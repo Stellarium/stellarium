@@ -284,6 +284,8 @@ void StelActionMgr::saveShortcuts()
 		conf->setValue(action->objectName(), seq);
 	}
 	conf->endGroup();
+	// Apparently shortcuts was changed
+	emit shortcutsChanged();
 }
 
 void StelActionMgr::restoreDefaultShortcuts()
