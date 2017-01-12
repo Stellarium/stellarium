@@ -67,7 +67,8 @@ void HelpDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		updateText();
+		updateHelpText();
+		updateAboutText();
 	}
 }
 
@@ -75,7 +76,8 @@ void HelpDialog::styleChanged()
 {
 	if (dialog)
 	{
-		updateText();
+		updateHelpText();
+		updateAboutText();
 	}
 }
 
@@ -96,8 +98,12 @@ void HelpDialog::createDialogContent()
 #endif
 
 	// Help page
-	updateText();
+	updateHelpText();
 	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
+	connect(StelApp::getInstance().getStelActionManager(), SIGNAL(shortcutsChanged()), this, SLOT(updateHelpText()));
+
+	// About page
+	updateAboutText();
 
 	// Log page
 	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUserDir()));
@@ -126,19 +132,19 @@ void HelpDialog::refreshLog()
 	ui->logBrowser->setPlainText(StelLogger::getLog());
 }
 
-QString HelpDialog::getHelpText(void)
+void HelpDialog::updateHelpText(void)
 {
 	QString htmlText = "<html><head><title>";
 	htmlText += q_("Stellarium Help").toHtmlEscaped();
 	htmlText += "</title></head><body>\n";
-	
+
 	// WARNING! Section titles are re-used below!
 	htmlText += "<p align=\"center\"><a href=\"#keys\">" +
 		    q_("Keys").toHtmlEscaped() +
-	            "</a> &bull; <a href=\"#links\">" +
+		    "</a> &bull; <a href=\"#links\">" +
 		    q_("Further Reading").toHtmlEscaped() +
-	            "</a></p>\n";
-	
+		    "</a></p>\n";
+
 	htmlText += "<h2 id='keys'>" + q_("Keys").toHtmlEscaped() + "</h2>\n";
 	htmlText += "<table cellpadding=\"10%\">\n";
 	// Describe keys for those keys which do not have actions.
@@ -147,11 +153,11 @@ QString HelpDialog::getHelpText(void)
 	htmlText += "<td><b>" + q_("Arrow keys & left mouse drag").toHtmlEscaped() + "</b></td></tr>\n";
 	// zoom in/out
 	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() +
-	            "</td>";
+		    "</td>";
 	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() +
-	            "</b></td></tr>\n";
+		    "</b></td></tr>\n";
 	htmlText += "<tr><td><b>" + q_("Ctrl+Up/Down").toHtmlEscaped() +
-	            "</b></td></tr>\n";
+		    "</b></td></tr>\n";
 	// time dragging/scrolling
 	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
 			q_("Ctrl & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
@@ -173,7 +179,7 @@ QString HelpDialog::getHelpText(void)
 #ifdef Q_OS_MAC
 	htmlText += "<td><b>" + q_("Ctrl & left click").toHtmlEscaped() + "</b></td></tr>\n";
 #else
-	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";	
+	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
 #endif
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
@@ -181,11 +187,11 @@ QString HelpDialog::getHelpText(void)
 	// delete custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Shift & right click").toHtmlEscaped() + "</b></td></tr>\n";
-	
+
 	htmlText += "</table>\n<p>" +
-	                q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
-	                .arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
-	            "</p><table cellpadding=\"10%\">\n";
+			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
+			.arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
+		    "</p><table cellpadding=\"10%\">\n";
 
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
@@ -203,12 +209,12 @@ QString HelpDialog::getHelpText(void)
 		}
 		qSort(descriptions);
 		htmlText += "<tr></tr><tr><td><b><u>" + q_(group) +
-		            ":</u></b></td></tr>\n";
+			    ":</u></b></td></tr>\n";
 		foreach (const KeyDescription& desc, descriptions)
 		{
 			htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
 			htmlText += "<td><b>" + desc.second.toHtmlEscaped() +
-			            "</b></td></tr>\n";
+				    "</b></td></tr>\n";
 		}
 	}
 
@@ -252,21 +258,18 @@ QString HelpDialog::getHelpText(void)
 	htmlText += "</p>\n";
 
 	htmlText += "</body></html>\n";
-
-	return htmlText;
 #undef E
-}
 
-void HelpDialog::updateText(void)
-{
-	QString newHtml = getHelpText();
 	ui->helpBrowser->clear();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 	ui->helpBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->helpBrowser->insertHtml(newHtml);
+	ui->helpBrowser->insertHtml(htmlText);
 	ui->helpBrowser->scrollToAnchor("top");
+}
 
+void HelpDialog::updateAboutText(void)
+{
 	QStringList contributors;
 	contributors << "Vladislav Bataron" << "Barry Gerdes" << "Peter Walser" << "Michal Sojka"
 		     << "Nick Fedoseev" << "Clement Sommelet" << "Ivan Marti-Vidal" << "Nicolas Martignoni"
@@ -289,7 +292,7 @@ void HelpDialog::updateText(void)
 	contributors.sort();
 
 	// populate About tab
-	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
+	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
 	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
 	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
@@ -334,6 +337,8 @@ void HelpDialog::updateText(void)
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made contributions to the project and their work has made Stellarium better (sorted alphabetically): %1.").arg(contributors.join(", ")).toHtmlEscaped() + "</p>";
 	newHtml += "<p>";
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
 	ui->aboutBrowser->clear();
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->aboutBrowser->insertHtml(newHtml);

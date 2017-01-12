@@ -182,6 +182,8 @@ signals:
 	//! @param value The new value of the action
 	void actionToggled(const QString& id, bool value);
 
+	void shortcutsChanged();
+
 public slots:
 	//! Enable/disable all actions of application.
 	//! need for editing shortcuts without trigging any actions
