@@ -75,7 +75,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 			prj->project(mousePosition,win);
 			float dx = prj->getViewportPosX()+wh+mx - win.v[0];
 			float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-			coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
+			prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
 			addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 		}
 		e->setAccepted(true);
