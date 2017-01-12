@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-06 23:51+0700\n"
-"PO-Revision-Date: 2016-12-27 08:38+0000\n"
+"PO-Revision-Date: 2017-01-11 20:51+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-07 05:37+0000\n"
+"X-Launchpad-Export-Date: 2017-01-12 05:29+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -993,7 +993,7 @@ msgstr "Iluminado: %1%"
 #: src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Albedo: %1"
-msgstr ""
+msgstr "Albedo: %1"
 
 #: src/core/modules/Planet.cpp:435
 #, qt-format
@@ -1716,6 +1716,10 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
+"Esta solución de F. R. Stephenson, L. V. Morrison e C. Y. Hohenkerk (2016) "
+"foi publicada en <em> Medición da rotación da Terra: 720 aC a 2015 dC </ em> "
+"(%1). Fóra do intervalo indicado (modelado cun axuste de spline) ofrece unha "
+"parábola de valores aproximados."
 
 #: src/core/StelCore.cpp:2187
 #, qt-format
@@ -1736,6 +1740,8 @@ msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
+"O valor da solución de %1 a %2 (aceleración secular da Lúa) require unha "
+"adaptación, consulta a Guía para máis detalles."
 
 #: src/core/StelCore.cpp:2239
 msgid "with zero values outside this range"
@@ -1751,10 +1757,12 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
+"cun erro medio de menos de un segundo, un erro máx. de 1.9s, e valores para "
+"os anos límite fóra deste rango"
 
 #: src/core/StelCore.cpp:2252
 msgid "with values for the limit years outside this range"
-msgstr ""
+msgstr "con valores para os anos límite fóra deste rango"
 
 #: src/core/StelCore.cpp:2262
 #, qt-format
@@ -2268,7 +2276,7 @@ msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1418
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
-msgstr ""
+msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
 #: src/gui/ConfigurationDialog.cpp:1420
 msgid "Espenak & Meeus (2006)"
@@ -3041,7 +3049,7 @@ msgstr "ano"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "Secular acceleration of the Moon"
-msgstr ""
+msgstr "Aceleración secular da Lúa"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:189 src/ui_configurationDialog.h:1290
@@ -3406,7 +3414,7 @@ msgstr "Obxecto da nube de Oort"
 #. TRANSLATORS: Type of object
 #: src/translations.h:66
 msgid "sednoid"
-msgstr ""
+msgstr "sednoide"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
@@ -3416,7 +3424,7 @@ msgstr "Lunas"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Sednoids"
-msgstr ""
+msgstr "Sednoides"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:88
@@ -6685,7 +6693,7 @@ msgstr "Información adicional"
 
 #: src/ui_configurationDialog.h:1308
 msgid "Sidereal time"
-msgstr ""
+msgstr "Tempo sideral"
 
 #: src/ui_configurationDialog.h:1309
 msgid "Control"
@@ -7645,11 +7653,11 @@ msgstr "Cor das órbitas dos obxectos do disco disperso"
 
 #: src/ui_orbitColorsDialog.h:469
 msgid "Orbits of sednoids"
-msgstr ""
+msgstr "Órbitas de sednoides"
 
 #: src/ui_orbitColorsDialog.h:471
 msgid "Color of sednoid orbits"
-msgstr ""
+msgstr "Cor das órbitas sednoides"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -8813,7 +8821,7 @@ msgstr "satélite artificial"
 #: plugins/Satellites/src/Satellite.cpp:284
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitude aproximada: <b>%1</b> (extinguido a: <b>%2</b>)"
 
 #: plugins/Satellites/src/Satellite.cpp:287
 #, qt-format
