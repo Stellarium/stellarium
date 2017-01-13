@@ -19,7 +19,6 @@
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
-#include "glues.h"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
@@ -44,11 +43,15 @@ StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NU
 
 StelTexture::~StelTexture()
 {
-	if (id != 0 && QOpenGLContext::currentContext())
+	if (id != 0)
 	{
+		//make sure the correct GL context is bound!
+		StelApp::getInstance().ensureGLContextCurrent();
+
 		if (glIsTexture(id)==GL_FALSE)
 		{
-			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << "Current GL ERROR status is" << glGetError() << "(" << getGLErrorText(glGetError()) << ")";
+			GLenum err = glGetError();
+			qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
 		}
 		else
 		{
@@ -276,6 +279,10 @@ bool StelTexture::glLoad(const GLData& data)
 
 	width = data.width;
 	height = data.height;
+
+	//make sure the correct GL context is bound!
+	StelApp::getInstance().ensureGLContextCurrent();
+	initializeOpenGLFunctions();
 
 	//check minimum texture size
 	GLint maxSize;

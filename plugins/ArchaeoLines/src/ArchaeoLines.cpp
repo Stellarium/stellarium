@@ -37,7 +37,6 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QColor>
-#include <QtNetwork>
 #include <QSettings>
 #include <QMouseEvent>
 #include <cmath>
@@ -1223,9 +1222,7 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 
 	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	d->sPainter->setBlending(true);
 }
 
 
@@ -1324,16 +1321,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	glDisable(GL_TEXTURE_2D);
-
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glEnable(GL_LINE_SMOOTH);
-	#endif
-
+	sPainter.setBlending(true);
+	sPainter.setLineSmooth(true);
 	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
 
@@ -1419,22 +1408,11 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 			sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
 			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
-			#ifdef GL_LINE_SMOOTH
-			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-				glDisable(GL_LINE_SMOOTH);
-			#endif
-			glDisable(GL_BLEND);
-			return;
 		}
-		else
-		{
-			#ifdef GL_LINE_SMOOTH
-			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-				glDisable(GL_LINE_SMOOTH);
-			#endif
-			glDisable(GL_BLEND);
-			return;
-		}
+
+		sPainter.setLineSmooth(false);
+		sPainter.setBlending(false);
+		return;
 	}
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 	Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
@@ -1451,11 +1429,6 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
 	sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
 
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	#ifdef GL_LINE_SMOOTH
-	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-		glDisable(GL_LINE_SMOOTH);
-	#endif
-
-	glDisable(GL_BLEND);
+	sPainter.setLineSmooth(false);
+	sPainter.setBlending(false);
 }

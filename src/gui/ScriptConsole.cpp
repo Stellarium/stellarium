@@ -28,6 +28,7 @@
 #include "StelScriptSyntaxHighlighter.hpp"
 
 #include <QDialog>
+#include <QDebug>
 #include <QTextStream>
 #include <QTemporaryFile>
 #include <QDir>

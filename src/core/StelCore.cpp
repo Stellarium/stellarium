@@ -244,6 +244,9 @@ void StelCore::init()
 	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
 	updateMaximumFov();
 
+	// activate DE430/431
+	initEphemeridesFunctions();
+
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");
 	QString movementGroup = N_("Movement and Selection");
@@ -503,10 +506,6 @@ void StelCore::preDraw()
 	currentProjectorParams.zFar = 500.;
 
 	skyDrawer->preDraw();
-
-	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
-	glClearColor(0,0,0,0);
-	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 

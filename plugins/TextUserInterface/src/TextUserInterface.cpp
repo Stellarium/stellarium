@@ -61,9 +61,7 @@
 #include <QTime>
 #include <QProcess>
 #include <QDir>
-#ifdef DISABLE_SCRIPTING
-#include "QSettings" // WTF?
-#endif
+#include <QSettings>
 
 
 /*************************************************************************

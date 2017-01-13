@@ -102,6 +102,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["PCSS"] = PCSS;
 		featureFlagsStrings["SINGLE_SHADOW_FRUSTUM"] = SINGLE_SHADOW_FRUSTUM;
 		featureFlagsStrings["OGL_ES2"] = OGL_ES2;
+		featureFlagsStrings["HW_SHADOW_SAMPLERS"] = HW_SHADOW_SAMPLERS;
 	}
 }
 
@@ -437,8 +438,10 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 	//this enumerates all available uniforms of this shader, and stores their locations in a map
 	GLuint prog = program.programId();
 	GLint numUniforms=0,bufSize;
-	glGetProgramiv(prog, GL_ACTIVE_UNIFORMS, &numUniforms);
-	glGetProgramiv(prog, GL_ACTIVE_UNIFORM_MAX_LENGTH, &bufSize);
+
+	QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
+	GL(gl->glGetProgramiv(prog, GL_ACTIVE_UNIFORMS, &numUniforms));
+	GL(gl->glGetProgramiv(prog, GL_ACTIVE_UNIFORM_MAX_LENGTH, &bufSize));
 
 	QByteArray buf(bufSize,'\0');
 	GLsizei length;
@@ -450,7 +453,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 #endif
 	for(int i =0;i<numUniforms;++i)
 	{
-		glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data());
+		GL(gl->glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data()));
 		QString str(buf);
 		str = str.trimmed(); // no idea if this is required
 

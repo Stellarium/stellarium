@@ -336,6 +336,8 @@ private:
 	QOpenGLBuffer m_indexBuffer;
 	QOpenGLVertexArrayObject* m_vertexArrayObject;
 
+	static QOpenGLFunctions* gl;
+
 	//! Heightmap
 	friend class Heightmap;
 };

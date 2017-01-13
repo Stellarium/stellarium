@@ -216,11 +216,9 @@ void ZodiacalLight::draw(StelCore* core)
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
 
 	StelPainter sPainter(prj);
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.setCullFace(true);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	tex->bind();
 	sPainter.drawStelVertexArray(*vertexArray);
-	glDisable(GL_CULL_FACE);
+	sPainter.setCullFace(false);
 }
