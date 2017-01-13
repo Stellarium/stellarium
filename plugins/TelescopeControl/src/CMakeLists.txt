@@ -66,11 +66,15 @@ QT5_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
 QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
-SET(extLinkerOption ${OPENGL_LIBRARIES})
+#IF(WIN32 AND NOT MSVC)
+# TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
+# Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
+#   SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
+#ENDIF()
+#
 
 ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
-TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
-QT5_USE_MODULES(TelescopeControl-static Core Network Widgets SerialPort OpenGL)
+TARGET_LINK_LIBRARIES(TelescopeControl-static Qt5::Core Qt5::Network Qt5::Widgets Qt5::SerialPort)
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)

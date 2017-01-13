@@ -18,7 +18,7 @@
  */
 
 #include "SpoutSender.hpp"
-#include "SpoutLibrary.h"
+#include "../../external/SpoutLibrary.h"
 
 Q_LOGGING_CATEGORY(spout,"stel.spout")
 

@@ -278,21 +278,16 @@ void TelescopeControl::draw(StelCore* core)
 				if (circleFader.getInterstate() >= 0)
 				{
 					sPainter.setColor(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
-					glDisable(GL_TEXTURE_2D);
 					foreach (double circle, telescope->getOculars())
 					{
 						sPainter.drawCircle(XY[0], XY[1], 0.5 * prj->getPixelPerRadAtCenter() * (M_PI/180) * (circle));
 					}
-					glEnable(GL_TEXTURE_2D);
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
-					glEnable(GL_TEXTURE_2D);
-					glEnable(GL_BLEND);
-					glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+					sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 					sPainter.setColor(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
-					glDisable(GL_TEXTURE_2D);
 				}
 				if (labelFader.getInterstate() >= 0)
 				{
@@ -423,9 +418,7 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		const Vec3f& c(obj->getInfoColor());
 		sPainter.setColor(c[0], c[1], c[2]);
 		selectionTexture->bind();
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
 	}
 #endif //COMPATIBILITY_001002

@@ -35,7 +35,6 @@
 #include <QDir>
 #include <QProcess>
 #include <QSysInfo>
-#include <QGLFormat>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"

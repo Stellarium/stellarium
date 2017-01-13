@@ -24,6 +24,9 @@
 #include "StelTranslator.hpp"
 
 #include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QVariant>
 
 ScriptService::ScriptService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
 {
