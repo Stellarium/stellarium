@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-06 23:51+0700\n"
-"PO-Revision-Date: 2017-01-11 14:09+0000\n"
+"PO-Revision-Date: 2017-01-12 17:44+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-12 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-01-13 05:33+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -3822,7 +3822,7 @@ msgstr "2048年火卫一掩地球和木星"
 #. TRANSLATORS: Name of script
 #: src/translations.h:303
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr "2027年火卫二上看到的三次凌和两次食"
+msgstr "2027年火卫二上看到的三次凌日和两次日食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:305
@@ -3878,12 +3878,12 @@ msgstr "火星上看到的地球天象"
 #: src/translations.h:325
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
-msgstr "从火星观测地球和其它行星的最大距角和冲"
+msgstr "从火星观测地球和其它行星的大距和冲"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:327
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
-msgstr "木卫四上观测地球和火星的最大伸长率和凌日"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:329
@@ -4054,7 +4054,7 @@ msgstr "演示第谷·布拉赫于1572年观测到的超新星爆发。需启用
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
-msgstr "公元2000-3000年间从火星观测地球和其它行星的最大距角和冲"
+msgstr "公元2000-3000年间从火星观测地球和其它行星的最距和冲"
 
 #: src/translations.h:376
 msgid ""
@@ -4064,14 +4064,14 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 "2000-"
-"3000年木卫四上观测地球和火星的最大伸长率和凌日。选择木卫四的原因是由于它是木星4个伽利略卫星中唯一在木星辐射带外的，如果人类要移民到木星的卫星上，木卫"
-"四是最合适的一个。"
+"3000年木卫四上观测地球和火星的大距和凌日。选择木卫四的原因是由于它是木星4个伽利略卫星中唯一在木星辐射带外的，如果人类要移民到木星的卫星上，木卫四是最"
+"合适的一个。"
 
 #: src/translations.h:377
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
-msgstr "公元2000-3000年间从谷神星观测地球其它可见行星的最大距角和冲"
+msgstr "公元2000-3000年间从谷神星观测地球其它可见行星的大距和冲"
 
 #: src/translations.h:378
 msgid "A tour of Messier Objects"
@@ -12486,7 +12486,7 @@ msgstr "无冲日升/落)或偕日升/落"
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr "最大距角%1 (at %2 度)"
+msgstr "大距%1 (at %2 度)"
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
