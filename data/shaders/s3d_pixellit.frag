@@ -32,6 +32,7 @@ Note: This shader currently requires some #version 120 features!
 #define SHADOW_FILTER 0
 #define SHADOW_FILTER_HQ 0
 #define SINGLE_SHADOW_FRUSTUM 1
+#define HW_SHADOW_SAMPLERS 0
 #define PCSS 0
 #define MAT_DIFFUSETEX 1
 #define MAT_EMISSIVETEX 1
@@ -254,10 +255,10 @@ uniform vec3 u_vMixEmissive;
 #endif
 //shadow related uniforms
 uniform vec4 u_vSplits; //the frustum splits
-#if PCSS
-	#define SHADOWSAMPLER sampler2D
-#else
+#if HW_SHADOW_SAMPLERS
 	#define SHADOWSAMPLER sampler2DShadow
+#else
+	#define SHADOWSAMPLER sampler2D
 #endif
 
 //for some reason, Intel does absolutely not like it if the shadowmaps are passed as an array
@@ -311,23 +312,29 @@ float sampleShadow(in SHADOWSAMPLER tex, in vec4 coord, in vec2 filterRadiusUV)
 	{
 		vec2 offset = poissonDisk[i] * filterRadiusUV;
 		//TODO offsets should probably depend on light ortho size?
-		#if PCSS
+		#if HW_SHADOW_SAMPLERS
+		sum+=shadow2D(tex,vec3(texC.xy + offset, texC.z)).x;
+		#else
 		//texture is a normal sampler2D because we need depth values in blocker calculation
 		//opengl does not allow to sample this texture in 2 different ways (unless sampler objects are used, but needs version >= 3.3)
 		//so we have to do comparison ourselves 
 		sum+= (texture2D(tex,texC.xy + offset).r > texC.z) ? 1.0f : 0.0f;
-		#else
-		sum+=shadow2D(tex,vec3(texC.xy + offset, texC.z)).x;
 		#endif
 	}
 	return sum / FILTER_STEPS;
-	#else
+	#elif HW_SHADOW_SAMPLERS
 	//no filtering performed, just return the sampled tex
 	return shadow2DProj(tex,coord).x;
+	#else
+	vec3 texC = coord.xyz / coord.w;
+	return texture2D(tex,texC.xy).x > texC.z ? 1.0f : 0.0f;
 	#endif
 }
 
 #if PCSS
+#if HW_SHADOW_SAMPLERS
+#error Tried to compile PCSS shader compiled with HW shadow samplers
+#endif
 //Based on the PCSS implementation of NVidia, ported to GLSL 
 //see http://developer.download.nvidia.com/whitepapers/2008/PCSS_Integration.pdf
 //Some modifications to work better with directional light are included

@@ -24,19 +24,13 @@
 #include <QGraphicsView>
 #include <QEventLoop>
 #include <QOpenGLContext>
-
-// This define (only used here and in StelMainView.cpp) is temporarily used
-// to allow uncompromised compiling while the migration to the new QOpenGL... classes
-// has not been done. As soon as Qt5.4 is out, we should finish this migration process!
-#define STEL_USE_NEW_OPENGL_WIDGETS 0
-
-#if STEL_USE_NEW_OPENGL_WIDGETS
-class QOpenGLWidget;
-class StelQOpenGLWidget;
-#else
-class QGLWidget;
-class StelQGLWidget;
+#include <QTimer>
+#ifdef OPENGL_DEBUG_LOGGING
+#include <QOpenGLDebugMessage>
 #endif
+
+class StelGLWidget;
+class StelGraphicsScene;
 class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
@@ -49,16 +43,27 @@ class QSettings;
 class StelMainView : public QGraphicsView
 {
 	friend class StelGuiItem;
-	friend class StelSkyItem;
+	friend class StelRootItem;
+	friend class StelGraphicsScene;
+	friend class NightModeGraphicsEffect;
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
 
 public:
-	StelMainView(QWidget* parent = NULL);
+	//! Contains some basic info about the OpenGL context used
+	struct GLInfo
+	{
+		QString vendor;
+		QString renderer;
+		QOpenGLContext* mainContext;
+		QOpenGLFunctions* functions;
+	};
+
+	StelMainView(QSettings* settings);
 	virtual ~StelMainView();
 
 	//! Start the main initialization of Stellarium
-	void init(class QSettings* conf);
+	void init();
 	void deinit();
 
 	//! Set the application title for the current language.
@@ -70,20 +75,33 @@ public:
 
 	//! Delete openGL textures (to call before the GLContext disappears)
 	void deinitGL();
-	//! Return focus to the sky item.  To be used when we close a dialog.
-	void focusSky();
+
 	//! Return the parent gui widget, this should be used as parent to all
 	//! the StelDialog instances.
 	QGraphicsWidget* getGuiWidget() const {return guiItem;}
 	//! Return mouse position coordinates
 	QPoint getMousePos();
+
+	//! Returns the main application OpenGL context,
+	//! which should be used for all drawing Stellarium does
+	//! @sa glContextMakeCurrent()
+	//! @sa glContextDoneCurrent()
+	QOpenGLContext* glContext() const;
+	//! Make the main GL context (the one returned from glContext()) current
+	//! on the main view surface
+	void glContextMakeCurrent();
+	//! Releases the main GL context
+	void glContextDoneCurrent();
+
+	//! Returns the information about the GL context, this does not require the context to be active.
+	GLInfo getGLInformation() const { return glInfo; }
 public slots:
 
 	//! Set whether fullscreen is activated or not
 	void setFullScreen(bool);
 
-	//! Set focus on the sky
-	void setFocusOnSky();
+	//! Return focus to the sky item.  To be used when we close a dialog.
+	void focusSky();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Specific methods
@@ -119,82 +137,86 @@ public slots:
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
 	//! value to improve playing smoothness in scripts.
 	//! @param m the new minimum fps setting.
-	void setMinFps(float m) {minfps=m; minFpsChanged();}
+	void setMinFps(float m) {minfps=m; minFpsTimer->setInterval(1000/minfps);}
 	//! Get the current minimum frames per second.
 	float getMinFps() {return minfps;}
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
+	//! @todo this setting currently does nothing
 	void setMaxFps(float m) {maxfps = m;}
 	//! Get the current maximum frames per second.
 	float getMaxFps() {return maxfps;}
-
-	void maxFpsSceneUpdate();
-	//! Updates the scene and process all events
-	void updateScene();
 
 	//! Notify that an event was handled by the program and therefore the
 	//! FPS should be maximized for a couple of seconds.
 	void thereWasAnEvent();
 
+	//! Determines if we should render as fast as possible,
+	//! or limit the FPS. This depends on the time the last user event
+	//! happened.
+	bool needsMaxFPS() const;
+
 protected:
-	virtual void mouseMoveEvent(QMouseEvent* event);
-	virtual void mousePressEvent(QMouseEvent* event);
-	virtual void mouseReleaseEvent(QMouseEvent* event);
-	virtual void keyPressEvent(QKeyEvent* event);
-	virtual void keyReleaseEvent(QKeyEvent* event);
-	virtual void wheelEvent(QWheelEvent* wheelEvent);
-	virtual void moveEvent(QMoveEvent* event);
-	virtual void closeEvent(QCloseEvent* event);
-	virtual void resizeEvent(QResizeEvent* event);
-
-	//! Update the mouse pointer state and schedule next redraw.
-	//! This method is called automatically by Qt.
-	virtual void drawBackground(QPainter* painter, const QRectF &rect);
-
+	//! Hack to determine current monitor pixel ratio
+	//! @todo Find a better way to handle this
+	virtual void moveEvent(QMoveEvent* event) Q_DECL_OVERRIDE;
+	//! Handle window closed event, calling StelApp::quit()
+	virtual void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
+	//! Handle window resized events, and change the size of the underlying
+	//! QGraphicsScene to be the same
+	virtual void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
 	//! thread, where as saveScreenShot() might get called from another one.
+	//!
+	//! @remark FS: is threaded access here even a possibility anymore, or a remnant of older code?
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
-
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
-	void minFpsChanged();
+	void minFPSUpdate();
+#ifdef OPENGL_DEBUG_LOGGING
+	void logGLMessage(const QOpenGLDebugMessage& debugMessage);
+	void contextDestroyed();
+#endif
 	void updateNightModeProperty(bool b);
 
 private:
-	//! Start the display loop
-	void startMainLoop();
-	
+	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
+	void drawEnded();
+	//! Returns the desired OpenGL format settings,
+	//! on desktop this corresponds to a GL 2.1 context,
+	//! with 32bit RGBA buffer and 24/8 depth/stencil buffer
+	QSurfaceFormat getDesiredGLFormat() const;
 	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
 	//! to provide feedback to the user about bad OpenGL drivers.
-#if STEL_USE_NEW_OPENGL_WIDGETS
-	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
-#else
-	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const;
-#endif
+	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLContext* context) const;
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
 
-	QGraphicsWidget* rootItem;
-	QGraphicsWidget* skyItem;
+	GLInfo glInfo;
+
+	QSettings* configuration;
+
+	class StelRootItem* rootItem;
 	QGraphicsWidget* guiItem;
 	QGraphicsEffect* nightModeEffect;
 
-	//! The openGL window
-#if STEL_USE_NEW_OPENGL_WIDGETS
-	StelQOpenGLWidget* glWidget;
-#else
-	StelQGLWidget* glWidget;
-#endif
+	//! The openGL viewport of the graphics scene
+	//! Responsible for main GL setup, rendering is done in the scene background
+	StelGLWidget* glWidget;
+	//! Custom QGraphicsScene, this renders our scene background
+	StelGraphicsScene* stelScene;
+
 	StelGuiBase* gui;
 	class StelApp* stelApp;
 
+	bool updateQueued;
 	bool flagInvertScreenShotColors;
 	bool flagOverwriteScreenshots; //! if set to true, screenshot is named exactly screenShotPrefix.png and overwrites existing file
 
@@ -207,12 +229,15 @@ private:
 
 	double lastEventTimeSec;
 
-	QTimer* minFpsTimer;
-	bool flagMaxFpsUpdatePending;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
+	QTimer* minFpsTimer;
+
+#ifdef OPENGL_DEBUG_LOGGING
+	QOpenGLDebugLogger* glLogger;
+#endif
 };
 
 

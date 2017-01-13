@@ -333,9 +333,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 	StelUtils::spheToRect(m_radiantAlpha, m_radiantDelta, m_position);
 	painter.getProjector()->project(m_position, XY);
 
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
 	float alpha = 0.85f + ((float) qrand() / (float) RAND_MAX) / 10.f;

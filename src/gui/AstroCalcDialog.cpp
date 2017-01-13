@@ -34,7 +34,7 @@
 
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
-#include "qcustomplot/qcustomplot.h"
+#include "external/qcustomplot/qcustomplot.h"
 
 #include <QFileDialog>
 #include <QDir>

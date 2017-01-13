@@ -17,13 +17,14 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <QtOpenGL>
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelToast.hpp"
+
+#include <QTimeLine>
 
 ToastTile::ToastTile(ToastSurvey* survey, int level, int x, int y)
 	: survey(survey), level(level), x(x), y(y), empty(false), prepared(false), readyDraw(false), texFader(1000)
@@ -168,24 +169,21 @@ void ToastTile::drawTile(StelPainter* sPainter)
 
 	if (texFader.state()==QTimeLine::Running)
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-		glEnable(GL_BLEND);
+		sPainter->setBlending(true);
 		sPainter->setColor(1,1,1, texFader.currentValue());
 	}
 	else
 	{
-		glDisable(GL_BLEND);
+		sPainter->setBlending(false);
 		sPainter->setColor(1, 1, 1, 1);
 	}
 
-	sPainter->enableTexture2d(true);
 	Q_ASSERT(vertexArray.size() == textureArray.size());
 
-	glEnable(GL_CULL_FACE);
+	sPainter->setCullFace(true);
 	// sPainter.drawArrays(GL_TRIANGLES, vertexArray.size(), vertexArray.data(), textureArray.data(), NULL, NULL, indexArray.size(), indexArray.constData());
 	sPainter->setArrays(vertexArray.constData(), textureArray.constData());
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
-	glDisable(GL_CULL_FACE);
 
 //	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
 //	sPainter->enableTexture2d(false);

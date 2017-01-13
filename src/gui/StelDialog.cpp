@@ -29,6 +29,7 @@
 #include <QAbstractButton>
 #include <QComboBox>
 #include <QDialog>
+#include <QGraphicsSceneWheelEvent>
 #include <QMetaProperty>
 #include <QStyleOptionGraphicsItem>
 #include <QSlider>

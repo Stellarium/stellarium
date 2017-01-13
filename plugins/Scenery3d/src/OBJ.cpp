@@ -100,12 +100,16 @@ bool StelModelCompFunc(const OBJ::StelModel& lhs, const OBJ::StelModel& rhs)
 bool OBJ::vertexArraysSupported=false;
 GLenum OBJ::indexBufferType=GL_UNSIGNED_SHORT;
 size_t OBJ::indexBufferTypeSize=0;
+QOpenGLFunctions* OBJ::gl=Q_NULLPTR;
 
 //static function
 void OBJ::setupGL()
 {
+	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	gl = ctx->functions();
+
 	//disable VAOs on Intel because of serious bugs in their implemenation...
-	QString vendor(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+	QString vendor(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
 	if(vendor.contains("Intel",Qt::CaseInsensitive))
 	{
 		OBJ::vertexArraysSupported = false;
@@ -130,7 +134,6 @@ void OBJ::setupGL()
 	}
 
 	//check if we can enable int index buffers
-	QOpenGLContext* ctx = QOpenGLContext::currentContext();
 	if(ctx->isOpenGLES())
 	{
 		//query for extension
@@ -1709,19 +1712,19 @@ void OBJ::bindBuffersGL()
 	//(but may be stored in a VAO to enable faster binding/unbinding)
 
 	//enable the attrib arrays
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
 
 	const GLsizei stride = sizeof(Vertex);
 
-	glVertexAttribPointer(ShaderMgr::ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_TEXCOORD, 2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_TEXCOORD, 2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
 
 	//vertex buffer does not need to remain bound, because the binding is stored by glVertexAttribPointer
 	m_vertexBuffer.release();
@@ -1736,11 +1739,11 @@ void OBJ::unbindBuffersGL()
 	m_indexBuffer.release();
 
 	//disable our attribute arrays
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
 }
 
 void OBJ::transform(QMatrix4x4 mat)

@@ -50,7 +50,6 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMouseEvent>
-#include <QtNetwork>
 #include <QPixmap>
 #include <QSignalMapper>
 
@@ -335,14 +334,7 @@ void Oculars::draw(StelCore* core)
 					paintCrosshairs();
 				}
 			}
-			if (guiPanelEnabled)
-			{
-				// Reset the state to allow the panel to be painted normally
-				glDisable(GL_TEXTURE_2D);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glEnable(GL_BLEND);
-			}
-			else
+			if (!guiPanelEnabled)
 			{
 				// Paint the information in the upper-right hand corner
 				paintText(core);
@@ -352,14 +344,7 @@ void Oculars::draw(StelCore* core)
 	else if (flagShowCCD)
 	{
 		paintCCDBounds();
-		if (guiPanelEnabled)
-		{
-			// Reset the state to allow the panel to be painted normally
-			glDisable(GL_TEXTURE_2D);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glEnable(GL_BLEND);
-		}
-		else
+		if (!guiPanelEnabled)
 		{
 			// Paint the information in the upper-right hand corner
 			paintText(core);
@@ -1768,15 +1753,13 @@ void Oculars::paintOcularMask(const StelCore *core)
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	painter.setBlending(true);
 
 	Vec2i centerScreen(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2);
 
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		painter.enableTexture2d(true);
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 
 		reticleTexture->bind();
@@ -1869,9 +1852,7 @@ void Oculars::paintText(const StelCore* core)
 
 	// set up the color and the GL state
 	painter.setColor(0.8f, 0.48f, 0.f, 1.f);
-	glDisable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	painter.setBlending(true);
 
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);

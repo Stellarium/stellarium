@@ -20,6 +20,7 @@
 #include "StelApp.hpp"
 
 #include "StelCore.hpp"
+#include "StelMainView.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -202,9 +203,10 @@ void StelApp::deinitStatic()
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(QObject* parent)
+StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
-	, core(NULL)	
+	, mainWin(parent)
+	, core(NULL)
 	, moduleMgr(NULL)
 	, localeMgr(NULL)
 	, skyCultureMgr(NULL)
@@ -226,8 +228,7 @@ StelApp::StelApp(QObject* parent)
 	, globalScalingRatio(1.f)
 	, fps(0)
 	, frame(0)
-	, timefr(0.)
-	, timeBase(0.)
+	, frameTimeAccum(0.)
 	, flagNightVision(false)
 	, confSettings(NULL)
 	, initialized(false)
@@ -390,6 +391,7 @@ void StelApp::initScriptMgr() {}
 
 void StelApp::init(QSettings* conf)
 {
+	gl = QOpenGLContext::currentContext()->functions();
 	confSettings = conf;
 
 	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
@@ -632,13 +634,13 @@ void StelApp::update(double deltaTime)
 		return;
 
 	++frame;
-	timefr+=deltaTime;
-	if (timefr-timeBase > 1.)
+	frameTimeAccum+=deltaTime;
+	if (frameTimeAccum > 1.)
 	{
 		// Calc the FPS rate every seconds
-		fps=(double)frame/(timefr-timeBase);
+		fps=(double)frame/frameTimeAccum;
 		frame = 0;
-		timeBase+=1.;
+		frameTimeAccum=0.;
 	}
 		
 	core->update(deltaTime);
@@ -668,11 +670,10 @@ void StelApp::prepareRenderBuffer()
 	renderBuffer->bind();
 }
 
-void StelApp::applyRenderBuffer(int drawFbo)
+void StelApp::applyRenderBuffer(GLuint drawFbo)
 {
 	if (!renderBuffer) return;
-	renderBuffer->release();
-	if (drawFbo) GL(glBindFramebuffer(GL_FRAMEBUFFER, drawFbo));
+	GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, drawFbo));
 	viewportEffect->paintViewportBuffer(renderBuffer);
 }
 
@@ -682,11 +683,18 @@ void StelApp::draw()
 	if (!initialized)
 		return;
 
-	int drawFbo;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFbo);
+	//find out which framebuffer is the current one
+	//this is usually NOT the "zero" FBO, but one provided by QOpenGLWidget
+	GLint drawFbo;
+	GL(gl->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &drawFbo));
 
 	prepareRenderBuffer();
+	currentFbo = renderBuffer ? renderBuffer->handle() : drawFbo;
+
 	core->preDraw();
+	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	GL(gl->glClearColor(0,0,0,0));
+	GL(gl->glClear(GL_COLOR_BUFFER_BIT));
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
 	foreach(StelModule* module, modules)
@@ -706,23 +714,24 @@ void StelApp::draw()
 /*************************************************************************
  Call this when the size of the GL window has changed
 *************************************************************************/
-void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
+void StelApp::glWindowHasBeenResized(const QRectF& rect)
 {
 	if (core)
-		core->windowHasBeenResized(x, y, w, h);
+		core->windowHasBeenResized(rect.x(), rect.y(), rect.width(), rect.height());
 	else
 	{
-		saveProjW = w;
-		saveProjH = h;
+		saveProjW = rect.width();
+		saveProjH = rect.height();
 	}
 	if (renderBuffer)
 	{
+		ensureGLContextCurrent();
 		delete renderBuffer;
 		renderBuffer = NULL;
 	}
 #ifdef ENABLE_SPOUT
 	if (spoutSender)
-		spoutSender->resize(w,h);
+		spoutSender->resize(rect.width(),rect.height());
 #endif
 }
 
@@ -788,7 +797,7 @@ void StelApp::handleWheel(QWheelEvent* event)
 }
 
 // Handle mouse move
-void StelApp::handleMove(float x, float y, Qt::MouseButtons b)
+bool StelApp::handleMove(float x, float y, Qt::MouseButtons b)
 {
 	if (viewportEffect)
 		viewportEffect->distortXY(x, y);
@@ -796,8 +805,9 @@ void StelApp::handleMove(float x, float y, Qt::MouseButtons b)
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
 		if (i->handleMouseMoves(x*devicePixelsPerPixel, y*devicePixelsPerPixel, b))
-			return;
+			return true;
 	}
+	return false;
 }
 
 // Handle key press and release
@@ -857,6 +867,11 @@ void StelApp::updateI18n()
 #endif
 }
 
+void StelApp::ensureGLContextCurrent()
+{
+	mainWin->glContextMakeCurrent();
+}
+
 // Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime()
 {
@@ -907,6 +922,7 @@ void StelApp::setViewportEffect(const QString& name)
 	if (name == getViewportEffect()) return;
 	if (renderBuffer)
 	{
+		ensureGLContextCurrent();
 		delete renderBuffer;
 		renderBuffer = NULL;
 	}
