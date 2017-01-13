@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-01-06 23:51+0700\n"
-"PO-Revision-Date: 2017-01-11 22:08+0000\n"
+"PO-Revision-Date: 2017-01-12 20:19+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-12 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-01-13 05:32+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -14854,12 +14854,12 @@ msgstr "Non si podet agattare s'ID de s'iscena po %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:481
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Po pighere carriga una iscena prima!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Ombreggiadura Per-Pixel %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:518
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:537
@@ -14882,51 +14882,52 @@ msgstr "Umbras %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:542
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Ombre disabilitadas o non possibile."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:573
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "Urtos de superficie %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:621
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
+"Sa modalidade cubemap seberada non est supportada, si torrat a '6' Textures"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "Cubemapping lesina: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 msgid "enabled"
-msgstr ""
+msgstr "abilitau"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:717
 msgid "disabled"
-msgstr ""
+msgstr "disabilitau"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:790
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Mannaria cambiada de su cubemap"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:792
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Mannaria de su cubemap non supportada, imposta a %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:813
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Mannaria shadowmap cambiada"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:815
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Mannaria shadowmap non supportada, impostada a %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:928
 msgid "3D Sceneries"
-msgstr ""
+msgstr "Scenarios 3D"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:931
 msgid ""
@@ -14939,52 +14940,73 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Renderizatzione 3D de su primu pianu. Passiza a ziru a ziru, agatta et "
+"evita una ostrutzione in s'ortu, agatta et faghe biere possibiles "
+"allineamentos astronomicos in tempios, abbaida sas umbras in sas meridianas "
+"etc.</p><p>Move in tundu, caria su tastu Ctrl+cursor. Po artziare a s'artesa "
+"de sos ogos, imprea Ctrl+PgUp/PgDn. Sa velocidade de su movimentu est "
+"cullegau a su campu de vista (po esempiu, su zoom po regulatziones prus "
+"pretzisas). Ti podes sighire a movere lassande su tastu Ctrl prima de su "
+"cursore. </p><p>S'isviluppu de custu plugin fuit supportau in parte dae su "
+"progettu ASTROSIM (P 21208-G19) de sa Austrian Science Fund (FWF). Po nde "
+"inschire de prus: http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Fornit una menzus illuminatzione calculande po per-pixel inbetze de per-"
+"vertice."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Bi cheret po su bump mapping et po sas ombras!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid "Uses only a single shadow cascade instead of up to four."
 msgstr ""
+"Impreat una cascata de ombras ebbia, inbetze de unu massimu de battero."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"Iat unu aumentu de velocidade in cambiu de sa calidade de sas ombras, a "
+"mesche in sas iscnas mannas."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"Determinat comente sas ombras benini filtradas, creschinde in qualidade dae "
+"artu cara a bassu."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:252
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS cheret sa calidade impostada a LOW o HIGH."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Calculu approssimau de saas umbras (prus craras a canta a sos puntos de "
+"cuntattu, sas umbras pagu craras prus a tesu)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Bi cheret <b>LOW</b> o <b>HIGH</b> filtru de umbras (chentza "
+"<b>Hardware</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:256
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Causat unu calu de sas performance"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
@@ -14993,17 +15015,26 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Custu determiat su modu chi est fatta iere s'iscena cando Stellarium usat "
+"una proietzione diversa dae &quot; Prospettiva &quot;. S'iscena est sempere "
+"renderizada in unu cubu, et custu cubu benit deformau in base a sa "
+"proietzione reale. Su cubu est descrittu impreande una immazine mutia "
+"&quot;cubemap&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 Textures</b> impreat 6 singulas textures, una po onnia cara de su cubu. "
+"Custu est su metodo prus compatibile, ma est su prus lesinu de sos ateros."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Cubemap</b> impreat una singula GL_TEXTURE_CUBEMAP. Recumandada po meads "
+"utentes."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
 msgid ""
@@ -15011,10 +15042,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Geometry shader</b> imoreada una moderna GPU fatta po renderizare totu a "
+"6 caras de su cubu in una orta. Podet essere su metodu prus lestru "
+"dipendente da s'iscena et de s'ahardware de sa GPU. Si no est supportada, "
+"non podet essere seberada."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Calculat umbras po onnia cara de cubemap a parte."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
@@ -15022,380 +15057,408 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Si disabilitada, sa parte umbrosa est calculada impreande sa proietzione "
+"prospettica, chi podet causare umbras chi mancana cun artos vaolres de FOV, "
+"ma est sa prus lestra!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:265
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Custu non funtzionat cando si est impreande sa <b>Geometry shader</b> su "
+"metodo cubemapping!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Cando seberada, sa cubemap est torrada a fagher ebbia in sos ispecificos "
+"intervallos de tempus, a su postu de onnia frame."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid "Saves energy and may increase subjective application performance."
 msgstr ""
+"Risparmiat energia et podet aumentare suggettivamente sa velocidade de "
+"s'applicatzione."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:269
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Nota chi sa cubemap est sempere torrada a renderizare cando sa positzione de "
+"vista cambiat."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Cando est seberada, solu sa cara chi currispondet a diretzione de vista tua "
+"est aggiornada cando b'hat  movimnetu."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Custu aumentat sa velocidade de su rendering, ma s'apparentzia hat a essere "
+"&quot;segada&quot; mentras a cando non si frimat su movimentu."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:273
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
+"Custu NON funtzionat cun sa &quot;Geometry-Shader&quot; cun sa modalidade "
+"cubemapping!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:275
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Custu aggiornat sa segunda cara, gasi a sa vista paret prus pagu "
+"&quot;segada&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:284
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
+"Su intervallu  (in segundos de tempus) inue perunu disinnu de s'iscena est "
+"torrau a faghere."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
-msgstr ""
+msgstr "6 Textures"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr ""
+msgstr "Cubemap"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Geometry shader"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:164
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr ""
+msgstr "Coordinadas de grillia (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "Iscenariu 3D"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Imposta comenet iscena preimpostada"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Carriga/sarva su puntu de vista"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Sa fortza de sa pila:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Su raggiu de sa pila:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Luminosidade de sa pila (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Fae biere sa coordinadas de sa grillia (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Optziones de visuale"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "Illuminatzione Per-Pixel"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Umbras"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Umbras semplices"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Mapping de corpu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Mannaria de su cubemap:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Mannaria de su shadowmap:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Calodade de su filtraggiu:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Bassu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Bassu + Hardware"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Artu (lesinu)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Artu + Hardware (lesinu)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Modalidade cubemapping:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Umbras cubemap cumpleta"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "Re-rendering de cubemap lesina"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Intervallu:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Aggiorna sa cara dominante ebbia cando b'hat movimenu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Aggirona fintzas sa segunda cara prus dominante"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Calidade/Impostatziones de performance"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
-msgstr ""
+msgstr "Vistas collias"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
-msgstr ""
+msgstr "Carrigamentu de sa vista"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Delete view"
-msgstr ""
+msgstr "Cantzella sa vista"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Add current view"
-msgstr ""
+msgstr "Azunghe sa vista currente"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "Carriga/colli cun sa data"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
-msgstr ""
+msgstr "Titulu:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:576
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "ArchaeoLineas"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
+"Unu istrumentu po istudios de sos allineamentos archaeo-ethnoastronomicos"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "Fae biere sa linea de sos Ecuinotzios"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Fae biere sa linea de sos Solstitzios"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "Fae biere sa linea de su Crossquarter"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "Fae biere sa linea de su Standstill massimu"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "Fae biere sa linea de su Standstill minore"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "Fae biere sa linea de su passazu a su Zenith"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "Fae biere sa linea de su passazu a su Nadir"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "Fae biere sa linea po s'ogettu seberau"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "Fae biere sa linea de su Sole Currente"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "Fae biere sa linea de sa Luna Currente"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Line for Geographic Location 1"
-msgstr ""
+msgstr "Fae biere sa linea de sa Localidade Geografica 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
 msgid "Show Line for Geographic Location 2"
-msgstr ""
+msgstr "Fae biere sa linea de sa Localidade Geografica 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Line for Custom Azimuth 1"
-msgstr ""
+msgstr "Fae biere sa linea de su Azimuth Personalizau 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Line for Custom Azimuth 2"
-msgstr ""
+msgstr "Fae biere sa linea de su Azimuth Personalizau 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
-msgstr ""
+msgstr "Fae biere sa linea de sa Declinatzione Personalizada 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
-msgstr ""
+msgstr "Fae biere sa linea de sa Declinatzione Personalizada 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1253
 msgid "Equinox"
-msgstr ""
+msgstr "Ecuinotziu"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1256
 msgid "Solstice"
-msgstr ""
+msgstr "Solstitziu"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1259
 msgid "Crossquarter"
-msgstr ""
+msgstr "Crossquarter"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1262
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Stanstill Lunare Majore"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1265
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Stanstill Lunare Minore"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1268
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Passazu a su Zenith"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1271
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Passazu a su Nadir"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
-msgstr ""
+msgstr "Ogettu Seberau"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
 msgid "error if you can read this"
-msgstr ""
+msgstr "irballiu si non podes lezere custu"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1286
 msgid "Mercury"
-msgstr ""
+msgstr "Mercuriu"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
 msgid "Venus"
-msgstr ""
+msgstr "Isteddu Chenadorzu / Isteddu de s'Impuddile"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:248
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Plugin de sas ArchaeoLinieas"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:254
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"Su plug-in de sas ArchaeoLineas faghet biere onnia  de arcos de "
+"declinatzione prus importantes po sos istudios archaeo-ethnoastronomicos."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:255
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
 msgstr ""
+"Declinatziones de sos ecuinotzios (po esempiu, ecuatore) et de sos "
+"solstitzios"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"Declinatziones de sas dies crossquarter (dies in mesu de sos solstizios et "
+"de sos ecuinotzios)"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:257
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Declinationess de sos Standstill Lunares Majores"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:258
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Declinationess de sos Standstill Lunares Minores"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:259
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Declinatzione de su passazu a su Zenith"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:260
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Declinatzione de su passazu a Nadir"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:261
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "Declinatzione de s'ogettu seberau currentemente"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:262
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Declinatzione currente de su sole"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Declinatzione currente de sa luna"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:264
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Declinatzione currente de sos pianetas chi si biene a ogu nù"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:265
 msgid ""
@@ -15404,6 +15467,11 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"Sas lineas lunares tene effettos de parallasse in s'orizonte. B'hat duas "
+"lineas disinnadas, po sa massima et sa minima distantzia de as luna. Nota ca "
+"sa declinatzione de sa luna a su  standstill majore podet essere prus mannu "
+"de su limite indicau si est artu in su chelu po urpa de sos effettos de "
+"parallasse."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:269
 msgid ""
@@ -15413,190 +15481,198 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Tsertas religiones, in particulare s'islam, aderini a sa pratiga de "
+"abbadiare cara a inue pregana cara a una localidade particulare. Sas lineas "
+"de Azimuth po duas localidades poden essere mustrada. Sas positzione "
+"predefinias suni sa Mecca (Kaaba) et Gerusalemma. Sas diretziones suni "
+"calculadas in base a sa trigonometria isferica in susu de una Terra isferica."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:272
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and declination "
 "lines with custom label can be shown."
 msgstr ""
+"In azunta, mentras a duas lienas verticales cun lineas arbitrarias de "
+"azimuth et declinatzione et cun etichettas pesonalizadas poden essere "
+"mustradas."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:364
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Sebera su colore po sa linea de ecuinotziu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:375
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Sebera su colore po sa linea de solstitziu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:386
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Sebera su colore de sas lineas de crossquarter"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:397
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Sebera su colore de sas lineas de standstill majore"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:408
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Sebera su colore de sas lineas de standstill minore"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:419
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de su passazu a su Zenith"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:430
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de su passazu a su Nadir"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:441
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de s'ogettu sebaru"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:452
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de su sole currente"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:463
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de sa luna currente"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:474
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de su pianeta currente"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:485
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de sa Localidade Geografica 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:496
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de sa Localidade Geografica 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:507
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de su Azimuth Personalizau 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:518
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de su Azimuth Personalizau 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:529
 msgid "Select color for Custom Declination 1 line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de sa Declinatzione Personalizada 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:540
 msgid "Select color for Custom Declination 2 line"
-msgstr ""
+msgstr "Sebera su colore de sa linea de sa Declinatzione Personalizada 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:527
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "Configuraztione de sas AcheoLineas"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:528
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "Configuraztione de su Plug-in sas AcheoLineas"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "Po cambiare colores tepes lassare sa modalidade a ischemo intreu!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "Declinatzione Personalizada 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
-msgstr ""
+msgstr "Sole Currente"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Inseri una etichetta (numene de sa localidade) po custa linea"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Localidade Geografcia 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:544
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Localidade Geografcia 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:546
 msgid "Change color"
-msgstr ""
+msgstr "Cambia colore"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:549
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Linea de  Standstill Lunare Minore"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Pianeta Currente: Nessunu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Pianeta Currente: Mercuriu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Pianeta Currente: Venere"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Pianeta Currente: Marte"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Pianeta Currente: Zove"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:557
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Pianeta Currente: Saturnu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Declinatzione de su passazu a Nadir"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "Azimuth Personalizau 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:561
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "Azimuth Personalizau 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:563
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:566
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "Inseri una etichetta po custa linea"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
 msgid "Solstice Lines"
-msgstr ""
+msgstr "Lianeas de Solstitziu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
 msgid "Current Moon"
-msgstr ""
+msgstr "Luna Currente"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "Declinatzione de su passazu a Zenith"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Lineas Crossquarter"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "Linea Ecuinotziu (Ecuatore)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Linea de Standstill Lunare Majore"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "Declinatzione Personalizada 2"
 
 #~ msgid "Illumination"
 #~ msgstr "Lughe"
