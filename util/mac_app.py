@@ -125,12 +125,11 @@ def processFrameworks():
 	allFramework = []
 	# First, copy over the stellarium dependencies
 	frameworks = getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))
-	# QtOpenGL hack (required!)
-	if 'QtCore' in ' '.join(frameworks):
-		frameworks.append(frameworks[-1].replace('QtCore','QtOpenGL'))
 	# QtMultimedia?
 	if 'QtMultimedia' in ' '.join(frameworks):
 		frameworks.append(frameworks[-1].replace('QtMultimedia','QtMultimediaWidgets'))
+		# QtOpenGL is required by QtMultimediaWidgets
+		frameworks.append(frameworks[-1].replace('QtCore','QtOpenGL'))
 	for framework in frameworks:
 		copyFrameworkToApp(framework)
 		allFramework.append(framework)
