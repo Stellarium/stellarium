@@ -46,4 +46,12 @@ namespace StelOpenGL
 	int checkGLErrors(const char *file, int line);
 }
 
+// This is still needed for the ARM platform (armhf)
+
+#if defined(QT_OPENGL_ES_2)
+#ifndef GL_DOUBLE
+#define GL_DOUBLE GL_FLOAT
+#endif
+#endif
+
 #endif // _STELOPENGL_HPP_
