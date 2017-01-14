@@ -179,6 +179,7 @@ Oculars::Oculars():
 	actualFOV(0),
 	initialFOV(0),
 	flagInitFOVUsage(false),
+	flagInitDirectionUsage(false),
 	flagAutosetMountForCCD(false),
 	equatorialMountEnabled(false),
 	reticleRotation(0)
@@ -660,6 +661,7 @@ void Oculars::init()
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
+		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
@@ -1416,6 +1418,9 @@ void Oculars::toggleCCD(bool show)
 		else
 			movementManager->zoomTo(initialFOV);
 
+		if (getFlagInitDirectionUsage())
+			movementManager->setViewDirectionJ2000(core->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
+
 		if (getFlagAutosetMountForCCD())
 		{
 			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
@@ -1461,6 +1466,10 @@ void Oculars::toggleTelrad(bool show)
 		}
 		else if (getFlagInitFovUsage()) // Restoration of FOV is needed?
 			movementMgr->zoomTo(movementMgr->getInitFov());
+
+		if (getFlagInitDirectionUsage())
+			movementMgr->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(movementMgr->getInitViewingDirection(), StelCore::RefractionOff));
+
 		flagShowTelrad = show;
 		emit enableTelradChanged(flagShowTelrad);
 	}
@@ -2149,6 +2158,9 @@ void Oculars::unzoomOcular()
 		movementManager->zoomTo(movementManager->getInitFov());
 	else
 		movementManager->zoomTo(initialFOV);
+
+	if (getFlagInitDirectionUsage())
+		movementManager->setViewDirectionJ2000(core->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 void Oculars::zoom(bool zoomedIn)
@@ -2459,6 +2471,18 @@ void Oculars::setFlagInitFovUsage(const bool b)
 bool Oculars::getFlagInitFovUsage() const
 {
 	return flagInitFOVUsage;
+}
+
+void Oculars::setFlagInitDirectionUsage(const bool b)
+{
+	flagInitDirectionUsage = b;
+	settings->setValue("use_initial_direction", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagInitDirectionUsage() const
+{
+	return flagInitDirectionUsage;
 }
 
 void Oculars::setFlagAutosetMountForCCD(const bool b)
