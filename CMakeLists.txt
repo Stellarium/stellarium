@@ -329,6 +329,7 @@ ELSE()
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
+FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 # required for qcustomplot external dependency
@@ -379,7 +380,7 @@ endif()
 
 if(USE_OLD_QGLWIDGET)
     add_definitions(-DUSE_OLD_QGLWIDGET)
-    find_package(Qt5OpenGL REQUIRED)
+
 endif()
 
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
@@ -553,6 +554,7 @@ IF(WIN32)
     GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
     GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
     GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
+    GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
     GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
     GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
     GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)    
