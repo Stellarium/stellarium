@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-12-10 15:56+0700\n"
-"PO-Revision-Date: 2017-01-08 03:04+0000\n"
+"PO-Revision-Date: 2017-01-14 02:06+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-09 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-01-14 05:29+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr ""
+msgstr "Nie udało się pobrać listy działań"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Działanie '%1' nie zostało zaakceptowane przez serwer: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Błąd podczas wysyłania działania '%1' do serwera: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -122,7 +122,7 @@ msgstr "Brak pasujących elementów"
 
 #: plugins/RemoteControl/webroot/js/ui/mainui.js:317
 msgid "No current selection"
-msgstr ""
+msgstr "Brak bieżącego zaznaczenia"
 
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:420
 #: tablet7in.html:606
@@ -143,11 +143,11 @@ msgstr "Zdalne sterowanie Stellarium"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
-msgstr ""
+msgstr "Główne elementy sterujące"
 
 #: index.html:31 tablet7in.html:33
 msgid "Selection"
-msgstr ""
+msgstr "Zaznaczenie"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
@@ -155,7 +155,7 @@ msgstr "DSO"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Działania i skrypty"
 
 #: index.html:76
 msgid "Pause"
@@ -259,31 +259,31 @@ msgstr "Lewo"
 
 #: index.html:118 tablet7in.html:92
 msgid "Focus on selected object"
-msgstr ""
+msgstr "Zogniskuj na wybranym obiekcie"
 
 #: index.html:118 tablet7in.html:92
 msgid "Focus on selection"
-msgstr ""
+msgstr "Zogniskuj na zaznaczeniu"
 
 #: index.html:118 tablet7in.html:92
 msgid "Right"
-msgstr ""
+msgstr "Prawo"
 
 #: index.html:118 tablet7in.html:92
 msgid "Down/Left"
-msgstr ""
+msgstr "Dół/Lewo"
 
 #: index.html:118 tablet7in.html:92
 msgid "Down"
-msgstr ""
+msgstr "Dół"
 
 #: index.html:118 tablet7in.html:92
 msgid "Down/Right"
-msgstr ""
+msgstr "Dół/Prawo"
 
 #: index.html:122 tablet7in.html:133
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
@@ -291,11 +291,11 @@ msgstr "Wpisz szukany termin. Użyj TAB do poruszania się po wynikach."
 
 #: index.html:141 tablet7in.html:225
 msgid "Select and focus"
-msgstr ""
+msgstr "Zaznaczanie i ogniskowanie"
 
 #: index.html:168 tablet7in.html:255
 msgid "Quick select"
-msgstr ""
+msgstr "Szybkie zaznaczanie"
 
 #: index.html:172 tablet7in.html:259
 msgid "Earth"
@@ -307,7 +307,7 @@ msgstr "Pluton"
 
 #: index.html:180 tablet7in.html:290
 msgid "Current selection"
-msgstr ""
+msgstr "Bieżące zaznaczenie"
 
 #: index.html:205 tablet7in.html:325
 msgid "Planets and satellites"
@@ -363,11 +363,11 @@ msgstr "Zatrzymaj bieżący skrypt"
 
 #: index.html:426 tablet7in.html:41 tablet7in.html:591
 msgid "Actions"
-msgstr ""
+msgstr "Działania"
 
 #: index.html:430 tablet7in.html:595
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Uruchom/przełącz działanie"
 
 #: index.html:441 tablet7in.html:630
 msgid "Planet map"
@@ -393,23 +393,23 @@ msgstr ""
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Skok w czasie"
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "Siatki"
 
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Widok w kierunku horyzontu w azymucie"
 
 #: tablet7in.html:118
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Przesunięcie widoku w pionie"
 
 #: tablet7in.html:128
 msgid "Reset"
-msgstr ""
+msgstr "Zresetuj"
 
 #: tablet7in.html:260
 msgid "Sirius"
@@ -508,6 +508,8 @@ msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Okręgi kreślone w danej chwili przez oś Ziemi podczas jej ruchu wokół "
+"biegunów ekliptycznych. Wyświetlane tylko na Ziemi."
 
 #: tablet7in.html:406
 msgid "Solstices"
@@ -531,7 +533,7 @@ msgstr "Bieżąca planeta:"
 
 #: tablet7in.html:577
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Oddzielne zaznaczenie gwiazdozbioru"
 
 #: tablet7in.html:615
 msgid "Favorites"
