@@ -329,7 +329,6 @@ ELSE()
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
-FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 # required for qcustomplot external dependency
@@ -379,8 +378,8 @@ else()
 endif()
 
 if(USE_OLD_QGLWIDGET)
+    set(USE_QTOPENGL 1)
     add_definitions(-DUSE_OLD_QGLWIDGET)
-
 endif()
 
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
@@ -411,10 +410,17 @@ IF(ENABLE_SCRIPTING)
     FIND_PACKAGE(Qt5Script REQUIRED)
 ENDIF()
 IF(ENABLE_MEDIA)
+    set(USE_QTOPENGL 1)
     ADD_DEFINITIONS(-DENABLE_MEDIA)
     FIND_PACKAGE(Qt5Multimedia REQUIRED)
     FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
 ENDIF()
+
+if(USE_QTOPENGL)
+    # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
+    # but the QtMultimediaWidgets module requires it internally, so we still have to package it.
+    FIND_PACKAGE(Qt5OpenGL REQUIRED)
+endif()
 
 FIND_PACKAGE(Qt5Test)
 
@@ -554,7 +560,12 @@ IF(WIN32)
     GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
     GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
     GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
+if(USE_QTOPENGL)
     GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
+    SET(ISS_QT_OPENGL "Source: \"${QtOpenGL_location}\"; DestDir: \"{app}\";")
+else()
+    set(ISS_QT_OPENGL "; QtOpenGL isn't used")
+endif()
     GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
     GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
     GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)    
