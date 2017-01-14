@@ -159,6 +159,9 @@ public slots:
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
 
+	void setFlagInitDirectionUsage(const bool b);
+	bool getFlagInitDirectionUsage(void) const;
+
 	void setFlagAutosetMountForCCD(const bool b);
 	bool getFlagAutosetMountForCCD(void) const;
 
@@ -351,6 +354,7 @@ private:
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
+	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
 	bool equatorialMountEnabled;
 	double reticleRotation;

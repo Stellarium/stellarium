@@ -213,6 +213,16 @@
                </property>
               </widget>
              </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialDirection">
+               <property name="toolTip">
+                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore direction to initial values</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
