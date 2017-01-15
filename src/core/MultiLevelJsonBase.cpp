@@ -90,17 +90,15 @@ void JsonLoadThread::run()
 }
 
 MultiLevelJsonBase::MultiLevelJsonBase(MultiLevelJsonBase* parent) : StelSkyLayer(parent)
+	, errorOccured(false)
+	, downloading(false)
+	, httpReply(NULL)
+	, deletionDelay(2.)
+	, loadThread(NULL)
+	, timeWhenDeletionScheduled(-1.) // Avoid tiles to be deleted just after constructed
+	, loadingState(false)
+	, lastPercent(0)
 {
-	errorOccured = false;
-	httpReply = NULL;
-	downloading = false;
-	loadThread = NULL;
-	loadingState = false;
-	lastPercent = 0;
-	// Avoid tiles to be deleted just after constructed
-	timeWhenDeletionScheduled = -1.;
-	deletionDelay = 2.;
-
 	if (parent!=NULL)
 	{
 		deletionDelay = parent->deletionDelay;
