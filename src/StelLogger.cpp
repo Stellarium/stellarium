@@ -293,7 +293,7 @@ void StelLogger::debugLogHandler(QtMsgType type, const QMessageLogContext& ctx, 
 
 void StelLogger::writeLog(QString msg)
 {
-	if (!msg.contains('\n'))
+	if (!msg.endsWith('\n'))
 		msg.append(QLatin1Char('\n'));
 
 	fileMutex.lock();
