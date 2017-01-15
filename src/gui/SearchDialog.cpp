@@ -133,13 +133,12 @@ QString SearchDialog::extSearchText = "";
 SearchDialog::SearchDialog(QObject* parent)
 	: StelDialog("Search", parent)
 	, simbadReply(NULL)
+	, flagHasSelectedText(false)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
-
-	flagHasSelectedText = false;
 
 	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	

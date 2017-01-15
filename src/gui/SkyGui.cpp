@@ -206,8 +206,12 @@ const QString InfoPanel::getSelectedText(void)
 
 SkyGui::SkyGui(QGraphicsItem * parent)
 	: QGraphicsWidget(parent)
+	, lastButtonbarWidth(0)
 	, btHorizAutoHide(NULL)
 	, btVertAutoHide(NULL)
+	, autoHidebts(NULL)
+	, autoHideHorizontalButtonBar(true)
+	, autoHideVerticalButtonBar(true)
 	, stelGui(NULL)
 {
 	setObjectName("StelSkyGui");
@@ -229,12 +233,6 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(this);
-
-	lastButtonbarWidth = 0;
-	autoHidebts = NULL;
-
-	autoHideHorizontalButtonBar = true;
-	autoHideVerticalButtonBar = true;
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);

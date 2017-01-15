@@ -62,13 +62,13 @@
 #include <QColorDialog>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
+	, addRemoveLandscapesDialog(NULL)
+	, atmosphereDialog(NULL)
+	, greatRedSpotDialog(NULL)
+	, configureDSOColorsDialog(NULL)
+	, configureOrbitColorsDialog(NULL)
 {
-	ui = new Ui_viewDialogForm;
-	addRemoveLandscapesDialog = NULL;
-	atmosphereDialog=NULL;
-	greatRedSpotDialog=NULL;
-	configureDSOColorsDialog=NULL;
-	configureOrbitColorsDialog=NULL;
+	ui = new Ui_viewDialogForm;	
 }
 
 ViewDialog::~ViewDialog()
