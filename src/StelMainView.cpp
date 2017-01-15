@@ -467,8 +467,17 @@ private:
 			case QEvent::GraphicsSceneMouseMove:
 				t = QEvent::MouseMove;
 				break;
+			case QEvent::GraphicsSceneMouseDoubleClick:
+				//note: the old code seems to have ignored double clicks
+				// and handled them the same as normal mouse presses
+				//if we ever want to handle double clicks, switch out these lines
+				//t = QEvent::MouseButtonDblClick;
+				t = QEvent::MouseButtonPress;
+				break;
 			default:
-				qFatal("Invalid mouse event type %d",event->type());
+				//warn in release and assert in debug
+				qWarning("Unhandled mouse event type %d",event->type());
+				Q_ASSERT(false);
 		}
 
 		QPointF pos = event->scenePos();
