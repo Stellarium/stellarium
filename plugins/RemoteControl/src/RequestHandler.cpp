@@ -56,7 +56,7 @@ public:
 		if(trans.isNull())
 			trans = StelTranslator::globalTranslator->qtranslate(key);
 		//HTML escape + single quote escape
-		return trans.toHtmlEscaped().replace('\'',"&#39");
+		return trans.toHtmlEscaped().replace('\'',"&#39;");
 	}
 private:
 	StelTranslator* rcTranslator;
