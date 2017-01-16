@@ -221,7 +221,8 @@ void ArchaeoLines::init()
 
 	// Create action for enable/disable & hook up signals	
 	QString section=N_("ArchaeoLines");
-	addAction("actionShow_Archaeo_Lines", section, N_("ArchaeoLines"), "enabled", "Ctrl+U");
+	addAction("actionShow_ArchaeoLines",         section, N_("ArchaeoLines"), "enabled", "Ctrl+U");
+	addAction("actionShow_ArchaeoLines_dialog",  section, N_("Show settings dialog"),  configDialog,  "visible",           "Ctrl+Shift+U");
 
 	// Add a toolbar button
 	try
@@ -660,6 +661,12 @@ void ArchaeoLines::showCurrentMoon(bool b)
 }
 void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 {
+	// Avoid a crash but give warning.
+	if ((l<ArchaeoLine::CurrentPlanetNone) || (l>ArchaeoLine::CurrentPlanetSaturn))
+	{
+		qWarning() << "ArchaeoLines::showCurrentPlanet: Invalid planet called:" << l << "Setting to none.";
+		l=ArchaeoLine::CurrentPlanetNone;
+	}
 	if(l!=enumShowCurrentPlanet)
 	{
 		enumShowCurrentPlanet=l;
