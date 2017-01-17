@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-10 15:56+0700\n"
+"POT-Creation-Date: 2017-01-16 20:12+0700\n"
 "PO-Revision-Date: 2016-07-02 10:38+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-11 05:00+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2017-01-17 06:20+0000\n"
+"X-Generator: Launchpad (build 18302)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -124,8 +124,8 @@ msgstr ""
 msgid "No current selection"
 msgstr ""
 
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:420
-#: tablet7in.html:606
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:478
+#: tablet7in.html:629
 msgid "-none-"
 msgstr ""
 
@@ -321,71 +321,97 @@ msgstr ""
 msgid "ZHR:"
 msgstr "ЗЧО:"
 
-#: index.html:339 tablet7in.html:508
+#: index.html:281 tablet7in.html:412
+msgid ""
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
+"Displayed on Earth only."
+msgstr ""
+
+#: index.html:290 tablet7in.html:421
+msgid "Solstices"
+msgstr ""
+
+#: index.html:291 tablet7in.html:422
+msgid "Crossquarters"
+msgstr ""
+
+#: index.html:292 tablet7in.html:423
+msgid "Major Standstill"
+msgstr ""
+
+#: index.html:293 tablet7in.html:424
+msgid "Minor Standstill"
+msgstr ""
+
+#: index.html:303 tablet7in.html:434
+msgid "Current Planet:"
+msgstr ""
+
+#: index.html:397 tablet7in.html:531
 msgid "Bright Nebulae"
 msgstr ""
 
-#: index.html:340 tablet7in.html:509
+#: index.html:398 tablet7in.html:532
 msgid "Dark Nebulae"
 msgstr ""
 
-#: index.html:341 tablet7in.html:510
+#: index.html:399 tablet7in.html:533
 msgid "Planetary Nebulae"
 msgstr ""
 
-#: index.html:347 tablet7in.html:519
+#: index.html:405 tablet7in.html:542
 msgid "Labels and markers"
 msgstr ""
 
-#: index.html:375 tablet7in.html:547
+#: index.html:433 tablet7in.html:570
 msgid "Show illumination"
 msgstr ""
 
-#: index.html:380 tablet7in.html:553
+#: index.html:438 tablet7in.html:576
 msgid "Current landscape"
 msgstr ""
 
-#: index.html:407 tablet7in.html:581
+#: index.html:465 tablet7in.html:604
 msgid "Current sky culture"
 msgstr ""
 
-#: index.html:420 tablet7in.html:606
+#: index.html:478 tablet7in.html:629
 msgid "Active script:"
 msgstr ""
 
-#: index.html:421 tablet7in.html:607
+#: index.html:479 tablet7in.html:630
 msgid "Run selected script"
 msgstr ""
 
-#: index.html:421 tablet7in.html:607
+#: index.html:479 tablet7in.html:630
 msgid "Stop current script"
 msgstr ""
 
-#: index.html:426 tablet7in.html:41 tablet7in.html:591
+#: index.html:484 tablet7in.html:41 tablet7in.html:614
 msgid "Actions"
 msgstr ""
 
-#: index.html:430 tablet7in.html:595
+#: index.html:488 tablet7in.html:618
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:441 tablet7in.html:630
+#: index.html:499 tablet7in.html:653
 msgid "Planet map"
 msgstr ""
 
-#: index.html:442 tablet7in.html:631
+#: index.html:500 tablet7in.html:654
 msgid "Planet map pointer"
 msgstr ""
 
-#: index.html:446 tablet7in.html:635
+#: index.html:504 tablet7in.html:658
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:491 tablet7in.html:681
+#: index.html:549 tablet7in.html:704
 msgid "No response from server"
 msgstr ""
 
-#: index.html:492
+#: index.html:550
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
@@ -502,52 +528,26 @@ msgstr "Водолија"
 msgid "Pisces"
 msgstr "Рибе"
 
-#: tablet7in.html:386
-msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
-msgstr ""
-
-#: tablet7in.html:406
-msgid "Solstices"
-msgstr ""
-
-#: tablet7in.html:407
-msgid "Crossquarters"
-msgstr ""
-
-#: tablet7in.html:408
-msgid "Major Standstill"
-msgstr ""
-
-#: tablet7in.html:409
-msgid "Minor Standstill"
-msgstr ""
-
-#: tablet7in.html:420
-msgid "Current Planet:"
-msgstr ""
-
-#: tablet7in.html:577
+#: tablet7in.html:600
 msgid "Constellation selection isolated"
 msgstr ""
 
-#: tablet7in.html:615
+#: tablet7in.html:638
 msgid "Favorites"
 msgstr ""
 
-#: tablet7in.html:617
+#: tablet7in.html:640
 msgid "Show 1"
 msgstr ""
 
-#: tablet7in.html:618
+#: tablet7in.html:641
 msgid "Remove Labels and Images"
 msgstr ""
 
-#: tablet7in.html:618
+#: tablet7in.html:641
 msgid "Cleanup Screen"
 msgstr ""
 
-#: tablet7in.html:682
+#: tablet7in.html:705
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
