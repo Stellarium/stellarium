@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-10 15:56+0700\n"
+"POT-Creation-Date: 2017-01-16 20:12+0700\n"
 "PO-Revision-Date: 2016-12-14 18:09+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali <bn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-15 04:35+0000\n"
-"X-Generator: Launchpad (build 18293)\n"
+"X-Launchpad-Export-Date: 2017-01-17 06:20+0000\n"
+"X-Generator: Launchpad (build 18302)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -124,8 +124,8 @@ msgstr "তালিকায় এই নামে কিছু নেই"
 msgid "No current selection"
 msgstr "কিছু না"
 
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:420
-#: tablet7in.html:606
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:478
+#: tablet7in.html:629
 msgid "-none-"
 msgstr "-কিছু না-"
 
@@ -321,71 +321,99 @@ msgstr "সৌরজগতিক জ্যোতিষ্কসমূহ"
 msgid "ZHR:"
 msgstr "হার :"
 
-#: index.html:339 tablet7in.html:508
+#: index.html:281 tablet7in.html:412
+msgid ""
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
+"Displayed on Earth only."
+msgstr ""
+"মেরুর বৃত্তাকার সঞ্চারপথ যা পৃথিবীর অক্ষের দোলন জনিত প্রভাবের ফলে উৎপন্ন হয় "
+"(লাট্টুর মত ঘুর্ণনের কারণে) ।"
+
+#: index.html:290 tablet7in.html:421
+msgid "Solstices"
+msgstr "সূর্যায়ণ"
+
+#: index.html:291 tablet7in.html:422
+msgid "Crossquarters"
+msgstr "মরশুমি সূচনা রেখা"
+
+#: index.html:292 tablet7in.html:423
+msgid "Major Standstill"
+msgstr "সর্বোচ্চ চন্দ্রায়ণ"
+
+#: index.html:293 tablet7in.html:424
+msgid "Minor Standstill"
+msgstr "সর্বনিম্ন চন্দ্রায়ণ"
+
+#: index.html:303 tablet7in.html:434
+msgid "Current Planet:"
+msgstr "পছন্দসই গ্রহ :"
+
+#: index.html:397 tablet7in.html:531
 msgid "Bright Nebulae"
 msgstr "উজ্জ্বল নীহারিকা"
 
-#: index.html:340 tablet7in.html:509
+#: index.html:398 tablet7in.html:532
 msgid "Dark Nebulae"
 msgstr "কৃষ্ণবর্ণ নীহারিকা"
 
-#: index.html:341 tablet7in.html:510
+#: index.html:399 tablet7in.html:533
 msgid "Planetary Nebulae"
 msgstr "গ্রহরূপী নীহারিকা"
 
-#: index.html:347 tablet7in.html:519
+#: index.html:405 tablet7in.html:542
 msgid "Labels and markers"
 msgstr "নাম এবং চিহ্ন"
 
-#: index.html:375 tablet7in.html:547
+#: index.html:433 tablet7in.html:570
 msgid "Show illumination"
 msgstr "দীপন স্তর"
 
-#: index.html:380 tablet7in.html:553
+#: index.html:438 tablet7in.html:576
 msgid "Current landscape"
 msgstr "ব্যবহৃত ভূমিরূপ"
 
-#: index.html:407 tablet7in.html:581
+#: index.html:465 tablet7in.html:604
 msgid "Current sky culture"
 msgstr "ব্যবহৃত সংস্কৃতি"
 
-#: index.html:420 tablet7in.html:606
+#: index.html:478 tablet7in.html:629
 msgid "Active script:"
 msgstr "সক্রিয় কার্যলিপি"
 
-#: index.html:421 tablet7in.html:607
+#: index.html:479 tablet7in.html:630
 msgid "Run selected script"
 msgstr "কার্যলিপি চালান"
 
-#: index.html:421 tablet7in.html:607
+#: index.html:479 tablet7in.html:630
 msgid "Stop current script"
 msgstr "কার্যলিপি বন্ধ করুন"
 
-#: index.html:426 tablet7in.html:41 tablet7in.html:591
+#: index.html:484 tablet7in.html:41 tablet7in.html:614
 msgid "Actions"
 msgstr "কার্য তালিকা"
 
-#: index.html:430 tablet7in.html:595
+#: index.html:488 tablet7in.html:618
 msgid "Run/toggle action"
 msgstr "কার্য সম্পাদনা করুন"
 
-#: index.html:441 tablet7in.html:630
+#: index.html:499 tablet7in.html:653
 msgid "Planet map"
 msgstr "মানচিত্র"
 
-#: index.html:442 tablet7in.html:631
+#: index.html:500 tablet7in.html:654
 msgid "Planet map pointer"
 msgstr "মানচিত্রে স্থান নির্দেশক"
 
-#: index.html:446 tablet7in.html:635
+#: index.html:504 tablet7in.html:658
 msgid "Type to search location"
 msgstr "স্থানের নাম লিখুন"
 
-#: index.html:491 tablet7in.html:681
+#: index.html:549 tablet7in.html:704
 msgid "No response from server"
 msgstr "সার্ভার থেকে কোনো প্রতিক্রিয়া পাওয়া যাচ্ছে না"
 
-#: index.html:492
+#: index.html:550
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
@@ -503,55 +531,27 @@ msgstr "জল বাহক (কুম্ভ)"
 msgid "Pisces"
 msgstr "মাছ (মীন)"
 
-#: tablet7in.html:386
-msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
-msgstr ""
-"মেরুর বৃত্তাকার সঞ্চারপথ যা পৃথিবীর অক্ষের দোলন জনিত প্রভাবের ফলে উৎপন্ন হয় "
-"(লাট্টুর মত ঘুর্ণনের কারণে) ।"
-
-#: tablet7in.html:406
-msgid "Solstices"
-msgstr "সূর্যায়ণ"
-
-#: tablet7in.html:407
-msgid "Crossquarters"
-msgstr "মরশুমি সূচনা রেখা"
-
-#: tablet7in.html:408
-msgid "Major Standstill"
-msgstr "সর্বোচ্চ চন্দ্রায়ণ"
-
-#: tablet7in.html:409
-msgid "Minor Standstill"
-msgstr "সর্বনিম্ন চন্দ্রায়ণ"
-
-#: tablet7in.html:420
-msgid "Current Planet:"
-msgstr "পছন্দসই গ্রহ :"
-
-#: tablet7in.html:577
+#: tablet7in.html:600
 msgid "Constellation selection isolated"
 msgstr "একটি করে তারামন্ডল নির্বাচন"
 
-#: tablet7in.html:615
+#: tablet7in.html:638
 msgid "Favorites"
 msgstr "প্রিয়"
 
-#: tablet7in.html:617
+#: tablet7in.html:640
 msgid "Show 1"
 msgstr "১ নং টি দেখুন"
 
-#: tablet7in.html:618
+#: tablet7in.html:641
 msgid "Remove Labels and Images"
 msgstr "নাম ও চিত্রগুলি মুছুন"
 
-#: tablet7in.html:618
+#: tablet7in.html:641
 msgid "Cleanup Screen"
 msgstr "পরিষ্কার করুন"
 
-#: tablet7in.html:682
+#: tablet7in.html:705
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "%1 সেকেন্ড ধরে সার্ভারের সাথে যোগাযোগ নেই । স্টেলারিয়াম কি চালু করা আছে ?"
