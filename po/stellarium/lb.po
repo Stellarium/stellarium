@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-01-14 12:29+0700\n"
+"POT-Creation-Date: 2017-01-16 20:12+0700\n"
 "PO-Revision-Date: 2016-07-15 17:02+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Luxembourgish <lb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-15 05:45+0000\n"
+"X-Launchpad-Export-Date: 2017-01-17 05:42+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -51,7 +51,7 @@ msgstr ""
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:532 src/core/StelCore.cpp:253
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:726
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:735
 msgid "Display Options"
 msgstr "Display Optiounen"
 
@@ -1853,7 +1853,7 @@ msgid "Deep-sky objects background images"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
-#: src/StelMainView.cpp:725
+#: src/StelMainView.cpp:734
 msgid "Miscellaneous"
 msgstr ""
 
@@ -2779,89 +2779,89 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:211
+#: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:212
+#: src/gui/SearchDialog.cpp:211
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:213
+#: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:214
+#: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:215
+#: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:216
+#: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:217
+#: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:245
+#: src/gui/SearchDialog.cpp:244
 msgid "Right ascension"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:248
+#: src/gui/SearchDialog.cpp:247
 msgid "Declination"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:256
+#: src/gui/SearchDialog.cpp:255
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:663
+#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:663
 #: src/gui/AstroCalcDialog.cpp:722 src/gui/AstroCalcDialog.cpp:724
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:270
+#: src/gui/SearchDialog.cpp:269
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
 msgid "Longitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:273
+#: src/gui/SearchDialog.cpp:272
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:540
 msgid "Latitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:610
+#: src/gui/SearchDialog.cpp:609
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:618
+#: src/gui/SearchDialog.cpp:617
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:829
+#: src/gui/SearchDialog.cpp:828
 msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:903
+#: src/gui/SearchDialog.cpp:902
 msgid "Paste and Search"
 msgstr ""
 
@@ -3112,54 +3112,54 @@ msgstr ""
 msgid "Location of observer"
 msgstr ""
 
-#: src/StelMainView.cpp:725
+#: src/StelMainView.cpp:734
 msgid "Save screenshot"
 msgstr ""
 
-#: src/StelMainView.cpp:726
+#: src/StelMainView.cpp:735
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/StelMainView.cpp:874
+#: src/StelMainView.cpp:883
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:877
+#: src/StelMainView.cpp:886
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:919
+#: src/StelMainView.cpp:928
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:970
+#: src/StelMainView.cpp:979
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1026
+#: src/StelMainView.cpp:1035
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1067
+#: src/StelMainView.cpp:1076
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1179
+#: src/StelMainView.cpp:1188
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -3595,7 +3595,7 @@ msgid "Trees"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:245 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1277
+#: src/translations.h:245 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
 msgid "Moon"
 msgstr ""
 
@@ -3615,17 +3615,17 @@ msgid "Garching"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:253 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
+#: src/translations.h:253 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
 msgid "Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:255 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1292
+#: src/translations.h:255 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1299
 msgid "Jupiter"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:257 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
+#: src/translations.h:257 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
 msgid "Saturn"
 msgstr ""
 
@@ -11451,7 +11451,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:311
 #: plugins/Exoplanets/src/Exoplanet.cpp:315
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
 msgid "Sun"
 msgstr ""
 
@@ -12696,6 +12696,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:157
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show settings dialog"
 msgstr ""
 
@@ -14114,112 +14115,112 @@ msgstr ""
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Solstices"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Major Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Minor Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
 msgid "Show Line for Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
 msgid "Show Line for Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Sun"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Current Moon"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Line for Geographic Location 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
 msgid "Show Line for Geographic Location 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Line for Custom Azimuth 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Line for Custom Azimuth 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1250
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1257
 msgid "Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1253
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1260
 msgid "Solstice"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1256
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1263
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1259
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1266
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1262
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1269
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1265
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1272
 msgid "Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1268
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1275
 msgid "Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1271
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1280
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "error if you can read this"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
 msgid "Mercury"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1286
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1293
 msgid "Venus"
 msgstr ""
 

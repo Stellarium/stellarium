@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 12:29+0700\n"
+"POT-Creation-Date: 2017-01-16 20:12+0700\n"
 "PO-Revision-Date: 2017-01-14 20:23+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-15 05:57+0000\n"
+"X-Launchpad-Export-Date: 2017-01-17 05:52+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -57,7 +57,7 @@ msgstr "сузір'я"
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:532 src/core/StelCore.cpp:253
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:726
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:735
 msgid "Display Options"
 msgstr "Параметри показу"
 
@@ -2001,7 +2001,7 @@ msgid "Deep-sky objects background images"
 msgstr "Зображення тла для далеких об’єктів"
 
 #: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
-#: src/StelMainView.cpp:725
+#: src/StelMainView.cpp:734
 msgid "Miscellaneous"
 msgstr "Інше"
 
@@ -2955,89 +2955,89 @@ msgstr "довкілля"
 msgid "starchart"
 msgstr "зоряна карта"
 
-#: src/gui/SearchDialog.cpp:211
+#: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Екваторіальні (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:212
+#: src/gui/SearchDialog.cpp:211
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Екваторіальні"
 
-#: src/gui/SearchDialog.cpp:213
+#: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Горизонтальні"
 
-#: src/gui/SearchDialog.cpp:214
+#: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Галактичні"
 
-#: src/gui/SearchDialog.cpp:215
+#: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr "Супергалактична"
 
-#: src/gui/SearchDialog.cpp:216
+#: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Екліптична"
 
-#: src/gui/SearchDialog.cpp:217
+#: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "Екліптична (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:245
+#: src/gui/SearchDialog.cpp:244
 msgid "Right ascension"
 msgstr "Пряме сходження"
 
-#: src/gui/SearchDialog.cpp:248
+#: src/gui/SearchDialog.cpp:247
 msgid "Declination"
 msgstr "Схилення"
 
-#: src/gui/SearchDialog.cpp:256
+#: src/gui/SearchDialog.cpp:255
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Azimuth"
 msgstr "Азимут"
 
-#: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:663
+#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:663
 #: src/gui/AstroCalcDialog.cpp:722 src/gui/AstroCalcDialog.cpp:724
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Altitude"
 msgstr "Висота"
 
-#: src/gui/SearchDialog.cpp:270
+#: src/gui/SearchDialog.cpp:269
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
 msgid "Longitude"
 msgstr "Довгота"
 
-#: src/gui/SearchDialog.cpp:273
+#: src/gui/SearchDialog.cpp:272
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:540
 msgid "Latitude"
 msgstr "Широта"
 
-#: src/gui/SearchDialog.cpp:610
+#: src/gui/SearchDialog.cpp:609
 msgid "Simbad Lookup Error"
 msgstr "Помилка під час пошуку у Simbad"
 
-#: src/gui/SearchDialog.cpp:618
+#: src/gui/SearchDialog.cpp:617
 msgid "Simbad Lookup"
 msgstr "Пошук у Simbad"
 
-#: src/gui/SearchDialog.cpp:829
+#: src/gui/SearchDialog.cpp:828
 msgid "University of Strasbourg (France)"
 msgstr "Стразбурзький університет (Франція)"
 
-#: src/gui/SearchDialog.cpp:830
+#: src/gui/SearchDialog.cpp:829
 msgid "Harvard University (USA)"
 msgstr "Гарвардський університет (США)"
 
-#: src/gui/SearchDialog.cpp:903
+#: src/gui/SearchDialog.cpp:902
 msgid "Paste and Search"
 msgstr "Вставити і шукати"
 
@@ -3288,15 +3288,15 @@ msgstr "Локалізована назва"
 msgid "Location of observer"
 msgstr "Розташування спостерігача"
 
-#: src/StelMainView.cpp:725
+#: src/StelMainView.cpp:734
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/StelMainView.cpp:726
+#: src/StelMainView.cpp:735
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/StelMainView.cpp:874
+#: src/StelMainView.cpp:883
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3305,14 +3305,14 @@ msgstr ""
 "графічної підсистеми або скористайтеся параметром --angle-mode (або --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:877
+#: src/StelMainView.cpp:886
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери або графічне "
 "обладнання."
 
-#: src/StelMainView.cpp:919
+#: src/StelMainView.cpp:928
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3323,7 +3323,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:970
+#: src/StelMainView.cpp:979
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3334,7 +3334,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1026
+#: src/StelMainView.cpp:1035
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3345,7 +3345,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1067
+#: src/StelMainView.cpp:1076
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3356,7 +3356,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1179
+#: src/StelMainView.cpp:1188
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -3792,7 +3792,7 @@ msgid "Trees"
 msgstr "Дерева"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:245 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1277
+#: src/translations.h:245 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
 msgid "Moon"
 msgstr "Місяць"
 
@@ -3812,17 +3812,17 @@ msgid "Garching"
 msgstr "Ґаршінґ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:253 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
+#: src/translations.h:253 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:255 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1292
+#: src/translations.h:255 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1299
 msgid "Jupiter"
 msgstr "Юпітер"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:257 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
+#: src/translations.h:257 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -12213,7 +12213,7 @@ msgstr "Маса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:311
 #: plugins/Exoplanets/src/Exoplanet.cpp:315
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
 msgid "Sun"
 msgstr "Сонце"
 
@@ -13690,6 +13690,7 @@ msgstr "Увімкнути або вимкнути мітки радіантів
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:157
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show settings dialog"
 msgstr "Показати діалогове вікно параметрів"
 
@@ -15231,112 +15232,112 @@ msgstr "Археолінії"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "Інструмент для археоастрономічних і етноастрономічних досліджень"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Equinox"
 msgstr "Показати лінію для рівнодення"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Solstices"
 msgstr "Показати лінію для сонцестоянь"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Crossquarter"
 msgstr "Показати лінію для квантального дня"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Major Standstill"
 msgstr "Показати лінію для основних зупинок"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Minor Standstill"
 msgstr "Показати лінію для мінорних зупинок"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Zenith Passage"
 msgstr "Показати лінію для проходження зеніта"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
 msgid "Show Line for Nadir Passage"
 msgstr "Показати лінію для проходження надира"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
 msgid "Show Line for Selected Object"
 msgstr "Показати лінію для позначеного об’єкта"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Sun"
 msgstr "Показати лінію для поточного Сонця"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Current Moon"
 msgstr "Показати лінію для поточного Місяця"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Line for Geographic Location 1"
 msgstr "Показати лінію для географічного місця 1"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
 msgid "Show Line for Geographic Location 2"
 msgstr "Показати лінію для географічного місця 1"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Line for Custom Azimuth 1"
 msgstr "Показати лінію для нетипового азимута 1"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Line for Custom Azimuth 2"
 msgstr "Показати лінію для нетипового азимута 2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
 msgstr "Показувати лінію нетипового схилення 1"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
 msgstr "Показувати лінію нетипового схилення 2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1250
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1257
 msgid "Equinox"
 msgstr "Рівнодення"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1253
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1260
 msgid "Solstice"
 msgstr "Сонцестояння"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1256
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1263
 msgid "Crossquarter"
 msgstr "Квартальний день"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1259
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1266
 msgid "Major Lunar Standstill"
 msgstr "Основна місячна зупинка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1262
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1269
 msgid "Minor Lunar Standstill"
 msgstr "Мінорна місячна зупинка"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1265
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1272
 msgid "Zenith Passage"
 msgstr "Проходження зеніту"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1268
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1275
 msgid "Nadir Passage"
 msgstr "Проходження надиру"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1271
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
 msgstr "Позначений об’єкт"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1280
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "error if you can read this"
 msgstr "помилка, якщо ви це бачите"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
 msgid "Mercury"
 msgstr "Меркурій"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1286
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1293
 msgid "Venus"
 msgstr "Венера"
 
