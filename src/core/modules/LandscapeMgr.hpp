@@ -41,7 +41,7 @@ class QSettings;
 //! \note
 //! The Bortle scale index setting was removed from this class, because it was duplicated
 //! from StelSkyDrawer, complicating code that changes it.
-//! It is now only in StelSkyDrawer and can be accessed with
+//! It is now only in StelSkyDrawer and can be accessed
 //! with \link StelSkyDrawer::getBortleScaleIndex getBortleScaleIndex \endlink
 //! and \link StelSkyDrawer::setBortleScaleIndex setBortleScaleIndex \endlink.
 //! Slots setAtmosphereBortleLightPollution and getAtmosphereBortleLightPollution
@@ -141,9 +141,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the landscape manager
 
-	//! Load a landscape based on a hash of parameters mirroring the landscape.ini
-	//! file and make it the current landscape.
-	bool loadLandscape(QMap<QString, QString>& param);
+	// Load a landscape based on a hash of parameters mirroring the landscape.ini
+	// file and make it the current landscape.
+	// GZ: This was declared, but not implemented(?)
+	//bool loadLandscape(QMap<QString, QString>& param);
 
 	//! Create a new landscape from the files which describe it.
 	//! Reads a landscape.ini file which is passed as the first parameter, determines
@@ -177,7 +178,7 @@ public slots:
 	//! this value explicitly to freeze it during image export. To unfreeze, call this again with any negative value.
 	void setAtmosphereAverageLuminance(const float overrideLuminance);
 
-	//! Return a map of landscape name to landscape ID (directory name).
+	//! Return a map of landscape names to landscape IDs (directory names).
 	QMap<QString,QString> getNameToDirMap() const;
 
 	//! Retrieve a list of the names of all the available landscapes in
@@ -211,6 +212,17 @@ public slots:
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
 	//! @param changeLocationDuration the duration of the transition animation
 	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
+
+	//! Preload a landscape.
+	//! @param id the ID of a landscape
+	//! @param replace true if existing landscape entry should be replaced (useful during development to reload after edit)
+	//! @return false if landscape could not be found
+	bool preloadLandscape(const QString& id, const bool replace=true);
+	//! Remove a landscape from the pool (QMap) of preloaded landscapes.
+	//! If the landscape is currently in use, it will not be deleted, but still taken from the pool.
+	//! @param id the ID of a landscape
+	//! @return false if landscape could not be found
+	bool removePreloadedLandscape(const QString& id);
 
 	//! Get the current landscape object.
 	Landscape* getCurrentLandscape() const { return landscape; }
@@ -514,6 +526,12 @@ private:
 	//! List of the IDs of the landscapes packaged by default with Stellarium.
 	//! (So that they can't be removed.)
 	QStringList packagedLandscapeIDs;
+
+	//! QMap of landscapes kept in memory for faster access. This is useful in a context of automated setup
+	//! (museum show or such) where a list of landscapes is loaded at system start (e.g. in the startup.ssc script)
+	//! and then retrieved while script is running. It should allow faster switching of landscapes.
+	//! The key is just the LandscapeID.
+	QMap<QString,Landscape*> preloadedLandscapes;
 
 };
 
