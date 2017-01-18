@@ -142,7 +142,8 @@ void Cardinals::updateI18n()
 
 
 LandscapeMgr::LandscapeMgr()
-	: atmosphere(NULL)
+	: StelModule()
+	, atmosphere(NULL)
 	, cardinalsPoints(NULL)
 	, landscape(NULL)
 	, oldLandscape(NULL)
@@ -154,7 +155,7 @@ LandscapeMgr::LandscapeMgr()
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagAtmosphereAutoEnabling(false)
 {
-	setObjectName("LandscapeMgr");
+	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
 	packagedLandscapeIDs = (QStringList() << "guereins");
@@ -165,19 +166,34 @@ LandscapeMgr::LandscapeMgr()
 		packagedLandscapeIDs << directories.fileName();
 	}
 	packagedLandscapeIDs.removeDuplicates();
+	preloadedLandscapes.clear();
 }
 
 LandscapeMgr::~LandscapeMgr()
 {
 	delete atmosphere;
 	delete cardinalsPoints;
-	if (oldLandscape)
+	// If oldLandscape happens to be in the preloaded, only delete later.
+	if ( (oldLandscape) && (preloadedLandscapes.key(oldLandscape) == QString()) )
 	{
 		delete oldLandscape;
 		oldLandscape=NULL;
 	}
-	delete landscape;
-	landscape = NULL;
+	if (!preloadedLandscapes.contains(currentLandscapeID))
+	{
+		delete landscape;
+		landscape = NULL;
+	}
+	// GZ: fastest way to clean out a QMap?
+	if (! preloadedLandscapes.empty())
+	{
+		foreach (Landscape* landscape, preloadedLandscapes)
+		{
+			//if (currentLandscapeID != landscape)
+			delete landscape;
+		}
+		preloadedLandscapes.clear();
+	}
 }
 
 /*************************************************************************
@@ -198,6 +214,7 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 void LandscapeMgr::update(double deltaTime)
 {
 	atmosphere->update(deltaTime);
+
 	if (oldLandscape)
 	{
 		// This is only when transitioning to newly loaded landscape. We must draw the old one until the new one is faded in completely.
@@ -208,7 +225,8 @@ void LandscapeMgr::update(double deltaTime)
 
 			if (oldLandscape->getEffectiveLandFadeValue()< 0.01f)
 			{
-				delete oldLandscape;
+				if (preloadedLandscapes.key(oldLandscape) == QString())
+					delete oldLandscape;
 				oldLandscape=NULL;
 			}
 		}
@@ -422,7 +440,14 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		return false;
 
 	// We want to lookup the landscape ID (dir) from the name.
-	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+	Landscape* newLandscape;
+
+	if (preloadedLandscapes.contains(id))
+	{
+		newLandscape = preloadedLandscapes[id];
+	}
+	else
+		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
 	
 	if (!newLandscape)
 	{
@@ -440,8 +465,12 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
 		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
 		//in case we already fade out one old landscape (if switching too rapidly): the old one has to go immediately.
-		if (oldLandscape)
+		// Delete the oldLandscape only if not in preloadedLandscapes.
+		if ( (oldLandscape) && (preloadedLandscapes.key(oldLandscape) == QString()) )
+		{
+			qDebug() << "it seems safe to delete oldLandscape" << oldLandscape->getName();
 			delete oldLandscape;
+		}
 		oldLandscape = landscape; // keep old while transitioning!
 	}
 	landscape=newLandscape;
@@ -507,6 +536,56 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 		return false;
 	}
 }
+
+//! Preload a landscape.
+//! @param id the ID of a landscape
+//! @param replace true if existing landscape entry should be replaced (useful during development to reload after edit)
+//! @return false if landscape could not be found, or existed already and replace was false.
+bool LandscapeMgr::preloadLandscape(const QString& id, const bool replace)
+{
+	if (preloadedLandscapes.contains(id) && (!replace))
+		return false;
+
+	if ( (id==currentLandscapeID) && (!preloadedLandscapes.contains(id)))
+	{ // already loaded?
+		preloadedLandscapes.insert(id, landscape);
+		return true;
+	}
+
+	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+	if (!newLandscape)
+	{
+		qWarning() << "ERROR while preloading landscape " << "landscapes/" + id + "/landscape.ini";
+		return false;
+	}
+
+	Landscape* existingLandscape=preloadedLandscapes.value(id, NULL);
+
+	// don't delete if element is in active use!
+	if ( (existingLandscape) && (existingLandscape!=landscape) && (existingLandscape!=oldLandscape) )
+	{
+		delete existingLandscape;
+	}
+	preloadedLandscapes.insert(id, newLandscape);
+	return true;
+}
+
+//! Remove a landscape from the pool (QMap) of preloaded landscapes.
+//! If the landscape is currently in use, it will not be deleted, but still taken from the pool.
+//! @param id the ID of a landscape
+//! @return false if landscape could not be found
+bool LandscapeMgr::removePreloadedLandscape(const QString& id)
+{
+	Landscape* existingLandscape=preloadedLandscapes.value(id, NULL);
+
+	// don't delete if element is in active use!
+	if ( (existingLandscape) && (existingLandscape!=landscape) && (existingLandscape!=oldLandscape) )
+	{
+		delete existingLandscape;
+	}
+	return (bool) preloadedLandscapes.remove(id);
+}
+
 
 // Change the default landscape to the landscape with the ID specified.
 bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
@@ -878,7 +957,7 @@ QString LandscapeMgr::nameToID(const QString& name) const
 }
 
 /****************************************************************************
- get a map of landscape name (from landscape.ini name field) to ID (dir name)
+ get a map of landscape names (from landscape.ini name field) to ID (dir name)
  ****************************************************************************/
 QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 {
