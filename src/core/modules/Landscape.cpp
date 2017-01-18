@@ -284,13 +284,14 @@ void Landscape::loadLabels(const QString& landscapeId)
 		{
 			QString line=in.readLine();
 
-			// TODO: Read entries, construct vectors, put in list.
-			if (line.startsWith('#'))
+			// Skip comments and all-empty lines (space allowed and ignored)
+			if (line.startsWith('#') || line.trimmed().isEmpty() )
 				continue;
+			// Read entries, construct vectors, put in list.
 			QStringList parts=line.split('|');
 			if (parts.count() != 5)
 			{
-				qWarning() << "Invalid line in landscape" << descFileName << ":" << line;
+				qWarning() << "Invalid line in landscape gazetteer" << descFileName << ":" << line;
 				continue;
 			}
 			LandscapeLabel newLabel;
