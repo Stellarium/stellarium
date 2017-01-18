@@ -61,7 +61,7 @@ private:
 	//! Must be called after the creation of the GLContext.
 	void init();
 
-	int glMemoryUsage;
+	unsigned int glMemoryUsage;
 };
 
 
