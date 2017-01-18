@@ -180,10 +180,6 @@ bool StelOBJ::parseVec3(const ParseParams& params, T &out, int paramsStart)
 		qCCritical(stelOBJ)<<"Invalid Vec3f specification"<<params;
 		return false;
 	}
-	if(params.size()-paramsStart>3)
-	{
-		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
-	}
 
 	bool ok = false;
 	out[0] = params.at(paramsStart).toDouble(&ok); //use double here, so that it even works for Vec3d, etc
@@ -208,10 +204,6 @@ bool StelOBJ::parseVec2(const ParseParams& params,T &out, int paramsStart)
 	{
 		qCCritical(stelOBJ)<<"Invalid Vec2f specification"<<params;
 		return false;
-	}
-	if(params.size()-paramsStart>2)
-	{
-		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
 	bool ok = false;
@@ -437,7 +429,8 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 	{
 		++lineNr;
 		bool ok = true;
-		QString line = stream.readLine();
+		//make sure only spaces are the separator
+		QString line = stream.readLine().simplified();
 		//split line by space
 		QVector<QStringRef> splits = line.splitRef(' ',QString::SkipEmptyParts);
 		if(!splits.isEmpty())
@@ -485,11 +478,19 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 			{
 				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->Ns));
 			}
-			else if(CMD_CMP("d") || CMD_CMP("Tr"))
+			else if(CMD_CMP("d"))
 			{
 				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->d));
 				//clamp d to [0,1]
 				curMaterial->d = std::max(0.0f, std::min(curMaterial->d,1.0f));
+			}
+			else if(CMD_CMP("Tr"))
+			{
+				//Tr should be the inverse of d, in theory
+				//not all exporters seem to follow this rule...
+				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->d));
+				//clamp d to [0,1]
+				curMaterial->d = 1.0f - std::max(0.0f, std::min(curMaterial->d,1.0f));
 			}
 			else if(CMD_CMP("map_Ka")) //define ambient map
 			{
@@ -608,6 +609,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 	timer.start();
 	QTextStream stream(&device);
 
+	bool smoothGroupWarned = false;
+
 	//contains the parsed vertex positions
 	V3Vec posList;
 	//contains the parsed normals
@@ -624,7 +627,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 	while(!stream.atEnd())
 	{
 		++lineNr;
-		QString line = stream.readLine();
+		//make sure only spaces are the separator
+		QString line = stream.readLine().simplified();
 
 		//split line by space
 		QVector<QStringRef> splits = line.splitRef(' ',QString::SkipEmptyParts);
@@ -643,6 +647,14 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 				//we have to handle the vertex order
 				Vec3f& target = INC_LIST(posList);
 				ok = parseVec3(splits,target);
+				//check the optional w coord if we have a vec4, must be 1
+				if(splits.size()>4)
+				{
+					float w;
+					parseFloat(splits,w,4);
+					if(!qFuzzyCompare(w,1.0f))
+						qWarning(stelOBJ)<<"Vertex w coordinates different from 1.0 are not supported, changed to 1.0, on line"<<lineNr;
+				}
 				switch(vertexOrder)
 				{
 					case XYZ:
@@ -672,6 +684,14 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 			else if(CMD_CMP("vt"))
 			{
 				ok = parseVec2(splits,INC_LIST(texList));
+				//check the optional w coord if we have a vec3, must be 0
+				if(splits.size()>3)
+				{
+					float w;
+					parseFloat(splits,w,3);
+					if(!qFuzzyIsNull(w))
+						qWarning(stelOBJ)<<"Texture w coordinates are not supported, on line"<<lineNr;
+				}
 			}
 			else if(CMD_CMP("vn"))
 			{
@@ -724,6 +744,14 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 					state.currentObject = &obj;
 					//also clear material group to make sure a new group is created
 					state.currentMaterialGroup = Q_NULLPTR;
+				}
+			}
+			else if(CMD_CMP("s"))
+			{
+				if(!smoothGroupWarned)
+				{
+					qCWarning(stelOBJ)<<"Smoothing groups are not supported, consider re-exporting your model from blender";
+					smoothGroupWarned = true;
 				}
 			}
 			else if(!cmd.startsWith('#'))
