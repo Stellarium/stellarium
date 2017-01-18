@@ -128,6 +128,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldOcularAfov = new QGraphicsTextItem(ocularControls);
 	fieldCcdName = new QGraphicsTextItem(ccdControls);
 	fieldCcdDimensions = new QGraphicsTextItem(ccdControls);
+	fieldCcdHScale = new QGraphicsTextItem(ccdControls);
+	fieldCcdVScale = new QGraphicsTextItem(ccdControls);
 	fieldCcdRotation = new QGraphicsTextItem(ccdControls);
 	fieldTelescopeName = new QGraphicsTextItem(telescopeControls);
 	fieldMagnification = new QGraphicsTextItem(telescopeControls);
@@ -153,6 +155,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldOcularAfov->setTextWidth(maxWidth);
 	fieldCcdName->setTextWidth(maxWidth);
 	fieldCcdDimensions->setTextWidth(maxWidth);
+	fieldCcdHScale->setTextWidth(maxWidth);
+	fieldCcdVScale->setTextWidth(maxWidth);
 	fieldCcdRotation->setTextWidth(maxWidth);
 	fieldTelescopeName->setTextWidth(maxWidth);
 	fieldMagnification->setTextWidth(maxWidth);
@@ -700,9 +704,22 @@ void OcularsGuiPanel::updateCcdControls()
 	double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 	QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 	fieldCcdDimensions->setPlainText(dimensionsLabel);
+	fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
 	fieldCcdDimensions->setPos(posX, posY);
 	posY += fieldCcdDimensions->boundingRect().height();
 	widgetHeight += fieldCcdDimensions->boundingRect().height();
+	//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+	QString unit = q_("\"/px");
+	fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("H. scale"), QString::number(fovX*3600/ccd->resolutionX(), 'f', 3), unit));
+	fieldCcdHScale->setToolTip(q_("Horizontal scale"));
+	fieldCcdHScale->setPos(posX, posY);
+	posY += fieldCcdHScale->boundingRect().height();
+	widgetHeight += fieldCcdHScale->boundingRect().height();
+	fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("V. scale"), QString::number(fovY*3600/ccd->resolutionY(), 'f', 3), unit));
+	fieldCcdVScale->setToolTip(q_("Vertical scale"));
+	fieldCcdVScale->setPos(posX, posY);
+	posY += fieldCcdVScale->boundingRect().height();
+	widgetHeight += fieldCcdVScale->boundingRect().height();
 	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle(), 'f', 0);
 	rotation.append(QChar(0x00B0));
 	QString rotationLabel = QString(q_("Rotation: %1")).arg(rotation);
@@ -796,6 +813,14 @@ void OcularsGuiPanel::updateTelescopeControls()
 		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 		QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 		fieldCcdDimensions->setPlainText(dimensionsLabel);
+		fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
+
+		//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+		QString unit = q_("\"/px");
+		fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("H. scale"), QString::number(fovX*3600/ccd->resolutionX(), 'f', 3), unit));
+		fieldCcdHScale->setToolTip(q_("Horizontal scale"));
+		fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("V. scale"), QString::number(fovY*3600/ccd->resolutionY(), 'f', 3), unit));
+		fieldCcdVScale->setToolTip(q_("Vertical scale"));
 
 		fieldMagnification->setVisible(false);
 		fieldExitPupil->setVisible(false);
@@ -1025,6 +1050,8 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldOcularAfov);
 	Q_ASSERT(fieldCcdName);
 	Q_ASSERT(fieldCcdDimensions);
+	Q_ASSERT(fieldCcdHScale);
+	Q_ASSERT(fieldCcdVScale);
 	Q_ASSERT(fieldCcdRotation);
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
@@ -1038,6 +1065,8 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldOcularAfov->setDefaultTextColor(color);
 	fieldCcdName->setDefaultTextColor(color);
 	fieldCcdDimensions->setDefaultTextColor(color);
+	fieldCcdHScale->setDefaultTextColor(color);
+	fieldCcdVScale->setDefaultTextColor(color);
 	fieldCcdRotation->setDefaultTextColor(color);
 	fieldTelescopeName->setDefaultTextColor(color);
 	fieldMagnification->setDefaultTextColor(color);
@@ -1054,6 +1083,8 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldOcularAfov);
 	Q_ASSERT(fieldCcdName);
 	Q_ASSERT(fieldCcdDimensions);
+	Q_ASSERT(fieldCcdHScale);
+	Q_ASSERT(fieldCcdVScale);
 	Q_ASSERT(fieldCcdRotation);
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
@@ -1067,6 +1098,8 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldOcularAfov->setFont(font);
 	fieldCcdName->setFont(font);
 	fieldCcdDimensions->setFont(font);
+	fieldCcdHScale->setFont(font);
+	fieldCcdVScale->setFont(font);
 	fieldCcdRotation->setFont(font);
 	fieldTelescopeName->setFont(font);
 	fieldMagnification->setFont(font);

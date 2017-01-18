@@ -1545,6 +1545,7 @@ bool Oculars::isBinocularDefined()
 
 void Oculars::paintCCDBounds()
 {
+	int fontSize = StelApp::getInstance().getBaseFontSize();
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
@@ -1563,10 +1564,14 @@ void Oculars::paintCCDBounds()
 		{
 			StelPainter painter(projector);
 			painter.setColor(0.77f, 0.14f, 0.16f, 1.0f);
+			painter.setFont(font);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
+
+			double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+			double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
@@ -1687,9 +1692,23 @@ void Oculars::paintCCDBounds()
 						cxt = StelUtils::radToHmsStr(cx, true);
 						cyt = StelUtils::radToDmsStr(cy, true);
 					}
+					// Coordinates of center of visible field of view for CCD (red rectangle)
 					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
 					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
 					painter.drawText(a.x(), a.y(), coords, -(ccd->chipRotAngle() + polarAngle));
+					// Dimensions of visible field of view for CCD (red rectangle)
+					a = transform.map(QPoint(-width/2.0, -height/2.0 - fontSize*1.2f));
+					painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), -(ccd->chipRotAngle() + polarAngle));
+					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
+					//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+					QString unit = q_("\"/px");
+					QString scales = QString("%1%3 %4 %2%3").arg(QString::number(fovX*3600/ccd->resolutionX(), 'f', 3)).arg(QString::number(fovY*3600/ccd->resolutionY(), 'f', 3)).arg(unit).arg(QChar(0x00D7));
+					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(scales), -height/2.0 - fontSize*1.2f));
+					painter.drawText(a.x(), a.y(), scales, -(ccd->chipRotAngle() + polarAngle));
+					// Rotation angle of visible field of view for CCD (red rectangle)
+					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
+					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(angle), height/2.0 + 5.f));
+					painter.drawText(a.x(), a.y(), angle, -(ccd->chipRotAngle() + polarAngle));
 				}
 			}
 		}
@@ -2517,25 +2536,25 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 		if (fovX >= 1.0)
 		{
 			int degrees = (int)fovX;
-			int minutes = (int)((fovX - degrees) * 60);
-			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+			float minutes = (int)((fovX - degrees) * 60);
+			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 		else
 		{
-			int minutes = (int)(fovX * 60);
-			stringFovX = QString::number(minutes) + QChar(0x2032);
+			float minutes = (fovX * 60);
+			stringFovX = QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 
 		if (fovY >= 1.0)
 		{
 			int degrees = (int)fovY;
-			int minutes = (int)((fovY - degrees) * 60);
-			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+			float minutes = ((fovY - degrees) * 60);
+			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 		else
 		{
-			int minutes = (int)(fovY * 60);
-			stringFovY = QString::number(minutes) + QChar(0x2032);
+			float minutes = (fovY * 60);
+			stringFovY = QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 	}
 	else
