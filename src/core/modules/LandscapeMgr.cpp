@@ -166,34 +166,22 @@ LandscapeMgr::LandscapeMgr()
 		packagedLandscapeIDs << directories.fileName();
 	}
 	packagedLandscapeIDs.removeDuplicates();
-	preloadedLandscapes.clear();
+	landscapeCache.clear();
 }
 
 LandscapeMgr::~LandscapeMgr()
 {
 	delete atmosphere;
 	delete cardinalsPoints;
-	// If oldLandscape happens to be in the preloaded, only delete later.
-	if ( (oldLandscape) && (preloadedLandscapes.key(oldLandscape) == QString()) )
+	if (oldLandscape)
 	{
 		delete oldLandscape;
 		oldLandscape=NULL;
 	}
-	if (!preloadedLandscapes.contains(currentLandscapeID))
-	{
-		delete landscape;
-		landscape = NULL;
-	}
-	// GZ: fastest way to clean out a QMap?
-	if (! preloadedLandscapes.empty())
-	{
-		foreach (Landscape* landscape, preloadedLandscapes)
-		{
-			//if (currentLandscapeID != landscape)
-			delete landscape;
-		}
-		preloadedLandscapes.clear();
-	}
+	delete landscape;
+	landscape = NULL;
+	qDebug() << "LandscapeMgr: Clearing cache of" << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+	landscapeCache.clear(); // deletes all objects within.
 }
 
 /*************************************************************************
@@ -225,8 +213,10 @@ void LandscapeMgr::update(double deltaTime)
 
 			if (oldLandscape->getEffectiveLandFadeValue()< 0.01f)
 			{
-				if (preloadedLandscapes.key(oldLandscape) == QString())
-					delete oldLandscape;
+				// new logic: try to put old landscape to cache.
+				//qDebug() << "LandscapeMgr::update: moving oldLandscape " << oldLandscape->getId() << "to Cache. Cost:" << oldLandscape->getMemorySize()/(1024*1024)+1;
+				landscapeCache.insert(oldLandscape->getId(), oldLandscape, oldLandscape->getMemorySize()/(1024*1024)+1);
+				//qDebug() << "--> LandscapeMgr::update(): cache now contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
 				oldLandscape=NULL;
 			}
 		}
@@ -386,8 +376,11 @@ void LandscapeMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	landscapeCache.setMaxCost(conf->value("landscape/cache_size_mb", 100).toInt());
+	qDebug() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
+
 	atmosphere = new Atmosphere();
-	landscape = new LandscapeOldStyle();
+	//landscape = new LandscapeOldStyle(); // TODO TRY TO GET RID OF THIS!
 	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
 	setCurrentLandscapeID(defaultLandscapeID);
 	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
@@ -439,20 +432,37 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if(id==currentLandscapeID)
 		return false;
 
-	// We want to lookup the landscape ID (dir) from the name.
 	Landscape* newLandscape;
 
-	if (preloadedLandscapes.contains(id))
+	// There is a slight chance that we switch back to oldLandscape while oldLandscape is still fading away.
+	// in this case it is not yet stored in cache, but obviously available. So we just swap places.
+	if (oldLandscape && oldLandscape->getId()==id)
 	{
-		newLandscape = preloadedLandscapes[id];
+		newLandscape=oldLandscape;
 	}
 	else
-		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
-	
-	if (!newLandscape)
 	{
-		qWarning() << "ERROR while loading landscape " << "landscapes/" + id + "/landscape.ini";
-		return false;
+
+		// We want to lookup the landscape ID (dir) from the name.
+		newLandscape= landscapeCache.take(id);
+
+		if (newLandscape)
+		{
+			qDebug() << "LandscapeMgr::setCurrentLandscapeID():: taken " << id << "from cache...";
+			qDebug() << ".-->LandscapeMgr::setCurrentLandscapeId(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+
+		}
+		else
+		{
+			qDebug() << "LandscapeMgr::setCurrentLandscapeID: Loading from file:" << id ;
+			newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+		}
+
+		if (!newLandscape)
+		{
+			qWarning() << "ERROR while loading landscape " << "landscapes/" + id + "/landscape.ini";
+			return false;
+		}
 	}
 
 	// Keep current landscape for a while, while new landscape fades in!
@@ -464,18 +474,20 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
 		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
-		//in case we already fade out one old landscape (if switching too rapidly): the old one has to go immediately.
-		// Delete the oldLandscape only if not in preloadedLandscapes.
-		if ( (oldLandscape) && (preloadedLandscapes.key(oldLandscape) == QString()) )
+
+		// If we have an oldLandscape that is not just swapped back, put that into cache.
+		if (oldLandscape && oldLandscape!=newLandscape)
 		{
-			qDebug() << "it seems safe to delete oldLandscape" << oldLandscape->getName();
-			delete oldLandscape;
+			//qDebug() << "LandscapeMgr::setCurrent: moving oldLandscape " << oldLandscape->getId() << "to Cache. Cost:" << oldLandscape->getMemorySize()/(1024*1024)+1;
+
+			landscapeCache.insert(oldLandscape->getId(), oldLandscape, oldLandscape->getMemorySize()/(1024*1024)+1);
+			//qDebug() << "-->LandscapeMgr::setCurrentLandscapeId(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+
 		}
 		oldLandscape = landscape; // keep old while transitioning!
 	}
 	landscape=newLandscape;
 	currentLandscapeID = id;
-
 
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
@@ -537,20 +549,14 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 	}
 }
 
-//! Preload a landscape.
-//! @param id the ID of a landscape
-//! @param replace true if existing landscape entry should be replaced (useful during development to reload after edit)
-//! @return false if landscape could not be found, or existed already and replace was false.
-bool LandscapeMgr::preloadLandscape(const QString& id, const bool replace)
+// Load a landscape into cache.
+// @param id the ID of a landscape
+// @param replace true if existing landscape entry should be replaced (useful during development to reload after edit)
+// @return false if landscape could not be found, or existed already and replace was false.
+bool LandscapeMgr::precacheLandscape(const QString& id, const bool replace)
 {
-	if (preloadedLandscapes.contains(id) && (!replace))
+	if (landscapeCache.contains(id) && (!replace))
 		return false;
-
-	if ( (id==currentLandscapeID) && (!preloadedLandscapes.contains(id)))
-	{ // already loaded?
-		preloadedLandscapes.insert(id, landscape);
-		return true;
-	}
 
 	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
 	if (!newLandscape)
@@ -559,31 +565,23 @@ bool LandscapeMgr::preloadLandscape(const QString& id, const bool replace)
 		return false;
 	}
 
-	Landscape* existingLandscape=preloadedLandscapes.value(id, NULL);
-
-	// don't delete if element is in active use!
-	if ( (existingLandscape) && (existingLandscape!=landscape) && (existingLandscape!=oldLandscape) )
+	bool res=landscapeCache.insert(id, newLandscape, newLandscape->getMemorySize()/(1024*1024)+1);
+	if (res)
 	{
-		delete existingLandscape;
+		qDebug() << "LandscapeMgr::precacheLandscape(): Successfully added landscape with ID " << id << "to cache";
 	}
-	preloadedLandscapes.insert(id, newLandscape);
-	return true;
+	qDebug() << "LandscapeMgr::precacheLandscape(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+	return res;
 }
 
-//! Remove a landscape from the pool (QMap) of preloaded landscapes.
-//! If the landscape is currently in use, it will not be deleted, but still taken from the pool.
-//! @param id the ID of a landscape
-//! @return false if landscape could not be found
-bool LandscapeMgr::removePreloadedLandscape(const QString& id)
+// Remove a landscape from the cache of loaded landscapes.
+// @param id the ID of a landscape
+// @return false if landscape could not be found
+bool LandscapeMgr::removeCachedLandscape(const QString& id)
 {
-	Landscape* existingLandscape=preloadedLandscapes.value(id, NULL);
-
-	// don't delete if element is in active use!
-	if ( (existingLandscape) && (existingLandscape!=landscape) && (existingLandscape!=oldLandscape) )
-	{
-		delete existingLandscape;
-	}
-	return (bool) preloadedLandscapes.remove(id);
+	bool res= landscapeCache.remove(id);
+	qDebug() << "LandscapeMgr::removeCachedLandscape(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+	return res;
 }
 
 
