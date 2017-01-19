@@ -1570,8 +1570,8 @@ void Oculars::paintCCDBounds()
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 
-			double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-			double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+			const double fovX = ccd->getActualFOVx(telescope, lens);
+			const double fovY = ccd->getActualFOVy(telescope, lens);
 
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
@@ -1580,8 +1580,8 @@ void Oculars::paintCCDBounds()
 			{
 				aspectIndex = 3;
 			}
-			float width = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
-			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
+			float width = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
+			float height = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
 
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
@@ -1993,8 +1993,8 @@ void Oculars::paintText(const StelCore* core)
 		double fovY = 0.0;
 		if (telescope!=NULL && lens!=NULL)
 		{
-			fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-			fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+			fovX = ccd->getActualFOVx(telescope, lens);
+			fovY = ccd->getActualFOVy(telescope, lens);
 			name = ccd->name();
 			telescopeName = telescope->name();
 		}
