@@ -1702,7 +1702,11 @@ void Oculars::paintCCDBounds()
 					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
 					//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 					QString unit = q_("\"/px");
-					QString scales = QString("%1%3 %4 %2%3").arg(QString::number(fovX*3600/ccd->resolutionX(), 'f', 3)).arg(QString::number(fovY*3600/ccd->resolutionY(), 'f', 3)).arg(unit).arg(QChar(0x00D7));
+					QString scales = QString("%1%3 %4 %2%3")
+							.arg(QString::number(fovX*3600/ccd->resolutionX(), 'f', 4))
+							.arg(QString::number(fovY*3600/ccd->resolutionY(), 'f', 4))
+							.arg(unit)
+							.arg(QChar(0x00D7));
 					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(scales), -height/2.0 - fontSize*1.2f));
 					painter.drawText(a.x(), a.y(), scales, -(ccd->chipRotAngle() + polarAngle));
 					// Rotation angle of visible field of view for CCD (red rectangle)

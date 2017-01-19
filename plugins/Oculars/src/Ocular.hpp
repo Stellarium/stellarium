@@ -72,8 +72,7 @@ private:
 	double m_effectiveFocalLength;
 	double m_fieldStop;
 	QString m_name;
-	QString m_reticlePath;
-	double m_reticleFOV;
+	QString m_reticlePath;	
 };
 
 
