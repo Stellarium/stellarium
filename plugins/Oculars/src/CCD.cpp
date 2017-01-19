@@ -250,14 +250,14 @@ double CCD::getOAGActualFOVx(Telescope *telescope, Lens *lens) const
 double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
 	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
-	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->chipHeight() /(2.0 * telescope->focalLength() * lens_multipler));
+	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->chipWidth() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovX;
 }
 
 double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 {
 	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
-	double fovY = RADIAN_TO_DEGREES * 2 * qAtan(this->chipWidth() /(2.0 * telescope->focalLength() * lens_multipler));
+	double fovY = RADIAN_TO_DEGREES * 2 * qAtan(this->chipHeight() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovY;
 }
 

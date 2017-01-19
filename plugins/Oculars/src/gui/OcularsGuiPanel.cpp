@@ -700,8 +700,8 @@ void OcularsGuiPanel::updateCcdControls()
 	index = ocularsPlugin->selectedTelescopeIndex;
 	Telescope* telescope = ocularsPlugin->telescopes[index];
 	Q_ASSERT(telescope);
-	double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-	double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+	const double fovX = ccd->getActualFOVx(telescope, lens);
+	const double fovY = ccd->getActualFOVy(telescope, lens);
 	QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 	fieldCcdDimensions->setPlainText(dimensionsLabel);
 	fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
@@ -809,8 +809,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 		CCD* ccd = ocularsPlugin->ccds[index];
 		Q_ASSERT(ccd);
 
-		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+		const double fovX = ccd->getActualFOVx(telescope, lens);
+		const double fovY = ccd->getActualFOVy(telescope, lens);
 		QString dimensionsLabel = QString(q_("Dimensions: %1")).arg(ocularsPlugin->getDimensionsString(fovX, fovY));
 		fieldCcdDimensions->setPlainText(dimensionsLabel);
 		fieldCcdDimensions->setToolTip(q_("Dimensions field of view"));
