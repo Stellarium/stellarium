@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-16 20:12+0700\n"
-"PO-Revision-Date: 2016-12-26 11:28+0000\n"
-"Last-Translator: Wout Huygens <wout.huygens@telenet.be>\n"
+"PO-Revision-Date: 2017-01-18 15:25+0000\n"
+"Last-Translator: Dirk Bakker <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-17 05:34+0000\n"
+"X-Launchpad-Export-Date: 2017-01-19 05:36+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -101,7 +101,7 @@ msgstr "Meridiaan"
 
 #: src/core/modules/GridLinesMgr.cpp:638
 msgid "Ecliptic of J2000.0"
-msgstr "Ecliptica van j2000.0"
+msgstr "Ecliptica van J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:642
 msgid "Ecliptic of Date"
@@ -109,7 +109,7 @@ msgstr "Ecliptica van Datum"
 
 #: src/core/modules/GridLinesMgr.cpp:646
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Evenaar van J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:650
 msgid "Equator"
@@ -117,7 +117,7 @@ msgstr "Evenaar"
 
 #: src/core/modules/GridLinesMgr.cpp:655
 msgid "Precession Circle"
-msgstr ""
+msgstr "Precessiecirkel"
 
 #: src/core/modules/GridLinesMgr.cpp:659 src/ui_viewDialog.h:2127
 msgid "Horizon"
@@ -259,7 +259,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:1183 src/ui_viewDialog.h:2249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
-msgstr "Galactisch raster"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1184 src/ui_viewDialog.h:2111
 msgid "Galactic equator"
@@ -296,7 +296,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1193
 msgid "Celestial poles"
-msgstr ""
+msgstr "Hemelpolen"
 
 #: src/core/modules/GridLinesMgr.cpp:1194
 msgid "Zenith and nadir"
@@ -946,7 +946,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:396
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "Volle maan"
 
 #: src/core/modules/Planet.cpp:398
 msgctxt "Moon phase"
@@ -966,7 +966,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:404
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "Nieuwe maan"
 
 #: src/core/modules/Planet.cpp:409 src/core/modules/Planet.cpp:414
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
@@ -1224,7 +1224,7 @@ msgstr "Stel tijd in op nu"
 
 #: src/core/StelCore.cpp:263
 msgid "Add 1 solar minute"
-msgstr ""
+msgstr "1 Zonneminuut vooruit"
 
 #: src/core/StelCore.cpp:264
 msgid "Add 1 solar hour"
@@ -1240,7 +1240,7 @@ msgstr "Voeg 7 zonnedagen toe"
 
 #: src/core/StelCore.cpp:267
 msgid "Subtract 1 solar minute"
-msgstr ""
+msgstr "1 Zonneminuut achteruit"
 
 #: src/core/StelCore.cpp:268
 msgid "Subtract 1 solar hour"
@@ -1264,7 +1264,7 @@ msgstr "Ga 1 siderisch jaar verder"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "100 Siderische jaren vooruit"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 synodic month"
@@ -1328,7 +1328,7 @@ msgstr "Ga 1 siderisch jaar terug"
 
 #: src/core/StelCore.cpp:289
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "100 Siderische jaren achteruit"
 
 #: src/core/StelCore.cpp:290
 msgid "Subtract 1 synodic month"
@@ -2676,7 +2676,7 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:709
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "Afstand tot planeetkern %1 km"
 
 #: src/gui/StelGuiItems.cpp:711
 msgid "planetocentric observer"
@@ -3186,7 +3186,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:662 src/gui/AstroCalcDialog.cpp:722
 #: src/gui/AstroCalcDialog.cpp:724
 msgid "Local Time"
-msgstr ""
+msgstr "Lokale tijd"
 
 #: src/gui/AstroCalcDialog.cpp:718
 #, qt-format
@@ -3229,7 +3229,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1032
 msgid "Eclipse"
-msgstr ""
+msgstr "Verduistering"
 
 #: src/gui/BookmarksDialog.cpp:99 src/ui_searchDialogGui.h:695
 msgid "Object"
@@ -3944,7 +3944,7 @@ msgstr "Verrekijkerhoogtepunten"
 #. TRANSLATORS: Name of script
 #: src/translations.h:337
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 Dubbelsterren die met het blote oog zichtbaar zijn"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:339
