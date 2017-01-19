@@ -380,7 +380,6 @@ void LandscapeMgr::init()
 	qDebug() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
 
 	atmosphere = new Atmosphere();
-	//landscape = new LandscapeOldStyle(); // TODO TRY TO GET RID OF THIS!
 	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
 	setCurrentLandscapeID(defaultLandscapeID);
 	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
@@ -442,19 +441,21 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	}
 	else
 	{
-
 		// We want to lookup the landscape ID (dir) from the name.
 		newLandscape= landscapeCache.take(id);
 
 		if (newLandscape)
 		{
+#ifndef NDEBUG
 			qDebug() << "LandscapeMgr::setCurrentLandscapeID():: taken " << id << "from cache...";
-			qDebug() << ".-->LandscapeMgr::setCurrentLandscapeId(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
-
+			qDebug() << ".-->LandscapeMgr::setCurrentLandscapeID(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
 		}
 		else
 		{
+#ifndef NDEBUG
 			qDebug() << "LandscapeMgr::setCurrentLandscapeID: Loading from file:" << id ;
+#endif
 			newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
 		}
 
@@ -478,11 +479,13 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		// If we have an oldLandscape that is not just swapped back, put that into cache.
 		if (oldLandscape && oldLandscape!=newLandscape)
 		{
-			//qDebug() << "LandscapeMgr::setCurrent: moving oldLandscape " << oldLandscape->getId() << "to Cache. Cost:" << oldLandscape->getMemorySize()/(1024*1024)+1;
-
+#ifndef NDEBUG
+			qDebug() << "LandscapeMgr::setCurrent: moving oldLandscape " << oldLandscape->getId() << "to Cache. Cost:" << oldLandscape->getMemorySize()/(1024*1024)+1;
+#endif
 			landscapeCache.insert(oldLandscape->getId(), oldLandscape, oldLandscape->getMemorySize()/(1024*1024)+1);
-			//qDebug() << "-->LandscapeMgr::setCurrentLandscapeId(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
-
+#ifndef NDEBUG
+			qDebug() << "-->LandscapeMgr::setCurrentLandscapeId(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
 		}
 		oldLandscape = landscape; // keep old while transitioning!
 	}
@@ -566,11 +569,13 @@ bool LandscapeMgr::precacheLandscape(const QString& id, const bool replace)
 	}
 
 	bool res=landscapeCache.insert(id, newLandscape, newLandscape->getMemorySize()/(1024*1024)+1);
+#ifndef NDEBUG
 	if (res)
 	{
 		qDebug() << "LandscapeMgr::precacheLandscape(): Successfully added landscape with ID " << id << "to cache";
 	}
 	qDebug() << "LandscapeMgr::precacheLandscape(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
 	return res;
 }
 
@@ -580,7 +585,9 @@ bool LandscapeMgr::precacheLandscape(const QString& id, const bool replace)
 bool LandscapeMgr::removeCachedLandscape(const QString& id)
 {
 	bool res= landscapeCache.remove(id);
+#ifndef NDEBUG
 	qDebug() << "LandscapeMgr::removeCachedLandscape(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
 	return res;
 }
 
