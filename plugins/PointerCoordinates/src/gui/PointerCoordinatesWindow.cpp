@@ -28,10 +28,10 @@
 #include "StelGui.hpp"
 
 PointerCoordinatesWindow::PointerCoordinatesWindow()
-	: coord(NULL)
+	: StelDialog("PointerCoordinates")
+	, coord(NULL)
 {
 	ui = new Ui_pointerCoordinatesWindowForm();
-	dialogName = "PointerCoordinates";
 }
 
 PointerCoordinatesWindow::~PointerCoordinatesWindow()
@@ -87,6 +87,9 @@ void PointerCoordinatesWindow::createDialogContent()
 	}
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
 	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
+
+	ui->checkBoxConstellation->setChecked(coord->getFlagShowConstellation());
+	connect(ui->checkBoxConstellation, SIGNAL(toggled(bool)), coord, SLOT(setFlagShowConstellation(bool)));
 
 	connect(ui->spinBoxX, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 	connect(ui->spinBoxY, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));

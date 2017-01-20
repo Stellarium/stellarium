@@ -362,8 +362,8 @@ int main(int argc, char **argv)
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	StelMainView mainWin;
-	mainWin.init(confSettings); // May exit(0) when OpenGL subsystem insufficient
+	StelMainView mainWin(confSettings);
+	mainWin.show();
 	splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();

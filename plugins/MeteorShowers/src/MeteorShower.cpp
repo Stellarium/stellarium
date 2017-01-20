@@ -55,6 +55,8 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_speed = map.value("speed").toInt();
 	m_radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
 	m_radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
+	// initialize position to keep valgrind happy
+	StelUtils::spheToRect(m_radiantAlpha, m_radiantDelta, m_position);
 	m_parentObj = map.value("parentObj").toString();
 	m_pidx = map.value("pidx").toFloat();
 
@@ -194,6 +196,7 @@ MeteorShower::~MeteorShower()
 {
 	qDeleteAll(m_activeMeteors);
 	m_activeMeteors.clear();
+	m_colors.clear();
 }
 
 bool MeteorShower::enabled() const
@@ -265,6 +268,8 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	{
 		if (!m->update(deltaTime))
 		{
+			//important to delete when no longer active
+			delete m;
 			m_activeMeteors.removeOne(m);
 		}
 	}
@@ -328,9 +333,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 	StelUtils::spheToRect(m_radiantAlpha, m_radiantDelta, m_position);
 	painter.getProjector()->project(m_position, XY);
 
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
 	float alpha = 0.85f + ((float) qrand() / (float) RAND_MAX) / 10.f;

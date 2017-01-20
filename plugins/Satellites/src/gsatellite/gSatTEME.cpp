@@ -58,8 +58,8 @@ gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 {
 
 	double startmfe, stopmfe, deltamin;
-	double ro[3];
-	double vo[3];
+	double ro[3] = {};
+	double vo[3] = {};
 
 	m_Position.resize(3);
 	m_Vel.resize(3);
@@ -90,8 +90,8 @@ void gSatTEME::setEpoch(gTime ai_time)
 	gTime     kepEpoch(satrec.jdsatepoch);
 	gTimeSpan tSince = ai_time - kepEpoch;
 
-	double ro[3];
-	double vo[3];
+	double ro[3] = {};
+	double vo[3] = {};
 	double dtsince = tSince.getDblSeconds()/KSEC_PER_MIN;
 	// call the propagator to get the initial state vector value
 	sgp4(CONSTANTS_SET, satrec,  dtsince, ro,  vo);

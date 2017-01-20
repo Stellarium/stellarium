@@ -47,6 +47,7 @@ class StelOBJ;
 class StelOpenGLArray;
 template <class T> class QFuture;
 class QOpenGLBuffer;
+class QOpenGLFunctions;
 class QOpenGLShaderProgram;
 class QOpenGLTexture;
 #ifdef DEBUG_SHADOWMAP
@@ -85,6 +86,7 @@ public:
 	friend class SolarSystem;
 
 	Q_ENUMS(PlanetType)
+	Q_ENUMS(PlanetOrbitColorStyle)
 	Q_ENUMS(ApparentMagnitudeAlgorithm)
 	//! numeric typecodes for the type descriptions in ssystem.ini
 	// GZ: Until 0.13 QStrings were used for types.
@@ -92,26 +94,34 @@ public:
 	// GZ: If other types are introduced, add here and the string in init().
 	enum PlanetType
 	{
-		isStar,                   // ssystem.ini: type="star"
-		isPlanet,                 // ssystem.ini: type="planet"
-		isMoon,                   // ssystem.ini: type="moon"
-		isAsteroid,               // ssystem.ini: type="asteroid"
-		isPlutino,                // ssystem.ini: type="plutino"
-		isComet,                  // ssystem.ini: type="comet"
-		isDwarfPlanet,		  // ssystem.ini: type="dwarf planet"
-		isCubewano,		  // ssystem.ini: type="cubewano"
-		isSDO,			  // ssystem.ini: type="sdo"
-		isOCO,			  // ssystem.ini: type="oco"
-		isUNDEFINED               // ssystem.ini: type=<anything else>
+		isStar,			// ssystem.ini: type="star"
+		isPlanet,		// ssystem.ini: type="planet"
+		isMoon,			// ssystem.ini: type="moon"
+		isAsteroid,		// ssystem.ini: type="asteroid"
+		isPlutino,		// ssystem.ini: type="plutino"
+		isComet,		// ssystem.ini: type="comet"
+		isDwarfPlanet,		// ssystem.ini: type="dwarf planet"
+		isCubewano,		// ssystem.ini: type="cubewano"
+		isSDO,			// ssystem.ini: type="scattered disc object"
+		isOCO,			// ssystem.ini: type="oco"
+		isSednoid,		// ssystem.ini: type="sednoid"
+		isUNDEFINED		// ssystem.ini: type=<anything else>
+	};
+
+	enum PlanetOrbitColorStyle
+	{
+		ocsOneColor,		// One color for all orbits
+		ocsGroups,		// Separate colors for each group of Solar system bodies
+		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
 
 	enum ApparentMagnitudeAlgorithm
 	{
-		Planesas,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-		Mueller,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Harris,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Harris,			// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
 		UndefinedAlgorithm,
-		Generic		// Visual magnitude based on phase angle and albedo
+		Generic			// Visual magnitude based on phase angle and albedo
 	};
 
 	Planet(const QString& englishName,
@@ -167,6 +177,7 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;
+	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
@@ -194,6 +205,8 @@ public:
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
+	//! Get albedo
+	double getAlbedo(void) const { return albedo; }
 
 	const QString& getTextMapName() const {return texMapName;}	
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
@@ -304,19 +317,80 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
-	static Vec3f orbitPlanetsColor;
-	static void setPlanetOrbitColor(const Vec3f& oc) { orbitPlanetsColor = oc;}
-	static const Vec3f& getPlanetOrbitColor() {return orbitPlanetsColor;}
+	static Vec3f orbitMajorPlanetsColor;
+	static void setMajorPlanetOrbitColor(const Vec3f& oc) { orbitMajorPlanetsColor = oc;}
+	static const Vec3f& getMajorPlanetOrbitColor() {return orbitMajorPlanetsColor;}
 
-	static Vec3f orbitAsteroidsColor;
-	static void setAsteroidOrbitColor(const Vec3f& oc) { orbitAsteroidsColor = oc;}
-	static const Vec3f& getAsteroidOrbitColor() {return orbitAsteroidsColor;}
+	static Vec3f orbitMoonsColor;
+	static void setMoonOrbitColor(const Vec3f& oc) { orbitMoonsColor = oc;}
+	static const Vec3f& getMoonOrbitColor() {return orbitMoonsColor;}
+
+	static Vec3f orbitMinorPlanetsColor;
+	static void setMinorPlanetOrbitColor(const Vec3f& oc) { orbitMinorPlanetsColor = oc;}
+	static const Vec3f& getMinorPlanetOrbitColor() {return orbitMinorPlanetsColor;}
+
+	static Vec3f orbitDwarfPlanetsColor;
+	static void setDwarfPlanetOrbitColor(const Vec3f& oc) { orbitDwarfPlanetsColor = oc;}
+	static const Vec3f& getDwarfPlanetOrbitColor() {return orbitDwarfPlanetsColor;}
+
+	static Vec3f orbitCubewanosColor;
+	static void setCubewanoOrbitColor(const Vec3f& oc) { orbitCubewanosColor = oc;}
+	static const Vec3f& getCubewanoOrbitColor() {return orbitCubewanosColor;}
+
+	static Vec3f orbitPlutinosColor;
+	static void setPlutinoOrbitColor(const Vec3f& oc) { orbitPlutinosColor = oc;}
+	static const Vec3f& getPlutinoOrbitColor() {return orbitPlutinosColor;}
+
+	static Vec3f orbitScatteredDiscObjectsColor;
+	static void setScatteredDiscObjectOrbitColor(const Vec3f& oc) { orbitScatteredDiscObjectsColor = oc;}
+	static const Vec3f& getScatteredDiscObjectOrbitColor() {return orbitScatteredDiscObjectsColor;}
+
+	static Vec3f orbitOortCloudObjectsColor;
+	static void setOortCloudObjectOrbitColor(const Vec3f& oc) { orbitOortCloudObjectsColor = oc;}
+	static const Vec3f& getOortCloudObjectOrbitColor() {return orbitOortCloudObjectsColor;}
 
 	static Vec3f orbitCometsColor;
 	static void setCometOrbitColor(const Vec3f& oc) { orbitCometsColor = oc;}
 	static const Vec3f& getCometOrbitColor() {return orbitCometsColor;}
 
+	static Vec3f orbitSednoidsColor;
+	static void setSednoidOrbitColor(const Vec3f& oc) { orbitSednoidsColor = oc;}
+	static const Vec3f& getSednoidOrbitColor() {return orbitSednoidsColor;}
+
+	static Vec3f orbitMercuryColor;
+	static void setMercuryOrbitColor(const Vec3f& oc) { orbitMercuryColor = oc;}
+	static const Vec3f& getMercuryOrbitColor() {return orbitMercuryColor;}
+
+	static Vec3f orbitVenusColor;
+	static void setVenusOrbitColor(const Vec3f& oc) { orbitVenusColor = oc;}
+	static const Vec3f& getVenusOrbitColor() {return orbitVenusColor;}
+
+	static Vec3f orbitEarthColor;
+	static void setEarthOrbitColor(const Vec3f& oc) { orbitEarthColor = oc;}
+	static const Vec3f& getEarthOrbitColor() {return orbitEarthColor;}
+
+	static Vec3f orbitMarsColor;
+	static void setMarsOrbitColor(const Vec3f& oc) { orbitMarsColor = oc;}
+	static const Vec3f& getMarsOrbitColor() {return orbitMarsColor;}
+
+	static Vec3f orbitJupiterColor;
+	static void setJupiterOrbitColor(const Vec3f& oc) { orbitJupiterColor = oc;}
+	static const Vec3f& getJupiterOrbitColor() {return orbitJupiterColor;}
+
+	static Vec3f orbitSaturnColor;
+	static void setSaturnOrbitColor(const Vec3f& oc) { orbitSaturnColor = oc;}
+	static const Vec3f& getSaturnOrbitColor() {return orbitSaturnColor;}
+
+	static Vec3f orbitUranusColor;
+	static void setUranusOrbitColor(const Vec3f& oc) { orbitUranusColor = oc;}
+	static const Vec3f& getUranusOrbitColor() {return orbitUranusColor;}
+
+	static Vec3f orbitNeptuneColor;
+	static void setNeptuneOrbitColor(const Vec3f& oc) { orbitNeptuneColor = oc;}
+	static const Vec3f& getNeptuneOrbitColor() {return orbitNeptuneColor;}
+
 	static bool permanentDrawingOrbits;
+	static PlanetOrbitColorStyle orbitColorStyle;
 
 	//! Return the list of planets which project some shadow on this planet
 	QVector<const Planet*> getCandidatesForShadow() const;
@@ -348,6 +422,8 @@ protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	void computeModelMatrix(Mat4d &result) const;
+
+	Vec3f getCurrentOrbitColor();
 	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
@@ -426,6 +502,8 @@ protected:
 
 	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
+    QOpenGLFunctions* gl;
+
 	static bool shaderError;		// True if loading shaders caused errors
 
 	static Vec3f labelColor;
@@ -488,7 +566,7 @@ private:
 		QVector<const Planet*> shadowCandidates;
 		QMatrix4x4 shadowCandidatesData;
 		Vec3d eyePos;
-	};
+    };
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
 	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const;

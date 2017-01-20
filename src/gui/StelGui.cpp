@@ -42,6 +42,7 @@
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
+#include "ToastMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyDrawer.hpp"
@@ -102,6 +103,8 @@ StelGui::StelGui()
 	, flipHoriz(NULL)
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(NULL)
+	, flagShowToastSurveyButton(false)
+	, btShowToastSurvey(NULL)
 	, flagShowBookmarksButton(false)
 	, btShowBookmarks(NULL)
 	, initDone(false)
@@ -218,7 +221,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
-	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("Astronomical calculations window"), astroCalcDialog, "visible", "F10", "Alt+A", true);
+	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("Astronomical calculations window"), astroCalcDialog, "visible", "F10", "", true);
 	actionsMgr->addAction("actionShow_Bookmarks_Window_Global", windowsGroup, N_("Bookmarks"), bookmarksDialog, "visible", "Alt+B", "", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);	
 
@@ -270,10 +273,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Configuration_Window_Global");
 	skyGui->winBar->addButton(b);
 
-	// NOTE: Should be a toggle of visibility for this button?
-	// FIXME: Update icons for AstroCalc window
-	pxmapOn = QPixmap(":/graphicGui/5-on-labels.png");
-	pxmapOff = QPixmap(":/graphicGui/5-off-labels.png");
+	// NOTE: Should be a toggle of visibility for this button?	
+	pxmapOn = QPixmap(":/graphicGui/11-on-AstroCalc.png");
+	pxmapOff = QPixmap(":/graphicGui/11-off-AstroCalc.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_AstroCalc_Window_Global");
 	skyGui->winBar->addButton(b);
 
@@ -382,6 +384,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
+	setFlagShowToastSurveyButton(conf->value("gui/flag_show_toast_survey_button", false).toBool());
 	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
@@ -536,6 +539,10 @@ void StelGui::update()
 	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
 	if (getAction("actionShow_DSS")->isChecked() != flag)
 		getAction("actionShow_DSS")->setChecked(flag);
+
+	flag = GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
+	if (getAction("actionShow_Toast_Survey")->isChecked() != flag)
+		getAction("actionShow_Toast_Survey")->setChecked(flag);
 
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
@@ -696,10 +703,9 @@ void StelGui::setFlagShowBookmarksButton(bool b)
 	if (b==true) {
 		if (btShowBookmarks==NULL) {
 			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			// FIXME: Updated icons for bookmarks button
-			QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
-			QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");			
+			QPixmap pxmapOn(":/graphicGui/btBookmarksA-on.png");
+			QPixmap pxmapOff(":/graphicGui/btBookmarksA-off.png");
 			btShowBookmarks = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Bookmarks_Window_Global");
 		}
 		getButtonBar()->addButton(btShowBookmarks, "060-othersGroup");
@@ -710,6 +716,24 @@ void StelGui::setFlagShowBookmarksButton(bool b)
 	if (initDone) {
 		skyGui->updateBarsPos();
 	}
+}
+
+// Define whether the button toggling TOAST survey images should be visible
+void StelGui::setFlagShowToastSurveyButton(bool b)
+{
+	if (b==true) {
+		if (btShowToastSurvey==NULL) {
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+			QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
+			QPixmap pxmapOff(":/graphicGui/btToastSurvey-off.png");
+			btShowToastSurvey = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
+		}
+		getButtonBar()->addButton(btShowToastSurvey, "040-nebulaeGroup");
+	} else {
+		getButtonBar()->hideButton("actionShow_Toast_Survey");
+	}
+	flagShowToastSurveyButton = b;
 }
 
 void StelGui::setFlagShowDecimalDegrees(bool b)
@@ -807,6 +831,11 @@ bool StelGui::getFlagShowFlipButtons() const
 bool StelGui::getFlagShowNebulaBackgroundButton() const
 {
 	return flagShowNebulaBackgroundButton;
+}
+
+bool StelGui::getFlagShowToastSurveyButton() const
+{
+	return flagShowToastSurveyButton;
 }
 
 bool StelGui::getFlagShowBookmarksButton() const

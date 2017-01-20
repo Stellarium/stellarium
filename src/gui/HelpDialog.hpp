@@ -56,18 +56,17 @@ private slots:
 	//! On tab change, if the Log tab is selected, call refreshLog().
 	void updateLog(int);
 
+	//! Updated text in Help tab.
+	void updateHelpText(void);
+
+	//! Updated text in About tab.
+	void updateAboutText(void);
+
 	//! Sync the displayed log.
 	void refreshLog();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
-private:
-	//! Return the help text with keys description and external links.
-	QString getHelpText(void);
-
-	//! This function concatenates the header, key codes and footer to build
-	//! up the help text.
-	void updateText(void);
 };
 
 #endif /*_HELPDIALOG_HPP_*/

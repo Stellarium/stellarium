@@ -71,7 +71,7 @@ public:
 
 	//! Releases the currently bound texture without testing if it is currently bound,
 	//! i.e. it simply calls glBindTexture(GL_TEXTURE_2D, 0)
-	inline void release() const { glBindTexture(GL_TEXTURE_2D, 0 ); }
+    inline void release() const { gl->glBindTexture(GL_TEXTURE_2D, 0 ); }
 
 	//! Waits until the texture data is ready for usage (i.e. bind will return true after this).
 	//! Do not use this for potentially network loaded textures.
@@ -100,6 +100,9 @@ public:
 
 	//! Return whether the image is currently being loaded
 	bool isLoading() const {return (loader || networkReply) && !canBind();}
+
+	//! Return texture memory size
+	unsigned int getGlSize() const {return glSize;}
 
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
@@ -131,7 +134,7 @@ private:
 	static GLData loadFromData(const QByteArray& data);
 
 	//! Private constructor
-	StelTexture();
+	StelTexture(StelTextureMgr* mgr);
 
 	//! Convert a QImage into opengl compatible format.
 	static QByteArray convertToGLFormat(const QImage& image, GLint* format, GLint* type);
@@ -151,6 +154,10 @@ private:
 	//! Returns true if the data was loaded, false if not yet ready.
 	bool load();
 
+    //! The parent texture manager
+    StelTextureMgr* textureMgr;
+
+    QOpenGLFunctions* gl;
 	StelTextureParams loadParams;
 
 	//! Used to handle the connection for remote textures.
@@ -180,6 +187,9 @@ private:
 
 	GLsizei width;	//! Texture image width
 	GLsizei height;	//! Texture image height
+
+	//! Size in GL memory
+	unsigned int glSize;
 };
 
 

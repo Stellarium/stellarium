@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>522</width>
-    <height>459</height>
+    <height>460</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -192,6 +192,16 @@
            <widget class="QCheckBox" name="checkBoxShowButton">
             <property name="text">
              <string>Show plug-in button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxConstellation">
+            <property name="toolTip">
+             <string>3-letter IAU constellation abbreviation</string>
+            </property>
+            <property name="text">
+             <string>Show IAU constellation code</string>
             </property>
            </widget>
           </item>

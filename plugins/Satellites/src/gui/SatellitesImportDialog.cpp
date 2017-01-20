@@ -37,14 +37,14 @@
 #include <QDir>
 
 SatellitesImportDialog::SatellitesImportDialog()
-	: isGettingData(false)
+	: StelDialog("SatellitesImport")
+	, isGettingData(false)
 	, numberDownloadsComplete(0)
 	, downloadMgr(0)
 	, progressBar(0)
 	, filterProxyModel(NULL)
 {
 	ui = new Ui_satellitesImportDialog;
-	dialogName = "SatellitesImport";
 	newSatellitesModel = new QStandardItemModel(this);
 }
 

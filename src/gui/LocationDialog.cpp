@@ -43,13 +43,12 @@
 #include <QTimeZone>
 
 LocationDialog::LocationDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Location", parent)
 	, isEditingNew(false)
 	, allModel(NULL)
 	, pickedModel(NULL)
 	, proxyModel(NULL)
 {
-	dialogName = "Location";
 	ui = new Ui_locationDialogForm;
 }
 
@@ -144,10 +143,9 @@ void LocationDialog::createDialogContent()
 
 	customTimeZone = conf->value("localization/time_zone", "").toString();
 	if (!customTimeZone.isEmpty())
-		b = true;
+		ui->useCustomTimeZoneCheckBox->setChecked(true);
 	else
-		b = false;
-	updateTimeZoneControls(b);
+		ui->timeZoneNameComboBox->setEnabled(false);
 
 	setFieldsFromLocation(currentLocation);
 
@@ -255,8 +253,12 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use LMST as default
-		idx = ui->timeZoneNameComboBox->findData(QVariant("LMST"), Qt::UserRole, Qt::MatchCaseSensitive);
+		if (loc.planetName=="Earth")
+			tz = "system_default";
+		else
+			tz = "LMST";
+		// Use LMST/system_default as default
+		idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeZoneNameComboBox->setCurrentIndex(idx);
 	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
@@ -398,7 +400,7 @@ void LocationDialog::populateTimeZonesList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const QString& name, tzNames)
 	{
-		timeZones->addItem(q_(name), name);
+		timeZones->addItem(name, name);
 	}
 	timeZones->addItem(q_("Local Mean Solar Time"), "LMST");
 	timeZones->addItem(q_("Local True Solar Time"), "LTST");
@@ -525,9 +527,13 @@ void LocationDialog::setPositionFromCoords(int )
 void LocationDialog::saveTimeZone()
 {
 	QString tz = ui->timeZoneNameComboBox->itemData(ui->timeZoneNameComboBox->currentIndex()).toString();
-	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setCurrentTimeZone(tz);
 	if (ui->useCustomTimeZoneCheckBox->isChecked())
+	{
 		StelApp::getInstance().getSettings()->setValue("localization/time_zone", tz);
+		core->setUseCustomTimeZone(true);
+	}
 }
 
 void LocationDialog::reportEdit()
@@ -632,17 +638,23 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 	}
 	else
 	{
-		StelLocation loc = StelApp::getInstance().getCore()->getCurrentLocation();
+		StelCore* core = StelApp::getInstance().getCore();
+		StelLocation loc = core->getCurrentLocation();
 		QString tz = loc.timeZone;
 		if (loc.planetName=="Earth" && tz.isEmpty())
 			tz = "system_default";
 		int idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
 		if (idx==-1)
 		{
-			idx = ui->timeZoneNameComboBox->findData(QVariant("LMST"), Qt::UserRole, Qt::MatchCaseSensitive);
+			QString defTZ = "LMST";
+			if (loc.planetName=="Earth")
+				defTZ = "system_default";
+			// Use LMST/system_default as default
+			idx = ui->timeZoneNameComboBox->findData(defTZ, Qt::UserRole, Qt::MatchCaseSensitive);
 		}
 		ui->timeZoneNameComboBox->setCurrentIndex(idx);
 		StelApp::getInstance().getSettings()->remove("localization/time_zone");
+		core->setUseCustomTimeZone(false);
 	}
 
 	ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);	

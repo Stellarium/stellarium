@@ -51,7 +51,7 @@
 #include <QSettings>
 
 // Inspired by text-use-opengl-buffer branch: work around font problems in GUI buttons.
-// May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26.
+// May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26. Mesa 13 (2016-11) has finally fixed this on RasPi(VC4).
 QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
@@ -201,7 +201,7 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent*)
 		setChecked(toggleChecked(checked));
 
 	if (flagChangeFocus) // true if button is on bottom bar
-		StelMainView::getInstance().setFocusOnSky(); // Change the focus after clicking on button
+		StelMainView::getInstance().focusSky(); // Change the focus after clicking on button
 }
 
 void StelButton::updateIcon()
@@ -633,41 +633,39 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(tzName);
 
-	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=StelCore::TZ_ERA_BEGINNING) || planetName!="Earth")
+	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=StelCore::TZ_ERA_BEGINNING && !core->getUseCustomTimeZone()) || planetName!="Earth")
 		currTZ = q_("Local Mean Solar Time");
 
 	if (tzName.contains("LTST"))
 		currTZ = q_("Local True Solar Time");
 
-	if (datetime->text()!=newDateInfo)
+	updatePos = true;
+	datetime->setText(newDateInfo);
+	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 	{
-		updatePos = true;		
-		datetime->setText(newDateInfo);
-		if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
-		{
-			if (sigma>0)
-				sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
+		if (sigma>0)
+			sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
-			QString deltaTInfo = "";
-			if (qAbs(deltaT)>60.)
-				deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
-			else
-				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
-
-			float ndot = -23.8946f;
-			if (core->de430IsActive() || core->de431IsActive())
-				ndot = -25.8f;
-
-			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ));
-		}
+		QString deltaTInfo = "";
+		if (qAbs(deltaT)>60.)
+			deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
 		else
-			datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
+			deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
-		if (qApp->property("text_texture")==true) // CLI option -t given?
-		{
-			datetime->setVisible(false); // hide normal thingy.
-			datetimePixmap->setPixmap(getTextPixmap(newDateInfo, datetime->font()));
-		}
+		// the corrective ndot to be displayed could be set according to the currently used DeltaT algorithm.
+		//float ndot=core->getDeltaTnDot();
+		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
+		float ndot=( (core->de430IsActive() || core->de431IsActive()) ? -25.8f : -23.8946f );
+
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)));
+	}
+	else
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
+
+	if (qApp->property("text_texture")==true) // CLI option -t given?
+	{
+		datetime->setVisible(false); // hide normal thingy.
+		datetimePixmap->setPixmap(getTextPixmap(newDateInfo, datetime->font()));
 	}
 
 	// build location tooltip
@@ -724,13 +722,15 @@ void BottomStelBar::updateText(bool updatePos)
 
 	// build fov tooltip
 	QTextStream wos(&str);
+	// TRANSLATORS: Field of view. Please use abbreviation.
+	QString fovstr = QString("%1 ").arg(qc_("FOV", "abbreviation"));
 	if (getFlagFovDms())
 	{
-		wos << "FOV " << StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
+		wos << fovstr << StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
 	}
 	else
 	{
-		wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
+		wos << fovstr << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
 	}
 
 	if (fov->text()!=str)
@@ -757,7 +757,9 @@ void BottomStelBar::updateText(bool updatePos)
 
 	// build fps tooltip
 	QTextStream wos2(&str);
-	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
+	// TRANSLATORS: Frames per second. Please use abbreviation.
+	QString fpsstr = QString(" %1").arg(qc_("FPS", "abbreviation"));
+	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << fpsstr;
 	if (fps->text()!=str)
 	{
 		updatePos = true;

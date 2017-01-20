@@ -339,9 +339,7 @@ void Atmosphere::draw(StelCore* core)
 		return;
 
 	StelPainter sPainter(core->getProjection2d());
-	glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 	const float atm_intensity = fader.getInterstate();
 
@@ -386,7 +384,7 @@ void Atmosphere::draw(StelCore* core)
 	int shift=0;
 	for (int y=0;y<skyResolutionY;++y)
 	{
-		glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
+		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
 		shift += (skyResolutionX+1)*2*2;
 	}
 	indicesBuffer.release();

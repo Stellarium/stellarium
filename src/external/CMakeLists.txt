@@ -1,0 +1,85 @@
+SET(glues_lib_SRCS
+     glues_stel/source/glues_error.c
+     glues_stel/source/glues_error.h
+     glues_stel/source/glues.h
+     glues_stel/source/libtess/dict.h
+     glues_stel/source/libtess/dict.c
+     glues_stel/source/libtess/dict-list.h
+     glues_stel/source/libtess/geom.c
+     glues_stel/source/libtess/geom.h
+     glues_stel/source/libtess/memalloc.c
+     glues_stel/source/libtess/memalloc.h
+     glues_stel/source/libtess/mesh.c
+     glues_stel/source/libtess/mesh.h
+     glues_stel/source/libtess/normal.c
+     glues_stel/source/libtess/normal.h
+     glues_stel/source/libtess/priorityq.c
+     glues_stel/source/libtess/priorityq.h
+     glues_stel/source/libtess/priorityq-heap.h
+     glues_stel/source/libtess/priorityq-heap.i
+     glues_stel/source/libtess/priorityq-sort.h
+     glues_stel/source/libtess/render.c
+     glues_stel/source/libtess/render.h
+     glues_stel/source/libtess/sweep.c
+     glues_stel/source/libtess/sweep.h
+     glues_stel/source/libtess/tess.c
+     glues_stel/source/libtess/tess.h
+     glues_stel/source/libtess/tessmono.c
+     glues_stel/source/libtess/tessmono.h
+)
+add_library(glues_stel STATIC EXCLUDE_FROM_ALL ${glues_lib_SRCS})
+target_include_directories(glues_stel PUBLIC glues_stel/source)
+#turn off automoc, not needed here
+set_target_properties(glues_stel PROPERTIES AUTOMOC 0)
+
+SET(zlib_SRCS
+     zlib/adler32.c
+     zlib/compress.c
+     zlib/crc32.c
+     zlib/crc32.h
+     zlib/deflate.c
+     zlib/deflate.h
+     zlib/gzclose.c
+     zlib/gzguts.h
+     zlib/gzlib.c
+     zlib/gzread.c
+     zlib/gzwrite.c
+     zlib/infback.c
+     zlib/inffast.c
+     zlib/inffast.h
+     zlib/inffixed.h
+     zlib/inflate.c
+     zlib/inflate.h
+     zlib/inftrees.c
+     zlib/inftrees.h
+     zlib/trees.c
+     zlib/trees.h
+     zlib/uncompr.c
+     zlib/zconf.h
+     zlib/zlib.h
+     zlib/zutil.c
+     zlib/zutil.h)
+
+add_library(zlib_stel STATIC EXCLUDE_FROM_ALL ${zlib_SRCS})
+target_include_directories(zlib_stel PUBLIC zlib)
+#turn off automoc, not needed here
+set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
+
+set(qtcompress_SRCS
+    qtcompress/qzip.cpp
+    qtcompress/qzipreader.h
+    qtcompress/qzipwriter.h
+    )
+add_library(qtcompress_stel STATIC EXCLUDE_FROM_ALL ${qtcompress_SRCS})
+target_include_directories(qtcompress_stel PUBLIC qtcompress)
+#this can use the system zlib, or our zlib
+target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
+#turn off automoc, not needed here
+set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
+
+set(qcustomplot_SRCS
+    qcustomplot/qcustomplot.cpp
+    qcustomplot/qcustomplot.h
+    )
+add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
+target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
