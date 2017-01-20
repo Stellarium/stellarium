@@ -710,12 +710,12 @@ void OcularsGuiPanel::updateCcdControls()
 	widgetHeight += fieldCcdDimensions->boundingRect().height();
 	//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 	QString unit = q_("\"/px");
-	fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("H. scale"), QString::number(fovX*3600/ccd->resolutionX(), 'f', 4), unit));
+	fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("H. scale"), QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), unit));
 	fieldCcdHScale->setToolTip(q_("Horizontal scale"));
 	fieldCcdHScale->setPos(posX, posY);
 	posY += fieldCcdHScale->boundingRect().height();
 	widgetHeight += fieldCcdHScale->boundingRect().height();
-	fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("V. scale"), QString::number(fovY*3600/ccd->resolutionY(), 'f', 4), unit));
+	fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("V. scale"), QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4), unit));
 	fieldCcdVScale->setToolTip(q_("Vertical scale"));
 	fieldCcdVScale->setPos(posX, posY);
 	posY += fieldCcdVScale->boundingRect().height();
@@ -817,9 +817,9 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 		QString unit = q_("\"/px");
-		fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("H. scale"), QString::number(fovX*3600/ccd->resolutionX(), 'f', 4), unit));
+		fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("H. scale"), QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), unit));
 		fieldCcdHScale->setToolTip(q_("Horizontal scale"));
-		fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("V. scale"), QString::number(fovY*3600/ccd->resolutionY(), 'f', 4), unit));
+		fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("V. scale"), QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4), unit));
 		fieldCcdVScale->setToolTip(q_("Vertical scale"));
 
 		fieldMagnification->setVisible(false);

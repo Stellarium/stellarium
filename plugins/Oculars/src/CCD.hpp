@@ -43,6 +43,8 @@ class CCD : public QObject
 	Q_PROPERTY(double prismWidth READ prismWidth WRITE setPrismWidth)
 	Q_PROPERTY(double prismDistance READ prismDistance WRITE setPrismDistance)
 	Q_PROPERTY(double prismPosAngle READ prismPosAngle WRITE setPrismPosAngle)
+	Q_PROPERTY(int binningX READ binningX WRITE setBinningX)
+	Q_PROPERTY(int binningY READ binningY WRITE setBinningY)
 public:
 	CCD();
 	Q_INVOKABLE CCD(const QObject& other);
@@ -78,6 +80,10 @@ public:
 	void setPrismWidth(double width);
 	double prismPosAngle() const;
 	void setPrismPosAngle(double angle);
+	int binningX() const;
+	void setBinningX(int binning);
+	int binningY() const;
+	void setBinningY(int binning);
 
 	/**
 	  * The formula for this calculation comes from the Yerkes observatory.
@@ -115,6 +121,10 @@ private:
 	double m_oag_prismDistance;
 	//! OAG prisrm position angle (degrees)
 	double m_oag_prismPosAngle;
+	//! Binning for axes X
+	int m_binningX;
+	//! Binning for axes Y
+	int m_binningY;
 };
 
 
