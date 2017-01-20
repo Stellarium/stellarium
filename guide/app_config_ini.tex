@@ -362,7 +362,7 @@ last\_location    & string & Coordinates of last used location in stellarium.\\\
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID}                            & \emph{Type} & \emph{Description}\\\midrule
 atmosphere\_fade\_duration                 & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\\midrule
-flag\_landscape                            & bool  & Set to false if you don't want to see the landscape at all\\\midrule
+flag\_landscape                            & bool  & Set to \emph{false} if you don't want to see the landscape at all\\\midrule
 flag\_fog                                  & bool  & Set to \emph{false} if you don't want to see fog on start-up\\\midrule
 flag\_atmosphere                           & bool  & Set to \emph{false} if you don't want to see atmosphere on start-up\\\midrule
 flag\_landscape\_sets\_location            & bool  & Set to \emph{true} if you want Stellarium to modify the observer location 
@@ -376,7 +376,8 @@ flag\_enable\_illumination\_layer          & bool  & Set to \emph{true} to use i
 flag\_enable\_labels                       & bool  & Set to \emph{true} to use landscape labels from gazetteer layer.\\\midrule
 atmospheric\_extinction\_coefficient       & float & Set atmospheric extinction coefficient $k$ [mag/airmass]\\\midrule
 temperature\_C                             & float & Set atmospheric temperature [Celsius]\\\midrule
-pressure\_mbar                             & float & Set atmospheric pressure [mbar]\\\bottomrule
+pressure\_mbar                             & float & Set atmospheric pressure [mbar]\\\midrule
+cache\_size\_mb                            & int   & Set the cache size for landscapes [megabytes]. Default: 100\\\bottomrule
 \end{longtabu}
 
 \subsection{\big[localization\big]}\label{sec:config.ini:localization}
