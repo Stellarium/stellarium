@@ -1775,7 +1775,7 @@ bool Planet::initFBO()
 			qWarning()<<"Planet self-shadow framebuffer is incomplete, cannot use. Status:"<<status;
 		}
 
-		GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, ctx->defaultFramebufferObject()));
+		GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, StelApp::getInstance().getDefaultFBO()));
 		gl->glActiveTexture(GL_TEXTURE0);
 #else
 		GL(shadowFBO = new QOpenGLFramebufferObject(SM_SIZE,SM_SIZE,QOpenGLFramebufferObject::Depth));
@@ -2594,11 +2594,8 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 
 	//this is probably unsupported on an OGL ES2 context! just don't use DEBUG_SHADOWMAP here...
 	GL(QOpenGLContext::currentContext()->functions()->glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, SM_SIZE, SM_SIZE, 0));
-
-	GL(shadowFBO->release());
-#else
-	gl->glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
 #endif
+	gl->glBindFramebuffer(GL_FRAMEBUFFER, StelApp::getInstance().getDefaultFBO());
 
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = projector->getViewport();
