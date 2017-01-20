@@ -75,6 +75,13 @@ public:
 	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
+
+	//! Return approximate memory footprint in bytes (required for cache cost estimate in LandscapeMgr)
+	//! The returned value is only approximate, content of QStrings and other small containers like the horizon polygon are not put in in detail.
+	//! However, texture image sizes must be computed in subclasses.
+	//! The value returned is a sum of RAM and texture memory requirements.
+	virtual unsigned int getMemorySize() const {return sizeof(Landscape);}
+
 	virtual void draw(StelCore* core) = 0;
 	void update(double deltaTime)
 	{
@@ -124,6 +131,8 @@ public:
 	QString getAuthorName() const {return author;}
 	//! Get landscape description
 	QString getDescription() const {return description;}
+	//! Get landscape id. This is the landscape directory name, used for cache handling.
+	QString getId() const {return id;}
 
 	//! Return the associated location (may be empty!)
 	const StelLocation& getLocation() const {return location;}
@@ -202,6 +211,7 @@ protected:
 	QString name;          //! Read from landscape.ini:[landscape]name
 	QString author;        //! Read from landscape.ini:[landscape]author
 	QString description;   //! Read from landscape.ini:[landscape]description
+	QString id;            //! Set during load. Required for consistent caching.
 
 	float minBrightness;   //! Read from landscape.ini:[landscape]minimal_brightness. Allows minimum visibility that cannot be underpowered.
 	float landscapeBrightness;  //! brightness [0..1] to draw the landscape. Computed by the LandscapeMgr.
@@ -259,6 +269,7 @@ public:
 	LandscapeOldStyle(float radius = 2.f);
 	virtual ~LandscapeOldStyle();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
+	virtual unsigned int getMemorySize() const {return memorySize;}
 	virtual void draw(StelCore* core);
 	//void create(bool _fullpath, QMap<QString, QString> param); // still not implemented
 	virtual float getOpacity(Vec3d azalt) const;
@@ -302,6 +313,7 @@ private:
 	};
 
 	QList<LOSSide> precomputedSides;
+	unsigned int memorySize;
 };
 
 /////////////////////////////////////////////////////////
@@ -319,6 +331,7 @@ public:
 	LandscapePolygonal(float radius = 1.f);
 	virtual ~LandscapePolygonal();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
+	virtual unsigned int getMemorySize() const {return sizeof(LandscapePolygonal);}
 	virtual void draw(StelCore* core);
 	virtual float getOpacity(Vec3d azalt) const;
 private:
@@ -338,6 +351,7 @@ public:
 	LandscapeFisheye(float radius = 1.f);
 	virtual ~LandscapeFisheye();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
+	virtual unsigned int getMemorySize() const {return memorySize;}
 	virtual void draw(StelCore* core);
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
@@ -360,6 +374,7 @@ private:
 	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for sampling.
 
 	float texFov;
+	unsigned int memorySize;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -378,6 +393,7 @@ public:
 	LandscapeSpherical(float radius = 1.f);
 	virtual ~LandscapeSpherical();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
+	virtual unsigned int getMemorySize() const {return memorySize;}
 	virtual void draw(StelCore* core);
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
@@ -414,6 +430,7 @@ private:
 	float illumTexTop;	   //!< zenithal top angle of the illumination texture, radians
 	float illumTexBottom;	   //!< zenithal bottom angle of the illumination texture, radians
 	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for opacity sampling.
+	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
 };
 
 #endif // _LANDSCAPE_HPP_

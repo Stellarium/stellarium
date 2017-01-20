@@ -91,6 +91,9 @@ public:
 	//! Return whether the image is currently being loaded
 	bool isLoading() const {return (loader || networkReply) && !canBind();}
 
+	//! Return texture memory size
+	unsigned int getGlSize() const {return glSize;}
+
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
 	//! or when an error occured and the texture will never be available
@@ -171,7 +174,7 @@ private:
 	GLsizei height;	//! Texture image height
 
 	//! Size in GL memory
-	int glSize;
+	unsigned int glSize;
 };
 
 
