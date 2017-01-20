@@ -1093,7 +1093,8 @@ static void dspace
              // sgp4fix move end checks to end of routine
              if (fabs(t - atime) >= stepp)
                {
-		 iret  = 0;
+		  // NOTE: Never read!
+		  // iret  = 0;
                  iretn = 381;
                }
                else // exit here
@@ -1705,7 +1706,7 @@ bool sgp4
 {
      double am   , axnl  , aynl , betal ,  cosim , cnod  ,
 	 cos2u, coseo1=0.0, cosi , cosip ,  cosisq, cossu , cosu,
-         delm , delomg, em   , emsq  ,  ecose , el2   , eo1 ,
+	 delm , delomg, em   , ecose , el2   , eo1 ,
          ep   , esine , argpm, argpp ,  argpdf, pl,     mrt = 0.0,
          mvt  , rdotl , rl   , rvdot ,  rvdotl, sinim ,
 	 sin2u, sineo1=0.0, sini , sinip ,  sinsu , sinu  ,
@@ -1812,8 +1813,9 @@ bool sgp4
          em  = 1.0e-6;
      mm     = mm + satrec.no * templ;
      xlm    = mm + argpm + nodem;
-     emsq   = em * em;
-     temp   = 1.0 - emsq;
+     // NOTE: Never read!
+     // emsq   = em * em;
+     // temp   = 1.0 - emsq;
 
      nodem  = fmod(nodem, twopi);
      argpm  = fmod(argpm, twopi);

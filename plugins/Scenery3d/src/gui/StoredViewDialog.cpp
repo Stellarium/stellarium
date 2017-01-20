@@ -27,10 +27,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 
-StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog(parent), mgr(NULL), viewModel(NULL)
+StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog("Scenery3dViews", parent), mgr(NULL), viewModel(NULL)
 {
 	ui = new Ui_storedViewDialogForm;
-	dialogName = "Scenery3dViews";
 }
 
 StoredViewDialog::~StoredViewDialog()

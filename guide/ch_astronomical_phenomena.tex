@@ -85,7 +85,7 @@ Major are widely recognised, known variously as ``the plough'', the
 picture of the bear has been removed and only a constellation diagram
 remains.
 
-\begin{figure}[h]
+\begin{figure}[hb]
 \centering\includegraphics[scale=0.8]{uma}
 \caption{Ursa Major}
 \label{fig:ursamajor}
@@ -106,20 +106,22 @@ an amateur observer is \emph{learning the constellations} --- the
 process of becoming familiar with the relative positions of the
 constellations, at what time of year a constellation is visible, and
 in which constellations observationally interesting objects reside.
-Internationally, astronomers have adopted 88 ``Western''
+The International Astronomical Union has adopted 88 ``Western''
 constellations as a common system for segmenting the sky. They are
 based on Greek/Roman mythology, but with several additions from
 Renaissance and later centuries.  As such some formalisation has been
 adopted, each constellation having a \emph{proper name}, which is in
 Latin, and a three letter abbreviation of that name.  For example,
-Ursa Major has the abbreviation UMa. Also, each ``Western''
-constellation has clearly defined boundaries, which you can draw in
+Ursa Major has the abbreviation UMa. Also, the ``Western''
+constellation have clearly defined boundaries \cite{Delporte:1930}, which you can draw in
 Stellarium when you press the \key{B} key\footnote{These boundaries or
   borders have been drawn using star maps from 1875. Due to the effect
   of \emph{precession}, these borders are no longer parallel to
-  today's coordinates.}. On the other hand, the shapes of mythological
-figures, and also stick figures, have not been canonized, so you will
-find deviations between Stellarium and printed atlases.
+  today's coordinates.}. The IAU constellation a selected object is placed in 
+is also available in the object information data \cite{1987PASP...99..695R}, 
+regardless of the currently active skyculture.  On the other hand, the shapes 
+of mythological figures, and also stick figures, have not been canonized, so 
+you will find deviations between Stellarium and printed atlases.
 
 \subsection{Star Names}
 \label{sec:Phenomena:StarNames}
@@ -400,7 +402,7 @@ Waning Crescent& Less than half the disc of the moon is illuminated, and this ge
 \label{tab:moonphases}
 \end{longtabu}
 
-
+\newpage
 \section{The Major Planets}
 \label{sec:Planets}
 
@@ -877,14 +879,23 @@ environmental issues like dangers for the nocturnal fauna, are ever
 worsening conditions for astronomical observations or just enjoyment
 of the night sky. 
 
-Stellarium can simulate light pollution, which is controlled from the
+Stellarium can simulate the effect of light pollution on the visibility 
+of celestial objects. This is controlled from the
 light pollution section of the \emph{Sky} tab of the \emph{View}
-window.  Light pollution levels are set using a numerical value
+window (see section~\ref{fig:gui:view:sky}).  Light pollution levels are set using a numerical value
 between 1 and 9 which corresponds to the \emph{Bortle Dark Sky Scale}
-(see Appendix~\ref{ch:BortleScale}).  In addition, local variations of
+(see Appendix~\ref{ch:BortleScale}). Given that public lighting became 
+bright enough to cause adverse effects on observability only during 
+the 19th century, Stellarium presents an unpolluted sky for dates before 1825. 
+Note that of course light pollution was not switched on over night, 
+but became gradually noticeable over decades, but you have to estimate the appropriate level. 
+
+In addition, local variations of
 the amount of light pollution can be included in a light pollution
 layer in the landscapes, see
-section~\ref{ch:landscapes} for details.
+section~\ref{ch:landscapes} for details. This foreground layer may include 
+all kinds of light, e.g.\  campfires, so this is also available for earlier 
+dates.
 
 
 %%% Local Variables: 

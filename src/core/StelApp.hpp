@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include "StelModule.hpp"
 
 // Predeclaration of some classes
 class StelCore;
@@ -29,9 +30,11 @@ class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
+class StelMainView;
 class StelSkyCultureMgr;
 class StelViewportEffect;
 class QOpenGLFramebufferObject;
+class QOpenGLFunctions;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -46,6 +49,10 @@ class StelScriptMgr;
 class StelActionMgr;
 class StelPropertyMgr;
 class StelProgressController;
+
+#ifdef 	ENABLE_SPOUT
+class SpoutSender;
+#endif
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -65,14 +72,14 @@ class StelApp : public QObject
 
 public:
 	friend class StelAppGraphicsWidget;
-	friend class StelSkyItem;
+	friend class StelRootItem;
 
 	//! Create and initialize the main Stellarium application.
 	//! @param parent the QObject parent
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
-	StelApp(QObject* parent=NULL);
+	StelApp(StelMainView* parent);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
@@ -155,9 +162,6 @@ public:
 	// @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
 
-	//! Call this when the size of the GL window has changed.
-	void glWindowHasBeenResized(float x, float y, float w, float h);
-
 	//! Get the ratio between real device pixel and "Device Independent Pixel".
 	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
 	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
@@ -175,7 +179,7 @@ public:
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
-	//! Tell the StelApp instance which GUI si currently being used.
+	//! Tell the StelApp instance which GUI is currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
@@ -200,10 +204,15 @@ public:
 	void setViewportEffect(const QString& effectName);
 	//! Get the type of viewport effect currently used
 	QString getViewportEffect() const;
+
+	//! Dump diagnostics about action call priorities
+	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
+	//! Call this when the size of the GL window has changed.
+	void glWindowHasBeenResized(const QRectF &rect);
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
@@ -232,6 +241,17 @@ public slots:
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
 
+	//! Returns the default FBO handle, to be used when StelModule instances want to release their own FBOs.
+	//! Note that this is usually not the same as QOpenGLContext::defaultFramebufferObject(),
+	//! so use this call instead of the Qt version!
+	//! Valid through a StelModule::draw() call, do not use elsewhere.
+	quint32 getDefaultFBO() const { return currentFbo; }
+
+	//! Makes sure the correct GL context used for main drawing is made current.
+	//! This is always the case during init() and draw() calls, but if OpenGL access is required elsewhere,
+	//! this MUST be called before using any GL functions.
+	void ensureGLContextCurrent();
+
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
 
@@ -255,7 +275,6 @@ signals:
 	void progressBarRemoved(const StelProgressController*);
 	//! Called just before we exit Qt mainloop.
 	void aboutToQuit();
-
 private:
 
 	//! Handle mouse clics.
@@ -263,7 +282,7 @@ private:
 	//! Handle mouse wheel.
 	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	void handleMove(float x, float y, Qt::MouseButtons b);
+	bool handleMove(float x, float y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
@@ -273,10 +292,13 @@ private:
 	void prepareRenderBuffer();
 	//! Used internally to set the viewport effects.
 	//! @param drawFbo the OpenGL fbo we need to render into.
-	void applyRenderBuffer(int drawFbo=0);
+	void applyRenderBuffer(quint32 drawFbo=0);
 
 	// The StelApp singleton
 	static StelApp* singleton;
+
+	//! The main window which is the parent of this object
+	StelMainView* mainWin;
 
 	// The associated StelCore instance
 	StelCore* core;
@@ -346,7 +368,7 @@ private:
 
 	float fps;
 	int frame;
-	double timefr, timeBase;		// Used for fps counter
+	double frameTimeAccum;		// Used for fps counter
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
@@ -380,12 +402,18 @@ private:
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;
-
 	StelViewportEffect* viewportEffect;
+	QOpenGLFunctions* gl;
 	
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+#ifdef 	ENABLE_SPOUT
+	SpoutSender* spoutSender;
+#endif
+
+	// The current main FBO/render target handle, without requiring GL queries. Valid through a draw() call
+	quint32 currentFbo;
 
 };
 

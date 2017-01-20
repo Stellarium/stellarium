@@ -62,6 +62,8 @@
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QTimer>
+#include <QEventLoop>
 
 #include <cmath>
 
@@ -793,6 +795,31 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	return StelUtils::getJDFromSystem();
 }
 
+void StelMainScriptAPI::wait(double t) {
+	QEventLoop loop;
+	QTimer timer;
+	timer.setInterval(1000*t);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
+void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
+{
+	double deltaJD = jdFromDateString(dt, spec) - getJDay();
+	double timeSpeed = getTimeRate();
+	if (timeSpeed == 0.) { qDebug() << "waitFor() called with no time passing - would be infinite. not waiting!"; return;}
+	QEventLoop loop;
+	QTimer timer;
+	int interval=1000*deltaJD*86400/timeSpeed;
+	//qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
+	timer.setInterval(interval);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
+
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
@@ -879,21 +906,21 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	map.insert("sglong", glong*180./M_PI);
 	map.insert("sglat", glat*180./M_PI);
 
-	if (core->getCurrentLocation().planetName == "Earth")
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	double ra_equ, dec_equ, lambda, beta;
+	// J2000
+	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+	// ecliptic longitude/latitude (J2000 frame)
+	StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
+	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+	if (lambda<0) lambda+=2.0*M_PI;
+	map.insert("elongJ2000", lambda*180./M_PI);
+	map.insert("elatJ2000", beta*180./M_PI);
+
+	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
 	{
-		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-		double ra_equ, dec_equ, lambda, beta;
-		// J2000
-		double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
-		double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
-
-		// ecliptic longitude/latitude (J2000 frame)
-		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		map.insert("elongJ2000", lambda*180./M_PI);
-		map.insert("elatJ2000", beta*180./M_PI);
-
 		// ecliptic longitude/latitude
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
@@ -933,6 +960,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+		map.insert("ptype", ssmgr->getPlanetType(name));
 	}
 
 	// localized name
@@ -1018,21 +1046,21 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	map.insert("sglong", glong*180./M_PI);
 	map.insert("sglat", glat*180./M_PI);
 
-	if (core->getCurrentLocation().planetName == "Earth")
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	double ra_equ, dec_equ, lambda, beta;
+	// J2000
+	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+	// ecliptic longitude/latitude (J2000 frame)
+	StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
+	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+	if (lambda<0) lambda+=2.0*M_PI;
+	map.insert("elongJ2000", lambda*180./M_PI);
+	map.insert("elatJ2000", beta*180./M_PI);
+
+	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
 	{
-		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-		double ra_equ, dec_equ, lambda, beta;
-		// J2000
-		double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
-		double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
-
-		// ecliptic longitude/latitude (J2000 frame)
-		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		map.insert("elongJ2000", lambda*180./M_PI);
-		map.insert("elatJ2000", beta*180./M_PI);
-
 		// ecliptic longitude/latitude
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
@@ -1072,6 +1100,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+		map.insert("ptype", ssmgr->getPlanetType(obj->getEnglishName()));
 	}
 
 	// english name or designation & localized name

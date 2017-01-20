@@ -29,9 +29,9 @@
 #include "StelOpenGL.hpp"
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
-	: al(NULL)
+	: StelDialog("ArchaeoLines")
+	, al(NULL)
 {
-	dialogName = "ArchaeoLines";
 	ui = new Ui_archaeoLinesDialog();
 }
 
@@ -222,8 +222,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	#ifndef Q_OS_WIN
 	ui->switchToWindowedModeLabel->hide();
 	#else
-	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-	if (glRenderer.startsWith("ANGLE", Qt::CaseSensitive))
+	// don't call GL functions in GUI code please
+	if (StelMainView::getInstance().getGLInformation().renderer.startsWith("ANGLE", Qt::CaseSensitive))
 		ui->switchToWindowedModeLabel->hide();
 	#endif
 	setAboutHtml();

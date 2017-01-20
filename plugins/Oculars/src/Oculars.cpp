@@ -50,7 +50,6 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMouseEvent>
-#include <QtNetwork>
 #include <QPixmap>
 #include <QSignalMapper>
 
@@ -142,8 +141,6 @@ Oculars::Oculars():
 	magLimitDSOs(0.0),
 	flagLimitPlanets(false),
 	magLimitPlanets(0.0),
-	relativeStarScale(1.0),
-	absoluteStarScale(1.0),
 	flagMoonScale(false),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
@@ -180,6 +177,7 @@ Oculars::Oculars():
 	actualFOV(0),
 	initialFOV(0),
 	flagInitFOVUsage(false),
+	flagInitDirectionUsage(false),
 	flagAutosetMountForCCD(false),
 	equatorialMountEnabled(false),
 	reticleRotation(0)
@@ -335,14 +333,7 @@ void Oculars::draw(StelCore* core)
 					paintCrosshairs();
 				}
 			}
-			if (guiPanelEnabled)
-			{
-				// Reset the state to allow the panel to be painted normally
-				glDisable(GL_TEXTURE_2D);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				glEnable(GL_BLEND);
-			}
-			else
+			if (!guiPanelEnabled)
 			{
 				// Paint the information in the upper-right hand corner
 				paintText(core);
@@ -352,14 +343,7 @@ void Oculars::draw(StelCore* core)
 	else if (flagShowCCD)
 	{
 		paintCCDBounds();
-		if (guiPanelEnabled)
-		{
-			// Reset the state to allow the panel to be painted normally
-			glDisable(GL_TEXTURE_2D);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glEnable(GL_BLEND);
-		}
-		else
+		if (!guiPanelEnabled)
 		{
 			// Paint the information in the upper-right hand corner
 			paintText(core);
@@ -675,6 +659,7 @@ void Oculars::init()
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
+		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
@@ -1208,9 +1193,8 @@ void Oculars::displayPopupMenu()
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
 			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
-			rotateAction = submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
-			popup->addMenu(submenu);
-			
+			submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
+			popup->addMenu(submenu);			
 			popup->addSeparator();
 		}
 		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
@@ -1386,8 +1370,6 @@ void Oculars::toggleCCD(bool show)
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	StelSkyDrawer *skyManager = core->getSkyDrawer();
-	skyManager->setAbsoluteStarScale(absoluteStarScale);
 	if (show)
 	{
 		initialFOV = movementManager->getCurrentFov();
@@ -1411,10 +1393,6 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 
-		// Change relative scale for stars
-		// TODO: Finding experimental value for better rendering
-		skyManager->setRelativeStarScale(0.6);
-
 		if (guiPanel)
 		{
 			guiPanel->showCcdGui();
@@ -1424,13 +1402,15 @@ void Oculars::toggleCCD(bool show)
 	{
 		flagShowCCD = false;
 
-		skyManager->setRelativeStarScale(relativeStarScale);
 		movementManager->setFlagTracking(false);
 		//Zoom out
 		if (getFlagInitFovUsage())
 			movementManager->zoomTo(movementManager->getInitFov());
 		else
 			movementManager->zoomTo(initialFOV);
+
+		if (getFlagInitDirectionUsage())
+			movementManager->setViewDirectionJ2000(core->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
 
 		if (getFlagAutosetMountForCCD())
 		{
@@ -1465,12 +1445,22 @@ void Oculars::toggleTelrad(bool show)
 {
 	if(show!=flagShowTelrad)
 	{
+		StelMovementMgr* movementMgr = StelApp::getInstance().getCore()->getMovementMgr();
 		if (show)
 		{
 			hideUsageMessageIfDisplayed();
 			enableOcular(false);
 			toggleCCD(false);
+			// NOTE: Added special zoom level for Telrad
+			// Seems problem was introduced with introducing StelProperty feature
+			movementMgr->zoomTo(10.0);
 		}
+		else if (getFlagInitFovUsage()) // Restoration of FOV is needed?
+			movementMgr->zoomTo(movementMgr->getInitFov());
+
+		if (getFlagInitDirectionUsage())
+			movementMgr->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(movementMgr->getInitViewingDirection(), StelCore::RefractionOff));
+
 		flagShowTelrad = show;
 		emit enableTelradChanged(flagShowTelrad);
 	}
@@ -1555,6 +1545,7 @@ bool Oculars::isBinocularDefined()
 
 void Oculars::paintCCDBounds()
 {
+	int fontSize = StelApp::getInstance().getBaseFontSize();
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
@@ -1573,10 +1564,14 @@ void Oculars::paintCCDBounds()
 		{
 			StelPainter painter(projector);
 			painter.setColor(0.77f, 0.14f, 0.16f, 1.0f);
+			painter.setFont(font);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
+
+			const double fovX = ccd->getActualFOVx(telescope, lens);
+			const double fovY = ccd->getActualFOVy(telescope, lens);
 
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
@@ -1585,8 +1580,8 @@ void Oculars::paintCCDBounds()
 			{
 				aspectIndex = 3;
 			}
-			float width = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
-			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
+			float width = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
+			float height = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
 
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
@@ -1697,9 +1692,27 @@ void Oculars::paintCCDBounds()
 						cxt = StelUtils::radToHmsStr(cx, true);
 						cyt = StelUtils::radToDmsStr(cy, true);
 					}
+					// Coordinates of center of visible field of view for CCD (red rectangle)
 					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
 					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
 					painter.drawText(a.x(), a.y(), coords, -(ccd->chipRotAngle() + polarAngle));
+					// Dimensions of visible field of view for CCD (red rectangle)
+					a = transform.map(QPoint(-width/2.0, -height/2.0 - fontSize*1.2f));
+					painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), -(ccd->chipRotAngle() + polarAngle));
+					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
+					//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
+					QString unit = q_("\"/px");
+					QString scales = QString("%1%3 %4 %2%3")
+							.arg(QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4))
+							.arg(QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4))
+							.arg(unit)
+							.arg(QChar(0x00D7));
+					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(scales), -height/2.0 - fontSize*1.2f));
+					painter.drawText(a.x(), a.y(), scales, -(ccd->chipRotAngle() + polarAngle));
+					// Rotation angle of visible field of view for CCD (red rectangle)
+					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
+					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(angle), height/2.0 + 5.f));
+					painter.drawText(a.x(), a.y(), angle, -(ccd->chipRotAngle() + polarAngle));
 				}
 			}
 		}
@@ -1763,15 +1776,13 @@ void Oculars::paintOcularMask(const StelCore *core)
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	painter.setBlending(true);
 
 	Vec2i centerScreen(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2);
 
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull())
 	{
-		painter.enableTexture2d(true);
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 
 		reticleTexture->bind();
@@ -1864,9 +1875,7 @@ void Oculars::paintText(const StelCore* core)
 
 	// set up the color and the GL state
 	painter.setColor(0.8f, 0.48f, 0.f, 1.f);
-	glDisable(GL_TEXTURE_2D);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	painter.setBlending(true);
 
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);
@@ -1988,8 +1997,8 @@ void Oculars::paintText(const StelCore* core)
 		double fovY = 0.0;
 		if (telescope!=NULL && lens!=NULL)
 		{
-			fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-			fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+			fovX = ccd->getActualFOVx(telescope, lens);
+			fovY = ccd->getActualFOVy(telescope, lens);
 			name = ccd->name();
 			telescopeName = telescope->name();
 		}
@@ -2147,8 +2156,6 @@ void Oculars::unzoomOcular()
 	skyManager->setCustomStarMagnitudeLimit(magLimitStars);
 	skyManager->setCustomPlanetMagnitudeLimit(magLimitPlanets);
 	skyManager->setCustomNebulaMagnitudeLimit(magLimitDSOs);
-	skyManager->setRelativeStarScale(relativeStarScale);
-	skyManager->setAbsoluteStarScale(absoluteStarScale);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -2163,6 +2170,9 @@ void Oculars::unzoomOcular()
 		movementManager->zoomTo(movementManager->getInitFov());
 	else
 		movementManager->zoomTo(initialFOV);
+
+	if (getFlagInitDirectionUsage())
+		movementManager->setViewDirectionJ2000(core->altAzToJ2000(movementManager->getInitViewingDirection(), StelCore::RefractionOff));
 }
 
 void Oculars::zoom(bool zoomedIn)
@@ -2224,8 +2234,6 @@ void Oculars::zoom(bool zoomedIn)
 			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
 			magLimitPlanets = skyManager->getCustomPlanetMagnitudeLimit();
 			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
-			relativeStarScale = skyManager->getRelativeStarScale();
-			absoluteStarScale = skyManager->getAbsoluteStarScale();
 
 			flagMoonScale = GETSTELMODULE(SolarSystem)->getFlagMoonScale();
 
@@ -2325,11 +2333,6 @@ void Oculars::zoomOcular()
 		core->setFlipVert(telescope->isVFlipped());
 	}
 
-	// Change relative and absolute scales for stars
-	// TODO: Finding experimental value for better rendering
-	skyManager->setRelativeStarScale(0.6);
-	skyManager->setAbsoluteStarScale(0.75);
-
 	// Limit stars and DSOs	if it enable and it's telescope + eyepiece combination
 	if (getFlagLimitMagnitude())
 	{
@@ -2338,7 +2341,7 @@ void Oculars::zoomOcular()
 		if (ocular->isBinoculars())
 			diameter = ocular->fieldStop();
 		else
-			diameter = telescope->diameter();
+			diameter = telescope!=NULL ? telescope->diameter() : 0.; // Avoid a potential call of null pointer
 		double limitMag = 2.1 + 5*std::log10(diameter);
 
 		skyManager->setFlagStarMagnitudeLimit(true);
@@ -2475,6 +2478,18 @@ bool Oculars::getFlagInitFovUsage() const
 	return flagInitFOVUsage;
 }
 
+void Oculars::setFlagInitDirectionUsage(const bool b)
+{
+	flagInitDirectionUsage = b;
+	settings->setValue("use_initial_direction", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagInitDirectionUsage() const
+{
+	return flagInitDirectionUsage;
+}
+
 void Oculars::setFlagAutosetMountForCCD(const bool b)
 {
 	flagAutosetMountForCCD = b;
@@ -2525,25 +2540,25 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 		if (fovX >= 1.0)
 		{
 			int degrees = (int)fovX;
-			int minutes = (int)((fovX - degrees) * 60);
-			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+			float minutes = (int)((fovX - degrees) * 60);
+			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 		else
 		{
-			int minutes = (int)(fovX * 60);
-			stringFovX = QString::number(minutes) + QChar(0x2032);
+			float minutes = (fovX * 60);
+			stringFovX = QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 
 		if (fovY >= 1.0)
 		{
 			int degrees = (int)fovY;
-			int minutes = (int)((fovY - degrees) * 60);
-			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes) + QChar(0x2032);
+			float minutes = ((fovY - degrees) * 60);
+			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 		else
 		{
-			int minutes = (int)(fovY * 60);
-			stringFovY = QString::number(minutes) + QChar(0x2032);
+			float minutes = (fovY * 60);
+			stringFovY = QString::number(minutes, 'f', 1) + QChar(0x2032);
 		}
 	}
 	else

@@ -33,7 +33,7 @@
 #include <QOpenGLContext>
 
 StelTextureMgr::StelTextureMgr(QObject *parent)
-	:QObject(parent)
+	: QObject(parent), glMemoryUsage(0)
 {
 
 }
@@ -59,7 +59,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	StelTextureSP cache = lookupCache(canPath);
 	if(!cache.isNull()) return cache;
 
-	StelTextureSP tex = StelTextureSP(new StelTexture());
+	StelTextureSP tex = StelTextureSP(new StelTexture(this));
 	tex->fullPath = canPath;
 
 	QImage image(tex->fullPath);
@@ -105,7 +105,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	StelTextureSP cache = lookupCache(canPath);
 	if(!cache.isNull()) return cache;
 
-	StelTextureSP tex = StelTextureSP(new StelTexture());
+	StelTextureSP tex = StelTextureSP(new StelTexture(this));
 	tex->loadParams = params;
 	tex->fullPath = canPath;
 	if (!lazyLoading)

@@ -128,6 +128,8 @@ def processFrameworks():
 	# QtMultimedia?
 	if 'QtMultimedia' in ' '.join(frameworks):
 		frameworks.append(frameworks[-1].replace('QtMultimedia','QtMultimediaWidgets'))
+		# QtOpenGL is required by QtMultimediaWidgets
+		frameworks.append(frameworks[-1].replace('QtCore','QtOpenGL'))
 	for framework in frameworks:
 		copyFrameworkToApp(framework)
 		allFramework.append(framework)

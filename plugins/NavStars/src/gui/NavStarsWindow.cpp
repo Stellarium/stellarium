@@ -29,11 +29,9 @@
 
 #include <QComboBox>
 
-NavStarsWindow::NavStarsWindow()
-	: ns(NULL)
+NavStarsWindow::NavStarsWindow() : StelDialog("NavStars"), ns(NULL)
 {
 	ui = new Ui_navStarsWindowForm();
-	dialogName = "NavStars";
 }
 
 NavStarsWindow::~NavStarsWindow()

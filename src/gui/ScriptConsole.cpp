@@ -28,6 +28,7 @@
 #include "StelScriptSyntaxHighlighter.hpp"
 
 #include <QDialog>
+#include <QDebug>
 #include <QTextStream>
 #include <QTemporaryFile>
 #include <QDir>
@@ -38,10 +39,9 @@
 #include <QTextDocumentFragment>
 
 ScriptConsole::ScriptConsole(QObject *parent)
-	: StelDialog(parent)
+	: StelDialog("ScriptConsole", parent)
 	, highlighter(NULL)
 {
-	dialogName = "ScriptConsole";
 	ui = new Ui_scriptConsoleForm;
 }
 

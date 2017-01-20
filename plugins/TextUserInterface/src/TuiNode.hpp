@@ -55,7 +55,8 @@ public:
 	virtual TuiNode* getParentNode() {return parentNode;}
 	virtual void setParentNode(TuiNode* n) {parentNode=n; updateNodeNumber();}
 	virtual TuiNode* getChildNode() {return childNode;}
-	virtual void setChildNode(TuiNode* n) {childNode=n;}
+	//! This also takes ownership of the child through OObject->setParent
+	virtual void setChildNode(TuiNode* n) {childNode=n; n->setParent(this);}
 	virtual TuiNode* getPrevNode() {return prevNode;}
 	virtual void setPrevNode(TuiNode* n) {prevNode=n; updateNodeNumber();}
 	virtual TuiNode* getNextNode() {return nextNode;}

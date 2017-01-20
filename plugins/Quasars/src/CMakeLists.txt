@@ -25,11 +25,8 @@ QT5_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
 SET(Quasars_RES ../resources/Quasars.qrc)
 QT5_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
 
-SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
-
 ADD_LIBRARY(Quasars-static STATIC ${Quasars_SRCS} ${Quasars_RES_CXX} ${QuasarsDialog_UIS_H})
-QT5_USE_MODULES(Quasars-static Core Network Widgets)
+TARGET_LINK_LIBRARIES(Quasars-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(Quasars-static PROPERTIES OUTPUT_NAME "Quasars")
-TARGET_LINK_LIBRARIES(Quasars-static ${extLinkerOption})
 SET_TARGET_PROPERTIES(Quasars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Quasars-static)

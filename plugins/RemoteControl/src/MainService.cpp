@@ -35,17 +35,17 @@
 #include "StelUtils.hpp"
 
 #include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 
 MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	: AbstractAPIService(serviceName,parent),
-	  moveX(0),moveY(0),lastMoveUpdateTime(0)
+	  moveX(0),moveY(0),lastMoveUpdateTime(0),
+	  //100 should be more than enough
+	  //this only has to emcompass events that occur between 2 status updates
+	  actionCache(100), propCache(100)
 {
-	//100 should be more than enough
-	//this only has to emcompass events that occur between 2 status updates
-	actionCache.setCapacity(100);
-	propCache.setCapacity(100);
-
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
 	actionMgr =  StelApp::getInstance().getStelActionManager();
@@ -446,7 +446,7 @@ bool MainService::focusObject(const QString &name)
 void MainService::focusPosition(const Vec3d &pos)
 {
 	objMgr->unSelect();
-	mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
+	mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
 }
 
 void MainService::updateMovement(float x, float y, bool xUpdated, bool yUpdated)

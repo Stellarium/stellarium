@@ -38,7 +38,7 @@ QFrame#viewContent {
 }
 
 QFrame#bottomResizeFrame {
-background:rgb(48, 49, 52);
+        background:rgb(48, 49, 52);
 }
 
 /*QWidget QFrame {
@@ -769,6 +769,14 @@ QHeaderView::section {
         font-size: 12px;
         padding-left: 4px;
         border: 1px solid rgb(108, 108, 108);
+}
+
+QHeaderView::up-arrow {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QHeaderView::down-arrow {
+        image: url(:/graphicGui/spindown.png);
 }
 
 #configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {

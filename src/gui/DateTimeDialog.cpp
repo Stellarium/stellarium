@@ -32,7 +32,7 @@
 #include <QLineEdit>
 
 DateTimeDialog::DateTimeDialog(QObject* parent) :
-	StelDialog(parent),
+	StelDialog("DateTime", parent),
 	year(0),
 	month(0),
 	day(0),
@@ -42,7 +42,6 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 	jd(0)
 {
 	ui = new Ui_dateTimeDialogForm;
-	dialogName = "DateTime";
 }
 
 DateTimeDialog::~DateTimeDialog()
@@ -62,6 +61,12 @@ void DateTimeDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+
+	// Use ISO 8601 to date formatting
+	// See details: https://bugs.launchpad.net/stellarium/+bug/1655630
+	QString delimiter = QChar(0x2012);
+	ui->dateDelimiterLabel1->setText(delimiter);
+	ui->dateDelimiterLabel2->setText(delimiter);
 
 	connectSpinnerEvents();
 }
@@ -121,7 +126,6 @@ bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
 	StelApp::getInstance().getCore()->setJD(jday);
-
 	return true;
 }
 
@@ -152,6 +156,7 @@ void DateTimeDialog::yearChanged(int newyear)
 	if ( year != newyear )
 	{
 		valid( newyear, month, day, hour, minute, second );
+		emit StelApp::getInstance().getCore()->dateChanged();
 	}
 }
 
@@ -160,6 +165,7 @@ void DateTimeDialog::monthChanged(int newmonth)
 	if ( month != newmonth )
 	{
 		valid( year, newmonth, day, hour, minute, second );
+		emit StelApp::getInstance().getCore()->dateChanged();
 	}
 }
 
@@ -167,6 +173,7 @@ void DateTimeDialog::dayChanged(int newday)
 {
 	int delta = newday - day;
 	validJd(jd + delta);
+	emit StelApp::getInstance().getCore()->dateChanged();
 }
 
 void DateTimeDialog::hourChanged(int newhour)

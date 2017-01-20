@@ -52,6 +52,8 @@ class StelModule : public QObject
 	// Do not add Q_OBJECT here!!
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.
+	Q_ENUMS(StelModuleSelectAction)
+	Q_ENUMS(StelModuleActionName)
 public:
 	StelModule();
 
@@ -108,11 +110,13 @@ public:
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
 	{
-		AddToSelection,     //!< Add the StelObject to the current list of selected ones.
+		AddToSelection,		//!< Add the StelObject to the current list of selected ones.
 		ReplaceSelection,	//!< Set the StelObject as the new list of selected ones.
-		RemoveFromSelection //!< Subtract the StelObject from the current list of selected ones.
+		RemoveFromSelection	//!< Subtract the StelObject from the current list of selected ones.
 	};
-
+#if QT_VERSION >= 0x050500
+	Q_ENUM(StelModuleSelectAction)
+#endif
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName
 	{
@@ -122,7 +126,9 @@ public:
 		ActionHandleMouseMoves,  //!< Action associated to the handleMouseMoves() method
 		ActionHandleKeys         //!< Action associated to the handleKeys() method
 	};
-
+#if QT_VERSION >= 0x050500
+	Q_ENUM(StelModuleActionName)
+#endif
 	//! Return the value defining the order of call for the given action
 	//! For example if stars.callOrder[ActionDraw] == 10 and constellation.callOrder[ActionDraw] == 11,
 	//! the stars module will be drawn before the constellations

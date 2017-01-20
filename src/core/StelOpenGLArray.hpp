@@ -24,6 +24,7 @@
 
 #include <QLoggingCategory>
 #include <QOpenGLBuffer>
+#include <QOpenGLFunctions>
 #include <QOpenGLVertexArrayObject>
 #include <QVector>
 
@@ -36,8 +37,9 @@ Q_DECLARE_LOGGING_CATEGORY(stelOpenGLArray)
 //! without repeated CPU-GPU data uploads.
 //! Each StelOpenGLArray uses a single vertex buffer for vertex data, an element index buffer,
 //! and a vertex array object for faster binding if the hardware supports it.
-class StelOpenGLArray : QObject
+class StelOpenGLArray : public QObject
 {
+    Q_OBJECT
 public:
 	//! Specifies the attribute location used for the glVertexAttribPointer calls.
 	//! Shaders should be configured to use these locations before linking,
@@ -97,7 +99,7 @@ public:
 	//! Does not bind the array first.
 	inline void draw(int offset, int count) const
 	{
-		glDrawElements(GL_TRIANGLES, count, m_indexBufferType, reinterpret_cast<const GLvoid*>(offset * m_indexBufferTypeSize));
+        gl->glDrawElements(GL_TRIANGLES, count, m_indexBufferType, reinterpret_cast<const GLvoid*>(offset * m_indexBufferTypeSize));
 	}
 
 	//! Returns the buffer used for the vertex data.

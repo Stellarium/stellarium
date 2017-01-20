@@ -89,6 +89,8 @@ QHash<int, int> StarMgr::saoStarsMap;
 QMap<int, int> StarMgr::saoStarsIndex;
 QHash<int, int> StarMgr::hdStarsMap;
 QMap<int, int> StarMgr::hdStarsIndex;
+QHash<int, int> StarMgr::hrStarsMap;
+QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
 
 QStringList initStringListFromFile(const QString& file_name)
@@ -240,6 +242,15 @@ QString StarMgr::getCrossIdentificationDesignations(int hip)
 			designations = QString("HD %1").arg(it2.value());
 		else
 			designations += QString(" - HD %1").arg(it2.value());
+	}
+
+	QHash<int,int>::const_iterator it3(hrStarsMap.find(hip));
+	if (it3!=hrStarsMap.end())
+	{
+		if (designations.isEmpty())
+			designations = QString("HR %1").arg(it3.value());
+		else
+			designations += QString(" - HR %1").arg(it3.value());
 	}
 
 	return designations;
@@ -452,9 +463,7 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 		Vec3f c(obj->getInfoColor());
 		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
-		sPainter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getAnimationTime()*40.);
 	}
 }
@@ -623,6 +632,18 @@ void StarMgr::loadData(QVariantMap starsConfig)
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
 	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
+
+	hipparcosStars.clear();
+	for (int hip=0; hip<=NR_OF_HIP; hip++)
+	{
+		const Star1 *const s = hipIndex[hip].s;
+		if (s)
+		{
+			const SpecialZoneArray<Star1> *const a = hipIndex[hip].a;
+			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
+			hipparcosStars.push_back(s->createStelObject(a,z));
+		}
+	}
 }
 
 // Load common names from file
@@ -768,7 +789,8 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -842,7 +864,8 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -916,7 +939,8 @@ void StarMgr::loadWds(const QString& WdsFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
@@ -957,6 +981,8 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	saoStarsIndex.clear();
 	hdStarsMap.clear();
 	hdStarsIndex.clear();
+	hrStarsMap.clear();
+	hrStarsIndex.clear();
 
 	qDebug() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
 	QFile ciFile(crossIdFile);
@@ -977,12 +1003,13 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	foreach(const QString& record, allRecords)
 	{
 		++lineNumber;
-		if (record.isEmpty())
+		// skip comments and empty lines
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
 			continue;
 
 		++totalRecords;
 		const QStringList& fields = record.split('\t');
-		if (fields.size()!=3)
+		if (fields.size()!=4)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
 				   << " - record does not match record pattern";
@@ -1002,6 +1029,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 
 			unsigned int sao = fields.at(1).toUInt(&ok);
 			unsigned int hd = fields.at(2).toUInt(&ok);
+			unsigned int hr = fields.at(3).toUInt(&ok);
 
 			if (sao>0)
 			{
@@ -1013,6 +1041,12 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 			{
 				hdStarsMap[hip] = hd;
 				hdStarsIndex[hd] = hip;
+			}
+
+			if (hr>0)
+			{
+				hrStarsMap[hip] = hr;
+				hrStarsIndex[hr] = hip;
 			}
 
 			++readOk;
@@ -1273,6 +1307,17 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by HR number if it's an HR formated number
+	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx4.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		if (hr!=hrStarsIndex.end())
+		{
+			return searchHP(hr.value());
+		}
+	}
+
 	// Search by I18n common name
 	QMap<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 	if (it!=commonNamesIndexI18n.end())
@@ -1280,11 +1325,12 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it.value());
 	}
 
-	// Search by I18n additional common names
-	QMap<QString,int>::const_iterator ita(additionalNamesIndexI18n.find(objw));
-	if (ita!=additionalNamesIndexI18n.end())
+	// Search by I18n additional common names	
+	QMap<QString, int>::iterator ita;
+	for (ita = additionalNamesIndexI18n.begin(); ita != additionalNamesIndexI18n.end(); ++ita)
 	{
-		return searchHP(ita.value());
+		if (ita.key().contains(objw, Qt::CaseInsensitive))
+			return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1353,6 +1399,17 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		}
 	}
 
+	// Search by HR number if it's an HR formated number
+	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx4.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		if (hr!=hrStarsIndex.end())
+		{
+			return searchHP(hr.value());
+		}
+	}
+
 	// Search by English common name
 	QMap<QString,int>::const_iterator it(commonNamesIndex.find(objw));
 	if (it!=commonNamesIndex.end())
@@ -1361,10 +1418,11 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by English additional common names
-	QMap<QString,int>::const_iterator ita(additionalNamesIndex.find(objw));
-	if (ita!=additionalNamesIndex.end())
+	QMap<QString, int>::iterator ita;
+	for (ita = additionalNamesIndex.begin(); ita != additionalNamesIndex.end(); ++ita)
 	{
-		return searchHP(ita.value());
+		if (ita.key().contains(objw, Qt::CaseInsensitive))
+			return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1419,8 +1477,15 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem<=0)
 					break;
-				result.append(inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value()));
-				--maxNbItem;
+				QStringList names = (inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value())).split(" - ");
+				foreach (QString name, names)
+				{
+					if (name.contains(objw, Qt::CaseInsensitive))
+					{
+						result.append(name);
+						--maxNbItem;
+					}
+				}
 			}
 			else
 				break;
@@ -1449,8 +1514,15 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem<=0)
 					break;
-				result.append(inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value()));
-				--maxNbItem;
+				QStringList names = (inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value())).split(" - ");
+				foreach (QString name, names)
+				{
+					if (name.contains(objw, Qt::CaseInsensitive))
+					{
+						result.append(name);
+						--maxNbItem;
+					}
+				}
 			}
 		}
 
@@ -1556,6 +1628,25 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (s && maxNbItem>0)
 			{
 				result << QString("HD%1").arg(hdNum);
+				maxNbItem--;
+			}
+		}
+	}
+
+	// Add exact HR catalogue numbers
+	QRegExp hrRx("^(HR)\\s*(\\d+)\\s*$");
+	hrRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (hrRx.exactMatch(objw))
+	{
+		bool ok;
+		int hrNum = hrRx.capturedTexts().at(2).toInt(&ok);
+		QMap<int,int>::const_iterator hr(hrStarsIndex.find(hrNum));
+		if (hr!=hrStarsIndex.end())
+		{
+			StelObjectP s = searchHP(hr.value());
+			if (s && maxNbItem>0)
+			{
+				result << QString("HR%1").arg(hrNum);
 				maxNbItem--;
 			}
 		}

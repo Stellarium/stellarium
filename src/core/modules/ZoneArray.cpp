@@ -255,10 +255,9 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 			 int mag_range, int mag_steps)
 			: fname(fname), level(level), mag_min(mag_min),
 			  mag_range(mag_range), mag_steps(mag_steps),
-			  star_position_scale(0.0), zones(0), file(file)
+			  star_position_scale(0.0), nr_of_stars(0), zones(0), file(file)
 {
-	nr_of_zones = StelGeodesicGrid::nrOfZones(level);
-	nr_of_stars = 0;
+	nr_of_zones = StelGeodesicGrid::nrOfZones(level);	
 }
 
 bool ZoneArray::readFile(QFile& file, void *data, qint64 size)

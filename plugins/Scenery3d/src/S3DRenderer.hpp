@@ -40,13 +40,12 @@
 
 //predeclarations
 class LandscapeMgr;
-class QOpenGLFramebufferObject;
 class S3DScene;
 
 Q_DECLARE_LOGGING_CATEGORY(scenery3d)
 
 //! Scenery3d renderer class
-class S3DRenderer : public QObject
+class S3DRenderer : public QObject, protected QOpenGLFunctions
 {
 	Q_OBJECT
 public:
@@ -149,6 +148,7 @@ private:
 	bool supportsShadowFiltering; //if shadow filtering is supported
 	bool isANGLE; //true if running on ANGLE
 	unsigned int maximumFramebufferSize;
+	GLuint defaultFBO; //the default background FBO handle
 
 	float torchBrightness; // toggle light brightness
 	float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/
@@ -213,6 +213,7 @@ private:
 	QVector<Vec3f> cubeVertices, transformedCubeVertices;
 	QVector<Vec2f> cubeTexcoords;
 	QOpenGLBuffer cubeVertexBuffer;
+	QOpenGLBuffer transformedCubeVertexBuffer;
 	QOpenGLBuffer cubeIndexBuffer;
 	int cubeIndexCount;
 

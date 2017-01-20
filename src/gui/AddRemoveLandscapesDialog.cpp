@@ -30,9 +30,8 @@
 #include <QFileDialog>
 #include <QString>
 
-AddRemoveLandscapesDialog::AddRemoveLandscapesDialog()
+AddRemoveLandscapesDialog::AddRemoveLandscapesDialog() : StelDialog("AddRemoveLandscapes")
 {
-	dialogName = "AddRemoveLandscapes";
 	ui = new Ui_addRemoveLandscapesDialogForm;
 	landscapeManager = GETSTELMODULE(LandscapeMgr);
 	lastUsedDirectoryPath = QDir::homePath();
