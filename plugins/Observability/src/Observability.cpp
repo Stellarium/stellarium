@@ -933,12 +933,9 @@ double Observability::HourAngle2(double RA, double ST)
 // Converts a float time/angle span (in hours/degrees) in the (integer) format hh/dd,mm,ss:
 void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 {
-	double f1,f2,f3;
-	hfloat = qAbs(hfloat);
-	double ffrac = std::modf(hfloat,&f1);
-	double ffrac2 = std::modf(60.*ffrac,&f2);
-	ffrac2 = std::modf(3600.*(ffrac-f2/60.),&f3);
-	h1 = (int)f1 ; h2 = (int)qAbs(f2+0.0*ffrac2) ; h3 = (int)qAbs(f3);
+	h1 = (int)hfloat;
+	h2 = (int)((qAbs(hfloat)-qAbs(double(h1)))*60);
+	h3 = (int)(((qAbs(hfloat)-qAbs(double(h1)))*60)-h2)*60;
 } 
 ////////////////////////////////////
 

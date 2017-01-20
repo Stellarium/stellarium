@@ -61,9 +61,7 @@
 #include <QTime>
 #include <QProcess>
 #include <QDir>
-#ifdef DISABLE_SCRIPTING
-#include "QSettings" // WTF?
-#endif
+#include <QSettings>
 
 
 /*************************************************************************
@@ -114,7 +112,7 @@ TextUserInterface::TextUserInterface()
  Destructor
 *************************************************************************/
 TextUserInterface::~TextUserInterface()
-{
+{	
 }
 
 /*************************************************************************
@@ -144,6 +142,7 @@ void TextUserInterface::init()
 	loadConfiguration();
 	//Reusing strings from the location dialog
 	TuiNode* m1 = new TuiNode(N_("Location"));
+	m1->setParent(this);
 	TuiNode* m1_1 = new TuiNodeDouble(N_("Latitude:"),
 	                                  this, SLOT(setLatitude(double)),
 					  getLatitude(), -90, 90, 0.5, m1);
@@ -171,6 +170,7 @@ void TextUserInterface::init()
 	m1->setChildNode(m1_1);
 
 	TuiNode* m2 = new TuiNode(N_("Date and Time"), NULL, m1);
+	m2->setParent(this);
 	m1->setNextNode(m2);
 	TuiNode* m2_1 = new TuiNodeDateTime(N_("Current date/time"),
 	                                    core,
@@ -224,6 +224,7 @@ void TextUserInterface::init()
 	m2->setChildNode(m2_1);
 
 	TuiNode* m3 = new TuiNode(N_("General"), NULL, m2);
+	m3->setParent(this);
 	m2->setNextNode(m3);
 	StelSkyCultureMgr& skyCultureMgr = StelApp::getInstance().getSkyCultureMgr();
 	TuiNode* m3_1 = new TuiNodeEnum(N_("Starlore"),
@@ -251,6 +252,7 @@ void TextUserInterface::init()
 	m3->setChildNode(m3_1);
 
 	TuiNode* m4 = new TuiNode(N_("Stars"), NULL, m3);
+	m4->setParent(this);
 	m3->setNextNode(m4);
 	StarMgr* starMgr = GETSTELMODULE(StarMgr);
 	TuiNode* m4_1 = new TuiNodeBool(N_("Show stars"),
@@ -282,6 +284,7 @@ void TextUserInterface::init()
 	m4->setChildNode(m4_1);
 
 	TuiNode* m5 = new TuiNode(N_("Colors"), NULL, m4);
+	m5->setParent(this);
 	m4->setNextNode(m5);
 	ConstellationMgr* constellationMgr = GETSTELMODULE(ConstellationMgr);
 	TuiNode* m5_1 = new TuiNodeColor(N_("Constellation lines"),
@@ -436,6 +439,7 @@ void TextUserInterface::init()
 	m5->setChildNode(m5_1);
 
 	TuiNode* m6 = new TuiNode(N_("Effects"), NULL, m5);
+	m6->setParent(this);
 	m5->setNextNode(m6);
 	TuiNode* m6_1 = new TuiNodeInt(N_("Light pollution:"),
 				       skyDrawer,
@@ -465,7 +469,6 @@ void TextUserInterface::init()
 					 movementMgr->getAutoMoveDuration(),
 					 0, 20.0, 0.1,
 					 m6, m6_4);
-//	TuiNode* m6_4 = new TuiNode(N_("Magnitude scaling multiplier"), m6, m6_3); // No longer used. Use 4.2, 4.3 instead.
 	TuiNode* m6_6 = new TuiNodeDouble(N_("Milky Way intensity:"),
 	                                 GETSTELMODULE(MilkyWay),
 					 SLOT(setIntensity(double)),
@@ -478,8 +481,6 @@ void TextUserInterface::init()
 					 GETSTELMODULE(ZodiacalLight)->getIntensity(),
 					 0, 10.0, 0.1,
 					 m6, m6_6);
-//	TuiNode* m6_8 = new TuiNode(N_("Nebula label frequency:"), m6, m6_7); // INACTIVE. Reactivate?
-//	TuiNode* m6_9 = new TuiNode(N_("Cursor timeout:"), m6, m6_8);
 	m6_1->setNextNode(m6_2);
 	m6_2->setNextNode(m6_3);
 	m6_3->setNextNode(m6_4);
@@ -487,14 +488,12 @@ void TextUserInterface::init()
 	m6_5->setNextNode(m6_6);
 	m6_6->setNextNode(m6_7);
 	m6_7->setNextNode(m6_1);
-//	m6_8->setNextNode(m6_9);
-//	m6_9->setNextNode(m6_10);
-//	m6_10->setNextNode(m6_1);
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 
 	#ifndef DISABLE_SCRIPTING
 	TuiNode* m7 = new TuiNode(N_("Scripts"), NULL, m6);
+	m7->setParent(this);
 	m6->setNextNode(m7);	
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	TuiNode* m7_1 = new TuiNodeEnum(N_("Run local script"),
@@ -515,9 +514,11 @@ void TextUserInterface::init()
 
 
 	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m7);
+	m8->setParent(this);
 	m7->setNextNode(m8);
 	#else
 	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m6);
+	m8->setParent(this);
 	m6->setNextNode(m8);
 	#endif
 	m8->setNextNode(m1);

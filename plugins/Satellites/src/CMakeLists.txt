@@ -53,23 +53,13 @@ QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 SET(Satellites_RES ../resources/Satellites.qrc)
 QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
-SET(extLinkerOption ${OPENGL_LIBRARIES})
-
 ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
-QT5_USE_MODULES(Satellites-static Core Network OpenGL)
+TARGET_LINK_LIBRARIES(Satellites-static Qt5::Core Qt5::Network Qt5::Widgets)
 # The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
-TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
 IF(MSVC)
      SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ELSE()
      SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
 ENDIF()
 ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
-
-
-
-
-
-
-

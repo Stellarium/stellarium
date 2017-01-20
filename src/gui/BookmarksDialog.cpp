@@ -35,9 +35,8 @@
 #include "ui_bookmarksDialog.h"
 
 BookmarksDialog::BookmarksDialog(QObject *parent)
-	: StelDialog(parent)
+	: StelDialog("Bookmarks", parent)
 {
-	dialogName = "Bookmarks";
 	ui = new Ui_bookmarksDialogForm;
 	core = StelApp::getInstance().getCore();
 	objectMgr = GETSTELMODULE(StelObjectMgr);

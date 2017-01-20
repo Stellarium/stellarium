@@ -36,11 +36,11 @@
 #include <QFileDialog>
 
 SolarSystemManagerWindow::SolarSystemManagerWindow()
+	: StelDialog("SolarSystemEditor")
+	, manualImportWindow(NULL)
 {
 	ui = new Ui_solarSystemManagerWindow();
-	dialogName = "SolarSystemEditor";
 	mpcImportWindow = new MpcImportWindow();
-	manualImportWindow = NULL;
 
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 }

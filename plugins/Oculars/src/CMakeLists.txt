@@ -34,12 +34,8 @@ SET(Oculars_UIS
 )
 QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
-SET(extLinkerOption ${OPENGL_LIBRARIES})
-
 ADD_LIBRARY(Oculars-static STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H})
 SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
-QT5_USE_MODULES(Oculars-static Core Network OpenGL Widgets)
-
-TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
+TARGET_LINK_LIBRARIES(Oculars-static Qt5::Core Qt5::Widgets)
 SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)

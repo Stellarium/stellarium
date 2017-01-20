@@ -89,10 +89,11 @@ RemoteControl::~RemoteControl()
 	delete configDialog;
 	if(httpListener)
 	{
+		//we manually delete the listener here to make sure
+		//all connections are closed before the requesthandler is deleted
 		delete httpListener;
+		httpListener = Q_NULLPTR;
 	}
-	if(requestHandler)
-		requestHandler->deleteLater();
 }
 
 bool RemoteControl::configureGui(bool show)
@@ -139,7 +140,7 @@ void RemoteControl::init()
 	settings.cacheTime = 1;
 	settings.maxAge = 1;
 #endif
-	requestHandler = new RequestHandler(settings);
+	requestHandler = new RequestHandler(settings, this);
 
 	StelApp& app = StelApp::getInstance();
 

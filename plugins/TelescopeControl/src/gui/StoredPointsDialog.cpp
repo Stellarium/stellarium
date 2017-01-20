@@ -21,10 +21,9 @@
 #include "StoredPointsDialog.hpp"
 #include "ui_storedPointsDialog.h"
 
-StoredPointsDialog::StoredPointsDialog()
+StoredPointsDialog::StoredPointsDialog(): StelDialog("TelescopeControlStoredPoints")
 {
 	ui = new Ui_StoredPoints;
-	dialogName = "TelescopeControlStoredPoints";
 	storedPointsListModel = new QStandardItemModel(0, ColumnCount);
 }
 

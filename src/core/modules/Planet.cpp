@@ -17,12 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QtGlobal>
-
-#if !defined(Q_OS_WIN)
-//exclude StelOpenGL here on windows because of conflicts otherwise (uses QOpenGLFunctions_1_0 directly)
-#include "StelOpenGL.hpp"
-#endif
 #include <QOpenGLFunctions_1_0>
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -65,13 +59,29 @@ bool Planet::shaderError = false;
 
 Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
-Vec3f Planet::orbitPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
-Vec3f Planet::orbitAsteroidsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMajorPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMoonsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMinorPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitDwarfPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitCubewanosColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitPlutinosColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitScatteredDiscObjectsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitOortCloudObjectsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitSednoidsColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitCometsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMercuryColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitVenusColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitEarthColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitMarsColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitJupiterColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitSaturnColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitUranusColor = Vec3f(1.0f,0.6f,1.0f);
+Vec3f Planet::orbitNeptuneColor = Vec3f(1.0f,0.6f,1.0f);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
 bool Planet::permanentDrawingOrbits = false;
+Planet::PlanetOrbitColorStyle Planet::orbitColorStyle = Planet::ocsOneColor;
 
 bool Planet::flagCustomGrsSettings = false;
 double Planet::customGrsJD = 2456901.5;
@@ -156,7 +166,18 @@ Planet::Planet(const QString& englishName,
 	       bool hasAtmosphere,
 	       bool hasHalo,
 	       const QString& pTypeStr)
-	: englishName(englishName),
+	: flagNativeName(true),
+	  flagTranslatedName(true),
+	  lastOrbitJDE(0.0),
+	  deltaJDE(StelCore::JD_SECOND),
+	  deltaOrbitJDE(0.0),
+	  orbitCached(false),
+	  closeOrbit(acloseOrbit),
+	  englishName(englishName),
+	  nameI18(englishName),
+	  nativeName(""),
+	  texMapName(atexMapName),
+	  normalMapName(anormalMapName),
 	  flagLighting(flagLighting),
 	  radius(radius),
 	  oneMinusOblateness(1.0-oblateness),
@@ -169,25 +190,19 @@ Planet::Planet(const QString& englishName,
 	  objModel(NULL),
 	  objModelLoader(NULL),
 	  rings(NULL),
+	  distance(0.0),
 	  sphereScale(1.f),
 	  lastJDE(J2000),
 	  coordFunc(coordFunc),
 	  userDataPtr(auserDataPtr),
 	  osculatingFunc(osculatingFunc),
 	  parent(NULL),
+	  flagLabels(true),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
-	  halo(hasHalo)
+      halo(hasHalo),
+      gl(NULL)
 {
-	texMapName = atexMapName;
-	normalMapName = anormalMapName;
-	lastOrbitJDE =0;
-	deltaJDE = StelCore::JD_SECOND;
-	orbitCached = 0;
-	closeOrbit = acloseOrbit;
-	deltaOrbitJDE = 0;
-	distance = 0;
-
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
 	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
@@ -211,15 +226,12 @@ Planet::Planet(const QString& englishName,
 		}
 	}
 
-	nameI18 = englishName;
-	nativeName = "";
 	if (englishName!="Pluto")
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
-	flagLabels = true;
-	flagNativeName = true;
-	flagTranslatedName = true;
+
+
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -241,6 +253,7 @@ void Planet::init()
 	pTypeMap.insert(Planet::isCubewano,	"cubewano");
 	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
 	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
+	pTypeMap.insert(Planet::isSednoid,	"sednoid");
 	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
 
 	if (vMagAlgorithmMap.count() > 0)
@@ -324,7 +337,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
 	if (flags&AbsoluteMagnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
+	{
+		// TODO: Calculate accurate value of absolute magnitude for Solar System bodies (H)
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(distanceAu*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+	}
 
 	oss << getPositionInfoString(core, flags);
 
@@ -392,10 +408,24 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (withDecimalDegree)
-				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+			{
+				if (withDecimalDegree)
+					oss << q_("Apparent diameter: %1, scaled up to: %2")
+					       .arg(StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true))
+					       .arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+				else
+					oss << q_("Apparent diameter: %1, scaled up to: %2")
+					       .arg(StelUtils::radToDmsStr(angularSize / sphereScale, true))
+					       .arg(StelUtils::radToDmsStr(angularSize, true));
+			}
 			else
-				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			{
+				if (withDecimalDegree)
+					oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+				else
+					oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			}
 		}
 		oss << "<br>";
 	}
@@ -426,6 +456,34 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 			const double elongation = getElongation(observerHelioPos);
+			QString moonPhase = "";
+			if (englishName=="Moon" && core->getCurrentLocation().planetName=="Earth")
+			{
+				double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, GETSTELMODULE(SolarSystem)->searchByEnglishName("Sun")->getEquinoxEquatorialPos(core));
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
+				int deltaLong = (int)(lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI);
+				if (deltaLong<0) deltaLong+=360;
+				if (deltaLong==45)
+					moonPhase = qc_("Waxing Crescent", "Moon phase");
+				if (deltaLong==90)
+					moonPhase = qc_("First Quarter", "Moon phase");
+				if (deltaLong==135)
+					moonPhase = qc_("Waxing Gibbous", "Moon phase");
+				if (deltaLong==180)
+					moonPhase = qc_("Full Moon", "Moon phase");
+				if (deltaLong==225)
+					moonPhase = qc_("Waning Gibbous", "Moon phase");
+				if (deltaLong==270)
+					moonPhase = qc_("Third Quarter", "Moon phase");
+				if (deltaLong==315)
+					moonPhase = qc_("Waning Crescent", "Moon phase");
+				if (deltaLong==0 || deltaLong==360)
+					moonPhase = qc_("New Moon", "Moon phase");
+			}
 
 			if (withDecimalDegree)
 			{
@@ -438,8 +496,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
 			}
 
-			oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2) << "<br>";
+			oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2);
+			if (!moonPhase.isEmpty())
+				oss << " (" << moonPhase << ")";
+			oss << "<br>";
 			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
+			oss << QString(q_("Albedo: %1")).arg(QString::number(getAlbedo(), 'f', 3)) << "<br>";
 		}
 		if (englishName=="Sun")
 		{
@@ -1145,7 +1207,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 			{
 				// (2)
 				if (englishName=="Mercury")
-					return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg;
+					return -0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg;
 				if (englishName=="Venus")
 					return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg;
 				if (englishName=="Mars")
@@ -1625,6 +1687,7 @@ bool Planet::initFBO()
 		return false;
 
 	QOpenGLContext* ctx  = QOpenGLContext::currentContext();
+    QOpenGLFunctions* gl = ctx->functions();
 
 	bool isGLESv2 = false;
 	bool error = false;
@@ -1650,35 +1713,35 @@ bool Planet::initFBO()
 	if(!error)
 	{
 		//all seems ok, create our objects
-		glGenTextures(1, &shadowTex);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, shadowTex);
+        gl->glGenTextures(1, &shadowTex);
+        gl->glActiveTexture(GL_TEXTURE1);
+        gl->glBindTexture(GL_TEXTURE_2D, shadowTex);
 
 #ifndef QT_OPENGL_ES_2
 		if(!isGLESv2)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+            gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+            gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
+            gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+            gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
-			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+            gl->glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 		}
 #endif
-		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
-		GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+        GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+        GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
 #ifndef DEBUG_SHADOWMAP
 		//create the texture
 		//note that the 'type' must be GL_UNSIGNED_SHORT or GL_UNSIGNED_INT for ES2 compatibility, even if the 'pixels' are NULL
-		GL(glTexImage2D(GL_TEXTURE_2D, 0, isGLESv2?GL_DEPTH_COMPONENT:GL_DEPTH_COMPONENT16, SM_SIZE, SM_SIZE, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL));
+        GL(gl->glTexImage2D(GL_TEXTURE_2D, 0, isGLESv2?GL_DEPTH_COMPONENT:GL_DEPTH_COMPONENT16, SM_SIZE, SM_SIZE, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL));
 
 		//we dont use QOpenGLFramebuffer because we dont want a color buffer...
-		GL(glGenFramebuffers(1, &shadowFBO));
-		GL(glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO));
+        GL(gl->glGenFramebuffers(1, &shadowFBO));
+        GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO));
 
 		//attach shadow tex to FBO
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTex, 0);
+        gl->glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTex, 0);
 
 		//on desktop, we must disable the read/draw buffer because we have no color buffer
 		//else, it would be an FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER error
@@ -1705,15 +1768,15 @@ bool Planet::initFBO()
 #endif
 
 		//check for completeness
-		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        GLenum status = gl->glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if(status != GL_FRAMEBUFFER_COMPLETE)
 		{
 			error = true;
 			qWarning()<<"Planet self-shadow framebuffer is incomplete, cannot use. Status:"<<status;
 		}
 
-		GL(glBindFramebuffer(GL_FRAMEBUFFER, ctx->defaultFramebufferObject()));
-		glActiveTexture(GL_TEXTURE0);
+        GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, ctx->defaultFramebufferObject()));
+        gl->glActiveTexture(GL_TEXTURE0);
 #else
 		GL(shadowFBO = new QOpenGLFramebufferObject(SM_SIZE,SM_SIZE,QOpenGLFramebufferObject::Depth));
 		error = !shadowFBO->isValid();
@@ -1731,15 +1794,17 @@ void Planet::deinitFBO()
 	if(!shadowInitialized)
 		return;
 
+    QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
+
 #ifndef DEBUG_SHADOWMAP
 	//zeroed names are ignored by GL
-	glDeleteFramebuffers(1,&shadowFBO);
+    gl->glDeleteFramebuffers(1,&shadowFBO);
 	shadowFBO = 0;
 #else
 	delete shadowFBO;
 	shadowFBO = Q_NULLPTR;
 #endif
-	glDeleteTextures(1,&shadowTex);
+    gl->glDeleteTextures(1,&shadowTex);
 	shadowTex = 0;
 
 	shadowInitialized = false;
@@ -1780,6 +1845,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
 		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
+        gl = sPainter->glFuncs();
 		
 		if (flagLighting)
 		{
@@ -2075,9 +2141,9 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 			return;
 		}
 	}
-	painter->enableTexture2d(true);
-	glDisable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+
+	painter->setBlending(false);
+	painter->setCullFace(true);
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
@@ -2176,22 +2242,21 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	if (rings)
 	{
-		glDepthMask(GL_TRUE);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		glEnable(GL_DEPTH_TEST);
+		painter->setDepthMask(true);
+		painter->setDepthTest(true);
+		gl->glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	
 	if (!drawOnlyRing)
-		GL(glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
+		GL(gl->glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
 
 	if (rings)
 	{
 		// Draw the rings just after the planet
-		glDepthMask(GL_FALSE);
+		painter->setDepthMask(false);
 	
 		// Normal transparency mode
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
+		painter->setBlending(true);
 	
 		Ring3DModel ringModel;
 		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
@@ -2221,19 +2286,19 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.texCoord));
 		
 		if (rData.eyePos[2]<0)
-			glCullFace(GL_FRONT);
+			gl->glCullFace(GL_FRONT);
 					
-		GL(glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
+		GL(gl->glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
 		
 		if (rData.eyePos[2]<0)
-			glCullFace(GL_BACK);
+			gl->glCullFace(GL_BACK);
 		
-		glDisable(GL_DEPTH_TEST);
+		painter->setDepthTest(false);
 	}
 	
 	GL(shader->release());
 	
-	glDisable(GL_CULL_FACE);
+	painter->setCullFace(false);
 }
 
 Planet::PlanetOBJModel* Planet::loadObjModel() const
@@ -2350,13 +2415,13 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	}
 
 	//the model is ready to draw!
-	glDisable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+    painter->setBlending(false);
+    painter->setCullFace(true);
+    gl->glCullFace(GL_BACK);
 	//depth testing is required here
-	glEnable(GL_DEPTH_TEST);
-	glDepthMask(GL_TRUE);
-	glClear(GL_DEPTH_BUFFER_BIT);
+    painter->setDepthTest(true);
+    painter->setDepthMask(true);
+    gl->glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Bind the array
 	GL(objModel->arr->bind());
@@ -2368,8 +2433,8 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	{
 		shd = objShadowShaderProgram;
 		shdVars = &objShadowShaderVars;
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D,shadowTex);
+        gl->glActiveTexture(GL_TEXTURE1);
+        gl->glBindTexture(GL_TEXTURE_2D,shadowTex);
 		GL(shd->bind());
 		GL(shd->setUniformValue(shdVars->shadowMatrix, shadowMatrix));
 		GL(shd->setUniformValue(shdVars->shadowTex, 1));
@@ -2411,8 +2476,8 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	shd->release();
 	objModel->arr->release();
 
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_DEPTH_TEST);
+    painter->setCullFace(false);
+    painter->setDepthTest(false);
 
 	return true;
 }
@@ -2494,14 +2559,14 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 					   0.0f, 0.0f, 0.0f, 1.0f);
 	shadowMatrix = biasMatrix * mvp;
 
-	glEnable(GL_DEPTH_TEST);
-	glDepthMask(GL_TRUE);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glEnable(GL_POLYGON_OFFSET_FILL);
-	glPolygonOffset(2.0f,6.0f);
+    painter->setDepthTest(true);
+    painter->setDepthMask(true);
+    painter->setCullFace(true);
+    gl->glCullFace(GL_BACK);
+    gl->glEnable(GL_POLYGON_OFFSET_FILL);
+    gl->glPolygonOffset(2.0f,6.0f);
 
-	glViewport(0,0,SM_SIZE,SM_SIZE);
+    gl->glViewport(0,0,SM_SIZE,SM_SIZE);
 
 	GL(objModel->arr->bind());
 	GL(transformShaderProgram->bind());
@@ -2511,10 +2576,10 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	shadowFBO->bind();
 	objModel->texture->bind();
 	transformShaderProgram->setUniformValue(transformShaderVars.tex, 0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 #else
-	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-	glClear(GL_DEPTH_BUFFER_BIT);
+    gl->glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+    gl->glClear(GL_DEPTH_BUFFER_BIT);
 #endif
 
 	GL(objModel->arr->draw());
@@ -2524,26 +2589,26 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 
 #ifdef DEBUG_SHADOWMAP
 	//copy depth buffer into shadowTex
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D,shadowTex);
+    gl->glActiveTexture(GL_TEXTURE1);
+    gl->glBindTexture(GL_TEXTURE_2D,shadowTex);
 
 	//this is probably unsupported on an OGL ES2 context! just don't use DEBUG_SHADOWMAP here...
 	GL(QOpenGLContext::currentContext()->functions()->glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 0, 0, SM_SIZE, SM_SIZE, 0));
 
 	GL(shadowFBO->release());
 #else
-	glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
+    gl->glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
 #endif
 
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = projector->getViewport();
-	glViewport(vp[0], vp[1], vp[2], vp[3]);
+    gl->glViewport(vp[0], vp[1], vp[2], vp[3]);
 
-	glDepthMask(GL_FALSE);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_POLYGON_OFFSET_FILL);
-	GL(glPolygonOffset(0.0f,0.0f));
+    painter->setDepthMask(false);
+    painter->setDepthTest(false);
+    painter->setCullFace(false);
+    gl->glDisable(GL_POLYGON_OFFSET_FILL);
+    GL(gl->glPolygonOffset(0.0f,0.0f));
 
 #ifdef DEBUG_SHADOWMAP
 	//display the FB contents on-screen
@@ -2574,9 +2639,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
 
 	// Draw the 2D small circle
-	glEnable(GL_BLEND);
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlending(true);
 	Planet::hintCircleTex->bind();
 	sPainter.drawSprite2dMode(screenPos[0], screenPos[1], 11);
 }
@@ -2587,6 +2650,82 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
 }
 
+Vec3f Planet::getCurrentOrbitColor()
+{
+	Vec3f orbColor = orbitColor;
+	switch(orbitColorStyle)
+	{
+		case ocsGroups:
+		{
+			switch (pType)
+			{
+				case isMoon:
+					orbColor = orbitMoonsColor;
+					break;
+				case isPlanet:
+					orbColor = orbitMajorPlanetsColor;
+					break;
+				case isAsteroid:
+					orbColor = orbitMinorPlanetsColor;
+					break;
+				case isDwarfPlanet:
+					orbColor = orbitDwarfPlanetsColor;
+					break;
+				case isCubewano:
+					orbColor = orbitCubewanosColor;
+					break;
+				case isPlutino:
+					orbColor = orbitPlutinosColor;
+					break;
+				case isSDO:
+					orbColor = orbitScatteredDiscObjectsColor;
+					break;
+				case isOCO:
+					orbColor = orbitOortCloudObjectsColor;
+					break;
+				case isComet:
+					orbColor = orbitCometsColor;
+					break;
+				case isSednoid:
+					orbColor = orbitSednoidsColor;
+					break;
+				default:
+					orbColor = orbitColor;
+			}
+			break;
+		}
+		case ocsMajorPlanets:
+		{
+			QString pName = getEnglishName().toLower();
+			if (pName=="mercury")
+				orbColor = orbitMercuryColor;
+			else if (pName=="venus")
+				orbColor = orbitVenusColor;
+			else if (pName=="earth")
+				orbColor = orbitEarthColor;
+			else if (pName=="mars")
+				orbColor = orbitMarsColor;
+			else if (pName=="jupiter")
+				orbColor = orbitJupiterColor;
+			else if (pName=="saturn")
+				orbColor = orbitSaturnColor;
+			else if (pName=="uranus")
+				orbColor = orbitUranusColor;
+			else if (pName=="neptune")
+				orbColor = orbitNeptuneColor;
+			else
+				orbColor = orbitColor;
+			break;
+		}
+		case ocsOneColor:
+		{
+			orbColor = orbitColor;
+			break;
+		}
+	}
+
+	return orbColor;
+}
 
 // draw orbital path of Planet
 void Planet::drawOrbit(const StelCore* core)
@@ -2601,30 +2740,9 @@ void Planet::drawOrbit(const StelCore* core)
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	sPainter.setBlending(true);
 
-	Vec3f orbColor = orbitColor;
-	switch (pType)
-	{
-		case isMoon:
-		case isPlanet:
-			orbColor = orbitPlanetsColor;
-			break;
-		case isAsteroid:
-		case isDwarfPlanet:
-		case isCubewano:
-		case isPlutino:
-		case isSDO:
-		case isOCO:
-			orbColor = orbitAsteroidsColor;
-			break;
-		case isComet:
-			orbColor = orbitCometsColor;
-			break;
-		default:
-			orbColor = orbitColor;
-	}
+	Vec3f orbColor = getCurrentOrbitColor();
 
 	sPainter.setColor(orbColor[0], orbColor[1], orbColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;

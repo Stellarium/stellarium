@@ -1,6 +1,8 @@
-GETTEXT_CREATE_TRANSLATIONS(stellarium-remotecontrol DEFAULT_TARGET
-    ar be bn cs de en en_GB es fi fr gd gl hu id is it ko nl pt pt_BR ru sk sr sv uk vi zh_HK
-)
+FILE(GLOB porcfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-remotecontrol/" "*.po")
+LIST(SORT porcfiles)
+STRING(REGEX REPLACE ".po" "" outporcfiles "${porcfiles}")
+
+GETTEXT_CREATE_TRANSLATIONS(stellarium-remotecontrol DEFAULT_TARGET ${outporcfiles})
 
 # Discard this target if xgettext is not installed
 IF(${XGETTEXT_FOUND})

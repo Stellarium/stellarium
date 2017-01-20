@@ -172,8 +172,8 @@ public slots:
 	//! - sglat : supergalactic latitude in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
-	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)
-	//! - elatJ2000 : ecliptic latitude (J2000 frame) in decimal degrees (on Earth only!)
+	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
+	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
 	//! - size: angular size in radians
@@ -190,6 +190,7 @@ public slots:
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	//! - ptype : object type (for Solar system objects only!)
 	QVariantMap getObjectInfo(const QString& name);
 
 	//! Fetch a map with data about an latest selected object's position, magnitude and so on
@@ -208,8 +209,8 @@ public slots:
 	//! - sglat : supergalactic latitude in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
-	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)
-	//! - elatJ2000 : ecliptic latitude (J2000 frame) in decimal degrees (on Earth only!)
+	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
+	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)	
 	//! - size: angular size in radians
@@ -227,6 +228,7 @@ public slots:
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	//! - ptype : object type (for Solar system objects only!)
 	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
@@ -808,8 +810,7 @@ public slots:
 
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	//! @note This method is pure JavaScript implementation.
-	void wait(double t) { Q_UNUSED(t) }
+	void wait(double t);
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -819,8 +820,7 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use
 	//! @param spec "local" or "utc"
-	//! @note This method is pure JavaScript implementation.
-	void waitFor(const QString& dt, const QString& spec="utc") { Q_UNUSED(dt); Q_UNUSED(spec) }
+	void waitFor(const QString& dt, const QString& spec="utc");
 
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,

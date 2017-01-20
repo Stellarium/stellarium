@@ -107,6 +107,8 @@ private:
 	QGraphicsTextItem* fieldOcularAfov;
 	QGraphicsTextItem* fieldCcdName;
 	QGraphicsTextItem* fieldCcdDimensions;
+	QGraphicsTextItem* fieldCcdHScale;
+	QGraphicsTextItem* fieldCcdVScale;
 	QGraphicsTextItem* fieldCcdRotation;
 	QGraphicsTextItem* fieldTelescopeName;
 	QGraphicsTextItem* fieldMagnification;

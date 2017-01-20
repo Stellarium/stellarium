@@ -101,6 +101,7 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Ced_nb()
+	, nameI18("")
 	, mTypeString()
 	, bMag(99.)
 	, vMag(99.)
@@ -115,7 +116,6 @@ Nebula::Nebula()
 	, parallaxErr(0.)
 	, nType()	
 {
-	nameI18 = "";	
 }
 
 Nebula::~Nebula()
@@ -136,6 +136,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (!nameI18.isEmpty() && flags&Name)
 	{
 		oss << getNameI18n();
+		QString aliases = getI18nAliases();
+		if (!aliases.isEmpty())
+			oss << " (" << aliases << ")";
 	}
 
 	if (flags&CatalogNumber)
@@ -152,7 +155,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (B_nb > 0)
 			catIds << QString("B %1").arg(B_nb);
 		if (Sh2_nb > 0)
-			catIds << QString("Sh 2-%1").arg(Sh2_nb);
+			catIds << QString("SH 2-%1").arg(Sh2_nb);
 		if (VdB_nb > 0)
 			catIds << QString("VdB %1").arg(VdB_nb);
 		if (RCW_nb > 0)
@@ -338,6 +341,22 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
+QString Nebula::getEnglishAliases() const
+{
+	QString aliases = "";
+	if (englishAliases.size()!=0)
+		aliases = englishAliases.join(" - ");
+	return aliases;
+}
+
+QString Nebula::getI18nAliases() const
+{
+	QString aliases = "";
+	if (nameI18Aliases.size()!=0)
+		aliases = nameI18Aliases.join(" - ");
+	return aliases;
+}
+
 float Nebula::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
@@ -458,8 +477,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
 
 	Vec3f color=circleColor;
@@ -682,7 +700,7 @@ QString Nebula::getDSODesignation()
 	else if (catalogFilters&CatB && B_nb>0)
 		str = QString("B %1").arg(B_nb);
 	else if (catalogFilters&CatSh2 && Sh2_nb>0)
-		str = QString("Sh 2-%1").arg(Sh2_nb);
+		str = QString("SH 2-%1").arg(Sh2_nb);
 	else if (catalogFilters&CatVdB && VdB_nb>0)
 		str = QString("VdB %1").arg(VdB_nb);
 	else if (catalogFilters&CatRCW && RCW_nb>0)

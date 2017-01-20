@@ -34,10 +34,9 @@
 //#include "StelTranslator.hpp"
 
 
-ManualImportWindow::ManualImportWindow()
+ManualImportWindow::ManualImportWindow(): StelDialog("SolarSystemEditorManualImport")
 {
 	ui = new Ui_manualImportWindow();
-	dialogName = "SolarSystemEditorManualImport";
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 }
 

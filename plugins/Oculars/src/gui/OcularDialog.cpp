@@ -43,14 +43,14 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 			   QList<Ocular *>* oculars,
 			   QList<Telescope *>* telescopes,
 			   QList<Lens *> *lense)
-	: plugin(pluginPtr)
+	: StelDialog("Oculars")
+	, plugin(pluginPtr)
 	, ccdMapper(NULL)
 	, ocularMapper(NULL)
 	, telescopeMapper(NULL)
 	, lensMapper(NULL)
 {
 	ui = new Ui_ocularDialogForm;
-	dialogName = "Oculars";
 	this->ccds = ccds;
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
@@ -341,7 +341,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->hideGridsLinesCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagHideGridsLines(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
-	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));	
+	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
+	connect(ui->checkBoxInitialDirection, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitDirectionUsage(bool)));
 	connect(ui->checkBoxTypeOfMount, SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
 	
 	// The add & delete buttons
@@ -396,6 +397,8 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->OAGPrismW, 10);
 	ccdMapper->addMapping(ui->OAGDist, 11);
 	ccdMapper->addMapping(ui->OAGPrismPA, 12);
+	ccdMapper->addMapping(ui->ccdBinningX, 13);
+	ccdMapper->addMapping(ui->ccdBinningY, 14);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -412,7 +415,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularFL, 2);
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
 	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
-	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
+	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");	
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -471,7 +474,11 @@ void OcularDialog::createDialogContent()
 	if (settings->value("use_initial_fov", false).toBool())
 	{
 		ui->checkBoxInitialFOV->setChecked(true);
-	}	
+	}
+	if (settings->value("use_initial_direction", false).toBool())
+	{
+		ui->checkBoxInitialDirection->setChecked(true);
+	}
 	if (settings->value("use_semi_transparency", true).toBool())
 	{
 		ui->semiTransparencyCheckBox->setChecked(true);

@@ -91,8 +91,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 	updatePercent(result.size(), numToBeLoaded);
 
 	// Draw in the good order
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
@@ -257,24 +256,23 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
 	ad_lum=std::min(1.f, ad_lum);
 	Vec4f color;
-	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
+	if (alphaBlend || texFader->state()==QTimeLine::Running)
 	{
+
 		if (!alphaBlend)
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+			sPainter.setBlending(true); // Normal transparency mode
 		else
-			glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
+			sPainter.setBlending(true, GL_ONE, GL_ONE); // additive blending
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
-		glDisable(GL_BLEND);
+		sPainter.setBlending(false);
 		color.set(ad_lum,ad_lum,ad_lum, 1.f);
 	}
 
 	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
 	
-	sPainter.enableTexture2d(true);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		Vec4f extinctedColor = color;

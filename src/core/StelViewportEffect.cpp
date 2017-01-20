@@ -35,8 +35,7 @@ void StelViewportEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
-	sPainter.enableTexture2d(true);
-	glBindTexture(GL_TEXTURE_2D, buf->texture());
+	sPainter.glFuncs()->glBindTexture(GL_TEXTURE_2D, buf->texture());
 	sPainter.drawRect2d(0, 0, buf->size().width(), buf->size().height());
 }
 
@@ -330,11 +329,11 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	sPainter.enableTexture2d(true);
-	glBindTexture(GL_TEXTURE_2D, buf->texture());
-	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-	glDisable(GL_BLEND);
+	QOpenGLFunctions* gl = sPainter.glFuncs();
+	GL(gl->glBindTexture(GL_TEXTURE_2D, buf->texture()));
+	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+	sPainter.setBlending(false);
 
 	sPainter.enableClientStates(true, true, true);
 	sPainter.setColorPointer(4, GL_FLOAT, displayColorList.constData());
@@ -342,11 +341,11 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	sPainter.setTexCoordPointer(2, GL_FLOAT, displayTexCoordList.constData());
 	for (int j=0;j<max_y;j++)
 	{
-		glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2);
+		GL(gl->glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2));
 		sPainter.drawFromArray(StelPainter::TriangleStrip, (max_x+1)*2, j*(max_x+1)*2, false);
 	}
 	sPainter.enableClientStates(false);
-	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
 

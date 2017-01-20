@@ -539,7 +539,14 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QComboBox" name="groupFilterCombo"/>
+          <widget class="QComboBox" name="groupFilterCombo">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLineEdit" name="lineEditSearch"/>

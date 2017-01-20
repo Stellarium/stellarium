@@ -23,11 +23,11 @@
 #include "ui_atmosphereDialog.h"
 
 AtmosphereDialog::AtmosphereDialog()
-	: refraction(NULL)
+	: StelDialog("Atmosphere")
+	, refraction(NULL)
 	, extinction(NULL)
 
 {
-	dialogName = "Atmosphere";
 	ui = new Ui_atmosphereDialogForm;
 }
 

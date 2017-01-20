@@ -38,6 +38,8 @@ StelLocaleMgr::StelLocaleMgr()
 	, timeFormat()
 	, dateFormat()	
 {
+	core = StelApp::getInstance().getCore();
+
 	// Load from file
 	QString path = StelFileMgr::findFile("data/countryCodes.dat");
 	if (path.isEmpty())
@@ -60,7 +62,7 @@ StelLocaleMgr::StelLocaleMgr()
 StelLocaleMgr::~StelLocaleMgr()
 {
 	delete skyTranslator;
-	skyTranslator=0;
+	skyTranslator=NULL;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
@@ -107,8 +109,6 @@ void StelLocaleMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
-	core = StelApp::getInstance().getCore();
 
 	if (conf->value("devel/convert_countries_list", false).toBool())
 		generateCountryList();
@@ -267,20 +267,26 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 		QString currTZ = core->getCurrentTimeZone();
 		QString timeZoneST = "";
 
-		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto"))
-			timeZoneST = "LMST";
+		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto") || currTZ.contains("LMST"))
+		{
+			// TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
+			timeZoneST = qc_("LMST", "solar time");
+		}
 
-		if (currTZ.contains("LMST") || currTZ.contains("LTST"))
-			timeZoneST = currTZ;
+		if (currTZ.contains("LTST"))
+		{
+			// TRANSLATORS: Local True Solar Time. Please use abbreviation.
+			timeZoneST = qc_("LTST", "solar time");
+		}
 
-		float shift = core->getUTCOffset(JD);
+		float shift = core->getUTCOffset(JD);		
 		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
 		if(shift<0.0f)
 			timeZone.append("-" + tz.toString("hh:mm"));
 		else
 			timeZone.append("+" + tz.toString("hh:mm"));
 
-		if (!timeZoneST.isEmpty())
+		if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
 			timeZone.append(" (" + timeZoneST + ")");
 
 		return timeZone;

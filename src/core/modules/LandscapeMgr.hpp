@@ -28,6 +28,7 @@
 
 #include <QMap>
 #include <QStringList>
+#include <QCache>
 
 class Atmosphere;
 class Cardinals;
@@ -41,7 +42,7 @@ class QSettings;
 //! \note
 //! The Bortle scale index setting was removed from this class, because it was duplicated
 //! from StelSkyDrawer, complicating code that changes it.
-//! It is now only in StelSkyDrawer and can be accessed with
+//! It is now only in StelSkyDrawer and can be accessed
 //! with \link StelSkyDrawer::getBortleScaleIndex getBortleScaleIndex \endlink
 //! and \link StelSkyDrawer::setBortleScaleIndex setBortleScaleIndex \endlink.
 //! Slots setAtmosphereBortleLightPollution and getAtmosphereBortleLightPollution
@@ -141,9 +142,10 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the landscape manager
 
-	//! Load a landscape based on a hash of parameters mirroring the landscape.ini
-	//! file and make it the current landscape.
-	bool loadLandscape(QMap<QString, QString>& param);
+	// Load a landscape based on a hash of parameters mirroring the landscape.ini
+	// file and make it the current landscape.
+	// GZ: This was declared, but not implemented(?)
+	//bool loadLandscape(QMap<QString, QString>& param);
 
 	//! Create a new landscape from the files which describe it.
 	//! Reads a landscape.ini file which is passed as the first parameter, determines
@@ -177,7 +179,7 @@ public slots:
 	//! this value explicitly to freeze it during image export. To unfreeze, call this again with any negative value.
 	void setAtmosphereAverageLuminance(const float overrideLuminance);
 
-	//! Return a map of landscape name to landscape ID (directory name).
+	//! Return a map of landscape names to landscape IDs (directory names).
 	QMap<QString,QString> getNameToDirMap() const;
 
 	//! Retrieve a list of the names of all the available landscapes in
@@ -196,7 +198,7 @@ public slots:
 	QStringList getUserLandscapeIDs() const;
 
 	//! Get the current landscape ID.
-	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
+	const QString getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
 	//! Emits currentLandscapeChanged() if the landscape changed (true returned)
 	//! @param id the ID of the new landscape
@@ -212,11 +214,36 @@ public slots:
 	//! @param changeLocationDuration the duration of the transition animation
 	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
 
+	//! Preload a landscape into cache.
+	//! @param id the ID of a landscape
+	//! @param replace true if existing landscape entry should be replaced (useful during development to reload after edit)
+	//! @return false if landscape could not be found, or if it already existed in cache and replace was false.
+	bool precacheLandscape(const QString& id, const bool replace=true);
+	//! Remove a landscape from the cache of landscapes.
+	//! @param id the ID of a landscape
+	//! @return false if landscape could not be found
+	bool removeCachedLandscape(const QString& id);
+	//! Set size of the landscape cache, in MB.
+	//! Default size is 100MB, or configured as [landscape/cache_size_mb] from config.ini.
+	//! The landscape sizes returned in Landscape::getMemorySize() are only approximate, but include image and texture sizes.
+	//! A big landscape may well take 150MB or more.
+	//! On a 32bit system, keep this rather small. On 64bit with 16GB RAM and no other tasks, 4GB is no problem.
+	//! Modern GPUs may have 4 or even 8GB of dedicated texture memory. Most of this may be filled with landscape textures.
+	//! Example: a museum installation with 20 large (16384x2048) old_stype landscapes can require up to 3.5GB. Allow 4GB cache,
+	//! and the system will never have to load a landscape during the show when all have been preloaded.
+	void setCacheSize(int mb) { landscapeCache.setMaxCost(mb);}
+	//! Retrieve total size of cache (MB).
+	int getCacheSize() const {return landscapeCache.maxCost();}
+	//! Retrieve sum of currently used memory in cache (MB, approximate)
+	int getCacheFilledSize() const {return landscapeCache.totalCost();}
+	//! Return number of landscapes already in the cache.
+	int getCacheCount() const {return landscapeCache.count();}
+
 	//! Get the current landscape object.
 	Landscape* getCurrentLandscape() const { return landscape; }
 
 	//! Get the default landscape ID.
-	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
+	const QString getDefaultLandscapeID() const {return defaultLandscapeID;}
 	//! Change the default landscape to the landscape with the ID specified.
 	//! @param id the ID of the landscape to use by default
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
@@ -505,16 +532,24 @@ private:
 	//! Indicate auto-enable atmosphere for planets with atmospheres in location window
 	bool flagAtmosphereAutoEnabling;
 
-	// The ID of the currently loaded landscape
+	//! The ID of the currently loaded landscape
 	QString currentLandscapeID;
 
-	// The ID of the default landscape
+	//! The ID of the default landscape
 	QString defaultLandscapeID;
 
 	//! List of the IDs of the landscapes packaged by default with Stellarium.
 	//! (So that they can't be removed.)
 	QStringList packagedLandscapeIDs;
 
+	//! QCache of landscapes kept in memory for faster access, esp. when frequently switching between several big landscapes.
+	//! Example: a 16384-size old_style landscape takes about 10 seconds to load. Kept in cache, it is back instantly.
+	//! Of course, this requires lots of RAM and GPU texture memory, but in the age of 64bit CPUs and 4GB and more GPU
+	//! texture memory, it is no problem to keep even 20 or more landscapes.
+	//! This is esp. useful in a context of automated setup (museum show or such) where a list of landscapes is preloaded
+	//! at system start (e.g. in the startup.ssc script) and then retrieved while script is running.
+	//! The key is just the LandscapeID.
+	QCache<QString,Landscape> landscapeCache;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

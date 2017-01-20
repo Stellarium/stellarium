@@ -20,13 +20,7 @@
 
 #include <QtGlobal>
 
-#if !defined(Q_OS_WIN)
-//exclude StelOpenGL here on windows because of conflicts with GLFuncs.hpp otherwise (uses QOpenGLFunctions_1_0 directly)
-#include "StelOpenGL.hpp"
-#endif
-//needs to be included before StelOpenGL on Windows
 #include "GLFuncs.hpp"
-
 #include "S3DRenderer.hpp"
 #include "S3DScene.hpp"
 
@@ -47,18 +41,11 @@
 #include <stdexcept>
 #include <cmath>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLFramebufferObject>
 #include <QLoggingCategory>
 
 Q_LOGGING_CATEGORY(scenery3d, "stel.plugin.scenery3d")
 
-#define GET_GLERROR()                                   \
-{                                                       \
-    GLenum err = glGetError();                          \
-    if (err != GL_NO_ERROR) {                           \
-    qCWarning(scenery3d,"[line %d] GL Error: %d",__LINE__, err);   \
-    }                                                   \
-}
+#define GET_GLERROR() StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
@@ -91,7 +78,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
       needsCubemapUpdate(true), needsMovementUpdate(false), lazyInterval(2.0), lastCubemapUpdate(0.0), lastCubemapUpdateRealTime(0), lastMovementEndRealTime(0),
       cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), dominantFace(0), secondDominantFace(1), cubeFBO(0), cubeSideFBO(), cubeMappingCreated(false),
-      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
+      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), transformedCubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
       lightOrthoNear(0.1f), lightOrthoFar(1000.0f), parallaxScale(0.015f)
 {
 	#ifndef NDEBUG
@@ -111,6 +98,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
 	shaderParameters.geometryShader = false;
 	shaderParameters.torchLight = false;
 	shaderParameters.frustumSplits = 0;
+	shaderParameters.hwShadowSamplers = false;
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
@@ -200,7 +188,7 @@ void S3DRenderer::setupPassUniforms(QOpenGLShaderProgram *shader)
 		{
 			//send size of light ortho for each frustum
 			loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_LIGHTORTHOSCALE);
-			shader->setUniformValueArray(loc,shadowFrustumSize.constData(),4);
+			shader->setUniformValueArray(loc,shadowFrustumSize.constData(),shaderParameters.frustumSplits);
 		}
 	}
 
@@ -795,7 +783,7 @@ bool S3DRenderer::renderShadowMaps()
 
 
 	//Unbind
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = altAzProjector->getViewport();
@@ -1210,7 +1198,7 @@ void S3DRenderer::generateCubeMap()
 	}
 
 	//cubemap fbo must be released
-	glBindFramebuffer(GL_FRAMEBUFFER,0);
+	glBindFramebuffer(GL_FRAMEBUFFER,defaultFBO);
 
 	//reset GL state
 	glDepthMask(GL_FALSE);
@@ -1259,10 +1247,15 @@ void S3DRenderer::drawFromCubeMap()
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
 	else // 2D tex coords are stored in the same buffer, but with an offset
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
-	cubeVertexBuffer.release();
 	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
-	cubeShader->setAttributeArray(ShaderMgr::ATTLOC_VERTEX, reinterpret_cast<const GLfloat*>(transformedCubeVertices.constData()),3);
+	cubeVertexBuffer.release();
+
+	//upload transformed vertex data
+	transformedCubeVertexBuffer.bind();
+	transformedCubeVertexBuffer.allocate(transformedCubeVertices.constData(), transformedCubeVertices.size() * sizeof(Vec3f));
+	cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_VERTEX, GL_FLOAT, 0,3);
 	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
+	transformedCubeVertexBuffer.release();
 
 	glEnable(GL_BLEND);
 	//note that GL_ONE is required here for correct blending (see drawArrays)
@@ -1696,7 +1689,9 @@ void S3DRenderer::determineFeatureSupport()
 
 void S3DRenderer::init()
 {
+	initializeOpenGLFunctions();	
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	Q_ASSERT(ctx);
 
 #ifndef QT_OPENGL_ES_2
 	//initialize additional functions needed and not provided through StelOpenGL
@@ -1712,6 +1707,8 @@ void S3DRenderer::init()
 
 	cubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	cubeVertexBuffer.create();
+	transformedCubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StreamDraw);
+	transformedCubeVertexBuffer.create();
 	cubeIndexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	cubeIndexBuffer.create();
 
@@ -2009,7 +2006,7 @@ bool S3DRenderer::initCubemapping()
 	}
 
 	//unbind last framebuffer
-	glBindFramebuffer(GL_FRAMEBUFFER,0);
+	glBindFramebuffer(GL_FRAMEBUFFER,defaultFBO);
 
 	//initialize cube rotations... found by trial and error :)
 	QMatrix4x4 stackBase;
@@ -2273,7 +2270,23 @@ bool S3DRenderer::initShadowmapping()
 			//for OpenGL ES2, type has to be UNSIGNED_SHORT or UNSIGNED_INT for depth textures, desktop does probably not care
 			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
 
-			GLint filter = (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
+			//we use hardware-accelerated depth compare mode, unless pcss is used
+			shaderParameters.hwShadowSamplers = false;
+			//NOTE: cant use depth compare mode on ES2
+			if(!pcssEnabled)
+			{
+#ifndef QT_OPENGL_ES_2
+				if(!isEs)
+				{
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+					shaderParameters.hwShadowSamplers = true;
+				}
+#endif
+			}
+
+			//IF we support hw shadow sampling, then we may enable linear filtering, otherwise filtering depth values directly would not make much sense
+			GLint filter = shaderParameters.hwShadowSamplers && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH_HARDWARE) ? GL_LINEAR : GL_NEAREST;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
@@ -2289,18 +2302,6 @@ bool S3DRenderer::initShadowmapping()
 				glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 			}
 #endif
-			//we use hardware-accelerated depth compare mode, unless pcss is used
-			//NOTE: cant use depth compare mode on ES2
-			if(!pcssEnabled)
-			{
-#ifndef QT_OPENGL_ES_2
-				if(!isEs)
-				{
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-				}
-#endif
-			}
 
 			//Attach the depthmap to the Buffer
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
@@ -2329,7 +2330,7 @@ bool S3DRenderer::initShadowmapping()
 		}
 
 		//Done. Unbind and switch to normal texture unit 0
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 		glActiveTexture(GL_TEXTURE0);
 
 		qDebug(scenery3d)<<"shadowmapping initialized";
@@ -2355,6 +2356,8 @@ void S3DRenderer::draw(StelCore* core, S3DScene &scene)
 		invalidateCubemap();
 	}
 
+	//find out the default FBO
+	defaultFBO = StelApp::getInstance().getDefaultFBO();
 	currentScene = &scene;
 
 	//reset render statistic
@@ -2363,11 +2366,6 @@ void S3DRenderer::draw(StelCore* core, S3DScene &scene)
 	requiresCubemap = core->getCurrentProjectionType() != StelCore::ProjectionPerspective;
 	//update projector from core
 	altAzProjector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-
-	//perform Z-sorting for correct transparency
-	//this uses the object's centroids for sorting, so the OBJ must be created correctly
-	//TODO make this work with new OBJ loader
-	//objModel->transparencyDepthSort(-absolutePosition.toVec3f());
 
 	if(requiresCubemap)
 	{

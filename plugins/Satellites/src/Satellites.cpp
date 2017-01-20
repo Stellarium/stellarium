@@ -294,7 +294,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getNameI18n().toUpper() == nameI18n)
+			if (sat->getNameI18n().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
@@ -317,7 +317,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	{
 		if (sat->initialized && sat->displayed)
 		{
-			if (sat->getEnglishName().toUpper() == englishName)
+			if (sat->getEnglishName().toUpper() == objw)
 				return qSharedPointerCast<StelObject>(sat);
 		}
 	}
@@ -803,6 +803,9 @@ QVariantMap Satellites::createDataMap(void)
 		if (satMap["stdMag"].toFloat() == 99.f)
 			satMap.remove("stdMag");
 
+		if (satMap["status"].toInt() == Satellite::StatusUnknown)
+			satMap.remove("status");
+
 		sats[sat->id] = satMap;		
 	}
 	map["satellites"] = sats;
@@ -911,6 +914,8 @@ bool Satellites::add(const TleData& tleData)
 	satProperties.insert("orbitVisible", false);
 	if (qsMagList.contains(tleData.id))
 		satProperties.insert("stdMag", qsMagList[tleData.id]);
+	if (tleData.status != Satellite::StatusUnknown)
+		satProperties.insert("status", tleData.status);
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
@@ -1372,6 +1377,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				// Update the name if it has been changed in the source list
 				sat->name = newTle.name;
 
+				// Update operational status
+				sat->status = newTle.status;
+
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
 				updatedCount++;
@@ -1463,11 +1471,47 @@ void Satellites::parseTleFile(QFile& openFile,
 			lastData = TleData();
 			lastData.addThis = addFlagValue;
 			
+			// The thing in square brackets after the name is actually
+			// Celestrak's "status code". Parse it!
+			QStringList codes;
+			codes << "+" << "-" << "P" << "B" << "S" << "X" << "D" << "?";
+
+			QRegExp statusRx("\\s*\\[(\\D{1})\\]\\s*$");
+			statusRx.setMinimal(true);
+			if (statusRx.indexIn(line)>-1)
+			{
+				lastData.status = Satellite::StatusUnknown;
+				switch (codes.indexOf(statusRx.capturedTexts().at(1).toUpper()))
+				{
+					case 0:
+						lastData.status = Satellite::StatusOperational;
+						break;
+					case 1:
+						lastData.status = Satellite::StatusNonoperational;
+						break;
+					case 2:
+						lastData.status = Satellite::StatusPartiallyOperational;
+						break;
+					case 3:
+						lastData.status = Satellite::StatusStandby;
+						break;
+					case 4:
+						lastData.status = Satellite::StatusSpare;
+						break;
+					case 5:
+						lastData.status = Satellite::StatusExtendedMission;
+						break;
+					case 6:
+						lastData.status = Satellite::StatusDecayed;
+						break;
+					default:
+						lastData.status = Satellite::StatusUnknown;
+				}
+			}
+
 			//TODO: We need to think of some kind of ecaping these
 			//characters in the JSON parser. --BM
-			// The thing in square brackets after the name is actually
-			// Celestrak's "status code". Parse automatically? --BM
-			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove things in square brackets
+			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
 			lastData.name = line;
 		}
 		else
@@ -1487,8 +1531,7 @@ void Satellites::parseTleFile(QFile& openFile,
 				
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
-				if (!lastData.name.isEmpty() &&
-						!lastData.first.isEmpty())
+				if (!lastData.name.isEmpty() &&	!lastData.first.isEmpty())
 				{
 					// Some satellites can be listed in multiple files,
 					// and only some of those files may be marked for adding,
@@ -1559,14 +1602,12 @@ void Satellites::draw(StelCore* core)
 	if (core->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return;
 
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
 	StelPainter painter(prj);
 	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
+	painter.setBlending(true);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	foreach (const SatelliteP& sat, satellites)
@@ -1596,9 +1637,7 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.setBlending(true);
 
 		// Size on screen
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
@@ -1652,6 +1691,7 @@ bool Satellites::isValidRangeDates() const
 		return true;
 }
 
+#ifdef _OLD_IRIDIUM_PREDICTIONS
 IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 {
 	StelCore* pcore = StelApp::getInstance().getCore();
@@ -1722,6 +1762,171 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 
 	return predictions;
 }
+#else
+
+struct SatDataStruct {
+	double nextJD;
+	double angleToSun;
+	double altitude;
+	double azimuth;
+	double v;
+};
+
+IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
+{
+	StelCore* pcore = StelApp::getInstance().getCore();
+	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+
+	double currentJD = pcore->getJD(); // save current JD
+	bool isTimeNow = pcore->getIsTimeNow();
+
+	double predictionJD = currentJD - 1.;  //  investigate what's seen recently// yesterday
+	double predictionEndJD = currentJD + 7.; // 7 days interval
+	pcore->setJD(predictionJD);
+
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+
+	IridiumFlaresPredictionList predictions;
+
+// create a lіst of Iridiums
+	QMap<SatelliteP,SatDataStruct> iridiums;
+	SatDataStruct sds;
+	double nextJD = predictionJD + 1./24;
+
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat.data()->getEnglishName().startsWith("IRIDIUM"))
+		{
+			Vec3d pos = sat.data()->getAltAzPosApparent(pcore);
+			sds.angleToSun = sat.data()->sunReflAngle;
+			sds.altitude = pos.latitude();
+			sds.azimuth = pos.longitude();
+			sds.v = sat.data()->getVMagnitude(pcore);
+			double t;
+			if (sds.altitude<0)
+				t = qMax(-sds.altitude, 1.) / 2880;
+			else
+			if (sds.angleToSun>0)
+				t = qMax(sds.angleToSun, 1.) / (2*86400);
+			else
+			{
+				//qDebug() << "IRIDIUM warn: alt, angleToSun = " <<sds.altitude << sds.angleToSun;
+				t = 0.25/1440; // we should never be here, but assuming 1/4 minute to leave this
+			}
+
+			sds.nextJD = predictionJD + t;
+			iridiums.insert(sat, sds);
+			//qDebug() << sat.data()->getEnglishName() << ": "
+			//		 << sds.altitude
+			//		 << sds.azimuth
+			//		 << sds.angleToSun
+			//		 << sds.v
+			//		 << StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
+			//			;
+			if (nextJD>sds.nextJD)
+				nextJD = sds.nextJD;
+		}
+	}
+	predictionJD = nextJD;
+
+	while (predictionJD<predictionEndJD)
+	{
+		nextJD = predictionJD + 1./24;
+		pcore->setJD(predictionJD);
+
+		ssystem->getEarth().data()->computePosition(predictionJD);
+		pcore->update(0);
+
+		QMap<SatelliteP,SatDataStruct>::iterator i = iridiums.begin();
+		while (i != iridiums.end())
+		{
+			if ( i.value().nextJD<=predictionJD)
+			{
+
+				i.key().data()->update(0);
+
+				double v = i.key().data()->getVMagnitude(pcore);
+				bool flareFound = false;
+				if (v > i.value().v)
+				{
+					if (i.value().v < 1. // brighness limit
+					 && i.value().angleToSun>0.
+					 && i.value().angleToSun<2.)
+					{
+						IridiumFlaresPrediction flare;
+						flare.datetime = StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f);
+						flare.satellite = i.key().data()->getEnglishName();
+						flare.azimuth   = i.value().azimuth;
+						if (useSouthAzimuth)
+						{
+							flare.azimuth += M_PI;
+							if (flare.azimuth > M_PI*2)
+								flare.azimuth -= M_PI*2;
+						}
+						flare.altitude  = i.value().altitude;
+						flare.magnitude = i.value().v;
+
+						predictions.append(flare);
+						flareFound = true;
+						//qDebug() << "Flare:" << flare.datetime << flare.satellite;
+
+					}
+				}
+
+/*				qDebug() << QString::asprintf("%20s  alt:%6.1f  az:%6.1f  sun:%6.1f  v:%6.1f",
+											 i.key().data()->getEnglishName().toStdString(),
+											 i.value().altitude*180/M_PI,
+											 i.value().azimuth*180/M_PI,
+											 i.value().angleToSun,
+											 v
+											 )
+						 <<  StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
+							 ;
+*/
+
+				Vec3d pos = i.key().data()->getAltAzPosApparent(pcore);
+
+				i.value().v = flareFound ?  17 : v; // block extra report
+				i.value().altitude = pos.latitude();
+				i.value().azimuth = M_PI - pos.longitude();
+				i.value().angleToSun = i.key().data()->sunReflAngle;
+
+
+
+
+				double t;
+				if (flareFound)
+					t = 1./24;
+				else
+				if (i.value().altitude<0)
+					t = qMax((-i.value().altitude)*57,1.) / 5600;
+				else
+				if (i.value().angleToSun>0)
+					t = qMax(i.value().angleToSun,1.) / (4*86400);
+				else
+				{
+					//qDebug() << "IRIDIUM warn2: alt, angleToSun = " <<i.value().altitude << i.value().angleToSun;
+					t = 0.25/1440; // we should never be here, but assuming 1/4 minute to leave this
+				}
+				i.value().nextJD = predictionJD + t;
+				if (nextJD>i.value().nextJD)
+					nextJD = i.value().nextJD;
+			}
+			++i;
+		}
+		predictionJD = nextJD;
+	}
+
+	Satellite::timeShift = 0.;
+	if (isTimeNow)
+		pcore->setTimeNow();
+	else
+		pcore->setJD(currentJD);
+
+	return predictions;
+}
+#endif
+
 
 void Satellites::translations()
 {

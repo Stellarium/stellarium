@@ -131,16 +131,14 @@ SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("Search", parent)
 	, simbadReply(NULL)
+	, flagHasSelectedText(false)
 {
-	dialogName = "Search";
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
-
-	flagHasSelectedText = false;
 
 	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
@@ -535,8 +533,7 @@ void SearchDialog::manualPositionChanged()
 	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, aimUp, 0.05);
-	if (useLockPosition)
-		mvmgr->setFlagLockEquPos(true);
+	mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
 void SearchDialog::onSearchTextChanged(const QString& text)
@@ -564,21 +561,24 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 	} else {
 		if (useSimbad)
 		{
-			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 3);
+			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 4);
 			onSimbadStatusChanged();
 			connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		}
 
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
-		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords, false);
-			matches += objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords, true);
-			matches += objectMgr->listMatchingObjects(greekText, (15 - matches.size()), useStartOfWords, false);
-			matches += objectMgr->listMatchingObjects(greekText, (15 - matches.size()), useStartOfWords, true);
-		} else {
-			matches = objectMgr->listMatchingObjects(trimmedText, 10, useStartOfWords, false);
-			matches += objectMgr->listMatchingObjects(trimmedText, 10, useStartOfWords, true);
+		if(greekText != trimmedText)
+		{
+			matches  = objectMgr->listMatchingObjects(trimmedText, 8, useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(trimmedText, 8, useStartOfWords, true);
+			matches += objectMgr->listMatchingObjects(greekText, (18 - matches.size()), useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(greekText, (18 - matches.size()), useStartOfWords, true);
+		}
+		else
+		{
+			matches  = objectMgr->listMatchingObjects(trimmedText, 13, useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(trimmedText, 13, useStartOfWords, true);
 		}
 
 		// remove possible duplicates from completion list
@@ -657,8 +657,7 @@ void SearchDialog::greekLetterClicked()
 
 void SearchDialog::gotoObject()
 {
-	QString name = ui->completionLabel->getSelected();
-	gotoObject(name);
+	gotoObject(ui->completionLabel->getSelected());
 }
 
 void SearchDialog::gotoObject(const QString &nameI18n)
@@ -736,8 +735,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 
 void SearchDialog::gotoObject(QListWidgetItem *item)
 {
-	QString objName = item->text();
-	gotoObject(objName);
+	gotoObject(item->text());
 }
 
 void SearchDialog::searchListChanged(const QString &newText)

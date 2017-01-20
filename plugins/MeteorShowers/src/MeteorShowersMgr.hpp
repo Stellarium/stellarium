@@ -325,7 +325,7 @@ private:
 	QString m_url;
 	QDateTime m_lastUpdate;
 	DownloadStatus m_statusOfLastUpdate;
-	QNetworkAccessManager* m_downloadMgr;
+    QNetworkAccessManager* m_downloadMgr;
 	class StelProgressController* m_progressBar;
 
 	void createActions();
