@@ -208,7 +208,7 @@ public:
 	//! Get albedo
 	double getAlbedo(void) const { return albedo; }
 
-	const QString& getTextMapName() const {return texMapName;}	
+	const QString& getTextMapName() const {return texMapName;}
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
 	PlanetType getPlanetType() const {return pType;}
 
@@ -310,8 +310,8 @@ public:
 	double deltaOrbitJDE;
 	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
-					 // the end: good for elliptical orbits, bad for parabolic
-					 // and hyperbolic orbits
+	// the end: good for elliptical orbits, bad for parabolic
+	// and hyperbolic orbits
 
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
@@ -459,7 +459,7 @@ protected:
 	double radius;                   // Planet radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system
-					 // centered on the parent Planet
+	// centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
 	Vec3f haloColor;                 // exclusively used for drawing the planet halo
@@ -469,9 +469,9 @@ protected:
 	float outgas_intensity;          // The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
-					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+	// Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis.
-					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
+	// For Earth, this should be Greenwich Mean Sidereal Time GMST.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
@@ -482,7 +482,7 @@ protected:
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
-					 // it is used for sorting while drawing
+	// it is used for sorting while drawing
 	float sphereScale;               // Artificial scaling for better viewing
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
@@ -497,17 +497,17 @@ protected:
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
-	bool halo;                       // Does the planet have a halo?	
+	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
 
 	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
-    QOpenGLFunctions* gl;
+	QOpenGLFunctions* gl;
 
 	static bool shaderError;		// True if loading shaders caused errors
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex;	
+	static StelTextureSP hintCircleTex;
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 
@@ -566,7 +566,7 @@ private:
 		QVector<const Planet*> shadowCandidates;
 		QMatrix4x4 shadowCandidatesData;
 		Vec3d eyePos;
-    };
+	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
 	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const;
