@@ -397,6 +397,8 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->OAGPrismW, 10);
 	ccdMapper->addMapping(ui->OAGDist, 11);
 	ccdMapper->addMapping(ui->OAGPrismPA, 12);
+	ccdMapper->addMapping(ui->ccdBinningX, 13);
+	ccdMapper->addMapping(ui->ccdBinningY, 14);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
