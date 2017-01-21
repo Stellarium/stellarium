@@ -722,8 +722,8 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 					QString snamecap = sname.toUpper();
 					additionalNamesMap[hip] = sname;
 					additionalNamesMapI18n[hip] = sname;
-					additionalNamesIndex.remove(englishNameCap);
-					additionalNamesIndexI18n.remove(englishNameCap);
+					additionalNamesIndex.remove(additionalNamesIndex.key(hip));
+					additionalNamesIndexI18n.remove(additionalNamesIndexI18n.key(hip));
 					additionalNamesIndex[snamecap] = hip;
 					additionalNamesIndexI18n[snamecap] = hip;
 				}
@@ -1325,12 +1325,25 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it.value());
 	}
 
-	// Search by I18n additional common names	
+	// Search by I18n additional common names
+	QMap<QString, int> splittedAdditionalNamesIndexI18n;
 	QMap<QString, int>::iterator ita;
 	for (ita = additionalNamesIndexI18n.begin(); ita != additionalNamesIndexI18n.end(); ++ita)
 	{
-		if (ita.key().contains(objw, Qt::CaseInsensitive))
-			return searchHP(ita.value());
+		if (ita.key().contains(" - ", Qt::CaseInsensitive))
+		{
+			const int i = ita.value();
+			QStringList a = ita.key().split(" - ");
+			foreach(const QString &str, a)
+				splittedAdditionalNamesIndexI18n[str] = i;
+		}
+		else
+			splittedAdditionalNamesIndexI18n[ita.key()] = ita.value();
+	}
+	QMap<QString,int>::const_iterator itsa(splittedAdditionalNamesIndexI18n.find(objw));
+	if (itsa!=splittedAdditionalNamesIndexI18n.end())
+	{
+		return searchHP(itsa.value());
 	}
 
 	// Search by sci name
@@ -1418,11 +1431,24 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by English additional common names
+	QMap<QString, int> splittedAdditionalNamesIndex;
 	QMap<QString, int>::iterator ita;
 	for (ita = additionalNamesIndex.begin(); ita != additionalNamesIndex.end(); ++ita)
 	{
-		if (ita.key().contains(objw, Qt::CaseInsensitive))
-			return searchHP(ita.value());
+		if (ita.key().contains(" - ", Qt::CaseInsensitive))
+		{
+			const int i = ita.value();
+			QStringList a = ita.key().split(" - ");
+			foreach(const QString &str, a)
+				splittedAdditionalNamesIndex[str] = i;
+		}
+		else
+			splittedAdditionalNamesIndex[ita.key()] = ita.value();
+	}
+	QMap<QString,int>::const_iterator itsa(splittedAdditionalNamesIndex.find(objw));
+	if (itsa!=splittedAdditionalNamesIndex.end())
+	{
+		return searchHP(itsa.value());
 	}
 
 	// Search by sci name
@@ -1525,7 +1551,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 				}
 			}
 		}
-
 	}
 
 	// Search for sci names
