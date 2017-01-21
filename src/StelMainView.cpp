@@ -1317,7 +1317,19 @@ void StelMainView::doScreenshot(void)
 #ifdef USE_OLD_QGLWIDGET
 	QImage im = glWidget->grabFrameBuffer();
 #else
-	QImage im = glWidget->grabFramebuffer();
+	glWidget->makeCurrent();
+	QOpenGLFramebufferObjectFormat fbFormat;
+	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width(), stelScene->height(), fbFormat);
+	fbObj->bind();
+	QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
+	QPainter painter(&fbObjPaintDev);
+	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+	stelScene->render(&painter);
+	painter.end();
+	QImage im = fbObj->toImage();
+	fbObj->release();
+	delete fbObj;
 #endif
 
 	if (flagInvertScreenShotColors)
