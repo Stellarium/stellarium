@@ -719,13 +719,10 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				if (additionalNamesMap.find(hip)!=additionalNamesMap.end())
 				{
 					QString sname = additionalNamesMap[hip].append(" - " + englishCommonName);
-					QString snamecap = sname.toUpper();
 					additionalNamesMap[hip] = sname;
 					additionalNamesMapI18n[hip] = sname;
-					additionalNamesIndex.remove(additionalNamesIndex.key(hip));
-					additionalNamesIndexI18n.remove(additionalNamesIndexI18n.key(hip));
-					additionalNamesIndex[snamecap] = hip;
-					additionalNamesIndexI18n[snamecap] = hip;
+					additionalNamesIndex[englishNameCap] = hip;
+					additionalNamesIndexI18n[englishNameCap] = hip;
 				}
 				else
 				{
@@ -1250,11 +1247,12 @@ void StarMgr::updateI18n()
 		QStringList tn;
 		foreach(const QString &str, a)
 		{
-			tn << trans.qtranslate(str);
+			QString tns = trans.qtranslate(str);
+			tn << tns;
+			additionalNamesIndexI18n[tns.toUpper()] = i;
 		}
 		const QString r = tn.join(" - ");
 		additionalNamesMapI18n[i] = r;
-		additionalNamesIndexI18n[r.toUpper()] = i;
 	}
 }
 
@@ -1326,24 +1324,10 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by I18n additional common names
-	QMap<QString, int> splittedAdditionalNamesIndexI18n;
-	QMap<QString, int>::iterator ita;
-	for (ita = additionalNamesIndexI18n.begin(); ita != additionalNamesIndexI18n.end(); ++ita)
+	QMap<QString,int>::const_iterator ita(additionalNamesIndexI18n.find(objw));
+	if (ita!=additionalNamesIndexI18n.end())
 	{
-		if (ita.key().contains(" - ", Qt::CaseInsensitive))
-		{
-			const int i = ita.value();
-			QStringList a = ita.key().split(" - ");
-			foreach(const QString &str, a)
-				splittedAdditionalNamesIndexI18n[str] = i;
-		}
-		else
-			splittedAdditionalNamesIndexI18n[ita.key()] = ita.value();
-	}
-	QMap<QString,int>::const_iterator itsa(splittedAdditionalNamesIndexI18n.find(objw));
-	if (itsa!=splittedAdditionalNamesIndexI18n.end())
-	{
-		return searchHP(itsa.value());
+		return searchHP(ita.value());
 	}
 
 	// Search by sci name
@@ -1431,24 +1415,10 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by English additional common names
-	QMap<QString, int> splittedAdditionalNamesIndex;
-	QMap<QString, int>::iterator ita;
-	for (ita = additionalNamesIndex.begin(); ita != additionalNamesIndex.end(); ++ita)
+	QMap<QString,int>::const_iterator ita(additionalNamesIndex.find(objw));
+	if (ita!=additionalNamesIndex.end())
 	{
-		if (ita.key().contains(" - ", Qt::CaseInsensitive))
-		{
-			const int i = ita.value();
-			QStringList a = ita.key().split(" - ");
-			foreach(const QString &str, a)
-				splittedAdditionalNamesIndex[str] = i;
-		}
-		else
-			splittedAdditionalNamesIndex[ita.key()] = ita.value();
-	}
-	QMap<QString,int>::const_iterator itsa(splittedAdditionalNamesIndex.find(objw));
-	if (itsa!=splittedAdditionalNamesIndex.end())
-	{
-		return searchHP(itsa.value());
+		return searchHP(ita.value());
 	}
 
 	// Search by sci name
