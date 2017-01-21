@@ -219,7 +219,7 @@ void ArchaeoLines::init()
 
 	StelApp& app = StelApp::getInstance();
 
-	// Create action for enable/disable & hook up signals	
+	// Create action for enable/disable & hook up signals
 	QString section=N_("ArchaeoLines");
 	addAction("actionShow_ArchaeoLines",         section, N_("ArchaeoLines"), "enabled", "Ctrl+U");
 	addAction("actionShow_ArchaeoLines_dialog",  section, N_("Show settings dialog"),  configDialog,  "visible",           "Ctrl+Shift+U");
@@ -234,7 +234,7 @@ void ArchaeoLines::init()
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
-						       "actionShow_Archaeo_Lines");
+						       "actionShow_ArchaeoLines");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
