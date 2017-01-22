@@ -24,7 +24,7 @@
 #include <QSettings>
 #include <QtMath>
 
-#include <math.h>
+#include <cmath>
 
 #define RADIAN_TO_DEGREES 57.2957795131
 
