@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-20 18:26+0700\n"
+"POT-Creation-Date: 2017-01-23 00:29+0700\n"
 "PO-Revision-Date: 2017-01-14 14:03+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-21 05:33+0000\n"
+"X-Launchpad-Export-Date: 2017-01-23 05:27+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -133,12 +133,12 @@ msgstr "Звышґаляктычны экватар"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:672 src/ui_viewDialog.h:2142
 msgid "O./C. longitude"
-msgstr "Даўгата С/З"
+msgstr "Даўгата П./З."
 
 #: src/core/modules/GridLinesMgr.cpp:676 src/core/modules/GridLinesMgr.cpp:1189
 #: src/ui_viewDialog.h:2187
 msgid "Prime Vertical"
-msgstr "Галоўная вэртыкаль"
+msgstr "Першы вертыкал"
 
 #: src/core/modules/GridLinesMgr.cpp:680
 msgid "Equinoctial Colure"
@@ -226,7 +226,7 @@ msgstr "Лінія экліптыкі J2000"
 #: src/core/modules/GridLinesMgr.cpp:1176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
-msgstr "Лінія экватару"
+msgstr "Лінія экватара"
 
 #: src/core/modules/GridLinesMgr.cpp:1177
 msgid "Equator J2000 line"
@@ -235,12 +235,12 @@ msgstr "Лінія экватара J2000"
 #: src/core/modules/GridLinesMgr.cpp:1178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
-msgstr "Лінія мэрыдыяну"
+msgstr "Лінія мередыяна"
 
 #: src/core/modules/GridLinesMgr.cpp:1179
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:393
 msgid "Horizon line"
-msgstr "Лінія гарызонту"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1180
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
@@ -275,11 +275,11 @@ msgstr "Звышґаляктычны экватар"
 #: src/core/modules/GridLinesMgr.cpp:1187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Opposition/conjunction longitude line"
-msgstr "Лінія даўгаты супрацьстаяньня/злучэньня"
+msgstr "Лінія даўгаты процістаяння/злучэння"
 
 #: src/core/modules/GridLinesMgr.cpp:1188
 msgid "Precession Circles"
-msgstr "Акружыны прэцэсіі"
+msgstr "Акружнасці прэцэсіі"
 
 #: src/core/modules/GridLinesMgr.cpp:1190
 msgid "Colure Lines"
@@ -307,7 +307,7 @@ msgstr "Экліптычныя полюсы (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1196
 msgid "Ecliptic poles"
-msgstr "Экліптычныя полюсы экліптыкі"
+msgstr "Полюсы экліптыкі"
 
 #: src/core/modules/GridLinesMgr.cpp:1197 src/ui_viewDialog.h:2192
 msgid "Galactic poles"
@@ -452,7 +452,7 @@ msgstr "кпк"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:283
 msgid "ly"
-msgstr "сьв.г."
+msgstr "св.г."
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:290
@@ -551,7 +551,7 @@ msgstr "малая цэнтральная канцэнтрацыя зорак"
 #: src/core/modules/Nebula.cpp:915
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
-msgstr "няма заўважнай канцэнрацыі зорак"
+msgstr "няма заўважнай канцэнтрацыі зорак"
 
 #: src/core/modules/Nebula.cpp:918
 msgctxt "Trumpler's Concentration Class"
@@ -748,15 +748,15 @@ msgstr "квазар"
 
 #: src/core/modules/Nebula.cpp:1114
 msgid "star cluster"
-msgstr "зоркавае скопішча"
+msgstr "зорнае скопішча"
 
 #: src/core/modules/Nebula.cpp:1117
 msgid "open star cluster"
-msgstr "адкрытае скопішча"
+msgstr "расеянае скопішча"
 
 #: src/core/modules/Nebula.cpp:1120
 msgid "globular star cluster"
-msgstr "шарападобнае скопішча"
+msgstr "шаравое скопішча"
 
 #: src/core/modules/Nebula.cpp:1123
 msgid "nebula"
@@ -796,15 +796,15 @@ msgstr "рэшткі звышновай"
 
 #: src/core/modules/Nebula.cpp:1150
 msgid "stellar association"
-msgstr "зоркавая асацыяцыя"
+msgstr "зорная асацыяцыя"
 
 #: src/core/modules/Nebula.cpp:1153
 msgid "star cloud"
-msgstr "Зоркавае воблака"
+msgstr "зорнае воблака"
 
 #: src/core/modules/Nebula.cpp:1156
 msgid "interstellar matter"
-msgstr "міжзоркавая матэрыя"
+msgstr "міжзорная матэрыя"
 
 #: src/core/modules/Nebula.cpp:1159
 msgid "emission object"
@@ -812,7 +812,7 @@ msgstr "эмісійны аб'ект"
 
 #: src/core/modules/Nebula.cpp:1162
 msgid "BL Lac object"
-msgstr "лацэтыда"
+msgstr "лацэртыда"
 
 #: src/core/modules/Nebula.cpp:1165
 msgid "blazar"
@@ -871,13 +871,13 @@ msgstr "Абсалютная велічыня: %1"
 #: src/core/modules/Comet.cpp:195
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "Адлегласьць ад Сонца: %1 АА (%2 км)"
+msgstr "Адлегласьць ад Сонца: %1 а.а. (%2 км)"
 
 #: src/core/modules/Planet.cpp:289 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Адлегласьць ад Сонца: %1 АА (%2 млн км)"
+msgstr "Адлегласьць ад Сонца: %1 а.а. (%2 млн км)"
 
 #: src/core/modules/Planet.cpp:299 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:212
@@ -889,7 +889,7 @@ msgstr "Адлегласьць: %1 а.а. (%2 км)"
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr "Адлегласьць: %1 АА (%2 млн км)"
+msgstr "Адлегласьць: %1 а.а. (%2 млн км)"
 
 #: src/core/modules/Planet.cpp:320 src/core/modules/Planet.cpp:324
 #, qt-format
@@ -911,21 +911,21 @@ msgstr "Бачны дыямэтар: %1"
 #: src/core/modules/Planet.cpp:363 src/core/modules/MinorPlanet.cpp:285
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr "Зоркавы пэрыяд: %1 дзён (%2 a)"
+msgstr "Зорны пэрыяд: %1 сут (%2 г)"
 
 #: src/core/modules/Planet.cpp:366
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr "Зоркавы дзень: %1"
+msgstr "Зорныя суткі: %1"
 
 #: src/core/modules/Planet.cpp:367
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr "Сярэдні сонечны дзень: %1"
+msgstr "Сярэднія сонечныя суткі: %1"
 
 #: src/core/modules/Planet.cpp:371
 msgid "The period of rotation is chaotic"
-msgstr "Пэрыяд авароту хаатычны"
+msgstr "Перыяд вярчэння хаатычны"
 
 #: src/core/modules/Planet.cpp:390
 msgctxt "Moon phase"
@@ -960,7 +960,7 @@ msgstr "Трэцяя чвэрць"
 #: src/core/modules/Planet.cpp:402
 msgctxt "Moon phase"
 msgid "Waning Crescent"
-msgstr "МаладзікЗьмяншэньне сярпа"
+msgstr "Змяншэнне сярпа"
 
 #: src/core/modules/Planet.cpp:404
 msgctxt "Moon phase"
@@ -1020,7 +1020,7 @@ msgstr "пэрыядычныя"
 #: src/core/modules/Comet.cpp:232
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr "Зоркавы пэрыяд: %1 a"
+msgstr "Зорны перыяд: %1 г."
 
 #: src/core/modules/Comet.cpp:237
 #, no-c-format, qt-format
@@ -1260,11 +1260,11 @@ msgstr "Наперад на 1 зоркавы дзень"
 
 #: src/core/StelCore.cpp:272
 msgid "Add 1 sidereal year"
-msgstr "Дадаць 1 зоркавы год"
+msgstr "Дадаць 1 зорны год"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 100 sidereal years"
-msgstr "Дадаць 100 зоркавых гадоў"
+msgstr "Дадаць 100 зорных гадоў"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 synodic month"
@@ -1324,11 +1324,11 @@ msgstr "Назад на 1 зоркавы дзень"
 
 #: src/core/StelCore.cpp:288
 msgid "Subtract 1 sidereal year"
-msgstr "Адняць 1 зоркавы год"
+msgstr "Адняць 1 зорны год"
 
 #: src/core/StelCore.cpp:289
 msgid "Subtract 100 sidereal years"
-msgstr "Адняць 100 зоркавых гадоў"
+msgstr "Адняць 100 зорных гадоў"
 
 #: src/core/StelCore.cpp:290
 msgid "Subtract 1 synodic month"
@@ -1861,7 +1861,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:365
 msgid "Mercator"
-msgstr "Мэркаторава"
+msgstr "Меркатар"
 
 #: src/core/StelProjectorClasses.cpp:370
 msgid ""
@@ -1869,9 +1869,8 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"Мэркаторава праекцыя — гэта адна з найчасьцей ужываных праекцый. Яна "
-"захоўвае напрамкі й формы, але скажае памер, і чым далей ад экватара, тым "
-"болей."
+"Праекцыя Меркатара — гэта адна з найчасьцей ужываных праекцый. Яна захоўвае "
+"напрамкі й формы, але скажае памер, і чым далей ад экватара, тым болей."
 
 #: src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
@@ -1897,7 +1896,7 @@ msgid ""
 msgstr ""
 "Сінусаідальная праекцыя — гэта <i>псэўдацыліндрычная раўнаплошўчавая "
 "праекцыя</i>, якую часам называюць праекцыяй Сансона-Флэмстыда або "
-"раўнаплошчавай Мэкатара."
+"раўнаплошчавай Меркатара."
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
@@ -1967,16 +1966,16 @@ msgstr "Сузор'е МАЗ: %1"
 #: src/core/StelObject.cpp:280
 #, qt-format
 msgid "Mean Sidereal Time: %1"
-msgstr "Сярэдні зоркавы час: %1"
+msgstr "Сярэдні зорны час: %1"
 
 #: src/core/StelObject.cpp:286
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
-msgstr "Бачны зоркавы дзень: %1"
+msgstr "Сапраўдны зорны час: %1"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
-msgstr "Відарысы асноведзі аб'ектаў глыбокага космасу"
+msgstr "Фонавыя выявы аб'ектаў глыбокага космасу"
 
 #: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
 #: src/StelMainView.cpp:734
@@ -1985,11 +1984,11 @@ msgstr "Рознае"
 
 #: src/core/StelMovementMgr.cpp:181
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "Пераключыцца між экватарыяльным і азімутальным мацаваньнем"
+msgstr "Пераключыцца паміж экватарыяльнай і азімутальнай манціроўкай"
 
 #: src/core/StelMovementMgr.cpp:182
 msgid "Center on selected object"
-msgstr "Перайсьці да вылучанага аб'екту"
+msgstr "Цэнтроўка на вылучаным аб'екце"
 
 #: src/core/StelMovementMgr.cpp:183
 msgid "Zoom in on selected object"
@@ -2184,7 +2183,7 @@ msgstr "Не наяўна"
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1384
 msgid "Algorithm of"
-msgstr "Альґарытм"
+msgstr "Алгарытм"
 
 #: src/gui/ConfigurationDialog.cpp:1397
 msgid "Without correction"
@@ -2346,7 +2345,7 @@ msgstr "Дапамога па Stellarium"
 
 #: src/gui/HelpDialog.cpp:142 src/gui/HelpDialog.cpp:147
 msgid "Keys"
-msgstr "Клявішы"
+msgstr "Клавішы"
 
 #: src/gui/HelpDialog.cpp:144 src/gui/HelpDialog.cpp:230
 msgid "Further Reading"
@@ -2470,8 +2469,8 @@ msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
-"Наступныя спасылкі — гэта Сеціўныя спасылкі, для іх будзе выкананы гартач "
-"Сеціва:\n"
+"Наступныя спасылкі — гэта Сеціўныя спасылкі, для іх будзе выкананы вэб-"
+"браўзер:\n"
 
 #: src/gui/HelpDialog.cpp:232
 msgid "The Stellarium User Guide"
@@ -8273,7 +8272,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
-msgid "H. scale"
+msgid "X scale"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
@@ -8283,7 +8282,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:718
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
-msgid "V. scale"
+msgid "Y scale"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:719
