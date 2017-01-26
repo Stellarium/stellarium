@@ -854,9 +854,13 @@ double Planet::getMeanSolarDay() const
 	double msd = 0.;
 
 	if (englishName=="Sun")
-		return msd;
+	{
+		// A mean solar day (equals to Earth's day) has been added here for educational purposes
+		// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/fbe282db/
+		return 1.;
+	}
 
-	double sday = getSiderealDay();	
+	double sday = getSiderealDay();
 	double coeff = qAbs(sday/getSiderealPeriod());
 	float sign = 1;
 	// planets with retrograde rotation
