@@ -1069,7 +1069,7 @@ void StelOBJ::scale(double factor)
 	qCDebug(stelOBJ)<<"Scaling done in"<<timer.elapsed()<<"ms";
 }
 
-void StelOBJ::transform(const QMatrix4x4 &mat)
+void StelOBJ::transform(const QMatrix4x4 &mat, bool onlyPosition)
 {
 	//matrix for normals/tangents
 	QMatrix3x3 normalMat = mat.normalMatrix();
@@ -1082,20 +1082,23 @@ void StelOBJ::transform(const QMatrix4x4 &mat)
 		QVector3D tf = mat * QVector3D(pVertex.position[0], pVertex.position[1], pVertex.position[2]);
 		std::copy(&tf[0],&tf[0]+3,pVertex.position);
 
-		tf = normalMat * QVector3D(pVertex.normal[0], pVertex.normal[1], pVertex.normal[2]);
-		pVertex.normal[0] = tf.x();
-		pVertex.normal[1] = tf.y();
-		pVertex.normal[2] = tf.z();
+		if(!onlyPosition)
+		{
+			tf = normalMat * QVector3D(pVertex.normal[0], pVertex.normal[1], pVertex.normal[2]);
+			pVertex.normal[0] = tf.x();
+			pVertex.normal[1] = tf.y();
+			pVertex.normal[2] = tf.z();
 
-		tf = normalMat * QVector3D(pVertex.tangent[0], pVertex.tangent[1], pVertex.tangent[2]);
-		pVertex.tangent[0] = tf.x();
-		pVertex.tangent[1] = tf.y();
-		pVertex.tangent[2] = tf.z();
+			tf = normalMat * QVector3D(pVertex.tangent[0], pVertex.tangent[1], pVertex.tangent[2]);
+			pVertex.tangent[0] = tf.x();
+			pVertex.tangent[1] = tf.y();
+			pVertex.tangent[2] = tf.z();
 
-		tf = normalMat * QVector3D(pVertex.bitangent[0], pVertex.bitangent[1], pVertex.bitangent[2]);
-		pVertex.bitangent[0] = tf.x();
-		pVertex.bitangent[1] = tf.y();
-		pVertex.bitangent[2] = tf.z();
+			tf = normalMat * QVector3D(pVertex.bitangent[0], pVertex.bitangent[1], pVertex.bitangent[2]);
+			pVertex.bitangent[0] = tf.x();
+			pVertex.bitangent[1] = tf.y();
+			pVertex.bitangent[2] = tf.z();
+		}
 	}
 
 	//Update bounding box in case it changed
