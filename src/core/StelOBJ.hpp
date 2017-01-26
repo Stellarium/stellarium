@@ -275,7 +275,8 @@ public:
 	void scale(double factor);
 
 	//! Applies the given transformation matrix to the vertex data.
-	void transform(const QMatrix4x4& mat);
+	//! @param onlyPosition If true, only the position information is transformed, the normals/tangents are skipped
+	void transform(const QMatrix4x4& mat, bool onlyPosition = false);
 
 	//! Splits the vertex data into separate arrays.
 	//! If a given parameter vector is null, it is not filled.

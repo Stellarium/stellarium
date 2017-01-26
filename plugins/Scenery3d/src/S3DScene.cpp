@@ -267,16 +267,12 @@ void S3DScene::setModel(const StelOBJ &model)
 void S3DScene::setGround(const StelOBJ &ground)
 {
 	//we only need to retain the position data for the ground
+	StelOBJ groundTmp = ground;
+	groundTmp.transform(zRot2Grid,true);
 	StelOBJ::V3Vec groundPositionList;
-	ground.splitVertexData(&groundPositionList);
-	for(int i=0;i<groundPositionList.size();++i)
-	{
-		Vec3f& pos = groundPositionList[i];
-		QVector3D trans = zRot2Grid * QVector3D(pos[0], pos[1], pos[2]);
-		pos.set(trans.x(),trans.y(),trans.z());
-	}
+	groundTmp.splitVertexData(&groundPositionList);
 
-	heightmap.setMeshData(ground.getIndexList(), groundPositionList);
+	heightmap.setMeshData(groundTmp.getIndexList(), groundPositionList, &groundTmp.getAABBox());
 	if(info.groundNullHeightFromModel)
 	{
 		info.groundNullHeight = ground.getAABBox().min[2];
