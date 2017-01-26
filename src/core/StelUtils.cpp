@@ -2063,7 +2063,6 @@ double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay)
 	double t=(y-StephensonMorrisonHohenkerk2016DeltaTtableS15[i][0]) / (StephensonMorrisonHohenkerk2016DeltaTtableS15[i][1]-StephensonMorrisonHohenkerk2016DeltaTtableS15[i][0]);
 	return ((StephensonMorrisonHohenkerk2016DeltaTtableS15[i][5]*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][4])*t
 		+ StephensonMorrisonHohenkerk2016DeltaTtableS15[i][3])*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][2];
-	Q_ASSERT(0);
 }
 
 double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x)
