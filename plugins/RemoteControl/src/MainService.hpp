@@ -74,6 +74,8 @@ private slots:
 	void focusPosition(const Vec3d& pos);
 
 	void updateMovement(float x, float y, bool xUpdated, bool yUpdated);
+	// Allow azimut/altitude changes. Values must be in Radians.
+	void updateView(double az, double alt, bool azUpdated, bool altUpdated);
 	void setFov(double fov);
 
 	void actionToggled(const QString& id, bool val);
