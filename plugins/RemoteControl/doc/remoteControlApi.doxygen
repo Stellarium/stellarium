@@ -189,6 +189,10 @@ move speed in azimuth and altitude (i.e. a negative \p x means left). Values of 
 This operation works in conjunction with the update() method - until the movement is stopped
 (i.e. \p x and \p y are zero), or no \c move command has been received for a specified time (about a second), the movement is performed in the given directions.
 
+\paragraph rcMainServiceView view
+Parameters: <tt>az (Number) alt (Number)</tt>\n
+Sets the view direction in altitude/azimut coordinates. \p az and \p alt must be given in radians. Omitting one value will keep the relevant coordinate unchanged.
+
 \paragraph rcMainServiceFov fov
 Parameters: <tt>fov (Number)</tt>\n
 Sets the current field-of-view using StelCore::setFov
