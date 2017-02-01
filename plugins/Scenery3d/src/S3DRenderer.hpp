@@ -42,7 +42,7 @@
 class LandscapeMgr;
 class S3DScene;
 
-Q_DECLARE_LOGGING_CATEGORY(scenery3d)
+Q_DECLARE_LOGGING_CATEGORY(s3drenderer)
 
 //! Scenery3d renderer class
 class S3DRenderer : public QObject, protected QOpenGLFunctions

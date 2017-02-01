@@ -28,6 +28,8 @@
 #include <QMap>
 #include <QSharedPointer>
 
+Q_DECLARE_LOGGING_CATEGORY(sceneInfo)
+
 class QSettings;
 
 //! Contains all the metadata necessary for a Scenery3d scene,
@@ -149,6 +151,7 @@ private:
 	static int initMetaType();
 };
 
+Q_DECLARE_LOGGING_CATEGORY(storedView)
 struct StoredView;
 typedef QList<StoredView> StoredViewList;
 

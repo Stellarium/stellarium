@@ -28,6 +28,8 @@
 
 class QOpenGLShaderProgram;
 
+Q_DECLARE_LOGGING_CATEGORY(shaderMgr)
+
 //! A structure for global shader parameters
 struct GlobalShaderParameters
 {

@@ -28,6 +28,8 @@
 
 #include <QVector3D>
 
+Q_LOGGING_CATEGORY(s3dscene, "stel.plugin.scenery3d.s3dscene")
+
 void S3DScene::Material::loadTexturesAsync()
 {
 	StelTextureMgr& mgr = StelApp::getInstance().getTextureManager();
@@ -79,7 +81,7 @@ void S3DScene::Material::fixup()
 	//this is probably the minimum we should expect
 	if(Kd[0]< .0f)
 	{
-		qWarning()<<"Material"<<name<<"has no Kd defined";
+		qCWarning(s3dscene)<<"Material"<<name<<"has no Kd defined";
 		Kd = QVector3D(0.8f,0.8f,0.8f);
 	}
 
@@ -130,7 +132,7 @@ void S3DScene::Material::fixup()
 				}
 				break;
 			default:
-				qWarning()<<"Unknown illum model encountered"<<illum;
+				qCWarning(s3dscene)<<"Unknown illum model encountered"<<illum;
 				break;
 		}
 	}
@@ -231,9 +233,9 @@ void S3DScene::setModel(const StelOBJ &model)
 	{
 		//position at the XY center of the model
 		position.v[0] = (sceneAABB.max[0]+sceneAABB.min[0])/2.0;
-		qDebug() << "Setting Easting  to BBX center: " << sceneAABB.min[0] << ".." << sceneAABB.max[0] << ": " << -position.v[0];
+		qCDebug(s3dscene) << "Setting Easting  to BBX center: " << sceneAABB.min[0] << ".." << sceneAABB.max[0] << ": " << -position.v[0];
 		position.v[1] = (sceneAABB.max[1]+sceneAABB.min[1])/2.0;
-		qDebug() << "Setting Northing to BBX center: " << sceneAABB.min[1] << ".." << sceneAABB.max[1] << ": " << position.v[1];
+		qCDebug(s3dscene) << "Setting Northing to BBX center: " << sceneAABB.min[1] << ".." << sceneAABB.max[1] << ": " << position.v[1];
 	}
 	else
 	{
@@ -376,10 +378,11 @@ void S3DScene::finalizeTexture(StelTextureSP &tex)
 	if(tex)
 	{
 		tex->waitForLoaded();
+
 		//load it into GL
 		if(!tex->bind())
 		{
-			qWarning()<<"Error loading texture"<<tex->getFullPath()<<tex->getErrorMessage();
+			qCWarning(s3dscene)<<"Error loading texture"<<tex->getFullPath()<<tex->getErrorMessage();
 			tex.clear();
 		}
 		else
