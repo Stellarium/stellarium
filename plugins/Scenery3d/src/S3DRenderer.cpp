@@ -43,7 +43,7 @@
 #include <QOpenGLShaderProgram>
 #include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(scenery3d, "stel.plugin.scenery3d")
+Q_LOGGING_CATEGORY(s3drenderer, "stel.plugin.scenery3d.renderer")
 
 #define GET_GLERROR() StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
@@ -82,7 +82,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
       lightOrthoNear(0.1f), lightOrthoFar(1000.0f), parallaxScale(0.015f)
 {
 	#ifndef NDEBUG
-	qDebug(scenery3d)<<"Scenery3d constructor...";
+	qCDebug(s3drenderer)<<"Scenery3d constructor...";
 	#endif
 	//the arrays should all contain only zeroes
 	Q_ASSERT(cubeMapTex[0]==0);
@@ -104,7 +104,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
 	debugTextFont.setPixelSize(16);
 
 	#ifndef NDEBUG
-	qDebug(scenery3d)<<"Scenery3d constructor...done";
+	qCDebug(s3drenderer)<<"Scenery3d constructor...done";
 	#endif
 }
 
@@ -1476,7 +1476,7 @@ void S3DRenderer::drawDebug()
 		}
 		else
 		{
-			qWarning(scenery3d)<<"Cannot use debug shader, probably on OpenGL ES context";
+			qCWarning(s3drenderer)<<"Cannot use debug shader, probably on OpenGL ES context";
 		}
 	}
 #endif
@@ -1616,8 +1616,8 @@ void S3DRenderer::determineFeatureSupport()
 	if ( !ctx->functions()->hasOpenGLFeature(QOpenGLFunctions::Framebuffers) ) {
 
 		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
-		qWarning(scenery3d) << "Your hardware does not support EXT_framebuffer_object.";
-		qWarning(scenery3d) << "Shadow mapping disabled, and display limited to perspective projection.";
+		qCWarning(s3drenderer) << "Your hardware does not support EXT_framebuffer_object.";
+		qCWarning(s3drenderer) << "Shadow mapping disabled, and display limited to perspective projection.";
 
 		setCubemapSize(0);
 		setShadowmapSize(0);
@@ -1630,12 +1630,12 @@ void S3DRenderer::determineFeatureSupport()
 		glGetIntegerv(GL_MAX_VIEWPORT_DIMS, viewportSize);
 		glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &rbSize);
 
-		qDebug(scenery3d)<<"Maximum texture size:"<<texSize;
-		qDebug(scenery3d)<<"Maximum viewport dims:"<<viewportSize[0]<<viewportSize[1];
-		qDebug(scenery3d)<<"Maximum renderbuffer size:"<<rbSize;
+		qCDebug(s3drenderer)<<"Maximum texture size:"<<texSize;
+		qCDebug(s3drenderer)<<"Maximum viewport dims:"<<viewportSize[0]<<viewportSize[1];
+		qCDebug(s3drenderer)<<"Maximum renderbuffer size:"<<rbSize;
 
 		maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
-		qDebug(scenery3d)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
+		qCDebug(s3drenderer)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
 	}
 
 	QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
@@ -1645,21 +1645,21 @@ void S3DRenderer::determineFeatureSupport()
 	if(QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry,ctx)) //this checks if version >= 3.2
 	{
 		this->supportsGSCubemapping = true;
-		qDebug(scenery3d)<<"Geometry shader supported";
+		qCDebug(s3drenderer)<<"Geometry shader supported";
 	}
 	else
-		qDebug(scenery3d)<<"Geometry shader not supported on this hardware";
+		qCWarning(s3drenderer)<<"Geometry shader not supported on this hardware";
 
 	//Query how many texture units we have at disposal in a fragment shader
 	//we currently need 8 in the worst case: diffuse, emissive, bump, height + 4x shadowmap
 	GLint texUnits,combUnits;
 	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texUnits);
-	qDebug(scenery3d) << "GL_MAX_TEXTURE_IMAGE_UNITS:" << texUnits;
+	qCDebug(s3drenderer) << "GL_MAX_TEXTURE_IMAGE_UNITS:" << texUnits;
 	glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &combUnits);
-	qDebug(scenery3d) << "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:" << combUnits;
+	qCDebug(s3drenderer) << "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:" << combUnits;
 	if(texUnits < 8 || combUnits < 8)
 	{
-		qWarning(scenery3d)<<"Insufficient texture units available for all effects, should have at least 8!";
+		qCWarning(s3drenderer)<<"Insufficient texture units available for all effects, should have at least 8!";
 	}
 
 	if(shaderParameters.openglES)
@@ -1669,12 +1669,12 @@ void S3DRenderer::determineFeatureSupport()
 			ctx->hasExtension("GL_ANGLE_depth_texture"))
 		{
 			supportsShadows = true;
-			qDebug(scenery3d)<<"Shadows are supported";
+			qCDebug(s3drenderer)<<"Shadows are supported";
 		}
 		else
 		{
 			supportsShadows = false;
-			qDebug(scenery3d)<<"Shadows are not supported on this hardware";
+			qCDebug(s3drenderer)<<"Shadows are not supported on this hardware";
 		}
 		//shadow filtering is completely disabled for now on ES
 		supportsShadowFiltering = false;
@@ -1717,7 +1717,7 @@ void S3DRenderer::init()
 	{
 #ifdef GL_TEXTURE_CUBE_MAP_SEAMLESS
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-		qDebug(scenery3d)<<"Seamless cubemap filtering enabled";
+		qCDebug(s3drenderer)<<"Seamless cubemap filtering enabled";
 #endif
 	}
 
@@ -1789,7 +1789,7 @@ bool S3DRenderer::initCubemapping()
 	GET_GLERROR()
 
 	bool ret = false;
-	qDebug(scenery3d)<<"Initializing cubemap...";
+	qCDebug(s3drenderer)<<"Initializing cubemap...";
 
 	//remove old cubemap objects if they exist
 	deleteCubemapping();
@@ -1798,7 +1798,7 @@ bool S3DRenderer::initCubemapping()
 
 	if(cubemapSize<=0)
 	{
-		qWarning(scenery3d)<<"Cubemapping not supported or disabled";
+		qCWarning(s3drenderer)<<"Cubemapping not supported or disabled";
 		rendererMessage(q_("Your hardware does not support cubemapping, please switch to 'Perspective' projection!"));
 		return false;
 	}
@@ -1809,7 +1809,7 @@ bool S3DRenderer::initCubemapping()
 	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
 		rendererMessage(q_("Geometry shader is not supported. Falling back to '6 Textures' mode."));
-		qWarning(scenery3d)<<"GS not supported, fallback to '6 Textures'";
+		qCWarning(s3drenderer)<<"GS not supported, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
 
@@ -1819,7 +1819,7 @@ bool S3DRenderer::initCubemapping()
 	{
 		//Fall back to "6 Textures" mode
 		rendererMessage(q_("Falling back to '6 Textures' because of ANGLE bug"));
-		qWarning(scenery3d)<<"On ANGLE, fallback to '6 Textures'";
+		qCWarning(s3drenderer)<<"On ANGLE, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
 
@@ -1917,7 +1917,7 @@ bool S3DRenderer::initCubemapping()
 		//gen renderbuffer for single-face depth, reused for all faces to save some memory
 		int val = 0;
 		glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE,&val);
-		qDebug(scenery3d)<<"Max Renderbuffer size"<<val;
+		qCDebug(s3drenderer)<<"Max Renderbuffer size"<<val;
 
 		glGenRenderbuffers(1,&cubeRB);
 		glBindRenderbuffer(GL_RENDERBUFFER,cubeRB);
@@ -1928,16 +1928,16 @@ bool S3DRenderer::initCubemapping()
 			case GL_NO_ERROR:
 					break;
 			case GL_INVALID_ENUM:
-					qWarning(scenery3d)<<"RB: invalid depth format?";
+					qCWarning(s3drenderer)<<"RB: invalid depth format?";
 					break;
 			case GL_INVALID_VALUE:
-					qWarning(scenery3d)<<"RB: invalid renderbuffer size";
+					qCWarning(s3drenderer)<<"RB: invalid renderbuffer size";
 					break;
 			case GL_OUT_OF_MEMORY:
-					qWarning(scenery3d)<<"RB: out of memory. Cannot create renderbuffer.";
+					qCWarning(s3drenderer)<<"RB: out of memory. Cannot create renderbuffer.";
 					break;
 				default:
-				qWarning(scenery3d)<<"RB: unexpected OpenGL error:" << err;
+				qCWarning(s3drenderer)<<"RB: unexpected OpenGL error:" << err;
 		}
 
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
@@ -1965,7 +1965,7 @@ bool S3DRenderer::initCubemapping()
 		//check validity
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			qWarning(scenery3d) << "glCheckFramebufferStatus failed, probably can't use cube map";
+			qCWarning(s3drenderer) << "glCheckFramebufferStatus failed, probably can't use cube map";
 		}
 		else
 			ret = true;
@@ -1996,7 +1996,7 @@ bool S3DRenderer::initCubemapping()
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
-				qWarning(scenery3d) << "glCheckFramebufferStatus failed, probably can't use cube map";
+				qCWarning(s3drenderer) << "glCheckFramebufferStatus failed, probably can't use cube map";
 				ret = false;
 				break;
 			}
@@ -2147,7 +2147,7 @@ bool S3DRenderer::initCubemapping()
 	transformedCubeVertices.resize(cubeVertices.size());
 	cubeIndexCount = cubeIndices.size();
 
-	qDebug(scenery3d)<<"Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndexCount<<"indices";
+	qCDebug(s3drenderer)<<"Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndexCount<<"indices";
 
 	//create the other cube faces by rotating the front face
 #define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
@@ -2176,7 +2176,7 @@ bool S3DRenderer::initCubemapping()
 	//reset cubemap timer to make sure it is rerendered immediately after re-init
 	invalidateCubemap();
 
-	qDebug(scenery3d)<<"Initializing cubemap...done!";
+	qCDebug(s3drenderer)<<"Initializing cubemap...done!";
 
 	if(!ret)
 	{
@@ -2201,7 +2201,7 @@ void S3DRenderer::deleteShadowmapping()
 		frustumArray.clear();
 		focusBodies.clear();
 
-		qDebug(scenery3d)<<"Shadowmapping objects cleaned up";
+		qCDebug(s3drenderer)<<"Shadowmapping objects cleaned up";
 	}
 }
 
@@ -2223,7 +2223,7 @@ bool S3DRenderer::initShadowmapping()
 
 	if(!areShadowsSupported())
 	{
-		qWarning(scenery3d)<<"Tried to initialize shadows without shadow support!";
+		qCWarning(s3drenderer)<<"Tried to initialize shadows without shadow support!";
 		return false;
 	}
 
@@ -2320,7 +2320,7 @@ bool S3DRenderer::initShadowmapping()
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
-				qWarning(scenery3d) << "glCheckFramebufferStatus failed, can't use FBO";
+				qCWarning(s3drenderer) << "glCheckFramebufferStatus failed, can't use FBO";
 				break;
 			}
 			else if (i==shaderParameters.frustumSplits-1)
@@ -2333,11 +2333,11 @@ bool S3DRenderer::initShadowmapping()
 		glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 		glActiveTexture(GL_TEXTURE0);
 
-		qDebug(scenery3d)<<"shadowmapping initialized";
+		qCDebug(s3drenderer)<<"shadowmapping initialized";
 	}
 	else
 	{
-		qWarning(scenery3d)<<"shadowmapping not supported or disabled";
+		qCWarning(s3drenderer)<<"shadowmapping not supported or disabled";
 	}
 
 	if(!valid)

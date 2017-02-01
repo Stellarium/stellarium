@@ -44,6 +44,8 @@ class QSettings;
 class StelButton;
 class S3DScene;
 
+Q_DECLARE_LOGGING_CATEGORY(scenery3d)
+
 //! Main class of the module, inherits from StelModule.
 //! Manages initialization, provides an interface to change Scenery3d properties and handles user input
 class Scenery3d : public StelModule
