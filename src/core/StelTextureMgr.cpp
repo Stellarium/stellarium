@@ -31,11 +31,14 @@
 #include <QSettings>
 #include <cstdlib>
 #include <QOpenGLContext>
+#include <QThreadPool>
 
 StelTextureMgr::StelTextureMgr(QObject *parent)
-	: QObject(parent), glMemoryUsage(0)
+	: QObject(parent), glMemoryUsage(0), loaderThreadPool(new QThreadPool(this))
 {
-
+	//for now ensure that just 1 texture is at once in background
+	//otherwise, for large textures loaded in parallel, the risk of an out-of-memory error is great on 32bit systems
+	loaderThreadPool->setMaxThreadCount(1);
 }
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)

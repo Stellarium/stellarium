@@ -28,6 +28,7 @@
 
 class QNetworkReply;
 class QThread;
+class QThreadPool;
 
 //! @class StelTextureMgr
 //! Manage textures loading.
@@ -61,6 +62,9 @@ private:
 	StelTextureMgr(QObject* parent = 0);
 
 	unsigned int glMemoryUsage;
+
+	//! We use our own thread pool to ensure only 1 texture is being loaded at a time
+	QThreadPool* loaderThreadPool;
 
 	StelTextureSP lookupCache(const QString& file);
 	typedef QMap<QString,QWeakPointer<StelTexture>> TexCache;

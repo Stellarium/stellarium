@@ -121,7 +121,8 @@ private:
 	//! data and information to create the OpenGL texture.
 	struct GLData
 	{
-		GLData() : data(NULL), width(0), height(0), format(0), type(0) {}
+		GLData() : width(0), height(0), format(0), type(0) {}
+		QString loaderError;
 		QByteArray data;
 		int width;
 		int height;
@@ -165,7 +166,6 @@ private:
 
 	//! The loader object
 	QFuture<GLData>* loader;
-
 
 	//! The URL where to download the file
 	QString fullPath;
