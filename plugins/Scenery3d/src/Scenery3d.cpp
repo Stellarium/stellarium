@@ -48,6 +48,8 @@
 #include "LandscapeMgr.hpp"
 #include "StelMainView.hpp"
 
+Q_LOGGING_CATEGORY(scenery3d,"stel.plugin.scenery3d")
+
 #define S3D_CONFIG_PREFIX QString("Scenery3d")
 
 Scenery3d::Scenery3d() :
@@ -86,9 +88,6 @@ Scenery3d::Scenery3d() :
 
 Scenery3d::~Scenery3d()
 {
-#ifndef NDEBUG
-	qDebug()<<"[Scenery3dMgr] Destructor called";
-#endif
 	if(!cleanedUp)
 		deinit();
 
@@ -194,8 +193,7 @@ void Scenery3d::update(double deltaTime)
 		//perform movement
 		//when zoomed in more than 5°, we slow down movement
 		if(movementKeyInput.lengthSquared() > 0.00001)
-			currentScene->moveViewer(movementKeyInput * deltaTime * 0.01 * qMax(5.0, mvMgr->getCurrentFov()));
-
+			currentScene->moveViewer(movementKeyInput * deltaTime * 0.01 * std::max(5.0, mvMgr->getCurrentFov()));
 
 		//update material fade info, if necessary
 		double curTime = core->getJD();
@@ -233,15 +231,15 @@ void Scenery3d::draw(StelCore* core)
 
 void Scenery3d::init()
 {
-	qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
+	qCDebug(scenery3d) << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
 
 	core = StelApp::getInstance().getCore();
 	mvMgr = GETSTELMODULE(StelMovementMgr);
 
 	//Initialize the renderer - this also finds out what features are supported
-	qDebug() << "[Scenery3dMgr] Initializing Scenery3d object...";
+	qCDebug(scenery3d) << "Initializing Scenery3d renderer...";
 	renderer->init();
-	qDebug() << "[Scenery3dMgr] Initializing Scenery3d object...done";
+	qCDebug(scenery3d) << "Initializing Scenery3d renderer...done";
 
 	//make sure shadows are off if unsupported
 	if(! renderer->areShadowsSupported())
@@ -271,10 +269,6 @@ void Scenery3d::init()
 
 void Scenery3d::deinit()
 {
-#ifndef NDEBUG
-	qDebug()<<"[Scenery3dMgr] deinit() called";
-#endif
-
 	//wait until loading is finished. (If test added after hint from Coverity)
 	if(renderer)
 	{
@@ -365,14 +359,14 @@ void Scenery3d::createToolbarButtons() const
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "[Scenery3dMgr] WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
+		qCWarning(scenery3d) << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
 	}
 }
 
 void Scenery3d::reloadShaders()
 {
 	showMessage(q_("Scenery3d shaders reloaded"));
-	qDebug()<<"[Scenery3dMgr] Reloading Scenery3d shaders";
+	qCDebug(scenery3d)<<"Reloading Scenery3d shaders";
 
 	renderer->getShaderManager().clearCache();
 }
@@ -448,10 +442,10 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 	//load model
 	StelOBJ modelOBJ;
 	QString modelFile = StelFileMgr::findFile( scene.fullPath+ "/" + scene.modelScenery);
-	qDebug()<<"Loading scene from "<<modelFile;
+	qCDebug(scenery3d)<<"Loading scene from "<<modelFile;
 	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum))
 	{
-	    qCritical()<<"Failed to load OBJ file.";
+	    qCCritical(scenery3d)<<"Failed to load OBJ file"<<modelFile;
 	    return Q_NULLPTR;
 	}
 
@@ -475,10 +469,10 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 
 		StelOBJ groundOBJ;
 		modelFile = StelFileMgr::findFile(scene.fullPath + "/" + scene.modelGround);
-		qDebug()<<"Loading ground from"<<modelFile;
+		qCDebug(scenery3d)<<"Loading ground from"<<modelFile;
 		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum))
 		{
-			qCritical()<<"Failed to load ground model";
+			qCCritical(scenery3d)<<"Failed to load ground model"<<modelFile;
 			return Q_NULLPTR;
 		}
 
@@ -531,21 +525,21 @@ void Scenery3d::loadSceneCompleted()
 
 	if (info.hasLocation())
 	{
-		qDebug() << "[Scenery3dMgr] Setting location to given coordinates";
+		qCDebug(scenery3d) << "Setting location to given coordinates";
 		StelApp::getInstance().getCore()->moveObserverTo(*(info.location.data()), 0., 0.);
 	}
-	else qDebug() << "[Scenery3dMgr] No coordinates given in scenery3d.ini";
+	else qCDebug(scenery3d) << "No coordinates given in scenery3d.ini";
 
 	if (info.hasLookAtFOV())
 	{
-		qDebug() << "[Scenery3dMgr] Setting orientation";
+		qCDebug(scenery3d) << "Setting orientation";
 		Vec3f lookat=currentLoadScene.lookAt_fov;
 		// This vector is (az_deg, alt_deg, fov_deg)
 		Vec3d v;
 		StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
 		mvMgr->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
 		mvMgr->zoomTo(lookat[2]);
-	} else qDebug() << "[Scenery3dMgr] No orientation given in scenery3d.ini";
+	} else qCDebug(scenery3d) << "No orientation given in scenery3d.ini";
 
 	//clear loading scene
 	currentLoadScene = SceneInfo();
@@ -577,7 +571,7 @@ SceneInfo Scenery3d::loadScenery3dByID(const QString& id)
 	catch (std::runtime_error& e)
 	{
 		//TODO do away with the exceptions if possible
-		qCritical() << "[Scenery3dMgr] ERROR while loading 3D scenery with id " <<  id  << ", (" << e.what() << ")";
+		qCCritical(scenery3d) << "ERROR while loading 3D scenery with id " <<  id  << ", (" << e.what() << ")";
 		return SceneInfo();
 	}
 
@@ -999,7 +993,7 @@ void Scenery3d::setView(const StoredView &view, const bool setDate)
 {
 	if(!currentScene)
 	{
-		qWarning()<<"Can't set current view, no scene loaded!";
+		qCWarning(scenery3d)<<"Can't set current view, no scene loaded!";
 		return;
 	}
 
@@ -1028,7 +1022,7 @@ StoredView Scenery3d::getCurrentView()
 {
 	if(!currentScene)
 	{
-		qWarning()<<"Can't return current view, no scene loaded!";
+		qCWarning(scenery3d)<<"Can't return current view, no scene loaded!";
 		return StoredView();
 	}
 
