@@ -379,7 +379,7 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 		double az = azs.toDouble(&azOk);
 		double alt = alts.toDouble(&altOk);
 
-		if(azOk && altOk)
+		if(azOk || altOk)
 		{
 			QMetaObject::invokeMethod(this,"updateView", SERVICE_DEFAULT_INVOKETYPE,
 						  Q_ARG(double,az),
