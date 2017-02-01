@@ -246,6 +246,7 @@ StelApp::StelApp(StelMainView *parent)
 	#ifdef ENABLE_SPOUT
 	, spoutSender(NULL)
 	#endif
+	, currentFbo(0)
 {
 	setObjectName("StelApp");
 
