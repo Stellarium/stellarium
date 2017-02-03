@@ -34,8 +34,6 @@
 #include <QFuture>
 #include <QtConcurrent>
 
-#include <cstdlib>
-
 StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f),
 	width(-1), height(-1), glSize(0)
 {
@@ -115,7 +113,7 @@ StelTexture::GLData StelTexture::loadFromPath(const QString &path)
 	catch(std::exception& ex) //this catches out-of-memory errors from file conversion
 	{
 		qCritical()<<"Failed loading texture from"<<path<<"error:"<<ex.what();
-		GLData ret();
+		GLData ret;
 		ret.loaderError = ex.what();
 		return ret;
 	}
@@ -130,7 +128,7 @@ StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
 	catch(std::exception& ex)  //this catches out-of-memory errors from file conversion
 	{
 		qCritical()<<"Failed loading texture"<<ex.what();
-		GLData ret();
+		GLData ret;
 		ret.loaderError = ex.what();
 		return ret;
 	}
