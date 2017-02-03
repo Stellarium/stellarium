@@ -166,7 +166,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 		if(m_shaderContentCache.contains(contentHash))
 		{
 #ifndef NDEBUG
-			qCDebug(shaderMgr)<<"Using existing shader with content-hash"<<contentHash.toHex();
+			//qCDebug(shaderMgr)<<"Using existing shader with content-hash"<<contentHash.toHex();
 #endif
 			prog = m_shaderContentCache[contentHash];
 		}
@@ -184,7 +184,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 #ifndef NDEBUG
 			else
 			{
-				qCDebug(shaderMgr)<<"Shader '"<<flags<<"' created, content-hash"<<contentHash.toHex();
+				//qCDebug(shaderMgr)<<"Shader '"<<flags<<"' created, content-hash"<<contentHash.toHex();
 			}
 #endif
 			m_shaderContentCache[contentHash] = prog;
@@ -291,7 +291,7 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 	//open and load file
 	QFile file(filePath);
 #ifndef NDEBUG
-	qCDebug(shaderMgr)<<"File path:"<<filePath;
+	//qCDebug(shaderMgr)<<"File path:"<<filePath;
 #endif
 	if(!file.open(QFile::ReadOnly))
 	{

@@ -68,10 +68,10 @@ void Heightmap::setMeshData(const IdxList &indexList, const PosList &posList, co
 	QElapsedTimer timer;
 	timer.start();
 	this->initQuadtree();
-	qDebug()<<"initQuadtree"<<timer.nsecsElapsed();
+	qDebug()<<"initQuadtree\t"<<qSetFieldWidth(12)<<right<<timer.nsecsElapsed();
 	timer.start();
 	this->initGrid();
-	qDebug()<<"initGrid"<<timer.nsecsElapsed();
+	qDebug()<<"initGrid\t\t"<<qSetFieldWidth(12)<<right<<timer.nsecsElapsed();
 }
 
 /**
