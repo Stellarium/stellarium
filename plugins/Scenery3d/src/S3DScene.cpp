@@ -150,6 +150,11 @@ void S3DScene::Material::fixup()
 		}
 	}
 
+	if(qIsNull(d))
+	{
+		traits.isFullyTransparent = true;
+	}
+
 	//finally, find out if Ks and Ke are valid
 	if(Ks[0]< .0f)
 	{

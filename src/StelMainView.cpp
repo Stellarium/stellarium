@@ -826,6 +826,8 @@ void StelMainView::updateNightModeProperty(bool b)
 
 void StelMainView::reloadShaders()
 {
+	//make sure GL context is bound
+	glContextMakeCurrent();
 	emit reloadShadersRequested();
 }
 

@@ -71,7 +71,7 @@ public:
 
 	//! Releases the currently bound texture without testing if it is currently bound,
 	//! i.e. it simply calls glBindTexture(GL_TEXTURE_2D, 0)
-    inline void release() const { gl->glBindTexture(GL_TEXTURE_2D, 0 ); }
+	inline void release() const { gl->glBindTexture(GL_TEXTURE_2D, 0 ); }
 
 	//! Waits until the texture data is ready for usage (i.e. bind will return true after this).
 	//! Do not use this for potentially network loaded textures.
@@ -122,7 +122,7 @@ private:
 	struct GLData
 	{
 		GLData() : width(0), height(0), format(0), type(0) {}
-		QString loaderError;
+		QString loaderError; //! can contain an error message if data is null
 		QByteArray data;
 		int width;
 		int height;

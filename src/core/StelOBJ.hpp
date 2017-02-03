@@ -348,6 +348,9 @@ private:
 	inline bool parseFace(const ParseParams& params, const V3Vec& posList, const V3Vec& normList, const V2Vec& texList,
 			      CurrentParserState &state, VertexCache& vertCache);
 
+	//! Regenerate all normals in the vertex list
+	void generateNormals();
+
 	//! Calculates tangents and bitangents
 	void generateTangents();
 
@@ -356,7 +359,7 @@ private:
 
 	//! Performs post-processing steps, like finding centroids and bounding boxes
 	//! This is called after a model has been loaded
-	void performPostProcessing();
+	void performPostProcessing(bool genNormals);
 };
 
 //! Implements the qHash method for the Vertex type

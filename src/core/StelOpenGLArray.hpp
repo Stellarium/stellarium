@@ -136,7 +136,7 @@ private:
 	GLenum m_indexBufferType;
 	size_t m_indexBufferTypeSize;
 	int m_indexCount;
-	int m_memoryUsage;
+	size_t m_memoryUsage;
 
 	int m_offsets[ATTLOC_SIZE];
 	GLint m_sizes[ATTLOC_SIZE];

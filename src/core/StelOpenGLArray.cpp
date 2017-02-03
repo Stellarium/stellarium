@@ -215,7 +215,7 @@ bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
 			m_indexBufferType = GL_UNSIGNED_SHORT;
 			m_indexBufferTypeSize = sizeof(GLushort);
 			const StelOBJ::ShortIndexList idxList = obj->getShortIndexList();
-			m_indexBuffer.allocate(idxList.constData(),m_indexBufferTypeSize * idxList.size());
+			m_indexBuffer.allocate(idxList.constData(),static_cast<int>(m_indexBufferTypeSize * idxList.size()));
 		}
 		else
 		{
@@ -231,7 +231,7 @@ bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
 			m_indexBufferTypeSize = sizeof(GLuint);
 
 			const StelOBJ::IndexList& idxList = obj->getIndexList();
-			m_indexBuffer.allocate(idxList.constData(),m_indexBufferTypeSize * idxList.size());
+			m_indexBuffer.allocate(idxList.constData(),static_cast<int>(m_indexBufferTypeSize * idxList.size()));
 		}
 		m_indexCount = obj->getIndexList().size();
 		m_memoryUsage+= m_indexCount * m_indexBufferTypeSize;

@@ -522,7 +522,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 				CHECK_MTL(ok = parseString(splits,curMaterial->map_height));
 				MAKE_ABS(curMaterial->map_height);
 			}
-			else if(CMD_CMP("Illum"))
+			else if(CMD_CMP("illum"))
 			{
 				int tmp;
 				CHECK_MTL(ok = parseInt(splits,tmp));
@@ -536,7 +536,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 				}
 
 				//if between these 2, set to translucent and warn
-				if(tmp>I_DIFFUSE_AND_AMBIENT && tmp < I_TRANSLUCENT)
+				if(tmp>I_SPECULAR && tmp < I_TRANSLUCENT)
 				{
 					qCWarning(stelOBJ())<<"Treating illum "<<tmp<<"as TRANSLUCENT";
 					tmp = I_TRANSLUCENT;
@@ -695,7 +695,36 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 			}
 			else if(CMD_CMP("vn"))
 			{
-				ok = parseVec3(splits,INC_LIST(normalList));
+				//we have to handle the vertex order
+				Vec3f& target = INC_LIST(normalList);
+				ok = parseVec3(splits,target);
+				switch(vertexOrder)
+				{
+					case XYZ:
+						//no change
+						break;
+					case XZY:
+						target.set(target[0],-target[2],target[1]);
+						break;
+					case YXZ:
+						target.set(target[1],target[0],target[2]);
+						break;
+					case YZX:
+						target.set(target[1],target[2],target[0]);
+						break;
+					case ZXY:
+						target.set(target[2],target[0],target[1]);
+						break;
+					case ZYX:
+						target.set(target[2],target[1],target[0]);
+						break;
+					default:
+						Q_ASSERT_X(0,"StelOBJ::load","invalid vertex order found");
+						qCWarning(stelOBJ) << "Vertex order"<<vertexOrder<<"not implemented, assuming XYZ";
+						break;
+				}
+				//normalize is usually not needed so we skip it
+				//target.normalize();
 			}
 			else if(CMD_CMP("usemtl"))
 			{
@@ -774,13 +803,15 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 	m_vertices.squeeze();
 	m_indices.squeeze();
 
+	Q_ASSERT(m_indices.size() % 3 == 0);
+
 	qCDebug(stelOBJ)<<"Loaded OBJ in"<<timer.elapsed()<<"ms";
 	qCDebug(stelOBJ, "Parsed %d positions, %d normals, %d texture coordinates, %d materials",
 		posList.size(), normalList.size(), texList.size(), m_materials.size());
 	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", m_vertices.size(), getFaceCount(), m_objects.size());
 
 	//perform post processing
-	performPostProcessing();
+	performPostProcessing(normalList.isEmpty());
 	m_isLoaded = true;
 	return true;
 }
@@ -820,6 +851,82 @@ void StelOBJ::Object::postprocess(const StelOBJ &obj, Vec3d &centroid)
 	//only do 1 division for more accuracy
 	centroid /= idxCnt;
 	this->centroid = centroid.toVec3f();
+}
+
+void StelOBJ::generateNormals()
+{
+	//Code adapted from old OBJ loader (Andrei Borza)
+
+	const unsigned int *pTriangle = 0;
+	Vertex *pVertex0 = Q_NULLPTR;
+	Vertex *pVertex1 = Q_NULLPTR;
+	Vertex *pVertex2 = Q_NULLPTR;
+	float edge1[3] = {0.0f, 0.0f, 0.0f};
+	float edge2[3] = {0.0f, 0.0f, 0.0f};
+	float normal[3] = {0.0f, 0.0f, 0.0f};
+	float invlength = 0.0f;
+	int totalVertices = m_vertices.size();
+	int totalTriangles = m_indices.size() / 3;
+
+	// Initialize all the vertex normals.
+	for (int i=0; i<totalVertices; ++i)
+	{
+		pVertex0 = &m_vertices[i];
+		pVertex0->normal[0] = 0.0f;
+		pVertex0->normal[1] = 0.0f;
+		pVertex0->normal[2] = 0.0f;
+	}
+
+	// Calculate the vertex normals.
+	for (int i=0; i<totalTriangles; ++i)
+	{
+		pTriangle = &m_indices.at(i*3);
+
+		pVertex0 = &m_vertices[pTriangle[0]];
+		pVertex1 = &m_vertices[pTriangle[1]];
+		pVertex2 = &m_vertices[pTriangle[2]];
+
+		// Calculate triangle face normal.
+		edge1[0] = static_cast<float>(pVertex1->position[0] - pVertex0->position[0]);
+		edge1[1] = static_cast<float>(pVertex1->position[1] - pVertex0->position[1]);
+		edge1[2] = static_cast<float>(pVertex1->position[2] - pVertex0->position[2]);
+
+		edge2[0] = static_cast<float>(pVertex2->position[0] - pVertex0->position[0]);
+		edge2[1] = static_cast<float>(pVertex2->position[1] - pVertex0->position[1]);
+		edge2[2] = static_cast<float>(pVertex2->position[2] - pVertex0->position[2]);
+
+		normal[0] = (edge1[1]*edge2[2]) - (edge1[2]*edge2[1]);
+		normal[1] = (edge1[2]*edge2[0]) - (edge1[0]*edge2[2]);
+		normal[2] = (edge1[0]*edge2[1]) - (edge1[1]*edge2[0]);
+
+		// Accumulate the normals.
+
+		pVertex0->normal[0] += normal[0];
+		pVertex0->normal[1] += normal[1];
+		pVertex0->normal[2] += normal[2];
+
+		pVertex1->normal[0] += normal[0];
+		pVertex1->normal[1] += normal[1];
+		pVertex1->normal[2] += normal[2];
+
+		pVertex2->normal[0] += normal[0];
+		pVertex2->normal[1] += normal[1];
+		pVertex2->normal[2] += normal[2];
+	}
+
+	// Normalize the vertex normals.
+	for (int i=0; i<totalVertices; ++i)
+	{
+		pVertex0 = &m_vertices[i];
+
+		invlength = 1.0f / std::sqrt(pVertex0->normal[0]*pVertex0->normal[0] +
+				pVertex0->normal[1]*pVertex0->normal[1] +
+				pVertex0->normal[2]*pVertex0->normal[2]);
+
+		pVertex0->normal[0] *= invlength;
+		pVertex0->normal[1] *= invlength;
+		pVertex0->normal[2] *= invlength;
+	}
 }
 
 void StelOBJ::generateTangents()
@@ -1015,10 +1122,17 @@ void StelOBJ::generateAABB()
 	m_centroid = (accCentroid / m_objects.size()).toVec3f();
 }
 
-void StelOBJ::performPostProcessing()
+void StelOBJ::performPostProcessing(bool genNormals)
 {
 	QElapsedTimer timer;
 	timer.start();
+
+	//if no normals have been read at all, generate them (we do not support smoothing groups at the time, so this is quite simple)
+	if(genNormals)
+	{
+		generateNormals();
+		qCDebug(stelOBJ)<<"Normals calculated in"<<timer.restart()<<"ms";
+	}
 
 	//generate tangent data
 	generateTangents();
