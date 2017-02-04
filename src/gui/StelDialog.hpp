@@ -124,6 +124,14 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectIntProperty(QComboBox* comboBox, const QString& propName);
+	//! Helper function to connect a QSlider to an double or float StelProperty
+	//! @param slider The slider which should be connected
+	//! @param propName The id of the StelProperty which should be connected
+	//! @param minValue the int value associated with the minimal slider position
+	//! @param maxValue the int value associated with the maximal slider position
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectIntProperty(QSlider* slider, const QString& propName, int minValue, int maxValue);
 	//! Helper function to connect a QDoubleSpinBox to an double or float StelProperty
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
