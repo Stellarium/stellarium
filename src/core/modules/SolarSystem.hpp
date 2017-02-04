@@ -67,10 +67,10 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagPointer
 		   WRITE setFlagPointer
 		   NOTIFY flagPointerChanged)
-	Q_PROPERTY(bool flagNativeNames // was bool nativeNamesDisplayed
-		   READ getFlagNativeNames
-		   WRITE setFlagNativeNames
-		   NOTIFY flagNativeNamesChanged)
+	Q_PROPERTY(bool flagNativePlanetNames // was bool nativeNamesDisplayed
+		   READ getFlagNativePlanetNames
+		   WRITE setFlagNativePlanetNames
+		   NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool flagTranslatedNames
 		   READ getFlagTranslatedNames
 		   WRITE setFlagTranslatedNames
@@ -660,9 +660,9 @@ public slots:
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
 	//! Set flag which enable use native names for planets or not.
-	void setFlagNativeNames(bool b);
+	void setFlagNativePlanetNames(bool b);
 	//! Get the current value of the flag which enables showing native names for planets or not.
-	bool getFlagNativeNames(void) const;
+	bool getFlagNativePlanetNames(void) const;
 
 	//! Set flag which enable use translated names for planets or not.
 	void setFlagTranslatedNames(bool b);
@@ -719,7 +719,7 @@ signals:
 	void flagHintsChanged(bool b);
 	void trailsDisplayedChanged(bool b);
 	void flagPointerChanged(bool b);
-	void flagNativeNamesChanged(bool b);
+	void flagNativePlanetNamesChanged(bool b);
 	void flagTranslatedNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
@@ -881,7 +881,7 @@ private:
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
-	bool flagNativeNames;                       // show native names?
+	bool flagNativePlanetNames;                 // show native names for planets?
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;

@@ -127,6 +127,7 @@ void ViewDialog::createDialogContent()
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
 	//ui->viewTabWidget->removeTab(4);
 
@@ -142,76 +143,71 @@ void ViewDialog::createDialogContent()
 
 	populateLists();
 
-	// Note: GZ had a day of "fun" on 20160411-12 sorting out the merge with the restructured method from trunk.
-	// I had to check whether all entries from re-arranged trunk are present in the property-enabled versions here.
-	// I hope I have everything working again.
-	// TODO: New method: populateLightPollution may be useful. Make sure it is.
-	// Jupiter's GRS must become property, and recheck the other "from trunk" entries.
+	// TODOs after properties merge:
+	// New method: populateLightPollution may be useful. Make sure it is.
+	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
 
-	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
 
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
-	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
-	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
 
 	// Connect and initialize checkboxes and other widgets
 
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-
-	// DSO
-	updateSelectedCatalogsCheckBoxes();
-	connect(nmgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
-	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
-	updateSelectedTypesCheckBoxes();
-	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
-	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
-	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
-	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
-	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
-	connectBoolProperty(ui->checkBoxDesignationsOnlyUsage, "NebulaMgr.flagDesignationLabels");
-	connect(ui->pushButtonConfigureDSOColors, SIGNAL(clicked()), this, SLOT(showConfigureDSOColorsDialog()));
-
-	// From Trunk, but seems OK here. It was close to end before.
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
-
 	// Stars section
 	connectGroupBox(ui->starGroupBox, "actionShow_Stars");
-	connectBoolProperty(ui->starTwinkleCheckBox, "StelSkyDrawer.flagTwinkle");
 	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"StelSkyDrawer.absoluteStarScale");
 	connectDoubleProperty(ui->starRelativeScaleDoubleSpinBox, "StelSkyDrawer.relativeStarScale");
-	connectDoubleProperty(ui->milkyWayBrightnessDoubleSpinBox, "MilkyWay.intensity");
-	connectBoolProperty(ui->milkyWayCheckBox, "MilkyWay.flagMilkyWayDisplayed");
-	connectBoolProperty(ui->zodiacalLightCheckBox, "ZodiacalLight.flagZodiacalLightDisplayed");
-	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "ZodiacalLight.intensity");
+	connectBoolProperty(ui->starTwinkleCheckBox, "StelSkyDrawer.flagTwinkle");
 	connectDoubleProperty(ui->starTwinkleAmountDoubleSpinBox, "StelSkyDrawer.twinkleAmount");
-	connectBoolProperty(ui->adaptationCheckbox, "StelSkyDrawer.flagLuminanceAdaptation");
-
-	// Limit Magnitudes
-	// Stars
 	connectBoolProperty(ui->starLimitMagnitudeCheckBox,"StelSkyDrawer.flagStarMagnitudeLimit");
 	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "StelSkyDrawer.customStarMagLimit");
-	// Planets
-	connectBoolProperty(ui->planetLimitMagnitudeCheckBox,"StelSkyDrawer.flagPlanetMagnitudeLimit");
-	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customPlanetMagLimit");
-	// DSO
-	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"StelSkyDrawer.flagNebulaMagnitudeLimit");
-	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customNebulaMagLimit");
+	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
+	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
+
+	// Sky section
+	connectBoolProperty(ui->milkyWayCheckBox, "MilkyWay.flagMilkyWayDisplayed");
+	connectDoubleProperty(ui->milkyWayBrightnessDoubleSpinBox, "MilkyWay.intensity");
+	connectBoolProperty(ui->zodiacalLightCheckBox, "ZodiacalLight.flagZodiacalLightDisplayed");
+	connectDoubleProperty(ui->zodiacalLightBrightnessDoubleSpinBox, "ZodiacalLight.intensity");
+	connectBoolProperty(ui->adaptationCheckbox, "StelSkyDrawer.flagLuminanceAdaptation");
+
+	// Light pollution
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	Q_ASSERT(lmgr);
+	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	Q_ASSERT(drawer);
+	// TODO: In trunk, populateLightPollution has been added, while socis15 has setLightPollutionSpinBoxStatus.
+	// TODO: Decide which is better?
+	// The trunk version also sets value of the spinbox, this seems more complete.
+	//setLightPollutionSpinBoxStatus();
+	populateLightPollution();
+	connectBoolProperty(ui->useLightPollutionFromLocationDataCheckBox, "LandscapeMgr.flagUseLightPollutionFromDatabase");
+
+	//connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(setLightPollutionSpinBoxStatus()));
+	connect(lmgr, SIGNAL(flagUseLightPollutionFromDatabaseChanged(bool)), this, SLOT(populateLightPollution()));
+
+	connectIntProperty(ui->lightPollutionSpinBox, "StelSkyDrawer.bortleScaleIndex");
+	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+
+	// atmosphere details
+	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
 
 	// Planets section
-	//connectCheckBox(ui->showPlanetCheckBox, "actionShow_Planets"); // ui element MAY HAVE BEEN RENAMED IN TRUNK?
-	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets"); // THIS ONE FROM TRUNK
+	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets");
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
-
-	connectBoolProperty(ui->planetScaleMoonCheckBox, "SolarSystem.flagMoonScale");
-	connectDoubleProperty(ui->moonScaleFactor,"SolarSystem.moonScale");
-
 	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
+	connectBoolProperty(ui->planetLimitMagnitudeCheckBox,"StelSkyDrawer.flagPlanetMagnitudeLimit");
+	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customPlanetMagLimit");
+	connectBoolProperty(ui->planetScaleMoonCheckBox, "SolarSystem.flagMoonScale");
+	connectDoubleProperty(ui->moonScaleFactor,"SolarSystem.moonScale");
+	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
+	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
+	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
 
-	// NEW SECTION FROM TRUNK: GreatRedSpot (Jupiter)
+	// GreatRedSpot (Jupiter)
 	// TODO: put under Properties system!
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
@@ -220,36 +216,37 @@ void ViewDialog::createDialogContent()
 	connect(ui->customGrsSettingsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagCustomGrsSettings(bool)));
 	ui->pushButtonGrsDetails->setEnabled(grsFlag);
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
-	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
 
 	// Shooting stars section
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	Q_ASSERT(mmgr);
-
-	int zhr = mmgr->getZHR();
-	ui->zhrSlider->setValue(zhr);
-	ui->zhrSpinBox->setValue(zhr);
-	updateZhrDescription(zhr);
-	//connect to the data, instead of the GUI
+	connectIntProperty(ui->zhrSpinBox, "SporadicMeteorMgr.zhr");
+	connectIntProperty(ui->zhrSlider, "SporadicMeteorMgr.zhr", ui->zhrSlider->minimum(), ui->zhrSlider->maximum());
+	updateZhrDescription(mmgr->getZHR());
 	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(updateZhrDescription(int)));
-	connect(mmgr, SIGNAL(zhrChanged(int)), ui->zhrSlider, SLOT(setValue(int)));
-	connect(mmgr, SIGNAL(zhrChanged(int)), ui->zhrSpinBox, SLOT(setValue(int)));
-	connect(ui->zhrSlider, SIGNAL(valueChanged(int)), mmgr, SLOT(setZHR(int)));
-	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), mmgr, SLOT(setZHR(int)));
 
-	// Labels section
-	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
-	connectGroupBox(ui->groupBoxLabelsAndMarkers, "actionShow_Nebulas");
-	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
+	// DSO tab contents
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+	updateSelectedCatalogsCheckBoxes();
+	connect(nmgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
+	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
+	updateSelectedTypesCheckBoxes();
+	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
+	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
+	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
 
-	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
-	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
+	// DSO Labels section
+	connectGroupBox(ui->groupBoxDSOLabelsAndMarkers, "actionShow_Nebulas");
 	connectDoubleProperty(ui->nebulasLabelsHorizontalSlider, "NebulaMgr.labelsAmount",0.0,10.0);
 	connectDoubleProperty(ui->nebulasHintsHorizontalSlider, "NebulaMgr.hintsAmount",0.0,10.0);
+	connectBoolProperty(ui->checkBoxDesignationsOnlyUsage, "NebulaMgr.flagDesignationLabels");
+	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
+	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
+	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"StelSkyDrawer.flagNebulaMagnitudeLimit");
+	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customNebulaMagLimit");
+	connect(ui->pushButtonConfigureDSOColors, SIGNAL(clicked()), this, SLOT(showConfigureDSOColorsDialog()));
 
 	// Landscape section
-	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	Q_ASSERT(lmgr);
 	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
 	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
@@ -276,31 +273,6 @@ void ViewDialog::createDialogContent()
 
 	connect(lmgr, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
-
-	// Light pollution
-	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	// TODO: In trunk, populateLightPollution has been added, while socis has setLightPollutionSpinBoxStatus.
-	// The trunk version also sets value of the spinbox, this seems more complete.
-	//setLightPollutionSpinBoxStatus();
-	populateLightPollution();
-	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
-	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
-	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), ui->useLocationDataCheckBox, SLOT(setChecked(bool)));
-	// TODO: Decide which is better?
-	//connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(setLightPollutionSpinBoxStatus()));
-	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
-
-
-	ui->lightPollutionSpinBox->setValue(drawer->getBortleScaleIndex());
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), drawer, SLOT(setBortleScaleIndex(int)));
-	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), ui->lightPollutionSpinBox, SLOT(setValue(int)));
-	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
-
-	// Note: This has vanished in the merge on 20160411. -- Ah, moved to ConfigurationDialog.
-	//connectBoolProperty(ui->autoChangeLandscapesCheckBox,"LandscapeMgr.flagLandscapeAutoSelection");
-	
-	// atmosphere details
-	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
 
 	// Grid and lines
 	connectCheckBox(ui->showEquatorLineCheckBox,		"actionShow_Equator_Line");
@@ -396,32 +368,34 @@ void ViewDialog::createDialogContent()
 	connect(ui->colorEquinoxPoints,			SIGNAL(released()), this, SLOT(askEquinoxPointsColor()));
 	connect(ui->colorCardinalPoints,		SIGNAL(released()), this, SLOT(askCardinalPointsColor()));
 
-	// Constellations
-	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
-	connectCheckBox(ui->showConstellationLabelsCheckBox, "actionShow_Constellation_Labels");
-	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
-	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
-
-	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,"ConstellationMgr.artIntensity");
-	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"ConstellationMgr.constellationLineThickness");
-
-	colorButton(ui->colorConstellationBoundaries,	"ConstellationMgr.boundariesColor");
-	colorButton(ui->colorConstellationLabels,	"ConstellationMgr.namesColor");
-	colorButton(ui->colorConstellationLines,	"ConstellationMgr.linesColor");
-
-	connect(ui->colorConstellationBoundaries,	SIGNAL(released()), this, SLOT(askConstellationBoundariesColor()));
-	connect(ui->colorConstellationLabels,		SIGNAL(released()), this, SLOT(askConstellationLabelsColor()));
-	connect(ui->colorConstellationLines,		SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
+	// Projection
+	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
+	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
+	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(defaultSkyCultureChanged(QString)),this,SLOT(updateDefaultSkyCulture()));
 	updateDefaultSkyCulture();
 
-	connectCheckBox(ui->nativeNameCheckBox,"actionShow_Skyculture_Nativenames");
-
 	// allow to display short names and inhibit translation.
 	connectIntProperty(ui->skyCultureNamesStyleComboBox,"ConstellationMgr.constellationDisplayStyle");
+	connectCheckBox(ui->nativePlanetNamesCheckBox,"actionShow_Skyculture_NativePlanetNames");
+
+	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
+	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"ConstellationMgr.constellationLineThickness");
+	connectCheckBox(ui->showConstellationLabelsCheckBox, "actionShow_Constellation_Labels");
+	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
+	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
+	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,"ConstellationMgr.artIntensity");
+
+	colorButton(ui->colorConstellationBoundaries,	"ConstellationMgr.boundariesColor");
+	colorButton(ui->colorConstellationLabels,	"ConstellationMgr.namesColor");
+	colorButton(ui->colorConstellationLines,	"ConstellationMgr.linesColor");
+	connect(ui->colorConstellationBoundaries,	SIGNAL(released()), this, SLOT(askConstellationBoundariesColor()));
+	connect(ui->colorConstellationLabels,		SIGNAL(released()), this, SLOT(askConstellationLabelsColor()));
+	connect(ui->colorConstellationLines,		SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
+
 
 	// Sky layers. This not yet finished and not visible in releases.
 	// TODO: These 4 lines are commented away in trunk.
