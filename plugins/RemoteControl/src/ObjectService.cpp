@@ -24,6 +24,10 @@
 #include "StelCore.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMainScriptAPI.hpp"
+#include "StelObjectMgr.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QEventLoop>
 #include <QJsonArray>
@@ -111,6 +115,12 @@ void ObjectService::getImpl(const QByteArray& operation, const APIParameters &pa
 		//if no parameter is given, uses the currently selected object
 
 		QString name = QString::fromUtf8(parameters.value("name"));
+		QString formatStr = QString::fromUtf8(parameters.value("format"));
+		bool formatHtml;
+		if (formatStr == "map")
+			formatHtml=false;
+		else
+			formatHtml=true;
 
 		StelObjectP obj;
 		if(!name.isEmpty())
@@ -139,12 +149,32 @@ void ObjectService::getImpl(const QByteArray& operation, const APIParameters &pa
 			obj = selection[0];
 		}
 
-		QString infoStr;
-		QMetaObject::invokeMethod(this,"getInfoString",SERVICE_DEFAULT_INVOKETYPE,
-					  Q_RETURN_ARG(QString,infoStr),
-					  Q_ARG(StelObjectP,obj));
+		if (formatHtml)
+		{
+			QString infoStr;
+			QMetaObject::invokeMethod(this,"getInfoString",SERVICE_DEFAULT_INVOKETYPE,
+						  Q_RETURN_ARG(QString,infoStr),
+						  Q_ARG(StelObjectP,obj));
 
-		response.setData(infoStr.toUtf8());
+			response.setData(infoStr.toUtf8());
+		}
+		else
+		{
+			QJsonObject infoObj;
+			StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+			StelObjectP obj = omgr->searchByName(name);
+			QVariantMap infoMap=StelMainScriptAPI::getObjectInfo(obj);
+			QVariantMap::const_iterator i;
+			for (i=infoMap.constBegin(); i!=infoMap.constEnd(); ++i)
+				infoObj.insert(i.key(), i.value().toString());
+
+			// We make use of 2 extra values for linked applications. These govern sky brightness and can be used for ambient settings.
+			LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
+			infoObj.insert("ambientLum", QString().setNum(lmgr->getAtmosphereAverageLuminance()));
+			infoObj.insert("ambientInt", QString().setNum(lmgr->getCurrentLandscape()->getBrightness()));
+			response.writeJSON(QJsonDocument(infoObj));
+
+		}
 	}
 	else if (operation == "listobjecttypes")
 	{
