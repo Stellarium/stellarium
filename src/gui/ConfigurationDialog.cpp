@@ -611,7 +611,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/grs_jd",				propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
 	conf->setValue("astro/flag_planets_labels",		propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
 	conf->setValue("astro/labels_amount",			propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
-	conf->setValue("viewing/flag_planets_native_names",	propMgr->getStelPropertyValue("SolarSystem.flagNativeNames").toBool());
+	conf->setValue("viewing/flag_planets_native_names",	propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid",		propMgr->getStelPropertyValue("GridLinesMgr.azimuthalGridDisplayed").toBool());
@@ -651,7 +651,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_constellation_art",	propMgr->getStelPropertyValue("ConstellationMgr.artDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_isolate_selected", propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
 	conf->setValue("viewing/flag_landscape_autoselection",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
-	conf->setValue("viewing/flag_light_pollution_database",	propMgr->getStelPropertyValue("LandscapeMgr.databaseUsage").toBool());
+	conf->setValue("viewing/flag_light_pollution_database",	propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
 	conf->setValue("viewing/flag_atmosphere_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagAtmosphereAutoEnabling").toBool());
 	conf->setValue("viewing/constellation_art_intensity",	propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_name_style",	ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));

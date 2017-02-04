@@ -80,10 +80,10 @@ class LandscapeMgr : public StelModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
-	Q_PROPERTY(bool databaseUsage
+	Q_PROPERTY(bool flagUseLightPollutionFromDatabase // was databaseUsage
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
-		   NOTIFY lightPollutionUsageChanged)
+		   NOTIFY flagUseLightPollutionFromDatabaseChanged)
 	Q_PROPERTY(bool flagLandscapeAutoSelection
 		   READ getFlagLandscapeAutoSelection
 		   WRITE setFlagLandscapeAutoSelection
@@ -440,7 +440,7 @@ signals:
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
-	void lightPollutionUsageChanged(const bool usage);
+	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
 	void flagLandscapeAutoSelectionChanged(const bool value);
 	void flagLandscapeSetsLocationChanged(const bool value);
 	void flagLandscapeUseMinimalBrightnessChanged(const bool value);
