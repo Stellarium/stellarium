@@ -98,6 +98,7 @@ class QSliderStelPropertyConnectionHelper : public StelPropertyProxy
 	Q_OBJECT
 public:
 	QSliderStelPropertyConnectionHelper(StelProperty* prop, double minValue, double maxValue, QSlider* slider);
+	QSliderStelPropertyConnectionHelper(StelProperty* prop, int minValue, int maxValue, QSlider* slider);
 protected slots:
 	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
 private slots:
