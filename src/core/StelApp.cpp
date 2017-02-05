@@ -665,8 +665,7 @@ void StelApp::prepareRenderBuffer()
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 		int w = params.viewportXywh[2];
 		int h = params.viewportXywh[3];
-		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
-		renderBuffer = new QOpenGLFramebufferObject(w, h, QOpenGLFramebufferObject::CombinedDepthStencil);
+		renderBuffer = new QOpenGLFramebufferObject(w, h, QOpenGLFramebufferObject::Depth); // we only need depth here
 	}
 	renderBuffer->bind();
 }
@@ -693,9 +692,6 @@ void StelApp::draw()
 	currentFbo = renderBuffer ? renderBuffer->handle() : drawFbo;
 
 	core->preDraw();
-	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
-	GL(gl->glClearColor(0,0,0,0));
-	GL(gl->glClear(GL_COLOR_BUFFER_BIT));
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
 	foreach(StelModule* module, modules)

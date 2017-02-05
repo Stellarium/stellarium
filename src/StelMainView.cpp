@@ -329,12 +329,17 @@ protected:
 		//qDebug()<<"dt"<<dt;
 		previousPaintTime = now;
 
-		//update and draw
-		StelApp& app = StelApp::getInstance();
-		app.update(dt);
-
 		//important to call this, or Qt may have invalid state after we have drawn (wrong textures, etc...)
 		painter->beginNativePainting();
+		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
+
+		//clear the buffer (not strictly required for us because we repaint all pixels, but should improve perf on tile-based renderers)
+		gl->glClearColor(0,0,0,1);
+		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		//update and draw
+		StelApp& app = StelApp::getInstance();
+		app.update(dt); // may also issue GL calls
 		app.draw();
 		painter->endNativePainting();
 
