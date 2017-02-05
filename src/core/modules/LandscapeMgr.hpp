@@ -214,6 +214,10 @@ public slots:
 	//! @param changeLocationDuration the duration of the transition animation
 	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
 
+	//! Get the current landscape or lightscape brightness (0..1)
+	//! @param light true to retrieve the light layer brightness value.
+	float getCurrentLandscapeBrightness(const bool light=false) const {return (light? landscape->getLightscapeBrightness() : landscape->getBrightness());}
+
 	//! Preload a landscape into cache.
 	//! @param id the ID of a landscape
 	//! @param replace true if existing landscape entry should be replaced (useful during development to reload after edit)
