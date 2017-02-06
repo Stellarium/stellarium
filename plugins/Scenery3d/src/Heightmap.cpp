@@ -66,9 +66,9 @@ void Heightmap::setMeshData(const IdxList &indexList, const PosList &posList, co
 	range = max - min;
 
 	QElapsedTimer timer;
-	timer.start();
+	/*timer.start();
 	this->initQuadtree();
-	qDebug()<<"initQuadtree\t"<<qSetFieldWidth(12)<<right<<timer.nsecsElapsed();
+	qDebug()<<"initQuadtree\t"<<qSetFieldWidth(12)<<right<<timer.nsecsElapsed();*/
 	timer.start();
 	this->initGrid();
 	qDebug()<<"initGrid\t\t"<<qSetFieldWidth(12)<<right<<timer.nsecsElapsed();
@@ -81,13 +81,13 @@ void Heightmap::setMeshData(const IdxList &indexList, const PosList &posList, co
  */
 float Heightmap::getHeight(const float x, const float y) const
 {
-	QElapsedTimer timer;
+	/*QElapsedTimer timer;
 	timer.start();
 	if(!rootNode)
 		return nullHeight;
 	float height = rootNode->getHeightAtPoint(Vec2f(x,y),posList);
 	qint64 qtTime = timer.nsecsElapsed();
-	timer.start();
+	timer.start();*/
 
 	Heightmap::GridSpace* space = getSpace(x, y);
 	if (space == NULL)
@@ -97,9 +97,9 @@ float Heightmap::getHeight(const float x, const float y) const
 	else
 	{
 		float h = space->getHeight(posList, x, y);
-		qint64 gridTime = timer.nsecsElapsed();
-		qDebug()<<"qt"<<qtTime<<"grid"<<gridTime;
-		Q_ASSERT(height == h);
+		//qint64 gridTime = timer.nsecsElapsed();
+		//qDebug()<<"qt"<<qtTime<<"grid"<<gridTime;
+		//Q_ASSERT(height == h);
 		if (h == NO_HEIGHT)
 		{
 			return nullHeight;
