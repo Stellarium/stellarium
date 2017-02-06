@@ -97,7 +97,7 @@ bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder)
 }
 
 //macro to test out different ways of comparison and their performance
-#define CMD_CMP(a) (cmd==QLatin1String(a))
+#define CMD_CMP(a) (QLatin1String(a)==cmd)
 
 //macro to increase a list by size one and return a reference to the last element
 //used instead of append() to avoid memory copies
@@ -153,6 +153,11 @@ bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsSta
 
 	out = params.at(paramsStart).toString();
 	return true;
+}
+
+QString StelOBJ::getRestOfString(const QString &strip, const QString &line)
+{
+	return line.mid(strip.length()).trimmed();
 }
 
 bool StelOBJ::parseFloat(const ParseParams &params, float &out, int paramsStart)
@@ -438,123 +443,184 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 			const QStringRef& cmd = splits.at(0);
 
 			//macro to make sure a material is currently active
-			#define CHECK_MTL(a) do{ if(curMaterial) { a; } else { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; } } while(0)
+			#define CHECK_MTL() if(!curMaterial) { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; }
 			//macro to make path absolute, also to force use of forward slashes
 			#define MAKE_ABS(a) if(!a.isEmpty()){ a = dir.absoluteFilePath(QDir::cleanPath(a.replace('\\','/'))); }
 			if(CMD_CMP("newmtl")) //define new material
 			{
-				ok = splits.size()==2;
+				//use rest of line to support spaces in file name
+				QString name = getRestOfString(QStringLiteral("newmtl"),line);
+				ok = !name.isEmpty();
 				if(ok)
 				{
-					const QStringRef& name = splits.at(1);
 					//add a new material with the specified name
-					list.resize(list.size()+1);
-					curMaterial = &list.last();
-					curMaterial->name = name.toString();
-					ok = !name.isEmpty();
+					curMaterial = &INC_LIST(list);
+					curMaterial->name = name;
 				}
-				if(!ok)
+				else
 				{
 					qCCritical(stelOBJ)<<"Invalid newmtl statement"<<line;
 				}
 			}
 			else if(CMD_CMP("Ka")) //define ambient color
 			{
-				CHECK_MTL(ok = parseVec3(splits,curMaterial->Ka));
+				CHECK_MTL();
+				if(ok)
+					ok = parseVec3(splits,curMaterial->Ka);
 			}
 			else if(CMD_CMP("Kd")) //define diffuse color
 			{
-				CHECK_MTL(ok = parseVec3(splits,curMaterial->Kd));
+				CHECK_MTL();
+				if(ok)
+					ok = parseVec3(splits,curMaterial->Kd);
 			}
 			else if(CMD_CMP("Ks")) //define specular color
 			{
-				CHECK_MTL(ok = parseVec3(splits,curMaterial->Ks));
+				CHECK_MTL();
+				if(ok)
+					ok = parseVec3(splits,curMaterial->Ks);
 			}
 			else if(CMD_CMP("Ke")) //define emissive color
 			{
-				CHECK_MTL(ok = parseVec3(splits,curMaterial->Ke));
+				CHECK_MTL();
+				if(ok)
+					ok = parseVec3(splits,curMaterial->Ke);
 			}
 			else if(CMD_CMP("Ns")) //define specular coefficient
 			{
-				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->Ns));
+				CHECK_MTL();
+				if(ok)
+					ok = StelOBJ::parseFloat(splits,curMaterial->Ns);
 			}
 			else if(CMD_CMP("d"))
 			{
-				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->d));
-				//clamp d to [0,1]
-				curMaterial->d = std::max(0.0f, std::min(curMaterial->d,1.0f));
+				CHECK_MTL();
+				if(ok)
+				{
+					ok = StelOBJ::parseFloat(splits,curMaterial->d);
+					//clamp d to [0,1]
+					curMaterial->d = std::max(0.0f, std::min(curMaterial->d,1.0f));
+				}
 			}
 			else if(CMD_CMP("Tr"))
 			{
-				//Tr should be the inverse of d, in theory
-				//not all exporters seem to follow this rule...
-				CHECK_MTL(ok = StelOBJ::parseFloat(splits,curMaterial->d));
-				//clamp d to [0,1]
-				curMaterial->d = 1.0f - std::max(0.0f, std::min(curMaterial->d,1.0f));
+				CHECK_MTL();
+				if(ok)
+				{
+					//Tr should be the inverse of d, in theory
+					//not all exporters seem to follow this rule...
+					ok = StelOBJ::parseFloat(splits,curMaterial->d);
+					//clamp d to [0,1]
+					curMaterial->d = 1.0f - std::max(0.0f, std::min(curMaterial->d,1.0f));
+				}
 			}
 			else if(CMD_CMP("map_Ka")) //define ambient map
 			{
-				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ka));
-				MAKE_ABS(curMaterial->map_Ka);
+				CHECK_MTL();
+				if(ok)
+				{
+					//use rest of line to support spaces in file name
+					curMaterial->map_Ka = getRestOfString(QStringLiteral("map_Ka"),line);
+					ok = !curMaterial->map_Ka.isEmpty();
+					MAKE_ABS(curMaterial->map_Ka);
+				}
 			}
 			else if(CMD_CMP("map_Kd")) //define diffuse map
 			{
-				CHECK_MTL(ok = parseString(splits,curMaterial->map_Kd));
-				MAKE_ABS(curMaterial->map_Kd);
+				CHECK_MTL();
+				if(ok)
+				{
+					//use rest of line to support spaces in file name
+					curMaterial->map_Kd = getRestOfString(QStringLiteral("map_Kd"),line);
+					ok = !curMaterial->map_Kd.isEmpty();
+					MAKE_ABS(curMaterial->map_Kd);
+				}
 			}
 			else if(CMD_CMP("map_Ks")) //define specular map
 			{
-				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ks));
-				MAKE_ABS(curMaterial->map_Ks);
+				CHECK_MTL();
+				if(ok)
+				{
+					//use rest of line to support spaces in file name
+					curMaterial->map_Ks = getRestOfString(QStringLiteral("map_Ks"),line);
+					ok = !curMaterial->map_Ks.isEmpty();
+					MAKE_ABS(curMaterial->map_Ks);
+				}
 			}
 			else if(CMD_CMP("map_Ke")) //define emissive map
 			{
-				CHECK_MTL(ok = parseString(splits,curMaterial->map_Ke));
-				MAKE_ABS(curMaterial->map_Ke);
+				CHECK_MTL();
+				if(ok)
+				{
+					//use rest of line to support spaces in file name
+					curMaterial->map_Ke = getRestOfString(QStringLiteral("map_Ke"),line);
+					ok = !curMaterial->map_Ke.isEmpty();
+					MAKE_ABS(curMaterial->map_Ke);
+				}
 			}
 			else if(CMD_CMP("map_bump")) //define bump/normal map
 			{
-				CHECK_MTL(ok = parseString(splits,curMaterial->map_bump));
-				MAKE_ABS(curMaterial->map_bump);
+				CHECK_MTL();
+				if(ok)
+				{
+					//use rest of line to support spaces in file name
+					curMaterial->map_bump = getRestOfString(QStringLiteral("map_bump"),line);
+					ok = !curMaterial->map_bump.isEmpty();
+					MAKE_ABS(curMaterial->map_bump);
+				}
 			}
 			else if(CMD_CMP("map_height")) //define height map
 			{
-				CHECK_MTL(ok = parseString(splits,curMaterial->map_height));
-				MAKE_ABS(curMaterial->map_height);
+				CHECK_MTL();
+				if(ok)
+				{
+					//use rest of line to support spaces in file name
+					curMaterial->map_height = getRestOfString(QStringLiteral("map_height"),line);
+					ok = !curMaterial->map_height.isEmpty();
+					MAKE_ABS(curMaterial->map_height);
+				}
 			}
 			else if(CMD_CMP("illum"))
 			{
-				int tmp;
-				CHECK_MTL(ok = parseInt(splits,tmp));
-				curMaterial->illum = static_cast<Illum>(tmp);
-
-				if(tmp<I_DIFFUSE || tmp > I_TRANSLUCENT)
+				CHECK_MTL();
+				if(ok)
 				{
-					ok = false;
-					tmp = I_NONE;
-					qCCritical(stelOBJ())<<"Invalid illum statement"<<line;
-				}
+					int tmp;
+					ok = parseInt(splits,tmp);
+					curMaterial->illum = static_cast<Illum>(tmp);
 
-				//if between these 2, set to translucent and warn
-				if(tmp>I_SPECULAR && tmp < I_TRANSLUCENT)
-				{
-					qCWarning(stelOBJ())<<"Treating illum "<<tmp<<"as TRANSLUCENT";
-					tmp = I_TRANSLUCENT;
+					if(tmp<I_DIFFUSE || tmp > I_TRANSLUCENT)
+					{
+						ok = false;
+						tmp = I_NONE;
+						qCCritical(stelOBJ())<<"Invalid illum statement"<<line;
+					}
+
+					//if between these 2, set to translucent and warn
+					if(tmp>I_SPECULAR && tmp < I_TRANSLUCENT)
+					{
+						qCWarning(stelOBJ())<<"Treating illum "<<tmp<<"as TRANSLUCENT";
+						tmp = I_TRANSLUCENT;
+					}
+					curMaterial->illum = static_cast<Illum>(tmp);
 				}
-				curMaterial->illum = static_cast<Illum>(tmp);
 			}
 			else if(!cmd.startsWith("#"))
 			{
-				//unknown command, add to additional params
-				//we need to convert to actual string instances to store them
-				QStringList list;
-				for(int i = 1; i<splits.size();++i)
+				CHECK_MTL();
+				if(ok)
 				{
-					list.append(splits.at(i).toString());
-				}
+					//unknown command, add to additional params
+					//we need to convert to actual string instances to store them
+					QStringList list;
+					for(int i = 1; i<splits.size();++i)
+					{
+						list.append(splits.at(i).toString());
+					}
 
-				CHECK_MTL(curMaterial->additionalParams.insert(cmd.toString(),list));
-				//qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
+					curMaterial->additionalParams.insert(cmd.toString(),list);
+					//qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
+				}
 			}
 		}
 
@@ -620,6 +686,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 	VertexCache vertCache;
 	CurrentParserState state = CurrentParserState();
+	const QRegularExpression separator("\\s");
+	separator.optimize();
 
 	int lineNr=0;
 
@@ -627,11 +695,11 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 	while(!stream.atEnd())
 	{
 		++lineNr;
-		//make sure only spaces are the separator
-		QString line = stream.readLine().simplified();
+		//ignore front/back whitespace
+		QString line = stream.readLine().trimmed();
 
-		//split line by space
-		QVector<QStringRef> splits = line.splitRef(' ',QString::SkipEmptyParts);
+		//split line by whitespace
+		QVector<QStringRef> splits = line.splitRef(separator,QString::SkipEmptyParts);
 		if(!splits.isEmpty())
 		{
 			const QStringRef& cmd = splits.at(0);
@@ -728,10 +796,11 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 			}
 			else if(CMD_CMP("usemtl"))
 			{
-				ok = splits.size()==2;
+				//use the rest of the string
+				QString mtl = getRestOfString(QStringLiteral("usemtl"),line);
+				ok = !mtl.isEmpty();
 				if(ok)
 				{
-					QString mtl = splits.at(1).toString();
 					if(m_materialMap.contains(mtl))
 					{
 						//set material as active
@@ -743,14 +812,18 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 						qCCritical(stelOBJ)<<"Unknown material"<<mtl<<"has been referenced";
 					}
 				}
+				else
+					qCCritical(stelOBJ)<<"No material name given";
 			}
 			else if(CMD_CMP("mtllib"))
 			{
-				ok = splits.size()==2;
+				//use the rest of the string
+				QString fileName = getRestOfString(QStringLiteral("mtllib"),line);
+				ok = !fileName.isEmpty();
 				if(ok)
 				{
 					//load external material file
-					MaterialList newMaterials = Material::loadFromFile(baseDir.absoluteFilePath(splits.at(1).toString()));
+					MaterialList newMaterials = Material::loadFromFile(baseDir.absoluteFilePath(fileName));
 					foreach(const Material& m, newMaterials)
 					{
 						m_materials.append(m);
@@ -759,21 +832,28 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 						//because of list resizeing
 						m_materialMap.insert(m.name,m_materials.size()-1);
 					}
-					qCDebug(stelOBJ)<<newMaterials.size()<<"materials loaded from MTL file"<<splits.at(1);
+					qCDebug(stelOBJ)<<newMaterials.size()<<"materials loaded from MTL file"<<fileName;
 				}
+				else
+					qCCritical(stelOBJ)<<"No material file name given";
 			}
 			else if(CMD_CMP("o"))
 			{
-				//create new object
-				Object& obj = INC_LIST(m_objects);
-				ok = parseString(splits, obj.name);
+				//use the rest of the string
+				QString objName = getRestOfString(QStringLiteral("o"),line);
+				ok = !objName.isEmpty();
 				if(ok)
 				{
+					//create new object
+					Object& obj = INC_LIST(m_objects);
+					obj.name = objName;
 					m_objectMap.insert(obj.name,m_objects.size()-1);
 					state.currentObject = &obj;
 					//also clear material group to make sure a new group is created
 					state.currentMaterialGroup = Q_NULLPTR;
 				}
+				else
+					qCCritical(stelOBJ)<<"Object name is required";
 			}
 			else if(CMD_CMP("s"))
 			{

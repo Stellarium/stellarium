@@ -117,7 +117,9 @@ public:
 		//! space-separated parameters to this statement
 		ParamsMap additionalParams;
 
-		//! Loads all materials contained in an .mtl file
+		//! Loads all materials contained in an .mtl file.
+		//! Does not check if the texture map files exist.
+		//! @return empty vector on error
 		static QVector<Material> loadFromFile(const QString& filename);
 	protected:
 		//! Parses a bool from a parameter list (like included in the ::additionalParams)
@@ -333,6 +335,7 @@ private:
 	inline static bool parseInt(const ParseParams& params, int& out, int paramsStart=1);
 	//! Parse a single string
 	inline static bool parseString(const ParseParams &params, QString &out, int paramsStart=1);
+	inline static QString getRestOfString(const QString &strip, const QString& line);
 	//! Parse a single float
 	inline static bool parseFloat(const ParseParams& params, float& out, int paramsStart=1);
 	//! Generic Vec3 parse method, used for position, normals, colors, etc.
