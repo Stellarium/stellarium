@@ -334,7 +334,7 @@ protected:
 		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 
 		//clear the buffer (not strictly required for us because we repaint all pixels, but should improve perf on tile-based renderers)
-		gl->glClearColor(0,0,0,1);
+		gl->glClearColor(0,0,0,0); //we also clear alpha to zero
 		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		//update and draw
