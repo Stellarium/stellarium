@@ -1743,6 +1743,7 @@ void StelCore::resetSync()
 
 void StelCore::registerMathMetaTypes()
 {
+	//enables use of these types in QVariant, StelProperty, signals and slots
 	qRegisterMetaType<Vec2d>();
 	qRegisterMetaType<Vec2f>();
 	qRegisterMetaType<Vec2i>();
@@ -1756,6 +1757,21 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaType<Mat4f>();
 	qRegisterMetaType<Mat3d>();
 	qRegisterMetaType<Mat3f>();
+
+	//registers the QDataStream operators, so that QVariants with these types can be saved
+	qRegisterMetaTypeStreamOperators<Vec2d>();
+	qRegisterMetaTypeStreamOperators<Vec2f>();
+	qRegisterMetaTypeStreamOperators<Vec2i>();
+	qRegisterMetaTypeStreamOperators<Vec3d>();
+	qRegisterMetaTypeStreamOperators<Vec3f>();
+	qRegisterMetaTypeStreamOperators<Vec3i>();
+	qRegisterMetaTypeStreamOperators<Vec4d>();
+	qRegisterMetaTypeStreamOperators<Vec4f>();
+	qRegisterMetaTypeStreamOperators<Vec4i>();
+	qRegisterMetaTypeStreamOperators<Mat4d>();
+	qRegisterMetaTypeStreamOperators<Mat4f>();
+	qRegisterMetaTypeStreamOperators<Mat3d>();
+	qRegisterMetaTypeStreamOperators<Mat3f>();
 
 	//for debugging QVariants with these types, it helps if we register the string converters
 	QMetaType::registerConverter(&Vec3d::toString);

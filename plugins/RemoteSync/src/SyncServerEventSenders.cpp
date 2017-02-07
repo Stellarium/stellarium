@@ -24,7 +24,9 @@
 #include "StelCore.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
+using namespace SyncProtocol;
 
 SyncServerEventSender::SyncServerEventSender()
 	: isDirty(false)
@@ -101,4 +103,38 @@ Selection SelectionEventSender::constructMessage()
 	}
 
 	return msg;
+}
+
+StelPropertyEventSender::StelPropertyEventSender()
+{
+	propMgr = StelApp::getInstance().getStelPropertyManager();
+	connect(propMgr, SIGNAL(stelPropertyChanged(StelProperty*,QVariant)), this, SLOT(sendStelPropChange(StelProperty*,QVariant)));
+}
+
+void StelPropertyEventSender::sendStelPropChange(StelProperty* prop, const QVariant &val)
+{
+	//only send changes that can be applied on clients
+	if(prop->isSynchronizable())
+	{
+		StelPropertyUpdate msg;
+		msg.propId = prop->getId();
+		msg.value = val;
+		broadcastMessage(msg);
+	}
+}
+
+void StelPropertyEventSender::newClientConnected(SyncRemotePeer &client)
+{
+	//send all current StelProperty values to the client
+	QList<StelProperty*> propList = propMgr->getAllProperties();
+	foreach(StelProperty* prop, propList)
+	{
+		if(prop->isSynchronizable())
+			continue;
+
+		StelPropertyUpdate msg;
+		msg.propId = prop->getId();
+		msg.value = prop->getValue();
+		client.writeMessage(msg);
+	}
 }

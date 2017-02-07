@@ -226,6 +226,10 @@ public slots:
 	//! If false, setValue can be used.
 	bool isReadOnly() const;
 
+	//! True when this property can be synchronized with external sources.
+	//! This is the case when it is writable, and it is marked as \c STORED true (default).
+	bool isSynchronizable() const;
+
 	//! If true, the Q_PROPERTY has a NOTIFY signal and the changed() signal can be used
 	bool canNotify() const;
 
@@ -301,13 +305,13 @@ public:
 	bool setStelPropertyValue(const QString& id, const QVariant &value) const;
 	//! Returns the QMetaProperty information for the given \p id.
 	QMetaProperty getMetaProperty(const QString& id) const;
-private slots:
-	void onStelPropChanged(const QVariant& val);
 signals:
 	//! Emitted when any registered StelProperty has been changed
-	//! @param id The unique id of the property that was changed
+	//! @param prop The property that was changed
 	//! @param value The new value of the property
-	void stelPropChanged(const QString& id, const QVariant& value);
+	void stelPropertyChanged(StelProperty* prop, const QVariant& value);
+private slots:
+	void onStelPropChanged(const QVariant& val);
 private:
 	StelProperty* registerProperty(const QString &id, QObject *target, const QMetaProperty& prop);
 

@@ -36,6 +36,7 @@ class StelLocaleMgr;
 class StelMovementMgr;
 class StelObjectMgr;
 class StelPropertyMgr;
+class StelProperty;
 class StelScriptMgr;
 class StelSkyCultureMgr;
 
@@ -77,7 +78,7 @@ private slots:
 	void setFov(double fov);
 
 	void actionToggled(const QString& id, bool val);
-	void propertyChanged(const QString& id, const QVariant& val);
+	void propertyChanged(StelProperty* prop, const QVariant &val);
 
 private:
 	StelCore* core;
