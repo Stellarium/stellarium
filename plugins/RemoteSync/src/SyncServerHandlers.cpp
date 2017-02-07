@@ -20,6 +20,8 @@
 #include "SyncServerHandlers.hpp"
 #include "SyncServer.hpp"
 
+using namespace SyncProtocol;
+
 ServerHandler::ServerHandler(SyncServer *server)
 	: server(server)
 {

@@ -26,6 +26,7 @@
 #include "StelTranslator.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 using namespace SyncProtocol;
 
@@ -239,5 +240,22 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncRemotePeer &
 	//set selection
 	objMgr->setSelectedObject(selection,StelModule::ReplaceSelection);
 
+	return true;
+}
+
+ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler()
+{
+	propMgr = StelApp::getInstance().getStelPropertyManager();
+}
+
+bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+{
+	StelPropertyUpdate msg;
+	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+
+	if(!ok)
+		return false;
+
+	propMgr->setStelPropertyValue(msg.propId,msg.value);
 	return true;
 }

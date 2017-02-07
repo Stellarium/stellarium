@@ -169,3 +169,17 @@ bool Selection::deserialize(QDataStream &stream, tPayloadSize dataSize)
 	stream>>selectedObjectNames;
 	return !stream.status();
 }
+
+void StelPropertyUpdate::serialize(QDataStream &stream) const
+{
+	writeString(stream,propId);
+	stream<<value;
+}
+
+bool StelPropertyUpdate::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	Q_UNUSED(dataSize);
+	propId = readString(stream);
+	stream>>value;
+	return !stream.status();
+}
