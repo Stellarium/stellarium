@@ -1429,6 +1429,7 @@ bool SolarSystem::getFlagLabels() const
 
 void SolarSystem::setFlagOrbits(bool b)
 {
+	bool old = flagOrbits;
 	flagOrbits = b;
 	if (!b || !selected || selected==sun)
 	{
@@ -1457,7 +1458,8 @@ void SolarSystem::setFlagOrbits(bool b)
 				p->setFlagOrbits(false);
 		}
 	}
-	emit flagOrbitsChanged(b);
+	if(old != flagOrbits)
+		emit flagOrbitsChanged(flagOrbits);
 }
 
 void SolarSystem::setFlagLightTravelTime(bool b)
