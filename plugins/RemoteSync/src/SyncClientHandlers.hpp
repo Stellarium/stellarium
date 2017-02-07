@@ -76,7 +76,6 @@ public:
 };
 
 class StelObjectMgr;
-
 class ClientSelectionHandler : public ClientHandler
 {
 public:
@@ -84,6 +83,16 @@ public:
 	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 private:
 	StelObjectMgr* objMgr;
+};
+
+class StelPropertyMgr;
+class ClientStelPropertyUpdateHandler : public ClientHandler
+{
+public:
+	ClientStelPropertyUpdateHandler();
+	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelPropertyMgr* propMgr;
 };
 
 #endif

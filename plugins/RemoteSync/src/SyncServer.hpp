@@ -42,7 +42,7 @@ public:
 	void update();
 
 	//! Broadcasts this message to all connected and authenticated clients
-	void broadcastMessage(const SyncMessage& msg);
+	void broadcastMessage(const SyncProtocol::SyncMessage& msg);
 public slots:
 	//! Starts the SyncServer on the specified port. If the server is already running, stops it first.
 	//! Returns true if successful (false usually means port was in use, use getErrorString)

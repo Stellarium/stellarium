@@ -68,7 +68,8 @@ enum SyncMessageType
 	//all messages below here can only be sent from authenticated peers
 	TIME, //time jumps + time scale updates
 	LOCATION, //location changes
-	SELECTION,
+	SELECTION, //current selection changed
+	STELPROPERTY, //stelproperty updates
 
 	ALIVE, //sent from a peer after no data was sent for about 5 seconds to indicate it is still alive
 	MSGTYPE_MAX = ALIVE,
@@ -99,6 +100,9 @@ inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
 		case SyncProtocol::SELECTION:
 			deb<<"SELECTION";
 			break;
+		case SyncProtocol::STELPROPERTY:
+			deb<<"STELPROPERTY";
+			break;
 		case SyncProtocol::ALIVE:
 			deb<<"ALIVE";
 			break;
@@ -107,8 +111,6 @@ inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
 			break;
 	}
 	return deb;
-}
-
 }
 
 //! Base interface for the messages themselves, allowing to serialize/deserialize them
@@ -136,6 +138,8 @@ protected:
 	static QString readString(QDataStream& stream);
 };
 
+}
+
 class SyncMessageHandler;
 
 //! Handling the connection to a remote peer (i.e. all clients on the server, and the server on the client)
@@ -150,7 +154,7 @@ public:
 	void receiveMessage();
 
 	//! Sends a message to this peer
-	void writeMessage(const SyncMessage& msg);
+	void writeMessage(const SyncProtocol::SyncMessage& msg);
 	//! Writes this data packet to the socket without processing
 	void writeData(const QByteArray& data, int size=-1);
 	//! Can be used to write an error message to the peer and drop the connection

@@ -122,7 +122,7 @@ void SyncRemotePeer::receiveMessage()
 	dataStream.setVersion(SYNC_DATASTREAM_VERSION);
 
 	//to debug read buffer contents, uncomment
-	//QByteArray peekData = sock->peek(SYNC_MAX_MESSAGE_SIZE);
+	QByteArray peekData = sock->peek(SYNC_MAX_MESSAGE_SIZE);
 
 	lastReceiveTime = QDateTime::currentMSecsSinceEpoch();
 

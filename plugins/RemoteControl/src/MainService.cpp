@@ -58,7 +58,7 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
-	connect(propMgr,SIGNAL(stelPropChanged(QString,QVariant)),this,SLOT(propertyChanged(QString,QVariant)));
+	connect(propMgr,SIGNAL(stelPropChanged(StelProperty*,QVariant)),this,SLOT(propertyChanged(StelProperty*,QVariant)));
 
 	Q_ASSERT(this->thread()==objMgr->thread());
 }
@@ -483,10 +483,10 @@ void MainService::actionToggled(const QString &id, bool val)
 	actionMutex.unlock();
 }
 
-void MainService::propertyChanged(const QString &id, const QVariant &val)
+void MainService::propertyChanged(StelProperty* prop, const QVariant& val)
 {
 	propMutex.lock();
-	propCache.append(PropertyCacheEntry(id,val));
+	propCache.append(PropertyCacheEntry(prop->getId(),val));
 	if(!propCache.areIndexesValid())
 	{
 		//in theory, this can happen, but practically not so much

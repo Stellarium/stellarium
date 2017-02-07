@@ -23,6 +23,9 @@
 #include "SyncProtocol.hpp"
 #include "StelLocation.hpp"
 
+namespace SyncProtocol
+{
+
 class ErrorMessage : public SyncMessage
 {
 public:
@@ -123,5 +126,18 @@ public:
 	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE  { return SyncProtocol::ALIVE; }
 };
 
+class StelPropertyUpdate : public SyncMessage
+{
+public:
+	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::STELPROPERTY; }
+
+	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	QString propId;
+	QVariant value;
+};
+
+}
 
 #endif
