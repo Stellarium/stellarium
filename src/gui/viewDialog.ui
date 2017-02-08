@@ -593,7 +593,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="useLocationDataCheckBox">
+              <widget class="QCheckBox" name="useLightPollutionFromLocationDataCheckBox">
                <property name="toolTip">
                 <string>Use light pollution data from locations database and ignore settings for light pollution below</string>
                </property>
@@ -1515,7 +1515,7 @@
           <item row="1" column="1">
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <widget class="QGroupBox" name="groupBoxLabelsAndMarkers">
+             <widget class="QGroupBox" name="groupBoxDSOLabelsAndMarkers">
               <property name="title">
                <string>Labels and Markers</string>
               </property>
@@ -2834,7 +2834,7 @@
               </layout>
              </item>
              <item row="2" column="1">
-              <widget class="QCheckBox" name="nativeNameCheckBox">
+              <widget class="QCheckBox" name="nativePlanetNamesCheckBox">
                <property name="toolTip">
                 <string>Use native names for planets from current culture</string>
                </property>
@@ -3160,7 +3160,7 @@
  <tabstops>
   <tabstop>planetMarkerCheckBox</tabstop>
   <tabstop>planetLightSpeedCheckBox</tabstop>
-  <tabstop>useLocationDataCheckBox</tabstop>
+  <tabstop>useLightPollutionFromLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
   <tabstop>showEquatorialGridCheckBox</tabstop>

@@ -252,16 +252,22 @@ public slots:
 	void zoomIn(bool);
 	void zoomOut(bool);
 
-	//! Look immediately towards East, but keep altitude. When looking to the zenith already, turn eastern horizon to screen bottom.
-	void lookEast(void);
-	//! Look immediately towards West, but keep altitude. When looking to the zenith already, turn western horizon to screen bottom.
-	void lookWest(void);
-	//! Look immediately towards North, but keep altitude. When looking to the zenith already, turn northern horizon to screen bottom.
-	void lookNorth(void);
-	//! Look immediately towards South, but keep altitude. When looking to the zenith already, turn southern horizon to screen bottom.
-	void lookSouth(void);
+	//! Look immediately towards East.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn eastern horizon to screen bottom.
+	void lookEast(bool zero=false);
+	//! Look immediately towards West.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn western horizon to screen bottom.
+	void lookWest(bool zero=false);
+	//! Look immediately towards North.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn northern horizon to screen bottom.
+	void lookNorth(bool zero=false);
+	//! Look immediately towards South.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn southern horizon to screen bottom.
+	void lookSouth(bool zero=false);
 	//! Look immediately towards Zenith, turning southern horizon to screen bottom.
 	void lookZenith(void);
+	//! Look immediately towards Nadir, turning southern horizon to screen top.
+	void lookNadir(void);
 	//! Look immediately towards North Celestial pole.
 	void lookTowardsNCP(void);
 	//! Look immediately towards South Celestial pole.

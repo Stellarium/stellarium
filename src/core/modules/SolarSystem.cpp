@@ -72,7 +72,7 @@ SolarSystem::SolarSystem()
 	, flagShowObjSelfShadows(true)
 	, flagShow(false)
 	, flagPointer(false)
-	, flagNativeNames(false)
+	, flagNativePlanetNames(false)
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
 	, flagIsolatedOrbits(true)
@@ -163,7 +163,7 @@ void SolarSystem::init()
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
-	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
+	setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
@@ -230,7 +230,7 @@ void SolarSystem::init()
 	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
 	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "flagHints", "Ctrl+P");
 	addAction("actionShow_Planets_Pointers", displayGroup, N_("Planet selection marker"), "flagPointer", "Ctrl+Shift+P");
-	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "flagNativeNames", "Ctrl+Shift+N");
+	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 }
 
 void SolarSystem::deinit()
@@ -1458,6 +1458,7 @@ bool SolarSystem::getFlagLabels() const
 
 void SolarSystem::setFlagOrbits(bool b)
 {
+	bool old = flagOrbits;
 	flagOrbits = b;
 	if (!b || !selected || selected==sun)
 	{
@@ -1486,7 +1487,8 @@ void SolarSystem::setFlagOrbits(bool b)
 				p->setFlagOrbits(false);
 		}
 	}
-	emit flagOrbitsChanged(b);
+	if(old != flagOrbits)
+		emit flagOrbitsChanged(flagOrbits);
 }
 
 void SolarSystem::setFlagLightTravelTime(bool b)
@@ -1659,24 +1661,24 @@ bool SolarSystem::getFlagEphemerisDates() const
 	return ephemerisDatesDisplayed;
 }
 
-void SolarSystem::setFlagNativeNames(bool b)
+void SolarSystem::setFlagNativePlanetNames(bool b)
 {
-	if (b!=flagNativeNames)
+	if (b!=flagNativePlanetNames)
 	{
-		flagNativeNames=b;
+		flagNativePlanetNames=b;
 		foreach (const PlanetP& p, systemPlanets)
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-				p->setFlagNativeName(flagNativeNames);
+				p->setFlagNativeName(flagNativePlanetNames);
 		}
 		updateI18n();
-		emit flagNativeNamesChanged(b);
+		emit flagNativePlanetNamesChanged(b);
 	}
 }
 
-bool SolarSystem::getFlagNativeNames() const
+bool SolarSystem::getFlagNativePlanetNames() const
 {
-	return flagNativeNames;
+	return flagNativePlanetNames;
 }
 
 void SolarSystem::setFlagTranslatedNames(bool b)
@@ -1986,7 +1988,7 @@ void SolarSystem::reloadPlanets()
 	bool flagHints = getFlagHints();
 	bool flagLabels = getFlagLabels();
 	bool flagOrbits = getFlagOrbits();
-	bool flagNative = getFlagNativeNames();
+	bool flagNative = getFlagNativePlanetNames();
 	bool flagTrans = getFlagTranslatedNames();
 	bool hasSelection = false;
 
@@ -2049,7 +2051,7 @@ void SolarSystem::reloadPlanets()
 	setFlagHints(flagHints);
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
-	setFlagNativeNames(flagNative);
+	setFlagNativePlanetNames(flagNative);
 	setFlagTranslatedNames(flagTrans);
 
 	if (hasSelection)

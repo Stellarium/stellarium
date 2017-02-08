@@ -654,74 +654,120 @@ void StelMovementMgr::zoomOut(bool s)
 		deltaFov = (s!=0);
 }
 
-void StelMovementMgr::lookEast(void)
+void StelMovementMgr::lookEast(bool zero)
 {
-	float cx, cy;
+	float alt, cy;
 	Vec3f dir;
-	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+
+	if (zero)
+	{
+		alt = 0.0f;
+		cy = M_PI/2.;
+		StelUtils::spheToRect(cy, alt, dir);
+
+		setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+		setViewUpVector(Vec3d(0., 0., 1.));
+		return;
+	}
+
+	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = M_PI/2.;
-	StelUtils::spheToRect(cy, cx, dir);
+	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 	//qDebug() << "Setting East at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) && (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	if ((mountMode==MountAltAzimuthal) && (fabsf(alt)>M_PI/2-0.0001) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring East to bottom of screen.
-		upVectorMountFrame.set(0., -1., 0.);
+		upVectorMountFrame.set(0., -1.*StelUtils::sign(alt), 0.);
 		//qDebug() << "lookEast: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
 }
 
-void StelMovementMgr::lookWest(void)
+void StelMovementMgr::lookWest(bool zero)
 {
-	float cx, cy;
+	float alt, cy;
 	Vec3f dir;
-	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+
+	if (zero)
+	{
+		alt = 0.0f;
+		cy = 3.*M_PI/2.;
+		StelUtils::spheToRect(cy, alt, dir);
+
+		setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+		setViewUpVector(Vec3d(0., 0., 1.));
+		return;
+	}
+
+	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = 3.*M_PI/2.;
-	StelUtils::spheToRect(cy, cx, dir);
+	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 	//qDebug() << "Setting West at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) &&  (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI/2-0.0001) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring West to bottom of screen.
-		upVectorMountFrame.set(0., 1., 0.);
+		upVectorMountFrame.set(0., StelUtils::sign(alt), 0.);
 		//qDebug() << "lookEast: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
 }
 
-void StelMovementMgr::lookNorth(void)
+void StelMovementMgr::lookNorth(bool zero)
 {
-	float cx, cy;
+	float alt, cy;
 	Vec3f dir;
-	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 
+	if (zero)
+	{
+		alt = 0.0f;
+		cy = M_PI;
+		StelUtils::spheToRect(cy, alt, dir);
+
+		setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+		setViewUpVector(Vec3d(0., 0., 1.));
+		return;
+	}
+
+	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 	cy = M_PI;
-	StelUtils::spheToRect(cy, cx, dir);
+	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 
 	//qDebug() << "Setting North at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) &&  (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI/2-0.0001) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring North to bottom of screen.
-		upVectorMountFrame.set(1., 0., 0.);
+		upVectorMountFrame.set(StelUtils::sign(alt), 0., 0.);
 		//qDebug() << "lookNorth: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
 }
 
-void StelMovementMgr::lookSouth(void)
+void StelMovementMgr::lookSouth(bool zero)
 {
-	float cx, cy;
+	float alt, cy;
 	Vec3f dir;
-	StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
 
-	cy = 0.;
-	StelUtils::spheToRect(cy, cx, dir);
+	if (zero)
+	{
+		alt = 0.0f;
+		cy = 0.0f;
+		StelUtils::spheToRect(cy, alt, dir);
+
+		setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+		setViewUpVector(Vec3d(0., 0., 1.));
+		return;
+	}
+
+	StelUtils::rectToSphe(&cy,&alt,core->j2000ToAltAz(getViewDirectionJ2000(), StelCore::RefractionOff));
+	cy = 0.f;
+	StelUtils::spheToRect(cy, alt, dir);
 	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
 
 	//qDebug() << "Setting South at Alt:" << cx*180./M_PI;
-	if ((mountMode==MountAltAzimuthal) &&  (cx>M_PI/2-0.0001) && (upVectorMountFrame[2]<0.001))
+	if ((mountMode==MountAltAzimuthal) &&  (fabsf(alt)>M_PI/2-0.0001) && (fabs(upVectorMountFrame[2])<0.001))
 	{
 		// Special case: we already look into zenith (with rounding tolerance). Bring South to bottom of screen.
-		upVectorMountFrame.set(-1., 0., 0.);
+		upVectorMountFrame.set(-1.*StelUtils::sign(alt), 0., 0.);
 		//qDebug() << "lookSouth: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
 }
@@ -738,7 +784,20 @@ void StelMovementMgr::lookZenith(void)
 		upVectorMountFrame.set(-1., 0., 0.);
 		//qDebug() << "lookZenith: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
+}
 
+void StelMovementMgr::lookNadir(void)
+{
+	Vec3f dir;
+	StelUtils::spheToRect(M_PI, -M_PI/2., dir);
+	//qDebug() << "lookNadir: Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
+	setViewDirectionJ2000(core->altAzToJ2000(Vec3d(dir[0], dir[1], dir[2]), StelCore::RefractionOff));
+	//qDebug() << "lookNadir: View is " << viewDirectionMountFrame[0] << "/" << viewDirectionMountFrame[1] << "/" << viewDirectionMountFrame[2];
+	if (mountMode==MountAltAzimuthal)
+	{	// ensure a stable up vector that makes the top of the screen point south.
+		upVectorMountFrame.set(-1., 0., 0.);
+		//qDebug() << "lookNadir: better Up is " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
+	}
 }
 
 void StelMovementMgr::lookTowardsNCP(void)

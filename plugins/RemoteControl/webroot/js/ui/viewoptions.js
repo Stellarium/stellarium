@@ -94,7 +94,7 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 		viewOptionApi.registerTypeFlags($("#vo_dsotype > div")); //needs a stricter selector to prevent capturing the header checkbox
 	}
 
-	$(actionApi).on("stelActionChanged:actionShow_LightPollution_Database", function(evt, data) {
+	$(actionApi).on("stelActionChanged:actionShow_LightPollutionFromDatabase", function(evt, data) {
 		$("#atmosphere_bortlescaleindex").spinner("option", "disabled", data.isChecked);
 	});
 

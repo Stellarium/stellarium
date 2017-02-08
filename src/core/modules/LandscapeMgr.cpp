@@ -419,7 +419,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
-	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
+	addAction("actionShow_LightPollutionFromDatabase", displayGroup, N_("Light pollution data from locations database"), "flagUseLightPollutionFromDatabase");
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
@@ -656,7 +656,7 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 			updateLocationBasedPollution(loc);
 		}
 
-		emit lightPollutionUsageChanged(usage);
+		emit flagUseLightPollutionFromDatabaseChanged(usage);
 	}
 }
 
