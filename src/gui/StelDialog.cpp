@@ -213,6 +213,15 @@ void StelDialog::connectIntProperty(QComboBox *comboBox, const QString &propName
 	new QComboBoxStelPropertyConnectionHelper(prop,comboBox);
 }
 
+void StelDialog::connectIntProperty(QSlider *slider, const QString &propName,int minValue, int maxValue)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	//The connection is handled by a helper class. It is automatically destroyed when the slider is destroyed.
+	new QSliderStelPropertyConnectionHelper(prop,minValue,maxValue,slider);
+}
+
 void StelDialog::connectDoubleProperty(QDoubleSpinBox *spinBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
@@ -377,6 +386,19 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
 }
 
+QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelProperty *prop, int minValue, int maxValue, QSlider *slider)
+	: StelPropertyProxy(prop,slider),slider(slider),minValue(minValue),maxValue(maxValue)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<double>();
+	Q_ASSERT_X(ok,"QSliderStelPropertyConnectionHelper","Can not convert to double datatype");
+	Q_UNUSED(ok);
+
+	dRange = maxValue - minValue;
+	onPropertyChanged(val);
+
+	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
+}
 void QSliderStelPropertyConnectionHelper::sliderIntValueChanged(int val)
 {
 	double dVal = ((val - slider->minimum()) / (double)(slider->maximum() - slider->minimum())) * dRange + minValue;

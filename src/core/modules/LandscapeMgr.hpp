@@ -80,10 +80,10 @@ class LandscapeMgr : public StelModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
-	Q_PROPERTY(bool databaseUsage
+	Q_PROPERTY(bool flagUseLightPollutionFromDatabase // was databaseUsage
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
-		   NOTIFY lightPollutionUsageChanged)
+		   NOTIFY flagUseLightPollutionFromDatabaseChanged)
 	Q_PROPERTY(bool flagLandscapeAutoSelection
 		   READ getFlagLandscapeAutoSelection
 		   WRITE setFlagLandscapeAutoSelection
@@ -213,6 +213,10 @@ public slots:
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
 	//! @param changeLocationDuration the duration of the transition animation
 	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
+
+	//! Get the current landscape or lightscape brightness (0..1)
+	//! @param light true to retrieve the light layer brightness value.
+	float getCurrentLandscapeBrightness(const bool light=false) const {return (light? landscape->getLightscapeBrightness() : landscape->getBrightness());}
 
 	//! Preload a landscape into cache.
 	//! @param id the ID of a landscape
@@ -440,7 +444,7 @@ signals:
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
-	void lightPollutionUsageChanged(const bool usage);
+	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
 	void flagLandscapeAutoSelectionChanged(const bool value);
 	void flagLandscapeSetsLocationChanged(const bool value);
 	void flagLandscapeUseMinimalBrightnessChanged(const bool value);
