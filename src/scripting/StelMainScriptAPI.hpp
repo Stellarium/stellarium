@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QStringList>
-
+#include "StelObject.hpp"
 class QScriptEngine;
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
@@ -142,15 +142,7 @@ public slots:
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
-	//! @return a map of object data.  Keys:
-	//! - altitude : apparent altitude angle in decimal degrees
-	//! - azimuth : apparent azimuth angle in decimal degrees
-	//! - altitude-geometric : geometric altitude angle in decimal degrees
-	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
-	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees
-	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! @return a map of object data, exactly like getObjectInfo().
 	//! @deprecated Use getObjectInfo()
 	QVariantMap getObjectPosition(const QString& name);
 
@@ -231,6 +223,12 @@ public slots:
 	//! - ptype : object type (for Solar system objects only!)
 	QVariantMap getSelectedObjectInfo();
 
+public:
+	//! Called by getSelectedObjectInfo() and getObjectInfo(name). Not useful to be scriptable, not a slot!
+	//! The static method can be called more easily by other components.
+	static QVariantMap getObjectInfo(const StelObjectP obj);
+
+public slots:
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,
@@ -731,14 +729,14 @@ public slots:
 
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
-	void debug(const QString& s);
+	static void debug(const QString& s);
 
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
-	void output(const QString& s);
+	void output(const QString& s) const;
 
 	//! Reset (clear) output file
-	void resetOutput(void);
+	void resetOutput(void) const;
 
 	//! Save output file to new file (in same directory as output.txt).
 	//! This is required to allow reading with other program on Windows while output.txt is still open.
@@ -746,7 +744,7 @@ public slots:
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getAppLanguage();
+	QString getAppLanguage() const;
 
 	//! Set the current application language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
@@ -754,7 +752,7 @@ public slots:
 
 	//! Get the current sky language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getSkyLanguage();
+	QString getSkyLanguage() const;
 
 	//! Set the current sky language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
@@ -773,7 +771,7 @@ public slots:
 
 	//! Get Milky Way intensity.
 	//! @return value of Milky Way intensity, e.g. "1.2"
-	double getMilkyWayIntensity();
+	double getMilkyWayIntensity() const;
 
 	//! Show or hide the Zodiacal Light.
 	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
@@ -785,7 +783,7 @@ public slots:
 
 	//! Get Zodiacal Light intensity.
 	//! @return value of Zodiacal Light intensity, e.g. "1.2"
-	double getZodiacalLightIntensity();
+	double getZodiacalLightIntensity() const;
 
 	//! Returns the currently set Bortle scale index, which is used to simulate light pollution.
 	//! Wrapper for StelSkyDrawer::getBortleScaleIndex
@@ -807,7 +805,7 @@ public slots:
 
 	// Methods wait() and waitFor() was added for documentation.
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
-
+	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
 	void wait(double t);
@@ -821,6 +819,7 @@ public slots:
 	//! @param dt the date string to use
 	//! @param spec "local" or "utc"
 	void waitFor(const QString& dt, const QString& spec="utc");
+
 
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
