@@ -220,6 +220,7 @@ IF(ENABLE_SPOUT)
         # try to find the .dll for automatic copy
         get_filename_component(SPOUT_LIBRARY_DIR ${SPOUT_LIBRARY} DIRECTORY)
         set(SPOUT_LIBRARY_DLL ${SPOUT_LIBRARY_DIR}/SpoutLibrary.dll CACHE FILEPATH "The path to the Spout .dll file")
+        set(SPOUT_LIBRARY_LICENCE ${CMAKE_SOURCE_DIR}/util/spout2/licence.txt CACHE FILEPATH "The path to the Spout licence file")
 
         if(NOT EXISTS ${SPOUT_LIBRARY_DLL})
             unset(SPOUT_LIBRARY_DLL)
@@ -631,6 +632,7 @@ endif()
         IF(SPOUT_LIBRARY_DLL) # we know the dll
             MESSAGE(STATUS "Found Spout library: ${SPOUT_LIBRARY_DLL}")
             SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_DLL}\"; DestDir: \"{app}\";")
+            SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_LICENCE}\"; DestDir: \"{app}\" DestName: \"Spout_licence.txt\";")
         ENDIF()
         SET(ISS_SPOUT "Name: \"{group}\\Stellarium {cm:SpoutMode}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
     ELSE()
