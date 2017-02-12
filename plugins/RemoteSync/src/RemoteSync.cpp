@@ -23,13 +23,17 @@
 #include "SyncServer.hpp"
 #include "SyncClient.hpp"
 
+#include "CLIProcessor.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 
+#include <QApplication>
 #include <QDebug>
 #include <QSettings>
+
+Q_LOGGING_CATEGORY(remoteSync,"stel.plugin.remoteSync")
 
 //! This method is the one called automatically by the StelModuleMgr just after loading the dynamic library
 StelModule* RemoteSyncStelPluginInterface::getStelModule() const
@@ -82,9 +86,30 @@ void RemoteSync::init()
 
 	loadSettings();
 
-	qDebug()<<"[RemoteSync] Plugin initialized";
+	qCDebug(remoteSync)<<"Plugin initialized";
 
-	// TODO create actions/buttons, if required
+	//parse command line args
+	QStringList args = qApp->property("stelCommandLine").toStringList();
+	QString syncMode = CLIProcessor::argsGetOptionWithArg(args,"","--syncMode","").toString();
+	QString syncHost = CLIProcessor::argsGetOptionWithArg(args,"","--syncHost","").toString();
+	int syncPort = CLIProcessor::argsGetOptionWithArg(args,"","--syncPort",0).toInt();
+
+	if(syncMode=="server")
+	{
+		if(syncPort!=0)
+			setServerPort(syncPort);
+		qCDebug(remoteSync)<<"Starting server from command line";
+		startServer();
+	}
+	else if(syncMode=="client")
+	{
+		if(!syncHost.isEmpty())
+			setClientServerHost(syncHost);
+		if(syncPort!=0)
+			setClientServerPort(syncPort);
+		qCDebug(remoteSync)<<"Connecting to server from command line";
+		connectToServer();
+	}
 }
 
 void RemoteSync::update(double deltaTime)
@@ -148,7 +173,7 @@ void RemoteSync::startServer()
 		}
 	}
 	else
-		qWarning()<<"[RemoteSync] startServer: invalid state";
+		qCWarning(remoteSync)<<"startServer: invalid state";
 }
 
 void RemoteSync::stopServer()
@@ -161,7 +186,7 @@ void RemoteSync::stopServer()
 		setState(IDLE);
 	}
 	else
-		qWarning()<<"[RemoteSync] stopServer: invalid state";
+		qCWarning(remoteSync)<<"stopServer: invalid state";
 }
 
 void RemoteSync::connectToServer()
@@ -176,7 +201,7 @@ void RemoteSync::connectToServer()
 		setState(CLIENT_CONNECTING);
 	}
 	else
-		qWarning()<<"[RemoteSync] connectToServer: invalid state";
+		qCWarning(remoteSync)<<"connectToServer: invalid state";
 }
 
 void RemoteSync::clientConnected()
@@ -204,7 +229,7 @@ void RemoteSync::disconnectFromServer()
 		client->disconnectFromServer();
 	}
 	else
-		qWarning()<<"[RemoteSync] disconnectFromServer: invalid state";
+		qCWarning(remoteSync)<<"disconnectFromServer: invalid state";
 }
 
 void RemoteSync::restoreDefaultSettings()
@@ -241,7 +266,7 @@ void RemoteSync::setState(RemoteSync::SyncState state)
 	if(state != this->state)
 	{
 		this->state = state;
-		qDebug()<<"[RemoteSync] New state:"<<state;
+		qCDebug(remoteSync)<<"New state:"<<state;
 		emit stateChanged(state);
 	}
 }

@@ -184,6 +184,9 @@ int main(int argc, char **argv)
 		argList+= envStelOpts.split(" ");
 		argStr += " " + envStelOpts;
 	}
+	//save the modified arg list as an app property for later use
+	qApp->setProperty("stelCommandLine", argList);
+
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version
 	CLIProcessor::parseCLIArgsPreConfig(argList);
