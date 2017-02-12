@@ -22,6 +22,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
@@ -56,7 +57,7 @@ Time TimeEventSender::constructMessage()
 
 LocationEventSender::LocationEventSender()
 {
-	connect(core,SIGNAL(locationChanged(StelLocation)), this, SLOT(reactToStellariumEvent()));
+	connect(core,SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(reactToStellariumEvent()));
 }
 
 Location LocationEventSender::constructMessage()
@@ -129,12 +130,40 @@ void StelPropertyEventSender::newClientConnected(SyncRemotePeer &client)
 	QList<StelProperty*> propList = propMgr->getAllProperties();
 	foreach(StelProperty* prop, propList)
 	{
-		if(prop->isSynchronizable())
+		if(!prop->isSynchronizable())
 			continue;
 
 		StelPropertyUpdate msg;
 		msg.propId = prop->getId();
 		msg.value = prop->getValue();
 		client.writeMessage(msg);
+	}
+}
+
+ViewEventSender::ViewEventSender()
+	: lastView(0.0), lastFov(0.0)
+{
+	mvMgr = core->getMovementMgr();
+}
+
+SyncProtocol::View ViewEventSender::constructMessage()
+{
+	View msg;
+	Vec3d viewDirJ2000 = mvMgr->getViewDirectionJ2000();
+	msg.viewAltAz = core->j2000ToAltAz(viewDirJ2000, StelCore::RefractionOff);
+	msg.fov = mvMgr->getCurrentFov();
+	return msg;
+}
+
+void ViewEventSender::update()
+{
+	Vec3d viewDir = mvMgr->getViewDirectionJ2000();
+	viewDir = core->j2000ToAltAz(viewDir, StelCore::RefractionOff);
+	double curFov = mvMgr->getCurrentFov();
+	if(!(qFuzzyCompare(viewDir[0], lastView[0]) && qFuzzyCompare(viewDir[1], lastView[1]) && qFuzzyCompare(viewDir[2], lastView[2])) || curFov != lastFov)
+	{
+		lastFov = curFov;
+		lastView = viewDir;
+		broadcastMessage(constructMessage());
 	}
 }

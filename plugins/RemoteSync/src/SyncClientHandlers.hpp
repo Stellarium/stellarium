@@ -95,4 +95,14 @@ private:
 	StelPropertyMgr* propMgr;
 };
 
+class StelMovementMgr;
+class ClientViewHandler : public ClientHandler
+{
+public:
+	ClientViewHandler();
+	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelMovementMgr* mvMgr;
+};
+
 #endif
