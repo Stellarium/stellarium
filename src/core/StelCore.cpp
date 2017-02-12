@@ -1159,7 +1159,6 @@ void StelCore::setObserver(StelObserver *obs)
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
 {
-	emit(locationChanged(target));
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
 	{
@@ -1170,15 +1169,15 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			curLoc.name = ".";
 		}
 		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, target, d);
-		delete position;
-		position = newObs;
+		setObserver(newObs);
 		newObs->update(0);
 	}
 	else
 	{
-		delete position;
-		position = new StelObserver(target);
+		setObserver(new StelObserver(target));
 	}
+	emit targetLocationChanged(target);
+	emit locationChanged(getCurrentLocation());
 }
 
 float StelCore::getUTCOffset(const double JD) const

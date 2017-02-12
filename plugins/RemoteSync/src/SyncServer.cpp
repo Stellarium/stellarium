@@ -62,6 +62,7 @@ bool SyncServer::start(int port)
 		addSender(new LocationEventSender());
 		addSender(new SelectionEventSender());
 		addSender(new StelPropertyEventSender());
+		addSender(new ViewEventSender());
 
 		timeoutTimerId = startTimer(5000,Qt::VeryCoarseTimer);
 	}
@@ -78,7 +79,7 @@ void SyncServer::addSender(SyncServerEventSender *snd)
 
 void SyncServer::broadcastMessage(const SyncMessage &msg)
 {
-	qDebug()<<"[SyncServer] Broadcast message"<<msg.getMessageType();
+	qDebug()<<"[SyncServer] Broadcast message"<<msg;
 	qint64 size = msg.createFullMessage(broadcastBuffer);
 
 	if(!size)
@@ -219,6 +220,9 @@ void SyncServer::handleNewConnection()
 	QTcpSocket* newConn = qserver->nextPendingConnection();
 	clientLog(newConn,"New Connection");
 
+	//set low delay option
+	newConn->setSocketOption(QAbstractSocket::LowDelayOption, 1);
+
 	//add to client list
 	clients.insert(newConn,SyncRemotePeer(newConn,false,handlerList));
 	SyncRemotePeer& peer = clients.last();
@@ -231,9 +235,6 @@ void SyncServer::handleNewConnection()
 	connect(newConn, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
 	connect(newConn, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(clientError(QAbstractSocket::SocketError)));
 	connect(newConn, SIGNAL(readyRead()), this, SLOT(clientDataReceived()));
-
-	//set low delay option
-	newConn->setSocketOption(QAbstractSocket::LowDelayOption,1);
 
 	//write challenge
 	ServerChallenge msg;

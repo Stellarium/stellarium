@@ -24,6 +24,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
@@ -185,9 +186,6 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncRemotePeer &p
 		return false;
 
 	//replicated from StelCore::moveObserverTo
-	//first, emit a locationChanged like StelCore does
-	emit core->locationChanged(msg.stelLocation);
-
 	if(msg.totalDuration>0.0)
 	{
 		//for optimal results, the network latency should be subtracted from the timeToGo...
@@ -209,6 +207,9 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncRemotePeer &p
 		//create a normal observer
 		core->setObserver(new StelObserver(msg.stelLocation));
 	}
+	emit core->targetLocationChanged(msg.stelLocation);
+	emit core->locationChanged(core->getCurrentLocation());
+
 
 	return true;
 }
@@ -256,6 +257,23 @@ bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncRem
 	if(!ok)
 		return false;
 
+	qDebug()<<msg;
 	propMgr->setStelPropertyValue(msg.propId,msg.value);
+	return true;
+}
+
+ClientViewHandler::ClientViewHandler()
+{
+	mvMgr = core->getMovementMgr();
+}
+
+bool ClientViewHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+{
+	View msg;
+	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	if(!ok) return false;
+
+	mvMgr->setViewDirectionJ2000(core->altAzToJ2000(msg.viewAltAz, StelCore::RefractionOff));
+	mvMgr->zoomTo(msg.fov, 0.0f);
 	return true;
 }

@@ -22,6 +22,7 @@
 
 #include "SyncProtocol.hpp"
 #include "StelLocation.hpp"
+#include "VecMath.hpp"
 
 namespace SyncProtocol
 {
@@ -134,8 +135,25 @@ public:
 	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
 	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
 
+	QDebug debugOutput(QDebug dbg) const Q_DECL_OVERRIDE
+	{
+		return dbg<<propId<<value;
+	}
+
 	QString propId;
 	QVariant value;
+};
+
+class View : public SyncMessage
+{
+public:
+	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::VIEW; }
+
+	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	Vec3d viewAltAz;
+	double fov;
 };
 
 }

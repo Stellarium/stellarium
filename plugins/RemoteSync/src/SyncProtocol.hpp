@@ -70,6 +70,7 @@ enum SyncMessageType
 	LOCATION, //location changes
 	SELECTION, //current selection changed
 	STELPROPERTY, //stelproperty updates
+    VIEW, //view/fov change
 
 	ALIVE, //sent from a peer after no data was sent for about 5 seconds to indicate it is still alive
 	MSGTYPE_MAX = ALIVE,
@@ -103,6 +104,9 @@ inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
 		case SyncProtocol::STELPROPERTY:
 			deb<<"STELPROPERTY";
 			break;
+		case SyncProtocol::VIEW:
+			deb<<"VIEW";
+			break;
 		case SyncProtocol::ALIVE:
 			deb<<"ALIVE";
 			break;
@@ -132,6 +136,20 @@ public:
 	//! Subclasses should override this to load their contents from the data stream.
 	//! The default implementation expects a zero dataSize, and reads nothing.
 	virtual bool deserialize(QDataStream& stream, SyncProtocol::tPayloadSize dataSize);
+
+	//! Subclasses can override this to provide proper debug output.
+	//! The default just prints the message type.
+	virtual QDebug debugOutput(QDebug dbg) const
+	{
+		return dbg;
+	}
+
+	friend QDebug operator<<(QDebug dbg, const SyncMessage& msg)
+	{
+		dbg = dbg<<msg.getMessageType()<<'[';
+		dbg = msg.debugOutput(dbg);
+		return dbg<<']';
+	}
 
 protected:
 	static void writeString(QDataStream& stream, const QString& str);
