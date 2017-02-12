@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-23 00:29+0700\n"
-"PO-Revision-Date: 2016-07-10 03:27+0000\n"
-"Last-Translator: Thomas Pryds <Unknown>\n"
+"PO-Revision-Date: 2017-02-11 18:29+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-23 05:30+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-02-12 05:26+0000\n"
+"X-Generator: Launchpad (build 18326)\n"
 "X-Poedit-Country: DENMARK\n"
 "Language: da\n"
 "X-Poedit-Language: Danish\n"
@@ -391,7 +391,7 @@ msgstr "Uigennemsigtighed: <b>%1</b>"
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr "Lysstyrke: <b>%1</b> (efter ekstinktion: <b>%2</b>)"
+msgstr "Størrelsesklasse: <b>%1</b> (efter ekstinktion: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:208 src/core/modules/Nebula.cpp:213
 #: src/core/modules/Planet.cpp:256 src/core/modules/MinorPlanet.cpp:209
@@ -401,7 +401,7 @@ msgstr "Lysstyrke: <b>%1</b> (efter ekstinktion: <b>%2</b>)"
 #: plugins/Quasars/src/Quasar.cpp:112 plugins/Exoplanets/src/Exoplanet.cpp:284
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Lysstyrke: <b>%1</b>"
+msgstr "Størrelsesklasse: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:214
 msgid " (Photometric system: B)"
@@ -867,7 +867,7 @@ msgstr "Slå DSO-typefilter til/fra"
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr "Absolut lysstyrke: %1"
+msgstr "Absolut størrelsesklasse: %1"
 
 #: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
@@ -1109,12 +1109,14 @@ msgstr "Type: <b>%1, %2</b>"
 #: src/core/modules/StarWrapper.cpp:231
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr "Lysstyrkeinterval: <b>%1</b>%2<b>%3</b> (fotometrisk system: %4)"
+msgstr ""
+"Størrelsesklasseinterval: <b>%1</b>%2<b>%3</b> (fotometrisk system: %4)"
 
 #: src/core/modules/StarWrapper.cpp:233
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr "Lysstyrkeinterval: <b>%1</b>%2<b>%3/%4</b> (fotometrisk system: %5)"
+msgstr ""
+"Størrelsesklasseinterval: <b>%1</b>%2<b>%3/%4</b> (fotometrisk system: %5)"
 
 #: src/core/modules/StarWrapper.cpp:249
 #: plugins/Exoplanets/src/Exoplanet.cpp:294
@@ -2058,7 +2060,7 @@ msgid ""
 msgstr ""
 "Overførselsstørrelse: %1 MB\n"
 "Antal stjerner: %2 millioner\n"
-"Lysstyrkeinterval: %3 - %4"
+"Størrelsesklasseinterval: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:1167 src/gui/ConfigurationDialog.cpp:1203
 #, qt-format
@@ -2681,7 +2683,7 @@ msgstr "Indre storby-himmel"
 
 #: src/gui/ViewDialog.cpp:1153
 msgid "The naked-eye limiting magnitude is"
-msgstr "Lysstyrkebegrænsningen for det blotte øje er"
+msgstr "Størrelsesklassebegrænsningen for det blotte øje er"
 
 # Refers to "Show names", i.e. plural.
 #: src/gui/ViewDialog.cpp:1177
@@ -5610,11 +5612,11 @@ msgstr "Funklen:"
 
 #: src/ui_viewDialog.h:1945
 msgid "Limit the magnitude of stars"
-msgstr "Begræns lysstyrken for stjerner"
+msgstr "Begræns størrelsesklassen for stjerner"
 
 #: src/ui_viewDialog.h:1947 src/ui_viewDialog.h:1995 src/ui_viewDialog.h:2077
 msgid "Limit magnitude:"
-msgstr "Begræns lysstyrke:"
+msgstr "Begræns størrelsesklasse:"
 
 #: src/ui_viewDialog.h:1948 src/ui_viewDialog.h:2000 src/ui_viewDialog.h:2065
 msgid "Labels and Markers"
@@ -5731,7 +5733,7 @@ msgstr "Detaljer om Den store røde plet…"
 
 #: src/ui_viewDialog.h:1993
 msgid "Limit the magnitude of solar system objects"
-msgstr "Begræns lysstyrken for objekter i Solsystemet"
+msgstr "Begræns størrelsesklassen for objekter i Solsystemet"
 
 #: src/ui_viewDialog.h:1996
 msgid "Scale Moon:"
@@ -5869,8 +5871,8 @@ msgstr "Brug overfladelysstyrke"
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"Begræns lysstyrke (for observatører med kikkerter/det blotte øje) for deep-"
-"sky-objekter."
+"Begræns størrelsesklasse (for observatører med kikkerter/det blotte øje) for "
+"deep-sky-objekter."
 
 #: src/ui_viewDialog.h:2079
 msgid ""
@@ -6504,7 +6506,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1270
 msgid "Absolute magnitude"
-msgstr "Absolut lysstyrke"
+msgstr "Absolut størrelsesklasse"
 
 #: src/ui_configurationDialog.h:1272
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
@@ -6566,7 +6568,7 @@ msgstr "Timevinkel/deklination"
 
 #: src/ui_configurationDialog.h:1299
 msgid "Visual magnitude"
-msgstr "Tilsyneladende lysstyrke"
+msgstr "Tilsyneladende størrelsesklasse"
 
 #: src/ui_configurationDialog.h:1301
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
@@ -8711,11 +8713,12 @@ msgstr ""
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
+"Tilnærmelsesvis størrelsesklasse: <b>%1</b> (med ekstinktion: <b>%2</b>)"
 
 #: plugins/Satellites/src/Satellite.cpp:287
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
-msgstr ""
+msgstr "Tilnærmelsesvis størrelsesklasse: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:301
@@ -10921,7 +10924,7 @@ msgstr "supernova"
 #: plugins/Quasars/src/Quasar.cpp:107 plugins/Exoplanets/src/Exoplanet.cpp:279
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Lysstyrke: <b>%1</b> (med ekstinktion: <b>%2</b>)"
+msgstr "Størrelsesklasse: <b>%1</b> (med ekstinktion: <b>%2</b>)"
 
 #: plugins/Supernovae/src/Supernova.cpp:145
 #, qt-format
