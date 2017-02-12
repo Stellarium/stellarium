@@ -183,3 +183,20 @@ bool StelPropertyUpdate::deserialize(QDataStream &stream, tPayloadSize dataSize)
 	stream>>value;
 	return !stream.status();
 }
+
+void View::serialize(QDataStream &stream) const
+{
+	stream<<viewAltAz;
+	stream<<fov;
+}
+
+bool View::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	if(dataSize != 4 * sizeof(double))
+		return false;
+
+	stream>>viewAltAz;
+	stream>>fov;
+
+	return !stream.status();
+}

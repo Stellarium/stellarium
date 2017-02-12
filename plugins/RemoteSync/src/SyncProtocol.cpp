@@ -122,7 +122,7 @@ void SyncRemotePeer::receiveMessage()
 	dataStream.setVersion(SYNC_DATASTREAM_VERSION);
 
 	//to debug read buffer contents, uncomment
-	QByteArray peekData = sock->peek(SYNC_MAX_MESSAGE_SIZE);
+	//QByteArray peekData = sock->peek(SYNC_MAX_MESSAGE_SIZE);
 
 	lastReceiveTime = QDateTime::currentMSecsSinceEpoch();
 
@@ -188,7 +188,7 @@ void SyncRemotePeer::peerLog(const QString &msg)
 void SyncRemotePeer::writeMessage(const SyncMessage &msg)
 {
 	qint64 size = msg.createFullMessage(msgWriteBuffer);
-	qDebug()<<"[SyncPeer] Send message"<<msg.getMessageType();
+	qDebug()<<"[SyncPeer] Send message"<<msg;
 
 	if(!size)
 	{
@@ -211,8 +211,6 @@ void SyncRemotePeer::writeData(const QByteArray &data, int size)
 	if(sock->state() == QAbstractSocket::ConnectedState)
 	{
 		sock->write(data.constData(),size>0?size:data.size());
-		//flush immediately if possible to reduce delay
-		sock->flush();
 		lastSendTime = QDateTime::currentMSecsSinceEpoch();
 	}
 	else

@@ -694,6 +694,8 @@ public slots:
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
+	//! This signal is emitted whenever the targetted location changes
+	void targetLocationChanged(StelLocation);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
 	//! This signal is emitted whenever the time is re-synced.

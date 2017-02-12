@@ -57,6 +57,7 @@ void SyncClient::connectToServer(const QString &host, const int port)
 	handlerList[LOCATION] = new ClientLocationHandler();
 	handlerList[SELECTION] = new ClientSelectionHandler();
 	handlerList[STELPROPERTY] = new ClientStelPropertyUpdateHandler();
+	handlerList[VIEW] = new ClientViewHandler();
 
 	server = new SyncRemotePeer(new QTcpSocket(this), true, handlerList );
 	connect(server->sock, SIGNAL(connected()), this, SLOT(socketConnected()));
@@ -66,6 +67,7 @@ void SyncClient::connectToServer(const QString &host, const int port)
 
 	isConnecting = true;
 	qDebug()<<"[SyncClient] Connecting to"<<(host + ":" + QString::number(port));
+	server->sock->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 	server->sock->connectToHost(host,port);
 	timeoutTimerId = startTimer(2000,Qt::VeryCoarseTimer); //the connection is checked all 5 seconds
 }
@@ -153,8 +155,6 @@ void SyncClient::socketConnected()
 {
 	isConnecting = false;
 	qDebug()<<"[SyncClient] Socket connection established, waiting for challenge";
-	//set low delay option
-	server->sock->setSocketOption(QAbstractSocket::LowDelayOption,1);
 }
 
 void SyncClient::socketDisconnected()

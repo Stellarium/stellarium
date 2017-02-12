@@ -143,4 +143,20 @@ private:
 	StelPropertyMgr* propMgr;
 };
 
+class StelMovementMgr;
+class ViewEventSender : public TypedSyncServerEventSender<SyncProtocol::View>
+{
+	Q_OBJECT
+public:
+	ViewEventSender();
+protected:
+	SyncProtocol::View constructMessage() Q_DECL_OVERRIDE;
+
+	void update() Q_DECL_OVERRIDE;
+private:
+	StelMovementMgr* mvMgr;
+	Vec3d lastView;
+	double lastFov;
+};
+
 #endif
