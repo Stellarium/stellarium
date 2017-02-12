@@ -20,14 +20,17 @@
 #ifndef REMOTESYNC_HPP_
 #define REMOTESYNC_HPP_
 
+#include "StelModule.hpp"
+
 #include <QFont>
 #include <QKeyEvent>
-
-#include "StelModule.hpp"
+#include <QLoggingCategory>
 
 class RemoteSyncDialog;
 class SyncServer;
 class SyncClient;
+
+Q_DECLARE_LOGGING_CATEGORY(remoteSync)
 
 //! Main class of the RemoteSync plug-in.
 //! Provides a synchronization mechanism for multiple Stellarium instances in a network.

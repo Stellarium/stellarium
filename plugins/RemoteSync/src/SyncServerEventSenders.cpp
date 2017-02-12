@@ -157,6 +157,10 @@ SyncProtocol::View ViewEventSender::constructMessage()
 
 void ViewEventSender::update()
 {
+	//do not send view updates when tracking
+	if(mvMgr->getFlagTracking())
+		return;
+
 	Vec3d viewDir = mvMgr->getViewDirectionJ2000();
 	viewDir = core->j2000ToAltAz(viewDir, StelCore::RefractionOff);
 	double curFov = mvMgr->getCurrentFov();
