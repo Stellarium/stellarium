@@ -223,8 +223,9 @@ public slots:
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();
 
-	//! Return the current viewing direction in equatorial J2000 frame.
+	//! Return the current viewing direction in the equatorial J2000 frame.
 	Vec3d getViewDirectionJ2000() const {return viewDirectionJ2000;}
+	//! Set the current viewing direction in the equatorial J2000 frame.
 	void setViewDirectionJ2000(const Vec3d& v);
 
 	//! Set the maximum field of View in degrees.
