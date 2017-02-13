@@ -58,7 +58,7 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
-	connect(propMgr,SIGNAL(stelPropChanged(StelProperty*,QVariant)),this,SLOT(propertyChanged(StelProperty*,QVariant)));
+	connect(propMgr,SIGNAL(stelPropertyChanged(StelProperty*,QVariant)),this,SLOT(propertyChanged(StelProperty*,QVariant)));
 
 	Q_ASSERT(this->thread()==objMgr->thread());
 }
@@ -372,6 +372,50 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 	}
 	else if(operation == "view")
 	{
+		QByteArray j2000 = parameters.value("j2000");
+		if(!j2000.isEmpty())
+		{
+			QJsonDocument doc = QJsonDocument::fromJson(j2000);
+			QJsonArray arr = doc.array();
+			if(arr.size() == 3)
+			{
+				Vec3d pos;
+				pos[0] = arr.at(0).toDouble();
+				pos[1] = arr.at(1).toDouble();
+				pos[2] = arr.at(2).toDouble();
+
+				mvmgr->setViewDirectionJ2000(pos);
+				response.setData("ok");
+			}
+			else
+			{
+				response.writeRequestError("invalid j2000 format, use JSON array of 3 doubles");
+			}
+			return;
+		}
+
+		QByteArray rect = parameters.value("altAz");
+		if(!rect.isEmpty())
+		{
+			QJsonDocument doc = QJsonDocument::fromJson(rect);
+			QJsonArray arr = doc.array();
+			if(arr.size() == 3)
+			{
+				Vec3d pos;
+				pos[0] = arr.at(0).toDouble();
+				pos[1] = arr.at(1).toDouble();
+				pos[2] = arr.at(2).toDouble();
+
+				mvmgr->setViewDirectionJ2000(core->altAzToJ2000(pos,StelCore::RefractionOff));
+				response.setData("ok");
+			}
+			else
+			{
+				response.writeRequestError("invalid altAz format, use JSON array of 3 doubles");
+			}
+			return;
+		}
+
 		QString azs = QString::fromUtf8(parameters.value("az"));
 		QString alts = QString::fromUtf8(parameters.value("alt"));
 
@@ -390,7 +434,7 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 			response.setData("ok");
 		}
 		else
-			response.writeRequestError("requires x or y parameter");
+			response.writeRequestError("requires at least one of az,alt,j2000 parameters");
 	}
 
 	else if (operation == "fov")
@@ -413,7 +457,7 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. POST: time,focus,move,fov");
+		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov");
 	}
 }
 
