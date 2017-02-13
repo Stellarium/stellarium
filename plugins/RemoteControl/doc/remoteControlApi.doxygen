@@ -190,8 +190,8 @@ This operation works in conjunction with the update() method - until the movemen
 (i.e. \p x and \p y are zero), or no \c move command has been received for a specified time (about a second), the movement is performed in the given directions.
 
 \paragraph rcMainServiceView view
-Parameters: <tt>az (Number) alt (Number)</tt>\n
-Sets the view direction in altitude/azimut coordinates. \p az and \p alt must be given in radians. Omitting one value will keep the relevant coordinate unchanged.
+Parameters: <tt>j2000 (Vec3d) | altAz (Vec3d) | (az (Number) alt (Number))</tt>\n
+Sets the view direction. When the \p j2000 parameter is given (interpreted as JSON Number Array of size 3), it sets the view in J2000 coordinates (see StelMovementMgr::setViewDirectionJ2000). When the \p altAz parameter is given, the 3-element vector is interpreted as if in the rectangular surface direction frame centered on the current location. For example, <tt>[1,0,0]</tt> would point the view directly south, and <tt>[0,1,0]</tt> directly east. The last parameter style provides the view in altitude/azimuth spherical coordinates/angles. \p az and \p alt must be given in radians. Omitting one value will keep the relevant coordinate unchanged.
 
 \paragraph rcMainServiceFov fov
 Parameters: <tt>fov (Number)</tt>\n
