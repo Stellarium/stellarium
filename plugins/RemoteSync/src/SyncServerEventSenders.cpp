@@ -141,7 +141,7 @@ void StelPropertyEventSender::newClientConnected(SyncRemotePeer &client)
 }
 
 ViewEventSender::ViewEventSender()
-	: lastView(0.0), lastFov(0.0)
+	: lastView(0.0)
 {
 	mvMgr = core->getMovementMgr();
 }
@@ -151,7 +151,6 @@ SyncProtocol::View ViewEventSender::constructMessage()
 	View msg;
 	Vec3d viewDirJ2000 = mvMgr->getViewDirectionJ2000();
 	msg.viewAltAz = core->j2000ToAltAz(viewDirJ2000, StelCore::RefractionOff);
-	msg.fov = mvMgr->getCurrentFov();
 	return msg;
 }
 
@@ -163,11 +162,33 @@ void ViewEventSender::update()
 
 	Vec3d viewDir = mvMgr->getViewDirectionJ2000();
 	viewDir = core->j2000ToAltAz(viewDir, StelCore::RefractionOff);
+	if(!(qFuzzyCompare(viewDir[0], lastView[0]) && qFuzzyCompare(viewDir[1], lastView[1]) && qFuzzyCompare(viewDir[2], lastView[2])))
+	{
+		lastView = viewDir;
+		broadcastMessage(constructMessage());
+	}
+}
+
+FovEventSender::FovEventSender()
+	: lastFov(0.0)
+{
+	mvMgr = core->getMovementMgr();
+}
+
+
+SyncProtocol::Fov FovEventSender::constructMessage()
+{
+	Fov msg;
+	msg.fov = mvMgr->getCurrentFov();
+	return msg;
+}
+
+void FovEventSender::update()
+{
 	double curFov = mvMgr->getCurrentFov();
-	if(!(qFuzzyCompare(viewDir[0], lastView[0]) && qFuzzyCompare(viewDir[1], lastView[1]) && qFuzzyCompare(viewDir[2], lastView[2])) || curFov != lastFov)
+	if(curFov!=lastFov)
 	{
 		lastFov = curFov;
-		lastView = viewDir;
 		broadcastMessage(constructMessage());
 	}
 }

@@ -70,7 +70,8 @@ enum SyncMessageType
 	LOCATION, //location changes
 	SELECTION, //current selection changed
 	STELPROPERTY, //stelproperty updates
-    VIEW, //view/fov change
+	VIEW, //view change
+	FOV, //fov change
 
 	ALIVE, //sent from a peer after no data was sent for about 5 seconds to indicate it is still alive
 	MSGTYPE_MAX = ALIVE,
@@ -106,6 +107,9 @@ inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
 			break;
 		case SyncProtocol::VIEW:
 			deb<<"VIEW";
+			break;
+		case SyncProtocol::FOV:
+			deb<<"FOV";
 			break;
 		case SyncProtocol::ALIVE:
 			deb<<"ALIVE";

@@ -105,4 +105,13 @@ private:
 	StelMovementMgr* mvMgr;
 };
 
+class ClientFovHandler : public ClientHandler
+{
+public:
+	ClientFovHandler();
+	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelMovementMgr* mvMgr;
+};
+
 #endif
