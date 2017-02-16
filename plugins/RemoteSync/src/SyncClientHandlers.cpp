@@ -274,6 +274,20 @@ bool ClientViewHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	if(!ok) return false;
 
 	mvMgr->setViewDirectionJ2000(core->altAzToJ2000(msg.viewAltAz, StelCore::RefractionOff));
+	return true;
+}
+
+ClientFovHandler::ClientFovHandler()
+{
+	mvMgr = core->getMovementMgr();
+}
+
+bool ClientFovHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+{
+	Fov msg;
+	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	if(!ok) return false;
+
 	mvMgr->zoomTo(msg.fov, 0.0f);
 	return true;
 }

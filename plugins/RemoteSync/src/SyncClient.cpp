@@ -58,6 +58,7 @@ void SyncClient::connectToServer(const QString &host, const int port)
 	handlerList[SELECTION] = new ClientSelectionHandler();
 	handlerList[STELPROPERTY] = new ClientStelPropertyUpdateHandler();
 	handlerList[VIEW] = new ClientViewHandler();
+	handlerList[FOV] = new ClientFovHandler();
 
 	server = new SyncRemotePeer(new QTcpSocket(this), true, handlerList );
 	connect(server->sock, SIGNAL(connected()), this, SLOT(socketConnected()));

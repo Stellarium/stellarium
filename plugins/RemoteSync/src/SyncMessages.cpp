@@ -187,15 +187,28 @@ bool StelPropertyUpdate::deserialize(QDataStream &stream, tPayloadSize dataSize)
 void View::serialize(QDataStream &stream) const
 {
 	stream<<viewAltAz;
-	stream<<fov;
 }
 
 bool View::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
-	if(dataSize != 4 * sizeof(double))
+	if(dataSize != 3 * sizeof(double))
 		return false;
 
 	stream>>viewAltAz;
+
+	return !stream.status();
+}
+
+void Fov::serialize(QDataStream &stream) const
+{
+	stream<<fov;
+}
+
+bool Fov::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	if(dataSize != sizeof(double))
+		return false;
+
 	stream>>fov;
 
 	return !stream.status();

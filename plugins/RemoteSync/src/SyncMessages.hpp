@@ -153,6 +153,16 @@ public:
 	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
 
 	Vec3d viewAltAz;
+};
+
+class Fov : public SyncMessage
+{
+public:
+	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::FOV; }
+
+	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
 	double fov;
 };
 
