@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-23 00:29+0700\n"
+"POT-Creation-Date: 2017-02-15 22:10+0700\n"
 "PO-Revision-Date: 2016-12-21 07:21+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-23 05:25+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-02-16 05:27+0000\n"
+"X-Generator: Launchpad (build 18326)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -50,8 +50,8 @@ msgstr "كوكبة - مجموعة نجمية"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
-#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:253
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:735
+#: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:743
 msgid "Display Options"
 msgstr "اختيارات العرض"
 
@@ -1167,11 +1167,11 @@ msgstr "الضوء البروجي"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "(مسح السماء الرقمي (تجريبي"
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:533
 msgid "Night mode"
 msgstr "نَسَق الرؤية الليلية"
 
-#: src/core/StelApp.cpp:563
+#: src/core/StelApp.cpp:564
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "لم يتمكن البرنامج من إنشاء Spout sender . إرجع إلى السجل لمزيد من التفاصيل."
@@ -1952,7 +1952,7 @@ msgid "Deep-sky objects background images"
 msgstr "الصور الخلفية لأجرام الفضاء السحيق"
 
 #: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
-#: src/StelMainView.cpp:734
+#: src/StelMainView.cpp:742
 msgid "Miscellaneous"
 msgstr "منوعات"
 
@@ -2056,7 +2056,7 @@ msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفا
 msgid "Authors"
 msgstr "<P DIR=RTL>المؤلفون<P DIR=RTL>"
 
-#: src/gui/ConfigurationDialog.cpp:930 src/gui/ViewDialog.cpp:1253
+#: src/gui/ConfigurationDialog.cpp:930 src/gui/ViewDialog.cpp:1227
 msgid "Contact"
 msgstr "<P DIR=RTL>للمراسلة"
 
@@ -2701,107 +2701,107 @@ msgid "Frames per second"
 msgstr "إطار في الثانية"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1123
+#: src/gui/ViewDialog.cpp:1097
 msgid "Excellent dark-sky site"
 msgstr "موقع ممتاز سماؤه حالكة"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1125
+#: src/gui/ViewDialog.cpp:1099
 msgid "Typical truly dark site"
 msgstr "موقع سماؤه حالكة"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1127
+#: src/gui/ViewDialog.cpp:1101
 msgid "Rural sky"
 msgstr "سماء الريف"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1129
+#: src/gui/ViewDialog.cpp:1103
 msgid "Rural/suburban transition"
 msgstr "سماء الأماكن المتوسطة بين الريف والضواحي"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1131
+#: src/gui/ViewDialog.cpp:1105
 msgid "Suburban sky"
 msgstr "سماء الضواحي"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1133
+#: src/gui/ViewDialog.cpp:1107
 msgid "Bright suburban sky"
 msgstr "سماء ضواحي ساطعة"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1135
+#: src/gui/ViewDialog.cpp:1109
 msgid "Suburban/urban transition"
 msgstr "سماء الأماكن المتوسطة بين الضواحي والمدن"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1137
+#: src/gui/ViewDialog.cpp:1111
 msgid "City sky"
 msgstr "سماء المدن"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1139
+#: src/gui/ViewDialog.cpp:1113
 msgid "Inner-city sky"
 msgstr "سماء وسط المدينة"
 
-#: src/gui/ViewDialog.cpp:1153
+#: src/gui/ViewDialog.cpp:1127
 msgid "The naked-eye limiting magnitude is"
 msgstr "حد قدر اللمعان الذي تراه العين المجردة هو"
 
-#: src/gui/ViewDialog.cpp:1177
+#: src/gui/ViewDialog.cpp:1151
 msgid "Abbreviated"
 msgstr "مختصرة"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1152
 msgid "Native"
 msgstr "باللغة الأصلية"
 
-#: src/gui/ViewDialog.cpp:1179
+#: src/gui/ViewDialog.cpp:1153
 msgid "Translated"
 msgstr "مترجمة"
 
-#: src/gui/ViewDialog.cpp:1374
+#: src/gui/ViewDialog.cpp:1348
 msgid "No shooting stars"
 msgstr "لا يوجد شهب"
 
-#: src/gui/ViewDialog.cpp:1376
+#: src/gui/ViewDialog.cpp:1350
 msgid "Normal rate"
 msgstr "معدل طبيعي لعدد للشهب"
 
-#: src/gui/ViewDialog.cpp:1378
+#: src/gui/ViewDialog.cpp:1352
 msgid "Standard Orionids rate"
 msgstr "معدل زخات شهب قياسي للأسديات"
 
-#: src/gui/ViewDialog.cpp:1380
+#: src/gui/ViewDialog.cpp:1354
 msgid "Standard Perseids rate"
 msgstr "المعدل القياسي للبرشاويات"
 
-#: src/gui/ViewDialog.cpp:1382
+#: src/gui/ViewDialog.cpp:1356
 msgid "Standard Geminids rate"
 msgstr "معدل زخات شهب قياسي للتوأميات"
 
-#: src/gui/ViewDialog.cpp:1384
+#: src/gui/ViewDialog.cpp:1358
 msgid "Exceptional Perseid rate"
 msgstr "معدل زخات شهب استثنائي للبرشاويات"
 
-#: src/gui/ViewDialog.cpp:1386
+#: src/gui/ViewDialog.cpp:1360
 msgid "Meteor storm rate"
 msgstr "معدّل تساقط الشهب"
 
-#: src/gui/ViewDialog.cpp:1388
+#: src/gui/ViewDialog.cpp:1362
 msgid "Exceptional Draconid rate"
 msgstr "معدل زخات شهب استثنائي للتنينيات"
 
-#: src/gui/ViewDialog.cpp:1390
+#: src/gui/ViewDialog.cpp:1364
 msgid "Exceptional Leonid rate"
 msgstr "المعدل الاستثنائي للأسديات"
 
-#: src/gui/ViewDialog.cpp:1392
+#: src/gui/ViewDialog.cpp:1366
 msgid "Very high rate (1966 Leonids)"
 msgstr "معدل مرتفع جداً - الأسديات 1966 م"
 
-#: src/gui/ViewDialog.cpp:1394
+#: src/gui/ViewDialog.cpp:1368
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "أعلى المعدلات - الأسديات 1833 م"
 
@@ -3240,15 +3240,15 @@ msgstr "الإسم المحلي"
 msgid "Location of observer"
 msgstr "موقع الراصد"
 
-#: src/StelMainView.cpp:734
+#: src/StelMainView.cpp:742
 msgid "Save screenshot"
 msgstr "احفظ لقطة الشاشة"
 
-#: src/StelMainView.cpp:735
+#: src/StelMainView.cpp:743
 msgid "Full-screen mode"
 msgstr "نَسَق الشاشة الكاملة"
 
-#: src/StelMainView.cpp:883
+#: src/StelMainView.cpp:891
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3257,7 +3257,7 @@ msgstr ""
 "(drivers, graphics hardware) أو استخدم هذه الخيارات  --angle-mode أو --mesa-"
 "mode فضلا"
 
-#: src/StelMainView.cpp:886
+#: src/StelMainView.cpp:894
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
@@ -3265,7 +3265,7 @@ msgstr ""
 "شاشة حديث. Insufficient OpenGL version. Please update drivers, or graphics "
 "hardware."
 
-#: src/StelMainView.cpp:928
+#: src/StelMainView.cpp:936
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3274,7 +3274,7 @@ msgstr ""
 "التفاصيل في السجل. . DirectX/OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:979
+#: src/StelMainView.cpp:987
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3283,7 +3283,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL/Mesa لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1035
+#: src/StelMainView.cpp:1043
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3292,7 +3292,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1076
+#: src/StelMainView.cpp:1084
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3301,7 +3301,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1188
+#: src/StelMainView.cpp:1196
 #, qt-format
 msgid "Stellarium %1"
 msgstr "ستيللاريوم %1"
@@ -4077,8 +4077,8 @@ msgstr ""
 
 #: src/translations.h:368
 msgid ""
-"Screensaver of various happenings in the Solar System. 261 events in all!"
-msgstr "حافظ شاشة لـ 261 حدث فلكي في النظام الشمسي"
+"Screensaver of various happenings in the Solar System. 287 events in all!"
+msgstr ""
 
 #: src/translations.h:369
 msgid "A tour of the western constellations."
@@ -17023,3 +17023,7 @@ msgstr "الميل المخصص 2"
 
 #~ msgid "Show names"
 #~ msgstr ". اعرض الأسماء ."
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 261 events in all!"
+#~ msgstr "حافظ شاشة لـ 261 حدث فلكي في النظام الشمسي"

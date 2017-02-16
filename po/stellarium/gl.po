@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-23 00:29+0700\n"
+"POT-Creation-Date: 2017-02-15 22:10+0700\n"
 "PO-Revision-Date: 2017-01-27 18:15+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-28 05:31+0000\n"
-"X-Generator: Launchpad (build 18315)\n"
+"X-Launchpad-Export-Date: 2017-02-16 05:35+0000\n"
+"X-Generator: Launchpad (build 18326)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -50,8 +50,8 @@ msgstr "constelación"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
-#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:253
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:735
+#: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:743
 msgid "Display Options"
 msgstr "Opcións de visualización"
 
@@ -1168,11 +1168,11 @@ msgstr "Luz zodiacal"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Exame do Ceo Dixitalizado (experimental)"
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:533
 msgid "Night mode"
 msgstr "Modo nocturno"
 
-#: src/core/StelApp.cpp:563
+#: src/core/StelApp.cpp:564
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Non se pode crear Spout sender. Ver rexistro para máis información."
 
@@ -1978,7 +1978,7 @@ msgid "Deep-sky objects background images"
 msgstr "Imaxes de fondo de obxectos do ceo profundo"
 
 #: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
-#: src/StelMainView.cpp:734
+#: src/StelMainView.cpp:742
 msgid "Miscellaneous"
 msgstr "Varios"
 
@@ -2082,7 +2082,7 @@ msgstr "Comezar na dirección Az/Alt: %1/%2"
 msgid "Authors"
 msgstr "Autoría"
 
-#: src/gui/ConfigurationDialog.cpp:930 src/gui/ViewDialog.cpp:1253
+#: src/gui/ConfigurationDialog.cpp:930 src/gui/ViewDialog.cpp:1227
 msgid "Contact"
 msgstr "Contacto"
 
@@ -2725,107 +2725,107 @@ msgid "Frames per second"
 msgstr "Fotogramas por segundo"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1123
+#: src/gui/ViewDialog.cpp:1097
 msgid "Excellent dark-sky site"
 msgstr "Sito con excelente ceo escuro"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1125
+#: src/gui/ViewDialog.cpp:1099
 msgid "Typical truly dark site"
 msgstr "Típico sitio verdadeiramente escuro"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1127
+#: src/gui/ViewDialog.cpp:1101
 msgid "Rural sky"
 msgstr "Ceo rural"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1129
+#: src/gui/ViewDialog.cpp:1103
 msgid "Rural/suburban transition"
 msgstr "Transición rural/periurbano"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1131
+#: src/gui/ViewDialog.cpp:1105
 msgid "Suburban sky"
 msgstr "Ceo periurbano"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1133
+#: src/gui/ViewDialog.cpp:1107
 msgid "Bright suburban sky"
 msgstr "Ceo periurbano iluminado"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1135
+#: src/gui/ViewDialog.cpp:1109
 msgid "Suburban/urban transition"
 msgstr "Transición periurbano/cidade"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1137
+#: src/gui/ViewDialog.cpp:1111
 msgid "City sky"
 msgstr "Ceo de cidade"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1139
+#: src/gui/ViewDialog.cpp:1113
 msgid "Inner-city sky"
 msgstr "Ceo do centro da cidade"
 
-#: src/gui/ViewDialog.cpp:1153
+#: src/gui/ViewDialog.cpp:1127
 msgid "The naked-eye limiting magnitude is"
 msgstr "A magnitude a simple vista é"
 
-#: src/gui/ViewDialog.cpp:1177
+#: src/gui/ViewDialog.cpp:1151
 msgid "Abbreviated"
 msgstr "Abreviado"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1152
 msgid "Native"
 msgstr "Nativo"
 
-#: src/gui/ViewDialog.cpp:1179
+#: src/gui/ViewDialog.cpp:1153
 msgid "Translated"
 msgstr "Traducido"
 
-#: src/gui/ViewDialog.cpp:1374
+#: src/gui/ViewDialog.cpp:1348
 msgid "No shooting stars"
 msgstr "Sen estrelas fugaces"
 
-#: src/gui/ViewDialog.cpp:1376
+#: src/gui/ViewDialog.cpp:1350
 msgid "Normal rate"
 msgstr "Tipo normal"
 
-#: src/gui/ViewDialog.cpp:1378
+#: src/gui/ViewDialog.cpp:1352
 msgid "Standard Orionids rate"
 msgstr "Taxa estándar das Oriónidas"
 
-#: src/gui/ViewDialog.cpp:1380
+#: src/gui/ViewDialog.cpp:1354
 msgid "Standard Perseids rate"
 msgstr "Ratio de Perseidas estándar"
 
-#: src/gui/ViewDialog.cpp:1382
+#: src/gui/ViewDialog.cpp:1356
 msgid "Standard Geminids rate"
 msgstr "Taxa estándar das Xemínidas"
 
-#: src/gui/ViewDialog.cpp:1384
+#: src/gui/ViewDialog.cpp:1358
 msgid "Exceptional Perseid rate"
 msgstr "Taxa excepcional das Perseidas"
 
-#: src/gui/ViewDialog.cpp:1386
+#: src/gui/ViewDialog.cpp:1360
 msgid "Meteor storm rate"
 msgstr "Ratio de meteoritos"
 
-#: src/gui/ViewDialog.cpp:1388
+#: src/gui/ViewDialog.cpp:1362
 msgid "Exceptional Draconid rate"
 msgstr "Taxa excepcional das Dracónidas"
 
-#: src/gui/ViewDialog.cpp:1390
+#: src/gui/ViewDialog.cpp:1364
 msgid "Exceptional Leonid rate"
 msgstr "Ratio de Leónidas excepcional"
 
-#: src/gui/ViewDialog.cpp:1392
+#: src/gui/ViewDialog.cpp:1366
 msgid "Very high rate (1966 Leonids)"
 msgstr "Taxa moi alta (1966 Leónidas)"
 
-#: src/gui/ViewDialog.cpp:1394
+#: src/gui/ViewDialog.cpp:1368
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "A maior taxa acadada (1833 Leónidas)"
 
@@ -3263,15 +3263,15 @@ msgstr "Nome localizado"
 msgid "Location of observer"
 msgstr "Localización do observador"
 
-#: src/StelMainView.cpp:734
+#: src/StelMainView.cpp:742
 msgid "Save screenshot"
 msgstr "Gardar a captura de pantalla"
 
-#: src/StelMainView.cpp:735
+#: src/StelMainView.cpp:743
 msgid "Full-screen mode"
 msgstr "Modo pantalla completa"
 
-#: src/StelMainView.cpp:883
+#: src/StelMainView.cpp:891
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3279,13 +3279,13 @@ msgstr ""
 "Versión OpenGL insuficiente. Por favor, actualiza os controladores, o "
 "hardware de gráficos, ou usa a opción angle-mode (ou mesa-mode)."
 
-#: src/StelMainView.cpp:886
+#: src/StelMainView.cpp:894
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Versión OpenGL insuficiente. Actualiza os drivers ou  a tarxeta gráfica."
 
-#: src/StelMainView.cpp:928
+#: src/StelMainView.cpp:936
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3296,7 +3296,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar en modo degradado "
 "de todos os xeitos?"
 
-#: src/StelMainView.cpp:979
+#: src/StelMainView.cpp:987
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3307,7 +3307,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar en modo degradado "
 "de todos os xeitos?"
 
-#: src/StelMainView.cpp:1035
+#: src/StelMainView.cpp:1043
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3318,7 +3318,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar en modo degradado "
 "de todos os xeitos?"
 
-#: src/StelMainView.cpp:1076
+#: src/StelMainView.cpp:1084
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3328,7 +3328,7 @@ msgstr ""
 "Ignorar e suprimir esta mensaxe no futuro e intentar continuar igualmente en "
 "modo degradado?"
 
-#: src/StelMainView.cpp:1188
+#: src/StelMainView.cpp:1196
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4113,10 +4113,8 @@ msgstr ""
 
 #: src/translations.h:368
 msgid ""
-"Screensaver of various happenings in the Solar System. 261 events in all!"
+"Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
-"Salvapantallas de varios acontecementos no Sistema Solar, 261 eventos en "
-"total!"
 
 #: src/translations.h:369
 msgid "A tour of the western constellations."
@@ -17270,3 +17268,9 @@ msgstr "Declinación 2 personalizada"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Amosa Obxectos do Sistema Solar"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 261 events in all!"
+#~ msgstr ""
+#~ "Salvapantallas de varios acontecementos no Sistema Solar, 261 eventos en "
+#~ "total!"
