@@ -63,6 +63,7 @@ bool SyncServer::start(int port)
 		addSender(new SelectionEventSender());
 		addSender(new StelPropertyEventSender());
 		addSender(new ViewEventSender());
+		addSender(new FovEventSender());
 
 		timeoutTimerId = startTimer(5000,Qt::VeryCoarseTimer);
 	}
