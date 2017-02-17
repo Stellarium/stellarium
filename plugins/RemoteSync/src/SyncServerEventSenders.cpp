@@ -100,7 +100,7 @@ Selection SelectionEventSender::constructMessage()
 
 	for (QList<StelObjectP>::const_iterator iter=selObj.constBegin();iter!=selObj.constEnd();++iter)
 	{
-		msg.selectedObjectNames.append((*iter)->getEnglishName());
+		msg.selectedObjects.append(qMakePair((*iter)->getType(), (*iter)->getID()));
 	}
 
 	return msg;

@@ -1438,6 +1438,11 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
+StelObjectP StarMgr::searchByID(const QString &id) const
+{
+	return searchByName(id);
+}
+
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
@@ -1808,4 +1813,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 
 	result.removeDuplicates();
 	return result;
+}
+
+QString StarMgr::getStelObjectType() const
+{
+	return STAR_TYPE;
 }

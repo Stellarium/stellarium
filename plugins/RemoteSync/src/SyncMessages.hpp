@@ -118,7 +118,13 @@ public:
 	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
 	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
 
-	QList<QString> selectedObjectNames;
+	QDebug debugOutput(QDebug dbg) const Q_DECL_OVERRIDE
+	{
+		return dbg<<selectedObjects;
+	}
+
+	//list of type/ID pairs
+	QList< QPair<QString,QString> > selectedObjects;
 };
 
 class Alive : public SyncMessage

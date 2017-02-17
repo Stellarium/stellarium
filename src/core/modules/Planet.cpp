@@ -55,6 +55,8 @@
 #include <QOpenGLShader>
 #include <QtConcurrent>
 
+const QString Planet::PLANET_TYPE = QStringLiteral("Planet");
+
 bool Planet::shaderError = false;
 
 Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);

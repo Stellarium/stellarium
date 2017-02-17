@@ -292,6 +292,8 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
@@ -302,6 +304,7 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Deep-sky objects"; }
+	virtual QString getStelObjectType() const { return Nebula::NEBULA_TYPE; }
 
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;

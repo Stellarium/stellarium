@@ -306,9 +306,15 @@ public:
 	//! @return a StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	virtual StelObjectP searchByID(const QString &id) const
+	{
+		return searchByName(id);
+	}
+
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Solar System"; }
+	virtual QString getStelObjectType() const { return Planet::PLANET_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
