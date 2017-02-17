@@ -518,7 +518,7 @@ bool Quasars::checkJsonFileFormat()
 	return true;
 }
 
-QuasarP Quasars::getByID(const QString& id)
+QuasarP Quasars::getByID(const QString& id) const
 {
 	foreach(const QuasarP& quasar, QSO)
 	{

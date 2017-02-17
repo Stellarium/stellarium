@@ -108,12 +108,18 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	virtual StelObjectP searchByID(const QString &id) const
+	{
+		return qSharedPointerCast<StelObject>(getByID(id));
+	}
+
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
 	virtual QString getName() const { return "Historical Supernovae"; }
+	virtual QString getStelObjectType() const { return Supernova::SUPERNOVA_TYPE; }
 
 	//! get a supernova object by identifier
-	SupernovaP getByID(const QString& id);
+	SupernovaP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.

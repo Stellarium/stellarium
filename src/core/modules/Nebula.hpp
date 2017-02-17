@@ -42,6 +42,8 @@ friend class NebulaMgr;
 	Q_FLAGS(TypeGroup)
 	Q_ENUMS(NebulaType)
 public:
+	static const QString NEBULA_TYPE;
+
 	enum CatalogGroupFlags
 	{
 		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
@@ -133,7 +135,8 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	virtual QString getType() const {return "Nebula";}
+	virtual QString getType() const {return NEBULA_TYPE;}
+	virtual QString getID() const {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
 	virtual double getCloseViewFov(const StelCore* core = NULL) const;
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -173,7 +176,7 @@ public:
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced)
 	//! @return a designation
-	QString getDSODesignation();
+	QString getDSODesignation() const;
 
 private:
 	friend struct DrawNebulaFuncObject;

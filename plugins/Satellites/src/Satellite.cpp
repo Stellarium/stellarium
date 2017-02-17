@@ -48,6 +48,8 @@
 
 #define sqr(a) ((a)*(a))
 
+const QString Satellite::SATELLITE_TYPE = QStringLiteral("Satellite");
+
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
 float Satellite::showLabels = true;

@@ -58,6 +58,10 @@ public:
 	//! @param name the english object name
 	virtual StelObjectP searchByName(const QString& name) const = 0;
 
+	//! Return the StelObject with the given ID if exists or the empty StelObject if not found
+	//! @param name the english object name
+	virtual StelObjectP searchByID(const QString& id) const = 0;
+
 	//! Find and return the list of at most maxNbItem objects auto-completing passed object name
 	//! @param objPrefix the first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
@@ -77,7 +81,10 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 
+	//! Gets a user-displayable name of the object category
 	virtual QString getName() const = 0;
+	//! Returns the name that will be returned by StelObject::getType() for the objects this module manages
+	virtual QString getStelObjectType() const = 0;
 
 	//! Auxiliary method of listMatchingObjects()
 	//! @param objName object name

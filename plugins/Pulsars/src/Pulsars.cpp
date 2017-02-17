@@ -514,7 +514,7 @@ bool Pulsars::checkJsonFileFormat()
 	return true;
 }
 
-PulsarP Pulsars::getByID(const QString& id)
+PulsarP Pulsars::getByID(const QString& id) const
 {
 	foreach(const PulsarP& pulsar, psr)
 	{

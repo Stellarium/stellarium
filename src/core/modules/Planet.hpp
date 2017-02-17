@@ -83,6 +83,7 @@ public:
 class Planet : public StelObject
 {
 public:
+	static const QString PLANET_TYPE;
 	friend class SolarSystem;
 
 	Q_ENUMS(PlanetType)
@@ -173,7 +174,8 @@ public:
 	virtual float getVMagnitude(const StelCore* core) const;
 	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual QString getType(void) const {return "Planet";}
+	virtual QString getType(void) const {return PLANET_TYPE;}
+	virtual QString getID(void) const { return englishName; }
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;

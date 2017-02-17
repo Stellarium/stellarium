@@ -38,6 +38,7 @@
 
 #define PSR_INERTIA 1.0e45 /* Typical moment of inertia for a pulsar */
 
+const QString Pulsar::PULSAR_TYPE = QStringLiteral("Pulsar");
 StelTextureSP Pulsar::markerTexture;
 
 bool Pulsar::distributionMode = false;
