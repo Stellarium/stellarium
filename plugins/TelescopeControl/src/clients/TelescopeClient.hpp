@@ -54,6 +54,7 @@ class TelescopeClient : public QObject, public StelObject
 {
 	Q_OBJECT
 public:
+	static const QString TELESCOPECLIENT_TYPE;
 	static TelescopeClient *create(const QString &url);
 	virtual ~TelescopeClient(void) {}
 	
@@ -73,7 +74,8 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	QString getType(void) const {return "Telescope";}
+	QString getType(void) const {return TELESCOPECLIENT_TYPE;}
+	QString getID() const {return name;}
 	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope

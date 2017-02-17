@@ -31,7 +31,7 @@ typedef QSharedPointer<MeteorShower> MeteorShowerP;
 //! reimplement the methods defined in the StelObjectModule class.
 //! @author Marcos Cardinot <mcardinot@gmail.com>
 //! @ingroup meteorShowers
-class MeteorShowers : public MeteorShowersMgr
+class MeteorShowers : public StelObjectModule
 {
 	Q_OBJECT
 public:
@@ -46,6 +46,8 @@ public:
 
 	//! Constructor
 	MeteorShowers(MeteorShowersMgr *mgr);
+
+	virtual void init(void) {}
 
 	//! Destructor
 	virtual ~MeteorShowers();
@@ -73,9 +75,11 @@ public:
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByID(const QString &id) const;
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Meteor Showers"; }
+	virtual QString getStelObjectType() const { return MeteorShower::METEORSHOWER_TYPE; }
 
 private:
 	MeteorShowersMgr* m_mgr;

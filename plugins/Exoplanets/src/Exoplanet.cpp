@@ -38,6 +38,7 @@
 #include <QVariant>
 #include <QList>
 
+const QString Exoplanet::EXOPLANET_TYPE=QStringLiteral("Exoplanet");
 StelTextureSP Exoplanet::markerTexture;
 bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;

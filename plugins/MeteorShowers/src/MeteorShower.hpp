@@ -37,6 +37,8 @@
 class MeteorShower : public StelObject
 {
 public:
+	static const QString METEORSHOWER_TYPE;
+
 	//! @enum Meteor Shower status.
 	enum Status {
 		INVALID,          // not initialized properly
@@ -105,7 +107,8 @@ public:
 	// Methods defined in StelObject class
 	//
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	virtual QString getType(void) const { return "MeteorShower"; }
+	virtual QString getType(void) const { return METEORSHOWER_TYPE; }
+	virtual QString getID(void) const { return m_showerID; }
 	virtual QString getEnglishName(void) const { return m_designation.trimmed(); }
 	virtual QString getNameI18n(void) const	{ return q_(m_designation.trimmed()); }
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const { return m_position; }

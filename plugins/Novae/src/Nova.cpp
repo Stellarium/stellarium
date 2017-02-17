@@ -35,6 +35,8 @@
 #include <QVariant>
 #include <QList>
 
+const QString Nova::NOVA_TYPE = QStringLiteral("Nova");
+
 Nova::Nova(const QVariantMap& map)
 	: initialized(false)
 	, designation("")

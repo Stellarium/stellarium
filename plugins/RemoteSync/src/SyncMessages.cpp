@@ -160,13 +160,13 @@ bool Location::deserialize(QDataStream &stream, tPayloadSize dataSize)
 
 void Selection::serialize(QDataStream &stream) const
 {
-	stream<<selectedObjectNames;
+	stream<<selectedObjects;
 }
 
 bool Selection::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
 	Q_UNUSED(dataSize);
-	stream>>selectedObjectNames;
+	stream>>selectedObjects;
 	return !stream.status();
 }
 

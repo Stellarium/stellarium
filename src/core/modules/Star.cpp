@@ -26,6 +26,8 @@
 #include <QDebug>
 #include <QString>
 
+const QString STAR_TYPE = QStringLiteral("Star");
+
 QString Star1::getNameI18n(void) const
 {
 	if (getHip())

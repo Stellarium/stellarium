@@ -227,19 +227,28 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncRemotePeer &
 	if(!ok)
 		return false;
 
+	qDebug()<<msg;
+
 	//lookup the objects from their names
 	//this might cause problems if 2 objects of different types have the same name!
 	QList<StelObjectP> selection;
 
-	for(QList<QString>::iterator it = msg.selectedObjectNames.begin(); it!=msg.selectedObjectNames.end();++it)
+	for(QList< QPair<QString,QString> >::iterator it = msg.selectedObjects.begin(); it!=msg.selectedObjects.end();++it)
 	{
-		StelObjectP obj = objMgr->searchByName(*it);
-		if(!obj.isNull())
+		StelObjectP obj = objMgr->searchByID(it->first, it->second);
+		if(obj)
 			selection.append(obj);
+		else
+			qWarning()<<"Object not found"<<it->first<<it->second;
 	}
 
-	//set selection
-	objMgr->setSelectedObject(selection,StelModule::ReplaceSelection);
+	if(selection.isEmpty())
+		objMgr->unSelect();
+	else
+	{
+		//set selection
+		objMgr->setSelectedObject(selection,StelModule::ReplaceSelection);
+	}
 
 	return true;
 }
