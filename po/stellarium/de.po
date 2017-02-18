@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-23 00:29+0700\n"
-"PO-Revision-Date: 2017-01-15 20:04+0000\n"
+"POT-Creation-Date: 2017-02-15 22:10+0700\n"
+"PO-Revision-Date: 2017-02-07 21:27+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-23 05:32+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-02-16 05:34+0000\n"
+"X-Generator: Launchpad (build 18326)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -52,8 +52,8 @@ msgstr "Sternbild"
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
-#: src/core/StelApp.cpp:532 src/core/StelCore.cpp:253
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:735
+#: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:743
 msgid "Display Options"
 msgstr "Anzeigeoptionen"
 
@@ -1171,11 +1171,11 @@ msgstr "Zodiakallicht"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Digitized Sky Survey (experimentell)"
 
-#: src/core/StelApp.cpp:532
+#: src/core/StelApp.cpp:533
 msgid "Night mode"
 msgstr "Nachtmodus"
 
-#: src/core/StelApp.cpp:563
+#: src/core/StelApp.cpp:564
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Spout-Sender nicht möglich. Details im Logfile."
 
@@ -1988,7 +1988,7 @@ msgid "Deep-sky objects background images"
 msgstr "Hintergrundbilder für Deep-Sky-Objekte"
 
 #: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
-#: src/StelMainView.cpp:734
+#: src/StelMainView.cpp:742
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
@@ -2092,7 +2092,7 @@ msgstr "Anfängliche Blickrichtung in Azimut/Höhe: %1/%2"
 msgid "Authors"
 msgstr "Autoren"
 
-#: src/gui/ConfigurationDialog.cpp:930 src/gui/ViewDialog.cpp:1253
+#: src/gui/ConfigurationDialog.cpp:930 src/gui/ViewDialog.cpp:1227
 msgid "Contact"
 msgstr "Ansprechpartner"
 
@@ -2738,107 +2738,107 @@ msgid "Frames per second"
 msgstr "Bilder pro Sekunde"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1123
+#: src/gui/ViewDialog.cpp:1097
 msgid "Excellent dark-sky site"
 msgstr "Hervorragend dunkler Beobachtungsplatz"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1125
+#: src/gui/ViewDialog.cpp:1099
 msgid "Typical truly dark site"
 msgstr "Typischer wirklich dunkler Beobachtungsplatz"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1127
+#: src/gui/ViewDialog.cpp:1101
 msgid "Rural sky"
 msgstr "Ländlicher Himmel"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1129
+#: src/gui/ViewDialog.cpp:1103
 msgid "Rural/suburban transition"
 msgstr "Ländlich-vorstädtischer Himmel"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1131
+#: src/gui/ViewDialog.cpp:1105
 msgid "Suburban sky"
 msgstr "Vorstadthimmel"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1133
+#: src/gui/ViewDialog.cpp:1107
 msgid "Bright suburban sky"
 msgstr "Heller Vorstadthimmel"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1135
+#: src/gui/ViewDialog.cpp:1109
 msgid "Suburban/urban transition"
 msgstr "Stadtrand"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1137
+#: src/gui/ViewDialog.cpp:1111
 msgid "City sky"
 msgstr "Stadthimmel"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1139
+#: src/gui/ViewDialog.cpp:1113
 msgid "Inner-city sky"
 msgstr "Innenstadthimmel"
 
-#: src/gui/ViewDialog.cpp:1153
+#: src/gui/ViewDialog.cpp:1127
 msgid "The naked-eye limiting magnitude is"
 msgstr "Freiäugige Grenzgröße ist"
 
-#: src/gui/ViewDialog.cpp:1177
+#: src/gui/ViewDialog.cpp:1151
 msgid "Abbreviated"
 msgstr "Abgekürzt"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1152
 msgid "Native"
 msgstr "Original"
 
-#: src/gui/ViewDialog.cpp:1179
+#: src/gui/ViewDialog.cpp:1153
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: src/gui/ViewDialog.cpp:1374
+#: src/gui/ViewDialog.cpp:1348
 msgid "No shooting stars"
 msgstr "Keine Sternschnuppen"
 
-#: src/gui/ViewDialog.cpp:1376
+#: src/gui/ViewDialog.cpp:1350
 msgid "Normal rate"
 msgstr "Normale Frequenz"
 
-#: src/gui/ViewDialog.cpp:1378
+#: src/gui/ViewDialog.cpp:1352
 msgid "Standard Orionids rate"
 msgstr "Standardrate für Orioniden"
 
-#: src/gui/ViewDialog.cpp:1380
+#: src/gui/ViewDialog.cpp:1354
 msgid "Standard Perseids rate"
 msgstr "Standard-Perseidenfrequenz"
 
-#: src/gui/ViewDialog.cpp:1382
+#: src/gui/ViewDialog.cpp:1356
 msgid "Standard Geminids rate"
 msgstr "Standardrate für Geminiden"
 
-#: src/gui/ViewDialog.cpp:1384
+#: src/gui/ViewDialog.cpp:1358
 msgid "Exceptional Perseid rate"
 msgstr "Außergewöhnliche Rate für Perseiden"
 
-#: src/gui/ViewDialog.cpp:1386
+#: src/gui/ViewDialog.cpp:1360
 msgid "Meteor storm rate"
 msgstr "Meteorsturmrate"
 
-#: src/gui/ViewDialog.cpp:1388
+#: src/gui/ViewDialog.cpp:1362
 msgid "Exceptional Draconid rate"
 msgstr "Außergewöhnliche Rate für Draconiden"
 
-#: src/gui/ViewDialog.cpp:1390
+#: src/gui/ViewDialog.cpp:1364
 msgid "Exceptional Leonid rate"
 msgstr "Außergewöhnliche Leonidenfrequenz"
 
-#: src/gui/ViewDialog.cpp:1392
+#: src/gui/ViewDialog.cpp:1366
 msgid "Very high rate (1966 Leonids)"
 msgstr "Sehr hohe Rate (Leoniden 1966)"
 
-#: src/gui/ViewDialog.cpp:1394
+#: src/gui/ViewDialog.cpp:1368
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Höchste jemals beobachtete Rate (Leoniden 1833)"
 
@@ -3281,15 +3281,15 @@ msgstr "Lokalisierter Name"
 msgid "Location of observer"
 msgstr "Standort des Beobachters"
 
-#: src/StelMainView.cpp:734
+#: src/StelMainView.cpp:742
 msgid "Save screenshot"
 msgstr "Bildschirmfoto speichern"
 
-#: src/StelMainView.cpp:735
+#: src/StelMainView.cpp:743
 msgid "Full-screen mode"
 msgstr "Vollbildmodus"
 
-#: src/StelMainView.cpp:883
+#: src/StelMainView.cpp:891
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3297,14 +3297,14 @@ msgstr ""
 "Unzureichendes OpenGL-System. Bitte Treiber aktualisieren, Hardware "
 "aufrüsten, oder --angle-mode (oder --mesa-mode) probieren."
 
-#: src/StelMainView.cpp:886
+#: src/StelMainView.cpp:894
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Mangelhafte OpenGL-Unterstützung. Bitte Graphikkarten-Treiber aktualisieren "
 "oder andere Graphikkarte einbauen."
 
-#: src/StelMainView.cpp:928
+#: src/StelMainView.cpp:936
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3314,7 +3314,7 @@ msgstr ""
 "Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
 "Probleme fortzufahren?"
 
-#: src/StelMainView.cpp:979
+#: src/StelMainView.cpp:987
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3324,7 +3324,7 @@ msgstr ""
 "Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
 "Probleme fortzufahren?"
 
-#: src/StelMainView.cpp:1035
+#: src/StelMainView.cpp:1043
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3334,7 +3334,7 @@ msgstr ""
 "Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
 "Probleme fortzufahren?"
 
-#: src/StelMainView.cpp:1076
+#: src/StelMainView.cpp:1084
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3344,7 +3344,7 @@ msgstr ""
 "Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
 "Probleme fortzufahren?"
 
-#: src/StelMainView.cpp:1188
+#: src/StelMainView.cpp:1196
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4129,10 +4129,8 @@ msgstr ""
 
 #: src/translations.h:368
 msgid ""
-"Screensaver of various happenings in the Solar System. 261 events in all!"
+"Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
-"Bildschirmschoner mit diversen Vorgängen im Sonnensystem. Insgesamt 261 "
-"Ereignisse!"
 
 #: src/translations.h:369
 msgid "A tour of the western constellations."
@@ -8082,7 +8080,7 @@ msgstr "Rekt/Dekl (J2000.0) des Kreuzes"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "\"/px"
-msgstr ""
+msgstr "\"/px"
 
 #: plugins/Oculars/src/Oculars.cpp:1899
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:517
@@ -8307,22 +8305,22 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 msgid "X scale"
-msgstr ""
+msgstr "X-Maßstab"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
 msgid "Horizontal scale"
-msgstr ""
+msgstr "Horizontaler Maßstab"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:718
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:822
 msgid "Y scale"
-msgstr ""
+msgstr "Y-Maßstab"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:719
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 msgid "Vertical scale"
-msgstr ""
+msgstr "Vertikaler Maßstab"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:725
 #, qt-format
@@ -8674,11 +8672,11 @@ msgstr "Rotationswinkel (Grad):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Binning x:"
-msgstr ""
+msgstr "Binning x:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
 msgid "Binning y:"
-msgstr ""
+msgstr "Binning y:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1223
 #: plugins/Oculars/src/ui_ocularDialog.h:1232
@@ -17277,3 +17275,9 @@ msgstr "Wahlfreie Deklination 2"
 
 #~ msgid "Show Solar System objects"
 #~ msgstr "Zeige Objekte des Sonnensystems"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 261 events in all!"
+#~ msgstr ""
+#~ "Bildschirmschoner mit diversen Vorgängen im Sonnensystem. Insgesamt 261 "
+#~ "Ereignisse!"
