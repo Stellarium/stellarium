@@ -29,8 +29,13 @@
 
 using namespace SyncProtocol;
 
-SyncClient::SyncClient(QObject *parent)
-	: QObject(parent), isConnecting(false), server(NULL), timeoutTimerId(-1)
+SyncClient::SyncClient(SyncOptions options, const QStringList &excludeProperties, QObject *parent)
+	: QObject(parent),
+	  options(options),
+	  stelPropFilter(excludeProperties),
+	  isConnecting(false),
+	  server(NULL),
+	  timeoutTimerId(-1)
 {
 }
 
@@ -53,12 +58,24 @@ void SyncClient::connectToServer(const QString &host, const int port)
 	handlerList[ALIVE] = new ClientAliveHandler();
 
 	//these are the actual sync handlers
-	handlerList[TIME] = new ClientTimeHandler();
-	handlerList[LOCATION] = new ClientLocationHandler();
-	handlerList[SELECTION] = new ClientSelectionHandler();
-	handlerList[STELPROPERTY] = new ClientStelPropertyUpdateHandler();
-	handlerList[VIEW] = new ClientViewHandler();
-	handlerList[FOV] = new ClientFovHandler();
+	if(options.testFlag(SyncTime))
+		handlerList[TIME] = new ClientTimeHandler();
+	if(options.testFlag(SyncLocation))
+		handlerList[LOCATION] = new ClientLocationHandler();
+	if(options.testFlag(SyncSelection))
+		handlerList[SELECTION] = new ClientSelectionHandler();
+	if(options.testFlag(SyncStelProperty))
+		handlerList[STELPROPERTY] = new ClientStelPropertyUpdateHandler(options.testFlag(SkipGUIProps), stelPropFilter);
+	if(options.testFlag(SyncView))
+		handlerList[VIEW] = new ClientViewHandler();
+	if(options.testFlag(SyncFov))
+		handlerList[FOV] = new ClientFovHandler();
+
+	//fill unused handlers with dummies
+	for(int t = TIME;t<ALIVE;++t)
+	{
+		if(!handlerList[t]) handlerList[t] = new DummyMessageHandler();
+	}
 
 	server = new SyncRemotePeer(new QTcpSocket(this), true, handlerList );
 	connect(server->sock, SIGNAL(connected()), this, SLOT(socketConnected()));
@@ -67,7 +84,7 @@ void SyncClient::connectToServer(const QString &host, const int port)
 	connect(server->sock, SIGNAL(readyRead()), this, SLOT(dataReceived()));
 
 	isConnecting = true;
-	qDebug()<<"[SyncClient] Connecting to"<<(host + ":" + QString::number(port));
+	qDebug()<<"[SyncClient] Connecting to"<<(host + ":" + QString::number(port))<<", with options"<<options;
 	server->sock->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 	server->sock->connectToHost(host,port);
 	timeoutTimerId = startTimer(2000,Qt::VeryCoarseTimer); //the connection is checked all 5 seconds
@@ -130,7 +147,7 @@ void SyncClient::checkTimeout()
 	qint64 writeDiff = curTime - server->lastSendTime;
 
 
-	if(writeDiff>5000)
+	if(writeDiff>5000 && server->isAuthenticated) // only send ALIVE after auth
 	{
 		//send an ALIVE message
 		Alive msg;

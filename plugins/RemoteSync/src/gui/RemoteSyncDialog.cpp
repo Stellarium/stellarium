@@ -77,6 +77,21 @@ void RemoteSyncDialog::createDialogContent()
 	ui->serverPortSpinBox->setValue(rs->getServerPort());
 	connect(ui->serverPortSpinBox, SIGNAL(valueChanged(int)), rs, SLOT(setServerPort(int)));
 
+	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionTime, SyncClient::SyncTime);
+	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionLocation, SyncClient::SyncLocation);
+	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionSelection, SyncClient::SyncSelection);
+	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionStelProperty, SyncClient::SyncStelProperty);
+	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionView, SyncClient::SyncView);
+	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionFov, SyncClient::SyncFov);
+	ui->buttonGroupSyncOptions->setId(ui->checkBoxExcludeGUIProps, SyncClient::SkipGUIProps);
+	updateCheckboxesFromSyncOptions();
+	connect(rs, SIGNAL(clientSyncOptionsChanged(SyncClient::SyncOptions)), this, SLOT(updateCheckboxesFromSyncOptions()));
+	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
+
+	setTextboxFromList(rs->getStelPropFilter());
+	connect(rs, SIGNAL(stelPropFilterChanged(QStringList)), this, SLOT(setTextboxFromList(QStringList)));
+	connect(ui->textStelPropertyExclude, SIGNAL(textChanged()), this, SLOT(setExcludesFromTextbox()));
+
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rs, SLOT(restoreDefaultSettings()));
 
@@ -204,4 +219,48 @@ void RemoteSyncDialog::updateIPlabel(bool running)
 		// Maybe even hide the label?
 		//ui->label_RemoteRunningState->hide();
 	}
+}
+
+void RemoteSyncDialog::updateCheckboxesFromSyncOptions()
+{
+	SyncClient::SyncOptions options = rs->getClientSyncOptions();
+
+	foreach(QAbstractButton* bt, ui->buttonGroupSyncOptions->buttons())
+	{
+		int id = ui->buttonGroupSyncOptions->id(bt);
+		bt->setChecked(options & id);
+	}
+}
+
+void RemoteSyncDialog::checkboxToggled(int id, bool state)
+{
+	SyncClient::SyncOptions options = rs->getClientSyncOptions();
+	SyncClient::SyncOption enumVal = static_cast<SyncClient::SyncOption>(id);
+	//toggle flag
+	options = state ? (options|enumVal) : (options&~enumVal);
+	rs->setClientSyncOptions(options);
+}
+
+void RemoteSyncDialog::setTextboxFromList(const QStringList &list)
+{
+	bool val = ui->textStelPropertyExclude->blockSignals(true);
+	ui->textStelPropertyExclude->setPlainText(list.join('\n'));
+	ui->textStelPropertyExclude->blockSignals(val);
+}
+
+void RemoteSyncDialog::setExcludesFromTextbox()
+{
+	bool val = ui->textStelPropertyExclude->blockSignals(true);
+	QString text = ui->textStelPropertyExclude->toPlainText();
+	QStringList lines = text.split('\n', QString::SkipEmptyParts);
+
+	//trim strings
+	for(QStringList::iterator it = lines.begin();it!=lines.end();++it)
+	{
+		(*it) = (*it).trimmed();
+	}
+	lines.removeDuplicates();
+
+	rs->setStelPropFilter(lines);
+	ui->textStelPropertyExclude->blockSignals(val);
 }

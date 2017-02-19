@@ -206,9 +206,21 @@ public:
 	virtual ~SyncMessageHandler() {}
 
 	//! Read a message directly from the stream. SyncMessage::deserialize of the correct class should be used to deserialize the message.
+	//! @param stream The stream to be used to read data. The current position is after the header.
 	//! @param peer The remote peer this message originated from. Can be used to send replies through SyncRemotePeer::writeMessage
 	//! @return return false if the message is found to be invalid. The connection to the client/server will be dropped.
 	virtual bool handleMessage(QDataStream& stream, SyncRemotePeer& peer) = 0;
+};
+
+//! Skips the message, and does nothing else.
+class DummyMessageHandler : public SyncMessageHandler
+{
+public:
+	virtual bool handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+	{
+		stream.skipRawData(peer.msgHeader.dataSize);
+		return !stream.status();
+	}
 };
 
 Q_DECLARE_INTERFACE(SyncMessageHandler,"Stellarium/RemoteSync/SyncMessageHandler/1.0")

@@ -30,8 +30,25 @@ class SyncRemotePeer;
 class SyncClient : public QObject
 {
 	Q_OBJECT
+	Q_FLAGS(SyncOptions)
 public:
-	SyncClient(QObject* parent = 0);
+	//! Bitflag-enum which determines the message types the client instance reacts to,
+	//! and other boolean options
+	enum SyncOption
+	{
+		NONE		= 0x0000,
+		SyncTime	= 0x0001,
+		SyncLocation	= 0x0002,
+		SyncSelection	= 0x0004,
+		SyncStelProperty= 0x0008,
+		SyncView	= 0x0010,
+		SyncFov		= 0x0020,
+		SkipGUIProps	= 0x0040,
+		ALL		= 0xFFFF
+	};
+	Q_DECLARE_FLAGS(SyncOptions, SyncOption)
+
+	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = 0);
 	virtual ~SyncClient();
 
 	//! True if the connection has been established completely
@@ -58,6 +75,8 @@ private slots:
 private:
 	void checkTimeout();
 
+	SyncOptions options;
+	QStringList stelPropFilter;
 	QString errorStr;
 	bool isConnecting;
 	SyncRemotePeer* server;
@@ -67,5 +86,6 @@ private:
 	friend class ClientErrorHandler;
 };
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(SyncClient::SyncOptions)
 
 #endif
