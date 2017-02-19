@@ -22,6 +22,8 @@
 
 #include "SyncProtocol.hpp"
 
+#include <QRegularExpression>
+
 class SyncClient;
 class StelCore;
 
@@ -89,10 +91,11 @@ class StelPropertyMgr;
 class ClientStelPropertyUpdateHandler : public ClientHandler
 {
 public:
-	ClientStelPropertyUpdateHandler();
+	ClientStelPropertyUpdateHandler(bool skipGuiProps, const QStringList& excludeProps);
 	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 private:
 	StelPropertyMgr* propMgr;
+	QRegularExpression filter;
 };
 
 class StelMovementMgr;

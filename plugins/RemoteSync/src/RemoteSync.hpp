@@ -21,14 +21,14 @@
 #define REMOTESYNC_HPP_
 
 #include "StelModule.hpp"
+#include "SyncClient.hpp"
+#include "SyncServer.hpp"
 
 #include <QFont>
 #include <QKeyEvent>
 #include <QLoggingCategory>
 
 class RemoteSyncDialog;
-class SyncServer;
-class SyncClient;
 
 Q_DECLARE_LOGGING_CATEGORY(remoteSync)
 
@@ -65,12 +65,17 @@ public:
 	QString getClientServerHost() const { return clientServerHost; }
 	int getClientServerPort() const { return clientServerPort; }
 	int getServerPort() const { return serverPort; }
+	SyncClient::SyncOptions getClientSyncOptions() const { return syncOptions; }
+	QStringList getStelPropFilter() const { return stelPropFilter; }
+
 	SyncState getState() const { return state; }
 
 public slots:
 	void setClientServerHost(const QString& clientServerHost);
 	void setClientServerPort(const int port);
 	void setServerPort(const int port);
+	void setClientSyncOptions(SyncClient::SyncOptions options);
+	void setStelPropFilter(const QStringList& stelPropFilter);
 
 	//! Starts the plugin in server mode, on the port specified by the serverPort property.
 	//! If currently in a state other than IDLE, this call has no effect.
@@ -106,10 +111,13 @@ public slots:
 	void restoreDefaultSettings();
 
 signals:
-	void errorOccurred(const QString errorString);
-	void clientServerHostChanged(const QString clientServerHost);
+	void errorOccurred(const QString& errorString);
+	void clientServerHostChanged(const QString& clientServerHost);
 	void clientServerPortChanged(const int port);
 	void serverPortChanged(const int port);
+	void clientSyncOptionsChanged(const SyncClient::SyncOptions options);
+	void stelPropFilterChanged(const QStringList& stelPropFilter);
+
 	void stateChanged(RemoteSync::SyncState state);
 
 private slots:
@@ -126,8 +134,10 @@ private:
 	int clientServerPort;
 	//the port used in server mode
 	int serverPort;
-	SyncState state;
+	SyncClient::SyncOptions syncOptions;
+	QStringList stelPropFilter;
 
+	SyncState state;
 	SyncServer* server;
 	SyncClient* client;
 

@@ -48,6 +48,11 @@ private slots:
 	void updateState();
 	void updateIPlabel(bool running);
 
+	void updateCheckboxesFromSyncOptions();
+	void checkboxToggled(int id, bool state);
+
+	void setTextboxFromList(const QStringList& list);
+	void setExcludesFromTextbox();
 private:
 	Ui_remoteSyncDialog* ui;
 	RemoteSync* rs;

@@ -159,6 +159,24 @@ void RemoteSync::setServerPort(const int port)
 	}
 }
 
+void RemoteSync::setClientSyncOptions(SyncClient::SyncOptions options)
+{
+	if(options!=syncOptions)
+	{
+		syncOptions = options;
+		emit clientSyncOptionsChanged(options);
+	}
+}
+
+void RemoteSync::setStelPropFilter(const QStringList &stelPropFilter)
+{
+	if(stelPropFilter!=this->stelPropFilter)
+	{
+		this->stelPropFilter = stelPropFilter;
+		emit stelPropFilterChanged(stelPropFilter);
+	}
+}
+
 void RemoteSync::startServer()
 {
 	if(state == IDLE)
@@ -193,7 +211,7 @@ void RemoteSync::connectToServer()
 {
 	if(state == IDLE)
 	{
-		client = new SyncClient(this);
+		client = new SyncClient(syncOptions, stelPropFilter, this);
 		connect(client, SIGNAL(connectionError()), this, SLOT(clientConnectionFailed()));
 		connect(client, SIGNAL(connected()), this, SLOT(clientConnected()));
 		connect(client, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
@@ -213,6 +231,7 @@ void RemoteSync::clientDisconnected()
 {
 	setState(IDLE);
 	client->deleteLater();
+	client = Q_NULLPTR;
 }
 
 void RemoteSync::clientConnectionFailed()
@@ -220,6 +239,7 @@ void RemoteSync::clientConnectionFailed()
 	setState(IDLE);
 	setError(client->errorString());
 	client->deleteLater();
+	client = Q_NULLPTR;
 }
 
 void RemoteSync::disconnectFromServer()
@@ -249,6 +269,8 @@ void RemoteSync::loadSettings()
 	setClientServerHost(conf->value("clientServerHost","127.0.0.1").toString());
 	setClientServerPort(conf->value("clientServerPort",20180).toInt());
 	setServerPort(conf->value("serverPort",20180).toInt());
+	setClientSyncOptions(SyncClient::SyncOptions(conf->value("clientSyncOptions", SyncClient::ALL).toInt()));
+	setStelPropFilter(conf->value("stelPropFilter").toStringList());
 	conf->endGroup();
 }
 
@@ -258,6 +280,8 @@ void RemoteSync::saveSettings()
 	conf->setValue("clientServerHost",clientServerHost);
 	conf->setValue("clientServerPort",clientServerPort);
 	conf->setValue("serverPort",serverPort);
+	conf->setValue("clientSyncOptions",static_cast<int>(syncOptions));
+	conf->setValue("stelPropFilter", stelPropFilter);
 	conf->endGroup();
 }
 
