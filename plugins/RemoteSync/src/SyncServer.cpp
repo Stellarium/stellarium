@@ -55,7 +55,7 @@ bool SyncServer::start(int port)
 		//create message handlers
 		handlerList.resize(MSGTYPE_SIZE);
 		handlerList[ERROR] =  new ServerErrorHandler();
-		handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, true);
+		handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, false);
 		handlerList[ALIVE] = new ServerAliveHandler();
 
 		addSender(new TimeEventSender());
@@ -186,7 +186,7 @@ void SyncServer::checkTimeouts()
 		qint64 writeDiff = currentTime - it.value().lastSendTime;
 		qint64 readDiff = currentTime - it.value().lastReceiveTime;
 
-		if(writeDiff > 5000)
+		if(writeDiff > 5000 && it->isAuthenticated) //only send ALIVE to authenticated clients
 		{
 			//no data sent to this client for some time, send a ALIVE
 			Alive msg;
