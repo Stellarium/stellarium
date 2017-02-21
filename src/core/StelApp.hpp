@@ -95,6 +95,11 @@ public:
 	//! Registers all loaded StelModules with the ScriptMgr, and queues starting of the startup script.
 	void initScriptMgr();
 
+	//! Returns all arguments passed on the command line, together with the contents of the STEL_OPTS environment variable.
+	//! You can use the CLIProcessor class to help parse it.
+	//! @return the arguments passed to Stellarium on the command line concatenated with the STEL_OPTS environment variable
+	static QStringList getCommandlineArguments();
+
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {Q_ASSERT(singleton); return *singleton;}

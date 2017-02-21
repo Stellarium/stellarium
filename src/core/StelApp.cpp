@@ -390,6 +390,11 @@ void StelApp::initScriptMgr()
 void StelApp::initScriptMgr() {}
 #endif
 
+QStringList StelApp::getCommandlineArguments()
+{
+	return qApp->property("stelCommandLine").toStringList();
+}
+
 void StelApp::init(QSettings* conf)
 {
 	gl = QOpenGLContext::currentContext()->functions();

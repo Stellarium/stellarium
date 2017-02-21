@@ -65,6 +65,9 @@ RemoteSync::RemoteSync() : state(IDLE), server(NULL), client(NULL)
 
 	configDialog = new RemoteSyncDialog();
 	conf = StelApp::getInstance().getSettings();
+
+	reconnectTimer.setSingleShot(true);
+	connect(&reconnectTimer, SIGNAL(timeout()), this, SLOT(connectToServer()));
 }
 
 RemoteSync::~RemoteSync()
@@ -89,7 +92,7 @@ void RemoteSync::init()
 	qCDebug(remoteSync)<<"Plugin initialized";
 
 	//parse command line args
-	QStringList args = qApp->property("stelCommandLine").toStringList();
+	QStringList args = StelApp::getCommandlineArguments();;
 	QString syncMode = CLIProcessor::argsGetOptionWithArg(args,"","--syncMode","").toString();
 	QString syncHost = CLIProcessor::argsGetOptionWithArg(args,"","--syncHost","").toString();
 	int syncPort = CLIProcessor::argsGetOptionWithArg(args,"","--syncPort",0).toInt();
@@ -177,6 +180,24 @@ void RemoteSync::setStelPropFilter(const QStringList &stelPropFilter)
 	}
 }
 
+void RemoteSync::setConnectionLostBehavior(const ClientBehavior bh)
+{
+	if(connectionLostBehavior!=bh)
+	{
+		connectionLostBehavior = bh;
+		emit connectionLostBehaviorChanged(bh);
+	}
+}
+
+void RemoteSync::setQuitBehavior(const ClientBehavior bh)
+{
+	if(quitBehavior!=bh)
+	{
+		quitBehavior = bh;
+		emit quitBehaviorChanged(bh);
+	}
+}
+
 void RemoteSync::startServer()
 {
 	if(state == IDLE)
@@ -188,6 +209,7 @@ void RemoteSync::startServer()
 		{
 			setError(server->errorString());
 			delete server;
+			server = Q_NULLPTR;
 		}
 	}
 	else
@@ -198,9 +220,9 @@ void RemoteSync::stopServer()
 {
 	if(state == SERVER)
 	{
+		connect(server, SIGNAL(serverStopped()), server, SLOT(deleteLater()));
 		server->stop();
-		delete server;
-		server = NULL;
+		server = Q_NULLPTR;
 		setState(IDLE);
 	}
 	else
@@ -209,14 +231,13 @@ void RemoteSync::stopServer()
 
 void RemoteSync::connectToServer()
 {
-	if(state == IDLE)
+	if(state == IDLE || state == CLIENT_WAIT_RECONNECT)
 	{
 		client = new SyncClient(syncOptions, stelPropFilter, this);
-		connect(client, SIGNAL(connectionError()), this, SLOT(clientConnectionFailed()));
 		connect(client, SIGNAL(connected()), this, SLOT(clientConnected()));
-		connect(client, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
-		client->connectToServer(clientServerHost,clientServerPort);
+		connect(client, SIGNAL(disconnected(bool)), this, SLOT(clientDisconnected(bool)));
 		setState(CLIENT_CONNECTING);
+		client->connectToServer(clientServerHost,clientServerPort);
 	}
 	else
 		qCWarning(remoteSync)<<"connectToServer: invalid state";
@@ -224,32 +245,57 @@ void RemoteSync::connectToServer()
 
 void RemoteSync::clientConnected()
 {
+	Q_ASSERT(state == CLIENT_CONNECTING);
 	setState(CLIENT);
 }
 
-void RemoteSync::clientDisconnected()
+void RemoteSync::clientDisconnected(bool clean)
 {
-	setState(IDLE);
+	QString errStr = client->errorString();
 	client->deleteLater();
 	client = Q_NULLPTR;
+
+	if(!clean)
+	{
+		setError(errStr);
+	}
+
+	setState(applyClientBehavior(clean ? quitBehavior : connectionLostBehavior));
 }
 
-void RemoteSync::clientConnectionFailed()
+RemoteSync::SyncState RemoteSync::applyClientBehavior(ClientBehavior bh)
 {
-	setState(IDLE);
-	setError(client->errorString());
-	client->deleteLater();
-	client = Q_NULLPTR;
+	if(state!=CLIENT_CLOSING) //when client closes we do nothing
+	{
+		switch (bh) {
+			case RECONNECT:
+				reconnectTimer.start();
+				return CLIENT_WAIT_RECONNECT;
+			case QUIT:
+				StelApp::getInstance().quit();
+				break;
+			default:
+				break;
+		}
+	}
+
+	return IDLE;
 }
 
 void RemoteSync::disconnectFromServer()
 {
 	if(state == CLIENT)
 	{
+		setState(CLIENT_CLOSING);
 		client->disconnectFromServer();
 	}
+	else if(state == CLIENT_WAIT_RECONNECT)
+	{
+		reconnectTimer.stop();
+		setState(IDLE);
+	}
 	else
-		qCWarning(remoteSync)<<"disconnectFromServer: invalid state";
+		qCWarning(remoteSync)<<"disconnectFromServer: invalid state"<<state;
 }
 
 void RemoteSync::restoreDefaultSettings()
@@ -271,6 +317,9 @@ void RemoteSync::loadSettings()
 	setServerPort(conf->value("serverPort",20180).toInt());
 	setClientSyncOptions(SyncClient::SyncOptions(conf->value("clientSyncOptions", SyncClient::ALL).toInt()));
 	setStelPropFilter(conf->value("stelPropFilter").toStringList());
+	setConnectionLostBehavior(static_cast<ClientBehavior>(conf->value("connectionLostBehavior",1).toInt()));
+	setQuitBehavior(static_cast<ClientBehavior>(conf->value("quitBehavior").toInt()));
+	reconnectTimer.setInterval(conf->value("clientReconnectInterval", 5000).toInt());
 	conf->endGroup();
 }
 
@@ -282,6 +331,9 @@ void RemoteSync::saveSettings()
 	conf->setValue("serverPort",serverPort);
 	conf->setValue("clientSyncOptions",static_cast<int>(syncOptions));
 	conf->setValue("stelPropFilter", stelPropFilter);
+	conf->setValue("connectionLostBehavior", connectionLostBehavior);
+	conf->setValue("quitBehavior", quitBehavior);
+	conf->setValue("clientReconnectInterval", reconnectTimer.interval());
 	conf->endGroup();
 }
 
@@ -315,6 +367,9 @@ QDebug operator<<(QDebug deb, RemoteSync::SyncState state)
 			break;
 		case RemoteSync::CLIENT_CONNECTING:
 			deb<<"CLIENT_CONNECTING";
+			break;
+		case RemoteSync::CLIENT_WAIT_RECONNECT:
+			deb<<"CLIENT_WAIT_RECONNECT";
 			break;
 		default:
 			deb<<"RemoteSync::SyncState(" <<int(state)<<')';

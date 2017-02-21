@@ -77,6 +77,14 @@ void RemoteSyncDialog::createDialogContent()
 	ui->serverPortSpinBox->setValue(rs->getServerPort());
 	connect(ui->serverPortSpinBox, SIGNAL(valueChanged(int)), rs, SLOT(setServerPort(int)));
 
+	ui->comboBoxClientServerQuits->setModel(ui->comboBoxClientConnectionLost->model());
+	ui->comboBoxClientConnectionLost->setCurrentIndex(rs->getConnectionLostBehavior());
+	ui->comboBoxClientServerQuits->setCurrentIndex(rs->getQuitBehavior());
+	connect(ui->comboBoxClientConnectionLost, SIGNAL(activated(int)), this, SLOT(setConnectionLostBehavior(int)));
+	connect(rs, &RemoteSync::connectionLostBehaviorChanged, ui->comboBoxClientConnectionLost, &QComboBox::setCurrentIndex);
+	connect(ui->comboBoxClientServerQuits, SIGNAL(activated(int)), this, SLOT(setQuitBehavior(int)));
+	connect(rs, &RemoteSync::quitBehaviorChanged, ui->comboBoxClientServerQuits, &QComboBox::setCurrentIndex);
+
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionTime, SyncClient::SyncTime);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionLocation, SyncClient::SyncLocation);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionSelection, SyncClient::SyncSelection);
@@ -138,26 +146,37 @@ void RemoteSyncDialog::updateState()
 		ui->statusLabel->setText(QString(q_("Running as server on port %1")).arg(rs->getServerPort()));
 		updateIPlabel(true);
 	}
-	else if(state == RemoteSync::CLIENT_CONNECTING)
+	else
 	{
-		ui->serverGroupBox->setEnabled(false);
-		ui->clientGroupBox->setEnabled(false);
+		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(disconnectFromServer()));
 
-		ui->clientButton->setText(q_("Connecting..."));
-		ui->statusLabel->setText(QString(q_("Connecting to %1:%2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
-		updateIPlabel(false);
-	}
-	else if (state == RemoteSync::CLIENT)
-	{
 		ui->serverGroupBox->setEnabled(false);
 		ui->clientGroupBox->setEnabled(true);
 		ui->clientControls->setEnabled(false);
-
-		ui->clientButton->setText(q_("Disconnect from server"));
-		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(disconnectFromServer()));
-
-		ui->statusLabel->setText(QString(q_("Connected to %1:%2")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
 		updateIPlabel(false);
+
+		if(state == RemoteSync::CLIENT_CONNECTING)
+		{
+			ui->clientButton->setText(q_("Cancel connecting"));
+			ui->statusLabel->setText(QString(q_("Connecting to %1:%2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+		}
+		else if (state == RemoteSync::CLIENT_WAIT_RECONNECT)
+		{
+			ui->clientButton->setText(q_("Cancel connecting"));
+			ui->statusLabel->setText(QString(q_("Retrying connection to %1:%2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+		}
+		else if (state == RemoteSync::CLIENT_CLOSING)
+		{
+			ui->clientGroupBox->setEnabled(false);
+
+			ui->clientButton->setText(q_("Disconnecting..."));
+			ui->statusLabel->setText(q_("Disconnecting..."));
+		}
+		else if (state == RemoteSync::CLIENT)
+		{
+			ui->clientButton->setText(q_("Disconnect from server"));
+			ui->statusLabel->setText(QString(q_("Connected to %1:%2")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+		}
 	}
 }
 
@@ -263,4 +282,14 @@ void RemoteSyncDialog::setExcludesFromTextbox()
 
 	rs->setStelPropFilter(lines);
 	ui->textStelPropertyExclude->blockSignals(val);
+}
+
+void RemoteSyncDialog::setConnectionLostBehavior(int idx)
+{
+	rs->setConnectionLostBehavior(static_cast<RemoteSync::ClientBehavior>(idx));
+}
+
+void RemoteSyncDialog::setQuitBehavior(int idx)
+{
+	rs->setQuitBehavior(static_cast<RemoteSync::ClientBehavior>(idx));
 }

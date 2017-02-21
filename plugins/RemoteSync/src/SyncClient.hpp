@@ -20,8 +20,11 @@
 #ifndef SYNCCLIENT_HPP_
 #define SYNCCLIENT_HPP_
 
+#include <QLoggingCategory>
 #include <QObject>
 #include <QTcpSocket>
+
+Q_DECLARE_LOGGING_CATEGORY(syncClient)
 
 class SyncMessageHandler;
 class SyncRemotePeer;
@@ -51,8 +54,6 @@ public:
 	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = 0);
 	virtual ~SyncClient();
 
-	//! True if the connection has been established completely
-	bool isConnected() const;
 	QString errorString() const { return errorStr; }
 
 public slots:
@@ -63,14 +64,11 @@ protected:
 	void timerEvent(QTimerEvent* evt) Q_DECL_OVERRIDE;
 signals:
 	void connected();
-	void disconnected();
-	void connectionError();
+	void disconnected(bool cleanExit);
 private slots:
-	void dataReceived();
+	void serverDisconnected(bool clean);
 	void socketConnected();
-	void socketDisconnected();
-	void socketError(QAbstractSocket::SocketError err);
-	void emitError(const QString& msg);
+	void emitServerError(const QString& errorStr);
 
 private:
 	void checkTimeout();
