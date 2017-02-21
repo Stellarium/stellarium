@@ -53,12 +53,14 @@ private slots:
 
 	void setTextboxFromList(const QStringList& list);
 	void setExcludesFromTextbox();
+
+	void setConnectionLostBehavior(int idx);
+	void setQuitBehavior(int idx);
 private:
 	Ui_remoteSyncDialog* ui;
 	RemoteSync* rs;
 
 	void setAboutHtml();
-
 };
 
 
