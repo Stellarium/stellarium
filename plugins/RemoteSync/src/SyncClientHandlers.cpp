@@ -51,13 +51,13 @@ ClientErrorHandler::ClientErrorHandler(SyncClient *client)
 
 }
 
-bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	ErrorMessage msg;
-	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream,dataSize);
 	peer.peerLog("Received error message from server: " + msg.message);
 
-	client->emitError(msg.message);
+	client->emitServerError(msg.message);
 
 	//we don't drop the connection here, we let the remote end do that
 	return ok;
@@ -70,14 +70,14 @@ ClientAuthHandler::ClientAuthHandler(SyncClient *client)
 }
 
 
-bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	//get message type
 	SyncMessageType type = SyncMessageType(peer.msgHeader.msgType);
 
 	if(type == SERVER_CHALLENGE)
 	{
-		if(peer.isAuthenticated)
+		if(peer.isAuthenticated())
 		{
 			//we are already authenticated, another challenge is an error
 			qWarning()<<"[SyncClient] received server challenge when not expecting one";
@@ -85,7 +85,7 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 		}
 
 		ServerChallenge msg;
-		bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+		bool ok = msg.deserialize(stream,dataSize);
 
 		if(!ok)
 		{
@@ -134,7 +134,7 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 		if(peer.authResponseSent)
 		{
 			//we authenticated correctly, yay!
-			peer.isAuthenticated = true;
+			peer.authenticated = true;
 			qDebug()<<"[SyncClient] Connection authenticated";
 			emit authenticated();
 			return true;
@@ -154,16 +154,16 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	}
 }
 
-bool ClientAliveHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientAliveHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Alive p;
-	return p.deserialize(stream,peer.msgHeader.dataSize);
+	return p.deserialize(stream,dataSize);
 }
 
-bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Time msg;
-	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
 		return false;
@@ -177,10 +177,10 @@ bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	return true;
 }
 
-bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Location msg;
-	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream,dataSize);
 
 	if(!ok)
 		return false;
@@ -219,10 +219,10 @@ ClientSelectionHandler::ClientSelectionHandler()
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 }
 
-bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Selection msg;
-	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
 		return false;
@@ -298,10 +298,10 @@ ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(bool skipGuiPro
 	filter.optimize();
 }
 
-bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	StelPropertyUpdate msg;
-	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
 		return false;
@@ -324,10 +324,10 @@ ClientViewHandler::ClientViewHandler()
 	mvMgr = core->getMovementMgr();
 }
 
-bool ClientViewHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientViewHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	View msg;
-	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 	if(!ok) return false;
 
 	mvMgr->setViewDirectionJ2000(core->altAzToJ2000(msg.viewAltAz, StelCore::RefractionOff));
@@ -339,10 +339,10 @@ ClientFovHandler::ClientFovHandler()
 	mvMgr = core->getMovementMgr();
 }
 
-bool ClientFovHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientFovHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Fov msg;
-	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 	if(!ok) return false;
 
 	mvMgr->zoomTo(msg.fov, 0.0f);
