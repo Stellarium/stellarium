@@ -308,6 +308,12 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 	else if(operation == "focus")
 	{
 		QString target = QString::fromUtf8(parameters.value("target"));
+		SelectionMode selMode = Center;
+
+		if(parameters.value("mode") == "zoom")
+			selMode = Zoom;
+		else if(parameters.value("mode") == "mark")
+			selMode = Mark;
 
 		//check target string first
 		if(target.isEmpty())
@@ -344,7 +350,8 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 		bool result;
 		QMetaObject::invokeMethod(this,"focusObject",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_RETURN_ARG(bool,result),
-					  Q_ARG(QString,target));
+					  Q_ARG(QString,target),
+					  Q_ARG(SelectionMode,selMode));
 
 		response.setData(result ? "true" : "false");
 	}
@@ -477,7 +484,7 @@ QString MainService::getInfoString()
 	return selectedObject->getInfoString(core,StelObject::AllInfo | StelObject::NoFont);
 }
 
-bool MainService::focusObject(const QString &name)
+bool MainService::focusObject(const QString &name, SelectionMode mode)
 {
 	//StelDialog::gotoObject
 
@@ -485,6 +492,8 @@ bool MainService::focusObject(const QString &name)
 	if(name.isEmpty())
 	{
 		objMgr->unSelect();
+		if(mode == Zoom)
+			mvmgr->autoZoomOut();
 		return true;
 	}
 
@@ -497,8 +506,15 @@ bool MainService::focusObject(const QString &name)
 			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=core->getCurrentLocation().planetName)
 			{
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setFlagTracking(true);
+				if(mode != Mark)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+					if(mode == Zoom)
+					{
+						mvmgr->autoZoomIn();
+					}
+				}
 				result = true;
 			}
 			else

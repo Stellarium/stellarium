@@ -1,4 +1,4 @@
-define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui"], function($, viewOptionApi, actionApi, propApi) {
+define(["jquery", "api/remotecontrol", "api/viewoptions", "api/actions", "api/properties", "jquery-ui"], function($, rc, viewOptionApi, actionApi, propApi) {
 	"use strict";
 
 	var $vo_projectionlist;
@@ -92,16 +92,17 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 
 		viewOptionApi.registerCatalogFlags($("#vo_dsocatalog"));
 		viewOptionApi.registerTypeFlags($("#vo_dsotype > div")); //needs a stricter selector to prevent capturing the header checkbox
+
+		$(actionApi).on("stelActionChanged:actionShow_LightPollutionFromDatabase", function(evt, data) {
+			$("#atmosphere_bortlescaleindex").spinner("option", "disabled", data.isChecked);
+		});
+
+		$(propApi).on("stelPropertyChanged:LandscapeMgr.flagLandscapeUseMinimalBrightness", function(evt, data) {
+			$("#landscape_defaultMinimalBrightness").spinner("option", "disabled", !data.value);
+			$("#landscape_flagLandscapeSetsMinimalBrightness").prop("disabled", !data.value);
+		});
+
 	}
-
-	$(actionApi).on("stelActionChanged:actionShow_LightPollutionFromDatabase", function(evt, data) {
-		$("#atmosphere_bortlescaleindex").spinner("option", "disabled", data.isChecked);
-	});
-
-	$(propApi).on("stelPropertyChanged:LandscapeMgr.flagLandscapeUseMinimalBrightness", function(evt, data) {
-		$("#landscape_defaultMinimalBrightness").spinner("option", "disabled", !data.value);
-		$("#landscape_flagLandscapeSetsMinimalBrightness").prop("disabled", !data.value);
-	});
 
 	$(propApi).on("stelPropertyChanged:LandscapeMgr.currentLandscapeID", function(evt,data){
 		//reload iframe
@@ -128,5 +129,5 @@ define(["jquery", "api/viewoptions", "api/actions", "api/properties", "jquery-ui
 		$("#vo_dsotype > div input[type='checkbox']").prop("disabled", !data.isChecked);
 	});
 
-	$(initControls);
+	$(rc).on("uiReady",initControls);
 });

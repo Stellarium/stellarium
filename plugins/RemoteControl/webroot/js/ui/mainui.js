@@ -1,14 +1,15 @@
 /* jshint expr: true */
 
-define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "api/properties", "./time", "./actions", "./viewoptions", "./scripts", "./viewcontrol", "./location", "./search", "jquery-ui"], function($, settings, globalize, rc, actionApi, propApi, timeui) {
+define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
+	"api/properties", "./time", "./actions", "./viewoptions", "./scripts",
+	"./viewcontrol", "./location", "./search", "jquery-ui"
+], function($, settings, globalize, rc, actionApi, propApi, timeui) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);
 	//controls
 	var $noresponse;
 	var $noresponsetime;
-
-	var sel_infostring;
 
 	var activeTab = 0;
 	//keep preloaded images to prevent browser from releasing them
@@ -39,7 +40,7 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 		}
 	}
 
-	// create 
+	// create
 	function createAutomaticGUIElements() {
 		//automatically setup spinners
 		$("input.spinner").each(function() {
@@ -82,9 +83,13 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			var self = $(this);
 			var prop = self.attr("name");
 			if (!prop) {
-				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.error(
+					'Error: no StelProperty name defined on an "stelproperty" element, element follows...'
+				);
 				console.dir(this);
-				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+				alert(
+					'Error: no StelProperty name defined on an "stelproperty" element, see log for details'
+				);
 			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
@@ -111,9 +116,13 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			var self = $(this);
 			var prop = self.attr("name");
 			if (!prop) {
-				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.error(
+					'Error: no StelProperty name defined on an "stelproperty" element, element follows...'
+				);
 				console.dir(this);
-				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+				alert(
+					'Error: no StelProperty name defined on an "stelproperty" element, see log for details'
+				);
 			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
@@ -129,9 +138,13 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			var self = $(this);
 			var prop = self.data("prop");
 			if (!prop) {
-				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.error(
+					'Error: no StelProperty name defined on an "stelproperty" element, element follows...'
+				);
 				console.dir(this);
-				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+				alert(
+					'Error: no StelProperty name defined on an "stelproperty" element, see log for details'
+				);
 			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
@@ -151,20 +164,24 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			var numberformat = self.data("numberformat");
 
 			if (!prop) {
-				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.error(
+					'Error: no StelProperty name defined on an "stelproperty" element, element follows...'
+				);
 				console.dir(this);
-				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+				alert(
+					'Error: no StelProperty name defined on an "stelproperty" element, see log for details'
+				);
 			}
 
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				var val = prop.value;
-				if(numberformat)
-					val = globalize.format(val,numberformat);
+				if (numberformat)
+					val = globalize.format(val, numberformat);
 				elem.textContent = val;
 			});
 			var val = propApi.getStelProp(prop);
-			if(numberformat)
-					val = globalize.format(val,numberformat);
+			if (numberformat)
+				val = globalize.format(val, numberformat);
 			elem.textContent = val;
 		});
 
@@ -173,9 +190,13 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			var prop = self.attr("name");
 
 			if (!prop) {
-				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.error(
+					'Error: no StelProperty name defined on an "stelproperty" element, element follows...'
+				);
 				console.dir(this);
-				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+				alert(
+					'Error: no StelProperty name defined on an "stelproperty" element, see log for details'
+				);
 			}
 			$(propApi).on("stelPropertyChanged:" + prop, function(evt, prop) {
 				self.val(prop.value);
@@ -201,16 +222,24 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			var val = this.value;
 
 			if (!prop) {
-				console.error('Error: no StelProperty name defined on an "stelproperty" element, element follows...');
+				console.error(
+					'Error: no StelProperty name defined on an "stelproperty" element, element follows...'
+				);
 				console.dir(this);
-				alert('Error: no StelProperty name defined on an "stelproperty" element, see log for details');
+				alert(
+					'Error: no StelProperty name defined on an "stelproperty" element, see log for details'
+				);
 				return;
 			}
 
 			if (!val) {
-				console.error('Error: no value defined for an "stelproperty" button, element follows...');
+				console.error(
+					'Error: no value defined for an "stelproperty" button, element follows...'
+				);
 				console.dir(this);
-				alert('Error: no value defined for an "stelproperty" button,, see log for details');
+				alert(
+					'Error: no value defined for an "stelproperty" button,, see log for details'
+				);
 				return;
 			}
 
@@ -286,8 +315,6 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 			}
 		});
 
-		sel_infostring = document.getElementById("sel_infostring");
-
 		var $loading = $("#loadindicator").hide(),
 			timer;
 		$(document).ajaxStart(function() {
@@ -306,18 +333,11 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions", "
 		rc.startUpdateLoop();
 
 		$("#loadoverlay").fadeOut();
+		$(rc).trigger("uiReady"); //signal other components that the main UI init is done (some may need the jQueryUI stuff set up)
 	});
 
 	//new server data
 	$(rc).on('serverDataReceived', function(event, data) {
-		if (data.selectioninfo) {
-			sel_infostring.innerHTML = data.selectioninfo;
-			sel_infostring.className = "";
-		} else {
-			sel_infostring.innerHTML = rc.tr("No current selection");
-			sel_infostring.className = "bold";
-		}
-
 		//this will get reset after the event is processed
 		//this means the connection WAS lost before, but now is not anymore
 		if (rc.isConnectionLost()) {
