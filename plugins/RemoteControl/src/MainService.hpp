@@ -48,7 +48,16 @@ class StelSkyCultureMgr;
 class MainService : public AbstractAPIService
 {
 	Q_OBJECT
+
+	Q_ENUMS(SelectionMode)
 public:
+	enum SelectionMode
+	{
+		Center,
+		Zoom,
+		Mark
+	};
+
 	MainService(const QByteArray& serviceName, QObject* parent = 0);
 
 	virtual ~MainService() {}
@@ -71,7 +80,7 @@ private slots:
 	QString getInfoString();
 
 	//! Like StelDialog::gotoObject
-	bool focusObject(const QString& name);
+	bool focusObject(const QString& name, SelectionMode mode);
 	void focusPosition(const Vec3d& pos);
 
 	void updateMovement(float x, float y, bool xUpdated, bool yUpdated);
