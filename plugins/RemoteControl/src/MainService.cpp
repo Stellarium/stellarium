@@ -39,8 +39,8 @@
 #include <QJsonArray>
 
 
-MainService::MainService(const QByteArray &serviceName, QObject *parent)
-	: AbstractAPIService(serviceName,parent),
+MainService::MainService(QObject *parent)
+	: AbstractAPIService(parent),
 	  moveX(0),moveY(0),lastMoveUpdateTime(0),
 	  //100 should be more than enough
 	  //this only has to emcompass events that occur between 2 status updates
@@ -126,7 +126,7 @@ void MainService::update(double deltaTime)
 	}
 }
 
-void MainService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void MainService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if(operation=="status")
 	{
@@ -250,7 +250,7 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 	}
 }
 
-void MainService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void MainService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 

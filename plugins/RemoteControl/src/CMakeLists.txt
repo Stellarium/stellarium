@@ -41,6 +41,7 @@ SET(RemoteControl_SRCS
   LocationSearchService.cpp
   RemoteControl.hpp
   RemoteControl.cpp
+  RemoteControlServiceInterface.hpp
   RequestHandler.hpp
   RequestHandler.cpp
   ScriptService.hpp

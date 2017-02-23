@@ -52,13 +52,16 @@ public:
 	virtual void service(HttpRequest& request, HttpResponse& response);
 
 	//! Registers a service with the APIController.
-	//! The AbstractAPIService::serviceName() determines the request path of the service.
-	void registerService(AbstractAPIService* service);
+	//! The RemoteControlServiceInterface::getPath() determines the request path of the service.
+	void registerService(RemoteControlServiceInterface* service);
+private slots:
+	void performGet(RemoteControlServiceInterface* service, const QByteArray& operation, const APIParameters& parameters, APIServiceResponse* response);
+	void performPost(RemoteControlServiceInterface* service, const QByteArray& operation, const APIParameters& parameters, const QByteArray& data, APIServiceResponse* response);
 private:
+	static void applyAPIResponse(const APIServiceResponse& apiresponse, HttpResponse& httpresponse);
 	int m_prefixLength;
-	typedef QMap<QByteArray,AbstractAPIService*> ServiceMap;
+	typedef QMap<QByteArray,RemoteControlServiceInterface*> ServiceMap;
 	ServiceMap m_serviceMap;
-	QMutex mutex;
 };
 
 #endif
