@@ -35,7 +35,7 @@
 #include <QJsonObject>
 #include <QStringListModel>
 
-LocationService::LocationService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+LocationService::LocationService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
@@ -43,7 +43,7 @@ LocationService::LocationService(const QByteArray &serviceName, QObject *parent)
 	ssys = GETSTELMODULE(SolarSystem);
 }
 
-void LocationService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void LocationService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if(operation=="list")
 	{
@@ -151,7 +151,7 @@ void LocationService::getImpl(const QByteArray& operation, const APIParameters &
 	}
 }
 
-void LocationService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void LocationService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 
