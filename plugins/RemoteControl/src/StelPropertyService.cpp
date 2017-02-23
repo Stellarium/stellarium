@@ -28,13 +28,13 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-StelPropertyService::StelPropertyService(const QByteArray &serviceName, QObject *parent)
-	: AbstractAPIService(serviceName,parent)
+StelPropertyService::StelPropertyService(QObject *parent)
+	: AbstractAPIService(parent)
 {
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 }
 
-void StelPropertyService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void StelPropertyService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	Q_UNUSED(parameters);
 
@@ -70,7 +70,7 @@ void StelPropertyService::getImpl(const QByteArray& operation, const APIParamete
 	}
 }
 
-void StelPropertyService::postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void StelPropertyService::post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 

@@ -28,13 +28,13 @@
 #include <QJsonArray>
 #include <QVariant>
 
-ScriptService::ScriptService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+ScriptService::ScriptService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
 }
 
-void ScriptService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void ScriptService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if(operation=="list")
 	{
@@ -95,7 +95,7 @@ void ScriptService::getImpl(const QByteArray& operation, const APIParameters &pa
 	}
 }
 
-void ScriptService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void ScriptService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 
