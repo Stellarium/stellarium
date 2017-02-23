@@ -24,6 +24,8 @@ SET(Scenery3d_SRCS
      S3DScene.cpp
      Scenery3d.hpp
      Scenery3d.cpp
+     Scenery3dRemoteControlService.hpp
+     Scenery3dRemoteControlService.cpp
      S3DRenderer.hpp
      S3DRenderer.cpp
      gui/Scenery3dDialog.hpp

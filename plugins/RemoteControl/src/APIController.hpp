@@ -23,10 +23,8 @@
 #include "httpserver/httprequesthandler.h"
 #include "AbstractAPIService.hpp"
 
-#include <QMutex>
-
 //! @ingroup remoteControl
-//! This class handles the API-specific requests and dispatches them to the correct AbstractAPISerice implementation.
+//! This class handles the API-specific requests and dispatches them to the correct RemoteControlServiceInterface implementation.
 //! Services are registered using registerService().
 //! To see the default services used, see the RequestHandler::RequestHandler constructor.
 class APIController : public HttpRequestHandler
@@ -43,11 +41,11 @@ public:
 	//! Passed on to each AbstractAPIService::update method for optional processing.
 	void update(double deltaTime);
 
-	//! Handles an API-specific request. It finds out which AbstractAPIService to use
+	//! Handles an API-specific request. It finds out which RemoteControlServiceInterface to use
 	//! depending on the service name (first part of path until slash). An error is returned for invalid requests.
-	//! If a service was found, the request is passed on to its AbstractAPIService::get or AbstractAPIService::post
+	//! If a service was found, the request is passed on to its RemoteControlServiceInterface::get or RemoteControlServiceInterface::post
 	//! method depending on the HTTP request type.
-	//! If AbstractAPIService::supportsThreadedOperation is false, these methods are called in the Stellarium main thread
+	//! If RemoteControlServiceInterface::isThreadSafe is false, these methods are called in the Stellarium main thread
 	//! using QMetaObject::invokeMethod, otherwise they are directly executed in the current thread (HTTP worker thread).
 	virtual void service(HttpRequest& request, HttpResponse& response);
 

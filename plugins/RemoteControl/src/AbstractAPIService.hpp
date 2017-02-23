@@ -29,6 +29,7 @@
 class AbstractAPIService : public QObject, public RemoteControlServiceInterface
 {
 	Q_OBJECT
+	//Probably not really necessary to do this here but it probably won't hurt either
 	Q_INTERFACES(RemoteControlServiceInterface)
 public:
 	//! Only calls QObject constructor

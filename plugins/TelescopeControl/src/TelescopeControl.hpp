@@ -378,6 +378,7 @@ class TelescopeControlStelPluginInterface : public QObject, public StelPluginInt
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_TELESCOPE_CONTROL_HPP_*/

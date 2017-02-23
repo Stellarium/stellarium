@@ -46,7 +46,13 @@ void APIController::update(double deltaTime)
 
 void APIController::registerService(RemoteControlServiceInterface *service)
 {
-	m_serviceMap.insert(service->getPath().latin1(), service);
+	QByteArray key = service->getPath().latin1();
+	if(m_serviceMap.contains(key))
+	{
+		qWarning()<<"Service"<<key<<"already registered, skipping...";
+		return;
+	}
+	m_serviceMap.insert(key, service);
 }
 
 void APIController::performGet(RemoteControlServiceInterface *service, const QByteArray &operation, const APIParameters &parameters, APIServiceResponse *response)
