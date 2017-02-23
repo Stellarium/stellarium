@@ -36,9 +36,11 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QDir>
 #include <QFile>
+#include <QPluginLoader>
 
 const QByteArray RequestHandler::AUTH_REALM = "Basic realm=\"Stellarium remote control\"";
 
@@ -100,6 +102,9 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	apiController->registerService(new LocationSearchService(apiController));
 	apiController->registerService(new ViewService(apiController));
 
+	connect(&StelApp::getInstance().getModuleMgr(), SIGNAL(extensionsAdded(QObjectList)), this, SLOT(addExtensionServices(QObjectList)));
+	addExtensionServices(StelApp::getInstance().getModuleMgr().getExtensionList());
+
 	staticFiles = new StaticFileController(settings,this);
 	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshTemplates()));
 	refreshTemplates();
@@ -107,6 +112,19 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 
 RequestHandler::~RequestHandler()
 {
+}
+
+void RequestHandler::addExtensionServices(QObjectList services)
+{
+	foreach(QObject* obj, services)
+	{
+		RemoteControlServiceInterface* sv = qobject_cast<RemoteControlServiceInterface*>(obj);
+		if(sv)
+		{
+			qDebug()<<"Registering RemoteControl extension service:"<<sv->getPath();
+			apiController->registerService(sv);
+		}
+	}
 }
 
 void RequestHandler::update(double deltaTime)

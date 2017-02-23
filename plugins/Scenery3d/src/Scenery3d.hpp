@@ -309,12 +309,13 @@ private:
 //! This class is used by Qt to manage a plug-in interface
 class Scenery3dStelPluginInterface : public QObject, public StelPluginInterface
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
-    Q_INTERFACES(StelPluginInterface)
+	Q_OBJECT
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
+	Q_INTERFACES(StelPluginInterface)
 public:
-    virtual StelModule* getStelModule() const;
-    virtual StelPluginInfo getPluginInfo() const;
+	virtual StelModule* getStelModule() const;
+	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const;
 };
 
 

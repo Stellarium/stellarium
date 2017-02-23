@@ -123,6 +123,12 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		{
 			Q_ASSERT(desc.pluginInterface);
 			StelModule* sMod = desc.pluginInterface->getStelModule();
+			QObjectList exts = desc.pluginInterface->getExtensionList();
+			if(!exts.isEmpty())
+			{
+				extensions.append(exts);
+				emit extensionsAdded(exts);
+			}
 			qDebug() << "Loaded plugin" << moduleID;
 			pluginDescriptorList[moduleID].loaded=true;
 			return sMod;
