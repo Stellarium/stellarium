@@ -31,6 +31,7 @@
 #include <stdexcept>
 
 #include "Scenery3d.hpp"
+#include "Scenery3dRemoteControlService.hpp"
 #include "S3DRenderer.hpp"
 #include "S3DScene.hpp"
 #include "Scenery3dDialog.hpp"
@@ -1091,6 +1092,13 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 			      "<p>Development of this plugin was in parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19). More: http://astrosim.univie.ac.at/</p>");
 
 	return info;
+}
+
+QObjectList Scenery3dStelPluginInterface::getExtensionList() const
+{
+	QObjectList ret;
+	ret.append(new Scenery3dRemoteControlService());
+	return ret;
 }
 /////////////////////////////////////////////////////////////////////
 

@@ -512,6 +512,7 @@ class ArchaeoLinesStelPluginInterface : public QObject, public StelPluginInterfa
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*ARCHAEOLINES_HPP_*/

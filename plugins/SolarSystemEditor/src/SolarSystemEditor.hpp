@@ -310,6 +310,7 @@ class SolarSystemEditorStelPluginInterface : public QObject, public StelPluginIn
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif //_SOLAR_SYSTEM_EDITOR_HPP_

@@ -110,7 +110,9 @@ Q_DECLARE_METATYPE(APIParameters)
 
 //! Interface for all \ref remoteControl services. Each implementation is mapped to a separate
 //! HTTP request path. The get() or post() method is called to handle each request.
-//! @note This interface can be used through the Qt plugin system, for use in other plugins.
+//! Instances of this class which are provided through the StelModuleMgr's extension mechanism
+//! (by adding it into the list returned by StelPluginInterface::getExtensionList()) are automatically
+//! discovered and registered with the APIController.
 class RemoteControlServiceInterface
 {
 public:
@@ -146,7 +148,7 @@ public:
 	virtual void update(double deltaTime) = 0;
 };
 
-// Qt plugin setup
+// Q_DECLARE_INTERFACE enables qobject_cast for the interface
 #define RemoteControlServiceInterface_iid "org.stellarium.plugin.RemoteSync.RemoteControlServiceInterface/1.0"
 Q_DECLARE_INTERFACE(RemoteControlServiceInterface, RemoteControlServiceInterface_iid)
 

@@ -53,6 +53,7 @@ class HelloStelModuleStelPluginInterface : public QObject, public StelPluginInte
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*HELLOSTELMODULE_HPP_*/
