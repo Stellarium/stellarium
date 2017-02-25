@@ -2541,30 +2541,30 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 		{
 			int degrees = (int)fovX;
 			float minutes = (int)((fovX - degrees) * 60);
-			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
 			float minutes = (fovX * 60);
-			stringFovX = QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovX = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 
 		if (fovY >= 1.0)
 		{
 			int degrees = (int)fovY;
 			float minutes = ((fovY - degrees) * 60);
-			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
 			float minutes = (fovY * 60);
-			stringFovY = QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovY = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 	}
 	else
 	{
-		stringFovX = QString::number(fovX) + QChar(0x00B0);
-		stringFovY = QString::number(fovY) + QChar(0x00B0);
+		stringFovX = QString::number(fovX, 'f', 5) + QChar(0x00B0);
+		stringFovY = QString::number(fovY, 'f', 5) + QChar(0x00B0);
 	}
 
 	return stringFovX + QChar(0x00D7) + stringFovY;
