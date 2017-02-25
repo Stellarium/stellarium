@@ -454,13 +454,16 @@ void OcularDialog::createDialogContent()
 
 	// set the initial state
 	QSettings *settings = Oculars::appSettings();
-	if (settings->value("require_selection_to_zoom", true).toBool()) {
+	if (settings->value("require_selection_to_zoom", true).toBool())
+	{
 		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
 	}
-	if (settings->value("use_max_exit_circle", false).toBool()) {
+	if (settings->value("use_max_exit_circle", false).toBool())
+	{
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
-	if (settings->value("limit_stellar_magnitude", true).toBool()) {
+	if (settings->value("limit_stellar_magnitude", true).toBool())
+	{
 		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
 	}
 	if (settings->value("enable_control_panel", false).toBool())
