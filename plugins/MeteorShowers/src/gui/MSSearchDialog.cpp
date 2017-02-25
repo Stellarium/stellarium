@@ -75,6 +75,11 @@ void MSSearchDialog::createDialogContent()
 	connect(m_ui->listEvents, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		m_ui->listEvents, SLOT(repaint()));
 
+	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
+	QDate min = QDate(100,1,1);
+	m_ui->dateFrom->setMinimumDate(min);
+	m_ui->dateTo->setMinimumDate(min);
+
 	refreshRangeDates();
 	initListEvents();
 }
