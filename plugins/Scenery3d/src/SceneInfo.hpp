@@ -142,13 +142,12 @@ struct SceneInfo
 	static QStringList getAllSceneIDs();
 	//! Returns all available scene names
 	static QStringList getAllSceneNames();
-
-	//! The meta type ID associated to the SceneInfo type
-	static int metaTypeId;
-private:
 	//! Builds a mapping of available scene names to the folders they are contained in, similar to the LandscapeMgr's method
 	static QMap<QString,QString> getNameToIDMap();
-	static int initMetaType();
+
+private:
+	//! The meta type ID associated to the SceneInfo type
+	static int metaTypeId;
 };
 
 Q_DECLARE_LOGGING_CATEGORY(storedView)

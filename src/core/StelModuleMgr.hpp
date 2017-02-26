@@ -59,6 +59,8 @@ public:
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized
 	StelModule* loadPlugin(const QString& moduleID);
 
+	QObjectList loadExtensions(const QString& moduleID);
+
 	//! Unload all plugins
 	void unloadAllPlugins();
 

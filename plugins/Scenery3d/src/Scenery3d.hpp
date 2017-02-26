@@ -73,6 +73,8 @@ class Scenery3d : public StelModule
 	Q_PROPERTY(bool secondDominantFaceWhenMoving READ getSecondDominantFaceWhenMoving WRITE setSecondDominantFaceWhenMoving NOTIFY secondDominantFaceWhenMovingChanged)
 	Q_PROPERTY(uint cubemapSize READ getCubemapSize WRITE setCubemapSize NOTIFY cubemapSizeChanged)
 	Q_PROPERTY(uint shadowmapSize READ getShadowmapSize WRITE setShadowmapSize NOTIFY shadowmapSizeChanged)
+	Q_PROPERTY(QString currentSceneID READ getCurrentSceneID NOTIFY currentSceneIDChanged STORED false)
+	Q_PROPERTY(QString loadingSceneID READ getLoadingSceneID NOTIFY loadingSceneIDChanged STORED false)
 
 	//these properties are only valid after init() has been called
 	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported)
@@ -123,6 +125,8 @@ signals:
     void shadowmapSizeChanged(const uint val);
 
     void currentSceneChanged(const SceneInfo& sceneInfo);
+    void currentSceneIDChanged(const QString& sceneID);
+    void loadingSceneIDChanged(const QString& sceneID);
 
     //! This signal is emitted from another thread than this QObject belongs to, so use QueuedConnection.
     void progressReport(const QString& str, int val, int min, int max) const;
@@ -232,6 +236,12 @@ public slots:
     //! Gets the SceneInfo of the scene that is currently being displayed.
     //! Check SceneInfo::isValid to determine if a scene is displayed.
     SceneInfo getCurrentScene() const;
+
+    //! Returns the ID of the currently loaded scene, or an null string if nothing is displayed.
+    QString getCurrentSceneID() const;
+
+    //! Returns the ID of the currently loading scene, or null if nothing is being loaded
+    QString getLoadingSceneID() const;
 
     //! Gets the SceneInfo of the scene that is currently in the process of being loaded.
     //! Check SceneInfo::isValid to determine if a scene is loaded.

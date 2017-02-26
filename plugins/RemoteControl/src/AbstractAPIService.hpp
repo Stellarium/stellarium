@@ -51,15 +51,6 @@ protected:
 	//! This defines the connection type QMetaObject::invokeMethod has to use inside a service: either Qt::DirectConnection for main thread handling, or
 	//! Qt::BlockingQueuedConnection for HTTP thread handling
 	static const Qt::ConnectionType SERVICE_DEFAULT_INVOKETYPE;
-
-	//! Because the HTML descriptions in Stellarium are often not compatible
-	//! with "clean" HTML5 which is used for the main interface,
-	//! this method can be used to explicitely set the doctype
-	//! to 4.01 transitional for better results, and include the stylesheet
-	//! \c iframestyle.css
-	//! @param text The text to wrap with HTML document tags
-	//! @param title The title of the page
-	QString wrapHtml(QString& text, const QString& title) const;
 };
 
 //! @}
