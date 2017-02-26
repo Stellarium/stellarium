@@ -53,8 +53,7 @@ void ScriptService::get(const QByteArray& operation, const APIParameters &parame
 			if(parameters.contains("html"))
 			{
 				QString html = scriptMgr->getHtmlDescription(scriptId, false);
-				response.setHeader("Content-Type","text/html; charset=UTF-8");
-				response.setData(wrapHtml(html, scriptId).toUtf8());
+				response.writeWrappedHTML(html, scriptId);
 				return;
 			}
 

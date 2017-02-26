@@ -22,6 +22,7 @@
 #define _SCENERY3DREMOTECONTROLSERVICE_HPP_
 
 #include "../../RemoteControl/include/RemoteControlServiceInterface.hpp"
+#include "Scenery3d.hpp"
 
 
 //! Provides a Scenery3d service for the \ref remoteControl plugin.
@@ -31,12 +32,17 @@ class Scenery3dRemoteControlService : public QObject, public RemoteControlServic
 	Q_INTERFACES(RemoteControlServiceInterface)
 
 public:
+	//! Requires the Scenery3d module to be registered
+	Scenery3dRemoteControlService();
+
 	// RemoteControlServiceInterface interface
 	virtual QLatin1String getPath() const Q_DECL_OVERRIDE;
 	virtual bool isThreadSafe() const Q_DECL_OVERRIDE;
 	virtual void get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response) Q_DECL_OVERRIDE;
 	virtual void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+private:
+	Scenery3d* s3d;
 };
 
 

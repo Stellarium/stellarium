@@ -595,6 +595,8 @@ void StelApp::initPlugIns()
 		if (m!=NULL)
 		{
 			moduleMgr->registerModule(m, true);
+			//load extensions after the module is registered
+			moduleMgr->loadExtensions(i.info.id);
 			m->init();
 		}
 	}

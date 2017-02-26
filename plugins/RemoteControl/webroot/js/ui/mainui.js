@@ -42,6 +42,8 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 
 	// create
 	function createAutomaticGUIElements() {
+		console.log("setting up GUI elements");
+
 		//automatically setup spinners
 		$("input.spinner").each(function() {
 			var self = $(this),
