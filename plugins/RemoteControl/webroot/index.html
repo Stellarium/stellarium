@@ -36,6 +36,7 @@
         <li><a href="#tab_actions"><?= tr("Actions and scripts")?></a></li>
         <li><a href="#tab_location"><?= tr("Location")?></a></li>
         <li><a href="#tab_projection"><?= tr("Projection")?></a></li>
+        <li class="stelplugin" data-plugin="Scenery3d"><a href="#tab_scenery3d"><?= tr("Scenery3d")?></a></li>
       </ul>
       <div id="tab_main">
         <div class="flex">
@@ -543,6 +544,29 @@
           </select>
           <iframe id="vo_projectioninfo" class="flex-expand" src="/api/view/projectiondescription"></iframe>
         </div>
+      </div>
+      <div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
+          <div class="smallblock">
+            <h3><?= tr("Interaction")?></h3>
+            <p><?= tr("Current scene:")?> <span id="s3d_curscene"><?= tr("-none-")?></span></p>
+          </div>
+          <div class="smallblock">
+            <h3><?= tr("Options")?></h3>
+            <div class="inline-block blocklabel">
+              <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
+              <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
+              <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
+            </div>
+          </div>
+          <div class="smallblock flex landscapeblock">
+            <h3><?= tr("Scene selection")?></h3>
+            <div class="flex flex-column">
+            <select id="s3d_list" class="scrollselect flex-expand" size="5">
+            </select>
+            <button id="s3d_load" class="jquerybutton"><?= tr("Load selected scene")?></button>
+            </div>
+            <iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
+          </div>
       </div>
     </div>
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">

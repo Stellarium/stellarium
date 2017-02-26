@@ -106,35 +106,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 		if (p)
 		{
 			QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
-			QFile file(path);
-			if (path.isEmpty() || !file.exists())
-			{
-				response.setStatus(404,"not found");
-				response.setData("planet image not available");
-				qWarning() << "ERROR - could not find planet map for " << planet;
-				return;
-			}
-
-			QMimeType mime = QMimeDatabase().mimeTypeForFile(path);
-
-			if(file.open(QIODevice::ReadOnly))
-			{
-				//allow the image to be cached by browser (1 hour)
-				response.setHeader("Cache-Control","max-age="+QByteArray::number(60*60));
-				//response.setHeader("Content-Length",static_cast<int>(file.size()));
-				if(!mime.isDefault())
-				{
-					response.setHeader("Content-Type", mime.name().toLatin1());
-				}
-
-				//load and write data
-				response.setData(file.readAll());
-			}
-			else
-			{
-				response.setStatus(500,"internal server error");
-				response.setData("could not open image file");
-			}
+			response.writeFile(path, true);
 		}
 		else
 		{

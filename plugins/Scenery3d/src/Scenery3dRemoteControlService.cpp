@@ -20,6 +20,15 @@
 
 #include "Scenery3dRemoteControlService.hpp"
 
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
+
+Scenery3dRemoteControlService::Scenery3dRemoteControlService()
+{
+	s3d = GETSTELMODULE(Scenery3d);
+}
+
 QLatin1String Scenery3dRemoteControlService::getPath() const
 {
 	return QLatin1String("scenery3d");
@@ -37,10 +46,112 @@ void Scenery3dRemoteControlService::update(double deltaTime)
 
 void Scenery3dRemoteControlService::get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	response.writeRequestError("not yet implemented");
+	if(operation == "listscene")
+	{
+		QMap<QString,QString> map = SceneInfo::getNameToIDMap();
+
+		QJsonObject obj;
+
+		for(QMap<QString,QString>::const_iterator it = map.constBegin(); it!=map.constEnd();++it)
+		{
+			obj.insert(it.value(), StelTranslator::globalTranslator->qtranslate(it.key()));
+		}
+
+		response.writeJSON(QJsonDocument(obj));
+	}
+	else if (operation.startsWith("scenedescription/"))
+	{
+		//extract scene id
+		int startidx = operation.indexOf('/');
+		int endidx = operation.indexOf('/', startidx+1);
+
+		if(endidx == -1)
+		{
+			response.writeRequestError("requires /-separated scene ID");
+			return;
+		}
+
+		QString id = operation.mid(startidx+1,(endidx - startidx - 1));
+		SceneInfo si;
+		SceneInfo::loadByID(id,si);
+
+		if(!si.isValid)
+		{
+			response.writeRequestError("invalid scene ID");
+			return;
+		}
+
+		// allow caching of response
+		response.setCacheTime(60*60);
+
+		//get the path after the name and map it to the scene's directory
+		QByteArray path = operation.mid(endidx+1);
+		if(path.isEmpty())
+		{
+			//no path, return HTML description
+			//first, try to find a localized description
+			QString desc = si.getLocalizedHTMLDescription();
+			if(desc.isEmpty())
+			{
+				//use the "old" way to create an description from data contained in the .ini
+				desc = QString("<h3>%1</h3>").arg(si.name);
+				desc+= si.description;
+				desc+="<br><br>";
+				desc+="<b>"+q_("Author: ")+"</b>";
+				desc+= si.author;
+			}
+			response.writeWrappedHTML(desc,si.name);
+		}
+		else
+		{
+			//map path to scene dir and return files
+			QString baseFolder = si.fullPath;
+			QString pathString = baseFolder + '/' + QString::fromUtf8(path);
+
+			response.writeFile(pathString);
+		}
+	}
+	else
+	{
+		response.writeRequestError("unsupported operation. GET: listscene,scenedescription/");
+	}
 }
 
 void Scenery3dRemoteControlService::post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	response.writeRequestError("not yet implemented");
+
+	if(operation == "loadscene")
+	{
+		QString id(parameters.value("id"));
+
+		if(id.isEmpty())
+		{
+			response.writeRequestError("requires valid id parameter");
+			return;
+		}
+
+		if(id == s3d->getCurrentSceneID())
+		{
+			if(s3d->getLoadingSceneID().isEmpty())
+			{
+				response.writeRequestError("scene already loaded");
+				return;
+			}
+		}
+		else if(id == s3d->getLoadingSceneID())
+		{
+			response.writeRequestError("scene already being loaded");
+			return;
+		}
+
+		SceneInfo si = s3d->loadScenery3dByID(id);
+		if(si.isValid)
+			response.setData("ok");
+		else
+			response.writeRequestError("invalid id parameter");
+	}
+	else
+	{
+		response.writeRequestError("unsupported operation. POST: loadscene");
+	}
 }

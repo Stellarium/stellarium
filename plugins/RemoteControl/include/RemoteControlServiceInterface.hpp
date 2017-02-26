@@ -21,10 +21,12 @@
 #define REMOTECONTROLSERVICEINTERFACE_HPP_
 
 #include <QByteArray>
+#include <QDebug>
+#include <QFile>
 #include <QJsonDocument>
 #include <QMap>
+#include <QMimeDatabase>
 #include <QObject>
-
 
 //! \addtogroup remoteControl
 //! @{
@@ -43,13 +45,20 @@ public:
 	//! Sets a specific HTTP header to the specified value
 	void setHeader(const QByteArray &name, const QByteArray &val)
 	{
-		headers.insert(name,val);
+		headers[name]=val;
 	}
 	//! Shortcut for int header values
 	void setHeader(const QByteArray& name, const int val)
 	{
-		headers.insert(name,QByteArray::number(val));
+		headers[name]=QByteArray::number(val);
 	}
+
+	//! Sets the time in seconds for which the browser is allowed to cache the reply
+	void setCacheTime(int seconds)
+	{
+		setHeader("Cache-Control","max-age="+QByteArray::number(seconds));
+	}
+
 	//! Sets the HTTP status type and status text
 	void setStatus(int status, const QByteArray& text)
 	{
@@ -88,6 +97,60 @@ public:
 		//setHeader("Content-Length",data.size());
 		setHeader("Content-Type","application/json; charset=utf-8");
 		setData(data);
+	}
+
+	//! Because the HTML descriptions in Stellarium are often not compatible
+	//! with "clean" HTML5 which is used for the main interface,
+	//! this method can be used to explicitely wrap the given HTML snippet
+	//! in a valid HTML 4.01 transitional document for better results, and include the stylesheet
+	//! \c iframestyle.css for consistent styling when used in iframes of the RemoteControl web interface
+	//! @param html The HTML snippet to wrap with HTML document tags
+	//! @param title The title of the page
+	void writeWrappedHTML(const QString& html, const QString& title)
+	{
+		QString wrapped = QStringLiteral("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<html><head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n<title>")
+				+ title + QStringLiteral("</title>\n<link type=\"text/css\" rel=\"stylesheet\" href=\"/iframestyle.css\">\n<base target=\"_blank\">\n</head><body>\n")
+				+ html + QStringLiteral("</body></html>");
+
+		setHeader("Content-Type","text/html; charset=UTF-8");
+		setData(wrapped.toUtf8());
+	}
+
+	//! Writes the specified file contents into the response.
+	//! @param path The (preferably absolute) path to a file
+	//! @param allowCaching if true, the browser is allowed to cache the file for one hour
+	void writeFile(const QString& path, bool allowCaching = false)
+	{
+		QFile file(path);
+		if (path.isEmpty() || !file.exists())
+		{
+			setStatus(404,"not found");
+			setData("requested file resource not found");
+			return;
+		}
+
+		QMimeType mime = QMimeDatabase().mimeTypeForFile(path);
+
+		if(file.open(QIODevice::ReadOnly))
+		{
+			if(allowCaching)
+				setHeader("Cache-Control","max-age="+QByteArray::number(60*60));
+
+			//reply with correct mime type if possible
+			if(!mime.isDefault())
+			{
+				setHeader("Content-Type", mime.name().toLatin1());
+			}
+
+			//load and write data
+			setData(file.readAll());
+		}
+		else
+		{
+			qWarning()<<"Could not open requested file resource"<<path<<file.errorString();
+			setStatus(500,"internal server error");
+			setData("could not open file resource");
+		}
 	}
 
 private:

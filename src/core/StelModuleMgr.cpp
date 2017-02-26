@@ -123,12 +123,6 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		{
 			Q_ASSERT(desc.pluginInterface);
 			StelModule* sMod = desc.pluginInterface->getStelModule();
-			QObjectList exts = desc.pluginInterface->getExtensionList();
-			if(!exts.isEmpty())
-			{
-				extensions.append(exts);
-				emit extensionsAdded(exts);
-			}
 			qDebug() << "Loaded plugin" << moduleID;
 			pluginDescriptorList[moduleID].loaded=true;
 			return sMod;
@@ -136,6 +130,28 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 	}
 	qWarning() << "Unable to find plugin called" << moduleID;
 	return NULL;
+}
+
+QObjectList StelModuleMgr::loadExtensions(const QString &moduleID)
+{
+	foreach (const PluginDescriptor& desc, getPluginsList())
+	{
+		if (desc.info.id==moduleID)
+		{
+			Q_ASSERT(desc.pluginInterface);
+			QObjectList exts = desc.pluginInterface->getExtensionList();
+			if(!exts.isEmpty())
+			{
+				extensions.append(exts);
+				emit extensionsAdded(exts);
+				qDebug() << "Loaded"<<exts.size()<<"extensions for"<<moduleID;
+			}
+
+			return exts;
+		}
+	}
+	qWarning() << "Unable to find plugin called" << moduleID;
+	return QObjectList();
 }
 
 struct StelModuleOrderComparator

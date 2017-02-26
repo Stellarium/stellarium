@@ -425,6 +425,7 @@ void Scenery3d::loadScene(const SceneInfo& scene)
 	progressBar->setValue(0);
 
 	currentLoadScene = scene;
+	emit loadingSceneIDChanged(currentLoadScene.id);
 
 	QFuture<S3DScene*> future = QtConcurrent::run(this,&Scenery3d::loadSceneBackground,scene);
 	currentLoadFuture.setFuture(future);
@@ -544,6 +545,7 @@ void Scenery3d::loadSceneCompleted()
 
 	//clear loading scene
 	currentLoadScene = SceneInfo();
+	emit loadingSceneIDChanged(QString());
 
 	//switch scenes
 	delete currentScene;
@@ -553,6 +555,7 @@ void Scenery3d::loadSceneCompleted()
 	setEnableScene(true);
 
 	emit currentSceneChanged(info);
+	emit currentSceneIDChanged(info.id);
 }
 
 SceneInfo Scenery3d::loadScenery3dByID(const QString& id)
@@ -600,6 +603,16 @@ SceneInfo Scenery3d::getCurrentScene() const
 	if(currentScene)
 		return currentScene->getSceneInfo();
 	return SceneInfo();
+}
+
+QString Scenery3d::getCurrentSceneID() const
+{
+	return currentScene ? currentScene->getSceneInfo().id : QString();
+}
+
+QString Scenery3d::getLoadingSceneID() const
+{
+	return currentLoadScene.id;
 }
 
 void Scenery3d::setDefaultScenery3dID(const QString& id)
