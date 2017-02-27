@@ -25,6 +25,7 @@
 #include "StelTranslator.hpp"
 
 Scenery3dRemoteControlService::Scenery3dRemoteControlService()
+	: move(0.0),lastMoveUpdateTime(0)
 {
 	s3d = GETSTELMODULE(Scenery3d);
 }
@@ -41,11 +42,21 @@ bool Scenery3dRemoteControlService::isThreadSafe() const
 
 void Scenery3dRemoteControlService::update(double deltaTime)
 {
-	Q_UNUSED(deltaTime);
+	//prevent sudden disconnects from moving endlessly
+	if((QDateTime::currentMSecsSinceEpoch() - lastMoveUpdateTime) > 1000)
+	{
+		move = Vec3d(0.0);
+	}
+	else
+	{
+		s3d->relativeMove(move * deltaTime);
+	}
 }
 
 void Scenery3dRemoteControlService::get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)
 {
+	Q_UNUSED(parameters)
+
 	if(operation == "listscene")
 	{
 		QMap<QString,QString> map = SceneInfo::getNameToIDMap();
@@ -119,8 +130,26 @@ void Scenery3dRemoteControlService::get(const QByteArray &operation, const APIPa
 
 void Scenery3dRemoteControlService::post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
+	Q_UNUSED(data)
 
-	if(operation == "loadscene")
+	if(operation == "move")
+	{
+		bool xOk,yOk,zOk;
+		double x = parameters.value("x").toDouble(&xOk);
+		double y = parameters.value("y").toDouble(&yOk);
+		double z = parameters.value("z").toDouble(&zOk);
+
+		if(xOk || yOk || zOk)
+		{
+			move.set(x,y,z);
+
+			lastMoveUpdateTime = QDateTime::currentMSecsSinceEpoch();
+			response.setData("ok");
+		}
+		else
+			response.writeRequestError("requires x,y and/or z parameter");
+	}
+	else if(operation == "loadscene")
 	{
 		QString id(parameters.value("id"));
 
@@ -152,6 +181,6 @@ void Scenery3dRemoteControlService::post(const QByteArray &operation, const APIP
 	}
 	else
 	{
-		response.writeRequestError("unsupported operation. POST: loadscene");
+		response.writeRequestError("unsupported operation. POST: move,loadscene");
 	}
 }

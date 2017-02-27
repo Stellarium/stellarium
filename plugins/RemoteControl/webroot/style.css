@@ -256,6 +256,10 @@ h2 {
 	margin: auto;
 }
 
+.margin-none {
+    margin: 0;
+}
+
 .margin-block {
 	margin: 10px;
 }
@@ -886,4 +890,32 @@ button.button32:active {
 
 .selectmenu + span.ui-selectmenu-button {
 	display: block;
+}
+
+.joystickcontainer {
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 64px;
+    background: #B4B4B7;
+    background-image: url("images/joypad.png");
+    background-image: url("images/joypad.png"), radial-gradient(#B4B4B7, #5D5F62);
+    background-repeat: no-repeat;
+    width: 128px;
+    height: 128px;
+}
+
+.joystick {
+    border: 5px double white;
+    background-color: rgb(53,53,53);
+    box-sizing: border-box;
+    border-radius: 16px;
+    top: 48px;
+    left: 48px;
+    width: 32px;
+    height: 32px;
+    cursor: move;
+}
+
+.smallblock128 {
+    max-width: 143px;
 }
