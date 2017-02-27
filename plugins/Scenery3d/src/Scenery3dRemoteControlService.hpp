@@ -41,8 +41,12 @@ public:
 	virtual void get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response) Q_DECL_OVERRIDE;
 	virtual void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+protected:
+	void performMove(double x,double y, double z);
 private:
 	Scenery3d* s3d;
+	Vec3d move;
+	qint64 lastMoveUpdateTime;
 };
 
 

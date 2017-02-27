@@ -132,6 +132,16 @@ signals:
     void progressReport(const QString& str, int val, int min, int max) const;
 
 public slots:
+    //! Performs a relative translation of the viewer's position.
+    //! The values should usually be given pre-adjusted with the delta time.
+    //! Does nothing if no scene is currently loaded.
+    //!
+    //! The first component specifies movement in the "right" direction, the second
+    //! component in the "forward" directon, and the last value
+    //! is used to adjust the height offset of the viewer (he is still
+    //! positioned according to the heightmap).
+    void relativeMove(const Vec3d& move);
+
     //! Clears the shader cache, forcing a reload of shaders on use
     void reloadShaders();
 

@@ -24,10 +24,12 @@ define({
 	"waiting" : '<?= tr("waiting")?>',
 	"Could not retrieve projection list" : '<?= tr("Could not retrieve projection list")?>',
 	"Could not retrieve landscape list" : '<?= tr("Could not retrieve landscape list")?>',
+	"-none-" : '<?= tr("-none-")?>',
+	"(Currently loading: %1)" : '<?= tr("(Currently loading: %1)")?>',
+	"Could not retrieve Scenery3d list" : '<?= tr("Could not retrieve Scenery3d list")?>',
 	"on" : '<?= tr("on")?>',
 	"off" : '<?= tr("off")?>',
 	"Show All Items" : '<?= tr("Show All Items")?>',
 	"Input did not match any item" : '<?= tr("Input did not match any item")?>',
-	"-none-" : '<?= tr("-none-")?>',
 	"No current selection" : '<?= tr("No current selection")?>'
 });

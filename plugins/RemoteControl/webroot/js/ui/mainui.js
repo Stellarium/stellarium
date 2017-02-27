@@ -77,6 +77,48 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 		$("select.selectmenu").selectmenu({
 			width: 'auto'
 		});
+
+		//setup joysticks
+		$(".joystickcontainer > .joystick").draggable({
+			revert: true,
+			revertDuration: 100,
+			cursor: "move",
+			//containment: "parent",
+			scroll: false,
+			drag: function(evt, ui) {
+				var ct = $(this).parent();
+				var halfHeight = ui.helper.height() / 2;
+				var halfWidth = ui.helper.width() / 2;
+
+				//calculate radius
+				var ctCenter = [ct.height() / 2, ct.width() / 2];
+				var pos = [halfHeight + ui.position.top - ctCenter[0],
+					halfWidth + ui.position.left - ctCenter[1]
+				];
+
+				var curRad = Math.sqrt(pos[0] * pos[0] + pos[1] * pos[1]);
+				var maxRad = Math.min(ctCenter[0], ctCenter[1]);
+				var radFactor = Math.min(1.0, curRad / maxRad);
+				var angle = Math.atan2(pos[0], pos[1]);
+
+				//position in the unit circle
+				var unitPos = [Math.sin(angle) * radFactor, Math.cos(angle) *
+					radFactor
+				];
+
+				if (curRad > maxRad) {
+					ui.position.top = Math.floor(unitPos[0] * maxRad + ctCenter[0] -
+						halfHeight);
+					ui.position.left = Math.floor(unitPos[1] * maxRad + ctCenter[1] -
+						halfWidth);
+				}
+
+				$(this).trigger("unitDrag", {
+					x: unitPos[1],
+					y: -unitPos[0]
+				});
+			}
+		});
 	}
 
 	function connectStelProperties() {

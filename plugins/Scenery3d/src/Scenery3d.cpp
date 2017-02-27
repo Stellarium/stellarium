@@ -364,6 +364,14 @@ void Scenery3d::createToolbarButtons() const
 	}
 }
 
+void Scenery3d::relativeMove(const Vec3d &move)
+{
+	if(currentScene)
+	{
+		currentScene->moveViewer(move);
+	}
+}
+
 void Scenery3d::reloadShaders()
 {
 	showMessage(q_("Scenery3d shaders reloaded"));
