@@ -288,7 +288,7 @@
               </div>
             </div>
 
-			<div id="vo_archaeolines" class="smallblock flex stelplugin" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines">
+			<div id="vo_archaeolines" class="smallblock flex stelplugin" data-plugin="ArchaeoLines">
               <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_ArchaeoLines"/><?= tr("ArchaeoLines")?></label></h3>
               <div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" name="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
@@ -546,17 +546,26 @@
         </div>
       </div>
       <div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
-          <div class="smallblock">
-            <h3><?= tr("Interaction")?></h3>
-            <p><?= tr("Current scene:")?> <span id="s3d_curscene"><?= tr("-none-")?></span></p>
-          </div>
-          <div class="smallblock">
-            <h3><?= tr("Options")?></h3>
-            <div class="inline-block blocklabel">
-              <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
-              <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
-              <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
-            </div>
+          <div class="flex">
+              <div class="smallblock smallblock128">
+                  <h3><?= tr("Interaction")?></h3>
+                  <p class="margin-none"><?= tr("Current scene:")?></p>
+                  <p id="s3d_curscene" class="bold margin-none"><?= tr("-none-")?></p>
+                  <div class="innerblock inline-block">
+                      <h3><?= tr("Movement controls")?></h3>
+                      <div class="joystickcontainer">
+                          <div id="s3d_joy" class="joystick"></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="smallblock flex-expand">
+                  <h3><?= tr("Options")?></h3>
+                  <div class="inline-block blocklabel">
+                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
+                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
+                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
+                  </div>
+              </div>
           </div>
           <div class="smallblock flex landscapeblock">
             <h3><?= tr("Scene selection")?></h3>
