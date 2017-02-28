@@ -106,6 +106,7 @@ SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QVe
 	  handlerList(handlerList)
 {
 	Q_ASSERT(sock);
+	sock->setParent(this); //reparent
 	sock->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 	stream.setVersion(SYNC_DATASTREAM_VERSION);
 	connect(sock, SIGNAL(readyRead()), this, SLOT(receiveMessage()));
