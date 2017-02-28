@@ -183,7 +183,7 @@ bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
 				//copy the first 8 floats from each vertex
 				m_vertexBuffer.write(i * vtxSize, &vertices.at(i), vtxSize);
 			}
-			for (int i = 0;i<=ATTLOC_TEXCOORD;++i)
+			for (int i = 0;i<=ATTLOC_NORMAL;++i)
 			{
 				//all strides are the same, and only float is used
 				m_strides[i] = vtxSize;

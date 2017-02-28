@@ -489,6 +489,19 @@ double dmsStrToRad(const QString& s)
 	return dmsToRad(sign ? deg : -deg, min, sec);
 }
 
+Vec2f strToVec2f(const QStringList &s)
+{
+	if (s.size()<2)
+		 return Vec2f(0.f,0.f);
+
+	return Vec2f(s[0].toFloat(),s[1].toFloat());
+}
+
+Vec2f strToVec2f(const QString &s)
+{
+	return strToVec2f(s.split(","));
+}
+
 // Obtains a Vec3f from a string with the form x,y,z
 Vec3f strToVec3f(const QStringList& s)
 {
@@ -514,6 +527,13 @@ Vec4d strToVec4d(const QStringList &s)
 Vec4d strToVec4d(const QString& str)
 {
 	return strToVec4d(str.split(","));
+}
+
+QString vec2fToStr(const Vec2f &v)
+{
+	return QString("%1,%2")
+		.arg(v[0],0,'f',6)
+		.arg(v[1],0,'f',6);
 }
 
 QString vec3fToStr(const Vec3f &v)
