@@ -151,6 +151,8 @@ public:
 	inline void normalize();
 
 	T v[2];
+
+	QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
 };
 
 
