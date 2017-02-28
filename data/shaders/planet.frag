@@ -87,7 +87,7 @@ lowp float offset_lookup(in highp sampler2D sTex, in highp vec4 loc, in highp ve
     //It should have no effect on platforms which don't have this bug
     highp float texVal = texture2DProj(sTex, coords, -1000.0).r;
     //perform shadow comparison
-    return texVal > (loc.z/loc.w)-zbias ? 1.0 : 0.0;
+    return texVal > (loc.z-zbias)/loc.w ? 1.0 : 0.0;
 }
 
 //basic pseudo-random number generator
@@ -98,7 +98,10 @@ mediump float random(in mediump vec4 seed4)
 }
 
 lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord, in highp float zbias)
-{    
+{   
+    //uncomment for a single sample
+    //return offset_lookup(sTex,coord, vec2(0.0),zbias);
+ 
     // for some reason > 5 samples do not seem to work on my Ubuntu VM 
     // (no matter if ES2 or GL 2.1)
     // everything gets shadowed, but no errors?!
@@ -256,8 +259,9 @@ void main()
     //use shadowmapping
     //z-bias is modified using the angle between the surface and the light
     //gives less shadow acne
-    highp float zbias = 0.0025 * tan(acos(dot(normal, normalize(sunInfo.xyz))));
-    zbias = clamp(zbias, 0.0, 0.01);
+    highp float NdotL = clamp(dot(normal, lightDirection), 0.0, 1.0);
+    highp float zbias = 0.01 * tan(acos(NdotL));
+    zbias = clamp(zbias, 0.0, 0.03);
     lowp float shadow = sampleShadowMap(shadowTex, shadowCoord, zbias);
     lum*=shadow;
 #endif
@@ -287,9 +291,4 @@ void main()
 #endif
 
     gl_FragColor = finalColor;
-
-#ifdef ADVANCED_SHADING
-    //to debug the outgas effect contribution, uncomment this line
-    //gl_FragColor = vec4(vec3(outgas),1.0);
-#endif
 }

@@ -592,6 +592,7 @@ private:
 	static QOpenGLShaderProgram* transformShaderProgram;
 
 	static bool shadowInitialized;
+	static Vec2f shadowPolyOffset;
 #ifdef DEBUG_SHADOWMAP
 	static QOpenGLFramebufferObject* shadowFBO;
 #else

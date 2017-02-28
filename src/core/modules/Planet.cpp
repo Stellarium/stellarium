@@ -104,6 +104,7 @@ QOpenGLShaderProgram* Planet::transformShaderProgram=Q_NULLPTR;
 Planet::PlanetShaderVars Planet::transformShaderVars;
 
 bool Planet::shadowInitialized = false;
+Vec2f Planet::shadowPolyOffset = Vec2f(0.0f, 0.0f);
 #ifdef DEBUG_SHADOWMAP
 QOpenGLFramebufferObject* Planet::shadowFBO = Q_NULLPTR;
 #else
@@ -1364,7 +1365,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 class StelPainterLight
 {
 public:
-	Vec3f position;
+	Vec3d position;
 	Vec3f diffuse;
 	Vec3f ambient;
 };
@@ -1488,6 +1489,11 @@ void Planet::initShader()
 {
 	qDebug() << "Initializing planets GL shaders... ";
 	shaderError = true;
+
+	QSettings* settings = StelApp::getInstance().getSettings();
+	settings->sync();
+	shadowPolyOffset = StelUtils::strToVec2f(settings->value("astro/planet_shadow_polygonoffset", StelUtils::vec2fToStr(Vec2f(0.0f, 0.0f))).toString());
+	//qDebug()<<"Shadow poly offset"<<shadowPolyOffset;
 
 	// Shader text is loaded from file
 	QString vFileName = StelFileMgr::findFile("data/shaders/planet.vert",StelFileMgr::File);
@@ -1719,19 +1725,19 @@ bool Planet::initFBO()
 	if(!error)
 	{
 		//all seems ok, create our objects
-		gl->glGenTextures(1, &shadowTex);
-		gl->glActiveTexture(GL_TEXTURE1);
-		gl->glBindTexture(GL_TEXTURE_2D, shadowTex);
+		GL(gl->glGenTextures(1, &shadowTex));
+		GL(gl->glActiveTexture(GL_TEXTURE1));
+		GL(gl->glBindTexture(GL_TEXTURE_2D, shadowTex));
 
 #ifndef QT_OPENGL_ES_2
 		if(!isGLESv2)
 		{
-			gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
-			gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
-			gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-			gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+			GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0));
+			GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0));
+			GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
+			GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
-			gl->glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+			GL(gl->glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones));
 		}
 #endif
 		GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
@@ -1858,7 +1864,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// Set the main source of light to be the sun
 			Vec3d sunPos(0.);
 			core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
-			light.position=Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f);
+			light.position=Vec4d(sunPos);
 
 			// Set the light parameters taking sun as the light source
 			light.diffuse = Vec4f(1.f,magFactorGreen*1.f,magFactorBlue*1.f);
@@ -2382,7 +2388,9 @@ bool Planet::ensureObjLoaded()
 					objModel = NULL;
 					objModelPath.clear();
 					qWarning()<<"Cannot load OBJ model into OpenGL for solar system object"<<getEnglishName();
+					return false;
 				}
+				GL(;);
 			}
 		}
 		else
@@ -2500,13 +2508,13 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	const StelProjectorP projector = painter->getProjector();
 
 	//find the light direction in model space
-	Mat4d modelMatrix;
-	computeModelMatrix(modelMatrix);
-	Mat4d worldToModel = modelMatrix.inverse();
+	//Mat4d modelMatrix;
+	//computeModelMatrix(modelMatrix);
+	//Mat4d worldToModel = modelMatrix.inverse();
 
-	//Vec3d lightDir = light.position;
-	//projector->getModelViewTransform()->backward(lightDir);
-	Vec3d lightDir(worldToModel[12], worldToModel[13], worldToModel[14]);
+	Vec3d lightDir = light.position.toVec3d();
+	projector->getModelViewTransform()->backward(lightDir);
+	//Vec3d lightDir(worldToModel[12], worldToModel[13], worldToModel[14]);
 	lightDir.normalize();
 
 	//use a distance of 1km to the origin for additional precision, instead of 1AU
@@ -2569,8 +2577,13 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	painter->setDepthMask(true);
 	painter->setCullFace(true);
 	gl->glCullFace(GL_BACK);
-	gl->glEnable(GL_POLYGON_OFFSET_FILL);
-	gl->glPolygonOffset(2.0f,6.0f);
+	bool useOffset = !qFuzzyIsNull(shadowPolyOffset.lengthSquared());
+
+	if(useOffset)
+	{
+		gl->glEnable(GL_POLYGON_OFFSET_FILL);
+		gl->glPolygonOffset(shadowPolyOffset[0], shadowPolyOffset[1]);
+	}
 
 	gl->glViewport(0,0,SM_SIZE,SM_SIZE);
 
@@ -2607,11 +2620,11 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	const Vec4i& vp = projector->getViewport();
 	gl->glViewport(vp[0], vp[1], vp[2], vp[3]);
 
-	painter->setDepthMask(false);
-	painter->setDepthTest(false);
-	painter->setCullFace(false);
-	gl->glDisable(GL_POLYGON_OFFSET_FILL);
-	GL(gl->glPolygonOffset(0.0f,0.0f));
+	if(useOffset)
+	{
+		gl->glDisable(GL_POLYGON_OFFSET_FILL);
+		GL(gl->glPolygonOffset(0.0f,0.0f));
+	}
 
 #ifdef DEBUG_SHADOWMAP
 	//display the FB contents on-screen
