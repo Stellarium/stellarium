@@ -55,21 +55,6 @@ public:
 	ShaderMgr();
 	~ShaderMgr();
 
-	//! Enum for OpenGL shader attribute locations
-	enum ATTLOC
-	{
-		//! This is the OpenGL attribute location where vertex positions are mapped to
-		ATTLOC_VERTEX,
-		//! This is the OpenGL attribute location where vertex normals are mapped to
-		ATTLOC_NORMAL,
-		//! This is the OpenGL attribute location where vertex texture coordinates are mapped to
-		ATTLOC_TEXCOORD,
-		//! This is the OpenGL attribute location where vertex tangents are mapped to
-		ATTLOC_TANGENT,
-		//! This is the OpenGL attribute location where vertex bitangents are mapped to
-		ATTLOC_BITANGENT
-	};
-
 	//! Enum for OpenGL shader uniform locations (faster than accessing by string each time)
 	enum UNIFORM
 	{
