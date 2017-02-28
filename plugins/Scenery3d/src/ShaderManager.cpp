@@ -416,11 +416,11 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 
 	//Set attribute locations to hardcoded locations.
 	//This enables us to use a single VAO configuration for all shaders!
-	program.bindAttributeLocation("a_vertex",ATTLOC_VERTEX);
-	program.bindAttributeLocation("a_normal", ATTLOC_NORMAL);
-	program.bindAttributeLocation("a_texcoord",ATTLOC_TEXCOORD);
-	program.bindAttributeLocation("a_tangent",ATTLOC_TANGENT);
-	program.bindAttributeLocation("a_bitangent",ATTLOC_BITANGENT);
+	program.bindAttributeLocation("a_vertex",StelOpenGLArray::ATTLOC_VERTEX);
+	program.bindAttributeLocation("a_normal", StelOpenGLArray::ATTLOC_NORMAL);
+	program.bindAttributeLocation("a_texcoord",StelOpenGLArray::ATTLOC_TEXCOORD);
+	program.bindAttributeLocation("a_tangent",StelOpenGLArray::ATTLOC_TANGENT);
+	program.bindAttributeLocation("a_bitangent",StelOpenGLArray::ATTLOC_BITANGENT);
 
 
 	//link program

@@ -1244,17 +1244,17 @@ void S3DRenderer::drawFromCubeMap()
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_DIFFUSE),0);
 	cubeVertexBuffer.bind();
 	if(cubemappingMode>=S3DEnum::CM_CUBEMAP)
-		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
+		cubeShader->setAttributeBuffer(StelOpenGLArray::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
 	else // 2D tex coords are stored in the same buffer, but with an offset
-		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
-	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
+		cubeShader->setAttributeBuffer(StelOpenGLArray::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
+	cubeShader->enableAttributeArray(StelOpenGLArray::ATTLOC_TEXCOORD);
 	cubeVertexBuffer.release();
 
 	//upload transformed vertex data
 	transformedCubeVertexBuffer.bind();
 	transformedCubeVertexBuffer.allocate(transformedCubeVertices.constData(), transformedCubeVertices.size() * sizeof(Vec3f));
-	cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_VERTEX, GL_FLOAT, 0,3);
-	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
+	cubeShader->setAttributeBuffer(StelOpenGLArray::ATTLOC_VERTEX, GL_FLOAT, 0,3);
+	cubeShader->enableAttributeArray(StelOpenGLArray::ATTLOC_VERTEX);
 	transformedCubeVertexBuffer.release();
 
 	glEnable(GL_BLEND);
@@ -1289,8 +1289,8 @@ void S3DRenderer::drawFromCubeMap()
 	}
 	cubeIndexBuffer.release();
 
-	cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
-	cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
+	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_TEXCOORD);
+	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_VERTEX);
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
