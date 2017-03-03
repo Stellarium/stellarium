@@ -132,10 +132,8 @@ void SimbadLookupReply::httpQueryFinished()
 				StelUtils::spheToRect(ra, dec, v);
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
-				line.replace("NAME " ,"");
-				line.replace("   ", " "); // Remove triple spaces
-				line.replace("  ", " ");  // Remove double spaces
-				resultPositions[line]=v;
+				line.replace("NAME " ,"");				
+				resultPositions[line.simplified()]=v; // Remove an extra spaces
 			}
 			line = reply->readLine();
 			line.chop(1); // Remove a line break at the end
