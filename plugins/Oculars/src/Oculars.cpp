@@ -134,6 +134,8 @@ Oculars::Oculars():
 	flagSupergalacticPoles(false),
 	flagEquinoxJ2000Points(false),
 	flagEquinoxPoints(false),
+	flagSolsticeJ2000Points(false),
+	flagSolsticePoints(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -2145,6 +2147,8 @@ void Oculars::unzoomOcular()
 		gridManager->setFlagSupergalacticPoles(flagSupergalacticPoles);
 		gridManager->setFlagEquinoxJ2000Points(flagEquinoxJ2000Points);
 		gridManager->setFlagEquinoxPoints(flagEquinoxPoints);
+		gridManager->setFlagSolsticeJ2000Points(flagSolsticeJ2000Points);
+		gridManager->setFlagSolsticePoints(flagSolsticePoints);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
 	}
@@ -2222,6 +2226,8 @@ void Oculars::zoom(bool zoomedIn)
 				flagSupergalacticPoles = gridManager->getFlagSupergalacticPoles();
 				flagEquinoxJ2000Points = gridManager->getFlagEquinoxJ2000Points();
 				flagEquinoxPoints = gridManager->getFlagEquinoxPoints();
+				flagSolsticeJ2000Points = gridManager->getFlagSolsticeJ2000Points();
+				flagSolsticePoints = gridManager->getFlagSolsticePoints();
 				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 			}
 
@@ -2293,6 +2299,8 @@ void Oculars::zoomOcular()
 		gridManager->setFlagSupergalacticPoles(false);
 		gridManager->setFlagEquinoxJ2000Points(false);
 		gridManager->setFlagEquinoxPoints(false);
+		gridManager->setFlagSolsticeJ2000Points(false);
+		gridManager->setFlagSolsticePoints(false);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
 	}
