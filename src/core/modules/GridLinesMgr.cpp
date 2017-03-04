@@ -76,7 +76,9 @@ public:
 		GALACTICPOLES,
 		SUPERGALACTICPOLES,
 		EQUINOXES_J2000,
-		EQUINOXES_OF_DATE
+		EQUINOXES_OF_DATE,
+		SOLSTICES_J2000,
+		SOLSTICES_OF_DATE
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLES_J2000);
@@ -950,6 +952,20 @@ void SkyPoint::updateLabel()
 			southernLabel = QChar(0x264E); // Autumnal equinox
 			break;
 		}
+		case SOLSTICES_J2000:
+		{
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			northernLabel = QChar(0x264B); // Summer solstice
+			southernLabel = QChar(0x2651); // Winter solstice
+			break;
+		}
+		case SOLSTICES_OF_DATE:
+		{
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			northernLabel = QChar(0x264B); // Summer solstice
+			southernLabel = QChar(0x2651); // Winter solstice
+			break;
+		}
 		default:
 			Q_ASSERT(0);
 	}
@@ -1009,6 +1025,18 @@ void SkyPoint::draw(StelCore *core) const
 			sPainter.drawText(Vec3d(-1,0,0), southernLabel, 0, shift, shift, false);
 			break;
 		}
+		case SOLSTICES_J2000:
+		case SOLSTICES_OF_DATE:
+		{
+			// Summer solstice
+			sPainter.drawSprite2dMode(Vec3d(0,1,0), 5.f);
+			sPainter.drawText(Vec3d(0,1,0), northernLabel, 0, shift, shift, false);
+
+			// Winter solstice
+			sPainter.drawSprite2dMode(Vec3d(0,-1,0), 5.f);
+			sPainter.drawText(Vec3d(0,-1,0), southernLabel, 0, shift, shift, false);
+			break;
+		}
 		default:
 			Q_ASSERT(0);
 	}
@@ -1050,6 +1078,8 @@ GridLinesMgr::GridLinesMgr()
 	supergalacticPoles = new SkyPoint(SkyPoint::SUPERGALACTICPOLES);
 	equinoxJ2000Points = new SkyPoint(SkyPoint::EQUINOXES_J2000);
 	equinoxPoints = new SkyPoint(SkyPoint::EQUINOXES_OF_DATE);
+	solsticeJ2000Points = new SkyPoint(SkyPoint::SOLSTICES_J2000);
+	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -1086,6 +1116,8 @@ GridLinesMgr::~GridLinesMgr()
 	delete supergalacticPoles;
 	delete equinoxJ2000Points;
 	delete equinoxPoints;
+	delete solsticeJ2000Points;
+	delete solsticePoints;
 }
 
 /*************************************************************************
@@ -1132,6 +1164,8 @@ void GridLinesMgr::init()
 	setFlagSupergalacticPoles(conf->value("viewing/flag_supergalactic_poles").toBool());
 	setFlagEquinoxJ2000Points(conf->value("viewing/flag_equinox_J2000_points").toBool());
 	setFlagEquinoxPoints(conf->value("viewing/flag_equinox_points").toBool());
+	setFlagSolsticeJ2000Points(conf->value("viewing/flag_solstice_J2000_points").toBool());
+	setFlagSolsticePoints(conf->value("viewing/flag_solstice_points").toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -1164,6 +1198,8 @@ void GridLinesMgr::init()
 	setColorSupergalacticPoles(StelUtils::strToVec3f(conf->value("color/supergalactic_poles_color", defaultColor).toString()));
 	setColorEquinoxJ2000Points(StelUtils::strToVec3f(conf->value("color/equinox_J2000_points_color", defaultColor).toString()));
 	setColorEquinoxPoints(StelUtils::strToVec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
+	setColorSolsticeJ2000Points(StelUtils::strToVec3f(conf->value("color/solstice_J2000_points_color", defaultColor).toString()));
+	setColorSolsticePoints(StelUtils::strToVec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
@@ -1198,6 +1234,8 @@ void GridLinesMgr::init()
 	addAction("actionShow_Supergalactic_Poles", displayGroup, N_("Supergalactic poles"), "supergalacticPolesDisplayed");
 	addAction("actionShow_Equinox_J2000_Points", displayGroup, N_("Equinox J2000 points"), "equinoxJ2000PointsDisplayed");
 	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
+	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
+	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -1235,6 +1273,8 @@ void GridLinesMgr::update(double deltaTime)
 	supergalacticPoles->update(deltaTime);
 	equinoxJ2000Points->update(deltaTime);
 	equinoxPoints->update(deltaTime);
+	solsticeJ2000Points->update(deltaTime);
+	solsticePoints->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -1279,6 +1319,8 @@ void GridLinesMgr::draw(StelCore* core)
 	supergalacticPoles->draw(core);
 	equinoxJ2000Points->draw(core);
 	equinoxPoints->draw(core);
+	solsticeJ2000Points->draw(core);
+	solsticePoints->draw(core);
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -1308,6 +1350,8 @@ void GridLinesMgr::updateLineLabels()
 	supergalacticPoles->updateLabel();
 	equinoxJ2000Points->updateLabel();
 	equinoxPoints->updateLabel();
+	solsticeJ2000Points->updateLabel();
+	solsticePoints->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -2058,5 +2102,59 @@ void GridLinesMgr::setColorEquinoxPoints(const Vec3f& newColor)
 	if(newColor != equinoxPoints->getColor()) {
 		equinoxPoints->setColor(newColor);
 		emit equinoxPointsColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying solstice points of J2000
+void GridLinesMgr::setFlagSolsticeJ2000Points(const bool displayed)
+{
+	if(displayed != solsticeJ2000Points->isDisplayed()) {
+		solsticeJ2000Points->setDisplayed(displayed);
+		emit solsticeJ2000PointsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying solstice points of J2000
+bool GridLinesMgr::getFlagSolsticeJ2000Points(void) const
+{
+	return solsticeJ2000Points->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorSolsticeJ2000Points(void) const
+{
+	return solsticeJ2000Points->getColor();
+}
+
+void GridLinesMgr::setColorSolsticeJ2000Points(const Vec3f& newColor)
+{
+	if(newColor != solsticeJ2000Points->getColor()) {
+		solsticeJ2000Points->setColor(newColor);
+		emit solsticeJ2000PointsColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying solstice points
+void GridLinesMgr::setFlagSolsticePoints(const bool displayed)
+{
+	if(displayed != solsticePoints->isDisplayed()) {
+		solsticePoints->setDisplayed(displayed);
+		emit solsticePointsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying solstice points
+bool GridLinesMgr::getFlagSolsticePoints(void) const
+{
+	return solsticePoints->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorSolsticePoints(void) const
+{
+	return solsticePoints->getColor();
+}
+
+void GridLinesMgr::setColorSolsticePoints(const Vec3f& newColor)
+{
+	if(newColor != solsticePoints->getColor()) {
+		solsticePoints->setColor(newColor);
+		emit solsticePointsColorChanged(newColor);
 	}
 }
