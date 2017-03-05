@@ -24,6 +24,8 @@
 #include <QVariant>
 #include <QStringList>
 #include "StelObject.hpp"
+#include "StelCore.hpp"
+
 class QScriptEngine;
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
@@ -420,7 +422,7 @@ public slots:
 	void setViewportOffset(const float x, const float y);
 
 	//! Set a lateral width distortion. Use this e.g. in startup.ssc.
-	//! Implemented for 0.15 for a setup with 5 beamers with edge blending. The 9600x1200 get squeezed somewhat which looks a bit odd. Use this stretch to compensate.
+	//! Implemented for 0.15 for a setup with 5 projectors with edge blending. The 9600x1200 get squeezed somewhat which looks a bit odd. Use this stretch to compensate.
 	//! Experimental! To avoid overuse, there is currently no config.ini setting available.
 	//! @note Currently only the projected content is affected. ScreenImage, ScreenLabel is not stretched.
 	void setViewportStretch(const float stretch);
@@ -454,67 +456,72 @@ public slots:
 	//! @param b if true, turn on gravity labels, else turn them off
 	void setFlagGravityLabels(bool b);
 
-	//! Load an image which will have sky coordinates.
-	//! @param id a string ID to be used when referring to this
-	//! image (e.g. when changing the displayed status or deleting
-	//! it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
-	//! image is searched for using StelFileMgr.
-	//! @param ra0 The right ascension of the first corner of the image in degrees (J2000.0)
-	//! @param dec0 The declination of the first corner of the image in degrees (J2000.0)
-	//! @param ra1 The right ascension of the second corner of the image in degrees (J2000.0)
-	//! @param dec1 The declination of the second corner of the image in degrees (J2000.0)
-	//! @param ra2 The right ascension of the third corner of the image in degrees (J2000.0)
-	//! @param dec2 The declination of the third corner of the image in degrees (J2000.0)
-	//! @param ra3 The right ascension of the fourth corner of the image in degrees (J2000.0)
-	//! @param dec3 The declination of the fourth corner of the image in degrees (J2000.0)
-	//! @param minRes The minimum resolution setting for the image
-	//! @param maxBright The maximum brightness setting for the image
-	//! @param visible The initial visibility of the image
-	void loadSkyImage(const QString& id, const QString& filename,
-					  double ra0, double dec0,
-					  double ra1, double dec1,
-					  double ra2, double dec2,
-					  double ra3, double dec3,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
-
-
-	//! Convenience function which allows the user to provide RA and DEC angles
-	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by
-	//! StelUtils::getDecAngle()).
-	void loadSkyImage(const QString& id, const QString& filename,
-					  const QString& ra0, const QString& dec0,
-					  const QString& ra1, const QString& dec1,
-					  const QString& ra2, const QString& dec2,
-					  const QString& ra3, const QString& dec3,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
-
-	//! Convenience function which allows loading of a sky image based on a
-	//! central coordinate, angular size and rotation.
+	//! Load an image into the sky background at the given sky coordinates and be warped with the sky.
+	//! The image is projected like a deep-sky object, with a notion for surface magnitude of the brightest parts.
+	//! Transparent sections in the image are possibly rendered white, so make your image just RGB with black background.
+	//! The black background covers the milky way, but is brightened by the Zodiacal light.
+	//! @todo allow alpha in images?
 	//! @param id a string ID to be used when referring to this
 	//! image (e.g. when changing the displayed status or deleting it.
 	//! @param filename the file name of the image.  If a relative
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
-	//! @param ra The right ascension of the center of the image in J2000 frame degrees
-	//! @param dec The declination of the center of the image in J2000 frame degrees
-	//! @param angSize The angular size of the image in arc minutes
-	//! @param rotation The clockwise rotation angle of the image in degrees
+	//! @param lon0 The right ascension/longitude/azimuth of the first corner of the image in degrees (bottom left)
+	//! @param lat0 The declination/latitude/altitude of the first corner of the image in degrees (bottom left)
+	//! @param lon1 The right ascension/longitude/azimuth of the second corner of the image in degrees (bottom right)
+	//! @param lat1 The declination/latitude/altitude of the second corner of the image in degrees (bottom right)
+	//! @param lon2 The right ascension/longitude/azimuth of the third corner of the image in degrees (top right)
+	//! @param lat2 The declination/latitude/altitude of the third corner of the image in degrees (top right)
+	//! @param lon3 The right ascension/longitude/azimuth of the fourth corner of the image in degrees (top left)
+	//! @param lat3 The declination/latitude/altitude of the fourth corner of the image in degrees (top left)
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
+	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
+	//! @note since 2017-02, you can select Frame now.
 	void loadSkyImage(const QString& id, const QString& filename,
-					  double ra, double dec, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
+					  double lon0, double lat0,
+					  double lon1, double lat1,
+					  double lon2, double lat2,
+					  double lon3, double lat3,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString &frame="EqJ2000");
 
-	//! Convenience function which allows loading of a sky image based on a
+
+	//! Convenience function which allows the user to provide longitudinal and latitudinal angles (RA/Dec or Long/Lat or Az/Alt)
+	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by StelUtils::getDecAngle()).
+	void loadSkyImage(const QString& id, const QString& filename,
+					  const QString& lon0, const QString& lat0,
+					  const QString& lon1, const QString& lat1,
+					  const QString& lon2, const QString& lat2,
+					  const QString& lon3, const QString& lat3,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+
+	//! Convenience function which allows loading of a (square) sky image based on a
+	//! central coordinate, angular size and rotation. Note that the edges will not be aligned with edges at center plus/minus size!
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting it.
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param lon The right ascension/longitude/azimuth of the center of the image in frame degrees
+	//! @param lat The declination/latitude/altitude of the center of the image in frame degrees
+	//! @param angSize The angular size of the image in arc minutes
+	//! @param rotation The clockwise rotation angle of the image in degrees. Use 0 for an image with top=north. (New from 2017 -- This used to be 90!)
+	//! @param minRes The minimum resolution setting for the image. UNCLEAR, using 2.5 seems to work well.
+	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
+	//! @param visible The initial visibility of the image
+	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
+	void loadSkyImage(const QString& id, const QString& filename,
+					  double lon, double lat, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+
+	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation.  Parameters are the same
 	//! as the version of this function which takes double values for the
-	//! ra and dec, except here text expressions of angles may be used.
+	//! lon and lat, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
-					  const QString& ra, const QString& dec, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
+					  const QString& lon, const QString& lat, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
 
 	//! Load an image which will have a sky location given in alt-azimuthal coordinates.
 	//! @param id a string ID to be used when referring to this
@@ -534,6 +541,7 @@ public slots:
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
+	//! @deprecated since 2017-02 because of inconsistent name. Use loadSkyImage(,,,, "AzAlt") instead!
 	void loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double azi0, double alt0,
 					  double azi1, double alt1,
@@ -555,6 +563,7 @@ public slots:
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
+	//! @deprecated since 2017-03. Use loadSkyImage(,,,, "AzAlt") instead!
 	void loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double alt, double azi, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
@@ -803,7 +812,7 @@ public slots:
 	//! @returns Julian day.
 	double jdFromDateString(const QString& dt, const QString& spec);
 
-	// Methods wait() and waitFor() was added for documentation.
+	// Methods wait() and waitFor() were added for documentation.
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
 	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
@@ -822,19 +831,21 @@ public slots:
 
 
 signals:
+
 	void requestLoadSkyImage(const QString& id, const QString& filename,
 							 double c1, double c2,
 							 double c3, double c4,
 							 double c5, double c6,
 							 double c7, double c8,
-							 double minRes, double maxBright, bool visible);
+							 double minRes, double maxBright, bool visible, const StelCore::FrameType frameType);
+	//! @deprecated! USE requestLoadSkyImage() with frameType=AzAlt!
+	//! @todo: Remove with V0.16.0
 	void requestLoadSkyImageAltAz(const QString& id, const QString& filename,
 							 double c1, double c2,
 							 double c3, double c4,
 							 double c5, double c6,
 							 double c7, double c8,
 							 double minRes, double maxBright, bool visible);
-
 
 	void requestRemoveSkyImage(const QString& id);
 
