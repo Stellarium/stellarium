@@ -71,8 +71,12 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 	{
-		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), smgr, SLOT(loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
-		connect(this, SIGNAL(requestLoadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)), smgr, SLOT(loadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
+		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)),
+			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)));
+		// The next is deprecated and should be removed in V0.16.
+		connect(this, SIGNAL(requestLoadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)),
+			smgr, SLOT(         loadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
+
 		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyLayer(const QString&)));
 	}
 
@@ -418,44 +422,64 @@ void StelMainScriptAPI::setViewportStretch(const float stretch)
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-				     double ra0, double dec0,
-				     double ra1, double dec1,
-				     double ra2, double dec2,
-				     double ra3, double dec3,
-				     double minRes, double maxBright, bool visible)
+				     double lon0, double lat0,
+				     double lon1, double lat1,
+				     double lon2, double lat2,
+				     double lon3, double lat3,
+				     double minRes, double maxBright, bool visible, const QString &frame)
 {
 	QString path = "scripts/" + filename;
-	emit(requestLoadSkyImage(id, path, ra0, dec0, ra1, dec1, ra2, dec2, ra3, dec3, minRes, maxBright, visible));
+	StelCore::FrameType frameType=StelCore::FrameJ2000;
+	if (frame=="EqDate")
+		frameType=StelCore::FrameEquinoxEqu;
+	else if (frame=="EclJ2000")
+		frameType=StelCore::FrameObservercentricEclipticJ2000;
+	else if (frame=="EclDate")
+		frameType=StelCore::FrameObservercentricEclipticOfDate;
+	else if (frame.startsWith("Gal"))
+		frameType=StelCore::FrameGalactic;
+	else if (frame.startsWith("SuperG"))
+		frameType=StelCore::FrameSupergalactic;
+	else if (frame=="AzAlt")
+		frameType=StelCore::FrameAltAz;
+	else if (frame!="EqJ2000")
+	{
+		qDebug() << "StelMainScriptAPI::loadSkyImage(): unknown frame type " << frame << " requested -- Using Equatorial J2000";
+	}
+
+	emit(requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType));
 }
 
+// Convenience method:
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-				     const QString& ra0, const QString& dec0,
-				     const QString& ra1, const QString& dec1,
-				     const QString& ra2, const QString& dec2,
-				     const QString& ra3, const QString& dec3,
-				     double minRes, double maxBright, bool visible)
+				     const QString& lon0, const QString& lat0,
+				     const QString& lon1, const QString& lat1,
+				     const QString& lon2, const QString& lat2,
+				     const QString& lon3, const QString& lat3,
+				     double minRes, double maxBright, bool visible, const QString& frame)
 {
 	loadSkyImage(id, filename,
-		     StelUtils::getDecAngle(ra0) *180./M_PI, StelUtils::getDecAngle(dec0)*180./M_PI,
-		     StelUtils::getDecAngle(ra1) *180./M_PI, StelUtils::getDecAngle(dec1)*180./M_PI,
-		     StelUtils::getDecAngle(ra2) *180./M_PI, StelUtils::getDecAngle(dec2)*180./M_PI,
-		     StelUtils::getDecAngle(ra3) *180./M_PI, StelUtils::getDecAngle(dec3)*180./M_PI,
-		     minRes, maxBright, visible);
+		     StelUtils::getDecAngle(lon0) *180./M_PI, StelUtils::getDecAngle(lat0)*180./M_PI,
+		     StelUtils::getDecAngle(lon1) *180./M_PI, StelUtils::getDecAngle(lat1)*180./M_PI,
+		     StelUtils::getDecAngle(lon2) *180./M_PI, StelUtils::getDecAngle(lat2)*180./M_PI,
+		     StelUtils::getDecAngle(lon3) *180./M_PI, StelUtils::getDecAngle(lat3)*180./M_PI,
+		     minRes, maxBright, visible, frame);
 }
 
+// Convenience method: (Fixed 2017-03: rotation increased by 90deg, makes upright images now!)
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-				     double ra, double dec, double angSize, double rotation,
-				     double minRes, double maxBright, bool visible)
+				     double lon, double lat, double angSize, double rotation,
+				     double minRes, double maxBright, bool visible, const QString &frame)
 {
 	Vec3f XYZ;
-	static const float RADIUS_NEB = 1.;
-	StelUtils::spheToRect(ra*M_PI/180., dec*M_PI/180., XYZ);
+	static const float RADIUS_NEB = 1.f;
+	StelUtils::spheToRect(lon*M_PI/180., lat*M_PI/180., XYZ);
 	XYZ*=RADIUS_NEB;
-	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
+	float texSize = RADIUS_NEB * sin(angSize/2./60.*M_PI/180.);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-			   Mat4f::zrotation(ra*M_PI/180.) *
-			   Mat4f::yrotation(-dec*M_PI/180.) *
-			   Mat4f::xrotation(rotation*M_PI/180.);
+			   Mat4f::zrotation(lon*M_PI/180.) *
+			   Mat4f::yrotation(-lat*M_PI/180.) *
+			   Mat4f::xrotation((rotation+90.0)*M_PI/180.);
 
 	Vec3f corners[4];
 	corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
@@ -473,21 +497,22 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		     cornersRaDec[1][0]*180./M_PI, cornersRaDec[1][1]*180./M_PI,
 		     cornersRaDec[3][0]*180./M_PI, cornersRaDec[3][1]*180./M_PI,
 		     cornersRaDec[2][0]*180./M_PI, cornersRaDec[2][1]*180./M_PI,
-		     minRes, maxBright, visible);
+		     minRes, maxBright, visible, frame);
 }
 
 
-
+// Convenience method:
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-				     const QString& ra, const QString& dec,
+				     const QString& lon, const QString& lat,
 				     double angSize, double rotation,
-				     double minRes, double maxBright, bool visible)
+				     double minRes, double maxBright, bool visible, const QString &frame)
 {
-	loadSkyImage(id, filename, StelUtils::getDecAngle(ra)*180./M_PI,
-		     StelUtils::getDecAngle(dec)*180./M_PI, angSize,
-		     rotation, minRes, maxBright, visible);
+	loadSkyImage(id, filename, StelUtils::getDecAngle(lon)*180./M_PI,
+		     StelUtils::getDecAngle(lat)*180./M_PI, angSize,
+		     rotation, minRes, maxBright, visible, frame);
 }
 
+// DEPRECATED with old name
 void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double azi0, double alt0,
 					  double azi1, double alt1,
@@ -495,21 +520,25 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 					  double azi3, double alt3,
 					  double minRes, double maxBright, bool visible)
 {
+	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImageAzAlt()";
 	QString path = "scripts/" + filename;
 	emit(requestLoadSkyImageAltAz(id, path, alt0, azi0, alt1, azi1, alt2, azi2, alt3, azi3, minRes, maxBright, visible));
 }
 
+// DEPRECATED with old argument order and name.
 void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double alt, double azi,
 					  double angSize, double rotation,
 					  double minRes, double maxBright, bool visible)
 {
-	Vec3f XYZ;
-	static const float RADIUS_NEB = 1.;
+	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImageAzAlt()";
 
-	StelUtils::spheToRect((180-azi)*M_PI/180., alt*M_PI/180., XYZ);
+	Vec3f XYZ;
+	static const float RADIUS_NEB = 1.0f;
+
+	StelUtils::spheToRect((180.0-azi)*M_PI/180., alt*M_PI/180., XYZ);
 	XYZ*=RADIUS_NEB;
-	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
+	float texSize = RADIUS_NEB * sin(angSize/2.0f/60.0f*M_PI/180.0f);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
 			   Mat4f::zrotation((180.-azi)*M_PI/180.) *
 			   Mat4f::yrotation(-alt*M_PI/180.) *
