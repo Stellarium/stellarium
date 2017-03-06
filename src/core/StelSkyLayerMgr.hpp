@@ -102,7 +102,6 @@ public slots:
 	//! @param frameType Coordinate frame type
 	//! @note Last argument has been added 2017-02. Use loadSkyImage(... , StelCore::FrameJ2000) for the previous behaviour!
 	//! @note For frameType=AzAlt, azimuth currently is counted from South towards East.
-	//! @bug AltAz images sometimes are attenuated by refraction of some other location. Very odd.
 	//! @bug Some image are not visible close to screen center, only when in the corners.
 	bool loadSkyImage(const QString& id, const QString& filename,
 					  double long0, double lat0,
