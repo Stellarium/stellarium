@@ -815,7 +815,7 @@ private:
 	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
 	SkyGrid * aziGrid;			// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
-	SkyLine * equatorJ2000Line;		// Celestial Equator of J2000 line
+	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * eclipticLine;			// Ecliptic line
 	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
 	SkyLine * precessionCircleN;		// Northern precession circle
