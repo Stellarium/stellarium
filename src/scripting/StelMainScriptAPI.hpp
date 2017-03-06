@@ -478,7 +478,8 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-02, you can select Frame now.
+	//! @note since 2017-03, you can select Frame now.
+	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon0, double lat0,
 					  double lon1, double lat1,
@@ -511,6 +512,8 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
+	//! @note since 2017-03, you can select Frame now.
+	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon, double lat, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
