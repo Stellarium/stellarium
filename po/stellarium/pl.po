@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-05 03:15+0700\n"
-"PO-Revision-Date: 2017-03-03 02:56+0000\n"
+"PO-Revision-Date: 2017-03-06 02:25+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-05 05:44+0000\n"
-"X-Generator: Launchpad (build 18329)\n"
+"X-Launchpad-Export-Date: 2017-03-07 05:30+0000\n"
+"X-Generator: Launchpad (build 18330)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -329,11 +329,11 @@ msgstr "Punkty równonocy"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Solstice J2000 points"
-msgstr ""
+msgstr "Punkty J2000 przesilenia"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Solstice points"
-msgstr ""
+msgstr "Punkty przesilenia"
 
 #: src/core/modules/LandscapeMgr.cpp:416 src/ui_viewDialog.h:1976
 msgid "Atmosphere"
@@ -2694,11 +2694,11 @@ msgstr "Strefa czasowa"
 
 #: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:405
 msgid "Local Mean Solar Time"
-msgstr ""
+msgstr "Lokalny Średni Czas Słoneczny"
 
 #: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:406
 msgid "Local True Solar Time"
-msgstr ""
+msgstr "Lokalny Rzeczywisty Czas Słoneczny"
 
 #: src/gui/StelGuiItems.cpp:677
 #, c-format, qt-format
@@ -3059,7 +3059,7 @@ msgstr "rok"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "Secular acceleration of the Moon"
-msgstr ""
+msgstr "Odwieczne przyspieszenie Księżyca"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:196 src/ui_configurationDialog.h:1290
@@ -6292,19 +6292,19 @@ msgstr "Równonoce (na dzień)"
 
 #: src/ui_viewDialog.h:2299
 msgid "Solstices (J2000)"
-msgstr ""
+msgstr "Przesilenia (J2000)"
 
 #: src/ui_viewDialog.h:2301
 msgid "Color of the solstice points (J2000.0)"
-msgstr ""
+msgstr "Kolory punktów przesilenia (J2000.0)"
 
 #: src/ui_viewDialog.h:2304
 msgid "Solstices (of date)"
-msgstr ""
+msgstr "Przesilenia (na dzień)"
 
 #: src/ui_viewDialog.h:2306
 msgid "Color of the solstice points (of date)"
-msgstr ""
+msgstr "Kolory punktów przesilenia (na dzień)"
 
 #: src/ui_viewDialog.h:2309
 msgid "Projection"
@@ -8387,7 +8387,7 @@ msgstr "Wtyczka Okulary"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Barlow lens feature"
-msgstr ""
+msgstr "Użycie soczewki Barlowa"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid "Overview"
@@ -8519,7 +8519,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Restore direction to initial values"
-msgstr ""
+msgstr "Przywróć początkowe wartości kierunku"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1169
 msgid "Enable only if an object is selected"
@@ -8562,7 +8562,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
 msgid "Enable automatic switch of mount type"
-msgstr ""
+msgstr "Włącz automatyczne przełączanie rodzaju montażu"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1186
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
@@ -8936,7 +8936,7 @@ msgstr "Kąt odbicia słońca: %1%2"
 #: plugins/Satellites/src/Satellite.cpp:344
 #, qt-format
 msgid "Operational status: %1"
-msgstr ""
+msgstr "Stan działania: %1"
 
 #: plugins/Satellites/src/Satellite.cpp:351
 msgid "The satellite and the observer are in sunlight."
@@ -8963,42 +8963,42 @@ msgstr "%1 MHz (%2%3 kHz)"
 #: plugins/Satellites/src/Satellite.cpp:628
 msgctxt "operational status"
 msgid "unknown"
-msgstr ""
+msgstr "nieznany"
 
 #: plugins/Satellites/src/Satellite.cpp:607
 msgctxt "operational status"
 msgid "operational"
-msgstr ""
+msgstr "działający"
 
 #: plugins/Satellites/src/Satellite.cpp:610
 msgctxt "operational status"
 msgid "nonoperational"
-msgstr ""
+msgstr "niedziałający"
 
 #: plugins/Satellites/src/Satellite.cpp:613
 msgctxt "operational status"
 msgid "partially operational"
-msgstr ""
+msgstr "częściowo działający"
 
 #: plugins/Satellites/src/Satellite.cpp:616
 msgctxt "operational status"
 msgid "standby"
-msgstr ""
+msgstr "czuwający"
 
 #: plugins/Satellites/src/Satellite.cpp:619
 msgctxt "operational status"
 msgid "spare"
-msgstr ""
+msgstr "zapasowy"
 
 #: plugins/Satellites/src/Satellite.cpp:622
 msgctxt "operational status"
 msgid "extended mission"
-msgstr ""
+msgstr "przedłużona misja"
 
 #: plugins/Satellites/src/Satellite.cpp:625
 msgctxt "operational status"
 msgid "decayed"
-msgstr ""
+msgstr "niszczejący"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Stellarium Satellites Plugin"
@@ -9625,16 +9625,20 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
+"klasy Telescope, TelescopeDummy, TelescopeTcp i TelescopeMgr w kodzie "
+"Stellarium (strona klienta oryginalnej funkcji sterowania teleskopem w "
+"programie Stellarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr ""
+msgstr "podstawowy kod serwera teleskopu (na licencji LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr ""
+"podstawowy kod serwera TelescopeServerLx200 (oryginalnie na licencji LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
@@ -9642,12 +9646,18 @@ msgid ""
 "server, along with the Stellarium telescope control network protocol (over "
 "TCP/IP), is <b>Johannes Gajdosik</b>."
 msgstr ""
+"Autorem wszystkich powyższych - klienta, podstawowego kodu serwera, serwera "
+"LX200, łącznie z protokołem sieciowym do sterowania teleskopem w programie "
+"Stellarium (poprzez TCP/IP) - jest <b>Johannes Gajdosik</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
 msgstr ""
+"podstawowy kod serwera teleskopu TelescopeServerNexStar (oryginalnie na "
+"licencji LGPL, oparty na TelescopeServerLx200), autorstwa <b>Michaela "
+"Heinza</b>."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
@@ -9888,12 +9898,18 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"W systemach Linux i Mac OS X obydwie sytuacje są obsługiwane w taki sam "
+"sposób przez wtyczkę. W systemie Windows połączenie USB może wymagać "
+"oprogramowania do obsługi 'wirtualnego portu szeregowego', o ile nie jest "
+"ono dostarczone razem z kablem lub teleskopem."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr ""
+"Takie oprogramowanie tworzy wirtualny ('udawany') port COM, który odpowiada "
+"rzeczywistemu portowi USB, dzięki czemu może być używany przez wtyczkę."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
@@ -9901,12 +9917,19 @@ msgid ""
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr ""
+"Na wszystkich trzech platformach, jeżeli komputer nie ma 'klasycznych' "
+"portów szeregowych, a teleskop może łączyć się wyłącznie z portem "
+"szeregowym, wówczas konieczne może być użycie adaptera 'serial-to-USB' ('RS-"
+"232-to-USB')."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
+"Ustawienie teleskopu (wybranie współrzędnych geograficznych, wyregulowanie "
+"położenia) powinno zostać przeprowadzone przed podłączeniem teleskopu w "
+"programie Stellarium."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid "The plug-in's main window can be opened:"
