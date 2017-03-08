@@ -33,6 +33,7 @@
 	2014-01: GZ: Parabolic tails appropriately scaled/rotated. Much is currently empirical, leaving room for physics-based improvements.
 	2014-08: GZ: speedup in case hundreds of comets are loaded.
 	2014-11: GZ: tail extinction, better brightness balance.
+	2017-03: GZ: added fields to infoMap
   */
 class Comet : public Planet
 {
@@ -72,6 +73,7 @@ public:
 	//! \param flags a set of InfoStringGroup items to include in the return value.
 	//! \return a QString containing an HMTL encoded description of the Comet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	//The Comet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.
 	//virtual QString getType() const {return "Comet";}

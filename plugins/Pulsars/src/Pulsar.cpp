@@ -111,7 +111,7 @@ Pulsar::~Pulsar()
 	//
 }
 
-QVariantMap Pulsar::getMap(void)
+QVariantMap Pulsar::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -266,6 +266,14 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QVariantMap Pulsar::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map.unite(getMap());
+	return map;
 }
 
 Vec3f Pulsar::getInfoColor(void) const

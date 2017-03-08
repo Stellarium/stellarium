@@ -166,7 +166,7 @@ Exoplanet::~Exoplanet()
 	//
 }
 
-QVariantMap Exoplanet::getMap(void)
+QVariantMap Exoplanet::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -465,6 +465,14 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map.unite(getMap());
+	return map;
 }
 
 QString Exoplanet::getPlanetaryClassI18n(QString ptype) const

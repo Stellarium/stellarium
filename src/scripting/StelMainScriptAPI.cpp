@@ -860,6 +860,8 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	return StelMainScriptAPI::getObjectInfo(obj);
 }
 
+
+// TODO: DEPRECATED - GET RID OF IT!
 QVariantMap StelMainScriptAPI::getObjectInfo(const StelObjectP obj)
 {
 	QVariantMap map;
@@ -867,127 +869,12 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const StelObjectP obj)
 	{
 		debug("getObjectData WARNING - object not found");
 		map.insert("found", false);
-		return map;
 	}
 	else
 	{
+		map=obj->getInfoMap(StelApp::getInstance().getCore());
 		map.insert("found", true);
 	}
-
-	// OK, object found. Let's go.
-	Vec3d pos;
-	double ra, dec, alt, az, glong, glat;
-	StelCore* core = StelApp::getInstance().getCore();
-	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-
-	// ra/dec
-	pos = obj->getEquinoxEquatorialPos(core);
-	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);	
-
-	// ra/dec in J2000
-	pos = obj->getJ2000EquatorialPos(core);
-	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);	
-
-	// apparent altitude/azimuth
-	pos = obj->getAltAzPosApparent(core);
-	StelUtils::rectToSphe(&az, &alt, pos);
-	float direction = 3.; // N is zero, E is 90 degrees
-	if (useOldAzimuth)
-		direction = 2.;
-	az = direction*M_PI - az;
-	if (az > M_PI*2)
-		az -= M_PI*2;
-
-	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);	
-
-	// geometric altitude/azimuth
-	pos = obj->getAltAzPosGeometric(core);
-	StelUtils::rectToSphe(&az, &alt, pos);
-	az = direction*M_PI - az;
-	if (az > M_PI*2)
-		az -= M_PI*2;
-
-	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);	
-
-	// galactic long/lat
-	pos = obj->getGalacticPos(core);
-	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);
-
-	// supergalactic long/lat
-	pos = obj->getSupergalacticPos(core);
-	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("sglong", glong*180./M_PI);
-	map.insert("sglat", glat*180./M_PI);
-
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	double ra_equ, dec_equ, lambda, beta;
-	// J2000
-	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
-	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
-
-	// ecliptic longitude/latitude (J2000 frame)
-	StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
-	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
-	if (lambda<0) lambda+=2.0*M_PI;
-	map.insert("elongJ2000", lambda*180./M_PI);
-	map.insert("elatJ2000", beta*180./M_PI);
-
-	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
-	{
-		// ecliptic longitude/latitude
-		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		map.insert("elong", lambda*180./M_PI);
-		map.insert("elat", beta*180./M_PI);
-	}
-
-	// magnitude
-	map.insert("vmag", obj->getVMagnitude(core));
-	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
-
-	// angular size
-	double angularSize = 2.*obj->getAngularSize(core)*M_PI/180.;
-	bool sign;
-	double deg;
-	StelUtils::radToDecDeg(angularSize, sign, deg);
-	if (!sign)
-		deg *= -1;
-	map.insert("size", angularSize);
-	map.insert("size-dd", deg);
-	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
-	map.insert("size-dms", StelUtils::radToDmsStr(angularSize, true));
-
-	if (obj->getType().toLower()=="planet" && obj->getEnglishName()!="Sun")
-	{
-		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-		map.insert("distance", obj->getJ2000EquatorialPos(core).length());
-		double phase = ssmgr->getPhaseForPlanet(obj->getEnglishName());
-		map.insert("phase", phase);
-		map.insert("illumination", 100.*phase);
-		double phaseAngle = ssmgr->getPhaseAngleForPlanet(obj->getEnglishName());
-		map.insert("phase-angle", phaseAngle);
-		map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
-		map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
-		double elongation = ssmgr->getElongationForPlanet(obj->getEnglishName());
-		map.insert("elongation", elongation);
-		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
-		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
-		map.insert("ptype", ssmgr->getPlanetType(obj->getEnglishName()));
-	}
-
-	// english name or designation & localized name
-	map.insert("name", obj->getEnglishName());
-	map.insert("localized-name", obj->getNameI18n());
-
 	return map;
 }
 
