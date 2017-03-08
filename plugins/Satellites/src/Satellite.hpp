@@ -133,7 +133,26 @@ public:
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
 	//! - Extra: range, range rate and altitude of satellite above the Earth, comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	//! Return a map like StelObject, but with a few extra tags also available in getInfoString().
+	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getInfoString().
+	//! - description
+	//! - catalog
+	//! - international-designator
+	//! - type
+	//! - range (distance in km)
+	//! - rangerate (distance change in km/s)
+	//! - height (height in km)
+	//! - subpoint-lat (latitude of subpoint, decimal degrees)
+	//! - subpoint-long (longitude of subpoint, decimal degrees)
+	//! - TEME-km-X
+	//! - TEME-km-Y
+	//! - TEME-km-Z
+	//! - TEME-speed-X
+	//! - TEME-speed-Y
+	//! - TEME-speed-Z
+	//! - sun-reflection-angle (if available)
+	//! - operational-status
+	//! - visibility (descriptive string)
+	//! - comm (Radio information, optional, if available. There may be several comm entries!)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;

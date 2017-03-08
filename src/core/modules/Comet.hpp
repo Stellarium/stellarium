@@ -73,6 +73,10 @@ public:
 	//! \param flags a set of InfoStringGroup items to include in the return value.
 	//! \return a QString containing an HMTL encoded description of the Comet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
+	//! In addition to Planet::getInfoMap(), Comets provides estimates for
+	//! - tail-length-km
+	//! - coma-diameter-km
+	//! using the formula from Guide found by the GSoC2012 initiative at http://www.projectpluto.com/update7b.htm#comet_tail_formula
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	//The Comet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.

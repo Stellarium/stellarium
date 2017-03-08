@@ -400,33 +400,33 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	QVariantMap map = StelObject::getInfoMap(core);
 
 	map.insert("description", q_(description).replace("\n", " - "));
-	map.insert("Catalog", id);
+	map.insert("catalog", id);
 	if (!internationalDesignator.isEmpty())
-		map.insert("InternationalDesignator", internationalDesignator);
-	map.insert("type", "artificial satellite");
+		map.insert("international-designator", internationalDesignator);
+	map.insert("type", q_("artificial satellite"));
 
-	if (stdMag==99.f)
+	if (stdMag==99.f) // replace whatever has been computed
 	{
 		map.insert("vmag", "?");
 		map.insert("vmage", "?");
 	}
 
-	map.insert("range_km", range);
-	map.insert("RangeRate_km/s", rangeRate);
-	map.insert("height_km", height);
-	map.insert("subpoint_lat", latLongSubPointPosition[0]);
-	map.insert("subpoint_long", latLongSubPointPosition[1]);
-	map.insert("TEME_km_X", position[0]);
-	map.insert("TEME_km_Y", position[1]);
-	map.insert("TEME_km_Z", position[2]);
-	map.insert("TEME_km/s_X", velocity[0]);
-	map.insert("TEME_km/s_Y", velocity[1]);
-	map.insert("TEME_km/s_Z", velocity[2]);
+	map.insert("range", range);
+	map.insert("rangerate", rangeRate);
+	map.insert("height", height);
+	map.insert("subpoint-lat", latLongSubPointPosition[0]);
+	map.insert("subpoint-long", latLongSubPointPosition[1]);
+	map.insert("TEME-km-X", position[0]);
+	map.insert("TEME-km-Y", position[1]);
+	map.insert("TEME-km-Z", position[2]);
+	map.insert("TEME-speed-X", velocity[0]);
+	map.insert("TEME-speed-Y", velocity[1]);
+	map.insert("TEME-speed-Z", velocity[2]);
 	if (sunReflAngle>0)
 	{  // Iridium
-		map.insert("SunReflectionAngle", sunReflAngle);
+		map.insert("sun-reflection-angle", sunReflAngle);
 	}
-	map.insert("OperationalStatus", getOperationalStatus());
+	map.insert("operational-status", getOperationalStatus());
 
 	//TODO: Move to a more prominent place.
 	QString visibilityState;
