@@ -462,7 +462,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
-		map.insert("ptype", getPlanetTypeString());
+		map.insert("type", getPlanetTypeString());
 	}
 
 	return map;

@@ -120,11 +120,12 @@ public:
 	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
 	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
 	//! - vmag : visual magnitude
-	//! - vmage : visual magnitude (extincted)
+	//! - vmage : visual magnitude (after atmospheric extinction)
 	//! - size: angular size in radians
 	//! - size-dd : angular size in decimal degrees
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
+	//! - name : english name of the object
 	//! - localized-name : localized name
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 

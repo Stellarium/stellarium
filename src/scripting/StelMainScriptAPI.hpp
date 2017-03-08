@@ -184,7 +184,8 @@ public slots:
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
 	//! - ptype : object type (for Solar system objects only!)
-	//! StelObject derivates defined in plugins may add more, simply try what you get.
+	//! Other StelObject derivates, also those defined in plugins, may add more, simply try what you get.
+	// TODO: describe how a complete map can be written to output with script commands.
 	QVariantMap getObjectInfo(const QString& name);
 
 	//! Fetch a map with data about the latest selected object's position, magnitude and so on

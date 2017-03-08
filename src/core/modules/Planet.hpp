@@ -153,6 +153,17 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
+	//! - distance
+	//! - phase (result of getPhase)
+	//! - illumination (=100*phase)
+	//! - phase-angle
+	//! - phase-angle-dms (formatted string)
+	//! - phase-angle-deg (formatted string)
+	//! - elongation
+	//! - elongation-dms (formatted string)
+	//! - elongation-deg (formatted string)
+	//! - type (object type description)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;
