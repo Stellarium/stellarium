@@ -654,24 +654,23 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 		}
 		map.insert("status", mstdata);
 
-		map.insert("name", getNameI18n());
 		if (!m_showerID.toInt())
 		{
-			map.insert("ID", m_showerID);
+			map.insert("id", m_showerID);
 		}
 		else
 		{
-			map.insert("ID", "?");
+			map.insert("id", "?");
 		}
 
 		map.insert("type", q_("meteor shower"));
-		map.insert("speed_km/s", m_speed);
-		map.insert("pop_idx", m_pidx);
+		map.insert("speed", m_speed);
+		map.insert("pop-idx", m_pidx);
 		map.insert("parent", q_(m_parentObj));
 
 		if(m_activity.zhr > 0)
 		{
-			map.insert("ZHR_max", m_activity.zhr);
+			map.insert("zhr-max", m_activity.zhr);
 		}
 		else
 		{
@@ -683,7 +682,7 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 					.arg(m_activity.variable.at(0))
 					.arg(m_activity.variable.at(1));
 			}
-			map.insert("ZHR_max", varStr);
+			map.insert("zhr-max", varStr);
 		}
 	}
 
