@@ -395,6 +395,91 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
+QVariantMap Satellite::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map.insert("description", q_(description).replace("\n", " - "));
+	map.insert("Catalog", id);
+	if (!internationalDesignator.isEmpty())
+		map.insert("InternationalDesignator", internationalDesignator);
+	map.insert("type", "artificial satellite");
+
+	if (stdMag==99.f)
+	{
+		map.insert("vmag", "?");
+		map.insert("vmage", "?");
+	}
+
+	map.insert("range_km", range);
+	map.insert("RangeRate_km/s", rangeRate);
+	map.insert("height_km", height);
+	map.insert("subpoint_lat", latLongSubPointPosition[0]);
+	map.insert("subpoint_long", latLongSubPointPosition[1]);
+	map.insert("TEME_km_X", position[0]);
+	map.insert("TEME_km_Y", position[1]);
+	map.insert("TEME_km_Z", position[2]);
+	map.insert("TEME_km/s_X", velocity[0]);
+	map.insert("TEME_km/s_Y", velocity[1]);
+	map.insert("TEME_km/s_Z", velocity[2]);
+	if (sunReflAngle>0)
+	{  // Iridium
+		map.insert("SunReflectionAngle", sunReflAngle);
+	}
+	map.insert("OperationalStatus", getOperationalStatus());
+
+	//TODO: Move to a more prominent place.
+	QString visibilityState;
+	switch (visibility)
+	{
+		case RADAR_SUN:
+			visibilityState = q_("The satellite and the observer are in sunlight.");
+			break;
+		case VISIBLE:
+			visibilityState =  q_("The satellite is visible.");
+			break;
+		case RADAR_NIGHT:
+			visibilityState =  q_("The satellite is eclipsed.");
+			break;
+		case NOT_VISIBLE:
+			visibilityState =  q_("The satellite is not visible");
+			break;
+		default:
+			break;
+	}
+	map.insert("visibility", visibilityState);
+	if (comms.size() > 0)
+	{
+		foreach(const CommLink &c, comms)
+		{
+			double dop = getDoppler(c.frequency);
+			double ddop = dop;
+			char sign;
+			if (dop<0.)
+			{
+				sign='-';
+				ddop*=-1;
+			}
+			else
+				sign='+';
+
+			QString commModDesc;
+			if (!c.modulation.isEmpty() && c.modulation != "") commModDesc=c.modulation;
+			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) commModDesc.append(" ");
+			if (!c.description.isEmpty() && c.description != "") commModDesc.append(c.description);
+			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) commModDesc.append(": ");
+			map.insertMulti("comm", QString(q_("%1%2 MHz (%3%4 kHz)"))
+				.arg(commModDesc)
+				.arg(c.frequency, 8, 'f', 5)
+				.arg(sign)
+				.arg(ddop, 6, 'f', 3));
+		}
+	}
+
+	return map;
+}
+
+
 Vec3d Satellite::getJ2000EquatorialPos(const StelCore* core) const
 {
 	// Bugfix LP:1654331. I assume the elAzPosition has been computed without refraction! We must say this definitely.
