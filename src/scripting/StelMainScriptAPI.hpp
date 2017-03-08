@@ -191,13 +191,6 @@ public slots:
 	//! @return a map of object data.  See description for getObjectInfo(const QString& name);
 	QVariantMap getSelectedObjectInfo();
 
-public:
-	//! Called by getSelectedObjectInfo() and getObjectInfo(name). Not useful to be scriptable, not a slot!
-	//! The static method can be called more easily by other components.
-	//! @deprecated Use StelObject::getInfoMap() instead.
-	static QVariantMap getObjectInfo(const StelObjectP obj);
-
-public slots:
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,

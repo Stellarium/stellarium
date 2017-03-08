@@ -841,7 +841,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
 
-	return StelMainScriptAPI::getObjectInfo(obj);
+	return StelObjectMgr::getObjectInfo(obj);
 }
 
 QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
@@ -857,27 +857,8 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 	StelObjectP obj = omgr->getSelectedObject()[0];
 
-	return StelMainScriptAPI::getObjectInfo(obj);
+	return StelObjectMgr::getObjectInfo(obj);
 }
-
-
-// TODO: DEPRECATED - GET RID OF IT!
-QVariantMap StelMainScriptAPI::getObjectInfo(const StelObjectP obj)
-{
-	QVariantMap map;
-	if (!obj)
-	{
-		debug("getObjectData WARNING - object not found");
-		map.insert("found", false);
-	}
-	else
-	{
-		map=obj->getInfoMap(StelApp::getInstance().getCore());
-		map.insert("found", true);
-	}
-	return map;
-}
-
 
 void StelMainScriptAPI::clear(const QString& state)
 {
