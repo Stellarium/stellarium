@@ -272,6 +272,14 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	return str;
 }
 
+QVariantMap Comet::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+	map.insert("tailLength_km", tailFactors[1]*AU);
+	map.insert("comaDiameter_km", tailFactors[0]*AU);
+
+	return map;
+}
 void Comet::setSemiMajorAxis(const double value)
 {
 	semiMajorAxis = value;

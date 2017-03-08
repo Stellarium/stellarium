@@ -80,7 +80,7 @@ Nova::~Nova()
 	//
 }
 
-QVariantMap Nova::getMap(void)
+QVariantMap Nova::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -159,6 +159,15 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+
+QVariantMap Nova::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map.unite(getMap());
+	return map;
 }
 
 Vec3f Nova::getInfoColor(void) const

@@ -442,6 +442,33 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	return str;
 }
 
+QVariantMap Planet::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	if (getEnglishName()!="Sun")
+	{
+		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+		//SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+		map.insert("distance", getJ2000EquatorialPos(core).length());
+		double phase=getPhase(observerHelioPos);
+		map.insert("phase", phase);
+		map.insert("illumination", 100.*phase);
+		double phaseAngle = getPhaseAngle(observerHelioPos);
+		map.insert("phase-angle", phaseAngle);
+		map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
+		map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
+		double elongation = getElongation(observerHelioPos);
+		map.insert("elongation", elongation);
+		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
+		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+		map.insert("ptype", getPlanetTypeString());
+	}
+
+	return map;
+}
+
+
 //! Get sky label (sky translation)
 QString Planet::getSkyLabel(const StelCore*) const
 {
