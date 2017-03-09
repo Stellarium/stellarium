@@ -153,6 +153,18 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
+	//! - distance
+	//! - phase (result of getPhase)
+	//! - illumination (=100*phase)
+	//! - phase-angle
+	//! - phase-angle-dms (formatted string)
+	//! - phase-angle-deg (formatted string)
+	//! - elongation
+	//! - elongation-dms (formatted string)
+	//! - elongation-deg (formatted string)
+	//! - type (object type description)
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;
 	virtual double getParentSatellitesFov(const StelCore* core) const;
@@ -213,21 +225,21 @@ public:
 
 	const RotationElements &getRotationElements(void) const {return re;}
 
-	// Compute the position in the parent Planet coordinate system
+	//! Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double dateJDE);
 	void computePosition(const double dateJDE);
 
-	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
-	// This requires both flavours of JD in cases involving Earth.
+	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
+	//! This requires both flavours of JD in cases involving Earth.
 	void computeTransMatrix(double JD, double JDE);
 
-	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
-	// Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getElongation(const Vec3d& obsPos) const;
-	// Get the angular size of the spheroid of the planet (i.e. without the rings)
+	//! Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
-	// Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
 	float getPhase(const Vec3d& obsPos) const;
 
 	// Set the orbital elements

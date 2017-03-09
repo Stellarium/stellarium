@@ -46,9 +46,27 @@ public:
 	Pulsar(const QVariantMap& map);
 	~Pulsar();
 
-	//! Get a QVariantMap which describes the pulsar. Could be used to
-	//! create a duplicate.
-	QVariantMap getMap(void);
+	//! Get a QVariantMap which describes the pulsar. Could be used to create a duplicate.
+	// TODO: Add proper documentation of these fields!
+	//! - designation
+	//! - parallax
+	//! - bperiod
+	//! - frequency
+	//! - pfrequency
+	//! - pderivative
+	//! - dmeasure
+	//! - eccentricity
+	//! - RA
+	//! - DE
+	//! - period
+	//! - w50
+	//! - s400
+	//! - s600
+	//! - s1400
+	//! - distance
+	//! - glitch
+	//! - notes
+	QVariantMap getMap(void) const;
 
 	//! Get the type of object
 	virtual QString getType(void) const
@@ -62,6 +80,8 @@ public:
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap(), except for designation, RA and DE fields.
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
