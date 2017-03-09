@@ -471,7 +471,18 @@ QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
 
-	map.unite(getMap());
+	// Tentatively add a few more strings. Details are left to the plugin author.
+	if (!starProperName.isEmpty()) map["starProperName"] = starProperName;
+	map["distance"] = distance;
+	map["stype"] = stype;
+	map["smass"] = smass;
+	map["smetal"] = smetal;
+	// map["Vmag"] = Vmag; // maybe same as getVmagnitude?
+	map["sradius"] = sradius;
+	map["effectiveTemp"] = effectiveTemp;
+	map["hasHabitablePlanets"] = hasHabitableExoplanets;
+	map["type"] = "ExoplanetSystem"; // Replace default but confusing "Exoplanet" from class name.
+	// TODO: Maybe add number of habitables? Add details?
 	return map;
 }
 

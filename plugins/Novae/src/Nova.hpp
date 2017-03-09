@@ -47,32 +47,27 @@ public:
 	~Nova();
 
 	//! Get a QVariantMap which describes the nova.  Could be used to create a duplicate.
-	// TODO: Describe the entries!
-	//! - designation
-	//! - name
-	//! - type
-	//! - maxMagnitude
-	//! - minMagnitude
-	//! - peakJD
-	//! - m2
-	//! - m3
-	//! - m6
-	//! - m9
-	//! - RA
-	//! - Dec
-	//! - distance
 	QVariantMap getMap(void) const;
 
-	virtual QString getType(void) const
-	{
-		return "Nova";
-	}
+	virtual QString getType(void) const {return "Nova";}
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
+	// TODO: Describe the entries!
+	//! - designation
+	//! - name
+	//! - nova-type
+	//! - max-magnitude
+	//! - min-magnitude
+	//! - peakJD
+	//! - m2
+	//! - m3
+	//! - m6
+	//! - m9
+	//! - distance
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
