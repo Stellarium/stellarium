@@ -449,7 +449,6 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	if (getEnglishName()!="Sun")
 	{
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-		//SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 		map.insert("distance", getJ2000EquatorialPos(core).length());
 		double phase=getPhase(observerHelioPos);
 		map.insert("phase", phase);
@@ -462,7 +461,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
-		map.insert("type", getPlanetTypeString());
+		map.insert("type", getPlanetTypeString()); // replace existing "type=Planet" by something more detailed.
+		// TBD: Is there ANY reason to keep "type"="Planet" and add a "ptype"=getPlanetTypeString() field?
 	}
 
 	return map;

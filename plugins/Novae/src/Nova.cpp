@@ -166,7 +166,18 @@ QVariantMap Nova::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
 
-	map.unite(getMap());
+	map["designation"] = designation;
+	map["name"] = novaName;
+	map["nova-type"] = novaType;
+	map["max-magnitude"] = maxMagnitude;
+	map["min-magnitude"] = minMagnitude;
+	map["peakJD"] = peakJD;
+	map["m2"] = m2;
+	map["m3"] = m3;
+	map["m6"] = m6;
+	map["m9"] = m9;
+	map["distance"] = distance;
+
 	return map;
 }
 

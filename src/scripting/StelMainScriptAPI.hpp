@@ -175,17 +175,21 @@ public slots:
 	//! - localized-name : localized name
 	//! The returned map can contain other information. For example, Solar System objects add:
 	//! - distance : distance to object in AU (for Solar system objects only!)
-	//! - phase : phase of object (for Solar system objects only!)
-	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
+	//! - illumination : phase of object in percent (0..100) (for Solar system objects only!)
 	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
 	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
 	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
-	//! - ptype : object type (for Solar system objects only!)
-	//! Other StelObject derivates, also those defined in plugins, may add more, simply try what you get.
-	// TODO: describe how a complete map can be written to output with script commands.
+	//! Other StelObject derivates, also those defined in plugins, may add more,
+	//! these fields are documented in the respective classes, or simply try what you get:
+	//! You can print a complete set of entries into output with the following commands:
+	//! @code
+	//! map=core.getSelectedObjectInfo();
+	//! core.output(core.mapToString(map));
+	//! @endcode
 	QVariantMap getObjectInfo(const QString& name);
 
 	//! Fetch a map with data about the latest selected object's position, magnitude and so on
@@ -697,6 +701,12 @@ public slots:
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
 	void output(const QString& s) const;
+
+	//! print contents of a QVariantMap as []-delimited list of [ "key" = <value>] lists.
+	//! @param map QVariantMap e.g. from getObjectInfo() or getLocationInfo()
+	//! @note string values are surrounded with ", simple numeric types are printed as themselves.
+	//! @note More complicated value types like lists are only indicated by their type name. You must extract those (and their contents) yourself.
+	QString mapToString(const QVariantMap &map) const;
 
 	//! Reset (clear) output file
 	void resetOutput(void) const;
