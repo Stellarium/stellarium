@@ -173,62 +173,29 @@ public slots:
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
 	//! - localized-name : localized name
+	//! The returned map can contain other information. For example, Solar System objects add:
 	//! - distance : distance to object in AU (for Solar system objects only!)
-	//! - phase : phase of object (for Solar system objects only!)
-	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
+	//! - illumination : phase of object in percent (0..100) (for Solar system objects only!)
 	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
 	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
 	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
-	//! - ptype : object type (for Solar system objects only!)
+	//! Other StelObject derivates, also those defined in plugins, may add more,
+	//! these fields are documented in the respective classes, or simply try what you get:
+	//! You can print a complete set of entries into output with the following commands:
+	//! @code
+	//! map=core.getSelectedObjectInfo();
+	//! core.output(core.mapToString(map));
+	//! @endcode
 	QVariantMap getObjectInfo(const QString& name);
 
-	//! Fetch a map with data about an latest selected object's position, magnitude and so on
-	//! @return a map of object data.  Keys:
-	//! - altitude : apparent altitude angle in decimal degrees
-	//! - azimuth : apparent azimuth angle in decimal degrees	
-	//! - altitude-geometric : geometric altitude angle in decimal degrees
-	//! - azimuth-geometric : geometric azimuth angle in decimal degrees	
-	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees	
-	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees	
-	//! - glong : galactic longitude in decimal degrees
-	//! - glat : galactic latitude in decimal degrees
-	//! - sglong : supergalactic longitude in decimal degrees
-	//! - sglat : supergalactic latitude in decimal degrees
-	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
-	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
-	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
-	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
-	//! - vmag : visual magnitude
-	//! - vmage : visual magnitude (extincted)	
-	//! - size: angular size in radians
-	//! - size-dd : angular size in decimal degrees
-	//! - size-deg : angular size in decimal degrees (formatted string)
-	//! - size-dms : angular size in DMS format
-	//! - name : english name
-	//! - localized-name : localized name
-	//! - distance : distance to object in AU (for Solar system objects only!)
-	//! - phase : phase of object (for Solar system objects only!)
-	//! - illumination : phase of object in percentages (for Solar system objects only!)
-	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
-	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
-	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
-	//! - elongation : elongation of object in radians (for Solar system objects only!)
-	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
-	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
-	//! - ptype : object type (for Solar system objects only!)
+	//! Fetch a map with data about the latest selected object's position, magnitude and so on
+	//! @return a map of object data.  See description for getObjectInfo(const QString& name);
 	QVariantMap getSelectedObjectInfo();
 
-public:
-	//! Called by getSelectedObjectInfo() and getObjectInfo(name). Not useful to be scriptable, not a slot!
-	//! The static method can be called more easily by other components.
-	static QVariantMap getObjectInfo(const StelObjectP obj);
-
-public slots:
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,
@@ -734,6 +701,12 @@ public slots:
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
 	void output(const QString& s) const;
+
+	//! print contents of a QVariantMap as []-delimited list of [ "key" = <value>] lists.
+	//! @param map QVariantMap e.g. from getObjectInfo() or getLocationInfo()
+	//! @note string values are surrounded with ", simple numeric types are printed as themselves.
+	//! @note More complicated value types like lists are only indicated by their type name. You must extract those (and their contents) yourself.
+	QString mapToString(const QVariantMap &map) const;
 
 	//! Reset (clear) output file
 	void resetOutput(void) const;
