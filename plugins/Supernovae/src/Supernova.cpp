@@ -160,7 +160,12 @@ QVariantMap Supernova::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
 
-	map.unite(getMap());
+	map["sntype"] = sntype;
+	map["max-magnitude"] = maxMagnitude;
+	map["peakJD"] = peakJD;
+	map["note"] = note;
+	map["distance"] = distance;
+
 	return map;
 }
 

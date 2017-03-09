@@ -399,11 +399,10 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
 
-	map.insert("description", q_(description).replace("\n", " - "));
+	map.insert("description", QString(description).replace("\n", " - "));
 	map.insert("catalog", id);
 	if (!internationalDesignator.isEmpty())
 		map.insert("international-designator", internationalDesignator);
-	map.insert("type", q_("artificial satellite"));
 
 	if (stdMag==99.f) // replace whatever has been computed
 	{
@@ -433,16 +432,16 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	switch (visibility)
 	{
 		case RADAR_SUN:
-			visibilityState = q_("The satellite and the observer are in sunlight.");
+			visibilityState = "The satellite and the observer are in sunlight.";
 			break;
 		case VISIBLE:
-			visibilityState =  q_("The satellite is visible.");
+			visibilityState =  "The satellite is visible.";
 			break;
 		case RADAR_NIGHT:
-			visibilityState =  q_("The satellite is eclipsed.");
+			visibilityState =  "The satellite is eclipsed.";
 			break;
 		case NOT_VISIBLE:
-			visibilityState =  q_("The satellite is not visible");
+			visibilityState =  "The satellite is not visible";
 			break;
 		default:
 			break;
@@ -468,7 +467,7 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) commModDesc.append(" ");
 			if (!c.description.isEmpty() && c.description != "") commModDesc.append(c.description);
 			if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) commModDesc.append(": ");
-			map.insertMulti("comm", QString(q_("%1%2 MHz (%3%4 kHz)"))
+			map.insertMulti("comm", QString("%1%2 MHz (%3%4 kHz)")
 				.arg(commModDesc)
 				.arg(c.frequency, 8, 'f', 5)
 				.arg(sign)

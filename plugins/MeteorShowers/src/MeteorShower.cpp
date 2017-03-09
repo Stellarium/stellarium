@@ -642,15 +642,15 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 		QString mstdata;
 		if (m_status == ACTIVE_GENERIC)
 		{
-			mstdata = q_("generic data");
+			mstdata = "generic-data";
 		}
 		else if (m_status == ACTIVE_CONFIRMED)
 		{
-			mstdata = q_("confirmed data");
+			mstdata = "confirmed-data";
 		}
 		else if (m_status == INACTIVE)
 		{
-			mstdata = q_("inactive");
+			mstdata = "inactive";
 		}
 		map.insert("status", mstdata);
 
@@ -663,10 +663,9 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 			map.insert("id", "?");
 		}
 
-		map.insert("type", q_("meteor shower"));
-		map.insert("speed", m_speed);
-		map.insert("pop-idx", m_pidx);
-		map.insert("parent", q_(m_parentObj));
+		map.insert("velocity", m_speed);
+		map.insert("population-index", m_pidx);
+		map.insert("parent", m_parentObj);
 
 		if(m_activity.zhr > 0)
 		{
@@ -674,11 +673,11 @@ QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
 		}
 		else
 		{
-			QString varStr=q_("variable");
+			QString varStr="variable";
 			if(m_activity.variable.size() == 2)
 			{
 				 varStr=QString("%1; %2-%3")
-					.arg(q_("variable"))
+					.arg("variable")
 					.arg(m_activity.variable.at(0))
 					.arg(m_activity.variable.at(1));
 			}

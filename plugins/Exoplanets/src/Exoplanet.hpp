@@ -81,6 +81,13 @@ public:
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	//! Return a map like StelObject, but with a few extra tags also available in getMap().
+	//! - distance = distance in pc
+	//! - stype = Spectral type of star
+	//! - smass = Mass of star in Msun
+	//! - smetal = [Fe/H] of star
+	//! - sradius = Radius of star in Rsun
+	//! - effectiveTemp = Effective temperature of star in K
+	//! - hasHabitablePlanets (true/false)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const

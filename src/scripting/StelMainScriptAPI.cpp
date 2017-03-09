@@ -711,6 +711,39 @@ void StelMainScriptAPI::output(const QString &s) const
 	StelApp::getInstance().getScriptMgr().output(s);
 }
 
+//! print contents of a QVariantMap
+//! @param map QVariantMap e.g. from getObjectInfo() or getLocationInfo()
+QString StelMainScriptAPI::mapToString(const QVariantMap& map) const
+{
+	QString res = QString("[\n");
+	QList<QVariant::Type> simpleTypeList;
+	simpleTypeList.push_back(QVariant::Bool);
+	simpleTypeList.push_back(QVariant::Int);
+	simpleTypeList.push_back(QVariant::UInt);
+	simpleTypeList.push_back(QVariant::Double);
+
+	QVariantMap::const_iterator i=map.constBegin();
+	while (i != map.constEnd()){
+
+		if (i.value().type()==QMetaType::QString)
+		{
+			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key()).arg(i.value().toString()));
+		}
+		else if (simpleTypeList.contains(i.value().type()))
+		{
+			res.append(QString("[ \"%1\" = %2 ]\n").arg(i.key()).arg(i.value().toString()));
+		}
+		else
+		{
+			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key()).arg(i.value().typeName()).arg(i.value().toString()));
+		}
+
+		++i;
+	}
+	res.append( QString("]\n"));
+	return res;
+}
+
 void StelMainScriptAPI::resetOutput(void) const
 {
 	StelApp::getInstance().getScriptMgr().resetOutput();

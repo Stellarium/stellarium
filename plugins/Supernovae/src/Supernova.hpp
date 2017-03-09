@@ -67,6 +67,11 @@ public:
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
+	//! - sntype
+	//! - max-magnitude
+	//! - peakJD
+	//! - note
+	//! - distance
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const

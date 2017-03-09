@@ -141,7 +141,10 @@ QVariantMap Quasar::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
 
-	map.unite(getMap());
+	map["amag"] = AMagnitude;
+	map["bV"] = bV;
+	map["redshift"] = redshift;
+
 	return map;
 }
 
