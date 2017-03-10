@@ -133,6 +133,14 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! In addition to the entries from StelObject::getInfoMap(), Nebula objects provide
+	//! - bmag (photometric B magnitude. 99 if unknown)
+	//! - morpho (longish description; translated!)
+	//! - surface-brightness
+	//! A few entries are optional
+	//! - bV (B-V index)
+	//! - redshift
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual QString getType() const {return "Nebula";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
 	virtual double getCloseViewFov(const StelCore* core = NULL) const;
