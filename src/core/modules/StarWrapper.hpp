@@ -121,6 +121,20 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the StarWrapper1.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! In addition to the entries from StelObject::getInfoMap(), StarWrapper1 objects provide
+	//! - variable-star (no|eruptive|pulsating|rotating|cataclysmic|eclipsing-binary)
+	//! - star-type (star|double-star)
+	//! - bV : B-V Color Index
+	//! A few tags are only present if data known, or for variable or double stars from the WDS catalog
+	//! - absolute-mag
+	//! - distance-ly
+	//! - parallax
+	//! - spectral-class
+	//! - period (days)
+	//! - wds-year (year of validity of wds... fields)
+	//! - wds-position-angle
+	//! - wds-separation (arcseconds; 0 for spectroscopic binaries)
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	QString getEnglishName(void) const;
 };
 

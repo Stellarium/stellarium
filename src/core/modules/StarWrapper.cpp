@@ -294,6 +294,67 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	return str;
 }
 
+QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
+	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
+	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
+
+	QString varstartype = "no";
+	QString startype = "star";
+	if(!varType.isEmpty())
+	{
+		if (QString("FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+			varstartype = "eruptive";
+		else if (QString("ACYG BCEP BCEPS CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB").contains(varType))
+			varstartype = "pulsating";
+		else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
+			varstartype = "rotating";
+		else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
+			varstartype = "cataclysmic";
+		else if (QString("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
+		{
+			varstartype = "eclipsing-binary";
+		}
+		else
+			varstartype = "variable";
+	}
+	map.insert("variable-star", varstartype);
+
+	if (s->getComponentIds() || wdsObs>0)
+		startype = "double-star";
+
+	map.insert("star-type", startype);
+
+	map.insert("bV", s->getBV());
+
+	if (s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	{
+		map.insert("parallax", 0.00001*s->getPlx());
+		map.insert("absolute-mag", getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())));
+		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
+	}
+
+	if (s->getSpInt())
+		map.insert("spectral-class", StarMgr::convertToSpectralType(s->getSpInt()));
+
+	if (vPeriod>0)
+		map.insert("period", vPeriod);
+
+	if (wdsObs>0)
+	{
+		map.insert("wds-year", wdsObs);
+		map.insert("wds-position-angle", wdsPA);
+		map.insert("wds-separation", wdsSep);
+	}
+
+	return map;
+}
+
 StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a,
 									const SpecialZoneData<Star1> *z) const {
   return StelObjectP(new StarWrapper1(a,z,this), true);
