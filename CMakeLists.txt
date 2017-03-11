@@ -2,18 +2,18 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
 IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0))
-    CMAKE_POLICY(SET CMP0050 OLD)
-    # silently ignore errors in add_dependency():
-    CMAKE_POLICY(SET CMP0046 OLD)
+     CMAKE_POLICY(SET CMP0050 OLD)
+     # silently ignore errors in add_dependency():
+     CMAKE_POLICY(SET CMP0046 OLD)
 ENDIF()
 
 # just avoid a warning mess. 
 IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" LESS 3.0.2))
-    CMAKE_POLICY(SET CMP0043 OLD)
+     CMAKE_POLICY(SET CMP0043 OLD)
 ENDIF()
 
 IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" LESS 3.1.3))
-    CMAKE_POLICY(SET CMP0054 OLD)
+     CMAKE_POLICY(SET CMP0054 OLD)
 ENDIF()
 
 # warn about deprecated stuff so that we may try fixing it
@@ -46,9 +46,12 @@ SET(MINIMAL_QT_VERSION "5.3.0")
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
+# Show platform info
+MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
+
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-    SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
@@ -58,50 +61,50 @@ ENDIF()
 
 # GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
 # Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
-if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-    ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
-endif()
+IF(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+     ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
+ENDIF()
 
-set(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
-if(OPENGL_DEBUG_LOGGING)
-    add_definitions(-DOPENGL_DEBUG_LOGGING)
-    # This enables logging of QOpenGLFunctions through forced glGetError after each call
-    add_definitions(-DQ_ENABLE_OPENGL_FUNCTIONS_DEBUG)
-endif()
+SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
+IF(OPENGL_DEBUG_LOGGING)
+     ADD_DEFINITIONS(-DOPENGL_DEBUG_LOGGING)
+     # This enables logging of QOpenGLFunctions through forced glGetError after each call
+     ADD_DEFINITIONS(-DQ_ENABLE_OPENGL_FUNCTIONS_DEBUG)
+ENDIF()
 
 # Use ccache if possible
-find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
-    MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
-endif()
+FIND_PROGRAM(CCACHE_PROGRAM ccache)
+IF(CCACHE_PROGRAM)
+     MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
+     SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
 IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
-    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
-    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
+     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
 ENDIF()
 
 # Add valgrind build options if necessary
 IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
-    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
 ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    SET(APPLE 1)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+     SET(APPLE 1)
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
-    IF(WIN32)
+     IF(WIN32)
         # The stars structs rely on gnu gcc packing of bit-fields.
         SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
-    ENDIF()
-    SET(GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
+     ENDIF()
+     SET(GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
 ELSE()
-    SET(GCC_VERSION "0.0")
+     SET(GCC_VERSION "0.0")
 ENDIF()
 
 # _USE_MATH_DEFINES enables use of math constants like M_PI,
@@ -115,13 +118,13 @@ SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
 
 SET(STELLARIUM_USE_CPP11 1 CACHE BOOL "Set whether to try using C++11 when compiling. Required for Qt >= 5.7")
 IF(STELLARIUM_USE_CPP11)
-    IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
+     IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
         # Let CMake handle setting C++11 (since 3.1)
         SET(CMAKE_CXX_STANDARD 11)
-    ELSE()
+     ELSE()
         # Add std=c++11 to gcc flags
         SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")
-    ENDIF()
+     ENDIF()
 
 ENDIF()
 
@@ -197,42 +200,47 @@ SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
-     SET(ENABLE_SPOUT 1 CACHE BOOL "Define whether SPOUT support should be activated.")
+     IF(${CMAKE_SYSTEM_VERSION} LESS 6.1 ) # Need Windows 7 to enable support of Spout
+          SET(ENABLE_SPOUT 0)
+          MESSAGE(STATUS "Spout support disabled due to operating system requirement")
+     ELSE()
+          SET(ENABLE_SPOUT 1 CACHE BOOL "Define whether SPOUT support should be activated.")
+     ENDIF()
 ELSE()
      SET(ENABLE_SPOUT 0)
 ENDIF()
 IF(ENABLE_SPOUT)
-	ADD_DEFINITIONS(-DENABLE_SPOUT)
-	IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
-            set(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/Win32/)
-        ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8") # 64bit build?
-            set(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/x64/)
-	ENDIF()
+     ADD_DEFINITIONS(-DENABLE_SPOUT)
+     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
+          SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/Win32/)
+     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8") # 64bit build?
+          SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/x64/)
+     ENDIF()
 
-        # make sure the .lib file is used, otherwise MinGW will try the .dll directly and fails to link
-        find_library(SPOUT_LIBRARY NAMES SpoutLibrary.lib SpoutLibrary PATHS ${SPOUT_PATH_HINT})
-        mark_as_advanced(SPOUT_LIBRARY)
+     # make sure the .lib file is used, otherwise MinGW will try the .dll directly and fails to link
+     FIND_LIBRARY(SPOUT_LIBRARY NAMES SpoutLibrary.lib SpoutLibrary PATHS ${SPOUT_PATH_HINT})
+     MARK_AS_ADVANCED(SPOUT_LIBRARY)
 
-        if(NOT SPOUT_LIBRARY)
-            message(FATAL_ERROR "Spout library not found. Try setting SPOUT_LIBRARY or disable Spout support.")
-        endif()
+     IF(NOT SPOUT_LIBRARY)
+          MESSAGE(FATAL_ERROR "Spout library not found. Try setting SPOUT_LIBRARY or disable Spout support.")
+     ENDIF()
 
-        # try to find the .dll for automatic copy
-        get_filename_component(SPOUT_LIBRARY_DIR ${SPOUT_LIBRARY} DIRECTORY)
-        set(SPOUT_LIBRARY_DLL ${SPOUT_LIBRARY_DIR}/SpoutLibrary.dll CACHE FILEPATH "The path to the Spout .dll file")
-        set(SPOUT_LIBRARY_LICENCE ${CMAKE_SOURCE_DIR}/util/spout2/licence.txt CACHE FILEPATH "The path to the Spout licence file")
+     # try to find the .dll for automatic copy
+     GET_FILENAME_COMPONENT(SPOUT_LIBRARY_DIR ${SPOUT_LIBRARY} DIRECTORY)
+     SET(SPOUT_LIBRARY_DLL ${SPOUT_LIBRARY_DIR}/SpoutLibrary.dll CACHE FILEPATH "The path to the Spout .dll file")
+     SET(SPOUT_LIBRARY_LICENCE ${CMAKE_SOURCE_DIR}/util/spout2/licence.txt CACHE FILEPATH "The path to the Spout licence file")
 
-        if(NOT EXISTS ${SPOUT_LIBRARY_DLL})
-            unset(SPOUT_LIBRARY_DLL)
-            # try to find it with find_library (note that this does not work with MSVC, but with MinGW it does, so the above manual version is necessary)
-            find_library(SPOUT_LIBRARY_DLL SpoutLibrary.dll PATHS ${SPOUT_PATH_HINT})
-        endif()
+     IF(NOT EXISTS ${SPOUT_LIBRARY_DLL})
+          UNSET(SPOUT_LIBRARY_DLL)
+          # try to find it with find_library (note that this does not work with MSVC, but with MinGW it does, so the above manual version is necessary)
+          FIND_LIBRARY(SPOUT_LIBRARY_DLL SpoutLibrary.dll PATHS ${SPOUT_PATH_HINT})
+     ENDIF()
 
-        if(NOT SPOUT_LIBRARY_DLL)
-            message(WARNING "Could not find SpoutLibrary.dll, you may have to manually copy it to the binary directory.\
-                Try setting SPOUT_LIBRARY_DLL. Note that this is necessary for correct installer generation.")
-        endif()
-        mark_as_advanced(SPOUT_LIBRARY_DLL)
+     IF(NOT SPOUT_LIBRARY_DLL)
+          MESSAGE(WARNING "Could not find SpoutLibrary.dll, you may have to manually copy it to the binary directory.\
+                           Try setting SPOUT_LIBRARY_DLL. Note that this is necessary for correct installer generation.")
+     ENDIF()
+     MARK_AS_ADVANCED(SPOUT_LIBRARY_DLL)
 ENDIF(ENABLE_SPOUT)
 
 SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
@@ -349,39 +357,39 @@ IF(WIN32)
      FIND_FILE(OPENSSL_LICENSE "OpenSSL License.txt")
      SET(ISS_OPENSSL_LIBS "; OpenSSL support")
      IF(EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL})
-        MESSAGE(STATUS "Found ssleay32 library: ${OPENSSL_SSLEAY32_LIBRARY_DLL}")
-        SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSLEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\";")
+          MESSAGE(STATUS "Found ssleay32 library: ${OPENSSL_SSLEAY32_LIBRARY_DLL}")
+          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSLEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\";")
      ENDIF()
      IF(EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL})
-        MESSAGE(STATUS "Found libeay32 library: ${OPENSSL_LIBEAY32_LIBRARY_DLL}")
-        SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\";")
+          MESSAGE(STATUS "Found libeay32 library: ${OPENSSL_LIBEAY32_LIBRARY_DLL}")
+          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\";")
      ENDIF()
      IF(EXISTS ${OPENSSL_LIBSSL32_LIBRARY_DLL})
-        MESSAGE(STATUS "Found libssl32 library: ${OPENSSL_LIBSSL32_LIBRARY_DLL}")
-        SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBSSL32_LIBRARY_DLL}\"; DestDir: \"{app}\";")
+          MESSAGE(STATUS "Found libssl32 library: ${OPENSSL_LIBSSL32_LIBRARY_DLL}")
+          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBSSL32_LIBRARY_DLL}\"; DestDir: \"{app}\";")
      ENDIF()
      IF(EXISTS ${OPENSSL_LICENSE})
-        MESSAGE(STATUS "Found OpenSSL license: ${OPENSSL_LICENSE}")
-        SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LICENSE}\"; DestDir: \"{app}\";")
+          MESSAGE(STATUS "Found OpenSSL license: ${OPENSSL_LICENSE}")
+          SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LICENSE}\"; DestDir: \"{app}\";")
      ENDIF()
      IF((NOT EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL}))
-        SET(ISS_OPENSSL_LIBS "; OpenSSL libraries isn't found")
+          SET(ISS_OPENSSL_LIBS "; OpenSSL libraries isn't found")
      ENDIF()
 ENDIF()
 
 # when using Qt 5.3, default to using the old QGLWidget, but warn
-if(${Qt5Core_VERSION_STRING} VERSION_LESS "5.4")
-    set(USE_OLD_QGLWIDGET 1)
-    message(WARNING "You are using Qt ${Qt5Core_VERSION_STRING} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
-else()
-    # offer the old widget as an alternative, default off
-    set(USE_OLD_QGLWIDGET 0 CACHE BOOL "Use the legacy QGLWidget instead of the new QOpenGLWidget for the main viewport, and link to the QtOpenGL module")
-endif()
+IF(${Qt5Core_VERSION_STRING} VERSION_LESS "5.4")
+     SET(USE_OLD_QGLWIDGET 1)
+     MESSAGE(WARNING "You are using Qt ${Qt5Core_VERSION_STRING} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
+ELSE()
+     # offer the old widget as an alternative, default off
+     SET(USE_OLD_QGLWIDGET 0 CACHE BOOL "Use the legacy QGLWidget instead of the new QOpenGLWidget for the main viewport, and link to the QtOpenGL module")
+ENDIF()
 
-if(USE_OLD_QGLWIDGET)
-    set(USE_QTOPENGL 1)
-    add_definitions(-DUSE_OLD_QGLWIDGET)
-endif()
+IF(USE_OLD_QGLWIDGET)
+     SET(USE_QTOPENGL 1)
+     ADD_DEFINITIONS(-DUSE_OLD_QGLWIDGET)
+ENDIF()
 
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
 # because the QtGui module re-implements the GL functions, and perhaps even
@@ -396,365 +404,364 @@ endif()
 
 # Check if we have a GLES-only build
 # On dynamic builds, this property is also "GL"
-if(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
-    message(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
-    set(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
-endif()
+IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
+     MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
+     SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+ENDIF()
 
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 IF(ENABLE_SCRIPTING)
-    FIND_PACKAGE(Qt5Script REQUIRED)
+     FIND_PACKAGE(Qt5Script REQUIRED)
 ENDIF()
 IF(ENABLE_MEDIA)
-    set(USE_QTOPENGL 1)
-    ADD_DEFINITIONS(-DENABLE_MEDIA)
-    FIND_PACKAGE(Qt5Multimedia REQUIRED)
-    FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
+     SET(USE_QTOPENGL 1)
+     ADD_DEFINITIONS(-DENABLE_MEDIA)
+     FIND_PACKAGE(Qt5Multimedia REQUIRED)
+     FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
 ENDIF()
 
-if(USE_QTOPENGL)
-    # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
-    # but the QtMultimediaWidgets module requires it internally, so we still have to package it.
-    FIND_PACKAGE(Qt5OpenGL REQUIRED)
-endif()
+IF(USE_QTOPENGL)
+     # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
+     # but the QtMultimediaWidgets module requires it internally, so we still have to package it.
+     FIND_PACKAGE(Qt5OpenGL REQUIRED)
+ENDIF()
 
 FIND_PACKAGE(Qt5Test)
 
 ### Setup external packages
 
-find_package(ZLIB QUIET) #quiet warnings about not found, we have our own version anyway
+FIND_PACKAGE(ZLIB QUIET) #quiet warnings about not found, we have our own version anyway
 
 # if a system zlib is found, let the user choose if to instead use our bundled version
-if(ZLIB_FOUND)
-    if(WIN32) #on win, we default to "no"
-        set(USE_SYSTEM_ZLIB 0 CACHE BOOL "Use system-provided zlib instead of the bundled version")
-    else() #else, we default to "yes"
-        set(USE_SYSTEM_ZLIB 1 CACHE BOOL "Use system-provided zlib instead of the bundled version")
-    endif()
-else()
-    set(USE_SYSTEM_ZLIB 0)
-endif()
+IF(ZLIB_FOUND)
+     IF(WIN32) #on win, we default to "no"
+          SET(USE_SYSTEM_ZLIB 0 CACHE BOOL "Use system-provided zlib instead of the bundled version")
+     ELSE() #else, we default to "yes"
+          SET(USE_SYSTEM_ZLIB 1 CACHE BOOL "Use system-provided zlib instead of the bundled version")
+     ENDIF()
+ELSE()
+     SET(USE_SYSTEM_ZLIB 0)
+ENDIF()
 
-if(NOT USE_SYSTEM_ZLIB)
-    #use our own zlib
-    message(STATUS "Using bundled zlib version at ${CMAKE_SOURCE_DIR}/src/external/zlib")
-    set(ZLIB_LIBRARIES zlib_stel)
-else()
-    message(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
-endif()
+IF(NOT USE_SYSTEM_ZLIB)
+     #use our own zlib
+     MESSAGE(STATUS "Using bundled zlib version at ${CMAKE_SOURCE_DIR}/src/external/zlib")
+     SET(ZLIB_LIBRARIES zlib_stel)
+ELSE()
+     MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
+ENDIF()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
-    IF(APPLE)
-        SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
-    ELSE()
-        ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
-        ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
-        # Used in generating the documentation (doc/stellarium.pod.cmake):
-        SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
-    ENDIF()
+     IF(APPLE)
+          SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
+     ELSE()
+          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
+          ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+          # Used in generating the documentation (doc/stellarium.pod.cmake):
+          SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
+     ENDIF()
 ELSE()
-    ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
-    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
+     ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
+     ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
 ENDIF()
 # For not installed debug builds with build directory path that not match sources directory path ${PROJECT_BINARY_DIR} != ${CMAKE_SOURCE_DIR}
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    ADD_DEFINITIONS(-DINSTALL_DATADIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
-    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
-endif()
+IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
+     ADD_DEFINITIONS(-DINSTALL_DATADIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
+     ADD_DEFINITIONS(-DINSTALL_LOCALEDIR_FOR_DEBUG="${CMAKE_SOURCE_DIR}")
+ENDIF()
 
 ########### Get revision number for non-release builds ###########
 IF(NOT STELLARIUM_RELEASE_BUILD)
-    # Hack until CMake detection for Bazaar is finished
-    EXECUTE_PROCESS(COMMAND bzr revno --tree WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
-    EXECUTE_PROCESS(COMMAND bzr version-info --custom --template={branch_nick} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
-    IF(BZR_REVISION)
-        SET(PACKAGE_VERSION "${VERSION}.${BZR_REVISION}")
-        ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
-        ADD_DEFINITIONS(-DBZR_BRANCH="${BZR_BRANCH}")
-    ENDIF()
-    # MESSAGE(STATUS "Branch: ${BZR_BRANCH}; Revision: ${BZR_REVISION}; Error: ${BZR_ERROR}")
-    IF(STELLARIUM_VERSION)
-        SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
-        ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
-    ENDIF()
+     # Hack until CMake detection for Bazaar is finished
+     EXECUTE_PROCESS(COMMAND bzr revno --tree WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
+     EXECUTE_PROCESS(COMMAND bzr version-info --custom --template={branch_nick} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE BZR_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE BZR_ERROR)
+     IF(BZR_REVISION)
+          SET(PACKAGE_VERSION "${VERSION}.${BZR_REVISION}")
+          ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
+          ADD_DEFINITIONS(-DBZR_BRANCH="${BZR_BRANCH}")
+     ENDIF()
+     # MESSAGE(STATUS "Branch: ${BZR_BRANCH}; Revision: ${BZR_REVISION}; Error: ${BZR_ERROR}")
+     IF(STELLARIUM_VERSION)
+          SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
+          ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
+     ENDIF()
 ENDIF()
 
 
 IF(WIN32)
-    #######################################################
-    ### Generate icon file name                         ###
-    #######################################################
+     #######################################################
+     ### Generate icon file name                         ###
+     #######################################################
 
-    IF(STELLARIUM_RELEASE_BUILD)
-       SET(PACKAGE_ICON "stellarium")
-    ELSE()
-       SET(PACKAGE_ICON "stellarium-gray")
-    ENDIF()
+     IF(STELLARIUM_RELEASE_BUILD)
+          SET(PACKAGE_ICON "stellarium")
+     ELSE()
+          SET(PACKAGE_ICON "stellarium-gray")
+     ENDIF()
 
-    #######################################################
-    ### Generate a VersionInfo file                     ###
-    #######################################################
+     #######################################################
+     ### Generate a VersionInfo file                     ###
+     #######################################################
 
-    IF(STELLARIUM_RELEASE_BUILD)
-       SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
-    ELSE()
-       SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
-    ENDIF()
-    STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)
+     IF(STELLARIUM_RELEASE_BUILD)
+           SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
+     ELSE()
+          SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
+     ENDIF()
+     STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
+     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)
 
-    #######################################################
-    ### [Optional] Embed icon in the Windows executable ###
-    #######################################################
+     #######################################################
+     ### [Optional] Embed icon in the Windows executable ###
+     #######################################################
 
-    SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
-    IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-        IF(NOT MSVC)
-            #The mingGW snapshot distributed with the Qt SDK has it under this name.
-            SET(RC_COMPILER_FILENAME "windres.exe")
-            FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
-        ENDIF()
-        IF(RC_COMPILER_PATH)
-            MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
-        ENDIF(RC_COMPILER_PATH)
-    ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+     SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
+     IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+          IF(NOT MSVC)
+               #The mingGW snapshot distributed with the Qt SDK has it under this name.
+               SET(RC_COMPILER_FILENAME "windres.exe")
+               FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
+          ENDIF()
+          IF(RC_COMPILER_PATH)
+               MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
+          ENDIF(RC_COMPILER_PATH)
+     ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
 
-    #######################################################
-    ### Generate an Inno Setup project file             ###
-    #######################################################
+     #######################################################
+     ### Generate an Inno Setup project file             ###
+     #######################################################
 
-    # Try to guess the MinGW /bin directory...
-    GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
-    IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
-        SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
-        SET(ISS_PACKAGE_PLATFORM "win32")
-	# TODO: Add selector for VC2013/VC2015
-        SET(REDIST_VERSION "VC_REDIST_X86")
-        IF(MSVC)
-            SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x86.exe\"; DestDir: \"{tmp}\";")
-            SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x86.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"; Check: VCRedistNeedsInstall")
-        ELSE()
-            SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
-            SET(REDIST_RUN "; Redistributable package not required for MinGW")
-        ENDIF()
-    ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-        SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
-        SET(ISS_PACKAGE_PLATFORM "win64")
-	# TODO: Add selector for VC2013/VC2015
-        SET(REDIST_VERSION "VC_REDIST_X64")
-        IF(MSVC)
-            SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x64.exe\"; DestDir: \"{tmp}\";")
-            SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x64.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"; Check: VCRedistNeedsInstall")
-        ELSE()
-            SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
-            SET(REDIST_RUN "; Redistributable package not required for MinGW")
-        ENDIF()
-    ENDIF()
-    SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
+     # Try to guess the MinGW /bin directory...
+     GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
+     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+          SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
+          SET(ISS_PACKAGE_PLATFORM "win32")
+          # TODO: Add selector for VC2013/VC2015
+          SET(REDIST_VERSION "VC_REDIST_X86")
+          IF(MSVC)
+               SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x86.exe\"; DestDir: \"{tmp}\";")
+               SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x86.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"; Check: VCRedistNeedsInstall")
+          ELSE()
+               SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+               SET(REDIST_RUN "; Redistributable package not required for MinGW")
+          ENDIF()
+     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+          SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+          SET(ISS_PACKAGE_PLATFORM "win64")
+          # TODO: Add selector for VC2013/VC2015
+          SET(REDIST_VERSION "VC_REDIST_X64")
+          IF(MSVC)
+               SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x64.exe\"; DestDir: \"{tmp}\";")
+               SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x64.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"; Check: VCRedistNeedsInstall")
+          ELSE()
+               SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+               SET(REDIST_RUN "; Redistributable package not required for MinGW")
+          ENDIF()
+     ENDIF()
+     SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
 
-    GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
-    GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
-    GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
-if(USE_QTOPENGL)
-    GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
-    SET(ISS_QT_OPENGL "Source: \"${QtOpenGL_location}\"; DestDir: \"{app}\";")
-else()
-    set(ISS_QT_OPENGL "; QtOpenGL isn't used")
-endif()
-    GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
-    GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
-    GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)    
-    GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
-    GET_TARGET_PROPERTY(QtPrintSupport_location Qt5::PrintSupport LOCATION)
-    SET(ISS_QT_PRINTSUPPORT "Source: \"${QtPrintSupport_location}\"; DestDir: \"{app}\";")
-    IF(ENABLE_SCRIPTING)
-        GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
-        SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
-    ELSE()
-        SET(ISS_QT_SCRIPT "; QtScript isn't used")
-    ENDIF()
-    IF(USE_PLUGIN_TELESCOPECONTROL)
-        GET_TARGET_PROPERTY(QtSerialPort_location Qt5::SerialPort LOCATION)
-        SET(ISS_QT_SERIALPORT "Source: \"${QtSerialPort_location}\"; DestDir: \"{app}\";")
-    ELSE()
-        SET(ISS_QT_SERIALPORT "; QtSerialPort isn't used")
-    ENDIF()
-    IF(ENABLE_MEDIA)
-        GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
-        GET_TARGET_PROPERTY(QtMultimediaWidgets_location Qt5::MultimediaWidgets LOCATION)
-        SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";\nSource: \"${QtMultimediaWidgets_location}\"; DestDir: \"{app}\";")
-    ELSE()
-        SET(ISS_QT_MULTIMEDIA "; QtMultimedia isn't used")
-    ENDIF()
-    GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
-    IF(GENERATE_STELMAINLIB)
-        SET(STELMAINLIB "Source: \"${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"; DestDir: \"{app}\";")
-        SET(MESALIB "; MESA libraries isn't used")
-    ELSE()
-        SET(STELMAINLIB "; StelMainLib isn't used")
-        SET(MESALIB "Source: \"${QT5_LIBS}/opengl32sw.dll\"; DestDir: \"{app}\";")
-    ENDIF()
-    IF(MSVC)
-        # Use installer for checking minimum requirements
-        # Stellarium/MSVC require Windows Vista (6.0) for work
-        # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-        SET(MIN_VERSION "6.0")
-        SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
-    ELSE()
-        # Use installer for checking minimum requirements
-        # Stellarium/MinGW require Windows XP (5.1) for work
-        # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-        SET(MIN_VERSION "5.1")
-        SET(ISS_ANGLE_LIBS "; ANGLE support doesn't exists for MinGW")
-    ENDIF()
-    SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
-    # Deploy related stuff
-    SET(ISS_QT_PLUGINS "; Qt plugins")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/audio/qtaudio_windows.dll\"; DestDir: \"{app}/audio/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/bearer/qgenericbearer.dll\"; DestDir: \"{app}/bearer/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/bearer/qnativewifibearer.dll\"; DestDir: \"{app}/bearer/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qico.dll\"; DestDir: \"{app}/imageformats/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qjpeg.dll\"; DestDir: \"{app}/imageformats/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qgif.dll\"; DestDir: \"{app}/imageformats/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qwbmp.dll\"; DestDir: \"{app}/imageformats/\";")
-    SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qwebp.dll\"; DestDir: \"{app}/imageformats/\";")
-    IF(ENABLE_MEDIA)
-    	SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
-    ENDIF()
-    IF(ENABLE_SPOUT)
-        IF(SPOUT_LIBRARY_DLL) # we know the dll
-            MESSAGE(STATUS "Found Spout library: ${SPOUT_LIBRARY_DLL}")
-            SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_DLL}\"; DestDir: \"{app}\";")
-            SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_LICENCE}\"; DestDir: \"{app}\" DestName: \"Spout_licence.txt\";")
-        ENDIF()
-        SET(ISS_SPOUT "Name: \"{group}\\Stellarium {cm:SpoutMode}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
-    ELSE()
-        SET(ISS_SPOUT "; Spout support is disabled")
-    ENDIF(ENABLE_SPOUT)
+     GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
+     GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
+     GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
+     IF(USE_QTOPENGL)
+          GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
+          SET(ISS_QT_OPENGL "Source: \"${QtOpenGL_location}\"; DestDir: \"{app}\";")
+     ELSE()
+          SET(ISS_QT_OPENGL "; QtOpenGL isn't used")
+     ENDIF()
+     GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
+     GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
+     GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)     
+     GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
+     GET_TARGET_PROPERTY(QtPrintSupport_location Qt5::PrintSupport LOCATION)
+     SET(ISS_QT_PRINTSUPPORT "Source: \"${QtPrintSupport_location}\"; DestDir: \"{app}\";")
+     IF(ENABLE_SCRIPTING)
+          GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
+          SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
+     ELSE()
+          SET(ISS_QT_SCRIPT "; QtScript isn't used")
+     ENDIF()
+     IF(USE_PLUGIN_TELESCOPECONTROL)
+          GET_TARGET_PROPERTY(QtSerialPort_location Qt5::SerialPort LOCATION)
+          SET(ISS_QT_SERIALPORT "Source: \"${QtSerialPort_location}\"; DestDir: \"{app}\";")
+     ELSE()
+          SET(ISS_QT_SERIALPORT "; QtSerialPort isn't used")
+     ENDIF()
+     IF(ENABLE_MEDIA)
+          GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
+          GET_TARGET_PROPERTY(QtMultimediaWidgets_location Qt5::MultimediaWidgets LOCATION)
+          SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";\nSource: \"${QtMultimediaWidgets_location}\"; DestDir: \"{app}\";")
+     ELSE()
+          SET(ISS_QT_MULTIMEDIA "; QtMultimedia isn't used")
+     ENDIF()
+     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
+     IF(GENERATE_STELMAINLIB)
+          SET(STELMAINLIB "Source: \"${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"; DestDir: \"{app}\";")
+     ELSE()
+          SET(STELMAINLIB "; StelMainLib isn't used")
+     ENDIF()
+     SET(MESALIB "Source: \"${QT5_LIBS}/opengl32sw.dll\"; DestDir: \"{app}\";")
+     IF(MSVC)
+          # Use installer for checking minimum requirements
+          # Stellarium/MSVC require Windows Vista (6.0) for work
+          # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+          SET(MIN_VERSION "6.0")
+          SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
+     ELSE()
+          # Use installer for checking minimum requirements
+          # Stellarium/MinGW require Windows XP (5.1) for work
+          # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+          SET(MIN_VERSION "5.1")
+          SET(ISS_ANGLE_LIBS "; ANGLE support doesn't exists for MinGW")
+     ENDIF()
+     SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+     # Deploy related stuff
+     SET(ISS_QT_PLUGINS "; Qt plugins")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/audio/qtaudio_windows.dll\"; DestDir: \"{app}/audio/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/bearer/qgenericbearer.dll\"; DestDir: \"{app}/bearer/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/bearer/qnativewifibearer.dll\"; DestDir: \"{app}/bearer/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qico.dll\"; DestDir: \"{app}/imageformats/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qjpeg.dll\"; DestDir: \"{app}/imageformats/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qgif.dll\"; DestDir: \"{app}/imageformats/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qwbmp.dll\"; DestDir: \"{app}/imageformats/\";")
+     SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/imageformats/qwebp.dll\"; DestDir: \"{app}/imageformats/\";")
+     IF(ENABLE_MEDIA)
+          SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
+     ENDIF()
+     IF(ENABLE_SPOUT)
+          IF(SPOUT_LIBRARY_DLL) # we know the dll
+               MESSAGE(STATUS "Found Spout library: ${SPOUT_LIBRARY_DLL}")
+               SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_DLL}\"; DestDir: \"{app}\";")
+               SET(ISS_QT_PLUGINS "${ISS_QT_PLUGINS}\nSource: \"${SPOUT_LIBRARY_LICENCE}\"; DestDir: \"{app}\"; DestName: \"Spout_licence.txt\";")
+          ENDIF()
+          SET(ISS_SPOUT "Name: \"{group}\\Stellarium {cm:SpoutMode}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
+     ELSE()
+          SET(ISS_SPOUT "; Spout support is disabled")
+     ENDIF(ENABLE_SPOUT)
 
 ENDIF(WIN32)
 
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    ADD_DEFINITIONS(-DQT_NO_DEBUG)
-    ADD_DEFINITIONS(-DNDEBUG)
+     ADD_DEFINITIONS(-DQT_NO_DEBUG)
+     ADD_DEFINITIONS(-DNDEBUG)
 ENDIF()
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/default_config.ini.cmake ${CMAKE_SOURCE_DIR}/data/default_config.ini @ONLY)
 
 ########### uninstall files ###############
 CONFIGURE_FILE(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-    IMMEDIATE @ONLY)
+     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+     IMMEDIATE @ONLY)
 
 ADD_CUSTOM_TARGET(uninstall
-    "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+     "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 ########### Packaging info for CPack ###########
 
 IF(GENERATE_PACKAGE_TARGET)
-    INCLUDE(InstallRequiredSystemLibraries)
-    SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
-    SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
-    SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-    SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
-    SET(CPACK_PACKAGE_VERSION_MAJOR "${STELLARIUM_MAJOR}")
-    SET(CPACK_PACKAGE_VERSION_MINOR "${STELLARIUM_MINOR}")
-    SET(CPACK_PACKAGE_VERSION_PATCH "${STELLARIUM_PATCH}")
-    SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
-    SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
-    SET(CPACK_SOURCE_GENERATOR "TGZ")
-    SET(CPACK_GENERATOR "TGZ")
-    SET(CPACK_STRIP_FILES "bin/stellarium")
-    SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-    SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "guide/" "builds/" "installers/" "util/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
-    SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
-    SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
-    SET(CPACK_RPM_PACKAGE_URL "http://stellarium.org/")
-    SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium-pubdevel@lists.sourceforge.net>")
-    SET(CPACK_DEBIAN_PACKAGE_SECTION "science")
-    SET(CPACK_DEBIAN_PACKAGE_VERSION "${VERSION}+deb1")
-    SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "${CPACK_RPM_PACKAGE_URL}")
-    SET(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-    INCLUDE(CPack)
+     INCLUDE(InstallRequiredSystemLibraries)
+     SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
+     SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
+     SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+     SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+     SET(CPACK_PACKAGE_VERSION_MAJOR "${STELLARIUM_MAJOR}")
+     SET(CPACK_PACKAGE_VERSION_MINOR "${STELLARIUM_MINOR}")
+     SET(CPACK_PACKAGE_VERSION_PATCH "${STELLARIUM_PATCH}")
+     SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
+     SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${VERSION}")
+     SET(CPACK_SOURCE_GENERATOR "TGZ")
+     SET(CPACK_GENERATOR "TGZ")
+     SET(CPACK_STRIP_FILES "bin/stellarium")
+     SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
+     SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "guide/" "builds/" "installers/" "util/" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+     SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
+     SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
+     SET(CPACK_RPM_PACKAGE_URL "http://stellarium.org/")
+     SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium-pubdevel@lists.sourceforge.net>")
+     SET(CPACK_DEBIAN_PACKAGE_SECTION "science")
+     SET(CPACK_DEBIAN_PACKAGE_VERSION "${VERSION}+deb1")
+     SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "${CPACK_RPM_PACKAGE_URL}")
+     SET(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+     INCLUDE(CPack)
 ENDIF()
 
 ########### OS X Bundling ###############
 IF(APPLE)
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
+     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
 
-    # ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
-    ADD_CUSTOM_TARGET(
-        mac_app
-        python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
-        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        COMMENT "making the macosx bundle."
-        VERBATIM
-    )
+     # ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
+     ADD_CUSTOM_TARGET(
+          mac_app
+          python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
+          DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
+          WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+          COMMENT "making the macosx bundle."
+          VERBATIM
+     )
 ENDIF()
 
 ########### Windows packaging ###############
 IF(WIN32)
-    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
-    SET(ISS_COMPILER_FILENAME "ISCC.exe")
-    FIND_FILE(ISS_COMPILER_PATH ${ISS_COMPILER_FILENAME})
-    IF(ISS_COMPILER_PATH)
-        MESSAGE(STATUS "Found Inno Setup (.iss) compiler: ${ISS_COMPILER_PATH}")
-        # Add installer target
-        ADD_CUSTOM_TARGET(
+     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+     SET(ISS_COMPILER_FILENAME "ISCC.exe")
+     FIND_FILE(ISS_COMPILER_PATH ${ISS_COMPILER_FILENAME})
+     IF(ISS_COMPILER_PATH)
+          MESSAGE(STATUS "Found Inno Setup (.iss) compiler: ${ISS_COMPILER_PATH}")
+          # Add installer target
+          ADD_CUSTOM_TARGET(
                stellarium-installer
                COMMAND ${ISS_COMPILER_PATH} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
                COMMENT "Making an installer package for Windows..."
                VERBATIM
-        )
-    ELSE()
-        MESSAGE(WARNING "Inno Setup Compiler not found. You won't be able to build setup files.")
-    ENDIF()
+          )
+     ELSE()
+          MESSAGE(WARNING "Inno Setup Compiler not found. You won't be able to build setup files.")
+     ENDIF()
 ENDIF()
 
 ########### Generate doxygen doc ###############
 FIND_PACKAGE(Doxygen)
 IF(DOXYGEN_FOUND)
-    IF(DOXYGEN_DOT_FOUND)
-        SET(HAVE_DOT "YES")
-        SET(DOT_PATH ${DOXYGEN_DOT_PATH})
-    ELSE()
-        SET(HAVE_DOT "NO")
-        SET(DOT_PATH "")
-    ENDIF()
-    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-    ADD_CUSTOM_TARGET(apidoc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
+     IF(DOXYGEN_DOT_FOUND)
+          SET(HAVE_DOT "YES")
+          SET(DOT_PATH ${DOXYGEN_DOT_PATH})
+     ELSE()
+          SET(HAVE_DOT "NO")
+          SET(DOT_PATH "")
+     ENDIF()
+     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+     ADD_CUSTOM_TARGET(apidoc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
 ENDIF()
 
 ##################### Generate translation copying script ######################
 IF(WIN32)
-    STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
-    STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
-    CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
+     STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
+     STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
+     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
 ENDIF() 
 
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
 INCLUDE_DIRECTORIES(
-     ${CMAKE_BINARY_DIR}
-     ${CMAKE_SOURCE_DIR}/src
-     ${CMAKE_SOURCE_DIR}/src/core
-     ${CMAKE_SOURCE_DIR}/src/core/modules
-     ${CMAKE_SOURCE_DIR}/src/core/planetsephems
-     ${CMAKE_SOURCE_DIR}/src/gui
-     ${CMAKE_SOURCE_DIR}/src/scripting
-     ${INTL_INCLUDE_DIR}
-     ${CMAKE_BINARY_DIR}/src
+      ${CMAKE_BINARY_DIR}
+      ${CMAKE_SOURCE_DIR}/src
+      ${CMAKE_SOURCE_DIR}/src/core
+      ${CMAKE_SOURCE_DIR}/src/core/modules
+      ${CMAKE_SOURCE_DIR}/src/core/planetsephems
+      ${CMAKE_SOURCE_DIR}/src/gui
+      ${CMAKE_SOURCE_DIR}/src/scripting
+      ${INTL_INCLUDE_DIR}
+      ${CMAKE_BINARY_DIR}/src
 )
 
 ########### Subdirectories ###############
@@ -763,17 +770,17 @@ ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc )
 IF(ENABLE_NLS)
-    ADD_SUBDIRECTORY( po )
+     ADD_SUBDIRECTORY( po )
 ENDIF()
 ADD_SUBDIRECTORY( landscapes )
 ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae )
 IF(ENABLE_SCRIPTING)
-    ADD_SUBDIRECTORY( scripts )
+     ADD_SUBDIRECTORY( scripts )
 ENDIF()
 IF(USE_PLUGIN_SCENERY3D)
-    # add scenery3d scenes
-    ADD_SUBDIRECTORY( scenery3d )
+     # add scenery3d scenes
+     ADD_SUBDIRECTORY( scenery3d )
 ENDIF()
 ADD_SUBDIRECTORY( stars )
 ADD_SUBDIRECTORY( plugins )

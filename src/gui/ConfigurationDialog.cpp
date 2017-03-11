@@ -644,6 +644,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_supergalactic_poles",	propMgr->getStelPropertyValue("GridLinesMgr.supergalacticPolesDisplayed").toBool());
 	conf->setValue("viewing/flag_equinox_J2000_points",	propMgr->getStelPropertyValue("GridLinesMgr.equinoxJ2000PointsDisplayed").toBool());
 	conf->setValue("viewing/flag_equinox_points",		propMgr->getStelPropertyValue("GridLinesMgr.equinoxPointsDisplayed").toBool());
+	conf->setValue("viewing/flag_solstice_J2000_points",	propMgr->getStelPropertyValue("GridLinesMgr.solsticeJ2000PointsDisplayed").toBool());
+	conf->setValue("viewing/flag_solstice_points",		propMgr->getStelPropertyValue("GridLinesMgr.solsticePointsDisplayed").toBool());
 
 	conf->setValue("viewing/flag_constellation_drawing",	propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_name",	propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
