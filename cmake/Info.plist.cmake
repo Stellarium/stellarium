@@ -30,7 +30,5 @@
 	<string>true</string>
 	<key>Application Category</key>
 	<string>Education</string>
-	<key>NSSupportsAutomaticGraphicsSwitching</key>
-	<true/>
 </dict>
 </plist>
