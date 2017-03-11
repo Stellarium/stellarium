@@ -142,7 +142,7 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox
-	//! The frame has it's Z axis at the planet's current rotation axis
+	//! The frame has its Z axis at the planet's current rotation axis
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
 
@@ -164,17 +164,17 @@ public:
 
 	//! Get observer-centered alt/az position
 	//! It is the geometric position, i.e. without taking refraction effect into account.
-	//! The frame has it's Z axis at the zenith
+	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosGeometric(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the apparent position, i.e. taking the refraction effect into account.
-	//! The frame has it's Z axis at the zenith
+	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the automatic position, i.e. taking the refraction effect into account if atmosphere is on.
-	//! The frame has it's Z axis at the zenith
+	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
