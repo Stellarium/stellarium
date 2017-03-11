@@ -132,9 +132,8 @@ void SimbadLookupReply::httpQueryFinished()
 				StelUtils::spheToRect(ra, dec, v);
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
-				line.replace("NAME " ,"");
-				line.replace("  ", " "); // Remove double spaces
-				resultPositions[line]=v;
+				line.replace("NAME " ,"");				
+				resultPositions[line.simplified()]=v; // Remove an extra spaces
 			}
 			line = reply->readLine();
 			line.chop(1); // Remove a line break at the end
@@ -170,8 +169,12 @@ SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QStrin
 {
 	// Create the Simbad query
 	QString url(serverUrl);
-	url += "simbad/sim-script?script=format object \"%COO(d;A D)\\n%IDLIST(1)\"\n";
-	url += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
-	url += objectName;
+	QString query = "format object \"%COO(d;A D)\\n%IDLIST(1)\"\n";
+	query += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
+	query += objectName;
+	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
+
+	url += "simbad/sim-script?script=";
+	url += ba.constData();
 	return new SimbadLookupReply(url, networkMgr, delayMs);
 }

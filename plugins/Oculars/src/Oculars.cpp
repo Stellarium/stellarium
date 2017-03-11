@@ -134,6 +134,8 @@ Oculars::Oculars():
 	flagSupergalacticPoles(false),
 	flagEquinoxJ2000Points(false),
 	flagEquinoxPoints(false),
+	flagSolsticeJ2000Points(false),
+	flagSolsticePoints(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -2145,6 +2147,8 @@ void Oculars::unzoomOcular()
 		gridManager->setFlagSupergalacticPoles(flagSupergalacticPoles);
 		gridManager->setFlagEquinoxJ2000Points(flagEquinoxJ2000Points);
 		gridManager->setFlagEquinoxPoints(flagEquinoxPoints);
+		gridManager->setFlagSolsticeJ2000Points(flagSolsticeJ2000Points);
+		gridManager->setFlagSolsticePoints(flagSolsticePoints);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
 	}
@@ -2222,6 +2226,8 @@ void Oculars::zoom(bool zoomedIn)
 				flagSupergalacticPoles = gridManager->getFlagSupergalacticPoles();
 				flagEquinoxJ2000Points = gridManager->getFlagEquinoxJ2000Points();
 				flagEquinoxPoints = gridManager->getFlagEquinoxPoints();
+				flagSolsticeJ2000Points = gridManager->getFlagSolsticeJ2000Points();
+				flagSolsticePoints = gridManager->getFlagSolsticePoints();
 				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 			}
 
@@ -2293,6 +2299,8 @@ void Oculars::zoomOcular()
 		gridManager->setFlagSupergalacticPoles(false);
 		gridManager->setFlagEquinoxJ2000Points(false);
 		gridManager->setFlagEquinoxPoints(false);
+		gridManager->setFlagSolsticeJ2000Points(false);
+		gridManager->setFlagSolsticePoints(false);
 
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
 	}
@@ -2541,30 +2549,30 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 		{
 			int degrees = (int)fovX;
 			float minutes = (int)((fovX - degrees) * 60);
-			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
 			float minutes = (fovX * 60);
-			stringFovX = QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovX = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 
 		if (fovY >= 1.0)
 		{
 			int degrees = (int)fovY;
 			float minutes = ((fovY - degrees) * 60);
-			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
 			float minutes = (fovY * 60);
-			stringFovY = QString::number(minutes, 'f', 1) + QChar(0x2032);
+			stringFovY = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 	}
 	else
 	{
-		stringFovX = QString::number(fovX) + QChar(0x00B0);
-		stringFovY = QString::number(fovY) + QChar(0x00B0);
+		stringFovX = QString::number(fovX, 'f', 5) + QChar(0x00B0);
+		stringFovY = QString::number(fovY, 'f', 5) + QChar(0x00B0);
 	}
 
 	return stringFovX + QChar(0x00D7) + stringFovY;

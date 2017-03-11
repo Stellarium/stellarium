@@ -105,6 +105,16 @@ public:
 	// Methods defined in StelObject class
 	//
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	//! Return a map like StelObject, but with a few extra tags:
+	// TODO: Describe the fields!
+	//! - status
+	//! - id
+	//! - type (translated string "meteor shower")
+	//! - speed (km/s)
+	//! - pop-idx (population index)
+	//! - parent
+	//! - zhr-max (information string)
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual QString getType(void) const { return "MeteorShower"; }
 	virtual QString getEnglishName(void) const { return m_designation.trimmed(); }
 	virtual QString getNameI18n(void) const	{ return q_(m_designation.trimmed()); }
@@ -151,7 +161,7 @@ private:
 	//! Gets the solar longitude for a specified date
 	//! @param date QDate
 	//! @return solar longitude in degree
-	QString getSolarLongitude(QDate date) const;
+	static QString getSolarLongitude(QDate date);
 };
 
 #endif /*_METEORSHOWER_HPP_*/

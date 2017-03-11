@@ -287,7 +287,7 @@ void OcularDialog::moveDownSelectedLens()
 void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
-	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool();
+	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", true).toBool();
 	if (requireSelection != requireSelectionToZoom)
 	{
 		Oculars::appSettings()->setValue("require_selection_to_zoom", requireSelection);
@@ -299,7 +299,7 @@ void OcularDialog::requireSelectionStateChanged(int state)
 void OcularDialog::scaleImageCircleStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
-	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool();
+	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle", false).toBool();
 	if (shouldScale != useMaxImageCircle)
 	{
 		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
@@ -454,13 +454,16 @@ void OcularDialog::createDialogContent()
 
 	// set the initial state
 	QSettings *settings = Oculars::appSettings();
-	if (settings->value("require_selection_to_zoom", 1.0).toBool()) {
+	if (settings->value("require_selection_to_zoom", true).toBool())
+	{
 		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
 	}
-	if (settings->value("use_max_exit_circle", 0.0).toBool()) {
+	if (settings->value("use_max_exit_circle", false).toBool())
+	{
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
-	if (settings->value("limit_stellar_magnitude", true).toBool()) {
+	if (settings->value("limit_stellar_magnitude", true).toBool())
+	{
 		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
 	}
 	if (settings->value("enable_control_panel", false).toBool())

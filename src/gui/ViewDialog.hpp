@@ -122,6 +122,8 @@ private slots:
 	void askSupergalacticPolesColor();
 	void askEquinoxJ2000PointsColor();
 	void askEquinoxPointsColor();
+	void askSolsticeJ2000PointsColor();
+	void askSolsticePointsColor();
 	// constellations colors
 	void askConstellationLabelsColor();
 	void askConstellationLinesColor();

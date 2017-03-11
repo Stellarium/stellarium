@@ -419,13 +419,13 @@ IF(ENABLE_SCRIPTING)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
 ENDIF()
 if(USE_OLD_QGLWIDGET)
-    # The Qt5OpenGL library is only required when using the legacy viewport
-    SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
+     # The Qt5OpenGL library is only required when using the legacy viewport
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
 endif()
 
 if(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
-    # automatically copy the spout .dll to the binary directory, if possible
-    configure_file(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+     # automatically copy the spout .dll to the binary directory, if possible
+     CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 endif()
 
 set(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
