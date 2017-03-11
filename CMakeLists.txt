@@ -46,6 +46,9 @@ SET(MINIMAL_QT_VERSION "5.3.0")
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
+# Show platform info
+MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
+
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
@@ -58,23 +61,23 @@ ENDIF()
 
 # GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
 # Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
-if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+IF(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
     ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
-endif()
+ENDIF()
 
-set(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
-if(OPENGL_DEBUG_LOGGING)
-    add_definitions(-DOPENGL_DEBUG_LOGGING)
+SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
+IF(OPENGL_DEBUG_LOGGING)
+    ADD_DEFINITIONS(-DOPENGL_DEBUG_LOGGING)
     # This enables logging of QOpenGLFunctions through forced glGetError after each call
-    add_definitions(-DQ_ENABLE_OPENGL_FUNCTIONS_DEBUG)
-endif()
+    ADD_DEFINITIONS(-DQ_ENABLE_OPENGL_FUNCTIONS_DEBUG)
+ENDIF()
 
 # Use ccache if possible
-find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
+FIND_PROGRAMCCACHE_PROGRAM ccache)
+IF(CCACHE_PROGRAM)
     MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
-endif()
+    SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
 IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
@@ -197,7 +200,12 @@ SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
-     SET(ENABLE_SPOUT 1 CACHE BOOL "Define whether SPOUT support should be activated.")
+     IF(${CMAKE_SYSTEM_VERSION} LESS 6.1 ) # Need Windows 7 to enable support of Spout
+          SET(ENABLE_SPOUT 0)
+          MESSAGE(STATUS "Spout support disabled due to operating system requirement")
+     ELSE()
+          SET(ENABLE_SPOUT 1 CACHE BOOL "Define whether SPOUT support should be activated.")
+     ENDIF()
 ELSE()
      SET(ENABLE_SPOUT 0)
 ENDIF()
