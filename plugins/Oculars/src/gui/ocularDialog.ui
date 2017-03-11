@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>646</width>
-    <height>609</height>
+    <height>661</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -306,6 +306,13 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
+               <property name="text">
+                <string>Use degrees and minutes for FOV of CCD</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxTypeOfMount">
                <property name="toolTip">
@@ -313,13 +320,6 @@
                </property>
                <property name="text">
                 <string>Enable automatic switch of mount type</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBoxDecimalDegrees">
-               <property name="text">
-                <string>Use degrees and minutes for FOV of CCD</string>
                </property>
               </widget>
              </item>

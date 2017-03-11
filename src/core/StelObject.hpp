@@ -99,6 +99,36 @@ public:
 	//! @return an HTML string containing information about the StelObject.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const = 0;
 
+	//! Return a key/value map with data about an object's position, magnitude and so on. Useful in a context like scripting.
+	//! Derived objects can add their own special information tags.
+	//! @param core the current StelCore
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declination angle (current date frame) in decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
+	//! - sglong : supergalactic longitude in decimal degrees
+	//! - sglat : supergalactic latitude in decimal degrees
+	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
+	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
+	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
+	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (after atmospheric extinction)
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
+	//! - name : english name of the object
+	//! - localized-name : localized name
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
+
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
 

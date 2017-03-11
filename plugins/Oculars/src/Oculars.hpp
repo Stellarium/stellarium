@@ -291,6 +291,8 @@ private:
 	bool flagSupergalacticPoles;	//!< Flag to track if SupergalacticPoles was displayed at activation.
 	bool flagEquinoxJ2000Points;	//!< Flag to track if EquinoxJ2000Points was displayed at activation.
 	bool flagEquinoxPoints;		//!< Flag to track if EquinoxPoints was displayed at activation.
+	bool flagSolsticeJ2000Points;	//!< Flag to track if SolsticeJ2000Points was displayed at activation.
+	bool flagSolsticePoints;	//!< Flag to track if SolsticePoints was displayed at activation.
 
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 

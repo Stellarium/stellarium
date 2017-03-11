@@ -381,7 +381,7 @@ void Atmosphere::draw(StelCore* core)
 
 	// And draw everything at once
 	indicesBuffer.bind();
-	int shift=0;
+	std::size_t shift=0;
 	for (int y=0;y<skyResolutionY;++y)
 	{
 		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
