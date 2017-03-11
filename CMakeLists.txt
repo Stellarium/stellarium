@@ -603,11 +603,10 @@ IF(WIN32)
      GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
      IF(GENERATE_STELMAINLIB)
           SET(STELMAINLIB "Source: \"${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"; DestDir: \"{app}\";")
-          SET(MESALIB "; MESA libraries isn't used")
      ELSE()
           SET(STELMAINLIB "; StelMainLib isn't used")
-          SET(MESALIB "Source: \"${QT5_LIBS}/opengl32sw.dll\"; DestDir: \"{app}\";")
      ENDIF()
+     SET(MESALIB "Source: \"${QT5_LIBS}/opengl32sw.dll\"; DestDir: \"{app}\";")
      IF(MSVC)
           # Use installer for checking minimum requirements
           # Stellarium/MSVC require Windows Vista (6.0) for work
