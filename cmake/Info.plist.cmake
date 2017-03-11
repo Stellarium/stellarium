@@ -23,12 +23,14 @@
 	<key>CFBundleShortVersionString</key>
 	<string>@PACKAGE_VERSION@</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.7.0</string>
+	<string>10.8.0</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHighResolutionCapable</key>
 	<string>true</string>
 	<key>Application Category</key>
 	<string>Education</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
 </dict>
 </plist>
