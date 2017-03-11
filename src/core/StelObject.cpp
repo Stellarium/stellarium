@@ -214,10 +214,10 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 	if (flags&EclipticCoordJ2000)
 	{
-		double ecl=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+		double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
 		if (withDecimalDegree)
 			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
