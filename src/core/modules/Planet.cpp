@@ -1638,7 +1638,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				}
 				// Special case for the Moon. Was 1.6, but this often is too bright.
 				light.diffuse = Vec4f(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor,1.f);
-
 			}
 		}
 		else
@@ -1648,8 +1647,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		// possibly tint sun's color from extinction. This should deliberately cause stronger reddening than for the other objects.
 		if (this==ssm->getSun())
-			sPainter->setColor(2.f, pow(0.75f, extinctedMag)*2.f, pow(0.42f, 0.9f*extinctedMag)*2.f);
-
+		{
+			// when we zoom in, reduce the overbrightness. (LP:#1421173)
+			const float fov=core->getProjection(transfo)->getFov();
+			const float overbright=qMin(2.0f, qMax(0.85f,0.5f*fov)); // scale full brightness to 0.85...2. (<2 when fov gets under 4 degrees)
+			sPainter->setColor(overbright, pow(0.75f, extinctedMag)*overbright, pow(0.42f, 0.9f*extinctedMag)*overbright);
+		}
 
 		if (rings)
 		{
