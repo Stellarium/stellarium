@@ -25,6 +25,7 @@
 #include "SolarSystem.hpp"
 #include "LandscapeMgr.hpp"
 #include "Planet.hpp"
+#include "Orbit.hpp"
 #include "planetsephems/precession.h"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
@@ -119,8 +120,11 @@ Planet::Planet(const QString& englishName,
 	  flagLighting(flagLighting),
 	  radius(radius),
 	  oneMinusOblateness(1.0-oblateness),
+	  eclipticPos(0.,0.,0.),
 	  haloColor(halocolor),
 	  albedo(albedo),
+	  absoluteMagnitude(-99.0f),
+	  rotLocalToParent(Mat4d::identity()),
 	  axisRotation(0.),
 	  rings(NULL),
 	  distance(0.0),
@@ -133,15 +137,13 @@ Planet::Planet(const QString& englishName,
 	  flagLabels(true),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
-	  halo(hasHalo)
+	  halo(hasHalo),
+	  vMagAlgorithm(Planet::UndefinedAlgorithm)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
 	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
-	vMagAlgorithm = Planet::UndefinedAlgorithm;
 
-	eclipticPos = Vec3d(0.,0.,0.);
-	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
@@ -180,9 +182,13 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		vMagAlgorithmMap.clear();
 	}
-	vMagAlgorithmMap.insert(Planet::Planesas,	"planesas");
-	vMagAlgorithmMap.insert(Planet::Mueller,	"mueller");
-	vMagAlgorithmMap.insert(Planet::Harris,		"harris");
+	vMagAlgorithmMap.insert(Planet::Expl_Sup_2013,	"ExpSup2013");
+	vMagAlgorithmMap.insert(Planet::Expl_Sup_1992,	"planesas"); // deprecate in 0.16, remove later. TODO: Rename the other strings. BETTER: Use the metaobject!
+	vMagAlgorithmMap.insert(Planet::Expl_Sup_1992,	"ExpSup1992");
+	vMagAlgorithmMap.insert(Planet::Mueller_1893,	"mueller");     // deprecate in 0.16, remove later.
+	vMagAlgorithmMap.insert(Planet::Mueller_1893,	"Mueller1893"); // better name
+	vMagAlgorithmMap.insert(Planet::Astr_Alm_1984,	"harris");      // deprecate in 0.16, remove later
+	vMagAlgorithmMap.insert(Planet::Astr_Alm_1984,	"AstrAlm1984"); // consistent name
 	vMagAlgorithmMap.insert(Planet::Generic,	"generic"),
 	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
 }
@@ -255,10 +261,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		else
 			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
-	if (flags&AbsoluteMagnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
+	if (flags&AbsoluteMagnitude && (getAbsoluteMagnitude() > -99.))
 	{
-		// TODO: Calculate accurate value of absolute magnitude for Solar System bodies (H)
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(distanceAu*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+		oss << q_("Absolute Magnitude: %1").arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br>";
+		const float moMag=getMeanOppositionMagnitude();
+		if (moMag<50.f)
+			oss << q_("Mean Opposition Magnitude: %1").arg(moMag, 0, 'f', 2) << "<br>";
 	}
 
 	oss << getPositionInfoString(core, flags);
@@ -986,6 +994,61 @@ double Planet::getElongation(const Vec3d& obsPos) const
 	return std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*sqrt(observerPlanetRq*observerRq)));
 }
 
+// Source: Explanatory Supplement 2013, Table 10.6 and formula (10.5) with semimajorAxis a from Table 8.7.
+float Planet::getMeanOppositionMagnitude() const
+{
+	if (absoluteMagnitude==-99.)
+		return 100.;
+	if (englishName=="Sun")
+		return 100;
+
+	double semimajorAxis=0.;
+	if (englishName=="Moon")
+		return -12.74f;
+	else 	if (englishName=="Mars")
+		return -2.01f;
+	else if (englishName=="Jupiter")
+		return -2.7f;
+	else if (englishName=="Saturn")
+		return 0.67f;
+	else if (englishName=="Uranus")
+		return 5.52f;
+	else if (englishName=="Neptune")
+		return 7.84f;
+	else if (englishName=="Pluto")
+		return 15.12f;
+	else if (englishName=="Io")
+		return 5.02f;
+	else if (englishName=="Europa")
+		return 5.29f;
+	else if (englishName=="Ganymede")
+		return 4.61f;
+	else if (englishName=="Callisto")
+		return 5.65f;
+	else if (parent->englishName=="Mars")
+		semimajorAxis=1.52371034;
+	else if (parent->englishName=="Jupiter")
+		semimajorAxis=5.202887;
+	else if (parent->englishName=="Saturn")
+		semimajorAxis=9.53667594;
+	else if (parent->englishName=="Uranus")
+		semimajorAxis=19.18916464;
+	else if (parent->englishName=="Neptune")
+		semimajorAxis=30.06992276;
+	else if (parent->englishName=="Pluto")
+		semimajorAxis=39.48211675;
+	else if (pType>= isAsteroid)
+	{
+		if (userDataPtr)
+			semimajorAxis=((CometOrbit*)userDataPtr)->getSemimajorAxis();
+	}
+
+	if (semimajorAxis>0.)
+		return absoluteMagnitude+5*log10(semimajorAxis*(semimajorAxis-1));
+
+	return 100.;
+}
+
 // Computation of the visual magnitude (V band) of the planet.
 float Planet::getVMagnitude(const StelCore* core) const
 {
@@ -1006,14 +1069,14 @@ float Planet::getVMagnitude(const StelCore* core) const
 		return 4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor));
 	}
 
-	// Compute the angular phase
+	// Compute the phase angle i. We need the intermediate results also below, therefore we don't just call getPhaseAngle.
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const double observerRq = observerHelioPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
 	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
-	const double phase = std::acos(cos_chi);
+	const double phaseAngle = std::acos(cos_chi);
 
 	double shadowFactor = 1.;
 	// Check if the satellite is inside the inner shadow of the parent planet:
@@ -1058,22 +1121,83 @@ float Planet::getVMagnitude(const StelCore* core) const
 	// Use empirical formulae for main planets when seen from earth
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		const double phaseDeg=phase*180./M_PI;
+		const double phaseDeg=phaseAngle*180./M_PI;
 		const double d = 5. * log10(std::sqrt(observerPlanetRq*planetRq));
 
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
-		// There are two solutions:
-		// (1) G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		// There are three solutions:
+		// (0) "Planesas": original solution in Stellarium, present around 2010.
+		// (1) G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961 p.312ff]
 		// (2) Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
 		// The structure is almost identical, just the numbers are different!
 		// I activate (1) for now, because we want to simulate the eye's impression. (Esp. Venus!)
 		// AW: (2) activated by default
+		// GZ Note that calling (2) "Harris" is an absolute misnomer. Meeus clearly describes this in AstrAlg1998 p.286.
+		// The values should likely be named:
+		// Planesas --> Expl_Suppl_1992  AND THIS SHOULD BECOME DEFAULT
+		// Mueller  --> Mueller_1893
+		// Harris   --> Astr_Eph_1984
 
 		switch (core->getCurrentPlanet()->getApparentMagnitudeAlgorithm())
 		{
-			case Planesas:
+			case UndefinedAlgorithm:	// The most recent solution should be activated by default
+			case Expl_Sup_2013:
+			{
+				// GZ2017: This is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 2013 (chap. 10.3)
+				if (englishName=="Mercury")
+					return -0.6 + d +  (((3.02e-6*phaseDeg -0.000488)*phaseDeg + 0.0498)*phaseDeg);
+				if (englishName=="Venus")
+				{ // there are two regions strongly enclosed per phaseDeg (2.7..163.6..170.2). However, we must deliver a solution for every case.
+					if (phaseDeg<163.6)
+						return -5.18 + d + ((0.13e-6*phaseDeg +0.000057)*phaseDeg + 0.0103)*phaseDeg;
+					else
+						return 0.17 + d -0.0096*phaseDeg;
+				}
+				if (englishName=="Mars")
+					return -1.52 + d + 0.016*phaseDeg;
+				if (englishName=="Jupiter")
+					return -9.40 + d + 0.005*phaseDeg;
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					// implemented from Meeus, Astr.Alg.1992
+					const double jde=core->getJDE();
+					const double T=(jde-2451545.0)/36525.0;
+					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+					double rings = -2.6*fabs(sinx) + 1.25*sinx*sinx; // ExplSup2013: added term as (10.81)
+					return -8.88 + d + 0.044*phaseDeg + rings;
+				}
+				if (englishName=="Uranus")
+					return -7.19 + d + 0.0028*phaseDeg;
+				if (englishName=="Neptune")
+					return -6.87 + d + 0.041*phaseDeg;
+				if (englishName=="Pluto")
+					return -1.0  + d + 0.041*phaseDeg;
+				if (englishName=="Io")
+					return -1.68 + d + phaseDeg*(0.46   - 0.0010*phaseDeg);
+				if (englishName=="Europa")
+					return -1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg);
+				if (englishName=="Ganymede")
+					return -2.09 + d + phaseDeg*(0.323  - 0.00066*phaseDeg);
+				if (englishName=="Callisto")
+					return -1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg);
+				if (absoluteMagnitude!=-99.)
+					return absoluteMagnitude+d;
+
+				break;
+			}
+
+			case Expl_Sup_1992:
 			{
 				// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+				// GZ2016: Actually, this is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 1992! (chap. 7.12)
+				// The value -8.88 for Saturn V(1,0) seems to be a correction of a typo, where Suppl.Astr. gives -7.19 just like for Uranus.
 				double f1 = phaseDeg/100.;
 
 				if (englishName=="Mercury")
@@ -1100,7 +1224,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*sinx + 1.25*sinx*sinx;
+					double rings = -2.6*fabs(sinx) + 1.25*sinx*sinx;
 					return -8.88 + d + 0.044*phaseDeg + rings;
 				}
 				if (englishName=="Uranus")
@@ -1112,7 +1236,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
-			case Mueller:
+			case Mueller_1893:
 			{
 				// (1)
 				if (englishName=="Mercury")
@@ -1121,9 +1245,9 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50;
 				}
 				if (englishName=="Venus")
-					return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg;
+					return -4.00 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg;
 				if (englishName=="Mars")
-					return -1.3 + d + 0.01486*phaseDeg;
+					return -1.30 + d + 0.01486*phaseDeg;
 				if (englishName=="Jupiter")
 					return -8.93 + d;
 				if (englishName=="Saturn")
@@ -1146,14 +1270,13 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return -6.85 + d;
 				if (englishName=="Neptune")
 					return -7.05 + d;
-				// Original formulae doesn't have equeation for Pluto
+				// Original formulae doesn't have equation for Pluto
 				if (englishName=="Pluto")
 					return -1.0 + d;
 
 				break;
 			}
-			case Harris:
-			case UndefinedAlgorithm:	// activated by default
+			case Astr_Alm_1984:
 			{
 				// (2)
 				if (englishName=="Mercury")
@@ -1191,14 +1314,14 @@ float Planet::getVMagnitude(const StelCore* core) const
 			}
 			case Generic:
 			{
-				// Calculation visual magnitude from phase angle and albedo of the planet
+				// drop down to calculation of visual magnitude from phase angle and albedo of the planet
 				break;
 			}
 		}
 	}
 
-	// This formula seems to give wrong results
-	const double p = (1.0 - phase/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
+	// This formula seems to give wrong results. Source unknown.
+	const double p = (1.0 - phaseAngle/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 	double F = 2.0 * albedo * radius * radius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
 	return -26.73 - 2.5 * std::log10(F);
 }
