@@ -27,8 +27,8 @@
 #include <QDebug>
 #include <QFile>
 #include <QDir>
-#include <QtNetwork/QNetworkInterface>
-#include <QtNetwork/QNetworkAccessManager>
+#include <QNetworkInterface>
+#include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QUrl>

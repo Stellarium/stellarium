@@ -1112,7 +1112,8 @@ void Satellites::setUpdateFrequencyHours(int hours)
 void Satellites::checkForUpdate(void)
 {
 	if (updatesEnabled && updateState != Updating
-	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()
+	    && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
 		updateFromOnlineSources();
 }
 
