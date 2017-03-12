@@ -99,7 +99,7 @@ static void InitPar(const double q, const double n, const double dt, double &rCo
 //	const double M=dt*sqrt(GAUSS_GRAV_CONST/(2.0*q*q*q));
 //	const double W=1.5*M;
 	const double W=dt*n;
-	const double Y=cbrt(W+std::sqrt(W*W+1));
+	const double Y=cbrt(W+std::sqrt(W*W+1.));
 	const double tanNu2=Y-1.0/Y; // Heafner (5.5.8) has an error here, writes (Y-1)/Y.
 	rCosNu=q*(1.0-tanNu2*tanNu2);
 	rSinNu=2.0*q*tanNu2;
@@ -217,7 +217,6 @@ CometOrbit::CometOrbit(double pericenterDistance,
 		       double parentRotObliquity,
 		       double parentRotAscendingnode,
 		       double parentRotJ2000Longitude)
-		      //)
 	: q(pericenterDistance),
 	  e(eccentricity),
 	  i(inclination),
@@ -228,6 +227,8 @@ CometOrbit::CometOrbit(double pericenterDistance,
 	  updateTails(true),
 	  orbitGood(orbitGoodDays)
 {
+	// GZ MAKE SURE THIS IS ALWAYS 0/0/0. ==> OK.
+	//qDebug() << "parentRotObliquity" << parentRotObliquity << "parentRotAscendingnode" << parentRotAscendingnode << "parentRotJ2000Longitude" << parentRotJ2000Longitude;
 	rdot.set(0.0, 0.0, 0.0);
 	const double c_obl = cos(parentRotObliquity);
 	const double s_obl = sin(parentRotObliquity);
@@ -252,7 +253,7 @@ void CometOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v, bool 
 {
 	JDE -= t0;
 	double rCosNu,rSinNu;
-	if (e < 1.0) InitEll(q,n,e,JDE,rCosNu,rSinNu); // GZ: After solving with Laguerre-Conway, I dare to go for 1.0.
+	if (e < 1.0) InitEll(q,n,e,JDE,rCosNu,rSinNu); // Laguerre-Conway seems stable enough to go for <1.0.
 	else if (e > 1.0)
 	{
 		// qDebug() << "Hyperbolic orbit for ecc=" << e << ", i=" << i << ", w=" << w << ", Mean Motion n=" << n;
@@ -530,7 +531,8 @@ void EllipticalOrbit::sample(double, double, int nSamples, OrbitSampleProc& proc
 		proc.sample(positionAtE(dE * i));
 }
 
-
+/*
+ * Stuff found unused and deactivated pre-0.15
 Vec3d CachingOrbit::positionAtTime(double JDE) const
 {
 	if (JDE != lastTime)
@@ -548,3 +550,4 @@ void CachingOrbit::sample(double start, double t, int nSamples, OrbitSampleProc&
 	for (int i = 0; i < nSamples; i++)
 		proc.sample(positionAtTime(start + dt * i));
 }
+*/
