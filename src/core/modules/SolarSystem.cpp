@@ -993,6 +993,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", 0).toBool(),
 					       type));
+			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toDouble();
 		}
 
 
