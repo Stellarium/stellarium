@@ -453,7 +453,7 @@ void Observability::draw(StelCore* core)
 		isScreen = true;
 		Vec3d currentPos = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 		currentPos.normalize();
-		EquPos = core->j2000ToEquinoxEqu(currentPos);
+		EquPos = core->j2000ToEquinoxEqu(currentPos, StelCore::RefractionOff);
 		LocPos = core->j2000ToAltAz(currentPos, StelCore::RefractionOff);
 	}
 
@@ -1048,7 +1048,7 @@ void Observability::updateSunData(StelCore* core)
 		myEarth->computePosition(yearJD[i].second);
 		myEarth->computeTransMatrix(yearJD[i].first, yearJD[i].second);
 		pos = myEarth->getHeliocentricEclipticPos();
-		sunPos = core->j2000ToEquinoxEqu((StelCore::matVsop87ToJ2000)*(-pos));
+		sunPos = core->j2000ToEquinoxEqu((StelCore::matVsop87ToJ2000)*(-pos), StelCore::RefractionOff);
 		EarthPos[i] = -pos;
 		toRADec(sunPos,sunRA[i],sunDec[i]);
 	};
@@ -1297,7 +1297,7 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 		double curSidT;
 
 // Sun coordinates:
-		Vec3d sunPos = core->j2000ToEquinoxEqu((StelCore::matVsop87ToJ2000)*(-earthPos));
+		Vec3d sunPos = core->j2000ToEquinoxEqu((StelCore::matVsop87ToJ2000)*(-earthPos), StelCore::RefractionOff);
 		toRADec(sunPos, raSun, decSun);
 
 // Moon coordinates:
@@ -1307,7 +1307,7 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 		myMoon->computePosition(JD.second);
 		myMoon->computeTransMatrix(JD.first, JD.second);
 		Vec3d moonPos = myMoon->getHeliocentricEclipticPos();
-		sunPos = (core->j2000ToEquinoxEqu(LocTrans*moonPos))-RotObserver;
+		sunPos = (core->j2000ToEquinoxEqu(LocTrans*moonPos, StelCore::RefractionOff))-RotObserver;
 		
 		eclLon = moonPos[0]*earthPos[1] - moonPos[1]*earthPos[0];
 
@@ -1349,7 +1349,7 @@ void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, do
 		myMoon->computePosition(JD.second);
 		myMoon->computeTransMatrix(JD.first, JD.second);
 		Pos1 = myMoon->getHeliocentricEclipticPos();
-		Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1)); //-RotObserver;
+		Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1), StelCore::RefractionOff); //-RotObserver;
 
 		distance = std::sqrt(Pos2*Pos2);
 
@@ -1383,7 +1383,7 @@ void Observability::getPlanetCoords(StelCore *core, QPair<double, double> JD, do
 		myEarth->computeTransMatrix(JD.first, JD.second);
 		Pos2 = myEarth->getHeliocentricEclipticPos();
 		LocTrans = (StelCore::matVsop87ToJ2000)*(Mat4d::translation(-Pos2));
-		Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1);
+		Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1, StelCore::RefractionOff);
 		toRADec(Pos2,RA,Dec);
 	};
 
@@ -1421,7 +1421,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 		if (bodyType == 1) // Sun position
 		{
-			Pos2 = core->j2000ToEquinoxEqu((StelCore::matVsop87ToJ2000)*(-earthPos));
+			Pos2 = core->j2000ToEquinoxEqu((StelCore::matVsop87ToJ2000)*(-earthPos), StelCore::RefractionOff);
 		}
 		else if (bodyType==2) // Moon position
 		{
@@ -1431,7 +1431,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			myMoon->computePosition(myJD.second);
 			myMoon->computeTransMatrix(myJD.first, myJD.second);
 			Pos1 = myMoon->getHeliocentricEclipticPos();
-			Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1))-RotObserver;
+			Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1, StelCore::RefractionOff))-RotObserver;
 		}
 		else // Planet position
 		{
@@ -1439,7 +1439,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			myPlanet->computeTransMatrix(myJD.first, myJD.second);
 			Pos1 = myPlanet->getHeliocentricEclipticPos();
 			LocTrans = (StelCore::matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
-			Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1);
+			Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1, StelCore::RefractionOff);
 		};
 
 		toRADec(Pos2,ra,dec);

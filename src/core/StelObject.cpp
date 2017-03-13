@@ -39,8 +39,19 @@ int StelObject::stelObjectPMetaTypeID = qRegisterMetaType<StelObjectP>();
 
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
+	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOff);
 }
+
+Vec3d StelObject::getEquinoxEquatorialPosApparent(const StelCore* core) const
+{
+	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+}
+
+Vec3d StelObject::getEquinoxEquatorialPosAuto(const StelCore* core) const
+{
+	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+}
+
 
 // Get observer local sidereal coordinate
 Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
@@ -70,7 +81,7 @@ Vec3d StelObject::getAltAzPosApparent(const StelCore* core) const
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
+	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
 }
 
 // Get observer-centered galactic position
