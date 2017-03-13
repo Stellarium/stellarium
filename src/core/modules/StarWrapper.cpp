@@ -277,14 +277,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		if (wdsObs>0)
 		{
-			oss << QString("%1: %2").arg(q_("Year of last satisfactory observation")).arg(wdsObs) << "<br />";
-			oss << QString("%1: %2%3").arg(q_("Position angle")).arg(QString::number(wdsPA, 'f', 2)).arg(QChar(0x00B0)) << "<br />";
+			oss << QString("%1 (%4): %2%3").arg(q_("Position angle")).arg(QString::number(wdsPA, 'f', 2)).arg(QChar(0x00B0)).arg(wdsObs) << "<br />";
 			if (wdsSep>0.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
-					oss << QString("%1: %2\" (%3)").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(StelUtils::decDegToDmsStr(wdsSep/3600.f)) << "<br />";
+					oss << QString("%1 (%4): %2\" (%3)").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(StelUtils::decDegToDmsStr(wdsSep/3600.f)).arg(wdsObs) << "<br />";
 				else
-					oss << QString("%1: %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)) << "<br />";
+					oss << QString("%1 (%3): %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(wdsObs) << "<br />";
 			}
 		}
 	}
