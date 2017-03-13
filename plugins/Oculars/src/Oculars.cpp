@@ -1682,7 +1682,7 @@ void Oculars::paintCCDBounds()
 					projector->unProject(centerScreen[0], centerScreen[1], centerPosition);
 					double cx, cy;
 					QString cxt, cyt;
-					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
+					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition, StelCore::RefractionOff)); // Calculate RA/DE (J2000.0) and show it...
 					bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 					if (withDecimalDegree)
 					{

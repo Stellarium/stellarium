@@ -289,7 +289,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 					baryJ2000=bary;
 					break;
 				case	StelCore::FrameEquinoxEqu:
-					baryJ2000=core->equinoxEquToJ2000(bary);
+					baryJ2000=core->equinoxEquToJ2000(bary, StelCore::RefractionOff);
 					break;
 				case	StelCore::FrameObservercentricEclipticJ2000:
 					// For the ecliptic cases, apply clumsy trafos from StelUtil!
@@ -304,7 +304,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 					StelUtils::rectToSphe(&lng, &lat, bary);
 					StelUtils::eclToEqu(lng, lat, eclJDE, &ra, &dec); // convert to Equatorial/equinox of date
 					StelUtils::spheToRect(ra, dec, bary);
-					baryJ2000=core->equinoxEquToJ2000(bary);
+					baryJ2000=core->equinoxEquToJ2000(bary, StelCore::RefractionOff);
 					break;
 				case	StelCore::FrameGalactic:
 					baryJ2000=core->galacticToJ2000(bary);

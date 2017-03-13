@@ -145,6 +145,10 @@ public:
 	//! The frame has its Z axis at the planet's current rotation axis
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
+	//! Like getEquinoxEquatorialPos(core), but always adds refraction correction to the position.
+	Vec3d getEquinoxEquatorialPosApparent(const StelCore* core) const;
+	//! Like getEquinoxEquatorialPos(core), but adds refraction correction to the position if atmosphere is active.
+	Vec3d getEquinoxEquatorialPosAuto(const StelCore* core) const;
 
 	//! Get observer-centered galactic coordinates
 	Vec3d getGalacticPos(const StelCore* core) const;

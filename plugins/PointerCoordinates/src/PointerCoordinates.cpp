@@ -165,7 +165,7 @@ void PointerCoordinates::draw(StelCore *core)
 		}
 		case RaDec:
 		{
-			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition)); // Calculate RA/DE and show it...
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff)); // Calculate RA/DE and show it...
 			coordsSystem = qc_("RA/Dec", "abbreviated in the plugin");
 			if (withDecimalDegree)
 			{
@@ -237,7 +237,7 @@ void PointerCoordinates::draw(StelCore *core)
 		case Ecliptic:
 		{
 			double lambda, beta;
-			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition));
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff));
 			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
