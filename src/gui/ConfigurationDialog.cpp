@@ -234,8 +234,8 @@ void ConfigurationDialog::createDialogContent()
 	int idx = ui->dateFormatsComboBox->findData(localeManager.getDateFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use system_deafult as default
-		idx = ui->dateFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+		// Use system_default as default
+		idx = ui->dateFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->dateFormatsComboBox->setCurrentIndex(idx);
 	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDateFormat()));
@@ -245,8 +245,8 @@ void ConfigurationDialog::createDialogContent()
 	idx = ui->timeFormatsComboBox->findData(localeManager.getTimeFormatStr(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use system_deafult as default
-		idx = ui->timeFormatsComboBox->findData(QVariant("system_deafult"), Qt::UserRole, Qt::MatchCaseSensitive);
+		// Use system_default as default
+		idx = ui->timeFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeFormatsComboBox->setCurrentIndex(idx);
 	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setTimeFormat()));
@@ -279,8 +279,6 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
-	//ui->autoZoomResetsDirectionCheckbox->setChecked(mvmgr->getFlagAutoZoomOutResetsDirection());
-	//connect(ui->autoZoomResetsDirectionCheckbox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagAutoZoomOutResetsDirection(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
 	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
@@ -306,9 +304,12 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
 
-	connect(ui->setViewingOptionAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewOptions()));
+	// General Option Save
+	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
+	connect(ui->saveSettingsAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveAllSettings()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
 
+	// Screenshots
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
@@ -560,9 +561,20 @@ void ConfigurationDialog::selectScreenshotDir(const QString& dir)
 	}
 }
 
+// Store FOV and viewing dir.
+void ConfigurationDialog::saveCurrentViewDirSettings()
+{
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	Q_ASSERT(mvmgr);
+
+	mvmgr->setInitFov(mvmgr->getCurrentFov());
+	mvmgr->setInitViewDirectionToCurrent();
+}
+
+
 // Save the current viewing option including landscape, location and sky culture
 // This doesn't include the current viewing direction, time and FOV since those have specific controls
-void ConfigurationDialog::saveCurrentViewOptions()
+void ConfigurationDialog::saveAllSettings()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -797,9 +809,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
-
-	mvmgr->setInitFov(mvmgr->getCurrentFov());
-	mvmgr->setInitViewDirectionToCurrent();
 
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
