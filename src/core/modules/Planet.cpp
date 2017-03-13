@@ -1145,7 +1145,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 			case Expl_Sup_2013:
 			{
 				// GZ2017: This is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 2013 (chap. 10.3)
-				// AW2017: Updated data from Expl. Suppl. 2013 Errata (p. 4)
+				// AW2017: Updated data from Errata in The Explanatory Supplement to the Astronomical Almanac (3rd edition, 1st printing)
+				//         http://aa.usno.navy.mil/publications/docs/exp_supp_errata.pdf (Last update: 1 December 2016)
 				if (englishName=="Mercury")
 					return -0.6 + d + (((3.02e-6*phaseDeg - 0.000488)*phaseDeg + 0.0498)*phaseDeg);
 				if (englishName=="Venus")
