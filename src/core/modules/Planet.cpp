@@ -1140,8 +1140,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 		switch (core->getCurrentPlanet()->getApparentMagnitudeAlgorithm())
 		{
-			case UndefinedAlgorithm:	// The most recent solution should be activated by default
-			case Generic:
+			case UndefinedAlgorithm:	// The most recent solution should be activated by default			
 			case Expl_Sup_2013:
 			{
 				// GZ2017: This is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 2013 (chap. 10.3)
@@ -1315,6 +1314,11 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Pluto")
 					return -1.00f + d;
 
+				break;
+			}
+			case Generic:
+			{
+				// drop down to calculation of visual magnitude from phase angle and albedo of the planet
 				break;
 			}
 		}
