@@ -229,9 +229,9 @@ void LandscapeMgr::update(double deltaTime)
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 
 	StelCore* core = StelApp::getInstance().getCore();
-	Vec3d sunPos = ssystem->getSun()->getAltAzPosApparent(core);
+	Vec3d sunPos = ssystem->getSun()->getAltAzPosAuto(core);
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
+	Vec3d moonPos = ssystem->getMoon()->getAltAzPosAuto(core);
 	// GZ: First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
 	atmosphere->computeColor(core->getJDE(), sunPos, moonPos,
 		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
@@ -242,7 +242,7 @@ void LandscapeMgr::update(double deltaTime)
 
 
 	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
-	if (core->getCurrentLocation().planetName.contains("Sun"))
+	if (core->getCurrentLocation().planetName == "Sun")
 	{
 		landscape->setBrightness(1.0f, 1.0f);
 		return;
