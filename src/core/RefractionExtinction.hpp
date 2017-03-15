@@ -54,7 +54,7 @@ public:
 	
 	Extinction();
 	
-	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
+	//! Compute extinction effect for arrays of size num position vectors and magnitudes.
 	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(geometric_altitude).
 	//! This call must therefore be done before application of Refraction if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
@@ -70,7 +70,7 @@ public:
 		*mag += airmass(altAzPos[2], false) * ext_coeff;
 	}
 
-	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
+	//! Compute inverse extinction effect for arrays of size num position vectors and magnitudes.
 	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(geometric_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(const Vec3d& altAzPos, float* mag) const

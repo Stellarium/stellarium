@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _SCENEINFO_HPP_
@@ -151,7 +151,7 @@ typedef QList<StoredView> StoredViewList;
 //! A structure which stores a specific view position, view direction and FOV, together with a textual description.
 struct StoredView
 {
-	StoredView() : position(0,0,0,0), view_fov(0,0,-1000), isGlobal(false)
+	StoredView() : position(0,0,0,0), view_fov(0,0,-1000), isGlobal(false), jd(0.0), jdIsRelevant(false)
 	{}
 
 	//! A descriptive label
@@ -164,6 +164,10 @@ struct StoredView
 	Vec3f view_fov;
 	//! True if this is a position stored next to the scene definition (viewpoints.ini). If false, this is a user-defined view (from userdir\stellarium\scenery3d\userviews.ini).
 	bool isGlobal;
+	//! Julian Date of interest.
+	double jd;
+	//! Indicate if stored date is potentially relevant
+	bool jdIsRelevant;
 
 	//! Returns a list of all global views of a scene.
 	//! If the scene is invalid, an empty list is returned.

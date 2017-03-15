@@ -41,6 +41,8 @@ class LocationDialog;
 class SearchDialog;
 class ViewDialog;
 class ShortcutsDialog;
+class AstroCalcDialog;
+class BookmarksDialog;
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
 #endif
@@ -51,9 +53,9 @@ class ScriptConsole;
 class StelGui : public QObject, public StelGuiBase
 {
 	Q_OBJECT
-	Q_PROPERTY(bool visible READ getVisible WRITE setVisible)
-	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar)
-	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar)
+	Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged)
+	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar NOTIFY autoHideHorizontalButtonBarChanged)
+	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar NOTIFY autoHideVerticalButtonBarChanged)
 
 public:
 	friend class ViewDialog;
@@ -90,6 +92,12 @@ public:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
+	//! Get whether the button toggling TOAST survey is visible
+	bool getFlagShowToastSurveyButton() const;
+
+	//! Get whether the button toggling bookmarks is visible
+	bool getFlagShowBookmarksButton() const;
+
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
@@ -104,6 +112,8 @@ public:
 
 	virtual bool getVisible() const;
 
+	virtual bool getAstroCalcVisible();
+
 	virtual bool isCurrentlyUsed() const;
 	
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
@@ -115,6 +125,12 @@ public slots:
 	
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
+
+	//! Define whether the button toggling TOAST survey should be visible
+	void setFlagShowToastSurveyButton(bool b);
+
+	//! Define whether the button toggling bookmarks should be visible
+	void setFlagShowBookmarksButton(bool b);
 
 	void setFlagShowDecimalDegrees(bool b);
 
@@ -149,6 +165,11 @@ public slots:
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
 	void setGuiVisible(bool);	
+
+signals:
+	void visibleChanged(bool b);
+	void autoHideHorizontalButtonBarChanged(bool b);
+	void autoHideVerticalButtonBarChanged(bool b);
 
 private slots:
 	void reloadStyle();
@@ -187,6 +208,8 @@ private:
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole* scriptConsole;
 #endif
+	AstroCalcDialog* astroCalcDialog;
+	BookmarksDialog* bookmarksDialog;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;
@@ -195,12 +218,23 @@ private:
 	bool flagShowNebulaBackgroundButton;
 	StelButton* btShowNebulaeBackground;
 
+	bool flagShowToastSurveyButton;
+	StelButton* btShowToastSurvey;
+
+	bool flagShowBookmarksButton;
+	StelButton* btShowBookmarks;
+
 	bool initDone;
 
 	QSizeF savedProgressBarSize;
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
+
+#ifndef DISABLE_SCRIPTING
+	// We use a QStringList to save the user-configured buttons while script is running, and restore them later.
+	QStringList scriptSaveSpeedbuttons;
+#endif
 };
 
 #else // NO_GUI

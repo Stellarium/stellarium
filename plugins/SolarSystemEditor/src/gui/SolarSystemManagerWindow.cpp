@@ -36,10 +36,11 @@
 #include <QFileDialog>
 
 SolarSystemManagerWindow::SolarSystemManagerWindow()
+	: StelDialog("SolarSystemEditor")
+	, manualImportWindow(NULL)
 {
 	ui = new Ui_solarSystemManagerWindow();
 	mpcImportWindow = new MpcImportWindow();
-	manualImportWindow = NULL;
 
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 }
@@ -69,6 +70,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
 	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObject()));
@@ -78,7 +80,8 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
 
-	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), this, SLOT(repaintSolarSystemList()));
+	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
+	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), ui->listWidgetObjects, SLOT(repaint()));
 
 	updateTexts();
 
@@ -88,13 +91,6 @@ void SolarSystemManagerWindow::createDialogContent()
 
 	ui->lineEditUserFilePath->setText(ssoManager->getCustomSolarSystemFilePath());
 	populateSolarSystemList();
-}
-
-void SolarSystemManagerWindow::repaintSolarSystemList()
-{
-	// Enable force repaint listEvents to avoiding artifacts
-	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
-	ui->listWidgetObjects->repaint();
 }
 
 void SolarSystemManagerWindow::updateTexts()
@@ -188,12 +184,14 @@ void SolarSystemManagerWindow::removeObject()
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	QString filePath = QFileDialog::getSaveFileName(0, "Save the Solar System configuration file as...", StelFileMgr::getScreenshotDir());
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the Solar System configuration file as..."), QDir::homePath() + "/ssystem.ini");
 	ssoManager->copySolarSystemConfigurationFileTo(filePath);
 }
 
 void SolarSystemManagerWindow::replaceConfiguration()
 {
-	QString filePath = QFileDialog::getOpenFileName(0, "Select a file to replace the Solar System configuration file", StelFileMgr::getScreenshotDir(), QString("Configration files (*.ini)"));
+	QString filter = q_("Configuration files");
+	filter.append(" (*.ini)");
+	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System configuration file"), QDir::homePath(), filter);
 	ssoManager->replaceSolarSystemConfigurationFileWith(filePath);
 }

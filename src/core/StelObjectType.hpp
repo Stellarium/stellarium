@@ -43,4 +43,6 @@ class StelObject;
 //! Intrusive pointer used to manage StelObject with smart pointers
 typedef QSharedPointerNoDelete<StelObject> StelObjectP;
 
+Q_DECLARE_METATYPE(StelObjectP)
+
 #endif // _STELOBJECTTYPE_HPP_

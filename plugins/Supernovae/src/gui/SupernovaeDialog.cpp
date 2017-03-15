@@ -38,7 +38,8 @@
 #include "StelTranslator.hpp"
 
 SupernovaeDialog::SupernovaeDialog()
-	: sn(NULL)
+	: StelDialog("Supernovae")
+	, sn(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_supernovaeDialog;
@@ -86,6 +87,7 @@ void SupernovaeDialog::createDialogContent()
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(sn, SIGNAL(updateStateChanged(Supernovae::UpdateState)), this, SLOT(updateStateReceiver(Supernovae::UpdateState)));
 	connect(sn, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(sn, SIGNAL(jsonUpdateComplete(void)), sn, SLOT(reloadCatalog()));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -96,6 +98,7 @@ void SupernovaeDialog::createDialogContent()
 	updateTimer->start(7000);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -219,7 +222,7 @@ void SupernovaeDialog::updateCompleteReceiver(void)
 
 void SupernovaeDialog::restoreDefaults(void)
 {
-	qDebug() << "Supernovae::restoreDefaults";
+	qDebug() << "[Supernovae] restore defaults";
 	sn->restoreDefaults();
 	sn->readSettingsFromConfig();
 	updateGuiFromSettings();

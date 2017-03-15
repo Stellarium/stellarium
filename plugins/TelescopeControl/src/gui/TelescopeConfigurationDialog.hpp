@@ -53,6 +53,7 @@ protected:
 	Ui_telescopeConfigurationDialog* ui;
 	
 private:
+	QStringList* listSerialPorts();
 	void initConfigurationDialog();
 	
 private slots:
@@ -65,6 +66,7 @@ private slots:
 	void toggleTypeRTS2(bool);
 	
 	void deviceModelSelected(const QString&);
+	bool validateHost(QString hostName);
 
 signals:
 	void changesSaved(QString name, ConnectionType type);

@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>565</width>
     <height>480</height>
    </rect>
   </property>
@@ -251,8 +251,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>382</width>
-        <height>476</height>
+        <width>549</width>
+        <height>520</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">
@@ -486,25 +486,9 @@ Increase this value if the reticle is skipping.</string>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEditSerialPort">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
+             <widget class="QComboBox" name="comboSerialPort">
+              <property name="editable">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -797,14 +781,12 @@ Increase this value if the reticle is skipping.</string>
   <tabstop>lineEditTelescopeName</tabstop>
   <tabstop>doubleSpinBoxTelescopeDelay</tabstop>
   <tabstop>checkBoxConnectAtStartup</tabstop>
-  <tabstop>lineEditSerialPort</tabstop>
   <tabstop>comboBoxDeviceModel</tabstop>
   <tabstop>lineEditHostName</tabstop>
   <tabstop>spinBoxTCPPort</tabstop>
   <tabstop>checkBoxCircles</tabstop>
   <tabstop>lineEditCircleList</tabstop>
   <tabstop>pushButtonDiscard</tabstop>
-  <tabstop>pushButtonSave</tabstop>
  </tabstops>
  <resources/>
  <connections>

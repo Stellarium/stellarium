@@ -30,20 +30,22 @@
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
 
+//! @ingroup exoplanets
 typedef struct
 {
-	QString planetName;	//! Exoplanet name
-	float mass;		//! Exoplanet mass (Mjup)
-	float radius;		//! Exoplanet radius (Rjup)
-	float period;		//! Exoplanet period (days)
-	float semiAxis;		//! Exoplanet orbit semi-major axis (AU)
-	float eccentricity;	//! Exoplanet orbit eccentricity
-	float inclination;	//! Exoplanet orbit inclination
-	float angleDistance;	//! Exoplanet angle distance
-	int discovered;		//! Exoplanet discovered year
-	QString pclass;		//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)	
-	int EqTemp;		//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
-	int ESI;		//! Exoplanet Earth Similarity Index
+	QString planetName;		//! Exoplanet designation
+	QString planetProperName;	//! Exoplanet proper name
+	float mass;			//! Exoplanet mass (Mjup)
+	float radius;			//! Exoplanet radius (Rjup)
+	float period;			//! Exoplanet period (days)
+	float semiAxis;			//! Exoplanet orbit semi-major axis (AU)
+	float eccentricity;		//! Exoplanet orbit eccentricity
+	float inclination;		//! Exoplanet orbit inclination
+	float angleDistance;		//! Exoplanet angle distance
+	int discovered;			//! Exoplanet discovered year
+	QString pclass;			//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
+	int EqTemp;			//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
+	int ESI;			//! Exoplanet Earth Similarity Index
 } exoplanetData;
 
 class StelPainter;
@@ -52,6 +54,7 @@ class StelPainter;
 //! A exoplanet object represents one pulsar on the sky.
 //! Details about the exoplanets are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup exoplanets
 
 class Exoplanet : public StelObject
 {
@@ -89,10 +92,12 @@ public:
 	//! Get the localized name of pulsar
 	virtual QString getNameI18n(void) const;
 	//! Get the english name
-	virtual QString getEnglishName(void) const
-	{
-		return designation;
-	}
+	virtual QString getEnglishName(void) const;
+
+	QString getDesignation(void) const;
+	QStringList getExoplanetsEnglishNames(void) const;
+	QStringList getExoplanetsNamesI18n(void) const;
+	QStringList getExoplanetsDesignations(void) const;
 
 	bool isDiscovered(const StelCore* core);
 
@@ -107,6 +112,30 @@ public:
 		return PHEPCount;
 	}
 
+	QList<double> getData(int mode)
+	{
+		switch(mode)
+		{
+			case 1:
+				return semiAxisList;
+				break;
+			case 2:
+				return massList;
+				break;
+			case 3:
+				return radiusList;
+				break;
+			case 4:
+				return periodList;
+				break;
+			case 5:
+				return angleDistanceList;
+				break;
+			default:
+				return eccentricityList;
+		}
+	}
+
 private:
 
 	QString getPlanetaryClassI18n(QString ptype) const;
@@ -115,13 +144,13 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
 	static Vec3f habitableExoplanetMarkerColor;
 	static Vec3f exoplanetMarkerColor;
 	static bool distributionMode;
 	static bool timelineMode;
 	static bool habitableMode;
+	static bool showDesignations;
 
 	void draw(StelCore* core, StelPainter *painter);
 
@@ -130,6 +159,7 @@ private:
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star
+	QString starProperName;			//! The proper name of the host star
 	float RA;				//! J2000 right ascension of host star
 	float DE;				//! J2000 declination of host star
 	float distance;				//! Distance to star in pc
@@ -142,8 +172,11 @@ private:
 	bool hasHabitableExoplanets;		//! Has potential habitable exoplanets
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
-	LinearFader labelsFader;
+	QStringList englishNames, translatedNames, exoplanetDesignations;
 
+	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList;
+
+	LinearFader labelsFader;
 };
 
 #endif // _EXOPLANET_HPP_

@@ -119,7 +119,7 @@ private:
 };
 
 // Allow to use SphericalRegionP with the Qt MetaType system.
-Q_DECLARE_METATYPE(SphericalRegionP);
+Q_DECLARE_METATYPE(SphericalRegionP)
 
 //! Serialize the passed SphericalRegionP into a binary blob.
 QDataStream& operator<<(QDataStream& out, const SphericalRegionP& region);

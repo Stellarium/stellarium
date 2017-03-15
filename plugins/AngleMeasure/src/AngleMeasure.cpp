@@ -34,7 +34,6 @@
 #include <QDebug>
 #include <QTimer>
 #include <QPixmap>
-#include <QtNetwork>
 #include <QSettings>
 #include <QKeyEvent>
 #include <QMouseEvent>
@@ -77,6 +76,19 @@ AngleMeasure::AngleMeasure()
 	, angleHor(0.)
 	, toolbarButton(NULL)
 {
+	startPoint.set(0.,0.,0.);
+	endPoint.set(0.,0.,0.);
+	perp1StartPoint.set(0.,0.,0.);
+	perp1EndPoint.set(0.,0.,0.);
+	perp2StartPoint.set(0.,0.,0.);
+	perp2EndPoint.set(0.,0.,0.);
+	startPointHor.set(0.,0.,0.);
+	endPointHor.set(0.,0.,0.);
+	perp1StartPointHor.set(0.,0.,0.);
+	perp1EndPointHor.set(0.,0.,0.);
+	perp2StartPointHor.set(0.,0.,0.);
+	perp2EndPointHor.set(0.,0.,0.);
+
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);
 
@@ -118,19 +130,6 @@ void AngleMeasure::init()
 		restoreDefaultSettings();
 
 	loadSettings();
-
-	startPoint.set(0.,0.,0.);
-	endPoint.set(0.,0.,0.);
-	perp1StartPoint.set(0.,0.,0.);
-	perp1EndPoint.set(0.,0.,0.);
-	perp2StartPoint.set(0.,0.,0.);
-	perp2EndPoint.set(0.,0.,0.);
-	startPointHor.set(0.,0.,0.);
-	endPointHor.set(0.,0.,0.);
-	perp1StartPointHor.set(0.,0.,0.);
-	perp1EndPointHor.set(0.,0.,0.);
-	perp2StartPointHor.set(0.,0.,0.);
-	perp2EndPointHor.set(0.,0.,0.);
 
 	StelApp& app = StelApp::getInstance();
 
@@ -183,15 +182,13 @@ void AngleMeasure::update(double deltaTime)
 	}
 }
 
-
 void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor)
 {
 	const StelProjectorP prj = core->getProjection(frameType, refractionMode);
 	StelPainter painter(prj);
 	painter.setFont(font);
+	painter.setBlending(true);
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
 		Vec3d xy;
@@ -221,12 +218,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			}
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glEnable(GL_LINE_SMOOTH);
-		#endif
+		painter.setLineSmooth(true);
 
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
@@ -246,10 +238,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
 			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
 		}
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glDisable(GL_LINE_SMOOTH);
-		#endif
+
+		painter.setLineSmooth(false);
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{
@@ -263,12 +253,14 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
-	glDisable(GL_BLEND);
+	painter.setBlending(false);
 }
 
 //! Draw any parts on the screen which are for our module
 void AngleMeasure::draw(StelCore* core)
 {
+	if (startPoint.lengthSquared()==0.0) // avoid crash on switch-on, lp:#1455839
+		return;
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
 	if (flagShowHorizontal)
@@ -327,7 +319,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		prj->unProject(event->x(),event->y(),startPoint);
+		if (prj->unProject(event->x(),event->y(),startPoint))
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(startPoint,win);
@@ -364,7 +356,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	else if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::RightButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		prj->unProject(event->x(),event->y(),endPoint);
+		if (prj->unProject(event->x(),event->y(),endPoint))
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(endPoint,win);
@@ -386,7 +378,7 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	if (dragging)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-		prj->unProject(x,y,endPoint);
+		if (prj->unProject(x,y,endPoint))
 		{ // Nick Fedoseev patch: improve click match
 		   Vec3d win;
 		   prj->project(endPoint,win);
@@ -464,44 +456,65 @@ QString AngleMeasure::calculateAngle(bool horizontal) const
 
 void AngleMeasure::enableAngleMeasure(bool b)
 {
-	flagShowAngleMeasure = b;
-	lineVisible = b;
-	messageFader = b;
-	if (b)
+	if (b!=flagShowAngleMeasure)
 	{
-		//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
-		messageTimer->start();
+		flagShowAngleMeasure = b;
+		lineVisible = b;
+		messageFader = b;
+		if (b)
+		{
+			//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
+			messageTimer->start();
+		}
+		// Immediate saving of settings
+		conf->setValue("AngleMeasure/enable_at_startup", flagShowAngleMeasure);
+
+		emit flagAngleMeasureChanged(b);
 	}
 }
 
 void AngleMeasure::showPositionAngle(bool b)
 {
 	flagShowPA = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_position_angle", flagShowPA);
 }
 
 void AngleMeasure::showPositionAngleHor(bool b)
 {
 	flagShowHorizontalPA = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_position_angle_horizontal", flagShowHorizontalPA);
 }
 void AngleMeasure::showEquatorial(bool b)
 {
 	flagShowEquatorial = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_equatorial", flagShowEquatorial);
 }
 void AngleMeasure::showHorizontal(bool b)
 {
 	flagShowHorizontal = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_horizontal", flagShowHorizontal);
 }
 void AngleMeasure::showHorizontalStartSkylinked(bool b)
 {
 	flagShowHorizontalStartSkylinked = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/link_horizontal_start_to_sky", flagShowHorizontalStartSkylinked);
 }
 void AngleMeasure::showHorizontalEndSkylinked(bool b)
 {
 	flagShowHorizontalEndSkylinked = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/link_horizontal_end_to_sky", flagShowHorizontalEndSkylinked);
 }
 void AngleMeasure::useDmsFormat(bool b)
 {
 	flagUseDmsFormat=b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/angle_format_dms", flagUseDmsFormat);
 }
 
 void AngleMeasure::updateMessageText()
@@ -528,9 +541,7 @@ void AngleMeasure::restoreDefaultSettings()
 	// Remove the old values...
 	conf->remove("AngleMeasure");
 	// ...load the default values...
-	loadSettings();
-	// ...and then save them.
-	saveSettings();
+	loadSettings();	
 	// But this doesn't save the colors, so:
 	conf->beginGroup("AngleMeasure");
 	conf->setValue("text_color", "0,0.5,1");
@@ -542,34 +553,16 @@ void AngleMeasure::restoreDefaultSettings()
 
 void AngleMeasure::loadSettings()
 {
-	conf->beginGroup("AngleMeasure");
-
-	useDmsFormat(conf->value("angle_format_dms", false).toBool());
-	showPositionAngle(conf->value("show_position_angle", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
-	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
-	horTextColor = StelUtils::strToVec3f(conf->value("text_color_horizontal", "0.9,0.6,0.4").toString());
-	horLineColor = StelUtils::strToVec3f(conf->value("line_color_horizontal", "0.9,0.6,0.4").toString());
-	showPositionAngleHor(conf->value("show_position_angle_horizontal", false).toBool());
-	flagShowEquatorial = conf->value("show_equatorial", true).toBool();
-	flagShowHorizontal = conf->value("show_horizontal", false).toBool();
-	flagShowHorizontalStartSkylinked = conf->value("link_horizontal_start_to_sky", false).toBool();
-	flagShowHorizontalEndSkylinked = conf->value("link_horizontal_end_to_sky", false).toBool();
-
-	conf->endGroup();
-}
-
-void AngleMeasure::saveSettings()
-{
-	conf->beginGroup("AngleMeasure");
-
-	conf->setValue("angle_format_dms", isDmsFormat());
-	conf->setValue("show_position_angle", isPaDisplayed());
-	conf->setValue("show_position_angle_horizontal", isHorPaDisplayed());
-	conf->setValue("show_equatorial", isEquatorial());
-	conf->setValue("show_horizontal", isHorizontal());
-	conf->setValue("link_horizontal_start_to_sky", isHorizontalStartSkylinked());
-	conf->setValue("link_horizontal_end_to_sky", isHorizontalEndSkylinked());
-
-	conf->endGroup();
+	enableAngleMeasure(conf->value("AngleMeasure/enable_at_startup", false).toBool());
+	useDmsFormat(conf->value("AngleMeasure/angle_format_dms", false).toBool());
+	showPositionAngle(conf->value("AngleMeasure/show_position_angle", false).toBool());
+	textColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
+	lineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
+	horTextColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color_horizontal", "0.9,0.6,0.4").toString());
+	horLineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color_horizontal", "0.9,0.6,0.4").toString());
+	showPositionAngleHor(conf->value("AngleMeasure/show_position_angle_horizontal", false).toBool());
+	showEquatorial(conf->value("AngleMeasure/show_equatorial", true).toBool());
+	showHorizontal(conf->value("AngleMeasure/show_horizontal", false).toBool());
+	showHorizontalStartSkylinked(conf->value("AngleMeasure/link_horizontal_start_to_sky", false).toBool());
+	showHorizontalEndSkylinked(conf->value("AngleMeasure/link_horizontal_end_to_sky", false).toBool());
 }

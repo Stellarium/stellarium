@@ -24,14 +24,17 @@
 #include <QObject>
 #include <QHash>
 #include <QString>
+#include <QDir>
+
+#include "StoredPointsDialog.hpp"
+
 #include "StelStyle.hpp"
-
 #include "StelDialog.hpp"
-
-#include "StelObjectMgr.hpp"
+#include "StelFileMgr.hpp"
 
 class Ui_slewDialog;
 class TelescopeControl;
+class StoredPointsDialog;
 
 class SlewDialog : public StelDialog
 {
@@ -74,18 +77,32 @@ private slots:
 	//! The parameter is necessary for signal/slot compatibility (QRadioButton).
 	//! If "set" is "false", this method does nothing.
 	void setFormatDecimal(bool set);
-        //! Sets the input fields to current info
-        void getCurrentObjectInfo();
+	//! Sets the input fields to current info
+	void getCurrentObjectInfo();
 	//! Sets the input fields to current info
 	void getCenterInfo();
 
+	//! Add or remove user points
+	void editStoredPoints();
+	void addStoredPointToComboBox(int number, QString name, double radiansRA, double radiansDec);
+	void removeStoredPointFromComboBox(int number);
+	void clearStoredPointsFromComboBox();
+	//! Sets the input fields to selected point info
+	void getStoredPointInfo();
+
 private:
 	TelescopeControl * telescopeManager;
-
+	StoredPointsDialog * storedPointsDialog;
 	QHash<QString, int> connectedSlotsByName;
+	QVariantMap storedPointsDescriptions;
 
 	void updateTelescopeList();
 	void updateTelescopeControls();
+
+	void updateStoredPointsList();
+
+	void savePointsToFile();
+	void loadPointsFromFile();
 };
 
 #endif // _SLEWDIALOG_

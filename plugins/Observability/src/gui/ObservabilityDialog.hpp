@@ -29,6 +29,7 @@ class Ui_ObservabilityDialog;
 
 //! Configuration window of the %Observability Analysis plug-in.
 //! @see Observability
+//! @ingroup observability
 class ObservabilityDialog : public StelDialog
 {
 	Q_OBJECT

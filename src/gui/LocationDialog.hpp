@@ -25,6 +25,8 @@
 
 class Ui_locationDialogForm;
 class QModelIndex;
+class QSortFilterProxyModel;
+class QStringListModel;
 class StelLocation;
 
 class LocationDialog : public StelDialog
@@ -72,10 +74,21 @@ private:
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
 	void populateCountryList();
+
+	//! Populates the drop-down list of time zones.
+	//! The displayed names are localized in the current interface language.
+	//! The original names are kept in the user data field of each QComboBox
+	//! item.
+	void populateTimeZonesList();
 	
 private slots:
+	//! Called whenever the StelLocationMgr is updated
+	void reloadLocations();
+
 	//! To be called when user edits any field
 	void reportEdit();
+
+	void saveTimeZone();
 	
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
@@ -110,11 +123,20 @@ private slots:
 	
 	//! Called when the user wants to use the current location as default
 	void setDefaultLocation(bool state);
-	
+
+	//! Updates the check state and the enabled/disabled status.
+	void updateTimeZoneControls(bool useCustomTimeZone);
+
 private:
 	QString lastPlanet;
+	QString customTimeZone;
+	QStringListModel* allModel;
+	QStringListModel* pickedModel;
+	QSortFilterProxyModel *proxyModel;
+
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
+
 };
 
 #endif // _LOCATIONDIALOG_HPP_

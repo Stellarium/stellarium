@@ -29,6 +29,7 @@ class Ui_supernovaeDialog;
 class QTimer;
 class Supernovae;
 
+//! @ingroup historicalSupernovae
 class SupernovaeDialog : public StelDialog
 {
 	Q_OBJECT

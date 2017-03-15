@@ -34,21 +34,25 @@
 #include <QCompleter>
 #include <QFrame>
 #include <QTimer>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QFile>
+#include <QDir>
 
 TelescopeConfigurationDialog::TelescopeConfigurationDialog()
-	: configuredSlot(0)
+	: StelDialog("TelescopeControlConfiguration")
+	, configuredSlot(0)
 {
-	ui = new Ui_telescopeConfigurationDialog;
+	ui = new Ui_telescopeConfigurationDialog();
 	
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 
 	telescopeNameValidator = new QRegExpValidator (QRegExp("[^:\"]+"), this);//Test the update for JSON
 	hostNameValidator = new QRegExpValidator (QRegExp("[a-zA-Z0-9\\-\\.]+"), this);//TODO: Write a proper host/IP regexp?
 	circleListValidator = new QRegExpValidator (QRegExp("[0-9,\\.\\s]+"), this);
-	#ifdef Q_OS_WIN32
+	#ifdef Q_OS_WIN
 	serialPortValidator = new QRegExpValidator (QRegExp("COM[0-9]+"), this);
 	#else
-	serialPortValidator = new QRegExpValidator (QRegExp("/dev/.*"), this);
+	serialPortValidator = new QRegExpValidator (QRegExp("/.*"), this);
 	#endif
 }
 
@@ -60,6 +64,52 @@ TelescopeConfigurationDialog::~TelescopeConfigurationDialog()
 	delete hostNameValidator;
 	delete circleListValidator;
 	delete serialPortValidator;
+}
+
+QStringList* TelescopeConfigurationDialog::listSerialPorts()
+{
+	// list real serial ports
+	QStringList *plist = new QStringList();
+	foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+	{
+		#ifdef Q_OS_WIN
+		plist->append(serialPortInfo.portName()); // Use COM1 in the GUI instead \\.\COM1 naming
+		#else
+		plist->append(serialPortInfo.systemLocation());
+		#endif
+		qDebug() << "[TelescopeControl] port name:" << serialPortInfo.portName()
+			 << "; vendor identifier:" << serialPortInfo.vendorIdentifier()
+			 << "; product identifier:" << serialPortInfo.productIdentifier();
+	}
+
+// on linux find some virtual ports
+#ifdef Q_OS_LINUX
+	QStringList filters;
+	filters << "ttyNET*" << "ttynet*" << "Telescope*";
+	// look in /dev/*
+	QDir dev("/dev");
+	dev.setFilter(QDir::System);
+	dev.setSorting(QDir::Reversed);
+	dev.setNameFilters(filters);
+	QFileInfoList list = dev.entryInfoList();
+	for (int i = 0; i < list.size(); i ++) {
+		QFileInfo fileInfo = list.at(i);
+		plist->append(fileInfo.absoluteFilePath());
+	}
+	// look in /tmp/* for non-root virtual ports (append ttyS8 and ttyUSB*)
+	filters << "ttyS*" << "ttyUSB*";
+	QDir tmp("/tmp");
+	tmp.setFilter(QDir::System);
+	tmp.setSorting(QDir::Reversed);
+	tmp.setNameFilters(filters);
+	list = tmp.entryInfoList();
+	for (int i = 0; i < list.size(); i ++) {
+		QFileInfo fileInfo = list.at(i);
+		plist->append(fileInfo.absoluteFilePath());
+	}
+#endif
+
+	return plist;
 }
 
 void TelescopeConfigurationDialog::retranslate()
@@ -76,6 +126,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 	
 	//Connect: sender, signal, receiver, member
@@ -93,7 +144,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->lineEditTelescopeName->setValidator(telescopeNameValidator);
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
-	ui->lineEditSerialPort->setValidator(serialPortValidator);
+	ui->comboSerialPort->setValidator(serialPortValidator);
 }
 
 //Set the configuration panel in a predictable state
@@ -110,11 +161,14 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 
 	//Connect at startup
 	ui->checkBoxConnectAtStartup->setChecked(false);
-	
+
 	//Serial port
-	ui->lineEditSerialPort->clear();
-	ui->lineEditSerialPort->setCompleter(new QCompleter(SERIAL_PORT_NAMES, this));
-	ui->lineEditSerialPort->setText(SERIAL_PORT_NAMES.value(0));
+	QStringList *plist = listSerialPorts();
+	ui->comboSerialPort->clear();
+	ui->comboSerialPort->addItems(*plist);
+	ui->comboSerialPort->activated(plist->value(0));
+	ui->comboSerialPort->setEditText(plist->value(0));
+	delete(plist);
 	
 	//Populating the list of available devices
 	ui->comboBoxDeviceModel->clear();
@@ -199,7 +253,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
 		}
 		//Initialize the serial port value
-		ui->lineEditSerialPort->setText(serialPortName);
+		ui->comboSerialPort->activated(serialPortName);
+		ui->comboSerialPort->setEditText(serialPortName);
 	}
 	else if (connectionType == ConnectionRemote)
 	{
@@ -249,7 +304,10 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 	{
 		//Re-initialize values that may have been changed
 		ui->comboBoxDeviceModel->setCurrentIndex(0);
-		ui->lineEditSerialPort->setText(SERIAL_PORT_NAMES.value(0));
+		QStringList *plist = listSerialPorts();
+		ui->comboSerialPort->activated(plist->value(0));
+		ui->comboSerialPort->setEditText(plist->value(0));
+		delete(plist);
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
@@ -315,10 +373,13 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 {
 	//Main telescope properties
 	QString name = ui->lineEditTelescopeName->text().trimmed();
+
 	if(name.isEmpty())
 		return;
+
 	QString host = ui->lineEditHostName->text();
-	if(host.isEmpty())//TODO: Validate host
+
+	if(host.isEmpty() || !validateHost(host))
 		return;
 	
 	int delay = MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxTelescopeDelay->value());
@@ -356,10 +417,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	if(ui->radioButtonTelescopeLocal->isChecked())
 	{
 		//Read the serial port
-		QString serialPortName = ui->lineEditSerialPort->text();
-		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX))
-			return;//TODO: Add more validation!
-		
+		QString serialPortName = ui->comboSerialPort->currentText();
 		type = ConnectionInternal;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
 	}
@@ -394,4 +452,19 @@ void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceMode
 {
 	ui->labelDeviceModelDescription->setText(telescopeManager->getDeviceModels().value(deviceModelName).description);
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
+}
+
+bool TelescopeConfigurationDialog::validateHost(QString hostName)
+{
+    // Simple validation by ping
+    int exitCode;
+#ifdef Q_OS_WIN
+    // WTF? It's not working anymore!
+    //exitCode = QProcess::execute("ping", QStringList() << "-n 1" << hostName);
+    exitCode = 0;
+#else
+    exitCode = QProcess::execute("ping", QStringList() << "-c1" << hostName);
+#endif
+    return (0 == exitCode);
+    //TODO: Add debug if host not alive?
 }

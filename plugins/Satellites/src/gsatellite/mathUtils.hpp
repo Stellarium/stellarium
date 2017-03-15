@@ -32,10 +32,12 @@
 #define _MATHUTILS_HPP_ 1
 
 
-/* Four-quadrant arctan function */
+//! Four-quadrant arctan function
+//! @ingroup satellites
 double AcTan(double sinx, double cosx);
 
-/* Returns square of a double */
+//! Returns square of a double
+//! @ingroup satellites
 double Sqr(double arg);
 
 

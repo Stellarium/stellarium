@@ -36,12 +36,16 @@
 #include <QCache>
 #include <QOpenGLPaintDevice>
 #include <QOpenGLShader>
+#include <QOpenGLTexture>
+#include <QApplication>
 
+static const int TEX_CACHE_LIMIT = 7000000;
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
+QCache<QByteArray, StringTexture> StelPainter::texCache(TEX_CACHE_LIMIT);
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
@@ -51,26 +55,50 @@ StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
-StelPainter::GLState::GLState()
+StelPainter::GLState::GLState(QOpenGLFunctions* gl)
+	: blend(false),
+	  blendSrc(GL_SRC_ALPHA), blendDst(GL_ONE_MINUS_SRC_ALPHA),
+	  depthTest(false),
+	  depthMask(false),
+	  cullFace(false),
+	  lineSmooth(false),
+	  lineWidth(1.0f),
+	  gl(gl)
 {
-	blend = glIsEnabled(GL_BLEND);
-	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
-	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);
-	glGetIntegerv(GL_BLEND_SRC_ALPHA, &blendSrcAlpha);
-	glGetIntegerv(GL_BLEND_DST_ALPHA, &blendDstAlpha);
+
 }
 
-StelPainter::GLState::~GLState()
+void StelPainter::GLState::apply()
 {
-	if (blend)
-	{
-		glEnable(GL_BLEND);
-		glBlendFuncSeparate(blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha);
-	}
+	if(blend)
+		gl->glEnable(GL_BLEND);
 	else
+		gl->glDisable(GL_BLEND);
+	gl->glBlendFunc(blendSrc,blendDst);
+	if(depthTest)
+		gl->glEnable(GL_DEPTH_TEST);
+	else
+		gl->glDisable(GL_DEPTH_TEST);
+	gl->glDepthMask(depthMask);
+	if(cullFace)
+		gl->glEnable(GL_CULL_FACE);
+	else
+		gl->glDisable(GL_CULL_FACE);
+#ifdef GL_LINE_SMOOTH
+	if(!QOpenGLContext::currentContext()->isOpenGLES())
 	{
-		glDisable(GL_BLEND);
+		if (lineSmooth)
+			gl->glEnable(GL_LINE_SMOOTH);
+		else
+			gl->glDisable(GL_LINE_SMOOTH);
 	}
+#endif
+}
+
+void StelPainter::GLState::reset()
+{
+	*this = GLState(gl);
+	apply();
 }
 
 bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
@@ -81,7 +109,7 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 	return ret;
 }
 
-StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
+StelPainter::StelPainter(const StelProjectorP& proj) : QOpenGLFunctions(QOpenGLContext::currentContext()), glState(this)
 {
 	Q_ASSERT(proj);
 
@@ -102,13 +130,10 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	}
 #endif
 
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
+	//TODO: is this still required, and is there some Qt way to fix it? 0x11111111 is a bit peculiar, how was it chosen?
 	// Fix some problem when using Qt OpenGL2 engine
 	glStencilMask(0x11111111);
-	// Deactivate drawing in depth buffer by default
-	glDepthMask(GL_FALSE);
-	enableTexture2d(false);
+	glState.apply(); //apply default OpenGL state
 	setProjector(proj);
 }
 
@@ -122,6 +147,9 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
+	//reset opengl state
+	glState.reset();
+
 #ifndef NDEBUG
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
@@ -129,9 +157,7 @@ StelPainter::~StelPainter()
 		if (er==GL_INVALID_OPERATION)
 			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
-#endif
 
-#ifndef NDEBUG
 	// We are done with this StelPainter
 	globalMutex->unlock();
 #endif
@@ -158,33 +184,110 @@ QFontMetrics StelPainter::getFontMetrics() const
 	return QFontMetrics(currentFont);
 }
 
+void StelPainter::setBlending(bool enableBlending, GLenum blendSrc, GLenum blendDst)
+{
+	if(enableBlending != glState.blend)
+	{
+		glState.blend = enableBlending;
+		if(enableBlending)
+			glEnable(GL_BLEND);
+		else
+			glDisable(GL_BLEND);
+	}
+	if(enableBlending)
+	{
+		if(blendSrc!=glState.blendSrc||blendDst!=glState.blendDst)
+		{
+			glState.blendSrc = blendSrc;
+			glState.blendDst = blendDst;
+			glBlendFunc(blendSrc,blendDst);
+		}
+	}
+}
+
+void StelPainter::setDepthTest(bool enable)
+{
+	if(glState.depthTest != enable)
+	{
+		glState.depthTest = enable;
+		if(enable)
+			glEnable(GL_DEPTH_TEST);
+		else
+			glDisable(GL_DEPTH_TEST);
+	}
+}
+
+void StelPainter::setDepthMask(bool enable)
+{
+	if(glState.depthMask != enable)
+	{
+		glState.depthMask = enable;
+		if(enable)
+			glDepthMask(GL_TRUE);
+		else
+			glDepthMask(GL_FALSE);
+	}
+}
+
+void StelPainter::setCullFace(bool enable)
+{
+	if(glState.cullFace!=enable)
+	{
+		glState.cullFace = enable;
+		if(enable)
+			glEnable(GL_CULL_FACE);
+		else
+			glDisable(GL_CULL_FACE);
+	}
+}
+
+void StelPainter::setLineSmooth(bool enable)
+{
+#ifdef GL_LINE_SMOOTH
+	if (!QOpenGLContext::currentContext()->isOpenGLES() && enable!=glState.lineSmooth)
+	{
+		glState.lineSmooth = enable;
+		if(enable)
+			glEnable(GL_LINE_SMOOTH);
+		else
+			glDisable(GL_LINE_SMOOTH);
+	}
+#else
+	Q_UNUSED(enable); //noop
+#endif
+}
+
+void StelPainter::setLineWidth(float width)
+{
+	if(glState.lineWidth != width)
+	{
+		glState.lineWidth = width;
+		glLineWidth(width);
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // Standard methods for drawing primitives
 
 // Fill with black around the circle
-void StelPainter::drawViewportShape(const GLfloat innerRadius)
+void StelPainter::drawViewportShape(void)
 {
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
 
+	bool oldBlendState = glState.blend;
 	glDisable(GL_BLEND);
 	setColor(0.f,0.f,0.f);
 
+	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
-	GLint slices = 256;
-	GLfloat sweepAngle = 360.;
+	GLint slices = 239;
 
 	GLfloat sinCache[240];
 	GLfloat cosCache[240];
 	GLfloat vertices[(240+1)*2][3];
 	GLfloat deltaRadius;
 	GLfloat radiusHigh;
-
-	if (slices>=240)
-	{
-		slices=240-1;
-	}
 
 	if (outerRadius<=0.0 || innerRadius<0.0 ||innerRadius > outerRadius)
 	{
@@ -198,7 +301,7 @@ void StelPainter::drawViewportShape(const GLfloat innerRadius)
 	/* Cache is the vertex locations cache */
 	for (int i=0; i<=slices; i++)
 	{
-		GLfloat angle=((M_PI*sweepAngle)/180.0f)*i/slices;
+		GLfloat angle=(M_PI*2.0f)*i/slices;
 		sinCache[i]=(GLfloat)sin(angle);
 		cosCache[i]=(GLfloat)cos(angle);
 	}
@@ -222,14 +325,9 @@ void StelPainter::drawViewportShape(const GLfloat innerRadius)
 	}
 	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
 	enableClientStates(false);
+	if(oldBlendState)
+		glEnable(GL_BLEND);
 }
-
-void StelPainter::drawViewportShape(void)
-{
-	this->drawViewportShape(0.5*prj->viewportFovDiameter);
-}
-
-
 
 void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
@@ -440,8 +538,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	float xom = x + xshift*cosr - yshift*sinr;
 	float yom = y + yshift*sinr + yshift*cosr;
 
-	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("ar fa ckb ug ur he yi").contains(lang))
+	if (!StelApp::getInstance().getLocaleMgr().isAppRTL())
 	{
 		for (int i=0; i<ws.length(); ++i)
 		{
@@ -494,34 +591,112 @@ void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, f
  Draw the string at the given position and angle with the given font
 *************************************************************************/
 
+// Methods taken from text-use-opengl-buffer
 // Container for one cached string texture
 struct StringTexture
 {
-	GLuint texture;
-	int width;
-	int height;
-	int subTexWidth;
-	int subTexHeight;
-
-	StringTexture()
-		: texture(0),
-		  width(0),
-		  height(0),
-		  subTexWidth(0),
-		  subTexHeight(0) {;}
-	~StringTexture()
-	{
-		if (texture != 0)
-			glDeleteTextures(1, &texture);
+	QOpenGLTexture* texture;
+	QSize size;
+	QSizeF getTexSize() const {
+		return QSizeF((float)size.width() / texture->width(),
+			      (float)size.height() / texture->height());
 	}
+
+	StringTexture(QOpenGLTexture* tex, const QSize& size) :
+	     texture(tex), size(size) {}
+	~StringTexture() {delete texture;}
 };
+
+StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
+{
+	// Render first the text into a QPixmap, then create a QOpenGLTexture
+	// from it.  We could optimize by directly using a QImage, but for some
+	// reason the result is not exactly the same than with a QPixmap.
+	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
+	StringTexture* cachedTex = texCache.object(hash);
+	if (cachedTex)
+		return cachedTex;
+	QFont tmpFont = currentFont;
+	tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
+	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
+	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int h = strRect.height();
+
+	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
+	strImage.fill(Qt::transparent);
+	QPainter painter(&strImage);
+	tmpFont.setStyleStrategy(QFont::NoAntialias);
+	painter.setFont(tmpFont);
+	//painter.setRenderHints(QPainter::TextAntialiasing);
+	painter.setPen(Qt::white);
+	painter.drawText(-strRect.x(), -strRect.y(), str);
+	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h));
+	texCache.insert(hash, newTex, 3*w*h);
+	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
+	return texCache.object(hash);
+}
 
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
-	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
+	}
+	else if (qApp->property("text_texture")==true) // CLI option -t given?
+	{
+		//qDebug() <<  "Text texture" << str;
+		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
+		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
+		Q_ASSERT(tex);
+		if (!noGravity)
+			angleDeg += prj->defaultAngleForGravityText;
+		tex->texture->bind();
+
+		static float vertexData[8];
+		// compute the vertex coordinates applying the translation and the rotation
+		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
+		if (std::fabs(angleDeg)>1.f*M_PI/180.f)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			const float cosr = std::cos(angleDeg * M_PI/180.);
+			const float sinr = std::sin(angleDeg * M_PI/180.);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = int(x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr);
+				vertexData[i+1] = int(y  + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr);
+			}
+		}
+		else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			for (int i = 0; i < 8; i+=2)
+			{
+				vertexData[i] = int(x + tex->size.width()*vertexBase[i]+xshift);
+				vertexData[i+1] = int(y  + tex->size.height()*vertexBase[i+1]+yshift);
+			}
+		}
+
+		float* texCoords = new float[8];
+		for (int i=0;i<4;i++)
+		{
+			texCoords[i*2+0] = tex->getTexSize().width() * (i % 2);
+			texCoords[i*2+1] = tex->getTexSize().height() * (1 - i / 2);
+		}
+		setTexCoordPointer(2, GL_FLOAT, texCoords);
+
+		//text drawing requires blending, but we reset GL state afterwards if necessary
+		bool oldBlending = glState.blend;
+		GLenum oldSrc = glState.blendSrc, oldDst = glState.blendDst;
+		setBlending(true);
+		enableClientStates(true, true);
+		setVertexPointer(2, GL_FLOAT, vertexData);
+		drawFromArray(TriangleStrip, 4, 0, false);
+		setBlending(oldBlending, oldSrc, oldDst);
+		enableClientStates(false, false);
+		tex->texture->release();
+		delete[] texCoords;
 	}
 	else
 	{
@@ -533,15 +708,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// painter.setFont(currentFont);
 		
 		QPainter painter(&device);
-		painter.beginNativePainting();
 		
 		QFont tmpFont = currentFont;
 		tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
 		painter.setFont(tmpFont);
 		painter.setPen(QColor(currentColor[0]*255, currentColor[1]*255, currentColor[2]*255, currentColor[3]*255));
 		
-		xshift*=StelApp::getInstance().getGlobalScalingRatio();
-		yshift*=StelApp::getInstance().getGlobalScalingRatio();
+		float scaleRatio = StelApp::getInstance().getGlobalScalingRatio();
+		xshift*=scaleRatio;
+		yshift*=scaleRatio;
 		
 		y = prj->getViewportHeight()-y;
 		yshift = -yshift;
@@ -563,7 +738,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			painter.drawText(x+xshift, y+yshift, str);
 		}
 		
-		painter.endNativePainting();
+		//important to call this before GL state restore
+		painter.end();
+
+		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
+		glState.apply();
 	}
 }
 
@@ -604,6 +783,7 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 
 // Used by the method below
 QVector<Vec2f> StelPainter::smallCircleVertexArray;
+QVector<Vec4f> StelPainter::smallCircleColorArray;
 
 void StelPainter::drawSmallCircleVertexArray()
 {
@@ -612,11 +792,14 @@ void StelPainter::drawSmallCircleVertexArray()
 
 	Q_ASSERT(smallCircleVertexArray.size()>1);
 
-	enableClientStates(true);
+	enableClientStates(true, false, !smallCircleColorArray.isEmpty());
 	setVertexPointer(2, GL_FLOAT, smallCircleVertexArray.constData());
+	if (!smallCircleColorArray.isEmpty())
+		setColorPointer(4, GL_FLOAT, smallCircleColorArray.constData());
 	drawFromArray(LineStrip, smallCircleVertexArray.size(), 0, false);
 	enableClientStates(false);
 	smallCircleVertexArray.resize(0);
+	smallCircleColorArray.resize(0);
 }
 
 static Vec3d pt1, pt2;
@@ -698,6 +881,47 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		}
 	}
 	Q_ASSERT(smallCircleVertexArray.isEmpty());
+}
+
+void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors)
+{
+	// Because the path may intersect a viewport discontinuity, we cannot render
+	// it in one OpenGL drawing call.
+	Q_ASSERT(smallCircleVertexArray.isEmpty());
+	Q_ASSERT(smallCircleColorArray.isEmpty());
+	Q_ASSERT(points.size() == colors.size());
+	Vec3d win;
+	for (int i = 0; i+1 != points.size(); i++)
+	{
+		const Vec3d p1 = points[i];
+		const Vec3d p2 = points[i + 1];
+		if (!prj->intersectViewportDiscontinuity(p1, p2))
+		{
+			prj->project(p1, win);
+			smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+			smallCircleColorArray.append(colors[i]);
+			if (i+2==points.size())
+			{
+				prj->project(p2, win);
+				smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+				smallCircleColorArray.append(colors[i + 1]);
+				drawSmallCircleVertexArray();
+			}
+		}
+		else
+		{
+			// Break the line, draw the stored vertex and flush the list
+			if (!smallCircleVertexArray.isEmpty())
+			{
+				prj->project(p1, win);
+				smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+				smallCircleColorArray.append(colors[i]);
+			}
+			drawSmallCircleVertexArray();
+		}
+	}
+	Q_ASSERT(smallCircleVertexArray.isEmpty());
+	Q_ASSERT(smallCircleColorArray.isEmpty());
 }
 
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
@@ -1351,6 +1575,8 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
 
+	bool oldCullFace = glState.cullFace;
+
 	switch (drawMode)
 	{
 		case SphericalPolygonDrawModeBoundary:
@@ -1362,7 +1588,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
 		case SphericalPolygonDrawModeTextureFillColormodulated:
-			glEnable(GL_CULL_FACE);
+			setCullFace(true);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
@@ -1370,7 +1596,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			else
 				drawStelVertexArray(poly->getFillVertexArray(), false);
 
-			glDisable(GL_CULL_FACE);
+			setCullFace(oldCullFace);
 			break;
 		default:
 			Q_ASSERT(0);
@@ -1411,7 +1637,6 @@ void StelPainter::drawCircle(float x, float y, float r)
 	drawFromArray(LineLoop, 180, 0, false);
 	enableClientStates(false);
 }
-
 
 void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
@@ -1712,14 +1937,9 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 		glCullFace(GL_BACK);
 }
 
-void StelPainter::enableTexture2d(bool b)
-{
-	texture2dEnabled = b;
-}
-
 void StelPainter::initGLShaders()
 {
-	qWarning() << "Intializing basic GL shaders... ";
+	qDebug() << "Initializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =
@@ -1873,6 +2093,7 @@ void StelPainter::deinitGLShaders()
 	texturesShaderProgram = NULL;
 	delete texturesColorShaderProgram;
 	texturesColorShaderProgram = NULL;
+	texCache.clear();
 }
 
 

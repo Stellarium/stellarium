@@ -34,8 +34,8 @@ class SimbadLookupReply : public QObject
 	Q_OBJECT
 	Q_ENUMS(SimbadLookupStatus)
 
-public:
 	friend class SimbadSearcher;
+public:
 
 	//! Possible status for a simbad query.
 	enum SimbadLookupStatus
@@ -58,6 +58,9 @@ public:
 
 	//! Get the error descrition string. Return empty string if no error occured.
 	QString getErrorString() const {return errorString;}
+
+	//! Explicitly delete the internal QNetworkReply. Must not be called from a QNetworkReply signal.
+	void deleteNetworkReply();
 
 signals:
 	//! Triggered when the lookup status change.
@@ -96,7 +99,7 @@ class SimbadSearcher : public QObject
 	Q_OBJECT
 
 public:
-	SimbadSearcher(QObject* parent);
+	SimbadSearcher(QObject* parent = NULL);
 
 	//! Lookup in Simbad for object which have a name starting with @em objectName.
 	//! @param serverUrl URL of the SIMBAD mirror server.

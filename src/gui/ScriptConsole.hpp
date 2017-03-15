@@ -30,18 +30,20 @@ class ScriptConsole : public StelDialog
 {
 	Q_OBJECT
 public:
-	ScriptConsole();
+	ScriptConsole(QObject* parent);
 	virtual ~ScriptConsole();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
 	void retranslate();
+private slots:
 	void runScript();
 	void loadScript();
 	void saveScript();
 	void clearButtonPressed();
 	void preprocessScript();
+	void scriptStarted();
 	void scriptEnded();
 	void appendLogLine(const QString& s);
 	void appendOutputLine(const QString& s);

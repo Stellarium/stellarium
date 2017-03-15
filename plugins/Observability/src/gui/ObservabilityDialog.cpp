@@ -34,7 +34,7 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-ObservabilityDialog::ObservabilityDialog()
+ObservabilityDialog::ObservabilityDialog() : StelDialog("Observability")
 {
         ui = new Ui_ObservabilityDialog;
 }
@@ -107,6 +107,7 @@ void ObservabilityDialog::createDialogContent()
 	        this, SLOT(updateHorizonLabel(int)));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
 	        plugin, SLOT(resetConfiguration()));
 	// TODO: The plug-in should emit a signal when settings are changed.

@@ -26,6 +26,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
+#include "Planet.hpp"
+#include "CustomObjectMgr.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -44,6 +46,7 @@
 #include <QComboBox>
 #include <QMenu>
 #include <QMetaEnum>
+#include <QClipboard>
 
 #include "SimbadSearcher.hpp"
 
@@ -124,48 +127,23 @@ void CompletionLabel::updateText()
 // Start of members for class SearchDialog
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
+SearchDialog::SearchDialogStaticData SearchDialog::staticData;
+QString SearchDialog::extSearchText = "";
 
-SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
+SearchDialog::SearchDialog(QObject* parent)
+	: StelDialog("Search", parent)
+	, simbadReply(NULL)
+	, flagHasSelectedText(false)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 
-	flagHasSelectedText = false;
-
-	greekLetters.insert("alpha", QString(QChar(0x03B1)));
-	greekLetters.insert("beta", QString(QChar(0x03B2)));
-	greekLetters.insert("gamma", QString(QChar(0x03B3)));
-	greekLetters.insert("delta", QString(QChar(0x03B4)));
-	greekLetters.insert("epsilon", QString(QChar(0x03B5)));
-    
-	greekLetters.insert("zeta", QString(QChar(0x03B6)));
-	greekLetters.insert("eta", QString(QChar(0x03B7)));
-	greekLetters.insert("theta", QString(QChar(0x03B8)));
-	greekLetters.insert("iota", QString(QChar(0x03B9)));
-	greekLetters.insert("kappa", QString(QChar(0x03BA)));
-	
-	greekLetters.insert("lambda", QString(QChar(0x03BB)));
-	greekLetters.insert("mu", QString(QChar(0x03BC)));
-	greekLetters.insert("nu", QString(QChar(0x03BD)));
-	greekLetters.insert("xi", QString(QChar(0x03BE)));
-	greekLetters.insert("omicron", QString(QChar(0x03BF)));
-	
-	greekLetters.insert("pi", QString(QChar(0x03C0)));
-	greekLetters.insert("rho", QString(QChar(0x03C1)));
-	greekLetters.insert("sigma", QString(QChar(0x03C3))); // second lower-case sigma shouldn't affect anything
-	greekLetters.insert("tau", QString(QChar(0x03C4)));
-	greekLetters.insert("upsilon", QString(QChar(0x03C5)));
-	
-	greekLetters.insert("phi", QString(QChar(0x03C6)));
-	greekLetters.insert("chi", QString(QChar(0x03C7)));
-	greekLetters.insert("psi", QString(QChar(0x03C8)));
-	greekLetters.insert("omega", QString(QChar(0x03C9)));
-
 	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
+	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());
 }
@@ -233,6 +211,9 @@ void SearchDialog::populateCoordinateSystemsList()
 	csys->addItem(qc_("Equatorial", "coordinate system"), "equatorial");
 	csys->addItem(qc_("Horizontal", "coordinate system"), "horizontal");
 	csys->addItem(qc_("Galactic", "coordinate system"), "galactic");
+	csys->addItem(qc_("Supergalactic", "coordinate system"), "supergalactic");
+	csys->addItem(qc_("Ecliptic", "coordinate system"), "ecliptic");
+	csys->addItem(qc_("Ecliptic (J2000.0)", "coordinate system"), "eclipticJ2000");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -247,6 +228,14 @@ void SearchDialog::populateCoordinateAxis()
 
 	ui->AxisXSpinBox->setDecimals(2);
 	ui->AxisYSpinBox->setDecimals(2);
+
+	// Allow rotating through longitudinal coordinates, but stop at poles.
+	ui->AxisXSpinBox->setMinimum(  0., true);
+	ui->AxisXSpinBox->setMaximum(360., true);
+	ui->AxisXSpinBox->setWrapping(true);
+	ui->AxisYSpinBox->setMinimum(-90., true);
+	ui->AxisYSpinBox->setMaximum( 90., true);
+	ui->AxisYSpinBox->setWrapping(false);
 
 	switch (getCurrentCoordinateSystem()) {		
 		case equatorialJ2000:
@@ -272,7 +261,10 @@ void SearchDialog::populateCoordinateAxis()
 			xnormal = false;
 			break;
 		}
+		case ecliptic:
+		case eclipticJ2000:
 		case galactic:
+		case supergalactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
@@ -317,6 +309,7 @@ void SearchDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
 		this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
@@ -372,8 +365,8 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
-	ui->checkBoxUseSimbad->setChecked(useSimbad);
+	connect(ui->simbadGroupBox, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
+	ui->simbadGroupBox->setChecked(useSimbad);
 
 	populateSimbadServerList();
 	idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -387,6 +380,9 @@ void SearchDialog::createDialogContent()
 
 	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+
+	connect(ui->checkBoxLockPosition, SIGNAL(clicked(bool)), this, SLOT(enableLockPosition(bool)));
+	ui->checkBoxLockPosition->setChecked(useLockPosition);
 
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
@@ -417,6 +413,12 @@ void SearchDialog::enableStartOfWordsAutofill(bool enable)
 	conf->setValue("search/flag_start_words", useStartOfWords);
 }
 
+void SearchDialog::enableLockPosition(bool enable)
+{
+	useLockPosition = enable;
+	conf->setValue("search/flag_lock_position", useLockPosition);
+}
+
 void SearchDialog::setSimpleStyle()
 {
 	ui->AxisXSpinBox->setVisible(false);
@@ -435,37 +437,103 @@ void SearchDialog::manualPositionChanged()
 	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
 	Vec3d pos;
+	Vec3d aimUp;
+	double spinLong=ui->AxisXSpinBox->valueRadians();
+	double spinLat=ui->AxisYSpinBox->valueRadians();
+
+	// Since 0.15: proper handling of aimUp vector. This does not depend on the searched coordinate system, but on the MovementManager's C.S.
+	// However, if those are identical, we have a problem when we want to look right into the pole. (e.g. zenith), which requires a special up vector.
+	// aimUp depends on MovementMgr::MountMode mvmgr->mountMode!
+	mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
+	aimUp=mvmgr->getViewUpVectorJ2000();
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+
 	switch (getCurrentCoordinateSystem()) {
 		case equatorialJ2000:
 		{
-			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			StelUtils::spheToRect(spinLong, spinLat, pos);
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				// Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
 			break;
 		}
 		case equatorial:
 		{
-			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->equinoxEquToJ2000(pos);
+
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
 			break;
 		}
 		case horizontal:
 		{
 			double cx;
-			cx = 3.*M_PI - ui->AxisXSpinBox->valueRadians(); // N is zero, E is 90 degrees
-			if (cx > M_PI*2)
-				cx -= M_PI*2;
-			StelUtils::spheToRect(cx, ui->AxisYSpinBox->valueRadians(), pos);
+			cx = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
+			if (cx > 2.*M_PI)
+				cx -= 2.*M_PI;
+			StelUtils::spheToRect(cx, spinLat, pos);
 			pos = core->altAzToJ2000(pos);
+
+			if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(cx), -sin(cx), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
 			break;
 		}
 		case galactic:
 		{
-			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->galacticToJ2000(pos);
+			if ( (mountMode==StelMovementMgr::MountGalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
+			break;
+		}
+		case supergalactic:
+		{
+			StelUtils::spheToRect(spinLong, spinLat, pos);
+			pos = core->supergalacticToJ2000(pos);
+			if ( (mountMode==StelMovementMgr::MountSupergalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
+			break;
+		}
+		case eclipticJ2000:
+		{
+			double ra, dec;
+			StelUtils::eclToEqu(spinLong, spinLat, core->getCurrentPlanet()->getRotObliquity(2451545.0), &ra, &dec);
+			StelUtils::spheToRect(ra, dec, pos);
+			break;
+		}
+		case ecliptic:
+		{
+			double ra, dec;
+			StelUtils::eclToEqu(spinLong, spinLat, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &ra, &dec);
+			StelUtils::spheToRect(ra, dec, pos);
+			pos = core->equinoxEquToJ2000(pos);
 			break;
 		}
 	}
 	mvmgr->setFlagTracking(false);
-	mvmgr->moveToJ2000(pos, 0.05);
+	mvmgr->moveToJ2000(pos, aimUp, 0.05);
+	mvmgr->setFlagLockEquPos(useLockPosition);
 }
 
 void SearchDialog::onSearchTextChanged(const QString& text)
@@ -493,20 +561,24 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 	} else {
 		if (useSimbad)
 		{
-			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 3);
+			simbadReply = simbadSearcher->lookup(simbadServerUrl, trimmedText, 4);
 			onSimbadStatusChanged();
 			connect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		}
 
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
-		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3, useStartOfWords);
-			matches += objectMgr->listMatchingObjects(trimmedText, 3, useStartOfWords);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()), useStartOfWords);
-		} else {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5, useStartOfWords);
-			matches += objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords);
+		if(greekText != trimmedText)
+		{
+			matches  = objectMgr->listMatchingObjects(trimmedText, 8, useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(trimmedText, 8, useStartOfWords, true);
+			matches += objectMgr->listMatchingObjects(greekText, (18 - matches.size()), useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(greekText, (18 - matches.size()), useStartOfWords, true);
+		}
+		else
+		{
+			matches  = objectMgr->listMatchingObjects(trimmedText, 13, useStartOfWords, false);
+			matches += objectMgr->listMatchingObjects(trimmedText, 13, useStartOfWords, true);
 		}
 
 		// remove possible duplicates from completion list
@@ -585,8 +657,7 @@ void SearchDialog::greekLetterClicked()
 
 void SearchDialog::gotoObject()
 {
-	QString name = ui->completionLabel->getSelected();
-	gotoObject(name);
+	gotoObject(ui->completionLabel->getSelected());
 }
 
 void SearchDialog::gotoObject(const QString &nameI18n)
@@ -597,12 +668,47 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	if (simbadResults.contains(nameI18n))
 	{
-		close();
-		Vec3d pos = simbadResults[nameI18n];
-		objectMgr->unSelect();
-		mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
-		ui->lineEditSearchSkyObject->clear();
-		ui->completionLabel->clearValues();
+		if (objectMgr->findAndSelect(nameI18n))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+				close();
+				ui->lineEditSearchSkyObject->clear();
+				ui->completionLabel->clearValues();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
+			}
+		}
+		else
+		{
+			close();
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(nameI18n, simbadResults[nameI18n]);
+			ui->lineEditSearchSkyObject->clear();
+			ui->completionLabel->clearValues();
+			if (objectMgr->findAndSelect(nameI18n))
+			{
+				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
+			}
+		}
 	}
 	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{
@@ -629,8 +735,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 
 void SearchDialog::gotoObject(QListWidgetItem *item)
 {
-	QString objName = item->text();
-	gotoObject(objName);
+	gotoObject(item->text());
 }
 
 void SearchDialog::searchListChanged(const QString &newText)
@@ -663,6 +768,16 @@ bool SearchDialog::eventFilter(QObject*, QEvent *event)
 			return true;
 		}
 	}
+	if (event->type() == QEvent::Show)
+	{
+		if (!extSearchText.isEmpty())
+		{
+			ui->lineEditSearchSkyObject->setText(extSearchText);
+			ui->lineEditSearchSkyObject->selectAll();
+			extSearchText.clear();
+		}
+	}
+
 
 	return false;
 }
@@ -682,8 +797,8 @@ QString SearchDialog::substituteGreek(const QString& keyString)
 
 QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterName)
 {
-	if(greekLetters.contains(potentialGreekLetterName))
-		return greekLetters[potentialGreekLetterName.toLower()];
+	if(staticData.greekLetters.contains(potentialGreekLetterName))
+		return staticData.greekLetters[potentialGreekLetterName.toLower()];
 
 	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
 	// any trailing digit.
@@ -692,8 +807,8 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 	{
 		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
 		QString name = potentialGreekLetterName.left(lastCharacterIndex);
-		if(greekLetters.contains(name))
-			return greekLetters[name.toLower()] + digit;
+		if(staticData.greekLetters.contains(name))
+			return staticData.greekLetters[name.toLower()] + digit;
 	}
 
 	return potentialGreekLetterName;
@@ -737,7 +852,9 @@ void SearchDialog::updateListWidget(int index)
 	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
 	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
 	ui->objectsListWidget->sortItems(Qt::AscendingOrder);
-	connect(ui->objectsListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+	connect(ui->objectsListWidget, SIGNAL(itemClicked(QListWidgetItem*)),
+		this, SLOT(gotoObject(QListWidgetItem*)),
+		Qt::UniqueConnection); //bugfix: prevent multiple connections, which seems to have happened before
 }
 
 void SearchDialog::updateListTab()
@@ -771,7 +888,18 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 {
 	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
 	menu->addSeparator();
-	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
+	QString clipText;
+	QClipboard *clipboard = QApplication::clipboard();
+	if (clipboard)
+		clipText = clipboard->text();
+	if (!clipText.isEmpty())
+	{
+		if (clipText.length()>12)
+			clipText = clipText.right(9) + "...";
+		clipText = "\t(" + clipText + ")";
+	}
+
+	menu->addAction(q_("Paste and Search") + clipText, this, SLOT(pasteAndGo()));
 	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
 	delete menu;
 }

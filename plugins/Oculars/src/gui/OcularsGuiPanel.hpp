@@ -31,6 +31,7 @@ class QPushButton;
 class QWidget;
 
 //! A screen widget similar to InfoPanel. Contains controls and information.
+//! @ingroup oculars
 class OcularsGuiPanel : public QGraphicsWidget
 {
 	Q_OBJECT
@@ -106,9 +107,12 @@ private:
 	QGraphicsTextItem* fieldOcularAfov;
 	QGraphicsTextItem* fieldCcdName;
 	QGraphicsTextItem* fieldCcdDimensions;
+	QGraphicsTextItem* fieldCcdHScale;
+	QGraphicsTextItem* fieldCcdVScale;
 	QGraphicsTextItem* fieldCcdRotation;
 	QGraphicsTextItem* fieldTelescopeName;
 	QGraphicsTextItem* fieldMagnification;
+	QGraphicsTextItem* fieldExitPupil;
 	QGraphicsTextItem* fieldFov;
 
 	//Sensor frame rotation controls

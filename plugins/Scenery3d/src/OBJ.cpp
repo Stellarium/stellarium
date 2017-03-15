@@ -44,6 +44,7 @@
 
 #include "StelOpenGL.hpp"
 #include "OBJ.hpp"
+#include "StelApp.hpp"
 #include "ShaderManager.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTextureMgr.hpp"
@@ -53,6 +54,7 @@
 #include <QElapsedTimer>
 #include <QOpenGLVertexArrayObject>
 #include <QTemporaryFile>
+#include <QDebug>
 
 #include <algorithm>
 #include <cstddef>
@@ -98,12 +100,16 @@ bool StelModelCompFunc(const OBJ::StelModel& lhs, const OBJ::StelModel& rhs)
 bool OBJ::vertexArraysSupported=false;
 GLenum OBJ::indexBufferType=GL_UNSIGNED_SHORT;
 size_t OBJ::indexBufferTypeSize=0;
+QOpenGLFunctions* OBJ::gl=Q_NULLPTR;
 
 //static function
 void OBJ::setupGL()
 {
+	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	gl = ctx->functions();
+
 	//disable VAOs on Intel because of serious bugs in their implemenation...
-	QString vendor(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+	QString vendor(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
 	if(vendor.contains("Intel",Qt::CaseInsensitive))
 	{
 		OBJ::vertexArraysSupported = false;
@@ -128,7 +134,6 @@ void OBJ::setupGL()
 	}
 
 	//check if we can enable int index buffers
-	QOpenGLContext* ctx = QOpenGLContext::currentContext();
 	if(ctx->isOpenGLES())
 	{
 		//query for extension
@@ -312,14 +317,9 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
 	qint64 boundTime = timer.restart();
 
 	//Create vertex normals if specified or required
-	if(rebuildNormals)
+	if(rebuildNormals || !hasNormals())
 	{
 		generateNormals();
-	}
-	else
-	{
-		if(!hasNormals())
-			generateNormals();
 	}
 
 	//Create tangents
@@ -553,7 +553,7 @@ void OBJ::generateNormals()
 	float edge1[3] = {0.0f, 0.0f, 0.0f};
 	float edge2[3] = {0.0f, 0.0f, 0.0f};
 	float normal[3] = {0.0f, 0.0f, 0.0f};
-	float length = 0.0f;
+	float invlength = 0.0f;
 	int totalVertices = getNumberOfVertices();
 	int totalTriangles = getNumberOfTriangles();
 
@@ -608,13 +608,13 @@ void OBJ::generateNormals()
 	{
 		pVertex0 = &m_vertexArray[i];
 
-		length = 1.0f / sqrtf(pVertex0->normal[0]*pVertex0->normal[0] +
-				      pVertex0->normal[1]*pVertex0->normal[1] +
-				      pVertex0->normal[2]*pVertex0->normal[2]);
+		invlength = 1.0f / sqrt(pVertex0->normal[0]*pVertex0->normal[0] +
+					pVertex0->normal[1]*pVertex0->normal[1] +
+					pVertex0->normal[2]*pVertex0->normal[2]);
 
-		pVertex0->normal[0] *= length;
-		pVertex0->normal[1] *= length;
-		pVertex0->normal[2] *= length;
+		pVertex0->normal[0] *= invlength;
+		pVertex0->normal[1] *= invlength;
+		pVertex0->normal[2] *= invlength;
 	}
 
 	m_hasNormals = true;
@@ -635,7 +635,7 @@ void OBJ::generateTangents()
 	float det = 0.0f;
 	float nDotT = 0.0f;
 	float bDotB = 0.0f;
-	float length = 0.0f;
+	float invlength = 0.0f;
 	int totalVertices = getNumberOfVertices();
 	int totalTriangles = getNumberOfTriangles();
 
@@ -745,13 +745,13 @@ void OBJ::generateTangents()
 
 		// Normalize the tangent.
 
-		length = 1.0f / sqrtf(pVertex0->tangent[0]*pVertex0->tangent[0] +
+		invlength = 1.0f / sqrtf(pVertex0->tangent[0]*pVertex0->tangent[0] +
 				      pVertex0->tangent[1]*pVertex0->tangent[1] +
 				      pVertex0->tangent[2]*pVertex0->tangent[2]);
 
-		pVertex0->tangent[0] *= length;
-		pVertex0->tangent[1] *= length;
-		pVertex0->tangent[2] *= length;
+		pVertex0->tangent[0] *= invlength;
+		pVertex0->tangent[1] *= invlength;
+		pVertex0->tangent[2] *= invlength;
 
 		// Calculate the handedness of the local tangent space.
 		// The bitangent vector is the cross product between the triangle face
@@ -926,6 +926,7 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 
 	float fTmp[3] = {0.0f};
 	double dTmp[3] = {0.0};
+	Vec3f tmpNrm;
 
 	while (fscanf(pFile, "%s", buffer) != EOF)
 	{
@@ -1110,11 +1111,27 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 
 						switch(order)
 						{
+							case XYZ:
+								vertexCoords[numVertices] = VPos(dTmp[0],dTmp[1],dTmp[2]);
+								break;
 							case XZY:
 								vertexCoords[numVertices] = VPos(dTmp[0],-dTmp[2],dTmp[1]);
 								break;
-
-							default: //! XYZ
+							case YXZ:
+								vertexCoords[numVertices] = VPos(dTmp[1],dTmp[0],dTmp[2]);
+								break;
+							case YZX:
+								vertexCoords[numVertices] = VPos(dTmp[1],dTmp[2],dTmp[0]);
+								break;
+							case ZXY:
+								vertexCoords[numVertices] = VPos(dTmp[2],dTmp[0],dTmp[1]);
+								break;
+							case ZYX:
+								vertexCoords[numVertices] = VPos(dTmp[2],dTmp[1],dTmp[0]);
+								break;
+							default:
+								Q_ASSERT(0);
+								qDebug() << "OBJ::importSecondPass() vertex order not implemented. assuming XYZ.";
 								vertexCoords[numVertices] = VPos(dTmp[0],dTmp[1],dTmp[2]);
 								break;
 						}
@@ -1122,21 +1139,26 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 						++numVertices;
 						break;
 
-
 					case 'n': //! vn
 						fscanf(pFile, "%f %f %f", &fTmp[0], &fTmp[1], &fTmp[2]);
 
 						switch(order)
 						{
-							case XZY:
-								normals[numNormals] = Vec3f(fTmp[0], -fTmp[2], fTmp[1]);
+							// Only the first two are known in practice.
+							case XYZ:
+								tmpNrm.set(fTmp[0],fTmp[1],fTmp[2]);
 								break;
-
-							default: //! XYZ
-								normals[numNormals] = Vec3f(fTmp[0],fTmp[1],fTmp[2]);
+							case XZY:
+								tmpNrm.set(fTmp[0], -fTmp[2], fTmp[1]);
+								break;
+							default: // all others: complain, but process as XYZ
+								qDebug() << "OBJ::importSecondPass() vertex order for normals not implemented. assuming XYZ.";
+								tmpNrm.set(fTmp[0],fTmp[1],fTmp[2]);
 								break;
 						}
 
+						tmpNrm.normalize();
+						normals[numNormals] = tmpNrm;
 						++numNormals;
 						break;
 
@@ -1481,7 +1503,7 @@ void OBJ::transparencyDepthSort(const Vec3f &position)
 
 void OBJ::uploadTexturesGL()
 {
-	StelTextureMgr textureMgr;
+	StelTextureMgr& textureMgr = StelApp::getInstance().getTextureManager();
 
 	for(unsigned int i=0; i<m_numberOfMaterials; ++i)
 	{
@@ -1690,19 +1712,19 @@ void OBJ::bindBuffersGL()
 	//(but may be stored in a VAO to enable faster binding/unbinding)
 
 	//enable the attrib arrays
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
-	glEnableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
+	gl->glEnableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
 
 	const GLsizei stride = sizeof(Vertex);
 
-	glVertexAttribPointer(ShaderMgr::ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_TEXCOORD, 2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_TEXCOORD, 2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
+	gl->glVertexAttribPointer(ShaderMgr::ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
 
 	//vertex buffer does not need to remain bound, because the binding is stored by glVertexAttribPointer
 	m_vertexBuffer.release();
@@ -1717,11 +1739,11 @@ void OBJ::unbindBuffersGL()
 	m_indexBuffer.release();
 
 	//disable our attribute arrays
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
-	glDisableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_TEXCOORD);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
+	gl->glDisableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
 }
 
 void OBJ::transform(QMatrix4x4 mat)

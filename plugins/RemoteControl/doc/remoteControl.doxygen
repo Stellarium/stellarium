@@ -1,0 +1,61 @@
+/*
+ * Stellarium
+ * Copyright (C) 2016 Florian Schaukowitsch
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+/*!
+@defgroup remoteControl Remote Control Plug-in
+@brief Control Stellarium through your web browser! For more information, see @ref remoteControlDoc.
+
+@page remoteControlDoc Remote Control Plug-in documentation
+The %RemoteControl plugin provides a remote control using a webserver interface, usable for single or even synchronized cluster of clients (via the RemoteSync plugin).
+You can simply connect via web browser to a
+configurable port (default: 8090) of your computer. To use it locally, you can use
+http://localhost:8090[/index.html]
+or for a slightly modified GUI which may be better suited for smaller 7inch screens, try
+http://localhost:8090/tablet7in.html.
+Your web browser has to support JavaScript and HTML5 (recommended in 2016: <a href="https://mozilla.org/firefox">Firefox</a>, <a href="https://www.google.com/chrome/">Chrome</a>).
+
+The web data for the interface resides in the <tt>/data/webroot</tt> directory inside the installation directory (<tt>share/stellarium/data/webroot</tt> on Linux), and can be customized with
+some knowledge of HTML, CSS and maybe JavaScript (not necessary for basic functionality, only when more complex additions are required).
+Alternative or derived HTML control GUIs must be placed into the same folder,
+the web server for now cannot read data from the private Stellarium user directory (<tt>~/.stellarium</tt>, <tt>\%APPDATA\%\\stellarium</tt>).
+
+This plugin makes extensive use of the StelProperty system introduced with it. This allows not only to trigger actions,
+but also set QVariant values, which is enough to control many things in the program.
+A few dedicated modules have been implemented closely following the existing GUI for view motion, location setting,
+landscape and skyculture selection, searching objects, etc.
+It is also possible to define interfaces that control plugins, and dynamically show them only when the plugin is enabled.
+
+Because the API is based on simple HTTP calls, it can also be called from command-line clients. For example,
+to execute the script "double_stars.ssc", one could use one of the following lines:
+@code
+wget -q --post-data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
+curl --data 'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
+curl -d     'id=double_stars.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1
+@endcode
+This allows triggering automatic show setups for museums etc.
+
+The entry point of the plugin is the RemoteControl class.
+- To see how the HTTP API looks like (i.e. if you want to extend it or access it without using the web interface), see @subpage remoteControlApi.
+- To see how the web interface works (i.e. if you want to modify it or add new controls), see @subpage remoteControlWeb.
+
+@author Florian Schaukowitsch, Georg Zotti
+@note This plugin includes parts of the \ref qtWebApp by Stefan Frings, used under the LGPL
+@note This plugin has been developed as project of ESA SoCiS 2015 (http://sophia.estec.esa.int/socis/)
+
+*/

@@ -28,7 +28,7 @@
 #include "StelJsonParser.hpp"
 
 
-QTEST_MAIN(TestStelJsonParser);
+QTEST_GUILESS_MAIN(TestStelJsonParser);
 
 void TestStelJsonParser::initTestCase()
 {
@@ -86,33 +86,6 @@ void TestStelJsonParser::testBase()
 	QVERIFY(ok==true);
 }
 
-void TestStelJsonParser::testIterator()
-{
-	QBuffer buf;
-	buf.setData(listJsonBuff);
-	buf.open(QIODevice::ReadOnly);
-
-	try
-	{
-		int tot = 0;
-		JsonListIterator iter = StelJsonParser::initListIterator(&buf);
-		while (iter.hasNext())
-		{
-			QVariant v = iter.next();
-			QVERIFY(v.canConvert<QVariantMap>());
-			++tot;
-		}
-		QVERIFY(tot==3);
-	}
-	catch (std::runtime_error& e)
-	{
-		QString msg("Exception while loading JSON: ");
-		msg+=e.what();
-		QFAIL(qPrintable(msg));
-	}
-	buf.close();
-}
-
 void TestStelJsonParser::testErrors()
 {
 	bool wasCatched = false;
@@ -139,6 +112,7 @@ void TestStelJsonParser::benchmarkParse()
 	buf.open(QIODevice::ReadOnly);
 	QVariant result;
 	QBENCHMARK {
+		buf.seek(0);
 		result = StelJsonParser::parse(&buf);
 	}
 }

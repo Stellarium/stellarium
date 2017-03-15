@@ -97,26 +97,31 @@ public:
 			: viewportXywh(0, 0, 256, 256)
 			, fov(60.f)
 			, gravityLabels(false)
-			, defautAngleForGravityText(0.f)
+			, defaultAngleForGravityText(0.f)
 			, maskType(MaskNone)
 			, zNear(0.f)
 			, zFar(0.f)
 			, viewportCenter(128.f, 128.f)
+			, viewportCenterOffset(0.f, 0.f)
 			, viewportFovDiameter(0.f)
 			, flipHorz(false)
 			, flipVert(false)
-			, devicePixelsPerPixel(1.f) {;}
+			, devicePixelsPerPixel(1.f)
+			, widthStretch(1.f) {;}
 
-		Vector4<int> viewportXywh;      //! posX, posY, width, height
-		float fov;                      //! FOV in degrees
-		bool gravityLabels;             //! the flag to use gravity labels or not
-		float defautAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
-		StelProjectorMaskType maskType; //! The current projector mask
-		float zNear, zFar;              //! Near and far clipping planes
-		Vec2f viewportCenter;           //! Viewport center in screen pixel
-		float viewportFovDiameter;      //! diameter of the FOV disk in pixel
-		bool flipHorz, flipVert;        //! Whether to flip in horizontal or vertical directions
-		float devicePixelsPerPixel;     //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
+		Vector4<int> viewportXywh;       //! posX, posY, width, height
+		float fov;                       //! FOV in degrees
+		bool gravityLabels;              //! the flag to use gravity labels or not
+		float defaultAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
+		StelProjectorMaskType maskType;  //! The current projector mask
+		float zNear, zFar;               //! Near and far clipping planes
+		Vec2f viewportCenter;            //! Viewport center in screen pixel
+		Vec2f viewportCenterOffset;      //! Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
+						 //! Currently only Y shift is fully implemented, X shift likely not too meaningful.
+		float viewportFovDiameter;       //! diameter of the FOV disk in pixel
+		bool flipHorz, flipVert;         //! Whether to flip in horizontal or vertical directions
+		float devicePixelsPerPixel;      //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
+		float widthStretch;              //! A factor to adapt to special installation setups, e.g. multi-projector with edge blending. Allow to stretch/squeeze projected content. Larger than 1 means the image is stretched wider.
 	};
 
 	//! Destructor
@@ -165,6 +170,7 @@ public:
 
 	//! Get the center of the viewport relative to the lower left corner of the screen.
 	Vec2f getViewportCenter() const;
+	Vec2f getViewportCenterOffset() const;
 
 	//! Get the horizontal viewport offset in pixels.
 	int getViewportPosX() const;
@@ -292,7 +298,8 @@ protected:
 		  viewportFovDiameter(0.f),
 		  gravityLabels(true),
 		  defaultAngleForGravityText(0.f),
-		  devicePixelsPerPixel(1.f) {;}
+		  devicePixelsPerPixel(1.f),
+		  widthStretch(1.0f) {;}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
@@ -315,12 +322,14 @@ protected:
 	float zNear, oneOverZNearMinusZFar; // Near and far clipping planes
 	Vec4i viewportXywh;                 // Viewport parameters
 	Vec2f viewportCenter;               // Viewport center in screen pixel
+	Vec2f viewportCenterOffset;         // Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
+					    // Currently only Y shift is fully implemented, X shift likely not too meaningful.
 	float viewportFovDiameter;          // diameter of the FOV disk in pixel
 	bool gravityLabels;                 // should label text align with the horizon?
 	float defaultAngleForGravityText;   // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
 	float devicePixelsPerPixel;         // The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
-
+	float widthStretch;                 // A factor to adapt to special installation setups, e.g. multi-projector with edge blending. Allow to stretch/squeeze projected content. Larger than 1 means the image is stretched wider.
 private:
 	//! Initialise the StelProjector from a param instance.
 	void init(const StelProjectorParams& param);

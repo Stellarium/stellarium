@@ -44,6 +44,7 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
+	birthJD = -1e10;
 }
 
 // Constructor
@@ -90,8 +91,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 	updatePercent(result.size(), numToBeLoaded);
 
 	// Draw in the good order
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
@@ -134,6 +134,13 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 
 	if (luminance>0 && luminance<limitLuminance)
+	{
+		// Schedule a deletion
+		scheduleChildsDeletion();
+		return;
+	}
+
+	if (birthJD>-1e10 && birthJD>core->getJD())
 	{
 		// Schedule a deletion
 		scheduleChildsDeletion();
@@ -249,24 +256,23 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
 	ad_lum=std::min(1.f, ad_lum);
 	Vec4f color;
-	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
+	if (alphaBlend || texFader->state()==QTimeLine::Running)
 	{
+
 		if (!alphaBlend)
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+			sPainter.setBlending(true); // Normal transparency mode
 		else
-			glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
+			sPainter.setBlending(true, GL_ONE, GL_ONE); // additive blending
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
-		glDisable(GL_BLEND);
+		sPainter.setBlending(false);
 		color.set(ad_lum,ad_lum,ad_lum, 1.f);
 	}
 
 	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
 	
-	sPainter.enableTexture2d(true);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		Vec4f extinctedColor = color;
@@ -454,6 +460,11 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	else
 		noTexture = true;
 
+	if (map.contains("birthJD"))
+		birthJD = map.value("birthJD").toDouble();
+	else
+		birthJD = -1e10;
+
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyImageTile objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
@@ -506,13 +517,15 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 	if (!shortName.isEmpty())
 		res["shortName"] = shortName;
 	if (minResolution>0)
-		 res["minResolution"]=minResolution;
+		res["minResolution"]=minResolution;
 	if (luminance>0)
 		res["maxBrightness"]=StelApp::getInstance().getCore()->getSkyDrawer()->luminanceToSurfacebrightness(luminance);
 	if (alphaBlend)
 		res["alphaBlend"]=true;
 	if (noTexture==false)
 		res["imageUrl"]=absoluteImageURI;
+	if (birthJD>-1e10)
+		res["birthJD"]=birthJD;
 
 	// Polygons
 	// TODO

@@ -70,16 +70,10 @@ private:
 };
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2)
+Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2), sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
 {
 	// Font size is 30
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);
-	// Default labels - if sky locale specified, loaded later
-	// Improvement for gettext translation
-	sNorth = "N";
-	sSouth = "S";
-	sEast = "E";
-	sWest = "W";
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);	
 }
 
 Cardinals::~Cardinals()
@@ -109,10 +103,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
 	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
-	glEnable(GL_BLEND);
-	sPainter.enableTexture2d(true);
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.setBlending(true);
 
 	Vec3f pos;
 	Vec3f xy;
@@ -151,9 +142,11 @@ void Cardinals::updateI18n()
 
 
 LandscapeMgr::LandscapeMgr()
-	: atmosphere(NULL)
+	: StelModule()
+	, atmosphere(NULL)
 	, cardinalsPoints(NULL)
 	, landscape(NULL)
+	, oldLandscape(NULL)
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
@@ -162,7 +155,7 @@ LandscapeMgr::LandscapeMgr()
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagAtmosphereAutoEnabling(false)
 {
-	setObjectName("LandscapeMgr");
+	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
 	packagedLandscapeIDs = (QStringList() << "guereins");
@@ -173,14 +166,22 @@ LandscapeMgr::LandscapeMgr()
 		packagedLandscapeIDs << directories.fileName();
 	}
 	packagedLandscapeIDs.removeDuplicates();
+	landscapeCache.clear();
 }
 
 LandscapeMgr::~LandscapeMgr()
 {
 	delete atmosphere;
 	delete cardinalsPoints;
+	if (oldLandscape)
+	{
+		delete oldLandscape;
+		oldLandscape=NULL;
+	}
 	delete landscape;
 	landscape = NULL;
+	qDebug() << "LandscapeMgr: Clearing cache of" << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+	landscapeCache.clear(); // deletes all objects within.
 }
 
 /*************************************************************************
@@ -189,7 +190,7 @@ LandscapeMgr::~LandscapeMgr()
 double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+20;
+		return StelApp::getInstance().getModuleMgr().getModule("SporadicMeteorMgr")->getCallOrder(actionName)+20;
 	if (actionName==StelModule::ActionUpdate)
 		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
 	// GZ The next 2 lines are only required to test landscape transparency. They should be commented away for releases.
@@ -201,6 +202,25 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 void LandscapeMgr::update(double deltaTime)
 {
 	atmosphere->update(deltaTime);
+
+	if (oldLandscape)
+	{
+		// This is only when transitioning to newly loaded landscape. We must draw the old one until the new one is faded in completely.
+		oldLandscape->update(deltaTime);
+		if (getIsLandscapeFullyVisible())
+		{
+			oldLandscape->setFlagShow(false);
+
+			if (oldLandscape->getEffectiveLandFadeValue()< 0.01f)
+			{
+				// new logic: try to put old landscape to cache.
+				//qDebug() << "LandscapeMgr::update: moving oldLandscape " << oldLandscape->getId() << "to Cache. Cost:" << oldLandscape->getMemorySize()/(1024*1024)+1;
+				landscapeCache.insert(oldLandscape->getId(), oldLandscape, oldLandscape->getMemorySize()/(1024*1024)+1);
+				//qDebug() << "--> LandscapeMgr::update(): cache now contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+				oldLandscape=NULL;
+			}
+		}
+	}
 	landscape->update(deltaTime);
 	cardinalsPoints->update(deltaTime);
 
@@ -212,12 +232,22 @@ void LandscapeMgr::update(double deltaTime)
 	Vec3d sunPos = ssystem->getSun()->getAltAzPosApparent(core);
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
-	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
+	// GZ: First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
+	atmosphere->computeColor(core->getJDE(), sunPos, moonPos,
 		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
+
+
+	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
+	if (core->getCurrentLocation().planetName.contains("Sun"))
+	{
+		landscape->setBrightness(1.0f, 1.0f);
+		return;
+	}
+
 
 	// Compute the ground luminance based on every planets around
 	// TBD: Reactivate and verify this code!? Source, reference?
@@ -260,11 +290,24 @@ void LandscapeMgr::update(double deltaTime)
 			landscapeBrightness = getDefaultMinimalBrightness();
 	}
 
-	// We define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
-	float sinSunAngle = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
-	if(sinSunAngle > -0.1/1.5 )
-		landscapeBrightness +=  1.5*(sinSunAngle+0.1/1.5);
+	// With atmosphere on, we define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
+	// The multiplier of 1.5 just looks better, it somehow represents illumination by scattered sunlight.
+	// Else, we should account for sun's diameter but else just apply Lambertian Cos-rule and check with landscape opacity.
+	float sinSunAngle = 0.0f;
+	if(atmosphere->getFlagShow())
+	{
+		sinSunAngle=sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+		if(sinSunAngle > -0.1/1.5 )
+			landscapeBrightness +=  1.5*(sinSunAngle+0.1/1.5);
+	}
+	else
+	{
+		// In case we have exceptionally deep horizons ("Little Prince planet"), the sun will rise somehow over that line and demand light on the landscape.
+		sinSunAngle=sin(qMin(M_PI_2, asin(qMax(-1.0, qMin(1.0, sunPos[2]-landscape->getSinMinAltitudeLimit()))) + (0.25f *M_PI/180.)));
+		if(sinSunAngle > 0.0f)
+			landscapeBrightness +=  (1.0f-landscape->getOpacity(sunPos))*sinSunAngle;
 
+	}
 
 	// GZ: 2013-09-25 Take light pollution into account!
 	StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
@@ -288,28 +331,30 @@ void LandscapeMgr::update(double deltaTime)
 	if (landscapeBrightness>0.95)
 		landscapeBrightness = 0.95;
 
-	if (core->getCurrentLocation().planetName.contains("Sun"))
+	// GZ's rules and intentions for lightscape brightness:
+	// lightscapeBrightness >0 makes sense only for sun below horizon.
+	// If atmosphere on, we mix it in with darkening twilight. If atmosphere off, we can switch on more apruptly.
+	// Note however that lightscape rendering does not per se depend on atmosphere on/off.
+	// This allows for illuminated windows or light panels on spaceships. If a landscape's lightscape
+	// contains light smog of a city, it should also be shown if atmosphere is switched off.
+	// (Configure another landscape without light smog to avoid, or just switch off lightscape.)
+	float lightscapeBrightness=0.0f;
+	float sinSunAlt = sunPos[2];
+	if (atmosphere->getFlagShow())
 	{
-		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
-		landscape->setBrightness(1.f, 0.0f);
+		// light pollution layer is mixed in at -3...-8 degrees.
+		if (sinSunAlt<-0.14f)
+			lightscapeBrightness=1.0f;
+		else if (sinSunAlt<-0.05f)
+			lightscapeBrightness = 1.0f-(sinSunAlt+0.14)/(-0.05+0.14);
 	}
 	else
 	{
-		float lightscapeBrightness=0.0f;
-		// light pollution layer is mixed in at -3...-8 degrees.
-		float sunAlt = sunPos[2];
-		if (sunAlt<-0.14f)
-			lightscapeBrightness=1.0f;
-		else
-		{
-			if (sunAlt<-0.05f)
-				lightscapeBrightness = 1.0f-(sunAlt+0.14)/(-0.05+0.14);
-		}
-		if (sunAlt<=0.f && !atmosphere->getFlagShow() && !getFlagLandscapeUseMinimalBrightness())
-			landscape->setBrightness(0.f, 0.f);
-		else
-			landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+		// If we have no atmosphere, we can assume windows and panels on spaceships etc. are switched on whenever the sun does not shine, i.e. when sun is blocked by landscape.
+		lightscapeBrightness= landscape->getOpacity(sunPos);
 	}
+
+	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 }
 
 void LandscapeMgr::draw(StelCore* core)
@@ -318,6 +363,8 @@ void LandscapeMgr::draw(StelCore* core)
 	atmosphere->draw(core);
 
 	// Draw the landscape
+	if (oldLandscape)
+		oldLandscape->draw(core);
 	landscape->draw(core);
 
 	// Draw the cardinal points
@@ -329,8 +376,10 @@ void LandscapeMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	landscapeCache.setMaxCost(conf->value("landscape/cache_size_mb", 100).toInt());
+	qDebug() << "LandscapeMgr: initialized Cache for" << landscapeCache.maxCost() << "MB.";
+
 	atmosphere = new Atmosphere();
-	landscape = new LandscapeOldStyle();
 	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
 	setCurrentLandscapeID(defaultLandscapeID);
 	setFlagLandscape(conf->value("landscape/flag_landscape", conf->value("landscape/flag_ground", true).toBool()).toBool());
@@ -349,34 +398,28 @@ void LandscapeMgr::init()
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
 	setFlagAtmosphereAutoEnable(conf->value("viewing/flag_atmosphere_auto_enable",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
+	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
-	bool ok =true;
-	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
-	if (!ok)
-	{
-		conf->setValue("stars/init_bortle_scale",3);
-		setAtmosphereBortleLightPollution(3);
-		ok = true;
-	}
+	// Load colors from config file
+	QString defaultColor = conf->value("color/default_color").toString();
+	setColorCardinalPoints(StelUtils::strToVec3f(conf->value("color/cardinal_color", defaultColor).toString()));
+
 	StelApp *app = &StelApp::getInstance();
+	//Bortle scale is managed by SkyDrawer
+	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
+	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
+	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocationBasedPollution(StelLocation)));
+	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");
 	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
-	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
-}
-
-void LandscapeMgr::setStelStyle(const QString& section)
-{
-	// Load colors from config file
-	QSettings* conf = StelApp::getInstance().getSettings();
-
-	QString defaultColor = conf->value(section+"/default_color").toString();
-	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
+	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
+	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
+	addAction("actionShow_LightPollutionFromDatabase", displayGroup, N_("Light pollution data from locations database"), "flagUseLightPollutionFromDatabase");
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
@@ -384,30 +427,76 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if (id.isEmpty())
 		return false;
 
-	// We want to lookup the landscape ID (dir) from the name.
-	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
-	
-	if (!newLandscape)
-	{
-		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini";
+	//prevent unnecessary changes/file access
+	if(id==currentLandscapeID)
 		return false;
+
+	Landscape* newLandscape;
+
+	// There is a slight chance that we switch back to oldLandscape while oldLandscape is still fading away.
+	// in this case it is not yet stored in cache, but obviously available. So we just swap places.
+	if (oldLandscape && oldLandscape->getId()==id)
+	{
+		newLandscape=oldLandscape;
+	}
+	else
+	{
+		// We want to lookup the landscape ID (dir) from the name.
+		newLandscape= landscapeCache.take(id);
+
+		if (newLandscape)
+		{
+#ifndef NDEBUG
+			qDebug() << "LandscapeMgr::setCurrentLandscapeID():: taken " << id << "from cache...";
+			qDebug() << ".-->LandscapeMgr::setCurrentLandscapeID(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
+		}
+		else
+		{
+#ifndef NDEBUG
+			qDebug() << "LandscapeMgr::setCurrentLandscapeID: Loading from file:" << id ;
+#endif
+			newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+		}
+
+		if (!newLandscape)
+		{
+			qWarning() << "ERROR while loading landscape " << "landscapes/" + id + "/landscape.ini";
+			return false;
+		}
 	}
 
+	// Keep current landscape for a while, while new landscape fades in!
+	// This prevents subhorizon sun or grid becoming briefly visible.
 	if (landscape)
 	{
 		// Copy display parameters from previous landscape to new one
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
-		delete landscape;
-		landscape = newLandscape;
+		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
+
+		// If we have an oldLandscape that is not just swapped back, put that into cache.
+		if (oldLandscape && oldLandscape!=newLandscape)
+		{
+#ifndef NDEBUG
+			qDebug() << "LandscapeMgr::setCurrent: moving oldLandscape " << oldLandscape->getId() << "to Cache. Cost:" << oldLandscape->getMemorySize()/(1024*1024)+1;
+#endif
+			landscapeCache.insert(oldLandscape->getId(), oldLandscape, oldLandscape->getMemorySize()/(1024*1024)+1);
+#ifndef NDEBUG
+			qDebug() << "-->LandscapeMgr::setCurrentLandscapeId(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
+		}
+		oldLandscape = landscape; // keep old while transitioning!
 	}
+	landscape=newLandscape;
 	currentLandscapeID = id;
 
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
-		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
-		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+		StelCore *core = StelApp::getInstance().getCore();
+		core->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+		StelSkyDrawer* drawer=core->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
 		{
@@ -416,22 +505,21 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		}
 		if (landscape->getDefaultBortleIndex() > 0)
 		{
-			setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
 			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
 		}
-		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
+		if (landscape->getDefaultAtmosphericExtinction() >= 0.0f)
 		{
 			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
 		}
-		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
+		if (landscape->getDefaultAtmosphericTemperature() > -273.15f)
 		{
 			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
 		}
-		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
+		if (landscape->getDefaultAtmosphericPressure() >= 0.0f)
 		{
 			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
 		}
-		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+		else if (landscape->getDefaultAtmosphericPressure() == -1.0f)
 		{
 			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
 			// International altitude formula found in Wikipedia.
@@ -440,6 +528,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 			drawer->setAtmospherePressure(p);
 		}
 	}
+
+	emit currentLandscapeChanged(currentLandscapeID,getCurrentLandscapeName());
+
 	// else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
 }
@@ -461,6 +552,46 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 	}
 }
 
+// Load a landscape into cache.
+// @param id the ID of a landscape
+// @param replace true if existing landscape entry should be replaced (useful during development to reload after edit)
+// @return false if landscape could not be found, or existed already and replace was false.
+bool LandscapeMgr::precacheLandscape(const QString& id, const bool replace)
+{
+	if (landscapeCache.contains(id) && (!replace))
+		return false;
+
+	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+	if (!newLandscape)
+	{
+		qWarning() << "ERROR while preloading landscape " << "landscapes/" + id + "/landscape.ini";
+		return false;
+	}
+
+	bool res=landscapeCache.insert(id, newLandscape, newLandscape->getMemorySize()/(1024*1024)+1);
+#ifndef NDEBUG
+	if (res)
+	{
+		qDebug() << "LandscapeMgr::precacheLandscape(): Successfully added landscape with ID " << id << "to cache";
+	}
+	qDebug() << "LandscapeMgr::precacheLandscape(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
+	return res;
+}
+
+// Remove a landscape from the cache of loaded landscapes.
+// @param id the ID of a landscape
+// @return false if landscape could not be found
+bool LandscapeMgr::removeCachedLandscape(const QString& id)
+{
+	bool res= landscapeCache.remove(id);
+#ifndef NDEBUG
+	qDebug() << "LandscapeMgr::removeCachedLandscape(): cache contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
+#endif
+	return res;
+}
+
+
 // Change the default landscape to the landscape with the ID specified.
 bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
 {
@@ -469,6 +600,7 @@ bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
 	defaultLandscapeID = id;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("init_location/landscape_name", id);
+	emit defaultLandscapeChanged(id);
 	return true;
 }
 
@@ -476,10 +608,13 @@ void LandscapeMgr::updateI18n()
 {
 	// Translate all labels with the new language
 	if (cardinalsPoints) cardinalsPoints->updateI18n();
+	landscape->loadLabels(getCurrentLandscapeID());
 }
 
 void LandscapeMgr::setFlagLandscape(const bool displayed)
 {
+	if (oldLandscape && !displayed)
+		oldLandscape->setFlagShow(false);
 	if(landscape->getFlagShow() != displayed) {
 		landscape->setFlagShow(displayed);
 		emit landscapeDisplayedChanged(displayed);
@@ -496,6 +631,11 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 	return landscape->getIsFullyVisible();
 }
 
+float LandscapeMgr::getLandscapeSinMinAltitudeLimit() const
+{
+	return landscape->getSinMinAltitudeLimit();
+}
+
 bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
 {
 	return flagLightPollutionFromDatabase;
@@ -506,7 +646,33 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	if (flagLightPollutionFromDatabase != usage)
 	{
 		flagLightPollutionFromDatabase = usage;
-		emit lightPollutionUsageChanged(usage);
+
+		StelCore* core = StelApp::getInstance().getCore();
+
+		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
+		if (usage)
+		{
+			StelLocation loc = core->getCurrentLocation();
+			updateLocationBasedPollution(loc);
+		}
+
+		emit flagUseLightPollutionFromDatabaseChanged(usage);
+	}
+}
+
+void LandscapeMgr::updateLocationBasedPollution(StelLocation loc)
+{
+	if(flagLightPollutionFromDatabase)
+	{
+		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
+		StelCore* core = StelApp::getInstance().getCore();
+		int bIdx = loc.bortleScaleIndex;
+		if (!loc.planetName.contains("Earth")) // location not on Earth...
+			bIdx = 1;
+		if (bIdx<1) // ...or it observatory, or it unknown location
+			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
+
+		core->getSkyDrawer()->setBortleScaleIndex(bIdx);
 	}
 }
 
@@ -536,9 +702,26 @@ bool LandscapeMgr::getFlagIllumination() const
 	return landscape->getFlagShowIllumination();
 }
 
+void LandscapeMgr::setFlagLabels(const bool displayed)
+{
+	if (landscape->getFlagShowLabels() != displayed) {
+		landscape->setFlagShowLabels(displayed);
+		emit labelsDisplayedChanged(displayed);
+	}
+}
+
+bool LandscapeMgr::getFlagLabels() const
+{
+	return landscape->getFlagShowLabels();
+}
+
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
 {
-	flagLandscapeAutoSelection = enableAutoSelect;
+	if(enableAutoSelect != flagLandscapeAutoSelection)
+	{
+		flagLandscapeAutoSelection = enableAutoSelect;
+		emit flagLandscapeAutoSelectionChanged(enableAutoSelect);
+	}
 }
 
 bool LandscapeMgr::getFlagLandscapeAutoSelection() const
@@ -548,7 +731,12 @@ bool LandscapeMgr::getFlagLandscapeAutoSelection() const
 
 void LandscapeMgr::setFlagAtmosphereAutoEnable(bool b)
 {
-	flagAtmosphereAutoEnabling = b;
+	if(b != flagAtmosphereAutoEnabling)
+	{
+		flagAtmosphereAutoEnabling = b;
+		emit setFlagAtmosphereAutoEnableChanged(b);
+	}
+
 }
 
 bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
@@ -633,7 +821,11 @@ bool LandscapeMgr::getFlagCardinalsPoints() const
 //! Set Cardinals Points color
 void LandscapeMgr::setColorCardinalPoints(const Vec3f& v)
 {
-	cardinalsPoints->setColor(v);
+	if(v != getColorCardinalPoints())
+	{
+		cardinalsPoints->setColor(v);
+		emit cardinalsPointsColorChanged(v);
+	}
 }
 
 //! Get Cardinals Points color
@@ -693,13 +885,6 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
-	emit lightPollutionChanged();
-}
-
-//! Get the light pollution following the Bortle Scale
-int LandscapeMgr::getAtmosphereBortleLightPollution() const
-{
-	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0004, 1./2.1) + 1;
 }
 
 void LandscapeMgr::setZRotation(const float d)
@@ -718,6 +903,11 @@ float LandscapeMgr::getAtmosphereAverageLuminance() const
 	return atmosphere->getAverageLuminance();
 }
 
+// Override auto-computed luminance. Only use when you know what you are doing, and don't forget to unfreeze the average by calling this function with a negative value.
+void LandscapeMgr::setAtmosphereAverageLuminance(const float overrideLum)
+{
+	atmosphere->setAverageLuminance(overrideLum);
+}
 
 Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QString& landscapeId)
 {
@@ -750,6 +940,8 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	}
 
 	ldscp->load(landscapeIni, landscapeId);
+	QSettings *conf=StelApp::getInstance().getSettings();
+	ldscp->setLabelFontSize(conf->value("landscape/label_font_size", 15).toInt());
 	return ldscp;
 }
 
@@ -770,7 +962,7 @@ QString LandscapeMgr::nameToID(const QString& name) const
 }
 
 /****************************************************************************
- get a map of landscape name (from landscape.ini name field) to ID (dir name)
+ get a map of landscape names (from landscape.ini name field) to ID (dir name)
  ****************************************************************************/
 QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 {

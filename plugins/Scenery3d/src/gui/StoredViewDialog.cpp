@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StoredViewDialog.hpp"
@@ -27,7 +27,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 
-StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog(parent), mgr(NULL), viewModel(NULL)
+StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog("Scenery3dViews", parent), mgr(NULL), viewModel(NULL)
 {
 	ui = new Ui_storedViewDialogForm;
 }
@@ -47,6 +47,7 @@ void StoredViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(ui->closeStelWindow, &QPushButton::clicked, this, &StelDialog::close);
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	mgr = GETSTELMODULE(Scenery3dMgr);
 	Q_ASSERT(mgr);
@@ -134,7 +135,7 @@ void StoredViewDialog::loadView()
 	int idx = ui->listView->selectionModel()->currentIndex().row();
 	if(idx>=0)
 	{
-		mgr->setView(viewModel->getViewAtIdx(idx));
+		mgr->setView(viewModel->getViewAtIdx(idx), ui->useDateCheckBox->isChecked());
 	}
 }
 
@@ -152,6 +153,12 @@ void StoredViewDialog::addUserView()
 {
 	StoredView sv = mgr->getCurrentView();
 	sv.label = "New user view";
+	if (ui->useDateCheckBox->isChecked())
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		sv.jd=core->getJD();
+		sv.jdIsRelevant=true;
+	}
 
 	SceneInfo info = viewModel->getScene();
 	sv.description = QString(q_("Grid coordinates (%1): %2m, %3m, %4m")).arg(info.gridName)
