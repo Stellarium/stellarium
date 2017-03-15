@@ -1,3 +1,0 @@
-{
-	"latestVersion": "@PACKAGE_VERSION@"
-}

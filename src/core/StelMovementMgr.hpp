@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2015 Georg Zotti (offset view adaptations, Up vector fix for zenithal views)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +24,8 @@
 #include "StelModule.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectType.hpp"
+#include <QTimeLine>
+#include <QCursor>
 
 //! @class StelMovementMgr
 //! Manages the head movements and zoom operations.
@@ -30,15 +33,37 @@ class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool equatorialMount
-			   READ getEquatorialMount
-			   WRITE setEquatorialMount)
+		   READ getEquatorialMount
+		   WRITE setEquatorialMount
+		   NOTIFY equatorialMountChanged)
 	Q_PROPERTY(bool tracking
-			   READ getFlagTracking
-			   WRITE setFlagTracking)
+		   READ getFlagTracking
+		   WRITE setFlagTracking
+		   NOTIFY flagTrackingChanged)
+
+	//The targets of viewport offset animation
+	Q_PROPERTY(float viewportHorizontalOffsetTarget
+		   READ getViewportHorizontalOffsetTarget
+		   WRITE setViewportHorizontalOffsetTarget
+		   NOTIFY viewportHorizontalOffsetTargetChanged)
+	Q_PROPERTY(float viewportVerticalOffsetTarget
+		   READ getViewportVerticalOffsetTarget
+		   WRITE setViewportVerticalOffsetTarget
+		   NOTIFY viewportVerticalOffsetTargetChanged)
+
+	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
+		   READ getFlagAutoZoomOutResetsDirection
+		   WRITE setFlagAutoZoomOutResetsDirection
+		   NOTIFY flagAutoZoomOutResetsDirectionChanged)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
-	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
+	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
+	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
+	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
+
+	//! Named constants for zoom operations.
+	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
 
 	StelMovementMgr(StelCore* core);
 	virtual ~StelMovementMgr();
@@ -55,8 +80,12 @@ public:
 	//! - Sets the auto-zoom duration and mode.
 	virtual void init();
 
-	//! Update time-dependent things (does nothing).
-	virtual void update(double) {;}
+	//! Update time-dependent things (triggers a time dragging record if required)
+	virtual void update(double)
+	{
+		if (dragTimeMode)
+			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
+	}
 	//! Implement required draw function.  Does nothing.
 	virtual void draw(StelCore*) {;}
 	//! Handle keyboard events.
@@ -67,7 +96,7 @@ public:
 	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
-	// GZ: allow some keypress interaction by plugins.
+	// allow some keypress interaction by plugins.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Handle pinch gesture.
 	virtual bool handlePinch(qreal scale, bool started);
@@ -75,19 +104,20 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
 
-	//! Increment/decrement smoothly the vision field and position.
+	//! Increment/decrement smoothly the vision field and position. Called in StelCore.update().
 	void updateMotion(double deltaTime);
-
-	// These are hopefully temporary.
-	bool getHasDragged() const {return hasDragged;}
 
 	//! Get the zoom speed
 	// TODO: what are the units?
 	double getZoomSpeed() {return keyZoomSpeed;}
 
-	//! Return the current up view vector.
+	//! Return the current up view vector in J2000 coordinates.
 	Vec3d getViewUpVectorJ2000() const;
+	// You can set an upVector in J2000 coordinates which is translated to current mount mode. Important when viewing into the pole of the current mount mode coordinates.
 	void setViewUpVectorJ2000(const Vec3d& up);
+	// Set vector directly. This is set in the current mountmode, but will be translated to J2000 internally
+	// We need this only when viewing to the poles of current coordinate system where the view vector would else be parallel to the up vector.
+	void setViewUpVector(const Vec3d& up);
 
 	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
@@ -114,7 +144,7 @@ public slots:
 	//! Changes to viewing direction are instantaneous.
 	//! @param deltaAz change in azimuth angle in radians
 	//! @param deltaAlt change in altitude angle in radians
-	void panView(double deltaAz, double deltaAlt);
+	void panView(const double deltaAz, const double deltaAlt);
 
 	//! Set automove duration in seconds
 	//! @param f the number of seconds it takes for an auto-move operation to complete.
@@ -124,7 +154,7 @@ public slots:
 	float getAutoMoveDuration(void) const {return autoMoveDuration;}
 
 	//! Set whether auto zoom out will reset the viewing direction to the inital value
-	void setFlagAutoZoomOutResetsDirection(bool b) {flagAutoZoomOutResetsDirection = b;}
+	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; emit flagAutoZoomOutResetsDirectionChanged(b);}}
 	//! Get whether auto zoom out will reset the viewing direction to the inital value
 	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
 
@@ -150,14 +180,34 @@ public slots:
 
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
+	//! @param aimUp Up vector. Can be usually (0/0/1) but may have to be exact for looking into the zenith/pole
 	//! @param moveDuration The time it takes for the move to complete.
-	//! @param zooming ???
-	void moveToJ2000(const Vec3d& aim, float moveDuration = 1., int zooming = 0);
-	void moveToObject(const StelObjectP& target, float moveDuration = 1., int zooming = 0);
+	//! @param zooming you want to zoom in, out or not (just center).
+	//! @code
+	//! // You can use the following code most of the times to find a valid aimUp vector:
+	//! StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	//! mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
+	//! @endcode
+	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+
+	//! Move the view to a specified AltAzimuthal position.
+	//! @param aim The position to move to expressed as a vector in AltAz frame.
+	//! @param aimUp Up vector in AltAz coordinates. Can be usually (0/0/1) but may have to be exact for looking into the zenith/pole
+	//! @param moveDuration The time it takes for the move to complete.
+	//! @param zooming you want to zoom in, out or not (just center).
+	//! @code
+	//! // You can use the following code most of the times to find a valid aimUp vector:
+	//! StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	//! mvmgr->moveToAltAzi(pos, Vec3d(0., 0., 1.), mvmgr->getAutoMoveDuration());
+	//! @endcode
+	//! @note Panic function made March 2016. It turned out that using moveToJ2000 for alt-az-based moves behaves odd for long moves during fast timelapse: end vector is linked to the sky!
+	//! As of March 2016: This call does nothing when mount frame is not AltAzi!
+	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
-	//! @param moveDuration The time that the operation should take to complete.
+	//! @param moveDuration The time that the operation should take to complete. [seconds]
 	void zoomTo(double aimFov, float moveDuration = 1.);
 	//! Get the current Field Of View in degrees
 	double getCurrentFov() const {return currentFov;}
@@ -168,7 +218,7 @@ public slots:
 	void setInitFov(double fov) {initFov=fov;}
 
 	//! Return the inital viewing direction in altazimuthal coordinates
-	const Vec3d& getInitViewingDirection() {return initViewPos;}
+	const Vec3d getInitViewingDirection() {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();
@@ -181,6 +231,9 @@ public slots:
 	void setMaxFov(double max);
 	//! Get the maximum field of View in degrees.
 	double getMaxFov(void) const {return maxFov;}
+
+	//! Get the minimum field of View in degrees.
+	double getMinFov(void) const {return minFov;}
 
 	//! Go and zoom to the selected object. A later call to autoZoomOut will come back to the previous zoom level.
 	void autoZoomIn(float moveDuration = 1.f, bool allowManualZoom = 1);
@@ -199,57 +252,99 @@ public slots:
 	void zoomIn(bool);
 	void zoomOut(bool);
 
+	//! Look immediately towards East.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn eastern horizon to screen bottom.
+	void lookEast(bool zero=false);
+	//! Look immediately towards West.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn western horizon to screen bottom.
+	void lookWest(bool zero=false);
+	//! Look immediately towards North.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn northern horizon to screen bottom.
+	void lookNorth(bool zero=false);
+	//! Look immediately towards South.
+	//! @param zero true to center on horizon, false to keep altitude, or when looking to the zenith already, turn southern horizon to screen bottom.
+	void lookSouth(bool zero=false);
+	//! Look immediately towards Zenith, turning southern horizon to screen bottom.
+	void lookZenith(void);
+	//! Look immediately towards Nadir, turning southern horizon to screen top.
+	void lookNadir(void);
+	//! Look immediately towards North Celestial pole.
+	void lookTowardsNCP(void);
+	//! Look immediately towards South Celestial pole.
+	void lookTowardsSCP(void);
+
+	//! start animated move of the viewport offset.
+	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
+	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
+	//! @param duration animation duration, seconds.
+	//! @note Only vertical viewport is really meaningful.
+	void moveViewport(float offsetX, float offsetY, const float duration=0.f);
+
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
 	//! Get current mount type defining the reference frame in which head movements occur.
 	MountMode getMountMode(void) const {return mountMode;}
 	bool getEquatorialMount(void) const {return mountMode == MountEquinoxEquatorial;}
 
-	void setDragTimeMode(bool b) {dragTimeMode=b;}
-	bool getDragTimeMode() const {return dragTimeMode;}
+	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
+	//! this will avoid any unwanted tracking.
+	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
+
+	//! Returns the targetted value of the viewport offset
+	Vec2f getViewportOffsetTarget() const { return targetViewportOffset; }
+	float getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
+	float getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
+
+	void setViewportHorizontalOffsetTarget(float f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
+	void setViewportVerticalOffsetTarget(float f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
+
+signals:
+	//! Emitted when the tracking property changes
+	void flagTrackingChanged(bool b);
+	void equatorialMountChanged(bool b);
+
+	void flagAutoZoomOutResetsDirectionChanged(bool b);
+
+	void viewportHorizontalOffsetTargetChanged(float f);
+	void viewportVerticalOffsetTargetChanged(float f);
 
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 
-	//! Return the initial value of intensity of art of constellations.
-	double getInitConstellationIntensity() const {return initConstellationIntensity;}
-	//! Set the initial value of intensity of art of constellations.
-	void setInitConstellationIntensity(double v) {initConstellationIntensity=v;}
-	
-private:
+	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
+	void handleViewportOffsetMovement(qreal value);
+
+public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
 
-	double currentFov; // The current FOV in degree
+private:
+	double currentFov; // The current FOV in degrees
 	double initFov;    // The FOV at startup
-	double minFov;     // Minimum FOV in degree
-	double maxFov;     // Maximum FOV in degree
-	double initConstellationIntensity;   // The initial constellation art intensity (level at startup)
-
+	double minFov;     // Minimum FOV in degrees
+	double maxFov;     // Maximum FOV in degrees
+	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
-		currentFov = f;
-		if (f>maxFov)
-			currentFov = maxFov;
-		if (f<minFov)
-			currentFov = minFov;
-
-		changeConstellationArtIntensity();
+		currentFov=qMax(minFov, qMin(f, maxFov));
 	}
+	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
-	void changeConstellationArtIntensity();
 
+	// Move (a bit) to selected/tracked object until move.coef reaches 1, or auto-follow (track) selected object.
+	// Does nothing if flagInhibitAllAutomoves=true
 	void updateVisionVector(double deltaTime);
 	void updateAutoZoom(double deltaTime); // Update autoZoom if activated
 
-	//! Make the first screen position correspond to the second (useful for mouse dragging)
+	//! Make the first screen position correspond to the second (useful for mouse dragging and also time dragging.)
 	void dragView(int x1, int y1, int x2, int y2);
 
 	StelCore* core;          // The core on which the movement are applied
 	class StelObjectMgr* objectMgr;
 	bool flagLockEquPos;     // Define if the equatorial position is locked
 	bool flagTracking;       // Define if the selected object is followed
+	bool flagInhibitAllAutomoves; // Required for special installations: If true, there is no automatic centering etc.
 
 	// Flags for mouse movements
 	bool isMouseMovingHoriz;
@@ -274,26 +369,34 @@ private:
 	{
 		Vec3d start;
 		Vec3d aim;
-		float speed;
-		float coef;
-		// If not null, move to the object.
+		Vec3d startUp; // The Up vector at start time
+		Vec3d aimUp;   // The Up vector at end time of move
+		float speed;   // set to 1/duration[ms] during automove setup.
+		float coef;    // Set to 0 at begin of an automove, runs up to 1.
+		// If not null, move to the object instead of the aim.
 		StelObjectP targetObject;
+		MountMode mountMode; // In which frame we shall move. This may be different from the frame the display is set to!
+		// The start and aim vectors are given in those coordinates, and are interpolated in the respective reference frames,
+		// then the view vector is derived from the current coef.
+		// AzAlt moves should be set to AltAz mode, else they will move towards the RA/Dec at begin of move which may have moved.
+		// It is an error to move in J2000 or Eq frame with fast timelapse!
+		// This is a March 2016 GZ hack. TODO: This class should be thought over a bit.
 	};
 
-	AutoMove move;          // Current auto movement
+	AutoMove move;          // Current auto movement. 2016-03: During setup, decide upon the frame for motion!
 	bool flagAutoMove;       // Define if automove is on or off
-	int zoomingMode;        // 0 : undefined, 1 zooming, -1 unzooming
+	ZoomingMode zoomingMode;
 
-	double deltaFov,deltaAlt,deltaAz; // View movement
+	double deltaAlt,deltaAz; // View movement
 
 	bool flagManualZoom;     // Define whether auto zoom can go further
-	float autoMoveDuration; // Duration of movement for the auto move to a selected objectin seconds
+	float autoMoveDuration; // Duration of movement for the auto move to a selected object in seconds
 
 	// Mouse control options
 	bool isDragging, hasDragged;
 	int previousX, previousY;
 
-	// Contains the last N real time / JD times pairs associated with the last N mouse move events
+	// Contains the last N real time / JD times pairs associated with the last N mouse move events at screen coordinates x/y
 	struct DragHistoryEntry
 	{
 		double runTime;
@@ -301,20 +404,24 @@ private:
 		int x;
 		int y;
 	};
-
-	QList<DragHistoryEntry> timeDragHistory;
+	QList<DragHistoryEntry> timeDragHistory; // list of max 3 entries.
 	void addTimeDragPoint(int x, int y);
 	float beforeTimeDragTimeRate;
 
 	// Time mouse control
-	bool dragTimeMode;
+	bool dragTimeMode; // Internal flag, true during mouse time motion. This is set true when mouse is moving with ctrl pressed. Set false when releasing ctrl.
 
 	//! @internal
 	//! Store data for auto-zoom.
+	// Components:
+	// startFov: field of view at start
+	// aimFov: intended field of view at end of zoom move
+	// speed: rate of change. UNITS?
+	// coef: set to 0 at begin of zoom, will increase to 1 during autozoom motion.
 	struct AutoZoom
 	{
-		double start;
-		double aim;
+		double startFov;
+		double aimFov;
 		float speed;
 		float coef;
 	};
@@ -328,15 +435,26 @@ private:
 	MountMode mountMode;
 
 	Vec3d initViewPos;        // Default viewing direction
+	Vec3d initViewUp;         // original up vector. Usually 0/0/1, but maybe something else in rare setups (e.g. Planetarium dome upwards fisheye projection).
 
 	// Viewing direction in equatorial J2000 coordinates
 	Vec3d viewDirectionJ2000;
 	// Viewing direction in the mount reference frame.
 	Vec3d viewDirectionMountFrame;
 
+	// Up vector (in OpenGL terms) in the mount reference frame.
+	// This can usually be just 0/0/1, but must be set to something useful when viewDirectionMountFrame is parallel, i.e. looks into a pole.
 	Vec3d upVectorMountFrame;
 
+	// TODO: Docfix?
 	float dragTriggerDistance;
+
+	// Viewport shifting. This animates a property belonging to StelCore. But the shift itself is likely best placed here.
+	QTimeLine *viewportOffsetTimeline;
+	// Those two are used during viewport offset animation transitions. Both are set by moveViewport(), and irrelevant after the transition.
+	Vec2f oldViewportOffset;
+	Vec2f targetViewportOffset;
+
 };
 
 #endif // _STELMOVEMENTMGR_HPP_

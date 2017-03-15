@@ -27,6 +27,7 @@
 #include "StelModule.hpp"
 #include "StelFileMgr.hpp"
 #include "StelPluginInterface.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelIniParser.hpp"
 
 
@@ -67,6 +68,9 @@ void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 	}
 	modules.insert(name, m);
 	m->setParent(this);
+
+	//register with StelPropertyMgr
+	StelApp::getInstance().getStelPropertyManager()->registerObject(m);
 
 	if (fgenerateCallingLists)
 		generateCallingLists();

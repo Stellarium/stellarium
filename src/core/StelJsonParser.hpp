@@ -24,34 +24,6 @@
 #include <QByteArray>
 
 
-//! Qt-style iterator over a JSON array. An actual list is not kept in memory,
-//! so only forward iteration is supported and all methods, including the constructor,
-//! involve read() calls on the QIODevice. Because of this, do not modify the
-//! QIODevice between calls to JsonListIterator methods. Also, the toFront()
-//! method has a special function and reset() is provided for convenience. Only
-//! peekNext() is guaranteed not to modify the QIODevice.
-class JsonListIterator
-{
-public:
-	//! Sets up JsonListIterator to read an array. Swallows all whitespace
-	//! up to a beginning '[' character. If '[' is not the first non-whitespace
-	//! character encountered, reset() is called and an exception is thrown.
-	JsonListIterator(QIODevice* input);
-	~JsonListIterator();
-
-	//! Reads and parses the next object from input. Advances QIODevice to
-	//! just after the object.
-	//! @return the next object from the array
-	QVariant next();
-
-	//! Returns true if the next non-whitespace character is not a ']' character.
-	bool hasNext() const {return ahasNext;}
-
-private:
-	bool ahasNext;
-	class StelJsonParserInstance* parser;
-};
-
 //! @class StelJsonParser
 //! Qt-based simple JSON reader inspired by the one from <a href='http://zoolib.sourceforge.net/'>Zoolib</a>.
 //! JSON is JavaScript Object Notation. See http://www.json.org/
@@ -69,9 +41,6 @@ number        QVariant::Int or QVariant::Double
 class StelJsonParser
 {
 public:
-	//! Create a JsonListIterator from the given input device.
-	static JsonListIterator initListIterator(QIODevice* in) {return JsonListIterator(in);}
-
 	//! Parse the given input stream.
 	static QVariant parse(QIODevice* input);
 	static QVariant parse(const QByteArray& input);
@@ -82,10 +51,7 @@ public:
 	//! Serialize the passed QVariant as JSON in a QByteArray.
 	static QByteArray write(const QVariant& jsonObject, int indentLevel=0);
 	
-	static void registerSerializerForType(int t, void (*func)(const QVariant&, QIODevice*, int)) {otherSerializer.insert(t, func);}
-	
-private:
-	static QHash<int, void (*)(const QVariant&, QIODevice*, int)> otherSerializer;
+	// static void registerSerializerForType(int t, void (*func)(const QVariant&, QIODevice*, int)) {otherSerializer.insert(t, func);}
 };
 
 #endif // _STELJSONPARSER_HPP_

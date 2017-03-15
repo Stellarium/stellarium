@@ -34,7 +34,7 @@ gVector::gVector()
 
 }
 
-gVector::gVector(unsigned int ai_uiElementsNumber)
+gVector::gVector(size_t ai_uiElementsNumber)
 	: br_stl::gVectorTempl<double>(ai_uiElementsNumber)
 {
 

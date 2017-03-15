@@ -55,26 +55,47 @@ core.wait(...);
 - The public slots for each of the following classes are available in the
   scripting engine via an object with the same name as the corresponding class:
    - ConstellationMgr
+   - CustomObjectMgr
    - GridLinesMgr
    - LabelMgr
    - LandscapeMgr
-   - MeteorMgr
+   - SporadicMeteorMgr
    - NebulaMgr
    - ScreenImageMgr
    - SolarSystem
    - StarMgr
+   - StelActionMgr
    - StelAudioMgr
    - StelVideoMgr
    - StelMovementMgr
+   - StelSkyCultureMgr
    - StelSkyDrawer
    - StelSkyLayerMgr
+   - MilkyWay
+   - ZodiacalLight
    .
   For example, to access LandscapeMgr::setFlagAtmosphere(), use the scripting
   command: 
 \code
 LandscapeMgr.setFlagAtmosphere(true);
 \endcode
-  Note: All of these except for StelSkyDrawer are StelModule classes.
+\note All of these except for StelSkyDrawer are StelModule classes.
+
+- The public slots for each of the following classes of the plugins are available 
+in the scripting engine too:
+   - CompassMarks
+   - Oculars
+   - Satellites
+   - Quasars
+   - Pulsars
+   - Exoplanets
+   - Observability
+   - EquationOfTime
+   - NavStars
+   - MeteorShowersMgr (The public slots in this class are available via an object named \b MeteorShowers)
+   - ArchaeoLines
+   - TelescopeControl
+   .
 
 @section include_scripts Includes
 
@@ -84,7 +105,7 @@ command:
 \code
 include("common_objects.inc");
 \endcode
-Note: Detailed example can be found <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/scripts/constellations_tour.ssc">in Constellations Tour script</a>.
+\note Detailed example can be found <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/scripts/constellations_tour.ssc">in Constellations Tour script</a>.
 
 @section script_console Script Console
 
@@ -92,7 +113,7 @@ It is possible to open, edit run and save scripts using the script console windo
 To toggle the script console, press F12.  The script console also provides
 an output window in which script debugging output is visible.
 
-Note:  The Script Console is a build-time option.  It has been enabled by
+\note The Script Console is a build-time option.  It has been enabled by
 default since version 0.10.5.  To enable or disable this feature, use the
 ENABLE_SCRIPT_CONSOLE=1 or =0 option to cmake.
 

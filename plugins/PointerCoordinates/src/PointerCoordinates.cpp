@@ -2,6 +2,7 @@
  * Pointer Coordinates plug-in for Stellarium
  *
  * Copyright (C) 2014 Alexander Wolf
+ * Copyright (C) 2016 Georg Zotti (Constellation code)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +55,7 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "PointerCoordinates";
 	info.displayedName = N_("Pointer Coordinates");
-	info.authors = "Alexander Wolf";
+	info.authors = "Alexander Wolf, Georg Zotti";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plugin shows the coordinates of the mouse pointer.");
 	info.version = POINTERCOORDINATES_PLUGIN_VERSION;
@@ -67,6 +68,7 @@ PointerCoordinates::PointerCoordinates()
 	, flagShowCoordinates(false)
 	, flagEnableAtStartup(false)
 	, flagShowCoordinatesButton(false)
+	, flagShowConstellation(false)
 	, textColor(Vec3f(1,0.5,0))
 	, coordinatesPoint(Vec3d(0,0,0))
 	, fontSize(14)
@@ -99,6 +101,7 @@ void PointerCoordinates::init()
 
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
+	setFlagShowConstellation(flagShowConstellation);
 }
 
 void PointerCoordinates::deinit()
@@ -124,15 +127,21 @@ void PointerCoordinates::draw(StelCore *core)
 	float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
 	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
-	prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
+	// If coordinates are invalid, don't draw them.
+	bool coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
+	if (coordsValid)
 	{ // Nick Fedoseev patch
-	   Vec3d win;
-	   prj->project(mousePosition,win);
-	   float dx = prj->getViewportPosX()+wh+mx - win.v[0];
-	   float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-	   prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
-	  }
+		Vec3d win;
+		prj->project(mousePosition,win);
+		float dx = prj->getViewportPosX()+wh+mx - win.v[0];
+		float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
+		prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
+	}
+	else
+		return;
+
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;
@@ -173,7 +182,10 @@ void PointerCoordinates::draw(StelCore *core)
 		case AltAzi:
 		{
 			StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto));
-			cy = 3.*M_PI - cy;  // N is zero, E is 90 degrees
+			float direction = 3.; // N is zero, E is 90 degrees
+			if (useSouthAzimuth)
+				direction = 2.;
+			cy = direction*M_PI - cy;
 			if (cy > M_PI*2)
 				cy -= M_PI*2;
 
@@ -206,11 +218,27 @@ void PointerCoordinates::draw(StelCore *core)
 			}
 			break;
 		}
+		case Supergalactic:
+		{
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToSupergalactic(mousePosition)); // Calculate supergalactic position and show it...
+			coordsSystem = qc_("Supergal. Long/Lat", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(cx);
+				cyt = StelUtils::radToDecDegStr(cy);
+			}
+			else
+			{
+				cxt = StelUtils::radToDmsStr(cx, true);
+				cyt = StelUtils::radToDmsStr(cy, true);
+			}
+			break;
+		}
 		case Ecliptic:
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition));
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(core->getJDay()), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -247,7 +275,7 @@ void PointerCoordinates::draw(StelCore *core)
 		case HourAngle:
 		{
 			Vec3d v = core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto);
-			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime()+((core->getDeltaT(core->getJDay())/240.)*M_PI/180.))*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
+			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime())*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
 			cx = 2.*M_PI-cx;
 			coordsSystem = qc_("HA/Dec", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -268,13 +296,22 @@ void PointerCoordinates::draw(StelCore *core)
 		}
 	}
 
-	QString coordsText = QString("%1: %2/%3").arg(coordsSystem).arg(cxt).arg(cyt);
+	QString constel;
+	if (flagShowConstellation)
+	{
+		constel=QString(" (%1)").arg(core->getIAUConstellation(mousePosition));
+	}
+	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
 }
 
 void PointerCoordinates::enableCoordinates(bool b)
 {
-	flagShowCoordinates = b;
+	if (b!=flagShowCoordinates)
+	{
+		flagShowCoordinates = b;
+		emit flagCoordinatesVisibilityChanged(b);
+	}
 }
 
 double PointerCoordinates::getCallOrder(StelModuleActionName actionName) const
@@ -320,6 +357,7 @@ void PointerCoordinates::loadConfiguration(void)
 	setCurrentCoordinateSystemKey(conf->value("current_coordinate_system", "RaDecJ2000").toString());
 	QStringList cc = conf->value("custom_coordinates", "1,1").toString().split(",");
 	setCustomCoordinatesPlace(cc[0].toInt(), cc[1].toInt());
+	flagShowConstellation = conf->value("flag_show_constellation", false).toBool();
 
 	conf->endGroup();
 }
@@ -336,6 +374,7 @@ void PointerCoordinates::saveConfiguration(void)
 	conf->setValue("custom_coordinates", QString("%1,%2").arg(cc.first).arg(cc.second));
 	//conf->setValue("text_color", "1,0.5,0");
 	conf->setValue("font_size", getFontSize());
+	conf->setValue("flag_show_constellation", getFlagShowConstellation());
 
 	conf->endGroup();
 }
@@ -438,4 +477,5 @@ void PointerCoordinates::setCustomCoordinatesPlace(int x, int y)
 {
 	customPosition = qMakePair(x, y);
 }
+
 

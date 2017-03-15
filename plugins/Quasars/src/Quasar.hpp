@@ -36,6 +36,7 @@ class StelPainter;
 //! A Quasar object represents one Quasar on the sky.
 //! Details about the Quasars are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup quasars
 
 class Quasar : public StelObject
 {
@@ -99,7 +100,7 @@ private:
 	float AMagnitude;		//! Absolute magnitude
 	float bV;			//! B-V color index
 	double qRA;			//! R.A. J2000 for the quasar
-	double qDE;			//! Dec. J2000 for the quasar	
+	double qDE;			//! Dec. J2000 for the quasar
 	float redshift;			//! Distance to quasar (redshift)
 
 	LinearFader labelsFader;

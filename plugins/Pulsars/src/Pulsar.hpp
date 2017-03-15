@@ -36,6 +36,7 @@ class StelPainter;
 //! A Pulsar object represents one pulsar on the sky.
 //! Details about the Pulsars are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup pulsars
 
 class Pulsar : public StelObject
 {

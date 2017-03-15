@@ -67,7 +67,7 @@ static inline int SetNonblocking(int s)
 #define INVALID_SOCKET (-1)
 #define STRERROR(x) strerror(x)
 
-#endif //Q_OS_WIN32
+#endif //Q_OS_WIN
 
 long long int GetNow(void);
 
@@ -91,7 +91,7 @@ protected:
 	Socket(Server &server, SOCKET fd) : server(server), fd(fd) {}
 	Server & server;
 	
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	virtual int readNonblocking(char *buf, int count)
 	{
 		return recv(fd, buf, count, 0);

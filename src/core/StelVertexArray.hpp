@@ -151,7 +151,6 @@ Func StelVertexArray::foreachTriangle(Func func) const
 				return specForeachTriangle<false, false, false, Func>(func);
 		}
 	}
-	Q_ASSERT(0); // GZ. Just make sure...
 }
 
 template<bool T, bool I, bool C, class Func>

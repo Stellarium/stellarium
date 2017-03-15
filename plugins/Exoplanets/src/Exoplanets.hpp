@@ -38,13 +38,43 @@ class ExoplanetsDialog;
 class StelPainter;
 class StelButton;
 
+/*! @defgroup exoplanets Exoplanets Plug-in
+@{
+The %Exoplanets plugin plots the position of stars with exoplanets. Exoplanets
+data is derived from [The Extrasolar Planets Encyclopaedia](http://exoplanet.eu/).
+List of potential habitable exoplanets and data about them were taken from
+[The Habitable Exoplanets Catalog](http://phl.upr.edu/projects/habitable-exoplanets-catalog)
+by [Planetary Habitability Laboratory](http://phl.upr.edu/home).
+
+<b>Exoplanets Catalog</b>
+
+The exoplanets catalog is stored on the disk in [JSON](http://www.json.org/)
+format, in a file named "exoplanets.json". A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
+
+<b>Configuration</b>
+
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [Exoplanets]).
+
+@}
+*/
+
+//! @ingroup exoplanets
 typedef QSharedPointer<Exoplanet> ExoplanetP;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+//! @class Exoplanets
+//! Main class of the %Exoplanets plugin.
+//! @author Alexander Wolf
+//! @ingroup exoplanets
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool showExoplanets READ getFlagShowExoplanets WRITE setFlagShowExoplanets)
+	Q_PROPERTY(bool showExoplanets
+		   READ getFlagShowExoplanets
+		   WRITE setFlagShowExoplanets
+		   NOTIFY flagExoplanetsVisibilityChanged
+		   )
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -85,22 +115,14 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 
 	virtual QString getName() const { return "Exoplanets"; }
 
@@ -130,18 +152,6 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void);
-	void setDisplayMode(bool b);
-
-	bool getTimelineMode(void);
-	void setTimelineMode(bool b);
-
-	bool getHabitableMode(void);
-	void setHabitableMode(bool b);
-
-	QString getMarkerColor(bool habitable);
-	void setMarkerColor(QString c, bool h);
-
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -158,22 +168,28 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
-	//! Get count of planetary systems from catalog
-	int getCountPlanetarySystems(void) const
+	QList<double> getExoplanetsData(int mode)
 	{
-		return PSCount;
-	}
-
-	//! Get count of exoplanets from catalog
-	int getCountAllExoplanets(void) const
-	{
-		return EPCountAll;
-	}
-
-	//! Get count of potentially habitable exoplanets from catalog
-	int getCountHabitableExoplanets(void) const
-	{
-		return EPCountPH;
+		switch(mode)
+		{
+			case 1:
+				return EPSemiAxisAll;
+				break;
+			case 2:
+				return EPMassAll;
+				break;
+			case 3:
+				return EPRadiusAll;
+				break;
+			case 4:
+				return EPPeriodAll;
+				break;
+			case 5:
+				return EPAngleDistanceAll;
+				break;
+			default:
+				return EPEccentricityAll;
+		}
 	}
 
 signals:
@@ -183,21 +199,85 @@ signals:
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
+	void flagExoplanetsVisibilityChanged(bool b);
+
 public slots:
 	//! Download JSON from web recources described in the module section of the
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
-	void setFlagShowExoplanets(bool b) { flagShowExoplanets=b; }
+	//! Enable/disable display of markers of exoplanetary systems
+	//! @param b boolean flag
+	void setFlagShowExoplanets(bool b);
+	//! Get status to display of markers of exoplanetary systems
+	//! @return true if it's visible
 	bool getFlagShowExoplanets(void) { return flagShowExoplanets; }
+
+	//! Enable/disable display of designations of exoplanetary systems
+	//! @param b boolean flag
+	void setFlagShowExoplanetsDesignations(bool b);
+	//! Get status to display of designations of exoplanetary systems
+	//! @return true if it's visible
+	bool getFlagShowExoplanetsDesignations(void);
 
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
 	bool getFlagShowExoplanetsButton(void) { return flagShowExoplanetsButton; }
 
-	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
+	//! Get status to display of distribution of exoplanetary systems
+	//! @return true if distribution of exoplanetary systems is enabled
+	bool getDisplayMode(void);
+	//! Enable/disable display of distribution of exoplanetary systems
+	//! @param b
+	void setDisplayMode(bool b);
+
+	//! Get status to display of systems with exoplanets after their discovery
+	//! @return true if markers of exoplanetary systems are visible after discovery of exoplanets
+	bool getTimelineMode(void);
+	//! Enable/disable display of systems with exoplanets after their discovery only
+	//! @param b
+	void setTimelineMode(bool b);
+
+	//! Get status to display of exoplanetary systems with the potentially habitable exoplanets
+	//! @return true if systems with only potentially habitable exoplanets are visible
+	bool getHabitableMode(void);
+	//! Enable/disable display of exoplanetary systems with the potentially habitable exoplanets only
+	//! @param b
+	void setHabitableMode(bool b);
+
+	//! Get color for markers of exoplanetary systems
+	//! @param h set false if you want get color of markers of potentially habitable exoplanets
+	//! @return color
+	Vec3f getMarkerColor(bool habitable);
+	//! Set color for markers of exoplanetary systems
+	//! @param c color
+	//! @param h set true if you want set color for potentially habitable exoplanets
+	//! @code
+	//! // example of usage in scripts
+	//! Exoplanets.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
+	//! @endcode
+	void setMarkerColor(const Vec3f& c, bool h);
+
+	//! Get count of planetary systems from catalog
+	//! @return count of planetary systems
+	int getCountPlanetarySystems(void) const
+	{
+		return PSCount;
+	}
+
+	//! Get count of exoplanets from catalog
+	//! @return count of all exoplanets
+	int getCountAllExoplanets(void) const
+	{
+		return EPCountAll;
+	}
+
+	//! Get count of potentially habitable exoplanets from catalog
+	//! @return count of potentially habitable exoplanets
+	int getCountHabitableExoplanets(void) const
+	{
+		return EPCountPH;
+	}
 
 private:
 	// Font used for displaying our text
@@ -246,6 +326,8 @@ private:
 	int EPCountAll;
 	int EPCountPH;
 
+	QList<double> EPEccentricityAll, EPSemiAxisAll, EPMassAll, EPRadiusAll, EPPeriodAll, EPAngleDistanceAll;
+
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
 
@@ -277,6 +359,11 @@ private slots:
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
 
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
+	void reloadCatalog(void);
 };
 
 

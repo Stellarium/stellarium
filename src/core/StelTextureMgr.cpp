@@ -33,6 +33,11 @@
 #include <QOpenGLContext>
 
 
+StelTextureMgr::StelTextureMgr() : glMemoryUsage(0)
+{
+
+}
+
 void StelTextureMgr::init()
 {
 }
@@ -42,7 +47,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	if (afilename.isEmpty())
 		return StelTextureSP();
 
-	StelTextureSP tex = StelTextureSP(new StelTexture());
+	StelTextureSP tex = StelTextureSP(new StelTexture(this));
 	tex->fullPath = afilename;
 
 	QImage image(tex->fullPath);
@@ -65,9 +70,9 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	if (url.isEmpty())
 		return StelTextureSP();
 
-	StelTextureSP tex = StelTextureSP(new StelTexture());
+	StelTextureSP tex = StelTextureSP(new StelTexture(this));
 	tex->loadParams = params;
-	tex->fullPath = url;
+	tex->fullPath = url;	
 	if (!lazyLoading)
 	{
 		tex->bind();

@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _SCENERY3DMGR_HPP_
@@ -242,8 +242,8 @@ public slots:
     QString getDefaultScenery3dID() const { return defaultScenery3dID; }
     void setDefaultScenery3dID(const QString& id);
 
-    //! Changes the current view to the given view
-    void setView(const StoredView& view);
+    //! Changes the current view to the given view. JD is updated only if view contains valid data and setDate is true
+    void setView(const StoredView& view, const bool setDate);
     //! Returns a StoredView that represents the current observer position + view direction.
     //! Label and description are empty.
     StoredView getCurrentView();

@@ -42,6 +42,7 @@ QT_END_NAMESPACE
 
 class Oculars;
 
+//! @ingroup oculars
 class OcularDialog : public StelDialog
 {
 	Q_OBJECT
@@ -83,12 +84,11 @@ protected:
 	Ui_ocularDialogForm* ui;
 
 private slots:
-	void keyBindingTogglePluginChanged(const QString& newString);
-	void keyBindingPopupNavigatorConfigChanged(const QString& newString);
 	void initAboutText();
 	void requireSelectionStateChanged(int state);
 	void scaleImageCircleStateChanged(int state);
 	void setLabelsDescriptionText(bool state);
+	void selectedCCDRotationAngleChanged();
 
 private:
 	Oculars* plugin;

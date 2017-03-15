@@ -29,6 +29,7 @@ class Ui_fovWindowForm;
 class FOV;
 
 //! Main window of the FOV plug-in.
+//! @ingroup fieldOfView
 class FOVWindow : public StelDialog
 {
 	Q_OBJECT

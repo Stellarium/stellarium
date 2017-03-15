@@ -29,6 +29,7 @@ class Ui_pulsarsDialog;
 class Pulsars;
 class QTimer;
 
+//! @ingroup pulsars
 class PulsarsDialog : public StelDialog
 {
 	Q_OBJECT

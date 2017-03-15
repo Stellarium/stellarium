@@ -29,7 +29,7 @@
 
 #define ERROR_LIMIT 1e-6
 
-QTEST_MAIN(TestConversions)
+QTEST_GUILESS_MAIN(TestConversions)
 
 void TestConversions::testHMSToRad()
 {

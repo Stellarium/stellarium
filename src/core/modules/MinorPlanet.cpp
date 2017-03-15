@@ -37,7 +37,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 int flagLighting,
 			 double radius,
 			 double oblateness,
-			 Vec3f color,
+			 Vec3f halocolor,
 			 float albedo,
 			 const QString& atexMapName,
 			 posFuncType coordFunc,
@@ -50,7 +50,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  flagLighting,
 		  radius,
 		  oblateness,
-		  color,
+		  halocolor,
 		  albedo,
 		  atexMapName,
 		  "",
@@ -61,23 +61,17 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  hidden,
 		  false, //No atmosphere
 		  true,  //Halo
-		  pTypeStr)
+		  pTypeStr),
+	minorPlanetNumber(0),
+	absoluteMagnitude(0.0f),
+	slopeParameter(-1.0f), //== mark as uninitialized: used in getVMagnitude()
+	semiMajorAxis(0.),
+	nameIsProvisionalDesignation(false),
+	properName(englishName)
 {
-	texMapName = atexMapName;
-	lastOrbitJD =0;
-	deltaJD = StelCore::JD_SECOND;
-	orbitCached = 0;
-	closeOrbit = acloseOrbit;
-	semiMajorAxis = 0.;
-
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-
-	//MinorPlanet specific members
-	minorPlanetNumber = 0;
-	absoluteMagnitude = 0;
-	slopeParameter = -1;//== uninitialized: used in getVMagnitude()	
 
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -117,21 +111,14 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	//Try to detect a naming conflict
 	if (englishName.endsWith('*'))
 		properName = englishName.left(englishName.count() - 1);
-	else
-		properName = englishName;
 
-	//Try to detect provisional designation
-	nameIsProvisionalDesignation = false;
+	//Try to detect provisional designation	
 	QString provisionalDesignation = renderProvisionalDesignationinHtml(englishName);
 	if (!provisionalDesignation.isEmpty())
 	{
 		nameIsProvisionalDesignation = true;
 		provisionalDesignationHtml = provisionalDesignation;
 	}
-
-	nameI18 = englishName;
-
-	flagLabels = true;
 }
 
 MinorPlanet::~MinorPlanet()
@@ -143,7 +130,7 @@ void MinorPlanet::setSemiMajorAxis(double value)
 {
 	semiMajorAxis = value;
 	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
-	deltaJD = 2.0*semiMajorAxis*StelCore::JD_SECOND;
+	deltaJDE = 2.0*semiMajorAxis*StelCore::JD_SECOND;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -181,6 +168,11 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	double distanceAu = getJ2000EquatorialPos(core).length();
+	Q_UNUSED(az_app);
 
 	if (flags&Name)
 	{
@@ -210,8 +202,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
 		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
@@ -224,7 +216,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		//If the H-G system is not used, use the default radius/albedo mechanism
 		if (slopeParameter < 0)
 		{
-			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core) - 5. * (std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core) - 5. * (std::log10(distanceAu*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 		}
 		else
 		{
@@ -236,7 +228,26 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&Distance)
 	{
-		double distanceAu = getJ2000EquatorialPos(core).length();
+		double hdistanceAu = getHeliocentricEclipticPos().length();
+		double hdistanceKm = AU * hdistanceAu;
+		if (englishName!="Sun")
+		{
+			if (hdistanceAu < 0.1)
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
+				       .arg(hdistanceAu, 0, 'f', 6)
+				       .arg(hdistanceKm, 0, 'f', 3);
+			}
+			else
+			{
+				// xgettext:no-c-format
+				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
+				       .arg(hdistanceAu, 0, 'f', 3)
+				       .arg(hdistanceKm / 1.0e6, 0, 'f', 3);
+			}
+			oss << "<br>";
+		}
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
@@ -257,14 +268,36 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	float aSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && aSize>1e-6)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+	{
+		if (withDecimalDegree)
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(aSize,5,false,true)) << "<br>";
+		else
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+	}
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra) && (siderealPeriod>0))
+	if (flags&Extra)
 	{
-		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+		if (siderealPeriod>0)
+		{
+			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+		}
+
+		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+		const double elongation = getElongation(observerHelioPos);
+
+		if (withDecimalDegree)
+		{
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+		}
+		else
+		{
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);

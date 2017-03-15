@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelOpenGL.hpp"
@@ -25,6 +25,7 @@
 #include <QDir>
 #include <QOpenGLShaderProgram>
 #include <QCryptographicHash>
+#include <QDebug>
 
 ShaderMgr::t_UniformStrings ShaderMgr::uniformStrings;
 ShaderMgr::t_FeatureFlagStrings ShaderMgr::featureFlagsStrings;
@@ -101,6 +102,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["PCSS"] = PCSS;
 		featureFlagsStrings["SINGLE_SHADOW_FRUSTUM"] = SINGLE_SHADOW_FRUSTUM;
 		featureFlagsStrings["OGL_ES2"] = OGL_ES2;
+		featureFlagsStrings["HW_SHADOW_SAMPLERS"] = HW_SHADOW_SAMPLERS;
 	}
 }
 
@@ -436,8 +438,10 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 	//this enumerates all available uniforms of this shader, and stores their locations in a map
 	GLuint prog = program.programId();
 	GLint numUniforms=0,bufSize;
-	glGetProgramiv(prog, GL_ACTIVE_UNIFORMS, &numUniforms);
-	glGetProgramiv(prog, GL_ACTIVE_UNIFORM_MAX_LENGTH, &bufSize);
+
+	QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
+	GL(gl->glGetProgramiv(prog, GL_ACTIVE_UNIFORMS, &numUniforms));
+	GL(gl->glGetProgramiv(prog, GL_ACTIVE_UNIFORM_MAX_LENGTH, &bufSize));
 
 	QByteArray buf(bufSize,'\0');
 	GLsizei length;
@@ -449,7 +453,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 #endif
 	for(int i =0;i<numUniforms;++i)
 	{
-		glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data());
+		GL(gl->glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data()));
 		QString str(buf);
 		str = str.trimmed(); // no idea if this is required
 

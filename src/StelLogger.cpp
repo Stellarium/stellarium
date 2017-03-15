@@ -29,6 +29,7 @@
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
+QMutex StelLogger::fileMutex;
 
 void StelLogger::init(const QString& logFilePath)
 {
@@ -130,21 +131,19 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined Q_OS_WIN
 	// Hopefully doesn't throw a linker error on earlier systems. Not like
 	// I'm gonna test it or anything.
-	if (QSysInfo::WindowsVersion >= QSysInfo::WV_2000)
+	if (QSysInfo::WindowsVersion >= QSysInfo::WV_XP)
 	{
-#ifdef __LP64__
 		MEMORYSTATUSEX statex;
+		statex.dwLength = sizeof (statex);
 		GlobalMemoryStatusEx(&statex);
-		writeLog(QString("Total physical memory: %1 MB (unreliable)").arg(statex.ullTotalPhys/(1024<<10)));
-		writeLog(QString("Total virtual memory: %1 MB (unreliable)").arg(statex.ullTotalVirtual/(1024<<10)));
+		writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
+		writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
 		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-#else
-		MEMORYSTATUS statex;
-		GlobalMemoryStatus(&statex);
-		writeLog(QString("Total memory: %1 MB (unreliable)").arg(statex.dwTotalPhys/(1024<<10)));
-		writeLog(QString("Total virtual memory: %1 MB (unreliable)").arg(statex.dwTotalVirtual/(1024<<10)));
-		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-#endif
+		#ifndef _WIN64
+		// This always reports about 8TB on Win64, not really useful to show.
+		writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
+		writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
+		#endif
 	}
 	else
 		writeLog("Windows version too old to get memory info.");
@@ -253,17 +252,54 @@ void StelLogger::deinit()
 	logFile.close();
 }
 
-void StelLogger::debugLogHandler(QtMsgType, const QMessageLogContext&, const QString& msg)
+void StelLogger::debugLogHandler(QtMsgType type, const QMessageLogContext& ctx, const QString& msg)
 {
-	fprintf(stderr, "%s\n", msg.toUtf8().constData());
-	writeLog(QString(msg));
+	// *** NOTE: see original Qt source in qlogging.cpp (qDefaultMessageHandler) for sensible default code
+
+#if (QT_VERSION>=QT_VERSION_CHECK(5,4,0))
+	//use Qt to format the log message, if possible
+	//this uses the format set by qSetMessagePattern
+	//or QT_MESSAGE_PATTERN environment var
+	QString fmt = qFormatLogMessage(type,ctx,msg);
+#else
+	Q_UNUSED(type)
+	Q_UNUSED(ctx)
+	QString fmt = msg;
+#endif
+	//do nothing for null messages
+	if(fmt.isNull())
+		return;
+
+	//always append newline
+	fmt.append(QLatin1Char('\n'));
+
+#ifdef Q_OS_WIN
+	//Send debug messages to Debugger, if one is attached, instead of stderr
+	//This seems to avoid output delays in Qt Creator, allowing for easier debugging
+	//Seems to work fine with MSVC and MinGW
+	if (IsDebuggerPresent())
+	{
+		OutputDebugStringW(reinterpret_cast<const wchar_t *>(fmt.utf16()));
+	}
+	else
+#endif
+	{
+		//this does the same as the default handler in qlogging.cpp
+		fprintf(stderr, "%s", qPrintable(fmt));
+		fflush(stderr);
+	}
+	writeLog(fmt);
 }
 
 void StelLogger::writeLog(QString msg)
 {
-	msg += "\n";
+	if (!msg.endsWith('\n'))
+		msg.append(QLatin1Char('\n'));
+
+	fileMutex.lock();
 	logFile.write(qPrintable(msg), msg.size());
 	log += msg;
+	fileMutex.unlock();
 }
 
 QString StelLogger::getMsvcVersionString(int ver)
@@ -288,6 +324,9 @@ QString StelLogger::getMsvcVersionString(int ver)
 			break;
 		case 1800:
 			version = "MSVC++ 12.0 (Visual Studio 2013)";
+			break;
+		case 1900:
+			version = "MSVC++ 14.0 (Visual Studio 2015)";
 			break;
 		default:
 			version = "unknown MSVC++ version";

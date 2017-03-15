@@ -47,13 +47,35 @@ QString getApplicationName()
 //! Return the version of stellarium, i.e. "0.9.0"
 QString getApplicationVersion()
 {
-#ifdef BZR_REVISION
-	return QString(PACKAGE_VERSION)+" (BZR r"+BZR_REVISION+")";
-#elif SVN_REVISION
-	return QString(PACKAGE_VERSION)+" (SVN r"+SVN_REVISION+")";
+#if defined(STELLARIUM_VERSION)
+	return QString(STELLARIUM_VERSION);
+#elif defined(BZR_REVISION)
+	return QString("%1.%2 [%3]").arg(PACKAGE_VERSION).arg(BZR_REVISION).arg(BZR_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
 #endif
+}
+
+QString getUserAgentString()
+{
+	// Get info about operating system
+	QString platform = StelUtils::getOperatingSystemInfo();
+	if (platform.contains("Linux"))
+		platform = "Linux";
+	if (platform.contains("FreeBSD"))
+		platform = "FreeBSD";
+	if (platform.contains("NetBSD"))
+		platform = "NetBSD";
+	if (platform.contains("OpenBSD"))
+		platform = "OpenBSD";
+
+	// Set user agent as "Stellarium/$version$ ($platform$; $CPU architecture$)"
+	#if QT_VERSION >= 0x050400
+	// TODO: Remove #ifdef when Qt 5.4 will set as minimal
+	platform.append("; " + QSysInfo::currentCpuArchitecture());
+	#endif
+
+	return QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(platform);
 }
 
 QString getOperatingSystemInfo()
@@ -90,17 +112,15 @@ QString getOperatingSystemInfo()
 		case QSysInfo::WV_WINDOWS7:
 			OS = "Windows 7";
 			break;
-		#ifdef WV_WINDOWS8
 		case QSysInfo::WV_WINDOWS8:
 			OS = "Windows 8";
 			break;
-		#endif
-		#ifdef WV_WINDOWS8_1
+		#if QT_VERSION >= 0x050200
 		case QSysInfo::WV_WINDOWS8_1:
 			OS = "Windows 8.1";
 			break;
 		#endif
-		#ifdef WV_WINDOWS10
+		#if QT_VERSION >= 0x050500
 		case QSysInfo::WV_WINDOWS10:
 			OS = "Windows 10";
 			break;
@@ -135,9 +155,17 @@ QString getOperatingSystemInfo()
 		case QSysInfo::MV_MAVERICKS:
 			OS = "Mac OS X 10.9 series";
 			break;
-		#ifdef MV_YOSEMITE
 		case QSysInfo::MV_YOSEMITE:
 			OS = "Mac OS X 10.10 series";
+			break;
+		#if QT_VERSION >= 0x050500
+		case QSysInfo::MV_ELCAPITAN:
+			OS = "Mac OS X 10.11 series";
+			break;
+		#endif
+		#if QT_VERSION >= 0x050600
+		case QSysInfo::MV_SIERRA:
+			OS = "Mac OS X 10.12 series";
 			break;
 		#endif
 		default:
@@ -583,6 +611,12 @@ void equToEcl(const double raRad, const double decRad, const double eclRad, doub
 	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
 }
 
+void eclToEqu(const double lambdaRad, const double betaRad, const double eclRad, double *raRad, double *decRad)
+{
+	*raRad = std::atan2(std::sin(lambdaRad)*std::cos(eclRad)-std::tan(betaRad)*std::sin(eclRad), std::cos(lambdaRad));
+	*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
+}
+
 double getDecAngle(const QString& str)
 {
 	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*([hHDd\xBA])\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$"); // DMS/HMS
@@ -658,6 +692,15 @@ double asinh(const double z)
 	return returned;
 }
 
+// Simple integer modulo where the result is always positive.
+int imod(const int a, const int b)
+{
+   int ret = a % b;
+   if(ret < 0)
+     ret+=b;
+   return ret;
+}
+
 /*************************************************************************
  Convert a QT QDateTime class to julian day
 *************************************************************************/
@@ -674,7 +717,6 @@ QDateTime jdToQDateTime(const double& jd)
 	result.setTime(jdFractionToQTime(jd));
 	return result;
 }
-
 
 void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 {
@@ -739,21 +781,26 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 }
 
-void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second)
+void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis)
 {
 	double frac = julianDay - (floor(julianDay));
-	int s = (int)floor((frac * 24.0 * 60.0 * 60.0) + 0.0001);  // add constant to fix floating-point truncation error
+	double secs = frac * 24.0 * 60.0 * 60.0 + 0.0001; // add constant to fix floating-point truncation error
+	int s = (int)floor(secs);
 
 	*hour = ((s / (60 * 60))+12)%24;
 	*minute = (s/(60))%60;
 	*second = s % 60;
+	if(millis)
+	{
+		*millis = (int)floor((secs - floor(secs)) * 1000.0);
+	}
 }
 
-QString julianDayToISO8601String(const double jd)
+QString julianDayToISO8601String(const double jd, bool addMS)
 {
-	int year, month, day, hour, minute, second;
+	int year, month, day, hour, minute, second,millis;
 	getDateFromJulianDay(jd, &year, &month, &day);
-	getTimeFromJulianDay(jd, &hour, &minute, &second);
+	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : NULL );
 
 	QString res = QString("%1-%2-%3T%4:%5:%6")
 				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
@@ -762,6 +809,11 @@ QString julianDayToISO8601String(const double jd)
 				 .arg(hour,2,10,QLatin1Char('0'))
 				 .arg(minute,2,10,QLatin1Char('0'))
 				 .arg(second,2,10,QLatin1Char('0'));
+
+	if(addMS)
+	{
+		res = res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
+	}
 	if (year < 0)
 	{
 		res.prepend("-");
@@ -926,35 +978,6 @@ QTime jdFractionToQTime(const double jd)
 	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
 }
 
-// Use Qt's own sense of time and offset instead of platform specific code.
-float getGMTShiftFromQT(const double JD)
-{
-	int year, month, day, hour, minute, second;
-	getDateFromJulianDay(JD, &year, &month, &day);
-	getTimeFromJulianDay(JD, &hour, &minute, &second);
-	// as analogous to second statement in getJDFromDate, nkerr
-	if ( year <= 0 )
-	{
-		year = year - 1;
-	}
-	//getTime/DateFromJulianDay returns UTC time, not local time
-	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
-	if (! universal.isValid())
-	{
-		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
-		// Assumes the GMT shift was always the same before year -4710
-		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
-	}
-	QDateTime local = universal.toLocalTime();
-	//Both timezones should be interpreted as UTC because secsTo() converts both
-	//times to UTC if their zones have different daylight saving time rules.
-	local.setTimeSpec(Qt::UTC);
-
-	int shiftInSeconds = universal.secsTo(local);
-	float shiftInHours = shiftInSeconds / 3600.0f;
-	return shiftInHours;
-}
-
 // UTC !
 bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s)
 {
@@ -1106,11 +1129,43 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 	return 0;
 }
 
+// return true if year is a leap year. Observes 1582 switch from Julian to Gregorian Calendar.
+bool isLeapYear(const int year)
+{
+	if (year>1582){
+		if (year % 400 == 0)
+			return true;
+		else if (year % 100 == 0)
+			return false;
+		else return (year % 4 == 0);
+	}
+	else
+		return (year % 4 == 0);
+}
+
+// Find day number for date in year.
+// Meeus, AA 2nd, 1998, ch.7 p.65
+int dayInYear(const int year, const int month, const int day)
+{
+	// set k to 1 (leap) or 2.
+	int k=(isLeapYear(year) ? 1:2);
+	return (int)(275*month/9) - k*(int)((month+9)/12) + day -30;
+}
+
+// Return a fractional year like YYYY.ddddd. For negative years, the year number is of course decrease. E.g. -500.5 occurs in -501.
+double yearFraction(const int year, const int month, const double day)
+{
+	double d=dayInYear(year, month, 0)+day;
+	double daysInYear=( isLeapYear(year) ? 366.0 : 365.0);
+	return year+d/daysInYear;
+
+}
+
 //! given the submitted year/month/day hour:minute:second, try to
 //! normalize into an actual year/month/day.  values can be positive, 0,
 //! or negative.  start assessing from seconds to larger increments.
 bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
-				int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
+			       int* ry, int* rm, int* rd, int* rh, int* rmin, int* rs)
 {
 	bool change = false;
 
@@ -1223,7 +1278,7 @@ double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 {
 	int y, m, d, h, min;
 	float s;
-	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);
+	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);	
 	if (*ok)
 	{
 		double jd;
@@ -1293,7 +1348,16 @@ QString hoursToHmsStr(const double hours)
 //  1800.0=1800-jan-0.5=2378496.0
 //  1735.0=1735-jan-0.5=2354755.0
 //  1625.0=1625-jan-0.5=2314579.0
+//
+// Up to V0.15.1, if the requested year was outside validity range, we returned zero or some useless value.
+// Starting with V0.15.2 the value from the edge of the range is returned instead.
 */
+
+double getDeltaTwithoutCorrection(const double jDay)
+{
+	Q_UNUSED(jDay)
+	return 0.;
+}
 
 // Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
 double getDeltaTByEspenakMeeus(const double jDay)
@@ -1421,9 +1485,8 @@ double getDeltaTByClemence(const double jDay)
 // Implementation of algorithm by IAU (1952) for DeltaT computation
 double getDeltaTByIAU(const double jDay)
 {
-	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-	// TODO: Calculate Moon's longitude fluctuation
-	return (29.950*u +72.318)*u +24.349 /* + 1.82144*b */ ;
+	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)	
+	return (29.950*u +72.318)*u +24.349 + 1.82144*getMoonFluctuation(jDay)  ;
 }
 
 // Implementation of algorithm by Astronomical Ephemeris (1960) for DeltaT computation, also used by Mucke&Meeus, Canon of Solar Eclipses, Vienna 1983
@@ -1463,10 +1526,11 @@ double getDeltaTByStephenson1997(const double jDay)
 	return -20.0 + 35.0*u*u;
 }
 
-// Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation
+// Implementation of algorithm by Schmadel & Zech (1979) for DeltaT computation. STRICTLY 1800...1975 ONLY!! Now delivers values for the edges.
 double getDeltaTBySchmadelZech1979(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
+	u=qMax(-1.0, qMin(u, 0.76));  // Limit range to 1800...1975. Else we have crazy values which cause strange artefacts.
 	double deltaT=(((((((((((-0.089491*u -0.117389)*u + 0.185489)*u + 0.247433)*u - 0.159732)*u - 0.200097)*u + 0.075456)*u
 			+ 0.076929)*u - 0.020446)*u - 0.013867)*u + 0.003081)*u + 0.001233)*u -0.000029;
 	return deltaT * 86400.0;
@@ -1485,6 +1549,9 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	// Limited years!
+	year=qMax(-391, qMin(year, 1600));
 
 	double u = (getDecYear(year, month, day)-1800)/100;
 
@@ -1506,25 +1573,31 @@ double getDeltaTByStephensonMorrison1995(const double jDay)
 // Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
 double getDeltaTByStephensonHoulden(const double jDay)
 {
-	int year, month, day;
-	double u;
-	double deltaT = 0.;
-	getDateFromJulianDay(jDay, &year, &month, &day);
+	// TODO FIXME: GZ 2016-12: WHAT IS THIS?? Stephenson-Houlden 1986 has a different Formula!!
+//	int year, month, day;
+//	double u;
+//	double deltaT = 0.;
+//	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=getDecYear(year, month, day);
+//	double yeardec=getDecYear(year, month, day);
+//	// Limited years!?
+//	year=qMax(-600, qMin(year, 1600));
 
-	if (year <= 948)
-	{
-		u = (yeardec-948)/100;
-		deltaT = (46.5*u -405.0)*u + 1830.0;
-	}
-	if (948 < year && year <= 1600)
-	{
-		u = (yeardec-1850)/100;
-		deltaT = 22.5*u*u;
-	}
+//	if (year <= 948)
+//	{
+//		u = (yeardec-948)/100;
+//		deltaT = (46.5*u -405.0)*u + 1830.0;
+//	}
+//	if (948 < year && year <= 1600)
+//	{
+//		u = (yeardec-1850)/100;
+//		deltaT = 22.5*u*u;
+//	}
+//	return deltaT;
+// This formula found in the cited book, page (ii), formula (1).
+	double T=(jDay-2415020.0)/36525; // centuries from J1900.0
 
-	return deltaT;
+	return (36.79*T+35.06)*T+4.87;
 }
 
 // Implementation of algorithm by Espenak (1987, 1989) for DeltaT computation
@@ -1542,10 +1615,11 @@ double getDeltaTByBorkowski(const double jDay)
 	return 40.0 + 35.0*u*u;
 }
 
-// Implementation of algorithm by Schmadel & Zech (1988) for DeltaT computation
+// Implementation of algorithm by Schmadel & Zech (1988) for DeltaT computation. STRICTLY 1800...1988 ONLY!! Now delivers values for the edges.
 double getDeltaTBySchmadelZech1988(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
+	u=qMax(-1.0, qMin(u, 0.89));  // Limit range to 1800...1988. Else we have crazy values which cause strange artefacts.
 	double deltaT = (((((((((((-0.058091*u -0.067471)*u +.145932)*u +.161416)*u -.149279)*u -.146960)*u +.079441)*u +.062971)*u -.022542)*u -.012462)*u +.003357)*u +.001148)*u-.000014;
 	return deltaT * 86400.0;
 }
@@ -1556,6 +1630,9 @@ double getDeltaTByChaprontTouze(const double jDay)
 	int year, month, day;	
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	// Limited years!
+	year=qMax(-391, qMin(year, 1600));
 
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
@@ -1574,6 +1651,9 @@ double getDeltaTByJPLHorizons(const double jDay)
 	double u;
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	// Limited years!
+	year=qMax(-2999, qMin(year, 1620));
 
 	if (-2999 < year && year < 948)
 	{
@@ -1703,49 +1783,41 @@ double getDeltaTByMeeusSimons(const double jDay)
 	else if (year < 1690)
 	{
 		u = 3.45 + ub;
-		//deltaT = +40.3 - 107.0*u + 50.0*std::pow(u,2) - 454.0*std::pow(u,3) + 1244.0*std::pow(u,4);
 		deltaT = (((1244.0*u -454.0)*u + 50.0)*u -107.0)*u +40.3;
 	}
 	else if (year < 1770)
 	{
 		u = 2.70 + ub;
-		//deltaT = +10.2 + 11.3*u - std::pow(u,2) - 16.0*std::pow(u,3) + 70.0*std::pow(u,4);
 		deltaT = (((70.0*u -16.0)*u -1.0)*u +11.3)*u +10.2;
 	}
 	else if (year < 1820)
 	{
 		u = 2.05 + ub;
-		//deltaT = +14.7 - 18.8*u - 22.0*std::pow(u,2) + 173.0*std::pow(u,3) + 6.0*std::pow(u,4);
 		deltaT = (((6.0*u +173.0)*u -22.0)*u -18.8)*u +14.7;
 	}
 	else if (year < 1870)
 	{
 		u = 1.55 + ub;
-		//deltaT = +5.7 + 12.7*u + 111.0*std::pow(u,2) - 534.0*std::pow(u,3) - 1654.0*std::pow(u,4);
 		deltaT = (((-1654.0*u -534.0)*u +111)*u +12.7)*u +5.7;
 	}
 	else if (year < 1900)
 	{
 		u = 1.15 + ub;
-		//deltaT = -5.8 - 14.6*u + 27.0*std::pow(u,2) + 101.0*std::pow(u,3) + 8234.0*std::pow(u,4);
 		deltaT = (((8234.0*u +101.0)*u +27.0)*u - 14.6)*u -5.8;
 	}
 	else if (year < 1940)
 	{
 		u = 0.80 + ub;
-		//deltaT = +21.4 + 67.0*u - 443.0*std::pow(u,2) + 19.0*std::pow(u,3) + 4441.0*std::pow(u,4);
 		deltaT = (((4441.0*u + 19.0)*u -443.0)*u +67.0)*u +21.4;
 	}
 	else if (year < 1990)
 	{
 		u = 0.35 + ub;
-		//deltaT = +36.2 + 74.0*u + 189.0*std::pow(u,2) - 140.0*std::pow(u,3) - 1883.0*std::pow(u,4);
 		deltaT = (((-1883.0*u -140.0)*u +189.0)*u +74.0)*u +36.2;
 	}
 	else if (year <= 2000)
 	{
 		u = 0.05 + ub;
-		//deltaT = +60.8 + 82.0*u - 188.0*std::pow(u,2) - 5034.0*std::pow(u,3);
 		deltaT = ((-5034.0*u -188.0)*u +82.0)*u +60.8;
 	}
 
@@ -1811,20 +1883,18 @@ double getDeltaTByBanjevic(const double jDay)
 
 	double u, c;
 
-	if (year>=-2020 && year<=-700)
+	// Limited years!
+	year=qMax(-2020, qMin(year, 1620));
+
+	if (year<=-700)
 	{
 		u = (jDay-2378496.0)/36525.0; // 1800.0=1800-jan-0.5=2378496.0
 		c = 30.86;
 	}
-	else if (year>-700 && year<=1620)
+	else //  if (year>-700 && year<=1620)
 	{
 		u = (jDay-2385800.0)/36525.0; // 1820.0=1820-jan-0.5=2385800.0
 		c = 31;
-	}
-	else
-	{
-		u = 0.;
-		c = 0.;
 	}
 
 	return c*u*u;
@@ -1835,10 +1905,14 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
-	double deltaT = 0.0; // Return deltaT = 0 outside valid range.
+	double deltaT; // Return deltaT for the edge year outside valid range.
 	double u;
 	const double ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
-	if (year >= 1620 && year <= 1698)
+
+	// Limited years!
+	year=qMax(1620, qMin(year, 2007));
+
+	if (year <= 1698)
 	{
 		u = 3.48 + ub;
 		deltaT = (((1162.805 * u - 273.116) * u + 14.523) * u - 105.262) * u + 38.067;
@@ -1864,7 +1938,7 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 		u = 0.77 + ub;
 		deltaT = (((-390.785 * u + 901.514) * u - 88.044) * u + 8.997) * u + 24.006;
 	}
-	else if (year <= 2007)
+	else //if (year <= 2007)
 	{
 		// revised 2013 per email
 		u = 0.265 + ub;
@@ -1879,62 +1953,131 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
-	double k, a0, a1, a2, a3, a4;
-	if (year>=1620 && year<=1672)
-	{
-		k = 3.670; a0 = 76.541; a1 = -253.532; a2 = 695.901; a3 = -1256.982; a4 = 627.152;
-	}
-	else if (year>=1673 && year<=1729)
-	{
-		k = 3.120; a0 = 10.872; a1 = -40.744; a2 = 236.890; a3 = -351.537; a4 = 36.612;
-	}
-	else if (year>=1730 && year<=1797)
-	{
-		k = 2.495; a0 = 13.480; a1 = 13.075; a2 = 8.635; a3 = -3.307; a4 = -128.294;
-	}
-	else if (year>=1798 && year<=1843)
-	{
-		k = 1.925; a0 = 12.584; a1 = 1.929; a2 = 60.896; a3 = -1432.216; a4 = 3129.071;
-	}
-	else if (year>=1844 && year<=1877)
-	{
-		k = 1.525; a0 = 6.364; a1 = 11.004; a2 = 407.776; a3 = -4168.394; a4 = 7561.686;
-	}
-	else if (year>=1878 && year<=1904)
-	{
-		k = 1.220; a0 = -5.058; a1 = -1.701; a2 = -46.403; a3 = -866.171; a4 = 5917.585;
-	}
-	else if (year>=1905 && year<=1945)
-	{
-		k = 0.880; a0 = 13.392; a1 = 128.592; a2 = -279.165; a3 = -1282.050; a4 = 4039.490;
-	}
-	else if (year>=1946 && year<=1989)
-	{
-		k = 0.455; a0 = 30.782; a1 = 34.348; a2 = 46.452; a3 = 1295.550; a4 = -3210.913;
-	}
-	else if (year>=1990 && year<=2013)
-	{
-		k = 0.115; a0 = 55.281; a1 = 91.248; a2 = 87.202; a3 = -3092.565; a4 = 8255.422;
-	}
-	else
-	{
-		k = 0.0; a0 = 0.0; a1 = 0.0; a2 = 0.0; a3 = 0.0; a4 = 0.0;
-	}
+	//double a0, a1, a2, a3, a4;
+	const float k[9] ={     3.670f,    3.120f,    2.495f,     1.925f,     1.525f,    1.220f,     0.880f,     0.455f,      0.115f};
+	const float a0[9]={    76.541f,   10.872f,   13.480f,    12.584f,     6.364f,   -5.058f,    13.392f,    30.782f,     55.281f};
+	const float a1[9]={  -253.532f,  -40.744f,   13.075f,     1.929f,    11.004f,   -1.701f,   128.592f,    34.348f,     91.248f};
+	const float a2[9]={   695.901f,  236.890f,    8.635f,    60.896f,   407.776f,  -46.403f,  -279.165f,    46.452f,     87.202f};
+	const float a3[9]={ -1256.982f, -351.537f,   -3.307f, -1432.216f, -4168.394f, -866.171f, -1282.050f,  1295.550f,  -3092.565f};
+	const float a4[9]={   627.152f,   36.612f, -128.294f,  3129.071f,  7561.686f, 5917.585f,  4039.490f, -3210.913f,   8255.422f};
+	int i;
+	// Limited years! Deliver border values.
+	year=qMax(1620, qMin(year, 2013));
 
-	double u = k + (year - 2000)/100;
+	if (year<=1672)
+		i=0;
+	else if (year<=1729)
+		i=1;
+	else if (year<=1797)
+		i=2;
+	else if (year<=1843)
+		i=3;
+	else if (year<=1877)
+		i=4;
+	else if (year<=1904)
+		i=5;
+	else if (year<=1945)
+		i=6;
+	else if (year<=1989)
+		i=7;
+	else // if (year<=2013)
+		i=8;
 
-	return (((a4*u + a3)*u + a2)*u + a1)*u + a0;
+	double u = k[i] + (year - 2000)/100;
+
+	return (((a4[i]*u + a3[i])*u + a2[i])*u + a1[i])*u + a0[i];
 }
 
-double getMoonSecularAcceleration(const double jDay, const double nd)
+static const double StephensonMorrisonHohenkerk2016DeltaTtableS15[54][6]={
+//	Row         Years                  Polynomial Coefficients
+//	  i      K_i    K_{i+1}        a_0         a_1         a_2         a_3
+//	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*	  1 */   -720.0,     400.0,   20550.593,  -21268.478,   11863.418,   -4541.129,
+/*	  2 */    400.0,    1000.0,    6604.404,   -5981.266,    -505.093,    1349.609,
+/*	  3 */   1000.0,    1500.0,    1467.654,   -2452.187,    2460.927,   -1183.759,
+/*	  4 */   1500.0,    1600.0,     292.635,    -216.322,     -43.614,      56.681,
+/*	  5 */   1600.0,    1650.0,      89.380,     -66.754,      31.607,     -10.497,
+/*	  6 */   1650.0,    1720.0,      43.736,     -49.043,       0.227,      15.811,
+/*	  7 */   1720.0,    1800.0,      10.730,      -1.321,      62.250,     -52.946,
+/*	  8 */   1800.0,    1810.0,      18.714,      -4.457,      -1.509,       2.507,
+/*	  9 */   1810.0,    1820.0,      15.255,       0.046,       6.012,      -4.634,
+/*	 10 */   1820.0,    1830.0,      16.679,      -1.831,      -7.889,       3.799,
+/*	 11 */   1830.0,    1840.0,      10.758,      -6.211,       3.509,      -0.388,
+/*	 12 */   1840.0,    1850.0,       7.668,      -0.357,       2.345,      -0.338,
+/*	 13 */   1850.0,    1855.0,       9.317,       1.659,       0.332,      -0.932,
+/*	 14 */   1855.0,    1860.0,      10.376,      -0.472,      -2.463,       1.596,
+/*	 15 */   1860.0,    1865.0,       9.038,      -0.610,       2.325,      -2.497,
+/*	 16 */   1865.0,    1870.0,       8.256,      -3.450,      -5.166,       2.729,
+/*	 17 */   1870.0,    1875.0,       2.369,      -5.596,       3.020,      -0.919,
+/*	 18 */   1875.0,    1880.0,      -1.126,      -2.312,       0.264,      -0.037,
+/*	 19 */   1880.0,    1885.0,      -3.211,      -1.894,       0.154,       0.562,
+/*	 20 */   1885.0,    1890.0,      -4.388,       0.101,       1.841,      -1.438,
+/*	 21 */   1890.0,    1895.0,      -3.884,      -0.531,      -2.473,       1.870,
+/*	 22 */   1895.0,    1900.0,      -5.017,       0.134,       3.138,      -0.232,
+/*	 23 */   1900.0,    1905.0,      -1.977,       5.715,       2.443,      -1.257,
+/*	 24 */   1905.0,    1910.0,       4.923,       6.828,      -1.329,       0.720,
+/*	 25 */   1910.0,    1915.0,      11.142,       6.330,       0.831,      -0.825,
+/*	 26 */   1915.0,    1920.0,      17.479,       5.518,      -1.643,       0.262,
+/*	 27 */   1920.0,    1925.0,      21.617,       3.020,      -0.856,       0.008,
+/*	 28 */   1925.0,    1930.0,      23.789,       1.333,      -0.831,       0.127,
+/*	 29 */   1930.0,    1935.0,      24.418,       0.052,      -0.449,       0.142,
+/*	 30 */   1935.0,    1940.0,      24.164,      -0.419,      -0.022,       0.702,
+/*	 31 */   1940.0,    1945.0,      24.426,       1.645,       2.086,      -1.106,
+/*	 32 */   1945.0,    1950.0,      27.050,       2.499,      -1.232,       0.614,
+/*	 33 */   1950.0,    1953.0,      28.932,       1.127,       0.220,      -0.277,
+/*	 34 */   1953.0,    1956.0,      30.002,       0.737,      -0.610,       0.631,
+/*	 35 */   1956.0,    1959.0,      30.760,       1.409,       1.282,      -0.799,
+/*	 36 */   1959.0,    1962.0,      32.652,       1.577,      -1.115,       0.507,
+/*	 37 */   1962.0,    1965.0,      33.621,       0.868,       0.406,       0.199,
+/*	 38 */   1965.0,    1968.0,      35.093,       2.275,       1.002,      -0.414,
+/*	 39 */   1968.0,    1971.0,      37.956,       3.035,      -0.242,       0.202,
+/*	 40 */   1971.0,    1974.0,      40.951,       3.157,       0.364,      -0.229,
+/*	 41 */   1974.0,    1977.0,      44.244,       3.198,      -0.323,       0.172,
+/*	 42 */   1977.0,    1980.0,      47.291,       3.069,       0.193,      -0.192,
+/*	 43 */   1980.0,    1983.0,      50.361,       2.878,      -0.384,       0.081,
+/*	 44 */   1983.0,    1986.0,      52.936,       2.354,      -0.140,      -0.166,
+/*	 45 */   1986.0,    1989.0,      54.984,       1.577,      -0.637,       0.448,
+/*	 46 */   1989.0,    1992.0,      56.373,       1.649,       0.709,      -0.277,
+/*	 47 */   1992.0,    1995.0,      58.453,       2.235,      -0.122,       0.111,
+/*	 48 */   1995.0,    1998.0,      60.677,       2.324,       0.212,      -0.315,
+/*	 49 */   1998.0,    2001.0,      62.899,       1.804,      -0.732,       0.112,
+/*	 50 */   2001.0,    2004.0,      64.082,       0.675,      -0.396,       0.193,
+/*	 51 */   2004.0,    2007.0,      64.555,       0.463,       0.184,      -0.008,
+/*	 52 */   2007.0,    2010.0,      65.194,       0.809,       0.161,      -0.101,
+/*	 53 */   2010.0,    2013.0,      66.063,       0.828,      -0.142,       0.168,
+/*	 54 */   2013.0,    2016.0,      66.917,       1.046,       0.360,      -0.282
+};
+double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay)
+{
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	double y=yearFraction(year, month, day);
+	if ((y<-720.) || (y>2016.))
+	{
+		double fact=(y-1825.0)/100.;
+		return -320.0+32.5*fact*fact;
+	}
+	int i=0;
+	while (StephensonMorrisonHohenkerk2016DeltaTtableS15[i][1]<y) i++;
+	Q_ASSERT(i<54);
+	double t=(y-StephensonMorrisonHohenkerk2016DeltaTtableS15[i][0]) / (StephensonMorrisonHohenkerk2016DeltaTtableS15[i][1]-StephensonMorrisonHohenkerk2016DeltaTtableS15[i][0]);
+	return ((StephensonMorrisonHohenkerk2016DeltaTtableS15[i][5]*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][4])*t
+		+ StephensonMorrisonHohenkerk2016DeltaTtableS15[i][3])*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][2];
+}
+
+double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	double t = (getDecYear(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
-	// have value -23.8946 "/cy/cy
-	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
+	// have value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
+	double ephND = -23.8946;
+	if (useDE43x)
+		ephND = -25.8;
+
+	return -0.91072 * (ephND + qAbs(nd))*t*t;
 }
 
 double getDeltaTStandardError(const double jDay)
@@ -1953,6 +2096,209 @@ double getDeltaTStandardError(const double jDay)
 	return sigma;
 }
 
+// Current table contains interpolated data of original table by Spencer Jones, H., "The Rotation of the Earth, and the Secular
+// Accelerations of the Sun, Moon and Planets", Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+// [http://adsabs.harvard.edu/abs/1939MNRAS..99..541S] see Table I.
+static const double MoonFluctuationTable[2555] = {
+	-12.720, -12.691, -12.662, -12.632, -12.603, -12.574, -12.545, -12.516, -12.486, -12.457, -12.428, -12.399, -12.369, -12.340,
+	-12.311, -12.282, -12.253, -12.223, -12.194, -12.165, -12.136, -12.107, -12.077, -12.048, -12.019, -11.990, -11.960, -11.931,
+	-11.902, -11.873, -11.843, -11.814, -11.785, -11.756, -11.726, -11.697, -11.668, -11.639, -11.609, -11.580, -11.551, -11.522,
+	-11.492, -11.463, -11.434, -11.404, -11.375, -11.346, -11.317, -11.287, -11.258, -11.229, -11.199, -11.170, -11.141, -11.111,
+	-11.082, -11.053, -11.023, -10.994, -10.965, -10.935, -10.906, -10.877, -10.847, -10.818, -10.788, -10.759, -10.730, -10.700,
+	-10.671, -10.641, -10.612, -10.583, -10.553, -10.524, -10.494, -10.465, -10.435, -10.406, -10.376, -10.347, -10.317, -10.288,
+	-10.258, -10.229, -10.199, -10.170, -10.140, -10.111, -10.081, -10.052, -10.022, -09.993, -09.963, -09.934, -09.904, -09.874,
+	-09.845, -09.815, -09.786, -09.756, -09.726, -09.697, -09.667, -09.637, -09.608, -09.578, -09.548, -09.519, -09.489, -09.459,
+	-09.430, -09.400, -09.370, -09.340, -09.311, -09.281, -09.251, -09.221, -09.191, -09.162, -09.132, -09.102, -09.072, -09.042,
+	-09.013, -08.983, -08.953, -08.923, -08.893, -08.863, -08.833, -08.803, -08.773, -08.743, -08.713, -08.683, -08.653, -08.623,
+	-08.593, -08.563, -08.533, -08.503, -08.473, -08.443, -08.413, -08.383, -08.353, -08.323, -08.293, -08.263, -08.232, -08.202,
+	-08.172, -08.142, -08.112, -08.082, -08.051, -08.021, -07.991, -07.961, -07.930, -07.900, -07.870, -07.839, -07.809, -07.779,
+	-07.748, -07.718, -07.688, -07.657, -07.627, -07.596, -07.566, -07.535, -07.505, -07.474, -07.444, -07.413, -07.383, -07.352,
+	-07.322, -07.291, -07.261, -07.230, -07.199, -07.169, -07.138, -07.107, -07.077, -07.046, -07.015, -06.985, -06.954, -06.923,
+	-06.892, -06.862, -06.831, -06.800, -06.769, -06.738, -06.707, -06.676, -06.646, -06.615, -06.584, -06.553, -06.522, -06.491,
+	-06.460, -06.429, -06.398, -06.367, -06.336, -06.304, -06.273, -06.242, -06.211, -06.180, -06.149, -06.118, -06.086, -06.055,
+	-06.024, -05.993, -05.961, -05.930, -05.899, -05.867, -05.836, -05.805, -05.773, -05.742, -05.710, -05.679, -05.647, -05.616,
+	-05.584, -05.553, -05.521, -05.490, -05.458, -05.426, -05.395, -05.363, -05.331, -05.300, -05.268, -05.236, -05.204, -05.173,
+	-05.141, -05.109, -05.077, -05.045, -05.013, -04.982, -04.950, -04.918, -04.886, -04.854, -04.822, -04.790, -04.758, -04.726,
+	-04.693, -04.661, -04.629, -04.597, -04.565, -04.533, -04.500, -04.468, -04.436, -04.404, -04.371, -04.339, -04.307, -04.274,
+	-04.242, -04.209, -04.177, -04.144, -04.112, -04.079, -04.047, -04.014, -03.982, -03.949, -03.916, -03.884, -03.851, -03.818,
+	-03.785, -03.753, -03.720, -03.687, -03.654, -03.621, -03.588, -03.556, -03.523, -03.490, -03.457, -03.424, -03.391, -03.357,
+	-03.324, -03.291, -03.258, -03.225, -03.192, -03.158, -03.125, -03.092, -03.058, -03.025, -02.992, -02.958, -02.925, -02.891,
+	-02.858, -02.824, -02.791, -02.757, -02.723, -02.690, -02.656, -02.622, -02.589, -02.555, -02.521, -02.487, -02.453, -02.419,
+	-02.385, -02.351, -02.317, -02.283, -02.249, -02.215, -02.181, -02.147, -02.112, -02.078, -02.044, -02.009, -01.975, -01.941,
+	-01.906, -01.872, -01.837, -01.803, -01.768, -01.733, -01.699, -01.664, -01.629, -01.594, -01.559, -01.525, -01.490, -01.455,
+	-01.420, -01.385, -01.350, -01.315, -01.279, -01.244, -01.209, -01.174, -01.138, -01.103, -01.068, -01.032, -00.997, -00.961,
+	-00.926, -00.890, -00.854, -00.819, -00.783, -00.747, -00.711, -00.675, -00.639, -00.603, -00.567, -00.531, -00.495, -00.459,
+	-00.423, -00.387, -00.350, -00.314, -00.278, -00.241, -00.205, -00.168, -00.132, -00.095, -00.058, -00.022,  00.015,  00.052,
+	 00.089,  00.126,  00.163,  00.200,  00.237,  00.274,  00.311,  00.348,  00.385,  00.423,  00.460,  00.497,  00.535,  00.572,
+	 00.610,  00.647,  00.685,  00.723,  00.761,  00.798,  00.836,  00.874,  00.912,  00.950,  00.988,  01.026,  01.065,  01.103,
+	 01.141,  01.180,  01.218,  01.257,  01.295,  01.334,  01.372,  01.411,  01.450,  01.489,  01.527,  01.566,  01.605,  01.644,
+	 01.683,  01.723,  01.762,  01.801,  01.840,  01.880,  01.919,  01.959,  01.998,  02.038,  02.078,  02.117,  02.157,  02.197,
+	 02.237,  02.277,  02.317,  02.357,  02.397,  02.437,  02.478,  02.518,  02.558,  02.598,  02.639,  02.679,  02.720,  02.760,
+	 02.800,  02.841,  02.881,  02.922,  02.962,  03.003,  03.043,  03.084,  03.124,  03.165,  03.205,  03.246,  03.286,  03.326,
+	 03.367,  03.407,  03.448,  03.488,  03.528,  03.568,  03.609,  03.649,  03.689,  03.729,  03.769,  03.809,  03.849,  03.889,
+	 03.929,  03.968,  04.008,  04.048,  04.087,  04.127,  04.166,  04.205,  04.245,  04.284,  04.323,  04.362,  04.401,  04.440,
+	 04.478,  04.517,  04.555,  04.594,  04.632,  04.670,  04.708,  04.746,  04.784,  04.822,  04.859,  04.896,  04.934,  04.971,
+	 05.008,  05.045,  05.082,  05.118,  05.155,  05.191,  05.227,  05.263,  05.299,  05.334,  05.370,  05.405,  05.440,  05.475,
+	 05.510,  05.545,  05.579,  05.613,  05.647,  05.681,  05.715,  05.748,  05.782,  05.815,  05.848,  05.880,  05.913,  05.945,
+	 05.977,  06.009,  06.040,  06.072,  06.103,  06.134,  06.165,  06.195,	 06.226,  06.256,  06.286,  06.315,  06.345,  06.374,
+	 06.404,  06.433,  06.461,  06.490,  06.519,  06.547,  06.575,  06.603,  06.631,  06.659,  06.686,  06.713,  06.741,  06.768,
+	 06.794,  06.821,  06.848,  06.874,  06.900,  06.927,  06.953,  06.979,  07.004,  07.030,  07.055,  07.081,  07.106,  07.131,
+	 07.156,  07.181,  07.206,  07.231,  07.255,  07.280,  07.304,  07.329,  07.353,  07.377,  07.401,  07.425,  07.449,  07.472,
+	 07.496,  07.520,  07.543,  07.567,  07.590,  07.613,  07.637,  07.660,  07.683,  07.706,  07.729,  07.752,  07.775,  07.798,
+	 07.820,  07.843,  07.866,  07.889,  07.911,  07.934,  07.956,  07.979,  08.002,  08.024,  08.047,  08.069,  08.092,  08.114,
+	 08.136,  08.159,  08.181,  08.204,  08.226,  08.248,  08.271,  08.293,  08.316,  08.338,  08.361,  08.383,  08.406,  08.428,
+	 08.451,  08.473,  08.496,  08.518,  08.541,  08.564,  08.587,  08.609,  08.632,  08.655,  08.678,  08.700,  08.723,  08.746,
+	 08.769,  08.792,  08.815,  08.838,  08.861,  08.884,  08.907,  08.930,  08.953,  08.976,  09.000,  09.023,  09.046,  09.069,
+	 09.092,  09.115,  09.139,  09.162,  09.185,  09.208,  09.231,  09.255,  09.278,  09.301,  09.325,  09.348,  09.371,  09.394,
+	 09.418,  09.441,  09.464,  09.488,  09.511,  09.534,  09.558,  09.581,  09.604,  09.628,  09.651,  09.674,  09.698,  09.721,
+	 09.744,  09.768,  09.791,  09.814,  09.837,  09.861,  09.884,  09.907,  09.930,  09.954,  09.977,  10.000,  10.023,  10.047,
+	 10.070,  10.093,  10.116,  10.139,  10.162,  10.185,  10.209,  10.232,  10.255,  10.278,  10.301,  10.324,  10.347,  10.370,
+	 10.393,  10.415,  10.438,  10.461,  10.484,  10.507,  10.530,  10.552,  10.575,  10.598,  10.621,  10.643,  10.666,  10.688,
+	 10.711,  10.734,  10.756,  10.779,  10.801,  10.824,  10.846,  10.868,  10.891,  10.913,  10.935,  10.958,  10.980,  11.002,
+	 11.024,  11.047,  11.069,  11.091,  11.113,  11.135,  11.157,  11.179,	 11.201,  11.223,  11.245,  11.266,  11.288,  11.310,
+	 11.332,  11.353,  11.375,  11.397,  11.418,  11.440,  11.462,  11.483,  11.504,  11.526,  11.547,  11.569,  11.590,  11.611,
+	 11.632,  11.654,  11.675,  11.696,  11.717,  11.738,  11.759,  11.780,  11.801,  11.822,  11.843,  11.863,  11.884,  11.905,
+	 11.926,  11.946,  11.967,  11.987,  12.008,  12.028,  12.049,  12.069,  12.089,  12.110,  12.130,  12.150,  12.170,  12.190,
+	 12.210,  12.230,  12.250,  12.270,  12.290,  12.310,  12.330,  12.349,  12.369,  12.389,  12.408,  12.428,  12.447,  12.467,
+	 12.486,  12.505,  12.525,  12.544,  12.563,  12.582,  12.601,  12.620,  12.639,  12.658,  12.677,  12.696,  12.714,  12.733,
+	 12.752,  12.770,  12.789,  12.807,  12.826,  12.844,  12.862,  12.881,  12.899,  12.917,  12.935,  12.953,  12.971,  12.989,
+	 13.007,  13.025,  13.042,  13.060,  13.078,  13.095,  13.113,  13.130,  13.148,  13.165,  13.182,  13.199,  13.216,  13.234,
+	 13.251,  13.267,  13.284,  13.301,  13.318,  13.335,  13.351,  13.368,  13.384,  13.401,  13.417,  13.433,  13.450,  13.466,
+	 13.482,  13.498,  13.514,  13.530,  13.546,  13.561,  13.577,  13.593,  13.608,  13.624,  13.639,  13.654,  13.670,  13.685,
+	 13.700,  13.715,  13.730,  13.745,  13.760,  13.775,  13.789,  13.804,  13.818,  13.833,  13.847,  13.861,  13.876,  13.890,
+	 13.904,  13.918,  13.932,  13.946,  13.959,  13.973,  13.986,  14.000,  14.013,  14.027,  14.040,  14.053,  14.066,  14.079,
+	 14.092,  14.105,  14.117,  14.130,  14.142,  14.155,  14.167,  14.179,  14.192,  14.204,  14.216,  14.227,  14.239,  14.251,
+	 14.262,  14.274,  14.285,  14.296,  14.308,  14.319,  14.330,  14.341,  14.351,  14.362,  14.373,  14.383,  14.394,  14.404,
+	 14.414,  14.424,  14.434,  14.444,  14.454,  14.463,  14.473,  14.482,  14.492,  14.501,  14.510,  14.519,  14.528,  14.537,
+	 14.545,  14.554,  14.562,  14.571,  14.579,  14.587,  14.595,  14.603,	 14.610,  14.618,  14.626,  14.633,  14.640,  14.647,
+	 14.654,  14.661,  14.668,  14.675,  14.681,  14.688,  14.694,  14.700,  14.706,  14.712,  14.718,  14.724,  14.730,  14.735,
+	 14.740,  14.745,  14.751,  14.755,  14.760,  14.765,  14.770,  14.774,  14.778,  14.782,  14.786,  14.790,  14.794,  14.798,
+	 14.801,  14.805,  14.808,  14.811,  14.814,  14.817,  14.819,  14.822,  14.824,  14.826,  14.829,  14.831,  14.832,  14.834,
+	 14.836,  14.837,  14.838,  14.839,  14.840,  14.841,  14.842,  14.842,  14.843,  14.843,  14.843,  14.843,  14.843,  14.843,
+	 14.842,  14.841,  14.841,  14.840,  14.839,  14.837,  14.836,  14.834,  14.833,  14.831,  14.829,  14.827,  14.824,  14.822,
+	 14.819,  14.817,  14.814,  14.811,  14.807,  14.804,  14.800,  14.797,  14.793,  14.789,  14.785,  14.780,  14.776,  14.771,
+	 14.766,  14.761,  14.756,  14.751,  14.746,  14.740,  14.734,  14.728,  14.722,  14.716,  14.709,  14.703,  14.696,  14.689,
+	 14.682,  14.675,  14.667,  14.660,  14.652,  14.644,  14.636,  14.628,  14.619,  14.611,  14.602,  14.593,  14.584,  14.575,
+	 14.565,  14.555,  14.546,  14.536,  14.526,  14.515,  14.505,  14.494,  14.483,  14.472,  14.461,  14.450,  14.438,  14.427,
+	 14.415,  14.403,  14.391,  14.379,  14.366,  14.354,  14.341,  14.329,  14.316,  14.303,  14.289,  14.276,  14.263,  14.249,
+	 14.235,  14.222,  14.208,  14.194,  14.179,  14.165,  14.151,  14.136,  14.122,  14.107,  14.092,  14.077,  14.062,  14.047,
+	 14.032,  14.017,  14.001,  13.986,  13.970,  13.955,  13.939,  13.923,  13.908,  13.892,  13.876,  13.860,  13.843,  13.827,
+	 13.811,  13.795,  13.778,  13.762,  13.745,  13.729,  13.712,  13.695,  13.679,  13.662,  13.645,  13.628,  13.612,  13.595,
+	 13.578,  13.561,  13.544,  13.527,  13.510,  13.493,  13.476,  13.459,  13.441,  13.424,  13.407,  13.390,  13.373,  13.356,
+	 13.338,  13.321,  13.304,  13.287,  13.270,  13.253,  13.236,  13.218,	 13.201,  13.184,  13.167,  13.150,  13.133,  13.116,
+	 13.099,  13.082,  13.065,  13.048,  13.031,  13.014,  12.998,  12.981,  12.964,  12.947,  12.931,  12.914,  12.897,  12.881,
+	 12.864,  12.847,  12.831,  12.814,  12.798,  12.781,  12.765,  12.748,  12.732,  12.716,  12.699,  12.683,  12.667,  12.650,
+	 12.634,  12.618,  12.602,  12.585,  12.569,  12.553,  12.537,  12.521,  12.504,  12.488,  12.472,  12.456,  12.440,  12.424,
+	 12.408,  12.392,  12.376,  12.360,  12.344,  12.328,  12.312,  12.296,  12.280,  12.265,  12.249,  12.233,  12.217,  12.201,
+	 12.185,  12.169,  12.154,  12.138,  12.122,  12.106,  12.090,  12.075,  12.059,  12.043,  12.027,  12.012,  11.996,  11.980,
+	 11.965,  11.949,  11.933,  11.917,  11.902,  11.886,  11.870,  11.855,  11.839,  11.823,  11.808,  11.792,  11.776,  11.761,
+	 11.745,  11.730,  11.714,  11.698,  11.683,  11.667,  11.652,  11.636,  11.621,  11.606,  11.590,  11.575,  11.560,  11.545,
+	 11.530,  11.515,  11.500,  11.485,  11.470,  11.455,  11.441,  11.426,  11.412,  11.397,  11.383,  11.369,  11.355,  11.341,
+	 11.327,  11.314,  11.300,  11.286,  11.273,  11.260,  11.247,  11.234,  11.221,  11.208,  11.196,  11.183,  11.171,  11.158,
+	 11.146,  11.134,  11.122,  11.109,  11.097,  11.085,  11.074,  11.062,  11.050,  11.038,  11.026,  11.014,  11.003,  10.991,
+	 10.979,  10.968,  10.956,  10.944,  10.932,  10.921,  10.909,  10.897,  10.885,  10.873,  10.861,  10.849,  10.837,  10.825,
+	 10.813,  10.801,  10.789,  10.776,  10.764,  10.751,  10.738,  10.726,  10.713,  10.700,  10.687,  10.674,  10.660,  10.647,
+	 10.633,  10.619,  10.605,  10.591,  10.577,  10.563,  10.548,  10.534,  10.519,  10.504,  10.488,  10.473,  10.457,  10.441,
+	 10.425,  10.409,  10.392,  10.376,  10.359,  10.342,  10.324,  10.306,  10.288,  10.270,  10.252,  10.233,  10.214,  10.195,
+	 10.175,  10.155,  10.135,  10.115,  10.094,  10.073,  10.052,  10.030,	 10.008,  09.985,  09.963,  09.940,  09.917,  09.893,
+	 09.869,  09.845,  09.820,  09.795,  09.770,  09.745,  09.719,  09.693,  09.667,  09.641,  09.614,  09.587,  09.559,  09.532,
+	 09.504,  09.476,  09.447,  09.419,  09.390,  09.361,  09.331,  09.301,  09.272,  09.242,  09.211,  09.181,  09.150,  09.119,
+	 09.088,  09.056,  09.025,  08.993,  08.961,  08.928,  08.896,  08.863,  08.831,  08.798,  08.764,  08.731,  08.697,  08.664,
+	 08.630,  08.596,  08.561,  08.527,  08.492,  08.458,  08.423,  08.388,  08.353,  08.317,  08.282,  08.246,  08.211,  08.175,
+	 08.139,  08.103,  08.067,  08.030,  07.994,  07.957,  07.921,  07.884,  07.847,  07.810,  07.773,  07.736,  07.699,  07.662,
+	 07.624,  07.587,  07.549,  07.512,  07.474,  07.437,  07.399,  07.361,  07.323,  07.285,  07.247,  07.209,  07.171,  07.133,
+	 07.095,  07.057,  07.019,  06.980,  06.942,  06.904,  06.866,  06.827,  06.789,  06.751,  06.713,  06.674,  06.636,  06.598,
+	 06.560,  06.522,  06.484,  06.446,  06.409,  06.371,  06.333,  06.296,  06.259,  06.221,  06.184,  06.148,  06.111,  06.074,
+	 06.038,  06.002,  05.966,  05.931,  05.895,  05.860,  05.825,  05.790,  05.756,  05.722,  05.688,  05.654,  05.621,  05.588,
+	 05.556,  05.523,  05.491,  05.460,  05.429,  05.398,  05.367,  05.337,  05.308,  05.279,  05.250,  05.221,  05.194,  05.166,
+	 05.139,  05.113,  05.087,  05.061,  05.036,  05.011,  04.987,  04.964,  04.941,  04.919,  04.897,  04.875,  04.855,  04.835,
+	 04.815,  04.796,  04.777,  04.759,  04.741,  04.724,  04.708,  04.691,  04.676,  04.661,  04.646,  04.631,  04.617,  04.604,
+	 04.591,  04.578,  04.566,  04.554,  04.542,  04.531,  04.520,  04.510,  04.500,  04.490,  04.480,  04.471,  04.462,  04.454,
+	 04.446,  04.438,  04.430,  04.422,  04.415,  04.408,  04.402,  04.395,  04.389,  04.383,  04.377,  04.371,  04.366,  04.361,
+	 04.355,  04.350,  04.346,  04.341,  04.336,  04.332,  04.328,  04.323,	 04.319,  04.315,  04.311,  04.308,  04.304,  04.300,
+	 04.296,  04.293,  04.289,  04.285,  04.282,  04.278,  04.275,  04.271,  04.268,  04.264,  04.261,  04.257,  04.253,  04.249,
+	 04.246,  04.242,  04.238,  04.234,  04.230,  04.226,  04.221,  04.217,  04.212,  04.208,  04.203,  04.198,  04.193,  04.188,
+	 04.183,  04.177,  04.171,  04.165,  04.159,  04.153,  04.147,  04.140,  04.133,  04.126,  04.118,  04.111,  04.103,  04.095,
+	 04.086,  04.078,  04.069,  04.059,  04.050,  04.040,  04.030,  04.019,  04.009,  03.997,  03.986,  03.974,  03.962,  03.949,
+	 03.937,  03.923,  03.910,  03.896,  03.882,  03.867,  03.853,  03.838,  03.823,  03.807,  03.791,  03.776,  03.760,  03.743,
+	 03.727,  03.710,  03.693,  03.676,  03.659,  03.642,  03.625,  03.607,  03.590,  03.572,  03.554,  03.537,  03.519,  03.501,
+	 03.483,  03.465,  03.447,  03.429,  03.412,  03.394,  03.376,  03.358,  03.340,  03.323,  03.305,  03.287,  03.270,  03.252,
+	 03.235,  03.217,  03.200,  03.182,  03.164,  03.147,  03.129,  03.111,  03.094,  03.076,  03.058,  03.040,  03.022,  03.004,
+	 02.985,  02.967,  02.949,  02.930,  02.911,  02.893,  02.874,  02.855,  02.835,  02.816,  02.796,  02.777,  02.757,  02.737,
+	 02.716,  02.696,  02.675,  02.654,  02.633,  02.612,  02.590,  02.568,  02.546,  02.524,  02.501,  02.478,  02.455,  02.431,
+	 02.407,  02.383,  02.359,  02.334,  02.309,  02.284,  02.258,  02.233,  02.206,  02.180,  02.153,  02.126,  02.099,  02.072,
+	 02.044,  02.016,  01.988,  01.960,  01.931,  01.902,  01.873,  01.844,  01.814,  01.785,  01.755,  01.725,  01.694,  01.664,
+	 01.633,  01.602,  01.571,  01.540,  01.509,  01.477,  01.445,  01.413,  01.381,  01.349,  01.317,  01.284,  01.252,  01.219,
+	 01.186,  01.153,  01.120,  01.087,  01.054,  01.020,  00.987,  00.953,  00.920,  00.886,  00.852,  00.818,  00.784,  00.750,
+	 00.715,  00.680,  00.645,  00.609,  00.574,  00.537,  00.500,  00.463,	 00.426,  00.387,  00.348,  00.309,  00.269,  00.228,
+	 00.187,  00.145,  00.102,  00.058,  00.013, -00.032, -00.079, -00.126,	-00.174, -00.223, -00.274, -00.325, -00.378, -00.431,
+	-00.486, -00.542, -00.599, -00.658, -00.718, -00.779, -00.841, -00.905,	-00.970, -01.037, -01.105, -01.175, -01.247, -01.320,
+	-01.394, -01.471, -01.549, -01.628, -01.710, -01.793, -01.877, -01.964,	-02.051, -02.140, -02.230, -02.322, -02.415, -02.508,
+	-02.603, -02.699, -02.796, -02.893, -02.992, -03.091, -03.191, -03.291,	-03.392, -03.494, -03.596, -03.698, -03.801, -03.903,
+	-04.006, -04.109, -04.212, -04.315, -04.418, -04.521, -04.624, -04.726,	-04.828, -04.929, -05.030, -05.131, -05.231, -05.330,
+	-05.428, -05.526, -05.623, -05.719, -05.813, -05.907, -06.000, -06.091,	-06.182, -06.271, -06.358, -06.444, -06.529, -06.612,
+	-06.694, -06.775, -06.854, -06.932, -07.009, -07.084, -07.158, -07.231,	-07.302, -07.373, -07.442, -07.510, -07.578, -07.644,
+	-07.708, -07.772, -07.835, -07.897, -07.958, -08.018, -08.077, -08.135,	-08.193, -08.249, -08.305, -08.360, -08.414, -08.467,
+	-08.520, -08.572, -08.623, -08.674, -08.724, -08.773, -08.822, -08.870,	-08.918, -08.965, -09.011, -09.058, -09.103, -09.149,
+	-09.194, -09.238, -09.282, -09.326, -09.370, -09.413, -09.456, -09.499,	-09.542, -09.584, -09.626, -09.668, -09.709, -09.751,
+	-09.792, -09.833, -09.873, -09.914, -09.954, -09.994, -10.034, -10.073,	-10.113, -10.152, -10.191, -10.230, -10.269, -10.307,
+	-10.346, -10.384, -10.422, -10.460, -10.498, -10.535, -10.573, -10.610,	-10.648, -10.685, -10.722, -10.759, -10.796, -10.832,
+	-10.869, -10.905, -10.942, -10.978, -11.014, -11.051, -11.087, -11.123,	-11.159, -11.195, -11.231, -11.267, -11.302, -11.338,
+	-11.374, -11.410, -11.445, -11.481, -11.517, -11.552, -11.588, -11.623,	-11.659, -11.694, -11.730, -11.765, -11.800, -11.836,
+	-11.871, -11.906, -11.941, -11.976, -12.011, -12.047, -12.082, -12.117,	-12.151, -12.186, -12.221, -12.256, -12.291, -12.325,
+	-12.360, -12.395, -12.429, -12.464, -12.498, -12.533, -12.567, -12.601,	-12.636, -12.670, -12.704, -12.738, -12.772, -12.807,
+	-12.841, -12.875, -12.908, -12.942, -12.976, -13.010, -13.044, -13.077,	-13.111, -13.144, -13.178, -13.211, -13.245, -13.278,
+	-13.311, -13.344, -13.378, -13.411, -13.444, -13.476, -13.509, -13.542,	-13.575, -13.607, -13.640, -13.673, -13.705, -13.737,
+	-13.770, -13.802, -13.834, -13.866, -13.898, -13.930, -13.961, -13.993,	-14.024, -14.056, -14.087, -14.119, -14.150, -14.181,
+	-14.212, -14.243, -14.273, -14.304, -14.335, -14.365, -14.395, -14.426,	-14.456, -14.486, -14.516, -14.546, -14.576, -14.605,
+	-14.635, -14.665, -14.694, -14.724, -14.754, -14.783, -14.813, -14.842,	-14.871, -14.901, -14.930, -14.960, -14.989, -15.018,
+	-15.048, -15.077, -15.107, -15.136, -15.166, -15.195, -15.225, -15.255,	-15.285, -15.314, -15.344, -15.373, -15.403, -15.432,
+	-15.461, -15.490, -15.519, -15.547, -15.575, -15.603, -15.630, -15.657,	-15.684, -15.710, -15.735, -15.760, -15.784, -15.808,
+	-15.831, -15.853, -15.875, -15.896, -15.916, -15.935, -15.954, -15.971,	-15.988, -16.003, -16.018, -16.031, -16.044, -16.055,
+	-16.065, -16.074, -16.082, -16.089, -16.094, -16.098, -16.101, -16.102,	-16.102, -16.100, -16.097, -16.092, -16.086, -16.078,
+	-16.068, -16.057, -16.044, -16.029, -16.013, -15.995, -15.974, -15.952,	-15.928, -15.902, -15.874, -15.844, -15.812, -15.778,
+	-15.742, -15.705, -15.666, -15.626, -15.584, -15.541, -15.496, -15.451,	-15.404, -15.357, -15.309, -15.260, -15.211, -15.161,
+	-15.110, -15.059, -15.008, -14.957, -14.906, -14.855, -14.804, -14.753,	-14.703, -14.653, -14.603, -14.554, -14.506, -14.459,
+	-14.412, -14.367, -14.322, -14.278, -14.235, -14.192, -14.151, -14.110,	-14.070, -14.031, -13.993, -13.955, -13.918, -13.882,
+	-13.847, -13.813, -13.779, -13.746, -13.714, -13.682, -13.652, -13.622,	-13.593, -13.564, -13.536, -13.509, -13.483, -13.458,
+	-13.433, -13.409, -13.385, -13.363, -13.340, -13.319, -13.297, -13.276,	-13.256, -13.236, -13.216, -13.196, -13.176, -13.156,
+	-13.137, -13.117, -13.097, -13.078, -13.058, -13.037, -13.017, -12.996,	-12.974, -12.953, -12.930, -12.907, -12.884, -12.860,
+	-12.835, -12.809, -12.783, -12.755, -12.727, -12.698, -12.668, -12.637,	-12.606, -12.573, -12.540, -12.506, -12.471, -12.435,
+	-12.399, -12.362, -12.324, -12.285, -12.246, -12.205, -12.165, -12.123,	-12.081, -12.038, -11.995, -11.951, -11.906, -11.860,
+	-11.814, -11.768, -11.721, -11.673, -11.625, -11.576, -11.526, -11.477,	-11.427, -11.377, -11.326, -11.276, -11.226, -11.176,
+	-11.127, -11.078, -11.029, -10.981, -10.934, -10.887, -10.842, -10.797,	-10.754, -10.711, -10.670, -10.631, -10.592, -10.556,
+	-10.521, -10.488, -10.456, -10.427, -10.400, -10.375, -10.352, -10.331,	-10.313, -10.297, -10.283, -10.270, -10.260, -10.251,
+	-10.243, -10.237, -10.232, -10.229, -10.226, -10.224, -10.223, -10.222,	-10.222, -10.222, -10.223, -10.223, -10.224, -10.224,
+	-10.225, -10.224, -10.223, -10.222, -10.220, -10.217, -10.212, -10.207,	-10.201, -10.193, -10.183, -10.173, -10.162, -10.150,
+	-10.138, -10.125, -10.112, -10.099, -10.087, -10.075, -10.063, -10.053,	-10.043, -10.035, -10.028, -10.022, -10.019, -10.017,
+	-10.017, -10.020, -10.025, -10.033, -10.043, -10.057, -10.074, -10.094,	-10.118, -10.146, -10.178, -10.214, -10.254, -10.297,
+	-10.344, -10.394, -10.447, -10.502, -10.560, -10.619, -10.680, -10.743,	-10.806, -10.871, -10.936, -11.001, -11.066, -11.131,
+	-11.195, -11.259, -11.321, -11.382, -11.441, -11.498, -11.553, -11.605,	-11.655, -11.701, -11.744, -11.783, -11.818, -11.850,
+	-11.877, -11.900, -11.921, -11.938, -11.953, -11.966, -11.978, -11.988,	-11.997, -12.005, -12.013, -12.021, -12.029, -12.038,
+	-12.049, -12.061, -12.074, -12.091, -12.109, -12.131, -12.155, -12.182,	-12.212, -12.244, -12.278, -12.314, -12.352, -12.392,
+	-12.434, -12.476, -12.520, -12.565, -12.612, -12.658, -12.706, -12.754,	-12.802, -12.850, -12.898, -12.947, -12.995, -13.042,
+	-13.090, -13.137, -13.185, -13.232, -13.278, -13.325, -13.372, -13.418,	-13.464, -13.510, -13.556, -13.602, -13.648, -13.693,
+	-13.739, -13.784, -13.829, -13.874, -13.919, -13.964, -14.009, -14.054,	-14.099, -14.145, -14.192, -14.238, -14.286, -14.334,
+	-14.383, -14.432, -14.483, -14.534, -14.587, -14.640, -14.695, -14.751,	-14.809, -14.868, -14.928, -14.990, -15.052, -15.115,
+	-15.178, -15.241, -15.304, -15.367, -15.430, -15.491, -15.552, -15.612,	-15.670, -15.727, -15.782, -15.835, -15.886, -15.934,
+	-15.980, -16.022, -16.063, -16.100, -16.135, -16.168, -16.198, -16.227,	-16.254, -16.279, -16.302, -16.324, -16.344, -16.364,
+	-16.382, -16.400, -16.417, -16.433, -16.449, -16.465, -16.480
+};
+
+double getMoonFluctuation(const double jDay)
+{
+	double f = 0.;
+	int year, month, day, index;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	double t = getDecYear(year, month, day);
+	if (t>=1681.0 && t<=1936.5) {
+		index = std::floor((t - 1681.0)*10);
+		f = MoonFluctuationTable[index]*0.07; // Get interpolated data and convert to seconds of time
+	}
+
+	return f;
+}
 
 // Arrays to keep cos/sin of angles and multiples of angles. rho and theta are delta angles, and these arrays
 #define MAX_STACKS 4096
@@ -2055,6 +2401,24 @@ float *ComputeCosSinRhoZone(const float dRho, const int segments, const float mi
 double getDecYear(const int year, const int month, const int day)
 {
 	return year+((month-1)*30.5+day/31.*30.5)/366;
+}
+
+int compareVersions(const QString v1, const QString v2)
+{
+	// result (-1: v1<v2; 0: v1==v2; 1: v1>v2)
+	int result = 0;
+	QStringList v1s = v1.split(".");
+	QStringList v2s = v2.split(".");
+	int ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100 + v1s.at(2).toInt();
+	int ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100 + v2s.at(2).toInt();
+	if (ver1<ver2)
+		result = -1;
+	else if (ver1 == ver2)
+		result = 0;
+	else if (ver1 > ver2)
+		result = 1;
+
+	return result;
 }
 
 //! Uncompress gzip or zlib compressed data.

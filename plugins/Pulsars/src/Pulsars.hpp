@@ -40,13 +40,44 @@ class PulsarsDialog;
 
 class StelPainter;
 
+/*! @defgroup pulsars Pulsars Plug-in
+@{
+The %Pulsars plugin plots the position of various pulsars, with object information
+about each one. Pulsar data is derived from Catalog of Pulsars
+([Taylor+ 1995](http://cdsads.u-strasbg.fr/cgi-bin/nph-bib_query?1993ApJS...88..529T&db_key=AST&nosetcookie=1))
+for 0.1.x series and derived from The ATNF Pulsar Catalogue (Manchester, R. N.,
+Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005)
+([astro-ph/0412641](http://arxiv.org/abs/astro-ph/0412641))) for series 0.2.x.
+
+<b>Pulsars Catalog</b>
+
+The pulsars catalog is stored on the disk in [JSON](http://www.json.org/)
+format, in a file named "pulsars.json". A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
+
+<b>Configuration</b>
+
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [Pulsars]).
+
+@}
+*/
+
+//! @ingroup pulsars
 typedef QSharedPointer<Pulsar> PulsarP;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+//! @class Pulsars
+//! Main class of the %Pulsars plugin.
+//! @author Alexander Wolf
+//! @ingroup pulsars
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool pulsarsVisible READ getFlagShowPulsars WRITE setFlagShowPulsars)
+	Q_PROPERTY(bool pulsarsVisible
+		   READ getFlagShowPulsars
+		   WRITE setFlagShowPulsars
+		   NOTIFY flagPulsarsVisibilityChanged
+		   )
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -87,20 +118,13 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Pulsars"; }
 
 	//! get a Pulsar object by identifier
@@ -129,15 +153,6 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void);
-	void setDisplayMode(bool b);
-
-	bool getGlitchFlag(void);
-	void setGlitchFlag(bool b);
-
-	QString getMarkerColor(bool mtype = true);
-	void setMarkerColor(QString c, bool mtype = true);
-
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -154,9 +169,6 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
-	//! Get count of pulsars from catalog
-	int getCountPulsars(void) {return PsrCount;}
-
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Pulsars::UpdateState state);
@@ -164,22 +176,54 @@ signals:
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
+	void flagPulsarsVisibilityChanged(bool b);
+
 public slots:
-	//! Download JSON from web recources described in the module section of the
-	//! module.ini file and update the local JSON file.
-	void updateJSON(void);
-
-	void setFlagShowPulsars(bool b) { flagShowPulsars=b; }
-	bool getFlagShowPulsars(void) { return flagShowPulsars; }
-
-	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
-
 	//! Define whether the button toggling pulsars should be visible
 	void setFlagShowPulsarsButton(bool b);
 	bool getFlagShowPulsarsButton(void) { return flagShowPulsarsButton; }
 
+	//! Enable/disable display of markers of pulsars
+	//! @param b boolean flag
+	void setFlagShowPulsars(bool b);
+	//! Get status to display of markers of pulsars
+	//! @return true if it's visible
+	bool getFlagShowPulsars(void) { return flagShowPulsars; }
+
+	//! Get status to display of distribution of pulsars
+	//! @return true if distribution of pulsars is enabled
+	bool getDisplayMode(void);
+	//! Enable/disable display of distribution of pulsars
+	//! @param b
+	void setDisplayMode(bool b);
+
+	//! Get status for usage of separate color for pulsars with glitches
+	//! @return true if separate color is used for pulsars with glitches
+	bool getGlitchFlag(void);
+	//! Enable/disable the use of a separate color for pulsars with glitches
+	//! @param boolean flag
+	void setGlitchFlag(bool b);
+
+	//! Get color for pulsars markers
+	//! @param mtype set false if you want get color of pulsars with glitches
+	//! @return color
+	Vec3f getMarkerColor(bool mtype = true);
+	//! Set color for pulsars markers
+	//! @param c color
+	//! @param mtype set false if you want set color for pulsars with glitches
+	//! @code
+	//! // example of usage in scripts
+	//! Pulsars.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
+	//! @endcode
+	void setMarkerColor(const Vec3f& c, bool mtype = true);
+
+	//! Get count of pulsars from catalog
+	//! @return count of pulsars
+	int getCountPulsars(void) {return PsrCount;}
+
+	//! Download JSON from web recources described in the module section of the
+	//! module.ini file and update the local JSON file.
+	void updateJSON(void);
 
 private:
 	// Font used for displaying our text
@@ -255,6 +299,11 @@ private slots:
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
 
+	void reloadCatalog(void);
+
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
 };
 
 

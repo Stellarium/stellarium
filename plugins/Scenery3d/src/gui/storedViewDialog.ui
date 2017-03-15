@@ -262,6 +262,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QCheckBox" name="useDateCheckBox">
+             <property name="text">
+              <string>Load/store with date</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item row="0" column="1">

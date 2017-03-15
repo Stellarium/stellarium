@@ -27,7 +27,8 @@
 #include "StelModuleMgr.hpp"
 
 EquationOfTimeWindow::EquationOfTimeWindow()
-	: eq(NULL)
+	: StelDialog("EquationOfTime")
+	, eq(NULL)
 {
 	ui = new Ui_equationOfTimeWindowForm();
 }
@@ -53,6 +54,7 @@ void EquationOfTimeWindow::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	ui->checkBoxEnableAtStartup->setChecked(eq->getFlagEnableAtStartup());
 	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), eq, SLOT(setFlagEnableAtStartup(bool)));

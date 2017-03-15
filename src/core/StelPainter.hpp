@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
  *
@@ -37,7 +37,7 @@ class QOpenGLShaderProgram;
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
-class StelPainter
+class StelPainter : protected QOpenGLFunctions
 {
 public:
 	friend class VertexArrayProjector;
@@ -66,13 +66,17 @@ public:
 	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
 
+	//! Returns a QOpenGLFunctions object suitable for drawing directly with OpenGL while this StelPainter is active.
+	//! This is recommended to be used instead of QOpenGLContext::currentContext()->functions() when a StelPainter is available,
+	//! and you only need to call a few GL functions directly.
+	inline QOpenGLFunctions* glFuncs() { return this; }
+
 	//! Return the instance of projector associated to this painter
 	const StelProjectorP& getProjector() const {return prj;}
 	void setProjector(const StelProjectorP& p);
 
 	//! Fill with black around the viewport.
 	void drawViewportShape(void);
-	void drawViewportShape(const GLfloat innerRadius);
 
 	//! Draw the string at the given position and angle with the given font.
 	//! If the gravity label flag is set, uses drawTextGravity180.
@@ -118,6 +122,11 @@ public:
 	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=NULL, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
 
+	//! Draw a curve defined by a list of points.
+	//! The points should be already tesselated to ensure that the path will look smooth.
+	//! The algorithm take care of cutting the path if it crosses a viewport discontinutiy.
+	void drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors);
+
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(float x, float y, float r);
 
@@ -126,7 +135,7 @@ public:
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
-	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
+	//! @param v direction vector of object to draw. Will draw only if this is in the visible hemisphere.
 	void drawSprite2dMode(float x, float y, float radius);
 	void drawSprite2dMode(const Vec3d& v, float radius);
 
@@ -223,6 +232,25 @@ public:
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
+	//! Enable OpenGL blending. By default, blending is disabled.
+	//! The additional parameters specify the blending mode, the default parameters are suitable for
+	//! "normal" blending operations that you want in most cases. Blending will be automatically disabled when
+	//! the StelPainter is destroyed.
+	void setBlending(bool enableBlending, GLenum blendSrc = GL_SRC_ALPHA, GLenum blendDst = GL_ONE_MINUS_SRC_ALPHA);
+
+	void setDepthTest(bool enable);
+
+	void setDepthMask(bool enable);
+
+	//! Set the OpenGL GL_CULL_FACE state, by default face culling is disabled
+	void setCullFace(bool enable);
+
+	//! Enables/disables line smoothing. By default, smoothing is disabled.
+	void setLineSmooth(bool enable);
+
+	//! Sets the line width. Default is 1.0f.
+	void setLineWidth(float width);
+
 	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
 	static void initGLShaders();
@@ -230,9 +258,6 @@ public:
 	//! Delete the OpenGL shaders objects.
 	//! This method needs to be called once before exit.
 	static void deinitGLShaders();
-
-	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
@@ -258,7 +283,7 @@ public:
 		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
 	}
 
-	//! use instead of glEnableClient
+	//! Simulates glEnableClientState, basically you describe what data the ::drawFromArray call has available
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
 
 	//! convenience method that enable and set all the given arrays.
@@ -286,17 +311,31 @@ private:
 	friend class StelTextureMgr;
 	friend class StelTexture;
 
-	//! RAII class used to store and restore the opengl state.
-	//! to use it we just need to instanciate it at the beginning of a method that might change the state.
-	class GLState
+	//! Helper struct to track the GL state and restore it to canonical values on StelPainter creation/destruction
+	struct GLState
 	{
-	public:
-		GLState();
-		~GLState();
-	private:
+		GLState(QOpenGLFunctions *gl);
+
 		bool blend;
-		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
-	};
+		GLenum blendSrc, blendDst;
+		bool depthTest;
+		bool depthMask;
+		bool cullFace;
+		bool lineSmooth;
+		GLfloat lineWidth;
+
+		//! Applies the values stored here to set the GL state
+		void apply();
+		//! Resets the state to the default values (like a GLState was newly constructed)
+		//! and calls apply()
+		void reset();
+	private:
+		QOpenGLFunctions* gl;
+	} glState;
+
+	// From text-use-opengl-buffer
+	static QCache<QByteArray, struct StringTexture> texCache;
+	struct StringTexture* getTexTexture(const QString& str, int pixelSize);
 
 	//! Struct describing one opengl array
 	typedef struct ArrayDesc
@@ -329,6 +368,7 @@ private:
 
 	// Used by the method below
 	static QVector<Vec2f> smallCircleVertexArray;
+	static QVector<Vec4f> smallCircleColorArray;
 	void drawSmallCircleVertexArray();
 
 	//! The associated instance of projector
@@ -343,7 +383,6 @@ private:
 	QFont currentFont;
 
 	Vec4f currentColor;
-	bool texture2dEnabled;
 	
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {

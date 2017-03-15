@@ -1,0 +1,144 @@
+% Status info:
+% M. Gates	2006-2009
+% A. Wolf	2011-2015
+% ArdWar	2012
+% B. Gerdes	2013
+% Additions inserted from wiki 2015-12-26
+% Content OK for 0.14+.
+% 2016-07: Historical notes added by Fabien.
+% TODO: typo&grammar check
+
+
+\chapter{Introduction}
+\label{ch:Introduction}
+
+\emph{Stellarium} is a software project that allows people to use their
+home computer as a virtual planetarium. It calculates the positions of
+the Sun and Moon, planets and stars, and draws how the sky would look to
+an observer depending on their location and the time. It can also draw
+the constellations and simulate astronomical phenomena such as meteor
+showers or comets, and solar or lunar eclipses.
+
+Stellarium may be used as an educational tool for teaching about the
+night sky, as an observational aid for amateur astronomers wishing to
+plan a night's observing or even drive their telescopes to observing
+targets, or simply as a curiosity (it's fun!). Because of the high
+quality of the graphics that Stellarium produces, it is used in some
+real planetarium projector products and museum projection setups. Some
+amateur astronomy groups use it to create sky maps for describing
+regions of the sky in articles for newsletters and magazines, and the
+exchangeable sky cultures feature invites its use in the field of
+Cultural Astronomy research and outreach.
+
+Stellarium is still under development, and by the time you read
+this guide, a newer version may have been released with even more
+features than those documented here. Check for updates to Stellarium at
+the Stellarium website\footnote{\url{http://stellarium.org}}.
+
+If you have questions and/or comments about this guide, or about
+Stellarium itself, visit the Stellarium site at
+LaunchPad\footnote{\url{https://launchpad.net/stellarium}} or our
+SourceForge
+forums\footnote{\url{https://sourceforge.net/p/stellarium/discussion/278769/}}.
+
+
+\section{Historical notes}
+\label{sec:Introduction:HistoricalNotes}
+
+Fabien Ch\'ereau started the project during the summer 2000, and throughout
+the years found continuous support by a small team of enthusiastic developers.
+
+Here is a list of past and present major contributors sorted roughly by date of
+arrival on the project:
+\newpage
+\begin{description}
+\item[Fabien Ch\'ereau] original creator, maintainer, general development
+\item[Matthew Gates] maintainer, original user guide, user support, general development
+\item[Johannes Gajdosik] astronomical computations, large star catalogs support
+\item[Johan Meuris] GUI design, website creation, drawings of our 88 Western constellations
+\item[Nigel Kerr] Mac OSX port
+\item[Rob Spearman] funding for planetarium support
+\item[Barry Gerdes] user support, tester, Windows support. Barry
+  passed away in October 2014 at age 80. He was a major contributor on
+  the forums, wiki pages and mailing list where his good will and
+  enthusiasm is strongly missed. \ifthenelse{\equal{\StelVersion}{0.15.0}}{Version 0.15 of Stellarium is
+  dedicated in his memory.}{} RIP Barry.
+\item[Timothy Reaves] ocular plugin
+\item[Bogdan Marinov] GUI, telescope control, other plugins
+\item[Diego Marcos] SVMT plugin
+\item[Guillaume Ch\'ereau] display, optimization, Qt upgrades
+\item[Alexander Wolf] maintainer, DSO catalogs, user guide, general development
+\item[Georg Zotti] astronomical computations, Scenery 3D and ArchaeoLines plugins, general development, user guide, user support
+\item[Marcos Cardinot] MeteorShowers plugin
+\item[Florian Schaukowitsch] Scenery 3D plugin, Remote Control plugin, Qt/OpenGL internals
+\end{description}
+
+Unfortunately time is evolving, and most members of the original
+development team are no longer able to devote most of their spare time
+to the project (some are still available for limited work
+which requires specific knowledge about the project).
+
+As of 2016, the project's maintainer is Alexander Wolf, doing most maintenance
+and regular releases. Major new features are contributed mostly by Georg Zotti
+and his team focussing on extensions of Stellarium's applicability in the fields of
+historical and cultural astronomy (which means Stellarium is getting more
+accurate), but also on graphic items like comet tails or the Zodiacal Light.
+
+\vspace{1\baselineskip}
+\noindent A detailed track of development can be found in the
+\file{ChangeLog} file in the installation folder. A few important
+milestones for the project:
+\begin{description}
+\item[2000] first lines of code for the project
+\item[2001-06] first public mention (and users feedbacks!) of the
+  software on the French newsgroup \texttt{fr.sci.astronomie.amateur} 
+  \footnote{\url{https://groups.google.com/d/topic/fr.sci.astronomie.amateur/OT7K8yogRlI/discussion}}
+\item[2003-01] Stellarium reviewed by Astronomy magazine
+\item[2003-07] funding for developing planetarium features (fisheye projection and other features)
+\item[2005-12] use accurate (and fast) planetary model
+\item[2006-05] Stellarium ``Project Of the Month'' on SourceForge
+\item[2006-08] large stars catalogs
+\item[2007-01] funding by ESO for development of professional astronomy extensions (VirGO)
+\item[2007-04] developers' meeting near Munich, Germany
+\item[2007-05] switch to the Qt library as main GUI and general purpose library
+\item[2009-09] plugin system, enabling a lot of new development
+\item[2010-07] Stellarium ported on Maemo mobile device
+\item[2010-11] artificial satellites plugin
+\item[2014-06] high quality satellites and Saturn rings shadows, normal mapping for moon craters
+\item[2014-07] V0.13: adapt to OpenGL evolutions in the Qt framework, now requires more modern graphic hardware than earlier versions
+\item[2015-04] V0.13.3: Scenery 3D plugin
+\item[2015-10] V0.14.0: Accurate precession
+\item[2016-07] V0.15: Remote Control plugin
+\item{2016-12} V0.15.1: AstroCalc, DSS layer, and Stellarium acting as SpoutSender
+\end{description}
+
+Stellarium has been kindly supported by ESA in their Summer of Code in
+Space initiatives, which resulted in better planetary rendering
+(2012), the Meteor Showers plugin (2013) and the web-based remote
+control and an alternative solution for planetary positions based on
+the DE430/DE431 ephemeris (2015).
+
+
+This guide is based on the user guide written by Matthew Gates for
+version 0.10 around 2008. The guide was then ported to the Stellarium
+wiki and continuously updated by Barry Gerdes and Alexander Wolf up to version 0.12. 
+
+The user documentation has been developed further on the Stellarium
+wiki for some time, but without Barry started to fall out of sync with
+the actual program.  We (Alexander and Georg) have ported the texts
+back to \LaTeX{} and updated and added information where necessary. We
+feel now that a single book may be the better format for offline
+reading. The PDF version of this guide has a clickable table of
+contents and clickable hyperlinks.
+
+This new edition of the guide will not contain notes about using
+earlier versions than 0.13 or using very outdated hardware. Some
+references to previous version may still be made for completeness, 
+but if you are using earlier versions
+for particular reasons, please use the older guides.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "guide"
+%%% End: 

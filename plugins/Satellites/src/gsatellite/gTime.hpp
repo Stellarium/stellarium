@@ -50,6 +50,7 @@ static const int KMIN_PER_HR  = 60;
 static const int KMIN_PER_DAY = 1440;
 static const int KHR_PER_DAY  = 60;
 
+//! @ingroup satellites
 class gTimeSpan
 {
 public:

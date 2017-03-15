@@ -5,9 +5,9 @@ ADD_DEFINITIONS(-DBUILD_DYNAMIC_PLUGIN=0)
 ADD_SUBDIRECTORY( src )
 
 IF(APPLE)
-    SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)
+     SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)
 ElSE(APPLE)
-    SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/.stellarium)
+     SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/.stellarium)
 ENDIF(APPLE)
 INSTALL(FILES DESTINATION "modules/SimpleDrawLine")
 

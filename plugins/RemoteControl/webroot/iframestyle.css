@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'DejaVuSans';
+    src: url('dejavusans-webfont.eot');
+    src: url('dejavusans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('dejavusans-webfont.woff2') format('woff2'),
+         url('dejavusans-webfont.woff') format('woff'),
+         url('dejavusans-webfont.ttf') format('truetype'),
+         url('dejavusans-webfont.svg#dejavu_sansbook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'DejaVuSansMono';
+    src: url('dejavusansmono-webfont.eot');
+    src: url('dejavusansmono-webfont.eot?#iefix') format('embedded-opentype'),
+         url('dejavusansmono-webfont.woff2') format('woff2'),
+         url('dejavusansmono-webfont.woff') format('woff'),
+         url('dejavusansmono-webfont.ttf') format('truetype'),
+         url('dejavusansmono-webfont.svg#dejavu_sans_monobook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+	/* font-size: 13px; */
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
+}
+
+::selection {
+    background: rgb(253, 216, 134);
+}
+
+::-moz-selection {
+    background: rgb(253, 216, 134);
+}
+
+/* from normalHtml.css */
+a {
+	color: rgb(162, 140, 66);
+}
+
+/* style for tables with nomenclature (first usage in Tongan starlore) */
+table.nomenclature {
+        margin: 3px auto;
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+}
+
+table.nomenclature tr td, table.nomenclature tr th {
+        padding: 3px;
+}

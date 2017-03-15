@@ -110,20 +110,6 @@ void clearCache()
 	cacheMgr->clear(); // Removes all items from the cache.
 }
 
-void registerPluginsDir(QDir& appDir)
-{
-	QStringList pathes;
-	// Windows
-	pathes << appDir.absolutePath();
-	pathes << appDir.absoluteFilePath("platforms");
-	// OS X
-	appDir.cdUp();	
-	pathes << appDir.absoluteFilePath("plugins");
-	// All systems
-	pathes << QCoreApplication::libraryPaths();
-	QCoreApplication::setLibraryPaths(pathes);
-}
-
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
@@ -140,15 +126,23 @@ int main(int argc, char **argv)
 	}
 #endif
 
+	// Seed the PRNG
+	qsrand(QDateTime::currentMSecsSinceEpoch());
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
-	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
+	#if defined(Q_OS_MAC)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
-	registerPluginsDir(appDir);
+	appDir.cdUp();
+	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("plugins"));
+	#elif defined(Q_OS_WIN)
+	QFileInfo appInfo(QString::fromUtf8(argv[0]));
+	QCoreApplication::addLibraryPath(appInfo.absolutePath());
+	#endif	
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
@@ -160,10 +154,6 @@ int main(int argc, char **argv)
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
 #endif
-	QPixmap pixmap(":/splash.png");
-	QSplashScreen splash(pixmap);
-	splash.show();
-	app.processEvents();
 
 	// QApplication sets current locale, but
 	// we need scanf()/printf() and friends to always work in the C locale,
@@ -173,7 +163,13 @@ int main(int argc, char **argv)
 	// Init the file manager
 	StelFileMgr::init();
 
-	// Log command line arguments
+	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
+	QSplashScreen splash(pixmap);
+	splash.show();
+	splash.showMessage(StelUtils::getApplicationVersion() , Qt::AlignLeft, Qt::white);
+	app.processEvents();
+
+	// Log command line arguments.
 	QString argStr;
 	QStringList argList;
 	for (int i=0; i<argc; ++i)
@@ -181,9 +177,31 @@ int main(int argc, char **argv)
 		argList << argv[i];
 		argStr += QString("%1 ").arg(argv[i]);
 	}
+	// add contents of STEL_OPTS environment variable.
+	QString envStelOpts(qgetenv("STEL_OPTS").constData());
+	if (envStelOpts.length()>0)
+	{
+		argList+= envStelOpts.split(" ");
+		argStr += " " + envStelOpts;
+	}
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version
 	CLIProcessor::parseCLIArgsPreConfig(argList);
+
+	#ifdef Q_OS_WIN
+	#if QT_VERSION >= 0x050300
+	if (qApp->property("onetime_angle_mode").isValid())
+	{
+		app.setAttribute(Qt::AA_UseOpenGLES, true);
+	}
+	#endif
+	#if QT_VERSION >= 0x050400
+	if (qApp->property("onetime_mesa_mode").isValid())
+	{
+		app.setAttribute(Qt::AA_UseSoftwareOpenGL, true);
+	}
+	#endif
+	#endif
 
 	// Start logging.
 	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
@@ -192,7 +210,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2014 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) %1 Fabien Chereau et al.").arg(COPYRIGHT_YEARS);
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -305,7 +323,7 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
 	// Support hi-dpi pixmaps
-	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);	
 
 	// Add the DejaVu font that we use everywhere in the program
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
@@ -344,8 +362,8 @@ int main(int argc, char **argv)
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	StelMainView mainWin;
-	mainWin.init(confSettings); // May exit(0) when OpenGL subsystem insufficient
+	StelMainView mainWin(confSettings);
+	mainWin.show();
 	splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();

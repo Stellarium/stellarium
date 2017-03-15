@@ -2,14 +2,14 @@
 // Name: Sun from different planets
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.0
+// Version: 2.0
 // Description: Look at the Sun from big planets of Solar System and Pluto.
 //
 
 var planets = new Array("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto");
 var atm = new Array(false, true, true, true, true, true, true, true, false);
 var landscapes = new Array("moon", "moon", "garching", "mars", "saturn", "saturn", "saturn", "saturn", "moon");
-var dates = new Array("2012-04-01T12:00:00","2012-10-01T12:00:00","2012-04-01T08:30:00","2012-01-01T11:30:00","2012-10-01T18:30:00","2012-04-01T12:50:00","2012-04-01T11:50:00","2012-10-01T12:00:00","2012-12-01T12:00:00");
+var dates = new Array(2457728.645058,2457463.228403,2457381.978414,2457728.353391,2457728.289502,2453345.164502,2451887.227002,2451887.060336,2457426.060336);
 var psizes = new Array("1°12′33″","0°44′25″","0°32′00″","0°19′19″","0°6′21″","0°3′18″","0°1′36″","0°1′4″","0°0′59″");
 
 var atmosphere = LandscapeMgr.getFlagAtmosphere();
@@ -22,11 +22,12 @@ LabelMgr.deleteAllLabels();
 core.clear("natural");
 core.setGuiVisible(false);
 core.wait(3);
+core.setTimeRate(0);
 
 for (i=0; i<planets.length; i++)
 {
 	core.setObserverLocation(0, 0, 1, 5, "", planets[i]);
-	core.setDate(dates[i], "utc");
+	core.setJDay(dates[i]);
 
 	LandscapeMgr.setFlagAtmosphere(atm[i]);
 	LandscapeMgr.setFlagFog(atm[i]);
@@ -40,6 +41,10 @@ for (i=0; i<planets.length; i++)
 	LabelMgr.setLabelShow(psize, true);
 
 	StelMovementMgr.setFlagTracking(true);
+	core.wait(3);
+	StelMovementMgr.zoomTo(1.8, 1);
+	core.wait(3);
+	StelMovementMgr.zoomTo(120, 1);
 
 	core.wait(5);
 	LabelMgr.setLabelShow(pname, false);

@@ -36,25 +36,28 @@
 #include <QList>
 
 Nova::Nova(const QVariantMap& map)
-		: initialized(false),
-		  designation(""),
-		  novaName(""),
-		  novaType(""),
-		  maxMagnitude(21.),
-		  minMagnitude(21.),
-		  peakJD(0.),
-		  m2(-1),
-		  m3(-1),
-		  m6(-1),
-		  m9(-1),
-		  RA(0.),
-		  Dec(0.),
-		  distance(0.)
+	: initialized(false)
+	, designation("")
+	, novaName("")
+	, novaType("")
+	, maxMagnitude(21.)
+	, minMagnitude(21.)
+	, peakJD(0.)
+	, m2(-1)
+	, m3(-1)
+	, m6(-1)
+	, m9(-1)
+	, RA(0.)
+	, Dec(0.)
+	, distance(0.)
 {
-	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation"))
+	if (!map.contains("designation") || !map.contains("RA") || !map.contains("Dec"))
+	{
+		qWarning() << "Nova: INVALID nova!" << map.value("designation").toString();
+		qWarning() << "Nova: Please, check your 'novae.json' catalog!";
 		return;
-		
+	}
+
 	designation  = map.value("designation").toString();
 	novaName = map.value("name").toString();
 	novaType = map.value("type").toString();
@@ -167,7 +170,7 @@ float Nova::getVMagnitude(const StelCore* core) const
 {
 	// OK, start from minimal brightness
 	double vmag = minMagnitude;
-	double currentJD = core->getJDay();
+	double currentJD = core->getJDE();
 	double deltaJD = qAbs(peakJD-currentJD);
     
 	// Fill "default" values for mX
@@ -308,7 +311,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	{
 		sd->computeRCMag(mag, &rcMag);
 		sd->drawPointSource(painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, false);
-		painter->setColor(color[0], color[1], color[2], 1);
+		painter->setColor(color[0], color[1], color[2], 1.f);
 		size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())

@@ -37,6 +37,7 @@ $URL	= "http://exoplanet.eu/catalog/csv/";
 $CSV	= "./exoplanets.csv";
 $JSON	= "./exoplanets.json";
 $HCSV	= "./habitable.csv";
+$NCSV	= "./names.csv";
 $CNT	= "./count";
 
 $CATALOG_FORMAT_VERSION = 1;
@@ -47,7 +48,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.7; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.8; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -77,6 +78,22 @@ for ($i=1;$i<scalar(@habitable);$i++) {
 	@hdata = $csvdata->fields();
 	%hs = (%hs, $hdata[1], 1);
 	%hp = (%hp, $hdata[1]." ".$hdata[2], $habitable[$i]);
+}
+
+open (NCSV, "<$NCSV");
+@propname = <NCSV>;
+close NCSV;
+
+%pns = ();
+%pnp = ();
+for ($i=1;$i<scalar(@propname);$i++) {
+	$status  = $csvdata->parse($propname[$i]);
+	@pndata = $csvdata->fields();
+	if ($pndata[1] eq '') {
+	    %pns = (%pns, $pndata[0], $propname[$i]);
+	} else {
+	    %pnp = (%pnp, $pndata[0]." ".$pndata[1], $propname[$i]);
+	}
 }
 
 open (CSV, "<$CSV");
@@ -191,9 +208,100 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$outDE = "-".$outDE;
 	}
 
+	# fixed proper names of stars
+	$starname =~ s/Fomalhaut/alpha PsA/gi;
+	$starname =~ s/Aldebaran/alpha Tau/gi;
+	$starname =~ s/Pollux/beta Gem/gi;
+	$starname =~ s/PSR 1257 12/PSR B1257+12/gi;
+	$starname =~ s/PSR 1719-14/PSR B1719-14/gi;
+	# fixed designations of stars
+	$starname =~ s/Eridani/Eri/gi;
+	$starname =~ s/Cephei/Cep/gi;
 	
-	$sname = $starname;
+	if (($sRA != 0.0) && ($sDec != 0.0) && ($starname ne '')) {
+		# check star
+		$sth = $dbh->prepare(q{SELECT sid,sname FROM stars WHERE ra_coord=? AND dec_coord=?});
+		$sth->execute($outRA, $outDE);
+		@starDATA = $sth->fetchrow_array();
+		# get star ID
+		if (scalar(@starDATA)!=0) {
+			$starID   = @starDATA[0];
+			$starName = @starDATA[1];
+		} else {
+			$HPflag = 0;
+			if (exists($hs{$starname})) {
+				$HPflag = 1;
+			}
+			$sProperName = '';
+			if (exists($pns{$starname})) {
+				$status  = $csvdata->parse($pns{$starname});
+				($hssname,$hspname,$sProperName) = $csvdata->fields();
+			}
+			# insert star data
+			$sth = $dbh->do(q{INSERT INTO stars (ra_coord,dec_coord,sname,propername,distance,stype,smass,smetal,vmag,sradius,sefftemp,has_habit_planet) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $outRA, $outDE, $starname, $sProperName, $sdist, $sstype, $smass, $smetal, $sVmag, $sradius, $sefftemp, $HPflag);
+			$sth = $dbh->prepare(q{SELECT sid,sname FROM stars ORDER BY sid DESC LIMIT 0,1});
+			$sth->execute();
+			@starDATA = $sth->fetchrow_array();
+			$starID   = @starDATA[0];
+			$starName = @starDATA[1];
+		}
+		
+		$hclass = '';
+		$hptype = '';
+		$mstemp = -1;
+		$eqtemp = -1;
+		$esi    = -1;
+		
+		$key = $starName." ".$pname;
+		if (exists($hp{$key})) {
+			$status  = $csvdata->parse($hp{$key});
+			($hsn,$hsname,$hpname,$hptype,$eqtemp,$esi) = $csvdata->fields();
+		}
+		$pProperName = '';
+		if (exists($pnp{$key})) {
+			$status  = $csvdata->parse($pnp{$key});
+			($hsname,$hpname,$pProperName) = $csvdata->fields();
+		}
+		
+		# insert planet data
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,propername,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hptype,eqtemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pProperName, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hptype, $eqtemp, $esi);
+	}
+#	else
+#	{
+#		print $sname.": ".$sRA.":".$sDec." [".$currdata."]\n";
+#	}
+}
 
+open (JSON, ">$JSON");
+print JSON "{\n";
+print JSON "\t\"version\": \"".$CATALOG_FORMAT_VERSION."\",\n";
+print JSON "\t\"shortName\": \"A catalogue of stars with exoplanets\",\n";
+print JSON "\t\"stars\":\n";
+print JSON "\t{\n";
+
+$sth = $dbh->prepare(q{SELECT COUNT(sid) FROM stars});
+$sth->execute();
+@scountraw = $sth->fetchrow_array();
+$scount = @scountraw[0];
+$i = 0;
+
+$sth = $dbh->prepare(q{SELECT * FROM stars});
+$sth->execute();
+while (@stars = $sth->fetchrow_array()) {
+	$sid		= $stars[0];
+	$RA		= $stars[1];
+	$DE		= $stars[2];
+	$sname		= $stars[3];
+	$spropname	= $stars[4];
+	$sdist		= $stars[5];
+	$sstype		= $stars[6];
+	$smass		= $stars[7];
+	$smetal		= $stars[8];
+	$sVmag		= $stars[9];
+	$sradius	= $stars[10];
+	$sefftemp	= $stars[11];
+	$hasHabitPl	= $stars[12];
+	
 	$sname =~ s/^alpha/α/gi;
 	$sname =~ s/^alf/α/gi;
 	$sname =~ s/^beta/β/gi;
@@ -223,79 +331,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^psi/ψ/gi;
 	$sname =~ s/^omega/ω/gi;
 	$sname =~ s/^ome/ω/gi;
-	
-	if (($sRA != 0.0) && ($sDec != 0.0) && ($sname ne '')) {
-		# check star
-		$sth = $dbh->prepare(q{SELECT sid,sname FROM stars WHERE ra_coord=? AND dec_coord=?});
-		$sth->execute($outRA, $outDE);
-		@starDATA = $sth->fetchrow_array();
-		# get star ID
-		if (scalar(@starDATA)!=0) {
-			$starID   = @starDATA[0];
-			$starName = @starDATA[1];
-		} else {
-			$HPflag = 0;
-			if (exists($hs{$sname})) {
-				$HPflag = 1;
-			}
-			# insert star data
-			$sth = $dbh->do(q{INSERT INTO stars (ra_coord,dec_coord,sname,distance,stype,smass,smetal,vmag,sradius,sefftemp,has_habit_planet) VALUES (?,?,?,?,?,?,?,?,?,?,?)}, undef, $outRA, $outDE, $sname, $sdist, $sstype, $smass, $smetal, $sVmag, $sradius, $sefftemp, $HPflag);
-			$sth = $dbh->prepare(q{SELECT sid,sname FROM stars ORDER BY sid DESC LIMIT 0,1});
-			$sth->execute();
-			@starDATA = $sth->fetchrow_array();
-			$starID   = @starDATA[0];
-			$starName = @starDATA[1];
-		}
-		
-		$hclass = '';
-		$hptype = '';
-		$mstemp = -1;
-		$eqtemp = -1;
-		$esi    = -1;
-		
-		$key = $starName." ".$pname;
-		if (exists($hp{$key})) {
-			$status  = $csvdata->parse($hp{$key});
-			($hsn,$hsname,$hpname,$hptype,$eqtemp,$esi) = $csvdata->fields();
-		}
-		
-		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hptype,eqtemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hptype, $eqtemp, $esi);
-	}
-#	else
-#	{
-#		print $sname.": ".$sRA.":".$sDec." [".$currdata."]\n";
-#	}
-}
 
-open (JSON, ">$JSON");
-print JSON "{\n";
-print JSON "\t\"version\": \"".$CATALOG_FORMAT_VERSION."\",\n";
-print JSON "\t\"shortName\": \"A catalogue of stars with exoplanets\",\n";
-print JSON "\t\"stars\":\n";
-print JSON "\t{\n";
-
-$sth = $dbh->prepare(q{SELECT COUNT(sid) FROM stars});
-$sth->execute();
-@scountraw = $sth->fetchrow_array();
-$scount = @scountraw[0];
-$i = 0;
-
-$sth = $dbh->prepare(q{SELECT * FROM stars});
-$sth->execute();
-while (@stars = $sth->fetchrow_array()) {
-	$sid		= $stars[0];
-	$RA		= $stars[1];
-	$DE		= $stars[2];
-	$sname		= $stars[3];
-	$sdist		= $stars[4];
-	$sstype		= $stars[5];
-	$smass		= $stars[6];
-	$smetal		= $stars[7];
-	$sVmag		= $stars[8];
-	$sradius	= $stars[9];
-	$sefftemp	= $stars[10];
-	$hasHabitPl	= $stars[11];
 	
 	if ($sname eq "Kapteyn's") {
 		$sname .= " Star"; # cosmetic fix for translation support
@@ -317,17 +353,18 @@ while (@stars = $sth->fetchrow_array()) {
 	while(@planets = $stp->fetchrow_array()) {
 		$pid		= $planets[0];
 		$pname		= $planets[2];
-		$pmass		= $planets[3];
-		$pradius	= $planets[4];
-		$pperiod	= $planets[5];
-		$psemiax	= $planets[6];
-		$pecc		= $planets[7];
-		$pinc		= $planets[8];
-		$angdist	= $planets[9];
-		$discovered	= $planets[10];
-		$hpltype	= $planets[11];
-		$eqktemp	= $planets[12];
-		$esindex	= $planets[13];
+		$ppropname	= $planets[3];
+		$pmass		= $planets[4];
+		$pradius	= $planets[5];
+		$pperiod	= $planets[6];
+		$psemiax	= $planets[7];
+		$pecc		= $planets[8];
+		$pinc		= $planets[9];
+		$angdist	= $planets[10];
+		$discovered	= $planets[11];
+		$hpltype	= $planets[12];
+		$eqktemp	= $planets[13];
+		$esindex	= $planets[14];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
@@ -362,6 +399,9 @@ while (@stars = $sth->fetchrow_array()) {
 		}
 		if ($esindex > 0) {
 			$out .= "\t\t\t\t\"ESI\": ".$esindex.",\n";
+		}
+		if ($ppropname ne '') {
+			$out .= "\t\t\t\t\"planetProperName\": \"".$ppropname."\",\n";
 		}
 		if ($pname eq '') {
 			$pname = "a";
@@ -399,6 +439,9 @@ while (@stars = $sth->fetchrow_array()) {
 	}
 	if ($hasHabitPl > 0) {
 		$out .= "\t\t\t\"hasHP\": true,\n";
+	}
+	if ($spropname ne '') {
+		$out .= "\t\t\t\"starProperName\": \"".$spropname."\",\n";
 	}
 	$out .= "\t\t\t\"RA\": \"".$RA."\",\n";
 	$out .= "\t\t\t\"DE\": \"".$DE."\"\n";

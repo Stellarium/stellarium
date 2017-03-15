@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "Scenery3dDialog.hpp"
@@ -34,7 +34,7 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent), mgr(NULL)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(NULL)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
@@ -89,6 +89,7 @@ void Scenery3dDialog::createDialogContent()
 
 	//connect UI events
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->scenery3dListWidget, &QListWidget::currentItemChanged, this, &Scenery3dDialog::scenery3dChanged);
 
 	//checkboxes can connect directly to manager

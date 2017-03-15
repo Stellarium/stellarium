@@ -53,6 +53,11 @@ class ZodiacalLight : public StelModule
 		   READ getFlagShow
 		   WRITE setFlagShow
 		   NOTIFY zodiacalLightDisplayedChanged)
+	Q_PROPERTY(double intensity
+		   READ getIntensity
+		   WRITE setIntensity
+		   NOTIFY intensityChanged
+		   )
 
 public:
 	ZodiacalLight();
@@ -72,8 +77,9 @@ public:
 	//! Zodiacal Light rendering is being changed from on to off or off to on.
 	virtual void update(double deltaTime);
 	
-	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, we use 6.
-	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 6.;}
+	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, TOAST=7, we use 8.
+	//! Other actions return 0 for "nothing special".
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
@@ -81,25 +87,36 @@ public slots:
 	//! Get Zodiacal Light intensity.
 	double getIntensity() const {return intensity;}
 	//! Set Zodiacal Light intensity.
-	void setIntensity(double aintensity) {intensity = aintensity;}
+	//! @param aintensity intensity of Zodiacal Light
+	void setIntensity(double aintensity) {if(aintensity!=intensity){intensity = aintensity; emit intensityChanged(intensity);}}
 	
 	//! Get the color used for rendering the Zodiacal Light
 	Vec3f getColor() const {return color;}
 	//! Sets the color to use for rendering the Zodiacal Light
+	//! @param c The color to use for rendering the Zodiacal Light
+	//! @code
+	//! // example of usage in scripts
+	//! ZodiacalLight.setColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColor(const Vec3f& c) {color=c;}
 	
 	//! Sets whether to show the Zodiacal Light
+	//! @code
+	//! // example of usage in scripts
+	//! ZodiacalLight.setFlagShow(true);
+	//! @endcode
 	void setFlagShow(bool b);
 	//! Gets whether the Zodiacal Light is displayed
 	bool getFlagShow(void) const;
 
 signals:
 	void zodiacalLightDisplayedChanged(const bool displayed);
+	void intensityChanged(double intensity);
 	
 private:
 	StelTextureSP tex;
 	Vec3f color; // global color
-	float intensity;
+	double intensity;
 	class LinearFader* fader;
 	double lastJD; // keep date of last computation. Position will be updated only if far enough away from last computation.
 

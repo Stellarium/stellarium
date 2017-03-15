@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,10 +34,9 @@
 #include <QDebug>
 #include <QStringList>
 
-StelObjectMgr::StelObjectMgr() : searchRadiusPixel(25.f), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.f), distanceWeight(1.f)
 {
 	setObjectName("StelObjectMgr");
-	objectPointerVisibility = true;
 }
 
 StelObjectMgr::~StelObjectMgr()
@@ -242,41 +242,22 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 	return result;
 }
 
-
-/*************************************************************************
- Find and return the list of at most maxNbItem objects auto-completing
- passed object I18 name
-*************************************************************************/
-QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
+/*****************************************************************************************
+ Find and return the list of at most maxNbItem objects auto-completing passed object name
+*******************************************************************************************/
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-
-	// For all StelObjectmodules..
-	foreach (const StelObjectModule* m, objectsModule)
+	if (maxNbItem <= 0)
 	{
-		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
-		result += matchingObj;
-		maxNbItem-=matchingObj.size();
+		return result;
 	}
 
-	result.sort();
-	return result;
-}
-
-/*************************************************************************
- Find and return the list of at most maxNbItem objects auto-completing
- passed object English name
-*************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-
 	// For all StelObjectmodules..
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
@@ -340,21 +321,39 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["SolarSystem:dwarf planet"] = "Dwarf planets";
 			result["SolarSystem:scattered disc object"] = "Scattered disc objects";
 			result["SolarSystem:Oort cloud object"] = "Oort cloud objects";
+			result["SolarSystem:sednoid"] = "Sednoids";
 		}
-		// Deep-sky objects by type + couple amateur catalogue
+		// Deep-sky objects by type + amateur catalogues
 		if (m->objectName()=="NebulaMgr")
 		{
 			result["NebulaMgr:0"] = "Bright galaxies";
-			result["NebulaMgr:1"] = "Open star clusters";
-			result["NebulaMgr:2"] = "Globular star clusters";
-			result["NebulaMgr:3"] = "Nebulae";
-			result["NebulaMgr:4"] = "Planetary nebulae";
-			result["NebulaMgr:5"] = "Dark nebulae";
-			result["NebulaMgr:6"] = "Irregular galaxies";
-			result["NebulaMgr:7"] = "Clusters associated with nebulosity";
-			result["NebulaMgr:9"] = "HII regions";
-			result["NebulaMgr:10"] = "Reflection nebulae";
-			result["NebulaMgr:11"] = "H-α emission regions";
+			result["NebulaMgr:1"] = "Active galaxies";
+			result["NebulaMgr:2"] = "Radio galaxies";
+			result["NebulaMgr:3"] = "Interacting galaxies";
+			result["NebulaMgr:4"] = "Bright quasars";
+			result["NebulaMgr:5"] = "Star clusters";
+			result["NebulaMgr:6"] = "Open star clusters";
+			result["NebulaMgr:7"] = "Globular star clusters";
+			result["NebulaMgr:8"] = "Stellar associations";
+			result["NebulaMgr:9"] = "Star clouds";
+			result["NebulaMgr:10"] = "Nebulae";
+			result["NebulaMgr:11"] = "Planetary nebulae";
+			result["NebulaMgr:12"] = "Dark nebulae";
+			result["NebulaMgr:13"] = "Reflection nebulae";
+			result["NebulaMgr:14"] = "Bipolar nebulae";
+			result["NebulaMgr:15"] = "Emission nebulae";
+			result["NebulaMgr:16"] = "Clusters associated with nebulosity";
+			result["NebulaMgr:17"] = "HII regions";			
+			result["NebulaMgr:18"] = "Supernova remnants";
+			result["NebulaMgr:19"] = "Interstellar matter";
+			result["NebulaMgr:20"] = "Emission objects";
+			result["NebulaMgr:21"] = "BL Lac objects";
+			result["NebulaMgr:22"] = "Blazars";
+			result["NebulaMgr:23"] = "Molecular Clouds";
+			result["NebulaMgr:24"] = "Young Stellar Objects";
+			result["NebulaMgr:25"] = "Possible Quasars";
+			result["NebulaMgr:26"] = "Possible Planetary Nebulae";
+			result["NebulaMgr:27"] = "Protoplanetary Nebulae";
 			result["NebulaMgr:100"] = "Messier Catalogue";
 			result["NebulaMgr:101"] = "Caldwell Catalogue";
 			result["NebulaMgr:102"] = "Barnard Catalogue";
@@ -363,6 +362,14 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
 			result["NebulaMgr:106"] = "Collinder Catalogue";
 			result["NebulaMgr:107"] = "Melotte Catalogue";
+			result["NebulaMgr:150"] = "Dwarf galaxies";
+			result["NebulaMgr:151"] = "Herschel 400 Catalogue";
+		}
+		// Interesting stars
+		if (m->objectName()=="StarMgr")
+		{
+			result["StarMgr:0"] = "Interesting double stars";
+			result["StarMgr:1"] = "Interesting variable stars";
 		}
 	}
 	return result;

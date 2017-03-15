@@ -82,7 +82,7 @@ void GetElp82bCoor(double jd,double xyz[3]);
      
 
 #ifdef __cplusplus
-};
+}
 #endif
 
 #endif

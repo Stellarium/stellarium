@@ -67,7 +67,7 @@ public:
 	//! unambigiously identifies one and only one file on multi-root OSes), it will
 	//! be tested for compliance with other conditions - the regular search path will
 	//! not be tested.
-	//! If you wish to search for a non-exiting file which is not in the search path
+	//! If you wish to search for a non-existing file which is not in the search path
 	//! you should explicitly prefix it with "./", or otherwise have a . at the start of
 	//! the path parameter, e.g. path="./my_config_file_in_the_pwd.ini"
 	//! @param path the name of the file to search for, for example "textures/fog.png".

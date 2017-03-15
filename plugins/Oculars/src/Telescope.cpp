@@ -26,6 +26,7 @@ Telescope::Telescope()
 	, m_focalLength(0.)
 	, m_hFlipped(false)
 	, m_vFlipped(false)
+	, m_equatorial(false)
 {
 }
 
@@ -35,6 +36,7 @@ Telescope::Telescope(const QObject& other)
 	, m_focalLength(other.property("focalLength").toDouble())
 	, m_hFlipped(other.property("hFlipped").toBool())
 	, m_vFlipped(other.property("vFlipped").toBool())
+	, m_equatorial(other.property("equatorial").toBool())
 {
 }
 
@@ -52,6 +54,7 @@ QMap<int, QString> Telescope::propertyMap()
 		mapping[2] = "focalLength";
 		mapping[3] = "hFlipped";
 		mapping[4] = "vFlipped";
+		mapping[5] = "equatorial";
 	}
 	return mapping;
 }
@@ -112,6 +115,16 @@ void Telescope::setVFlipped(bool flipped)
 	m_vFlipped = flipped;
 }
 
+bool Telescope::isEquatorial() const
+{
+	return m_equatorial;
+}
+
+void Telescope::setEquatorial(bool eq)
+{
+	m_equatorial = eq;
+}
+
 void Telescope::writeToSettings(QSettings * settings, const int index)
 {
 	QString prefix = "telescope/" + QVariant(index).toString() + "/";
@@ -120,6 +133,7 @@ void Telescope::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "diameter", this->diameter());
 	settings->setValue(prefix + "hFlip", this->isHFlipped());
 	settings->setValue(prefix + "vFlip", this->isVFlipped());
+	settings->setValue(prefix + "equatorial", this->isEquatorial());
 }
 
 /* ********************************************************************* */
@@ -139,7 +153,7 @@ Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescop
 	telescope->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
 	telescope->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
 	telescope->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
-	
+	telescope->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
 	return telescope;
 }
 Telescope* Telescope::telescopeModel()
@@ -150,5 +164,6 @@ Telescope* Telescope::telescopeModel()
 	model->setFocalLength(500);
 	model->setHFlipped(true);
 	model->setVFlipped(true);
+	model->setEquatorial(true);
 	return model;
 }

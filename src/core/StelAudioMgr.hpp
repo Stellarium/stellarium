@@ -34,11 +34,23 @@ public:
 	~StelAudioMgr();
 
 public slots:
+	//! Load sound file to be accessed under ID.
+	//! If id has been defined already, replace the old sound object.
 	void loadSound(const QString& filename, const QString& id);
+	//! Play sound with id previously loaded with loadSound. Prints warning to logfile if id not found.
+	//! If sound is already playing, restart it. If sound had been paused previously, continue replay.
 	void playSound(const QString& id);
+	//! Pauses replay of sound id. Prints warning to logfile if id not found.
 	void pauseSound(const QString& id);
+	//! Stops replay of sound id. Prints warning to logfile if id not found.
 	void stopSound(const QString& id);
+	//! remove audio object from memory. Prints warning to logfile if id not found.
 	void dropSound(const QString& id);
+	//! report position (in ms) in running audio track id, or -1 if this is not possible.
+	qint64 position(const QString& id);
+	//! report duration (in ms) in running audio track id, 0 if unknown (before playback starts!), or -1 if this is not possible.
+	//! @note duration may only be detected after playback has started! Call it a second after that.
+	qint64 duration(const QString& id);
 
 private:
 	QMap<QString, QMediaPlayer*> audioObjects;

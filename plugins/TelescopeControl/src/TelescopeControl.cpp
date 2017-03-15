@@ -131,7 +131,7 @@ void TelescopeControl::init()
 		loadDeviceModels();
 		if(deviceModels.isEmpty())
 		{
-			qWarning() << "TelescopeControl: No device model descriptions have been loaded. Stellarium will not be able to control a telescope on its own, but it is still possible to do it through an external application or to connect to a remote host.";
+			qWarning() << "[TelescopeControl] No device model descriptions have been loaded. Stellarium will not be able to control a telescope on its own, but it is still possible to do it through an external application or to connect to a remote host.";
 		}
 		
 		//Unload Stellarium's internal telescope control module
@@ -151,9 +151,13 @@ void TelescopeControl::init()
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
+		QSignalMapper* slewObj = new QSignalMapper(this);
+		QSignalMapper* slewDir = new QSignalMapper(this);
+
 		//Create telescope key bindings
 		/* StelAction-s with these key bindings existed in Stellarium prior to
 			revision 6311. Any future backports should account for that. */
+		QString section = N_("Telescope Control");
 		for (int i = MIN_SLOT_NUMBER; i <= MAX_SLOT_NUMBER; i++)
 		{
 			// "Slew to object" commands
@@ -161,14 +165,18 @@ void TelescopeControl::init()
 			QString shortcut = QString("Ctrl+%1").arg(i);
 			QString text;
 			text = q_("Move telescope #%1 to selected object").arg(i);
-			addAction(name, N_("Telescope Control"), text, "slewTelescopeToSelectedObject()", shortcut);
+			StelAction* actionSlewObj = addAction(name, section, text, slewObj, "map()", shortcut);
+			slewObj->setMapping(actionSlewObj, i);
 
 			// "Slew to the center of the screen" commands
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			addAction(name, N_("Telescope Control"), text, "slewTelescopeToViewDirection()", shortcut);
+			StelAction* actionSlewDir = addAction(name, section, text, slewDir, "map()", shortcut);
+			slewDir->setMapping(actionSlewDir, i);
 		}
+		connect(slewObj,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToSelectedObject(int)));
+		connect(slewDir,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToViewDirection(int)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));
 	
@@ -192,16 +200,11 @@ void TelescopeControl::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "TelescopeControl::init() error: " << e.what();
+		qWarning() << "[TelescopeControl] init() error: " << e.what();
 		return;
 	}
 	
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
-	
-	//Initialize style, as it is not called at startup:
-	//(necessary to initialize the reticle/label/circle colors)
-	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 }
 
 void TelescopeControl::translateActionDescriptions()
@@ -233,14 +236,14 @@ void TelescopeControl::deinit()
 	while(iterator != telescopeServerProcess.constEnd())
 	{
 		int slotNumber = iterator.key();
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 		telescopeServerProcess[slotNumber]->close();
 #else
 		telescopeServerProcess[slotNumber]->terminate();
 #endif
 		telescopeServerProcess[slotNumber]->waitForFinished();
 		delete telescopeServerProcess[slotNumber];
-		qDebug() << "TelescopeControl::deinit(): Server process at slot" << slotNumber << "terminated successfully.";
+		qDebug() << "[TelescopeControl] deinit(): Server process at slot" << slotNumber << "terminated successfully.";
 
 		++iterator;
 	}
@@ -264,10 +267,7 @@ void TelescopeControl::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	reticleTexture->bind();
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	reticleTexture->bind();	
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
@@ -279,15 +279,14 @@ void TelescopeControl::draw(StelCore* core)
 				if (circleFader.getInterstate() >= 0)
 				{
 					sPainter.setColor(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
-					glDisable(GL_TEXTURE_2D);
 					foreach (double circle, telescope->getOculars())
 					{
 						sPainter.drawCircle(XY[0], XY[1], 0.5 * prj->getPixelPerRadAtCenter() * (M_PI/180) * (circle));
 					}
-					glEnable(GL_TEXTURE_2D);
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
+					sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 					sPainter.setColor(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
@@ -307,24 +306,6 @@ void TelescopeControl::draw(StelCore* core)
 
 	if(GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(prj, core, sPainter);
-}
-
-void TelescopeControl::setStelStyle(const QString& section)
-{
-	if (section == "night_color")
-	{
-		setLabelColor(labelNightColor);
-		setReticleColor(reticleNightColor);
-		setCircleColor(circleNightColor);
-	}
-	else
-	{
-		setLabelColor(labelNormalColor);
-		setReticleColor(reticleNormalColor);
-		setCircleColor(circleNormalColor);
-	}
-
-	telescopeDialog->updateStyle();
 }
 
 double TelescopeControl::getCallOrder(StelModuleActionName actionName) const
@@ -377,76 +358,6 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 	return 0;
 }
 
-QStringList TelescopeControl::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString tn;
-	bool find;
-	foreach (const TelescopeClientP& telescope, telescopeClients)
-	{
-		tn = telescope->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
-				find = true;
-		}
-		else
-		{
-			if (tn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << tn;
-		}
-	}
-	result.sort();
-	if (result.size()>maxNbItem)
-	{
-		result.erase(result.begin() + maxNbItem, result.end());
-	}
-	return result;
-}
-
-QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (maxNbItem==0)
-		return result;
-
-	QString tn;
-	bool find;
-	foreach (const TelescopeClientP& telescope, telescopeClients)
-	{
-		tn = telescope->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
-				find = true;
-		}
-		else
-		{
-			if (tn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << tn;
-		}
-	}
-	result.sort();
-	if (result.size()>maxNbItem)
-	{
-		result.erase(result.begin() + maxNbItem, result.end());
-	}
-	return result;
-}
-
 bool TelescopeControl::configureGui(bool show)
 {
 	if(show)
@@ -465,13 +376,8 @@ void TelescopeControl::setFontSize(int fontSize)
 	labelFont.setPixelSize(fontSize);
 }
 
-void TelescopeControl::slewTelescopeToSelectedObject()
+void TelescopeControl::slewTelescopeToSelectedObject(const int idx)
 {
-	// Find out for which telescope is the command
-	if (sender() == NULL)
-		return;
-	int slotNumber = sender()->objectName().right(1).toInt();
-
 	// Find out the coordinates of the target
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	if (omgr->getSelectedObject().isEmpty())
@@ -483,21 +389,15 @@ void TelescopeControl::slewTelescopeToSelectedObject()
 
 	Vec3d objectPosition = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 
-	telescopeGoto(slotNumber, objectPosition);
+	telescopeGoto(idx, objectPosition);
 }
 
-void TelescopeControl::slewTelescopeToViewDirection()
+void TelescopeControl::slewTelescopeToViewDirection(const int idx)
 {
-	// Find out for which telescope is the command
-	if (sender() == NULL)
-		return;
-	// XXX: we could use a QSignalMapper instead of this trick.
-	int slotNumber = sender()->objectName().right(1).toInt();
-
 	// Find out the coordinates of the target
 	Vec3d centerPosition = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 
-	telescopeGoto(slotNumber, centerPosition);
+	telescopeGoto(idx, centerPosition);
 }
 
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
@@ -519,9 +419,7 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		const Vec3f& c(obj->getInfoColor());
 		sPainter.setColor(c[0], c[1], c[2]);
 		selectionTexture->bind();
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
 	}
 #endif //COMPATIBILITY_001002
@@ -594,7 +492,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	QDir serverDirectory(serverExecutablesDirectoryPath);
 	if(!serverDirectory.exists())
 	{
-		qWarning() << "TelescopeControl: No telescope server directory has been found.";
+		qWarning() << "[TelescopeControl] No telescope server directory has been found.";
 		return;
 	}
 	QList<QFileInfo> telescopeServerExecutables = serverDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
@@ -605,8 +503,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	}
 	else
 	{
-		qWarning() << "TelescopeControl: No telescope server executables found in"
-							 << serverExecutablesDirectoryPath;
+		qWarning() << "[TelescopeControl] No telescope server executables found in" << serverExecutablesDirectoryPath;
 	}
 }
 
@@ -627,19 +524,16 @@ void TelescopeControl::loadConfiguration()
 	setFlagTelescopeCircles(settings->value("flag_telescope_circles", true).toBool());
 
 	//Load font size
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	setFontSize(settings->value("telescope_labels_font_size", 13).toInt()); //Windows Qt bug workaround
 #else
 	setFontSize(settings->value("telescope_labels_font_size", 12).toInt());
 #endif
 
 	//Load colours
-	reticleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString());
-	reticleNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_reticles", "0.5,0,0").toString());
-	labelNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString());
-	labelNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_labels", "0.5,0,0").toString());
-	circleNormalColor = StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString());
-	circleNightColor = StelUtils::strToVec3f(settings->value("night_color_telescope_circles", "0.5,0,0").toString());
+	setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
+	setLabelColor(StelUtils::strToVec3f(settings->value("color_telescope_labels", "0.6,0.4,0").toString()));
+	setCircleColor(StelUtils::strToVec3f(settings->value("color_telescope_circles", "0.6,0.4,0").toString()));
 
 	//Load server executables flag and directory
 	useServerExecutables = settings->value("flag_use_server_executables", false).toBool();
@@ -681,12 +575,9 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_telescope_circles", getFlagTelescopeCircles());
 
 	//Save colours
-	settings->setValue("color_telescope_reticles", QString("%1,%2,%3").arg(reticleNormalColor[0], 0, 'f', 2).arg(reticleNormalColor[1], 0, 'f', 2).arg(reticleNormalColor[2], 0, 'f', 2));
-	settings->setValue("night_color_telescope_reticles", QString("%1,%2,%3").arg(reticleNightColor[0], 0, 'f', 2).arg(reticleNightColor[1], 0, 'f', 2).arg(reticleNightColor[2], 0, 'f', 2));
-	settings->setValue("color_telescope_labels", QString("%1,%2,%3").arg(labelNormalColor[0], 0, 'f', 2).arg(labelNormalColor[1], 0, 'f', 2).arg(labelNormalColor[2], 0, 'f', 2));
-	settings->setValue("night_color_telescope_labels", QString("%1,%2,%3").arg(labelNightColor[0], 0, 'f', 2).arg(labelNightColor[1], 0, 'f', 2).arg(labelNightColor[2], 0, 'f', 2));
-	settings->setValue("color_telescope_circles", QString("%1,%2,%3").arg(circleNormalColor[0], 0, 'f', 2).arg(circleNormalColor[1], 0, 'f', 2).arg(circleNormalColor[2], 0, 'f', 2));
-	settings->setValue("night_color_telescope_circles", QString("%1,%2,%3").arg(circleNightColor[0], 0, 'f', 2).arg(circleNightColor[1], 0, 'f', 2).arg(circleNightColor[2], 0, 'f', 2));
+	settings->setValue("color_telescope_reticles", StelUtils::vec3fToHtmlColor(getReticleColor()));
+	settings->setValue("color_telescope_labels", StelUtils::vec3fToHtmlColor(getLabelColor()));
+	settings->setValue("color_telescope_circles", StelUtils::vec3fToHtmlColor(getCircleColor()));
 
 	//Save telescope server executables flag and directory
 	settings->setValue("flag_use_server_executables", useServerExecutables);
@@ -703,6 +594,16 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_enable_telescope_logs", useTelescopeServerLogs);
 
 	settings->endGroup();
+
+	// Remove outdated config items
+	if (settings->contains("TelescopeControl/night_color_telescope_reticles"))
+		settings->remove("TelescopeControl/night_color_telescope_reticles");
+
+	if (settings->contains("TelescopeControl/night_color_telescope_labels"))
+		settings->remove("TelescopeControl/night_color_telescope_labels");
+
+	if (settings->contains("TelescopeControl/night_color_telescope_circles"))
+		settings->remove("TelescopeControl/night_color_telescope_circles");
 }
 
 void TelescopeControl::saveTelescopes()
@@ -711,13 +612,13 @@ void TelescopeControl::saveTelescopes()
 	QString telescopesJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/telescopes.json";
 	if (telescopesJsonPath.isEmpty())
 	{
-		qWarning() << "TelescopeControl: Error saving telescopes";
+		qWarning() << "[TelescopeControl] Error saving telescopes";
 		return;
 	}
 	QFile telescopesJsonFile(telescopesJsonPath);
 	if(!telescopesJsonFile.open(QFile::WriteOnly|QFile::Text))
 	{
-		qWarning() << "TelescopeControl: Telescopes can not be saved. A file can not be open for writing:" << QDir::toNativeSeparators(telescopesJsonPath);
+		qWarning() << "[TelescopeControl] Telescopes can not be saved. A file can not be open for writing:" << QDir::toNativeSeparators(telescopesJsonPath);
 		return;
 	}
 
@@ -737,12 +638,12 @@ void TelescopeControl::loadTelescopes()
 	QString telescopesJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/telescopes.json";
 	if (telescopesJsonPath.isEmpty())
 	{
-		qWarning() << "TelescopeControl: Error loading telescopes";
+		qWarning() << "[TelescopeControl] Error loading telescopes";
 		return;
 	}
 	if(!QFileInfo(telescopesJsonPath).exists())
 	{
-		qWarning() << "TelescopeControl::loadTelescopes(): No telescopes loaded. File is missing:" << QDir::toNativeSeparators(telescopesJsonPath);
+		qWarning() << "[TelescopeControl] loadTelescopes(): No telescopes loaded. File is missing:" << QDir::toNativeSeparators(telescopesJsonPath);
 		telescopeDescriptions = result;
 		return;
 	}
@@ -753,7 +654,7 @@ void TelescopeControl::loadTelescopes()
 
 	if(!telescopesJsonFile.open(QFile::ReadOnly))
 	{
-		qWarning() << "TelescopeControl: No telescopes loaded. Can't open for reading" << QDir::toNativeSeparators(telescopesJsonPath);
+		qWarning() << "[TelescopeControl] No telescopes loaded. Can't open for reading" << QDir::toNativeSeparators(telescopesJsonPath);
 		telescopeDescriptions = result;
 		return;
 	}
@@ -771,24 +672,24 @@ void TelescopeControl::loadTelescopes()
 	}
 
 	QString version = map.value("version", "0.0.0").toString();
-	if(version < QString(TELESCOPE_CONTROL_VERSION))
+	if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_VERSION))!=0)
 	{
 		QString newName = telescopesJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 		if(telescopesJsonFile.rename(newName))
 		{
-			qWarning() << "TelescopeControl: The existing version of telescopes.json is obsolete. Backing it up as " << QDir::toNativeSeparators(newName);
-			qWarning() << "TelescopeControl: A blank telescopes.json file will have to be created.";
+			qWarning() << "[TelescopeControl] The existing version of telescopes.json is obsolete. Backing it up as" << QDir::toNativeSeparators(newName);
+			qWarning() << "[TelescopeControl] A blank telescopes.json file will have to be created.";
 			telescopeDescriptions = result;
 			return;
 		}
 		else
 		{
-			qWarning() << "TelescopeControl: The existing version of telescopes.json is obsolete. Unable to rename.";
+			qWarning() << "[TelescopeControl] The existing version of telescopes.json is obsolete. Unable to rename.";
 			telescopeDescriptions = result;
 			return;
 		}
 	}
-	map.remove("version");//Otherwise it will try to read it as a telescope
+	map.remove("version"); // Otherwise it will try to read it as a telescope
 
 	//Make sure that there are no telescope clients yet
 	deleteAllTelescopes();
@@ -806,7 +707,7 @@ void TelescopeControl::loadTelescopes()
 		int slot = key.toInt(&ok);
 		if(!ok || !isValidSlotNumber(slot))
 		{
-			qDebug() << "TelescopeControl::loadTelescopes(): Deleted node unrecogised as slot:" << key;
+			qDebug() << "[TelescopeControl] loadTelescopes(): Deleted node unrecogised as slot:" << key;
 			map.remove(key);
 			continue;
 		}
@@ -818,7 +719,7 @@ void TelescopeControl::loadTelescopes()
 		QString name = telescope.value("name").toString();
 		if(name.isEmpty())
 		{
-			qDebug() << "TelescopeControl: Unable to load telescope: No name specified at slot" << key;
+			qDebug() << "[TelescopeControl] Unable to load telescope: No name specified at slot" << key;
 			map.remove(key);
 			continue;
 		}
@@ -827,7 +728,7 @@ void TelescopeControl::loadTelescopes()
 		QString connection = telescope.value("connection").toString();
 		if(connection.isEmpty() || !connectionTypeNames.values().contains(connection))
 		{
-			qDebug() << "TelescopeControl: Unable to load telescope: No valid connection type at slot" << key;
+			qDebug() << "[TelescopeControl] Unable to load telescope: No valid connection type at slot" << key;
 			map.remove(key);
 			continue;
 		}
@@ -836,7 +737,7 @@ void TelescopeControl::loadTelescopes()
 		QString equinox = telescope.value("equinox", "J2000").toString();
 		if (equinox != "J2000" && equinox != "JNow")
 		{
-			qDebug() << "TelescopeControl: Unable to load telescope: Invalid equinox value at slot" << key;
+			qDebug() << "[TelescopeControl] Unable to load telescope: Invalid equinox value at slot" << key;
 			map.remove(key);
 			continue;
 		}
@@ -855,7 +756,7 @@ void TelescopeControl::loadTelescopes()
 
 			if(deviceModelName.isEmpty())
 			{
-				qDebug() << "TelescopeControl: Unable to load telescope: No device model specified at slot" << key;
+				qDebug() << "[TelescopeControl] Unable to load telescope: No device model specified at slot" << key;
 				map.remove(key);
 				continue;
 			}
@@ -863,14 +764,15 @@ void TelescopeControl::loadTelescopes()
 			//Do we have this server?
 			if(!deviceModels.contains(deviceModelName))
 			{
-				qWarning() << "TelescopeControl: Unable to load telescope at slot" << slot << "because the specified device model is missing:" << deviceModelName;
+				qWarning() << "[TelescopeControl] Unable to load telescope at slot" << slot
+					   << "because the specified device model is missing:" << deviceModelName;
 				map.remove(key);
 				continue;
 			}
 
-			if(portSerial.isEmpty() || !portSerial.startsWith(SERIAL_PORT_PREFIX))
+			if(portSerial.isEmpty())
 			{
-				qDebug() << "TelescopeControl: Unable to load telescope: No valid serial port specified at slot" << key;
+				qDebug() << "[TelescopeControl] Unable to load telescope: No valid serial port specified at slot" << key;
 				map.remove(key);
 				continue;
 			}
@@ -882,7 +784,7 @@ void TelescopeControl::loadTelescopes()
 			hostName = telescope.value("host_name").toString();
 			if(hostName.isEmpty())
 			{
-				qDebug() << "TelescopeControl::loadTelescopes(): No host name at slot" << key;
+				qDebug() << "[TelescopeControl] loadTelescopes(): No host name at slot" << key;
 				map.remove(key);
 				continue;
 			}
@@ -894,7 +796,7 @@ void TelescopeControl::loadTelescopes()
 			portTCP = telescope.value("tcp_port").toInt();
 			if(!telescope.contains("tcp_port") || !isValidPort(portTCP))
 			{
-				qDebug() << "TelescopeControl: Unable to load telescope: No valid TCP port at slot" << key;
+				qDebug() << "[TelescopeControl] Unable to load telescope: No valid TCP port at slot" << key;
 				map.remove(key);
 				continue;
 			}
@@ -903,7 +805,7 @@ void TelescopeControl::loadTelescopes()
 			delay = telescope.value("delay", 0).toInt();
 			if(!isValidDelay(delay))
 			{
-				qDebug() << "TelescopeControl: Unable to load telescope: No valid delay at slot" << key;
+				qDebug() << "[TelescopeControl] Unable to load telescope: No valid delay at slot" << key;
 				map.remove(key);
 				continue;
 			}
@@ -952,12 +854,12 @@ void TelescopeControl::loadTelescopes()
 						if(!startServerAtSlot(slot, deviceModelName, portTCP, portSerial))
 						{
 							stopClientAtSlot(slot);
-							qDebug() << "TelescopeControl: Unable to launch a telescope server at slot" << slot;
+							qDebug() << "[TelescopeControl] Unable to launch a telescope server at slot" << slot;
 						}
 					}
 					else
 					{
-						qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
+						qDebug() << "[TelescopeControl] Unable to create a telescope client at slot" << slot;
 						//Unnecessary due to if-else construction;
 						//also, causes bug #608533
 						//continue;
@@ -969,7 +871,7 @@ void TelescopeControl::loadTelescopes()
 					logAtSlot(slot);
 					if(!startClientAtSlot(slot, connectionType, name, equinox, QString(), 0, delay, internalCircles, deviceModelName, portSerial))
 					{
-						qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
+						qDebug() << "[TelescopeControl] Unable to create a telescope client at slot" << slot;
 						//Unnecessary due to if-else construction;
 						//also, causes bug #608533
 						//continue;
@@ -980,7 +882,7 @@ void TelescopeControl::loadTelescopes()
 			{
 				if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))
 				{
-					qDebug() << "TelescopeControl: Unable to create a telescope client at slot" << slot;
+					qDebug() << "[TelescopeControl] Unable to create a telescope client at slot" << slot;
 					//Unnecessary due to if-else construction;
 					//also, causes bug #608533
 					//continue;
@@ -995,7 +897,8 @@ void TelescopeControl::loadTelescopes()
 	if(telescopesCount > 0)
 	{
 		result = map;
-		qDebug() << "TelescopeControl: Loaded successfully" << telescopesCount << "telescopes.";
+		qDebug() << "[TelescopeControl] Loaded successfully" << telescopesCount
+			 << "telescopes.";
 	}
 
 	telescopeDescriptions = result;
@@ -1244,25 +1147,23 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		QString serverExecutablePath = StelFileMgr::findFile(serverExecutablesDirectoryPath + TELESCOPE_SERVER_PATH.arg(serverName), StelFileMgr::File);
 		if (serverExecutablePath.isEmpty())
 		{
-			qDebug() << "TelescopeControl: Error starting telescope server: Can't find executable:" << QDir::toNativeSeparators(serverExecutablePath);
+			qDebug() << "[TelescopeControl] Error starting telescope server: Can't find executable:"				 << QDir::toNativeSeparators(serverExecutablePath);
 			return false;
 		}
 
-#ifdef Q_OS_WIN32
-		QString serialPortName;
-		if(portSerial.right(portSerial.size() - SERIAL_PORT_PREFIX.size()).toInt() > 9)
-			serialPortName = "\\\\.\\" + portSerial;//"\\.\COMxx", not sure if it will work
-		else
-			serialPortName = portSerial;
+#ifdef Q_OS_WIN
+		QString serialPortName = "\\\\.\\" + portSerial;
 #else
 		QString serialPortName = portSerial;
-#endif //Q_OS_WIN32
+#endif //Q_OS_WIN
 		QStringList serverArguments;
 		serverArguments << QString::number(portTCP) << serialPortName;
 		if(useTelescopeServerLogs)
 			serverArguments << QString(StelFileMgr::getUserDir() + "/log_TelescopeServer" + slotName + ".txt");
 
-		qDebug() << "TelescopeControl: Starting tellescope server at slot" << slotName << "with path" << QDir::toNativeSeparators(serverExecutablePath) << "and arguments" << serverArguments.join(" ");
+		qDebug() << "[TelescopeControl] Starting tellescope server at slot" << slotName
+			 << "with path"	 << QDir::toNativeSeparators(serverExecutablePath)
+			 << "and arguments" << serverArguments.join(" ");
 
 		//Starting the new process
 		telescopeServerProcess.insert(slotNumber, new QProcess());
@@ -1274,7 +1175,7 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		return true;
 	}
 	else
-		qDebug() << "TelescopeControl: Error starting telescope server: No such server found:" << serverName;
+		qDebug() << "[TelescopeControl] Error starting telescope server: No such server found:" << serverName;
 
 	return false;
 }
@@ -1286,11 +1187,11 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 		return false;
 
 	//Stop/close the process
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	telescopeServerProcess[slotNumber]->close();
 #else
 	telescopeServerProcess[slotNumber]->terminate();
-#endif //Q_OS_WIN32
+#endif //Q_OS_WIN
 	telescopeServerProcess[slotNumber]->waitForFinished();
 
 	delete telescopeServerProcess[slotNumber];
@@ -1396,7 +1297,7 @@ void TelescopeControl::loadDeviceModels()
 	{
 		if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 		{
-			qWarning() << "TelescopeControl: Unable to find " << QDir::toNativeSeparators(deviceModelsJsonPath);
+			qWarning() << "[TelescopeControl] Unable to find " << QDir::toNativeSeparators(deviceModelsJsonPath);
 			useDefaultList = true;
 		}
 	}
@@ -1405,7 +1306,7 @@ void TelescopeControl::loadDeviceModels()
 		QFile deviceModelsJsonFile(deviceModelsJsonPath);
 		if(!deviceModelsJsonFile.open(QFile::ReadOnly))
 		{
-			qWarning() << "TelescopeControl: Can't open for reading " << QDir::toNativeSeparators(deviceModelsJsonPath);
+			qWarning() << "[TelescopeControl] Can't open for reading " << QDir::toNativeSeparators(deviceModelsJsonPath);
 			useDefaultList = true;
 		}
 		else
@@ -1413,14 +1314,14 @@ void TelescopeControl::loadDeviceModels()
 			//Check the version and move the old file if necessary
 			QVariantMap deviceModelsJsonMap;
 			deviceModelsJsonMap = StelJsonParser::parse(&deviceModelsJsonFile).toMap();
-			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();
-			if(version < QString(TELESCOPE_CONTROL_VERSION))
+			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();						
+			if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_VERSION))!=0)
 			{
 				deviceModelsJsonFile.close();
 				QString newName = deviceModelsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 				if(deviceModelsJsonFile.rename(newName))
 				{
-					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Backing it up as " << QDir::toNativeSeparators(newName);
+					qWarning() << "[TelescopeControl] The existing version of device_models.json is obsolete. Backing it up as " << QDir::toNativeSeparators(newName);
 					if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 					{
 						useDefaultList = true;
@@ -1428,7 +1329,7 @@ void TelescopeControl::loadDeviceModels()
 				}
 				else
 				{
-					qWarning() << "TelescopeControl: The existing version of device_models.json is obsolete. Unable to rename.";
+					qWarning() << "[TelescopeControl] The existing version of device_models.json is obsolete. Unable to rename.";
 					useDefaultList = true;
 				}
 			}
@@ -1439,7 +1340,7 @@ void TelescopeControl::loadDeviceModels()
 
 	if (useDefaultList)
 	{
-		qWarning() << "TelescopeControl: Using embedded device models list.";
+		qWarning() << "[TelescopeControl] Using embedded device models list.";
 		deviceModelsJsonPath = ":/telescopeControl/device_models.json";
 	}
 
@@ -1462,7 +1363,7 @@ void TelescopeControl::loadDeviceModels()
 	{
 		//deviceModels = QHash<QString, DeviceModel>();
 		//return;
-		qWarning() << "TelescopeControl: Only embedded telescope servers are available.";
+		qWarning() << "[TelescopeControl] Only embedded telescope servers are available.";
 	}
 
 	//Clear the list of device models - it may not be empty.
@@ -1485,7 +1386,7 @@ void TelescopeControl::loadDeviceModels()
 
 		if(deviceModels.contains(name))
 		{
-			qWarning() << "TelescopeControl: Skipping device model: Duplicate name:" << name;
+			qWarning() << "[TelescopeControl] Skipping device model: Duplicate name:" << name;
 			continue;
 		}
 
@@ -1495,25 +1396,27 @@ void TelescopeControl::loadDeviceModels()
 		bool useExecutable = false;
 		if(server.isEmpty())
 		{
-			qWarning() << "TelescopeControl: Skipping device model: No server specified for" << name;
+			qWarning() << "[TelescopeControl] Skipping device model: No server specified for" << name;
 			continue;
 		}
 		if(useServerExecutables)
 		{
 			if(telescopeServers.contains(server))
 			{
-				qDebug() << "TelescopeControl: Using telescope server executable for" << name;
+				qDebug() << "[TelescopeControl] Using telescope server executable for" << name;
 				useExecutable = true;
 			}
 			else if(EMBEDDED_TELESCOPE_SERVERS.contains(server))
 			{
-				qWarning() << "TelescopeControl: No external telescope server executable found for" << name;
-				qWarning() << "TelescopeControl: Using embedded telescope server" << server << "for" << name;
+				qWarning() << "[TelescopeControl] No external telescope server executable found for" << name;
+				qWarning() << "[TelescopeControl] Using embedded telescope server" << server
+					   << "for" << name;
 				useExecutable = false;
 			}
 			else
 			{
-				qWarning() << "TelescopeControl: Skipping device model: No server" << server << "found for" << name;
+				qWarning() << "[TelescopeControl] Skipping device model: No server" << server
+					   << "found for" << name;
 				continue;
 			}
 		}
@@ -1521,7 +1424,8 @@ void TelescopeControl::loadDeviceModels()
 		{
 			if(!EMBEDDED_TELESCOPE_SERVERS.contains(server))
 			{
-				qWarning() << "TelescopeControl: Skipping device model: No server" << server << "found for" << name;
+				qWarning() << "[TelescopeControl] Skipping device model: No server" << server
+					   << "found for" << name;
 				continue;
 			}
 			//else: everything is OK, using embedded server
@@ -1534,7 +1438,7 @@ void TelescopeControl::loadDeviceModels()
 		//Add this to the main list
 		DeviceModel newDeviceModel = {name, description, server, delay, useExecutable};
 		deviceModels.insert(name, newDeviceModel);
-		//qDebug() << "TelescopeControl: Adding device model:" << name << description << server << delay;
+		qDebug() << "[TelescopeControl] Adding device model:" << name << description << server << delay;
 	}
 }
 
@@ -1563,13 +1467,13 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 	QFile defaultFile(":/telescopeControl/device_models.json");
 	if (!defaultFile.copy(deviceModelsListPath))
 	{
-		qWarning() << "TelescopeControl: Unable to copy the default device models list to" << QDir::toNativeSeparators(deviceModelsListPath);
+		qWarning() << "[TelescopeControl] Unable to copy the default device models list to" << QDir::toNativeSeparators(deviceModelsListPath);
 		return false;
 	}
 	QFile newCopy(deviceModelsListPath);
 	newCopy.setPermissions(newCopy.permissions() | QFile::WriteOwner);
 
-	qDebug() << "TelescopeControl: The default device models list has been copied to" << QDir::toNativeSeparators(deviceModelsListPath);
+	qDebug() << "[TelescopeControl] The default device models list has been copied to" << QDir::toNativeSeparators(deviceModelsListPath);
 	return true;
 }
 
@@ -1584,14 +1488,14 @@ bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 	QDir newServerDirectory(newPath);
 	if(!newServerDirectory.exists())
 	{
-		qWarning() << "TelescopeControl: Can't find such a directory: " << QDir::toNativeSeparators(newPath);
+		qWarning() << "[TelescopeControl] Can't find such a directory: " << QDir::toNativeSeparators(newPath);
 		return false;
 	}
 	QList<QFileInfo> telescopeServerExecutables = newServerDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
 	if(telescopeServerExecutables.isEmpty())
 	{
-		qWarning() << "TelescopeControl: No telescope server executables found in"
-							 << QDir::toNativeSeparators(serverExecutablesDirectoryPath);
+		qWarning() << "[TelescopeControl] No telescope server executables found in"
+			   << QDir::toNativeSeparators(serverExecutablesDirectoryPath);
 		return false;
 	}
 
@@ -1630,8 +1534,8 @@ void TelescopeControl::addLogAtSlot(int slot)
 		QFile* logFile = new QFile(filePath);
 		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
 		{
-			qWarning() << "TelescopeControl: Unable to create a log file for slot"
-								 << slot << ":" << QDir::toNativeSeparators(filePath);
+			qWarning() << "[TelescopeControl] Unable to create a log file for slot" << slot
+				   << ":" << QDir::toNativeSeparators(filePath);
 			telescopeServerLogFiles.insert(slot, logFile);
 			telescopeServerLogStreams.insert(slot, new QTextStream(new QFile()));
 		}

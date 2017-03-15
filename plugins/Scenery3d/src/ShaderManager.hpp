@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _SHADERMANAGER_HPP_
@@ -42,6 +42,7 @@ struct GlobalShaderParameters
 	bool torchLight;
 	//for now, only 1 or 4 really supported
 	int frustumSplits;
+	bool hwShadowSamplers;
 };
 
 //! A simple shader cache class that gives us the correct shader depending on desired configuration.
@@ -199,6 +200,8 @@ private:
 		SINGLE_SHADOW_FRUSTUM  = (1<<18),
 		//set if opengl es2
 		OGL_ES2		= (1<<19),
+		//true if shadow samplers (shadow2d) should be used for shadow maps instead of normal samplers (texture2d)
+		HW_SHADOW_SAMPLERS = (1<<20)
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -238,7 +241,8 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 		if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::SFQ_HARDWARE) flags|= SHADOW_FILTER;
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::SFQ_LOW_HARDWARE) flags|= SHADOW_FILTER_HQ;
-		if(globals.pixelLighting && globals.shadows && (globals.shadowFilterQuality == S3DEnum::SFQ_LOW || globals.shadowFilterQuality == S3DEnum::SFQ_HIGH) && globals.pcss) flags|= PCSS;
+		if(globals.pixelLighting && globals.shadows && !globals.hwShadowSamplers && (globals.shadowFilterQuality == S3DEnum::SFQ_LOW || globals.shadowFilterQuality == S3DEnum::SFQ_HIGH) && globals.pcss) flags|= PCSS;
+		if(globals.hwShadowSamplers) flags|=HW_SHADOW_SAMPLERS;
 		if(globals.geometryShader) flags|= GEOMETRY_SHADER;
 		if(globals.torchLight) flags|= TORCH;
 		if(globals.frustumSplits == 1) flags|= SINGLE_SHADOW_FRUSTUM;

@@ -29,6 +29,7 @@ class Ui_novaeDialog;
 class QTimer;
 class Novae;
 
+//! @ingroup brightNovae
 class NovaeDialog : public StelDialog
 {
 	Q_OBJECT

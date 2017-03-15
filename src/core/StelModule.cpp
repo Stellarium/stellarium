@@ -21,6 +21,12 @@
 #include "StelApp.hpp"
 #include "StelActionMgr.hpp"
 
+StelModule::StelModule()
+{
+	//set the default object name to the class name
+	setObjectName(metaObject()->className());
+}
+
 /*************************************************************************
  Get the version of the module, default is stellarium main version
 *************************************************************************/
@@ -36,4 +42,3 @@ class StelAction* StelModule::addAction(const QString& id, const QString& groupI
 	StelActionMgr* mgr = StelApp::getInstance().getStelActionManager();
 	return mgr->addAction(id, groupId, text, target, slot, shortcut, altShortcut);
 }
-

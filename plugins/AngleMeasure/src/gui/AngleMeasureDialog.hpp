@@ -30,6 +30,7 @@ class Ui_angleMeasureDialog;
 class AngleMeasure;
 
 //! Main window of the Angle Measure plug-in.
+//! @ingroup angleMeasure
 class AngleMeasureDialog : public StelDialog
 {
 	Q_OBJECT
@@ -50,8 +51,7 @@ private:
 
 	void setAboutHtml();
 
-private slots:
-	void saveAngleMeasureSettings();
+private slots:	
 	void resetAngleMeasureSettings();
 };
 
