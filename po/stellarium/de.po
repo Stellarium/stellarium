@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-14 09:50+0700\n"
-"PO-Revision-Date: 2017-03-13 13:29+0000\n"
+"PO-Revision-Date: 2017-03-14 10:27+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-14 05:36+0000\n"
+"X-Launchpad-Export-Date: 2017-03-15 05:37+0000\n"
 "X-Generator: Launchpad (build 18331)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -6541,7 +6541,7 @@ msgstr "Standardeinstellungen"
 
 #: src/ui_configurationDialog.h:1235
 msgid "Save View"
-msgstr ""
+msgstr "Anblick speichern"
 
 #: src/ui_configurationDialog.h:1237
 msgid ""
@@ -6577,6 +6577,9 @@ msgid ""
 "for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
+"Speichere Blickrichtung und Gesichtsfeld, oder alle anderen Einstellungen "
+"für den nächsten Start. Nach Wiederherstellung der Standardeinstellungen ist "
+"ein Neustart von Stellarium erforderlich. "
 
 #: src/ui_configurationDialog.h:1246
 msgid "The width of your view when Stellarium starts"
@@ -8180,7 +8183,7 @@ msgstr "Gesichtsfeld: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 #, qt-format
 msgid "Dimensions: %1"
-msgstr "Abmessungen: %1"
+msgstr "Bildfeld: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2012
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:665
@@ -8327,7 +8330,7 @@ msgstr "Okularbrennweite"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:707
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 msgid "Dimensions field of view"
-msgstr ""
+msgstr "Bildfeld des Sensors"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:713
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
@@ -8540,6 +8543,8 @@ msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr ""
+"Markieren, um beim Verlassen des Okularmodus die Blickrichtung auf den Wert "
+"bei Programmstart zu setzen."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Restore direction to initial values"
