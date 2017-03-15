@@ -38,7 +38,7 @@ template <class T> class QFuture;
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 //! @sa StelTextureSP
-class StelTexture: public QObject
+class StelTexture: public QObject, protected QOpenGLFunctions
 {
 	Q_OBJECT
 
@@ -91,6 +91,9 @@ public:
 	//! Return whether the image is currently being loaded
 	bool isLoading() const {return (loader || networkReply) && !canBind();}
 
+	//! Return texture memory size
+	unsigned int getGlSize() const {return glSize;}
+
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
 	//! or when an error occured and the texture will never be available
@@ -121,7 +124,7 @@ private:
 	static GLData loadFromData(const QByteArray& data);
 
 	//! Private constructor
-	StelTexture();
+	StelTexture(StelTextureMgr* mgr);
 
 	//! Convert a QImage into opengl compatible format.
 	static QByteArray convertToGLFormat(const QImage& image, GLint* format, GLint* type);
@@ -137,6 +140,9 @@ private:
 	//! Same as glLoad(QImage), but with an image already in OpenGl format
 	bool glLoad(const GLData& data);
 
+	//! The parent texture manager
+	StelTextureMgr* textureMgr;
+
 	StelTextureParams loadParams;
 
 	//! Used to handle the connection for remote textures.
@@ -147,7 +153,7 @@ private:
 
 
 	//! The URL where to download the file
-	QString fullPath;
+	QString fullPath;	
 
 	//! True when something when wrong in the loading process
 	bool errorOccured;
@@ -166,6 +172,9 @@ private:
 
 	GLsizei width;	//! Texture image width
 	GLsizei height;	//! Texture image height
+
+	//! Size in GL memory
+	unsigned int glSize;
 };
 
 

@@ -37,7 +37,8 @@
 #include "StelTranslator.hpp"
 
 NovaeDialog::NovaeDialog()
-	: nova(NULL)
+	: StelDialog("Novae")
+	, nova(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_novaeDialog;
@@ -85,6 +86,7 @@ void NovaeDialog::createDialogContent()
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(nova, SIGNAL(updateStateChanged(Novae::UpdateState)), this, SLOT(updateStateReceiver(Novae::UpdateState)));
 	connect(nova, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(nova, SIGNAL(jsonUpdateComplete(void)), nova, SLOT(reloadCatalog()));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -95,6 +97,7 @@ void NovaeDialog::createDialogContent()
 	updateTimer->start(7000);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -216,7 +219,7 @@ void NovaeDialog::updateCompleteReceiver(void)
 
 void NovaeDialog::restoreDefaults(void)
 {
-	qDebug() << "Novae::restoreDefaults";
+	qDebug() << "[Novae] restore defaults";
 	nova->restoreDefaults();
 	nova->readSettingsFromConfig();
 	updateGuiFromSettings();

@@ -29,13 +29,14 @@
 #include "StelUtils.hpp"
 
 
-QTEST_MAIN(TestStelSphericalIndex)
+QTEST_GUILESS_MAIN(TestStelSphericalIndex)
 
 class TestRegionObject : public StelRegionObject
 {
 	public:
 		TestRegionObject(SphericalRegionP reg) : region(reg) {;}
-		virtual SphericalRegionP getRegion() const {return region;}
+		virtual SphericalRegionP getRegion() const { return region; }
+		virtual Vec3d getPointInRegion() const { return Vec3d(0,0,0); }
 		SphericalRegionP region;
 };
 
@@ -59,11 +60,11 @@ void TestStelSphericalIndex::testBase()
 	grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.9)))));
 	grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalCap(Vec3d(-1,0,0), 0.99)))));
 	CountFuncObject countFunc;
- 	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5)), countFunc);
-	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.95)), countFunc);
+	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5))), countFunc);
+	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.95))), countFunc);
 	QVERIFY(countFunc.count==2);
 	countFunc.count=0;
-	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(0,1,0), 0.99)), countFunc);
+	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalCap(Vec3d(0,1,0), 0.99))), countFunc);
 	QVERIFY(countFunc.count==0);
 	
 	// Process all
@@ -93,10 +94,10 @@ void TestStelSphericalIndex::testBase()
 		grid.insert(StelRegionObjectP(new TestRegionObject(SphericalRegionP(new SphericalConvexPolygon(c1)))));
 	}
 	countFunc.count=0;
-	grid.processIntersectingRegions(SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5)), countFunc);
+	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalCap(Vec3d(1,0,0), 0.5))), countFunc);
 	QVERIFY(countFunc.count==30000);
 	countFunc.count=0;
-	grid.processIntersectingRegions(SphericalRegionP(new SphericalConvexPolygon(c1)), countFunc);
+	grid.processIntersectingRegions(&(*SphericalRegionP(new SphericalConvexPolygon(c1))), countFunc);
 	qDebug() << countFunc.count;
 	QVERIFY(countFunc.count==30000);
 }

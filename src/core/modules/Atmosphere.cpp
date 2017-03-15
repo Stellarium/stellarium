@@ -45,6 +45,7 @@ Atmosphere::Atmosphere(void)
 	, colorGrid(NULL)
 	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, averageLuminance(0.f)
+	, overrideAverageLuminance(false)
 	, eclipseFactor(1.f)
 	, lightPollutionLuminance(0)
 {
@@ -220,7 +221,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 	else
 		eclipseFactor = 1.f;
-
+	// TODO: compute eclipse factor also for Lunar eclipses! (lp:#1471546)
 
 	// No need to calculate if not visible
 	if (!fader.getInterstate())
@@ -306,10 +307,25 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	colorGridBuffer.release();
 	
 	// Update average luminance
-	averageLuminance = sum_lum/((1+skyResolutionX)*(1+skyResolutionY));
+	if (!overrideAverageLuminance)
+		averageLuminance = sum_lum/((1+skyResolutionX)*(1+skyResolutionY));
 }
 
-
+// override computable luminance. This is for special operations only, e.g. for scripting of brightness-balanced image export.
+// To return to auto-computed values, set any negative value.
+void Atmosphere::setAverageLuminance(float overrideLum)
+{
+	if (overrideLum<0.f)
+	{
+		overrideAverageLuminance=false;
+		averageLuminance=0.f;
+	}
+	else
+	{
+		overrideAverageLuminance=true;
+		averageLuminance=overrideLum;
+	}
+}
 
 // Draw the atmosphere using the precalc values stored in tab_sky
 void Atmosphere::draw(StelCore* core)
@@ -323,9 +339,7 @@ void Atmosphere::draw(StelCore* core)
 		return;
 
 	StelPainter sPainter(core->getProjection2d());
-	glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 	const float atm_intensity = fader.getInterstate();
 
@@ -370,7 +384,7 @@ void Atmosphere::draw(StelCore* core)
 	int shift=0;
 	for (int y=0;y<skyResolutionY;++y)
 	{
-		glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
+		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
 		shift += (skyResolutionX+1)*2*2;
 	}
 	indicesBuffer.release();

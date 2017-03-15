@@ -20,6 +20,11 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifndef LN_PLUTO_H
 #define LN_PLUTO_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 struct pluto_argument
 {
 	double J, S, P;
@@ -39,6 +44,12 @@ struct pluto_radius
 {
 	double A,B;
 };
+
+void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z);
+
+#ifdef __cplusplus
+}
+#endif
 
 
 #endif

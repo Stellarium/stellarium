@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QDebug>
@@ -80,8 +80,9 @@ Scenery3dMgr::Scenery3dMgr() :
 
 Scenery3dMgr::~Scenery3dMgr()
 {
+#ifndef NDEBUG
 	qDebug()<<"[Scenery3dMgr] Destructor called";
-
+#endif
 	if(!cleanedUp)
 		deinit();
 
@@ -229,9 +230,9 @@ void Scenery3dMgr::createActions()
 	QString groupName = N_("Scenery3d: 3D landscapes");
 
 	//enable action will be set checkable if a scene was loaded
-	addAction("actionShow_Scenery3d",                  groupName, N_("Toggle 3D landscape"),      this,          "enableScene",       "Ctrl+3");
-	addAction("actionShow_Scenery3d_dialog",           groupName, N_("Show settings dialog"),  scenery3dDialog,  "visible",           "Ctrl+Shift+3");
-	addAction("actionShow_Scenery3d_storedViewDialog", groupName, N_("Show viewpoint dialog"), storedViewDialog, "visible",           "Ctrl+Alt+3");
+	addAction("actionShow_Scenery3d",                  groupName, N_("Toggle 3D landscape"),      this,          "enableScene",       "Ctrl+W");
+	addAction("actionShow_Scenery3d_dialog",           groupName, N_("Show settings dialog"),  scenery3dDialog,  "visible",           "Ctrl+Shift+W");
+	addAction("actionShow_Scenery3d_storedViewDialog", groupName, N_("Show viewpoint dialog"), storedViewDialog, "visible",           "Ctrl+Alt+W");
 	addAction("actionShow_Scenery3d_shadows",          groupName, N_("Toggle shadows"),           this,          "enableShadows",     "Ctrl+R, S");
 	addAction("actionShow_Scenery3d_debuginfo",        groupName, N_("Toggle debug information"), this,          "enableDebugInfo",   "Ctrl+R, D");
 	addAction("actionShow_Scenery3d_locationinfo",     groupName, N_("Toggle location text"),     this,          "enableLocationInfo","Ctrl+R, T");
@@ -477,7 +478,7 @@ void Scenery3dMgr::setEnableScene(const bool enable)
 		else
 		{
 			flagEnabled = false;
-			showMessage("Please load a scene first!");
+			showMessage(q_("Please load a scene first!"));
 			emit enableSceneChanged(false);
 		}
 	}
@@ -843,7 +844,7 @@ uint Scenery3dMgr::getMaximumFramebufferSize() const
 	return scenery3d->getMaximumFramebufferSize();
 }
 
-void Scenery3dMgr::setView(const StoredView &view)
+void Scenery3dMgr::setView(const StoredView &view, const bool setDate)
 {
 	//update position
 	//important: set eye height first
@@ -851,9 +852,15 @@ void Scenery3dMgr::setView(const StoredView &view)
 	//then, set grid position
 	scenery3d->setGridPosition(Vec3d(view.position[0],view.position[1],view.position[2]));
 
+	//update time, if relevant and wanted.
+	if (view.jdIsRelevant && setDate)
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		core->setJD(view.jd);
+	}
+
 	//update view vector
 	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
-
 	// This vector is (az_deg, alt_deg, fov_deg)
 	Vec3d v;
 	StelUtils::spheToRect((180.0-view.view_fov[0])*M_PI/180.0, view.view_fov[1]*M_PI/180.0, v);

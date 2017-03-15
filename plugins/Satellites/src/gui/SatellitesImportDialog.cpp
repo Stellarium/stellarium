@@ -37,7 +37,8 @@
 #include <QDir>
 
 SatellitesImportDialog::SatellitesImportDialog()
-	: isGettingData(false)
+	: StelDialog("SatellitesImport")
+	, isGettingData(false)
 	, numberDownloadsComplete(0)
 	, downloadMgr(0)
 	, progressBar(0)
@@ -94,6 +95,8 @@ void SatellitesImportDialog::createDialogContent()
 	
 	connect(ui->closeStelWindow, SIGNAL(clicked()),
 	        this, SLOT(close()));
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)),
+		this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonGetData, SIGNAL(clicked()),
 	        this, SLOT(getData()));

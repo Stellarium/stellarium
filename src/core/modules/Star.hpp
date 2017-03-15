@@ -95,7 +95,13 @@ struct Star1 { // 28 byte
 	//
 	// qint32 dx0,dx1,plx   32
 private:
-	quint8 d[28];
+	// Use an union so we can access the data as different types without
+	// aliasing issues.
+	union {
+		quint8  uint8[28];
+		quint16 uint16[14];
+		qint32  int32[7];
+	} d;
 
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
@@ -107,24 +113,24 @@ public:
 		pos+=((float)(getX1())+movementFactor*getDx1())*z->axis1;
 		pos+=z->center;
 	}
-	inline int getBVIndex() const {return d[12];}
-	inline int getMag() const {return d[13];}
-	inline int getSpInt() const {return ((Uint16*)d)[7];}
-	inline int getX0() const { return qFromLittleEndian(((qint32*)d)[1]); }
-	inline int getX1() const { return qFromLittleEndian(((qint32*)d)[2]); }
-	inline int getDx0() const {return qFromLittleEndian(((qint32*)d)[4]);}
-	inline int getDx1() const {return qFromLittleEndian(((qint32*)d)[5]);}
-	inline int getPlx() const {return qFromLittleEndian(((qint32*)d)[6]);}
+	inline int getBVIndex() const {return d.uint8[12];}
+	inline int getMag() const {return d.uint8[13];}
+	inline int getSpInt() const {return d.uint16[7];}
+	inline int getX0() const { return qFromLittleEndian(d.int32[1]);}
+	inline int getX1() const { return qFromLittleEndian(d.int32[2]);}
+	inline int getDx0() const {return qFromLittleEndian(d.int32[4]);}
+	inline int getDx1() const {return qFromLittleEndian(d.int32[5]);}
+	inline int getPlx() const {return qFromLittleEndian(d.int32[6]);}
 
 	inline int getHip() const
 	{
-		quint32 v = d[0] | d[1] << 8 | d[2] << 16;
+		quint32 v = d.uint8[0] | d.uint8[1] << 8 | d.uint8[2] << 16;
 		return ((qint32)v) << 8 >> 8;
 	}
 
 	inline int getComponentIds() const
 	{
-		return (qint32)d[3];
+		return d.uint8[3];
 	}
 
 	float getBV(void) const {return IndexToBV(getBVIndex());}

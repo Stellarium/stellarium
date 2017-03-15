@@ -32,7 +32,7 @@
 #include <QFont>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 2
+#define MIN_OCULARS_INI_VERSION 3.1f
 
 QT_BEGIN_NAMESPACE
 class QKeyEvent;
@@ -46,10 +46,41 @@ QT_END_NAMESPACE
 class StelButton;
 class StelAction;
 
+/*! @defgroup oculars Oculars Plug-in
+@{
+This plugin serves several purposes:
+ - the primary use is to see what the sky looks like through a particular
+combination of eyepiece and telescope. I wanted to be able to get an idea of
+what I should see when looking through a physical telescope, and understand
+why one eyepiece may be better suited to a particular target. This can also
+be very useful in deciding what telescope is best suited to a style of viewing.
+And with the support for binoculars, you now have the ability to understand just
+about any type of visual observing.
+ - to show what a particular camera would be able to photograph of the sky. Also
+to better plan what type of telescope (or camera lens) to pair with a particular
+camera to capture what you want.
+ - lastly, with the help of the Telrad sight, understand where object in the sky
+are in relation to each other. This can be very useful if you have a non-GOTO
+telescope, and to get an idea of how to star-hop from a known location to an
+area of interest.
+
+None of these activities can take the plce of hands-on experience, but they are
+a good way to supplement your visual astronomy interests.
+@}
+*/
+
 //! Main class of the Oculars plug-in.
+//! @class Oculars
+//! @ingroup oculars
 class Oculars : public StelModule
 {
 	Q_OBJECT
+
+	Q_PROPERTY(bool enableOcular READ getEnableOcular WRITE enableOcular NOTIFY enableOcularChanged)
+	Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
+	Q_PROPERTY(bool enableCCD READ getEnableCCD WRITE toggleCCD NOTIFY enableCCDChanged)
+	Q_PROPERTY(bool enableTelrad READ getEnableTelrad WRITE toggleTelrad NOTIFY enableTelradChanged)
+
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
 	friend class OcularsGuiPanel;
@@ -75,6 +106,7 @@ public:
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual void update(double) {;}
+	double ccdRotationAngle() const;
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
@@ -93,6 +125,7 @@ public slots:
 	//! This method is called with we detect that our hot key is pressed.  It handles
 	//! determining if we should do anything - based on a selected object.
 	void enableOcular(bool b);
+	bool getEnableOcular() const { return flagShowOculars; }
 	void incrementCCDIndex();
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
@@ -107,9 +140,12 @@ public slots:
 	void toggleCCD(bool show);
 	//! Toggles the sensor frame overlay (overloaded for blind switching).
 	void toggleCCD();
+	bool getEnableCCD() const { return flagShowCCD; }
 	void toggleCrosshairs(bool show = true);
+	bool getEnableCrosshairs() const { return flagShowCrosshairs; }
 	//! Toggles the Telrad sight overlay.
 	void toggleTelrad(bool show);
+	bool getEnableTelrad() const { return flagShowTelrad; }
 	//! Toggles the Telrad sight overlay (overloaded for blind switching).
 	void toggleTelrad();
 	void enableGuiPanel(bool enable = true);
@@ -123,10 +159,23 @@ public slots:
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
 
-	void setFlagUseFlipForCCD(const bool b);
-	bool getFlagUseFlipForCCD(void) const;
+	void setFlagInitDirectionUsage(const bool b);
+	bool getFlagInitDirectionUsage(void) const;
+
+	void setFlagAutosetMountForCCD(const bool b);
+	bool getFlagAutosetMountForCCD(void) const;
+
+	void setFlagUseSemiTransparency(const bool b);
+	bool getFlagUseSemiTransparency(void) const;
+
+	void setFlagHideGridsLines(const bool b);
+	bool getFlagHideGridsLines(void) const;
 
 signals:
+	void enableOcularChanged(bool value);
+	void enableCrosshairsChanged(bool value);
+	void enableCCDChanged(bool value);
+	void enableTelradChanged(bool value);
 	void selectedCCDChanged();
 	void selectedOcularChanged();
 	void selectedTelescopeChanged();
@@ -137,7 +186,7 @@ private slots:
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
 	void setRequireSelection(bool state);
-	void setScaleImageCircle(bool state);	
+	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
 	void retranslateGui();
 	void setStelStyle(const QString& style);
@@ -213,23 +262,47 @@ private:
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
 	bool flagGalacticGrid;		//!< Flag to track if GalacticGrid was displayed at activation.
-	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
+	bool flagSupergalacticGrid;	//!< Flag to track if SupergalacticGrid was displayed at activation.
 	bool flagEquatorJ2000Grid;	//!< Flag to track if EquatorJ2000Grid was displayed at activation.
-	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.
-	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
+	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
+	bool flagEquatorJ2000Line;	//!< Flag to track if EquatorJ2000Line was displayed at activation.
+	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.	
+	bool flagEclipticJ2000Line;	//!< Flag to track if EclipticJ2000Line was displayed at activation.
+	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.	
 	bool flagEclipticJ2000Grid;	//!< Flag to track if EclipticJ2000Grid was displayed at activation.
+	bool flagEclipticGrid;		//!< Flag to track if EclipticGrid was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 	bool flagLongitudeLine;		//!< Flag to track if LongitudeLine was displayed at activation.
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
 	bool flagGalacticEquatorLine;	//!< Flag to track if GalacticEquatorLine was displayed at activation.
+	bool flagSupergalacticEquatorLine;	//!< Flag to track if SupergalacticEquatorLine was displayed at activation.
+	bool flagPrimeVerticalLine;	//!< Flag to track if PrimeVerticalLine was displayed at activation.
+	bool flagColureLines;		//!< Flag to track if ColureLines was displayed at activation.
+	bool flagCircumpolarCircles;	//!< Flag to track if CircumpolarCircles was displayed at activation.
+	bool flagPrecessionCircles;	//!< Flag to track if PrecessionCircles was displayed at activation.
+
+	bool flagCardinalPoints;	//!< Flag to track if CardinalPoints was displayed at activation.
+	bool flagCelestialJ2000Poles;	//!< Flag to track if CelestialJ2000Poles was displayed at activation.
+	bool flagCelestialPoles;	//!< Flag to track if CelestialPoles was displayed at activation.
+	bool flagZenithNadirPoints;	//!< Flag to track if ZenithNadir was displayed at activation.
+	bool flagEclipticJ2000Poles;	//!< Flag to track if EclipticJ2000Poles was displayed at activation.
+	bool flagEclipticPoles;		//!< Flag to track if EclipticPoles was displayed at activation.
+	bool flagGalacticPoles;		//!< Flag to track if GalacticPoles was displayed at activation.
+	bool flagSupergalacticPoles;	//!< Flag to track if SupergalacticPoles was displayed at activation.
+	bool flagEquinoxJ2000Points;	//!< Flag to track if EquinoxJ2000Points was displayed at activation.
+	bool flagEquinoxPoints;		//!< Flag to track if EquinoxPoints was displayed at activation.
+
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
 	float magLimitStars;		//!< Value of limited magnitude for stars
 	bool flagLimitDSOs;		//!< Flag to track limit magnitude for DSOs
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
+	bool flagLimitPlanets;		//!< Flag to track limit magnitude for planets, asteroids, comets etc.
+	float magLimitPlanets;		//!< Value of limited magnitude for planets, asteroids, comets etc.
 
-	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
+	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
+
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
 	bool flagLimitMagnitude;	//!< Read from the ini file, whether a magnitude is required to be limited.
@@ -237,6 +310,10 @@ private:
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
+	bool flagSemiTransporency;
+	bool flagHideGridsLines;
+	bool flipVert;
+	bool flipHorz;
 
 	QSignalMapper * ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
 	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
@@ -275,7 +352,9 @@ private:
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
-	bool flagUseFlipForCCD;		//!< Flag used to track if we use flips for CCD
+	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
+	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
+	bool equatorialMountEnabled;
 	double reticleRotation;
 };
 

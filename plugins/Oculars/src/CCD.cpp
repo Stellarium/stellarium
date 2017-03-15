@@ -22,8 +22,9 @@
 
 #include <QDebug>
 #include <QSettings>
+#include <QtMath>
 
-#include <math.h>
+#include <cmath>
 
 #define RADIAN_TO_DEGREES 57.2957795131
 
@@ -34,6 +35,14 @@ CCD::CCD()
 	, m_chipHeight(0.)
 	, m_pixelWidth(0.)
 	, m_pixelHeight(0.)
+	, m_chipRotAngle(0.)
+	, m_has_oag(false)
+	, m_oag_prismHeight(0.)
+	, m_oag_prismWidth(0.)
+	, m_oag_prismDistance(0.)
+	, m_oag_prismPosAngle(0.)
+	, m_binningX(1)
+	, m_binningY(1)
 {
 }
 
@@ -45,6 +54,14 @@ CCD::CCD(const QObject& other)
 	, m_chipHeight(other.property("chipHeight").toFloat())
 	, m_pixelWidth(other.property("pixelWidth").toFloat())
 	, m_pixelHeight(other.property("pixelHeight").toFloat())
+	, m_chipRotAngle(other.property("chipRotAngle").toFloat())
+	, m_has_oag(other.property("hasOAG").toBool())
+	, m_oag_prismHeight(other.property("prismHeight").toFloat())
+	, m_oag_prismWidth(other.property("prismWidth").toFloat())
+	, m_oag_prismDistance(other.property("prismDistance").toFloat())
+	, m_oag_prismPosAngle(other.property("prismPosAngle").toFloat())
+	, m_binningX(other.property("binningX").toInt())
+	, m_binningY(other.property("binningY").toInt())
 {
 }
 
@@ -66,6 +83,14 @@ QMap<int, QString> CCD::propertyMap()
 		mapping[4] = "pixelWidth";
 		mapping[5] = "resolutionX";
 		mapping[6] = "resolutionY";
+		mapping[7] = "chipRotAngle";
+		mapping[8] = "hasOAG";
+		mapping[9] = "prismHeight";
+		mapping[10] = "prismWidth";
+		mapping[11] = "prismDistance";
+		mapping[12] = "prismPosAngle";
+		mapping[13] = "binningX";
+		mapping[14] = "binningY";
 	}
 	return mapping;
 }
@@ -147,18 +172,119 @@ void CCD::setPixelHeight(double height)
 	m_pixelHeight = height;
 }
 
+void CCD::setChipRotAngle(double angle)
+{
+	m_chipRotAngle = angle;
+}
+
+double CCD::chipRotAngle() const
+{
+	return m_chipRotAngle;
+}
+
+bool CCD::hasOAG() const
+{
+	return m_has_oag;
+}
+
+void CCD::setHasOAG(bool oag)
+{
+	m_has_oag = oag;
+}
+
+double CCD::prismHeight() const
+{
+	return m_oag_prismHeight;
+}
+
+void CCD::setPrismHeight(double height)
+{
+	m_oag_prismHeight = height;
+}
+
+double CCD::prismWidth() const
+{
+	return m_oag_prismWidth;
+}
+
+void CCD::setPrismWidth(double width)
+{
+	m_oag_prismWidth = width;
+}
+
+double CCD::prismDistance() const
+{
+	return m_oag_prismDistance;
+}
+
+void CCD::setPrismDistance(double distance)
+{
+	m_oag_prismDistance = distance;
+}
+
+void CCD::setPrismPosAngle(double angle)
+{
+	m_oag_prismPosAngle = angle;
+}
+
+double CCD::prismPosAngle() const
+{
+	return m_oag_prismPosAngle;
+}
+
+int CCD::binningX() const
+{
+	return m_binningX;
+}
+
+void CCD::setBinningX(int binning)
+{
+	m_binningX = binning;
+}
+
+int CCD::binningY() const
+{
+	return m_binningY;
+}
+
+void CCD::setBinningY(int binning)
+{
+	m_binningY = binning;
+}
+
+double CCD::getInnerOAGRadius(Telescope *telescope, Lens *lens) const
+{
+	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	double radius = RADIAN_TO_DEGREES * 2 * qAtan(this->prismDistance() /(2.0 * telescope->focalLength() * lens_multipler));
+	return radius;
+}
+
+double CCD::getOuterOAGRadius(Telescope *telescope, Lens *lens) const
+{
+	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	double radius = RADIAN_TO_DEGREES * 2 * qAtan((this->prismDistance() + this->prismHeight()) /(2.0 * telescope->focalLength() * lens_multipler));
+	return radius;
+}
+
+double CCD::getOAGActualFOVx(Telescope *telescope, Lens *lens) const
+{
+	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->prismWidth() /(2.0 * telescope->focalLength() * lens_multipler));
+	return fovX;
+}
+
 double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
-	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / (telescope->focalLength() * lens_multipler);
-	return FOVx;
+	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->chipWidth() /(2.0 * telescope->focalLength() * lens_multipler));
+	return fovX;
 }
 
 double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
-	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / (telescope->focalLength() * lens_multipler);
-	return FOVy;
+	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	double fovY = RADIAN_TO_DEGREES * 2 * qAtan(this->chipHeight() /(2.0 * telescope->focalLength() * lens_multipler));
+	return fovY;
 }
 
 void CCD::writeToSettings(QSettings * settings, const int index)
@@ -170,7 +296,15 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "chip_width", this->chipWidth());
 	settings->setValue(prefix + "chip_height", this->chipHeight());
 	settings->setValue(prefix + "pixel_width", this->pixelWidth());
-	settings->setValue(prefix + "pixel_height", this->pixelWidth());
+	settings->setValue(prefix + "pixel_height", this->pixelHeight());
+	settings->setValue(prefix + "chip_rot_angle", this->chipRotAngle());
+	settings->setValue(prefix + "binningX", this->binningX());
+	settings->setValue(prefix + "binningY", this->binningY());
+	settings->setValue(prefix + "has_oag", this->hasOAG());
+	settings->setValue(prefix + "prism_height", this->prismHeight());
+	settings->setValue(prefix + "prism_width", this->prismWidth());
+	settings->setValue(prefix + "prism_distance", this->prismDistance());
+	settings->setValue(prefix + "prism_pos_angle", this->prismPosAngle());
 }
 /* ********************************************************************* */
 #if 0
@@ -183,13 +317,20 @@ CCD* CCD::ccdFromSettings(QSettings* theSettings, int ccdIndex)
 	CCD* ccd = new CCD();
 	QString prefix = "ccd/" + QVariant(ccdIndex).toString() + "/";
 	ccd->setName(theSettings->value(prefix + "name", "").toString());
-	ccd->setResolutionX(theSettings->value(prefix + "resolutionX", "0").toInt());
-	ccd->setResolutionY(theSettings->value(prefix + "resolutionY", "0").toInt());
-	ccd->setChipWidth(theSettings->value(prefix + "chip_width", "0.0").toDouble());
-	ccd->setChipHeight(theSettings->value(prefix + "chip_height", "0.0").toDouble());
-	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", "0.0").toDouble());
-	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", "0.0").toDouble());
-	
+	ccd->setResolutionX(theSettings->value(prefix + "resolutionX", 0).toInt());
+	ccd->setResolutionY(theSettings->value(prefix + "resolutionY", 0).toInt());
+	ccd->setChipWidth(theSettings->value(prefix + "chip_width", 0.0).toDouble());
+	ccd->setChipHeight(theSettings->value(prefix + "chip_height", 0.0).toDouble());
+	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", 0.0).toDouble());
+	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", 0.0).toDouble());
+	ccd->setChipRotAngle(theSettings->value(prefix + "chip_rot_angle", 0.0).toDouble());
+	ccd->setBinningX(theSettings->value(prefix + "binningX", 1).toInt());
+	ccd->setBinningY(theSettings->value(prefix + "binningY", 1).toInt());
+	ccd->setHasOAG(theSettings->value(prefix + "has_oag", "false").toBool());
+	ccd->setPrismHeight(theSettings->value(prefix + "prism_height", 0.0).toDouble());
+	ccd->setPrismWidth(theSettings->value(prefix + "prism_width", 0.0).toDouble());
+	ccd->setPrismDistance(theSettings->value(prefix + "prism_distance", 0.0).toDouble());
+	ccd->setPrismPosAngle(theSettings->value(prefix + "prism_pos_angle", 0.0).toDouble());
 	return ccd;
 }
 
@@ -203,5 +344,8 @@ CCD* CCD::ccdModel()
 	model->setPixelWidth(9);
 	model->setResolutionX(4096);
 	model->setResolutionY(4096);
+	model->setChipRotAngle(0);
+	model->setBinningX(1);
+	model->setBinningY(1);
 	return model;
 }

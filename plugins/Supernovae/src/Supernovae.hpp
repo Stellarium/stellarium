@@ -39,27 +39,32 @@ class SupernovaeDialog;
 
 class StelPainter;
 
-typedef QSharedPointer<Supernova> SupernovaP;
-
-/*! @mainpage notitle
-@section overview Plugin Overview
-
-The %Supernovae plugin displays the positions some historical
+/*! @defgroup historicalSupernovae Historical Supernovae Plug-in
+@{
+The %Historical Supernovae plugin displays the positions some historical
 supernovae brighter than 10 visual magnitude.
 
-@section sncat Supernovae Catalog
+<b>Supernovae Catalog</b>
+
 The supernovae catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "supernovae.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file.
+
+@}
 */
+
+//! @ingroup historicalSupernovae
+typedef QSharedPointer<Supernova> SupernovaP;
 
 //! @class Supernovae
 //! Main class of the %Historical Supernovae plugin.
 //! @author Alexander Wolf
+//! @ingroup historicalSupernovae
 class Supernovae : public StelObjectModule
 {
 	Q_OBJECT
@@ -103,20 +108,8 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+
 	virtual QString getName() const { return "Historical Supernovae"; }
 
 	//! get a supernova object by identifier
@@ -184,6 +177,8 @@ public slots:
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
+
+	void reloadCatalog(void);
 
 private:
 	// Font used for displaying our text

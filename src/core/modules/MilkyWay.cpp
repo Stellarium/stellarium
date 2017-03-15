@@ -32,6 +32,8 @@
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -79,7 +81,17 @@ void MilkyWay::update(double deltaTime)
 	fader->update((int)(deltaTime*1000));
 }
 
-void MilkyWay::setFlagShow(bool b){*fader = b;}
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double MilkyWay::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ActionDraw)
+		return 1;
+	return 0;
+}
+
+void MilkyWay::setFlagShow(bool b){*fader = b; emit milkyWayDisplayedChanged(b);}
 bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)
@@ -91,6 +103,7 @@ void MilkyWay::draw(StelCore* core)
 
 	const StelProjectorP prj = core->getProjection(transfo); // GZ: Maybe this can now be simplified?
 	StelToneReproducer* eye = core->getToneReproducer();
+	StelSkyDrawer *drawer=core->getSkyDrawer();
 
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
 
@@ -102,7 +115,12 @@ void MilkyWay::draw(StelCore* core)
 	// The new texture (V0.13.1) is quite blue to start with. It is better to apply white color for it.
 	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
 
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(11.5f); // Source? How to calibrate the new texture?
+	// We must also adjust milky way to light pollution.
+	// Is there any way to calibrate this?
+	int bortle=drawer->getBortleScaleIndex();
+	//aLum*=(11.0f-bortle)*0.1f;
+
+	float lum = drawer->surfacebrightnessToLuminance(12.f+0.15*bortle); // was 11.5; Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -110,25 +128,31 @@ void MilkyWay::draw(StelCore* core)
 	// Bound a maximum luminance. GZ: Is there any reference/reason, or just trial and error?
 	aLum = qMin(0.38f, aLum*2.f);
 
-	// We must also adjust milky way to light pollution.
-	// Is there any way to calibrate this?
-	int bortle=core->getSkyDrawer()->getBortleScaleIndex();
-	aLum*=(11.0f-bortle)*0.1f;
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
+
+
+	// TODO: Find an even better balance with sky brightness, MW should be hard to see during Full Moon and at least somewhat reduced in smaller phases.
+	// adapt brightness by atmospheric brightness. This block developed for ZodiacalLight, hopefully similarly applicable...
+	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+	// 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
+	//qDebug() << "AtmLum: " << atmLum;
+	float atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+	c*=atmFactor*atmFactor;
+
 
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
 
-	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
+	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
 
 	if (withExtinction)
 	{
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
 		// Note that there is a visible boost of extinction for higher Bortle indices. I must reflect that as well.
-		Extinction extinction=core->getSkyDrawer()->getExtinction();
+		const Extinction& extinction=drawer->getExtinction();
 		vertexArray->colors.clear();
 
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
@@ -138,7 +162,7 @@ void MilkyWay::draw(StelCore* core)
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.4f , oneMag) * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
+			float extinctionFactor=std::pow(0.3f , oneMag) * (1.1f-bortle*0.1f); // drop of one magnitude: should be factor 2.5 or 40%. We take 30%, it looks more realistic.
 			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
 			vertexArray->colors.append(thisColor);
 		}
@@ -147,10 +171,9 @@ void MilkyWay::draw(StelCore* core)
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
 
 	StelPainter sPainter(prj);
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glDisable(GL_BLEND);
+	sPainter.setCullFace(true);
+	sPainter.setBlending(false);
 	tex->bind();
 	sPainter.drawStelVertexArray(*vertexArray);
-	glDisable(GL_CULL_FACE);
+	sPainter.setCullFace(false);
 }

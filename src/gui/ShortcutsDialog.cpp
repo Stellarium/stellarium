@@ -60,7 +60,7 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 
 
 ShortcutsDialog::ShortcutsDialog(QObject* parent) :
-	StelDialog(parent),
+	StelDialog("Shortcuts", parent),
 	ui(new Ui_shortcutsDialogForm),
 	filterModel(new ShortcutsFilterModel(this)),
 	mainModel(new QStandardItemModel(this))
@@ -280,7 +280,8 @@ void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	
+	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+
 	resetModel();
 	filterModel->setSourceModel(mainModel);
 	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);

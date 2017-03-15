@@ -52,7 +52,6 @@ ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
 		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "", "", NULL, NULL, 0, false, true, false, true, ""), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
-	radius = 0;
 	// set parent = sun:
 	if (orig->getParent())
 	{
@@ -77,9 +76,9 @@ void ArtificialPlanet::setDest(const PlanetP& dest)
 
 	// rotation:
 	const RotationElements &r(dest->getRotationElements());
-	lastJD = StelApp::getInstance().getCore()->getJDay();
+	lastJDE = StelApp::getInstance().getCore()->getJDE();
 
-	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJD-re.epoch)/re.period - (lastJD-r.epoch)/r.period), 360.0);
+	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJDE-re.epoch)/re.period - (lastJDE-r.epoch)/r.period), 360.0);
 
 	re.epoch = r.epoch;
 	re.period = r.period;
@@ -183,6 +182,7 @@ StelObserver::~StelObserver()
 
 const QSharedPointer<Planet> StelObserver::getHomePlanet(void) const
 {
+	Q_ASSERT(planet);
 	return planet;
 }
 
@@ -191,26 +191,45 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 	return getHomePlanet()->getHeliocentricEclipticPos();
 }
 
+// Used to approximate solution with assuming a spherical planet.
+// Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
 double StelObserver::getDistanceFromCenter(void) const
 {
-	return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
+	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet od SpaceShipObserver has this
+		return currentLocation.altitude/(1000*AU);
+
+	double a=getHomePlanet()->getRadius();
+	double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
+
+	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
+		return a * bByA;
+
+	double latRad=currentLocation.latitude*(M_PI/180.0);
+	double u = atan( bByA * tan(latRad));
+	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	Q_ASSERT(fabs(u)<= fabs(latRad));
+	double altFix=(currentLocation.altitude/(1000.0*AU)) / a;
+
+	double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	double rhoCosPhiPrime= cos(u) + altFix*cos(latRad);
+
+	double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	return rho*a;
 }
 
-Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
+// For Earth we require JD, for other planets JDE to describe rotation!
+Mat4d StelObserver::getRotAltAzToEquatorial(double JD, double JDE) const
 {
 	double lat = currentLocation.latitude;
-	// TODO: Figure out how to keep continuity in sky as reach poles
+	// TODO: Figure out how to keep continuity in sky as we reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
+	// GZ: Actually, why would that be? Lat should be clamped elsewhere. Added tests to track down problems in other locations.
+	Q_ASSERT(lat <=  90.0);
+	Q_ASSERT(lat >= -90.0);
 	if( lat > 90.0 )  lat = 90.0;
 	if( lat < -90.0 ) lat = -90.0;
-	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
-	// 360 degrees = 24hrs; 15 degrees = 1hr = 3600s; 1 degree = 240s
-	// Apply DeltaT correction only for Earth
-	double deltaT = 0.;
-	if (getHomePlanet()->getEnglishName()=="Earth")
-		deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/240.;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude-deltaT)*M_PI/180.)
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+currentLocation.longitude)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
@@ -219,9 +238,12 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 	return getHomePlanet()->getRotEquatorialToVsop87();
 }
 
-SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds) : StelObserver(startLoc),
-		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
+SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds, double atimeToGo) : StelObserver(startLoc),
+		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
 {
+	if(timeToGo<0.0)
+		timeToGo = transitSeconds;
+
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	PlanetP targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
 	if (moveStartLocation.planetName!=moveTargetLocation.planetName)
@@ -244,7 +266,6 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 		artificialPlanet = QSharedPointer<Planet>(artPlanet);
 	}
 	planet = targetPlanet;
-	timeToGo = transitSeconds;
 }
 
 SpaceShipObserver::~SpaceShipObserver()
@@ -253,8 +274,9 @@ SpaceShipObserver::~SpaceShipObserver()
 	planet.clear();
 }
 
-void SpaceShipObserver::update(double deltaTime)
+bool SpaceShipObserver::update(double deltaTime)
 {
+	if (timeToGo <= 0.) return false; // Already over.
 	timeToGo -= deltaTime;
 
 	// If move is over
@@ -299,6 +321,7 @@ void SpaceShipObserver::update(double deltaTime)
 		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));		
 	}
+	return true;
 }
 
 const QSharedPointer<Planet> SpaceShipObserver::getHomePlanet() const

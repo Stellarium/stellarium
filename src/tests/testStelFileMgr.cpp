@@ -31,7 +31,7 @@
 
 #include "StelFileMgr.hpp"
 
-QTEST_MAIN(TestStelFileMgr)
+QTEST_GUILESS_MAIN(TestStelFileMgr)
 
 void TestStelFileMgr::initTestCase()
 {

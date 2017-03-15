@@ -29,6 +29,7 @@ class Ui_pointerCoordinatesWindowForm;
 class PointerCoordinates;
 
 //! Main window of the Pointer Coordinates plug-in.
+//! @ingroup pointerCoordinates
 class PointerCoordinatesWindow : public StelDialog
 {
 	Q_OBJECT
@@ -47,7 +48,7 @@ private:
 	Ui_pointerCoordinatesWindowForm* ui;
 	PointerCoordinates* coord;
 
-	void updateAboutText();
+	void setAboutHtml();
 	void populateValues();
 	void setCustomCoordinatesAccess(QString place);
 

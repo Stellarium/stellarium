@@ -438,7 +438,7 @@ static double gust86_elem_2[GUST86_DIM];
 static double gust86_jd0 = -1e100;
 static double gust86_elem[GUST86_DIM];
 
-void GetGust86Coor(double jd,int body,double *xyz) {
+void GetGust86Coor(const double jd,const int body,double *xyz) {
   GetGust86OsculatingCoor(jd,jd,body,xyz);
 }
 

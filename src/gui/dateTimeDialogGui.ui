@@ -281,7 +281,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="dateDelimiterLabel1">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -334,7 +334,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="dateDelimiterLabel2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -557,7 +557,7 @@
      </widget>
      <widget class="QWidget" name="julianDateTab">
       <attribute name="title">
-       <string>Julian Date</string>
+       <string>Julian Day</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <property name="leftMargin">
@@ -599,7 +599,7 @@
           <item>
            <widget class="QLabel" name="label_5">
             <property name="toolTip">
-             <string>Julian Date</string>
+             <string>Julian Day</string>
             </property>
             <property name="text">
              <string notr="true">JD:</string>
@@ -621,7 +621,7 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="decimals">
-             <number>5</number>
+             <number>6</number>
             </property>
             <property name="minimum">
              <double>-100000000.000000000000000</double>
@@ -664,7 +664,7 @@
           <item>
            <widget class="QLabel" name="label_6">
             <property name="toolTip">
-             <string>Modified Julian Date</string>
+             <string>Modified Julian Day</string>
             </property>
             <property name="text">
              <string notr="true">MJD:</string>
@@ -686,7 +686,7 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="decimals">
-             <number>5</number>
+             <number>6</number>
             </property>
             <property name="minimum">
              <double>-100000000.000000000000000</double>

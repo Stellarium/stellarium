@@ -20,6 +20,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelIniParser.hpp"
 
@@ -34,6 +35,8 @@
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
+	setObjectName("StelSkyCultureMgr");
+
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
 	
 	foreach (const QString& dir, cultureDirNames)
@@ -47,6 +50,15 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		QSettings pd(pdFile, StelIniFormat);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
 		dirToNameEnglish[dir].author = pd.value("info/author").toString();
+		QString boundaries = pd.value("info/boundaries", "none").toString();
+		int boundariesIdx = -1;
+		if (boundaries.contains("generic", Qt::CaseInsensitive))
+			boundariesIdx = 0;
+		else if (boundaries.contains("own", Qt::CaseInsensitive))
+			boundariesIdx = 1;
+		else
+			boundariesIdx = -1;
+		dirToNameEnglish[dir].boundariesIdx = boundariesIdx;
 	}	
 }
 
@@ -66,6 +78,10 @@ void StelSkyCultureMgr::init()
 //! Set the current sky culture from the passed directory
 bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {
+	//prevent unnecessary changes
+	if(cultureDir==currentSkyCultureDir)
+		return false;
+
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
@@ -74,7 +90,8 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	}
 	currentSkyCultureDir = cultureDir;
 	currentSkyCulture = dirToNameEnglish[cultureDir];
-	StelApp::getInstance().updateSkyCulture();
+
+	emit currentSkyCultureChanged(currentSkyCultureDir);
 	return true;
 }
 
@@ -91,12 +108,30 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("localization/sky_culture", id);
+
+	emit defaultSkyCultureChanged(id);
 	return true;
 }
 	
-QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
+QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
+{
+	return q_(currentSkyCulture.englishName);
+}
 
-QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const {return currentSkyCulture.englishName;}
+QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
+{
+	return currentSkyCulture.englishName;
+}
+
+int StelSkyCultureMgr::getCurrentSkyCultureBoundariesIdx() const
+{
+	return currentSkyCulture.boundariesIdx;
+}
+
+bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
+{
+	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
+}
 
 //! returns newline delimited list of human readable culture names in english
 QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
@@ -129,6 +164,39 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 QStringList StelSkyCultureMgr::getSkyCultureListIDs(void)
 {
 	return dirToNameEnglish.keys();
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
+{
+	QString skyCultureId = getCurrentSkyCultureID();
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+	{
+		lang = lang.split("_").at(0);
+	}
+	QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
+	if (descPath.isEmpty())
+	{
+		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
+		if (descPath.isEmpty())
+			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
+	}
+
+	if (descPath.isEmpty())
+	{
+		return q_("No description");
+	}
+	else
+	{
+		QFile f(descPath);
+		QString htmlFile;
+		if(f.open(QIODevice::ReadOnly))
+		{
+			htmlFile = QString::fromUtf8(f.readAll());
+			f.close();
+		}
+		return htmlFile;
+	}
 }
 
 QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)

@@ -2,7 +2,7 @@
 // Name: Sky Culture Tour
 // License: Public Domain
 // Author: Matthew Gates
-// Shortcut: Ctrl+U,2
+// Shortcut: Ctrl+D,2
 // Description: Look at each installed sky culture.
 //
 
@@ -29,7 +29,7 @@ for(i=0; i<allIDs.length; i++)
 	core.debug("setting sky culture: " + id);
 	core.setSkyCulture(id);
 	core.wait(2);
-	name = core.getSkyCultureName();
+	name = core.getSkyCultureNameI18n();
 	lab = LabelMgr.labelScreen(name, 100, 100, false, 25, "#ff2200");
 	LabelMgr.setLabelShow(lab, true);
 	core.wait(2);

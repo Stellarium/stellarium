@@ -24,7 +24,7 @@
 #include <QFile>
 
 //! @class StelScriptOutput
-//! Class wit only static members used to manage output for Stellarium scripts.
+//! Class with only static members used to manage output for Stellarium scripts.
 class StelScriptOutput
 {
 public:
@@ -39,6 +39,15 @@ public:
 	//! Write the message plus a newline to the output file at $USERDIR/output.txt.
 	//! @param msg message to write.
 	static void writeLog(QString msg);
+
+	//! Reset file, i.e., empty it. This may be useful to have repetitive output which may be read by other programs.
+	static void reset(void);
+
+	//! Save to new file, re-create output file.
+	//! This allows reading of results on Windows, where otherwise reading programs cannot access files opened for writing by Stellarium.
+	//! @param name new filename. It will be created in the same directory as output.txt
+	//! Normally you would call saveOutputAs(...), then reset().
+	static void saveOutputAs(const QString& name);
 
 private:
 	static QFile outputFile;

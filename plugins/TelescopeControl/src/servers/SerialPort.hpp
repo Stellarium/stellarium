@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include "Connection.hpp"
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
   #include <windows.h>
 #else
   #include <termios.h>
@@ -47,7 +47,7 @@ public:
 	//! This method has different platform-dependent implementations.
 	virtual bool isClosed(void) const
 	{
-	#ifdef Q_OS_WIN32
+	#ifdef Q_OS_WIN
 		return (handle == INVALID_HANDLE_VALUE);
 	#else
 		return IS_INVALID_SOCKET(fd);
@@ -64,7 +64,7 @@ private:
 	bool isAsciiConnection(void) const {return true;}
 	
 private:
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	int readNonblocking(char *buf, int count);
 	int writeNonblocking(const char *buf, int count);
 	void handleSelectFds(const fd_set&, const fd_set&) {}

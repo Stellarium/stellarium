@@ -23,14 +23,15 @@
 
 static const double KINTERPOLATIONLIMIT=0.0000000000001;
 static const double KMU=3.9861352E5;
-static const double KPI=3.141592654;
-static const double K2PI=6.283185308;
+static const double KPI=3.1415926535897932384626433832795;
+static const double K2PI=6.283185307179586476925286766559;
 static const double KEARTHRADIUS=6378.135;
 static const double __f=3.352779E-3;
 static const double KMFACTOR=7.292115E-5;
 static const double KAU=1.4959787066E8; //Km
 
 static const double KDEG2RAD  =   KPI / 180.0;   //   0.0174532925199433
+static const double KRAD2DEG  =  180.0 / KPI ;   //   0.0174532925199433
 static const double XPDOTP   =  1440.0 / K2PI;  // 229.1831180523293 minutes per radian (earth rotation)
 
 #endif // _STDSAT_H_

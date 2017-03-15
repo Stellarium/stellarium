@@ -91,7 +91,7 @@ QString SubContour::toJSON() const
 	}
 	res[res.size()-1]=']';
 	return res;
-};
+}
 
 OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {

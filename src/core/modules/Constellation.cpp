@@ -27,6 +27,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "ConstellationMgr.hpp"
 
 #include <algorithm>
@@ -40,6 +41,7 @@ Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
 bool Constellation::seasonalRuleEnabled = false;
+float Constellation::artIntensityFovScale = 1.0f;
 
 Constellation::Constellation()
 	: numberOfSegments(0)
@@ -149,7 +151,6 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 			case ConstellationMgr::constellationsAbbreviated:
 				name=(abbreviation.startsWith('.') ? "" : abbreviation);
 				break;
-			Q_ASSERT(0);
 		}
 
 		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
@@ -161,8 +162,8 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 {
 	if (checkVisibility())
 	{
-		const float intensity = artFader.getInterstate();
-		if (artTexture && intensity && region.intersects(boundingCap))
+		const float intensity = artFader.getInterstate() * artIntensityFovScale;
+		if (artTexture && intensity > 0.0f && region.intersects(boundingCap))
 		{
 			sPainter.setColor(intensity,intensity,intensity);
 
@@ -178,14 +179,11 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 // Draw the art texture
 void Constellation::drawArt(StelPainter& sPainter) const
 {
-	glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.enableTexture2d(true);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setCullFace(true);
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	drawArtOptim(sPainter, *region);
-
-	glDisable(GL_CULL_FACE);
+	sPainter.setCullFace(false);
 }
 
 const Constellation* Constellation::isStarIn(const StelObject* s) const
@@ -216,13 +214,11 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 	if (!boundaryFader.getInterstate())
 		return;
 
-	sPainter.enableTexture2d(false);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
+	sPainter.setBlending(true);
 	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
 
-	unsigned int i, j, size;
+	unsigned int i, j;
+	size_t size;
 	Vec3f pt1, pt2;
 	Vec3d ptd1, ptd2;
 	std::vector<Vec3f> *points;
@@ -259,7 +255,7 @@ bool Constellation::checkVisibility() const
 	bool visible = false;
 	int year, month, day;
 	// Get the current month
-	StelUtils::getDateFromJulianDay(StelApp::getInstance().getCore()->getJDay(), &year, &month, &day);
+	StelUtils::getDateFromJulianDay(StelApp::getInstance().getCore()->getJD(), &year, &month, &day);
 	if (endSeason >= beginSeason)
 	{
 		// OK, it's a "normal" season rule...
@@ -275,6 +271,29 @@ bool Constellation::checkVisibility() const
 	}
 	return visible;
 }
+
+QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
+{
+	Q_UNUSED(core);
+	QString str;
+	QTextStream oss(&str);
+
+	if (flags&Name)
+	{
+		oss << "<h2>" << getNameI18n();
+		if (!getShortName().isEmpty())
+			oss << " (" << getShortName() << ")";
+		oss << "</h2>";
+	}
+
+	if (flags&ObjectType)
+		oss << q_("Type: <b>%1</b>").arg(q_("constellation")) << "<br />";
+
+	postProcessInfoString(str, flags);
+
+	return str;
+}
+
 
 StelObjectP Constellation::getBrightestStarInConstellation(void) const
 {

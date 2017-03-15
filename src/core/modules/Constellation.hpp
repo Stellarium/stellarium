@@ -39,11 +39,11 @@ class StelPainter;
 //! @class Constellation
 //! The Constellation class models a grouping of stars in a Sky Culture.
 //! Each Constellation consists of a list of stars identified by their
-//! @var abbreviation and Hipparcos catalogue numbers (taken from @file: constellationship.fab),
-//! another entry in @file constellation_names.eng.fab with the defining abbreviated name,
-//! @var nativeName, and translatable @var englishName (translation goes into @var nameI18),
-//! boundary shape from @file constellations_boundaries.dat and an (optional) artistic pictorial representation.
-//! GZ NEW: The @var nativeName should be accessible in a GUI option, so that e.g. original names as written in a
+//! abbreviation and Hipparcos catalogue numbers (taken from file: constellationship.fab),
+//! another entry in file constellation_names.eng.fab with the defining abbreviated name,
+//! nativeName, and translatable englishName (translation goes into nameI18),
+//! boundary shape from file constellations_boundaries.dat and an (optional) artistic pictorial representation.
+//! GZ NEW: The nativeName should be accessible in a GUI option, so that e.g. original names as written in a
 //! concrete book where a skyculture has been taken from can be assured even when translation is available.
 //! TODO: There should be a distinction between constellations and asterisms, which are "inofficial" figures within a sky culture.
 //! For example, Western sky culture has a "Big Dipper", "Coathanger", etc. These would be nice to see, but in different style.
@@ -61,11 +61,7 @@ private:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString a description of the constellation.
-	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const
-	{
-		if (flags&Name) return getNameI18n() + "(" + getShortName() + ")";
-		else return "";
-	}
+	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const;
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
@@ -107,8 +103,8 @@ private:
 
 	//! Get the translated name for the Constellation.
 	QString getNameI18n() const {return nameI18;}
-	//! Get the English name for the Constellation (returns the abbreviation).
-	QString getEnglishName() const {return abbreviation;}
+	//! Get the English name for the Constellation.
+	QString getEnglishName() const {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.
@@ -188,6 +184,9 @@ private:
 
 	static bool singleSelected;	
 	static bool seasonalRuleEnabled;
+	// set by ConstellationMgr to fade out art on small FOV values
+	// see LP:#1294483
+	static float artIntensityFovScale;
 };
 
 #endif // _CONSTELLATION_HPP_

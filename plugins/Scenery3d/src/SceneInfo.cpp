@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "SceneInfo.hpp"
@@ -459,6 +459,13 @@ void StoredView::readArray(QSettings &ini, StoredViewList &list, int size, bool 
 		sv.description = ini.value("description").toString();
 		sv.position = StelUtils::strToVec4d(ini.value("position").toString());
 		sv.view_fov = StelUtils::strToVec3f(ini.value("view_fov").toString());
+		if (ini.contains("JD"))
+		{
+			sv.jdIsRelevant=true;
+			sv.jd=ini.value("JD").toDouble();
+		}
+		else
+			sv.jdIsRelevant=false;
 
 		list.append(sv);
 	}
@@ -475,6 +482,8 @@ void StoredView::writeArray(QSettings &ini, const StoredViewList &list)
 		ini.setValue("description", view.description);
 		ini.setValue("position", StelUtils::vec4dToStr(view.position));
 		ini.setValue("view_fov", StelUtils::vec3fToStr(view.view_fov));
+		if (view.jdIsRelevant)
+			ini.setValue("JD", (view.jd));
 	}
 }
 

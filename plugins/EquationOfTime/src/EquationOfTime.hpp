@@ -30,12 +30,39 @@ class QPixmap;
 class StelButton;
 class EquationOfTimeWindow;
 
+/*! @defgroup equationOfTime Equation of Time plug-in
+@{
+The %Equation of Time plugin shows the solution of the equation of time.
+
+The equation of time describes the discrepancy between two kinds of solar
+time. These are apparent solar time, which directly tracks the motion of
+the sun, and mean solar time, which tracks a fictitious "mean" sun with
+noons 24 hours apart. There is no universally accepted definition of the
+sign of the equation of time. Some publications show it as positive when
+a sundial is ahead of a clock; others when the clock is ahead of the sundial.
+In the English-speaking world, the former usage is the more common, but is
+not always followed. Anyone who makes use of a published table or graph
+should first check its sign usage.
+
+<b>Configuration</b>
+
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [EquationOfTime]).
+
+@}
+*/
+
+//! @class EquationOfTime
+//! @ingroup equationOfTime
+//! Main class of the %Equation of Time plugin.
+//! @author Alexander Wolf
 class EquationOfTime : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool showEOT
 		   READ isEnabled
-		   WRITE enableEquationOfTime)
+		   WRITE enableEquationOfTime
+		   NOTIFY equationOfTimeStateChanged)
 
 public:
 	EquationOfTime();
@@ -58,12 +85,6 @@ public:
 
 	//! Save the settings to the main configuration file.
 	void saveSettingsToConfig(void);
-
-	//! Get solution of equation of time
-	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
-	//! @param JDay JD
-	//! @return time in minutes
-	double getSolutionEquationOfTime(const double JDay) const;
 
 	//! Is plugin enabled?
 	bool isEnabled() const
@@ -111,6 +132,9 @@ public slots:
 
 private slots:
 	void updateMessageText();
+
+signals:
+	void equationOfTimeStateChanged(bool b);
 
 private:
 	// if existing, delete EquationOfTime section in main config.ini, then create with default values

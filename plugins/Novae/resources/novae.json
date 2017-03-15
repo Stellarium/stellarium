@@ -1,6 +1,6 @@
 {
 	"version": "1",
-	"limit": 8.6,
+	"limit": 9.0,
 	"shortName": "List of bright novae in the Milky Way galaxy",
 	"nova":
 	{
@@ -243,7 +243,7 @@
 			"m9": 748,
 			"distance": 3.72,
 			"RA": "08h11m46.1s",
-			"Dec": "35d21m05s"
+			"Dec": "-35d21m05s"
 		},
 		"V0500 Aql":
 		{
@@ -596,6 +596,36 @@
 			"peakJD": 2457103.6,
 			"RA": "18h36m56.85s",
 			"Dec": "-28d55m40s"
+		},
+		"V5669 Sgt":
+		{
+			"name": "Nova Sagittarii 2015 #3",
+			"type": "NA",
+			"maxMagnitude": 9.0,
+			"minMagnitude": 11,
+			"peakJD": 2457298.9,
+			"RA": "18h03m32.77s",
+			"Dec": "-28d16m05.3s"
+		},
+		"ASASSN-16kt":
+		{
+			"name": "Nova Lupi 2016",
+			"type": "NA",
+			"maxMagnitude": 5.6,
+			"minMagnitude": 18.5,
+			"peakJD": 2457656.9028,
+			"RA": "15h29m01.82s",
+			"Dec": "-44d49m40.9s"
+		},
+		"TCP J18102829-2729590":
+		{
+			"name": "Nova Sagittarii 2016",
+			"type": "NA",
+			"maxMagnitude": 7.9,
+			"minMagnitude": 14.0,
+			"peakJD": 2457687.04306,
+			"RA": "18h10m28.29s",
+			"Dec": "-27d29m59.0s"
 		}
 	}
 }

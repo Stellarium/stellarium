@@ -24,6 +24,7 @@
 #include "Satellite.hpp" // for the flags
 
 //! Custom proxy model allowing filtering by satellite group and flag.
+//! @ingroup satellites
 class SatellitesListFilterModel : public QSortFilterProxyModel
 {
 	Q_OBJECT

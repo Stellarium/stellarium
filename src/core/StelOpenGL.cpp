@@ -16,10 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cstdio>
 #include "StelOpenGL.hpp"
+#include <QDebug>
 
-const char* getGLErrorText(int code) {
+QOpenGLContext* StelOpenGL::mainContext = NULL;
+
+const char* StelOpenGL::getGLErrorText(GLenum code) {
 	switch (code) {
 		case GL_INVALID_ENUM:
 			return "GL_INVALID_ENUM";
@@ -32,20 +34,18 @@ const char* getGLErrorText(int code) {
 		case GL_OUT_OF_MEMORY:
 			return "GL_OUT_OF_MEMORY";
 		default:
-			return "undefined error";
+			return "unknown GL error type";
 	}
 }
 
-int checkGLErrors(const char *file, int line)
+int StelOpenGL::checkGLErrors(const char *file, int line)
 {
 	int errors = 0;
-	while (true)
+	for(GLenum x; (x=mainContext->functions()->glGetError())!=GL_NO_ERROR; )
 	{
-		GLenum x = glGetError();
-		if (x == GL_NO_ERROR)
-			return errors;
-		printf("%s:%d: OpenGL error: %d (%s)\n",
-			file, line, x, getGLErrorText(x));
-		errors++;
+		++errors;
+		qCritical("%s:%d: OpenGL error: %d (%s)\n",
+			  file, line, x, getGLErrorText(x));
 	}
+	return errors;
 }

@@ -76,12 +76,19 @@ public:
 	//! @param action the associated action. Connections are automatically done with the signals if relevant.
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
-			   const QPixmap& pixHover=QPixmap(),
-			   class StelAction* action=NULL, bool noBackground=false);
+		   const QPixmap& pixHover=QPixmap(),
+		   class StelAction* action=NULL, bool noBackground=false);
 	
+	//! Constructor
+	//! @param parent the parent item
+	//! @param pixOn the pixmap to display when the button is toggled
+	//! @param pixOff the pixmap to display when the button is not toggled
+	//! @param pixHover a pixmap slowly blended when mouse is over the button
+	//! @param actionId the id of the associated action. Connections are automatically done with the signals if relevant.
+	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
-			   const QPixmap& pixHover=QPixmap(),
-			   const QString& actionId=QString(), bool noBackground=false);
+		   const QPixmap& pixHover,
+		   const QString& actionId, bool noBackground=false);
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
@@ -92,8 +99,8 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	//! @param isTristate define whether the button is a tristate or an on/off button
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
-			   const QPixmap& pixHover=QPixmap(),
-			   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
+		   const QPixmap& pixHover,
+		   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
 	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
@@ -110,6 +117,8 @@ public:
 
 	//! Set the background pixmap of the button.
 	void setBackgroundPixmap(const QPixmap& newBackground);
+
+	void setFocusOnSky(bool b) { flagChangeFocus=b; }
 
 signals:
 	//! Triggered when the button state changes
@@ -150,6 +159,7 @@ private:
 	QPixmap pixBackground;
 
 	int checked;
+	bool flagChangeFocus;
 
 	QTimeLine* timeLine;
 	class StelAction* action;
@@ -163,7 +173,7 @@ private:
 class LeftStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-	Q_INTERFACES(QGraphicsItem);
+	Q_INTERFACES(QGraphicsItem)
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
@@ -179,13 +189,14 @@ private slots:
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
+	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The button bar on the bottom containing actions toggle buttons
 class BottomStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-	Q_INTERFACES(QGraphicsItem);
+	Q_INTERFACES(QGraphicsItem)
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual ~BottomStelBar();
@@ -245,10 +256,19 @@ private:
 	void updateText(bool forceUpdatePos=false);
 	void updateButtonsGroups();
 	QRectF getButtonsBoundingRect() const;
+	// Elements which get displayed above the buttons:
 	QGraphicsSimpleTextItem* location;
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
+	// For bad graphics, show these instead. We can use location etc for font info.
+	// We use ad-hoc pixmaps instead if command-line arg. -t (--text-fix) is given.
+	QGraphicsPixmapItem* locationPixmap;
+	QGraphicsPixmapItem* datetimePixmap;
+	QGraphicsPixmapItem* fovPixmap;
+	QGraphicsPixmapItem* fpsPixmap;
+
+
 
 	struct ButtonGroup
 	{
@@ -283,6 +303,7 @@ private:
 	bool flagShowTZ;
 
 	QGraphicsSimpleTextItem* helpLabel;
+	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The path around the bottom left button bars

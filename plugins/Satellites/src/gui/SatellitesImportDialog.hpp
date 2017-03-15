@@ -30,6 +30,7 @@ class QFile;
 class QTemporaryFile;
 class QNetworkReply;
 
+//! @ingroup satellites
 class SatellitesImportDialog : public StelDialog
 {
 	Q_OBJECT

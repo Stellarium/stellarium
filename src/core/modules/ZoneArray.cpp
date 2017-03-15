@@ -255,10 +255,9 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 			 int mag_range, int mag_steps)
 			: fname(fname), level(level), mag_min(mag_min),
 			  mag_range(mag_range), mag_steps(mag_steps),
-			  star_position_scale(0.0), zones(0), file(file)
+			  star_position_scale(0.0), nr_of_stars(0), zones(0), file(file)
 {
-	nr_of_zones = StelGeodesicGrid::nrOfZones(level);
-	nr_of_stars = 0;
+	nr_of_zones = StelGeodesicGrid::nrOfZones(level);	
 }
 
 bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
@@ -467,7 +466,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
 	static const double d2000 = 2451545.0;
-	const float movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
+	const float movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDE()-d2000)/365.25) / star_position_scale;
 
 	// GZ, added for extinction
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
@@ -521,6 +520,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		}
 
 		int extinctedMagIndex = s->getMag();
+		float twinkleFactor=1.0f; // allow height-dependent twinkle.
 		if (withExtinction)
 		{
 			Vec3f altAz(vf);
@@ -532,9 +532,10 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			if (extinctedMagIndex >= cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
+			twinkleFactor=qMin(1.0f, 1.0f-0.9f*altAz[2]); // suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
 		}
 	
-		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
@@ -549,7 +550,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 					  QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25)/ star_position_scale;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf(v[0], v[1], v[2]);

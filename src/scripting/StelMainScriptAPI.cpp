@@ -26,7 +26,7 @@
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "MeteorMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
@@ -62,6 +62,8 @@
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QTimer>
+#include <QEventLoop>
 
 #include <cmath>
 
@@ -81,12 +83,13 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestDropSound(const QString&)), StelApp::getInstance().getStelAudioMgr(), SLOT(dropSound(const QString&)));
 
 	connect(this, SIGNAL(requestLoadVideo(const QString&, const QString&, float, float, bool, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(loadVideo(const QString&, const QString&, float, float, bool, float)));
-	connect(this, SIGNAL(requestPlayVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideo(const QString&)));
+	connect(this, SIGNAL(requestPlayVideo(const QString&, const bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideo(const QString&, const bool)));
+	connect(this, SIGNAL(requestPlayVideoPopout(QString,float,float,float,float,float,float,float,bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideoPopout(QString,float,float,float,float,float,float,float,bool)));
 	connect(this, SIGNAL(requestPauseVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(pauseVideo(const QString&)));
 	connect(this, SIGNAL(requestStopVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(stopVideo(const QString&)));
 	connect(this, SIGNAL(requestDropVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(dropVideo(const QString&)));
-	connect(this, SIGNAL(requestSeekVideo(const QString&, qint64)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64)));
-	connect(this, SIGNAL(requestSetVideoXY(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoXY(const QString&, float, float)));
+	connect(this, SIGNAL(requestSeekVideo(const QString&, qint64, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64, bool)));
+	connect(this, SIGNAL(requestSetVideoXY(const QString&, float, float, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoXY(const QString&, float, float, bool)));
 	connect(this, SIGNAL(requestSetVideoAlpha(const QString&, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoAlpha(const QString&, float)));
 	connect(this, SIGNAL(requestResizeVideo(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(resizeVideo(const QString&, float, float)));
 	connect(this, SIGNAL(requestShowVideo(const QString&, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(showVideo(const QString&, bool)));
@@ -104,17 +107,17 @@ StelMainScriptAPI::~StelMainScriptAPI()
 }
 
 //! Set the current date in Julian Day
-//! @param JD the Julian Date
+//! @param JD the Julian Date (UT)
 void StelMainScriptAPI::setJDay(double JD)
 {
-	StelApp::getInstance().getCore()->setJDay(JD);
+	StelApp::getInstance().getCore()->setJD(JD);
 }
 
 //! Get the current date in Julian Day
-//! @return the Julian Date
+//! @return the Julian Date (UT)
 double StelMainScriptAPI::getJDay() const
 {
-	return StelApp::getInstance().getCore()->getJDay();
+	return StelApp::getInstance().getCore()->getJD();
 }
 
 //! Set the current date in Modified Julian Day
@@ -131,31 +134,42 @@ double StelMainScriptAPI::getMJDay() const
 	return StelApp::getInstance().getCore()->getMJDay();
 }
 
-void StelMainScriptAPI::setDate(const QString& dt, const QString& spec, const bool &enableDeltaT)
+void StelMainScriptAPI::setDate(const QString& dateStr, const QString& spec, const bool &dateIsDT)
 {
-	bool relativeTime = false;
-	if (dt.startsWith("+") || dt.startsWith("-") || (dt.startsWith("now") && (dt.startsWith("+") || dt.startsWith("-"))))
-		relativeTime = true;
-	double JD = jdFromDateString(dt, spec);
 	StelCore* core = StelApp::getInstance().getCore();
-	if (relativeTime)
+	double JD = jdFromDateString(dateStr, spec);
+	if (dateIsDT)
 	{
-		core->setJDay(JD);
+		qWarning() << "StelMainScriptAPI::setDate() called with final Boolean set to indicate Dynamical Time. This is new in 0.14, make sure you did this intentionally.";
+		qWarning() << "This warning will go away in Stellarium 0.16, please update the script by then to be sure.";
+		core->setJDE(JD);
 	}
 	else
-	{
-		if (enableDeltaT)
-		{
-			// add Delta-T correction for date
-			core->setJDay(JD + core->getDeltaT(JD)/86400);
-		}
-		else
-		{
-			// set date without Delta-T correction
-			// compatible with 0.11
-			core->setJDay(JD);
-		}
-	}
+		core->setJD(JD);
+
+//	bool relativeTime = false;
+//	if (dateStr.startsWith("+") || dateStr.startsWith("-") || (dateStr.startsWith("now") && (dateStr.startsWith("+") || dateStr.startsWith("-"))))
+//		relativeTime = true;
+//	double JD = jdFromDateString(dateStr, spec);
+//	StelCore* core = StelApp::getInstance().getCore();
+//	if (relativeTime)
+//	{
+//		core->setJDay(JD);
+//	}
+//	else
+//	{
+//		if (dateIsDT)
+//		{
+//			// add Delta-T correction for date
+//			core->setJDay(JD + core->getDeltaT(JD)/86400);
+//		}
+//		else
+//		{
+//			// set date without Delta-T correction
+//			// compatible with 0.11
+//			core->setJDay(JD);
+//		}
+//	}
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
@@ -163,12 +177,12 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 	if (spec=="utc")
 		return StelUtils::julianDayToISO8601String(getJDay());
 	else
-		return StelUtils::julianDayToISO8601String(getJDay()+StelUtils::getGMTShiftFromQT(getJDay())/24);
+		return StelUtils::julianDayToISO8601String(getJDay()+StelApp::getInstance().getCore()->getUTCOffset(getJDay())/24);
 }
 
 QString StelMainScriptAPI::getDeltaT() const
 {
-	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT(getJDay())/3600.);
+	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT()/3600.);
 }
 
 QString StelMainScriptAPI::getDeltaTAlgorithm() const
@@ -262,11 +276,12 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	return map;
 }
 
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite)
 {
 	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
-	StelMainView::getInstance().saveScreenShot(prefix, dir);
+	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
+	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
@@ -391,6 +406,17 @@ void StelMainScriptAPI::setDiskViewport(bool b)
 	emit(requestSetDiskViewport(b));
 }
 
+void StelMainScriptAPI::setViewportOffset(const float x, const float y)
+{	
+	StelCore* core = StelApp::getInstance().getCore();
+	core->getMovementMgr()->moveViewport(x,y);
+}
+
+void StelMainScriptAPI::setViewportStretch(const float stretch)
+{
+	StelApp::getInstance().getCore()->setViewportStretch(stretch);
+}
+
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double ra0, double dec0,
 				     double ra1, double dec1,
@@ -463,10 +489,10 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 }
 
 void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double alt0, double azi0,
-					  double alt1, double azi1,
-					  double alt2, double azi2,
-					  double alt3, double azi3,
+					  double azi0, double alt0,
+					  double azi1, double alt1,
+					  double azi2, double alt2,
+					  double azi3, double alt3,
 					  double minRes, double maxBright, bool visible)
 {
 	QString path = "scripts/" + filename;
@@ -485,9 +511,9 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 	XYZ*=RADIUS_NEB;
 	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-			   Mat4f::zrotation((180-azi)*M_PI/180.) *
+			   Mat4f::zrotation((180.-azi)*M_PI/180.) *
 			   Mat4f::yrotation(-alt*M_PI/180.) *
-			   Mat4f::xrotation((rotation+90)*M_PI/180.);
+			   Mat4f::xrotation((rotation+90.)*M_PI/180.);
 
 	Vec3f corners[4];
 	corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
@@ -545,6 +571,16 @@ void StelMainScriptAPI::dropSound(const QString& id)
 	emit(requestDropSound(id));
 }
 
+qint64 StelMainScriptAPI::getSoundPosition(const QString& id)
+{
+	return StelApp::getInstance().getStelAudioMgr()->position(id);
+}
+
+qint64 StelMainScriptAPI::getSoundDuration(const QString& id)
+{
+	return StelApp::getInstance().getStelAudioMgr()->duration(id);
+}
+
 void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
 	QString path = StelFileMgr::findFile("scripts/" + filename);
@@ -557,9 +593,14 @@ void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, fl
 	emit(requestLoadVideo(path, id, x, y, show, alpha));
 }
 
-void StelMainScriptAPI::playVideo(const QString& id)
+void StelMainScriptAPI::playVideo(const QString& id, bool keepVisibleAtEnd)
 {
-	emit(requestPlayVideo(id));
+	emit(requestPlayVideo(id, keepVisibleAtEnd));
+}
+
+void StelMainScriptAPI::playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)
+{
+	emit(requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition));
 }
 
 void StelMainScriptAPI::pauseVideo(const QString& id)
@@ -577,14 +618,14 @@ void StelMainScriptAPI::dropVideo(const QString& id)
 	emit(requestDropVideo(id));
 }
 
-void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms)
+void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms, bool pause)
 {
-	emit(requestSeekVideo(id, ms));
+	emit(requestSeekVideo(id, ms, pause));
 }
 
-void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y)
+void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y, bool relative)
 {
-	emit(requestSetVideoXY(id, x, y));
+	emit(requestSetVideoXY(id, x, y, relative));
 }
 
 void StelMainScriptAPI::setVideoAlpha(const QString& id, float alpha)
@@ -600,6 +641,16 @@ void StelMainScriptAPI::resizeVideo(const QString& id, float w, float h)
 void StelMainScriptAPI::showVideo(const QString& id, bool show)
 {
 	emit(requestShowVideo(id, show));
+}
+
+qint64 StelMainScriptAPI::getVideoDuration(const QString& id)
+{
+	return StelApp::getInstance().getStelVideoMgr()->getVideoDuration(id);
+}
+
+qint64 StelMainScriptAPI::getVideoPosition(const QString& id)
+{
+	return StelApp::getInstance().getStelVideoMgr()->getVideoPosition(id);
 }
 
 int StelMainScriptAPI::getScreenWidth()
@@ -655,9 +706,19 @@ void StelMainScriptAPI::debug(const QString& s)
 	StelApp::getInstance().getScriptMgr().debug(s);
 }
 
-void StelMainScriptAPI::output(const QString &s)
+void StelMainScriptAPI::output(const QString &s) const
 {
 	StelApp::getInstance().getScriptMgr().output(s);
+}
+
+void StelMainScriptAPI::resetOutput(void) const
+{
+	StelApp::getInstance().getScriptMgr().resetOutput();
+}
+
+void StelMainScriptAPI::saveOutputAs(const QString &filename)
+{
+	StelApp::getInstance().getScriptMgr().saveOutputAs(filename);
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
@@ -691,7 +752,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		if (nowRe.capturedTexts().at(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
-			jd = core->getJDay();
+			jd = core->getJD();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 		{
@@ -734,14 +795,39 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	return StelUtils::getJDFromSystem();
 }
 
+void StelMainScriptAPI::wait(double t) {
+	QEventLoop loop;
+	QTimer timer;
+	timer.setInterval(1000*t);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
+void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
+{
+	double deltaJD = jdFromDateString(dt, spec) - getJDay();
+	double timeSpeed = getTimeRate();
+	if (timeSpeed == 0.) { qDebug() << "waitFor() called with no time passing - would be infinite. not waiting!"; return;}
+	QEventLoop loop;
+	QTimer timer;
+	int interval=1000*deltaJD*86400/timeSpeed;
+	//qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
+	timer.setInterval(interval);
+	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+	timer.start();
+	loop.exec();
+}
+
+
 void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	omgr->setFlagSelectedObjectPointer(pointer);
-	if (name=="")
+	if (name.isEmpty() || !omgr->findAndSelect(name))
+	{
 		omgr->unSelect();
-	else
-		omgr->findAndSelect(name);
+	}
 }
 
 //DEPRECATED: Use getObjectInfo()
@@ -754,99 +840,8 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
-	QVariantMap map;
 
-	if (!obj)
-	{
-		debug("getObjectData WARNING - object not found: " + name);
-		map.insert("found", false);
-		return map;
-	}
-	else
-	{
-		map.insert("found", true);
-	}
-
-	
-	Vec3d pos;
-	double ra, dec, alt, az, glong, glat;
-	StelCore* core = StelApp::getInstance().getCore();
-
-	// ra/dec
-	pos = obj->getEquinoxEquatorialPos(core);
-	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
-
-	// ra/dec in J2000
-	pos = obj->getJ2000EquatorialPos(core);
-	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
-
-	// apparent altitude/azimuth
-	pos = obj->getAltAzPosApparent(core);
-	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
-	if (az > M_PI*2)
-		az -= M_PI*2;
-
-	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);
-
-	// geometric altitude/azimuth
-	pos = obj->getAltAzPosGeometric(core);
-	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
-	if (az > M_PI*2)
-		az -= M_PI*2;
-
-	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);
-
-	// galactic long/lat
-	pos = obj->getGalacticPos(core);
-	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);
-
-	// magnitude
-	map.insert("vmag", obj->getVMagnitude(core));
-	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
-
-	// angular size
-	double angularSize = 2.*obj->getAngularSize(core)*M_PI/180.;
-	bool sign;
-	double deg;
-	StelUtils::radToDecDeg(angularSize, sign, deg);
-	if (!sign)
-		deg *= -1;
-	map.insert("size", angularSize);
-	map.insert("size-dd", deg);
-	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
-	map.insert("size-dms", StelUtils::radToDmsStr(angularSize, true));
-
-	if (obj->getType().toLower()=="planet" && name!="Sun")
-	{
-		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-		map.insert("distance", obj->getJ2000EquatorialPos(core).length());
-		double phase = ssmgr->getPhaseForPlanet(name);
-		map.insert("phase", phase);
-		map.insert("illumination", 100.*phase);
-		double phaseAngle = ssmgr->getPhaseAngleForPlanet(name);
-		map.insert("phase-angle", phaseAngle);
-		map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
-		map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
-		double elongation = ssmgr->getElongationForPlanet(name);
-		map.insert("elongation", elongation);
-		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
-		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
-	}
-
-	// localized name
-	map.insert("localized-name", obj->getNameI18n());
-
-	return map;
+	return StelMainScriptAPI::getObjectInfo(obj);
 }
 
 QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
@@ -862,6 +857,12 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 	StelObjectP obj = omgr->getSelectedObject()[0];
 
+	return StelMainScriptAPI::getObjectInfo(obj);
+}
+
+QVariantMap StelMainScriptAPI::getObjectInfo(const StelObjectP obj)
+{
+	QVariantMap map;
 	if (!obj)
 	{
 		debug("getObjectData WARNING - object not found");
@@ -877,44 +878,77 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
+	map.insert("dec", dec*180./M_PI);	
 
 	// ra/dec in J2000
 	pos = obj->getJ2000EquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);	
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	float direction = 3.; // N is zero, E is 90 degrees
+	if (useOldAzimuth)
+		direction = 2.;
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);	
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
 	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);	
 
 	// galactic long/lat
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", glong*180./M_PI);
 	map.insert("glat", glat*180./M_PI);
+
+	// supergalactic long/lat
+	pos = obj->getSupergalacticPos(core);
+	StelUtils::rectToSphe(&glong, &glat, pos);
+	map.insert("sglong", glong*180./M_PI);
+	map.insert("sglat", glat*180./M_PI);
+
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	double ra_equ, dec_equ, lambda, beta;
+	// J2000
+	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+	// ecliptic longitude/latitude (J2000 frame)
+	StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getJ2000EquatorialPos(core));
+	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+	if (lambda<0) lambda+=2.0*M_PI;
+	map.insert("elongJ2000", lambda*180./M_PI);
+	map.insert("elatJ2000", beta*180./M_PI);
+
+	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
+	{
+		// ecliptic longitude/latitude
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, obj->getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		map.insert("elong", lambda*180./M_PI);
+		map.insert("elat", beta*180./M_PI);
+	}
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
@@ -947,6 +981,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+		map.insert("ptype", ssmgr->getPlanetType(obj->getEnglishName()));
 	}
 
 	// english name or designation & localized name
@@ -961,7 +996,7 @@ void StelMainScriptAPI::clear(const QString& state)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
@@ -983,14 +1018,33 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(10);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagEclipticJ2000Line(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagColureLines(false);
+		glmgr->setFlagPrimeVerticalLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagEclipticGrid(false);
+		glmgr->setFlagEclipticJ2000Grid(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1017,14 +1071,28 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(true);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(true);
 		cmgr->setFlagLabels(true);
@@ -1051,14 +1119,28 @@ void StelMainScriptAPI::clear(const QString& state)
 		mmgr->setZHR(0);
 		glmgr->setFlagAzimuthalGrid(false);
 		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(false);
 		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
 		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
 		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
-		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
 		lmgr->setFlagCardinalsPoints(false);
 		cmgr->setFlagLines(false);
 		cmgr->setFlagLabels(false);
@@ -1072,6 +1154,103 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagFog(false);
 		zl->setFlagShow(false);
 	}
+	else if (state.toLower() == "galactic")
+	{
+		movmgr->setMountMode(StelMovementMgr::MountGalactic);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(true);
+		glmgr->setFlagSupergalacticGrid(false);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticEquatorLine(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
+	}
+	else if (state.toLower() == "supergalactic")
+	{
+		movmgr->setMountMode(StelMovementMgr::MountSupergalactic);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagSupergalacticGrid(true);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Line(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticEquatorLine(false);
+		glmgr->setFlagSupergalacticEquatorLine(false);
+		glmgr->setFlagCircumpolarCircles(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagCelestialJ2000Poles(false);
+		glmgr->setFlagCelestialPoles(false);
+		glmgr->setFlagZenithNadir(false);
+		glmgr->setFlagEclipticJ2000Poles(false);
+		glmgr->setFlagEclipticPoles(false);
+		glmgr->setFlagGalacticPoles(false);
+		glmgr->setFlagSupergalacticPoles(false);
+		glmgr->setFlagEquinoxJ2000Points(false);
+		glmgr->setFlagEquinoxPoints(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
+	}
+
 	else
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";
@@ -1139,17 +1318,30 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aim;
-	double dAlt = StelUtils::getDecAngle(alt);
+	double dAlt = StelUtils::getDecAngle(alt);	
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
 
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		dAzi -= M_PI;
+
 	StelUtils::spheToRect(dAzi,dAlt,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), duration);
+
+	// make up vector more stable:
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(dAlt)> (0.9*M_PI/2.0)) )
+		aimUp=Vec3d(-cos(dAzi), -sin(dAzi), 0.) * (dAlt>0. ? 1. : -1.);
+	else
+		aimUp=Vec3d(0., 0., 1.);
+
+	mvmgr->moveToAltAzi(aim, aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
+	StelCore* core = StelApp::getInstance().getCore();
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
@@ -1158,7 +1350,15 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), duration);
+	// make up vector more stable:
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
+		aimUp=core->equinoxEquToJ2000(Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. ));
+	else
+		aimUp=core->equinoxEquToJ2000(Vec3d(0., 0., 1.));
+
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, float duration)
@@ -1173,10 +1373,18 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aimJ2000);	
-	mvmgr->moveToJ2000(aimJ2000, duration);
+	// make up vector more stable. Not sure if we have to set the up vector in this case though.
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
+		aimUp=Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. );
+	else
+		aimUp=Vec3d(0., 0., 1.);
+
+	mvmgr->moveToJ2000(aimJ2000, aimUp, duration);
 }
 
-QString StelMainScriptAPI::getAppLanguage()
+QString StelMainScriptAPI::getAppLanguage() const
 {
 	return StelApp::getInstance().getLocaleMgr().getAppLanguage();
 }
@@ -1186,7 +1394,7 @@ void StelMainScriptAPI::setAppLanguage(QString langCode)
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(langCode);
 }
 
-QString StelMainScriptAPI::getSkyLanguage()
+QString StelMainScriptAPI::getSkyLanguage() const
 {
 	return StelApp::getInstance().getLocaleMgr().getSkyLanguage();
 }
@@ -1211,7 +1419,7 @@ void StelMainScriptAPI::setMilkyWayIntensity(double i)
 	GETSTELMODULE(MilkyWay)->setIntensity(i);
 }
 
-double StelMainScriptAPI::getMilkyWayIntensity()
+double StelMainScriptAPI::getMilkyWayIntensity() const
 {
 	return GETSTELMODULE(MilkyWay)->getIntensity();
 }
@@ -1226,7 +1434,39 @@ void StelMainScriptAPI::setZodiacalLightIntensity(double i)
 	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
 }
 
-double StelMainScriptAPI::getZodiacalLightIntensity()
+double StelMainScriptAPI::getZodiacalLightIntensity() const
 {
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
+}
+
+int StelMainScriptAPI::getBortleScaleIndex() const
+{
+	return StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
+}
+
+void StelMainScriptAPI::setBortleScaleIndex(int index)
+{
+	StelApp::getInstance().getCore()->getSkyDrawer()->setBortleScaleIndex(index);
+}
+
+QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
+{
+	Vec3d aim, v;
+	double dAlt = StelUtils::getDecAngle(alt);
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		dAzi -= M_PI;
+
+	StelUtils::spheToRect(dAzi,dAlt,aim);
+
+	const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+
+	prj->project(aim, v);
+
+	QVariantMap map;
+	map.insert("x", qRound(v[0]));
+	map.insert("y", prj->getViewportHeight()-qRound(v[1]));
+
+	return map;
 }

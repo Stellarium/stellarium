@@ -27,7 +27,7 @@
 #include <QObject>
 #include <QSettings>
 
-class Ui_CustomDeltaTEquationDialogForm;
+class Ui_customDeltaTEquationDialogForm;
 
 //! @class CustomDeltaTEquationDialog
 class CustomDeltaTEquationDialog : public StelDialog
@@ -45,7 +45,7 @@ public slots:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent();
-	Ui_CustomDeltaTEquationDialogForm *ui;
+	Ui_customDeltaTEquationDialogForm *ui;
 
 private slots:
 	void saveSettings(void) const;

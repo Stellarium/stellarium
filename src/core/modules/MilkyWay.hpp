@@ -33,6 +33,11 @@ class MilkyWay : public StelModule
 		   READ getFlagShow
 		   WRITE setFlagShow
 		   NOTIFY milkyWayDisplayedChanged)
+	Q_PROPERTY(double intensity
+		   READ getIntensity
+		   WRITE setIntensity
+		   NOTIFY intensityChanged
+		   )
 
 public:
 	MilkyWay();
@@ -52,8 +57,9 @@ public:
 	//! Milky way rendering is being changed from on to off or off to on.
 	virtual void update(double deltaTime);
 	
-	//! Used to determine the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 1.;}
+	//! actionDraw returns 1 (because this is background, very early drawing).
+	//! Other actions return 0 for no action.
+	virtual double getCallOrder(StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
@@ -61,7 +67,7 @@ public slots:
 	//! Get Milky Way intensity.
 	double getIntensity() const {return intensity;}
 	//! Set Milky Way intensity.
-	void setIntensity(double aintensity) {intensity = aintensity;}
+	void setIntensity(double aintensity) {if(aintensity!=intensity){ intensity = aintensity; emit intensityChanged(intensity); }}
 	
 	//! Get the color used for rendering the milky way
 	Vec3f getColor() const {return color;}
@@ -75,11 +81,12 @@ public slots:
 
 signals:
 	void milkyWayDisplayedChanged(const bool displayed);
+	void intensityChanged(double intensity);
 	
 private:
 	StelTextureSP tex;
 	Vec3f color; // global color
-	float intensity;
+	double intensity;
 	class LinearFader* fader;
 
 	struct StelVertexArray* vertexArray;

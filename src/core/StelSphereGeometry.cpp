@@ -136,8 +136,8 @@ bool SphericalRegion::contains(const SphericalRegion* r) const
 		default:
 			return containsDefault(r);
 	}
-	Q_ASSERT(0);
-	return false;
+	//Q_ASSERT(0);
+	//return false;
 }
 
 bool SphericalRegion::intersects(const SphericalPolygon& r) const {return intersectsDefault(&r);}
@@ -164,8 +164,8 @@ bool SphericalRegion::intersects(const SphericalRegion* r) const
 		default:
 			return intersectsDefault(r);
 	}
-	Q_ASSERT(0);
-	return false;
+	//Q_ASSERT(0);
+	//return false;
 }
 
 SphericalRegionP SphericalRegion::getIntersection(const SphericalRegion* r) const
@@ -443,8 +443,8 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			return false;
 		}
 	}
-	Q_ASSERT(0);
-	return false;
+	//Q_ASSERT(0);
+	//return false;
 }
 
 //! Compute the intersection of the circles defined by the 2 caps on the sphere (usually on 2 points) and return it in p1 and p2.
@@ -1314,6 +1314,11 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 	{
 		return SphericalRegionP(new SphericalPolygon(pathFromQVariantList(l)));
 	}
+	else if (code=="CONVEX_POLYGON")
+	{
+		return SphericalRegionP(new SphericalConvexPolygon(singleContourFromQVariantList(l.at(1).toList())));
+	}
+
 	Q_ASSERT(0);
 	return EmptySphericalRegion::staticInstance;
 }

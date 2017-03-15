@@ -27,6 +27,23 @@
 
 class FOVWindow;
 
+/*! @defgroup fieldOfView Field of View Plug-in
+@{
+The %Field of View plugin allows stepwise zooming via keyboard shortcuts like
+in the Cartes du Ciel planetarium program.
+
+<b>Configuration</b>
+
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [FOV]).
+
+@}
+*/
+
+//! @class FOV
+//! Main class of the %Field of View plugin.
+//! @author Alexander Wolf
+//! @ingroup fieldOfView
 class FOV : public StelModule
 {
 	Q_OBJECT
@@ -56,8 +73,8 @@ public:
 	void setQuickFOV(const double value, const int item);
 	double getQuickFOV(const int item) const;
 
-public slots:
-	void setFOV();
+private slots:
+	void setFOV(const int idx);
 
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
@@ -66,7 +83,7 @@ private:
 	QList<double> FOVitem, FOVdefault;
 
 	FOVWindow* mainWindow;
-	QSettings* conf;	
+	QSettings* conf;
 };
 
 

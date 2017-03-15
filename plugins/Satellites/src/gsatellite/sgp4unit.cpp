@@ -1093,7 +1093,8 @@ static void dspace
              // sgp4fix move end checks to end of routine
              if (fabs(t - atime) >= stepp)
                {
-		 iret  = 0;
+		  // NOTE: Never read!
+		  // iret  = 0;
                  iretn = 381;
                }
                else // exit here
@@ -1356,9 +1357,9 @@ bool sgp4init
           em    , emsq  , eeta  , etasq , gam   , argpm , nodem ,
           inclm , mm    , nm    , perige, pinvsq, psisq , qzms24,
           rtemsq, s1    , s2    , s3    , s4    , s5    , s6    ,
-          s7    , sfour , ss1   , ss2   , ss3   , ss4   , ss5   ,
-          ss6   , ss7   , sz1   , sz2   , sz3   , sz11  , sz12  ,
-          sz13  , sz21  , sz22  , sz23  , sz31  , sz32  , sz33  ,
+	  s7    , sfour , ss1=0.0   , ss2=0.0   , ss3=0.0   , ss4=0.0   , ss5=0.0   ,
+	  ss6=0.0   , ss7=0.0   , sz1=0.0   , sz2=0.0   , sz3=0.0   , sz11=0.0  , sz12=0.0  ,
+	  sz13=0.0  , sz21=0.0  , sz22=0.0  , sz23=0.0  , sz31=0.0  , sz32=0.0  , sz33=0.0  ,
           tc    , temp  , temp1 , temp2 , temp3 , tsi   , xpidot,
           xhdot1, z1    , z2    , z3    , z11   , z12   , z13   ,
           z21   , z22   , z23   , z31   , z32   , z33,
@@ -1705,7 +1706,7 @@ bool sgp4
 {
      double am   , axnl  , aynl , betal ,  cosim , cnod  ,
 	 cos2u, coseo1=0.0, cosi , cosip ,  cosisq, cossu , cosu,
-         delm , delomg, em   , emsq  ,  ecose , el2   , eo1 ,
+	 delm , delomg, em   , ecose , el2   , eo1 ,
          ep   , esine , argpm, argpp ,  argpdf, pl,     mrt = 0.0,
          mvt  , rdotl , rl   , rvdot ,  rvdotl, sinim ,
 	 sin2u, sineo1=0.0, sini , sinip ,  sinsu , sinu  ,
@@ -1812,8 +1813,9 @@ bool sgp4
          em  = 1.0e-6;
      mm     = mm + satrec.no * templ;
      xlm    = mm + argpm + nodem;
-     emsq   = em * em;
-     temp   = 1.0 - emsq;
+     // NOTE: Never read!
+     // emsq   = em * em;
+     // temp   = 1.0 - emsq;
 
      nodem  = fmod(nodem, twopi);
      argpm  = fmod(argpm, twopi);
