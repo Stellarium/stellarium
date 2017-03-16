@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>646</width>
-    <height>661</height>
+    <height>677</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -382,22 +382,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="ocularListLabel">
-               <property name="text">
-                <string>Eyepieces</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="ocularListView">
                <property name="editTriggers">
@@ -708,25 +698,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="lensListLabel">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="text">
-                <string>Lenses</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="lensListView">
                <property name="editTriggers">
@@ -996,22 +973,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="sensorListLabel">
-               <property name="text">
-                <string>Sensors</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="ccdListView">
                <property name="editTriggers">
@@ -1506,22 +1473,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="telescopeListLabel">
-               <property name="text">
-                <string>Telescopes</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="telescopeListView">
                <property name="editTriggers">
@@ -1655,6 +1612,12 @@
                 </item>
                 <item row="0" column="1">
                  <widget class="QLineEdit" name="telescopeName">
+                  <property name="baseSize">
+                   <size>
+                    <width>100</width>
+                    <height>22</height>
+                   </size>
+                  </property>
                   <property name="maxLength">
                    <number>50</number>
                   </property>
