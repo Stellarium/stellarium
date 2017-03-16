@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>755</width>
-    <height>597</height>
+    <height>618</height>
    </rect>
   </property>
   <property name="font">
@@ -2003,6 +2003,16 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="4" column="1">
+                  <widget class="QToolButton" name="colorZenithNadir">
+                   <property name="toolTip">
+                    <string>Color of Zenith and Nadir</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
                  <item row="5" column="0">
                   <widget class="QCheckBox" name="showGalacticPolesCheckBox">
                    <property name="text">
@@ -2010,10 +2020,10 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1">
-                  <widget class="QToolButton" name="colorZenithNadir">
+                 <item row="8" column="1">
+                  <widget class="QToolButton" name="colorCircumpolarCircles">
                    <property name="toolTip">
-                    <string>Color of Zenith and Nadir</string>
+                    <string>Color of circumpolar circles</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
@@ -2040,10 +2050,10 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1">
-                  <widget class="QToolButton" name="colorCircumpolarCircles">
+                 <item row="9" column="1">
+                  <widget class="QToolButton" name="colorPrecessionCircles">
                    <property name="toolTip">
-                    <string>Color of circumpolar circles</string>
+                    <string>Color of precession circles</string>
                    </property>
                    <property name="text">
                     <string notr="true"/>
@@ -2060,15 +2070,18 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="1">
-                  <widget class="QToolButton" name="colorPrecessionCircles">
-                   <property name="toolTip">
-                    <string>Color of precession circles</string>
+                 <item row="10" column="0">
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
                    </property>
-                   <property name="text">
-                    <string notr="true"/>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
                    </property>
-                  </widget>
+                  </spacer>
                  </item>
                 </layout>
                </item>
@@ -3182,12 +3195,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
