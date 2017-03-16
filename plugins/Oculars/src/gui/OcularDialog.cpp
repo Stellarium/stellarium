@@ -106,22 +106,6 @@ void OcularDialog::retranslate()
 	}
 }
 
-void OcularDialog::styleChanged()
-{
-	// Nothing for now
-}
-
-void OcularDialog::updateStyle()
-{
-	if(dialog) {
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		const StelStyle pluginStyle = plugin->getModuleStyleSheet(gui->getStelStyle());
-		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-		ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
-	}
-}
-
 /* ********************************************************************* */
 #if 0
 #pragma mark -
@@ -490,9 +474,6 @@ void OcularDialog::createDialogContent()
 	{
 		ui->hideGridsLinesCheckBox->setChecked(true);
 	}
-
-	//Initialize the style
-	updateStyle();
 }
 
 void OcularDialog::selectedCCDRotationAngleChanged()

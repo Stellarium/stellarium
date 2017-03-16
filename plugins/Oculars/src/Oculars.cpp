@@ -289,7 +289,7 @@ void Oculars::deinit()
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged()), this, SLOT(updateOcularReticle()));
-	disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	//disconnect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	disconnect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 }
 
@@ -369,20 +369,6 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 	}
 
 	return order;
-}
-
-const StelStyle Oculars::getModuleStyleSheet(const StelStyle& style)
-{
-	StelStyle pluginStyle(style);
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		pluginStyle.qtStyleSheet.append(nightStyleSheet);
-	}
-	else
-	{
-		pluginStyle.qtStyleSheet.append(normalStyleSheet);
-	}
-	return pluginStyle;
 }
 
 void Oculars::handleMouseClicks(class QMouseEvent* event)
@@ -675,31 +661,8 @@ void Oculars::init()
 		ready = false;
 	}
 
-	//Load the module's custom style sheets
-	QFile styleSheetFile;
-	styleSheetFile.setFileName(":/ocular/normalStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		normalStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-	styleSheetFile.setFileName(":/ocular/nightStyle.css");
-	if(styleSheetFile.open(QFile::ReadOnly|QFile::Text))
-	{
-		nightStyleSheet = styleSheetFile.readAll();
-	}
-	styleSheetFile.close();
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslateGui()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(updateOcularReticle()));
-}
-
-void Oculars::setStelStyle(const QString&)
-{
-	if(ocularDialog)
-	{
-		ocularDialog->updateStyle();
-	}
 }
 
 /* ****************************************************************************************************************** */
@@ -1040,10 +1003,6 @@ void Oculars::decrementLensIndex()
 void Oculars::displayPopupMenu()
 {
 	QMenu * popup = new QMenu(&StelMainView::getInstance());
-	StelGui * gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	//qDebug() << "[Oculars]" << this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
-	popup->setStyleSheet(this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
 
 	if (flagShowOculars)
 	{

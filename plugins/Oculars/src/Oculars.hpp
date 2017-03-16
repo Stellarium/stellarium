@@ -98,8 +98,6 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	virtual const StelStyle getModuleStyleSheet(const StelStyle& style);
 	//! This method is needed because the MovementMgr classes handleKeys() method consumes the event.
 	//! Because we want the ocular view to track, we must intercept & process ourselves.  Only called
 	//! while flagShowOculars or flagShowCCD == true.
@@ -189,7 +187,6 @@ private slots:
 	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
 	void retranslateGui();
-	void setStelStyle(const QString& style);
 	void updateOcularReticle(void);
 
 private:
@@ -344,10 +341,6 @@ private:
 	StelAction * actionOcularDecrement;
 
 	class OcularsGuiPanel * guiPanel;
-
-	//Styles
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
 
 	//Reticle
 	StelTextureSP reticleTexture;
