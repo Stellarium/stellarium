@@ -1005,20 +1005,12 @@ void Oculars::decrementOcularIndex()
 			// reject the change
 			selectedOcularIndex++;
 		}
-		else if (selectedTelescopeIndex == -1)
-		{
+
+		if (selectedTelescopeIndex == -1)
 			selectedTelescopeIndex = 0;
-			emit(selectedOcularChanged());
-		}
-		else
-		{
-			emit(selectedOcularChanged());
-		}
 	}
-	else
-	{
-		emit(selectedOcularChanged());
-	}
+
+	emit(selectedOcularChanged());
 }
 
 void Oculars::decrementTelescopeIndex()
@@ -1077,21 +1069,13 @@ void Oculars::displayPopupMenu()
 				}
 				//BM: Does this happen at all any more?
 				QAction* action = 0;
-				if (selectedTelescopeIndex == -1)
+				if (selectedTelescopeIndex != -1 || oculars[index]->isBinoculars())
 				{
-					if (oculars[index]->isBinoculars())
-					{
 						action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
 						availableOcularCount++;
 						ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
-					}
 				}
-				else
-				{
-					action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
-					availableOcularCount++;
-					ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
-				}
+
 				if (action && index == selectedOcularIndex)
 				{
 					action->setCheckable(true);
@@ -1238,20 +1222,12 @@ void Oculars::incrementOcularIndex()
 			// reject the change
 			selectedOcularIndex++;
 		}
-		else if (selectedTelescopeIndex == -1)
-		{
+
+		if (selectedTelescopeIndex == -1)
 			selectedTelescopeIndex = 0;
-			emit(selectedOcularChanged());
-		}
-		else
-		{
-			emit(selectedOcularChanged());
-		}
 	}
-	else
-	{
-		emit(selectedOcularChanged());
-	}
+
+	emit(selectedOcularChanged());
 }
 
 void Oculars::incrementTelescopeIndex()
@@ -1312,27 +1288,13 @@ void Oculars::selectOcularAtIndex(QString indexString)
 {
 	int index = indexString.toInt();
 
-	// validate the new selection
-	if (oculars[index]->isBinoculars())
+	if (selectedTelescopeIndex == -1)
+		selectedTelescopeIndex = 0;
+
+	if (telescopes.count() != 0 || oculars[index]->isBinoculars())
 	{
 		selectedOcularIndex = index;
 		emit(selectedOcularChanged());
-	}
-	else
-	{
-		if ( selectedTelescopeIndex == -1 && telescopes.count() == 0)
-		{
-			// reject the change
-		}
-		else
-		{
-			if (selectedTelescopeIndex == -1)
-			{
-				selectedTelescopeIndex = 0;
-			}
-			selectedOcularIndex = index;
-			emit(selectedOcularChanged());
-		}
 	}
 }
 
