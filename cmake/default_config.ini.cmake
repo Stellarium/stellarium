@@ -172,10 +172,10 @@ supergalactic_color                 = 0.4,0.4,0.0
 supergalactic_equator_color         = 1.0,1.0,0.0
 supergalactic_poles_color           = 1.0,1.0,0.0
 zenith_nadir_color                  = 0.2,0.6,0.2
-equinox_J2000_points_color          = 0.8,0.2,0.1
-equinox_points_color                = 0.2,0.3,0.8
-solstice_J2000_points_color         = 0.8,0.2,0.1
-solstice_points_color               = 0.2,0.3,0.8
+equinox_J2000_points_color          = 0.7,0.2,0.2
+equinox_points_color                = 0.9,0.6,0.2
+solstice_J2000_points_color         = 0.7,0.2,0.2
+solstice_points_color               = 0.9,0.6,0.2
 
 [tui]
 flag_show_gravity_ui                = false
