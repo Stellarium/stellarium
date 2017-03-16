@@ -469,7 +469,7 @@ void Oculars::handleKeys(QKeyEvent* event)
 				{
 					reticleRotation -= (1.0 * multiplier);
 				}
-				qDebug() << reticleRotation;
+				//qDebug() << reticleRotation;
 				consumeEvent = true;
 				break;
 		}
