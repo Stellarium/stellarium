@@ -280,10 +280,8 @@ public:
 	static const Mat4d matJ2000ToSupergalactic;
 	//! Rotation matrix from Supergalactic to J2000 reference frame.
 	static const Mat4d matSupergalacticToJ2000;
-	//! Precession matrix for IAU constellation lookup.
-	static Mat4d matJ2000ToJ1875;
 
-	//! Return the observer heliocentric ecliptic position
+	//! Return the observer heliocentric ecliptic position (GZ: presumably J2000)
 	Vec3d getObserverHeliocentricEclipticPos() const;
 
 	//! Get the informations on the current location
@@ -759,6 +757,7 @@ private:
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
 	Mat4d matEquinoxEquToJ2000;                // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // precession matrix
+	static Mat4d matJ2000ToJ1875;              // Precession matrix for IAU constellation lookup.
 
 	Mat4d matJ2000ToAltAz;
 	Mat4d matAltAzToJ2000;
