@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-05 03:15+0700\n"
+"POT-Creation-Date: 2017-03-14 09:50+0700\n"
 "PO-Revision-Date: 2016-07-27 15:24+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-05 05:49+0000\n"
-"X-Generator: Launchpad (build 18329)\n"
+"X-Launchpad-Export-Date: 2017-03-15 05:53+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
-#: src/core/modules/Planet.cpp:247 src/core/modules/MinorPlanet.cpp:200
+#: src/core/modules/Planet.cpp:253 src/core/modules/MinorPlanet.cpp:200
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:277
@@ -74,7 +74,7 @@ msgstr "Tên của các chòm sao"
 msgid "Constellation boundaries"
 msgstr "Ranh giới các chòm sao"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1393
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1401
 msgid "Select single constellation"
 msgstr "Lựa chọn chòm sao đơn"
 
@@ -390,7 +390,7 @@ msgstr "Loại: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Độ chắn sáng: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:253
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:259
 #: src/core/modules/MinorPlanet.cpp:206 src/core/modules/Comet.cpp:171
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -398,7 +398,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Độ sáng: <b>%1</b> (sau khi dập tắt: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:208 src/core/modules/Nebula.cpp:213
-#: src/core/modules/Planet.cpp:256 src/core/modules/MinorPlanet.cpp:209
+#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:209
 #: src/core/modules/Comet.cpp:174 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
@@ -489,372 +489,372 @@ msgstr "Thị sai: %1\""
 msgid "Morphological description: "
 msgstr "Mô tả hình thái: "
 
-#: src/core/modules/Nebula.cpp:857
+#: src/core/modules/Nebula.cpp:874
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "mật độ sao cao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:860
+#: src/core/modules/Nebula.cpp:877
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "mật độ sao trung tâm dày đặc"
 
-#: src/core/modules/Nebula.cpp:863
+#: src/core/modules/Nebula.cpp:880
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "lõi trong mạnh mẽ của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:866
+#: src/core/modules/Nebula.cpp:883
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "mật độ đậm đặc trung bình của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:888
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "mật độ trung bình của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:874
+#: src/core/modules/Nebula.cpp:891
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "mật độ tập trung khá lỏng lẻo của các ngôi sao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:877
+#: src/core/modules/Nebula.cpp:894
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "mật độ tập trung lỏng lẻo của các ngôi sao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:880
+#: src/core/modules/Nebula.cpp:897
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "mật độ tập trung lỏng lẻo của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:883
+#: src/core/modules/Nebula.cpp:900
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "mật độ tập trung rất lỏng lẻo của các ngôi sao về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:886
+#: src/core/modules/Nebula.cpp:903
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "hầu như không có sự tập trung về hướng trung tâm"
 
-#: src/core/modules/Nebula.cpp:889
+#: src/core/modules/Nebula.cpp:906
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "Lớp mật độ không có tư liệu"
 
-#: src/core/modules/Nebula.cpp:909
+#: src/core/modules/Nebula.cpp:926
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "mật độ trung tâm mạnh mẽ của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:912
+#: src/core/modules/Nebula.cpp:929
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "mật độ sao trung tâm nhỏ"
 
-#: src/core/modules/Nebula.cpp:915
+#: src/core/modules/Nebula.cpp:932
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "mật độ tập trung không đáng kể của các ngôi sao"
 
-#: src/core/modules/Nebula.cpp:918
+#: src/core/modules/Nebula.cpp:935
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "sự cô đặc sao"
 
-#: src/core/modules/Nebula.cpp:921
+#: src/core/modules/Nebula.cpp:938
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "Lớp mật độ không có tư liệu"
 
-#: src/core/modules/Nebula.cpp:927
+#: src/core/modules/Nebula.cpp:944
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "phạm vi độ sáng nhỏ của những thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:947
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "phạm vị độ sáng trung bình của các thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "phạm vi độ sáng lớn của các thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:936
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "phạm vi độ sáng không có cơ sở của các thành viên trong cụm sao"
 
-#: src/core/modules/Nebula.cpp:942
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "cụm sao nghèo với ít hơn 50 sao"
 
-#: src/core/modules/Nebula.cpp:945
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "cụm sao khá với 50-100 sao"
 
-#: src/core/modules/Nebula.cpp:948
+#: src/core/modules/Nebula.cpp:965
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "cụm sao giàu với hơn 100 sao"
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "Số lớp thành viên không có tư liệu"
 
-#: src/core/modules/Nebula.cpp:955
+#: src/core/modules/Nebula.cpp:972
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "các cụm sao nằm trong tinh vân"
 
-#: src/core/modules/Nebula.cpp:976
+#: src/core/modules/Nebula.cpp:993
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "rất sáng"
 
-#: src/core/modules/Nebula.cpp:979
+#: src/core/modules/Nebula.cpp:996
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "sáng"
 
-#: src/core/modules/Nebula.cpp:982
+#: src/core/modules/Nebula.cpp:999
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "độ sáng vừa phải"
 
-#: src/core/modules/Nebula.cpp:985
+#: src/core/modules/Nebula.cpp:1002
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "mờ rạt"
 
-#: src/core/modules/Nebula.cpp:988
+#: src/core/modules/Nebula.cpp:1005
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "rất mờ"
 
-#: src/core/modules/Nebula.cpp:991
+#: src/core/modules/Nebula.cpp:1008
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "độ sáng không ổn định"
 
-#: src/core/modules/Nebula.cpp:994
+#: src/core/modules/Nebula.cpp:1011
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "độ sáng không có cơ sở của tinh vân phản xạ"
 
-#: src/core/modules/Nebula.cpp:1000
+#: src/core/modules/Nebula.cpp:1017
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "ngôi sao chiếu sáng được lồng vào trong tinh vân"
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1020
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "ngôi sao được định vị bên ngoài tinh vân được chiếu sáng"
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1023
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "ngôi sao được định vị ở góc của tinh vân được chiếu sáng"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1011
+#: src/core/modules/Nebula.cpp:1028
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "ngôi sao được định vị bên ngoài tinh vân đặc biệt được chiếu sáng"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1017
+#: src/core/modules/Nebula.cpp:1034
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "tinh vân tự phát sáng"
 
-#: src/core/modules/Nebula.cpp:1021
+#: src/core/modules/Nebula.cpp:1038
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "tinh vân phản xạ không có cơ sở"
 
-#: src/core/modules/Nebula.cpp:1044
+#: src/core/modules/Nebula.cpp:1061
 msgid "circular form"
 msgstr "dạng tròn"
 
-#: src/core/modules/Nebula.cpp:1047
+#: src/core/modules/Nebula.cpp:1064
 msgid "elliptical form"
 msgstr "dạng elip"
 
-#: src/core/modules/Nebula.cpp:1050
+#: src/core/modules/Nebula.cpp:1067
 msgid "irregular form"
 msgstr "dạng bất thường"
 
-#: src/core/modules/Nebula.cpp:1053
+#: src/core/modules/Nebula.cpp:1070
 msgid "undocumented form"
 msgstr "dạng không có dữ liệu"
 
-#: src/core/modules/Nebula.cpp:1059
+#: src/core/modules/Nebula.cpp:1076
 msgid "amorphous structure"
 msgstr "cấu trúc vô định hình"
 
-#: src/core/modules/Nebula.cpp:1062
+#: src/core/modules/Nebula.cpp:1079
 msgid "conventional structure"
 msgstr "cấu trúc thông thường"
 
-#: src/core/modules/Nebula.cpp:1065
+#: src/core/modules/Nebula.cpp:1082
 msgid "filamentary structure"
 msgstr "cấu trúc sợi"
 
-#: src/core/modules/Nebula.cpp:1068
+#: src/core/modules/Nebula.cpp:1085
 msgid "undocumented structure"
 msgstr "cấu trúc không có dữ liệu"
 
-#: src/core/modules/Nebula.cpp:1074
+#: src/core/modules/Nebula.cpp:1091
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "mờ nhạt nhất"
 
-#: src/core/modules/Nebula.cpp:1077
+#: src/core/modules/Nebula.cpp:1094
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "độ sáng vừa phải"
 
-#: src/core/modules/Nebula.cpp:1080
+#: src/core/modules/Nebula.cpp:1097
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "sáng nhất"
 
-#: src/core/modules/Nebula.cpp:1083
+#: src/core/modules/Nebula.cpp:1100
 msgid "undocumented brightness"
 msgstr "độ sáng không có dữ liệu"
 
-#: src/core/modules/Nebula.cpp:1099
+#: src/core/modules/Nebula.cpp:1116
 msgid "galaxy"
 msgstr "thiên hà"
 
-#: src/core/modules/Nebula.cpp:1102
+#: src/core/modules/Nebula.cpp:1119
 msgid "active galaxy"
 msgstr "thiên hà hoạt động"
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1122
 msgid "radio galaxy"
 msgstr "thiên hà vô tuyến"
 
-#: src/core/modules/Nebula.cpp:1108
+#: src/core/modules/Nebula.cpp:1125
 msgid "interacting galaxy"
 msgstr "thiên hà tương tác"
 
-#: src/core/modules/Nebula.cpp:1111 plugins/Quasars/src/Quasar.cpp:101
+#: src/core/modules/Nebula.cpp:1128 plugins/Quasars/src/Quasar.cpp:101
 msgid "quasar"
 msgstr "Chuẩn tinh"
 
-#: src/core/modules/Nebula.cpp:1114
+#: src/core/modules/Nebula.cpp:1131
 msgid "star cluster"
 msgstr "cụm sao"
 
-#: src/core/modules/Nebula.cpp:1117
+#: src/core/modules/Nebula.cpp:1134
 msgid "open star cluster"
 msgstr "cụm sao mở"
 
-#: src/core/modules/Nebula.cpp:1120
+#: src/core/modules/Nebula.cpp:1137
 msgid "globular star cluster"
 msgstr "cụm sao cầu"
 
-#: src/core/modules/Nebula.cpp:1123
+#: src/core/modules/Nebula.cpp:1140
 msgid "nebula"
 msgstr "tinh vân"
 
-#: src/core/modules/Nebula.cpp:1126
+#: src/core/modules/Nebula.cpp:1143
 msgid "planetary nebula"
 msgstr "tinh vân hành tinh"
 
-#: src/core/modules/Nebula.cpp:1129
+#: src/core/modules/Nebula.cpp:1146
 msgid "dark nebula"
 msgstr "tinh vân tối"
 
-#: src/core/modules/Nebula.cpp:1132
+#: src/core/modules/Nebula.cpp:1149
 msgid "cluster associated with nebulosity"
 msgstr "cụm sao liên kết với tinh vân"
 
-#: src/core/modules/Nebula.cpp:1135
+#: src/core/modules/Nebula.cpp:1152
 msgid "bipolar nebula"
 msgstr "tinh vân lưỡng tính"
 
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1155
 msgid "emission nebula"
 msgstr "tinh vân phát xạ"
 
-#: src/core/modules/Nebula.cpp:1141
+#: src/core/modules/Nebula.cpp:1158
 msgid "HII region"
 msgstr "Vùng H II"
 
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1161
 msgid "reflection nebula"
 msgstr "tinh vân phản xạ"
 
-#: src/core/modules/Nebula.cpp:1147
+#: src/core/modules/Nebula.cpp:1164
 msgid "supernova remnant"
 msgstr "dấu vết siêu tân tinh"
 
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1167
 msgid "stellar association"
 msgstr "quần sao"
 
-#: src/core/modules/Nebula.cpp:1153
+#: src/core/modules/Nebula.cpp:1170
 msgid "star cloud"
 msgstr "đám mây sao"
 
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1173
 msgid "interstellar matter"
 msgstr "vật chất liên sao"
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1176
 msgid "emission object"
 msgstr "vật thể phát xạ"
 
-#: src/core/modules/Nebula.cpp:1162
+#: src/core/modules/Nebula.cpp:1179
 msgid "BL Lac object"
 msgstr "Vật thể BL Lac"
 
-#: src/core/modules/Nebula.cpp:1165
+#: src/core/modules/Nebula.cpp:1182
 msgid "blazar"
 msgstr "bùng cháy"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1185
 msgid "molecular cloud"
 msgstr "mây phân tử"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1188
 msgid "young stellar object"
 msgstr "vật thể sao trẻ"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1191
 msgid "possible quasar"
 msgstr "chuẩn tinh khả thi"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1194
 msgid "possible planetary nebula"
 msgstr "tinh vân hành tinh khả thi"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1197
 msgid "protoplanetary nebula"
 msgstr "tinh vân tiền hành tinh"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1183 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1200 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "sao"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1203
 msgid "object of unknown nature"
 msgstr "vật thể không rõ bản chất"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1206
 msgid "undocumented type"
 msgstr "loại không có dữ liệu"
 
@@ -866,143 +866,148 @@ msgstr "Vật thể xa"
 msgid "Toggle DSO type filter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:261 src/core/modules/MinorPlanet.cpp:219
+#: src/core/modules/Planet.cpp:266 src/core/modules/MinorPlanet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:183
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Độ sáng tuyệt đối (M): %1"
 
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:238
+#: src/core/modules/Planet.cpp:269
+#, qt-format
+msgid "Mean Opposition Magnitude: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:290 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Khoảng cách từ mặt trời: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:289 src/core/modules/MinorPlanet.cpp:245
+#: src/core/modules/Planet.cpp:297 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Khoảng cách từ mặt trời: %1AU (%2 triệu km)"
 
-#: src/core/modules/Planet.cpp:299 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:307 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:212
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Khoảng cách: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:306 src/core/modules/MinorPlanet.cpp:262
+#: src/core/modules/Planet.cpp:314 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Khoảng cách: %1AU (%2 triệu km)"
 
-#: src/core/modules/Planet.cpp:320 src/core/modules/Planet.cpp:324
+#: src/core/modules/Planet.cpp:328 src/core/modules/Planet.cpp:332
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Đường kính biểu kiến: %1, với vành đai: %2"
 
-#: src/core/modules/Planet.cpp:333 src/core/modules/Planet.cpp:337
+#: src/core/modules/Planet.cpp:341 src/core/modules/Planet.cpp:345
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:346
+#: src/core/modules/Planet.cpp:352 src/core/modules/Planet.cpp:354
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Đường kính biểu kiến: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:363 src/core/modules/MinorPlanet.cpp:285
+#: src/core/modules/Planet.cpp:371 src/core/modules/MinorPlanet.cpp:285
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Chu kỳ thiên văn: %1 ngày (%2a)"
 
-#: src/core/modules/Planet.cpp:366
+#: src/core/modules/Planet.cpp:374
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Ngày thiên văn: %1"
 
-#: src/core/modules/Planet.cpp:367
+#: src/core/modules/Planet.cpp:375
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Ngày mặt trời trung bình: %1"
 
-#: src/core/modules/Planet.cpp:371
+#: src/core/modules/Planet.cpp:379
 msgid "The period of rotation is chaotic"
 msgstr "Chu kỳ quay hỗn độn"
 
-#: src/core/modules/Planet.cpp:390
+#: src/core/modules/Planet.cpp:398
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:392
+#: src/core/modules/Planet.cpp:400
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:394
+#: src/core/modules/Planet.cpp:402
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:396
+#: src/core/modules/Planet.cpp:404
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:398
+#: src/core/modules/Planet.cpp:406
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:400
+#: src/core/modules/Planet.cpp:408
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:402
+#: src/core/modules/Planet.cpp:410
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:404
+#: src/core/modules/Planet.cpp:412
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:409 src/core/modules/Planet.cpp:414
+#: src/core/modules/Planet.cpp:417 src/core/modules/Planet.cpp:422
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
 #: src/core/modules/Comet.cpp:246 src/core/modules/Comet.cpp:251
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Pha quỹ đạo: %1"
 
-#: src/core/modules/Planet.cpp:410 src/core/modules/Planet.cpp:415
+#: src/core/modules/Planet.cpp:418 src/core/modules/Planet.cpp:423
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:247 src/core/modules/Comet.cpp:252
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Ly độ: %1"
 
-#: src/core/modules/Planet.cpp:418
+#: src/core/modules/Planet.cpp:426
 #, qt-format
 msgid "Phase: %1"
 msgstr "Pha: %1"
 
-#: src/core/modules/Planet.cpp:422
+#: src/core/modules/Planet.cpp:430
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Được chiếu sáng: %1%"
 
-#: src/core/modules/Planet.cpp:423
+#: src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Albedo: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:435
+#: src/core/modules/Planet.cpp:443
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Hệ số che khuất: %1%"
@@ -1151,14 +1156,10 @@ msgid "Rising time: %1%"
 msgstr "Giờ mọc: %1%"
 
 #: src/core/modules/StarWrapper.cpp:280
-msgid "Year of last satisfactory observation"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:281
 msgid "Position angle"
 msgstr "Góc vị trí"
 
-#: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
+#: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
 #: src/gui/AstroCalcDialog.cpp:752
 msgid "Separation"
 msgstr "cách xa"
@@ -1403,11 +1404,11 @@ msgstr "Lật cảnh theo chiều ngang"
 msgid "Flip scene vertically"
 msgstr "Lật cảnh theo chiều dọc"
 
-#: src/core/StelCore.cpp:2090
+#: src/core/StelCore.cpp:2103
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Sửa chữa bị vô hiệu hóa. Chỉ sử dụng nếu bạn biết đang làm gì"
 
-#: src/core/StelCore.cpp:2093
+#: src/core/StelCore.cpp:2106
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1418,7 +1419,7 @@ msgstr ""
 "G. Henriksson trong bài báo của ông ấy <em>Thuyết tương đối của Einstein phù "
 "hợp với những lần nhật thực cổ xưa</em> (%1). Xem thêm thông tin %2ở đây%3."
 
-#: src/core/StelCore.cpp:2096
+#: src/core/StelCore.cpp:2109
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1427,7 +1428,7 @@ msgstr ""
 "Phương trình kinh nghiệm này được xuất bản bởi G. M. Clemence trong bài báo "
 "<em>Trên hệ thống của những hằng số vũ trụ</em> (%1)."
 
-#: src/core/StelCore.cpp:2099
+#: src/core/StelCore.cpp:2112
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1440,7 +1441,7 @@ msgstr ""
 "dụng bởi Jean Meeus trong bài viết của ông ấy <em>Công thức vũ trụ cho những "
 "máy tính</em>.  Nó cũng được thực hiện trong PC program Sun Tracker Pro."
 
-#: src/core/StelCore.cpp:2103
+#: src/core/StelCore.cpp:2116
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1450,7 +1451,7 @@ msgstr ""
 "trong <em>Lịch vũ trụ</em> và trong <em>Tiêu chuẩn của nhật thực</em> bởi "
 "Mucke và Meeus (1983)."
 
-#: src/core/StelCore.cpp:2107
+#: src/core/StelCore.cpp:2120
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1462,7 +1463,7 @@ msgstr ""
 "601 TCN đến 1649. Một cái tương tự cũng được thực hiện hoàn toàn trong những "
 "bảng syzygy của Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2111
+#: src/core/StelCore.cpp:2124
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1473,7 +1474,7 @@ msgstr ""
 "bài <em>Gia tốc của trái đất và mặt trăng từ những quan sát vũ trụ cổ "
 "xưa</em> (%1)."
 
-#: src/core/StelCore.cpp:2114
+#: src/core/StelCore.cpp:2127
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1482,7 +1483,7 @@ msgstr ""
 "Phương trình này được xuất bản bởi F. R. Stephenson trong bài <em>Những quan "
 "sát vũ trụ trước khi có kính thiên văn</em> (%1)."
 
-#: src/core/StelCore.cpp:2117
+#: src/core/StelCore.cpp:2130
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1495,7 +1496,7 @@ msgstr ""
 "<em>Xấp xỉ đa thức cho chính xác delta T E.T.-U.T. trong giai đoạn 1800-"
 "1975</em> (%1) là phù hợp thông qua dữ liệu được xuất bản bởi Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2120
+#: src/core/StelCore.cpp:2133
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1505,7 +1506,7 @@ msgstr ""
 "bảng và chương trình hành tinh từ năm 4000 TCN đến năm 2800</em> (1986) và "
 "trong PC planetarium program RedShift."
 
-#: src/core/StelCore.cpp:2123
+#: src/core/StelCore.cpp:2136
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1516,11 +1517,11 @@ msgstr ""
 "bài <em>Những thay đổi lâu dài trong chu kỳ của trái đất từ 700 TCN đến "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2126
+#: src/core/StelCore.cpp:2139
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Thuật toán này được sử dụng trong PC planetarium program Guide 7."
 
-#: src/core/StelCore.cpp:2129
+#: src/core/StelCore.cpp:2142
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1530,7 +1531,7 @@ msgstr ""
 "trong 50 năm: 1986-2035</em> (1987) và trong bài <em>Danh sách nguyệt thực "
 "trong 50 năm: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2132
+#: src/core/StelCore.cpp:2145
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1539,7 +1540,7 @@ msgstr ""
 "Công thức này có được bởi K. M. Borkowsky (%1) từ việc phân tích những ghi "
 "chép của 31 lần nhật thực giữa 2137 TCN và 1715."
 
-#: src/core/StelCore.cpp:2135
+#: src/core/StelCore.cpp:2148
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1552,7 +1553,7 @@ msgstr ""
 "1800-1988</em> (%1) như là dữ liệu phù hợp thông qua các giá trị được đưa ra "
 "bởi Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2151
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1562,7 +1563,7 @@ msgstr ""
 "phiên bản ngắn của thuyết mặt trăng ELP 2000-85 trong bài <em>Những chương "
 "trình và bảng về mặt trăng từ năm 4000 TCN đến 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2141
+#: src/core/StelCore.cpp:2154
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1573,7 +1574,7 @@ msgstr ""
 "bài <em>Những dao động dài hạn trong chu kỳ của trái đất: năm 700 TCN đến "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:2144
+#: src/core/StelCore.cpp:2157
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1582,7 +1583,7 @@ msgstr ""
 "F. R. Stepenson đã xuất bản công thức này trong cuốn sách <em>Lịch sử che "
 "khuất và chu kỳ của trái đất</em> (%1)."
 
-#: src/core/StelCore.cpp:2147
+#: src/core/StelCore.cpp:2160
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1592,7 +1593,7 @@ msgstr ""
 "dụng rộng rãi. Bảng cho 1620..2000, và bao gồm một biến thể của Chapront, "
 "Chapront-Touze và Francou (1997) cho những dữ liệu ngoài 1620..2000."
 
-#: src/core/StelCore.cpp:2150
+#: src/core/StelCore.cpp:2163
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1601,7 +1602,7 @@ msgstr ""
 "Nhóm Động lực học Hệ Mặt trời JPL của Phòng thí nghiệm tên lửa đẩy NASA sử "
 "dụng công thức này trong trang web tương tác %1JPL Horizons%2 của họ."
 
-#: src/core/StelCore.cpp:2153
+#: src/core/StelCore.cpp:2166
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1610,7 +1611,7 @@ msgstr ""
 "Đa thức này được xuất bản bởi J. Meeus và L. Simons trong bài <em> Xấp xỉ đa "
 "thức đối với Delta T, 1620-2000</em> (%1)."
 
-#: src/core/StelCore.cpp:2156
+#: src/core/StelCore.cpp:2169
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1620,7 +1621,7 @@ msgstr ""
 "Montenbruck & T. Pfleger (2000) cung cấp dữ liệu đa thức bậc 3 đơn giản phù "
 "hợp cho quá khứ gần đây."
 
-#: src/core/StelCore.cpp:2159
+#: src/core/StelCore.cpp:2172
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1632,7 +1633,7 @@ msgstr ""
 "(2002). Nó được dựa trên <em>Thuật toán thiên văn học</em> của Jean Meeus "
 "(1991)."
 
-#: src/core/StelCore.cpp:2162
+#: src/core/StelCore.cpp:2175
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1643,7 +1644,7 @@ msgstr ""
 "Stephenson trong bài <em>Giá trị lịch sử của sai số đồng hồ của trái đất %1T "
 "và sự tính toán nhật thực</em> (%2) với phụ lục trong (%3)."
 
-#: src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2178
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1656,7 +1657,7 @@ msgstr ""
 "với cosin và hàm bình phương. Điều này dược trên một tính được mô tả bởi "
 "Stephenson (%2). Xem thêm thông tin %3ở đây%4."
 
-#: src/core/StelCore.cpp:2168 src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2181 src/core/StelCore.cpp:2184
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1671,15 +1672,15 @@ msgstr ""
 "Solar Eclipse: -1900 to +3000</em> (2006) của họ. Công thức này cũng được sử "
 "dụng trong chương trình thiên văn SOLEX mặt trời, mặt trăng và hành tinh."
 
-#: src/core/StelCore.cpp:2168
+#: src/core/StelCore.cpp:2181
 msgid "Used by default."
 msgstr "Được sử dụng bởi mặc định"
 
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2184
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PHIÊN BẢN VÁ LỖI MÀ KHÔNG BỔ SUNG GIA TỐC MẶT TRĂNG"
 
-#: src/core/StelCore.cpp:2174
+#: src/core/StelCore.cpp:2187
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1690,7 +1691,7 @@ msgstr ""
 "xuất bản trong bài <em>Thiên thực cổ đại và ngày sụp đổ của Babylon</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2177
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1701,7 +1702,7 @@ msgstr ""
 "Simons (2000), được xuất bản trong bài viết <em>Giảm thiểu lỗi của xấp xỉ đa "
 "thức của Delta T</em> (%1) và được xem xét lại bới Sana Islam vào năm 2003."
 
-#: src/core/StelCore.cpp:2180
+#: src/core/StelCore.cpp:2193
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1712,7 +1713,7 @@ msgstr ""
 "Sultana và Faheem Zaidi được xuất bản trong <em>Delata T: Xấp xỉ đa thức của "
 "chu kỳ thời gian 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2196
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1721,7 +1722,7 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2199
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1730,42 +1731,42 @@ msgstr ""
 "Đây là công thức bậc hai cho phép tính của %1T với hệ số được xác định với "
 "người dùng."
 
-#: src/core/StelCore.cpp:2189 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2202 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Lỗi"
 
-#: src/core/StelCore.cpp:2197
+#: src/core/StelCore.cpp:2210
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2238
+#: src/core/StelCore.cpp:2251
 msgid "with zero values outside this range"
 msgstr "với giá trị zero nằm ngoài phạm vi này"
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2254
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "với một độ chính xác 1s điển hình và giá trị zero nằm ngoài khoảng này"
 
-#: src/core/StelCore.cpp:2244
+#: src/core/StelCore.cpp:2257
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2264
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2261
+#: src/core/StelCore.cpp:2274
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Khoảng hợp lệ thường dùng: giữa những năm %1 và %2, %3."
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2276
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Khoảng hợp lệ thường dùng: giữa những năm %1 và %2."
@@ -1899,63 +1900,63 @@ msgid ""
 "longer mapped to infinity."
 msgstr ""
 
-#: src/core/StelObject.cpp:122
+#: src/core/StelObject.cpp:133
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "vào ngày"
 
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:132
-#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:142
+#: src/core/StelObject.cpp:141 src/core/StelObject.cpp:143
+#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:153
 msgid "RA/Dec"
 msgstr "Xích kinh/Xích vĩ"
 
-#: src/core/StelObject.cpp:161 src/core/StelObject.cpp:164
-#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:177
+#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:175
+#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:188
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Góc giờ/Xích vĩ: %1/%2"
 
-#: src/core/StelObject.cpp:161 src/core/StelObject.cpp:164
-#: src/core/StelObject.cpp:195 src/core/StelObject.cpp:197
+#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:175
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
 msgid "(apparent)"
 msgstr "(biểu kiến)"
 
-#: src/core/StelObject.cpp:195 src/core/StelObject.cpp:197
-#: src/core/StelObject.cpp:202 src/core/StelObject.cpp:204
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
+#: src/core/StelObject.cpp:213 src/core/StelObject.cpp:215
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Góc phương vị/Cao độ: %1/%2"
 
-#: src/core/StelObject.cpp:223 src/core/StelObject.cpp:225
-#: src/core/StelObject.cpp:238 src/core/StelObject.cpp:240
+#: src/core/StelObject.cpp:234 src/core/StelObject.cpp:236
+#: src/core/StelObject.cpp:249 src/core/StelObject.cpp:251
 msgid "Ecliptic longitude/latitude"
 msgstr "Kinh độ/vĩ độ đường Hoàng đạo"
 
-#: src/core/StelObject.cpp:243 src/core/StelObject.cpp:245
+#: src/core/StelObject.cpp:254 src/core/StelObject.cpp:256
 msgid "Ecliptic obliquity"
 msgstr "Độ nghiêng hoàng đạo"
 
-#: src/core/StelObject.cpp:253 src/core/StelObject.cpp:255
+#: src/core/StelObject.cpp:264 src/core/StelObject.cpp:266
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Kinh độ/vĩ độ dải Ngân Hà: %1/%2"
 
-#: src/core/StelObject.cpp:263 src/core/StelObject.cpp:265
+#: src/core/StelObject.cpp:274 src/core/StelObject.cpp:276
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:271
+#: src/core/StelObject.cpp:282
 #, qt-format
 msgid "IAU Constellation: %1"
 msgstr ""
 
-#: src/core/StelObject.cpp:280
+#: src/core/StelObject.cpp:291
 #, qt-format
 msgid "Mean Sidereal Time: %1"
 msgstr "Giờ thiên văn trung bình: %1"
 
-#: src/core/StelObject.cpp:286
+#: src/core/StelObject.cpp:297
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
 msgstr "Giờ thiên văn biểu kiến: %1"
@@ -2049,31 +2050,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:538
+#: src/gui/ConfigurationDialog.cpp:539
 msgid "Select screenshot directory"
 msgstr "Chọn thư mục chứa hình"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:870
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Trường nhìn khởi phát: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:869
+#: src/gui/ConfigurationDialog.cpp:878
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hướng nhìn ban đầu Góc phương vị/Cao độ: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:931
+#: src/gui/ConfigurationDialog.cpp:940
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "Các tác giả"
 
-#: src/gui/ConfigurationDialog.cpp:932 src/gui/ViewDialog.cpp:1263
+#: src/gui/ConfigurationDialog.cpp:941 src/gui/ViewDialog.cpp:1263
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: src/gui/ConfigurationDialog.cpp:934
+#: src/gui/ConfigurationDialog.cpp:943
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -2092,30 +2093,30 @@ msgstr "Liên hệ"
 msgid "Version"
 msgstr "Phiên bản"
 
-#: src/gui/ConfigurationDialog.cpp:1031
+#: src/gui/ConfigurationDialog.cpp:1040
 msgid "Running script: "
 msgstr "Script thực thi: "
 
-#: src/gui/ConfigurationDialog.cpp:1038
+#: src/gui/ConfigurationDialog.cpp:1047
 msgid "Running script: [none]"
 msgstr "Script thực thi: [không]"
 
-#: src/gui/ConfigurationDialog.cpp:1103
+#: src/gui/ConfigurationDialog.cpp:1112
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr "Hoàn tất việc tải các catalô sao mới"
 
-#: src/gui/ConfigurationDialog.cpp:1107
+#: src/gui/ConfigurationDialog.cpp:1116
 msgid "All available star catalogs have been installed."
 msgstr "Tất cả danh mục sao sẵn có đã được cài đặt."
 
-#: src/gui/ConfigurationDialog.cpp:1112
+#: src/gui/ConfigurationDialog.cpp:1121
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Lấy catalog thứ %1 trong %2"
 
-#: src/gui/ConfigurationDialog.cpp:1119
+#: src/gui/ConfigurationDialog.cpp:1128
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2124,7 +2125,7 @@ msgstr ""
 "Đang tải %1...\n"
 "(Bạn có thể đóng cữa sổ cấu hình)"
 
-#: src/gui/ConfigurationDialog.cpp:1126
+#: src/gui/ConfigurationDialog.cpp:1135
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2135,7 +2136,7 @@ msgstr ""
 "Số lượng sao: %2 Million\n"
 "Khoảng độ sáng: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1169 src/gui/ConfigurationDialog.cpp:1205
+#: src/gui/ConfigurationDialog.cpp:1178 src/gui/ConfigurationDialog.cpp:1214
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2144,11 +2145,11 @@ msgstr ""
 "Lỗi khi đang tải xuống %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1258
+#: src/gui/ConfigurationDialog.cpp:1267
 msgid "Verifying file integrity..."
 msgstr "Kiểm tra sự toàn vẹn của tập tin..."
 
-#: src/gui/ConfigurationDialog.cpp:1262
+#: src/gui/ConfigurationDialog.cpp:1271
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2157,170 +2158,170 @@ msgstr ""
 "Lỗi khi đang tải xuống %1:\n"
 "Tập tin bị lỗi."
 
-#: src/gui/ConfigurationDialog.cpp:1308 src/gui/ConfigurationDialog.cpp:1317
+#: src/gui/ConfigurationDialog.cpp:1317 src/gui/ConfigurationDialog.cpp:1326
 msgid "Available"
 msgstr "Sẵn có"
 
-#: src/gui/ConfigurationDialog.cpp:1310 src/gui/ConfigurationDialog.cpp:1319
+#: src/gui/ConfigurationDialog.cpp:1319 src/gui/ConfigurationDialog.cpp:1328
 msgid "Not Available"
 msgstr "Không sẵn có"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Algorithm of"
 msgstr "Thuật toán của"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Without correction"
 msgstr "Không có sự chính xác"
 
-#: src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1410
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1412
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Lịch vũ trụ (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1414
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1415
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1407
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1417
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1410
+#: src/gui/ConfigurationDialog.cpp:1419
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1421
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1422
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1414
+#: src/gui/ConfigurationDialog.cpp:1423
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1424
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1416
+#: src/gui/ConfigurationDialog.cpp:1425
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1427
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (với Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1419
+#: src/gui/ConfigurationDialog.cpp:1428
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1429
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1421
+#: src/gui/ConfigurationDialog.cpp:1430
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1431
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1433
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1427
+#: src/gui/ConfigurationDialog.cpp:1436
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) không bổ sung gia tốc mặt trăng"
 
-#: src/gui/ConfigurationDialog.cpp:1429
+#: src/gui/ConfigurationDialog.cpp:1438
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1430
+#: src/gui/ConfigurationDialog.cpp:1439
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1431
+#: src/gui/ConfigurationDialog.cpp:1440
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1432
+#: src/gui/ConfigurationDialog.cpp:1441
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1433
+#: src/gui/ConfigurationDialog.cpp:1442
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1434
+#: src/gui/ConfigurationDialog.cpp:1443
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1435
+#: src/gui/ConfigurationDialog.cpp:1444
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Phương trình tùy chỉnh của %1T."
 
-#: src/gui/ConfigurationDialog.cpp:1484 src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:407
 msgid "System default"
 msgstr "Mặc định hệ thống"
 
-#: src/gui/ConfigurationDialog.cpp:1485
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "năm-tháng-ngày (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1495
 msgid "dd-mm-yyyy"
 msgstr "ngày-tháng-năm"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "mm-dd-yyyy"
 msgstr "tháng-ngày-năm"
 
-#: src/gui/ConfigurationDialog.cpp:1520
+#: src/gui/ConfigurationDialog.cpp:1529
 msgid "12-hour format"
 msgstr "Định dạng 12-giờ"
 
-#: src/gui/ConfigurationDialog.cpp:1521
+#: src/gui/ConfigurationDialog.cpp:1530
 msgid "24-hour format"
 msgstr "Định dạng 24-giờ"
 
@@ -3040,7 +3041,7 @@ msgid "Secular acceleration of the Moon"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:196 src/ui_configurationDialog.h:1290
+#: src/gui/AstroCalcDialog.cpp:196 src/ui_configurationDialog.h:1298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -3064,7 +3065,7 @@ msgid "Mag."
 msgstr "Độ lớn"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:204 src/ui_configurationDialog.h:1269
+#: src/gui/AstroCalcDialog.cpp:204 src/ui_configurationDialog.h:1277
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Loại"
@@ -4275,7 +4276,7 @@ msgstr "Thư mục"
 msgid "&Choose"
 msgstr "&Chọn"
 
-#: src/translations.h:400 src/ui_configurationDialog.h:1431
+#: src/translations.h:400 src/ui_configurationDialog.h:1439
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Hủy bỏ"
@@ -5386,7 +5387,7 @@ msgstr "Giới thiệu về"
 msgid "Log"
 msgstr "Ghi nhận"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1314
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1322
 msgid "Edit keyboard shortcuts..."
 msgstr "Chỉnh sửa những phím tắt..."
 
@@ -5662,7 +5663,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2311
 #: src/ui_viewDialog.h:2333 src/ui_viewDialog.h:2359
-#: src/ui_configurationDialog.h:1432 src/ui_configurationDialog.h:1443
+#: src/ui_configurationDialog.h:1440 src/ui_configurationDialog.h:1451
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Tùy chọn"
@@ -6428,35 +6429,35 @@ msgstr "Khung cảnh"
 msgid "Starlore"
 msgstr "Truyền thuyết sao"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1211
 msgid "Configuration"
 msgstr "Cấu hình"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1213
 msgid "Language settings"
 msgstr "Thiết lập ngôn ngữ"
 
-#: src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1214
 msgid "Program Language"
 msgstr "Ngôn ngữ chương trình"
 
-#: src/ui_configurationDialog.h:1208
+#: src/ui_configurationDialog.h:1215
 msgid "Sky Culture Language"
 msgstr "Ngôn ngữ văn hóa bầu trời"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1217
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Đặc điểm này chưa được kiểm tra hoàn toàn!"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1219
 msgid "Ephemeris settings (experimental)"
 msgstr "Các cài đặt lịch thiên văn (thực nghiệm)"
 
-#: src/ui_configurationDialog.h:1213 src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1221
 msgid "Not installed"
 msgstr "Không được cài đặt"
 
-#: src/ui_configurationDialog.h:1216
+#: src/ui_configurationDialog.h:1223
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -6464,19 +6465,19 @@ msgstr ""
 "DE431 cung cấp dữ liệu vị trí cho những năm -13000...+17000. Chỉ dành cho "
 "những chương trình đặc biệt."
 
-#: src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1225
 msgid "Use DE431 (long-time data)"
 msgstr "Sử dụng DE431 (Dữ liệu thời gian dài)"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1227
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430 cung cấp sự chính xác cao nhất, chỉ cho những năm 1550...2650."
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1229
 msgid "Use DE430 (high accuracy)"
 msgstr "Sử dụng DE430 (sự chính xác cao)"
 
-#: src/ui_configurationDialog.h:1224
+#: src/ui_configurationDialog.h:1231
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6484,18 +6485,22 @@ msgstr ""
 "Sử dụng VSOP87 chỉ được đề nghị cho những năm -4000...+8000, nhưng phân phát "
 "vị trí hữu dụng nằm ngoài phạm vi này."
 
-#: src/ui_configurationDialog.h:1226
+#: src/ui_configurationDialog.h:1233
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP2000-82B được sử dụng khi những cái này không được cài đặt hoặc "
 "không được kích hoạt."
 
-#: src/ui_configurationDialog.h:1227
+#: src/ui_configurationDialog.h:1234
 msgid "Default options"
 msgstr "Tùy chọn mặc định"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1235
+msgid "Save View"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1237
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6503,7 +6508,7 @@ msgstr ""
 "Lưu các cài đặt bạn đã thay đổi lần này để sử dụng trong lần tới khi bạn "
 "chạy Stellarium"
 
-#: src/ui_configurationDialog.h:1231
+#: src/ui_configurationDialog.h:1239
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6511,11 +6516,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Lưu các thiết lập"
 
-#: src/ui_configurationDialog.h:1233
+#: src/ui_configurationDialog.h:1241
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Khôi phục cài đặt mặc định đi kèm với Stellarium"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1243
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6523,214 +6528,211 @@ msgstr "Khôi phục cài đặt mặc định đi kèm với Stellarium"
 msgid "Restore defaults"
 msgstr "Khôi phục mặc định"
 
-#: src/ui_configurationDialog.h:1236
+#: src/ui_configurationDialog.h:1244
 msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
+"Save either the current FOV and direction of view or all the current options "
+"for use at next startup. Restoring default settings requires a restart of "
+"Stellarium. "
 msgstr ""
-"Khôi phục cài đặt mặc định yêu cầu khởi động lại Stellarium. Lưu tất cả các "
-"tùy chọn hiện thời bao gồm trường nhìn và hướng nhìn cho việc sử dụng ở lần "
-"khởi động kế tiếp."
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1246
 msgid "The width of your view when Stellarium starts"
 msgstr "Chiều rộng tầm nhìn của bạn khi Stellarium bắt đầu"
 
-#: src/ui_configurationDialog.h:1241
+#: src/ui_configurationDialog.h:1249
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Hướng bạn đang nhìn khi Stellarium bắt đầu"
 
-#: src/ui_configurationDialog.h:1243 src/ui_configurationDialog.h:1454
+#: src/ui_configurationDialog.h:1251 src/ui_configurationDialog.h:1462
 msgid "Selected object information"
 msgstr "Thông tin đối tượng đã chọn"
 
-#: src/ui_configurationDialog.h:1245
+#: src/ui_configurationDialog.h:1253
 msgid "Display all information available"
 msgstr "Hiển thị tất cả thông tin sẵn có"
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1255
 msgid "All available"
 msgstr "Tất cả có sẵn"
 
-#: src/ui_configurationDialog.h:1249
+#: src/ui_configurationDialog.h:1257
 msgid "Display no information"
 msgstr "Hiển thị không có thông tin"
 
-#: src/ui_configurationDialog.h:1251 plugins/Oculars/src/Oculars.cpp:2398
+#: src/ui_configurationDialog.h:1259 plugins/Oculars/src/Oculars.cpp:2398
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Không"
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1261
 msgid "Display less information"
 msgstr "Hiển thị ít thông tin"
 
-#: src/ui_configurationDialog.h:1255
+#: src/ui_configurationDialog.h:1263
 msgid "Short"
 msgstr "Ngắn gọn"
 
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1265
 msgid "Display user settings information"
 msgstr "Hiển thị thông tin cài đặt người dùng"
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1267
 msgid "Customized"
 msgstr "Tùy chỉnh"
 
-#: src/ui_configurationDialog.h:1260
+#: src/ui_configurationDialog.h:1268
 msgid "Displayed fields"
 msgstr "Phạm vi hiển thị"
 
-#: src/ui_configurationDialog.h:1262 src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1270 src/ui_configurationDialog.h:1304
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Tọa độ xích đạo, điểm phân của ngày"
 
-#: src/ui_configurationDialog.h:1264
+#: src/ui_configurationDialog.h:1272
 msgid "Right ascension/Declination (of date)"
 msgstr "Xích kinh/Xích vĩ (của ngày)"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1273
 msgid "Supergalactic coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1275
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Loại đối tượng (sao, hành tinh,...)"
 
-#: src/ui_configurationDialog.h:1270
+#: src/ui_configurationDialog.h:1278
 msgid "Absolute magnitude"
 msgstr "Độ sáng tuyệt đối"
 
-#: src/ui_configurationDialog.h:1272
+#: src/ui_configurationDialog.h:1280
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1274
+#: src/ui_configurationDialog.h:1282
 msgid "Ecliptic coordinates (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1276
+#: src/ui_configurationDialog.h:1284
 msgid "Angular or physical size"
 msgstr "Kích thước góc hoặc vật lí"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1286
 msgid "Size"
 msgstr "Kích cỡ"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1288
 msgid "Horizontal coordinates"
 msgstr "Tọa độ chân trời"
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1290
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "Độ cao/Góc phương vị"
 
-#: src/ui_configurationDialog.h:1283
+#: src/ui_configurationDialog.h:1291
 msgid "Catalog number(s)"
 msgstr "Số danh mục"
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1292
 msgid "Distance"
 msgstr "Khoảng cách"
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1293
 msgid "Galactic coordinates"
 msgstr "Tọa độ Ngân hà"
 
-#: src/ui_configurationDialog.h:1287
+#: src/ui_configurationDialog.h:1295
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Tọa độ xích đạo, điểm phân của J2000.0"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1297
 msgid "Right ascension/Declination (J2000)"
 msgstr "Xích kinh/Xích vĩ (J2000)"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1300
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1294
+#: src/ui_configurationDialog.h:1302
 msgid "Ecliptic coordinates (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1306
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "Góc giờ/Xích vĩ"
 
-#: src/ui_configurationDialog.h:1299
+#: src/ui_configurationDialog.h:1307
 msgid "Visual magnitude"
 msgstr "Độ sáng khả kiến"
 
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1309
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1303
+#: src/ui_configurationDialog.h:1311
 msgid "Constellation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1305
+#: src/ui_configurationDialog.h:1313
 msgid "Spectral class, nebula type, etc."
 msgstr "Lớp quang phổ, loại tinh vân,..."
 
-#: src/ui_configurationDialog.h:1307
+#: src/ui_configurationDialog.h:1315
 msgid "Additional information"
 msgstr "Thông tin bổ sung"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1316
 msgid "Sidereal time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1317
 msgid "Control"
 msgstr "Điều khiển"
 
-#: src/ui_configurationDialog.h:1311
+#: src/ui_configurationDialog.h:1319
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Cho phép dùng chuột để xoay (kéo) và phóng to (con lăn chuột)"
 
-#: src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1321
 msgid "Enable mouse navigation"
 msgstr "Bật điều hướng chuột"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1324
 msgid "Allow keyboard to pan and zoom"
 msgstr "Cho phép dùng bàn phím để xoay và phóng to"
 
-#: src/ui_configurationDialog.h:1318
+#: src/ui_configurationDialog.h:1326
 msgid "Enable keyboard navigation"
 msgstr "Bật điều hướng bàn phím"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1328
 msgid "Hides the mouse cursor when inactive"
 msgstr "Dấu đầu chuột khi không hoạt động"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1330
 msgid "Mouse cursor timeout:"
 msgstr "Thời gian trễ con trỏ chuột:"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1332
 msgid "seconds"
 msgstr "giây"
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1334
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Khởi động ngày và giờ"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1336
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Bắt đầu Stellarium tại ngày và giờ của đồng hồ hệ thống"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1338
 msgid "System date and time"
 msgstr "Hệ thống ngày và giờ"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1340
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -6738,59 +6740,59 @@ msgstr ""
 "Thiết lập thời gian mô phỏng cho các ví dụ tiếp theo của thời gian này trong "
 "ngày khi bắt đầu Stellarium"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1342
 msgid "System date at:"
 msgstr "Ngày hệ thống tại:"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1344
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Sử dụng một ngày cụ thể và thời gian khi Stellarium khởi động"
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1346
 msgid "Other:"
 msgstr "Loại Khác:"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1348
 msgid "Use current local date and time"
 msgstr "Sử dụng ngày và giờ địa phương hiện tại"
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1350
 msgid "use current"
 msgstr "Dùng hiệnt tại"
 
-#: src/ui_configurationDialog.h:1344
+#: src/ui_configurationDialog.h:1352
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Những cài đặt này điều khiển cách mà thời gian và ngày tháng được hiển thị "
 "trong thanh dưới cùng"
 
-#: src/ui_configurationDialog.h:1346
+#: src/ui_configurationDialog.h:1354
 msgid "Display formats of date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1347
+#: src/ui_configurationDialog.h:1355
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Ngày tháng:"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1356
 msgid "and time:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1349
+#: src/ui_configurationDialog.h:1357
 msgid "Time correction"
 msgstr "Thời gian điều chỉnh"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1360
 msgid "Edit equation"
 msgstr "Phương trình chỉnh sửa"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1362
 msgid "Planetarium options"
 msgstr "Tùy chọn mô hình vũ trụ"
 
-#: src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1364
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6798,37 +6800,37 @@ msgstr ""
 "Khi được kích hoạt, lệnh \"tự động phóng to\" cũng sẽ thiết lập các hướng "
 "nhìn ban đầu"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1366
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Tự động thu nhỏ về hướng nhìn ban đầu"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1368
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 "Che tất cả mọi thứ bên ngoài  vòng tròn trung tâm trong giao diện chính"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1370
 msgid "Disc viewport"
 msgstr "Chế độ xem đĩa"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1372
 msgid "Align labels with the horizon"
 msgstr "Căn chỉnh nhãn với đường chân trời"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1374
 msgid "Gravity labels"
 msgstr "Nhãn trọng lực"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1376
 msgid "Use decimal degrees for coordinates"
 msgstr "Sử dụng độ thập phân cho tọa độ"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1378
 msgid "Use decimal degrees"
 msgstr "Sử dụng độ dưới dạng thập phân"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1380
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -6836,11 +6838,11 @@ msgstr ""
 "Biến dạng hình ảnh bầu trời được sử dụng khi chiếu Stellarium đi tới một "
 "hình ảnh bầu trời cho các hệ thống vũ trụ chi phí thấp."
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1382
 msgid "Spheric mirror distortion"
 msgstr "Biến dạng hình ảnh bầu trời"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1384
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -6848,158 +6850,158 @@ msgstr ""
 "Kích hoạt để như được nhìn thấy từ bề mặt của hành tinh (được khuyến khích). "
 "Nếu chuyển sang tắt, sẽ hiển thị tầm nhìn hành tinh tâm."
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1386
 msgid "Topocentric coordinates"
 msgstr "Tọa độ bề mặt trái đất"
 
-#: src/ui_configurationDialog.h:1380
+#: src/ui_configurationDialog.h:1388
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Tự động bật khí quyển cho các vất thể với khí quyển trong cửa sổ vị trí"
 
-#: src/ui_configurationDialog.h:1382
+#: src/ui_configurationDialog.h:1390
 msgid "Auto-enabling for the atmosphere"
 msgstr "Tự động bật khí quyển"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1392
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Chuyển đổi hình dọc và ngang của nút lật"
 
-#: src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1394
 msgid "Show flip buttons"
 msgstr "Hiển thị nút lật"
 
-#: src/ui_configurationDialog.h:1388 src/ui_configurationDialog.h:1391
+#: src/ui_configurationDialog.h:1396 src/ui_configurationDialog.h:1399
 msgid "Hide other constellations when you click one"
 msgstr "Ẩn các chòm sao khác khi bạn chọn một cái bất kì"
 
-#: src/ui_configurationDialog.h:1395
+#: src/ui_configurationDialog.h:1403
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Chuyển đổi hình nền của tinh vân"
 
-#: src/ui_configurationDialog.h:1397
+#: src/ui_configurationDialog.h:1405
 msgid "Show nebula background button"
 msgstr "Hiển thị nút nền tinh vân"
 
-#: src/ui_configurationDialog.h:1399
+#: src/ui_configurationDialog.h:1407
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Chương động là một dao động nhỏ của trục Trái Đất, chiếm tới một vài giây "
 "cung."
 
-#: src/ui_configurationDialog.h:1401
+#: src/ui_configurationDialog.h:1409
 msgid "Include nutation"
 msgstr "Bao gồm chương động"
 
-#: src/ui_configurationDialog.h:1403
+#: src/ui_configurationDialog.h:1411
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 "Kích hoạt vị trí này để tính toán góc phương vị từ hướng nam đến hướng tây."
 
-#: src/ui_configurationDialog.h:1405
+#: src/ui_configurationDialog.h:1413
 msgid "Azimuth from South"
 msgstr "Góc phương vị từ phía nam"
 
-#: src/ui_configurationDialog.h:1407
+#: src/ui_configurationDialog.h:1415
 msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1409
+#: src/ui_configurationDialog.h:1417
 msgid "Show DSS button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1411
+#: src/ui_configurationDialog.h:1419
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Tự động thay đổi phong cảnh khi hành tinh được thay đổi"
 
-#: src/ui_configurationDialog.h:1413
+#: src/ui_configurationDialog.h:1421
 msgid "Auto select landscapes"
 msgstr "Tự động chọn phong cảnh"
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1422
 msgid "Show bookmarks button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1415
+#: src/ui_configurationDialog.h:1423
 msgid "Screenshots"
 msgstr "Ảnh chụp màn hình"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1424
 msgid "Screenshot Directory"
 msgstr "Hướng dẫn chụp màn hình"
 
-#: src/ui_configurationDialog.h:1418
+#: src/ui_configurationDialog.h:1426
 msgid "Invert colors"
 msgstr "Đảo ngược màu sắc"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1427
 msgid "Star catalog updates"
 msgstr "Danh mục sao mới"
 
-#: src/ui_configurationDialog.h:1421
+#: src/ui_configurationDialog.h:1429
 msgid "Click here to start downloading"
 msgstr "Bấm vào đây để tải"
 
-#: src/ui_configurationDialog.h:1423
+#: src/ui_configurationDialog.h:1431
 msgid "Download this file to view even more stars"
 msgstr "Tải hồ sơ này xuống để xem nhiều sao hơn"
 
-#: src/ui_configurationDialog.h:1425
+#: src/ui_configurationDialog.h:1433
 msgid "Restart the download"
 msgstr "Tải xuống lại lần nữa"
 
-#: src/ui_configurationDialog.h:1427
+#: src/ui_configurationDialog.h:1435
 msgid "Retry"
 msgstr "Thử lại"
 
-#: src/ui_configurationDialog.h:1429
+#: src/ui_configurationDialog.h:1437
 msgid "Stop the download. You can always restart it later"
 msgstr "Ngừng tải.  Bạn có thể tải xuống lần khác"
 
-#: src/ui_configurationDialog.h:1434
+#: src/ui_configurationDialog.h:1442
 msgid "Close window when script runs"
 msgstr "Đóng cửa sổ khi chạy kịch bản"
 
-#: src/ui_configurationDialog.h:1436
+#: src/ui_configurationDialog.h:1444
 msgid "Run the selected script"
 msgstr "Chạy lệnh được chọn"
 
-#: src/ui_configurationDialog.h:1440
+#: src/ui_configurationDialog.h:1448
 msgid "Stop a running script"
 msgstr "Dừng lệnh đang chạy"
 
-#: src/ui_configurationDialog.h:1444
+#: src/ui_configurationDialog.h:1452
 msgid "Load at startup"
 msgstr "Tải lúc khởi động"
 
-#: src/ui_configurationDialog.h:1445
+#: src/ui_configurationDialog.h:1453
 msgid "configure"
 msgstr "Cấu hình"
 
-#: src/ui_configurationDialog.h:1450
+#: src/ui_configurationDialog.h:1458
 msgid "Main"
 msgstr "Chính"
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1460
 msgid "Information"
 msgstr "Thông tin"
 
-#: src/ui_configurationDialog.h:1457
+#: src/ui_configurationDialog.h:1465
 msgid "Navigation"
 msgstr "Điều hướng"
 
-#: src/ui_configurationDialog.h:1459
+#: src/ui_configurationDialog.h:1467
 msgid "Tools"
 msgstr "Công cụ"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1469
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Nguyên bản"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1471
 msgid "Plugins"
 msgstr "Phần bổ sung"
 
@@ -8714,77 +8716,77 @@ msgstr ""
 "tin mặc định"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1936
+#: plugins/Satellites/src/Satellites.cpp:1937
 msgid "visual"
 msgstr "Có thể nhìn thấy"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1938
+#: plugins/Satellites/src/Satellites.cpp:1939
 msgid "scientific"
 msgstr "Khoa học"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1940
+#: plugins/Satellites/src/Satellites.cpp:1941
 msgid "communications"
 msgstr "Viễn thông"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1942
+#: plugins/Satellites/src/Satellites.cpp:1943
 msgid "navigation"
 msgstr "Điều hướng"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1944
+#: plugins/Satellites/src/Satellites.cpp:1945
 msgid "amateur"
 msgstr "Nghiệp dư"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1946
+#: plugins/Satellites/src/Satellites.cpp:1947
 msgid "weather"
 msgstr "Thời tiết"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1948
+#: plugins/Satellites/src/Satellites.cpp:1949
 msgid "geostationary"
 msgstr "Địa tĩnh"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1950
+#: plugins/Satellites/src/Satellites.cpp:1951
 msgid "non-operational"
 msgstr "Không hoạt động"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1952
+#: plugins/Satellites/src/Satellites.cpp:1953
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1954
+#: plugins/Satellites/src/Satellites.cpp:1955
 msgid "glonass"
 msgstr "Hệ thống vệ tinh định vị toàn cầu"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1956
+#: plugins/Satellites/src/Satellites.cpp:1957
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1958
+#: plugins/Satellites/src/Satellites.cpp:1959
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1960
+#: plugins/Satellites/src/Satellites.cpp:1961
 msgid "stations"
 msgstr "trạm không gian"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1962
+#: plugins/Satellites/src/Satellites.cpp:1963
 msgid "education"
 msgstr "giáo dục"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1964
+#: plugins/Satellites/src/Satellites.cpp:1965
 msgid "observatory"
 msgstr "trạm quan sát"
 
@@ -8794,57 +8796,57 @@ msgstr "trạm quan sát"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1974
+#: plugins/Satellites/src/Satellites.cpp:1975
 msgid "The Hubble Space Telescope"
 msgstr "Kính viễn vọng không gian Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1976
+#: plugins/Satellites/src/Satellites.cpp:1977
 msgid "The International Space Station"
 msgstr "Trạm vũ trụ quốc tế"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1978
+#: plugins/Satellites/src/Satellites.cpp:1979
 msgid "China's first space station"
 msgstr "Trạm không gian đầu tiên của Trung Quốc"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1980
+#: plugins/Satellites/src/Satellites.cpp:1981
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1982
+#: plugins/Satellites/src/Satellites.cpp:1983
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1984
+#: plugins/Satellites/src/Satellites.cpp:1985
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:1988
+#: plugins/Satellites/src/Satellites.cpp:1989
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:1990
+#: plugins/Satellites/src/Satellites.cpp:1991
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:1992
+#: plugins/Satellites/src/Satellites.cpp:1993
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:1994
+#: plugins/Satellites/src/Satellites.cpp:1995
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:1996
+#: plugins/Satellites/src/Satellites.cpp:1997
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -8938,43 +8940,43 @@ msgstr "Vệ tinh không thể nhìn thấy"
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/Satellite.cpp:603
-#: plugins/Satellites/src/Satellite.cpp:628
+#: plugins/Satellites/src/Satellite.cpp:687
+#: plugins/Satellites/src/Satellite.cpp:712
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:607
+#: plugins/Satellites/src/Satellite.cpp:691
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:610
+#: plugins/Satellites/src/Satellite.cpp:694
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:613
+#: plugins/Satellites/src/Satellite.cpp:697
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:616
+#: plugins/Satellites/src/Satellite.cpp:700
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:619
+#: plugins/Satellites/src/Satellite.cpp:703
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:622
+#: plugins/Satellites/src/Satellite.cpp:706
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:625
+#: plugins/Satellites/src/Satellite.cpp:709
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
@@ -11836,34 +11838,34 @@ msgstr "mJy (milliJansky)"
 msgid "Notes: %1"
 msgstr "Chú ý: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:330
+#: plugins/Pulsars/src/Pulsar.cpp:352
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "Ẩn tinh phát tia X dị thường hoặc sự lặp lại tia gamma mềm với những rung "
 "động được phát hiện"
 
-#: plugins/Pulsars/src/Pulsar.cpp:335
+#: plugins/Pulsars/src/Pulsar.cpp:357
 msgid "has one or more binary companions"
 msgstr "có một bạn đồng hành hoặc nhiều hơn"
 
-#: plugins/Pulsars/src/Pulsar.cpp:340
+#: plugins/Pulsars/src/Pulsar.cpp:362
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "với phát xung từ tần số vô tuyến đến hồng ngoại hoặc cao hơn"
 
-#: plugins/Pulsars/src/Pulsar.cpp:345
+#: plugins/Pulsars/src/Pulsar.cpp:367
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "với phát xung chỉ ở tần số hồng ngoại hoặc cao hơn"
 
-#: plugins/Pulsars/src/Pulsar.cpp:350
+#: plugins/Pulsars/src/Pulsar.cpp:372
 msgid "with pulsed emission in the radio band"
 msgstr "với phát xung trong dải tầng vô tuyến"
 
-#: plugins/Pulsars/src/Pulsar.cpp:355
+#: plugins/Pulsars/src/Pulsar.cpp:377
 msgid "with intermittently pulsed radio emission"
 msgstr "với phát xung vô tuyến không liên tục"
 
-#: plugins/Pulsars/src/Pulsar.cpp:360
+#: plugins/Pulsars/src/Pulsar.cpp:382
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -17177,6 +17179,15 @@ msgstr ""
 
 #~ msgid "Display a derived class-specific extra fields"
 #~ msgstr "Hiển thị nguồn gốc trường bổ sung lớp cụ thể"
+
+#~ msgid ""
+#~ "Restoring default settings requires a restart of Stellarium. Saving all the "
+#~ "current options includes the current FOV and direction of view for use at "
+#~ "next startup."
+#~ msgstr ""
+#~ "Khôi phục cài đặt mặc định yêu cầu khởi động lại Stellarium. Lưu tất cả các "
+#~ "tùy chọn hiện thời bao gồm trường nhìn và hướng nhìn cho việc sử dụng ở lần "
+#~ "khởi động kế tiếp."
 
 #~ msgid ""
 #~ "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
