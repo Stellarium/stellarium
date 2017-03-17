@@ -211,11 +211,13 @@ protected:
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 
+		QPaintDevice* paintDevice = painter->device();
+
 		int mainFBO;
 		gl->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mainFBO);
 
-		int pixelRatio = painter->device()->devicePixelRatio();
-		QSize size(painter->device()->width() * pixelRatio, painter->device()->height() * pixelRatio);
+		int pixelRatio = paintDevice->devicePixelRatio();
+		QSize size(paintDevice->width() * pixelRatio, paintDevice->height() * pixelRatio);
 		if (fbo && fbo->size() != size)
 		{
 			delete fbo;
@@ -229,15 +231,25 @@ protected:
 			fbo = new QOpenGLFramebufferObject(size, format);
 		}
 
-		fbo->bind();
-		QOpenGLPaintDevice device(size);
-		QPainter fboPainter(&device);
-		drawSource(&fboPainter);
-		//dont use QOpenGLFramebufferObject::release here
-		gl->glBindFramebuffer(GL_FRAMEBUFFER,mainFBO);
+		// we have to use our own paint device
+		// we need this because using the original paint device (QOpenGLWidgetPaintDevice when used with QOpenGLWidget) will rebind the default FBO randomly
+		// but using 2 GL painters at the same time can mess up the GL state, so we should close the old one first
 
-		painter->save();
-		painter->beginNativePainting();
+		// stop drawing to the old paint device to make sure state is reset correctly
+		painter->end();
+
+		// create our paint device
+		QOpenGLPaintDevice fboPaintDevice(size);
+		fboPaintDevice.setDevicePixelRatio(pixelRatio);
+
+		fbo->bind();
+		painter->begin(&fboPaintDevice);
+		drawSource(painter);
+		painter->end();
+
+		painter->begin(paintDevice);
+
+		//painter->beginNativePainting();
 		program->bind();
 		const GLfloat pos[] = {-1, -1, +1, -1, -1, +1, +1, +1};
 		const GLfloat texCoord[] = {0, 0, 1, 0, 0, 1, 1, 1};
@@ -249,8 +261,7 @@ protected:
 		gl->glBindTexture(GL_TEXTURE_2D, fbo->texture());
 		gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		program->release();
-		painter->endNativePainting();
-		painter->restore();
+		//painter->endNativePainting();
 	}
 
 private:
