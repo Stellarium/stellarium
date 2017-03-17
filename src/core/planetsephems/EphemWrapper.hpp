@@ -39,6 +39,8 @@ class EphemWrapper{
 public:
     static void init_de430(const char* filepath);
     static void init_de431(const char* filepath);
+    static bool jd_fits_de430(const double jd);
+    static bool jd_fits_de431(const double jd);
 };
 
 void get_sun_helio_coordsv(double jd,double xyz[3], void*);
