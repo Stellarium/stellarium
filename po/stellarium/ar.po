@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-05 03:15+0700\n"
+"POT-Creation-Date: 2017-03-14 09:50+0700\n"
 "PO-Revision-Date: 2016-12-21 07:21+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-05 05:27+0000\n"
-"X-Generator: Launchpad (build 18329)\n"
+"X-Launchpad-Export-Date: 2017-03-15 05:29+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
-#: src/core/modules/Planet.cpp:247 src/core/modules/MinorPlanet.cpp:200
+#: src/core/modules/Planet.cpp:253 src/core/modules/MinorPlanet.cpp:200
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:277
@@ -74,7 +74,7 @@ msgstr "أسماء المجموعات النجمية"
 msgid "Constellation boundaries"
 msgstr "حدود المجموعات النجمية"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1393
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1401
 msgid "Select single constellation"
 msgstr "اختر مجموعة نجمية واحدة"
 
@@ -390,7 +390,7 @@ msgstr "‎النوع‎: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "‎الحجب‎:‎<b>%1</b>‎"
 
-#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:253
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:259
 #: src/core/modules/MinorPlanet.cpp:206 src/core/modules/Comet.cpp:171
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -398,7 +398,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "‎القدر‎:‎ <b>%1</b> (‎بعد الانطفاء‎: <b>%2</b>)‎"
 
 #: src/core/modules/Nebula.cpp:208 src/core/modules/Nebula.cpp:213
-#: src/core/modules/Planet.cpp:256 src/core/modules/MinorPlanet.cpp:209
+#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:209
 #: src/core/modules/Comet.cpp:174 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
@@ -489,372 +489,372 @@ msgstr "‎اختلاف المنظر:‎ %1\""
 msgid "Morphological description: "
 msgstr "‎وصف الشكل‎: ‏ ‎ "
 
-#: src/core/modules/Nebula.cpp:857
+#: src/core/modules/Nebula.cpp:874
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "‎احتشاد عالي للنجوم باتجاه المركز‎"
 
-#: src/core/modules/Nebula.cpp:860
+#: src/core/modules/Nebula.cpp:877
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "‎احتشاد كثيف مركزي للنجوم ‎"
 
-#: src/core/modules/Nebula.cpp:863
+#: src/core/modules/Nebula.cpp:880
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "‎نواة داخلية قوية من النجوم‎"
 
-#: src/core/modules/Nebula.cpp:866
+#: src/core/modules/Nebula.cpp:883
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "‎احتشاد غني متوسط للنجوم‎"
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:888
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "‎احتشاد متوسط للنجوم‎"
 
-#: src/core/modules/Nebula.cpp:874
+#: src/core/modules/Nebula.cpp:891
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "‎احتشاد متباعد نوعا ما للنجوم باتجاه المركز‎"
 
-#: src/core/modules/Nebula.cpp:877
+#: src/core/modules/Nebula.cpp:894
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "‎احتشاد متباعد للنجوم باتجاه المركز‎"
 
-#: src/core/modules/Nebula.cpp:880
+#: src/core/modules/Nebula.cpp:897
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "‎احتشاد متباعد للنجوم‎"
 
-#: src/core/modules/Nebula.cpp:883
+#: src/core/modules/Nebula.cpp:900
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "‎احتشاد متباعد جدا للنجوم باتجاه المركز‎"
 
-#: src/core/modules/Nebula.cpp:886
+#: src/core/modules/Nebula.cpp:903
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "‎احتشاد معدوم تقريبا للنجوم باتجاه المركز‎"
 
-#: src/core/modules/Nebula.cpp:889
+#: src/core/modules/Nebula.cpp:906
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "‎تصنيف غير موثق للاحتشاد‎"
 
-#: src/core/modules/Nebula.cpp:909
+#: src/core/modules/Nebula.cpp:926
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "‎احتشاد مركزي قوي للنجوم‎"
 
-#: src/core/modules/Nebula.cpp:912
+#: src/core/modules/Nebula.cpp:929
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "‎احتشاد مركزي قليل  للنجوم‎"
 
-#: src/core/modules/Nebula.cpp:915
+#: src/core/modules/Nebula.cpp:932
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "‎لا يوجد احتشاد ملحوظ للنجوم‎"
 
-#: src/core/modules/Nebula.cpp:918
+#: src/core/modules/Nebula.cpp:935
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "‎احتشاد لحقل نجوم‎"
 
-#: src/core/modules/Nebula.cpp:921
+#: src/core/modules/Nebula.cpp:938
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "‎تصنيف الاحتشاد غير موثق‎"
 
-#: src/core/modules/Nebula.cpp:927
+#: src/core/modules/Nebula.cpp:944
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "‎نطاق صغير لسطوع أعضاء الحشد النجمي‎"
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:947
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "‎نطاق متوسط  لسطوع أعضاء الحشد النجمي‎"
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "‎نطاق كبير  لسطوع أعضاء الحشد النجمي‎"
 
-#: src/core/modules/Nebula.cpp:936
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "‎نطاق غير موثق لسطوع أعضاء الحشد النجمي‎"
 
-#: src/core/modules/Nebula.cpp:942
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "‎حشد نجمي فقير يحوي أقل من 50 نجماً‎"
 
-#: src/core/modules/Nebula.cpp:945
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "‎حشد نجمي غني معتدل  يحوي من 50 - 100 نجم‎"
 
-#: src/core/modules/Nebula.cpp:948
+#: src/core/modules/Nebula.cpp:965
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "‎حشد نجمي غني يحوي أكثر من 100 نجم‎"
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "‎حشد نجمي لم يوثق عدد أعضائه‎"
 
-#: src/core/modules/Nebula.cpp:955
+#: src/core/modules/Nebula.cpp:972
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "‎الحشد يقع داخل السديم‎"
 
-#: src/core/modules/Nebula.cpp:976
+#: src/core/modules/Nebula.cpp:993
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "‎ساطع جداً‎"
 
-#: src/core/modules/Nebula.cpp:979
+#: src/core/modules/Nebula.cpp:996
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "‎ساطعً‎"
 
-#: src/core/modules/Nebula.cpp:982
+#: src/core/modules/Nebula.cpp:999
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "‎سطوع معتدلً‎"
 
-#: src/core/modules/Nebula.cpp:985
+#: src/core/modules/Nebula.cpp:1002
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "‎خافت‎"
 
-#: src/core/modules/Nebula.cpp:988
+#: src/core/modules/Nebula.cpp:1005
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "‎خافت جدا‎"
 
-#: src/core/modules/Nebula.cpp:991
+#: src/core/modules/Nebula.cpp:1008
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "‎سطوع غير متأكد منه‎"
 
-#: src/core/modules/Nebula.cpp:994
+#: src/core/modules/Nebula.cpp:1011
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "‎سطوع غير موثق للسديم العاكس‎"
 
-#: src/core/modules/Nebula.cpp:1000
+#: src/core/modules/Nebula.cpp:1017
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "‎النجم المضيء موجود ضمن السديم‎"
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1020
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "‎النجم موجود خارج السديم المضاء‎"
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1023
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "‎النجم موجود في ركن السديم المضاء‎"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1011
+#: src/core/modules/Nebula.cpp:1028
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "‎النجم موجود خارج السديم الغريب المضاء‎"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1017
+#: src/core/modules/Nebula.cpp:1034
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "‎السديم الغريب المضاء‎"
 
-#: src/core/modules/Nebula.cpp:1021
+#: src/core/modules/Nebula.cpp:1038
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "‎سديم عاكس غير موثق‎"
 
-#: src/core/modules/Nebula.cpp:1044
+#: src/core/modules/Nebula.cpp:1061
 msgid "circular form"
 msgstr "‎شكل دائري‎"
 
-#: src/core/modules/Nebula.cpp:1047
+#: src/core/modules/Nebula.cpp:1064
 msgid "elliptical form"
 msgstr "‎شكل بيضاوي‎"
 
-#: src/core/modules/Nebula.cpp:1050
+#: src/core/modules/Nebula.cpp:1067
 msgid "irregular form"
 msgstr "‎شكل غير منتظم‎"
 
-#: src/core/modules/Nebula.cpp:1053
+#: src/core/modules/Nebula.cpp:1070
 msgid "undocumented form"
 msgstr "‎شكل غير موثق‎"
 
-#: src/core/modules/Nebula.cpp:1059
+#: src/core/modules/Nebula.cpp:1076
 msgid "amorphous structure"
 msgstr "‎بنية لايمكن تحديدها‎"
 
-#: src/core/modules/Nebula.cpp:1062
+#: src/core/modules/Nebula.cpp:1079
 msgid "conventional structure"
 msgstr "‎بنية عادية‎"
 
-#: src/core/modules/Nebula.cpp:1065
+#: src/core/modules/Nebula.cpp:1082
 msgid "filamentary structure"
 msgstr "‎بنية خيطية‎"
 
-#: src/core/modules/Nebula.cpp:1068
+#: src/core/modules/Nebula.cpp:1085
 msgid "undocumented structure"
 msgstr "‎بنية غير موثقة‎"
 
-#: src/core/modules/Nebula.cpp:1074
+#: src/core/modules/Nebula.cpp:1091
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "‎الأضعف‎"
 
-#: src/core/modules/Nebula.cpp:1077
+#: src/core/modules/Nebula.cpp:1094
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "‎سطوع معتدل‎"
 
-#: src/core/modules/Nebula.cpp:1080
+#: src/core/modules/Nebula.cpp:1097
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "‎الأسطع‎"
 
-#: src/core/modules/Nebula.cpp:1083
+#: src/core/modules/Nebula.cpp:1100
 msgid "undocumented brightness"
 msgstr "‎غير موثق السطوع‎"
 
-#: src/core/modules/Nebula.cpp:1099
+#: src/core/modules/Nebula.cpp:1116
 msgid "galaxy"
 msgstr "‎مجرة‎"
 
-#: src/core/modules/Nebula.cpp:1102
+#: src/core/modules/Nebula.cpp:1119
 msgid "active galaxy"
 msgstr "‎مجرة نشطة‎"
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1122
 msgid "radio galaxy"
 msgstr "‎مجرة راديوية‎"
 
-#: src/core/modules/Nebula.cpp:1108
+#: src/core/modules/Nebula.cpp:1125
 msgid "interacting galaxy"
 msgstr "‎مجرة متفاعلة‎"
 
-#: src/core/modules/Nebula.cpp:1111 plugins/Quasars/src/Quasar.cpp:101
+#: src/core/modules/Nebula.cpp:1128 plugins/Quasars/src/Quasar.cpp:101
 msgid "quasar"
 msgstr "كوازار"
 
-#: src/core/modules/Nebula.cpp:1114
+#: src/core/modules/Nebula.cpp:1131
 msgid "star cluster"
 msgstr "‎حشد نجمي‎"
 
-#: src/core/modules/Nebula.cpp:1117
+#: src/core/modules/Nebula.cpp:1134
 msgid "open star cluster"
 msgstr "‎حشد نجمي مفتوح‎"
 
-#: src/core/modules/Nebula.cpp:1120
+#: src/core/modules/Nebula.cpp:1137
 msgid "globular star cluster"
 msgstr "‎حشد نجمي كروي‎"
 
-#: src/core/modules/Nebula.cpp:1123
+#: src/core/modules/Nebula.cpp:1140
 msgid "nebula"
 msgstr "‎سديم‎"
 
-#: src/core/modules/Nebula.cpp:1126
+#: src/core/modules/Nebula.cpp:1143
 msgid "planetary nebula"
 msgstr "‎سديم كوكبي‎"
 
-#: src/core/modules/Nebula.cpp:1129
+#: src/core/modules/Nebula.cpp:1146
 msgid "dark nebula"
 msgstr "‎سديم معتم"
 
-#: src/core/modules/Nebula.cpp:1132
+#: src/core/modules/Nebula.cpp:1149
 msgid "cluster associated with nebulosity"
 msgstr "‎حشد نجمي مرتبط بسديم‎"
 
-#: src/core/modules/Nebula.cpp:1135
+#: src/core/modules/Nebula.cpp:1152
 msgid "bipolar nebula"
 msgstr "‎سديم ثنائي القطب‎"
 
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1155
 msgid "emission nebula"
 msgstr "‎سديم إشعاعي‎"
 
-#: src/core/modules/Nebula.cpp:1141
+#: src/core/modules/Nebula.cpp:1158
 msgid "HII region"
 msgstr "HII region"
 
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1161
 msgid "reflection nebula"
 msgstr "‎سديم عاكس‎"
 
-#: src/core/modules/Nebula.cpp:1147
+#: src/core/modules/Nebula.cpp:1164
 msgid "supernova remnant"
 msgstr "‎بقايا مستعر عظيم‎"
 
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1167
 msgid "stellar association"
 msgstr "‎مجتمع نجمي‎"
 
-#: src/core/modules/Nebula.cpp:1153
+#: src/core/modules/Nebula.cpp:1170
 msgid "star cloud"
 msgstr "‎سحابة نجمية‎"
 
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1173
 msgid "interstellar matter"
 msgstr "‎مادة بين نجمية‎"
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1176
 msgid "emission object"
 msgstr "‎جرم إشعاعي‎"
 
-#: src/core/modules/Nebula.cpp:1162
+#: src/core/modules/Nebula.cpp:1179
 msgid "BL Lac object"
 msgstr "ب ل الورل  BL Lac جرم‎"
 
-#: src/core/modules/Nebula.cpp:1165
+#: src/core/modules/Nebula.cpp:1182
 msgid "blazar"
 msgstr "‎بلازار‎"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1185
 msgid "molecular cloud"
 msgstr "‎سحابة جزيئية‎"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1188
 msgid "young stellar object"
 msgstr "‎جرم نجمي شاب‎"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1191
 msgid "possible quasar"
 msgstr "‎يحتمل أن يكون كوازار‎"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1194
 msgid "possible planetary nebula"
 msgstr "‎ربما سديم كوكبي‎"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1197
 msgid "protoplanetary nebula"
 msgstr "‎سديم في مرحلة ماقبل الشكل الكوكبي‎"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1183 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1200 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "نجم"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1203
 msgid "object of unknown nature"
 msgstr "‎جرم ذو طبيعة غير معروفة‎"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1206
 msgid "undocumented type"
 msgstr "‎نوع غير موثق‎"
 
@@ -866,143 +866,148 @@ msgstr "أجرام الفضاء السحيق"
 msgid "Toggle DSO type filter"
 msgstr "تمكين أو تعطيل اختيار نوع أجرام الفضاء السحيق"
 
-#: src/core/modules/Planet.cpp:261 src/core/modules/MinorPlanet.cpp:219
+#: src/core/modules/Planet.cpp:266 src/core/modules/MinorPlanet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:183
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "‎القدر المطلق:‎ %1"
 
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:238
+#: src/core/modules/Planet.cpp:269
+#, qt-format
+msgid "Mean Opposition Magnitude: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:290 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "‎المسافة من الشمس‎: %1  وحدة فلكية (‎%2 كم‎)"
 
-#: src/core/modules/Planet.cpp:289 src/core/modules/MinorPlanet.cpp:245
+#: src/core/modules/Planet.cpp:297 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "‎المسافة من الشمس‎: %1  وحدة فلكية (‎%2 مليون كم‎)"
 
-#: src/core/modules/Planet.cpp:299 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:307 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:212
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "‎‎‎المسافة‎‎: ‎%1 وحدة فلكية‎ (‎‎%2 كم‎‎)"
 
-#: src/core/modules/Planet.cpp:306 src/core/modules/MinorPlanet.cpp:262
+#: src/core/modules/Planet.cpp:314 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "‎مليون كم %2) وحدة فلكية %1 :المسافة)‎"
 
-#: src/core/modules/Planet.cpp:320 src/core/modules/Planet.cpp:324
+#: src/core/modules/Planet.cpp:328 src/core/modules/Planet.cpp:332
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "‎القطر الظاهري‎: %1, مع الحلقات‎: %2"
 
-#: src/core/modules/Planet.cpp:333 src/core/modules/Planet.cpp:337
+#: src/core/modules/Planet.cpp:341 src/core/modules/Planet.cpp:345
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "‎القطر الظاهري‎: %1, ‎مكبر إلى‎: %2"
 
-#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:346
+#: src/core/modules/Planet.cpp:352 src/core/modules/Planet.cpp:354
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "‎القطر الظاهري‎: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:363 src/core/modules/MinorPlanet.cpp:285
+#: src/core/modules/Planet.cpp:371 src/core/modules/MinorPlanet.cpp:285
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "‎الدورة النجمية‎: %1‎ يوم‎ (%2 a)"
 
-#: src/core/modules/Planet.cpp:366
+#: src/core/modules/Planet.cpp:374
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "‎اليوم النجمي‎: %1"
 
-#: src/core/modules/Planet.cpp:367
+#: src/core/modules/Planet.cpp:375
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "‎اليوم الشمسي المتوسط‎: %1"
 
-#: src/core/modules/Planet.cpp:371
+#: src/core/modules/Planet.cpp:379
 msgid "The period of rotation is chaotic"
 msgstr "فترة الدوران مضطربة"
 
-#: src/core/modules/Planet.cpp:390
+#: src/core/modules/Planet.cpp:398
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "‎هلال متزايد‎"
 
-#: src/core/modules/Planet.cpp:392
+#: src/core/modules/Planet.cpp:400
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "‎ربع أول‎"
 
-#: src/core/modules/Planet.cpp:394
+#: src/core/modules/Planet.cpp:402
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "‎أحدب متزايد‎"
 
-#: src/core/modules/Planet.cpp:396
+#: src/core/modules/Planet.cpp:404
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "‎بدر تام‎"
 
-#: src/core/modules/Planet.cpp:398
+#: src/core/modules/Planet.cpp:406
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "‎أحدب متناقص‎"
 
-#: src/core/modules/Planet.cpp:400
+#: src/core/modules/Planet.cpp:408
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "‎ربع  ثالث‎"
 
-#: src/core/modules/Planet.cpp:402
+#: src/core/modules/Planet.cpp:410
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "‎هلال متناقص‎"
 
-#: src/core/modules/Planet.cpp:404
+#: src/core/modules/Planet.cpp:412
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "‎محاق‎"
 
-#: src/core/modules/Planet.cpp:409 src/core/modules/Planet.cpp:414
+#: src/core/modules/Planet.cpp:417 src/core/modules/Planet.cpp:422
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
 #: src/core/modules/Comet.cpp:246 src/core/modules/Comet.cpp:251
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "‎زاوية الطور‎: %1"
 
-#: src/core/modules/Planet.cpp:410 src/core/modules/Planet.cpp:415
+#: src/core/modules/Planet.cpp:418 src/core/modules/Planet.cpp:423
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:247 src/core/modules/Comet.cpp:252
 #, qt-format
 msgid "Elongation: %1"
 msgstr "‎الاستطالة‎: %1"
 
-#: src/core/modules/Planet.cpp:418
+#: src/core/modules/Planet.cpp:426
 #, qt-format
 msgid "Phase: %1"
 msgstr "‎الطور‎: %1"
 
-#: src/core/modules/Planet.cpp:422
+#: src/core/modules/Planet.cpp:430
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "‎الإضاءة‎: %1%"
 
-#: src/core/modules/Planet.cpp:423
+#: src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Albedo: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:435
+#: src/core/modules/Planet.cpp:443
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "‎نسبة الكسوف: ‎%1%"
@@ -1151,14 +1156,10 @@ msgid "Rising time: %1%"
 msgstr "‎وقت الشروق:‎%1%"
 
 #: src/core/modules/StarWrapper.cpp:280
-msgid "Year of last satisfactory observation"
-msgstr "‎سنة آخر رصد مقبول‎"
-
-#: src/core/modules/StarWrapper.cpp:281
 msgid "Position angle"
 msgstr "‎زاوية الموقع‎"
 
-#: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
+#: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
 #: src/gui/AstroCalcDialog.cpp:752
 msgid "Separation"
 msgstr "‎البعد الزاوي‎"
@@ -1404,12 +1405,12 @@ msgstr "اقلب المنظر افقيا"
 msgid "Flip scene vertically"
 msgstr "اقلب المنظر عموديا"
 
-#: src/core/StelCore.cpp:2090
+#: src/core/StelCore.cpp:2103
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "التصحيح غير مفعّل. لاتستخدم هذا الخيار إلا عندما تعلم معنى إلغاء التصحيح."
 
-#: src/core/StelCore.cpp:2093
+#: src/core/StelCore.cpp:2106
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1420,7 +1421,7 @@ msgstr ""
 "في مقالته \"نظرية آينشتاين النسبية تؤكدها الكسوفات التاريخية القديمة\" (%1). "
 "لمزيد من المعلومات انظر %2هنـــــا%3."
 
-#: src/core/StelCore.cpp:2096
+#: src/core/StelCore.cpp:2109
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1429,7 +1430,7 @@ msgstr ""
 "هذه المعادلة المبنية على الملاحظات نشرها G. M. Clemence في مقالته  \"عن نظام "
 "الثوابت الفلكية\" (%1)."
 
-#: src/core/StelCore.cpp:2099
+#: src/core/StelCore.cpp:2112
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1441,7 +1442,7 @@ msgstr ""
 "من قبل Spencer Jones ـ (%1) ـ واستخدمها  Jean Meeus في كتابه \" الصيغ "
 "الفلكية للآلات الحاسبة\". واستعملت في برنامج الحاسب  SunTracker Pro."
 
-#: src/core/StelCore.cpp:2103
+#: src/core/StelCore.cpp:2116
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1451,7 +1452,7 @@ msgstr ""
 "& Meeuse سنة (1983) في <em>Astronomical Ephemeris</em> وفي <em>Canon of "
 "Solar Eclipses</em>"
 
-#: src/core/StelCore.cpp:2107
+#: src/core/StelCore.cpp:2120
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1462,7 +1463,7 @@ msgstr ""
 "601 قبل الميلاد حتى 1649 م في فترات يفصل بينها 5 و 10 أيام. نفس العلاقات "
 "تضمنتها جداول سيزيجي (1973) لـ Goldstine ."
 
-#: src/core/StelCore.cpp:2111
+#: src/core/StelCore.cpp:2124
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1473,7 +1474,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> ـ (%1)."
 
-#: src/core/StelCore.cpp:2114
+#: src/core/StelCore.cpp:2127
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1482,7 +1483,7 @@ msgstr ""
 "هذه المعادلة نشرها F. R. Stephenson في المقالة <em>Pre-Telescopic "
 "Astronomical Observations</em> ـ (%1)."
 
-#: src/core/StelCore.cpp:2117
+#: src/core/StelCore.cpp:2130
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1495,7 +1496,7 @@ msgstr ""
 "U.T. in the period 1800-1975</em> ـ (%1) كما توافق مع البيانات التي نشرها "
 "Brouwer سنة (1952)."
 
-#: src/core/StelCore.cpp:2120
+#: src/core/StelCore.cpp:2133
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1504,7 +1505,7 @@ msgstr ""
 "هذه الخوارزمية تبناها P. Bretagnon & L. Simon's في \"برامج حسابات الكواكب من "
 "-4000 حتى +2800\" ـ(1986) وفي برنامج القبة الفلكية  RedShift."
 
-#: src/core/StelCore.cpp:2123
+#: src/core/StelCore.cpp:2136
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1514,11 +1515,11 @@ msgstr ""
 "هذه الصيغة نشرها F. R. Stephenson و L. V. Morrison في المقالة \"التغيرات "
 "طويلة المدى في دوران الأرض - 700 قبل الميلاد حتى 1980 م\" (%1)."
 
-#: src/core/StelCore.cpp:2126
+#: src/core/StelCore.cpp:2139
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "هذه الخوارزمية مستخدمة في البرنامج الحاسوبي Guide 7."
 
-#: src/core/StelCore.cpp:2129
+#: src/core/StelCore.cpp:2142
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1527,7 +1528,7 @@ msgstr ""
 "هذه الخوارزمية نشرها F. Espenak في \"لائحة بالكسوفات الشمسية من 1986 إلى "
 "2035\" وفي \"لائحة بالخسوفات القمرية من 1986 إلى 2035\" (1989)."
 
-#: src/core/StelCore.cpp:2132
+#: src/core/StelCore.cpp:2145
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1536,7 +1537,7 @@ msgstr ""
 "هذه الصيغة تحصّل عليها (%1) K.M. Borkowski من تحليل سجلات 31 كسوفا شمسياً "
 "بين سنة 2137 قبل الميلاد وسنة 1715 م."
 
-#: src/core/StelCore.cpp:2135
+#: src/core/StelCore.cpp:2148
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1548,7 +1549,7 @@ msgstr ""
 "مقالتهما \"Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988\" ـ(%1) كتوفيق للبيانات المعطاة من قبل Stephenson & Morrison ـ(1984)."
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2151
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1558,7 +1559,7 @@ msgstr ""
 "نظرية ELP 2000-85 القمرية في \"جداول وبرامج القمر من 4000 قبل الميلاد حتى "
 "8000 م\" (1991)."
 
-#: src/core/StelCore.cpp:2141
+#: src/core/StelCore.cpp:2154
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1568,7 +1569,7 @@ msgstr ""
 "هذه المعادلة نشرها F. R. Stephenson و L. V. Morrison في المقالة \" التذبذبات "
 "طويلة المدى في دوران الأرض: 700 قبل الميلاد حتى 1900 م\" (%1)."
 
-#: src/core/StelCore.cpp:2144
+#: src/core/StelCore.cpp:2157
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1577,7 +1578,7 @@ msgstr ""
 "نشر F. R. Stephenson هذه الصيغة في كتابه \"الكسوفات التاريخية ودوران الأرض\" "
 "(%1)."
 
-#: src/core/StelCore.cpp:2147
+#: src/core/StelCore.cpp:2160
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1587,7 +1588,7 @@ msgstr ""
 "الاستخدام للسنين 1620 - 2000 ويتضمن نسخة معدلة من (1997) Chapront, Chapront-"
 "Touze & Francou للتواريخ خارج نطاق 1620..2000."
 
-#: src/core/StelCore.cpp:2150
+#: src/core/StelCore.cpp:2163
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1596,7 +1597,7 @@ msgstr ""
 "مجموعة  JPL Solar System Dynamics Group التابعة لناسا تستخدم هذه الصيغة في "
 "موقعها التفاعلي %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2153
+#: src/core/StelCore.cpp:2166
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1605,7 +1606,7 @@ msgstr ""
 "متعددة الحدود هذه نشرها  J. Meeus and L. Simons في مقالتهما \"متعددة حدود "
 "تقريبية لدلتا تي، 1620 - 2000 م\" (%1)."
 
-#: src/core/StelCore.cpp:2156
+#: src/core/StelCore.cpp:2169
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1615,7 +1616,7 @@ msgstr ""
 "الشخصي\" (2000) تحوي متعددة حدود بسيطة من الترتيب الثالث لتوفيق البيانات من "
 "الماضي القريب."
 
-#: src/core/StelCore.cpp:2159
+#: src/core/StelCore.cpp:2172
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1627,7 +1628,7 @@ msgstr ""
 "التقاويم\" (2002). وهي مبنية على \"خوارزميات فلكية\" (طبعة 1991) لـ   Jean "
 "Meeus."
 
-#: src/core/StelCore.cpp:2162
+#: src/core/StelCore.cpp:2175
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1637,7 +1638,7 @@ msgstr ""
 "هذا الحل المهم نشره L. V. Morrison and F. R. Stephenson في المقالة \"القيم "
 "التاريخية لخطأ الساعة الأرضية %1T وحسابات الكسوفات\" (%2) مع زيادات في (%3)."
 
-#: src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2178
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1649,7 +1650,7 @@ msgstr ""
 "صيغة لـ  %1T  باستخدام استمثال مبسط مع دالة تربيعية وجيب تمامية. ينبني هذا "
 "على دورة محتملة كما وصفها Stephenson في (%2). للاستزادة %3هنـــــا%4."
 
-#: src/core/StelCore.cpp:2168 src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2181 src/core/StelCore.cpp:2184
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1664,15 +1665,15 @@ msgstr ""
 "5000 سنة: من -1900 حتى +3000\" (2006). وهذه الصيغة مستخدمة أيضاً في برنامج "
 "التقويم الفلكي للشمس والقمر والكواكب SOLEX."
 
-#: src/core/StelCore.cpp:2168
+#: src/core/StelCore.cpp:2181
 msgid "Used by default."
 msgstr "مستخدم افتراضياً"
 
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2184
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "نسخة معدلة من دون تسارع قمري إضافي."
 
-#: src/core/StelCore.cpp:2174
+#: src/core/StelCore.cpp:2187
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1683,7 +1684,7 @@ msgstr ""
 "نشر في المقالة  <em>Ancient eclipses and dating the fall of Babylon</em>سنة "
 "%1."
 
-#: src/core/StelCore.cpp:2177
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1694,7 +1695,7 @@ msgstr ""
 "2000 ، ونشر في المقالة العلمية <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em>  %1  ، وعدّل من قبل سنا إسلام في 2013م."
 
-#: src/core/StelCore.cpp:2180
+#: src/core/StelCore.cpp:2193
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1705,7 +1706,7 @@ msgstr ""
 "وفهيم زيدي ونشر في Delta T: Polynomial Approximation of Time Period 1620-"
 "2013 (%1)"
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2196
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1714,48 +1715,48 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2199
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "هذه صيغة رباعية لحساب %1T بمعاملات معرّفة من قبل المستخدم."
 
-#: src/core/StelCore.cpp:2189 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2202 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "خطأ"
 
-#: src/core/StelCore.cpp:2197
+#: src/core/StelCore.cpp:2210
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2238
+#: src/core/StelCore.cpp:2251
 msgid "with zero values outside this range"
 msgstr "هذا الحل يعطي أصفاراً للقيم خارج نطاق الحقبة الزمنية."
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2254
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "بدقة نموذجية تساوي ثانية واحدة وبقيم صفرية خارج نطاق الحقبة"
 
-#: src/core/StelCore.cpp:2244
+#: src/core/StelCore.cpp:2257
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2264
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2261
+#: src/core/StelCore.cpp:2274
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "صالح للاستخدام في الحقبة بين  سنة %1 و %2، %3."
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2276
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "صالح للاستخدام في الحقبة بين سنة %1 و %2."
@@ -1894,63 +1895,63 @@ msgstr ""
 "إسقاط ميلر الأسطواني إسقاط معدل عن الإسقاط المركاتوري اقترحه أوزبورن ميتلاند "
 "ميلر (1897 - 1979) عام 1942. في هذا الإسقاط لم تعد الأقطاب تمثل في مالانهاية"
 
-#: src/core/StelObject.cpp:122
+#: src/core/StelObject.cpp:133
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "‎التاريخ الحالي‎"
 
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:132
-#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:142
+#: src/core/StelObject.cpp:141 src/core/StelObject.cpp:143
+#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:153
 msgid "RA/Dec"
 msgstr "‎الميل / المطلع المستقيم‎"
 
-#: src/core/StelObject.cpp:161 src/core/StelObject.cpp:164
-#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:177
+#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:175
+#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:188
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "‎الميل / زاوية الساعة:‎ %1/%2"
 
-#: src/core/StelObject.cpp:161 src/core/StelObject.cpp:164
-#: src/core/StelObject.cpp:195 src/core/StelObject.cpp:197
+#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:175
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
 msgid "(apparent)"
 msgstr "‎(الظاهري‎)"
 
-#: src/core/StelObject.cpp:195 src/core/StelObject.cpp:197
-#: src/core/StelObject.cpp:202 src/core/StelObject.cpp:204
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
+#: src/core/StelObject.cpp:213 src/core/StelObject.cpp:215
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "‎ارتفاع زاوي / سمتي:‎ %1/%2"
 
-#: src/core/StelObject.cpp:223 src/core/StelObject.cpp:225
-#: src/core/StelObject.cpp:238 src/core/StelObject.cpp:240
+#: src/core/StelObject.cpp:234 src/core/StelObject.cpp:236
+#: src/core/StelObject.cpp:249 src/core/StelObject.cpp:251
 msgid "Ecliptic longitude/latitude"
 msgstr "‎العرض / الطول الكسوفي‎"
 
-#: src/core/StelObject.cpp:243 src/core/StelObject.cpp:245
+#: src/core/StelObject.cpp:254 src/core/StelObject.cpp:256
 msgid "Ecliptic obliquity"
 msgstr "‎ميل المستوى الكسوفي‎"
 
-#: src/core/StelObject.cpp:253 src/core/StelObject.cpp:255
+#: src/core/StelObject.cpp:264 src/core/StelObject.cpp:266
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "‎العرض/الطول المجرّي‎: %1/%2"
 
-#: src/core/StelObject.cpp:263 src/core/StelObject.cpp:265
+#: src/core/StelObject.cpp:274 src/core/StelObject.cpp:276
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
 msgstr "العرض/الطول لإحداثيات المجموعة المجرية‎: %1/%2"
 
-#: src/core/StelObject.cpp:271
+#: src/core/StelObject.cpp:282
 #, qt-format
 msgid "IAU Constellation: %1"
 msgstr "‎اختصار اسم المجموعة النجمية من الاتحاد الفلكي العالمي‎: %1‎"
 
-#: src/core/StelObject.cpp:280
+#: src/core/StelObject.cpp:291
 #, qt-format
 msgid "Mean Sidereal Time: %1"
 msgstr "‎الوقت النجمي المتوسط:‎ %1"
 
-#: src/core/StelObject.cpp:286
+#: src/core/StelObject.cpp:297
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
 msgstr "‎الوقت النجمي الظاهري:‎ %1"
@@ -2044,31 +2045,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr "و ش م ح"
 
-#: src/gui/ConfigurationDialog.cpp:538
+#: src/gui/ConfigurationDialog.cpp:539
 msgid "Select screenshot directory"
 msgstr "أختر مجلد حفظ لقطة الشاشة"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:870
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "حقل الرؤية عند بدء البرنامج: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:869
+#: src/gui/ConfigurationDialog.cpp:878
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "اتجاه الرؤية عند بدء البرنامج سمت/ارتفاع: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:931
+#: src/gui/ConfigurationDialog.cpp:940
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "<P DIR=RTL>المؤلفون<P DIR=RTL>"
 
-#: src/gui/ConfigurationDialog.cpp:932 src/gui/ViewDialog.cpp:1263
+#: src/gui/ConfigurationDialog.cpp:941 src/gui/ViewDialog.cpp:1263
 msgid "Contact"
 msgstr "<P DIR=RTL>للمراسلة"
 
-#: src/gui/ConfigurationDialog.cpp:934
+#: src/gui/ConfigurationDialog.cpp:943
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -2087,15 +2088,15 @@ msgstr "<P DIR=RTL>للمراسلة"
 msgid "Version"
 msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 
-#: src/gui/ConfigurationDialog.cpp:1031
+#: src/gui/ConfigurationDialog.cpp:1040
 msgid "Running script: "
 msgstr "البرنامج النصي الشغَال‎: "
 
-#: src/gui/ConfigurationDialog.cpp:1038
+#: src/gui/ConfigurationDialog.cpp:1047
 msgid "Running script: [none]"
 msgstr "البرنامج النصي الشغَال‎: [لايوجد]"
 
-#: src/gui/ConfigurationDialog.cpp:1103
+#: src/gui/ConfigurationDialog.cpp:1112
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2103,16 +2104,16 @@ msgstr ""
 "أنتهى تحميل أدلة النجوم الجديدة\n"
 "أعد تشغيل برنامج ستيللاريوم لرؤيتها.‏"
 
-#: src/gui/ConfigurationDialog.cpp:1107
+#: src/gui/ConfigurationDialog.cpp:1116
 msgid "All available star catalogs have been installed."
 msgstr "لقد تمت إضافة جميع أدلة النجوم المتاحة"
 
-#: src/gui/ConfigurationDialog.cpp:1112
+#: src/gui/ConfigurationDialog.cpp:1121
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "اجلب الدليل %1 من %2"
 
-#: src/gui/ConfigurationDialog.cpp:1119
+#: src/gui/ConfigurationDialog.cpp:1128
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2121,7 +2122,7 @@ msgstr ""
 "جاري التحميل %1 ...‏\n"
 "(تستطيع إغلاق هذه النافذة)"
 
-#: src/gui/ConfigurationDialog.cpp:1126
+#: src/gui/ConfigurationDialog.cpp:1135
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2132,7 +2133,7 @@ msgstr ""
 "عدد النجوم: %2 مليون\n"
 "نطاق قدر لمعان النجوم: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1169 src/gui/ConfigurationDialog.cpp:1205
+#: src/gui/ConfigurationDialog.cpp:1178 src/gui/ConfigurationDialog.cpp:1214
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2141,11 +2142,11 @@ msgstr ""
 "خطأ في تحميل %1‎:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1258
+#: src/gui/ConfigurationDialog.cpp:1267
 msgid "Verifying file integrity..."
 msgstr "جاري التأكد من صحة الملف...‏"
 
-#: src/gui/ConfigurationDialog.cpp:1262
+#: src/gui/ConfigurationDialog.cpp:1271
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2154,170 +2155,170 @@ msgstr ""
 "خطأ في تحميل %1‎:\n"
 "الملف فاسد"
 
-#: src/gui/ConfigurationDialog.cpp:1308 src/gui/ConfigurationDialog.cpp:1317
+#: src/gui/ConfigurationDialog.cpp:1317 src/gui/ConfigurationDialog.cpp:1326
 msgid "Available"
 msgstr "متاح"
 
-#: src/gui/ConfigurationDialog.cpp:1310 src/gui/ConfigurationDialog.cpp:1319
+#: src/gui/ConfigurationDialog.cpp:1319 src/gui/ConfigurationDialog.cpp:1328
 msgid "Not Available"
 msgstr "غير متاح"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Algorithm of"
 msgstr "خوارزمية حساب"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Without correction"
 msgstr "بدون تصحيح"
 
-#: src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1410
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1412
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1414
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1415
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1407
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1417
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1410
+#: src/gui/ConfigurationDialog.cpp:1419
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1421
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1422
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1414
+#: src/gui/ConfigurationDialog.cpp:1423
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1424
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1416
+#: src/gui/ConfigurationDialog.cpp:1425
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1427
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1419
+#: src/gui/ConfigurationDialog.cpp:1428
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1429
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1421
+#: src/gui/ConfigurationDialog.cpp:1430
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1431
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1433
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1427
+#: src/gui/ConfigurationDialog.cpp:1436
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) no extra moon acceleration"
 
-#: src/gui/ConfigurationDialog.cpp:1429
+#: src/gui/ConfigurationDialog.cpp:1438
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1430
+#: src/gui/ConfigurationDialog.cpp:1439
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1431
+#: src/gui/ConfigurationDialog.cpp:1440
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1432
+#: src/gui/ConfigurationDialog.cpp:1441
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1433
+#: src/gui/ConfigurationDialog.cpp:1442
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "إسلام، صادق وقريشي 2008، 2013"
 
-#: src/gui/ConfigurationDialog.cpp:1434
+#: src/gui/ConfigurationDialog.cpp:1443
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1435
+#: src/gui/ConfigurationDialog.cpp:1444
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T معادلة مخصّصة لـ"
 
-#: src/gui/ConfigurationDialog.cpp:1484 src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:407
 msgid "System default"
 msgstr "حسب ضبط جهاز الحاسب"
 
-#: src/gui/ConfigurationDialog.cpp:1485
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "س س س س - ش ش - ي ي"
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1495
 msgid "dd-mm-yyyy"
 msgstr "ي ي - ش ش - س س س س"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "mm-dd-yyyy"
 msgstr "ش ش - ي ي - س س س س"
 
-#: src/gui/ConfigurationDialog.cpp:1520
+#: src/gui/ConfigurationDialog.cpp:1529
 msgid "12-hour format"
 msgstr "12 ساعة"
 
-#: src/gui/ConfigurationDialog.cpp:1521
+#: src/gui/ConfigurationDialog.cpp:1530
 msgid "24-hour format"
 msgstr "24 ساعة"
 
@@ -3036,7 +3037,7 @@ msgid "Secular acceleration of the Moon"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:196 src/ui_configurationDialog.h:1290
+#: src/gui/AstroCalcDialog.cpp:196 src/ui_configurationDialog.h:1298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -3060,7 +3061,7 @@ msgid "Mag."
 msgstr "القدر"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:204 src/ui_configurationDialog.h:1269
+#: src/gui/AstroCalcDialog.cpp:204 src/ui_configurationDialog.h:1277
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "النوع"
@@ -4250,7 +4251,7 @@ msgstr "المجلد"
 msgid "&Choose"
 msgstr "&اختر"
 
-#: src/translations.h:400 src/ui_configurationDialog.h:1431
+#: src/translations.h:400 src/ui_configurationDialog.h:1439
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "إلغاء"
@@ -5361,7 +5362,7 @@ msgstr "عن"
 msgid "Log"
 msgstr "السجلّ"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1314
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1322
 msgid "Edit keyboard shortcuts..."
 msgstr "حرِّر مفاتيح الاختصارات"
 
@@ -5636,7 +5637,7 @@ msgstr "ثبّت الموقع عند استخدام الإحداثيات"
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2311
 #: src/ui_viewDialog.h:2333 src/ui_viewDialog.h:2359
-#: src/ui_configurationDialog.h:1432 src/ui_configurationDialog.h:1443
+#: src/ui_configurationDialog.h:1440 src/ui_configurationDialog.h:1451
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "الخيارات"
@@ -6393,35 +6394,35 @@ msgstr "منظر الرصد الطبيعي"
 msgid "Starlore"
 msgstr "التراث الفلكي"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1211
 msgid "Configuration"
 msgstr "الإعدادات"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1213
 msgid "Language settings"
 msgstr "إعدادات اللغة"
 
-#: src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1214
 msgid "Program Language"
 msgstr "لغة البرنامج"
 
-#: src/ui_configurationDialog.h:1208
+#: src/ui_configurationDialog.h:1215
 msgid "Sky Culture Language"
 msgstr "لغة التراث الفلكي"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1217
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "هذه الميزة لم تختبر اختباراً شاملاً!"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1219
 msgid "Ephemeris settings (experimental)"
 msgstr "إعدادات حساب التقويم الفلكي (تجريبي)"
 
-#: src/ui_configurationDialog.h:1213 src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1221
 msgid "Not installed"
 msgstr "غير مركب"
 
-#: src/ui_configurationDialog.h:1216
+#: src/ui_configurationDialog.h:1223
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -6429,19 +6430,19 @@ msgstr ""
 "يزود DE431  ببيانات للمواقع من سنة -13000 حتى +17000 لبعض التطبيقات الخاصة "
 "فقط"
 
-#: src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1225
 msgid "Use DE431 (long-time data)"
 msgstr "استخدم DE431 (بيانات لمدد طويلة)"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1227
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "يزود DE430  بأعلى دقة فقط للفترة من 1550 حتى 2650"
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1229
 msgid "Use DE430 (high accuracy)"
 msgstr "استخدم DE430 (دقة عالية)"
 
-#: src/ui_configurationDialog.h:1224
+#: src/ui_configurationDialog.h:1231
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6449,17 +6450,21 @@ msgstr ""
 "يوصى باستخدام VSOP87 للفترة من -4000 حتى +8000 فقط ولكن يمكن أن يعطي مواقع "
 "معقولة خارج هذا النطاق"
 
-#: src/ui_configurationDialog.h:1226
+#: src/ui_configurationDialog.h:1233
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "يستخدم VSOP87/ELP2000-82B عندما تكون هذه الخيارات غير متاحة أو غير مفعلة"
 
-#: src/ui_configurationDialog.h:1227
+#: src/ui_configurationDialog.h:1234
 msgid "Default options"
 msgstr "الخيارات الافتراضية"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1235
+msgid "Save View"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1237
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6467,7 +6472,7 @@ msgstr ""
 "احفظ الإعدادات التي قمت بتغييرها في هذه الجلسة لاستخدامها عند تشغيل "
 "ستيللاريوم المرة القادمة"
 
-#: src/ui_configurationDialog.h:1231
+#: src/ui_configurationDialog.h:1239
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6475,11 +6480,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "احفظ الإعدادات"
 
-#: src/ui_configurationDialog.h:1233
+#: src/ui_configurationDialog.h:1241
 msgid "Restore the default settings that came with Stellarium"
 msgstr "استرجع الإعدادات الافتراضية الأصلية كما كانت عند تركيب البرنامج"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1243
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6487,271 +6492,268 @@ msgstr "استرجع الإعدادات الافتراضية الأصلية كم
 msgid "Restore defaults"
 msgstr "استرجع الإعدادات الافتراضية كما كانت عند تركيب البرنامج"
 
-#: src/ui_configurationDialog.h:1236
+#: src/ui_configurationDialog.h:1244
 msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
+"Save either the current FOV and direction of view or all the current options "
+"for use at next startup. Restoring default settings requires a restart of "
+"Stellarium. "
 msgstr ""
-"استرجاع الإعدادات الافتراضية يتطلب إعادة تشغيل ستيللاريوم.‏حفظ الإعدادات "
-"الحالية سوف يحفظ أيضاً حقل الرؤية الحالي واتجاه الرؤية لاستخدامها في المرة "
-"القادمة.‏"
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1246
 msgid "The width of your view when Stellarium starts"
 msgstr "عرض الرؤية عند بدء تشغيل ستيللاريوم"
 
-#: src/ui_configurationDialog.h:1241
+#: src/ui_configurationDialog.h:1249
 msgid "The direction you're looking when Stellarium starts"
 msgstr "اتجاه الرؤية عند التشغيل"
 
-#: src/ui_configurationDialog.h:1243 src/ui_configurationDialog.h:1454
+#: src/ui_configurationDialog.h:1251 src/ui_configurationDialog.h:1462
 msgid "Selected object information"
 msgstr "معلومات الجرم المختار"
 
-#: src/ui_configurationDialog.h:1245
+#: src/ui_configurationDialog.h:1253
 msgid "Display all information available"
 msgstr "أظهر جميع المعلومات المتوفرة"
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1255
 msgid "All available"
 msgstr "أظهر جميع المعلومات"
 
-#: src/ui_configurationDialog.h:1249
+#: src/ui_configurationDialog.h:1257
 msgid "Display no information"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:1251 plugins/Oculars/src/Oculars.cpp:2398
+#: src/ui_configurationDialog.h:1259 plugins/Oculars/src/Oculars.cpp:2398
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1261
 msgid "Display less information"
 msgstr "أظهر معلومات اقل"
 
-#: src/ui_configurationDialog.h:1255
+#: src/ui_configurationDialog.h:1263
 msgid "Short"
 msgstr "أظهر معلومات مختصرة"
 
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1265
 msgid "Display user settings information"
 msgstr "إعرض المعلومات التي اختارها المستخدم"
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1267
 msgid "Customized"
 msgstr "معلومات مختارة"
 
-#: src/ui_configurationDialog.h:1260
+#: src/ui_configurationDialog.h:1268
 msgid "Displayed fields"
 msgstr "حقول المعلومات المعروضة"
 
-#: src/ui_configurationDialog.h:1262 src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1270 src/ui_configurationDialog.h:1304
 msgid "Equatorial coordinates, equinox of date"
 msgstr "الإحداثيات الاستوائية للاعتدال الربيعي الحالي"
 
-#: src/ui_configurationDialog.h:1264
+#: src/ui_configurationDialog.h:1272
 msgid "Right ascension/Declination (of date)"
 msgstr "(المطلع المستقيم/الميل (الحالي"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1273
 msgid "Supergalactic coordinates"
 msgstr "إحداثيات المجموعة المجرية"
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1275
 msgid "The type of the object (star, planet, etc.)"
 msgstr "نوع الجرم (نجم، كوكب، إلخ...)"
 
-#: src/ui_configurationDialog.h:1270
+#: src/ui_configurationDialog.h:1278
 msgid "Absolute magnitude"
 msgstr "القدر المطلق"
 
-#: src/ui_configurationDialog.h:1272
+#: src/ui_configurationDialog.h:1280
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "الإحداثيات الكسوفية والاعتدال للوقت الحالي ، فقط للأرض"
 
-#: src/ui_configurationDialog.h:1274
+#: src/ui_configurationDialog.h:1282
 msgid "Ecliptic coordinates (of date)"
 msgstr "( الإحداثيات الكسوفية ( الوقت الحالي"
 
-#: src/ui_configurationDialog.h:1276
+#: src/ui_configurationDialog.h:1284
 msgid "Angular or physical size"
 msgstr "الحجم الطبيعي أو القدر الزاوي"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1286
 msgid "Size"
 msgstr "الحجم"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1288
 msgid "Horizontal coordinates"
 msgstr "الإحداثيات الأفقية"
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1290
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "الارتفاع الزاوي/السمت"
 
-#: src/ui_configurationDialog.h:1283
+#: src/ui_configurationDialog.h:1291
 msgid "Catalog number(s)"
 msgstr "رقم الدليل"
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1292
 msgid "Distance"
 msgstr "المسافة"
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1293
 msgid "Galactic coordinates"
 msgstr "الإحداثيات المجرية"
 
-#: src/ui_configurationDialog.h:1287
+#: src/ui_configurationDialog.h:1295
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "الإحداثيات الاستوائية للاعتدال الربيعي لعام 2000"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1297
 msgid "Right ascension/Declination (J2000)"
 msgstr "(المطلع المستقيم/الميل (عام 2000"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1300
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "J2000.0 الإحداثيات الكسوفية والاعتدال لحقبة"
 
-#: src/ui_configurationDialog.h:1294
+#: src/ui_configurationDialog.h:1302
 msgid "Ecliptic coordinates (J2000)"
 msgstr "( J2000 ) الإحداثيات الكسوفية"
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1306
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "زاوية الساعة/الميل"
 
-#: src/ui_configurationDialog.h:1299
+#: src/ui_configurationDialog.h:1307
 msgid "Visual magnitude"
 msgstr "القدر الظاهري"
 
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1309
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr ""
 "اختصار إسم المجموعة النجمية المكون من ثلاثة حروف حسب الاتحاد الفلكي العالمي"
 
-#: src/ui_configurationDialog.h:1303
+#: src/ui_configurationDialog.h:1311
 msgid "Constellation"
 msgstr "المجموعة النجمية"
 
-#: src/ui_configurationDialog.h:1305
+#: src/ui_configurationDialog.h:1313
 msgid "Spectral class, nebula type, etc."
 msgstr "الخصائص الطيفية، نوع السديم، إلخ."
 
-#: src/ui_configurationDialog.h:1307
+#: src/ui_configurationDialog.h:1315
 msgid "Additional information"
 msgstr "معلومات إضافية"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1316
 msgid "Sidereal time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1317
 msgid "Control"
 msgstr "التحكم"
 
-#: src/ui_configurationDialog.h:1311
+#: src/ui_configurationDialog.h:1319
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "مكِّن الفأرة من تحريك المشهد بالسحب ومن التكبير بالعجلة"
 
-#: src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1321
 msgid "Enable mouse navigation"
 msgstr "مكِّن من التنقل بالفأرة"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1324
 msgid "Allow keyboard to pan and zoom"
 msgstr "اسمح للوحة المفاتيح بالتحكم في تحريك المشهد والتكبير"
 
-#: src/ui_configurationDialog.h:1318
+#: src/ui_configurationDialog.h:1326
 msgid "Enable keyboard navigation"
 msgstr "مكِّن من التنقل بواسطة لوحة المفاتيح"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1328
 msgid "Hides the mouse cursor when inactive"
 msgstr "يخفي مؤشر الفأرة في حالة عدم النشاط"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1330
 msgid "Mouse cursor timeout:"
 msgstr "مهلة إخفاء مؤشر الفأرة (بالثواني)‏"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1332
 msgid "seconds"
 msgstr "ثوانٍ"
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1334
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "تاريخ ووقت البدء"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1336
 msgid "Starts Stellarium at system clock date and time"
 msgstr "ابدأ البرنامج باستخدام وقت وتاريخ النظام"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1338
 msgid "System date and time"
 msgstr "وقت و تاريخ النظام"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1340
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "يضبط محاكاة الوقت لمثل هذه اللحظة من اليوم عندما يبدأ ستيللاريوم"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1342
 msgid "System date at:"
 msgstr "تاريخ النظام عند الساعة"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1344
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "استخدم تاريخاً ووقتاً ثابتين عندما  يبدأ ستيللاريوم"
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1346
 msgid "Other:"
 msgstr "وقت ثابت"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1348
 msgid "Use current local date and time"
 msgstr "استخدم التاريخ والوقت المحليين الحاليين"
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1350
 msgid "use current"
 msgstr "استخدم الوقت والتاريخ الحاليين"
 
-#: src/ui_configurationDialog.h:1344
+#: src/ui_configurationDialog.h:1352
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr "هذه الخيارات تحدد كيف يكون عرض الوقت والتاريخ في الشريط السفلي"
 
-#: src/ui_configurationDialog.h:1346
+#: src/ui_configurationDialog.h:1354
 msgid "Display formats of date and time"
 msgstr "صيغة عرض التاريخ والوقت"
 
-#: src/ui_configurationDialog.h:1347
+#: src/ui_configurationDialog.h:1355
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "التاريخ"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1356
 msgid "and time:"
 msgstr "والوقت"
 
-#: src/ui_configurationDialog.h:1349
+#: src/ui_configurationDialog.h:1357
 msgid "Time correction"
 msgstr "تصحيح الوقت"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1360
 msgid "Edit equation"
 msgstr "حرِّر المعادلة"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1362
 msgid "Planetarium options"
 msgstr "خيارات عرض القبة السماوية"
 
-#: src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1364
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6759,36 +6761,36 @@ msgstr ""
 "عندما يكون \" زر التصغير الذاتي\" ممكناً فسوف يضبط الاتجاه الأولي للمشهد "
 "أيضاً"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1366
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "التصغير الذاتي يعود إلى الاتجاه الأولي للمشهد"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1368
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "لاتظهر اي شيء خارج دائرة مركزية في المشهد الرئيسي"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1370
 msgid "Disc viewport"
 msgstr "عرض على شكل قرص"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1372
 msgid "Align labels with the horizon"
 msgstr "اجعل الأسماء موازية للأفق"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1374
 msgid "Gravity labels"
 msgstr "اجعل الأسماء موازية للأفق الأقرب"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1376
 msgid "Use decimal degrees for coordinates"
 msgstr "استخدم الدرجات العشرية للإحداثيات"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1378
 msgid "Use decimal degrees"
 msgstr "استخدم الدرجات العشرية"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1380
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -6796,11 +6798,11 @@ msgstr ""
 "يستعمل تشوه المرآة الكروية عند عرض ستيللاريوم على مرآة كروية مستخدمة في "
 "أنظمة القبب السماوية المنخفضة التكلفة"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1382
 msgid "Spheric mirror distortion"
 msgstr "تشوه المرآة الكروية"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1384
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -6808,156 +6810,156 @@ msgstr ""
 "فعّل هذا الخيار لعرض السماء حسب ماترى من سطح الكوكب. عند تعطيل هذا الخيار "
 "يكون عرض السماء كما يرى من راصد وهمي في مركز الكوكب"
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1386
 msgid "Topocentric coordinates"
 msgstr "الإحداثيات السطحية"
 
-#: src/ui_configurationDialog.h:1380
+#: src/ui_configurationDialog.h:1388
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "تفعيل الغلاف الجوي تلقائياً حين اختيار موقع جديد في كوكب له غلاف جوي في "
 "نافذة الموقع"
 
-#: src/ui_configurationDialog.h:1382
+#: src/ui_configurationDialog.h:1390
 msgid "Auto-enabling for the atmosphere"
 msgstr "تفعيل تلقائي للغلاف الجوي"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1392
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "إزرار قلب المشهد عمودياً وأفقياً.‏"
 
-#: src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1394
 msgid "Show flip buttons"
 msgstr "أظهر أزرار قلب المشهد في شريط التحكم"
 
-#: src/ui_configurationDialog.h:1388 src/ui_configurationDialog.h:1391
+#: src/ui_configurationDialog.h:1396 src/ui_configurationDialog.h:1399
 msgid "Hide other constellations when you click one"
 msgstr "إخفاء المجموعات النجمية الاخرى عند النقر على أحدها"
 
-#: src/ui_configurationDialog.h:1395
+#: src/ui_configurationDialog.h:1403
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "إظهار وإخفاء عرض خلفية السديم"
 
-#: src/ui_configurationDialog.h:1397
+#: src/ui_configurationDialog.h:1405
 msgid "Show nebula background button"
 msgstr "أظهر زر خلفية السديم"
 
-#: src/ui_configurationDialog.h:1399
+#: src/ui_configurationDialog.h:1407
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr "الحركة الاهتزازية هي تمايل صغير لمحور الأرض يصل إلى بضع ثوان قوسية"
 
-#: src/ui_configurationDialog.h:1401
+#: src/ui_configurationDialog.h:1409
 msgid "Include nutation"
 msgstr "ضمّن الحركة الاهتزازية"
 
-#: src/ui_configurationDialog.h:1403
+#: src/ui_configurationDialog.h:1411
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "فعّل هذا الخيار لحساب الزاوية من الجنوب باتجاه الغرب"
 
-#: src/ui_configurationDialog.h:1405
+#: src/ui_configurationDialog.h:1413
 msgid "Azimuth from South"
 msgstr "زاوية السمت من الجنوب"
 
-#: src/ui_configurationDialog.h:1407
+#: src/ui_configurationDialog.h:1415
 msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr "إظهار وإخفاء زر عرض المسح الرقمي للسماء"
 
-#: src/ui_configurationDialog.h:1409
+#: src/ui_configurationDialog.h:1417
 msgid "Show DSS button"
 msgstr "أظهر زر عرض مسح السماء الرقمي"
 
-#: src/ui_configurationDialog.h:1411
+#: src/ui_configurationDialog.h:1419
 msgid "Automatic change of landscape when planet is changed"
 msgstr "تغيير منظر الرصد تلقائياً عندما يتغير الكوكب"
 
-#: src/ui_configurationDialog.h:1413
+#: src/ui_configurationDialog.h:1421
 msgid "Auto select landscapes"
 msgstr "اختيار منظر الرصد تلقائياً"
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1422
 msgid "Show bookmarks button"
 msgstr "أظهر زر العلامات المرجعية"
 
-#: src/ui_configurationDialog.h:1415
+#: src/ui_configurationDialog.h:1423
 msgid "Screenshots"
 msgstr "لقطات الشاشة"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1424
 msgid "Screenshot Directory"
 msgstr "مجلد لقطة الشاشة"
 
-#: src/ui_configurationDialog.h:1418
+#: src/ui_configurationDialog.h:1426
 msgid "Invert colors"
 msgstr "عكس الألوان"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1427
 msgid "Star catalog updates"
 msgstr "تحديثات دليل النجوم"
 
-#: src/ui_configurationDialog.h:1421
+#: src/ui_configurationDialog.h:1429
 msgid "Click here to start downloading"
 msgstr "اضغط هنا لبدء التحميل"
 
-#: src/ui_configurationDialog.h:1423
+#: src/ui_configurationDialog.h:1431
 msgid "Download this file to view even more stars"
 msgstr "حمِّل هذا الملف لإظهار نجوم اكثر ايضاً"
 
-#: src/ui_configurationDialog.h:1425
+#: src/ui_configurationDialog.h:1433
 msgid "Restart the download"
 msgstr "ابدأ التحميل من جديد"
 
-#: src/ui_configurationDialog.h:1427
+#: src/ui_configurationDialog.h:1435
 msgid "Retry"
 msgstr "أعد المحاولة"
 
-#: src/ui_configurationDialog.h:1429
+#: src/ui_configurationDialog.h:1437
 msgid "Stop the download. You can always restart it later"
 msgstr "أوقف التحميل. تستطيع دائماً أن تبدأ مجدداً في وقت لاحق."
 
-#: src/ui_configurationDialog.h:1434
+#: src/ui_configurationDialog.h:1442
 msgid "Close window when script runs"
 msgstr "أغلق النافذة عندما يبدأ السكريبت في العمل"
 
-#: src/ui_configurationDialog.h:1436
+#: src/ui_configurationDialog.h:1444
 msgid "Run the selected script"
 msgstr "شغِّل السكريبت المختار"
 
-#: src/ui_configurationDialog.h:1440
+#: src/ui_configurationDialog.h:1448
 msgid "Stop a running script"
 msgstr "أوقف السكريبت الشغَّال"
 
-#: src/ui_configurationDialog.h:1444
+#: src/ui_configurationDialog.h:1452
 msgid "Load at startup"
 msgstr "حمِّل عند بدء التشغيل"
 
-#: src/ui_configurationDialog.h:1445
+#: src/ui_configurationDialog.h:1453
 msgid "configure"
 msgstr "اضبط الإعدادات"
 
-#: src/ui_configurationDialog.h:1450
+#: src/ui_configurationDialog.h:1458
 msgid "Main"
 msgstr "الرئيسي"
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1460
 msgid "Information"
 msgstr "معلومات"
 
-#: src/ui_configurationDialog.h:1457
+#: src/ui_configurationDialog.h:1465
 msgid "Navigation"
 msgstr "التنقل"
 
-#: src/ui_configurationDialog.h:1459
+#: src/ui_configurationDialog.h:1467
 msgid "Tools"
 msgstr "الأدوات"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1469
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "البرامج النصية‏"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1471
 msgid "Plugins"
 msgstr "الإضافات"
 
@@ -8668,77 +8670,77 @@ msgstr ""
 "لم يعد متوافقاً مع البرنامج - سوف يستخدم الملف الافتراضي"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1936
+#: plugins/Satellites/src/Satellites.cpp:1937
 msgid "visual"
 msgstr "الأقمار الصناعية المرئية"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1938
+#: plugins/Satellites/src/Satellites.cpp:1939
 msgid "scientific"
 msgstr "الأقمار الصناعية العلمية"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1940
+#: plugins/Satellites/src/Satellites.cpp:1941
 msgid "communications"
 msgstr "أقمار الاتصالات"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1942
+#: plugins/Satellites/src/Satellites.cpp:1943
 msgid "navigation"
 msgstr "أقمار الملاحة"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1944
+#: plugins/Satellites/src/Satellites.cpp:1945
 msgid "amateur"
 msgstr "الأقمار التي تبث لهواة الراديو"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1946
+#: plugins/Satellites/src/Satellites.cpp:1947
 msgid "weather"
 msgstr "أقمار الطقس"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1948
+#: plugins/Satellites/src/Satellites.cpp:1949
 msgid "geostationary"
 msgstr "الأقمار ذات المدار الثابت"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1950
+#: plugins/Satellites/src/Satellites.cpp:1951
 msgid "non-operational"
 msgstr "الأقمار المتوقفة عن العمل"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1952
+#: plugins/Satellites/src/Satellites.cpp:1953
 msgid "gps"
 msgstr "أقمار نظام تحديد الموقع"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1954
+#: plugins/Satellites/src/Satellites.cpp:1955
 msgid "glonass"
 msgstr "أقمار جلوناس"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1956
+#: plugins/Satellites/src/Satellites.cpp:1957
 msgid "galileo"
 msgstr "أقمار جاليليو"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1958
+#: plugins/Satellites/src/Satellites.cpp:1959
 msgid "iridium"
 msgstr "أقمار إيريديوم"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1960
+#: plugins/Satellites/src/Satellites.cpp:1961
 msgid "stations"
 msgstr "المحطات الفضائية"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1962
+#: plugins/Satellites/src/Satellites.cpp:1963
 msgid "education"
 msgstr "الأقمار التعليمية"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1964
+#: plugins/Satellites/src/Satellites.cpp:1965
 msgid "observatory"
 msgstr "التلسكوبات الفضائية"
 
@@ -8748,57 +8750,57 @@ msgstr "التلسكوبات الفضائية"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1974
+#: plugins/Satellites/src/Satellites.cpp:1975
 msgid "The Hubble Space Telescope"
 msgstr "‎تلسكوب هابل‎"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1976
+#: plugins/Satellites/src/Satellites.cpp:1977
 msgid "The International Space Station"
 msgstr "‎المحطة الفضائية الدولية‎"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1978
+#: plugins/Satellites/src/Satellites.cpp:1979
 msgid "China's first space station"
 msgstr "محطة الصين الفضائية الأولى"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1980
+#: plugins/Satellites/src/Satellites.cpp:1981
 msgid "The russian space radio telescope RadioAstron"
 msgstr "‎التلسكوب الراديوي الروسي راديوأسترون‎"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1982
+#: plugins/Satellites/src/Satellites.cpp:1983
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "‎المعمل الدولي لفيزياء فلك  أشعة جاما‎"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1984
+#: plugins/Satellites/src/Satellites.cpp:1985
 msgid "The Gamma-Ray Observatory"
 msgstr "‎مرصد أشعة جاما‎"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:1988
+#: plugins/Satellites/src/Satellites.cpp:1989
 msgid "ISS (ZARYA)"
 msgstr "‎المحطة الفضائية الدولية‎"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:1990
+#: plugins/Satellites/src/Satellites.cpp:1991
 msgid "HST"
 msgstr "‎تلسكوب هابل الفضائي‎"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:1992
+#: plugins/Satellites/src/Satellites.cpp:1993
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:1994
+#: plugins/Satellites/src/Satellites.cpp:1995
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:1996
+#: plugins/Satellites/src/Satellites.cpp:1997
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
@@ -8892,43 +8894,43 @@ msgstr "القمر الصناعي لايمكن رؤيته"
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 ‎ميجا هرتز ‎(%2%3 ‎كيلوهرتز ‎)"
 
-#: plugins/Satellites/src/Satellite.cpp:603
-#: plugins/Satellites/src/Satellite.cpp:628
+#: plugins/Satellites/src/Satellite.cpp:687
+#: plugins/Satellites/src/Satellite.cpp:712
 msgctxt "operational status"
 msgid "unknown"
 msgstr "‎غير معروفة‎"
 
-#: plugins/Satellites/src/Satellite.cpp:607
+#: plugins/Satellites/src/Satellite.cpp:691
 msgctxt "operational status"
 msgid "operational"
 msgstr "‎عامل‎"
 
-#: plugins/Satellites/src/Satellite.cpp:610
+#: plugins/Satellites/src/Satellite.cpp:694
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "‎غير عامل‎"
 
-#: plugins/Satellites/src/Satellite.cpp:613
+#: plugins/Satellites/src/Satellite.cpp:697
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "‎عامل جزئياً‎"
 
-#: plugins/Satellites/src/Satellite.cpp:616
+#: plugins/Satellites/src/Satellite.cpp:700
 msgctxt "operational status"
 msgid "standby"
 msgstr "‎جاهز‎"
 
-#: plugins/Satellites/src/Satellite.cpp:619
+#: plugins/Satellites/src/Satellite.cpp:703
 msgctxt "operational status"
 msgid "spare"
 msgstr "‎احتياطي‎"
 
-#: plugins/Satellites/src/Satellite.cpp:622
+#: plugins/Satellites/src/Satellite.cpp:706
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "‎مهمة ممددة‎"
 
-#: plugins/Satellites/src/Satellite.cpp:625
+#: plugins/Satellites/src/Satellite.cpp:709
 msgctxt "operational status"
 msgid "decayed"
 msgstr "‎متفتت‎"
@@ -11780,34 +11782,34 @@ msgstr "mJy"
 msgid "Notes: %1"
 msgstr "‎ملاحظات‎: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:330
+#: plugins/Pulsars/src/Pulsar.cpp:352
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr "نجم نابض شاذ ذو أشعة سينية أو مردّد أشعة جاما ضعيفة مع نبضات مكتشفة"
 
-#: plugins/Pulsars/src/Pulsar.cpp:335
+#: plugins/Pulsars/src/Pulsar.cpp:357
 msgid "has one or more binary companions"
 msgstr "لديه مرافق ثنائي أو أكثر"
 
-#: plugins/Pulsars/src/Pulsar.cpp:340
+#: plugins/Pulsars/src/Pulsar.cpp:362
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 "مع إشعاعات نابضة في نطاق الموجات الراديوية وماتحت الحمراء أو الترددات الأعلى"
 
-#: plugins/Pulsars/src/Pulsar.cpp:345
+#: plugins/Pulsars/src/Pulsar.cpp:367
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "مع إشعاعات نابضة في نطاق الموجات ماتحت الحمراء أو الترددات الأعلى فقط"
 
-#: plugins/Pulsars/src/Pulsar.cpp:350
+#: plugins/Pulsars/src/Pulsar.cpp:372
 msgid "with pulsed emission in the radio band"
 msgstr "مع إشعاعات نابضة في نطاق الموجات الراديوية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:355
+#: plugins/Pulsars/src/Pulsar.cpp:377
 msgid "with intermittently pulsed radio emission"
 msgstr "مع إشعاعات نابضة متقطعة في نطاق الموجات الراديوية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:360
+#: plugins/Pulsars/src/Pulsar.cpp:382
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -15898,6 +15900,15 @@ msgstr "الميل المخصص 2"
 #~ msgid "Hektor"
 #~ msgstr "هيكتور"
 
+#~ msgid ""
+#~ "Restoring default settings requires a restart of Stellarium. Saving all the "
+#~ "current options includes the current FOV and direction of view for use at "
+#~ "next startup."
+#~ msgstr ""
+#~ "استرجاع الإعدادات الافتراضية يتطلب إعادة تشغيل ستيللاريوم.‏حفظ الإعدادات "
+#~ "الحالية سوف يحفظ أيضاً حقل الرؤية الحالي واتجاه الرؤية لاستخدامها في المرة "
+#~ "القادمة.‏"
+
 #~ msgid "Plugin Key Bindings"
 #~ msgstr "المفاتيح المرتبطة بالبرامج المضافة"
 
@@ -17051,3 +17062,6 @@ msgstr "الميل المخصص 2"
 #~ msgid ""
 #~ "Screensaver of various happenings in the Solar System. 261 events in all!"
 #~ msgstr "حافظ شاشة لـ 261 حدث فلكي في النظام الشمسي"
+
+#~ msgid "Year of last satisfactory observation"
+#~ msgstr "‎سنة آخر رصد مقبول‎"

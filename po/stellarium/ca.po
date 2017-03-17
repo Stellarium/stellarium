@@ -10,19 +10,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-05 03:15+0700\n"
-"PO-Revision-Date: 2017-03-06 13:58+0000\n"
+"POT-Creation-Date: 2017-03-14 09:50+0700\n"
+"PO-Revision-Date: 2017-03-10 08:46+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-07 05:30+0000\n"
-"X-Generator: Launchpad (build 18330)\n"
+"X-Launchpad-Export-Date: 2017-03-15 05:33+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
-#: src/core/modules/Planet.cpp:247 src/core/modules/MinorPlanet.cpp:200
+#: src/core/modules/Planet.cpp:253 src/core/modules/MinorPlanet.cpp:200
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
 #: src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:277
@@ -77,7 +77,7 @@ msgstr "Etiquetes de les constel·lacions"
 msgid "Constellation boundaries"
 msgstr "Límits de les constel·lacions"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1393
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1401
 msgid "Select single constellation"
 msgstr "Selecciona constel·lació individual"
 
@@ -393,7 +393,7 @@ msgstr "Tipus: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Opacitat: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:253
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:259
 #: src/core/modules/MinorPlanet.cpp:206 src/core/modules/Comet.cpp:171
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -401,7 +401,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (després de l'extinció: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:208 src/core/modules/Nebula.cpp:213
-#: src/core/modules/Planet.cpp:256 src/core/modules/MinorPlanet.cpp:209
+#: src/core/modules/Planet.cpp:262 src/core/modules/MinorPlanet.cpp:209
 #: src/core/modules/Comet.cpp:174 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:144
@@ -492,372 +492,372 @@ msgstr "Paral·laxi %1\""
 msgid "Morphological description: "
 msgstr "Descripció morfològica: "
 
-#: src/core/modules/Nebula.cpp:857
+#: src/core/modules/Nebula.cpp:874
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "alta concentració d'estels cap al centre"
 
-#: src/core/modules/Nebula.cpp:860
+#: src/core/modules/Nebula.cpp:877
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "concentració central densa d'estels"
 
-#: src/core/modules/Nebula.cpp:863
+#: src/core/modules/Nebula.cpp:880
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "nucli intern dens d'estels"
 
-#: src/core/modules/Nebula.cpp:866
+#: src/core/modules/Nebula.cpp:883
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "concentració rica intermèdia d'estels"
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:888
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "concentració intermèdia d'estels"
 
-#: src/core/modules/Nebula.cpp:874
+#: src/core/modules/Nebula.cpp:891
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "Més aviat vaga concentració d'estels cap al centre"
 
-#: src/core/modules/Nebula.cpp:877
+#: src/core/modules/Nebula.cpp:894
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "concentració baixa d'estels cap al centre"
 
-#: src/core/modules/Nebula.cpp:880
+#: src/core/modules/Nebula.cpp:897
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "concentració baixa d'estels"
 
-#: src/core/modules/Nebula.cpp:883
+#: src/core/modules/Nebula.cpp:900
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "concentració molt baixa d'estels cap al centre"
 
-#: src/core/modules/Nebula.cpp:886
+#: src/core/modules/Nebula.cpp:903
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "Gairebé sense concentració cap al centre"
 
-#: src/core/modules/Nebula.cpp:889
+#: src/core/modules/Nebula.cpp:906
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "classe de concentració no documentada"
 
-#: src/core/modules/Nebula.cpp:909
+#: src/core/modules/Nebula.cpp:926
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "forta concentració central d'estels"
 
-#: src/core/modules/Nebula.cpp:912
+#: src/core/modules/Nebula.cpp:929
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "petita concentració central d'estels"
 
-#: src/core/modules/Nebula.cpp:915
+#: src/core/modules/Nebula.cpp:932
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "sense concentració noticiable d'estels"
 
-#: src/core/modules/Nebula.cpp:918
+#: src/core/modules/Nebula.cpp:935
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "un camp de concentració d'estels"
 
-#: src/core/modules/Nebula.cpp:921
+#: src/core/modules/Nebula.cpp:938
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "classe de concentració no documentada"
 
-#: src/core/modules/Nebula.cpp:927
+#: src/core/modules/Nebula.cpp:944
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "rang baix de brillantor dels membres del clúster"
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:947
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "rang mig de brillantor dels membres del clúster"
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "rang alt de brillantor dels membres del clúster"
 
-#: src/core/modules/Nebula.cpp:936
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "rang de brillantor dels membres del clúster no documentada"
 
-#: src/core/modules/Nebula.cpp:942
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "clúster pobre amb menys de 50 estels"
 
-#: src/core/modules/Nebula.cpp:945
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "clúster moderadament ric amb entre 50 i 100 estels"
 
-#: src/core/modules/Nebula.cpp:948
+#: src/core/modules/Nebula.cpp:965
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "clúster ric amb més de 100 estels"
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "nombre de membres de la classe no documentat"
 
-#: src/core/modules/Nebula.cpp:955
+#: src/core/modules/Nebula.cpp:972
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "el clúster es troba dins de la nebulositat"
 
-#: src/core/modules/Nebula.cpp:976
+#: src/core/modules/Nebula.cpp:993
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "molt brillant"
 
-#: src/core/modules/Nebula.cpp:979
+#: src/core/modules/Nebula.cpp:996
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "brillant"
 
-#: src/core/modules/Nebula.cpp:982
+#: src/core/modules/Nebula.cpp:999
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "brillantor moderada"
 
-#: src/core/modules/Nebula.cpp:985
+#: src/core/modules/Nebula.cpp:1002
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "feble"
 
-#: src/core/modules/Nebula.cpp:988
+#: src/core/modules/Nebula.cpp:1005
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "molt feble"
 
-#: src/core/modules/Nebula.cpp:991
+#: src/core/modules/Nebula.cpp:1008
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "brillantor incerta"
 
-#: src/core/modules/Nebula.cpp:994
+#: src/core/modules/Nebula.cpp:1011
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "brillantor de les nebuloses de reflexió no documentada"
 
-#: src/core/modules/Nebula.cpp:1000
+#: src/core/modules/Nebula.cpp:1017
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "l'estel il·luminadora està incrustada en el nebulositat"
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1020
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "estel localitzat fora de la nebulosa il·luminada"
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1023
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "estel localitzat a la cantonada de la nebulosa il·luminada"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1011
+#: src/core/modules/Nebula.cpp:1028
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "estel localitzat fora de la peculiar nebulosa il·luminada"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1017
+#: src/core/modules/Nebula.cpp:1034
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "la peculiar nebulosa il·luminada"
 
-#: src/core/modules/Nebula.cpp:1021
+#: src/core/modules/Nebula.cpp:1038
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "nebuloses de reflexió no documentada"
 
-#: src/core/modules/Nebula.cpp:1044
+#: src/core/modules/Nebula.cpp:1061
 msgid "circular form"
 msgstr "formar circular"
 
-#: src/core/modules/Nebula.cpp:1047
+#: src/core/modules/Nebula.cpp:1064
 msgid "elliptical form"
 msgstr "forma el·líptica"
 
-#: src/core/modules/Nebula.cpp:1050
+#: src/core/modules/Nebula.cpp:1067
 msgid "irregular form"
 msgstr "forma irregular"
 
-#: src/core/modules/Nebula.cpp:1053
+#: src/core/modules/Nebula.cpp:1070
 msgid "undocumented form"
 msgstr "forma no documentada"
 
-#: src/core/modules/Nebula.cpp:1059
+#: src/core/modules/Nebula.cpp:1076
 msgid "amorphous structure"
 msgstr "estructura amorfa"
 
-#: src/core/modules/Nebula.cpp:1062
+#: src/core/modules/Nebula.cpp:1079
 msgid "conventional structure"
 msgstr "estructura convencional"
 
-#: src/core/modules/Nebula.cpp:1065
+#: src/core/modules/Nebula.cpp:1082
 msgid "filamentary structure"
 msgstr "estructura filamentosa"
 
-#: src/core/modules/Nebula.cpp:1068
+#: src/core/modules/Nebula.cpp:1085
 msgid "undocumented structure"
 msgstr "estructura no documentada"
 
-#: src/core/modules/Nebula.cpp:1074
+#: src/core/modules/Nebula.cpp:1091
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "molt feble"
 
-#: src/core/modules/Nebula.cpp:1077
+#: src/core/modules/Nebula.cpp:1094
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "brillantor moderada"
 
-#: src/core/modules/Nebula.cpp:1080
+#: src/core/modules/Nebula.cpp:1097
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "brillant"
 
-#: src/core/modules/Nebula.cpp:1083
+#: src/core/modules/Nebula.cpp:1100
 msgid "undocumented brightness"
 msgstr "brillantor no documentada"
 
-#: src/core/modules/Nebula.cpp:1099
+#: src/core/modules/Nebula.cpp:1116
 msgid "galaxy"
 msgstr "galàxia"
 
-#: src/core/modules/Nebula.cpp:1102
+#: src/core/modules/Nebula.cpp:1119
 msgid "active galaxy"
 msgstr "galàxia activa"
 
-#: src/core/modules/Nebula.cpp:1105
+#: src/core/modules/Nebula.cpp:1122
 msgid "radio galaxy"
 msgstr "radio galàxia"
 
-#: src/core/modules/Nebula.cpp:1108
+#: src/core/modules/Nebula.cpp:1125
 msgid "interacting galaxy"
 msgstr "galàxia interactiva"
 
-#: src/core/modules/Nebula.cpp:1111 plugins/Quasars/src/Quasar.cpp:101
+#: src/core/modules/Nebula.cpp:1128 plugins/Quasars/src/Quasar.cpp:101
 msgid "quasar"
 msgstr "quàsar"
 
-#: src/core/modules/Nebula.cpp:1114
+#: src/core/modules/Nebula.cpp:1131
 msgid "star cluster"
 msgstr "clúster d'estels"
 
-#: src/core/modules/Nebula.cpp:1117
+#: src/core/modules/Nebula.cpp:1134
 msgid "open star cluster"
 msgstr "clúster obert d'estels"
 
-#: src/core/modules/Nebula.cpp:1120
+#: src/core/modules/Nebula.cpp:1137
 msgid "globular star cluster"
 msgstr "clúster globular d'estels"
 
-#: src/core/modules/Nebula.cpp:1123
+#: src/core/modules/Nebula.cpp:1140
 msgid "nebula"
 msgstr "nebulosa"
 
-#: src/core/modules/Nebula.cpp:1126
+#: src/core/modules/Nebula.cpp:1143
 msgid "planetary nebula"
 msgstr "nebulosa planetària"
 
-#: src/core/modules/Nebula.cpp:1129
+#: src/core/modules/Nebula.cpp:1146
 msgid "dark nebula"
 msgstr "nebulosa fosca"
 
-#: src/core/modules/Nebula.cpp:1132
+#: src/core/modules/Nebula.cpp:1149
 msgid "cluster associated with nebulosity"
 msgstr "clúster associat amb una nebulositat"
 
-#: src/core/modules/Nebula.cpp:1135
+#: src/core/modules/Nebula.cpp:1152
 msgid "bipolar nebula"
 msgstr "nebulosa bipolar"
 
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1155
 msgid "emission nebula"
 msgstr "nebulosa d'emissió"
 
-#: src/core/modules/Nebula.cpp:1141
+#: src/core/modules/Nebula.cpp:1158
 msgid "HII region"
 msgstr "Regió HII"
 
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1161
 msgid "reflection nebula"
 msgstr "nebulosa de reflexió"
 
-#: src/core/modules/Nebula.cpp:1147
+#: src/core/modules/Nebula.cpp:1164
 msgid "supernova remnant"
 msgstr "restes d'una supernova"
 
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1167
 msgid "stellar association"
 msgstr "associació estel·lar"
 
-#: src/core/modules/Nebula.cpp:1153
+#: src/core/modules/Nebula.cpp:1170
 msgid "star cloud"
 msgstr "núvol estel·lar"
 
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1173
 msgid "interstellar matter"
 msgstr "matèria interestel·lar"
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1176
 msgid "emission object"
 msgstr "objecte emissor"
 
-#: src/core/modules/Nebula.cpp:1162
+#: src/core/modules/Nebula.cpp:1179
 msgid "BL Lac object"
 msgstr "objecte BL Lac"
 
-#: src/core/modules/Nebula.cpp:1165
+#: src/core/modules/Nebula.cpp:1182
 msgid "blazar"
 msgstr "blàzar"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1185
 msgid "molecular cloud"
 msgstr "núvol molecular"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1188
 msgid "young stellar object"
 msgstr "objecte estel·lar jove"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1191
 msgid "possible quasar"
 msgstr "possible quàsar"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1194
 msgid "possible planetary nebula"
 msgstr "possible nebulosa planetària"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1197
 msgid "protoplanetary nebula"
 msgstr "nebulosa protoplanetària"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1183 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1200 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "estel"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1203
 msgid "object of unknown nature"
 msgstr "objecte de naturalesa desconeguda"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1206
 msgid "undocumented type"
 msgstr "tipus no documentat"
 
@@ -869,143 +869,148 @@ msgstr "Objectes de l'Espai Profund"
 msgid "Toggle DSO type filter"
 msgstr "Commuta filtre de tipus d'OEP"
 
-#: src/core/modules/Planet.cpp:261 src/core/modules/MinorPlanet.cpp:219
+#: src/core/modules/Planet.cpp:266 src/core/modules/MinorPlanet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:183
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:116
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitud absoluta: %1"
 
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:238
+#: src/core/modules/Planet.cpp:269
+#, qt-format
+msgid "Mean Opposition Magnitude: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:290 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Distància del Sol: %1UA (%2 km)"
 
-#: src/core/modules/Planet.cpp:289 src/core/modules/MinorPlanet.cpp:245
+#: src/core/modules/Planet.cpp:297 src/core/modules/MinorPlanet.cpp:245
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Distància del Sol: %1UA (%2 Milions km)"
 
-#: src/core/modules/Planet.cpp:299 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:307 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:212
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Distància: %1UA (%2 km)"
 
-#: src/core/modules/Planet.cpp:306 src/core/modules/MinorPlanet.cpp:262
+#: src/core/modules/Planet.cpp:314 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Distancia: %1UA (%2 Milions km)"
 
-#: src/core/modules/Planet.cpp:320 src/core/modules/Planet.cpp:324
+#: src/core/modules/Planet.cpp:328 src/core/modules/Planet.cpp:332
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Diàmetre aparent: %1, amb anells: %2"
 
-#: src/core/modules/Planet.cpp:333 src/core/modules/Planet.cpp:337
+#: src/core/modules/Planet.cpp:341 src/core/modules/Planet.cpp:345
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "Diàmetre aparent: %1, escalat fins: %2"
 
-#: src/core/modules/Planet.cpp:344 src/core/modules/Planet.cpp:346
+#: src/core/modules/Planet.cpp:352 src/core/modules/Planet.cpp:354
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diàmetre aparent: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:363 src/core/modules/MinorPlanet.cpp:285
+#: src/core/modules/Planet.cpp:371 src/core/modules/MinorPlanet.cpp:285
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Període sideral: %1 dies (%2 a)"
 
-#: src/core/modules/Planet.cpp:366
+#: src/core/modules/Planet.cpp:374
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Dia sideral: %1"
 
-#: src/core/modules/Planet.cpp:367
+#: src/core/modules/Planet.cpp:375
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Dia solar mitjà: %1"
 
-#: src/core/modules/Planet.cpp:371
+#: src/core/modules/Planet.cpp:379
 msgid "The period of rotation is chaotic"
 msgstr "El període de rotació és caòtic"
 
-#: src/core/modules/Planet.cpp:390
+#: src/core/modules/Planet.cpp:398
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Nova visible"
 
-#: src/core/modules/Planet.cpp:392
+#: src/core/modules/Planet.cpp:400
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Quart creixent"
 
-#: src/core/modules/Planet.cpp:394
+#: src/core/modules/Planet.cpp:402
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Gibosa creixent"
 
-#: src/core/modules/Planet.cpp:396
+#: src/core/modules/Planet.cpp:404
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Lluna plena"
 
-#: src/core/modules/Planet.cpp:398
+#: src/core/modules/Planet.cpp:406
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Gibosa Minvant"
 
-#: src/core/modules/Planet.cpp:400
+#: src/core/modules/Planet.cpp:408
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Minvant"
 
-#: src/core/modules/Planet.cpp:402
+#: src/core/modules/Planet.cpp:410
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Quart minvant"
 
-#: src/core/modules/Planet.cpp:404
+#: src/core/modules/Planet.cpp:412
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Lluna nova"
 
-#: src/core/modules/Planet.cpp:409 src/core/modules/Planet.cpp:414
+#: src/core/modules/Planet.cpp:417 src/core/modules/Planet.cpp:422
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
 #: src/core/modules/Comet.cpp:246 src/core/modules/Comet.cpp:251
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Angle de fase: %1"
 
-#: src/core/modules/Planet.cpp:410 src/core/modules/Planet.cpp:415
+#: src/core/modules/Planet.cpp:418 src/core/modules/Planet.cpp:423
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:247 src/core/modules/Comet.cpp:252
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongació: %1"
 
-#: src/core/modules/Planet.cpp:418
+#: src/core/modules/Planet.cpp:426
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fase: %1"
 
-#: src/core/modules/Planet.cpp:422
+#: src/core/modules/Planet.cpp:430
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Il·luminat: %1%"
 
-#: src/core/modules/Planet.cpp:423
+#: src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Albedo: %1"
 msgstr "Albedo: %1"
 
-#: src/core/modules/Planet.cpp:435
+#: src/core/modules/Planet.cpp:443
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Factor d'eclipsi: %1%"
@@ -1154,14 +1159,10 @@ msgid "Rising time: %1%"
 msgstr "Hora de sortida: %1%"
 
 #: src/core/modules/StarWrapper.cpp:280
-msgid "Year of last satisfactory observation"
-msgstr "Data de l'última observació satisfactòria"
-
-#: src/core/modules/StarWrapper.cpp:281
 msgid "Position angle"
 msgstr "Angle de posició"
 
-#: src/core/modules/StarWrapper.cpp:285 src/core/modules/StarWrapper.cpp:287
+#: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
 #: src/gui/AstroCalcDialog.cpp:752
 msgid "Separation"
 msgstr "Separació"
@@ -1407,12 +1408,12 @@ msgstr "Volteja escena horitzontalment"
 msgid "Flip scene vertically"
 msgstr "Volteja escena verticalment"
 
-#: src/core/StelCore.cpp:2090
+#: src/core/StelCore.cpp:2103
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "La correcció està desactivada. Fer servir només si saps que estas fent!"
 
-#: src/core/StelCore.cpp:2093
+#: src/core/StelCore.cpp:2106
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1424,7 +1425,7 @@ msgstr ""
 "Relativity Confirmed by Ancient Solar Eclipses</em> (%1). Veure més "
 "informació %2aquí%3"
 
-#: src/core/StelCore.cpp:2096
+#: src/core/StelCore.cpp:2109
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1433,7 +1434,7 @@ msgstr ""
 "Aquesta equació empírica va ser publicada per G. M . Clemente a l'article "
 "<em>On the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2099
+#: src/core/StelCore.cpp:2112
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1446,7 +1447,7 @@ msgstr ""
 "Jean Meeus al seu <em>Astronomical Formulae for Calculators</em>. També va "
 "ser adoptada per el programari de PC SunTracker Pro."
 
-#: src/core/StelCore.cpp:2103
+#: src/core/StelCore.cpp:2116
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1456,7 +1457,7 @@ msgstr ""
 "(1952) que va ser adoptada a <em>Astronomical Ephemeris</em> i a <em>Canon "
 "of Solar Eclipses</em> per Mucke i Meeus (1983)."
 
-#: src/core/StelCore.cpp:2107
+#: src/core/StelCore.cpp:2120
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1468,7 +1469,7 @@ msgstr ""
 "mateixa relació va ser adoptada de manera implícita a les taules syzygy de "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2111
+#: src/core/StelCore.cpp:2124
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1479,7 +1480,7 @@ msgstr ""
 "l'article <em>The accelerations of the earth and moon from early "
 "astronomical observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2114
+#: src/core/StelCore.cpp:2127
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1488,7 +1489,7 @@ msgstr ""
 "Aquesta equació va ser publicada per F. R. Stephenson a l'article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2117
+#: src/core/StelCore.cpp:2130
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1502,7 +1503,7 @@ msgstr ""
 "period 1800-1975</em> (%1) tal com es pot comprovar a les dades publicades "
 "per Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2120
+#: src/core/StelCore.cpp:2133
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1512,7 +1513,7 @@ msgstr ""
 "4000 to +2800</em>  de P. Breetagnon i L. Simon (1986) i per el programari "
 "de PC RedShift."
 
-#: src/core/StelCore.cpp:2123
+#: src/core/StelCore.cpp:2136
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1523,12 +1524,12 @@ msgstr ""
 "ser article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2126
+#: src/core/StelCore.cpp:2139
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Aquest aalgoritme es fa servir al programari de planetari de PC Guide 7."
 
-#: src/core/StelCore.cpp:2129
+#: src/core/StelCore.cpp:2142
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1538,7 +1539,7 @@ msgstr ""
 "Canon of Solar Eclipses: 1986-2035</em> (1987) i en el seu <em>Fifty Year "
 "Canon of Lunar Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2132
+#: src/core/StelCore.cpp:2145
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1547,7 +1548,7 @@ msgstr ""
 "Aquesta fórmula va ser obtinguda per K.M. Borkowski (%1) del anàlisi de les "
 "dades recavades de 31 eclipsis solars datats entre el 2137 aC i el 1751 dC."
 
-#: src/core/StelCore.cpp:2135
+#: src/core/StelCore.cpp:2148
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1560,7 +1561,7 @@ msgstr ""
 "the Period 1800-1988</em> (%1) i les dades s'ajusten als valors "
 "proporcionats per Stephenson i Morrison (1984)."
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2151
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1570,7 +1571,7 @@ msgstr ""
 "versió curta del la teoria lunar ELP 2000-85 al seu <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2141
+#: src/core/StelCore.cpp:2154
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1581,7 +1582,7 @@ msgstr ""
 "l'article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:2144
+#: src/core/StelCore.cpp:2157
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1590,7 +1591,7 @@ msgstr ""
 "F. R. Stepenson va publicar aquesta fórmula al seu llibre <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2147
+#: src/core/StelCore.cpp:2160
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1600,7 +1601,7 @@ msgstr ""
 "utilitzat. Taula per 1620..2000, i inclou una variant de Chapront, Chapront-"
 "Touze i Francou (1997) per dades fora de 1620..2000."
 
-#: src/core/StelCore.cpp:2150
+#: src/core/StelCore.cpp:2163
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1610,7 +1611,7 @@ msgstr ""
 "Laboratory) de la NASA fa servir aquesta fórmula al seu web interactiu %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:2153
+#: src/core/StelCore.cpp:2166
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1619,7 +1620,7 @@ msgstr ""
 "Aquest polinomi va ser publicat per J. Meeus i L. Simon al seu article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2156
+#: src/core/StelCore.cpp:2169
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1629,7 +1630,7 @@ msgstr ""
 "Personal Computer</em> (2000) proporciona polinòmics simples de 3è ordre "
 "quadrant les dades del passat recent."
 
-#: src/core/StelCore.cpp:2159
+#: src/core/StelCore.cpp:2172
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1641,7 +1642,7 @@ msgstr ""
 "Tabulations</em> (2002). Es basat en <em>Astronomical Algorithms</em> (1991) "
 "de Jean Meeus."
 
-#: src/core/StelCore.cpp:2162
+#: src/core/StelCore.cpp:2175
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1652,7 +1653,7 @@ msgstr ""
 "Stephenson al seu article <em>Historical values of the Earth's clock error "
 "%1T and the calculation of eclipses</em> (%2) amb apèndix a (%3)."
 
-#: src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2178
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1665,7 +1666,7 @@ msgstr ""
 "amb un cosinus i la funció quadrada. Això es basa en una periodicitat "
 "possible descrit per Stephenson (%2). Veure més informació %3aquí%4."
 
-#: src/core/StelCore.cpp:2168 src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2181 src/core/StelCore.cpp:2184
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1681,15 +1682,15 @@ msgstr ""
 "fórmula s'utilitza també a les efemèrides solar, lunar i planetària del "
 "programari SOLEX."
 
-#: src/core/StelCore.cpp:2168
+#: src/core/StelCore.cpp:2181
 msgid "Used by default."
 msgstr "Fet servir per omissió."
 
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2184
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "VERSIÓ APEDAÇADA SENSE ACCELERACIÓ LUNAR ADDICIONAL"
 
-#: src/core/StelCore.cpp:2174
+#: src/core/StelCore.cpp:2187
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1700,7 +1701,7 @@ msgstr ""
 "va ser publicada a l'article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2177
+#: src/core/StelCore.cpp:2190
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1712,7 +1713,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1) i revisada per Sana Islam al "
 "2013."
 
-#: src/core/StelCore.cpp:2180
+#: src/core/StelCore.cpp:2193
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1723,7 +1724,7 @@ msgstr ""
 "Mariam Sultana i Faheem Zaidi va ser publicada a <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2196
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1736,7 +1737,7 @@ msgstr ""
 "dC</em> (%1). Fora del rang mencionat (modelat amb un ajust de spline) "
 "proporciona valors d'una paràbola aproximada."
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2199
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1745,11 +1746,11 @@ msgstr ""
 "Aquesta es una fórmula quadràtica per el càlcul de %1T amb coeficients "
 "definits per l'usuari."
 
-#: src/core/StelCore.cpp:2189 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2202 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Error"
 
-#: src/core/StelCore.cpp:2197
+#: src/core/StelCore.cpp:2210
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -1758,16 +1759,16 @@ msgstr ""
 "El valor de la solució de l'%1 per %2 (acceleració secular de la Lluna) "
 "requereix una adaptació, consulteu la Guia per als detalls."
 
-#: src/core/StelCore.cpp:2238
+#: src/core/StelCore.cpp:2251
 msgid "with zero values outside this range"
 msgstr "amb valors zero fora d'aquest rang"
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2254
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "amb un típic 1-segon de precisió i els valors zero fora d'aquest rang"
 
-#: src/core/StelCore.cpp:2244
+#: src/core/StelCore.cpp:2257
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -1775,23 +1776,23 @@ msgstr ""
 "amb una mitjana d'error de menys d'un segon, error max. 1.9s, i els valors "
 "per els anys límit fora d'aquest rang"
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2264
 msgid "with values for the limit years outside this range"
 msgstr "amb valors per els anys límits fora d'aquest rang"
 
-#: src/core/StelCore.cpp:2261
+#: src/core/StelCore.cpp:2274
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "El rang vàlid d'ús: entre anys %1 i %2, %3."
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2276
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "El rang vàlid d'ús: entre els anys %1 i %2."
 
 #: src/core/StelProjector.cpp:131
 msgid "Maximum FOV: "
-msgstr "Màxim CDV: "
+msgstr "Màxim FOV: "
 
 #: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
@@ -1930,63 +1931,63 @@ msgstr ""
 "proposat per Osborne Maitland Miller (1897-1979) el 1942. Els pols ja no "
 "s'assignen a l'infinit."
 
-#: src/core/StelObject.cpp:122
+#: src/core/StelObject.cpp:133
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "en data"
 
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:132
-#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:142
+#: src/core/StelObject.cpp:141 src/core/StelObject.cpp:143
+#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:153
 msgid "RA/Dec"
 msgstr "AR/Dec"
 
-#: src/core/StelObject.cpp:161 src/core/StelObject.cpp:164
-#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:177
+#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:175
+#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:188
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Angle horari/DE: %1/%2"
 
-#: src/core/StelObject.cpp:161 src/core/StelObject.cpp:164
-#: src/core/StelObject.cpp:195 src/core/StelObject.cpp:197
+#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:175
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
 msgid "(apparent)"
 msgstr "(aparent)"
 
-#: src/core/StelObject.cpp:195 src/core/StelObject.cpp:197
-#: src/core/StelObject.cpp:202 src/core/StelObject.cpp:204
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
+#: src/core/StelObject.cpp:213 src/core/StelObject.cpp:215
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:223 src/core/StelObject.cpp:225
-#: src/core/StelObject.cpp:238 src/core/StelObject.cpp:240
+#: src/core/StelObject.cpp:234 src/core/StelObject.cpp:236
+#: src/core/StelObject.cpp:249 src/core/StelObject.cpp:251
 msgid "Ecliptic longitude/latitude"
 msgstr "Longitud/latitud de l'eclíptica"
 
-#: src/core/StelObject.cpp:243 src/core/StelObject.cpp:245
+#: src/core/StelObject.cpp:254 src/core/StelObject.cpp:256
 msgid "Ecliptic obliquity"
 msgstr "Obliqüitat de l'eclíptica"
 
-#: src/core/StelObject.cpp:253 src/core/StelObject.cpp:255
+#: src/core/StelObject.cpp:264 src/core/StelObject.cpp:266
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Longitud/latitud galàctica: %1/%2"
 
-#: src/core/StelObject.cpp:263 src/core/StelObject.cpp:265
+#: src/core/StelObject.cpp:274 src/core/StelObject.cpp:276
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
 msgstr "Longitud/Latitud supergalàctic: %1/%2"
 
-#: src/core/StelObject.cpp:271
+#: src/core/StelObject.cpp:282
 #, qt-format
 msgid "IAU Constellation: %1"
 msgstr "Constel·lació UAI: %1"
 
-#: src/core/StelObject.cpp:280
+#: src/core/StelObject.cpp:291
 #, qt-format
 msgid "Mean Sidereal Time: %1"
 msgstr "Mitjana de Temps Sideral: %1"
 
-#: src/core/StelObject.cpp:286
+#: src/core/StelObject.cpp:297
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
 msgstr "Temps Sideral aparent: %1"
@@ -2080,31 +2081,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr "TLSV"
 
-#: src/gui/ConfigurationDialog.cpp:538
+#: src/gui/ConfigurationDialog.cpp:539
 msgid "Select screenshot directory"
 msgstr "Selecciona la carpeta per les captures de pantalles"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:870
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "CDV inicial: %1/%2"
+msgstr "FOV inicial: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:869
+#: src/gui/ConfigurationDialog.cpp:878
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direcció de la vista inicial Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:931
+#: src/gui/ConfigurationDialog.cpp:940
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:253
 msgid "Authors"
 msgstr "Autors"
 
-#: src/gui/ConfigurationDialog.cpp:932 src/gui/ViewDialog.cpp:1263
+#: src/gui/ConfigurationDialog.cpp:941 src/gui/ViewDialog.cpp:1263
 msgid "Contact"
 msgstr "Contacte"
 
-#: src/gui/ConfigurationDialog.cpp:934
+#: src/gui/ConfigurationDialog.cpp:943
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
@@ -2123,15 +2124,15 @@ msgstr "Contacte"
 msgid "Version"
 msgstr "Versió"
 
-#: src/gui/ConfigurationDialog.cpp:1031
+#: src/gui/ConfigurationDialog.cpp:1040
 msgid "Running script: "
 msgstr "Executant script: "
 
-#: src/gui/ConfigurationDialog.cpp:1038
+#: src/gui/ConfigurationDialog.cpp:1047
 msgid "Running script: [none]"
 msgstr "Executant script: [cap]"
 
-#: src/gui/ConfigurationDialog.cpp:1103
+#: src/gui/ConfigurationDialog.cpp:1112
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2139,16 +2140,16 @@ msgstr ""
 "Finalitzada la descàrrega del nous catàlegs estel·lars!\n"
 "Reinicia Stellarium per poder fer-los servir."
 
-#: src/gui/ConfigurationDialog.cpp:1107
+#: src/gui/ConfigurationDialog.cpp:1116
 msgid "All available star catalogs have been installed."
 msgstr "Tots els catàlegs estelars han sigut instal·lats"
 
-#: src/gui/ConfigurationDialog.cpp:1112
+#: src/gui/ConfigurationDialog.cpp:1121
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obtenint catàleg %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:1119
+#: src/gui/ConfigurationDialog.cpp:1128
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2157,7 +2158,7 @@ msgstr ""
 "Descarregant %1...\n"
 "(pots tancat aquesta finestra.)"
 
-#: src/gui/ConfigurationDialog.cpp:1126
+#: src/gui/ConfigurationDialog.cpp:1135
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2168,7 +2169,7 @@ msgstr ""
 "Nombre d'estels: %2 Milions\n"
 "Rang de magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1169 src/gui/ConfigurationDialog.cpp:1205
+#: src/gui/ConfigurationDialog.cpp:1178 src/gui/ConfigurationDialog.cpp:1214
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2177,11 +2178,11 @@ msgstr ""
 "Error descarregant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1258
+#: src/gui/ConfigurationDialog.cpp:1267
 msgid "Verifying file integrity..."
 msgstr "Verificant integritat del fitxer..."
 
-#: src/gui/ConfigurationDialog.cpp:1262
+#: src/gui/ConfigurationDialog.cpp:1271
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2190,170 +2191,170 @@ msgstr ""
 "Error descarregant %1:\n"
 "El fitxer està corrupte."
 
-#: src/gui/ConfigurationDialog.cpp:1308 src/gui/ConfigurationDialog.cpp:1317
+#: src/gui/ConfigurationDialog.cpp:1317 src/gui/ConfigurationDialog.cpp:1326
 msgid "Available"
 msgstr "Disponible"
 
-#: src/gui/ConfigurationDialog.cpp:1310 src/gui/ConfigurationDialog.cpp:1319
+#: src/gui/ConfigurationDialog.cpp:1319 src/gui/ConfigurationDialog.cpp:1328
 msgid "Not Available"
 msgstr "No disponible"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1395
 msgid "Algorithm of"
 msgstr "Algoritme de"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1408
 msgid "Without correction"
 msgstr "Sense correció"
 
-#: src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1409
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1401
+#: src/gui/ConfigurationDialog.cpp:1410
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1411
 msgid "IAU (1952)"
 msgstr "UAI (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1412
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Efemèrides astronòmiques (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1404
+#: src/gui/ConfigurationDialog.cpp:1413
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) i Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1405
+#: src/gui/ConfigurationDialog.cpp:1414
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller i Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1406
+#: src/gui/ConfigurationDialog.cpp:1415
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1407
+#: src/gui/ConfigurationDialog.cpp:1416
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel i Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1408
+#: src/gui/ConfigurationDialog.cpp:1417
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel i Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1409
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison i Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1410
+#: src/gui/ConfigurationDialog.cpp:1419
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson i Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1411
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson i Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1421
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1413
+#: src/gui/ConfigurationDialog.cpp:1422
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1414
+#: src/gui/ConfigurationDialog.cpp:1423
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze i Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1424
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson i Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1416
+#: src/gui/ConfigurationDialog.cpp:1425
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1427
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (aamb Chapront, Chapront-Touze i Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1419
+#: src/gui/ConfigurationDialog.cpp:1428
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1429
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus i Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1421
+#: src/gui/ConfigurationDialog.cpp:1430
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison i Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1431
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison i Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1433
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak i Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1427
+#: src/gui/ConfigurationDialog.cpp:1436
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak i Meeus (2006) cap acceleració addicional de la lluna"
 
-#: src/gui/ConfigurationDialog.cpp:1429
+#: src/gui/ConfigurationDialog.cpp:1438
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1430
+#: src/gui/ConfigurationDialog.cpp:1439
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1431
+#: src/gui/ConfigurationDialog.cpp:1440
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck i Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1432
+#: src/gui/ConfigurationDialog.cpp:1441
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold i Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1433
+#: src/gui/ConfigurationDialog.cpp:1442
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq i Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1434
+#: src/gui/ConfigurationDialog.cpp:1443
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana i Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1435
+#: src/gui/ConfigurationDialog.cpp:1444
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Equació personalitzada per %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1484 src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:407
 msgid "System default"
 msgstr "Predeterminat del sistema"
 
-#: src/gui/ConfigurationDialog.cpp:1485
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "aaaa-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1495
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1520
+#: src/gui/ConfigurationDialog.cpp:1529
 msgid "12-hour format"
 msgstr "Format de 12 hores"
 
-#: src/gui/ConfigurationDialog.cpp:1521
+#: src/gui/ConfigurationDialog.cpp:1530
 msgid "24-hour format"
 msgstr "Format de 24 hores"
 
@@ -2728,7 +2729,7 @@ msgstr "observador planetocèntric"
 #: src/gui/StelGuiItems.cpp:726
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr "CDV"
+msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:742
 msgid "Field of view"
@@ -2738,7 +2739,7 @@ msgstr "Camp de visió"
 #: src/gui/StelGuiItems.cpp:761
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr "QPS"
+msgstr "FPS"
 
 #: src/gui/StelGuiItems.cpp:769
 msgid "Frames per second"
@@ -3070,7 +3071,7 @@ msgid "Secular acceleration of the Moon"
 msgstr "acceleració secular de la Lluna"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:196 src/ui_configurationDialog.h:1290
+#: src/gui/AstroCalcDialog.cpp:196 src/ui_configurationDialog.h:1298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -3094,7 +3095,7 @@ msgid "Mag."
 msgstr "Mag."
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:204 src/ui_configurationDialog.h:1269
+#: src/gui/AstroCalcDialog.cpp:204 src/ui_configurationDialog.h:1277
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid "Type"
 msgstr "Tipus"
@@ -4311,7 +4312,7 @@ msgstr "Carpeta"
 msgid "&Choose"
 msgstr "T&ria"
 
-#: src/translations.h:400 src/ui_configurationDialog.h:1431
+#: src/translations.h:400 src/ui_configurationDialog.h:1439
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Cancel·lar"
@@ -5422,7 +5423,7 @@ msgstr "Quant a"
 msgid "Log"
 msgstr "Registre"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1314
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1322
 msgid "Edit keyboard shortcuts..."
 msgstr "Edita les dreceres de teclat ..."
 
@@ -5701,7 +5702,7 @@ msgstr "Bloqueja posició quan s'utilitzen les coordenades"
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2311
 #: src/ui_viewDialog.h:2333 src/ui_viewDialog.h:2359
-#: src/ui_configurationDialog.h:1432 src/ui_configurationDialog.h:1443
+#: src/ui_configurationDialog.h:1440 src/ui_configurationDialog.h:1451
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Opcions"
@@ -6451,7 +6452,7 @@ msgstr "Visible"
 #: src/ui_viewDialog.h:2367
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr "OCP"
+msgstr "DSO"
 
 #: src/ui_viewDialog.h:2369
 msgid "Deep-Sky Objects"
@@ -6471,35 +6472,35 @@ msgstr "Paisatge"
 msgid "Starlore"
 msgstr "Mitologia"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1211
 msgid "Configuration"
 msgstr "Configuració"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1213
 msgid "Language settings"
 msgstr "Paràmetres d'idioma"
 
-#: src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1214
 msgid "Program Language"
 msgstr "Llenguatge de programació"
 
-#: src/ui_configurationDialog.h:1208
+#: src/ui_configurationDialog.h:1215
 msgid "Sky Culture Language"
 msgstr "Idioma de la Cultura del Cel"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1217
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Aquesta característica no ha estat provada a fons encara!"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1219
 msgid "Ephemeris settings (experimental)"
 msgstr "Configuració d'efemèrides (experimental)"
 
-#: src/ui_configurationDialog.h:1213 src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1221
 msgid "Not installed"
 msgstr "No instal·lat"
 
-#: src/ui_configurationDialog.h:1216
+#: src/ui_configurationDialog.h:1223
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -6507,20 +6508,20 @@ msgstr ""
 "DE431 proporciona dades de posició durant els anys -13.000 ... + 17000. "
 "Només per a aplicacions especials."
 
-#: src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1225
 msgid "Use DE431 (long-time data)"
 msgstr "Ús DE431 (dades en temps amplis)"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1227
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 "DE430 ofereix la més alta precisió, només per als anys 1550 ... 2650."
 
-#: src/ui_configurationDialog.h:1222
+#: src/ui_configurationDialog.h:1229
 msgid "Use DE430 (high accuracy)"
 msgstr "Ús DE430 (alta precisió)"
 
-#: src/ui_configurationDialog.h:1224
+#: src/ui_configurationDialog.h:1231
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6528,18 +6529,22 @@ msgstr ""
 "Usant VSOP87 es recomana per als anys -4000 ... + 8000 només, però ofereix "
 "posicions útils fora d'aquest rang."
 
-#: src/ui_configurationDialog.h:1226
+#: src/ui_configurationDialog.h:1233
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP 2000-82B s'utilitza quan aquests no estan instal·lats o no "
 "activades."
 
-#: src/ui_configurationDialog.h:1227
+#: src/ui_configurationDialog.h:1234
 msgid "Default options"
 msgstr "Opcions per ﻿omissió"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1235
+msgid "Save View"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1237
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6547,7 +6552,7 @@ msgstr ""
 "Salva la configuració canviada en aquesta sessió per que sigui la mateixa "
 "quan arrenquis la propera vegada que Stellarium"
 
-#: src/ui_configurationDialog.h:1231
+#: src/ui_configurationDialog.h:1239
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6555,11 +6560,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Desa els paràmetres"
 
-#: src/ui_configurationDialog.h:1233
+#: src/ui_configurationDialog.h:1241
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Retorna a la configuració per defecte de Stellarium"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1243
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6567,214 +6572,211 @@ msgstr "Retorna a la configuració per defecte de Stellarium"
 msgid "Restore defaults"
 msgstr "Restaura per omissió"
 
-#: src/ui_configurationDialog.h:1236
+#: src/ui_configurationDialog.h:1244
 msgid ""
-"Restoring default settings requires a restart of Stellarium. Saving all the "
-"current options includes the current FOV and direction of view for use at "
-"next startup."
+"Save either the current FOV and direction of view or all the current options "
+"for use at next startup. Restoring default settings requires a restart of "
+"Stellarium. "
 msgstr ""
-"Restaurar les opcions per omissió necessita un reinici de Stellarium. "
-"Guardar totes les opcions actual inclou l'actual CDV i direcció de la vista "
-"per fer servir la propera arrancada."
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1246
 msgid "The width of your view when Stellarium starts"
 msgstr "Ample de la visió quan arrenca Stellarium"
 
-#: src/ui_configurationDialog.h:1241
+#: src/ui_configurationDialog.h:1249
 msgid "The direction you're looking when Stellarium starts"
 msgstr "La direcció de la vista quan arrenca Stellarium"
 
-#: src/ui_configurationDialog.h:1243 src/ui_configurationDialog.h:1454
+#: src/ui_configurationDialog.h:1251 src/ui_configurationDialog.h:1462
 msgid "Selected object information"
 msgstr "Informació del objecte selecionat"
 
-#: src/ui_configurationDialog.h:1245
+#: src/ui_configurationDialog.h:1253
 msgid "Display all information available"
 msgstr "Mostra tota la informació disponible"
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1255
 msgid "All available"
 msgstr "Tota la disponible"
 
-#: src/ui_configurationDialog.h:1249
+#: src/ui_configurationDialog.h:1257
 msgid "Display no information"
 msgstr "No mostris cap informació"
 
-#: src/ui_configurationDialog.h:1251 plugins/Oculars/src/Oculars.cpp:2398
+#: src/ui_configurationDialog.h:1259 plugins/Oculars/src/Oculars.cpp:2398
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Cap"
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1261
 msgid "Display less information"
 msgstr "Mostra menys informació"
 
-#: src/ui_configurationDialog.h:1255
+#: src/ui_configurationDialog.h:1263
 msgid "Short"
 msgstr "Mínima"
 
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1265
 msgid "Display user settings information"
 msgstr "Mostra la informació de configuració de l'usuari"
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1267
 msgid "Customized"
 msgstr "Personalitzada"
 
-#: src/ui_configurationDialog.h:1260
+#: src/ui_configurationDialog.h:1268
 msgid "Displayed fields"
 msgstr "Camps mostrats"
 
-#: src/ui_configurationDialog.h:1262 src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1270 src/ui_configurationDialog.h:1304
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Coordinades equatorials, equinocci de la data"
 
-#: src/ui_configurationDialog.h:1264
+#: src/ui_configurationDialog.h:1272
 msgid "Right ascension/Declination (of date)"
 msgstr "Ascensió Recta / Declinació (de la data)"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1273
 msgid "Supergalactic coordinates"
 msgstr "Coordenades supergalàctiques"
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1275
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Tipus d'objecte (estel, planeta, etc.)"
 
-#: src/ui_configurationDialog.h:1270
+#: src/ui_configurationDialog.h:1278
 msgid "Absolute magnitude"
 msgstr "Magnitud absoluta"
 
-#: src/ui_configurationDialog.h:1272
+#: src/ui_configurationDialog.h:1280
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "Coordenades eclíptiques, equinocci de data (només per la Terra)"
 
-#: src/ui_configurationDialog.h:1274
+#: src/ui_configurationDialog.h:1282
 msgid "Ecliptic coordinates (of date)"
 msgstr "Coordenades eclíptiques (de data)"
 
-#: src/ui_configurationDialog.h:1276
+#: src/ui_configurationDialog.h:1284
 msgid "Angular or physical size"
 msgstr "Mida angular o física"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1286
 msgid "Size"
 msgstr "Mida"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1288
 msgid "Horizontal coordinates"
 msgstr "Coordenades horitzontals"
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1290
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "Altitud / Azimut"
 
-#: src/ui_configurationDialog.h:1283
+#: src/ui_configurationDialog.h:1291
 msgid "Catalog number(s)"
 msgstr "El(s) nombre(s) del catàleg"
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1292
 msgid "Distance"
 msgstr "Distància"
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1293
 msgid "Galactic coordinates"
 msgstr "Coordenades galàctiques"
 
-#: src/ui_configurationDialog.h:1287
+#: src/ui_configurationDialog.h:1295
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Coordinades equatorials, equinocci de J2000.0"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1297
 msgid "Right ascension/Declination (J2000)"
 msgstr "Ascensió Recta / Declinació (J2000)"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1300
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "Coordenades eclíptiques, equinocci J2000.0"
 
-#: src/ui_configurationDialog.h:1294
+#: src/ui_configurationDialog.h:1302
 msgid "Ecliptic coordinates (J2000)"
 msgstr "Coordenades eclíptiques (J2000)"
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1306
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "Hora angle / Declinació"
 
-#: src/ui_configurationDialog.h:1299
+#: src/ui_configurationDialog.h:1307
 msgid "Visual magnitude"
 msgstr "Magnitud visual"
 
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1309
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr "Abreviació de 3 lletres constel·lació UAI"
 
-#: src/ui_configurationDialog.h:1303
+#: src/ui_configurationDialog.h:1311
 msgid "Constellation"
 msgstr "Constel·lació"
 
-#: src/ui_configurationDialog.h:1305
+#: src/ui_configurationDialog.h:1313
 msgid "Spectral class, nebula type, etc."
 msgstr "Classe espectral, el tipus de nebulosa, etc."
 
-#: src/ui_configurationDialog.h:1307
+#: src/ui_configurationDialog.h:1315
 msgid "Additional information"
 msgstr "Informació addicional"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1316
 msgid "Sidereal time"
 msgstr "Temps sideral"
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1317
 msgid "Control"
 msgstr "Control"
 
-#: src/ui_configurationDialog.h:1311
+#: src/ui_configurationDialog.h:1319
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Permetre al ratolí deplaçament (arrosegant) i zoom (roda del ratolí)"
 
-#: src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1321
 msgid "Enable mouse navigation"
 msgstr "Activar navegació amb ratolí"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1324
 msgid "Allow keyboard to pan and zoom"
 msgstr "Permetre al teclat desplaçament i zoom"
 
-#: src/ui_configurationDialog.h:1318
+#: src/ui_configurationDialog.h:1326
 msgid "Enable keyboard navigation"
 msgstr "Activar navegació amb teclat"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1328
 msgid "Hides the mouse cursor when inactive"
 msgstr "Amaga el cursor del ratoli quan estigui inactiu"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1330
 msgid "Mouse cursor timeout:"
 msgstr "Temps d'espera del cursor del ratolí:"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1332
 msgid "seconds"
 msgstr "segons"
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1334
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Data i hora a l'arrancada"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1336
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Iniciar Stellarium amb la data i hora del sistema"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1338
 msgid "System date and time"
 msgstr "Data i hora del sistema"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1340
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -6782,59 +6784,59 @@ msgstr ""
 "Estableix l'hora de simulació a la propera instància d'aquesta hora del dia "
 "quan Stellarium arrenqui"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1342
 msgid "System date at:"
 msgstr "Data del sistema:"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1344
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Fes servir una data i hora específica quan Stellarium arrenqui"
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1346
 msgid "Other:"
 msgstr "Altres:"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1348
 msgid "Use current local date and time"
 msgstr "Utilitza data i hora local actual"
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1350
 msgid "use current"
 msgstr "Fes servir l'actual"
 
-#: src/ui_configurationDialog.h:1344
+#: src/ui_configurationDialog.h:1352
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Aquests paràmetres controlen la manera com es mostren la data i l'hora a la "
 "barra inferior."
 
-#: src/ui_configurationDialog.h:1346
+#: src/ui_configurationDialog.h:1354
 msgid "Display formats of date and time"
 msgstr "Visualització de formats de data i hora"
 
-#: src/ui_configurationDialog.h:1347
+#: src/ui_configurationDialog.h:1355
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Data:"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1356
 msgid "and time:"
 msgstr "i temps:"
 
-#: src/ui_configurationDialog.h:1349
+#: src/ui_configurationDialog.h:1357
 msgid "Time correction"
 msgstr "Correciò temporal"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1360
 msgid "Edit equation"
 msgstr "Editar equació"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1362
 msgid "Planetarium options"
 msgstr "Opcions de planetari"
 
-#: src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1364
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6842,36 +6844,36 @@ msgstr ""
 "Quan està actiu, la tecla \"l'allunyament automàtic\" també establirà la "
 "direcció inicial de la vista"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1366
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "L'allunyament automàtic torna a la direcció inicial de la vista"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1368
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Oculta-ho tot fora del cercle central a la vista principal."
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1370
 msgid "Disc viewport"
 msgstr "Vista de disc"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1372
 msgid "Align labels with the horizon"
 msgstr "Alinea etiquetes amb l'horitzó"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1374
 msgid "Gravity labels"
 msgstr "﻿Etiquetes de gravetat"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1376
 msgid "Use decimal degrees for coordinates"
 msgstr "Utilitzeu graus decimals per les coordenades"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1378
 msgid "Use decimal degrees"
 msgstr "Utilitzeu graus decimals"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1380
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -6879,11 +6881,11 @@ msgstr ""
 "La distorsió de mirall esfèrica es fa servir quan projectem Stellarium en un "
 "mirall esfèric, com a planetari de baix cost."
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1382
 msgid "Spheric mirror distortion"
 msgstr "Distorsió de mirall esfèrica"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1384
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -6891,158 +6893,158 @@ msgstr ""
 "Activa per veure com es veu des de la superfície del planeta (recomanat). Si "
 "es desconnecta, mostrar la vista planetocéntrica."
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1386
 msgid "Topocentric coordinates"
 msgstr "Coordenades topocèntriques"
 
-#: src/ui_configurationDialog.h:1380
+#: src/ui_configurationDialog.h:1388
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Auto-habilitació de l'atmosfera per als cossos amb l'atmosfera a la finestra "
 "d'ubicació"
 
-#: src/ui_configurationDialog.h:1382
+#: src/ui_configurationDialog.h:1390
 msgid "Auto-enabling for the atmosphere"
 msgstr "Auto-activat per l'atmosfera"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1392
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Commuta botons per invertir la imatge vertical i horitzontal."
 
-#: src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1394
 msgid "Show flip buttons"
 msgstr "Mostra botons d'inversió"
 
-#: src/ui_configurationDialog.h:1388 src/ui_configurationDialog.h:1391
+#: src/ui_configurationDialog.h:1396 src/ui_configurationDialog.h:1399
 msgid "Hide other constellations when you click one"
 msgstr "Oculta la resta de constel·lacions quan facis clic en una"
 
-#: src/ui_configurationDialog.h:1395
+#: src/ui_configurationDialog.h:1403
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Commuta mostrar fons de pantalla de les nebuloses."
 
-#: src/ui_configurationDialog.h:1397
+#: src/ui_configurationDialog.h:1405
 msgid "Show nebula background button"
 msgstr "Mostra el botó nebulosa de fons"
 
-#: src/ui_configurationDialog.h:1399
+#: src/ui_configurationDialog.h:1407
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Nutació és un petit balanceig de l'eix de la Terra,  d'una magnitud d'uns "
 "segons d'arc."
 
-#: src/ui_configurationDialog.h:1401
+#: src/ui_configurationDialog.h:1409
 msgid "Include nutation"
 msgstr "Incloure nutació"
 
-#: src/ui_configurationDialog.h:1403
+#: src/ui_configurationDialog.h:1411
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "Activa aquesta opció per calcular l'azimut des del sud cap a l'oest."
 
-#: src/ui_configurationDialog.h:1405
+#: src/ui_configurationDialog.h:1413
 msgid "Azimuth from South"
 msgstr "Azimuth del Sud"
 
-#: src/ui_configurationDialog.h:1407
+#: src/ui_configurationDialog.h:1415
 msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr "Commuta el botó del Estudi Digitalitzat del Cel"
 
-#: src/ui_configurationDialog.h:1409
+#: src/ui_configurationDialog.h:1417
 msgid "Show DSS button"
 msgstr "Mostrar botó EDC"
 
-#: src/ui_configurationDialog.h:1411
+#: src/ui_configurationDialog.h:1419
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Canviar automàticament el paisatge quan es canvia de planeta"
 
-#: src/ui_configurationDialog.h:1413
+#: src/ui_configurationDialog.h:1421
 msgid "Auto select landscapes"
 msgstr "Seleciona automàticament el paisatge"
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1422
 msgid "Show bookmarks button"
 msgstr "Mostra botó de favorits"
 
-#: src/ui_configurationDialog.h:1415
+#: src/ui_configurationDialog.h:1423
 msgid "Screenshots"
 msgstr "Captura de pantalla"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1424
 msgid "Screenshot Directory"
 msgstr "Carpeta de captura de pantalla"
 
-#: src/ui_configurationDialog.h:1418
+#: src/ui_configurationDialog.h:1426
 msgid "Invert colors"
 msgstr "Invertir colors"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1427
 msgid "Star catalog updates"
 msgstr "Actualització de catàlegs estel·lars"
 
-#: src/ui_configurationDialog.h:1421
+#: src/ui_configurationDialog.h:1429
 msgid "Click here to start downloading"
 msgstr "Fes clic aquí per començar la descàrrega"
 
-#: src/ui_configurationDialog.h:1423
+#: src/ui_configurationDialog.h:1431
 msgid "Download this file to view even more stars"
 msgstr "Descarrega aquest fitxer per veure encara més estels"
 
-#: src/ui_configurationDialog.h:1425
+#: src/ui_configurationDialog.h:1433
 msgid "Restart the download"
 msgstr "Reinicia la descàrrega"
 
-#: src/ui_configurationDialog.h:1427
+#: src/ui_configurationDialog.h:1435
 msgid "Retry"
 msgstr "Reintenta"
 
-#: src/ui_configurationDialog.h:1429
+#: src/ui_configurationDialog.h:1437
 msgid "Stop the download. You can always restart it later"
 msgstr "Atura la descàrrega. Sempre es pot reiniciar després"
 
-#: src/ui_configurationDialog.h:1434
+#: src/ui_configurationDialog.h:1442
 msgid "Close window when script runs"
 msgstr "Tanca la finestra quan s'executi l'script"
 
-#: src/ui_configurationDialog.h:1436
+#: src/ui_configurationDialog.h:1444
 msgid "Run the selected script"
 msgstr "Executa l'script seleccionat"
 
-#: src/ui_configurationDialog.h:1440
+#: src/ui_configurationDialog.h:1448
 msgid "Stop a running script"
 msgstr "Atura un script que estigui corrent"
 
-#: src/ui_configurationDialog.h:1444
+#: src/ui_configurationDialog.h:1452
 msgid "Load at startup"
 msgstr "Carregar a l'engegada"
 
-#: src/ui_configurationDialog.h:1445
+#: src/ui_configurationDialog.h:1453
 msgid "configure"
 msgstr "configura"
 
-#: src/ui_configurationDialog.h:1450
+#: src/ui_configurationDialog.h:1458
 msgid "Main"
 msgstr "Principal"
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1460
 msgid "Information"
 msgstr "Informació"
 
-#: src/ui_configurationDialog.h:1457
+#: src/ui_configurationDialog.h:1465
 msgid "Navigation"
 msgstr "Navegació"
 
-#: src/ui_configurationDialog.h:1459
+#: src/ui_configurationDialog.h:1467
 msgid "Tools"
 msgstr "Eines"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1469
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Scripts"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1471
 msgid "Plugins"
 msgstr "Connectors"
 
@@ -8130,7 +8132,7 @@ msgstr "DF de l'ocular: %1 mm"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr "CDVa de l'ocular: %1"
+msgstr "FOVa de l'ocular: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1937
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
@@ -8170,7 +8172,7 @@ msgstr "Pupil·la de sortida: %1 mm"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:885
 #, qt-format
 msgid "FOV: %1"
-msgstr "CDV: %1"
+msgstr "FOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2008
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
@@ -8383,7 +8385,7 @@ msgstr ""
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "tFOV:"
-msgstr "CDVv"
+msgstr "FOVv:"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:510
@@ -8398,7 +8400,7 @@ msgstr "Diàmetre:"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:515
 #: plugins/Oculars/src/ui_ocularDialog.h:1191
 msgid "aFOV:"
-msgstr "CDVa"
+msgstr "FOVa:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:516
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
@@ -8534,11 +8536,11 @@ msgstr "Panell de control en pantalla"
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
-msgstr "Marca-ho si vols el valor del CDV igual que a l'inici de Stellarium."
+msgstr "Marca-ho si vols el valor del FOV igual que a l'inici de Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid "Restore FOV to initial values"
-msgstr "Restaura el CDV als valors inicials"
+msgstr "Restaura el FOV als valors inicials"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid ""
@@ -8583,7 +8585,7 @@ msgstr "Vista del sensor"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1181
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr "Utilitzeu graus i minuts per CDV de la CCD"
+msgstr "Utilitzeu graus i minuts per FOV de la CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1183
 msgid ""
@@ -8765,77 +8767,77 @@ msgstr ""
 "L'arxiu satellites.json ja no és compatible - fent servir l'arxiu per defecte"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1936
+#: plugins/Satellites/src/Satellites.cpp:1937
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1938
+#: plugins/Satellites/src/Satellites.cpp:1939
 msgid "scientific"
 msgstr "científic"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1940
+#: plugins/Satellites/src/Satellites.cpp:1941
 msgid "communications"
 msgstr "comunicacions"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1942
+#: plugins/Satellites/src/Satellites.cpp:1943
 msgid "navigation"
 msgstr "navegació"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1944
+#: plugins/Satellites/src/Satellites.cpp:1945
 msgid "amateur"
 msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1946
+#: plugins/Satellites/src/Satellites.cpp:1947
 msgid "weather"
 msgstr "meteo"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1948
+#: plugins/Satellites/src/Satellites.cpp:1949
 msgid "geostationary"
 msgstr "geostacionaris"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1950
+#: plugins/Satellites/src/Satellites.cpp:1951
 msgid "non-operational"
 msgstr "no operatius"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1952
+#: plugins/Satellites/src/Satellites.cpp:1953
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1954
+#: plugins/Satellites/src/Satellites.cpp:1955
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1956
+#: plugins/Satellites/src/Satellites.cpp:1957
 msgid "galileo"
 msgstr "galileu"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1958
+#: plugins/Satellites/src/Satellites.cpp:1959
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1960
+#: plugins/Satellites/src/Satellites.cpp:1961
 msgid "stations"
 msgstr "estacions"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1962
+#: plugins/Satellites/src/Satellites.cpp:1963
 msgid "education"
 msgstr "educació"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1964
+#: plugins/Satellites/src/Satellites.cpp:1965
 msgid "observatory"
 msgstr "observatoris"
 
@@ -8845,57 +8847,57 @@ msgstr "observatoris"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1974
+#: plugins/Satellites/src/Satellites.cpp:1975
 msgid "The Hubble Space Telescope"
 msgstr "Telescopi Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1976
+#: plugins/Satellites/src/Satellites.cpp:1977
 msgid "The International Space Station"
 msgstr "La Estació Espacial Internacional"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1978
+#: plugins/Satellites/src/Satellites.cpp:1979
 msgid "China's first space station"
 msgstr "Primera estació espacial de la Xina"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1980
+#: plugins/Satellites/src/Satellites.cpp:1981
 msgid "The russian space radio telescope RadioAstron"
 msgstr "El radiotelescopi espaial rus  RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1982
+#: plugins/Satellites/src/Satellites.cpp:1983
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "Laboratori d'Astrofísica Internacional de Raigs-Gamma"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1984
+#: plugins/Satellites/src/Satellites.cpp:1985
 msgid "The Gamma-Ray Observatory"
 msgstr "L'observatori de Raigs-Gamma"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:1988
+#: plugins/Satellites/src/Satellites.cpp:1989
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARIÀ)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:1990
+#: plugins/Satellites/src/Satellites.cpp:1991
 msgid "HST"
 msgstr "TEH"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:1992
+#: plugins/Satellites/src/Satellites.cpp:1993
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:1994
+#: plugins/Satellites/src/Satellites.cpp:1995
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:1996
+#: plugins/Satellites/src/Satellites.cpp:1997
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
@@ -8989,43 +8991,43 @@ msgstr "El satèl·lit no es visible."
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/Satellite.cpp:603
-#: plugins/Satellites/src/Satellite.cpp:628
+#: plugins/Satellites/src/Satellite.cpp:687
+#: plugins/Satellites/src/Satellite.cpp:712
 msgctxt "operational status"
 msgid "unknown"
 msgstr "desconegut"
 
-#: plugins/Satellites/src/Satellite.cpp:607
+#: plugins/Satellites/src/Satellite.cpp:691
 msgctxt "operational status"
 msgid "operational"
 msgstr "operatiu"
 
-#: plugins/Satellites/src/Satellite.cpp:610
+#: plugins/Satellites/src/Satellite.cpp:694
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "no operatiu"
 
-#: plugins/Satellites/src/Satellite.cpp:613
+#: plugins/Satellites/src/Satellite.cpp:697
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "operatiu parcialment"
 
-#: plugins/Satellites/src/Satellite.cpp:616
+#: plugins/Satellites/src/Satellite.cpp:700
 msgctxt "operational status"
 msgid "standby"
 msgstr "en espera"
 
-#: plugins/Satellites/src/Satellite.cpp:619
+#: plugins/Satellites/src/Satellite.cpp:703
 msgctxt "operational status"
 msgid "spare"
 msgstr "en reparació"
 
-#: plugins/Satellites/src/Satellite.cpp:622
+#: plugins/Satellites/src/Satellite.cpp:706
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "missió estesa"
 
-#: plugins/Satellites/src/Satellite.cpp:625
+#: plugins/Satellites/src/Satellite.cpp:709
 msgctxt "operational status"
 msgid "decayed"
 msgstr "deteriorat"
@@ -11937,34 +11939,34 @@ msgstr "mJy"
 msgid "Notes: %1"
 msgstr "Notes: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:330
+#: plugins/Pulsars/src/Pulsar.cpp:352
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "Púlsar de raigs X anòmal  o repetidor de raigs gamma tous amb pulsacions "
 "detectades"
 
-#: plugins/Pulsars/src/Pulsar.cpp:335
+#: plugins/Pulsars/src/Pulsar.cpp:357
 msgid "has one or more binary companions"
 msgstr "té un o més companys binaris"
 
-#: plugins/Pulsars/src/Pulsar.cpp:340
+#: plugins/Pulsars/src/Pulsar.cpp:362
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "amb emissió polsada de ràdio a freqüències infraroges o majors"
 
-#: plugins/Pulsars/src/Pulsar.cpp:345
+#: plugins/Pulsars/src/Pulsar.cpp:367
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "amb emissió polsada només en les freqüències infraroges o majors"
 
-#: plugins/Pulsars/src/Pulsar.cpp:350
+#: plugins/Pulsars/src/Pulsar.cpp:372
 msgid "with pulsed emission in the radio band"
 msgstr "amb emissió polsada a la banda de ràdio"
 
-#: plugins/Pulsars/src/Pulsar.cpp:355
+#: plugins/Pulsars/src/Pulsar.cpp:377
 msgid "with intermittently pulsed radio emission"
 msgstr "amb emissió de ràdio polsada de manera intermitent"
 
-#: plugins/Pulsars/src/Pulsar.cpp:360
+#: plugins/Pulsars/src/Pulsar.cpp:382
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -13618,7 +13620,7 @@ msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:86
 msgid "Set FOV to"
-msgstr "Establir CDV a"
+msgstr "Establir FOV a"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:80
 msgid "Field of View plug-in"
@@ -17355,3 +17357,15 @@ msgstr "Declinació Personalitzada 2"
 #~ msgstr ""
 #~ "Salvapantalles de diversos esdeveniments en el Sistema Solar. 261 "
 #~ "esdeveniments en total!"
+
+#~ msgid "Year of last satisfactory observation"
+#~ msgstr "Data de l'última observació satisfactòria"
+
+#~ msgid ""
+#~ "Restoring default settings requires a restart of Stellarium. Saving all the "
+#~ "current options includes the current FOV and direction of view for use at "
+#~ "next startup."
+#~ msgstr ""
+#~ "Restaurar les opcions per omissió necessita un reinici de Stellarium. "
+#~ "Guardar totes les opcions actual inclou l'actual FOV i direcció de la vista "
+#~ "per fer servir la propera arrancada."
