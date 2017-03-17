@@ -225,6 +225,8 @@ void SatellitesDialog::createDialogContent()
 	populateSourcesList();
 
 	initListIridiumFlares();
+	ui->flaresPredictionDepthSpinBox->setValue(plugin->getIridiumFlaresPredictionDepth());
+	connect(ui->flaresPredictionDepthSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setIridiumFlaresPredictionDepth(int)));
 	connect(ui->pushButtonPredictIridiumFlares, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 }
