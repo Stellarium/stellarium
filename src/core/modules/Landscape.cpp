@@ -881,7 +881,7 @@ float LandscapePolygonal::getOpacity(Vec3d azalt) const
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(angleRotateZOffset));
 
-	if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+	if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -1212,7 +1212,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	// QImage has pixel 0/0 in top left corner. We must first find image Y for optionally cropped images.
 	// It is possible that sample position is outside cropped texture. in this case, assume full transparency and exit early.
 
-	const float alt_pm1 = 2.0f * std::asin(alt_rad)  / M_PI;  // sampled altitude, -1...+1 linear in altitude angle
+	const float alt_pm1 = 2.0f * alt_rad / M_PI;               // sampled altitude, -1...+1 linear in altitude angle
 	const float img_top_pm1 = 1.0f-2.0f*(mapTexTop    / M_PI); // the top    line in -1..+1
 	if (alt_pm1>img_top_pm1) return 0.0f;
 	const float img_bot_pm1 = 1.0f-2.0f*(mapTexBottom / M_PI); // the bottom line in -1..+1
