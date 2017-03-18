@@ -22,6 +22,7 @@
 #include "StelLocationMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QStringListModel>
 #include <QDebug>
@@ -34,9 +35,48 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QSettings>
+#include <QTimeZone>
+
+
+TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
 StelLocationMgr::StelLocationMgr()
 {
+
+	// initialize the static QMap first if necessary.
+	if (locationDBToIANAtranslations.count()==0)
+	{
+		// Missing on Qt5.7/Win10 as of 2017-03-18.
+		locationDBToIANAtranslations.insert("Europe/Astrakhan", "UTC+04:00");
+		locationDBToIANAtranslations.insert("Europe/Ulyanovsk", "UTC+04:00");
+		locationDBToIANAtranslations.insert("Europe/Kirov",     "UTC+03:00");
+		locationDBToIANAtranslations.insert("Asia/Hebron",      "Asia/Jerusalem");
+		locationDBToIANAtranslations.insert("Asia/Gaza",        "Asia/Jerusalem"); // or use UTC+2:00? (political issue...)
+		locationDBToIANAtranslations.insert("Asia/Kolkata",     "Asia/Calcutta");
+		locationDBToIANAtranslations.insert("Asia/Kathmandu",   "Asia/Katmandu");
+		locationDBToIANAtranslations.insert("Asia/Tomsk",       "Asia/Novosibirsk");
+		locationDBToIANAtranslations.insert("Asia/Barnaul",     "UTC+07:00");
+		locationDBToIANAtranslations.insert("Asia/Ho_Chi_Minh", "Asia/Saigon");
+		locationDBToIANAtranslations.insert("Asia/Hovd",        "UTC+07:00");
+		locationDBToIANAtranslations.insert("America/Argentina/Buenos_Aires", "America/Buenos_Aires");
+		locationDBToIANAtranslations.insert("America/Argentina/Jujuy",        "America/Jujuy");
+		locationDBToIANAtranslations.insert("America/Argentina/Mendoza",      "America/Mendoza");
+		locationDBToIANAtranslations.insert("America/Argentina/Catamarca",    "America/Catamarca");
+		locationDBToIANAtranslations.insert("America/Argentina/Cordoba",      "America/Cordoba");
+		locationDBToIANAtranslations.insert("America/Indiana/Indianapolis",   "America/Indianapolis");
+		locationDBToIANAtranslations.insert("America/Kentucky/Louisville",    "America/Louisville");
+		locationDBToIANAtranslations.insert("America/Miquelon",               "UTC-03:00");  // Small Canadian island.
+		locationDBToIANAtranslations.insert("Africa/Asmara",     "Africa/Asmera");
+		locationDBToIANAtranslations.insert("Atlantic/Faroe",    "Atlantic/Faeroe");
+		locationDBToIANAtranslations.insert("Pacific/Pohnpei",   "Pacific/Ponape");
+		locationDBToIANAtranslations.insert("Pacific/Pitcairn",  "UTC-08:00");
+		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18
+		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon"); // UTC+6:30 Missing on Ubuntu/Qt5.5.1.
+		locationDBToIANAtranslations.insert( "", "UTC");
+		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
+		// TODO later: create a text file in user data directory.
+	}
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
@@ -102,17 +142,56 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
 		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
-		return res;
 	}
 	else
 	{
 		QDataStream in(&sourcefile);
 		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
-		return res;
 	}
+	// Now res has all location data. However, some timezone names are not available in various versions of Qt.
+	// Sanity checks: It seems we must translate timezone names. Quite a number on Windows, but also still some on Linux.
+	QList<QByteArray> availableTimeZoneList=QTimeZone::availableTimeZoneIds();
+	QStringList unknownTZlist;
+	QMap<QString, StelLocation>::iterator i=res.begin();
+	while (i!=res.end())
+	{
+		StelLocation loc=i.value();
+		if ((loc.ianaTimeZone!="LMST") &&  (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
+		{
+			// TZ name which is currently unknown to Qt detected. See if we can translate it, if not: complain to qDebug().
+			QString fixTZname=sanitizeTimezoneStringFromLocationDB(loc.ianaTimeZone);
+			if (availableTimeZoneList.contains(fixTZname.toUtf8()))
+			{
+				loc.ianaTimeZone=fixTZname;
+				i.value() = loc;
+			}
+			else
+			{
+				qDebug() << "StelLocationMgr::loadCitiesBin(): TimeZone for " << loc.name <<  " not found: " << loc.ianaTimeZone;
+				unknownTZlist.append(loc.ianaTimeZone);
+			}
+		}
+		++i;
+	}
+	if (unknownTZlist.length()>0)
+	{
+		unknownTZlist.removeDuplicates();
+		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
+		QStringList::const_iterator t=unknownTZlist.begin();
+		while (t!=unknownTZlist.end())
+		{
+			qDebug() << *t;
+			++t;
+		}
+		qDebug() << "Please report these timezone names (this logfile) to the Stellarium developers.";
+		// Note to developers: Fill those names and replacements to the map above.
+	}
+
+	return res;
 }
 
+// Done in the following: TZ name sanitizing also for text file!
 LocationMap StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 {
 	// Load the cities from data file
@@ -438,3 +517,33 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 	return results;
 }
 
+// Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.
+// If timezone name starts with "UTC", always return unchanged.
+// This is required to store timezone names exactly as we know them, and not mix ours and corrent-iana spelling flavour.
+// In practice, reverse lookup to locationDBToIANAtranslations
+QString StelLocationMgr::sanitizeTimezoneStringForLocationDB(QString tzString)
+{
+	if (tzString.startsWith("UTC"))
+		return tzString;
+	QByteArray res=locationDBToIANAtranslations.key(tzString.toUtf8(), "---");
+	if ( res != "---")
+		return QString(res);
+	return tzString;
+}
+
+// Attempt to translate a timezone name from those used in Stellarium's location database to a name which is valid
+// as ckeckable by QTimeZone::availableTimeZoneIds(). That list may be updated anytime and is known to differ
+// between OSes. Some spellings may be different, or in some cases some names get simply translated to "UTC+HH:MM" style.
+// The empty string gets translated to "UTC".
+QString StelLocationMgr::sanitizeTimezoneStringFromLocationDB(QString dbString)
+{
+	if (dbString.startsWith("UTC"))
+		return dbString;
+	// Maybe silences a debug later:
+	if (dbString=="")
+		return "UTC";
+	QByteArray res=locationDBToIANAtranslations.value(dbString.toUtf8(), "---");
+	if ( res != "---")
+		return QString(res);
+	return dbString;
+}
