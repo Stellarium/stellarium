@@ -1135,6 +1135,13 @@ void GridLinesMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	// Upgrade config keys
+	if (conf->contains("color/longitude_color"))
+	{
+		conf->setValue("color/oc_longitude_color", conf->value("color/longitude_color", "0.2,0.4,0.4").toString());
+		conf->remove("color/longitude_color");
+	}
+
 	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
 	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
@@ -1185,7 +1192,7 @@ void GridLinesMgr::init()
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value("color/horizon_color", defaultColor).toString()));
 	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/galactic_equator_color", defaultColor).toString()));
 	setColorSupergalacticEquatorLine(StelUtils::strToVec3f(conf->value("color/supergalactic_equator_color", defaultColor).toString()));
-	setColorLongitudeLine(StelUtils::strToVec3f(conf->value("color/longitude_color", defaultColor).toString()));
+	setColorLongitudeLine(StelUtils::strToVec3f(conf->value("color/oc_longitude_color", defaultColor).toString()));
 	setColorPrimeVerticalLine(StelUtils::strToVec3f(conf->value("color/prime_vertical_color", defaultColor).toString()));
 	setColorColureLines(StelUtils::strToVec3f(conf->value("color/colures_color", defaultColor).toString()));
 	setColorCircumpolarCircles(StelUtils::strToVec3f(conf->value("color/circumpolar_circles_color", defaultColor).toString()));
