@@ -105,70 +105,52 @@ no whitespace between the numbers!
 \emph{ID}	& \emph{Default} & \emph{Colour of the\ldots}\\
 \midrule
 default\_color           				& \ccbox{0.5,0.5,0.7} & default colour.\\\midrule
-azimuthal\_color         				& \ccbox{0.3,0.2,0.1} &  azimuthal grid. \\\midrule
-equatorial\_color        				& \ccbox{0.2,0.3,0.8} &  equatorial grid (of date). \\\midrule
-equatorial\_J2000\_color 				& \ccbox{0.1,0.1,0.5} &  equatorial grid (J2000). \\\midrule
+daylight\_text\_color            		& \ccbox{0.0,0.0,0.0} & info text at daylight. \\\midrule
+%% Ecliptic J2000 group: red tones
+ecliptical\_J2000\_color 				& \ccbox{0.4,0.1,0.1} &  ecliptical grid (J2000.0 frame). \\\midrule
+ecliptic\_J2000\_color   				& \ccbox{0.7,0.2,0.2} &  ecliptic line (J2000.0 frame). \\\midrule
+equinox\_J2000\_points\_color			& \ccbox{0.7,0.2,0.2} &  equinox points (J2000.0 frame). \\\midrule
+solstice\_J2000\_points\_color			& \ccbox{0.7,0.2,0.2} &  solstice points (J2000.0 frame). \\\midrule
+ecliptic\_J2000\_poles\_color			& \ccbox{0.7,0.2,0.2} &  ecliptic poles (J2000.0 frame). \\\midrule
+%% Ecliptic of date group: orange tones
 ecliptical\_color        				& \ccbox{0.6,0.3,0.1} &  ecliptical grid (of date). \\\midrule
-ecliptical\_J2000\_color 				& \ccbox{0.4,0.1,0.1} &  ecliptical grid (J2000). \\\midrule
-galactic\_color          				& \ccbox{0.0,0.3,0.2} &  galactic grid. \\\midrule
-galactic\_equator\_color 				& \ccbox{0.5,0.3,0.1} &  galactic equator line. \\\midrule
-supergalactic\_color       				& \ccbox{0.5,0.5,0.7} &  supergalactic grid. \\\midrule
-supergalactic\_equator\_color 			& \ccbox{0.5,0.5,0.7} &  supergalactic equator line. \\\midrule
-equator\_color           				& \ccbox{0.3,0.5,1.0} &  equatorial line. \\\midrule
 ecliptic\_color          				& \ccbox{0.9,0.6,0.2} &  ecliptic line (of date). \\\midrule
-ecliptic\_J2000\_color   				& \ccbox{0.7,0.2,0.2} &  ecliptic line (J2000). \\\midrule
-meridian\_color          				& \ccbox{0.2,0.6,0.2} &  meridian line. \\\midrule
+equinox\_points\_color					& \ccbox{0.9,0.6,0.2} &  equinox points (of date). \\\midrule
+solstice\_points\_color					& \ccbox{0.9,0.6,0.2} &  solstice points (of date). \\\midrule
+ecliptic\_poles\_color					& \ccbox{0.9,0.6,0.2} &  ecliptic poles (of date). \\\midrule
+precession\_circles\_color 				& \ccbox{0.9,0.6,0.2} &  precession circles. \\\midrule
+%% Equatorial J2000 group: blue tones (standard atlas coordinates)
+equator\_J2000\_color      				& \ccbox{0.2,0.2,0.6} &  equator line (J2000.0 frame). \\\midrule
+equatorial\_J2000\_color 				& \ccbox{0.1,0.1,0.5} &  equatorial grid (J2000.0 frame). \\\midrule
+celestial\_J2000\_poles\_color			& \ccbox{0.2,0.2,0.6} &  celestial poles (J2000.0 frame). \\\midrule
+%% Equatorial of date group: brighter blue
+equator\_color           				& \ccbox{0.3,0.5,1.0} &  equator line (of date). \\\midrule
+equatorial\_color        				& \ccbox{0.2,0.3,0.8} &  equatorial grid (of date). \\\midrule
+celestial\_poles\_color					& \ccbox{0.3,0.5,1.0} &  celestial poles (of date). \\\midrule
+circumpolar\_circles\_color 			& \ccbox{0.3,0.5,1.0} &  circumpolar circles. \\\midrule
+%% Galaxy: brownish, not too strong.
+galactic\_color          				& \ccbox{0.3,0.2,0.1} &  galactic grid. \\\midrule
+galactic\_equator\_color 				& \ccbox{0.5,0.3,0.1} &  galactic equator line. \\\midrule
+galactic\_poles\_color					& \ccbox{0.5,0.3,0.1} &  galactic poles. \\\midrule
+%% Supergalactic group: dark grey, should be less apparent than galactic.
+supergalactic\_color       				& \ccbox{0.2,0.2,0.2} &  supergalactic grid. \\\midrule
+supergalactic\_equator\_color 			& \ccbox{0.4,0.4,0.4} &  supergalactic equator line. \\\midrule
+supergalactic\_poles\_color				& \ccbox{0.4,0.4,0.4} &  supergalactic poles. \\\midrule
+%% Horizon and altazimuthal grid: greenish.
+azimuthal\_color         				& \ccbox{0.0,0.3,0.2} &  azimuthal grid. \\\midrule
 horizon\_color           				& \ccbox{0.2,0.6,0.2} &  horizon line. \\\midrule
+meridian\_color          				& \ccbox{0.2,0.6,0.2} &  meridian line. \\\midrule
+prime\_vertical\_color   				& \ccbox{0.2,0.5,0.2} &  prime vertical. \\\midrule
+zenith\_nadir\_color					& \ccbox{0.2,0.6,0.2} &  zenith and nadir. \\\midrule
+cardinal\_color          				& \ccbox{0.8,0.2,0.1} &  cardinal points. \\\midrule
+%% A mix of equatorial (blueish) and ecliptical (reddish)...
+colures\_color 			 				& \ccbox{0.5,0.0,0.5} &  colures. \\\midrule
+longitude\_color	     				& \ccbox{0.2,0.4,0.4} &  opposition/conjunction longitude. \\\midrule
+%% Constellations
 const\_lines\_color      				& \ccbox{0.2,0.2,0.6} &  constellation lines. \\\midrule
 const\_names\_color      				& \ccbox{0.4,0.6,0.9} &  constellation names. \\\midrule
 const\_boundary\_color   				& \ccbox{0.3,0.1,0.1} &  constellation boundaries. \\\midrule
-star\_label\_color       				& \ccbox{0.4,0.3,0.5} &  star labels. \\\midrule
-cardinal\_color          				& \ccbox{0.8,0.2,0.1} &  cardinal points. \\\midrule
-planet\_names\_color     				& \ccbox{0.5,0.5,0.7} &  planet names. \\\midrule
-planet\_pointers\_color  				& \ccbox{1.0,0.3,0.3} &  planet pointers. \\\midrule
-sso\_orbits\_color    					& \ccbox{0.7,0.2,0.2} &  default orbits. \\\midrule
-major\_planet\_orbits\_color			& \ccbox{0.7,0.2,0.2} &  major planet orbits. \\\midrule
-minor\_planet\_orbits\_color			& \ccbox{0.7,0.5,0.5} &  minor planet orbits. \\\midrule
-dwarf\_planet\_orbits\_color			& \ccbox{0.7,0.5,0.5} &  dwarf planet orbits. \\\midrule
-moon\_orbits\_color    					& \ccbox{0.7,0.2,0.2} &  moon of planet orbits. \\\midrule
-cubewano\_orbits\_color    				& \ccbox{0.7,0.5,0.5} &  cubewano orbits. \\\midrule
-plutino\_orbits\_color    				& \ccbox{0.7,0.5,0.5} &  plutino orbits. \\\midrule
-sdo\_orbits\_color    		  			& \ccbox{0.7,0.5,0.5} &  scattered disk object orbits. \\\midrule
-oco\_orbits\_color    		  			& \ccbox{0.7,0.5,0.5} &  Oort cloud object orbits. \\\midrule
-comet\_orbits\_color   		  			& \ccbox{0.7,0.8,0.8} &  comet orbits. \\\midrule
-mercury\_orbit\_color  		  			& \ccbox{0.5,0.5,0.5} &  orbit of Mercury. \\\midrule
-venus\_orbit\_color  		  			& \ccbox{0.9,0.9,0.7} &  orbit of Venus. \\\midrule
-earth\_orbit\_color  		  			& \ccbox{0.0,0.0,1.0} &  orbit of Earth. \\\midrule
-mars\_orbit\_color  		  			& \ccbox{0.8,0.4,0.1} &  orbit of Mars. \\\midrule
-jupiter\_orbit\_color  		  			& \ccbox{1.0,0.6,0.0} &  orbit of Jupiter. \\\midrule
-saturn\_orbit\_color  		  			& \ccbox{1.0,0.8,0.0} &  orbit of Saturn. \\\midrule
-uranus\_orbit\_color  		  			& \ccbox{0.0,0.7,1.0} &  orbit of Uranus. \\\midrule
-neptune\_orbit\_color  		  			& \ccbox{0.0,0.3,1.0} &  orbit of Neptune. \\\midrule
-object\_trails\_color    				& \ccbox{1.0,0.7,0.0} &  planet trails. \\\midrule
-precession\_circles\_color 				& \ccbox{0.9,0.6,0.2} &  precession circles. \\\midrule
-prime\_vertical\_color   				& \ccbox{0.2,0.5,0.2} &  prime vertical. \\\midrule
-longitude\_color	     				& \ccbox{0.2,0.4,0.4} &  opposition/conjunction longitude. \\\midrule
-circumpolar\_circles\_color 			& \ccbox{0.5,0.5,0.7} &  circumpolar circles. \\\midrule
-colures\_color 			 				& \ccbox{0.5,0.5,0.7} &  colures. \\\midrule
-celestial\_J2000\_poles\_color			& \ccbox{0.5,0.5,0.7} &  celestial poles (J2000.0 frame). \\\midrule
-celestial\_poles\_color					& \ccbox{0.5,0.5,0.7} &  celestial poles. \\\midrule
-zenith\_nadir\_color					& \ccbox{0.5,0.5,0.7} &  zenith and nadir. \\\midrule
-ecliptic\_J2000\_poles\_color			& \ccbox{0.5,0.5,0.7} &  ecliptic poles (J2000.0 frame). \\\midrule
-ecliptic\_poles\_color					& \ccbox{0.5,0.5,0.7} &  ecliptic poles. \\\midrule
-galactic\_poles\_color					& \ccbox{0.5,0.5,0.7} &  galactic poles. \\\midrule
-supergalactic\_poles\_color				& \ccbox{0.5,0.5,0.7} &  supergalactic poles. \\\midrule
-equinox\_J2000\_points\_color			& \ccbox{0.5,0.5,0.7} &  equinox points (J2000.0 frame). \\\midrule
-equinox\_points\_color					& \ccbox{0.5,0.5,0.7} &  equinox points. \\\midrule
-solstice\_J2000\_points\_color			& \ccbox{0.5,0.5,0.7} &  solstice points (J2000.0 frame). \\\midrule
-solstice\_points\_color					& \ccbox{0.5,0.5,0.7} &  solstice points. \\\midrule
-telescope\_circle\_color 				& \ccbox{0.6,0.4,0.0} &  telescope location indicator. \\\midrule
-telescope\_label\_color  				& \ccbox{0.6,0.4,0.0} &  telescope label (next to location circle). \\\midrule
-script\_console\_keyword\_color  		& \ccbox{1.0,0.0,1.0} & syntax highlight for keywords in the script console. \\\midrule
-script\_console\_module\_color   		& \ccbox{0.0,1.0,1.0} & syntax highlight for modules in the script console. \\\midrule
-script\_console\_comment\_color  		& \ccbox{1.0,1.0,0.0} & syntax highlight for comments in the script console. \\\midrule
-script\_console\_function\_color 		& \ccbox{0.0,1.0,0.0} & syntax highlight for functions in the script console. \\\midrule
-script\_console\_constant\_color 		& \ccbox{1.0,0.5,0.5} & syntax highlight for constants in the script console. \\\midrule
-daylight\_text\_color            		& \ccbox{0.0,0.0,0.0} & info text at daylight. \\\midrule
+%% DSO
 dso\_label\_color                       & \ccbox{0.2,0.6,0.7} & deep-sky objects labels. \\\midrule
 dso\_circle\_color                      & \ccbox{1.0,0.7,0.2} & deep-sky objects symbols, if not of the types below. \\\midrule
 dso\_galaxy\_color                      & \ccbox{1.0,0.2,0.2} & galaxies symbols. \\\midrule
@@ -199,7 +181,36 @@ dso\_stellar\_association\_color        & \ccbox{1.0,1.0,0.1} & stellar associat
 dso\_star\_cloud\_color                 & \ccbox{1.0,1.0,0.1} & star clouds symbols. \\\midrule
 dso\_star\_color                        & \ccbox{1.0,0.7,0.2} & star symbols. \\\midrule
 dso\_emission\_object\_color            & \ccbox{1.0,0.7,0.2} & emission objects symbols. \\\midrule
-dso\_young\_stellar\_object\_color      & \ccbox{1.0,0.7,0.2} & young stellar objects symbols. \\
+dso\_young\_stellar\_object\_color      & \ccbox{1.0,0.7,0.2} & young stellar objects symbols. \\\midrule
+star\_label\_color       				& \ccbox{0.4,0.3,0.5} &  star labels. \\\midrule
+planet\_names\_color     				& \ccbox{0.5,0.5,0.7} &  planet names. \\\midrule
+planet\_pointers\_color  				& \ccbox{1.0,0.3,0.3} &  planet pointers. \\\midrule
+sso\_orbits\_color    					& \ccbox{0.7,0.2,0.2} &  default orbits. \\\midrule
+major\_planet\_orbits\_color			& \ccbox{0.7,0.2,0.2} &  major planet orbits. \\\midrule
+minor\_planet\_orbits\_color			& \ccbox{0.7,0.5,0.5} &  minor planet orbits. \\\midrule
+dwarf\_planet\_orbits\_color			& \ccbox{0.7,0.5,0.5} &  dwarf planet orbits. \\\midrule
+moon\_orbits\_color    					& \ccbox{0.7,0.2,0.2} &  moon of planet orbits. \\\midrule
+cubewano\_orbits\_color    				& \ccbox{0.7,0.5,0.5} &  cubewano orbits. \\\midrule
+plutino\_orbits\_color    				& \ccbox{0.7,0.5,0.5} &  plutino orbits. \\\midrule
+sdo\_orbits\_color    		  			& \ccbox{0.7,0.5,0.5} &  scattered disk object orbits. \\\midrule
+oco\_orbits\_color    		  			& \ccbox{0.7,0.5,0.5} &  Oort cloud object orbits. \\\midrule
+comet\_orbits\_color   		  			& \ccbox{0.7,0.8,0.8} &  comet orbits. \\\midrule
+mercury\_orbit\_color  		  			& \ccbox{0.5,0.5,0.5} &  orbit of Mercury. \\\midrule
+venus\_orbit\_color  		  			& \ccbox{0.9,0.9,0.7} &  orbit of Venus. \\\midrule
+earth\_orbit\_color  		  			& \ccbox{0.0,0.0,1.0} &  orbit of Earth. \\\midrule
+mars\_orbit\_color  		  			& \ccbox{0.8,0.4,0.1} &  orbit of Mars. \\\midrule
+jupiter\_orbit\_color  		  			& \ccbox{1.0,0.6,0.0} &  orbit of Jupiter. \\\midrule
+saturn\_orbit\_color  		  			& \ccbox{1.0,0.8,0.0} &  orbit of Saturn. \\\midrule
+uranus\_orbit\_color  		  			& \ccbox{0.0,0.7,1.0} &  orbit of Uranus. \\\midrule
+neptune\_orbit\_color  		  			& \ccbox{0.0,0.3,1.0} &  orbit of Neptune. \\\midrule
+object\_trails\_color    				& \ccbox{1.0,0.7,0.0} &  planet trails. \\\midrule
+telescope\_circle\_color 				& \ccbox{0.6,0.4,0.0} &  telescope location indicator. \\\midrule
+telescope\_label\_color  				& \ccbox{0.6,0.4,0.0} &  telescope label (next to location circle). \\\midrule
+script\_console\_keyword\_color  		& \ccbox{1.0,0.0,1.0} & syntax highlight for keywords in the script console. \\\midrule
+script\_console\_module\_color   		& \ccbox{0.0,1.0,1.0} & syntax highlight for modules in the script console. \\\midrule
+script\_console\_comment\_color  		& \ccbox{1.0,1.0,0.0} & syntax highlight for comments in the script console. \\\midrule
+script\_console\_function\_color 		& \ccbox{0.0,1.0,0.0} & syntax highlight for functions in the script console. \\\midrule
+script\_console\_constant\_color 		& \ccbox{1.0,0.5,0.5} & syntax highlight for constants in the script console. \\
 \bottomrule
 \end{longtabu}
 

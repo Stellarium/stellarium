@@ -554,16 +554,14 @@ void OcularsGuiPanel::updateOcularControls()
 	}
 	else
 	{
-		double focalLength = ocular->effectiveFocalLength();
-		QString focalLengthString = QString(q_("Ocular FL: %1 mm")).arg(focalLength);
+		QString focalLengthString = QString(q_("Ocular FL: %1 mm")).arg(QString::number(ocular->effectiveFocalLength(), 'f', 1));
 		fieldOcularFl->setPlainText(focalLengthString);
 		fieldOcularFl->setToolTip(q_("Effective focal length of the ocular"));
 		fieldOcularFl->setPos(posX, posY);
 		posY += fieldOcularFl->boundingRect().height();
 		widgetHeight += fieldOcularFl->boundingRect().height();
 
-		double apparentFov = ocular->appearentFOV();
-		QString apparentFovString = QString::number(apparentFov);
+		QString apparentFovString = QString::number(ocular->appearentFOV(), 'f', 2);
 		apparentFovString.append(QChar(0x00B0));// Degree sign
 		QString apparentFovLabel = QString(q_("Ocular aFOV: %1"))
 				.arg(apparentFovString);
@@ -857,9 +855,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 			fieldExitPupil->setToolTip(q_("Exit pupil provided by this ocular/lens/telescope combination"));
 		}
 
-		//WTF? Rounding?
-		double magnification = ((int)(ocular->magnification(telescope, lens) * 10.0)) / 10.0;
-		QString magnificationString = QString::number(magnification);
+		double mag = ocular->magnification(telescope, lens);
+		QString magnificationString = QString::number(mag, 'f', 1);
 		magnificationString.append(QChar(0x00D7));
 		QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
 		fieldMagnification->setPlainText(magnificationLabel);
@@ -867,7 +864,6 @@ void OcularsGuiPanel::updateTelescopeControls()
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 
-		double mag = ocular->magnification(telescope, lens);
 		if (mag>0)
 		{
 			double exitPupil = telescope->diameter()/mag;
@@ -880,8 +876,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 			widgetHeight += fieldExitPupil->boundingRect().height();
 		}
 
-		double fov = ((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0;
-		QString fovString = QString::number(fov) + QChar(0x00B0);
+		QString fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 1) + QChar(0x00B0);
 		QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
 		fieldFov->setPlainText(fovLabel);
 		fieldFov->setPos(posX, posY);
