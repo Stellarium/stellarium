@@ -159,8 +159,7 @@ zenith_nadir_color                  = 0.2,0.6,0.2
 cardinal_color                      = 0.8,0.2,0.1
 # A mix of equatorial (blueish) and ecliptical (reddish)...
 colures_color                       = 0.5,0.0,0.5
-# This is a very confusing name. Should at least be oc_longitude_color
-longitude_color                     = 0.2,0.4,0.4
+oc_longitude_color                  = 0.2,0.4,0.4
 
 # Constellations
 const_lines_color                   = 0.2,0.2,0.6

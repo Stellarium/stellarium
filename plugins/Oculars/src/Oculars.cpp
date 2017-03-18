@@ -1790,11 +1790,7 @@ void Oculars::paintText(const StelCore* core)
 	{
 		telescope = telescopes[selectedTelescopeIndex];
 	}
-	Lens *lens = NULL;
-	if(selectedLensIndex != -1)
-	{
-		lens = lense[selectedLensIndex];
-	}
+	Lens *lens = selectedLens();
 
 	// set up the color and the GL state
 	painter.setColor(0.8f, 0.48f, 0.f, 1.f);
@@ -1835,13 +1831,12 @@ void Oculars::paintText(const StelCore* core)
 		
 		if (!ocular->isBinoculars())
 		{
-			QString eFocalLength = QVariant(ocular->effectiveFocalLength()).toString();
 			// TRANSLATORS: FL = Focal length
-			QString eFocalLengthLabel = QString(q_("Ocular FL: %1 mm")).arg(eFocalLength);
+			QString eFocalLengthLabel = QString(q_("Ocular FL: %1 mm")).arg(QString::number(ocular->effectiveFocalLength(), 'f', 1));
 			painter.drawText(xPosition, yPosition, eFocalLengthLabel);
 			yPosition-=lineHeight;
 			
-			QString ocularFov = QString::number(ocular->appearentFOV());
+			QString ocularFov = QString::number(ocular->appearentFOV(), 'f', 2);
 			ocularFov.append(QChar(0x00B0));//Degree sign
 			// TRANSLATORS: aFOV = apparent field of view
 			QString ocularFOVLabel = QString(q_("Ocular aFOV: %1")).arg(ocularFov);
@@ -1869,44 +1864,40 @@ void Oculars::paintText(const StelCore* core)
 			painter.drawText(xPosition, yPosition, lensNumberLabel);
 			yPosition-=lineHeight;
 
-			// The telescope
-			QString telescopeString = "";
-			QString magString = "";
-			QString fovString = "";
-			QString exitPupil = "";
-
 			if (telescope!=NULL)
 			{
 				QString telescopeName = telescope->name();
+				QString telescopeString = "";
 
 				if (telescopeName.isEmpty())
 					telescopeString = QString("%1").arg(selectedTelescopeIndex);
 				else
 					telescopeString = QString("%1: %2").arg(selectedTelescopeIndex).arg(telescopeName);
 
+				painter.drawText(xPosition, yPosition, QString(q_("Telescope #%1")).arg(telescopeString));
+				yPosition-=lineHeight;
+
 				// General info
-				if (lens!=NULL)
+				double mag = ocular->magnification(telescope, lens);
+				QString magString = QString::number(mag, 'f', 1);
+				magString.append(QChar(0x00D7));//Multiplication sign
+
+				painter.drawText(xPosition, yPosition, QString(q_("Magnification: %1")).arg(magString));
+				yPosition-=lineHeight;
+
+				if (mag>0)
 				{
-					magString = QString::number(((int)(ocular->magnification(telescope, lens) * 10.0)) / 10.0);
-					magString.append(QChar(0x00D7));//Multiplication sign
+					QString exitPupil = QString::number(telescope->diameter()/mag, 'f', 2);
 
-					fovString = QString::number(((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0);
-					fovString.append(QChar(0x00B0));//Degree sign
-
-					exitPupil = QString::number(telescope->diameter()/ocular->magnification(telescope, lens), 'f', 2);
+					painter.drawText(xPosition, yPosition, QString(q_("Exit pupil: %1 mm")).arg(exitPupil));
+					yPosition-=lineHeight;
 				}
+
+				QString fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 5);
+				fovString.append(QChar(0x00B0));//Degree sign
+
+				painter.drawText(xPosition, yPosition, QString(q_("FOV: %1")).arg(fovString));
 			}
-
-			painter.drawText(xPosition, yPosition, QString(q_("Telescope #%1")).arg(telescopeString));
-			yPosition-=lineHeight;
-
-			painter.drawText(xPosition, yPosition, QString(q_("Magnification: %1")).arg(magString));
-			yPosition-=lineHeight;
-
-			painter.drawText(xPosition, yPosition, QString(q_("Exit pupil: %1 mm")).arg(exitPupil));
-			yPosition-=lineHeight;
-
-			painter.drawText(xPosition, yPosition, QString(q_("FOV: %1")).arg(fovString));
 		}
 	}
 
@@ -1918,7 +1909,7 @@ void Oculars::paintText(const StelCore* core)
 		QString telescopeName = "";
 		double fovX = 0.0;
 		double fovY = 0.0;
-		if (telescope!=NULL && lens!=NULL)
+		if (telescope!=NULL)
 		{
 			fovX = ccd->getActualFOVx(telescope, lens);
 			fovY = ccd->getActualFOVy(telescope, lens);

@@ -644,7 +644,7 @@ void ViewDialog::askLongitudeLineColor()
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		GETSTELMODULE(GridLinesMgr)->setColorLongitudeLine(vColor);
-		StelApp::getInstance().getSettings()->setValue("color/longitude_color", StelUtils::vec3fToStr(vColor));
+		StelApp::getInstance().getSettings()->setValue("color/oc_longitude_color", StelUtils::vec3fToStr(vColor));
 		ui->colorLongitudeLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
