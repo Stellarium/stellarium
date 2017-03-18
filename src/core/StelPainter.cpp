@@ -741,6 +741,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		//important to call this before GL state restore
 		painter.end();
 
+		//fix for bug 1628072 caused by QTBUG-56798
+#ifndef QT_NO_DEBUG
+		StelOpenGL::clearGLErrors();
+#endif
+
 		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
 		glState.apply();
 	}
