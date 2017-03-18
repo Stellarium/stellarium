@@ -27,6 +27,7 @@
 
 typedef QList<StelLocation> LocationList;
 typedef QMap<QString,StelLocation> LocationMap;
+typedef QMap<QByteArray,QByteArray> TimezoneNameMap;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -90,6 +91,16 @@ public slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
 
+	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
+	//! If timezone name starts with "UTC", always return unchanged.
+	//! This is required to store timezone names exactly as we know them, and not mix ours and corrent-IANA spelling flavour.
+	static QString sanitizeTimezoneStringForLocationDB(QString tzString);
+	//! Attempt to translate a timezone name from those used in Stellarium's location database to a name which is known
+	//! to Qt at runtime as result of QTimeZone::availableTimeZoneIds(). That list may be updated by OS anytime and is known to differ
+	//! between OSes. Some spellings may be different, or in some cases some names get simply translated to "UTC+HH:MM" style.
+	//! The empty string gets translated to "UTC".
+	static QString sanitizeTimezoneStringFromLocationDB(QString dbString);
+
 signals:
 	//! Can be used to detect changes to the full location list
 	//! i.e. when the user added or removed locations
@@ -104,6 +115,16 @@ private:
 
 	//! The list of all loaded locations
 	LocationMap locations;
+	//! A Map which has to be used to replace, system- and Qt-version dependent,
+	//! timezone names from our location database to the code names currently used by Qt.
+	//! Required to avoid https://bugs.launchpad.net/stellarium/+bug/1662132,
+	//! details on IANA names with Qt at http://doc.qt.io/qt-5/qtimezone.html.
+	//! This has nothing to do with the Windows timezone names!
+	//! Key: TZ name as used in our database.
+	//! Value: TZ name as may be available instead in the currently running version of Qt.
+	//! The list has to be maintained based on empirical observations.
+	//! @todo Make it load from a configurable external file.
+	static TimezoneNameMap locationDBToIANAtranslations;
 	
 	StelLocation lastResortLocation;
 };

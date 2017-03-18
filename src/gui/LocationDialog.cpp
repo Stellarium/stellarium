@@ -245,7 +245,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 
-	QString tz = loc.timeZone;
+	QString tz = loc.ianaTimeZone;
 	if (loc.planetName=="Earth" && tz.isEmpty())
 		tz = "system_default";
 	if (!customTimeZone.isEmpty())
@@ -384,10 +384,14 @@ void LocationDialog::populateTimeZonesList()
 	QComboBox* timeZones = ui->timeZoneNameComboBox;
 	// Return a list of all the known time zone names (from Qt)
 	QStringList tzNames;
-	QList<QByteArray> tzList = QTimeZone::availableTimeZoneIds();
+	QList<QByteArray> tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
 	QList<QByteArray>::iterator i;
 	for (i = tzList.begin(); i!= tzList.end(); ++i)
+	{
 		tzNames.append(*i);
+		// Activate this to get a list of known TZ names...
+		//qDebug() << "Qt/IANA TZ entry: " << *i;
+	}
 
 	tzNames.sort();
 
@@ -397,7 +401,7 @@ void LocationDialog::populateTimeZonesList()
 	QVariant selectedTzId = timeZones->itemData(index);
 	timeZones->clear();
 	//For each time zone, display the localized name and store the original as user
-	//data. Unfortunately, there's no other way to do this than with a cycle.
+	//data. Unfortunately, there's no other way to do this than with a loop.
 	foreach(const QString& name, tzNames)
 	{
 		timeZones->addItem(name, name);
@@ -407,6 +411,8 @@ void LocationDialog::populateTimeZonesList()
 	timeZones->addItem(q_("System default"), "system_default");
 	//Restore the selection
 	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
+	// TODO: Handle notfound!?
+	Q_ASSERT(index!=-1);
 	timeZones->setCurrentIndex(index);
 	timeZones->blockSignals(false);
 
@@ -433,9 +439,12 @@ StelLocation LocationDialog::locationFromFields() const
 
 	index = ui->timeZoneNameComboBox->currentIndex();
 	if (index < 0)
-		loc.timeZone = QString(); //As returned by QComboBox::currentText()
+		loc.ianaTimeZone = QString(); //As returned by QComboBox::currentText()
 	else
-		loc.timeZone = ui->timeZoneNameComboBox->itemData(index).toString();
+	{
+		QString tz=ui->timeZoneNameComboBox->itemData(index).toString();
+		loc.ianaTimeZone = tz;
+	}
 
 	return loc;
 }
@@ -640,7 +649,7 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		StelLocation loc = core->getCurrentLocation();
-		QString tz = loc.timeZone;
+		QString tz = loc.ianaTimeZone;
 		if (loc.planetName=="Earth" && tz.isEmpty())
 			tz = "system_default";
 		int idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
