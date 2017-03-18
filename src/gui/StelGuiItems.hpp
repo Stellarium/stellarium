@@ -118,6 +118,9 @@ public:
 	//! Set the background pixmap of the button.
 	void setBackgroundPixmap(const QPixmap& newBackground);
 
+	//! While configuring buttons, call this with true when after key release
+	//! focus should go back to the sky (typical for bottom buttons;
+	//! left buttons call panels which receive focus after button press, so those should be configured with b=false)
 	void setFocusOnSky(bool b) { flagChangeFocus=b; }
 
 signals:

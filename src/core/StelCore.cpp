@@ -187,7 +187,7 @@ void StelCore::init()
 	if (!ctz.isEmpty())
 		setUseCustomTimeZone(true);
 	else
-		ctz = getCurrentLocation().timeZone;
+		ctz = getCurrentLocation().ianaTimeZone;
 	setCurrentTimeZone(ctz);
 
 	// Delta-T stuff

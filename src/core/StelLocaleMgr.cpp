@@ -364,6 +364,13 @@ QString StelLocaleMgr::countryCodeToString(const QString& countryCode)
 	return (i!=countryCodeToStringMap.constEnd()) ? i.value() : QString();
 }
 
+// Convert a string to 2 letter country code
+QString StelLocaleMgr::countryNameToCode(const QString& countryName)
+{
+	return countryCodeToStringMap.key(countryName, "??");
+}
+
+
 // Return a list of all the known country names
 QStringList StelLocaleMgr::getAllCountryNames()
 {
