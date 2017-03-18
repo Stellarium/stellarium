@@ -345,6 +345,13 @@ protected:
 
 		//important to call this, or Qt may have invalid state after we have drawn (wrong textures, etc...)
 		painter->beginNativePainting();
+
+		//fix for bug 1628072 caused by QTBUG-56798
+#ifndef QT_NO_DEBUG
+		StelOpenGL::clearGLErrors();
+#endif
+
+
 		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 
 		//clear the buffer (not strictly required for us because we repaint all pixels, but should improve perf on tile-based renderers)
@@ -1317,6 +1324,11 @@ void StelMainView::closeEvent(QCloseEvent* event)
 //! Delete openGL textures (to call before the GLContext disappears)
 void StelMainView::deinitGL()
 {
+	//fix for bug 1628072 caused by QTBUG-56798
+#ifndef QT_NO_DEBUG
+	StelOpenGL::clearGLErrors();
+#endif
+
 	stelApp->deinit();
 	delete gui;
 	gui = NULL;

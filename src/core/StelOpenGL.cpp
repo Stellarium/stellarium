@@ -49,3 +49,9 @@ int StelOpenGL::checkGLErrors(const char *file, int line)
 	}
 	return errors;
 }
+
+void StelOpenGL::clearGLErrors()
+{
+	while(mainContext->functions()->glGetError()!=GL_NO_ERROR)
+	{ }
+}
