@@ -903,7 +903,7 @@
            <item>
             <widget class="QLabel" name="labelFlaresPredictionDepth">
              <property name="text">
-              <string>Flares prediction depth (days):</string>
+              <string>Flare prediction (days):</string>
              </property>
             </widget>
            </item>
@@ -925,7 +925,7 @@
          <item>
           <widget class="QPushButton" name="pushButtonPredictIridiumFlares">
            <property name="toolTip">
-            <string>Calculations requires the time, please be in patience</string>
+            <string>Calculations require time, please be patient</string>
            </property>
            <property name="text">
             <string>Predict Iridium flares</string>
