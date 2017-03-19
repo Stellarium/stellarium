@@ -1191,7 +1191,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return -2.09 + d + phaseDeg*(0.323  - 0.00066*phaseDeg);
 				if (englishName=="Callisto")
 					return -1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg);
-				if (absoluteMagnitude!=-99.)
+				if ((absoluteMagnitude!=-99.) && (englishName!="Moon"))
 					return absoluteMagnitude+d;
 
 				break;
@@ -1324,7 +1324,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		}
 	}
 
-	// This formula seems to give wrong results. Source unknown.
+	// This formula source is unknown. But this is actually used even for the Moon!
 	const double p = (1.0 - phaseAngle/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 	double F = 2.0 * albedo * radius * radius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
 	return -26.73 - 2.5 * std::log10(F);
