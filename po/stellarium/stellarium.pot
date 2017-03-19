@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 13:42+0700\n"
+"POT-Creation-Date: 2017-03-19 15:38+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6949,57 +6949,62 @@ msgstr ""
 msgid "Cleanup ephemerides"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:541
+#: src/ui_astroCalcDialog.h:542 src/ui_astroCalcDialog.h:550
+#: plugins/Satellites/src/ui_satellitesDialog.h:822
+msgid "Calculations require time, please be patient"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:544
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:542
+#: src/ui_astroCalcDialog.h:545
 msgid "Save ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:543
+#: src/ui_astroCalcDialog.h:546
 msgid "Time step:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:544 src/ui_astroCalcDialog.h:551
+#: src/ui_astroCalcDialog.h:547 src/ui_astroCalcDialog.h:557
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:545 src/ui_astroCalcDialog.h:548
+#: src/ui_astroCalcDialog.h:548 src/ui_astroCalcDialog.h:554
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:546
+#: src/ui_astroCalcDialog.h:552
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:547
+#: src/ui_astroCalcDialog.h:553
 msgid "Save phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:549
+#: src/ui_astroCalcDialog.h:555
 msgid "Between objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:550
+#: src/ui_astroCalcDialog.h:556
 msgid "and"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:552
+#: src/ui_astroCalcDialog.h:558
 msgid "Maximum allowed separation:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:554
+#: src/ui_astroCalcDialog.h:560
 msgid "Value in decimal degrees"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:556
+#: src/ui_astroCalcDialog.h:562
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:557
+#: src/ui_astroCalcDialog.h:563
 msgid "Astronomical calculations"
 msgstr ""
 
@@ -9128,10 +9133,6 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:820
 msgid "Flare prediction (days):"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:822
-msgid "Calculations require time, please be patient"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
