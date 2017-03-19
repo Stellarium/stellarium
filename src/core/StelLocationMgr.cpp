@@ -69,6 +69,7 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("Africa/Asmara",     "Africa/Asmera");
 		locationDBToIANAtranslations.insert("Atlantic/Faroe",    "Atlantic/Faeroe");
 		locationDBToIANAtranslations.insert("Pacific/Pohnpei",   "Pacific/Ponape");
+		locationDBToIANAtranslations.insert("Pacific/Norfolk",   "UTC+11:00");
 		locationDBToIANAtranslations.insert("Pacific/Pitcairn",  "UTC-08:00");
 		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18
 		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon"); // UTC+6:30 Missing on Ubuntu/Qt5.5.1.
