@@ -376,13 +376,13 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdResX, 5);
 	ccdMapper->addMapping(ui->ccdResY, 6);
 	ccdMapper->addMapping(ui->ccdRotAngle, 7);
-	ccdMapper->addMapping(ui->OAG_checkBox, 8);
-	ccdMapper->addMapping(ui->OAGPrismH, 9);
-	ccdMapper->addMapping(ui->OAGPrismW, 10);
-	ccdMapper->addMapping(ui->OAGDist, 11);
-	ccdMapper->addMapping(ui->OAGPrismPA, 12);
-	ccdMapper->addMapping(ui->ccdBinningX, 13);
-	ccdMapper->addMapping(ui->ccdBinningY, 14);
+	ccdMapper->addMapping(ui->ccdBinningX, 8);
+	ccdMapper->addMapping(ui->ccdBinningY, 9);
+	ccdMapper->addMapping(ui->OAG_checkBox, 10);
+	ccdMapper->addMapping(ui->OAGPrismH, 11);
+	ccdMapper->addMapping(ui->OAGPrismW, 12);
+	ccdMapper->addMapping(ui->OAGDist, 13);
+	ccdMapper->addMapping(ui->OAGPrismPA, 14);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -478,7 +478,8 @@ void OcularDialog::createDialogContent()
 
 void OcularDialog::selectedCCDRotationAngleChanged()
 {
-	emit(plugin->selectedCCDChanged());
+	if (plugin->getEnableCCD())
+		emit(plugin->selectedCCDChanged());
 }
 
 void OcularDialog::setLabelsDescriptionText(bool state)
