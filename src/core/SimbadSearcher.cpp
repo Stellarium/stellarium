@@ -176,8 +176,5 @@ SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QStrin
 
 	url += "simbad/sim-script?script=";
 	url += ba.constData();
-	if (networkMgr->networkAccessible()==QNetworkAccessManager::Accessible)
-		return new SimbadLookupReply(url, networkMgr, delayMs);
-	else
-		return NULL;
+	return new SimbadLookupReply(url, networkMgr, delayMs);
 }
