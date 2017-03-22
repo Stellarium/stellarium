@@ -149,6 +149,7 @@ void LocationDialog::createDialogContent()
 
 	setFieldsFromLocation(currentLocation);
 
+	connect(ui->gpsPushButton, SIGNAL(clicked(bool)), this, SLOT(gpsQueryLocation()));
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
@@ -689,7 +690,21 @@ void LocationDialog::ipQueryLocation(bool state)
 	}
 	else
 		conf->setValue("init_location/location", StelApp::getInstance().getCore()->getCurrentLocation().getID());
+}
 
+// called when the user clicks on the GPS Query button
+void LocationDialog::gpsQueryLocation()
+{
+	disconnectEditSignals();
+	resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
+	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+	locMgr.locationFromGPS(); // This just triggers asynchronous lookup.
+	ui->useAsDefaultLocationCheckBox->setChecked(false);
+	ui->pushButtonReturnToDefault->setEnabled(true);
+	ui->useCustomTimeZoneCheckBox->setChecked(true);
+	updateTimeZoneControls(true);
+	connectEditSignals();
+	ui->citySearchLineEdit->setFocus();
 }
 
 // called when user clicks "reset list"
