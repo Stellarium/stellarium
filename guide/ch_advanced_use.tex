@@ -209,6 +209,8 @@ in appendix~\ref{sec:config.ini} Configuration File.
 \section{Getting Extra Data}
 \label{sec:ExtraData}
 
+\subsection{More Stars}
+\label{sec:ExtraData:stars}
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
 in the \emph{Tools} tab of the \emph{Configuration} dialog.
@@ -272,6 +274,32 @@ will always be used.
 \paragraph{Acknowledgement}
 The optional use of DE430/431 has been supported by the ESA Summer of
 Code 2015 initiative.
+
+\subsection{GPS Position}
+\label{sec:ExtraData:GPSD}
+
+You can receive your location from a GPS device. 
+Stellarium does not connect directly to a GPS USB device, serial device, 
+bluetooth device, etc., but uses a connection to a GPSD daemon running on a computer 
+in your network which provides GPS services for any interested application. In most cases, 
+this will be a GPSD running on your localhost, receiving data from some GPS device 
+plugged in via USB.
+
+A few hints: 
+On Ubuntu, USB hotplug devices are handled by the \program{udev} daemon which detects newly plugged-in 
+devices and creates device files in the \file{/dev} directory. Unfortunately, most GPS devices use the Prolific 2330 
+chipset in their serial-to-USB converter and are identified as such. In ... the file 60-gps.rules find the commented 
+line and re-activate it. If you have such an USB GPS mouse and USB-to-serial converters for other purposes, you must solve 
+the ``udev crisis'' in some other way to get gpsd running. 
+
+For Windows, there is a project\footnote{\url{https://code.google.com/archive/p/gpsd-4-win/}} which provides a \program{gpsd} 
+running with the aid of cygwin for Windows. The binaries are very much outdated, but you may want to utilize the BAT file with 
+a current version of cygwin.
+... Download and install. 
+TODO: ADD INSTRUCTIONS:
+
+
+
 
 
 \chapter{Command Line Options}

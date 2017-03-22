@@ -78,6 +78,11 @@ public:
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
+	//! Find location via query of a GPSD (GPS daemon) or directly-attached serial NMEA-183 emitter.
+	//! When using GPSD not on localhost, don't forget the -G switch!
+	void locationFromGPS();
+
+
 	//! Find list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
 	LocationMap pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
 	//! Find list of locations in a particular country only.
@@ -127,6 +132,11 @@ private:
 	static TimezoneNameMap locationDBToIANAtranslations;
 	
 	StelLocation lastResortLocation;
+
+	//! used while a GPS location query is being processed.
+	//! 0 when dormant, will count up while querying the GPSD answers.
+	//! After 10 trials, lookup will be declared unsuccessful.
+	int gpsLocationQueryActive;
 };
 
 #endif // _STELLOCATIONMGR_HPP_
