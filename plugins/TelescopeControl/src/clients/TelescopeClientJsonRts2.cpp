@@ -19,6 +19,7 @@
  */
 
 #include "QByteArray"
+#include "QJsonArray"
 #include "QJsonDocument"
 #include "QJsonParseError"
 #include "QJsonObject"
@@ -30,9 +31,8 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	: TelescopeClient(name)
 	, networkManager(new QNetworkAccessManager)
 	, equinox(eq)
-	, port(0)
-	, address("")
 	, baseurl("http://localhost:8889/")
+	, telName("")
 {
 	// Example params:
 	// petr:test@localhost:8889/tel
@@ -48,19 +48,21 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 
 	QUrl rurl(baseurl);
 
-	rurl.setPath(baseurl.path() + "/api/get");
+	rurl.setPath(baseurl.path() + "/api/devbytype");
 
 	QUrlQuery query;
-	query.addQueryItem("d", "B2");
+	query.addQueryItem("t", "2");
 	rurl.setQuery(query);
 
-	request.setUrl(rurl);
+	QNetworkRequest cfgRequest;
+
+	cfgRequest.setUrl(rurl);
 
 	qDebug() << "request url:" << rurl.toString();
 
-	networkManager.get(request);
-
 	connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+
+	networkManager.get(cfgRequest);
 }
 
 TelescopeClientJsonRts2::~TelescopeClientJsonRts2(void)
@@ -71,36 +73,67 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 {
 	qDebug() << "TelescopeRTS2 error" << reply->error();
 	if (reply->error() != QNetworkReply::NoError)
+	{
+		telName = "";
 		return;
+	}
 
 	QByteArray data = reply->readAll();
-	qDebug() << "TelescopeRTS2 data" << (QString) data;
+	//qDebug() << "TelescopeRTS2 data" << (QString) data;
 
 	QJsonDocument doc;
 	QJsonParseError jsonError;
 	doc = QJsonDocument::fromJson(data, &jsonError);
 
-	QJsonObject docObject = doc.object();
-	QJsonObject dObject = docObject["d"].toObject();
-	QJsonObject telObject = dObject["TEL"].toObject();
+	if (reply->url().path().endsWith("/api/devbytype"))
+	{
+		QJsonArray arr = doc.array();
+		telName = arr[0].toString();
 
-	qDebug() << "TelescopeRTS2 object" << doc.isNull() << jsonError.errorString() << jsonError.offset << telObject["ra"].toDouble() << telObject["dec"].toDouble();
+		QUrl rurl(baseurl);
 
-	const double ra = telObject["ra"].toDouble() * M_PI / 180.0;
-	const double dec = telObject["dec"].toDouble() * M_PI / 180.0;
-	const double cdec = cos(dec);
+		rurl.setPath(baseurl.path() + "/api/get");
+
+		QUrlQuery query;
+		query.addQueryItem("d", telName);
+		rurl.setQuery(query);
+
+		request.setUrl(rurl);
+
+		qDebug() << "request url:" << rurl.toString();
+
+		networkManager.get(request);
+	}
+	else if (reply->url().path().endsWith("/api/get"))
+	{
+		QJsonObject docObject = doc.object();
+		QJsonObject dObject = docObject["d"].toObject();
+		QJsonObject telObject = dObject["TEL"].toObject();
+
+		qDebug() << "TelescopeRTS2 object" << doc.isNull() << jsonError.errorString() << jsonError.offset << telObject["ra"].toDouble() << telObject["dec"].toDouble();
+
+		const double ra = telObject["ra"].toDouble() * M_PI / 180.0;
+		const double dec = telObject["dec"].toDouble() * M_PI / 180.0;
+		const double cdec = cos(dec);
 	
-	qDebug() << "TelescopeRTS2 RADEC" << ra << dec;
+		qDebug() << "TelescopeRTS2 RADEC" << ra << dec;
 
-	Vec3d pos(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
-	position = pos;
+		Vec3d pos(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
+		position = pos;
+
+		qDebug() << "request url:" << request.url().toString();
 	
-	networkManager.get(request);
+		networkManager.get(request);
+	}
+	else
+	{
+		qWarning() << "unhandled reply: " << reply->url().toString();
+	}
 }
 
 bool TelescopeClientJsonRts2::isConnected(void) const
 {
-	return true;
+	return telName.isEmpty() == false;
 }
 
 Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore* core) const
@@ -121,7 +154,7 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 	set.setPath(baseurl.path() + "/api/cmd");
 
 	QUrlQuery query;
-	query.addQueryItem("d", "B2");
+	query.addQueryItem("d", telName);
 	query.addQueryItem("c", QString("move+%1+%2").arg(ra * 180 / M_PI).arg(dec * 180 / M_PI));
 	set.setQuery(query);
 
