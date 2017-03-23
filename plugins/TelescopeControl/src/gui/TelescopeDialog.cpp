@@ -176,11 +176,10 @@ void TelescopeDialog::createDialogContent()
 		QList<double> circles;
 		QString serverName;
 		QString portSerial;
-		QString rts2Host;
-		int rts2Port;
+		QString rts2Url;
 		QString rts2Username;
 		QString rts2Password;
-		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial, rts2Host, rts2Port, rts2Username, rts2Password))
+		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial, rts2Url, rts2Username, rts2Password))
 			continue;
 		
 		//Determine the server type
@@ -505,6 +504,10 @@ QString TelescopeDialog::getTypeLabel(ConnectionType type)
 		case ConnectionVirtual:
 			// TRANSLATORS: Telescope connection type
 			typeLabel = N_("virtual");
+			break;
+		case ConnectionRTS2:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("RTS2");
 			break;
 		default:
 			;

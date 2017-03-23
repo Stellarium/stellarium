@@ -35,53 +35,28 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, baseurl("http://localhost:8889/")
 {
 	// Example params:
-	// localhost:10000:petr:test
-	// split into:
-	// host       = localhost
-	// port       = 10000 (int)
-	// login      = petr
-	// password   = test
+	// petr:test@localhost:8889/tel
 
-	QRegExp paramRx("^([^:]*):(\\d+):([^:]*):([^:]*)$");
-	QString host;
-	QString login;
-	QString password;
+	qDebug() << "TelescopeRTS2 paramaters: " << params;
 
-	if (paramRx.exactMatch(params))
+	baseurl.setUrl(params);
+	if (!baseurl.isValid())
 	{
-		host         = paramRx.capturedTexts().at(1).trimmed();
-		port         = paramRx.capturedTexts().at(2).toInt();
-		login        = paramRx.capturedTexts().at(3).trimmed();
-		password     = paramRx.capturedTexts().at(4).trimmed();
-	}
-	else
-	{
-		qWarning() << "WARNING - incorrect TelescopeRTS2 parameters";
+		qWarning() << "TelescopeRTS2 invalid URL";
 		return;
 	}
-
-	qDebug() << "TelescopeRTS2 paramaters host, port, login, password:" << host << port << login << password;
-
-	if (port <= 0 || port > 0xffff)
-	{
-		qWarning() << "ERROR creating TelescopeRTS2 - port not valid (should be less than 32767)";
-		return;
-	}
-
-	baseurl.setHost(host);
-	baseurl.setPort(port);
-	baseurl.setUserName(login);
-	baseurl.setPassword(password);
 
 	QUrl rurl(baseurl);
 
-	rurl.setPath("/api/get");
+	rurl.setPath(baseurl.path() + "/api/get");
 
 	QUrlQuery query;
-	query.addQueryItem("d", "T0");
+	query.addQueryItem("d", "B2");
 	rurl.setQuery(query);
 
 	request.setUrl(rurl);
+
+	qDebug() << "request url:" << rurl.toString();
 
 	networkManager.get(request);
 
@@ -143,15 +118,17 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 	const double dec = atan2(j2000Pos[2], std::sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
 
 	QUrl set(baseurl);
-	set.setPath("/api/cmd");
+	set.setPath(baseurl.path() + "/api/cmd");
 
 	QUrlQuery query;
-	query.addQueryItem("d", "T0");
+	query.addQueryItem("d", "B2");
 	query.addQueryItem("c", QString("move+%1+%2").arg(ra * 180 / M_PI).arg(dec * 180 / M_PI));
 	set.setQuery(query);
 
 	QNetworkRequest setR;
 	setR.setUrl(set);
+
+	qDebug() << "GoTo request: " << set.toString();
 
 	networkManager.get(setR);
 }

@@ -267,7 +267,7 @@
         <x>0</x>
         <y>-283</y>
         <width>547</width>
-        <height>580</height>
+        <height>603</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">
@@ -681,60 +681,8 @@ Increase this value if the reticle is skipping.</string>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="labelRTS2Host">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
             <property name="text">
-             <string>Host:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="labelRTS2TCPPort">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="text">
-             <string>TCP port:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEditRTS2HostName">
-            <property name="toolTip">
-             <string>Host name or IPv4 address of the machine that hosts the RTS2 JSON (httpd) server</string>
-            </property>
-            <property name="text">
-             <string notr="true">localhost</string>
-            </property>
-            <property name="maxLength">
-             <number>255</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="labelRTS2Colon">
-            <property name="text">
-             <string notr="true">:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QSpinBox" name="spinBoxRTS2TCPPort">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>65535</number>
-            </property>
-            <property name="value">
-             <number>8889</number>
+             <string>URL:</string>
             </property>
            </widget>
           </item>
@@ -745,7 +693,7 @@ Increase this value if the reticle is skipping.</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
+          <item row="2" column="1">
            <widget class="QLabel" name="labelRTS2Password">
             <property name="text">
              <string>Password:</string>
@@ -765,7 +713,7 @@ Increase this value if the reticle is skipping.</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="2">
+          <item row="3" column="1">
            <widget class="QLineEdit" name="lineEditRTS2Password">
             <property name="toolTip">
              <string>RTS2 password</string>
@@ -778,6 +726,19 @@ Increase this value if the reticle is skipping.</string>
             </property>
             <property name="echoMode">
              <enum>QLineEdit::Password</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLineEdit" name="lineEditRTS2Url">
+            <property name="toolTip">
+             <string>URL of the machine that hosts the RTS2 JSON (httpd) server</string>
+            </property>
+            <property name="text">
+             <string notr="true">localhost</string>
+            </property>
+            <property name="maxLength">
+             <number>255</number>
             </property>
            </widget>
           </item>
