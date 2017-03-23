@@ -226,11 +226,10 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QList<double> circles;
 	QString deviceModelName;
 	QString serialPortName;
-	QString rts2Host;
-	int rts2Port;
+	QString rts2Url;
 	QString rts2Username;
 	QString rts2Password;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Host, rts2Port, rts2Username, rts2Password))
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password))
 	{
 		//TODO: Add debug
 		return;
@@ -277,8 +276,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionRTS2)
 	{
 		ui->radioButtonTelescopeRTS2->setChecked(true);
-		ui->lineEditRTS2HostName->setText(rts2Host);
-		ui->spinBoxRTS2TCPPort->setValue(rts2Port);
+		ui->lineEditRTS2Url->setText(rts2Url);
 		ui->lineEditRTS2Username->setText(rts2Username);
 		ui->lineEditRTS2Password->setText(rts2Password);
 	}
@@ -370,8 +368,7 @@ void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
 	if(isChecked)
 	{
 		//Re-initialize values that may have been changed
-		ui->lineEditRTS2HostName->setText("localhost");
-		ui->spinBoxRTS2TCPPort->setValue(8889);
+		ui->lineEditRTS2Url->setText("localhost:8889");
 
 		ui->groupBoxRTS2Settings->setEnabled(true);
 
@@ -451,7 +448,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	else if (ui->radioButtonTelescopeRTS2->isChecked())
 	{
 		type = ConnectionRTS2;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2HostName->text(), ui->spinBoxRTS2TCPPort->value(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text());
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text());
 	}
 	
 	emit changesSaved(name, type);
