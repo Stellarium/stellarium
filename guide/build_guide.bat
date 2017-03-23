@@ -2,6 +2,7 @@ pdflatex guide
 makeindex guide.idx -s StyleInd.ist
 biber guide
 pdflatex guide
+makeindex guide.idx -s StyleInd.ist
 pdflatex guide
 del *.aux
 del *.bbl

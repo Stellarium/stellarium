@@ -226,17 +226,15 @@ for a few more millennia without too great errors, but with degrading accuracy.
 
 Since V0.15 you can install extra data files which allow access to the
 numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
+from NASA's Jet Propulsion Laboratory (JPL)\cite{DE43x}. The data files have to be
 downloaded separately, and most users will likely not need them. DE430
 provides highly accurate data for the years $+1550\ldots+2650$, while
 DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
 archaeoastronomical research on Mesolithic landscapes. Outside these
 year ranges, positional computation falls back to VSOP87.
 
-The integration of this feature is still experimental. As of V0.15,
-solar eclipses in antiquity seem to be slightly off. Please use JPL
+The integration of this feature is still somewhat experimental.  Please compare to  JPL
 Horizon for quotable results.
-% GZ TODO: FIX THAT ASAP!! 
 
 To enable use of these data, download the files from
 JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
