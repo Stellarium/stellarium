@@ -226,7 +226,11 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QList<double> circles;
 	QString deviceModelName;
 	QString serialPortName;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
+	QString rts2Host;
+	int rts2Port;
+	QString rts2Username;
+	QString rts2Password;
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Host, rts2Port, rts2Username, rts2Password))
 	{
 		//TODO: Add debug
 		return;
@@ -269,6 +273,14 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionVirtual)
 	{
 		ui->radioButtonTelescopeVirtual->setChecked(true);
+	}
+	else if (connectionType == ConnectionRTS2)
+	{
+		ui->radioButtonTelescopeRTS2->setChecked(true);
+		ui->lineEditRTS2HostName->setText(rts2Host);
+		ui->spinBoxRTS2TCPPort->setValue(rts2Port);
+		ui->lineEditRTS2Username->setText(rts2Username);
+		ui->lineEditRTS2Password->setText(rts2Password);
 	}
 
 	//Equinox
@@ -333,6 +345,7 @@ void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
 		ui->groupBoxDeviceSettings->setEnabled(false);
+		ui->groupBoxRTS2Settings->setEnabled(false);
 
 		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
@@ -347,6 +360,7 @@ void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
 	//TODO: This really should be done in the GUI
 	ui->groupBoxDeviceSettings->setEnabled(!isChecked);
 	ui->groupBoxConnectionSettings->setEnabled(!isChecked);
+	ui->groupBoxRTS2Settings->setEnabled(!isChecked);
 
 	ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 }
@@ -356,16 +370,16 @@ void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
 	if(isChecked)
 	{
 		//Re-initialize values that may have been changed
-		ui->lineEditHostName->setText("localhost");
-		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
+		ui->lineEditRTS2HostName->setText("localhost");
+		ui->spinBoxRTS2TCPPort->setValue(8889);
 
-		ui->groupBoxDeviceSettings->setEnabled(false);
+		ui->groupBoxRTS2Settings->setEnabled(true);
 
-		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
+		ui->scrollArea->ensureWidgetVisible(ui->groupBoxRTS2Settings);
 	}
 	else
 	{
-		ui->groupBoxDeviceSettings->setEnabled(true);
+		ui->groupBoxRTS2Settings->setEnabled(false);
 	}
 }
 
@@ -437,7 +451,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	else if (ui->radioButtonTelescopeRTS2->isChecked())
 	{
 		type = ConnectionRTS2;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles);
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2HostName->text(), ui->spinBoxRTS2TCPPort->value(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text());
 	}
 	
 	emit changesSaved(name, type);
