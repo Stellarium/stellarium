@@ -39,18 +39,18 @@ public:
 	~TelescopeClientJsonRts2(void);
 	virtual bool isConnected(void) const;
 
+	void telescopeGoto(const Vec3d &j2000Pos);
+	bool hasKnownPosition(void) const;
+
 private:
 	QNetworkAccessManager networkManager;
 	Equinox equinox;
-	unsigned int port;
-	QHostAddress address;
 	QUrl baseurl;
+	QString telName;
 	QNetworkRequest request;
 	Vec3d position;
 
 	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
-	void telescopeGoto(const Vec3d &j2000Pos);
-	bool hasKnownPosition(void) const;
 
 private slots:
 	void replyFinished(QNetworkReply *reply);
