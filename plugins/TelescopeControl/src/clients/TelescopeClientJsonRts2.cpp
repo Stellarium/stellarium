@@ -33,6 +33,7 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, equinox(eq)
 	, baseurl("http://localhost:8889/")
 	, telName("")
+	, time_delay(500)
 {
 	// Example params:
 	// petr:test@localhost:8889/tel
@@ -119,7 +120,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 		qDebug() << "TelescopeRTS2 RADEC" << ra << dec;
 
 		Vec3d pos(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
-		position = pos;
+		interpolatedPosition.add(pos, getNow(), getNow(), 0);
 
 		qDebug() << "request url:" << request.url().toString();
 	
@@ -138,7 +139,8 @@ bool TelescopeClientJsonRts2::isConnected(void) const
 
 Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore* core) const
 {
-	return position;
+	const qint64 now = getNow() - time_delay;
+	return interpolatedPosition.get(now);
 }
 
 void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
@@ -168,5 +170,5 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const
 {
-	return true;
+	return interpolatedPosition.isKnown();
 }
