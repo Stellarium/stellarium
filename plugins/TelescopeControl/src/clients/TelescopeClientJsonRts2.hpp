@@ -39,6 +39,8 @@ public:
 	~TelescopeClientJsonRts2(void);
 	virtual bool isConnected(void) const;
 
+	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
+
 	void telescopeGoto(const Vec3d &j2000Pos);
 	bool hasKnownPosition(void) const;
 
@@ -49,8 +51,8 @@ private:
 	QString telName;
 	QNetworkRequest request;
 	Vec3d position;
-
-	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
+	InterpolatedPosition interpolatedPosition;
+	int time_delay;
 
 private slots:
 	void replyFinished(QNetworkReply *reply);
