@@ -24,7 +24,6 @@
 #include <QMap>
 #include <QString>
 #include <QStringList>
-#include <QObject>
 
 //! @class StelSkyCulture
 //! Store basic info about a sky culture for stellarium.
