@@ -36,7 +36,9 @@
 #include <QUrlQuery>
 #include <QSettings>
 #include <QTimeZone>
-
+#ifdef ENABLE_GPS
+#include <libgpsmm.h>
+#endif
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
@@ -484,63 +486,96 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
-// lookup location from IP address.
+// lookup location from GPS.
 void StelLocationMgr::locationFromGPS()
 {
-	gpsLocationQueryActive=1;
-	QNetworkRequest req( QUrl( QString("tcp://127.0.0.1:2947/?WATCH={\"enable\":true,\"json\":true};") ) );
-	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
-	//req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
-	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromGPSDLookup()));
+//	gpsLocationQueryActive=1;
+//	QNetworkRequest req( QUrl( QString("tcp://127.0.0.1:2947/?WATCH={\"enable\":true,\"json\":true};") ) );
+//	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
+//	//req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
+//	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
+//	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromGPSDLookup()));
+	qDebug() << "StelLocationMgr::locationFromGPS() -- REMOVE THIS CALL?";
+	changeLocationFromGPSDLookup();
 }
 
 // slot that receives IP-based location data from the network.
-void StelLocationMgr::changeLocationFromGPSDLookup()
+bool StelLocationMgr::changeLocationFromGPSDLookup()
 {
-	StelLocation location;
+#ifdef ENABLE_GPS
 	StelCore *core=StelApp::getInstance().getCore();
-	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
-	if (!networkReply)
-	{
-		qDebug() << "changeLocationFromGPSDLookup(): no network reply";
-		return;
-	}
-	if (networkReply->error() == QNetworkReply::NoError) {
-		//success
-		QVariantMap gpsdMap = StelJsonParser::parse(networkReply->readAll()).toMap();
-		qDebug() << "GPSD reply: " << networkReply->readAll();
-//		QString ipRegion = locMap.value("region_name").toString();
-//		QString ipCity = locMap.value("city").toString();
-//		QString ipCountry = locMap.value("country_name").toString(); // NOTE: Got a short name of country
-//		QString ipCountryCode = locMap.value("country_code").toString();
-//		QString ipTimeZone = locMap.value("time_zone").toString();
-//		float latitude=locMap.value("latitude").toFloat();
-//		float longitude=locMap.value("longitude").toFloat();
+	StelLocation loc;
 
-//		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
+	// Example straight from http://www.catb.org/gpsd/client-howto.html
+	gpsmm gps_rec("localhost", DEFAULT_GPSD_PORT);
+	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL) {
+	      qDebug() << "GPSD query: No GPSD running.\n";
+	      return false;
+	  }
 
-//		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
-//				QString("%1\t%2\t%3\tX\t0\t%4\t%5\t0\t\t%6")
-//				.arg(ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity)
-//				.arg(ipRegion.isEmpty() ? "IPregion"  : ipRegion)
-//				.arg(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower())
-//				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
-//				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
-//				.arg(ipTimeZone.isEmpty() ? "" : ipTimeZone);
-//		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
-//		core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-//		core->moveObserverTo(location, 0.0f, 0.0f);
-//		QSettings* conf = StelApp::getInstance().getSettings();
-//		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
+	int tries=0;
+	int fixmode;
+	while (tries<10) {
+		struct gps_data_t* newdata;
+
+		if (!gps_rec.waiting(50000000))
+			continue;
+
+		if ((newdata = gps_rec.read()) == NULL) {
+			qDebug()  << "GPSD query: Read error.\n";
+			return false;
+		} else
+		{
+			fixmode=newdata->fix.mode;
+			loc.longitude=newdata->fix.longitude;
+			loc.latitude=newdata->fix.latitude;
+			loc.altitude=newdata->fix.altitude;
+			// fixode 0...no data. 1...bad. 2...2Dfix, 3...3Dfix(best).
+			if (fixmode<3)
+			{
+				qDebug() << "GPSD query: fix mode only " << fixmode;
+			}
+			else
+			{
+				qDebug() << "GPSDfix " << fixmode << " location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				break;
+			}
+		}
+		tries++;
 	}
-	else
+
+	if (fixmode<3)
 	{
-		qDebug() << "Failure getting GPSD location: \n\t" <<networkReply->errorString();
-		// If there is a problem, this must not change to some other location!
+		qDebug() << "Fix only quality " << fixmode << " after " << tries << " tries";
+		if (fixmode <2)
+		{
+			qDebug() << "Not setting new location";
+			return false;
+		}
 	}
-	networkReply->deleteLater();
+	qDebug() << "GPSD got location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+
+	// Usually you don't leave your time zone with GPS. How to keep it?
+
+	loc.bortleScaleIndex=2;
+	loc.ianaTimeZone="LMST";
+	loc.isUserLocation=true;
+	loc.planetName="Earth";
+	loc.name="GPS";
+	core->moveObserverTo(loc, 0.0f, 0.0f);
+
+	return true;
+#else
+	qDebug() << "StelLocationMgr::changeLocationFromGPSDLookup() not available";
+	return false;
+#endif
 }
+
+void StelLocationMgr::changeLocationFromNMEALookup()
+{
+	qDebug() << "GPS NMEA lookup: not implemented yet";
+}
+
 
 LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
 {

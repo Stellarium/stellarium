@@ -413,7 +413,7 @@ void LocationDialog::populateTimeZonesList()
 	//Restore the selection
 	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
 	// TODO: Handle notfound!?
-	Q_ASSERT(index!=-1);
+	//Q_ASSERT(index!=-1);
 	timeZones->setCurrentIndex(index);
 	timeZones->blockSignals(false);
 
@@ -698,13 +698,21 @@ void LocationDialog::gpsQueryLocation()
 	disconnectEditSignals();
 	resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
-	locMgr.locationFromGPS(); // This just triggers asynchronous lookup.
-	ui->useAsDefaultLocationCheckBox->setChecked(false);
-	ui->pushButtonReturnToDefault->setEnabled(true);
-	ui->useCustomTimeZoneCheckBox->setChecked(true);
-	updateTimeZoneControls(true);
+	if (locMgr.changeLocationFromGPSDLookup()) // This just triggers asynchronous lookup.
+	{
+		ui->gpsPushButton->text()="GPS:SUCCESS";
+		ui->useAsDefaultLocationCheckBox->setChecked(false);
+		ui->pushButtonReturnToDefault->setEnabled(true);
+		ui->useCustomTimeZoneCheckBox->setChecked(true);
+		updateTimeZoneControls(true);
+	}
+	else
+	{
+		ui->gpsPushButton->text()="GPS:FAILED";
+	}
 	connectEditSignals();
 	ui->citySearchLineEdit->setFocus();
+	// TODO: Use a QTimer to reset the labels after 2 seconds.
 }
 
 // called when user clicks "reset list"
