@@ -71,7 +71,7 @@ public:
 	QChar role;
 	//! IANA identificator of time zone.
 	//! Note that timezone names under various OSes may be different than those used in Stellarium's
-	//! location database (e.g. Stellarium&IANA:Asia/Kolkata=Windows:Asia/Calcutta),
+	//! location database (e.g. Ubuntu:Asia/Kolkata=Windows:Asia/Calcutta),
 	//! which requires some translation effort during the loading process.
 	//  See LP:1662132
 	// GZ renamed to more clearly indicate these are IANA names.
