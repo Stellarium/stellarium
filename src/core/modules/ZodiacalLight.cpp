@@ -35,6 +35,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
+#include "precession.h"
 
 #include <QDebug>
 #include <QSettings>
@@ -120,12 +121,11 @@ void ZodiacalLight::update(double deltaTime)
 			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &betaJDE);
 			lambdaSun+= M_PI*0.5;
 		}
-		else
+		else // currently Moon only...
 		{
 			Vec3d obsPos=core->getObserverHeliocentricEclipticPos();
 			lambdaSun=atan2(obsPos[1], obsPos[0])  -M_PI*0.5;
 		}
-
 
 		Mat4d rotMat=Mat4d::zrotation(lambdaSun);
 		for (int i=0; i<eclipticalVertices.size(); ++i)
@@ -214,15 +214,23 @@ void ZodiacalLight::draw(StelCore* core)
 
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
 
-	if (withExtinction)
+	if ((withExtinction) && (core->getCurrentLocation().planetName=="Earth")) // If anybody switches on atmosphere on the moon, there will be no extinction.
 	{
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
 		const Extinction& extinction=drawer->getExtinction();
+		const double epsDate=getPrecessionAngleVondrakCurrentEpsilonA();
 		vertexArray->colors.clear();
 
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
 		{
-			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
+			Vec3d eclPos=vertexArray->vertex.at(i);
+			Q_ASSERT(fabs(eclPos.lengthSquared()-1.0) < 0.001f);
+			double ecLon, ecLat, ra, dec;
+			StelUtils::rectToSphe(&ecLon, &ecLat, eclPos);
+			StelUtils::eclToEqu(ecLon, ecLat, epsDate, &ra, &dec);
+			Vec3d eqPos;
+			StelUtils::spheToRect(ra, dec, eqPos);
+			Vec3d vertAltAz=core->equinoxEquToAltAz(eqPos, StelCore::RefractionOn);
 			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001f);
 
 			float oneMag=0.0f;
