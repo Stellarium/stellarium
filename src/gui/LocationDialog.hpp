@@ -129,6 +129,8 @@ private slots:
 	//! The easiest way to get GPS coordinates from a Linux device is via GPSD.
 	//! On Windows (and Mac?), or where GPSD is not available, we must parse the NMEA-183 strings ourselves.
 	void gpsQueryLocation();
+	//! reset the default string after a short time where the button shows either success or failure of GPS data retrieval.
+	void resetGPSbuttonLabel();
 	
 	//! Called when the user wants to use the current location as default
 	void setDefaultLocation(bool state);

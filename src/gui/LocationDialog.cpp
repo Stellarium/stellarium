@@ -149,7 +149,12 @@ void LocationDialog::createDialogContent()
 
 	setFieldsFromLocation(currentLocation);
 
+#if defined(ENABLE_NMEA) || defined(ENABLE_LIBGPS)
 	connect(ui->gpsPushButton, SIGNAL(clicked(bool)), this, SLOT(gpsQueryLocation()));
+#else
+	ui->gpsPushButton->setEnabled(false);
+	ui->gpsPushButton->hide();
+#endif
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
@@ -692,27 +697,44 @@ void LocationDialog::ipQueryLocation(bool state)
 		conf->setValue("init_location/location", StelApp::getInstance().getCore()->getCurrentLocation().getID());
 }
 
-// called when the user clicks on the GPS Query button
+// called when the user clicks on the GPS Query button. Use gpsd or Qt's NMEA reader.
 void LocationDialog::gpsQueryLocation()
 {
+#if (!defined(ENABLE_LIBGPS)) && (!defined(ENABLE_NMEA))
+	qDebug() << "gpsQueryLocation(): Button should be hidden! Who called you?";
+	return;
+#else
 	disconnectEditSignals();
-	resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
-	if (locMgr.changeLocationFromGPSDLookup()) // This just triggers asynchronous lookup.
+  #ifdef ENABLE_LIBGPS
+	if (locMgr.changeLocationFromGPSDLookup())
+  #endif
+  #ifdef ENABLE_NMEA
+	if (locMgr.changeLocationFromNMEALookup())
+  #endif
 	{
-		ui->gpsPushButton->text()="GPS:SUCCESS";
+		ui->gpsPushButton->setText(q_("GPS:SUCCESS"));
 		ui->useAsDefaultLocationCheckBox->setChecked(false);
 		ui->pushButtonReturnToDefault->setEnabled(true);
 		ui->useCustomTimeZoneCheckBox->setChecked(true);
+		resetCompleteList(); // in case we come back from Moon/Mars, we must get list back to show all (earth) locations...
 		updateTimeZoneControls(true);
 	}
 	else
 	{
-		ui->gpsPushButton->text()="GPS:FAILED";
+		ui->gpsPushButton->setText(q_("GPS:FAILED"));
 	}
 	connectEditSignals();
 	ui->citySearchLineEdit->setFocus();
-	// TODO: Use a QTimer to reset the labels after 2 seconds.
+
+	// Use QTimer to reset the labels after 2 seconds.
+	QTimer::singleShot(2000, this, SLOT(resetGPSbuttonLabel()));
+#endif
+}
+
+void LocationDialog::resetGPSbuttonLabel()
+{
+	ui->gpsPushButton->setText(q_("Get location from GPS"));
 }
 
 // called when user clicks "reset list"

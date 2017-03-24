@@ -36,7 +36,7 @@
 #include <QUrlQuery>
 #include <QSettings>
 #include <QTimeZone>
-#ifdef ENABLE_GPS
+#ifdef ENABLE_LIBGPS
 #include <libgpsmm.h>
 #endif
 
@@ -445,7 +445,6 @@ void StelLocationMgr::locationFromIP()
 // slot that receives IP-based location data from the network.
 void StelLocationMgr::changeLocationFromNetworkLookup()
 {
-	StelLocation location;
 	StelCore *core=StelApp::getInstance().getCore();
 	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
 	if (!networkReply)
@@ -463,17 +462,22 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
-		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
-				QString("%1\t%2\t%3\tX\t0\t%4\t%5\t0\t\t%6")
-				.arg(ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity)
-				.arg(ipRegion.isEmpty() ? "IPregion"  : ipRegion)
-				.arg(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower())
-				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
-				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
-				.arg(ipTimeZone.isEmpty() ? "" : ipTimeZone);
-		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
+		StelLocation loc;
+		loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
+		loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
+		loc.country = StelLocaleMgr::countryCodeToString(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+		loc.role    = QChar(0x0058); // char 'X'
+		loc.population = 0;
+		loc.latitude = latitude;
+		loc.longitude = longitude;
+		loc.altitude = 0;
+		loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
+		loc.planetName = "Earth";
+		loc.landscapeKey = "";
+
 		core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-		core->moveObserverTo(location, 0.0f, 0.0f);
+		core->moveObserverTo(loc, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
 	}
@@ -502,7 +506,7 @@ void StelLocationMgr::locationFromGPS()
 // slot that receives IP-based location data from the network.
 bool StelLocationMgr::changeLocationFromGPSDLookup()
 {
-#ifdef ENABLE_GPS
+#ifdef ENABLE_LIBGPS
 	StelCore *core=StelApp::getInstance().getCore();
 	StelLocation loc;
 
@@ -566,14 +570,15 @@ bool StelLocationMgr::changeLocationFromGPSDLookup()
 
 	return true;
 #else
-	qDebug() << "StelLocationMgr::changeLocationFromGPSDLookup() not available";
+	qDebug() << "StelLocationMgr::changeLocationFromGPSDLookup() not available.";
 	return false;
 #endif
 }
 
-void StelLocationMgr::changeLocationFromNMEALookup()
+bool StelLocationMgr::changeLocationFromNMEALookup()
 {
 	qDebug() << "GPS NMEA lookup: not implemented yet";
+	return false;
 }
 
 
