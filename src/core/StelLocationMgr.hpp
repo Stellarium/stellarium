@@ -96,13 +96,17 @@ public slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
 
-	//! Process answer from GPSD location query (Does nothing on Windows because gpsd is not available).
+	//! Process answer from GPSD location query.
 	//! Requires configured and running gpsd.
 	//! This method may block the program for a few seconds.
-	//! @return true if successful, false on error.
+	//! @return true if successful (and sets location), false (and does not set location) on error.
+	//! @note Does nothing on Windows because gpsd is not available.
 	bool changeLocationFromGPSDLookup();
-	//! Process answer from direct NMEA-0183 query (On Windows.) Not sure yet, read serial COM and process with NMEAlib from SoureForge.
-	void changeLocationFromNMEALookup();
+	//! Process answer from direct NMEA-0183 query (on Windows only).
+	//! Requires a serially or serial-to-USB (COM port) connected GPS device and process with Qt5's NMEA capabilities.
+	//! This method may block the program for a few seconds.
+	//! @return true if successful (and sets location), false (and does not set location) on error.
+	bool changeLocationFromNMEALookup();
 
 
 	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
