@@ -197,6 +197,20 @@ ENDIF()
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
+# Activate GPSD client library support (Non-Windows only)
+IF(WIN32)
+  SET(ENABE_GPS 0)
+  MESSAGE(STATUS "GPSD support not available on Windows.")
+ELSE()
+  SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPSD queries should be supported. NOT FOR WINDOWS!")
+ENDIF()
+IF(ENABLE_GPS)
+  ADD_DEFINITIONS(-DENABLE_GPS)
+  FIND_LIBRARY(GPSMM_LIBRARY NAMES libgps.so CACHE FILEPATH DOC "Path to libgps.so")
+ENDIF()
+
+
+
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)

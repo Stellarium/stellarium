@@ -78,7 +78,7 @@ public:
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
-	//! Find location via query of a GPSD (GPS daemon) or directly-attached serial NMEA-183 emitter.
+	//! Find location via query of a GPSD (GPS daemon) or directly-attached serial NMEA-0183 emitter.
 	//! When using GPSD not on localhost, don't forget the -G switch!
 	void locationFromGPS();
 
@@ -95,6 +95,15 @@ public slots:
 
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
+
+	//! Process answer from GPSD location query (Does nothing on Windows because gpsd is not available).
+	//! Requires configured and running gpsd.
+	//! This method may block the program for a few seconds.
+	//! @return true if successful, false on error.
+	bool changeLocationFromGPSDLookup();
+	//! Process answer from direct NMEA-0183 query (On Windows.) Not sure yet, read serial COM and process with NMEAlib from SoureForge.
+	void changeLocationFromNMEALookup();
+
 
 	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
 	//! If timezone name starts with "UTC", always return unchanged.
