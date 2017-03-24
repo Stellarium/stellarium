@@ -826,7 +826,7 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 	Q_ASSERT(!tle1.isEmpty());
 	
 	// The designator is encoded as columns 10-17 on the first line.
-	QString rawString = tle1.mid(9, 8);
+	QString rawString = tle1.mid(9, 6);
 	//TODO: Use a regular expression?
 	bool ok;
 	int year = rawString.left(2).toInt(&ok);
