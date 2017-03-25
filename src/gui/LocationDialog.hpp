@@ -40,7 +40,6 @@ public:
 
 public slots:
 	void retranslate();
-
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -125,13 +124,18 @@ private slots:
 	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
 
+#if (defined(ENABLE_LIBGPS)) || (defined(ENABLE_NMEA))
 	//! called when the user wants get location from a GPSD or directly attached (USB over virtual serial device) GPS device.
 	//! The easiest way to get GPS coordinates from a Linux device is via GPSD.
 	//! On Windows (and Mac?), or where GPSD is not available, we must parse the NMEA-183 strings ourselves.
 	void gpsQueryLocation();
+	//! handle a few GUI elements when GPS query returns. Should be connected to LocationMgr's signal gpsResult().
+	//! @param success true if location was found
+	void gpsReturn(bool success);
 	//! reset the default string after a short time where the button shows either success or failure of GPS data retrieval.
 	void resetGPSbuttonLabel();
-	
+#endif
+
 	//! Called when the user wants to use the current location as default
 	void setDefaultLocation(bool state);
 

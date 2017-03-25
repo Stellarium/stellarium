@@ -97,7 +97,8 @@ void LocationDialog::createDialogContent()
 	//initialize list model
 	allModel = new QStringListModel(this);
 	pickedModel = new QStringListModel(this);
-	connect(&StelApp::getInstance().getLocationMgr(), SIGNAL(locationListChanged()), this, SLOT(reloadLocations()));
+	StelLocationMgr *locMgr=&(StelApp::getInstance().getLocationMgr());
+	connect(locMgr, SIGNAL(locationListChanged()), this, SLOT(reloadLocations()));
 	reloadLocations();
 	proxyModel = new QSortFilterProxyModel(ui->citiesListView);
 	proxyModel->setSourceModel(allModel);
@@ -151,6 +152,7 @@ void LocationDialog::createDialogContent()
 
 #if defined(ENABLE_NMEA) || defined(ENABLE_LIBGPS)
 	connect(ui->gpsPushButton, SIGNAL(clicked(bool)), this, SLOT(gpsQueryLocation()));
+	connect(locMgr, SIGNAL(gpsResult(bool)), this, SLOT(gpsReturn(bool)));
 #else
 	ui->gpsPushButton->setEnabled(false);
 	ui->gpsPushButton->hide();
@@ -697,28 +699,35 @@ void LocationDialog::ipQueryLocation(bool state)
 		conf->setValue("init_location/location", StelApp::getInstance().getCore()->getCurrentLocation().getID());
 }
 
+#if (defined(ENABLE_LIBGPS)) || (defined(ENABLE_NMEA))
 // called when the user clicks on the GPS Query button. Use gpsd or Qt's NMEA reader.
 void LocationDialog::gpsQueryLocation()
 {
-#if (!defined(ENABLE_LIBGPS)) && (!defined(ENABLE_NMEA))
-	qDebug() << "gpsQueryLocation(): Button should be hidden! Who called you?";
-	return;
-#else
 	disconnectEditSignals();
-	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+	ui->gpsPushButton->setText(q_("GPS..."));
+
   #ifdef ENABLE_LIBGPS
-	if (locMgr.changeLocationFromGPSDLookup())
+	StelApp::getInstance().getLocationMgr().changeLocationFromGPSDLookup();
   #endif
   #ifdef ENABLE_NMEA
-	if (locMgr.changeLocationFromNMEALookup())
+	StelApp::getInstance().getLocationMgr().changeLocationFromNMEALookup();
   #endif
+}
+
+void LocationDialog::gpsReturn(bool success)
+{
+	if (success)
 	{
+		StelCore* core = StelApp::getInstance().getCore();
+
 		ui->gpsPushButton->setText(q_("GPS:SUCCESS"));
 		ui->useAsDefaultLocationCheckBox->setChecked(false);
 		ui->pushButtonReturnToDefault->setEnabled(true);
 		ui->useCustomTimeZoneCheckBox->setChecked(true);
 		resetCompleteList(); // in case we come back from Moon/Mars, we must get list back to show all (earth) locations...
 		updateTimeZoneControls(true);
+		StelLocation loc=core->getCurrentLocation();
+		setFieldsFromLocation(loc);
 	}
 	else
 	{
@@ -729,13 +738,13 @@ void LocationDialog::gpsQueryLocation()
 
 	// Use QTimer to reset the labels after 2 seconds.
 	QTimer::singleShot(2000, this, SLOT(resetGPSbuttonLabel()));
-#endif
 }
 
 void LocationDialog::resetGPSbuttonLabel()
 {
 	ui->gpsPushButton->setText(q_("Get location from GPS"));
 }
+#endif
 
 // called when user clicks "reset list"
 void LocationDialog::resetCompleteList()
