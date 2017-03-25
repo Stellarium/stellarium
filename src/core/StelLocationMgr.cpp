@@ -522,10 +522,10 @@ void StelLocationMgr::locationFromGPSDLookup()
 	StelLocation loc;
 
 	QString gpsdHostname=conf->value("gui/gpsd_hostname", "localhost").toString();
-	int gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toInt();
+	QString gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toString();
 
 	// Example straight from http://www.catb.org/gpsd/client-howto.html
-	gpsmm gps_rec(gpsdHostname, gpsdPort);
+	gpsmm gps_rec(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
 	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL) {
 		qDebug() << "GPSD query: No GPSD running.\n";
 		emit gpsResult(false);

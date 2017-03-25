@@ -278,65 +278,90 @@ Code 2015 initiative.
 \subsection{GPS Position}
 \label{sec:ExtraData:GPS}
 
-\noindent In the Location panel (see section~\ref{sec:gui:location}) you can receive your location from a \indexterm{GPS} device. 
-\newFeature{0.16}
-The exact way to receive GPS location depends on your operating system. 
+\noindent In the Location panel (see section~\ref{sec:gui:location})
+you can receive your location from a \indexterm{GPS} device.
+\newFeature{0.16} The exact way to receive GPS location depends on
+your operating system.
 
-\subsubsection{GPSD (Linux, Mac-OS X only)}
+\subsubsection{GPSD (Linux, Mac OS X only)}
 \label{sec:ExtraData:GPS:GPSD}
 
-On Linux and Mac-OS X, Stellarium does not connect directly to a GPS USB device, serial device, 
-bluetooth device, etc., but uses a connection to the \program{gpsd} daemon running on a computer 
-in your network which provides GPS services concurrently for any interested application. In most cases, 
-this will be a \program{gpsd} running on your localhost, receiving data from some GPS device 
-plugged in via USB.
+On Linux and Mac-OS X, Stellarium does not connect directly to a GPS
+USB device, serial device, bluetooth device, etc., but uses a
+connection to the \program{gpsd} daemon running on a computer in your
+network which provides GPS services concurrently for any interested
+application. In most cases, this will be a \program{gpsd} running on
+your localhost, receiving data from some GPS device plugged in via
+USB.
 
-Please follow instructions by the \program{gpsd} authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly configure this system daemon.
-A few hints: 
+Please follow instructions by the \program{gpsd}
+authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
+configure this system daemon.  A few hints:
 \begin{itemize}
-\item On Ubuntu 16.04 and likely other systems, USB hotplug devices are handled by the \program{udev} daemon which detects newly plugged-in 
-devices and creates device files in the \file{/dev} directory. Unfortunately, most GPS devices use the Prolific 2303 
-chipset in their serial-to-USB converter and are identified as such. This converter is also used in other Serial-to-USB converter cables, 
-and to avoid conflicts the according rule has been disabled by the release managers of Ubuntu.  In \file{PATH-TO-UDEV-RULES},
-edit the file \file{60-gps.rules}, find the commented  line and re-activate it. 
+\item On Ubuntu 16.04 and likely other systems, USB hotplug devices
+  are handled by the \program{udev} daemon which detects newly
+  plugged-in devices and creates device files in the \file{/dev}
+  directory. Unfortunately, most GPS devices use the Prolific 2303
+  chipset in their serial-to-USB converter and are identified as
+  such. This converter is also used in other Serial-to-USB converter
+  cables, and to avoid conflicts the according rule has been disabled
+  by the release managers of Ubuntu.  In
+  \file{/lib/udev/60-gpsd.rules}, find the commented line and
+  re-activate it.
 
-\item If you have such an USB GPS mouse and USB-to-serial converters for other purposes like for your telescope control, you must solve 
-the ``\program{udev} crisis'' in some other way to get \program{gpsd} running. You may be able to find some property in your device to uniquely identify this device and 
-write an \program{udev} rule to create the symlink in \file{/dev/gps0} to which \program{gpsd} can then connect. 
+\item If you have such an USB GPS mouse and USB-to-serial converters
+  for other purposes like for your telescope control, you must solve
+  the ``\program{udev} crisis'' in some other way to get
+  \program{gpsd} running. You may be able to find some property in
+  your device to uniquely identify this device and write an
+  \program{udev} rule to create the symlink in \file{/dev/gps0} to
+  which \program{gpsd} can then connect.
 
-\item You can also connect to another computer which runs \program{gpsd}. This could be a little Raspberry Pi computer which happens 
-to be in your WiFi to allow localisation and time service, or even your smartphone.  
-To configure this, you must manually edit \file{stellarium.ini}. Find the \texttt{[gui]} section and edit
+\item You can also connect to another computer which runs
+  \program{gpsd}. This could be a little Raspberry Pi computer which
+  happens to be in your WiFi to allow localisation and time service,
+  or even your smartphone.  To configure this, you must manually edit
+  \file{stellarium.ini}. Find the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
 # These values are used on non-Windows systems 
 # supporting GPSD
 gpsd_hostname   = "localhost"
-gpsd_port       = 2947 
+gpsd_port       = "2947" 
 \end{configfile}
-Also, \program{gpsd} must be started with the \texttt{-G} parameter to enable this.
+Also, \program{gpsd} must be started with the \texttt{-G} parameter to
+enable this.
 \end{itemize}
 
 \subsubsection{NMEA Device (Windows only)}
 \label{sec:ExtraData:GPS:NMEA}
 
-Virtually all GPS receivers are able to emit the standardized \indexterm{NMEA}-0183 messages which encode time, position, speed, satellite information and other data. 
-The standard originally required connection settings of 4800\,baud, 8 bit, no parity, one stop bit (8N1), however some devices can be configured for faster transfer.
-Compatible devices today are connected on a ``virtual COM port'' via USB. Unfortunately the COM number seems to depend on the USB plug where you attach the receiver. 
-You can identify the port name (COM3, COM4, \ldots) in the Windows system configuration (Device Manager) or with the software that came with your device.
+Virtually all GPS receivers are able to emit the standardized
+\indexterm{NMEA}-0183 messages which encode time, position, speed,
+satellite information and other data.  The standard originally
+required connection settings of 4800\,baud, 8 bit, no parity, one stop
+bit (8N1), however some devices can be configured for faster transfer.
+Compatible devices today are connected on a ``virtual COM port'' via
+USB. Unfortunately the COM number seems to depend on the USB plug
+where you attach the receiver.  You can identify the port name (COM3,
+COM4, \ldots) in the Windows system configuration (Device Manager) or
+with the software that came with your device.
 
-If this is the only serial device, Stellarium should automatically connect to it regardless of configuration entries. 
-You cannot change the USB plug after you first have received a location fix. 
-If you have a device with non-standard baudrate or several serial devices on COM ports (e.g., your telescope?), 
-you must find out which COM port is used by the GPS device and manually edit \file{stellarium.ini}. 
-Find the \texttt{[gui]} section and edit
+If this is the only serial device, Stellarium should automatically
+connect to it regardless of configuration entries.  You cannot change
+the USB plug after you first have received a location fix.  If you
+have a device with non-standard baudrate or several serial devices on
+COM ports (e.g., your telescope?), you must find out which COM port is
+used by the GPS device and manually edit \file{stellarium.ini}.  Find
+the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
 # These values are used on Windows only.
 gps_interface     = "COM3"
 gps_baudrate      = 4800
 \end{configfile}
-From now on, always use the same USB plug configuration to connect GPS and telescope.
+From now on, always use the same USB plug configuration to connect GPS
+and telescope.
 
 
 \chapter{Command Line Options}
