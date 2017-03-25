@@ -47,11 +47,10 @@
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
-StelLocationMgr::StelLocationMgr():
-	//gpsLocationQueryActive(0)
+StelLocationMgr::StelLocationMgr()
 #ifdef ENABLE_NMEA
-       nmea(NULL)
-      , serial(NULL)
+	      : nmea(NULL),
+		serial(NULL)
 #endif
 {
 	// initialize the static QMap first if necessary.
@@ -514,28 +513,19 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
-//// lookup location from GPS.
-//void StelLocationMgr::locationFromGPS()
-//{
-////	gpsLocationQueryActive=1;
-////	QNetworkRequest req( QUrl( QString("tcp://127.0.0.1:2947/?WATCH={\"enable\":true,\"json\":true};") ) );
-////	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
-////	//req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
-////	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
-////	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromGPSDLookup()));
-//	qDebug() << "StelLocationMgr::locationFromGPS() -- REMOVE THIS CALL?";
-//	changeLocationFromGPSDLookup();
-//}
-
 #ifdef ENABLE_LIBGPS
 // slot that receives IP-based location data from the network.
-void StelLocationMgr::changeLocationFromGPSDLookup()
+void StelLocationMgr::locationFromGPSDLookup()
 {
 	StelCore *core=StelApp::getInstance().getCore();
+	QSettings* conf = StelApp::getInstance().getSettings();
 	StelLocation loc;
 
+	QString gpsdHostname=conf->value("gui/gpsd_hostname", "localhost").toString();
+	int gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toInt();
+
 	// Example straight from http://www.catb.org/gpsd/client-howto.html
-	gpsmm gps_rec("localhost", DEFAULT_GPSD_PORT);
+	gpsmm gps_rec(gpsdHostname, gpsdPort);
 	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL) {
 		qDebug() << "GPSD query: No GPSD running.\n";
 		emit gpsResult(false);
@@ -601,27 +591,18 @@ void StelLocationMgr::changeLocationFromGPSDLookup()
 }
 #endif
 #ifdef ENABLE_NMEA
-void StelLocationMgr::changeLocationFromNMEALookup()
+void StelLocationMgr::locationFromNMEALookup()
 {
-	qDebug() << "GPS NMEA lookup: not complete yet";
-
 	if (nmea==NULL)
 	{
 		// Getting a list of ports may enable auto-detection!
 		QList<QSerialPortInfo> portInfoList=QSerialPortInfo::availablePorts();
-		for (int i=0; i<portInfoList.size(); ++i)
+
+		if (portInfoList.size()==0)
 		{
-			QSerialPortInfo pi=portInfoList.at(i);
-			qDebug() << "Port:===" << pi.portName();
-			qDebug() << "     SystemLocation:" << pi.systemLocation();
-			qDebug() << "     Description:"    << pi.description();
-			qDebug() << "     Busy:"           << pi.isBusy();
-			qDebug() << "     Valid:"          << pi.isValid();
-			qDebug() << "     Null:"           << pi.isNull();
-			qDebug() << "     Manufacturer:"   << pi.manufacturer();
-			qDebug() << "     VendorID:"       << pi.vendorIdentifier();
-			qDebug() << "     ProductID:"      << pi.productIdentifier();
-			qDebug() << "     SerialNumber:"   << pi.serialNumber();
+			qDebug() << "No connected devices found. NMEA GPS lookup failed.";
+			emit gpsResult(false);
+			return;
 		}
 
 		QSettings* conf = StelApp::getInstance().getSettings();
@@ -634,13 +615,28 @@ void StelLocationMgr::changeLocationFromNMEALookup()
 		}
 		else
 		{
-			QString portName=conf->value("gui/gpsInterface", "COM4").toString();
+			for (int i=0; i<portInfoList.size(); ++i)
+			{
+				QSerialPortInfo pi=portInfoList.at(i);
+				qDebug() << "COM port list. Make sure you are using the right configuration.";
+				qDebug() << "Port: " << pi.portName();
+				qDebug() << "  SystemLocation:" << pi.systemLocation();
+				qDebug() << "  Description:"    << pi.description();
+				qDebug() << "  Manufacturer:"   << pi.manufacturer();
+				qDebug() << "  VendorID:"       << pi.vendorIdentifier();
+				qDebug() << "  ProductID:"      << pi.productIdentifier();
+				qDebug() << "  SerialNumber:"   << pi.serialNumber();
+				qDebug() << "  Busy:"           << pi.isBusy();
+				qDebug() << "  Valid:"          << pi.isValid();
+				qDebug() << "  Null:"           << pi.isNull();
+			}
+			QString portName=conf->value("gui/gps_interface", portInfoList.at(0).portName()).toString();
 			portInfo=QSerialPortInfo(portName);
 		}
 
 		// NMEA-0183 specifies device sends at 4800bps, 8N1. Some devices however send at 9600, allow this.
-		// Maybe make baudrate configurable via config?
-		qint32 baudrate=conf->value("gui/gpsBaudrate", 4800).toInt();
+		// baudrate is configurable via config
+		qint32 baudrate=conf->value("gui/gps_baudrate", 4800).toInt();
 
 		serial = new QSerialPort(portInfo);
 		serial->setBaudRate(baudrate);
@@ -652,19 +648,15 @@ void StelLocationMgr::changeLocationFromNMEALookup()
 
 		nmea=new QNmeaPositionInfoSource(QNmeaPositionInfoSource::RealTimeMode);
 		nmea->setDevice(serial);
-		//connect(device, SIGNAL(QIODevice::readyRead()),nmea)
-		qDebug() << "GPS NMEA device configured at port " << serial->portName();
-		qDebug() << "GPS NMEA device configured at baud " << serial->baudRate();
-		qDebug() << "GPS NMEA device configured at databits " << serial->dataBits();
-		qDebug() << "GPS NMEA device configured readable? " << serial->isReadable();
-		qDebug() << "GPS NMEA device configured at open mode " << serial->openMode();
-		qDebug() << "GPS device positioning methods (should be FF or Flags 01..80): " << nmea->supportedPositioningMethods();
+		// TODO Find out what happens if some other serial device is connected? Just timeout/error?
+
+		qDebug() << "GPS NMEA device at port " << serial->portName();
 		connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
 		connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
 		connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
 	}
 
-	nmea->requestUpdate();
+	nmea->requestUpdate(3000);
 }
 
 void StelLocationMgr::nmeaTimeout()
@@ -706,12 +698,11 @@ void StelLocationMgr::nmeaUpdated(const QGeoPositionInfo &update)
 				.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
 				.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
 		core->moveObserverTo(loc, 0.0f, 0.0f);
-
 		emit gpsResult(true);
 	}
 	else
 	{
-		qDebug() << "nmeaUpdate: invalid package";
+		qDebug() << "NMEA update: invalid package";
 		emit gpsResult(false);
 	}
 }

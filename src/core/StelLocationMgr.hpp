@@ -84,10 +84,6 @@ public:
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
-//	//! Find location via query of a GPSD (GPS daemon) or directly-attached serial NMEA-0183 emitter (on Windows).
-
-//	void locationFromGPS();
-
 	//! Find list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
 	LocationMap pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
 	//! Find list of locations in a particular country only.
@@ -107,14 +103,14 @@ public slots:
 	//! This method may block the program for a few moments.
 	//! @return true if successful (and sets location), false (and does not set location) on error.
 	//! @note Does nothing on Windows because gpsd is not available.
-	void changeLocationFromGPSDLookup();
+	void locationFromGPSDLookup();
 #endif
 #ifdef ENABLE_NMEA
 	//! Process answer from direct NMEA-0183 query (on Windows only).
 	//! Requires a serially or serial-to-USB (COM port) connected GPS device and process with Qt5's NMEA capabilities.
 	//! @note When using GPSD not on localhost, don't forget the -G switch!
 	//! @return true if successful (and sets location), false (and does not set location) on error.
-	void changeLocationFromNMEALookup();
+	void locationFromNMEALookup();
 	//! 3 Signal handlers for NMEA object.
 	void nmeaTimeout();
 	void nmeaError(QGeoPositionInfoSource::Error error);
@@ -162,10 +158,6 @@ private:
 	
 	StelLocation lastResortLocation;
 
-	//! used while a GPS location query is being processed.
-	//! 0 when dormant, will count up while querying the GPSD answers.
-	//! After 10 trials, lookup will be declared unsuccessful.
-	//int gpsLocationQueryActive;
 #ifdef ENABLE_NMEA
 	//! A serial device (nowadays usually an USB-connected "GPS mouse") emitting NMEA-0183 strings.
 	QNmeaPositionInfoSource *nmea;
