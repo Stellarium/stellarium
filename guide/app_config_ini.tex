@@ -354,7 +354,11 @@ flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI.\
 flag\_dso\_designation\_usage   & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\\midrule
 flag\_enable\_kinetic\_scrolling & bool  & true  & If \emph{true}, use kinetic scrolling in the GUI\footnote{This option is available on Windows tablets only.}.\\\midrule
 flag\_show\_buttons\_background & bool   & true  & If \emph{true}, use background under bottons on bottom panel.\\\midrule
-pointer\_animation\_speed 		& float  & 1.0 	 & Animation speed of pointers.\\\bottomrule
+pointer\_animation\_speed 		& float  & 1.0 	 & Animation speed of pointers.\\\midrule
+gpsd\_hostname                  & string & "localhost" & hostname of server running \program{gpsd} (non-Windows only)\\\midrule
+gpsd\_port                      & int    & 2947  & port number of \program{gpsd} (non-Windows only)\\\midrule
+gps\_interface                  & string & "COM3" & Port number of serial/USB GPS device (Windows only)\\\midrule
+gps\_baudrate                   & int    &  4800  & baudrate of serial/USB GPS device (Windows only)\\\bottomrule
 \end{longtabu}
 
 \subsection{\big[init\_location\big]}\label{sec:config.ini:init_location}
