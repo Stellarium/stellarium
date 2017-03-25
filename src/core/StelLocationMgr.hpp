@@ -26,10 +26,8 @@
 #include <QMap>
 
 #ifdef ENABLE_NMEA
-//#include <QtLocation/QLocation>
 #include <QNmeaPositionInfoSource>
 #include <QSerialPort>
-//#include <QSerialPortInfo>
 #endif
 
 typedef QList<StelLocation> LocationList;
@@ -86,10 +84,9 @@ public:
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
-	//! Find location via query of a GPSD (GPS daemon) or directly-attached serial NMEA-0183 emitter.
-	//! When using GPSD not on localhost, don't forget the -G switch!
-	void locationFromGPS();
+//	//! Find location via query of a GPSD (GPS daemon) or directly-attached serial NMEA-0183 emitter (on Windows).
 
+//	void locationFromGPS();
 
 	//! Find list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
 	LocationMap pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
@@ -104,22 +101,25 @@ public slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
 
+#ifdef ENABLE_LIBGPS
 	//! Process answer from GPSD location query.
 	//! Requires configured and running gpsd.
-	//! This method may block the program for a few seconds.
+	//! This method may block the program for a few moments.
 	//! @return true if successful (and sets location), false (and does not set location) on error.
 	//! @note Does nothing on Windows because gpsd is not available.
-	bool changeLocationFromGPSDLookup();
+	void changeLocationFromGPSDLookup();
+#endif
+#ifdef ENABLE_NMEA
 	//! Process answer from direct NMEA-0183 query (on Windows only).
 	//! Requires a serially or serial-to-USB (COM port) connected GPS device and process with Qt5's NMEA capabilities.
-	//! This method may block the program for a few seconds.
+	//! @note When using GPSD not on localhost, don't forget the -G switch!
 	//! @return true if successful (and sets location), false (and does not set location) on error.
-	bool changeLocationFromNMEALookup();
+	void changeLocationFromNMEALookup();
 	//! 3 Signal handlers for NMEA object.
 	void nmeaTimeout();
 	void nmeaError(QGeoPositionInfoSource::Error error);
 	void nmeaUpdated(const QGeoPositionInfo &update);
-
+#endif
 
 	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
 	//! If timezone name starts with "UTC", always return unchanged.
@@ -135,7 +135,11 @@ signals:
 	//! Can be used to detect changes to the full location list
 	//! i.e. when the user added or removed locations
 	void locationListChanged();
-
+#if defined(ENABLE_NMEA) || defined (ENABLE_GPSD)
+	//! emitted when GPS location query and setting location either succeed or fail.
+	//! @param success true if successful, false in case of any error (timeout, no device, bad fix, ...).
+	void gpsResult(bool success);
+#endif
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
@@ -161,10 +165,11 @@ private:
 	//! used while a GPS location query is being processed.
 	//! 0 when dormant, will count up while querying the GPSD answers.
 	//! After 10 trials, lookup will be declared unsuccessful.
-	int gpsLocationQueryActive;
+	//int gpsLocationQueryActive;
 #ifdef ENABLE_NMEA
-	//!
+	//! A serial device (nowadays usually an USB-connected "GPS mouse") emitting NMEA-0183 strings.
 	QNmeaPositionInfoSource *nmea;
+	//! The serial port for the NMEA device
 	QSerialPort *serial;
 #endif
 };
