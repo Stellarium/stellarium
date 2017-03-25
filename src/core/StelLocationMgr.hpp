@@ -131,7 +131,7 @@ signals:
 	//! Can be used to detect changes to the full location list
 	//! i.e. when the user added or removed locations
 	void locationListChanged();
-#if defined(ENABLE_NMEA) || defined (ENABLE_GPSD)
+#if defined(ENABLE_NMEA) || defined(ENABLE_LIBGPS)
 	//! emitted when GPS location query and setting location either succeed or fail.
 	//! @param success true if successful, false in case of any error (timeout, no device, bad fix, ...).
 	void gpsResult(bool success);

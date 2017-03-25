@@ -118,7 +118,7 @@ auto_hide_vertical_toolbar          = true
 flag_enable_kinetic_scrolling       = true
 # These values are used on non-Windows systems supporting GPSD
 gpsd_hostname                       = "localhost"
-gpsd_port                           = 2947 
+gpsd_port                           = "2947"
 # These values are used on Windows only.
 gps_interface                       = "COM3"
 gps_baudrate                        = 4800
