@@ -39,10 +39,20 @@
 #ifdef ENABLE_LIBGPS
 #include <libgpsmm.h>
 #endif
+#ifdef ENABLE_NMEA
+//#include <QtLocation/QLocation>
+#include <QNmeaPositionInfoSource>
+#include <QSerialPortInfo>
+#endif
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
-StelLocationMgr::StelLocationMgr(): gpsLocationQueryActive(0)
+StelLocationMgr::StelLocationMgr():
+	gpsLocationQueryActive(0)
+#ifdef ENABLE_NMEA
+      , nmea(NULL)
+      , serial(NULL)
+#endif
 {
 	// initialize the static QMap first if necessary.
 	if (locationDBToIANAtranslations.count()==0)
@@ -90,6 +100,20 @@ StelLocationMgr::StelLocationMgr(): gpsLocationQueryActive(0)
 	
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+}
+
+StelLocationMgr::~StelLocationMgr()
+{
+#ifdef ENABLE_NMEA
+	if (nmea)
+	{
+		nmea->device()->close();
+		delete nmea;
+		nmea=NULL;
+		delete serial;
+		serial=NULL;
+	}
+#endif
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
@@ -561,7 +585,7 @@ bool StelLocationMgr::changeLocationFromGPSDLookup()
 
 	// Usually you don't leave your time zone with GPS. How to keep it?
 
-	loc.bortleScaleIndex=2;
+	loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
 	loc.ianaTimeZone="LMST";
 	loc.isUserLocation=true;
 	loc.planetName="Earth";
@@ -577,8 +601,105 @@ bool StelLocationMgr::changeLocationFromGPSDLookup()
 
 bool StelLocationMgr::changeLocationFromNMEALookup()
 {
-	qDebug() << "GPS NMEA lookup: not implemented yet";
+	qDebug() << "GPS NMEA lookup: not complete yet";
+
+	if (nmea==NULL)
+	{
+		// Getting a list of ports may enable auto-detection!
+		QList<QSerialPortInfo> portInfoList=QSerialPortInfo::availablePorts();
+		for (int i=0; i<portInfoList.size(); ++i)
+		{
+			QSerialPortInfo pi=portInfoList.at(i);
+			qDebug() << "Port:===" << pi.portName();
+			qDebug() << "     SystemLocation:" << pi.systemLocation();
+			qDebug() << "     Description:"    << pi.description();
+			qDebug() << "     Busy:"           << pi.isBusy();
+			qDebug() << "     Valid:"          << pi.isValid();
+			qDebug() << "     Null:"           << pi.isNull();
+			qDebug() << "     Manufacturer:"   << pi.manufacturer();
+			qDebug() << "     VendorID:"       << pi.vendorIdentifier();
+			qDebug() << "     ProductID:"      << pi.productIdentifier();
+			qDebug() << "     SerialNumber:"   << pi.serialNumber();
+		}
+
+
+		// As long as we only have one, this is OK. Else we must do something about COM3, COM4 etc.
+		QSerialPortInfo portInfo=portInfoList.at(0);
+
+
+		// NMEA-0183 requires device sends at 4800bps, 8N1.
+		// Maybe make baudrate configurable via config?
+		QSettings* conf = StelApp::getInstance().getSettings();
+		//QString portName=conf->value("gui/gpsInterface", "COM4").toString();
+		qint32 baudrate=conf->value("gui/gpsBaudrate", 4800).toInt();
+		QSerialPort::DataBits databits=QSerialPort::Data8;
+		QSerialPort::Parity parity=QSerialPort::NoParity;
+		QSerialPort::StopBits stopbits=QSerialPort::OneStop;
+
+		serial = new QSerialPort(portInfo);
+		serial->setDataBits(databits);
+		serial->setBaudRate(baudrate);
+		serial->setParity(parity);
+		serial->setStopBits(stopbits);
+		serial->setFlowControl(QSerialPort::NoFlowControl);
+
+		nmea=new QNmeaPositionInfoSource(QNmeaPositionInfoSource::RealTimeMode);
+		nmea->setDevice(serial);
+		qDebug() << "GPS NMEA device configured at port " << serial->portName();
+	}
+
+	nmea->setUpdateInterval(5000);
+	connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
+	connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
+	connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
+	nmea->requestUpdate(10000);
+
+
 	return false;
+}
+
+void StelLocationMgr::nmeaTimeout()
+{
+	qDebug() << "NMEA timeout";
+}
+
+void StelLocationMgr::nmeaError(QGeoPositionInfoSource::Error error)
+{
+	qDebug() << "NMEA Error: " << error;
+}
+
+void StelLocationMgr::nmeaUpdated(const QGeoPositionInfo &update)
+{
+	qDebug() << "NMEA updated";
+
+	QGeoCoordinate coord=update.coordinate();
+	QDateTime timestamp=update.timestamp();
+
+	qDebug() << " time: " << timestamp.toString();
+
+	if (update.isValid())
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		StelLocation loc;
+		loc.longitude=coord.longitude();
+		loc.latitude=coord.latitude();
+		loc.altitude=coord.altitude();
+		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		loc.ianaTimeZone="LMST";
+		loc.isUserLocation=true;
+		loc.planetName="Earth";
+		loc.name="GPS";
+		core->moveObserverTo(loc, 0.0f, 0.0f);
+
+		// TODO: Signal that location update was successful?
+		qDebug() << " Signal that location update was successful?";
+
+	}
+	else
+	{
+		// TODO: Signal failure.
+		qDebug() << "nmeaUpdate: invalid package";
+	}
 }
 
 

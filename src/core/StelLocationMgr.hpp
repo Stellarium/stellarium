@@ -25,6 +25,13 @@
 #include <QMetaType>
 #include <QMap>
 
+#ifdef ENABLE_NMEA
+//#include <QtLocation/QLocation>
+#include <QNmeaPositionInfoSource>
+#include <QSerialPort>
+//#include <QSerialPortInfo>
+#endif
+
 typedef QList<StelLocation> LocationList;
 typedef QMap<QString,StelLocation> LocationMap;
 typedef QMap<QByteArray,QByteArray> TimezoneNameMap;
@@ -38,6 +45,7 @@ class StelLocationMgr : public QObject
 public:
 	//! Default constructor which loads the list of locations from the base and user location files.
 	StelLocationMgr();
+	~StelLocationMgr();
 
 	//! Construct a StelLocationMgr which uses the locations given instead of loading them from the files.
 	StelLocationMgr(const LocationList& locations);
@@ -107,6 +115,10 @@ public slots:
 	//! This method may block the program for a few seconds.
 	//! @return true if successful (and sets location), false (and does not set location) on error.
 	bool changeLocationFromNMEALookup();
+	//! 3 Signal handlers for NMEA object.
+	void nmeaTimeout();
+	void nmeaError(QGeoPositionInfoSource::Error error);
+	void nmeaUpdated(const QGeoPositionInfo &update);
 
 
 	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
@@ -150,6 +162,11 @@ private:
 	//! 0 when dormant, will count up while querying the GPSD answers.
 	//! After 10 trials, lookup will be declared unsuccessful.
 	int gpsLocationQueryActive;
+#ifdef ENABLE_NMEA
+	//!
+	QNmeaPositionInfoSource *nmea;
+	QSerialPort *serial;
+#endif
 };
 
 #endif // _STELLOCATIONMGR_HPP_
