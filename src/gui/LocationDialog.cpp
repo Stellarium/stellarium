@@ -707,10 +707,10 @@ void LocationDialog::gpsQueryLocation()
 	ui->gpsPushButton->setText(q_("GPS..."));
 
   #ifdef ENABLE_LIBGPS
-	StelApp::getInstance().getLocationMgr().changeLocationFromGPSDLookup();
+	StelApp::getInstance().getLocationMgr().locationFromGPSDLookup();
   #endif
   #ifdef ENABLE_NMEA
-	StelApp::getInstance().getLocationMgr().changeLocationFromNMEALookup();
+	StelApp::getInstance().getLocationMgr().locationFromNMEALookup();
   #endif
 }
 
