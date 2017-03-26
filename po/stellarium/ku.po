@@ -1,20 +1,20 @@
-# Scots translation for stellarium
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Kurdish translation for stellarium
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-03-21 23:21+0700\n"
-"PO-Revision-Date: 2014-05-01 14:51+0000\n"
+"PO-Revision-Date: 2017-03-20 16:51+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
-"Language-Team: Scots <sco@li.org>\n"
+"Language-Team: Kurdish <ku@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 05:39+0000\n"
+"X-Launchpad-Export-Date: 2017-03-22 05:33+0000\n"
 "X-Generator: Launchpad (build 18334)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -27,7 +27,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:158 plugins/Exoplanets/src/Exoplanet.cpp:270
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Type: <b>%1</b>"
+msgstr ""
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom marker"
@@ -337,7 +337,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:423
 msgid "Fog"
-msgstr "Fog"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:424 src/ui_viewDialog.h:2185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
@@ -363,16 +363,16 @@ msgstr ""
 #: src/core/modules/LandscapeMgr.cpp:788
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 msgid "Author: "
-msgstr "Author: "
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:794
 msgid "Location: "
-msgstr "Location: "
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:797
 #, qt-format
 msgid ", %1 m"
-msgstr ", %1 m"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:802 src/ui_astroCalcDialog.h:538
 msgid "Celestial body:"
@@ -430,7 +430,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1"
-msgstr "Size: %1"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:245
 #, qt-format
@@ -483,7 +483,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:331 src/core/modules/StarWrapper.cpp:252
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Parallax: %1\""
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:335
 msgid "Morphological description: "
@@ -946,7 +946,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:400
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr ""
+msgstr "Çarika Pêşîn"
 
 #: src/core/modules/Planet.cpp:402
 msgctxt "Moon phase"
@@ -956,7 +956,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:404
 msgctxt "Moon phase"
 msgid "Full Moon"
-msgstr ""
+msgstr "Heyva Tijî"
 
 #: src/core/modules/Planet.cpp:406
 msgctxt "Moon phase"
@@ -976,7 +976,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:412
 msgctxt "Moon phase"
 msgid "New Moon"
-msgstr ""
+msgstr "Heyva Nû"
 
 #: src/core/modules/Planet.cpp:417 src/core/modules/Planet.cpp:422
 #: src/core/modules/MinorPlanet.cpp:293 src/core/modules/MinorPlanet.cpp:298
@@ -1128,7 +1128,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:294
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "Spectral Type: %1"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:255
 #, qt-format
@@ -1190,7 +1190,7 @@ msgstr ""
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
-msgstr "Day and Time"
+msgstr ""
 
 #: src/core/StelCore.cpp:252 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
@@ -1648,7 +1648,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:2202 src/core/SimbadSearcher.cpp:155
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #: src/core/StelCore.cpp:2210
 #, qt-format
@@ -1880,7 +1880,7 @@ msgstr ""
 
 #: src/core/StelMovementMgr.cpp:184
 msgid "Zoom out"
-msgstr "Zoom oot"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:185
 msgid "Track object"
@@ -1968,7 +1968,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:941 src/gui/ViewDialog.cpp:1263
 msgid "Contact"
-msgstr "Contact"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:943
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
@@ -1987,7 +1987,7 @@ msgstr "Contact"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
 msgid "Version"
-msgstr "Version"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1040
 msgid "Running script: "
@@ -2379,7 +2379,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:313
 msgid "Developers"
-msgstr "Developers"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:314
 #, qt-format
@@ -2400,7 +2400,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "Developer: %1"
-msgstr "Developer: %1"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:323
 #, qt-format
@@ -2410,7 +2410,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Tester: %1"
-msgstr "Tester: %1"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:325
 msgid "Former Developers"
@@ -2452,7 +2452,7 @@ msgstr ""
 
 #: src/gui/StelGui.cpp:205
 msgid "Quit"
-msgstr "Quit"
+msgstr ""
 
 #: src/gui/StelGui.cpp:206
 msgid "Speed up the script execution rate"
@@ -2536,7 +2536,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:862
 msgid "Space"
-msgstr "Space"
+msgstr ""
 
 #: src/gui/StelGuiItems.cpp:634
 msgid "Time zone"
@@ -2722,7 +2722,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:230
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "Error!"
-msgstr "Mistak!"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
 #, qt-format
@@ -2876,7 +2876,7 @@ msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:497
 msgid "Action"
-msgstr "Action"
+msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:498 src/ui_shortcutsDialog.h:197
 msgid "Primary shortcut"
@@ -3123,7 +3123,7 @@ msgstr ""
 
 #: src/StelMainView.cpp:760
 msgid "Save screenshot"
-msgstr "Sauf screenshot"
+msgstr ""
 
 #: src/StelMainView.cpp:761
 msgid "Full-screen mode"
@@ -4169,43 +4169,43 @@ msgstr ""
 
 #: src/translations_countries.h:31
 msgid "Andorra"
-msgstr ""
+msgstr "Andora"
 
 #: src/translations_countries.h:32
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Mîrîtiyên Ereb ên Yekbûyî"
 
 #: src/translations_countries.h:33
 msgid "Afghanistan"
-msgstr ""
+msgstr "Efxanistan"
 
 #: src/translations_countries.h:34
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua and Barbuda"
 
 #: src/translations_countries.h:35
 msgid "Anguilla"
-msgstr ""
+msgstr "Angîla"
 
 #: src/translations_countries.h:36
 msgid "Albania"
-msgstr ""
+msgstr "Arnavût"
 
 #: src/translations_countries.h:37
 msgid "Armenia"
-msgstr ""
+msgstr "Ermenistan"
 
 #: src/translations_countries.h:38
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #: src/translations_countries.h:39
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarktîka"
 
 #: src/translations_countries.h:40
 msgid "Argentina"
-msgstr ""
+msgstr "Arjantîn"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
@@ -4213,59 +4213,59 @@ msgstr ""
 
 #: src/translations_countries.h:42
 msgid "Austria"
-msgstr ""
+msgstr "Awusturya"
 
 #: src/translations_countries.h:43
 msgid "Australia"
-msgstr ""
+msgstr "Australya"
 
 #: src/translations_countries.h:44
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: src/translations_countries.h:45
 msgid "Åland Islands"
-msgstr ""
+msgstr "Giravên Åland"
 
 #: src/translations_countries.h:46
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbaycan"
 
 #: src/translations_countries.h:47
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosna Hersek"
 
 #: src/translations_countries.h:48
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #: src/translations_countries.h:49
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladeş"
 
 #: src/translations_countries.h:50
 msgid "Belgium"
-msgstr ""
+msgstr "Belçîka"
 
 #: src/translations_countries.h:51
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkîna Faso"
 
 #: src/translations_countries.h:52
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgaristan"
 
 #: src/translations_countries.h:53
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrayîn"
 
 #: src/translations_countries.h:54
 msgid "Burundi"
-msgstr ""
+msgstr "Bûrûndî"
 
 #: src/translations_countries.h:55
 msgid "Benin"
-msgstr ""
+msgstr "Benîn"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
@@ -4273,15 +4273,15 @@ msgstr ""
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermûda"
 
 #: src/translations_countries.h:58
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: src/translations_countries.h:59
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolîvya"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
@@ -4289,39 +4289,39 @@ msgstr ""
 
 #: src/translations_countries.h:61
 msgid "Brazil"
-msgstr ""
+msgstr "Brezîlya"
 
 #: src/translations_countries.h:62
 msgid "Bahamas"
-msgstr ""
+msgstr "Giravên Bahama"
 
 #: src/translations_countries.h:63
 msgid "Bhutan"
-msgstr ""
+msgstr "Bûtan"
 
 #: src/translations_countries.h:64
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Girava Boyuvet"
 
 #: src/translations_countries.h:65
 msgid "Botswana"
-msgstr ""
+msgstr "Botswana"
 
 #: src/translations_countries.h:66
 msgid "Belarus"
-msgstr ""
+msgstr "Belarus"
 
 #: src/translations_countries.h:67
 msgid "Belize"
-msgstr ""
+msgstr "Belîze"
 
 #: src/translations_countries.h:68
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 #: src/translations_countries.h:69
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Grava Kokos (Kîlîng)"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
@@ -4337,123 +4337,123 @@ msgstr ""
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
-msgstr ""
+msgstr "Swîsre"
 
 #: src/translations_countries.h:74
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Perava Diranfîlê"
 
 #: src/translations_countries.h:75
 msgid "Cook Islands"
-msgstr ""
+msgstr "Giravên Cook"
 
 #: src/translations_countries.h:76
 msgid "Chile"
-msgstr ""
+msgstr "Sîlî"
 
 #: src/translations_countries.h:77
 msgid "Cameroon"
-msgstr ""
+msgstr "Kamerûn"
 
 #: src/translations_countries.h:78
 msgid "China"
-msgstr ""
+msgstr "Çîn"
 
 #: src/translations_countries.h:79
 msgid "Colombia"
-msgstr ""
+msgstr "Kolombiya"
 
 #: src/translations_countries.h:80
 msgid "Costa Rica"
-msgstr ""
+msgstr "Kosta Rîka"
 
 #: src/translations_countries.h:81
 msgid "Cuba"
-msgstr ""
+msgstr "Kûba"
 
 #: src/translations_countries.h:82
 msgid "Cape Verde"
-msgstr ""
+msgstr "Kap Verde"
 
 #: src/translations_countries.h:83
 msgid "Curacao"
-msgstr ""
+msgstr "Curacao"
 
 #: src/translations_countries.h:84
 msgid "Christmas Island"
-msgstr ""
+msgstr "Girava Noel"
 
 #: src/translations_countries.h:85
 msgid "Cyprus"
-msgstr ""
+msgstr "Kibris"
 
 #: src/translations_countries.h:86
 msgid "Czech Republic"
-msgstr ""
+msgstr "Komara Çek"
 
 #: src/translations_countries.h:87
 msgid "Germany"
-msgstr ""
+msgstr "Almanya"
 
 #: src/translations_countries.h:88
 msgid "Djibouti"
-msgstr ""
+msgstr "Cîbutî"
 
 #: src/translations_countries.h:89
 msgid "Denmark"
-msgstr ""
+msgstr "Danîmarka"
 
 #: src/translations_countries.h:90
 msgid "Dominica"
-msgstr ""
+msgstr "Domînîka"
 
 #: src/translations_countries.h:91
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Komara Domînîk"
 
 #: src/translations_countries.h:92
 msgid "Algeria"
-msgstr ""
+msgstr "Cezayîr"
 
 #: src/translations_countries.h:93
 msgid "Ecuador"
-msgstr ""
+msgstr "Ekvator"
 
 #: src/translations_countries.h:94
 msgid "Estonia"
-msgstr ""
+msgstr "Estonia"
 
 #: src/translations_countries.h:95
 msgid "Egypt"
-msgstr ""
+msgstr "Misir"
 
 #: src/translations_countries.h:96
 msgid "Western Sahara"
-msgstr ""
+msgstr "Sehraya Rojava"
 
 #: src/translations_countries.h:97
 msgid "Eritrea"
-msgstr ""
+msgstr "Erître"
 
 #: src/translations_countries.h:98
 msgid "Spain"
-msgstr ""
+msgstr "Îspanya"
 
 #: src/translations_countries.h:99
 msgid "Ethiopia"
-msgstr ""
+msgstr "Atiyopya"
 
 #: src/translations_countries.h:100
 msgid "Finland"
-msgstr ""
+msgstr "Fînlandiya"
 
 #: src/translations_countries.h:101
 msgid "Fiji"
-msgstr ""
+msgstr "Fîjî"
 
 #: src/translations_countries.h:102
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Giravên Falklandê"
 
 #: src/translations_countries.h:103
 msgid "Micronesia"
@@ -4461,11 +4461,11 @@ msgstr ""
 
 #: src/translations_countries.h:104
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Giravên Faroye"
 
 #: src/translations_countries.h:105
 msgid "France"
-msgstr ""
+msgstr "Fransa"
 
 #: src/translations_countries.h:106
 msgid "Gabon"
@@ -4477,171 +4477,171 @@ msgstr ""
 
 #: src/translations_countries.h:108
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: src/translations_countries.h:109
 msgid "Georgia"
-msgstr ""
+msgstr "Gurcistan"
 
 #: src/translations_countries.h:110
 msgid "French Guiana"
-msgstr ""
+msgstr "Guyana'ya Fransî"
 
 #: src/translations_countries.h:111
 msgid "Guernsey"
-msgstr ""
+msgstr "Guernsey"
 
 #: src/translations_countries.h:112
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #: src/translations_countries.h:113
 msgid "Gibraltar"
-msgstr ""
+msgstr "Cebelîtariq"
 
 #: src/translations_countries.h:114
 msgid "Greenland"
-msgstr ""
+msgstr "Gronland"
 
 #: src/translations_countries.h:115
 msgid "Gambia"
-msgstr ""
+msgstr "Gambiya"
 
 #: src/translations_countries.h:116
 msgid "Guinea"
-msgstr ""
+msgstr "Gîne"
 
 #: src/translations_countries.h:117
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadelûp"
 
 #: src/translations_countries.h:118
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Equatorial Guinea"
 
 #: src/translations_countries.h:119
 msgid "Greece"
-msgstr ""
+msgstr "Yunanistan"
 
 #: src/translations_countries.h:120
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "South Georgia and the South Sandwich Islands"
 
 #: src/translations_countries.h:121
 msgid "Guatemala"
-msgstr ""
+msgstr "Gûatemala"
 
 #: src/translations_countries.h:122
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #: src/translations_countries.h:123
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Gîne Bîssau"
 
 #: src/translations_countries.h:124
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #: src/translations_countries.h:125
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #: src/translations_countries.h:126
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Giravên Heard û McDonald"
 
 #: src/translations_countries.h:127
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: src/translations_countries.h:128
 msgid "Croatia"
-msgstr ""
+msgstr "Xirwatistan"
 
 #: src/translations_countries.h:129
 msgid "Haiti"
-msgstr ""
+msgstr "Haîtî"
 
 #: src/translations_countries.h:130
 msgid "Hungary"
-msgstr ""
+msgstr "Macaristan"
 
 #: src/translations_countries.h:131
 msgid "Indonesia"
-msgstr ""
+msgstr "Endonezya"
 
 #: src/translations_countries.h:132
 msgid "Ireland"
-msgstr ""
+msgstr "Îrlanda"
 
 #: src/translations_countries.h:133
 msgid "Israel"
-msgstr ""
+msgstr "Îsraîl"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Girava Man"
 
 #: src/translations_countries.h:135
 msgid "India"
-msgstr ""
+msgstr "Hindistan"
 
 #: src/translations_countries.h:136
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "British Indian Ocean Territory"
 
 #: src/translations_countries.h:137
 msgid "Iraq"
-msgstr ""
+msgstr "Iraq"
 
 #: src/translations_countries.h:138
 msgid "Iran"
-msgstr ""
+msgstr "Îran"
 
 #: src/translations_countries.h:139
 msgid "Iceland"
-msgstr ""
+msgstr "Îzlanda"
 
 #: src/translations_countries.h:140
 msgid "Italy"
-msgstr ""
+msgstr "Îtalya"
 
 #: src/translations_countries.h:141
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 #: src/translations_countries.h:142
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaica"
 
 #: src/translations_countries.h:143
 msgid "Jordan"
-msgstr ""
+msgstr "Urdin"
 
 #: src/translations_countries.h:144
 msgid "Japan"
-msgstr ""
+msgstr "Japonya"
 
 #: src/translations_countries.h:145
 msgid "Kenya"
-msgstr ""
+msgstr "Kenya"
 
 #: src/translations_countries.h:146
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Kirgîzistan"
 
 #: src/translations_countries.h:147
 msgid "Cambodia"
-msgstr ""
+msgstr "Kamboçya"
 
 #: src/translations_countries.h:148
 msgid "Kiribati"
-msgstr ""
+msgstr "Kîrîbatî"
 
 #: src/translations_countries.h:149
 msgid "Comoros"
-msgstr ""
+msgstr "Komoros"
 
 #: src/translations_countries.h:150
 msgid "St Kitts and Nevis"
@@ -4657,23 +4657,23 @@ msgstr ""
 
 #: src/translations_countries.h:153
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuweyt"
 
 #: src/translations_countries.h:154
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Giravên Kayman"
 
 #: src/translations_countries.h:155
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Kazaxistan"
 
 #: src/translations_countries.h:156
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: src/translations_countries.h:157
 msgid "Lebanon"
-msgstr ""
+msgstr "Libnan"
 
 #: src/translations_countries.h:158
 msgid "St Lucia"
@@ -4681,51 +4681,51 @@ msgstr ""
 
 #: src/translations_countries.h:159
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Liechtenstein"
 
 #: src/translations_countries.h:160
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Srî Lanka"
 
 #: src/translations_countries.h:161
 msgid "Liberia"
-msgstr ""
+msgstr "Lîberya"
 
 #: src/translations_countries.h:162
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #: src/translations_countries.h:163
 msgid "Lithuania"
-msgstr ""
+msgstr "Lîtvanya"
 
 #: src/translations_countries.h:164
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luksemburg"
 
 #: src/translations_countries.h:165
 msgid "Latvia"
-msgstr ""
+msgstr "Latviya"
 
 #: src/translations_countries.h:166
 msgid "Libya"
-msgstr ""
+msgstr "Lîbya"
 
 #: src/translations_countries.h:167
 msgid "Morocco"
-msgstr ""
+msgstr "Fas"
 
 #: src/translations_countries.h:168
 msgid "Monaco"
-msgstr ""
+msgstr "Monako"
 
 #: src/translations_countries.h:169
 msgid "Moldova"
-msgstr ""
+msgstr "Moldova"
 
 #: src/translations_countries.h:170
 msgid "Montenegro"
-msgstr ""
+msgstr "Montenegro"
 
 #: src/translations_countries.h:171
 msgid "St Martin (French)"
@@ -4733,19 +4733,19 @@ msgstr ""
 
 #: src/translations_countries.h:172
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagaskar"
 
 #: src/translations_countries.h:173
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Giravên Marşal"
 
 #: src/translations_countries.h:174
 msgid "Macedonia"
-msgstr ""
+msgstr "Makedonya"
 
 #: src/translations_countries.h:175
 msgid "Mali"
-msgstr ""
+msgstr "Malî"
 
 #: src/translations_countries.h:176
 msgid "Myanmar (Burma)"
@@ -4753,135 +4753,135 @@ msgstr ""
 
 #: src/translations_countries.h:177
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolya"
 
 #: src/translations_countries.h:178
 msgid "Macau"
-msgstr ""
+msgstr "Macau"
 
 #: src/translations_countries.h:179
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Giravên Mariana yên Bakur"
 
 #: src/translations_countries.h:180
 msgid "Martinique"
-msgstr ""
+msgstr "Martînîque"
 
 #: src/translations_countries.h:181
 msgid "Mauritania"
-msgstr ""
+msgstr "Morîtanya"
 
 #: src/translations_countries.h:182
 msgid "Montserrat"
-msgstr ""
+msgstr "Montserrat"
 
 #: src/translations_countries.h:183
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: src/translations_countries.h:184
 msgid "Mauritius"
-msgstr ""
+msgstr "Morîtiyus"
 
 #: src/translations_countries.h:185
 msgid "Maldives"
-msgstr ""
+msgstr "Giravên Maldîv"
 
 #: src/translations_countries.h:186
 msgid "Malawi"
-msgstr ""
+msgstr "Malawî"
 
 #: src/translations_countries.h:187
 msgid "Mexico"
-msgstr ""
+msgstr "Meksîka"
 
 #: src/translations_countries.h:188
 msgid "Malaysia"
-msgstr ""
+msgstr "Malezya"
 
 #: src/translations_countries.h:189
 msgid "Mozambique"
-msgstr ""
+msgstr "Mozambîk"
 
 #: src/translations_countries.h:190
 msgid "Namibia"
-msgstr ""
+msgstr "Namibia"
 
 #: src/translations_countries.h:191
 msgid "New Caledonia"
-msgstr ""
+msgstr "Kaledonyaya Nû"
 
 #: src/translations_countries.h:192
 msgid "Niger"
-msgstr ""
+msgstr "Nîjer"
 
 #: src/translations_countries.h:193
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Girava Norfolk"
 
 #: src/translations_countries.h:194
 msgid "Nigeria"
-msgstr ""
+msgstr "Nîjerya"
 
 #: src/translations_countries.h:195
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nîkaragûa"
 
 #: src/translations_countries.h:196
 msgid "Netherlands"
-msgstr ""
+msgstr "Holanda"
 
 #: src/translations_countries.h:197
 msgid "Norway"
-msgstr ""
+msgstr "Norwec"
 
 #: src/translations_countries.h:198
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: src/translations_countries.h:199
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: src/translations_countries.h:200
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: src/translations_countries.h:201
 msgid "New Zealand"
-msgstr ""
+msgstr "Zelandaya Nû"
 
 #: src/translations_countries.h:202
 msgid "Oman"
-msgstr ""
+msgstr "Uman"
 
 #: src/translations_countries.h:203
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #: src/translations_countries.h:204
 msgid "Peru"
-msgstr ""
+msgstr "Perû"
 
 #: src/translations_countries.h:205
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polinezya'ya Fransî"
 
 #: src/translations_countries.h:206
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Papûa Gîneya Nû"
 
 #: src/translations_countries.h:207
 msgid "Philippines"
-msgstr ""
+msgstr "Filîpîn"
 
 #: src/translations_countries.h:208
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #: src/translations_countries.h:209
 msgid "Poland"
-msgstr ""
+msgstr "Polonya"
 
 #: src/translations_countries.h:210
 msgid "St Pierre and Miquelon"
@@ -4889,75 +4889,75 @@ msgstr ""
 
 #: src/translations_countries.h:211
 msgid "Pitcairn"
-msgstr ""
+msgstr "Pitcairn"
 
 #: src/translations_countries.h:212
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Puerto Rico"
 
 #: src/translations_countries.h:213
 msgid "Palestine"
-msgstr ""
+msgstr "Filistin"
 
 #: src/translations_countries.h:214
 msgid "Portugal"
-msgstr ""
+msgstr "Portekîzî"
 
 #: src/translations_countries.h:215
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #: src/translations_countries.h:216
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 #: src/translations_countries.h:217
 msgid "Qatar"
-msgstr ""
+msgstr "Qeter"
 
 #: src/translations_countries.h:218
 msgid "Réunion"
-msgstr ""
+msgstr "Réunion"
 
 #: src/translations_countries.h:219
 msgid "Romania"
-msgstr ""
+msgstr "Romanya"
 
 #: src/translations_countries.h:220
 msgid "Serbia"
-msgstr ""
+msgstr "Sirbistan"
 
 #: src/translations_countries.h:221
 msgid "Russia"
-msgstr ""
+msgstr "Rûsya"
 
 #: src/translations_countries.h:222
 msgid "Rwanda"
-msgstr ""
+msgstr "Rûanda"
 
 #: src/translations_countries.h:223
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Erebistana Siûdî"
 
 #: src/translations_countries.h:224
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Giravên Solomon"
 
 #: src/translations_countries.h:225
 msgid "Seychelles"
-msgstr ""
+msgstr "Seychelles"
 
 #: src/translations_countries.h:226
 msgid "Sudan"
-msgstr ""
+msgstr "Sûdan"
 
 #: src/translations_countries.h:227
 msgid "Sweden"
-msgstr ""
+msgstr "Swêd"
 
 #: src/translations_countries.h:228
 msgid "Singapore"
-msgstr ""
+msgstr "Sîngapur"
 
 #: src/translations_countries.h:229
 msgid "St Helena"
@@ -4965,35 +4965,35 @@ msgstr ""
 
 #: src/translations_countries.h:230
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovenya"
 
 #: src/translations_countries.h:231
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "Svalbard û Jan Mayen"
 
 #: src/translations_countries.h:232
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovakya"
 
 #: src/translations_countries.h:233
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sîera Leone"
 
 #: src/translations_countries.h:234
 msgid "San Marino"
-msgstr ""
+msgstr "San Marino"
 
 #: src/translations_countries.h:235
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #: src/translations_countries.h:236
 msgid "Somalia"
-msgstr ""
+msgstr "Somalî"
 
 #: src/translations_countries.h:237
 msgid "Suriname"
-msgstr ""
+msgstr "Sûrînam"
 
 #: src/translations_countries.h:238
 msgid "South Sudan"
@@ -5001,11 +5001,11 @@ msgstr ""
 
 #: src/translations_countries.h:239
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Sao Tome û Prinsipe"
 
 #: src/translations_countries.h:240
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #: src/translations_countries.h:241
 msgid "St Maarten (Dutch)"
@@ -5013,11 +5013,11 @@ msgstr ""
 
 #: src/translations_countries.h:242
 msgid "Syria"
-msgstr ""
+msgstr "Sûriye"
 
 #: src/translations_countries.h:243
 msgid "Swaziland"
-msgstr ""
+msgstr "Swazîland"
 
 #: src/translations_countries.h:244
 msgid "Turks and Caicos Is"
@@ -5025,7 +5025,7 @@ msgstr ""
 
 #: src/translations_countries.h:245
 msgid "Chad"
-msgstr ""
+msgstr "Çad"
 
 #: src/translations_countries.h:246
 msgid "French Southern and Antarctic Lands"
@@ -5033,63 +5033,63 @@ msgstr ""
 
 #: src/translations_countries.h:247
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #: src/translations_countries.h:248
 msgid "Thailand"
-msgstr ""
+msgstr "Tayland"
 
 #: src/translations_countries.h:249
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tacîkistan"
 
 #: src/translations_countries.h:250
 msgid "Tokelau"
-msgstr ""
+msgstr "Tokelau"
 
 #: src/translations_countries.h:251
 msgid "East Timor"
-msgstr ""
+msgstr "Tîmora Rojhilat"
 
 #: src/translations_countries.h:252
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Tirkmenistan"
 
 #: src/translations_countries.h:253
 msgid "Tunisia"
-msgstr ""
+msgstr "Tûnis"
 
 #: src/translations_countries.h:254
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #: src/translations_countries.h:255
 msgid "Turkey"
-msgstr ""
+msgstr "Tirkiye"
 
 #: src/translations_countries.h:256
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trînîdad û Tobago"
 
 #: src/translations_countries.h:257
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #: src/translations_countries.h:258
 msgid "Taiwan"
-msgstr ""
+msgstr "Taywan"
 
 #: src/translations_countries.h:259
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzanya"
 
 #: src/translations_countries.h:260
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukrayna"
 
 #: src/translations_countries.h:261
 msgid "Uganda"
-msgstr ""
+msgstr "Ûganda"
 
 #: src/translations_countries.h:262
 msgid "US minor outlying islands"
@@ -5097,19 +5097,19 @@ msgstr ""
 
 #: src/translations_countries.h:263
 msgid "United States"
-msgstr ""
+msgstr "Dewletên Yekbûyî"
 
 #: src/translations_countries.h:264
 msgid "Uruguay"
-msgstr ""
+msgstr "Urugûay"
 
 #: src/translations_countries.h:265
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Ozbekistan"
 
 #: src/translations_countries.h:266
 msgid "Vatican City"
-msgstr ""
+msgstr "Bajarê Vatîkanê"
 
 #: src/translations_countries.h:267
 msgid "St Vincent"
@@ -5117,7 +5117,7 @@ msgstr ""
 
 #: src/translations_countries.h:268
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezûela"
 
 #: src/translations_countries.h:269
 msgid "Virgin Islands (UK)"
@@ -5129,15 +5129,15 @@ msgstr ""
 
 #: src/translations_countries.h:271
 msgid "Vietnam"
-msgstr ""
+msgstr "Viyetnam"
 
 #: src/translations_countries.h:272
 msgid "Vanuatu"
-msgstr ""
+msgstr "Vanûatû"
 
 #: src/translations_countries.h:273
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "Walis û Futuna"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
@@ -5145,23 +5145,23 @@ msgstr ""
 
 #: src/translations_countries.h:275
 msgid "Yemen"
-msgstr ""
+msgstr "Yemen"
 
 #: src/translations_countries.h:276
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: src/translations_countries.h:277
 msgid "South Africa"
-msgstr ""
+msgstr "Afrîkaya Başûr"
 
 #: src/translations_countries.h:278
 msgid "Zambia"
-msgstr ""
+msgstr "Zambiya"
 
 #: src/translations_countries.h:279
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zîmbabwe"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
@@ -14560,71 +14560,3 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
 msgstr ""
-
-#~ msgid "Planet: "
-#~ msgstr "Planet: "
-
-#~ msgid "Globular cluster"
-#~ msgstr "Globular cluster"
-
-#~ msgid "Galaxy"
-#~ msgstr "Galaxy"
-
-#, no-c-format, qt-format
-#~ msgid "Distance: %1AU"
-#~ msgstr "Distance: %1AU"
-
-#~ msgid "Unknown"
-#~ msgstr "Unkent"
-
-#, qt-format
-#~ msgid "Distance: %1 Light Years"
-#~ msgstr "Distans: %1 Light Years"
-
-#~ msgid "Administration "
-#~ msgstr "Administratioun "
-
-#~ msgid "Stars "
-#~ msgstr "Sternis "
-
-#~ msgid "Set Time "
-#~ msgstr "Set Tyme "
-
-#~ msgid "Colors "
-#~ msgstr "Colouris "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Altitud (m): "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Sky Tyme: "
-
-#~ msgid "Calendar"
-#~ msgstr "Calendar"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Sky Language: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Sky Culture: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Actuall Tyme"
-
-#~ msgid "Twinkling: "
-#~ msgstr "Twinklin': "
-
-#~ msgid "General "
-#~ msgstr "General "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Set Time Zone: "
-
-#~ msgid "Landscape: "
-#~ msgstr "Landscape: "
-
-#~ msgid "Planet Names"
-#~ msgstr "Planet Names"
-
-#~ msgid "License"
-#~ msgstr "Liecence"

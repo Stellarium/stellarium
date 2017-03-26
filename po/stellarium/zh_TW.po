@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 15:38+0700\n"
+"POT-Creation-Date: 2017-03-21 23:21+0700\n"
 "PO-Revision-Date: 2017-02-16 02:41+0000\n"
 "Last-Translator: Freeman Li <freeman.tam@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-20 05:45+0000\n"
-"X-Generator: Launchpad (build 18332)\n"
+"X-Launchpad-Export-Date: 2017-03-22 05:45+0000\n"
+"X-Generator: Launchpad (build 18334)\n"
 "Language: zh_TW\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -2038,7 +2038,7 @@ msgstr "聯絡"
 
 #: src/gui/ConfigurationDialog.cpp:943
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:252
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
@@ -2511,7 +2511,7 @@ msgstr "OSX 開發: %1"
 
 #: src/gui/HelpDialog.cpp:336
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:510
+#: plugins/Oculars/src/gui/OcularDialog.cpp:511
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "貢獻者"
@@ -7530,7 +7530,7 @@ msgid "Angle Measure Plug-in"
 msgstr "角度測量外掛程式"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:509
+#: plugins/Oculars/src/gui/OcularDialog.cpp:510
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
@@ -8152,49 +8152,49 @@ msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "由這組目鏡/鏡片/望遠鏡組合所提供的出射光瞳"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:489
+#: plugins/Oculars/src/gui/OcularDialog.cpp:490
 msgid "tFOV:"
 msgstr "真實視野(tFOV):"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:491
+#: plugins/Oculars/src/gui/OcularDialog.cpp:492
 msgid "Magnification factor:"
 msgstr "放大係數:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/Oculars/src/ui_ocularDialog.h:1200
 msgid "Diameter:"
 msgstr "直徑:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+#: plugins/Oculars/src/gui/OcularDialog.cpp:497
 #: plugins/Oculars/src/ui_ocularDialog.h:1166
 msgid "aFOV:"
 msgstr "可視視野(aFOV):"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:498
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid "Focal length:"
 msgstr "焦距:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 msgid "Field stop:"
 msgstr "視野限度:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "Oculars Plug-in"
 msgstr "望遠鏡模式外掛"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:510
+#: plugins/Oculars/src/gui/OcularDialog.cpp:511
 msgid "Barlow lens feature"
 msgstr "巴羅(Barlow)鏡特性"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:515
 msgid "Overview"
 msgstr "摘要"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -8204,42 +8204,42 @@ msgstr ""
 "這個外掛程式計畫去模擬你透過目鏡所看到的景象，這個設定對話框可用來增加、修改或刪除目鏡、望遠鏡、還有 CCD "
 "感測器，首次執行將會自動加入一些樣本好讓你開始使用。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
 msgid "You can choose to scale the image you see on the screen."
 msgstr "您可以透過選取去改變螢幕所見影像的大小，"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:518
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "這是為了給您一個使用不同目鏡/望遠鏡的組合效果提供更佳的比較，"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/gui/OcularDialog.cpp:520
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr "相同的目鏡在不同焦距的望遠鏡會有不同的出射光瞳，也會改變您看到的畫面。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:521
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "這樣權衡的結果是影像縮放後，螢幕大部分的範圍可能會浪費掉，"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr "所以我建議您關閉這個外掛程式，除非您覺得有必要。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:522
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr "您可以在觀看時切換是否顯示十字准線，原本我希望它的十字的某個方向可以指向北方，可惜我無法完成，所以目前它指向螢幕正上方。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:523
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -8250,38 +8250,38 @@ msgstr ""
 "您可以切換顯示Telrad尋星鏡，但這僅能在您沒有在望遠鏡模擬時使用。這個功能會顯示三個同心圓，分別是 0.5%1，2.0%1，和 4.0%1 "
 "。這有助於您想像用裸眼透過Telrad尋星鏡(或類似的)看到的畫面。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:524
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "若您發現任何問題，請讓我知曉。盡情享用吧！"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid "Hot Keys"
 msgstr "快速鍵"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:542
-#: plugins/Oculars/src/gui/OcularDialog.cpp:547
+#: plugins/Oculars/src/gui/OcularDialog.cpp:543
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 msgid "[no key defined]"
 msgstr "[未指定按鍵]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:552
 msgid "Switches on/off the ocular overlay."
 msgstr "切換望遠鏡模擬。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:555
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid "Opens the pop-up navigation menu."
 msgstr "打開彈出式導航選單。"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:559
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:563
+#: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr ""
 
