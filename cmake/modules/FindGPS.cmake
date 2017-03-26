@@ -10,6 +10,7 @@
 # Copyright 2006-2009 Kitware, Inc.
 # Copyright 2006 Alexander Neundorf <neundorf@kde.org>
 # Copyright 2010 David Register 
+# Copyright 2017 Alexander Wolf
 #
 #
 # All rights reserved.
@@ -67,30 +68,26 @@
 #
 # * Kitware, Inc.
 
-
-
-
-
 IF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
     SET(GPS_FIND_QUIETLY TRUE)
 ENDIF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
 
-FIND_PATH(GPS_INCLUDE_DIR gps.h /usr/include /usr/include/gps /usr/local/include/gps /opt/local/include)
+FIND_PATH(GPS_INCLUDE_DIR gps.h /usr/include /usr/include/gps /usr/local/include/gps /opt/local/include /sw/include)
 
-FIND_LIBRARY(GPS_LIBRARY NAMES gps PATH /usr/lib /usr/local/lib /opt/local/lib) 
+FIND_LIBRARY(GPS_LIBRARY NAMES gps PATH /usr/lib /usr/local/lib /opt/local/lib /sw/lib) 
 
 IF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
-   SET(GPS_FOUND TRUE)
+    SET(GPS_FOUND TRUE)
 ENDIF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
 
 IF (GPS_FOUND)
-   IF (NOT GPS_FIND_QUIETLY)
-      MESSAGE(STATUS "Found gps: ${GPS_LIBRARY}")
-   ENDIF (NOT GPS_FIND_QUIETLY)
+    IF (NOT GPS_FIND_QUIETLY)
+        MESSAGE(STATUS "Found GPS: ${GPS_LIBRARY}")
+    ENDIF (NOT GPS_FIND_QUIETLY)
 ELSE (GPS_FOUND)
-   IF (GPS_FIND_REQUIRED)
-      MESSAGE(FATAL_ERROR "Could not find gps library")
-   ENDIF (GPS_FIND_REQUIRED)
+    IF (GPS_FIND_REQUIRED)
+        MESSAGE(FATAL_ERROR "Could not find GPS library")
+    ENDIF (GPS_FIND_REQUIRED)
 ENDIF (GPS_FOUND)
 
 
