@@ -197,6 +197,23 @@ ENDIF()
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
+# Activate GPS support (solution depends on operating system)
+SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
+IF(ENABLE_GPS)
+    IF(WIN32)
+        SET(ENABLE_LIBGPS 0)
+        SET(ENABLE_NMEA 1)
+        MESSAGE(STATUS "GPS support by Qt's NMEA handling enabled.")
+    ELSE(WIN32)
+        SET(ENABLE_LIBGPS 1)
+        SET(ENABLE_NMEA 0)
+        MESSAGE(STATUS "GPS support by GPSD enabled.")
+    ENDIF(WIN32)
+ELSE(ENABLE_GPS)
+    SET(ENABLE_LIBGPS 0)
+    SET(ENABLE_NMEA 0)
+ENDIF(ENABLE_GPS)
+
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
@@ -433,6 +450,12 @@ ENDIF()
 
 FIND_PACKAGE(Qt5Test)
 
+IF(ENABLE_NMEA)
+  ADD_DEFINITIONS(-DENABLE_NMEA)
+  FIND_PACKAGE(Qt5Positioning REQUIRED)
+  FIND_PACKAGE(Qt5SerialPort REQUIRED)
+ENDIF()
+
 ### Setup external packages
 
 FIND_PACKAGE(ZLIB QUIET) #quiet warnings about not found, we have our own version anyway
@@ -454,6 +477,11 @@ IF(NOT USE_SYSTEM_ZLIB)
      SET(ZLIB_LIBRARIES zlib_stel)
 ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
+ENDIF()
+
+IF(ENABLE_LIBGPS)
+  ADD_DEFINITIONS(-DENABLE_LIBGPS)
+  FIND_LIBRARY(GPS_LIBRARY NAMES libgps.so CACHE FILEPATH DOC "Path to libgps.so")
 ENDIF()
 
 ########### Set some global variables ###########
