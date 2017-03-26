@@ -68,7 +68,12 @@ SET(RemoteControl_RES ../RemoteControl.qrc)
 QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 
 ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
-TARGET_LINK_LIBRARIES(RemoteControl-static Qt5::Core Qt5::Network Qt5::Widgets)
+IF(ENABLE_NMEA)
+    SET(GPS_NMEA_LIBRARIES  Qt5::Positioning Qt5::SerialPort)
+ENDIF()
+
+TARGET_LINK_LIBRARIES(RemoteControl-static Qt5::Core Qt5::Network Qt5::Widgets ${GPS_NMEA_LIBRARIES})
+
 # The library target "RemoteControl-static" has a default OUTPUT_NAME of "RemoteControl-static", so change it.
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES OUTPUT_NAME "RemoteControl")
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
