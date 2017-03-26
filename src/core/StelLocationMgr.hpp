@@ -25,6 +25,11 @@
 #include <QMetaType>
 #include <QMap>
 
+#ifdef ENABLE_NMEA
+#include <QNmeaPositionInfoSource>
+#include <QSerialPort>
+#endif
+
 typedef QList<StelLocation> LocationList;
 typedef QMap<QString,StelLocation> LocationMap;
 typedef QMap<QByteArray,QByteArray> TimezoneNameMap;
@@ -38,6 +43,7 @@ class StelLocationMgr : public QObject
 public:
 	//! Default constructor which loads the list of locations from the base and user location files.
 	StelLocationMgr();
+	~StelLocationMgr();
 
 	//! Construct a StelLocationMgr which uses the locations given instead of loading them from the files.
 	StelLocationMgr(const LocationList& locations);
@@ -91,6 +97,26 @@ public slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
 
+#ifdef ENABLE_LIBGPS
+	//! Process answer from GPSD location query.
+	//! Requires configured and running gpsd.
+	//! This method may block the program for a few moments.
+	//! @return true if successful (and sets location), false (and does not set location) on error.
+	//! @note Does nothing on Windows because gpsd is not available.
+	void locationFromGPSDLookup();
+#endif
+#ifdef ENABLE_NMEA
+	//! Process answer from direct NMEA-0183 query (on Windows only).
+	//! Requires a serially or serial-to-USB (COM port) connected GPS device and process with Qt5's NMEA capabilities.
+	//! @note When using GPSD not on localhost, don't forget the -G switch!
+	//! @return true if successful (and sets location), false (and does not set location) on error.
+	void locationFromNMEALookup();
+	//! 3 Signal handlers for NMEA object.
+	void nmeaTimeout();
+	void nmeaError(QGeoPositionInfoSource::Error error);
+	void nmeaUpdated(const QGeoPositionInfo &update);
+#endif
+
 	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
 	//! If timezone name starts with "UTC", always return unchanged.
 	//! This is required to store timezone names exactly as we know them, and not mix ours and corrent-IANA spelling flavour.
@@ -105,7 +131,11 @@ signals:
 	//! Can be used to detect changes to the full location list
 	//! i.e. when the user added or removed locations
 	void locationListChanged();
-
+#if defined(ENABLE_NMEA) || defined(ENABLE_LIBGPS)
+	//! emitted when GPS location query and setting location either succeed or fail.
+	//! @param success true if successful, false in case of any error (timeout, no device, bad fix, ...).
+	void gpsResult(bool success);
+#endif
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
@@ -127,6 +157,13 @@ private:
 	static TimezoneNameMap locationDBToIANAtranslations;
 	
 	StelLocation lastResortLocation;
+
+#ifdef ENABLE_NMEA
+	//! A serial device (nowadays usually an USB-connected "GPS mouse") emitting NMEA-0183 strings.
+	QNmeaPositionInfoSource *nmea;
+	//! The serial port for the NMEA device
+	QSerialPort *serial;
+#endif
 };
 
 #endif // _STELLOCATIONMGR_HPP_

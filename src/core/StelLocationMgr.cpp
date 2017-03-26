@@ -36,13 +36,23 @@
 #include <QUrlQuery>
 #include <QSettings>
 #include <QTimeZone>
-
+#ifdef ENABLE_LIBGPS
+#include <libgpsmm.h>
+#endif
+#ifdef ENABLE_NMEA
+//#include <QtLocation/QLocation>
+#include <QNmeaPositionInfoSource>
+#include <QSerialPortInfo>
+#endif
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
 StelLocationMgr::StelLocationMgr()
+#ifdef ENABLE_NMEA
+	      : nmea(NULL),
+		serial(NULL)
+#endif
 {
-
 	// initialize the static QMap first if necessary.
 	if (locationDBToIANAtranslations.count()==0)
 	{
@@ -89,6 +99,20 @@ StelLocationMgr::StelLocationMgr()
 	
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+}
+
+StelLocationMgr::~StelLocationMgr()
+{
+#ifdef ENABLE_NMEA
+	if (nmea)
+	{
+		nmea->device()->close();
+		delete nmea;
+		nmea=NULL;
+		delete serial;
+		serial=NULL;
+	}
+#endif
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
@@ -444,7 +468,6 @@ void StelLocationMgr::locationFromIP()
 // slot that receives IP-based location data from the network.
 void StelLocationMgr::changeLocationFromNetworkLookup()
 {
-	StelLocation location;
 	StelCore *core=StelApp::getInstance().getCore();
 	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
 	if (!networkReply)
@@ -462,17 +485,22 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
-		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
-				QString("%1\t%2\t%3\tX\t0\t%4\t%5\t0\t\t%6")
-				.arg(ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity)
-				.arg(ipRegion.isEmpty() ? "IPregion"  : ipRegion)
-				.arg(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower())
-				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
-				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
-				.arg(ipTimeZone.isEmpty() ? "" : ipTimeZone);
-		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
+		StelLocation loc;
+		loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
+		loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
+		loc.country = StelLocaleMgr::countryCodeToString(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+		loc.role    = QChar(0x0058); // char 'X'
+		loc.population = 0;
+		loc.latitude = latitude;
+		loc.longitude = longitude;
+		loc.altitude = 0;
+		loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
+		loc.planetName = "Earth";
+		loc.landscapeKey = "";
+
 		core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-		core->moveObserverTo(location, 0.0f, 0.0f);
+		core->moveObserverTo(loc, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
 	}
@@ -484,6 +512,224 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	}
 	networkReply->deleteLater();
 }
+
+#ifdef ENABLE_LIBGPS
+// slot that receives IP-based location data from the network.
+void StelLocationMgr::locationFromGPSDLookup()
+{
+	StelCore *core=StelApp::getInstance().getCore();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	StelLocation loc;
+
+	QString gpsdHostname=conf->value("gui/gpsd_hostname", "localhost").toString();
+	QString gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toString();
+
+	// Example almost straight from http://www.catb.org/gpsd/client-howto.html
+	gpsmm gps_rec(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
+	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL) {
+		qDebug() << "GPSD query: No GPSD running.\n";
+		emit gpsResult(false);
+		return;
+	}
+
+	int tries=0;
+	int fixmode=0;
+	while (tries<10) {
+		tries++;
+
+		if (!gps_rec.waiting(750000)) // argument usec. wait 0.75 sec. (example had 50s)
+		{
+			//qDebug() << " - waiting timed out after 0.75sec.";
+			continue;
+		}
+
+		struct gps_data_t* newdata;
+		if ((newdata = gps_rec.read()) == NULL)
+		{
+			qDebug()  << "GPSD query: Read error.";
+			emit gpsResult(false);
+			return;
+		}
+		else
+		{
+// It is unclear why some data elements seem to be not filled by gps_rec.read().
+//			if (newdata->status==0) // no fix?
+//			{
+//				// This can happen indoors.
+//				qDebug() << "GPS has no fix.";
+//				emit gpsResult(false);
+//				return;
+//			}
+			if (newdata->online==0) // no device?
+			{
+				// This can happen when unplugging the GPS while running Stellarium,
+				// or running gpsd with no GPS receiver.
+				qDebug() << "GPS seems offline. No fix.";
+				emit gpsResult(false);
+				return;
+			}
+
+			fixmode=newdata->fix.mode; // 0:not_seen, 1:no_fix, 2:2Dfix(no alt), 3:3Dfix(perfect)
+			loc.longitude=newdata->fix.longitude;
+			loc.latitude=newdata->fix.latitude;
+			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
+			if (fixmode<3)
+			{
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
+			}
+			else
+			{
+				loc.altitude=newdata->fix.altitude;
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m, VDOP " << newdata->dop.vdop <<  "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
+				break; // escape from the tries loop
+			}
+		}
+	}
+
+	if (fixmode <2)
+	{
+		qDebug() << "GPSD: Could not get valid position.";
+		emit gpsResult(false);
+		return;
+	}
+	if (fixmode<3)
+	{
+		qDebug() << "Fix only quality " << fixmode << " after " << tries << " tries";
+	}
+	qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+
+	loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+	// Usually you don't leave your time zone with GPS.
+	loc.ianaTimeZone=core->getCurrentTimeZone();
+	loc.isUserLocation=true;
+	loc.planetName="Earth";
+	loc.name=QString("GPS %1%2 %3%4")
+			.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
+			.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
+	core->moveObserverTo(loc, 0.0f, 0.0f);
+
+	emit gpsResult(true);
+}
+#endif
+#ifdef ENABLE_NMEA
+void StelLocationMgr::locationFromNMEALookup()
+{
+	if (nmea==NULL)
+	{
+		// Getting a list of ports may enable auto-detection!
+		QList<QSerialPortInfo> portInfoList=QSerialPortInfo::availablePorts();
+
+		if (portInfoList.size()==0)
+		{
+			qDebug() << "No connected devices found. NMEA GPS lookup failed.";
+			emit gpsResult(false);
+			return;
+		}
+
+		QSettings* conf = StelApp::getInstance().getSettings();
+
+		// As long as we only have one, this is OK. Else we must do something about COM3, COM4 etc.
+		QSerialPortInfo portInfo;
+		if (portInfoList.size()==1)
+		{
+			portInfo=portInfoList.at(0);
+		}
+		else
+		{
+			for (int i=0; i<portInfoList.size(); ++i)
+			{
+				QSerialPortInfo pi=portInfoList.at(i);
+				qDebug() << "COM port list. Make sure you are using the right configuration.";
+				qDebug() << "Port: " << pi.portName();
+				qDebug() << "  SystemLocation:" << pi.systemLocation();
+				qDebug() << "  Description:"    << pi.description();
+				qDebug() << "  Manufacturer:"   << pi.manufacturer();
+				qDebug() << "  VendorID:"       << pi.vendorIdentifier();
+				qDebug() << "  ProductID:"      << pi.productIdentifier();
+				qDebug() << "  SerialNumber:"   << pi.serialNumber();
+				qDebug() << "  Busy:"           << pi.isBusy();
+				qDebug() << "  Valid:"          << pi.isValid();
+				qDebug() << "  Null:"           << pi.isNull();
+			}
+			QString portName=conf->value("gui/gps_interface", portInfoList.at(0).portName()).toString();
+			portInfo=QSerialPortInfo(portName);
+		}
+
+		// NMEA-0183 specifies device sends at 4800bps, 8N1. Some devices however send at 9600, allow this.
+		// baudrate is configurable via config
+		qint32 baudrate=conf->value("gui/gps_baudrate", 4800).toInt();
+
+		serial = new QSerialPort(portInfo);
+		serial->setBaudRate(baudrate);
+		serial->setDataBits(QSerialPort::Data8);
+		serial->setParity(QSerialPort::NoParity);
+		serial->setStopBits(QSerialPort::OneStop);
+		serial->setFlowControl(QSerialPort::NoFlowControl);
+		//serial->open(QIODevice::ReadOnly); // automatic by setDevice below.
+
+		nmea=new QNmeaPositionInfoSource(QNmeaPositionInfoSource::RealTimeMode);
+		nmea->setDevice(serial);
+		// TODO Find out what happens if some other serial device is connected? Just timeout/error?
+
+		qDebug() << "GPS NMEA device at port " << serial->portName();
+		connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
+		connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
+		connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
+	}
+
+	nmea->requestUpdate(3000);
+}
+
+void StelLocationMgr::nmeaTimeout()
+{
+	qDebug() << "NMEA timeout";
+	emit gpsResult(false);
+}
+
+void StelLocationMgr::nmeaError(QGeoPositionInfoSource::Error error)
+{
+	qDebug() << "NMEA general error: " << error;
+	emit gpsResult(false);
+}
+
+void StelLocationMgr::nmeaUpdated(const QGeoPositionInfo &update)
+{
+	qDebug() << "NMEA updated";
+
+	QGeoCoordinate coord=update.coordinate();
+	QDateTime timestamp=update.timestamp();
+
+	qDebug() << " - time: " << timestamp.toString();
+	qDebug() << " - location: Long=" << coord.longitude() << " Lat=" << coord.latitude() << " Alt=" << coord.altitude();
+
+	if (update.isValid())
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		StelLocation loc;
+		loc.longitude=coord.longitude();
+		loc.latitude=coord.latitude();
+		// 2D fix may have only long/lat, invalid altitude.
+		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : (int) floor(coord.altitude()));
+		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		// Usually you don't leave your time zone with GPS.
+		loc.ianaTimeZone=core->getCurrentTimeZone();
+		loc.isUserLocation=true;
+		loc.planetName="Earth";
+		loc.name=QString("GPS %1%2 %3%4")
+				.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
+				.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
+		core->moveObserverTo(loc, 0.0f, 0.0f);
+		emit gpsResult(true);
+	}
+	else
+	{
+		qDebug() << "NMEA update: invalid package";
+		emit gpsResult(false);
+	}
+}
+#endif
 
 LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
 {
