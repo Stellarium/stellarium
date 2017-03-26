@@ -200,12 +200,12 @@ SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.
 # Activate GPSD client library support (Non-Windows only)
 IF(WIN32)
   SET(ENABLE_LIBGPS 0)
-  MESSAGE(STATUS "GPSD support not available on Windows.")
-  SET(ENABLE_NMEA 1 CACHE BOOL "Define whether Qt's NMEA queries should be supported.")
+  #MESSAGE(STATUS "GPSD support not available on Windows.")
+  SET(ENABLE_NMEA 1 CACHE BOOL "Define whether Qt's NMEA queries for GPS positioning should be supported.")
 ELSE()
   SET(ENABLE_LIBGPS 1 CACHE BOOL "Define whether GPSD queries (libgps) should be supported. NOT FOR WINDOWS!")
   SET(ENABLE_NMEA 0)
-  MESSAGE(STATUS "Qt's NMEA queries not required on non-Windows systems.")
+  #MESSAGE(STATUS "Qt's NMEA queries not required on non-Windows systems.")
 ENDIF()
 
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
