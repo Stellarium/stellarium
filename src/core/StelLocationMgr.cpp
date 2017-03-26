@@ -524,7 +524,7 @@ void StelLocationMgr::locationFromGPSDLookup()
 	QString gpsdHostname=conf->value("gui/gpsd_hostname", "localhost").toString();
 	QString gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toString();
 
-	// Example straight from http://www.catb.org/gpsd/client-howto.html
+	// Example almost straight from http://www.catb.org/gpsd/client-howto.html
 	gpsmm gps_rec(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
 	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL) {
 		qDebug() << "GPSD query: No GPSD running.\n";
@@ -533,49 +533,72 @@ void StelLocationMgr::locationFromGPSDLookup()
 	}
 
 	int tries=0;
-	int fixmode;
+	int fixmode=0;
 	while (tries<10) {
-		struct gps_data_t* newdata;
+		tries++;
 
-		if (!gps_rec.waiting(50000000))
+		if (!gps_rec.waiting(750000)) // argument usec. wait 0.75 sec. (example had 50s)
+		{
+			//qDebug() << " - waiting timed out after 0.75sec.";
 			continue;
+		}
 
-		if ((newdata = gps_rec.read()) == NULL) {
-			qDebug()  << "GPSD query: Read error.\n";
+		struct gps_data_t* newdata;
+		if ((newdata = gps_rec.read()) == NULL)
+		{
+			qDebug()  << "GPSD query: Read error.";
 			emit gpsResult(false);
 			return;
-		} else
+		}
+		else
 		{
-			fixmode=newdata->fix.mode;
+// It is unclear why some data elements seem to be not filled by gps_rec.read().
+//			if (newdata->status==0) // no fix?
+//			{
+//				// This can happen indoors.
+//				qDebug() << "GPS has no fix.";
+//				emit gpsResult(false);
+//				return;
+//			}
+			if (newdata->online==0) // no device?
+			{
+				// This can happen when unplugging the GPS while running Stellarium,
+				// or running gpsd with no GPS receiver.
+				qDebug() << "GPS seems offline. No fix.";
+				emit gpsResult(false);
+				return;
+			}
+
+			fixmode=newdata->fix.mode; // 0:not_seen, 1:no_fix, 2:2Dfix(no alt), 3:3Dfix(perfect)
 			loc.longitude=newdata->fix.longitude;
 			loc.latitude=newdata->fix.latitude;
-			loc.altitude=newdata->fix.altitude;
-			// fixode 0...no data. 1...bad. 2...2Dfix, 3...3Dfix(best).
+			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
 			if (fixmode<3)
 			{
-				qDebug() << "GPSD query: fix mode only " << fixmode;
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
 			}
 			else
 			{
-				qDebug() << "GPSDfix " << fixmode << " location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
-				break;
+				loc.altitude=newdata->fix.altitude;
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m, VDOP " << newdata->dop.vdop <<  "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
+				break; // escape from the tries loop
 			}
 		}
-		tries++;
 	}
 
+	if (fixmode <2)
+	{
+		qDebug() << "GPSD: Could not get valid position.";
+		emit gpsResult(false);
+		return;
+	}
 	if (fixmode<3)
 	{
 		qDebug() << "Fix only quality " << fixmode << " after " << tries << " tries";
-		if (fixmode <2)
-		{
-			qDebug() << "Not setting new location";
-			emit gpsResult(false);
-			return;
-		}
 	}
-	qDebug() << "GPSD got location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
-
+	qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
 
 	loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
 	// Usually you don't leave your time zone with GPS.
