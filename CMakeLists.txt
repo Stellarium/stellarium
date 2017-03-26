@@ -44,7 +44,7 @@ CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DI
 SET(MINIMAL_QT_VERSION "5.3.0")
 
 # Use customized cmake macros
-SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 # Show platform info
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
@@ -193,7 +193,6 @@ IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
 
-
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
@@ -213,6 +212,17 @@ ELSE(ENABLE_GPS)
     SET(ENABLE_LIBGPS 0)
     SET(ENABLE_NMEA 0)
 ENDIF(ENABLE_GPS)
+
+IF(ENABLE_LIBGPS)
+     FIND_PACKAGE(GPS QUIET)
+     IF(GPS_FOUND)
+          ADD_DEFINITIONS(-DENABLE_LIBGPS)
+          MESSAGE(STATUS "Using GPS library at ${GPS_LIBRARY}")
+     ELSE()
+          SET(ENABLE_LIBGPS 0)
+          MESSAGE(STATUS "Could not find GPS library: the feature has been disabled!")
+     ENDIF()
+ENDIF()
 
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
@@ -479,10 +489,6 @@ ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
 
-IF(ENABLE_LIBGPS)
-  ADD_DEFINITIONS(-DENABLE_LIBGPS)
-  FIND_LIBRARY(GPS_LIBRARY NAMES libgps.so CACHE FILEPATH DOC "Path to libgps.so")
-ENDIF()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
