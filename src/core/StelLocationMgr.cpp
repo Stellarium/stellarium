@@ -56,6 +56,11 @@ StelLocationMgr::StelLocationMgr()
 	// initialize the static QMap first if necessary.
 	if (locationDBToIANAtranslations.count()==0)
 	{
+		// reported in SF forum on 2017-03-27
+		locationDBToIANAtranslations.insert("Europe/Minsk",     "UTC+03:00");
+		locationDBToIANAtranslations.insert("Europe/Samara",    "UTC+04:00");
+		locationDBToIANAtranslations.insert("America/Cancun",   "UTC-05:00");
+		locationDBToIANAtranslations.insert("Asia/Kamchatka",   "UTC+12:00");
 		// Missing on Qt5.7/Win10 as of 2017-03-18.
 		locationDBToIANAtranslations.insert("Europe/Astrakhan", "UTC+04:00");
 		locationDBToIANAtranslations.insert("Europe/Ulyanovsk", "UTC+04:00");
@@ -85,7 +90,7 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon"); // UTC+6:30 Missing on Ubuntu/Qt5.5.1.
 		locationDBToIANAtranslations.insert( "", "UTC");
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
-		// TODO later: create a text file in user data directory.
+		// TODO later: create a text file in user data directory, and auto-update it weekly.
 	}
 
 	QSettings* conf = StelApp::getInstance().getSettings();
