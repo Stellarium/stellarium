@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>700</width>
-    <height>506</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -625,7 +625,7 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="4" column="0" colspan="2">
              <widget class="QPushButton" name="gpsPushButton">
               <property name="toolTip">
                <string>Retrieve current coordinates from GPS. Does not set timezone!</string>
