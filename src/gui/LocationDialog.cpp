@@ -708,6 +708,7 @@ void LocationDialog::gpsQueryLocation()
 
   #ifdef ENABLE_LIBGPS
 	StelApp::getInstance().getLocationMgr().locationFromGPSDLookup();
+	return;
   #endif
   #ifdef ENABLE_NMEA
 	StelApp::getInstance().getLocationMgr().locationFromNMEALookup();

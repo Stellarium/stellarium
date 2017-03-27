@@ -196,33 +196,34 @@ ENDIF()
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
-# Activate GPS support (solution depends on operating system)
+# Activate GPS support. Solution depends on operating system:
+# - Windows: Only directly-attached serial NMEA emitter.
+# - Other systems: libgps if possible and NMEA emitter as fallback.
+# TBD: Maybe replace ENABLE_NMEA tags by ENABLE_GPS to save one variable, and support NMEA whenever GPS is enabled.
+#      Currently it is possible to disable NMEA device support when having libgps support.
+#      This may be meaningful on a platform where Qt5positioning is not available (is there one??)
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 IF(ENABLE_GPS)
+        SET(ENABLE_NMEA 1)
+        MESSAGE(STATUS "GPS: support by Qt's NMEA handling enabled.")
     IF(WIN32)
         SET(ENABLE_LIBGPS 0)
-        SET(ENABLE_NMEA 1)
-        MESSAGE(STATUS "GPS support by Qt's NMEA handling enabled.")
     ELSE(WIN32)
-        SET(ENABLE_LIBGPS 1)
-        SET(ENABLE_NMEA 0)
-        MESSAGE(STATUS "GPS support by GPSD enabled.")
+        FIND_PACKAGE(GPS QUIET)
+        IF(GPS_FOUND)
+            SET(ENABLE_LIBGPS 1)
+            ADD_DEFINITIONS(-DENABLE_LIBGPS)
+            MESSAGE(STATUS "GPS: Using GPS library at ${GPS_LIBRARY}")
+        ELSE(GPS_FOUND)
+            SET(ENABLE_LIBGPS 0)
+            MESSAGE(STATUS "GPS: Could not find GPS library - GPSD query disabled!")
+        ENDIF(GPS_FOUND)
     ENDIF(WIN32)
 ELSE(ENABLE_GPS)
     SET(ENABLE_LIBGPS 0)
     SET(ENABLE_NMEA 0)
 ENDIF(ENABLE_GPS)
 
-IF(ENABLE_LIBGPS)
-     FIND_PACKAGE(GPS QUIET)
-     IF(GPS_FOUND)
-          ADD_DEFINITIONS(-DENABLE_LIBGPS)
-          MESSAGE(STATUS "Using GPS library at ${GPS_LIBRARY}")
-     ELSE()
-          SET(ENABLE_LIBGPS 0)
-          MESSAGE(STATUS "Could not find GPS library: the feature has been disabled!")
-     ENDIF()
-ENDIF()
 
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
