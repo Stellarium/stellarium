@@ -527,9 +527,15 @@ void StelLocationMgr::locationFromGPSDLookup()
 	// Example almost straight from http://www.catb.org/gpsd/client-howto.html
 	gpsmm gps_rec(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
 	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL) {
-		qDebug() << "GPSD query: No GPSD running.\n";
+#ifdef ENABLE_NMEA
+		qDebug() << "GPSD query: No GPSD running. Trying direct connection.";
+		locationFromNMEALookup();
+		return;
+#else
+		qDebug() << "GPSD query: No GPSD running.";
 		emit gpsResult(false);
 		return;
+#endif
 	}
 
 	int tries=0;

@@ -284,13 +284,13 @@ your operating system.
 \subsubsection{GPSD (Linux, Mac OS X only)}
 \label{sec:ExtraData:GPS:GPSD}
 
-On Linux and Mac-OS X, Stellarium does not connect directly to a GPS
-USB device, serial device, bluetooth device, etc., but uses a
-connection to the \program{gpsd} daemon running on a computer in your
-network which provides GPS services concurrently for any interested
-application. In most cases, this will be a \program{gpsd} running on
-your localhost, receiving data from some GPS device plugged in via
-USB.
+On Linux, Mac-OS X and other Unixoid platforms, Stellarium preferrably
+should not connect directly to a GPS USB device, serial device,
+bluetooth device, etc., but uses a connection to the \program{gpsd}
+daemon running on a computer in your network which provides GPS
+services concurrently for any interested application. In most cases,
+this will be a \program{gpsd} running on your localhost, receiving
+data from some GPS device plugged in via USB.
 
 Please follow instructions by the \program{gpsd}
 authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
@@ -319,7 +319,7 @@ configure this system daemon.  A few hints:
   \program{gpsd}. This could be a little Raspberry Pi computer which
   happens to be in your WiFi to allow localisation and time service,
   or even your smartphone.  To configure this, you must manually edit
-  \file{stellarium.ini}. Find the \texttt{[gui]} section and edit
+  \file{config.ini}. Find the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
 # These values are used on non-Windows systems 
@@ -329,28 +329,37 @@ gpsd_port       = 2947
 \end{configfile}
 Also, \program{gpsd} must be started with the \texttt{-G} parameter to
 enable this.
+\item In case you really don't want to use the \program{gpsd}, you can
+  use a directly connected device, see
+  section~\ref{sec:ExtraData:GPS:NMEA}. This is however not
+  recommended when you have \program{gpsd} available.
 \end{itemize}
 
-\subsubsection{NMEA Device (Windows only)}
+\subsubsection{NMEA Device}
 \label{sec:ExtraData:GPS:NMEA}
+
+This mode is primarily for Windows users, but also for Linux and Mac
+users who don't want to use \program{gpsd}.
 
 Virtually all GPS receivers are able to emit the standardized
 \indexterm{NMEA}-0183 messages which encode time, position, speed,
 satellite information and other data.  The standard originally
 required connection settings of 4800\,baud, 8 bit, no parity, one stop
-bit (8N1), however some devices can be configured for faster transfer.
+bit (8N1), however some devices come with faster transfer.
+
 Compatible devices today are connected on a ``virtual COM port'' via
 USB. Unfortunately the COM number seems to depend on the USB plug
 where you attach the receiver.  You can identify the port name (COM3,
 COM4, \ldots) in the Windows system configuration (Device Manager) or
-with the software that came with your device.
+with the software that came with your device.\footnote{On Linux, this
+  may read \file{/dev/ttyUSB0}, \file{/dev/gps0} or similar.}
 
 If this is the only serial device, Stellarium should automatically
 connect to it regardless of configuration entries.  You cannot change
 the USB plug after you first have received a location fix.  If you
 have a device with non-standard baudrate or several serial devices on
 COM ports (e.g., your telescope?), you must find out which COM port is
-used by the GPS device and manually edit \file{stellarium.ini}.  Find
+used by the GPS device and manually edit \file{config.ini}.  Find
 the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
@@ -359,7 +368,12 @@ gps_interface     = "COM3"
 gps_baudrate      = 4800
 \end{configfile}
 From now on, always use the same USB plug configuration to connect GPS
-and telescope.
+and telescope.\footnote{Again, for Linux the port number is defined in
+  order of hotplugging by \program{udev}. You should develop an
+  \program{udev} rule which adds a unique name and use this. In this
+  case, you may also need to add your user to the \texttt{dialout}
+  group (or whichever group owns your serial port).  Better yet, use
+  \program{gpsd} (see section~\ref{sec:ExtraData:GPS:GPSD}).}
 
 
 \chapter{Command Line Options}
