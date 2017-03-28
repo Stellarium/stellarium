@@ -23,6 +23,7 @@ SET(stellarium_lib_SRCS
      core/StelLocation.hpp
      core/StelLocation.cpp
      core/StelLocationMgr.hpp
+     core/StelLocationMgr_p.hpp
      core/StelLocationMgr.cpp
      core/StelProjector.cpp
      core/StelProjector.hpp
