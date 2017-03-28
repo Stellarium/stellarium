@@ -152,7 +152,7 @@ void LocationDialog::createDialogContent()
 
 #ifdef ENABLE_GPS
 	connect(ui->gpsPushButton, SIGNAL(clicked(bool)), this, SLOT(gpsQueryLocation()));
-	connect(locMgr, SIGNAL(gpsResult(bool)), this, SLOT(gpsReturn(bool)));
+	connect(locMgr, SIGNAL(gpsQueryFinished(bool)), this, SLOT(gpsReturn(bool)));
 #else
 	ui->gpsPushButton->setEnabled(false);
 	ui->gpsPushButton->hide();
@@ -706,12 +706,8 @@ void LocationDialog::gpsQueryLocation()
 	disconnectEditSignals();
 	ui->gpsPushButton->setText(q_("GPS..."));
 
-	#ifdef ENABLE_LIBGPS
-	StelApp::getInstance().getLocationMgr().locationFromGPSDLookup();
-	#else
-	StelApp::getInstance().getLocationMgr().locationFromNMEALookup();
-	#endif
-	return;  
+	//only use a single call from a service class here
+	StelApp::getInstance().getLocationMgr().locationFromGPS();
 }
 
 void LocationDialog::gpsReturn(bool success)
