@@ -97,18 +97,19 @@ public slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
 
-#ifdef ENABLE_LIBGPS
+#ifdef ENABLE_GPS
+	#ifdef ENABLE_LIBGPS
 	//! Process answer from GPSD location query.
 	//! Requires configured and running gpsd.
 	//! This method may block the program for a few moments.
 	//! @return true if successful (and sets location), false (and does not set location) on error.
-	//! @note Does nothing on Windows because gpsd is not available.
-	void locationFromGPSDLookup();
-#endif
-#ifdef ENABLE_GPS
-	//! Process answer from direct NMEA-0183 query (on Windows only).
-	//! Requires a serially or serial-to-USB (COM port) connected GPS device and process with Qt5's NMEA capabilities.
 	//! @note When using GPSD not on localhost, don't forget the -G switch!
+	//! @note Not available on Windows because gpsd is not available.
+	void locationFromGPSDLookup();
+	#endif
+
+	//! Process answer from direct NMEA-0183 query.
+	//! Requires a serially or serial-to-USB (Windows: COM port; else likely /dev/ttyUSBnn or similar) connected GPS device and process with Qt5's NMEA capabilities.
 	//! @return true if successful (and sets location), false (and does not set location) on error.
 	void locationFromNMEALookup();
 	//! 3 Signal handlers for NMEA object.
@@ -131,9 +132,10 @@ signals:
 	//! Can be used to detect changes to the full location list
 	//! i.e. when the user added or removed locations
 	void locationListChanged();
+
 #ifdef ENABLE_GPS
 	//! emitted when GPS location query and setting location either succeed or fail.
-	//! @param success true if successful, false in case of any error (timeout, no device, bad fix, ...).
+	//! @param success true if successful, false in case of any error (no device, timeout, bad fix, ...).
 	void gpsResult(bool success);
 #endif
 private:
