@@ -68,7 +68,7 @@ SET(RemoteControl_RES ../RemoteControl.qrc)
 QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 
 ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
-IF(ENABLE_NMEA)
+IF(ENABLE_GPS)
     SET(GPS_NMEA_LIBRARIES  Qt5::Positioning Qt5::SerialPort)
 ENDIF()
 

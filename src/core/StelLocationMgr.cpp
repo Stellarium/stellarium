@@ -39,7 +39,7 @@
 #ifdef ENABLE_LIBGPS
 #include <libgpsmm.h>
 #endif
-#ifdef ENABLE_NMEA
+#ifdef ENABLE_GPS
 //#include <QtLocation/QLocation>
 #include <QNmeaPositionInfoSource>
 #include <QSerialPortInfo>
@@ -48,7 +48,7 @@
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
 StelLocationMgr::StelLocationMgr()
-#ifdef ENABLE_NMEA
+#ifdef ENABLE_GPS
 	      : nmea(NULL),
 		serial(NULL)
 #endif
@@ -108,7 +108,7 @@ StelLocationMgr::StelLocationMgr()
 
 StelLocationMgr::~StelLocationMgr()
 {
-#ifdef ENABLE_NMEA
+#ifdef ENABLE_GPS
 	if (nmea)
 	{
 		nmea->device()->close();
@@ -518,6 +518,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
+#ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
 // slot that receives IP-based location data from the network.
 void StelLocationMgr::locationFromGPSDLookup()
@@ -531,21 +532,17 @@ void StelLocationMgr::locationFromGPSDLookup()
 
 	// Example almost straight from http://www.catb.org/gpsd/client-howto.html
 	gpsmm gps_rec(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
-	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL) {
-#ifdef ENABLE_NMEA
+	if (gps_rec.stream(WATCH_ENABLE|WATCH_JSON) == NULL)
+	{
 		qDebug() << "GPSD query: No GPSD running. Trying direct connection.";
 		locationFromNMEALookup();
 		return;
-#else
-		qDebug() << "GPSD query: No GPSD running.";
-		emit gpsResult(false);
-		return;
-#endif
 	}
 
 	int tries=0;
 	int fixmode=0;
-	while (tries<10) {
+	while (tries<10)
+	{
 		tries++;
 
 		if (!gps_rec.waiting(750000)) // argument usec. wait 0.75 sec. (example had 50s)
@@ -624,7 +621,7 @@ void StelLocationMgr::locationFromGPSDLookup()
 	emit gpsResult(true);
 }
 #endif
-#ifdef ENABLE_NMEA
+
 void StelLocationMgr::locationFromNMEALookup()
 {
 	if (nmea==NULL)

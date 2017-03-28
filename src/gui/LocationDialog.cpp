@@ -150,7 +150,7 @@ void LocationDialog::createDialogContent()
 
 	setFieldsFromLocation(currentLocation);
 
-#if defined(ENABLE_NMEA) || defined(ENABLE_LIBGPS)
+#ifdef ENABLE_GPS
 	connect(ui->gpsPushButton, SIGNAL(clicked(bool)), this, SLOT(gpsQueryLocation()));
 	connect(locMgr, SIGNAL(gpsResult(bool)), this, SLOT(gpsReturn(bool)));
 #else
@@ -699,20 +699,19 @@ void LocationDialog::ipQueryLocation(bool state)
 		conf->setValue("init_location/location", StelApp::getInstance().getCore()->getCurrentLocation().getID());
 }
 
-#if (defined(ENABLE_LIBGPS)) || (defined(ENABLE_NMEA))
+#ifdef ENABLE_GPS
 // called when the user clicks on the GPS Query button. Use gpsd or Qt's NMEA reader.
 void LocationDialog::gpsQueryLocation()
 {
 	disconnectEditSignals();
 	ui->gpsPushButton->setText(q_("GPS..."));
 
-  #ifdef ENABLE_LIBGPS
+	#ifdef ENABLE_LIBGPS
 	StelApp::getInstance().getLocationMgr().locationFromGPSDLookup();
-	return;
-  #endif
-  #ifdef ENABLE_NMEA
+	#else
 	StelApp::getInstance().getLocationMgr().locationFromNMEALookup();
-  #endif
+	#endif
+	return;  
 }
 
 void LocationDialog::gpsReturn(bool success)
