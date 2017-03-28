@@ -196,6 +196,12 @@
    </item>
    <item>
     <widget class="QFrame" name="locationContent">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -217,6 +223,12 @@
       </property>
       <item row="0" column="0" colspan="2">
        <widget class="QFrame" name="frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -226,7 +238,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>240</height>
+          <height>2400</height>
          </size>
         </property>
         <property name="frameShape">
@@ -254,7 +266,7 @@
          <item row="1" column="0">
           <widget class="MapLabel" name="mapLabel">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -267,8 +279,8 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>400</width>
-             <height>240</height>
+             <width>1440</width>
+             <height>720</height>
             </size>
            </property>
            <property name="lineWidth">
@@ -290,16 +302,22 @@
          </item>
          <item row="1" column="1">
           <widget class="QFrame" name="frame_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>200</width>
              <height>240</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>240</height>
+             <width>300</width>
+             <height>2400</height>
             </size>
            </property>
            <property name="frameShape">
@@ -377,6 +395,18 @@
       </item>
       <item row="2" column="1">
        <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>240</height>
+         </size>
+        </property>
         <property name="title">
          <string>Current location information</string>
         </property>
@@ -489,6 +519,12 @@
          </item>
          <item row="0" column="1">
           <widget class="QFrame" name="frame_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -653,6 +689,12 @@
          </item>
          <item row="0" column="3">
           <widget class="QFrame" name="frame_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>350</width>

@@ -99,7 +99,7 @@ public slots:
 	//! Adds dialog location to config.ini; should be connected in createDialogContent()
 	void handleMovedTo(QPoint newPos);
 	//! Stores dialog sizes into config.ini; should be connected from the proxy.
-	void handleDialogSizeChanged(QSizeF size);
+	virtual void handleDialogSizeChanged(QSizeF size);
 	QString getDialogName(){return dialogName;}
 signals:
 	void visibleChanged(bool);
