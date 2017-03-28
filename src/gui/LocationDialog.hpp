@@ -124,7 +124,7 @@ private slots:
 	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
 
-#if (defined(ENABLE_LIBGPS)) || (defined(ENABLE_NMEA))
+#ifdef ENABLE_GPS
 	//! called when the user wants get location from a GPSD or directly attached (USB over virtual serial device) GPS device.
 	//! The easiest way to get GPS coordinates from a Linux device is via GPSD.
 	//! On Windows (and Mac?), or where GPSD is not available, we must parse the NMEA-183 strings ourselves.

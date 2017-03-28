@@ -57,6 +57,7 @@ Source: "@QtConcurrent_location@"; DestDir: "{app}";
 @ISS_QT_SCRIPT@
 @ISS_QT_MULTIMEDIA@
 @ISS_QT_SERIALPORT@
+@ISS_QT_POSITIONING@
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
