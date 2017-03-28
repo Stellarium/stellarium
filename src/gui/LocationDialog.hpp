@@ -40,6 +40,7 @@ public:
 
 public slots:
 	void retranslate();
+	virtual void handleDialogSizeChanged(QSizeF size);
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -102,9 +103,10 @@ private slots:
 	
 	//! Called when the planet is manually changed.
 	void moveToAnotherPlanet(const QString& text);
+
 	//! Called when latitude/longitude/altitude is modified
 	void setPositionFromCoords(int i=0);
-	
+
 	//! Called when the user clicks on the add to list button
 	void addCurrentLocationToList();
 	

@@ -172,6 +172,13 @@ void LocationDialog::createDialogContent()
 	ui->citySearchLineEdit->setFocus();
 }
 
+void LocationDialog::handleDialogSizeChanged(QSizeF size)
+{
+	StelDialog::handleDialogSizeChanged(size);
+	StelLocation loc = locationFromFields();
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+}
+
 void LocationDialog::reloadLocations()
 {
 	allModel->setStringList(StelApp::getInstance().getLocationMgr().getAllMap().keys());
