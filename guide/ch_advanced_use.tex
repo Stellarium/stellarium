@@ -318,10 +318,8 @@ configure this system daemon.  A few hints:
 
 \item You can also connect to another computer which runs
   \program{gpsd}. This could be a little Raspberry Pi computer which
-  happens to be in your WiFi to allow localisation and time service,
-  or even your smartphone. Apps like \program{BlueNMEA} can provide
-  these data, but make sure to configure hostname/IP Address and port
-  number correctly.  To configure this, you must manually edit
+  happens to be in your WiFi to allow localisation and time service.
+ To configure this, you must manually edit
   \file{config.ini}. Find the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
@@ -332,6 +330,22 @@ gpsd_port       = 2947
 \end{configfile}
 Also, \program{gpsd} must be started with the \texttt{-G} parameter to
 enable this.
+\item Even your smartphone can be used as GPS data
+  source\footnote{Thanks to user Caysho for this hint.}: Apps like
+  \program{BlueNMEA} can provide these data for \program{gpsd}, but
+  you must make sure to configure hostname/IP Address and port number
+  correctly, for example
+  \begin{commands}
+ sudo gpsd -n -D8 -S 1001 tcp://192.168.1.101:4352
+  \end{commands}
+which means
+\begin{description}
+\item[-n] to start without a device connection
+\item[-D8] maximum debug level. When it works, use what suits you
+\item[-S 1001] provide service on port 1001
+\item[tcp] Use this address:port combination to receive data from (IP of
+  your smartphone, port shown on \program{BlueNMEA} screen).
+\end{description}
 \item In case you really don't want to use the \program{gpsd}, you can
   use a directly connected device, see below. This is however not
   recommended when you have \program{gpsd} available.
@@ -376,7 +390,7 @@ and telescope.\footnote{Again, for Linux the port number is defined in
   \program{udev} rule which adds a unique name and use this. In this
   case, you may also need to add your user to the \texttt{dialout}
   group (or whichever group owns your serial port).  Better yet, use
-  \program{gpsd} (see section~\ref{sec:ExtraData:GPS:GPSD}).}
+  \program{gpsd} (see above).}
 If GPS lookup fails, see the logfile for diagnostic messages.
 
 \paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
