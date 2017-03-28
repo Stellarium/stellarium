@@ -301,7 +301,8 @@ configure this system daemon.  A few hints:
   plugged-in devices and creates device files in the \file{/dev}
   directory. Unfortunately, most GPS devices use the Prolific 2303
   chipset in their serial-to-USB converter and are identified as
-  such. This converter is also used in other Serial-to-USB converter
+  such, without other unique information like serial numbers. 
+  This chipset is also used in other Serial-to-USB converter
   cables, and to avoid conflicts the according rule has been disabled
   by the release managers of Ubuntu.  In
   \file{/lib/udev/60-gpsd.rules}, find the commented line and
@@ -318,7 +319,9 @@ configure this system daemon.  A few hints:
 \item You can also connect to another computer which runs
   \program{gpsd}. This could be a little Raspberry Pi computer which
   happens to be in your WiFi to allow localisation and time service,
-  or even your smartphone.  To configure this, you must manually edit
+  or even your smartphone. Apps like \program{BlueNMEA} can provide
+  these data, but make sure to configure hostname/IP Address and port
+  number correctly.  To configure this, you must manually edit
   \file{config.ini}. Find the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
@@ -330,10 +333,10 @@ gpsd_port       = 2947
 Also, \program{gpsd} must be started with the \texttt{-G} parameter to
 enable this.
 \item In case you really don't want to use the \program{gpsd}, you can
-  use a directly connected device, see
-  section~\ref{sec:ExtraData:GPS:NMEA}. This is however not
+  use a directly connected device, see below. This is however not
   recommended when you have \program{gpsd} available.
 \end{itemize}
+
 
 \subsubsection{NMEA Device}
 \label{sec:ExtraData:GPS:NMEA}
@@ -358,12 +361,12 @@ If this is the only serial device, Stellarium should automatically
 connect to it regardless of configuration entries.  You cannot change
 the USB plug after you first have received a location fix.  If you
 have a device with non-standard baudrate or several serial devices on
-COM ports (e.g., your telescope?), you must find out which COM port is
+serial ports (e.g., your telescope?), you must find out which serial port is
 used by the GPS device and manually edit \file{config.ini}.  Find
 the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
-# These values are used on Windows only.
+# These values are used on Windows primarily.
 gps_interface     = "COM3"
 gps_baudrate      = 4800
 \end{configfile}
@@ -374,7 +377,12 @@ and telescope.\footnote{Again, for Linux the port number is defined in
   case, you may also need to add your user to the \texttt{dialout}
   group (or whichever group owns your serial port).  Better yet, use
   \program{gpsd} (see section~\ref{sec:ExtraData:GPS:GPSD}).}
+If GPS lookup fails, see the logfile for diagnostic messages.
 
+\paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
+hardware. You can install a virtual COM port in your Windows Bluetooth
+settings and use a smartphone app like \program{BlueNMEA} to provide
+the NMEA strings.
 
 \chapter{Command Line Options}
 %\label{command-line-options}

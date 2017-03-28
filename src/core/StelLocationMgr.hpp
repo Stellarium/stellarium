@@ -95,7 +95,7 @@ public slots:
 	//! Try to get a location from GPS lookup.
 	//! This prefers GPSD on non-Windows platforms, and uses Qt positioning/NMEA otherwise
 	//! Use the gpsResult() signal to determine if the location was set successfully
-	//! @note When using GPSD not on localhost, don't forget the -G switch!
+	//! @note When using GPSD not on localhost, don't forget the -G switch when starting gpsd there!
 	//! @return true if a query has been made, false if not
 	bool locationFromGPS();
 #endif

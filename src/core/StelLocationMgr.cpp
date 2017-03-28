@@ -182,10 +182,15 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	}
 	else
 	{
+		#ifdef Q_OS_WIN
+		QString portName=conf->value("gui/gps_interface", "COM3").toString();
+		#else
+		QString portName=conf->value("gui/gps_interface", "ttyUSB0").toString();
+		#endif
 		for (int i=0; i<portInfoList.size(); ++i)
 		{
 			QSerialPortInfo pi=portInfoList.at(i);
-			qDebug() << "COM port list. Make sure you are using the right configuration.";
+			qDebug() << "Serial port list. Make sure you are using the right configuration.";
 			qDebug() << "Port: " << pi.portName();
 			qDebug() << "  SystemLocation:" << pi.systemLocation();
 			qDebug() << "  Description:"    << pi.description();
@@ -196,9 +201,16 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 			qDebug() << "  Busy:"           << pi.isBusy();
 			qDebug() << "  Valid:"          << pi.isValid();
 			qDebug() << "  Null:"           << pi.isNull();
+			if (pi.portName()==portName)
+			{
+				portInfo=pi;
+			}
+			else
+			{
+				qDebug() << "Configured port" << portName << "not found. No GPS query.";
+				return;
+			}
 		}
-		QString portName=conf->value("gui/gps_interface", portInfoList.at(0).portName()).toString();
-		portInfo=QSerialPortInfo(portName);
 	}
 
 	// NMEA-0183 specifies device sends at 4800bps, 8N1. Some devices however send at 9600, allow this.
