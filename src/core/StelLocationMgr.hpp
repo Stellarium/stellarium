@@ -25,7 +25,7 @@
 #include <QMetaType>
 #include <QMap>
 
-#ifdef ENABLE_NMEA
+#ifdef ENABLE_GPS
 #include <QNmeaPositionInfoSource>
 #include <QSerialPort>
 #endif
@@ -105,7 +105,7 @@ public slots:
 	//! @note Does nothing on Windows because gpsd is not available.
 	void locationFromGPSDLookup();
 #endif
-#ifdef ENABLE_NMEA
+#ifdef ENABLE_GPS
 	//! Process answer from direct NMEA-0183 query (on Windows only).
 	//! Requires a serially or serial-to-USB (COM port) connected GPS device and process with Qt5's NMEA capabilities.
 	//! @note When using GPSD not on localhost, don't forget the -G switch!
@@ -131,7 +131,7 @@ signals:
 	//! Can be used to detect changes to the full location list
 	//! i.e. when the user added or removed locations
 	void locationListChanged();
-#if defined(ENABLE_NMEA) || defined(ENABLE_LIBGPS)
+#ifdef ENABLE_GPS
 	//! emitted when GPS location query and setting location either succeed or fail.
 	//! @param success true if successful, false in case of any error (timeout, no device, bad fix, ...).
 	void gpsResult(bool success);
@@ -158,7 +158,7 @@ private:
 	
 	StelLocation lastResortLocation;
 
-#ifdef ENABLE_NMEA
+#ifdef ENABLE_GPS
 	//! A serial device (nowadays usually an USB-connected "GPS mouse") emitting NMEA-0183 strings.
 	QNmeaPositionInfoSource *nmea;
 	//! The serial port for the NMEA device
