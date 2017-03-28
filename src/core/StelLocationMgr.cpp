@@ -36,13 +36,12 @@
 #include <QUrlQuery>
 #include <QSettings>
 #include <QTimeZone>
+#ifdef ENABLE_GPS
+#include <QNmeaPositionInfoSource>
+#include <QSerialPortInfo>
 #ifdef ENABLE_LIBGPS
 #include <libgpsmm.h>
 #endif
-#ifdef ENABLE_GPS
-//#include <QtLocation/QLocation>
-#include <QNmeaPositionInfoSource>
-#include <QSerialPortInfo>
 #endif
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
@@ -111,9 +110,13 @@ StelLocationMgr::~StelLocationMgr()
 #ifdef ENABLE_GPS
 	if (nmea)
 	{
-		nmea->device()->close();
+		if (nmea->device())
+			nmea->device()->close();
 		delete nmea;
 		nmea=NULL;
+	}
+	if (serial)
+	{
 		delete serial;
 		serial=NULL;
 	}
@@ -121,6 +124,10 @@ StelLocationMgr::~StelLocationMgr()
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
+#ifdef ENABLE_GPS
+	      : nmea(NULL),
+		serial(NULL)
+#endif
 {
 	setLocations(locations);
 
@@ -520,7 +527,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 #ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
-// slot that receives IP-based location data from the network.
+// slot that receives location data from gpsd.
 void StelLocationMgr::locationFromGPSDLookup()
 {
 	StelCore *core=StelApp::getInstance().getCore();
@@ -646,10 +653,16 @@ void StelLocationMgr::locationFromNMEALookup()
 		}
 		else
 		{
+#ifdef Q_OS_WIN
+			QString portName=conf->value("gui/gps_interface", "COM3").toString();
+#else
+			QString portName=conf->value("gui/gps_interface", "/dev/ttyUSB0").toString();
+#endif
+			bool portFound=false;
 			for (int i=0; i<portInfoList.size(); ++i)
 			{
 				QSerialPortInfo pi=portInfoList.at(i);
-				qDebug() << "COM port list. Make sure you are using the right configuration.";
+				qDebug() << "Port list. Make sure you are using the right configuration.";
 				qDebug() << "Port: " << pi.portName();
 				qDebug() << "  SystemLocation:" << pi.systemLocation();
 				qDebug() << "  Description:"    << pi.description();
@@ -660,9 +673,20 @@ void StelLocationMgr::locationFromNMEALookup()
 				qDebug() << "  Busy:"           << pi.isBusy();
 				qDebug() << "  Valid:"          << pi.isValid();
 				qDebug() << "  Null:"           << pi.isNull();
+
+				// Test whether the configured portname is in the list
+				if (pi.portName()==portName)
+				{
+					portInfo=pi;
+					portFound=true;
+				}
 			}
-			QString portName=conf->value("gui/gps_interface", portInfoList.at(0).portName()).toString();
-			portInfo=QSerialPortInfo(portName);
+			if (!portFound)
+			{
+				qDebug() << "Configured port (" << portName << ") not available. NMEA GPS lookup failed.";
+				emit gpsResult(false);
+				return;
+			}
 		}
 
 		// NMEA-0183 specifies device sends at 4800bps, 8N1. Some devices however send at 9600, allow this.
@@ -704,7 +728,7 @@ void StelLocationMgr::nmeaError(QGeoPositionInfoSource::Error error)
 
 void StelLocationMgr::nmeaUpdated(const QGeoPositionInfo &update)
 {
-	qDebug() << "NMEA updated";
+	qDebug() << "NMEA update:";
 
 	QGeoCoordinate coord=update.coordinate();
 	QDateTime timestamp=update.timestamp();
@@ -733,7 +757,7 @@ void StelLocationMgr::nmeaUpdated(const QGeoPositionInfo &update)
 	}
 	else
 	{
-		qDebug() << "NMEA update: invalid package";
+		qDebug() << " ---> invalid package";
 		emit gpsResult(false);
 	}
 }
