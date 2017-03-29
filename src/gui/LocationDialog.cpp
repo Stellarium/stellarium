@@ -170,6 +170,11 @@ void LocationDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
+	//TODO: Update the position of the map pointer (map may have scaled)
+	// Does not work:
+	//ui->mapLabel->setCursorPos(currentLocation.longitude, currentLocation.latitude);
+	// Does not work:
+	handleDialogSizeChanged(dialog->size());
 }
 
 void LocationDialog::handleDialogSizeChanged(QSizeF size)
@@ -539,8 +544,9 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	stelCore->moveObserverTo(loc, 0., 0.);
 }
 
-void LocationDialog::setPositionFromCoords(int )
+void LocationDialog::setPositionFromCoords(int i)
 {
+	Q_UNUSED(i)
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
