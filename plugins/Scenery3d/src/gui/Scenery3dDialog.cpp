@@ -394,7 +394,7 @@ void Scenery3dDialog::on_checkBoxDefaultScene_stateChanged(int value)
 
 	if(value)
 	{
-		QString id = SceneInfo::getIDFromName(sel.at(0)->text());
+		QString id = SceneInfo::getIDFromName(sel.at(0)->data(Qt::UserRole).toString());
 		if(!id.isEmpty())
 			mgr->setDefaultScenery3dID(id);
 	}
