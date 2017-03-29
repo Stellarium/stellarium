@@ -105,6 +105,7 @@ private slots:
 	void moveToAnotherPlanet(const QString& text);
 
 	//! Called when latitude/longitude/altitude is modified
+	//! The int argument is required by the Altitude spinbox signal connection, but unused.
 	void setPositionFromCoords(int i=0);
 
 	//! Called when the user clicks on the add to list button
