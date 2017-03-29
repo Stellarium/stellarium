@@ -99,6 +99,8 @@ public slots:
 	//! Adds dialog location to config.ini; should be connected in createDialogContent()
 	void handleMovedTo(QPoint newPos);
 	//! Stores dialog sizes into config.ini; should be connected from the proxy.
+	//! When a subclass needs a size-dependent update, implement such update in the subclass version,
+	//! but call StelDialog::handleDialogSizeChanged() first.
 	virtual void handleDialogSizeChanged(QSizeF size);
 	QString getDialogName(){return dialogName;}
 signals:

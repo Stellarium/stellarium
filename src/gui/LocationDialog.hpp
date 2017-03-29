@@ -40,6 +40,7 @@ public:
 
 public slots:
 	void retranslate();
+	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
 	virtual void handleDialogSizeChanged(QSizeF size);
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

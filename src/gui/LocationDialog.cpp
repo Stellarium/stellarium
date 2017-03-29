@@ -170,11 +170,6 @@ void LocationDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
-	//TODO: Update the position of the map pointer (map may have scaled)
-	// Does not work:
-	//ui->mapLabel->setCursorPos(currentLocation.longitude, currentLocation.latitude);
-	// Does not work:
-	handleDialogSizeChanged(dialog->size());
 }
 
 void LocationDialog::handleDialogSizeChanged(QSizeF size)
