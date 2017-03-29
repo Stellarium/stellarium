@@ -157,6 +157,7 @@ protected:
 
 #ifdef Q_OS_WIN
 	//! Kinetic scrolling for lists.
+	//! @note This has been temporarily disabled (since 0.13.2) due to a bug in Qt.
 	void installKineticScrolling(QList<QWidget *> addscroll);
 #endif
 
