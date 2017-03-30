@@ -600,6 +600,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_light_travel_time",		propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
 	conf->setValue("viewing/flag_moon_scaled",		propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
 	conf->setValue("viewing/moon_scale",			propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble());
+	conf->setValue("viewing/flag_minorbodies_scaled",	propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool());
+	conf->setValue("viewing/minorbodies_scale",		propMgr->getStelPropertyValue("SolarSystem.minorBodyScale").toDouble());
 	conf->setValue("astro/meteor_zhr",			propMgr->getStelPropertyValue("SporadicMeteorMgr.zhr").toInt());
 	conf->setValue("astro/flag_milky_way",			propMgr->getStelPropertyValue("MilkyWay.flagMilkyWayDisplayed").toBool());
 	conf->setValue("astro/milky_way_intensity",		propMgr->getStelPropertyValue("MilkyWay.intensity").toDouble());
