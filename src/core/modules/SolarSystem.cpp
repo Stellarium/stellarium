@@ -64,7 +64,9 @@
 SolarSystem::SolarSystem()
 	: shadowPlanetCount(0)
 	, flagMoonScale(false)
-	, moonScale(1.)
+	, moonScale(1.0)
+	, flagMinorBodyScale(false)
+	, minorBodyScale(1.0)
 	, labelsAmount(false)
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
@@ -1944,7 +1946,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 	}
 }
 
-// Set/Get Moon display scaling factor
+// Set/Get Moon display scaling factor. This goes directly to the Moon object.
 void SolarSystem::setMoonScale(double f)
 {
 	if(moonScale != f)
@@ -1953,6 +1955,26 @@ void SolarSystem::setMoonScale(double f)
 		if (flagMoonScale)
 			getMoon()->setSphereScale(moonScale);
 		emit moonScaleChanged(f);
+	}
+}
+
+// Set/Get if minor body display is scaled. This flag will be queried by all Planet objects except for the Moon.
+void SolarSystem::setFlagMinorBodyScale(bool b)
+{
+	if(b!=flagMinorBodyScale)
+	{
+		flagMinorBodyScale = b;
+		emit flagMinorBodyScaleChanged(b);
+	}
+}
+
+// Set/Get minor body display scaling factor. This will be queried by all Planet objects except for the Moon.
+void SolarSystem::setMinorBodyScale(double f)
+{
+	if(minorBodyScale != f)
+	{
+		minorBodyScale = f;
+		emit minorBodyScaleChanged(f);
 	}
 }
 

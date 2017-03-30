@@ -209,6 +209,8 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customPlanetMagLimit");
 	connectBoolProperty(ui->planetScaleMoonCheckBox, "SolarSystem.flagMoonScale");
 	connectDoubleProperty(ui->moonScaleFactor,"SolarSystem.moonScale");
+	connectBoolProperty(ui->planetScaleMinorBodyCheckBox, "SolarSystem.flagMinorBodyScale");
+	connectDoubleProperty(ui->minorBodyScaleFactor,"SolarSystem.minorBodyScale");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
 	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));

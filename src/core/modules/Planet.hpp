@@ -93,6 +93,9 @@ public:
 	// GZ: Until 0.13 QStrings were used for types.
 	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
 	// GZ: If other types are introduced, add here and the string in init().
+	// GZ TODO for 0.16: Preferably convert this into a bitfield and allow several bits set:
+	// Cubewanos, SDO, OCO, Sednoids are Asteroids, Pluto is a Plutino and DwarfPlanet, Ceres is Asteroid and DwarfPlanet etc.!
+	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
 	{
 		isStar,			// ssystem.ini: type="star"
@@ -272,7 +275,11 @@ public:
 	void setRings(Ring* r) {rings = r;}
 
 	void setSphereScale(float s) {sphereScale = s;}
-	float getSphereScale(void) const {return sphereScale;}
+	//! Return the scale value used to visually enlarge the 3D body.
+	// Given that there is only one place to set a global scale factor for minor bodies: the SolarSystem settings panel,
+	// we return a direct scale factor for the Moon, but ignore the Planet's scaleFactor for all other bodies,
+	// but retrieve this value from the SolarSystem.
+	float getSphereScale(void) const;
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
@@ -485,7 +492,7 @@ protected:
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
 	// it is used for sorting while drawing
-	float sphereScale;               // Artificial scaling for better viewing
+	float sphereScale;               // Artificial scaling for better viewing. Always use getSphereScale() to retrieve this value (there is some magic involved)!
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;
