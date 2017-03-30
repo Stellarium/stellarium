@@ -152,6 +152,8 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
+	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toFloat());
+	setFlagMinorBodyScale(conf->value("viewing/flag_minorbodies_scaled", false).toBool());
 	setMoonScale(conf->value("viewing/moon_scale", 4.0).toFloat());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
