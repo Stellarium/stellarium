@@ -189,8 +189,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
-		if (sphereScale != 1.f)
-			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+		if (getSphereScale() != 1.f)
+			oss << QString::fromUtf8(" (\xC3\x97") << getSphereScale() << ")";
 		oss << "</h2>";
 		if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
 		{

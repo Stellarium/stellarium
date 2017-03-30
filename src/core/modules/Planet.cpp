@@ -305,6 +305,27 @@ QString Planet::getNameI18n() const
 	return nameI18;
 }
 
+// It makes sense to display a scaled-up moon always scaled-up,
+// but we ignore the Planet's scaleFactor for all other bodies,
+// and retrieve this from the SolarSystem.
+// Note that the major planets are currently never scaled up (not even with scripting).
+float Planet::getSphereScale(void) const
+{
+	if (englishName=="Moon")
+		return sphereScale;
+	else
+	{
+		SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		if ((getPlanetType()!=Planet::isPlanet)
+				&& (getPlanetType()!=Planet::isStar)
+				&&  ssystem->getFlagMinorBodyScale()
+				)
+			return ssystem->getMinorBodyScale();
+		else
+			return 1.0f;
+	}
+}
+
 // Return the information string "ready to print" :)
 QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
@@ -321,8 +342,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
-		if (sphereScale != 1.f)
-			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+		if (getSphereScale() != 1.f)
+			oss << QString::fromUtf8(" (\xC3\x97") << getSphereScale() << ")";
 		oss << "</h2>";
 	}
 
@@ -411,15 +432,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+			if (getSphereScale()!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
 			{
 				if (withDecimalDegree)
 					oss << q_("Apparent diameter: %1, scaled up to: %2")
-					       .arg(StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true))
+					       .arg(StelUtils::radToDecDegStr(angularSize / getSphereScale(),5,false,true))
 					       .arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
 				else
 					oss << q_("Apparent diameter: %1, scaled up to: %2")
-					       .arg(StelUtils::radToDmsStr(angularSize / sphereScale, true))
+					       .arg(StelUtils::radToDmsStr(angularSize / getSphereScale(), true))
 					       .arg(StelUtils::radToDmsStr(angularSize, true));
 			}
 			else
@@ -534,9 +555,9 @@ QString Planet::getSkyLabel(const StelCore*) const
 	oss.setRealNumberPrecision(2);
 	oss << getNameI18n();
 
-	if (sphereScale != 1.f)
+	if (getSphereScale() != 1.f)
 	{
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+		oss << QString::fromUtf8(" (\xC3\x97") << getSphereScale() << ")";
 	}
 	return str;
 }
@@ -562,7 +583,7 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const StelCore* core) const
 {
-	return std::atan(radius*sphereScale*2.f/getEquinoxEquatorialPos(core).length())*180./M_PI * 4;
+	return std::atan(radius*getSphereScale()*2.f/getEquinoxEquatorialPos(core).length())*180./M_PI * 4;
 }
 
 double Planet::getSatellitesFov(const StelCore* core) const
@@ -1265,13 +1286,13 @@ double Planet::getAngularSize(const StelCore* core) const
 	double rad = radius;
 	if (rings)
 		rad = rings->getSize();
-	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(rad*getSphereScale(),getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
 
 double Planet::getSpheroidAngularSize(const StelCore* core) const
 {
-	return std::atan2(radius*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(radius*getSphereScale(),getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -1556,70 +1577,70 @@ void Planet::initShader()
 	{
 		objShadowShaderProgram->bind();
 		const float poissonDisk[] ={
-			-0.610470, -0.702763,
-			0.609267,  0.765488,
-			-0.817537, -0.412950,
-			0.777710, -0.446717,
-			-0.668764, -0.524195,
-			0.425181,  0.797780,
-			-0.766728, -0.065185,
-			0.266692,  0.917346,
-			-0.578028, -0.268598,
-			0.963767,  0.079058,
-			-0.968971, -0.039291,
-			0.174263, -0.141862,
-			-0.348933, -0.505110,
-			0.837686, -0.083142,
-			-0.462722, -0.072878,
-			0.701887, -0.281632,
-			-0.377209, -0.247278,
-			0.765589,  0.642157,
-			-0.678950,  0.128138,
-			0.418512, -0.186050,
-			-0.442419,  0.242444,
-			0.442748, -0.456745,
-			-0.196461,  0.084314,
-			0.536558, -0.770240,
-			-0.190154, -0.268138,
-			0.643032, -0.584872,
-			-0.160193, -0.457076,
-			0.089220,  0.855679,
-			-0.200650, -0.639838,
-			0.220825,  0.710969,
-			-0.330313, -0.812004,
-			-0.046886,  0.721859,
-			0.070102, -0.703208,
-			-0.161384,  0.952897,
-			0.034711, -0.432054,
-			-0.508314,  0.638471,
-			-0.026992, -0.163261,
-			0.702982,  0.089288,
-			-0.004114, -0.901428,
-			0.656819,  0.387131,
-			-0.844164,  0.526829,
-			0.843124,  0.220030,
-			-0.802066,  0.294509,
-			0.863563,  0.399832,
-			0.268762, -0.576295,
-			0.465623,  0.517930,
-			0.340116, -0.747385,
-			0.223493,  0.516709,
-			0.240980, -0.942373,
-			-0.689804,  0.649927,
-			0.272309, -0.297217,
-			0.378957,  0.162593,
-			0.061461,  0.067313,
-			0.536957,  0.249192,
-			-0.252331,  0.265096,
-			0.587532, -0.055223,
-			0.034467,  0.289122,
-			0.215271,  0.278700,
-			-0.278059,  0.615201,
-			-0.369530,  0.791952,
-			-0.026918,  0.542170,
-			0.274033,  0.010652,
-			-0.561495,  0.396310,
-			-0.367752,  0.454260
+			-0.610470f, -0.702763f,
+			 0.609267f,  0.765488f,
+			-0.817537f, -0.412950f,
+			 0.777710f, -0.446717f,
+			-0.668764f, -0.524195f,
+			 0.425181f,  0.797780f,
+			-0.766728f, -0.065185f,
+			 0.266692f,  0.917346f,
+			-0.578028f, -0.268598f,
+			 0.963767f,  0.079058f,
+			-0.968971f, -0.039291f,
+			 0.174263f, -0.141862f,
+			-0.348933f, -0.505110f,
+			 0.837686f, -0.083142f,
+			-0.462722f, -0.072878f,
+			 0.701887f, -0.281632f,
+			-0.377209f, -0.247278f,
+			 0.765589f,  0.642157f,
+			-0.678950f,  0.128138f,
+			 0.418512f, -0.186050f,
+			-0.442419f,  0.242444f,
+			 0.442748f, -0.456745f,
+			-0.196461f,  0.084314f,
+			 0.536558f, -0.770240f,
+			-0.190154f, -0.268138f,
+			 0.643032f, -0.584872f,
+			-0.160193f, -0.457076f,
+			 0.089220f,  0.855679f,
+			-0.200650f, -0.639838f,
+			 0.220825f,  0.710969f,
+			-0.330313f, -0.812004f,
+			-0.046886f,  0.721859f,
+			 0.070102f, -0.703208f,
+			-0.161384f,  0.952897f,
+			 0.034711f, -0.432054f,
+			-0.508314f,  0.638471f,
+			-0.026992f, -0.163261f,
+			 0.702982f,  0.089288f,
+			-0.004114f, -0.901428f,
+			 0.656819f,  0.387131f,
+			-0.844164f,  0.526829f,
+			 0.843124f,  0.220030f,
+			-0.802066f,  0.294509f,
+			 0.863563f,  0.399832f,
+			 0.268762f, -0.576295f,
+			 0.465623f,  0.517930f,
+			 0.340116f, -0.747385f,
+			 0.223493f,  0.516709f,
+			 0.240980f, -0.942373f,
+			-0.689804f,  0.649927f,
+			 0.272309f, -0.297217f,
+			 0.378957f,  0.162593f,
+			 0.061461f,  0.067313f,
+			 0.536957f,  0.249192f,
+			-0.252331f,  0.265096f,
+			 0.587532f, -0.055223f,
+			 0.034467f,  0.289122f,
+			 0.215271f,  0.278700f,
+			-0.278059f,  0.615201f,
+			-0.369530f,  0.791952f,
+			-0.026918f,  0.542170f,
+			 0.274033f,  0.010652f,
+			-0.561495f,  0.396310f,
+			-0.367752f,  0.454260f
 		};
 		objShadowShaderProgram->setUniformValueArray(objShadowShaderVars.poissonDisk,poissonDisk,64,2);
 		objShadowShaderProgram->release();
@@ -1844,7 +1865,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		core->getClippingPlanes(&n,&f); // Save clipping planes
 
 		//determine the minimum size of the clip space
-		double r = radius;
+		double r = radius*getSphereScale();
 		if(rings)
 			r+=rings->getSize();
 
@@ -2165,7 +2186,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Generates the vertice
 	Planet3DModel model;
-	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+	sSphere(&model, radius*getSphereScale(), oneMinusOblateness, nb_facet, nb_facet);
 	
 	QVector<float> projectedVertexArr(model.vertexArr.size());
 	for (int i=0;i<model.vertexArr.size()/3;++i)
@@ -2413,7 +2434,10 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 		return false;
 
 	if(shaderError)
+	{
+		qDebug() << "Planet::drawObjModel: Something went wrong with shader initialisation. Cannot draw OBJs, using spheres instead.";
 		return false;
+	}
 
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
