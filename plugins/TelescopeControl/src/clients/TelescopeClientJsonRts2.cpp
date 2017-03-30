@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelUtils.hpp"
+
 #include "QByteArray"
 #include "QJsonArray"
 #include "QJsonDocument"
@@ -148,9 +150,8 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 	if (!isConnected())
 		return;
 
-	const double ra_signed = atan2(j2000Pos[1], j2000Pos[0]);
-	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2 * M_PI);
-	const double dec = atan2(j2000Pos[2], std::sqrt(j2000Pos[0]*j2000Pos[0]+j2000Pos[1]*j2000Pos[1]));
+	double ra, dec;
+	StelUtils::rectToSphe(&ra, &dec, j2000Pos);
 
 	QUrl set(baseurl);
 	set.setPath(baseurl.path() + "/api/cmd");
