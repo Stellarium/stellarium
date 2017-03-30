@@ -107,7 +107,7 @@ public:
 	//! @return true if at least 1 object was sucessfully selected
 	bool setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
-	//! Get the list objects which was recently selected by the user.
+	//! Get the list of objects which was recently selected by the user.
 	const QList<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
 
 	//! Return the list objects of type "withType" which was recently selected by the user.
