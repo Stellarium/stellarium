@@ -2485,6 +2485,15 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	objModel->projPosBuffer->bind();
 	const int vtxCount = objModel->posArray.size();
 
+	// GZ we have to prescale posArray. Maybe make that array even part of objModel and scale in setSphereScale() because scaling factor does not change so often?
+	QVector<Vec3f> scaledPosArray;
+	scaledPosArray.resize(objModel->posArray.size());
+	for (int i=0; i<objModel->posArray.size(); ++i)
+	{
+		scaledPosArray[i]=objModel->posArray[i]*getSphereScale();
+	}
+
+
 	const StelProjectorP& projector = painter->getProjector();
 
 	// I tested buffer orphaning (https://www.opengl.org/wiki/Buffer_Object_Streaming#Buffer_re-specification),
@@ -2496,7 +2505,9 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	// caused a 40% FPS drop for some reason!
 	// (in theory, this should be faster because it should avoid copying the array)
 	// So, lets not do that and just use this simple way in all cases:
-	projector->project(vtxCount,objModel->posArray.constData(),objModel->projectedPosArray.data());
+	//projector->project(vtxCount,objModel->posArray.constData(),objModel->projectedPosArray.data());
+	// GZ use the scaled array.
+	projector->project(vtxCount,scaledPosArray.constData(),objModel->projectedPosArray.data());
 	objModel->projPosBuffer->allocate(objModel->projectedPosArray.constData(),vtxCount * sizeof(Vec3f));
 
 	//unprojectedVertex, normalIn and texCoord are set by the StelOpenGLArray
