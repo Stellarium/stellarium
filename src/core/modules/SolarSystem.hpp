@@ -115,6 +115,16 @@ class SolarSystem : public StelObjectModule
 		   WRITE setMoonScale
 		   NOTIFY moonScaleChanged
 		   )
+	Q_PROPERTY(bool flagMinorBodyScale
+		   READ getFlagMinorBodyScale
+		   WRITE setFlagMinorBodyScale
+		   NOTIFY flagMinorBodyScaleChanged
+		   )
+	Q_PROPERTY(double minorBodyScale
+		   READ getMinorBodyScale
+		   WRITE setMinorBodyScale
+		   NOTIFY minorBodyScaleChanged
+		   )
 	Q_PROPERTY(double labelsAmount
 		   READ getLabelsAmount
 		   WRITE setLabelsAmount
@@ -630,6 +640,16 @@ public slots:
 	//! Get the display scaling factor for Earth's moon.
 	double getMoonScale(void) const {return moonScale;}
 
+	//! Set flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
+	void setFlagMinorBodyScale(bool b);
+	//! Get the current value of the flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
+	bool getFlagMinorBodyScale(void) const {return flagMinorBodyScale;}
+
+	//! Set the display scaling factor for minor bodies.
+	void setMinorBodyScale(double f);
+	//! Get the display scaling factor for minor bodies.
+	double getMinorBodyScale(void) const {return minorBodyScale;}
+
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
@@ -753,6 +773,8 @@ signals:
 	void flagShowObjSelfShadowsChanged(bool b);
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
+	void flagMinorBodyScaleChanged(bool b);
+	void minorBodyScaleChanged(double f);
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
 	void ephemerisDatesChanged(bool b);
@@ -888,9 +910,12 @@ private:
 	//! The currently selected planet.
 	PlanetP selected;
 
-	// Moon scale value
+	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
+	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
 	bool flagMoonScale;
 	double moonScale;
+	bool flagMinorBodyScale;
+	double minorBodyScale;
 
 	QFont planetNameFont;
 

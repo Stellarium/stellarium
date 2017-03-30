@@ -978,6 +978,30 @@
               </layout>
              </item>
              <item>
+              <layout class="QHBoxLayout" name="scaleSelectedHorizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="planetScaleMinorBodyCheckBox">
+                 <property name="text">
+                  <string>Scale minor bodies:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="minorBodyScaleFactor">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.250000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
               <layout class="QHBoxLayout" name="horizontalLayout_17">
                <item>
                 <widget class="QCheckBox" name="planetLabelCheckBox">
@@ -3188,12 +3212,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
