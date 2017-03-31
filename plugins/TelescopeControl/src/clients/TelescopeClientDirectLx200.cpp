@@ -107,7 +107,7 @@ void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos)
 	if (equinox == EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
-		position = core->j2000ToEquinoxEqu(j2000Pos);
+		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
 	}
 
 	//if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
@@ -241,7 +241,7 @@ void TelescopeClientDirectLx200::sendPosition(unsigned int ra_int, int dec_int, 
 	if (equinox == EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
-		j2000Position = core->equinoxEquToJ2000(position);
+		j2000Position = core->equinoxEquToJ2000(position, StelCore::RefractionOff);
 	}
 	interpolatedPosition.add(j2000Position, getNow(), server_micros, status);
 }

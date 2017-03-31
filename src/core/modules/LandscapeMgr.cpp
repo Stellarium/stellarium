@@ -229,12 +229,18 @@ void LandscapeMgr::update(double deltaTime)
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 
 	StelCore* core = StelApp::getInstance().getCore();
-	Vec3d sunPos = ssystem->getSun()->getAltAzPosApparent(core);
+	Vec3d sunPos = ssystem->getSun()->getAltAzPosAuto(core);
 	// Compute the moon position in local coordinate
-	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
+	Vec3d moonPos = ssystem->getMoon()->getAltAzPosAuto(core);
+	float lunarPhaseAngle=ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos());
+	// LP:1673283 no lunar brightening if not on Earth!
+	if (core->getCurrentLocation().planetName != "Earth")
+	{
+		moonPos=sunPos;
+		lunarPhaseAngle=0.0f;
+	}
 	// GZ: First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
-	atmosphere->computeColor(core->getJDE(), sunPos, moonPos,
-		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
+	atmosphere->computeColor(core->getJDE(), sunPos, moonPos, lunarPhaseAngle,
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
@@ -242,7 +248,7 @@ void LandscapeMgr::update(double deltaTime)
 
 
 	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
-	if (core->getCurrentLocation().planetName.contains("Sun"))
+	if (core->getCurrentLocation().planetName == "Sun")
 	{
 		landscape->setBrightness(1.0f, 1.0f);
 		return;

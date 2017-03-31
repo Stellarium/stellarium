@@ -202,7 +202,8 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// TODO: correct for atmospheric diffusion
 	// TODO: use better coverage function (non-linear)
 	// because of above issues, this algorithm darkens more quickly than reality
-	if (separation_angle < touch_angle)
+	// Note: On Earth only, else moon would brighten other planets' atmospheres (LP:1673283)
+	if ((core->getCurrentLocation().planetName=="Earth") && (separation_angle < touch_angle))
 	{
 		float dark_angle = moon_angular_size - sun_angular_size;
 		float min = 0.0001f;  // so bright stars show up at total eclipse
@@ -381,7 +382,7 @@ void Atmosphere::draw(StelCore* core)
 
 	// And draw everything at once
 	indicesBuffer.bind();
-	int shift=0;
+	std::size_t shift=0;
 	for (int y=0;y<skyResolutionY;++y)
 	{
 		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));

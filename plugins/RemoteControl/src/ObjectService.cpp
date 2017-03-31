@@ -25,7 +25,6 @@
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMainScriptAPI.hpp"
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 
@@ -163,7 +162,7 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 			QJsonObject infoObj;
 			StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 			StelObjectP obj = omgr->searchByName(name);
-			QVariantMap infoMap=StelMainScriptAPI::getObjectInfo(obj);
+			QVariantMap infoMap=StelObjectMgr::getObjectInfo(obj);
 			QVariantMap::const_iterator i;
 			for (i=infoMap.constBegin(); i!=infoMap.constEnd(); ++i)
 				infoObj.insert(i.key(), i.value().toString());

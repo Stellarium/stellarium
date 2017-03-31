@@ -25,6 +25,7 @@
 #include "StelModule.hpp"
 #include "VecMath.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelLocation.hpp"
 
 //! @class ZodiacalLight 
 //! Manages the displaying of the Zodiacal Light. The brightness values follow the paper:
@@ -56,8 +57,11 @@ class ZodiacalLight : public StelModule
 	Q_PROPERTY(double intensity
 		   READ getIntensity
 		   WRITE setIntensity
-		   NOTIFY intensityChanged
-		   )
+		   NOTIFY intensityChanged)
+	Q_PROPERTY(Vec3f color
+		   READ getColor
+		   WRITE setColor
+		   NOTIFY colorChanged)
 
 public:
 	ZodiacalLight();
@@ -86,19 +90,19 @@ public:
 public slots:
 	//! Get Zodiacal Light intensity.
 	double getIntensity() const {return intensity;}
-	//! Set Zodiacal Light intensity.
+	//! Set Zodiacal Light intensity. Default value: 1.
 	//! @param aintensity intensity of Zodiacal Light
 	void setIntensity(double aintensity) {if(aintensity!=intensity){intensity = aintensity; emit intensityChanged(intensity);}}
 	
-	//! Get the color used for rendering the Zodiacal Light
+	//! Get the color used for rendering the Zodiacal Light. It is modulated by intensity, light pollution and atmospheric extinction.
 	Vec3f getColor() const {return color;}
 	//! Sets the color to use for rendering the Zodiacal Light
-	//! @param c The color to use for rendering the Zodiacal Light
+	//! @param c The color to use for rendering the Zodiacal Light. Default (1.0, 1.0, 1.0).
 	//! @code
 	//! // example of usage in scripts
 	//! ZodiacalLight.setColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setColor(const Vec3f& c) {color=c;}
+	void setColor(const Vec3f& c) {if (c!=color) { color=c; emit colorChanged(c);}}
 	
 	//! Sets whether to show the Zodiacal Light
 	//! @code
@@ -109,9 +113,14 @@ public slots:
 	//! Gets whether the Zodiacal Light is displayed
 	bool getFlagShow(void) const;
 
+private slots:
+	//! connect to StelCore to force-update ZL.
+	void handleLocationChanged(StelLocation loc);
+
 signals:
 	void zodiacalLightDisplayedChanged(const bool displayed);
 	void intensityChanged(double intensity);
+	void colorChanged(Vec3f color);
 	
 private:
 	StelTextureSP tex;

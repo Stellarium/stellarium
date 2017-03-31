@@ -73,7 +73,7 @@ Supernova::~Supernova()
 	//
 }
 
-QVariantMap Supernova::getMap(void)
+QVariantMap Supernova::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -155,6 +155,20 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+
+QVariantMap Supernova::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map["sntype"] = sntype;
+	map["max-magnitude"] = maxMagnitude;
+	map["peakJD"] = peakJD;
+	map["note"] = note;
+	map["distance"] = distance;
+
+	return map;
 }
 
 Vec3f Supernova::getInfoColor(void) const

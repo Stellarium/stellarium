@@ -99,7 +99,9 @@ public slots:
 	//! Adds dialog location to config.ini; should be connected in createDialogContent()
 	void handleMovedTo(QPoint newPos);
 	//! Stores dialog sizes into config.ini; should be connected from the proxy.
-	void handleDialogSizeChanged(QSizeF size);
+	//! When a subclass needs a size-dependent update, implement such update in the subclass version,
+	//! but call StelDialog::handleDialogSizeChanged() first.
+	virtual void handleDialogSizeChanged(QSizeF size);
 	QString getDialogName(){return dialogName;}
 signals:
 	void visibleChanged(bool);
@@ -157,6 +159,7 @@ protected:
 
 #ifdef Q_OS_WIN
 	//! Kinetic scrolling for lists.
+	//! @note This has been temporarily disabled (since 0.13.2) due to a bug in Qt.
 	void installKineticScrolling(QList<QWidget *> addscroll);
 #endif
 

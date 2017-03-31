@@ -1,0 +1,100 @@
+// Name: Sky Image load test script 5
+// License: Public Domain
+// Author: Georg Zotti
+// Description: This script demonstrates adding sky images in various coordinate frames. 
+// Due to the deplorably fragile nature of this feature, images are only created.
+//  Run this script from the script editor. Mark the commented block and just run this to delete the images.
+//
+
+include("status_label.inc");
+
+useStatusLabel("Sky Images Test 6: ", 50, core.getScreenHeight() - 50, 16, "#ff0000");
+
+status("Load a sky image by centre, size and rotation");
+core.clear("starchart");
+core.setJDay(2457824.451222);
+core.setObserverLocation(16, 48.5, 200);
+GridLinesMgr.setFlagEquatorJ2000Grid(true);
+GridLinesMgr.setFlagEquatorGrid(false);
+core.selectObjectByName("HP86317", false); // some star so that we can see several coordinate system equators.
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(125,1);
+GridLinesMgr.setFlagHorizonLine(true);
+GridLinesMgr.setFlagEclipticLine(true);
+GridLinesMgr.setFlagEclipticJ2000Line(true);
+GridLinesMgr.setFlagSupergalacticEquatorLine(true);
+GridLinesMgr.setFlagGalacticEquatorLine(true);
+
+status("loading images...");
+
+
+core.loadSkyImage("image1", "../textures/TestSquare.png", 
+                  40, 0,    // az, alt centre, degrees from south towards east. (May be changed in V0.16!)
+                  600.0, 0,        // angSize, rotation
+                  2.5, -14,        // minRes, maxBright
+                  true, "AzAlt");         // visible on load? (J2000 by default)
+
+core.loadSkyImage("image2", "../textures/TestSquare.png", 
+                  240, 0,    // ra, dec centre, degrees Should be on equator.
+                  600.0, 0,       // angSize, rotation
+                  2.5, -14,        // minRes, maxBright
+                  true, "EqDate");         // visible on load? Coord.Frame?
+
+core.loadSkyImage("image3", "../textures/TestSquare.png", 
+                  210, 0,    // lon, lat centre
+                  600.0, 0,      // angSize, rotation
+                  2.5, -14,        // minRes, maxBright
+                  true, "EclJ2000");         // visible on load? Coord.Frame?
+
+core.loadSkyImage("image4", "../textures/TestSquare.png", 
+                  225, 0,    // lon, lat centre
+                  600.0, 0,      // angSize, rotation
+                  2.5, -14,        // minRes, maxBright
+                  true, "EclDate");         // visible on load? Coord.Frame?
+
+core.loadSkyImage("image5", "../textures/TestSquare.png", 
+                  340, 0,    // lon, lat centre
+                  600.0, 0,      // angSize, rotation
+                  2.5, -14,        // minRes, maxBright
+                  true, "Galactic");         // visible on load? Coord.Frame?
+
+core.loadSkyImage("image6", "../textures/TestSquare.png", 
+                  165, 0,    // lon, lat centre
+                  600.0, 0,      // angSize, rotation
+                  2.5, -14,        // minRes, maxBright
+                  true, "SuperGalactic");         // visible on load? Coord.Frame?
+				  
+core.loadSkyImage("image7", "../textures/TestSquare.png", 
+                  270, 0,    // ra, dec centre
+                  600.0, 0,      // angSize, rotation
+                  2.5, -14,        // minRes, maxBright
+                  true, "EqJ2000");         // visible on load? Coord.Frame?
+
+core.wait(1.5);
+
+status("Move around and see test frames aligned with several equators. Some may only be visible off-center (bug!)");
+
+
+if (0){
+status("hiding image (should fade out)");
+StelSkyLayerMgr.showLayer("image1", false); core.wait(0.5);
+StelSkyLayerMgr.showLayer("image2", false); core.wait(0.5);
+StelSkyLayerMgr.showLayer("image3", false); core.wait(0.5);
+StelSkyLayerMgr.showLayer("image4", false); core.wait(0.5);
+StelSkyLayerMgr.showLayer("image5", false); core.wait(0.5);
+StelSkyLayerMgr.showLayer("image6", false); core.wait(0.5);
+StelSkyLayerMgr.showLayer("image7", false); 
+
+core.wait(1.5);
+
+status("removing images, thx and goodbye");
+core.removeSkyImage("image1");
+core.removeSkyImage("image2");
+core.removeSkyImage("image3");
+core.removeSkyImage("image4");
+core.removeSkyImage("image5");
+core.removeSkyImage("image6");
+core.removeSkyImage("image7");
+core.wait(1.5);
+LabelMgr.deleteAllLabels();
+}

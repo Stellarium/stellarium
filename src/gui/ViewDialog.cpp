@@ -311,6 +311,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showSupergalacticPolesCheckBox,	"actionShow_Supergalactic_Poles");
 	connectCheckBox(ui->showEquinoxJ2000PointsCheckBox,	"actionShow_Equinox_J2000_Points");
 	connectCheckBox(ui->showEquinoxPointsCheckBox,		"actionShow_Equinox_Points");
+	connectCheckBox(ui->showSolsticeJ2000PointsCheckBox,	"actionShow_Solstice_J2000_Points");
+	connectCheckBox(ui->showSolsticePointsCheckBox,		"actionShow_Solstice_Points");
 
 	colorButton(ui->colorEclipticGridJ2000,		"GridLinesMgr.eclipticJ2000GridColor");
 	colorButton(ui->colorEclipticGridOfDate,	"GridLinesMgr.eclipticGridColor");
@@ -341,6 +343,8 @@ void ViewDialog::createDialogContent()
 	colorButton(ui->colorSupergalacticPoles,	"GridLinesMgr.supergalacticPolesColor");
 	colorButton(ui->colorEquinoxJ2000Points,	"GridLinesMgr.equinoxJ2000PointsColor");
 	colorButton(ui->colorEquinoxPoints,		"GridLinesMgr.equinoxPointsColor");
+	colorButton(ui->colorSolsticeJ2000Points,	"GridLinesMgr.solsticeJ2000PointsColor");
+	colorButton(ui->colorSolsticePoints,		"GridLinesMgr.solsticePointsColor");
 	colorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor");
 
 	connect(ui->colorEclipticGridJ2000,		SIGNAL(released()), this, SLOT(askEclipticJ2000GridColor()));
@@ -372,6 +376,8 @@ void ViewDialog::createDialogContent()
 	connect(ui->colorSupergalacticPoles,		SIGNAL(released()), this, SLOT(askSupergalacticPolesColor()));
 	connect(ui->colorEquinoxJ2000Points,		SIGNAL(released()), this, SLOT(askEquinoxJ2000PointsColor()));
 	connect(ui->colorEquinoxPoints,			SIGNAL(released()), this, SLOT(askEquinoxPointsColor()));
+	connect(ui->colorSolsticeJ2000Points,		SIGNAL(released()), this, SLOT(askSolsticeJ2000PointsColor()));
+	connect(ui->colorSolsticePoints,		SIGNAL(released()), this, SLOT(askSolsticePointsColor()));
 	connect(ui->colorCardinalPoints,		SIGNAL(released()), this, SLOT(askCardinalPointsColor()));
 
 	// Projection
@@ -644,7 +650,7 @@ void ViewDialog::askLongitudeLineColor()
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
 		GETSTELMODULE(GridLinesMgr)->setColorLongitudeLine(vColor);
-		StelApp::getInstance().getSettings()->setValue("color/longitude_color", StelUtils::vec3fToStr(vColor));
+		StelApp::getInstance().getSettings()->setValue("color/oc_longitude_color", StelUtils::vec3fToStr(vColor));
 		ui->colorLongitudeLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
@@ -856,6 +862,36 @@ void ViewDialog::askEquinoxPointsColor()
 		GETSTELMODULE(GridLinesMgr)->setColorEquinoxPoints(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/equinox_points_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEquinoxPoints->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askSolsticeJ2000PointsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.solsticeJ2000PointsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSolsticeJ2000Points->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(GridLinesMgr)->setColorSolsticeJ2000Points(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/solstice_J2000_points_color", StelUtils::vec3fToStr(vColor));
+		ui->colorSolsticeJ2000Points->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askSolsticePointsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.solsticePointsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSolsticePoints->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(GridLinesMgr)->setColorSolsticePoints(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/solstice_points_color", StelUtils::vec3fToStr(vColor));
+		ui->colorSolsticePoints->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 
