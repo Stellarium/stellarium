@@ -389,3 +389,19 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 {
 	return objModulesMap;
 }
+
+QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
+{
+	QVariantMap map;
+	if (!obj)
+	{
+		qDebug() << "getObjectInfo WARNING - object not found";
+		map.insert("found", false);
+	}
+	else
+	{
+		map=obj->getInfoMap(StelApp::getInstance().getCore());
+		map.insert("found", true);
+	}
+	return map;
+}

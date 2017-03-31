@@ -1,11 +1,11 @@
 // Author: Qam1
 // Name: Solar System Screensaver
 // License: Public Domain
-// Version: 261-1
+// Version: 287-1
 // Shortcut: Ctrl+D,0
-// Description: Screensaver of various happenings in the Solar System. 261 events in all!
+// Description: Screensaver of various happenings in the Solar System. 287 events in all!
 
-// Made on Stellarium Version 14.1
+// Made on Stellarium Version 15.1
 
 
 
@@ -21,7 +21,7 @@ core.setDeltaTAlgorithm("WithoutCorrection");
 LabelMgr.deleteAllLabels();
 
 // Number of Events
-l = 261;
+l = 287;
 
 
 degstring = "\u00B0";
@@ -46,7 +46,7 @@ ob = SolarSystem.getFlagOrbits();
 id = new Array(length=l);
 for(i=1; i<l+1; i++)
 {
-id[i] = i; 
+id[i] = i;
 }
 
 // mix 'em up - A Swap command would be nice
@@ -82,7 +82,26 @@ txt1 = LabelMgr.labelScreen(id[r], 10 * x, 600 * y, false, 40 * x, "#78FF17");
 d2 = ""; c2 = "";
 
 
+
 if (id[r] == 1)
+{
+// Gan De's Gandymede
+core.setObserverLocation(116.87, 37.19, 20, 1, "", "Earth");
+core.setDate("-365-05-28T17:00:51", "utc");
+
+core.selectObjectByName("Ganymede", pointer = true);
+
+StelMovementMgr.setFlagTracking(true);
+var pick = Math.floor(Math.random()*2)+3;
+StelMovementMgr.zoomTo(pick/10, 1);
+
+d1 = "Gan De may have discovered Gandymede summer 365 B.C."; 
+c1 = "#7ADAFF"
+
+
+}
+
+if (id[r] == 2)
 {
 // Jupiter/Sun from Saturn
 core.setObserverLocation(-15, -90, 2700, 1, "", "Saturn");
@@ -106,7 +125,7 @@ c1 = "#78FF17"
 }
 
 
-if (id[r] == 2)
+if (id[r] == 3)
 {
 // Mars - Jupiter - Saturn   12/22/1503 & 12/26/1503
 core.setObserverLocation(-0.71, 40.50, 26, 1, "", "Earth");
@@ -137,7 +156,7 @@ c2 = "#EFEE01"
 
 
 
-if (id[r] == 3)
+if (id[r] == 4)
 {
 // Columbus' Eclipse
 SolarSystem.setFlagMoonScale(0);   	
@@ -158,7 +177,7 @@ SolarSystem.setFlagMoonScale(0);
 }
 
 
-if (id[r] == 4)
+if (id[r] == 5)
 {
 // Jupiter Galileo Galilei
 core.setObserverLocation(43.75, 11.3333, 26, 1, "", "Earth");
@@ -196,7 +215,7 @@ c1 = "#19AF77"
 }
 
 
-if (id[r] == 5)
+if (id[r] == 6)
 {
 // Einstein's Eclipse
 SolarSystem.setFlagMoonScale(0);   	
@@ -209,7 +228,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*6)+1
 StelMovementMgr.zoomTo(pick, 1);
 
-d1 = "Solar eclipse proves Einstein's Theory of Reletivity 5/29/1919"
+d1 = "That Solar eclipse that proved Einstein's Theory of Reletivity 5/29/1919"
 c1 = "#FAFAFF"
 
 
@@ -217,7 +236,7 @@ SolarSystem.setFlagMoonScale(0);
 }
 
 
-if (id[r] == 6)
+if (id[r] == 7)
 {
 // Earth from Apollo 11  07/20/1969
 core.setObserverLocation(23.472969, 0.674081, 4, 1, "", "Moon");
@@ -238,7 +257,31 @@ c1 = "#F1FAFF"
 }
 
 
-if (id[r] == 7)
+if (id[r] == 8)
+{
+// Carley's Eclipse
+SolarSystem.setFlagMoonScale(0);   	
+core.setObserverLocation(-63.5391, 45.3287, 45, 1, "", "Earth");
+core.setDate("1972-07-10T20:40:07", "utc");
+
+core.selectObjectByName("Moon", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*4)+1
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "And you flew your private jet up to Nova Scotia for the Total Eclispe of the Sun"
+c1 = "#FAFAFF"
+
+d2 = "You're so vain - I bet you think this script is about you. Don't you."
+c2 = "#FFFFFF" 
+
+ 	
+}
+
+
+
+if (id[r] == 9)
 {
 // Voyager II - 8/20/1977
 
@@ -273,7 +316,7 @@ c1 = "#FFFFFF"
 }
 
 
-if (id[r] == 8)
+if (id[r] == 10)
 {
 // Uranus - Neptune Conjunction 8/19/1993
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -295,7 +338,7 @@ c1 = "#FF14FA"
 
 }
 
-if (id[r] == 9)
+if (id[r] == 11)
 {
 // 2002 Planet Grouping 
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -334,7 +377,7 @@ c1 = "#791BC9"
 }
 
 
-if (id[r] == 10)
+if (id[r] == 12)
 {
 // Mars - Closest Approach in 65,000 Years 08/27/2003
 
@@ -354,7 +397,7 @@ c1 = "#FF0000"
 }
 
 
-if (id[r] == 11)
+if (id[r] == 13)
 {
 // Venus brightest 21st century
 core.setObserverLocation(-24.5, 40.5, 1738, 1, "", "Earth");
@@ -375,7 +418,7 @@ SolarSystem.setFlagOrbits(false);
 }
 
 
-if (id[r] == 12)
+if (id[r] == 14)
 {
 // Smiley
 SolarSystem.setFlagMoonScale(4);   	
@@ -396,41 +439,9 @@ c1 = "#FFFFFF"
 StelSkyDrawer.setFlagLuminanceAdaptation(false);
 }
 
-if (id[r] == 13)
-{
-// Saturn's Moons - Quadruple Transit
-
-core.setObserverLocation(-137.39, 40.50, 1126, 1, "", "Earth");
-core.setDate("2009-02-24T14:27:17", "utc");
-
-core.selectObjectByName("Saturn", pointer = false);
-StelMovementMgr.setFlagTracking(true);
-
-StelMovementMgr.zoomTo(0.009, 1);
-var pick = Math.floor(Math.random()*5);
-if (pick == 1)
-{
-core.selectObjectByName("Enceladus", pointer = true);
-}
-if (pick == 2)
-{
-core.selectObjectByName("Dione", pointer = true);
-}
-if (pick == 3)
-{
-core.selectObjectByName("Titan", pointer = true);
-}
-if (pick == 4)
-{
-core.selectObjectByName("Mimas", pointer = true);
-}
-d1 = "An Incredible Quadruple Saturn Moon Transit 2/24/2009"
-c1 = "#F1FBD9"
 
 
-}
-
-if (id[r] == 14)
+if (id[r] == 15)
 {
 // 4 Planet Grouping 2010
 core.setObserverLocation(-73.71, 7.50, 26, 1, "", "Earth");
@@ -465,7 +476,7 @@ c1 = "#A95F3A"
 
 }
 
-if (id[r] == 15)
+if (id[r] == 16)
 {
 // Jupiter - Uranus Opposition Together 9/21/2010
 
@@ -489,7 +500,8 @@ c1 = "#74A82C"
 
 }
 
-if (id[r] == 16)
+
+if (id[r] == 17)
 {
 // Gandymede's Greatest Elongation 09/23/2010
 core.setObserverLocation(-145.5, 15, 64, 1, "", "Earth");
@@ -500,6 +512,8 @@ core.selectObjectByName("Ganymede", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*2)+3;
 StelMovementMgr.zoomTo(pick/10, 1);
+
+SolarSystem.setFlagOrbits(true);
 
 d1 = "Gandymede Greatest Elongation away from Jupiter (0.1049 Degrees)"; 
 c1 = "#7ADAFF"
@@ -512,7 +526,36 @@ c2 = "#7ADAFF"
 }
 
 
-if (id[r] == 17)
+if (id[r] == 18)
+{
+// Brightest Ganymede from Callisto 
+	
+core.setObserverLocation(-0.40, 0, 116, 1, "", "Callisto");
+core.setDate("2011-04-21T14:41:57", "UTC");
+
+core.selectObjectByName("Ganymede", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.floor(Math.random())+.8
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Brightest Ganymede of the 21st Century -9.478 Mag."
+c1 = "#BABABF"
+
+d2 = "From Callisto 4/21/2011"
+c2 = c1
+
+
+  	
+}
+
+
+
+
+
+if (id[r] == 19)
 {
 // Grouping 2011
 
@@ -545,7 +588,8 @@ c1 = "#B22FAA"
 
 }
 
-if (id[r] == 18)
+
+if (id[r] == 20)
 {
 // Jupiter from Mars 
 core.setObserverLocation(-73.71, 45.25, 1176, 1, "", "Mars");
@@ -566,7 +610,7 @@ c1 = "#F7714F"
 
 
 
-if (id[r] == 19)
+if (id[r] == 21)
 {
 // Vesta
 
@@ -587,7 +631,7 @@ c1 = "#A0A0A0"
 }
 
 
-if (id[r] == 20)
+if (id[r] == 22)
 {
 // Venus Transit
 
@@ -610,7 +654,7 @@ c1 = "#000007"
 }
 
 
-if (id[r] == 21)
+if (id[r] == 23)
 {
 // Jup & Venus
 core.setObserverLocation(-74.5, 16.5, 126, 1, "", "Earth");
@@ -636,7 +680,7 @@ c1 = "#FFFFFF"
 }
 
 
-if (id[r] == 22)
+if (id[r] == 24)
 {
 // Jupiter Spread
 core.setObserverLocation(-175.33, 44.24, 1126, 1, "", "Earth");
@@ -673,7 +717,7 @@ c1 = "#FFFFFF"
 
 }
 
-if (id[r] == 23)
+if (id[r] == 25)
 {
 // Uranus
 
@@ -696,7 +740,7 @@ c1 = "#33FF4F"
 
 
 
-if (id[r] == 24)
+if (id[r] == 26)
 {
 // Lunar Eclipse near Spica & mars
 SolarSystem.setFlagMoonScale(0);   	
@@ -717,7 +761,34 @@ SolarSystem.setFlagMoonScale(0);
 }
 
 
-if (id[r] == 25)
+if (id[r] == 27)
+{
+// Vesta - Ceres 7/5/2014
+core.setObserverLocation(116.36, -4.28, 126, 1, "", "Earth");
+core.setDate("2014-07-05T11:19:07", "utc");
+
+core.selectObjectByName("Vesta", pointer = true);
+var pick = Math.floor(Math.random()*2);
+if (pick == 0)
+{
+core.selectObjectByName("Ceres", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*70)+10;
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "A very close 0.166" + degstring + " Ceres - Vesta Conjunction 07/13/2014"
+c1 = "#F0F0F0"
+
+
+}
+
+
+
+
+
+if (id[r] == 28)
 {
 // Moon Transits Earth 7/6/2014
 core.setObserverLocation(-92.90, 40.25, 126, 1, "", "Mars");
@@ -743,34 +814,7 @@ c1 = "#0F0FFF"
 
 
 
-if (id[r] == 26)
-{
-// Vesta - Ceres 7/13/2014
-core.setObserverLocation(-43.36, -4.28, 126, 1, "", "Earth");
-core.setDate("2014-07-13T22:51:07", "utc");
-
-core.selectObjectByName("Vesta", pointer = true);
-var pick = Math.floor(Math.random()*2);
-if (pick == 0)
-{
-core.selectObjectByName("Ceres", pointer = true);
-}
-StelMovementMgr.setFlagTracking(true);
-
-var pick = Math.floor(Math.random()*70)+10;
-StelMovementMgr.zoomTo(pick, 1);
-
-d1 = "A very close 0.04" + degstring + " Ceres - Vesta Conjunction 07/13/2014"
-c1 = "#F0F0F0"
-
-
-}
-
-
-
-
-
-if (id[r] == 27)
+if (id[r] == 29)
 {
 // Total Eclipse of the sun by Europa from Ganymede 
 core.setObserverLocation(-79.25, -55.5, 26, 1, "", "Ganymede");
@@ -789,7 +833,7 @@ c1 = "#FFFF07"
 
 }
 
-if (id[r] == 28)
+if (id[r] == 30)
 {
 // Grouping 2015
 
@@ -818,7 +862,7 @@ c1 = "#F2FFFF"
 
 }
 
-if (id[r] == 29)
+if (id[r] == 31)
 {
 // Saturn Venus Antares 1/8/2016
 core.setObserverLocation(27.66, 10.66, 36, 1, "", "Earth");
@@ -843,7 +887,7 @@ c1 = "#F331F1"
 }
 
 
-if (id[r] == 30)
+if (id[r] == 32)
 {
 // Mercury & Pluto 
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -860,14 +904,14 @@ StelMovementMgr.setFlagTracking(true);
 
 StelMovementMgr.zoomTo(24.7, 1);
 
-d1 = "The Next Mercury - Pluto conjunction 1/30/2016";
+d1 = "Mercury - Pluto conjunction 1/30/2016";
 c1 = "#BB4234"
 
 
 
 }
 
-if (id[r] == 31)
+if (id[r] == 33)
 {
 // Mars & Saturn & Antares 
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -894,7 +938,7 @@ c1 = "#FF1B00"
 }
 
 
-if (id[r] == 32)
+if (id[r] == 34)
 {
 // 3 Planet Grouping 2016
 core.setObserverLocation(-73.39, -40.50, 26, 1, "", "Earth");
@@ -924,7 +968,7 @@ c1 = "#F611FA"
 }
 
 
-if (id[r] == 33)
+if (id[r] == 35)
 {
 // Earth Circlet
 
@@ -947,32 +991,42 @@ LandscapeMgr.setFlagAtmosphere(false);
 }
 
 
-if (id[r] == 34)
+
+if (id[r] == 36)
 {
-// Mars
+// Moon Mars and Venus
+SolarSystem.setFlagMoonScale(4);   	
+StelSkyDrawer.setFlagLuminanceAdaptation(true);
+core.setObserverLocation(-73.710, 44.235, 1121, 1, "", "Earth");
+core.setDate("2017-01-31T23:45:07", "utc");
 
-core.setObserverLocation(-148.9, 6.75, 16, 1, "", "Ceres");
-core.setDate("2016-09-14T18:28:07", "utc");
+core.selectObjectByName("Venus", pointer = true);
 
-core.selectObjectByName("Mars", pointer = false);
+var pick = Math.floor(Math.random()*2);
+if (pick == 0)
+{
+core.selectObjectByName("Mars", pointer = true);
+}
+
+
 StelMovementMgr.setFlagTracking(true);
 
-var pick = Math.random()*6+1;
-pick = pick * 0.01;
-StelMovementMgr.zoomTo(pick);
-
-d1 = "Mars Occults Zubeneschamali from Ceres"
-c1 = "#FF334F"
-
-d2 = " 09/14/2016"
-c2 = c1
 
 
+var pick = Math.floor(Math.random()*10)+20;
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Venus-Mars-Moon 1/31/2017"
+c1 = "#FFFFFF"
+
+
+StelSkyDrawer.setFlagLuminanceAdaptation(false);
 }
 
 
 
-if (id[r] == 35)
+
+if (id[r] == 37)
 {
 // Venus - Earth - Jupiter - Spica 02/27/2017
 core.setObserverLocation(98, 32.27, 16, 1, "", "Mars");
@@ -991,6 +1045,8 @@ core.selectObjectByName("Jupiter", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
 
+
+
 var pick = Math.floor(Math.random()*20)+20;
 StelMovementMgr.zoomTo(pick, 0);
 
@@ -1002,7 +1058,7 @@ c1 = "#1DFFB0"
 
 
 
-if (id[r] == 36)
+if (id[r] == 38)
 {
 // Earth & Jup & Venus & Spica  3/01/2017
 core.setObserverLocation(-2.4, -5, 16, 1, "", "Mars");
@@ -1030,7 +1086,7 @@ c1 = "#AD2CF0"
 
 
 
-if (id[r] == 37)
+if (id[r] == 39)
 {
 // Phobos from Deimos //@#@
 core.setObserverLocation(-26.6, 37.5, 26, 1, "", "Deimos");
@@ -1048,7 +1104,7 @@ c1 = "#F0F0F0"
 
 
 
-if (id[r] == 38)
+if (id[r] == 40)
 {
 // Uranus Greatest Brillancy
 core.setObserverLocation(-160.25, 20.25, 126, 1, "", "Neptune");
@@ -1068,7 +1124,7 @@ c1 = "#11FF18"
 
 
 
-if (id[r] == 39)
+if (id[r] == 41)
 {
 // Saturn Jupiter 6/20/2017
 core.setObserverLocation(-178.66, -22.66, 36, 1, "", "Pluto");
@@ -1095,7 +1151,7 @@ c1 = "#F331F1"
 
 
 
-if (id[r] == 40)
+if (id[r] == 42)
 {
 // Jupiter from Saturn GE
 core.setObserverLocation(-74.5, -10.5, 200000, 1, "", "Saturn");
@@ -1120,7 +1176,7 @@ SolarSystem.setFlagOrbits(false);
 
 }
 
-if (id[r] == 41)
+if (id[r] == 43)
 {
 // Jup Ple from Callisto 08/28/2017
 core.setObserverLocation(-10.5, 30, 0, 1, "", "Callisto");
@@ -1142,7 +1198,36 @@ c1 = "#FF0007"
 
 
 
-if (id[r] == 42)
+if (id[r] == 44)
+{
+// Triple Conjunctions of Pluto's Moons 3/23/2018
+core.setObserverLocation(-15.4, 14.1, 16, 1, "", "Pluto");
+core.setDate("2018-03-23T14:54:23", "utc");
+
+core.selectObjectByName("Charon", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Nix", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Hydra (moon)", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*4)+4;
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Triple Conjunction of Pluto's Moons 3/23/2018 from Pluto"
+c1 = "#A1CFFF"
+
+
+}
+
+
+
+if (id[r] == 45)
 {
 // Earth Transit from Pluto
 core.setObserverLocation(-73.71, 10.25, 40, 1, "", "Pluto");
@@ -1164,7 +1249,7 @@ c1 = "#11777F"
 
 
 
-if (id[r] == 43)
+if (id[r] == 46)
 {
 // Nice Ceres Grouping 7/21/2018
 core.setObserverLocation(74.3, 40.5, 16, 1, "", "Ceres");
@@ -1202,7 +1287,7 @@ c2 = "#FF2222"
 }
 
 
-if (id[r] == 44)
+if (id[r] == 47)
 {
 // Mars - Closest (although not as close) to Earth since 2003  7/27/2018
 
@@ -1222,7 +1307,7 @@ c1 = "#FF0F00"
 }
 
 
-if (id[r] == 45)
+if (id[r] == 48)
 {
 // Uranus Greatest Elongation
 core.setObserverLocation(-33.00, 22.5, 126, 1, "", "Neptune");
@@ -1245,7 +1330,7 @@ SolarSystem.setFlagOrbits(false);
 
 
 
-if (id[r] == 46)
+if (id[r] == 49)
 {
 // Venus Dimmest 
 core.setObserverLocation(61.1, 9.25, 1738, 1, "", "Earth");
@@ -1268,7 +1353,7 @@ c1 = "#B5FFA7"
 
 
 
-if (id[r] == 47)
+if (id[r] == 50)
 {
 // Jupiter's Moons - Triple Transit
 
@@ -1303,7 +1388,7 @@ SolarSystem.setFlagMoonScale(0);
 
 
 
-if (id[r] == 48)
+if (id[r] == 51)
 {
 // Mars Conjunction Pluto 3/23/2020
 core.setObserverLocation(1.80, 12.75, 12, 1, "", "Earth");
@@ -1330,7 +1415,7 @@ c1 = "#FF0007"
 }
 
 
-if (id[r] == 49)
+if (id[r] == 52)
 {
 // Mars - Jupiter - Saturn - Pluto Conjunction 3/26/2020
 core.setObserverLocation(-73.71, 45.24, 1126, 1, "", "Earth");
@@ -1363,7 +1448,7 @@ c1 = "#47B75D"
 
 }
 
-if (id[r] == 50)
+if (id[r] == 53)
 {
 // Earth - Antares 04/15/2020
 SolarSystem.setFlagMoonScale(0);   	
@@ -1394,39 +1479,12 @@ SolarSystem.setFlagMoonScale(4);
 }
 
 
-if (id[r] == 51)
-{
-// Jupiter's Moons - Triple Transit from Titan
-
-core.setObserverLocation(177.1, 19.24, 1126, 1, "", "Titan");
-core.setDate("2020-05-12T15:20:01", "utc");
-
-core.selectObjectByName("Jupiter", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-StelMovementMgr.zoomTo(0.009, 1);
-var pick = Math.floor(Math.random()*4);
-if (pick == 1)
-{
-core.selectObjectByName("Io", pointer = true);
-}
-if (pick == 2)
-{
-core.selectObjectByName("Europa", pointer = true);
-}
-if (pick == 3)
-{
-core.selectObjectByName("Callisto", pointer = true);
-}
-d1 = "Triple Jupiter Moon Transit from Titan 8/15/2021"
-c1 = "#CCCC1C"
-
-}
 
 
 
 
-if (id[r] == 52)
+
+if (id[r] == 54)
 {
 // Moon Greatest Elongation from Mars 6/6/2020
 SolarSystem.setFlagMoonScale(0);   	
@@ -1457,7 +1515,7 @@ SolarSystem.setFlagOrbits(false);
 
 }
 
-if (id[r] == 53)
+if (id[r] == 55)
 {
 // 4 Planet Grouping Venus 2020
 core.setObserverLocation(104.350, 63.44, 50000, 1, "", "Venus");
@@ -1490,7 +1548,7 @@ c1 = "#AFAAFF"
 
 
 
-if (id[r] == 54)
+if (id[r] == 56)
 {
 // Saturn from Jupiter 11/2/2020
 core.setObserverLocation(163.9, 34.5, 1, 1, "", "Europa");
@@ -1507,7 +1565,7 @@ c1 = "#FFF6F8"
 
 
 
-if (id[r] == 55)
+if (id[r] == 57)
 {
 // Mercury from Venus 
 core.setObserverLocation(-154.3, 2.5, 10, 1, "", "Venus");
@@ -1535,7 +1593,7 @@ SolarSystem.setLabelsAmount(20);
 
 
 
-if (id[r] == 56)
+if (id[r] == 58)
 {
 // Jupiter - Saturn Conjunction 12/21/2020
 
@@ -1558,7 +1616,7 @@ c1 = "#96AA22"
 
 }
 
-if (id[r] == 57)
+if (id[r] == 59)
 {
 // Earth - Lagoon 6/03/2021
 core.setObserverLocation(7, 7.24, 50000, 1, "", "Venus");
@@ -1582,7 +1640,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 }
 
 
-if (id[r] == 58)
+if (id[r] == 60)
 {
 // Jupiter's Moons - Triple Transit
 
@@ -1613,11 +1671,11 @@ c1 = "#CC7802"
 }
 
 
-if (id[r] == 59)
+if (id[r] == 61)
 {
-// Ceres - Hyades 7/11/2028
+// Ceres - Hyades 11/22/2021
 core.setObserverLocation(-3.71, 44.24, 1126, 1, "", "Earth");
-core.setDate("2021-11-22T00:11:07", "utc");
+core.setDate("2021-11-17T00:11:07", "utc");
 
 core.selectObjectByName("Ceres", pointer = true);
 StelMovementMgr.setFlagTracking(true);
@@ -1626,7 +1684,7 @@ var pick = Math.floor(Math.random()*12)+8
 StelMovementMgr.zoomTo(pick, 1);
 
 
-d1 = "Ceres in Hyades 11/12/2021 - 11/25/2021"
+d1 = "Ceres in Hyades 11/6/2021 - 11/21/2021"
 c1 = "#777777"
 
 
@@ -1635,7 +1693,28 @@ SolarSystem.setFlagMoonScale(0);
 
 
 
-if (id[r] == 60)
+if (id[r] == 62)
+{
+// The Eclipse of the sun by Nereid from Trition 
+core.setObserverLocation(0.25, -87.99, 7, 1, "", "Triton");
+core.setDate("2022-01-25T00:57:35", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Nereid", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*10)+3;
+StelMovementMgr.zoomTo(pick/100, 1);
+
+d1 = "Eclipse of the sun by Nereid from Triton 1/25/2022"
+c1 = "#00FFF7"
+
+
+} 
+
+
+
+if (id[r] == 63)
 {
 // Jupiter's Moons - Triple Transit from Mars
 
@@ -1666,7 +1745,7 @@ c1 = "#CC78CC"
 
 
 
-if (id[r] == 61)
+if (id[r] == 64)
 {
 // 4 Planet Grouping 2022
 core.setObserverLocation(1.80, -18.27, 26, 1, "", "Earth");
@@ -1708,7 +1787,7 @@ c1 = "#C6CCFA"
 
 
 
-if (id[r] == 62)
+if (id[r] == 65)
 {
 // 5 Planet Grouping 2022
 core.setObserverLocation(1.80, -18.27, 26, 1, "", "Earth");
@@ -1746,7 +1825,7 @@ c1 = "#C6CCFA"
 
 
 
-if (id[r] == 63)
+if (id[r] == 66)
 {
 // Opposition Grouping 9/23/2022
 core.setObserverLocation(-175.1, 14.25, 26, 1, "", "Mercury");
@@ -1785,7 +1864,7 @@ c2 = "#FD2CF0"
 
 
 
-if (id[r] == 64)
+if (id[r] == 67)
 {
 // Earth - Mars from Mercury
 core.setObserverLocation(-72.9, 49.5, 26, 1, "", "Mercury");
@@ -1803,7 +1882,7 @@ c1 = "#0AAFFF"
 
 }
 
-if (id[r] == 65)
+if (id[r] == 68)
 {
 // Earth from Moon 
 core.setObserverLocation(19.71, 39.0, 50, 1, "", "Moon");
@@ -1822,7 +1901,7 @@ c1 = "#FFFFFF"
 
 }
 
-if (id[r] == 66)
+if (id[r] == 69)
 {
 // Jupiter - Venus Conjunction 2023
 
@@ -1848,7 +1927,7 @@ c2 = c1
 
 }
 
-if (id[r] == 67)
+if (id[r] == 70)
 {
 // Moon In Auriga 21st century
 SolarSystem.setFlagMoonScale(0);   	
@@ -1870,7 +1949,7 @@ c1 = "#FAFAFF"
 
 
 
-if (id[r] == 68)
+if (id[r] == 71)
 {
 // Jupiter Aries 
 core.setObserverLocation(44.80, 45.50, 7, 1, "", "Earth");
@@ -1891,7 +1970,7 @@ c1 = "#B5FFA7"
 }
 
 
-if (id[r] == 69)
+if (id[r] == 72)
 {
 // Moon in Pleiades
 
@@ -1918,7 +1997,7 @@ SolarSystem.setFlagMoonScale(0);
 
 
 
-if (id[r] == 70)
+if (id[r] == 73)
 {
 // Saturn - Moon 5/31/2024
 SolarSystem.setFlagMoonScale(0);   	
@@ -1938,7 +2017,7 @@ c1 = "#FFA1A7"
 }
 
 
-if (id[r] == 71)
+if (id[r] == 74)
 {
 // Saturn - Moon 8/21/2024
 SolarSystem.setFlagMoonScale(0);   	
@@ -1958,7 +2037,7 @@ c1 = "#FFA118"
 }
 
 
-if (id[r] == 72)
+if (id[r] == 75)
 {
 // Jup Ple from Callisto 08/25/2024
 core.setObserverLocation(-30.5, 40, 0, 1, "", "Callisto");
@@ -1981,7 +2060,67 @@ c1 = "#FF0007"
 
 
 
-if (id[r] == 73)
+if (id[r] == 76)
+{
+// Saturn latest opposition 9/08/2024
+
+core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
+core.setDate("2024-09-08T04:03:00", "utc");
+
+core.selectObjectByName("Saturn", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(148, 1);
+
+d1 = "Saturn - Opposition 9/24/2024"
+c1 = "#DEE267"
+
+d2 = "The latest first planetary opposition of the year in the 21st century"
+c2 = "#DEE267"
+
+
+
+}
+
+
+
+if (id[r] == 77)
+{
+// Mars - Earth - Venus
+
+core.setObserverLocation(148, 43.5, 0.6, 1, "", "Ceres");
+core.setDate("2024-12-13T04:10:07", "utc");
+
+core.selectObjectByName("Earth", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Venus", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Mars", pointer = true);
+}
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.floor(Math.random()*28)+20;
+StelMovementMgr.zoomTo(pick, 0);
+
+StelMovementMgr.setFlagTracking(true);
+
+d1 = "Venus, Earth and Mars lined up in reverse from Ceres"
+c1 = "#FFF34F"
+
+d2 = " 12/13/2024"
+c2 = c1
+
+
+}
+
+
+
+if (id[r] == 78)
 {
 // Venus Circlet
 
@@ -2003,7 +2142,7 @@ c1 = "#BBBBFF"
 
 
 
-if (id[r] == 74)
+if (id[r] == 79)
 {
 // Uranus
 
@@ -2026,7 +2165,7 @@ c1 = "#33FF4F"
 
 
 
-if (id[r] == 75)
+if (id[r] == 80)
 {
 // Dione Eclipses
 core.setObserverLocation(-32.36666, -38.28333, 381, 1, "", "Titan");
@@ -2049,7 +2188,7 @@ c2 = c1
 
 
 
-if (id[r] == 76)
+if (id[r] == 81)
 {
 // 4 Planet Grouping 2025
 core.setObserverLocation(-74.23, 3.50, 26, 1, "", "Earth");
@@ -2082,7 +2221,7 @@ c1 = "#FFAAFF"
 
 
 
-if (id[r] == 77)
+if (id[r] == 82)
 {
 // Earth - Neptune - Saturn 08/09/2025
 core.setObserverLocation(135, 32.27, 16, 1, "", "Mars");
@@ -2116,7 +2255,92 @@ c1 = "#1DFFB0"
 
 
 
-if (id[r] == 78)
+if (id[r] == 83)
+{
+// Saturn's Moons - Quadruple Transit
+
+core.setObserverLocation(-72.00, 44.75, 1126, 1, "", "Earth");
+core.setDate("2025-08-22T06:11:59", "utc");
+
+core.selectObjectByName("Saturn", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(0.009, 1);
+var pick = Math.floor(Math.random()*5);
+if (pick == 1)
+{
+core.selectObjectByName("Rhea", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Dione", pointer = true);
+}
+if (pick == 3)
+{
+core.selectObjectByName("Tethys", pointer = true);
+}
+if (pick == 4)
+{
+core.selectObjectByName("Mimas", pointer = true);
+}
+d1 = "The Next Land Visible Quadruple Saturn Moon Transit 8/22/2025"
+c1 = "#F1FBD9"
+
+
+}
+
+if (id[r] == 84)
+{
+core.setDate("2025-11-21T15:40:04", "utc");
+core.setObserverLocation(206.49, -3.45, 12, 0, "The Place to be", "Mars");
+core.selectObjectByName("Phobos", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = (Math.random()*14+6)/10;
+StelMovementMgr.zoomTo(pick, 1);
+
+
+
+d1 = "The Next Phobos & Diemos Double Eclipse"
+c1 = "#A10107"
+
+d2 = "from Mars 11/21/2025"
+c2 = c1
+
+
+}
+
+
+if (id[r] == 85)
+{
+// Earth Transits while Callisto Eclipses  
+core.setObserverLocation(-13.2842, -34.2319, 500000, 1, "", "Jupiter");
+core.setDate("2026-01-10T08:31:26", "utc");
+
+core.selectObjectByName("Earth", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*150+100)/1000;
+StelMovementMgr.zoomTo(pick, 1);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+d1 = "Earth Transits the Sun at the same time Callisto Eclipses it";
+c1 = "#00FFF3"
+
+d2 = "From Jupiter - 01/10/2026"
+c2 = c1
+
+
+}
+
+
+
+
+
+
+if (id[r] == 86)
 {
 // Nice Grouping 4/20/2026
 core.setObserverLocation(-74.4, -37.51, 16, 1, "", "Earth");
@@ -2152,7 +2376,7 @@ c1 = "#BD2CB0"
 
 
 
-if (id[r] == 79)
+if (id[r] == 87)
 {
 // Jupiter - Mars Conjunction Opposition 2/19/2027
 
@@ -2181,7 +2405,7 @@ c1 = "#FF2F00"
 }
 
 
-if (id[r] == 80)
+if (id[r] == 88)
 {
 // Worst Mars 
 
@@ -2195,14 +2419,14 @@ var pick = Math.floor(Math.random()*70)+10;
 StelMovementMgr.zoomTo(pick, 1);
 
 
-d1 = "Mars - Lamest Opposition of the 21st Century 2/19/27"
+d1 = "Mars - Lamest Opposition of the 21st Century 2/19/2027"
 c1 = "#FF0000"
 
 
 }
 
 
-if (id[r] == 81)
+if (id[r] == 89)
 {
 // Venus and Atlas 
 core.setObserverLocation(29.6, 40.5, 10, 1, "", "Earth");
@@ -2225,7 +2449,7 @@ c1 = "#FFFFFF"
 
 
 
-if (id[r] == 82)
+if (id[r] == 90)
 {
 // Venus and Earth conjunction
 core.setObserverLocation(-72.7, 40, 50, 1, "", "Mercury");
@@ -2251,7 +2475,7 @@ c1 = "#F7F8AA"
 
 }
 
-if (id[r] == 83)
+if (id[r] == 91)
 {
 // Venus - Hyades 7/11/2028
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -2268,12 +2492,12 @@ c1 = "#F1AFF8"
 
 }
 
-if (id[r] == 84)
+if (id[r] == 92)
 {
 // Earth - Orion Nebula 01/31/2029
 SolarSystem.setFlagMoonScale(0);   	
 core.setObserverLocation(158.37, 0.52, 20, 1, "", "Pallas");
-core.setDate("2029-01-31T08:29:33", "utc");
+core.setDate("2029-02-01T08:29:33", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
 core.selectObjectByName("Earth", pointer = true);
@@ -2289,14 +2513,14 @@ StelMovementMgr.setFlagTracking(true);
 var pick = pick *( Math.floor(Math.random()*7)+1);
 pick = pick/10 + 0.7;
 StelMovementMgr.zoomTo(pick, 1);
-d1 = "Earth in Orion's Nebula from Pallas 01/31/2029"
+d1 = "Earth in Orion's Nebula from Pallas 02/01/2029"
 c1 = "#F700FF"
 
 
 }
 
 
-if (id[r] == 85)
+if (id[r] == 93)
 {
 // Mars - Jupiter - Spica   07/29/2029
 core.setObserverLocation(0.00, 40.50, 26, 1, "", "Earth");
@@ -2323,7 +2547,7 @@ c1 = "#FFEE07"
 
 }
 
-if (id[r] == 86)
+if (id[r] == 94)
 {
 // Uranus best rings
 
@@ -2344,7 +2568,7 @@ c1 = "#33FF47"
 }
 
 
-if (id[r] == 87)
+if (id[r] == 95)
 {
 // Moon Greatest Elongation from Venus 1/10/2030
 SolarSystem.setFlagMoonScale(0);   	
@@ -2378,7 +2602,7 @@ c2 = "#AADAFF"
 
 }
 
-if (id[r] == 88)
+if (id[r] == 96)
 {
 // Double - Double
 core.setObserverLocation(116.2, 42.1, 6, 0, "", "Mercury");
@@ -2424,7 +2648,7 @@ c2 = "#FFFFFF"
 }
 
 
-if (id[r] == 89)
+if (id[r] == 97)
 {
 // Pluto and some 10 mag star 2031
 core.setObserverLocation(-74.33, -74.33, 36, 1, "", "Earth");
@@ -2449,7 +2673,7 @@ c1 = "#AADDFF"
 }
 
 
-if (id[r] == 90)
+if (id[r] == 98)
 {
 // Earth from Saturn 
 core.setObserverLocation(-73.71, 9.24, 200000, 1, "", "Saturn");
@@ -2480,7 +2704,7 @@ SolarSystem.setFlagOrbits(false);
 
 }
 
-if (id[r] == 91)
+if (id[r] == 99)
 {
 // Saturn - Earth from Venus   
 core.setObserverLocation(-51.28, 69.50, 50000, 1, "", "Venus");
@@ -2517,7 +2741,43 @@ c1 = "#AAAAFF"
 
 }
 
-if (id[r] == 92)
+if (id[r] == 100)
+{
+// Mars - Saturn - Uranus
+
+core.setObserverLocation(21.55, 1.5, 0.6, 1, "", "Callisto");
+core.setDate("2032-02-07T16:28:44", "utc");
+
+core.selectObjectByName("Mars", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Saturn", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Uranus", pointer = true);
+}
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.floor(Math.random()*14)+31;
+StelMovementMgr.zoomTo(pick, 0);
+
+StelMovementMgr.setFlagTracking(true);
+
+d1 = "Triple conjunction Saturn, Mars, Uranus during a Jupiter Eclispe";
+c1 = "#FFFFF4"
+
+d2 = " from Callisto 2/7/2032"
+c2 = c1
+
+
+}
+
+
+
+if (id[r] == 101)
 {
 // Saturn - 105 Tauri 4/7/2032
 core.setObserverLocation(-131.33, 46.5, 36, 1, "", "Earth");
@@ -2547,7 +2807,7 @@ c1 = "#FFDDFF"
 }
 
 
-if (id[r] == 93)
+if (id[r] == 102)
 {
 // Uranus from Saturn 
 core.setObserverLocation(43.71, 14.24, 30268000, 1, "", "Saturn");
@@ -2566,7 +2826,7 @@ c1 = "#11FF01"
 
 }
 
-if (id[r] == 94)
+if (id[r] == 103)
 {
 // Mars from Saturn 
 core.setObserverLocation(152.52, -9, 17, 1, "", "Enceladus");
@@ -2595,7 +2855,7 @@ SolarSystem.setLabelsAmount(20);
 
 
 
-if (id[r] == 95)
+if (id[r] == 104)
 {
 // Saturn opposition 12/24/2032
 
@@ -2613,7 +2873,7 @@ c1 = "#DEE267"
 
 }
 
-if (id[r] == 96)
+if (id[r] == 105)
 {
 // Saturn in Orion
 core.setObserverLocation(142.74, 56.92, 381, 1, "", "Iapetus");
@@ -2633,7 +2893,7 @@ c1 = "#FFFFFF"
 
 }
 
-if (id[r] == 97)
+if (id[r] == 106)
 {
 // Lowest Mars 
 
@@ -2654,7 +2914,7 @@ c2 = "#FF0000"
 
 }
 
-if (id[r] == 98)
+if (id[r] == 107)
 {
 // Mercury from Mars 
 core.setObserverLocation(144.1, -33.5, 10, 1, "", "Mars");
@@ -2681,7 +2941,7 @@ c2 = "#FF7700"
 }
 
 
-if (id[r] == 99)
+if (id[r] == 108)
 {
 // 5 Planet Grouping 2034
 core.setObserverLocation(-74, 43, 26, 1, "", "Earth");
@@ -2727,11 +2987,53 @@ c1 = "#C6CCFA"
 
 
 
-if (id[r] == 100)
+if (id[r] == 109)
+{
+// Callisto longest 21st century from Ceres
+core.setObserverLocation(148, 40, 38, 1, "", "Ceres");
+core.setDate("2035-02-05T04:46:00", "utc");
+
+core.selectObjectByName("Callisto", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*4);
+if (pick == 1)
+{
+core.selectObjectByName("Io", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Europa", pointer = true);
+}
+if (pick == 3)
+{
+core.selectObjectByName("Ganymede", pointer = true);
+}
+var pick = Math.floor(Math.random()*5+10)/10;
+StelMovementMgr.zoomTo(pick, 1);
+
+SolarSystem.setFlagOrbits(true);
+
+LandscapeMgr.setFlagAtmosphere(true);
+
+d1 = "All 4 Galilean Satellites at their Extreme Elongations and best 21st century elongations";
+c1 = "#FFB5A7"
+
+
+d2 = "From Ceres 2/5/2035";
+c2 = "#FFB5A7"
+
+
+SolarSystem.setFlagOrbits(true);   
+}
+
+
+
+if (id[r] == 110)
 {
 // Jupiter brightest 21st century from Ceres
 core.setObserverLocation(100.5, 0.5, 1738, 1, "", "Ceres");
-core.setDate("2035-02-06T06:05:00", "utc");
+core.setDate("2035-02-11T02:01:00", "utc");
 
 core.selectObjectByName("Jupiter", pointer = true);
 StelMovementMgr.setFlagTracking(true);
@@ -2743,7 +3045,7 @@ SolarSystem.setFlagOrbits(true);
 
 LandscapeMgr.setFlagAtmosphere(true);
 
-d1 = "Brightest Jupiter of the 21st Century 02/06/2035 (-4.288 mag)";
+d1 = "Brightest Jupiter of the 21st Century 02/11/2035 (-4.288 mag)";
 c1 = "#B5FFA7"
 
 
@@ -2755,7 +3057,7 @@ SolarSystem.setFlagOrbits(false);
 }
 
 
-if (id[r] == 101)
+if (id[r] == 111)
 {
 // Jupiter from Saturn Gi (fixed ver.238)
 core.setObserverLocation(-13.5, 39.0, 200000, 1, "", "Saturn");
@@ -2779,7 +3081,31 @@ SolarSystem.setFlagOrbits(false);
 
 }
 
-if (id[r] == 102)
+if (id[r] == 112)
+{
+// Ceres from Earth 
+core.setObserverLocation(168.00, 48.75, 5, 1, "", "Earth");
+core.setDate("2035-12-16T12:06:00", "utc");
+
+core.selectObjectByName("Ceres", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*37+60);
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d1 = "The Brightest Ceres of the 21st Century";
+c1 = "#FF7770"
+
+d2 = "12/16/2035"
+c2 = c1
+
+
+}
+
+
+
+if (id[r] == 113)
 {
 // Venus - Pleiades conjunction
 
@@ -2797,7 +3123,7 @@ c1 = "#05A8F4"
 
 }
 
-if (id[r] == 103)
+if (id[r] == 114)
 {
 //  Mars from Jupiter
 core.setObserverLocation(120.5, -17.25, 7, 1, "", "Europa");
@@ -2811,15 +3137,19 @@ StelMovementMgr.zoomTo(31, 1);
 
 StelMovementMgr.setFlagTracking(true);
 
-d1 = "Mars Farthest Greatest Elongation from Jupiter 19.20 degrees  6/17/2036 "  
+d1 = "Mars Farthest Greatest Elongation from Jupiter of the 21st century"  
 c1 = "#FFF0F1"
+
+d2 = "19.20 degrees  6/17/2036"
+c2 = c1;
+
 SolarSystem.setFlagOrbits(true);
 
 
 }
 
 
-if (id[r] == 104)
+if (id[r] == 115)
 {
 // Venus & Saturn & Regulus 
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -2845,10 +3175,10 @@ c1 = "#BF9150"
 
 }
 
-if (id[r] == 105)
+if (id[r] == 116)
 {
-// Jupiter - Hyades 7/11/2028
-core.setObserverLocation(-73.71, 33.24, 16, 1, "", "Ceres");
+// Jupiter - Hyades 4/1/2037
+core.setObserverLocation(-73.71, 33.24, 16, 1, "","Ceres");
 core.setDate("2037-04-01T01:11:07", "utc");
 
 core.selectObjectByName("Jupiter", pointer = true);
@@ -2864,7 +3194,7 @@ c1 = "#F1AF18"
 }
 
 
-if (id[r] == 106)
+if (id[r] == 117)
 {
 // Saturn Mercury 9/15/2037
 core.setObserverLocation(112.6, 13.75, 36, 1, "", "Earth");
@@ -2895,7 +3225,7 @@ c2 = c1
 
 
 
-if (id[r] == 107)
+if (id[r] == 118)
 {
 // Mars and Pleiades 
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -2913,7 +3243,43 @@ c1 = "#FF1101"
 
 }
 
-if (id[r] == 108)
+if (id[r] == 119)
+{
+// Earth - Venus - Jupiter from Ceres
+
+core.setObserverLocation(-151, 20.5, 0.6, 1, "", "Ceres");
+core.setDate("2038-02-27T10:51:44", "utc");
+
+core.selectObjectByName("Earth", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Venus", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Jupiter", pointer = true);
+}
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.floor(Math.random()*4)+15;
+StelMovementMgr.zoomTo(pick, 0);
+
+StelMovementMgr.setFlagTracking(true);
+
+d1 = "Gemini's Belt of Venus, Earth and Jupiter from Ceres";
+c1 = "#5F3FF4"
+
+d2 = " 2/27/2038"
+c2 = c1
+
+
+}
+
+
+
+if (id[r] == 120)
 {
 // Triple Coquadrature
 
@@ -2946,7 +3312,7 @@ c1 = "#FAA0A0"
 
 
 
-if (id[r] == 109)
+if (id[r] == 121)
 {
 // Nice Grouping 8/25/2038
 core.setObserverLocation(74.1, 14.25, 16, 1, "", "Earth");
@@ -2973,7 +3339,7 @@ c1 = "#FD2CF0"
 
 
 
-if (id[r] == 110)
+if (id[r] == 122)
 {
 // Jupiter & Regulus
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -2990,9 +3356,9 @@ c1 = "#E6B823"
 
 }
 
-if (id[r] == 111)
+if (id[r] == 123)
 {
-// Sun through Saturn rings from Titan  02/06/2042
+// Sun through Saturn rings from Titan  01/13/2039
 core.setObserverLocation(40.00, -66.24, 34, 1, "", "Titan");
 core.setDate("2039-01-13T04:58:08", "utc");
 
@@ -3003,7 +3369,7 @@ SolarSystem.setLabelsAmount(20);
 var pick = Math.floor(Math.random()*7)*0.57+0.7;
 StelMovementMgr.zoomTo(pick, 1);
 	
-d1 = "Sun through Saturn rings from Titan  02/06/2042"
+d1 = "Sun through Saturn rings from Titan  01/13/2039"
 c1 = "#000070"
 
 SolarSystem.setFlagMoonScale(4);   	
@@ -3011,7 +3377,7 @@ SolarSystem.setFlagMoonScale(4);
 }
 
 
-if (id[r] == 112)
+if (id[r] == 124)
 {
 // Mars Shortest co 5/31/2039
 
@@ -3035,7 +3401,29 @@ c2 = "#FF3118"
 }
 
 
-if (id[r] == 113)
+if (id[r] == 125)
+{
+// The Next Total Eclipse of the sun by Trition from Neptune 
+core.setObserverLocation(138.25, 67.99917, 7600, 1, "", "Neptune");
+core.setDate("2039-07-25T21:48:35", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Triton", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*3)+1.5;
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "The next Eclipse of the sun by Triton from Neptune 7/25/2039"
+c1 = "#00FFF7"
+
+
+}
+
+
+
+
+if (id[r] == 126)
 {
 // Highest Mars 
 
@@ -3055,7 +3443,7 @@ c1 = "#FF0000"
 }
 
 
-if (id[r] == 114)
+if (id[r] == 127)
 {
 // Saturn from Uranus 
 core.setObserverLocation(-62.3, 31.5, 10, 1, "", "Uranus");
@@ -3084,7 +3472,7 @@ c2 = "#777700"
 
 
 
-if (id[r] == 115)
+if (id[r] == 128)
 {
 // Fullest Uranus in the Little Dipper 
 core.setObserverLocation(2.42, 34.33, 7, 1, "", "Oberon");
@@ -3111,7 +3499,7 @@ c1 = "#ABFF99"
 
 
 
-if (id[r] == 116)
+if (id[r] == 129)
 {
 // 5 Planet Grouping 2040
 core.setObserverLocation(-0.39, 4.50, 26, 1, "", "Earth");
@@ -3151,7 +3539,7 @@ c1 = "#C6CCFA"
 
 
 
-if (id[r] == 117)
+if (id[r] == 130)
 {
 // Jupiter - Saturn - Moon - Spica Conjunction 4/16/2041
 
@@ -3174,7 +3562,7 @@ c1 = "#9FAA92"
 
 }
 
-if (id[r] == 118)
+if (id[r] == 131)
 {
 // Moon Greatest Elongation from Mercury 6/6/2041
 SolarSystem.setFlagMoonScale(0);   	
@@ -3207,7 +3595,7 @@ c2 = "#DAAAFF"
 
 }
 
-if (id[r] == 119)
+if (id[r] == 132)
 {
 // Neptune best 10/29/2041
 
@@ -3225,7 +3613,7 @@ c1 = "#0E2FFC"
 
 }
 
-if (id[r] == 120)
+if (id[r] == 133)
 {
 // Mars - Moon   02/06/2042
 SolarSystem.setFlagMoonScale(0);   	
@@ -3247,7 +3635,42 @@ c1 = "#FF7AA7"
 
 }
 
-if (id[r] == 121)
+if (id[r] == 134)
+{
+// Venus-Mars-Saturn 09/14/2042
+ 	
+core.setObserverLocation(-70.3, -40.516, 26, 1, "", "Earth");
+core.setDate("2042-09-14T00:23:19", "utc");
+
+core.selectObjectByName("Venus", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Mars", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Saturn", pointer = true);
+}
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*20)+30;
+
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d1 = "Venus, Mars, Saturn lineup above Spica 9/14/2042"
+c1 = "#FFDAFF"
+
+
+	
+}
+
+
+
+if (id[r] == 135)
 {
 // Trifid Nebula 
 
@@ -3268,7 +3691,7 @@ c1 = "#9FAA92"
 
 
 
-if (id[r] == 122)
+if (id[r] == 136)
 {
 // Brightest Jupiter of 21st Century 2/1/2035 Juno
 
@@ -3291,7 +3714,7 @@ c1 = "#CC7802"
 
 
 
-if (id[r] == 123)
+if (id[r] == 137)
 {
 // Trifid Nebula 
 
@@ -3313,7 +3736,7 @@ c1 = "#FFFF9F"
 
 
 
-if (id[r] == 124)
+if (id[r] == 138)
 {
 // Mars Longest Retro 4/23/2044
 
@@ -3338,7 +3761,7 @@ c2 = "#FF3118"
 }
 
 
-if (id[r] == 125)
+if (id[r] == 139)
 {
 // Venus - Regulus 10/1/2044
 core.setObserverLocation(100.90, 44.24, 126, 1, "", "Earth");
@@ -3362,7 +3785,29 @@ c1 = "#FFDDFF"
 
 
 
-if (id[r] == 126)
+if (id[r] == 140)
+{
+// Jupiter - Neptune from Saturn
+core.setObserverLocation(-28.37, -48.4, 56000, 1, "", "Saturn");
+core.setDate("2046-04-29T05:52:50", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Neptune", pointer = false);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*7) +1;
+pick = pick / 2; 
+pick = pick /200;
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Jupiter Occults Neptune as seen from Saturn 4/29/2046"
+c1 = "#FF91FF"
+
+}
+
+if (id[r] == 141)
 {
 // Jupiter - Saturn from Neptune
 core.setObserverLocation(168.7, 57.5, 26, 1, "", "Neptune");
@@ -3390,29 +3835,7 @@ c1 = "#A291FF"
 
 }
 
-if (id[r] == 127)
-{
-// Jupiter - Neptune from Saturn
-core.setObserverLocation(-28.37, -48.4, 56000, 1, "", "Saturn");
-core.setDate("2046-04-29T05:52:50", "utc");
-LandscapeMgr.setFlagAtmosphere(false);
-
-core.selectObjectByName("Neptune", pointer = false);
-
-
-StelMovementMgr.setFlagTracking(true);
-
-var pick = Math.floor(Math.random()*7) +1;
-pick = pick / 2; 
-pick = pick /200;
-StelMovementMgr.zoomTo(pick, 1);
-
-d1 = "Jupiter Occults Neptune as seen from Saturn 4/29/2046"
-c1 = "#FF91FF"
-
-}
-
-if (id[r] == 128)
+if (id[r] == 142)
 {
 // Callisto - Neptune from Saturn
 core.setObserverLocation(48.37, 11.3, 56000, 1, "", "Saturn");
@@ -3438,7 +3861,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 }
 
 
-if (id[r] == 129)
+if (id[r] == 143)
 {
 // Jupiter - Closest opposition of 21st Century 10/07/2046
 
@@ -3457,7 +3880,35 @@ c1 = "#CC7802"
 
 }
 
-if (id[r] == 130)
+if (id[r] == 144)
+{
+// Brightest Ganymede from Europa 
+	
+core.setObserverLocation(-179.40, 0, 116, 1, "", "Europa");
+core.setDate("2047-05-17T14:41:57", "UTC");
+
+core.selectObjectByName("Ganymede", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.floor(Math.random())+.8
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Brightest Ganymede of the 21st Century -10.924 Mag."
+c1 = "#BABABF"
+
+d2 = "From Europa 5/17/2047"
+c2 = c1
+
+
+ 	
+}
+
+
+
+
+if (id[r] == 145)
 {
 // 2048 Planet Grouping 
 core.setObserverLocation(-73.71, -40.24, 1126, 1, "", "Earth");
@@ -3488,7 +3939,7 @@ c1 = "#79FFC9"
 
 }
 
-if (id[r] == 131)
+if (id[r] == 146)
 {
 //  Callisto's Greatest Elongation 11/26/2048
 core.setObserverLocation(-113, 15, 64, 1, "", "Earth");
@@ -3511,7 +3962,35 @@ c2 = "#7ADAFF"
 
 }
 
-if (id[r] == 132)
+if (id[r] == 147)
+{
+// Brightest Titania from Oberon 
+	
+core.setObserverLocation(-0.40, 0, 116, 1, "", "Oberon");
+core.setDate("2049-12-06T00:50:05", "UTC");
+
+core.selectObjectByName("Titania", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.floor(Math.random()*10)+6
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Brightest Titania of the 21st Century -7.22 Mag."
+c1 = "#BABABF"
+
+d2 = "From Oberon 12/6/2049"
+c2 = c1
+
+  	
+}
+
+
+
+
+
+if (id[r] == 148)
 {
 // Earth - Jup _ Regulus
 core.setObserverLocation(-73.71, 30.24, 1126, 1, "", "Mars");
@@ -3546,7 +4025,7 @@ c2 = "#7777FF"
 
 
 
-if (id[r] == 133)
+if (id[r] == 149)
 {
 // Uranus opposition 03/14/2051
 
@@ -3565,7 +4044,32 @@ c1 = "#41BA17"
 }
 
 
-if (id[r] == 134)
+if (id[r] == 150)
+{
+// Mars from Venus 
+core.setObserverLocation(69.31, 40.5, 50000, 1, "", "Venus");
+core.setDate("2052-07-20T16:53:02", "utc");
+
+core.selectObjectByName("Mars", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(67, 1);
+
+var pick = Math.floor(Math.random()*37+60);
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d1 = "Mars best Opposition of the 21st Century as seen from Venus"
+c1 = "#FF0700"
+
+d2 = "07/20/2052"
+c2 = "#FF0700"
+
+   
+}
+
+
+if (id[r] == 151)
 {
 
 
@@ -3592,32 +4096,7 @@ c2 = "#FF0700"
 
 
 
-if (id[r] == 135)
-{
-// Mars from Venus 
-core.setObserverLocation(69.31, 40.5, 50000, 1, "", "Venus");
-core.setDate("2052-07-20T16:53:02", "utc");
-
-core.selectObjectByName("Mars", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-StelMovementMgr.zoomTo(67, 1);
-
-var pick = Math.floor(Math.random()*37+60);
-StelMovementMgr.zoomTo(pick, 1);
-
-
-d1 = "Mars best Opposition of the 21st Century as seen from Venus"
-c1 = "#FF0700"
-
-d2 = "07/20/2052"
-c2 = "#FF0700"
-
-   
-}
-
-
-if (id[r] == 136)
+if (id[r] == 152)
 {
 // Brightest full moon 21st century
 SolarSystem.setFlagMoonScale(0);   	
@@ -3643,7 +4122,45 @@ SolarSystem.setFlagMoonScale(4);
 
 
 
-if (id[r] == 137)
+if (id[r] == 153)
+{
+// Saturn's Moons - Quadruple Transit
+
+core.setObserverLocation(136.8, 37.5, 26, 1, "", "Earth");
+core.setDate("2054-12-04T10:24:11", "utc");
+
+core.selectObjectByName("Saturn", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(0.009, 1);
+var pick = Math.floor(Math.random()*5);
+if (pick == 1)
+{
+core.selectObjectByName("Mimas", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Enceladus", pointer = true);
+}
+if (pick == 3)
+{
+core.selectObjectByName("Tethys", pointer = true);
+}
+if (pick == 4)
+{
+core.selectObjectByName("Titan", pointer = true);
+}
+d1 = "The Next Quadruple Saturn Moon Transit that includes Titan 12/04/2054"
+c1 = "#1FBFD9"
+
+
+}
+
+
+
+
+
+if (id[r] == 154)
 {
 // Jupiter from Uranus 
 core.setObserverLocation(80.52, 79.3, 1700, 1, "", "Uranus");
@@ -3670,38 +4187,31 @@ SolarSystem.setLabelsAmount(20);
 
 
 
-
-
-if (id[r] == 138)
+if (id[r] == 155)
 {
-// Calllisto longest 21st century from Ceres
-core.setObserverLocation(148, 40, 38, 1, "", "Ceres");
-core.setDate("2057-07-03T00:19:00", "utc");
+// Eros from Earth 
+core.setObserverLocation(8.00, 18.75, 5, 1, "", "Earth");
+core.setDate("2056-01-27T21:46:00", "utc");
 
-core.selectObjectByName("Callisto", pointer = true);
+core.selectObjectByName("Eros", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
-var pick = Math.floor(Math.random()*5+10)/10;
+var pick = Math.floor(Math.random()*37+60);
 StelMovementMgr.zoomTo(pick, 1);
 
-SolarSystem.setFlagOrbits(true);
 
-LandscapeMgr.setFlagAtmosphere(true);
+d1 = "The Eros' closest approach of the 21st Century";
+c1 = "#FF7770"
 
-d1 = "Greatest Callisto elongation of the 21st Century 0.340" + degstring;
-c1 = "#FFB5A7"
-
-
-d2 = "From Ceres 7/3/2057";
-c2 = "#FFB5A7"
+d2 = "~14 million miles  01/27/2056"
+c2 = c1
 
 
-SolarSystem.setFlagOrbits(true);   
 }
 
 
 
-if (id[r] == 139)
+if (id[r] == 156)
 {
 // Earth from Jupiter 
 core.setObserverLocation(101.00, 22.24, 7, 1, "", "Europa");
@@ -3732,7 +4242,39 @@ SolarSystem.setLabelsAmount(20);
 }
 
 
-if (id[r] == 140)
+if (id[r] == 157)
+{
+// Earth Transits from Ceres
+
+core.setObserverLocation(-125.3, 4.24, 36, 1, "", "Ceres");
+core.setDate("2058-12-13T13:22:00", "utc");
+SolarSystem.setFlagMoonScale(0);  
+
+core.selectObjectByName("Earth", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+var pick = Math.floor(Math.random()*2)+2;
+pick = pick / 10 
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d1 = "Earth & Moon Transit the Sun 12/13/2058"
+c1 = "#707070"
+
+d2 = "from Ceres"
+c2 = c1
+
+
+}
+
+
+
+
+
+if (id[r] == 158)
 {
 // Mercury best GE *
 core.setObserverLocation(-0.5, -40.5, 7, 1, "", "Earth");
@@ -3756,7 +4298,7 @@ SolarSystem.setFlagOrbits(true);
 }
 
 
-if (id[r] == 141)
+if (id[r] == 159)
 {
 // Solar Eclipse with Saturn and Jupiter near by 05/11/2059
 SolarSystem.setFlagMoonScale(0);   	
@@ -3789,7 +4331,7 @@ c1 = "#FFDAFF"
 SolarSystem.setFlagMoonScale(0);   	
 }
 
-if (id[r] == 142)
+if (id[r] == 160)
 {
 // Saturn from Jupiter 2/6/2060
 core.setObserverLocation(153.9, 30, 16, 1, "", "Callisto");
@@ -3806,7 +4348,7 @@ c1 = "#FFF6AA"
 }
 
 
-if (id[r] == 143)
+if (id[r] == 161)
 {
 // Nice Grouping 4/5/2060
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -3832,7 +4374,7 @@ c1 = "#BD2CB0"
 
 
 
-if (id[r] == 144)
+if (id[r] == 162)
 {
 // Saturn/Sun from Neptune
 core.setObserverLocation(93.5, 37, 7, 1, "", "Triton");
@@ -3852,7 +4394,7 @@ c1 = "#22F5FF"
 }
 
 
-if (id[r] == 145)
+if (id[r] == 163)
 {
 // Earth from Mercury 
 core.setObserverLocation(141.80, 44.24, 7, 1, "", "Mercury");
@@ -3870,7 +4412,7 @@ c1 = "#E03857"
 
 }
 
-if (id[r] == 146)
+if (id[r] == 164)
 {
 // Jupiter & Mars & Regulus 
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -3902,7 +4444,7 @@ c1 = "#BF9150"
 
 
 
-if (id[r] == 147)
+if (id[r] == 165)
 {
 // Crab Neptune 
 
@@ -3922,7 +4464,7 @@ c1 = "#1234FF"
 
 }
 
-if (id[r] == 148)
+if (id[r] == 166)
 {
 // Saturn from Jupiter 2064-05-12T20:03:09
 
@@ -3944,7 +4486,7 @@ c2 = "#DEE267"
 
 
 
-if (id[r] == 149)
+if (id[r] == 167)
 {
 // Mars from Pallas 
 core.setObserverLocation(-109.22, 40.52, 17, 1, "", "Pallas");
@@ -3963,13 +4505,13 @@ LandscapeMgr.setFlagAtmosphere(false);
 d1 = "Brightest Mars of the 21st Century from Pallas"
 c1 = "#FF1101"
 
-d2 = "Magnitude 1.807       10/06/2064"
+d2 = "Magnitude 1.82       10/06/2064"
 c2 = "#DFF7FF"
   
 }
 
 
-if (id[r] == 150)
+if (id[r] == 168)
 {
 // Mars - Jupiter 12/18/2064
 core.setObserverLocation(174.33, 40.5, 126, 1, "", "Earth");
@@ -3992,7 +4534,7 @@ c1 = "#FF31F1"
 
 
 
-if (id[r] == 151)
+if (id[r] == 169)
 {
 // Earth Full - Venus New 
 core.setObserverLocation(90.12, 1.25, 7, 1, "", "Callisto");
@@ -4026,7 +4568,7 @@ c1 = "#B59918"
 
 
 
-if (id[r] == 152)
+if (id[r] == 170)
 {
 // Mars so far 
 core.setObserverLocation(176.12, 8.33, 7, 1, "", "Earth");
@@ -4054,33 +4596,34 @@ c1 = "#CBBBD9"
 
 
 
-if (id[r] == 153)
+if (id[r] == 171)
 {
-// Mercury & Neptune 
-core.setObserverLocation(-103.22, 4.31, 26, 1, "", "Earth");
-core.setDate("2067-07-15T11:54:30", "utc");
+// Latest 1st full moon 21st century
+	
+core.setObserverLocation(-179.40, 44.24, 116, 1, "", "Earth");
+core.setDate("2067-01-30T10:30:07", "UTC");
 
-SolarSystem.setLabelsAmount(20);   	
-core.selectObjectByName("Mercury", pointer = true);
-var pick = Math.floor(Math.random()*2);
-if (pick == 0)
-{
-core.selectObjectByName("Neptune", pointer = true);
-}
-
+core.selectObjectByName("Moon", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
-StelMovementMgr.zoomTo(0.00747, 1);
+var pick = Math.floor(Math.random()*24)+14
+StelMovementMgr.zoomTo(pick, 1);
 
-d1 = "The Closest Mercury - Neptune conjunction 0.010" + degstring +" of the Millennium 7/15/2067";
-c1 = "#BB4234"
+d1 = "Latest First Full Moon of the year in the 21st Century 1/30/2067"
+c1 = "#BABABF"
 
+
+SolarSystem.setFlagMoonScale(4);   	
 }
 
 
 
 
-if (id[r] == 154)
+
+
+
+
+if (id[r] == 172)
 {
 // Mercury & Earth 
 core.setObserverLocation(31.5, 64.31, 26, 1, "", "Triton");
@@ -4107,7 +4650,62 @@ LandscapeMgr.setFlagAtmosphere(false);
 }
 
 
-if (id[r] == 155)
+if (id[r] == 173)
+{
+// Mercury & Neptune 
+core.setObserverLocation(-103.22, 4.31, 26, 1, "", "Earth");
+core.setDate("2067-07-15T11:54:30", "utc");
+
+SolarSystem.setLabelsAmount(20);   	
+core.selectObjectByName("Mercury", pointer = true);
+var pick = Math.floor(Math.random()*2);
+if (pick == 0)
+{
+core.selectObjectByName("Neptune", pointer = true);
+}
+
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(0.00747, 1);
+
+d1 = "The Closest Mercury - Neptune conjunction 0.010" + degstring +" of the Millennium 7/15/2067";
+c1 = "#BB4234"
+
+}
+
+
+
+
+if (id[r] == 174)
+{
+// Brightest Titan from Hyperion 
+	
+core.setObserverLocation(-170.40, 0, 116, 1, "", "Hyperion");
+core.setDate("2067-07-25T03:15:06", "UTC");
+
+core.selectObjectByName("Titan", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.random() + 2.8
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Brightest Titan of the 21st Century -8.805 Mag."
+c1 = "#FF5F35"
+
+d2 = "From Hyperion 7/25/2067"
+c2 = c1
+
+
+  	
+}
+
+
+
+
+
+if (id[r] == 175)
 {
 core.setDate("2068-01-10T10:36:40", "utc");
 core.setObserverLocation(-132.94, 18.2, 27012, 0, "Olympus Mons", "Mars");
@@ -4125,7 +4723,7 @@ c2 = c1
 
 }
 
-if (id[r] == 156)
+if (id[r] == 176)
 {
 // Mars Dimmest 
 core.setObserverLocation(-160.12, 4.25, 1738, 1, "", "Earth");
@@ -4147,11 +4745,11 @@ c1 = "#B59918"
 }
 
 
-if (id[r] == 157)
+if (id[r] == 177)
 {
 // Mars from Ceres 
-core.setObserverLocation(81, 7.5, 10, 1, "", "Ceres");
-core.setDate("2068-08-28T20:27:02", "utc");
+core.setObserverLocation(-81, -30, 10, 1, "", "Ceres");
+core.setDate("2068-08-24T06:52:02", "utc");
 
 core.selectObjectByName("Mars", pointer = true);
 StelMovementMgr.setFlagTracking(true);
@@ -4169,7 +4767,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 d1 = "Mars best Greatest Elongation of the 21st Century as seen from Ceres"
 c1 = "#F00090"
 
-d2 = "Elongation 40.031 Degrees       08/28/2068"
+d2 = "Elongation 39.992 Degrees       08/24/2068"
 c2 = "#F00090"
 
 
@@ -4181,7 +4779,7 @@ c2 = "#F00090"
 
 
 
-if (id[r] == 158)
+if (id[r] == 178)
 {
 // Venus - Zavijava 2069
 
@@ -4204,7 +4802,33 @@ c1 = "#AAAAFF"
 
 }
 
-if (id[r] == 159)
+if (id[r] == 179)
+{
+// Earth from Eros
+core.setObserverLocation(-13.5, 41.5, 2, 1, "", "Eros");
+core.setDate("2070-02-26T03:06:00", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Earth");
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(120, 1);
+SolarSystem.setFlagOrbits(true);
+
+
+d1 = "Earth's best 21st Greatest Elongation 60.778" + degstring 
+c1 = "#15FFF7"
+
+d2 = "From Eros" 
+c2 = c1
+
+
+
+}
+
+
+
+if (id[r] == 180)
 {
 // Jupiter from Venus 
 core.setObserverLocation(73.71, 5.25, 50000, 1, "", "Venus");
@@ -4226,7 +4850,7 @@ c1 = "#FFFF4F"
 
 
 
-if (id[r] == 160)
+if (id[r] == 181)
 {
 // Earth - Alpha Capicorn 08/3/2071
 core.setObserverLocation(-100, 7.24, 50000, 1, "", "Venus");
@@ -4248,36 +4872,11 @@ c2 = "#11D2FF"
 
 
 
-if (id[r] == 161)
-{
-// Venus from Ceres 
-core.setObserverLocation(-122, 2.5, 10, 1, "", "Ceres");
-core.setDate("2078-03-19T12:07:03", "utc");
-
-core.selectObjectByName("Venus", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-SolarSystem.setFlagOrbits(true);
-
-var pick = Math.floor(Math.random()*30+60);
-StelMovementMgr.zoomTo(pick, 1);
-
-
-d1 = "Venus' best Greatest Elongation of the 21st Century as seen"
-c1 = "#0FFF0F"
-
-d2 = "From Ceres - Elongation 16.442" + degstring + " 03/19/2078"
-c2 = "#0FFF0F";
-   
-}
-
-
-
-if (id[r] == 162)
+if (id[r] == 182)
 {
 // Earth from Ceres 
-core.setObserverLocation(-50.1, 3.5, 10, 1, "", "Ceres");
-core.setDate("2078-05-21T08:19:03", "utc");
+core.setObserverLocation(-164.1, 3.5, 10, 1, "", "Ceres");
+core.setDate("2078-05-18T16:09:03", "utc");
 
 core.selectObjectByName("Earth", pointer = true);
 StelMovementMgr.setFlagTracking(true);
@@ -4294,7 +4893,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 d1 = "Earth's best Greatest Elongation of the 21st Century as seen from Ceres"
 c1 = "#999999"
 
-d2 = "Elongation 23.202 Degrees       05/21/2078"
+d2 = "Elongation 23.209 Degrees       05/18/2078"
 c2 = "#909090"
 
 
@@ -4304,7 +4903,7 @@ c2 = "#909090"
 
 
 
-if (id[r] == 163)
+if (id[r] == 183)
 {
 // Venus from Mars 
 core.setObserverLocation(-93.37, -5.5, 17, 1, "", "Mars");
@@ -4335,7 +4934,7 @@ SolarSystem.setLabelsAmount(20);
 
 
 
-if (id[r] == 164)
+if (id[r] == 184)
 {
 // Venus from Mercury 
 core.setObserverLocation(-74.80, 40.50, 7, 1, "", "Mercury");
@@ -4357,7 +4956,7 @@ c2 = "#E03857"
 
 
 
-if (id[r] == 165)
+if (id[r] == 185)
 {
 // Saturn - Uranus Opposition Together 7/23/2079
 
@@ -4389,7 +4988,7 @@ c2 = "#71FF11"
 
 }
 
-if (id[r] == 166)
+if (id[r] == 186)
 {
 // Nice Grouping 2/18/2080
 core.setObserverLocation(118.3, 8.5, 220, 1, "", "Earth");
@@ -4427,7 +5026,7 @@ c1 = "#FF22FF"
 
 
 
-if (id[r] == 167)
+if (id[r] == 187)
 {
 // Jupiter/Sun from Iapetus
 core.setObserverLocation(134.5, -7.7, 27, 1, "", "Iapetus");
@@ -4454,7 +5053,7 @@ c1 = "#78FF17"
 
 
 
-if (id[r] == 168)
+if (id[r] == 188)
 {
 // Jupiter/Sun from Titan
 core.setObserverLocation(80.5, 30, 27, 1, "", "Titan");
@@ -4475,9 +5074,9 @@ c1 = "#131200"
 }
 
 
-if (id[r] == 169)
+if (id[r] == 189)
 {
-// 2081
+
 
 core.setObserverLocation(-7.2, 27.75, 1126, 1, "", "Earth");
 core.setDate("2081-01-12T18:13:07", "utc");
@@ -4540,63 +5139,7 @@ c1 = "#FF2FF0"
 
 
 
-if (id[r] == 170)
-{
-// Earth Transit from Ceres
-
-core.setObserverLocation(125.3, 4.24, 36, 1, "", "Ceres");
-core.setDate("2081-12-12T23:28:00", "utc");
-SolarSystem.setFlagMoonScale(0);  
-
-core.selectObjectByName("Earth", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-LandscapeMgr.setFlagAtmosphere(false);
-
-
-var pick = Math.floor(Math.random()*2)+2;
-pick = pick / 10 
-StelMovementMgr.zoomTo(pick, 1);
-
-
-d1 = "Earth & Moon Transit the Sun 12/12/2081"
-c1 = "#707070"
-
-d2 = "from Ceres"
-c2 = c1
-
-
-}
-
-
-
-
-
-if (id[r] == 171)
-{
-// Ceres from Earth 
-core.setObserverLocation(18.00, 48.75, 5, 1, "", "Earth");
-core.setDate("2081-12-12T23:05:00", "utc");
-
-core.selectObjectByName("Ceres", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-var pick = Math.floor(Math.random()*37+60);
-StelMovementMgr.zoomTo(pick, 1);
-
-
-d1 = "Ceres best Opposition of the Millennium";
-c1 = "#FF7770"
-
-d2 = "12/12/2081"
-c2 = c1
-
-
-}
-
-
-
-if (id[r] == 172)
+if (id[r] == 190)
 {
 // Neptune so far 
 core.setObserverLocation(-126.12, 4.33, 7, 1, "", "Uranus");
@@ -4622,7 +5165,7 @@ c1 = "#1899B6"
 
 
 
-if (id[r] == 173)
+if (id[r] == 191)
 {
 // Earth from Mars 
 core.setObserverLocation(-14, 34.48, 17, 1, "", "Mars");
@@ -4652,7 +5195,7 @@ c2 = "#1170FF"
 
 
 
-if (id[r] == 174)
+if (id[r] == 192)
 {
 // Earth Transit from Mars
 
@@ -4682,7 +5225,32 @@ c2 = c1
 
 
 
-if (id[r] == 175)
+if (id[r] == 193)
+{
+// Venus from Ceres 
+core.setObserverLocation(150, 2.5, 10, 1, "", "Ceres");
+core.setDate("2087-06-10T17:43:00", "utc");
+
+core.selectObjectByName("Venus", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+SolarSystem.setFlagOrbits(true);
+
+var pick = Math.floor(Math.random()*30+60);
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d1 = "Venus' best Greatest Elongation of the 21st Century as seen"
+c1 = "#0FFF0F"
+
+d2 = "From Ceres - Elongation 16.437" + degstring + " 06/10/2087"
+c2 = "#0FFF0F";
+   
+}
+
+
+
+if (id[r] == 194)
 {
 // Earth - Moon Conjunction Sirrus 4/17/2089
 core.setObserverLocation(108.80, 12.75, 12, 1, "", "Pallas");
@@ -4711,7 +5279,7 @@ c1 = "#07F4F7"
 
 
 
-if (id[r] == 176)
+if (id[r] == 195)
 {
 // Fullest Neptune in Big Dipper 
 core.setObserverLocation(0.12, 34.33, 7, 1, "", "Triton");
@@ -4738,7 +5306,7 @@ c1 = "#ABBBFF"
 
 
 
-if (id[r] == 177)
+if (id[r] == 196)
 {
 //  Titan's Greatest Elongation 12/28/2091
 core.setObserverLocation(112, 40, 64, 1, "", "Earth");
@@ -4761,7 +5329,7 @@ c2 = "#AADA0F"
 
 }
 
-if (id[r] == 178)
+if (id[r] == 197)
 {
 // Neptune - Regulus Conjunction
 core.setObserverLocation(-0, 44, 114, 1, "", "Earth");
@@ -4782,7 +5350,7 @@ c1 = "#0A0AFF"
 }
 
 
-if (id[r] == 179)
+if (id[r] == 198)
 {
 // Earth from Venus 
 SolarSystem.setFlagMoonScale(0);   	
@@ -4809,7 +5377,7 @@ SolarSystem.setFlagMoonScale(4);
 
 
 
-if (id[r] == 180)
+if (id[r] == 199)
 {
 // Venus best GE
 core.setObserverLocation(-74.5, 40.5, 1738, 1, "", "Earth");
@@ -4830,7 +5398,7 @@ c2 = "#B5FFA7"
 
 }
 
-if (id[r] == 181)
+if (id[r] == 200)
 {
 // Eris from Pluto 
 core.setObserverLocation(-88.0, 40.25, 701, 1, "", "Pluto");
@@ -4849,7 +5417,7 @@ c1 = "#A1A1FF"
 
 
 
-if (id[r] == 182)
+if (id[r] == 201)
 {
 // Earth from Mars 
 core.setObserverLocation(-175.399994, -14.48, 17, 1, "", "Mars");
@@ -4879,7 +5447,7 @@ SolarSystem.setLabelsAmount(20);
 
 
 
-if (id[r] == 183)
+if (id[r] == 202)
 {
 // Polaris Furthest North Star
 
@@ -4900,7 +5468,7 @@ c1 = "#AAAAF8"
 
 }
 
-if (id[r] == 184)
+if (id[r] == 203)
 {
 // Neptune - Leo
 
@@ -4921,7 +5489,7 @@ c1 = "#33AFFF"
 }
 
 
-if (id[r] == 185)
+if (id[r] == 204)
 {
 // Earth - Mars Conjunction 12/15/2101
 
@@ -4951,7 +5519,30 @@ c2 = "#FF2F00"
 }
 
 
-if (id[r] == 186)
+if (id[r] == 205)
+{
+// Eris - Pluto 2/17/2104
+core.setObserverLocation(147.69, 64.85, 126, 1, "", "Earth");
+core.setDate("2104-02-17T09:07:45", "UTC");
+
+core.selectObjectByName("Pluto", pointer = true);
+var pick = Math.floor(Math.random()*2);
+if (pick == 1)
+{
+core.selectObjectByName("Eris", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(72, 1);
+
+
+d1 = "The Next Pluto and Eris Conjunction 02/17/2104";
+c1 = "#7F31FF"
+
+}
+
+
+
+if (id[r] == 206)
 {
 // Pluto Eclispe 02/01/2108
 
@@ -5000,7 +5591,7 @@ c2 = "#FFF3AF"
 }
 
 
-if (id[r] == 187)
+if (id[r] == 207)
 {
 // Pluto Aphelion
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -5017,7 +5608,7 @@ c1 = "#52D1FC"
 
 }
 
-if (id[r] == 188)
+if (id[r] == 208)
 {
 // Earth - Circlet 10/14/2114
 core.setObserverLocation(-66.60, 27.24, 6, 1, "", "Venus");
@@ -5039,7 +5630,7 @@ c1 = "#11DDFF"
 
 
 
-if (id[r] == 189)
+if (id[r] == 209)
 {
 // Venus - Antares 10/19/2117
 core.setObserverLocation(-28.33, 34.50, 1126, 1, "", "Earth");
@@ -5059,7 +5650,7 @@ c1 = "#F1FFF8"
 }
 
 
-if (id[r] == 190)
+if (id[r] == 210)
 {
 // Neptune - Virgo
 
@@ -5080,7 +5671,7 @@ c1 = "#33AFFF"
 }
 
 
-if (id[r] == 191)
+if (id[r] == 211)
 {
 // Venus - Jupiter   9/14/2123
 core.setObserverLocation(51.00, -0.50, 26, 1, "", "Earth");
@@ -5103,7 +5694,7 @@ c1 = "#CCDDFF"
 
 }
 
-if (id[r] == 192)
+if (id[r] == 212)
 {
 // Earth and Moon in Pleiades conjunction
 SolarSystem.setFlagMoonScale(0);   	
@@ -5130,7 +5721,7 @@ SolarSystem.setFlagMoonScale(4);
 }
 
 
-if (id[r] == 193)
+if (id[r] == 213)
 {
 // Mars - Antares 10/29/2041
 
@@ -5148,7 +5739,7 @@ c1 = "#D81B0B"
 
 }
 
-if (id[r] == 194)
+if (id[r] == 214)
 {
 // Pluto so far 
 core.setObserverLocation(116.12, 8.33, 7, 1, "", "Neptune");
@@ -5176,7 +5767,7 @@ c1 = "#18BBD9"
 
 
 
-if (id[r] == 195)
+if (id[r] == 215)
 {
 // Venus Transits Earth 12/2/2123
 core.setObserverLocation(-8.24, -33.50, 1126, 1, "", "Mercury");
@@ -5201,7 +5792,7 @@ c1 = "#A2C9FA"
 
 }
 
-if (id[r] == 196)
+if (id[r] == 216)
 {
 //  Venus Crab
 core.setObserverLocation(17.1, 35.25, 70, 1, "", "Earth");
@@ -5224,7 +5815,7 @@ c1 = "#0FF001"
 
 
 
-if (id[r] == 197)
+if (id[r] == 217)
 {
 // Mars & Saturn & Beehaive 
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -5247,32 +5838,33 @@ c1 = "#BF1B0B"
 }
 
 
-if (id[r] == 198)
+if (id[r] == 218)
 {
-// Jupiter in Pleiades from Ceres 
-core.setObserverLocation(-12.6, 23.25, 1, 1, "", "Ceres");
-core.setDate("2153-11-15T12:08:54", "utc");
+// Ceres in Gemeni's head 
+core.setObserverLocation(168.00, 48.75, 5, 1, "", "Earth");
+core.setDate("2156-01-14T16:17:07", "utc");
 
-core.selectObjectByName("Jupiter", pointer = true);
+core.selectObjectByName("Ceres", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
-var pick = Math.floor(Math.random()*5+1)/10;
+var pick = Math.floor(Math.random()*7+6);
 StelMovementMgr.zoomTo(pick, 1);
 
-SolarSystem.setFlagOrbits(true); 
-LandscapeMgr.setFlagAtmosphere(false);
+
+d1 = "Ceres Opposition between Gemini's heads";
+c1 = "#FF7770"
+
+d2 = "1/14/2156"
+c2 = c1
 
 
-d1 = "Jupiter in the Pleiades from Ceres 11/15/2153"
-c1 = "#FFFF00"
-
-
-  
 }
 
 
 
-if (id[r] == 199)
+
+
+if (id[r] == 219)
 {
 // Neptune from Urauns 
 core.setObserverLocation(-81.0, 69.25, 25559000, 1, "", "Uranus");
@@ -5290,7 +5882,7 @@ c1 = "#010FFF"
 
 }
 
-if (id[r] == 200)
+if (id[r] == 220)
 {
 // Uranus - Neptune Conjunction 1/17/2165
 core.setObserverLocation(-73.71, 40.24, 1126, 1, "", "Earth");
@@ -5312,7 +5904,38 @@ c1 = "#2104FF"
 
 
 
-if (id[r] == 201)
+if (id[r] == 221)
+{
+// Uranus - Neptune 2171 from Pluto
+core.setObserverLocation(-60.33, 17.00, 6, 1, "", "Pluto");
+core.setDate("2171-10-30T20:30:07", "utc");
+
+core.selectObjectByName("Uranus", pointer = true);
+var pick = Math.floor(Math.random()*2);
+if (pick == 1)
+{
+core.selectObjectByName("Neptune", pointer = true);
+}
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*17)+1;
+pick = pick /10 + .7 
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Uranus - Neptune Closest Conjunction 0.011" + degstring
+c1 = "#02A1A5"
+
+d2 = "in 5000 years from Pluto 10/30/2171 "
+c2 = "#02A1A5"
+}
+
+
+
+
+
+
+if (id[r] == 222)
 {
 // Jupiter/Sun from Neptune
 core.setObserverLocation(-88.5, 40.5, 24764000, 1, "", "Neptune");
@@ -5332,7 +5955,7 @@ c1 = "#78A1F7"
 
 }
 
-if (id[r] == 202)
+if (id[r] == 223)
 {
 // Venus brightest Millennium
 core.setObserverLocation(-24.5, 40.5, 1738, 1, "", "Earth");
@@ -5352,35 +5975,7 @@ c1 = "#B5FFA7"
 SolarSystem.setFlagOrbits(false);   
 }
 
-if (id[r] == 203)
-{
-// Earth from Ceres
-
-core.setObserverLocation(125.24, 71.3, 36, 1, "", "Ceres");
-core.setDate("2194-02-17T12:39:51", "utc");
-
-core.selectObjectByName("Earth", pointer = false);
-StelMovementMgr.setFlagTracking(true);
-
-LandscapeMgr.setFlagAtmosphere(false);
-
-var pick = Math.random()*2+5;
-pick = pick * 0.01;
-StelMovementMgr.zoomTo(pick);
-
-d1 = "Earth Occults Alderbaran"
-c1 = "#FF334F"
-
-d2 = "From Ceres 02/17/2194";
-c2 = c1
-
-}
-
-
-
-
-
-if (id[r] == 204)
+if (id[r] == 224)
 {
 // Venus - Spica 09/2/2197
 core.setObserverLocation(-179.90, 23.24, 126, 1, "", "Earth");
@@ -5402,7 +5997,48 @@ c1 = "#77DDFF"
 
 }
 
-if (id[r] == 205)
+if (id[r] == 225)
+{
+// Saturn's Moons - Quintuple Transit
+
+core.setObserverLocation(1.8, 47.25, 16, 1, "", "Earth");
+core.setDate("2203-01-07T19:43:09", "utc");
+
+core.selectObjectByName("Saturn", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(0.008, 1);
+var pick = Math.floor(Math.random()*6);
+if (pick == 1)
+{
+core.selectObjectByName("Rhea", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Dione", pointer = true);
+}
+if (pick == 3)
+{
+core.selectObjectByName("Tethys", pointer = true);
+}
+if (pick == 4)
+{
+core.selectObjectByName("Mimas", pointer = true);
+}
+if (pick == 5)
+{
+core.selectObjectByName("Enceladus", pointer = true);
+}
+d1 = "The Next rare Quintuple Saturn Moon Transit 1/07/2203"
+c1 = "#D9FBF1"
+
+
+}
+
+
+
+
+if (id[r] == 226)
 {
 // Eris
 
@@ -5428,7 +6064,7 @@ SolarSystem.setFlagOrbits(true);
 
 
 
-if (id[r] == 206)
+if (id[r] == 227)
 {
 // Saturn Crab Neptune 
 
@@ -5450,7 +6086,7 @@ c1 = "#F3F34F"
 
 
 
-if (id[r] == 207)
+if (id[r] == 228)
 {
 // Opposition grouping
 core.setObserverLocation(1.23, 48.50, 26, 1, "", "Earth");
@@ -5489,31 +6125,7 @@ c1 = "#AAAAFF"
 }
 
 
-if (id[r] == 208)
-{
-// Mars Transits Earth 12/2/2223
-core.setObserverLocation(124.77, 56.50, 12, 1, "", "Callisto");
-core.setDate("2223-12-02T06:49:11", "utc");
-LandscapeMgr.setFlagAtmosphere(false);
-
-core.selectObjectByName("Earth", pointer = false);
-var pick = Math.floor(Math.random()*2);
-if (pick == 1)
-{
-core.selectObjectByName("Mars", pointer = false);
-}
-StelMovementMgr.setFlagTracking(true);
-
-StelMovementMgr.zoomTo(0.003, 1);
-
-d1 = "Mars Transits of Earth as seen from Callisto 12/2/2223"
-SolarSystem.setFlagMoonScale(0);   	
-c1 = "#FF0007"
- 	
-}
-
-
-if (id[r] == 209)
+if (id[r] == 229)
 {
 // Jupiter - Mars   12/02/2223
 core.setObserverLocation(94.61, 44.50, 26, 1, "", "Earth");
@@ -5542,7 +6154,31 @@ c1 = "#FF0700"
 
 
 
-if (id[r] == 210)
+if (id[r] == 230)
+{
+// Mars Transits Earth 12/2/2223
+core.setObserverLocation(124.77, 56.50, 12, 1, "", "Callisto");
+core.setDate("2223-12-02T06:49:11", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Earth", pointer = false);
+var pick = Math.floor(Math.random()*2);
+if (pick == 1)
+{
+core.selectObjectByName("Mars", pointer = false);
+}
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(0.003, 1);
+
+d1 = "Mars Transits of Earth as seen from Callisto 12/2/2223"
+SolarSystem.setFlagMoonScale(0);   	
+c1 = "#FF0007"
+ 	
+}
+
+
+if (id[r] == 231)
 {
 // Earth - Jupiter   4/24/2230
 core.setObserverLocation(35.1, -42, 50000, 1, "", "Venus");
@@ -5567,10 +6203,10 @@ c1 = "#2C66FF"
 
 }
 
-if (id[r] == 211)
+if (id[r] == 232)
 {
 // Earth from Pluto 
-core.setObserverLocation(-83.71, 45.24, 30268000, 1, "", "Pluto");
+core.setObserverLocation(83.71, 45.24, 30268000, 1, "", "Pluto");
 core.setDate("2237-08-05T04:31:00", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -5585,21 +6221,22 @@ var pick = Math.floor(Math.random()*2);
 if (pick == 0)
 {
 SolarSystem.setLabelsAmount(-20);   
-SolarSystem.setFlagOrbits(false);
 }
 d1 = "Earth's Greatest Elongation as seen from Pluto during it's next perihelion"
+
+d2 = "8/5/2237"
 c1 = "#00FFFF"
-c1 = "#00FFFF"
+c2 = "#00FFFF"
 
 
 SolarSystem.setLabelsAmount(20);
-SolarSystem.setFlagOrbits(false);   
+ 
 
 }
 
 
 
-if (id[r] == 212)
+if (id[r] == 233)
 {
 // Pluto Perihelion 9/15/2237
 
@@ -5617,7 +6254,30 @@ c1 = "#2677DE"
 
 }
 
-if (id[r] == 213)
+if (id[r] == 234)
+{
+
+
+// Pluto from Eris 
+	
+core.setObserverLocation(78.27, 2.25, 5, 1, "", "Eris");
+core.setDate("2247-12-27T00:03:00", "utc");
+
+core.selectObjectByName("Pluto", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(79, 1);
+
+d1 = "Pluto's best greatest elongation 46.46"+degstring+ " from Eris of the Millennium"
+c1 = "#FF0002"
+SolarSystem.setFlagOrbits(true);
+
+  
+}
+
+
+
+if (id[r] == 235)
 {
 // Full Moon and Earth from Venus 
 SolarSystem.setFlagMoonScale(0);   	
@@ -5647,7 +6307,7 @@ c2 = "#11F1FF"
 }
 
 
-if (id[r] == 214)
+if (id[r] == 236)
 {
 // Jupiter - Saturn Conjunction Opposition 2/19/2279
 
@@ -5677,7 +6337,7 @@ c1 = "#FF2F00"
 
 
 
-if (id[r] == 215)
+if (id[r] == 237)
 {
 // Earth & & Venus & Jup & Saturn  6/11/2279
 core.setObserverLocation(133.6, 12.1, 6, 1, "", "Mercury");
@@ -5718,7 +6378,7 @@ c2 = "#AD2CF0"
 }
 
 
-if (id[r] == 216)
+if (id[r] == 238)
 {
 // Mars & Jup & Saturn & Moon  3/01/2017
 core.setObserverLocation(21.6, -40.6, 26, 1, "", "Earth");
@@ -5751,30 +6411,7 @@ c1 = "#AD2CF0"
 }
 
 
-if (id[r] == 217)
-{
-
-
-// Pluto from Eris 
-	
-core.setObserverLocation(-154.37, -18, 5, 1, "", "Eris");
-core.setDate("2306-12-30T15:00:07", "utc");
-
-core.selectObjectByName("Pluto", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-StelMovementMgr.zoomTo(79, 1);
-
-d1 = "Pluto's best greatest elongation 41.9831"+degstring+ " from Eris of the Millennium"
-c1 = "#FF0002"
-SolarSystem.setFlagOrbits(true);
-
-  
-}
-
-
-
-if (id[r] == 218)
+if (id[r] == 239)
 {
 // Earth - Jupiter   12/17/2331
 
@@ -5805,9 +6442,72 @@ c1 = "#2C66FF"
 
 
 
-if (id[r] == 219)
+if (id[r] == 240)
 {
-// Neptune - Pluto Opposition 9/16/2383
+// Jupiter - Saturn Conjunction 4/7/2339
+
+var pick = Math.floor(Math.random()*40)-20;
+
+core.setObserverLocation(129.497, pick, 1126, 1, "", "Ceres");
+core.setDate("2339-04-07T00:52:07", "utc");
+
+core.selectObjectByName("Jupiter", pointer = true);
+var pick = Math.floor(Math.random()*2);
+if (pick == 0)
+{
+core.selectObjectByName("Saturn", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+
+LandscapeMgr.setFlagAtmosphere(false);
+var pick = Math.floor((Math.random()*200) + 200) /10000 ;
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Jupiter Partially Occults Saturn 4/7/2339"
+c1 = "#AAAA22"
+
+d2 = "From Ceres"
+c2 = c1
+
+}
+
+
+
+
+
+if (id[r] == 241)
+{
+// Earth from Ceres
+
+core.setObserverLocation(92.66, 9.75, 36, 1, "", "Ceres");
+core.setDate("2369-05-09T16:19:51", "utc");
+
+core.selectObjectByName("Earth", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+SolarSystem.setFlagMoonScale(0);   
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.random()*2+5;
+pick = pick * 0.01;
+StelMovementMgr.zoomTo(pick);
+
+d1 = "Earth Occults Aldebaran"
+c1 = "#FF334F"
+
+d2 = "From Ceres 05/09/2369";
+c2 = c1
+
+}
+
+
+
+
+
+if (id[r] == 242)
+{
+// Neptune - Pluto Conjunction 9/16/2383
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
 core.setDate("2383-09-16T06:00:07", "utc");
 
@@ -5828,7 +6528,7 @@ c1 = "#616898"
 
 }
 
-if (id[r] == 220)
+if (id[r] == 243)
 {
 // Pluto opposition from Neptune 01/29/2386
 
@@ -5846,7 +6546,7 @@ c1 = "#4100AA"
 
 }
 
-if (id[r] == 221)
+if (id[r] == 244)
 {
 // Mercury Grazing Transit
 
@@ -5873,7 +6573,7 @@ c1 = "#000007"
 
 
 
-if (id[r] == 222)
+if (id[r] == 245)
 {
 // Venus - Alpha Capicorn 03/1/2428
 core.setObserverLocation(120.60, 7.24, 6, 1, "", "Earth");
@@ -5901,7 +6601,7 @@ c2 = "#FFDDFF"
 
 
 
-if (id[r] == 223)
+if (id[r] == 246)
 {
 // Mars - Jupiter - Saturn - Antares
 core.setObserverLocation(33.75, 1.3333, 26, 1, "", "Earth");
@@ -5931,7 +6631,7 @@ c1 = "#F9AF77"
 }
 
 
-if (id[r] == 224)
+if (id[r] == 247)
 {
 // Saturn from Uranus 2484-10-11T23:03:09
 
@@ -5953,7 +6653,7 @@ c2 = "#1EE267"
 
 
 
-if (id[r] == 225)
+if (id[r] == 248)
 {
 // Neptune Greatest Brillancy
 core.setObserverLocation(-160.25, 20.25, 126, 1, "", "Pluto");
@@ -5978,7 +6678,7 @@ c1 = "#11FFF8"
 
 
 
-if (id[r] == 226)
+if (id[r] == 249)
 {
 // Earth - Antares 4/24/2506
 core.setObserverLocation(-70, 78, 49736, 1, "", "Venus");
@@ -5997,7 +6697,7 @@ c1 = "#F1FFF8"
 
 }
 
-if (id[r] == 227)
+if (id[r] == 250)
 {
 // Venus Conjunction Pluto 2/24/2513
 core.setObserverLocation(125.27, -30.0, 12, 1, "", "Earth");
@@ -6028,7 +6728,7 @@ c1 = "#FFFF10"
 
 
 
-if (id[r] == 228)
+if (id[r] == 251)
 {
 // Mars - Jupiter - Saturn   07/29/2029
 core.setObserverLocation(-7.71, 40.50, 26, 1, "", "Earth");
@@ -6060,7 +6760,7 @@ c2 = "#EFEE01"
 
 }
 
-if (id[r] == 229)
+if (id[r] == 252)
 {
 // Jupiter - Acrab 3/3/2564
 core.setObserverLocation(96.36, 40.5, 126, 1, "", "Earth");
@@ -6083,7 +6783,7 @@ c1 = "#FFDD7A"
 }
 
 
-if (id[r] == 230)
+if (id[r] == 253)
 {
 // Earth Jupiter Uranus Lagoon 9/05/2577
 core.setObserverLocation(-74.3, 55.52, 126, 1, "", "Mars");
@@ -6120,7 +6820,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 
 
 
-if (id[r] == 231)
+if (id[r] == 254)
 {
 // Jupiter Uranus Lagoon 9/23/2577
 core.setObserverLocation(-74.33, 40.5, 126, 1, "", "Earth");
@@ -6142,30 +6842,7 @@ c1 = "#FF31F1"
 
 
 
-if (id[r] == 232)
-{
-// Eris - Pluto 5/26/2587
-core.setObserverLocation(0.01, -40.07, 126, 1, "", "Earth");
-core.setDate("2587-05-26T06:00:07", "UTC");
-
-core.selectObjectByName("Pluto", pointer = true);
-var pick = Math.floor(Math.random()*2);
-if (pick == 1)
-{
-core.selectObjectByName("Eris", pointer = true);
-}
-StelMovementMgr.setFlagTracking(true);
-StelMovementMgr.zoomTo(72, 1);
-
-
-d1 = "The Next Pluto and Eris Conjunction 05/26/2587";
-c1 = "#7F31FF"
-
-}
-
-
-
-if (id[r] == 233)
+if (id[r] == 255)
 {
 // Jupiter from Saturn Gi
 core.setObserverLocation(-13.5, 39.0, 200000, 1, "", "Saturn");
@@ -6193,7 +6870,7 @@ SolarSystem.setFlagOrbits(false);
 
 
 
-if (id[r] == 234)
+if (id[r] == 256)
 {
 // Earth Transit from Callisto
 core.setObserverLocation(-10, 60, 4, 1, "", "Callisto");
@@ -6215,7 +6892,7 @@ c1 = "#99FF00"
 
 
 
-if (id[r] == 235)
+if (id[r] == 257)
 {
 // Jupiter - Mars Opposition Together 5/10/2599
 
@@ -6240,7 +6917,7 @@ c1 = "#E63118"
 }
 
 
-if (id[r] == 236)
+if (id[r] == 258)
 {
 // Mercury Grazing North Pole Transit
 
@@ -6264,13 +6941,12 @@ c1 = "#000007"
 
 
 
-if (id[r] == 237)
+if (id[r] == 259)
 {
 // Mars Transit from Ceres
 
-core.setObserverLocation(125.3, 4.24, 36, 1, "", "Ceres");
-core.setDate("2608-12-30T08:06:33", "utc");
-SolarSystem.setFlagMoonScale(0);  
+core.setObserverLocation(7.3, 2.24, 36, 1, "", "Ceres");
+core.setDate("2618-05-26T18:43:13", "utc");
 
 core.selectObjectByName("Mars", pointer = true);
 StelMovementMgr.setFlagTracking(true);
@@ -6283,7 +6959,7 @@ pick = pick / 10
 StelMovementMgr.zoomTo(pick, 1);
 
 
-d1 = "Mars Transits the Sun 12/30/2608"
+d1 = "Mars Transits the Sun 05/26/2618"
 c1 = "#FF3737"
 
 d2 = "from Ceres"
@@ -6294,7 +6970,32 @@ c2 = c1
 
 
 
-if (id[r] == 238)
+if (id[r] == 260)
+{
+// Jupiter in Pleiades from Ceres 
+core.setObserverLocation(52.6, 23.25, 1, 1, "", "Ceres");
+core.setDate("2628-05-01T09:32:57", "utc");
+
+core.selectObjectByName("Jupiter", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*2)+0.5;
+StelMovementMgr.zoomTo(pick, 1);
+
+SolarSystem.setFlagOrbits(true); 
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+d1 = "Jupiter in the Pleiades from Ceres 05/01/2628"
+c1 = "#BF1B0B"
+
+
+  
+}
+
+
+
+if (id[r] == 261)
 {
 // 3 Planet Grouping 2040
 core.setObserverLocation(30.39, 40.50, 26, 1, "", "Earth");
@@ -6330,7 +7031,7 @@ c1 = "#F611FA"
 
 
 
-if (id[r] == 239)
+if (id[r] == 262)
 {
 // Saturn/Sun from Uranus
 core.setObserverLocation(93.5, -15, 24764000, 1, "", "Uranus");
@@ -6352,7 +7053,7 @@ c1 = "#78FF17"
 
 
 
-if (id[r] == 240)
+if (id[r] == 263)
 {
 // Jupiter - Saturn from Ceres
 
@@ -6395,7 +7096,7 @@ c2 = "#F0F0F0"
 
 
 
-if (id[r] == 241)
+if (id[r] == 264)
 {
 // Mars - Jupiter - Saturn 12/01/2755
 core.setObserverLocation(-87.4, 32.27, 16, 1, "", "Earth");
@@ -6429,7 +7130,7 @@ c1 = "#1DFFB0"
 
 
 
-if (id[r] == 242)
+if (id[r] == 265)
 {
 // Earth - Alpha Capicorn 09/6/2766
 core.setObserverLocation(144.60, 42, 6, 1, "", "Venus");
@@ -6453,7 +7154,32 @@ c2 = "#11DDFF"
 
 
 
-if (id[r] == 243)
+if (id[r] == 266)
+{
+// Closest Nereid from Trition 
+core.setObserverLocation(180.25, -1.99, 7, 1, "", "Triton");
+core.setDate("2798-11-03T16:11:11", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Nereid", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*40)+1;
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Brightest Nereid of the Millennium from Triton 11/03/2798"
+d2 = "Mag 1.8646"
+
+c1 = "#007FF7"
+c2 = c1
+
+} 
+
+
+
+
+
+if (id[r] == 267)
 {
 // Jupiter - Saturn   5/28/2815
 core.setObserverLocation(-126.50, 57.1, 50000, 1, "", "Venus");
@@ -6480,7 +7206,37 @@ c1 = "#CCDDFF"
 }
 
 
-if (id[r] == 244)
+if (id[r] == 268)
+{
+// Neptune latest opposition 10/16/2854
+
+core.setObserverLocation(-3.71, 42.24, 1126, 1, "", "Earth");
+core.setDate("2854-10-16T00:37:20", "utc");
+
+core.selectObjectByName("Neptune", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(148, 1);
+
+d1 = "Neptune - Opposition 10/16/2854"
+c1 = "#1EE2D7"
+
+d2 = "The latest first planetary opposition of the year in the Millennium"
+c2 = c1
+
+
+//script:  "2854-10-16T00:00:04"
+//script:  "Neptune"
+
+
+}
+
+
+
+
+
+
+if (id[r] == 269)
 { 
 // Merc and Venus trans Sun from Neptune
 
@@ -6508,7 +7264,11 @@ c1 = "#7817FF"
 
 }
 
-if (id[r] == 245)
+
+
+
+
+if (id[r] == 270)
 {
 // Best Jupiter - Saturn Conjunction 12/25/2874
 
@@ -6538,7 +7298,7 @@ c2 = "#FFAAFF"
 
 
 
-if (id[r] == 246)
+if (id[r] == 271)
 {
 // Titan and Europa Pleiades conjunction
 core.setObserverLocation(-77.7, 77, 50000, 1, "", "Uranus");
@@ -6564,7 +7324,33 @@ c1 = "#17AAF7"
 
 }
 
-if (id[r] == 247)
+if (id[r] == 272)
+{
+// Earth Occuts Rigel from Pallas 
+	
+core.setObserverLocation(-162.40, -8.25, 116, 1, "", "Pallas");
+core.setDate("2892-03-06T08:34:43", "UTC");
+
+core.selectObjectByName("Earth", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+var pick = Math.floor(Math.random()*4)+1
+StelMovementMgr.zoomTo(pick, 1);
+
+d1 = "Earth Occults Rigel from Pallas 3/6/2892"
+c1 = "#FAFA5A"
+
+c2 = c1
+
+  	
+}
+
+
+
+
+if (id[r] == 273)
 {
 // Saturn - Earth from Jupiter   
 core.setObserverLocation(-134.1, -42.5, 50000, 1, "", "Jupiter");
@@ -6597,7 +7383,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 
 
 
-if (id[r] == 248)
+if (id[r] == 274)
 {
 // Ceres from Mars 
 core.setObserverLocation(57.0, 18.75, 50, 1, "", "Mars");
@@ -6623,7 +7409,7 @@ c2 = c1
 
 
 
-if (id[r] == 249)
+if (id[r] == 275)
 {
 // Nice Grouping on Mars Plea 9/30/2913
 core.setObserverLocation(-73.4, 30.1, 16, 1, "", "Mars");
@@ -6654,7 +7440,7 @@ c1 = "#ADFCF0"
 
 
 
-if (id[r] == 250)
+if (id[r] == 276)
 {
 // 3066 Planet Grouping 
 core.setObserverLocation(-73.71, -40.24, 1126, 1, "", "Earth");
@@ -6686,7 +7472,7 @@ c1 = "#F9FFCF"
 
 }
 
-if (id[r] == 251)
+if (id[r] == 277)
 {
 // 5 Planet Grouping 3194
 core.setObserverLocation(-69.23, 8.50, 26, 1, "", "Earth");
@@ -6724,7 +7510,7 @@ c1 = "#AAAAFF"
 
 }
 
-if (id[r] == 252)
+if (id[r] == 278)
 {
 // Saturn - Mars   07/09/3332
 core.setObserverLocation(-50.00, 44.50, 26, 1, "", "Earth");
@@ -6757,7 +7543,7 @@ c1 = "#FFAA00"
 
 
 
-if (id[r] == 253)
+if (id[r] == 279)
 {
 // Uranus, Neptune and Pluto Conjunction  9/16/3367
 core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Earth");
@@ -6788,7 +7574,7 @@ c1 = "#0CDDFC"
 
 
 
-if (id[r] == 254)
+if (id[r] == 280)
 {
 // Jupiter - Saturn 4523
 core.setObserverLocation(-337.33, -20.00, 26, 1, "", "Earth");
@@ -6816,7 +7602,7 @@ c1 = "#A29165"
 
 
 
-if (id[r] == 255)
+if (id[r] == 281)
 {
 // Zues as North Star
 core.setObserverLocation(-70, 90, 4, 1, "", "Earth");
@@ -6840,7 +7626,9 @@ c1 = "#AAAAF8"
 }
 
 
-if (id[r] == 256)
+
+
+if (id[r] == 282)
 {
 // Jupiter/Sun from Titan
 core.setObserverLocation(-23.5, 40.5, 27, 1, "", "Titan");
@@ -6860,7 +7648,7 @@ c1 = "#78FF17"
 
 }
 
-if (id[r] == 257)
+if (id[r] == 283)
 {
 // All 9 Planets lined up 8335
 core.setObserverLocation(-167.5, 44.5, 26, 1, "", "Sun");
@@ -6912,7 +7700,7 @@ c1 = "#FFFFFF"
 
 }
 
-if (id[r] == 258)
+if (id[r] == 284)
 {
 // Alpha Centauri rises in New York City
 core.setObserverLocation(-73.98592, 40.74831, 381, 1, "", "Earth");
@@ -6930,7 +7718,9 @@ c1 = "#0AAAFA"
 }
 
 
-if (id[r] == 259)
+
+
+if (id[r] == 285)
 {
 //  Neptune orion
 core.setObserverLocation(17.1, 25.25, 70, 1, "", "Pluto");
@@ -6955,7 +7745,7 @@ c1 = "#0FFFF1"
 
 
  
-if (id[r] == 260)
+if (id[r] == 286)
 {
 // Vega as North Star
 
@@ -6979,7 +7769,7 @@ c1 = "#AAAAF8"
 }
 
 
-if (id[r] == 261)
+if (id[r] == 287)
 {
 // Arcturus and Spica 
 core.setObserverLocation(132.71, -44.24, 1126, 1, "", "Earth");
@@ -7001,8 +7791,16 @@ c1 = "#FA3118"
 
 
 
-
 //last
+
+
+
+
+
+
+
+
+
 
 
 

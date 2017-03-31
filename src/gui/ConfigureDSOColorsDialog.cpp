@@ -150,7 +150,7 @@ void ConfigureDSOColorsDialog::askDSOLabelsColor()
 
 void ConfigureDSOColorsDialog::askDSOMarkersColor()
 {
-	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.cirlesColor")->getValue().value<Vec3f>();
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.circlesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
 	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOMarkers->toolTip()));

@@ -22,7 +22,7 @@ minimum_fps                         = 18
 maximum_fps                         = 10000
 #viewport_effect                     = sphericMirrorDistorter
 viewport_effect                     = none
-vsync                               = true
+#vsync                               = true
 
 [projection]
 type                                = ProjectionStereographic
@@ -116,64 +116,82 @@ selected_object_info                = all
 auto_hide_horizontal_toolbar        = true
 auto_hide_vertical_toolbar          = true
 flag_enable_kinetic_scrolling       = true
+# These values are used on non-Windows systems supporting GPSD
+gpsd_hostname                       = "localhost"
+gpsd_port                           = 2947
+# These values are used on Windows only.
+gps_interface                       = "COM3"
+gps_baudrate                        = 4800
 
 [color]
 default_color                       = 0.5,0.5,0.7
-azimuthal_color                     = 0.3,0.2,0.1
 daylight_text_color                 = 0.0,0.0,0.0
-ecliptic_J2000_color                = 0.7,0.2,0.2
-ecliptic_color                      = 0.9,0.6,0.2
+# Ecliptic J2000 group: red tones
 ecliptical_J2000_color              = 0.4,0.1,0.1
+ecliptic_J2000_color                = 0.7,0.2,0.2
+equinox_J2000_points_color          = 0.7,0.2,0.2
+solstice_J2000_points_color         = 0.7,0.2,0.2
+ecliptic_J2000_poles_color          = 0.7,0.2,0.2
+# Ecliptic of date group: orange tones
 ecliptical_color                    = 0.6,0.3,0.1
-# default: same as ecliptic_color
-precession_circle_color             = 0.9,0.6,0.2
+ecliptic_color                      = 0.9,0.6,0.2
+equinox_points_color                = 0.9,0.6,0.2
+solstice_points_color               = 0.9,0.6,0.2
+ecliptic_poles_color                = 0.9,0.6,0.2
+precession_circles_color            = 0.9,0.6,0.2
+# Equatorial J2000 group: blue tones (standard atlas coordinates)
 equator_J2000_color                 = 0.2,0.2,0.6
-equator_color                       = 0.3,0.5,1.0
 equatorial_J2000_color              = 0.1,0.1,0.5
+celestial_J2000_poles_color         = 0.2,0.2,0.6
+# Equatorial of date group: brighter blue
+equator_color                       = 0.3,0.5,1.0
 equatorial_color                    = 0.2,0.3,0.8
-galactic_color                      = 0.0,0.3,0.2
+celestial_poles_color               = 0.3,0.5,1.0
+circumpolar_circles_color           = 0.3,0.5,1.0
+# Galaxy: brownish, not too strong.
+galactic_color                      = 0.3,0.2,0.1
 galactic_equator_color              = 0.5,0.3,0.1
+galactic_poles_color                = 0.5,0.3,0.1
+# Supergalactic group: dark grey, should be less apparent than galactic.
+supergalactic_color                 = 0.2,0.2,0.2
+supergalactic_equator_color         = 0.4,0.4,0.4
+supergalactic_poles_color           = 0.4,0.4,0.4
+# Horizon and altazimuthal grid: greenish.
+azimuthal_color                     = 0.0,0.3,0.2
+horizon_color                       = 0.2,0.6,0.2
 meridian_color                      = 0.2,0.6,0.2
 prime_vertical_color                = 0.2,0.5,0.2
+zenith_nadir_color                  = 0.2,0.6,0.2
+cardinal_color                      = 0.8,0.2,0.1
+# A mix of equatorial (blueish) and ecliptical (reddish)...
 colures_color                       = 0.5,0.0,0.5
-longitude_color                     = 0.2,0.4,0.4
-horizon_color                       = 0.2,0.6,0.2
+oc_longitude_color                  = 0.2,0.4,0.4
+
+# Constellations
 const_lines_color                   = 0.2,0.2,0.6
 const_names_color                   = 0.4,0.6,0.9
 const_boundary_color                = 0.3,0.1,0.1
+#DSO
 dso_label_color                     = 0.2,0.6,0.7
 dso_circle_color                    = 1.0,0.7,0.2
 dso_galaxy_color                    = 1.0,0.2,0.2
 dso_nebula_color                    = 0.1,1.0,0.1
 dso_dark_nebula_color               = 0.3,0.3,0.3
 dso_cluster_color                   = 1.0,1.0,0.1
+
 star_label_color                    = 0.4,0.3,0.5
-cardinal_color                      = 0.8,0.2,0.1
 planet_names_color                  = 0.5,0.5,0.7
 planet_orbits_color                 = 0.7,0.2,0.2
 planet_pointers_color               = 1.0,0.3,0.3
 object_trails_color                 = 1.0,0.7,0.0
-telescope_label_color               = 0.6,0.4,0.0
-telescope_circle_color              = 0.6,0.4,0.0
+asteroid_orbits_color               = 0.7,0.5,0.5
+comet_orbits_color                  = 0.7,0.8,0.8
+sso_orbits_color                    = 0.7,0.2,0.2
 script_console_keyword_color        = 1.0,0.0,1.0
 script_console_module_color         = 0.0,1.0,1.0
 script_console_comment_color        = 1.0,1.0,0.0
 script_console_function_color       = 0.0,1.0,0.0
 script_console_constant_color       = 1.0,0.5,0.5
-asteroid_orbits_color               = 0.7,0.5,0.5
-comet_orbits_color                  = 0.7,0.8,0.8
-sso_orbits_color                    = 0.7,0.2,0.2
-celestial_J2000_poles_color         = 0.2,0.2,0.6
-celestial_poles_color               = 0.3,0.5,1.0
-ecliptic_J2000_poles_color          = 0.7,0.2,0.2
-ecliptic_poles_color                = 0.9,0.6,0.2
-galactic_poles_color                = 0.5,0.3,0.1
-supergalactic_color                 = 0.4,0.4,0.0
-supergalactic_equator_color         = 1.0,1.0,0.0
-supergalactic_poles_color           = 1.0,1.0,0.0
-zenith_nadir_color                  = 0.2,0.6,0.2
-equinox_J2000_points_color          = 0.8,0.2,0.1
-equinox_points_color                = 0.2,0.3,0.8
 
 [tui]
 flag_show_gravity_ui                = false

@@ -23,6 +23,7 @@ SET(stellarium_lib_SRCS
      core/StelLocation.hpp
      core/StelLocation.cpp
      core/StelLocationMgr.hpp
+     core/StelLocationMgr_p.hpp
      core/StelLocationMgr.cpp
      core/StelProjector.cpp
      core/StelProjector.hpp
@@ -424,17 +425,23 @@ ENDIF()
 IF(ENABLE_SCRIPTING)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
 ENDIF()
-if(USE_OLD_QGLWIDGET)
-    # The Qt5OpenGL library is only required when using the legacy viewport
-    SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
-endif()
+IF(USE_OLD_QGLWIDGET)
+     # The Qt5OpenGL library is only required when using the legacy viewport
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
+ENDIF()
+IF(ENABLE_GPS)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Positioning Qt5::SerialPort)
+ENDIF()
 
-if(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
-    # automatically copy the spout .dll to the binary directory, if possible
-    configure_file(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
-endif()
+IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
+     # automatically copy the spout .dll to the binary directory, if possible
+     CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+ENDIF()
 
-set(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+IF(ENABLE_LIBGPS)
+     SET(STELMAIN_DEPS ${STELMAIN_DEPS} ${GPS_LIBRARY})
+ENDIF()
 
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
