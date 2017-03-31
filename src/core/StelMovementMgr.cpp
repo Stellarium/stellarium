@@ -802,12 +802,12 @@ void StelMovementMgr::lookNadir(void)
 
 void StelMovementMgr::lookTowardsNCP(void)
 {
-	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,1)));
+	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,1), StelCore::RefractionOff));
 }
 
 void StelMovementMgr::lookTowardsSCP(void)
 {
-	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1)));
+	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1), StelCore::RefractionOff));
 }
 
 // Increment/decrement smoothly the vision field and position
@@ -854,9 +854,6 @@ void StelMovementMgr::updateMotion(double deltaTime)
 
 	if (deltaFov<0)
 	{
-//		deltaFov = -deplzoom*5;
-//		if (deltaFov<-0.15*currentFov)
-//			deltaFov = -0.15*currentFov;
 		deltaFov=qMax(-0.15*currentFov, -deplzoom*5);
 	}
 	else if (deltaFov>0)
@@ -894,7 +891,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 					v = move.targetObject->getAltAzPosAuto(core);
 					break;
 				case MountEquinoxEquatorial:
-					v = move.targetObject->getEquinoxEquatorialPos(core);
+					v = move.targetObject->getEquinoxEquatorialPosAuto(core); //  ..Auto! Fix Bug LP:#1484976
 					break;
 				case MountGalactic:
 					v = move.targetObject->getGalacticPos(core);
@@ -1014,7 +1011,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 					v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
 					break;
 				case MountEquinoxEquatorial:
-					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core);
+					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPosAuto(core);
 					break;
 				case MountGalactic:
 					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);
@@ -1249,7 +1246,7 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 		case MountAltAzimuthal:
 			return core->j2000ToAltAz(v, StelCore::RefractionOff); // TODO: Decide if RefractionAuto?
 		case MountEquinoxEquatorial:
-			return core->j2000ToEquinoxEqu(v);
+			return core->j2000ToEquinoxEqu(v, StelCore::RefractionOff);
 		case MountGalactic:
 			return core->j2000ToGalactic(v);
 		case MountSupergalactic:
@@ -1266,7 +1263,7 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 		case MountAltAzimuthal:
 			return core->altAzToJ2000(v, StelCore::RefractionOff); // TODO: Decide if RefractionAuto?
 		case MountEquinoxEquatorial:
-			return core->equinoxEquToJ2000(v);
+			return core->equinoxEquToJ2000(v, StelCore::RefractionOff);
 		case MountGalactic:
 			return core->galacticToJ2000(v);
 		case MountSupergalactic:
@@ -1419,7 +1416,7 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 					v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
 					break;
 				case MountEquinoxEquatorial:
-					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core);
+					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPosAuto(core);
 					break;
 				case MountGalactic:
 					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);

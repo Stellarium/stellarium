@@ -231,7 +231,7 @@ void SlewDialog::getCenterInfo()
 	projector->unProject(center[0], center[1], centerPosition);
 	double dec_j2000 = 0;
 	double ra_j2000 = 0;
-	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,core->equinoxEquToJ2000(centerPosition));
+	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,core->equinoxEquToJ2000(centerPosition, StelCore::RefractionOff));
 	ui->spinBoxRA->setRadians(ra_j2000);
 	ui->spinBoxDec->setRadians(dec_j2000);
 }

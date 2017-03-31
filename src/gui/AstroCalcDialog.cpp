@@ -138,6 +138,13 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
 	ui->phenomenToDateEdit->setDateTime(currentDT.addYears(1));
 
+	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
+	QDate min = QDate(100,1,1);
+	ui->dateFromDateTimeEdit->setMinimumDate(min);
+	ui->dateToDateTimeEdit->setMinimumDate(min);
+	ui->phenomenFromDateEdit->setMinimumDate(min);
+	ui->phenomenToDateEdit->setMinimumDate(min);
+
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		ui->planetaryPositionsTreeWidget, SLOT(repaint()));

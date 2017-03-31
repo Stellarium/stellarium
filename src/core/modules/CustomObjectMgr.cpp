@@ -139,7 +139,7 @@ void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &r
 	double dDec = StelUtils::getDecAngle(dec);
 	StelUtils::spheToRect(dRa, dDec, aim);
 
-	addCustomObject(designation, StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), isVisible);
+	addCustomObject(designation, StelApp::getInstance().getCore()->equinoxEquToJ2000(aim, StelCore::RefractionOff), isVisible);
 }
 
 void CustomObjectMgr::addCustomObjectAltAzi(QString designation, const QString &alt, const QString &azi, bool isVisible)

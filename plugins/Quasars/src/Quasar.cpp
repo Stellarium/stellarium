@@ -74,7 +74,7 @@ Quasar::~Quasar()
 	//
 }
 
-QVariantMap Quasar::getMap(void)
+QVariantMap Quasar::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -136,6 +136,17 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QVariantMap Quasar::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map["amag"] = AMagnitude;
+	map["bV"] = bV;
+	map["redshift"] = redshift;
+
+	return map;
 }
 
 Vec3f Quasar::getInfoColor(void) const

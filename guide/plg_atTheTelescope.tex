@@ -11,31 +11,369 @@ Two plugins are bundled with Stellarium which are designed to be used
 at the telescope: Oculars (section~\ref{sec:plugins:Oculars}), which
 provides field of view hints for telescopes, oculars and sensors, and
 TelescopeControl (section~\ref{sec:plugins:TelescopeControl}), which
-allows you to send GOTO commands to many motorized telescopes. Other
-goto telescopes are supported by an external program which you must
+allows you to send GOTO commands to many motorized telescope mounts. Other
+GOTO telescopes are supported by an external program which you must
 install separately: \program{StellariumScope}
-(section~\ref{sec:plugins:StellariumScope}).
+(section~\ref{sec:plugins:StellariumScope}). This can also help DIY hardware 
+tinkerers who like to build their own control systems (section~\ref{sec:plugins:TelescopeControl:Other}).
 
 In addition, the Observability plugin (section~\ref{sec:plugins:Observability})
 can be used for planning the best times to observe your favourite
 objects.
 
 \section{Oculars Plugin}
+\sectionauthor*{Timothy Reaves, with additions by Alexander Wolf}
 \label{sec:plugins:Oculars}
 
-This places a window on the screen that corresponds to the view
-through a telescope or on a camera. It reads from an editable data
-base.
+This plugin serves several purposes:
+\begin{itemize}
+\item to see what the sky looks like through a particular combination of eyepiece, lense (Barlow or Shapley types) and telescope. This plugin helps to get an idea of what you should see when looking through a physical telescope, and understand why one eyepiece may be better suited to observe a particular target than another. This can also be very useful for deciding what telescope is best suited to a style of viewing. And with the support for binoculars, you also have the ability to understand just about any type of optics-enhanced visual observing.
+\item to show what a particular combination of camera and lens or telescope would be able to photograph of the sky. 
+\item lastly, with the help of the Telrad sight, understand where object in the sky are in relation to each other. 
+%This can be very useful if you have a non-GOTO telescope, and to get an idea of how to star-hop from a known location to an area of interest.
+This can be helpful for star-hopping with a non-GOTO telescope. 
+\end{itemize}
 
-When this plug in is active a circular view will appear around the
-selected object depicting what would be seen by the viewing object. On
-the top right hand side of the screen a menu will appear that can be
-used to select the viewing device, e.g., Camera, Eyepiece, Barlow type
-lenses, etc. This menu is filled with items from the \file{ocular.ini}
-file in the \file{modules/oculars} folder. This file can be edited
-from the Plugin's menu screen or with a text editor.
+\noindent None of these activities can take the place of hands-on experience, but they are a good way to supplement your visual astronomy interests.
 
-%TODO: Details?
+\subsection{Using the Ocular plugin}
+\label{sec:sec:plugins:Oculars:UsingPlugin}
+
+The plugin is controlled through a popup menu or through an on-screen control panel (see top right corner on screens in fig.~\ref{fig:plugins:Oculars:TeleVue}). 
+By default, the hot key to display the popup is \keys{\Alt+O} (\keys{Option+O} for Mac users). 
+This can be changed in the \menu{Editing Keyboard Shortcuts} window (see section~\ref{sec:gui:help:hotkeys}). The menu will popup where your cursor is located.
+
+\begin{figure}[t]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_menu}
+\caption{The on-screen menu (top right) and popup menu (lower right) of the Oculars plugin.}
+\label{fig:plugins:Oculars:Usage:Menu}
+\end{figure}
+
+The options available in the popup menu depend on what you are currently doing. 
+In the default menu, you can choose to configure the plugin, activate a CCD, or activate the Telrad finder (see fig.~\ref{fig:plugins:Oculars:Usage:Menu}).
+The menu is navigated by either the arrow keys on your keyboard or by your mouse. 
+The \keys{\arrowkeyup} and \keys{\arrowkeydown} arrow keys move the selection up or down the menu, 
+and the \keys{\arrowkeyleft} and \keys{\arrowkeyright}  arrow keys display or hide sub-menus. \keys{\return} activates an option.
+
+\paragraph{Telrad Finder}
+
+The Telrad view can be used without defining any of the items below. 
+As a reflex sight is non-magnifying, this feature can only be enabled when no eyepiece is selected. 
+You still may want to zoom in a bit to better see which stars are in the circles (fig.~\ref{fig:plugins:Oculars:Usage:Telrad}).
+The three circles that appear in the center of the screen are $0.5\degree$, $2.0\degree$, and $4.0\degree$ in diameter. 
+They stay centered in the screen, so move the ``telescope'' (click-drag the background) to center the circles on the object of interest. 
+
+\begin{figure}[b]\centering
+\includegraphics[width=\textwidth]{oculars_usage_telrad}
+\caption{The left image is the default $60\degree$, and the right one is $40\degree$.}
+\label{fig:plugins:Oculars:Usage:Telrad}
+\end{figure}
+
+While the Telrad finder is active, you can not activate a CCD with the popup menu, but only with the on-screen menu.
+
+\paragraph{CCD Sensors}
+
+
+\begin{figure}[ht]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd}
+\caption{View of M37 through a CCD sensor of the Oculars plugin.}
+\label{fig:plugins:Oculars:Usage:CCD}
+\end{figure}
+
+\begin{figure}[ht]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_info}
+\caption{View of M37 through a CCD sensor of the Oculars plugin (without on-screen control panel).}
+\label{fig:plugins:Oculars:Usage:CCD:Info}
+\end{figure}
+
+\noindent This is a great way to get an idea of what a particular camera will be able to capture when attached to a particular telescope or lens. 
+For using camera lenses, you must describe them as telescope with the appropriate values for the lens. 
+When active, this feature will display a red bounding box of the area that will be captured, 
+as well as zoom in to give a better view of the surroundings. You can manually zoom in or out from there.
+
+The default CCD view will appear similar to fig. \ref{fig:plugins:Oculars:Usage:CCD} or, 
+when you are working without the on-screen control panel, the information area in the upper right hand corner 
+also shows angular size captured by the CCD (see fig. \ref{fig:plugins:Oculars:Usage:CCD:Info}).
+
+
+When a CCD view is displayed, the popup menu changes  as seen in  fig. \ref{fig:plugins:Oculars:Usage:CCD:Menu}. 
+You can select what telescope to use, as well as progress to the previous or next CCD, or go to a specific CCD. 
+You can also rotate the CCD to better frame your subject, or to see if the CCD can be rotated in such a way as to 
+catch your area of interest (see fig. \ref{fig:plugins:Oculars:Usage:CCD:RotMenu}). 
+Once rotated, the CCD frame on screen displays the new orientation (see fig. \ref{fig:plugins:Oculars:Usage:CCD:Rotation}).
+
+% THESE 3 should always be together on one float page.
+\begin{figure}[p]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_menu}
+\caption{The CCD sensor popup menu of the Oculars plugin.}
+\label{fig:plugins:Oculars:Usage:CCD:Menu}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_rotmenu}
+\caption{Setting rotation of CCD sensor in the popup menu.}
+\label{fig:plugins:Oculars:Usage:CCD:RotMenu}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_rotation}
+\caption{A rotated CCD sensor frame of the Oculars plugin.}
+\label{fig:plugins:Oculars:Usage:CCD:Rotation}
+\end{figure}
+
+\newpage
+
+
+\paragraph{Oculars}
+
+\begin{itemize}
+\item Define some eyepieces and telescope (see section \ref{sec:sec:plugins:Oculars:Configuration}).
+\item Select an object to view (i.e. a star, planet, etc.)
+\item Click the toolbar button \guibutton{0.6}{bt_ocular} for toggling the Ocular view, or press \keys{\ctrl+O} (\keys{\cmdmac+O} for Mac users).
+\item Swap between eye pieces and telescopes to see how the view changes.
+\end{itemize}
+
+This is really the area of interest to most telescopic observers. 
+It is a great way to compare different eyepiece/telescope combinations, to see how they change the view of the sky. 
+And it is easy to do so with binoculars too. 
+To show this, let us use the M37 cluster as target. Through a pair of Celestron 15x70 binoculars, it would look like in fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37Binos}.
+
+\begin{figure}[h]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37binos}
+\caption{The M37 cluster through a Celestron 15x70 binocular.}
+\label{fig:plugins:Oculars:Usage:Ocular:M37Binos}
+\end{figure}
+
+\noindent A very pretty sight. Now, what would it look like through a Celestron 80\,mm EDF finder 'scope, with an Explore Scientific 14\,mm $100\degree$ eyepiece? See fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37EDF}!
+
+\begin{figure}[h]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37edf}
+\caption{The M37 cluster through a Celestron 80\,mm EDF with Explore Scientific 14\,mm eyepiece.}
+\label{fig:plugins:Oculars:Usage:Ocular:M37EDF}
+\end{figure}
+
+\noindent Not bad at all. But we like to see more! So we move the eyepiece to a C1400. See fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37C1400} for the resulting view.
+
+%%%%%%%%%%% MISSING CONTEXT SWITCH!! Here might be a paragraph with comparing the 14mm eyepiece with a 31mm Nagler!
+
+\begin{figure}[ht]\centering
+\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37c1400}
+\caption{The M37 cluster through a Celestron C1400 with Tele Vue Nagler 31\,mm eyepiece.}
+\label{fig:plugins:Oculars:Usage:Ocular:M37C1400}
+\end{figure}
+
+Very nice indeed! So for this target, the C1400 is going to be the best bet. However, if my target was the Pleiades, the C1400 with that eyepiece would not be good -- the 80EDF would do much better!
+
+When an eyepiece is active, the popup menu again changes.  
+With a non-binocular eyepiece selected, you also have the ability to select a particular eyepiece or telescope.
+When a binocular is active, you can not select a telescope, as it is not relevant. 
+Changing the eyepiece to a non-binocular will again allow the telescope to be selected. 
+Also notice that when your mouse cursor is very near the right hand border of the screen, the popup menu's sub-menus display to the left, not the right.
+
+\subsection{Configuration}
+\label{sec:sec:plugins:Oculars:Configuration}
+All configuration is done through the user interface in the application. 
+To open the configuration dialog hit the \keys{\Alt+O} key, 
+or click the \button{configure} button on the plugin setup dialog (available in the
+\menu{Plugins} tab of Stellarium's Configuration window (opened by 
+pressing \keys{F2} or the \guibutton[0.25]{2}{btd_config} button in the left toolbar)), 
+or the rightmost button of the on-screen panel (if displayed in the top right corner of screen). 
+There are six tabs in the configuration dialog: \emph{General}, \emph{Eyepieces}, \emph{Lenses}, \emph{Sensors}, \emph{Telescopes}, and \emph{About}. The first five are the ones we are interested in here.
+
+\paragraph{General}
+
+The first option allows you to define the general behaviour of the plugin. 
+The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view} and \emph{Sensor view} (see figure \ref{fig:plugins:Oculars:Gui:General}).
+
+\begin{figure}[ht]\centering
+\includegraphics[width=0.75\textwidth]{oculars_gui_general}
+\caption{General tab of the Oculars plugin configuration dialog.}
+\label{fig:plugins:Oculars:Gui:General}
+\end{figure}
+
+\begin{description}
+\item[Interface:] this group of options allows to change behaviour of the plugin in general.
+ \begin{description}
+   \item[On-screen control panel:] show an additional GUI panel in the top-right corner of the screen to allow switching features of the plugin (in addition to the popup window).
+   \item[Restore FOV to initial values] and
+   \item[Restore direction to initial values] options allow restoration field of view and direction of view, resp., 
+         to the initial values at program start at the end of the plugin usage (e.g., when disabling the view through CCD frame).
+ \end{description}
+\item[Ocular view] is a group of options that allows to change the plugin's behaviour in visual observation mode.
+ \begin{description}
+   \item[Enable only if an object is selected] -- uncheck this option if you want to use the visual observation mode when no object is selected.
+   \item[Limit stellar magnitude] allows to hide faint stars, which are invisible for the selected combination of eyepiece, lens and telescope.
+   \item[Hide grids and lines when enabled] allows to hide grids and lines when you observe the sky through the eyepiece and re-enables their visibility when leaving visual observation mode.
+   \item[Scale image circle] option allows you to define whether or not to scale the images based on apparent FOV. When deactivated, the image circle will fill your screen. 
+         In general, we recommend you not select this, unless you have a need to, because it can really reduce the image size on the screen. 
+		 It can however be very useful in comparing two eyepieces. 
+		 If you set this option, the  on-screen image will be scaled based on the eyepieces and telescopes you define. 
+		 See section \ref{sec:sec:plugins:Oculars:ScalingTheEyepieceView} for information on what scaling means, and why you might want to use it.
+   \item[Use semi-transparent mask:] uncheck this option if you want to see visible field of view as in real telescope.
+ \end{description}
+\item[Sensor view] is group of options allows to change behaviour of the plugin for photographic observations mode.
+ \begin{description}
+   \item[Use degrees and minutes for FOV of CCD] -- for many cases the use of decimal degrees for the value of the field of view is not comfortable, and this option allows to use the more human readable format for FOV.
+   \item[Enable automatic switch of mount type] allows to store the CCD frame orientation when the type of telescope mount is changed.
+ \end{description}
+\end{description}
+
+\paragraph{Eyepieces}
+
+This is the tab used to enter your own eyepieces (see figures~\ref{fig:plugins:Oculars:Gui:Eyepieces} and \ref{fig:plugins:Oculars:Gui:Eyepieces_binos}). 
+By default, a few sample ones have been added; feel free to delete those once you've entered your own.
+
+\begin{figure}[p]\centering
+\includegraphics[trim=0 200 0 0,clip,width=.75\textwidth]{oculars_gui_eyepieces}
+\caption{Eyepieces tab of Oculars plugin configuration dialog.}
+\label{fig:plugins:Oculars:Gui:Eyepieces}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=0.75\textwidth]{oculars_gui_eyepieces_binos}
+\caption{Eyepieces tab of Oculars plugin configuration dialog (settings for binocular).}
+\label{fig:plugins:Oculars:Gui:Eyepieces_binos}
+\end{figure}
+
+
+The fields on this tab are:
+\begin{description}
+\item[Name] -- a free-text description of the eye piece. You could modify this to match your personal descriptions of eyepieces.
+\item[aFOV] -- apparent field of view in degrees.
+\item[Focal Length] -- eyepiece focal length in mm.
+\item[Field Stop] -- the field stop of the eyepiece in mm. This is used to calculate the true field of view of an eyepiece. If you do not know what it is just leave it the default zero. Not all manufacturers provide this value; TeleVue is one that does.
+\item[Binoculars] -- selecting this checkbox tells the system that this eyepiece is binoculars or finders; this means that this eyepiece can be used without defining a telescope.
+\item[Has permanent cross-hairs] -- selecting this checkbox tells the system that this eyepiece or binocular (finder) has also simple cross-hairs\footnote{The Oculars plugin supports eyepieces with reticle patterns -- both special eyepieces are available in the default list of eyepieces, and the option \emph{Has permanent cross-hairs} is not related to those eyepieces.}.
+\end{description}
+When Binoculars are described, the relevant fields change to
+\begin{description}
+\item[tFOV] -- true field of view in degrees.
+\item[Magnification factor] -- the magnification of the binocular.
+\item[Diameter] -- the diameter of the binocular objective in mm.
+\end{description}
+
+
+\paragraph{Lenses}
+
+This is the tab used to enter your own lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}). By default, a few sample ones have been added; feel free to delete them once you've entered your own.
+
+\begin{figure}[ht]\centering
+\includegraphics[trim=0 350 0 0,clip,width=.75\textwidth]{oculars_gui_lenses}
+\caption{Lenses tab of Oculars plugin configuration dialog.}
+\label{fig:plugins:Oculars:Gui:Lenses}
+\end{figure}
+
+The fields on this tab are:
+\begin{description}
+\item[Name] -- a free-text description of the lense. You could modify this to match your personal descriptions of lenses.
+\item[Multiplier] -- a factor larger than 1 expands the focal length, and lenses with this type are named Barlow lense; 
+                     a factor less   than 1 reduces the focal length, and lenses with this type are named Shapley lense or focus reducer.
+\end{description}
+
+\paragraph{Sensors}
+
+This tab allows you to define sensors for any camera you may have (see figure \ref{fig:plugins:Oculars:Gui:Sensors}). 
+When defined and selected, this will draw a red bounding rectangle in the center of the eye piece view, showing what the CCD will capture. 
+Because of the way floating point numbers are stored, sometimes you may see one of your defined values change (for example from 2.2 to 2.19999) but this should not affect what you see.
+
+\begin{figure}[ht]\centering
+\includegraphics[trim=0 115 0 0,clip,width=.75\textwidth]{oculars_gui_sensors}
+\caption{Sensors tab of Oculars plugin configuration dialog.}
+\label{fig:plugins:Oculars:Gui:Sensors}
+\end{figure}
+
+The fields on this tab are:
+\begin{description}
+\item[Name] -- A free-text description of the sensor.
+\item[Resolution x] -- the width of the sensor in pixels.
+\item[Resolution y] -- the height of the sensor in pixels.
+\item[Chip width] -- the width of the sensor in mm.
+\item[Chip height] -- the height of the sensor in mm.
+\item[Pixel width] -- the width of an individual pixel, in \um.
+\item[Pixel height] -- the height of an individual pixel, in \um.
+\item[Rotation Angle] -- the rotation angle of the sensor, in degrees.
+\item[Binning x] -- the binning factor for the width of the sensor.
+\item[Binning y] -- the binning factor for the height of the sensor.
+\item[Off-Axis guider] -- selecting this checkbox tells the system that this sensor has support an off-axis guider also.
+\item[Prism/CCD distance] -- distance between center of prism/CCD of Off-Axis Guider and optical axis of telescope in mm.
+\item[Prism/CCD width] -- the width of the prism/CCD of Off-Axis Guider in mm.
+\item[Prism/CCD height] -- the height of the prism/CCD of Off-Axis Guider in mm.
+\item[Position Angle] -- the position angle of the prism/CCD of Off-Axis Guider, in degrees.
+\end{description}
+
+\noindent The resolution is easy to find: these are simply the image dimensions of a (non-binned) frame. 
+The chip size and pixel size may be more difficult, but the manual, or searching the Internet, should turn up these values.  
+For a ``full-frame'' DSLR, this should be close to 36x24\mm, while APS-C should be around 22.5x15\mm. 
+Pixel size is simply image size divided by resolution. Some cameras may have unsquare pixels.
+
+\paragraph{Telescopes}
+
+This is the tab used to enter your own telescopes (see fig.~\ref{fig:plugins:Oculars:Gui:Telescopes}). The fields on this tab are:
+
+\begin{figure}[ht]\centering
+\includegraphics[trim=0 325 0 0,clip,width=.75\textwidth]{oculars_gui_telescopes}
+\caption{Telescopes tab of Oculars plugin configuration dialog.}
+\label{fig:plugins:Oculars:Gui:Telescopes}
+\end{figure}
+
+
+\begin{description}
+\item[Name] -- A free-text description of the telescope. 
+\item[Focal Length] -- telescope focal length in mm.
+\item[Diameter] -- telescope diameter (aperture) in mm.
+\item[Horizontal flip] -- if the view through this telescope should flip horizontally.
+\item[Vertical flip] -- if the view through this telescope should flip vertically.
+\item[Equatorial Mount] -- select it if this telescope has an equatorial mount.
+\end{description}
+
+\subsection{Scaling the eyepiece view}
+\label{sec:sec:plugins:Oculars:ScalingTheEyepieceView}
+I (TR) would like to thank Al Nagler over at TeleVue\footnote{\url{http://televue.com/}} for helping to set me straight on the topic of eyepieces. They are a lot more complicated than you might think!
+
+By default, the view drawn on your computer screen when the plugin is active fills the screen. That is, there is a circle drawn to represent the view through the eyepiece, and this circle will fill the screen. For general use, this is what most people would want. There will be times that it's not.
+
+If you are going to be observing any deep space object, it can be very important to choose the best eyepiece for that object. You will typically want an eyepiece that will magnify the object as much as possible, while showing all of the object in the eyepiece view. Getting this can be tricky, especially if you do not like changing eyepieces at the telescope. Or maybe you want to understand why one type of telescope may be better than another type for observing what you are interested in. This is where you will want to scale the image on screen based on your eyepiece.
+
+Different eyepieces generally have a different apparent field of view (aFOV). An easy way to think about this is: the larger the aFOV, the bigger the picture you see in the eyepiece. 
+Older types of eyepiece (some types still built and in wide use today have been constructed in the 19th century) generally have their aFOV in the $50\degree$ range. 
+Today, there are massive eyepieces available with $82\degree$, and recently even $100\degree$ aFOV! 
+These eyepieces are huge, as they require a lot of very special glass to achieve their incredible fields of view. 
+An eyepiece of the same focal length with a $100\degree$ aFOV will produce an image through the eyepiece that is twice as wide as one produced by a $50\degree$ eyepiece.
+
+Different telescopes, with an eyepiece of a given aFOV, will also produce a different true field of view. 
+This is the actual size of the piece of sky that you see through the eyepiece. 
+Getting these two ``just right'' can be very important. 
+It's easy to assume that you want the biggest telescope you can get, with the eyepiece that gives you the highest magnification. 
+This is never true in reality. Depending on where you live, and especially what you like to look at, a 100-120\mm\ quality refractor with a wide aFOV eyepiece may very well be better than a large SCT with the same eyepiece. This is something I learned the hard way.
+
+So how does scaling the eyepiece view help? The plugin will find the eyepiece you have with the largest aFOV. This aFOV becomes $100\%$ of the computer screen diameter. 
+Then, any other eyepiece will have its aFOV compared, and the view on screen will be scaled down accordingly. These $100\degree$ aFOV eyepieces makes the math here easy. If you have one, then when that eyepiece is used, the circle that represents the view through the eyepiece will take up $100\%$ of the screen diameter. Next, if you select an eyepiece with an $82\degree$ aFOV, its view will be scaled to $82\%$ of the screen, and a $62\degree$ aFOV eyepiece will be scaled to $62\%$ of the screen.
+
+\paragraph{Example in action}
+
+This is easier to understand in action, so let us look at an example that uses three eyepieces all with the same 17\mm\ focal length, 
+so they all produce the same level of magnification (well, one has an 17.3\mm\ focal length, but its magnification is nearly identical) and see how the view changes.
+These example all use a Celestron C8 8" SCT telescope, and the target is the Great Orion Nebula.
+
+\begin{figure}[p]\centering
+\begin{tabular}{c}
+\includegraphics[width=.825\textwidth]{oculars_tv_ethos}\\
+\includegraphics[width=.825\textwidth]{oculars_tv_nagler}\\
+\includegraphics[width=.825\textwidth]{oculars_tv_delos}
+\end{tabular}
+\caption{Comparing apparent fields of view of (top) a 17\mm\ Tele Vue Ethos eyepiece with an aFOV of $100\degree$. Magnification is $119.5\times$.
+(center) a 17\mm\ Tele Vue Nagler eyepiece with an aFOV of $82\degree$. Magnification is $119.5\times$.
+(bottom) a 17.3\mm\ Tele Vue Delos eyepiece with an aFOV of $62\degree$. Magnification is $117.5\times$.}
+\label{fig:plugins:Oculars:TeleVue}
+\end{figure}
+
+
+We can see from the images in fig.~\ref{fig:plugins:Oculars:TeleVue}
+that the target is all three images is the same size. The $100\degree$ image fills the screen, 
+the $82\degree$ is smaller, and the $62\degree$ is smallest yet, filling $62\%$ of the computer screen. 
+Note that in each image, the field of view that you see changes. The larger the aFOV, the more you can see of the sky. 
+So in this example, if you had an 8" telescope, you would want to use the 17\mm\ $100\degree$ Ethos eyepiece to see as much of the nebula as possible.
+
 
 \newpage
 \section{TelescopeControl Plugin}
@@ -76,7 +414,7 @@ protection.
 
 
 \subsection{Abilities and limitations}
-\label{sec:sec:plugins:TelescopeControl:Linitaitons}
+\label{sec:sec:plugins:TelescopeControl:Limitations}
 
 This plug-in allows Stellarium to send only 'slew' ('go to') commands
 to the device and to receive its current position. It cannot issue any
@@ -85,7 +423,8 @@ collisions and similar situations. (To abort a slew, you can start
 another one to a safe position.)
 
 Currently this plug-in does not allow satellite tracking, and is not
-very suitable for lunar or planetary observations.
+very suitable for lunar or planetary observations. Many mounts can be set 
+to a 'lunar' tracking speed, you may prefer this. 
 
 \subsection{Using this plug-in}
 \label{sec:plugins:TelescopeControl:using}

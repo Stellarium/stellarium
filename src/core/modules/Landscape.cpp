@@ -742,10 +742,12 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	// in case we also have a horizon polygon defined, this is trivial and fast.
 	if (horizonPolygon)
 	{
-		if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+		if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
 	}
 	// Else, sample the images...
-	const float alt_rad = std::asin(azalt[2]);  // sampled altitude, radians
+	float az, alt_rad;
+	StelUtils::rectToSphe(&az, &alt_rad, azalt);
+
 	if (alt_rad < decorAngleShift*M_PI/180.0f) return 1.0f; // below decor, i.e. certainly opaque ground.
 	if (alt_rad > (decorAltAngle+decorAngleShift)*M_PI/180.0f) return 0.0f; // above decor, i.e. certainly free sky.
 	if (!calibrated) // the result of this function has no real use here: just complain and return result for math. horizon.
@@ -758,10 +760,9 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		}
 		return (azalt[2] > 0 ? 0.0f : 1.0f);
 	}
-	float az=atan2(azalt[0], azalt[1]) / M_PI + 0.5f;  // -0.5..+1.5
-	if (az<0) az+=2.0f;                                //  0..2 = N.E.S.W.N
+	az = (M_PI-az) / M_PI;                             //  0..2 = N.E.S.W.N
 	// we go to 0..1 domain, it's easier to think.
-	const float xShift=angleRotateZ /(2.0f*M_PI); // shift value in -1..1
+	const float xShift=angleRotateZ /(2.0f*M_PI); // shift value in -1..1 domain
 	Q_ASSERT(xShift >= -1.0f);
 	Q_ASSERT(xShift <=  1.0f);
 	float az_phot=az*0.5f - 0.25f - xShift;      // The 0.25 is caused by regular pano left edge being East. The xShift compensates any configured angleRotateZ
@@ -795,6 +796,8 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		if (alt_pm1<img_bot_pm1) { Q_ASSERT(0); return 1.0f; } // should have been caught above with alt_rad tests
 
 		y_img_1=(alt_pm1-img_bot_pm1)/(img_top_pm1-img_bot_pm1); // the sampled altitude in 0..1 visible image height from bottom
+		Q_ASSERT(y_img_1<=1.f);
+		Q_ASSERT(y_img_1>=0.f);
 	}
 	// x0/y0 is lower left, x1/y1 upper right corner.
 	float y_baseImg_1 = sides[currentSide].texCoords[1]+ y_img_1*(sides[currentSide].texCoords[3]-sides[currentSide].texCoords[1]);
@@ -878,7 +881,7 @@ float LandscapePolygonal::getOpacity(Vec3d azalt) const
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(angleRotateZOffset));
 
-	if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+	if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -1003,19 +1006,20 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 	// in case we also have a horizon polygon defined, this is trivial and fast.
 	if (horizonPolygon)
 	{
-		if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+		if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
 	}
 	// Else, sample the image...
+	float az, alt_rad;
+	StelUtils::rectToSphe(&az, &alt_rad, azalt);
 
 	// QImage has pixel 0/0 in top left corner.
 	// The texture is taken from the center circle in the square texture.
 	// It is possible that sample position is outside. in this case, assume full opacity and exit early.
-	const float alt_rad = std::asin(azalt[2]);  // sampled altitude, radians
-	if (M_PI/2-alt_rad > texFov/2.0 ) return 1.0; // outside fov, in the clamped texture zone: always opaque.
+	if (M_PI/2-alt_rad > texFov/2.0f ) return 1.0f; // outside fov, in the clamped texture zone: always opaque.
 
 	float radius=(M_PI/2-alt_rad)*2.0f/texFov; // radius in units of mapImage.height/2
 
-	float az=atan2(azalt[0], azalt[1]) + M_PI/2 - angleRotateZ; // -pi/2..+3pi/2, real azimuth. NESW
+	az = (M_PI-az) - angleRotateZ; // 0..+2pi -angleRotateZ, real azimuth. NESW
 	//  The texture map has south on top, east at right (if anglerotateZ=0)
 	int x= mapImage->height()/2*(1 + radius*std::sin(az));
 	int y= mapImage->height()/2*(1 + radius*std::cos(az));
@@ -1199,24 +1203,28 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	// in case we also have a horizon polygon defined, this is trivial and fast.
 	if (horizonPolygon)
 	{
-		if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+		if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
 	}
 	// Else, sample the image...
+	float az, alt_rad;
+	StelUtils::rectToSphe(&az, &alt_rad, azalt);
 
 	// QImage has pixel 0/0 in top left corner. We must first find image Y for optionally cropped images.
 	// It is possible that sample position is outside cropped texture. in this case, assume full transparency and exit early.
-	const float alt_pm1 = 2.0f * std::asin(azalt[2])  / M_PI;  // sampled altitude, -1...+1 linear in altitude angle
+
+	const float alt_pm1 = 2.0f * alt_rad / M_PI;               // sampled altitude, -1...+1 linear in altitude angle
 	const float img_top_pm1 = 1.0f-2.0f*(mapTexTop    / M_PI); // the top    line in -1..+1
 	if (alt_pm1>img_top_pm1) return 0.0f;
 	const float img_bot_pm1 = 1.0f-2.0f*(mapTexBottom / M_PI); // the bottom line in -1..+1
 	if (alt_pm1<img_bot_pm1) return 1.0f; // rare case of a hole in the ground. Even though there is a visible hole, play opaque.
 
 	float y_img_1=(alt_pm1-img_bot_pm1)/(img_top_pm1-img_bot_pm1); // the sampled altitude in 0..1 image height from bottom
+	Q_ASSERT(y_img_1<=1.f);
+	Q_ASSERT(y_img_1>=0.f);
 
 	int y=(1.0-y_img_1)*mapImage->height();           // pixel Y from top.
 
-	float az=atan2(azalt[0], azalt[1]) / M_PI + 0.5f;  // -0.5..+1.5
-	if (az<0) az+=2.0f;                                //  0..2 = N.E.S.W.N
+	az = (M_PI-az) / M_PI;                            //  0..2 = N.E.S.W.N
 
 	const float xShift=(angleRotateZ) /M_PI; // shift value in -2..2
 	float az_phot=az - 0.5f - xShift;      // The 0.5 is caused by regular pano left edge being East. The xShift compensates any configured angleRotateZ

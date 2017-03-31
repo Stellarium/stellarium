@@ -165,16 +165,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	{
 		if (s->show) 
 		{
-			if (s->layer->getFrameType() == StelCore::FrameAltAz) 
-			{
-				sPainter.setProjector(core->getProjection(StelCore::FrameAltAz));
-			} 
-			else
-			{
-				// TODO : Use the respective reference frames, once every SkyLayer
-				// object sets their frame type. Defaulting to Equatorial frame now.
-				sPainter.setProjector(core->getProjection(StelCore::FrameJ2000));
-			}
+			sPainter.setProjector(core->getProjection(s->layer->getFrameType()));
 			s->layer->draw(core, sPainter, 1.);
 		}
 	}
@@ -246,11 +237,11 @@ StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
 }
 
 bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
-								   double ra0, double dec0,
-								   double ra1, double dec1,
-								   double ra2, double dec2,
-								   double ra3, double dec3,
-								   double minRes, double maxBright, bool visible)
+								   double long0, double lat0,
+								   double long1, double lat1,
+								   double long2, double lat2,
+								   double long3, double lat3,
+								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType)
 {
 	if (allSkyLayers.contains(id))
 	{
@@ -265,7 +256,6 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 		return false;
 	}
 	QVariantMap vm;
-	QVariantList l;
 	QVariantList cl; // coordinates list for adding worldCoords and textureCoords
 	QVariantList c;  // a list for a pair of coordinates
 	QVariantList ol; // outer list - we want a structure 3 levels deep...
@@ -287,15 +277,17 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	// world coordinates
 	cl.clear();
 	ol.clear();
-	c.clear(); c.append(ra0); c.append(dec0); cl.append(QVariant(c));
-	c.clear(); c.append(ra1); c.append(dec1); cl.append(QVariant(c));
-	c.clear(); c.append(ra2); c.append(dec2); cl.append(QVariant(c));
-	c.clear(); c.append(ra3); c.append(dec3); cl.append(QVariant(c)); 
+	c.clear(); c.append(long0); c.append(lat0); cl.append(QVariant(c));
+	c.clear(); c.append(long1); c.append(lat1); cl.append(QVariant(c));
+	c.clear(); c.append(long2); c.append(lat2); cl.append(QVariant(c));
+	c.clear(); c.append(long3); c.append(lat3); cl.append(QVariant(c));
 	ol.append(QVariant(cl));
 	vm["worldCoords"] = ol;
 
+	vm["alphaBlend"] = true; // new 2017-3: Make black correctly see-through.
+
 	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
-	tile->setFrameType(StelCore::FrameJ2000);
+	tile->setFrameType(frameType);
 	
 	try
 	{
@@ -312,6 +304,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	}
 }
 
+// DEPRECATED, REMOVE FOR 0.16.
 bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filename,
 								   double alt0, double azi0,
 								   double alt1, double azi1,
@@ -319,6 +312,11 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 								   double alt3, double azi3,
 								   double minRes, double maxBright, bool visible)
 {
+	qDebug() << "StelSkyLayerMgr::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImage() with AzAlt frame argument.";
+	return loadSkyImage( id, filename, azi0, alt0, azi1, alt1, azi2, alt2, azi3, alt3, minRes, maxBright, visible, StelCore::FrameAltAz);
+
+	// NOTE: This old version may have inverted series of coordinates. Else, the only difference against the original loadSkyImage (setting J2000 coords) is the frame.
+/*
 	if (allSkyLayers.contains(id))
 	{
 		qWarning() << "Image ID" << id << "already exists, removing old image before loading";
@@ -333,7 +331,7 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 	}
 
 	QVariantMap vm;
-	QVariantList l;
+	//QVariantList l;
 	QVariantList cl; // coordinates list for adding worldCoords and textureCoords
 	QVariantList c;  // a list for a pair of coordinates
 	QVariantList ol; // outer list - we want a structure 3 levels deep...
@@ -378,6 +376,7 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 		qWarning() << e.what();
 		return false;
 	}
+	*/
 }
 
 void StelSkyLayerMgr::showLayer(const QString& id, bool b)

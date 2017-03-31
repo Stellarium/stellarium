@@ -36,9 +36,11 @@ class MilkyWay : public StelModule
 	Q_PROPERTY(double intensity
 		   READ getIntensity
 		   WRITE setIntensity
-		   NOTIFY intensityChanged
-		   )
-
+		   NOTIFY intensityChanged)
+	Q_PROPERTY(Vec3f color
+		   READ getColor
+		   WRITE setColor
+		   NOTIFY colorChanged)
 public:
 	MilkyWay();
 	virtual ~MilkyWay();
@@ -66,13 +68,18 @@ public:
 public slots:
 	//! Get Milky Way intensity.
 	double getIntensity() const {return intensity;}
-	//! Set Milky Way intensity.
+	//! Set Milky Way intensity. Default value: 1.
 	void setIntensity(double aintensity) {if(aintensity!=intensity){ intensity = aintensity; emit intensityChanged(intensity); }}
 	
-	//! Get the color used for rendering the milky way
+	//! Get the color used for rendering the Milky Way. It is modulated by intensity, light pollution and atmospheric extinction.
 	Vec3f getColor() const {return color;}
-	//! Sets the color to use for rendering the milky way
-	void setColor(const Vec3f& c) {color=c;}
+	//! Sets the color to use for rendering the Milky Way
+	//! @param c The color to use for rendering the Milky Way. Default (1.0, 1.0, 1.0)
+	//! @code
+	//! // example of usage in scripts
+	//! MilkyWay.setColor(Vec3f(0.7,1.0,0.8));
+	//! @endcode
+	void setColor(const Vec3f& c) {if (c!=color) { color=c; emit colorChanged(c);}}
 	
 	//! Sets whether to show the Milky Way
 	void setFlagShow(bool b);
@@ -82,7 +89,8 @@ public slots:
 signals:
 	void milkyWayDisplayedChanged(const bool displayed);
 	void intensityChanged(double intensity);
-	
+	void colorChanged(Vec3f color);
+
 private:
 	StelTextureSP tex;
 	Vec3f color; // global color

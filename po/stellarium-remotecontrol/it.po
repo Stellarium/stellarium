@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-01-16 20:12+0700\n"
-"PO-Revision-Date: 2017-01-23 10:37+0000\n"
-"Last-Translator: SebastianoPistore <sebastiano.pistore.info@aol.com>\n"
+"POT-Creation-Date: 2017-03-21 23:22+0700\n"
+"PO-Revision-Date: 2017-03-21 10:20+0000\n"
+"Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-24 05:31+0000\n"
-"X-Generator: Launchpad (build 18312)\n"
+"X-Launchpad-Export-Date: 2017-03-22 06:08+0000\n"
+"X-Generator: Launchpad (build 18334)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -74,7 +74,7 @@ msgstr "Errore (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:53
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Errore durante la ricerca Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:71 index.html:146
 #: tablet7in.html:230
@@ -124,7 +124,7 @@ msgstr "L'input non corrispondeva ad alcuna voce"
 msgid "No current selection"
 msgstr "Nessuna selezione attuale"
 
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:478
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
 #: tablet7in.html:629
 msgid "-none-"
 msgstr "-nessuno-"
@@ -163,7 +163,7 @@ msgstr "in pausa"
 
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
-msgstr ""
+msgstr "Salti temporali"
 
 #: index.html:85 tablet7in.html:182
 msgid "Solar hour"
@@ -283,7 +283,7 @@ msgstr "Giù/Destra"
 
 #: index.html:122 tablet7in.html:133
 msgid "FOV"
-msgstr ""
+msgstr "CDV"
 
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
@@ -310,109 +310,103 @@ msgstr "Plutone"
 msgid "Current selection"
 msgstr "Selezione attuale"
 
-#: index.html:205 tablet7in.html:325
-msgid "Planets and satellites"
-msgstr "Pianeti e satelliti"
-
-#: index.html:206 tablet7in.html:326
-msgid "Show Solar System objects"
-msgstr "Mostra gli oggetti del Sistema solare"
-
-#: index.html:237 tablet7in.html:362
+#: index.html:242 tablet7in.html:361
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: index.html:281 tablet7in.html:412
+#: index.html:288 tablet7in.html:413
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Cerchi istantanei dell'asse terrestre descritti col movimento lungo "
+"l'eclittica polare. Visualizzato solo dalla Terra."
 
-#: index.html:290 tablet7in.html:421
+#: index.html:297 tablet7in.html:422
 msgid "Solstices"
 msgstr "Solstizi"
 
-#: index.html:291 tablet7in.html:422
+#: index.html:298 tablet7in.html:423
 msgid "Crossquarters"
-msgstr ""
+msgstr "Crossquarters"
 
-#: index.html:292 tablet7in.html:423
+#: index.html:299 tablet7in.html:424
 msgid "Major Standstill"
-msgstr ""
+msgstr "Maggiore fermata"
 
-#: index.html:293 tablet7in.html:424
+#: index.html:300 tablet7in.html:425
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Minore fermata"
 
-#: index.html:303 tablet7in.html:434
+#: index.html:310 tablet7in.html:435
 msgid "Current Planet:"
 msgstr "Pianeta attuale:"
 
-#: index.html:397 tablet7in.html:531
+#: index.html:413 tablet7in.html:530
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Nebulose luminose"
 
-#: index.html:398 tablet7in.html:532
+#: index.html:414 tablet7in.html:531
 msgid "Dark Nebulae"
 msgstr "Nebulose oscure"
 
-#: index.html:399 tablet7in.html:533
+#: index.html:415 tablet7in.html:532
 msgid "Planetary Nebulae"
 msgstr "Nebulose planetarie"
 
-#: index.html:405 tablet7in.html:542
+#: index.html:424 tablet7in.html:541
 msgid "Labels and markers"
 msgstr "Etichette e indicatori"
 
-#: index.html:433 tablet7in.html:570
+#: index.html:453 tablet7in.html:570
 msgid "Show illumination"
 msgstr "Mostra l'illuminazione"
 
-#: index.html:438 tablet7in.html:576
+#: index.html:458 tablet7in.html:576
 msgid "Current landscape"
 msgstr "Panorama attuale"
 
-#: index.html:465 tablet7in.html:604
+#: index.html:485 tablet7in.html:604
 msgid "Current sky culture"
-msgstr ""
+msgstr "Sky culture corrente"
 
-#: index.html:478 tablet7in.html:629
+#: index.html:498 tablet7in.html:629
 msgid "Active script:"
 msgstr "Script attivo:"
 
-#: index.html:479 tablet7in.html:630
+#: index.html:499 tablet7in.html:630
 msgid "Run selected script"
 msgstr "Eseguire script selezionato"
 
-#: index.html:479 tablet7in.html:630
+#: index.html:499 tablet7in.html:630
 msgid "Stop current script"
 msgstr "Fermare script attuale"
 
-#: index.html:484 tablet7in.html:41 tablet7in.html:614
+#: index.html:504 tablet7in.html:41 tablet7in.html:614
 msgid "Actions"
 msgstr "Azioni"
 
-#: index.html:488 tablet7in.html:618
+#: index.html:508 tablet7in.html:618
 msgid "Run/toggle action"
 msgstr "Esegui/commuta azione"
 
-#: index.html:499 tablet7in.html:653
+#: index.html:519 tablet7in.html:653
 msgid "Planet map"
-msgstr ""
+msgstr "Mappa planetaria"
 
-#: index.html:500 tablet7in.html:654
+#: index.html:520 tablet7in.html:654
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Puntatore della mappa planetaria"
 
-#: index.html:504 tablet7in.html:658
+#: index.html:524 tablet7in.html:658
 msgid "Type to search location"
-msgstr ""
+msgstr "Digita per cercare la posizione"
 
-#: index.html:549 tablet7in.html:704
+#: index.html:569 tablet7in.html:704
 msgid "No response from server"
 msgstr "Nessuna risposta ricevuta dal server"
 
-#: index.html:550
+#: index.html:570
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
@@ -421,7 +415,7 @@ msgstr ""
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Salto temporale"
 
 #: tablet7in.html:37
 msgid "Grids"
@@ -429,11 +423,11 @@ msgstr "Griglie"
 
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Vista dall'orizzonte all'azimuth"
 
 #: tablet7in.html:118
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Compensazione vista verticale"
 
 #: tablet7in.html:128
 msgid "Reset"
@@ -533,7 +527,7 @@ msgstr "Pesci"
 
 #: tablet7in.html:600
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Selezione della costellazione isolata"
 
 #: tablet7in.html:638
 msgid "Favorites"

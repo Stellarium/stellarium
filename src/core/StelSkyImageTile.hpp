@@ -133,6 +133,7 @@ protected:
 	//! Minimum resolution of the data of the texture in degree/pixel
 	float minResolution;
 
+	//! Allow some images to be shown only after this date, e.g. Supernova remnants.
 	double birthJD;
 
 private:
