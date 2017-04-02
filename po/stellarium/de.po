@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:21+0700\n"
-"PO-Revision-Date: 2017-03-20 11:15+0000\n"
+"POT-Creation-Date: 2017-03-27 04:33+0700\n"
+"PO-Revision-Date: 2017-03-31 22:52+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 05:28+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-04-02 07:31+0000\n"
+"X-Generator: Launchpad (build 18335)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -51,7 +51,7 @@ msgstr "Sternbild"
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
+#: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
@@ -1172,7 +1172,7 @@ msgstr "Winkeldistanz"
 msgid "Milky Way"
 msgstr "Milchstraße"
 
-#: src/core/modules/ZodiacalLight.cpp:81
+#: src/core/modules/ZodiacalLight.cpp:82
 msgid "Zodiacal Light"
 msgstr "Zodiakallicht"
 
@@ -2334,7 +2334,7 @@ msgid "Custom equation of %1T"
 msgstr "Benutzerdefinierte Gleichung für %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:411
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:419
 msgid "System default"
 msgstr "Systemstandard"
 
@@ -2704,11 +2704,11 @@ msgstr "Leertaste"
 msgid "Time zone"
 msgstr "Zeitzone"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:417
 msgid "Local Mean Solar Time"
 msgstr "Mittlere Ortszeit"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:410
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:418
 msgid "Local True Solar Time"
 msgstr "Wahre Ortszeit"
 
@@ -2850,6 +2850,22 @@ msgstr "Sehr hohe Rate (Leoniden 1966)"
 #: src/gui/ViewDialog.cpp:1404
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Höchste jemals beobachtete Rate (Leoniden 1833)"
+
+#: src/gui/LocationDialog.cpp:707
+msgid "GPS..."
+msgstr "GPS..."
+
+#: src/gui/LocationDialog.cpp:723
+msgid "GPS:SUCCESS"
+msgstr "GPS: ERFOLG!"
+
+#: src/gui/LocationDialog.cpp:734
+msgid "GPS:FAILED"
+msgstr "GPS:FEHLER"
+
+#: src/gui/LocationDialog.cpp:745 src/ui_locationDialogGui.h:472
+msgid "Get location from GPS"
+msgstr "GPS-Standortabfrage"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:113
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -5436,60 +5452,65 @@ msgstr "Tastenkombinationen bearbeiten …"
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#: src/ui_locationDialogGui.h:430
+#: src/ui_locationDialogGui.h:436
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Location"
 msgstr "Standort"
 
-#: src/ui_locationDialogGui.h:434 src/ui_locationDialogGui.h:437
+#: src/ui_locationDialogGui.h:440 src/ui_locationDialogGui.h:443
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 "Die Standardliste der Orte enthält nur englische Namen (ohne Umlaute etc.)!"
 
-#: src/ui_locationDialogGui.h:441
+#: src/ui_locationDialogGui.h:447
 msgid "Reset location list to show all known locations"
 msgstr "Gesamtheit der bekannten Orte wiederherstellen"
 
-#: src/ui_locationDialogGui.h:443
+#: src/ui_locationDialogGui.h:449
 msgid "Reset Location List"
 msgstr "Ortsliste zurücksetzen"
 
-#: src/ui_locationDialogGui.h:444
+#: src/ui_locationDialogGui.h:450
 msgid "Current location information"
 msgstr "Standortinformationen"
 
-#: src/ui_locationDialogGui.h:445
+#: src/ui_locationDialogGui.h:451
 msgid "Add to list"
 msgstr "Zur Liste hinzufügen"
 
-#: src/ui_locationDialogGui.h:446
+#: src/ui_locationDialogGui.h:452
 msgid "Delete from list"
 msgstr "Aus Liste entfernen"
 
-#: src/ui_locationDialogGui.h:447
+#: src/ui_locationDialogGui.h:453
 msgid "Return to default location"
 msgstr "Zum Standardort zurückkehren"
 
-#: src/ui_locationDialogGui.h:448
-msgid "Use current location as default"
-msgstr "Aktuellen Ort als Standard setzen"
-
-#: src/ui_locationDialogGui.h:449
+#: src/ui_locationDialogGui.h:454
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Längengrad:"
 
-#: src/ui_locationDialogGui.h:450
+#: src/ui_locationDialogGui.h:455
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Breitengrad:"
 
-#: src/ui_locationDialogGui.h:451
+#: src/ui_locationDialogGui.h:456
+msgid "Use current location as default"
+msgstr "Aktuellen Ort als Standard setzen"
+
+#: src/ui_locationDialogGui.h:457
 msgid "Get location from Network"
 msgstr "Standort automatisch aus Netzwerk ermitteln"
 
-#: src/ui_locationDialogGui.h:453 src/ui_locationDialogGui.h:460
+#: src/ui_locationDialogGui.h:458
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+msgid "Altitude:"
+msgstr "Höhe :"
+
+#: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -5497,44 +5518,43 @@ msgstr ""
 "Sie können Gradangaben in dezimaler oder in Bogendarstellung (+1° 12' 8\") "
 "angeben."
 
-#: src/ui_locationDialogGui.h:456
+#: src/ui_locationDialogGui.h:466
 msgid "Enter the altitude in meter"
 msgstr "Geben Sie die Höhe über NN in Metern an"
 
-#: src/ui_locationDialogGui.h:458
+#: src/ui_locationDialogGui.h:468
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:462
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
-msgid "Altitude:"
-msgstr "Höhe :"
+#: src/ui_locationDialogGui.h:470
+msgid "Retrieve current coordinates from GPS. Does not set timezone!"
+msgstr "Koordinaten aus einem GPS-Gerät beziehen. Zeitzone bleibt gleich!"
 
-#: src/ui_locationDialogGui.h:463
+#: src/ui_locationDialogGui.h:473
 msgid "New Location"
 msgstr "Neuer Standort"
 
-#: src/ui_locationDialogGui.h:464
+#: src/ui_locationDialogGui.h:474
 msgid "Planet:"
 msgstr "Planet:"
 
-#: src/ui_locationDialogGui.h:465
+#: src/ui_locationDialogGui.h:475
 msgid "Use custom time zone"
 msgstr "Zeitzone wählen"
 
-#: src/ui_locationDialogGui.h:466
+#: src/ui_locationDialogGui.h:476
 msgid "Time zone:"
 msgstr "Zeitzone:"
 
-#: src/ui_locationDialogGui.h:467
+#: src/ui_locationDialogGui.h:477
 msgid "Name/City:"
 msgstr "Name/Stadt:"
 
-#: src/ui_locationDialogGui.h:468
+#: src/ui_locationDialogGui.h:478
 msgid "Country:"
 msgstr "Land:"
 
-#: src/ui_locationDialogGui.h:472
+#: src/ui_locationDialogGui.h:482
 msgid "Enable daylight saving time"
 msgstr "Sommerzeit aktivieren"
 
@@ -7214,7 +7234,7 @@ msgstr "Cursor-Position"
 msgid "Include dir:"
 msgstr "Verzeichnis einschließen:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "…"
 
@@ -7285,12 +7305,12 @@ msgid "Time step:"
 msgstr "Zeitschritt:"
 
 #: src/ui_astroCalcDialog.h:547 src/ui_astroCalcDialog.h:557
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "Bis:"
 
 #: src/ui_astroCalcDialog.h:548 src/ui_astroCalcDialog.h:554
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "Von:"
 
@@ -10690,67 +10710,67 @@ msgstr "Deklination (J2000)"
 msgid "Select one"
 msgstr "Wählen Sie"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "Bewege Teleskop zu"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "Keine aktiven Geräte gefunden."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "Bewege Teleskop zu Koordinaten"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Rektaszension (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "&Deklination (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Aktuelles Objekt"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Bildschirm&mitte"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "Format: Stunden-Minuten-Sekunden"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&SMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "Format: Grad-Minuten-Sekunden"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "&GMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "Grad (Dezimal)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "D&ezimal"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "&Schwenken"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "&Teleskope konfigurieren..."
 
@@ -14473,7 +14493,7 @@ msgid "Peak"
 msgstr "Höhepunkt"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "Meteorschauer-Konfiguration"
 
@@ -14553,21 +14573,21 @@ msgstr "Status:"
 msgid "Update"
 msgstr "Update"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "Meteorschauer: Suche"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "Suche"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd/MM/yyyy"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "Suchergebnisse"
 
