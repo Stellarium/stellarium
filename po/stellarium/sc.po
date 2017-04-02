@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-03-21 23:21+0700\n"
-"PO-Revision-Date: 2017-03-20 11:33+0000\n"
+"POT-Creation-Date: 2017-03-27 04:33+0700\n"
+"PO-Revision-Date: 2017-03-28 07:53+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 05:41+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-04-02 07:29+0000\n"
+"X-Generator: Launchpad (build 18335)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -49,7 +49,7 @@ msgstr "costellatzione"
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
+#: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
@@ -1170,7 +1170,7 @@ msgstr "Separatzione"
 msgid "Milky Way"
 msgstr "S'andaina de paza"
 
-#: src/core/modules/ZodiacalLight.cpp:81
+#: src/core/modules/ZodiacalLight.cpp:82
 msgid "Zodiacal Light"
 msgstr "Lughe Zodiacale"
 
@@ -2333,7 +2333,7 @@ msgid "Custom equation of %1T"
 msgstr "Ecuatzione Personalizada de %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:411
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:419
 msgid "System default"
 msgstr "Sistema predefiniu"
 
@@ -2706,11 +2706,11 @@ msgstr "Ispatziu"
 msgid "Time zone"
 msgstr "Fusu orariu"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:417
 msgid "Local Mean Solar Time"
 msgstr "Tempus solare locale printzipale"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:410
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:418
 msgid "Local True Solar Time"
 msgstr "Tempus solare locale beru"
 
@@ -2852,6 +2852,22 @@ msgstr "Cantidade manna meda (Leonides 1966)"
 #: src/gui/ViewDialog.cpp:1404
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Sa prus manna cantidade (Leonides 1833)"
+
+#: src/gui/LocationDialog.cpp:707
+msgid "GPS..."
+msgstr "GPS..."
+
+#: src/gui/LocationDialog.cpp:723
+msgid "GPS:SUCCESS"
+msgstr "GPS:A POSTU"
+
+#: src/gui/LocationDialog.cpp:734
+msgid "GPS:FAILED"
+msgstr "GPS:NON RESURTAU"
+
+#: src/gui/LocationDialog.cpp:745 src/ui_locationDialogGui.h:472
+msgid "Get location from GPS"
+msgstr "Pigata sa positzione dae su GPS"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:113
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -5438,61 +5454,66 @@ msgstr "Edita sos tastos po segare in curtzu..."
 msgid "Refresh"
 msgstr "Agiorna"
 
-#: src/ui_locationDialogGui.h:430
+#: src/ui_locationDialogGui.h:436
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Location"
 msgstr "Logu"
 
-#: src/ui_locationDialogGui.h:434 src/ui_locationDialogGui.h:437
+#: src/ui_locationDialogGui.h:440 src/ui_locationDialogGui.h:443
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 "La lista istandard de sos logos tenene solu sos numenes ingresos (chentza "
 "sinnos diacriticos!)"
 
-#: src/ui_locationDialogGui.h:441
+#: src/ui_locationDialogGui.h:447
 msgid "Reset location list to show all known locations"
 msgstr "Resetta la lista de sos logos et fae biere sos logos connottos ebbia"
 
-#: src/ui_locationDialogGui.h:443
+#: src/ui_locationDialogGui.h:449
 msgid "Reset Location List"
 msgstr "Resetta la lista de sos logos"
 
-#: src/ui_locationDialogGui.h:444
+#: src/ui_locationDialogGui.h:450
 msgid "Current location information"
 msgstr "Informatzione de sa localidade currente"
 
-#: src/ui_locationDialogGui.h:445
+#: src/ui_locationDialogGui.h:451
 msgid "Add to list"
 msgstr "Azunghe a sa lista"
 
-#: src/ui_locationDialogGui.h:446
+#: src/ui_locationDialogGui.h:452
 msgid "Delete from list"
 msgstr "Cantzella de sa lista"
 
-#: src/ui_locationDialogGui.h:447
+#: src/ui_locationDialogGui.h:453
 msgid "Return to default location"
 msgstr "Torra a sa localidade predefinia"
 
-#: src/ui_locationDialogGui.h:448
-msgid "Use current location as default"
-msgstr "Imprea sa localidade currente comente cussa predefinia"
-
-#: src/ui_locationDialogGui.h:449
+#: src/ui_locationDialogGui.h:454
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Longitudini:"
 
-#: src/ui_locationDialogGui.h:450
+#: src/ui_locationDialogGui.h:455
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Latitudini:"
 
-#: src/ui_locationDialogGui.h:451
+#: src/ui_locationDialogGui.h:456
+msgid "Use current location as default"
+msgstr "Imprea sa localidade currente comente cussa predefinia"
+
+#: src/ui_locationDialogGui.h:457
 msgid "Get location from Network"
 msgstr "Piga sa localidade dae sa Rete"
 
-#: src/ui_locationDialogGui.h:453 src/ui_locationDialogGui.h:460
+#: src/ui_locationDialogGui.h:458
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+msgid "Altitude:"
+msgstr "Artaria:"
+
+#: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -5500,44 +5521,44 @@ msgstr ""
 "Podes ponnere sos valores in angulosa detzimales, o impreande su formatu "
 "dms, po esempiu: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:456
+#: src/ui_locationDialogGui.h:466
 msgid "Enter the altitude in meter"
 msgstr "Iscrie s'artaria in metros"
 
-#: src/ui_locationDialogGui.h:458
+#: src/ui_locationDialogGui.h:468
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:462
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
-msgid "Altitude:"
-msgstr "Artaria:"
+#: src/ui_locationDialogGui.h:470
+msgid "Retrieve current coordinates from GPS. Does not set timezone!"
+msgstr ""
+"Iscarriga sa coordinadas currentes dae su GPS. Non impostat su fusu orariu!"
 
-#: src/ui_locationDialogGui.h:463
+#: src/ui_locationDialogGui.h:473
 msgid "New Location"
 msgstr "Localidade Noa"
 
-#: src/ui_locationDialogGui.h:464
+#: src/ui_locationDialogGui.h:474
 msgid "Planet:"
 msgstr "Pianeta:"
 
-#: src/ui_locationDialogGui.h:465
+#: src/ui_locationDialogGui.h:475
 msgid "Use custom time zone"
 msgstr "Imprea su fusu orariu personalizau"
 
-#: src/ui_locationDialogGui.h:466
+#: src/ui_locationDialogGui.h:476
 msgid "Time zone:"
 msgstr "Fusu Orariu:"
 
-#: src/ui_locationDialogGui.h:467
+#: src/ui_locationDialogGui.h:477
 msgid "Name/City:"
 msgstr "Numene/Tzitade:"
 
-#: src/ui_locationDialogGui.h:468
+#: src/ui_locationDialogGui.h:478
 msgid "Country:"
 msgstr "Natzione:"
 
-#: src/ui_locationDialogGui.h:472
+#: src/ui_locationDialogGui.h:482
 msgid "Enable daylight saving time"
 msgstr "Attiva s'ora legale"
 
@@ -7233,7 +7254,7 @@ msgstr "Positzione de su cursore"
 msgid "Include dir:"
 msgstr "Inlude sa cartedda"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "..."
 
@@ -7307,12 +7328,12 @@ msgid "Time step:"
 msgstr "Passu de su tempus"
 
 #: src/ui_astroCalcDialog.h:547 src/ui_astroCalcDialog.h:557
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "Po:"
 
 #: src/ui_astroCalcDialog.h:548 src/ui_astroCalcDialog.h:554
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "Dae:"
 
@@ -10754,67 +10775,67 @@ msgstr "Declinatzione (J2000)"
 msgid "Select one"
 msgstr "Seberande unu"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "Zira su telescopiu a"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "Non c'hat disoisitivos attivos"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "Zira su telescoiu a sas coordinadas"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Ascensione Retta (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "De&clinatzione (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "Ogettu &Currente"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Centeru de s'ischermu"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "Formatu Oras-minutos-segundos"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "Formatu Grados-minutos-segundos"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "Grados decimales"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "D&ecimales"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "&Zira"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "Configura &telescopios..."
 
@@ -14571,7 +14592,7 @@ msgid "Peak"
 msgstr "Punta"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "Configurazione de sas temporadas meteoricas"
 
@@ -14651,21 +14672,21 @@ msgstr "Istadu:"
 msgid "Update"
 msgstr "Aggiorna"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "Temporadas Meteoricas: Cricca"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "Cricca"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd/MM/yyyy"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "Resurtaos"
 
@@ -15799,9 +15820,3 @@ msgstr "Declinatzione Personalizada 2"
 #~ msgstr ""
 #~ "Sas cumbinatziones de sos tastos de su plug-in poden essere cambiadas in sa "
 #~ "ischeda generale."
-
-#~ msgid "Calculations requires the time, please be in patience"
-#~ msgstr "Po sos calculos bi cheret tempus, tene passentzia"
-
-#~ msgid "Flares prediction depth (days):"
-#~ msgstr "Longhesa de sas preditziones de sos flares (dies):"
