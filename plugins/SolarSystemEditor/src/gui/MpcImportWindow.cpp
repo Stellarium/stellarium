@@ -48,10 +48,10 @@
 #include <QDir>
 
 MpcImportWindow::MpcImportWindow() :
-    downloadReply(0),
-    queryReply(0),
-    downloadProgressBar(0),
-    queryProgressBar(0)
+	downloadReply(0),
+	queryReply(0),
+	downloadProgressBar(0),
+	queryProgressBar(0)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
@@ -748,7 +748,7 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	request.setHeader(QNetworkRequest::ContentTypeHeader,
 	                  "application/x-www-form-urlencoded");//Is this really necessary?
 	request.setHeader(QNetworkRequest::ContentLengthHeader,
-	                  url.encodedQuery().length());
+			  url.encodedQuery().length());
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
 	queryReply = networkManager->post(request, url.encodedQuery());
@@ -843,13 +843,16 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		file.write(reply->readAll());
 		file.close();
 
-		/*
-		//Try to read it as a comet first?
-		objects = readElementsFromFile(MpcComets, file.fileName());
-		if (objects.isEmpty())
+		QRegExp cometProvisionalDesignation("[PCDX]/");
+		QRegExp cometDesignation("(\\d)+[PCDX]/");
+		QString queryData = ui->lineEditQuery->text().trimmed();
+
+		if (cometDesignation.indexIn(queryData) == 0 || cometProvisionalDesignation.indexIn(queryData) == 0)
+			objects = readElementsFromFile(MpcComets, file.fileName());
+		else
 			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
-		*/
-		objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
+
+		//	objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
 	}
 	else
 	{
