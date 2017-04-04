@@ -283,7 +283,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 
 void NMEALookupHelper::nmeaError(QGeoPositionInfoSource::Error error)
 {
-	emit queryError("NMEA general error: " + error);
+	emit queryError(QString("NMEA general error: %1").arg(error));
 }
 
 void NMEALookupHelper::nmeaTimeout()
