@@ -192,3 +192,18 @@ begin
   // the Visual C++ 2013 Redist are installed for the current user
   Result := not (VCVersionInstalled(@REDIST_VERSION@));
 end;
+
+procedure CurUninstallStepChanged (CurUninstallStep: TUninstallStep);
+var
+  mres : integer;
+begin
+  case CurUninstallStep of
+    usPostUninstall:
+      begin
+        mres := MsgBox('Do you want to delete user data?', mbConfirmation, MB_YESNO or MB_DEFBUTTON2)
+        if mres = IDYES then
+          DelTree(ExpandConstant('{userappdata}\Stellarium'), True, True, True);
+	  DelTree(ExpandConstant('{userdocs}\Stellarium'), True, True, True);
+      end;  
+  end;
+end;
