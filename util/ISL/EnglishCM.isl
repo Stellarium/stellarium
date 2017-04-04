@@ -34,3 +34,4 @@ MesaMode=(MESA mode)
 DebugMode=(with OpenGL diagnostics)
 SpoutMode=(with Spout sender)
 RedistRun=Installing Microsoft's C/C++ runtime...
+DeleteUserData=Do you want to delete user data?
