@@ -166,7 +166,7 @@ private:
 	//! Month of end visibility of constellation (seasonal rules)
 	int endSeason;
 	//! List of stars forming the segments
-	StelObjectP* asterism;
+	StelObjectP* constellation;
 
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;

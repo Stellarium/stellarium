@@ -98,6 +98,8 @@ public:
 	void setUpdateTails(const bool update){ updateTails=update; }
 	//! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JDE, v, true)
 	Vec3d getVelocity() const { return rdot; }
+	double getSemimajorAxis() const { return (e==1. ? 0. : q / (1.-e)); }
+	double getEccentricity() const { return e; }
 	bool objectDateValid(const double JDE) const { return (fabs(t0-JDE)<orbitGood); }
 private:
 	const double q;  //! perihel distance
@@ -110,7 +112,7 @@ private:
 	Vec3d rdot;      //! GZ: velocity vector. Caches velocity from last position computation, [AU/d]
 	double rotateToVsop87[9]; //! Rotation matrix
 	bool updateTails; //! flag to signal that tails must be recomputed.
-	const double orbitGood; //! orb. elements are only valid for this time [days]. Don't draw the object outside.
+	const double orbitGood; //! orb. elements are only valid for this time from perihel [days]. Don't draw the object outside.
 };
 
 
@@ -121,7 +123,8 @@ class OrbitSampleProc
 	virtual void sample(const Vec3d&) = 0;
 };
 
-
+/*
+ * Stuff found unused and deactivated pre-0.15
 
 // Custom orbit classes should be derived from CachingOrbit.  The custom
 // orbits can be expensive to compute, with more than 50 periodic terms.
@@ -147,6 +150,6 @@ private:
 	mutable double lastTime;
 };
 
-
+*/
 
 #endif // _ORBIT_HPP_

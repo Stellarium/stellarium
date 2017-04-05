@@ -298,6 +298,24 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorEquinoxPoints
 		   NOTIFY equinoxPointsColorChanged)
 
+	Q_PROPERTY(bool solsticeJ2000PointsDisplayed
+		   READ getFlagSolsticeJ2000Points
+		   WRITE setFlagSolsticeJ2000Points
+		   NOTIFY solsticeJ2000PointsDisplayedChanged)
+	Q_PROPERTY(Vec3f solsticeJ2000PointsColor
+		   READ getColorSolsticeJ2000Points
+		   WRITE setColorSolsticeJ2000Points
+		   NOTIFY solsticeJ2000PointsColorChanged)
+
+	Q_PROPERTY(bool solsticePointsDisplayed
+		   READ getFlagSolsticePoints
+		   WRITE setFlagSolsticePoints
+		   NOTIFY solsticePointsDisplayedChanged)
+	Q_PROPERTY(Vec3f solsticePointsColor
+		   READ getColorSolsticePoints
+		   WRITE setColorSolsticePoints
+		   NOTIFY solsticePointsColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -741,6 +759,34 @@ public slots:
 	//! @endcode
 	void setColorEquinoxPoints(const Vec3f& newColor);
 
+	//! Setter for displaying solstice points of J2000.
+	void setFlagSolsticeJ2000Points(const bool displayed);
+	//! Accessor for displaying solstice points of J2000.
+	bool getFlagSolsticeJ2000Points(void) const;
+	//! Get the current color of the solstice points of J2000.
+	Vec3f getColorSolsticeJ2000Points(void) const;
+	//! Set the color of the solstice points of J2000.
+	//! @param newColor The color of solstice points
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorSolsticeJ2000Points(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorSolsticeJ2000Points(const Vec3f& newColor);
+
+	//! Setter for displaying solstice points.
+	void setFlagSolsticePoints(const bool displayed);
+	//! Accessor for displaying solstice points.
+	bool getFlagSolsticePoints(void) const;
+	//! Get the current color of the solstice points.
+	Vec3f getColorSolsticePoints(void) const;
+	//! Set the color of the solstice points.
+	//! @param newColor The color of solstice points
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorSolsticePoints(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorSolsticePoints(const Vec3f& newColor);
+
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
@@ -800,6 +846,10 @@ signals:
 	void equinoxJ2000PointsColorChanged(const Vec3f & newColor) const;
 	void equinoxPointsDisplayedChanged(const bool displayed) const;
 	void equinoxPointsColorChanged(const Vec3f & newColor) const;
+	void solsticeJ2000PointsDisplayedChanged(const bool displayed) const;
+	void solsticeJ2000PointsColorChanged(const Vec3f & newColor) const;
+	void solsticePointsDisplayedChanged(const bool displayed) const;
+	void solsticePointsColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -815,7 +865,7 @@ private:
 	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
 	SkyGrid * aziGrid;			// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
-	SkyLine * equatorJ2000Line;		// Celestial Equator of J2000 line
+	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * eclipticLine;			// Ecliptic line
 	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
 	SkyLine * precessionCircleN;		// Northern precession circle
@@ -839,6 +889,8 @@ private:
 	SkyPoint * supergalacticPoles;		// Supergalactic poles
 	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
 	SkyPoint * equinoxPoints;		// Equinox points
+	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
+	SkyPoint * solsticePoints;		// Solstice points
 };
 
 #endif // _GRIDLINESMGR_HPP_

@@ -132,6 +132,11 @@ public:
 	//! Default to 1.
 	void setDistanceWeight(float newDistanceWeight) {distanceWeight=newDistanceWeight;}
 
+	//! Return a QMap of data about the object (calls obj->getInfoMap()).
+	//! If obj is valid, add an element ["found", true].
+	//! If obj is NULL, returns a 1-element map [["found", false]]
+	static QVariantMap getObjectInfo(const StelObjectP obj);
+
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it

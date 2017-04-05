@@ -225,6 +225,8 @@ void SatellitesDialog::createDialogContent()
 	populateSourcesList();
 
 	initListIridiumFlares();
+	ui->flaresPredictionDepthSpinBox->setValue(plugin->getIridiumFlaresPredictionDepth());
+	connect(ui->flaresPredictionDepthSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setIridiumFlaresPredictionDepth(int)));
 	connect(ui->pushButtonPredictIridiumFlares, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 }
@@ -992,12 +994,14 @@ void SatellitesDialog::predictIridiumFlares()
 
 void SatellitesDialog::selectCurrentIridiumFlare(const QModelIndex &modelIndex)
 {
+	StelCore* core = StelApp::getInstance().getCore();
 	// Find the object
 	QString name = modelIndex.sibling(modelIndex.row(), IridiumFlaresSatellite).data().toString();
 	QString date = modelIndex.sibling(modelIndex.row(), IridiumFlaresDate).data().toString();
 	bool ok;
 	double JD  = StelUtils::getJulianDayFromISO8601String(date.left(10) + "T" + date.right(8), &ok);
-	JD -= StelApp::getInstance().getCore()->getUTCOffset(JD)/24.;
+	JD -= core->getUTCOffset(JD)/24.;
+	JD -= core->JD_SECOND*15; // Set start point on 15 seconds before flash (TODO: should be an option in the GUI?)
 
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))

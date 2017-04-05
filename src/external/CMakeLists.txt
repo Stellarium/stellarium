@@ -29,6 +29,9 @@ SET(glues_lib_SRCS
 )
 add_library(glues_stel STATIC EXCLUDE_FROM_ALL ${glues_lib_SRCS})
 target_include_directories(glues_stel PUBLIC glues_stel/source)
+#link the GUI module for the GL headers
+#our stripped version does not call any GL functions, but requires the GL types to be defined
+target_link_libraries(glues_stel Qt5::Gui)
 #turn off automoc, not needed here
 set_target_properties(glues_stel PROPERTIES AUTOMOC 0)
 

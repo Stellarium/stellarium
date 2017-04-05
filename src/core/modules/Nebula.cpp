@@ -341,6 +341,23 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	return str;
 }
 
+QVariantMap Nebula::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map["type"]=getTypeString(); // replace "Nebula" type by detail. This is localized. Maybe add argument such as getTypeString(bool translated=true)?
+	map.insert("morpho", getMorphologicalTypeString());
+	map.insert("surface-brightness", getSurfaceBrightness(core));
+	map.insert("bmag", bMag);
+	if (vMag < 50 && bMag < 50)
+		map.insert("bV", bMag-vMag);
+	if (redshift<99.f)
+		map.insert("redshift", redshift);
+
+	// TODO: more? Names? Data?
+	return map;
+}
+
 QString Nebula::getEnglishAliases() const
 {
 	QString aliases = "";

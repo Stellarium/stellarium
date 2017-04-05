@@ -122,10 +122,15 @@ private slots:
 	void askSupergalacticPolesColor();
 	void askEquinoxJ2000PointsColor();
 	void askEquinoxPointsColor();
+	void askSolsticeJ2000PointsColor();
+	void askSolsticePointsColor();
 	// constellations colors
 	void askConstellationLabelsColor();
 	void askConstellationLinesColor();
 	void askConstellationBoundariesColor();
+	// asterisms colors
+	void askAsterismLabelsColor();
+	void askAsterismLinesColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

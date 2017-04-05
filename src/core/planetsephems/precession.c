@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * New precession expressions, valid for long time intervals
  * Astronomy&Astrophysics 534, A22 (2011)
  * DOI: 10.1051/0004-6361/201117274
+ *   with correction from
  * J. Vondrak, N. Capitaine, P. Wallace
  * New precession expressions, valid for long time intervals (Corrigendum)
  * A&A 541, C1 (2012)

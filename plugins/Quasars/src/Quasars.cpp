@@ -599,7 +599,7 @@ int Quasars::getSecondsToUpdate(void)
 
 void Quasars::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
 		updateJSON();
 }
 

@@ -369,6 +369,9 @@ public:
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
 
+	//! Get depth of prediction for Iridium flares
+	int getIridiumFlaresPredictionDepth(void) { return iridiumFlaresPredictionDepth; }
+
 	IridiumFlaresPredictionList getIridiumFlaresPrediction();
 
 signals:
@@ -461,6 +464,10 @@ public slots:
 
 	//! Save the current satellite catalog to disk.
 	void saveCatalog(QString path=QString());
+
+	//! Set depth of prediction for Iridium flares
+	//! @param depth in days
+	void setIridiumFlaresPredictionDepth(int depth) { iridiumFlaresPredictionDepth=depth; }
 
 private slots:
 
@@ -591,6 +598,8 @@ private:
 	QTimer* messageTimer;
 	QList<int> messageIDs;
 	//@}
+
+	int iridiumFlaresPredictionDepth;
 
 	// GUI
 	SatellitesDialog* configDialog;	

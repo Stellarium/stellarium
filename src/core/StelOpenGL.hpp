@@ -44,6 +44,8 @@ namespace StelOpenGL
 	const char* getGLErrorText(GLenum code);
 	//! Retrieves and prints all current OpenGL errors to console (glGetError in a loop)
 	int checkGLErrors(const char *file, int line);
+	//! Clears all queued-up OpenGL errors without handling them
+	void clearGLErrors();
 }
 
 // This is still needed for the ARM platform (armhf)

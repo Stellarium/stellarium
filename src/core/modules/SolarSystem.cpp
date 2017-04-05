@@ -993,6 +993,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", 0).toBool(),
 					       type));
+			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toDouble();
 		}
 
 
@@ -1340,7 +1341,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	if (!getFlagPlanets())
 		return result;
 
-	Vec3d v = core->j2000ToEquinoxEqu(vv);
+	Vec3d v = core->j2000ToEquinoxEqu(vv, StelCore::RefractionOff);
 	v.normalize();
 	double cosLimFov = std::cos(limitFov * M_PI/180.);
 	Vec3d equPos;

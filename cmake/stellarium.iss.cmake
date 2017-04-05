@@ -57,6 +57,7 @@ Source: "@QtConcurrent_location@"; DestDir: "{app}";
 @ISS_QT_SCRIPT@
 @ISS_QT_MULTIMEDIA@
 @ISS_QT_SERIALPORT@
+@ISS_QT_POSITIONING@
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
@@ -190,4 +191,19 @@ begin
   // this statement, the following won't install your VC redist only when
   // the Visual C++ 2013 Redist are installed for the current user
   Result := not (VCVersionInstalled(@REDIST_VERSION@));
+end;
+
+procedure CurUninstallStepChanged (CurUninstallStep: TUninstallStep);
+var
+  mres : integer;
+begin
+  case CurUninstallStep of
+    usPostUninstall:
+      begin
+        mres := MsgBox('{cm:DeleteUserData}', mbConfirmation, MB_YESNO or MB_DEFBUTTON2)
+        if mres = IDYES then
+          DelTree(ExpandConstant('{userappdata}\Stellarium'), True, True, True);
+          DelTree(ExpandConstant('{userdocs}\Stellarium'), True, True, True);
+      end;  
+  end;
 end;
