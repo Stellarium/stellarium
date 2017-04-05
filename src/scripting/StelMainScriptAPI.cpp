@@ -24,6 +24,7 @@
 #include "StelLocaleMgr.hpp"
 
 #include "ConstellationMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
@@ -929,6 +930,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
+	AsterismMgr* amgr = GETSTELMODULE(AsterismMgr);
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
@@ -980,6 +982,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setFlagLabels(false);
 		cmgr->setFlagBoundaries(false);
 		cmgr->setFlagArt(false);
+		amgr->setFlagLines(false);
+		amgr->setFlagLabels(false);
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
@@ -1028,6 +1032,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setFlagLabels(true);
 		cmgr->setFlagBoundaries(true);
 		cmgr->setFlagArt(false);
+		amgr->setFlagLines(false);
+		amgr->setFlagLabels(false);
 		smgr->setFlagLabels(true);
 		ssmgr->setFlagLabels(true);
 		nmgr->setFlagHints(true);		
@@ -1076,6 +1082,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setFlagLabels(false);
 		cmgr->setFlagBoundaries(false);
 		cmgr->setFlagArt(false);
+		amgr->setFlagLines(false);
+		amgr->setFlagLabels(false);
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
@@ -1124,6 +1132,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setFlagLabels(false);
 		cmgr->setFlagBoundaries(false);
 		cmgr->setFlagArt(false);
+		amgr->setFlagLines(false);
+		amgr->setFlagLabels(false);
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
@@ -1172,6 +1182,8 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setFlagLabels(false);
 		cmgr->setFlagBoundaries(false);
 		cmgr->setFlagArt(false);
+		amgr->setFlagLines(false);
+		amgr->setFlagLabels(false);
 		smgr->setFlagLabels(false);
 		ssmgr->setFlagLabels(false);
 		nmgr->setFlagHints(false);
