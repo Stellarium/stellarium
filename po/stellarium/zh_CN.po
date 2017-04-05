@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:21+0700\n"
-"PO-Revision-Date: 2017-03-10 16:00+0000\n"
+"POT-Creation-Date: 2017-04-02 14:53+0700\n"
+"PO-Revision-Date: 2017-03-24 13:45+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 05:45+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-04-05 05:48+0000\n"
+"X-Generator: Launchpad (build 18335)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -49,7 +49,7 @@ msgstr "星座"
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
+#: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
@@ -1168,7 +1168,7 @@ msgstr "间距"
 msgid "Milky Way"
 msgstr "银河"
 
-#: src/core/modules/ZodiacalLight.cpp:81
+#: src/core/modules/ZodiacalLight.cpp:82
 msgid "Zodiacal Light"
 msgstr "黄道带"
 
@@ -2264,7 +2264,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
 #: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:411
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr "系统默认"
 
@@ -2618,11 +2618,11 @@ msgstr "空格键"
 msgid "Time zone"
 msgstr "时区"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:424
 msgid "Local Mean Solar Time"
 msgstr "本地平太阳时"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:410
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
 msgstr "本地真太阳时"
 
@@ -2764,6 +2764,22 @@ msgstr "超强爆发(1966 狮子座流星雨)"
 #: src/gui/ViewDialog.cpp:1404
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "最强爆发(1833 狮子座流星雨)"
+
+#: src/gui/LocationDialog.cpp:715
+msgid "GPS..."
+msgstr ""
+
+#: src/gui/LocationDialog.cpp:727
+msgid "GPS:SUCCESS"
+msgstr ""
+
+#: src/gui/LocationDialog.cpp:738
+msgid "GPS:FAILED"
+msgstr ""
+
+#: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:492
+msgid "Get location from GPS"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:113
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -5284,102 +5300,106 @@ msgstr "编辑键盘快捷键..."
 msgid "Refresh"
 msgstr "重新整理"
 
-#: src/ui_locationDialogGui.h:430
+#: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Location"
 msgstr "所在位置"
 
-#: src/ui_locationDialogGui.h:434 src/ui_locationDialogGui.h:437
+#: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr "标准位置清单只包含英文名称（不含变音符号！）"
 
-#: src/ui_locationDialogGui.h:441
+#: src/ui_locationDialogGui.h:467
 msgid "Reset location list to show all known locations"
 msgstr "重置地点列表以显示所有已知地点"
 
-#: src/ui_locationDialogGui.h:443
+#: src/ui_locationDialogGui.h:469
 msgid "Reset Location List"
 msgstr "重置地点列表"
 
-#: src/ui_locationDialogGui.h:444
+#: src/ui_locationDialogGui.h:470
 msgid "Current location information"
 msgstr "当前位置信息"
 
-#: src/ui_locationDialogGui.h:445
+#: src/ui_locationDialogGui.h:471
 msgid "Add to list"
 msgstr "加入列表"
 
-#: src/ui_locationDialogGui.h:446
+#: src/ui_locationDialogGui.h:472
 msgid "Delete from list"
 msgstr "删除"
 
-#: src/ui_locationDialogGui.h:447
+#: src/ui_locationDialogGui.h:473
 msgid "Return to default location"
 msgstr "返回默认地点"
 
-#: src/ui_locationDialogGui.h:448
-msgid "Use current location as default"
-msgstr "使用当前位置为默认地点"
-
-#: src/ui_locationDialogGui.h:449
+#: src/ui_locationDialogGui.h:474
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "经度:"
 
-#: src/ui_locationDialogGui.h:450
+#: src/ui_locationDialogGui.h:475
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "纬度:"
 
-#: src/ui_locationDialogGui.h:451
+#: src/ui_locationDialogGui.h:476
+msgid "Use current location as default"
+msgstr "使用当前位置为默认地点"
+
+#: src/ui_locationDialogGui.h:477
 msgid "Get location from Network"
 msgstr "从网络定位"
 
-#: src/ui_locationDialogGui.h:453 src/ui_locationDialogGui.h:460
+#: src/ui_locationDialogGui.h:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+msgid "Altitude:"
+msgstr "高度角"
+
+#: src/ui_locationDialogGui.h:480 src/ui_locationDialogGui.h:483
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr "您可以输入十进位度数，或是使用 dms 格式，例如: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:456
+#: src/ui_locationDialogGui.h:486
 msgid "Enter the altitude in meter"
 msgstr "输入海拔高度(以米为单位)"
 
-#: src/ui_locationDialogGui.h:458
+#: src/ui_locationDialogGui.h:488
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:462
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
-msgid "Altitude:"
-msgstr "高度角"
+#: src/ui_locationDialogGui.h:490
+msgid "Retrieve current coordinates from GPS. Does not set timezone!"
+msgstr ""
 
-#: src/ui_locationDialogGui.h:463
+#: src/ui_locationDialogGui.h:493
 msgid "New Location"
 msgstr "新位置"
 
-#: src/ui_locationDialogGui.h:464
+#: src/ui_locationDialogGui.h:494
 msgid "Planet:"
 msgstr "行星:"
 
-#: src/ui_locationDialogGui.h:465
+#: src/ui_locationDialogGui.h:495
 msgid "Use custom time zone"
 msgstr "使用自定义时区"
 
-#: src/ui_locationDialogGui.h:466
+#: src/ui_locationDialogGui.h:496
 msgid "Time zone:"
 msgstr "时区"
 
-#: src/ui_locationDialogGui.h:467
+#: src/ui_locationDialogGui.h:497
 msgid "Name/City:"
 msgstr "地名/城市:"
 
-#: src/ui_locationDialogGui.h:468
+#: src/ui_locationDialogGui.h:498
 msgid "Country:"
 msgstr "国家/地区:"
 
-#: src/ui_locationDialogGui.h:472
+#: src/ui_locationDialogGui.h:502
 msgid "Enable daylight saving time"
 msgstr "启用夏令时"
 
@@ -6349,7 +6369,7 @@ msgstr "默认选项"
 
 #: src/ui_configurationDialog.h:1235
 msgid "Save View"
-msgstr ""
+msgstr "保存视图"
 
 #: src/ui_configurationDialog.h:1237
 msgid ""
@@ -6382,7 +6402,7 @@ msgid ""
 "Save either the current FOV and direction of view or all the current options "
 "for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
-msgstr ""
+msgstr "保存当前FOV和视图方向或当前设置以供下次启动使用。 恢复默认设置需重启Stellarium "
 
 #: src/ui_configurationDialog.h:1246
 msgid "The width of your view when Stellarium starts"
@@ -6994,7 +7014,7 @@ msgstr "光标位置"
 msgid "Include dir:"
 msgstr "包含目录："
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "..."
 
@@ -7049,7 +7069,7 @@ msgstr "清理星历表"
 #: src/ui_astroCalcDialog.h:542 src/ui_astroCalcDialog.h:550
 #: plugins/Satellites/src/ui_satellitesDialog.h:822
 msgid "Calculations require time, please be patient"
-msgstr ""
+msgstr "计算需要时间，请耐心等待"
 
 #: src/ui_astroCalcDialog.h:544
 msgid "Calculate ephemeris"
@@ -7064,12 +7084,12 @@ msgid "Time step:"
 msgstr "时间间隔："
 
 #: src/ui_astroCalcDialog.h:547 src/ui_astroCalcDialog.h:557
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "到："
 
 #: src/ui_astroCalcDialog.h:548 src/ui_astroCalcDialog.h:554
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "从："
 
@@ -8255,7 +8275,7 @@ msgstr "快捷键"
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
-msgstr ""
+msgstr "可以在键盘快捷键编辑器（F7）中编辑插件快捷键。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:543
 #: plugins/Oculars/src/gui/OcularDialog.cpp:548
@@ -9242,7 +9262,7 @@ msgstr "来源"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:820
 msgid "Flare prediction (days):"
-msgstr ""
+msgstr "耀斑预测（天）："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid "Predict Iridium flares"
@@ -10200,67 +10220,67 @@ msgstr "赤纬（J2000）"
 msgid "Select one"
 msgstr "选择一个"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "把望远镜指向"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "没有活动设备。"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "把望远镜指向坐标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "赤经（J2000）:"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "赤纬（J2000）:"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&当前目标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "屏幕中间"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "时分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "度分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "十进制度"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "十进制 (&e)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "指向 (&S)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "配置望远镜..."
 
@@ -13680,7 +13700,7 @@ msgid "Peak"
 msgstr "峰值"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "流星雨配置"
 
@@ -13760,21 +13780,21 @@ msgstr "状态："
 msgid "Update"
 msgstr "更新"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "流星雨：搜索"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "搜索"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "dd/MM/yyyy"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "结果"
 

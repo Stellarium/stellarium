@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:21+0700\n"
-"PO-Revision-Date: 2017-02-18 09:40+0000\n"
+"POT-Creation-Date: 2017-04-02 14:53+0700\n"
+"PO-Revision-Date: 2017-04-02 12:10+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 05:31+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-04-05 05:35+0000\n"
+"X-Generator: Launchpad (build 18335)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -51,7 +51,7 @@ msgstr "csillagkép"
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
+#: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
@@ -303,7 +303,7 @@ msgstr "Zenit és nadír"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "Ekliptikus pólusok (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1239
 msgid "Ecliptic poles"
@@ -331,7 +331,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1245
 msgid "Solstice points"
-msgstr ""
+msgstr "Napfordulók pontjai"
 
 #: src/core/modules/LandscapeMgr.cpp:422 src/ui_viewDialog.h:1981
 msgid "Atmosphere"
@@ -470,7 +470,7 @@ msgstr "Mpc"
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:292
 msgid "Mio. ly"
-msgstr ""
+msgstr "Millió fé"
 
 #: src/core/modules/Nebula.cpp:306
 #, qt-format
@@ -878,7 +878,7 @@ msgstr "Abszolút fényesség: %1"
 #: src/core/modules/Planet.cpp:269
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
-msgstr ""
+msgstr "Átlagos oppozíciós magnitúdó: %1"
 
 #: src/core/modules/Planet.cpp:290 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
@@ -1172,7 +1172,7 @@ msgstr "Szögtávolság"
 msgid "Milky Way"
 msgstr "Tejút"
 
-#: src/core/modules/ZodiacalLight.cpp:81
+#: src/core/modules/ZodiacalLight.cpp:82
 msgid "Zodiacal Light"
 msgstr "Állatövi fény"
 
@@ -1768,7 +1768,7 @@ msgstr ""
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
-msgstr ""
+msgstr "az átlagos hiba kisebb mint 1 s, a legnagyobb 1,9 s"
 
 #: src/core/StelCore.cpp:2264
 msgid "with values for the limit years outside this range"
@@ -2322,7 +2322,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T egyéni kiszámítása"
 
 #: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:411
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr "A rendszer alapértelmezése"
 
@@ -2388,7 +2388,7 @@ msgstr "Ctrl & bal egérgombbal húzás"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Idő pörgetés: perc"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl & mouse wheel"
@@ -2396,7 +2396,7 @@ msgstr "Ctrl & egér görgő"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Idő pörgetés: óra"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Shift & mouse wheel"
@@ -2404,7 +2404,7 @@ msgstr "Ctrl+Shift & egér görgő"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Idő pörgetés: nap"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Ctrl+Alt & mouse wheel"
@@ -2412,7 +2412,7 @@ msgstr "Ctrl+Alt & egér görgő"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Idő pörgetés: év"
 
 #: src/gui/HelpDialog.cpp:170
 msgid "Ctrl+Alt+Shift & mouse wheel"
@@ -2688,13 +2688,13 @@ msgstr "Szóköz"
 msgid "Time zone"
 msgstr "Időzóna"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:424
 msgid "Local Mean Solar Time"
-msgstr ""
+msgstr "Helyi középnap idő"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:410
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
-msgstr ""
+msgstr "Helyi valódi nap idő"
 
 #: src/gui/StelGuiItems.cpp:677
 #, c-format, qt-format
@@ -2834,6 +2834,22 @@ msgstr "Nagyon nagy gyakoriság (1966-os Leonidák)"
 #: src/gui/ViewDialog.cpp:1404
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Az eddigi legnagyobb gyakoriság (1833-as Leonidák)"
+
+#: src/gui/LocationDialog.cpp:715
+msgid "GPS..."
+msgstr "GPS..."
+
+#: src/gui/LocationDialog.cpp:727
+msgid "GPS:SUCCESS"
+msgstr "GPS:SIKERES"
+
+#: src/gui/LocationDialog.cpp:738
+msgid "GPS:FAILED"
+msgstr "GPS:SIKERTELEN"
+
+#: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:492
+msgid "Get location from GPS"
+msgstr "Hely meghatározása GPS alapján"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:113
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -4489,7 +4505,7 @@ msgstr "Bolívia"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Karibi Hollandia"
 
 #: src/translations_countries.h:61
 msgid "Brazil"
@@ -5396,62 +5412,67 @@ msgstr "Gyorsbillentyűk szerkesztése..."
 msgid "Refresh"
 msgstr "Frissít"
 
-#: src/ui_locationDialogGui.h:430
+#: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Location"
 msgstr "Hely"
 
-#: src/ui_locationDialogGui.h:434 src/ui_locationDialogGui.h:437
+#: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 "A földrajzi helyek standard listája csak ékezet nélküli angol neveket "
 "tartalmaz."
 
-#: src/ui_locationDialogGui.h:441
+#: src/ui_locationDialogGui.h:467
 msgid "Reset location list to show all known locations"
 msgstr ""
 "A földrajzi helyek listájának újragenerálása, hogy minden név látható legyen"
 
-#: src/ui_locationDialogGui.h:443
+#: src/ui_locationDialogGui.h:469
 msgid "Reset Location List"
 msgstr "A földrajzi helyek listájának újragenerálása"
 
-#: src/ui_locationDialogGui.h:444
+#: src/ui_locationDialogGui.h:470
 msgid "Current location information"
 msgstr "A beállított megfigyelési hely adatai"
 
-#: src/ui_locationDialogGui.h:445
+#: src/ui_locationDialogGui.h:471
 msgid "Add to list"
 msgstr "Hozzáadás"
 
-#: src/ui_locationDialogGui.h:446
+#: src/ui_locationDialogGui.h:472
 msgid "Delete from list"
 msgstr "Törlés a listából"
 
-#: src/ui_locationDialogGui.h:447
+#: src/ui_locationDialogGui.h:473
 msgid "Return to default location"
 msgstr "Vissza az alapértelmezett helyhez"
 
-#: src/ui_locationDialogGui.h:448
-msgid "Use current location as default"
-msgstr "A jelenlegi hely legyen az alapértelmezett"
-
-#: src/ui_locationDialogGui.h:449
+#: src/ui_locationDialogGui.h:474
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Hosszúság:"
 
-#: src/ui_locationDialogGui.h:450
+#: src/ui_locationDialogGui.h:475
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Szélesség:"
 
-#: src/ui_locationDialogGui.h:451
+#: src/ui_locationDialogGui.h:476
+msgid "Use current location as default"
+msgstr "A jelenlegi hely legyen az alapértelmezett"
+
+#: src/ui_locationDialogGui.h:477
 msgid "Get location from Network"
 msgstr "Hely megállapítása az internetes szolgáltatótól"
 
-#: src/ui_locationDialogGui.h:453 src/ui_locationDialogGui.h:460
+#: src/ui_locationDialogGui.h:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+msgid "Altitude:"
+msgstr "Magasság:"
+
+#: src/ui_locationDialogGui.h:480 src/ui_locationDialogGui.h:483
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -5459,44 +5480,43 @@ msgstr ""
 "Az érték fokban vagy fok-perc-másodperc hármasban adható meg. Például: +1d "
 "12m 8s"
 
-#: src/ui_locationDialogGui.h:456
+#: src/ui_locationDialogGui.h:486
 msgid "Enter the altitude in meter"
 msgstr "Add meg a magasságot méterben"
 
-#: src/ui_locationDialogGui.h:458
+#: src/ui_locationDialogGui.h:488
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:462
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
-msgid "Altitude:"
-msgstr "Magasság:"
+#: src/ui_locationDialogGui.h:490
+msgid "Retrieve current coordinates from GPS. Does not set timezone!"
+msgstr ""
 
-#: src/ui_locationDialogGui.h:463
+#: src/ui_locationDialogGui.h:493
 msgid "New Location"
 msgstr "Új helyszín"
 
-#: src/ui_locationDialogGui.h:464
+#: src/ui_locationDialogGui.h:494
 msgid "Planet:"
 msgstr "Égitest:"
 
-#: src/ui_locationDialogGui.h:465
+#: src/ui_locationDialogGui.h:495
 msgid "Use custom time zone"
 msgstr "Egyéni időzóna megadása"
 
-#: src/ui_locationDialogGui.h:466
+#: src/ui_locationDialogGui.h:496
 msgid "Time zone:"
 msgstr "Időzóna:"
 
-#: src/ui_locationDialogGui.h:467
+#: src/ui_locationDialogGui.h:497
 msgid "Name/City:"
 msgstr "Név/város:"
 
-#: src/ui_locationDialogGui.h:468
+#: src/ui_locationDialogGui.h:498
 msgid "Country:"
 msgstr "Ország:"
 
-#: src/ui_locationDialogGui.h:472
+#: src/ui_locationDialogGui.h:502
 msgid "Enable daylight saving time"
 msgstr "Nyári időszámítás engedése"
 
@@ -6089,7 +6109,7 @@ msgstr "Kardinális pontok színe"
 
 #: src/ui_viewDialog.h:2191
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr ""
+msgstr "Ekliptikus pólusok színe (J2000.0)"
 
 #: src/ui_viewDialog.h:2194
 msgid "Color of Prime Vertical"
@@ -6097,7 +6117,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2197
 msgid "Show ecliptic poles of J2000.0"
-msgstr ""
+msgstr "Ekliptikus pólusok mutatása (J2000.0)"
 
 #: src/ui_viewDialog.h:2199
 msgid "Ecliptic poles (J2000)"
@@ -6207,7 +6227,7 @@ msgstr "Egyenlítői háló színe  (J2000.0)"
 
 #: src/ui_viewDialog.h:2262
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "Napéjegyenlőségi pontok színe (J2000.0)"
 
 #: src/ui_viewDialog.h:2265
 msgid "Ecliptical coordinates for J2000.0."
@@ -6247,7 +6267,7 @@ msgstr "Egyenlítői háló színe (dátum szerint)"
 
 #: src/ui_viewDialog.h:2289
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "Napéjegyenlőségek (J2000)"
 
 #: src/ui_viewDialog.h:2291
 msgid "Color of the ecliptical grid (of date)"
@@ -6259,7 +6279,7 @@ msgstr "Azimut háló színe"
 
 #: src/ui_viewDialog.h:2297
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "Napéjegyenlőségi pontok színe (dátum szerint)"
 
 #: src/ui_viewDialog.h:2300
 msgid "Equatorial coordinates of current date and planet."
@@ -6271,23 +6291,23 @@ msgstr "Jelenlegi dátum egyenlítői hálója"
 
 #: src/ui_viewDialog.h:2303
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "Napéjegyenlőségek (dátum szerint)"
 
 #: src/ui_viewDialog.h:2304
 msgid "Solstices (J2000)"
-msgstr ""
+msgstr "Napfordulók (J2000)"
 
 #: src/ui_viewDialog.h:2306
 msgid "Color of the solstice points (J2000.0)"
-msgstr ""
+msgstr "Napfordulók pontjainak színe (J2000.0)"
 
 #: src/ui_viewDialog.h:2309
 msgid "Solstices (of date)"
-msgstr ""
+msgstr "Napfordulók (dátum szerint)"
 
 #: src/ui_viewDialog.h:2311
 msgid "Color of the solstice points (of date)"
-msgstr ""
+msgstr "Napfordulók pontjainak színe (dátum szerint)"
 
 #: src/ui_viewDialog.h:2314
 msgid "Projection"
@@ -6496,7 +6516,7 @@ msgstr "Alapbeállítások"
 
 #: src/ui_configurationDialog.h:1235
 msgid "Save View"
-msgstr ""
+msgstr "Nézet mentése"
 
 #: src/ui_configurationDialog.h:1237
 msgid ""
@@ -7157,7 +7177,7 @@ msgstr "Kurzorpozíció"
 msgid "Include dir:"
 msgstr "keresési könyvtár:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "…"
 
@@ -7212,7 +7232,7 @@ msgstr "Efemeridák tisztítása"
 #: src/ui_astroCalcDialog.h:542 src/ui_astroCalcDialog.h:550
 #: plugins/Satellites/src/ui_satellitesDialog.h:822
 msgid "Calculations require time, please be patient"
-msgstr ""
+msgstr "A számításokhoz idő kell, türelmet kérünk"
 
 #: src/ui_astroCalcDialog.h:544
 msgid "Calculate ephemeris"
@@ -7227,12 +7247,12 @@ msgid "Time step:"
 msgstr "Időlépés:"
 
 #: src/ui_astroCalcDialog.h:547 src/ui_astroCalcDialog.h:557
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "Eddig:"
 
 #: src/ui_astroCalcDialog.h:548 src/ui_astroCalcDialog.h:554
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "Ettől:"
 
@@ -7403,7 +7423,7 @@ msgstr "Mélyég-objektumok címkéi"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Labels of DSOs"
-msgstr ""
+msgstr "DSO címkék"
 
 #: src/ui_dsoColorsDialog.h:562
 msgid "Color of labels of deep-sky objects"
@@ -7479,7 +7499,7 @@ msgstr "Szupernova maradványok  jelölésének színe"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
-msgstr ""
+msgstr "Keringési színek stílusa"
 
 #: src/ui_orbitColorsDialog.h:381
 msgid "One color for all orbits"
@@ -8276,7 +8296,7 @@ msgstr "X tengely"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "Horizontal scale"
-msgstr ""
+msgstr "Vízszintes skála"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
@@ -9454,7 +9474,7 @@ msgstr "Források"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:820
 msgid "Flare prediction (days):"
-msgstr ""
+msgstr "Felvillanás becslése (nap):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid "Predict Iridium flares"
@@ -9830,6 +9850,9 @@ msgid ""
 "Windows, a USB connection may require a 'virtual serial port' software, if "
 "it is not supplied with the cable or the telescope."
 msgstr ""
+"Linux és Mac OS X rendszeren a bővítmény egyformán működik. Windows esetén "
+"az USB csatlakozásnak szüksége lehet egy 'virtuális soros port' szoftverre, "
+"ha azt nem biztosítja a kábel vagy a távcső."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid ""
@@ -9994,12 +10017,16 @@ msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to "
 "attempt to connect to the telescope immediately after it starts."
 msgstr ""
+"<b>Start/csatlakozás induláskor</b>: ki kell jelölni, ha azt akarjuk, hogy a "
+"Stellarium az indulása után azonnal kísérelje meg a csatlakozást a távcsőhöz."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr ""
+"Egyébként a távcső indításához meg kell nyitni a fő ablakot, kiválasztani a "
+"távcsövet és megnyomni a \"Start/csatlakozás\" gombot."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 #, qt-format
@@ -10043,12 +10070,16 @@ msgstr ""
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
+"Mac OS X esetén a létező soros portok kilistázásához meg kell nyitni egy "
+"terminálablakot, és begépelni:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr ""
+"Ez kilistázza az összes eszközt és a soros portok teljes nevét (például, "
+"'/dev/cu.usbserial-FTDFZVMK')."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 #, qt-format
@@ -10171,6 +10202,8 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 "
 "of the plug-in."
 msgstr ""
+"A <b>Távcső beállítása...</b> gomb megnyomása megnyitja a %1 fő ablakot %2 a "
+"bővítményben."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
@@ -10454,67 +10487,67 @@ msgstr "Deklináció (J2000)"
 msgid "Select one"
 msgstr "Válasszon"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "Távcső forgatása"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "Nincs aktív eszköz."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "Távcső forgatása koordinátára"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&RA (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "&Deklináció (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Kiválasztott objektum"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "A képernyő közepe"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "Óra, perc, másodperc formátum"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "Fok, perc, másodperc formátum"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "Decimális fokok"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "D&ecimális"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "Forgatá&s"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "&Távcsövek beállításai"
 
@@ -10980,6 +11013,7 @@ msgstr "Beállítófájlok"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
 msgid "Select a file to replace the Solar System configuration file"
 msgstr ""
+"Fájlt kiválasztani a Naprendszer konfigurációs fájljának felülírásához"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -11833,6 +11867,7 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:122
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr ""
+"Ez a bővítmény az ESA SoCiS 2015 rendezvény alkalmából lett kifejlesztve."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
 #, qt-format
@@ -14093,7 +14128,7 @@ msgid "Peak"
 msgstr "Csúcs"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "Meteorraj beállítások"
 
@@ -14173,21 +14208,21 @@ msgstr "Állapot:"
 msgid "Update"
 msgstr "Frissítés"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "Meteorrajok keresése"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "Keres"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "nn/hh/éééé"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "Eredmények"
 
@@ -15105,7 +15140,7 @@ msgstr "Színválasztás az aktuális objektum vonalához"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:452
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Jelenlegi napvonal színe"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:463
 msgid "Select color for current moon line"
@@ -15117,11 +15152,11 @@ msgstr "Színválasztás az aktuális  bolygó-vonalhoz"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:485
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Földrajzi hely 1 vonalának színe"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:496
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Földrajzi hely 2 vonalának színe"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:507
 msgid "Select color for Custom Azimuth 1 line"
