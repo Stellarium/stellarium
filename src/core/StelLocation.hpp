@@ -69,8 +69,13 @@ public:
 	//! @li @p X is an unknown or user-defined location (the default value).
 	//! @li @p ! is an invalid location.
 	QChar role;
-	//! IANA identificator of time zone
-	QString timeZone;
+	//! IANA identificator of time zone.
+	//! Note that timezone names under various OSes may be different than those used in Stellarium's
+	//! location database (e.g. Ubuntu:Asia/Kolkata=Windows:Asia/Calcutta),
+	//! which requires some translation effort during the loading process.
+	//  See LP:1662132
+	// GZ renamed to more clearly indicate these are IANA names.
+	QString ianaTimeZone;
 
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);

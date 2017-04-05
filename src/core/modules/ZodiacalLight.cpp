@@ -1,7 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau (MilkyWay class)
- * Copyright (C) 2014 Georg Zotti (followed pattern for ZodiacalLight)
+ * Copyright (C) 2014-17 Georg Zotti (followed pattern for ZodiacalLight)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
+#include "precession.h"
 
 #include <QDebug>
 #include <QSettings>
@@ -72,15 +73,24 @@ void ZodiacalLight::init()
 
 	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,60,30,1, true)); // 6x6 degree quads
 	vertexArray->colors.resize(vertexArray->vertex.length());
-	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
+	vertexArray->colors.fill(color);
 
 	eclipticalVertices=vertexArray->vertex;
 	// This vector is used to keep original vertices, these will be modified in update().
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_ZodiacalLight", displayGroup, N_("Zodiacal Light"), "flagZodiacalLightDisplayed", "Ctrl+Shift+Z");
+
+	StelCore* core=StelApp::getInstance().getCore();
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(handleLocationChanged(StelLocation)));
 }
 
+void ZodiacalLight::handleLocationChanged(StelLocation loc)
+{
+	// This just forces update() to re-compute longitude.
+	Q_UNUSED(loc);
+	lastJD=-1e12;
+}
 
 void ZodiacalLight::update(double deltaTime)
 {
@@ -90,21 +100,38 @@ void ZodiacalLight::update(double deltaTime)
 		return;
 
 	StelCore* core=StelApp::getInstance().getCore();
-	// Test if we are not on Earth. Texture would not fit, so don't draw then.
-	if (core->getCurrentLocation().planetName != "Earth") return;
+	// Test if we are not on Earth or Moon. Texture would not fit, so don't draw then.
+	if (! QString("Earth Moon").contains(core->getCurrentLocation().planetName)) return;
 
 	double currentJD=core->getJD();
 	if (qAbs(currentJD - lastJD) > 0.25f) // should be enough to update position every 6 hours.
 	{
-		// update vertices
-		Vec3d obsPos=core->getObserverHeliocentricEclipticPos();
-		// For solar-centered texture, take minus, else plus:
-		double solarLongitude=atan2(obsPos[1], obsPos[0]) - 0.5*M_PI;
-		Mat4d transMat=StelCore::matVsop87ToJ2000 * Mat4d::zrotation(solarLongitude);
+		// Allowed locations are only Earth or Moon. For Earth, we can compute ZL along ecliptic of date.
+		// For the Moon, we can only show ZL along J2000 ecliptic.
+		// In draw() we have different projector frames. But we also need separate solar longitude computations here.
+		// The ZL texture has its bright spot in the winter solstice point.
+		// The computation here returns solar longitude for Earth, and antilongitude for the Moon, therefore we either add or subtract pi/2.
+
+		double lambdaSun;
+		if (core->getCurrentLocation().planetName=="Earth")
+		{
+			double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+			double ra_equ, dec_equ, betaJDE;
+			StelUtils::rectToSphe(&ra_equ,&dec_equ,GETSTELMODULE(SolarSystem)->getSun()->getEquinoxEquatorialPos(core));
+			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &betaJDE);
+			lambdaSun+= M_PI*0.5;
+		}
+		else // currently Moon only...
+		{
+			Vec3d obsPos=core->getObserverHeliocentricEclipticPos();
+			lambdaSun=atan2(obsPos[1], obsPos[0])  -M_PI*0.5;
+		}
+
+		Mat4d rotMat=Mat4d::zrotation(lambdaSun);
 		for (int i=0; i<eclipticalVertices.size(); ++i)
 		{
 			Vec3d tmp=eclipticalVertices.at(i);
-			vertexArray->vertex.replace(i, transMat * tmp);
+			vertexArray->vertex.replace(i, rotMat * tmp);
 		}
 		lastJD=currentJD;
 	}
@@ -137,22 +164,27 @@ void ZodiacalLight::draw(StelCore* core)
 		return;
 
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.
-	if (core->getCurrentLocation().planetName != "Earth") return;
+	if (! QString("Earth Moon").contains(core->getCurrentLocation().planetName)) return;
 
 	StelSkyDrawer *drawer=core->getSkyDrawer();
 	int bortle=drawer->getBortleScaleIndex();
 	// Test for light pollution, return if too bad.
 	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
 
-	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
+	// The ZL is best observed from Earth only. On the Moon, we must be happy with ZL along the J2000 ecliptic. (Sorry for LP:1628765, I don't find a general solution.)
+	StelProjector::ModelViewTranformP transfo;
+	if (core->getCurrentLocation().planetName == "Earth")
+		transfo = core->getObservercentricEclipticOfDateModelViewTransform();
+	else
+		transfo = core->getObservercentricEclipticJ2000ModelViewTransform();
 
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelToneReproducer* eye = core->getToneReproducer();
 
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
 
-	// Default ZL color is white (sunlight)
-	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
+	// Default ZL color is white (sunlight), or whatever has been set e.g. by script.
+	Vec3f c = color;
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
 	float lum = drawer->surfacebrightnessToLuminance(13.5f + 0.5f*bortle); // (8.0f + 0.5*bortle);
@@ -166,18 +198,6 @@ void ZodiacalLight::draw(StelCore* core)
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
-
-//	// In brighter twilight we should tune brightness down. So for sun above -18 degrees, we must tweak here:
-//	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(core);
-//	if (drawer->getFlagHasAtmosphere())
-//	{
-//		if (sunPos[2] > -0.1) return; // Make ZL invisible during civil twilight and daylight.
-//		if (sunPos[2] > -0.3)
-//		{ // scale twilight down for sun altitude -18..-6, i.e. scale -0.3..-0.1 to 1..0,
-//			float twilightScale= -5.0f* (sunPos[2]+0.1)  ; // 0(if bright)..1(dark)
-//			c*=twilightScale;
-//		}
-//	}
 
 	// Better: adapt brightness by atmospheric brightness
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
@@ -194,15 +214,23 @@ void ZodiacalLight::draw(StelCore* core)
 
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
 
-	if (withExtinction)
+	if ((withExtinction) && (core->getCurrentLocation().planetName=="Earth")) // If anybody switches on atmosphere on the moon, there will be no extinction.
 	{
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
 		const Extinction& extinction=drawer->getExtinction();
+		const double epsDate=getPrecessionAngleVondrakCurrentEpsilonA();
 		vertexArray->colors.clear();
 
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
 		{
-			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
+			Vec3d eclPos=vertexArray->vertex.at(i);
+			Q_ASSERT(fabs(eclPos.lengthSquared()-1.0) < 0.001f);
+			double ecLon, ecLat, ra, dec;
+			StelUtils::rectToSphe(&ecLon, &ecLat, eclPos);
+			StelUtils::eclToEqu(ecLon, ecLat, epsDate, &ra, &dec);
+			Vec3d eqPos;
+			StelUtils::spheToRect(ra, dec, eqPos);
+			Vec3d vertAltAz=core->equinoxEquToAltAz(eqPos, StelCore::RefractionOn);
 			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001f);
 
 			float oneMag=0.0f;

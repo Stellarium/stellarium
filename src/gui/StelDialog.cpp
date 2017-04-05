@@ -163,6 +163,7 @@ void StelDialog::setVisible(bool v)
 				//qDebug() << confNameSize << ": resize to " << storedSizeString;
 				proxy->resize(qMax((qreal)newX, proxy->size().width()), qMax((qreal)newY, proxy->size().height()));
 			}
+			handleDialogSizeChanged(proxy->size()); // This may trigger internal updates in subclasses. E.g. LocationPanel location arrow.
 
 			// The caching is buggy on all platforms with Qt 4.5.2
 			proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);

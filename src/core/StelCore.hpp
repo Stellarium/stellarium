@@ -219,9 +219,18 @@ public:
 	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
 	Vec3d supergalacticToJ2000(const Vec3d& v) const;
-	Vec3d equinoxEquToJ2000(const Vec3d& v) const;
+	//! Transform position vector v from equatorial coordinates of date (which may also include atmospheric refraction) to those of J2000.
+	//! Use refMode=StelCore::RefractionOff if you don't want any atmosphere correction.
+	//! Use refMode=StelCore::RefractionOn to create observed (apparent) coordinates (which are subject to refraction).
+	//! Use refMode=StelCore::RefractionAuto to correct coordinates for refraction only when atmosphere is active.
+	Vec3d equinoxEquToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	//! Use fixed matrix to allow fast transformation of positions related to the IAU constellation borders.
 	Vec3d j2000ToJ1875(const Vec3d& v) const;
-	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const;
+	//! Transform position vector v from equatorial coordinates J2000 to those of date (optionally corrected by refraction).
+	//! Use refMode=StelCore::RefractionOff if you don't want any atmosphere correction.
+	//! Use refMode=StelCore::RefractionOn to correct observed (apparent) coordinates (which are subject to refraction).
+	//! Use refMode=StelCore::RefractionAuto to correct coordinates for refraction only when atmosphere is active.
+	Vec3d j2000ToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d j2000ToGalactic(const Vec3d& v) const;
 	Vec3d j2000ToSupergalactic(const Vec3d& v) const;
 
@@ -271,10 +280,8 @@ public:
 	static const Mat4d matJ2000ToSupergalactic;
 	//! Rotation matrix from Supergalactic to J2000 reference frame.
 	static const Mat4d matSupergalacticToJ2000;
-	//! Precession matrix for IAU constellation lookup.
-	static Mat4d matJ2000ToJ1875;
 
-	//! Return the observer heliocentric ecliptic position
+	//! Return the observer heliocentric ecliptic position (GZ: presumably J2000)
 	Vec3d getObserverHeliocentricEclipticPos() const;
 
 	//! Get the informations on the current location
@@ -750,8 +757,10 @@ private:
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
 	Mat4d matEquinoxEquToJ2000;                // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // precession matrix
+	static Mat4d matJ2000ToJ1875;              // Precession matrix for IAU constellation lookup.
 
 	Mat4d matJ2000ToAltAz;
+	Mat4d matAltAzToJ2000;
 
 	Mat4d matAltAzModelView;           // Modelview matrix for observer-centric altazimuthal drawing
 	Mat4d invertMatAltAzModelView;     // Inverted modelview matrix for observer-centric altazimuthal drawing

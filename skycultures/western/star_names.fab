@@ -69,7 +69,7 @@
  23015|_("Kabalinan")
  23453|_("Haedus") 2,5,11
  23453|_("Haedus I")
- 23416|_("Almaaz") 2,3,5,11
+ 23416|_("Almaaz") 2,3,5,11,12
  23416|_("Al Ma'az")
  23416|_("Alanz")
  23767|_("Haedus II") 5,11
@@ -147,7 +147,7 @@
 100345|_("Dabih Major")
 100325|_("Dabih Minor") 2,11
 106985|_("Nashira") 1,2,6,11,12
-107556|_("Deneb Algedi") 1,2,11
+107556|_("Deneb Algedi") 1,2,11,12
 100310|_("Al Shat") 2,3,5,10,11
 100310|_("Alshat")
 # Carina (Car)
@@ -206,8 +206,8 @@
   3419|_("Deneb Kaitos")
   8645|_("Baten Kaitos") 1,2,11,12
  10826|_("Mira") 1,2,6,11,12
- 12706|_("Al Kaff al Jidhmah") 2,5,11
- 12706|_("Kaffaljidhma")
+ 12706|_("Kaffaljidhma") 2,5,11,12
+ 12706|_("Al Kaff al Jidhmah")
  12706|_("Kafalgidma")
   5364|_("Dheneb") 2,5,11
   5364|_("Deneb Algenubi")
@@ -238,7 +238,7 @@
  29807|_("Kurud II") 11
 # Coma Berenices (Com)
  62763|_("Polaris Galacticum Borealis") 5
- 64241|_("Diadem") 3,5,10,11
+ 64241|_("Diadem") 3,5,10,11,12
  61071|_("Kissin") 11
  60742|_("Al Dafirah") 11
 # Corona Australis (CrA)
@@ -308,10 +308,10 @@
  94376|_("Altais") 1,2,6,11,12
  94376|_("Al Tais")
  75458|_("Edasich") 1,2,6,11,12
- 56211|_("Giausar") 1,2,11
+ 56211|_("Giausar") 1,2,11,12
  56211|_("Giansar")
  56211|_("Nodus Secundus")
- 83608|_("Alrakis") 1,2,11
+ 83608|_("Alrakis") 1,2,11,12
  83608|_("Arrakis")
  83608|_("Errakis")
  87585|_("Grumium") 1,2,11,12
@@ -350,8 +350,9 @@
  13847|_("Dalim")
  19587|_("Beid") 1,2,11,12
  19849|_("Keid") 1,2,11,12
- 20535|_("Theemin") 1,2,11
- 20535|_("Theemim")
+ 21393|_("Theemin") 2,12
+ 20535|_("Theemim") 1,2,11
+ 20535|_("Theemin")
  20535|_("Beemim II")
  13288|_("Angetenar") 2,11
  21248|_("Beemim") 2,11
@@ -376,7 +377,7 @@
  29655|_("Propus") 1,2,6,10,11,12
  29655|_("Tejat Prior")
  29655|_("Praepes")
- 30343|_("Tejat") 1,2,11
+ 30343|_("Tejat") 1,2,11,12
  30343|_("Tejat Posterior")
  30343|_("Calx")
  32362|_("Al Zirr") 2,5,10,11
@@ -393,11 +394,11 @@
  84345|_("Ras Algethi")
  80816|_("Kornephoros") 1,2,6,11,12
  80816|_("Rutilicus")
- 79043|_("Marsic") 1,2,5,11
+ 79043|_("Marsic") 1,2,5,11,12
  79043|_("Marfik")
  85693|_("Maasym") 1,2,11,12
  85693|_("Masym")
- 80463|_("Cujam") 1,2,11
+ 80463|_("Cujam") 1,2,11,12
  84379|_("Sarin") 1,11,12
  80838|_("Ogma") 4,6,12
  80170|_("Nasak Shamiya III") 11
@@ -428,7 +429,7 @@
  54879|_("Chertan") 1,2,6,11,12
  54879|_("Al Haratan")
  54879|_("Coxa")
- 46750|_("Alterf") 1,2,11
+ 46750|_("Alterf") 1,2,11,12
  48455|_("Rasalas") 1,2,11,12
  48455|_("Alshemali")
  47508|_("Subra") 1,11,12
@@ -488,7 +489,7 @@
  84012|_("Sabik") 1,2,6,11,12
  80883|_("Marfik") 1,2,5,11,12
  87108|_("Muliphen") 2,5,11
- 87937|_("Barnard's Star") 3
+ 87937|_("Barnard's Star") 3,12
  81377|_("Saik") 11
  84970|_("Garafsa") 11
  84893|_("Aggia") 11
@@ -545,8 +546,8 @@
  14576|_("Algol") 1,2,6,11,12
  14576|_("Gorgonea Prima")
  18614|_("Menkib") 1,2,11,12
- 17448|_("Ati") 1,2,11,12
- 17448|_("Atik")
+ 17448|_("Atik") 1,2,11,12
+ 17448|_("Ati")
  17448|_("Alatik")
  18246|_("Atik") 1,2,11
  13879|_("Gorgonea Secunda") 2,5,11
@@ -631,7 +632,8 @@
  86228|_("Sargas") 1,6,11,12
  86228|_("Girtab")
  85927|_("Shaula") 1,2,6,11,12
- 80112|_("Alniyat I") 1,2,5,10,11
+ 80112|_("Alniyat") 1,2,5,10,11,12
+ 80112|_("Alniyat I")
  80112|_("Al Niyat")
  81266|_("Alniyat II") 2,5,10,11
  81266|_("Al Niyat")

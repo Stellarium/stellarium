@@ -852,7 +852,7 @@ void TextUserInterface::saveDefaultSettings(void)
 	conf->setValue("color/planet_orbits_color", colToConf(ssmgr->getOrbitsColor()));
 	conf->setValue("color/object_trails_color", colToConf(ssmgr->getTrailsColor()));
 	conf->setValue("color/meridian_color", colToConf(glmgr->getColorMeridianLine()));
-	conf->setValue("color/longitude_color", colToConf(glmgr->getColorLongitudeLine()));
+	conf->setValue("color/oc_longitude_color", colToConf(glmgr->getColorLongitudeLine()));
 	conf->setValue("color/azimuthal_color", colToConf(glmgr->getColorAzimuthalGrid()));
 	conf->setValue("color/equator_color", colToConf(glmgr->getColorEquatorGrid()));
 	conf->setValue("color/equatorial_J2000_color", colToConf(glmgr->getColorEquatorJ2000Grid()));

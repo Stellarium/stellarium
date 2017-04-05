@@ -105,7 +105,7 @@ public:
 		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
 
-	enum ApparentMagnitudeAlgorithm
+/*	enum ApparentMagnitudeAlgorithm
 	{
 		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
 		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
@@ -113,6 +113,20 @@ public:
 		UndefinedAlgorithm,
 		Generic			// Visual magnitude based on phase angle and albedo
 	};
+*/
+	enum ApparentMagnitudeAlgorithm
+	{
+		Mueller_1893,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Astr_Alm_1984,	// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
+		Expl_Sup_1992,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
+		Expl_Sup_2013,	// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
+//		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+//		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+//		Harris,			// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		UndefinedAlgorithm,
+		Generic		// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
+	};
+
 
 	Planet(const QString& englishName,
 	       int flagLighting,
@@ -153,6 +167,18 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
+	//! - distance
+	//! - phase (result of getPhase)
+	//! - illumination (=100*phase)
+	//! - phase-angle
+	//! - phase-angle-dms (formatted string)
+	//! - phase-angle-deg (formatted string)
+	//! - elongation
+	//! - elongation-dms (formatted string)
+	//! - elongation-deg (formatted string)
+	//! - type (object type description)
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;
 	virtual double getParentSatellitesFov(const StelCore* core) const;
@@ -200,6 +226,11 @@ public:
 
 	void setNativeName(QString planet) { nativeName = planet; }
 
+	//! Return the absolute magnitude (read from file ssystem.ini)
+	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
+	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
+	//! A return value of 100 signals invalid result.
+	float getMeanOppositionMagnitude() const;
 	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
 	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
 	void setApparentMagnitudeAlgorithm(QString algorithm);
@@ -212,24 +243,6 @@ public:
 	void setRotEquatorialToVsop87(const Mat4d &m);
 
 	const RotationElements &getRotationElements(void) const {return re;}
-
-	// Compute the position in the parent Planet coordinate system
-	void computePositionWithoutOrbits(const double dateJDE);
-	void computePosition(const double dateJDE);
-
-	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
-	// This requires both flavours of JD in cases involving Earth.
-	void computeTransMatrix(double JD, double JDE);
-
-	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
-	double getPhaseAngle(const Vec3d& obsPos) const;
-	// Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
-	double getElongation(const Vec3d& obsPos) const;
-	// Get the angular size of the spheroid of the planet (i.e. without the rings)
-	double getSpheroidAngularSize(const StelCore* core) const;
-	// Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
-	float getPhase(const Vec3d& obsPos) const;
-
 	// Set the orbital elements
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
@@ -238,6 +251,25 @@ public:
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
+
+
+
+	//! Compute the position in the parent Planet coordinate system
+	void computePositionWithoutOrbits(const double dateJDE);
+	void computePosition(const double dateJDE);
+
+	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
+	//! This requires both flavours of JD in cases involving Earth.
+	void computeTransMatrix(double JD, double JDE);
+
+	//! Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	double getPhaseAngle(const Vec3d& obsPos) const;
+	//! Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	double getElongation(const Vec3d& obsPos) const;
+	//! Get the angular size of the spheroid of the planet (i.e. without the rings)
+	double getSpheroidAngularSize(const StelCore* core) const;
+	//! Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
+	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;
@@ -416,6 +448,8 @@ protected:
 	Vec3f haloColor;                 // exclusively used for drawing the planet halo
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
+	float absoluteMagnitude;         // since 2017: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
+					 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
 					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis.

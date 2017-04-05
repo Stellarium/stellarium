@@ -98,8 +98,6 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	virtual const StelStyle getModuleStyleSheet(const StelStyle& style);
 	//! This method is needed because the MovementMgr classes handleKeys() method consumes the event.
 	//! Because we want the ocular view to track, we must intercept & process ourselves.  Only called
 	//! while flagShowOculars or flagShowCCD == true.
@@ -189,7 +187,6 @@ private slots:
 	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
 	void retranslateGui();
-	void setStelStyle(const QString& style);
 	void updateOcularReticle(void);
 
 private:
@@ -291,6 +288,8 @@ private:
 	bool flagSupergalacticPoles;	//!< Flag to track if SupergalacticPoles was displayed at activation.
 	bool flagEquinoxJ2000Points;	//!< Flag to track if EquinoxJ2000Points was displayed at activation.
 	bool flagEquinoxPoints;		//!< Flag to track if EquinoxPoints was displayed at activation.
+	bool flagSolsticeJ2000Points;	//!< Flag to track if SolsticeJ2000Points was displayed at activation.
+	bool flagSolsticePoints;	//!< Flag to track if SolsticePoints was displayed at activation.
 
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
@@ -342,10 +341,6 @@ private:
 	StelAction * actionOcularDecrement;
 
 	class OcularsGuiPanel * guiPanel;
-
-	//Styles
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
 
 	//Reticle
 	StelTextureSP reticleTexture;

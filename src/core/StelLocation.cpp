@@ -17,8 +17,10 @@
  */
 
 #include "StelLocation.hpp"
+#include "StelLocationMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
+#include <QTimeZone>
 #include <QStringList>
 
 const int StelLocation::DEFAULT_BORTLE_SCALE_INDEX = 2;
@@ -32,6 +34,7 @@ int StelLocation::initMetaType()
 // Output the location as a string ready to be stored in the user_location file
 QString StelLocation::serializeToLine() const
 {
+	QString sanitizedTZ=StelLocationMgr::sanitizeTimezoneStringForLocationDB(ianaTimeZone);
 	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
 			.arg(name)
 			.arg(state)
@@ -42,7 +45,7 @@ QString StelLocation::serializeToLine() const
 			.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
 			.arg(altitude)
 			.arg(bortleScaleIndex)
-			.arg(timeZone)
+			.arg(sanitizedTZ)
 			.arg(planetName)
 			.arg(landscapeKey);
 }
@@ -58,15 +61,16 @@ QString StelLocation::getID() const
 		return name;
 }
 
+// GZ TODO: These operators may require the sanitizing for timezone names!
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
-	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.timeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 {
-	in >> loc.name >> loc.state >> loc.country >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.timeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	in >> loc.name >> loc.state >> loc.country >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
 	return in;
 }
 
@@ -111,7 +115,15 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (splitline.size()>9)
 	{
 		// Parse time zone
-		loc.timeZone = splitline.at(9).trimmed();
+		loc.ianaTimeZone = splitline.at(9).trimmed();
+		// GZ Check whether the timezone ID is available in the current Qt/IANA list?
+		if ( ! QTimeZone::isTimeZoneIdAvailable(loc.ianaTimeZone.toUtf8()))
+		{
+			// Try to find a currently used IANA string from our known replacements.
+			QString fitName=StelLocationMgr::sanitizeTimezoneStringFromLocationDB(loc.ianaTimeZone);
+			qDebug() << "StelLocation::createFromLine(): TimeZone name for " << loc.name << " not found. Translating" << loc.ianaTimeZone << " to " << fitName;
+			loc.ianaTimeZone=fitName;
+		}
 	}
 
 	if (splitline.size()>10)

@@ -97,7 +97,8 @@ void LocationDialog::createDialogContent()
 	//initialize list model
 	allModel = new QStringListModel(this);
 	pickedModel = new QStringListModel(this);
-	connect(&StelApp::getInstance().getLocationMgr(), SIGNAL(locationListChanged()), this, SLOT(reloadLocations()));
+	StelLocationMgr *locMgr=&(StelApp::getInstance().getLocationMgr());
+	connect(locMgr, SIGNAL(locationListChanged()), this, SLOT(reloadLocations()));
 	reloadLocations();
 	proxyModel = new QSortFilterProxyModel(ui->citiesListView);
 	proxyModel->setSourceModel(allModel);
@@ -149,6 +150,13 @@ void LocationDialog::createDialogContent()
 
 	setFieldsFromLocation(currentLocation);
 
+#ifdef ENABLE_GPS
+	connect(ui->gpsPushButton, SIGNAL(clicked(bool)), this, SLOT(gpsQueryLocation()));
+	connect(locMgr, SIGNAL(gpsQueryFinished(bool)), this, SLOT(gpsReturn(bool)));
+#else
+	ui->gpsPushButton->setEnabled(false);
+	ui->gpsPushButton->hide();
+#endif
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
@@ -162,6 +170,13 @@ void LocationDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
+}
+
+void LocationDialog::handleDialogSizeChanged(QSizeF size)
+{
+	StelDialog::handleDialogSizeChanged(size);
+	StelLocation loc = locationFromFields();
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 }
 
 void LocationDialog::reloadLocations()
@@ -245,7 +260,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
 
-	QString tz = loc.timeZone;
+	QString tz = loc.ianaTimeZone;
 	if (loc.planetName=="Earth" && tz.isEmpty())
 		tz = "system_default";
 	if (!customTimeZone.isEmpty())
@@ -384,10 +399,14 @@ void LocationDialog::populateTimeZonesList()
 	QComboBox* timeZones = ui->timeZoneNameComboBox;
 	// Return a list of all the known time zone names (from Qt)
 	QStringList tzNames;
-	QList<QByteArray> tzList = QTimeZone::availableTimeZoneIds();
+	QList<QByteArray> tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
 	QList<QByteArray>::iterator i;
 	for (i = tzList.begin(); i!= tzList.end(); ++i)
+	{
 		tzNames.append(*i);
+		// Activate this to get a list of known TZ names...
+		//qDebug() << "Qt/IANA TZ entry: " << *i;
+	}
 
 	tzNames.sort();
 
@@ -397,7 +416,7 @@ void LocationDialog::populateTimeZonesList()
 	QVariant selectedTzId = timeZones->itemData(index);
 	timeZones->clear();
 	//For each time zone, display the localized name and store the original as user
-	//data. Unfortunately, there's no other way to do this than with a cycle.
+	//data. Unfortunately, there's no other way to do this than with a loop.
 	foreach(const QString& name, tzNames)
 	{
 		timeZones->addItem(name, name);
@@ -407,6 +426,8 @@ void LocationDialog::populateTimeZonesList()
 	timeZones->addItem(q_("System default"), "system_default");
 	//Restore the selection
 	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
+	// TODO: Handle notfound!?
+	//Q_ASSERT(index!=-1);
 	timeZones->setCurrentIndex(index);
 	timeZones->blockSignals(false);
 
@@ -433,9 +454,12 @@ StelLocation LocationDialog::locationFromFields() const
 
 	index = ui->timeZoneNameComboBox->currentIndex();
 	if (index < 0)
-		loc.timeZone = QString(); //As returned by QComboBox::currentText()
+		loc.ianaTimeZone = QString(); //As returned by QComboBox::currentText()
 	else
-		loc.timeZone = ui->timeZoneNameComboBox->itemData(index).toString();
+	{
+		QString tz=ui->timeZoneNameComboBox->itemData(index).toString();
+		loc.ianaTimeZone = tz;
+	}
 
 	return loc;
 }
@@ -515,8 +539,9 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	stelCore->moveObserverTo(loc, 0., 0.);
 }
 
-void LocationDialog::setPositionFromCoords(int )
+void LocationDialog::setPositionFromCoords(int i)
 {
+	Q_UNUSED(i)
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
@@ -640,7 +665,7 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		StelLocation loc = core->getCurrentLocation();
-		QString tz = loc.timeZone;
+		QString tz = loc.ianaTimeZone;
 		if (loc.planetName=="Earth" && tz.isEmpty())
 			tz = "system_default";
 		int idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -680,8 +705,50 @@ void LocationDialog::ipQueryLocation(bool state)
 	}
 	else
 		conf->setValue("init_location/location", StelApp::getInstance().getCore()->getCurrentLocation().getID());
-
 }
+
+#ifdef ENABLE_GPS
+// called when the user clicks on the GPS Query button. Use gpsd or Qt's NMEA reader.
+void LocationDialog::gpsQueryLocation()
+{
+	disconnectEditSignals();
+	ui->gpsPushButton->setText(q_("GPS..."));
+
+	//only use a single call from a service class here
+	StelApp::getInstance().getLocationMgr().locationFromGPS();
+}
+
+void LocationDialog::gpsReturn(bool success)
+{
+	if (success)
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+
+		ui->gpsPushButton->setText(q_("GPS:SUCCESS"));
+		ui->useAsDefaultLocationCheckBox->setChecked(false);
+		ui->pushButtonReturnToDefault->setEnabled(true);
+		ui->useCustomTimeZoneCheckBox->setChecked(true);
+		resetCompleteList(); // in case we come back from Moon/Mars, we must get list back to show all (earth) locations...
+		updateTimeZoneControls(true);
+		StelLocation loc=core->getCurrentLocation();
+		setFieldsFromLocation(loc);
+	}
+	else
+	{
+		ui->gpsPushButton->setText(q_("GPS:FAILED"));
+	}
+	connectEditSignals();
+	ui->citySearchLineEdit->setFocus();
+
+	// Use QTimer to reset the labels after 2 seconds.
+	QTimer::singleShot(2000, this, SLOT(resetGPSbuttonLabel()));
+}
+
+void LocationDialog::resetGPSbuttonLabel()
+{
+	ui->gpsPushButton->setText(q_("Get location from GPS"));
+}
+#endif
 
 // called when user clicks "reset list"
 void LocationDialog::resetCompleteList()

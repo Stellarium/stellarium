@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-01-16 20:12+0700\n"
-"PO-Revision-Date: 2016-06-20 22:28+0000\n"
+"POT-Creation-Date: 2017-03-21 23:22+0700\n"
+"PO-Revision-Date: 2017-03-09 18:46+0000\n"
 "Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-17 06:20+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-03-22 06:08+0000\n"
+"X-Generator: Launchpad (build 18334)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -23,11 +23,11 @@ msgstr "No se puede recuperar lista de acciones"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr "Acción '% 1' no aceptada por el servidor: "
+msgstr "Acción '%1' no aceptada por el servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr "Error enviando accion '%1' al servidor: "
+msgstr "Error enviando acción '%1' al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -124,7 +124,7 @@ msgstr "La entrada no encontró ningún elemento"
 msgid "No current selection"
 msgstr "Sin selección actual"
 
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:478
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
 #: tablet7in.html:629
 msgid "-none-"
 msgstr "-nada-"
@@ -159,7 +159,7 @@ msgstr "Acciones y scripts"
 
 #: index.html:76
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: index.html:81 tablet7in.html:178
 msgid "Time jumps"
@@ -283,7 +283,7 @@ msgstr "Bajar/Derecha"
 
 #: index.html:122 tablet7in.html:133
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: index.html:140 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
@@ -311,19 +311,11 @@ msgstr "Plutón"
 msgid "Current selection"
 msgstr "Selección actual"
 
-#: index.html:205 tablet7in.html:325
-msgid "Planets and satellites"
-msgstr "Planetas y satélites"
-
-#: index.html:206 tablet7in.html:326
-msgid "Show Solar System objects"
-msgstr "Ver objetos del Sistema Solar"
-
-#: index.html:237 tablet7in.html:362
+#: index.html:242 tablet7in.html:361
 msgid "ZHR:"
 msgstr "THZ:"
 
-#: index.html:281 tablet7in.html:412
+#: index.html:288 tablet7in.html:413
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
@@ -331,91 +323,91 @@ msgstr ""
 "Círculos instantáneas del eje de la Tierra en su movimiento a lo largo de "
 "los polos de la eclíptica. Se ve sólo en la Tierra."
 
-#: index.html:290 tablet7in.html:421
+#: index.html:297 tablet7in.html:422
 msgid "Solstices"
 msgstr "Solsticios"
 
-#: index.html:291 tablet7in.html:422
+#: index.html:298 tablet7in.html:423
 msgid "Crossquarters"
 msgstr "Cuartos cruzados"
 
-#: index.html:292 tablet7in.html:423
+#: index.html:299 tablet7in.html:424
 msgid "Major Standstill"
 msgstr "Mayor Parada"
 
-#: index.html:293 tablet7in.html:424
+#: index.html:300 tablet7in.html:425
 msgid "Minor Standstill"
 msgstr "Menor Parada"
 
-#: index.html:303 tablet7in.html:434
+#: index.html:310 tablet7in.html:435
 msgid "Current Planet:"
 msgstr "Planeta Actual:"
 
-#: index.html:397 tablet7in.html:531
+#: index.html:413 tablet7in.html:530
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Nebulosa Brillante"
 
-#: index.html:398 tablet7in.html:532
+#: index.html:414 tablet7in.html:531
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Nebulosa Obscura"
 
-#: index.html:399 tablet7in.html:533
+#: index.html:415 tablet7in.html:532
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Nebulosa Planetaria"
 
-#: index.html:405 tablet7in.html:542
+#: index.html:424 tablet7in.html:541
 msgid "Labels and markers"
 msgstr "Etiquetas y marcadores"
 
-#: index.html:433 tablet7in.html:570
+#: index.html:453 tablet7in.html:570
 msgid "Show illumination"
 msgstr "Ver iluminación"
 
-#: index.html:438 tablet7in.html:576
+#: index.html:458 tablet7in.html:576
 msgid "Current landscape"
 msgstr "Paisaje actual"
 
-#: index.html:465 tablet7in.html:604
+#: index.html:485 tablet7in.html:604
 msgid "Current sky culture"
 msgstr "Cultura actual del cielo"
 
-#: index.html:478 tablet7in.html:629
+#: index.html:498 tablet7in.html:629
 msgid "Active script:"
 msgstr "Script activo:"
 
-#: index.html:479 tablet7in.html:630
+#: index.html:499 tablet7in.html:630
 msgid "Run selected script"
 msgstr "Arrancar script seleccionado"
 
-#: index.html:479 tablet7in.html:630
+#: index.html:499 tablet7in.html:630
 msgid "Stop current script"
 msgstr "Parar script actual"
 
-#: index.html:484 tablet7in.html:41 tablet7in.html:614
+#: index.html:504 tablet7in.html:41 tablet7in.html:614
 msgid "Actions"
 msgstr "Acciones"
 
-#: index.html:488 tablet7in.html:618
+#: index.html:508 tablet7in.html:618
 msgid "Run/toggle action"
 msgstr "Arrancar/Accion actual"
 
-#: index.html:499 tablet7in.html:653
+#: index.html:519 tablet7in.html:653
 msgid "Planet map"
 msgstr "Mapa planeta"
 
-#: index.html:500 tablet7in.html:654
+#: index.html:520 tablet7in.html:654
 msgid "Planet map pointer"
 msgstr "Punto mapa planeta"
 
-#: index.html:504 tablet7in.html:658
+#: index.html:524 tablet7in.html:658
 msgid "Type to search location"
 msgstr "Escribe localización de búsqueda"
 
-#: index.html:549 tablet7in.html:704
+#: index.html:569 tablet7in.html:704
 msgid "No response from server"
 msgstr "No hay respuesta del servidor"
 
-#: index.html:550
+#: index.html:570
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
@@ -436,7 +428,7 @@ msgstr "Ver el horizonte en el acimut"
 
 #: tablet7in.html:118
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Desplazamiento vertical de la vista"
 
 #: tablet7in.html:128
 msgid "Reset"
@@ -536,7 +528,7 @@ msgstr "Piscis"
 
 #: tablet7in.html:600
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Constelación de selección aislados"
 
 #: tablet7in.html:638
 msgid "Favorites"
@@ -544,7 +536,7 @@ msgstr "Favoritos"
 
 #: tablet7in.html:640
 msgid "Show 1"
-msgstr ""
+msgstr "Mostrar 1"
 
 #: tablet7in.html:641
 msgid "Remove Labels and Images"

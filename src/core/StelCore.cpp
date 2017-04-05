@@ -187,7 +187,7 @@ void StelCore::init()
 	if (!ctz.isEmpty())
 		setUseCustomTimeZone(true);
 	else
-		ctz = getCurrentLocation().timeZone;
+		ctz = getCurrentLocation().ianaTimeZone;
 	setCurrentTimeZone(ctz);
 
 	// Delta-T stuff
@@ -766,14 +766,26 @@ Vec3d StelCore::supergalacticToJ2000(const Vec3d& v) const
 	return matSupergalacticToJ2000*v;
 }
 
-Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v) const
+Vec3d StelCore::equinoxEquToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
-	return matEquinoxEquToJ2000*v;
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matEquinoxEquToJ2000*v;
+	Vec3d r(v);
+	r.transfo4d(matEquinoxEquToAltAz);
+	skyDrawer->getRefraction().backward(r);
+	r.transfo4d(matAltAzToJ2000);
+	return r;
 }
 
-Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v) const
+Vec3d StelCore::j2000ToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 {
-	return matJ2000ToEquinoxEqu*v;
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return matJ2000ToEquinoxEqu*v;
+	Vec3d r(v);
+	r.transfo4d(matJ2000ToAltAz);
+	skyDrawer->getRefraction().forward(r);
+	r.transfo4d(matAltAzToEquinoxEqu);
+	return r;
 }
 
 Vec3d StelCore::j2000ToJ1875(const Vec3d& v) const
@@ -931,6 +943,7 @@ void StelCore::updateTransformMatrices()
 	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
 	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
+	matAltAzToJ2000 = matJ2000ToAltAz.transpose();
 
 	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
@@ -1797,7 +1810,7 @@ double StelCore::computeDeltaT(const double JD)
 	}
 
 	if (!deltaTdontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, (de430Active || de431Active));
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, deltaTnDot, ((de430Active&&EphemWrapper::jd_fits_de430(JD)) || (de431Active&&EphemWrapper::jd_fits_de431(JD))));
 
 	return DeltaT;
 }
