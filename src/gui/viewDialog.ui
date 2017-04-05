@@ -2906,6 +2906,55 @@
                </item>
               </layout>
              </item>
+             <item row="4" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_asterismLines">
+               <item>
+                <widget class="QCheckBox" name="showAsterismLinesCheckBox">
+                 <property name="text">
+                  <string>Show asterism lines</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="asterismLineThicknessSpinBox">
+                 <property name="decimals">
+                  <number>0</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>5.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="colorAsterismLines">
+                 <property name="toolTip">
+                  <string>Color of lines of asterisms</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_asterismLabels">
+               <item>
+                <widget class="QCheckBox" name="showAsterismLabelsCheckBox">
+                 <property name="text">
+                  <string>Show asterism labels</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="colorAsterismLabels">
+                 <property name="toolTip">
+                  <string>Color of names of asterisms</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
           </item>

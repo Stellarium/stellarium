@@ -25,6 +25,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "CustomObjectMgr.hpp"
@@ -481,7 +482,12 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(videoMgr);
 
 	// Constellations
-	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
+	ConstellationMgr* constellations = new ConstellationMgr(hip_stars);
+	constellations->init();
+	getModuleMgr().registerModule(constellations);
+
+	// Asterisms
+	AsterismMgr* asterisms = new AsterismMgr(hip_stars);
 	asterisms->init();
 	getModuleMgr().registerModule(asterisms);
 

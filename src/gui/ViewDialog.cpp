@@ -41,6 +41,7 @@
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
 #include "ConstellationMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
@@ -402,6 +403,14 @@ void ViewDialog::createDialogContent()
 	connect(ui->colorConstellationLabels,		SIGNAL(released()), this, SLOT(askConstellationLabelsColor()));
 	connect(ui->colorConstellationLines,		SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
 
+	connectCheckBox(ui->showAsterismLinesCheckBox, "actionShow_Asterism_Lines");
+	connectDoubleProperty(ui->asterismLineThicknessSpinBox, "AsterismMgr.asterismLineThickness");
+	connectCheckBox(ui->showAsterismLabelsCheckBox, "actionShow_Asterism_Labels");
+
+	colorButton(ui->colorAsterismLabels,	"AsterismMgr.namesColor");
+	colorButton(ui->colorAsterismLines,	"AsterismMgr.linesColor");
+	connect(ui->colorAsterismLabels,	SIGNAL(released()), this, SLOT(askAsterismLabelsColor()));
+	connect(ui->colorAsterismLines,		SIGNAL(released()), this, SLOT(askAsterismLinesColor()));
 
 	// Sky layers. This not yet finished and not visible in releases.
 	// TODO: These 4 lines are commented away in trunk.
@@ -946,6 +955,36 @@ void ViewDialog::askConstellationLinesColor()
 		GETSTELMODULE(ConstellationMgr)->setLinesColor(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/const_lines_color", StelUtils::vec3fToStr(vColor));
 		ui->colorConstellationLines->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askAsterismLabelsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("AsterismMgr.namesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorAsterismLabels->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(AsterismMgr)->setLabelsColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/asterism_names_color", StelUtils::vec3fToStr(vColor));
+		ui->colorAsterismLabels->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askAsterismLinesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("AsterismMgr.linesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorAsterismLines->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(AsterismMgr)->setLinesColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/asterism_lines_color", StelUtils::vec3fToStr(vColor));
+		ui->colorAsterismLines->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 
