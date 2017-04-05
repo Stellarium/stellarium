@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:21+0700\n"
-"PO-Revision-Date: 2017-03-13 19:36+0000\n"
+"POT-Creation-Date: 2017-04-02 14:53+0700\n"
+"PO-Revision-Date: 2017-04-02 18:02+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 05:24+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-04-05 05:28+0000\n"
+"X-Generator: Launchpad (build 18335)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -51,7 +51,7 @@ msgstr "сузор'е"
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
-#: src/core/modules/ZodiacalLight.cpp:80 src/core/modules/ToastMgr.cpp:60
+#: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:533 src/core/StelCore.cpp:253
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
@@ -1171,7 +1171,7 @@ msgstr "Аддаленьне"
 msgid "Milky Way"
 msgstr "Млечны шлях"
 
-#: src/core/modules/ZodiacalLight.cpp:81
+#: src/core/modules/ZodiacalLight.cpp:82
 msgid "Zodiacal Light"
 msgstr "Задыякальнае сьвятло"
 
@@ -2326,7 +2326,7 @@ msgid "Custom equation of %1T"
 msgstr "Сваё раўнаньне %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1493 src/gui/ConfigurationDialog.cpp:1528
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:411
+#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr "Прадвызначаны сыстэмны"
 
@@ -2696,11 +2696,11 @@ msgstr "Прабел"
 msgid "Time zone"
 msgstr "Часавая зона"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:409
+#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:424
 msgid "Local Mean Solar Time"
 msgstr "Мясцовы сярэдні сонечны дзень"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:410
+#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
 msgstr "Мясцовы сапраўдны сонечны дзень"
 
@@ -2842,6 +2842,22 @@ msgstr "Вельмі высокая (Леаніды ў 1966)"
 #: src/gui/ViewDialog.cpp:1404
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Найбольшая калі (Леаніды ў 1833)"
+
+#: src/gui/LocationDialog.cpp:715
+msgid "GPS..."
+msgstr "GPS…"
+
+#: src/gui/LocationDialog.cpp:727
+msgid "GPS:SUCCESS"
+msgstr "GPS:ПОСЬПЕХ"
+
+#: src/gui/LocationDialog.cpp:738
+msgid "GPS:FAILED"
+msgstr "GPS:НЯЎДАЧА"
+
+#: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:492
+msgid "Get location from GPS"
+msgstr "Узяць месца з GPS"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:113
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -5416,60 +5432,65 @@ msgstr "Правіць скароты клявіятуры…"
 msgid "Refresh"
 msgstr "Абнавіць"
 
-#: src/ui_locationDialogGui.h:430
+#: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Location"
 msgstr "Месца"
 
-#: src/ui_locationDialogGui.h:434 src/ui_locationDialogGui.h:437
+#: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 "Стандартны сьпіс месцаў утрымлівае толькі анґельскія назвы (без дыяктрыкі!)"
 
-#: src/ui_locationDialogGui.h:441
+#: src/ui_locationDialogGui.h:467
 msgid "Reset location list to show all known locations"
 msgstr "Вернуць стан сьпісу месцаў, каб адлюстроўваліся ўсе вядомыя месцы"
 
-#: src/ui_locationDialogGui.h:443
+#: src/ui_locationDialogGui.h:469
 msgid "Reset Location List"
 msgstr "Вернуць стан сьпісу месцаў"
 
-#: src/ui_locationDialogGui.h:444
+#: src/ui_locationDialogGui.h:470
 msgid "Current location information"
 msgstr "Зьвесткі пра цяперашняе месца"
 
-#: src/ui_locationDialogGui.h:445
+#: src/ui_locationDialogGui.h:471
 msgid "Add to list"
 msgstr "Дадаць да сьпісу"
 
-#: src/ui_locationDialogGui.h:446
+#: src/ui_locationDialogGui.h:472
 msgid "Delete from list"
 msgstr "Выдаліць са сьпісу"
 
-#: src/ui_locationDialogGui.h:447
+#: src/ui_locationDialogGui.h:473
 msgid "Return to default location"
 msgstr "Вернуцца да прадвызначанага"
 
-#: src/ui_locationDialogGui.h:448
-msgid "Use current location as default"
-msgstr "Выкарыстоўваць бягучае месца як прадвызначанае"
-
-#: src/ui_locationDialogGui.h:449
+#: src/ui_locationDialogGui.h:474
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Даўгата:"
 
-#: src/ui_locationDialogGui.h:450
+#: src/ui_locationDialogGui.h:475
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Шырата:"
 
-#: src/ui_locationDialogGui.h:451
+#: src/ui_locationDialogGui.h:476
+msgid "Use current location as default"
+msgstr "Выкарыстоўваць бягучае месца як прадвызначанае"
+
+#: src/ui_locationDialogGui.h:477
 msgid "Get location from Network"
 msgstr "Атрымаць месца зь Сеціва"
 
-#: src/ui_locationDialogGui.h:453 src/ui_locationDialogGui.h:460
+#: src/ui_locationDialogGui.h:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+msgid "Altitude:"
+msgstr "Вышыня:"
+
+#: src/ui_locationDialogGui.h:480 src/ui_locationDialogGui.h:483
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -5477,44 +5498,43 @@ msgstr ""
 "Можна ўвесьці значэньні ў ґрадусах, або ў фармаце dms (гмс), напрыклад: +1d "
 "12m 8s"
 
-#: src/ui_locationDialogGui.h:456
+#: src/ui_locationDialogGui.h:486
 msgid "Enter the altitude in meter"
 msgstr "Увядзі вышыню ў мэтрах"
 
-#: src/ui_locationDialogGui.h:458
+#: src/ui_locationDialogGui.h:488
 msgid " m"
 msgstr " м"
 
-#: src/ui_locationDialogGui.h:462
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
-msgid "Altitude:"
-msgstr "Вышыня:"
+#: src/ui_locationDialogGui.h:490
+msgid "Retrieve current coordinates from GPS. Does not set timezone!"
+msgstr "Атрымаць бягучыя каардынаты з GPS. Не задае часавую зону!"
 
-#: src/ui_locationDialogGui.h:463
+#: src/ui_locationDialogGui.h:493
 msgid "New Location"
 msgstr "Новае месца"
 
-#: src/ui_locationDialogGui.h:464
+#: src/ui_locationDialogGui.h:494
 msgid "Planet:"
 msgstr "Плянэта:"
 
-#: src/ui_locationDialogGui.h:465
+#: src/ui_locationDialogGui.h:495
 msgid "Use custom time zone"
 msgstr "Свая часавая зона"
 
-#: src/ui_locationDialogGui.h:466
+#: src/ui_locationDialogGui.h:496
 msgid "Time zone:"
 msgstr "Часавая зона:"
 
-#: src/ui_locationDialogGui.h:467
+#: src/ui_locationDialogGui.h:497
 msgid "Name/City:"
 msgstr "Назва/горад:"
 
-#: src/ui_locationDialogGui.h:468
+#: src/ui_locationDialogGui.h:498
 msgid "Country:"
 msgstr "Краіна:"
 
-#: src/ui_locationDialogGui.h:472
+#: src/ui_locationDialogGui.h:502
 msgid "Enable daylight saving time"
 msgstr "Задзейнічаць летні час"
 
@@ -6518,7 +6538,7 @@ msgstr "Прадвызначаныя настаўленьні"
 
 #: src/ui_configurationDialog.h:1235
 msgid "Save View"
-msgstr ""
+msgstr "Захоўваць прагляд"
 
 #: src/ui_configurationDialog.h:1237
 msgid ""
@@ -6554,6 +6574,9 @@ msgid ""
 "for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
+"Захоўваць ці бягучае ПЗ і напрамак прагляду ці ўсе бягучыя выборы для "
+"вырарыстаньня пры наступным запуску. Для аднаўленьня прадвызначаных настроек "
+"патрэбны перазапуск Stellarium. "
 
 #: src/ui_configurationDialog.h:1246
 msgid "The width of your view when Stellarium starts"
@@ -7181,7 +7204,7 @@ msgstr "Становішча курсора"
 msgid "Include dir:"
 msgstr "Уключыць каталёґ:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:327
+#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "..."
 msgstr "…"
 
@@ -7236,7 +7259,7 @@ msgstr "Ачысьціць эфэмэрыды"
 #: src/ui_astroCalcDialog.h:542 src/ui_astroCalcDialog.h:550
 #: plugins/Satellites/src/ui_satellitesDialog.h:822
 msgid "Calculations require time, please be patient"
-msgstr ""
+msgstr "Разьлік патрабуе часу, пачакай, калі ласка"
 
 #: src/ui_astroCalcDialog.h:544
 msgid "Calculate ephemeris"
@@ -7251,12 +7274,12 @@ msgid "Time step:"
 msgstr "Крок часу:"
 
 #: src/ui_astroCalcDialog.h:547 src/ui_astroCalcDialog.h:557
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "Да:"
 
 #: src/ui_astroCalcDialog.h:548 src/ui_astroCalcDialog.h:554
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "Ад:"
 
@@ -8486,6 +8509,8 @@ msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
+"Прывязкі клявіш гэтага дадатку можна правіць у Рэдактары скаротаў клявіятуры "
+"(F7)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:543
 #: plugins/Oculars/src/gui/OcularDialog.cpp:548
@@ -8502,11 +8527,11 @@ msgstr "Адкрые усплыўное навіґацыйнае мэню."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "Rotate reticle pattern of the eyepiece clockwise."
-msgstr ""
+msgstr "Павернуць узор сеткі акуляра за стрэлкай гадзіньніка."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
-msgstr ""
+msgstr "Павернуць узор сеткі акуляра супраць стрэлкі гадзіньніка."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1134
 msgid "Interface"
@@ -9517,7 +9542,7 @@ msgstr "Крыніцы"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:820
 msgid "Flare prediction (days):"
-msgstr ""
+msgstr "Прадказаньне ўспышкі (дзён):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid "Predict Iridium flares"
@@ -10644,67 +10669,67 @@ msgstr "Схіленьне (J2000)"
 msgid "Select one"
 msgstr "Вылучы адзін"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:319
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "Павернуць тэлескоп да"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "Няма актыўных прыладаў."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:322
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "Павернуць тэлескоп да каардынат"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Прамое ўзыходжаньне (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "&Схіленьне (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Бягучы аб'ект"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Цэнтр экрана"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "Фармат гадзіны-хвіліны-сэкунды"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&ГХС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "Фармат ґрадусы-мінуты-сэкунды"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "Ґ&МС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "Дзесятковыя ґрадусы"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "Дз&есятковыя"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "&Павернуць"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "Наставіць &тэлескопы…"
 
@@ -14403,7 +14428,7 @@ msgid "Peak"
 msgstr "Пік"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
 msgstr "Настаўленьні «Мэтэорных плыняў»"
 
@@ -14483,21 +14508,21 @@ msgstr "Статус:"
 msgid "Update"
 msgstr "Абнаўленьне"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
 msgstr "Мэтэорныя плыні: пошук"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
 msgstr "Шукаць"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
 msgstr "дд/мм/гггг"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
 msgstr "Вынікі"
 

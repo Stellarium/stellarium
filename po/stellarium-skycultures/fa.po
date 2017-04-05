@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:22+0700\n"
-"PO-Revision-Date: 2016-11-26 07:10+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2017-04-04 11:08+0700\n"
+"PO-Revision-Date: 2017-04-02 22:17+0000\n"
+"Last-Translator: Farhad Bagheri Fard <canada.fery@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 06:00+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-04-05 06:03+0000\n"
+"X-Generator: Launchpad (build 18335)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -24,11 +24,11 @@ msgstr "خورشید"
 
 #: skycultures/translations.fab:10
 msgid "Mercury"
-msgstr "تیر"
+msgstr "تیر (عطارد)"
 
 #: skycultures/translations.fab:11
 msgid "Venus"
-msgstr "ناهید"
+msgstr "ناهید (زهره)"
 
 #: skycultures/translations.fab:12
 msgid "Earth"
@@ -41,7 +41,7 @@ msgstr "ماه"
 
 #: skycultures/translations.fab:14
 msgid "Mars"
-msgstr "بهرام"
+msgstr "بهرام (مریخ)"
 
 #: skycultures/translations.fab:15
 msgid "Deimos"
@@ -61,7 +61,7 @@ msgstr "پالاس"
 
 #: skycultures/translations.fab:19
 msgid "Juno"
-msgstr "جونو"
+msgstr "ژوئن"
 
 #: skycultures/translations.fab:20
 msgid "Vesta"
@@ -69,7 +69,7 @@ msgstr "وستا"
 
 #: skycultures/translations.fab:21
 msgid "Jupiter"
-msgstr "برجیس"
+msgstr "برجیس (مشتری)"
 
 #: skycultures/translations.fab:22
 msgid "Io"
@@ -81,7 +81,7 @@ msgstr "اروپا"
 
 #: skycultures/translations.fab:24
 msgid "Ganymede"
-msgstr "گانيمد"
+msgstr "گانیمید"
 
 #: skycultures/translations.fab:25
 msgid "Callisto"
@@ -133,7 +133,7 @@ msgstr "ادراستيا"
 
 #: skycultures/translations.fab:37
 msgid "Saturn"
-msgstr "کیوان"
+msgstr "کیوان (زحل)"
 
 #: skycultures/translations.fab:38
 msgid "Mimas"
@@ -205,7 +205,7 @@ msgstr "پلوتون"
 
 #: skycultures/translations.fab:55
 msgid "Charon"
-msgstr "كارن"
+msgstr "کارون (قمر پلوتون)"
 
 #. TRANSLATORS: Moon of Pluto (II)
 #: skycultures/translations.fab:57
@@ -295,7 +295,7 @@ msgstr "ناظر منظومه خورشیدی"
 
 #: skycultures/translations.fab:79
 msgid "Earth Observer"
-msgstr ""
+msgstr "ناظر زمینی"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: skycultures/translations.fab:81
@@ -370,7 +370,7 @@ msgstr "فلورا"
 #. TRANSLATORS: Asteroid (9) Metis and moon of Jupiter
 #: skycultures/translations.fab:118
 msgid "Metis"
-msgstr "ادراستيا"
+msgstr "متیس"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
 #: skycultures/translations.fab:120
@@ -395,7 +395,7 @@ msgstr "آپوفیس"
 #. TRANSLATORS: Asteroid (2060) Chiron
 #: skycultures/translations.fab:128
 msgid "Chiron"
-msgstr "چایرون"
+msgstr "کارون"
 
 #. TRANSLATORS: Asteroid (433) Eros
 #: skycultures/translations.fab:130
@@ -450,22 +450,22 @@ msgstr "آیدا"
 #. TRANSLATORS: Asteroid (218) Bianca
 #: skycultures/translations.fab:150
 msgid "Bianca"
-msgstr ""
+msgstr "بیانکا"
 
 #. TRANSLATORS: Asteroid (3753) Cruithne
 #: skycultures/translations.fab:152
 msgid "Cruithne"
-msgstr ""
+msgstr "سیارک کروئینیه"
 
 #. TRANSLATORS: Asteroid (5261) Eureka
 #: skycultures/translations.fab:154
 msgid "Eureka"
-msgstr ""
+msgstr "یوریکا"
 
 #. TRANSLATORS: Asteroid (367943) Duende [2012 DA14]
 #: skycultures/translations.fab:156
 msgid "Duende"
-msgstr ""
+msgstr "دوئنده"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: skycultures/translations.fab:161
@@ -485,12 +485,12 @@ msgstr "ابرنواختر كپلر"
 #. TRANSLATORS: Name of supernova SN 1680A
 #: skycultures/translations.fab:175
 msgid "Cassiopeia A"
-msgstr ""
+msgstr "ذات الکرسى A"
 
 #. TRANSLATORS: Name of supernova SN 1885A
 #: skycultures/translations.fab:177
 msgid "S Andromedae"
-msgstr ""
+msgstr "S زن برزنجیر"
 
 #. TRANSLATORS: Proper name of star 14 Andromedae
 #: skycultures/translations.fab:182 skycultures/western/star_names.fab:11
@@ -523,7 +523,7 @@ msgid "Orbitar"
 msgstr "اوربیتار"
 
 #. TRANSLATORS: Proper name of star 47 Ursae Majoris
-#: skycultures/translations.fab:194 skycultures/western/star_names.fab:715
+#: skycultures/translations.fab:194 skycultures/western/star_names.fab:716
 msgid "Chalawan"
 msgstr "چالاوان"
 
@@ -595,7 +595,7 @@ msgstr "رن"
 #. TRANSLATORS: Proper name of exoplanet epsilon Eridani b
 #: skycultures/translations.fab:222
 msgid "AEgir"
-msgstr ""
+msgstr "اِجیر"
 
 #. TRANSLATORS: Proper name of exoplanet Errai b (gamma Cephei b)
 #: skycultures/translations.fab:224
@@ -628,7 +628,7 @@ msgid "Smertrios"
 msgstr "اسمرتریوس"
 
 #. TRANSLATORS: Proper name of star HD 81688
-#: skycultures/translations.fab:236 skycultures/western/star_names.fab:714
+#: skycultures/translations.fab:236 skycultures/western/star_names.fab:715
 msgid "Intercrus"
 msgstr "اینترکروس"
 
@@ -719,7 +719,7 @@ msgstr "فورتیتودو"
 
 #: nebulae/default/names.dat:9
 msgid "Bow-Tie Nebula"
-msgstr ""
+msgstr "سحابی پاپیون"
 
 #: nebulae/default/names.dat:10 nebulae/default/names.dat:11
 #: nebulae/default/names.dat:12 nebulae/default/names.dat:13
@@ -732,7 +732,7 @@ msgstr "47 تی یو سی"
 
 #: nebulae/default/names.dat:15
 msgid "Giant Squid Galaxy"
-msgstr ""
+msgstr "کهکشان سرپاور عظیم"
 
 #: nebulae/default/names.dat:16
 msgid "Andromeda Galaxy"
@@ -740,11 +740,11 @@ msgstr "کهکشان آندرومدا"
 
 #: nebulae/default/names.dat:17
 msgid "Andromeda Nebula"
-msgstr ""
+msgstr "سحابی زن برزنجیر"
 
 #: nebulae/default/names.dat:18
 msgid "Sailboat Cluster"
-msgstr ""
+msgstr "خوشه کشتی بادبانی"
 
 #: nebulae/default/names.dat:19
 msgid "Skull Nebula"
@@ -756,15 +756,15 @@ msgstr "کهکشان مجسمه‌ساز"
 
 #: nebulae/default/names.dat:21
 msgid "Silver Coin Galaxy"
-msgstr ""
+msgstr "کهکشان سکه نقره"
 
 #: nebulae/default/names.dat:22
 msgid "Silver Dollar Galaxy"
-msgstr ""
+msgstr "کهکشان دلار نقره"
 
 #: nebulae/default/names.dat:23
 msgid "Markarian 348"
-msgstr ""
+msgstr "مارکارین 348"
 
 #: nebulae/default/names.dat:24
 msgid "Small Magellanic Cloud"
@@ -776,15 +776,15 @@ msgstr "شبح میراچ"
 
 #: nebulae/default/names.dat:26
 msgid "Dragonfly Cluster"
-msgstr ""
+msgstr "خوشه سنجاقک"
 
 #: nebulae/default/names.dat:27
 msgid "Owl Cluster"
-msgstr ""
+msgstr "خوشه جغد"
 
 #: nebulae/default/names.dat:28
 msgid "E.T. Cluster"
-msgstr ""
+msgstr "خوشه باز ای.تی.( در ذات الکرسی)"
 
 #: nebulae/default/names.dat:29
 msgid "Triangulum Galaxy"
@@ -792,35 +792,35 @@ msgstr "کهکشان مثلثی"
 
 #: nebulae/default/names.dat:30
 msgid "Triangulum Pinwheel"
-msgstr ""
+msgstr "فرفره کهکشان مثلثی"
 
 #: nebulae/default/names.dat:31
 msgid "Little Dumbbell Nebula"
-msgstr ""
+msgstr "سحابی دمبل کوچک"
 
 #: nebulae/default/names.dat:32
 msgid "Cork Nebula"
-msgstr ""
+msgstr "سحابی‬‏ چوب پنبه"
 
 #: nebulae/default/names.dat:33
 msgid "Barbell Nebula"
-msgstr ""
+msgstr "سحابی هالتر"
 
 #: nebulae/default/names.dat:34 nebulae/default/names.dat:36
 msgid "Double Cluster"
-msgstr ""
+msgstr "خوشه دوتایی"
 
 #: nebulae/default/names.dat:35
 msgid "h Persei"
-msgstr ""
+msgstr "اچ پرسی"
 
 #: nebulae/default/names.dat:37
 msgid "χ Persei"
-msgstr ""
+msgstr "ایکس پرسی"
 
 #: nebulae/default/names.dat:38
 msgid "Spiral Cluster"
-msgstr ""
+msgstr "خوشه مارپیچ"
 
 #: nebulae/default/names.dat:39
 msgid "Cetus A"
@@ -840,11 +840,11 @@ msgstr "کوره B"
 
 #: nebulae/default/names.dat:43
 msgid "Little Scorpion Cluster"
-msgstr ""
+msgstr "خوشه عقرب کوچک"
 
 #: nebulae/default/names.dat:44
 msgid "Robin's Egg Nebula"
-msgstr ""
+msgstr "سحابی تخم پرنده سینه سرخ"
 
 #: nebulae/default/names.dat:45
 msgid "Maia Nebula"
@@ -856,7 +856,7 @@ msgstr "سحابی مروپ"
 
 #: nebulae/default/names.dat:47
 msgid "Tempel's Nebula"
-msgstr ""
+msgstr "سحابی معبد"
 
 #: nebulae/default/names.dat:48
 msgid "California Nebula"
@@ -864,19 +864,19 @@ msgstr "سحابی کالیفرنیا"
 
 #: nebulae/default/names.dat:49
 msgid "Camel's Eye Nebula"
-msgstr ""
+msgstr "سحابی چشم شتر"
 
 #: nebulae/default/names.dat:50
 msgid "Jolly Roger Cluster"
-msgstr ""
+msgstr "خوشه پرچم دزد دریایی"
 
 #: nebulae/default/names.dat:51
 msgid "Crystal Ball Nebula"
-msgstr ""
+msgstr "سحابی گوی بلورین"
 
 #: nebulae/default/names.dat:52
 msgid "Cleopatra's Eye Nebula"
-msgstr ""
+msgstr "سحابی چشم کلوپاترا"
 
 #: nebulae/default/names.dat:53
 msgid "Struve's Lost Nebula"
@@ -884,7 +884,7 @@ msgstr "سحابی مفقود اشترووه"
 
 #: nebulae/default/names.dat:54
 msgid "Hind's variable Nebula"
-msgstr ""
+msgstr "سحابی متغیر پسین گاو"
 
 #: nebulae/default/names.dat:55 nebulae/default/names.dat:56
 msgid "Carafe Group"
@@ -892,11 +892,11 @@ msgstr "گروه کارافه"
 
 #: nebulae/default/names.dat:57 nebulae/default/names.dat:58
 msgid "Starfish Cluster"
-msgstr ""
+msgstr "خوشه ستاره دریایی"
 
 #: nebulae/default/names.dat:59
 msgid "Fly Nebula"
-msgstr ""
+msgstr "سحابی پرواز"
 
 #: nebulae/default/names.dat:60
 msgid "Crab Nebula"
@@ -904,15 +904,15 @@ msgstr "سحابی خرچنگ"
 
 #: nebulae/default/names.dat:61
 msgid "Taurus A"
-msgstr ""
+msgstr "ثور A"
 
 #: nebulae/default/names.dat:62
 msgid "Pinwheel Cluster"
-msgstr ""
+msgstr "خوشه فرفره"
 
 #: nebulae/default/names.dat:63
 msgid "Great Orion Nebula"
-msgstr ""
+msgstr "سحابی بزرگ شکارچی"
 
 #: nebulae/default/names.dat:64
 msgid "Orion Nebula"
@@ -920,7 +920,7 @@ msgstr "سحابی منظومۀ جبار"
 
 #: nebulae/default/names.dat:65
 msgid "Orion A"
-msgstr ""
+msgstr "شکارچی A"
 
 #: nebulae/default/names.dat:66
 msgid "Running Man Nebula"
@@ -928,31 +928,31 @@ msgstr "سحابی مرد دونده"
 
 #: nebulae/default/names.dat:67
 msgid "de Mairan's Nebula"
-msgstr ""
+msgstr "سحابی دی ماریان"
 
 #: nebulae/default/names.dat:68
 msgid "ε Ori Nebula"
-msgstr ""
+msgstr "سحابی اپسیلون شکارچی"
 
 #: nebulae/default/names.dat:69
 msgid "Flame Nebula"
-msgstr ""
+msgstr "سحابی مشتعل"
 
 #: nebulae/default/names.dat:70
 msgid "Tank Tracks Nebula"
-msgstr ""
+msgstr "سحابی چرخ زنجیری تانک"
 
 #: nebulae/default/names.dat:71
 msgid "Tarantula Nebula"
-msgstr ""
+msgstr "سحابی رتیل"
 
 #: nebulae/default/names.dat:72
 msgid "Looped Nebula"
-msgstr ""
+msgstr "سحابی حلقه شده"
 
 #: nebulae/default/names.dat:73
 msgid "True Lovers' Knot"
-msgstr ""
+msgstr "گره عشق حقیقی"
 
 #: nebulae/default/names.dat:74
 msgid "Ghost Head Nebula"
@@ -960,7 +960,7 @@ msgstr "سحابی سر روح"
 
 #: nebulae/default/names.dat:75
 msgid "January Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "خوشه نمک و فلفل ژانویه"
 
 #: nebulae/default/names.dat:76
 msgid "The 37 Cluster"
@@ -968,11 +968,11 @@ msgstr "خوشه 37"
 
 #: nebulae/default/names.dat:77
 msgid "The 'LE' Cluster"
-msgstr ""
+msgstr "خوشه 'LE'"
 
 #: nebulae/default/names.dat:78
 msgid "Monkey Head Nebula"
-msgstr ""
+msgstr "سحابی سر میمون"
 
 #: nebulae/default/names.dat:79
 msgid "Rosette A"
@@ -980,7 +980,7 @@ msgstr "گل سرخ A"
 
 #: nebulae/default/names.dat:80
 msgid "Satellite Cluster"
-msgstr ""
+msgstr "خوشه ماهواره"
 
 #: nebulae/default/names.dat:81
 msgid "Rosette B"
@@ -988,11 +988,11 @@ msgstr "گل سرخ B"
 
 #: nebulae/default/names.dat:82
 msgid "Hubble's variable Nebula"
-msgstr ""
+msgstr "سحابی متغیر هابل"
 
 #: nebulae/default/names.dat:83
 msgid "Cone Nebula"
-msgstr ""
+msgstr "سحابی مخروطی"
 
 #: nebulae/default/names.dat:84
 msgid "Christmas Tree Cluster"
@@ -1000,7 +1000,7 @@ msgstr "خوشۀ درخت کریسمس"
 
 #: nebulae/default/names.dat:85
 msgid "Heart-Shaped Cluster"
-msgstr ""
+msgstr "سحابی قلبی شکل"
 
 #: nebulae/default/names.dat:86 nebulae/default/names.dat:209
 #: nebulae/default/names.dat:302
@@ -1009,7 +1009,7 @@ msgstr "سحابی پروانه‌ای"
 
 #: nebulae/default/names.dat:87
 msgid "Hourglass Planetary Nebula"
-msgstr ""
+msgstr "سحابی سیاره ای ساعت شنى"
 
 #: nebulae/default/names.dat:88
 msgid "Thor's Helmet"
@@ -1017,23 +1017,23 @@ msgstr "سحابی کلاه خود ثور"
 
 #: nebulae/default/names.dat:89
 msgid "Duck Nebula"
-msgstr ""
+msgstr "سحابی مرغابی"
 
 #: nebulae/default/names.dat:90
 msgid "Caroline's Cluster"
-msgstr ""
+msgstr "خوشه کارولین"
 
 #: nebulae/default/names.dat:91
 msgid "τ Canis Majoris Cluster"
-msgstr ""
+msgstr "خوشه سگ بزرگ تاو"
 
 #: nebulae/default/names.dat:92
 msgid "Mexican Jumping Star"
-msgstr ""
+msgstr "ستاره لوبیای مکزیکی"
 
 #: nebulae/default/names.dat:93
 msgid "Gemini Nebula"
-msgstr ""
+msgstr "سحابی دوپیکر"
 
 #: nebulae/default/names.dat:94
 msgid "Eskimo Nebula"
@@ -1041,7 +1041,7 @@ msgstr "سحابی اسکیمو"
 
 #: nebulae/default/names.dat:95
 msgid "Clown Face Nebula"
-msgstr ""
+msgstr "سحابی صورت دلقکی"
 
 #: nebulae/default/names.dat:96
 msgid "Intergalactic Wanderer/Tramp"
@@ -1053,19 +1053,19 @@ msgstr "خوشۀ پروانه‌ای"
 
 #: nebulae/default/names.dat:98
 msgid "Skull and Crossbones Nebula"
-msgstr ""
+msgstr "سحابی کله اسکلت و استخوان صلیبی"
 
 #: nebulae/default/names.dat:99
 msgid "Electric Guitar Cluster"
-msgstr ""
+msgstr "خوشه گیتار الکتریک"
 
 #: nebulae/default/names.dat:100
 msgid "Sprinter Cluster"
-msgstr ""
+msgstr "خوشه قهرمان دوسرعت"
 
 #: nebulae/default/names.dat:101
 msgid "Bear's Paw Galaxy"
-msgstr ""
+msgstr "کهکشان پنجه خرس"
 
 #: nebulae/default/names.dat:102
 msgid "Polarissima Australis"
@@ -1073,15 +1073,15 @@ msgstr "ستارۀ قطبی جنوبی"
 
 #: nebulae/default/names.dat:103
 msgid "Beehive Cluster"
-msgstr ""
+msgstr "خوشه کندوی عسل"
 
 #: nebulae/default/names.dat:104
 msgid "Praesepe"
-msgstr ""
+msgstr "پری سی پی"
 
 #: nebulae/default/names.dat:105
 msgid "Manger"
-msgstr ""
+msgstr "مین جه"
 
 #: nebulae/default/names.dat:106
 msgid "Helix Galaxy"
@@ -1089,7 +1089,7 @@ msgstr "کهکشان مارپیچ"
 
 #: nebulae/default/names.dat:107
 msgid "Pancake Galaxy"
-msgstr ""
+msgstr "کهکشان کلوچه"
 
 #: nebulae/default/names.dat:108 nebulae/default/names.dat:116
 #: nebulae/default/names.dat:195
@@ -1098,11 +1098,11 @@ msgstr "کهکشان دوکی"
 
 #: nebulae/default/names.dat:109
 msgid "Pencil Nebula"
-msgstr ""
+msgstr "سحابی مداد"
 
 #: nebulae/default/names.dat:110
 msgid "Herschel's Ray Nebula"
-msgstr ""
+msgstr "سحابی هرشل ری"
 
 #: nebulae/default/names.dat:111
 msgid "Supernova Factory"
@@ -1114,7 +1114,7 @@ msgstr "کهکشان بود"
 
 #: nebulae/default/names.dat:113
 msgid "Bode's Nebula"
-msgstr ""
+msgstr "سحابی Bode"
 
 #: nebulae/default/names.dat:114
 msgid "Cigar Galaxy"
@@ -1126,11 +1126,11 @@ msgstr "خرس بزرگ A"
 
 #: nebulae/default/names.dat:117
 msgid "Eight-Burst Planetary Nebula"
-msgstr ""
+msgstr "سحابی سیاره نمای انفجار هشتی (8شکل)"
 
 #: nebulae/default/names.dat:118
 msgid "Southern Ring Nebula"
-msgstr ""
+msgstr "سحابی حلقه جنوبی"
 
 #: nebulae/default/names.dat:119
 msgid "Polarissima Borealis"
@@ -1138,15 +1138,15 @@ msgstr "ستارۀ قطبی شمالی"
 
 #: nebulae/default/names.dat:120
 msgid "Ghost of Jupiter Nebula"
-msgstr ""
+msgstr "سحابی شبح ژوپیتر"
 
 #: nebulae/default/names.dat:121
 msgid "Eye Nebula"
-msgstr ""
+msgstr "سحابی چشم"
 
 #: nebulae/default/names.dat:122
 msgid "η Car Nebula"
-msgstr ""
+msgstr "سحابی اتومبیل اتا"
 
 #: nebulae/default/names.dat:123
 msgid "Wishing Well Cluster"
@@ -1154,7 +1154,7 @@ msgstr "خوشه چشمه آرزو"
 
 #: nebulae/default/names.dat:124
 msgid "Surfboard Galaxy"
-msgstr ""
+msgstr "کهکشان تخته اسکی روی آب"
 
 #: nebulae/default/names.dat:125
 msgid "Ambartsumian's Knot"
@@ -1171,7 +1171,7 @@ msgstr "کهکشان سه گانه برج اسد"
 
 #: nebulae/default/names.dat:129
 msgid "Hamburger Galaxy"
-msgstr ""
+msgstr "کهکشان همبرگر"
 
 #: nebulae/default/names.dat:131 nebulae/default/names.dat:132
 #: nebulae/default/names.dat:133 nebulae/default/names.dat:134
@@ -1182,7 +1182,7 @@ msgstr "هفت قلوی کوپ لند"
 
 #: nebulae/default/names.dat:138
 msgid "Pearl Cluster"
-msgstr ""
+msgstr "خوشه مروارید"
 
 #: nebulae/default/names.dat:139
 msgid "Blue planetary"
@@ -1194,7 +1194,7 @@ msgstr "مارپیچ مینیاتور"
 
 #: nebulae/default/names.dat:141
 msgid "Vacuum Cleaner Galaxy"
-msgstr ""
+msgstr "کهکشان جارو برقی"
 
 #: nebulae/default/names.dat:142 nebulae/default/names.dat:143
 msgid "Antennae"
@@ -1211,23 +1211,23 @@ msgstr ""
 
 #: nebulae/default/names.dat:148
 msgid "Virgo Cluster Pinwheel"
-msgstr ""
+msgstr "فرفره خوشه دوشیزه"
 
 #: nebulae/default/names.dat:149
 msgid "Coma Pinwheel Galaxy"
-msgstr ""
+msgstr "کهکشان فرفره ای گیسو"
 
 #: nebulae/default/names.dat:150
 msgid "St. Catherine’s Wheel"
-msgstr ""
+msgstr "چرخ کاترین مقدس"
 
 #: nebulae/default/names.dat:151
 msgid "Blowdryer Galaxy"
-msgstr ""
+msgstr "کهکشان سشوار"
 
 #: nebulae/default/names.dat:152
 msgid "Galaxy Cluster"
-msgstr ""
+msgstr "خوشه کهکشانی"
 
 #: nebulae/default/names.dat:153
 msgid "Markarian's Chain"
@@ -1235,7 +1235,7 @@ msgstr "سلسله مارکارین"
 
 #: nebulae/default/names.dat:154
 msgid "Faust V051"
-msgstr ""
+msgstr "فاوست V051"
 
 #: nebulae/default/names.dat:155 nebulae/default/names.dat:156
 msgid "The Eyes"
@@ -1243,7 +1243,7 @@ msgstr "چشمها (دوکهکشان برج سنبله)"
 
 #: nebulae/default/names.dat:157
 msgid "Virgo Galaxy"
-msgstr ""
+msgstr "کهکشان دوشیزه"
 
 #: nebulae/default/names.dat:158
 msgid "Virgo A"
@@ -1255,15 +1255,15 @@ msgstr ""
 
 #: nebulae/default/names.dat:160
 msgid "Cocoon Galaxy"
-msgstr ""
+msgstr "کهکشان پیله ابریشم"
 
 #: nebulae/default/names.dat:161
 msgid "Shapley-Ames 2"
-msgstr ""
+msgstr "شپلی-ایمز 2"
 
 #: nebulae/default/names.dat:162 nebulae/default/names.dat:164
 msgid "Lost Galaxy"
-msgstr ""
+msgstr "کهکشان گمشده"
 
 #: nebulae/default/names.dat:163
 msgid "McLeish's Object"
@@ -1271,7 +1271,7 @@ msgstr "سوژه مک لیش"
 
 #: nebulae/default/names.dat:165
 msgid "Needle Galaxy"
-msgstr ""
+msgstr "کهکشان سوزن"
 
 #: nebulae/default/names.dat:166 nebulae/default/names.dat:167
 msgid "Siamese Twins"
@@ -1283,15 +1283,15 @@ msgstr "کهکشان کلاه اسپانیولی"
 
 #: nebulae/default/names.dat:169
 msgid "Whale Galaxy"
-msgstr ""
+msgstr "کهکشان نهنگ"
 
 #: nebulae/default/names.dat:170
 msgid "Herring Galaxy"
-msgstr ""
+msgstr "کهکشان شاه ماهی"
 
 #: nebulae/default/names.dat:171
 msgid "Crowbar Galaxy"
-msgstr ""
+msgstr "کهکشان اهرم"
 
 #: nebulae/default/names.dat:172
 msgid "Superwind-Galaxy"
@@ -1299,7 +1299,7 @@ msgstr "کهکشان ابر باد"
 
 #: nebulae/default/names.dat:173
 msgid "Mice Galaxies"
-msgstr ""
+msgstr "کهکشان موشها"
 
 #: nebulae/default/names.dat:174
 msgid "Jewel Box"
@@ -1307,11 +1307,11 @@ msgstr "جعبۀ جواهر"
 
 #: nebulae/default/names.dat:175
 msgid "Herschel's Jewel Box"
-msgstr ""
+msgstr "جعبه جواهر هرشل"
 
 #: nebulae/default/names.dat:176
 msgid "κ Cru Cluster"
-msgstr ""
+msgstr "خوشه کاپا-صلیب جنوبی"
 
 #: nebulae/default/names.dat:177
 msgid "Kidney Bean Galaxy"
@@ -1323,11 +1323,11 @@ msgstr "کهکشان سیه‌چشم"
 
 #: nebulae/default/names.dat:179
 msgid "Evil Eye Galaxy"
-msgstr ""
+msgstr "کهکشان چشم شور"
 
 #: nebulae/default/names.dat:180
 msgid "Sleeping Beauty Galaxy"
-msgstr ""
+msgstr "کهکشان زیبای خفته"
 
 #: nebulae/default/names.dat:181
 msgid "Coma B"
@@ -1343,7 +1343,7 @@ msgstr "آ قنطروس"
 
 #: nebulae/default/names.dat:184
 msgid "ω Cen Cluster"
-msgstr ""
+msgstr "خوشه امگا قنطورس"
 
 #: nebulae/default/names.dat:185
 msgid "Spiral planetary nebula"
@@ -1355,11 +1355,11 @@ msgstr "کهکشان گردابی"
 
 #: nebulae/default/names.dat:187
 msgid "Question Mark Galaxy"
-msgstr ""
+msgstr "کهکشان علامت سوال"
 
 #: nebulae/default/names.dat:188
 msgid "Lord Rosse's Galaxy"
-msgstr ""
+msgstr "کهکشان لرد راس"
 
 #: nebulae/default/names.dat:189 nebulae/default/names.dat:190
 msgid "Keenan's System"
@@ -1367,11 +1367,11 @@ msgstr "سامانه کینان"
 
 #: nebulae/default/names.dat:191
 msgid "Southern Pinwheel Galaxy"
-msgstr ""
+msgstr "کهکشان فرفره جنوبی"
 
 #: nebulae/default/names.dat:192
 msgid "Seashell Galaxy"
-msgstr ""
+msgstr "کهکشان صدفی"
 
 #: nebulae/default/names.dat:193
 msgid "Pinwheel Galaxy"
@@ -1379,7 +1379,7 @@ msgstr "کهکشان فرفره‌ای"
 
 #: nebulae/default/names.dat:194
 msgid "Dragon Nebula"
-msgstr ""
+msgstr "سحابی اژدها"
 
 #: nebulae/default/names.dat:196
 msgid "Fath 703"
@@ -1387,7 +1387,7 @@ msgstr "فاد 703"
 
 #: nebulae/default/names.dat:197
 msgid "Splinter Galaxy"
-msgstr ""
+msgstr "کهکشان باريکه چوب"
 
 #: nebulae/default/names.dat:198
 msgid "Seyfert's Sextet"
@@ -1395,19 +1395,19 @@ msgstr "شش‌قلوی سیفرت"
 
 #: nebulae/default/names.dat:199
 msgid "Serpens Sextet"
-msgstr ""
+msgstr "شش‌قلوی مار"
 
 #: nebulae/default/names.dat:200
 msgid "S Normae Cluster"
-msgstr ""
+msgstr "خوشه اس-گونیا"
 
 #: nebulae/default/names.dat:201
 msgid "Rim Nebula"
-msgstr ""
+msgstr "سحابی حاشیه دار"
 
 #: nebulae/default/names.dat:202
 msgid "μ Normae Cluster"
-msgstr ""
+msgstr "خوشه مو-گونیا"
 
 #: nebulae/default/names.dat:203
 msgid "Great Cluster in Hercules"
@@ -1415,7 +1415,7 @@ msgstr "خوشه بزرگ هرکول"
 
 #: nebulae/default/names.dat:204
 msgid "Hercules Globular Cluster"
-msgstr ""
+msgstr "خوشه کروی هرکول"
 
 #: nebulae/default/names.dat:205
 msgid "Turtle planetary nebula"
@@ -1423,7 +1423,7 @@ msgstr "سحابی سیاره وار لاک پشت"
 
 #: nebulae/default/names.dat:206
 msgid "Northern Jewel Box Cluster"
-msgstr ""
+msgstr "خوشه جعبه جواهر شمالی"
 
 #: nebulae/default/names.dat:207
 msgid "Table of Scorpius Cluster"
@@ -1439,31 +1439,31 @@ msgstr "سحابی جعبه‌ای"
 
 #: nebulae/default/names.dat:211
 msgid "Cat's Paw Nebula"
-msgstr ""
+msgstr "سحابی پنجه گربه"
 
 #: nebulae/default/names.dat:212
 msgid "Cheerio Nebula"
-msgstr ""
+msgstr "سحابی خداحافظ"
 
 #: nebulae/default/names.dat:213
 msgid "War and Peace Nebula"
-msgstr ""
+msgstr "سحابی جنگ و صلح"
 
 #: nebulae/default/names.dat:214
 msgid "Little Ghost Nebula"
-msgstr ""
+msgstr "سحابی شبح کوچک"
 
 #: nebulae/default/names.dat:216
 msgid "Splendors of the Heavens"
-msgstr ""
+msgstr "شکوه هفت آسمان"
 
 #: nebulae/default/names.dat:217 nebulae/default/names.dat:245
 msgid "Little Gem Nebula"
-msgstr ""
+msgstr "سحابی گوهر کوچک"
 
 #: nebulae/default/names.dat:218
 msgid "Tom Thumb Cluster"
-msgstr ""
+msgstr "خوشه آدم کوتوله"
 
 #: nebulae/default/names.dat:219
 msgid "Ptolemy's Cluster"
@@ -1475,15 +1475,15 @@ msgstr "سحابی سه جزئی"
 
 #: nebulae/default/names.dat:221
 msgid "Herschel 36"
-msgstr ""
+msgstr "هرشل 36"
 
 #: nebulae/default/names.dat:222
 msgid "Hourglass Cluster"
-msgstr ""
+msgstr "خوشه ساعت شنی"
 
 #: nebulae/default/names.dat:223
 msgid "Red spider Nebula"
-msgstr ""
+msgstr "سحابی عنکبوت قرمز"
 
 #: nebulae/default/names.dat:224
 msgid "Cat's Eye Nebula"
@@ -1491,7 +1491,7 @@ msgstr "سحابی چشم گربه"
 
 #: nebulae/default/names.dat:225
 msgid "Blue Racquetball Nebula"
-msgstr ""
+msgstr "سحابی توپ تنیس آبی"
 
 #: nebulae/default/names.dat:226
 msgid "Eagle Nebula"
@@ -1503,23 +1503,23 @@ msgstr ""
 
 #: nebulae/default/names.dat:228
 msgid "Omega Nebula"
-msgstr ""
+msgstr "سحابی اومگا"
 
 #: nebulae/default/names.dat:229
 msgid "Swan Nebula"
-msgstr ""
+msgstr "سحابی قو"
 
 #: nebulae/default/names.dat:230
 msgid "Horseshoe Nebula"
-msgstr ""
+msgstr "سحابی نعل اسب"
 
 #: nebulae/default/names.dat:231
 msgid "Lobster Nebula"
-msgstr ""
+msgstr "سحابی خرچنگ دریایی"
 
 #: nebulae/default/names.dat:232
 msgid "Checkmark Nebula"
-msgstr ""
+msgstr "سحابی نشان درستی"
 
 #: nebulae/default/names.dat:233
 msgid "Wild Duck Cluster"
@@ -1527,11 +1527,11 @@ msgstr "خوشۀ مرغابی وحشی"
 
 #: nebulae/default/names.dat:234
 msgid "July Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "سحابی نمک و فلفل ژوئیه"
 
 #: nebulae/default/names.dat:235
 msgid "Scutum Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "سحابی نمک و فلفل سپر"
 
 #: nebulae/default/names.dat:236
 msgid "Ring Nebula"
@@ -1539,7 +1539,7 @@ msgstr "سحابی حلقه"
 
 #: nebulae/default/names.dat:237
 msgid "R CrA Nebula"
-msgstr ""
+msgstr "سحابی آر-اکلیل جنوبی"
 
 #: nebulae/default/names.dat:238
 msgid "Phantom Streak Nebula"
@@ -1547,7 +1547,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:239
 msgid "Bird's Head"
-msgstr ""
+msgstr "سر پرنده"
 
 #: nebulae/default/names.dat:240
 msgid "Dandelion Puffball Nebula"
@@ -1555,7 +1555,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:241
 msgid "Pavo Globular Cluster"
-msgstr ""
+msgstr "خوشه کروی طاووس"
 
 #: nebulae/default/names.dat:242
 msgid "Ruprecht 147"
@@ -1563,7 +1563,7 @@ msgstr "خوشه ستاره راپ رچ 147"
 
 #: nebulae/default/names.dat:243
 msgid "Snowball Nebula"
-msgstr ""
+msgstr "سحابی گلوله برفی"
 
 #: nebulae/default/names.dat:244
 msgid "Hole in a Cluster"
@@ -1571,7 +1571,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:246
 msgid "The Foxhead Cluster"
-msgstr ""
+msgstr "خوشه کله روباه"
 
 #: nebulae/default/names.dat:247
 msgid "Barnard's Galaxy"
@@ -1587,19 +1587,19 @@ msgstr "سحابی دمبل"
 
 #: nebulae/default/names.dat:250
 msgid "Diabolo Nebula"
-msgstr ""
+msgstr "سحابی شیطان"
 
 #: nebulae/default/names.dat:251
 msgid "Apple Core Nebula"
-msgstr ""
+msgstr "سحابی هسته سیب"
 
 #: nebulae/default/names.dat:252
 msgid "Condor Galaxy"
-msgstr ""
+msgstr "کهکشان کرکس آمریکایی"
 
 #: nebulae/default/names.dat:253
 msgid "20 Vulpeculae Cluster"
-msgstr ""
+msgstr "خوشه 20 روباهک"
 
 #: nebulae/default/names.dat:254
 msgid "Crescent Nebula"
@@ -1607,7 +1607,7 @@ msgstr "سحابی هلالی"
 
 #: nebulae/default/names.dat:255
 msgid "Little Ring Nebula"
-msgstr ""
+msgstr "سحابی حلقه کوچک"
 
 #: nebulae/default/names.dat:256
 msgid "Blue Flash Nebula"
@@ -1623,31 +1623,31 @@ msgstr "برج سردکننده"
 
 #: nebulae/default/names.dat:259
 msgid "Fireworks Galaxy"
-msgstr ""
+msgstr "کهکشان آتش بازی"
 
 #: nebulae/default/names.dat:260
 msgid "Filamentary Nebula"
-msgstr ""
+msgstr "سحابی رشته ای"
 
 #: nebulae/default/names.dat:261
 msgid "West Veil Nebula"
-msgstr ""
+msgstr "سحابی پرده غربی"
 
 #: nebulae/default/names.dat:262
 msgid "East Veil Nebula"
-msgstr ""
+msgstr "سحابی پرده شرقی"
 
 #: nebulae/default/names.dat:263
 msgid "Network Nebula"
-msgstr ""
+msgstr "سحابی شبکه"
 
 #: nebulae/default/names.dat:264
 msgid "North America Nebula"
-msgstr ""
+msgstr "سحابی آمریکای شمالی"
 
 #: nebulae/default/names.dat:265
 msgid "Fetus Nebula"
-msgstr ""
+msgstr "سحابی جنین"
 
 #: nebulae/default/names.dat:266
 msgid "Saturn Nebula"
@@ -1655,15 +1655,15 @@ msgstr "سحابی کیوان"
 
 #: nebulae/default/names.dat:267
 msgid "Iris Nebula"
-msgstr ""
+msgstr "سحابی عنبیه"
 
 #: nebulae/default/names.dat:268
 msgid "Cheeseburger Nebula"
-msgstr ""
+msgstr "سحابی چیزبرگر"
 
 #: nebulae/default/names.dat:269
 msgid "Small Cluster Nebula"
-msgstr ""
+msgstr "سحابی خوشه کوچک"
 
 #: nebulae/default/names.dat:270
 msgid "Atoms for Peace Galaxy"
@@ -1688,7 +1688,7 @@ msgstr "سحابی جادوگر"
 
 #: nebulae/default/names.dat:278
 msgid "Grand Design Galaxy"
-msgstr ""
+msgstr "کهکشان طراحی باشکوه"
 
 #: nebulae/default/names.dat:279 nebulae/default/names.dat:280
 #: nebulae/default/names.dat:281 nebulae/default/names.dat:282
@@ -1697,11 +1697,11 @@ msgstr "چهارقلوی دُرنا"
 
 #: nebulae/default/names.dat:283
 msgid "Cassiopeia Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "خوشه نمک و فلفل ذات الکرسی"
 
 #: nebulae/default/names.dat:284
 msgid "October Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "خوشه نمک و فلفل اوت"
 
 #: nebulae/default/names.dat:285
 msgid "Blue Snowball"
@@ -1713,7 +1713,7 @@ msgstr "سحابی حبابی"
 
 #: nebulae/default/names.dat:287
 msgid "Fried-egg Galaxy"
-msgstr ""
+msgstr "کهکشان تخم مرغ نیمرو"
 
 #: nebulae/default/names.dat:288
 msgid "Caroline's Rose Cluster"
@@ -1721,7 +1721,7 @@ msgstr "خوشه رز کارولین"
 
 #: nebulae/default/names.dat:289 nebulae/default/names.dat:290
 msgid "γ Cas Nebula"
-msgstr ""
+msgstr "سحابی گاما-ذات الکرسی"
 
 #: nebulae/default/names.dat:291
 msgid "Maffei Group"
@@ -1737,11 +1737,11 @@ msgstr "سحابی عنکبوت"
 
 #: nebulae/default/names.dat:294
 msgid "Spirograph Nebula"
-msgstr ""
+msgstr "سحابی دم نگار"
 
 #: nebulae/default/names.dat:295
 msgid "Jellyfish Nebula"
-msgstr ""
+msgstr "سحابی ستاره دریایی"
 
 #: nebulae/default/names.dat:296
 msgid "Papillon"
@@ -1749,19 +1749,19 @@ msgstr "پاپیلون"
 
 #: nebulae/default/names.dat:297
 msgid "Elephant's Trunk Nebula"
-msgstr ""
+msgstr "سحابی خرطوم فیل"
 
 #: nebulae/default/names.dat:298
 msgid "Fish Head Nebula"
-msgstr ""
+msgstr "سحابی سر ماهی"
 
 #: nebulae/default/names.dat:299
 msgid "Heart Nebula"
-msgstr ""
+msgstr "سحابی قلب"
 
 #: nebulae/default/names.dat:300
 msgid "Soul Nebula"
-msgstr ""
+msgstr "سحابی روح"
 
 #: nebulae/default/names.dat:301
 msgid "Witch Head Nebula"
@@ -1769,15 +1769,15 @@ msgstr "سحابی سر زن جادوگر"
 
 #: nebulae/default/names.dat:303
 msgid "Toby Jug Nebula"
-msgstr ""
+msgstr "سحابی لیوان توبی جوگ"
 
 #: nebulae/default/names.dat:304
 msgid "ο Vel Cluster"
-msgstr ""
+msgstr "خوشه اومیکرون-بادبان"
 
 #: nebulae/default/names.dat:305
 msgid "Coddington's Nebula"
-msgstr ""
+msgstr "سحابی کودینگتن"
 
 #: nebulae/default/names.dat:306
 msgid "Southern Pleiades"
@@ -1785,7 +1785,7 @@ msgstr "پروین جنوبی"
 
 #: nebulae/default/names.dat:307
 msgid "θ Carinae Cluster"
-msgstr ""
+msgstr "خوشه تتا-شاه تخته"
 
 #: nebulae/default/names.dat:308
 msgid "Running Chicken Nebula"
@@ -1793,7 +1793,7 @@ msgstr "سحابی جوجۀ در حال دو"
 
 #: nebulae/default/names.dat:309
 msgid "λ Cen Nebula"
-msgstr ""
+msgstr "سحابی لامبدا-قنطورس"
 
 #: nebulae/default/names.dat:310
 msgid "Thackeray's Globules"
@@ -1801,15 +1801,15 @@ msgstr ""
 
 #: nebulae/default/names.dat:311
 msgid "Lemon slice Nebula"
-msgstr ""
+msgstr "سحابی قاچ لیمو"
 
 #: nebulae/default/names.dat:312
 msgid "Retina Nebula"
-msgstr ""
+msgstr "سحابی شبکیه چشم"
 
 #: nebulae/default/names.dat:313
 msgid "White Eyed Pea Nebula"
-msgstr ""
+msgstr "سحابی لوبیای چشم‌بلبلی"
 
 #: nebulae/default/names.dat:314
 msgid "ρ Oph Nebula"
@@ -1817,7 +1817,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:315
 msgid "Prawn Nebula"
-msgstr ""
+msgstr "سحابی میگو"
 
 #: nebulae/default/names.dat:316
 msgid "False Comet Nebula"
@@ -1825,11 +1825,11 @@ msgstr ""
 
 #: nebulae/default/names.dat:317
 msgid "Summer Beehive Cluster"
-msgstr ""
+msgstr "خوشه کندوی عسل تابستانی"
 
 #: nebulae/default/names.dat:318
 msgid "Graff's Cluster"
-msgstr ""
+msgstr "خوشه گراف"
 
 #: nebulae/default/names.dat:319
 msgid "Shapley-Ames 5"
@@ -1869,11 +1869,11 @@ msgstr "خوشۀ پروین"
 
 #: nebulae/default/names.dat:328
 msgid "Seven Sisters"
-msgstr ""
+msgstr "هفت خواهران"
 
 #: nebulae/default/names.dat:329
 msgid "Subaru"
-msgstr ""
+msgstr "سوبارو"
 
 #: nebulae/default/names.dat:330
 msgid "α Per Cluster"
@@ -1889,7 +1889,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:333
 msgid "Taurus Dark Cloud Nebula"
-msgstr ""
+msgstr "سحابی ابر تاریک ثور"
 
 #: nebulae/default/names.dat:334
 msgid "Horsehead Nebula"
@@ -1906,7 +1906,7 @@ msgstr "سحابی لکه جوهر"
 
 #: nebulae/default/names.dat:340
 msgid "Snake Nebula"
-msgstr ""
+msgstr "سحابی ماری"
 
 #: nebulae/default/names.dat:341
 msgid "The S Nebula"
@@ -1918,7 +1918,7 @@ msgstr "چپق (جام)"
 
 #: nebulae/default/names.dat:344
 msgid "Parrot's Head Nebula"
-msgstr ""
+msgstr "سحابی سر طوطی"
 
 #: nebulae/default/names.dat:345 nebulae/default/names.dat:346
 msgid "E Nebula"
@@ -1926,7 +1926,7 @@ msgstr "سحابی ای (E)"
 
 #: nebulae/default/names.dat:347
 msgid "Fish on the platter nebula"
-msgstr ""
+msgstr "سحابی ماهی تو دیس"
 
 #: nebulae/default/names.dat:348
 msgid "Hyades"
@@ -1950,7 +1950,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:353
 msgid "Markarian 18 Cluster"
-msgstr ""
+msgstr "خوشه مارکاریان 18"
 
 #: nebulae/default/names.dat:354
 msgid "η Car Cluster"
@@ -1970,11 +1970,11 @@ msgstr ""
 
 #: nebulae/default/names.dat:358
 msgid "Al Sufi's Cluster"
-msgstr ""
+msgstr "خوشه الصوفی"
 
 #: nebulae/default/names.dat:359
 msgid "Brocchi's Cluster"
-msgstr ""
+msgstr "خوشه بروکی"
 
 #: nebulae/default/names.dat:360
 msgid "Burnham's Nebula"
@@ -2038,7 +2038,7 @@ msgstr "سحابی پکمن"
 
 #: nebulae/default/names.dat:375
 msgid "Dolphin Nebula"
-msgstr ""
+msgstr "سحابی دلفین"
 
 #: nebulae/default/names.dat:376
 msgid "Maffei 1"
@@ -2062,7 +2062,7 @@ msgstr "سحابی اسپاگتی"
 
 #: nebulae/default/names.dat:381
 msgid "Simeis 147"
-msgstr ""
+msgstr "سیمیس 147"
 
 #: nebulae/default/names.dat:382
 msgid "Lower's Nebula"
@@ -2074,7 +2074,7 @@ msgstr "سحابی فرشته ماهی"
 
 #: nebulae/default/names.dat:384
 msgid "Orion's Head Nebula"
-msgstr ""
+msgstr "سحابی سر شکارچی"
 
 #: nebulae/default/names.dat:385
 msgid "North Orion Bubble"
@@ -2110,7 +2110,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:393
 msgid "Engraved Hourglass Nebula"
-msgstr ""
+msgstr "سحابی ساعت شنی منقوش"
 
 #: nebulae/default/names.dat:394
 msgid "Antares Nebula"
@@ -2122,19 +2122,19 @@ msgstr "سحابی شبح"
 
 #: nebulae/default/names.dat:397
 msgid "Vulture Head Nebula"
-msgstr ""
+msgstr "سحابی سر کرکس"
 
 #: nebulae/default/names.dat:398
 msgid "Orion B"
-msgstr ""
+msgstr "بتا-شکارچی"
 
 #: nebulae/default/names.dat:399
-msgid "Golf of Mexico Nebula"
+msgid "Gulf of Mexico Nebula"
 msgstr ""
 
 #: nebulae/default/names.dat:400 nebulae/default/names.dat:402
 msgid "Taffy Galaxies"
-msgstr ""
+msgstr "کهکشانهای آبنباتی"
 
 #: nebulae/default/names.dat:401 nebulae/default/names.dat:403
 msgid "Taffy System"
@@ -2146,11 +2146,11 @@ msgstr ""
 
 #: nebulae/default/names.dat:405
 msgid "Andromeda III Dwarf Galaxy"
-msgstr ""
+msgstr "کهکشان کوتوله آندرومدا3"
 
 #: nebulae/default/names.dat:406
 msgid "Andromeda I Dwarf Galaxy"
-msgstr ""
+msgstr "کهکشان کوتوله آندرومدا1"
 
 #: nebulae/default/names.dat:407
 msgid "Burbidge Chain"
@@ -2158,19 +2158,19 @@ msgstr ""
 
 #: nebulae/default/names.dat:408
 msgid "Sculptor Dwarf Galaxy"
-msgstr "کهکشان کوچک پيکر تراش(کهکشان سپر)"
+msgstr "کهکشان کوتوله سنگ تراش"
 
 #: nebulae/default/names.dat:409
 msgid "Pisces Dwarf Galaxy"
-msgstr "کهکشان کوچک ماهی"
+msgstr "کهکشان کوتوله حوت"
 
 #: nebulae/default/names.dat:410
 msgid "Andromeda II Dwarf Galaxy"
-msgstr ""
+msgstr "کهکشان کوتوله آندرومدا2"
 
 #: nebulae/default/names.dat:411
 msgid "Phoenix Dwarf Galaxy"
-msgstr "کهکشان کوچک سیمرغ"
+msgstr "کهکشان کوتوله سیمرغ"
 
 #: nebulae/default/names.dat:412
 msgid "Holmberg VI"
@@ -2190,7 +2190,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:416
 msgid "Carina Dwarf Galaxy"
-msgstr "کهکشان کوچک تخته شاه (کارینا)"
+msgstr "کهکشان کوتوله شاه تخته"
 
 #: nebulae/default/names.dat:417
 msgid "Southern Ellipse"
@@ -2415,7 +2415,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:475
 msgid "Serpens Dwarf Cluster"
-msgstr ""
+msgstr "خوشه کوتوله مار"
 
 #: nebulae/default/names.dat:476
 msgid "Tadpole Galaxy"
@@ -3655,7 +3655,7 @@ msgstr ""
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:18
 #: skycultures/arabic_moon_stations/star_names.fab:71
 msgid "The Heart"
-msgstr ""
+msgstr "قلب"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:19
 #: skycultures/arabic_moon_stations/star_names.fab:78
@@ -3961,11 +3961,11 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:70
 msgid "The Veins of the heart 1"
-msgstr ""
+msgstr "رگ قلب 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:72
 msgid "The Veins of the heart 2"
-msgstr ""
+msgstr "رگ قلب 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:73
 msgid "The Trotting Camel"
@@ -7703,7 +7703,7 @@ msgid "Baten Kaitos"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:13
-#: skycultures/western/star_names.fab:688
+#: skycultures/western/star_names.fab:689
 msgid "Mothallah"
 msgstr ""
 
@@ -7774,53 +7774,53 @@ msgid "Mirphak"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:28
-#: skycultures/western/star_names.fab:550
+#: skycultures/western/star_names.fab:549
 #: skycultures/western/star_names.fab:552
 msgid "Atik"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:29
-#: skycultures/western/star_names.fab:666
+#: skycultures/western/star_names.fab:667
 msgid "Celaeno"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:30
-#: skycultures/western/star_names.fab:667
+#: skycultures/western/star_names.fab:668
 msgid "Electra"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:31
-#: skycultures/western/star_names.fab:668
+#: skycultures/western/star_names.fab:669
 msgid "Taygeta"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:32
-#: skycultures/western/star_names.fab:669
+#: skycultures/western/star_names.fab:670
 msgid "Maia"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:33
-#: skycultures/western/star_names.fab:670
+#: skycultures/western/star_names.fab:671
 msgid "Asterope"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:34
-#: skycultures/western/star_names.fab:672
+#: skycultures/western/star_names.fab:673
 msgid "Merope"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:35
-#: skycultures/western/star_names.fab:665
+#: skycultures/western/star_names.fab:666
 msgid "Alcyone"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:36
-#: skycultures/western/star_names.fab:673
+#: skycultures/western/star_names.fab:674
 msgid "Atlas"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:37
-#: skycultures/western/star_names.fab:674
+#: skycultures/western/star_names.fab:675
 msgid "Pleione"
 msgstr ""
 
@@ -7845,7 +7845,7 @@ msgid "Keid"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:42
-#: skycultures/western/star_names.fab:663
+#: skycultures/western/star_names.fab:664
 msgid "Ain"
 msgstr ""
 
@@ -7962,7 +7962,7 @@ msgstr ""
 #: skycultures/western/star_names.fab:154
 #: skycultures/western_rey/star_names.fab:52
 msgid "Canopus"
-msgstr ""
+msgstr "ستاره سهیل"
 
 #: skycultures/romanian/star_names.fab:67
 #: skycultures/western/star_names.fab:372
@@ -8038,7 +8038,7 @@ msgid "Naos"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:83
-#: skycultures/western/star_names.fab:746
+#: skycultures/western/star_names.fab:747
 msgid "Regor"
 msgstr ""
 
@@ -8053,7 +8053,7 @@ msgid "Avior"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:86
-#: skycultures/western/star_names.fab:709
+#: skycultures/western/star_names.fab:710
 msgid "Muscida"
 msgstr ""
 
@@ -8073,12 +8073,12 @@ msgid "Acubens"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:90
-#: skycultures/western/star_names.fab:704
+#: skycultures/western/star_names.fab:705
 msgid "Talitha"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:91
-#: skycultures/western/star_names.fab:748
+#: skycultures/western/star_names.fab:749
 msgid "Suhail"
 msgstr ""
 
@@ -8125,7 +8125,7 @@ msgid "Adhafera"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:100
-#: skycultures/western/star_names.fab:705
+#: skycultures/western/star_names.fab:706
 msgid "Tania Borealis"
 msgstr ""
 
@@ -8135,7 +8135,7 @@ msgid "Algieba"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:102
-#: skycultures/western/star_names.fab:706
+#: skycultures/western/star_names.fab:707
 msgid "Tania Australis"
 msgstr ""
 
@@ -8145,12 +8145,12 @@ msgid "Alkes"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:104
-#: skycultures/western/star_names.fab:695
+#: skycultures/western/star_names.fab:696
 msgid "Merak"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:105
-#: skycultures/western/star_names.fab:694
+#: skycultures/western/star_names.fab:695
 msgid "Dubhe"
 msgstr ""
 
@@ -8165,12 +8165,12 @@ msgid "Chertan"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:108
-#: skycultures/western/star_names.fab:708
+#: skycultures/western/star_names.fab:709
 msgid "Alula Australis"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:109
-#: skycultures/western/star_names.fab:707
+#: skycultures/western/star_names.fab:708
 msgid "Alula Borealis"
 msgstr ""
 
@@ -8186,12 +8186,12 @@ msgid "Denebola"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:112
-#: skycultures/western/star_names.fab:752
+#: skycultures/western/star_names.fab:753
 msgid "Zavijava"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:113
-#: skycultures/western/star_names.fab:697
+#: skycultures/western/star_names.fab:698
 msgid "Phad"
 msgstr ""
 
@@ -8201,7 +8201,7 @@ msgid "Alchiba"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:115
-#: skycultures/western/star_names.fab:698
+#: skycultures/western/star_names.fab:699
 msgid "Megrez"
 msgstr ""
 
@@ -8212,7 +8212,7 @@ msgid "Gienah"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:117
-#: skycultures/western/star_names.fab:757
+#: skycultures/western/star_names.fab:758
 msgid "Zaniah"
 msgstr ""
 
@@ -8238,7 +8238,7 @@ msgid "Chara"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:122
-#: skycultures/western/star_names.fab:753
+#: skycultures/western/star_names.fab:754
 msgid "Porrima"
 msgstr ""
 
@@ -8248,7 +8248,7 @@ msgid "Mimosa"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:124
-#: skycultures/western/star_names.fab:700
+#: skycultures/western/star_names.fab:701
 msgid "Alioth"
 msgstr ""
 
@@ -8259,18 +8259,18 @@ msgid "Cor Caroli"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:126
-#: skycultures/western/star_names.fab:755
+#: skycultures/western/star_names.fab:756
 msgid "Vindemiatrix"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:127
-#: skycultures/western/star_names.fab:701
+#: skycultures/western/star_names.fab:702
 #: skycultures/western_rey/star_names.fab:7
 msgid "Mizar"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:128
-#: skycultures/western/star_names.fab:750
+#: skycultures/western/star_names.fab:751
 #: skycultures/western_rey/star_names.fab:40
 msgid "Spica"
 msgstr ""
@@ -8280,7 +8280,7 @@ msgid "The Little Bitch"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:130
-#: skycultures/western/star_names.fab:702
+#: skycultures/western/star_names.fab:703
 msgid "Alkaid"
 msgstr ""
 
@@ -8307,7 +8307,7 @@ msgid "Arcturus"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:136
-#: skycultures/western/star_names.fab:758
+#: skycultures/western/star_names.fab:759
 msgid "Syrma"
 msgstr ""
 
@@ -8356,7 +8356,7 @@ msgid "Zubeneschamali"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:146
-#: skycultures/western/star_names.fab:738
+#: skycultures/western/star_names.fab:739
 msgid "Pherkad"
 msgstr ""
 
@@ -8381,7 +8381,7 @@ msgid "Alphekka"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:151
-#: skycultures/western/star_names.fab:653
+#: skycultures/western/star_names.fab:654
 msgid "Unukalhai"
 msgstr ""
 
@@ -8411,8 +8411,8 @@ msgid "Yed Posterior"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:157
-#: skycultures/western/star_names.fab:636
-#: skycultures/western/star_names.fab:638
+#: skycultures/western/star_names.fab:637
+#: skycultures/western/star_names.fab:639
 msgid "Al Niyat"
 msgstr ""
 
@@ -8439,7 +8439,7 @@ msgid "Marfik"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:162
-#: skycultures/western/star_names.fab:692
+#: skycultures/western/star_names.fab:693
 msgid "Atria"
 msgstr ""
 
@@ -8469,12 +8469,12 @@ msgid "Maasym"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:168
-#: skycultures/western/star_names.fab:639
+#: skycultures/western/star_names.fab:640
 msgid "Lesath"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:169
-#: skycultures/western/star_names.fab:741
+#: skycultures/western/star_names.fab:742
 msgid "Yildun"
 msgstr ""
 
@@ -8490,7 +8490,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:172
 #: skycultures/western/star_names.fab:633
-#: skycultures/western/star_names.fab:643
+#: skycultures/western/star_names.fab:644
 msgid "Girtab"
 msgstr ""
 
@@ -8549,7 +8549,7 @@ msgid "Nunki"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:184
-#: skycultures/western/star_names.fab:654
+#: skycultures/western/star_names.fab:655
 msgid "Alya"
 msgstr ""
 
@@ -10775,7 +10775,7 @@ msgstr ""
 msgid "Gorgonea Prima"
 msgstr ""
 
-#: skycultures/western/star_names.fab:549
+#: skycultures/western/star_names.fab:550
 msgid "Ati"
 msgstr ""
 
@@ -10997,365 +10997,369 @@ msgid "Sargas"
 msgstr ""
 
 #: skycultures/western/star_names.fab:635
+msgid "Alniyat"
+msgstr ""
+
+#: skycultures/western/star_names.fab:636
 msgid "Alniyat I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:637
+#: skycultures/western/star_names.fab:638
 msgid "Alniyat II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:640
+#: skycultures/western/star_names.fab:641
 msgid "Jabbah"
 msgstr ""
 
-#: skycultures/western/star_names.fab:641
+#: skycultures/western/star_names.fab:642
 msgid "Grafias"
 msgstr ""
 
-#: skycultures/western/star_names.fab:642
+#: skycultures/western/star_names.fab:643
 msgid "Grassias"
 msgstr ""
 
-#: skycultures/western/star_names.fab:644
+#: skycultures/western/star_names.fab:645
 msgid "Vanant"
 msgstr ""
 
-#: skycultures/western/star_names.fab:645
+#: skycultures/western/star_names.fab:646
 msgid "Mula"
 msgstr ""
 
-#: skycultures/western/star_names.fab:646
+#: skycultures/western/star_names.fab:647
 msgid "Tali al Shaulah I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:647
+#: skycultures/western/star_names.fab:648
 msgid "Tali al Shaulah II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:648
+#: skycultures/western/star_names.fab:649
 msgid "Nur"
 msgstr ""
 
-#: skycultures/western/star_names.fab:649
+#: skycultures/western/star_names.fab:650
 msgid "Iolil"
 msgstr ""
 
-#: skycultures/western/star_names.fab:650
+#: skycultures/western/star_names.fab:651
 msgid "Jabhat Acrabi I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:651
+#: skycultures/western/star_names.fab:652
 msgid "Jabhat Acrabi II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:655
+#: skycultures/western/star_names.fab:656
 msgid "Nasak Shamiya I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:656
+#: skycultures/western/star_names.fab:657
 msgid "Nasak Shamiya II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:657
+#: skycultures/western/star_names.fab:658
 msgid "Nasak Yamani I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:658
+#: skycultures/western/star_names.fab:659
 msgid "Nasak Yamani II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:660
+#: skycultures/western/star_names.fab:661
 #: skycultures/western_rey/star_names.fab:27
 msgid "Aldebaran"
 msgstr ""
 
-#: skycultures/western/star_names.fab:661
+#: skycultures/western/star_names.fab:662
 msgid "Elnath"
 msgstr ""
 
-#: skycultures/western/star_names.fab:662
+#: skycultures/western/star_names.fab:663
 msgid "El Nath"
 msgstr ""
 
-#: skycultures/western/star_names.fab:664
+#: skycultures/western/star_names.fab:665
 msgid "Oculus Boreus"
 msgstr ""
 
-#: skycultures/western/star_names.fab:671
+#: skycultures/western/star_names.fab:672
 msgid "Sterope I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:675
+#: skycultures/western/star_names.fab:676
 msgid "Hyadum I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:676
+#: skycultures/western/star_names.fab:677
 msgid "Prima Hyadum"
 msgstr ""
 
-#: skycultures/western/star_names.fab:677
+#: skycultures/western/star_names.fab:678
 msgid "Hyadum II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:678
+#: skycultures/western/star_names.fab:679
 msgid "The Ruby Star"
 msgstr ""
 
-#: skycultures/western/star_names.fab:679
+#: skycultures/western/star_names.fab:680
 msgid "Sterope II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:680
+#: skycultures/western/star_names.fab:681
 msgid "Hyadum III"
 msgstr ""
 
-#: skycultures/western/star_names.fab:681
+#: skycultures/western/star_names.fab:682
 msgid "Hyadum IV"
 msgstr ""
 
-#: skycultures/western/star_names.fab:682
+#: skycultures/western/star_names.fab:683
 msgid "Alkalbain III"
 msgstr ""
 
-#: skycultures/western/star_names.fab:683
+#: skycultures/western/star_names.fab:684
 msgid "Alkalbain IV"
 msgstr ""
 
-#: skycultures/western/star_names.fab:684
+#: skycultures/western/star_names.fab:685
 msgid "Alkalbain V"
 msgstr ""
 
-#: skycultures/western/star_names.fab:685
+#: skycultures/western/star_names.fab:686
 msgid "Alkalbain I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:686
+#: skycultures/western/star_names.fab:687
 msgid "Alkalbain II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:689
+#: skycultures/western/star_names.fab:690
 msgid "Caput Trianguli"
 msgstr ""
 
-#: skycultures/western/star_names.fab:690
+#: skycultures/western/star_names.fab:691
 msgid "Mizan"
 msgstr ""
 
-#: skycultures/western/star_names.fab:696
+#: skycultures/western/star_names.fab:697
 msgid "Phecda"
 msgstr ""
 
-#: skycultures/western/star_names.fab:699
+#: skycultures/western/star_names.fab:700
 msgid "Kaffa"
 msgstr ""
 
-#: skycultures/western/star_names.fab:703
+#: skycultures/western/star_names.fab:704
 msgid "Benetnasch"
 msgstr ""
 
-#: skycultures/western/star_names.fab:710
+#: skycultures/western/star_names.fab:711
 #: skycultures/western_rey/star_names.fab:8
 msgid "Alcor"
 msgstr ""
 
-#: skycultures/western/star_names.fab:711
+#: skycultures/western/star_names.fab:712
 msgid "Groombridge 1830"
 msgstr ""
 
-#: skycultures/western/star_names.fab:712
+#: skycultures/western/star_names.fab:713
 msgid "Flying Star"
 msgstr ""
 
-#: skycultures/western/star_names.fab:713
+#: skycultures/western/star_names.fab:714
 msgid "Runaway Star"
 msgstr ""
 
-#: skycultures/western/star_names.fab:716
+#: skycultures/western/star_names.fab:717
 msgid "Al Kaphrah"
 msgstr ""
 
-#: skycultures/western/star_names.fab:717
+#: skycultures/western/star_names.fab:718
 msgid "Alkafzah"
 msgstr ""
 
-#: skycultures/western/star_names.fab:718
+#: skycultures/western/star_names.fab:719
 msgid "Althiba I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:719
+#: skycultures/western/star_names.fab:720
 msgid "Althiba VII"
 msgstr ""
 
-#: skycultures/western/star_names.fab:720
+#: skycultures/western/star_names.fab:721
 msgid "Alhaud III"
 msgstr ""
 
-#: skycultures/western/star_names.fab:721
+#: skycultures/western/star_names.fab:722
 msgid "Alhaud I"
 msgstr ""
 
-#: skycultures/western/star_names.fab:722
+#: skycultures/western/star_names.fab:723
 msgid "Alhaud IV"
 msgstr ""
 
-#: skycultures/western/star_names.fab:723
+#: skycultures/western/star_names.fab:724
 msgid "Alhaud V"
 msgstr ""
 
-#: skycultures/western/star_names.fab:724
+#: skycultures/western/star_names.fab:725
 msgid "Kafzatania"
 msgstr ""
 
-#: skycultures/western/star_names.fab:725
+#: skycultures/western/star_names.fab:726
 msgid "Althiba II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:726
+#: skycultures/western/star_names.fab:727
 msgid "Althiba III"
 msgstr ""
 
-#: skycultures/western/star_names.fab:727
+#: skycultures/western/star_names.fab:728
 msgid "Althiba IV"
 msgstr ""
 
-#: skycultures/western/star_names.fab:728
+#: skycultures/western/star_names.fab:729
 msgid "Althiba V"
 msgstr ""
 
-#: skycultures/western/star_names.fab:729
+#: skycultures/western/star_names.fab:730
 msgid "Althiba VI"
 msgstr ""
 
-#: skycultures/western/star_names.fab:730
+#: skycultures/western/star_names.fab:731
 msgid "Alhaud II"
 msgstr ""
 
-#: skycultures/western/star_names.fab:731
+#: skycultures/western/star_names.fab:732
 msgid "Alhaud VI"
 msgstr ""
 
-#: skycultures/western/star_names.fab:732
+#: skycultures/western/star_names.fab:733
 msgid "Alhaud VII"
 msgstr ""
 
-#: skycultures/western/star_names.fab:734
+#: skycultures/western/star_names.fab:735
 msgid "Polaris"
 msgstr ""
 
-#: skycultures/western/star_names.fab:735
+#: skycultures/western/star_names.fab:736
 msgid "Alrucaba"
 msgstr ""
 
-#: skycultures/western/star_names.fab:736
+#: skycultures/western/star_names.fab:737
 msgid "Cinosura"
 msgstr ""
 
-#: skycultures/western/star_names.fab:737
+#: skycultures/western/star_names.fab:738
 #: skycultures/western_rey/star_names.fab:6
 msgid "Kochab"
 msgstr ""
 
-#: skycultures/western/star_names.fab:739
+#: skycultures/western/star_names.fab:740
 msgid "Pherkad Major"
 msgstr ""
 
-#: skycultures/western/star_names.fab:740
+#: skycultures/western/star_names.fab:741
 msgid "Pherkad Minor"
 msgstr ""
 
-#: skycultures/western/star_names.fab:742
+#: skycultures/western/star_names.fab:743
 msgid "Circitores"
 msgstr ""
 
-#: skycultures/western/star_names.fab:743
+#: skycultures/western/star_names.fab:744
 msgid "Akfa Farkadain"
 msgstr ""
 
-#: skycultures/western/star_names.fab:744
+#: skycultures/western/star_names.fab:745
 msgid "Anwa Farkadain"
 msgstr ""
 
-#: skycultures/western/star_names.fab:747
+#: skycultures/western/star_names.fab:748
 msgid "Markeb"
 msgstr ""
 
-#: skycultures/western/star_names.fab:751
+#: skycultures/western/star_names.fab:752
 msgid "Azimech"
 msgstr ""
 
-#: skycultures/western/star_names.fab:754
+#: skycultures/western/star_names.fab:755
 msgid "Antevorta"
 msgstr ""
 
-#: skycultures/western/star_names.fab:756
+#: skycultures/western/star_names.fab:757
 msgid "Almuredin"
 msgstr ""
 
-#: skycultures/western/star_names.fab:759
+#: skycultures/western/star_names.fab:760
 msgid "Arich"
 msgstr ""
 
-#: skycultures/western/star_names.fab:760
+#: skycultures/western/star_names.fab:761
 msgid "Heze"
 msgstr ""
 
-#: skycultures/western/star_names.fab:761
+#: skycultures/western/star_names.fab:762
 msgid "Minelauva"
 msgstr ""
 
-#: skycultures/western/star_names.fab:762
+#: skycultures/western/star_names.fab:763
 msgid "Auva"
 msgstr ""
 
-#: skycultures/western/star_names.fab:763
+#: skycultures/western/star_names.fab:764
 msgid "Khambaliya"
 msgstr ""
 
-#: skycultures/western/star_names.fab:764
-msgid "Kambalia"
-msgstr ""
-
 #: skycultures/western/star_names.fab:765
-msgid "Rijl al Awwa"
-msgstr ""
+msgid "Kambalia"
+msgstr "چنگال خمیده"
 
 #: skycultures/western/star_names.fab:766
-msgid "Rigilawwa"
-msgstr ""
+msgid "Rijl al Awwa"
+msgstr "پای دوشیزه"
 
 #: skycultures/western/star_names.fab:767
-msgid "Algafar I"
-msgstr ""
+msgid "Rigilawwa"
+msgstr "پای دوشیزه"
 
 #: skycultures/western/star_names.fab:768
-msgid "Algafar II"
-msgstr ""
+msgid "Algafar I"
+msgstr "القفار 1"
 
-#: skycultures/western/star_names.fab:770
+#: skycultures/western/star_names.fab:769
+msgid "Algafar II"
+msgstr "القفار 2"
+
+#: skycultures/western/star_names.fab:771
 msgid "Anser"
-msgstr ""
+msgstr "غاز هنسر"
 
 #: skycultures/western_rey/constellation_names.eng.fab:6
 msgid "Big Dipper"
-msgstr ""
+msgstr "ملاقه بزرگ"
 
 #: skycultures/western_rey/constellation_names.eng.fab:7
 msgid "Pointers"
-msgstr ""
+msgstr "اشاره گرها"
 
 #: skycultures/western_rey/constellation_names.eng.fab:8
 msgid "Little Dipper"
-msgstr ""
+msgstr "ملاقه کوچک"
 
 #: skycultures/western_rey/constellation_names.eng.fab:9
 msgid "Guardians"
-msgstr ""
+msgstr "نگهبانان"
 
 #: skycultures/western_rey/constellation_names.eng.fab:11
 #: skycultures/western_rey/constellation_names.eng.fab:39
 #: skycultures/western_rey/constellation_names.eng.fab:90
 msgid "feet"
-msgstr ""
+msgstr "پا"
 
 #: skycultures/western_rey/constellation_names.eng.fab:12
 #: skycultures/western_rey/constellation_names.eng.fab:20
@@ -11373,7 +11377,7 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:156
 #: skycultures/western_rey/constellation_names.eng.fab:169
 msgid "head"
-msgstr ""
+msgstr "سر"
 
 #: skycultures/western_rey/constellation_names.eng.fab:13
 #: skycultures/western_rey/constellation_names.eng.fab:25
@@ -11387,23 +11391,23 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:157
 #: skycultures/western_rey/constellation_names.eng.fab:166
 msgid "tail"
-msgstr ""
+msgstr "دم"
 
 #: skycultures/western_rey/constellation_names.eng.fab:21
 #: skycultures/western_rey/constellation_names.eng.fab:22
 msgid "paws"
-msgstr ""
+msgstr "پنجه ها"
 
 #: skycultures/western_rey/constellation_names.eng.fab:30
 #: skycultures/western_rey/constellation_names.eng.fab:101
 #: skycultures/western_rey/constellation_names.eng.fab:122
 #: skycultures/western_rey/constellation_names.eng.fab:172
 msgid "body"
-msgstr ""
+msgstr "پیکره"
 
 #: skycultures/western_rey/constellation_names.eng.fab:32
 msgid "pipe"
-msgstr ""
+msgstr "چپق"
 
 #: skycultures/western_rey/constellation_names.eng.fab:37
 #: skycultures/western_rey/constellation_names.eng.fab:38
@@ -11414,11 +11418,11 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:153
 #: skycultures/western_rey/constellation_names.eng.fab:158
 msgid "wing"
-msgstr ""
+msgstr "بال"
 
 #: skycultures/western_rey/constellation_names.eng.fab:40
 msgid "outstretched neck"
-msgstr ""
+msgstr "گردن گسترده"
 
 #: skycultures/western_rey/constellation_names.eng.fab:44
 #: skycultures/western_rey/constellation_names.eng.fab:76
@@ -11427,36 +11431,36 @@ msgstr ""
 
 #: skycultures/western_rey/constellation_names.eng.fab:45
 msgid "Keystone"
-msgstr ""
+msgstr "سنگ سرطاق"
 
 #: skycultures/western_rey/constellation_names.eng.fab:50
 msgid "the chain"
-msgstr ""
+msgstr "زنجیر"
 
 #: skycultures/western_rey/constellation_names.eng.fab:51
 msgid "Great Square"
-msgstr ""
+msgstr "مربع بزرگ"
 
 #: skycultures/western_rey/constellation_names.eng.fab:63
 #: skycultures/western_rey/constellation_names.eng.fab:64
 msgid "horn"
-msgstr ""
+msgstr "شاخ"
 
 #: skycultures/western_rey/constellation_names.eng.fab:75
 msgid "belt"
-msgstr ""
+msgstr "کمربند"
 
 #: skycultures/western_rey/constellation_names.eng.fab:77
 msgid "shield"
-msgstr ""
+msgstr "سپر"
 
 #: skycultures/western_rey/constellation_names.eng.fab:83
 msgid "Hydra's head"
-msgstr ""
+msgstr "سر شجاع"
 
 #: skycultures/western_rey/constellation_names.eng.fab:87
 msgid "Hydra's tail"
-msgstr ""
+msgstr "دنباله شجاع"
 
 #: skycultures/western_rey/constellation_names.eng.fab:93
 msgid "bill"
@@ -11466,15 +11470,15 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:105
 #: skycultures/western_rey/constellation_names.eng.fab:106
 msgid "foot"
-msgstr ""
+msgstr "پا"
 
 #: skycultures/western_rey/constellation_names.eng.fab:97
 msgid "Serpens Cauda"
-msgstr ""
+msgstr "دم مار"
 
 #: skycultures/western_rey/constellation_names.eng.fab:98
 msgid "Serpens Caput"
-msgstr ""
+msgstr "سر مار"
 
 #: skycultures/western_rey/constellation_names.eng.fab:103
 #: skycultures/western_rey/constellation_names.eng.fab:104
@@ -11482,43 +11486,43 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:170
 #: skycultures/western_rey/constellation_names.eng.fab:171
 msgid "arm"
-msgstr ""
+msgstr "بازو"
 
 #: skycultures/western_rey/constellation_names.eng.fab:108
 msgid "claws"
-msgstr ""
+msgstr "پنجه ها"
 
 #: skycultures/western_rey/constellation_names.eng.fab:110
 msgid "cat's eyes"
-msgstr ""
+msgstr "چشمان گربه"
 
 #: skycultures/western_rey/constellation_names.eng.fab:123
 msgid "skirt"
-msgstr ""
+msgstr "دامن"
 
 #: skycultures/western_rey/constellation_names.eng.fab:124
 msgid "the bow"
-msgstr ""
+msgstr "کمان"
 
 #: skycultures/western_rey/constellation_names.eng.fab:131
 msgid "vessel"
-msgstr ""
+msgstr "کشتی"
 
 #: skycultures/western_rey/constellation_names.eng.fab:138
 msgid "Northern Fish"
-msgstr ""
+msgstr "ماهی شمالی"
 
 #: skycultures/western_rey/constellation_names.eng.fab:139
 msgid "Circlet"
-msgstr ""
+msgstr "دایره وار"
 
 #: skycultures/western_rey/constellation_names.eng.fab:146
 msgid "False Cross"
-msgstr ""
+msgstr "صلیب دروغین"
 
 #: skycultures/western_rey/constellation_names.eng.fab:148
 msgid "figurehead"
-msgstr ""
+msgstr "دست نشانده"
 
 #: skycultures/western_rey/constellation_names.eng.fab:150
 msgid "transom"
@@ -11526,43 +11530,43 @@ msgstr ""
 
 #: skycultures/western_rey/constellation_names.eng.fab:167
 msgid "ears"
-msgstr ""
+msgstr "گوشها"
 
 #: skycultures/western_rey/constellation_names.eng.fab:173
 msgid "front legs"
-msgstr ""
+msgstr "پاهای جلویی"
 
 #: skycultures/western_rey/constellation_names.eng.fab:174
 msgid "hind legs"
-msgstr ""
+msgstr "پاهای عقبی"
 
 #: skycultures/western_rey/constellation_names.eng.fab:180
 msgid "Fly"
-msgstr ""
+msgstr "پرواز"
 
 #: skycultures/western_rey/constellation_names.eng.fab:183
 msgid "eyes"
-msgstr ""
+msgstr "چشمها"
 
 #: skycultures/western_rey/star_names.fab:5
 msgid "Pole Star"
-msgstr ""
+msgstr "ستاره قطبى"
 
 #: skycultures/western_rey/star_names.fab:49
 msgid "Tau Ceti"
-msgstr ""
+msgstr "تاو-نهنگ"
 
 #: skycultures/western_rey/star_names.fab:50
 msgid "Knot"
-msgstr ""
+msgstr "گره"
 
 #: skycultures/western_rey/star_names.fab:56
 msgid "Alpha Centauri"
-msgstr ""
+msgstr "آلفا-قنطورس"
 
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
-msgstr ""
+msgstr "بتا قنطورس"
 
 #~ msgid "Animal"
 #~ msgstr "جانور"
@@ -12031,3 +12035,6 @@ msgstr ""
 
 #~ msgid "ρ Oph nebula"
 #~ msgstr "سحابی رو-حوا"
+
+#~ msgid "Golf of Mexico Nebula"
+#~ msgstr "سحابی خلیج مکزیک"
