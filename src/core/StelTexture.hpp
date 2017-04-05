@@ -155,10 +155,13 @@ private:
 	//! Returns true if the data was loaded, false if not yet ready.
 	bool load();
 
-    //! The parent texture manager
-    StelTextureMgr* textureMgr;
+	template <typename T, typename Param1, typename Arg1>
+	void startAsyncLoader(T (*functionPointer)(Param1), const Arg1 &arg1);
 
-    QOpenGLFunctions* gl;
+	//! The parent texture manager
+	StelTextureMgr* textureMgr;
+
+	QOpenGLFunctions* gl;
 	StelTextureParams loadParams;
 
 	//! Used to handle the connection for remote textures.
