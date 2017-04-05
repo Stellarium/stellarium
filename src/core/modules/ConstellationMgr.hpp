@@ -365,7 +365,7 @@ private:
 	Constellation* isStarIn(const StelObject *s) const;
 	Constellation* isObjectIn(const StelObject *s) const;
 	Constellation* findFromAbbreviation(const QString& abbreviation) const;
-	std::vector<Constellation*> asterisms;
+	std::vector<Constellation*> constellations;
 	QFont asterFont;
 	StarMgr* hipStarMgr;
 

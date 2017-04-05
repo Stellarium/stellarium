@@ -155,6 +155,10 @@ SET(stellarium_lib_SRCS
 
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
+     core/modules/Asterism.cpp
+     core/modules/Asterism.hpp
+     core/modules/AsterismMgr.cpp
+     core/modules/AsterismMgr.hpp
      core/modules/Constellation.cpp
      core/modules/Constellation.hpp
      core/modules/ConstellationMgr.cpp
