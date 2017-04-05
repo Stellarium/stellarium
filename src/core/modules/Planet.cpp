@@ -2555,6 +2555,7 @@ bool Planet::ensureObjLoaded()
 				//model load failed, fall back to sphere mode
 				objModelPath.clear();
 				qWarning()<<"Cannot load OBJ model for solar system object"<<getEnglishName();
+				return false;
 			}
 			else
 			{
