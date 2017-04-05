@@ -188,6 +188,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 		#else
 		QString portName=conf->value("gui/gps_interface", "ttyUSB0").toString();
 		#endif
+		bool portFound=false;
 		for (int i=0; i<portInfoList.size(); ++i)
 		{
 			QSerialPortInfo pi=portInfoList.at(i);
@@ -205,12 +206,13 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 			if (pi.portName()==portName)
 			{
 				portInfo=pi;
+				portFound=true;
 			}
-			else
-			{
-				qDebug() << "Configured port" << portName << "not found. No GPS query.";
-				return;
-			}
+		}
+		if (!portFound)
+		{
+			qDebug() << "Configured port" << portName << "not found. No GPS query.";
+			return;
 		}
 	}
 
@@ -230,7 +232,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	nmea->setDevice(serial);
 	// TODO Find out what happens if some other serial device is connected? Just timeout/error?
 
-	qDebug() << "GPS NMEA device at port " << serial->portName();
+	qDebug() << "Query GPS NMEA device at port " << serial->portName();
 	connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
 	connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
 	connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
