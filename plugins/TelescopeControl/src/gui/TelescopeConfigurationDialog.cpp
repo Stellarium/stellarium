@@ -43,7 +43,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	, configuredSlot(0)
 {
 	ui = new Ui_telescopeConfigurationDialog();
-	
+
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 
 	telescopeNameValidator = new QRegExpValidator (QRegExp("[^:\"]+"), this);//Test the update for JSON
@@ -122,7 +122,7 @@ void TelescopeConfigurationDialog::retranslate()
 void TelescopeConfigurationDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	
+
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -150,6 +150,10 @@ void TelescopeConfigurationDialog::createDialogContent()
 //Set the configuration panel in a predictable state
 void TelescopeConfigurationDialog::initConfigurationDialog()
 {
+	ui->groupBoxConnectionSettings->hide();
+	ui->groupBoxDeviceSettings->hide();
+	ui->groupBoxRTS2Settings->hide();
+
 	//Reusing code used in both methods that call this one
 	deviceModelNames = telescopeManager->getDeviceModels().keys();
 	
@@ -214,7 +218,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	configuredSlot = slot;
 	initConfigurationDialog();
 	ui->stelWindowTitle->setText(q_("Configure Telescope"));
-	
+
 	//Read the telescope properties
 	QString name;
 	ConnectionType connectionType;
@@ -321,16 +325,13 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
-		//Enable/disable controls
-		ui->labelHost->setEnabled(false);
-		ui->lineEditHostName->setEnabled(false);
+		ui->groupBoxDeviceSettings->show();
 
 		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
-		ui->labelHost->setEnabled(true);
-		ui->lineEditHostName->setEnabled(true);
+		ui->groupBoxDeviceSettings->hide();
 	}
 }
 
@@ -342,24 +343,18 @@ void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
-		ui->groupBoxDeviceSettings->setEnabled(false);
-		ui->groupBoxRTS2Settings->setEnabled(false);
+		ui->groupBoxConnectionSettings->show();
 
 		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
-		ui->groupBoxDeviceSettings->setEnabled(true);
+		ui->groupBoxConnectionSettings->hide();
 	}
 }
 
 void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
 {
-	//TODO: This really should be done in the GUI
-	ui->groupBoxDeviceSettings->setEnabled(!isChecked);
-	ui->groupBoxConnectionSettings->setEnabled(!isChecked);
-	ui->groupBoxRTS2Settings->setEnabled(!isChecked);
-
 	ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 }
 
@@ -370,13 +365,13 @@ void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
 		//Re-initialize values that may have been changed
 		ui->lineEditRTS2Url->setText("localhost:8889");
 
-		ui->groupBoxRTS2Settings->setEnabled(true);
+		ui->groupBoxRTS2Settings->show();
 
 		ui->scrollArea->ensureWidgetVisible(ui->groupBoxRTS2Settings);
 	}
 	else
 	{
-		ui->groupBoxRTS2Settings->setEnabled(false);
+		ui->groupBoxRTS2Settings->hide();
 	}
 }
 
