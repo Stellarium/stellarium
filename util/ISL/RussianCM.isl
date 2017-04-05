@@ -36,3 +36,4 @@ SpoutMode=(с отправителем Spout)
 RedistRun=Установка библиотеки времени выполнения Microsoft C/C++...
 UserGuide=Руководство пользователя
 DevelopersDocsOnTheWeb=Документация разработчика в Интернете
+DeleteUserData=Вы хотите удалить пользовательские данные?

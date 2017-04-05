@@ -30,6 +30,10 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
+#include "StelModuleMgr.hpp"
+#include "LandscapeMgr.hpp"
+#include "Landscape.hpp"
+
 #include <QOpenGLContext>
 #include <QOpenGLShaderProgram>
 #include <QStringList>
@@ -555,7 +559,16 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		if (wl>0)
 		{
 			const float f = core->getMovementMgr()->getCurrentFov();
-			reportLuminanceInFov(qMin(700.f, qMin(wl/50, (60.f*60.f)/(f*f)*6.f)));
+			// Report to the SkyDrawer that a very bright object (most notably Sun, Moon, bright planet)
+			// is in view. LP:1138533 correctly wants no such effect if object is hidden by landscape horizon.
+			LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
+			Q_ASSERT(lmgr);
+			Landscape *landscape=lmgr->getCurrentLandscape();
+			Q_ASSERT(landscape);
+			// Preliminary: create new Vec3d here. Later: consider replacing to vec3d in the arguments!
+			Vec3d vec(v[0], v[1], v[2]);
+			float opacity=(landscape->getFlagShow() ? landscape->getOpacity(core->j2000ToAltAz(vec, StelCore::RefractionAuto)) : 0.0f);
+			reportLuminanceInFov(qMin(700.f, qMin(wl/50, (60.f*60.f)/(f*f)*6.f))*(1.0f-opacity));
 		}
 	}
 

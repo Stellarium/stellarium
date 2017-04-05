@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-01-16 20:12+0700\n"
+"POT-Creation-Date: 2017-03-21 23:22+0700\n"
 "PO-Revision-Date: 2016-12-10 16:47+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-17 06:20+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-03-22 06:08+0000\n"
+"X-Generator: Launchpad (build 18334)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -124,7 +124,7 @@ msgstr "Введене не відповідає жодному з елемен�
 msgid "No current selection"
 msgstr "Зараз нічого не позначено"
 
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:478
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
 #: tablet7in.html:629
 msgid "-none-"
 msgstr "-немає-"
@@ -309,19 +309,11 @@ msgstr "Плутон"
 msgid "Current selection"
 msgstr "Поточне позначене"
 
-#: index.html:205 tablet7in.html:325
-msgid "Planets and satellites"
-msgstr "Планети і супутники"
-
-#: index.html:206 tablet7in.html:326
-msgid "Show Solar System objects"
-msgstr "Показати об’єкти Сонячної системи"
-
-#: index.html:237 tablet7in.html:362
+#: index.html:242 tablet7in.html:361
 msgid "ZHR:"
 msgstr "ЗГЧ:"
 
-#: index.html:281 tablet7in.html:412
+#: index.html:288 tablet7in.html:413
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
@@ -329,91 +321,91 @@ msgstr ""
 "Кола на вісі Землі під час її руху навколо полюсів екліптики. Буде показано "
 "лише на Землі."
 
-#: index.html:290 tablet7in.html:421
+#: index.html:297 tablet7in.html:422
 msgid "Solstices"
 msgstr "Солнцестояння"
 
-#: index.html:291 tablet7in.html:422
+#: index.html:298 tablet7in.html:423
 msgid "Crossquarters"
 msgstr "Квартальні дні"
 
-#: index.html:292 tablet7in.html:423
+#: index.html:299 tablet7in.html:424
 msgid "Major Standstill"
 msgstr "Основна зупинка"
 
-#: index.html:293 tablet7in.html:424
+#: index.html:300 tablet7in.html:425
 msgid "Minor Standstill"
 msgstr "Мінорна зупинка"
 
-#: index.html:303 tablet7in.html:434
+#: index.html:310 tablet7in.html:435
 msgid "Current Planet:"
 msgstr "Поточна планета:"
 
-#: index.html:397 tablet7in.html:531
+#: index.html:413 tablet7in.html:530
 msgid "Bright Nebulae"
 msgstr "Яскраві туманності"
 
-#: index.html:398 tablet7in.html:532
+#: index.html:414 tablet7in.html:531
 msgid "Dark Nebulae"
 msgstr "Темні туманності"
 
-#: index.html:399 tablet7in.html:533
+#: index.html:415 tablet7in.html:532
 msgid "Planetary Nebulae"
 msgstr "Планетарні туманності"
 
-#: index.html:405 tablet7in.html:542
+#: index.html:424 tablet7in.html:541
 msgid "Labels and markers"
 msgstr "Мітки і позначки"
 
-#: index.html:433 tablet7in.html:570
+#: index.html:453 tablet7in.html:570
 msgid "Show illumination"
 msgstr "Показати освітлення"
 
-#: index.html:438 tablet7in.html:576
+#: index.html:458 tablet7in.html:576
 msgid "Current landscape"
 msgstr "Поточний ландшафт"
 
-#: index.html:465 tablet7in.html:604
+#: index.html:485 tablet7in.html:604
 msgid "Current sky culture"
 msgstr "Поточна картина неба"
 
-#: index.html:478 tablet7in.html:629
+#: index.html:498 tablet7in.html:629
 msgid "Active script:"
 msgstr "Поточний сценарій:"
 
-#: index.html:479 tablet7in.html:630
+#: index.html:499 tablet7in.html:630
 msgid "Run selected script"
 msgstr "Виконати позначений сценарій"
 
-#: index.html:479 tablet7in.html:630
+#: index.html:499 tablet7in.html:630
 msgid "Stop current script"
 msgstr "Припинити виконання поточного сценарію"
 
-#: index.html:484 tablet7in.html:41 tablet7in.html:614
+#: index.html:504 tablet7in.html:41 tablet7in.html:614
 msgid "Actions"
 msgstr "Дії"
 
-#: index.html:488 tablet7in.html:618
+#: index.html:508 tablet7in.html:618
 msgid "Run/toggle action"
 msgstr "Виконати/Перемкнути дію"
 
-#: index.html:499 tablet7in.html:653
+#: index.html:519 tablet7in.html:653
 msgid "Planet map"
 msgstr "Карта планети"
 
-#: index.html:500 tablet7in.html:654
+#: index.html:520 tablet7in.html:654
 msgid "Planet map pointer"
 msgstr "Вказівник на карті планети"
 
-#: index.html:504 tablet7in.html:658
+#: index.html:524 tablet7in.html:658
 msgid "Type to search location"
 msgstr "Введіть щось, щоб знайти місце"
 
-#: index.html:549 tablet7in.html:704
+#: index.html:569 tablet7in.html:704
 msgid "No response from server"
 msgstr "Немає відповіді від сервера"
 
-#: index.html:550
+#: index.html:570
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr "Сервер не відповідає уже протягом %1 секунд. Stellarium ще працює?"

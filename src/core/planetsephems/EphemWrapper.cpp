@@ -68,7 +68,7 @@ void EphemWrapper::init_de431(const char* filepath)
 	InitDE431(filepath);
 }
 
-bool jd_fits_de431(const double jd)
+bool EphemWrapper::jd_fits_de431(const double jd)
 {
 	//Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
 	//return !(jd < -3027215.5 || jd > 7930192.5);
@@ -77,7 +77,7 @@ bool jd_fits_de431(const double jd)
 	return ((jd > -3027188.25 ) && (jd < 7930056.87916));
 }
 
-bool jd_fits_de430(const double jd)
+bool EphemWrapper::jd_fits_de430(const double jd)
 {
 	//return !(jd < 2287184.5 || jd > 2688974.5);
 	//return !(jd < 2287184.5 || jd > 2688976.5);
@@ -86,12 +86,12 @@ bool jd_fits_de430(const double jd)
 
 bool use_de430(const double jd)
 {
-	return StelApp::getInstance().getCore()->de430IsActive() && jd_fits_de430(jd);
+	return StelApp::getInstance().getCore()->de430IsActive() && EphemWrapper::jd_fits_de430(jd);
 }
 
 bool use_de431(const double jd)
 {
-	return StelApp::getInstance().getCore()->de431IsActive() && jd_fits_de431(jd);
+	return StelApp::getInstance().getCore()->de431IsActive() && EphemWrapper::jd_fits_de431(jd);
 }
 
 // planet_id is ONLY one of the #defined values 0..8 above.

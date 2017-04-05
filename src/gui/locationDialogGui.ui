@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>506</height>
+    <width>715</width>
+    <height>551</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -196,6 +196,12 @@
    </item>
    <item>
     <widget class="QFrame" name="locationContent">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -217,6 +223,12 @@
       </property>
       <item row="0" column="0" colspan="2">
        <widget class="QFrame" name="frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -226,7 +238,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>240</height>
+          <height>2400</height>
          </size>
         </property>
         <property name="frameShape">
@@ -254,7 +266,7 @@
          <item row="1" column="0">
           <widget class="MapLabel" name="mapLabel">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -267,8 +279,8 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>400</width>
-             <height>240</height>
+             <width>1440</width>
+             <height>720</height>
             </size>
            </property>
            <property name="lineWidth">
@@ -290,16 +302,22 @@
          </item>
          <item row="1" column="1">
           <widget class="QFrame" name="frame_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>200</width>
              <height>240</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>16777215</width>
-             <height>240</height>
+             <width>300</width>
+             <height>2400</height>
             </size>
            </property>
            <property name="frameShape">
@@ -377,6 +395,18 @@
       </item>
       <item row="2" column="1">
        <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>240</height>
+         </size>
+        </property>
         <property name="title">
          <string>Current location information</string>
         </property>
@@ -489,6 +519,12 @@
          </item>
          <item row="0" column="1">
           <widget class="QFrame" name="frame_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -517,13 +553,6 @@
             <property name="horizontalSpacing">
              <number>6</number>
             </property>
-            <item row="5" column="0" colspan="2">
-             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
-              <property name="text">
-               <string>Use current location as default</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label">
               <property name="text">
@@ -538,10 +567,24 @@
               </property>
              </widget>
             </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
+              <property name="text">
+               <string>Use current location as default</string>
+              </property>
+             </widget>
+            </item>
             <item row="4" column="0" colspan="2">
              <widget class="QCheckBox" name="useIpQueryCheckBox">
               <property name="text">
                <string>Get location from Network</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Altitude:</string>
               </property>
              </widget>
             </item>
@@ -550,6 +593,22 @@
               <property name="minimumSize">
                <size>
                 <width>140</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="AngleSpinBox" name="latitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>180</width>
                 <height>24</height>
                </size>
               </property>
@@ -589,41 +648,15 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="AngleSpinBox" name="latitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>180</width>
-                <height>24</height>
-               </size>
-              </property>
+            <item row="3" column="0" colspan="2">
+             <widget class="QPushButton" name="gpsPushButton">
               <property name="toolTip">
-               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+               <string>Retrieve current coordinates from GPS. Does not set timezone!</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_7">
               <property name="text">
-               <string>Altitude:</string>
+               <string>Get location from GPS</string>
               </property>
              </widget>
-            </item>
-            <item row="3" column="0">
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -643,6 +676,12 @@
          </item>
          <item row="0" column="3">
           <widget class="QFrame" name="frame_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>350</width>

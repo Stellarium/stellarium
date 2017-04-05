@@ -89,6 +89,7 @@ Satellites::Satellites()
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
 	, messageTimer(0)
+	, iridiumFlaresPredictionDepth(7)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -610,6 +611,7 @@ void Satellites::loadSettings()
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
+	iridiumFlaresPredictionDepth = conf->value("flares_prediction_depth", 7).toInt();
 
 	// Get a font for labels
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
@@ -640,6 +642,7 @@ void Satellites::saveSettings()
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("auto_add_enabled", autoAddEnabled);
 	conf->setValue("auto_remove_enabled", autoRemoveEnabled);
+	conf->setValue("flares_prediction_depth", iridiumFlaresPredictionDepth);
 
 	// Get a font for labels
 	conf->setValue("hint_font_size", labelFont.pixelSize());
@@ -1112,7 +1115,8 @@ void Satellites::setUpdateFrequencyHours(int hours)
 void Satellites::checkForUpdate(void)
 {
 	if (updatesEnabled && updateState != Updating
-	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()
+	    && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
 		updateFromOnlineSources();
 }
 
@@ -1781,7 +1785,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 	bool isTimeNow = pcore->getIsTimeNow();
 
 	double predictionJD = currentJD - 1.;  //  investigate what's seen recently// yesterday
-	double predictionEndJD = currentJD + 7.; // 7 days interval
+	double predictionEndJD = currentJD + getIridiumFlaresPredictionDepth(); // 7 days interval by default
 	pcore->setJD(predictionJD);
 
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();

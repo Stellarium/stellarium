@@ -50,9 +50,6 @@ class OcularDialog : public StelDialog
 public:
 	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *>* lense);
 	virtual ~OcularDialog();
-	//! Notify that the application style changed
-	void styleChanged();
-	void updateStyle();
 
 public slots:
 	void closeWindow();

@@ -209,6 +209,8 @@ in appendix~\ref{sec:config.ini} Configuration File.
 \section{Getting Extra Data}
 \label{sec:ExtraData}
 
+\subsection{More Stars}
+\label{sec:ExtraData:stars}
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
 in the \emph{Tools} tab of the \emph{Configuration} dialog.
@@ -226,17 +228,15 @@ for a few more millennia without too great errors, but with degrading accuracy.
 
 Since V0.15 you can install extra data files which allow access to the
 numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
+from NASA's Jet Propulsion Laboratory (JPL)\cite{DE43x}. The data files have to be
 downloaded separately, and most users will likely not need them. DE430
 provides highly accurate data for the years $+1550\ldots+2650$, while
 DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
 archaeoastronomical research on Mesolithic landscapes. Outside these
 year ranges, positional computation falls back to VSOP87.
 
-The integration of this feature is still experimental. As of V0.15,
-solar eclipses in antiquity seem to be slightly off. Please use JPL
+The integration of this feature is still somewhat experimental.  Please compare to  JPL
 Horizon for quotable results.
-% GZ TODO: FIX THAT ASAP!! 
 
 To enable use of these data, download the files from
 JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
@@ -273,6 +273,130 @@ will always be used.
 The optional use of DE430/431 has been supported by the ESA Summer of
 Code 2015 initiative.
 
+\subsection{GPS Position}
+\label{sec:ExtraData:GPS}
+
+\noindent In the Location panel (see section~\ref{sec:gui:location})
+you can receive your location from a \indexterm{GPS} device.
+\newFeature{0.16} The exact way to receive GPS location depends on
+your operating system.
+
+\subsubsection{GPSD (Linux, Mac OS X only)}
+\label{sec:ExtraData:GPS:GPSD}
+
+On Linux, Mac-OS X and other Unixoid platforms, Stellarium preferrably
+should not connect directly to a GPS USB device, serial device,
+bluetooth device, etc., but uses a connection to the \program{gpsd}
+daemon running on a computer in your network which provides GPS
+services concurrently for any interested application. In most cases,
+this will be a \program{gpsd} running on your localhost, receiving
+data from some GPS device plugged in via USB.
+
+Please follow instructions by the \program{gpsd}
+authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
+configure this system daemon.  A few hints:
+\begin{itemize}
+\item On Ubuntu 16.04 and likely other systems, USB hotplug devices
+  are handled by the \program{udev} daemon which detects newly
+  plugged-in devices and creates device files in the \file{/dev}
+  directory. Unfortunately, most GPS devices use the Prolific 2303
+  chipset in their serial-to-USB converter and are identified as
+  such, without other unique information like serial numbers. 
+  This chipset is also used in other Serial-to-USB converter
+  cables, and to avoid conflicts the according rule has been disabled
+  by the release managers of Ubuntu.  In
+  \file{/lib/udev/60-gpsd.rules}, find the commented line and
+  re-activate it.
+
+\item If you have such an USB GPS mouse and USB-to-serial converters
+  for other purposes like for your telescope control, you must solve
+  the ``\program{udev} crisis'' in some other way to get
+  \program{gpsd} running. You may be able to find some property in
+  your device to uniquely identify this device and write an
+  \program{udev} rule to create the symlink in \file{/dev/gps0} to
+  which \program{gpsd} can then connect.
+
+\item You can also connect to another computer which runs
+  \program{gpsd}. This could be a little Raspberry Pi computer which
+  happens to be in your WiFi to allow localisation and time service.
+ To configure this, you must manually edit
+  \file{config.ini}. Find the \texttt{[gui]} section and edit
+\begin{configfile}
+[gui]
+# These values are used on non-Windows systems 
+# supporting GPSD
+gpsd_hostname   = "localhost"
+gpsd_port       = 2947 
+\end{configfile}
+Also, \program{gpsd} must be started with the \texttt{-G} parameter to
+enable this.
+\item Even your smartphone can be used as GPS data
+  source\footnote{Thanks to user Caysho for this hint.}: Apps like
+  \program{BlueNMEA} can provide these data for \program{gpsd}, but
+  you must make sure to configure hostname/IP Address and port number
+  correctly, for example
+  \begin{commands}
+ sudo gpsd -n -D8 -S 1001 tcp://192.168.1.101:4352
+  \end{commands}
+which means
+\begin{description}
+\item[-n] to start without a device connection
+\item[-D8] maximum debug level. When it works, use what suits you
+\item[-S 1001] provide service on port 1001
+\item[tcp] Use this address:port combination to receive data from (IP of
+  your smartphone, port shown on \program{BlueNMEA} screen).
+\end{description}
+\item In case you really don't want to use the \program{gpsd}, you can
+  use a directly connected device, see below. This is however not
+  recommended when you have \program{gpsd} available.
+\end{itemize}
+
+
+\subsubsection{NMEA Device}
+\label{sec:ExtraData:GPS:NMEA}
+
+This mode is primarily for Windows users, but also for Linux and Mac
+users who don't want to use \program{gpsd}.
+
+Virtually all GPS receivers are able to emit the standardized
+\indexterm{NMEA}-0183 messages which encode time, position, speed,
+satellite information and other data.  The standard originally
+required connection settings of 4800\,baud, 8 bit, no parity, one stop
+bit (8N1), however some devices come with faster transfer.
+
+Compatible devices today are connected on a ``virtual COM port'' via
+USB. Unfortunately the COM number seems to depend on the USB plug
+where you attach the receiver.  You can identify the port name (COM3,
+COM4, \ldots) in the Windows system configuration (Device Manager) or
+with the software that came with your device.\footnote{On Linux, this
+  may read \file{/dev/ttyUSB0}, \file{/dev/gps0} or similar.}
+
+If this is the only serial device, Stellarium should automatically
+connect to it regardless of configuration entries.  You cannot change
+the USB plug after you first have received a location fix.  If you
+have a device with non-standard baudrate or several serial devices on
+serial ports (e.g., your telescope?), you must find out which serial port is
+used by the GPS device and manually edit \file{config.ini}.  Find
+the \texttt{[gui]} section and edit
+\begin{configfile}
+[gui]
+# These values are used on Windows primarily.
+gps_interface     = "COM3"
+gps_baudrate      = 4800
+\end{configfile}
+From now on, always use the same USB plug configuration to connect GPS
+and telescope.\footnote{Again, for Linux the port number is defined in
+  order of hotplugging by \program{udev}. You should develop an
+  \program{udev} rule which adds a unique name and use this. In this
+  case, you may also need to add your user to the \texttt{dialout}
+  group (or whichever group owns your serial port).  Better yet, use
+  \program{gpsd} (see above).}
+If GPS lookup fails, see the logfile for diagnostic messages.
+
+\paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
+hardware. You can install a virtual COM port in your Windows Bluetooth
+settings and use a smartphone app like \program{BlueNMEA} to provide
+the NMEA strings.
 
 \chapter{Command Line Options}
 %\label{command-line-options}

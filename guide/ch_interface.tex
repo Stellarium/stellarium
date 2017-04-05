@@ -78,8 +78,8 @@ using. This seems very practical, but if you feel this causes privacy
 issues, you may want to switch this feature off. You should also consider switching it off on a computer which does not move, to save network bandwidth.
 
 To set your location more accurately, or if the lookup service fails,
-press \key{F6} to open the location window. There are a few ways you
-can set your location:
+press \key{F6} to open the location window (Fig.~\ref{fig:gui:location}). 
+There are a few ways you can set your location:
 
 \begin{enumerate}
 \item Just click on the map.
@@ -90,9 +90,12 @@ can set your location:
   your click, then choose from the shortlist.
 \item Enter a new location using the longitude, latitude and other
   data.
+\item Click on \button{Get Location from GPS} if you have a GPS receiver. \newFeature{0.16}
+  See section~\ref{sec:ExtraData:GPS} for configuration details. 
+  Sometimes you have to try several times to get a valid 3D fix including altitude.
 \end{enumerate}
 
-\noindent If you want to use this location permanently, click on the
+\noindent If you want to use the current location permanently, click on the
 ``use as default'' checkbox, disable ``Get location from Network'',
 and close the location window.
 
@@ -268,7 +271,7 @@ available depends on the sound and video capabilities of you computer
 platform and may not work.
 
 
-\subsection{The Plugins Tab }
+\subsection{The Plugins Tab}
 \label{sec:gui:configuration:plugins}
 
 

@@ -29,7 +29,10 @@
 class StelCore;
 class StelSkyImageTile;
 
-//! Manage the sky background images, including DSS and deep sky objects images
+//! Manage the sky background images, including DSS and deep sky objects images.
+//! Drawn after Milky Way, but before Zodiacal Light.
+//! It is not intended to be used to "overdraw" images into the foreground without a concept of surface magnitude.
+
 class StelSkyLayerMgr : public StelModule
 {
 	Q_OBJECT
@@ -78,31 +81,36 @@ public slots:
 	// Properties setters and getters
 	//! Set whether Sky Background should be displayed
 	void setFlagShow(bool b) {if (flagShow !=b) { flagShow = b; emit flagShowChanged(b);}}
-	//! Load an image from a file. This should not be called directly from
-	//! scripts because it is not thread safe.  Instead use the simiarly
-	//! named function in the core scripting object.
+	//! Load an image from a file into a quad described with 4 corner coordinates.
+	//! The corners are always given in counterclockwise from top-left, also for azaltimuthal images.
+	//! This should not be called directly from scripts because it is not thread safe.
+	//! Instead use the similarly named function in the core scripting object.
 	//! @param id a string identifier for the image
 	//! @param filename the name of the image file to load.  Will be
 	//! searched for using StelFileMgr, so partial names are fine.
-	//! @param ra0 right ascention of corner 0 in degrees
-	//! @param dec0 declination of corner 0 in degrees
-	//! @param ra1 right ascention of corner 1 in degrees
-	//! @param dec1 declination of corner 1 in degrees
-	//! @param ra2 right ascention of corner 2 in degrees
-	//! @param dec2 declination of corner 2 in degrees
-	//! @param ra3 right ascention of corner 3 in degrees
-	//! @param dec3 declination of corner 3 in degrees
+	//! @param lon0 right ascension/longitude/azimuth of top-left corner 0 in degrees
+	//! @param lat0 declination/latitude/altitude of corner 0 in degrees
+	//! @param lon1 right ascension/longitude/azimuth of bottom-left corner 1 in degrees
+	//! @param lat1 declination/latitude/altitude of corner 1 in degrees
+	//! @param lon2 right ascension/longitude/azimuth of bottom-right corner 2 in degrees
+	//! @param lat2 declination/latitude/altitude of corner 2 in degrees
+	//! @param lon3 right ascension/longitude/azimuth of top-right corner 3 in degrees
+	//! @param lat3 declination/latitude/altitude of corner 3 in degrees
 	//! @param minRes the minimum resolution setting for the image
 	//! @param maxBright the maximum brightness setting for the image
 	//! @param visible initial visibility setting
+	//! @param frameType Coordinate frame type
+	//! @note Last argument has been added 2017-03. Use loadSkyImage(... , StelCore::FrameJ2000) for the previous behaviour!
+	//! @note For frameType=AzAlt, azimuth currently is counted from South towards East.
+	//! @bug Some image are not visible close to screen center, only when in the corners.
 	bool loadSkyImage(const QString& id, const QString& filename,
-					  double ra0, double dec0,
-					  double ra1, double dec1,
-					  double ra2, double dec2,
-					  double ra3, double dec3,
-					  double minRes, double maxBright, bool visible);
+					  double long0, double lat0,
+					  double long1, double lat1,
+					  double long2, double lat2,
+					  double long3, double lat3,
+					  double minRes, double maxBright, bool visible, StelCore::FrameType frameType=StelCore::FrameJ2000);
 
-	//! Load an image from a file. This should not be called directly from
+	//! Load an image from a file into AzAltimuthal coordinates. This should not be called directly from
 	//! scripts because it is not thread safe.  Instead use the similarly
 	//! named function in the core scripting object.
 	//! @param id a string identifier for the image
@@ -119,6 +127,8 @@ public slots:
 	//! @param minRes the minimum resolution setting for the image
 	//! @param maxBright the maximum brightness setting for the image
 	//! @param visible initial visibility setting
+	//! @deprecated since 2017-03 (inconsistent parameter order)! Use loadSkyImage(...., StelCore::FrameAzAlt) instead!
+	//! @todo remove before 0.16
 	bool loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double alt0, double azi0,
 					  double alt1, double azi1,
@@ -126,9 +136,7 @@ public slots:
 					  double alt3, double azi3,
 					  double minRes, double maxBright, bool visible);
 
-
-
-	//! Decide to show or not to show a layer by it's ID.
+	//! Decide to show or not to show a layer by its ID.
 	//! @param id the id of the layer whose status is to be changed.
 	//! @param b the new shown value:
 	//! - true means the specified image will be shown.

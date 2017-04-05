@@ -99,6 +99,36 @@ public:
 	//! @return an HTML string containing information about the StelObject.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags=StelObject::AllInfo) const = 0;
 
+	//! Return a key/value map with data about an object's position, magnitude and so on. Useful in a context like scripting.
+	//! Derived objects can add their own special information tags.
+	//! @param core the current StelCore
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declination angle (current date frame) in decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
+	//! - sglong : supergalactic longitude in decimal degrees
+	//! - sglat : supergalactic latitude in decimal degrees
+	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
+	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
+	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
+	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (after atmospheric extinction)
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
+	//! - name : english name of the object
+	//! - localized-name : localized name
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
+
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
 
@@ -112,9 +142,13 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox
-	//! The frame has it's Z axis at the planet's current rotation axis
+	//! The frame has its Z axis at the planet's current rotation axis
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
+	//! Like getEquinoxEquatorialPos(core), but always adds refraction correction to the position.
+	Vec3d getEquinoxEquatorialPosApparent(const StelCore* core) const;
+	//! Like getEquinoxEquatorialPos(core), but adds refraction correction to the position if atmosphere is active.
+	Vec3d getEquinoxEquatorialPosAuto(const StelCore* core) const;
 
 	//! Get observer-centered galactic coordinates
 	Vec3d getGalacticPos(const StelCore* core) const;
@@ -134,17 +168,17 @@ public:
 
 	//! Get observer-centered alt/az position
 	//! It is the geometric position, i.e. without taking refraction effect into account.
-	//! The frame has it's Z axis at the zenith
+	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosGeometric(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the apparent position, i.e. taking the refraction effect into account.
-	//! The frame has it's Z axis at the zenith
+	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the automatic position, i.e. taking the refraction effect into account if atmosphere is on.
-	//! The frame has it's Z axis at the zenith
+	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
