@@ -41,6 +41,7 @@
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
+#ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
 LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 	: GPSLookupHelper(parent), ready(false)
@@ -158,7 +159,7 @@ void LibGPSLookupHelper::query()
 }
 
 #endif
-#ifdef ENABLE_GPS
+
 NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	: GPSLookupHelper(parent), serial(NULL), nmea(NULL)
 {
@@ -704,6 +705,7 @@ void StelLocationMgr::locationFromIP()
 	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
 }
 
+#ifdef ENABLE_GPS
 bool StelLocationMgr::locationFromGPS()
 {
 #ifdef ENABLE_LIBGPS
@@ -719,7 +721,6 @@ bool StelLocationMgr::locationFromGPS()
 		return true;
 	}
 #endif
-#ifdef ENABLE_GPS
 	if(!nmeaHelper)
 	{
 		nmeaHelper = new NMEALookupHelper(this);
@@ -731,7 +732,7 @@ bool StelLocationMgr::locationFromGPS()
 		nmeaHelper->query();
 		return true;
 	}
-#endif
+
 	emit gpsQueryFinished(false);
 	return false;
 }
@@ -747,6 +748,7 @@ void StelLocationMgr::gpsQueryError(const QString &err)
 	qWarning()<<err;
 	emit gpsQueryFinished(false);
 }
+#endif
 
 // slot that receives IP-based location data from the network.
 void StelLocationMgr::changeLocationFromNetworkLookup()
