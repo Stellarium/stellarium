@@ -269,7 +269,7 @@ void S3DRenderer::setupMaterialUniforms(QOpenGLShaderProgram* shader, const S3DS
 
 //depth sort helper
 Vec3f zSortValue;
-bool zSortFunction(const StelOBJ::MaterialGroup*& mLeft, const StelOBJ::MaterialGroup*& mRight)
+bool zSortFunction(const StelOBJ::MaterialGroup* const & mLeft, const StelOBJ::MaterialGroup* const & mRight)
 {
 	//we can avoid taking the sqrt here
 	float dist1 = (mLeft->centroid - zSortValue).lengthSquared();
