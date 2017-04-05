@@ -180,6 +180,20 @@ void StelTexture::waitForLoaded()
 		loader->waitForFinished();
 }
 
+template <typename T, typename Param, typename Arg>
+void StelTexture::startAsyncLoader(T (*functionPointer)(Param), const Arg &arg)
+{
+	Q_ASSERT(loader==NULL);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,4,0))
+	//own thread pool only supported with Qt 5.4+
+	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, arg));
+#else
+	//this restores compatibility with Qt 5.3, with the drawback of potentially using
+	//more memory while loading textures (because more than one can be loaded at a time)
+	loader = new QFuture<GLData>(QtConcurrent::run(functionPointer, arg));
+#endif
+}
+
 bool StelTexture::load()
 {
 	// If the file is remote, start a network connection.
@@ -198,7 +212,7 @@ bool StelTexture::load()
 	// Not a remote file, start a loader from local file.
 	if (loader == NULL)
 	{
-		loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, loadFromPath, fullPath));
+		startAsyncLoader(loadFromPath,fullPath);
 		return false;
 	}
 	// Wait until the loader finish.
@@ -218,7 +232,7 @@ void StelTexture::onNetworkReply()
 		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
 			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
 		else
-			loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, loadFromData, data));
+			startAsyncLoader(loadFromData, data);
 	}
 	networkReply->deleteLater();
 	networkReply = NULL;
