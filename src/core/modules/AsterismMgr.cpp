@@ -351,15 +351,12 @@ void AsterismMgr::loadNames(const QString& namesFile)
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-
-	// lines which look like records - we use the RE to extract the fields
-	// which will be available in recRx.capturedTexts()
-	// abbreviation is allowed to start with a dot to mark as "hidden".
-	QRegExp recRx("^\\s*(\\.?\\w+)\\s+_[(]\"(.*)\"[)]\\n");
+	QRegExp recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\n");
+	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
 
 	// Some more variables to use in the parsing
 	Asterism *aster;
-	QString record, shortName;
+	QString record, shortName, ctxt;
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -387,7 +384,14 @@ void AsterismMgr::loadNames(const QString& namesFile)
 			// If the asterism exists, set the English name
 			if (aster != NULL)
 			{
-				aster->englishName = recRx.capturedTexts().at(2);
+				ctxt = recRx.capturedTexts().at(2);
+				if (ctxRx.exactMatch(ctxt))
+				{
+					aster->englishName = ctxRx.capturedTexts().at(1);
+					aster->context = ctxRx.capturedTexts().at(2);
+				}
+				else
+					aster->englishName = ctxt;
 				readOk++;
 			}
 			else
@@ -406,7 +410,7 @@ void AsterismMgr::updateI18n()
 	vector < Asterism * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName);
+		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName, (*iter)->context);
 	}
 }
 

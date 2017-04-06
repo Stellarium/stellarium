@@ -706,10 +706,11 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	// which will be available in recRx.capturedTexts()
 	// abbreviation is allowed to start with a dot to mark as "hidden".
 	QRegExp recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\n");
+	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
 
 	// Some more variables to use in the parsing
 	Constellation *aster;
-	QString record, shortName;
+	QString record, shortName, ctxt;
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -738,7 +739,15 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 			if (aster != NULL)
 			{
 				aster->nativeName = recRx.capturedTexts().at(2);
-				aster->englishName = recRx.capturedTexts().at(3);
+				ctxt = recRx.capturedTexts().at(3);
+				if (ctxRx.exactMatch(ctxt))
+				{
+					aster->englishName = ctxRx.capturedTexts().at(1);
+					aster->context = ctxRx.capturedTexts().at(2);
+				}
+				else
+					aster->englishName = ctxt;
+
 				readOk++;
 				// Some skycultures already have empty nativeNames. Fill those.
 				if (aster->nativeName.isEmpty())

@@ -86,7 +86,7 @@ private:
 	//! Get the translated name for the Asterism.
 	QString getNameI18n() const {return nameI18;}
 	//! Get the English name for the Asterism.
-	QString getEnglishName() const {return englishName;}
+	QString getEnglishName() const {return englishName;}	
 	//! Draw the lines for the Asterism.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class AsterismMgr only).
@@ -113,7 +113,9 @@ private:
 	//! Abbreviation
 	//! A skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
-	QString abbreviation;
+	QString abbreviation;	
+	//! Context for name
+	QString context;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
 	Vec3d XYname;

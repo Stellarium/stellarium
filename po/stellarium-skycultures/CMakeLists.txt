@@ -10,7 +10,7 @@ IF(${XGETTEXT_FOUND})
           generate-pot-stellarium-skycultures
           ${GETTEXT_XGETTEXT_EXECUTABLE}
                -o stellarium-skycultures.pot
-               --keyword=_
+               --keyword=_:1,2c
                --language=Python
                --add-comments=TRANSLATORS:
                --directory=${PROJECT_SOURCE_DIR}
