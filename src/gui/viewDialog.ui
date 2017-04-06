@@ -533,6 +533,9 @@
               <layout class="QHBoxLayout" name="horizontalLayout_starLabel">
                <item>
                 <widget class="QCheckBox" name="starLabelCheckBox">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
                  <property name="text">
                   <string>Labels and Markers</string>
                  </property>
@@ -1791,7 +1794,7 @@
                  <item row="4" column="0">
                   <widget class="QCheckBox" name="showHorizonLineCheckBox">
                    <property name="toolTip">
-                    <string>Show horizon line.</string>
+                    <string>Show mathematical horizon line.</string>
                    </property>
                    <property name="text">
                     <string>Horizon</string>
@@ -1810,6 +1813,9 @@
                  </item>
                  <item row="6" column="0">
                   <widget class="QCheckBox" name="showSupergalacticEquatorLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show equator of de Vaucouleurs' Supergalactic coordinates (1976).</string>
+                   </property>
                    <property name="text">
                     <string>Supergalactic equator</string>
                    </property>
@@ -2159,6 +2165,9 @@
                  </item>
                  <item row="6" column="0">
                   <widget class="QCheckBox" name="showSupergalacticGridCheckBox">
+                   <property name="toolTip">
+                    <string>Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the distribution of nearby galaxies.</string>
+                   </property>
                    <property name="text">
                     <string>Supergalactic grid</string>
                    </property>
@@ -2834,7 +2843,7 @@
                <item>
                 <widget class="QToolButton" name="colorConstellationLines">
                  <property name="toolTip">
-                  <string>Color of lines of constellations</string>
+                  <string>Color of constellation lines</string>
                  </property>
                 </widget>
                </item>
@@ -2879,7 +2888,7 @@
                <item>
                 <widget class="QToolButton" name="colorConstellationLabels">
                  <property name="toolTip">
-                  <string>Color of names of constellations</string>
+                  <string>Color of constellation names</string>
                  </property>
                 </widget>
                </item>
@@ -2900,7 +2909,7 @@
                <item>
                 <widget class="QToolButton" name="colorConstellationBoundaries">
                  <property name="toolTip">
-                  <string>Color of boundaries of constellations</string>
+                  <string>Color of constellation boundaries</string>
                  </property>
                 </widget>
                </item>
@@ -2931,7 +2940,7 @@
                <item>
                 <widget class="QToolButton" name="colorAsterismLines">
                  <property name="toolTip">
-                  <string>Color of lines of asterisms</string>
+                  <string>Color of asterism lines</string>
                  </property>
                 </widget>
                </item>
@@ -2949,7 +2958,7 @@
                <item>
                 <widget class="QToolButton" name="colorAsterismLabels">
                  <property name="toolTip">
-                  <string>Color of names of asterisms</string>
+                  <string>Color of asterism names</string>
                  </property>
                 </widget>
                </item>
