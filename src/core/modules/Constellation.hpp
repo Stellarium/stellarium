@@ -156,6 +156,7 @@ private:
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
 	QString abbreviation;
+	QString context;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
 	Vec3d XYname;
