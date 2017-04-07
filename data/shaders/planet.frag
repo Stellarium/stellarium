@@ -67,7 +67,7 @@ varying highp vec4 shadowCoord;
     varying highp vec3 normalY;
     varying highp vec3 normalZ;
 #else
-    varying mediump float lum_;
+    varying mediump float lambertIllum;
 #endif
 
 #ifdef SHADOWMAP
@@ -154,12 +154,13 @@ void main()
 #ifdef ADVANCED_SHADING
     mediump float lum = 1.;
 #else
-    mediump float lum = lum_;
+    mediump float lum = lambertIllum;
 #endif
 #ifdef RINGS_SUPPORT
     if(isRing)
         lum=1.0;
 #endif
+    //shadow calculation
     if(lum > 0.0)
     {
         highp vec3 sunPosition = sunInfo.xyz;
@@ -291,4 +292,5 @@ void main()
 #endif
 
     gl_FragColor = finalColor;
+    //gl_FragColor = lum;
 }
