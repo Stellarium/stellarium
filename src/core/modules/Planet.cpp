@@ -2301,7 +2301,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 		QVector3D vec(
 					1.0f - 0.5f * roughnessSq / (roughnessSq + 0.57f), //x = A
 					0.45f * roughnessSq / (roughnessSq + 0.09f),	//y = B
-					albedo * 15.0f	//z = scale factor, with the lunar albedo of 0.12, this produces roughly the same scaling as before (1.8)
+					1.85f	//z = scale factor
 					);
 
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
@@ -2503,12 +2503,15 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	const StelOBJ::Material& mat = mdl->obj->getMaterialList().at(mdl->obj->getObjectList().first().groups.first().materialIndex);
 	if(mat.map_Kd.isEmpty())
 	{
-		qCritical()<<"Planet OBJ model for"<<englishName<<"has no diffuse texture, aborting loading";
-		delete mdl;
-		return NULL;
+		qWarning()<<"Planet OBJ model for"<<englishName<<"has no diffuse texture";
+		//use nomap.png fallback
+		mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/nomap.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	}
-	//this call starts loading the tex in background
-	mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
+	else
+	{
+		//this call starts loading the tex in background
+		mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
+	}
 
 	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
 	mdl->obj->splitVertexData(&mdl->posArray);
@@ -2588,7 +2591,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	if(ssm->getFlagShowObjSelfShadows())
 		shadowmapping = drawObjShadowMap(painter,shadowMatrix);
 
-	if(!objModel->texture->bind())
+	if(objModel->texture && !objModel->texture->bind())
 	{
 		//the texture is still loading, use the sphere method
 		return false;
