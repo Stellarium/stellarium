@@ -456,7 +456,7 @@ void TelescopeConfigurationDialog::buttonDiscardPressed()
 
 void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceModelName)
 {
-	ui->labelDeviceModelDescription->setText(telescopeManager->getDeviceModels().value(deviceModelName).description);
+	ui->labelDeviceModelDescription->setText(q_(telescopeManager->getDeviceModels().value(deviceModelName).description));
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
 }
 

@@ -1603,3 +1603,25 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
+void TelescopeControl::translations()
+{
+#if 0
+	// TRANSLATORS: Description for Meade AutoStar compatible mounts
+	N_("Any telescope or telescope mount compatible with Meade's AutoStar controller.")
+	// TRANSLATORS: Description for Meade LX200 (compatible) mounts
+	N_("Any telescope or telescope mount compatible with Meade LX200.")
+	// TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
+	N_("Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable Set.")
+	// TRANSLATORS: Description for Losmandy G-11 mounts
+	N_("Losmandy's G-11 telescope mount.")
+	// TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
+	N_("Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode.")
+	// TRANSLATORS: Description for Celestron NexStar (compatible) mounts
+	N_("Any telescope or telescope mount compatible with Celestron NexStar.")
+	// TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
+	N_("Any Sky-Watcher mount that uses version 3 or later of the SynScan hand controller.")
+	// TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
+	N_("The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models.")
+#endif
+}
+

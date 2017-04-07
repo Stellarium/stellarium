@@ -357,6 +357,8 @@ private:
 	void logAtSlot(int slot);
 	void removeLogAtSlot(int slot);
 	
+	static void translations();
+	
 	QString actionGroupId;
 	QString moveToSelectedActionId;
 	QString moveToCenterActionId;
