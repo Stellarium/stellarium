@@ -297,12 +297,7 @@ public:
 
 	void setRings(Ring* r) {rings = r;}
 
-	void setSphereScale(float s) {sphereScale = s;}
-	//! Return the scale value used to visually enlarge the 3D body.
-	// Given that there is only one place to set a global scale factor for minor bodies: the SolarSystem settings panel,
-	// we return a direct scale factor for the Moon, but ignore the Planet's scaleFactor for all other bodies,
-	// but retrieve this value from the SolarSystem.
-	float getSphereScale(void) const;
+	void setSphereScale(float s) { if(s!=sphereScale) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
@@ -436,9 +431,16 @@ protected:
 		//! Loads the data from the StelOBJ into the StelOpenGLArray
 		bool loadGL();
 
+		void performScaling(double scale);
+
+		//! The BBox of the original model before any transformations
 		AABBox bbox;
-		//! Contains the original positions, they need StelProjector transformation
+		//! Contains the original positions in model space in km, they need scaling and projection
 		QVector<Vec3f> posArray;
+		//! True when the positions need to be rescaled before drawing
+		bool needsRescale;
+		//! Contains the scaled positions (sphere scale in AU), need StelProjector transformation for display
+		QVector<Vec3f> scaledArray;
 		//! Used to store the projected array data, avoids re-allocation each frame
 		QVector<Vec3f> projectedPosArray;
 		//! An OpenGL buffer for the projected positions
@@ -449,6 +451,7 @@ protected:
 		StelOBJ* obj;
 		//! The opengl array, created by loadObjModel() but filled later in main thread
 		StelOpenGLArray* arr;
+
 	};
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
@@ -517,7 +520,7 @@ protected:
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
 	// it is used for sorting while drawing
-	float sphereScale;               // Artificial scaling for better viewing. Always use getSphereScale() to retrieve this value (there is some magic involved)!
+	float sphereScale;               // Artificial scaling for better viewing.
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;
