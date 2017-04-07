@@ -122,7 +122,7 @@ QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
 #define SM_SIZE 1024
 
 Planet::PlanetOBJModel::PlanetOBJModel()
-	: projPosBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)), obj(new StelOBJ()), arr(new StelOpenGLArray())
+	: needsRescale(true), projPosBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)), obj(new StelOBJ()), arr(new StelOpenGLArray())
 {
 	//The buffer is refreshed completely before each draw, so StreamDraw should be ok
 	projPosBuffer->setUsagePattern(QOpenGLBuffer::StreamDraw);
@@ -148,6 +148,19 @@ bool Planet::PlanetOBJModel::loadGL()
 		return projPosBuffer->create();
 	}
 	return false;
+}
+
+void Planet::PlanetOBJModel::performScaling(double scale)
+{
+	scaledArray = posArray;
+
+	//pre-scale the cpu-side array
+	for(int i = 0; i<posArray.size();++i)
+	{
+		scaledArray[i]*=scale;
+	}
+
+	needsRescale = false;
 }
 
 Planet::Planet(const QString& englishName,
@@ -308,27 +321,6 @@ QString Planet::getNameI18n() const
 	return nameI18;
 }
 
-// It makes sense to display a scaled-up moon always scaled-up,
-// but we ignore the Planet's scaleFactor for all other bodies,
-// and retrieve this from the SolarSystem.
-// Note that the major planets are currently never scaled up (not even with scripting).
-float Planet::getSphereScale(void) const
-{
-	if (englishName=="Moon")
-		return sphereScale;
-	else
-	{
-		SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		if ((getPlanetType()!=Planet::isPlanet)
-				&& (getPlanetType()!=Planet::isStar)
-				&&  ssystem->getFlagMinorBodyScale()
-				)
-			return ssystem->getMinorBodyScale();
-		else
-			return 1.0f;
-	}
-}
-
 // Return the information string "ready to print" :)
 QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
@@ -345,8 +337,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
-		if (getSphereScale() != 1.f)
-			oss << QString::fromUtf8(" (\xC3\x97") << getSphereScale() << ")";
+		if (sphereScale != 1.f)
+			oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 		oss << "</h2>";
 	}
 
@@ -437,15 +429,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (getSphereScale()!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+			if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
 			{
 				if (withDecimalDegree)
 					oss << q_("Apparent diameter: %1, scaled up to: %2")
-					       .arg(StelUtils::radToDecDegStr(angularSize / getSphereScale(),5,false,true))
+					       .arg(StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true))
 					       .arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
 				else
 					oss << q_("Apparent diameter: %1, scaled up to: %2")
-					       .arg(StelUtils::radToDmsStr(angularSize / getSphereScale(), true))
+					       .arg(StelUtils::radToDmsStr(angularSize / sphereScale, true))
 					       .arg(StelUtils::radToDmsStr(angularSize, true));
 			}
 			else
@@ -587,9 +579,9 @@ QString Planet::getSkyLabel(const StelCore*) const
 	oss.setRealNumberPrecision(2);
 	oss << getNameI18n();
 
-	if (getSphereScale() != 1.f)
+	if (sphereScale != 1.f)
 	{
-		oss << QString::fromUtf8(" (\xC3\x97") << getSphereScale() << ")";
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 	}
 	return str;
 }
@@ -615,7 +607,7 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const StelCore* core) const
 {
-	return std::atan(radius*getSphereScale()*2.f/getEquinoxEquatorialPos(core).length())*180./M_PI * 4;
+	return std::atan(radius*sphereScale*2.f/getEquinoxEquatorialPos(core).length())*180./M_PI * 4;
 }
 
 double Planet::getSatellitesFov(const StelCore* core) const
@@ -1437,13 +1429,13 @@ double Planet::getAngularSize(const StelCore* core) const
 	double rad = radius;
 	if (rings)
 		rad = rings->getSize();
-	return std::atan2(rad*getSphereScale(),getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
 
 double Planet::getSpheroidAngularSize(const StelCore* core) const
 {
-	return std::atan2(radius*getSphereScale(),getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(radius*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -2016,7 +2008,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		core->getClippingPlanes(&n,&f); // Save clipping planes
 
 		//determine the minimum size of the clip space
-		double r = radius*getSphereScale();
+		double r = radius*sphereScale;
 		if(rings)
 			r+=rings->getSize();
 
@@ -2342,7 +2334,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Generates the vertice
 	Planet3DModel model;
-	sSphere(&model, radius*getSphereScale(), oneMinusOblateness, nb_facet, nb_facet);
+	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	
 	QVector<float> projectedVertexArr(model.vertexArr.size());
 	for (int i=0;i<model.vertexArr.size()/3;++i)
@@ -2520,13 +2512,6 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 
 	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
 	mdl->obj->splitVertexData(&mdl->posArray);
-
-	//pre-scale the cpu-side array
-	for(int i = 0; i<mdl->posArray.size();++i)
-	{
-		mdl->posArray[i]*=AU_KM;
-	}
-
 	mdl->bbox = mdl->obj->getAABBox();
 
 	return mdl;
@@ -2609,6 +2594,9 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 		return false;
 	}
 
+	if(objModel->needsRescale)
+		objModel->performScaling(AU_KM * sphereScale);
+
 	//the model is ready to draw!
 	painter->setBlending(false);
 	painter->setCullFace(true);
@@ -2642,15 +2630,6 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	objModel->projPosBuffer->bind();
 	const int vtxCount = objModel->posArray.size();
 
-	// GZ we have to prescale posArray. Maybe make that array even part of objModel and scale in setSphereScale() because scaling factor does not change so often?
-	QVector<Vec3f> scaledPosArray;
-	scaledPosArray.resize(objModel->posArray.size());
-	for (int i=0; i<objModel->posArray.size(); ++i)
-	{
-		scaledPosArray[i]=objModel->posArray[i]*getSphereScale();
-	}
-
-
 	const StelProjectorP& projector = painter->getProjector();
 
 	// I tested buffer orphaning (https://www.opengl.org/wiki/Buffer_Object_Streaming#Buffer_re-specification),
@@ -2662,9 +2641,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	// caused a 40% FPS drop for some reason!
 	// (in theory, this should be faster because it should avoid copying the array)
 	// So, lets not do that and just use this simple way in all cases:
-	//projector->project(vtxCount,objModel->posArray.constData(),objModel->projectedPosArray.data());
-	// GZ use the scaled array.
-	projector->project(vtxCount,scaledPosArray.constData(),objModel->projectedPosArray.data());
+	projector->project(vtxCount, objModel->scaledArray.constData(),objModel->projectedPosArray.data());
 	objModel->projPosBuffer->allocate(objModel->projectedPosArray.constData(),vtxCount * sizeof(Vec3f));
 
 	//unprojectedVertex, normalIn and texCoord are set by the StelOpenGLArray

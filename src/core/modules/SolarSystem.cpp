@@ -1967,6 +1967,17 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 	if(b!=flagMinorBodyScale)
 	{
 		flagMinorBodyScale = b;
+
+		double newScale = b ? minorBodyScale : 1.0;
+		//update the bodies with the new scale
+		foreach(PlanetP p, systemPlanets)
+		{
+			if(p == moon) continue;
+			if (p->getPlanetType()!=Planet::isPlanet
+					&& p->getPlanetType()!=Planet::isStar
+					)
+				p->setSphereScale(newScale);
+		}
 		emit flagMinorBodyScaleChanged(b);
 	}
 }
@@ -1977,6 +1988,17 @@ void SolarSystem::setMinorBodyScale(double f)
 	if(minorBodyScale != f)
 	{
 		minorBodyScale = f;
+		if(flagMinorBodyScale) //update the bodies with the new scale
+		{
+			foreach(PlanetP p, systemPlanets)
+			{
+				if(p == moon) continue;
+				if (p->getPlanetType()!=Planet::isPlanet
+						&& p->getPlanetType()!=Planet::isStar
+						)
+					p->setSphereScale(minorBodyScale);
+			}
+		}
 		emit minorBodyScaleChanged(f);
 	}
 }
