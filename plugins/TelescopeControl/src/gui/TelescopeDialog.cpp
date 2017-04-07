@@ -256,6 +256,7 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td rowspan=4><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
+	aboutPage += "<tr><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
 	aboutPage += "</table>";
 
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
