@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-07 10:01+0700\n"
-"PO-Revision-Date: 2017-03-27 10:55+0000\n"
+"PO-Revision-Date: 2017-04-07 11:19+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-07 05:27+0000\n"
+"X-Launchpad-Export-Date: 2017-04-08 05:28+0000\n"
 "X-Generator: Launchpad (build 18343)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -6129,7 +6129,7 @@ msgstr "Couleur de l'équateur galactique"
 
 #: src/ui_viewDialog.h:2206
 msgid "Show mathematical horizon line."
-msgstr ""
+msgstr "Afficher l'horizon mathématique"
 
 #: src/ui_viewDialog.h:2210
 msgid "Color of horizon"
@@ -6138,6 +6138,7 @@ msgstr "Couleur de l'horizon"
 #: src/ui_viewDialog.h:2213
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr ""
+"Afficher l'équateur des coordonnées supergalactiques de de Vaucouleurs (1976)"
 
 #: src/ui_viewDialog.h:2217
 msgid "Show meridian line."
@@ -6319,6 +6320,8 @@ msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr ""
+"Afficher les coordonnées supergalactiques de de Vaucouleurs (1976), définies "
+"par la distribution des galaxies proches."
 
 #: src/ui_viewDialog.h:2328
 msgid "Equatorial coordinates of J2000.0."
@@ -6465,7 +6468,7 @@ msgstr "Valeur en pixels"
 
 #: src/ui_viewDialog.h:2397
 msgid "Color of constellation lines"
-msgstr ""
+msgstr "Couleur des lignes des constellations"
 
 #: src/ui_viewDialog.h:2400
 msgid "Use native names for planets from current culture"
@@ -6490,7 +6493,7 @@ msgstr "Indiquez sous quelle forme vous désirez l'affichage des noms"
 
 #: src/ui_viewDialog.h:2410
 msgid "Color of constellation names"
-msgstr ""
+msgstr "Couleur des noms des constellations"
 
 #: src/ui_viewDialog.h:2412
 msgid "Show boundaries"
@@ -6498,23 +6501,23 @@ msgstr "Afficher les délimitations"
 
 #: src/ui_viewDialog.h:2414
 msgid "Color of constellation boundaries"
-msgstr ""
+msgstr "Couleur des limites des constellations"
 
 #: src/ui_viewDialog.h:2416
 msgid "Show asterism lines"
-msgstr ""
+msgstr "Afficher les lignes des astérismes"
 
 #: src/ui_viewDialog.h:2418
 msgid "Color of asterism lines"
-msgstr ""
+msgstr "Couleur des lignes des astérismes"
 
 #: src/ui_viewDialog.h:2420
 msgid "Show asterism labels"
-msgstr ""
+msgstr "Afficher les noms des astérismes"
 
 #: src/ui_viewDialog.h:2422
 msgid "Color of asterism names"
-msgstr ""
+msgstr "Couleur des noms des astérismes"
 
 #: src/ui_viewDialog.h:2425
 msgid "Visible"
@@ -9794,7 +9797,7 @@ msgstr "Programmation du plugin et interface graphique"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid "RTS2 support"
-msgstr ""
+msgstr "Support RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
@@ -10777,7 +10780,7 @@ msgstr "virtuelle"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:511
 msgid "RTS2"
-msgstr ""
+msgstr "RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:933
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
@@ -10924,11 +10927,11 @@ msgstr "Logiciel tiers ou poste distant"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:535
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
-msgstr ""
+msgstr "Télescope accessible via l'API JSON RTS2(.org)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:537
 msgid "RTS2 telescope"
-msgstr ""
+msgstr "Télescope RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:538
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -10992,31 +10995,31 @@ msgstr "Port TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:562
 msgid "RTS2 telescope settings"
-msgstr ""
+msgstr "Réglages télescope RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
 msgid "URL:"
-msgstr ""
+msgstr "URL :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:564
 msgid "Username:"
-msgstr ""
+msgstr "Nom d'utilisateur :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:565
 msgid "Password:"
-msgstr ""
+msgstr "Mot de passe :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
 msgid "RTS2 username"
-msgstr ""
+msgstr "Nom d'utilisateur RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
 msgid "RTS2 password"
-msgstr ""
+msgstr "Mot de passe RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:573
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
-msgstr ""
+msgstr "URL de l'ordinateur qui héberge le serveur RTS2 JSON (httpd)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
 msgid "User interface settings"
