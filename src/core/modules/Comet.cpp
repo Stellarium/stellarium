@@ -274,7 +274,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 QVariantMap Comet::getInfoMap(const StelCore *core) const
 {
-	QVariantMap map = StelObject::getInfoMap(core);
+	QVariantMap map = Planet::getInfoMap(core);
 	map.insert("tail-length-km", tailFactors[1]*AU);
 	map.insert("coma-diameter-km", tailFactors[0]*AU);
 
