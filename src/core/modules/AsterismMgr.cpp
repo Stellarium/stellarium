@@ -391,7 +391,10 @@ void AsterismMgr::loadNames(const QString& namesFile)
 					aster->context = ctxRx.capturedTexts().at(2);
 				}
 				else
+				{
 					aster->englishName = ctxt;
+					aster->context = "";
+				}
 				readOk++;
 			}
 			else

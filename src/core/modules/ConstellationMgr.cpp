@@ -746,8 +746,10 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 					aster->context = ctxRx.capturedTexts().at(2);
 				}
 				else
+				{
 					aster->englishName = ctxt;
-
+					aster->context = "";
+				}
 				readOk++;
 				// Some skycultures already have empty nativeNames. Fill those.
 				if (aster->nativeName.isEmpty())
