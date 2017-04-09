@@ -34,7 +34,7 @@
 #include <QFuture>
 #include <QtConcurrent>
 
-StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f),
+StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0),
 	width(-1), height(-1), glSize(0)
 {
 }
@@ -55,6 +55,7 @@ StelTexture::~StelTexture()
 		{
 			gl->glDeleteTextures(1, &id);
 			textureMgr->glMemoryUsage -= glSize;
+			textureMgr->idMap.remove(id);
 			glSize = 0;
 		}
 #ifndef NDEBUG
@@ -76,6 +77,24 @@ StelTexture::~StelTexture()
 	if (loader != NULL) {
 		delete loader;
 		loader = NULL;
+	}
+}
+
+void StelTexture::wrapGLTexture(GLuint texId)
+{
+	gl = QOpenGLContext::currentContext()->functions();
+	bool valid = gl->glIsTexture(texId);
+	if(valid)
+	{
+		id = texId;
+		//Note: there is no way to retrieve texture width/height on OpenGL ES
+		//so the members will be wrong
+		//also we can't estimate memory usage because of this
+	}
+	else
+	{
+		errorMessage="No valid OpenGL texture name";
+		errorOccured=true;
 	}
 }
 
@@ -388,7 +407,6 @@ bool StelTexture::glLoad(const GLData& data)
 
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = data.data.size();
-	textureMgr->glMemoryUsage += glSize;
 
 #ifndef NDEBUG
 	qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
@@ -403,7 +421,14 @@ bool StelTexture::glLoad(const GLData& data)
 	{
 		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filterMipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR_MIPMAP_NEAREST);
 		gl->glGenerateMipmap(GL_TEXTURE_2D);
+		glSize = glSize + glSize/3; //mipmaps require 1/3 more mem
 	}
+
+	//register ID with textureMgr and increment size
+	textureMgr->glMemoryUsage += glSize;
+	textureMgr->idMap.insert(id,sharedFromThis());
+
+
 	// Report success of texture loading
 	emit(loadingProcessFinished(false));
 	return true;

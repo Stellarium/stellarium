@@ -44,11 +44,18 @@ public:
 	StelTextureSP createTexture(const QString& filename, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
 
 	//! Load an image from a file and create a new texture from it in a new thread.
+	//! @note This method is safe to be called from threads other than the main thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked for in Stellarium's standard textures directories.
 	//! @param params the texture creation parameters.
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
 	StelTextureSP createTextureThread(const QString& url, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams(), bool lazyLoading=true);
+
+	//! Creates or finds a StelTexture wrapper for the specified OpenGL texture object.
+	//! The wrapper takes ownership of the texture and will delete it if it is destroyed.
+	//! @param texID The OpenGL texture ID which should be wrapped. If this is already a StelTexture, the existing wrapper will be returned.
+	//! @returns the existing or new wrapper for the texture with the given GL name. Returns a null pointer if the texture name is invalid.
+	StelTextureSP wrapperForGLTexture(GLuint texId);
 
 	//! Returns the estimated memory usage of all textures currently loaded through StelTexture
 	int getGLMemoryUsage();
@@ -67,9 +74,11 @@ private:
 	QThreadPool* loaderThreadPool;
 
 	StelTextureSP lookupCache(const QString& file);
-	typedef QMap<QString,QWeakPointer<StelTexture>> TexCache;
+	typedef QMap<QString,QWeakPointer<StelTexture> > TexCache;
+	typedef QMap<GLuint,QWeakPointer<StelTexture> > IdMap;
 	QMutex mutex;
 	TexCache textureCache;
+	IdMap idMap;
 };
 
 
