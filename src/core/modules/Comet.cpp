@@ -100,7 +100,10 @@ Comet::Comet(const QString& englishName,
 	  lastJDEtail(0.0),
 	  dustTailWidthFactor(dustTailWidthFact),
 	  dustTailLengthFactor(dustTailLengthFact),
-	  dustTailBrightnessFactor(dustTailBrightnessFact)
+	  dustTailBrightnessFactor(dustTailBrightnessFact),
+	  intensityFovScale(1.0f),
+	  intensityMinFov(0.001f), // when zooming in further, Coma is no longer visible.
+	  intensityMaxFov(0.010f) // when zooming out further, MilkyComa is fully visible (when enabled).
 {
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
@@ -327,6 +330,10 @@ float Comet::getVMagnitude(const StelCore* core) const
 void Comet::update(int deltaTime)
 {
 	Planet::update(deltaTime);
+
+	//calculate FOV fade value, linear fade between intensityMaxFov and intensityMinFov
+	const double vfov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+	intensityFovScale = qBound(0.25,(vfov - intensityMinFov) / (intensityMaxFov - intensityMinFov),1.0);
 
 	// The rest deals with updating tail geometries and brightness
 	StelCore* core=StelApp::getInstance().getCore();
@@ -591,7 +598,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum);
-	float magFactor=qBound(0.25f, aLum, 2.0f);
+	float magFactor=qBound(0.25f*intensityFovScale, aLum*intensityFovScale, 2.0f);
 	comaTexture->bind();
 	sPainter.setColor(0.3f*magFactor,0.7*magFactor,magFactor);
 	sPainter.setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
