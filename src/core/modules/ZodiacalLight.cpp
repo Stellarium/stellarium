@@ -46,8 +46,8 @@ ZodiacalLight::ZodiacalLight()
 	: color(1.f, 1.f, 1.f)
 	, intensity(1.)
 	, intensityFovScale(1.0f)
-	, intensityMinFov(0.25f) // when zooming in further, MilkyWay is no longer visible.
-	, intensityMaxFov(2.5f) // when zooming out further, MilkyWay is fully visible (when enabled).
+	, intensityMinFov(0.25f) // when zooming in further, Z.L. is no longer visible.
+	, intensityMaxFov(2.5f) // when zooming out further, Z.L. is fully visible (when enabled).
 	, lastJD(-1.0E6)
 	, vertexArray()
 {
