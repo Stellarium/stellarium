@@ -630,7 +630,7 @@ double StelCore::getViewportHorizontalOffset(void)
 // Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
 void StelCore::setViewportHorizontalOffset(double newOffsetPct)
 {
-	currentProjectorParams.viewportCenterOffset[0]=0.01f* qMin(50., qMax(-50., newOffsetPct));
+	currentProjectorParams.viewportCenterOffset[0]=0.01f* qBound(-50., newOffsetPct, 50.);
 	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
 						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }
@@ -643,7 +643,7 @@ double StelCore::getViewportVerticalOffset(void)
 // Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
 void StelCore::setViewportVerticalOffset(double newOffsetPct)
 {
-	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newOffsetPct));
+	currentProjectorParams.viewportCenterOffset[1]=0.01f* qBound(-50., newOffsetPct, 50.);
 	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
 						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }
@@ -651,8 +651,8 @@ void StelCore::setViewportVerticalOffset(double newOffsetPct)
 // Set both viewport offsets. Arguments will be clamped to be inside [-50...50]. I (GZ) hope this will avoid some of the shaking.
 void StelCore::setViewportOffset(double newHorizontalOffsetPct, double newVerticalOffsetPct)
 {
-	currentProjectorParams.viewportCenterOffset[0]=0.01f* qMin(50., qMax(-50., newHorizontalOffsetPct));
-	currentProjectorParams.viewportCenterOffset[1]=0.01f* qMin(50., qMax(-50., newVerticalOffsetPct));
+	currentProjectorParams.viewportCenterOffset[0]=0.01f* qBound(-50., newHorizontalOffsetPct, 50.);
+	currentProjectorParams.viewportCenterOffset[1]=0.01f* qBound(-50., newVerticalOffsetPct,   50.);
 	currentProjectorParams.viewportCenter.set(currentProjectorParams.viewportXywh[0]+(0.5f+currentProjectorParams.viewportCenterOffset.v[0])*currentProjectorParams.viewportXywh[2],
 						currentProjectorParams.viewportXywh[1]+(0.5f+currentProjectorParams.viewportCenterOffset.v[1])*currentProjectorParams.viewportXywh[3]);
 }

@@ -443,7 +443,7 @@ StelLocation LocationDialog::locationFromFields() const
 	else
 		loc.planetName = ui->planetNameComboBox->itemData(index).toString();
 	loc.name = ui->cityNameLineEdit->text().trimmed(); // avoid locations with leading whitespace
-	loc.latitude = qMin(90.0, qMax(-90.0, ui->latitudeSpinBox->valueDegrees()));
+	loc.latitude = qBound(-90.0, ui->latitudeSpinBox->valueDegrees(), 90.0);
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
 	loc.altitude = ui->altitudeSpinBox->value();
 	index = ui->countryNameComboBox->currentIndex();

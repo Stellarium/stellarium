@@ -1497,8 +1497,8 @@ void StelMovementMgr::setMaxFov(double max)
 void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float duration)
 {
 	//clamp to valid range
-	offsetX = qMax(-50.f, qMin(50.f, offsetX));
-	offsetY = qMax(-50.f, qMin(50.f, offsetY));
+	offsetX = qBound(-50.f, offsetX, 50.f);
+	offsetY = qBound(-50.f, offsetY, 50.f);
 
 	Vec2f oldTargetViewportOffset = targetViewportOffset;
 	targetViewportOffset.set(offsetX, offsetY);

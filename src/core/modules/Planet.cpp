@@ -2064,7 +2064,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		{
 			// when we zoom in, reduce the overbrightness. (LP:#1421173)
 			const float fov=core->getProjection(transfo)->getFov();
-			const float overbright=qMin(2.0f, qMax(0.85f,0.5f*fov)); // scale full brightness to 0.85...2. (<2 when fov gets under 4 degrees)
+			const float overbright=qBound(0.85f, 0.5f*fov, 2.0f); // scale full brightness to 0.85...2. (<2 when fov gets under 4 degrees)
 			sPainter->setColor(overbright, pow(0.75f, extinctedMag)*overbright, pow(0.42f, 0.9f*extinctedMag)*overbright);
 		}
 
