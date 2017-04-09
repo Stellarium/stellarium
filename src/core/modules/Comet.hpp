@@ -154,6 +154,11 @@ private:
 	QVector<double> comaVertexArr;
 	QVector<float> comaTexCoordArr; //  --> 2014-08: could also be declared static, but it is filled by StelPainter...
 
+	float intensityFovScale; // like for constellations: reduce brightness when zooming in.
+	float intensityMinFov;
+	float intensityMaxFov;
+
+
 	// These are to avoid having index arrays for each comet when all are equal.
 	static bool createTailIndices;
 	static bool createTailTextureCoords;
