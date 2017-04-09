@@ -277,7 +277,7 @@ public:
 	double getElongation(const Vec3d& obsPos) const;
 	//! Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
-	//! Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the planet phase [0=dark..1=full] for an observer at pos obsPos in heliocentric coordinates (in AU)
 	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
