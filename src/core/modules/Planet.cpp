@@ -1065,7 +1065,7 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq)));
 }
 
-// Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
+// Get the planet phase[0..1] for an observer at pos obsPos in heliocentric coordinates (in AU)
 float Planet::getPhase(const Vec3d& obsPos) const
 {
 	const double observerRq = obsPos.lengthSquared();
@@ -2029,10 +2029,25 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// Set the light parameters taking sun as the light source
 		light.diffuse = Vec4f(1.f,magFactorGreen*1.f,magFactorBlue*1.f);
 		light.ambient = Vec4f(0.02f,magFactorGreen*0.02f,magFactorBlue*0.02f);
-		// TODO: ambient for the moon should provide the Ashen light!
 
 		if (this==ssm->getMoon())
 		{
+			// ambient for the moon can provide the Ashen light!
+			// during daylight, this still should not make moon visible. We grab sky brightness and dim the moon.
+			// This approach here is again pretty ad-hoc.
+			// We have 5000cd/m^2 at sunset returned (Note this may be unnaturally much. Should be rather 10, but the 5000 may include the sun).
+			// When atm.brightness has fallen to 2000cd/m^2, we allow ashen light to appear visible. Its impact is full when atm.brightness is below 1000.
+			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+			Q_ASSERT(lmgr);
+			float atmLum=lmgr->getAtmosphereAverageLuminance();
+			if (atmLum<2000.0f)
+			{
+				float atmScaling=1.0f- (qMax(1000.0f, atmLum)-1000.0f)*0.001f; // full impact when atmLum<1000.
+				float ashenFactor=(1.0f-getPhase(core->getObserverHeliocentricEclipticPos()));
+				ashenFactor*=ashenFactor*0.15f*atmScaling;
+				light.ambient = Vec4f(ashenFactor,magFactorGreen*ashenFactor,magFactorBlue*ashenFactor);
+
+			}
 			float fov=core->getProjection(transfo)->getFov();
 			float fovFactor=1.6f;
 			// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
