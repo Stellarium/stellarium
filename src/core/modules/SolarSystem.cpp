@@ -497,7 +497,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	{
 		const QString secname = sections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString();
-		const QString strParent = pd.value(secname+"/parent").toString();
+		const QString strParent = pd.value(secname+"/parent", "Sun").toString();
 		secNameMap[englishName] = secname;
 		if (strParent!="none" && !strParent.isEmpty() && !englishName.isEmpty())
 			parentMap[englishName] = strParent;
@@ -902,15 +902,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
-						    pd.value(secname+"/lighting").toBool(),
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
-						    StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-						    pd.value(secname+"/albedo").toFloat(),
+						    StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()),
+						    pd.value(secname+"/albedo", 0.25f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
 						    pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
-						    pd.value(secname+"/tex_map").toString(),
+						    pd.value(secname+"/tex_map", "nomap.png").toString(),
 						    pd.value(secname+"/model").toString(),
 						    posfunc,
 						    userDataPtr,
@@ -956,15 +955,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else if (type == "comet")
 		{
 			p = PlanetP(new Comet(englishName,
-					      pd.value(secname+"/lighting").toBool(),
 					      pd.value(secname+"/radius").toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
-					      StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-					      pd.value(secname+"/albedo").toFloat(),
+					      StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()),
+					      pd.value(secname+"/albedo", 0.25f).toFloat(),
 					      pd.value(secname+"/roughness",0.9f).toFloat(),
 					      pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
 					      pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
-					      pd.value(secname+"/tex_map").toString(),
+					      pd.value(secname+"/tex_map", "nomap.png").toString(),
 					      pd.value(secname+"/model").toString(),
 					      posfunc,
 					      userDataPtr,
@@ -1008,15 +1006,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
 			QString normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
-					       pd.value(secname+"/lighting").toBool(),
 					       pd.value(secname+"/radius").toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
-					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-					       pd.value(secname+"/albedo").toFloat(),
+					       StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()),
+					       pd.value(secname+"/albedo", 0.25f).toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
 					       pd.value(secname+"/outgas_intensity",0.0f).toFloat(), // GZ should likely be zero in any case. Or adds some atmosphere glow?
 					       pd.value(secname+"/outgas_falloff", 0.1f).toFloat(), // GZ should likely be zero in any case. Or adds some atmosphere glow?
-					       pd.value(secname+"/tex_map").toString(),
+					       pd.value(secname+"/tex_map", "nomap.png").toString(),
 					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,

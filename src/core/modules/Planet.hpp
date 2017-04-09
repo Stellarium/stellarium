@@ -134,7 +134,6 @@ public:
 
 
 	Planet(const QString& englishName,
-	       int flagLighting,
 	       double radius,
 	       double oblateness,
 	       Vec3f halocolor,
@@ -489,11 +488,11 @@ protected:
 	QString nativeName;              // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;              // Texture file path
-	int flagLighting;                // Set whether light computation has to be proceed
+	//int flagLighting;                // Set whether light computation has to be proceed. NO LONGER USED (always on!)
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
-	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system
+	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system around the parent body. To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	// centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
