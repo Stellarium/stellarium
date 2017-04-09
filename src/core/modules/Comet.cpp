@@ -339,7 +339,7 @@ void Comet::update(int deltaTime)
 
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
-	//deltaJDtail=StelCore::JD_SECOND * qMax(1.0, qMin(eclipticPos.length(), 20.0));
+	//deltaJDtail=StelCore::JD_SECOND * qBound(1.0, eclipticPos.length(), 20.0);
 
 	if (fabs(lastJDEtail-dateJDE)>deltaJDEtail)
 	{
@@ -591,7 +591,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum);
-	float magFactor=qMin(qMax(aLum, 0.25f), 2.0f);
+	float magFactor=qBound(0.25f, aLum, 2.0f);
 	comaTexture->bind();
 	sPainter.setColor(0.3f*magFactor,0.7*magFactor,magFactor);
 	sPainter.setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
