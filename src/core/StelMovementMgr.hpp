@@ -328,7 +328,7 @@ private:
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
-		currentFov=qMax(minFov, qMin(f, maxFov));
+		currentFov=qBound(minFov, f, maxFov);
 	}
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
