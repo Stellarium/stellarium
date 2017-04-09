@@ -37,21 +37,17 @@ varying highp vec4 shadowCoord;
 varying mediump vec2 texc; //texture coord
 varying highp vec3 P; //original unprojected position (in AU)
 
-#ifdef IS_OBJ
-    //OBJ uses single normal for oren-nayar
-    varying mediump vec3 normalVS;
+#ifdef IS_MOON
+    //Luna uses normal mapping
+    varying highp vec3 normalX;
+    varying highp vec3 normalY;
+    varying highp vec3 normalZ;
 #else
-    #ifdef IS_MOON
-        //Luna uses normal mapping
-        varying highp vec3 normalX;
-        varying highp vec3 normalY;
-        varying highp vec3 normalZ;
-    #else
-        //normal objects use gourard shading
-        //good enough for our spheres
-        uniform highp vec3 lightDirection;
-        varying mediump float lambertIllum;
-    #endif
+    varying mediump vec3 normalVS;
+    //normal objects use gourard shading
+    //good enough for our spheres
+    uniform highp vec3 lightDirection;
+    varying mediump float lambertIllum;
 #endif
 
 void main()
@@ -79,6 +75,7 @@ void main()
         normalY = normalize(cross(normal, normalX));
         normalZ = normal;
     #else
+        normalVS = normal;
         //simple Lambert illumination
         mediump float c = dot(lightDirection, normal);
         lambertIllum = clamp(c, 0.0, 1.0);
