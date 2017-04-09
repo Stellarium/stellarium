@@ -23,9 +23,6 @@
 
 varying mediump vec2 texc; //texture coord
 varying highp vec3 P; //original vertex pos in model space
-#ifdef IS_OBJ
-    varying mediump vec3 normalVS; //pre-calculated normals
-#endif
 
 uniform sampler2D tex;
 uniform mediump vec3 ambientLight;
@@ -35,6 +32,11 @@ uniform mediump float skyBrightness;
 
 uniform int shadowCount;
 uniform highp mat4 shadowData;
+
+//x = scaling, y = exponential falloff
+uniform mediump vec2 outgasParameters;
+//eye direction in model space, pre-normalized
+uniform highp vec3 eyeDirection;
 
 #ifdef RINGS_SUPPORT
 uniform bool ring;
@@ -50,14 +52,11 @@ varying highp vec4 shadowCoord;
 #endif
 
 #if defined(IS_OBJ) || defined(IS_MOON)
-    #define ADVANCED_SHADING 1
-    //light and eye direction in model space, pre-normalized
-    uniform highp vec3 lightDirection;
-    uniform highp vec3 eyeDirection;    
+    #define OREN_NAYAR 1
+    //light direction in model space, pre-normalized
+    uniform highp vec3 lightDirection;  
     //x = A, y = B, z = scaling factor (rho/pi * E0)
     uniform mediump vec3 orenNayarParameters;
-    //x = scaling, y = exponential falloff
-    uniform mediump vec2 outgasParameters;
 #endif
 #ifdef IS_MOON
     uniform sampler2D earthShadow;
@@ -68,6 +67,7 @@ varying highp vec4 shadowCoord;
     varying highp vec3 normalZ;
 #else
     varying mediump float lambertIllum;
+    varying mediump vec3 normalVS; //pre-calculated normals or spherical normals in model space
 #endif
 
 #ifdef SHADOWMAP
@@ -121,6 +121,7 @@ lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord, in high
 }
 #endif
 
+#ifdef OREN_NAYAR
 // Calculates the Oren-Nayar reflectance (https://en.wikipedia.org/wiki/Oren%E2%80%93Nayar_reflectance_model)
 // the scale parameter is actually rho/pi * E_0 here
 // A and B are precalculated on the CPU side
@@ -138,6 +139,7 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     mediump float C = sin(alpha) * tan(beta);
     return max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * scale;
 }
+#endif
 
 // calculate pseudo-outgassing effect, inspired by MeshLab's "electronic microscope" shader
 lowp float outgasFactor(in mediump vec3 normal, in highp vec3 lightDir, in mediump float falloff)
@@ -151,7 +153,7 @@ lowp float outgasFactor(in mediump vec3 normal, in highp vec3 lightDir, in mediu
 void main()
 {
     mediump float final_illumination = 1.0;
-#ifdef ADVANCED_SHADING
+#ifdef OREN_NAYAR
     mediump float lum = 1.;
 #else
     mediump float lum = lambertIllum;
@@ -239,21 +241,21 @@ void main()
     mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
-#elif defined(IS_OBJ)
+#else
     // important to normalize here again
     mediump vec3 normal = normalize(normalVS);
 #endif
-#ifdef ADVANCED_SHADING
+#ifdef OREN_NAYAR
     // Use an Oren-Nayar model for rough surfaces
     // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar
     lum = orenNayar(normal, lightDirection, eyeDirection, orenNayarParameters.x, orenNayarParameters.y, orenNayarParameters.z);
+#endif
     //calculate pseudo-outgassing/rim-lighting effect
     lowp float outgas = 0.0;
     if(outgasParameters.x > 0.0)
     {
         outgas = outgasParameters.x * outgasFactor(normal, eyeDirection, outgasParameters.y);
     }
-#endif
 //Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
     lum *= (1.0-0.4*skyBrightness);
 #ifdef SHADOWMAP
@@ -269,11 +271,12 @@ void main()
 
     //final lighting color
     mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);
-#ifdef ADVANCED_SHADING
+
     //apply texture-colored rimlight
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
-#endif
-    mediump vec4 finalColor = texture2D(tex,texc);
+
+    lowp vec4 texColor = texture2D(tex, texc);
+    mediump vec4 finalColor = texColor;
 #ifdef IS_MOON
     if(final_illumination < 0.99)
     {
@@ -286,11 +289,10 @@ void main()
         finalColor *= litColor;
     }
 
-#ifdef ADVANCED_SHADING
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
-#endif
 
     gl_FragColor = finalColor;
-    //gl_FragColor = lum;
+    //to debug texture issues, uncomment and reload shader
+    //gl_FragColor = texColor;
 }
