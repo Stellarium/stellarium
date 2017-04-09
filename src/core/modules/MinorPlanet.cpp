@@ -34,7 +34,6 @@
 #include <QDebug>
 
 MinorPlanet::MinorPlanet(const QString& englishName,
-			 int flagLighting,
 			 double radius,
 			 double oblateness,
 			 Vec3f halocolor,
@@ -51,7 +50,6 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 bool hidden,
 			 const QString &pTypeStr)
 	: Planet (englishName,
-		  flagLighting,
 		  radius,
 		  oblateness,
 		  halocolor,
@@ -134,7 +132,7 @@ void MinorPlanet::setSemiMajorAxis(double value)
 {
 	semiMajorAxis = value;
 	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
-	deltaJDE = 2.0*semiMajorAxis*StelCore::JD_SECOND;
+	deltaJDE = 2.0*qMax(semiMajorAxis, 0.1)*StelCore::JD_SECOND;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)

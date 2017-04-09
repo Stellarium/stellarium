@@ -164,7 +164,6 @@ void Planet::PlanetOBJModel::performScaling(double scale)
 }
 
 Planet::Planet(const QString& englishName,
-	       int flagLighting,
 	       double radius,
 	       double oblateness,
 	       Vec3f halocolor,
@@ -195,7 +194,6 @@ Planet::Planet(const QString& englishName,
 	  nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
-	  flagLighting(flagLighting),
 	  radius(radius),
 	  oneMinusOblateness(1.0-oblateness),
 	  eclipticPos(0.,0.,0.),
@@ -2023,34 +2021,27 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
 		gl = sPainter->glFuncs();
 		
-		if (flagLighting)
+		// Set the main source of light to be the sun
+		Vec3d sunPos(0.);
+		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
+		light.position=Vec4d(sunPos);
+
+		// Set the light parameters taking sun as the light source
+		light.diffuse = Vec4f(1.f,magFactorGreen*1.f,magFactorBlue*1.f);
+		light.ambient = Vec4f(0.02f,magFactorGreen*0.02f,magFactorBlue*0.02f);
+		// TODO: ambient for the moon should provide the Ashen light!
+
+		if (this==ssm->getMoon())
 		{
-			// Set the main source of light to be the sun
-			Vec3d sunPos(0.);
-			core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
-			light.position=Vec4d(sunPos);
-
-			// Set the light parameters taking sun as the light source
-			light.diffuse = Vec4f(1.f,magFactorGreen*1.f,magFactorBlue*1.f);
-			light.ambient = Vec4f(0.02f,magFactorGreen*0.02f,magFactorBlue*0.02f);
-			// TODO: ambient for the moon should provide the Ashen light!
-
-			if (this==ssm->getMoon())
+			float fov=core->getProjection(transfo)->getFov();
+			float fovFactor=1.6f;
+			// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
+			if (fov<5.0f)
 			{
-				float fov=core->getProjection(transfo)->getFov();
-				float fovFactor=1.6f;
-				// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
-				if (fov<5.0f)
-				{
-					fovFactor -= 0.1f*(5.0f-qMax(2.0f, fov));
-				}
-				// Special case for the Moon. Was 1.6, but this often is too bright.
-				light.diffuse = Vec4f(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor,1.f);
+				fovFactor -= 0.1f*(5.0f-qMax(2.0f, fov));
 			}
-		}
-		else
-		{
-			sPainter->setColor(albedo,magFactorGreen*albedo,magFactorBlue*albedo);
+			// Special case for the Moon. Was 1.6, but this often is too bright.
+			light.diffuse = Vec4f(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor,1.f);
 		}
 
 		// possibly tint sun's color from extinction. This should deliberately cause stronger reddening than for the other objects.
@@ -2307,7 +2298,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
 	}
 
-	float outgas_intensity_distanceScaled=outgas_intensity/eclipticPos.lengthSquared(); // ad-hoc function: assume square falloff by distance.
+	float outgas_intensity_distanceScaled=outgas_intensity/getHeliocentricEclipticPos().lengthSquared(); // ad-hoc function: assume square falloff by distance.
 	GL(shader->setUniformValue(shaderVars.outgasParameters, QVector2D(outgas_intensity_distanceScaled, outgas_falloff)));
 
 	return data;
@@ -2506,7 +2497,9 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	{
 		qWarning()<<"Planet OBJ model for"<<englishName<<"has no diffuse texture";
 		//use nomap.png fallback
-		mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/nomap.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		//mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/nomap.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		// GZ better: Use texmap as defined in ssystem.ini
+		mdl->texture = texMap;
 	}
 	else
 	{
