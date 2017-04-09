@@ -449,6 +449,7 @@ void SolarSystem::loadPlanets()
 
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
+	qDebug() << "SolarSystem: loading from :"  << filePath;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -1013,8 +1014,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					       pd.value(secname+"/albedo").toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
-					       pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
-					       pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
+					       pd.value(secname+"/outgas_intensity",0.0f).toFloat(), // GZ should likely be zero in any case. Or adds some atmosphere glow?
+					       pd.value(secname+"/outgas_falloff", 0.1f).toFloat(), // GZ should likely be zero in any case. Or adds some atmosphere glow?
 					       pd.value(secname+"/tex_map").toString(),
 					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       pd.value(secname+"/model").toString(),

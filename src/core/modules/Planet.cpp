@@ -576,7 +576,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 {
 	QString str;
 	QTextStream oss(&str);
-	oss.setRealNumberPrecision(2);
+	oss.setRealNumberPrecision(3);
 	oss << getNameI18n();
 
 	if (sphereScale != 1.f)
@@ -2307,7 +2307,8 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
 	}
 
-	GL(shader->setUniformValue(shaderVars.outgasParameters, QVector2D(outgas_intensity, outgas_falloff)));
+	float outgas_intensity_distanceScaled=outgas_intensity/eclipticPos.lengthSquared(); // ad-hoc function: assume square falloff by distance.
+	GL(shader->setUniformValue(shaderVars.outgasParameters, QVector2D(outgas_intensity_distanceScaled, outgas_falloff)));
 
 	return data;
 }
