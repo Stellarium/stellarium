@@ -496,11 +496,11 @@ protected:
 	// centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
-	Vec3f haloColor;                 // exclusively used for drawing the planet halo
+	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
 	float absoluteMagnitude;         // since 2017: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
 					 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
-	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
+	float albedo;                    // Planet albedo. Used for magnitude computation when no other formula in use. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 	float roughness;                 // Oren-Nayar roughness for Moon and OBJ-based models
 	float outgas_intensity;          // The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
