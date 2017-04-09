@@ -38,7 +38,7 @@ template <class T> class QFuture;
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 //! @sa StelTextureSP
-class StelTexture: public QObject
+class StelTexture: public QObject, public QEnableSharedFromThis<StelTexture>
 {
 	Q_OBJECT
 
@@ -137,6 +137,9 @@ private:
 	//! Private constructor
 	StelTexture(StelTextureMgr* mgr);
 
+	//! Wrap an existing GL texture with this object
+	void wrapGLTexture(GLuint texId);
+
 	//! Convert a QImage into opengl compatible format.
 	static QByteArray convertToGLFormat(const QImage& image, GLint* format, GLint* type);
 
@@ -184,9 +187,6 @@ private:
 
 	//! OpenGL id
 	GLuint id;
-
-	//! Cached average luminance
-	float avgLuminance;
 
 	GLsizei width;	//! Texture image width
 	GLsizei height;	//! Texture image height
