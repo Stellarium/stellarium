@@ -904,7 +904,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
-						    StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()),
+						    StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 						    pd.value(secname+"/albedo", 0.25f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
@@ -915,7 +915,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    userDataPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", 0).toBool(),						    
+						    pd.value(secname+"/hidden", false).toBool(),
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -957,10 +957,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			p = PlanetP(new Comet(englishName,
 					      pd.value(secname+"/radius").toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
-					      StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()),
+					      StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					      pd.value(secname+"/albedo", 0.25f).toFloat(),
 					      pd.value(secname+"/roughness",0.9f).toFloat(),
-					      pd.value(secname+"/outgas_intensity",0.0f).toFloat(),
+					      pd.value(secname+"/outgas_intensity",0.1f).toFloat(),
 					      pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
 					      pd.value(secname+"/tex_map", "nomap.png").toString(),
 					      pd.value(secname+"/model").toString(),
@@ -968,7 +968,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					      userDataPtr,
 					      osculatingFunc,
 					      closeOrbit,
-					      pd.value(secname+"/hidden", 0).toBool(),
+					      pd.value(secname+"/hidden", false).toBool(),
 					      type,
 					      pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
 					      pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
@@ -1008,7 +1008,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			p = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius").toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
-					       StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()),
+					       StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					       pd.value(secname+"/albedo", 0.25f).toFloat(),
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
 					       pd.value(secname+"/outgas_intensity",0.0f).toFloat(), // GZ should likely be zero in any case. Or adds some atmosphere glow?
@@ -1020,9 +1020,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       userDataPtr,
 					       osculatingFunc,
 					       closeOrbit,
-					       pd.value(secname+"/hidden", 0).toBool(),
+					       pd.value(secname+"/hidden", false).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
-					       pd.value(secname+"/halo", 0).toBool(),
+					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
 			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toDouble();
 		}
