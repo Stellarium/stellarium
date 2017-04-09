@@ -586,7 +586,7 @@ Increase this value if the reticle is skipping.</string>
          <property name="title">
           <string>Connection settings</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QGridLayout" name="gridLayoutConnectionSettings">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -666,7 +666,7 @@ Increase this value if the reticle is skipping.</string>
          <property name="title">
           <string>RTS2 telescope settings</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QGridLayout" name="gridLayoutRTS2Settings">
           <property name="leftMargin">
            <number>0</number>
           </property>
