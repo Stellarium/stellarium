@@ -40,7 +40,6 @@ class Comet : public Planet
 public:
 	friend class SolarSystem;               // Solar System initializes static constants.
 	Comet(const QString& englishName,
-	      int flagLighting,
 	      double radius,
 	      double oblateness,
 	      Vec3f halocolor,

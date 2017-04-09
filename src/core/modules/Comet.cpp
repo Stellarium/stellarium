@@ -51,7 +51,6 @@ QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
 QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.
 
 Comet::Comet(const QString& englishName,
-	     int flagLighting,
 	     double radius,
 	     double oblateness,
 	     Vec3f halocolor,
@@ -71,7 +70,6 @@ Comet::Comet(const QString& englishName,
 	     float dustTailLengthFact,
 	     float dustTailBrightnessFact)
 	: Planet (englishName,
-		  flagLighting,
 		  radius,
 		  oblateness,
 		  halocolor,
@@ -80,7 +78,7 @@ Comet::Comet(const QString& englishName,
 		  outgas_intensity,
 		  outgas_falloff,
 		  atexMapName,
-		  "",
+		  "", // no normalmap.
 		  aobjModelName,
 		  coordFunc,
 		  auserDataPtr,
