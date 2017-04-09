@@ -126,6 +126,41 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	return tex;
 }
 
+StelTextureSP StelTextureMgr::wrapperForGLTexture(GLuint texId)
+{
+	IdMap::iterator it = idMap.find(texId);
+	if(it!=idMap.end())
+	{
+		//find out if it is valid
+		StelTextureSP ref = it->toStrongRef();
+		if(ref)
+		{
+			return ref; //valid texture!
+		}
+		else
+		{
+			//remove the cache entry
+			it=idMap.erase(it);
+		}
+	}
+
+
+	//no existing tex with this ID found, create a new wrapper
+	StelTextureSP newTex(new StelTexture(this));
+	newTex->wrapGLTexture(texId);
+	if(!newTex->errorOccured)
+	{
+		idMap.insert(texId, newTex);
+		return newTex;
+	}
+	else
+	{
+		//error while wrapping
+		qWarning()<<newTex->getErrorMessage();
+		return StelTextureSP();
+	}
+}
+
 StelTextureSP StelTextureMgr::lookupCache(const QString &file)
 {
 	TexCache::iterator it = textureCache.find(file);
@@ -135,7 +170,6 @@ StelTextureSP StelTextureMgr::lookupCache(const QString &file)
 		StelTextureSP ref = it->toStrongRef();
 		if(ref)
 		{
-			qDebug()<<"Cache hit"<<file;
 			return ref; //valid texture!
 		}
 		else

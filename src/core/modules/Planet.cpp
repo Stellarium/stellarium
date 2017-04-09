@@ -2510,11 +2510,8 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	const StelOBJ::Material& mat = mdl->obj->getMaterialList().at(mdl->obj->getObjectList().first().groups.first().materialIndex);
 	if(mat.map_Kd.isEmpty())
 	{
+		//we use a custom 1x1 pixel texture in this case
 		qWarning()<<"Planet OBJ model for"<<englishName<<"has no diffuse texture";
-		//use nomap.png fallback
-		//mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/nomap.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-		// GZ better: Use texmap as defined in ssystem.ini
-		mdl->texture = texMap;
 	}
 	else
 	{
@@ -2600,10 +2597,39 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 	if(ssm->getFlagShowObjSelfShadows())
 		shadowmapping = drawObjShadowMap(painter,shadowMatrix);
 
-	if(objModel->texture && !objModel->texture->bind())
+	if(objModel->texture)
 	{
-		//the texture is still loading, use the sphere method
-		return false;
+		if(!objModel->texture->bind())
+		{
+			//the texture is still loading, use the sphere method
+			return false;
+		}
+	}
+	else
+	{
+		//HACK: there is no texture defined, we create a 1x1 pixel texture with color*albedo
+		//this is not the most efficient method, but prevents having to rewrite the shader to work without a texture
+		//removing some complexity in managing this use-case
+		Vec3f texCol = haloColor * albedo * 255.0f + 0.5f;
+		//convert to byte
+		Vector3<GLubyte> colByte(texCol[0],texCol[1],texCol[2]);
+		GLuint tex;
+		gl->glActiveTexture(GL_TEXTURE0);
+		gl->glGenTextures(1, &tex);
+		gl->glBindTexture(GL_TEXTURE_2D,tex);
+		GLint oldalignment;
+		gl->glGetIntegerv(GL_UNPACK_ALIGNMENT,&oldalignment);
+		gl->glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		gl->glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1, 1, 0, GL_RGB, GL_UNSIGNED_BYTE, colByte.v );
+		gl->glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
+
+		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		// create a StelTexture from this
+		objModel->texture = StelApp::getInstance().getTextureManager().wrapperForGLTexture(tex);
 	}
 
 	if(objModel->needsRescale)
