@@ -2039,14 +2039,13 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// When atm.brightness has fallen to 2000cd/m^2, we allow ashen light to appear visible. Its impact is full when atm.brightness is below 1000.
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			Q_ASSERT(lmgr);
-			float atmLum=lmgr->getAtmosphereAverageLuminance();
+			float atmLum=(lmgr->getFlagAtmosphere() ? lmgr->getAtmosphereAverageLuminance() : 0.0f);
 			if (atmLum<2000.0f)
 			{
 				float atmScaling=1.0f- (qMax(1000.0f, atmLum)-1000.0f)*0.001f; // full impact when atmLum<1000.
-				float ashenFactor=(1.0f-getPhase(core->getObserverHeliocentricEclipticPos()));
+				float ashenFactor=(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
 				ashenFactor*=ashenFactor*0.15f*atmScaling;
 				light.ambient = Vec4f(ashenFactor,magFactorGreen*ashenFactor,magFactorBlue*ashenFactor);
-
 			}
 			float fov=core->getProjection(transfo)->getFov();
 			float fovFactor=1.6f;
