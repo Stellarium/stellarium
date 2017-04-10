@@ -75,8 +75,6 @@ Comet::Comet(const QString& englishName,
 		  halocolor,
 		  albedo,
 		  roughness,
-		  outgas_intensity,
-		  outgas_falloff,
 		  atexMapName,
 		  "", // no normalmap.
 		  aobjModelName,
@@ -88,8 +86,7 @@ Comet::Comet(const QString& englishName,
 		  false, //No atmosphere
 		  true, //halo
 		  pTypeStr),
-	  absoluteMagnitude(0.),
-	  slopeParameter(-1.), //== uninitialized: used in getVMagnitude()
+	  slopeParameter(-1.f), //== uninitialized: used in getVMagnitude()
 	  semiMajorAxis(0.),
 	  isCometFragment(false),
 	  nameIsProvisionalDesignation(false),
@@ -105,6 +102,8 @@ Comet::Comet(const QString& englishName,
 	  intensityMinFov(0.001f), // when zooming in further, Coma is no longer visible.
 	  intensityMaxFov(0.010f) // when zooming out further, MilkyComa is fully visible (when enabled).
 {
+	this->outgas_intensity =outgas_intensity;
+	this->outgas_falloff   =outgas_falloff;
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
@@ -118,7 +117,7 @@ Comet::~Comet()
 {
 }
 
-void Comet::setAbsoluteMagnitudeAndSlope(const double magnitude, const double slope)
+void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
 	if (slope < 0 || slope > 20.0)
 	{

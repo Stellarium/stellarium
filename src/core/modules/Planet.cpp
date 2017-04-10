@@ -169,8 +169,8 @@ Planet::Planet(const QString& englishName,
 	       Vec3f halocolor,
 	       float albedo,
 	       float roughness,
-	       float outgas_intensity,
-	       float outgas_falloff,
+	       //float outgas_intensity,
+	       //float outgas_falloff,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
 	       const QString& aobjModelName,
@@ -201,8 +201,8 @@ Planet::Planet(const QString& englishName,
 	  absoluteMagnitude(-99.0f),
 	  albedo(albedo),
 	  roughness(roughness),
-	  outgas_intensity(outgas_intensity),
-	  outgas_falloff(outgas_falloff),
+	  outgas_intensity(0.f),
+	  outgas_falloff(0.f),
 	  rotLocalToParent(Mat4d::identity()),
 	  axisRotation(0.),
 	  objModel(NULL),
@@ -225,6 +225,10 @@ Planet::Planet(const QString& englishName,
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
 	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
+	if (pType != isComet)
+	{
+		outgas_intensity=0.f;
+	}
 
 	//only try loading textures when there is actually something to load!
 	//prevents some overhead when starting

@@ -139,8 +139,6 @@ public:
 	       Vec3f halocolor,
 	       float albedo,
 	       float roughness,
-	       float outgas_intensity,
-	       float outgas_falloff,
 	       const QString& texMapName,
 	       const QString& normalMapName,
 	       const QString& objModelName,
@@ -498,12 +496,14 @@ protected:
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
-	float absoluteMagnitude;         // since 2017: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
+	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
 					 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
 	float albedo;                    // Planet albedo. Used for magnitude computation when no other formula in use. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 	float roughness;                 // Oren-Nayar roughness for Moon and OBJ-based models
 	float outgas_intensity;          // The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
+					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
+					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
 	// Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis.
