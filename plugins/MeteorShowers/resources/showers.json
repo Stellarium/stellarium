@@ -22,6 +22,25 @@
 			"driftAlpha": "0.9",
 			"driftDelta": "0.35"
 		},
+		"ACD":
+		{
+			"designation": "August Caelids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 4,
+				"start": "07.25",
+				"finish": "08.16",
+				"peak": "08.05"
+			}
+			],
+			"speed": 44.5,
+			"radiantAlpha": "70",
+			"radiantDelta": "-38.3",
+			"driftAlpha": "0.7",
+			"driftDelta": "-0.3"
+		},
 		"ARI":
 		{
 			"designation": "Arietids",
@@ -731,6 +750,25 @@
 			"driftDelta": "0",
 			"parentObj": "Comet C/1964 N1 (Ikeya)",
 			"pidx": 3.0
+		},
+		"EGR":
+		{
+			"designation": "ε-Gruids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 2,
+				"start": "06.01",
+				"finish": "06.21",
+				"peak": "06.11"
+			}
+			],
+			"speed": 52.67,
+			"radiantAlpha": "342.2",
+			"radiantDelta": "-51.6",
+			"driftAlpha": "0.7",
+			"driftDelta": "0.0"
 		},
 		"ELY":
 		{
