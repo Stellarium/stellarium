@@ -39,8 +39,8 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 Vec3f halocolor,
 			 float albedo,
 			 float roughness,
-			 float outgas_intensity,
-			 float outgas_falloff,
+			 //float outgas_intensity,
+			 //float outgas_falloff,
 			 const QString& atexMapName,
 			 const QString& aobjModelName,
 			 posFuncType coordFunc,
@@ -55,8 +55,8 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  halocolor,
 		  albedo,
 		  roughness,
-		  outgas_intensity,
-		  outgas_falloff,
+		  //0.f, // outgas_intensity,
+		  //0.f, // outgas_falloff,
 		  atexMapName,
 		  "",
 		  aobjModelName,
@@ -69,7 +69,6 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  true,  //Halo
 		  pTypeStr),
 	minorPlanetNumber(0),
-	absoluteMagnitude(0.0f),
 	slopeParameter(-1.0f), //== mark as uninitialized: used in getVMagnitude()
 	semiMajorAxis(0.),
 	nameIsProvisionalDesignation(false),
@@ -143,7 +142,7 @@ void MinorPlanet::setMinorPlanetNumber(int number)
 	minorPlanetNumber = number;
 }
 
-void MinorPlanet::setAbsoluteMagnitudeAndSlope(double magnitude, double slope)
+void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
 	if (slope < 0 || slope > 1.0)
 	{
