@@ -58,6 +58,13 @@ public slots:
 	//! Set the maximum velocity in km/s
 	void setMaxVelocity(int maxv) { m_maxVelocity = maxv; }
 
+	//! Set flag for enable activity of meteors when atmosphere is disabled.
+	//! @note option for planetariums
+	void setFlagForcedMeteorsActivity(bool b) {if(b!=m_flagForcedShow ){ m_flagForcedShow=b;}}
+	//! Get flag for enable activity of meteors when atmosphere is disabled.
+	//! @note option for planetariums
+	bool getFlagForcedMeteorsActivity() const {return m_flagForcedShow;}
+
 signals:
 	void zhrChanged(int);
 
@@ -67,6 +74,7 @@ private:
 	int m_zhr;
 	int m_maxVelocity;
 	bool m_flagShow;
+	bool m_flagForcedShow;
 };
 
 #endif // _SPORADICMETEORMGR_HPP_
