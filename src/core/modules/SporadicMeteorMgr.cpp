@@ -33,6 +33,7 @@ SporadicMeteorMgr::SporadicMeteorMgr(int zhr, int maxv)
 	: m_zhr(zhr)
 	, m_maxVelocity(maxv)
 	, m_flagShow(true)
+	, m_flagForcedShow(false)
 {
 	setObjectName("SporadicMeteorMgr");
 }
@@ -50,7 +51,9 @@ void SporadicMeteorMgr::init()
 				StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
 				StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
-	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_zhr", 10).toInt());
+	QSettings* conf = StelApp::getInstance().getSettings();
+	setZHR(conf->value("astro/meteor_zhr", 10).toInt());
+	setFlagForcedMeteorsActivity(conf->value("astro/flag_forced_meteor_activity", false).toBool());
 }
 
 double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
@@ -117,7 +120,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 
 void SporadicMeteorMgr::draw(StelCore* core)
 {
-	if (!m_flagShow || !core->getSkyDrawer()->getFlagHasAtmosphere())
+	if (!m_flagShow || (!core->getSkyDrawer()->getFlagHasAtmosphere() && !getFlagForcedMeteorsActivity()))
 	{
 		return;
 	}
