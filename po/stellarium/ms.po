@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-07 10:01+0700\n"
+"POT-Creation-Date: 2017-04-10 13:21+0700\n"
 "PO-Revision-Date: 2016-02-11 19:37+0000\n"
 "Last-Translator: Asrapsirap <kidzi.14@gmail.com>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-08 05:35+0000\n"
+"X-Launchpad-Export-Date: 2017-04-12 05:39+0000\n"
 "X-Generator: Launchpad (build 18343)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -3186,7 +3186,7 @@ msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:571 src/translations.h:103
+#: src/gui/AstroCalcDialog.cpp:571 src/translations.h:105
 #: src/ui_viewDialog.h:2135 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "Nebula planet"
@@ -3197,7 +3197,7 @@ msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:573 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:573 src/translations.h:107
 #: src/ui_viewDialog.h:2138 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "Nebula kelam"
@@ -3429,532 +3429,537 @@ msgid "Custom Objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:95
+#: src/translations.h:92
+msgid "Asterisms"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:97
 msgid "Bright galaxies"
 msgstr "Galaksi cerah"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:97 src/ui_dsoColorsDialog.h:500
+#: src/translations.h:99 src/ui_dsoColorsDialog.h:500
 msgid "Open star clusters"
 msgstr "Gugusan bintang terbuka"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:99 src/ui_dsoColorsDialog.h:536
+#: src/translations.h:101 src/ui_dsoColorsDialog.h:536
 msgid "Globular star clusters"
 msgstr "Gugusan bintang globular"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:101 src/ui_dsoColorsDialog.h:550
+#: src/translations.h:103 src/ui_dsoColorsDialog.h:550
 msgid "Nebulae"
 msgstr "Nebula"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:107 src/ui_dsoColorsDialog.h:497
+#: src/translations.h:109 src/ui_dsoColorsDialog.h:497
 msgid "Clusters associated with nebulosity"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109
+#: src/translations.h:111
 msgid "HII regions"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:111 src/ui_dsoColorsDialog.h:572
+#: src/translations.h:113 src/ui_dsoColorsDialog.h:572
 msgid "Reflection nebulae"
 msgstr "Nebula Memantul"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:113 src/ui_viewDialog.h:2137 src/ui_dsoColorsDialog.h:507
+#: src/translations.h:115 src/ui_viewDialog.h:2137 src/ui_dsoColorsDialog.h:507
 msgid "Active galaxies"
 msgstr "Galaksi aktif"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:115 src/ui_dsoColorsDialog.h:533
+#: src/translations.h:117 src/ui_dsoColorsDialog.h:533
 msgid "Radio galaxies"
 msgstr "Galaksi radio"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:117 src/ui_viewDialog.h:2131 src/ui_dsoColorsDialog.h:514
+#: src/translations.h:119 src/ui_viewDialog.h:2131 src/ui_dsoColorsDialog.h:514
 msgid "Interacting galaxies"
 msgstr "Galaksi Berinteraksi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:119
+#: src/translations.h:121
 msgid "Bright quasars"
 msgstr "Kuasar cerah"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:121 src/ui_viewDialog.h:2134 src/ui_dsoColorsDialog.h:534
+#: src/translations.h:123 src/ui_viewDialog.h:2134 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "Gugusan bintang"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:123 src/ui_dsoColorsDialog.h:485
+#: src/translations.h:125 src/ui_dsoColorsDialog.h:485
 msgid "Stellar associations"
 msgstr "Pertubuhan angkasaraya"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:125 src/ui_dsoColorsDialog.h:519
+#: src/translations.h:127 src/ui_dsoColorsDialog.h:519
 msgid "Star clouds"
 msgstr "Awan bintang"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:127 src/ui_dsoColorsDialog.h:571
+#: src/translations.h:129 src/ui_dsoColorsDialog.h:571
 msgid "Bipolar nebulae"
 msgstr "Nebula dwi-kutub"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:129 src/ui_dsoColorsDialog.h:595
+#: src/translations.h:131 src/ui_dsoColorsDialog.h:595
 msgid "Emission nebulae"
 msgstr "Nebula melepas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:131 src/ui_viewDialog.h:2130 src/ui_dsoColorsDialog.h:614
+#: src/translations.h:133 src/ui_viewDialog.h:2130 src/ui_dsoColorsDialog.h:614
 msgid "Supernova remnants"
 msgstr "Sisa supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:133 src/ui_dsoColorsDialog.h:564
+#: src/translations.h:135 src/ui_dsoColorsDialog.h:564
 msgid "Interstellar matter"
 msgstr "Jasad cakerawala"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:135 src/ui_dsoColorsDialog.h:489
+#: src/translations.h:137 src/ui_dsoColorsDialog.h:489
 msgid "Emission objects"
 msgstr "Objek dilepas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:137 src/ui_dsoColorsDialog.h:576
+#: src/translations.h:139 src/ui_dsoColorsDialog.h:576
 msgid "BL Lac objects"
 msgstr "Objek BL Lac"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:139 src/ui_dsoColorsDialog.h:535
+#: src/translations.h:141 src/ui_dsoColorsDialog.h:535
 msgid "Blazars"
 msgstr "Belazar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:141
+#: src/translations.h:143
 msgid "Molecular Clouds"
 msgstr "Awan-awan Molekul"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:143
+#: src/translations.h:145
 msgid "Young Stellar Objects"
 msgstr "Objek Cakerawala Muda"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:145
+#: src/translations.h:147
 msgid "Possible Quasars"
 msgstr "Kemungkinan Kuasar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:147
+#: src/translations.h:149
 msgid "Possible Planetary Nebulae"
 msgstr "Kemungkinan Nebula Planet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:149
+#: src/translations.h:151
 msgid "Protoplanetary Nebulae"
 msgstr "Nebula Protoplanet"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:151 src/ui_viewDialog.h:2094
+#: src/translations.h:153 src/ui_viewDialog.h:2094
 msgid "Messier Catalogue"
 msgstr "Katalog Messier"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:153 src/ui_viewDialog.h:2097
+#: src/translations.h:155 src/ui_viewDialog.h:2097
 msgid "Caldwell Catalogue"
 msgstr "Katalog Caldwell"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:155
+#: src/translations.h:157
 msgid "Barnard Catalogue"
 msgstr "Katalog Barnard"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:157
+#: src/translations.h:159
 msgid "Sharpless Catalogue"
 msgstr "Katalog Sharpless"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:159
+#: src/translations.h:161
 msgid "Van den Bergh Catalogue"
 msgstr "Katalog Van den Bergh"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:161
+#: src/translations.h:163
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr "Katalog Rodgers, Campbell, dan Whiteoak"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:163
+#: src/translations.h:165
 msgid "Collinder Catalogue"
 msgstr "Katalog Collinder"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:165
+#: src/translations.h:167
 msgid "Melotte Catalogue"
 msgstr "Katalog Melotte"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:167
+#: src/translations.h:169
 msgid "Dwarf galaxies"
 msgstr "Galaksi kerdil"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:169
+#: src/translations.h:171
 msgid "Herschel 400 Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:174
+#: src/translations.h:176
 msgid "Interesting double stars"
 msgstr "Dwi-bintang menarik"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:176
+#: src/translations.h:178
 msgid "Interesting variable stars"
 msgstr "Bintang laras menarik"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:181
+#: src/translations.h:183
 msgid "Arabic"
 msgstr "Arab"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:183
+#: src/translations.h:185
 msgid "Arabic Moon Stations"
 msgstr "Stesen Bulan Arab"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:185
+#: src/translations.h:187
 msgid "Aztec"
 msgstr "Aztek"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:187
+#: src/translations.h:189
 msgid "Boorong"
 msgstr "Burung"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:189
+#: src/translations.h:191
 msgid "Chinese"
 msgstr "Cina"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:191
+#: src/translations.h:193
 msgid "Egyptian"
 msgstr "Mesir"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:193
+#: src/translations.h:195
 msgid "Inuit"
 msgstr "Inuit"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:195
+#: src/translations.h:197
 msgid "Indian Vedic"
 msgstr "Veda India"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:197
+#: src/translations.h:199
 msgid "Japanese Moon Stations"
 msgstr "Stesen Bulan Jepun"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:199
+#: src/translations.h:201
 msgid "Kamilaroi/Euahlayi"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:201
+#: src/translations.h:203
 msgid "Korean"
 msgstr "Korea"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:203
+#: src/translations.h:205
 msgid "Dakota/Lakota/Nakota"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:205
+#: src/translations.h:207
 msgid "Macedonian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:207
+#: src/translations.h:209
 msgid "Maori"
 msgstr "Maori"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:209
+#: src/translations.h:211
 msgid "Mongolian"
 msgstr "Bahasa Mongolia"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:211
+#: src/translations.h:213
 msgid "Navajo"
 msgstr "Navajo"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:213
+#: src/translations.h:215
 msgid "Norse"
 msgstr "Norse"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:215
+#: src/translations.h:217
 msgid "Ojibwe"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:217
+#: src/translations.h:219
 msgid "Polynesian"
 msgstr "Polinesia"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:219
+#: src/translations.h:221
 msgid "Romanian"
 msgstr "Romania"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:221
+#: src/translations.h:223
 msgid "Sami"
 msgstr "Sami"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:223
+#: src/translations.h:225
 msgid "Sardinian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:225
+#: src/translations.h:227
 msgid "Siberian"
 msgstr "Bahasa Siberia"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:227
+#: src/translations.h:229
 msgid "Tukano"
 msgstr "Bahasa Tukano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:231
+#: src/translations.h:233
 msgid "Tongan"
 msgstr "Tongan"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:233
+#: src/translations.h:235
 msgid "Western"
 msgstr "Barat"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:235
+#: src/translations.h:237
 msgid "Western (H.A.Rey)"
 msgstr "Barat (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:241
+#: src/translations.h:243
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:243
+#: src/translations.h:245
 msgid "Trees"
 msgstr "Pepohon"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:245 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
+#: src/translations.h:247 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
 msgid "Moon"
 msgstr "Bulan"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:247
+#: src/translations.h:249
 msgid "Hurricane"
 msgstr "Ribut Taufan"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:249
+#: src/translations.h:251
 msgid "Ocean"
 msgstr "Lautan"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:251
+#: src/translations.h:253
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:253 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
+#: src/translations.h:255 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
 msgid "Mars"
 msgstr "Marikh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:255 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1299
+#: src/translations.h:257 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1299
 msgid "Jupiter"
 msgstr "Musytari"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:257 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
+#: src/translations.h:259 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
 msgid "Saturn"
 msgstr "Zuhal"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:259
+#: src/translations.h:261
 msgid "Uranus"
 msgstr "Uranus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:261
+#: src/translations.h:263
 msgid "Neptune"
 msgstr "Neptun"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:263
+#: src/translations.h:265
 msgid "Geneva"
 msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:265
+#: src/translations.h:267
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:267
+#: src/translations.h:269
 msgid "Zero Horizon"
 msgstr "Dataran Kosong"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:272
+#: src/translations.h:274
 msgid "Vienna Sterngarten"
 msgstr "Sterngarten Vienna"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:274
+#: src/translations.h:276
 msgid "Testscene"
 msgstr "adengan ujian"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:279
+#: src/translations.h:281
 msgid "Landscape Tour"
 msgstr "mengenal lanskap"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:281
+#: src/translations.h:283
 msgid "Partial Lunar Eclipse"
 msgstr "gerhana bulan separa"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:283
+#: src/translations.h:285
 msgid "Total Lunar Eclipse"
 msgstr "gerhana bulan penuh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:285
+#: src/translations.h:287
 msgid "Screensaver"
 msgstr "Penyelamat Skrin"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:287
+#: src/translations.h:289
 msgid "Solar Eclipse 2009"
 msgstr "gerhana matahari 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:289
+#: src/translations.h:291
 msgid "Startup Script"
 msgstr "Skrip Permulaan"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:291
+#: src/translations.h:293
 msgid "Zodiac"
 msgstr "Zodiak"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:293
+#: src/translations.h:295
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Terbit & Terbenam Matahari Tripel Utarid"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:295
+#: src/translations.h:297
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Gerhana Dubel melalui Deimos pada 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:297
+#: src/translations.h:299
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Gerhana Dubel melalui Deimos pada 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:299
+#: src/translations.h:301
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Gerhana dari Gunung Olympus 10 Jan 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:303
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Penghijaban Bumi dan Musytari 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:305
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 Lintasan dan 2 Gerhana dari Deimos 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "Solar System Screensaver"
 msgstr "Penyelamat Skrin Sistem Suria"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "Constellations Tour"
 msgstr "Jelajah Buruj"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Sun from different planets"
 msgstr "Matahari dari planet yang berlainan"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Earth best views from other bodies"
 msgstr "Pandangan terbaik bumi dari jasad lain"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Transit of Venus"
 msgstr "Pertukaran Venus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:317
 msgid "Analemma"
 msgstr "Analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:319
 msgid "Sky Culture Tour"
 msgstr "Lawatan Peribudaya Langit"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:319
+#: src/translations.h:321
 msgid "Earth Events from Mercury"
 msgstr "Peristiwa Bumi menerusi Utarid"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "Earth Events from a floating city on Venus"
 msgstr "Peristiwa Bumi dari bandar terapung di Zuhrah."
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Earth Events from Mars"
 msgstr "Peristiwa Bumi menerusi Marikh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
@@ -3962,83 +3967,83 @@ msgstr ""
 "Marikh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "Tycho's Supernova"
 msgstr "Supernova Tycho"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Earth and other Planets from Ceres"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Messier Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Binocular Highlights"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "List of largest known stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Herschel 400 Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "The Jack Bennett Catalog"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "Best objects in the New General Catalog"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Look around each installed landscape."
 msgstr "lihat lanskap yang tersedia"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Look at each installed sky culture."
 msgstr "Lihat setiap peribudaya langit yang dipasang."
 
-#: src/translations.h:356
+#: src/translations.h:358
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "skrip untuk demonstrasi gerhana bulan separa"
 
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "skrip untuk demonstrasi gerhana bulan penuh"
 
-#: src/translations.h:358
+#: src/translations.h:360
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "melihat objek langit secara random"
 
-#: src/translations.h:359
+#: src/translations.h:361
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -4046,11 +4051,11 @@ msgstr ""
 "skrip untuk demonstrasi gerhana matahari penuh yang berlaku pada 2009 di "
 "Rangpur, Bangladesh"
 
-#: src/translations.h:360
+#: src/translations.h:362
 msgid "Script which runs automatically at startup"
 msgstr "skrip supaya mula dengan automatik pada startup"
 
-#: src/translations.h:361
+#: src/translations.h:363
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -4059,7 +4064,7 @@ msgstr ""
 "skrip ini memaparkan buruj buruj zodiak. Buruj zodiak ialah 12 buruj yang "
 "dilalui oleh orbit matahari dalam masa setahun"
 
-#: src/translations.h:362
+#: src/translations.h:364
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -4068,7 +4073,7 @@ msgstr ""
 "matahari akan terbit & terbenam pada 3 masa yang berlainan dalam satu hari "
 "Utarid."
 
-#: src/translations.h:363
+#: src/translations.h:365
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -4076,7 +4081,7 @@ msgstr ""
 "Sebelum Marikh melindungi matahari, Phobos timbul dari belakang dan "
 "melindunginya dahulu. Ia berlaku diantara Kala dan Kaus pada 26 April, 2017."
 
-#: src/translations.h:364
+#: src/translations.h:366
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -4085,13 +4090,13 @@ msgstr ""
 "melindunginya dahulu. Ia berlaku diantara Lembu Jantan dan Jauza pada 22 "
 "Julai, 2031."
 
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Phobos mengelilingi Matahari sepertimana dilihat melalui Olympus Mons pada "
 "Jan 10, 2068."
 
-#: src/translations.h:366
+#: src/translations.h:368
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -4102,7 +4107,7 @@ msgstr ""
 "jarang berlaku. Peristiwa ini berlaku pada 1/23/2048. Dalam kelajuan yang "
 "sebenar."
 
-#: src/translations.h:367
+#: src/translations.h:369
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4118,38 +4123,38 @@ msgstr ""
 "Marikh dengan Deimos. Bila Phobos muncul dari Marikh ia masih digerhana dan "
 "kelihatan kabur di sebalik bayang Marikh, dan akan dicerahkan kemudian nanti."
 
-#: src/translations.h:368
+#: src/translations.h:370
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "A tour of the western constellations."
 msgstr "Lawatan ke buruj barat"
 
-#: src/translations.h:370
+#: src/translations.h:372
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Melihat Matahari daripada planet besar Sistem Suria dan Pluto."
 
-#: src/translations.h:371
+#: src/translations.h:373
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Pandangan terbaik Bumi dari jasad Sistem Suria lain dalam Abad ke 21."
 
-#: src/translations.h:372
+#: src/translations.h:374
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Lintasan Zuhrah sebagaimana dilihat dari Sydney Australia, 6 Jun 2012."
 
-#: src/translations.h:373
+#: src/translations.h:375
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 "Demonstrasi analemma - laluan Matahari merentasi langit sepanjang tahun."
 
-#: src/translations.h:374
+#: src/translations.h:376
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -4157,13 +4162,13 @@ msgstr ""
 "Pancaran supernova yang dicerap oleh Tycho Brahe pada tahun 1572. Pemalam "
 "Supernovae mesti dibenarkan."
 
-#: src/translations.h:375
+#: src/translations.h:377
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 
-#: src/translations.h:376
+#: src/translations.h:378
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4171,194 +4176,194 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:377
+#: src/translations.h:379
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 
-#: src/translations.h:378
+#: src/translations.h:380
 msgid "A tour of Messier Objects"
 msgstr ""
 
-#: src/translations.h:379
+#: src/translations.h:381
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr ""
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 "was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid ""
 "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
 "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
 msgstr ""
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "&Undo"
 msgstr "Buat &Asal"
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid "&Redo"
 msgstr "Buat &Semula"
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid "Cu&t"
 msgstr "Po&tong"
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid "&Copy"
 msgstr "Sa&lin"
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "&Paste"
 msgstr "Tam&pal"
 
-#: src/translations.h:394 plugins/Oculars/src/ui_ocularDialog.h:1164
+#: src/translations.h:396 plugins/Oculars/src/ui_ocularDialog.h:1164
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
 msgid "Delete"
 msgstr "Padam"
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Select All"
 msgstr "Pilih Semua"
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Look in:"
 msgstr "Lihat dalam:"
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "Directory:"
 msgstr "Direktori:"
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Folder"
 msgstr "Folder"
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "&Choose"
 msgstr "P&ilih"
 
-#: src/translations.h:400 src/ui_configurationDialog.h:1439
+#: src/translations.h:402 src/ui_configurationDialog.h:1439
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Files of type:"
 msgstr "Jenis fail:"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid "Date Modified"
 msgstr "Tarikh Diubahsuai"
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid "Directories"
 msgstr "Direktori"
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "Computer"
 msgstr "Komputer"
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid "&Open"
 msgstr "B&uka"
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "File &name:"
 msgstr "&Nama fail:"
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid "Copy &Link Location"
 msgstr "Salin Lokasi P&autan"
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid "Ignore"
 msgstr ""
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "&Basic colors"
 msgstr ""
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "&Custom colors"
 msgstr ""
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "&Add to Custom Colors"
 msgstr ""
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "&Red:"
 msgstr ""
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "&Green:"
 msgstr ""
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "Bl&ue:"
 msgstr ""
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "Select Color"
 msgstr ""
 
-#: src/translations.h:422
+#: src/translations.h:424
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
@@ -13759,108 +13764,118 @@ msgstr ""
 msgid "November Orionids"
 msgstr ""
 
-#. TRANSLATORS: Name of parent object for meteor shower
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:159
+msgid "August Caelids"
+msgstr ""
+
+#. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
+msgid "ε-Gruids"
+msgstr ""
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:165
 msgid "Comet 1P/Halley"
 msgstr "Komet 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:163
+#: plugins/MeteorShowers/src/translations.h:167
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "Komet 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:165
+#: plugins/MeteorShowers/src/translations.h:169
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "Komet 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:167
+#: plugins/MeteorShowers/src/translations.h:171
 msgid "Comet 96P/Machholz"
 msgstr "Komet 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:169
+#: plugins/MeteorShowers/src/translations.h:173
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "Komet 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:171
+#: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet Thatcher (1861 I)"
 msgstr "Komet Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:173
+#: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "Komet 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:175
+#: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "Komet 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:177
+#: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet 169P/NEAT"
 msgstr "Komet 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:179
+#: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet 289P/Blanpain"
 msgstr "Komet 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:181
+#: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet 8P/Tuttle"
 msgstr "Komet 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:183
+#: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet 3D/Biela"
 msgstr "Komet 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:185
+#: plugins/MeteorShowers/src/translations.h:189
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "Komet C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:187
+#: plugins/MeteorShowers/src/translations.h:191
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "Komet C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:189
+#: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "Komet Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:191
+#: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:193
+#: plugins/MeteorShowers/src/translations.h:197
 msgid "Minor planet (4450) Pan"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:195
+#: plugins/MeteorShowers/src/translations.h:199
 msgid "Minor planet 2008 ED69"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:197
+#: plugins/MeteorShowers/src/translations.h:201
 msgid "Comet 2P/Encke"
 msgstr "Komet 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:199
+#: plugins/MeteorShowers/src/translations.h:203
 msgid "Minor planet 2004 TG10"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:201
+#: plugins/MeteorShowers/src/translations.h:205
 msgid "Minor planet (3200) Phaethon"
 msgstr ""
 
