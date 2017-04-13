@@ -1,7 +1,7 @@
 /*
- * RTS2 Json stellarium plugin
+ * RTS2 JSON stellarium plugin
  * 
- * Copyright (C) 2014-2016 Petr Kubanek
+ * Copyright (C) 2014-2017 Petr Kubanek
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
  */
 
 #include "StelUtils.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include "QByteArray"
 #include "QJsonArray"
@@ -35,17 +37,22 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, equinox(eq)
 	, baseurl("http://localhost:8889/")
 	, telName("")
+	, telReadonly(false)
+	, telLatitude(NAN)
+	, telLongitude(NAN)
+	, telAltitude(NAN)
+	, telTargetDist(NAN)
 	, time_delay(500)
 {
 	// Example params:
 	// petr:test@localhost:8889/tel
 
-	qDebug() << "TelescopeRTS2 paramaters: " << params;
+	qDebug() << "TelescopeRTS2(" << name << ") paramaters: " << params;
 
 	baseurl.setUrl(params);
 	if (!baseurl.isValid())
 	{
-		qWarning() << "TelescopeRTS2 invalid URL";
+		qWarning() << "TelescopeRTS2(" << name << ") invalid URL";
 		return;
 	}
 
@@ -61,7 +68,7 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 
 	cfgRequest.setUrl(rurl);
 
-	qDebug() << "request url:" << rurl.toString();
+	qDebug() << "TelescopeRTS2(" << name << ")::TelescopeRTS2: request url:" << rurl.toString();
 
 	connect(&networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 
@@ -74,15 +81,20 @@ TelescopeClientJsonRts2::~TelescopeClientJsonRts2(void)
 
 void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 {
-	qDebug() << "TelescopeRTS2 error" << reply->error();
 	if (reply->error() != QNetworkReply::NoError)
 	{
+		if (reply->url().path().endsWith("/api/cmd") && reply->error() == QNetworkReply::ProtocolInvalidOperationError)
+		{
+			setReadOnly(true);
+			return;
+		}
+		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: error " << reply->error() << " url: " << reply->url().toString();
 		telName = "";
 		return;
 	}
 
 	QByteArray data = reply->readAll();
-	//qDebug() << "TelescopeRTS2 data" << (QString) data;
+	//qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: data " << (QString) data;
 
 	QJsonDocument doc;
 	QJsonParseError jsonError;
@@ -92,6 +104,25 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 	{
 		QJsonArray arr = doc.array();
 		telName = arr[0].toString();
+
+		QUrl diurl(baseurl);
+
+		diurl.setPath(baseurl.path() + "/api/deviceinfo");
+
+		QUrlQuery query;
+		query.addQueryItem("d", telName);
+		diurl.setQuery(query);
+
+		request.setUrl(diurl);
+
+		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << diurl.toString();
+
+		networkManager.get(request);
+	}
+	else if (reply->url().path().endsWith("/api/deviceinfo"))
+	{
+		QJsonObject docObject = doc.object();
+		setReadOnly(docObject["readonly"].toBool());
 
 		QUrl rurl(baseurl);
 
@@ -103,7 +134,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 
 		request.setUrl(rurl);
 
-		qDebug() << "request url:" << rurl.toString();
+		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << rurl.toString();
 
 		networkManager.get(request);
 	}
@@ -113,24 +144,27 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 		QJsonObject dObject = docObject["d"].toObject();
 		QJsonObject telObject = dObject["TEL"].toObject();
 
-		qDebug() << "TelescopeRTS2 object" << doc.isNull() << jsonError.errorString() << jsonError.offset << telObject["ra"].toDouble() << telObject["dec"].toDouble();
+		telLongitude = dObject["LONGITUD"].toDouble() * M_PI / 180.0;
+		telLatitude = dObject["LATITUDE"].toDouble() * M_PI / 180.0;
+		telAltitude = dObject["ALTITUDE"].toDouble();
+		telTargetDist = dObject["target_distance"].toDouble() * M_PI / 180.0;
 
 		const double ra = telObject["ra"].toDouble() * M_PI / 180.0;
 		const double dec = telObject["dec"].toDouble() * M_PI / 180.0;
 		const double cdec = cos(dec);
 	
-		qDebug() << "TelescopeRTS2 RADEC" << ra << dec;
+		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: RADEC" << ra << dec;
 
 		Vec3d pos(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 		interpolatedPosition.add(pos, getNow(), getNow(), 0);
 
-		qDebug() << "request url:" << request.url().toString();
+		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << request.url().toString();
 	
 		networkManager.get(request);
 	}
 	else
 	{
-		qWarning() << "unhandled reply: " << reply->url().toString();
+		qWarning() << "TelescopeRTS2(" << name << ")::replyFinished: unhandled reply: " << reply->url().toString();
 	}
 }
 
@@ -164,7 +198,7 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 	QNetworkRequest setR;
 	setR.setUrl(set);
 
-	qDebug() << "GoTo request: " << set.toString();
+	qDebug() << "TelescopeRTS2(" << name << ")::telescopeGoto: request: " << set.toString();
 
 	networkManager.get(setR);
 }
@@ -172,4 +206,41 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const
 {
 	return interpolatedPosition.isKnown();
+}
+
+QString TelescopeClientJsonRts2::getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
+{
+	QString str;
+	QTextStream oss(&str);
+	
+	if (telReadonly)
+	{
+		oss << q_("Read-only telescope") << "<br /";
+	}
+
+	oss << q_("Telescope position: ") << QString("%1 %2 %3m").arg(StelUtils::radToDmsStr(telLongitude,true), StelUtils::radToDmsStr(telLatitude,true)).arg(telAltitude) << "<br />";
+
+	oss << q_("Distance to target position: ") << StelUtils::radToDmsStr(telTargetDist,true) << "<br />";
+
+	return str;
+}
+
+void TelescopeClientJsonRts2::setReadOnly(bool readonly)
+{
+	telReadonly = readonly;
+	QSettings* settings = StelApp::getInstance().getSettings();
+	Q_ASSERT(settings);
+
+	telescopeManager = GETSTELMODULE(TelescopeControl);
+	if (telescopeManager)
+	{
+		if (telReadonly)
+		{
+			telescopeManager->setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_readonly", "1,0,0").toString()));
+		}
+		else
+		{
+			telescopeManager->setReticleColor(StelUtils::strToVec3f(settings->value("color_telescope_reticles", "0.6,0.4,0").toString()));
+		}
+	}
 }
