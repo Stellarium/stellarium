@@ -509,6 +509,7 @@ Telescope controlled by:
 \begin{description}
 \item[Stellarium, directly through a serial port] is the DIRECT case
 \item[External software or a remote computer] is the INDIRECT case
+\item[RTS2 Telescope] is the INDIRECT case
 \item[Nothing, just simulate one (a moving reticle)] is a \emph{virtual telescope} (no connection)
 \end{description}
 
@@ -576,8 +577,20 @@ Both fields here refer to INDIRECT connections, which implies communication over
   value depends on the telescope number and ranges between 10001 and
   10009.
 \end{description}
-%
-Both values are ignored for DIRECT connections.
+
+\paragraph{RTS2 settings}
+You will need access to RTS2 HTTPD server through HTTP/JSON calls. Please see
+RTS2 documentation (man rts2-httpd) for details. You will as well need username
+and password for HTTPD. Please be aware that in order to move the telescope,
+your user must have telescope in allowed devices. Please see \texttt{man
+rts2-user} for details on how to manipulate RTS2 users.
+
+\begin{description}
+\item[URL] points to RTS2 HTTPD. Can include anything URL can have - port
+  (:8889) and prefix path for RTS2 access.
+\item[Username] username used for login to RTS2 HTTPD.
+\item[Password] password for login to RTS2 HTTPD.
+\end{description}
 
 \paragraph{User Interface Settings: Field of view indicators}
 
@@ -679,6 +692,14 @@ The device list contains the following:
   compatibility mode and set the baud rate to 9600B1.
 \end{description}
 
+\subsubsection{RTS2 telescopes}
+Setting up RTS2 for Stellarium to be able to connect and command the telescope
+is beyond scope of this handbook. Please refer to the RTS2 Web pages (
+\url{http://rts2.org/}) for details.
+
+Please be aware that some username might have only read-only access. If this is
+case for used username, the telescope marker will be painted red (or
+color\_telescope\_readonly entered in Stellarium settings).
 
 \subsubsection{Virtual telescope}
 If you want to test this plug-in without an actual device connected to
