@@ -27,6 +27,7 @@
 #include "QUrl"
 
 #include "TelescopeClient.hpp"
+#include "TelescopeControl.hpp"
 
 #include "StelCore.hpp"
 
@@ -44,15 +45,27 @@ public:
 	void telescopeGoto(const Vec3d &j2000Pos);
 	bool hasKnownPosition(void) const;
 
+protected:
+	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+
 private:
 	QNetworkAccessManager networkManager;
 	Equinox equinox;
 	QUrl baseurl;
 	QString telName;
+	bool telReadonly;
+	double telLatitude;
+	double telLongitude;
+	double telAltitude;
+	double telTargetDist;
 	QNetworkRequest request;
 	Vec3d position;
 	InterpolatedPosition interpolatedPosition;
 	int time_delay;
+
+	TelescopeControl *telescopeManager;
+
+	void setReadOnly(bool readonly);
 
 private slots:
 	void replyFinished(QNetworkReply *reply);
