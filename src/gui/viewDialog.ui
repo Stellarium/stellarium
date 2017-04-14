@@ -1641,8 +1641,11 @@
             <property name="title">
              <string>Celestial Sphere</string>
             </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
             <property name="checkable">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_10">
              <property name="leftMargin">
