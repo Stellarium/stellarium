@@ -860,25 +860,20 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 void StelMainScriptAPI::wait(double t) {
 	QEventLoop loop;
-	QTimer timer;
-	timer.setInterval(1000*t);
-	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-	timer.start();
+	QTimer::singleShot(1000*t, &loop, SLOT(quit()));
 	loop.exec();
 }
 
 void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 {
 	double deltaJD = jdFromDateString(dt, spec) - getJDay();
-	double timeSpeed = getTimeRate();
-	if (timeSpeed == 0.) { qDebug() << "waitFor() called with no time passing - would be infinite. not waiting!"; return;}
-	QEventLoop loop;
-	QTimer timer;
-	int interval=1000*deltaJD*86400/timeSpeed;
+	double timeRate = getTimeRate();
+	if (timeRate == 0.) { qDebug() << "waitFor() called with no time passing - would be infinite. Not waiting!"; return;}
+	int interval=1000*deltaJD*86400/timeRate;
+	if (interval<=0){ qDebug() << "waitFor() called, but negative interval. (time exceeded before starting timer). Not waiting!"; return; }
 	//qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
-	timer.setInterval(interval);
-	connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-	timer.start();
+	QEventLoop loop;
+	QTimer::singleShot(interval, &loop, SLOT(quit()));
 	loop.exec();
 }
 
