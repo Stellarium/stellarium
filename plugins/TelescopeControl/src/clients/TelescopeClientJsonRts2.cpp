@@ -175,6 +175,7 @@ bool TelescopeClientJsonRts2::isConnected(void) const
 
 Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore* core) const
 {
+	Q_UNUSED(core);
 	const qint64 now = getNow() - time_delay;
 	return interpolatedPosition.get(now);
 }
