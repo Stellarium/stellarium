@@ -508,7 +508,8 @@ The topmost field represents the choice between the types of connections (see se
 Telescope controlled by:
 \begin{description}
 \item[Stellarium, directly through a serial port] is the DIRECT case
-\item[External software or a remote computer] is the INDIRECT case
+\item[External software or a remote computer] is an INDIRECT case
+\item[RTS2 Telescope] is another INDIRECT case
 \item[Nothing, just simulate one (a moving reticle)] is a \emph{virtual telescope} (no connection)
 \end{description}
 
@@ -576,8 +577,20 @@ Both fields here refer to INDIRECT connections, which implies communication over
   value depends on the telescope number and ranges between 10001 and
   10009.
 \end{description}
-%
-Both values are ignored for DIRECT connections.
+
+\paragraph{RTS2 settings} (see also \ref{sec:plugins:TelescopeControl:RTS2})
+You will need access to RTS2 HTTPD server through HTTP/JSON calls. Please see
+RTS2 documentation (man rts2-httpd) for details. You will as well need username
+and password for HTTPD. Please be aware that in order to move the telescope,
+your user must have the telescope in the list of allowed devices in the database. Please see \texttt{man
+rts2-user} for details on how to manipulate RTS2 users.
+
+\begin{description}
+\item[URL] points to RTS2 HTTPD. Can include anything a URL can have - port
+  (:8889) and prefix path for RTS2 access.
+\item[Username] username used for login to RTS2 HTTPD.
+\item[Password] password for login to RTS2 HTTPD.
+\end{description}
 
 \paragraph{User Interface Settings: Field of view indicators}
 
@@ -644,6 +657,7 @@ To point a device to a given set of coordinates: Use the \menu{Slew to} window (
 \subsection{Supported devices}
 \label{sec:plugins:TelescopeControl:supported}
 
+\subsubsection{Directly connected telescopes}
 All devices listed in the 'Device model' list are convenience
 definitions using one of the two built-in interfaces: the Meade LX200
 (the Meade Autostar controller) interface and the Celestron NexStar
@@ -679,6 +693,14 @@ The device list contains the following:
   compatibility mode and set the baud rate to 9600B1.
 \end{description}
 
+\subsubsection{RTS2 telescopes}
+Setting up RTS2 for Stellarium to be able to connect and command the telescope
+is beyond scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:RTS2} for a few notes.
+Please refer to the RTS2 Web pages\footnote{\url{http://rts2.org/}} for details.
+
+Please be aware that some username might have only read-only access. If this is
+case for used username, the telescope marker will be painted red (or
+color\_telescope\_readonly entered in Stellarium settings).
 
 \subsubsection{Virtual telescope}
 If you want to test this plug-in without an actual device connected to
@@ -693,6 +715,36 @@ circles).
 %This feature is equivalent to the 'Dummy' type of telescope
 %supported by Stellarium's original telescope control feature.
 
+
+\section{RTS2}
+\label{sec:plugins:TelescopeControl:RTS2}
+
+\indexterm{RTS2}, the Remote Telescope System 2, is a complete robotic observatory control system by Petr Kub\'{a}nek who kindly provided the plugin code to make RTS2 interoperate with Stellarium.
+We cannot give a full manual or any further support of RTS2 here, please refer to its website\footnote{\url{http://rts2.org}} for complete instructions. A few notes may be useful for beginners, though. 
+
+RTS2's central piece is a daemon. Start the system:
+\begin{commands}
+sudo service rts2 start
+\end{commands}
+RTS2's main control screen is text-based, \program{rts2-mon}. For a quick check, switch on the system using \key{F9}. 
+Telescope \texttt{T0} is a dummy telescope which you can select and operate with commands like \texttt{move 120 35} (this moves to RA=120°=8h, DEC=35°).
+
+Stellarium can communicate with RTS2 using its web interface. You must run \program{rts2-httpd} for this, 
+which may require the right permissions to write the lock files in \file{/var/run}. This program requires 
+that a database has been created as described in \file{RUN} and on the RTS2 website\footnote{\url{http://rts2.org/faq.html}}.   
+Also, you must create a user for RTS2. This is not a regular Linux account, but an entry in the database. 
+Create a user with \program{rts2-user -a <user>}. You should use a password different from your regular password, 
+as this will be transmitted in plain text between the computer running Stellarium and the RTS2 control computer, 
+and may also be written into Stellarium's logfile. Then you can enable device control for the respective user. 
+If you want to send slew commands from Stellarium, make sure to allow access to telescope \texttt{T0}. 
+If not, Stellarium will be able to show the telescope marker, but you will not be able to control the telescope. 
+To enable control for existing users in the default \file{stars} database, 
+\begin{commands}
+psql stars
+update users set allowed_devices = '*';
+\end{commands}
+
+In case you cannot properly connect to the RTS2 telescope or cannot send slew commands, check Stellarium's logfile \file{log.txt} for some diagnostic messages.
 
 
 \newpage
