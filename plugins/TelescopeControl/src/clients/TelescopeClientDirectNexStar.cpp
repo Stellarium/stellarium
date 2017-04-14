@@ -94,7 +94,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 }
 
 //! queues a GOTO command
-void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos)
+void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
 	if (!isConnected())
 		return;

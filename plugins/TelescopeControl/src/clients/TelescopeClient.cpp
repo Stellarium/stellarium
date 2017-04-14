@@ -265,7 +265,7 @@ void TelescopeTCP::hangup(void)
 //! queues a GOTO command with the specified position to the write buffer.
 //! For the data format of the command see the
 //! "Stellarium telescope control protocol" text file
-void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos)
+void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
 	if (!isConnected())
 		return;
