@@ -220,7 +220,7 @@ private:
 	//! Once there is a valid ini file, it is loaded into the settings attribute.
 	void validateAndLoadIniFile();
 
-	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
+	//! Record the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
 	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
 	void zoom(bool zoomedIn);
@@ -299,7 +299,12 @@ private:
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
 	bool flagLimitPlanets;		//!< Flag to track limit magnitude for planets, asteroids, comets etc.
 	float magLimitPlanets;		//!< Value of limited magnitude for planets, asteroids, comets etc.
-
+	// GZ THESE 2 RESTORED
+	float relativeStarScaleMain;	//!< Value to store the usual relative star scale when activating the plugin
+	float absoluteStarScaleMain;	//!< Value to store the usual absolute star scale when activating the plugin
+	// GZ THESE 2 NEW to have private settings for ocular view available.
+	float relativeStarScaleOcular;	//!< Value to store the relative star scale when switching off ocular view
+	float absoluteStarScaleOcular;	//!< Value to store the absolute star scale when switching off ocular view
 	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
 
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
