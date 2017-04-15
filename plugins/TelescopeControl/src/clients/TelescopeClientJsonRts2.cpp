@@ -186,16 +186,6 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 	if (!isConnected())
 		return;
 
-	// if it's satellite, use move_tle
-	if (selectObject)
-	{
-		QVariantMap objectMap = selectObject->getInfoMap(StelApp::getInstance().getCore());
-		if (objectMap.contains("tle1") && objectMap.contains("tle2"))
-		{
-			
-		}
-	}
-
 	QUrl set(baseurl);
 	set.setPath(baseurl.path() + "/api/cmd");
 
@@ -204,6 +194,7 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 
 	bool commanded = false;
 
+	// if it's satellite, use move_tle
 	if (selectObject)
 	{
 		QVariantMap objectMap = selectObject->getInfoMap(StelApp::getInstance().getCore());
