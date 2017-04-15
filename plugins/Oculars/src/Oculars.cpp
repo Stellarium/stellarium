@@ -104,38 +104,7 @@ Oculars::Oculars():
 	flagShowCrosshairs(false),
 	flagShowTelrad(false),
 	usageMessageLabelID(-1),
-	flagAzimuthalGrid(false),
-	flagGalacticGrid(false),
-	flagSupergalacticGrid(false),
-	flagEquatorJ2000Grid(false),
-	flagEquatorGrid(false),
-	flagEquatorJ2000Line(false),
-	flagEquatorLine(false),
-	flagEclipticJ2000Line(false),
-	flagEclipticLine(false),
-	flagEclipticJ2000Grid(false),
-	flagEclipticGrid(false),
-	flagMeridianLine(false),
-	flagLongitudeLine(false),
-	flagHorizonLine(false),
-	flagGalacticEquatorLine(false),
-	flagSupergalacticEquatorLine(false),
-	flagPrimeVerticalLine(false),
-	flagColureLines(false),
-	flagCircumpolarCircles(false),
-	flagPrecessionCircles(false),
 	flagCardinalPoints(false),
-	flagCelestialJ2000Poles(false),
-	flagCelestialPoles(false),
-	flagZenithNadirPoints(false),
-	flagEclipticJ2000Poles(false),
-	flagEclipticPoles(false),
-	flagGalacticPoles(false),
-	flagSupergalacticPoles(false),
-	flagEquinoxJ2000Points(false),
-	flagEquinoxPoints(false),
-	flagSolsticeJ2000Points(false),
-	flagSolsticePoints(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -145,8 +114,10 @@ Oculars::Oculars():
 	magLimitPlanets(0.0),
 	relativeStarScaleMain(1.0),
 	absoluteStarScaleMain(1.0),
-	relativeStarScaleOcular(1.0),
-	absoluteStarScaleOcular(1.0),
+	relativeStarScaleOculars(1.0),
+	absoluteStarScaleOculars(1.0),
+	relativeStarScaleCCD(1.0),
+	absoluteStarScaleCCD(1.0),
 	flagMoonScale(false),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
@@ -154,8 +125,9 @@ Oculars::Oculars():
 	useMaxEyepieceAngle(true),
 	guiPanelEnabled(false),
 	flagDecimalDegrees(false),
-	flagSemiTransporency(false),
+	flagSemiTransparency(false),
 	flagHideGridsLines(false),
+	flagGridlinesDisplayedMain(true),
 	flipVert(false),
 	flipHorz(false),
 	ccdRotationSignalMapper(0),
@@ -290,6 +262,30 @@ void Oculars::deinit()
 	settings->setValue("telescope_count", telescopes.count());
 	settings->setValue("ccd_count", ccds.count());
 	settings->setValue("lens_count", lense.count());
+
+	StelCore *core = StelApp::getInstance().getCore();
+	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
+	if (flagShowCCD)
+	{
+		// Retrieve and restore star scales
+		relativeStarScaleCCD=skyDrawer->getRelativeStarScale();
+		absoluteStarScaleCCD=skyDrawer->getAbsoluteStarScale();
+		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
+		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+	}
+	else if (flagShowOculars)
+	{
+		// Retrieve and restore star scales
+		relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
+		absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
+		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
+		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
+	}
+
+	settings->setValue("stars_scale_relative", QString::number(relativeStarScaleOculars, 'f', 2));
+	settings->setValue("stars_scale_absolute", QString::number(absoluteStarScaleOculars, 'f', 2));
+	settings->setValue("stars_scale_relative_ccd", QString::number(relativeStarScaleCCD, 'f', 2));
+	settings->setValue("stars_scale_absolute_ccd", QString::number(absoluteStarScaleCCD, 'f', 2));
 	settings->sync();
 
 	disconnect(this, SIGNAL(selectedOcularChanged()), this, SLOT(updateOcularReticle()));
@@ -655,6 +651,10 @@ void Oculars::init()
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
+		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
+		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
+		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
+		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
 		equatorialMountEnabled = propMgr->getStelPropertyValue("actionSwitch_Equatorial_Mount").toBool();
@@ -1297,8 +1297,7 @@ void Oculars::toggleCCD(bool show)
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	StelSkyDrawer *skyManager = core->getSkyDrawer();
-	skyManager->setAbsoluteStarScale(absoluteStarScaleMain);
+	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	if (show)
 	{
 		initialFOV = movementManager->getCurrentFov();
@@ -1322,9 +1321,11 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 
-		// Change relative scale for stars
-		// TODO: Finding experimental value for better rendering
-		skyManager->setRelativeStarScale(0.6);
+		// Change scales for stars. (Even restoring from ocular view has restored main program's values at this point.)
+		relativeStarScaleMain=skyDrawer->getRelativeStarScale();
+		absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
+		skyDrawer->setRelativeStarScale(relativeStarScaleCCD);
+		skyDrawer->setAbsoluteStarScale(absoluteStarScaleCCD);
 
 		if (guiPanel)
 		{
@@ -1335,7 +1336,11 @@ void Oculars::toggleCCD(bool show)
 	{
 		flagShowCCD = false;
 
-		skyManager->setRelativeStarScale(relativeStarScaleMain);
+		// Restore star scales
+		relativeStarScaleCCD=skyDrawer->getRelativeStarScale();
+		absoluteStarScaleCCD=skyDrawer->getAbsoluteStarScale();
+		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
+		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
 		movementManager->setFlagTracking(false);
 		//Zoom out
 		if (getFlagInitFovUsage())
@@ -2035,56 +2040,26 @@ void Oculars::unzoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();	
-	StelSkyDrawer *skyManager = core->getSkyDrawer();
+	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 
 	if (flagHideGridsLines)
 	{
-		GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-
-		gridManager->setFlagAzimuthalGrid(flagAzimuthalGrid);
-		gridManager->setFlagGalacticGrid(flagGalacticGrid);
-		gridManager->setFlagSupergalacticGrid(flagSupergalacticGrid);
-		gridManager->setFlagEquatorJ2000Grid(flagEquatorJ2000Grid);
-		gridManager->setFlagEquatorGrid(flagEquatorGrid);
-		gridManager->setFlagEquatorJ2000Line(flagEquatorJ2000Line);
-		gridManager->setFlagEquatorLine(flagEquatorLine);
-		gridManager->setFlagEclipticJ2000Line(flagEclipticJ2000Line);
-		gridManager->setFlagEclipticLine(flagEclipticLine);
-		gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
-		gridManager->setFlagEclipticGrid(flagEclipticGrid);
-		gridManager->setFlagMeridianLine(flagMeridianLine);
-		gridManager->setFlagLongitudeLine(flagLongitudeLine);
-		gridManager->setFlagHorizonLine(flagHorizonLine);
-		gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
-		gridManager->setFlagSupergalacticEquatorLine(flagSupergalacticEquatorLine);
-		gridManager->setFlagPrimeVerticalLine(flagPrimeVerticalLine);
-		gridManager->setFlagColureLines(flagColureLines);
-		gridManager->setFlagCircumpolarCircles(flagCircumpolarCircles);
-		gridManager->setFlagPrecessionCircles(flagPrecessionCircles);
-		gridManager->setFlagCelestialJ2000Poles(flagCelestialJ2000Poles);
-		gridManager->setFlagCelestialPoles(flagCelestialPoles);
-		gridManager->setFlagZenithNadir(flagZenithNadirPoints);
-		gridManager->setFlagEclipticJ2000Poles(flagEclipticJ2000Poles);
-		gridManager->setFlagEclipticPoles(flagEclipticPoles);
-		gridManager->setFlagGalacticPoles(flagGalacticPoles);
-		gridManager->setFlagSupergalacticPoles(flagSupergalacticPoles);
-		gridManager->setFlagEquinoxJ2000Points(flagEquinoxJ2000Points);
-		gridManager->setFlagEquinoxPoints(flagEquinoxPoints);
-		gridManager->setFlagSolsticeJ2000Points(flagSolsticeJ2000Points);
-		gridManager->setFlagSolsticePoints(flagSolsticePoints);
-
+		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridlinesDisplayedMain);
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
 	}
 
-	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
-	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
-	skyManager->setFlagPlanetMagnitudeLimit(flagLimitPlanets);
-	skyManager->setFlagNebulaMagnitudeLimit(flagLimitDSOs);
-	skyManager->setCustomStarMagnitudeLimit(magLimitStars);
-	skyManager->setCustomPlanetMagnitudeLimit(magLimitPlanets);
-	skyManager->setCustomNebulaMagnitudeLimit(magLimitDSOs);
-	skyManager->setRelativeStarScale(relativeStarScaleMain);
-	skyManager->setAbsoluteStarScale(absoluteStarScaleMain);
+	skyDrawer->setFlagLuminanceAdaptation(flagAdaptation);
+	skyDrawer->setFlagStarMagnitudeLimit(flagLimitStars);
+	skyDrawer->setFlagPlanetMagnitudeLimit(flagLimitPlanets);
+	skyDrawer->setFlagNebulaMagnitudeLimit(flagLimitDSOs);
+	skyDrawer->setCustomStarMagnitudeLimit(magLimitStars);
+	skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanets);
+	skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOs);
+	// restore values, but keep current to enable toggling
+	relativeStarScaleOculars=skyDrawer->getRelativeStarScale();
+	absoluteStarScaleOculars=skyDrawer->getAbsoluteStarScale();
+	skyDrawer->setRelativeStarScale(relativeStarScaleMain);
+	skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
@@ -2120,53 +2095,22 @@ void Oculars::zoom(bool zoomedIn)
 
 			if (flagHideGridsLines)
 			{
-				GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-				// Current state
-				flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
-				flagGalacticGrid = gridManager->getFlagGalacticGrid();
-				flagSupergalacticGrid = gridManager->getFlagSupergalacticGrid();
-				flagEquatorJ2000Grid = gridManager->getFlagEquatorJ2000Grid();
-				flagEquatorGrid = gridManager->getFlagEquatorGrid();
-				flagEquatorJ2000Line = gridManager->getFlagEquatorJ2000Line();
-				flagEquatorLine = gridManager->getFlagEquatorLine();
-				flagEclipticJ2000Line = gridManager->getFlagEclipticJ2000Line();
-				flagEclipticLine = gridManager->getFlagEclipticLine();
-				flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
-				flagEclipticGrid = gridManager->getFlagEclipticGrid();
-				flagMeridianLine = gridManager->getFlagMeridianLine();
-				flagLongitudeLine = gridManager->getFlagLongitudeLine();
-				flagHorizonLine = gridManager->getFlagHorizonLine();
-				flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
-				flagSupergalacticEquatorLine = gridManager->getFlagSupergalacticEquatorLine();
-				flagPrimeVerticalLine = gridManager->getFlagPrimeVerticalLine();
-				flagColureLines = gridManager->getFlagColureLines();
-				flagCircumpolarCircles = gridManager->getFlagCircumpolarCircles();
-				flagPrecessionCircles = gridManager->getFlagPrecessionCircles();
-				flagCelestialJ2000Poles = gridManager->getFlagCelestialJ2000Poles();
-				flagCelestialPoles = gridManager->getFlagCelestialPoles();
-				flagZenithNadirPoints = gridManager->getFlagZenithNadir();
-				flagEclipticJ2000Poles = gridManager->getFlagEclipticJ2000Poles();
-				flagEclipticPoles = gridManager->getFlagEclipticPoles();
-				flagGalacticPoles = gridManager->getFlagGalacticPoles();
-				flagSupergalacticPoles = gridManager->getFlagSupergalacticPoles();
-				flagEquinoxJ2000Points = gridManager->getFlagEquinoxJ2000Points();
-				flagEquinoxPoints = gridManager->getFlagEquinoxPoints();
-				flagSolsticeJ2000Points = gridManager->getFlagSolsticeJ2000Points();
-				flagSolsticePoints = gridManager->getFlagSolsticePoints();
+				// Store current state for later resetting
+				flagGridlinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
 				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 			}
 
-			StelSkyDrawer *skyManager = core->getSkyDrawer();
+			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 			// Current state
-			flagAdaptation = skyManager->getFlagLuminanceAdaptation();
-			flagLimitStars = skyManager->getFlagStarMagnitudeLimit();
-			flagLimitPlanets = skyManager->getFlagPlanetMagnitudeLimit();
-			flagLimitDSOs = skyManager->getFlagNebulaMagnitudeLimit();
-			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
-			magLimitPlanets = skyManager->getCustomPlanetMagnitudeLimit();
-			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
-			relativeStarScaleMain = skyManager->getRelativeStarScale();
-			absoluteStarScaleMain = skyManager->getAbsoluteStarScale();
+			flagAdaptation = skyDrawer->getFlagLuminanceAdaptation();
+			flagLimitStars = skyDrawer->getFlagStarMagnitudeLimit();
+			flagLimitPlanets = skyDrawer->getFlagPlanetMagnitudeLimit();
+			flagLimitDSOs = skyDrawer->getFlagNebulaMagnitudeLimit();
+			magLimitStars = skyDrawer->getCustomStarMagnitudeLimit();
+			magLimitPlanets = skyDrawer->getCustomPlanetMagnitudeLimit();
+			magLimitDSOs = skyDrawer->getCustomNebulaMagnitudeLimit();
+			relativeStarScaleMain = skyDrawer->getRelativeStarScale();
+			absoluteStarScaleMain = skyDrawer->getAbsoluteStarScale();
 
 			flagMoonScale = GETSTELMODULE(SolarSystem)->getFlagMoonScale();
 
@@ -2191,48 +2135,15 @@ void Oculars::zoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	StelSkyDrawer *skyManager = core->getSkyDrawer();
+	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 
 	if (flagHideGridsLines)
 	{
-		GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
-
-		gridManager->setFlagAzimuthalGrid(false);
-		gridManager->setFlagGalacticGrid(false);
-		gridManager->setFlagSupergalacticGrid(false);
-		gridManager->setFlagEquatorJ2000Grid(false);
-		gridManager->setFlagEquatorGrid(false);
-		gridManager->setFlagEquatorJ2000Line(false);
-		gridManager->setFlagEquatorLine(false);
-		gridManager->setFlagEclipticJ2000Line(false);
-		gridManager->setFlagEclipticLine(false);
-		gridManager->setFlagEclipticJ2000Grid(false);
-		gridManager->setFlagEclipticGrid(false);
-		gridManager->setFlagMeridianLine(false);
-		gridManager->setFlagLongitudeLine(false);
-		gridManager->setFlagHorizonLine(false);
-		gridManager->setFlagGalacticEquatorLine(false);
-		gridManager->setFlagSupergalacticEquatorLine(false);
-		gridManager->setFlagPrimeVerticalLine(false);
-		gridManager->setFlagColureLines(false);
-		gridManager->setFlagCircumpolarCircles(false);
-		gridManager->setFlagPrecessionCircles(false);
-		gridManager->setFlagCelestialJ2000Poles(false);
-		gridManager->setFlagCelestialPoles(false);		
-		gridManager->setFlagZenithNadir(false);
-		gridManager->setFlagEclipticJ2000Poles(false);
-		gridManager->setFlagEclipticPoles(false);
-		gridManager->setFlagGalacticPoles(false);
-		gridManager->setFlagSupergalacticPoles(false);
-		gridManager->setFlagEquinoxJ2000Points(false);
-		gridManager->setFlagEquinoxPoints(false);
-		gridManager->setFlagSolsticeJ2000Points(false);
-		gridManager->setFlagSolsticePoints(false);
-
+		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
 	}
 
-	skyManager->setFlagLuminanceAdaptation(false);
+	skyDrawer->setFlagLuminanceAdaptation(false);
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
 	
@@ -2269,11 +2180,12 @@ void Oculars::zoomOcular()
 	}
 
 	// Change relative and absolute scales for stars
-	// TODO: Finding experimental value for better rendering
-	skyManager->setRelativeStarScale(0.6);
-	skyManager->setAbsoluteStarScale(0.75);
+	relativeStarScaleMain=skyDrawer->getRelativeStarScale();
+	skyDrawer->setRelativeStarScale(relativeStarScaleOculars);
+	absoluteStarScaleMain=skyDrawer->getAbsoluteStarScale();
+	skyDrawer->setAbsoluteStarScale(absoluteStarScaleOculars);
 
-	// Limit stars and DSOs	if it enable and it's telescope + eyepiece combination
+	// Limit stars and DSOs	if enabled and it's telescope + eyepiece combination
 	if (getFlagLimitMagnitude())
 	{
 		// Simplified calculation of the penetrating power of the telescope
@@ -2282,12 +2194,12 @@ void Oculars::zoomOcular()
 			diameter = ocular->fieldStop();
 		else
 			diameter = telescope!=NULL ? telescope->diameter() : 0.; // Avoid a potential call of null pointer
-		double limitMag = 2.1 + 5*std::log10(diameter);
+		double limitMag = 2.1 + 5*std::log10(diameter); // TODO: document source of this formula!
 
-		skyManager->setFlagStarMagnitudeLimit(true);
-		skyManager->setFlagNebulaMagnitudeLimit(true);
-		skyManager->setCustomStarMagnitudeLimit(limitMag);
-		skyManager->setCustomNebulaMagnitudeLimit(limitMag);
+		skyDrawer->setFlagStarMagnitudeLimit(true);
+		skyDrawer->setFlagNebulaMagnitudeLimit(true);
+		skyDrawer->setCustomStarMagnitudeLimit(limitMag);
+		skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
 	}
 
 	actualFOV = ocular->actualFOV(telescope, lens);
@@ -2450,21 +2362,40 @@ bool Oculars::getFlagAutosetMountForCCD() const
 
 void Oculars::setFlagUseSemiTransparency(const bool b)
 {
-	flagSemiTransporency = b;
+	flagSemiTransparency = b;
 	settings->setValue("use_semi_transparency", b);
 	settings->sync();
 }
 
 bool Oculars::getFlagUseSemiTransparency() const
 {
-	return flagSemiTransporency;
+	return flagSemiTransparency;
 }
 
 void Oculars::setFlagHideGridsLines(const bool b)
 {
-	flagHideGridsLines = b;
-	settings->setValue("hide_grids_and_lines", b);
-	settings->sync();
+	if (b != flagHideGridsLines)
+	{
+		flagHideGridsLines = b;
+		settings->setValue("hide_grids_and_lines", b);
+		settings->sync();
+		emit hideGridsLinesChanged(b);
+
+		if (b && flagShowOculars)
+		{
+			// Store current state for later resetting
+			flagGridlinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
+			flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
+			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+		}
+		else if (!b && flagShowOculars)
+		{
+			// Restore main program state
+			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridlinesDisplayedMain);
+			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
+		}
+	}
 }
 
 bool Oculars::getFlagHideGridsLines() const
