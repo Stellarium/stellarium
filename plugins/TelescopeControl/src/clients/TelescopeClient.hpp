@@ -91,7 +91,12 @@ protected:
 	QString nameI18n;
 	const QString name;
 
-	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const {return "";}
+	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
+	{
+		Q_UNUSED(core);
+		Q_UNUSED(flags);
+		return QString();
+	}
 private:
 	virtual bool isInitialized(void) const {return true;}
 	float getSelectPriority(const StelCore* core) const {Q_UNUSED(core); return -10.f;}
