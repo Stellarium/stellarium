@@ -166,6 +166,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 	{
 		qWarning() << "TelescopeRTS2(" << name << ")::replyFinished: unhandled reply: " << reply->url().toString();
 	}
+	reply->deleteLater();
 }
 
 bool TelescopeClientJsonRts2::isConnected(void) const
@@ -180,20 +181,37 @@ Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore* core) const
 	return interpolatedPosition.get(now);
 }
 
-void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos)
+void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
 	if (!isConnected())
 		return;
-
-	double ra, dec;
-	StelUtils::rectToSphe(&ra, &dec, j2000Pos);
 
 	QUrl set(baseurl);
 	set.setPath(baseurl.path() + "/api/cmd");
 
 	QUrlQuery query;
 	query.addQueryItem("d", telName);
-	query.addQueryItem("c", QString("move+%1+%2").arg(ra * 180 / M_PI).arg(dec * 180 / M_PI));
+
+	bool commanded = false;
+
+	// if it's satellite, use move_tle
+	if (selectObject)
+	{
+		QVariantMap objectMap = selectObject->getInfoMap(StelApp::getInstance().getCore());
+		if (objectMap.contains("tle1") && objectMap.contains("tle2"))
+		{
+			query.addQueryItem("c", QString("move_tle+%22") + objectMap["tle1"].toString() + QString("%22+%22") + objectMap["tle2"].toString() + QString("%22"));
+			commanded = true;
+		}
+	}
+
+	if (commanded == false)
+	{
+		double ra, dec;
+		StelUtils::rectToSphe(&ra, &dec, j2000Pos);
+
+		query.addQueryItem("c", QString("move+%1+%2").arg(ra * 180 / M_PI).arg(dec * 180 / M_PI));
+	}
 	set.setQuery(query);
 
 	QNetworkRequest setR;
