@@ -525,7 +525,10 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = steps->findData("1 day", Qt::UserRole, Qt::MatchCaseSensitive);
+	{
+		// default step: one day
+		index = steps->findData("6", Qt::UserRole, Qt::MatchCaseSensitive);
+	}
 	steps->setCurrentIndex(index);
 	steps->blockSignals(false);
 }
