@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-10 13:21+0700\n"
-"PO-Revision-Date: 2017-04-13 13:05+0000\n"
+"POT-Creation-Date: 2017-04-14 21:33+0700\n"
+"PO-Revision-Date: 2017-04-14 15:02+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-14 05:22+0000\n"
-"X-Generator: Launchpad (build 18352)\n"
+"X-Launchpad-Export-Date: 2017-04-15 05:31+0000\n"
+"X-Generator: Launchpad (build 18354)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -9743,6 +9743,18 @@ msgid ""
 msgstr ""
 "La montatura Sky-Watcher SynScan AZ GOTO usata in parecchi modelli di "
 "telescopi."
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:219
+msgid "Read-only telescope"
+msgstr "Telescoio in sola lettura"
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:222
+msgid "Telescope position: "
+msgstr "Posizione telescopio: "
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:224
+msgid "Distance to target position: "
+msgstr "Distanza dalla potizione del bersaglio: "
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
 msgid "Add New Telescope"
