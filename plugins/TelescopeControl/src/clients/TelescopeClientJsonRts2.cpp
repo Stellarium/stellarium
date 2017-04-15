@@ -166,6 +166,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 	{
 		qWarning() << "TelescopeRTS2(" << name << ")::replyFinished: unhandled reply: " << reply->url().toString();
 	}
+	reply->deleteLater();
 }
 
 bool TelescopeClientJsonRts2::isConnected(void) const
