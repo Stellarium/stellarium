@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-10 13:21+0700\n"
+"POT-Creation-Date: 2017-04-14 21:33+0700\n"
 "PO-Revision-Date: 2017-03-12 20:44+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-12 05:46+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Launchpad-Export-Date: 2017-04-15 05:41+0000\n"
+"X-Generator: Launchpad (build 18354)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -9559,6 +9559,18 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1624
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:219
+msgid "Read-only telescope"
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:222
+msgid "Telescope position: "
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:224
+msgid "Distance to target position: "
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
