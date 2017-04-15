@@ -347,30 +347,33 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = 10 * StelCore::JD_MINUTE;
 			break;
 		case 2:
-			currentStep = StelCore::JD_HOUR;
+			currentStep = 30 * StelCore::JD_MINUTE;
 			break;
 		case 3:
-			currentStep = 6 * StelCore::JD_HOUR;
+			currentStep = StelCore::JD_HOUR;
 			break;
 		case 4:
-			currentStep = 12 * StelCore::JD_HOUR;
+			currentStep = 6 * StelCore::JD_HOUR;
 			break;
 		case 5:
-			currentStep = StelCore::JD_DAY;
+			currentStep = 12 * StelCore::JD_HOUR;
 			break;
 		case 6:
-			currentStep = 5 * StelCore::JD_DAY;
+			currentStep = StelCore::JD_DAY;
 			break;
 		case 7:
-			currentStep = 10 * StelCore::JD_DAY;
+			currentStep = 5 * StelCore::JD_DAY;
 			break;
 		case 8:
-			currentStep = 15 * StelCore::JD_DAY;
+			currentStep = 10 * StelCore::JD_DAY;
 			break;
 		case 9:
-			currentStep = 30 * StelCore::JD_DAY;
+			currentStep = 15 * StelCore::JD_DAY;
 			break;
 		case 10:
+			currentStep = 30 * StelCore::JD_DAY;
+			break;
+		case 11:
 			currentStep = 60 * StelCore::JD_DAY;
 			break;
 		default:
@@ -509,19 +512,20 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 
 	steps->clear();
 	steps->addItem(q_("10 minutes"), "1");
-	steps->addItem(q_("1 hour"), "2");
-	steps->addItem(q_("6 hours"), "3");
-	steps->addItem(q_("12 hours"), "4");
-	steps->addItem(q_("1 day"), "5");
-	steps->addItem(q_("5 days"), "6");
-	steps->addItem(q_("10 days"), "7");
-	steps->addItem(q_("15 days"), "8");
-	steps->addItem(q_("30 days"), "9");
-	steps->addItem(q_("60 days"), "10");
+	steps->addItem(q_("30 minutes"), "2");
+	steps->addItem(q_("1 hour"), "3");
+	steps->addItem(q_("6 hours"), "4");
+	steps->addItem(q_("12 hours"), "5");
+	steps->addItem(q_("1 day"), "6");
+	steps->addItem(q_("5 days"), "7");
+	steps->addItem(q_("10 days"), "8");
+	steps->addItem(q_("15 days"), "9");
+	steps->addItem(q_("30 days"), "10");
+	steps->addItem(q_("60 days"), "11");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = 2;
+		index = 6; // default step: one day
 	steps->setCurrentIndex(index);
 	steps->blockSignals(false);
 }
