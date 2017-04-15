@@ -114,6 +114,7 @@ private slots:
 
 	void drawAltVsTimeDiagram();
 	void drawCurrentTimeDiagram();
+	void drawTransitTimeDiagram(double transitTime); // time in hours
 	void mouseOverLine(QMouseEvent *event);
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
