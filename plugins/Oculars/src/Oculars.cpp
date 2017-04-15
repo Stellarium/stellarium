@@ -699,6 +699,10 @@ void Oculars::instrumentChanged()
 	// We only zoom if in ocular mode.
 	if (flagShowOculars)
 	{
+		// If we are already in Ocular mode, we must reset scalings because zoom() also resets.
+		StelSkyDrawer *skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+		skyDrawer->setRelativeStarScale(relativeStarScaleMain);
+		skyDrawer->setAbsoluteStarScale(absoluteStarScaleMain);
 		zoom(true);
 	}
 }
