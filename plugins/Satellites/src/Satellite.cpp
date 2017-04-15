@@ -401,6 +401,9 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 
 	map.insert("description", QString(description).replace("\n", " - "));
 	map.insert("catalog", id);
+	map.insert("tle1", tleElements.first.data());
+	map.insert("tle2", tleElements.second.data());
+
 	if (!internationalDesignator.isEmpty())
 		map.insert("international-designator", internationalDesignator);
 
