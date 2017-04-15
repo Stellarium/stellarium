@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-08 17:20+0700\n"
+"POT-Creation-Date: 2017-04-14 21:33+0700\n"
 "PO-Revision-Date: 2017-04-07 17:32+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-09 09:26+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Launchpad-Export-Date: 2017-04-15 05:44+0000\n"
+"X-Generator: Launchpad (build 18354)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -9405,6 +9405,18 @@ msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
 
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:219
+msgid "Read-only telescope"
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:222
+msgid "Telescope position: "
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:224
+msgid "Distance to target position: "
+msgstr ""
+
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
 msgid "Add New Telescope"
 msgstr "添加新望远镜"
@@ -13532,108 +13544,118 @@ msgstr "六分仪座流星雨"
 msgid "November Orionids"
 msgstr "十一月猎户座流星雨"
 
-#. TRANSLATORS: Name of parent object for meteor shower
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:159
+msgid "August Caelids"
+msgstr ""
+
+#. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
+msgid "ε-Gruids"
+msgstr ""
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:165
 msgid "Comet 1P/Halley"
 msgstr "1P哈雷彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:163
+#: plugins/MeteorShowers/src/translations.h:167
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "7P庞士-温尼克彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:165
+#: plugins/MeteorShowers/src/translations.h:169
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "55P/坦普尔-塔特尔彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:167
+#: plugins/MeteorShowers/src/translations.h:171
 msgid "Comet 96P/Machholz"
 msgstr "96P/梅克贺兹一号彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:169
+#: plugins/MeteorShowers/src/translations.h:173
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "109P/斯威夫特－塔特尔彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:171
+#: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet Thatcher (1861 I)"
 msgstr "C/1861 G1撒切尔彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:173
+#: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "26P/葛里格-斯杰勒鲁普彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:175
+#: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "21P/贾可比尼-秦诺彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:177
+#: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet 169P/NEAT"
 msgstr "169P/尼特彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:179
+#: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet 289P/Blanpain"
 msgstr "289P/宝珀彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:181
+#: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet 8P/Tuttle"
 msgstr "8P/塔特尔彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:183
+#: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet 3D/Biela"
 msgstr "3D/比拉彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:185
+#: plugins/MeteorShowers/src/translations.h:189
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "C/1917 F1梅尔斯彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:187
+#: plugins/MeteorShowers/src/translations.h:191
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "C/1964 N1池谷彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:189
+#: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "73P/施瓦斯曼-瓦赫曼3号彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:191
+#: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "小行星2003 EH1和彗星C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:193
+#: plugins/MeteorShowers/src/translations.h:197
 msgid "Minor planet (4450) Pan"
 msgstr "小行星(4450)潘"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:195
+#: plugins/MeteorShowers/src/translations.h:199
 msgid "Minor planet 2008 ED69"
 msgstr "小行星 2008ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:197
+#: plugins/MeteorShowers/src/translations.h:201
 msgid "Comet 2P/Encke"
 msgstr "2P/恩克彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:199
+#: plugins/MeteorShowers/src/translations.h:203
 msgid "Minor planet 2004 TG10"
 msgstr "小行星2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:201
+#: plugins/MeteorShowers/src/translations.h:205
 msgid "Minor planet (3200) Phaethon"
 msgstr "小行星(3200)法厄同"
 

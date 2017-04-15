@@ -126,6 +126,7 @@ private:
 	class NebulaMgr* dsoMgr;
 	class StarMgr* starMgr;
 	class StelObjectMgr* objectMgr;
+	class StelLocaleMgr* localeMgr;
 	QTimer *currentTimeLine;
 
 	//! Update header names for planetary positions table

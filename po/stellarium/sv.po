@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-08 17:20+0700\n"
+"POT-Creation-Date: 2017-04-14 21:33+0700\n"
 "PO-Revision-Date: 2017-04-04 07:39+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-09 09:25+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Launchpad-Export-Date: 2017-04-15 05:40+0000\n"
+"X-Generator: Launchpad (build 18354)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
@@ -9637,6 +9637,18 @@ msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
 
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:219
+msgid "Read-only telescope"
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:222
+msgid "Telescope position: "
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:224
+msgid "Distance to target position: "
+msgstr ""
+
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
 msgid "Add New Telescope"
 msgstr "Lägg till nytt teleskop"
@@ -13793,108 +13805,118 @@ msgstr ""
 msgid "November Orionids"
 msgstr ""
 
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:161
-msgid "Comet 1P/Halley"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:159
+msgid "August Caelids"
 msgstr ""
 
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:163
-msgid "Comet 7P/Pons-Winnecke"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:161
+msgid "ε-Gruids"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
-msgid "Comet 55P/Tempel-Tuttle"
+msgid "Comet 1P/Halley"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:167
-msgid "Comet 96P/Machholz"
+msgid "Comet 7P/Pons-Winnecke"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:169
-msgid "Comet 109P/Swift-Tuttle"
+msgid "Comet 55P/Tempel-Tuttle"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:171
-msgid "Comet Thatcher (1861 I)"
+msgid "Comet 96P/Machholz"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:173
-msgid "Comet 26P/Grigg-Skjellerup"
+msgid "Comet 109P/Swift-Tuttle"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:175
-msgid "Comet 21P/Giacobini-Zinner"
+msgid "Comet Thatcher (1861 I)"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:177
-msgid "Comet 169P/NEAT"
+msgid "Comet 26P/Grigg-Skjellerup"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:179
-msgid "Comet 289P/Blanpain"
+msgid "Comet 21P/Giacobini-Zinner"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:181
-msgid "Comet 8P/Tuttle"
+msgid "Comet 169P/NEAT"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:183
-msgid "Comet 3D/Biela"
+msgid "Comet 289P/Blanpain"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:185
-msgid "Comet C/1917 F1 (Mellish)"
+msgid "Comet 8P/Tuttle"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:187
-msgid "Comet C/1964 N1 (Ikeya)"
+msgid "Comet 3D/Biela"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:189
-msgid "Comet Schwassmann-Wachmann 3"
+msgid "Comet C/1917 F1 (Mellish)"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:191
-msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
+msgid "Comet C/1964 N1 (Ikeya)"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:193
-msgid "Minor planet (4450) Pan"
+msgid "Comet Schwassmann-Wachmann 3"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
-msgid "Minor planet 2008 ED69"
+msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:197
-msgid "Comet 2P/Encke"
+msgid "Minor planet (4450) Pan"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:199
-msgid "Minor planet 2004 TG10"
+msgid "Minor planet 2008 ED69"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:201
+msgid "Comet 2P/Encke"
+msgstr ""
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:203
+msgid "Minor planet 2004 TG10"
+msgstr ""
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:205
 msgid "Minor planet (3200) Phaethon"
 msgstr ""
 
