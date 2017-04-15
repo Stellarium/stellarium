@@ -618,7 +618,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		double az, alt, deg;
 		bool sign;
 
-		double shift = core->getUTCOffset(currentJD)/24;
+		double shift = core->getUTCOffset(currentJD)/24.0;
 		for(int i=-1;i<=49;i++) // Every 30 minutes (24 hours + 30 min extension in both directions)
 		{
 			double ltime = i*1800 + 43200;
@@ -633,6 +633,12 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			core->update(0.0);
 		}
 		core->setJD(currentJD);
+
+		double dec_sidereal, ra_sidereal, ha_sidereal;
+		StelUtils::rectToSphe(&ra_sidereal, &dec_sidereal, selectedObject->getSiderealPosGeometric(core));
+		ha_sidereal = (2.*M_PI-ra_sidereal)*12/M_PI;
+		if (ha_sidereal>24.0)
+			ha_sidereal -= 24.0;
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
 
@@ -655,6 +661,16 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		if (name.isEmpty() && selectedObject->getType()=="Nebula")
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
+		// FIXME: Satellites have different values for equatorial coordinates and same values for horizontal coordinates - a caching?
+		// NOTE: Drawing a line of transit time was added to else block to avoid troubles with satellites.
+		if (selectedObject->getType()=="Satellite")
+		{
+			x.clear();
+			y.clear();
+		}
+		else
+			drawTransitTimeDiagram((currentJD + 0.5 - (int)currentJD + shift) * 24.0 - ha_sidereal);
+
 		ui->altVsTimePlot->graph(0)->setData(x, y);
 		ui->altVsTimePlot->graph(0)->setName(name);
 		ui->altVsTimePlot->replot();
@@ -675,13 +691,35 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	ax.append(now);
 	ay.append(minY);
 	ay.append(maxY);
-	QVector<double> x = ax.toVector(), y = ay.toVector();
-	ui->altVsTimePlot->removeGraph(1);
+	QVector<double> x = ax.toVector(), y = ay.toVector();	
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->graph(1)->setData(x, y);
 	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
 	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(1)->setName("[Now]");
+
+	ui->altVsTimePlot->replot();
+}
+
+// Added vertical line indicating time of transit
+void AstroCalcDialog::drawTransitTimeDiagram(double transitTime)
+{
+	double transit = transitTime * 3600.0;
+	if (transit>129600)
+		transit -= 86400;
+	if (transit<43200)
+		transit += 86400;
+	QList<double> ax, ay;
+	ax.append(transit);
+	ax.append(transit);
+	ay.append(minY);
+	ay.append(maxY);
+	QVector<double> x = ax.toVector(), y = ay.toVector();
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(2)->setData(x, y);
+	ui->altVsTimePlot->graph(2)->setPen(QPen(Qt::cyan, 1));
+	ui->altVsTimePlot->graph(2)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(2)->setName("[Transit]");
 
 	ui->altVsTimePlot->replot();
 }
@@ -744,7 +782,9 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
 
 			QString info;
 			if (graph->name()=="[Now]")
-				info = q_("Now is %1").arg(LT);
+				info = q_("Now about %1").arg(LT);
+			else if (graph->name()=="[Transit]")
+				info = q_("Transit at approximately %1").arg(LT);
 			else
 			{
 				if (StelApp::getInstance().getFlagShowDecimalDegrees())
