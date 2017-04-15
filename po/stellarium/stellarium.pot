@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-15 14:57+0700\n"
+"POT-Creation-Date: 2017-04-15 16:03+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
-#: src/core/modules/Constellation.cpp:290 src/core/modules/Nebula.cpp:191
-#: src/core/modules/Planet.cpp:253 src/core/modules/MinorPlanet.cpp:200
-#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:192
-#: src/core/modules/StarWrapper.cpp:195
+#: src/core/modules/Asterism.cpp:158 src/core/modules/Constellation.cpp:290
+#: src/core/modules/Nebula.cpp:191 src/core/modules/Planet.cpp:253
+#: src/core/modules/MinorPlanet.cpp:200 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:277
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:101
 #: plugins/Pulsars/src/Pulsar.cpp:158 plugins/Exoplanets/src/Exoplanet.cpp:270
@@ -41,10 +41,11 @@ msgstr ""
 msgid "Marker"
 msgstr ""
 
-#: src/core/modules/Constellation.cpp:290
-msgid "constellation"
+#: src/core/modules/Asterism.cpp:158
+msgid "asterism"
 msgstr ""
 
+#: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
 #: src/core/modules/GridLinesMgr.cpp:1214 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:365 src/core/modules/NebulaMgr.cpp:366
@@ -53,6 +54,18 @@ msgstr ""
 #: src/core/StelApp.cpp:539 src/core/StelCore.cpp:253
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
+msgstr ""
+
+#: src/core/modules/AsterismMgr.cpp:94
+msgid "Asterism lines"
+msgstr ""
+
+#: src/core/modules/AsterismMgr.cpp:95
+msgid "Asterism labels"
+msgstr ""
+
+#: src/core/modules/Constellation.cpp:290
+msgid "constellation"
 msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:144
