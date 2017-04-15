@@ -389,7 +389,7 @@ void TelescopeControl::slewTelescopeToSelectedObject(const int idx)
 
 	Vec3d objectPosition = selectObject->getJ2000EquatorialPos(StelApp::getInstance().getCore());
 
-	telescopeGoto(idx, objectPosition);
+	telescopeGoto(idx, objectPosition, selectObject);
 }
 
 void TelescopeControl::slewTelescopeToViewDirection(const int idx)
@@ -425,11 +425,11 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 #endif //COMPATIBILITY_001002
 }
 
-void TelescopeControl::telescopeGoto(int slotNumber, const Vec3d &j2000Pos)
+void TelescopeControl::telescopeGoto(int slotNumber, const Vec3d &j2000Pos, StelObjectP selectObject)
 {
 	//TODO: See the original code. I think that something is wrong here...
 	if(telescopeClients.contains(slotNumber))
-		telescopeClients.value(slotNumber)->telescopeGoto(j2000Pos);
+		telescopeClients.value(slotNumber)->telescopeGoto(j2000Pos, selectObject);
 }
 
 void TelescopeControl::communicate(void)
