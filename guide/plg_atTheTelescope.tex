@@ -170,6 +170,11 @@ When a binocular is active, you can not select a telescope, as it is not relevan
 Changing the eyepiece to a non-binocular will again allow the telescope to be selected. 
 Also notice that when your mouse cursor is very near the right hand border of the screen, the popup menu's sub-menus display to the left, not the right.
 
+\subsubsection{Star Scales}
+\newFeature{0.16.0}Some Observers like a simulated ocular view with very small, or more, stars, quite different from what Stellarium usually shows. 
+These star scales can be set as usual in the view settings window (see section \ref{sec:gui:view:sky}). The Oculars plugin keeps separate sets of values 
+for ocular views and CCD views, which are even stored permanently in the plugin's \file{ocular.ini} file.  
+
 \subsection{Configuration}
 \label{sec:sec:plugins:Oculars:Configuration}
 All configuration is done through the user interface in the application. 
@@ -373,7 +378,6 @@ that the target is all three images is the same size. The $100\degree$ image fil
 the $82\degree$ is smaller, and the $62\degree$ is smallest yet, filling $62\%$ of the computer screen. 
 Note that in each image, the field of view that you see changes. The larger the aFOV, the more you can see of the sky. 
 So in this example, if you had an 8" telescope, you would want to use the 17\mm\ $100\degree$ Ethos eyepiece to see as much of the nebula as possible.
-
 
 \newpage
 \section{TelescopeControl Plugin}
