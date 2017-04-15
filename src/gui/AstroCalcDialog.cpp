@@ -58,6 +58,7 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	dsoMgr = GETSTELMODULE(NebulaMgr);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	starMgr = GETSTELMODULE(StarMgr);
+	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	ephemerisHeader.clear();
 	phenomenaHeader.clear();
 	planetaryPositionsHeader.clear();
@@ -218,9 +219,9 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	initListPlanetaryPositions();
 
-	StelCore* core = StelApp::getInstance().getCore();
+	StelCore* core = StelApp::getInstance().getCore();	
 	double JD = core->getJD();
-	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd hh:mm")));
+	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
@@ -349,21 +350,27 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = StelCore::JD_HOUR;
 			break;
 		case 3:
-			currentStep = StelCore::JD_DAY;
+			currentStep = 6 * StelCore::JD_HOUR;
 			break;
 		case 4:
-			currentStep = 5 * StelCore::JD_DAY;
+			currentStep = 12 * StelCore::JD_HOUR;
 			break;
 		case 5:
-			currentStep = 10 * StelCore::JD_DAY;
+			currentStep = StelCore::JD_DAY;
 			break;
 		case 6:
-			currentStep = 15 * StelCore::JD_DAY;
+			currentStep = 5 * StelCore::JD_DAY;
 			break;
 		case 7:
-			currentStep = 30 * StelCore::JD_DAY;
+			currentStep = 10 * StelCore::JD_DAY;
 			break;
 		case 8:
+			currentStep = 15 * StelCore::JD_DAY;
+			break;
+		case 9:
+			currentStep = 30 * StelCore::JD_DAY;
+			break;
+		case 10:
 			currentStep = 60 * StelCore::JD_DAY;
 			break;
 		default:
@@ -382,6 +389,9 @@ void AstroCalcDialog::generateEphemeris()
 		EphemerisListJ2000.reserve(elements);
 		EphemerisListDates.clear();
 		EphemerisListDates.reserve(elements);
+		bool withTime = false;
+		if (currentStep<StelCore::JD_DAY)
+			withTime = true;
 		for (int i=0; i<elements; i++)
 		{
 			double JD = firstJD + i*currentStep;
@@ -389,11 +399,14 @@ void AstroCalcDialog::generateEphemeris()
 			core->update(0); // force update to get new coordinates			
 			Vec3d pos = obj->getJ2000EquatorialPos(core);
 			EphemerisListJ2000.append(pos);
-			EphemerisListDates.append(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd"));
+			if (withTime)
+				EphemerisListDates.append(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
+			else
+				EphemerisListDates.append(localeMgr->getPrintableDateLocal(JD));
 			StelUtils::rectToSphe(&ra,&dec,pos);
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
-			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
+			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
 			treeItem->setText(EphemerisRA, StelUtils::radToHmsStr(ra));
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
@@ -497,12 +510,14 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->clear();
 	steps->addItem(q_("10 minutes"), "1");
 	steps->addItem(q_("1 hour"), "2");
-	steps->addItem(q_("1 day"), "3");
-	steps->addItem(q_("5 days"), "4");
-	steps->addItem(q_("10 days"), "5");
-	steps->addItem(q_("15 days"), "6");
-	steps->addItem(q_("30 days"), "7");
-	steps->addItem(q_("60 days"), "8");
+	steps->addItem(q_("6 hours"), "3");
+	steps->addItem(q_("12 hours"), "4");
+	steps->addItem(q_("1 day"), "5");
+	steps->addItem(q_("5 days"), "6");
+	steps->addItem(q_("10 days"), "7");
+	steps->addItem(q_("15 days"), "8");
+	steps->addItem(q_("30 days"), "9");
+	steps->addItem(q_("60 days"), "10");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -1044,7 +1059,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
-		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		if (occultation)
@@ -1360,7 +1375,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
-		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		if (occultation)

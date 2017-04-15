@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-08 17:20+0700\n"
-"PO-Revision-Date: 2017-04-09 09:24+0000\n"
+"POT-Creation-Date: 2017-04-14 21:33+0700\n"
+"PO-Revision-Date: 2017-04-10 07:29+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-09 09:27+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Launchpad-Export-Date: 2017-04-15 05:23+0000\n"
+"X-Generator: Launchpad (build 18354)\n"
 "Language: bn\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -6082,7 +6082,7 @@ msgstr "ছায়াপথ নির্দেশক রেখার রং"
 
 #: src/ui_viewDialog.h:2206
 msgid "Show mathematical horizon line."
-msgstr ""
+msgstr "দিগন্তরেখা দেখা যাবে ।"
 
 #: src/ui_viewDialog.h:2210
 msgid "Color of horizon"
@@ -6090,7 +6090,7 @@ msgstr "দিগন্ত রেখার রং"
 
 #: src/ui_viewDialog.h:2213
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
-msgstr ""
+msgstr "ডি ভোকুলিউর প্রবর্তিত নক্ষত্রলোকীয় ছকের (১৯৭৬) বিষুবরেখা"
 
 #: src/ui_viewDialog.h:2217
 msgid "Show meridian line."
@@ -6271,6 +6271,8 @@ msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr ""
+"নিকটবর্তী নক্ষত্রলোক সমূহের বন্টন ভিত্তিক ডি ভোকুলিউর প্রবর্তিত নক্ষত্রলোকীয় "
+"স্থানাঙ্ক ব্যবস্থা (১৯৭৬) ।"
 
 #: src/ui_viewDialog.h:2328
 msgid "Equatorial coordinates of J2000.0."
@@ -9618,34 +9620,34 @@ msgstr "প্রদত্ত স্থানাঙ্কের অবস্থ�
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1610
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar controller."
-msgstr ""
+msgstr "Meade's AutoStar নিয়ন্ত্রক বিচলন বা আলম্বযুক্ত যেকোনো দূরবীন"
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1612
 msgid "Any telescope or telescope mount compatible with Meade LX200."
-msgstr ""
+msgstr "Meade LX200 সমর্থিত বিচলন বা আলম্বযুক্ত যেকোনো দূরবীন"
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1614
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
-msgstr ""
+msgstr "#৪৯৪ Autostar নিয়ন্ত্রক এবং  #৫০৬ সংযোগ তার সহ Meade's ETX70 দূরবীন"
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1616
 msgid "Losmandy's G-11 telescope mount."
-msgstr ""
+msgstr "Losmandy's G-11 দূরবীন বিচলন বা আলম্ব"
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1618
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
-msgstr ""
+msgstr "Wildcard Innovations উদ্ভাবিত Argo Navis  'ডিজিটাল কম্পিউটার দূরবীন'"
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1620
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
-msgstr ""
+msgstr "Celestron NexStar সমর্থিত বিচলন বা আলম্বযুক্ত যেকোনো দূরবীন"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1622
@@ -9653,11 +9655,25 @@ msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
+"SynScan নিয়ন্ত্রকের ৩.০ বা তার বেশি সংস্করণ ব্যবহার করে এমন বিচলন বা "
+"আলম্বযুক্ত যেকোনো দূরবীন"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1624
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
+msgstr "Sky-Watcher SynScan AZ GoTo বিচলন বা আলম্বযুক্ত যেকোনো দূরবীন"
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:219
+msgid "Read-only telescope"
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:222
+msgid "Telescope position: "
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:224
+msgid "Distance to target position: "
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
@@ -9702,7 +9718,7 @@ msgstr "সরঞ্জাম ও গ্রাফিক্যাল প্রো
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid "RTS2 support"
-msgstr ""
+msgstr "রিমোট সিস্টেম (২য়) সমর্থিত"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
@@ -10649,7 +10665,7 @@ msgstr "নকল"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:511
 msgid "RTS2"
-msgstr ""
+msgstr "রিমোট সিস্টেম"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:933
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
@@ -10796,11 +10812,11 @@ msgstr "বাহ্যিক অ্যাপ্লিকেশন অথবা 
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:535
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
-msgstr ""
+msgstr "RTS2(.org) JSON API সমর্থিত দূরবীনগুলি নিয়ন্ত্রন করা যায় ।"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:537
 msgid "RTS2 telescope"
-msgstr ""
+msgstr "রিমোট টেলিস্কোপ সিস্টেম দূরবীন"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:538
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -10862,11 +10878,11 @@ msgstr "TCP পোর্ট :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:562
 msgid "RTS2 telescope settings"
-msgstr ""
+msgstr "রিমোট টেলিস্কোপ সিস্টেম বিন্যাস"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
 msgid "URL:"
-msgstr ""
+msgstr "ঠিকানা :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:564
 msgid "Username:"
@@ -10878,15 +10894,15 @@ msgstr "পাসওয়ার্ড :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
 msgid "RTS2 username"
-msgstr ""
+msgstr "ব্যবহারকারীর নাম"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
 msgid "RTS2 password"
-msgstr ""
+msgstr "পাসওয়ার্ড"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:573
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
-msgstr ""
+msgstr "RTS2 JSON (httpd) সার্ভার আছে এমন মেশিনের ঠিকানা (URL)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
 msgid "User interface settings"
@@ -14173,108 +14189,118 @@ msgstr "সেক্সট্যানিডস্"
 msgid "November Orionids"
 msgstr "নভেম্বর মাসিক ওরাইনিডস্"
 
-#. TRANSLATORS: Name of parent object for meteor shower
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:159
+msgid "August Caelids"
+msgstr "আগষ্ট মাসিক কায়েলিডস"
+
+#. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
+msgid "ε-Gruids"
+msgstr "ε-গ্রুইডস"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:165
 msgid "Comet 1P/Halley"
 msgstr "১পি/হ্যালী ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:163
+#: plugins/MeteorShowers/src/translations.h:167
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "৭পি/পন্স-উইনকি ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:165
+#: plugins/MeteorShowers/src/translations.h:169
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "৫৫পি/টেম্পেল-টাট্টেল ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:167
+#: plugins/MeteorShowers/src/translations.h:171
 msgid "Comet 96P/Machholz"
 msgstr "৯৬পি/ম্যাচোলজ ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:169
+#: plugins/MeteorShowers/src/translations.h:173
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "১০৯পি/সুইফ্ট-টাট্টেল ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:171
+#: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet Thatcher (1861 I)"
 msgstr "থ্যাচার ধূমকেতু (১৮৬১ I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:173
+#: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "২৬পি/গ্রিগ-স্কেলার্প ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:175
+#: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "২১পি/গিয়াকোবিনি-জিনার ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:177
+#: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet 169P/NEAT"
 msgstr "১৬৯পি/এন ই এ টি ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:179
+#: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet 289P/Blanpain"
 msgstr "২৮৯পি/ব্লাঁপেন ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:181
+#: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet 8P/Tuttle"
 msgstr "৮পি/টাট্টেল ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:183
+#: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet 3D/Biela"
 msgstr "৩ডি/বিয়েলা ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:185
+#: plugins/MeteorShowers/src/translations.h:189
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "সি/১৯১৭ এফ১ (মেলিশ) ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:187
+#: plugins/MeteorShowers/src/translations.h:191
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "সি/১৯৬৪ এন১ (ইকেয়া) ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:189
+#: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "স্বোয়াশম্যান-ওয্যাচম্যান ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:191
+#: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "গৌন গ্রহ ২০০৩ ই এইচ ১ ও সি/১৪৯০ ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:193
+#: plugins/MeteorShowers/src/translations.h:197
 msgid "Minor planet (4450) Pan"
 msgstr "গৌন গ্রহ (৪৪৫০) প্যান"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:195
+#: plugins/MeteorShowers/src/translations.h:199
 msgid "Minor planet 2008 ED69"
 msgstr "গৌন গ্রহ ২০০৮ ই ডি ৬৯"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:197
+#: plugins/MeteorShowers/src/translations.h:201
 msgid "Comet 2P/Encke"
 msgstr "২পি/এনকে ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:199
+#: plugins/MeteorShowers/src/translations.h:203
 msgid "Minor planet 2004 TG10"
 msgstr "গৌন গ্রহ ২০০৪ টি জি ১০"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:201
+#: plugins/MeteorShowers/src/translations.h:205
 msgid "Minor planet (3200) Phaethon"
 msgstr "গৌন গ্রহ (৩২০০) ফেইথন"
 

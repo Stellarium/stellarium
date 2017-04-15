@@ -2,20 +2,20 @@
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014, 2015, 2016.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014, 2015, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-04-08 17:20+0700\n"
-"PO-Revision-Date: 2017-04-04 10:10+0000\n"
+"POT-Creation-Date: 2017-04-14 21:33+0700\n"
+"PO-Revision-Date: 2017-04-09 18:52+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-09 09:27+0000\n"
-"X-Generator: Launchpad (build 18343)\n"
+"X-Launchpad-Export-Date: 2017-04-15 05:28+0000\n"
+"X-Generator: Launchpad (build 18354)\n"
 "Language: gd\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -326,11 +326,11 @@ msgstr "Puingean co-fhaid-thràth"
 
 #: src/core/modules/GridLinesMgr.cpp:1244
 msgid "Solstice J2000 points"
-msgstr ""
+msgstr "Puingean grian-staid J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1245
 msgid "Solstice points"
-msgstr ""
+msgstr "Puingean grian-staid"
 
 #: src/core/modules/LandscapeMgr.cpp:422 src/ui_viewDialog.h:2027
 msgid "Atmosphere"
@@ -351,11 +351,11 @@ msgstr "Làr"
 
 #: src/core/modules/LandscapeMgr.cpp:426
 msgid "Landscape illumination"
-msgstr ""
+msgstr "Soillseachadh a’ chrutha-thìre"
 
 #: src/core/modules/LandscapeMgr.cpp:427
 msgid "Landscape labels"
-msgstr ""
+msgstr "Leubailean a’ chrutha-tìre"
 
 #: src/core/modules/LandscapeMgr.cpp:428 src/ui_viewDialog.h:2031
 msgid "Light pollution data from locations database"
@@ -878,7 +878,7 @@ msgstr "Meudachd absaloideach: %1"
 #: src/core/modules/Planet.cpp:269
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
-msgstr ""
+msgstr "Meudachd na comhaireachd meadhain: %1"
 
 #: src/core/modules/Planet.cpp:290 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
@@ -1007,7 +1007,7 @@ msgstr "Soillsichte: %1%"
 #: src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Albedo: %1"
-msgstr ""
+msgstr "Albedo: %1"
 
 #: src/core/modules/Planet.cpp:443
 #, qt-format
@@ -1077,7 +1077,7 @@ msgstr "Comharran nam planaid"
 
 #: src/core/modules/SolarSystem.cpp:226
 msgid "Planet selection marker"
-msgstr ""
+msgstr "Comharra taghadh nam planaidean"
 
 #: src/core/modules/SolarSystem.cpp:227
 msgid "Native planet names (from starlore)"
@@ -1187,6 +1187,8 @@ msgstr "Modh oidhche"
 #: src/core/StelApp.cpp:570
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
+"Cha deach leinn inneal-cuir Spout a chruthachadh. Faic an loga airson "
+"barrachd fiosrachaidh."
 
 #: src/core/StelCore.cpp:251 src/gui/StelGui.cpp:202
 #: src/gui/AstroCalcDialog.cpp:312 src/gui/AstroCalcDialog.cpp:749
@@ -1737,6 +1739,11 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
+"Chaidh am fuasgladh seo le F. R. Stephenson, L. V. Morrison agus C. Y. "
+"Hohenkerk (2016) fhoillseachadh ann am <em>Measurement of the Earth’s "
+"rotation: 720 BC to AD 2015</em> (%1). Taobh a-muigh na rainse ainmichte "
+"(air a dealbhadh le freagradh splìona), bheir e luachan o pharabola "
+"faigseach dhuinn."
 
 #: src/core/StelCore.cpp:2199
 #, qt-format
@@ -1775,10 +1782,12 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
+"le meadhan mearachd dhe nas lugha na diog, mearachd as motha 1.9d agus "
+"luachan air bliadhnaichean crìche taobh a-muigh na rainse seo"
 
 #: src/core/StelCore.cpp:2264
 msgid "with values for the limit years outside this range"
-msgstr ""
+msgstr "le luachan air bliadhnaichean crìche taobh a-muigh na rainse seo"
 
 #: src/core/StelCore.cpp:2274
 #, qt-format
@@ -2296,7 +2305,7 @@ msgstr "Morrison ⁊ Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1437
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
-msgstr ""
+msgstr "Stephenson, Morrison ⁊ Hohenkerk (2016)"
 
 #: src/gui/ConfigurationDialog.cpp:1439
 msgid "Espenak & Meeus (2006)"
@@ -2858,19 +2867,19 @@ msgstr "An reat as àirde a-riamh (1833 dreag an Leòmhainn)"
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
-msgstr ""
+msgstr "GPS…"
 
 #: src/gui/LocationDialog.cpp:727
 msgid "GPS:SUCCESS"
-msgstr ""
+msgstr "GPS:SOIRBHEACHAIL"
 
 #: src/gui/LocationDialog.cpp:738
 msgid "GPS:FAILED"
-msgstr ""
+msgstr "GPS:DH’FÀILLIGEADH"
 
 #: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:492
 msgid "Get location from GPS"
-msgstr ""
+msgstr "Faigh an t-ionad o GPS"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:113
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -3448,7 +3457,7 @@ msgstr "cuspair neul Oort"
 #. TRANSLATORS: Type of object
 #: src/translations.h:66
 msgid "sednoid"
-msgstr ""
+msgstr "sednach"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
@@ -3458,7 +3467,7 @@ msgstr "Gealaichean"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:86
 msgid "Sednoids"
-msgstr ""
+msgstr "Sednaich"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:88
@@ -3773,7 +3782,7 @@ msgstr "Sàmach"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:225
 msgid "Sardinian"
-msgstr ""
+msgstr "Sàrdach"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:227
@@ -4174,6 +4183,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
+"Sàbhalaiche-sgrìn le grunn thachartasan san rian-ghrèine. Tha 287 tachartas "
+"ann!"
 
 #: src/translations.h:371
 msgid "A tour of the western constellations."
@@ -5548,6 +5559,7 @@ msgstr " m"
 #: src/ui_locationDialogGui.h:490
 msgid "Retrieve current coordinates from GPS. Does not set timezone!"
 msgstr ""
+"Faigh na co-chomharran làithreach o GPS. Cha shuidhich seo an roinn-tìde!"
 
 #: src/ui_locationDialogGui.h:493
 msgid "New Location"
@@ -5840,11 +5852,11 @@ msgstr "Seall reul-chuairtean nam planaidean"
 
 #: src/ui_viewDialog.h:2050
 msgid "Configure colors of orbit lines"
-msgstr ""
+msgstr "Rèitich dathan loidhnichean nan reul-chuairt"
 
 #: src/ui_viewDialog.h:2052
 msgid "Colors..."
-msgstr ""
+msgstr "Dathan…"
 
 #: src/ui_viewDialog.h:2054
 msgid ""
@@ -6374,19 +6386,19 @@ msgstr "Co-fhadan-tràth (an-diugh)"
 
 #: src/ui_viewDialog.h:2356
 msgid "Solstices (J2000)"
-msgstr ""
+msgstr "Grian-stadan (J2000)"
 
 #: src/ui_viewDialog.h:2358
 msgid "Color of the solstice points (J2000.0)"
-msgstr ""
+msgstr "Dath nam puingean grian-staid (J2000.0)"
 
 #: src/ui_viewDialog.h:2361
 msgid "Solstices (of date)"
-msgstr ""
+msgstr "Grian-stadan (an-diugh)"
 
 #: src/ui_viewDialog.h:2363
 msgid "Color of the solstice points (of date)"
-msgstr ""
+msgstr "Dath nam puingean grian-staid (an-diugh)"
 
 #: src/ui_viewDialog.h:2366
 msgid "Projection"
@@ -6623,7 +6635,7 @@ msgstr "Roghainnean bunaiteach"
 
 #: src/ui_configurationDialog.h:1235
 msgid "Save View"
-msgstr ""
+msgstr "Sàbhail an sealladh"
 
 #: src/ui_configurationDialog.h:1237
 msgid ""
@@ -6659,6 +6671,9 @@ msgid ""
 "for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
+"Sàbhail an raon-seallaidh làithreach ’s a chomhair no a h-uile roghainn a "
+"thèid a chleachdadh leis an ath-thòiseachadh. Bidh ath-shuidheachadh nan "
+"roghainnean tùsail feumach air ath-thòiseachadh Stellarium. "
 
 #: src/ui_configurationDialog.h:1246
 msgid "The width of your view when Stellarium starts"
@@ -6812,7 +6827,7 @@ msgstr "Barrachd fiosrachaidh"
 
 #: src/ui_configurationDialog.h:1316
 msgid "Sidereal time"
-msgstr ""
+msgstr "Àm reultach"
 
 #: src/ui_configurationDialog.h:1317
 msgid "Control"
@@ -7361,7 +7376,7 @@ msgstr "Sgioblaich ephemerides"
 #: src/ui_astroCalcDialog.h:542 src/ui_astroCalcDialog.h:550
 #: plugins/Satellites/src/ui_satellitesDialog.h:822
 msgid "Calculations require time, please be patient"
-msgstr ""
+msgstr "Bheir àireamhachadh ùine, bi foighidneach"
 
 #: src/ui_astroCalcDialog.h:544
 msgid "Calculate ephemeris"
@@ -7447,7 +7462,7 @@ msgstr "Rach &gu..."
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:378
 msgid "Color settings"
-msgstr ""
+msgstr "Roghainnean datha"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -7617,11 +7632,11 @@ msgstr "Dathan nan comharran aig neòil mhoileciuileach"
 
 #: src/ui_dsoColorsDialog.h:610
 msgid "Young stellar objects"
-msgstr ""
+msgstr "Cuspairean reultail òga"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of young stellar objects"
-msgstr ""
+msgstr "Dathan nan comharran aig cuspairean reultail òga"
 
 #: src/ui_dsoColorsDialog.h:616
 msgid "Color of markers of supernova remnants"
@@ -7629,175 +7644,175 @@ msgstr "Dathan nan comharran aig iarmadan mòr-nòbhathan"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
-msgstr ""
+msgstr "Stoidhle dathan nan reul-chuairt"
 
 #: src/ui_orbitColorsDialog.h:381
 msgid "One color for all orbits"
-msgstr ""
+msgstr "An t-aon dath air gach reul-chuairt"
 
 #: src/ui_orbitColorsDialog.h:382
 msgid "Separate colors for orbits by object type"
-msgstr ""
+msgstr "Dathan fa leth air na reul-chuairtean a-rèir seòrsa a’ chuspair"
 
 #: src/ui_orbitColorsDialog.h:383
 msgid "Separate colors for orbits of major planets only"
-msgstr ""
+msgstr "Dathan fa leth air na reul-chuairtean dha phlanaidean mòra a-mhàin"
 
 #: src/ui_orbitColorsDialog.h:384
 msgid "Colors of orbits of Solar system bodies"
-msgstr ""
+msgstr "Dathan air reul-chuairtean aig bodhaigean a’ chriosa-ghrèine"
 
 #: src/ui_orbitColorsDialog.h:386
 msgid "Color of comet orbits"
-msgstr ""
+msgstr "Dathan air reul-chuairtean nan comaidean"
 
 #: src/ui_orbitColorsDialog.h:388
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Reul-chuairt Ùranais"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "Reul-chuairt a’ Chuirg"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Color of Neptune orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt Neaptuin"
 
 #: src/ui_orbitColorsDialog.h:394
 msgid "Color of planet moon orbits"
-msgstr ""
+msgstr "Dath air reul-chuairtean gealaichean planaide"
 
 #: src/ui_orbitColorsDialog.h:397
 msgid "Color of generic orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt choitcheann"
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "Reul-chuairt Mhearcair"
 
 #: src/ui_orbitColorsDialog.h:401
 msgid "Color of major planet orbits"
-msgstr ""
+msgstr "Dath air reul-chuairtean nam planaidean mòra"
 
 #: src/ui_orbitColorsDialog.h:403
 msgid "Orbits of major planets"
-msgstr ""
+msgstr "Reul-chuairtean nam planaidean mòra"
 
 #: src/ui_orbitColorsDialog.h:405
 msgid "Color of Saturn orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt Shatairn"
 
 #: src/ui_orbitColorsDialog.h:407
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "Reul-chuairt a’ Bhliogh"
 
 #: src/ui_orbitColorsDialog.h:411
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "Reul-chuairt Neaptuin"
 
 #: src/ui_orbitColorsDialog.h:412
 msgid "Orbits of moons of planets"
-msgstr ""
+msgstr "Reul-chuairtean gealaichean nam planaidean"
 
 #: src/ui_orbitColorsDialog.h:414
 msgid "Color of cubewano orbits"
-msgstr ""
+msgstr "Dathan air reul-chuairtean nan cuspairean clasaigeach crios Kuiper"
 
 #: src/ui_orbitColorsDialog.h:417
 msgid "Color of Venus orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt na Rìbhinn"
 
 #: src/ui_orbitColorsDialog.h:420
 msgid "Color of minor planet orbits"
-msgstr ""
+msgstr "Dath air reul-chuairtean nam planaidean beaga"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "Reul-chuairt Shatairn"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Color of Uranus orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt Ùranais"
 
 #: src/ui_orbitColorsDialog.h:430
 msgid "Color of Earth orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt na Talmhainn"
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "Reul-chuairt na Talmhainn"
 
 #: src/ui_orbitColorsDialog.h:434
 msgid "Color of dwarf planet orbits"
-msgstr ""
+msgstr "Dath air reul-chuairtean nam fo-phlanaidean"
 
 #: src/ui_orbitColorsDialog.h:436
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Reul-chairtean nan comaidean"
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Orbits of dwarf planets"
-msgstr ""
+msgstr "Reul-chuairtean nam fo-phlanaidean"
 
 #: src/ui_orbitColorsDialog.h:439
 msgid "Color of Mercury orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt Mhearcair"
 
 #: src/ui_orbitColorsDialog.h:441
 msgid "Orbits of plutinos"
-msgstr ""
+msgstr "Reul-chuairtean nam plùtothach"
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Generic orbit"
-msgstr ""
+msgstr "Reul-chuairt choitcheann"
 
 #: src/ui_orbitColorsDialog.h:446
 msgid "Orbits of cubewanos"
-msgstr ""
+msgstr "Reul-chuairtean nan cuspairean clasaigeach crios Kuiper"
 
 #: src/ui_orbitColorsDialog.h:448
 msgid "Color of Mars orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt a’ Chuirg"
 
 #: src/ui_orbitColorsDialog.h:451
 msgid "Color of Jupiter orbit"
-msgstr ""
+msgstr "Dath air reul-chuairt a’ Bhliogh"
 
 #: src/ui_orbitColorsDialog.h:453
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Reul-chuairt na Rìbhinn"
 
 #: src/ui_orbitColorsDialog.h:455
 msgid "Color of plutino orbits"
-msgstr ""
+msgstr "Dathan air reul-chuairtean nam plùtothach"
 
 #: src/ui_orbitColorsDialog.h:460
 msgid "Orbits of minor planets"
-msgstr ""
+msgstr "Reul-chuairtean nam planaidean beaga"
 
 #: src/ui_orbitColorsDialog.h:462
 msgid "Color of Oort cloud object orbits"
-msgstr ""
+msgstr "Dath air reul-chuairtean nan cuspairean neul Oort"
 
 #: src/ui_orbitColorsDialog.h:464
 msgid "Orbits of Oort cloud objects"
-msgstr ""
+msgstr "Reul-chuairtean nan cuspairean neul Oort"
 
 #: src/ui_orbitColorsDialog.h:465
 msgid "Orbits of scattered disk objects"
-msgstr ""
+msgstr "Reul-chuairtean nan cuspairean diosg sgapte"
 
 #: src/ui_orbitColorsDialog.h:467
 msgid "Color of scattered disk object orbits"
-msgstr ""
+msgstr "Dath air reul-chuairtean nan cuspairean diosg sgapte"
 
 #: src/ui_orbitColorsDialog.h:469
 msgid "Orbits of sednoids"
-msgstr ""
+msgstr "Reul-chuairtean nan sednach"
 
 #: src/ui_orbitColorsDialog.h:471
 msgid "Color of sednoid orbits"
-msgstr ""
+msgstr "Dath air reul-chuairtean nan sednach"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:56
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:137
@@ -8208,7 +8223,7 @@ msgstr "Dd/Dì-chl (J2000.0) na croise"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 msgid "\"/px"
-msgstr ""
+msgstr "\"/px"
 
 #: plugins/Oculars/src/Oculars.cpp:1818
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:517
@@ -8428,27 +8443,27 @@ msgstr "Faid an fhòcais aig an lionsa sùla"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:814
 msgid "Dimensions field of view"
-msgstr ""
+msgstr "Dimeinseanan an raoin-sheallaidh"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 msgid "X scale"
-msgstr ""
+msgstr "Sgèile X"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:712
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 msgid "Horizontal scale"
-msgstr ""
+msgstr "Sgèile chòmhnard"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:820
 msgid "Y scale"
-msgstr ""
+msgstr "Sgèile Y"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:717
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:821
 msgid "Vertical scale"
-msgstr ""
+msgstr "Sgèile inghearach"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
 #, qt-format
@@ -8616,6 +8631,8 @@ msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
+"Gabhaidh nasgaidhean-iuchrach a’ phlugain deasachadh le deasaiche ath-"
+"ghoiridean a’ mheur-chlàir (F7)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:543
 #: plugins/Oculars/src/gui/OcularDialog.cpp:548
@@ -8632,11 +8649,11 @@ msgstr "Fosglaidh e priob-chlàr-taice na seòladaireachd."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:560
 msgid "Rotate reticle pattern of the eyepiece clockwise."
-msgstr ""
+msgstr "Cuairtich pàtran sgannan an lionsa sùla gu deiseil."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:564
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
-msgstr ""
+msgstr "Cuairtich pàtran sgannan an lionsa sùla gu tuathail."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1134
 msgid "Interface"
@@ -8662,10 +8679,12 @@ msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr ""
+"Cuir comharra ris ma tha thu airson an t-aon luach a cleachdadh air a’ "
+"chomhair ’s a bha aig Stellarium nuair a thòisich e."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid "Restore direction to initial values"
-msgstr ""
+msgstr "Aisig luachan tùsail na comhair"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
 msgid "Enable only if an object is selected"
@@ -9029,7 +9048,7 @@ msgstr "saideal fuadain"
 #: plugins/Satellites/src/Satellite.cpp:284
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Meudachd thuairmseach: <b>%1</b> (mùchte gu: <b>%2</b>)"
 
 #: plugins/Satellites/src/Satellite.cpp:287
 #, qt-format
@@ -9659,7 +9678,7 @@ msgstr "Tùsan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:820
 msgid "Flare prediction (days):"
-msgstr ""
+msgstr "Ro-innse lasan (là):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid "Predict Iridium flares"
@@ -9772,6 +9791,18 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1624
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:219
+msgid "Read-only telescope"
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:222
+msgid "Telescope position: "
+msgstr ""
+
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:224
+msgid "Distance to target position: "
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
@@ -14434,108 +14465,118 @@ msgstr "Dreagan an t-Siathamhain"
 msgid "November Orionids"
 msgstr "Dreagan an t-Sealgair-Mhòir san t-Samhainn"
 
-#. TRANSLATORS: Name of parent object for meteor shower
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:159
+msgid "August Caelids"
+msgstr ""
+
+#. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
+msgid "ε-Gruids"
+msgstr ""
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:165
 msgid "Comet 1P/Halley"
 msgstr "Reul-chearbach 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:163
+#: plugins/MeteorShowers/src/translations.h:167
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "Reul-chearbach 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:165
+#: plugins/MeteorShowers/src/translations.h:169
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "Reul-chearbach 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:167
+#: plugins/MeteorShowers/src/translations.h:171
 msgid "Comet 96P/Machholz"
 msgstr "Reul-chearbach 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:169
+#: plugins/MeteorShowers/src/translations.h:173
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "Reul-chearbach 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:171
+#: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet Thatcher (1861 I)"
 msgstr "Reul-chearbach Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:173
+#: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "Reul-chearbach 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:175
+#: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "Reul-chearbach 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:177
+#: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet 169P/NEAT"
 msgstr "Reul-chearbach 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:179
+#: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet 289P/Blanpain"
 msgstr "Reul-chearbach 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:181
+#: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet 8P/Tuttle"
 msgstr "Reul-chearbach 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:183
+#: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet 3D/Biela"
 msgstr "Reul-chearbach 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:185
+#: plugins/MeteorShowers/src/translations.h:189
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "Reul-chearbach C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:187
+#: plugins/MeteorShowers/src/translations.h:191
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "Reul-chearbach C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:189
+#: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "Reul-chearbach Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:191
+#: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "Meanbh-phlanaid 2003 EH1 agus Reul-chearbach C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:193
+#: plugins/MeteorShowers/src/translations.h:197
 msgid "Minor planet (4450) Pan"
 msgstr "Meanbh-phlanaid (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:195
+#: plugins/MeteorShowers/src/translations.h:199
 msgid "Minor planet 2008 ED69"
 msgstr "Meanbh-phlanaid 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:197
+#: plugins/MeteorShowers/src/translations.h:201
 msgid "Comet 2P/Encke"
 msgstr "Reul-chearbach 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:199
+#: plugins/MeteorShowers/src/translations.h:203
 msgid "Minor planet 2004 TG10"
 msgstr "Meanbh-phlanaid 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/translations.h:201
+#: plugins/MeteorShowers/src/translations.h:205
 msgid "Minor planet (3200) Phaethon"
 msgstr "Meanbh-phlanaid (3200) Phaethon"
 
