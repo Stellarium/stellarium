@@ -784,7 +784,7 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
 			if (graph->name()=="[Now]")
 				info = q_("Now about %1").arg(LT);
 			else if (graph->name()=="[Transit]")
-				info = q_("Transit at approximately %1").arg(LT);
+				info = q_("Passage of meridian at approximately %1").arg(LT);
 			else
 			{
 				if (StelApp::getInstance().getFlagShowDecimalDegrees())
