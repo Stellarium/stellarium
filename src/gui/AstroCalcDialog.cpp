@@ -619,9 +619,9 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		bool sign;
 
 		double shift = core->getUTCOffset(currentJD)/24.0;
-		for(int i=-1;i<=49;i++) // Every 30 minutes (24 hours + 30 min extension in both directions)
+		for(int i=-1;i<=99;i++) // Every 30 minutes (24 hours + 30 min extension in both directions)
 		{
-			double ltime = i*1800 + 43200;
+			double ltime = i*900 + 43200;
 			aX.append(ltime);
 			double JD = noon + ltime/86400 - shift - 0.5;
 			core->setJD(JD);
