@@ -619,9 +619,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		bool sign;
 
 		double shift = core->getUTCOffset(currentJD)/24.0;
-		for(int i=-1;i<=99;i++) // Every 15 minutes (24 hours + 30 min extension in both directions)
+		for(int i=-5;i<=485;i++) // 24 hours + 15 minutes in both directions
 		{
-			double ltime = i*900 + 43200;
+			// A new point on the graph every 3 minutes with shift to right 12 hours
+			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
+			double ltime = i*180 + 43200;
 			aX.append(ltime);
 			double JD = noon + ltime/86400 - shift - 0.5;
 			core->setJD(JD);
