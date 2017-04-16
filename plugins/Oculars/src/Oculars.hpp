@@ -80,6 +80,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
 	Q_PROPERTY(bool enableCCD READ getEnableCCD WRITE toggleCCD NOTIFY enableCCDChanged)
 	Q_PROPERTY(bool enableTelrad READ getEnableTelrad WRITE toggleTelrad NOTIFY enableTelradChanged)
+	Q_PROPERTY(bool flagHideGridsLines READ getFlagHideGridsLines WRITE setFlagHideGridsLines NOTIFY hideGridsLinesChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -178,6 +179,7 @@ signals:
 	void selectedOcularChanged();
 	void selectedTelescopeChanged();
 	void selectedLensChanged();
+	void hideGridsLinesChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -220,7 +222,8 @@ private:
 	//! Once there is a valid ini file, it is loaded into the settings attribute.
 	void validateAndLoadIniFile();
 
-	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
+	//!
+	//! Record the state of the GridLinesMgr views beforehand, so that it can be reset afterwards.
 	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
 	void zoom(bool zoomedIn);
@@ -257,40 +260,7 @@ private:
 	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
-	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
-	bool flagGalacticGrid;		//!< Flag to track if GalacticGrid was displayed at activation.
-	bool flagSupergalacticGrid;	//!< Flag to track if SupergalacticGrid was displayed at activation.
-	bool flagEquatorJ2000Grid;	//!< Flag to track if EquatorJ2000Grid was displayed at activation.
-	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
-	bool flagEquatorJ2000Line;	//!< Flag to track if EquatorJ2000Line was displayed at activation.
-	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.	
-	bool flagEclipticJ2000Line;	//!< Flag to track if EclipticJ2000Line was displayed at activation.
-	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.	
-	bool flagEclipticJ2000Grid;	//!< Flag to track if EclipticJ2000Grid was displayed at activation.
-	bool flagEclipticGrid;		//!< Flag to track if EclipticGrid was displayed at activation.
-	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
-	bool flagLongitudeLine;		//!< Flag to track if LongitudeLine was displayed at activation.
-	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
-	bool flagGalacticEquatorLine;	//!< Flag to track if GalacticEquatorLine was displayed at activation.
-	bool flagSupergalacticEquatorLine;	//!< Flag to track if SupergalacticEquatorLine was displayed at activation.
-	bool flagPrimeVerticalLine;	//!< Flag to track if PrimeVerticalLine was displayed at activation.
-	bool flagColureLines;		//!< Flag to track if ColureLines was displayed at activation.
-	bool flagCircumpolarCircles;	//!< Flag to track if CircumpolarCircles was displayed at activation.
-	bool flagPrecessionCircles;	//!< Flag to track if PrecessionCircles was displayed at activation.
-
 	bool flagCardinalPoints;	//!< Flag to track if CardinalPoints was displayed at activation.
-	bool flagCelestialJ2000Poles;	//!< Flag to track if CelestialJ2000Poles was displayed at activation.
-	bool flagCelestialPoles;	//!< Flag to track if CelestialPoles was displayed at activation.
-	bool flagZenithNadirPoints;	//!< Flag to track if ZenithNadir was displayed at activation.
-	bool flagEclipticJ2000Poles;	//!< Flag to track if EclipticJ2000Poles was displayed at activation.
-	bool flagEclipticPoles;		//!< Flag to track if EclipticPoles was displayed at activation.
-	bool flagGalacticPoles;		//!< Flag to track if GalacticPoles was displayed at activation.
-	bool flagSupergalacticPoles;	//!< Flag to track if SupergalacticPoles was displayed at activation.
-	bool flagEquinoxJ2000Points;	//!< Flag to track if EquinoxJ2000Points was displayed at activation.
-	bool flagEquinoxPoints;		//!< Flag to track if EquinoxPoints was displayed at activation.
-	bool flagSolsticeJ2000Points;	//!< Flag to track if SolsticeJ2000Points was displayed at activation.
-	bool flagSolsticePoints;	//!< Flag to track if SolsticePoints was displayed at activation.
-
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
@@ -299,7 +269,12 @@ private:
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
 	bool flagLimitPlanets;		//!< Flag to track limit magnitude for planets, asteroids, comets etc.
 	float magLimitPlanets;		//!< Value of limited magnitude for planets, asteroids, comets etc.
-
+	float relativeStarScaleMain;	//!< Value to store the usual relative star scale when activating ocular or CCD view
+	float absoluteStarScaleMain;	//!< Value to store the usual absolute star scale when activating ocular or CCD view
+	float relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
+	float absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
+	float relativeStarScaleCCD;	//!< Value to store the relative star scale when switching off CCD view
+	float absoluteStarScaleCCD;	//!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
 
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
@@ -309,8 +284,9 @@ private:
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
-	bool flagSemiTransporency;
+	bool flagSemiTransparency;
 	bool flagHideGridsLines;
+	bool flagGridlinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
 	bool flipVert;
 	bool flipHorz;
 

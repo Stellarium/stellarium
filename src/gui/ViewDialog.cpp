@@ -276,6 +276,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
 
 	// Grid and lines
+	connectGroupBox(ui->celestialSphereGroupBox,            "actionShow_Gridlines");
 	connectCheckBox(ui->showEquatorLineCheckBox,		"actionShow_Equator_Line");
 	connectCheckBox(ui->showEquatorJ2000LineCheckBox,	"actionShow_Equator_J2000_Line");
 	connectCheckBox(ui->showEclipticLineJ2000CheckBox,	"actionShow_Ecliptic_J2000_Line");
