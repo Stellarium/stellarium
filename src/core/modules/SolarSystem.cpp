@@ -1347,6 +1347,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	Vec3d equPos;
 	double cosAngularSize;
 
+	QString weAreHere = core->getCurrentPlanet()->getEnglishName();
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		equPos = p->getEquinoxEquatorialPos(core);
@@ -1354,7 +1355,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 
 		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
 
-		if (equPos*v>=std::min(cosLimFov, cosAngularSize))
+		if (equPos*v>=std::min(cosLimFov, cosAngularSize) && p->getEnglishName()!=weAreHere)
 		{
 			result.append(qSharedPointerCast<StelObject>(p));
 		}
