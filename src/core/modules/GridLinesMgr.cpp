@@ -1214,7 +1214,7 @@ void GridLinesMgr::init()
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
 	
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Gridlines", displayGroup, N_("Gridlines"), "gridlinesDisplayed");
+	addAction("actionShow_Gridlines", displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
 	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
 	addAction("actionShow_Azimuthal_Grid", displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
 	addAction("actionShow_Ecliptic_Line", displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
