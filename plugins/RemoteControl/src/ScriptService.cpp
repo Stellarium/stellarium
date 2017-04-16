@@ -69,6 +69,7 @@ void ScriptService::getImpl(const QByteArray& operation, const APIParameters &pa
 			obj.insert("description_localized", StelTranslator::globalTranslator->qtranslate(d));
 			obj.insert("author",scriptMgr->getAuthor(scriptId).trimmed());
 			obj.insert("license",scriptMgr->getLicense(scriptId).trimmed());
+			obj.insert("version",scriptMgr->getVersion(scriptId).trimmed());
 			//shortcut often causes a large delay because the whole file gets searched, and it is usually missing, so we ignore it
 			//obj.insert("shortcut",scriptMgr->getShortcut(scriptId));
 
