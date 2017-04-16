@@ -112,9 +112,13 @@ private slots:
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
 
+	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
+	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'
 	void drawCurrentTimeDiagram();
+	//! Draw vertical line of meridian passage time on diagram 'Altitude vs. Time'
 	void drawTransitTimeDiagram(double transitTime); // time in hours
+	//! Show info from graphs under mouse cursor
 	void mouseOverLine(QMouseEvent *event);
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
