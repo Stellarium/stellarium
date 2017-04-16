@@ -600,7 +600,7 @@ void OcularsGuiPanel::updateLensControls()
 			fullName = QString(q_("Lens #%1: %2")).arg(index).arg(name);
 		}
 		multiplerString = QString(q_("Multiplicity: %1")).arg(lens->getMultipler());
-		multiplerString.append(QChar(0x00D7));
+		multiplerString.append(QChar(0x02E3)); // Was 0x00D7
 	}
 	else
 	{
@@ -857,10 +857,11 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		double mag = ocular->magnification(telescope, lens);
 		QString magnificationString = QString::number(mag, 'f', 1);
-		magnificationString.append(QChar(0x00D7));
+		magnificationString.append(QChar(0x02E3)); // Was 0x00D7
+		magnificationString.append(QString(" (%1D)").arg(QString::number(mag/telescope->diameter(), 'f', 2)));
 		QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
 		fieldMagnification->setPlainText(magnificationLabel);
-		fieldMagnification->setPos(posX, posY);
+		fieldMagnification->setPos(posX, posY);		
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 
