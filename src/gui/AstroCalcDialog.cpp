@@ -317,7 +317,7 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	//TRANSLATORS: declination
 	ephemerisHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
-	ephemerisHeader << q_("Mag.");
+	ephemerisHeader << q_("mag");
 	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
 
 	// adjust the column width
