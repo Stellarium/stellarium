@@ -38,6 +38,7 @@ pdf: guide.pdf
 #Makefile: ;
 guide.pdf : guide.bbl guide.ind 
 	pdflatex guide.tex
+	makeindex guide.idx -s StyleInd.ist
 	pdflatex guide.tex
 
 guide.ind: guide.idx guide.toc
