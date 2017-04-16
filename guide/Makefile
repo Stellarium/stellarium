@@ -36,6 +36,7 @@ pdf: guide.pdf
 
 #%.tex : ;
 #Makefile: ;
+# we must call makeindex again just before final run to update page numbers. Not too intuitive, but seems necessary...
 guide.pdf : guide.bbl guide.ind 
 	pdflatex guide.tex
 	makeindex guide.idx -s StyleInd.ist
