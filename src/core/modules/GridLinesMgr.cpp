@@ -1043,7 +1043,8 @@ void SkyPoint::draw(StelCore *core) const
 }
 
 
-GridLinesMgr::GridLinesMgr()
+GridLinesMgr::GridLinesMgr():
+ gridlinesDisplayed(true)
 {
 	setObjectName("GridLinesMgr");
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
@@ -1142,6 +1143,7 @@ void GridLinesMgr::init()
 		conf->remove("color/longitude_color");
 	}
 
+	setFlagGridlines(conf->value("viewing/flag_gridlines", true).toBool());
 	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
 	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
@@ -1212,6 +1214,7 @@ void GridLinesMgr::init()
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
 	
 	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Gridlines", displayGroup, N_("Gridlines"), "gridlinesDisplayed");
 	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
 	addAction("actionShow_Azimuthal_Grid", displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
 	addAction("actionShow_Ecliptic_Line", displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
@@ -1286,6 +1289,8 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
+	if (!gridlinesDisplayed)
+		return;
 	galacticGrid->draw(core);
 	supergalacticGrid->draw(core);
 	eclJ2000Grid->draw(core);
@@ -1359,6 +1364,20 @@ void GridLinesMgr::updateLineLabels()
 	equinoxPoints->updateLabel();
 	solsticeJ2000Points->updateLabel();
 	solsticePoints->updateLabel();
+}
+
+//! Setter ("master switch") for displaying any grid/line.
+void GridLinesMgr::setFlagGridlines(const bool displayed)
+{
+	if(displayed != gridlinesDisplayed) {
+		gridlinesDisplayed=displayed;
+		emit gridlinesDisplayedChanged(displayed);
+	}
+}
+//! Accessor ("master switch") for displaying any grid/line.
+bool GridLinesMgr::getFlagGridlines(void) const
+{
+	return gridlinesDisplayed;
 }
 
 //! Set flag for displaying Azimuthal Grid
