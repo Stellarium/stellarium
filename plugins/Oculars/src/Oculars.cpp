@@ -1900,7 +1900,8 @@ void Oculars::paintText(const StelCore* core)
 				// General info
 				double mag = ocular->magnification(telescope, lens);
 				QString magString = QString::number(mag, 'f', 1);
-				magString.append(QChar(0x00D7));//Multiplication sign
+				magString.append(QChar(0x02E3)); // Was 0x00D7
+				magString.append(QString(" (%1D)").arg(QString::number(mag/telescope->diameter(), 'f', 2)));
 
 				painter.drawText(xPosition, yPosition, QString(q_("Magnification: %1")).arg(magString));
 				yPosition-=lineHeight;
