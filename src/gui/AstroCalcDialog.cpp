@@ -200,7 +200,7 @@ void AstroCalcDialog::setPlanetaryPositionsHeaderNames()
 	//TRANSLATORS: declination
 	planetaryPositionsHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
-	planetaryPositionsHeader << q_("Mag.");
+	planetaryPositionsHeader << q_("mag");
 	//TRANSLATORS: type of object
 	planetaryPositionsHeader << q_("Type");
 	ui->planetaryPositionsTreeWidget->setHeaderLabels(planetaryPositionsHeader);
