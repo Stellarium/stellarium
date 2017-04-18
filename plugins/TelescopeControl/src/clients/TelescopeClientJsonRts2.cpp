@@ -44,6 +44,8 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, telTargetDist(NAN)
 	, time_delay(500)
 {
+	telescopeManager = GETSTELMODULE(TelescopeControl);
+
 	// Example params:
 	// petr:test@localhost:8889/tel
 
@@ -250,7 +252,6 @@ void TelescopeClientJsonRts2::setReadOnly(bool readonly)
 	QSettings* settings = StelApp::getInstance().getSettings();
 	Q_ASSERT(settings);
 
-	telescopeManager = GETSTELMODULE(TelescopeControl);
 	if (telescopeManager)
 	{
 		if (telReadonly)
