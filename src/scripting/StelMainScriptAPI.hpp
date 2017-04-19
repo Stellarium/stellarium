@@ -324,7 +324,7 @@ public slots:
 	void setMinFps(float m);
 
 	//! Get the current minimum frames per second.
-	//! @return The current minimum frames per secon setting.
+	//! @return The current minimum frames per second setting.
 	float getMinFps();
 
 	//! Set the maximum frames per second.
@@ -332,7 +332,7 @@ public slots:
 	void setMaxFps(float m);
 
 	//! Get the current maximum frames per second.
-	//! @return The current maximum frames per secon setting.
+	//! @return The current maximum frames per second setting.
 	float getMaxFps();
 
 	//! Get the mount mode as a string
@@ -782,6 +782,13 @@ public slots:
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	//! @param index the new Bortle scale index, must be in range [1,9]
 	void setBortleScaleIndex(int index);
+
+	//! Show or hide the DSS (photorealistic sky).
+	//! @param b if true, show the DSS, if false, hide the DSS layer.
+	void setDSSMode(bool b);
+	//! Get the current status of DSS mode.
+	//! @return The current status of DSS mode.
+	bool isDSSModeEnabled() const;
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().

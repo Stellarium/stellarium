@@ -53,6 +53,7 @@
 #include "StelGuiBase.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
+#include "ToastMgr.hpp"
 
 #include <QDateTime>
 #include <QDebug>
@@ -1384,6 +1385,16 @@ int StelMainScriptAPI::getBortleScaleIndex() const
 void StelMainScriptAPI::setBortleScaleIndex(int index)
 {
 	StelApp::getInstance().getCore()->getSkyDrawer()->setBortleScaleIndex(index);
+}
+
+void StelMainScriptAPI::setDSSMode(bool b)
+{
+	GETSTELMODULE(ToastMgr)->setFlagSurveyShow(b);
+}
+
+bool StelMainScriptAPI::isDSSModeEnabled() const
+{
+	return GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
 }
 
 QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
