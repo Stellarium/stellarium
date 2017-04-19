@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-17 08:45+0700\n"
-"PO-Revision-Date: 2017-04-10 07:29+0000\n"
+"PO-Revision-Date: 2017-04-17 14:57+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-17 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-04-19 05:24+0000\n"
 "X-Generator: Launchpad (build 18354)\n"
 "Language: bn\n"
 
@@ -44,7 +44,7 @@ msgstr "বিন্দু"
 
 #: src/core/modules/Asterism.cpp:158
 msgid "asterism"
-msgstr ""
+msgstr "নক্ষত্রপুঞ্জ"
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
@@ -59,11 +59,11 @@ msgstr "দৃশ্যপটের বিকল্পগুলি"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
-msgstr ""
+msgstr "নক্ষত্রপুঞ্জের রেখাচিত্র"
 
 #: src/core/modules/AsterismMgr.cpp:95
 msgid "Asterism labels"
-msgstr ""
+msgstr "নক্ষত্রপুঞ্জের নাম"
 
 #: src/core/modules/Constellation.cpp:290
 msgid "constellation"
@@ -218,7 +218,7 @@ msgstr "নঃ দঃ মেরু"
 
 #: src/core/modules/GridLinesMgr.cpp:1217
 msgid "Grids and lines"
-msgstr ""
+msgstr "স্থানাঙ্ক ব্যবস্থা ও ছক"
 
 #: src/core/modules/GridLinesMgr.cpp:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -3120,7 +3120,7 @@ msgstr "বিষুবলম্ব (J2000 অনুযায়ী):"
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:203 src/gui/AstroCalcDialog.cpp:320
 msgid "mag"
-msgstr ""
+msgstr "উজ্জ্বল"
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:205 src/ui_configurationDialog.h:1277
@@ -3152,7 +3152,7 @@ msgstr "১০ মিনিট"
 
 #: src/gui/AstroCalcDialog.cpp:515
 msgid "30 minutes"
-msgstr ""
+msgstr "৩০ মিনিট"
 
 #: src/gui/AstroCalcDialog.cpp:516
 msgid "1 hour"
@@ -3160,11 +3160,11 @@ msgstr "১ ঘন্টা"
 
 #: src/gui/AstroCalcDialog.cpp:517
 msgid "6 hours"
-msgstr ""
+msgstr "৬ ঘন্টা"
 
 #: src/gui/AstroCalcDialog.cpp:518
 msgid "12 hours"
-msgstr ""
+msgstr "১২ ঘন্টা"
 
 #: src/gui/AstroCalcDialog.cpp:519
 msgid "1 day"
@@ -3271,7 +3271,7 @@ msgstr "স্থানীয় সময়"
 #: src/gui/AstroCalcDialog.cpp:787
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "এখন প্রায় %1"
 
 #: src/gui/AstroCalcDialog.cpp:789
 #, qt-format
