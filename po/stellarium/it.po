@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-17 08:45+0700\n"
-"PO-Revision-Date: 2017-04-15 10:28+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2017-04-20 00:40+0700\n"
+"PO-Revision-Date: 2017-04-19 22:06+0000\n"
+"Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-19 05:31+0000\n"
+"X-Launchpad-Export-Date: 2017-04-20 05:36+0000\n"
 "X-Generator: Launchpad (build 18354)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -58,11 +58,11 @@ msgstr "Opzioni di visualizzazione"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
-msgstr ""
+msgstr "Linee dell'asterismo"
 
 #: src/core/modules/AsterismMgr.cpp:95
 msgid "Asterism labels"
-msgstr ""
+msgstr "Etichetta dell'asterimso"
 
 #: src/core/modules/Constellation.cpp:290
 msgid "constellation"
@@ -217,7 +217,7 @@ msgstr "SSGP"
 
 #: src/core/modules/GridLinesMgr.cpp:1217
 msgid "Grids and lines"
-msgstr ""
+msgstr "Griglie e linee"
 
 #: src/core/modules/GridLinesMgr.cpp:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -3121,7 +3121,7 @@ msgstr "Dec (J2000)"
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:203 src/gui/AstroCalcDialog.cpp:320
 msgid "mag"
-msgstr ""
+msgstr "mag"
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:205 src/ui_configurationDialog.h:1277
@@ -3272,12 +3272,12 @@ msgstr "Ora locale"
 #: src/gui/AstroCalcDialog.cpp:787
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "Ora circa %1"
 
 #: src/gui/AstroCalcDialog.cpp:789
 #, qt-format
 msgid "Passage of meridian at approximately %1"
-msgstr ""
+msgstr "Passaggio al meridiano a circa %1"
 
 #: src/gui/AstroCalcDialog.cpp:812
 msgid "Phenomenon"
@@ -4329,20 +4329,22 @@ msgstr ""
 
 #: src/translations.h:386
 msgid ""
-"The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
-"was contributed by Auke Slotegraaf."
+"The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
+"The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
-"Il catalogo di Jack Bennett degli oggetti del cielo profondo meridionale. "
-"Auke Slotegraaf ha contribuito al catalogo."
+"Il catalogo di Jack Bennett degli oggetti del Profondo Cielo del Sud (152 "
+"oggetti in tutto). Al catalogo di Bennett ha contribuito  anche Auke "
+"Slotegraaf."
 
 #: src/translations.h:387
 msgid ""
-"This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
-"Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
+"This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
+"the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC "
+"achievement award."
 msgstr ""
-"Questa lista fatta da A.J. Crayon e Steve Coe è utilizzata dai membri del "
-"Saguaro Astronomy Club di Phoenix, AZ. utilizzata per assegnare il premio "
-"Best of the NGC achievement."
+"Questa lista di 111 oggetti di A.J. Crayon e Steve Coe sono utilizzati dai "
+"membri del Saguaro Astronomy Club di Phoenix, AZ. Per il premio Best of the "
+"NGC."
 
 #: src/translations.h:391
 msgid "&Undo"
@@ -9787,15 +9789,15 @@ msgstr ""
 "La montatura Sky-Watcher SynScan AZ GOTO usata in parecchi modelli di "
 "telescopi."
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:237
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:239
 msgid "Read-only telescope"
 msgstr "Telescoio in sola lettura"
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:240
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:242
 msgid "Telescope position: "
 msgstr "Posizione telescopio: "
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:242
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
 msgid "Distance to target position: "
 msgstr "Distanza dalla potizione del bersaglio: "
 
@@ -17623,9 +17625,24 @@ msgstr "Declinazione Personalizzata 2"
 #~ "Screensaver of various happenings in the Solar System. 261 events in all!"
 #~ msgstr "Screensaver di vari eventi del sistema solare. 261 eventi in tutto!"
 
+#~ msgid ""
+#~ "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
+#~ "was contributed by Auke Slotegraaf."
+#~ msgstr ""
+#~ "Il catalogo di Jack Bennett degli oggetti del cielo profondo meridionale. "
+#~ "Auke Slotegraaf ha contribuito al catalogo."
+
 #~ msgid "Color of names of constellations"
 #~ msgstr "Colore dei nomi delle costellazioni"
 
 #, qt-format
 #~ msgid "Now is %1"
 #~ msgstr "Ora è %1"
+
+#~ msgid ""
+#~ "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
+#~ "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
+#~ msgstr ""
+#~ "Questa lista fatta da A.J. Crayon e Steve Coe è utilizzata dai membri del "
+#~ "Saguaro Astronomy Club di Phoenix, AZ. utilizzata per assegnare il premio "
+#~ "Best of the NGC achievement."
