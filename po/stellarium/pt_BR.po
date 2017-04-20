@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-17 08:45+0700\n"
-"PO-Revision-Date: 2017-01-18 20:33+0000\n"
-"Last-Translator: cicero <Unknown>\n"
+"POT-Creation-Date: 2017-04-20 00:40+0700\n"
+"PO-Revision-Date: 2017-04-20 01:34+0000\n"
+"Last-Translator: Radagasio dos Santos Fernandes <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-19 05:44+0000\n"
+"X-Launchpad-Export-Date: 2017-04-20 05:49+0000\n"
 "X-Generator: Launchpad (build 18354)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -43,7 +43,7 @@ msgstr "Marcador"
 
 #: src/core/modules/Asterism.cpp:158
 msgid "asterism"
-msgstr ""
+msgstr "asterismo"
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
@@ -54,15 +54,15 @@ msgstr ""
 #: src/core/StelApp.cpp:539 src/core/StelCore.cpp:253
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
-msgstr "Opções de exibição"
+msgstr "Opções de Exibição"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
-msgstr ""
+msgstr "Linhas do Asterismo"
 
 #: src/core/modules/AsterismMgr.cpp:95
 msgid "Asterism labels"
-msgstr ""
+msgstr "Rótulos do Asterismo"
 
 #: src/core/modules/Constellation.cpp:290
 msgid "constellation"
@@ -71,7 +71,7 @@ msgstr "constelação"
 #: src/core/modules/ConstellationMgr.cpp:144
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation lines"
-msgstr "Linhas das constelações"
+msgstr "Linhas das Contelações"
 
 #: src/core/modules/ConstellationMgr.cpp:145
 msgid "Constellation art"
@@ -93,7 +93,7 @@ msgstr "Selecionar uma única constelação"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Remover a seleção das constelações"
 
 #: src/core/modules/StarMgr.cpp:445 src/ui_viewDialog.h:2016
 #: src/ui_dsoColorsDialog.h:541
@@ -149,19 +149,19 @@ msgstr "Longitude de oposição/conjunção"
 #: src/core/modules/GridLinesMgr.cpp:678 src/core/modules/GridLinesMgr.cpp:1235
 #: src/ui_viewDialog.h:2273
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Primeira Vertical"
 
 #: src/core/modules/GridLinesMgr.cpp:682
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "Coluro Equatorial"
 
 #: src/core/modules/GridLinesMgr.cpp:686
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Coluro Solsticial"
 
 #: src/core/modules/GridLinesMgr.cpp:691
 msgid "Circumpolar Circle"
-msgstr ""
+msgstr "Círculo Circumpolar"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:882 src/core/modules/GridLinesMgr.cpp:891
@@ -217,7 +217,7 @@ msgstr "PSSG"
 
 #: src/core/modules/GridLinesMgr.cpp:1217
 msgid "Grids and lines"
-msgstr ""
+msgstr "Linhas e Grades"
 
 #: src/core/modules/GridLinesMgr.cpp:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -281,7 +281,7 @@ msgstr "Equador galáctico"
 
 #: src/core/modules/GridLinesMgr.cpp:1231 src/ui_viewDialog.h:2327
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Grade Supergaláctica"
 
 #: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2216
 msgid "Supergalactic equator"
@@ -298,15 +298,15 @@ msgstr "Círculos de precessão"
 
 #: src/core/modules/GridLinesMgr.cpp:1236
 msgid "Colure Lines"
-msgstr ""
+msgstr "Linhas do Coluro"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Circumpolar Circles"
-msgstr ""
+msgstr "Círculos Circumpolar"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "Pólos J2000 Celestiais"
 
 #: src/core/modules/GridLinesMgr.cpp:1239
 msgid "Celestial poles"
@@ -318,7 +318,7 @@ msgstr "Zênite e nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 poles"
-msgstr ""
+msgstr "Pólos J2000 Eclípticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic poles"
@@ -334,19 +334,19 @@ msgstr "Polos supergalácticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1245
 msgid "Equinox J2000 points"
-msgstr ""
+msgstr "Pontos J2000 Equinócio"
 
 #: src/core/modules/GridLinesMgr.cpp:1246
 msgid "Equinox points"
-msgstr ""
+msgstr "Pontos do Equinócio"
 
 #: src/core/modules/GridLinesMgr.cpp:1247
 msgid "Solstice J2000 points"
-msgstr ""
+msgstr "Pontos J2000 do Solstício"
 
 #: src/core/modules/GridLinesMgr.cpp:1248
 msgid "Solstice points"
-msgstr ""
+msgstr "Pontos do Solstício"
 
 #: src/core/modules/LandscapeMgr.cpp:422 src/ui_viewDialog.h:2028
 msgid "Atmosphere"
@@ -439,7 +439,7 @@ msgstr "Índice de cor (B-V): <b>%1</b>"
 #: src/core/modules/Nebula.cpp:227
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr ""
+msgstr "Brilho da superfície: <b>%1</b> (após extinção: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:233
 #, qt-format
@@ -487,7 +487,7 @@ msgstr "Mpc"
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:292
 msgid "Mio. ly"
-msgstr ""
+msgstr "Milh. al"
 
 #: src/core/modules/Nebula.cpp:306
 #, qt-format
@@ -895,7 +895,7 @@ msgstr "Magnitude absoluta: %1"
 #: src/core/modules/Planet.cpp:269
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
-msgstr ""
+msgstr "Magnitude da Oposição Média: %1"
 
 #: src/core/modules/Planet.cpp:290 src/core/modules/MinorPlanet.cpp:238
 #: src/core/modules/Comet.cpp:195
@@ -1094,11 +1094,11 @@ msgstr "Marcadores de Planetas"
 
 #: src/core/modules/SolarSystem.cpp:226
 msgid "Planet selection marker"
-msgstr ""
+msgstr "Marcador de seleção de planeta"
 
 #: src/core/modules/SolarSystem.cpp:227
 msgid "Native planet names (from starlore)"
-msgstr ""
+msgstr "Nomes nativos dos planetas (da starlore)"
 
 #: src/core/modules/StarWrapper.cpp:166
 msgid "eruptive variable star"
@@ -1194,7 +1194,7 @@ msgstr "Luz zodiacal"
 
 #: src/core/modules/ToastMgr.cpp:60
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "Sky Survey Digitalizado (experimental)"
 
 #: src/core/StelApp.cpp:539
 msgid "Night mode"
@@ -1203,6 +1203,7 @@ msgstr "Modo noturno"
 #: src/core/StelApp.cpp:570
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
+"Não é possível criar o remetente Spout. Consulte o log para obter detalhes."
 
 #: src/core/StelCore.cpp:251 src/gui/StelGui.cpp:202
 #: src/gui/AstroCalcDialog.cpp:313 src/gui/AstroCalcDialog.cpp:813
@@ -1242,7 +1243,7 @@ msgstr "Definir a taxa de tempo para zero"
 
 #: src/core/StelCore.cpp:261
 msgid "Set reverse time direction"
-msgstr ""
+msgstr "Ajuste a direção do tempo inverso"
 
 #: src/core/StelCore.cpp:262
 msgid "Set time to now"
@@ -1250,7 +1251,7 @@ msgstr "Definir o tempo para a hora atual"
 
 #: src/core/StelCore.cpp:263
 msgid "Add 1 solar minute"
-msgstr ""
+msgstr "Adicionar 1 minuto solar"
 
 #: src/core/StelCore.cpp:264
 msgid "Add 1 solar hour"
@@ -1266,7 +1267,7 @@ msgstr "Avançar uma semana solar"
 
 #: src/core/StelCore.cpp:267
 msgid "Subtract 1 solar minute"
-msgstr ""
+msgstr "Subtrair 1 minuto solar"
 
 #: src/core/StelCore.cpp:268
 msgid "Subtract 1 solar hour"
@@ -1750,6 +1751,10 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
+"Esta solução de F. R. Stephenson, L. V. Morrison e C. Y. Hohenkerk (2016) "
+"foi publicada em <em> Medida da rotação da Terra: 720 aC a AD 2015 </em> "
+"(%1). Fora do intervalo nomeado (modelado com um ajuste de spline) fornece "
+"valores de uma parábola aproximada."
 
 #: src/core/StelCore.cpp:2200
 #, qt-format
@@ -1770,6 +1775,8 @@ msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
+"O valor da solução de%1 para %2 (aceleração secular da Lua) requer uma "
+"adaptação, consulte o Guia para obter detalhes."
 
 #: src/core/StelCore.cpp:2252
 msgid "with zero values outside this range"
@@ -1786,10 +1793,12 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
+"Com um erro médio inferior a um segundo, máx. Erro 1.9s e valores para os "
+"anos limites fora deste intervalo"
 
 #: src/core/StelCore.cpp:2265
 msgid "with values for the limit years outside this range"
-msgstr ""
+msgstr "Com valores para os anos limites fora deste intervalo"
 
 #: src/core/StelCore.cpp:2275
 #, qt-format
@@ -1815,6 +1824,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
+"A projeção de perspectiva mapeia o horizonte e outros grandes círculos como "
+"equador, eclíptica, linhas de hora, etc. em linhas retas. O nome matemático "
+"para este método de projeção é <i> projeção gnomônica </i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -1825,6 +1837,8 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
+"O nome completo deste método de projeção é <i> Lambert azimutal área-igual "
+"projeção </i>. Conserva a área mas não o ângulo."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
@@ -1836,6 +1850,9 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross "
 "each other but it does not preserve area."
 msgstr ""
+"A projeção estereográfica é conhecida desde a antiguidade e era conhecida "
+"originalmente como a projeção do planisfério. Conserva os ângulos em que as "
+"curvas cruzam-se mas não preservam a área."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
@@ -1888,6 +1905,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"A projeção de Mercator é uma das projeções mais utilizadas do mapa mundial. "
+"Ele preserva a direção e as formas, mas distorce o tamanho, em um crescente "
+"grau longe do equador."
 
 #: src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
@@ -1917,7 +1937,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr ""
+msgstr "Cilíndrico Miller"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -1925,6 +1945,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"A projeção cilíndrica de Miller é uma projeção de Mercator modificada, "
+"proposta por Osborn Maitland Miller (1897-1979) em 1942. Os pólos não são "
+"mais mapeados para o infinito."
 
 #: src/core/StelObject.cpp:133
 msgctxt "coordinates for current epoch"
@@ -1970,12 +1993,12 @@ msgstr "Longitude/Latitude galáctica: %1/%2"
 #: src/core/StelObject.cpp:274 src/core/StelObject.cpp:276
 #, qt-format
 msgid "Supergalactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Longitude/latitude Supergaláctica: %1/%2"
 
 #: src/core/StelObject.cpp:282
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "Constelação IAU: %1"
 
 #: src/core/StelObject.cpp:291
 #, qt-format
@@ -2038,11 +2061,11 @@ msgstr "Olhar para o Zênite"
 
 #: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Olhar para o Pólo Norte Celestial"
 
 #: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Olhar para o Pólo Sul Celestial"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2068,13 +2091,13 @@ msgstr "Encontrado"
 #: src/core/StelLocaleMgr.cpp:273
 msgctxt "solar time"
 msgid "LMST"
-msgstr ""
+msgstr "HMSL"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:279
 msgctxt "solar time"
 msgid "LTST"
-msgstr ""
+msgstr "HLSV"
 
 #: src/gui/ConfigurationDialog.cpp:540
 msgid "Select screenshot directory"
@@ -2297,7 +2320,7 @@ msgstr "Espenak e Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1443
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Espenak & Meeus (2006) sem aceleração extra lua"
 
 #: src/gui/ConfigurationDialog.cpp:1445
 msgid "Reijs (2006)"
@@ -2387,43 +2410,43 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time dragging"
-msgstr ""
+msgstr "Arrastando o tempo"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl & botão esquerdo do mouse"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Tempo de deslocamento: minutos"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl & roda do mouse"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Tempo de deslocamento: horas"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Shift & roda do mouse"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Tempo de deslocamento: dias"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt & roda do mouse"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Tempo de deslocamento: anos"
 
 #: src/gui/HelpDialog.cpp:170
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt+Shift & roda do mouse"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Select object"
@@ -2439,7 +2462,7 @@ msgstr "Limpar seleção"
 
 #: src/gui/HelpDialog.cpp:179
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl e clique esquerdo"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Right click"
@@ -2447,15 +2470,15 @@ msgstr "Clique com o botão direito"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Add custom marker"
-msgstr ""
+msgstr "Adicionar marcador personalizado"
 
 #: src/gui/HelpDialog.cpp:185
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift & Clique esquerdo"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Delete todos os marcadores personalizados"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -4311,14 +4334,15 @@ msgstr ""
 
 #: src/translations.h:386
 msgid ""
-"The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
-"was contributed by Auke Slotegraaf."
+"The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
+"The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
 #: src/translations.h:387
 msgid ""
-"This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
-"Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
+"This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
+"the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC "
+"achievement award."
 msgstr ""
 
 #: src/translations.h:391
@@ -9720,15 +9744,15 @@ msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:237
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:239
 msgid "Read-only telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:240
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:242
 msgid "Telescope position: "
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:242
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
 msgid "Distance to target position: "
 msgstr ""
 
