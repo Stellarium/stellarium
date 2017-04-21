@@ -755,6 +755,10 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! Called when the filter of DSO is updated.
+	//! Loads native names of deep-sky objects for a current sky culture.
+	void updateDSONames();
+
 private:
 
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
