@@ -361,6 +361,7 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	connect(this, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateDSONames()));
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
@@ -415,7 +416,7 @@ void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 
 		qWarning() << "Reloading DSO data...";
 		setFlagShow(false);
-		loadNebulaSet("default");
+		loadNebulaSet("default");		
 		setFlagShow(status);
 
 		updateI18n(); // OK, update localized names of DSO
@@ -1191,6 +1192,12 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	return true;
 }
 
+
+void NebulaMgr::updateDSONames()
+{
+	updateSkyCulture(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	updateI18n();
+}
 
 void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 {
