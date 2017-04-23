@@ -243,7 +243,6 @@ void AstroCalcDialog::currentPlanetaryPositions()
 	PlanetP sun = solarSystem->getSun();
 	double mag = ui->magnitudeDoubleSpinBox->value();
 	bool horizon = ui->aboveHorizonCheckBox->isChecked();
-	bool status = true;
 
 	StelCore* core = StelApp::getInstance().getCore();	
 	double JD = core->getJD();
@@ -251,8 +250,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
-		status = (planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet());
-		if (status && planet->getVMagnitudeWithExtinction(core)<=mag)
+		if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag)
 		{
 			StelUtils::rectToSphe(&az,&alt,planet->getAltAzPosAuto(core));
 			if (horizon && std::fmod(alt,2.0*M_PI)<=0)
