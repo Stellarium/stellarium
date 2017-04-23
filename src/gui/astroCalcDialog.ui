@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>399</height>
+    <width>728</width>
+    <height>406</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -157,6 +157,52 @@
             <property name="topMargin">
              <number>0</number>
             </property>
+            <item>
+             <widget class="QLabel" name="magnitudeLimitLabel">
+              <property name="toolTip">
+               <string>Calculate positions for celestial bodies who is brighter a selected magnitude.</string>
+              </property>
+              <property name="text">
+               <string>Brighter than magnitude</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="magnitudeDoubleSpinBox">
+              <property name="toolTip">
+               <string>Calculate positions for celestial bodies who is brighter a selected magnitude.</string>
+              </property>
+              <property name="maximum">
+               <double>25.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>12.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="aboveHorizonCheckBox">
+              <property name="toolTip">
+               <string>Calculate positions for celestial bodies who is above horizon at the moment.</string>
+              </property>
+              <property name="text">
+               <string>Above horizon</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
             <item>
              <widget class="QLabel" name="positionsTimeLabel">
               <property name="text">
