@@ -101,16 +101,25 @@ private slots:
 	void selectCurrentPlanetaryPosition(const QModelIndex &modelIndex);
 	void onChangedEphemerisPosition(const QModelIndex &modelIndex);
 
+	void savePlanetaryPositionsMagnitudeLimit(double mag);
+	void savePlanetaryPositionsAboveHorizonFlag(bool b);
+
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 	void saveEphemeris();
 
+	void saveEphemerisCelestialBody(int index);
+	void saveEphemerisTimeStep(int index);
+
 	//! Calculate phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
+
+	void savePhenomenaCelestialBody(int index);
+	void savePhenomenaCelestialGroup(int index);
 
 	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
@@ -132,6 +141,7 @@ private:
 	class StarMgr* starMgr;
 	class StelObjectMgr* objectMgr;
 	class StelLocaleMgr* localeMgr;
+	QSettings* conf;
 	QTimer *currentTimeLine;
 
 	//! Update header names for planetary positions table

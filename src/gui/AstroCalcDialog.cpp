@@ -59,6 +59,7 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	starMgr = GETSTELMODULE(StarMgr);
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
+	conf = StelApp::getInstance().getSettings();
 	ephemerisHeader.clear();
 	phenomenaHeader.clear();
 	planetaryPositionsHeader.clear();
@@ -150,6 +151,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		ui->planetaryPositionsTreeWidget, SLOT(repaint()));
 
+	ui->magnitudeDoubleSpinBox->setValue(conf->value("astrocalc/positions_magnitude_limit", 12.0).toDouble());
+	connect(ui->magnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(savePlanetaryPositionsMagnitudeLimit(double)));
+
+	ui->aboveHorizonCheckBox->setChecked(conf->value("astrocalc/flag_positions_above_horizon", false).toBool());
+	connect(ui->aboveHorizonCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePlanetaryPositionsAboveHorizonFlag(bool)));
+
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPlanetaryPosition(QModelIndex)));
 	connect(ui->planetaryPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentPlanetaryPositions()));
 
@@ -158,10 +165,14 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));
 	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
+	connect(ui->ephemerisStepComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeStep(int)));
+	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
+	connect(ui->object1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialBody(int)));
+	connect(ui->object2ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialGroup(int)));
 
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
@@ -180,6 +191,16 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+}
+
+void AstroCalcDialog::savePlanetaryPositionsAboveHorizonFlag(bool b)
+{
+	conf->setValue("astrocalc/flag_positions_above_horizon", b);
+}
+
+void AstroCalcDialog::savePlanetaryPositionsMagnitudeLimit(double mag)
+{
+	conf->setValue("astrocalc/positions_magnitude_limit", QString::number(mag, 'f', 2));
 }
 
 void AstroCalcDialog::initListPlanetaryPositions()
@@ -214,10 +235,15 @@ void AstroCalcDialog::setPlanetaryPositionsHeaderNames()
 
 void AstroCalcDialog::currentPlanetaryPositions()
 {
-	float ra, dec;
+	float ra, dec, alt, az;
 	QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
 
 	initListPlanetaryPositions();
+
+	PlanetP sun = solarSystem->getSun();
+	double mag = ui->magnitudeDoubleSpinBox->value();
+	bool horizon = ui->aboveHorizonCheckBox->isChecked();
+	bool status = true;
 
 	StelCore* core = StelApp::getInstance().getCore();	
 	double JD = core->getJD();
@@ -225,8 +251,13 @@ void AstroCalcDialog::currentPlanetaryPositions()
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
-		if (planet->getPlanetType()!=Planet::isUNDEFINED && planet->getEnglishName()!="Sun" && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
+		status = (planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet());
+		if (status && planet->getVMagnitudeWithExtinction(core)<=mag)
 		{
+			StelUtils::rectToSphe(&az,&alt,planet->getAltAzPosAuto(core));
+			if (horizon && std::fmod(alt,2.0*M_PI)<=0)
+				continue;
+
 			StelUtils::rectToSphe(&ra,&dec,planet->getJ2000EquatorialPos(core));
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->planetaryPositionsTreeWidget);
 			treeItem->setText(ColumnName, planet->getNameI18n());
@@ -495,10 +526,17 @@ void AstroCalcDialog::populateCelestialBodyList()
 	//Restore the selection
 	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = planets->findData("Moon", Qt::UserRole, Qt::MatchCaseSensitive);
+		index = planets->findData(conf->value("astrocalc/ephemeris_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
 	planets->setCurrentIndex(index);
 	planets->model()->sort(0);
 	planets->blockSignals(false);
+}
+
+void AstroCalcDialog::saveEphemerisCelestialBody(int index)
+{
+	Q_ASSERT(ui->celestialBodyComboBox);
+	QComboBox* planets = ui->celestialBodyComboBox;
+	conf->setValue("astrocalc/ephemeris_celestial_body", planets->itemData(index).toString());
 }
 
 void AstroCalcDialog::populateEphemerisTimeStepsList()
@@ -527,10 +565,17 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	if (index<0)
 	{
 		// default step: one day
-		index = steps->findData("6", Qt::UserRole, Qt::MatchCaseSensitive);
+		index = steps->findData(conf->value("astrocalc/ephemeris_time_step", "6").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	steps->setCurrentIndex(index);
 	steps->blockSignals(false);
+}
+
+void AstroCalcDialog::saveEphemerisTimeStep(int index)
+{
+	Q_ASSERT(ui->ephemerisStepComboBox);
+	QComboBox* steps = ui->ephemerisStepComboBox;
+	conf->setValue("astrocalc/ephemeris_time_step", steps->itemData(index).toInt());
 }
 
 void AstroCalcDialog::populateMajorPlanetList()
@@ -562,10 +607,17 @@ void AstroCalcDialog::populateMajorPlanetList()
 	//Restore the selection
 	index = majorPlanet->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = majorPlanet->findData("Venus", Qt::UserRole, Qt::MatchCaseSensitive);
+		index = majorPlanet->findData(conf->value("astrocalc/phenomena_celestial_body", "Venus").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
 	majorPlanet->setCurrentIndex(index);
 	majorPlanet->model()->sort(0);
 	majorPlanet->blockSignals(false);
+}
+
+void AstroCalcDialog::savePhenomenaCelestialBody(int index)
+{
+	Q_ASSERT(ui->object1ComboBox);
+	QComboBox* planets = ui->object1ComboBox;
+	conf->setValue("astrocalc/phenomena_celestial_body", planets->itemData(index).toString());
 }
 
 void AstroCalcDialog::populateGroupCelestialBodyList()
@@ -597,10 +649,17 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
-		index = groups->findData("1", Qt::UserRole, Qt::MatchCaseSensitive);
+		index = groups->findData(conf->value("astrocalc/phenomena_celestial_group", "1").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
 	groups->setCurrentIndex(index);
 	groups->model()->sort(0);
 	groups->blockSignals(false);
+}
+
+void AstroCalcDialog::savePhenomenaCelestialGroup(int index)
+{
+	Q_ASSERT(ui->object2ComboBox);
+	QComboBox* group = ui->object2ComboBox;
+	conf->setValue("astrocalc/phenomena_celestial_group", group->itemData(index).toInt());
 }
 
 void AstroCalcDialog::drawAltVsTimeDiagram()

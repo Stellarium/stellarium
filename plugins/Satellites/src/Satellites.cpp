@@ -1586,7 +1586,8 @@ void Satellites::update(double deltaTime)
 	// Separated because first test should be very fast.
 	if (!hintFader && hintFader.getInterstate() <= 0.)
 		return;
-	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+
+	if (StelApp::getInstance().getCore()->getCurrentPlanet() != earth || !isValidRangeDates())
 		return;
 
 	hintFader.update((int)(deltaTime*1000));
