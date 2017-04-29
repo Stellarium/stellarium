@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 12:35+0700\n"
+"POT-Creation-Date: 2017-04-29 18:29+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
-#: src/core/modules/GridLinesMgr.cpp:1216 src/core/modules/LandscapeMgr.cpp:421
+#: src/core/modules/GridLinesMgr.cpp:1220 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:366 src/core/modules/NebulaMgr.cpp:367
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
@@ -105,246 +105,246 @@ msgstr ""
 msgid "Stars labels"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:636 src/ui_viewDialog.h:2220
+#: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2220
 msgid "Meridian"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:640
+#: src/core/modules/GridLinesMgr.cpp:641
 msgid "Ecliptic of J2000.0"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:644
+#: src/core/modules/GridLinesMgr.cpp:645
 msgid "Ecliptic of Date"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:648
+#: src/core/modules/GridLinesMgr.cpp:649
 msgid "Equator of J2000.0"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:652
+#: src/core/modules/GridLinesMgr.cpp:653
 msgid "Equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:657
+#: src/core/modules/GridLinesMgr.cpp:658
 msgid "Precession Circle"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:661 src/ui_viewDialog.h:2209
+#: src/core/modules/GridLinesMgr.cpp:662 src/ui_viewDialog.h:2209
 msgid "Horizon"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:665
+#: src/core/modules/GridLinesMgr.cpp:666
 msgid "Galactic Equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:669
+#: src/core/modules/GridLinesMgr.cpp:670
 msgid "Supergalactic Equator"
 msgstr ""
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:674 src/ui_viewDialog.h:2224
+#: src/core/modules/GridLinesMgr.cpp:675 src/ui_viewDialog.h:2224
 msgid "O./C. longitude"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:678 src/core/modules/GridLinesMgr.cpp:1235
+#: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/GridLinesMgr.cpp:1239
 #: src/ui_viewDialog.h:2273
 msgid "Prime Vertical"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:682
+#: src/core/modules/GridLinesMgr.cpp:683
 msgid "Equinoctial Colure"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:686
+#: src/core/modules/GridLinesMgr.cpp:687
 msgid "Solstitial Colure"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:691
+#: src/core/modules/GridLinesMgr.cpp:692
 msgid "Circumpolar Circle"
 msgstr ""
 
 #. TRANSLATORS: North Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:882 src/core/modules/GridLinesMgr.cpp:891
+#: src/core/modules/GridLinesMgr.cpp:883 src/core/modules/GridLinesMgr.cpp:892
 msgid "NCP"
 msgstr ""
 
 #. TRANSLATORS: South Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:884 src/core/modules/GridLinesMgr.cpp:893
+#: src/core/modules/GridLinesMgr.cpp:885 src/core/modules/GridLinesMgr.cpp:894
 msgid "SCP"
 msgstr ""
 
 #. TRANSLATORS: Zenith
-#: src/core/modules/GridLinesMgr.cpp:900
+#: src/core/modules/GridLinesMgr.cpp:901
 msgctxt "zenith"
 msgid "Z"
 msgstr ""
 
 #. TRANSLATORS: Nadir
-#: src/core/modules/GridLinesMgr.cpp:902
+#: src/core/modules/GridLinesMgr.cpp:903
 msgctxt "nadir"
 msgid "Z'"
 msgstr ""
 
 #. TRANSLATORS: North Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:909 src/core/modules/GridLinesMgr.cpp:918
+#: src/core/modules/GridLinesMgr.cpp:910 src/core/modules/GridLinesMgr.cpp:919
 msgid "NEP"
 msgstr ""
 
 #. TRANSLATORS: South Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:911 src/core/modules/GridLinesMgr.cpp:920
+#: src/core/modules/GridLinesMgr.cpp:912 src/core/modules/GridLinesMgr.cpp:921
 msgid "SEP"
 msgstr ""
 
 #. TRANSLATORS: North Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:927
+#: src/core/modules/GridLinesMgr.cpp:928
 msgid "NGP"
 msgstr ""
 
 #. TRANSLATORS: South Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:929
+#: src/core/modules/GridLinesMgr.cpp:930
 msgid "SGP"
 msgstr ""
 
 #. TRANSLATORS: North Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:936
+#: src/core/modules/GridLinesMgr.cpp:937
 msgid "NSGP"
 msgstr ""
 
 #. TRANSLATORS: South Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:938
+#: src/core/modules/GridLinesMgr.cpp:939
 msgid "SSGP"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1217
+#: src/core/modules/GridLinesMgr.cpp:1221
 msgid "Grids and lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1218
+#: src/core/modules/GridLinesMgr.cpp:1222
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1219 src/ui_viewDialog.h:2303
+#: src/core/modules/GridLinesMgr.cpp:1223 src/ui_viewDialog.h:2303
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1220
+#: src/core/modules/GridLinesMgr.cpp:1224
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1221
+#: src/core/modules/GridLinesMgr.cpp:1225
 msgid "Ecliptic J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1222
+#: src/core/modules/GridLinesMgr.cpp:1226
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1223
+#: src/core/modules/GridLinesMgr.cpp:1227
 msgid "Equator J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1224
+#: src/core/modules/GridLinesMgr.cpp:1228
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1225
+#: src/core/modules/GridLinesMgr.cpp:1229
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:393
 msgid "Horizon line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1226
+#: src/core/modules/GridLinesMgr.cpp:1230
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1227
+#: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1228
+#: src/core/modules/GridLinesMgr.cpp:1232
 msgid "Ecliptic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2338
+#: src/core/modules/GridLinesMgr.cpp:1233 src/ui_viewDialog.h:2338
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1230 src/ui_viewDialog.h:2193
+#: src/core/modules/GridLinesMgr.cpp:1234 src/ui_viewDialog.h:2193
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1231 src/ui_viewDialog.h:2327
+#: src/core/modules/GridLinesMgr.cpp:1235 src/ui_viewDialog.h:2327
 msgid "Supergalactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2216
+#: src/core/modules/GridLinesMgr.cpp:1236 src/ui_viewDialog.h:2216
 msgid "Supergalactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1233
+#: src/core/modules/GridLinesMgr.cpp:1237
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1234
+#: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Precession Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1236
+#: src/core/modules/GridLinesMgr.cpp:1240
 msgid "Colure Lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1237
+#: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Circumpolar Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1238
+#: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Celestial J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1239
+#: src/core/modules/GridLinesMgr.cpp:1243
 msgid "Celestial poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1240
+#: src/core/modules/GridLinesMgr.cpp:1244
 msgid "Zenith and nadir"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1241
+#: src/core/modules/GridLinesMgr.cpp:1245
 msgid "Ecliptic J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1242
+#: src/core/modules/GridLinesMgr.cpp:1246
 msgid "Ecliptic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2281
+#: src/core/modules/GridLinesMgr.cpp:1247 src/ui_viewDialog.h:2281
 msgid "Galactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2239
+#: src/core/modules/GridLinesMgr.cpp:1248 src/ui_viewDialog.h:2239
 msgid "Supergalactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1245
+#: src/core/modules/GridLinesMgr.cpp:1249
 msgid "Equinox J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1246
+#: src/core/modules/GridLinesMgr.cpp:1250
 msgid "Equinox points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1247
+#: src/core/modules/GridLinesMgr.cpp:1251
 msgid "Solstice J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1248
+#: src/core/modules/GridLinesMgr.cpp:1252
 msgid "Solstice points"
 msgstr ""
 
@@ -391,7 +391,7 @@ msgstr ""
 msgid ", %1 m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:802 src/ui_astroCalcDialog.h:574
+#: src/core/modules/LandscapeMgr.cpp:802 src/ui_astroCalcDialog.h:575
 msgid "Celestial body:"
 msgstr ""
 
@@ -1066,7 +1066,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:220 src/gui/AstroCalcDialog.cpp:635
+#: src/core/modules/SolarSystem.cpp:220 src/gui/AstroCalcDialog.cpp:636
 #: src/translations.h:68
 msgid "Planets"
 msgstr ""
@@ -1177,7 +1177,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
-#: src/gui/AstroCalcDialog.cpp:875
+#: src/gui/AstroCalcDialog.cpp:881
 msgid "Separation"
 msgstr ""
 
@@ -1202,7 +1202,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
 #: src/core/StelCore.cpp:251 src/gui/StelGui.cpp:202
-#: src/gui/AstroCalcDialog.cpp:344 src/gui/AstroCalcDialog.cpp:872
+#: src/gui/AstroCalcDialog.cpp:345 src/gui/AstroCalcDialog.cpp:878
 #: src/gui/BookmarksDialog.cpp:101 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -2869,8 +2869,8 @@ msgstr ""
 msgid "Azimuth"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:791
-#: src/gui/AstroCalcDialog.cpp:852 src/gui/AstroCalcDialog.cpp:854
+#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:797
+#: src/gui/AstroCalcDialog.cpp:858 src/gui/AstroCalcDialog.cpp:860
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr ""
@@ -2942,7 +2942,7 @@ msgid "Secular acceleration of the Moon"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:218 src/ui_configurationDialog.h:1298
+#: src/gui/AstroCalcDialog.cpp:221 src/ui_configurationDialog.h:1298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:324
@@ -2951,211 +2951,211 @@ msgid "Name"
 msgstr ""
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:220 src/gui/AstroCalcDialog.cpp:347
+#: src/gui/AstroCalcDialog.cpp:223 src/gui/AstroCalcDialog.cpp:348
 msgid "RA (J2000)"
 msgstr ""
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:222 src/gui/AstroCalcDialog.cpp:349
+#: src/gui/AstroCalcDialog.cpp:225 src/gui/AstroCalcDialog.cpp:350
 msgid "Dec (J2000)"
 msgstr ""
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:224 src/gui/AstroCalcDialog.cpp:351
+#: src/gui/AstroCalcDialog.cpp:227 src/gui/AstroCalcDialog.cpp:352
 msgid "mag"
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:226 src/ui_configurationDialog.h:1277
+#: src/gui/AstroCalcDialog.cpp:229 src/ui_configurationDialog.h:1277
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Type"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:250
+#: src/gui/AstroCalcDialog.cpp:252
 #, qt-format
 msgid "Positions on %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:345 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:346 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:467 src/gui/AstroCalcDialog.cpp:1100
+#: src/gui/AstroCalcDialog.cpp:468 src/gui/AstroCalcDialog.cpp:1108
 msgid "CSV (Comma delimited)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:469
+#: src/gui/AstroCalcDialog.cpp:470
 msgid "Save calculated ephemerides as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:552
+#: src/gui/AstroCalcDialog.cpp:553
 msgid "10 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:553
+#: src/gui/AstroCalcDialog.cpp:554
 msgid "30 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:554
+#: src/gui/AstroCalcDialog.cpp:555
 msgid "1 hour"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:555
+#: src/gui/AstroCalcDialog.cpp:556
 msgid "6 hours"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:556
+#: src/gui/AstroCalcDialog.cpp:557
 msgid "12 hours"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:557
+#: src/gui/AstroCalcDialog.cpp:558
 msgid "1 day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:558
+#: src/gui/AstroCalcDialog.cpp:559
 msgid "5 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:559
+#: src/gui/AstroCalcDialog.cpp:560
 msgid "10 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:560
+#: src/gui/AstroCalcDialog.cpp:561
 msgid "15 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:561
+#: src/gui/AstroCalcDialog.cpp:562
 msgid "30 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:562
+#: src/gui/AstroCalcDialog.cpp:563
 msgid "60 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:634
+#: src/gui/AstroCalcDialog.cpp:635
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:636 src/translations.h:72
+#: src/gui/AstroCalcDialog.cpp:637 src/translations.h:72
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:637 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:638 src/translations.h:76
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:638 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:639 src/translations.h:70
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:639 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:640 src/translations.h:78
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:640 src/translations.h:80
+#: src/gui/AstroCalcDialog.cpp:641 src/translations.h:80
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:641 src/translations.h:82
+#: src/gui/AstroCalcDialog.cpp:642 src/translations.h:82
 msgid "Scattered disc objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:642 src/translations.h:84
+#: src/gui/AstroCalcDialog.cpp:643 src/translations.h:84
 msgid "Oort cloud objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:643
+#: src/gui/AstroCalcDialog.cpp:644
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:644
+#: src/gui/AstroCalcDialog.cpp:645
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:645 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:646 src/translations.h:105
 #: src/ui_viewDialog.h:2136 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:646
+#: src/gui/AstroCalcDialog.cpp:647
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:647 src/translations.h:107
+#: src/gui/AstroCalcDialog.cpp:648 src/translations.h:107
 #: src/ui_viewDialog.h:2139 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:648
+#: src/gui/AstroCalcDialog.cpp:649
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:790 src/gui/AstroCalcDialog.cpp:852
-#: src/gui/AstroCalcDialog.cpp:854
+#: src/gui/AstroCalcDialog.cpp:796 src/gui/AstroCalcDialog.cpp:858
+#: src/gui/AstroCalcDialog.cpp:860
 msgid "Local Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:846
+#: src/gui/AstroCalcDialog.cpp:852
 #, qt-format
 msgid "Now about %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:848
+#: src/gui/AstroCalcDialog.cpp:854
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:871
+#: src/gui/AstroCalcDialog.cpp:877
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:873
+#: src/gui/AstroCalcDialog.cpp:879
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:874
+#: src/gui/AstroCalcDialog.cpp:880
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1102
+#: src/gui/AstroCalcDialog.cpp:1110
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1141 src/gui/AstroCalcDialog.cpp:1316
-#: src/gui/AstroCalcDialog.cpp:1474
+#: src/gui/AstroCalcDialog.cpp:1149 src/gui/AstroCalcDialog.cpp:1324
+#: src/gui/AstroCalcDialog.cpp:1482
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1148
+#: src/gui/AstroCalcDialog.cpp:1156
 msgid "Opposition"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1156
+#: src/gui/AstroCalcDialog.cpp:1164
 msgid "Transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1158 src/gui/AstroCalcDialog.cpp:1321
-#: src/gui/AstroCalcDialog.cpp:1479
+#: src/gui/AstroCalcDialog.cpp:1166 src/gui/AstroCalcDialog.cpp:1329
+#: src/gui/AstroCalcDialog.cpp:1487
 msgid "Occultation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1162
+#: src/gui/AstroCalcDialog.cpp:1170
 msgid "Eclipse"
 msgstr ""
 
@@ -7012,113 +7012,105 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:538
+#: src/ui_astroCalcDialog.h:545
 msgid "Positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:540
+#: src/ui_astroCalcDialog.h:547
 msgid "Planetary positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:543
+#: src/ui_astroCalcDialog.h:550
 msgid "Ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:545
+#: src/ui_astroCalcDialog.h:552
 msgid "Phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:547
+#: src/ui_astroCalcDialog.h:554
 msgid "Alt. vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:549
+#: src/ui_astroCalcDialog.h:556
 msgid "Altitude vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:554 src/ui_astroCalcDialog.h:558
+#: src/ui_astroCalcDialog.h:561 src/ui_astroCalcDialog.h:565
 msgid ""
 "Calculate positions for celestial bodies who is brighter a selected "
 "magnitude."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:556
+#: src/ui_astroCalcDialog.h:563
 msgid "Brighter than magnitude"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:561
+#: src/ui_astroCalcDialog.h:568
 msgid ""
 "Calculate positions for celestial bodies who is above horizon at the moment."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:563
+#: src/ui_astroCalcDialog.h:570
 msgid "Above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:565
+#: src/ui_astroCalcDialog.h:572
 msgid "Update of planetary positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:567
-msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:569
-msgid "Show dates of positions"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:571
-msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:573
-msgid "Show markers of positions"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:576
-msgid "Cleanup ephemerides"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:578 src/ui_astroCalcDialog.h:586
-#: plugins/Satellites/src/ui_satellitesDialog.h:822
-msgid "Calculations require time, please be patient"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:580
-msgid "Calculate ephemeris"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:581
-msgid "Save ephemeris"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:582
-msgid "Time step:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:583 src/ui_astroCalcDialog.h:593
+#: src/ui_astroCalcDialog.h:573 src/ui_astroCalcDialog.h:599
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:584 src/ui_astroCalcDialog.h:590
+#: src/ui_astroCalcDialog.h:574 src/ui_astroCalcDialog.h:605
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:588
-msgid "Calculate phenomena"
+#: src/ui_astroCalcDialog.h:577
+msgid "Time step:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:589
-msgid "Save phenomena"
+#: src/ui_astroCalcDialog.h:579
+msgid "Show dates of positions of current celestial body near markers"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:581
+msgid "Show dates of positions"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:583
+msgid "Show markers of positions of the current celestial body on the sky"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:585
+msgid "Show markers of positions"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:586
+msgid "Cleanup ephemerides"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:588 src/ui_astroCalcDialog.h:601
+#: plugins/Satellites/src/ui_satellitesDialog.h:822
+msgid "Calculations require time, please be patient"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:590
+msgid "Calculate ephemeris"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:591
-msgid "Between objects:"
+msgid "Save ephemeris"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:592
+msgid "Between objects:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:593
 msgid "and"
 msgstr ""
 
@@ -7131,10 +7123,22 @@ msgid "Value in decimal degrees"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:598
+msgid "Calculate oppositions"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:603
+msgid "Calculate phenomena"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:604
+msgid "Save phenomena"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:606
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:599
+#: src/ui_astroCalcDialog.h:607
 msgid "Astronomical calculations"
 msgstr ""
 
@@ -8517,77 +8521,77 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1941
+#: plugins/Satellites/src/Satellites.cpp:1962
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1943
+#: plugins/Satellites/src/Satellites.cpp:1964
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1945
+#: plugins/Satellites/src/Satellites.cpp:1966
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1947
+#: plugins/Satellites/src/Satellites.cpp:1968
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1949
+#: plugins/Satellites/src/Satellites.cpp:1970
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1951
+#: plugins/Satellites/src/Satellites.cpp:1972
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1953
+#: plugins/Satellites/src/Satellites.cpp:1974
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1955
+#: plugins/Satellites/src/Satellites.cpp:1976
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1957
+#: plugins/Satellites/src/Satellites.cpp:1978
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1959
+#: plugins/Satellites/src/Satellites.cpp:1980
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1961
+#: plugins/Satellites/src/Satellites.cpp:1982
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1963
+#: plugins/Satellites/src/Satellites.cpp:1984
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1965
+#: plugins/Satellites/src/Satellites.cpp:1986
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1967
+#: plugins/Satellites/src/Satellites.cpp:1988
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1969
+#: plugins/Satellites/src/Satellites.cpp:1990
 msgid "observatory"
 msgstr ""
 
@@ -8597,57 +8601,57 @@ msgstr ""
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1979
+#: plugins/Satellites/src/Satellites.cpp:2000
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1981
+#: plugins/Satellites/src/Satellites.cpp:2002
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1983
+#: plugins/Satellites/src/Satellites.cpp:2004
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1985
+#: plugins/Satellites/src/Satellites.cpp:2006
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1987
+#: plugins/Satellites/src/Satellites.cpp:2008
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1989
+#: plugins/Satellites/src/Satellites.cpp:2010
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:1993
+#: plugins/Satellites/src/Satellites.cpp:2014
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:1995
+#: plugins/Satellites/src/Satellites.cpp:2016
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:1997
+#: plugins/Satellites/src/Satellites.cpp:2018
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:1999
+#: plugins/Satellites/src/Satellites.cpp:2020
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2001
+#: plugins/Satellites/src/Satellites.cpp:2022
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -9314,60 +9318,60 @@ msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1610
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1644
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1612
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1646
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1614
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1648
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
 msgstr ""
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1616
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1650
 msgid "Losmandy's G-11 telescope mount."
 msgstr ""
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1618
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1652
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1620
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1654
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1622
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1656
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1624
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1658
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:239
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:241
 msgid "Read-only telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:242
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
 msgid "Telescope position: "
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:246
 msgid "Distance to target position: "
 msgstr ""
 

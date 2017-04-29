@@ -120,6 +120,7 @@ private slots:
 
 	void savePhenomenaCelestialBody(int index);
 	void savePhenomenaCelestialGroup(int index);
+	void savePhenomenaOppositionFlag(bool b);
 
 	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
