@@ -115,6 +115,7 @@ private slots:
 
 	//! Calculate phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
+	void cleanupPhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
 
