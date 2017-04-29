@@ -1603,6 +1603,40 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+{
+	QStringList result;
+	if (maxNbItem<=0)
+		return result;
+
+	QString tn;
+	bool find;
+	foreach (const TelescopeClientP& telescope, telescopeClients)
+	{
+		tn = inEnglish ? telescope->getEnglishName() : telescope->getNameI18n();
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << tn;
+		}
+	}
+	result.sort();
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
+
+	return result;
+}
+
 void TelescopeControl::translations()
 {
 #if 0
