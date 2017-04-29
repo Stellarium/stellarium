@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-04-23 12:35+0700\n"
-"PO-Revision-Date: 2017-04-09 18:52+0000\n"
+"PO-Revision-Date: 2017-04-28 22:01+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-04-25 05:28+0000\n"
-"X-Generator: Launchpad (build 18361)\n"
+"X-Launchpad-Export-Date: 2017-04-29 05:20+0000\n"
+"X-Generator: Launchpad (build 18364)\n"
 "Language: gd\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -44,7 +44,7 @@ msgstr "Comharra"
 
 #: src/core/modules/Asterism.cpp:158
 msgid "asterism"
-msgstr ""
+msgstr "astaras"
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:444
@@ -59,11 +59,11 @@ msgstr "Roghainnean an t-seallaidh"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
-msgstr ""
+msgstr "Loidhnichean astarais"
 
 #: src/core/modules/AsterismMgr.cpp:95
 msgid "Asterism labels"
-msgstr ""
+msgstr "Leubailean astarais"
 
 #: src/core/modules/Constellation.cpp:290
 msgid "constellation"
@@ -218,7 +218,7 @@ msgstr "Pòla a deas os-reul-chriosach"
 
 #: src/core/modules/GridLinesMgr.cpp:1217
 msgid "Grids and lines"
-msgstr ""
+msgstr "Griodaichean is loidhnichean"
 
 #: src/core/modules/GridLinesMgr.cpp:1218
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -3142,7 +3142,7 @@ msgstr "Dì-chl (J2000)"
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:224 src/gui/AstroCalcDialog.cpp:351
 msgid "mag"
-msgstr ""
+msgstr "meud"
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:226 src/ui_configurationDialog.h:1277
@@ -3174,7 +3174,7 @@ msgstr "10 mionaidean"
 
 #: src/gui/AstroCalcDialog.cpp:553
 msgid "30 minutes"
-msgstr ""
+msgstr "Leth-uair a thìde"
 
 #: src/gui/AstroCalcDialog.cpp:554
 msgid "1 hour"
@@ -3182,11 +3182,11 @@ msgstr "Uair a thìde"
 
 #: src/gui/AstroCalcDialog.cpp:555
 msgid "6 hours"
-msgstr ""
+msgstr "6 uairean a thìde"
 
 #: src/gui/AstroCalcDialog.cpp:556
 msgid "12 hours"
-msgstr ""
+msgstr "12 uair a thìde"
 
 #: src/gui/AstroCalcDialog.cpp:557
 msgid "1 day"
@@ -3293,12 +3293,12 @@ msgstr "An t-àm ionadail"
 #: src/gui/AstroCalcDialog.cpp:846
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "Mu %1 an-dràsta"
 
 #: src/gui/AstroCalcDialog.cpp:848
 #, qt-format
 msgid "Passage of meridian at approximately %1"
-msgstr ""
+msgstr "Trasnaidh e a’ mheadhan-loidhne mu %1"
 
 #: src/gui/AstroCalcDialog.cpp:871
 msgid "Phenomenon"
@@ -3546,7 +3546,7 @@ msgstr "Cuspairean gnàthaichte"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:92
 msgid "Asterisms"
-msgstr ""
+msgstr "Astarasan"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
@@ -4365,6 +4365,8 @@ msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
+"Seo an catalog aig Jack Bennett de na cuspairean fad às deasach (152 cuspair "
+"uile gu lèir). Chaidh catalog Bhennett a thoirt dhuinn le Auke Slotegraaf."
 
 #: src/translations.h:387
 msgid ""
@@ -4372,6 +4374,9 @@ msgid ""
 "the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC "
 "achievement award."
 msgstr ""
+"Tha an liosta dhe 111 cuspair le A.J. Crayon agus Steve Coe ’ga cleachdadh "
+"le buill Saguaro Astronomy Club of Phoenix, AZ. airson an duais a thaobh "
+"obrach ionmholta “Best of the NGC”."
 
 #: src/translations.h:391
 msgid "&Undo"
@@ -6204,7 +6209,7 @@ msgstr "Dath a’ chriosa-mheadhain reul-chriosaich"
 
 #: src/ui_viewDialog.h:2207
 msgid "Show mathematical horizon line."
-msgstr ""
+msgstr "Seall an loidhne-fàire mhatamataigeach."
 
 #: src/ui_viewDialog.h:2211
 msgid "Color of horizon"
@@ -6213,6 +6218,8 @@ msgstr "Dath na fàire"
 #: src/ui_viewDialog.h:2214
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr ""
+"Seall crios-meadhain nan comharran os-reul-chriosach aig de Vaucouleurs "
+"(1976)."
 
 #: src/ui_viewDialog.h:2218
 msgid "Show meridian line."
@@ -6395,6 +6402,8 @@ msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr ""
+"Seall na comharran os-reul-chriosach aig de Vaucouleurs (1976) a chaidh a "
+"mhìneachadh a-rèir sgaoileadh nan reul-chriosan am fagas."
 
 #: src/ui_viewDialog.h:2329
 msgid "Equatorial coordinates of J2000.0."
@@ -6543,7 +6552,7 @@ msgstr "Luach ann am piogsailean"
 
 #: src/ui_viewDialog.h:2398
 msgid "Color of constellation lines"
-msgstr ""
+msgstr "Dath loidhnichean nan reul-bhadan"
 
 #: src/ui_viewDialog.h:2401
 msgid "Use native names for planets from current culture"
@@ -6570,7 +6579,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2411
 msgid "Color of constellation names"
-msgstr ""
+msgstr "Dath ainmean nan reul-bhadan"
 
 #: src/ui_viewDialog.h:2413
 msgid "Show boundaries"
@@ -6578,23 +6587,23 @@ msgstr "Seall crìochan"
 
 #: src/ui_viewDialog.h:2415
 msgid "Color of constellation boundaries"
-msgstr ""
+msgstr "Dath crìochan nan reul-bhadan"
 
 #: src/ui_viewDialog.h:2417
 msgid "Show asterism lines"
-msgstr ""
+msgstr "Seall loidhnichean nan astarasan"
 
 #: src/ui_viewDialog.h:2419
 msgid "Color of asterism lines"
-msgstr ""
+msgstr "Dath loidhnichean nan astarasan"
 
 #: src/ui_viewDialog.h:2421
 msgid "Show asterism labels"
-msgstr ""
+msgstr "Seall leubailean nan astarasan"
 
 #: src/ui_viewDialog.h:2423
 msgid "Color of asterism names"
-msgstr ""
+msgstr "Dath ainmean nan astarasan"
 
 #: src/ui_viewDialog.h:2426
 msgid "Visible"
@@ -7408,19 +7417,22 @@ msgid ""
 "Calculate positions for celestial bodies who is brighter a selected "
 "magnitude."
 msgstr ""
+"Àireamhaich ionadan nam bodhaigean speurach a tha nas soilleire na a' "
+"mheudachd a thagh thu."
 
 #: src/ui_astroCalcDialog.h:556
 msgid "Brighter than magnitude"
-msgstr ""
+msgstr "Nas soilleire na meudachd"
 
 #: src/ui_astroCalcDialog.h:561
 msgid ""
 "Calculate positions for celestial bodies who is above horizon at the moment."
 msgstr ""
+"Àireamhaich ionad nam bodhaigean speurach a tha os cionn na fàire an-dràsta."
 
 #: src/ui_astroCalcDialog.h:563
 msgid "Above horizon"
-msgstr ""
+msgstr "Os cionn na fàire"
 
 #: src/ui_astroCalcDialog.h:565
 msgid "Update of planetary positions"
@@ -9810,11 +9822,15 @@ msgstr "Gluais glainne-amhairc gu sheata co-chomharran sònraichte"
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar controller."
 msgstr ""
+"Glainne-amhairc no sorchan glainne-amhairc sam bith a tha co-chòrdail ri "
+"uidheam-smachd AutoStar le Meade."
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1612
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
+"Glainne-amhairc no sorchan glainne-amhairc sam bith a tha co-chòrdail ri "
+"Meade LX200."
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1614
@@ -9822,21 +9838,25 @@ msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
 msgstr ""
+"ETX70 le Meade le uidheam-smachd Autostar #494 agus seata chàballan ceangail "
+"#506."
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1616
 msgid "Losmandy's G-11 telescope mount."
-msgstr ""
+msgstr "Sorchan glainne-amhairc G-11 le Losmandy."
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1618
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
-msgstr ""
+msgstr "Argo Navis DTC le Wildcard Innovations sa mhodh riochd Meade LX200."
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1620
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
+"Glainne-amhairc no sorchan glainne-amhairc sam bith a tha co-chòrdail ri "
+"Celestron NexStar."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1622
@@ -9844,24 +9864,28 @@ msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
+"Sorchan Sky-Watcher sam bith a chleachdas tionndadh 3 no nas ùire dhen "
+"uidheam-smachd làimhe SynScan."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1624
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
+"Tha an sorchan Sky-Watcher AZ GOTO ’ga chleachdadh ann an uiread a "
+"mhodailean ghlainneachan-amhairc."
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:239
 msgid "Read-only telescope"
-msgstr ""
+msgstr "Glainne-amhairc ri leughadh a-mhàin"
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:242
 msgid "Telescope position: "
-msgstr ""
+msgstr "Ionad na glainne-amhairc: "
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
 msgid "Distance to target position: "
-msgstr ""
+msgstr "An t-astar gun ionad-amais: "
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
 msgid "Add New Telescope"
@@ -9905,7 +9929,7 @@ msgstr "Prògramachadh plugain ’s eadar-aghaidh"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid "RTS2 support"
-msgstr ""
+msgstr "Taic ri RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 msgid ""
@@ -10916,7 +10940,7 @@ msgstr "biortail"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:511
 msgid "RTS2"
-msgstr ""
+msgstr "RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:933
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
@@ -11063,11 +11087,11 @@ msgstr "Bathar-bog air an taobh a-muigh no coimpiutair cèin"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:535
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
-msgstr ""
+msgstr "Glainne-amhairc a ghabhas inntrigeadh le API JSON RTS2(.org)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:537
 msgid "RTS2 telescope"
-msgstr ""
+msgstr "Glainne-amhairc RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:538
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -11132,31 +11156,31 @@ msgstr "Port TCP:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:562
 msgid "RTS2 telescope settings"
-msgstr ""
+msgstr "Roghainnean glainne-amhairc RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:564
 msgid "Username:"
-msgstr ""
+msgstr "Ainm-cleachdaiche:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:565
 msgid "Password:"
-msgstr ""
+msgstr "Facal-faire:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
 msgid "RTS2 username"
-msgstr ""
+msgstr "Ainm-cleachdaiche RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
 msgid "RTS2 password"
-msgstr ""
+msgstr "Facal-faire RTS2"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:573
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
-msgstr ""
+msgstr "URL an uidheim a tha ag òstadh am frithealaiche JSON RTS2 (httpd)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
 msgid "User interface settings"
@@ -14526,12 +14550,12 @@ msgstr "Dreagan an t-Sealgair-Mhòir san t-Samhainn"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr ""
+msgstr "Caelidichean an Lùnastail"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "ε-Gruids"
-msgstr ""
+msgstr "ε-Gruidichean"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
