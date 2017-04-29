@@ -96,6 +96,8 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 //! queues a GOTO command
 void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
+	Q_UNUSED(selectObject);
+
 	if (!isConnected())
 		return;
 
