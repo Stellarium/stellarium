@@ -231,6 +231,8 @@ bool TelescopeClientJsonRts2::hasKnownPosition(void) const
 
 QString TelescopeClientJsonRts2::getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
+	Q_UNUSED(core);
+	Q_UNUSED(flags);
 	QString str;
 	QTextStream oss(&str);
 	
