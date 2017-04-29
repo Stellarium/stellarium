@@ -80,44 +80,15 @@ void MainService::update(double deltaTime)
 
 	if(!xZero || !yZero)
 	{
+		qDebug()<<moveX<<moveY;
+
 		double currentFov = mvmgr->getCurrentFov();
 		// the more it is zoomed, the lower the moving speed is (in angle)
-		double depl=0.00025*deltaTime*1000*currentFov;
+		//0.0004 is the default key move speed
+		double depl=0.0004 / 30 *deltaTime*1000*currentFov;
 
-		float deltaAz = moveX;
-		float deltaAlt = moveY;
-
-		if (deltaAz<0)
-		{
-			deltaAz = -depl/30;
-			if (deltaAz<-0.2)
-				deltaAz = -0.2;
-		}
-		else
-		{
-			if (deltaAz>0)
-			{
-				deltaAz = (depl/30);
-				if (deltaAz>0.2)
-					deltaAz = 0.2;
-			}
-		}
-
-		if (deltaAlt<0)
-		{
-			deltaAlt = -depl/30;
-			if (deltaAlt<-0.2)
-				deltaAlt = -0.2;
-		}
-		else
-		{
-			if (deltaAlt>0)
-			{
-				deltaAlt = depl/30;
-				if (deltaAlt>0.2)
-					deltaAlt = 0.2;
-			}
-		}
+		double deltaAz = moveX*depl;
+		double deltaAlt = moveY*depl;
 
 		mvmgr->panView(deltaAz,deltaAlt);
 
@@ -357,18 +328,16 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 	}
 	else if(operation == "move")
 	{
-		QString xs = QString::fromUtf8(parameters.value("x"));
-		QString ys = QString::fromUtf8(parameters.value("y"));
-
 		bool xOk,yOk;
-		float x = xs.toInt(&xOk);
-		float y = ys.toInt(&yOk);
+
+		double x = parameters.value("x").toDouble(&xOk);
+		double y = parameters.value("y").toDouble(&yOk);
 
 		if(xOk || yOk)
 		{
 			QMetaObject::invokeMethod(this,"updateMovement", SERVICE_DEFAULT_INVOKETYPE,
-						  Q_ARG(float,x),
-						  Q_ARG(float,y),
+						  Q_ARG(double,x),
+						  Q_ARG(double,y),
 						  Q_ARG(bool,xOk),
 						  Q_ARG(bool,yOk));
 
@@ -532,7 +501,7 @@ void MainService::focusPosition(const Vec3d &pos)
 	mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
 }
 
-void MainService::updateMovement(float x, float y, bool xUpdated, bool yUpdated)
+void MainService::updateMovement(double x, double y, bool xUpdated, bool yUpdated)
 {
 	if(xUpdated)
 	{
