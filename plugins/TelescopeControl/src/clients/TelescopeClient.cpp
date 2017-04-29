@@ -267,6 +267,8 @@ void TelescopeTCP::hangup(void)
 //! "Stellarium telescope control protocol" text file
 void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
+	Q_UNUSED(selectObject);
+
 	if (!isConnected())
 		return;
 
