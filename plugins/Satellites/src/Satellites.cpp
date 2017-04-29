@@ -254,10 +254,13 @@ double Satellites::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+	if (!hintFader)
+		return result;
+
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
 	Vec3d v(av);
@@ -282,7 +285,11 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 
 StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+	if (!hintFader)
+		return NULL;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return NULL;
 	
 	QString objw = nameI18n.toUpper();
@@ -305,7 +312,11 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 
 StelObjectP Satellites::searchByName(const QString& englishName) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+	if (!hintFader)
+		return NULL;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return NULL;
 
 	QString objw = englishName.toUpper();
@@ -328,7 +339,11 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 
 StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+	if (!hintFader)
+		return NULL;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return NULL;
 	
 	// If the search string is a catalog number...
@@ -353,13 +368,12 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!hintFader
-		|| maxNbItem <= 0
-		|| StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName()
-		|| !isValidRangeDates())
-	{
+	if (!hintFader || maxNbItem <= 0)
 		return result;
-	}
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
+		return result;
 
 	QString objw = objPrefix.toUpper();
 
@@ -404,7 +418,12 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 QStringList Satellites::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+
+	if (!hintFader)
+		return result;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
 	if (inEnglish)
@@ -1587,7 +1606,8 @@ void Satellites::update(double deltaTime)
 	if (!hintFader && hintFader.getInterstate() <= 0.)
 		return;
 
-	if (StelApp::getInstance().getCore()->getCurrentPlanet() != earth || !isValidRangeDates())
+	StelCore *core = StelApp::getInstance().getCore();
+	if (core->getCurrentPlanet() != earth || !isValidRangeDates(core))
 		return;
 
 	hintFader.update((int)(deltaTime*1000));
@@ -1604,7 +1624,8 @@ void Satellites::draw(StelCore* core)
 	// Separated because first test should be very fast.
 	if (!hintFader && hintFader.getInterstate() <= 0.)
 		return;
-	if (core->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
@@ -1681,10 +1702,10 @@ bool Satellites::checkJsonFileFormat()
 
 }
 
-bool Satellites::isValidRangeDates() const
+bool Satellites::isValidRangeDates(const StelCore *core) const
 {
 	bool ok;
-	double tJD = StelApp::getInstance().getCore()->getJD();
+	double tJD = core->getJD();
 	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
 	if (lastUpdate.isNull()) // No updates yet?
 		uJD = tJD;

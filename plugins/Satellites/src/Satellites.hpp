@@ -498,7 +498,7 @@ private:
 	void restoreDefaultQSMagFile();
 
 	//! Checks valid range dates of life of satellites
-	bool isValidRangeDates() const;
+	bool isValidRangeDates(const StelCore* core) const;
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.
