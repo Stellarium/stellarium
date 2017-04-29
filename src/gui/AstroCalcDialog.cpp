@@ -172,6 +172,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
+	connect(ui->phenomenaCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupPhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
 	connect(ui->object1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialBody(int)));
@@ -661,6 +662,11 @@ void AstroCalcDialog::savePhenomenaCelestialGroup(int index)
 	Q_ASSERT(ui->object2ComboBox);
 	QComboBox* group = ui->object2ComboBox;
 	conf->setValue("astrocalc/phenomena_celestial_group", group->itemData(index).toInt());
+}
+
+void AstroCalcDialog::cleanupPhenomena()
+{
+	ui->phenomenaTreeWidget->clear();
 }
 
 void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
