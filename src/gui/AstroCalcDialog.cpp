@@ -168,6 +168,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->ephemerisStepComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeStep(int)));
 	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
 
+	ui->phenomenaOppositionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_opposition", false).toBool());
+	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
+
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPhenomen(QModelIndex)));
 	connect(ui->phenomenaSaveButton, SIGNAL(clicked()), this, SLOT(savePhenomena()));
@@ -660,6 +663,11 @@ void AstroCalcDialog::savePhenomenaCelestialGroup(int index)
 	conf->setValue("astrocalc/phenomena_celestial_group", group->itemData(index).toInt());
 }
 
+void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
+{
+	conf->setValue("astrocalc/flag_phenomena_opposition", b);
+}
+
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
@@ -914,6 +922,7 @@ void AstroCalcDialog::calculatePhenomena()
 {
 	QString currentPlanet = ui->object1ComboBox->currentData().toString();
 	double separation = ui->allowedSeparationDoubleSpinBox->value();
+	bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
 
 	initListPhenomena();
 
@@ -1056,7 +1065,8 @@ void AstroCalcDialog::calculatePhenomena()
 				// conjunction
 				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, false), planet, obj, false);
 				// opposition
-				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
+				if (opposition)
+					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
 			}
 		}
 		else if (obj2Type==9)
