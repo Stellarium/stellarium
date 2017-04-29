@@ -23,6 +23,7 @@
 
 #include "VecMath.hpp"
 #include "StelModule.hpp"
+#include "Planet.hpp"
 
 class SkyGrid;
 class SkyLine;
@@ -868,6 +869,7 @@ private slots:
 	void updateLineLabels();
 
 private:
+	QSharedPointer<Planet> earth;
 	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
 	SkyGrid * equGrid;			// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid

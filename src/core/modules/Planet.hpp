@@ -247,7 +247,7 @@ public:
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingnode(void) const {return re.ascendingNode;}
+	double getRotAscendingNode(void) const {return re.ascendingNode;}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
