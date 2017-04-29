@@ -549,10 +549,16 @@
       </div>
       <div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
           <div class="flex">
-              <div class="smallblock smallblock128">
+              <div class="smallblock">
                   <h3><?= tr("Interaction")?></h3>
                   <p class="margin-none"><?= tr("Current scene:")?></p>
                   <p id="s3d_curscene" class="bold margin-none"><?= tr("-none-")?></p>
+                  <div class="innerblock inline-block">
+                      <h3><?= tr("View controls")?></h3>
+                      <div class="joystickcontainer">
+                          <div id="s3d_viewjoy" class="joystick"></div>
+                      </div>
+                  </div>
                   <div class="innerblock inline-block">
                       <h3><?= tr("Movement controls")?></h3>
                       <div class="joystickcontainer">

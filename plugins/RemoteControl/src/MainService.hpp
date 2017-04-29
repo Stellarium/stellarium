@@ -80,7 +80,7 @@ private slots:
 	bool focusObject(const QString& name, SelectionMode mode);
 	void focusPosition(const Vec3d& pos);
 
-	void updateMovement(float x, float y, bool xUpdated, bool yUpdated);
+	void updateMovement(double x, double y, bool xUpdated, bool yUpdated);
 	// Allow azimut/altitude changes. Values must be in Radians.
 	void updateView(double az, double alt, bool azUpdated, bool altUpdated);
 	void setFov(double fov);
@@ -99,7 +99,7 @@ private:
 	StelScriptMgr* scriptMgr;
 	StelSkyCultureMgr* skyCulMgr;
 
-	float moveX,moveY;
+	double moveX,moveY;
 	qint64 lastMoveUpdateTime;
 
 	struct ActionCacheEntry
