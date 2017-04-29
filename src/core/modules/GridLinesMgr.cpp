@@ -24,6 +24,7 @@
 #include "StelProjector.hpp"
 #include "StelFader.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
@@ -1043,10 +1044,11 @@ void SkyPoint::draw(StelCore *core) const
 }
 
 
-GridLinesMgr::GridLinesMgr():
- gridlinesDisplayed(true)
+GridLinesMgr::GridLinesMgr()
+	: gridlinesDisplayed(true)
 {
 	setObjectName("GridLinesMgr");
+
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
 	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEclipticJ2000);
@@ -1081,6 +1083,8 @@ GridLinesMgr::GridLinesMgr():
 	equinoxPoints = new SkyPoint(SkyPoint::EQUINOXES_OF_DATE);
 	solsticeJ2000Points = new SkyPoint(SkyPoint::SOLSTICES_J2000);
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
+
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -1291,14 +1295,26 @@ void GridLinesMgr::draw(StelCore* core)
 {
 	if (!gridlinesDisplayed)
 		return;
+
 	galacticGrid->draw(core);
 	supergalacticGrid->draw(core);
 	eclJ2000Grid->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
 	// Of course, orbital plane of respective planet would be better, but is not implemented.
-	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+	if (core->getCurrentPlanet()==earth)
+	{
 		eclGrid->draw(core);
+		eclipticLine->draw(core);
+		precessionCircleN->draw(core);
+		precessionCircleS->draw(core);
+		colureLine_1->draw(core);
+		colureLine_2->draw(core);
+		eclipticPoles->draw(core);
+		equinoxPoints->draw(core);
+		solsticePoints->draw(core);
+	}
+
 	equJ2000Grid->draw(core);
 	equGrid->draw(core);
 	aziGrid->draw(core);
@@ -1306,14 +1322,6 @@ void GridLinesMgr::draw(StelCore* core)
 	galacticEquatorLine->draw(core);
 	supergalacticEquatorLine->draw(core);
 	eclipticJ2000Line->draw(core);
-	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
-	{
-		eclipticLine->draw(core);
-		precessionCircleN->draw(core);
-		precessionCircleS->draw(core);
-		colureLine_1->draw(core);
-		colureLine_2->draw(core);
-	}
 	longitudeLine->draw(core);
 	equatorJ2000Line->draw(core);
 	equatorLine->draw(core);
@@ -1326,13 +1334,10 @@ void GridLinesMgr::draw(StelCore* core)
 	celestialPoles->draw(core);
 	zenithNadir->draw(core);
 	eclipticJ2000Poles->draw(core);
-	eclipticPoles->draw(core);
 	galacticPoles->draw(core);
 	supergalacticPoles->draw(core);
 	equinoxJ2000Points->draw(core);
-	equinoxPoints->draw(core);
-	solsticeJ2000Points->draw(core);
-	solsticePoints->draw(core);
+	solsticeJ2000Points->draw(core);	
 }
 
 void GridLinesMgr::updateLineLabels()
