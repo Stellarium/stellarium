@@ -143,6 +143,7 @@ public:
 	//! Re-translates the label.
 	void updateLabel();
 private:
+	QSharedPointer<Planet> earth, sun;
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
 	StelCore::FrameType frameType;
@@ -616,6 +617,9 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
 
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	sun = GETSTELMODULE(SolarSystem)->getSun();
+
 	updateLabel();
 }
 
@@ -670,7 +674,7 @@ void SkyLine::updateLabel()
 			label = q_("Supergalactic Equator");
 			break;
 		case LONGITUDE:
-			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
 			label = q_("O./C. longitude");
 			break;
@@ -806,10 +810,15 @@ void SkyLine::draw(StelCore *core) const
 	}
 	if (line_type==LONGITUDE)
 	{
-		Vec3d coord;
-		double lambda, beta;
-		StelUtils::rectToSphe(&lambda, &beta, core->getCurrentPlanet()->getHeliocentricEclipticPos());
-		StelUtils::spheToRect(lambda + M_PI/2., 0., coord);
+		Vec3d coord;		
+		double eclJDE = earth->getRotObliquity(core->getJDE());
+		double ra_equ, dec_equ, lambdaJDE, betaJDE;
+
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, sun->getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
+		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
+
+		StelUtils::spheToRect(lambdaJDE + M_PI/2., 0., coord);
 		meridianSphericalCap.n.set(coord[0],coord[1],coord[2]);
 		fpt.set(0,0,1);
 	}
@@ -1313,6 +1322,7 @@ void GridLinesMgr::draw(StelCore* core)
 		eclipticPoles->draw(core);
 		equinoxPoints->draw(core);
 		solsticePoints->draw(core);
+		longitudeLine->draw(core);
 	}
 
 	equJ2000Grid->draw(core);
@@ -1321,8 +1331,7 @@ void GridLinesMgr::draw(StelCore* core)
 	// Lines after grids, to be able to e.g. draw equators in different color!
 	galacticEquatorLine->draw(core);
 	supergalacticEquatorLine->draw(core);
-	eclipticJ2000Line->draw(core);
-	longitudeLine->draw(core);
+	eclipticJ2000Line->draw(core);	
 	equatorJ2000Line->draw(core);
 	equatorLine->draw(core);
 	meridianLine->draw(core);
