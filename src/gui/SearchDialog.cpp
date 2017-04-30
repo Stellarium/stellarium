@@ -404,7 +404,8 @@ void SearchDialog::setHasSelectedFlag()
 void SearchDialog::enableSimbadSearch(bool enable)
 {
 	useSimbad = enable;	
-	conf->setValue("search/flag_search_online", useSimbad);	
+	conf->setValue("search/flag_search_online", useSimbad);
+	ui->simbadStatusLabel->clear();
 }
 
 void SearchDialog::enableStartOfWordsAutofill(bool enable)
