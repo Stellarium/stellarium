@@ -105,26 +105,14 @@ public:
 		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
 
-/*	enum ApparentMagnitudeAlgorithm
-	{
-		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Harris,			// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
-		UndefinedAlgorithm,
-		Generic			// Visual magnitude based on phase angle and albedo
-	};
-*/
 	enum ApparentMagnitudeAlgorithm
 	{
-		Mueller_1893,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Astr_Alm_1984,	// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
-		Expl_Sup_1992,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
-		Expl_Sup_2013,	// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
-//		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-//		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-//		Harris,			// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		Mueller_1893,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Astr_Alm_1984,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
+		Expl_Sup_1992,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
+		Expl_Sup_2013,		// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
 		UndefinedAlgorithm,
-		Generic		// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
+		Generic			// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
 
 
