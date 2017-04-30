@@ -2929,6 +2929,9 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="asterismLineThicknessSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="decimals">
                   <number>0</number>
                  </property>
