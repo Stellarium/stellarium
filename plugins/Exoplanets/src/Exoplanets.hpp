@@ -187,6 +187,33 @@ public:
 			case 5:
 				return EPAngleDistanceAll;
 				break;
+			case 6:
+				return EPEffectiveTempHostStarAll;
+				break;
+			case 7:
+				return EPYearDiscoveryAll;
+				break;
+			case 8:
+				return EPMetallicityHostStarAll;
+				break;
+			case 9:
+				return EPVMagHostStarAll;
+				break;
+			case 10:
+				return EPRAHostStarAll;
+				break;
+			case 11:
+				return EPDecHostStarAll;
+				break;
+			case 12:
+				return EPDistanceHostStarAll;
+				break;
+			case 13:
+				return EPMassHostStarAll;
+				break;
+			case 14:
+				return EPRadiusHostStarAll;
+				break;
 			default:
 				return EPEccentricityAll;
 		}
@@ -326,7 +353,9 @@ private:
 	int EPCountAll;
 	int EPCountPH;
 
-	QList<double> EPEccentricityAll, EPSemiAxisAll, EPMassAll, EPRadiusAll, EPPeriodAll, EPAngleDistanceAll;
+	QList<double> EPEccentricityAll, EPSemiAxisAll, EPMassAll, EPRadiusAll, EPPeriodAll, EPAngleDistanceAll,
+		      EPEffectiveTempHostStarAll, EPYearDiscoveryAll, EPMetallicityHostStarAll, EPVMagHostStarAll,
+		      EPRAHostStarAll, EPDecHostStarAll, EPDistanceHostStarAll, EPMassHostStarAll, EPRadiusHostStarAll;
 
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
