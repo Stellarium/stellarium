@@ -92,6 +92,15 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	englishNames.clear();
 	translatedNames.clear();
 	exoplanetDesignations.clear();
+	effectiveTempHostStarList.clear();
+	yearDiscoveryList.clear();
+	metallicityHostStarList.clear();
+	vMagHostStarList.clear();
+	raHostStarList.clear();
+	decHostStarList.clear();
+	distanceHostStarList.clear();
+	massHostStarList.clear();
+	radiusHostStarList.clear();
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -155,6 +164,19 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 				periodList.append(p.period);
 			else
 				periodList.append(0);
+
+			if (p.discovered>0)
+				yearDiscoveryList.append(p.discovered);
+
+			effectiveTempHostStarList.append(effectiveTemp);
+			metallicityHostStarList.append(smetal);
+			if (Vmag<99)
+				vMagHostStarList.append(Vmag);
+			raHostStarList.append(RA);
+			decHostStarList.append(DE);
+			distanceHostStarList.append(distance);
+			massHostStarList.append(smass);
+			radiusHostStarList.append(sradius);
 		}
 	}
 
