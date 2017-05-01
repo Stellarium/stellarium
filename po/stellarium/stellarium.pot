@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 22:06+0700\n"
+"POT-Creation-Date: 2017-05-01 22:15+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1067,7 +1067,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:220 src/gui/AstroCalcDialog.cpp:648
-#: src/gui/AstroCalcDialog.cpp:1739 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:1735 src/translations.h:68
 msgid "Planets"
 msgstr ""
 
@@ -3040,49 +3040,49 @@ msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:649 src/gui/AstroCalcDialog.cpp:1745
+#: src/gui/AstroCalcDialog.cpp:649 src/gui/AstroCalcDialog.cpp:1741
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:650 src/gui/AstroCalcDialog.cpp:1747
+#: src/gui/AstroCalcDialog.cpp:650 src/gui/AstroCalcDialog.cpp:1743
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:651 src/gui/AstroCalcDialog.cpp:1746
+#: src/gui/AstroCalcDialog.cpp:651 src/gui/AstroCalcDialog.cpp:1742
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:652 src/gui/AstroCalcDialog.cpp:1748
+#: src/gui/AstroCalcDialog.cpp:652 src/gui/AstroCalcDialog.cpp:1744
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:653 src/gui/AstroCalcDialog.cpp:1749
+#: src/gui/AstroCalcDialog.cpp:653 src/gui/AstroCalcDialog.cpp:1745
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:654 src/gui/AstroCalcDialog.cpp:1750
+#: src/gui/AstroCalcDialog.cpp:654 src/gui/AstroCalcDialog.cpp:1746
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:655 src/gui/AstroCalcDialog.cpp:1751
+#: src/gui/AstroCalcDialog.cpp:655 src/gui/AstroCalcDialog.cpp:1747
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:656 src/gui/AstroCalcDialog.cpp:1752
+#: src/gui/AstroCalcDialog.cpp:656 src/gui/AstroCalcDialog.cpp:1748
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr ""
@@ -3098,7 +3098,7 @@ msgid "Bright star clusters (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:659 src/gui/AstroCalcDialog.cpp:1753
+#: src/gui/AstroCalcDialog.cpp:659 src/gui/AstroCalcDialog.cpp:1749
 #: src/translations.h:105 src/ui_viewDialog.h:2137 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr ""
@@ -3109,7 +3109,7 @@ msgid "Bright nebulae (<%1 mag)"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:661 src/gui/AstroCalcDialog.cpp:1742
+#: src/gui/AstroCalcDialog.cpp:661 src/gui/AstroCalcDialog.cpp:1738
 #: src/translations.h:107 src/ui_viewDialog.h:2140 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr ""
@@ -3184,30 +3184,21 @@ msgstr ""
 msgid "Any Time Tonight"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1726
-msgid ""
-"By default, the &quot;What's Up Tonight&quot; tool displays all objects "
-"which are above the horizon between sunset and midnight (i.e. &quot;in the "
-"evening&quot;). You can also choose to show objects which are up between "
-"midnight and down (i.e. &quot;in the morning&quot;), or objects which are up "
-"at any time between sunset and sunrise (i.e. &quot;any time tonight&quot;)."
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:1740
+#: src/gui/AstroCalcDialog.cpp:1736
 msgid "Bright stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1741 src/ui_viewDialog.h:2141
+#: src/gui/AstroCalcDialog.cpp:1737 src/ui_viewDialog.h:2141
 msgid "Bright nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1743 src/ui_viewDialog.h:2138
+#: src/gui/AstroCalcDialog.cpp:1739 src/ui_viewDialog.h:2138
 #: src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1744 src/translations.h:123
+#: src/gui/AstroCalcDialog.cpp:1740 src/translations.h:123
 #: src/ui_viewDialog.h:2136 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr ""
