@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 17:34+0700\n"
+"POT-Creation-Date: 2017-05-01 22:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1203,7 +1203,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:251 src/gui/StelGui.cpp:202
 #: src/gui/AstroCalcDialog.cpp:357 src/gui/AstroCalcDialog.cpp:896
-#: src/gui/BookmarksDialog.cpp:101 src/ui_dateTimeDialogGui.h:376
+#: src/gui/BookmarksDialog.cpp:105 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
@@ -2952,11 +2952,13 @@ msgstr ""
 
 #. TRANSLATORS: right ascension
 #: src/gui/AstroCalcDialog.cpp:235 src/gui/AstroCalcDialog.cpp:360
+#: src/gui/BookmarksDialog.cpp:102
 msgid "RA (J2000)"
 msgstr ""
 
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:237 src/gui/AstroCalcDialog.cpp:362
+#: src/gui/BookmarksDialog.cpp:104
 msgid "Dec (J2000)"
 msgstr ""
 
@@ -3218,8 +3220,12 @@ msgstr ""
 msgid "Localized name"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:102
+#: src/gui/BookmarksDialog.cpp:106
 msgid "Location of observer"
+msgstr ""
+
+#: src/gui/BookmarksDialog.cpp:165
+msgid "Unnamed object"
 msgstr ""
 
 #: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1469
