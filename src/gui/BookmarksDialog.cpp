@@ -98,13 +98,17 @@ void BookmarksDialog::setBookmarksHeaderNames()
 	headerStrings << "UUID"; // Hide the column
 	headerStrings << q_("Object");
 	headerStrings << q_("Localized name");
+	//TRANSLATORS: right ascension
+	headerStrings << q_("RA (J2000)");
+	//TRANSLATORS: declination
+	headerStrings << q_("Dec (J2000)");
 	headerStrings << q_("Date and Time");	
 	headerStrings << q_("Location of observer");
 
 	bookmarksListModel->setHorizontalHeaderLabels(headerStrings);
 }
 
-void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString nameI18n, QString Date, QString Location)
+void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString nameI18n, QString RA, QString Dec, QString Date, QString Location)
 {
 	QStandardItem* tempItem = 0;
 
@@ -119,6 +123,14 @@ void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QStrin
 	tempItem = new QStandardItem(nameI18n);
 	tempItem->setEditable(false);
 	bookmarksListModel->setItem(number, ColumnNameI18n, tempItem);
+
+	tempItem = new QStandardItem(RA);
+	tempItem->setEditable(false);
+	bookmarksListModel->setItem(number, ColumnRA, tempItem);
+
+	tempItem = new QStandardItem(Dec);
+	tempItem->setEditable(false);
+	bookmarksListModel->setItem(number, ColumnDec, tempItem);
 
 	tempItem = new QStandardItem(Date);
 	tempItem->setEditable(false);
@@ -144,48 +156,63 @@ void BookmarksDialog::addBookmarkButtonPressed()
 		if (selected[0]->getType()=="Nebula")
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
-		if (!name.isEmpty()) // Don't allow adding objects without name!
+		QString raStr = "", decStr = "";
+		if (name.isEmpty() || name.contains("marker", Qt::CaseInsensitive))
 		{
-			bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
-			bool locationFlag = ui->locationCheckBox->isChecked();
-
-			QString JDs = "";
-			double JD = -1.;
-
-			if (dateTimeFlag)
+			if (name.isEmpty())
 			{
-				JD = core->getJD();
-				JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)/24.).replace("T", " ");
+				name = "Unnamed object";
+				nameI18n = q_("Unnamed object");
 			}
-
-			QString Location = "";
-			if (locationFlag)
-			{
-				StelLocation loc = core->getCurrentLocation();
-				if (loc.name.isEmpty())
-					Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
-				else
-					Location = QString("%1, %2").arg(loc.name).arg(loc.country);
-			}
-
-			int lastRow = bookmarksListModel->rowCount();
-
-			QString uuid = QUuid::createUuid().toString();
-			addModelRow(lastRow, uuid, name, nameI18n, JDs, Location);
-
-			bookmark bm;
-			bm.name	= name;
-			if (!nameI18n.isEmpty())
-				bm.nameI18n = nameI18n;
-			if (!JDs.isEmpty())
-				bm.jd	= QString::number(JD, 'f', 6);
-			if (!Location.isEmpty())
-				bm.location = Location;
-
-			bookmarksCollection.insert(uuid, bm);
-
-			saveBookmarks();
+			float ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, selected[0]->getJ2000EquatorialPos(core));
+			raStr = StelUtils::radToHmsStr(ra, false);
+			decStr = StelUtils::radToDmsStr(dec, false);
 		}
+
+		bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
+		bool locationFlag = ui->locationCheckBox->isChecked();
+
+		QString JDs = "";
+		double JD = -1.;
+
+		if (dateTimeFlag)
+		{
+			JD = core->getJD();
+			JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)/24.).replace("T", " ");
+		}
+
+		QString Location = "";
+		if (locationFlag)
+		{
+			StelLocation loc = core->getCurrentLocation();
+			if (loc.name.isEmpty())
+				Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
+			else
+				Location = QString("%1, %2").arg(loc.name).arg(loc.country);
+		}
+
+		int lastRow = bookmarksListModel->rowCount();
+
+		QString uuid = QUuid::createUuid().toString();
+		addModelRow(lastRow, uuid, name, nameI18n, raStr, decStr, JDs, Location);
+
+		bookmark bm;
+		bm.name	= name;
+		if (!nameI18n.isEmpty())
+			bm.nameI18n = nameI18n;
+		if (!raStr.isEmpty())
+			bm.ra = raStr;
+		if (!decStr.isEmpty())
+			bm.dec = decStr;
+		if (!JDs.isEmpty())
+			bm.jd	= QString::number(JD, 'f', 6);
+		if (!Location.isEmpty())
+			bm.location = Location;
+
+		bookmarksCollection.insert(uuid, bm);
+
+		saveBookmarks();
 	}
 }
 
@@ -232,16 +259,26 @@ void BookmarksDialog::goToBookmark(QString uuid)
 			core->moveObserverTo(locationMgr->locationForString(bm.location));
 		}
 
+		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 		objectMgr->unSelect();
-		if (objectMgr->findAndSelect(bm.name))
+		if (bm.ra.isEmpty() && bm.dec.isEmpty())
 		{
-			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-			if (!newSelected.empty())
+			if (objectMgr->findAndSelect(bm.name))
 			{
-				StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setFlagTracking(true);
+				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+				if (!newSelected.empty())
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
 			}
+		}
+		else
+		{
+			Vec3d pos;
+			StelUtils::spheToRect(StelUtils::getDecAngle(bm.ra.trimmed()), StelUtils::getDecAngle(bm.dec.trimmed()), pos);
+			mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
+			mvmgr->setFlagLockEquPos(true);
 		}
 	}
 }
@@ -281,9 +318,15 @@ void BookmarksDialog::loadBookmarks()
 		QString Location = bookmarkData.value("location").toString();
 		if (!Location.isEmpty())
 			bm.location = Location;
+		QString RA = bookmarkData.value("ra").toString();
+		if (!RA.isEmpty())
+			bm.ra = RA;
+		QString Dec = bookmarkData.value("dec").toString();
+		if (!Dec.isEmpty())
+			bm.dec = Dec;
 
 		bookmarksCollection.insert(bookmarkKey, bm);
-		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
+		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, bm.ra, bm.dec, JDs, Location);
 		i++;
 	}
 }
@@ -314,6 +357,10 @@ void BookmarksDialog::saveBookmarks()
 	    bm.insert("name",	sp.name);
 	    if (!sp.nameI18n.isEmpty())
 		    bm.insert("nameI18n", sp.nameI18n);
+	    if (!sp.ra.isEmpty())
+		    bm.insert("ra", sp.ra);
+	    if (!sp.dec.isEmpty())
+		    bm.insert("dec", sp.dec);
 	    if (!sp.jd.isEmpty())
 		    bm.insert("jd", sp.jd);
 	    if (!sp.location.isEmpty())
