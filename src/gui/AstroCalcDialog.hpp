@@ -132,6 +132,11 @@ private slots:
 	//! Show info from graphs under mouse cursor
 	void mouseOverLine(QMouseEvent *event);
 
+	// WUT
+	void saveWutMagnitudeLimit(double mag);
+	void calculateWutObjects();
+	void selectWutObject();
+
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 	void updateSolarSystemData();
@@ -145,6 +150,8 @@ private:
 	class StelLocaleMgr* localeMgr;
 	QSettings* conf;
 	QTimer *currentTimeLine;
+	QHash<QString,QString> wutObjects;
+	QHash<QString,int> wutCategories;
 
 	//! Update header names for planetary positions table
 	void setPlanetaryPositionsHeaderNames();
@@ -173,6 +180,10 @@ private:
 	void populateGroupCelestialBodyList();	
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
+	//! Populates the drop-down list of time intervals for WUT tool.
+	void populateTimeIntervalsList();
+	//! Populates the list of groups for WUT tool.
+	void populateWutGroups();
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate

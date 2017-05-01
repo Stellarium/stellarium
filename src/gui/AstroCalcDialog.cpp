@@ -90,6 +90,8 @@ void AstroCalcDialog::retranslate()
 		populateGroupCelestialBodyList();		
 		currentPlanetaryPositions();
 		drawAltVsTimeDiagram();
+		populateTimeIntervalsList();
+		populateWutGroups();
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();		
@@ -132,6 +134,9 @@ void AstroCalcDialog::createDialogContent()
 	// Altitude vs. Time feature
 	prepareAxesAndGraph();
 	drawCurrentTimeDiagram();
+	// WUT
+	populateTimeIntervalsList();
+	populateWutGroups();
 
 	double JD = core->getJD() + core->getUTCOffset(core->getJD())/24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
@@ -186,6 +191,12 @@ void AstroCalcDialog::createDialogContent()
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
+
+	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
+	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
+	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(calculateWutObjects()));
+	connect(ui->wutCategoryListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(calculateWutObjects()));
+	connect(ui->wutMatchingObjectsListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectWutObject()));
 
 	currentPlanetaryPositions();
 
@@ -642,12 +653,13 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Cubewanos"), "6");
 	groups->addItem(q_("Scattered disc objects"), "7");
 	groups->addItem(q_("Oort cloud objects"), "8");
-	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit-5.0f, 'f', 1)), "9");
-	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "10");
-	groups->addItem(q_("Planetary nebulae"), "11");
-	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "12");
-	groups->addItem(q_("Dark nebulae"), "13");
-	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "14");
+	groups->addItem(q_("Sednoids"), "9");
+	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit-5.0f, 'f', 1)), "10");
+	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "11");
+	groups->addItem(q_("Planetary nebulae"), "12");
+	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "13");
+	groups->addItem(q_("Dark nebulae"), "14");
+	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "15");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -1010,42 +1022,49 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		case 9: // Stars
+		case 9: // Sednoids
+			foreach(const PlanetP& object, allObjects)
+			{
+				if (object->getPlanetType()==Planet::isSednoid)
+					objects.append(object);
+			}
+			break;
+		case 10: // Stars
 			foreach(const StelObjectP& object, hipStars)
 			{
 				if (object->getVMagnitude(core)<(brightLimit-5.0f))
 					star.append(object);
 			}
 			break;
-		case 10: // Star clusters
+		case 11: // Star clusters
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebCl || object->getDSOType()==Nebula::NebOc || object->getDSOType()==Nebula::NebGc || object->getDSOType()==Nebula::NebSA || object->getDSOType()==Nebula::NebSC || object->getDSOType()==Nebula::NebCn))
 					dso.append(object);
 			}
 			break;
-		case 11: // Planetary nebulae
+		case 12: // Planetary nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getDSOType()==Nebula::NebPn || object->getDSOType()==Nebula::NebPossPN || object->getDSOType()==Nebula::NebPPN)
 					dso.append(object);
 			}
 			break;
-		case 12: // Bright nebulae
+		case 13: // Bright nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
-		case 13: // Dark nebulae
+		case 14: // Dark nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getDSOType()==Nebula::NebDn || object->getDSOType()==Nebula::NebMolCld || object->getDSOType()==Nebula::NebYSO)
 					dso.append(object);
 			}
 			break;
-		case 14: // Galaxies
+		case 15: // Galaxies
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
@@ -1063,7 +1082,7 @@ void AstroCalcDialog::calculatePhenomena()
 		startJD = startJD - core->getUTCOffset(startJD)/24;
 		stopJD = stopJD - core->getUTCOffset(stopJD)/24;
 
-		if (obj2Type<9)
+		if (obj2Type<10)
 		{
 			// Solar system objects
 			foreach (PlanetP obj, objects)
@@ -1075,7 +1094,7 @@ void AstroCalcDialog::calculatePhenomena()
 					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
 			}
 		}
-		else if (obj2Type==9)
+		else if (obj2Type==10)
 		{
 			// Stars
 			foreach (StelObjectP obj, star)
@@ -1680,5 +1699,357 @@ void AstroCalcDialog::updateSolarSystemData()
 		populateCelestialBodyList();
 		populateGroupCelestialBodyList();
 		currentPlanetaryPositions();
+	}
+}
+
+void AstroCalcDialog::populateTimeIntervalsList()
+{
+	Q_ASSERT(ui->wutComboBox);
+
+	QComboBox* wut = ui->wutComboBox;
+	wut->blockSignals(true);
+	int index = wut->currentIndex();
+	QVariant selectedIntervalId = wut->itemData(index);
+
+	wut->clear();
+	wut->addItem(q_("In the Evening"), "0");
+	wut->addItem(q_("In the Morning"), "1");
+	wut->addItem(q_("Any Time Tonight"), "2");
+
+	index = wut->findData(selectedIntervalId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index<0)
+		index = wut->findData(conf->value("astrocalc/wut_time_interval", "0").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+	wut->setCurrentIndex(index);
+	wut->model()->sort(0);
+	wut->blockSignals(false);
+
+	QString info = q_("By default, the &quot;What's Up Tonight&quot; tool displays all objects which are above the horizon between sunset and midnight (i.e. &quot;in the evening&quot;). You can also choose to show objects which are up between midnight and down (i.e. &quot;in the morning&quot;), or objects which are up at any time between sunset and sunrise (i.e. &quot;any time tonight&quot;).");
+	ui->wutComboBox->setToolTip(QString("<p>%1</p>").arg(info));
+	ui->wutTimeIntervalLabel->setToolTip(QString("<p>%1</p>").arg(info));
+}
+
+void AstroCalcDialog::populateWutGroups()
+{
+	Q_ASSERT(ui->wutCategoryListWidget);
+
+	QListWidget* category = ui->wutCategoryListWidget;
+	category->blockSignals(true);
+
+	wutCategories.clear();
+	wutCategories.insert(q_("Planets"), 0);
+	wutCategories.insert(q_("Bright stars"), 1);
+	wutCategories.insert(q_("Bright nebulae"), 2);
+	wutCategories.insert(q_("Dark nebulae"), 3);
+	wutCategories.insert(q_("Galaxies"), 4);
+	wutCategories.insert(q_("Star clusters"), 5);
+	wutCategories.insert(q_("Asteroids"), 6);
+	wutCategories.insert(q_("Comets"), 7);
+	wutCategories.insert(q_("Plutinos"), 8);
+	wutCategories.insert(q_("Dwarf planets"), 9);
+	wutCategories.insert(q_("Cubewanos"), 10);
+	wutCategories.insert(q_("Scattered disc objects"), 11);
+	wutCategories.insert(q_("Oort cloud objects"), 12);
+	wutCategories.insert(q_("Sednoids"), 13);
+	wutCategories.insert(q_("Planetary nebulae"), 14);
+
+	category->clear();
+	category->addItems(wutCategories.keys());
+	category->sortItems(Qt::AscendingOrder);
+
+	category->blockSignals(false);
+}
+
+void AstroCalcDialog::saveWutMagnitudeLimit(double mag)
+{
+	conf->setValue("astrocalc/wut_magnitude_limit", QString::number(mag, 'f', 2));
+	calculateWutObjects();
+}
+
+void AstroCalcDialog::calculateWutObjects()
+{
+	ui->wutMatchingObjectsListWidget->clear();
+	if(ui->wutCategoryListWidget->currentItem())
+	{
+		QString categoryName = ui->wutCategoryListWidget->currentItem()->text();
+		int categoryId = wutCategories.value(categoryName);
+
+		wutObjects.clear();
+
+		QList<PlanetP> allObjects = solarSystem->getAllPlanets();
+		QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
+		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
+
+		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
+		double highLimit = 6.0;
+		double JD = core->getJD();
+		double wutJD = (int)JD;
+		double az, alt;
+
+		QComboBox* wut = ui->wutComboBox;
+		switch (wut->itemData(wut->currentIndex()).toInt())
+		{
+			case 1: // Morning
+				wutJD += 0.75;
+				break;
+			case 2: // Midnight
+				wutJD += 0.5;
+				break;
+			default: // Evening
+				wutJD += 1.25;
+				break;
+		}
+		core->setJD(wutJD);
+		core->update(0);
+
+		switch (categoryId)
+		{
+			case 1: // Bright stars
+				foreach(const StelObjectP& object, hipStars)
+				{
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 2: // Bright nebulae
+				foreach(const NebulaP& object, allDSO)
+				{
+					Nebula::NebulaType ntype = object->getDSOType();
+					if ((ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+						{
+							QString d = object->getDSODesignation();
+							if (object->getNameI18n().isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(object->getNameI18n(), d);
+						}
+					}
+				}
+				break;
+			case 3: // Dark nebulae
+				foreach(const NebulaP& object, allDSO)
+				{
+					Nebula::NebulaType ntype = object->getDSOType();
+					if ((ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+						{
+							QString d = object->getDSODesignation();
+							if (object->getNameI18n().isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(object->getNameI18n(), d);
+						}
+					}
+				}
+				break;
+			case 4: // Galaxies
+				foreach(const NebulaP& object, allDSO)
+				{
+					Nebula::NebulaType ntype = object->getDSOType();
+					if ((ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+						{
+							QString d = object->getDSODesignation();
+							if (object->getNameI18n().isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(object->getNameI18n(), d);
+						}
+					}
+				}
+				break;
+			case 5: // Star clusters
+				foreach(const NebulaP& object, allDSO)
+				{
+					Nebula::NebulaType ntype = object->getDSOType();
+					if ((ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+						{
+							QString d = object->getDSODesignation();
+							if (object->getNameI18n().isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(object->getNameI18n(), d);
+						}
+					}
+				}
+				break;
+			case 6: // Asteroids
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isAsteroid && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 7: // Comets
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isComet && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 8: // Plutinos
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isPlutino && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 9: // Dwarf planets
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 10: // Cubewanos
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isCubewano && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 11: // Scattered disc objects
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isSDO && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 12: // Oort cloud objects
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isOCO && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 13: // Sednoids
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isSednoid && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 14: // Planetary nebulae
+				foreach(const NebulaP& object, allDSO)
+				{
+					Nebula::NebulaType ntype = object->getDSOType();
+					if ((ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+						{
+							if (object->getNameI18n().isEmpty())
+								wutObjects.insert(object->getDSODesignation(), object->getDSODesignation());
+							else
+								wutObjects.insert(object->getNameI18n(), object->getDSODesignation());
+						}
+					}
+				}
+				break;
+			default: // Planets
+				foreach(const PlanetP& object, allObjects)
+				{
+					if (object->getPlanetType()==Planet::isPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+		}
+
+		core->setJD(JD);
+		ui->wutMatchingObjectsListWidget->blockSignals(true);
+		ui->wutMatchingObjectsListWidget->clear();
+		ui->wutMatchingObjectsListWidget->addItems(wutObjects.keys());
+		ui->wutMatchingObjectsListWidget->sortItems(Qt::AscendingOrder);
+		ui->wutMatchingObjectsListWidget->blockSignals(false);
+	}
+}
+
+void AstroCalcDialog::selectWutObject()
+{
+	if(ui->wutMatchingObjectsListWidget->currentItem())
+	{
+		QString wutObjectEnglisName = wutObjects.value(ui->wutMatchingObjectsListWidget->currentItem()->text());
+		if (objectMgr->findAndSelectI18n(wutObjectEnglisName) || objectMgr->findAndSelect(wutObjectEnglisName))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=core->getCurrentLocation().planetName)
+				{
+					StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
+			}
+		}
 	}
 }
