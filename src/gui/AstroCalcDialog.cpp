@@ -1722,10 +1722,6 @@ void AstroCalcDialog::populateTimeIntervalsList()
 	wut->setCurrentIndex(index);
 	wut->model()->sort(0);
 	wut->blockSignals(false);
-
-	QString info = q_("By default, the &quot;What's Up Tonight&quot; tool displays all objects which are above the horizon between sunset and midnight (i.e. &quot;in the evening&quot;). You can also choose to show objects which are up between midnight and down (i.e. &quot;in the morning&quot;), or objects which are up at any time between sunset and sunrise (i.e. &quot;any time tonight&quot;).");
-	ui->wutComboBox->setToolTip(QString("<p>%1</p>").arg(info));
-	ui->wutTimeIntervalLabel->setToolTip(QString("<p>%1</p>").arg(info));
 }
 
 void AstroCalcDialog::populateWutGroups()
