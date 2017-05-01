@@ -1788,13 +1788,13 @@ void AstroCalcDialog::calculateWutObjects()
 		QComboBox* wut = ui->wutComboBox;
 		switch (wut->itemData(wut->currentIndex()).toInt())
 		{
-			case 1: // Morning
+			case 1: // Morning (6:00 UTC)
 				wutJD += 0.75;
 				break;
-			case 2: // Midnight
+			case 2: // Midnight (0:00 UTC)
 				wutJD += 0.5;
 				break;
-			default: // Evening
+			default: // Evening (18:00 UTC)
 				wutJD += 1.25;
 				break;
 		}
