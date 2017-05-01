@@ -1785,17 +1785,33 @@ void AstroCalcDialog::calculateWutObjects()
 		double wutJD = (int)JD;
 		double az, alt;
 
+		// Dirty hack to calculate sunrise/sunset
+		// FIXME: This block of code should be replaced in future!
+		float phi = core->getCurrentLocation().latitude;
+		double dec_sidereal, ra_sidereal, ha_sidereal;
+		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,GETSTELMODULE(SolarSystem)->getSun()->getSiderealPosGeometric(core));
+		ha_sidereal = (2.*M_PI-ra_sidereal)*12/M_PI;
+		if (ha_sidereal>24.)
+			ha_sidereal -= 24.;
+		double cost = (-0.01483475 - sin(phi)*sin(dec_sidereal))/(cos(phi)*cos(dec_sidereal));
+		if (cost>1)
+			cost -= 1.;
+		if (cost<-1)
+			cost += 1.;
+		double h = std::abs(std::acos(cost)*180./M_PI)/360.;
+		wutJD += ((JD - wutJD)*24.0 - ha_sidereal)/24.0;
+
 		QComboBox* wut = ui->wutComboBox;
 		switch (wut->itemData(wut->currentIndex()).toInt())
 		{
-			case 1: // Morning (6:00 UTC)
-				wutJD += 0.75;
+			case 1: // Morning
+				wutJD += 0.5 + h;
 				break;
-			case 2: // Midnight (0:00 UTC)
+			case 2: // Night
 				wutJD += 0.5;
 				break;
-			default: // Evening (18:00 UTC)
-				wutJD += 1.25;
+			default: // Evening
+				wutJD += 0.5 - h;
 				break;
 		}
 		core->setJD(wutJD);
