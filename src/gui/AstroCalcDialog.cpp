@@ -196,7 +196,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
 	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(ui->wutCategoryListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(calculateWutObjects()));
-	connect(ui->wutMatchingObjectsListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectWutObject()));
+	connect(ui->wutMatchingObjectsListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectWutObject()));	
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 
 	currentPlanetaryPositions();
 
@@ -1699,6 +1700,7 @@ void AstroCalcDialog::updateSolarSystemData()
 		populateCelestialBodyList();
 		populateGroupCelestialBodyList();
 		currentPlanetaryPositions();
+		calculateWutObjects();
 	}
 }
 
