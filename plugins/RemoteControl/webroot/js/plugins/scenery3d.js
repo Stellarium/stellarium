@@ -1,5 +1,5 @@
-define(["jquery", "settings", "api/remotecontrol", "api/properties", "api/joystickqueue"],
-  function($, settings, rc, propApi, JoystickQueue) {
+define(["jquery", "settings", "api/remotecontrol", "api/properties"],
+  function($, settings, rc, propApi) {
     "use strict";
 
     if (!Date.now) {
@@ -85,10 +85,6 @@ define(["jquery", "settings", "api/remotecontrol", "api/properties", "api/joysti
       $s3d_list = $("#s3d_list");
       $s3d_info = $("#s3d_info");
       $s3d_curscene = $("#s3d_curscene");
-
-      //setup joysticks
-      new JoystickQueue($("#s3d_joy"), "/api/scenery3d/move", settings.s3dJoystickSpeed);
-      new JoystickQueue($("#s3d_viewjoy"), "/api/main/move", settings.joystickSpeed);
 
       loadScenes();
 

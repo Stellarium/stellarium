@@ -115,8 +115,8 @@
           <!-- part of ui/viecontrol.js -->
           <section id="view" class="block textcenter">
             <header><h2><?= tr("View")?></h2></header>
-            <div id="view_controls" class="ui-corner-all ui-widget-content">
-              <div id="view_upleft" class="joybutton"><?= tr("Up/Left")?></div><div id="view_up" class="joybutton"><?= tr("Up")?></div><div id="view_upright" class="joybutton"><?= tr("Up/Right")?></div><div id="view_left" class="joybutton"><?= tr("Left")?></div><div id="view_center" class="joybutton" title='<?= tr("Focus on selected object")?>'><?= tr("Focus on selection")?></div><div id="view_right" class="joybutton"><?= tr("Right")?></div><div id="view_downleft" class="joybutton"><?= tr("Down/Left")?></div><div id="view_down" class="joybutton"><?= tr("Down")?></div><div id="view_downright" class="joybutton"><?= tr("Down/Right")?></div>
+            <div class="joystickcontainer inline-block">
+                <div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
             </div>
             <div id="view_wrapper">
               <div id="view_fov"></div>
@@ -556,13 +556,13 @@
                   <div class="innerblock inline-block">
                       <h3><?= tr("View controls")?></h3>
                       <div class="joystickcontainer">
-                          <div id="s3d_viewjoy" class="joystick"></div>
+                          <div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
                       </div>
                   </div>
                   <div class="innerblock inline-block">
                       <h3><?= tr("Movement controls")?></h3>
                       <div class="joystickcontainer">
-                          <div id="s3d_joy" class="joystick"></div>
+                          <div class="joystick" data-joyurl="/api/scenery3d/move" data-joymax="50"></div>
                       </div>
                   </div>
               </div>
