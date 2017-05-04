@@ -893,15 +893,59 @@ button.button32:active {
 }
 
 .joystickcontainer {
+    position: relative;
     border: 1px solid black;
     box-sizing: border-box;
     border-radius: 64px;
     background: #B4B4B7;
-    background-image: url("images/joypad.png");
-    background-image: url("images/joypad.png"), radial-gradient(#B4B4B7, #5D5F62);
+    /* background-image: url("images/joypad.png"); */
+    /* background-image: url("images/joypad.png"), radial-gradient(#B4B4B7, #5D5F62); */
+    background-image: radial-gradient(#B4B4B7, #5D5F62);
     background-repeat: no-repeat;
     width: 128px;
     height: 128px;
+}
+
+.joystickbutton {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-image: url("images/joypad.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.joystickbutton:hover {
+    background-image: url("images/joypad-hover.png");
+}
+
+.joystickbutton:active {
+    background-image: url("images/joypad-active.png");
+}
+
+.joystickbutton-up {
+    left: 48px;
+    background-position: -48px 0px;
+}
+
+.joystickbutton-left {
+    top: 48px;
+    background-position: 0px -48px;
+}
+
+.joystickbutton-right {
+    top: 48px;
+    left: 96px;
+    background-position: -96px -48px;
+}
+
+.joystickbutton-down {
+    top: 96px;
+    left: 48px;
+    background-position: -48px -96px;
 }
 
 .joystick {

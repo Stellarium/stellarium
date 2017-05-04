@@ -20,10 +20,6 @@ define(function() {
   //how often the joystick control sends updates in ms, smaller numbers are more reponsive but have more overhead
   //you could even set this to 0
   data.joystickDelay = 200;
-  //Maximum movement speed of joystick control
-  data.joystickSpeed = 5;
-  //Maximum movement speed of Scenery3d joystick control
-  data.s3dJoystickSpeed = 50;
 
   return data;
 });
