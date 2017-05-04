@@ -55,6 +55,7 @@ double CustomObjectMgr::getCallOrder(StelModuleActionName actionName) const
 
 void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 {
+	// Shift + LeftClick
 	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
 		// Add custom marker
@@ -62,8 +63,8 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 
 		QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 		Vec3d mousePosition;
-		float wh = prj->getViewportWidth()/2.; // get half of width of the screen
-		float hh = prj->getViewportHeight()/2.; // get half of height of the screen
+		float wh = prj->getViewportWidth()/2.; // get quarter of width of the screen
+		float hh = prj->getViewportHeight()/2.; // get quarter of height of the screen
 		float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
 		float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 		// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
@@ -81,12 +82,62 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		e->setAccepted(true);
 		return;
 	}
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
-	{
-		// Delete custom markers
+
+	// Shift + Alt + Right click -- Removes all custom markers
+	// Changed by snowsailor 5/04/2017
+	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress) {
+		//Delete ALL custom markers
 		removeCustomObjects();
 		e->setAccepted(true);
 		return;
+	}
+	// Shift + RightClick
+	// Added by snowsailor 5/04/2017 -- Removes the closest marker within a radius specified within
+	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress) {
+		//Limit the click radius to 15px in any direction
+		int radiusLimit = 15;
+
+		StelCore *core = StelApp::getInstance().getCore();
+		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
+
+		QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
+		Vec3d mousePosition;
+		float wh = prj->getViewportWidth()/2.; // get half of width of the screen
+		float hh = prj->getViewportHeight()/2.; // get half of height of the screen
+		float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
+		float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
+		// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
+		prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
+
+		Vec3d winpos;
+		prj->project(mousePosition, winpos);
+		float xpos = winpos[0];
+		float ypos = winpos[1];
+
+		//Set the closest object to null for now
+		CustomObjectP closest = NULL;
+		//Smallest radius will be at most 15, so 100 is plenty as the default
+		float smallestRad = 100.;
+		foreach(const CustomObjectP cObj, customObjects) {
+			//Get the position of the custom object
+			Vec3d a = cObj->getJ2000EquatorialPos(core);
+			prj->project(a, winpos);
+			//Distance formula to determine how close we clicked to each of the custom objects
+			float dist = std::sqrt(((xpos-winpos[0])*(xpos-winpos[0])) + ((ypos-winpos[1])*(ypos-winpos[1])));
+			//If the position of the object is within our click radius
+			if(dist <= radiusLimit && dist < smallestRad) {
+				//Update the closest object and the smallest distance.
+				closest = cObj;
+				smallestRad = dist;
+			}
+		}
+		//If there was a custom object within `radiusLimit` pixels...
+		if(closest != NULL) {
+			//Remove it and return
+			removeCustomObject(closest);
+			e->setAccepted(true);
+			return;
+		}
 	}
 	e->setAccepted(false);
 }
@@ -161,6 +212,22 @@ void CustomObjectMgr::removeCustomObjects()
 	setSelected("");
 	customObjects.clear();
 	countMarkers = 0;
+}
+
+void CustomObjectMgr::removeCustomObject(CustomObjectP obj) {
+	setSelected("");
+	int i = 0;
+	foreach(const CustomObjectP& cObj, customObjects) {
+		//If we have a match for the thing we want to delete
+		if(cObj && cObj == obj && cObj->initialized) {
+			//Remove the value at the current index and exit loop
+			customObjects.removeAt(i);
+			break;
+		}
+		i++;
+	}
+	//Decrememnt marker count
+	countMarkers -= 1;
 }
 
 void CustomObjectMgr::draw(StelCore* core)
