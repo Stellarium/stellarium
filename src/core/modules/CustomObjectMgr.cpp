@@ -115,10 +115,10 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		float ypos = winpos[1];
 
 		//Set the closest object to null for now
-		CustomObjectP closest = NULL;
+		CustomObjectP *closest = NULL;
 		//Smallest radius will be at most 15, so 100 is plenty as the default
 		float smallestRad = 100.;
-		foreach(const CustomObjectP cObj, customObjects) {
+		foreach(CustomObjectP cObj, customObjects) {
 			//Get the position of the custom object
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
 			prj->project(a, winpos);
@@ -127,14 +127,14 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 			//If the position of the object is within our click radius
 			if(dist <= radiusLimit && dist < smallestRad) {
 				//Update the closest object and the smallest distance.
-				closest = cObj;
+				closest = &cObj;
 				smallestRad = dist;
 			}
 		}
 		//If there was a custom object within `radiusLimit` pixels...
 		if(closest != NULL) {
 			//Remove it and return
-			removeCustomObject(closest);
+			removeCustomObject(*closest);
 			e->setAccepted(true);
 			return;
 		}
@@ -211,6 +211,7 @@ void CustomObjectMgr::removeCustomObjects()
 {
 	setSelected("");
 	customObjects.clear();
+	//This marker count can be set to 0 because there will be no markers left and a duplicate will be impossible
 	countMarkers = 0;
 }
 
@@ -226,8 +227,8 @@ void CustomObjectMgr::removeCustomObject(CustomObjectP obj) {
 		}
 		i++;
 	}
-	//Decrememnt marker count
-	countMarkers -= 1;
+	//Don't decrememnt marker count. This will prevent multiple markers from being added with the same name.
+	//countMarkers -= 1;
 }
 
 void CustomObjectMgr::draw(StelCore* core)
