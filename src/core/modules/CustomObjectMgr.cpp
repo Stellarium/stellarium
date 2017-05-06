@@ -114,10 +114,9 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		float xpos = winpos[0];
 		float ypos = winpos[1];
 
-		//Set the closest object to null for now
-		CustomObjectP *closest = NULL;
-		//Smallest radius will be at most 15, so 100 is plenty as the default
-		float smallestRad = 100.;
+		CustomObjectP closest;
+		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
+		float smallestRad = radiusLimit + 10;
 		foreach(CustomObjectP cObj, customObjects) {
 			//Get the position of the custom object
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
@@ -127,14 +126,14 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 			//If the position of the object is within our click radius
 			if(dist <= radiusLimit && dist < smallestRad) {
 				//Update the closest object and the smallest distance.
-				closest = &cObj;
+				closest = cObj;
 				smallestRad = dist;
 			}
 		}
 		//If there was a custom object within `radiusLimit` pixels...
-		if(closest != NULL) {
+		if(smallestRad <= radiusLimit) {
 			//Remove it and return
-			removeCustomObject(*closest);
+			removeCustomObject(closest);
 			e->setAccepted(true);
 			return;
 		}
