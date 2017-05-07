@@ -74,8 +74,6 @@ private:
 		ColumnUUID,		//! UUID of bookmark
 		ColumnName,		//! name or designation of object
 		ColumnNameI18n,		//! Localized name of object
-		ColumnRA,		//! Right Ascension (J2000.0; optional)
-		ColumnDec,		//! Declination (J2000.0; optional)
 		ColumnDate,		//! date and time (optional)
 		ColumnLocation,		//! location (optional)
 		ColumnCount		//! total number of columns
@@ -91,7 +89,7 @@ private:
 	//! Update header names for bookmarks table
 	void setBookmarksHeaderNames();
 
-	void addModelRow(int number, QString uuid, QString name, QString nameI18n = "", QString RA = "", QString Dec = "", QString date = "", QString Location = "");
+	void addModelRow(int number, QString uuid, QString name, QString nameI18n = "", QString date = "", QString Location = "");
 
 	void loadBookmarks();
 	void saveBookmarks();
