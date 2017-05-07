@@ -33,6 +33,7 @@
 
 CustomObjectMgr::CustomObjectMgr()
 	: countMarkers(0)
+	, radiusLimit(15)
 {
 	setObjectName("CustomObjectMgr");
 	conf = StelApp::getInstance().getSettings();
@@ -94,9 +95,6 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 	// Shift + RightClick
 	// Added by snowsailor 5/04/2017 -- Removes the closest marker within a radius specified within
 	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress) {
-		//Limit the click radius to 15px in any direction
-		int radiusLimit = 15;
-
 		StelCore *core = StelApp::getInstance().getCore();
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 
@@ -149,6 +147,8 @@ void CustomObjectMgr::init()
 
 	setMarkersColor(StelUtils::strToVec3f(conf->value("color/custom_marker_color", "0.1,1.0,0.1").toString()));
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
+	// Limit the click radius to 15px in any direction
+	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -214,20 +214,38 @@ void CustomObjectMgr::removeCustomObjects()
 	countMarkers = 0;
 }
 
-void CustomObjectMgr::removeCustomObject(CustomObjectP obj) {
+void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
+{
 	setSelected("");
 	int i = 0;
-	foreach(const CustomObjectP& cObj, customObjects) {
+	foreach(const CustomObjectP& cObj, customObjects)
+	{
 		//If we have a match for the thing we want to delete
-		if(cObj && cObj == obj && cObj->initialized) {
+		if(cObj && cObj == obj && cObj->initialized)
+		{
+			//Remove the value at the current index and exit loop
+			customObjects.removeAt(i);
+			break;
+		}
+		i++;
+	}	
+}
+
+void CustomObjectMgr::removeCustomObject(QString englishName)
+{
+	setSelected("");
+	int i = 0;
+	foreach(const CustomObjectP& cObj, customObjects)
+	{
+		//If we have a match for the thing we want to delete
+		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
+		{
 			//Remove the value at the current index and exit loop
 			customObjects.removeAt(i);
 			break;
 		}
 		i++;
 	}
-	//Don't decrememnt marker count. This will prevent multiple markers from being added with the same name.
-	//countMarkers -= 1;
 }
 
 void CustomObjectMgr::draw(StelCore* core)
@@ -398,3 +416,9 @@ float CustomObjectMgr::getMarkersSize() const
 {
 	return CustomObject::markerSize;
 }
+
+void CustomObjectMgr::setActiveRadiusLimit(const int radius)
+{
+	radiusLimit = radius;
+}
+

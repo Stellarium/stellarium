@@ -183,9 +183,12 @@ void HelpDialog::updateHelpText(void)
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Shift & left click").toHtmlEscaped() + "</b></td></tr>\n";
-	// delete custom markers
-	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
+	// delete one custom marker
+	htmlText += "<tr><td>" + q_("Delete one custom marker near cursor").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Shift & right click").toHtmlEscaped() + "</b></td></tr>\n";
+	// delete all custom markers
+	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Shift & Alt & right click").toHtmlEscaped() + "</b></td></tr>\n";
 
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
