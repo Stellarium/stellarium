@@ -25,7 +25,6 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "StelMainView.hpp"
 #include "CustomObjectMgr.hpp"
 
 #include <QSettings>
@@ -56,37 +55,21 @@ double CustomObjectMgr::getCallOrder(StelModuleActionName actionName) const
 
 void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 {
+	StelCore *core = StelApp::getInstance().getCore();
+	Vec3d mousePosition = core->getMouseJ2000Pos();
 	// Shift + LeftClick
 	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
 		// Add custom marker
-		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
+		addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 
-		QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
-		Vec3d mousePosition;
-		float wh = prj->getViewportWidth()/2.; // get quarter of width of the screen
-		float hh = prj->getViewportHeight()/2.; // get quarter of height of the screen
-		float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
-		float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
-		// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
-		// If coordinates are invalid, don't draw them.
-		bool coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
-		if (coordsValid)
-		{ // Nick Fedoseev patch
-			Vec3d win;
-			prj->project(mousePosition,win);
-			float dx = prj->getViewportPosX()+wh+mx - win.v[0];
-			float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-			prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
-			addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
-		}
 		e->setAccepted(true);
 		return;
 	}
-
 	// Shift + Alt + Right click -- Removes all custom markers
 	// Changed by snowsailor 5/04/2017
-	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress) {
+	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
+	{
 		//Delete ALL custom markers
 		removeCustomObjects();
 		e->setAccepted(true);
@@ -94,19 +77,9 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 	}
 	// Shift + RightClick
 	// Added by snowsailor 5/04/2017 -- Removes the closest marker within a radius specified within
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress) {
-		StelCore *core = StelApp::getInstance().getCore();
-		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
-
-		QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
-		Vec3d mousePosition;
-		float wh = prj->getViewportWidth()/2.; // get half of width of the screen
-		float hh = prj->getViewportHeight()/2.; // get half of height of the screen
-		float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
-		float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
-		// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
-		prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
-
+	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
+	{
+		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 		Vec3d winpos;
 		prj->project(mousePosition, winpos);
 		float xpos = winpos[0];
@@ -115,21 +88,24 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		CustomObjectP closest;
 		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
 		float smallestRad = radiusLimit + 10;
-		foreach(CustomObjectP cObj, customObjects) {
+		foreach(CustomObjectP cObj, customObjects)
+		{
 			//Get the position of the custom object
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
 			prj->project(a, winpos);
 			//Distance formula to determine how close we clicked to each of the custom objects
 			float dist = std::sqrt(((xpos-winpos[0])*(xpos-winpos[0])) + ((ypos-winpos[1])*(ypos-winpos[1])));
 			//If the position of the object is within our click radius
-			if(dist <= radiusLimit && dist < smallestRad) {
+			if(dist <= radiusLimit && dist < smallestRad)
+			{
 				//Update the closest object and the smallest distance.
 				closest = cObj;
 				smallestRad = dist;
 			}
 		}
 		//If there was a custom object within `radiusLimit` pixels...
-		if(smallestRad <= radiusLimit) {
+		if(smallestRad <= radiusLimit)
+		{
 			//Remove it and return
 			removeCustomObject(closest);
 			e->setAccepted(true);

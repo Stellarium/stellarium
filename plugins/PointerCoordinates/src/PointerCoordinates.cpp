@@ -23,7 +23,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "SkyGui.hpp"
-#include "StelMainView.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -120,25 +119,7 @@ void PointerCoordinates::draw(StelCore *core)
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
-	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
-	Vec3d mousePosition;
-	float wh = prj->getViewportWidth()/2.; // get half of width of the screen
-	float hh = prj->getViewportHeight()/2.; // get half of height of the screen
-	float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
-	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
-	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
-	// If coordinates are invalid, don't draw them.
-	bool coordsValid = prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
-	if (coordsValid)
-	{ // Nick Fedoseev patch
-		Vec3d win;
-		prj->project(mousePosition,win);
-		float dx = prj->getViewportPosX()+wh+mx - win.v[0];
-		float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-		prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
-	}
-	else
-		return;
+	Vec3d mousePosition = core->getMouseJ2000Pos();
 
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
