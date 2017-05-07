@@ -26,6 +26,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
+#include "CustomObjectMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "AngleSpinBox.hpp"
@@ -97,18 +98,14 @@ void BookmarksDialog::setBookmarksHeaderNames()
 	QStringList headerStrings;
 	headerStrings << "UUID"; // Hide the column
 	headerStrings << q_("Object");
-	headerStrings << q_("Localized name");
-	//TRANSLATORS: right ascension
-	headerStrings << q_("RA (J2000)");
-	//TRANSLATORS: declination
-	headerStrings << q_("Dec (J2000)");
+	headerStrings << q_("Localized name");	
 	headerStrings << q_("Date and Time");	
 	headerStrings << q_("Location of observer");
 
 	bookmarksListModel->setHorizontalHeaderLabels(headerStrings);
 }
 
-void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString nameI18n, QString RA, QString Dec, QString Date, QString Location)
+void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString nameI18n, QString Date, QString Location)
 {
 	QStandardItem* tempItem = 0;
 
@@ -123,14 +120,6 @@ void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QStrin
 	tempItem = new QStandardItem(nameI18n);
 	tempItem->setEditable(false);
 	bookmarksListModel->setItem(number, ColumnNameI18n, tempItem);
-
-	tempItem = new QStandardItem(RA);
-	tempItem->setEditable(false);
-	bookmarksListModel->setItem(number, ColumnRA, tempItem);
-
-	tempItem = new QStandardItem(Dec);
-	tempItem->setEditable(false);
-	bookmarksListModel->setItem(number, ColumnDec, tempItem);
 
 	tempItem = new QStandardItem(Date);
 	tempItem->setEditable(false);
@@ -195,7 +184,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 		int lastRow = bookmarksListModel->rowCount();
 
 		QString uuid = QUuid::createUuid().toString();
-		addModelRow(lastRow, uuid, name, nameI18n, raStr, decStr, JDs, Location);
+		addModelRow(lastRow, uuid, name, nameI18n, JDs, Location);
 
 		bookmark bm;
 		bm.name	= name;
@@ -261,24 +250,23 @@ void BookmarksDialog::goToBookmark(QString uuid)
 
 		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 		objectMgr->unSelect();
-		if (bm.ra.isEmpty() && bm.dec.isEmpty())
-		{
-			if (objectMgr->findAndSelect(bm.name))
-			{
-				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-				if (!newSelected.empty())
-				{
-					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-					mvmgr->setFlagTracking(true);
-				}
-			}
-		}
-		else
+
+		if (!bm.ra.isEmpty() && !bm.dec.isEmpty())
 		{
 			Vec3d pos;
 			StelUtils::spheToRect(StelUtils::getDecAngle(bm.ra.trimmed()), StelUtils::getDecAngle(bm.dec.trimmed()), pos);
-			mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
-			mvmgr->setFlagLockEquPos(true);
+			// Add a visible custom marker on the sky
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(bm.name, pos, true);
+		}
+
+		if (objectMgr->findAndSelect(bm.name))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+				mvmgr->setFlagTracking(true);
+			}
 		}
 	}
 }
@@ -326,7 +314,7 @@ void BookmarksDialog::loadBookmarks()
 			bm.dec = Dec;
 
 		bookmarksCollection.insert(bookmarkKey, bm);
-		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, bm.ra, bm.dec, JDs, Location);
+		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 		i++;
 	}
 }
