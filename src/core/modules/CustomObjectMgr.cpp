@@ -193,34 +193,17 @@ void CustomObjectMgr::removeCustomObjects()
 void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 {
 	setSelected("");
-	int i = 0;
-	foreach(const CustomObjectP& cObj, customObjects)
-	{
-		//If we have a match for the thing we want to delete
-		if(cObj && cObj == obj && cObj->initialized)
-		{
-			//Remove the value at the current index and exit loop
-			customObjects.removeAt(i);
-			break;
-		}
-		i++;
-	}	
+	customObjects.removeOne(obj);
 }
 
 void CustomObjectMgr::removeCustomObject(QString englishName)
 {
 	setSelected("");
-	int i = 0;
 	foreach(const CustomObjectP& cObj, customObjects)
 	{
 		//If we have a match for the thing we want to delete
 		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
-		{
-			//Remove the value at the current index and exit loop
-			customObjects.removeAt(i);
-			break;
-		}
-		i++;
+			customObjects.removeOne(cObj);
 	}
 }
 
