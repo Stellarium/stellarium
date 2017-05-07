@@ -146,7 +146,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
 		QString raStr = "", decStr = "";
-		if (name.isEmpty() || name.contains("marker", Qt::CaseInsensitive))
+		bool visibleFlag = false;
+		if (selected[0]->getType()=="CustomObject")
 		{
 			if (name.isEmpty())
 			{
@@ -157,6 +158,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			StelUtils::rectToSphe(&ra, &dec, selected[0]->getJ2000EquatorialPos(core));
 			raStr = StelUtils::radToHmsStr(ra, false);
 			decStr = StelUtils::radToDmsStr(dec, false);
+			if (name.contains("marker", Qt::CaseInsensitive))
+				visibleFlag = true;
 		}
 
 		bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
@@ -198,6 +201,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			bm.jd	= QString::number(JD, 'f', 6);
 		if (!Location.isEmpty())
 			bm.location = Location;
+		if (!visibleFlag)
+			bm.isVisibleMarker = visibleFlag;
 
 		bookmarksCollection.insert(uuid, bm);
 
@@ -256,7 +261,7 @@ void BookmarksDialog::goToBookmark(QString uuid)
 			Vec3d pos;
 			StelUtils::spheToRect(StelUtils::getDecAngle(bm.ra.trimmed()), StelUtils::getDecAngle(bm.dec.trimmed()), pos);
 			// Add a custom object on the sky
-			GETSTELMODULE(CustomObjectMgr)->addCustomObject(bm.name, pos, true);
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(bm.name, pos, bm.isVisibleMarker);
 			status = objectMgr->findAndSelect(bm.name);
 		}
 
@@ -314,6 +319,8 @@ void BookmarksDialog::loadBookmarks()
 		if (!Dec.isEmpty())
 			bm.dec = Dec;
 
+		bm.isVisibleMarker = bookmarkData.value("isVisibleMarker", false).toBool();
+
 		bookmarksCollection.insert(bookmarkKey, bm);
 		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 		i++;
@@ -354,6 +361,8 @@ void BookmarksDialog::saveBookmarks()
 		    bm.insert("jd", sp.jd);
 	    if (!sp.location.isEmpty())
 		    bm.insert("location", sp.location);
+	    if (sp.isVisibleMarker)
+		    bm.insert("isVisibleMarker", sp.isVisibleMarker);
 
 	    bookmarksDataList.insert(i.key(), bm);
 	}
