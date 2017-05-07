@@ -124,6 +124,8 @@ public slots:
 	void addCustomObjectAltAzi(QString designation, const QString& alt, const QString& azi, bool isVisible=false);
 	//! Remove all custom objects
 	void removeCustomObjects();
+	//! Remove just one custom object
+	void removeCustomObject(CustomObjectP);
 
 	//! Set the color used to draw custom object markers.
 	//! @param c The color of the custom object markers (R,G,B)
