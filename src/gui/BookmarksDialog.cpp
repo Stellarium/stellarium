@@ -250,16 +250,17 @@ void BookmarksDialog::goToBookmark(QString uuid)
 
 		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 		objectMgr->unSelect();
-
-		if (!bm.ra.isEmpty() && !bm.dec.isEmpty())
+		bool status = objectMgr->findAndSelect(bm.name);
+		if (!bm.ra.isEmpty() && !bm.dec.isEmpty() && !status)
 		{
 			Vec3d pos;
 			StelUtils::spheToRect(StelUtils::getDecAngle(bm.ra.trimmed()), StelUtils::getDecAngle(bm.dec.trimmed()), pos);
-			// Add a visible custom marker on the sky
+			// Add a custom object on the sky
 			GETSTELMODULE(CustomObjectMgr)->addCustomObject(bm.name, pos, true);
+			status = objectMgr->findAndSelect(bm.name);
 		}
 
-		if (objectMgr->findAndSelect(bm.name))
+		if (status)
 		{
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())
