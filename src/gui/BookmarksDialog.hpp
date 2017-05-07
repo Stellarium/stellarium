@@ -37,6 +37,7 @@ struct bookmark
 	QString nameI18n;
 	QString ra;
 	QString dec;
+	bool isVisibleMarker;
 	QString jd;
 	QString location;
 };
