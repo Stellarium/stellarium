@@ -1822,7 +1822,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1835,7 +1835,7 @@ void AstroCalcDialog::calculateWutObjects()
 					Nebula::NebulaType ntype = object->getDSOType();
 					if ((ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 						{
@@ -1854,7 +1854,7 @@ void AstroCalcDialog::calculateWutObjects()
 					Nebula::NebulaType ntype = object->getDSOType();
 					if ((ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 						{
@@ -1873,7 +1873,7 @@ void AstroCalcDialog::calculateWutObjects()
 					Nebula::NebulaType ntype = object->getDSOType();
 					if ((ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 						{
@@ -1892,7 +1892,7 @@ void AstroCalcDialog::calculateWutObjects()
 					Nebula::NebulaType ntype = object->getDSOType();
 					if ((ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 						{
@@ -1910,7 +1910,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isAsteroid && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1922,7 +1922,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isComet && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1934,7 +1934,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isPlutino && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1946,7 +1946,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1958,7 +1958,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isCubewano && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1970,7 +1970,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isSDO && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1982,7 +1982,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isOCO && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -1994,7 +1994,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isSednoid && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
@@ -2007,7 +2007,7 @@ void AstroCalcDialog::calculateWutObjects()
 					Nebula::NebulaType ntype = object->getDSOType();
 					if ((ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 						{
@@ -2024,7 +2024,7 @@ void AstroCalcDialog::calculateWutObjects()
 				{
 					if (object->getPlanetType()==Planet::isPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosApparent(core));
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
 						alt = std::fmod(alt,2.0*M_PI);
 						if (alt*180./M_PI >= highLimit)
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
