@@ -56,6 +56,18 @@ public:
 		ColumnCount		//! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
+	//! @enum CPositionsColumns
+	enum CPositionsColumns {
+		CColumnName,		//! name of object
+		CColumnRA,		//! right ascension
+		CColumnDec,		//! declination
+		CColumnMagnitude,	//! magnitude
+		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnType,		//! type of object
+		CColumnCount		//! total number of columns
+	};
+
 	//! Defines the number and the order of the columns in the ephemeris table
 	//! @enum EphemerisColumns
 	enum EphemerisColumns {
@@ -239,7 +251,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::ColumnName)
+		if (column == AstroCalcDialog::ColumnName || column == AstroCalcDialog::CColumnName)
 		{
 			QRegExp dso("^(\\w+)\\s*(\\d+)$");
 			int a = 0, b = 0;
@@ -252,11 +264,14 @@ private:
 			else
 				return text(column).toLower() < other.text(column).toLower();
 		}
-		else if (column == AstroCalcDialog::ColumnRA || column == AstroCalcDialog::ColumnDec)
+		else if (column == AstroCalcDialog::ColumnRA    || column == AstroCalcDialog::ColumnDec  ||
+			 column == AstroCalcDialog::CColumnRA   || column == AstroCalcDialog::CColumnDec ||
+			 column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
-		else if (column == AstroCalcDialog::ColumnMagnitude)
+		else if (column == AstroCalcDialog::ColumnMagnitude    || column == AstroCalcDialog::CColumnMagnitude ||
+			 column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisJD)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}
