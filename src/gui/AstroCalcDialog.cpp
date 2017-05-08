@@ -253,7 +253,7 @@ void AstroCalcDialog::initListPlanetaryPositions()
 void AstroCalcDialog::initListCelestialPositions()
 {
 	ui->celestialPositionsTreeWidget->clear();
-	ui->celestialPositionsTreeWidget->setColumnCount(ColumnCount);
+	ui->celestialPositionsTreeWidget->setColumnCount(CColumnCount);
 
 	setCelestialPositionsHeaderNames();
 
@@ -318,12 +318,14 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		//TRANSLATORS: magnitude
 		positionsHeader << q_("mag");
 	}
+	//TRANSLATORS: surface brightness
+	positionsHeader << q_("S.B.");
 	//TRANSLATORS: type of object
 	positionsHeader << q_("Type");
 
 	ui->celestialPositionsTreeWidget->setHeaderLabels(positionsHeader);
 	// adjust the column width
-	for(int i = 0; i < ColumnCount; ++i)
+	for(int i = 0; i < CColumnCount; ++i)
 	{
 	    ui->celestialPositionsTreeWidget->resizeColumnToContents(i);
 	}
@@ -500,7 +502,7 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 void AstroCalcDialog::currentCelestialPositions()
 {
 	float ra, dec;
-	QString raStr, decStr, celObjId = "";
+	QString raStr, decStr, extra, celObjId = "";
 
 	initListCelestialPositions();
 
@@ -539,35 +541,44 @@ void AstroCalcDialog::currentCelestialPositions()
 				raStr = StelUtils::radToHmsStr(ra);
 				decStr = StelUtils::radToDmsStr(dec, true);
 			}
+
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->celestialPositionsTreeWidget);
+
 			celObjId = obj->getNameI18n();
 			if (celObjId.isEmpty())
 				celObjId = obj->getDSODesignation();
-			treeItem->setText(ColumnName, celObjId);
-			treeItem->setText(ColumnRA, raStr);
-			treeItem->setTextAlignment(ColumnRA, Qt::AlignRight);
-			treeItem->setText(ColumnDec, decStr);
-			treeItem->setTextAlignment(ColumnDec, Qt::AlignRight);
-			treeItem->setText(ColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
-			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);
-			treeItem->setText(ColumnType, q_(obj->getTypeString()));
+
+			extra = QString::number(obj->getSurfaceBrightnessWithExtinction(core), 'f', 2);
+			if (extra.toFloat()>90.f)
+				extra = QChar(0x2014);
+
+			treeItem->setText(CColumnName, celObjId);
+			treeItem->setText(CColumnRA, raStr);
+			treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+			treeItem->setText(CColumnDec, decStr);
+			treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+			treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
+			treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+			treeItem->setText(CColumnExtra, extra);
+			treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+			treeItem->setText(CColumnType, q_(obj->getTypeString()));
 		}
 	}
 
 	// adjust the column width
-	for(int i = 0; i < ColumnCount; ++i)
+	for(int i = 0; i < CColumnCount; ++i)
 	{
 	    ui->celestialPositionsTreeWidget->resizeColumnToContents(i);
 	}
 
 	// sort-by-name
-	ui->celestialPositionsTreeWidget->sortItems(ColumnName, Qt::AscendingOrder);
+	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
 }
 
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelIndex)
 {
 	// Find the object
-	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
+	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
 
 	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{
