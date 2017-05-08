@@ -103,6 +103,7 @@ public:
 	//! Derived objects can add their own special information tags.
 	//! @param core the current StelCore
 	//! @return a map of object data.  Keys:
+	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
@@ -126,7 +127,7 @@ public:
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
 	//! - name : english name of the object
-	//! - localized-name : localized name
+	//! - localized-name : localized name	
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 
 	//! Return object's type. It should be the name of the class.

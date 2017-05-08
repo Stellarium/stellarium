@@ -152,6 +152,7 @@ public slots:
 	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data.  Keys:
+	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
@@ -174,7 +175,7 @@ public slots:
 	//! - size-dd : angular size in decimal degrees
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
-	//! - localized-name : localized name
+	//! - localized-name : localized name	
 	//! The returned map can contain other information. For example, Solar System objects add:
 	//! - distance : distance to object in AU (for Solar system objects only!)
 	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
@@ -357,7 +358,7 @@ public slots:
 	QString getProjectionMode();
 
 	//! Set the current projection mode
-	//! @param id the name of the projection mode to use, e.g. "Perspective" and so on.
+	//! @param id the name of the projection mode to use, e.g. "ProjectionPerspective" and so on.
 	//! valid values of id are:
 	//! - ProjectionPerspective
 	//! - ProjectionEqualArea
@@ -367,6 +368,8 @@ public slots:
 	//! - ProjectionCylinder
 	//! - ProjectionMercator
 	//! - ProjectionOrthographic
+	//! - ProjectionSinusoidal
+	//! - ProjectionMiller
 	void setProjectionMode(const QString& id);
 
 	//! Get the status of the disk viewport
