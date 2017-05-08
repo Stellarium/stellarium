@@ -350,7 +350,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 	{
 		if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag)
 		{
-			if (horizon && planet->isAboveRealHorizon(core))
+			if (horizon && !planet->isAboveRealHorizon(core))
 				continue;
 
 			StelUtils::rectToSphe(&ra,&dec,planet->getJ2000EquatorialPos(core));
