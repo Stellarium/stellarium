@@ -62,7 +62,7 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	conf = StelApp::getInstance().getSettings();
 	ephemerisHeader.clear();
 	phenomenaHeader.clear();
-	planetaryPositionsHeader.clear();
+	positionsHeader.clear();
 }
 
 AstroCalcDialog::~AstroCalcDialog()
@@ -82,9 +82,11 @@ void AstroCalcDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		setPlanetaryPositionsHeaderNames();
+		setCelestialPositionsHeaderNames();
 		setEphemerisHeaderNames();
 		setPhenomenaHeaderNames();
 		populateCelestialBodyList();
+		populateCelestialCategoryList();
 		populateEphemerisTimeStepsList();
 		populateMajorPlanetList();
 		populateGroupCelestialBodyList();		
@@ -125,9 +127,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	initListPlanetaryPositions();
+	initListCelestialPositions();
 	initListEphemeris();
 	initListPhenomena();
 	populateCelestialBodyList();
+	populateCelestialCategoryList();
 	populateEphemerisTimeStepsList();
 	populateMajorPlanetList();
 	populateGroupCelestialBodyList();
@@ -155,15 +159,27 @@ void AstroCalcDialog::createDialogContent()
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		ui->planetaryPositionsTreeWidget, SLOT(repaint()));
+	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+		ui->celestialPositionsTreeWidget, SLOT(repaint()));
 
-	ui->magnitudeDoubleSpinBox->setValue(conf->value("astrocalc/positions_magnitude_limit", 12.0).toDouble());
-	connect(ui->magnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(savePlanetaryPositionsMagnitudeLimit(double)));
+	ui->planetaryMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/positions_magnitude_limit", 12.0).toDouble());
+	connect(ui->planetaryMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(savePlanetaryPositionsMagnitudeLimit(double)));
 
 	ui->aboveHorizonCheckBox->setChecked(conf->value("astrocalc/flag_positions_above_horizon", false).toBool());
 	connect(ui->aboveHorizonCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePlanetaryPositionsAboveHorizonFlag(bool)));
 
 	connect(ui->planetaryPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPlanetaryPosition(QModelIndex)));
 	connect(ui->planetaryPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentPlanetaryPositions()));
+
+	ui->celestialMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/celestial_magnitude_limit", 6.0).toDouble());
+	connect(ui->celestialMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveCelestialPositionsMagnitudeLimit(double)));
+
+	ui->horizontalCoordinatesCheckBox->setChecked(conf->value("astrocalc/flag_horizontal_coordinates", false).toBool());
+	connect(ui->horizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveCelestialPositionsHorizontalCoordinatesFlag(bool)));
+
+	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
+	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
+	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(currentCelestialPositions()));
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
@@ -200,6 +216,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 
 	currentPlanetaryPositions();
+	currentCelestialPositions();
 
 	currentTimeLine = new QTimer(this);
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
@@ -212,35 +229,52 @@ void AstroCalcDialog::createDialogContent()
 void AstroCalcDialog::savePlanetaryPositionsAboveHorizonFlag(bool b)
 {
 	conf->setValue("astrocalc/flag_positions_above_horizon", b);
+	// Refresh the planetary positions table
+	currentPlanetaryPositions();
 }
 
 void AstroCalcDialog::savePlanetaryPositionsMagnitudeLimit(double mag)
 {
 	conf->setValue("astrocalc/positions_magnitude_limit", QString::number(mag, 'f', 2));
+	// Refresh the planetary positions table
+	currentPlanetaryPositions();
 }
 
 void AstroCalcDialog::initListPlanetaryPositions()
 {
 	ui->planetaryPositionsTreeWidget->clear();
 	ui->planetaryPositionsTreeWidget->setColumnCount(ColumnCount);
+
 	setPlanetaryPositionsHeaderNames();
+
 	ui->planetaryPositionsTreeWidget->header()->setSectionsMovable(false);
 }
 
+void AstroCalcDialog::initListCelestialPositions()
+{
+	ui->celestialPositionsTreeWidget->clear();
+	ui->celestialPositionsTreeWidget->setColumnCount(ColumnCount);
+
+	setCelestialPositionsHeaderNames();
+
+	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
+}
+
+
 void AstroCalcDialog::setPlanetaryPositionsHeaderNames()
 {
-	planetaryPositionsHeader.clear();
+	positionsHeader.clear();
 	//TRANSLATORS: name of object
-	planetaryPositionsHeader << q_("Name");
+	positionsHeader << q_("Name");
 	//TRANSLATORS: right ascension
-	planetaryPositionsHeader << q_("RA (J2000)");
+	positionsHeader << q_("RA (J2000)");
 	//TRANSLATORS: declination
-	planetaryPositionsHeader << q_("Dec (J2000)");
+	positionsHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
-	planetaryPositionsHeader << q_("mag");
+	positionsHeader << q_("mag");
 	//TRANSLATORS: type of object
-	planetaryPositionsHeader << q_("Type");
-	ui->planetaryPositionsTreeWidget->setHeaderLabels(planetaryPositionsHeader);
+	positionsHeader << q_("Type");
+	ui->planetaryPositionsTreeWidget->setHeaderLabels(positionsHeader);
 
 	// adjust the column width
 	for(int i = 0; i < ColumnCount; ++i)
@@ -249,27 +283,72 @@ void AstroCalcDialog::setPlanetaryPositionsHeaderNames()
 	}
 }
 
+void AstroCalcDialog::setCelestialPositionsHeaderNames()
+{
+	Q_ASSERT(ui->celestialCategoryComboBox);
+	QComboBox* category = ui->celestialCategoryComboBox;
+	int celType = category->itemData(category->currentIndex()).toInt();
+
+	bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
+
+	positionsHeader.clear();
+	//TRANSLATORS: name of object
+	positionsHeader << q_("Name");
+	if (horizon)
+	{
+		//TRANSLATORS: azimuth
+		positionsHeader << q_("Azimuth");
+		//TRANSLATORS: altitude
+		positionsHeader << q_("Altitude");
+	}
+	else
+	{
+		//TRANSLATORS: right ascension
+		positionsHeader << q_("RA (J2000)");
+		//TRANSLATORS: declination
+		positionsHeader << q_("Dec (J2000)");
+	}
+	if (celType==12 || celType==102 || celType==111) // check for dark nebulae
+	{
+		//TRANSLATORS: opacity
+		positionsHeader << q_("opacity");
+	}
+	else
+	{
+		//TRANSLATORS: magnitude
+		positionsHeader << q_("mag");
+	}
+	//TRANSLATORS: type of object
+	positionsHeader << q_("Type");
+
+	ui->celestialPositionsTreeWidget->setHeaderLabels(positionsHeader);
+	// adjust the column width
+	for(int i = 0; i < ColumnCount; ++i)
+	{
+	    ui->celestialPositionsTreeWidget->resizeColumnToContents(i);
+	}
+}
+
 void AstroCalcDialog::currentPlanetaryPositions()
 {
-	float ra, dec, alt, az;
+	float ra, dec;
 	QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
 
 	initListPlanetaryPositions();
 
 	PlanetP sun = solarSystem->getSun();
-	double mag = ui->magnitudeDoubleSpinBox->value();
+	double mag = ui->planetaryMagnitudeDoubleSpinBox->value();
 	bool horizon = ui->aboveHorizonCheckBox->isChecked();
 
 	StelCore* core = StelApp::getInstance().getCore();	
 	double JD = core->getJD();
-	ui->positionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
+	ui->planetaryPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
 	foreach (const PlanetP& planet, allPlanets)
 	{
 		if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag)
 		{
-			StelUtils::rectToSphe(&az,&alt,planet->getAltAzPosAuto(core));
-			if (horizon && std::fmod(alt,2.0*M_PI)<=0)
+			if (horizon && planet->isAboveRealHorizon(core))
 				continue;
 
 			StelUtils::rectToSphe(&ra,&dec,planet->getJ2000EquatorialPos(core));
@@ -321,6 +400,174 @@ void AstroCalcDialog::selectCurrentPlanetaryPosition(const QModelIndex &modelInd
 			{
 				GETSTELMODULE(StelObjectMgr)->unSelect();
 			}
+		}
+	}
+}
+
+void AstroCalcDialog::populateCelestialCategoryList()
+{
+	Q_ASSERT(ui->celestialCategoryComboBox);
+
+	QComboBox* category = ui->celestialCategoryComboBox;
+
+
+	category->blockSignals(true);
+	int index = category->currentIndex();
+	QVariant selectedCategoryId = category->itemData(index);
+
+	category->clear();
+	// TODO: Automatic sync list with QMap<QString, QString> StelObjectMgr::objectModulesMap() data
+	category->addItem(q_("Galaxies"), "0");
+	category->addItem(q_("Active galaxies"), "1");
+	category->addItem(q_("Radio galaxies"), "2");
+	category->addItem(q_("Interacting galaxies"), "3");
+	category->addItem(q_("Bright quasars"), "4");
+	category->addItem(q_("Star clusters"), "5");
+	category->addItem(q_("Open star clusters"), "6");
+	category->addItem(q_("Globular star clusters"), "7");
+	category->addItem(q_("Stellar associations"), "8");
+	category->addItem(q_("Star clouds"), "9");
+	category->addItem(q_("Nebulae"), "10");
+	category->addItem(q_("Planetary nebulae"), "11");
+	category->addItem(q_("Dark nebulae"), "12");
+	category->addItem(q_("Reflection nebulae"), "13");
+	category->addItem(q_("Bipolar nebulae"), "14");
+	category->addItem(q_("Emission nebulae"), "15");
+	category->addItem(q_("Clusters associated with nebulosity"), "16");
+	category->addItem(q_("HII regions"), "17");
+	category->addItem(q_("Supernova remnants"), "18");
+	category->addItem(q_("Interstellar matter"), "19");
+	category->addItem(q_("Emission objects"), "20");
+	category->addItem(q_("BL Lac objects"), "21");
+	category->addItem(q_("Blazars"), "22");
+	category->addItem(q_("Molecular Clouds"), "23");
+	category->addItem(q_("Young Stellar Objects"), "24");
+	category->addItem(q_("Possible Quasars"), "25");
+	category->addItem(q_("Possible Planetary Nebulae"), "26");
+	category->addItem(q_("Protoplanetary Nebulae"), "27");
+	category->addItem(q_("Messier Catalogue"), "100");
+	category->addItem(q_("Caldwell Catalogue"), "101");
+	category->addItem(q_("Barnard Catalogue"), "102");
+	category->addItem(q_("Sharpless Catalogue"), "103");
+	category->addItem(q_("Van den Bergh Catalogue"), "104");
+	category->addItem(q_("The Catalogue of Rodgers, Campbell, and Whiteoak"), "105");
+	category->addItem(q_("Collinder Catalogue"), "106");
+	category->addItem(q_("Melotte Catalogue"), "107");
+	category->addItem(q_("New General Catalogue"), "108");
+	category->addItem(q_("Index Catalogue"), "109");
+	category->addItem(q_("Lynds' Catalogue of Bright Nebulae"), "110");
+	category->addItem(q_("Lynds' Catalogue of Dark Nebulae"), "111");
+	category->addItem(q_("Principal Galaxy Catalog"), "112");
+	category->addItem(q_("The Uppsala General Catalogue of Galaxies"), "113");
+	category->addItem(q_("Cederblad Catalog"), "114");
+	category->addItem(q_("Dwarf galaxies"), "150");
+	category->addItem(q_("Herschel 400 Catalogue"), "151");
+
+	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index<0)
+	{
+		// default step: Messier Catalogue
+		index = category->findData(conf->value("astrocalc/celestial_category", "100").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	category->setCurrentIndex(index);
+	category->model()->sort(0);
+	category->blockSignals(false);
+}
+
+void AstroCalcDialog::saveCelestialPositionsMagnitudeLimit(double mag)
+{
+	conf->setValue("astrocalc/celestial_magnitude_limit", QString::number(mag, 'f', 2));
+	// Refresh the celestial bodies positions table
+	currentCelestialPositions();
+}
+
+void AstroCalcDialog::saveCelestialPositionsHorizontalCoordinatesFlag(bool b)
+{
+	conf->setValue("astrocalc/flag_horizontal_coordinates", b);
+	// Refresh the celestial bodies positions table
+	currentCelestialPositions();
+}
+
+void AstroCalcDialog::currentCelestialPositions()
+{
+	float ra, dec;
+	QString raStr, decStr, celObjId = "";
+
+	initListCelestialPositions();
+
+	double mag = ui->celestialMagnitudeDoubleSpinBox->value();
+	bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+
+	Q_ASSERT(ui->celestialCategoryComboBox);
+	QComboBox* category = ui->celestialCategoryComboBox;
+	QString celType = category->itemData(category->currentIndex()).toString();
+	QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
+
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJD();
+	ui->celestialPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
+
+	foreach (const NebulaP& obj, celestialObjects)
+	{
+		if (obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
+		{
+			if (horizon)
+			{
+				StelUtils::rectToSphe(&ra, &dec, obj->getAltAzPosAuto(core));
+				float direction = 3.; // N is zero, E is 90 degrees
+				if (useSouthAzimuth)
+					direction = 2.;
+				ra = direction*M_PI - ra;
+				if (ra > M_PI*2)
+					ra -= M_PI*2;
+				raStr = StelUtils::radToDmsStr(ra, true);
+				decStr = StelUtils::radToDmsStr(dec, true);
+			}
+			else
+			{
+				StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
+				raStr = StelUtils::radToHmsStr(ra);
+				decStr = StelUtils::radToDmsStr(dec, true);
+			}
+			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->celestialPositionsTreeWidget);
+			celObjId = obj->getNameI18n();
+			if (celObjId.isEmpty())
+				celObjId = obj->getDSODesignation();
+			treeItem->setText(ColumnName, celObjId);
+			treeItem->setText(ColumnRA, raStr);
+			treeItem->setTextAlignment(ColumnRA, Qt::AlignRight);
+			treeItem->setText(ColumnDec, decStr);
+			treeItem->setTextAlignment(ColumnDec, Qt::AlignRight);
+			treeItem->setText(ColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
+			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);
+			treeItem->setText(ColumnType, q_(obj->getTypeString()));
+		}
+	}
+
+	// adjust the column width
+	for(int i = 0; i < ColumnCount; ++i)
+	{
+	    ui->celestialPositionsTreeWidget->resizeColumnToContents(i);
+	}
+
+	// sort-by-name
+	ui->celestialPositionsTreeWidget->sortItems(ColumnName, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelIndex)
+{
+	// Find the object
+	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
+
+	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
+	{
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+			mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+			mvmgr->setFlagTracking(true);
 		}
 	}
 }
