@@ -181,6 +181,14 @@ public:
 	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
+	//! Checking position an object above mathematical horizon for current location.
+	//! @return true if object an above mathematical horizon
+	bool isAboveHorizon(const StelCore* core) const;
+
+	//! Checking position an object above real horizon for current location.
+	//! @return true if object an above real horizon (uses test for landscapes)
+	bool isAboveRealHorizon(const StelCore* core) const;
+
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
 	
