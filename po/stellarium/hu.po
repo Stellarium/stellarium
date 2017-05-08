@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-02 11:26+0700\n"
+"POT-Creation-Date: 2017-05-07 18:05+0700\n"
 "PO-Revision-Date: 2017-05-02 04:05+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-03 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-05-08 05:30+0000\n"
 "X-Generator: Launchpad (build 18366)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -39,7 +39,7 @@ msgstr "Egyéni jelölő"
 msgid "custom object"
 msgstr "Egyéni objektum"
 
-#: src/core/modules/CustomObjectMgr.cpp:79
+#: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
 msgstr "Jelölő"
 
@@ -53,7 +53,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:366 src/core/modules/NebulaMgr.cpp:367
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
-#: src/core/StelApp.cpp:539 src/core/StelCore.cpp:253
+#: src/core/StelApp.cpp:539 src/core/StelCore.cpp:254
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
 msgid "Display Options"
 msgstr "Megjelenítés beállításai"
@@ -1068,8 +1068,8 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "A gázcsóva hossza  (becsült érték): %1 km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:220 src/gui/AstroCalcDialog.cpp:648
-#: src/gui/AstroCalcDialog.cpp:1735 src/translations.h:68
+#: src/core/modules/SolarSystem.cpp:220 src/gui/AstroCalcDialog.cpp:649
+#: src/gui/AstroCalcDialog.cpp:1737 src/translations.h:68
 msgid "Planets"
 msgstr "Bolygók"
 
@@ -1181,7 +1181,7 @@ msgid "Position angle"
 msgstr "Poziciószög"
 
 #: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
-#: src/gui/AstroCalcDialog.cpp:899
+#: src/gui/AstroCalcDialog.cpp:900
 msgid "Separation"
 msgstr "Szögtávolság"
 
@@ -1205,231 +1205,231 @@ msgstr "Éjszakai mód"
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:251 src/gui/StelGui.cpp:202
-#: src/gui/AstroCalcDialog.cpp:357 src/gui/AstroCalcDialog.cpp:896
-#: src/gui/BookmarksDialog.cpp:105 src/ui_dateTimeDialogGui.h:376
+#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:202
+#: src/gui/AstroCalcDialog.cpp:358 src/gui/AstroCalcDialog.cpp:897
+#: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr "Dátum és idő"
 
-#: src/core/StelCore.cpp:252 src/core/StelMovementMgr.cpp:180
+#: src/core/StelCore.cpp:253 src/core/StelMovementMgr.cpp:180
 msgid "Movement and Selection"
 msgstr "Mozgás és kijelölés"
 
-#: src/core/StelCore.cpp:255
+#: src/core/StelCore.cpp:256
 msgid "Increase time speed"
 msgstr "Idő gyorsítása"
 
-#: src/core/StelCore.cpp:256
+#: src/core/StelCore.cpp:257
 msgid "Decrease time speed"
 msgstr "Idő lassítása"
 
-#: src/core/StelCore.cpp:257
+#: src/core/StelCore.cpp:258
 msgid "Increase time speed (a little)"
 msgstr "Növelje az idő sebességét (egy kicsit)"
 
-#: src/core/StelCore.cpp:258
+#: src/core/StelCore.cpp:259
 msgid "Decrease time speed (a little)"
 msgstr "Csökkentse az idő sebességét (egy kicsit)"
 
-#: src/core/StelCore.cpp:259
+#: src/core/StelCore.cpp:260
 msgid "Set normal time rate"
 msgstr "Valós sebesség visszaállítása"
 
-#: src/core/StelCore.cpp:260
+#: src/core/StelCore.cpp:261
 msgid "Set time rate to zero"
 msgstr "Az időráta nullára állítása"
 
-#: src/core/StelCore.cpp:261
+#: src/core/StelCore.cpp:262
 msgid "Set reverse time direction"
 msgstr "Idő iránya visszafelé"
 
-#: src/core/StelCore.cpp:262
+#: src/core/StelCore.cpp:263
 msgid "Set time to now"
 msgstr "Vissza a jelenbe"
 
-#: src/core/StelCore.cpp:263
+#: src/core/StelCore.cpp:264
 msgid "Add 1 solar minute"
 msgstr ""
 
-#: src/core/StelCore.cpp:264
+#: src/core/StelCore.cpp:265
 msgid "Add 1 solar hour"
 msgstr "1 szoláris órával előre"
 
-#: src/core/StelCore.cpp:265
+#: src/core/StelCore.cpp:266
 msgid "Add 1 solar day"
 msgstr "1 szoláris nappal előre"
 
-#: src/core/StelCore.cpp:266
+#: src/core/StelCore.cpp:267
 msgid "Add 7 solar days"
 msgstr "+7 szoláris nap"
 
-#: src/core/StelCore.cpp:267
+#: src/core/StelCore.cpp:268
 msgid "Subtract 1 solar minute"
 msgstr ""
 
-#: src/core/StelCore.cpp:268
+#: src/core/StelCore.cpp:269
 msgid "Subtract 1 solar hour"
 msgstr "1 szoláris órával vissza"
 
-#: src/core/StelCore.cpp:269
+#: src/core/StelCore.cpp:270
 msgid "Subtract 1 solar day"
 msgstr "1 szoláris nappal vissza"
 
-#: src/core/StelCore.cpp:270
+#: src/core/StelCore.cpp:271
 msgid "Subtract 7 solar days"
 msgstr "-7 szoláris nap"
 
-#: src/core/StelCore.cpp:271
+#: src/core/StelCore.cpp:272
 msgid "Add 1 sidereal day"
 msgstr "1 csillagnappal előre"
 
-#: src/core/StelCore.cpp:272
+#: src/core/StelCore.cpp:273
 msgid "Add 1 sidereal year"
 msgstr "+1 sziderikus év"
 
-#: src/core/StelCore.cpp:273
+#: src/core/StelCore.cpp:274
 msgid "Add 100 sidereal years"
 msgstr "+100 sziderikus év"
 
-#: src/core/StelCore.cpp:274
+#: src/core/StelCore.cpp:275
 msgid "Add 1 synodic month"
 msgstr "+1 szinodikus hónap"
 
-#: src/core/StelCore.cpp:275
+#: src/core/StelCore.cpp:276
 msgid "Add 1 draconic month"
 msgstr "+1 drakonikus hónap"
 
-#: src/core/StelCore.cpp:276
+#: src/core/StelCore.cpp:277
 msgid "Add 1 draconic year"
 msgstr "+1 drakonikus év"
 
-#: src/core/StelCore.cpp:277
+#: src/core/StelCore.cpp:278
 msgid "Add 1 anomalistic month"
 msgstr "+1 anomális hónap"
 
-#: src/core/StelCore.cpp:278
+#: src/core/StelCore.cpp:279
 msgid "Add 1 anomalistic year"
 msgstr "+1 anomális év"
 
-#: src/core/StelCore.cpp:279
+#: src/core/StelCore.cpp:280
 msgid "Add 100 anomalistic years"
 msgstr "+100 anomális év"
 
-#: src/core/StelCore.cpp:280
+#: src/core/StelCore.cpp:281
 msgid "Add 1 mean tropical month"
 msgstr "+1 tropikus hónap"
 
-#: src/core/StelCore.cpp:281
+#: src/core/StelCore.cpp:282
 msgid "Add 1 mean tropical year"
 msgstr "+1 átlagos tropikus év"
 
-#: src/core/StelCore.cpp:282
+#: src/core/StelCore.cpp:283
 msgid "Add 100 mean tropical years"
 msgstr "+100 tropikus év"
 
-#: src/core/StelCore.cpp:283
+#: src/core/StelCore.cpp:284
 msgid "Add 1 tropical year"
 msgstr "+1 tropikus év"
 
-#: src/core/StelCore.cpp:284
+#: src/core/StelCore.cpp:285
 msgid "Add 1 Julian year"
 msgstr "+1 julián év"
 
-#: src/core/StelCore.cpp:285
+#: src/core/StelCore.cpp:286
 msgid "Add 1 Julian century"
 msgstr "+1 julián évszázad"
 
-#: src/core/StelCore.cpp:286
+#: src/core/StelCore.cpp:287
 msgid "Add 1 Gaussian year"
 msgstr "+1 Gauss év"
 
-#: src/core/StelCore.cpp:287
+#: src/core/StelCore.cpp:288
 msgid "Subtract 1 sidereal day"
 msgstr "1 csillagnappal vissza"
 
-#: src/core/StelCore.cpp:288
+#: src/core/StelCore.cpp:289
 msgid "Subtract 1 sidereal year"
 msgstr "-1 sziderikus év"
 
-#: src/core/StelCore.cpp:289
+#: src/core/StelCore.cpp:290
 msgid "Subtract 100 sidereal years"
 msgstr "-100 sziderikus év"
 
-#: src/core/StelCore.cpp:290
+#: src/core/StelCore.cpp:291
 msgid "Subtract 1 synodic month"
 msgstr "-1 szinodikus hónap"
 
-#: src/core/StelCore.cpp:291
+#: src/core/StelCore.cpp:292
 msgid "Subtract 1 draconic month"
 msgstr "-1 drakonikus hónap"
 
-#: src/core/StelCore.cpp:292
+#: src/core/StelCore.cpp:293
 msgid "Subtract 1 draconic year"
 msgstr "-1 drakonikus év"
 
-#: src/core/StelCore.cpp:293
+#: src/core/StelCore.cpp:294
 msgid "Subtract 1 anomalistic month"
 msgstr "-1 anomális hónap"
 
-#: src/core/StelCore.cpp:294
+#: src/core/StelCore.cpp:295
 msgid "Subtract 1 anomalistic year"
 msgstr "-1 anomális év"
 
-#: src/core/StelCore.cpp:295
+#: src/core/StelCore.cpp:296
 msgid "Subtract 100 anomalistic years"
 msgstr "-100 anomális év"
 
-#: src/core/StelCore.cpp:296
+#: src/core/StelCore.cpp:297
 msgid "Subtract 1 mean tropical month"
 msgstr "-1 tropikus hónap"
 
-#: src/core/StelCore.cpp:297
+#: src/core/StelCore.cpp:298
 msgid "Subtract 1 mean tropical year"
 msgstr "-1 lözép tropikus év"
 
-#: src/core/StelCore.cpp:298
+#: src/core/StelCore.cpp:299
 msgid "Subtract 100 mean tropical years"
 msgstr "-100 tropikus év"
 
-#: src/core/StelCore.cpp:299
+#: src/core/StelCore.cpp:300
 msgid "Subtract 1 tropical year"
 msgstr "-1 tropikus év"
 
-#: src/core/StelCore.cpp:300
+#: src/core/StelCore.cpp:301
 msgid "Subtract 1 Julian year"
 msgstr "-1 julián év"
 
-#: src/core/StelCore.cpp:301
+#: src/core/StelCore.cpp:302
 msgid "Subtract 1 Julian century"
 msgstr "-100 julián év"
 
-#: src/core/StelCore.cpp:302
+#: src/core/StelCore.cpp:303
 msgid "Subtract 1 Gaussian year"
 msgstr "-1 Gauss év"
 
-#: src/core/StelCore.cpp:304
+#: src/core/StelCore.cpp:305
 msgid "Set home planet to selected planet"
 msgstr "Váltás a kijelölt bolygóra"
 
-#: src/core/StelCore.cpp:305
+#: src/core/StelCore.cpp:306
 msgid "Go to home"
 msgstr "Vissza haza"
 
-#: src/core/StelCore.cpp:307
+#: src/core/StelCore.cpp:308
 msgid "Flip scene horizontally"
 msgstr "Kép tükrözése vízszintesen"
 
-#: src/core/StelCore.cpp:308
+#: src/core/StelCore.cpp:309
 msgid "Flip scene vertically"
 msgstr "Kép tükrözése függőlegesen"
 
-#: src/core/StelCore.cpp:2104
+#: src/core/StelCore.cpp:2105
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korrekció kikapcsolva. Csak akkor alkalmazd, ha tudod mit csinálsz."
 
-#: src/core/StelCore.cpp:2107
+#: src/core/StelCore.cpp:2108
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1440,7 +1440,7 @@ msgstr ""
 "az  <em>Einstein's Theory of Relativity Confirmed by Ancient Solar "
 "Eclipses</em> (%1) című cikkében. További információk %2itt%3."
 
-#: src/core/StelCore.cpp:2110
+#: src/core/StelCore.cpp:2111
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1449,7 +1449,7 @@ msgstr ""
 "Ezt a gyakorlati képletet  G. M. Clemence adta meg <em>On the system of "
 "astronomical constants</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:2113
+#: src/core/StelCore.cpp:2114
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1462,7 +1462,7 @@ msgstr ""
 "Formulae for Calculators</em> című munkájában. Az eljárást a PC-re írt "
 "SunTracker Pro program is használja."
 
-#: src/core/StelCore.cpp:2117
+#: src/core/StelCore.cpp:2118
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1472,7 +1472,7 @@ msgstr ""
 "az 1983  <em>Astronomical Ephemeris</em> és a <em>Canon of Solar "
 "Eclipses</em> című munkáikban felhasználtak."
 
-#: src/core/StelCore.cpp:2121
+#: src/core/StelCore.cpp:2122
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1484,7 +1484,7 @@ msgstr ""
 "ig. Ugyanezt az összefüggést alkalmazta   Goldstine a szembeállásokat megadó "
 "táblázatában (1973)."
 
-#: src/core/StelCore.cpp:2125
+#: src/core/StelCore.cpp:2126
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1495,7 +1495,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:2128
+#: src/core/StelCore.cpp:2129
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1504,7 +1504,7 @@ msgstr ""
 "Ezt a képletet F. R. Stephenson publikálta  a <em>Pre-Telescopic "
 "Astronomical Observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:2131
+#: src/core/StelCore.cpp:2132
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1517,7 +1517,7 @@ msgstr ""
 "1975</em> (%1) című cikkében.   Korszerűbb és pontosabb változatát Schmadel "
 "& Zech közölte 1988-ban."
 
-#: src/core/StelCore.cpp:2134
+#: src/core/StelCore.cpp:2135
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1527,7 +1527,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (1986) című cikkében és a RedShift nevű "
 "PC-s planetáriumprogram is ezt használja."
 
-#: src/core/StelCore.cpp:2137
+#: src/core/StelCore.cpp:2138
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1538,12 +1538,12 @@ msgstr ""
 "changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) című "
 "cikkében."
 
-#: src/core/StelCore.cpp:2140
+#: src/core/StelCore.cpp:2141
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Ezt az algoritmust használja a Guide 7 nevű PC-s planetárium-program."
 
-#: src/core/StelCore.cpp:2143
+#: src/core/StelCore.cpp:2144
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1553,7 +1553,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) című, és a <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989) című cikkében."
 
-#: src/core/StelCore.cpp:2146
+#: src/core/StelCore.cpp:2147
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1562,7 +1562,7 @@ msgstr ""
 "Ezt a képletet K.M. Borkowski (%1) adta meg 31 napfogyatkozás adatainak "
 "elemzése után  (i.e. 2137 és i.e. 1715 között)."
 
-#: src/core/StelCore.cpp:2149
+#: src/core/StelCore.cpp:2150
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1575,7 +1575,7 @@ msgstr ""
 "cikkében, ezek az adatok illeszkedtek legjobban a Stephenson és Morrison "
 "(1984) által megadott értékekhez."
 
-#: src/core/StelCore.cpp:2152
+#: src/core/StelCore.cpp:2153
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1585,7 +1585,7 @@ msgstr ""
 "rövidített változata alapján. Cikkük <em>Lunar Tables and Programs from 4000 "
 "B.C. to A.D. 8000</em> (1991) címmel jelent meg."
 
-#: src/core/StelCore.cpp:2155
+#: src/core/StelCore.cpp:2156
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1596,7 +1596,7 @@ msgstr ""
 "Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1) című "
 "cikkben közölték."
 
-#: src/core/StelCore.cpp:2158
+#: src/core/StelCore.cpp:2159
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1605,7 +1605,7 @@ msgstr ""
 "F. R. Stephenson publikálta ezt a képletet  a <em>Historical Eclipses and "
 "Earth's Rotation</em> (%1) című könyvében."
 
-#: src/core/StelCore.cpp:2161
+#: src/core/StelCore.cpp:2162
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1616,7 +1616,7 @@ msgstr ""
 "Chapront, Chapront-Touze és Francou (1997) kiegészítésével az  ezen kívüli "
 "időszakokra."
 
-#: src/core/StelCore.cpp:2164
+#: src/core/StelCore.cpp:2165
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1625,7 +1625,7 @@ msgstr ""
 "A JPL Solar System Dynamics Group (NASA), és a Jet Propulsion Laboratory "
 "használja ezt a képletet interaktív weboldalukon: %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2167
+#: src/core/StelCore.cpp:2168
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1634,7 +1634,7 @@ msgstr ""
 "Ezt a polinomot J. Meeus és L. Simons közli  a <em>Polynomial approximations "
 "to Delta T, 1620-2000 AD</em> (%1) című cikkében."
 
-#: src/core/StelCore.cpp:2170
+#: src/core/StelCore.cpp:2171
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1645,7 +1645,7 @@ msgstr ""
 "fokú képletet  is megadnak, ami jól illeszkedik a legutóbbi időszak "
 "adataihoz."
 
-#: src/core/StelCore.cpp:2173
+#: src/core/StelCore.cpp:2174
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1657,7 +1657,7 @@ msgstr ""
 "(2002) című könyvükben. A képlet Jean Meeus <em>Astronomical Algorithms</em> "
 "(1991) című munkáján alapszik."
 
-#: src/core/StelCore.cpp:2176
+#: src/core/StelCore.cpp:2177
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1668,7 +1668,7 @@ msgstr ""
 "values of the Earth's clock error %1T and the calculation of eclipses</em> "
 "(%2)  című cikkében jelent meg. Kiegészítés:  (%3)."
 
-#: src/core/StelCore.cpp:2179
+#: src/core/StelCore.cpp:2180
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1681,7 +1681,7 @@ msgstr ""
 "használva. Ez egy lehetséges periodicitáson alapszik, amit Stephenson (%2) "
 "írt le. További infó %3itt%4."
 
-#: src/core/StelCore.cpp:2182 src/core/StelCore.cpp:2185
+#: src/core/StelCore.cpp:2183 src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1697,15 +1697,15 @@ msgstr ""
 "alkalmazza a Nap, a Hold és a bolygók efemeriszét számító SOLEX "
 "csillagászati program is."
 
-#: src/core/StelCore.cpp:2182
+#: src/core/StelCore.cpp:2183
 msgid "Used by default."
 msgstr "Alapértelmezés."
 
-#: src/core/StelCore.cpp:2185
+#: src/core/StelCore.cpp:2186
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Módosított verzió, a Hold gyorsítása nélkül"
 
-#: src/core/StelCore.cpp:2188
+#: src/core/StelCore.cpp:2189
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1716,7 +1716,7 @@ msgstr ""
 "megjelent az <em>Ancient eclipses and dating the fall of Babylon</em> "
 "cikkben  (%1)."
 
-#: src/core/StelCore.cpp:2191
+#: src/core/StelCore.cpp:2192
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1727,7 +1727,7 @@ msgstr ""
 "munkáján alapul, ez <em>Error Minimization of Polynomial Approximation of "
 "DeltaT</em> (%1) címmel jelent meg, átdolgozva Sana Islam által 2013-ban."
 
-#: src/core/StelCore.cpp:2194
+#: src/core/StelCore.cpp:2195
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1739,7 +1739,7 @@ msgstr ""
 "ízben itt jelent meg: <em>Delta T: Polynomial Approximation of Time Period "
 "1620-2013</em> (%1)"
 
-#: src/core/StelCore.cpp:2197
+#: src/core/StelCore.cpp:2198
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1752,7 +1752,7 @@ msgstr ""
 "AD 2015</em> (%1) kiadványban. A megadott tartományon kívül parabolával "
 "leírt, közelítő eredményt ad."
 
-#: src/core/StelCore.cpp:2200
+#: src/core/StelCore.cpp:2201
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1761,42 +1761,42 @@ msgstr ""
 "A  %1T képlet kvadratikus kiszámítása, ahol a paramétereket a felhasználó "
 "adja meg."
 
-#: src/core/StelCore.cpp:2203 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2204 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Hiba"
 
-#: src/core/StelCore.cpp:2211
+#: src/core/StelCore.cpp:2212
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2252
+#: src/core/StelCore.cpp:2253
 msgid "with zero values outside this range"
 msgstr "a tartományon kívül az értékek nullák"
 
-#: src/core/StelCore.cpp:2255
+#: src/core/StelCore.cpp:2256
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "tipikus 1 másodperces pontosság,  a tartományon kívül az értékek nullák"
 
-#: src/core/StelCore.cpp:2258
+#: src/core/StelCore.cpp:2259
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr "az átlagos hiba kisebb mint 1 s, a legnagyobb 1,9 s"
 
-#: src/core/StelCore.cpp:2265
+#: src/core/StelCore.cpp:2266
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2276
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Érvényes időtartomány %1 és %2, %3"
 
-#: src/core/StelCore.cpp:2277
+#: src/core/StelCore.cpp:2278
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Érvényességi időszak: %1 és %2 év között"
@@ -2371,7 +2371,7 @@ msgstr "A Stellarium súgója"
 msgid "Keys"
 msgstr "Billentyűk"
 
-#: src/gui/HelpDialog.cpp:144 src/gui/HelpDialog.cpp:230
+#: src/gui/HelpDialog.cpp:144 src/gui/HelpDialog.cpp:233
 msgid "Further Reading"
 msgstr "További olvasmányok"
 
@@ -2464,14 +2464,22 @@ msgid "Shift & left click"
 msgstr "Shift & bal katt"
 
 #: src/gui/HelpDialog.cpp:187
-msgid "Delete all custom markers"
-msgstr "Egyéni jelölők törlése"
+msgid "Delete the one closest marker to mouse cursor"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
 msgstr "Shift & jobb katt"
 
+#: src/gui/HelpDialog.cpp:190
+msgid "Delete all custom markers"
+msgstr "Egyéni jelölők törlése"
+
 #: src/gui/HelpDialog.cpp:191
+msgid "Shift & Alt & right click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:194
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -2480,31 +2488,31 @@ msgstr ""
 "Alább a gombokhoz rendelt műveletek láthatók. További műveletek a  \"%1\"  "
 "gombbal érhetők el."
 
-#: src/gui/HelpDialog.cpp:220
+#: src/gui/HelpDialog.cpp:223
 msgid "Text User Interface (TUI)"
 msgstr "Szöveges interfész"
 
-#: src/gui/HelpDialog.cpp:222
+#: src/gui/HelpDialog.cpp:225
 msgid "Activate TUI"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:231
+#: src/gui/HelpDialog.cpp:234
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr "Az alábbi külső hivatkozások webböngészőben fognak megnyílni:\n"
 
-#: src/gui/HelpDialog.cpp:232
+#: src/gui/HelpDialog.cpp:235
 msgid "The Stellarium User Guide"
 msgstr "Stellarium felhasználói kézikönyv"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:236
+#: src/gui/HelpDialog.cpp:239
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Gyakori kérdések} a Stellariumról. Válaszokkal."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:241
+#: src/gui/HelpDialog.cpp:244
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -2513,7 +2521,7 @@ msgstr ""
 "által készített tájképek és parancsfájlok is."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:246
+#: src/gui/HelpDialog.cpp:249
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -2522,7 +2530,7 @@ msgstr ""
 "akkor itt tedd fel a kérdésedet, mi pedig megpróbálunk segíteni."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:251
+#: src/gui/HelpDialog.cpp:254
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -2533,74 +2541,74 @@ msgstr ""
 "megnyithatja a hibajelentéseket."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:256
+#: src/gui/HelpDialog.cpp:259
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Fórumok} – társalogj a Stellariumról a többi felhasználóval."
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:316
 msgid "Developers"
 msgstr "Fejlesztők"
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:317
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "%1 (koordinátor és vezető fejlesztő)"
 
-#: src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafika és egyéb design: %1"
 
-#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
-#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
-#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:321
-#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:328
-#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
-#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:332
-#: src/gui/HelpDialog.cpp:333
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323 src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:325 src/gui/HelpDialog.cpp:331
+#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
+#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:336
 #, qt-format
 msgid "Developer: %1"
 msgstr "Fejlesztő: %1"
 
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Folyamatos integrálás: %1"
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:327
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tesztelő: %1"
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:328
 msgid "Former Developers"
 msgstr "Korábbi fejlesztők"
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:329
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 "Sokan jelentősen hozzájárultak munkájukkal a projekthez, de már nem aktívak:"
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:330
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dokumentáció és fejlesztés: %1"
 
-#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:337 src/gui/HelpDialog.cpp:338
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX fejlesztő: %1"
 
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:339
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:511
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
 msgid "Contributors"
 msgstr "Közreműködők"
 
-#: src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:340
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -3017,8 +3025,8 @@ msgstr "Deklináció"
 msgid "Azimuth"
 msgstr "Azimut"
 
-#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:815
-#: src/gui/AstroCalcDialog.cpp:876 src/gui/AstroCalcDialog.cpp:878
+#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:816
+#: src/gui/AstroCalcDialog.cpp:877 src/gui/AstroCalcDialog.cpp:879
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "Magasság"
@@ -3090,7 +3098,7 @@ msgid "Secular acceleration of the Moon"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:233 src/ui_configurationDialog.h:1298
+#: src/gui/AstroCalcDialog.cpp:234 src/ui_configurationDialog.h:1298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
@@ -3099,271 +3107,269 @@ msgid "Name"
 msgstr "Név"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:235 src/gui/AstroCalcDialog.cpp:360
-#: src/gui/BookmarksDialog.cpp:102
+#: src/gui/AstroCalcDialog.cpp:236 src/gui/AstroCalcDialog.cpp:361
 msgid "RA (J2000)"
 msgstr "RA (J2000)"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:237 src/gui/AstroCalcDialog.cpp:362
-#: src/gui/BookmarksDialog.cpp:104
+#: src/gui/AstroCalcDialog.cpp:238 src/gui/AstroCalcDialog.cpp:363
 msgid "Dec (J2000)"
 msgstr "Dec (J2000)"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:239 src/gui/AstroCalcDialog.cpp:364
+#: src/gui/AstroCalcDialog.cpp:240 src/gui/AstroCalcDialog.cpp:365
 msgid "mag"
 msgstr "mag"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:241 src/ui_configurationDialog.h:1277
+#: src/gui/AstroCalcDialog.cpp:242 src/ui_configurationDialog.h:1277
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Type"
 msgstr "Típus"
 
-#: src/gui/AstroCalcDialog.cpp:264
+#: src/gui/AstroCalcDialog.cpp:265
 #, qt-format
 msgid "Positions on %1"
 msgstr "Pozíció ekkor %1"
 
-#: src/gui/AstroCalcDialog.cpp:358 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:359 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr "Julián-nap"
 
-#: src/gui/AstroCalcDialog.cpp:480 src/gui/AstroCalcDialog.cpp:1133
+#: src/gui/AstroCalcDialog.cpp:481 src/gui/AstroCalcDialog.cpp:1134
 msgid "CSV (Comma delimited)"
 msgstr "CSV (vesszővel elválasztva)"
 
-#: src/gui/AstroCalcDialog.cpp:482
+#: src/gui/AstroCalcDialog.cpp:483
 msgid "Save calculated ephemerides as..."
 msgstr "Kiszámított efemeriszek mentése mint..."
 
-#: src/gui/AstroCalcDialog.cpp:565
+#: src/gui/AstroCalcDialog.cpp:566
 msgid "10 minutes"
 msgstr "10 perc"
 
-#: src/gui/AstroCalcDialog.cpp:566
+#: src/gui/AstroCalcDialog.cpp:567
 msgid "30 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:567
+#: src/gui/AstroCalcDialog.cpp:568
 msgid "1 hour"
 msgstr "1 óra"
 
-#: src/gui/AstroCalcDialog.cpp:568
+#: src/gui/AstroCalcDialog.cpp:569
 msgid "6 hours"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:569
+#: src/gui/AstroCalcDialog.cpp:570
 msgid "12 hours"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:570
+#: src/gui/AstroCalcDialog.cpp:571
 msgid "1 day"
 msgstr "1 nap"
 
-#: src/gui/AstroCalcDialog.cpp:571
+#: src/gui/AstroCalcDialog.cpp:572
 msgid "5 days"
 msgstr "5 nap"
 
-#: src/gui/AstroCalcDialog.cpp:572
+#: src/gui/AstroCalcDialog.cpp:573
 msgid "10 days"
 msgstr "10 nap"
 
-#: src/gui/AstroCalcDialog.cpp:573
+#: src/gui/AstroCalcDialog.cpp:574
 msgid "15 days"
 msgstr "15 nap"
 
-#: src/gui/AstroCalcDialog.cpp:574
+#: src/gui/AstroCalcDialog.cpp:575
 msgid "30 days"
 msgstr "30 nap"
 
-#: src/gui/AstroCalcDialog.cpp:575
+#: src/gui/AstroCalcDialog.cpp:576
 msgid "60 days"
 msgstr "60 nap"
 
-#: src/gui/AstroCalcDialog.cpp:647
+#: src/gui/AstroCalcDialog.cpp:648
 msgid "Solar system"
 msgstr "Naprendszer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:649 src/gui/AstroCalcDialog.cpp:1741
+#: src/gui/AstroCalcDialog.cpp:650 src/gui/AstroCalcDialog.cpp:1743
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Aszteroidák"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:650 src/gui/AstroCalcDialog.cpp:1743
+#: src/gui/AstroCalcDialog.cpp:651 src/gui/AstroCalcDialog.cpp:1745
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr "Plutínók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:651 src/gui/AstroCalcDialog.cpp:1742
+#: src/gui/AstroCalcDialog.cpp:652 src/gui/AstroCalcDialog.cpp:1744
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Üstökösök"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:652 src/gui/AstroCalcDialog.cpp:1744
+#: src/gui/AstroCalcDialog.cpp:653 src/gui/AstroCalcDialog.cpp:1746
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr "Törpebolygók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:653 src/gui/AstroCalcDialog.cpp:1745
+#: src/gui/AstroCalcDialog.cpp:654 src/gui/AstroCalcDialog.cpp:1747
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr "Kubevanók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:654 src/gui/AstroCalcDialog.cpp:1746
+#: src/gui/AstroCalcDialog.cpp:655 src/gui/AstroCalcDialog.cpp:1748
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr "Szórtkorong objektumok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:655 src/gui/AstroCalcDialog.cpp:1747
+#: src/gui/AstroCalcDialog.cpp:656 src/gui/AstroCalcDialog.cpp:1749
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr "Oort felhő objektumok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:656 src/gui/AstroCalcDialog.cpp:1748
+#: src/gui/AstroCalcDialog.cpp:657 src/gui/AstroCalcDialog.cpp:1750
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr "szednoidák"
 
-#: src/gui/AstroCalcDialog.cpp:657
+#: src/gui/AstroCalcDialog.cpp:658
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Fényes csillagok (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:658
+#: src/gui/AstroCalcDialog.cpp:659
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Fényes csillagcsoportok (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:659 src/gui/AstroCalcDialog.cpp:1749
+#: src/gui/AstroCalcDialog.cpp:660 src/gui/AstroCalcDialog.cpp:1751
 #: src/translations.h:105 src/ui_viewDialog.h:2137 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "Planetáris köd"
 
-#: src/gui/AstroCalcDialog.cpp:660
+#: src/gui/AstroCalcDialog.cpp:661
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Fényes ködök (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:661 src/gui/AstroCalcDialog.cpp:1738
+#: src/gui/AstroCalcDialog.cpp:662 src/gui/AstroCalcDialog.cpp:1740
 #: src/translations.h:107 src/ui_viewDialog.h:2140 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "Sötét ködök"
 
-#: src/gui/AstroCalcDialog.cpp:662
+#: src/gui/AstroCalcDialog.cpp:663
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Fényes galaxisok (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:814 src/gui/AstroCalcDialog.cpp:876
-#: src/gui/AstroCalcDialog.cpp:878
+#: src/gui/AstroCalcDialog.cpp:815 src/gui/AstroCalcDialog.cpp:877
+#: src/gui/AstroCalcDialog.cpp:879
 msgid "Local Time"
 msgstr "Helyi idő"
 
-#: src/gui/AstroCalcDialog.cpp:870
+#: src/gui/AstroCalcDialog.cpp:871
 #, qt-format
 msgid "Now about %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:872
+#: src/gui/AstroCalcDialog.cpp:873
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:895
+#: src/gui/AstroCalcDialog.cpp:896
 msgid "Phenomenon"
 msgstr "Jelenség"
 
-#: src/gui/AstroCalcDialog.cpp:897
+#: src/gui/AstroCalcDialog.cpp:898
 msgid "Object 1"
 msgstr "Objektum 1"
 
-#: src/gui/AstroCalcDialog.cpp:898
+#: src/gui/AstroCalcDialog.cpp:899
 msgid "Object 2"
 msgstr "Objektum 2"
 
-#: src/gui/AstroCalcDialog.cpp:1135
+#: src/gui/AstroCalcDialog.cpp:1136
 msgid "Save calculated phenomena as..."
 msgstr "Kiszámított jelenség mentése mint..."
 
-#: src/gui/AstroCalcDialog.cpp:1174 src/gui/AstroCalcDialog.cpp:1349
-#: src/gui/AstroCalcDialog.cpp:1507
+#: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:1350
+#: src/gui/AstroCalcDialog.cpp:1508
 msgid "Conjunction"
 msgstr "Együttállás"
 
-#: src/gui/AstroCalcDialog.cpp:1181
+#: src/gui/AstroCalcDialog.cpp:1182
 msgid "Opposition"
 msgstr "Oppozíció"
 
-#: src/gui/AstroCalcDialog.cpp:1189
+#: src/gui/AstroCalcDialog.cpp:1190
 msgid "Transit"
 msgstr "Áthaladás"
 
-#: src/gui/AstroCalcDialog.cpp:1191 src/gui/AstroCalcDialog.cpp:1354
-#: src/gui/AstroCalcDialog.cpp:1512
+#: src/gui/AstroCalcDialog.cpp:1192 src/gui/AstroCalcDialog.cpp:1355
+#: src/gui/AstroCalcDialog.cpp:1513
 msgid "Occultation"
 msgstr "Okkultáció"
 
-#: src/gui/AstroCalcDialog.cpp:1195
+#: src/gui/AstroCalcDialog.cpp:1196
 msgid "Eclipse"
 msgstr "Fogyatkozás"
 
-#: src/gui/AstroCalcDialog.cpp:1715
+#: src/gui/AstroCalcDialog.cpp:1717
 msgid "In the Evening"
 msgstr "Este"
 
-#: src/gui/AstroCalcDialog.cpp:1716
+#: src/gui/AstroCalcDialog.cpp:1718
 msgid "In the Morning"
 msgstr "Reggel"
 
-#: src/gui/AstroCalcDialog.cpp:1717
+#: src/gui/AstroCalcDialog.cpp:1719
 msgid "Any Time Tonight"
 msgstr "Bármikor ma éjszaka"
 
-#: src/gui/AstroCalcDialog.cpp:1736
+#: src/gui/AstroCalcDialog.cpp:1738
 msgid "Bright stars"
 msgstr "Fényes csillagok"
 
-#: src/gui/AstroCalcDialog.cpp:1737 src/ui_viewDialog.h:2141
+#: src/gui/AstroCalcDialog.cpp:1739 src/ui_viewDialog.h:2141
 msgid "Bright nebulae"
 msgstr "Fényes ködök"
 
-#: src/gui/AstroCalcDialog.cpp:1739 src/ui_viewDialog.h:2138
+#: src/gui/AstroCalcDialog.cpp:1741 src/ui_viewDialog.h:2138
 #: src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "Galaxis"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1740 src/translations.h:123
+#: src/gui/AstroCalcDialog.cpp:1742 src/translations.h:123
 #: src/ui_viewDialog.h:2136 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "Csillagcsoport"
 
-#: src/gui/BookmarksDialog.cpp:99 src/ui_searchDialogGui.h:695
+#: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:695
 msgid "Object"
 msgstr "Objektum"
 
-#: src/gui/BookmarksDialog.cpp:100
+#: src/gui/BookmarksDialog.cpp:101
 msgid "Localized name"
 msgstr "Helyi név"
 
-#: src/gui/BookmarksDialog.cpp:106
+#: src/gui/BookmarksDialog.cpp:103
 msgid "Location of observer"
 msgstr "Megfigyelő helye"
 
-#: src/gui/BookmarksDialog.cpp:165
+#: src/gui/BookmarksDialog.cpp:154
 msgid "Unnamed object"
 msgstr ""
 
@@ -14528,58 +14534,58 @@ msgstr "nn/hh/éééé"
 msgid "Results"
 msgstr "Eredmények"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:99
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
 msgid "Pointer Coordinates"
 msgstr "A mutató koordinátái"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:60
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:59
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr "Ez a bővítmény az egérmutató koordinátáit írja ki"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:99
 msgid "Show coordinates of the mouse pointer"
 msgstr "Az egérmutató koordinátáinak kijelzése"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:134
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "RA/Dekl. (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:169
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:150
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "RA/Dekl."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:192
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Az/Alt"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "Gal. Long/Lat"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:224
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:205
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:243
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:224
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr "Ekl. h./sz."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:262
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:243
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Ecl. Long/Lat (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:280
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:261
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "HA/Dec"
