@@ -179,7 +179,7 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
-	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(currentCelestialPositions()));
+	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
 
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
@@ -484,6 +484,15 @@ void AstroCalcDialog::saveCelestialPositionsMagnitudeLimit(double mag)
 void AstroCalcDialog::saveCelestialPositionsHorizontalCoordinatesFlag(bool b)
 {
 	conf->setValue("astrocalc/flag_horizontal_coordinates", b);
+	// Refresh the celestial bodies positions table
+	currentCelestialPositions();
+}
+
+void AstroCalcDialog::saveCelestialPositionsCategory(int index)
+{
+	Q_ASSERT(ui->celestialCategoryComboBox);
+	QComboBox* category = ui->celestialCategoryComboBox;
+	conf->setValue("astrocalc/celestial_category", category->itemData(index).toInt());
 	// Refresh the celestial bodies positions table
 	currentCelestialPositions();
 }
