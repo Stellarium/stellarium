@@ -109,6 +109,7 @@ private slots:
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
 	void saveCelestialPositionsHorizontalCoordinatesFlag(bool b);
+	void saveCelestialPositionsCategory(int index);
 
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
@@ -238,7 +239,20 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::ColumnRA || column == AstroCalcDialog::ColumnDec)
+		if (column == AstroCalcDialog::ColumnName)
+		{
+			QRegExp dso("^(\\w+)\\s*(\\d+)$");
+			int a = 0, b = 0;
+			if (dso.exactMatch(text(column)))
+				a = dso.capturedTexts().at(2).toInt();
+			if (dso.exactMatch(other.text(column)))
+				b = dso.capturedTexts().at(2).toInt();
+			if (a>0 && b>0)
+				return a < b;
+			else
+				return text(column).toLower() < other.text(column).toLower();
+		}
+		else if (column == AstroCalcDialog::ColumnRA || column == AstroCalcDialog::ColumnDec)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
