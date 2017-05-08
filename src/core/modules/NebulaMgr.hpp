@@ -316,6 +316,9 @@ public:
 	//! Get the list of all deep-sky objects.
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
 
+	//! Get the list of deep-sky objects by type.
+	QList<NebulaP> getDeepSkyObjectsByType(const QString& objType);
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:

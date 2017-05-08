@@ -362,6 +362,13 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
 			result["NebulaMgr:106"] = "Collinder Catalogue";
 			result["NebulaMgr:107"] = "Melotte Catalogue";
+			result["NebulaMgr:108"] = "New General Catalogue";
+			result["NebulaMgr:109"] = "Index Catalogue";
+			result["NebulaMgr:110"] = "Lynds' Catalogue of Bright Nebulae";
+			result["NebulaMgr:111"] = "Lynds' Catalogue of Dark Nebulae";
+			result["NebulaMgr:112"] = "Principal Galaxy Catalog";
+			result["NebulaMgr:113"] = "The Uppsala General Catalogue of Galaxies";
+			result["NebulaMgr:114"] = "Cederblad Catalog";
 			result["NebulaMgr:150"] = "Dwarf galaxies";
 			result["NebulaMgr:151"] = "Herschel 400 Catalogue";
 		}
