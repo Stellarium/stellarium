@@ -377,6 +377,8 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 		{
 			result["StarMgr:0"] = "Interesting double stars";
 			result["StarMgr:1"] = "Interesting variable stars";
+			result["StarMgr:2"] = "Bright double stars";
+			result["StarMgr:3"] = "Bright variable stars";
 		}
 	}
 	return result;
