@@ -1,7 +1,7 @@
 /* jshint expr: true */
 
 define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
-	"api/properties", "./time", "./JoystickQueue", "./actions", "./viewoptions",
+	"api/properties", "./time", "./joystickqueue", "./actions", "./viewoptions",
 	"./scripts",
 	"./viewcontrol", "./location", "./search", "jquery-ui"
 ], function($, settings, globalize, rc, actionApi, propApi, timeui,
