@@ -173,6 +173,8 @@ private:
 	QHash<QString,QString> wutObjects;
 	QHash<QString,int> wutCategories;
 
+	typedef QMap<StelObjectP, float> starData;
+
 	//! Update header names for planetary and celestial positions tables
 	void setPlanetaryPositionsHeaderNames();
 	void setCelestialPositionsHeaderNames();
@@ -238,10 +240,10 @@ private:
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
-class ACTreeWidgetItem : public QTreeWidgetItem
+class ACPlanPosTreeWidgetItem : public QTreeWidgetItem
 {
 public:
-	ACTreeWidgetItem(QTreeWidget* parent)
+	ACPlanPosTreeWidgetItem(QTreeWidget* parent)
 		: QTreeWidgetItem(parent)
 	{
 	}
@@ -251,7 +253,36 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::ColumnName || column == AstroCalcDialog::CColumnName)
+		if (column == AstroCalcDialog::ColumnRA || column == AstroCalcDialog::ColumnDec)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::ColumnMagnitude)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACCelPosTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACCelPosTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::CColumnName)
 		{
 			QRegExp dso("^(\\w+)\\s*(\\d+)$");
 			int a = 0, b = 0;
@@ -264,16 +295,67 @@ private:
 			else
 				return text(column).toLower() < other.text(column).toLower();
 		}
-		else if (column == AstroCalcDialog::ColumnRA    || column == AstroCalcDialog::ColumnDec  ||
-			 column == AstroCalcDialog::CColumnRA   || column == AstroCalcDialog::CColumnDec ||
-			 column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
+		else if (column == AstroCalcDialog::CColumnRA || column == AstroCalcDialog::CColumnDec)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
-		else if (column == AstroCalcDialog::ColumnMagnitude    || column == AstroCalcDialog::CColumnMagnitude ||
-			 column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisJD)
+		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnExtra)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACEphemTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACEphemTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisJD)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACPhenTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACPhenTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::PhenomenaSeparation)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
 		else
 		{

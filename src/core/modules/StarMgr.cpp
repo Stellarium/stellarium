@@ -421,6 +421,10 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
+
+	populateStarsDesignations();
+	populateHipparcosLists();
+
 	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
@@ -631,9 +635,14 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
-	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
+	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;	
+}
 
+void StarMgr::populateHipparcosLists()
+{
 	hipparcosStars.clear();
+	doubleHipStars.clear();
+	variableHipStars.clear();
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
 		const Star1 *const s = hipIndex[hip].s;
@@ -641,7 +650,20 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		{
 			const SpecialZoneArray<Star1> *const a = hipIndex[hip].a;
 			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
-			hipparcosStars.push_back(s->createStelObject(a,z));
+			StelObjectP so = s->createStelObject(a,z);
+			hipparcosStars.push_back(so);
+			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
+			{
+				QMap<StelObjectP, float> sa;
+				sa[so] = getGcvsPeriod(s->getHip());
+				variableHipStars.push_back(sa);
+			}
+			if (!getWdsName(s->getHip()).isEmpty())
+			{
+				QMap<StelObjectP, float> sd;
+				sd[so] = getWdsLastSeparation(s->getHip());
+				doubleHipStars.push_back(sd);
+			}
 		}
 	}
 }
@@ -767,7 +789,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	sciAdditionalNamesMapI18n.clear();
 	sciAdditionalNamesIndexI18n.clear();
 
-	qDebug() << "Loading star names from" << QDir::toNativeSeparators(sciNameFile);
+	qDebug() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
 	QFile snFile(sciNameFile);
 	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1686,12 +1708,20 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	else
 		loadCommonNames(fic);
 
+	// Turn on sci names/catalog names for western culture only
+	setFlagSciNames(skyCultureDir.startsWith("western"));
+	updateI18n();
+}
+
+void StarMgr::populateStarsDesignations()
+{
+	QString fic;
 	fic = StelFileMgr::findFile("stars/default/name.fab");
 	if (fic.isEmpty())
 		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
 	else
 		loadSciNames(fic);
-	
+
 	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
 	if (fic.isEmpty())
 		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
@@ -1709,10 +1739,6 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
 	else
 		loadCrossIdentificationData(fic);
-
-	// Turn on sci names/catalog names for western culture only
-	setFlagSciNames(skyCultureDir.startsWith("western"));
-	updateI18n();
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const
