@@ -318,8 +318,21 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		//TRANSLATORS: magnitude
 		positionsHeader << q_("mag");
 	}
-	//TRANSLATORS: surface brightness
-	positionsHeader << q_("S.B.");
+	if (celType==170)
+	{
+		//TRANSLATORS: separation, arcseconds
+		positionsHeader << QString("%1, \"").arg(q_("Sep."));
+	}
+	else if (celType==171)
+	{
+		//TRANSLATORS: period, days
+		positionsHeader << QString("%1, %2").arg(q_("Per."), qc_("d", "days"));
+	}
+	else
+	{
+		//TRANSLATORS: surface brightness
+		positionsHeader << q_("S.B.");
+	}
 	//TRANSLATORS: type of object
 	positionsHeader << q_("Type");
 
@@ -354,7 +367,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 				continue;
 
 			StelUtils::rectToSphe(&ra,&dec,planet->getJ2000EquatorialPos(core));
-			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->planetaryPositionsTreeWidget);
+			ACPlanPosTreeWidgetItem *treeItem = new ACPlanPosTreeWidgetItem(ui->planetaryPositionsTreeWidget);
 			treeItem->setText(ColumnName, planet->getNameI18n());
 			treeItem->setText(ColumnRA, StelUtils::radToHmsStr(ra));
 			treeItem->setTextAlignment(ColumnRA, Qt::AlignRight);
@@ -464,6 +477,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Cederblad Catalog"), "114");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
+	category->addItem(q_("Bright double stars"), "170");
+	category->addItem(q_("Bright variable stars"), "171");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -510,58 +525,130 @@ void AstroCalcDialog::currentCelestialPositions()
 	bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
-	Q_ASSERT(ui->celestialCategoryComboBox);
-	QComboBox* category = ui->celestialCategoryComboBox;
-	QString celType = category->itemData(category->currentIndex()).toString();
-	QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
-
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
 	ui->celestialPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
-	foreach (const NebulaP& obj, celestialObjects)
+	Q_ASSERT(ui->celestialCategoryComboBox);
+	QComboBox* category = ui->celestialCategoryComboBox;
+	QString celType = category->itemData(category->currentIndex()).toString();
+	int celTypeId = celType.toInt();
+
+	if (celTypeId<170)
 	{
-		if (obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
+		// Deep-sky objects
+		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
+		foreach (const NebulaP& obj, celestialObjects)
 		{
-			if (horizon)
+			if (obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
 			{
-				StelUtils::rectToSphe(&ra, &dec, obj->getAltAzPosAuto(core));
-				float direction = 3.; // N is zero, E is 90 degrees
-				if (useSouthAzimuth)
-					direction = 2.;
-				ra = direction*M_PI - ra;
-				if (ra > M_PI*2)
-					ra -= M_PI*2;
-				raStr = StelUtils::radToDmsStr(ra, true);
-				decStr = StelUtils::radToDmsStr(dec, true);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, obj->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+
+				celObjId = obj->getNameI18n();
+				if (celObjId.isEmpty())
+					celObjId = obj->getDSODesignation();
+
+				extra = QString::number(obj->getSurfaceBrightnessWithExtinction(core), 'f', 2);
+				if (extra.toFloat()>90.f)
+					extra = QChar(0x2014);
+
+				treeItem->setText(CColumnName, celObjId);
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setText(CColumnType, q_(obj->getTypeString()));
 			}
-			else
+		}
+	}
+	else
+	{
+		// stars
+		QString sType = "star";
+		QList<starData> celestialObjects;
+		if (celTypeId==170)
+		{
+			// double stars
+			celestialObjects = starMgr->getHipparcosDoubleStars();
+			sType = "double star";
+		}
+		else
+		{
+			// variable stars
+			celestialObjects = starMgr->getHipparcosVariableStars();
+			sType = "variable star";
+		}
+
+		foreach (const starData& star, celestialObjects)
+		{
+			StelObjectP obj = star.firstKey();
+			if (obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
 			{
-				StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
-				raStr = StelUtils::radToHmsStr(ra);
-				decStr = StelUtils::radToDmsStr(dec, true);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, obj->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				if (celTypeId==170)
+					extra = QString::number(star.value(obj), 'f', 3); // arcseconds
+				else
+				{
+					if (star.value(obj)>0.f)
+						extra = QString::number(star.value(obj), 'f', 5); // days
+					else
+						extra = QChar(0x2014);
+				}
+
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, obj->getNameI18n());
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setText(CColumnType, q_(sType));
 			}
-
-			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->celestialPositionsTreeWidget);
-
-			celObjId = obj->getNameI18n();
-			if (celObjId.isEmpty())
-				celObjId = obj->getDSODesignation();
-
-			extra = QString::number(obj->getSurfaceBrightnessWithExtinction(core), 'f', 2);
-			if (extra.toFloat()>90.f)
-				extra = QChar(0x2014);
-
-			treeItem->setText(CColumnName, celObjId);
-			treeItem->setText(CColumnRA, raStr);
-			treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
-			treeItem->setText(CColumnDec, decStr);
-			treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-			treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
-			treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
-			treeItem->setText(CColumnExtra, extra);
-			treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-			treeItem->setText(CColumnType, q_(obj->getTypeString()));
 		}
 	}
 
@@ -719,7 +806,7 @@ void AstroCalcDialog::generateEphemeris()
 			else
 				EphemerisListDates.append(localeMgr->getPrintableDateLocal(JD));
 			StelUtils::rectToSphe(&ra,&dec,pos);
-			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
+			ACEphemTreeWidgetItem *treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
 			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
@@ -923,11 +1010,13 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Oort cloud objects"), "8");
 	groups->addItem(q_("Sednoids"), "9");
 	groups->addItem(q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit-5.0f, 'f', 1)), "10");
-	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "11");
-	groups->addItem(q_("Planetary nebulae"), "12");
-	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "13");
-	groups->addItem(q_("Dark nebulae"), "14");
-	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "15");
+	groups->addItem(q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit-5.0f, 'f', 1)), "11");
+	groups->addItem(q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit-5.0f, 'f', 1)), "12");
+	groups->addItem(q_("Bright star clusters (<%1 mag)").arg(brLimit), "13");
+	groups->addItem(q_("Planetary nebulae"), "14");
+	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "15");
+	groups->addItem(q_("Dark nebulae"), "16");
+	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "17");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -1220,9 +1309,13 @@ void AstroCalcDialog::calculatePhenomena()
 	dso.clear();
 	QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 
-	QList<StelObjectP> star;
+	QList<StelObjectP> star, doubleStar, variableStar;
 	star.clear();
+	doubleStar.clear();
+	variableStar.clear();
 	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
+	QList<starData> doubleHipStars = starMgr->getHipparcosDoubleStars();
+	QList<starData> variableHipStars = starMgr->getHipparcosVariableStars();
 
 	int obj2Type = ui->object2ComboBox->currentData().toInt();
 	switch (obj2Type)
@@ -1297,42 +1390,56 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		case 10: // Stars
+		case 10: // Stars			
 			foreach(const StelObjectP& object, hipStars)
 			{
 				if (object->getVMagnitude(core)<(brightLimit-5.0f))
 					star.append(object);
 			}
 			break;
-		case 11: // Star clusters
+		case 11: // Double stars
+			foreach(const starData& object, doubleHipStars)
+			{
+				if (object.firstKey()->getVMagnitude(core)<(brightLimit-5.0f))
+					star.append(object.firstKey());
+			}
+			break;
+		case 12: // Variable stars
+			foreach(const starData& object, variableHipStars)
+			{
+				if (object.firstKey()->getVMagnitude(core)<(brightLimit-5.0f))
+					star.append(object.firstKey());
+			}
+			break;
+		case 13: // Star clusters
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebCl || object->getDSOType()==Nebula::NebOc || object->getDSOType()==Nebula::NebGc || object->getDSOType()==Nebula::NebSA || object->getDSOType()==Nebula::NebSC || object->getDSOType()==Nebula::NebCn))
 					dso.append(object);
 			}
 			break;
-		case 12: // Planetary nebulae
+		case 14: // Planetary nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getDSOType()==Nebula::NebPn || object->getDSOType()==Nebula::NebPossPN || object->getDSOType()==Nebula::NebPPN)
 					dso.append(object);
 			}
 			break;
-		case 13: // Bright nebulae
+		case 15: // Bright nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebN || object->getDSOType()==Nebula::NebBn || object->getDSOType()==Nebula::NebEn || object->getDSOType()==Nebula::NebRn || object->getDSOType()==Nebula::NebHII || object->getDSOType()==Nebula::NebISM || object->getDSOType()==Nebula::NebCn || object->getDSOType()==Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
-		case 14: // Dark nebulae
+		case 16: // Dark nebulae
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getDSOType()==Nebula::NebDn || object->getDSOType()==Nebula::NebMolCld || object->getDSOType()==Nebula::NebYSO)
 					dso.append(object);
 			}
 			break;
-		case 15: // Galaxies
+		case 17: // Galaxies
 			foreach(const NebulaP& object, allDSO)
 			{
 				if (object->getVMagnitude(core)<brightLimit && (object->getDSOType()==Nebula::NebGx || object->getDSOType()==Nebula::NebAGx || object->getDSOType()==Nebula::NebRGx || object->getDSOType()==Nebula::NebQSO || object->getDSOType()==Nebula::NebPossQSO || object->getDSOType()==Nebula::NebBLL || object->getDSOType()==Nebula::NebBLA || object->getDSOType()==Nebula::NebIGx))
@@ -1362,7 +1469,7 @@ void AstroCalcDialog::calculatePhenomena()
 					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
 			}
 		}
-		else if (obj2Type==10)
+		else if (obj2Type==10 || obj2Type==11 || obj2Type==12)
 		{
 			// Stars
 			foreach (StelObjectP obj, star)
@@ -1465,7 +1572,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			occultation = true;
 		}
 
-		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
+		ACPhenTreeWidgetItem *treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
 		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
@@ -1623,7 +1730,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			occultation = true;
 		}
 
-		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
+		ACPhenTreeWidgetItem *treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
 		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
@@ -1781,7 +1888,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			occultation = true;
 		}
 
-		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
+		ACPhenTreeWidgetItem *treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
 		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
@@ -2016,6 +2123,8 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Oort cloud objects"), 12);
 	wutCategories.insert(q_("Sednoids"), 13);
 	wutCategories.insert(q_("Planetary nebulae"), 14);
+	wutCategories.insert(q_("Bright double stars"), 15);
+	wutCategories.insert(q_("Bright variable stars"), 16);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -2043,6 +2152,8 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<PlanetP> allObjects = solarSystem->getAllPlanets();
 		QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
+		QList<starData> dblHipStars = starMgr->getHipparcosDoubleStars();
+		QList<starData> varHipStars = starMgr->getHipparcosVariableStars();
 
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
 		double highLimit = 6.0;
@@ -2283,6 +2394,32 @@ void AstroCalcDialog::calculateWutObjects()
 							else
 								wutObjects.insert(object->getNameI18n(), object->getDSODesignation());
 						}
+					}
+				}
+				break;
+			case 15: // Bright double stars
+				foreach(const starData& dblStar, dblHipStars)
+				{
+					StelObjectP object = dblStar.firstKey();
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 16: // Bright variale stars
+				foreach(const starData& varStar, varHipStars)
+				{
+					StelObjectP object = varStar.firstKey();
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 				}
 				break;

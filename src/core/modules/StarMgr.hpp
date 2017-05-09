@@ -331,6 +331,8 @@ public:
 
 	//! Get the list of all Hipparcos stars.
 	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
 
 private slots:
 	//! Translate text.
@@ -385,8 +387,12 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(StelPainter& sPainter, const StelCore* core);
 
+	void populateHipparcosLists();
+	void populateStarsDesignations();
+
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars;
+	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
