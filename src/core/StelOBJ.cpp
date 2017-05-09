@@ -665,6 +665,28 @@ bool StelOBJ::Material::parseVec2d(const QStringList &params, Vec2d &out)
 	return StelOBJ::parseVec2(pp,out,0);
 }
 
+void StelOBJ::addObject(const QString &name, CurrentParserState &state)
+{
+	//check if the last object contained anything, if not remove it
+	if(state.currentObject)
+	{
+		if(state.currentObject->groups.isEmpty())
+		{
+			Q_ASSERT(state.currentObject == &m_objects.last());
+			m_objectMap.remove(state.currentObject->name);
+			m_objects.removeLast();
+		}
+	}
+
+	//create new object
+	Object& obj = INC_LIST(m_objects);
+	obj.name = name;
+	m_objectMap.insert(obj.name,m_objects.size()-1);
+	state.currentObject = &obj;
+	//also clear material group to make sure a new group is created
+	state.currentMaterialGroup = Q_NULLPTR;
+}
+
 bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder vertexOrder)
 {
 	clear();
@@ -844,16 +866,22 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 				ok = !objName.isEmpty();
 				if(ok)
 				{
-					//create new object
-					Object& obj = INC_LIST(m_objects);
-					obj.name = objName;
-					m_objectMap.insert(obj.name,m_objects.size()-1);
-					state.currentObject = &obj;
-					//also clear material group to make sure a new group is created
-					state.currentMaterialGroup = Q_NULLPTR;
+					addObject(objName, state);
 				}
 				else
 					qCCritical(stelOBJ)<<"Object name is required";
+			}
+			else if(CMD_CMP("g"))
+			{
+				//use the rest of the string
+				QString objName = getRestOfString(QStringLiteral("g"),line);
+				ok = !objName.isEmpty();
+				if(ok)
+				{
+					addObject(objName, state);
+				}
+				else
+					qCCritical(stelOBJ)<<"Group name is required";
 			}
 			else if(CMD_CMP("s"))
 			{

@@ -351,6 +351,8 @@ private:
 	inline bool parseFace(const ParseParams& params, const V3Vec& posList, const V3Vec& normList, const V2Vec& texList,
 			      CurrentParserState &state, VertexCache& vertCache);
 
+	inline void addObject(const QString& name, CurrentParserState& state);
+
 	//! Regenerate all normals in the vertex list
 	void generateNormals();
 
