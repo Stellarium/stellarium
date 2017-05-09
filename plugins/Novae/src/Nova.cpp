@@ -107,7 +107,16 @@ QString Nova::getEnglishName() const
 
 QString Nova::getNameI18n() const
 {
-	return novaName;
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	// Parse the nova name to get parts to translation
+	QRegExp nn("^Nova\\s+(\\w+|\\w+\\s+\\w+)\\s+(\\d+)$");
+	QString nameI18n = novaName;
+	if (nn.exactMatch(novaName))
+		nameI18n = QString("%1 %2 %3").arg(trans.qtranslate("Nova"), trans.qtranslate(nn.capturedTexts().at(1).trimmed()), nn.capturedTexts().at(2).trimmed());
+	else
+		nameI18n = trans.qtranslate(novaName);
+
+	return nameI18n;
 }
 
 QString Nova::getDesignation() const
