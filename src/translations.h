@@ -186,6 +186,10 @@ class Translations
 		N_("Interesting double stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Interesting variable stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright double stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright variable stars");
 		
 		// =====================================================================
 		// Constellation cultures

@@ -350,6 +350,8 @@ signals:
 
 private:
 
+	typedef QMap<StelObjectP, float> starData;
+
 	void setCheckFlag(const QString& catalogId, bool b);
 
 	void copyDefaultConfigFile();

@@ -1773,7 +1773,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	switch (type)
 	{
-		case 0: // Double stars
+		case 0: // Interesting double stars
 		{
 			QStringList doubleStars;
 			doubleStars  << "Asterope" << "Atlas" << "77 Tau" << "δ1 Tau" << "V1016 Ori"
@@ -1799,7 +1799,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			break;
 		}
-		case 1: // Variable stars
+		case 1: // Interesting variable stars
 		{
 			QStringList variableStars;
 			variableStars << "δ Cep" << "Algol" << "Mira" << "λ Tau" << "Sheliak" << "ζ Gem" << "μ Cep"
@@ -1822,6 +1822,28 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				{
 					result << trans.qtranslate(star);
 				}
+			}
+			break;
+		}
+		case 2: // Bright double stars
+		{
+			foreach (const starData& star, doubleHipStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 3: // Bright variable stars
+		{
+			foreach (const starData& star, variableHipStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
 			}
 			break;
 		}
