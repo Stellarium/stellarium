@@ -1451,11 +1451,17 @@ void AstroCalcDialog::calculatePhenomena()
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
 	if (planet)
 	{
-		double currentJD = core->getJD(); // save current JD		
+		double currentJD = core->getJD(); // save current JD
+		double currentJDE = core->getJDE(); // save current JDE
 		double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
 		double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
 		startJD = startJD - core->getUTCOffset(startJD)/24;
 		stopJD = stopJD - core->getUTCOffset(stopJD)/24;
+
+		// Calculate the limits on coordinates for speed-up of calculations
+		double coordsLimit = std::abs(core->getCurrentPlanet()->getRotObliquity(currentJDE)) + std::abs(planet->getRotObliquity(currentJDE)) + 0.026;
+		coordsLimit += separation*M_PI/180;
+		double ra, dec;
 
 		if (obj2Type<10)
 		{
@@ -1474,8 +1480,13 @@ void AstroCalcDialog::calculatePhenomena()
 			// Stars
 			foreach (StelObjectP obj, star)
 			{
-				// conjunction
-				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation), planet, obj);
+				StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
+				// Add limits on coordinates for speed-up calculations
+				if (dec<=coordsLimit && dec>=-coordsLimit)
+				{
+					// conjunction
+					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation), planet, obj);
+				}
 			}
 		}
 		else
@@ -1483,8 +1494,13 @@ void AstroCalcDialog::calculatePhenomena()
 			// Deep-sky objects
 			foreach (NebulaP obj, dso)
 			{
-				// conjunction
-				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation), planet, obj);
+				StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
+				// Add limits on coordinates for speed-up calculations
+				if (dec<=coordsLimit && dec>=-coordsLimit)
+				{
+					// conjunction
+					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation), planet, obj);
+				}
 			}
 		}
 
