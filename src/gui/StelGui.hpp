@@ -98,6 +98,12 @@ public:
 	//! Get whether the button toggling bookmarks is visible
 	bool getFlagShowBookmarksButton() const;
 
+	//! Get whether the button toggling ICRS grid is visible
+	bool getFlagShowICRSGridButton() const;
+
+	//! Get whether the button toggling galactic grid is visible
+	bool getFlagShowGalacticGridButton() const;
+
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
@@ -131,6 +137,12 @@ public slots:
 
 	//! Define whether the button toggling bookmarks should be visible
 	void setFlagShowBookmarksButton(bool b);
+
+	//! Define whether the button toggling ICRS grid should be visible
+	void setFlagShowICRSGridButton(bool b);
+
+	//! Define whether the button toggling galactic grid should be visible
+	void setFlagShowGalacticGridButton(bool b);
 
 	void setFlagShowDecimalDegrees(bool b);
 
@@ -223,6 +235,12 @@ private:
 
 	bool flagShowBookmarksButton;
 	StelButton* btShowBookmarks;
+
+	bool flagShowICRSGridButton;
+	StelButton* btShowICRSGrid;
+
+	bool flagShowGalacticGridButton;
+	StelButton* btShowGalacticGrid;
 
 	bool initDone;
 
