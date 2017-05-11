@@ -1126,6 +1126,12 @@ void StelCore::moveObserverToSelected()
 				loc.planetName = pl->getEnglishName();
 				loc.name = "-";
 				loc.state = "";
+
+				// Let's try guess name of location...
+				LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, loc.longitude, loc.latitude, 1.0f);
+				if (results.size()>0)
+					loc = results.value(results.firstKey()); // ...and use it!
+
 				moveObserverTo(loc);
 
 				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
