@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-11 21:14+0700\n"
+"POT-Creation-Date: 2017-05-11 23:28+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1203,7 +1203,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:210
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:1253
-#: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
+#: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
@@ -2539,7 +2539,7 @@ msgstr ""
 msgid "Astronomical calculations window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:174
+#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:193
 msgid "Bookmarks"
 msgstr ""
 
@@ -3488,20 +3488,28 @@ msgstr ""
 msgid "Bright nebulae"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:695
+#: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:695
 msgid "Object"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:101
+#: src/gui/BookmarksDialog.cpp:107
 msgid "Localized name"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:103
+#: src/gui/BookmarksDialog.cpp:109
 msgid "Location of observer"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:155
+#: src/gui/BookmarksDialog.cpp:161
 msgid "Unnamed object"
+msgstr ""
+
+#: src/gui/BookmarksDialog.cpp:341 src/ui_bookmarksDialog.h:204
+msgid "Import bookmarks"
+msgstr ""
+
+#: src/gui/BookmarksDialog.cpp:353
+msgid "Export bookmarks as..."
 msgstr ""
 
 #: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
@@ -7335,32 +7343,36 @@ msgstr ""
 msgid "Show objects which are up:"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:176
+#: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:177
+#: src/ui_bookmarksDialog.h:196
 msgid "Add location"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:179
+#: src/ui_bookmarksDialog.h:198
 msgid "Add selected object to bookmarks"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:181
+#: src/ui_bookmarksDialog.h:200
 msgid "&Add bookmark"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:182
+#: src/ui_bookmarksDialog.h:201
 msgid "&Remove bookmark"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:183
+#: src/ui_bookmarksDialog.h:202
 msgid "Clear bookmarks"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:184
+#: src/ui_bookmarksDialog.h:203
 msgid "&Go to..."
+msgstr ""
+
+#: src/ui_bookmarksDialog.h:205
+msgid "Export bookmarks"
 msgstr ""
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:378
