@@ -68,6 +68,9 @@ private slots:
 	void goToBookmarkButtonPressed();
 	void clearBookmarksButtonPressed();
 
+	void exportBookmarks();
+	void importBookmarks();
+
 	void selectCurrentBookmark(const QModelIndex &modelIdx);
 
 private:
