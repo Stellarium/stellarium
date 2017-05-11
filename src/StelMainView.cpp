@@ -56,6 +56,7 @@
 #include <QWidget>
 #include <QWindow>
 #include <QMessageBox>
+#include <QStandardPaths>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
 #endif
@@ -1365,6 +1366,28 @@ void StelMainView::doScreenshot(void)
 
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
+
+	if (StelFileMgr::getScreenshotDir().isEmpty())
+	{
+		qWarning() << "Oops, the directory for screenshots is not set! Let's try create and set it...";
+		// Create a directory for screenshots if main/screenshot_dir option is unset and user do screenshot at the moment!
+		QString screenshotDirSuffix = "/Stellarium";
+		QString screenshotDir;
+		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+		else
+			screenshotDir = StelFileMgr::getUserDir().append(screenshotDirSuffix);
+
+		try
+		{
+			StelFileMgr::setScreenshotDir(screenshotDir);
+			StelApp::getInstance().getSettings()->setValue("main/screenshot_dir", screenshotDir);
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug("Error: cannot create screenshot directory: %s", e.what());
+		}
+	}
 
 	if (screenShotDir == "")
 		shotDir = QFileInfo(StelFileMgr::getScreenshotDir());
