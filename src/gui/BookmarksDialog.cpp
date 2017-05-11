@@ -343,6 +343,7 @@ void BookmarksDialog::importBookmarks()
 	loadBookmarks();
 
 	bookmarksJsonPath = originalBookmarksFile;
+	saveBookmarks();
 }
 
 void BookmarksDialog::exportBookmarks()
