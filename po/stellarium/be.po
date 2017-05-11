@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-09 19:10+0700\n"
-"PO-Revision-Date: 2017-05-07 11:09+0000\n"
+"PO-Revision-Date: 2017-05-11 02:24+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-10 05:27+0000\n"
+"X-Launchpad-Export-Date: 2017-05-11 05:23+0000\n"
 "X-Generator: Launchpad (build 18366)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3146,27 +3146,27 @@ msgstr "Тып"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:314
 msgid "opacity"
-msgstr ""
+msgstr "непразрыстасьць"
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:324
 msgid "Sep."
-msgstr ""
+msgstr "Разьдз."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:329
 msgid "Per."
-msgstr ""
+msgstr "Пэр."
 
 #: src/gui/AstroCalcDialog.cpp:329
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "дз."
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:334
 msgid "S.B."
-msgstr ""
+msgstr "Я.П."
 
 #: src/gui/AstroCalcDialog.cpp:360 src/gui/AstroCalcDialog.cpp:530
 #, qt-format
@@ -3380,26 +3380,26 @@ msgstr "Каталёґ Мэлота"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:471 src/translations.h:169
 msgid "New General Catalogue"
-msgstr ""
+msgstr "Новы агульны каталёґ"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/translations.h:171
 msgid "Index Catalogue"
-msgstr ""
+msgstr "Пералікавы каталёґ"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/translations.h:173
 msgid "Lynds' Catalogue of Bright Nebulae"
-msgstr ""
+msgstr "Каталёґ яркіх туманнасьцяў Ліндса"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:474 src/translations.h:175
 msgid "Lynds' Catalogue of Dark Nebulae"
-msgstr ""
+msgstr "Каталёґ цёмных туманнасьцяў Ліндса"
 
 #: src/gui/AstroCalcDialog.cpp:475 src/ui_viewDialog.h:2123
 msgid "Principal Galaxy Catalog"
-msgstr ""
+msgstr "Галоўны каталёґ ґаляктык"
 
 #: src/gui/AstroCalcDialog.cpp:476 src/ui_viewDialog.h:2126
 msgid "The Uppsala General Catalogue of Galaxies"
@@ -3408,7 +3408,7 @@ msgstr "Агульны каталёґ ґаляктык Упсалы"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:477 src/translations.h:177
 msgid "Cederblad Catalog"
-msgstr ""
+msgstr "Каталёґ Цэрэблада"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:478 src/translations.h:179
@@ -3424,13 +3424,13 @@ msgstr "Каталёґ «Гершэль 400»"
 #: src/gui/AstroCalcDialog.cpp:480 src/gui/AstroCalcDialog.cpp:2126
 #: src/translations.h:190
 msgid "Bright double stars"
-msgstr ""
+msgstr "Яркія падвойныя зоркі"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:481 src/gui/AstroCalcDialog.cpp:2127
 #: src/translations.h:192
 msgid "Bright variable stars"
-msgstr ""
+msgstr "Яркія зьменныя зоркі"
 
 #: src/gui/AstroCalcDialog.cpp:713 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -3549,12 +3549,12 @@ msgstr "Яркія туманнасьці (<%1 вел.)"
 #: src/gui/AstroCalcDialog.cpp:1013
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr ""
+msgstr "Яркія падвойныя зоркі (<%1 вел.)"
 
 #: src/gui/AstroCalcDialog.cpp:1014
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
-msgstr ""
+msgstr "Яркія зьменныя зоркі (<%1 вел.)"
 
 #: src/gui/AstroCalcDialog.cpp:1015
 #, qt-format
@@ -7453,7 +7453,7 @@ msgstr "Становішчы плянэтаў"
 
 #: src/ui_astroCalcDialog.h:735
 msgid "Celestial bodies above horizon"
-msgstr ""
+msgstr "Нябесныя целы па-над гарызонтам"
 
 #: src/ui_astroCalcDialog.h:738
 msgid "Ephemeris"
@@ -7502,11 +7502,11 @@ msgstr "Абнаўленьне становішчаў плянэт"
 
 #: src/ui_astroCalcDialog.h:767
 msgid "Update positions"
-msgstr ""
+msgstr "Абнавіць становішчы"
 
 #: src/ui_astroCalcDialog.h:769
 msgid "Use horizontal coordinates"
-msgstr ""
+msgstr "Выкарыстоўваць гарызантальныя каардынаты"
 
 #: src/ui_astroCalcDialog.h:770 src/ui_astroCalcDialog.h:793
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
