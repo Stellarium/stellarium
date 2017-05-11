@@ -104,6 +104,12 @@ public:
 	//! Get whether the button toggling galactic grid is visible
 	bool getFlagShowGalacticGridButton() const;
 
+	//! Get whether the button toggling ecliptic grid is visible
+	bool getFlagShowEclipticGridButton() const;
+
+	//! Get whether the button toggling constellation boundaries is visible
+	bool getFlagShowConstellationBoundariesButton() const;
+
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
@@ -143,6 +149,12 @@ public slots:
 
 	//! Define whether the button toggling galactic grid should be visible
 	void setFlagShowGalacticGridButton(bool b);
+
+	//! Define whether the button toggling ecliptic grid should be visible
+	void setFlagShowEclipticGridButton(bool b);
+
+	//! Define whether the button toggling constellation boundaries should be visible
+	void setFlagShowConstellationBoundariesButton(bool b);
 
 	void setFlagShowDecimalDegrees(bool b);
 
@@ -241,6 +253,12 @@ private:
 
 	bool flagShowGalacticGridButton;
 	StelButton* btShowGalacticGrid;
+
+	bool flagShowEclipticGridButton;
+	StelButton* btShowEclipticGrid;
+
+	bool flagShowConstellationBoundariesButton;
+	StelButton* btShowConstellationBoundaries;
 
 	bool initDone;
 

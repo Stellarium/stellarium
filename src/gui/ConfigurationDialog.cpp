@@ -300,6 +300,12 @@ void ConfigurationDialog::createDialogContent()
 	ui->showGalacticGridButtonCheckBox->setChecked(gui->getFlagShowGalacticGridButton());
 	connect(ui->showGalacticGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowGalacticGridButton(bool)));
 
+	ui->showEclipticGridButtonCheckBox->setChecked(gui->getFlagShowEclipticGridButton());
+	connect(ui->showEclipticGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowEclipticGridButton(bool)));
+
+	ui->showConstellationBoundariesButtonCheckBox->setChecked(gui->getFlagShowConstellationBoundariesButton());
+	connect(ui->showConstellationBoundariesButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowConstellationBoundariesButton(bool)));
+
 	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
 	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagSouthAzimuthUsage());
@@ -821,6 +827,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_bookmarks_button", gui->getFlagShowBookmarksButton());
 	conf->setValue("gui/flag_show_icrs_grid_button", gui->getFlagShowICRSGridButton());
 	conf->setValue("gui/flag_show_galactic_grid_button", gui->getFlagShowGalacticGridButton());
+	conf->setValue("gui/flag_show_ecliptic_grid_button", gui->getFlagShowEclipticGridButton());
+	conf->setValue("gui/flag_show_boundaries_button", gui->getFlagShowConstellationBoundariesButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
