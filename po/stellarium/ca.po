@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-09 19:10+0700\n"
-"PO-Revision-Date: 2017-05-03 20:41+0000\n"
+"PO-Revision-Date: 2017-05-10 19:41+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-10 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-05-11 05:23+0000\n"
 "X-Generator: Launchpad (build 18366)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -2477,7 +2477,7 @@ msgstr "Maj, i botó esquerre"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete the one closest marker to mouse cursor"
-msgstr ""
+msgstr "Eliminar el marcador més proper al cursor del ratolí"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2489,7 +2489,7 @@ msgstr "Esborrar tots els marcadors personalitzats"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Shift & Alt & right click"
-msgstr ""
+msgstr "Maj + Alt + botó dret"
 
 #: src/gui/HelpDialog.cpp:194
 #, qt-format
@@ -3152,27 +3152,27 @@ msgstr "Tipus"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:314
 msgid "opacity"
-msgstr ""
+msgstr "opacitat"
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:324
 msgid "Sep."
-msgstr ""
+msgstr "Sep."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:329
 msgid "Per."
-msgstr ""
+msgstr "Per."
 
 #: src/gui/AstroCalcDialog.cpp:329
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:334
 msgid "S.B."
-msgstr ""
+msgstr "B.S."
 
 #: src/gui/AstroCalcDialog.cpp:360 src/gui/AstroCalcDialog.cpp:530
 #, qt-format
@@ -3386,26 +3386,26 @@ msgstr "Catàleg Melotte"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:471 src/translations.h:169
 msgid "New General Catalogue"
-msgstr ""
+msgstr "Nou Catàleg General"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/translations.h:171
 msgid "Index Catalogue"
-msgstr ""
+msgstr "15/5000 Índex del Catàleg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/translations.h:173
 msgid "Lynds' Catalogue of Bright Nebulae"
-msgstr ""
+msgstr "El catàleg de nebuloses brillants Lynds"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:474 src/translations.h:175
 msgid "Lynds' Catalogue of Dark Nebulae"
-msgstr ""
+msgstr "Catàleg de Nebuloses Fosques de Lynds"
 
 #: src/gui/AstroCalcDialog.cpp:475 src/ui_viewDialog.h:2123
 msgid "Principal Galaxy Catalog"
-msgstr ""
+msgstr "Catàleg Principal de Galaxies"
 
 #: src/gui/AstroCalcDialog.cpp:476 src/ui_viewDialog.h:2126
 msgid "The Uppsala General Catalogue of Galaxies"
@@ -3414,7 +3414,7 @@ msgstr "El Catàleg General de Galàxies d'Uppsala"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:477 src/translations.h:177
 msgid "Cederblad Catalog"
-msgstr ""
+msgstr "Catàleg Cederblad"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:478 src/translations.h:179
@@ -3430,13 +3430,13 @@ msgstr "Catàleg Herschel 400"
 #: src/gui/AstroCalcDialog.cpp:480 src/gui/AstroCalcDialog.cpp:2126
 #: src/translations.h:190
 msgid "Bright double stars"
-msgstr ""
+msgstr "Estels dobles brillants"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:481 src/gui/AstroCalcDialog.cpp:2127
 #: src/translations.h:192
 msgid "Bright variable stars"
-msgstr ""
+msgstr "Estels variables brillants"
 
 #: src/gui/AstroCalcDialog.cpp:713 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -3555,12 +3555,12 @@ msgstr "Estels brillants (mag <%1)"
 #: src/gui/AstroCalcDialog.cpp:1013
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr ""
+msgstr "Estels dobles brillants (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1014
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
-msgstr ""
+msgstr "Estels variables brillants (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1015
 #, qt-format
@@ -7480,7 +7480,7 @@ msgstr "Posicions planetàries"
 
 #: src/ui_astroCalcDialog.h:735
 msgid "Celestial bodies above horizon"
-msgstr ""
+msgstr "Cossos celestes sobre l'horitzó"
 
 #: src/ui_astroCalcDialog.h:738
 msgid "Ephemeris"
@@ -7529,11 +7529,11 @@ msgstr "Actualització de les posicions planetàries"
 
 #: src/ui_astroCalcDialog.h:767
 msgid "Update positions"
-msgstr ""
+msgstr "Actualitzar posicions"
 
 #: src/ui_astroCalcDialog.h:769
 msgid "Use horizontal coordinates"
-msgstr ""
+msgstr "Utilitzar coordenades horitzontals"
 
 #: src/ui_astroCalcDialog.h:770 src/ui_astroCalcDialog.h:793
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
