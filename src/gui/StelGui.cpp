@@ -107,6 +107,10 @@ StelGui::StelGui()
 	, btShowToastSurvey(NULL)
 	, flagShowBookmarksButton(false)
 	, btShowBookmarks(NULL)
+	, flagShowICRSGridButton(false)
+	, btShowICRSGrid(NULL)
+	, flagShowGalacticGridButton(false)
+	, btShowGalacticGrid(NULL)
 	, initDone(false)
 #ifndef DISABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
@@ -386,6 +390,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
 	setFlagShowToastSurveyButton(conf->value("gui/flag_show_toast_survey_button", false).toBool());
 	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
+	setFlagShowICRSGridButton(conf->value("gui/flag_show_icrs_grid_button", false).toBool());
+	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -543,6 +549,14 @@ void StelGui::update()
 	flag = GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
 	if (getAction("actionShow_Toast_Survey")->isChecked() != flag)
 		getAction("actionShow_Toast_Survey")->setChecked(flag);
+
+	flag = GETSTELMODULE(GridLinesMgr)->getFlagEquatorJ2000Grid();
+	if (getAction("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
+		getAction("actionShow_Equatorial_J2000_Grid")->setChecked(flag);
+
+	flag = GETSTELMODULE(GridLinesMgr)->getFlagGalacticGrid();
+	if (getAction("actionShow_Galactic_Grid")->isChecked() != flag)
+		getAction("actionShow_Galactic_Grid")->setChecked(flag);
 
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
@@ -718,6 +732,48 @@ void StelGui::setFlagShowBookmarksButton(bool b)
 	}
 }
 
+// Define whether the button toggling ICRS grid should be visible
+void StelGui::setFlagShowICRSGridButton(bool b)
+{
+	if (b==true) {
+		if (btShowICRSGrid==NULL) {
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+			QPixmap pxmapOn(":/graphicGui/btEquatorialJ2000Grid-on.png");
+			QPixmap pxmapOff(":/graphicGui/btEquatorialJ2000Grid-off.png");
+			btShowICRSGrid = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Equatorial_J2000_Grid");
+		}
+		getButtonBar()->addButton(btShowICRSGrid, "020-gridsGroup");
+	} else {
+		getButtonBar()->hideButton("actionShow_Equatorial_J2000_Grid");
+	}
+	flagShowICRSGridButton = b;
+	if (initDone) {
+		skyGui->updateBarsPos();
+	}
+}
+
+// Define whether the button toggling galactic grid should be visible
+void StelGui::setFlagShowGalacticGridButton(bool b)
+{
+	if (b==true) {
+		if (btShowGalacticGrid==NULL) {
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+			QPixmap pxmapOn(":/graphicGui/btGalacticGrid-on.png");
+			QPixmap pxmapOff(":/graphicGui/btGalacticGrid-off.png");
+			btShowGalacticGrid = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Galactic_Grid");
+		}
+		getButtonBar()->addButton(btShowGalacticGrid, "020-gridsGroup");
+	} else {
+		getButtonBar()->hideButton("actionShow_Galactic_Grid");
+	}
+	flagShowGalacticGridButton = b;
+	if (initDone) {
+		skyGui->updateBarsPos();
+	}
+}
+
 // Define whether the button toggling TOAST survey images should be visible
 void StelGui::setFlagShowToastSurveyButton(bool b)
 {
@@ -841,6 +897,16 @@ bool StelGui::getFlagShowToastSurveyButton() const
 bool StelGui::getFlagShowBookmarksButton() const
 {
 	return flagShowBookmarksButton;
+}
+
+bool StelGui::getFlagShowICRSGridButton() const
+{
+	return flagShowICRSGridButton;
+}
+
+bool StelGui::getFlagShowGalacticGridButton() const
+{
+	return flagShowGalacticGridButton;
 }
 
 bool StelGui::initComplete(void) const
