@@ -111,6 +111,10 @@ StelGui::StelGui()
 	, btShowICRSGrid(NULL)
 	, flagShowGalacticGridButton(false)
 	, btShowGalacticGrid(NULL)
+	, flagShowEclipticGridButton(false)
+	, btShowEclipticGrid(NULL)
+	, flagShowConstellationBoundariesButton(false)
+	, btShowConstellationBoundaries(NULL)
 	, initDone(false)
 #ifndef DISABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
@@ -392,6 +396,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
 	setFlagShowICRSGridButton(conf->value("gui/flag_show_icrs_grid_button", false).toBool());
 	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
+	setFlagShowEclipticGridButton(conf->value("gui/flag_show_ecliptic_grid_button", false).toBool());
+	setFlagShowConstellationBoundariesButton(conf->value("gui/flag_show_boundaries_button", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -557,6 +563,14 @@ void StelGui::update()
 	flag = GETSTELMODULE(GridLinesMgr)->getFlagGalacticGrid();
 	if (getAction("actionShow_Galactic_Grid")->isChecked() != flag)
 		getAction("actionShow_Galactic_Grid")->setChecked(flag);
+
+	flag = GETSTELMODULE(GridLinesMgr)->getFlagEclipticGrid();
+	if (getAction("actionShow_Ecliptic_Grid")->isChecked() != flag)
+		getAction("actionShow_Ecliptic_Grid")->setChecked(flag);
+
+	flag = GETSTELMODULE(ConstellationMgr)->getFlagBoundaries();
+	if (getAction("actionShow_Constellation_Boundaries")->isChecked() != flag)
+		getAction("actionShow_Constellation_Boundaries")->setChecked(flag);
 
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
@@ -774,6 +788,48 @@ void StelGui::setFlagShowGalacticGridButton(bool b)
 	}
 }
 
+// Define whether the button toggling ecliptic grid should be visible
+void StelGui::setFlagShowEclipticGridButton(bool b)
+{
+	if (b==true) {
+		if (btShowEclipticGrid==NULL) {
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+			QPixmap pxmapOn(":/graphicGui/btEclipticGrid-on.png");
+			QPixmap pxmapOff(":/graphicGui/btEclipticGrid-off.png");
+			btShowEclipticGrid = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Ecliptic_Grid");
+		}
+		getButtonBar()->addButton(btShowEclipticGrid, "020-gridsGroup");
+	} else {
+		getButtonBar()->hideButton("actionShow_Ecliptic_Grid");
+	}
+	flagShowEclipticGridButton = b;
+	if (initDone) {
+		skyGui->updateBarsPos();
+	}
+}
+
+// Define whether the button toggling constellation boundaries should be visible
+void StelGui::setFlagShowConstellationBoundariesButton(bool b)
+{
+	if (b==true) {
+		if (btShowConstellationBoundaries==NULL) {
+			// Create the nebulae background button
+			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+			QPixmap pxmapOn(":/graphicGui/btConstellationBoundaries-on.png");
+			QPixmap pxmapOff(":/graphicGui/btConstellationBoundaries-off.png");
+			btShowConstellationBoundaries = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Constellation_Boundaries");
+		}
+		getButtonBar()->addButton(btShowConstellationBoundaries, "010-constellationsGroup");
+	} else {
+		getButtonBar()->hideButton("actionShow_Constellation_Boundaries");
+	}
+	flagShowConstellationBoundariesButton = b;
+	if (initDone) {
+		skyGui->updateBarsPos();
+	}
+}
+
 // Define whether the button toggling TOAST survey images should be visible
 void StelGui::setFlagShowToastSurveyButton(bool b)
 {
@@ -907,6 +963,16 @@ bool StelGui::getFlagShowICRSGridButton() const
 bool StelGui::getFlagShowGalacticGridButton() const
 {
 	return flagShowGalacticGridButton;
+}
+
+bool StelGui::getFlagShowEclipticGridButton() const
+{
+	return flagShowEclipticGridButton;
+}
+
+bool StelGui::getFlagShowConstellationBoundariesButton() const
+{
+	return flagShowConstellationBoundariesButton;
 }
 
 bool StelGui::initComplete(void) const
