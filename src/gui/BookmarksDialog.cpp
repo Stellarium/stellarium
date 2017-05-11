@@ -32,6 +32,9 @@
 #include "AngleSpinBox.hpp"
 #include "NebulaMgr.hpp"
 
+#include <QFileDialog>
+#include <QDir>
+
 #include "BookmarksDialog.hpp"
 #include "ui_bookmarksDialog.h"
 
@@ -79,6 +82,9 @@ void BookmarksDialog::createDialogContent()
 	connect(ui->goToButton, SIGNAL(clicked()), this, SLOT(goToBookmarkButtonPressed()));
 	connect(ui->clearBookmarksButton, SIGNAL(clicked()), this, SLOT(clearBookmarksButtonPressed()));
 	connect(ui->bookmarksTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentBookmark(QModelIndex)));
+
+	connect(ui->importBookmarksButton, SIGNAL(clicked()), this, SLOT(importBookmarks()));
+	connect(ui->exportBookmarksButton, SIGNAL(clicked()), this, SLOT(exportBookmarks()));
 
 	//Initializing the list of bookmarks
 	bookmarksListModel->setColumnCount(ColumnCount);
@@ -325,6 +331,30 @@ void BookmarksDialog::loadBookmarks()
 		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 		i++;
 	}
+}
+
+void BookmarksDialog::importBookmarks()
+{
+	QString originalBookmarksFile = bookmarksJsonPath;
+
+	QString filter = "JSON (*.json)";
+	bookmarksJsonPath = QFileDialog::getOpenFileName(0, q_("Import bookmarks"), QDir::homePath(), filter);
+
+	loadBookmarks();
+
+	bookmarksJsonPath = originalBookmarksFile;
+}
+
+void BookmarksDialog::exportBookmarks()
+{
+	QString originalBookmarksFile = bookmarksJsonPath;
+
+	QString filter = "JSON (*.json)";
+	bookmarksJsonPath = QFileDialog::getSaveFileName(0, q_("Export bookmarks as..."), QDir::homePath() + "/bookmarks.json", filter);
+
+	saveBookmarks();
+
+	bookmarksJsonPath = originalBookmarksFile;
 }
 
 void BookmarksDialog::saveBookmarks()
