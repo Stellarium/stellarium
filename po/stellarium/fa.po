@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-09 19:10+0700\n"
+"POT-Creation-Date: 2017-05-12 00:21+0700\n"
 "PO-Revision-Date: 2017-04-02 23:53+0000\n"
 "Last-Translator: Farhad Bagheri Fard <canada.fery@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-10 05:41+0000\n"
-"X-Generator: Launchpad (build 18366)\n"
+"X-Launchpad-Export-Date: 2017-05-12 05:39+0000\n"
+"X-Generator: Launchpad (build 18373)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
 #: src/core/modules/Asterism.cpp:158 src/core/modules/Constellation.cpp:290
@@ -53,7 +53,7 @@ msgstr ""
 #: src/core/modules/SolarSystem.cpp:219 src/core/modules/MilkyWay.cpp:74
 #: src/core/modules/ZodiacalLight.cpp:81 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:539 src/core/StelCore.cpp:254
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:761
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:762
 msgid "Display Options"
 msgstr "تنظیمات نمایش"
 
@@ -88,7 +88,7 @@ msgstr "برچسب صورت‌های فلکی"
 msgid "Constellation boundaries"
 msgstr "مرز صورت‌های فلکی"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1401
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1429
 msgid "Select single constellation"
 msgstr "انتخاب تک صورت‌فلکی"
 
@@ -1068,7 +1068,7 @@ msgstr "درازای دنباله گازی (تخمین): %1 میلیون کیل�
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:220 src/gui/AstroCalcDialog.cpp:1003
-#: src/gui/AstroCalcDialog.cpp:2111 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:2127 src/translations.h:68
 msgid "Planets"
 msgstr "سیاره‌ها"
 
@@ -1202,9 +1202,9 @@ msgstr "دید در شب"
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:202
+#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:210
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:1253
-#: src/gui/BookmarksDialog.cpp:102 src/ui_dateTimeDialogGui.h:376
+#: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
@@ -1912,8 +1912,8 @@ msgstr "زمان نجومی ظاهری: %1"
 msgid "Deep-sky objects background images"
 msgstr "تصاویر زمینه از اجرام عمق آسمان"
 
-#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:204
-#: src/StelMainView.cpp:760
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:212
+#: src/StelMainView.cpp:761
 msgid "Miscellaneous"
 msgstr "سایر"
 
@@ -1997,31 +1997,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:540
+#: src/gui/ConfigurationDialog.cpp:552
 msgid "Select screenshot directory"
 msgstr "نشانی ذخیره عکس صفحه را مشخص کنید"
 
-#: src/gui/ConfigurationDialog.cpp:877
+#: src/gui/ConfigurationDialog.cpp:893
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "میدان دید هنگام راه‌اندازی: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:885
+#: src/gui/ConfigurationDialog.cpp:901
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "جهت‌گیری نمای سمت/ارتفاع هنگام راه‌اندازی: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:947
+#: src/gui/ConfigurationDialog.cpp:963
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 msgid "Authors"
 msgstr "پدیدآوران"
 
-#: src/gui/ConfigurationDialog.cpp:948 src/gui/ViewDialog.cpp:1303
+#: src/gui/ConfigurationDialog.cpp:964 src/gui/ViewDialog.cpp:1303
 msgid "Contact"
 msgstr "تماس"
 
-#: src/gui/ConfigurationDialog.cpp:950 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:966 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
@@ -2040,15 +2040,15 @@ msgstr "تماس"
 msgid "Version"
 msgstr "نسخه"
 
-#: src/gui/ConfigurationDialog.cpp:1047
+#: src/gui/ConfigurationDialog.cpp:1063
 msgid "Running script: "
 msgstr "اسکریپت در حال اجرا: "
 
-#: src/gui/ConfigurationDialog.cpp:1054
+#: src/gui/ConfigurationDialog.cpp:1070
 msgid "Running script: [none]"
 msgstr "اسکریپت در حال اجرا: [هیچ]"
 
-#: src/gui/ConfigurationDialog.cpp:1119
+#: src/gui/ConfigurationDialog.cpp:1135
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2056,16 +2056,16 @@ msgstr ""
 "دریافت فهرست‌های ستاره‌ای جدید تمام شد!\n"
 "برای نمایش آنها، استلاریوم را دوباره شروع کنید."
 
-#: src/gui/ConfigurationDialog.cpp:1123
+#: src/gui/ConfigurationDialog.cpp:1139
 msgid "All available star catalogs have been installed."
 msgstr "همه‌ی فهرست‌های موجود نصب شده‌اند."
 
-#: src/gui/ConfigurationDialog.cpp:1128
+#: src/gui/ConfigurationDialog.cpp:1144
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "دریافت فهرست %1 از %2"
 
-#: src/gui/ConfigurationDialog.cpp:1135
+#: src/gui/ConfigurationDialog.cpp:1151
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2074,7 +2074,7 @@ msgstr ""
 "در حال دریافت %1...\n"
 "(می‌توانید این پنجره را ببندید.)"
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1158
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2085,7 +2085,7 @@ msgstr ""
 "تعداد ستارگان: %2 میلیون\n"
 "بازه‌ی قدر: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1185 src/gui/ConfigurationDialog.cpp:1221
+#: src/gui/ConfigurationDialog.cpp:1201 src/gui/ConfigurationDialog.cpp:1237
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2094,11 +2094,11 @@ msgstr ""
 "خطا در دریافت %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1274
+#: src/gui/ConfigurationDialog.cpp:1290
 msgid "Verifying file integrity..."
 msgstr "بررسی کامل بودن فایل..."
 
-#: src/gui/ConfigurationDialog.cpp:1278
+#: src/gui/ConfigurationDialog.cpp:1294
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2107,170 +2107,170 @@ msgstr ""
 "خطا در دریافت %1:\n"
 "فایل خراب است."
 
-#: src/gui/ConfigurationDialog.cpp:1324 src/gui/ConfigurationDialog.cpp:1333
+#: src/gui/ConfigurationDialog.cpp:1340 src/gui/ConfigurationDialog.cpp:1349
 msgid "Available"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1326 src/gui/ConfigurationDialog.cpp:1335
+#: src/gui/ConfigurationDialog.cpp:1342 src/gui/ConfigurationDialog.cpp:1351
 msgid "Not Available"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1418
 msgid "Algorithm of"
 msgstr "الگوریتمِ"
 
-#: src/gui/ConfigurationDialog.cpp:1415
+#: src/gui/ConfigurationDialog.cpp:1431
 msgid "Without correction"
 msgstr "تصحیح نشده"
 
-#: src/gui/ConfigurationDialog.cpp:1416
+#: src/gui/ConfigurationDialog.cpp:1432
 msgid "Schoch (1931)"
 msgstr "شُخ (۱۹۳۱ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1417
+#: src/gui/ConfigurationDialog.cpp:1433
 msgid "Clemence (1948)"
 msgstr "کلِمِنس (۱۹۴۸ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1434
 msgid "IAU (1952)"
 msgstr "اتحادیه‌ی بین‌المللی نجوم (۱۹۵۲ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1419
+#: src/gui/ConfigurationDialog.cpp:1435
 msgid "Astronomical Ephemeris (1960)"
 msgstr "تقویم فلکی (۱۹۶۰ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1436
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "توکرمن (۱۹۶۲ م.، ۱۹۶۴ م.) و گلدستین (۱۹۷۳ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1421
+#: src/gui/ConfigurationDialog.cpp:1437
 msgid "Muller & Stephenson (1975)"
 msgstr "مولر و استِفِنسون (۱۹۷۵ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1438
 msgid "Stephenson (1978)"
 msgstr "استِفِنسون (۱۹۷۸ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1423
+#: src/gui/ConfigurationDialog.cpp:1439
 msgid "Schmadel & Zech (1979)"
 msgstr "اشمادِل و زِش (۱۹۷۹ م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1424
+#: src/gui/ConfigurationDialog.cpp:1440
 msgid "Schmadel & Zech (1988)"
 msgstr "اشمادل و زِش (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1425
+#: src/gui/ConfigurationDialog.cpp:1441
 msgid "Morrison & Stephenson (1982)"
 msgstr "موریسون و استفنسون (1982 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1426
+#: src/gui/ConfigurationDialog.cpp:1442
 msgid "Stephenson & Morrison (1984)"
 msgstr "موریسون و استفنسون (1984 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1427
+#: src/gui/ConfigurationDialog.cpp:1443
 msgid "Stephenson & Houlden (1986)"
 msgstr "استفنسون و هولدن (1986 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1428
+#: src/gui/ConfigurationDialog.cpp:1444
 msgid "Espenak (1987, 1989)"
 msgstr "اسپناک (1987، 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1429
+#: src/gui/ConfigurationDialog.cpp:1445
 msgid "Borkowski (1988)"
 msgstr "بورکوفسکی (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1430
+#: src/gui/ConfigurationDialog.cpp:1446
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "شاپرون-توز و شاپرون (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1431
+#: src/gui/ConfigurationDialog.cpp:1447
 msgid "Stephenson & Morrison (1995)"
 msgstr "استفنسون و موریسون (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1432
+#: src/gui/ConfigurationDialog.cpp:1448
 msgid "Stephenson (1997)"
 msgstr "استفنسون (1997 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1434
+#: src/gui/ConfigurationDialog.cpp:1450
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "میوس (1998 م.) (به همراه شاپرون، شاپرون-توز و فرانکو (1997 م.))"
 
-#: src/gui/ConfigurationDialog.cpp:1435
+#: src/gui/ConfigurationDialog.cpp:1451
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1436
+#: src/gui/ConfigurationDialog.cpp:1452
 msgid "Meeus & Simons (2000)"
 msgstr "میوس و سیمونز (2000 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1437
+#: src/gui/ConfigurationDialog.cpp:1453
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "موریسون و استفنسون (2004، 2005 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1438
+#: src/gui/ConfigurationDialog.cpp:1454
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1440
+#: src/gui/ConfigurationDialog.cpp:1456
 msgid "Espenak & Meeus (2006)"
 msgstr "اسپناک و میوس (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1443
+#: src/gui/ConfigurationDialog.cpp:1459
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1445
+#: src/gui/ConfigurationDialog.cpp:1461
 msgid "Reijs (2006)"
 msgstr "ریس (2006 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1446
+#: src/gui/ConfigurationDialog.cpp:1462
 msgid "Banjevic (2006)"
 msgstr "بانژویچ (2006 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1447
+#: src/gui/ConfigurationDialog.cpp:1463
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "مونتن‌براک و فلگر (2000 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1448
+#: src/gui/ConfigurationDialog.cpp:1464
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "رینگلد و دِرشویتز (2000، 2007 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1449
+#: src/gui/ConfigurationDialog.cpp:1465
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "اسلام، صدیق و قریشی (2008، 2013 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1450
+#: src/gui/ConfigurationDialog.cpp:1466
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "خالد، سلطان و زیدی (2014 م.)"
 
-#: src/gui/ConfigurationDialog.cpp:1451
+#: src/gui/ConfigurationDialog.cpp:1467
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "معادله‌ی دلخواه %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1500 src/gui/ConfigurationDialog.cpp:1535
+#: src/gui/ConfigurationDialog.cpp:1516 src/gui/ConfigurationDialog.cpp:1551
 #: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1501
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1502
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "dd-mm-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1503
+#: src/gui/ConfigurationDialog.cpp:1519
 msgid "mm-dd-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1536
+#: src/gui/ConfigurationDialog.cpp:1552
 msgid "12-hour format"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1537
+#: src/gui/ConfigurationDialog.cpp:1553
 msgid "24-hour format"
 msgstr ""
 
@@ -2471,8 +2471,8 @@ msgstr "طراح گرافیک و سایر موارد: %1"
 
 #: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
 #: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323 src/gui/HelpDialog.cpp:324
-#: src/gui/HelpDialog.cpp:325 src/gui/HelpDialog.cpp:331
+#: src/gui/HelpDialog.cpp:323 src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
 #: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
 #: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
 #: src/gui/HelpDialog.cpp:336
@@ -2480,21 +2480,21 @@ msgstr "طراح گرافیک و سایر موارد: %1"
 msgid "Developer: %1"
 msgstr "توسعه‌دهنده: %1"
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "یکپارچه‌سازی مداوم: %1"
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Tester: %1"
 msgstr "آزمایش‌کننده: %1"
 
-#: src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:326
 msgid "Former Developers"
 msgstr "توسعه‌دهندگان پیشین"
 
-#: src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:327
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -2502,7 +2502,7 @@ msgstr ""
 "بسیاری از افراد مشارکت‌های مهمی داشته‌اند اما اکنون فعال نیستند. فعالیت آنان "
 "در این پروژه تأثیرگذار بوده است:"
 
-#: src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:328
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "مستندساز/توسعه‌دهنده: %1"
@@ -2528,91 +2528,91 @@ msgstr ""
 "افراد بسیاری در این پروژه همکاری کرده‌اند و تلاش آن‌ها استلاریوم را بهبود "
 "بخشیده است (ترتیب الفبایی): %1."
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:211
 msgid "Windows"
 msgstr "ویندوز"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:213
 msgid "Quit"
 msgstr "خروج"
 
-#: src/gui/StelGui.cpp:206
+#: src/gui/StelGui.cpp:214
 msgid "Speed up the script execution rate"
 msgstr "تند کردن آهنگ اجرای اسکریپت‌ها"
 
-#: src/gui/StelGui.cpp:207
+#: src/gui/StelGui.cpp:215
 msgid "Slow down the script execution rate"
 msgstr "کند کردن آهنگ اجرای اسکریپت‌ها"
 
-#: src/gui/StelGui.cpp:208
+#: src/gui/StelGui.cpp:216
 msgid "Set the normal script execution rate"
 msgstr "عادی‌سازی آهنگ اجرای اسکریپت"
 
-#: src/gui/StelGui.cpp:209
+#: src/gui/StelGui.cpp:217
 msgid "Stop script execution"
 msgstr "توقف اجرای اسکریپت"
 
-#: src/gui/StelGui.cpp:210
+#: src/gui/StelGui.cpp:218
 msgid "Pause script execution"
 msgstr "مکث در اجرای اسکریپت"
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:219
 msgid "Resume script execution"
 msgstr "ادامه‌ی اجرای اسکریپت"
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:222
 msgid "Script console window"
 msgstr "پنجره‌ی فرمان اسکریپت"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:225
 msgid "Help window"
 msgstr "پنجره‌ی راهنما"
 
-#: src/gui/StelGui.cpp:218
+#: src/gui/StelGui.cpp:226
 msgid "Configuration window"
 msgstr "تنظیمات نرم‌افزار"
 
-#: src/gui/StelGui.cpp:219 src/ui_searchDialogGui.h:611
+#: src/gui/StelGui.cpp:227 src/ui_searchDialogGui.h:611
 msgid "Search window"
 msgstr "جست‌وجو"
 
-#: src/gui/StelGui.cpp:220
+#: src/gui/StelGui.cpp:228
 msgid "Sky and viewing options window"
 msgstr "تنظیمات نما و آسمان"
 
-#: src/gui/StelGui.cpp:221
+#: src/gui/StelGui.cpp:229
 msgid "Date/time window"
 msgstr "تاریخ/زمان"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:230
 msgid "Location window"
 msgstr "مکان"
 
-#: src/gui/StelGui.cpp:223
+#: src/gui/StelGui.cpp:231
 msgid "Shortcuts window"
 msgstr "میانبرها"
 
-#: src/gui/StelGui.cpp:224
+#: src/gui/StelGui.cpp:232
 msgid "Astronomical calculations window"
 msgstr ""
 
-#: src/gui/StelGui.cpp:225 src/ui_bookmarksDialog.h:174
+#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:193
 msgid "Bookmarks"
 msgstr ""
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:234
 msgid "Copy selected object information to clipboard"
 msgstr "کپی کردن اطلاعات جرم منتخب"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:240
 msgid "Auto hide horizontal button bar"
 msgstr "پنهان شدن خودکار نوار دکمه‌های افقی"
 
-#: src/gui/StelGui.cpp:233
+#: src/gui/StelGui.cpp:241
 msgid "Auto hide vertical button bar"
 msgstr "پنهان شدن خودکار نوار دکمه‌های عمودی"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:244
 msgid "Toggle visibility of GUI"
 msgstr "نمایش/عدم نمایش رابط گرافیکی"
 
@@ -2787,64 +2787,73 @@ msgstr ""
 msgid "Get location from GPS"
 msgstr ""
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:113
+#: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
 msgstr "یک فایل فشرده (ZIP) را که شامل چشم‌انداز استلاریوم است انتخاب کنید"
 
 #. TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
-#: src/gui/AddRemoveLandscapesDialog.cpp:115
+#: src/gui/AddRemoveLandscapesDialog.cpp:116
 msgid "ZIP archives"
 msgstr "فایل‌های فشرده (ZIP)"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:128
+#: src/gui/AddRemoveLandscapesDialog.cpp:129
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
 msgstr "چشم‌انداز «%1» با موفقيت نصب شد."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:129
-#: src/gui/AddRemoveLandscapesDialog.cpp:156
+#: src/gui/AddRemoveLandscapesDialog.cpp:130
+#: src/gui/AddRemoveLandscapesDialog.cpp:164
 msgid "Success"
 msgstr "انجام شد"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:142
-#: src/gui/AddRemoveLandscapesDialog.cpp:212
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:143
+#: src/gui/AddRemoveLandscapesDialog.cpp:220
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
+#: src/gui/AddRemoveLandscapesDialog.cpp:237
 msgid "No landscape was installed."
 msgstr "هیچ چشم‌اندازی نصب نشد."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:143
-#: src/gui/AddRemoveLandscapesDialog.cpp:167
-#: src/gui/AddRemoveLandscapesDialog.cpp:216
-#: src/gui/AddRemoveLandscapesDialog.cpp:222
+#: src/gui/AddRemoveLandscapesDialog.cpp:144
+#: src/gui/AddRemoveLandscapesDialog.cpp:175
+#: src/gui/AddRemoveLandscapesDialog.cpp:224
 #: src/gui/AddRemoveLandscapesDialog.cpp:230
-#: src/gui/AddRemoveLandscapesDialog.cpp:240
+#: src/gui/AddRemoveLandscapesDialog.cpp:238
+#: src/gui/AddRemoveLandscapesDialog.cpp:248
 msgid "Error!"
 msgstr "خطا!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:155
+#: src/gui/AddRemoveLandscapesDialog.cpp:153
+#: src/ui_addRemoveLandscapesDialog.h:272
+msgid "Remove an installed landscape"
+msgstr "حذف چشم‌انداز نصب شده"
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:154
+msgid "Are you really want to remove this landscape?"
+msgstr ""
+
+#: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
 msgstr "چشم‌انداز «%1» با موفقیت حذف شد."
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:166
-#: src/gui/AddRemoveLandscapesDialog.cpp:236
+#: src/gui/AddRemoveLandscapesDialog.cpp:174
+#: src/gui/AddRemoveLandscapesDialog.cpp:244
 msgid "The selected landscape could not be (completely) removed."
 msgstr "حذف چشم‌انداز منتخب ممکن نیست."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
-#: src/gui/AddRemoveLandscapesDialog.cpp:189
+#: src/gui/AddRemoveLandscapesDialog.cpp:197
 #, qt-format
 msgid "Size on disk: %1 MiB"
 msgstr "حجم: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
-#: src/gui/AddRemoveLandscapesDialog.cpp:215
+#: src/gui/AddRemoveLandscapesDialog.cpp:223
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
 msgstr "%1 بازشدني نيست!"
 
-#: src/gui/AddRemoveLandscapesDialog.cpp:221
+#: src/gui/AddRemoveLandscapesDialog.cpp:229
 msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
@@ -2852,13 +2861,13 @@ msgstr ""
 "پسونذ فایل منتخب ZIP نیست یا این فایل دارای چشم‌انداز استلاریوم نمی‌باشد."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
-#: src/gui/AddRemoveLandscapesDialog.cpp:228
+#: src/gui/AddRemoveLandscapesDialog.cpp:236
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
 msgstr "در حال حاضر چشم‌اندازی با نام يا شناسه‌ی مشابه (%1) موجود است."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
-#: src/gui/AddRemoveLandscapesDialog.cpp:239
+#: src/gui/AddRemoveLandscapesDialog.cpp:247
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "شما می‌توانید با حذف کردن مسیر زیر آن را به صورت دستی پاک کنید: %1"
@@ -3012,7 +3021,7 @@ msgstr ""
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:268 src/gui/AstroCalcDialog.cpp:296
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1322
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
@@ -3040,7 +3049,7 @@ msgstr ""
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:276 src/gui/AstroCalcDialog.cpp:337
-#: src/ui_configurationDialog.h:1277
+#: src/ui_configurationDialog.h:1301
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Type"
 msgstr "نوع"
@@ -3075,7 +3084,7 @@ msgstr ""
 msgid "Positions on %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:435 src/gui/AstroCalcDialog.cpp:2115
+#: src/gui/AstroCalcDialog.cpp:435 src/gui/AstroCalcDialog.cpp:2131
 #: src/ui_viewDialog.h:2138 src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "کهکشان‌ها"
@@ -3104,7 +3113,7 @@ msgid "Bright quasars"
 msgstr "اختروش‌های روشن"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:440 src/gui/AstroCalcDialog.cpp:2116
+#: src/gui/AstroCalcDialog.cpp:440 src/gui/AstroCalcDialog.cpp:2132
 #: src/translations.h:123 src/ui_viewDialog.h:2136 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "خوشه‌های ستاره‌ای"
@@ -3141,14 +3150,14 @@ msgstr "سحابی‌‌ها"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:446 src/gui/AstroCalcDialog.cpp:1016
-#: src/gui/AstroCalcDialog.cpp:2125 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:2141 src/translations.h:105
 #: src/ui_viewDialog.h:2137 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "سحابی‌های سیاره‌نما"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:447 src/gui/AstroCalcDialog.cpp:1018
-#: src/gui/AstroCalcDialog.cpp:2114 src/translations.h:107
+#: src/gui/AstroCalcDialog.cpp:2130 src/translations.h:107
 #: src/ui_viewDialog.h:2140 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "سحابی‌های تاریک"
@@ -3323,13 +3332,13 @@ msgid "Herschel 400 Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:480 src/gui/AstroCalcDialog.cpp:2126
+#: src/gui/AstroCalcDialog.cpp:480 src/gui/AstroCalcDialog.cpp:2142
 #: src/translations.h:190
 msgid "Bright double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:481 src/gui/AstroCalcDialog.cpp:2127
+#: src/gui/AstroCalcDialog.cpp:481 src/gui/AstroCalcDialog.cpp:2143
 #: src/translations.h:192
 msgid "Bright variable stars"
 msgstr ""
@@ -3339,7 +3348,7 @@ msgstr ""
 msgid "Julian Day"
 msgstr "روز ژولین"
 
-#: src/gui/AstroCalcDialog.cpp:835 src/gui/AstroCalcDialog.cpp:1508
+#: src/gui/AstroCalcDialog.cpp:835 src/gui/AstroCalcDialog.cpp:1524
 msgid "CSV (Comma delimited)"
 msgstr ""
 
@@ -3396,49 +3405,49 @@ msgid "Solar system"
 msgstr "منظومه‌ی شمسی"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1004 src/gui/AstroCalcDialog.cpp:2117
+#: src/gui/AstroCalcDialog.cpp:1004 src/gui/AstroCalcDialog.cpp:2133
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "سیارک‌ها"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1005 src/gui/AstroCalcDialog.cpp:2119
+#: src/gui/AstroCalcDialog.cpp:1005 src/gui/AstroCalcDialog.cpp:2135
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr "پلوتینوها"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1006 src/gui/AstroCalcDialog.cpp:2118
+#: src/gui/AstroCalcDialog.cpp:1006 src/gui/AstroCalcDialog.cpp:2134
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "دنباله‌دارها"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1007 src/gui/AstroCalcDialog.cpp:2120
+#: src/gui/AstroCalcDialog.cpp:1007 src/gui/AstroCalcDialog.cpp:2136
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr "سیاره‌های کوتوله"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1008 src/gui/AstroCalcDialog.cpp:2121
+#: src/gui/AstroCalcDialog.cpp:1008 src/gui/AstroCalcDialog.cpp:2137
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr "اجرام کمربند کوییپر (KBO)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1009 src/gui/AstroCalcDialog.cpp:2122
+#: src/gui/AstroCalcDialog.cpp:1009 src/gui/AstroCalcDialog.cpp:2138
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr "اجرام دیسکی پراکنده"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1010 src/gui/AstroCalcDialog.cpp:2123
+#: src/gui/AstroCalcDialog.cpp:1010 src/gui/AstroCalcDialog.cpp:2139
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr "اجرام ابر اورت"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1011 src/gui/AstroCalcDialog.cpp:2124
+#: src/gui/AstroCalcDialog.cpp:1011 src/gui/AstroCalcDialog.cpp:2140
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr ""
@@ -3500,69 +3509,77 @@ msgstr "جرم ۱"
 msgid "Object 2"
 msgstr "جرم ۲"
 
-#: src/gui/AstroCalcDialog.cpp:1510
+#: src/gui/AstroCalcDialog.cpp:1526
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1549 src/gui/AstroCalcDialog.cpp:1724
-#: src/gui/AstroCalcDialog.cpp:1882
+#: src/gui/AstroCalcDialog.cpp:1565 src/gui/AstroCalcDialog.cpp:1740
+#: src/gui/AstroCalcDialog.cpp:1898
 msgid "Conjunction"
 msgstr "مقارنه"
 
-#: src/gui/AstroCalcDialog.cpp:1556
+#: src/gui/AstroCalcDialog.cpp:1572
 msgid "Opposition"
 msgstr "مقابله"
 
-#: src/gui/AstroCalcDialog.cpp:1564
+#: src/gui/AstroCalcDialog.cpp:1580
 msgid "Transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1566 src/gui/AstroCalcDialog.cpp:1729
-#: src/gui/AstroCalcDialog.cpp:1887
+#: src/gui/AstroCalcDialog.cpp:1582 src/gui/AstroCalcDialog.cpp:1745
+#: src/gui/AstroCalcDialog.cpp:1903
 msgid "Occultation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1570
+#: src/gui/AstroCalcDialog.cpp:1586
 msgid "Eclipse"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2091
+#: src/gui/AstroCalcDialog.cpp:2107
 msgid "In the Evening"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2092
+#: src/gui/AstroCalcDialog.cpp:2108
 msgid "In the Morning"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2093
+#: src/gui/AstroCalcDialog.cpp:2109
 msgid "Any Time Tonight"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2112
+#: src/gui/AstroCalcDialog.cpp:2128
 msgid "Bright stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2113 src/ui_viewDialog.h:2141
+#: src/gui/AstroCalcDialog.cpp:2129 src/ui_viewDialog.h:2141
 msgid "Bright nebulae"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:100 src/ui_searchDialogGui.h:695
+#: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:695
 msgid "Object"
 msgstr "جرم"
 
-#: src/gui/BookmarksDialog.cpp:101
+#: src/gui/BookmarksDialog.cpp:107
 msgid "Localized name"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:103
+#: src/gui/BookmarksDialog.cpp:109
 msgid "Location of observer"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:155
+#: src/gui/BookmarksDialog.cpp:161
 msgid "Unnamed object"
 msgstr ""
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1469
+#: src/gui/BookmarksDialog.cpp:341 src/ui_bookmarksDialog.h:204
+msgid "Import bookmarks"
+msgstr ""
+
+#: src/gui/BookmarksDialog.cpp:354
+msgid "Export bookmarks as..."
+msgstr ""
+
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "برنامه‌ها"
@@ -3592,15 +3609,15 @@ msgstr "مجوز"
 msgid "Shortcut"
 msgstr "میانبر"
 
-#: src/StelMainView.cpp:760
+#: src/StelMainView.cpp:761
 msgid "Save screenshot"
 msgstr "ذخیره‌ی نما"
 
-#: src/StelMainView.cpp:761
+#: src/StelMainView.cpp:762
 msgid "Full-screen mode"
 msgstr "حالت تمام‌صفحه"
 
-#: src/StelMainView.cpp:909
+#: src/StelMainView.cpp:910
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3608,41 +3625,41 @@ msgstr ""
 "نسخه‌ی OpenGL پایین است. لطفاً درایورها یا سخت‌افزار گرافیکی را به‌روز کنید "
 "یا از امکان angle-mode-- (یا mesa-mode--) استفاده کنید."
 
-#: src/StelMainView.cpp:912
+#: src/StelMainView.cpp:913
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "نسخه‌ی OpenGL پایین است. لطفا درایورها یا سخت‌افزار گرافیکی را به‌روز کنید."
 
-#: src/StelMainView.cpp:954
+#: src/StelMainView.cpp:955
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1005
+#: src/StelMainView.cpp:1006
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1061
+#: src/StelMainView.cpp:1062
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1102
+#: src/StelMainView.cpp:1103
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1214
+#: src/StelMainView.cpp:1215
 #, qt-format
 msgid "Stellarium %1"
 msgstr "استلاریوم %1"
@@ -4381,7 +4398,7 @@ msgstr "پوشه"
 msgid "&Choose"
 msgstr "&برگزیدن"
 
-#: src/translations.h:416 src/ui_configurationDialog.h:1439
+#: src/translations.h:416 src/ui_configurationDialog.h:1473
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "لغو"
@@ -5492,7 +5509,7 @@ msgstr "درباره"
 msgid "Log"
 msgstr "گزارش"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1322
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1346
 msgid "Edit keyboard shortcuts..."
 msgstr "ویرایش میانبرهای صفحه‌کلید..."
 
@@ -5772,7 +5789,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2370
 #: src/ui_viewDialog.h:2392 src/ui_viewDialog.h:2426
-#: src/ui_configurationDialog.h:1440 src/ui_configurationDialog.h:1451
+#: src/ui_configurationDialog.h:1474 src/ui_configurationDialog.h:1485
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "گزینه‌ها"
@@ -6534,72 +6551,72 @@ msgstr "چشم‌انداز"
 msgid "Starlore"
 msgstr "افسانه‌ها و ستارگان"
 
-#: src/ui_configurationDialog.h:1211
+#: src/ui_configurationDialog.h:1235
 msgid "Configuration"
 msgstr "پیکربندی"
 
-#: src/ui_configurationDialog.h:1213
+#: src/ui_configurationDialog.h:1237
 msgid "Language settings"
 msgstr "تنظیمات زبان"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1238
 msgid "Program Language"
 msgstr "زبان برنامه"
 
-#: src/ui_configurationDialog.h:1215
+#: src/ui_configurationDialog.h:1239
 msgid "Sky Culture Language"
 msgstr "زبان فرهنگ آسمان"
 
-#: src/ui_configurationDialog.h:1217
+#: src/ui_configurationDialog.h:1241
 msgid "This feature has not been thoroughly tested yet!"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1243
 msgid "Ephemeris settings (experimental)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1221
+#: src/ui_configurationDialog.h:1244 src/ui_configurationDialog.h:1245
 msgid "Not installed"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1223
+#: src/ui_configurationDialog.h:1247
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1249
 msgid "Use DE431 (long-time data)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1227
+#: src/ui_configurationDialog.h:1251
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1253
 msgid "Use DE430 (high accuracy)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1231
+#: src/ui_configurationDialog.h:1255
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1233
+#: src/ui_configurationDialog.h:1257
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1234
+#: src/ui_configurationDialog.h:1258
 msgid "Default options"
 msgstr "تنظيمات پيش‌فرض"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1259
 msgid "Save View"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1237
+#: src/ui_configurationDialog.h:1261
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6607,7 +6624,7 @@ msgstr ""
 "ذخیره تنظیمات جاری این بار استلاریوم برای بار دیگر که استلاریوم را "
 "راه‌اندازی می‌شود"
 
-#: src/ui_configurationDialog.h:1239
+#: src/ui_configurationDialog.h:1263
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6615,11 +6632,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "ذخیره تنظیمات"
 
-#: src/ui_configurationDialog.h:1241
+#: src/ui_configurationDialog.h:1265
 msgid "Restore the default settings that came with Stellarium"
 msgstr "بازگشت به تنظیمات اولیه استلاریوم"
 
-#: src/ui_configurationDialog.h:1243
+#: src/ui_configurationDialog.h:1267
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6627,267 +6644,275 @@ msgstr "بازگشت به تنظیمات اولیه استلاریوم"
 msgid "Restore defaults"
 msgstr "تنظیمات پیش‌فرض"
 
-#: src/ui_configurationDialog.h:1244
+#: src/ui_configurationDialog.h:1268
 msgid ""
 "Save either the current FOV and direction of view or all the current options "
 "for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1270
 msgid "The width of your view when Stellarium starts"
 msgstr "پهنای دید هنگامی که استلاریوم دوباره راه‌اندازی می‌شود."
 
-#: src/ui_configurationDialog.h:1249
+#: src/ui_configurationDialog.h:1273
 msgid "The direction you're looking when Stellarium starts"
 msgstr "جهت‌گیری‌ای که هنگام راه‌اندازی استلاریوم مشاهده خواهید کرد"
 
-#: src/ui_configurationDialog.h:1251 src/ui_configurationDialog.h:1462
+#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1496
 msgid "Selected object information"
 msgstr "اطلاعات جرم انتخابی"
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1277
 msgid "Display all information available"
 msgstr "نمایش تمام اطلاعات در دسترس"
 
-#: src/ui_configurationDialog.h:1255
+#: src/ui_configurationDialog.h:1279
 msgid "All available"
 msgstr "كامل"
 
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1281
 msgid "Display no information"
 msgstr "نمایش ندادن هیچ کدام از اطلاعات"
 
-#: src/ui_configurationDialog.h:1259 plugins/Oculars/src/Oculars.cpp:2247
+#: src/ui_configurationDialog.h:1283 plugins/Oculars/src/Oculars.cpp:2247
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "هیچ"
 
-#: src/ui_configurationDialog.h:1261
+#: src/ui_configurationDialog.h:1285
 msgid "Display less information"
 msgstr "نمایش بخشی از اطلاعات"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1287
 msgid "Short"
 msgstr "کوتاه"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1289
 msgid "Display user settings information"
 msgstr "نمایش اطلاعات تنظیمات کاربر"
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1291
 msgid "Customized"
 msgstr "سفارشی"
 
-#: src/ui_configurationDialog.h:1268
+#: src/ui_configurationDialog.h:1292
 msgid "Displayed fields"
 msgstr "موردهایی که نمایش داده می‌شود"
 
-#: src/ui_configurationDialog.h:1270 src/ui_configurationDialog.h:1304
+#: src/ui_configurationDialog.h:1294 src/ui_configurationDialog.h:1328
 msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1272
+#: src/ui_configurationDialog.h:1296
 msgid "Right ascension/Declination (of date)"
 msgstr "بعد/میل (از تاریخ)"
 
-#: src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1297
 msgid "Supergalactic coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1275
+#: src/ui_configurationDialog.h:1299
 msgid "The type of the object (star, planet, etc.)"
 msgstr "گونهٔ جرم (ستاره، سیاره، ...)"
 
-#: src/ui_configurationDialog.h:1278
+#: src/ui_configurationDialog.h:1302
 msgid "Absolute magnitude"
 msgstr "قدر مطلق"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1304
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1306
 msgid "Ecliptic coordinates (of date)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1284
+#: src/ui_configurationDialog.h:1308
 msgid "Angular or physical size"
 msgstr "اندازه فیزیکی یا زاویه‌ای"
 
-#: src/ui_configurationDialog.h:1286
+#: src/ui_configurationDialog.h:1310
 msgid "Size"
 msgstr "اندازه‌"
 
-#: src/ui_configurationDialog.h:1288
+#: src/ui_configurationDialog.h:1312
 msgid "Horizontal coordinates"
 msgstr "مختصات سمتی/ارتفاعی"
 
-#: src/ui_configurationDialog.h:1290
+#: src/ui_configurationDialog.h:1314
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "سمت/ارتفاع"
 
-#: src/ui_configurationDialog.h:1291
+#: src/ui_configurationDialog.h:1315
 msgid "Catalog number(s)"
 msgstr "شماره(های) فهرست"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1316
 msgid "Distance"
 msgstr "فاصله"
 
-#: src/ui_configurationDialog.h:1293
+#: src/ui_configurationDialog.h:1317
 msgid "Galactic coordinates"
 msgstr "مختصات کهکشانی"
 
-#: src/ui_configurationDialog.h:1295
+#: src/ui_configurationDialog.h:1319
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1297
+#: src/ui_configurationDialog.h:1321
 msgid "Right ascension/Declination (J2000)"
 msgstr "بعد/میل (J2000)"
 
-#: src/ui_configurationDialog.h:1300
+#: src/ui_configurationDialog.h:1324
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1302
+#: src/ui_configurationDialog.h:1326
 msgid "Ecliptic coordinates (J2000)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1306
+#: src/ui_configurationDialog.h:1330
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "زاویه ساعتی/میل"
 
-#: src/ui_configurationDialog.h:1307
+#: src/ui_configurationDialog.h:1331
 msgid "Visual magnitude"
 msgstr "قدر دیداری"
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1333
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1311
+#: src/ui_configurationDialog.h:1335
 msgid "Constellation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1337
 msgid "Spectral class, nebula type, etc."
 msgstr "رده طیفی، گونه سحابی، ..."
 
-#: src/ui_configurationDialog.h:1315
+#: src/ui_configurationDialog.h:1339
 msgid "Additional information"
 msgstr "اطلاعات بیشتر"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1340
 msgid "Sidereal time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1317
+#: src/ui_configurationDialog.h:1341
 msgid "Control"
 msgstr "مهار"
 
-#: src/ui_configurationDialog.h:1319
+#: src/ui_configurationDialog.h:1343
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "امکان حرکت (با کشیدن) و بزرگ‌نمایی (با کلید وسط) با موشواره"
 
-#: src/ui_configurationDialog.h:1321
+#: src/ui_configurationDialog.h:1345
 msgid "Enable mouse navigation"
 msgstr "فعال کردن ناوبری با موشواره"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1348
 msgid "Allow keyboard to pan and zoom"
 msgstr "امکان حرکت و بزرگ‌نمایی با صفحه‌کلید"
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1350
 msgid "Enable keyboard navigation"
 msgstr "فعال کردن ناوبری با صفحه‌کلید"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1352
 msgid "Hides the mouse cursor when inactive"
 msgstr "پنهان کردن نشانگر موشواره هنگام بیکاری"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1354
 msgid "Mouse cursor timeout:"
 msgstr "زمان محو اشاره‌گر موشواره:"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1356
 msgid "seconds"
 msgstr "ثانیه"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1358
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "تاريخ و زمان هنگام راه‌اندازی"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1360
 msgid "Starts Stellarium at system clock date and time"
 msgstr "راه‌اندازی استلاریوم با تاریخ و زمان رایانه"
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1362
 msgid "System date and time"
 msgstr "تاریخ و ساعت رایانه"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1364
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1366
 msgid "System date at:"
 msgstr "ساعت در تاريخ رايانه"
 
-#: src/ui_configurationDialog.h:1344
+#: src/ui_configurationDialog.h:1368
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "استفاده از تاریخ و زمانی به‌خصوص هنگام راه‌اندازی استلاریوم"
 
-#: src/ui_configurationDialog.h:1346
+#: src/ui_configurationDialog.h:1370
 msgid "Other:"
 msgstr "دیگر:"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1372
 msgid "Use current local date and time"
 msgstr "از تاریخ و زمان محلی کنونی استفاده شود"
 
-#: src/ui_configurationDialog.h:1350
+#: src/ui_configurationDialog.h:1374
 msgid "use current"
 msgstr "هم‌اکنون"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1376
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1378
 msgid "Display formats of date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1355
+#: src/ui_configurationDialog.h:1379
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1380
 msgid "and time:"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1357
+#: src/ui_configurationDialog.h:1381
 msgid "Time correction"
 msgstr "تصحیح زمان"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1384
 msgid "Edit equation"
 msgstr "ویرایش معادله"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1386
 msgid "Planetarium options"
 msgstr "تنظیمات آسمان‌نما"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1388
+msgid "Toggle display of the button for Digitized Sky Survey."
+msgstr ""
+
+#: src/ui_configurationDialog.h:1390
+msgid "Show DSS button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1392
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -6895,195 +6920,211 @@ msgstr ""
 "وقتی فعال شود، دکمه ی \"کوچک نمایی خودکار\" جهت دید اولیه را نیز تقییر خواهد "
 "داد."
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1394
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "برگشت به زاويه ديدِ پيش‌فرض"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1396
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "نمايش اجرام داخل يك دايره مركزي"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1398
 msgid "Disc viewport"
 msgstr "نماي تلسكوپ"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1400
 msgid "Align labels with the horizon"
 msgstr "همراسنا كردن نام‌ها با افق"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1402
 msgid "Gravity labels"
 msgstr "دوران نام‌ها"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1404
 msgid "Use decimal degrees for coordinates"
 msgstr "استفاده از درجه‌های اعشاری برای مختصات"
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1406
 msgid "Use decimal degrees"
 msgstr "استفاده از درجه‌های اعشاری"
 
-#: src/ui_configurationDialog.h:1380
+#: src/ui_configurationDialog.h:1408
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
 "اعوجاج آينه‌اي كروي هنگام تصوير بر روي آينه كروي براي آسمان‌نماي ضعيف"
 
-#: src/ui_configurationDialog.h:1382
+#: src/ui_configurationDialog.h:1410
 msgid "Spheric mirror distortion"
 msgstr "اعوجاج آينه كروي"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1412
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1414
 msgid "Topocentric coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1388
+#: src/ui_configurationDialog.h:1416
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1418
 msgid "Auto-enabling for the atmosphere"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1392
+#: src/ui_configurationDialog.h:1420
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "تغییر وضعیت دکمه‌های برگردان جانبی و وارونگی"
 
-#: src/ui_configurationDialog.h:1394
+#: src/ui_configurationDialog.h:1422
 msgid "Show flip buttons"
 msgstr "دكمه‌هاي تغيير جهت روشن"
 
-#: src/ui_configurationDialog.h:1396 src/ui_configurationDialog.h:1399
+#: src/ui_configurationDialog.h:1424 src/ui_configurationDialog.h:1427
 msgid "Hide other constellations when you click one"
 msgstr "نهفتن دیگر صورت‌فلکی‌ها هنگام کلیک کردن بر یکی"
 
-#: src/ui_configurationDialog.h:1403
+#: src/ui_configurationDialog.h:1431
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "نهفتن/نمایش پس‌زمینه سحابی‌ها"
 
-#: src/ui_configurationDialog.h:1405
+#: src/ui_configurationDialog.h:1433
 msgid "Show nebula background button"
 msgstr "نمایش دکمه پس‌زمینه سحابی"
 
-#: src/ui_configurationDialog.h:1407
+#: src/ui_configurationDialog.h:1435
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1409
+#: src/ui_configurationDialog.h:1437
 msgid "Include nutation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1411
+#: src/ui_configurationDialog.h:1439
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1413
+#: src/ui_configurationDialog.h:1441
 msgid "Azimuth from South"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1415
-msgid "Toggle display of the button for Digitized Sky Survey."
-msgstr ""
-
-#: src/ui_configurationDialog.h:1417
-msgid "Show DSS button"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1443
 msgid "Automatic change of landscape when planet is changed"
 msgstr "تغییر خودکار چشم‌انداز با تغییر سیاره"
 
-#: src/ui_configurationDialog.h:1421
+#: src/ui_configurationDialog.h:1445
 msgid "Auto select landscapes"
 msgstr "گزینش خودکار چشم‌انداز"
 
-#: src/ui_configurationDialog.h:1422
+#: src/ui_configurationDialog.h:1446
 msgid "Show bookmarks button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1423
+#: src/ui_configurationDialog.h:1448
+msgid "A button to toggle equatorial J2000 grid."
+msgstr ""
+
+#: src/ui_configurationDialog.h:1450
+msgid "Show ICRS grid button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1452
+msgid "A button to toggle galactic grid"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1454
+msgid "Show galactic grid button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1455
+msgid "Show ecliptic grid button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1456
+msgid "Show constellation boundaries button"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1457
 msgid "Screenshots"
 msgstr "عكس از صفحه"
 
-#: src/ui_configurationDialog.h:1424
+#: src/ui_configurationDialog.h:1458
 msgid "Screenshot Directory"
 msgstr "پوشه تصاویر"
 
-#: src/ui_configurationDialog.h:1426
+#: src/ui_configurationDialog.h:1460
 msgid "Invert colors"
 msgstr "وارونه‌کردن رنگ‌ها"
 
-#: src/ui_configurationDialog.h:1427
+#: src/ui_configurationDialog.h:1461
 msgid "Star catalog updates"
 msgstr "بروزرساني زيج ستارگان"
 
-#: src/ui_configurationDialog.h:1429
+#: src/ui_configurationDialog.h:1463
 msgid "Click here to start downloading"
 msgstr "دريافت"
 
-#: src/ui_configurationDialog.h:1431
+#: src/ui_configurationDialog.h:1465
 msgid "Download this file to view even more stars"
 msgstr "برای مشاهده ستارگان بیشتر این فایل را دريافت کنید"
 
-#: src/ui_configurationDialog.h:1433
+#: src/ui_configurationDialog.h:1467
 msgid "Restart the download"
 msgstr "راه‌اندازی مجدد دريافت"
 
-#: src/ui_configurationDialog.h:1435
+#: src/ui_configurationDialog.h:1469
 msgid "Retry"
 msgstr "تلاش دوباره"
 
-#: src/ui_configurationDialog.h:1437
+#: src/ui_configurationDialog.h:1471
 msgid "Stop the download. You can always restart it later"
 msgstr "توقفِ دريافت. بعداً می‌توانید دوباره آن را دريافت کنید."
 
-#: src/ui_configurationDialog.h:1442
+#: src/ui_configurationDialog.h:1476
 msgid "Close window when script runs"
 msgstr "بستن پنجره هنگام اجرای اسکریپت"
 
-#: src/ui_configurationDialog.h:1444
+#: src/ui_configurationDialog.h:1478
 msgid "Run the selected script"
 msgstr "اجراي برنامه"
 
-#: src/ui_configurationDialog.h:1448
+#: src/ui_configurationDialog.h:1482
 msgid "Stop a running script"
 msgstr "توقف اجراي برنامه"
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1486
 msgid "Load at startup"
 msgstr "بارگذاری در هنگام راه‌اندازی"
 
-#: src/ui_configurationDialog.h:1453
+#: src/ui_configurationDialog.h:1487
 msgid "configure"
 msgstr "پیکربندی"
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1492
 msgid "Main"
 msgstr "اصلی"
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1494
 msgid "Information"
 msgstr "اطلاعات"
 
-#: src/ui_configurationDialog.h:1465
+#: src/ui_configurationDialog.h:1499
 msgid "Navigation"
 msgstr "کاوش"
 
-#: src/ui_configurationDialog.h:1467
+#: src/ui_configurationDialog.h:1501
 msgid "Tools"
 msgstr "ابزار"
 
-#: src/ui_configurationDialog.h:1471
+#: src/ui_configurationDialog.h:1505
 msgid "Plugins"
 msgstr "افزونه‌ها"
 
@@ -7102,10 +7143,6 @@ msgstr "نصب چشم‌انداز از فايل فشرده"
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Switch to the new landscape after installation"
 msgstr "تغيير چشم‌اندازبه چشم انداز نصب شده"
-
-#: src/ui_addRemoveLandscapesDialog.h:272
-msgid "Remove an installed landscape"
-msgstr "حذف چشم‌انداز نصب شده"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
@@ -7413,32 +7450,36 @@ msgstr ""
 msgid "Show objects which are up:"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:176
+#: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:177
+#: src/ui_bookmarksDialog.h:196
 msgid "Add location"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:179
+#: src/ui_bookmarksDialog.h:198
 msgid "Add selected object to bookmarks"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:181
+#: src/ui_bookmarksDialog.h:200
 msgid "&Add bookmark"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:182
+#: src/ui_bookmarksDialog.h:201
 msgid "&Remove bookmark"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:183
+#: src/ui_bookmarksDialog.h:202
 msgid "Clear bookmarks"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:184
+#: src/ui_bookmarksDialog.h:203
 msgid "&Go to..."
+msgstr ""
+
+#: src/ui_bookmarksDialog.h:205
+msgid "Export bookmarks"
 msgstr ""
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:378
@@ -11949,68 +11990,68 @@ msgstr ""
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:74
-#: plugins/Exoplanets/src/Exoplanets.cpp:169
+#: plugins/Exoplanets/src/Exoplanets.cpp:75
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
+#: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Exoplanets"
 msgstr "سیاره های فراخورشیدی"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:77
+#: plugins/Exoplanets/src/Exoplanets.cpp:78
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:169
+#: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Show exoplanets"
 msgstr "نمایش سیارات فراخورشیدی"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:170
+#: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Exoplanets configuration window"
 msgstr "پنجره ی پیکره بندی سیارات فراخورشیدی"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:904
+#: plugins/Exoplanets/src/Exoplanets.cpp:919
 msgid "Hot"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:906
+#: plugins/Exoplanets/src/Exoplanets.cpp:921
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:908
+#: plugins/Exoplanets/src/Exoplanets.cpp:923
 msgid "Cold"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:911
+#: plugins/Exoplanets/src/Exoplanets.cpp:926
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:913
+#: plugins/Exoplanets/src/Exoplanets.cpp:928
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:915
+#: plugins/Exoplanets/src/Exoplanets.cpp:930
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:917
+#: plugins/Exoplanets/src/Exoplanets.cpp:932
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:919
+#: plugins/Exoplanets/src/Exoplanets.cpp:934
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:921
+#: plugins/Exoplanets/src/Exoplanets.cpp:936
 msgid "Neptunian"
 msgstr ""
 
