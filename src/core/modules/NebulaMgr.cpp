@@ -1094,7 +1094,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	int nb;
 	NebulaP e;
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-	QRegExp transRx("_[(]\"(.*)\"[)]");
+	QRegExp transRx("_[(]\"(.*)\"[)](\\s*#.*)?"); // optional comments after name.
 	while (!dsoNameFile.atEnd())
 	{
 		record = QString::fromUtf8(dsoNameFile.readLine());
