@@ -80,7 +80,7 @@ void MainService::update(double deltaTime)
 
 	if(!xZero || !yZero)
 	{
-		qDebug()<<moveX<<moveY;
+		//qDebug()<<moveX<<moveY;
 
 		double currentFov = mvmgr->getCurrentFov();
 		// the more it is zoomed, the lower the moving speed is (in angle)
