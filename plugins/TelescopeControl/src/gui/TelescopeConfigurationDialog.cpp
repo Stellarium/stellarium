@@ -43,7 +43,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	, configuredSlot(0)
 {
 	ui = new Ui_telescopeConfigurationDialog();
-	
+
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 
 	telescopeNameValidator = new QRegExpValidator (QRegExp("[^:\"]+"), this);//Test the update for JSON
@@ -122,7 +122,7 @@ void TelescopeConfigurationDialog::retranslate()
 void TelescopeConfigurationDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	
+
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -133,6 +133,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeLocal, SIGNAL(toggled(bool)), this, SLOT(toggleTypeLocal(bool)));
 	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
 	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
+	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
 	
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -149,6 +150,10 @@ void TelescopeConfigurationDialog::createDialogContent()
 //Set the configuration panel in a predictable state
 void TelescopeConfigurationDialog::initConfigurationDialog()
 {
+	ui->groupBoxConnectionSettings->hide();
+	ui->groupBoxDeviceSettings->hide();
+	ui->groupBoxRTS2Settings->hide();
+
 	//Reusing code used in both methods that call this one
 	deviceModelNames = telescopeManager->getDeviceModels().keys();
 	
@@ -213,7 +218,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	configuredSlot = slot;
 	initConfigurationDialog();
 	ui->stelWindowTitle->setText(q_("Configure Telescope"));
-	
+
 	//Read the telescope properties
 	QString name;
 	ConnectionType connectionType;
@@ -225,7 +230,10 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QList<double> circles;
 	QString deviceModelName;
 	QString serialPortName;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName))
+	QString rts2Url;
+	QString rts2Username;
+	QString rts2Password;
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password))
 	{
 		//TODO: Add debug
 		return;
@@ -265,9 +273,16 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->radioButtonTelescopeConnection->setChecked(true);
 		ui->lineEditHostName->setText("localhost");
 	}
-	else
+	else if (connectionType == ConnectionVirtual)
 	{
 		ui->radioButtonTelescopeVirtual->setChecked(true);
+	}
+	else if (connectionType == ConnectionRTS2)
+	{
+		ui->radioButtonTelescopeRTS2->setChecked(true);
+		ui->lineEditRTS2Url->setText(rts2Url);
+		ui->lineEditRTS2Username->setText(rts2Username);
+		ui->lineEditRTS2Password->setText(rts2Password);
 	}
 
 	//Equinox
@@ -310,16 +325,13 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
-		//Enable/disable controls
-		ui->labelHost->setEnabled(false);
-		ui->lineEditHostName->setEnabled(false);
+		ui->groupBoxDeviceSettings->show();
 
 		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
-		ui->labelHost->setEnabled(true);
-		ui->lineEditHostName->setEnabled(true);
+		ui->groupBoxDeviceSettings->hide();
 	}
 }
 
@@ -331,23 +343,37 @@ void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
-		ui->groupBoxDeviceSettings->setEnabled(false);
+		ui->groupBoxConnectionSettings->show();
 
 		ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 	}
 	else
 	{
-		ui->groupBoxDeviceSettings->setEnabled(true);
+		ui->groupBoxConnectionSettings->hide();
 	}
 }
 
 void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
 {
-	//TODO: This really should be done in the GUI
-	ui->groupBoxDeviceSettings->setEnabled(!isChecked);
-	ui->groupBoxConnectionSettings->setEnabled(!isChecked);
-
+	Q_UNUSED(isChecked);
 	ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
+}
+
+void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
+{
+	if(isChecked)
+	{
+		//Re-initialize values that may have been changed
+		ui->lineEditRTS2Url->setText("localhost:8889");
+
+		ui->groupBoxRTS2Settings->show();
+
+		ui->scrollArea->ensureWidgetVisible(ui->groupBoxRTS2Settings);
+	}
+	else
+	{
+		ui->groupBoxRTS2Settings->hide();
+	}
 }
 
 void TelescopeConfigurationDialog::buttonSavePressed()
@@ -415,6 +441,11 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 		type = ConnectionVirtual;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, QString(), portTCP, delay, connectAtStartup, circles);
 	}
+	else if (ui->radioButtonTelescopeRTS2->isChecked())
+	{
+		type = ConnectionRTS2;
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text());
+	}
 	
 	emit changesSaved(name, type);
 }
@@ -426,7 +457,7 @@ void TelescopeConfigurationDialog::buttonDiscardPressed()
 
 void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceModelName)
 {
-	ui->labelDeviceModelDescription->setText(telescopeManager->getDeviceModels().value(deviceModelName).description);
+	ui->labelDeviceModelDescription->setText(q_(telescopeManager->getDeviceModels().value(deviceModelName).description));
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
 }
 

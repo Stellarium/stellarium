@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 23:22+0700\n"
-"PO-Revision-Date: 2017-03-13 05:55+0000\n"
+"POT-Creation-Date: 2017-05-09 19:29+0700\n"
+"PO-Revision-Date: 2017-05-12 10:18+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali <bn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-22 05:49+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-05-13 05:24+0000\n"
+"X-Generator: Launchpad (build 18373)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -455,7 +455,7 @@ msgstr "বিয়াঙ্কা"
 #. TRANSLATORS: Asteroid (3753) Cruithne
 #: skycultures/translations.fab:152
 msgid "Cruithne"
-msgstr "ক্রুথনে"
+msgstr "ক্রুইনিয়া"
 
 #. TRANSLATORS: Asteroid (5261) Eureka
 #: skycultures/translations.fab:154
@@ -492,230 +492,676 @@ msgstr "ক্যাসিওপিয়া A"
 msgid "S Andromedae"
 msgstr "S অ্যান্ড্রোমিডা"
 
+#. TRANSLATORS: Template for Nova name
+#: skycultures/translations.fab:182
+msgctxt "Nova template"
+msgid "Nova"
+msgstr ""
+
 #. TRANSLATORS: Proper name of star 14 Andromedae
-#: skycultures/translations.fab:182 skycultures/western/star_names.fab:11
+#: skycultures/translations.fab:187 skycultures/western/star_names.fab:11
 msgid "Veritate"
 msgstr "ভেরিতাতে"
 
 #. TRANSLATORS: Proper name of exoplanet 14 Andromedae b
-#: skycultures/translations.fab:184
+#: skycultures/translations.fab:189
 msgid "Spe"
 msgstr "স্পি"
 
 #. TRANSLATORS: Proper name of star 18 Delphini
-#: skycultures/translations.fab:186 skycultures/western/star_names.fab:295
+#: skycultures/translations.fab:191 skycultures/western/star_names.fab:313
 msgid "Musica"
 msgstr "মুজিকা"
 
 #. TRANSLATORS: Proper name of exoplanet 18 Delphini b
-#: skycultures/translations.fab:188
+#: skycultures/translations.fab:193
 msgid "Arion"
 msgstr "আরিয়ন"
 
 #. TRANSLATORS: Proper name of star 42 Draconis
-#: skycultures/translations.fab:190 skycultures/western/star_names.fab:328
+#: skycultures/translations.fab:195 skycultures/western/star_names.fab:346
 msgid "Fafnir"
 msgstr "ফাফনির"
 
 #. TRANSLATORS: Proper name of exoplanet 42 Draconis b
-#: skycultures/translations.fab:192
+#: skycultures/translations.fab:197
 msgid "Orbitar"
 msgstr "অর্বিটার"
 
 #. TRANSLATORS: Proper name of star 47 Ursae Majoris
-#: skycultures/translations.fab:194 skycultures/western/star_names.fab:715
+#: skycultures/translations.fab:199 skycultures/western/star_names.fab:776
 msgid "Chalawan"
 msgstr "ছালাওয়ান"
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris b
-#: skycultures/translations.fab:196
+#: skycultures/translations.fab:201
 msgid "Taphao Thong"
 msgstr "থাপাও থং"
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris c
-#: skycultures/translations.fab:198
+#: skycultures/translations.fab:203
 msgid "Taphao Kaew"
 msgstr "থাপাও ক্যা"
 
 #. TRANSLATORS: Proper name of star 51 Pegasi
-#: skycultures/translations.fab:200 skycultures/western/star_names.fab:538
+#: skycultures/translations.fab:205 skycultures/western/star_names.fab:584
 msgid "Helvetios"
 msgstr "হেলভেতিয়স"
 
 #. TRANSLATORS: Proper name of exoplanet 51 Pegasi b
-#: skycultures/translations.fab:202
+#: skycultures/translations.fab:207
 msgid "Dimidium"
 msgstr "ডিমিডিয়াম"
 
 #. TRANSLATORS: Proper name of star 55 Cancri
-#: skycultures/translations.fab:204 skycultures/western/star_names.fab:117
+#: skycultures/translations.fab:209 skycultures/western/star_names.fab:121
 msgid "Copernicus"
 msgstr "কোপার্নিকাস"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri b
-#: skycultures/translations.fab:206
+#: skycultures/translations.fab:211
 msgid "Galileo"
 msgstr "গ্যালিলিও"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri c
-#: skycultures/translations.fab:208
+#: skycultures/translations.fab:213
 msgid "Brahe"
 msgstr "ব্রাহে"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri d
-#: skycultures/translations.fab:210
+#: skycultures/translations.fab:215
 msgid "Lipperhey"
 msgstr "লিপারহে"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri e
-#: skycultures/translations.fab:212
+#: skycultures/translations.fab:217
 msgid "Janssen"
 msgstr "ইয়ানসে"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri f
-#: skycultures/translations.fab:214
+#: skycultures/translations.fab:219
 msgid "Harriot"
 msgstr "হ্যারিয়ট"
 
 #. TRANSLATORS: Proper name of exoplanet Ain b (epsilon Tauri b)
-#: skycultures/translations.fab:216
+#: skycultures/translations.fab:221
 msgid "Amateru"
 msgstr "আমাটেরু"
 
 #. TRANSLATORS: Proper name of exoplanet Edasich b (iota Draconis b)
-#: skycultures/translations.fab:218
+#: skycultures/translations.fab:223
 msgid "Hypatia"
 msgstr "হাইপ্যাশিয়া"
 
 #. TRANSLATORS: Proper name of star epsilon Eridani
-#: skycultures/translations.fab:220 skycultures/western/star_names.fab:360
+#: skycultures/translations.fab:225 skycultures/western/star_names.fab:380
 msgid "Ran"
 msgstr "রাং"
 
 #. TRANSLATORS: Proper name of exoplanet epsilon Eridani b
-#: skycultures/translations.fab:222
+#: skycultures/translations.fab:227
 msgid "AEgir"
 msgstr "এয়েগির"
 
 #. TRANSLATORS: Proper name of exoplanet Errai b (gamma Cephei b)
-#: skycultures/translations.fab:224
+#: skycultures/translations.fab:229
 msgid "Tadmor"
 msgstr "ট্যাডমা"
 
 #. TRANSLATORS: Proper name of exoplanet Fomalhaut b (alpha Piscis Austrini b)
-#: skycultures/translations.fab:226
+#: skycultures/translations.fab:231
 msgid "Dagon"
 msgstr "দাগন"
 
 #. TRANSLATORS: Proper name of star HD 104985
-#: skycultures/translations.fab:228 skycultures/western/star_names.fab:108
+#: skycultures/translations.fab:233 skycultures/western/star_names.fab:112
 msgid "Tonatiuh"
 msgstr "টোনাটিহ্"
 
 #. TRANSLATORS: Proper name of exoplanet HD 104985 b
-#: skycultures/translations.fab:230
+#: skycultures/translations.fab:235
 msgid "Meztli"
 msgstr "মেশচি"
 
 #. TRANSLATORS: Proper name of star HD 149026
-#: skycultures/translations.fab:232 skycultures/western/star_names.fab:403
+#: skycultures/translations.fab:237 skycultures/western/star_names.fab:430
 msgid "Ogma"
 msgstr "ওগমা"
 
 #. TRANSLATORS: Proper name of exoplanet HD 149026 b
-#: skycultures/translations.fab:234
+#: skycultures/translations.fab:239
 msgid "Smertrios"
 msgstr "স্মার্টায়োস"
 
 #. TRANSLATORS: Proper name of star HD 81688
-#: skycultures/translations.fab:236 skycultures/western/star_names.fab:714
+#: skycultures/translations.fab:241 skycultures/western/star_names.fab:775
 msgid "Intercrus"
 msgstr "ইন্টেরক্রুশ"
 
 #. TRANSLATORS: Proper name of exoplanet HD 81688 b
-#: skycultures/translations.fab:238
+#: skycultures/translations.fab:243
 msgid "Arkas"
 msgstr "আর্কাস"
 
 #. TRANSLATORS: Proper name of star mu Arae
-#: skycultures/translations.fab:240 skycultures/western/star_names.fab:50
+#: skycultures/translations.fab:245 skycultures/western/star_names.fab:50
 msgid "Cervantes"
 msgstr "সেরভান্তেস"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae b
-#: skycultures/translations.fab:242
+#: skycultures/translations.fab:247
 msgid "Quijote"
 msgstr "কিউহোটে"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae c
-#: skycultures/translations.fab:244
+#: skycultures/translations.fab:249
 msgid "Dulcinea"
 msgstr "ডুলশিনেয়া"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae d
-#: skycultures/translations.fab:246
+#: skycultures/translations.fab:251
 msgid "Rocinante"
 msgstr "রশিনান্তে"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae e
-#: skycultures/translations.fab:248
+#: skycultures/translations.fab:253
 msgid "Sancho"
 msgstr "স্যান্চো"
 
 #. TRANSLATORS: Proper name of exoplanet Pollux b
-#: skycultures/translations.fab:250
+#: skycultures/translations.fab:255
 msgid "Thestias"
 msgstr "থেসটিয়াস"
 
 #. TRANSLATORS: Proper name of pulsar PSR 1257+12
-#: skycultures/translations.fab:252
+#: skycultures/translations.fab:257
 msgid "Lich"
 msgstr "লিচ"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 b
-#: skycultures/translations.fab:254
+#: skycultures/translations.fab:259
 msgid "Draugr"
 msgstr "দ্রাউগ"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 c
-#: skycultures/translations.fab:256
+#: skycultures/translations.fab:261
 msgid "Poltergeist"
 msgstr "পোল্টেগেইস্ট"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 d
-#: skycultures/translations.fab:258
+#: skycultures/translations.fab:263
 msgid "Phobetor"
 msgstr "ফোবেটর"
 
 #. TRANSLATORS: Proper name of star upsilon Andromedae
-#: skycultures/translations.fab:260 skycultures/western/star_names.fab:10
+#: skycultures/translations.fab:265 skycultures/western/star_names.fab:10
 msgid "Titawin"
 msgstr "টিটাউইন"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae b
-#: skycultures/translations.fab:262
+#: skycultures/translations.fab:267
 msgid "Saffar"
 msgstr "সাফার"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae c
-#: skycultures/translations.fab:264
+#: skycultures/translations.fab:269
 msgid "Samh"
 msgstr "সাহম"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae d
-#: skycultures/translations.fab:266
+#: skycultures/translations.fab:271
 msgid "Majriti"
 msgstr "মাজরিতি"
 
 #. TRANSLATORS: Proper name of star xi Aquilae
-#: skycultures/translations.fab:268 skycultures/western/star_names.fab:37
+#: skycultures/translations.fab:273 skycultures/western/star_names.fab:37
 msgid "Libertas"
 msgstr "লিবেরটাস"
 
 #. TRANSLATORS: Proper name of exoplanet xi Aquilae b
-#: skycultures/translations.fab:270
+#: skycultures/translations.fab:275
 msgid "Fortitudo"
 msgstr "ফর্তিতুদো"
+
+#: skycultures/translations.fab:280
+msgctxt "Genitive name of constellation"
+msgid "Andromedae"
+msgstr ""
+
+#: skycultures/translations.fab:281
+msgctxt "Genitive name of constellation"
+msgid "Antliae"
+msgstr ""
+
+#: skycultures/translations.fab:282
+msgctxt "Genitive name of constellation"
+msgid "Apodis"
+msgstr ""
+
+#: skycultures/translations.fab:283
+msgctxt "Genitive name of constellation"
+msgid "Aquarii"
+msgstr ""
+
+#: skycultures/translations.fab:284
+msgctxt "Genitive name of constellation"
+msgid "Aquilae"
+msgstr ""
+
+#: skycultures/translations.fab:285
+msgctxt "Genitive name of constellation"
+msgid "Arae"
+msgstr ""
+
+#: skycultures/translations.fab:286
+msgctxt "Genitive name of constellation"
+msgid "Arietis"
+msgstr ""
+
+#: skycultures/translations.fab:287
+msgctxt "Genitive name of constellation"
+msgid "Aurigae"
+msgstr ""
+
+#: skycultures/translations.fab:288
+msgctxt "Genitive name of constellation"
+msgid "Bootis"
+msgstr ""
+
+#: skycultures/translations.fab:289
+msgctxt "Genitive name of constellation"
+msgid "Caeli"
+msgstr ""
+
+#: skycultures/translations.fab:290
+msgctxt "Genitive name of constellation"
+msgid "Camelopardalis"
+msgstr ""
+
+#: skycultures/translations.fab:291
+msgctxt "Genitive name of constellation"
+msgid "Cancri"
+msgstr ""
+
+#: skycultures/translations.fab:292
+msgctxt "Genitive name of constellation"
+msgid "Canum Venaticorum"
+msgstr ""
+
+#: skycultures/translations.fab:293
+msgctxt "Genitive name of constellation"
+msgid "Canis Majoris"
+msgstr ""
+
+#: skycultures/translations.fab:294
+msgctxt "Genitive name of constellation"
+msgid "Canis Minoris"
+msgstr ""
+
+#: skycultures/translations.fab:295
+msgctxt "Genitive name of constellation"
+msgid "Capricorni"
+msgstr ""
+
+#: skycultures/translations.fab:296
+msgctxt "Genitive name of constellation"
+msgid "Carinae"
+msgstr ""
+
+#: skycultures/translations.fab:297
+msgctxt "Genitive name of constellation"
+msgid "Cassiopeiae"
+msgstr ""
+
+#: skycultures/translations.fab:298
+msgctxt "Genitive name of constellation"
+msgid "Centauri"
+msgstr ""
+
+#: skycultures/translations.fab:299
+msgctxt "Genitive name of constellation"
+msgid "Cephei"
+msgstr ""
+
+#: skycultures/translations.fab:300
+msgctxt "Genitive name of constellation"
+msgid "Ceti"
+msgstr ""
+
+#: skycultures/translations.fab:301
+msgctxt "Genitive name of constellation"
+msgid "Chamaeleontis"
+msgstr ""
+
+#: skycultures/translations.fab:302
+msgctxt "Genitive name of constellation"
+msgid "Circini"
+msgstr ""
+
+#: skycultures/translations.fab:303
+msgctxt "Genitive name of constellation"
+msgid "Columbae"
+msgstr ""
+
+#: skycultures/translations.fab:304
+msgctxt "Genitive name of constellation"
+msgid "Comae Berenices"
+msgstr ""
+
+#: skycultures/translations.fab:305
+msgctxt "Genitive name of constellation"
+msgid "Coronae Australis"
+msgstr ""
+
+#: skycultures/translations.fab:306
+msgctxt "Genitive name of constellation"
+msgid "Coronae Borealis"
+msgstr ""
+
+#: skycultures/translations.fab:307
+msgctxt "Genitive name of constellation"
+msgid "Corvi"
+msgstr ""
+
+#: skycultures/translations.fab:308
+msgctxt "Genitive name of constellation"
+msgid "Crateris"
+msgstr ""
+
+#: skycultures/translations.fab:309
+msgctxt "Genitive name of constellation"
+msgid "Crucis"
+msgstr ""
+
+#: skycultures/translations.fab:310
+msgctxt "Genitive name of constellation"
+msgid "Cygni"
+msgstr ""
+
+#: skycultures/translations.fab:311
+msgctxt "Genitive name of constellation"
+msgid "Delphini"
+msgstr ""
+
+#: skycultures/translations.fab:312
+msgctxt "Genitive name of constellation"
+msgid "Doradus"
+msgstr ""
+
+#: skycultures/translations.fab:313
+msgctxt "Genitive name of constellation"
+msgid "Draconis"
+msgstr ""
+
+#: skycultures/translations.fab:314
+msgctxt "Genitive name of constellation"
+msgid "Equulei"
+msgstr ""
+
+#: skycultures/translations.fab:315
+msgctxt "Genitive name of constellation"
+msgid "Eridani"
+msgstr ""
+
+#: skycultures/translations.fab:316
+msgctxt "Genitive name of constellation"
+msgid "Fornacis"
+msgstr ""
+
+#: skycultures/translations.fab:317
+msgctxt "Genitive name of constellation"
+msgid "Geminorum"
+msgstr ""
+
+#: skycultures/translations.fab:318
+msgctxt "Genitive name of constellation"
+msgid "Gruis"
+msgstr ""
+
+#: skycultures/translations.fab:319
+msgctxt "Genitive name of constellation"
+msgid "Herculis"
+msgstr ""
+
+#: skycultures/translations.fab:320
+msgctxt "Genitive name of constellation"
+msgid "Horologii"
+msgstr ""
+
+#: skycultures/translations.fab:321
+msgctxt "Genitive name of constellation"
+msgid "Hydrae"
+msgstr ""
+
+#: skycultures/translations.fab:322
+msgctxt "Genitive name of constellation"
+msgid "Hydri"
+msgstr ""
+
+#: skycultures/translations.fab:323
+msgctxt "Genitive name of constellation"
+msgid "Indi"
+msgstr ""
+
+#: skycultures/translations.fab:324
+msgctxt "Genitive name of constellation"
+msgid "Lacertae"
+msgstr ""
+
+#: skycultures/translations.fab:325
+msgctxt "Genitive name of constellation"
+msgid "Leonis"
+msgstr ""
+
+#: skycultures/translations.fab:326
+msgctxt "Genitive name of constellation"
+msgid "Leonis Minoris"
+msgstr ""
+
+#: skycultures/translations.fab:327
+msgctxt "Genitive name of constellation"
+msgid "Leporis"
+msgstr ""
+
+#: skycultures/translations.fab:328
+msgctxt "Genitive name of constellation"
+msgid "Librae"
+msgstr ""
+
+#: skycultures/translations.fab:329
+msgctxt "Genitive name of constellation"
+msgid "Lupi"
+msgstr ""
+
+#: skycultures/translations.fab:330
+msgctxt "Genitive name of constellation"
+msgid "Lyncis"
+msgstr ""
+
+#: skycultures/translations.fab:331
+msgctxt "Genitive name of constellation"
+msgid "Lyrae"
+msgstr ""
+
+#: skycultures/translations.fab:332
+msgctxt "Genitive name of constellation"
+msgid "Mensae"
+msgstr ""
+
+#: skycultures/translations.fab:333
+msgctxt "Genitive name of constellation"
+msgid "Microscopii"
+msgstr ""
+
+#: skycultures/translations.fab:334
+msgctxt "Genitive name of constellation"
+msgid "Monocerotis"
+msgstr ""
+
+#: skycultures/translations.fab:335
+msgctxt "Genitive name of constellation"
+msgid "Muscae"
+msgstr ""
+
+#: skycultures/translations.fab:336
+msgctxt "Genitive name of constellation"
+msgid "Normae"
+msgstr ""
+
+#: skycultures/translations.fab:337
+msgctxt "Genitive name of constellation"
+msgid "Octantis"
+msgstr ""
+
+#: skycultures/translations.fab:338
+msgctxt "Genitive name of constellation"
+msgid "Ophiuchi"
+msgstr ""
+
+#: skycultures/translations.fab:339
+msgctxt "Genitive name of constellation"
+msgid "Orionis"
+msgstr ""
+
+#: skycultures/translations.fab:340
+msgctxt "Genitive name of constellation"
+msgid "Pavonis"
+msgstr ""
+
+#: skycultures/translations.fab:341
+msgctxt "Genitive name of constellation"
+msgid "Pegasi"
+msgstr ""
+
+#: skycultures/translations.fab:342
+msgctxt "Genitive name of constellation"
+msgid "Persei"
+msgstr ""
+
+#: skycultures/translations.fab:343
+msgctxt "Genitive name of constellation"
+msgid "Phoenicis"
+msgstr ""
+
+#: skycultures/translations.fab:344
+msgctxt "Genitive name of constellation"
+msgid "Pictoris"
+msgstr ""
+
+#: skycultures/translations.fab:345
+msgctxt "Genitive name of constellation"
+msgid "Piscium"
+msgstr ""
+
+#: skycultures/translations.fab:346
+msgctxt "Genitive name of constellation"
+msgid "Piscis Austrini"
+msgstr ""
+
+#: skycultures/translations.fab:347
+msgctxt "Genitive name of constellation"
+msgid "Puppis"
+msgstr ""
+
+#: skycultures/translations.fab:348
+msgctxt "Genitive name of constellation"
+msgid "Pyxidis"
+msgstr ""
+
+#: skycultures/translations.fab:349
+msgctxt "Genitive name of constellation"
+msgid "Reticuli"
+msgstr ""
+
+#: skycultures/translations.fab:350
+msgctxt "Genitive name of constellation"
+msgid "Sagittae"
+msgstr ""
+
+#: skycultures/translations.fab:351
+msgctxt "Genitive name of constellation"
+msgid "Sagittarii"
+msgstr ""
+
+#: skycultures/translations.fab:352
+msgctxt "Genitive name of constellation"
+msgid "Scorpii"
+msgstr ""
+
+#: skycultures/translations.fab:353
+msgctxt "Genitive name of constellation"
+msgid "Sculptoris"
+msgstr ""
+
+#: skycultures/translations.fab:354
+msgctxt "Genitive name of constellation"
+msgid "Scuti"
+msgstr ""
+
+#: skycultures/translations.fab:355
+msgctxt "Genitive name of constellation"
+msgid "Serpentis"
+msgstr ""
+
+#: skycultures/translations.fab:356
+msgctxt "Genitive name of constellation"
+msgid "Sextantis"
+msgstr ""
+
+#: skycultures/translations.fab:357
+msgctxt "Genitive name of constellation"
+msgid "Tauri"
+msgstr ""
+
+#: skycultures/translations.fab:358
+msgctxt "Genitive name of constellation"
+msgid "Telescopii"
+msgstr ""
+
+#: skycultures/translations.fab:359
+msgctxt "Genitive name of constellation"
+msgid "Trianguli"
+msgstr ""
+
+#: skycultures/translations.fab:360
+msgctxt "Genitive name of constellation"
+msgid "Trianguli Australis"
+msgstr ""
+
+#: skycultures/translations.fab:361
+msgctxt "Genitive name of constellation"
+msgid "Tucanae"
+msgstr ""
+
+#: skycultures/translations.fab:362
+msgctxt "Genitive name of constellation"
+msgid "Ursae Majoris"
+msgstr ""
+
+#: skycultures/translations.fab:363
+msgctxt "Genitive name of constellation"
+msgid "Ursae Minoris"
+msgstr ""
+
+#: skycultures/translations.fab:364
+msgctxt "Genitive name of constellation"
+msgid "Velorum"
+msgstr ""
+
+#: skycultures/translations.fab:365
+msgctxt "Genitive name of constellation"
+msgid "Virginis"
+msgstr ""
+
+#: skycultures/translations.fab:366
+msgctxt "Genitive name of constellation"
+msgid "Volantis"
+msgstr ""
+
+#: skycultures/translations.fab:367
+msgctxt "Genitive name of constellation"
+msgid "Vulpeculae"
+msgstr ""
 
 #: nebulae/default/names.dat:9
 msgid "Bow-Tie Nebula"
@@ -872,7 +1318,7 @@ msgstr "জলি রজার তারকাগুচ্ছ"
 
 #: nebulae/default/names.dat:51
 msgid "Crystal Ball Nebula"
-msgstr ""
+msgstr "মায়া গোলক নীহারিকা"
 
 #: nebulae/default/names.dat:52
 msgid "Cleopatra's Eye Nebula"
@@ -908,7 +1354,7 @@ msgstr "বৃষ মন্ডল A"
 
 #: nebulae/default/names.dat:62
 msgid "Pinwheel Cluster"
-msgstr ""
+msgstr "চরকা তারকাগুচ্ছ"
 
 #: nebulae/default/names.dat:63
 msgid "Great Orion Nebula"
@@ -940,7 +1386,7 @@ msgstr "শিখা নীহারিকা"
 
 #: nebulae/default/names.dat:70
 msgid "Tank Tracks Nebula"
-msgstr ""
+msgstr "ট্যাঙ্কের চাকার দাগ নীহারিকা"
 
 #: nebulae/default/names.dat:71
 msgid "Tarantula Nebula"
@@ -952,7 +1398,7 @@ msgstr "ফাঁস নীহারিকা"
 
 #: nebulae/default/names.dat:73
 msgid "True Lovers' Knot"
-msgstr ""
+msgstr "প্রকৃত প্রেমের বাঁধন"
 
 #: nebulae/default/names.dat:74
 msgid "Ghost Head Nebula"
@@ -960,7 +1406,7 @@ msgstr "প্রেত শির নীহারিকা"
 
 #: nebulae/default/names.dat:75
 msgid "January Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "জানুয়ারীর ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
 
 #: nebulae/default/names.dat:76
 msgid "The 37 Cluster"
@@ -968,7 +1414,7 @@ msgstr "৩৭ তারকাগুচ্ছ"
 
 #: nebulae/default/names.dat:77
 msgid "The 'LE' Cluster"
-msgstr ""
+msgstr "লে এর তারকাগুচ্ছ"
 
 #: nebulae/default/names.dat:78
 msgid "Monkey Head Nebula"
@@ -1002,8 +1448,8 @@ msgstr "ক্রিসমাসের গাছ"
 msgid "Heart-Shaped Cluster"
 msgstr "হৃদয় নীহারিকা"
 
-#: nebulae/default/names.dat:86 nebulae/default/names.dat:209
-#: nebulae/default/names.dat:302
+#: nebulae/default/names.dat:86 nebulae/default/names.dat:214
+#: nebulae/default/names.dat:310
 msgid "Butterfly Nebula"
 msgstr "প্রজাপতি নীহারিকা"
 
@@ -1029,7 +1475,7 @@ msgstr "τ বৃহৎ কুকুরমন্ডলীয় তারকাগ�
 
 #: nebulae/default/names.dat:92
 msgid "Mexican Jumping Star"
-msgstr ""
+msgstr "লাফিয়ে বেড়ানো মেক্সিকান তারা"
 
 #: nebulae/default/names.dat:93
 msgid "Gemini Nebula"
@@ -1047,7 +1493,7 @@ msgstr "জোকারের মুখাকৃতি নীহারিকা"
 msgid "Intergalactic Wanderer/Tramp"
 msgstr "মহাকাশের পথিক/ভবঘুরে"
 
-#: nebulae/default/names.dat:97 nebulae/default/names.dat:215
+#: nebulae/default/names.dat:97 nebulae/default/names.dat:220
 msgid "Butterfly Cluster"
 msgstr "প্রজাপতি স্তবক"
 
@@ -1089,10 +1535,10 @@ msgstr "সর্পিল ছায়াপথ"
 
 #: nebulae/default/names.dat:107
 msgid "Pancake Galaxy"
-msgstr ""
+msgstr "চ্যাপ্টা পিঠে নক্ষত্রলোক"
 
 #: nebulae/default/names.dat:108 nebulae/default/names.dat:116
-#: nebulae/default/names.dat:195
+#: nebulae/default/names.dat:200
 msgid "Spindle Galaxy"
 msgstr "ঘূর্ণ্যমান দণ্ড ছায়াপথ"
 
@@ -1102,7 +1548,7 @@ msgstr "পেনসিল নীহারিকা"
 
 #: nebulae/default/names.dat:110
 msgid "Herschel's Ray Nebula"
-msgstr ""
+msgstr "হার্শেলের সূত্রাকার নীহারিকা"
 
 #: nebulae/default/names.dat:111
 msgid "Supernova Factory"
@@ -1114,7 +1560,7 @@ msgstr "বোড-এর ছায়াপথ"
 
 #: nebulae/default/names.dat:113
 msgid "Bode's Nebula"
-msgstr ""
+msgstr "বোডের নীহারিকা"
 
 #: nebulae/default/names.dat:114
 msgid "Cigar Galaxy"
@@ -1126,11 +1572,11 @@ msgstr "উরসা মেজর (সপ্তর্ষি) A"
 
 #: nebulae/default/names.dat:117
 msgid "Eight-Burst Planetary Nebula"
-msgstr ""
+msgstr "চারের মত নীহারিকা"
 
 #: nebulae/default/names.dat:118
 msgid "Southern Ring Nebula"
-msgstr ""
+msgstr "দক্ষিনের আংটি নীহারিকা"
 
 #: nebulae/default/names.dat:119
 msgid "Polarissima Borealis"
@@ -1138,1356 +1584,1392 @@ msgstr "উত্তর ধ্রুবীয় নক্ষত্রলোক"
 
 #: nebulae/default/names.dat:120
 msgid "Ghost of Jupiter Nebula"
-msgstr ""
+msgstr "বৃহস্পতির প্রেতাত্মা নীহারিকা"
 
 #: nebulae/default/names.dat:121
 msgid "Eye Nebula"
+msgstr "চক্ষু নীহারিকা"
+
+#: nebulae/default/names.dat:122 nebulae/default/names.dat:125
+msgid "Keyhole Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:122
+#: nebulae/default/names.dat:123
 msgid "η Car Nebula"
 msgstr "ইটা ক্যারিনা নীহারিকা"
 
-#: nebulae/default/names.dat:123
+#: nebulae/default/names.dat:124
+msgid "Homunculus Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:126
 msgid "Wishing Well Cluster"
 msgstr "কল্পতরু কুপ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:124
+#: nebulae/default/names.dat:127
 msgid "Surfboard Galaxy"
 msgstr "সার্ফবোর্ড নীহারিকা"
 
-#: nebulae/default/names.dat:125
+#: nebulae/default/names.dat:128
 msgid "Ambartsumian's Knot"
 msgstr "অ্যমব্রাটসুমিয়ান গিঁট"
 
-#: nebulae/default/names.dat:126
+#: nebulae/default/names.dat:129
+msgid "Statue of Liberty Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:130
 msgid "Owl Nebula"
 msgstr "পেঁচা নীহারিকা"
 
-#: nebulae/default/names.dat:127 nebulae/default/names.dat:128
-#: nebulae/default/names.dat:130
+#: nebulae/default/names.dat:131 nebulae/default/names.dat:132
+#: nebulae/default/names.dat:134
 msgid "Leo Triplet"
 msgstr "সিংহ মন্ডলের ত্রয়ী নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:129
+#: nebulae/default/names.dat:133
 msgid "Hamburger Galaxy"
 msgstr "হ্যামবার্গার নীহারিকা"
 
-#: nebulae/default/names.dat:131 nebulae/default/names.dat:132
-#: nebulae/default/names.dat:133 nebulae/default/names.dat:134
 #: nebulae/default/names.dat:135 nebulae/default/names.dat:136
-#: nebulae/default/names.dat:137
+#: nebulae/default/names.dat:137 nebulae/default/names.dat:138
+#: nebulae/default/names.dat:139 nebulae/default/names.dat:140
+#: nebulae/default/names.dat:141
 msgid "Copeland's Septet"
 msgstr "কোপল্যান্ডের সপ্তক"
 
-#: nebulae/default/names.dat:138
+#: nebulae/default/names.dat:142
 msgid "Pearl Cluster"
 msgstr "মুক্ত নীহারিকা"
 
-#: nebulae/default/names.dat:139
+#: nebulae/default/names.dat:143
 msgid "Blue planetary"
 msgstr "নীল গ্রহরূপী নীহারিকা"
 
-#: nebulae/default/names.dat:140
+#: nebulae/default/names.dat:144
 msgid "Miniature Spiral"
 msgstr "ক্ষুদ্রকায় পেঁচানো নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:141
+#: nebulae/default/names.dat:145
 msgid "Vacuum Cleaner Galaxy"
 msgstr "ভ্যাকিউম ক্লিনার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:142 nebulae/default/names.dat:143
+#: nebulae/default/names.dat:146 nebulae/default/names.dat:147
 msgid "Antennae"
 msgstr "পতঙ্গের শুঁড়"
 
-#: nebulae/default/names.dat:144 nebulae/default/names.dat:145
-#: nebulae/default/names.dat:146
+#: nebulae/default/names.dat:148 nebulae/default/names.dat:149
+#: nebulae/default/names.dat:150
 msgid "Box"
 msgstr "বাক্স"
 
-#: nebulae/default/names.dat:147
+#: nebulae/default/names.dat:151
 msgid "Medusa merger"
 msgstr "মেডুসা সমবায়"
 
-#: nebulae/default/names.dat:148
+#: nebulae/default/names.dat:152
 msgid "Virgo Cluster Pinwheel"
 msgstr "ভিরগো চরকা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:149
+#: nebulae/default/names.dat:153
 msgid "Coma Pinwheel Galaxy"
 msgstr "কোমা চরকা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:150
+#: nebulae/default/names.dat:154
 msgid "St. Catherine’s Wheel"
-msgstr ""
+msgstr "সন্ত ক্যাথরিনের চরকা"
 
-#: nebulae/default/names.dat:151
+#: nebulae/default/names.dat:155
 msgid "Blowdryer Galaxy"
 msgstr "ব্লোড্রায়ার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:152
+#: nebulae/default/names.dat:156
 msgid "Galaxy Cluster"
 msgstr "নক্ষত্রলোক গুচ্ছ"
 
-#: nebulae/default/names.dat:153
+#: nebulae/default/names.dat:157
 msgid "Markarian's Chain"
 msgstr "মার্কারিয়ানের শিকল"
 
-#: nebulae/default/names.dat:154
+#: nebulae/default/names.dat:158
 msgid "Faust V051"
 msgstr "ফাউস্ট V051"
 
-#: nebulae/default/names.dat:155 nebulae/default/names.dat:156
+#: nebulae/default/names.dat:159 nebulae/default/names.dat:160
 msgid "The Eyes"
 msgstr "চক্ষুদ্বয়"
 
-#: nebulae/default/names.dat:157
+#: nebulae/default/names.dat:161
 msgid "Virgo Galaxy"
 msgstr "ভিরগো নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:158
+#: nebulae/default/names.dat:162
 msgid "Virgo A"
 msgstr "ভার্গো (কন্যা) A"
 
-#: nebulae/default/names.dat:159
+#: nebulae/default/names.dat:163
 msgid "Smoking gun"
 msgstr "তদন্ত সূত্র"
 
-#: nebulae/default/names.dat:160
+#: nebulae/default/names.dat:164
 msgid "Cocoon Galaxy"
 msgstr "গুটি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:161
+#: nebulae/default/names.dat:165
 msgid "Shapley-Ames 2"
-msgstr ""
+msgstr "শ্যাপলে-এমিস ২"
 
-#: nebulae/default/names.dat:162 nebulae/default/names.dat:164
+#: nebulae/default/names.dat:166 nebulae/default/names.dat:168
 msgid "Lost Galaxy"
 msgstr "নিখোঁজ নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:163
+#: nebulae/default/names.dat:167
 msgid "McLeish's Object"
 msgstr "ম্যাকলিশের জ্যোতিষ্ক"
 
-#: nebulae/default/names.dat:165
+#: nebulae/default/names.dat:169
 msgid "Needle Galaxy"
 msgstr "সূঁচ নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:166 nebulae/default/names.dat:167
+#: nebulae/default/names.dat:170 nebulae/default/names.dat:171
 msgid "Siamese Twins"
 msgstr "একত্রে জোড়া লাগা যমজ শিশু"
 
-#: nebulae/default/names.dat:168
+#: nebulae/default/names.dat:172
 msgid "Sombrero Galaxy"
 msgstr "সোম্বেরো ছায়াপথ"
 
-#: nebulae/default/names.dat:169
+#: nebulae/default/names.dat:173
 msgid "Whale Galaxy"
 msgstr "তিমি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:170
+#: nebulae/default/names.dat:174
 msgid "Herring Galaxy"
-msgstr ""
+msgstr "হেরিং মাছ নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:171
+#: nebulae/default/names.dat:175
 msgid "Crowbar Galaxy"
 msgstr "শাবল নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:172
+#: nebulae/default/names.dat:176
 msgid "Superwind-Galaxy"
 msgstr "ঝোড়ো নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:173
+#: nebulae/default/names.dat:177
 msgid "Mice Galaxies"
 msgstr "ইঁদুর নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:174
+#: nebulae/default/names.dat:178
 msgid "Jewel Box"
 msgstr "রত্ন বাক্স"
 
-#: nebulae/default/names.dat:175
+#: nebulae/default/names.dat:179
 msgid "Herschel's Jewel Box"
 msgstr "হার্শেলের গয়নার বাক্স"
 
-#: nebulae/default/names.dat:176
+#: nebulae/default/names.dat:180
 msgid "κ Cru Cluster"
 msgstr "κ ক্রুশ মন্ডলের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:177
+#: nebulae/default/names.dat:181
 msgid "Kidney Bean Galaxy"
 msgstr "বৃক্ক শিম ছায়াপথ"
 
-#: nebulae/default/names.dat:178
+#: nebulae/default/names.dat:182
 msgid "Black Eye Galaxy"
 msgstr "কালশিটে চোখ নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:179
+#: nebulae/default/names.dat:183
 msgid "Evil Eye Galaxy"
 msgstr "শয়তানের চোখ নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:180
+#: nebulae/default/names.dat:184
 msgid "Sleeping Beauty Galaxy"
-msgstr ""
+msgstr "ঘুমন্ত পরী নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:181
+#: nebulae/default/names.dat:185
 msgid "Coma B"
 msgstr "কেশমন্ডল 'বি'"
 
-#: nebulae/default/names.dat:182
+#: nebulae/default/names.dat:186
 msgid "Sunflower Galaxy"
 msgstr "সূর্যমুখী ছায়াপথ"
 
-#: nebulae/default/names.dat:183
+#: nebulae/default/names.dat:187
 msgid "Centaurus A"
 msgstr "অশ্বমানব 'এ'"
 
-#: nebulae/default/names.dat:184
+#: nebulae/default/names.dat:188
 msgid "ω Cen Cluster"
 msgstr "ω সেন্টুরাস তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:185
+#: nebulae/default/names.dat:189
 msgid "Spiral planetary nebula"
 msgstr "প্যাঁচালো গ্রহরূপী নীহারিকা"
 
-#: nebulae/default/names.dat:186
+#: nebulae/default/names.dat:190
 msgid "Whirlpool Galaxy"
 msgstr "ঘূর্ণিস্রোত ছায়াপথ"
 
-#: nebulae/default/names.dat:187
+#: nebulae/default/names.dat:191
 msgid "Question Mark Galaxy"
 msgstr "প্রশ্নচিহ্নাকার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:188
+#: nebulae/default/names.dat:192
 msgid "Lord Rosse's Galaxy"
-msgstr ""
+msgstr "লর্ড রসীর নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:189 nebulae/default/names.dat:190
+#: nebulae/default/names.dat:193 nebulae/default/names.dat:194
 msgid "Keenan's System"
 msgstr "কীনানের জগৎ"
 
-#: nebulae/default/names.dat:191
+#: nebulae/default/names.dat:195
 msgid "Southern Pinwheel Galaxy"
 msgstr "দক্ষিন চরকা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:192
+#: nebulae/default/names.dat:196
 msgid "Seashell Galaxy"
 msgstr "ঝিনুক নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:193
-msgid "Pinwheel Galaxy"
-msgstr "পিনচক্র ছায়াপথ"
-
-#: nebulae/default/names.dat:194
-msgid "Dragon Nebula"
-msgstr "ড্রাগন নীহারিকা"
-
-#: nebulae/default/names.dat:196
-msgid "Fath 703"
-msgstr "ফাথ ৭০৩"
-
 #: nebulae/default/names.dat:197
-msgid "Splinter Galaxy"
+msgid "Heron Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:198
+msgid "Pinwheel Galaxy"
+msgstr "পিনচক্র ছায়াপথ"
+
+#: nebulae/default/names.dat:199
+msgid "Dragon Nebula"
+msgstr "ড্রাগন নীহারিকা"
+
+#: nebulae/default/names.dat:201
+msgid "Fath 703"
+msgstr "ফাথ ৭০৩"
+
+#: nebulae/default/names.dat:202
+msgid "Splinter Galaxy"
+msgstr "ধারালো টুকরো নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:203
 msgid "Seyfert's Sextet"
 msgstr "সেইফার্টের ষষ্ঠক"
 
-#: nebulae/default/names.dat:199
+#: nebulae/default/names.dat:204
 msgid "Serpens Sextet"
 msgstr "সর্প মণ্ডলীয় ষষ্টক"
 
-#: nebulae/default/names.dat:200
+#: nebulae/default/names.dat:205
 msgid "S Normae Cluster"
 msgstr "S নর্মে তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:201
+#: nebulae/default/names.dat:206
 msgid "Rim Nebula"
 msgstr "বেড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:202
+#: nebulae/default/names.dat:207
 msgid "μ Normae Cluster"
 msgstr "মিউ নরমে তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:203
+#: nebulae/default/names.dat:208
 msgid "Great Cluster in Hercules"
 msgstr "হারকিউলিস মন্ডলের বিখ্যাত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:204
+#: nebulae/default/names.dat:209
 msgid "Hercules Globular Cluster"
 msgstr "হারকিউলিস গোলকাকার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:205
+#: nebulae/default/names.dat:210
 msgid "Turtle planetary nebula"
 msgstr "কচ্ছপরূপী গ্রহরূপী নীহারিকা"
 
-#: nebulae/default/names.dat:206
+#: nebulae/default/names.dat:211
 msgid "Northern Jewel Box Cluster"
-msgstr ""
+msgstr "উত্তরের গয়নার বাক্স তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:207
+#: nebulae/default/names.dat:212
 msgid "Table of Scorpius Cluster"
-msgstr ""
+msgstr "বৃশ্চিক মন্ডলের গোল টেবিল তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:208
+#: nebulae/default/names.dat:213
 msgid "Bug Nebula"
 msgstr "পতঙ্গ নীহারিকা"
 
-#: nebulae/default/names.dat:210
+#: nebulae/default/names.dat:215
 msgid "Box Nebula"
 msgstr "বাক্স নীহারিকা"
 
-#: nebulae/default/names.dat:211
+#: nebulae/default/names.dat:216
 msgid "Cat's Paw Nebula"
 msgstr "বিড়ালের থাবা নীহারিকা"
 
-#: nebulae/default/names.dat:212
+#: nebulae/default/names.dat:217
 msgid "Cheerio Nebula"
 msgstr "চীরিও নীহারিকা"
 
-#: nebulae/default/names.dat:213
+#: nebulae/default/names.dat:218
 msgid "War and Peace Nebula"
 msgstr "যুদ্ধ ও শান্তি নীহারিকা"
 
-#: nebulae/default/names.dat:214
+#: nebulae/default/names.dat:219
 msgid "Little Ghost Nebula"
 msgstr "ছোটো ভুত নীহারিকা"
 
-#: nebulae/default/names.dat:216
+#: nebulae/default/names.dat:221
 msgid "Splendors of the Heavens"
-msgstr ""
+msgstr "স্বর্গীয় ঐশ্বর্য"
 
-#: nebulae/default/names.dat:217 nebulae/default/names.dat:245
+#: nebulae/default/names.dat:222 nebulae/default/names.dat:250
 msgid "Little Gem Nebula"
 msgstr "ক্ষুদ্র রত্ন নীহারিকা"
 
-#: nebulae/default/names.dat:218
+#: nebulae/default/names.dat:223
 msgid "Tom Thumb Cluster"
-msgstr ""
+msgstr "টম থামের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:219
+#: nebulae/default/names.dat:224
 msgid "Ptolemy's Cluster"
 msgstr "টলেমী'র স্তবক"
 
-#: nebulae/default/names.dat:220
+#: nebulae/default/names.dat:225
 msgid "Trifid Nebula"
 msgstr "তিন-পাপড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:221
+#: nebulae/default/names.dat:226
 msgid "Herschel 36"
-msgstr ""
+msgstr "হার্শেল ৩৬"
 
-#: nebulae/default/names.dat:222
+#: nebulae/default/names.dat:227
 msgid "Hourglass Cluster"
-msgstr ""
+msgstr "বালিঘড়ি তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:223
+#: nebulae/default/names.dat:228
 msgid "Red spider Nebula"
 msgstr "লাল মাকড়শা নীহারিকা"
 
-#: nebulae/default/names.dat:224
+#: nebulae/default/names.dat:229
 msgid "Cat's Eye Nebula"
 msgstr "বিড়ালের চোখ নীহারিকা"
 
-#: nebulae/default/names.dat:225
+#: nebulae/default/names.dat:230
 msgid "Blue Racquetball Nebula"
 msgstr "নীল র‍্যাকেট বল নীহারিকা"
 
-#: nebulae/default/names.dat:226
+#: nebulae/default/names.dat:231
 msgid "Eagle Nebula"
 msgstr "ঈগল নীহারিকা"
 
-#: nebulae/default/names.dat:227
+#: nebulae/default/names.dat:232
 msgid "Star Queen"
 msgstr "নক্ষত্র রানী"
 
-#: nebulae/default/names.dat:228
+#: nebulae/default/names.dat:233
 msgid "Omega Nebula"
 msgstr "ওমেগা নীহারিকা"
 
-#: nebulae/default/names.dat:229
+#: nebulae/default/names.dat:234
 msgid "Swan Nebula"
 msgstr "মরাল নীহারিকা"
 
-#: nebulae/default/names.dat:230
+#: nebulae/default/names.dat:235
 msgid "Horseshoe Nebula"
 msgstr "নাল নীহারিকা"
 
-#: nebulae/default/names.dat:231
+#: nebulae/default/names.dat:236
 msgid "Lobster Nebula"
 msgstr "গলদা নীহারিকা"
 
-#: nebulae/default/names.dat:232
+#: nebulae/default/names.dat:237
 msgid "Checkmark Nebula"
 msgstr "টিকচিহ্ন কনীহারিকা"
 
-#: nebulae/default/names.dat:233
+#: nebulae/default/names.dat:238
 msgid "Wild Duck Cluster"
 msgstr "বুনো হাঁস স্তবক"
 
-#: nebulae/default/names.dat:234
+#: nebulae/default/names.dat:239
 msgid "July Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "জুলাইয়ের ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:235
+#: nebulae/default/names.dat:240
 msgid "Scutum Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "ঢাল মন্ডলীয় ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:236
+#: nebulae/default/names.dat:241
 msgid "Ring Nebula"
 msgstr "চক্র নীহারিকা"
 
-#: nebulae/default/names.dat:237
+#: nebulae/default/names.dat:242
 msgid "R CrA Nebula"
 msgstr "'আর' দক্ষিন মুকুট নীহারিকা"
 
-#: nebulae/default/names.dat:238
+#: nebulae/default/names.dat:243
 msgid "Phantom Streak Nebula"
 msgstr "ভৌতিক নীহারিকা"
 
-#: nebulae/default/names.dat:239
+#: nebulae/default/names.dat:244
 msgid "Bird's Head"
 msgstr "পাখির মাথা"
 
-#: nebulae/default/names.dat:240
+#: nebulae/default/names.dat:245
 msgid "Dandelion Puffball Nebula"
-msgstr ""
+msgstr "ড্যান্ডোলাইন নীহারিকা"
 
-#: nebulae/default/names.dat:241
+#: nebulae/default/names.dat:246
 msgid "Pavo Globular Cluster"
 msgstr "ময়ূর মন্ডলের গোলকাকার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:242
+#: nebulae/default/names.dat:247
 msgid "Ruprecht 147"
 msgstr "রুপ্রেক্ট ১৪৭"
 
-#: nebulae/default/names.dat:243
+#: nebulae/default/names.dat:248
 msgid "Snowball Nebula"
-msgstr ""
+msgstr "বরফের গোলা নীহারিকা"
 
-#: nebulae/default/names.dat:244
+#: nebulae/default/names.dat:249
 msgid "Hole in a Cluster"
 msgstr "ছিদ্রাল তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:246
+#: nebulae/default/names.dat:251
 msgid "The Foxhead Cluster"
 msgstr "শিয়ালের মাথা নীহারিকা"
 
-#: nebulae/default/names.dat:247
+#: nebulae/default/names.dat:252
 msgid "Barnard's Galaxy"
 msgstr "বার্নার্ডের ছায়াপথ"
 
-#: nebulae/default/names.dat:248
+#: nebulae/default/names.dat:253
 msgid "Blinking planetary"
 msgstr "মিটমিটে গ্রহরূপী নীহারিকা"
 
-#: nebulae/default/names.dat:249
+#: nebulae/default/names.dat:254
 msgid "Dumbbell Nebula"
 msgstr "ডাম্বেল নীহারিকা"
 
-#: nebulae/default/names.dat:250
+#: nebulae/default/names.dat:255
 msgid "Diabolo Nebula"
 msgstr "ডায়াবোলো নীহারিকা"
 
-#: nebulae/default/names.dat:251
+#: nebulae/default/names.dat:256
 msgid "Apple Core Nebula"
-msgstr ""
+msgstr "খাওয়া আপেল নীহারিকা"
 
-#: nebulae/default/names.dat:252
+#: nebulae/default/names.dat:257
 msgid "Condor Galaxy"
 msgstr "হাড়গিলা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:253
+#: nebulae/default/names.dat:258
 msgid "20 Vulpeculae Cluster"
 msgstr "২০ শিয়াল মন্ডলীয় তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:254
+#: nebulae/default/names.dat:259
 msgid "Crescent Nebula"
 msgstr "অর্ধচন্দ্রাকার নীহারিকা"
 
-#: nebulae/default/names.dat:255
+#: nebulae/default/names.dat:260
 msgid "Little Ring Nebula"
-msgstr ""
+msgstr "ছোটো আংটি নীহারিকা"
 
-#: nebulae/default/names.dat:256
+#: nebulae/default/names.dat:261
 msgid "Blue Flash Nebula"
 msgstr "নীল ঝলক নীহারিকা"
 
-#: nebulae/default/names.dat:257
+#: nebulae/default/names.dat:262
 msgid "Giant Behemoth Galaxy"
-msgstr ""
+msgstr "জলহস্তী নীহারিকা"
 
-#: nebulae/default/names.dat:258
+#: nebulae/default/names.dat:263
 msgid "Cooling Tower"
 msgstr "বাষ্প ঘনীভবন চিমনি"
 
-#: nebulae/default/names.dat:259
+#: nebulae/default/names.dat:264
 msgid "Fireworks Galaxy"
 msgstr "আতশবাজি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:260
+#: nebulae/default/names.dat:265
 msgid "Filamentary Nebula"
 msgstr "সূত্রাকার নীহারিকা"
 
-#: nebulae/default/names.dat:261
+#: nebulae/default/names.dat:266
 msgid "West Veil Nebula"
 msgstr "পশ্চিম পাল নীহারিকা"
 
-#: nebulae/default/names.dat:262
+#: nebulae/default/names.dat:267
+msgid "Witches Broom Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:268
 msgid "East Veil Nebula"
 msgstr "পূর্ব পাল নীহারিকা"
 
-#: nebulae/default/names.dat:263
+#: nebulae/default/names.dat:269
 msgid "Network Nebula"
 msgstr "নেটওয়ার্ক নীহারিকা"
 
-#: nebulae/default/names.dat:264
+#: nebulae/default/names.dat:270
 msgid "North America Nebula"
 msgstr "উত্তর আমেরিকা নীহারিকা"
 
-#: nebulae/default/names.dat:265
+#: nebulae/default/names.dat:271
 msgid "Fetus Nebula"
 msgstr "ভ্রূণ নীহারিকা"
 
-#: nebulae/default/names.dat:266
+#: nebulae/default/names.dat:272
 msgid "Saturn Nebula"
 msgstr "শনিগ্রহ নীহারিকা"
 
-#: nebulae/default/names.dat:267
+#: nebulae/default/names.dat:273
 msgid "Iris Nebula"
 msgstr "আইরিশ নীহারিকা"
 
-#: nebulae/default/names.dat:268
+#: nebulae/default/names.dat:274
 msgid "Cheeseburger Nebula"
-msgstr ""
+msgstr "চীজবার্গার নীহারিকা"
 
-#: nebulae/default/names.dat:269
+#: nebulae/default/names.dat:275
 msgid "Small Cluster Nebula"
-msgstr ""
+msgstr "ছোটো গুচ্ছ নীহারিকা"
 
-#: nebulae/default/names.dat:270
+#: nebulae/default/names.dat:276
 msgid "Atoms for Peace Galaxy"
 msgstr "শান্তির জন্য পরমাণু নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:271
+#: nebulae/default/names.dat:277
 msgid "Helix Nebula"
 msgstr "সর্পিল নীহারিকা"
 
-#: nebulae/default/names.dat:272 nebulae/default/names.dat:273
-#: nebulae/default/names.dat:274 nebulae/default/names.dat:275
+#: nebulae/default/names.dat:278 nebulae/default/names.dat:279
+#: nebulae/default/names.dat:280 nebulae/default/names.dat:281
 msgid "Stephan's Quintet"
 msgstr "স্টিফেনের পঞ্চক"
 
-#: nebulae/default/names.dat:276
+#: nebulae/default/names.dat:282
 msgid "Deer Lick Group"
 msgstr "ডিয়ার লিক সমূহ"
 
-#: nebulae/default/names.dat:277
+#: nebulae/default/names.dat:283
 msgid "The Wizard Nebula"
 msgstr "জাদুকরের নীহারিকা"
 
-#: nebulae/default/names.dat:278
+#: nebulae/default/names.dat:284
 msgid "Grand Design Galaxy"
 msgstr "নিখুঁত গঠন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:279 nebulae/default/names.dat:280
-#: nebulae/default/names.dat:281 nebulae/default/names.dat:282
+#: nebulae/default/names.dat:285 nebulae/default/names.dat:286
+#: nebulae/default/names.dat:287 nebulae/default/names.dat:288
 msgid "Grus Quartet"
 msgstr "সারস মন্ডলের চতুষ্টয়"
 
-#: nebulae/default/names.dat:283
+#: nebulae/default/names.dat:289
 msgid "Cassiopeia Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "ক্যাসিওপিয়া ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:284
+#: nebulae/default/names.dat:290
 msgid "October Salt-and-Pepper Cluster"
-msgstr ""
+msgstr "অক্টোবরের ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:285
+#: nebulae/default/names.dat:291
 msgid "Blue Snowball"
 msgstr "নীল বরফগোলক"
 
-#: nebulae/default/names.dat:286
+#: nebulae/default/names.dat:292
 msgid "Bubble Nebula"
 msgstr "বুদবুদ নীহারিকা"
 
-#: nebulae/default/names.dat:287
+#: nebulae/default/names.dat:293
 msgid "Fried-egg Galaxy"
 msgstr "ডিম ভাজা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:288
+#: nebulae/default/names.dat:294
 msgid "Caroline's Rose Cluster"
 msgstr "ক্যারোলিনের গোলাপ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:289 nebulae/default/names.dat:290
+#: nebulae/default/names.dat:295
+msgid "Starburst Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:296 nebulae/default/names.dat:297
 msgid "γ Cas Nebula"
 msgstr "গামা ক্যাসিওপিয়া নীহারিকা"
 
-#: nebulae/default/names.dat:291
+#: nebulae/default/names.dat:298
 msgid "Maffei Group"
 msgstr "ম্যাফেই সমষ্টি"
 
-#: nebulae/default/names.dat:292
+#: nebulae/default/names.dat:299
 msgid "Flaming Star Nebula"
 msgstr "জ্বলন্ত নক্ষত্র নীহারিকা"
 
-#: nebulae/default/names.dat:293
+#: nebulae/default/names.dat:300
+msgid "The Tadpoles"
+msgstr ""
+
+#: nebulae/default/names.dat:301
 msgid "Spider Nebula"
 msgstr "মাকড়শা নীহারিকা"
 
-#: nebulae/default/names.dat:294
+#: nebulae/default/names.dat:302
 msgid "Spirograph Nebula"
 msgstr "স্পিরোগ্রাফ নীহারিকা"
 
-#: nebulae/default/names.dat:295
+#: nebulae/default/names.dat:303
 msgid "Jellyfish Nebula"
 msgstr "জেলিফিস নীহারিকা"
 
-#: nebulae/default/names.dat:296
+#: nebulae/default/names.dat:304
 msgid "Papillon"
 msgstr "প্রজাপতির মত কান যুক্ত কুকুর"
 
-#: nebulae/default/names.dat:297
+#: nebulae/default/names.dat:305
 msgid "Elephant's Trunk Nebula"
 msgstr "হাতির শুঁড় নীহারিকা"
 
-#: nebulae/default/names.dat:298
+#: nebulae/default/names.dat:306
 msgid "Fish Head Nebula"
 msgstr "মাছের মুড়ো নীহারিকা"
 
-#: nebulae/default/names.dat:299
+#: nebulae/default/names.dat:307
 msgid "Heart Nebula"
 msgstr "হৃদয় নীহারিকা"
 
-#: nebulae/default/names.dat:300
+#: nebulae/default/names.dat:308
 msgid "Soul Nebula"
 msgstr "আত্মা নীহারিকা"
 
-#: nebulae/default/names.dat:301
+#: nebulae/default/names.dat:309
 msgid "Witch Head Nebula"
 msgstr "ডাইনির মাথা নীহারিকা"
 
-#: nebulae/default/names.dat:303
+#: nebulae/default/names.dat:311
 msgid "Toby Jug Nebula"
 msgstr "টোবি জগ নীহারিকা"
 
-#: nebulae/default/names.dat:304
+#: nebulae/default/names.dat:312
 msgid "ο Vel Cluster"
 msgstr "ο পাল মন্ডলের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:305
+#: nebulae/default/names.dat:313
 msgid "Coddington's Nebula"
 msgstr "কডিংটনের নীহারিকা"
 
-#: nebulae/default/names.dat:306
+#: nebulae/default/names.dat:314
 msgid "Southern Pleiades"
 msgstr "দক্ষিণ কৃত্তিকা"
 
-#: nebulae/default/names.dat:307
+#: nebulae/default/names.dat:315
 msgid "θ Carinae Cluster"
 msgstr "থিটা ক্যারিনা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:308
+#: nebulae/default/names.dat:316
 msgid "Running Chicken Nebula"
 msgstr "চলন্ত মুরগীর ছানা নীহারিকা"
 
-#: nebulae/default/names.dat:309
+#: nebulae/default/names.dat:317
 msgid "λ Cen Nebula"
 msgstr "ল্যামডা সেন্টুরাই নীহারিকা"
 
-#: nebulae/default/names.dat:310
+#: nebulae/default/names.dat:318
 msgid "Thackeray's Globules"
-msgstr ""
+msgstr "থ্যাকারের গুটি"
 
-#: nebulae/default/names.dat:311
+#: nebulae/default/names.dat:319
 msgid "Lemon slice Nebula"
 msgstr "পাতিলেবুর টুকরো নীহারিকা"
 
-#: nebulae/default/names.dat:312
+#: nebulae/default/names.dat:320
 msgid "Retina Nebula"
 msgstr "রেটিনা নীহারিকা"
 
-#: nebulae/default/names.dat:313
+#: nebulae/default/names.dat:321
 msgid "White Eyed Pea Nebula"
-msgstr ""
+msgstr "বিউলির ডাল নীহারিকা"
 
-#: nebulae/default/names.dat:314
+#: nebulae/default/names.dat:322
 msgid "ρ Oph Nebula"
 msgstr "রো অফিউকি নীহারিকা"
 
-#: nebulae/default/names.dat:315
+#: nebulae/default/names.dat:323
 msgid "Prawn Nebula"
 msgstr "চিংড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:316
+#: nebulae/default/names.dat:324
 msgid "False Comet Nebula"
-msgstr ""
+msgstr "নকল ধূমকেতু নীহারিকা"
 
-#: nebulae/default/names.dat:317
+#: nebulae/default/names.dat:325
 msgid "Summer Beehive Cluster"
 msgstr "গ্রীষ্মের মৌচাক তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:318
+#: nebulae/default/names.dat:326
 msgid "Graff's Cluster"
 msgstr "গ্রাফের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:319
+#: nebulae/default/names.dat:327
 msgid "Shapley-Ames 5"
-msgstr ""
+msgstr "শ্যাপলে-এমিস ৫"
 
-#: nebulae/default/names.dat:320
+#: nebulae/default/names.dat:328
 msgid "Pelican Nebula"
 msgstr "কপোত নীহারিকা"
 
-#: nebulae/default/names.dat:321
+#: nebulae/default/names.dat:329
 msgid "Southern Integral Sign"
 msgstr "দক্ষিনের সমাকলন আকার"
 
-#: nebulae/default/names.dat:322
+#: nebulae/default/names.dat:330
 msgid "Cocoon Nebula"
 msgstr "রেশম-গুটি নীহারিকা"
 
-#: nebulae/default/names.dat:323
+#: nebulae/default/names.dat:331
 msgid "Lagoon Nebula"
 msgstr "উপহ্রদ (লেগুন) নীহারিকা"
 
-#: nebulae/default/names.dat:324
+#: nebulae/default/names.dat:332
 msgid "Small Sagittarius Star Cloud"
 msgstr "ধনুম্ডলের ছোটো নক্ষত্র মেঘ"
 
-#: nebulae/default/names.dat:325
+#: nebulae/default/names.dat:333
 msgid "Delle Caustiche"
 msgstr "ডেলে কউস্টিচ"
 
-#: nebulae/default/names.dat:326
+#: nebulae/default/names.dat:334
 msgid "Winnecke 4"
 msgstr "উইনেকা ৪"
 
-#: nebulae/default/names.dat:327 skycultures/western_rey/star_names.fab:26
+#: nebulae/default/names.dat:335 skycultures/western_rey/star_names.fab:26
 msgid "Pleiades"
 msgstr "কৃত্তিকা"
 
-#: nebulae/default/names.dat:328
+#: nebulae/default/names.dat:336
 msgid "Seven Sisters"
 msgstr "সাত বোন"
 
-#: nebulae/default/names.dat:329
+#: nebulae/default/names.dat:337
 msgid "Subaru"
-msgstr ""
+msgstr "সুবারু"
 
-#: nebulae/default/names.dat:330
+#: nebulae/default/names.dat:338
 msgid "α Per Cluster"
 msgstr "আলফা পারসিউস তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:331
+#: nebulae/default/names.dat:339
 msgid "Coma Berenices Cluster"
 msgstr "বেরিনিসের কেশমন্ডল তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:332
+#: nebulae/default/names.dat:340
 msgid "Taurus Poniatovii Cluster"
 msgstr "টরাস পনিয়াটোভি তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:333
+#: nebulae/default/names.dat:341
 msgid "Taurus Dark Cloud Nebula"
-msgstr ""
+msgstr "বৃষ মন্ডলের কৃষ্ণ নীহারিকা"
 
-#: nebulae/default/names.dat:334
+#: nebulae/default/names.dat:342
 msgid "Horsehead Nebula"
 msgstr "অশ্বমুণ্ড নীহারিকা"
 
-#: nebulae/default/names.dat:335 nebulae/default/names.dat:336
-#: nebulae/default/names.dat:337 nebulae/default/names.dat:338
+#: nebulae/default/names.dat:343 nebulae/default/names.dat:344
+#: nebulae/default/names.dat:345 nebulae/default/names.dat:346
 msgid "Pipe (stem)"
 msgstr "ধূমপানের পাইপ (দন্ড)"
 
-#: nebulae/default/names.dat:339 nebulae/default/names.dat:343
+#: nebulae/default/names.dat:347 nebulae/default/names.dat:351
 msgid "Ink Spot Nebula"
 msgstr "কালির ছোপ নীহারিকা"
 
-#: nebulae/default/names.dat:340
+#: nebulae/default/names.dat:348
 msgid "Snake Nebula"
-msgstr ""
+msgstr "সর্প নীহারিকা"
 
-#: nebulae/default/names.dat:341
+#: nebulae/default/names.dat:349
 msgid "The S Nebula"
-msgstr ""
+msgstr "ইংরাজী এস নীহারিকা"
 
-#: nebulae/default/names.dat:342
+#: nebulae/default/names.dat:350
 msgid "Pipe (bowl)"
 msgstr "ধূমপানের পাইপ (পাত্র)"
 
-#: nebulae/default/names.dat:344
+#: nebulae/default/names.dat:352
 msgid "Parrot's Head Nebula"
-msgstr ""
+msgstr "তোতা পাখির মাথা নীহারিকা"
 
-#: nebulae/default/names.dat:345 nebulae/default/names.dat:346
+#: nebulae/default/names.dat:353 nebulae/default/names.dat:354
 msgid "E Nebula"
 msgstr "E আকৃতি নীহারিকা"
 
-#: nebulae/default/names.dat:347
+#: nebulae/default/names.dat:355
 msgid "Fish on the platter nebula"
-msgstr ""
+msgstr "থালায় রাখা মাছ নীহারিকা"
 
-#: nebulae/default/names.dat:348
+#: nebulae/default/names.dat:356
 msgid "Hyades"
 msgstr "রোহিনী তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:349
+#: nebulae/default/names.dat:357
 msgid "Coalsack Nebula"
 msgstr "কয়লার বস্তা নীহারিকা"
 
-#: nebulae/default/names.dat:350
+#: nebulae/default/names.dat:358
 msgid "Orion Cluster"
 msgstr "কালপুরুষ মন্ডলের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:351
+#: nebulae/default/names.dat:359
 msgid "Orion Belt Cluster"
 msgstr "কালপুরুষ বেল্টের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:352
+#: nebulae/default/names.dat:360
 msgid "Tuft in the Tail of the Dog Cluster"
-msgstr ""
+msgstr "কুকুর মন্ডলের লেজের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:353
+#: nebulae/default/names.dat:361
 msgid "Markarian 18 Cluster"
 msgstr "মার্কারিয়ান ১৮ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:354
+#: nebulae/default/names.dat:362
 msgid "η Car Cluster"
 msgstr "ইটা ক্যারিনা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:355
+#: nebulae/default/names.dat:363
 msgid "Ursa Major Cluster"
 msgstr "ভল্লুক মন্ডলের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:356
+#: nebulae/default/names.dat:364
 msgid "Antares Cluster"
 msgstr "জ্যেষ্ঠা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:357
+#: nebulae/default/names.dat:365
 msgid "Coathanger"
 msgstr "জামা ঝোলানোর হ্যাঙ্গার"
 
-#: nebulae/default/names.dat:358
+#: nebulae/default/names.dat:366
 msgid "Al Sufi's Cluster"
-msgstr ""
+msgstr "আল সুফির তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:359
+#: nebulae/default/names.dat:367
 msgid "Brocchi's Cluster"
 msgstr "ব্রোচির তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:360
+#: nebulae/default/names.dat:368
 msgid "Burnham's Nebula"
 msgstr "বার্নহামের নীহারিকা"
 
-#: nebulae/default/names.dat:361
+#: nebulae/default/names.dat:369
 msgid "T Tauri Nebula"
-msgstr ""
+msgstr "টি বৃষ মন্ডলীয় নীহারিকা"
 
-#: nebulae/default/names.dat:362
+#: nebulae/default/names.dat:370
 msgid "Orion Loop Nebula"
 msgstr "কালপুরুষের ফাঁস নীহারিকা"
 
-#: nebulae/default/names.dat:363
+#: nebulae/default/names.dat:371
 msgid "Green Ring Nebula"
 msgstr "সবুজ আংটি নীহারিকা"
 
-#: nebulae/default/names.dat:364
+#: nebulae/default/names.dat:372
 msgid "Bear Claw Nebula"
 msgstr "ভল্লুক নখর নীহারিকা"
 
-#: nebulae/default/names.dat:365
+#: nebulae/default/names.dat:373
 msgid "Little Cocoon Nebula"
 msgstr "ক্ষুদ্র গুটিপোকা নীহারিকা"
 
-#: nebulae/default/names.dat:366
+#: nebulae/default/names.dat:374
 msgid "Cygnus Star Cloud"
 msgstr "হংস মন্ডলের নক্ষত্রমেঘ"
 
-#: nebulae/default/names.dat:367
+#: nebulae/default/names.dat:375
+msgid "Tulip Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:376
 msgid "Cygnus Loop"
 msgstr "হংস মন্ডলের ফাঁস"
 
-#: nebulae/default/names.dat:368
+#: nebulae/default/names.dat:377
 msgid "Veil Nebula"
 msgstr "পর্দা নীহারিকা"
 
-#: nebulae/default/names.dat:369
+#: nebulae/default/names.dat:378
 msgid "Sadr Region"
 msgstr "সাদর তারা সংলগ্ন অঞ্চল"
 
-#: nebulae/default/names.dat:370
+#: nebulae/default/names.dat:379
 msgid "Abell 71"
 msgstr "অ্যাবেল ৭১"
 
-#: nebulae/default/names.dat:371
+#: nebulae/default/names.dat:380
 msgid "Flying Bat Nebula"
 msgstr "উড়ন্ত বাদুড় নীহারিকা"
 
-#: nebulae/default/names.dat:372 nebulae/default/names.dat:396
+#: nebulae/default/names.dat:381 nebulae/default/names.dat:405
 msgid "Cave Nebula"
 msgstr "গুহা নীহারিকা"
 
-#: nebulae/default/names.dat:373
+#: nebulae/default/names.dat:382
 msgid "Dreyer's Object"
 msgstr "ড্রেয়ারের জ্যোতিষ্ক"
 
-#: nebulae/default/names.dat:374
+#: nebulae/default/names.dat:383
 msgid "Pacman Nebula"
 msgstr "প্যাকম্যান নীহারিকা"
 
-#: nebulae/default/names.dat:375
+#: nebulae/default/names.dat:384
 msgid "Dolphin Nebula"
 msgstr "শুশুক নীহারিকা"
 
-#: nebulae/default/names.dat:376
+#: nebulae/default/names.dat:385
 msgid "Maffei 1"
 msgstr "ম্যাফেই ১"
 
-#: nebulae/default/names.dat:377
+#: nebulae/default/names.dat:386
 msgid "Maffei 2"
 msgstr "ম্যাফেই ২"
 
-#: nebulae/default/names.dat:378
+#: nebulae/default/names.dat:387
 msgid "Second Closest Planetary"
 msgstr "দ্বিতীয় নিকটতম গ্রহরূপী নীহারিকা"
 
-#: nebulae/default/names.dat:379
+#: nebulae/default/names.dat:388
 msgid "Northern Trifid"
 msgstr "উত্তরের ত্রিবিভক্ত নীহারিকা"
 
-#: nebulae/default/names.dat:380
+#: nebulae/default/names.dat:389
 msgid "Spaghetti Nebula"
 msgstr "স্প্যাগেটি নীহারিকা"
 
-#: nebulae/default/names.dat:381
+#: nebulae/default/names.dat:390
 msgid "Simeis 147"
-msgstr ""
+msgstr "সায়মিজ ১৪৭"
 
-#: nebulae/default/names.dat:382
+#: nebulae/default/names.dat:391
 msgid "Lower's Nebula"
 msgstr "লোয়ারের নীহারিকা"
 
-#: nebulae/default/names.dat:383
+#: nebulae/default/names.dat:392
 msgid "Angelfish Nebula"
 msgstr "অ্যাঞ্জেলফিস মাছ নীহারিকা"
 
-#: nebulae/default/names.dat:384
+#: nebulae/default/names.dat:393
 msgid "Orion's Head Nebula"
 msgstr "কালপুরুষ মন্ডলীয় মাথা নীহারিকা"
 
-#: nebulae/default/names.dat:385
+#: nebulae/default/names.dat:394
 msgid "North Orion Bubble"
-msgstr ""
+msgstr "কালপুরুষের উত্তর দিকের বুদবুদ"
 
-#: nebulae/default/names.dat:386
+#: nebulae/default/names.dat:395
 msgid "Medusa Nebula"
 msgstr "মেডুসা (সর্পচুলা দানবী) নীহারিকা"
 
-#: nebulae/default/names.dat:387
+#: nebulae/default/names.dat:396
 msgid "Rosette Nebula"
 msgstr "গোলাপাকৃতি নীহারিকা"
 
-#: nebulae/default/names.dat:388
+#: nebulae/default/names.dat:397
 msgid "Barnard's Loop"
 msgstr "বার্নাডের ফাঁস"
 
-#: nebulae/default/names.dat:389
+#: nebulae/default/names.dat:398
 msgid "Seagull Nebula"
 msgstr "সীগাল পাখি নীহারিকা"
 
-#: nebulae/default/names.dat:390
+#: nebulae/default/names.dat:399
 msgid "Snowman Nebula"
 msgstr "তুষার মানব নীহারিকা"
 
-#: nebulae/default/names.dat:391
+#: nebulae/default/names.dat:400
 msgid "Abell 35"
 msgstr "অ্যাবেল ২৫"
 
-#: nebulae/default/names.dat:392
+#: nebulae/default/names.dat:401
 msgid "Etched Hourglass Nebula"
 msgstr "ক্ষোদিত বালিঘড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:393
+#: nebulae/default/names.dat:402
 msgid "Engraved Hourglass Nebula"
 msgstr "উৎকীর্ণ বালিঘড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:394
+#: nebulae/default/names.dat:403
 msgid "Antares Nebula"
 msgstr "জ্যেষ্ঠা নীহারিকা"
 
-#: nebulae/default/names.dat:395
+#: nebulae/default/names.dat:404
 msgid "Ghost Nebula"
 msgstr "ভুতুড়ে নীহারিকা"
 
-#: nebulae/default/names.dat:397
+#: nebulae/default/names.dat:406
 msgid "Vulture Head Nebula"
 msgstr "শকুনের মাথা নীহারিকা"
 
-#: nebulae/default/names.dat:398
+#: nebulae/default/names.dat:407
 msgid "Orion B"
 msgstr "কালপুরুষ B"
 
-#: nebulae/default/names.dat:399
-msgid "Golf of Mexico Nebula"
-msgstr ""
+#: nebulae/default/names.dat:408
+msgid "Gulf of Mexico Nebula"
+msgstr "মেক্সিকো উপসাগর নীহারিকা"
 
-#: nebulae/default/names.dat:400 nebulae/default/names.dat:402
+#: nebulae/default/names.dat:409 nebulae/default/names.dat:411
 msgid "Taffy Galaxies"
-msgstr ""
+msgstr "টফি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:401 nebulae/default/names.dat:403
+#: nebulae/default/names.dat:410 nebulae/default/names.dat:412
 msgid "Taffy System"
-msgstr ""
+msgstr "টফি সিস্টেম"
 
-#: nebulae/default/names.dat:404
+#: nebulae/default/names.dat:413
 msgid "Wolf-Lundmark-Melotte (WLM)"
 msgstr "উল্ফ-লান্ডমার্ক-মেলোটি (WLM)"
 
-#: nebulae/default/names.dat:405
+#: nebulae/default/names.dat:414
 msgid "Andromeda III Dwarf Galaxy"
 msgstr "অ্যান্ড্রোমিডা III বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:406
+#: nebulae/default/names.dat:415
 msgid "Andromeda I Dwarf Galaxy"
 msgstr "অ্যান্ড্রোমিডা I বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:407
+#: nebulae/default/names.dat:416
 msgid "Burbidge Chain"
-msgstr ""
+msgstr "বারবিজের চেন"
 
-#: nebulae/default/names.dat:408
+#: nebulae/default/names.dat:417
 msgid "Sculptor Dwarf Galaxy"
 msgstr "ভাষ্কর মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:409
+#: nebulae/default/names.dat:418
 msgid "Pisces Dwarf Galaxy"
 msgstr "মীন মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:410
+#: nebulae/default/names.dat:419
 msgid "Andromeda II Dwarf Galaxy"
 msgstr "অ্যান্ড্রোমিডা II বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:411
+#: nebulae/default/names.dat:420
 msgid "Phoenix Dwarf Galaxy"
 msgstr "ফিনিক্স মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:412
+#: nebulae/default/names.dat:421
 msgid "Holmberg VI"
 msgstr "হোমবার্গ VI"
 
-#: nebulae/default/names.dat:413
+#: nebulae/default/names.dat:422
 msgid "Fornax Dwarf Galaxy"
 msgstr "অগ্নিকুণ্ড মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:414
+#: nebulae/default/names.dat:423
 msgid "Large Magellanic Cloud"
 msgstr "বৃহৎ ম্যাজেলেনীয় মেঘ"
 
-#: nebulae/default/names.dat:415
+#: nebulae/default/names.dat:424
 msgid "Orion Dwarf Galaxy"
 msgstr "কালপুরুষ বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:416
+#: nebulae/default/names.dat:425
 msgid "Carina Dwarf Galaxy"
 msgstr "ক্যারিনা বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:417
+#: nebulae/default/names.dat:426
 msgid "Southern Ellipse"
 msgstr "দক্ষিনের উপবৃত্ত"
 
-#: nebulae/default/names.dat:418
+#: nebulae/default/names.dat:427
 msgid "Lindsay-Shapley Ring"
-msgstr ""
+msgstr "নিন্ডসে-শ্যাপলে চক্র"
 
-#: nebulae/default/names.dat:419
+#: nebulae/default/names.dat:428
 msgid "Argo Dwarf Irregular Galaxy"
 msgstr "আর্গো অনিয়তকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:420
+#: nebulae/default/names.dat:429
 msgid "Holmberg II"
 msgstr "হোমবার্গ II"
 
-#: nebulae/default/names.dat:421
+#: nebulae/default/names.dat:430
 msgid "Holmberg III"
 msgstr "হোমবার্গ III"
 
-#: nebulae/default/names.dat:422
+#: nebulae/default/names.dat:431
 msgid "Hydra A"
-msgstr ""
+msgstr "হাইড্রা এ"
 
-#: nebulae/default/names.dat:423
+#: nebulae/default/names.dat:432
 msgid "Holmberg I"
 msgstr "হোমবার্গ I"
 
-#: nebulae/default/names.dat:424
+#: nebulae/default/names.dat:433
 msgid "Holmberg IX"
 msgstr "হোমবার্গ IX"
 
-#: nebulae/default/names.dat:425
+#: nebulae/default/names.dat:434
 msgid "Sextans B"
 msgstr "সেক্সট্যান্ট 'বি'"
 
-#: nebulae/default/names.dat:426
+#: nebulae/default/names.dat:435
 msgid "Antlia Dwarf Galaxy"
 msgstr "পাম্প মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:427
+#: nebulae/default/names.dat:436
 msgid "Sextans A"
 msgstr "সেক্সট্যান্ট 'এ'"
 
-#: nebulae/default/names.dat:428
+#: nebulae/default/names.dat:437
 msgid "Haro II"
 msgstr "হারো II"
 
-#: nebulae/default/names.dat:429
+#: nebulae/default/names.dat:438
 msgid "Leo II Dwarf Galaxy"
 msgstr "সিংহ মন্ডলের ২য় বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:430
+#: nebulae/default/names.dat:439
 msgid "Leo B"
 msgstr "লিও (সিংহ) B"
 
-#: nebulae/default/names.dat:431 nebulae/default/names.dat:432
+#: nebulae/default/names.dat:440 nebulae/default/names.dat:441
 msgid "Wild's Triplet"
 msgstr "ঔয়াইল্ডের ত্রয়ী নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:433
+#: nebulae/default/names.dat:442
 msgid "Holmberg VII"
 msgstr "হোমবার্গ VII"
 
-#: nebulae/default/names.dat:434
+#: nebulae/default/names.dat:443
 msgid "Shapley-Ames 3"
-msgstr ""
+msgstr "শ্যাপলে-এমিস ৩"
 
-#: nebulae/default/names.dat:435
+#: nebulae/default/names.dat:444
 msgid "Hardcastle's Galaxy"
-msgstr ""
+msgstr "হার্ডক্যাসেলের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:436
+#: nebulae/default/names.dat:445
 msgid "Holmberg VIII"
 msgstr "হোমবার্গ VIII"
 
-#: nebulae/default/names.dat:437
+#: nebulae/default/names.dat:446
 msgid "Holmberg V"
 msgstr "হোমবার্গ V"
 
-#: nebulae/default/names.dat:438
+#: nebulae/default/names.dat:447
 msgid "Holmberg IV"
 msgstr "হোমবার্গ IV"
 
-#: nebulae/default/names.dat:439
+#: nebulae/default/names.dat:448
 msgid "Circinus Galaxy"
 msgstr "কাঁটা কম্পাস মন্ডলের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:440
+#: nebulae/default/names.dat:449
 msgid "Ursa Minor Dwarf Galaxy"
 msgstr "ভল্লুক ছানা মন্ডলের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:441
+#: nebulae/default/names.dat:450
 msgid "Hooked Galaxy"
-msgstr ""
+msgstr "হুক নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:442 nebulae/default/names.dat:443
-#: nebulae/default/names.dat:444
+#: nebulae/default/names.dat:451 nebulae/default/names.dat:452
+#: nebulae/default/names.dat:453
 msgid "Zwicky's Triplet"
-msgstr ""
+msgstr "জুইকির ত্রয়"
 
-#: nebulae/default/names.dat:445
+#: nebulae/default/names.dat:454
 msgid "Draco Dwarf Galaxy"
 msgstr "ড্রাগন মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:446
+#: nebulae/default/names.dat:455
 msgid "Sagittarius Dwarf Galaxy"
 msgstr "ধনু মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:447
+#: nebulae/default/names.dat:456
 msgid "Aquarius Dwarf Galaxy"
 msgstr "কুম্ভ বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:448
+#: nebulae/default/names.dat:457
 msgid "Cygnus A"
 msgstr "হংস মন্ডল 'এ'"
 
-#: nebulae/default/names.dat:449
+#: nebulae/default/names.dat:458
 msgid "Tucana Dwarf Galaxy"
 msgstr "টুকান পাখি মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:450
+#: nebulae/default/names.dat:459
 msgid "Malin II"
 msgstr "মলিন II"
 
-#: nebulae/default/names.dat:451
+#: nebulae/default/names.dat:460
 msgid "Sextans Dwarf Spheroidal Galaxy"
 msgstr "সেক্সট্যান্ট গোলকাকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:452
+#: nebulae/default/names.dat:461
 msgid "Sextans Ring"
-msgstr ""
+msgstr "সেক্সট্যান্ট চক্র"
 
-#: nebulae/default/names.dat:453
+#: nebulae/default/names.dat:462
 msgid "Ring Galaxy in Sextans"
-msgstr ""
+msgstr "সেক্সট্যান্ট চক্র নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:454
+#: nebulae/default/names.dat:463
 msgid "Camelopardalis A"
 msgstr "ক্যামেলোপার্ডালিস (জিরাফ) A"
 
-#: nebulae/default/names.dat:455
+#: nebulae/default/names.dat:464
 msgid "Cassiopeia Dwarf Spheroidal Galaxy"
 msgstr "ক্যাসিওপিয়া গোলোকাকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:456
+#: nebulae/default/names.dat:465
 msgid "Andromeda VII"
 msgstr "অ্যান্ড্রোমিডা VII"
 
-#: nebulae/default/names.dat:457
+#: nebulae/default/names.dat:466
 msgid "Pegasus Dwarf Galaxy"
 msgstr "পক্ষীরাজ মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:458
+#: nebulae/default/names.dat:467
 msgid "Pegasus II"
 msgstr "পেগেসাস (পক্ষীরাজ) II"
 
-#: nebulae/default/names.dat:459
+#: nebulae/default/names.dat:468
 msgid "Andromeda VI"
 msgstr "অ্যান্ড্রোমিডা VI"
 
-#: nebulae/default/names.dat:460
+#: nebulae/default/names.dat:469
 msgid "Boomerang Nebula"
 msgstr "বুমেরাং নীহারিকা"
 
-#: nebulae/default/names.dat:461
+#: nebulae/default/names.dat:470
 msgid "Cepheus I"
 msgstr "সেফিয়ুস I"
 
-#: nebulae/default/names.dat:462
+#: nebulae/default/names.dat:471
 msgid "Cetus Dwarf Galaxy"
 msgstr "তিমি মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:463
+#: nebulae/default/names.dat:472
 msgid "BW Tauri"
-msgstr ""
+msgstr "বি ডব্লু বৃষ মন্ডল"
 
-#: nebulae/default/names.dat:464
+#: nebulae/default/names.dat:473
 msgid "Leo A"
 msgstr "লিও (সিংহ) A"
 
-#: nebulae/default/names.dat:465
+#: nebulae/default/names.dat:474
 msgid "Leo III"
 msgstr "লিও (সিংহ) III"
 
-#: nebulae/default/names.dat:466
+#: nebulae/default/names.dat:475
 msgid "Sextans C"
-msgstr ""
+msgstr "সেক্সট্যান্ট সি"
 
-#: nebulae/default/names.dat:467
+#: nebulae/default/names.dat:476
 msgid "Regulus Dwarf Galaxy"
 msgstr "রেগুলাস বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:468
+#: nebulae/default/names.dat:477
 msgid "Leo I"
 msgstr "লিও (সিংহ) I"
 
-#: nebulae/default/names.dat:469
+#: nebulae/default/names.dat:478
 msgid "Markarian 421"
 msgstr "মার্কারিয়ান ৪২১"
 
-#: nebulae/default/names.dat:470
+#: nebulae/default/names.dat:479
 msgid "Zwicky #2"
-msgstr ""
+msgstr "জুইকি ২য়"
 
-#: nebulae/default/names.dat:471
+#: nebulae/default/names.dat:480
 msgid "Shapley-Ames 4"
-msgstr ""
+msgstr "শ্যাপলে-এমিস ৪"
 
-#: nebulae/default/names.dat:472
+#: nebulae/default/names.dat:481
 msgid "Markarian 231"
 msgstr "মার্কারিয়ান ২৩১"
 
-#: nebulae/default/names.dat:473
+#: nebulae/default/names.dat:482
 msgid "Imprint of a Foot"
 msgstr "পদচিহ্ন"
 
-#: nebulae/default/names.dat:474
+#: nebulae/default/names.dat:483
 msgid "Exclamation Point Galaxy"
 msgstr "বিস্ময়চিহ্নাকার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:475
+#: nebulae/default/names.dat:484
 msgid "Serpens Dwarf Cluster"
-msgstr ""
+msgstr "সর্প মন্ডলের বামন তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:476
+#: nebulae/default/names.dat:485
 msgid "Tadpole Galaxy"
 msgstr "ব্যাঙাচি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:477
+#: nebulae/default/names.dat:486
 msgid "Egg Nebula"
 msgstr "ডিম্বাকৃতি নীহারিকা"
 
-#: nebulae/default/names.dat:478
+#: nebulae/default/names.dat:487
 msgid "Pegasus Dwarf Irregular Galaxy"
 msgstr "পক্ষীরাজ মন্ডলের অনিয়তকার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:479
+#: nebulae/default/names.dat:488
 msgid "Calabash Nebula"
 msgstr "লাউ আকারের নীহারিকা"
 
-#: nebulae/default/names.dat:480
+#: nebulae/default/names.dat:489
 msgid "Rotten Egg Nebula"
-msgstr ""
+msgstr "পচা ডিম নীহারিকা"
 
-#: nebulae/default/names.dat:481
+#: nebulae/default/names.dat:490
 msgid "Frosty Leo Nebula"
 msgstr "তুহিন সিংহ নীহারিকা"
 
-#: nebulae/default/names.dat:482
+#: nebulae/default/names.dat:491
 msgid "Gomez's Hamburger"
 msgstr "গোমেজের হ্যামবার্গার"
 
-#: nebulae/default/names.dat:483
+#: nebulae/default/names.dat:492
 msgid "Cotton Candy Nebula"
 msgstr "হাওয়াই মিঠাই নীহারিকা"
 
-#: nebulae/default/names.dat:484
+#: nebulae/default/names.dat:493
 msgid "Water Lily Nebula"
 msgstr "শালুক নীহারিকা"
 
-#: nebulae/default/names.dat:485
+#: nebulae/default/names.dat:494
 msgid "Westbrook Nebula"
 msgstr "ওয়েস্টব্রুকের নীহারিকা"
 
-#: nebulae/default/names.dat:486
+#: nebulae/default/names.dat:495
 msgid "Footprint Nebula"
 msgstr "পদচিহ্ন নীহারিকা"
 
-#: nebulae/default/names.dat:487
+#: nebulae/default/names.dat:496
 msgid "Minkowski's Footprint"
 msgstr "মিনিকোয়াস্কির পদচিহ্ন"
 
-#: nebulae/default/names.dat:488
+#: nebulae/default/names.dat:497
 msgid "M1-92"
 msgstr "M1-92"
 
-#: nebulae/default/names.dat:489
+#: nebulae/default/names.dat:498
 msgid "Minkowski's Butterfly"
 msgstr "মিনিকোয়াস্কির প্রজাপতি"
 
-#: nebulae/default/names.dat:490
+#: nebulae/default/names.dat:499
 msgid "Twin Jet Nebula"
 msgstr "দ্বিমুখী ফোয়ারা নীহারিকা"
 
-#: nebulae/default/names.dat:491
+#: nebulae/default/names.dat:500
 msgid "M2-9"
 msgstr "M2-9"
 
-#: nebulae/default/names.dat:492
+#: nebulae/default/names.dat:501
 msgid "Sagittarius A East"
 msgstr "ধনু মন্ডল 'এ' পূর্ব"
 
-#: nebulae/default/names.dat:493
+#: nebulae/default/names.dat:502
 msgid "Sagittarius A West"
 msgstr "ধনু মন্ডল 'এ' পশ্চিম"
+
+#: nebulae/default/names.dat:503
+msgid "Dark Doodad Nebula"
+msgstr ""
 
 #: skycultures/arabic/constellation_names.eng.fab:1
 msgid "The Shackled Woman"
@@ -2883,7 +3365,7 @@ msgid "The announcer of the southern Shining one"
 msgstr "দক্ষিন দ্যুতির ঘোষক"
 
 #: skycultures/arabic/star_names.fab:49 skycultures/romanian/star_names.fab:65
-#: skycultures/western/star_names.fab:380
+#: skycultures/western/star_names.fab:407
 msgid "Tejat"
 msgstr "তেজাট"
 
@@ -3090,7 +3572,7 @@ msgstr "একজন একা বল্লমধারী"
 
 #: skycultures/arabic/star_names.fab:101
 #: skycultures/romanian/star_names.fab:132
-#: skycultures/western/star_names.fab:180
+#: skycultures/western/star_names.fab:194
 msgid "Hadar"
 msgstr "হাদার"
 
@@ -5153,12 +5635,12 @@ msgid "Stars of Water"
 msgstr "জলের তারা সমূহ"
 
 #: skycultures/egyptian/star_names.fab:1 skycultures/romanian/star_names.fab:80
-#: skycultures/western/star_names.fab:139
+#: skycultures/western/star_names.fab:147
 #: skycultures/western_rey/star_names.fab:32
 msgid "Procyon"
 msgstr "প্রশ্বন"
 
-#: skycultures/egyptian/star_names.fab:2 skycultures/western/star_names.fab:127
+#: skycultures/egyptian/star_names.fab:2 skycultures/western/star_names.fab:131
 #: skycultures/western_rey/star_names.fab:36
 msgid "Sirius"
 msgstr "সিরিয়াস (লুব্ধক)"
@@ -7653,24 +8135,24 @@ msgstr "বুনো শুকর"
 msgid "Alpheratz"
 msgstr "আলফার্জ"
 
-#: skycultures/romanian/star_names.fab:2 skycultures/western/star_names.fab:163
+#: skycultures/romanian/star_names.fab:2 skycultures/western/star_names.fab:177
 msgid "Caph"
 msgstr "ক্যাফ (জমদগ্নি)"
 
-#: skycultures/romanian/star_names.fab:3 skycultures/western/star_names.fab:529
-#: skycultures/western/star_names.fab:545
+#: skycultures/romanian/star_names.fab:3 skycultures/western/star_names.fab:573
+#: skycultures/western/star_names.fab:591
 msgid "Algenib"
 msgstr "আলজেনিব"
 
-#: skycultures/romanian/star_names.fab:4 skycultures/western/star_names.fab:560
+#: skycultures/romanian/star_names.fab:4 skycultures/western/star_names.fab:607
 msgid "Ankaa"
 msgstr "আনকা"
 
-#: skycultures/romanian/star_names.fab:5 skycultures/western/star_names.fab:162
+#: skycultures/romanian/star_names.fab:5 skycultures/western/star_names.fab:176
 msgid "Shedir"
 msgstr "আশেদির (গৌতম)"
 
-#: skycultures/romanian/star_names.fab:6 skycultures/western/star_names.fab:205
+#: skycultures/romanian/star_names.fab:6 skycultures/western/star_names.fab:219
 msgid "Diphda"
 msgstr "দিফদা"
 
@@ -7687,23 +8169,23 @@ msgid "Adhil"
 msgstr "আধিল"
 
 #: skycultures/romanian/star_names.fab:10
-#: skycultures/western/star_names.fab:164
+#: skycultures/western/star_names.fab:178
 msgid "Ruchbah"
 msgstr "রুখবাহ্"
 
 #: skycultures/romanian/star_names.fab:11
-#: skycultures/western/star_names.fab:344
+#: skycultures/western/star_names.fab:362
 #: skycultures/western_rey/star_names.fab:53
 msgid "Achernar"
 msgstr "আখেরনার"
 
 #: skycultures/romanian/star_names.fab:12
-#: skycultures/western/star_names.fab:207
+#: skycultures/western/star_names.fab:221
 msgid "Baten Kaitos"
 msgstr "বতন আখিতোস"
 
 #: skycultures/romanian/star_names.fab:13
-#: skycultures/western/star_names.fab:688
+#: skycultures/western/star_names.fab:747
 msgid "Mothallah"
 msgstr "মুথাল্লাহ্"
 
@@ -7716,7 +8198,7 @@ msgid "Sheratan"
 msgstr "শেরতান"
 
 #: skycultures/romanian/star_names.fab:16
-#: skycultures/western/star_names.fab:570
+#: skycultures/western/star_names.fab:617
 msgid "Alrescha"
 msgstr "অ্যালরাশ্যা"
 
@@ -7729,7 +8211,7 @@ msgid "Hamal"
 msgstr "হামাল"
 
 #: skycultures/romanian/star_names.fab:19
-#: skycultures/western/star_names.fab:208
+#: skycultures/western/star_names.fab:222
 #: skycultures/western_rey/star_names.fab:48
 msgid "Mira"
 msgstr "মিরা"
@@ -7739,23 +8221,23 @@ msgid "The Sky's Votive Light"
 msgstr "শপথের গ্রহনের দ্যুতি"
 
 #: skycultures/romanian/star_names.fab:21
-#: skycultures/western/star_names.fab:348
+#: skycultures/western/star_names.fab:367
 msgid "Azha"
 msgstr "আজহা"
 
 #: skycultures/romanian/star_names.fab:22
-#: skycultures/western/star_names.fab:349
+#: skycultures/western/star_names.fab:368
 msgid "Acamar"
 msgstr "আখমার"
 
 #: skycultures/romanian/star_names.fab:23
-#: skycultures/western/star_names.fab:204
-#: skycultures/western/star_names.fab:217
+#: skycultures/western/star_names.fab:218
+#: skycultures/western/star_names.fab:231
 msgid "Menkar"
 msgstr "মেনখার"
 
 #: skycultures/romanian/star_names.fab:24
-#: skycultures/western/star_names.fab:546
+#: skycultures/western/star_names.fab:592
 #: skycultures/western_rey/star_names.fab:24
 msgid "Algol"
 msgstr "অ্যালগল"
@@ -7765,7 +8247,7 @@ msgid "Botein"
 msgstr "বোতেইন"
 
 #: skycultures/romanian/star_names.fab:26
-#: skycultures/western/star_names.fab:347
+#: skycultures/western/star_names.fab:366
 msgid "Zibal"
 msgstr "জ্যিবাল"
 
@@ -7774,78 +8256,78 @@ msgid "Mirphak"
 msgstr "মিরফাক"
 
 #: skycultures/romanian/star_names.fab:28
-#: skycultures/western/star_names.fab:550
-#: skycultures/western/star_names.fab:552
+#: skycultures/western/star_names.fab:596
+#: skycultures/western/star_names.fab:599
 msgid "Atik"
 msgstr "আটিক"
 
 #: skycultures/romanian/star_names.fab:29
-#: skycultures/western/star_names.fab:666
+#: skycultures/western/star_names.fab:725
 msgid "Celaeno"
 msgstr "সেল্যানো"
 
 #: skycultures/romanian/star_names.fab:30
-#: skycultures/western/star_names.fab:667
+#: skycultures/western/star_names.fab:726
 msgid "Electra"
 msgstr "ইলেকট্রা"
 
 #: skycultures/romanian/star_names.fab:31
-#: skycultures/western/star_names.fab:668
+#: skycultures/western/star_names.fab:727
 msgid "Taygeta"
 msgstr "তেইজ্যাতে (অনুসূয়া)"
 
 #: skycultures/romanian/star_names.fab:32
-#: skycultures/western/star_names.fab:669
+#: skycultures/western/star_names.fab:728
 msgid "Maia"
 msgstr "মেইয়্যা"
 
 #: skycultures/romanian/star_names.fab:33
-#: skycultures/western/star_names.fab:670
+#: skycultures/western/star_names.fab:729
 msgid "Asterope"
 msgstr "অ্যাস্টেরোপি"
 
 #: skycultures/romanian/star_names.fab:34
-#: skycultures/western/star_names.fab:672
+#: skycultures/western/star_names.fab:731
 msgid "Merope"
 msgstr "মেরোপি"
 
 #: skycultures/romanian/star_names.fab:35
-#: skycultures/western/star_names.fab:665
+#: skycultures/western/star_names.fab:724
 msgid "Alcyone"
 msgstr "অ্যালসিয়্যানি"
 
 #: skycultures/romanian/star_names.fab:36
-#: skycultures/western/star_names.fab:673
+#: skycultures/western/star_names.fab:732
 msgid "Atlas"
 msgstr "আটলাস"
 
 #: skycultures/romanian/star_names.fab:37
-#: skycultures/western/star_names.fab:674
+#: skycultures/western/star_names.fab:733
 msgid "Pleione"
 msgstr "প্লাইয়নি"
 
 #: skycultures/romanian/star_names.fab:38
-#: skycultures/western/star_names.fab:346
+#: skycultures/western/star_names.fab:365
 msgid "Zaurak"
 msgstr "জাউর‍্যাক"
 
 #: skycultures/romanian/star_names.fab:39
-#: skycultures/western/star_names.fab:548
+#: skycultures/western/star_names.fab:595
 msgid "Menkib"
 msgstr "মেনকিব"
 
 #: skycultures/romanian/star_names.fab:40
-#: skycultures/western/star_names.fab:351
+#: skycultures/western/star_names.fab:370
 msgid "Beid"
 msgstr "বেইদ"
 
 #: skycultures/romanian/star_names.fab:41
-#: skycultures/western/star_names.fab:352
+#: skycultures/western/star_names.fab:371
 msgid "Keid"
 msgstr "কাইদ"
 
 #: skycultures/romanian/star_names.fab:42
-#: skycultures/western/star_names.fab:663
+#: skycultures/western/star_names.fab:722
 msgid "Ain"
 msgstr "আয়িন"
 
@@ -7854,17 +8336,17 @@ msgid "The Bright Star of the Pig (The Alarm Clock)"
 msgstr "শুকর মন্ডলের উজ্জ্বল তারা (অ্যালার্মঘড়ি)"
 
 #: skycultures/romanian/star_names.fab:44
-#: skycultures/western/star_names.fab:345
+#: skycultures/western/star_names.fab:363
 msgid "Cursa"
 msgstr "কুরসী"
 
 #: skycultures/romanian/star_names.fab:45
-#: skycultures/western/star_names.fab:568
+#: skycultures/western/star_names.fab:615
 msgid "Kapteyn's Star"
 msgstr "কাপতেইনের তারা"
 
 #: skycultures/romanian/star_names.fab:46
-#: skycultures/western/star_names.fab:498
+#: skycultures/western/star_names.fab:540
 #: skycultures/western_rey/star_names.fab:35
 msgid "Rigel"
 msgstr "রাইজেল (বাণরাজা)"
@@ -7875,7 +8357,7 @@ msgid "Capella"
 msgstr "ক্যাপেলা (ব্রহ্মহৃদয়)"
 
 #: skycultures/romanian/star_names.fab:48
-#: skycultures/western/star_names.fab:499
+#: skycultures/western/star_names.fab:542
 msgid "Bellatrix"
 msgstr "বেলাট্রিক্স (কার্তিকেয়)"
 
@@ -7884,93 +8366,93 @@ msgid "Alnath"
 msgstr "আ্যালনাথ"
 
 #: skycultures/romanian/star_names.fab:50
-#: skycultures/western/star_names.fab:445
+#: skycultures/western/star_names.fab:483
 msgid "Nihal"
 msgstr "নিহাল"
 
 #: skycultures/romanian/star_names.fab:51
-#: skycultures/western/star_names.fab:500
+#: skycultures/western/star_names.fab:543
 msgid "Mintaka"
 msgstr "মিনটাকা (চিত্রলেখা)"
 
 #: skycultures/romanian/star_names.fab:52
-#: skycultures/western/star_names.fab:444
+#: skycultures/western/star_names.fab:482
 msgid "Arneb"
 msgstr "আরনেব"
 
 #: skycultures/romanian/star_names.fab:53
-#: skycultures/western/star_names.fab:504
+#: skycultures/western/star_names.fab:547
 msgid "Meissa"
 msgstr "মেইসা"
 
 #: skycultures/romanian/star_names.fab:54
-#: skycultures/western/star_names.fab:501
+#: skycultures/western/star_names.fab:544
 msgid "Alnilam"
 msgstr "আলনিলাম (অনিরুদ্ধ)"
 
 #: skycultures/romanian/star_names.fab:55
-#: skycultures/western/star_names.fab:235
+#: skycultures/western/star_names.fab:249
 msgid "Phact"
 msgstr "ফাকিত"
 
 #: skycultures/romanian/star_names.fab:56
-#: skycultures/western/star_names.fab:502
+#: skycultures/western/star_names.fab:545
 msgid "Alnitak"
 msgstr "আলনিতক (ঊষা)"
 
 #: skycultures/romanian/star_names.fab:57
-#: skycultures/western/star_names.fab:503
+#: skycultures/western/star_names.fab:546
 msgid "Saiph"
 msgstr "সাইফ (কার্তবীর্য)"
 
 #: skycultures/romanian/star_names.fab:58
-#: skycultures/western/star_names.fab:236
+#: skycultures/western/star_names.fab:250
 msgid "Wazn"
 msgstr "ওজন"
 
 #: skycultures/romanian/star_names.fab:59
-#: skycultures/western/star_names.fab:497
+#: skycultures/western/star_names.fab:538
 #: skycultures/western_rey/star_names.fab:34
 msgid "Betelgeuse"
 msgstr "বিটলজিউস (আদ্রা)"
 
-#: skycultures/romanian/star_names.fab:60 skycultures/western/star_names.fab:67
+#: skycultures/romanian/star_names.fab:60 skycultures/western/star_names.fab:68
 msgid "Menkalinan"
 msgstr "মেনকালিনান"
 
 #: skycultures/romanian/star_names.fab:61
-#: skycultures/western/star_names.fab:377
+#: skycultures/western/star_names.fab:404
 msgid "Propus"
 msgstr "প্রোপুস"
 
 #: skycultures/romanian/star_names.fab:62
-#: skycultures/western/star_names.fab:481
+#: skycultures/western/star_names.fab:521
 msgid "Red Rectangle"
 msgstr "লাল আয়তক্ষেত্র"
 
 #: skycultures/romanian/star_names.fab:63
-#: skycultures/western/star_names.fab:133
+#: skycultures/western/star_names.fab:141
 msgid "Furud"
 msgstr "ফারদ"
 
 #: skycultures/romanian/star_names.fab:64
-#: skycultures/western/star_names.fab:128
+#: skycultures/western/star_names.fab:134
 msgid "Mirzam"
 msgstr "মির্জাম"
 
 #: skycultures/romanian/star_names.fab:66
-#: skycultures/western/star_names.fab:154
+#: skycultures/western/star_names.fab:166
 #: skycultures/western_rey/star_names.fab:52
 msgid "Canopus"
 msgstr "ক্যানোপাস (অগস্ত্য)"
 
 #: skycultures/romanian/star_names.fab:67
-#: skycultures/western/star_names.fab:372
+#: skycultures/western/star_names.fab:397
 msgid "Alhena"
 msgstr "আলহেনা (অনল)"
 
 #: skycultures/romanian/star_names.fab:68
-#: skycultures/western/star_names.fab:375
+#: skycultures/western/star_names.fab:400
 msgid "Mebsuta"
 msgstr "মেবসুতা"
 
@@ -7980,47 +8462,47 @@ msgid "Morning Star"
 msgstr "ভোরের তারা"
 
 #: skycultures/romanian/star_names.fab:70
-#: skycultures/western/star_names.fab:132
+#: skycultures/western/star_names.fab:140
 msgid "Adhara"
 msgstr "আধারা"
 
 #: skycultures/romanian/star_names.fab:71
-#: skycultures/western/star_names.fab:129
+#: skycultures/western/star_names.fab:135
 msgid "Muliphein"
 msgstr "মুলিফেইন"
 
 #: skycultures/romanian/star_names.fab:72
-#: skycultures/western/star_names.fab:376
+#: skycultures/western/star_names.fab:403
 msgid "Mekbuda"
 msgstr "মাকবুদা"
 
 #: skycultures/romanian/star_names.fab:73
-#: skycultures/western/star_names.fab:131
+#: skycultures/western/star_names.fab:138
 msgid "Wezen"
 msgstr "ওয়েজেন"
 
 #: skycultures/romanian/star_names.fab:74
-#: skycultures/western/star_names.fab:589
+#: skycultures/western/star_names.fab:639
 msgid "Bernes 135"
 msgstr "বার্নেস ১৩৫"
 
 #: skycultures/romanian/star_names.fab:75
-#: skycultures/western/star_names.fab:374
+#: skycultures/western/star_names.fab:399
 msgid "Wasat"
 msgstr "ওয়াসাত"
 
 #: skycultures/romanian/star_names.fab:76
-#: skycultures/western/star_names.fab:134
+#: skycultures/western/star_names.fab:142
 msgid "Aludra"
 msgstr "অ্যালয়ুধরা"
 
 #: skycultures/romanian/star_names.fab:77
-#: skycultures/western/star_names.fab:140
+#: skycultures/western/star_names.fab:150
 msgid "Gomeisa"
 msgstr "গুমেইসা"
 
 #: skycultures/romanian/star_names.fab:78
-#: skycultures/western/star_names.fab:141
+#: skycultures/western/star_names.fab:153
 msgid "Luyten's Star"
 msgstr "লাউট্যার তারা"
 
@@ -8033,244 +8515,244 @@ msgid "Remus"
 msgstr "রীম্যাস"
 
 #: skycultures/romanian/star_names.fab:82
-#: skycultures/western/star_names.fab:587
+#: skycultures/western/star_names.fab:636
 msgid "Naos"
 msgstr "নাওস"
 
 #: skycultures/romanian/star_names.fab:83
-#: skycultures/western/star_names.fab:746
+#: skycultures/western/star_names.fab:811
 msgid "Regor"
 msgstr "রেগোর"
 
 #: skycultures/romanian/star_names.fab:84
-#: skycultures/western/star_names.fab:114
+#: skycultures/western/star_names.fab:118
 msgid "Tegmine"
 msgstr "তিগমিন"
 
 #: skycultures/romanian/star_names.fab:85
-#: skycultures/western/star_names.fab:157
+#: skycultures/western/star_names.fab:169
 msgid "Avior"
 msgstr "আভিয়োর"
 
 #: skycultures/romanian/star_names.fab:86
-#: skycultures/western/star_names.fab:709
+#: skycultures/western/star_names.fab:770
 msgid "Muscida"
 msgstr "মুসিডা"
 
 #: skycultures/romanian/star_names.fab:87
-#: skycultures/western/star_names.fab:112
+#: skycultures/western/star_names.fab:116
 msgid "Asellus Borealis"
 msgstr "আসেলুস বোরিয়ালিস"
 
 #: skycultures/romanian/star_names.fab:88
-#: skycultures/western/star_names.fab:113
+#: skycultures/western/star_names.fab:117
 msgid "Asellus Australis"
 msgstr "আসেলুস অস্ট্রালিস"
 
 #: skycultures/romanian/star_names.fab:89
-#: skycultures/western/star_names.fab:110
+#: skycultures/western/star_names.fab:114
 msgid "Acubens"
 msgstr "আকিউবেন্স"
 
 #: skycultures/romanian/star_names.fab:90
-#: skycultures/western/star_names.fab:704
+#: skycultures/western/star_names.fab:765
 msgid "Talitha"
 msgstr "থালিথা"
 
 #: skycultures/romanian/star_names.fab:91
-#: skycultures/western/star_names.fab:748
+#: skycultures/western/star_names.fab:814
 msgid "Suhail"
 msgstr "সুহাইল"
 
 #: skycultures/romanian/star_names.fab:92
-#: skycultures/western/star_names.fab:156
+#: skycultures/western/star_names.fab:168
 msgid "Miaplacidus"
 msgstr "মিয়াপ্লাচিডুস"
 
 #: skycultures/romanian/star_names.fab:93
-#: skycultures/western/star_names.fab:158
+#: skycultures/western/star_names.fab:170
 msgid "Aspidiske"
 msgstr "আস্পিডিস্কে"
 
 #: skycultures/romanian/star_names.fab:94
-#: skycultures/western/star_names.fab:406
+#: skycultures/western/star_names.fab:433
 #: skycultures/western_rey/star_names.fab:38
 msgid "Alphard"
 msgstr "আলফার্ড"
 
 #: skycultures/romanian/star_names.fab:95
-#: skycultures/western/star_names.fab:432
+#: skycultures/western/star_names.fab:468
 msgid "Alterf"
 msgstr "আলতার্ফ"
 
 #: skycultures/romanian/star_names.fab:96
-#: skycultures/western/star_names.fab:435
+#: skycultures/western/star_names.fab:472
 msgid "Subra"
 msgstr "সুর্বা"
 
 #: skycultures/romanian/star_names.fab:97
-#: skycultures/western/star_names.fab:433
+#: skycultures/western/star_names.fab:469
 msgid "Rasalas"
 msgstr "রাস্যালাস"
 
 #: skycultures/romanian/star_names.fab:98
-#: skycultures/western/star_names.fab:423
+#: skycultures/western/star_names.fab:454
 #: skycultures/western_rey/star_names.fab:12
 msgid "Regulus"
 msgstr "রেগুলাস (মঘা)"
 
 #: skycultures/romanian/star_names.fab:99
-#: skycultures/western/star_names.fab:428
+#: skycultures/western/star_names.fab:464
 msgid "Adhafera"
 msgstr "আদদাফিরা"
 
 #: skycultures/romanian/star_names.fab:100
-#: skycultures/western/star_names.fab:705
+#: skycultures/western/star_names.fab:766
 msgid "Tania Borealis"
 msgstr "টানিয়া বোরিয়ালিস"
 
 #: skycultures/romanian/star_names.fab:101
-#: skycultures/western/star_names.fab:425
+#: skycultures/western/star_names.fab:460
 msgid "Algieba"
 msgstr "আলজিবাহ্"
 
 #: skycultures/romanian/star_names.fab:102
-#: skycultures/western/star_names.fab:706
+#: skycultures/western/star_names.fab:767
 msgid "Tania Australis"
 msgstr "টানিয়া অস্ট্রালিস"
 
 #: skycultures/romanian/star_names.fab:103
-#: skycultures/western/star_names.fab:264
+#: skycultures/western/star_names.fab:279
 msgid "Alkes"
 msgstr "অ্যালকেস"
 
 #: skycultures/romanian/star_names.fab:104
-#: skycultures/western/star_names.fab:695
+#: skycultures/western/star_names.fab:756
 msgid "Merak"
 msgstr "মিরাক (পুলহ)"
 
 #: skycultures/romanian/star_names.fab:105
-#: skycultures/western/star_names.fab:694
+#: skycultures/western/star_names.fab:753
 msgid "Dubhe"
 msgstr "ধুবে (ক্রতু)"
 
 #: skycultures/romanian/star_names.fab:106
-#: skycultures/western/star_names.fab:426
+#: skycultures/western/star_names.fab:461
 msgid "Zosma"
 msgstr "জ্যোসমা"
 
 #: skycultures/romanian/star_names.fab:107
-#: skycultures/western/star_names.fab:429
+#: skycultures/western/star_names.fab:465
 msgid "Chertan"
 msgstr "খারতান"
 
 #: skycultures/romanian/star_names.fab:108
-#: skycultures/western/star_names.fab:708
+#: skycultures/western/star_names.fab:769
 msgid "Alula Australis"
 msgstr "আলুলা অস্ট্রালিস"
 
 #: skycultures/romanian/star_names.fab:109
-#: skycultures/western/star_names.fab:707
+#: skycultures/western/star_names.fab:768
 msgid "Alula Borealis"
 msgstr "আলুলা বোরিয়ালিস"
 
 #: skycultures/romanian/star_names.fab:110
-#: skycultures/western/star_names.fab:311
+#: skycultures/western/star_names.fab:329
 msgid "Giausar"
 msgstr "জাউজার"
 
 #: skycultures/romanian/star_names.fab:111
-#: skycultures/western/star_names.fab:424
+#: skycultures/western/star_names.fab:458
 #: skycultures/western_rey/star_names.fab:13
 msgid "Denebola"
 msgstr "ডেনেবোনা (উত্তর ফাল্গুনী)"
 
 #: skycultures/romanian/star_names.fab:112
-#: skycultures/western/star_names.fab:752
+#: skycultures/western/star_names.fab:819
 msgid "Zavijava"
 msgstr "জাভিজাভা"
 
 #: skycultures/romanian/star_names.fab:113
-#: skycultures/western/star_names.fab:697
+#: skycultures/western/star_names.fab:758
 msgid "Phad"
 msgstr "ফাড"
 
 #: skycultures/romanian/star_names.fab:114
-#: skycultures/western/star_names.fab:255
+#: skycultures/western/star_names.fab:270
 msgid "Alchiba"
 msgstr "আলখিবা"
 
 #: skycultures/romanian/star_names.fab:115
-#: skycultures/western/star_names.fab:698
+#: skycultures/western/star_names.fab:759
 msgid "Megrez"
 msgstr "মেগরেজ (অত্রি)"
 
 #: skycultures/romanian/star_names.fab:116
 #: skycultures/romanian/star_names.fab:203
-#: skycultures/western/star_names.fab:257
+#: skycultures/western/star_names.fab:272
 msgid "Gienah"
 msgstr "জিনাহ্"
 
 #: skycultures/romanian/star_names.fab:117
-#: skycultures/western/star_names.fab:757
+#: skycultures/western/star_names.fab:825
 msgid "Zaniah"
 msgstr "জ্যানাইয়্যা"
 
 #: skycultures/romanian/star_names.fab:118
-#: skycultures/western/star_names.fab:268
+#: skycultures/western/star_names.fab:283
 #: skycultures/western_rey/star_names.fab:55
 msgid "Acrux"
 msgstr "ইক্রাক্স (বিশ্বামিত্র)"
 
 #: skycultures/romanian/star_names.fab:119
-#: skycultures/western/star_names.fab:260
+#: skycultures/western/star_names.fab:275
 msgid "Algorab"
 msgstr "অ্যালগুরাব"
 
 #: skycultures/romanian/star_names.fab:120
-#: skycultures/western/star_names.fab:270
+#: skycultures/western/star_names.fab:286
 msgid "Gacrux"
 msgstr "গাক্রাক্স"
 
 #: skycultures/romanian/star_names.fab:121
-#: skycultures/western/star_names.fab:124
+#: skycultures/western/star_names.fab:128
 msgid "Chara"
 msgstr "চারা"
 
 #: skycultures/romanian/star_names.fab:122
-#: skycultures/western/star_names.fab:753
+#: skycultures/western/star_names.fab:821
 msgid "Porrima"
 msgstr "পোরিমা"
 
 #: skycultures/romanian/star_names.fab:123
-#: skycultures/western/star_names.fab:269
+#: skycultures/western/star_names.fab:284
 msgid "Mimosa"
 msgstr "মিমোসা"
 
 #: skycultures/romanian/star_names.fab:124
-#: skycultures/western/star_names.fab:700
+#: skycultures/western/star_names.fab:761
 msgid "Alioth"
 msgstr "অ্যালিয়থ (অঙ্গিরা)"
 
 #: skycultures/romanian/star_names.fab:125
-#: skycultures/western/star_names.fab:123
+#: skycultures/western/star_names.fab:127
 #: skycultures/western_rey/star_names.fab:14
 msgid "Cor Caroli"
 msgstr "কর ক্যারোলি"
 
 #: skycultures/romanian/star_names.fab:126
-#: skycultures/western/star_names.fab:755
+#: skycultures/western/star_names.fab:823
 msgid "Vindemiatrix"
 msgstr "ভিন্ডেমিয়েট্রিক্স"
 
 #: skycultures/romanian/star_names.fab:127
-#: skycultures/western/star_names.fab:701
+#: skycultures/western/star_names.fab:762
 #: skycultures/western_rey/star_names.fab:7
 msgid "Mizar"
 msgstr "মিজার (বশিষ্ঠ)"
 
 #: skycultures/romanian/star_names.fab:128
-#: skycultures/western/star_names.fab:750
+#: skycultures/western/star_names.fab:817
 #: skycultures/western_rey/star_names.fab:40
 msgid "Spica"
 msgstr "স্পাইকা (চিত্রা)"
@@ -8280,44 +8762,44 @@ msgid "The Little Bitch"
 msgstr "মেয়ে কুকুর ছানা"
 
 #: skycultures/romanian/star_names.fab:130
-#: skycultures/western/star_names.fab:702
+#: skycultures/western/star_names.fab:763
 msgid "Alkaid"
 msgstr "আলকাইদ (মারিচী)"
 
 #: skycultures/romanian/star_names.fab:131
-#: skycultures/western/star_names.fab:97
+#: skycultures/western/star_names.fab:98
 msgid "Muphrid"
 msgstr "মুফরাদ"
 
 #: skycultures/romanian/star_names.fab:133
-#: skycultures/western/star_names.fab:300
+#: skycultures/western/star_names.fab:318
 #: skycultures/western_rey/star_names.fab:10
 msgid "Thuban"
 msgstr "থুবান"
 
 #: skycultures/romanian/star_names.fab:134
-#: skycultures/western/star_names.fab:185
+#: skycultures/western/star_names.fab:199
 msgid "Menkent"
 msgstr "মেনকেন্ত"
 
 #: skycultures/romanian/star_names.fab:135
-#: skycultures/western/star_names.fab:90
+#: skycultures/western/star_names.fab:91
 #: skycultures/western_rey/star_names.fab:16
 msgid "Arcturus"
 msgstr "আর্কটুরাস (স্বাতী)"
 
 #: skycultures/romanian/star_names.fab:136
-#: skycultures/western/star_names.fab:758
+#: skycultures/western/star_names.fab:826
 msgid "Syrma"
 msgstr "শায়র্মা"
 
 #: skycultures/romanian/star_names.fab:137
-#: skycultures/western/star_names.fab:178
+#: skycultures/western/star_names.fab:192
 msgid "Proxima"
 msgstr "প্রক্সিমা"
 
 #: skycultures/romanian/star_names.fab:138
-#: skycultures/western/star_names.fab:92
+#: skycultures/western/star_names.fab:93
 msgid "Seginus"
 msgstr "সেগিনাস"
 
@@ -8326,12 +8808,12 @@ msgid "Rigil Kent"
 msgstr "রিজেল কেন্ট"
 
 #: skycultures/romanian/star_names.fab:140
-#: skycultures/western/star_names.fab:95
+#: skycultures/western/star_names.fab:96
 msgid "Izar"
 msgstr "ইজার"
 
 #: skycultures/romanian/star_names.fab:141
-#: skycultures/western/star_names.fab:99
+#: skycultures/western/star_names.fab:103
 msgid "Merga"
 msgstr "মার্গা"
 
@@ -8340,197 +8822,197 @@ msgid "Kocab"
 msgstr "কোখাব"
 
 #: skycultures/romanian/star_names.fab:143
-#: skycultures/western/star_names.fab:451
-#: skycultures/western/star_names.fab:453
+#: skycultures/western/star_names.fab:489
+#: skycultures/western/star_names.fab:491
 msgid "Zubenelgenubi"
 msgstr "জুবেনিলজেনুবি"
 
 #: skycultures/romanian/star_names.fab:144
-#: skycultures/western/star_names.fab:91
+#: skycultures/western/star_names.fab:92
 msgid "Nekkar"
 msgstr "নেক্কার"
 
 #: skycultures/romanian/star_names.fab:145
-#: skycultures/western/star_names.fab:454
+#: skycultures/western/star_names.fab:492
 msgid "Zubeneschamali"
 msgstr "জুবেনেস্চামালি"
 
 #: skycultures/romanian/star_names.fab:146
-#: skycultures/western/star_names.fab:738
+#: skycultures/western/star_names.fab:802
 msgid "Pherkad"
 msgstr "ফার্কাড"
 
 #: skycultures/romanian/star_names.fab:147
-#: skycultures/western/star_names.fab:98
+#: skycultures/western/star_names.fab:99
 msgid "Alkalurops"
 msgstr "আলকারূপস্"
 
 #: skycultures/romanian/star_names.fab:148
-#: skycultures/western/star_names.fab:310
+#: skycultures/western/star_names.fab:328
 msgid "Edasich"
 msgstr "এডাসিচ"
 
 #: skycultures/romanian/star_names.fab:149
-#: skycultures/western/star_names.fab:251
+#: skycultures/western/star_names.fab:266
 msgid "Nusakan"
 msgstr "নুসকাম"
 
 #: skycultures/romanian/star_names.fab:150
-#: skycultures/western/star_names.fab:249
+#: skycultures/western/star_names.fab:263
 msgid "Alphekka"
 msgstr "আলপেকা"
 
 #: skycultures/romanian/star_names.fab:151
-#: skycultures/western/star_names.fab:653
+#: skycultures/western/star_names.fab:709
 msgid "Unukalhai"
 msgstr "আনউকালহাই"
 
 #: skycultures/romanian/star_names.fab:152
-#: skycultures/western/star_names.fab:631
+#: skycultures/western/star_names.fab:685
 msgid "Dschubba"
 msgstr "স্চুবা (অনুরাধা)"
 
 #: skycultures/romanian/star_names.fab:153
-#: skycultures/western/star_names.fab:629
+#: skycultures/western/star_names.fab:683
 msgid "Acrab"
 msgstr "আকরাব"
 
 #: skycultures/romanian/star_names.fab:154
-#: skycultures/western/star_names.fab:397
+#: skycultures/western/star_names.fab:424
 msgid "Marsic"
 msgstr "মারসিক"
 
 #: skycultures/romanian/star_names.fab:155
-#: skycultures/western/star_names.fab:487
+#: skycultures/western/star_names.fab:527
 msgid "Yed Prior"
 msgstr "এড প্রায়র"
 
 #: skycultures/romanian/star_names.fab:156
-#: skycultures/western/star_names.fab:488
+#: skycultures/western/star_names.fab:529
 msgid "Yed Posterior"
 msgstr "পশ্চাত ইয়াদ"
 
 #: skycultures/romanian/star_names.fab:157
-#: skycultures/western/star_names.fab:636
-#: skycultures/western/star_names.fab:638
+#: skycultures/western/star_names.fab:692
+#: skycultures/western/star_names.fab:694
 msgid "Al Niyat"
 msgstr "আল নিয়াত"
 
 #: skycultures/romanian/star_names.fab:158
-#: skycultures/western/star_names.fab:401
+#: skycultures/western/star_names.fab:428
 msgid "Cujam"
 msgstr "কুজাম"
 
 #: skycultures/romanian/star_names.fab:159
-#: skycultures/western/star_names.fab:628
+#: skycultures/western/star_names.fab:679
 #: skycultures/western_rey/star_names.fab:42
 msgid "Antares"
 msgstr "আন্টেরিস (জ্যেষ্ঠা)"
 
 #: skycultures/romanian/star_names.fab:160
-#: skycultures/western/star_names.fab:395
+#: skycultures/western/star_names.fab:422
 msgid "Kornephoros"
 msgstr "করনেফোরোস"
 
 #: skycultures/romanian/star_names.fab:161
-#: skycultures/western/star_names.fab:398
-#: skycultures/western/star_names.fab:490
+#: skycultures/western/star_names.fab:425
+#: skycultures/western/star_names.fab:531
 msgid "Marfik"
 msgstr "মারফিক"
 
 #: skycultures/romanian/star_names.fab:162
-#: skycultures/western/star_names.fab:692
+#: skycultures/western/star_names.fab:751
 msgid "Atria"
 msgstr "আট্রিয়া"
 
 #: skycultures/romanian/star_names.fab:163
-#: skycultures/western/star_names.fab:314
+#: skycultures/western/star_names.fab:332
 msgid "Alrakis"
 msgstr "আলরাকিস"
 
 #: skycultures/romanian/star_names.fab:164
-#: skycultures/western/star_names.fab:489
+#: skycultures/western/star_names.fab:530
 msgid "Sabik"
 msgstr "সাবিক"
 
 #: skycultures/romanian/star_names.fab:165
-#: skycultures/western/star_names.fab:393
+#: skycultures/western/star_names.fab:420
 msgid "Rasalgethi"
 msgstr "রাস অ্যালিগ্যাথি"
 
 #: skycultures/romanian/star_names.fab:166
-#: skycultures/western/star_names.fab:303
+#: skycultures/western/star_names.fab:321
 msgid "Rastaban"
 msgstr "রাস্টাব্যান"
 
 #: skycultures/romanian/star_names.fab:167
-#: skycultures/western/star_names.fab:399
+#: skycultures/western/star_names.fab:426
 msgid "Maasym"
 msgstr "মাশিম"
 
 #: skycultures/romanian/star_names.fab:168
-#: skycultures/western/star_names.fab:639
+#: skycultures/western/star_names.fab:695
 msgid "Lesath"
 msgstr "লেসাথ"
 
 #: skycultures/romanian/star_names.fab:169
-#: skycultures/western/star_names.fab:741
+#: skycultures/western/star_names.fab:805
 msgid "Yildun"
 msgstr "ইলডান"
 
 #: skycultures/romanian/star_names.fab:170
-#: skycultures/western/star_names.fab:634
+#: skycultures/western/star_names.fab:689
 msgid "Shaula"
 msgstr "শ্যাউলা"
 
 #: skycultures/romanian/star_names.fab:171
-#: skycultures/western/star_names.fab:485
+#: skycultures/western/star_names.fab:525
 msgid "Rasalhague"
 msgstr "রাস অ্যালগি"
 
 #: skycultures/romanian/star_names.fab:172
-#: skycultures/western/star_names.fab:633
-#: skycultures/western/star_names.fab:643
+#: skycultures/western/star_names.fab:688
+#: skycultures/western/star_names.fab:699
 msgid "Girtab"
 msgstr "গিরটাব"
 
 #: skycultures/romanian/star_names.fab:173
-#: skycultures/western/star_names.fab:486
+#: skycultures/western/star_names.fab:526
 msgid "Cebalrai"
 msgstr "সেবালারি"
 
 #: skycultures/romanian/star_names.fab:174
-#: skycultures/western/star_names.fab:317
+#: skycultures/western/star_names.fab:335
 msgid "Grumium"
 msgstr "গ্রুমিয়াম"
 
 #: skycultures/romanian/star_names.fab:175
-#: skycultures/western/star_names.fab:306
+#: skycultures/western/star_names.fab:324
 msgid "Etamin"
 msgstr "এটামিন"
 
 #: skycultures/romanian/star_names.fab:176
-#: skycultures/western/star_names.fab:492
+#: skycultures/western/star_names.fab:533
 msgid "Barnard's Star"
 msgstr "বারনাডের নক্ষত্র"
 
 #: skycultures/romanian/star_names.fab:177
-#: skycultures/western/star_names.fab:599
+#: skycultures/western/star_names.fab:649
 msgid "Alnasl"
 msgstr "আলনাস্ল"
 
 #: skycultures/romanian/star_names.fab:178
-#: skycultures/western/star_names.fab:603
+#: skycultures/western/star_names.fab:653
 msgid "Kaus Media"
 msgstr "কাউস মিডিয়া"
 
 #: skycultures/romanian/star_names.fab:179
-#: skycultures/western/star_names.fab:605
+#: skycultures/western/star_names.fab:655
 msgid "Kaus Australis"
 msgstr "কাউস অস্ট্রালিস"
 
 #: skycultures/romanian/star_names.fab:180
-#: skycultures/western/star_names.fab:607
+#: skycultures/western/star_names.fab:657
 msgid "Kaus Borealis"
 msgstr "কাউস বোরিয়ালিস"
 
@@ -8539,58 +9021,58 @@ msgid "The Shepherd (The Stars Queen)"
 msgstr "মেষপালক (ডারাদের রানি)"
 
 #: skycultures/romanian/star_names.fab:182
-#: skycultures/western/star_names.fab:468
+#: skycultures/western/star_names.fab:508
 msgid "Sheliak"
 msgstr "শেলিয়াক"
 
 #: skycultures/romanian/star_names.fab:183
-#: skycultures/western/star_names.fab:609
+#: skycultures/western/star_names.fab:659
 msgid "Nunki"
 msgstr "নুনকি"
 
 #: skycultures/romanian/star_names.fab:184
-#: skycultures/western/star_names.fab:654
+#: skycultures/western/star_names.fab:711
 msgid "Alya"
 msgstr "আলিয়া"
 
 #: skycultures/romanian/star_names.fab:185
-#: skycultures/western/star_names.fab:469
+#: skycultures/western/star_names.fab:509
 msgid "Sulafat"
 msgstr "সুলাফাত"
 
 #: skycultures/romanian/star_names.fab:186
-#: skycultures/western/star_names.fab:606
+#: skycultures/western/star_names.fab:656
 msgid "Ascella"
 msgstr "অ্যাস্কেলা"
 
 #: skycultures/romanian/star_names.fab:187
-#: skycultures/western/star_names.fab:308
+#: skycultures/western/star_names.fab:326
 msgid "Altais"
 msgstr "অ্যালটেইস"
 
 #: skycultures/romanian/star_names.fab:188
-#: skycultures/western/star_names.fab:597
+#: skycultures/western/star_names.fab:647
 msgid "Arkab"
 msgstr "আরকাব"
 
 #: skycultures/romanian/star_names.fab:189
-#: skycultures/western/star_names.fab:594
+#: skycultures/western/star_names.fab:644
 msgid "Rukbat"
 msgstr "রূকবাট"
 
 #: skycultures/romanian/star_names.fab:190
-#: skycultures/western/star_names.fab:275
+#: skycultures/western/star_names.fab:292
 #: skycultures/western_rey/star_names.fab:19
 msgid "Albireo"
 msgstr "অ্যালবেরিও"
 
 #: skycultures/romanian/star_names.fab:191
-#: skycultures/western/star_names.fab:285
+#: skycultures/western/star_names.fab:302
 msgid "Campbell's Star"
 msgstr "ক্যাম্পবেলের নক্ষত্র"
 
 #: skycultures/romanian/star_names.fab:192
-#: skycultures/western/star_names.fab:592
+#: skycultures/western/star_names.fab:642
 msgid "Sham"
 msgstr "শাম"
 
@@ -8611,37 +9093,37 @@ msgid "Alshain"
 msgstr "আলশেইন"
 
 #: skycultures/romanian/star_names.fab:196
-#: skycultures/western/star_names.fab:144
+#: skycultures/western/star_names.fab:156
 msgid "Algedi"
 msgstr "অ্যালগেদি"
 
 #: skycultures/romanian/star_names.fab:197
-#: skycultures/western/star_names.fab:146
+#: skycultures/western/star_names.fab:158
 msgid "Dabih"
 msgstr "ডেবি"
 
 #: skycultures/romanian/star_names.fab:198
-#: skycultures/western/star_names.fab:276
+#: skycultures/western/star_names.fab:293
 msgid "Sadr"
 msgstr "সাদর"
 
 #: skycultures/romanian/star_names.fab:199
-#: skycultures/western/star_names.fab:524
+#: skycultures/western/star_names.fab:567
 msgid "Peacock"
 msgstr "ময়ূর"
 
 #: skycultures/romanian/star_names.fab:200
-#: skycultures/western/star_names.fab:294
+#: skycultures/western/star_names.fab:311
 msgid "Rotanev"
 msgstr "রোটানেভ"
 
 #: skycultures/romanian/star_names.fab:201
-#: skycultures/western/star_names.fab:292
+#: skycultures/western/star_names.fab:309
 msgid "Sualocin"
 msgstr "সুয়ালোসিন"
 
 #: skycultures/romanian/star_names.fab:202
-#: skycultures/western/star_names.fab:272
+#: skycultures/western/star_names.fab:288
 #: skycultures/western_rey/star_names.fab:20
 msgid "Deneb"
 msgstr "ডেনেব"
@@ -8652,17 +9134,17 @@ msgid "Albali"
 msgstr "অ্যালবালি"
 
 #: skycultures/romanian/star_names.fab:205
-#: skycultures/western/star_names.fab:342
+#: skycultures/western/star_names.fab:360
 msgid "Kitalpha"
 msgstr "কিটাফা"
 
 #: skycultures/romanian/star_names.fab:206
-#: skycultures/western/star_names.fab:188
+#: skycultures/western/star_names.fab:202
 msgid "Alderamin"
 msgstr "অ্যালডারমিন"
 
 #: skycultures/romanian/star_names.fab:207
-#: skycultures/western/star_names.fab:189
+#: skycultures/western/star_names.fab:203
 msgid "Alfirk"
 msgstr "অ্যালফিক"
 
@@ -8672,32 +9154,32 @@ msgid "Sadalsuud"
 msgstr "সাদালসুদ"
 
 #: skycultures/romanian/star_names.fab:209
-#: skycultures/western/star_names.fab:149
+#: skycultures/western/star_names.fab:161
 msgid "Nashira"
 msgstr "নাসিরা"
 
 #: skycultures/romanian/star_names.fab:210
-#: skycultures/western/star_names.fab:279
+#: skycultures/western/star_names.fab:296
 msgid "Azelfafage"
 msgstr "অ্যাজেলফাফেজ"
 
 #: skycultures/romanian/star_names.fab:211
-#: skycultures/western/star_names.fab:191
+#: skycultures/western/star_names.fab:205
 msgid "The Garnet Star"
 msgstr "তামড়ি নক্ষত্র"
 
 #: skycultures/romanian/star_names.fab:212
-#: skycultures/western/star_names.fab:530
+#: skycultures/western/star_names.fab:574
 msgid "Enif"
 msgstr "এনিফ"
 
 #: skycultures/romanian/star_names.fab:213
-#: skycultures/western/star_names.fab:150
+#: skycultures/western/star_names.fab:162
 msgid "Deneb Algedi"
 msgstr "ডেনেব অ্যালগেদি"
 
 #: skycultures/romanian/star_names.fab:214
-#: skycultures/western/star_names.fab:193
+#: skycultures/western/star_names.fab:207
 msgid "Kurhah"
 msgstr "কুরাহ"
 
@@ -8707,13 +9189,13 @@ msgid "Sadalmelik"
 msgstr "সাদালমেলিক"
 
 #: skycultures/romanian/star_names.fab:216
-#: skycultures/western/star_names.fab:183
-#: skycultures/western/star_names.fab:387
+#: skycultures/western/star_names.fab:197
+#: skycultures/western/star_names.fab:414
 msgid "Alnair"
 msgstr "অ্যালনেয়ার"
 
 #: skycultures/romanian/star_names.fab:217
-#: skycultures/western/star_names.fab:533
+#: skycultures/western/star_names.fab:579
 msgid "Biham"
 msgstr "বিহাম"
 
@@ -8728,7 +9210,7 @@ msgid "Sadachbia"
 msgstr "সাডাচবি"
 
 #: skycultures/romanian/star_names.fab:220
-#: skycultures/western/star_names.fab:198
+#: skycultures/western/star_names.fab:212
 msgid "Kruger 60"
 msgstr "ক্রুগার ৬০"
 
@@ -8742,17 +9224,17 @@ msgid "Homan"
 msgstr "হোম্যান"
 
 #: skycultures/romanian/star_names.fab:223
-#: skycultures/western/star_names.fab:532
+#: skycultures/western/star_names.fab:578
 msgid "Matar"
 msgstr "মাতার"
 
 #: skycultures/romanian/star_names.fab:224
-#: skycultures/western/star_names.fab:421
+#: skycultures/western/star_names.fab:452
 msgid "Babcock's Star"
 msgstr "ব্যাবক -এর তারা"
 
 #: skycultures/romanian/star_names.fab:225
-#: skycultures/western/star_names.fab:534
+#: skycultures/western/star_names.fab:580
 msgid "Sadalbari"
 msgstr "সাদালব্যারি"
 
@@ -8762,23 +9244,23 @@ msgid "Skat"
 msgstr "স্কাট"
 
 #: skycultures/romanian/star_names.fab:227
-#: skycultures/western/star_names.fab:583
+#: skycultures/western/star_names.fab:630
 #: skycultures/western_rey/star_names.fab:46
 msgid "Fomalhaut"
 msgstr "ফম্যালহট"
 
 #: skycultures/romanian/star_names.fab:228
-#: skycultures/western/star_names.fab:528
+#: skycultures/western/star_names.fab:571
 msgid "Scheat"
 msgstr "স্চিট"
 
 #: skycultures/romanian/star_names.fab:229
-#: skycultures/western/star_names.fab:526
+#: skycultures/western/star_names.fab:569
 msgid "Markab"
 msgstr "মারকাব"
 
 #: skycultures/romanian/star_names.fab:230
-#: skycultures/western/star_names.fab:190
+#: skycultures/western/star_names.fab:204
 msgid "Errai"
 msgstr "ইরি"
 
@@ -8905,47 +9387,47 @@ msgstr "নিশিতার (শুক্র)"
 
 #: skycultures/tongan/constellation_names.eng.fab:1
 msgid "Southern Wild Duck"
-msgstr ""
+msgstr "দক্ষিনের বুনো হাঁস"
 
 #: skycultures/tongan/constellation_names.eng.fab:2
 msgid "Two Men"
-msgstr ""
+msgstr "দুই পুরুষ"
 
 #: skycultures/tongan/constellation_names.eng.fab:3
 msgid "Wild Duck"
-msgstr ""
+msgstr "বুনো হাঁস"
 
 #: skycultures/tongan/constellation_names.eng.fab:4
 msgid "Pigeon Perch"
-msgstr ""
+msgstr "পায়রার দাঁড়"
 
 #: skycultures/tongan/constellation_names.eng.fab:5
 msgid "Big Wild Duck"
-msgstr ""
+msgstr "বড়ো বুনো হাঁস"
 
 #: skycultures/tongan/constellation_names.eng.fab:6
 msgid "Mound Top"
-msgstr ""
+msgstr "ঢিপির চুড়া"
 
 #: skycultures/tongan/constellation_names.eng.fab:7
 msgid "String of fishes"
-msgstr ""
+msgstr "মাছের মালা"
 
 #: skycultures/tongan/constellation_names.eng.fab:8
 msgid "Wild Duck's Point of Land"
-msgstr ""
+msgstr "বুনো হাঁসের স্থল নির্দেশক দিক"
 
 #: skycultures/tongan/constellation_names.eng.fab:9
 msgid "Two Carriers"
-msgstr ""
+msgstr "দুই বাহক"
 
 #: skycultures/tongan/constellation_names.eng.fab:10
 msgid "Cloud of 'Uvea"
-msgstr ""
+msgstr "উভ্ভেয়া এর মেঘ"
 
 #: skycultures/tongan/constellation_names.eng.fab:11
 msgid "Wing of Tafahi"
-msgstr ""
+msgstr "তাফাহি এর ডানা"
 
 #: skycultures/tongan/star_names.fab:1
 msgid "Ma'afutoka"
@@ -9262,6 +9744,7 @@ msgid "Grus"
 msgstr "সারস"
 
 #: skycultures/western/constellation_names.eng.fab:41
+#: skycultures/western/star_names.fab:396
 #: skycultures/western_rey/constellation_names.eng.fab:43
 msgid "Hercules"
 msgstr "বীর হারকিউলিস"
@@ -9498,6 +9981,176 @@ msgstr "কুমারী (কন্যা)"
 msgid "Vela"
 msgstr "বজরার পাল"
 
+#: skycultures/western/asterism_names.eng.fab:2
+msgctxt "asterism"
+msgid "Great Diamond"
+msgstr "বৃহৎ বরফি"
+
+#: skycultures/western/asterism_names.eng.fab:3
+msgctxt "asterism"
+msgid "Spring Triangle"
+msgstr "বসন্তের ত্রিভূজ"
+
+#: skycultures/western/asterism_names.eng.fab:4
+msgctxt "asterism"
+msgid "Summer Triangle"
+msgstr "গ্রীষ্মের ত্রিভূজ"
+
+#: skycultures/western/asterism_names.eng.fab:5
+msgctxt "asterism"
+msgid "Great Square of Pegasus"
+msgstr "পক্ষীরাজ মন্ডলের বৃহৎ বর্গক্ষেত্র"
+
+#: skycultures/western/asterism_names.eng.fab:6
+msgctxt "asterism"
+msgid "Winter Triangle"
+msgstr "শীতের ত্রিভূজ"
+
+#: skycultures/western/asterism_names.eng.fab:7
+msgctxt "asterism"
+msgid "Winter Hexagon (Winter Circle)"
+msgstr "শীতের ষড়ভূজ (বৃত্ত)"
+
+#: skycultures/western/asterism_names.eng.fab:9
+msgctxt "asterism"
+msgid "Northern Cross"
+msgstr "উত্তরের ক্রুশ"
+
+#: skycultures/western/asterism_names.eng.fab:10
+msgctxt "asterism"
+msgid "W"
+msgstr "W"
+
+#: skycultures/western/asterism_names.eng.fab:11
+msgctxt "asterism"
+msgid "Keystone"
+msgstr "মধ্যমনি"
+
+#: skycultures/western/asterism_names.eng.fab:12
+msgctxt "asterism"
+msgid "Butterfly"
+msgstr "প্রজাপতি"
+
+#: skycultures/western/asterism_names.eng.fab:13
+msgctxt "asterism"
+msgid "Kite"
+msgstr "ঘুড়ি"
+
+#: skycultures/western/asterism_names.eng.fab:14
+msgctxt "asterism"
+msgid "Sail"
+msgstr "পাল"
+
+#: skycultures/western/asterism_names.eng.fab:15
+msgctxt "asterism"
+msgid "Seven Stars Row"
+msgstr "সাত তারা দাঁড়"
+
+#: skycultures/western/asterism_names.eng.fab:16
+msgctxt "asterism"
+msgid "Arc to Arcturus - Spike to Spica"
+msgstr "স্বাতী ও চিত্রা তারা নির্দেশক বৃত্তচাপ"
+
+#: skycultures/western/asterism_names.eng.fab:18
+msgctxt "asterism"
+msgid "Big Dipper (Plough)"
+msgstr "বিশাল হাতা (লাঙল)"
+
+#: skycultures/western/asterism_names.eng.fab:19
+msgctxt "asterism"
+msgid "Little Dipper"
+msgstr "ছোটো হাতা"
+
+#: skycultures/western/asterism_names.eng.fab:20
+msgctxt "asterism"
+msgid "The Pointers"
+msgstr "কম্পাসের কাঁটা"
+
+#: skycultures/western/asterism_names.eng.fab:21
+msgctxt "asterism"
+msgid "Dragon Head"
+msgstr "ড্রাগনের মাথা"
+
+#: skycultures/western/asterism_names.eng.fab:22
+msgctxt "asterism"
+msgid "Head of Medusa Gorgon"
+msgstr "সর্পচুল রাক্ষসীর মাথা"
+
+#: skycultures/western/asterism_names.eng.fab:23
+msgctxt "asterism"
+msgid "Goatlings"
+msgstr "ছাগলছানা"
+
+#: skycultures/western/asterism_names.eng.fab:24
+msgctxt "asterism"
+msgid "The Y in Aquarius (The Urn)"
+msgstr "কুম্ভ মন্ডলের Y (ঘড়া)"
+
+#: skycultures/western/asterism_names.eng.fab:25
+msgctxt "asterism"
+msgid "Orion's Belt"
+msgstr "কালপুরুষের বেল্ট"
+
+#: skycultures/western/asterism_names.eng.fab:26
+msgctxt "asterism"
+msgid "Orion's Sword"
+msgstr "কালপুরুষের তলোয়ার"
+
+#: skycultures/western/asterism_names.eng.fab:27
+msgctxt "asterism"
+msgid "Orion's Shield"
+msgstr "কালপুরুষের ঢাল"
+
+#: skycultures/western/asterism_names.eng.fab:28
+msgctxt "asterism"
+msgid "Orion's Cudgel"
+msgstr "কালপুরুষের অসি"
+
+#: skycultures/western/asterism_names.eng.fab:29
+msgctxt "asterism"
+msgid "Head of Whale"
+msgstr "তিমির মাথা"
+
+#: skycultures/western/asterism_names.eng.fab:30
+msgctxt "asterism"
+msgid "Head of Serpent"
+msgstr "সাপের মাথা"
+
+#: skycultures/western/asterism_names.eng.fab:31
+msgctxt "asterism"
+msgid "Head of Hydra"
+msgstr "সর্পদৈত্যের মাথা"
+
+#: skycultures/western/asterism_names.eng.fab:32
+msgctxt "asterism"
+msgid "Teapot"
+msgstr "চায়ের কেটলী"
+
+#: skycultures/western/asterism_names.eng.fab:33
+msgctxt "asterism"
+msgid "Terebellum"
+msgstr "তুরপুন"
+
+#: skycultures/western/asterism_names.eng.fab:34
+msgctxt "asterism"
+msgid "Egyptian Cross"
+msgstr "মিশরীয় ক্রুশ"
+
+#: skycultures/western/asterism_names.eng.fab:35
+msgctxt "asterism"
+msgid "False Cross"
+msgstr "নকল ক্রুশ"
+
+#: skycultures/western/asterism_names.eng.fab:36
+msgctxt "asterism"
+msgid "Sickle"
+msgstr "কাস্তে"
+
+#: skycultures/western/asterism_names.eng.fab:37
+msgctxt "asterism"
+msgid "Diamond Cross"
+msgstr "চতুষ্কোণ ক্রুশ"
+
 #: skycultures/western/star_names.fab:4
 msgid "Sirrah"
 msgstr "সিরাহ্"
@@ -9634,1704 +10287,1959 @@ msgstr "আল বাতিন I"
 msgid "Al Butain II"
 msgstr "আল বাতিন II"
 
-#: skycultures/western/star_names.fab:68
+#: skycultures/western/star_names.fab:67
+msgid "Alhajoth"
+msgstr ""
+
+#: skycultures/western/star_names.fab:69
 msgid "Hassaleh"
 msgstr "হ্যাসাল্যা"
 
-#: skycultures/western/star_names.fab:69
+#: skycultures/western/star_names.fab:70
 msgid "Kabalinan"
 msgstr "কাবালিনান"
 
-#: skycultures/western/star_names.fab:70
+#: skycultures/western/star_names.fab:71
 msgid "Haedus"
 msgstr "হায়েডুস"
 
-#: skycultures/western/star_names.fab:71
+#: skycultures/western/star_names.fab:72
 msgid "Haedus I"
 msgstr "হাইডেস I"
 
-#: skycultures/western/star_names.fab:72
+#: skycultures/western/star_names.fab:73
 msgid "Almaaz"
 msgstr "আলমাজ"
 
-#: skycultures/western/star_names.fab:73
+#: skycultures/western/star_names.fab:74
 msgid "Al Ma'az"
 msgstr "আল মা আজ"
 
-#: skycultures/western/star_names.fab:74
+#: skycultures/western/star_names.fab:75
 msgid "Alanz"
 msgstr "আলানাজ"
 
-#: skycultures/western/star_names.fab:75
+#: skycultures/western/star_names.fab:76
 msgid "Haedus II"
 msgstr "হাইডেস II"
 
-#: skycultures/western/star_names.fab:76
+#: skycultures/western/star_names.fab:77
 msgid "Mahasim"
 msgstr "মাহ্জম"
 
-#: skycultures/western/star_names.fab:77
+#: skycultures/western/star_names.fab:78
 msgid "Alhiba II"
 msgstr "আলহিবা II"
 
-#: skycultures/western/star_names.fab:78
+#: skycultures/western/star_names.fab:79
 msgid "Alhiba I"
 msgstr "আলহিবা I"
 
-#: skycultures/western/star_names.fab:79
+#: skycultures/western/star_names.fab:80
 msgid "Alhiba III"
 msgstr "আলহিবা III"
 
-#: skycultures/western/star_names.fab:80
+#: skycultures/western/star_names.fab:81
 msgid "Dolones I"
 msgstr "ডোলোন্স I"
 
-#: skycultures/western/star_names.fab:81
+#: skycultures/western/star_names.fab:82
 msgid "Dolones III"
 msgstr "ডোলোন্স III"
 
-#: skycultures/western/star_names.fab:82
+#: skycultures/western/star_names.fab:83
 msgid "Dolones II"
 msgstr "ডোলোন্স II"
 
-#: skycultures/western/star_names.fab:83
+#: skycultures/western/star_names.fab:84
 msgid "Dolones IV"
 msgstr "ডোলোন্স IV"
 
-#: skycultures/western/star_names.fab:84
+#: skycultures/western/star_names.fab:85
 msgid "Dolones V"
 msgstr "ডোলোন্স V"
 
-#: skycultures/western/star_names.fab:85
+#: skycultures/western/star_names.fab:86
 msgid "Dolones VI"
 msgstr "ডোলোন্স VI"
 
-#: skycultures/western/star_names.fab:86
+#: skycultures/western/star_names.fab:87
 msgid "Dolones VII"
 msgstr "ডোলোন্স VII"
 
-#: skycultures/western/star_names.fab:87
+#: skycultures/western/star_names.fab:88
 msgid "Dolones VIII"
 msgstr "ডোলোন্স VIII"
 
-#: skycultures/western/star_names.fab:88
+#: skycultures/western/star_names.fab:89
 msgid "Dolones IX"
 msgstr "ডোলোন্স IX"
 
-#: skycultures/western/star_names.fab:93
+#: skycultures/western/star_names.fab:94
 msgid "Haris"
 msgstr "হ্যারিস"
 
-#: skycultures/western/star_names.fab:94 skycultures/western/star_names.fab:105
+#: skycultures/western/star_names.fab:95 skycultures/western/star_names.fab:109
 msgid "Ceginus"
 msgstr "সেজাইনাস"
 
-#: skycultures/western/star_names.fab:96
+#: skycultures/western/star_names.fab:97
 msgid "Pulcherrima"
 msgstr "পুলচেরিমা"
 
 #: skycultures/western/star_names.fab:100
+msgid "Inkalunis"
+msgstr "ইনকালুনিস"
+
+#: skycultures/western/star_names.fab:101
+msgid "Clava"
+msgstr ""
+
+#: skycultures/western/star_names.fab:102
+msgid "Venabulum"
+msgstr ""
+
+#: skycultures/western/star_names.fab:104
 msgid "Asellus Primus"
 msgstr "অ্যাসেলাস প্রাইমাস"
 
-#: skycultures/western/star_names.fab:101
+#: skycultures/western/star_names.fab:105
 msgid "Asellus Secundus"
 msgstr "অ্যাসেলাস সেকানডাস"
 
-#: skycultures/western/star_names.fab:102
+#: skycultures/western/star_names.fab:106
 msgid "Asellus Tertius"
 msgstr "অ্যাসেলাস টার্টিয়াস"
 
-#: skycultures/western/star_names.fab:103
+#: skycultures/western/star_names.fab:107
 msgid "Thiba"
 msgstr "থিবা"
 
-#: skycultures/western/star_names.fab:104
+#: skycultures/western/star_names.fab:108
 msgid "Aulad Althiba"
 msgstr "আলাউদ আলথিবা"
 
-#: skycultures/western/star_names.fab:106
+#: skycultures/western/star_names.fab:110
 msgid "Aulad Alnathlat"
 msgstr "আলাউদ আলনাথলাত"
 
-#: skycultures/western/star_names.fab:111
+#: skycultures/western/star_names.fab:115
 msgid "Sertan"
 msgstr "শেরতান"
 
-#: skycultures/western/star_names.fab:115
+#: skycultures/western/star_names.fab:119
 msgid "Al Tarf"
 msgstr "আল তার্ফ"
 
-#: skycultures/western/star_names.fab:116
+#: skycultures/western/star_names.fab:120
 msgid "Altarf"
 msgstr "আলতার্ফ"
 
-#: skycultures/western/star_names.fab:118
+#: skycultures/western/star_names.fab:122
 msgid "Almalaf"
 msgstr "আলমালাফ"
 
-#: skycultures/western/star_names.fab:119
+#: skycultures/western/star_names.fab:123
 msgid "Zubanah"
 msgstr "জ্যুবানাহ্"
 
-#: skycultures/western/star_names.fab:120
+#: skycultures/western/star_names.fab:124
 msgid "Piautos"
 msgstr "পিয়াউটোস"
 
-#: skycultures/western/star_names.fab:121
+#: skycultures/western/star_names.fab:125
 msgid "Nahn"
 msgstr "নান"
 
-#: skycultures/western/star_names.fab:125
+#: skycultures/western/star_names.fab:129
 msgid "La Superba"
 msgstr "লা সুপারবা"
 
-#: skycultures/western/star_names.fab:130
+#: skycultures/western/star_names.fab:132
+msgid "Canicula"
+msgstr ""
+
+#: skycultures/western/star_names.fab:133
+msgid "Aschere"
+msgstr ""
+
+#: skycultures/western/star_names.fab:136
 msgid "Mirza"
 msgstr "মির্জা"
 
-#: skycultures/western/star_names.fab:135
+#: skycultures/western/star_names.fab:137
+#: skycultures/western/star_names.fab:143
 msgid "Isis"
 msgstr "আইসিস"
 
-#: skycultures/western/star_names.fab:136
+#: skycultures/western/star_names.fab:139
+msgid "Alwazn"
+msgstr ""
+
+#: skycultures/western/star_names.fab:144
 msgid "Udra"
 msgstr "উদ্র"
 
-#: skycultures/western/star_names.fab:137
+#: skycultures/western/star_names.fab:145
 msgid "Al Zara"
 msgstr "আল জারা"
 
-#: skycultures/western/star_names.fab:143
+#: skycultures/western/star_names.fab:148
+msgid "Elgomaisa"
+msgstr ""
+
+#: skycultures/western/star_names.fab:149
+msgid "Antecanis"
+msgstr ""
+
+#: skycultures/western/star_names.fab:151
+msgid "Algomeyla"
+msgstr ""
+
+#: skycultures/western/star_names.fab:152
+msgid "Gomelza"
+msgstr ""
+
+#: skycultures/western/star_names.fab:155
 msgid "Prima Giedi"
 msgstr "প্রিমা গিইডি"
 
-#: skycultures/western/star_names.fab:145
+#: skycultures/western/star_names.fab:157
 msgid "Secunda Giedi"
 msgstr "সেকুন্ডা গিইডি"
 
-#: skycultures/western/star_names.fab:147
+#: skycultures/western/star_names.fab:159
 msgid "Dabih Major"
 msgstr "মুখ্য দাবিহ্"
 
-#: skycultures/western/star_names.fab:148
+#: skycultures/western/star_names.fab:160
 msgid "Dabih Minor"
 msgstr "গৌন দাবিহ্"
 
-#: skycultures/western/star_names.fab:151
+#: skycultures/western/star_names.fab:163
 msgid "Al Shat"
 msgstr "আল শাত"
 
-#: skycultures/western/star_names.fab:152
+#: skycultures/western/star_names.fab:164
 msgid "Alshat"
 msgstr "আলশাত"
 
-#: skycultures/western/star_names.fab:155
+#: skycultures/western/star_names.fab:167
 msgid "Suhel"
 msgstr "সুহেল"
 
-#: skycultures/western/star_names.fab:159
+#: skycultures/western/star_names.fab:171
+msgid "Turais"
+msgstr ""
+
+#: skycultures/western/star_names.fab:172
+msgid "Scutulum"
+msgstr ""
+
+#: skycultures/western/star_names.fab:173
 msgid "Innes' Star"
 msgstr "ইনেসের তারা"
 
-#: skycultures/western/star_names.fab:161
+#: skycultures/western/star_names.fab:175
 msgid "Shedar"
 msgstr "শেডার"
 
-#: skycultures/western/star_names.fab:165
+#: skycultures/western/star_names.fab:179
 msgid "Ksora"
 msgstr "সোরা"
 
-#: skycultures/western/star_names.fab:166
+#: skycultures/western/star_names.fab:180
 msgid "Achird"
 msgstr "আখয়ার্ড"
 
-#: skycultures/western/star_names.fab:167
+#: skycultures/western/star_names.fab:181
 msgid "Segin"
 msgstr "সেগিন"
 
-#: skycultures/western/star_names.fab:168
-#: skycultures/western/star_names.fab:170
+#: skycultures/western/star_names.fab:182
+#: skycultures/western/star_names.fab:184
 msgid "Marfak"
 msgstr "মারফাক"
 
-#: skycultures/western/star_names.fab:169
+#: skycultures/western/star_names.fab:183
 msgid "Marfak-East"
 msgstr "পূর্ব মারফাক"
 
-#: skycultures/western/star_names.fab:171
+#: skycultures/western/star_names.fab:185
 msgid "Marfak-West"
 msgstr "পশ্চিম মারফাক"
 
-#: skycultures/western/star_names.fab:172
+#: skycultures/western/star_names.fab:186
 msgid "Al Marfak"
 msgstr "আল মারফাক"
 
-#: skycultures/western/star_names.fab:173
+#: skycultures/western/star_names.fab:187
 msgid "Navi"
 msgstr "নাভি"
 
-#: skycultures/western/star_names.fab:175
+#: skycultures/western/star_names.fab:189
 msgid "Rigil Kentaurus"
 msgstr "রিজিল কেন্টুরাস"
 
-#: skycultures/western/star_names.fab:176
+#: skycultures/western/star_names.fab:190
 msgid "Toliman"
 msgstr "টলিমান"
 
-#: skycultures/western/star_names.fab:177
+#: skycultures/western/star_names.fab:191
 msgid "Bungula"
 msgstr "বুঙ্গলা"
 
-#: skycultures/western/star_names.fab:179
+#: skycultures/western/star_names.fab:193
 msgid "Proxima Centauri"
 msgstr "প্রক্সিমা সেন্টুরি"
 
-#: skycultures/western/star_names.fab:181
+#: skycultures/western/star_names.fab:195
 msgid "Agena"
 msgstr "অ্যাজিনা"
 
-#: skycultures/western/star_names.fab:182
+#: skycultures/western/star_names.fab:196
 msgid "Muhlifain"
 msgstr "মুলিফেন"
 
-#: skycultures/western/star_names.fab:184
+#: skycultures/western/star_names.fab:198
 msgid "Baten Kentaurus"
 msgstr "বাতেন কেন্টুরাস"
 
-#: skycultures/western/star_names.fab:186
+#: skycultures/western/star_names.fab:200
 msgid "Przybylski's Star"
 msgstr "শেবিলস্কির তারা"
 
-#: skycultures/western/star_names.fab:192
+#: skycultures/western/star_names.fab:206
 msgid "Erakis"
 msgstr "এরাকিস"
 
-#: skycultures/western/star_names.fab:194
+#: skycultures/western/star_names.fab:208
 msgid "Al Kurhah"
 msgstr "আল কুরাহ"
 
-#: skycultures/western/star_names.fab:195
+#: skycultures/western/star_names.fab:209
 msgid "Al Kalb al Rai"
 msgstr "আল কাল্ব আল রাই"
 
-#: skycultures/western/star_names.fab:196
+#: skycultures/western/star_names.fab:210
 msgid "Kalbalrai"
 msgstr "কেবেলরাই"
 
-#: skycultures/western/star_names.fab:197
+#: skycultures/western/star_names.fab:211
 msgid "Castula"
 msgstr "কাস্টুলা"
 
-#: skycultures/western/star_names.fab:199
+#: skycultures/western/star_names.fab:213
 msgid "Kabalfird"
 msgstr "কাবালফির্দ"
 
-#: skycultures/western/star_names.fab:200
+#: skycultures/western/star_names.fab:214
 msgid "Al Kidr"
 msgstr "আল কিদর"
 
-#: skycultures/western/star_names.fab:201
+#: skycultures/western/star_names.fab:215
 msgid "Al Aghnam I"
 msgstr "আল এঘনাম I"
 
-#: skycultures/western/star_names.fab:202
+#: skycultures/western/star_names.fab:216
 msgid "Al Aghnam II"
 msgstr "আল এঘনাম II"
 
-#: skycultures/western/star_names.fab:206
-#: skycultures/western/star_names.fab:216
+#: skycultures/western/star_names.fab:220
+#: skycultures/western/star_names.fab:230
 msgid "Deneb Kaitos"
 msgstr "ডেনেব কাইতোস"
 
-#: skycultures/western/star_names.fab:209
+#: skycultures/western/star_names.fab:223
 msgid "Kaffaljidhma"
 msgstr "ক্যাফালজিধমা"
 
-#: skycultures/western/star_names.fab:210
+#: skycultures/western/star_names.fab:224
 msgid "Al Kaff al Jidhmah"
 msgstr "আল কাফ আল জিদমাহ্"
 
-#: skycultures/western/star_names.fab:211
+#: skycultures/western/star_names.fab:225
 msgid "Kafalgidma"
 msgstr "কাফালগিদমা"
 
-#: skycultures/western/star_names.fab:212
+#: skycultures/western/star_names.fab:226
 msgid "Dheneb"
 msgstr "ধেনেব"
 
-#: skycultures/western/star_names.fab:213
+#: skycultures/western/star_names.fab:227
 msgid "Deneb Algenubi"
 msgstr "ডেনেব আলজেনুবি"
 
-#: skycultures/western/star_names.fab:214
+#: skycultures/western/star_names.fab:228
 msgid "Deneb Kaitos Shemali"
 msgstr "ডেনেব আখিতোস শেমালি"
 
-#: skycultures/western/star_names.fab:215
+#: skycultures/western/star_names.fab:229
 msgid "Schemali"
 msgstr "চেমালি"
 
-#: skycultures/western/star_names.fab:218
+#: skycultures/western/star_names.fab:232
 msgid "Menkab"
 msgstr "মেনকাব"
 
-#: skycultures/western/star_names.fab:219
+#: skycultures/western/star_names.fab:233
 msgid "Al Kaff al Jidhmah III"
 msgstr "আল কাফ আল জিদমাহ্ III"
 
-#: skycultures/western/star_names.fab:220
+#: skycultures/western/star_names.fab:234
 msgid "Sadr al Kaitos III"
 msgstr "সদর আল কাইতোস III"
 
-#: skycultures/western/star_names.fab:221
+#: skycultures/western/star_names.fab:235
 msgid "Al Naymat I"
 msgstr "আল নিমত I"
 
-#: skycultures/western/star_names.fab:222
+#: skycultures/western/star_names.fab:236
 msgid "Al Kaff al Jidhmah IV"
 msgstr "আল কাফ আল জিদমাহ্ IV"
 
-#: skycultures/western/star_names.fab:223
+#: skycultures/western/star_names.fab:237
 msgid "Al Kaff al Jidhmah I"
 msgstr "আল কাফ আল জিদমাহ্ I"
 
-#: skycultures/western/star_names.fab:224
+#: skycultures/western/star_names.fab:238
 msgid "Al Kaff al Jidhmah II"
 msgstr "আল কাফ আল জিদমাহ্ II"
 
-#: skycultures/western/star_names.fab:225
+#: skycultures/western/star_names.fab:239
 msgid "Sadr al Kaitos IV"
 msgstr "সদর আল কাইতোস IV"
 
-#: skycultures/western/star_names.fab:226
+#: skycultures/western/star_names.fab:240
 msgid "Sadr al Kaitos I"
 msgstr "সদর আল কাইতোস I"
 
-#: skycultures/western/star_names.fab:227
+#: skycultures/western/star_names.fab:241
 msgid "Sadr al Kaitos II"
 msgstr "সদর আল কাইতোস II"
 
-#: skycultures/western/star_names.fab:228
+#: skycultures/western/star_names.fab:242
 msgid "Al Naymat II"
 msgstr "আল নিমত II"
 
-#: skycultures/western/star_names.fab:229
+#: skycultures/western/star_names.fab:243
 msgid "Al Naymat III"
 msgstr "আল নিমত III"
 
-#: skycultures/western/star_names.fab:230
+#: skycultures/western/star_names.fab:244
 msgid "Alnitham I"
 msgstr "আলনিথাম I"
 
-#: skycultures/western/star_names.fab:231
+#: skycultures/western/star_names.fab:245
 msgid "Alnitham II"
 msgstr "আলনিথাম II"
 
-#: skycultures/western/star_names.fab:232
+#: skycultures/western/star_names.fab:246
 msgid "Alnitham III"
 msgstr "আলনিথাম III"
 
-#: skycultures/western/star_names.fab:233
+#: skycultures/western/star_names.fab:247
 msgid "Alnitham IV"
 msgstr "আলনিথাম IV"
 
-#: skycultures/western/star_names.fab:237
+#: skycultures/western/star_names.fab:251
 msgid "Kurud I"
 msgstr "কুরুদ I"
 
-#: skycultures/western/star_names.fab:238
+#: skycultures/western/star_names.fab:252
 msgid "Kurud II"
 msgstr "কুরুদ II"
 
-#: skycultures/western/star_names.fab:240
+#: skycultures/western/star_names.fab:254
 msgid "Polaris Galacticum Borealis"
 msgstr "পোলারিস গ্যালাক্টিকাম বোরিয়ালিস"
 
-#: skycultures/western/star_names.fab:241
+#: skycultures/western/star_names.fab:255
 msgid "Diadem"
 msgstr "দিয়াদিমা"
 
-#: skycultures/western/star_names.fab:242
+#: skycultures/western/star_names.fab:256
 msgid "Kissin"
 msgstr "কিসিন"
 
-#: skycultures/western/star_names.fab:243
+#: skycultures/western/star_names.fab:257
 msgid "Al Dafirah"
 msgstr "আল ডাফিরা"
 
-#: skycultures/western/star_names.fab:245
+#: skycultures/western/star_names.fab:259
 msgid "Alfecca Meridiana"
 msgstr "আলফেক্কা মেরিডিয়ানা"
 
-#: skycultures/western/star_names.fab:247
+#: skycultures/western/star_names.fab:261
 msgid "Alphecca"
 msgstr "কোহিনূর"
 
-#: skycultures/western/star_names.fab:248
+#: skycultures/western/star_names.fab:262
 #: skycultures/western_rey/star_names.fab:17
 msgid "Gemma"
 msgstr "রত্ন"
 
-#: skycultures/western/star_names.fab:250
+#: skycultures/western/star_names.fab:264
 msgid "Gnosia"
 msgstr "গ্নসিয়া"
 
-#: skycultures/western/star_names.fab:252
+#: skycultures/western/star_names.fab:265
+msgid "Ashtaroth"
+msgstr ""
+
+#: skycultures/western/star_names.fab:267
 msgid "Variabilis Coronae"
 msgstr "ভারিয়াবিলিস করোনায়"
 
-#: skycultures/western/star_names.fab:253
+#: skycultures/western/star_names.fab:268
 msgid "Blaze Star"
 msgstr "ব্লেল তারা"
 
-#: skycultures/western/star_names.fab:256
+#: skycultures/western/star_names.fab:271
 msgid "Al Chiba"
 msgstr "আল চিবা"
 
-#: skycultures/western/star_names.fab:258
+#: skycultures/western/star_names.fab:273
 msgid "Gienah Corvi"
 msgstr "জিনাহ্ করভি"
 
-#: skycultures/western/star_names.fab:259
+#: skycultures/western/star_names.fab:274
 msgid "Gienah Ghurab"
 msgstr "জিনাহ্ ঘুরাব"
 
-#: skycultures/western/star_names.fab:261
+#: skycultures/western/star_names.fab:276
 msgid "Kraz"
 msgstr "ক্রাশ"
 
-#: skycultures/western/star_names.fab:262
+#: skycultures/western/star_names.fab:277
 msgid "Minkar"
 msgstr "মিনকার"
 
-#: skycultures/western/star_names.fab:265
+#: skycultures/western/star_names.fab:280
 msgid "Al Sharasif"
 msgstr "আল সারাসিফ"
 
-#: skycultures/western/star_names.fab:266
+#: skycultures/western/star_names.fab:281
 msgid "Al Sharasif II"
 msgstr "আল সারাসিফ II"
 
-#: skycultures/western/star_names.fab:273
+#: skycultures/western/star_names.fab:285
+msgid "Becrux"
+msgstr ""
+
+#: skycultures/western/star_names.fab:289
 msgid "Arided"
 msgstr "অ্যারিডেড"
 
-#: skycultures/western/star_names.fab:274
+#: skycultures/western/star_names.fab:290
 msgid "Aridif"
 msgstr "অ্যারিডিফ"
 
-#: skycultures/western/star_names.fab:277
+#: skycultures/western/star_names.fab:291
+msgid "Arrioph"
+msgstr ""
+
+#: skycultures/western/star_names.fab:294
 msgid "Gienah Cygni"
 msgstr "জিনাহ্ সিগনি"
 
-#: skycultures/western/star_names.fab:278
+#: skycultures/western/star_names.fab:295
 msgid "Al Janah"
 msgstr "আল জানাহ্"
 
-#: skycultures/western/star_names.fab:280
+#: skycultures/western/star_names.fab:297
 msgid "Azelfage"
 msgstr "অ্যাজেলফাজে"
 
-#: skycultures/western/star_names.fab:281
+#: skycultures/western/star_names.fab:298
 msgid "Ruchba"
 msgstr "রুকবাহ্"
 
-#: skycultures/western/star_names.fab:282
+#: skycultures/western/star_names.fab:299
 msgid "Rucba"
 msgstr "রুকবা"
 
-#: skycultures/western/star_names.fab:283
+#: skycultures/western/star_names.fab:300
 msgid "Bessel's Star"
 msgstr "বেসেলের তারা"
 
-#: skycultures/western/star_names.fab:284
+#: skycultures/western/star_names.fab:301
 msgid "Piazzi's Flying Star"
 msgstr "পিয়াজ্জির উড়ন্ত তারা"
 
-#: skycultures/western/star_names.fab:286
+#: skycultures/western/star_names.fab:303
 msgid "Campbell’s Hydrogen Star"
 msgstr "ক্যাম্পবেলের হাইড্রোজেন তারা"
 
-#: skycultures/western/star_names.fab:287
+#: skycultures/western/star_names.fab:304
 msgid "Revenant of the Swan"
 msgstr "হাঁসের দলের প্রত্যাবর্তন"
 
-#: skycultures/western/star_names.fab:288
+#: skycultures/western/star_names.fab:305
 msgid "Fawaris II"
 msgstr "ফাওয়ারিস II"
 
-#: skycultures/western/star_names.fab:289
+#: skycultures/western/star_names.fab:306
 msgid "Fawaris III"
 msgstr "ফাওয়ারিস III"
 
-#: skycultures/western/star_names.fab:290
+#: skycultures/western/star_names.fab:307
 msgid "Fawaris I"
 msgstr "ফাওয়ারিস I"
 
-#: skycultures/western/star_names.fab:293
+#: skycultures/western/star_names.fab:310
 msgid "Svalocin"
 msgstr "সোয়ালোসিন"
 
-#: skycultures/western/star_names.fab:296
+#: skycultures/western/star_names.fab:312
+msgid "Venator"
+msgstr ""
+
+#: skycultures/western/star_names.fab:314
 msgid "Deneb Dulfim"
 msgstr "ডেনেব দলিফিন"
 
-#: skycultures/western/star_names.fab:297
+#: skycultures/western/star_names.fab:315
 msgid "Al Salib"
 msgstr "আল সালিব"
 
-#: skycultures/western/star_names.fab:298
+#: skycultures/western/star_names.fab:316
 msgid "Al Ukud"
 msgstr "আল উকুদ"
 
-#: skycultures/western/star_names.fab:301
+#: skycultures/western/star_names.fab:319
 msgid "Adib"
 msgstr "আদিব"
 
-#: skycultures/western/star_names.fab:302
+#: skycultures/western/star_names.fab:320
 msgid "Al Tinnin"
 msgstr "আল টিনিন"
 
-#: skycultures/western/star_names.fab:304
+#: skycultures/western/star_names.fab:322
 msgid "Alwaid"
 msgstr "আলওয়াইদ"
 
-#: skycultures/western/star_names.fab:305
+#: skycultures/western/star_names.fab:323
 msgid "Eltanin"
 msgstr "সর্পমণি"
 
-#: skycultures/western/star_names.fab:307
+#: skycultures/western/star_names.fab:325
 msgid "Taurt"
 msgstr "টাউর্ট"
 
-#: skycultures/western/star_names.fab:309
+#: skycultures/western/star_names.fab:327
 msgid "Al Tais"
 msgstr "আল তাইস"
 
-#: skycultures/western/star_names.fab:312
+#: skycultures/western/star_names.fab:330
 msgid "Giansar"
 msgstr "জিয়ানসার"
 
-#: skycultures/western/star_names.fab:313
+#: skycultures/western/star_names.fab:331
 msgid "Nodus Secundus"
 msgstr "নোডাস সেকুন্ডাস"
 
-#: skycultures/western/star_names.fab:315
+#: skycultures/western/star_names.fab:333
 msgid "Arrakis"
 msgstr "আরর‍্যাকিস"
 
-#: skycultures/western/star_names.fab:316
+#: skycultures/western/star_names.fab:334
 msgid "Errakis"
 msgstr "ইরাকিস"
 
-#: skycultures/western/star_names.fab:318
+#: skycultures/western/star_names.fab:336
 msgid "Kuma"
 msgstr "কুমা"
 
-#: skycultures/western/star_names.fab:319
+#: skycultures/western/star_names.fab:337
 msgid "Tyl"
 msgstr "টিল"
 
-#: skycultures/western/star_names.fab:320
+#: skycultures/western/star_names.fab:338
 msgid "Alsafi"
 msgstr "আলঅ্যাসাফি"
 
-#: skycultures/western/star_names.fab:321
+#: skycultures/western/star_names.fab:339
 msgid "Dziban I"
 msgstr "জিবান"
 
-#: skycultures/western/star_names.fab:322
-#: skycultures/western/star_names.fab:325
+#: skycultures/western/star_names.fab:340
+#: skycultures/western/star_names.fab:343
 msgid "Dsiban"
 msgstr "সিবান"
 
-#: skycultures/western/star_names.fab:323
+#: skycultures/western/star_names.fab:341
 msgid "Dziban"
 msgstr "জিবান"
 
-#: skycultures/western/star_names.fab:324
+#: skycultures/western/star_names.fab:342
 msgid "Dziban II"
 msgstr "জিবান II"
 
-#: skycultures/western/star_names.fab:326
+#: skycultures/western/star_names.fab:344
 msgid "Al Dhih"
 msgstr "আল  ধিহ্"
 
-#: skycultures/western/star_names.fab:327
+#: skycultures/western/star_names.fab:345
 msgid "Adfar Aldib II"
 msgstr "আদফার আলদিব II"
 
-#: skycultures/western/star_names.fab:329
+#: skycultures/western/star_names.fab:347
 msgid "Al Dhibain Posterior"
 msgstr "পশ্চাত আলধিবাইন"
 
-#: skycultures/western/star_names.fab:330
+#: skycultures/western/star_names.fab:348
 msgid "Aldhibah"
 msgstr "অ্যালধিবা"
 
-#: skycultures/western/star_names.fab:331
+#: skycultures/western/star_names.fab:349
 msgid "Dhibah"
 msgstr "ধিবাহ্"
 
-#: skycultures/western/star_names.fab:332
+#: skycultures/western/star_names.fab:350
 msgid "Al Dhibain Prior"
 msgstr "মুখ্য আল ধিবাহ্"
 
-#: skycultures/western/star_names.fab:333
+#: skycultures/western/star_names.fab:351
 msgid "Dhibain"
 msgstr "ধিবাইন"
 
-#: skycultures/western/star_names.fab:334
+#: skycultures/western/star_names.fab:352
 msgid "Adfar Aldib I"
 msgstr "আদাফার আলদিব I"
 
-#: skycultures/western/star_names.fab:335
+#: skycultures/western/star_names.fab:353
 msgid "Tais I"
 msgstr "টেইস I"
 
-#: skycultures/western/star_names.fab:336
+#: skycultures/western/star_names.fab:354
 msgid "Tais II"
 msgstr "টেইস II"
 
-#: skycultures/western/star_names.fab:337
+#: skycultures/western/star_names.fab:355
 msgid "Athafi II"
 msgstr "আথাফি II"
 
-#: skycultures/western/star_names.fab:338
+#: skycultures/western/star_names.fab:356
 msgid "Athafi I"
 msgstr "আথাফি I"
 
-#: skycultures/western/star_names.fab:339
+#: skycultures/western/star_names.fab:357
 msgid "Aldhiba"
 msgstr "আলধিবা"
 
-#: skycultures/western/star_names.fab:340
+#: skycultures/western/star_names.fab:358
 msgid "Alahakan"
 msgstr "আলহাকান"
 
-#: skycultures/western/star_names.fab:350
+#: skycultures/western/star_names.fab:364
+msgid "Dhalim"
+msgstr ""
+
+#: skycultures/western/star_names.fab:369
+#: skycultures/western/star_names.fab:390
 msgid "Dalim"
 msgstr "দালিম"
 
-#: skycultures/western/star_names.fab:353
-#: skycultures/western/star_names.fab:355
+#: skycultures/western/star_names.fab:372
+#: skycultures/western/star_names.fab:374
 msgid "Theemin"
 msgstr "থীমিন"
 
-#: skycultures/western/star_names.fab:354
+#: skycultures/western/star_names.fab:373
 msgid "Theemim"
 msgstr "থেমিম"
 
-#: skycultures/western/star_names.fab:356
+#: skycultures/western/star_names.fab:375
 msgid "Beemim II"
 msgstr "বীমিম II"
 
-#: skycultures/western/star_names.fab:357
+#: skycultures/western/star_names.fab:376
 msgid "Angetenar"
 msgstr "অ্যনজেটানার"
 
-#: skycultures/western/star_names.fab:358
+#: skycultures/western/star_names.fab:377
+msgid "Anchat"
+msgstr ""
+
+#: skycultures/western/star_names.fab:378
 msgid "Beemim"
 msgstr "বীমিম"
 
-#: skycultures/western/star_names.fab:359
+#: skycultures/western/star_names.fab:379
 msgid "Beemim III"
 msgstr "বীমিম III"
 
-#: skycultures/western/star_names.fab:361
+#: skycultures/western/star_names.fab:381
 msgid "Rana"
 msgstr "রানা"
 
-#: skycultures/western/star_names.fab:362
+#: skycultures/western/star_names.fab:382
 msgid "Sceptrum"
 msgstr "সেপ্ট্রাম"
 
-#: skycultures/western/star_names.fab:363
+#: skycultures/western/star_names.fab:383
 msgid "Kursi al Jauzah II"
 msgstr "কুরসী আল জাওয়াজা II"
 
-#: skycultures/western/star_names.fab:364
+#: skycultures/western/star_names.fab:384
 msgid "Aludhi I"
 msgstr "আলুধি I"
 
-#: skycultures/western/star_names.fab:365
+#: skycultures/western/star_names.fab:385
 msgid "Aludhi II"
 msgstr "আলুধি II"
 
-#: skycultures/western/star_names.fab:366
+#: skycultures/western/star_names.fab:386
 msgid "Aludhi III"
 msgstr "আলুধি III"
 
-#: skycultures/western/star_names.fab:367
+#: skycultures/western/star_names.fab:387
 msgid "Beemim I"
 msgstr "বীমিম I"
 
-#: skycultures/western/star_names.fab:368
+#: skycultures/western/star_names.fab:388
 msgid "Kursi al Jauzah I"
 msgstr "কুরসী আল জাওয়াজা I"
 
-#: skycultures/western/star_names.fab:370
+#: skycultures/western/star_names.fab:391
+msgid "Fornacis"
+msgstr ""
+
+#: skycultures/western/star_names.fab:393
 #: skycultures/western_rey/star_names.fab:29
 msgid "Castor"
 msgstr "ক্যাস্টর (বিষ্ণুতারা)"
 
-#: skycultures/western/star_names.fab:371
+#: skycultures/western/star_names.fab:394
+msgid "Apollo"
+msgstr ""
+
+#: skycultures/western/star_names.fab:395
 #: skycultures/western_rey/star_names.fab:30
 msgid "Pollux"
 msgstr "পোলাক্স (সোমতারা)"
 
-#: skycultures/western/star_names.fab:373
+#: skycultures/western/star_names.fab:398
 msgid "Almeisan"
 msgstr "আলমেইসান"
 
-#: skycultures/western/star_names.fab:378
+#: skycultures/western/star_names.fab:401
+msgid "Melucta"
+msgstr ""
+
+#: skycultures/western/star_names.fab:402
+msgid "Meboula"
+msgstr ""
+
+#: skycultures/western/star_names.fab:405
 msgid "Tejat Prior"
 msgstr "টেখেট প্রায়র"
 
-#: skycultures/western/star_names.fab:379
+#: skycultures/western/star_names.fab:406
 msgid "Praepes"
 msgstr "প্রায়েেোস"
 
-#: skycultures/western/star_names.fab:381
+#: skycultures/western/star_names.fab:408
 msgid "Tejat Posterior"
 msgstr "পশ্চাত টেখেট"
 
-#: skycultures/western/star_names.fab:382
+#: skycultures/western/star_names.fab:409
 msgid "Calx"
 msgstr "ক্ল্যাক্স"
 
-#: skycultures/western/star_names.fab:383
+#: skycultures/western/star_names.fab:410
 msgid "Al Zirr"
 msgstr "আল জির‍্যা"
 
-#: skycultures/western/star_names.fab:384
+#: skycultures/western/star_names.fab:411
 msgid "Alzirr"
 msgstr "আলজির"
 
-#: skycultures/western/star_names.fab:385
+#: skycultures/western/star_names.fab:412
 msgid "Nucatai"
 msgstr "নুকাটাই"
 
-#: skycultures/western/star_names.fab:388
+#: skycultures/western/star_names.fab:415
 msgid "Al Na'ir"
 msgstr "আল নাইর"
 
-#: skycultures/western/star_names.fab:389
+#: skycultures/western/star_names.fab:416
 msgid "Al Dhanab"
 msgstr "আল ধানাব"
 
-#: skycultures/western/star_names.fab:390
+#: skycultures/western/star_names.fab:417
 msgid "Deneb Hut"
 msgstr "ডেনেব হাই"
 
-#: skycultures/western/star_names.fab:391
+#: skycultures/western/star_names.fab:418
 msgid "Deneb Alnahr"
 msgstr "ডেনেব আলনহর"
 
-#: skycultures/western/star_names.fab:394
+#: skycultures/western/star_names.fab:421
 msgid "Ras Algethi"
 msgstr "রাস আলগেদি"
 
-#: skycultures/western/star_names.fab:396
+#: skycultures/western/star_names.fab:423
 msgid "Rutilicus"
 msgstr "রুটিলিকাস"
 
-#: skycultures/western/star_names.fab:400
+#: skycultures/western/star_names.fab:427
 msgid "Masym"
 msgstr "ম্যাসিম"
 
-#: skycultures/western/star_names.fab:402
+#: skycultures/western/star_names.fab:429
 msgid "Sarin"
 msgstr "শারিন"
 
-#: skycultures/western/star_names.fab:404
+#: skycultures/western/star_names.fab:431
 msgid "Nasak Shamiya III"
 msgstr "নাশাক শামিয়া III"
 
-#: skycultures/western/star_names.fab:407
+#: skycultures/western/star_names.fab:434
+msgid "Kalbelaphard"
+msgstr ""
+
+#: skycultures/western/star_names.fab:435
+msgid "Cor Hydrae"
+msgstr "কর হাইড্রেই"
+
+#: skycultures/western/star_names.fab:436
 msgid "Ukdah III"
 msgstr "উকদাহ্ III"
 
-#: skycultures/western/star_names.fab:408
+#: skycultures/western/star_names.fab:437
 msgid "Minazal I"
 msgstr "মিনাজাল I"
 
-#: skycultures/western/star_names.fab:409
+#: skycultures/western/star_names.fab:438
 msgid "Minazal III"
 msgstr "মিনাজাল III"
 
-#: skycultures/western/star_names.fab:410
+#: skycultures/western/star_names.fab:439
 msgid "Minazal V"
 msgstr "মিনাজাল V"
 
-#: skycultures/western/star_names.fab:411
+#: skycultures/western/star_names.fab:440
 msgid "Minazal II"
 msgstr "মিনাজাল II"
 
-#: skycultures/western/star_names.fab:412
+#: skycultures/western/star_names.fab:441
 msgid "Ukdah IV"
 msgstr "উকদাহ্ IV"
 
-#: skycultures/western/star_names.fab:413
+#: skycultures/western/star_names.fab:442
 msgid "Al Sharasif I"
 msgstr "আল সারাসিফ I"
 
-#: skycultures/western/star_names.fab:414
+#: skycultures/western/star_names.fab:443
 msgid "Minazal IV"
 msgstr "মিনাজাল IV"
 
-#: skycultures/western/star_names.fab:415
+#: skycultures/western/star_names.fab:444
 msgid "Minkalshuja"
 msgstr "মিনকালসুজা"
 
-#: skycultures/western/star_names.fab:416
+#: skycultures/western/star_names.fab:445
+msgid "Al Minliar al Shuja"
+msgstr ""
+
+#: skycultures/western/star_names.fab:446
+msgid "Minchir"
+msgstr "মিনচির"
+
+#: skycultures/western/star_names.fab:447
 msgid "Ukdah I"
 msgstr "উকদাহ্ I"
 
-#: skycultures/western/star_names.fab:417
+#: skycultures/western/star_names.fab:448
 msgid "Ukdah II"
 msgstr "উকদাহ্ II"
 
-#: skycultures/western/star_names.fab:419
+#: skycultures/western/star_names.fab:450
 msgid "Persian"
 msgstr "ফারসী"
 
-#: skycultures/western/star_names.fab:427
+#: skycultures/western/star_names.fab:455
+msgid "Cor Leonis"
+msgstr "কর লিওনিস"
+
+#: skycultures/western/star_names.fab:456
+msgid "Rex"
+msgstr ""
+
+#: skycultures/western/star_names.fab:457
+msgid "Kabeleced"
+msgstr ""
+
+#: skycultures/western/star_names.fab:459
+msgid "Deneb Aleet"
+msgstr ""
+
+#: skycultures/western/star_names.fab:462
 msgid "Duhr"
 msgstr "ডুর"
 
-#: skycultures/western/star_names.fab:430
+#: skycultures/western/star_names.fab:463
+msgid "Zubra"
+msgstr ""
+
+#: skycultures/western/star_names.fab:466
 msgid "Al Haratan"
 msgstr "আল হারাটান"
 
-#: skycultures/western/star_names.fab:431
+#: skycultures/western/star_names.fab:467
 msgid "Coxa"
 msgstr "কক্সা"
 
-#: skycultures/western/star_names.fab:434
+#: skycultures/western/star_names.fab:470
 msgid "Alshemali"
 msgstr "আল্সচেমালি"
 
-#: skycultures/western/star_names.fab:436
+#: skycultures/western/star_names.fab:471
+msgid "Ras Elased Borealis"
+msgstr ""
+
+#: skycultures/western/star_names.fab:473
 msgid "Algenubi"
 msgstr "আলজেনুবি"
 
-#: skycultures/western/star_names.fab:437
+#: skycultures/western/star_names.fab:474
+msgid "Ras Elased Australis"
+msgstr ""
+
+#: skycultures/western/star_names.fab:475
 msgid "Al Minlear al Asad"
 msgstr "আল মিনলেয়ার আল আসাদ"
 
-#: skycultures/western/star_names.fab:438
+#: skycultures/western/star_names.fab:476
 msgid "Minkarasad"
 msgstr "মিনকারাসাদ"
 
-#: skycultures/western/star_names.fab:439
+#: skycultures/western/star_names.fab:477
 msgid "Zubrah"
 msgstr "জুবর‍্যা"
 
-#: skycultures/western/star_names.fab:440
+#: skycultures/western/star_names.fab:478
 msgid "Al Jabhah"
 msgstr "আল জাবাহ্"
 
-#: skycultures/western/star_names.fab:442
+#: skycultures/western/star_names.fab:480
 msgid "Praecipua"
 msgstr "প্রিচিপুয়া"
 
-#: skycultures/western/star_names.fab:446
+#: skycultures/western/star_names.fab:484
 msgid "Hind's Crimson Star"
 msgstr "হিন্ডের রক্তিম তারা"
 
-#: skycultures/western/star_names.fab:447
+#: skycultures/western/star_names.fab:485
 msgid "Kursi al Jabbar"
 msgstr "কুরসী আল জাব্বার"
 
-#: skycultures/western/star_names.fab:448
+#: skycultures/western/star_names.fab:486
 msgid "Arsh al Jauzah"
 msgstr "আরস আল জাওয়াজা"
 
-#: skycultures/western/star_names.fab:450
+#: skycultures/western/star_names.fab:488
 msgid "Zubenelgenubi I"
 msgstr "জুবেনিলজেনুবি I"
 
-#: skycultures/western/star_names.fab:452
+#: skycultures/western/star_names.fab:490
 msgid "Zubenelgenubi II"
 msgstr "জুবেনিলজেনুবি II"
 
-#: skycultures/western/star_names.fab:455
+#: skycultures/western/star_names.fab:493
 msgid "Brachium"
 msgstr "ব্র্যাকিয়াম"
 
-#: skycultures/western/star_names.fab:456
+#: skycultures/western/star_names.fab:494
 msgid "Zuben Acrabi"
 msgstr "জুবেন আকরাবি"
 
-#: skycultures/western/star_names.fab:457
+#: skycultures/western/star_names.fab:495
+msgid "Cornu"
+msgstr "কর্নু"
+
+#: skycultures/western/star_names.fab:496
 msgid "Zuben Elakribi"
 msgstr "জুবেন ইলাকরিব"
 
-#: skycultures/western/star_names.fab:458
+#: skycultures/western/star_names.fab:497
 msgid "Zuben Elakrab"
 msgstr "জুবেন আলার্কাব"
 
-#: skycultures/western/star_names.fab:459
+#: skycultures/western/star_names.fab:498
 msgid "Zuben Hakraki"
 msgstr "জুবেন ইয়াকরাকি"
 
-#: skycultures/western/star_names.fab:460
+#: skycultures/western/star_names.fab:499
 msgid "Zuben Hakrabi"
 msgstr "জুবেন ইয়াকরিব"
 
-#: skycultures/western/star_names.fab:462
+#: skycultures/western/star_names.fab:501
 msgid "Alsciaukat"
 msgstr "আল্সচেরাউক্যাট"
 
-#: skycultures/western/star_names.fab:463
+#: skycultures/western/star_names.fab:502
 msgid "Mabsuthat"
 msgstr "মাবসুদাত"
 
-#: skycultures/western/star_names.fab:464
+#: skycultures/western/star_names.fab:503
 msgid "Shaukah"
 msgstr "শাউকাহ্"
 
-#: skycultures/western/star_names.fab:465
+#: skycultures/western/star_names.fab:504
 msgid "Dolones X"
 msgstr "ডোলোন্স X"
 
-#: skycultures/western/star_names.fab:467
+#: skycultures/western/star_names.fab:506
 #: skycultures/western_rey/star_names.fab:21
 msgid "Vega"
 msgstr "ভেগা (অভিজিত্‍)"
 
-#: skycultures/western/star_names.fab:470
+#: skycultures/western/star_names.fab:507
+msgid "Fidis"
+msgstr "ফিডিস"
+
+#: skycultures/western/star_names.fab:510
 msgid "Jugum"
 msgstr "জুগুম"
 
-#: skycultures/western/star_names.fab:471
+#: skycultures/western/star_names.fab:511
 msgid "Aladfar"
 msgstr "আলাদফার"
 
-#: skycultures/western/star_names.fab:472
+#: skycultures/western/star_names.fab:512
 msgid "Al Athfar"
 msgstr "আল আদফার"
 
-#: skycultures/western/star_names.fab:473
+#: skycultures/western/star_names.fab:513
 msgid "Alathfar"
 msgstr "আলআদফার"
 
-#: skycultures/western/star_names.fab:474
+#: skycultures/western/star_names.fab:514
 msgid "Athfar"
 msgstr "আদফার"
 
-#: skycultures/western/star_names.fab:475
+#: skycultures/western/star_names.fab:515
 msgid "Double Double I"
 msgstr "ডবল ডবল I"
 
-#: skycultures/western/star_names.fab:476
+#: skycultures/western/star_names.fab:516
 msgid "Double Double II"
 msgstr "ডবল ডবল II"
 
-#: skycultures/western/star_names.fab:477
+#: skycultures/western/star_names.fab:517
 msgid "Nasr Alwaki I"
 msgstr "নস্র আলওয়াকি I"
 
-#: skycultures/western/star_names.fab:478
+#: skycultures/western/star_names.fab:518
 msgid "Nasr Alwaki II"
 msgstr "নস্র আলওয়াকি II"
 
-#: skycultures/western/star_names.fab:480
+#: skycultures/western/star_names.fab:520
 msgid "Plaskett's Star"
 msgstr "প্লাসকেট্টের তারা"
 
-#: skycultures/western/star_names.fab:483
+#: skycultures/western/star_names.fab:523
 msgid "Polaris Australis"
 msgstr "পোলারিস অস্ট্রালিস"
 
-#: skycultures/western/star_names.fab:491
+#: skycultures/western/star_names.fab:528
+msgid "Yad"
+msgstr "এড"
+
+#: skycultures/western/star_names.fab:532
 msgid "Muliphen"
 msgstr "মুলিফেন"
 
-#: skycultures/western/star_names.fab:493
+#: skycultures/western/star_names.fab:534
 msgid "Saik"
 msgstr "সাইক"
 
-#: skycultures/western/star_names.fab:494
+#: skycultures/western/star_names.fab:535
 msgid "Garafsa"
 msgstr "গারাফ্সা"
 
-#: skycultures/western/star_names.fab:495
+#: skycultures/western/star_names.fab:536
 msgid "Aggia"
 msgstr "আজা"
 
-#: skycultures/western/star_names.fab:505
-#: skycultures/western/star_names.fab:522
+#: skycultures/western/star_names.fab:539
+msgid "Al Mankib"
+msgstr "আল ম্যানকিব"
+
+#: skycultures/western/star_names.fab:541
+msgid "Algebar"
+msgstr "আলজেবার"
+
+#: skycultures/western/star_names.fab:548
+#: skycultures/western/star_names.fab:565
 msgid "Heka"
 msgstr "হেকা"
 
-#: skycultures/western/star_names.fab:506
+#: skycultures/western/star_names.fab:549
 msgid "Hatysa"
 msgstr "হাতসা"
 
-#: skycultures/western/star_names.fab:507
+#: skycultures/western/star_names.fab:550
 msgid "Thabit"
 msgstr "থাবিত"
 
-#: skycultures/western/star_names.fab:508
+#: skycultures/western/star_names.fab:551
 msgid "Tabit"
 msgstr "টাবিত"
 
-#: skycultures/western/star_names.fab:509
+#: skycultures/western/star_names.fab:552
 msgid "Mizan Batil I"
 msgstr "মিজান বাতিল I"
 
-#: skycultures/western/star_names.fab:510
+#: skycultures/western/star_names.fab:553
 msgid "Mizan Batil III"
 msgstr "মিজান বাতিল III"
 
-#: skycultures/western/star_names.fab:511
+#: skycultures/western/star_names.fab:554
 msgid "Manica"
 msgstr "মানেকা"
 
-#: skycultures/western/star_names.fab:512
+#: skycultures/western/star_names.fab:555
 msgid "Saif al Jabbar"
 msgstr "সইফ আল জাবার"
 
-#: skycultures/western/star_names.fab:513
+#: skycultures/western/star_names.fab:556
 msgid "Trapezium"
 msgstr "ট্রাপেজিয়াম"
 
-#: skycultures/western/star_names.fab:514
+#: skycultures/western/star_names.fab:557
 msgid "Mizan Batil II"
 msgstr "মিজান বাতিল II"
 
-#: skycultures/western/star_names.fab:515
+#: skycultures/western/star_names.fab:558
 msgid "Al Kumm I"
 msgstr "আল কুম I"
 
-#: skycultures/western/star_names.fab:516
+#: skycultures/western/star_names.fab:559
 msgid "Al Kumm II"
 msgstr "আল কুম II"
 
-#: skycultures/western/star_names.fab:517
+#: skycultures/western/star_names.fab:560
 msgid "Al Taj IV"
 msgstr "আল তাজ IV"
 
-#: skycultures/western/star_names.fab:518
+#: skycultures/western/star_names.fab:561
 msgid "Al Taj I"
 msgstr "আল তাজ I"
 
-#: skycultures/western/star_names.fab:519
+#: skycultures/western/star_names.fab:562
 msgid "Al Taj II"
 msgstr "আল তাজ II"
 
-#: skycultures/western/star_names.fab:520
+#: skycultures/western/star_names.fab:563
 msgid "Al Taj III"
 msgstr "আল তাজ III"
 
-#: skycultures/western/star_names.fab:521
+#: skycultures/western/star_names.fab:564
 msgid "Al Taj V"
 msgstr "আল তাজ IV"
 
-#: skycultures/western/star_names.fab:527
+#: skycultures/western/star_names.fab:570
 msgid "Yed Alpheras"
 msgstr "ইয়াদ আলফেরাজ"
 
-#: skycultures/western/star_names.fab:531
+#: skycultures/western/star_names.fab:572
+msgid "Seat Alpheras"
+msgstr "সিয়েট আলফেরাস"
+
+#: skycultures/western/star_names.fab:575
+msgid "Os Pegasi"
+msgstr "অস পেগেসাই"
+
+#: skycultures/western/star_names.fab:576
+msgid "Fom"
+msgstr "ফম"
+
+#: skycultures/western/star_names.fab:577
 msgid "Homam"
 msgstr "হোমাম"
 
-#: skycultures/western/star_names.fab:535
+#: skycultures/western/star_names.fab:581
 msgid "Sa'd al Bari'"
 msgstr "সাদ আল বারি"
 
-#: skycultures/western/star_names.fab:536
+#: skycultures/western/star_names.fab:582
 msgid "Al Karab"
 msgstr "আল কারাব"
 
-#: skycultures/western/star_names.fab:537
+#: skycultures/western/star_names.fab:583
 msgid "Salma"
 msgstr "সালমা"
 
-#: skycultures/western/star_names.fab:539
+#: skycultures/western/star_names.fab:585
 msgid "Sadalnazi"
 msgstr "সাদালনাজি"
 
-#: skycultures/western/star_names.fab:540
+#: skycultures/western/star_names.fab:586
 msgid "Fum al Faras"
 msgstr "ফুম আল ফারাস"
 
-#: skycultures/western/star_names.fab:541
+#: skycultures/western/star_names.fab:587
 msgid "Suudalnujum"
 msgstr "সুদালনুজুম"
 
-#: skycultures/western/star_names.fab:542
+#: skycultures/western/star_names.fab:588
 msgid "Sadalmatar"
 msgstr "সাদালমাটার"
 
-#: skycultures/western/star_names.fab:544
+#: skycultures/western/star_names.fab:590
 msgid "Mirfak"
 msgstr "মিরফাক"
 
-#: skycultures/western/star_names.fab:547
+#: skycultures/western/star_names.fab:593
 msgid "Gorgonea Prima"
 msgstr "গর্গনিয়া প্রিমা"
 
-#: skycultures/western/star_names.fab:549
+#: skycultures/western/star_names.fab:594
+msgid "Gorgona"
+msgstr "গরগনা"
+
+#: skycultures/western/star_names.fab:597
 msgid "Ati"
 msgstr "আটি"
 
-#: skycultures/western/star_names.fab:551
+#: skycultures/western/star_names.fab:598
 msgid "Alatik"
 msgstr "আলাটিক"
 
-#: skycultures/western/star_names.fab:553
+#: skycultures/western/star_names.fab:600
 msgid "Gorgonea Secunda"
 msgstr "গর্গনিয়া সেকুন্ডা"
 
-#: skycultures/western/star_names.fab:554
+#: skycultures/western/star_names.fab:601
 msgid "Gorgonea Tertia"
 msgstr "গর্গনিয়া টার্টিয়া"
 
-#: skycultures/western/star_names.fab:555
+#: skycultures/western/star_names.fab:602
 msgid "Gorgonea Quarta"
 msgstr "গর্গনিয়া কোয়াট্রা"
 
-#: skycultures/western/star_names.fab:556
+#: skycultures/western/star_names.fab:603
 msgid "Miram"
 msgstr "মিরাম"
 
-#: skycultures/western/star_names.fab:557
+#: skycultures/western/star_names.fab:604
 msgid "Misam"
 msgstr "মিসাম"
 
-#: skycultures/western/star_names.fab:558
+#: skycultures/western/star_names.fab:605
 msgid "Misam al Thurayya I"
 msgstr "মিসাম আল থেরিয়া I"
 
-#: skycultures/western/star_names.fab:561
+#: skycultures/western/star_names.fab:608
 msgid "Nair al Zaurak"
 msgstr "নায়ার আল জাউরাক"
 
-#: skycultures/western/star_names.fab:562
+#: skycultures/western/star_names.fab:609
 msgid "Alrial III"
 msgstr "আলরিয়াল III"
 
-#: skycultures/western/star_names.fab:563
+#: skycultures/western/star_names.fab:610
 msgid "Alrial V"
 msgstr "আলরিয়াল V"
 
-#: skycultures/western/star_names.fab:564
+#: skycultures/western/star_names.fab:611
 msgid "Alrial I"
 msgstr "আলরিয়াল I"
 
-#: skycultures/western/star_names.fab:565
+#: skycultures/western/star_names.fab:612
 msgid "Alrial II"
 msgstr "আলরিয়াল II"
 
-#: skycultures/western/star_names.fab:566
+#: skycultures/western/star_names.fab:613
 msgid "Alrial IV"
 msgstr "আলরিয়াল IV"
 
-#: skycultures/western/star_names.fab:571
+#: skycultures/western/star_names.fab:618
 msgid "Al Rescha"
 msgstr "আল রিশা"
 
-#: skycultures/western/star_names.fab:572
+#: skycultures/western/star_names.fab:619
 msgid "Alrischa"
 msgstr "আলরিশা"
 
-#: skycultures/western/star_names.fab:573
+#: skycultures/western/star_names.fab:620
 msgid "van Maanen's Star"
 msgstr "ভ্যান ম্যানেনের তারা"
 
-#: skycultures/western/star_names.fab:574
+#: skycultures/western/star_names.fab:621
 msgid "van Maanen 2"
 msgstr "ভ্যান মানেন ২"
 
-#: skycultures/western/star_names.fab:575
+#: skycultures/western/star_names.fab:622
 msgid "Torcularis Septentrionalis"
 msgstr "টোর্কুলারিস সেপ্টেনট্রায়োনালিস"
 
-#: skycultures/western/star_names.fab:576
+#: skycultures/western/star_names.fab:623
 msgid "Torcular"
 msgstr "টরকুলার"
 
-#: skycultures/western/star_names.fab:577
+#: skycultures/western/star_names.fab:624
 msgid "Kullat Nunu"
 msgstr "কুল্যাট নুনু"
 
-#: skycultures/western/star_names.fab:578
+#: skycultures/western/star_names.fab:625
 msgid "Fum al Samakah"
 msgstr "ফাম আল সামাখা"
 
-#: skycultures/western/star_names.fab:579
+#: skycultures/western/star_names.fab:626
 msgid "Kuton I"
 msgstr "কুটন I"
 
-#: skycultures/western/star_names.fab:580
+#: skycultures/western/star_names.fab:627
 msgid "Kuton II"
 msgstr "কুটন II"
 
-#: skycultures/western/star_names.fab:581
+#: skycultures/western/star_names.fab:628
 msgid "Kuton III"
 msgstr "কুটন III"
 
-#: skycultures/western/star_names.fab:584
+#: skycultures/western/star_names.fab:631
 msgid "Thalim"
 msgstr "থালিম"
 
-#: skycultures/western/star_names.fab:585
+#: skycultures/western/star_names.fab:632
+msgid "Os Piscis Meridiani"
+msgstr "অস পিসিস মেরিডিয়ানি"
+
+#: skycultures/western/star_names.fab:633
+msgid "Os Piscis Notii"
+msgstr "অস পিসিস নটি"
+
+#: skycultures/western/star_names.fab:634
 msgid "Fum al Hui"
 msgstr "ফুম আল হুই"
 
-#: skycultures/western/star_names.fab:588
+#: skycultures/western/star_names.fab:637
+msgid "Suhail Hadar"
+msgstr "সুহাইল হাদার"
+
+#: skycultures/western/star_names.fab:638
 msgid "Tureis"
 msgstr "টোরেইস"
 
-#: skycultures/western/star_names.fab:590
+#: skycultures/western/star_names.fab:640
 msgid "Asmidiske"
 msgstr "আজমিডিস্কা"
 
-#: skycultures/western/star_names.fab:595
+#: skycultures/western/star_names.fab:645
 msgid "Alrami"
 msgstr "আলরামি"
 
-#: skycultures/western/star_names.fab:596
+#: skycultures/western/star_names.fab:646
 msgid "Arkab Prior"
 msgstr "পূর্ব আককাব"
 
-#: skycultures/western/star_names.fab:598
+#: skycultures/western/star_names.fab:648
 msgid "Arkab Posterior"
 msgstr "পশ্চাদ আকরাব"
 
-#: skycultures/western/star_names.fab:600
+#: skycultures/western/star_names.fab:650
 msgid "Nushaba"
 msgstr "নুশবা"
 
-#: skycultures/western/star_names.fab:601
+#: skycultures/western/star_names.fab:651
 msgid "Al Nasl"
 msgstr "আল নশল"
 
-#: skycultures/western/star_names.fab:602
+#: skycultures/western/star_names.fab:652
 msgid "Nash"
 msgstr "ন্যাশ"
 
-#: skycultures/western/star_names.fab:604
+#: skycultures/western/star_names.fab:654
 msgid "Kaus Meridionalis"
 msgstr "কাউস মেরিডিওনালিস"
 
-#: skycultures/western/star_names.fab:608
-#: skycultures/western/star_names.fab:611
+#: skycultures/western/star_names.fab:658
+#: skycultures/western/star_names.fab:662
 msgid "Al Thalimain"
 msgstr "আল দালিমান"
 
-#: skycultures/western/star_names.fab:610
+#: skycultures/western/star_names.fab:660
+msgid "Sadira"
+msgstr "সাদিরা"
+
+#: skycultures/western/star_names.fab:661
 msgid "Polis"
 msgstr "পোলিস"
 
-#: skycultures/western/star_names.fab:612
+#: skycultures/western/star_names.fab:663
 msgid "Alnam"
 msgstr "আলনাম"
 
-#: skycultures/western/star_names.fab:613
+#: skycultures/western/star_names.fab:664
 msgid "Albaldah"
 msgstr "আলবালদা"
 
-#: skycultures/western/star_names.fab:614
+#: skycultures/western/star_names.fab:665
 msgid "Al Baldah"
 msgstr "আল বালদাহ্"
 
-#: skycultures/western/star_names.fab:615
+#: skycultures/western/star_names.fab:666
 msgid "Terebellum I"
-msgstr "টেরেব্যালাম ১"
+msgstr "তুরপুন ১"
 
-#: skycultures/western/star_names.fab:616
+#: skycultures/western/star_names.fab:667
 msgid "Terebellum II"
-msgstr "টেরেব্যালাম ২"
+msgstr "তুরপুন ২"
 
-#: skycultures/western/star_names.fab:617
+#: skycultures/western/star_names.fab:668
 msgid "Terebellum III"
-msgstr "টেরেব্যালাম ৩"
+msgstr "তুরপুন ৩"
 
-#: skycultures/western/star_names.fab:618
+#: skycultures/western/star_names.fab:669
 msgid "Terebellum IV"
-msgstr "টেরেব্যালাম ৪"
+msgstr "তুরপুন ৪"
 
-#: skycultures/western/star_names.fab:619
+#: skycultures/western/star_names.fab:670
 msgid "Hamalwarid"
 msgstr "হামালওয়ারিড"
 
-#: skycultures/western/star_names.fab:620
+#: skycultures/western/star_names.fab:671
 msgid "Ain al Rami I"
 msgstr "এইন আল রামি I"
 
-#: skycultures/western/star_names.fab:621
+#: skycultures/western/star_names.fab:672
 msgid "Ain al Rami II"
 msgstr "এইন আল রামি II"
 
-#: skycultures/western/star_names.fab:622
+#: skycultures/western/star_names.fab:673
 msgid "Namalsadirah II"
 msgstr "নামালসাদিরা II"
 
-#: skycultures/western/star_names.fab:623
+#: skycultures/western/star_names.fab:674
 msgid "Namalsadirah I"
 msgstr "নামালসাদিরা I"
 
-#: skycultures/western/star_names.fab:624
+#: skycultures/western/star_names.fab:675
 msgid "Namalsadirah III"
 msgstr "নামালসাদিরা III"
 
-#: skycultures/western/star_names.fab:625
+#: skycultures/western/star_names.fab:676
 msgid "Namalsadirah IV"
 msgstr "নামালসাদিরা IV"
 
-#: skycultures/western/star_names.fab:626
+#: skycultures/western/star_names.fab:677
 msgid "Al Kiladah"
 msgstr "আল কিলাদাহ্"
 
-#: skycultures/western/star_names.fab:630
+#: skycultures/western/star_names.fab:680
+msgid "Cor Scorpii"
+msgstr "কর স্করপি"
+
+#: skycultures/western/star_names.fab:681
+msgid "Vespertilio"
+msgstr "ভাসপারটিলিও"
+
+#: skycultures/western/star_names.fab:682
+msgid "Kalb al Akrab"
+msgstr "কাল্ব আল আকরাব"
+
+#: skycultures/western/star_names.fab:684
 msgid "Graffias"
 msgstr "গ্রাফিস"
 
-#: skycultures/western/star_names.fab:632
+#: skycultures/western/star_names.fab:686
+msgid "Iclarkrau"
+msgstr "আইকলারক্রাউ"
+
+#: skycultures/western/star_names.fab:687
 msgid "Sargas"
 msgstr "সার্গাস"
 
-#: skycultures/western/star_names.fab:635
+#: skycultures/western/star_names.fab:690
+msgid "Alniyat"
+msgstr "আলনিয়াত"
+
+#: skycultures/western/star_names.fab:691
 msgid "Alniyat I"
 msgstr "আল নিয়াত I"
 
-#: skycultures/western/star_names.fab:637
+#: skycultures/western/star_names.fab:693
 msgid "Alniyat II"
 msgstr "আল নিয়াত II"
 
-#: skycultures/western/star_names.fab:640
+#: skycultures/western/star_names.fab:696
 msgid "Jabbah"
 msgstr "জ্যবাহ্"
 
-#: skycultures/western/star_names.fab:641
+#: skycultures/western/star_names.fab:697
 msgid "Grafias"
 msgstr "গ্রাফিয়াস"
 
-#: skycultures/western/star_names.fab:642
+#: skycultures/western/star_names.fab:698
 msgid "Grassias"
 msgstr "গ্রাসিয়াস"
 
-#: skycultures/western/star_names.fab:644
+#: skycultures/western/star_names.fab:700
 msgid "Vanant"
 msgstr "ভানান্ট"
 
-#: skycultures/western/star_names.fab:645
+#: skycultures/western/star_names.fab:701
 msgid "Mula"
 msgstr "মুলা"
 
-#: skycultures/western/star_names.fab:646
+#: skycultures/western/star_names.fab:702
 msgid "Tali al Shaulah I"
 msgstr "তালি আল সুলাহ্ I"
 
-#: skycultures/western/star_names.fab:647
+#: skycultures/western/star_names.fab:703
 msgid "Tali al Shaulah II"
 msgstr "তালি আল সুলাহ্ II"
 
-#: skycultures/western/star_names.fab:648
+#: skycultures/western/star_names.fab:704
 msgid "Nur"
 msgstr "নুর"
 
-#: skycultures/western/star_names.fab:649
+#: skycultures/western/star_names.fab:705
 msgid "Iolil"
 msgstr "আয়োলিল"
 
-#: skycultures/western/star_names.fab:650
+#: skycultures/western/star_names.fab:706
 msgid "Jabhat Acrabi I"
 msgstr "জাবাহাত আকরাবি I"
 
-#: skycultures/western/star_names.fab:651
+#: skycultures/western/star_names.fab:707
 msgid "Jabhat Acrabi II"
 msgstr "জাবাহাত আকরাবি II"
 
-#: skycultures/western/star_names.fab:655
+#: skycultures/western/star_names.fab:710
+msgid "Cor Serpentis"
+msgstr "কর সার্পেন্টিস"
+
+#: skycultures/western/star_names.fab:712
 msgid "Nasak Shamiya I"
 msgstr "নাশাক শামিয়া I"
 
-#: skycultures/western/star_names.fab:656
+#: skycultures/western/star_names.fab:713
 msgid "Nasak Shamiya II"
 msgstr "নাশাক শামিয়া II"
 
-#: skycultures/western/star_names.fab:657
+#: skycultures/western/star_names.fab:714
 msgid "Nasak Yamani I"
 msgstr "নাশাক ইমানি I"
 
-#: skycultures/western/star_names.fab:658
+#: skycultures/western/star_names.fab:715
 msgid "Nasak Yamani II"
 msgstr "নাশাক ইমানি II"
 
-#: skycultures/western/star_names.fab:660
+#: skycultures/western/star_names.fab:717
 #: skycultures/western_rey/star_names.fab:27
 msgid "Aldebaran"
 msgstr "আলদুবরান (রোহিনী)"
 
-#: skycultures/western/star_names.fab:661
+#: skycultures/western/star_names.fab:718
+msgid "Cor Tauri"
+msgstr "কর টাউরি"
+
+#: skycultures/western/star_names.fab:719
+msgid "Parilicium"
+msgstr "পারিলিচিয়াম"
+
+#: skycultures/western/star_names.fab:720
 msgid "Elnath"
 msgstr "এলনাথ"
 
-#: skycultures/western/star_names.fab:662
+#: skycultures/western/star_names.fab:721
 msgid "El Nath"
 msgstr "অ্যাল নাথ"
 
-#: skycultures/western/star_names.fab:664
+#: skycultures/western/star_names.fab:723
 msgid "Oculus Boreus"
 msgstr "অকুলাস বোরেযাস"
 
-#: skycultures/western/star_names.fab:671
+#: skycultures/western/star_names.fab:730
 msgid "Sterope I"
 msgstr "স্টেরোপি I"
 
-#: skycultures/western/star_names.fab:675
+#: skycultures/western/star_names.fab:734
 msgid "Hyadum I"
 msgstr "হায়াড্যাম ১"
 
-#: skycultures/western/star_names.fab:676
+#: skycultures/western/star_names.fab:735
 msgid "Prima Hyadum"
 msgstr "প্রিমা হায়াডাম"
 
-#: skycultures/western/star_names.fab:677
+#: skycultures/western/star_names.fab:736
 msgid "Hyadum II"
 msgstr "হায়াড্যাম ২"
 
-#: skycultures/western/star_names.fab:678
+#: skycultures/western/star_names.fab:737
 msgid "The Ruby Star"
 msgstr "চুনি তারা"
 
-#: skycultures/western/star_names.fab:679
+#: skycultures/western/star_names.fab:738
 msgid "Sterope II"
 msgstr "স্টেরোপি II"
 
-#: skycultures/western/star_names.fab:680
+#: skycultures/western/star_names.fab:739
 msgid "Hyadum III"
 msgstr "হায়াডাম III"
 
-#: skycultures/western/star_names.fab:681
+#: skycultures/western/star_names.fab:740
 msgid "Hyadum IV"
 msgstr "হায়াডাম IV"
 
-#: skycultures/western/star_names.fab:682
+#: skycultures/western/star_names.fab:741
 msgid "Alkalbain III"
 msgstr "আলকালবিন III"
 
-#: skycultures/western/star_names.fab:683
+#: skycultures/western/star_names.fab:742
 msgid "Alkalbain IV"
 msgstr "আলকালবিন IV"
 
-#: skycultures/western/star_names.fab:684
+#: skycultures/western/star_names.fab:743
 msgid "Alkalbain V"
 msgstr "আলকালবিন V"
 
-#: skycultures/western/star_names.fab:685
+#: skycultures/western/star_names.fab:744
 msgid "Alkalbain I"
 msgstr "আলকালবিন I"
 
-#: skycultures/western/star_names.fab:686
+#: skycultures/western/star_names.fab:745
 msgid "Alkalbain II"
 msgstr "আলকালবিন II"
 
-#: skycultures/western/star_names.fab:689
+#: skycultures/western/star_names.fab:748
 msgid "Caput Trianguli"
 msgstr "কাপুট ট্রায়াংগুলি"
 
-#: skycultures/western/star_names.fab:690
+#: skycultures/western/star_names.fab:749
 msgid "Mizan"
 msgstr "মিজান"
 
-#: skycultures/western/star_names.fab:696
+#: skycultures/western/star_names.fab:754
+msgid "Dubb"
+msgstr "দুব"
+
+#: skycultures/western/star_names.fab:755
+msgid "Ak"
+msgstr "আক"
+
+#: skycultures/western/star_names.fab:757
 msgid "Phecda"
 msgstr "ফ্যাকডা"
 
-#: skycultures/western/star_names.fab:699
+#: skycultures/western/star_names.fab:760
 msgid "Kaffa"
 msgstr "কাফা"
 
-#: skycultures/western/star_names.fab:703
+#: skycultures/western/star_names.fab:764
 msgid "Benetnasch"
 msgstr "বিনেতন্যাশ"
 
-#: skycultures/western/star_names.fab:710
+#: skycultures/western/star_names.fab:771
 #: skycultures/western_rey/star_names.fab:8
 msgid "Alcor"
 msgstr "অ্যালকর (অরুন্ধতি)"
 
-#: skycultures/western/star_names.fab:711
+#: skycultures/western/star_names.fab:772
 msgid "Groombridge 1830"
 msgstr "গ্রুমব্রিজ ১৮৩০"
 
-#: skycultures/western/star_names.fab:712
+#: skycultures/western/star_names.fab:773
 msgid "Flying Star"
 msgstr "উড়ন্ত তারা"
 
-#: skycultures/western/star_names.fab:713
+#: skycultures/western/star_names.fab:774
 msgid "Runaway Star"
 msgstr "ধাবমান তারা"
 
-#: skycultures/western/star_names.fab:716
+#: skycultures/western/star_names.fab:777
 msgid "Al Kaphrah"
 msgstr "আল কাফেরা"
 
-#: skycultures/western/star_names.fab:717
+#: skycultures/western/star_names.fab:778
 msgid "Alkafzah"
 msgstr "আলকাফজা"
 
-#: skycultures/western/star_names.fab:718
+#: skycultures/western/star_names.fab:779
 msgid "Althiba I"
 msgstr "আলথিবা I"
 
-#: skycultures/western/star_names.fab:719
+#: skycultures/western/star_names.fab:780
 msgid "Althiba VII"
 msgstr "আলথিবা VII"
 
-#: skycultures/western/star_names.fab:720
+#: skycultures/western/star_names.fab:781
 msgid "Alhaud III"
 msgstr "আলহুদ III"
 
-#: skycultures/western/star_names.fab:721
+#: skycultures/western/star_names.fab:782
 msgid "Alhaud I"
 msgstr "আলহুদ I"
 
-#: skycultures/western/star_names.fab:722
+#: skycultures/western/star_names.fab:783
 msgid "Alhaud IV"
 msgstr "আলহুদ IV"
 
-#: skycultures/western/star_names.fab:723
+#: skycultures/western/star_names.fab:784
 msgid "Alhaud V"
 msgstr "আলহুদ V"
 
-#: skycultures/western/star_names.fab:724
+#: skycultures/western/star_names.fab:785
 msgid "Kafzatania"
 msgstr "কাফস্জাটানিয়া"
 
-#: skycultures/western/star_names.fab:725
+#: skycultures/western/star_names.fab:786
 msgid "Althiba II"
 msgstr "আলথিবা II"
 
-#: skycultures/western/star_names.fab:726
+#: skycultures/western/star_names.fab:787
 msgid "Althiba III"
 msgstr "আলথিবা III"
 
-#: skycultures/western/star_names.fab:727
+#: skycultures/western/star_names.fab:788
 msgid "Althiba IV"
 msgstr "আলথিবা IV"
 
-#: skycultures/western/star_names.fab:728
+#: skycultures/western/star_names.fab:789
 msgid "Althiba V"
 msgstr "আলথিবা V"
 
-#: skycultures/western/star_names.fab:729
+#: skycultures/western/star_names.fab:790
 msgid "Althiba VI"
 msgstr "আলথিবা VI"
 
-#: skycultures/western/star_names.fab:730
+#: skycultures/western/star_names.fab:791
 msgid "Alhaud II"
 msgstr "আলহুদ II"
 
-#: skycultures/western/star_names.fab:731
+#: skycultures/western/star_names.fab:792
 msgid "Alhaud VI"
 msgstr "আলহুদ VI"
 
-#: skycultures/western/star_names.fab:732
+#: skycultures/western/star_names.fab:793
 msgid "Alhaud VII"
 msgstr "আলহুদ VII"
 
-#: skycultures/western/star_names.fab:734
+#: skycultures/western/star_names.fab:795
 msgid "Polaris"
 msgstr "পোলারিস (ধ্রুবতারা)"
 
-#: skycultures/western/star_names.fab:735
+#: skycultures/western/star_names.fab:796
 msgid "Alrucaba"
 msgstr "আলরুখবা"
 
-#: skycultures/western/star_names.fab:736
+#: skycultures/western/star_names.fab:797
 msgid "Cinosura"
 msgstr "সিনোসৌর"
 
-#: skycultures/western/star_names.fab:737
+#: skycultures/western/star_names.fab:798
+msgid "Tramontana"
+msgstr "ত্রামোনতানা"
+
+#: skycultures/western/star_names.fab:799
+msgid "Yilduz"
+msgstr "ইলদুজ"
+
+#: skycultures/western/star_names.fab:800
+msgid "Mismar"
+msgstr "মিসমার"
+
+#: skycultures/western/star_names.fab:801
 #: skycultures/western_rey/star_names.fab:6
 msgid "Kochab"
 msgstr "কোখাব"
 
-#: skycultures/western/star_names.fab:739
+#: skycultures/western/star_names.fab:803
 msgid "Pherkad Major"
 msgstr "মূল ফেরকাদ"
 
-#: skycultures/western/star_names.fab:740
+#: skycultures/western/star_names.fab:804
 msgid "Pherkad Minor"
 msgstr "ফার্কাড গৌণ"
 
-#: skycultures/western/star_names.fab:742
+#: skycultures/western/star_names.fab:806
+msgid "Vildiur"
+msgstr "ভিলদিউর"
+
+#: skycultures/western/star_names.fab:807
 msgid "Circitores"
 msgstr "সিরসিটোরেস"
 
-#: skycultures/western/star_names.fab:743
+#: skycultures/western/star_names.fab:808
 msgid "Akfa Farkadain"
 msgstr "ইকফা ফারকাদেইন"
 
-#: skycultures/western/star_names.fab:744
+#: skycultures/western/star_names.fab:809
 msgid "Anwa Farkadain"
 msgstr "আনওয়ার ফারকাদেইন"
 
-#: skycultures/western/star_names.fab:747
+#: skycultures/western/star_names.fab:812
+msgid "Suhail al Muhlif"
+msgstr "সুহাইল আল মুলিফ"
+
+#: skycultures/western/star_names.fab:813
 msgid "Markeb"
 msgstr "মার্কিব"
 
-#: skycultures/western/star_names.fab:751
+#: skycultures/western/star_names.fab:815
+msgid "Al Suhail al Wazn"
+msgstr "আল সুহাইল আল ওয়াজন"
+
+#: skycultures/western/star_names.fab:818
 msgid "Azimech"
 msgstr "আসিম্যাক"
 
-#: skycultures/western/star_names.fab:754
-msgid "Antevorta"
-msgstr "আন্তেভর্তা"
-
-#: skycultures/western/star_names.fab:756
-msgid "Almuredin"
-msgstr "আলমুরেদিন"
-
-#: skycultures/western/star_names.fab:759
-msgid "Arich"
-msgstr "আরিচ"
-
-#: skycultures/western/star_names.fab:760
-msgid "Heze"
-msgstr "হেজ"
-
-#: skycultures/western/star_names.fab:761
+#: skycultures/western/star_names.fab:820
+#: skycultures/western/star_names.fab:829
 msgid "Minelauva"
 msgstr "মিনেলেউভা"
 
-#: skycultures/western/star_names.fab:762
+#: skycultures/western/star_names.fab:822
+msgid "Antevorta"
+msgstr "আন্তেভর্তা"
+
+#: skycultures/western/star_names.fab:824
+msgid "Almuredin"
+msgstr "আলমুরেদিন"
+
+#: skycultures/western/star_names.fab:827
+msgid "Arich"
+msgstr "আরিচ"
+
+#: skycultures/western/star_names.fab:828
+msgid "Heze"
+msgstr "হেজ"
+
+#: skycultures/western/star_names.fab:830
 msgid "Auva"
 msgstr "আওয়া"
 
-#: skycultures/western/star_names.fab:763
+#: skycultures/western/star_names.fab:831
 msgid "Khambaliya"
 msgstr "খাম্বালিয়া"
 
-#: skycultures/western/star_names.fab:764
+#: skycultures/western/star_names.fab:832
 msgid "Kambalia"
 msgstr "কাম্বালিয়া"
 
-#: skycultures/western/star_names.fab:765
+#: skycultures/western/star_names.fab:833
 msgid "Rijl al Awwa"
 msgstr "রেজুল আল আওয়া"
 
-#: skycultures/western/star_names.fab:766
+#: skycultures/western/star_names.fab:834
 msgid "Rigilawwa"
 msgstr "রিজিলাওয়া"
 
-#: skycultures/western/star_names.fab:767
+#: skycultures/western/star_names.fab:835
 msgid "Algafar I"
 msgstr "আলগফর I"
 
-#: skycultures/western/star_names.fab:768
+#: skycultures/western/star_names.fab:836
 msgid "Algafar II"
 msgstr "আলগফর II"
 
-#: skycultures/western/star_names.fab:770
+#: skycultures/western/star_names.fab:838
 msgid "Anser"
 msgstr "আনসের"
 
@@ -12152,9 +13060,6 @@ msgstr "বিটা সেন্টুরি"
 #~ msgid "Al Kurud"
 #~ msgstr "আল কারাদ"
 
-#~ msgid "Minchir"
-#~ msgstr "মিনচির"
-
 #~ msgid "Hydrobius"
 #~ msgstr "হাইড্রোবিয়াস"
 
@@ -12172,12 +13077,6 @@ msgstr "বিটা সেন্টুরি"
 
 #~ msgid "Printseps"
 #~ msgstr "প্রিন্টসেপ্স"
-
-#~ msgid "Inkalunis"
-#~ msgstr "ইনকালুনিস"
-
-#~ msgid "Alniyat"
-#~ msgstr "আলনিয়াত"
 
 #~ msgid "Han"
 #~ msgstr "হান"
@@ -12238,3 +13137,6 @@ msgstr "বিটা সেন্টুরি"
 
 #~ msgid "Omicron Velorum Cluster"
 #~ msgstr "ওমিক্রন পাল মন্ডল তারকাগুচ্ছ"
+
+#~ msgid "Golf of Mexico Nebula"
+#~ msgstr "মেক্সিকো উপসাগর নীহারিকা"

@@ -43,6 +43,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "ConstellationMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #ifndef DISABLE_SCRIPTING
@@ -292,6 +293,18 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->showBookmarksButtonCheckBox->setChecked(gui->getFlagShowBookmarksButton());
 	connect(ui->showBookmarksButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowBookmarksButton(bool)));
+
+	ui->showICRSGridButtonCheckBox->setChecked(gui->getFlagShowICRSGridButton());
+	connect(ui->showICRSGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowICRSGridButton(bool)));
+
+	ui->showGalacticGridButtonCheckBox->setChecked(gui->getFlagShowGalacticGridButton());
+	connect(ui->showGalacticGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowGalacticGridButton(bool)));
+
+	ui->showEclipticGridButtonCheckBox->setChecked(gui->getFlagShowEclipticGridButton());
+	connect(ui->showEclipticGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowEclipticGridButton(bool)));
+
+	ui->showConstellationBoundariesButtonCheckBox->setChecked(gui->getFlagShowConstellationBoundariesButton());
+	connect(ui->showConstellationBoundariesButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowConstellationBoundariesButton(bool)));
 
 	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
@@ -630,6 +643,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_show_obj_self_shadows",	propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 
 	// view dialog / markings tab settings
+	conf->setValue("viewing/flag_gridlines",		propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());
 	conf->setValue("viewing/flag_azimuthal_grid",		propMgr->getStelPropertyValue("GridLinesMgr.azimuthalGridDisplayed").toBool());
 	conf->setValue("viewing/flag_equatorial_grid",		propMgr->getStelPropertyValue("GridLinesMgr.equatorGridDisplayed").toBool());
 	conf->setValue("viewing/flag_equatorial_J2000_grid",	propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000GridDisplayed").toBool());
@@ -674,6 +688,11 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/constellation_art_intensity",	propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_name_style",	ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
 	conf->setValue("viewing/constellation_line_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toFloat());
+
+	conf->setValue("viewing/flag_asterism_drawing",		propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
+	conf->setValue("viewing/flag_asterism_name",		propMgr->getStelPropertyValue("AsterismMgr.namesDisplayed").toBool());
+	conf->setValue("viewing/asterism_line_thickness",	propMgr->getStelPropertyValue("AsterismMgr.asterismLineThickness").toFloat());
+
 	conf->setValue("viewing/flag_night",			StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_stars",			propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
 	conf->setValue("astro/flag_star_name",			propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
@@ -810,6 +829,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_toast_survey_button", gui->getFlagShowToastSurveyButton());
 	conf->setValue("gui/flag_show_bookmarks_button", gui->getFlagShowBookmarksButton());
+	conf->setValue("gui/flag_show_icrs_grid_button", gui->getFlagShowICRSGridButton());
+	conf->setValue("gui/flag_show_galactic_grid_button", gui->getFlagShowGalacticGridButton());
+	conf->setValue("gui/flag_show_ecliptic_grid_button", gui->getFlagShowEclipticGridButton());
+	conf->setValue("gui/flag_show_boundaries_button", gui->getFlagShowConstellationBoundariesButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());

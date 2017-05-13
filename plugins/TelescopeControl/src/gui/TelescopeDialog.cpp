@@ -176,7 +176,10 @@ void TelescopeDialog::createDialogContent()
 		QList<double> circles;
 		QString serverName;
 		QString portSerial;
-		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial))
+		QString rts2Url;
+		QString rts2Username;
+		QString rts2Password;
+		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial, rts2Url, rts2Username, rts2Password))
 			continue;
 		
 		//Determine the server type
@@ -253,6 +256,7 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td rowspan=4><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
+	aboutPage += "<tr><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
 	aboutPage += "</table>";
 
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
@@ -501,6 +505,10 @@ QString TelescopeDialog::getTypeLabel(ConnectionType type)
 		case ConnectionVirtual:
 			// TRANSLATORS: Telescope connection type
 			typeLabel = N_("virtual");
+			break;
+		case ConnectionRTS2:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("RTS2");
 			break;
 		default:
 			;

@@ -109,6 +109,13 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
 		objModulesMap["NebulaMgr:106"] = "Collinder Catalogue";
 		objModulesMap["NebulaMgr:107"] = "Melotte Catalogue";
+		objModulesMap["NebulaMgr:108"] = "New General Catalogue";
+		objModulesMap["NebulaMgr:109"] = "Index Catalogue";
+		objModulesMap["NebulaMgr:110"] = "Lynds' Catalogue of Bright Nebulae";
+		objModulesMap["NebulaMgr:111"] = "Lynds' Catalogue of Dark Nebulae";
+		objModulesMap["NebulaMgr:112"] = "Principal Galaxy Catalog";
+		objModulesMap["NebulaMgr:113"] = "The Uppsala General Catalogue of Galaxies";
+		objModulesMap["NebulaMgr:114"] = "Cederblad Catalog";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
 	}

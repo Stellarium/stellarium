@@ -326,7 +326,7 @@ float StelSkyDrawer::pointSourceLuminanceToMag(float lum)
 }
 
 // Compute the luminance for an extended source with the given surface brightness in Vmag/arcmin^2
-float StelSkyDrawer::surfacebrightnessToLuminance(float sb)
+float StelSkyDrawer::surfaceBrightnessToLuminance(float sb)
 {
 	return 2.f*2025000.f*std::exp(-0.92103f*(sb + 12.12331f))/(1.f/60.f*1.f/60.f);
 }
@@ -427,10 +427,6 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	if (rcMag.radius<=0.f)
 		return false;
 
-	// Why do we need Vec3d here? Try with Vec3f win.
-//	Vec3d win;
-//	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(Vec3d(v[0],v[1],v[2]), win) : sPainter->getProjector()->project(Vec3d(v[0],v[1],v[2]), win)))
-//		return false;
 	Vec3f win;
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;

@@ -109,7 +109,16 @@ QString Nova::getEnglishName() const
 
 QString Nova::getNameI18n() const
 {
-	return novaName;
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	// Parse the nova name to get parts to translation
+	QRegExp nn("^Nova\\s+(\\w+|\\w+\\s+\\w+)\\s+(\\d+|\\d+\\s+#\\d+)$");
+	QString nameI18n = novaName;
+	if (nn.exactMatch(novaName))
+		nameI18n = QString("%1 %2 %3").arg(trans.qtranslate("Nova", "Nova template"), trans.qtranslate(nn.capturedTexts().at(1).trimmed(), "Genitive name of constellation"), nn.capturedTexts().at(2).trimmed());
+	else
+		nameI18n = trans.qtranslate(novaName);
+
+	return nameI18n;
 }
 
 QString Nova::getDesignation() const
@@ -130,7 +139,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 
 	if (flags&Name)
 	{
-		QString name = novaName.isEmpty() ? QString("<h2>%1</h2>").arg(designation) : QString("<h2>%1 (%2)</h2>").arg(novaName).arg(designation);
+		QString name = novaName.isEmpty() ? QString("<h2>%1</h2>").arg(designation) : QString("<h2>%1 (%2)</h2>").arg(getNameI18n()).arg(designation);
 		oss << name;
 	}
 

@@ -121,15 +121,12 @@ public:
 
 	enum ApparentMagnitudeAlgorithm
 	{
-		Mueller_1893,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Astr_Alm_1984,	// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
-		Expl_Sup_1992,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
-		Expl_Sup_2013,	// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
-//		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-//		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-//		Harris,			// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		Mueller_1893,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Astr_Alm_1984,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
+		Expl_Sup_1992,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
+		Expl_Sup_2013,		// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
 		UndefinedAlgorithm,
-		Generic		// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
+		Generic			// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
 
 
@@ -254,7 +251,7 @@ public:
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingnode(void) const {return re.ascendingNode;}
+	double getRotAscendingNode(void) const {return re.ascendingNode;}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
