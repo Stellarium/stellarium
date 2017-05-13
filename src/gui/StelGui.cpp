@@ -32,18 +32,15 @@
 #include "StelObjectMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "StarMgr.hpp"
-#include "ConstellationMgr.hpp"
-#include "GridLinesMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelActionMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include "SporadicMeteorMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
-#include "ToastMgr.hpp"
-#include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyDrawer.hpp"
 #ifdef ENABLE_SCRIPT_CONSOLE
@@ -545,30 +542,30 @@ void StelGui::update()
 		buttonGotoSelectedObject->setChecked(b);
 	}
 
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 	bool flag;
 
-	// XXX: this should probably be removed, we can use property NOTIFY instead.
-	flag = GETSTELMODULE(StelSkyLayerMgr)->getFlagShow();
+	flag = propMgr->getProperty("StelSkyLayerMgr.flagShow")->getValue().toBool();
 	if (getAction("actionShow_DSS")->isChecked() != flag)
 		getAction("actionShow_DSS")->setChecked(flag);
 
-	flag = GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
+	flag = propMgr->getProperty("ToastMgr.surveyDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Toast_Survey")->isChecked() != flag)
 		getAction("actionShow_Toast_Survey")->setChecked(flag);
 
-	flag = GETSTELMODULE(GridLinesMgr)->getFlagEquatorJ2000Grid();
+	flag = propMgr->getProperty("GridLinesMgr.equatorJ2000GridDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
 		getAction("actionShow_Equatorial_J2000_Grid")->setChecked(flag);
 
-	flag = GETSTELMODULE(GridLinesMgr)->getFlagGalacticGrid();
+	flag = propMgr->getProperty("GridLinesMgr.galacticGridDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Galactic_Grid")->isChecked() != flag)
 		getAction("actionShow_Galactic_Grid")->setChecked(flag);
 
-	flag = GETSTELMODULE(GridLinesMgr)->getFlagEclipticGrid();
+	flag = propMgr->getProperty("GridLinesMgr.eclipticGridDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Ecliptic_Grid")->isChecked() != flag)
 		getAction("actionShow_Ecliptic_Grid")->setChecked(flag);
 
-	flag = GETSTELMODULE(ConstellationMgr)->getFlagBoundaries();
+	flag = propMgr->getProperty("ConstellationMgr.boundariesDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Constellation_Boundaries")->isChecked() != flag)
 		getAction("actionShow_Constellation_Boundaries")->setChecked(flag);
 
