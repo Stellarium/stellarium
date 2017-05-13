@@ -55,6 +55,7 @@ static inline int SetNonblocking(int s)
 #include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/select.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>

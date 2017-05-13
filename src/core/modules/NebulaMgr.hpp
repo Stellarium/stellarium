@@ -316,8 +316,11 @@ public:
 	//! @return a designation
 	QString getLatestSelectedDSODesignation();
 
-	//! Get the list of all the bodies of the solar system.
+	//! Get the list of all deep-sky objects.
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
+
+	//! Get the list of deep-sky objects by type.
+	QList<NebulaP> getDeepSkyObjectsByType(const QString& objType);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -757,6 +760,10 @@ private slots:
 	//! Loads native names of deep-sky objects for a given sky culture.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
+
+	//! Called when the filter of DSO is updated.
+	//! Loads native names of deep-sky objects for a current sky culture.
+	void updateDSONames();
 
 private:
 

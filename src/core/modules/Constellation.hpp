@@ -158,6 +158,7 @@ private:
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
 	QString abbreviation;
+	QString context;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
 	Vec3d XYname;
@@ -168,7 +169,7 @@ private:
 	//! Month of end visibility of constellation (seasonal rules)
 	int endSeason;
 	//! List of stars forming the segments
-	StelObjectP* asterism;
+	StelObjectP* constellation;
 
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;

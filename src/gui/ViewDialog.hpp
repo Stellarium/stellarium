@@ -128,6 +128,9 @@ private slots:
 	void askConstellationLabelsColor();
 	void askConstellationLinesColor();
 	void askConstellationBoundariesColor();
+	// asterisms colors
+	void askAsterismLabelsColor();
+	void askAsterismLinesColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

@@ -41,6 +41,7 @@
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
+#ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
 LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 	: GPSLookupHelper(parent), ready(false)
@@ -158,7 +159,7 @@ void LibGPSLookupHelper::query()
 }
 
 #endif
-#ifdef ENABLE_GPS
+
 NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	: GPSLookupHelper(parent), serial(NULL), nmea(NULL)
 {
@@ -187,6 +188,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 		#else
 		QString portName=conf->value("gui/gps_interface", "ttyUSB0").toString();
 		#endif
+		bool portFound=false;
 		for (int i=0; i<portInfoList.size(); ++i)
 		{
 			QSerialPortInfo pi=portInfoList.at(i);
@@ -204,12 +206,13 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 			if (pi.portName()==portName)
 			{
 				portInfo=pi;
+				portFound=true;
 			}
-			else
-			{
-				qDebug() << "Configured port" << portName << "not found. No GPS query.";
-				return;
-			}
+		}
+		if (!portFound)
+		{
+			qDebug() << "Configured port" << portName << "not found. No GPS query.";
+			return;
 		}
 	}
 
@@ -229,7 +232,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	nmea->setDevice(serial);
 	// TODO Find out what happens if some other serial device is connected? Just timeout/error?
 
-	qDebug() << "GPS NMEA device at port " << serial->portName();
+	qDebug() << "Query GPS NMEA device at port " << serial->portName();
 	connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
 	connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
 	connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
@@ -283,7 +286,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 
 void NMEALookupHelper::nmeaError(QGeoPositionInfoSource::Error error)
 {
-	emit queryError("NMEA general error: " + error);
+	emit queryError(QString("NMEA general error: %1").arg(error));
 }
 
 void NMEALookupHelper::nmeaTimeout()
@@ -328,8 +331,10 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("Pacific/Pohnpei",   "Pacific/Ponape");
 		locationDBToIANAtranslations.insert("Pacific/Norfolk",   "UTC+11:00");
 		locationDBToIANAtranslations.insert("Pacific/Pitcairn",  "UTC-08:00");
-		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18
-		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon"); // UTC+6:30 Missing on Ubuntu/Qt5.5.1.
+		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18:
+		// NOTE: We must add these following zones for lookup in both ways: When the binary file is being created for publication on Linux, Rangoon/Yangon is being translated.
+		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon");  // UTC+6:30 Yangon missing on Ubuntu/Qt5.5.1.
+		locationDBToIANAtranslations.insert("Asia/Yangon",       "Asia/Rangoon"); // This can translate from the binary location file back to the zone name as known on Windows.
 		locationDBToIANAtranslations.insert( "", "UTC");
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
@@ -704,6 +709,7 @@ void StelLocationMgr::locationFromIP()
 	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
 }
 
+#ifdef ENABLE_GPS
 bool StelLocationMgr::locationFromGPS()
 {
 #ifdef ENABLE_LIBGPS
@@ -719,7 +725,6 @@ bool StelLocationMgr::locationFromGPS()
 		return true;
 	}
 #endif
-#ifdef ENABLE_GPS
 	if(!nmeaHelper)
 	{
 		nmeaHelper = new NMEALookupHelper(this);
@@ -731,7 +736,7 @@ bool StelLocationMgr::locationFromGPS()
 		nmeaHelper->query();
 		return true;
 	}
-#endif
+
 	emit gpsQueryFinished(false);
 	return false;
 }
@@ -747,6 +752,7 @@ void StelLocationMgr::gpsQueryError(const QString &err)
 	qWarning()<<err;
 	emit gpsQueryFinished(false);
 }
+#endif
 
 // slot that receives IP-based location data from the network.
 void StelLocationMgr::changeLocationFromNetworkLookup()

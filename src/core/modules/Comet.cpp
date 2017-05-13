@@ -409,7 +409,7 @@ void Comet::update(int deltaTime)
 	const bool withAtmosphere=(core->getSkyDrawer()->getFlagHasAtmosphere());
 
 	StelToneReproducer* eye = core->getToneReproducer();
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
+	float lum = core->getSkyDrawer()->surfaceBrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum);
 
@@ -594,7 +594,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	sPainter.setCullFace(false);
 
 	StelToneReproducer* eye = core->getToneReproducer();
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
+	float lum = core->getSkyDrawer()->surfaceBrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum);
 	float magFactor=qBound(0.25f*intensityFovScale, aLum*intensityFovScale, 2.0f);

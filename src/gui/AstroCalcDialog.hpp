@@ -35,6 +35,7 @@
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StarMgr.hpp"
+#include "StelUtils.hpp"
 
 class Ui_astroCalcDialogForm;
 class QListWidgetItem;
@@ -45,14 +46,26 @@ class AstroCalcDialog : public StelDialog
 
 public:
 	//! Defines the number and the order of the columns in the table that lists planetary positions
-	//! @enum PlanetaryPositionsColumns
-	enum PlanetaryPositionsColumns {
+	//! @enum PositionsColumns
+	enum PositionsColumns {
 		ColumnName,		//! name of object
 		ColumnRA,		//! right ascension
 		ColumnDec,		//! declination
 		ColumnMagnitude,	//! magnitude
 		ColumnType,		//! type of object
 		ColumnCount		//! total number of columns
+	};
+
+	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
+	//! @enum CPositionsColumns
+	enum CPositionsColumns {
+		CColumnName,		//! name of object
+		CColumnRA,		//! right ascension
+		CColumnDec,		//! declination
+		CColumnMagnitude,	//! magnitude
+		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnType,		//! type of object
+		CColumnCount		//! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the ephemeris table
@@ -98,23 +111,51 @@ protected:
 private slots:
 	//! Search planetary positions and fill the list.
 	void currentPlanetaryPositions();
-	void selectCurrentPlanetaryPosition(const QModelIndex &modelIndex);
-	void onChangedEphemerisPosition(const QModelIndex &modelIndex);
+	void selectCurrentPlanetaryPosition(const QModelIndex &modelIndex);	
+
+	void savePlanetaryPositionsMagnitudeLimit(double mag);
+	void savePlanetaryPositionsAboveHorizonFlag(bool b);
+
+	void currentCelestialPositions();
+	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
+
+	void saveCelestialPositionsMagnitudeLimit(double mag);
+	void saveCelestialPositionsHorizontalCoordinatesFlag(bool b);
+	void saveCelestialPositionsCategory(int index);
 
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 	void saveEphemeris();
+	void onChangedEphemerisPosition(const QModelIndex &modelIndex);
+
+	void saveEphemerisCelestialBody(int index);
+	void saveEphemerisTimeStep(int index);
 
 	//! Calculate phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
+	void cleanupPhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
 
+	void savePhenomenaCelestialBody(int index);
+	void savePhenomenaCelestialGroup(int index);
+	void savePhenomenaOppositionFlag(bool b);
+
+	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
+	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'
 	void drawCurrentTimeDiagram();
+	//! Draw vertical line of meridian passage time on diagram 'Altitude vs. Time'
+	void drawTransitTimeDiagram(double transitTime); // time in hours
+	//! Show info from graphs under mouse cursor
 	void mouseOverLine(QMouseEvent *event);
+
+	// WUT
+	void saveWutMagnitudeLimit(double mag);
+	void calculateWutObjects();
+	void selectWutObject();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
@@ -126,17 +167,25 @@ private:
 	class NebulaMgr* dsoMgr;
 	class StarMgr* starMgr;
 	class StelObjectMgr* objectMgr;
+	class StelLocaleMgr* localeMgr;
+	QSettings* conf;
 	QTimer *currentTimeLine;
+	QHash<QString,QString> wutObjects;
+	QHash<QString,int> wutCategories;
 
-	//! Update header names for planetary positions table
+	typedef QMap<StelObjectP, float> starData;
+
+	//! Update header names for planetary and celestial positions tables
 	void setPlanetaryPositionsHeaderNames();
+	void setCelestialPositionsHeaderNames();
 	//! Update header names for ephemeris table
 	void setEphemerisHeaderNames();
 	//! Update header names for phenomena table
 	void setPhenomenaHeaderNames();
 
-	//! Init header and list of planetary positions
+	//! Init header and list of planetary and celestial positions
 	void initListPlanetaryPositions();
+	void initListCelestialPositions();
 	//! Init header and list of ephemeris
 	void initListEphemeris();
 	//! Init header and list of phenomena
@@ -147,6 +196,7 @@ private:
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
 	void populateCelestialBodyList();
+	void populateCelestialCategoryList();
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
 	//! Populates the drop-down list of major planets.
@@ -155,6 +205,10 @@ private:
 	void populateGroupCelestialBodyList();	
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
+	//! Populates the drop-down list of time intervals for WUT tool.
+	void populateTimeIntervalsList();
+	//! Populates the list of groups for WUT tool.
+	void populateWutGroups();
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
@@ -176,7 +230,7 @@ private:
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2);
 
 	QString delimiter, acEndl;
-	QStringList ephemerisHeader, phenomenaHeader, planetaryPositionsHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;
 	static float brightLimit;
 	static float minY, maxY;
 
@@ -186,10 +240,10 @@ private:
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
-class ACTreeWidgetItem : public QTreeWidgetItem
+class ACPlanPosTreeWidgetItem : public QTreeWidgetItem
 {
 public:
-	ACTreeWidgetItem(QTreeWidget* parent)
+	ACPlanPosTreeWidgetItem(QTreeWidget* parent)
 		: QTreeWidgetItem(parent)
 	{
 	}
@@ -199,9 +253,109 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::ColumnMagnitude)
+		if (column == AstroCalcDialog::ColumnRA || column == AstroCalcDialog::ColumnDec)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::ColumnMagnitude)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACCelPosTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACCelPosTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::CColumnName)
+		{
+			QRegExp dso("^(\\w+)\\s*(\\d+)$");
+			int a = 0, b = 0;
+			if (dso.exactMatch(text(column)))
+				a = dso.capturedTexts().at(2).toInt();
+			if (dso.exactMatch(other.text(column)))
+				b = dso.capturedTexts().at(2).toInt();
+			if (a>0 && b>0)
+				return a < b;
+			else
+				return text(column).toLower() < other.text(column).toLower();
+		}
+		else if (column == AstroCalcDialog::CColumnRA || column == AstroCalcDialog::CColumnDec)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnExtra)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACEphemTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACEphemTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisJD)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACPhenTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACPhenTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::PhenomenaSeparation)
+		{
+			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
 		else
 		{

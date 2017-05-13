@@ -123,8 +123,10 @@ signals:
 private slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
+#ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
+#endif
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
