@@ -122,7 +122,7 @@ void MilkyWay::draw(StelCore* core)
 	int bortle=drawer->getBortleScaleIndex();
 	//aLum*=(11.0f-bortle)*0.1f;
 
-	float lum = drawer->surfacebrightnessToLuminance(12.f+0.15*bortle); // was 11.5; Source? How to calibrate the new texture?
+	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15*bortle); // was 11.5; Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());

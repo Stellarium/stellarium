@@ -187,7 +187,7 @@ void ZodiacalLight::draw(StelCore* core)
 	Vec3f c = color;
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = drawer->surfacebrightnessToLuminance(13.5f + 0.5f*bortle); // (8.0f + 0.5*bortle);
+	float lum = drawer->surfaceBrightnessToLuminance(13.5f + 0.5f*bortle); // (8.0f + 0.5*bortle);
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
