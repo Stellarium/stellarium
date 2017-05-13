@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 00:21+0700\n"
-"PO-Revision-Date: 2017-04-17 14:57+0000\n"
+"PO-Revision-Date: 2017-05-12 08:48+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-12 05:26+0000\n"
+"X-Launchpad-Export-Date: 2017-05-13 05:23+0000\n"
 "X-Generator: Launchpad (build 18373)\n"
 "Language: bn\n"
 
@@ -2472,7 +2472,7 @@ msgstr "Shift ও left click"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete the one closest marker to mouse cursor"
-msgstr ""
+msgstr "কার্সারের কাছের বিন্দুটি মুছে ফেলুন"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2484,7 +2484,7 @@ msgstr "বিন্দুগুলি মুছে ফেলুন"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Shift & Alt & right click"
-msgstr ""
+msgstr "Shift ও Alt ও right click"
 
 #: src/gui/HelpDialog.cpp:194
 #, qt-format
@@ -2927,7 +2927,7 @@ msgstr "মোছার জন্য কোন একটি ভূমিরূ�
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 msgid "Are you really want to remove this landscape?"
-msgstr ""
+msgstr "আপনি কি সত্যিই এই ভূমিরূপটি মুছে ফেলতে চান ?"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3161,22 +3161,22 @@ msgstr ""
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:324
 msgid "Sep."
-msgstr ""
+msgstr "চ্যুতি"
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:329
 msgid "Per."
-msgstr ""
+msgstr "অবকাশ"
 
 #: src/gui/AstroCalcDialog.cpp:329
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "দিন"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:334
 msgid "S.B."
-msgstr ""
+msgstr "পৃষ্ঠঃ উজ্জ্বঃ"
 
 #: src/gui/AstroCalcDialog.cpp:360 src/gui/AstroCalcDialog.cpp:530
 #, qt-format
@@ -3390,26 +3390,26 @@ msgstr "মেলোটি তালিকা"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:471 src/translations.h:169
 msgid "New General Catalogue"
-msgstr ""
+msgstr "নীহারিকা ও তারকাগুচ্ছের আধুনিক সাধারণ তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/translations.h:171
 msgid "Index Catalogue"
-msgstr ""
+msgstr "নীহারিকা ও তারকাগুচ্ছের ক্রম তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/translations.h:173
 msgid "Lynds' Catalogue of Bright Nebulae"
-msgstr ""
+msgstr "লিন্ডসের উজ্জ্বল নীহারিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:474 src/translations.h:175
 msgid "Lynds' Catalogue of Dark Nebulae"
-msgstr ""
+msgstr "লিন্ডসের কৃষ্ণবর্ণ নীহারিকা"
 
 #: src/gui/AstroCalcDialog.cpp:475 src/ui_viewDialog.h:2123
 msgid "Principal Galaxy Catalog"
-msgstr ""
+msgstr "মুখ্য নক্ষত্রলোক তালিকা"
 
 #: src/gui/AstroCalcDialog.cpp:476 src/ui_viewDialog.h:2126
 msgid "The Uppsala General Catalogue of Galaxies"
@@ -3419,7 +3419,7 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:477 src/translations.h:177
 msgid "Cederblad Catalog"
-msgstr ""
+msgstr "সেডেরব্লাডের তালিকা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:478 src/translations.h:179
@@ -3435,13 +3435,13 @@ msgstr "হার্শেল ৪০০ তালিকা"
 #: src/gui/AstroCalcDialog.cpp:480 src/gui/AstroCalcDialog.cpp:2142
 #: src/translations.h:190
 msgid "Bright double stars"
-msgstr ""
+msgstr "উজ্জ্বল দ্বৈত নক্ষত্র"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:481 src/gui/AstroCalcDialog.cpp:2143
 #: src/translations.h:192
 msgid "Bright variable stars"
-msgstr ""
+msgstr "উজ্জ্বল অসম ঔজ্জ্বল্যের তারা"
 
 #: src/gui/AstroCalcDialog.cpp:713 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -3560,12 +3560,12 @@ msgstr "উজ্জ্বল তারা (<%1 mag)"
 #: src/gui/AstroCalcDialog.cpp:1013
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr ""
+msgstr "উজ্জ্বল দ্বৈত নক্ষত্র (<%1 উজ্জ্বল)"
 
 #: src/gui/AstroCalcDialog.cpp:1014
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
-msgstr ""
+msgstr "উজ্জ্বল অসম ঔজ্জ্বল্যের তারা (<%1 উজ্জ্বল)"
 
 #: src/gui/AstroCalcDialog.cpp:1015
 #, qt-format
@@ -3595,7 +3595,7 @@ msgstr "এখন প্রায় %1"
 #: src/gui/AstroCalcDialog.cpp:1229
 #, qt-format
 msgid "Passage of meridian at approximately %1"
-msgstr ""
+msgstr "মধ্যগগনে %1 এ"
 
 #: src/gui/AstroCalcDialog.cpp:1252
 msgid "Phenomenon"
@@ -3637,19 +3637,19 @@ msgstr "গ্রহন"
 
 #: src/gui/AstroCalcDialog.cpp:2107
 msgid "In the Evening"
-msgstr ""
+msgstr "সন্ধ্যার সময়"
 
 #: src/gui/AstroCalcDialog.cpp:2108
 msgid "In the Morning"
-msgstr ""
+msgstr "ভোরের সময়"
 
 #: src/gui/AstroCalcDialog.cpp:2109
 msgid "Any Time Tonight"
-msgstr ""
+msgstr "রাতের বেলা"
 
 #: src/gui/AstroCalcDialog.cpp:2128
 msgid "Bright stars"
-msgstr ""
+msgstr "উজ্জ্বল তারা"
 
 #: src/gui/AstroCalcDialog.cpp:2129 src/ui_viewDialog.h:2141
 msgid "Bright nebulae"
@@ -3669,15 +3669,15 @@ msgstr "পর্যবেক্ষণ ঠিকানা"
 
 #: src/gui/BookmarksDialog.cpp:161
 msgid "Unnamed object"
-msgstr ""
+msgstr "নামকরন হয়নি এমন বস্তু"
 
 #: src/gui/BookmarksDialog.cpp:341 src/ui_bookmarksDialog.h:204
 msgid "Import bookmarks"
-msgstr ""
+msgstr "বুকমার্ক আমদানি করুন"
 
 #: src/gui/BookmarksDialog.cpp:354
 msgid "Export bookmarks as..."
-msgstr ""
+msgstr "বুকমার্ক পছন্দসই কোথাও সঞ্চয় করুন ..."
 
 #: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
@@ -4491,6 +4491,8 @@ msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
+"জ্যাক বেনেট প্রবর্তিত দক্ষিন গোলার্ধের ১৫২ টি মহাজাগতিক জ্যোতিষ্কের তালিকা । "
+"Auke Slotegraaf এটি যুক্ত করেছেন ।"
 
 #: src/translations.h:401
 msgid ""
@@ -7475,11 +7477,11 @@ msgstr "অবস্থান"
 
 #: src/ui_astroCalcDialog.h:730
 msgid "Planetary positions"
-msgstr "অবস্থান"
+msgstr "গ্রহ, গ্রহাণু ইত্যাদির অবস্থান"
 
 #: src/ui_astroCalcDialog.h:735
 msgid "Celestial bodies above horizon"
-msgstr ""
+msgstr "দিগন্তের উপরে"
 
 #: src/ui_astroCalcDialog.h:738
 msgid "Ephemeris"
@@ -7500,25 +7502,25 @@ msgstr "উন্নতি বনাম সময়"
 #: src/ui_astroCalcDialog.h:747
 msgctxt "What's Up Tonight"
 msgid "WUT"
-msgstr ""
+msgstr "আজ রাত"
 
 #: src/ui_astroCalcDialog.h:749
 msgid "What's Up Tonight"
-msgstr ""
+msgstr "আজ রাতে কি কি দেখা যাবে"
 
 #: src/ui_astroCalcDialog.h:756 src/ui_astroCalcDialog.h:768
 #: src/ui_astroCalcDialog.h:805
 msgid "Show objects brighter than magnitude:"
-msgstr ""
+msgstr "সর্বাধিক উজ্জ্বল্যতা :"
 
 #: src/ui_astroCalcDialog.h:761
 msgid ""
 "Calculate positions for celestial bodies who is above horizon at the moment."
-msgstr ""
+msgstr "শুধু দিগন্তের উপরে থাকা জ্যোতিষ্কগুলির অবস্থান দেখানো হবে ।"
 
 #: src/ui_astroCalcDialog.h:763
 msgid "Above horizon"
-msgstr ""
+msgstr "দিগন্তের উপরে"
 
 #: src/ui_astroCalcDialog.h:765
 msgid "Update of planetary positions"
@@ -7526,11 +7528,11 @@ msgstr "টাটকা তথ্য দেখুন"
 
 #: src/ui_astroCalcDialog.h:767
 msgid "Update positions"
-msgstr ""
+msgstr "টাটকা তথ্য দেখুন"
 
 #: src/ui_astroCalcDialog.h:769
 msgid "Use horizontal coordinates"
-msgstr ""
+msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক"
 
 #: src/ui_astroCalcDialog.h:770 src/ui_astroCalcDialog.h:793
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -7589,7 +7591,7 @@ msgstr "দশমিক যুক্ত ডিগ্রি ব্যবহার
 
 #: src/ui_astroCalcDialog.h:794
 msgid "Calculate oppositions"
-msgstr ""
+msgstr "প্রতিযোগ গণনা"
 
 #: src/ui_astroCalcDialog.h:795
 msgid "Between objects:"
@@ -7601,7 +7603,7 @@ msgstr "ও"
 
 #: src/ui_astroCalcDialog.h:797
 msgid "Cleanup of phenomena"
-msgstr ""
+msgstr "মুছে ফেলুন"
 
 #: src/ui_astroCalcDialog.h:798
 msgid "Save phenomena"
@@ -7617,15 +7619,15 @@ msgstr "উন্নতি - সময় লেখচিত্র তৈরীর 
 
 #: src/ui_astroCalcDialog.h:806
 msgid "Select a category:"
-msgstr ""
+msgstr "ধরন :"
 
 #: src/ui_astroCalcDialog.h:807
 msgid "Matching objects:"
-msgstr ""
+msgstr "জ্যোতিষ্ক সমূহ :"
 
 #: src/ui_astroCalcDialog.h:808
 msgid "Show objects which are up:"
-msgstr ""
+msgstr "দেখতে পাওয়ার সময় :"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -7657,7 +7659,7 @@ msgstr "বু&কমার্কটি দেখুন"
 
 #: src/ui_bookmarksDialog.h:205
 msgid "Export bookmarks"
-msgstr ""
+msgstr "বুকমার্ক অন্য কোথাও সঞ্চয় করুন"
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:378
 msgid "Color settings"
@@ -13343,39 +13345,39 @@ msgstr "কৌণিক দূরত্ব (আর্কসেকেন্ডে
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
 msgid "Effective temperature of a host star, K"
-msgstr ""
+msgstr "কার্যকর তাপমাত্রা, কেলভিন"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid "Year of Discovery"
-msgstr ""
+msgstr "আবিষ্কারের সাল"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
 msgid "Metallicity of a host star"
-msgstr ""
+msgstr "তারার ধাতবতা"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
 msgid "V magnitude of a host star, mag"
-msgstr ""
+msgstr "তারার আপাত উজ্জ্বল্যতা, উজ্জ্বল্যতা গুনাঙ্ক"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
 msgid "RA (J2000) of a star, deg."
-msgstr ""
+msgstr "বিষুবাংশ (J2000 অুনুযায়ী), ডিগ্রি"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
 msgid "Dec (J2000) of a star, deg."
-msgstr ""
+msgstr "বিষুবলম্ব (J2000 অুনুযায়ী), ডিগ্রি"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
 msgid "Distance to a star, pc"
-msgstr ""
+msgstr "তারার দূরত্ব, পারসেক"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid "Mass of a host star, Msol"
-msgstr ""
+msgstr "তারার ভর, সূর্যের সাপেক্ষে"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid "Radius of a host star, Rsol"
-msgstr ""
+msgstr "তারার ব্যাসার্ধ, সূর্যের সাপেক্ষে"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
 msgid "Exoplanets Configuration"
