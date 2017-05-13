@@ -124,6 +124,8 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 	{
 		objModulesMap["StarMgr:0"] = "Interesting double stars";
 		objModulesMap["StarMgr:1"] = "Interesting variable stars";
+		objModulesMap["StarMgr:2"] = "Bright double stars";
+		objModulesMap["StarMgr:3"] = "Bright variable stars";
 	}
 }
 
