@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 00:21+0700\n"
-"PO-Revision-Date: 2017-05-02 04:15+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2017-05-12 15:47+0000\n"
+"Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-12 05:42+0000\n"
+"X-Launchpad-Export-Date: 2017-05-13 05:24+0000\n"
 "X-Generator: Launchpad (build 18373)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -58,11 +58,11 @@ msgstr "Visningsalternativ"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
-msgstr ""
+msgstr "Asterismlinjer"
 
 #: src/core/modules/AsterismMgr.cpp:95
 msgid "Asterism labels"
-msgstr ""
+msgstr "Asterismetiketter"
 
 #: src/core/modules/Constellation.cpp:290
 msgid "constellation"
@@ -93,7 +93,7 @@ msgstr "Välj enskild stjärnbild"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Ta bort urval av konstellationer"
 
 #: src/core/modules/StarMgr.cpp:449 src/ui_viewDialog.h:2017
 #: src/ui_dsoColorsDialog.h:541
@@ -217,7 +217,7 @@ msgstr "SSGP"
 
 #: src/core/modules/GridLinesMgr.cpp:1230
 msgid "Grids and lines"
-msgstr ""
+msgstr "Rutnät och linjer"
 
 #: src/core/modules/GridLinesMgr.cpp:1231
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -490,7 +490,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:306
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Avstånd: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:320
 #, qt-format
@@ -1092,7 +1092,7 @@ msgstr "Planetmarkörer"
 
 #: src/core/modules/SolarSystem.cpp:226
 msgid "Planet selection marker"
-msgstr ""
+msgstr "Planetmarkeringsmarkör"
 
 #: src/core/modules/SolarSystem.cpp:227
 msgid "Native planet names (from starlore)"
@@ -1740,6 +1740,10 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
+"Denna lösning av F. R. Stephenson, L. V. Morrison och C. Y. Hohenkerk (2016) "
+"publicerades i <em>Measurement of the Earth’s rotation: 720 BC to AD "
+"2015</em> (%1). Utanför det angivna intervallet (modellerat med en spline-"
+"form) ger värden från en ungefärlig parabola."
 
 #: src/core/StelCore.cpp:2201
 #, qt-format
@@ -1760,6 +1764,8 @@ msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
+"Lösningensvärdes av %1 för %2 (sekulär acceleration av månen) kräver en "
+"anpassning, se Guide för detaljer."
 
 #: src/core/StelCore.cpp:2253
 msgid "with zero values outside this range"
@@ -1776,10 +1782,12 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
+"Med ett genomsnittligt fel på mindre än en sekund, max. fel 1,9s och värden "
+"för gränsåren utanför detta intervall"
 
 #: src/core/StelCore.cpp:2266
 msgid "with values for the limit years outside this range"
-msgstr ""
+msgstr "Med värden för gränsåren utanför detta intervall"
 
 #: src/core/StelCore.cpp:2276
 #, qt-format
@@ -1978,7 +1986,7 @@ msgstr "Supergalaktisk longitud/latidud: %1/%2"
 #: src/core/StelObject.cpp:311
 #, qt-format
 msgid "IAU Constellation: %1"
-msgstr ""
+msgstr "IAU-konstellation: %1"
 
 #: src/core/StelObject.cpp:320
 #, qt-format
@@ -2041,11 +2049,11 @@ msgstr "Titta mot zenit"
 
 #: src/core/StelMovementMgr.cpp:193
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Titta mot nordlig himmelsk pol"
 
 #: src/core/StelMovementMgr.cpp:194
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Titta mot sydlig himmelsk pol"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2292,7 +2300,7 @@ msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1454
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
-msgstr ""
+msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
 #: src/gui/ConfigurationDialog.cpp:1456
 msgid "Espenak & Meeus (2006)"
@@ -2300,7 +2308,7 @@ msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1459
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr ""
+msgstr "Espenak & Meeus (2006) ingen extra månacceleration"
 
 #: src/gui/ConfigurationDialog.cpp:1461
 msgid "Reijs (2006)"
@@ -2386,7 +2394,7 @@ msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "Ctrl+upp/ned"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time dragging"
@@ -2394,7 +2402,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl & vänster musknappsdragning"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: minutes"
@@ -2402,7 +2410,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl & mushjul"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: hours"
@@ -2410,7 +2418,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+shift & mushjul"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Time scrolling: days"
@@ -2418,7 +2426,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+alt & mushjul"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Time scrolling: years"
@@ -2426,7 +2434,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:170
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+alt+shift & mushjul"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Select object"
@@ -2442,7 +2450,7 @@ msgstr "Töm markering"
 
 #: src/gui/HelpDialog.cpp:179
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl & vänsterklicka"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Right click"
@@ -2454,15 +2462,15 @@ msgstr "Lägg till anpassad markör"
 
 #: src/gui/HelpDialog.cpp:185
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift & vänsterklicka"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete the one closest marker to mouse cursor"
-msgstr ""
+msgstr "Ta bort den närmsta markören till muspekaren"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift & högerklicka"
 
 #: src/gui/HelpDialog.cpp:190
 msgid "Delete all custom markers"
@@ -2470,7 +2478,7 @@ msgstr "Radera alla anpassade markörer"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Shift & Alt & right click"
-msgstr ""
+msgstr "Shift & alt & högerklicka"
 
 #: src/gui/HelpDialog.cpp:194
 #, qt-format
@@ -2483,11 +2491,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:223
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "Text användargränssnitt (TUI)"
 
 #: src/gui/HelpDialog.cpp:225
 msgid "Activate TUI"
-msgstr ""
+msgstr "Aktivera TUI"
 
 #: src/gui/HelpDialog.cpp:234
 msgid ""
@@ -2709,7 +2717,7 @@ msgstr "Tidszon"
 
 #: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:424
 msgid "Local Mean Solar Time"
-msgstr ""
+msgstr "Lokal genomsnittlig soltid"
 
 #: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
@@ -2856,19 +2864,19 @@ msgstr "Högsta frekvens någonsin (1833 års leonider)"
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
-msgstr ""
+msgstr "GPS..."
 
 #: src/gui/LocationDialog.cpp:727
 msgid "GPS:SUCCESS"
-msgstr ""
+msgstr "GPS:LYCKADES"
 
 #: src/gui/LocationDialog.cpp:738
 msgid "GPS:FAILED"
-msgstr ""
+msgstr "GPS:MISSLYCKADES"
 
 #: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:492
 msgid "Get location from GPS"
-msgstr ""
+msgstr "Få plats från GPS"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -2912,7 +2920,7 @@ msgstr "Ta bort ett installerat lanskap"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 msgid "Are you really want to remove this landscape?"
-msgstr ""
+msgstr "Vill du verkligen ta bort detta landskap?"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3101,7 +3109,7 @@ msgstr "år"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "Secular acceleration of the Moon"
-msgstr ""
+msgstr "Månens sekulära acceleration"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:268 src/gui/AstroCalcDialog.cpp:296
@@ -3141,7 +3149,7 @@ msgstr "Filtyp"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:314
 msgid "opacity"
-msgstr ""
+msgstr "opacitet"
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:324
@@ -3156,7 +3164,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:329
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:334
@@ -3380,7 +3388,7 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/translations.h:171
 msgid "Index Catalogue"
-msgstr ""
+msgstr "Index-katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/translations.h:173
@@ -3539,7 +3547,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1012
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr ""
+msgstr "Ljusa stjärnor (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1013
 #, qt-format
@@ -3564,12 +3572,12 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1019
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr ""
+msgstr "Ljusa galaxer (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1171 src/gui/AstroCalcDialog.cpp:1233
 #: src/gui/AstroCalcDialog.cpp:1235
 msgid "Local Time"
-msgstr ""
+msgstr "Lokal tid"
 
 #: src/gui/AstroCalcDialog.cpp:1227
 #, qt-format
@@ -3653,15 +3661,15 @@ msgstr "Observatörens plats"
 
 #: src/gui/BookmarksDialog.cpp:161
 msgid "Unnamed object"
-msgstr ""
+msgstr "Namnlöst objekt"
 
 #: src/gui/BookmarksDialog.cpp:341 src/ui_bookmarksDialog.h:204
 msgid "Import bookmarks"
-msgstr ""
+msgstr "Importera bokmärken"
 
 #: src/gui/BookmarksDialog.cpp:354
 msgid "Export bookmarks as..."
-msgstr ""
+msgstr "Exportera bokmärken som..."
 
 #: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
@@ -4368,6 +4376,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
+"Skärmsläckare av olika händelser i solsystemet. 287 händelser sammanlagt!"
 
 #: src/translations.h:385
 msgid "A tour of the western constellations."
@@ -4456,6 +4465,8 @@ msgstr ""
 #: src/translations.h:397
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
+"Detta skript hjälper dig att göra en utflykt runt de största kända "
+"stjärnorna."
 
 #: src/translations.h:398
 msgid "A tour around objects from the Herschel 400 Catalogue"
@@ -4579,7 +4590,7 @@ msgstr "&Basfärger"
 
 #: src/translations.h:428
 msgid "&Pick Screen Color"
-msgstr ""
+msgstr "&Välj skrämfärg"
 
 #: src/translations.h:429
 msgid "&Custom colors"
@@ -4664,7 +4675,7 @@ msgstr "Argentina"
 
 #: src/translations_countries.h:41
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samoa (Amerikanska)"
 
 #: src/translations_countries.h:42
 msgid "Austria"
@@ -4724,7 +4735,7 @@ msgstr "Benin"
 
 #: src/translations_countries.h:56
 msgid "St Barthelemy"
-msgstr ""
+msgstr "St Barthelemy"
 
 #: src/translations_countries.h:57
 msgid "Bermuda"
@@ -4740,7 +4751,7 @@ msgstr "Bolivien"
 
 #: src/translations_countries.h:60
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Karibien NL"
 
 #: src/translations_countries.h:61
 msgid "Brazil"
@@ -4780,15 +4791,15 @@ msgstr "Kokosöarna"
 
 #: src/translations_countries.h:70
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Congo (Dem. rep.)"
 
 #: src/translations_countries.h:71
 msgid "Central African Rep."
-msgstr ""
+msgstr "Centralafrikanska rep."
 
 #: src/translations_countries.h:72
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Congo (Rep.)"
 
 #: src/translations_countries.h:73
 msgid "Switzerland"
@@ -4928,7 +4939,7 @@ msgstr "Gabon"
 
 #: src/translations_countries.h:107
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Storbritannien (UK)"
 
 #: src/translations_countries.h:108
 msgid "Grenada"
@@ -5036,7 +5047,7 @@ msgstr "Israel"
 
 #: src/translations_countries.h:134
 msgid "Isle of Man"
-msgstr ""
+msgstr "Isle of Man"
 
 #: src/translations_countries.h:135
 msgid "India"
@@ -5596,7 +5607,7 @@ msgstr "Wallis och Futuna"
 
 #: src/translations_countries.h:274
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Samoa (västra)"
 
 #: src/translations_countries.h:275
 msgid "Yemen"

@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-12 00:21+0700\n"
-"PO-Revision-Date: 2017-05-10 19:22+0000\n"
+"PO-Revision-Date: 2017-05-12 19:20+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-12 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-05-13 05:24+0000\n"
 "X-Generator: Launchpad (build 18373)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -2946,7 +2946,7 @@ msgstr "Supprimer un paysage"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 msgid "Are you really want to remove this landscape?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer ce paysage ?"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3415,21 +3415,21 @@ msgstr "New General Catalogue"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/translations.h:171
 msgid "Index Catalogue"
-msgstr ""
+msgstr "Index Catalogue"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/translations.h:173
 msgid "Lynds' Catalogue of Bright Nebulae"
-msgstr ""
+msgstr "Catalogue de Lynd des nébuleuses brillantes"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:474 src/translations.h:175
 msgid "Lynds' Catalogue of Dark Nebulae"
-msgstr ""
+msgstr "Catalogue Lynd des nébuleuses obscures"
 
 #: src/gui/AstroCalcDialog.cpp:475 src/ui_viewDialog.h:2123
 msgid "Principal Galaxy Catalog"
-msgstr ""
+msgstr "Catalogue des galaxies principales"
 
 #: src/gui/AstroCalcDialog.cpp:476 src/ui_viewDialog.h:2126
 msgid "The Uppsala General Catalogue of Galaxies"
@@ -3692,11 +3692,11 @@ msgstr "Objet sans nom"
 
 #: src/gui/BookmarksDialog.cpp:341 src/ui_bookmarksDialog.h:204
 msgid "Import bookmarks"
-msgstr ""
+msgstr "Importer des signets"
 
 #: src/gui/BookmarksDialog.cpp:354
 msgid "Export bookmarks as..."
-msgstr ""
+msgstr "Importer les signets sous..."
 
 #: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
@@ -7142,7 +7142,7 @@ msgstr "Options du planétarium"
 
 #: src/ui_configurationDialog.h:1388
 msgid "Toggle display of the button for Digitized Sky Survey."
-msgstr "Afficher/cacher le bouton Digitized Sky Survey."
+msgstr "Afficher/cacher le bouton Digitized Sky Survey"
 
 #: src/ui_configurationDialog.h:1390
 msgid "Show DSS button"
@@ -7223,8 +7223,7 @@ msgstr "Activation automatique de l'atmosphère"
 
 #: src/ui_configurationDialog.h:1420
 msgid "Toggle vertical and horizontal image flip buttons."
-msgstr ""
-"Afficher/cacher les boutons d'inversion verticale et horizontale de l'image."
+msgstr "Toggle vertical and horizontal image flip buttons"
 
 #: src/ui_configurationDialog.h:1422
 msgid "Show flip buttons"
@@ -7232,11 +7231,12 @@ msgstr "Affichage des boutons d'inversion d'image"
 
 #: src/ui_configurationDialog.h:1424 src/ui_configurationDialog.h:1427
 msgid "Hide other constellations when you click one"
-msgstr "Masquer les autres constellations quand vous en sélectionnez une"
+msgstr ""
+"Cacher les autres constellations quand une d'entre elles est sélectionnée"
 
 #: src/ui_configurationDialog.h:1431
 msgid "Toggle display backgrounds of the nebulae."
-msgstr "Afficher/cacher le bouton d'affichage des photos des nébuleuses."
+msgstr "Afficher/cacher le bouton d'affichage des photos des nébuleuses"
 
 #: src/ui_configurationDialog.h:1433
 msgid "Show nebula background button"
@@ -7275,27 +7275,27 @@ msgstr "Affichage du bouton des signets"
 
 #: src/ui_configurationDialog.h:1448
 msgid "A button to toggle equatorial J2000 grid."
-msgstr ""
+msgstr "Afficher/cacher le bouton de la grille équatoriale J2000"
 
 #: src/ui_configurationDialog.h:1450
 msgid "Show ICRS grid button"
-msgstr ""
+msgstr "Affichage du bouton de la grille ICRS"
 
 #: src/ui_configurationDialog.h:1452
 msgid "A button to toggle galactic grid"
-msgstr ""
+msgstr "Afficher/cacher le bouton de la grille galactique"
 
 #: src/ui_configurationDialog.h:1454
 msgid "Show galactic grid button"
-msgstr ""
+msgstr "Affichage du bouton de la grille galactique"
 
 #: src/ui_configurationDialog.h:1455
 msgid "Show ecliptic grid button"
-msgstr ""
+msgstr "Affichage du bouton de la grille écliptique"
 
 #: src/ui_configurationDialog.h:1456
 msgid "Show constellation boundaries button"
-msgstr ""
+msgstr "Affichage du bouton des délimitations des constellations"
 
 #: src/ui_configurationDialog.h:1457
 msgid "Screenshots"
@@ -7731,7 +7731,7 @@ msgstr "Aller à..."
 
 #: src/ui_bookmarksDialog.h:205
 msgid "Export bookmarks"
-msgstr ""
+msgstr "Exporter les signets"
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:378
 msgid "Color settings"
@@ -14268,7 +14268,7 @@ msgstr "Pluies de météores"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:155
 msgid "Toggle meteor showers"
-msgstr "Afficher/masquer les pluies de météores"
+msgstr "Afficher/cacher les pluies de météores"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:156
 msgid "Toggle radiant labels"
