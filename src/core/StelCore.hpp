@@ -344,6 +344,8 @@ public:
 	//! Get the default Mapping used by the Projection
 	QString getDefaultProjectionTypeKey(void) const;
 
+	Vec3d getMouseJ2000Pos(void) const;
+
 public slots:
 	//! Smoothly move the observer to the given location
 	//! @param target the target location

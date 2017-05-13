@@ -98,8 +98,10 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 }
 
 //! queues a GOTO command
-void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos)
+void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
+	Q_UNUSED(selectObject);
+
 	if (!isConnected())
 		return;
 

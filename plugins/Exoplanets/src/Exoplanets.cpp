@@ -31,6 +31,7 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StarMgr.hpp"
 #include "LabelMgr.hpp"
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
@@ -101,7 +102,7 @@ Exoplanets::Exoplanets()
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize());	
 }
 
 /*
@@ -538,6 +539,10 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 */
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
+	StelCore* core = StelApp::getInstance().getCore();
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	double ra, dec;
+	StelObjectP star;
 	ep.clear();
 	PSCount = EPCountAll = EPCountPH = 0;
 	EPEccentricityAll.clear();
@@ -554,6 +559,16 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 
 		PSCount++;
 
+		// Let's check existence the star (by designation) in our catalog...
+		star = smgr->searchByName(epsKey.trimmed());
+		if (!star.isNull())
+		{
+			// ...if exists, let's use our coordinates of star instead exoplanets.eu website data
+			StelUtils::rectToSphe(&ra, &dec, star->getJ2000EquatorialPos(core));
+			epsData["RA"] = StelUtils::radToDecDegStr(ra, 6);
+			epsData["DE"] = StelUtils::radToDecDegStr(dec, 6);
+		}
+
 		ExoplanetP eps(new Exoplanet(epsData));
 		if (eps->initialized)
 		{
@@ -564,6 +579,15 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 			EPRadiusAll.append(eps->getData(3));
 			EPPeriodAll.append(eps->getData(4));
 			EPAngleDistanceAll.append(eps->getData(5));
+			EPEffectiveTempHostStarAll.append(eps->getData(6));
+			EPYearDiscoveryAll.append(eps->getData(7));
+			EPMetallicityHostStarAll.append(eps->getData(8));
+			EPVMagHostStarAll.append(eps->getData(9));
+			EPRAHostStarAll.append(eps->getData(10));
+			EPDecHostStarAll.append(eps->getData(11));
+			EPDistanceHostStarAll.append(eps->getData(12));
+			EPMassHostStarAll.append(eps->getData(13));
+			EPRadiusHostStarAll.append(eps->getData(14));
 			EPCountAll += eps->getCountExoplanets();
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}

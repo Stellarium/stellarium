@@ -103,6 +103,7 @@ public:
 	//! Derived objects can add their own special information tags.
 	//! @param core the current StelCore
 	//! @return a map of object data.  Keys:
+	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
@@ -126,7 +127,7 @@ public:
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
 	//! - name : english name of the object
-	//! - localized-name : localized name
+	//! - localized-name : localized name	
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 
 	//! Return object's type. It should be the name of the class.
@@ -194,6 +195,14 @@ public:
 	//! It is the automatic position, i.e. taking the refraction effect into account if atmosphere is on.
 	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
+
+	//! Checking position an object above mathematical horizon for current location.
+	//! @return true if object an above mathematical horizon
+	bool isAboveHorizon(const StelCore* core) const;
+
+	//! Checking position an object above real horizon for current location.
+	//! @return true if object an above real horizon (uses test for landscapes)
+	bool isAboveRealHorizon(const StelCore* core) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;

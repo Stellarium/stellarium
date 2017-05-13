@@ -533,6 +533,9 @@
               <layout class="QHBoxLayout" name="horizontalLayout_starLabel">
                <item>
                 <widget class="QCheckBox" name="starLabelCheckBox">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
                  <property name="text">
                   <string>Labels and Markers</string>
                  </property>
@@ -1351,7 +1354,7 @@
              <item row="0" column="4">
               <widget class="QCheckBox" name="checkBoxPGC">
                <property name="toolTip">
-                <string>Catalog of galaxies</string>
+                <string>Principal Galaxy Catalog</string>
                </property>
                <property name="text">
                 <string notr="true">PGC</string>
@@ -1702,8 +1705,11 @@
             <property name="title">
              <string>Celestial Sphere</string>
             </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
             <property name="checkable">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_10">
              <property name="leftMargin">
@@ -1855,7 +1861,7 @@
                  <item row="4" column="0">
                   <widget class="QCheckBox" name="showHorizonLineCheckBox">
                    <property name="toolTip">
-                    <string>Show horizon line.</string>
+                    <string>Show mathematical horizon line.</string>
                    </property>
                    <property name="text">
                     <string>Horizon</string>
@@ -1874,6 +1880,9 @@
                  </item>
                  <item row="6" column="0">
                   <widget class="QCheckBox" name="showSupergalacticEquatorLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show equator of de Vaucouleurs' Supergalactic coordinates (1976).</string>
+                   </property>
                    <property name="text">
                     <string>Supergalactic equator</string>
                    </property>
@@ -2223,6 +2232,9 @@
                  </item>
                  <item row="6" column="0">
                   <widget class="QCheckBox" name="showSupergalacticGridCheckBox">
+                   <property name="toolTip">
+                    <string>Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the distribution of nearby galaxies.</string>
+                   </property>
                    <property name="text">
                     <string>Supergalactic grid</string>
                    </property>
@@ -2898,7 +2910,7 @@
                <item>
                 <widget class="QToolButton" name="colorConstellationLines">
                  <property name="toolTip">
-                  <string>Color of lines of constellations</string>
+                  <string>Color of constellation lines</string>
                  </property>
                 </widget>
                </item>
@@ -2943,7 +2955,7 @@
                <item>
                 <widget class="QToolButton" name="colorConstellationLabels">
                  <property name="toolTip">
-                  <string>Color of names of constellations</string>
+                  <string>Color of constellation names</string>
                  </property>
                 </widget>
                </item>
@@ -2964,7 +2976,59 @@
                <item>
                 <widget class="QToolButton" name="colorConstellationBoundaries">
                  <property name="toolTip">
-                  <string>Color of boundaries of constellations</string>
+                  <string>Color of constellation boundaries</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_asterismLines">
+               <item>
+                <widget class="QCheckBox" name="showAsterismLinesCheckBox">
+                 <property name="text">
+                  <string>Show asterism lines</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="asterismLineThicknessSpinBox">
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>0</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>5.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="colorAsterismLines">
+                 <property name="toolTip">
+                  <string>Color of asterism lines</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_asterismLabels">
+               <item>
+                <widget class="QCheckBox" name="showAsterismLabelsCheckBox">
+                 <property name="text">
+                  <string>Show asterism labels</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="colorAsterismLabels">
+                 <property name="toolTip">
+                  <string>Color of asterism names</string>
                  </property>
                 </widget>
                </item>

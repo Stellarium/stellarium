@@ -213,6 +213,28 @@
        </widget>
       </item>
       <item>
+       <widget class="QRadioButton" name="radioButtonTelescopeRTS2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Telescope which is accessible through RTS2(.org) JSON API</string>
+        </property>
+        <property name="text">
+         <string>RTS2 telescope</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QRadioButton" name="radioButtonTelescopeVirtual">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -243,9 +265,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>549</width>
-        <height>520</height>
+        <y>-283</y>
+        <width>547</width>
+        <height>603</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">
@@ -564,7 +586,7 @@ Increase this value if the reticle is skipping.</string>
          <property name="title">
           <string>Connection settings</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QGridLayout" name="gridLayoutConnectionSettings">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -580,7 +602,7 @@ Increase this value if the reticle is skipping.</string>
           <item row="0" column="0">
            <widget class="QLabel" name="labelHost">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>Host:</string>
@@ -590,7 +612,7 @@ Increase this value if the reticle is skipping.</string>
           <item row="1" column="0">
            <widget class="QLineEdit" name="lineEditHostName">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="toolTip">
              <string>Host name or IPv4 address of the machine that hosts the telescope server</string>
@@ -633,6 +655,90 @@ Increase this value if the reticle is skipping.</string>
             </property>
             <property name="text">
              <string>TCP port:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxRTS2Settings">
+         <property name="title">
+          <string>RTS2 telescope settings</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayoutRTS2Settings">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelRTS2Host">
+            <property name="text">
+             <string>URL:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelRTS2Username">
+            <property name="text">
+             <string>Username:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="labelRTS2Password">
+            <property name="text">
+             <string>Password:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLineEdit" name="lineEditRTS2Username">
+            <property name="toolTip">
+             <string>RTS2 username</string>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="maxLength">
+             <number>50</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="lineEditRTS2Password">
+            <property name="toolTip">
+             <string>RTS2 password</string>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="maxLength">
+             <number>50</number>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLineEdit" name="lineEditRTS2Url">
+            <property name="toolTip">
+             <string>URL of the machine that hosts the RTS2 JSON (httpd) server</string>
+            </property>
+            <property name="text">
+             <string notr="true">localhost</string>
+            </property>
+            <property name="maxLength">
+             <number>255</number>
             </property>
            </widget>
           </item>

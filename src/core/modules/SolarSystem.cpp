@@ -635,7 +635,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 											  ? parent->getRotObliquity(2451545.0)
 											  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
-											  ? parent->getRotAscendingnode()
+											  ? parent->getRotAscendingNode()
 											  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 			if (parent->getParent()) {
@@ -743,7 +743,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
 			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
-			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingnode() : 0.0;
+			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode() : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 						if (parent->getParent()) {
 							const double c_obl = cos(parentRotObliquity);
@@ -1376,6 +1376,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	Vec3d equPos;
 	double cosAngularSize;
 
+	QString weAreHere = core->getCurrentPlanet()->getEnglishName();
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		equPos = p->getEquinoxEquatorialPos(core);
@@ -1383,7 +1384,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 
 		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
 
-		if (equPos*v>=std::min(cosLimFov, cosAngularSize))
+		if (equPos*v>=std::min(cosLimFov, cosAngularSize) && p->getEnglishName()!=weAreHere)
 		{
 			result.append(qSharedPointerCast<StelObject>(p));
 		}

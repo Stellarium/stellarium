@@ -361,6 +361,7 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	connect(this, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateDSONames()));
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
@@ -415,7 +416,7 @@ void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 
 		qWarning() << "Reloading DSO data...";
 		setFlagShow(false);
-		loadNebulaSet("default");
+		loadNebulaSet("default");		
 		setFlagShow(status);
 
 		updateI18n(); // OK, update localized names of DSO
@@ -1093,7 +1094,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	int nb;
 	NebulaP e;
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-	QRegExp transRx("_[(]\"(.*)\"[)]");
+	QRegExp transRx("_[(]\"(.*)\"[)](\\s*#.*)?"); // optional comments after name.
 	while (!dsoNameFile.atEnd())
 	{
 		record = QString::fromUtf8(dsoNameFile.readLine());
@@ -1191,6 +1192,12 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	return true;
 }
 
+
+void NebulaMgr::updateDSONames()
+{
+	updateSkyCulture(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	updateI18n();
+}
 
 void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 {
@@ -2069,6 +2076,41 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					result << QString("Mel %1").arg(n->Mel_nb);
 			}
 			break;
+		case 108: // New General Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->NGC_nb>0)
+					result << QString("NGC %1").arg(n->NGC_nb);
+			}
+			break;
+		case 109: // Index Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->IC_nb>0)
+					result << QString("IC %1").arg(n->IC_nb);
+			}
+			break;
+		case 110: // Lynds' Catalogue of Bright Nebulae
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->LBN_nb>0)
+					result << QString("LBN %1").arg(n->LBN_nb);
+			}
+			break;
+		case 111: // Lynds' Catalogue of Dark Nebulae
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->LDN_nb>0)
+					result << QString("LDN %1").arg(n->LDN_nb);
+			}
+			break;
+		case 114: // Cederblad Catalog
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->Ced_nb.isEmpty())
+					result << QString("Ced %1").arg(n->Ced_nb);
+			}
+			break;
 		case 150: // Dwarf galaxies
 		{
 			QStringList dwarfGalaxies;
@@ -2174,3 +2216,194 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 	return result;
 }
 
+QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType)
+{
+	QList<NebulaP> dso;
+	int type = objType.toInt();
+	switch (type)
+	{
+		case 100: // Messier Catalogue?
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->M_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 101: // Caldwell Catalogue?
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->C_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 102: // Barnard Catalogue?
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->B_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 103: // Sharpless Catalogue?
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->Sh2_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 104: // Van den Bergh Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->VdB_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 105: // RCW Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->RCW_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 106: // Collinder Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->Cr_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 107: // Melotte Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->Mel_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 108: // New General Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->NGC_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 109: // Index Catalogue
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->IC_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 110: // Lynds' Catalogue of Bright Nebulae
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->LBN_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 111: // Lynds' Catalogue of Dark Nebulae
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->LDN_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 112: // Principal Galaxy Catalog
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->PGC_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 113: // The Uppsala General Catalogue of Galaxies
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (n->UGC_nb>0)
+					dso.append(n);
+			}
+			break;
+		case 114: // Cederblad Catalog
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->Ced_nb.isEmpty())
+					dso.append(n);
+			}
+			break;
+		case 150: // Dwarf galaxies
+		{
+			QList<int> dwarfGalaxies;
+			dwarfGalaxies  <<    3589 <<    3792 <<    6830 <<   10074 <<   19441 <<   28913
+				       <<   29194 <<   29653 <<   50779 <<   54074 <<   60095 <<   63287
+				       <<   69519 <<   88608 << 2807155 << 3097691;
+			NebulaP ds;
+			for (int i=0; i < dwarfGalaxies.size(); i++)
+			{
+				ds = searchPGC(dwarfGalaxies.at(i));
+				if (!ds.isNull())
+					dso.append(ds);
+			}
+			break;
+		}
+		case 151: // Herschel 400 Catalogue
+		{
+			QList<int> h400list;
+			h400list <<   40 <<  129 <<  136 <<  157 <<  185 <<  205 <<  225 <<  246 <<  247 <<  253
+				 <<  278 <<  288 <<  381 <<  404 <<  436 <<  457 <<  488 <<  524 <<  559 <<  584
+				 <<  596 <<  598 <<  613 <<  615 <<  637 <<  650 <<  654 <<  659 <<  663 <<  720
+				 <<  752 <<  772 <<  779 <<  869 <<  884 <<  891 <<  908 <<  936 << 1022 << 1023
+				 << 1027 << 1052 << 1055 << 1084 << 1245 << 1342 << 1407 << 1444 << 1501 << 1502
+				 << 1513 << 1528 << 1535 << 1545 << 1647 << 1664 << 1788 << 1817 << 1857 << 1907
+				 << 1931 << 1961 << 1964 << 1980 << 1999 << 2022 << 2024 << 2126 << 2129 << 2158
+				 << 2169 << 2185 << 2186 << 2194 << 2204 << 2215 << 2232 << 2244 << 2251 << 2264
+				 << 2266 << 2281 << 2286 << 2301 << 2304 << 2311 << 2324 << 2335 << 2343 << 2353
+				 << 2354 << 2355 << 2360 << 2362 << 2371 << 2372 << 2392 << 2395 << 2403 << 2419
+				 << 2420 << 2421 << 2422 << 2423 << 2438 << 2440 << 2479 << 2482 << 2489 << 2506
+				 << 2509 << 2527 << 2539 << 2548 << 2567 << 2571 << 2613 << 2627 << 2655 << 2681
+				 << 2683 << 2742 << 2768 << 2775 << 2782 << 2787 << 2811 << 2841 << 2859 << 2903
+				 << 2950 << 2964 << 2974 << 2976 << 2985 << 3034 << 3077 << 3079 << 3115 << 3147
+				 << 3166 << 3169 << 3184 << 3190 << 3193 << 3198 << 3226 << 3227 << 3242 << 3245
+				 << 3277 << 3294 << 3310 << 3344 << 3377 << 3379 << 3384 << 3395 << 3412 << 3414
+				 << 3432 << 3486 << 3489 << 3504 << 3521 << 3556 << 3593 << 3607 << 3608 << 3610
+				 << 3613 << 3619 << 3621 << 3626 << 3628 << 3631 << 3640 << 3655 << 3665 << 3675
+				 << 3686 << 3726 << 3729 << 3810 << 3813 << 3877 << 3893 << 3898 << 3900 << 3912
+				 << 3938 << 3941 << 3945 << 3949 << 3953 << 3962 << 3982 << 3992 << 3998 << 4026
+				 << 4027 << 4030 << 4036 << 4039 << 4041 << 4051 << 4085 << 4088 << 4102 << 4111
+				 << 4143 << 4147 << 4150 << 4151 << 4179 << 4203 << 4214 << 4216 << 4245 << 4251
+				 << 4258 << 4261 << 4273 << 4274 << 4278 << 4281 << 4293 << 4303 << 4314 << 4346
+				 << 4350 << 4361 << 4365 << 4371 << 4394 << 4414 << 4419 << 4429 << 4435 << 4438
+				 << 4442 << 4448 << 4449 << 4450 << 4459 << 4473 << 4477 << 4478 << 4485 << 4490
+				 << 4494 << 4526 << 4527 << 4535 << 4536 << 4546 << 4548 << 4550 << 4559 << 4565
+				 << 4570 << 4594 << 4596 << 4618 << 4631 << 4636 << 4643 << 4654 << 4656 << 4660
+				 << 4665 << 4666 << 4689 << 4697 << 4698 << 4699 << 4725 << 4753 << 4754 << 4762
+				 << 4781 << 4800 << 4845 << 4856 << 4866 << 4900 << 4958 << 4995 << 5005 << 5033
+				 << 5054 << 5195 << 5248 << 5273 << 5322 << 5363 << 5364 << 5466 << 5473 << 5474
+				 << 5557 << 5566 << 5576 << 5631 << 5634 << 5676 << 5689 << 5694 << 5746 << 5846
+				 << 5866 << 5897 << 5907 << 5982 << 6118 << 6144 << 6171 << 6207 << 6217 << 6229
+				 << 6235 << 6284 << 6287 << 6293 << 6304 << 6316 << 6342 << 6355 << 6356 << 6369
+				 << 6401 << 6426 << 6440 << 6445 << 6451 << 6514 << 6517 << 6520 << 6522 << 6528
+				 << 6540 << 6543 << 6544 << 6553 << 6568 << 6569 << 6583 << 6624 << 6629 << 6633
+				 << 6638 << 6642 << 6645 << 6664 << 6712 << 6755 << 6756 << 6781 << 6802 << 6818
+				 << 6823 << 6826 << 6830 << 6834 << 6866 << 6882 << 6885 << 6905 << 6910 << 6934
+				 << 6939 << 6940 << 6946 << 7000 << 7006 << 7008 << 7009 << 7044 << 7062 << 7086
+				 << 7128 << 7142 << 7160 << 7209 << 7217 << 7243 << 7296 << 7331 << 7380 << 7448
+				 << 7479 << 7510 << 7606 << 7662 << 7686 << 7723 << 7727 << 7789 << 7790 << 7814;
+			NebulaP ds;
+			for (int i=0; i < h400list.size(); i++)
+			{
+				ds = searchNGC(h400list.at(i));
+				if (!ds.isNull())
+					dso.append(ds);
+			}
+			break;
+		}
+		default:
+		{
+			foreach (const NebulaP& n, dsoArray)
+			{
+				if (n->nType==type)
+					dso.append(n);
+			}
+			break;
+		}
+	}
+
+	return dso;
+}

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>512</width>
-    <height>579</height>
+    <width>568</width>
+    <height>605</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1327,7 +1327,17 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="8" column="0" colspan="2">
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="showToastSurveyButtonCheckbox">
+               <property name="toolTip">
+                <string>Toggle display of the button for Digitized Sky Survey.</string>
+               </property>
+               <property name="text">
+                <string>Show DSS button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0" colspan="2">
               <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
                <property name="toolTip">
                 <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
@@ -1357,7 +1367,7 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="6" column="1">
               <widget class="QCheckBox" name="decimalDegreeCheckBox">
                <property name="toolTip">
                 <string>Use decimal degrees for coordinates</string>
@@ -1380,7 +1390,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="7" column="1">
               <widget class="QCheckBox" name="topocentricCheckBox">
                <property name="toolTip">
                 <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
@@ -1390,7 +1400,7 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="6" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
                 <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
@@ -1433,7 +1443,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="7" column="0">
               <widget class="QCheckBox" name="nutationCheckBox">
                <property name="toolTip">
                 <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
@@ -1443,7 +1453,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="8" column="0">
               <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
                <property name="toolTip">
                 <string>Activate this option to calculate azimuth from south towards west.</string>
@@ -1453,17 +1463,7 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="showToastSurveyButtonCheckbox">
-               <property name="toolTip">
-                <string>Toggle display of the button for Digitized Sky Survey.</string>
-               </property>
-               <property name="text">
-                <string>Show DSS button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
+             <item row="8" column="1">
               <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
                <property name="toolTip">
                 <string>Automatic change of landscape when planet is changed</string>
@@ -1477,6 +1477,40 @@
               <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
                <property name="text">
                 <string>Show bookmarks button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="showICRSGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle equatorial J2000 grid.</string>
+               </property>
+               <property name="text">
+                <string>Show ICRS grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="showGalacticGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle galactic grid</string>
+               </property>
+               <property name="text">
+                <string>Show galactic grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="showEclipticGridButtonCheckBox">
+               <property name="text">
+                <string>Show ecliptic grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="showConstellationBoundariesButtonCheckBox">
+               <property name="text">
+                <string>Show constellation boundaries button</string>
                </property>
               </widget>
              </item>

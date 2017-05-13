@@ -155,6 +155,10 @@ class MSTranslations
 		N_("Sextantids");
 		// TRANSLATORS: Name of meteor shower
 		N_("November Orionids");
+		// TRANSLATORS: Name of meteor shower
+		N_("August Caelids");
+		// TRANSLATORS: Name of meteor shower
+		N_("ε-Gruids");
 
 		// List of parent objects for meteor showers
 		// TRANSLATORS: Name of parent object for meteor shower
