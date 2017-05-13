@@ -418,7 +418,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		luminance = map.value("maxBrightness").toFloat(&ok);
 		if (!ok)
 			throw std::runtime_error("maxBrightness expect a float value");
-		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfacebrightnessToLuminance(luminance);
+		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfaceBrightnessToLuminance(luminance);
 	}
 
 	if (map.contains("alphaBlend"))
