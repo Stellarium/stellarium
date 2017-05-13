@@ -1002,7 +1002,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Set possible default name of the normal map for avoiding yin-yang shaped moon
 			// phase when normal map key not exists. Example: moon_normals.png
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
-			QString normalMapName = englishName.toLower().append("_normals.png");
+			QString normalMapName = "";
+			if (!pd.value(secname+"/hidden", false).toBool()) // no normal maps for invisible objects!
+				normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius").toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
