@@ -134,8 +134,8 @@ StelCore::StelCore()
 	flagUseDST=conf->value("localization/flag_dst", true).toBool();
 
 	// Initialize matJ2000ToJ1875 matrix
-	double jd1875, eps1875, chi1875, omega1875, psi1875;
-	StelUtils::getJDFromDate(&jd1875, 1875, 1, 0, 0, 0, 0);
+	double eps1875, chi1875, omega1875, psi1875;
+	double jd1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
 	getPrecessionAnglesVondrak(jd1875, &eps1875, &chi1875, &omega1875, &psi1875);
 	matJ2000ToJ1875= Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psi1875) * Mat4d::xrotation(-omega1875) * Mat4d::zrotation(chi1875);
 	matJ2000ToJ1875=matJ2000ToJ1875.transpose();
@@ -2393,10 +2393,10 @@ static QVector<iau_constelspan> iau_constlineVec;
 static bool iau_constlineVecInitialized=false;
 
 // File iau_constellations_spans.dat is file data.dat from ADC catalog VI/42
-QString StelCore::getIAUConstellation(const Vec3d positionJ2000) const
+QString StelCore::getIAUConstellation(const Vec3d position) const
 {
 	// Precess positionJ2000 to 1875.0
-	Vec3d pos1875=j2000ToJ1875(positionJ2000);
+	Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(position));
 	float RA1875;
 	float dec1875;
 	StelUtils::rectToSphe(&RA1875, &dec1875, pos1875);

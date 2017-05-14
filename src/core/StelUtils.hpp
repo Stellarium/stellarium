@@ -263,6 +263,10 @@ namespace StelUtils
 	//! @return the current Julian Date
 	double getJDFromSystem();
 
+	//! Get the Julian Date from Besselian epoch.
+	//! @return Julian Date
+	double getJDFromBesselianEpoch(const float epoch);
+
 	//! Convert a time of day to the fraction of a Julian Day.
 	//! Note that a Julian Day starts at 12:00, not 0:00, and
 	//! so 12:00 == 0.0 and 0:00 == 0.5
