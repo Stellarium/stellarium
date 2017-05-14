@@ -1483,7 +1483,7 @@
              <item row="4" column="0">
               <widget class="QCheckBox" name="showICRSGridButtonCheckBox">
                <property name="toolTip">
-                <string>A button to toggle equatorial J2000 grid.</string>
+                <string>A button to toggle equatorial J2000 grid</string>
                </property>
                <property name="text">
                 <string>Show ICRS grid button</string>
@@ -1502,6 +1502,9 @@
              </item>
              <item row="5" column="0">
               <widget class="QCheckBox" name="showEclipticGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle ecliptic grid of date</string>
+               </property>
                <property name="text">
                 <string>Show ecliptic grid button</string>
                </property>

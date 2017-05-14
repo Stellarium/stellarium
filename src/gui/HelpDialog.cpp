@@ -184,7 +184,7 @@ void HelpDialog::updateHelpText(void)
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Shift & left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete one custom marker
-	htmlText += "<tr><td>" + q_("Delete the one closest marker to mouse cursor").toHtmlEscaped() + "</td>";
+	htmlText += "<tr><td>" + q_("Delete marker closest to mouse cursor").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Shift & right click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete all custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
