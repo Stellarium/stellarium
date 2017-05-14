@@ -263,8 +263,9 @@ namespace StelUtils
 	//! @return the current Julian Date
 	double getJDFromSystem();
 
-	//! Get the Julian Date from Besselian epoch.
-	//! @return Julian Date
+	//! Get the Julian Day Number (JD) from Besselian epoch.
+	//! @param epoch Besselian epoch, expressed as year
+	//! @return Julian Day number (JD) for B<Year>
 	double getJDFromBesselianEpoch(const float epoch);
 
 	//! Convert a time of day to the fraction of a Julian Day.

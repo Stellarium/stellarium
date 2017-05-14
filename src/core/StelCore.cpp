@@ -135,8 +135,8 @@ StelCore::StelCore()
 
 	// Initialize matJ2000ToJ1875 matrix
 	double eps1875, chi1875, omega1875, psi1875;
-	double jd1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
-	getPrecessionAnglesVondrak(jd1875, &eps1875, &chi1875, &omega1875, &psi1875);
+	double jdB1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
+	getPrecessionAnglesVondrak(jdB1875, &eps1875, &chi1875, &omega1875, &psi1875);
 	matJ2000ToJ1875= Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psi1875) * Mat4d::xrotation(-omega1875) * Mat4d::zrotation(chi1875);
 	matJ2000ToJ1875=matJ2000ToJ1875.transpose();
 }
@@ -624,7 +624,7 @@ bool StelCore::getFlipVert(void) const
 }
 
 // Get current value for horizontal viewport offset [-50...50]
-double StelCore::getViewportHorizontalOffset(void)
+double StelCore::getViewportHorizontalOffset(void) const
 {
 	return (currentProjectorParams.viewportCenterOffset[0] * 100.0f);
 }
@@ -637,7 +637,7 @@ void StelCore::setViewportHorizontalOffset(double newOffsetPct)
 }
 
 // Get current value for vertical viewport offset [-50...50]
-double StelCore::getViewportVerticalOffset(void)
+double StelCore::getViewportVerticalOffset(void) const
 {
 	return (currentProjectorParams.viewportCenterOffset[1] * 100.0f);
 }
@@ -2383,9 +2383,9 @@ void StelCore::initEphemeridesFunctions()
 
 // Methods for finding constellation from J2000 position.
 typedef struct iau_constline{
-	float RAlow;  // low value of 1875.0 right ascension segment, HH.dddd
-	float RAhigh; // high value of 1875.0 right ascension segment, HH.dddd
-	float decLow; // declination 1875.0 of southern border, DD.dddd
+	double RAlow;  // low value of 1875.0 right ascension segment, HH.dddd
+	double RAhigh; // high value of 1875.0 right ascension segment, HH.dddd
+	double decLow; // declination 1875.0 of southern border, DD.dddd
 	QString constellation; // 3-letter code of constellation
 } iau_constelspan;
 
@@ -2393,20 +2393,20 @@ static QVector<iau_constelspan> iau_constlineVec;
 static bool iau_constlineVecInitialized=false;
 
 // File iau_constellations_spans.dat is file data.dat from ADC catalog VI/42
-QString StelCore::getIAUConstellation(const Vec3d position) const
+QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 {
 	// Precess positionJ2000 to 1875.0
-	Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(position));
-	float RA1875;
-	float dec1875;
+	Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow));
+	double RA1875;
+	double dec1875;
 	StelUtils::rectToSphe(&RA1875, &dec1875, pos1875);
 	RA1875 *= 12./M_PI; // hours
-	if (RA1875 <0.f) RA1875+=24.f;
+	if (RA1875 <0.) RA1875+=24.;
 	dec1875 *= 180./M_PI; // degrees
-	Q_ASSERT(RA1875>=0.0f);
-	Q_ASSERT(RA1875<=24.0f);
-	Q_ASSERT(dec1875<=90.0f);
-	Q_ASSERT(dec1875>=-90.0f);
+	Q_ASSERT(RA1875>=0.0);
+	Q_ASSERT(RA1875<=24.0);
+	Q_ASSERT(dec1875<=90.0);
+	Q_ASSERT(dec1875>=-90.0);
 
 	// read file into structure.
 	if (!iau_constlineVecInitialized)
