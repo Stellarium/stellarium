@@ -307,7 +307,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 	if (flags&IAUConstellation)
 	{
-		QString constel=core->getIAUConstellation(getJ2000EquatorialPos(core));
+		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
 		res += q_("IAU Constellation: %1").arg(constel) + "<br>";
 	}
 
