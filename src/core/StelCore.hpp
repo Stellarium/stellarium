@@ -694,10 +694,10 @@ public slots:
 	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
-	//! Return 3-letter abbreviation of IAU constellation name for position in J2000 coordinates.
+	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
 	//! Data file from ADC catalog VI/42 with her amendment from 1999-12-30.
-	QString getIAUConstellation(const Vec3d positionJ2000) const;
+	QString getIAUConstellation(const Vec3d position) const;
 
 
 signals:
