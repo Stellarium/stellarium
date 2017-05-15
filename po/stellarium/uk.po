@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 00:21+0700\n"
+"POT-Creation-Date: 2017-05-15 09:52+0700\n"
 "PO-Revision-Date: 2017-05-12 05:54+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-13 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-05-15 05:43+0000\n"
 "X-Generator: Launchpad (build 18373)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -1208,7 +1208,7 @@ msgstr "Нічний режим"
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Не вдалося створити надсилання Spout. Докладніше про це у журналі."
 
-#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:210
+#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:1253
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
@@ -1428,13 +1428,13 @@ msgstr "Повернути горизонтально"
 msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
-#: src/core/StelCore.cpp:2105
+#: src/core/StelCore.cpp:2111
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Виправлення вимкнено! Користуйтеся ним, лише якщо вам добре відомі наслідки "
 "ваших дій!"
 
-#: src/core/StelCore.cpp:2108
+#: src/core/StelCore.cpp:2114
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1447,7 +1447,7 @@ msgstr ""
 "Айнштайна підтверджено на основі даних про сонячні затемнення, відомих з "
 "історії</em>). Докладніші відомості можна знайти %2тут%3."
 
-#: src/core/StelCore.cpp:2111
+#: src/core/StelCore.cpp:2117
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1457,7 +1457,7 @@ msgstr ""
 "system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
 "сталих</em>)."
 
-#: src/core/StelCore.cpp:2114
+#: src/core/StelCore.cpp:2120
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1471,7 +1471,7 @@ msgstr ""
 "(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
 "у комп’ютерній програмі SunTracker Pro."
 
-#: src/core/StelCore.cpp:2118
+#: src/core/StelCore.cpp:2124
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1482,7 +1482,7 @@ msgstr ""
 "у книзі <em>Canon of Solar Eclipses</em> (<em>Закони сонячних "
 "затемнень</em>), авторами якої є Mucke та Meeus (1983)."
 
-#: src/core/StelCore.cpp:2122
+#: src/core/StelCore.cpp:2128
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1494,7 +1494,7 @@ msgstr ""
 "1649 р. н.е. Те саме співвідношення також неявно використано у таблицях "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2126
+#: src/core/StelCore.cpp:2132
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1506,7 +1506,7 @@ msgstr ""
 "observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх "
 "астрономічних спостережень</em>)."
 
-#: src/core/StelCore.cpp:2129
+#: src/core/StelCore.cpp:2135
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1516,7 +1516,7 @@ msgstr ""
 "Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи "
 "телескопів</em>)."
 
-#: src/core/StelCore.cpp:2132
+#: src/core/StelCore.cpp:2138
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1530,7 +1530,7 @@ msgstr ""
 "in the period 1800-1975</em> (%1) як апроксимацію даних, опублікованих "
 "Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2135
+#: src/core/StelCore.cpp:2141
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1540,7 +1540,7 @@ msgstr ""
 "Programs and Tables from -4000 to +2800</em> (1986), а також у комп’ютерній "
 "програмі RedShift."
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2144
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1552,11 +1552,11 @@ msgstr ""
 "1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
 "н.е. до 1980 р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2141
+#: src/core/StelCore.cpp:2147
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Цей алгоритм використано у комп’ютерному планетарії Guide 7."
 
-#: src/core/StelCore.cpp:2144
+#: src/core/StelCore.cpp:2150
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1566,7 +1566,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) і <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2147
+#: src/core/StelCore.cpp:2153
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1575,7 +1575,7 @@ msgstr ""
 "Цю формулу було отримано K.M. Borkowski (%1) на основі аналізу записів щодо "
 "31 сонячного затемнення від 2137 р. до н.е. до 1715 р. н.е."
 
-#: src/core/StelCore.cpp:2150
+#: src/core/StelCore.cpp:2156
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1588,7 +1588,7 @@ msgstr ""
 "1988</em> (%1) як апроксимацію за даними, наведеними Stephenson і Morrison "
 "(1984)."
 
-#: src/core/StelCore.cpp:2153
+#: src/core/StelCore.cpp:2159
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1598,7 +1598,7 @@ msgstr ""
 "версії надточної теорії місячного руху у період 2000-85 у праці <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2156
+#: src/core/StelCore.cpp:2162
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1610,7 +1610,7 @@ msgstr ""
 "(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1990 "
 "р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2159
+#: src/core/StelCore.cpp:2165
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1620,7 +1620,7 @@ msgstr ""
 "Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
 "Землі</em>)."
 
-#: src/core/StelCore.cpp:2162
+#: src/core/StelCore.cpp:2168
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1630,7 +1630,7 @@ msgstr ""
 "Широко використовується. Таблиця для 1620–2000 років. Включено варіант "
 "Chapront, Chapront-Touze та Francou (1997) для дат поза діапазоном 1620–2000."
 
-#: src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2171
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1640,7 +1640,7 @@ msgstr ""
 "реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:2168
+#: src/core/StelCore.cpp:2174
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1649,7 +1649,7 @@ msgstr ""
 "Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2177
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1660,7 +1660,7 @@ msgstr ""
 "комп’ютері</em>) наведено просте поліноміальне наближення 3-го порядку "
 "точності лише для нещодавніх дат у минулому."
 
-#: src/core/StelCore.cpp:2174
+#: src/core/StelCore.cpp:2180
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1672,7 +1672,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Її засновано на даних книги Jean "
 "Meeus <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2177
+#: src/core/StelCore.cpp:2183
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1683,7 +1683,7 @@ msgstr ""
 "статті <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) з додатковими даними у (%3)."
 
-#: src/core/StelCore.cpp:2180
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1697,7 +1697,7 @@ msgstr ""
 "можливій періодичності, описаній Stephenson (%2). Докладніші дані можна "
 "знайти %3тут%4."
 
-#: src/core/StelCore.cpp:2183 src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2189 src/core/StelCore.cpp:2192
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1713,15 +1713,15 @@ msgstr ""
 "Eclipses: -1900 to +3000</em> цих же авторів (2006). Також цю формулу "
 "використано у програмі для обчислення ефемерид Сонця, Місяця та планет SOLEX."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2189
 msgid "Used by default."
 msgstr "Використовується типово."
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2192
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ЛАТАНА ВЕРСІЯ БЕЗ ДОДАТКОВОГО ПРИСКОРЕННЯ МІСЯЦЯ"
 
-#: src/core/StelCore.cpp:2189
+#: src/core/StelCore.cpp:2195
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1733,7 +1733,7 @@ msgstr ""
 "eclipses and dating the fall of Babylon</em> (затемнення у давнину та "
 "датування падіння Вавилона) (%1)."
 
-#: src/core/StelCore.cpp:2192
+#: src/core/StelCore.cpp:2198
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1745,7 +1745,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), а потім уточнено Sana Islam у "
 "2013 році."
 
-#: src/core/StelCore.cpp:2195
+#: src/core/StelCore.cpp:2201
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1756,7 +1756,7 @@ msgstr ""
 "Khalid, Mariam Sultana та Faheem Zaidi у роботі <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2198
+#: src/core/StelCore.cpp:2204
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1770,7 +1770,7 @@ msgstr ""
 "за допомогою сплайнового наближення) він дає значення параболічного "
 "наближення."
 
-#: src/core/StelCore.cpp:2201
+#: src/core/StelCore.cpp:2207
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1779,11 +1779,11 @@ msgstr ""
 "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
 "користувачем."
 
-#: src/core/StelCore.cpp:2204 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2210 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Помилка"
 
-#: src/core/StelCore.cpp:2212
+#: src/core/StelCore.cpp:2218
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -1792,16 +1792,16 @@ msgstr ""
 "Значення розв’язку %1 для %2 (секулярне прискорення Місяця) потребує "
 "адаптації, див. підручник, щоб дізнатися більше."
 
-#: src/core/StelCore.cpp:2253
+#: src/core/StelCore.cpp:2259
 msgid "with zero values outside this range"
 msgstr "з нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2256
+#: src/core/StelCore.cpp:2262
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з типовою односекундною точністю та нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2259
+#: src/core/StelCore.cpp:2265
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -1809,16 +1809,16 @@ msgstr ""
 "із середньою похибкою у менше за одну секунду, макс. похибка 1.9 с, і "
 "значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2272
 msgid "with values for the limit years outside this range"
 msgstr "із значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2276
+#: src/core/StelCore.cpp:2282
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Коректний діапазон використання: від %1 до %2 року, %3."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Коректний діапазон використання: від %1 до %2 року."
@@ -2026,7 +2026,7 @@ msgstr "Видимий сидеричний час: %1"
 msgid "Deep-sky objects background images"
 msgstr "Зображення тла для далеких об’єктів"
 
-#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:212
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:209
 #: src/StelMainView.cpp:761
 msgid "Miscellaneous"
 msgstr "Інше"
@@ -2489,8 +2489,8 @@ msgid "Shift & left click"
 msgstr "Shift і клацання лівою кнопкою"
 
 #: src/gui/HelpDialog.cpp:187
-msgid "Delete the one closest marker to mouse cursor"
-msgstr "Вилучити одну найближчу до вказівника миші позначку"
+msgid "Delete marker closest to mouse cursor"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2646,91 +2646,91 @@ msgstr ""
 "До розробки проекту долучалися декілька людей, робота яких зробила "
 "Stellarium кращим (упорядковано за абеткою): %1."
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:208
 msgid "Windows"
 msgstr "Вікна"
 
-#: src/gui/StelGui.cpp:213
+#: src/gui/StelGui.cpp:210
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:211
 msgid "Speed up the script execution rate"
 msgstr "Пришвидшити виконання скрипту"
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:212
 msgid "Slow down the script execution rate"
 msgstr "Уповільнити виконання скрипту"
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:213
 msgid "Set the normal script execution rate"
 msgstr "Встановити звичайну швидкість виконання"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:214
 msgid "Stop script execution"
 msgstr "Припинити виконання скрипту"
 
-#: src/gui/StelGui.cpp:218
+#: src/gui/StelGui.cpp:215
 msgid "Pause script execution"
 msgstr "Призупинити виконання скрипту"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:216
 msgid "Resume script execution"
 msgstr "Поновити виконання скрипту"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:219
 msgid "Script console window"
 msgstr "Вікно консолі скриптів"
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:222
 msgid "Help window"
 msgstr "Вікно довідки"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:223
 msgid "Configuration window"
 msgstr "Вікно налаштування"
 
-#: src/gui/StelGui.cpp:227 src/ui_searchDialogGui.h:611
+#: src/gui/StelGui.cpp:224 src/ui_searchDialogGui.h:611
 msgid "Search window"
 msgstr "Вікно пошуку"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:225
 msgid "Sky and viewing options window"
 msgstr "Вікно параметрів неба та відображення"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:226
 msgid "Date/time window"
 msgstr "Вікно встановлення дати і часу"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:227
 msgid "Location window"
 msgstr "Вікно розташування"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:228
 msgid "Shortcuts window"
 msgstr "Вікно клавіатурних скорочень"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:229
 msgid "Astronomical calculations window"
 msgstr "Вікно астрономічних обчислень"
 
-#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:193
+#: src/gui/StelGui.cpp:230 src/ui_bookmarksDialog.h:193
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/gui/StelGui.cpp:234
+#: src/gui/StelGui.cpp:231
 msgid "Copy selected object information to clipboard"
 msgstr "Копіювати дані щодо позначеного об’єкта до буфера обміну"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:237
 msgid "Auto hide horizontal button bar"
 msgstr "Автоматично ховати горизонтальні клавіші"
 
-#: src/gui/StelGui.cpp:241
+#: src/gui/StelGui.cpp:238
 msgid "Auto hide vertical button bar"
 msgstr "Автоматично ховати вертикальні клавіші"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:241
 msgid "Toggle visibility of GUI"
 msgstr "Увімкнути/Вимкнути графічний інтерфейс"
 
@@ -2946,8 +2946,8 @@ msgid "Remove an installed landscape"
 msgstr "Вилучити встановлений ландшафт"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
-msgid "Are you really want to remove this landscape?"
-msgstr "Ви справді хочете вилучити цей ландшафт?"
+msgid "Do you really want to remove this landscape?"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3697,7 +3697,7 @@ msgstr "Імпортувати закладки"
 msgid "Export bookmarks as..."
 msgstr "Експортувати закладки як…"
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1506
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Скрипти"
@@ -4581,7 +4581,7 @@ msgstr "Тека"
 msgid "&Choose"
 msgstr "Ви&брати"
 
-#: src/translations.h:416 src/ui_configurationDialog.h:1473
+#: src/translations.h:416 src/ui_configurationDialog.h:1476
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Скасувати"
@@ -5977,7 +5977,7 @@ msgstr "Заблокувати позицію, якщо використано �
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2370
 #: src/ui_viewDialog.h:2392 src/ui_viewDialog.h:2426
-#: src/ui_configurationDialog.h:1474 src/ui_configurationDialog.h:1485
+#: src/ui_configurationDialog.h:1477 src/ui_configurationDialog.h:1488
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Параметри"
@@ -6876,7 +6876,7 @@ msgstr "Ширина вікна при запуску Stellarium"
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Напрямок зору, який слід використовувати при запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1496
+#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1499
 msgid "Selected object information"
 msgstr "Інформація про вибраний об’єкт"
 
@@ -7254,8 +7254,8 @@ msgid "Show bookmarks button"
 msgstr "Показати кнопку закладок"
 
 #: src/ui_configurationDialog.h:1448
-msgid "A button to toggle equatorial J2000 grid."
-msgstr "Кнопка для вмикання або вимикання екваторіальної сітки J2000."
+msgid "A button to toggle equatorial J2000 grid"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1450
 msgid "Show ICRS grid button"
@@ -7269,87 +7269,91 @@ msgstr "Кнопка для вмикання або вимикання гала�
 msgid "Show galactic grid button"
 msgstr "Показати кнопку галактичної сітки"
 
-#: src/ui_configurationDialog.h:1455
+#: src/ui_configurationDialog.h:1456
+msgid "A button to toggle ecliptic grid of date"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1458
 msgid "Show ecliptic grid button"
 msgstr "Показати кнопку екліптичної сітки"
 
-#: src/ui_configurationDialog.h:1456
+#: src/ui_configurationDialog.h:1459
 msgid "Show constellation boundaries button"
 msgstr "Показати кнопку меж сузір’їв"
 
-#: src/ui_configurationDialog.h:1457
+#: src/ui_configurationDialog.h:1460
 msgid "Screenshots"
 msgstr "Знімки екрана"
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1461
 msgid "Screenshot Directory"
 msgstr "Каталог знімків екрана"
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1463
 msgid "Invert colors"
 msgstr "Інвертувати кольори"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1464
 msgid "Star catalog updates"
 msgstr "Оновлення каталогу зірок"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1466
 msgid "Click here to start downloading"
 msgstr "Натисніть тут, щоб розпочати звантаження"
 
-#: src/ui_configurationDialog.h:1465
+#: src/ui_configurationDialog.h:1468
 msgid "Download this file to view even more stars"
 msgstr "Звантажте цей файл, щоб збільшити кількість видимих зірок"
 
-#: src/ui_configurationDialog.h:1467
+#: src/ui_configurationDialog.h:1470
 msgid "Restart the download"
 msgstr "Почати звантаження з початку"
 
-#: src/ui_configurationDialog.h:1469
+#: src/ui_configurationDialog.h:1472
 msgid "Retry"
 msgstr "Повторити"
 
-#: src/ui_configurationDialog.h:1471
+#: src/ui_configurationDialog.h:1474
 msgid "Stop the download. You can always restart it later"
 msgstr "Зупинити звантаження. Ви можете поновити його  пізніше."
 
-#: src/ui_configurationDialog.h:1476
+#: src/ui_configurationDialog.h:1479
 msgid "Close window when script runs"
 msgstr "Закрити вікно, коли працює скрипт"
 
-#: src/ui_configurationDialog.h:1478
+#: src/ui_configurationDialog.h:1481
 msgid "Run the selected script"
 msgstr "Запуск вказаного скрипту"
 
-#: src/ui_configurationDialog.h:1482
+#: src/ui_configurationDialog.h:1485
 msgid "Stop a running script"
 msgstr "Зупинити запущений скрипт"
 
-#: src/ui_configurationDialog.h:1486
+#: src/ui_configurationDialog.h:1489
 msgid "Load at startup"
 msgstr "Завантажувати при запуску"
 
-#: src/ui_configurationDialog.h:1487
+#: src/ui_configurationDialog.h:1490
 msgid "configure"
 msgstr "налаштувати"
 
-#: src/ui_configurationDialog.h:1492
+#: src/ui_configurationDialog.h:1495
 msgid "Main"
 msgstr "Основне"
 
-#: src/ui_configurationDialog.h:1494
+#: src/ui_configurationDialog.h:1497
 msgid "Information"
 msgstr "Інформація"
 
-#: src/ui_configurationDialog.h:1499
+#: src/ui_configurationDialog.h:1502
 msgid "Navigation"
 msgstr "Навігація"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1504
 msgid "Tools"
 msgstr "Інструменти"
 
-#: src/ui_configurationDialog.h:1505
+#: src/ui_configurationDialog.h:1508
 msgid "Plugins"
 msgstr "Додатки"
 
@@ -7562,9 +7566,9 @@ msgstr "Показувати об’єкти, яскравіші за зорян
 
 #: src/ui_astroCalcDialog.h:761
 msgid ""
-"Calculate positions for celestial bodies who is above horizon at the moment."
+"Calculate positions for celestial bodies which are above the horizon at the "
+"moment."
 msgstr ""
-"Обчислювати розташування небесних тіл, які перебувають над горизонтом."
 
 #: src/ui_astroCalcDialog.h:763
 msgid "Above horizon"
@@ -13505,44 +13509,44 @@ msgid "Orbital Period, days"
 msgstr "Період обертання у днях"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:506
-msgid "Angular Distance, arcsec."
-msgstr "Кутова відстань у секундах"
+msgid "Angular Distance, arcsec"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
-msgid "Effective temperature of a host star, K"
-msgstr "Ефективна температура основної зірки, K"
+msgid "Effective temperature of host star, K"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid "Year of Discovery"
 msgstr "Рік відкриття"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
-msgid "Metallicity of a host star"
-msgstr "Металічність основної зірки"
+msgid "Metallicity of host star"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
-msgid "V magnitude of a host star, mag"
-msgstr "Видима величина основної зірки, ᵐ"
+msgid "V magnitude of host star, mag"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
-msgid "RA (J2000) of a star, deg."
-msgstr "ПС (J2000) зірки, °"
+msgid "RA (J2000) of star, deg"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
-msgid "Dec (J2000) of a star, deg."
-msgstr "Схил (J2000) зірки, °"
+msgid "Dec (J2000) of star, deg"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
-msgid "Distance to a star, pc"
-msgstr "Відстань до зірки, пк"
+msgid "Distance to star, pc"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
-msgid "Mass of a host star, Msol"
-msgstr "Маса зірки, Mсон"
+msgid "Mass of host star, Msol"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
-msgid "Radius of a host star, Rsol"
-msgstr "Радіус основної зірки, Rсон"
+msgid "Radius of host star, Rsol"
+msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
 msgid "Exoplanets Configuration"
@@ -17905,6 +17909,9 @@ msgstr "Нетипове схилення 2"
 #~ msgstr ""
 #~ "Зберігач екрана із записом різноманітних подій у Сонячній системі. 261 запис!"
 
+#~ msgid "Angular Distance, arcsec."
+#~ msgstr "Кутова відстань у секундах"
+
 #~ msgid ""
 #~ "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
 #~ "was contributed by Auke Slotegraaf."
@@ -17933,3 +17940,41 @@ msgstr "Нетипове схилення 2"
 #, qt-format
 #~ msgid "Now is %1"
 #~ msgstr "Зараз %1"
+
+#~ msgid ""
+#~ "Calculate positions for celestial bodies who is above horizon at the moment."
+#~ msgstr ""
+#~ "Обчислювати розташування небесних тіл, які перебувають над горизонтом."
+
+#~ msgid "Metallicity of a host star"
+#~ msgstr "Металічність основної зірки"
+
+#~ msgid "Effective temperature of a host star, K"
+#~ msgstr "Ефективна температура основної зірки, K"
+
+#~ msgid "Mass of a host star, Msol"
+#~ msgstr "Маса зірки, Mсон"
+
+#~ msgid "Radius of a host star, Rsol"
+#~ msgstr "Радіус основної зірки, Rсон"
+
+#~ msgid "V magnitude of a host star, mag"
+#~ msgstr "Видима величина основної зірки, ᵐ"
+
+#~ msgid "RA (J2000) of a star, deg."
+#~ msgstr "ПС (J2000) зірки, °"
+
+#~ msgid "Dec (J2000) of a star, deg."
+#~ msgstr "Схил (J2000) зірки, °"
+
+#~ msgid "Distance to a star, pc"
+#~ msgstr "Відстань до зірки, пк"
+
+#~ msgid "Delete the one closest marker to mouse cursor"
+#~ msgstr "Вилучити одну найближчу до вказівника миші позначку"
+
+#~ msgid "A button to toggle equatorial J2000 grid."
+#~ msgstr "Кнопка для вмикання або вимикання екваторіальної сітки J2000."
+
+#~ msgid "Are you really want to remove this landscape?"
+#~ msgstr "Ви справді хочете вилучити цей ландшафт?"
