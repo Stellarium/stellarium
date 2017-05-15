@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 00:21+0700\n"
+"POT-Creation-Date: 2017-05-15 09:52+0700\n"
 "PO-Revision-Date: 2017-05-12 15:47+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-13 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-05-15 05:41+0000\n"
 "X-Generator: Launchpad (build 18373)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -1201,7 +1201,7 @@ msgstr "Nattläge"
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:210
+#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:1253
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
@@ -1421,13 +1421,13 @@ msgstr "Vänd scenen horisontellt"
 msgid "Flip scene vertically"
 msgstr "Vänd scenen vertikalt"
 
-#: src/core/StelCore.cpp:2105
+#: src/core/StelCore.cpp:2111
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korrigering är inaktiverad! Använd endast om är säker på att du vet vad du "
 "gör!"
 
-#: src/core/StelCore.cpp:2108
+#: src/core/StelCore.cpp:2114
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1438,7 +1438,7 @@ msgstr ""
 "Henriksson i artikeln <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). Läs mer %2här%3."
 
-#: src/core/StelCore.cpp:2111
+#: src/core/StelCore.cpp:2117
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1447,7 +1447,7 @@ msgstr ""
 "Denna empiriska ekvation publicerades av G. M. Clemence i artikeln <em>On "
 "the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2114
+#: src/core/StelCore.cpp:2120
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1460,7 +1460,7 @@ msgstr ""
 "användes av Jean Meeus i boken <em>Astronomical Formulae for "
 "Calculators</em> (1988) och i datorprogrammet SunTracker Pro."
 
-#: src/core/StelCore.cpp:2118
+#: src/core/StelCore.cpp:2124
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1470,7 +1470,7 @@ msgstr ""
 "böckerna <em>Astronomical Ephemeris</em> och <em>Canon of Solar "
 "Eclipses</em> av Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:2122
+#: src/core/StelCore.cpp:2128
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1481,7 +1481,7 @@ msgstr ""
 "planeterna vid 5- och 10-dagarsintervaller från 601 f.v.t. till 1649 e.v.t. "
 "Samma förhållande antogs även indirekt i Goldstines syzygytabeller (1973)."
 
-#: src/core/StelCore.cpp:2126
+#: src/core/StelCore.cpp:2132
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1492,7 +1492,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2129
+#: src/core/StelCore.cpp:2135
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1501,7 +1501,7 @@ msgstr ""
 "Denna ekvation publicerades av F. R. Stephenson i artikeln <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2132
+#: src/core/StelCore.cpp:2138
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1515,7 +1515,7 @@ msgstr ""
 "period 1800-1975</em> (%1) efter att ha prövats och anpassats m.h.a. data "
 "från Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2135
+#: src/core/StelCore.cpp:2141
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1525,7 +1525,7 @@ msgstr ""
 "Tables from -4000 to +2800</em> (1986) och i planetariumdatorprogrammet "
 "RedShift."
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2144
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1536,11 +1536,11 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2141
+#: src/core/StelCore.cpp:2147
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Denna algoritm används i planetariumdatorprogrammet Guide 7."
 
-#: src/core/StelCore.cpp:2144
+#: src/core/StelCore.cpp:2150
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1550,7 +1550,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) och <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2147
+#: src/core/StelCore.cpp:2153
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1559,7 +1559,7 @@ msgstr ""
 "Denna formel togs fram av K.M. Borkowski (%1) utifrån en analys av 31 "
 "registrerade solförmörkelser mellan 2137 f.v.t. och 1715 e.v.t."
 
-#: src/core/StelCore.cpp:2150
+#: src/core/StelCore.cpp:2156
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1572,7 +1572,7 @@ msgstr ""
 "Period 1800-1988</em> (%1) eftr att ha prövats och anpassats m.h.a. "
 "datavärden från Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:2153
+#: src/core/StelCore.cpp:2159
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1582,7 +1582,7 @@ msgstr ""
 "version av månrörelseteorin ELP2000-85, publicerad som en del av <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2156
+#: src/core/StelCore.cpp:2162
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1593,7 +1593,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2159
+#: src/core/StelCore.cpp:2165
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1602,7 +1602,7 @@ msgstr ""
 "F. R. Stephenson publicerade denna formel i boken <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2162
+#: src/core/StelCore.cpp:2168
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1612,7 +1612,7 @@ msgstr ""
 "använd. Tabell för 1620-2000 och innefattar en variant av Chapront, Chapront-"
 "Touze & Francou (1997) för datum utanför 1620-2000."
 
-#: src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2171
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1621,7 +1621,7 @@ msgstr ""
 "JPL Solar System Dynamics Group vid NASA Jet Propulsion Laboratory använder "
 "denna formel på sin interaktiva webbplats %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2168
+#: src/core/StelCore.cpp:2174
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1630,7 +1630,7 @@ msgstr ""
 "Detta polynom publicerades av J. Meeus & L. Simons i artikeln <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2177
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1640,7 +1640,7 @@ msgstr ""
 "Montenbruck & T. Pfleger, 2000) tillhandahåller enkla dataanpassningar för "
 "tredjegradspolynom för en nära dåtid."
 
-#: src/core/StelCore.cpp:2174
+#: src/core/StelCore.cpp:2180
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1652,7 +1652,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Den baseras på Jean Meeus "
 "<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2177
+#: src/core/StelCore.cpp:2183
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1663,7 +1663,7 @@ msgstr ""
 "artikeln <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) med tillägg i (%3)."
 
-#: src/core/StelCore.cpp:2180
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1676,7 +1676,7 @@ msgstr ""
 "med en cosinus- och andragradsfunktion. Detta är baserat på en möjlig "
 "periodicitet, som beskrivs av Stephenson (%2). Läs mer %3här%4."
 
-#: src/core/StelCore.cpp:2183 src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2189 src/core/StelCore.cpp:2192
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1691,15 +1691,15 @@ msgstr ""
 "Canon of Solar Eclipses: -1900 to +3000</em> (2006). Formeln används även i "
 "ett efemeridprogram för solen, månen och planeterna, kallat SOLEX."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2189
 msgid "Used by default."
 msgstr "Används som standard."
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2192
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PATCHAD VERSION UTAN TILLAGD MÅNACCELERATION"
 
-#: src/core/StelCore.cpp:2189
+#: src/core/StelCore.cpp:2195
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1710,7 +1710,7 @@ msgstr ""
 "publiserad i artikeln <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2192
+#: src/core/StelCore.cpp:2198
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1721,7 +1721,7 @@ msgstr ""
 "(2000), publiserad i artikeln <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) och uppdaterad av Sana Islam i 2013."
 
-#: src/core/StelCore.cpp:2195
+#: src/core/StelCore.cpp:2201
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1732,7 +1732,7 @@ msgstr ""
 "Mariam Sultana och Faheem Zaidi publicerades i <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2198
+#: src/core/StelCore.cpp:2204
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1745,7 +1745,7 @@ msgstr ""
 "2015</em> (%1). Utanför det angivna intervallet (modellerat med en spline-"
 "form) ger värden från en ungefärlig parabola."
 
-#: src/core/StelCore.cpp:2201
+#: src/core/StelCore.cpp:2207
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1754,11 +1754,11 @@ msgstr ""
 "Det här är en andragradsfunktion för beräkning av %1T, där koefficienterna "
 "definieras av användaren."
 
-#: src/core/StelCore.cpp:2204 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2210 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Fel"
 
-#: src/core/StelCore.cpp:2212
+#: src/core/StelCore.cpp:2218
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -1767,17 +1767,17 @@ msgstr ""
 "Lösningensvärdes av %1 för %2 (sekulär acceleration av månen) kräver en "
 "anpassning, se Guide för detaljer."
 
-#: src/core/StelCore.cpp:2253
+#: src/core/StelCore.cpp:2259
 msgid "with zero values outside this range"
 msgstr "med noll och inga värden utanför detta intervall"
 
-#: src/core/StelCore.cpp:2256
+#: src/core/StelCore.cpp:2262
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "med en typisk noggrannhet på 1 sekund samt noll och inga värden utanför "
 "detta intervall"
 
-#: src/core/StelCore.cpp:2259
+#: src/core/StelCore.cpp:2265
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -1785,16 +1785,16 @@ msgstr ""
 "Med ett genomsnittligt fel på mindre än en sekund, max. fel 1,9s och värden "
 "för gränsåren utanför detta intervall"
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2272
 msgid "with values for the limit years outside this range"
 msgstr "Med värden för gränsåren utanför detta intervall"
 
-#: src/core/StelCore.cpp:2276
+#: src/core/StelCore.cpp:2282
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Giltigt tidsintervall: mellan år %1 och %2, %3."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Giltigt tidsintervall: mellan år %1 och %2."
@@ -2002,7 +2002,7 @@ msgstr "Skenbar siderisk tid: %1"
 msgid "Deep-sky objects background images"
 msgstr "Bakgrundsbilder för djuprymdsobjekt"
 
-#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:212
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:209
 #: src/StelMainView.cpp:761
 msgid "Miscellaneous"
 msgstr "Diverse"
@@ -2465,8 +2465,8 @@ msgid "Shift & left click"
 msgstr "Shift & vänsterklicka"
 
 #: src/gui/HelpDialog.cpp:187
-msgid "Delete the one closest marker to mouse cursor"
-msgstr "Ta bort den närmsta markören till muspekaren"
+msgid "Delete marker closest to mouse cursor"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2619,91 +2619,91 @@ msgstr ""
 "Flera personer har bidragit till projektet och deras arbete har gjort "
 "Stellarium bättre (alfabetisk ordning): %1."
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:208
 msgid "Windows"
 msgstr "Fönster"
 
-#: src/gui/StelGui.cpp:213
+#: src/gui/StelGui.cpp:210
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:211
 msgid "Speed up the script execution rate"
 msgstr "Öka uppspelningshastigheten på skriptet"
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:212
 msgid "Slow down the script execution rate"
 msgstr "Reduser kjørehastigheten for skript"
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:213
 msgid "Set the normal script execution rate"
 msgstr "Återställ skriptets uppspelningshastighet"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:214
 msgid "Stop script execution"
 msgstr "Stoppa körning av skript"
 
-#: src/gui/StelGui.cpp:218
+#: src/gui/StelGui.cpp:215
 msgid "Pause script execution"
 msgstr "Pausa aktuellt skript"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:216
 msgid "Resume script execution"
 msgstr "Återuppta körning av skript"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:219
 msgid "Script console window"
 msgstr "Konsolfönster för skript"
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:222
 msgid "Help window"
 msgstr "Hjälpfönster"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:223
 msgid "Configuration window"
 msgstr "Konfigurationsfönster"
 
-#: src/gui/StelGui.cpp:227 src/ui_searchDialogGui.h:611
+#: src/gui/StelGui.cpp:224 src/ui_searchDialogGui.h:611
 msgid "Search window"
 msgstr "Sökfönster"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:225
 msgid "Sky and viewing options window"
 msgstr "Fönster för himmel och visningsalternativ"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:226
 msgid "Date/time window"
 msgstr "Datum-/tidsfönster"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:227
 msgid "Location window"
 msgstr "Platsfönster"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:228
 msgid "Shortcuts window"
 msgstr "Genvägsfönstret"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:229
 msgid "Astronomical calculations window"
 msgstr "Fönster för astronomiska beräkningar"
 
-#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:193
+#: src/gui/StelGui.cpp:230 src/ui_bookmarksDialog.h:193
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/gui/StelGui.cpp:234
+#: src/gui/StelGui.cpp:231
 msgid "Copy selected object information to clipboard"
 msgstr "Kopierade markerad objektinformation till Urklipp"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:237
 msgid "Auto hide horizontal button bar"
 msgstr "Dölj den horisontella knappraden automatiskt"
 
-#: src/gui/StelGui.cpp:241
+#: src/gui/StelGui.cpp:238
 msgid "Auto hide vertical button bar"
 msgstr "Dölj den  lodräta knappraden automatiskt"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:241
 msgid "Toggle visibility of GUI"
 msgstr "Växla synlighet för det grafiska gränssnittet"
 
@@ -2919,8 +2919,8 @@ msgid "Remove an installed landscape"
 msgstr "Ta bort ett installerat lanskap"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
-msgid "Are you really want to remove this landscape?"
-msgstr "Vill du verkligen ta bort detta landskap?"
+msgid "Do you really want to remove this landscape?"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3671,7 +3671,7 @@ msgstr "Importera bokmärken"
 msgid "Export bookmarks as..."
 msgstr "Exportera bokmärken som..."
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1506
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Skript"
@@ -4539,7 +4539,7 @@ msgstr "Mapp"
 msgid "&Choose"
 msgstr "&Välj"
 
-#: src/translations.h:416 src/ui_configurationDialog.h:1473
+#: src/translations.h:416 src/ui_configurationDialog.h:1476
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Avbryt"
@@ -5932,7 +5932,7 @@ msgstr "Lås position när koordinater används"
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2370
 #: src/ui_viewDialog.h:2392 src/ui_viewDialog.h:2426
-#: src/ui_configurationDialog.h:1474 src/ui_configurationDialog.h:1485
+#: src/ui_configurationDialog.h:1477 src/ui_configurationDialog.h:1488
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Alternativ"
@@ -6817,7 +6817,7 @@ msgstr "Vidden av ditt synfält när Stellarium startar"
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Den riktning du ser när Stellarium startar"
 
-#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1496
+#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1499
 msgid "Selected object information"
 msgstr "Information om valt objekt"
 
@@ -7196,7 +7196,7 @@ msgid "Show bookmarks button"
 msgstr "Visa bokmärkesknapp"
 
 #: src/ui_configurationDialog.h:1448
-msgid "A button to toggle equatorial J2000 grid."
+msgid "A button to toggle equatorial J2000 grid"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1450
@@ -7211,87 +7211,91 @@ msgstr ""
 msgid "Show galactic grid button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1455
+#: src/ui_configurationDialog.h:1456
+msgid "A button to toggle ecliptic grid of date"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1458
 msgid "Show ecliptic grid button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1456
+#: src/ui_configurationDialog.h:1459
 msgid "Show constellation boundaries button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1457
+#: src/ui_configurationDialog.h:1460
 msgid "Screenshots"
 msgstr "Skärmbilder"
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1461
 msgid "Screenshot Directory"
 msgstr "Skärmbildskatalog"
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1463
 msgid "Invert colors"
 msgstr "Invertera färger"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1464
 msgid "Star catalog updates"
 msgstr "Uppdateringar av stjärnkataloger"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1466
 msgid "Click here to start downloading"
 msgstr "Klicka här för att ladda ner"
 
-#: src/ui_configurationDialog.h:1465
+#: src/ui_configurationDialog.h:1468
 msgid "Download this file to view even more stars"
 msgstr "Ladda ner denna fil för att visa ännu fler stjärnor"
 
-#: src/ui_configurationDialog.h:1467
+#: src/ui_configurationDialog.h:1470
 msgid "Restart the download"
 msgstr "Ladda ner på nytt"
 
-#: src/ui_configurationDialog.h:1469
+#: src/ui_configurationDialog.h:1472
 msgid "Retry"
 msgstr "Försök igen"
 
-#: src/ui_configurationDialog.h:1471
+#: src/ui_configurationDialog.h:1474
 msgid "Stop the download. You can always restart it later"
 msgstr "Stoppa nedladdningen. Du kan alltid starta om den senare"
 
-#: src/ui_configurationDialog.h:1476
+#: src/ui_configurationDialog.h:1479
 msgid "Close window when script runs"
 msgstr "Stäng fönstret när skriptet körs"
 
-#: src/ui_configurationDialog.h:1478
+#: src/ui_configurationDialog.h:1481
 msgid "Run the selected script"
 msgstr "Kör det valda skriptet"
 
-#: src/ui_configurationDialog.h:1482
+#: src/ui_configurationDialog.h:1485
 msgid "Stop a running script"
 msgstr "Stoppa ett körande skript"
 
-#: src/ui_configurationDialog.h:1486
+#: src/ui_configurationDialog.h:1489
 msgid "Load at startup"
 msgstr "Laddas vid start"
 
-#: src/ui_configurationDialog.h:1487
+#: src/ui_configurationDialog.h:1490
 msgid "configure"
 msgstr "Konfigurera"
 
-#: src/ui_configurationDialog.h:1492
+#: src/ui_configurationDialog.h:1495
 msgid "Main"
 msgstr "Allmänt"
 
-#: src/ui_configurationDialog.h:1494
+#: src/ui_configurationDialog.h:1497
 msgid "Information"
 msgstr "Information"
 
-#: src/ui_configurationDialog.h:1499
+#: src/ui_configurationDialog.h:1502
 msgid "Navigation"
 msgstr "Navigering"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1504
 msgid "Tools"
 msgstr "Verktyg"
 
-#: src/ui_configurationDialog.h:1505
+#: src/ui_configurationDialog.h:1508
 msgid "Plugins"
 msgstr "Insticksprogram"
 
@@ -7503,7 +7507,8 @@ msgstr "Visa objekt starkare än magnitud:"
 
 #: src/ui_astroCalcDialog.h:761
 msgid ""
-"Calculate positions for celestial bodies who is above horizon at the moment."
+"Calculate positions for celestial bodies which are above the horizon at the "
+"moment."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:763
@@ -13038,11 +13043,11 @@ msgid "Orbital Period, days"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:506
-msgid "Angular Distance, arcsec."
+msgid "Angular Distance, arcsec"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
-msgid "Effective temperature of a host star, K"
+msgid "Effective temperature of host star, K"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
@@ -13050,31 +13055,31 @@ msgid "Year of Discovery"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
-msgid "Metallicity of a host star"
+msgid "Metallicity of host star"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
-msgid "V magnitude of a host star, mag"
+msgid "V magnitude of host star, mag"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
-msgid "RA (J2000) of a star, deg."
+msgid "RA (J2000) of star, deg"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
-msgid "Dec (J2000) of a star, deg."
+msgid "Dec (J2000) of star, deg"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
-msgid "Distance to a star, pc"
+msgid "Distance to star, pc"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
-msgid "Mass of a host star, Msol"
+msgid "Mass of host star, Msol"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
-msgid "Radius of a host star, Rsol"
+msgid "Radius of host star, Rsol"
 msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
@@ -16734,3 +16739,9 @@ msgstr ""
 
 #~ msgid "Mag."
 #~ msgstr "Mag."
+
+#~ msgid "Delete the one closest marker to mouse cursor"
+#~ msgstr "Ta bort den närmsta markören till muspekaren"
+
+#~ msgid "Are you really want to remove this landscape?"
+#~ msgstr "Vill du verkligen ta bort detta landskap?"
