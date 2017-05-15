@@ -37,7 +37,7 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	setSelectionMode(QAbstractItemView::SingleSelection);
 	setFocusPolicy(Qt::NoFocus);
-	setEditTriggers(false);
+	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	setShowGrid(false);
 
 	m_pCheckboxGroup->setExclusive(false);

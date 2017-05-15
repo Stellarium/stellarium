@@ -23,7 +23,7 @@
 #include "ui_addonScanner.h"
 
 AddOnScanner::AddOnScanner(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("AddOnScanner", parent)
 {
 	ui = new Ui_AddOnScanner;
 }
