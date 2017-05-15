@@ -70,7 +70,7 @@ qint64 SyncMessage::createFullMessage(QByteArray &target) const
 	else
 	{
 		//write header in front
-		SyncHeader header = { getMessageType(), static_cast<tPayloadSize>(writtenSize) };
+		SyncHeader header = { (quint8)getMessageType(), static_cast<tPayloadSize>(writtenSize) };
 		tmpStream.device()->seek(0);
 		tmpStream<<header;
 

@@ -138,7 +138,7 @@ private:
 	int m_indexCount;
 	size_t m_memoryUsage;
 
-	int m_offsets[ATTLOC_SIZE];
+	qint32 m_offsets[ATTLOC_SIZE];
 	GLint m_sizes[ATTLOC_SIZE];
 	GLenum m_types[ATTLOC_SIZE];
 	GLsizei m_strides[ATTLOC_SIZE];
