@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-05-12 00:21+0700\n"
+"POT-Creation-Date: 2017-05-15 09:52+0700\n"
 "PO-Revision-Date: 2017-05-11 21:27+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-12 05:42+0000\n"
+"X-Launchpad-Export-Date: 2017-05-15 05:40+0000\n"
 "X-Generator: Launchpad (build 18373)\n"
 
 #: src/core/modules/CustomObject.cpp:78 src/core/modules/CustomObject.cpp:80
@@ -1204,7 +1204,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "Non potzo criare su imbiadore Spout. Abbaida su log po ischire de prus."
 
-#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:210
+#: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:1253
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
@@ -1424,12 +1424,12 @@ msgstr "Pone s'iscena a cucur'in besse orizzontale s'iscena"
 msgid "Flip scene vertically"
 msgstr "Pone s'iscena a cucur'in besse verticale s'iscena"
 
-#: src/core/StelCore.cpp:2105
+#: src/core/StelCore.cpp:2111
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Curretzione disabilitatda. Manizaddu si ischis ite ses faghinde ebbia."
 
-#: src/core/StelCore.cpp:2108
+#: src/core/StelCore.cpp:2114
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1441,7 +1441,7 @@ msgstr ""
 "Relatividade de Einstein cinfrimada dae sas antigas eclisses de Sole</em> "
 "(%1). Po ateras informatziones abbaida %2innoghe%3."
 
-#: src/core/StelCore.cpp:2111
+#: src/core/StelCore.cpp:2117
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1450,7 +1450,7 @@ msgstr ""
 "Custa ecuatzione empirica est bistada pubblicada de G. M. Clemence in "
 "s'articulu <em>Suba de su sistema de costantes astronomicas</em> (%1)."
 
-#: src/core/StelCore.cpp:2114
+#: src/core/StelCore.cpp:2120
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1463,7 +1463,7 @@ msgstr ""
 "dae Jean Meeus in su <em>Formula Astronomica po Carculadore</em>. Est "
 "bistada usada fintzas in su programma po PC SunTracker Pro."
 
-#: src/core/StelCore.cpp:2118
+#: src/core/StelCore.cpp:2124
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1473,7 +1473,7 @@ msgstr ""
 "bistada usada in su <em>Efemerides Astronomicas</em> et in sa <em>Regula po "
 "sas Eclisses Solares</em> de Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:2122
+#: src/core/StelCore.cpp:2128
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1485,7 +1485,7 @@ msgstr ""
 "a 1649 CE. Sa matessi relatzione fudi istada impreada implicitamente in sa "
 "syzygy tablellas de Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2126
+#: src/core/StelCore.cpp:2132
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1496,7 +1496,7 @@ msgstr ""
 "in s'articulu <em>S'atzelleratzione de sa Terra e de sa Luna dae sas prima "
 "osservatziones</em> (%1)."
 
-#: src/core/StelCore.cpp:2129
+#: src/core/StelCore.cpp:2135
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1505,7 +1505,7 @@ msgstr ""
 "Custa ecuqtzione est istada pubblicada dae F. R. Stephenson in s'articulu "
 "<em>Osservatziones Astronomicas prima de sos telescopios</em> (%1)."
 
-#: src/core/StelCore.cpp:2132
+#: src/core/StelCore.cpp:2138
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1519,7 +1519,7 @@ msgstr ""
 "U.T. in s'opeca de su 1800-1975</em> (%1) comente forma de sos datos "
 "pubblicaos dae Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2135
+#: src/core/StelCore.cpp:2141
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1529,7 +1529,7 @@ msgstr ""
 "Simon's<em>Programmas Planetarios e Tabellas dae su -4000 a +2800</em> "
 "(1986) et in su programma planetariu po PC RedShift."
 
-#: src/core/StelCore.cpp:2138
+#: src/core/StelCore.cpp:2144
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1540,12 +1540,12 @@ msgstr ""
 "in s'articulu <em>Cambiamentas de su zirare de sa Terra in tempus longu - "
 "700 A.C. a P.C. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2141
+#: src/core/StelCore.cpp:2147
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Custu algoritimu est impreau in su programma planetariu po PC Guide 7."
 
-#: src/core/StelCore.cpp:2144
+#: src/core/StelCore.cpp:2150
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1555,7 +1555,7 @@ msgstr ""
 "de Chimbanta Annos de sas Eclisses Solares: 1986-2035</em> (1987) et in su "
 "<em>Regula de Chimbanta Annos de sas Eclisses Lunares: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2147
+#: src/core/StelCore.cpp:2153
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1564,7 +1564,7 @@ msgstr ""
 "Custa formula est bistada otennia dae K.M. Borkowski (%1) dae una analisi de "
 "31 eclisses solares rezistrasdas tra su 2137 A.C. et 1715 P.C."
 
-#: src/core/StelCore.cpp:2150
+#: src/core/StelCore.cpp:2156
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1577,7 +1577,7 @@ msgstr ""
 "U.T. a E.T. po s'opeca 1800-1988</em> (%1) comente su datu valutau dae "
 "Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:2153
+#: src/core/StelCore.cpp:2159
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1587,7 +1587,7 @@ msgstr ""
 "versione curtza de su ELP 2000-85 teoria lunare in s'issoro <em>Tabellas "
 "Lunares et Programmas dae 4000 A.C. to 8000 P.C.</em> (1991)."
 
-#: src/core/StelCore.cpp:2156
+#: src/core/StelCore.cpp:2162
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1598,7 +1598,7 @@ msgstr ""
 "Morrison in s'articulu <em>Flutuazione in su zirare de sa Terra po tempus "
 "longu: 700 A.C. a 1990 P.C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2159
+#: src/core/StelCore.cpp:2165
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1607,7 +1607,7 @@ msgstr ""
 "F. R. Stephenson hat pubblicatu custa formula in su libru su <em>Eclisses "
 "Istoricas et su zirare de sa Terra</em> (%1)."
 
-#: src/core/StelCore.cpp:2162
+#: src/core/StelCore.cpp:2168
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1617,7 +1617,7 @@ msgstr ""
 "meda. Tabella po 1620..2000, et includet una variante de Chapront, Chapront-"
 "Touze & Francou (1997) po datas fora de su 1620..2000."
 
-#: src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2171
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1626,7 +1626,7 @@ msgstr ""
 "Su JPL Solar System Dynamics Group de sa NASA Jet Propulsion Laboratory "
 "impreat custa formula in su situ interativu %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2168
+#: src/core/StelCore.cpp:2174
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1635,7 +1635,7 @@ msgstr ""
 "Custu polinomiu est istau pubblicau dae J. Meeus et L. Simons in s'articulu "
 "<em>Approssimatziones polinomiale a Delta T, 1620-2000 P.C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2171
+#: src/core/StelCore.cpp:2177
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1645,7 +1645,7 @@ msgstr ""
 "Personal Computer</em> (2000) cun fatziles datos polinomiales de terz'ordine "
 "addatos po su passau retzente."
 
-#: src/core/StelCore.cpp:2174
+#: src/core/StelCore.cpp:2180
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1657,7 +1657,7 @@ msgstr ""
 "Calendricas</em> (2002). Si fundat suba Jean Meeus' <em>Algoritimos "
 "Astronomicos</em> (1991)."
 
-#: src/core/StelCore.cpp:2177
+#: src/core/StelCore.cpp:2183
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1669,7 +1669,7 @@ msgstr ""
 "de sa Terra %1T et de su calculu de sas eclisses</em> (%2) cun s'azunta in "
 "(%3)."
 
-#: src/core/StelCore.cpp:2180
+#: src/core/StelCore.cpp:2186
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1683,7 +1683,7 @@ msgstr ""
 "quadrau. Custu est fundau in una possibile periodicidade desscritta dae "
 "Stephenson (%2). Po ateras informatzione abbaidare %3innoghe %4."
 
-#: src/core/StelCore.cpp:2183 src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2189 src/core/StelCore.cpp:2192
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1699,15 +1699,15 @@ msgstr ""
 "formula est fintzas impreada in sas efemerides saolares, lunares et "
 "planetarias in su programma SOLEX."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2189
 msgid "Used by default."
 msgstr "Usada comente impostazione predefinia."
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2192
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "VERSIONE TZAPULADA CHENTZA ACCELERATZIONE LUNARE AZUNTA."
 
-#: src/core/StelCore.cpp:2189
+#: src/core/StelCore.cpp:2195
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1718,7 +1718,7 @@ msgstr ""
 "(1984), chi hant pubblicau in articulu <em>Antigas eclisses et sa datatzione "
 "de sa rutta de Babilonia</em> (%1)."
 
-#: src/core/StelCore.cpp:2192
+#: src/core/StelCore.cpp:2198
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1730,7 +1730,7 @@ msgstr ""
 "s'Irballiu de s'Approssimatzione Polinomiale de DeltaT</em> (%1) et torrada "
 "a sistemare a pustis dea Sana Islam in su 2013."
 
-#: src/core/StelCore.cpp:2195
+#: src/core/StelCore.cpp:2201
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1741,7 +1741,7 @@ msgstr ""
 "Khalid, Mariam Sultana et Faheem Zaidi est istada pubblicada in <em>Delta T: "
 "Aprossimatzione Polinomiale de s'opeca 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2198
+#: src/core/StelCore.cpp:2204
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1754,7 +1754,7 @@ msgstr ""
 "BC to AD 2015</em> (%1). Foras de s'intervallu numenau (modellau a forma de "
 "spline) zada volare dae una parabula approssimada."
 
-#: src/core/StelCore.cpp:2201
+#: src/core/StelCore.cpp:2207
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1763,11 +1763,11 @@ msgstr ""
 "Custa est una formula cuadratica po su calculu de %1T cun coeficientes "
 "definios de s'utente."
 
-#: src/core/StelCore.cpp:2204 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2210 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Irballiu"
 
-#: src/core/StelCore.cpp:2212
+#: src/core/StelCore.cpp:2218
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -1776,16 +1776,16 @@ msgstr ""
 "Su valore de sa solutzione de %1 po %2 (acceleratzione seculare de sa Luna) "
 "cheret unu adattamentu, leze sa guida po informatziones prus pretzisas."
 
-#: src/core/StelCore.cpp:2253
+#: src/core/StelCore.cpp:2259
 msgid "with zero values outside this range"
 msgstr "cun perunu valore fora de s'intevallu"
 
-#: src/core/StelCore.cpp:2256
+#: src/core/StelCore.cpp:2262
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "cun 1 tipucu segundu de acuradesa et perunu valore fora de s'intervallu"
 
-#: src/core/StelCore.cpp:2259
+#: src/core/StelCore.cpp:2265
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -1793,16 +1793,16 @@ msgstr ""
 "cun unu irballiu mediu prus piticu de unu segundu, irballiu massimu 1.9s, et "
 "valores po su limite de sos annos fora de custu intervallu."
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2272
 msgid "with values for the limit years outside this range"
 msgstr "valores po su limite de sos annos fora de custu intervallu."
 
-#: src/core/StelCore.cpp:2276
+#: src/core/StelCore.cpp:2282
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Intervallu validu de impreu: fra %1 annos e %2, %3."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Intervallu validu: tra sos annos %1 et %2."
@@ -2013,7 +2013,7 @@ msgstr "Tempus Siderale Apparente: %1"
 msgid "Deep-sky objects background images"
 msgstr "Imazines de fundu cun ogettos de s'ispaziu profundu"
 
-#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:212
+#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:209
 #: src/StelMainView.cpp:761
 msgid "Miscellaneous"
 msgstr "Miscellanea"
@@ -2475,8 +2475,8 @@ msgid "Shift & left click"
 msgstr "Shift & clicca a sinistra"
 
 #: src/gui/HelpDialog.cpp:187
-msgid "Delete the one closest marker to mouse cursor"
-msgstr "Cantzella su marcadore prus accanta a su cursore de su mouse"
+msgid "Delete marker closest to mouse cursor"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2635,91 +2635,91 @@ msgstr ""
 "Zente meda hat contribuiu a su progettu et su triballu isssoro hat mezorau "
 "meda Stellarium (postos in ordine alfabeticu): %1"
 
-#: src/gui/StelGui.cpp:211
+#: src/gui/StelGui.cpp:208
 msgid "Windows"
 msgstr "Bentanas"
 
-#: src/gui/StelGui.cpp:213
+#: src/gui/StelGui.cpp:210
 msgid "Quit"
 msgstr "Essi"
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:211
 msgid "Speed up the script execution rate"
 msgstr "Aumenta sa velocidade de esecutzione de s'iscript"
 
-#: src/gui/StelGui.cpp:215
+#: src/gui/StelGui.cpp:212
 msgid "Slow down the script execution rate"
 msgstr "Diminui sa velocidade de esecutzione de s'iscript"
 
-#: src/gui/StelGui.cpp:216
+#: src/gui/StelGui.cpp:213
 msgid "Set the normal script execution rate"
 msgstr "Imposta sa velocidade normale de esecutzione de s'iscript"
 
-#: src/gui/StelGui.cpp:217
+#: src/gui/StelGui.cpp:214
 msgid "Stop script execution"
 msgstr "Frima s'iscript"
 
-#: src/gui/StelGui.cpp:218
+#: src/gui/StelGui.cpp:215
 msgid "Pause script execution"
 msgstr "Pausa s'iscript"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:216
 msgid "Resume script execution"
 msgstr "Torra a faere partire s'iscript"
 
-#: src/gui/StelGui.cpp:222
+#: src/gui/StelGui.cpp:219
 msgid "Script console window"
 msgstr "Fentana de console de s'iscript"
 
-#: src/gui/StelGui.cpp:225
+#: src/gui/StelGui.cpp:222
 msgid "Help window"
 msgstr "Fentana de azudu"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:223
 msgid "Configuration window"
 msgstr "Fentana de configuratzione"
 
-#: src/gui/StelGui.cpp:227 src/ui_searchDialogGui.h:611
+#: src/gui/StelGui.cpp:224 src/ui_searchDialogGui.h:611
 msgid "Search window"
 msgstr "Fentana po cricare"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:225
 msgid "Sky and viewing options window"
 msgstr "Fentana de sas optziones de vista et de chelu"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:226
 msgid "Date/time window"
 msgstr "Fentana de data/ora"
 
-#: src/gui/StelGui.cpp:230
+#: src/gui/StelGui.cpp:227
 msgid "Location window"
 msgstr "Fentana de sa localidade"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:228
 msgid "Shortcuts window"
 msgstr "Fentana po fagher prus in presse"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:229
 msgid "Astronomical calculations window"
 msgstr "Fentana de sos calculos astronomicos"
 
-#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:193
+#: src/gui/StelGui.cpp:230 src/ui_bookmarksDialog.h:193
 msgid "Bookmarks"
 msgstr "Sinnalibros"
 
-#: src/gui/StelGui.cpp:234
+#: src/gui/StelGui.cpp:231
 msgid "Copy selected object information to clipboard"
 msgstr "Copia s'ogettu seberau in sos appuntos"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:237
 msgid "Auto hide horizontal button bar"
 msgstr "Tastu po che cuare sa barra orizontale automaticamente"
 
-#: src/gui/StelGui.cpp:241
+#: src/gui/StelGui.cpp:238
 msgid "Auto hide vertical button bar"
 msgstr "Tastu po che cuare sa barra vericale automaticamente"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:241
 msgid "Toggle visibility of GUI"
 msgstr "Interrutore po sa visibilidade de sa GUI"
 
@@ -2935,8 +2935,8 @@ msgid "Remove an installed landscape"
 msgstr "Cantzella unu panorama installau"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
-msgid "Are you really want to remove this landscape?"
-msgstr "Chere abberu catzellare custu panorama?"
+msgid "Do you really want to remove this landscape?"
+msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3686,7 +3686,7 @@ msgstr "Importa sinnalibros"
 msgid "Export bookmarks as..."
 msgstr "Isporta sinnalibros comente..."
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1503
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1506
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Iscript"
@@ -4575,7 +4575,7 @@ msgstr "Cartedda:"
 msgid "&Choose"
 msgstr "&Chirra"
 
-#: src/translations.h:416 src/ui_configurationDialog.h:1473
+#: src/translations.h:416 src/ui_configurationDialog.h:1476
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Cantzella"
@@ -5971,7 +5971,7 @@ msgstr "Mantene sa positzione cando suni usadas sas coordinadas"
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2370
 #: src/ui_viewDialog.h:2392 src/ui_viewDialog.h:2426
-#: src/ui_configurationDialog.h:1474 src/ui_configurationDialog.h:1485
+#: src/ui_configurationDialog.h:1477 src/ui_configurationDialog.h:1488
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Preferèntzias"
@@ -6878,7 +6878,7 @@ msgstr "Sa mannaria de sa vista tua cando partit Stellarium"
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Sa diretzione inue ses abaidande cando partit Stellarium"
 
-#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1496
+#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1499
 msgid "Selected object information"
 msgstr "Sebera s'informatzione de s'ogettu"
 
@@ -7265,8 +7265,8 @@ msgid "Show bookmarks button"
 msgstr "Fae biere sos tastos sinnalibros"
 
 #: src/ui_configurationDialog.h:1448
-msgid "A button to toggle equatorial J2000 grid."
-msgstr "Unu tastu  po attivare aa griglia ecuatoriale J2000."
+msgid "A button to toggle equatorial J2000 grid"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1450
 msgid "Show ICRS grid button"
@@ -7280,88 +7280,92 @@ msgstr "Unu tastu po attivare sa griglia galattica"
 msgid "Show galactic grid button"
 msgstr "Fae biere su tastu de sa griglia galattica"
 
-#: src/ui_configurationDialog.h:1455
+#: src/ui_configurationDialog.h:1456
+msgid "A button to toggle ecliptic grid of date"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1458
 msgid "Show ecliptic grid button"
 msgstr "Fae biere su tastu de da griglia eclittica"
 
-#: src/ui_configurationDialog.h:1456
+#: src/ui_configurationDialog.h:1459
 msgid "Show constellation boundaries button"
 msgstr "Fae biere su tastu de sas lacanas de sas costellatziones"
 
-#: src/ui_configurationDialog.h:1457
+#: src/ui_configurationDialog.h:1460
 msgid "Screenshots"
 msgstr "Screenshots"
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1461
 msgid "Screenshot Directory"
 msgstr "Cartedda de sos Screenshots"
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1463
 msgid "Invert colors"
 msgstr "Inverti sos colres"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1464
 msgid "Star catalog updates"
 msgstr "Aggiorna sos catalogos de sos isteddos"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1466
 msgid "Click here to start downloading"
 msgstr "Clicca innoghe po comintzare su iscarrigamentu"
 
-#: src/ui_configurationDialog.h:1465
+#: src/ui_configurationDialog.h:1468
 msgid "Download this file to view even more stars"
 msgstr "Iscarriga custu file po biere ateros prus isteddos"
 
-#: src/ui_configurationDialog.h:1467
+#: src/ui_configurationDialog.h:1470
 msgid "Restart the download"
 msgstr "Torra a comintzare s'iscarrigamentu"
 
-#: src/ui_configurationDialog.h:1469
+#: src/ui_configurationDialog.h:1472
 msgid "Retry"
 msgstr "Torra a provare"
 
-#: src/ui_configurationDialog.h:1471
+#: src/ui_configurationDialog.h:1474
 msgid "Stop the download. You can always restart it later"
 msgstr ""
 "Frima s'iscarrigamnetu. Du podes faere torrare a comitzare cando cheres"
 
-#: src/ui_configurationDialog.h:1476
+#: src/ui_configurationDialog.h:1479
 msgid "Close window when script runs"
 msgstr "Serra sa fentana cando s'iscript est anadnde"
 
-#: src/ui_configurationDialog.h:1478
+#: src/ui_configurationDialog.h:1481
 msgid "Run the selected script"
 msgstr "Fae partire s'iscript seberau"
 
-#: src/ui_configurationDialog.h:1482
+#: src/ui_configurationDialog.h:1485
 msgid "Stop a running script"
 msgstr "Frima s'iscript chi est andande"
 
-#: src/ui_configurationDialog.h:1486
+#: src/ui_configurationDialog.h:1489
 msgid "Load at startup"
 msgstr "Carriga a sa partentzia"
 
-#: src/ui_configurationDialog.h:1487
+#: src/ui_configurationDialog.h:1490
 msgid "configure"
 msgstr "configura"
 
-#: src/ui_configurationDialog.h:1492
+#: src/ui_configurationDialog.h:1495
 msgid "Main"
 msgstr "Printzipale"
 
-#: src/ui_configurationDialog.h:1494
+#: src/ui_configurationDialog.h:1497
 msgid "Information"
 msgstr "Informatzione"
 
-#: src/ui_configurationDialog.h:1499
+#: src/ui_configurationDialog.h:1502
 msgid "Navigation"
 msgstr "Navigatzione"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1504
 msgid "Tools"
 msgstr "Istrumentos"
 
-#: src/ui_configurationDialog.h:1505
+#: src/ui_configurationDialog.h:1508
 msgid "Plugins"
 msgstr "Estensiones"
 
@@ -7574,10 +7578,9 @@ msgstr "Fae biere sos ogettos prus luminosos in mannitudine:"
 
 #: src/ui_astroCalcDialog.h:761
 msgid ""
-"Calculate positions for celestial bodies who is above horizon at the moment."
+"Calculate positions for celestial bodies which are above the horizon at the "
+"moment."
 msgstr ""
-"Carculare sas positziones po sos corpos celestes chi suni suba de "
-"s'orizzonte in custu momentu."
 
 #: src/ui_astroCalcDialog.h:763
 msgid "Above horizon"
@@ -13551,44 +13554,44 @@ msgid "Orbital Period, days"
 msgstr "Periodo Orbitale, dies"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:506
-msgid "Angular Distance, arcsec."
-msgstr "Distantzia Angulare, arcsec."
+msgid "Angular Distance, arcsec"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
-msgid "Effective temperature of a host star, K"
-msgstr "Effetiva temperadura de s'isteddu ospite, K"
+msgid "Effective temperature of host star, K"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid "Year of Discovery"
 msgstr "Annu de s'iscoberta"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
-msgid "Metallicity of a host star"
-msgstr "Metallicidade de s'isteddu ospite"
+msgid "Metallicity of host star"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
-msgid "V magnitude of a host star, mag"
-msgstr "V mannitudine de s'isteddu ospite, mag"
+msgid "V magnitude of host star, mag"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
-msgid "RA (J2000) of a star, deg."
-msgstr "RA (J2000) de unu isteddu, deg."
+msgid "RA (J2000) of star, deg"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
-msgid "Dec (J2000) of a star, deg."
-msgstr "Dec (J2000)  de unu isteddu, deg."
+msgid "Dec (J2000) of star, deg"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
-msgid "Distance to a star, pc"
-msgstr "Distantzia de unu insteddu, pc"
+msgid "Distance to star, pc"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
-msgid "Mass of a host star, Msol"
-msgstr "Massa de unu isteddu ospitem Msol"
+msgid "Mass of host star, Msol"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
-msgid "Radius of a host star, Rsol"
-msgstr "Raju de unu isteddu ospite, Rsol"
+msgid "Radius of host star, Rsol"
+msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
 msgid "Exoplanets Configuration"
@@ -16332,3 +16335,45 @@ msgstr "Declinatzione Personalizada 2"
 #~ msgstr ""
 #~ "Sas cumbinatziones de sos tastos de su plug-in poden essere cambiadas in sa "
 #~ "ischeda generale."
+
+#~ msgid "Angular Distance, arcsec."
+#~ msgstr "Distantzia Angulare, arcsec."
+
+#~ msgid ""
+#~ "Calculate positions for celestial bodies who is above horizon at the moment."
+#~ msgstr ""
+#~ "Carculare sas positziones po sos corpos celestes chi suni suba de "
+#~ "s'orizzonte in custu momentu."
+
+#~ msgid "Metallicity of a host star"
+#~ msgstr "Metallicidade de s'isteddu ospite"
+
+#~ msgid "Effective temperature of a host star, K"
+#~ msgstr "Effetiva temperadura de s'isteddu ospite, K"
+
+#~ msgid "V magnitude of a host star, mag"
+#~ msgstr "V mannitudine de s'isteddu ospite, mag"
+
+#~ msgid "RA (J2000) of a star, deg."
+#~ msgstr "RA (J2000) de unu isteddu, deg."
+
+#~ msgid "Dec (J2000) of a star, deg."
+#~ msgstr "Dec (J2000)  de unu isteddu, deg."
+
+#~ msgid "Distance to a star, pc"
+#~ msgstr "Distantzia de unu insteddu, pc"
+
+#~ msgid "Mass of a host star, Msol"
+#~ msgstr "Massa de unu isteddu ospitem Msol"
+
+#~ msgid "Radius of a host star, Rsol"
+#~ msgstr "Raju de unu isteddu ospite, Rsol"
+
+#~ msgid "Delete the one closest marker to mouse cursor"
+#~ msgstr "Cantzella su marcadore prus accanta a su cursore de su mouse"
+
+#~ msgid "A button to toggle equatorial J2000 grid."
+#~ msgstr "Unu tastu  po attivare aa griglia ecuatoriale J2000."
+
+#~ msgid "Are you really want to remove this landscape?"
+#~ msgstr "Chere abberu catzellare custu panorama?"
