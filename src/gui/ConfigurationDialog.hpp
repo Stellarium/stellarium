@@ -72,8 +72,6 @@ private:
 	QFile* currentDownloadFile;
 	class StelProgressController* progressBar;
 
-	QString userAgent;
-
 private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
@@ -116,7 +114,9 @@ private slots:
 	//! Save the current viewing option including landscape, location and sky culture
 	//! This doesn't include the current viewing direction, time and FOV since those
 	//! have specific controls
-	void saveCurrentViewOptions();
+	void saveAllSettings();
+	//! Save the current view direction and field of view.
+	void saveCurrentViewDirSettings();
 
 	//! Reset all stellarium options.
 	//! This basically replaces the config.ini by the default one
@@ -131,6 +131,14 @@ private slots:
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();
 	void showCustomDeltaTEquationDialog();
+
+	void populateDateFormatsList();
+	void setDateFormat();
+
+	void populateTimeFormatsList();
+	void setTimeFormat();
+
+	void setButtonBarDTFormat();
 
 	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed

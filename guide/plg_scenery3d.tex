@@ -43,15 +43,15 @@ sundials and other shadow casters in action, etc.
 \label{sec:scenery3d:Usage}
 
 
-You activate the plugin with the \emph{circular enclosure} button at screen
+You activate the plugin with the \emph{circular enclosure} button \guibutton{0.6}{bt_scenery3d_off} at screen
 bottom or by pressing \key{\ctrl+W}. The other button with circular enclosure and
-tool icon (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
+tool icon  \guibutton{0.6}{bt_scenery3d_settings_off} (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
 displaying, you can walk around pressing \key{\ctrl} plus cursor keys. Change eye
-height with \key{\ctrl+Page \arrowkeyup}/\key{\ctrl + Page \arrowkeydown} keys. Adding \key{\shift} key increases speed by 10,
+height with \key{\ctrl+Page\,\arrowkeyup\,}/\key{\ctrl + Page\,\arrowkeydown\,} keys. Adding \key{\shift} key increases speed by 10,
 adding \key{\Alt} multiplies by 5 (pressing both keys multiplies by 50!). If you release \key{\ctrl} before
 the cursor key, animation will continue. (Press \key{\ctrl}+any cursor key to stop
-moving.)\footnote{I (GZ) had to change keyboard handling in the
-main program, somewhat breaking the plugin concept.}
+moving.)
+%\footnote{I (GZ) had to change keyboard handling in the main program, somewhat breaking the plugin concept.}
 
 Further key bindings exist which can be configured using the Stellarium default
 key-binding interface. Some options are also available in the Scenery3d dialog.
@@ -143,7 +143,7 @@ On reasonably good hardware
 % models up to 100.000 triangles are fluent, up to 250.000 are still ``interactive''.  
 % we have 2015, and a much faster implementation!
 (tested on a notebook PC with NVidia M580 GTS), models with about
-500.000 triangles are fluent with shadows and bumpmaps.  On very small
+850.000 triangles are working nicely with shadows and bumpmaps.  On very small
 hardware like single-board computers with native OpenGL ES2, models
 may be limited to 64k vertices (points).  If display is too slow,
 switch to perspective projection: all other projections require almost
@@ -180,18 +180,18 @@ Geometry&Yes\\Lights&Yes\\Clay&No\\Photomatched&Yes\\DefaultUVs&No\\Instanced&No
   \label{fig:scenery3d:KerkytheaExportSettings}
 \end{table}
 
-One good exporter is available in the Kerkythea renderer project\footnote{
+One good exporter is available in the \program{Kerkythea} renderer project\footnote{
 Available at \url{http://www.kerkythea.net/cms/}}.  You need
 \program{SU2KT~3.17}
 or better, and \program{KT2OBJ~1.1.0} or better.  Deselect any selection, then
-export your model to the Kerkythea XML format with settings shown in
+export your model to the \program{Kerkythea} XML format with settings shown in
 \ref{fig:scenery3d:KerkytheaExportSettings}.
 (Or, with selection enabled, make sure settings are No-Yes-Yes-No-Yes-No-No.)  
-You do not have to launch Kerkythea unless you want to create nice renderings of
+You do not have to launch \program{Kerkythea} unless you want to create nice renderings of
 your model. 
 Then, use the \program{KT2OBJ} converter to create an OBJ.  You can delete the
 XML after the conversion.  Note that some texture coordinates may not be
-exported correctly. The setting Photomatched:Yes seems now to have
+exported correctly. The setting \texttt{Photomatched:Yes} seems now to have
 corrected this issue, esp. with distorted/manu\-ally shifted textures.
 
 Another free OBJ exporter has been made available by 
@@ -199,7 +199,7 @@ TIG: \file{OBJexporter.rb}\footnote{Available from
 \url{http://forums.sketchucation.com/viewtopic.php?f=323&t=33448}}. 
 This is the only OBJ exporter tested so far capable of handling large TIN landscapes
 ($>450.000$ triangles). 
-As of version 2.6 it seems to be the best OBJ exporter available for Sketchup. 
+As of version 2.6 it seems to be the best OBJ exporter available for \program{Sketchup}. 
 
 %As of version 1.6 it appears to have valid texture coordinates, but I have
 %experienced problems with black faces which need more
@@ -229,7 +229,7 @@ statements: \parameter{mtllib}, \parameter{usemtl}, \parameter{v}, \parameter{vn
 specification of relative positions) are not supported.
 
 A further recommendation for correct illumination is that all vertices should
-have vertex normals. Sketchup models exported with the Kerkythea or TIG plugins
+have vertex normals. \program{Sketchup} models exported with the \program{Kerkythea} or TIG plugins
 should have correct normals. If your model does not provide them, default
 normals can be reconstructed from the triangle edges, resulting in a faceted
 look.
@@ -237,15 +237,18 @@ look.
 If possible, the model should also be triangulated, but the current loader may
 also work with non-triangle geometry. 
 %% TODO: GZ: Does that mean Quads, or higher-level polygons? 
-The correct use of objects (\parameter{o}) and
-groups (\parameter{g}) will improve performance: it is best if you pre-combine all objects
-that use the same material into a single one. The loader will try to optimize it
-anyways if this is not the case, but can do this only partly (to combine 2
-objects with the same material into 1, it requires them to follow directly after
-each other in the OBJ). A simple guide to use \program{Blender} for this task follows:
+The correct use of objects (\parameter{o}) and groups (\parameter{g})
+will improve performance: it is best if you pre-combine all objects
+that use the same material into a single one. The loader will try to
+optimize it anyways if this is not the case, but can do this only
+partly (to combine 2 objects with the same material into 1, it
+requires them to follow directly after each other in the OBJ). A
+simple guide to use
+\program{Blender}\footnote{\url{http://www.blender.org}} for this task
+follows:
 
 \begin{enumerate}
-\item Import from Wavefront (.obj) - you may need to change the forward/up axes for correct orientation, try -Y for forward and Z for up
+\item \menu{File>Import>Wavefront .obj} - you may need to change the forward/up axes for correct orientation, try ``-Y forward'' and ``Z up''
 \item Select an object which has a shared material
 \item Press \key{\shift+L} and select 'By Material'
 \item Select 'Join' in the left (main) tool window
@@ -258,7 +261,7 @@ NOT need this), this recommendation does NOT hold: for optimal
 results, each separate transparent object should be exported as a
 separate ``OBJ object''. This is because they need to be sorted during
 rendering to achieve correct transparency. If the objects are combined
-already, you can separate them using Blender:
+already, you can separate them using \program{Blender}:
 
 \begin{enumerate}
 \item Import .obj (see above)
@@ -284,6 +287,7 @@ already, you can separate them using Blender:
 \parameter{map\_Kd}       & (none)      & filename       & texture map to be mixed with Ka, Kd \\
 \parameter{map\_Ke}       & (none)      & filename       & texture map to be mixed with Ke \\
 \parameter{map\_bump}     & (none)      & filename       & normal map for surface roughness\\  
+\parameter{illum}         & 2           & integer        & illumination mode in the standard MTL format. \\
 \bottomrule
 \end{tabular}
 \caption{MTL parameters evaluated}
@@ -308,7 +312,14 @@ using the Phong reflection
 model\footnote{\url{https://en.wikipedia.org/wiki/Phong_reflection_model}}
 with \parameter{Ns} as the exponential shininess constant. Larger
 shininess means smaller specular highlights (more metal-like
-appearance). Specularity is not modulated by the texture maps.
+appearance). Specularity is not modulated by the texture
+maps. Unfortunately, some 3D editors export unusable default value
+combinations for \parameter{Ks} and \parameter{Ns}. \program{Blender}
+may create lines with \parameter{Ks}=1/1/1 and \parameter{Ns}=0. This
+creates a look of ``partial overexposed snow fields''. While the
+values are allowed in the specification, in most cases the result
+looks ugly. \emph{Make sure to set \parameter{Ns} to 1 or higher, or
+  disable those two lines.}
 
 If a value for \parameter{d} or \parameter{Tr} exists, alpha blending is enabled for this
 material. This simulates transparency effects. Transparency can be further
@@ -426,8 +437,8 @@ landscape called \file{Zero Horizon}.
 \noindent The \file{scenery3d.ini} may contain a simple scene description, but it is
 recommended to use the \emph{localizable} description format: in the scene's
 directory (which contains \file{scenery3d.ini}) create files in the format
-\file{description.<lang\_code>.utf8} which can contain arbitrary
-UTF-8--encoded HTML content. \parameter{<lang\_code>} stands for the ISO~639
+\file{description.<lang>.utf8} which can contain arbitrary
+UTF-8--encoded HTML content. \parameter{<lang>} stands for the ISO~639
 language code.
 
 \begin{longtabu}to \textwidth {lX} 
@@ -463,7 +474,7 @@ language code.
 \end{longtabu}
 
 \noindent Optional section to specify geographic longitude $\lambda$, latitude $\varphi$,
-and altitude. Required if \verb|coord/convergence_angle=from_grid|, else
+and altitude. The secton is required if \verb|coord/convergence_angle=from_grid|, else
 location is inherited from landscape.
 \begin{longtabu}to \textwidth {lX} 
 \multicolumn{2}{l}{\texttt{planet = Earth}}\\
@@ -495,7 +506,7 @@ system, like UTM or Gauss-Kr\"uger.
 \end{longtabu}
 
 \noindent These entries describe the offset, in metres, of the model coordinates relative
-to coordinates in a geographic grid, like Gauss-Kr\"uger. If you have your model
+to coordinates in a geographic grid, like Gauss-Kr\"uger or UTM. If you have your model
 vertices specified in grid coordinates, do not specify \verb|orig_...| data, but
 please definitely add \verb|start_...| data, below.
 
@@ -508,9 +519,11 @@ vertices, you will hit numerical problems with the usual
 single-precision floating point arithmetic. Therefore we can specify
 this offset which is only necessary for coordinate display.
 
-Typically, digital elevation models and building structures built on those are
-survey-grid aligned, so true geographical north will not coincide with grid
-north, the difference is known as \indexterm{meridian convergence}\footnote{%
+Typically, digital elevation models and building structures built on
+those are survey-grid aligned, so true geographical north for a place
+with geographical longitude $\lambda$ and latitude $\varphi$ will in
+general not coincide with grid north, the difference is known as
+\indexterm{meridian convergence}\footnote{%
   \url{http://en.wikipedia.org/wiki/Transverse_Mercator_projection}}.
 \begin{equation}
 \gamma(\lambda, \varphi)=\arctan(\tan(\lambda-\lambda_0)\sin\varphi)
@@ -521,21 +534,20 @@ vertical axis to be aligned with True North\footnote{Note that
   Sketchup's \emph{georeferencing dictionary} provides a NorthAngle
   entry, which is $360-\mathtt{convergence\_angle}$.}.
 
-\begin{verbatim}
+\begin{configfile}
 convergence_angle=from_grid|<double> 
 grid_meridian=<double>|+<int>d<int>'<float>"      
-\end{verbatim}
-
+\end{configfile}
 
 \noindent \texttt{grid\_meridian} is the central meridian $\lambda_0$ of grid
-zone, e.g.\ for UTM or Gauss-Kr\"uger, is only required to compute
-convergence angle if \texttt{convergence\_angle=from\_grid}
+zone, e.g.\ for UTM or Gauss-Kr\"uger, and is only required to compute
+convergence angle if \texttt{convergence\_angle=from\_grid}.
 
 
 
-\begin{verbatim}
+\begin{configfile}
 zero_ground_height=<double> 
-\end{verbatim}
+\end{configfile}
 height of terrain outside \file{<Temple>\_ground.OBJ}, or if \verb|ground=NULL|.
 Allows smooth approach from outside.  This value is relative to the model
 origin, or typically close to zero, i.e.,  use a Z value in model coordinates,
@@ -565,14 +577,32 @@ corridors (temple axes, \ldots).
 
 Some automated workflows may involve tiled landscape areas, e.g. to
 overcome texture limitations or triangle count limits in simpler tools
-like \program{Sketchup}. In this case you can create separate meshes in the same
-coordinate system, but you need to concatenate them. in \program{Blender}, import
-the OBJ files \menu{File>Import>Wavefront .obj}, select them and press
-\key{\ctrl+J} to join them, then export to a single OBJ
-\menu{File>Export>Wavefront .obj}%
+like \program{Sketchup}. In this case you can create separate meshes
+in the same coordinate system, but you need to concatenate them. One
+powerful program to assemble your parts is again \program{Blender}.
+
+In \program{Blender}, import the OBJ files \menu{File>Import>Wavefront
+  .obj}. If your OBJ coordinates have Z as vertical axis (common for
+terrestrial models), use ``Z up'', ``-Y Forward'' as import settings
+for the coordinate axes. The model will appear south-up.  Switch on
+textured view if required (\keys{\Alt+Z}). If the scene looks almost
+black now, reconfigure the light to be sunlight. If you have created a
+VRML of some structures in \program{ArcScene}, export that without
+shifting to center, and import the WRL file in \program{Blender} with
+default orientation ``Y up'', ``Z forward''. Models from other sources
+may still be different. In the end, all parts should fit neatly
+together. \program{Blender} is a very powerful program, you can
+enhance your model as you wish.
+
+In the end, select all relevant parts which you want to have visible
+in Stellarium (click on the lines in the outline view containing the
+object names to light them up gray, then Rightclick-Select) and press
+\key{\ctrl+J} to optionally join them, then export to a single OBJ
+\menu{File>Export>Wavefront .obj}. In the export options, apply
+``Selection Only'', and ``-Y Forward'' and ``Z Up''%
 \footnote{http://blender.stackexchange.com/questions/3352/merging-multiple-obj-files}.
 
-Verify the new model loads correctly, e.g.\ in Meshlab!
+Verify the new model loads correctly, e.g.\ in \program{Meshlab}\footnote{\url{http://www.meshlab.org}}!
 
 \subsection{Working with non-georeferenced OBJ files}
 \label{sec:scenery3d:NonGeoreferenced}
@@ -590,15 +620,15 @@ models in other applications, or you must find the correct
 transformation matrix.  Importing the OBJ in \program{Sketchup} may take a long
 time for detailed photo-generated models, and the texturing may
 suffer, so you can cut the model down to the minimum necessary e.g.\ in
-Meshlab, and import just a stub required to georeference the model in
+\program{Meshlab}, and import just a stub required to georeference the model in
 \program{Sketchup}. 
 
 Now, how would you find the proper orientation? The easiest chance
-would be with a structure visible in the photo layer of Google
-Earth. So, start a new model and immediately \menu{add location} from the
-Google Earth interface. Then you can import the OBJ with TIG's importer
+would be with a structure visible in the photo layer of \program{Google
+Earth}. So, start a new model and immediately \menu{add location} from the
+\program{Google Earth} interface. Then you can import the OBJ with TIG's importer
 plugin.  If the imported model looks perfect, you may just place the
-model into the Sketchup landscape and export a complete landscape just
+model into the \program{Sketchup} landscape and export a complete landscape just
 like above. If not, or if you had to cut/simplify the OBJ to be able
 to import it, you can rotate/scale the OBJ (it must be grouped!). If
 you see a shadow in the photos, you may want to set the date/time of
@@ -608,17 +638,17 @@ texture. When you are satisfied with placement/orientation, you create
 a \file{scenery3d.ini} like above with the command
 \menu{Plugins>ASTROSIM/Stellarium scenery3d helpers>Create scenery3d.ini}.
 
-Then, you select the OBJ group, open \menu{Windows>Ruby Console} and call
+Then, you select the OBJ group, open the \menu{Windows>Ruby Console} and readout data by calling
 \menu{Plugins>ASTROSIM/Stellarium scenery3d helpers>Export transformation
 of selected group}.
 
 On the Ruby console, you will find a line of numbers (the $4\times4$
 transformation matrix) which you copy/paste (all in one line!) into the
 \file{[model]} section in \file{scenery3d.ini}.
-\begin{verbatim}
+\begin{configfile}
 obj2grid_trafo=<a11>,<a12>,<a13>,<a14>,<a21>,<a22>,<a23>,<a24>,
                <a31>,<a32>,<a33>,<a34>,<a41>,<a42>,<a43>,<a44>
-\end{verbatim}
+\end{configfile}
 You edit the \file{scenery3d.ini} to use your full (unmodified)
 \program{PhotoFly} model and, if you don't have a panorama, take \parameter{Zero Horizon}
 landscape as (no-)background. It depends on the model if you want to
@@ -640,11 +670,14 @@ really helps if you know how to operate automatic text processors like
 \program{AWK}.
 
 \section{Predefined views}
-You can also distribute some predefined views with your model in a
-\file{viewpoints.ini} file. See the provided ``Sterngarten'' scene for an
-example. These entries are not editable by the user through the interface. The
-user can always save his own views, they will be saved into the file
-\file{userviews.ini} in the user's Stellarium user directory, and are editable.
+You can also configure and distribute some predefined views with your
+model in a \file{viewpoints.ini} file. The viewpoints can be loaded
+and stored with the viewpoint dialog which you can call with the
+\guibutton{0.6}{bt_scenery3d_eyepoint_off} button. See the provided
+``Sterngarten'' scene for an example. These entries are not editable
+by the user through the interface. The user can always save his own
+views, they will be saved into the file \file{userviews.ini} in the
+user's Stellarium user directory, and are editable.
 
 \begin{configfile}[\scriptsize]
 [StoredViews]
@@ -671,21 +704,22 @@ size=<int>              Defines how many entries are in this file.
 
 Scenery3d was conceived by Georg Zotti for the
 ASTROSIM\footnote{\url{http://astrosim.univie.ac.at}} project. A first
-prototype was implemented originally in 2010/2011 by Simon Parzer and
+prototype was implemented in 2010/2011 by Simon Parzer and
 Peter Neubauer as student work supervised by Michael Wimmer (TU Wien).
 Models for accuracy tests (Sterngarten, Testscene), and later
 improvements in integration, user interaction, \file{.ini} option handling,
 OBJ/MTL loader bugfixes and georeference testing by Georg Zotti.
 
-Andrei Borza in 2011/12 further improved
-rendering quality (shadow mapping, normal mapping) and speed. 
+Andrei Borza in 2011/12 further improved rendering quality (shadow
+mapping, normal mapping) and
+speed~\cite{Zotti-Neubauer:VSMM2012,Zotti-Neubauer:EuroMed2012,Zotti:2012:SpringerAA}.
 
 In 2014/15,
-Florian Schaukowitsch adapted the code to work with Qt 5 and the 
-Stellarium 0.13 codebase, replaced the renderer with a more efficient, fully
+Florian Schaukowitsch adapted the code to work with Qt~5 and the 
+Stellarium~0.13 codebase, replaced the renderer with a more efficient, fully
 shader-based system, implemented various performance, quality and usability
 enhancements, and did some code cleanup. Both Andrei and Florian were again
-supervised by Michael Wimmer.
+supervised by Michael Wimmer~\cite{Zotti:CHNT2015,Zotti:SEAC2015}. % when they are published.
 
 This work has been originally created during the ASTROSIM project supported 2008-2012 by
 the Austrian Science Fund (FWF) under grant number P~21208-G19.

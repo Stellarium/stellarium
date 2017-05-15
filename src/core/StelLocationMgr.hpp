@@ -25,7 +25,11 @@
 #include <QMetaType>
 #include <QMap>
 
-class QStringListModel;
+typedef QList<StelLocation> LocationList;
+typedef QMap<QString,StelLocation> LocationMap;
+typedef QMap<QByteArray,QByteArray> TimezoneNameMap;
+
+class GPSLookupHelper;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -34,22 +38,21 @@ class StelLocationMgr : public QObject
 	Q_OBJECT
 
 public:
-	//! Default constructor
+	//! Default constructor which loads the list of locations from the base and user location files.
 	StelLocationMgr();
-	//! Destructor
 	~StelLocationMgr();
 
-	//! Return the model containing all the city
-	QStringListModel* getModelAll() {return modelAllLocation;}
-	//! Return the model containing picked (nearby) cities or cities from a single country, or other preselection.
-	QStringListModel* getModelPicked() {return modelPickedLocation;}
+	//! Construct a StelLocationMgr which uses the locations given instead of loading them from the files.
+	StelLocationMgr(const LocationList& locations);
+
+	//! Replaces the loaded location list
+	void setLocations(const LocationList& locations);
 
 	//! Return the list of all loaded locations
-	QList<StelLocation> getAll() const {return locations.values();}
+	LocationList getAll() const {return locations.values();}
 
-	//! Return the StelLocation for a given string
-	//! Can match location name, or coordinates
-	const StelLocation locationForString(const QString& s) const;
+	//! Returns a map of all loaded locations. The key is the location ID, suitable for a list view.
+	LocationMap getAllMap() const { return locations; }
 
 	//! Return the StelLocation from a CLI
 	const StelLocation locationFromCLI() const;
@@ -75,38 +78,78 @@ public:
 	//! @param id the location ID
 	bool deleteUserLocation(const QString& id);
 
+	//! Find list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
+	LocationMap pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
+	//! Find list of locations in a particular country only.
+	LocationMap pickLocationsInCountry(const QString country);
+
+public slots:
+	//! Return the StelLocation for a given string
+	//! Can match location name, or coordinates
+	const StelLocation locationForString(const QString& s) const;
+
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
-	//! Preselect list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
-	//! The list can be retrieved by calling @name getModelPicked().
-	void pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
-	//! Preselect list of locations in a particular country only.
-	//! The list can be retrieved by calling @name getModelPicked().
-	void pickLocationsInCountry(const QString country);
+#ifdef ENABLE_GPS
+	//! Try to get a location from GPS lookup.
+	//! This prefers GPSD on non-Windows platforms, and uses Qt positioning/NMEA otherwise
+	//! Use the gpsResult() signal to determine if the location was set successfully
+	//! @note When using GPSD not on localhost, don't forget the -G switch when starting gpsd there!
+	//! @return true if a query has been made, false if not
+	bool locationFromGPS();
+#endif
 
-public slots:
+	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
+	//! If timezone name starts with "UTC", always return unchanged.
+	//! This is required to store timezone names exactly as we know them, and not mix ours and corrent-IANA spelling flavour.
+	static QString sanitizeTimezoneStringForLocationDB(QString tzString);
+	//! Attempt to translate a timezone name from those used in Stellarium's location database to a name which is known
+	//! to Qt at runtime as result of QTimeZone::availableTimeZoneIds(). That list may be updated by OS anytime and is known to differ
+	//! between OSes. Some spellings may be different, or in some cases some names get simply translated to "UTC+HH:MM" style.
+	//! The empty string gets translated to "UTC".
+	static QString sanitizeTimezoneStringFromLocationDB(QString dbString);
+
+signals:
+	//! Can be used to detect changes to the full location list
+	//! i.e. when the user added or removed locations
+	void locationListChanged();
+
+#ifdef ENABLE_GPS
+	//! emitted when GPS location query and setting location either succeed or fail.
+	//! @param success true if successful, false in case of any error (no device, timeout, bad fix, ...).
+	void gpsQueryFinished(bool success);
+#endif
+private slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
-
+#ifdef ENABLE_GPS
+	void changeLocationFromGPSQuery(const StelLocation& loc);
+	void gpsQueryError(const QString& err);
+#endif
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
 	//! Load cities from a file
-	QMap<QString, StelLocation> loadCities(const QString& fileName, bool isUserLocation) const;
-	QMap<QString, StelLocation> loadCitiesBin(const QString& fileName) const;
-
-	//! Model containing all the city information
-	QStringListModel* modelAllLocation;
-	//! Model containing selected city information
-	QStringListModel* modelPickedLocation;
+	static LocationMap loadCities(const QString& fileName, bool isUserLocation);
+	static LocationMap loadCitiesBin(const QString& fileName);
 
 	//! The list of all loaded locations
-	QMap<QString, StelLocation> locations;
-	//! A list of locations generated on-the-fly by filtering from @name locations
-	QMap<QString, StelLocation> pickedLocations;
+	LocationMap locations;
+	//! A Map which has to be used to replace, system- and Qt-version dependent,
+	//! timezone names from our location database to the code names currently used by Qt.
+	//! Required to avoid https://bugs.launchpad.net/stellarium/+bug/1662132,
+	//! details on IANA names with Qt at http://doc.qt.io/qt-5/qtimezone.html.
+	//! This has nothing to do with the Windows timezone names!
+	//! Key: TZ name as used in our database.
+	//! Value: TZ name as may be available instead in the currently running version of Qt.
+	//! The list has to be maintained based on empirical observations.
+	//! @todo Make it load from a configurable external file.
+	static TimezoneNameMap locationDBToIANAtranslations;
 	
 	StelLocation lastResortLocation;
+
+	GPSLookupHelper *nmeaHelper,*libGpsHelper;
 };
 
 #endif // _STELLOCATIONMGR_HPP_

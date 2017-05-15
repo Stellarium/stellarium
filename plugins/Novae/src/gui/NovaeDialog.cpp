@@ -37,11 +37,11 @@
 #include "StelTranslator.hpp"
 
 NovaeDialog::NovaeDialog()
-	: nova(NULL)
+	: StelDialog("Novae")
+	, nova(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_novaeDialog;
-	dialogName = "Novae";
 }
 
 NovaeDialog::~NovaeDialog()
@@ -219,7 +219,7 @@ void NovaeDialog::updateCompleteReceiver(void)
 
 void NovaeDialog::restoreDefaults(void)
 {
-	qDebug() << "Novae::restoreDefaults";
+	qDebug() << "[Novae] restore defaults";
 	nova->restoreDefaults();
 	nova->readSettingsFromConfig();
 	updateGuiFromSettings();

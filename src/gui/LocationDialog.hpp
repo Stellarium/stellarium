@@ -25,6 +25,8 @@
 
 class Ui_locationDialogForm;
 class QModelIndex;
+class QSortFilterProxyModel;
+class QStringListModel;
 class StelLocation;
 
 class LocationDialog : public StelDialog
@@ -38,7 +40,8 @@ public:
 
 public slots:
 	void retranslate();
-
+	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
+	virtual void handleDialogSizeChanged(QSizeF size);
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -72,10 +75,21 @@ private:
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
 	void populateCountryList();
+
+	//! Populates the drop-down list of time zones.
+	//! The displayed names are localized in the current interface language.
+	//! The original names are kept in the user data field of each QComboBox
+	//! item.
+	void populateTimeZonesList();
 	
 private slots:
+	//! Called whenever the StelLocationMgr is updated
+	void reloadLocations();
+
 	//! To be called when user edits any field
 	void reportEdit();
+
+	void saveTimeZone();
 	
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
@@ -90,9 +104,11 @@ private slots:
 	
 	//! Called when the planet is manually changed.
 	void moveToAnotherPlanet(const QString& text);
+
 	//! Called when latitude/longitude/altitude is modified
+	//! The int argument is required by the Altitude spinbox signal connection, but unused.
 	void setPositionFromCoords(int i=0);
-	
+
 	//! Called when the user clicks on the add to list button
 	void addCurrentLocationToList();
 	
@@ -105,16 +121,41 @@ private slots:
 	//! reset city list to complete list (may have been reduced to picked list)
 	void resetCompleteList();
 
-	//! called when the user wants get location from network
+	//! called when the user wants get location from network.
+	//! This is actually a toggle setting which will influence Stellarium's behaviour
+	//! on next boot:
+	//! @arg state true to immediately query location and activate auto-query on next launch.
+	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
-	
+
+#ifdef ENABLE_GPS
+	//! called when the user wants get location from a GPSD or directly attached (USB over virtual serial device) GPS device.
+	//! The easiest way to get GPS coordinates from a Linux device is via GPSD.
+	//! On Windows (and Mac?), or where GPSD is not available, we must parse the NMEA-183 strings ourselves.
+	void gpsQueryLocation();
+	//! handle a few GUI elements when GPS query returns. Should be connected to LocationMgr's signal gpsResult().
+	//! @param success true if location was found
+	void gpsReturn(bool success);
+	//! reset the default string after a short time where the button shows either success or failure of GPS data retrieval.
+	void resetGPSbuttonLabel();
+#endif
+
 	//! Called when the user wants to use the current location as default
 	void setDefaultLocation(bool state);
-	
+
+	//! Updates the check state and the enabled/disabled status.
+	void updateTimeZoneControls(bool useCustomTimeZone);
+
 private:
 	QString lastPlanet;
+	QString customTimeZone;
+	QStringListModel* allModel;
+	QStringListModel* pickedModel;
+	QSortFilterProxyModel *proxyModel;
+
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
+
 };
 
 #endif // _LOCATIONDIALOG_HPP_

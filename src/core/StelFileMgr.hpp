@@ -118,7 +118,7 @@ public:
 
 	//! Check if a path is writable
 	//! For files, true is returned if the file exists and is writable
-	//! or if the file doesn't exist, but it's parent directory does,
+	//! or if the file doesn't exist, but its parent directory does,
 	//! if the file can be created.
 	//! In the case of directories, return true if the directory can
 	//! have files created in it.

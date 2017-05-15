@@ -128,6 +128,8 @@ def processFrameworks():
 	# QtMultimedia?
 	if 'QtMultimedia' in ' '.join(frameworks):
 		frameworks.append(frameworks[-1].replace('QtMultimedia','QtMultimediaWidgets'))
+		# QtOpenGL is required by QtMultimediaWidgets
+		frameworks.append(frameworks[-1].replace('QtCore','QtOpenGL'))
 	for framework in frameworks:
 		copyFrameworkToApp(framework)
 		allFramework.append(framework)
@@ -153,7 +155,7 @@ def copyPluginDirectory(pluginDirectoryName):
 	fromDir = os.path.join(qtPluginsDirectory, pluginDirectoryName)
 	for plugin in os.listdir(fromDir):
 		# there may be debug versions installed; if so, ignore them
-		if plugin.find('_debug') is -1:
+		if (plugin.find('_debug') is -1) and (plugin.find('.dSYM') is -1):
 			shutil.copy(os.path.join(fromDir, plugin), toDir)
 	# Update all paths
 	for plugin in os.listdir(toDir):

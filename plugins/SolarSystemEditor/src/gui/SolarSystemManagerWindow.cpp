@@ -36,11 +36,11 @@
 #include <QFileDialog>
 
 SolarSystemManagerWindow::SolarSystemManagerWindow()
+	: StelDialog("SolarSystemEditor")
+	, manualImportWindow(NULL)
 {
 	ui = new Ui_solarSystemManagerWindow();
-	dialogName = "SolarSystemEditor";
 	mpcImportWindow = new MpcImportWindow();
-	manualImportWindow = NULL;
 
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 }
@@ -184,12 +184,14 @@ void SolarSystemManagerWindow::removeObject()
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	QString filePath = QFileDialog::getSaveFileName(0, "Save the Solar System configuration file as...", StelFileMgr::getScreenshotDir());
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the Solar System configuration file as..."), QDir::homePath() + "/ssystem.ini");
 	ssoManager->copySolarSystemConfigurationFileTo(filePath);
 }
 
 void SolarSystemManagerWindow::replaceConfiguration()
 {
-	QString filePath = QFileDialog::getOpenFileName(0, "Select a file to replace the Solar System configuration file", StelFileMgr::getScreenshotDir(), QString("Configration files (*.ini)"));
+	QString filter = q_("Configuration files");
+	filter.append(" (*.ini)");
+	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System configuration file"), QDir::homePath(), filter);
 	ssoManager->replaceSolarSystemConfigurationFileWith(filePath);
 }

@@ -25,10 +25,19 @@
 #include <QDebug>
 #include <QTimer>
 
-SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs) : url(aurl), reply(NULL), netMgr(anetMgr), currentStatus(SimbadLookupQuerying)
+SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs)
+	: url(aurl)
+	, reply(NULL)
+	, netMgr(anetMgr)
+	, currentStatus(SimbadLookupQuerying)
 {
-	// First wait before starting query. This avoids sending a query for each autocompletion letter.
-	QTimer::singleShot(delayMs, this, SLOT(delayTimerCompleted()));
+	if(delayMs <= 0)
+		delayTimerCompleted();
+	else
+	{
+		// First wait before starting query. This avoids sending a query for each autocompletion letter.
+		QTimer::singleShot(delayMs, this, SLOT(delayTimerCompleted()));
+	}
 }
 
 SimbadLookupReply::~SimbadLookupReply()
@@ -37,7 +46,20 @@ SimbadLookupReply::~SimbadLookupReply()
 	{
 		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 		reply->abort();
+		//do not use delete here
 		reply->deleteLater();
+		reply = NULL;
+	}
+}
+
+//This is provided for the correct deletion of the reply in the RemoteControl plugin
+void SimbadLookupReply::deleteNetworkReply()
+{
+	if(reply)
+	{
+		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
+		reply->abort();
+		delete reply;
 		reply = NULL;
 	}
 }
@@ -110,8 +132,8 @@ void SimbadLookupReply::httpQueryFinished()
 				StelUtils::spheToRect(ra, dec, v);
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
-				line.replace("NAME " ,"");
-				resultPositions[line]=v;
+				line.replace("NAME " ,"");				
+				resultPositions[line.simplified()]=v; // Remove an extra spaces
 			}
 			line = reply->readLine();
 			line.chop(1); // Remove a line break at the end
@@ -147,8 +169,12 @@ SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QStrin
 {
 	// Create the Simbad query
 	QString url(serverUrl);
-	url += "simbad/sim-script?script=format object \"%COO(d;A D)\\n%IDLIST(1)\"\n";
-	url += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
-	url += objectName;
+	QString query = "format object \"%COO(d;A D)\\n%IDLIST(1)\"\n";
+	query += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
+	query += objectName;
+	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
+
+	url += "simbad/sim-script?script=";
+	url += ba.constData();
 	return new SimbadLookupReply(url, networkMgr, delayMs);
 }

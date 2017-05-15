@@ -1,0 +1,161 @@
+/* some improvements for small 7"-tablets */
+
+/*html {
+	background: #fff url("images/stars.png");
+	font-size: 18px;
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
+}*/
+
+/* larger spinner button */
+#timewidget .ui-spinner-input {
+    margin: 22px 0.2em;
+    text-align: center;
+}
+
+/* larger up/down buttons */
+#timewidget .ui-spinner-button {
+    height: 20px;
+    left: 0;
+    width: 100%;
+	
+    cursor: default;
+    display: block;
+    font-size: 0.5em;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+}
+
+/* re-center icon on that button */
+#timewidget .ui-spinner .ui-icon {
+    left: 50%;
+    margin-left: -7px;
+    /* margin-top: -5px;
+    top: 2px; */
+    position: absolute;
+}
+
+/* override slider handle size  */
+#view_fov .ui-slider-handle {
+	width: 2em;
+	height: 2em;
+}
+
+/* override slider handle size  */
+#view_offset .ui-slider-handle {
+	width: 2em;
+	height: 2em;
+}
+
+
+/* TODO: Find real element name? Height of slider bar */
+.ui-slider-horizontal {
+    height: 1em;
+}
+
+
+select {
+	padding: 1px 0px;
+	/*font-size: small;  GZ changed to */
+	font-size: medium;
+}
+
+
+
+#srch_greek button {
+	width: 42px;
+	height: 35px;
+	margin: 0px;
+	padding: 0px;
+	flex-grow: 1;
+}
+
+label {
+	font-size: 18px;
+	padding: 2px 1px;
+}
+
+button {
+	font-size: 35px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+input {
+	font-size: 35px;
+	margin-top: 2px;
+	margin-bottom: 2px;	
+}
+/* TODO: make them a bit larger. */
+input .spinner .stelproperty {
+font-size: 26px;
+font-weight: bold;
+
+}
+
+.landscapeblock {
+	min-height: 15em;
+	height: 10em;
+}
+
+/* QuickSearch Buttons */
+ul.button32list > li > button,
+button.button32 {
+	font-size: 16px;
+}
+
+/* GZ Use larger spinner buttons for clumsy touchers */
+.ui-spinner-button {
+	width: 24px;
+	height: 100%;
+	font-size: .5em;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	position: absolute;
+	cursor: default;
+	display: block;
+	overflow: hidden;
+	right: 0;
+}
+
+.ui-spinner-button.ui-spinner-down {
+	right: 25px;
+	/*border-radius: 4px;
+	margin:1px;*/
+	background: linear-gradient(rgb(68, 68, 69),rgb(40, 40, 40));
+}
+.ui-spinner-button.ui-spinner-up {
+	right: 0px;
+	/*border-radius: 4px;
+	margin:1px;*/
+	background: linear-gradient(rgb(68, 68, 69),rgb(40, 40, 40));
+}
+
+.ui-icon-triangle-1-n {
+    background-position: -32px -16px;
+}
+.ui-spinner .ui-icon-triangle-1-s {
+    background-position: -96px -16px;
+}
+
+#time .ui-icon-triangle-1-n {
+    background-position: 0px -16px;
+}
+#time .ui-spinner .ui-icon-triangle-1-s {
+    background-position: -64px -16px;
+}
+
+input.spinner {
+    width: 100px;
+}
+
+#vo_refraction input.spinner {
+    width: 100px;
+}
+
+#tab_location input.ui-spinner-input {
+    width: 100px;
+}

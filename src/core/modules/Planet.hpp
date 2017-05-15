@@ -76,6 +76,7 @@ public:
 	friend class SolarSystem;
 
 	Q_ENUMS(PlanetType)
+	Q_ENUMS(PlanetOrbitColorStyle)
 	Q_ENUMS(ApparentMagnitudeAlgorithm)
 	//! numeric typecodes for the type descriptions in ssystem.ini
 	// GZ: Until 0.13 QStrings were used for types.
@@ -83,27 +84,37 @@ public:
 	// GZ: If other types are introduced, add here and the string in init().
 	enum PlanetType
 	{
-		isStar,                   // ssystem.ini: type="star"
-		isPlanet,                 // ssystem.ini: type="planet"
-		isMoon,                   // ssystem.ini: type="moon"
-		isAsteroid,               // ssystem.ini: type="asteroid"
-		isPlutino,                // ssystem.ini: type="plutino"
-		isComet,                  // ssystem.ini: type="comet"
-		isDwarfPlanet,		  // ssystem.ini: type="dwarf planet"
-		isCubewano,		  // ssystem.ini: type="cubewano"
-		isSDO,			  // ssystem.ini: type="sdo"
-		isOCO,			  // ssystem.ini: type="oco"
-		isUNDEFINED               // ssystem.ini: type=<anything else>
+		isStar,			// ssystem.ini: type="star"
+		isPlanet,		// ssystem.ini: type="planet"
+		isMoon,			// ssystem.ini: type="moon"
+		isAsteroid,		// ssystem.ini: type="asteroid"
+		isPlutino,		// ssystem.ini: type="plutino"
+		isComet,		// ssystem.ini: type="comet"
+		isDwarfPlanet,		// ssystem.ini: type="dwarf planet"
+		isCubewano,		// ssystem.ini: type="cubewano"
+		isSDO,			// ssystem.ini: type="scattered disc object"
+		isOCO,			// ssystem.ini: type="oco"
+		isSednoid,		// ssystem.ini: type="sednoid"
+		isUNDEFINED		// ssystem.ini: type=<anything else>
+	};
+
+	enum PlanetOrbitColorStyle
+	{
+		ocsOneColor,		// One color for all orbits
+		ocsGroups,		// Separate colors for each group of Solar system bodies
+		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
 
 	enum ApparentMagnitudeAlgorithm
 	{
-		Planesas,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-		Mueller,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Harris,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		Mueller_1893,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Astr_Alm_1984,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
+		Expl_Sup_1992,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
+		Expl_Sup_2013,		// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
 		UndefinedAlgorithm,
-		Generic		// Visual magnitude based on phase angle and albedo
+		Generic			// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
+
 
 	Planet(const QString& englishName,
 	       int flagLighting,
@@ -144,6 +155,18 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
+	//! - distance
+	//! - phase (result of getPhase)
+	//! - illumination (=100*phase)
+	//! - phase-angle
+	//! - phase-angle-dms (formatted string)
+	//! - phase-angle-deg (formatted string)
+	//! - elongation
+	//! - elongation-dms (formatted string)
+	//! - elongation-deg (formatted string)
+	//! - type (object type description)
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;
 	virtual double getParentSatellitesFov(const StelCore* core) const;
@@ -154,6 +177,7 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;
+	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
@@ -181,6 +205,8 @@ public:
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
+	//! Get albedo
+	double getAlbedo(void) const { return albedo; }
 
 	const QString& getTextMapName() const {return texMapName;}	
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
@@ -188,6 +214,11 @@ public:
 
 	void setNativeName(QString planet) { nativeName = planet; }
 
+	//! Return the absolute magnitude (read from file ssystem.ini)
+	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
+	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
+	//! A return value of 100 signals invalid result.
+	float getMeanOppositionMagnitude() const;
 	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
 	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
 	void setApparentMagnitudeAlgorithm(QString algorithm);
@@ -200,32 +231,33 @@ public:
 	void setRotEquatorialToVsop87(const Mat4d &m);
 
 	const RotationElements &getRotationElements(void) const {return re;}
-
-	// Compute the position in the parent Planet coordinate system
-	void computePositionWithoutOrbits(const double dateJDE);
-	void computePosition(const double dateJDE);
-
-	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
-	// This requires both flavours of JD in cases involving Earth.
-	void computeTransMatrix(double JD, double JDE);
-
-	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
-	double getPhaseAngle(const Vec3d& obsPos) const;
-	// Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
-	double getElongation(const Vec3d& obsPos) const;
-	// Get the angular size of the spheroid of the planet (i.e. without the rings)
-	double getSpheroidAngularSize(const StelCore* core) const;
-	// Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
-	float getPhase(const Vec3d& obsPos) const;
-
 	// Set the orbital elements
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingnode(void) const {return re.ascendingNode;}
+	double getRotAscendingNode(void) const {return re.ascendingNode;}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
+
+
+
+	//! Compute the position in the parent Planet coordinate system
+	void computePositionWithoutOrbits(const double dateJDE);
+	void computePosition(const double dateJDE);
+
+	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
+	//! This requires both flavours of JD in cases involving Earth.
+	void computeTransMatrix(double JD, double JDE);
+
+	//! Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	double getPhaseAngle(const Vec3d& obsPos) const;
+	//! Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
+	double getElongation(const Vec3d& obsPos) const;
+	//! Get the angular size of the spheroid of the planet (i.e. without the rings)
+	double getSpheroidAngularSize(const StelCore* core) const;
+	//! Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
+	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;
@@ -291,7 +323,80 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
+	static Vec3f orbitMajorPlanetsColor;
+	static void setMajorPlanetOrbitColor(const Vec3f& oc) { orbitMajorPlanetsColor = oc;}
+	static const Vec3f& getMajorPlanetOrbitColor() {return orbitMajorPlanetsColor;}
+
+	static Vec3f orbitMoonsColor;
+	static void setMoonOrbitColor(const Vec3f& oc) { orbitMoonsColor = oc;}
+	static const Vec3f& getMoonOrbitColor() {return orbitMoonsColor;}
+
+	static Vec3f orbitMinorPlanetsColor;
+	static void setMinorPlanetOrbitColor(const Vec3f& oc) { orbitMinorPlanetsColor = oc;}
+	static const Vec3f& getMinorPlanetOrbitColor() {return orbitMinorPlanetsColor;}
+
+	static Vec3f orbitDwarfPlanetsColor;
+	static void setDwarfPlanetOrbitColor(const Vec3f& oc) { orbitDwarfPlanetsColor = oc;}
+	static const Vec3f& getDwarfPlanetOrbitColor() {return orbitDwarfPlanetsColor;}
+
+	static Vec3f orbitCubewanosColor;
+	static void setCubewanoOrbitColor(const Vec3f& oc) { orbitCubewanosColor = oc;}
+	static const Vec3f& getCubewanoOrbitColor() {return orbitCubewanosColor;}
+
+	static Vec3f orbitPlutinosColor;
+	static void setPlutinoOrbitColor(const Vec3f& oc) { orbitPlutinosColor = oc;}
+	static const Vec3f& getPlutinoOrbitColor() {return orbitPlutinosColor;}
+
+	static Vec3f orbitScatteredDiscObjectsColor;
+	static void setScatteredDiscObjectOrbitColor(const Vec3f& oc) { orbitScatteredDiscObjectsColor = oc;}
+	static const Vec3f& getScatteredDiscObjectOrbitColor() {return orbitScatteredDiscObjectsColor;}
+
+	static Vec3f orbitOortCloudObjectsColor;
+	static void setOortCloudObjectOrbitColor(const Vec3f& oc) { orbitOortCloudObjectsColor = oc;}
+	static const Vec3f& getOortCloudObjectOrbitColor() {return orbitOortCloudObjectsColor;}
+
+	static Vec3f orbitCometsColor;
+	static void setCometOrbitColor(const Vec3f& oc) { orbitCometsColor = oc;}
+	static const Vec3f& getCometOrbitColor() {return orbitCometsColor;}
+
+	static Vec3f orbitSednoidsColor;
+	static void setSednoidOrbitColor(const Vec3f& oc) { orbitSednoidsColor = oc;}
+	static const Vec3f& getSednoidOrbitColor() {return orbitSednoidsColor;}
+
+	static Vec3f orbitMercuryColor;
+	static void setMercuryOrbitColor(const Vec3f& oc) { orbitMercuryColor = oc;}
+	static const Vec3f& getMercuryOrbitColor() {return orbitMercuryColor;}
+
+	static Vec3f orbitVenusColor;
+	static void setVenusOrbitColor(const Vec3f& oc) { orbitVenusColor = oc;}
+	static const Vec3f& getVenusOrbitColor() {return orbitVenusColor;}
+
+	static Vec3f orbitEarthColor;
+	static void setEarthOrbitColor(const Vec3f& oc) { orbitEarthColor = oc;}
+	static const Vec3f& getEarthOrbitColor() {return orbitEarthColor;}
+
+	static Vec3f orbitMarsColor;
+	static void setMarsOrbitColor(const Vec3f& oc) { orbitMarsColor = oc;}
+	static const Vec3f& getMarsOrbitColor() {return orbitMarsColor;}
+
+	static Vec3f orbitJupiterColor;
+	static void setJupiterOrbitColor(const Vec3f& oc) { orbitJupiterColor = oc;}
+	static const Vec3f& getJupiterOrbitColor() {return orbitJupiterColor;}
+
+	static Vec3f orbitSaturnColor;
+	static void setSaturnOrbitColor(const Vec3f& oc) { orbitSaturnColor = oc;}
+	static const Vec3f& getSaturnOrbitColor() {return orbitSaturnColor;}
+
+	static Vec3f orbitUranusColor;
+	static void setUranusOrbitColor(const Vec3f& oc) { orbitUranusColor = oc;}
+	static const Vec3f& getUranusOrbitColor() {return orbitUranusColor;}
+
+	static Vec3f orbitNeptuneColor;
+	static void setNeptuneOrbitColor(const Vec3f& oc) { orbitNeptuneColor = oc;}
+	static const Vec3f& getNeptuneOrbitColor() {return orbitNeptuneColor;}
+
 	static bool permanentDrawingOrbits;
+	static PlanetOrbitColorStyle orbitColorStyle;
 
 	//! Return the list of planets which project some shadow on this planet
 	QVector<const Planet*> getCandidatesForShadow() const;
@@ -300,6 +405,8 @@ protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	void computeModelMatrix(Mat4d &result) const;
+
+	Vec3f getCurrentOrbitColor();
 	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
@@ -329,6 +436,8 @@ protected:
 	Vec3f haloColor;                 // exclusively used for drawing the planet halo
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
+	float absoluteMagnitude;         // since 2017: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
+					 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
 					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis.

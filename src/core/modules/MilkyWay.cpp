@@ -81,7 +81,17 @@ void MilkyWay::update(double deltaTime)
 	fader->update((int)(deltaTime*1000));
 }
 
-void MilkyWay::setFlagShow(bool b){*fader = b;}
+/*************************************************************************
+ Reimplementation of the getCallOrder method
+*************************************************************************/
+double MilkyWay::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName==StelModule::ActionDraw)
+		return 1;
+	return 0;
+}
+
+void MilkyWay::setFlagShow(bool b){*fader = b; emit milkyWayDisplayedChanged(b);}
 bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)
@@ -103,14 +113,16 @@ void MilkyWay::draw(StelCore* core)
 	// This is the same color, just brighter to have Blue=1.
 	//Vec3f c = Vec3f(0.53730381f, .675724216f, 1.0f);
 	// The new texture (V0.13.1) is quite blue to start with. It is better to apply white color for it.
-	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
+	//Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
+	// Still better: Re-activate the configurable color!
+	Vec3f c = color;
 
 	// We must also adjust milky way to light pollution.
 	// Is there any way to calibrate this?
 	int bortle=drawer->getBortleScaleIndex();
 	//aLum*=(11.0f-bortle)*0.1f;
 
-	float lum = drawer->surfacebrightnessToLuminance(12.f+0.15*bortle); // was 11.5; Source? How to calibrate the new texture?
+	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15*bortle); // was 11.5; Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -161,10 +173,9 @@ void MilkyWay::draw(StelCore* core)
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
 
 	StelPainter sPainter(prj);
-	glEnable(GL_CULL_FACE);
-	sPainter.enableTexture2d(true);
-	glDisable(GL_BLEND);
+	sPainter.setCullFace(true);
+	sPainter.setBlending(false);
 	tex->bind();
 	sPainter.drawStelVertexArray(*vertexArray);
-	glDisable(GL_CULL_FACE);
+	sPainter.setCullFace(false);
 }

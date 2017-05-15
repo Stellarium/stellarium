@@ -56,7 +56,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	if (flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)")
+			oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)")
 			       .arg(QString::number(getVMagnitude(core), 'f', 2))
 			       .arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 		else
@@ -89,6 +89,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	QTextStream oss(&str);
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
+	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
 	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->getHip());
 	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->getHip());
 	const float minVMag = StarMgr::getGcvsMinMagnitude(s->getHip());
@@ -103,10 +106,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << "<h2>";
 
 		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
+		const QString additionalNameI18 = StarMgr::getAdditionalNames(s->getHip());
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
-		const QString crossIndexData = StarMgr::getCrossIndexDesignations(s->getHip());
+		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
+		const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
@@ -126,12 +131,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
 
+		if (!wdsSciName.isEmpty() && wdsSciName!=addSciName && wdsSciName!=sciName)
+			designations.append(wdsSciName);
+
 		const QString designationsList = designations.join(" - ");
 
 		if (flags&Name)
 		{
 			if (!commonNameI18.isEmpty())
 				oss << commonNameI18;
+
+			if (!additionalNameI18.isEmpty())
+				oss << " (" << additionalNameI18 << ")";
 
 			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 				oss << "<br>";
@@ -168,14 +179,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				varstartype = q_("variable star");
 		}
 
-		if (s->getComponentIds())
+		if (s->getComponentIds() || wdsObs>0)
 			startype = q_("double star");
 		else
 			startype = q_("star");
 
 		if (!varType.isEmpty())
 		{
-			if (s->getComponentIds())
+			if (s->getComponentIds() || wdsObs>0)
 				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype);
 			else
 				oss << q_("Type: <b>%1</b>").arg(varstartype);
@@ -188,7 +199,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2))
+			oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2))
 				   .arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 		else
 			oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
@@ -263,11 +274,84 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			else
 				oss << q_("Rising time: %1%").arg(vMm) << "<br />";
 		}
+
+		if (wdsObs>0)
+		{
+			oss << QString("%1 (%4): %2%3").arg(q_("Position angle")).arg(QString::number(wdsPA, 'f', 2)).arg(QChar(0x00B0)).arg(wdsObs) << "<br />";
+			if (wdsSep>0.f) // A spectroscopic binary or not?
+			{
+				if (wdsSep>60.f) // A wide binary star?
+					oss << QString("%1 (%4): %2\" (%3)").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(StelUtils::decDegToDmsStr(wdsSep/3600.f)).arg(wdsObs) << "<br />";
+				else
+					oss << QString("%1 (%3): %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(wdsObs) << "<br />";
+			}
+		}
 	}
 
 	StelObject::postProcessInfoString(str, flags);
 
 	return str;
+}
+
+QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	const float wdsPA = StarMgr::getWdsLastPositionAngle(s->getHip());
+	const float wdsSep = StarMgr::getWdsLastSeparation(s->getHip());
+	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
+
+	QString varstartype = "no";
+	QString startype = "star";
+	if(!varType.isEmpty())
+	{
+		if (QString("FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+			varstartype = "eruptive";
+		else if (QString("ACYG BCEP BCEPS CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB").contains(varType))
+			varstartype = "pulsating";
+		else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
+			varstartype = "rotating";
+		else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
+			varstartype = "cataclysmic";
+		else if (QString("E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
+		{
+			varstartype = "eclipsing-binary";
+		}
+		else
+			varstartype = "variable";
+	}
+	map.insert("variable-star", varstartype);
+
+	if (s->getComponentIds() || wdsObs>0)
+		startype = "double-star";
+
+	map.insert("star-type", startype);
+
+	map.insert("bV", s->getBV());
+
+	if (s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	{
+		map.insert("parallax", 0.00001*s->getPlx());
+		map.insert("absolute-mag", getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())));
+		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
+	}
+
+	if (s->getSpInt())
+		map.insert("spectral-class", StarMgr::convertToSpectralType(s->getSpInt()));
+
+	if (vPeriod>0)
+		map.insert("period", vPeriod);
+
+	if (wdsObs>0)
+	{
+		map.insert("wds-year", wdsObs);
+		map.insert("wds-position-angle", wdsPA);
+		map.insert("wds-separation", wdsSep);
+	}
+
+	return map;
 }
 
 StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a,

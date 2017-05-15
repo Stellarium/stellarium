@@ -12,8 +12,8 @@ Several plugins provide users with some more object classes.
 
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{NovaCygni1975wiki.jpg}
-\label{fig:NovaCygni1975}
 \caption{Nova Cygni 1975 (also known as \textbf{V1500 Cyg})}
+\label{fig:NovaCygni1975}
 \end{figure}
 
 
@@ -98,8 +98,8 @@ generalized values for it.
 
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{sn1604wiki.jpg}
-\label{fig:SN1604}
 \caption{Supernova 1604 (also known as \textbf{Kepler's Supernova}, \textbf{Kepler's Nova} or \textbf{Kepler's Star})}
+\label{fig:SN1604}
 \end{figure}
 
 
@@ -198,6 +198,7 @@ updates\_enable         & bool   & Enable updates of bright novae catalog from I
 url                     & string & URL of bright novae catalog \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of historical supernovae catalog}
 \label{sec:plugins:HistoricalSupernovae:format}
 
@@ -231,18 +232,15 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 },
 \end{configfile}
 
-%\newpage
-
 \newpage
-
 
 \section{Exoplanets Plugin}
 \label{sec:plugins:Exoplanets}
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{exoplanets.jpg}
-\label{fig:Exoplanets}
 \caption{Planetary system HD 13808}
+\label{fig:Exoplanets}
 \end{figure}
 
 \noindent This plugin plots the position of stars with
@@ -359,6 +357,7 @@ habitable\_exoplanet\_marker\_color  & R,G,B & Color for marker of star with pla
  \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of exoplanets catalog}
 \label{sec:plugins:Exoplanets:format}
 
@@ -462,15 +461,13 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{psr_j0332_5434.jpg}
-\label{fig:plugin:Pulsars}
 \caption{PSR J0332-5434}
+\label{fig:plugin:Pulsars}
 \end{figure}
 
 \noindent This plugin plots the position of various pulsars, with object
 information about each one. Pulsar data is derived from \textit{The
-  ATNF Pulsar Catalogue} (Manchester, R. N., Hobbs, G. B., Teoh, A. \&
-Hobbs, M., Astron. J., 129, 1993-2006
-(2005)\footnote{\url{http://arxiv.org/abs/astro-ph/0412641}}).
+  ATNF Pulsar Catalogue} \cite{2005AJ....129.1993M}.
 
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), use the
 \guibutton{0.6}{btPulsars-off} button to activate display of
@@ -497,12 +494,11 @@ glitch\_color               & R,G,B  & Color for marker of the pulsars with glit
 use\_separate\_colors       & bool   & Use separate colors for different types of the pulsars \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of pulsars catalog}
 \label{sec:plugins:Pulsars:format}
 
 To add a new pulsar, open a new line after line 5 and paste the following, note commas and brackets, they are important:
-
-%\newpage
 
 \begin{configfile}
 "Pulsar designation":
@@ -550,17 +546,19 @@ To add a new pulsar, open a new line after line 5 and paste the following, note 
 },
 \end{configfile}
 
+\newpage
 \section{Quasars Plugin}
 \label{sec:plugins:Quasars}
 
-%\begin{figure}[ht]
-%\includegraphics[width=\textwidth]{psr_j0332_5434.jpg}
-%\label{fig:plugin:Quasars}
-%\caption{PSR J0332-5434}
-%\end{figure}
+\noindent The Quasars plugin provides visualization of some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from \textit{Quasars and Active Galactic Nuclei} (13th Ed.) \cite{2010A&A...518A..10V}.
 
-\noindent This plugin plots the position of various quasars, with object
-information about each one. Quasar data is derived from \textit{WHICH Catalogue} 
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{qso_3c_249_1.jpg}
+\caption{3C 249.1, also known as LEDA 2821945 or 4C 77.09}
+\label{fig:plugin:Quasars}
+\end{figure}
+
+
 %% TODO follow scheme from Pulsars above. Add a section about QSOs in astornomical phenomena (after galaxies) and add reference from here.
 
 
@@ -568,6 +566,53 @@ If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), use the
 \guibutton{0.6}{btQuasars-off} button to activate display of
 quasars. The GUI allows a few configuration options.  You can also
 find a quasar (\key{F3}) by its designation (e.g., \emph{3C 273}).
+
+\subsection{Section \big[Quasars\big] in config.ini file}
+\label{sec:plugins:Quasars:config}
+
+\begin{longtabu} to \textwidth {l|l|X}\toprule
+\emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
+last\_update                & string & Date and time of last update\\\midrule
+update\_frequency\_days     & int    & Frequency of updates, in days\\\midrule
+updates\_enable             & bool   & Enable updates of quasars catalog from Internet \\\midrule
+url                         & string & URL of quasars catalog \\\midrule
+enable\_at\_startup         & bool   & Enable displaying of quasars at startup of Stellarium \\\midrule
+distribution\_enabled       & bool   & Enable distribution mode for the quasars \\\midrule
+flag\_show\_quasars\_button & bool   & Enable displaying quasars button on toolbar \\\midrule
+marker\_color               & R,G,B  & Color for marker of the quasars \\\bottomrule
+\end{longtabu}
+
+\newpage
+\subsection{Format of quasars catalog}
+\label{sec:plugins:Quasars:format}
+
+To add a new quasar, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+
+\begin{configfile}
+"Quasar designation":
+{
+    "RA": "Right ascension (J2000)",
+    "DE": "Declination (J2000)",
+    "Amag": value of absolute magnitude,
+    "Vmag": value of visual magnitude,
+    "z": value of Z (redshift),
+    "bV": value of B-V colour
+},
+\end{configfile}
+
+%\newpage
+\noindent For example, the record for \textbf{3C 249.1} looks like:
+\begin{configfile}
+"3C 249.1":
+{
+    "RA": "11h04m13.8s",
+    "DE": "+76d58m58s",
+    "Amag": -25.1,
+    "Vmag": 15.72,
+    "z": 0.313,
+    "bV": -0.02
+},
+\end{configfile}
 
 
 \newpage
@@ -578,16 +623,16 @@ find a quasar (\key{F3}) by its designation (e.g., \emph{3C 273}).
 
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{meteorshowers.jpg}
-\label{fig:plugins:MeteorShowers}
 \caption{The 1833 Leonids replayed with the Meteor Showers plugin.}
+\label{fig:plugins:MeteorShowers}
 \end{figure}
 
-\noindent In contrast and extension of the random ``shooting stars''
-feature of Stellarium, this plugin provides data for real meteor
-showers and a marker for each active and inactive radiant, showing
-real information about its activity. If enabled (see
-section~\ref{sec:Plugins:EnablingPlugins}), just click on the
-Meteor Showers button \guibutton{0.6}{btMS-off}  on the bottom
+\noindent In contrast and extension of the random \emph{shooting stars}
+feature of Stellarium (see section~\ref{sec:Phenomena:Meteoroids}), this 
+plugin provides data for real meteor showers and a marker for each 
+active and inactive radiant, showing real information about its activity. 
+If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), just click 
+on the Meteor Showers button \guibutton{0.6}{btMS-off}  on the bottom
 toolbar to display markers for the radiants.
 
 
@@ -663,6 +708,7 @@ colorARR               & R,G,B & Color for marker of active meteor showers with 
 colorIR               & R,G,B & Color for marker of inactive meteor showers \\\bottomrule
 \end{longtabu}
 
+\newpage
 \subsection{Format of Meteor Showers catalog}
 \label{sec:plugins:MeteorShowers:format}
 
@@ -749,16 +795,19 @@ This plugin was created as project of ESA Summer of Code in Space 2013\footnote{
 
 \begin{figure}[ht]
 \includegraphics[width=\textwidth]{navstars.jpg}
-\label{fig:plugin:NavigationalStars}
 \caption{Navigational stars on the screen}
+\label{fig:plugin:NavigationalStars}
 \end{figure}
 
-\noindent The Navigational Stars plugin marks the 58 navigational
-stars of the 2102-D Rude Star Finder\footnote{Rude Starfinder 2102-D
-  description and usage instruction --
-  \url{http://oceannavigation.blogspot.ru/2008/12/rude-starfinder-2102-d.html}},
-also tabulated in the Nautical Almanac\footnote{The Nautical Almanac
-  website -- \url{http://aa.usno.navy.mil/publications/docs/na.php}}.
+\noindent This plugin marks navigational stars from a selected set:
+\begin{description}
+	\item[Anglo-American] --- the 57 "selected stars" that are listed in \emph{The Nautical Almanac}\footnote{The Nautical Almanac
+		website -- \url{http://aa.usno.navy.mil/publications/docs/na.php}} jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the \emph{2102-D Star Finder}\footnote{Rude Starfinder 2102-D
+		description and usage instruction --
+		\url{http://oceannavigation.blogspot.ru/2008/12/rude-starfinder-2102-d.html}} and \emph{Identifier}. 
+	\item[French] --- the 81 stars that are listed in the \emph{Ephémérides Nautiques} published by the French Bureau des Longitudes.
+	\item[Russian] --- the 160 stars that are listed in the Russian Nautical Almanac.
+\end{description}
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), just click
 on the Sextant button \guibutton{0.6}{bt_NavStars-off} on
 the bottom toolbar to display markers for the navigational stars. This
@@ -774,8 +823,10 @@ You can edit \file{config.ini} file by yourself for changes of the
 settings for the Navigational Stars plugin -- just make it carefully!
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
-\emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-navstars\_color          & R,G,B & Color of markers of navigational stars  \\\bottomrule
+\emph{ID}			& \emph{Type} 	& \emph{Description}\\\midrule
+navstars\_color 	& R,G,B 		& Color of markers of navigational stars  \\
+current\_ns\_set	& string		& Current set of navigational stars. Possible values: \emph{AngloAmerican}, \emph{French} and \emph{Russian}. \\
+\bottomrule
 \end{longtabu}
 
 \newpage
@@ -786,8 +837,7 @@ navstars\_color          & R,G,B & Color of markers of navigational stars  \\\bo
 %% Original URL: http://www.stellarium.org/wiki/index.php/Satellites_plugin
 %% TODO: Update from there or write new.
 
-\noindent The Satellites plugin displays the positions of artifical satellites
-in Earth's orbit based on a catalog of orbital data. It allows
+\noindent The Satellites plugin displays the positions of artifical satellites in Earth's orbit based on a catalog of orbital data. It allows
 automatic updates from online sources and manages a list of update
 file URLs.
 
@@ -835,8 +885,7 @@ By convention, group names are in lowercase. The GUI translates some of the grou
 
 
 The satellite catalog is stored on the disk in JSON\footnote{\url{http://www.json.org/}}
-format, in a file named \file{satellites.json}. A default copy is embedded in the
-plug-in at compile time. A working copy is kept in the user data directory.
+format, in a file named \file{satellites.json}. A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory.
 
 %   Used in Satellites plug-in 0.7.1 and later (Stellarium 0.11.2 and later) 
 
@@ -868,10 +917,7 @@ Explanation of the fields:
 \begin{description}
 \item[NORAD number]  required parameter, surrounded by double quotes (\texttt{"}),
 followed by a colon (\texttt{:}). It is used internally to identify the
-satellite. You should replace the text \texttt{"NORAD number"} with the first
-number on both lines of the TLE set (in this case, \texttt{"12345"}). It must
-match the number of the satellite in the source you are adding from if
-you want the TLE to be automatically updated.
+satellite. You should replace the text \texttt{"NORAD number"} with the first number on both lines of the TLE set (in this case, \texttt{"12345"}). It must match the number of the satellite in the source you are adding from if you want the TLE to be automatically updated.
 \end{description}
 The remaining parameters should be listed between two curly brackets and the closing curly bracket must be followed by a comma to separate it from the next satellite in the list:
 
@@ -881,11 +927,10 @@ when searching for the satellite with the Find window. Use the
 description field for a more readable name if you like. (The
 description field can accept HTML tags such as \texttt{<br/>} (new line), \texttt{<b></b>} (bold), etc.)
 
-\item[description] optional parameter, double quoted. Appears when you click on the satellite
-\item[comms] optional parameter, square bracketed list of curly bracketed communications information.
+\item[description] optional parameter, double quoted. Appears when you click on the satellite \item[comms] optional parameter, square bracketed list of curly bracketed communications information.
 \item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets. Used for grouping satellites in the drop down box on the config (see above)
-\item[tle1]  required parameter, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1 "}
-\item[tle2]  required parameter, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2 "}
+\item[tle1]  required, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1~"}
+\item[tle2]  required, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2~"}
 \item[visible]  required parameter, set to true if you want to see it, this can be toggled from the configuration window once the satellite is loaded. 
 \end{description}
 You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 

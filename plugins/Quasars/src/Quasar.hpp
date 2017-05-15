@@ -46,9 +46,15 @@ public:
 	Quasar(const QVariantMap& map);
 	~Quasar();
 
-	//! Get a QVariantMap which describes the Quasar.  Could be used to
-	//! create a duplicate.
-	QVariantMap getMap(void);
+	//! Get a QVariantMap which describes the Quasar.  Could be used to create a duplicate.
+	//! - designation
+	//! - Vmag
+	//! - Amag
+	//! - bV
+	//! - RA
+	//! - DE
+	//! - z
+	QVariantMap getMap(void) const;
 
 	virtual QString getType(void) const
 	{
@@ -61,6 +67,12 @@ public:
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
+	// TODO: Describe the fields.
+	//! - amag
+	//! - bV
+	//! - redshift
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
@@ -100,7 +112,7 @@ private:
 	float AMagnitude;		//! Absolute magnitude
 	float bV;			//! B-V color index
 	double qRA;			//! R.A. J2000 for the quasar
-	double qDE;			//! Dec. J2000 for the quasar	
+	double qDE;			//! Dec. J2000 for the quasar
 	float redshift;			//! Distance to quasar (redshift)
 
 	LinearFader labelsFader;

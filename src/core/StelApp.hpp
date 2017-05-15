@@ -22,6 +22,7 @@
 
 #include <QString>
 #include <QObject>
+#include "StelModule.hpp"
 
 // Predeclaration of some classes
 class StelCore;
@@ -30,9 +31,11 @@ class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
+class StelMainView;
 class StelSkyCultureMgr;
 class StelViewportEffect;
 class QOpenGLFramebufferObject;
+class QOpenGLFunctions;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -45,7 +48,12 @@ class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
 class StelActionMgr;
+class StelPropertyMgr;
 class StelProgressController;
+
+#ifdef 	ENABLE_SPOUT
+class SpoutSender;
+#endif
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -65,14 +73,14 @@ class StelApp : public QObject
 
 public:
 	friend class StelAppGraphicsWidget;
-	friend class StelSkyItem;
+	friend class StelRootItem;
 
 	//! Create and initialize the main Stellarium application.
 	//! @param parent the QObject parent
 	//! The configFile will be search for in the search path by the StelFileMgr,
 	//! it is therefor possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
-	StelApp(QObject* parent=NULL);
+	StelApp(StelMainView* parent);
 
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
@@ -113,7 +121,7 @@ public:
 	StelLocationMgr& getLocationMgr() {return *planetLocationMgr;}
 
 	//! Get the StelObject manager to use for querying from all stellarium objects.
-	//! @return the StelObject manager to use for querying from all stellarium objects.
+	//! @return the StelObject manager to use for querying from all stellarium objects 	.
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
 
 	//! Get the StelAddOn manager.
@@ -127,6 +135,9 @@ public:
 
 	//! Get the actions manager to use for managing and editing actions
 	StelActionMgr* getStelActionManager() {return actionMgr;}
+
+	//! Return the property manager
+	StelPropertyMgr* getStelPropertyManager() {return propMgr;}
 
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
@@ -158,9 +169,6 @@ public:
 	// 2014-11: OLD COMMENT? What does a void return?
 	// @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
-
-	//! Call this when the size of the GL window has changed.
-	void glWindowHasBeenResized(float x, float y, float w, float h);
 
 	//! Get the ratio between real device pixel and "Device Independent Pixel".
 	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
@@ -205,9 +213,14 @@ public:
 	//! Get the type of viewport effect currently used
 	QString getViewportEffect() const;
 
+	//! Dump diagnostics about action call priorities
+	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
+	//! Call this when the size of the GL window has changed.
+	void glWindowHasBeenResized(const QRectF &rect);
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
@@ -231,9 +244,21 @@ public slots:
 	//! @deprecated Use setFlagSouthAzimuthUsage() instead.
 	void setFlagOldAzimuthUsage(bool use) { setFlagSouthAzimuthUsage(use); }
 
+
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
+
+	//! Returns the default FBO handle, to be used when StelModule instances want to release their own FBOs.
+	//! Note that this is usually not the same as QOpenGLContext::defaultFramebufferObject(),
+	//! so use this call instead of the Qt version!
+	//! Valid through a StelModule::draw() call, do not use elsewhere.
+	quint32 getDefaultFBO() const { return currentFbo; }
+
+	//! Makes sure the correct GL context used for main drawing is made current.
+	//! This is always the case during init() and draw() calls, but if OpenGL access is required elsewhere,
+	//! this MUST be called before using any GL functions.
+	void ensureGLContextCurrent();
 
 	//! Return the time since when stellarium is running in second.
 	static double getTotalRunTime();
@@ -259,7 +284,6 @@ signals:
 	void progressBarRemoved(const StelProgressController*);
 	//! Called just before we exit Qt mainloop.
 	void aboutToQuit();
-
 private:
 
 	//! Handle mouse clics.
@@ -267,17 +291,23 @@ private:
 	//! Handle mouse wheel.
 	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	void handleMove(float x, float y, Qt::MouseButtons b);
+	bool handleMove(float x, float y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
 	void handlePinch(qreal scale, bool started);
 
+	//! Used internally to set the viewport effects.
 	void prepareRenderBuffer();
-	void applyRenderBuffer();
+	//! Used internally to set the viewport effects.
+	//! @param drawFbo the OpenGL fbo we need to render into.
+	void applyRenderBuffer(quint32 drawFbo=0);
 
 	// The StelApp singleton
 	static StelApp* singleton;
+
+	//! The main window which is the parent of this object
+	StelMainView* mainWin;
 
 	// The associated StelCore instance
 	StelCore* core;
@@ -293,6 +323,9 @@ private:
 
 	//Actions manager fot the application.  Will replace shortcutMgr.
 	StelActionMgr* actionMgr;
+
+	//Property manager for the application
+	StelPropertyMgr* propMgr;
 
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;
@@ -344,7 +377,7 @@ private:
 
 	float fps;
 	int frame;
-	double timefr, timeBase;		// Used for fps counter
+	double frameTimeAccum;		// Used for fps counter
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
@@ -378,12 +411,18 @@ private:
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;
-
 	StelViewportEffect* viewportEffect;
-
+	QOpenGLFunctions* gl;
+	
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+#ifdef 	ENABLE_SPOUT
+	SpoutSender* spoutSender;
+#endif
+
+	// The current main FBO/render target handle, without requiring GL queries. Valid through a draw() call
+	quint32 currentFbo;
 
 };
 

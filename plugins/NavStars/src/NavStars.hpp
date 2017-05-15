@@ -1,6 +1,6 @@
 /*
  * Navigational Stars plug-in
- * Copyright (C) 2014 Alexander Wolf
+ * Copyright (C) 2014-2016 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,8 @@
 
 class StelButton;
 class StelPainter;
-class StarMgr;
+class StelPropertyMgr;
+class NavStarsWindow;
 
 /*! @defgroup navigationalStars Navigational Stars Plug-in
 @{
@@ -57,11 +58,21 @@ file (section [NavigationalStars]).
 class NavStars : public StelModule
 {
 	Q_OBJECT
+	Q_ENUMS(NavigationalStarsSet)
 	Q_PROPERTY(bool navStarsVisible
 		   READ getNavStarsMarks
 		   WRITE setNavStarsMarks
 		   NOTIFY navStarsMarksChanged)
 public:	
+	//! @enum NavigationalStarsSet
+	//! Available sets of navigational stars
+	enum NavigationalStarsSet
+	{
+		AngloAmerican,	//!< Anglo-American set (The Nautical Almanach)
+		French,		//!< French set (Ephémérides Nautiques)
+		Russian		//!< Russian set (Морской астрономический ежегодник)
+	};
+
 	NavStars();
 	virtual ~NavStars();
 
@@ -72,7 +83,20 @@ public:
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual bool configureGui(bool show);
 
+	//! Set up the plugin with default values.  This means clearing out the NavigationalStars section in the
+	//! main config.ini (if one already exists), and populating it with default values.
+	void restoreDefaultConfiguration(void);
+
+	//! Read (or re-read) settings from the main config file.  This will be called from init and also
+	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
+	void loadConfiguration(void);
+
+	//! Save the settings to the main configuration file.
+	void saveConfiguration(void);
+
+	void populateNavigationalStarsSet(void);
 
 public slots:
 	//! Set flag of displaying markers of the navigational stars
@@ -80,6 +104,22 @@ public slots:
 	void setNavStarsMarks(const bool b);
 	//! Get flag of displaying markers of the navigational stars
 	bool getNavStarsMarks(void) const;
+
+	//! Set the set of navigational stars
+	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
+	{
+		currentNSSet = nsset;
+	}
+	//! Get the set of navigational stars
+	NavigationalStarsSet getCurrentNavigationalStarsSet() const
+	{
+		return currentNSSet;
+	}
+	//! Get the key of current set of navigational stars
+	QString getCurrentNavigationalStarsSetKey(void) const;
+	QString getCurrentNavigationalStarsSetDescription(void) const;
+	//! Set the set of navigational stars from its key
+	void setCurrentNavigationalStarsSetKey(QString key);
 
 signals:
 	//! Emitted when display of markers have been changed.
@@ -90,8 +130,12 @@ private slots:
 	void starNamesChanged(const bool b);
 
 private:
-	StarMgr* smgr;
-	QSettings* conf;
+	NavStarsWindow* mainWindow;
+	StelPropertyMgr* propMgr;
+	QSettings* conf;	
+
+	// The current set of navigational stars
+	NavigationalStarsSet currentNSSet;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
@@ -102,9 +146,6 @@ private:
 	//! Color used to paint each star's marker and additional label.
 	Vec3f markerColor;	
 	LinearFader markerFader;
-	
-	//! State of displaying stars labels.
-	bool starNamesState;
 
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;

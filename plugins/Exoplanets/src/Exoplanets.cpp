@@ -31,6 +31,7 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StarMgr.hpp"
 #include "LabelMgr.hpp"
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
@@ -101,7 +102,7 @@ Exoplanets::Exoplanets()
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize());	
 }
 
 /*
@@ -151,7 +152,7 @@ void Exoplanets::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Exoplanets"))
 		{
-			qDebug() << "Exoplanets: no Exoplanets section exists in main config file - creating with defaults";
+			qDebug() << "[Exoplanets] No Exoplanets section exists in main config file - creating with defaults";
 			resetConfiguration();
 		}
 
@@ -174,7 +175,7 @@ void Exoplanets::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Exoplanets: init error: " << e.what();
+		qWarning() << "[Exoplanets] init error: " << e.what();
 		return;
 	}
 
@@ -195,11 +196,11 @@ void Exoplanets::init()
 	}
 	else
 	{
-		qDebug() << "Exoplanets: exoplanets.json does not exist - copying default catalog to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug() << "[Exoplanets] exoplanets.json does not exist - copying default catalog to " << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Exoplanets: loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug() << "[Exoplanets] loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -252,9 +253,7 @@ void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
 		const Vec3f& c(obj->getInfoColor());
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.setBlending(true);
 		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
@@ -346,129 +345,47 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;	
-	if (!flagShowExoplanets)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString epsn;
-	bool find;
-	foreach(const ExoplanetP& eps, ep)
-	{
-		epsn = eps->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << epsn;
-		}
-
-		QStringList epsnp = eps->getExoplanetsNamesI18n();
-		if (!epsnp.isEmpty())
-		{
-			foreach (const QString &str, epsnp)
-			{
-				find = false;
-				if (useStartOfWords)
-				{
-					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-						find = true;
-				}
-				else
-				{
-					if (str.contains(objPrefix, Qt::CaseInsensitive))
-						find = true;
-				}
-				if (find)
-				{
-					result << str;
-				}
-			}
-		}
-	}
-
-	result.sort();
-
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!flagShowExoplanets)
+	if (!flagShowExoplanets || maxNbItem <= 0)
+	{
 		return result;
+	}
 
-	if (maxNbItem==0)
-		return result;
-
-	QString epsn;
-	bool find;
 	foreach(const ExoplanetP& eps, ep)
 	{
-		epsn = eps->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		QStringList names;
+		if (inEnglish)
 		{
-			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
+			names.append(eps->getEnglishName());
+			names.append(eps->getExoplanetsEnglishNames());
 		}
 		else
 		{
-			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
+			names.append(eps->getNameI18n());
+			names.append(eps->getExoplanetsNamesI18n());
 		}
-		if (find)
+
+		foreach (const QString& name, names)
 		{
-			result << epsn;
-		}
-		QStringList epsnp = eps->getExoplanetsEnglishNames();
-		if (!epsnp.isEmpty())
-		{
-			foreach (const QString &str, epsnp)
+			if (!matchObjectName(name, objPrefix, useStartOfWords))
 			{
-				find = false;
-				if (useStartOfWords)
-				{
-					if (str.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-						find = true;
-				}
-				else
-				{
-					if (str.contains(objPrefix, Qt::CaseInsensitive))
-						find = true;
-				}
-				if (find)
-				{
-					result << str;
-				}
+				continue;
+			}
+
+			result.append(name);
+			if (result.size() >= maxNbItem)
+			{
+				result.sort();
+				return result;
 			}
 		}
 	}
 
 	result.sort();
-
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
-
 
 QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
@@ -503,11 +420,11 @@ void Exoplanets::restoreDefaultJsonFile(void)
 	QFile src(":/Exoplanets/exoplanets.json");
 	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "Exoplanets: cannot copy JSON resource to " + QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "[Exoplanets] Cannot copy JSON resource to " + QDir::toNativeSeparators(jsonCatalogPath);
 	}
 	else
 	{
-		qDebug() << "Exoplanets: default exoplanets.json to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug() << "[Exoplanets] Default exoplanets.json to " << QDir::toNativeSeparators(jsonCatalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
@@ -529,7 +446,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 	QFile old(jsonCatalogPath);
 	if (!old.exists())
 	{
-		qWarning() << "Exoplanets: no file to backup";
+		qWarning() << "[Exoplanets] No file to backup";
 		return false;
 	}
 
@@ -543,14 +460,14 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Exoplanets: WARNING - could not remove old exoplanets.json file";
+				qWarning() << "[Exoplanets] WARNING - could not remove old exoplanets.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Exoplanets: WARNING - failed to copy exoplanets.json to exoplanets.json.old";
+		qWarning() << "[Exoplanets] WARNING - failed to copy exoplanets.json to exoplanets.json.old";
 		return false;
 	}
 
@@ -562,7 +479,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 */
 void Exoplanets::readJsonFile(void)
 {
-	setEPMap(loadEPMap());	
+	setEPMap(loadEPMap());
 }
 
 void Exoplanets::reloadCatalog(void)
@@ -598,7 +515,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "Exoplanets: cannot open " << QDir::toNativeSeparators(path);
+		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(path);
 	else
 	{
 		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
@@ -612,6 +529,10 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 */
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
+	StelCore* core = StelApp::getInstance().getCore();
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	double ra, dec;
+	StelObjectP star;
 	ep.clear();
 	PSCount = EPCountAll = EPCountPH = 0;
 	EPEccentricityAll.clear();
@@ -628,6 +549,16 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 
 		PSCount++;
 
+		// Let's check existence the star (by designation) in our catalog...
+		star = smgr->searchByName(epsKey.trimmed());
+		if (!star.isNull())
+		{
+			// ...if exists, let's use our coordinates of star instead exoplanets.eu website data
+			StelUtils::rectToSphe(&ra, &dec, star->getJ2000EquatorialPos(core));
+			epsData["RA"] = StelUtils::radToDecDegStr(ra, 6);
+			epsData["DE"] = StelUtils::radToDecDegStr(dec, 6);
+		}
+
 		ExoplanetP eps(new Exoplanet(epsData));
 		if (eps->initialized)
 		{
@@ -638,6 +569,15 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 			EPRadiusAll.append(eps->getData(3));
 			EPPeriodAll.append(eps->getData(4));
 			EPAngleDistanceAll.append(eps->getData(5));
+			EPEffectiveTempHostStarAll.append(eps->getData(6));
+			EPYearDiscoveryAll.append(eps->getData(7));
+			EPMetallicityHostStarAll.append(eps->getData(8));
+			EPVMagHostStarAll.append(eps->getData(9));
+			EPRAHostStarAll.append(eps->getData(10));
+			EPDecHostStarAll.append(eps->getData(11));
+			EPDistanceHostStarAll.append(eps->getData(12));
+			EPMassHostStarAll.append(eps->getData(13));
+			EPRadiusHostStarAll.append(eps->getData(14));
 			EPCountAll += eps->getCountExoplanets();
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}
@@ -651,7 +591,7 @@ int Exoplanets::getJsonFileFormatVersion(void)
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Exoplanets: cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 
@@ -663,7 +603,7 @@ int Exoplanets::getJsonFileFormatVersion(void)
 		jsonVersion = map.value("version").toInt();
 	}
 
-	qDebug() << "Exoplanets: version of the format of the catalog:" << jsonVersion;
+	qDebug() << "[Exoplanets] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -672,7 +612,7 @@ bool Exoplanets::checkJsonFileFormat()
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Exoplanets: cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return false;
 	}
 
@@ -684,7 +624,7 @@ bool Exoplanets::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Exoplanets: file format is wrong! Error:" << e.what();
+		qDebug() << "[Exoplanets] File format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -742,8 +682,9 @@ void Exoplanets::loadConfiguration(void)
 	setHabitableMode(conf->value("habitable_enabled", false).toBool());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
-	setMarkerColor(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString(), false);
-	setMarkerColor(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString(), true);
+	setFlagShowExoplanetsDesignations(conf->value("flag_show_designations", true).toBool());
+	setMarkerColor(StelUtils::strToVec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()), false);
+	setMarkerColor(StelUtils::strToVec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()), true);
 
 	conf->endGroup();
 }
@@ -760,8 +701,9 @@ void Exoplanets::saveConfiguration(void)
 	conf->setValue("habitable_enabled", getHabitableMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
-	conf->setValue("habitable_exoplanet_marker_color", getMarkerColor(true));
-	conf->setValue("exoplanet_marker_color", getMarkerColor(false));
+	conf->setValue("flag_show_designations", getFlagShowExoplanetsDesignations());
+	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
+	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(false)));
 
 	conf->endGroup();
 }
@@ -774,7 +716,7 @@ int Exoplanets::getSecondsToUpdate(void)
 
 void Exoplanets::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime() && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
 		updateJSON();
 }
 
@@ -782,12 +724,12 @@ void Exoplanets::updateJSON(void)
 {
 	if (updateState==Exoplanets::Updating)
 	{
-		qWarning() << "Exoplanets: already updating...  will not start again current update is complete.";
+		qWarning() << "[Exoplanets] Already updating...  will not start again current update is complete.";
 		return;
 	}
 	else
 	{
-		qDebug() << "Exoplanets: starting update...";
+		qDebug() << "[Exoplanets] Starting update...";
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
@@ -818,7 +760,7 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Exoplanets: FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "[Exoplanets] FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -838,7 +780,7 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 		}
 		catch (std::runtime_error &e)
 		{
-			qWarning() << "Exoplanets: cannot write JSON data to file:" << e.what();
+			qWarning() << "[Exoplanets] Cannot write JSON data to file:" << e.what();
 		}
 
 	}
@@ -913,6 +855,16 @@ void Exoplanets::setDisplayMode(bool b)
 	Exoplanet::distributionMode=b;
 }
 
+bool Exoplanets::getFlagShowExoplanetsDesignations()
+{
+	return Exoplanet::showDesignations;
+}
+
+void Exoplanets::setFlagShowExoplanetsDesignations(bool b)
+{
+	Exoplanet::showDesignations=b;
+}
+
 bool Exoplanets::getTimelineMode()
 {
 	return Exoplanet::timelineMode;
@@ -933,23 +885,31 @@ void Exoplanets::setHabitableMode(bool b)
 	Exoplanet::habitableMode=b;
 }
 
-QString Exoplanets::getMarkerColor(bool habitable)
+Vec3f Exoplanets::getMarkerColor(bool habitable)
 {
-	Vec3f c;
+	Vec3f c = Exoplanet::exoplanetMarkerColor;
 	if (habitable)
 		c = Exoplanet::habitableExoplanetMarkerColor;
-	else
-		c = Exoplanet::exoplanetMarkerColor;
-	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+
+
+	return c;
 }
 
-void Exoplanets::setMarkerColor(QString c, bool h)
+void Exoplanets::setMarkerColor(const Vec3f &c, bool h)
 {
-	Vec3f nc = StelUtils::strToVec3f(c);
 	if (h)
-		Exoplanet::habitableExoplanetMarkerColor = nc;
+		Exoplanet::habitableExoplanetMarkerColor = c;
 	else
-		Exoplanet::exoplanetMarkerColor = nc;
+		Exoplanet::exoplanetMarkerColor = c;
+}
+
+void Exoplanets::setFlagShowExoplanets(bool b)
+{
+	if (b!=flagShowExoplanets)
+	{
+		flagShowExoplanets=b;
+		emit flagExoplanetsVisibilityChanged(b);
+	}
 }
 
 void Exoplanets::translations()

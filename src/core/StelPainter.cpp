@@ -55,26 +55,50 @@ StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
-StelPainter::GLState::GLState()
+StelPainter::GLState::GLState(QOpenGLFunctions* gl)
+	: blend(false),
+	  blendSrc(GL_SRC_ALPHA), blendDst(GL_ONE_MINUS_SRC_ALPHA),
+	  depthTest(false),
+	  depthMask(false),
+	  cullFace(false),
+	  lineSmooth(false),
+	  lineWidth(1.0f),
+	  gl(gl)
 {
-	blend = glIsEnabled(GL_BLEND);
-	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
-	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);
-	glGetIntegerv(GL_BLEND_SRC_ALPHA, &blendSrcAlpha);
-	glGetIntegerv(GL_BLEND_DST_ALPHA, &blendDstAlpha);
+
 }
 
-StelPainter::GLState::~GLState()
+void StelPainter::GLState::apply()
 {
-	if (blend)
-	{
-		glEnable(GL_BLEND);
-		glBlendFuncSeparate(blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha);
-	}
+	if(blend)
+		gl->glEnable(GL_BLEND);
 	else
+		gl->glDisable(GL_BLEND);
+	gl->glBlendFunc(blendSrc,blendDst);
+	if(depthTest)
+		gl->glEnable(GL_DEPTH_TEST);
+	else
+		gl->glDisable(GL_DEPTH_TEST);
+	gl->glDepthMask(depthMask);
+	if(cullFace)
+		gl->glEnable(GL_CULL_FACE);
+	else
+		gl->glDisable(GL_CULL_FACE);
+#ifdef GL_LINE_SMOOTH
+	if(!QOpenGLContext::currentContext()->isOpenGLES())
 	{
-		glDisable(GL_BLEND);
+		if (lineSmooth)
+			gl->glEnable(GL_LINE_SMOOTH);
+		else
+			gl->glDisable(GL_LINE_SMOOTH);
 	}
+#endif
+}
+
+void StelPainter::GLState::reset()
+{
+	*this = GLState(gl);
+	apply();
 }
 
 bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
@@ -85,7 +109,7 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 	return ret;
 }
 
-StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
+StelPainter::StelPainter(const StelProjectorP& proj) : QOpenGLFunctions(QOpenGLContext::currentContext()), glState(this)
 {
 	Q_ASSERT(proj);
 
@@ -106,13 +130,10 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	}
 #endif
 
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
+	//TODO: is this still required, and is there some Qt way to fix it? 0x11111111 is a bit peculiar, how was it chosen?
 	// Fix some problem when using Qt OpenGL2 engine
 	glStencilMask(0x11111111);
-	// Deactivate drawing in depth buffer by default
-	glDepthMask(GL_FALSE);
-	enableTexture2d(false);
+	glState.apply(); //apply default OpenGL state
 	setProjector(proj);
 }
 
@@ -126,6 +147,9 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
+	//reset opengl state
+	glState.reset();
+
 #ifndef NDEBUG
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
@@ -133,9 +157,7 @@ StelPainter::~StelPainter()
 		if (er==GL_INVALID_OPERATION)
 			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
-#endif
 
-#ifndef NDEBUG
 	// We are done with this StelPainter
 	globalMutex->unlock();
 #endif
@@ -162,6 +184,87 @@ QFontMetrics StelPainter::getFontMetrics() const
 	return QFontMetrics(currentFont);
 }
 
+void StelPainter::setBlending(bool enableBlending, GLenum blendSrc, GLenum blendDst)
+{
+	if(enableBlending != glState.blend)
+	{
+		glState.blend = enableBlending;
+		if(enableBlending)
+			glEnable(GL_BLEND);
+		else
+			glDisable(GL_BLEND);
+	}
+	if(enableBlending)
+	{
+		if(blendSrc!=glState.blendSrc||blendDst!=glState.blendDst)
+		{
+			glState.blendSrc = blendSrc;
+			glState.blendDst = blendDst;
+			glBlendFunc(blendSrc,blendDst);
+		}
+	}
+}
+
+void StelPainter::setDepthTest(bool enable)
+{
+	if(glState.depthTest != enable)
+	{
+		glState.depthTest = enable;
+		if(enable)
+			glEnable(GL_DEPTH_TEST);
+		else
+			glDisable(GL_DEPTH_TEST);
+	}
+}
+
+void StelPainter::setDepthMask(bool enable)
+{
+	if(glState.depthMask != enable)
+	{
+		glState.depthMask = enable;
+		if(enable)
+			glDepthMask(GL_TRUE);
+		else
+			glDepthMask(GL_FALSE);
+	}
+}
+
+void StelPainter::setCullFace(bool enable)
+{
+	if(glState.cullFace!=enable)
+	{
+		glState.cullFace = enable;
+		if(enable)
+			glEnable(GL_CULL_FACE);
+		else
+			glDisable(GL_CULL_FACE);
+	}
+}
+
+void StelPainter::setLineSmooth(bool enable)
+{
+#ifdef GL_LINE_SMOOTH
+	if (!QOpenGLContext::currentContext()->isOpenGLES() && enable!=glState.lineSmooth)
+	{
+		glState.lineSmooth = enable;
+		if(enable)
+			glEnable(GL_LINE_SMOOTH);
+		else
+			glDisable(GL_LINE_SMOOTH);
+	}
+#else
+	Q_UNUSED(enable); //noop
+#endif
+}
+
+void StelPainter::setLineWidth(float width)
+{
+	if(glState.lineWidth != width)
+	{
+		glState.lineWidth = width;
+		glLineWidth(width);
+	}
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // Standard methods for drawing primitives
@@ -172,6 +275,7 @@ void StelPainter::drawViewportShape(void)
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
 
+	bool oldBlendState = glState.blend;
 	glDisable(GL_BLEND);
 	setColor(0.f,0.f,0.f);
 
@@ -221,6 +325,8 @@ void StelPainter::drawViewportShape(void)
 	}
 	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
 	enableClientStates(false);
+	if(oldBlendState)
+		glEnable(GL_BLEND);
 }
 
 void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
@@ -432,8 +538,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	float xom = x + xshift*cosr - yshift*sinr;
 	float yom = y + yshift*sinr + yshift*cosr;
 
-	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("ar fa ckb ug ur he yi").contains(lang))
+	if (!StelApp::getInstance().getLocaleMgr().isAppRTL())
 	{
 		for (int i=0; i<ws.length(); ++i)
 		{
@@ -533,14 +638,13 @@ StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
-	//StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
 	}
 	else if (qApp->property("text_texture")==true) // CLI option -t given?
 	{
-	  //qDebug() <<  "Text texture" << str;
+		//qDebug() <<  "Text texture" << str;
 		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
 		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
 		Q_ASSERT(tex);
@@ -548,7 +652,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			angleDeg += prj->defaultAngleForGravityText;
 		tex->texture->bind();
 
-		enableTexture2d(true);
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
 		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
@@ -582,11 +685,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			texCoords[i*2+1] = tex->getTexSize().height() * (1 - i / 2);
 		}
 		setTexCoordPointer(2, GL_FLOAT, texCoords);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
+
+		//text drawing requires blending, but we reset GL state afterwards if necessary
+		bool oldBlending = glState.blend;
+		GLenum oldSrc = glState.blendSrc, oldDst = glState.blendDst;
+		setBlending(true);
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
 		drawFromArray(TriangleStrip, 4, 0, false);
+		setBlending(oldBlending, oldSrc, oldDst);
 		enableClientStates(false, false);
 		tex->texture->release();
 		delete[] texCoords;
@@ -601,15 +708,15 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		// painter.setFont(currentFont);
 		
 		QPainter painter(&device);
-		painter.beginNativePainting();
 		
 		QFont tmpFont = currentFont;
 		tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
 		painter.setFont(tmpFont);
 		painter.setPen(QColor(currentColor[0]*255, currentColor[1]*255, currentColor[2]*255, currentColor[3]*255));
 		
-		xshift*=StelApp::getInstance().getGlobalScalingRatio();
-		yshift*=StelApp::getInstance().getGlobalScalingRatio();
+		float scaleRatio = StelApp::getInstance().getGlobalScalingRatio();
+		xshift*=scaleRatio;
+		yshift*=scaleRatio;
 		
 		y = prj->getViewportHeight()-y;
 		yshift = -yshift;
@@ -631,7 +738,16 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			painter.drawText(x+xshift, y+yshift, str);
 		}
 		
-		painter.endNativePainting();
+		//important to call this before GL state restore
+		painter.end();
+
+		//fix for bug 1628072 caused by QTBUG-56798
+#ifndef QT_NO_DEBUG
+		StelOpenGL::clearGLErrors();
+#endif
+
+		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
+		glState.apply();
 	}
 }
 
@@ -1464,6 +1580,8 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
 
+	bool oldCullFace = glState.cullFace;
+
 	switch (drawMode)
 	{
 		case SphericalPolygonDrawModeBoundary:
@@ -1475,7 +1593,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
 		case SphericalPolygonDrawModeTextureFillColormodulated:
-			glEnable(GL_CULL_FACE);
+			setCullFace(true);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
@@ -1483,7 +1601,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			else
 				drawStelVertexArray(poly->getFillVertexArray(), false);
 
-			glDisable(GL_CULL_FACE);
+			setCullFace(oldCullFace);
 			break;
 		default:
 			Q_ASSERT(0);
@@ -1822,11 +1940,6 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 
 	if (orientInside)
 		glCullFace(GL_BACK);
-}
-
-void StelPainter::enableTexture2d(bool b)
-{
-	texture2dEnabled = b;
 }
 
 void StelPainter::initGLShaders()

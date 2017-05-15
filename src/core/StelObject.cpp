@@ -29,16 +29,30 @@
 #include "StelLocation.hpp"
 #include "SolarSystem.hpp"
 #include "StelModuleMgr.hpp"
+#include "LandscapeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
 
 #include <QRegExp>
 #include <QDebug>
 #include <QSettings>
 
+int StelObject::stelObjectPMetaTypeID = qRegisterMetaType<StelObjectP>();
+
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
-	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
+	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOff);
 }
+
+Vec3d StelObject::getEquinoxEquatorialPosApparent(const StelCore* core) const
+{
+	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionOn);
+}
+
+Vec3d StelObject::getEquinoxEquatorialPosAuto(const StelCore* core) const
+{
+	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
+}
+
 
 // Get observer local sidereal coordinate
 Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
@@ -68,13 +82,47 @@ Vec3d StelObject::getAltAzPosApparent(const StelCore* core) const
 // Get observer-centered alt/az position
 Vec3d StelObject::getAltAzPosAuto(const StelCore* core) const
 {
-	return core->j2000ToAltAz(getJ2000EquatorialPos(core));
+	return core->j2000ToAltAz(getJ2000EquatorialPos(core), StelCore::RefractionAuto);
 }
 
 // Get observer-centered galactic position
 Vec3d StelObject::getGalacticPos(const StelCore *core) const
 {
 	return core->j2000ToGalactic(getJ2000EquatorialPos(core));
+}
+
+// Get observer-centered supergalactic position
+Vec3d StelObject::getSupergalacticPos(const StelCore *core) const
+{
+	return core->j2000ToSupergalactic(getJ2000EquatorialPos(core));
+}
+
+// Checking position an object above mathematical horizon for current location
+bool StelObject::isAboveHorizon(const StelCore *core) const
+{
+	bool r = true;
+	float az, alt;
+	StelUtils::rectToSphe(&az, &alt, getAltAzPosAuto(core));
+	if (alt < 0.f)
+		r = false;
+
+	return r;
+}
+
+// Checking position an object above real horizon for current location
+bool StelObject::isAboveRealHorizon(const StelCore *core) const
+{
+	bool r = true;
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	if (lmgr->getFlagLandscape())
+	{
+		if (lmgr->getLandscapeOpacity(getAltAzPosAuto(core))>0.85f) // landscape displayed
+			r = false;
+	}
+	else
+		r = isAboveHorizon(core); // check object is below mathematical horizon
+
+	return r;
 }
 
 float StelObject::getVMagnitude(const StelCore* core) const 
@@ -113,6 +161,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	Q_UNUSED(az_app);
 	QString cepoch = qc_("on date", "coordinates for current epoch");
 	QString res;
+	QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
 	if (flags&RaDecJ2000)
 	{
 		double dec_j2000, ra_j2000;
@@ -126,7 +175,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	if (flags&RaDecOfDate)
 	{
 		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));		
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		if (withDecimalDegree)
 			res += q_("RA/Dec") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(ra_equ,5,false,true), StelUtils::radToDecDegStr(dec_equ)) + "<br>";
 		else
@@ -196,42 +245,44 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		}
 	}
 
-	if (flags&EclipticCoord)
-	{
-		// N.B. Ecliptical coordinates are particularly earth-bound.
-		// It may be OK to have terrestrial ecliptical coordinates of J2000.0 (standard epoch) because those are in practice linked with VSOP XY plane,
-		// and because the ecliptical grid of J2000 is also shown for observers on other planets.
-		// The formulation here has never computed the true position of any observer planet's orbital plane except for Earth,
-		// or ever displayed the coordinates in the observer planet's equivalent to Earth's ecliptical coordinates.
-		// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
+	// N.B. Ecliptical coordinates are particularly earth-bound.
+	// It may be OK to have terrestrial ecliptical coordinates of J2000.0 (standard epoch) because those are in practice linked with VSOP XY plane,
+	// and because the ecliptical grid of J2000 is also shown for observers on other planets.
+	// The formulation here has never computed the true position of any observer planet's orbital plane except for Earth,
+	// or ever displayed the coordinates in the observer planet's equivalent to Earth's ecliptical coordinates.
+	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 
-		double ecl=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+	if (flags&EclipticCoordJ2000)
+	{
+		double eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
 		if (withDecimalDegree)
 			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
 		else
 			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 
-		if (core->getCurrentPlanet()->getEnglishName()=="Earth")
-		{
-			ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+	}
 
-			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-			StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
-			if (lambda<0) lambda+=2.0*M_PI;
-			if (withDecimalDegree)
-				res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
-			else
-				res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
-			// GZ Only for now: display epsilon_A, angle between Earth's Axis and ecl. of date.
-			if (withDecimalDegree)
-				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
-			else
-				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl)) + "<br>";
-		}
+	if ((flags&EclipticCoordOfDate) && (QString("Earth Sun").contains(currentPlanet)))
+	{
+		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+		double ra_equ, dec_equ, lambdaJDE, betaJDE;
+
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
+		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
+		if (withDecimalDegree)
+			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(lambdaJDE), StelUtils::radToDecDegStr(betaJDE)) + "<br>";
+		else
+			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDmsStr(lambdaJDE, true), StelUtils::radToDmsStr(betaJDE, true)) + "<br>";
+		// GZ Only for now: display epsilon_A, angle between Earth's Axis and ecl. of date.
+		if (withDecimalDegree)
+			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(eclJDE)) + "<br>";
+		else
+			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(eclJDE, true)) + "<br>";
 	}
 
 	if (flags&GalacticCoord)
@@ -244,7 +295,23 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
 	}
 
-	if ((flags&Extra) && core->getCurrentPlanet()->getEnglishName()=="Earth")
+	if (flags&SupergalacticCoord)
+	{
+		double sglong, sglat;
+		StelUtils::rectToSphe(&sglong, &sglat, getSupergalacticPos(core));
+		if (withDecimalDegree)
+			res += q_("Supergalactic longitude/latitude: %1/%2").arg(StelUtils::radToDecDegStr(sglong), StelUtils::radToDecDegStr(sglat)) + "<br>";
+		else
+			res += q_("Supergalactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(sglong,true), StelUtils::radToDmsStr(sglat,true)) + "<br>";
+	}
+
+	if (flags&IAUConstellation)
+	{
+		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
+		res += q_("IAU Constellation: %1").arg(constel) + "<br>";
+	}
+
+	if ((flags&SiderealTime) && (currentPlanet=="Earth"))
 	{
 		double longitude=core->getCurrentLocation().longitude;
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
@@ -277,7 +344,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</h2>", "\n");
 		str.replace(QRegExp("<br(\\s*/)?>"), "\n");
 	}
-	else
+	else if(!(flags&NoFont))
 	{
 		Vec3f color = getInfoColor();
 		StelCore* core = StelApp::getInstance().getCore();
@@ -291,3 +358,107 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	}
 }
 
+QVariantMap StelObject::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map;
+
+	Vec3d pos;
+	double ra, dec, alt, az, glong, glat;
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+
+	map.insert("type", getType());
+	// ra/dec
+	pos = getEquinoxEquatorialPos(core);
+	StelUtils::rectToSphe(&ra, &dec, pos);
+	map.insert("ra", ra*180./M_PI);
+	map.insert("dec", dec*180./M_PI);
+
+	// ra/dec in J2000
+	pos = getJ2000EquatorialPos(core);
+	StelUtils::rectToSphe(&ra, &dec, pos);
+	map.insert("raJ2000", ra*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);
+
+	// apparent altitude/azimuth
+	pos = getAltAzPosApparent(core);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	float direction = 3.; // N is zero, E is 90 degrees
+	if (useOldAzimuth)
+		direction = 2.;
+	az = direction*M_PI - az;
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
+	map.insert("altitude", alt*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);
+
+	// geometric altitude/azimuth
+	pos = getAltAzPosGeometric(core);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = direction*M_PI - az;
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
+	map.insert("altitude-geometric", alt*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);
+
+	// galactic long/lat
+	pos = getGalacticPos(core);
+	StelUtils::rectToSphe(&glong, &glat, pos);
+	map.insert("glong", glong*180./M_PI);
+	map.insert("glat", glat*180./M_PI);
+
+	// supergalactic long/lat
+	pos = getSupergalacticPos(core);
+	StelUtils::rectToSphe(&glong, &glat, pos);
+	map.insert("sglong", glong*180./M_PI);
+	map.insert("sglat", glat*180./M_PI);
+
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	double ra_equ, dec_equ, lambda, beta;
+	// J2000
+	double eclJ2000 = ssmgr->getEarth()->getRotObliquity(2451545.0);
+	double ecl = ssmgr->getEarth()->getRotObliquity(core->getJDE());
+
+	// ecliptic longitude/latitude (J2000 frame)
+	StelUtils::rectToSphe(&ra_equ,&dec_equ, getJ2000EquatorialPos(core));
+	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
+	if (lambda<0) lambda+=2.0*M_PI;
+	map.insert("elongJ2000", lambda*180./M_PI);
+	map.insert("elatJ2000", beta*180./M_PI);
+
+	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
+	{
+		// ecliptic longitude/latitude
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		if (lambda<0) lambda+=2.0*M_PI;
+		map.insert("elong", lambda*180./M_PI);
+		map.insert("elat", beta*180./M_PI);
+	}
+
+	// magnitude
+	map.insert("vmag", getVMagnitude(core));
+	map.insert("vmage", getVMagnitudeWithExtinction(core));
+
+	// angular size
+	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+	bool sign;
+	double deg;
+	StelUtils::radToDecDeg(angularSize, sign, deg);
+	if (!sign)
+		deg *= -1;
+	map.insert("size", angularSize);
+	map.insert("size-dd", deg);
+	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
+	map.insert("size-dms", StelUtils::radToDmsStr(angularSize, true));
+
+	// english name or designation & localized name
+	map.insert("name", getEnglishName());
+	map.insert("localized-name", getNameI18n());
+
+	// 'above horizon' flag
+	map.insert("above-horizon", isAboveRealHorizon(core));
+
+	return map;
+}

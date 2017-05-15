@@ -42,24 +42,25 @@ StelTextureSP Exoplanet::markerTexture;
 bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
 bool Exoplanet::habitableMode = false;
+bool Exoplanet::showDesignations = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
 Exoplanet::Exoplanet(const QVariantMap& map)
-		: initialized(false),
-		  EPCount(0),
-		  PHEPCount(0),
-		  designation(""),
-		  RA(0.),
-		  DE(0.),
-		  distance(0.),
-		  stype(""),
-		  smass(0.),
-		  smetal(0.),
-		  Vmag(99.),
-		  sradius(0.),
-		  effectiveTemp(0),
-		  hasHabitableExoplanets(false)
+	: initialized(false)
+	, EPCount(0)
+	, PHEPCount(0)
+	, designation("")
+	, RA(0.)
+	, DE(0.)
+	, distance(0.)
+	, stype("")
+	, smass(0.)
+	, smetal(0.)
+	, Vmag(99.)
+	, sradius(0.)
+	, effectiveTemp(0)
+	, hasHabitableExoplanets(false)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
@@ -91,6 +92,15 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	englishNames.clear();
 	translatedNames.clear();
 	exoplanetDesignations.clear();
+	effectiveTempHostStarList.clear();
+	yearDiscoveryList.clear();
+	metallicityHostStarList.clear();
+	vMagHostStarList.clear();
+	raHostStarList.clear();
+	decHostStarList.clear();
+	distanceHostStarList.clear();
+	massHostStarList.clear();
+	radiusHostStarList.clear();
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -154,6 +164,19 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 				periodList.append(p.period);
 			else
 				periodList.append(0);
+
+			if (p.discovered>0)
+				yearDiscoveryList.append(p.discovered);
+
+			effectiveTempHostStarList.append(effectiveTemp);
+			metallicityHostStarList.append(smetal);
+			if (Vmag<99)
+				vMagHostStarList.append(Vmag);
+			raHostStarList.append(RA);
+			decHostStarList.append(DE);
+			distanceHostStarList.append(distance);
+			massHostStarList.append(smass);
+			radiusHostStarList.append(sradius);
 		}
 	}
 
@@ -165,7 +188,7 @@ Exoplanet::~Exoplanet()
 	//
 }
 
-QVariantMap Exoplanet::getMap(void)
+QVariantMap Exoplanet::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -466,6 +489,25 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	return str;
 }
 
+QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	// Tentatively add a few more strings. Details are left to the plugin author.
+	if (!starProperName.isEmpty()) map["starProperName"] = starProperName;
+	map["distance"] = distance;
+	map["stype"] = stype;
+	map["smass"] = smass;
+	map["smetal"] = smetal;
+	// map["Vmag"] = Vmag; // maybe same as getVmagnitude?
+	map["sradius"] = sradius;
+	map["effectiveTemp"] = effectiveTemp;
+	map["hasHabitablePlanets"] = hasHabitableExoplanets;
+	map["type"] = "ExoplanetSystem"; // Replace default but confusing "Exoplanet" from class name.
+	// TODO: Maybe add number of habitables? Add details?
+	return map;
+}
+
 QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 {
 	QString result = "";
@@ -558,8 +600,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	StelUtils::spheToRect(RA, DE, XYZ);
 	double mag = getVMagnitudeWithExtinction(core);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	painter->setBlending(true, GL_ONE, GL_ONE);
 	painter->setColor(color[0], color[1], color[2], 1);
 
 	if (timelineMode)
@@ -591,7 +632,8 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
+		float coeff = 4.5f + std::log10(sradius + 0.1f);
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels() && showDesignations)
 		{
 			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
 		}

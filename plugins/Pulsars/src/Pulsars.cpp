@@ -149,7 +149,7 @@ void Pulsars::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Pulsars"))
 		{
-			qDebug() << "Pulsars: no Pulsars section exists in main config file - creating with defaults";
+			qDebug() << "[Pulsars] No Pulsars section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -176,7 +176,7 @@ void Pulsars::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Pulsars: init error:" << e.what();
+		qWarning() << "[Pulsars] init error:" << e.what();
 		return;
 	}
 
@@ -197,11 +197,11 @@ void Pulsars::init()
 	}
 	else
 	{
-		qDebug() << "Pulsars: pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Pulsars: loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -259,9 +259,7 @@ void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
 		const Vec3f& c(obj->getInfoColor());
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.setBlending(true);
 		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
@@ -322,79 +320,13 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Pulsars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!flagShowPulsars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString psrn;
-	bool find;
-	foreach(const PulsarP& pulsar, psr)
+	if (flagShowPulsars)
 	{
-		psrn = pulsar->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (psrn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (psrn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << psrn;
-		}
+		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!flagShowPulsars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString psrn;
-	bool find;
-	foreach(const PulsarP& pulsar, psr)
-	{
-		psrn = pulsar->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (psrn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (psrn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << psrn;
-		}
-	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
 
@@ -432,11 +364,11 @@ void Pulsars::restoreDefaultJsonFile(void)
 	QFile src(":/Pulsars/pulsars.json");
 	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "Pulsars: cannot copy JSON resource to" + QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "[Pulsars] Cannot copy JSON resource to" + QDir::toNativeSeparators(jsonCatalogPath);
 	}
 	else
 	{
-		qDebug() << "Pulsars: copied default pulsars.json to" << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug() << "[Pulsars] Copied default pulsars.json to" << QDir::toNativeSeparators(jsonCatalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
@@ -458,7 +390,7 @@ bool Pulsars::backupJsonFile(bool deleteOriginal)
 	QFile old(jsonCatalogPath);
 	if (!old.exists())
 	{
-		qWarning() << "Pulsars: no file to backup";
+		qWarning() << "[Pulsars] No file to backup";
 		return false;
 	}
 
@@ -472,14 +404,14 @@ bool Pulsars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Pulsars: WARNING - could not remove old pulsars.json file";
+				qWarning() << "[Pulsars] WARNING - could not remove old pulsars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Pulsars: WARNING - failed to copy pulsars.json to pulsars.json.old";
+		qWarning() << "[Pulsars] WARNING - failed to copy pulsars.json to pulsars.json.old";
 		return false;
 	}
 
@@ -505,7 +437,7 @@ QVariantMap Pulsars::loadPSRMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "Pulsars: cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "[Pulsars] Cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
 		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
@@ -542,7 +474,7 @@ int Pulsars::getJsonFileFormatVersion(void)
 	QFile jsonPSRCatalogFile(jsonCatalogPath);
 	if (!jsonPSRCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Pulsars: cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "[Pulsars] Cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 
@@ -554,7 +486,7 @@ int Pulsars::getJsonFileFormatVersion(void)
 	}
 
 	jsonPSRCatalogFile.close();
-	qDebug() << "Pulsars: version of the format of the catalog:" << jsonVersion;
+	qDebug() << "[Pulsars] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -563,7 +495,7 @@ bool Pulsars::checkJsonFileFormat()
 	QFile jsonPSRCatalogFile(jsonCatalogPath);
 	if (!jsonPSRCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Pulsars: cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "[Pulsars] Cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
 		return false;
 	}
 
@@ -575,7 +507,7 @@ bool Pulsars::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Pulsars: file format is wrong! Error:" << e.what();
+		qDebug() << "[Pulsars] File format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -636,8 +568,8 @@ void Pulsars::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
 	setGlitchFlag(conf->value("use_separate_colors", false).toBool());
-	setMarkerColor(conf->value("marker_color", "0.4,0.5,1.0").toString(), true);
-	setMarkerColor(conf->value("glitch_color", "0.2,0.3,1.0").toString(), false);
+	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()), true);
+	setMarkerColor(StelUtils::strToVec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()), false);
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
@@ -655,8 +587,8 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("use_separate_colors", getGlitchFlag());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
-	conf->setValue("marker_color", getMarkerColor(true));
-	conf->setValue("glitch_color", getMarkerColor(false));
+	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
+	conf->setValue("glitch_color", StelUtils::vec3fToStr(getMarkerColor(false)));
 
 	conf->endGroup();
 }
@@ -669,7 +601,7 @@ int Pulsars::getSecondsToUpdate(void)
 
 void Pulsars::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
 		updateJSON();
 }
 
@@ -677,12 +609,12 @@ void Pulsars::updateJSON(void)
 {
 	if (updateState==Pulsars::Updating)
 	{
-		qWarning() << "Pulsars: already updating...  will not start again current update is complete.";
+		qWarning() << "[Pulsars] Already updating...  will not start again current update is complete.";
 		return;
 	}
 	else
 	{
-		qDebug() << "Pulsars: starting update...";
+		qDebug() << "[Pulsars] Starting update...";
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
@@ -713,7 +645,7 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Pulsars: FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "[Pulsars] FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -721,7 +653,7 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 		QString jsonFilePath = StelFileMgr::findFile("modules/Pulsars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/pulsars.json";
 		if (jsonFilePath.isEmpty())
 		{
-			qWarning() << "Pulsars: cannot write JSON data to file:" << QDir::toNativeSeparators(jsonCatalogPath);
+			qWarning() << "[Pulsars] Cannot write JSON data to file:" << QDir::toNativeSeparators(jsonCatalogPath);
 			return;
 		}
 		QFile jsonFile(jsonFilePath);
@@ -808,22 +740,21 @@ void Pulsars::setGlitchFlag(bool b)
 	Pulsar::glitchFlag=b;
 }
 
-QString Pulsars::getMarkerColor(bool mtype)
+Vec3f Pulsars::getMarkerColor(bool mtype)
 {
-	Vec3f c;
+	Vec3f c = Pulsar::glitchColor;
 	if (mtype)
 		c = Pulsar::markerColor;
-	else
-		c = Pulsar::glitchColor;
-	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+
+	return c;
 }
 
-void Pulsars::setMarkerColor(QString c, bool mtype)
+void Pulsars::setMarkerColor(const Vec3f &c, bool mtype)
 {
 	if (mtype)
-		Pulsar::markerColor = StelUtils::strToVec3f(c);
+		Pulsar::markerColor = c;
 	else
-		Pulsar::glitchColor = StelUtils::strToVec3f(c);
+		Pulsar::glitchColor = c;
 }
 
 void Pulsars::reloadCatalog(void)
@@ -845,5 +776,14 @@ void Pulsars::reloadCatalog(void)
 	{
 		// Restore selection...
 		objMgr->setSelectedObject(selectedObject);
+	}
+}
+
+void Pulsars::setFlagShowPulsars(bool b)
+{
+	if (b!=flagShowPulsars)
+	{
+		flagShowPulsars=b;
+		emit flagPulsarsVisibilityChanged(b);
 	}
 }

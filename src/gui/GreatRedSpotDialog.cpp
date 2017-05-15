@@ -28,15 +28,15 @@
 
 #include "ui_greatRedSpotDialog.h"
 
-GreatRedSpotDialog::GreatRedSpotDialog()
+GreatRedSpotDialog::GreatRedSpotDialog() : StelDialog("GreatRedSpot")
 {
-	dialogName = "GreatRedSpot";
 	ui = new Ui_GreatRedSpotDialogForm;
 }
 
 GreatRedSpotDialog::~GreatRedSpotDialog()
 {
 	delete ui;
+	ui=NULL;
 }
 
 void GreatRedSpotDialog::retranslate()
@@ -45,6 +45,10 @@ void GreatRedSpotDialog::retranslate()
 		ui->retranslateUi(dialog);
 }
 
+void GreatRedSpotDialog::setVisible(bool v)
+{
+	StelDialog::setVisible(v);
+}
 
 void GreatRedSpotDialog::createDialogContent()
 {

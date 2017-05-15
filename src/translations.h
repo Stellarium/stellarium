@@ -31,10 +31,14 @@ class Translations
 		Q_ASSERT(0);
 
 		// Cardinals names
-		N_("N");	// North
-		N_("S");	// South
-		N_("E");	// East
-		N_("W");	// West
+		// TRANSLATORS: Cardinals names: North
+		N_("N");
+		// TRANSLATORS: Cardinals names: South
+		N_("S");
+		// TRANSLATORS: Cardinals names: East
+		N_("E");
+		// TRANSLATORS: Cardinals names: West
+		N_("W");
 
 		// =====================================================================
 		// List of types solar system bodies
@@ -58,6 +62,8 @@ class Translations
 		N_("scattered disc object");
 		// TRANSLATORS: Type of object
 		N_("Oort cloud object");
+		// TRANSLATORS: Type of object
+		N_("sednoid");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -77,7 +83,13 @@ class Translations
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Oort cloud objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Sednoids");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Constellations");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Custom Objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Asterisms");
 
 		// =====================================================================
 		// List of deep-sky objects types
@@ -153,6 +165,16 @@ class Translations
 		N_("Collinder Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Melotte Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("New General Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Index Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Lynds' Catalogue of Bright Nebulae");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Lynds' Catalogue of Dark Nebulae");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Cederblad Catalog");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -164,33 +186,68 @@ class Translations
 		N_("Interesting double stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Interesting variable stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright double stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright variable stars");
 		
 		// =====================================================================
 		// Constellation cultures
+		// TRANSLATORS: Name of the sky culture
 		N_("Arabic");
+		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
+		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
+		// TRANSLATORS: Name of the sky culture
 		N_("Boorong");
+		// TRANSLATORS: Name of the sky culture
 		N_("Chinese");
+		// TRANSLATORS: Name of the sky culture
 		N_("Egyptian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Inuit");
+		// TRANSLATORS: Name of the sky culture
 		N_("Indian Vedic");
+		// TRANSLATORS: Name of the sky culture
 		N_("Japanese Moon Stations");
+		// TRANSLATORS: Name of the sky culture
+		N_("Kamilaroi/Euahlayi");
+		// TRANSLATORS: Name of the sky culture
 		N_("Korean");
-		N_("Lakota");
+		// TRANSLATORS: Name of the sky culture
+		N_("Dakota/Lakota/Nakota");
+		// TRANSLATORS: Name of the sky culture
+		N_("Macedonian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Maori");
+		// TRANSLATORS: Name of the sky culture
 		N_("Mongolian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Navajo");
+		// TRANSLATORS: Name of the sky culture
 		N_("Norse");
+		// TRANSLATORS: Name of the sky culture
+		N_("Ojibwe");
+		// TRANSLATORS: Name of the sky culture
 		N_("Polynesian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Romanian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Sami");
 		// TRANSLATORS: Name of the sky culture
+		N_("Sardinian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Siberian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Tukano");
+		// TRANSLATORS: Name of the sky culture
 		N_("Tupi-Guarani");
+		// TRANSLATORS: Name of the sky culture
 		N_("Tongan");
+		// TRANSLATORS: Name of the sky culture
 		N_("Western");
+		// TRANSLATORS: Name of the sky culture
 		N_("Western (H.A.Rey)");
 
 		
@@ -324,7 +381,7 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 261 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 287 events in all!");
 		N_("A tour of the western constellations.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
@@ -336,258 +393,13 @@ class Translations
 		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-3000");
 		N_("A tour of Messier Objects");
 		N_("Tours around interesting objects, which accessible to observation with binoculars. The data for the script are taken from the eponymous book by Gary Seronik.");
-		N_("This script help you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
-		N_("This script help you make an excursion around largest known stars.");
+		N_("This script helps you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
+		N_("This script helps you make an excursion around largest known stars.");
 		N_("A tour around objects from the Herschel 400 Catalogue");
 		N_("Ben Crowell has created Binosky, an observing list of Deep Sky Objects for Binoculars. In the script we give a list of these 31 objects, ordered by Right Ascension (2000.0).");
-		N_("The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog was contributed by Auke Slotegraaf.");
-		N_("This list by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award.");
+		N_("The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). The Bennett catalog was contributed by Auke Slotegraaf.");
+		N_("This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award.");
 		
-		// =====================================================================
-		// List of countries
-		N_("Andorra");
-		N_("United Arab Emirates");
-		N_("Afghanistan");
-		N_("Antigua and Barbuda");
-		N_("Anguilla");
-		N_("Albania");
-		N_("Armenia");
-		N_("Netherlands Antilles");
-		N_("Angola");
-		N_("Antarctica");
-		N_("Argentina");
-		N_("American Samoa");
-		N_("Austria");
-		N_("Australia");
-		N_("Aruba");
-		N_("Azerbaijan");
-		N_("Bosnia and Herzegowina");
-		N_("Barbados");
-		N_("Bangladesh");
-		N_("Belgium");
-		N_("Burkina Faso");
-		N_("Bulgaria");
-		N_("Bahrain");
-		N_("Burundi");
-		N_("Benin");
-		N_("Bermuda");
-		N_("Brunei Darussalam");
-		N_("Bolivia");
-		N_("Brazil");
-		N_("Bahamas");
-		N_("Bhutan");
-		N_("Bouvet Island");
-		N_("Botswana");
-		N_("Belarus");
-		N_("Belize");
-		N_("Canada");
-		N_("Cocos Islands");
-		N_("Democratic Republic of the Congo");
-		N_("Central African Republic");
-		N_("Republic of the Congo");
-		N_("Switzerland");
-		N_("Cote d'Ivoire");
-		N_("Cook Islands");
-		N_("Chile");
-		N_("Cameroon");
-		N_("China");
-		N_("Colombia");
-		N_("Costa Rica");
-		N_("Serbia and Montenegro");
-		N_("Montenegro");
-		N_("Cuba");
-		N_("Cape Verde");
-		N_("Christmas Island");
-		N_("Cyprus");
-		N_("Czech Republic");
-		N_("Germany");
-		N_("Djibouti");
-		N_("Denmark");
-		N_("Dominica");
-		N_("Dominican Republic");
-		N_("Algeria");
-		N_("Ecuador");
-		N_("Estonia");
-		N_("Egypt");
-		N_("Western Sahara");
-		N_("Eritrea");
-		N_("Spain");
-		N_("Ethiopia");
-		N_("Finland");
-		N_("Fiji");
-		N_("Falkland Islands");
-		N_("Micronesia");
-		N_("Faroe Islands");
-		N_("France");
-		N_("Gabon");
-		N_("United Kingdom");
-		N_("Grenada");
-		N_("Georgia");
-		N_("French Guiana");
-		N_("Ghana");
-		N_("Gibraltar");
-		N_("Greenland");
-		N_("Gambia");
-		N_("Guinea");
-		N_("Guadeloupe");
-		N_("Equatorial Guinea");
-		N_("Greece");
-		N_("South Georgia and the South Sandwich Islands");
-		N_("Guatemala");
-		N_("Guam");
-		N_("Guinea-Bissau");
-		N_("Guyana");
-		N_("Hong Kong");
-		N_("Heard Island and McDonald Islands");
-		N_("Honduras");
-		N_("Croatia");
-		N_("Haiti");
-		N_("Hungary");
-		N_("Indonesia");
-		N_("Ireland");
-		N_("Israel");
-		N_("India");
-		N_("British Indian Ocean Territory");
-		N_("Iraq");
-		N_("Iran");
-		N_("Iceland");
-		N_("Italy");
-		N_("Jamaica");
-		N_("Jordan");
-		N_("Japan");
-		N_("Kenya");
-		N_("Kyrgyzstan");
-		N_("Cambodia");
-		N_("Kiribati");
-		N_("Comoros");
-		N_("Saint Kitts and Nevis");
-		N_("Democratic People's Republic of Korea");
-		N_("Republic of Korea");
-		N_("Kuwait");
-		N_("Cayman Islands");
-		N_("Kazakhstan");
-		N_("Lao");
-		N_("Lebanon");
-		N_("Saint Lucia");
-		N_("Liechtenstein");
-		N_("Sri Lanka");
-		N_("Liberia");
-		N_("Lesotho");
-		N_("Lithuania");
-		N_("Luxembourg");
-		N_("Latvia");
-		N_("Libyan Arab Jamahiriya");
-		N_("Morocco");
-		N_("Monaco");
-		N_("Moldova");
-		N_("Madagascar");
-		N_("Marshall Islands");
-		N_("Macedonia");
-		N_("Mali");
-		N_("Myanmar");
-		N_("Mongolia");
-		N_("Macau");
-		N_("Northern Mariana Islands");
-		N_("Martinique");
-		N_("Mauritania");
-		N_("Montserrat");
-		N_("Malta");
-		N_("Mauritius");
-		N_("Maldives");
-		N_("Malawi");
-		N_("Mexico");
-		N_("Malaysia");
-		N_("Mozambique");
-		N_("Namibia");
-		N_("New Caledonia");
-		N_("Niger");
-		N_("Norfolk Island");
-		N_("Nigeria");
-		N_("Nicaragua");
-		N_("Netherlands");
-		N_("Norway");
-		N_("Nepal");
-		N_("Nauru");
-		N_("Niue");
-		N_("New Zealand");
-		N_("Oman");
-		N_("Panama");
-		N_("Peru");
-		N_("French Polynesia");
-		N_("Papua New Guinea");
-		N_("Philippines");
-		N_("Pakistan");
-		N_("Poland");
-		N_("Saint Pierre and Miquelon");
-		N_("Pitcairn");
-		N_("Puerto Rico");
-		N_("Palestinian Territories");
-		N_("Portugal");
-		N_("Palau");
-		N_("Paraguay");
-		N_("Qatar");
-		N_("Réunion");
-		N_("Romania");
-		N_("Serbia");
-		N_("Russian Federation");
-		N_("Rwanda");
-		N_("Saudi Arabia");
-		N_("Solomon Islands");
-		N_("Seychelles");
-		N_("Sudan");
-		N_("Sweden");
-		N_("Singapore");
-		N_("Saint Helena");
-		N_("Slovenia");
-		N_("Svalbard and Jan Mayen");
-		N_("Slovakia");
-		N_("Sierra Leone");
-		N_("San Marino");
-		N_("Senegal");
-		N_("Somalia");
-		N_("Suriname");
-		N_("Sao Tome and Principe");
-		N_("El Salvador");
-		N_("Syrian Arab Republic");
-		N_("Swaziland");
-		N_("Turks and Caicos Islands");
-		N_("Chad");
-		N_("French Southern Territories");
-		N_("Togo");
-		N_("Thailand");
-		N_("Tajikistan");
-		N_("Tokelau");
-		N_("East Timor");
-		N_("Turkmenistan");
-		N_("Tunisia");
-		N_("Tonga");
-		N_("Turkey");
-		N_("Trinidad and Tobago");
-		N_("Tuvalu");
-		N_("Taiwan");
-		N_("Tanzania");
-		N_("Ukraine");
-		N_("Uganda");
-		N_("United States Minor Outlying Islands");
-		N_("United States");
-		N_("Uruguay");
-		N_("Uzbekistan");
-		N_("Vatican City State");
-		N_("Saint Vincent and the Grenadines");
-		N_("Venezuela");
-		N_("British Virgin Islands");
-		N_("United States Virgin Islands");
-		N_("Viet Nam");
-		N_("Vanuatu");
-		N_("Wallis and Futuna");
-		N_("Samoa");
-		N_("Yemen");
-		N_("Mayotte");
-		N_("Yugoslavia");
-		N_("South Africa");
-		N_("Zambia");
-		N_("Zimbabwe");
-
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
 		N_("&Undo");
@@ -602,6 +414,7 @@ class Translations
 		N_("Folder");
 		N_("&Choose");
 		N_("Cancel");
+		N_("&Cancel");
 		N_("Files of type:");
 		N_("Date Modified");
 		N_("Directories");
@@ -611,5 +424,17 @@ class Translations
 		N_("Copy &Link Location");
 		N_("Abort");
 		N_("Ignore");
+		N_("&Basic colors");
+		N_("&Pick Screen Color");
+		N_("&Custom colors");
+		N_("&Add to Custom Colors");
+		N_("Hu&e:");
+		N_("&Sat:");
+		N_("&Val:");
+		N_("&Red:");
+		N_("&Green:");
+		N_("Bl&ue:");
+		N_("Select Color");
+		N_("Cursor at %1, %2 Press ESC to cancel");
 	}
 };

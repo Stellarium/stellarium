@@ -63,6 +63,18 @@ Dobbs'', the user directory will be:
 C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
 \end{commands}
 
+The user data directory is unfortunately hidden by default. To make it accessible in the Windows file
+explorer, open an \program{Explorer} window and select \menu{Organize... > Folder and
+search options}. Make sure folders marked as hidden are now 
+displayed. Also, deselect the checkbox to ``hide known file name
+endings''.\footnote{This is a very confusing default setting and in fact
+  a security risk: Consider you receive an email with some file
+  \file{funny.png.exe} attached. Your explorer displays this as
+  \file{funny.png}. You double-click it, expecting to open some image
+  browser with a funny image. However, you start some unknown program
+  instead, and running this \file{.exe} executable program may turn
+  out to be anything but funny!}
+
 \item[screenshot save directory] Screenshots will be saved to the
   \file{Pictures/Stellarium} directory, although this can be changed with a command line option (see
   section~\ref{sec:CommandLineOptions}\footnote{Windows Vista users who do not run Stellarium with
@@ -82,7 +94,7 @@ C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
     Bundles}\footnote{\url{http://www.mactipsandtricks.com/articles/Wiley_HT_appBundles.lasso}}
   for more information.
 \item[user directory] This is the sub-directory 
-  \file{Library/Preferences/Stellarium/} (or
+  \file{Library/Preferences/Stellarium/} (or \\
   \file{\textasciitilde{}/Library/Application\ Support/Stellarium} on
   newest versions of Mac OS X) of the user's home
   directory.
@@ -98,8 +110,11 @@ C:\Users\Bob Dobbs\AppData\Roaming\Stellarium\
   \file{share/stellarium} sub-directory of the installation prefix,
   i.e., usually \file{/usr/share/stellarium} or
   \file{/usr/local/share/stellarium/}.
-\item[user directory] This is the \file{.stellarium} sub-directory
-  of user's home directory, i.e., \file{\textasciitilde{}/.stellarium/}.
+\item[user directory] This is the \file{.stellarium} sub-directory of
+  user's home directory, i.e.,
+  \file{\textasciitilde{}/.stellarium/}. This is a hidden folder, so
+  if you are using a graphical file browser, you may want to change
+  its settings to ``display hidden folders''.
 \item[screenshot save directory] Screenshots are saved to the user's
   home directory.
 \end{description}
@@ -151,22 +166,37 @@ it there.
 It is recommended to add new landscapes or sky cultures by creating the relevant files
 and directories within the user directory, leaving the installation
 directory unchanged. In this manner different users on a multi-user
-system can customise Stellarium without affecting the other users. 
+system can customise Stellarium without affecting the other users, and 
+updating Stellarium will not risk the loss of your own data. 
+
+
+\section{The Logfile}
+\label{sec:LogFile}
+
+Stellarium reports various events and confirmations to a logfile, \file{log.txt}, 
+in the \emph{user directory}. This has the same content as you can see on the console 
+on Linux when you start Stellarium on the command line. Normally you don't need to bother with its contents, 
+however, if Stellarium behaves unexpectedly, crashes, or shows other problems, a quick look into this 
+file may help to identify the problem. Also when you report a problem to the developers in the hope 
+that they (we) can 'fix' anything, this logfile is an essential ingredient to your report. 
+The logfile can also be displayed within the program: press \key{F1} to call the help panel, and select the Logfile tab. 
+
 
 \section{The Main Configuration File}
-%\label{the-main-configuration-file}
 \label{sec:ConfigurationFile}
 
 The main configuration file is read each time Stellarium starts, and
 settings such as the observer's location and display preferences are
 taken from it. Ideally this mechanism should be totally transparent to
-the user -- anything that is configurable should be configured ``in'' the
-program GUI. However, at time of writing Stellarium isn't quite complete
-in this respect, despite improvements in each version. Some settings, 
-esp.\ color values for lines, grids, etc.\ 
-can only be changed by directly editing the configuration file. This
-section describes some of the settings a user may wish to modify in this
-way, and how to do it.
+the user -- anything that is configurable should be configured ``in''
+the program GUI. However, at time of writing Stellarium isn't quite
+complete in this respect, despite improvements in each version. Some
+settings, esp.\ color values for lines, grids, etc.\ can only be
+changed by directly editing the configuration file.\footnote{Color
+  values can be edited interactively by the Text User Interface plugin
+  (see~\ref{sec:plugins:TextUserInterface}).} This section describes
+some of the settings a user may wish to modify in this way, and how to
+do it.
 
 If the configuration file does not exist in the \emph{user directory}
 when Stellarium is started (e.g., the first time the user starts the
@@ -180,8 +210,8 @@ system). The name of the configuration file is
   Line Options for details.}.
 
 The configuration file is a regular text file, so all you need to edit
-it is a text editor like \emph{Notepad} on Windows, \emph{Text Edit} on
-the Mac, or \emph{nano/vi/gedit/emacs/leafpad} etc.\ on Linux.
+it is a text editor like \program{Notepad} on Windows, \program{Text Edit} on
+the Mac, or \program{nano}/\program{vi}/\program{gedit}/\program{emacs}/\program{leafpad} etc.\ on Linux.
 
 %The following sub-sections contain details on how to make commonly used
 %modifications to the configuration file. 
@@ -189,10 +219,11 @@ A complete list of configuration file options and values may be found
 in appendix~\ref{sec:config.ini} Configuration File.
 
 
-
 \section{Getting Extra Data}
 \label{sec:ExtraData}
 
+\subsection{More Stars}
+\label{sec:ExtraData:stars}
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
 in the \emph{Tools} tab of the \emph{Configuration} dialog.
@@ -210,21 +241,26 @@ for a few more millennia without too great errors, but with degrading accuracy.
 
 Since V0.15 you can install extra data files which allow access to the
 numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
+from NASA's Jet Propulsion Laboratory (JPL)\cite{DE43x}. The data files have to be
 downloaded separately, and most users will likely not need them. DE430
 provides highly accurate data for the years $+1550\ldots+2650$, while
 DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
 archaeoastronomical research on Mesolithic landscapes. Outside these
 year ranges, positional computation falls back to VSOP87.
 
+The integration of this feature is still somewhat experimental.  Please compare to  JPL
+Horizon for quotable results.
+
 To enable use of these data, download the files from
 JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
   download from this directory if you are not running Linux!)}:
 
-\begin{description}
-\item[DE430] \file{linux\_p1550p2650.430} (md5 hash 707c4262533d52d59abaaaa5e69c5738)
-\item[DE431] \file{lnxm13000p17000.431} (md5 hash fad0f432ae18c330f9e14915fbf8960a)
-\end{description}
+\begin{tabular}{ccc}
+\toprule
+\emph{Ephemeris}&\emph{Filename}& \emph{MD5 hash}\\\midrule
+DE430& \file{linux\_p1550p2650.430} &\texttt{707c4262533d52d59abaaaa5e69c5738}\\
+DE431& \file{lnxm13000p17000.431}   &\texttt{fad0f432ae18c330f9e14915fbf8960a}\\\bottomrule
+\end{tabular}
 
 
 The files can be placed in a folder named \file{ephem} inside either
@@ -246,10 +282,137 @@ You activate use of either ephemeris in the configuration panel
 if the simulation time allows it. Outside of the valid times, VSOP87
 will always be used.
 
+\paragraph{Acknowledgement}
+The optional use of DE430/431 has been supported by the ESA Summer of
+Code 2015 initiative.
 
+\subsection{GPS Position}
+\label{sec:ExtraData:GPS}
+
+\noindent In the Location panel (see section~\ref{sec:gui:location})
+you can receive your location from a \indexterm{GPS} device.
+\newFeature{0.16} The exact way to receive GPS location depends on
+your operating system.
+
+\subsubsection{GPSD (Linux, Mac OS X only)}
+\label{sec:ExtraData:GPS:GPSD}
+
+On Linux, Mac-OS X and other Unixoid platforms, Stellarium preferrably
+should not connect directly to a GPS USB device, serial device,
+bluetooth device, etc., but uses a connection to the \program{gpsd}
+daemon running on a computer in your network which provides GPS
+services concurrently for any interested application. In most cases,
+this will be a \program{gpsd} running on your localhost, receiving
+data from some GPS device plugged in via USB.
+
+Please follow instructions by the \program{gpsd}
+authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
+configure this system daemon.  A few hints:
+\begin{itemize}
+\item On Ubuntu 16.04 and likely other systems, USB hotplug devices
+  are handled by the \program{udev} daemon which detects newly
+  plugged-in devices and creates device files in the \file{/dev}
+  directory. Unfortunately, most GPS devices use the Prolific 2303
+  chipset in their serial-to-USB converter and are identified as
+  such, without other unique information like serial numbers. 
+  This chipset is also used in other Serial-to-USB converter
+  cables, and to avoid conflicts the according rule has been disabled
+  by the release managers of Ubuntu.  In
+  \file{/lib/udev/60-gpsd.rules}, find the commented line and
+  re-activate it.
+
+\item If you have such an USB GPS mouse and USB-to-serial converters
+  for other purposes like for your telescope control, you must solve
+  the ``\program{udev} crisis'' in some other way to get
+  \program{gpsd} running. You may be able to find some property in
+  your device to uniquely identify this device and write an
+  \program{udev} rule to create the symlink in \file{/dev/gps0} to
+  which \program{gpsd} can then connect.
+
+\item You can also connect to another computer which runs
+  \program{gpsd}. This could be a little Raspberry Pi computer which
+  happens to be in your WiFi to allow localisation and time service.
+ To configure this, you must manually edit
+  \file{config.ini}. Find the \texttt{[gui]} section and edit
+\begin{configfile}
+[gui]
+# These values are used on non-Windows systems 
+# supporting GPSD
+gpsd_hostname   = "localhost"
+gpsd_port       = 2947 
+\end{configfile}
+Also, \program{gpsd} must be started with the \texttt{-G} parameter to
+enable this.
+\item Even your smartphone can be used as GPS data
+  source\footnote{Thanks to user Caysho for this hint.}: Apps like
+  \program{BlueNMEA} can provide these data for \program{gpsd}, but
+  you must make sure to configure hostname/IP Address and port number
+  correctly, for example
+  \begin{commands}
+ sudo gpsd -n -D8 -S 1001 tcp://192.168.1.101:4352
+  \end{commands}
+which means
+\begin{description}
+\item[-n] to start without a device connection
+\item[-D8] maximum debug level. When it works, use what suits you
+\item[-S 1001] provide service on port 1001
+\item[tcp] Use this address:port combination to receive data from (IP of
+  your smartphone, port shown on \program{BlueNMEA} screen).
+\end{description}
+\item In case you really don't want to use the \program{gpsd}, you can
+  use a directly connected device, see below. This is however not
+  recommended when you have \program{gpsd} available.
+\end{itemize}
+
+
+\subsubsection{NMEA Device}
+\label{sec:ExtraData:GPS:NMEA}
+
+This mode is primarily for Windows users, but also for Linux and Mac
+users who don't want to use \program{gpsd}.
+
+Virtually all GPS receivers are able to emit the standardized
+\indexterm{NMEA}-0183 messages which encode time, position, speed,
+satellite information and other data.  The standard originally
+required connection settings of 4800\,baud, 8 bit, no parity, one stop
+bit (8N1), however some devices come with faster transfer.
+
+Compatible devices today are connected on a ``virtual COM port'' via
+USB. Unfortunately the COM number seems to depend on the USB plug
+where you attach the receiver.  You can identify the port name (COM3,
+COM4, \ldots) in the Windows system configuration (Device Manager) or
+with the software that came with your device.\footnote{On Linux, this
+  may read \file{/dev/ttyUSB0}, \file{/dev/gps0} or similar.}
+
+If this is the only serial device, Stellarium should automatically
+connect to it regardless of configuration entries.  You cannot change
+the USB plug after you first have received a location fix.  If you
+have a device with non-standard baudrate or several serial devices on
+serial ports (e.g., your telescope?), you must find out which serial port is
+used by the GPS device and manually edit \file{config.ini}.  Find
+the \texttt{[gui]} section and edit
+\begin{configfile}
+[gui]
+# These values are used on Windows primarily.
+gps_interface     = "COM3"
+gps_baudrate      = 4800
+\end{configfile}
+From now on, always use the same USB plug configuration to connect GPS
+and telescope.\footnote{Again, for Linux the port number is defined in
+  order of hotplugging by \program{udev}. You should develop an
+  \program{udev} rule which adds a unique name and use this. In this
+  case, you may also need to add your user to the \texttt{dialout}
+  group (or whichever group owns your serial port).  Better yet, use
+  \program{gpsd} (see above).}
+If GPS lookup fails, see the logfile for diagnostic messages.
+
+\paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
+hardware. You can install a virtual COM port in your Windows Bluetooth
+settings and use a smartphone app like \program{BlueNMEA} to provide
+the NMEA strings.
 
 \chapter{Command Line Options}
-\label{command-line-options}
+%\label{command-line-options}
 \label{sec:CommandLineOptions}
 
 Stellarium's behaviour can be modified by providing parameters to the
@@ -267,11 +430,11 @@ Partial paths will be searched for inside the regular search paths
 unless they start with a ``\file{.}'', which may be used to explicitly
 specify a file in the current directory or similar.
 
-For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file
-\file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas
+For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file 
+\file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas 
 \file{-c\ ./my\_config.ini} can be used to explicitly say the file
 \file{my\_config.ini} in the current working directory.\\\midrule
--\/-restore-defaults & {[}none{]} & Stellarium will start with the default configuration. 
+-\/-restore-defaults &  [none]    & Stellarium will start with the default configuration. 
                                     Note: The old configuration file will be overwritten. \\\midrule
 -\/-user-dir         & path       & Specify the user data directory. \\\midrule
 -\/-screenshot-dir   & path       & Specify the directory to which screenshots will be saved. \\\midrule
@@ -287,15 +450,18 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-startup-script   & script name & The name of a script to run after the program has started. \\\midrule
 -\/-fov              & angle      & The initial field of view in degrees. \\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
+-\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
+                                    \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\\midrule
+-\/-spout-name       & name       & Use \texttt{name} as name of the Spout sender. Default name: \texttt{Stellarium}.\footnotemark[1]\\\midrule									
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnote{On Windows only}\\\midrule
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\\\midrule
 -\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
 -\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
 -\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\\midrule
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\\midrule
--\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2}\\\bottomrule
+-\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2 with Raspbian Jessie and VC4 drivers from February 2016. A driver update which makes this unnecessary should be available later in 2016.}\\\bottomrule
 \end{longtabu}
 
 \noindent \newFeature{0.15} If you want to avoid adding the same
@@ -326,6 +492,25 @@ stellarium --landscape=ocean
 
 %% GZ found in 2015:
 \noindent Note that console output (like \command{-\/-list-landscapes}) on Windows is not possible. 
+
+\section{Special Options}
+\label{sec:CommandLineOptions:Special}
+\subsection{Spout}\newFeature{0.15.1} 
+\label{sec:CommandLineOptions:Special:Spout}
+Apart from stand-alone use, Stellarium can be used as multimedia source in larger installations, in museums or science exhibitions. 
+\program{Spout}\footnote{\url{http://spout.zeal.co/}} is a technology which enables use of Stellarium's 
+output window as texture in DirectX applications on Windows. Simply start Stellarium with 
+the \texttt{-\/-spout=sky} command line option. (Currently \program{Spout} output is limited to the main window 
+without GUI panels, but this may change in future versions.) 
+Your master application must obviously embed a \program{Spout} receiver. 
+The default name of the \program{Spout} sender is \texttt{Stellarium}. If you need more than one instance of Stellarium acting as source, 
+you can use option \texttt{-\/-spout-name=StelSpout2} in addition to create another \program{Spout} sender without a name conflict. 
+In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-user-dir}. 
+
+This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
+driver extension running in OpenGL mode. Some NVidia GPUs work without this extension listed explicitly. 
+On a notebook with NVidia Optimus technology, make sure to launch Stellarium on the NVidia hardware. 
+For permanent setting, use the NVidia configuration dialog to configure Stellarium explicitly to run always on the NVidia card.
 
 %%% Local Variables: 
 %%% mode: latex

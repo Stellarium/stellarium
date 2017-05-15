@@ -16,56 +16,383 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelLocationMgr.hpp"
+#include "StelLocationMgr_p.hpp"
+
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelLocationMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelJsonParser.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QStringListModel>
 #include <QDebug>
 #include <QFile>
 #include <QDir>
-#include <QtNetwork/QNetworkInterface>
-#include <QtNetwork/QNetworkAccessManager>
+#include <QNetworkInterface>
+#include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QUrl>
 #include <QUrlQuery>
 #include <QSettings>
+#include <QTimeZone>
 
-StelLocationMgr::StelLocationMgr()
+TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
+
+#ifdef ENABLE_GPS
+#ifdef ENABLE_LIBGPS
+LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
+	: GPSLookupHelper(parent), ready(false)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
+	QString gpsdHostname=conf->value("gui/gpsd_hostname", "localhost").toString();
+	QString gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toString();
+
+	// Example almost straight from http://www.catb.org/gpsd/client-howto.html
+	gps_rec = new gpsmm(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
+	if(gps_rec->is_open())
+	{
+		ready = gps_rec->stream(WATCH_ENABLE|WATCH_JSON);
+	}
+	if(!ready)
+		qDebug()<<"libGPS lookup not ready, GPSD probably not running";
+}
+
+LibGPSLookupHelper::~LibGPSLookupHelper()
+{
+	delete gps_rec;
+}
+
+bool LibGPSLookupHelper::isReady()
+{
+	return ready;
+}
+
+void LibGPSLookupHelper::query()
+{
+	if(!ready)
+	{
+		emit queryError("GPSD helper not ready");
+		return;
+	}
+
+	StelLocation loc;
+
+	int tries=0;
+	int fixmode=0;
+	while (tries<10)
+	{
+		tries++;
+
+		if (!gps_rec->waiting(750000)) // argument usec. wait 0.75 sec. (example had 50s)
+		{
+			//qDebug() << " - waiting timed out after 0.75sec.";
+			continue;
+		}
+
+		struct gps_data_t* newdata;
+		if ((newdata = gps_rec->read()) == NULL)
+		{
+			emit queryError("GPSD query: Read error.");
+			return;
+		}
+		else
+		{
+// It is unclear why some data elements seem to be not filled by gps_rec.read().
+//			if (newdata->status==0) // no fix?
+//			{
+//				// This can happen indoors.
+//				qDebug() << "GPS has no fix.";
+//				emit gpsResult(false);
+//				return;
+//			}
+			if (newdata->online==0) // no device?
+			{
+				// This can happen when unplugging the GPS while running Stellarium,
+				// or running gpsd with no GPS receiver.
+				emit queryError("GPS seems offline. No fix.");
+				return;
+			}
+
+			fixmode=newdata->fix.mode; // 0:not_seen, 1:no_fix, 2:2Dfix(no alt), 3:3Dfix(perfect)
+			loc.longitude=newdata->fix.longitude;
+			loc.latitude=newdata->fix.latitude;
+			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
+			if (fixmode<3)
+			{
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
+			}
+			else
+			{
+				loc.altitude=newdata->fix.altitude;
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m, VDOP " << newdata->dop.vdop <<  "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
+				break; // escape from the tries loop
+			}
+		}
+	}
+
+	if (fixmode <2)
+	{
+		emit queryError("GPSD: Could not get valid position.");
+		return;
+	}
+	if (fixmode<3)
+	{
+		qDebug() << "Fix only quality " << fixmode << " after " << tries << " tries";
+	}
+	qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+
+	loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+	// Usually you don't leave your time zone with GPS.
+	loc.ianaTimeZone=StelApp::getInstance().getCore()->getCurrentTimeZone();
+	loc.isUserLocation=true;
+	loc.planetName="Earth";
+	loc.name=QString("GPS %1%2 %3%4")
+			.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
+			.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
+	emit queryFinished(loc);
+}
+
+#endif
+
+NMEALookupHelper::NMEALookupHelper(QObject *parent)
+	: GPSLookupHelper(parent), serial(NULL), nmea(NULL)
+{
+	//use RAII
+	// Getting a list of ports may enable auto-detection!
+	QList<QSerialPortInfo> portInfoList=QSerialPortInfo::availablePorts();
+
+	if (portInfoList.size()==0)
+	{
+		qDebug() << "No connected devices found. NMEA GPS lookup failed.";
+		return;
+	}
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+
+	// As long as we only have one, this is OK. Else we must do something about COM3, COM4 etc.
+	QSerialPortInfo portInfo;
+	if (portInfoList.size()==1)
+	{
+		portInfo=portInfoList.at(0);
+	}
+	else
+	{
+		#ifdef Q_OS_WIN
+		QString portName=conf->value("gui/gps_interface", "COM3").toString();
+		#else
+		QString portName=conf->value("gui/gps_interface", "ttyUSB0").toString();
+		#endif
+		bool portFound=false;
+		for (int i=0; i<portInfoList.size(); ++i)
+		{
+			QSerialPortInfo pi=portInfoList.at(i);
+			qDebug() << "Serial port list. Make sure you are using the right configuration.";
+			qDebug() << "Port: " << pi.portName();
+			qDebug() << "  SystemLocation:" << pi.systemLocation();
+			qDebug() << "  Description:"    << pi.description();
+			qDebug() << "  Manufacturer:"   << pi.manufacturer();
+			qDebug() << "  VendorID:"       << pi.vendorIdentifier();
+			qDebug() << "  ProductID:"      << pi.productIdentifier();
+			qDebug() << "  SerialNumber:"   << pi.serialNumber();
+			qDebug() << "  Busy:"           << pi.isBusy();
+			qDebug() << "  Valid:"          << pi.isValid();
+			qDebug() << "  Null:"           << pi.isNull();
+			if (pi.portName()==portName)
+			{
+				portInfo=pi;
+				portFound=true;
+			}
+		}
+		if (!portFound)
+		{
+			qDebug() << "Configured port" << portName << "not found. No GPS query.";
+			return;
+		}
+	}
+
+	// NMEA-0183 specifies device sends at 4800bps, 8N1. Some devices however send at 9600, allow this.
+	// baudrate is configurable via config
+	qint32 baudrate=conf->value("gui/gps_baudrate", 4800).toInt();
+
+	nmea=new QNmeaPositionInfoSource(QNmeaPositionInfoSource::RealTimeMode,this);
+	serial = new QSerialPort(portInfo, nmea);
+	serial->setBaudRate(baudrate);
+	serial->setDataBits(QSerialPort::Data8);
+	serial->setParity(QSerialPort::NoParity);
+	serial->setStopBits(QSerialPort::OneStop);
+	serial->setFlowControl(QSerialPort::NoFlowControl);
+	//serial->open(QIODevice::ReadOnly); // automatic by setDevice below.
+
+	nmea->setDevice(serial);
+	// TODO Find out what happens if some other serial device is connected? Just timeout/error?
+
+	qDebug() << "Query GPS NMEA device at port " << serial->portName();
+	connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
+	connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
+	connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
+}
+
+void NMEALookupHelper::query()
+{
+	if(isReady())
+	{
+		//kick off a update request
+		nmea->requestUpdate(3000);
+	}
+	else
+		emit queryError("NMEA helper not ready");
+}
+
+void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
+{
+	qDebug() << "NMEA updated";
+
+	QGeoCoordinate coord=update.coordinate();
+	QDateTime timestamp=update.timestamp();
+
+	qDebug() << " - time: " << timestamp.toString();
+	qDebug() << " - location: Long=" << coord.longitude() << " Lat=" << coord.latitude() << " Alt=" << coord.altitude();
+
+	if (update.isValid())
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		StelLocation loc;
+		loc.longitude=coord.longitude();
+		loc.latitude=coord.latitude();
+		// 2D fix may have only long/lat, invalid altitude.
+		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : (int) floor(coord.altitude()));
+		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		// Usually you don't leave your time zone with GPS.
+		loc.ianaTimeZone=core->getCurrentTimeZone();
+		loc.isUserLocation=true;
+		loc.planetName="Earth";
+		loc.name=QString("GPS %1%2 %3%4")
+				.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
+				.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
+
+		emit queryFinished(loc);
+	}
+	else
+	{
+		emit queryError("NMEA update: invalid package");
+	}
+}
+
+void NMEALookupHelper::nmeaError(QGeoPositionInfoSource::Error error)
+{
+	emit queryError(QString("NMEA general error: %1").arg(error));
+}
+
+void NMEALookupHelper::nmeaTimeout()
+{
+	emit queryError("NMEA timeout");
+}
+#endif
+
+StelLocationMgr::StelLocationMgr()
+	: nmeaHelper(NULL), libGpsHelper(NULL)
+{
+	// initialize the static QMap first if necessary.
+	if (locationDBToIANAtranslations.count()==0)
+	{
+		// reported in SF forum on 2017-03-27
+		locationDBToIANAtranslations.insert("Europe/Minsk",     "UTC+03:00");
+		locationDBToIANAtranslations.insert("Europe/Samara",    "UTC+04:00");
+		locationDBToIANAtranslations.insert("America/Cancun",   "UTC-05:00");
+		locationDBToIANAtranslations.insert("Asia/Kamchatka",   "UTC+12:00");
+		// Missing on Qt5.7/Win10 as of 2017-03-18.
+		locationDBToIANAtranslations.insert("Europe/Astrakhan", "UTC+04:00");
+		locationDBToIANAtranslations.insert("Europe/Ulyanovsk", "UTC+04:00");
+		locationDBToIANAtranslations.insert("Europe/Kirov",     "UTC+03:00");
+		locationDBToIANAtranslations.insert("Asia/Hebron",      "Asia/Jerusalem");
+		locationDBToIANAtranslations.insert("Asia/Gaza",        "Asia/Jerusalem"); // or use UTC+2:00? (political issue...)
+		locationDBToIANAtranslations.insert("Asia/Kolkata",     "Asia/Calcutta");
+		locationDBToIANAtranslations.insert("Asia/Kathmandu",   "Asia/Katmandu");
+		locationDBToIANAtranslations.insert("Asia/Tomsk",       "Asia/Novosibirsk");
+		locationDBToIANAtranslations.insert("Asia/Barnaul",     "UTC+07:00");
+		locationDBToIANAtranslations.insert("Asia/Ho_Chi_Minh", "Asia/Saigon");
+		locationDBToIANAtranslations.insert("Asia/Hovd",        "UTC+07:00");
+		locationDBToIANAtranslations.insert("America/Argentina/Buenos_Aires", "America/Buenos_Aires");
+		locationDBToIANAtranslations.insert("America/Argentina/Jujuy",        "America/Jujuy");
+		locationDBToIANAtranslations.insert("America/Argentina/Mendoza",      "America/Mendoza");
+		locationDBToIANAtranslations.insert("America/Argentina/Catamarca",    "America/Catamarca");
+		locationDBToIANAtranslations.insert("America/Argentina/Cordoba",      "America/Cordoba");
+		locationDBToIANAtranslations.insert("America/Indiana/Indianapolis",   "America/Indianapolis");
+		locationDBToIANAtranslations.insert("America/Kentucky/Louisville",    "America/Louisville");
+		locationDBToIANAtranslations.insert("America/Miquelon",               "UTC-03:00");  // Small Canadian island.
+		locationDBToIANAtranslations.insert("Africa/Asmara",     "Africa/Asmera");
+		locationDBToIANAtranslations.insert("Atlantic/Faroe",    "Atlantic/Faeroe");
+		locationDBToIANAtranslations.insert("Pacific/Pohnpei",   "Pacific/Ponape");
+		locationDBToIANAtranslations.insert("Pacific/Norfolk",   "UTC+11:00");
+		locationDBToIANAtranslations.insert("Pacific/Pitcairn",  "UTC-08:00");
+		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18:
+		// NOTE: We must add these following zones for lookup in both ways: When the binary file is being created for publication on Linux, Rangoon/Yangon is being translated.
+		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon");  // UTC+6:30 Yangon missing on Ubuntu/Qt5.5.1.
+		locationDBToIANAtranslations.insert("Asia/Yangon",       "Asia/Rangoon"); // This can translate from the binary location file back to the zone name as known on Windows.
+		locationDBToIANAtranslations.insert( "", "UTC");
+		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
+		// TODO later: create a text file in user data directory, and auto-update it weekly.
+	}
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+
 	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
-	// generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
+	if (conf->value("devel/convert_locations_list", false).toBool())
+		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
 	locations.unite(loadCities("data/user_locations.txt", true));
-
-	modelAllLocation = new QStringListModel(this);
-	modelAllLocation->setStringList(locations.keys());
-	modelPickedLocation = new QStringListModel(this); // keep empty for now.
 	
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
 }
 
+StelLocationMgr::~StelLocationMgr()
+{
+
+}
+
+StelLocationMgr::StelLocationMgr(const LocationList &locations)
+	: nmeaHelper(NULL), libGpsHelper(NULL)
+{
+	setLocations(locations);
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	// Init to Paris France because it's the center of the world.
+	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+}
+
+void StelLocationMgr::setLocations(const LocationList &locations)
+{
+	for(LocationList::const_iterator it = locations.constBegin();it!=locations.constEnd();++it)
+	{
+		this->locations.insert(it->getID(),*it);
+	}
+
+	emit locationListChanged();
+}
+
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
 {
+	qWarning() << "Generating a locations list...";
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
-	QFile binfile(binFilePath);
+	QFile binfile(StelFileMgr::findFile(binFilePath));
 	if(binfile.open(QIODevice::WriteOnly))
 	{
 		QDataStream out(&binfile);
-		out.setVersion(QDataStream::Qt_4_6);
+		out.setVersion(QDataStream::Qt_5_2);
 		out << cities;
 		binfile.close();
 	}
 }
 
-QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileName) const
+LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 {
 	QMap<QString, StelLocation> res;
 	QString cityDataPath = StelFileMgr::findFile(fileName);
@@ -82,20 +409,59 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 	if (fileName.endsWith(".gz"))
 	{
 		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
-		in.setVersion(QDataStream::Qt_4_6);
+		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
-		return res;
 	}
 	else
 	{
 		QDataStream in(&sourcefile);
-		in.setVersion(QDataStream::Qt_4_6);
+		in.setVersion(QDataStream::Qt_5_2);
 		in >> res;
-		return res;
 	}
+	// Now res has all location data. However, some timezone names are not available in various versions of Qt.
+	// Sanity checks: It seems we must translate timezone names. Quite a number on Windows, but also still some on Linux.
+	QList<QByteArray> availableTimeZoneList=QTimeZone::availableTimeZoneIds();
+	QStringList unknownTZlist;
+	QMap<QString, StelLocation>::iterator i=res.begin();
+	while (i!=res.end())
+	{
+		StelLocation loc=i.value();
+		if ((loc.ianaTimeZone!="LMST") &&  (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
+		{
+			// TZ name which is currently unknown to Qt detected. See if we can translate it, if not: complain to qDebug().
+			QString fixTZname=sanitizeTimezoneStringFromLocationDB(loc.ianaTimeZone);
+			if (availableTimeZoneList.contains(fixTZname.toUtf8()))
+			{
+				loc.ianaTimeZone=fixTZname;
+				i.value() = loc;
+			}
+			else
+			{
+				qDebug() << "StelLocationMgr::loadCitiesBin(): TimeZone for " << loc.name <<  " not found: " << loc.ianaTimeZone;
+				unknownTZlist.append(loc.ianaTimeZone);
+			}
+		}
+		++i;
+	}
+	if (unknownTZlist.length()>0)
+	{
+		unknownTZlist.removeDuplicates();
+		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
+		QStringList::const_iterator t=unknownTZlist.begin();
+		while (t!=unknownTZlist.end())
+		{
+			qDebug() << *t;
+			++t;
+		}
+		qDebug() << "Please report these timezone names (this logfile) to the Stellarium developers.";
+		// Note to developers: Fill those names and replacements to the map above.
+	}
+
+	return res;
 }
 
-QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation) const
+// Done in the following: TZ name sanitizing also for text file!
+LocationMap StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 {
 	// Load the cities from data file
 	QMap<QString, StelLocation> locations;
@@ -150,14 +516,6 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 	}
 	sourcefile.close();
 	return locations;
-}
-
-StelLocationMgr::~StelLocationMgr()
-{
-	delete modelPickedLocation;
-	modelPickedLocation=NULL;
-	delete modelAllLocation;
-	modelAllLocation=NULL;
 }
 
 static float parseAngle(const QString& s, bool* ok)
@@ -240,8 +598,8 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	// Add in the program
 	locations[loc.getID()]=loc;
 
-	// Append in the Qt model
-	modelAllLocation->setStringList(locations.keys());
+	//emit before saving the list
+	emit locationListChanged();
 
 	// Append to the user location file
 	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
@@ -297,8 +655,9 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 		return false;
 
 	locations.remove(id);
-	// Remove in the Qt model file
-	modelAllLocation->setStringList(locations.keys());
+
+	//emit before saving the list
+	emit locationListChanged();
 
 	// Resave the whole remaining user locations file
 	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
@@ -343,69 +702,94 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 // lookup location from IP address.
 void StelLocationMgr::locationFromIP()
 {
-	QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );	
+	QNetworkRequest req( QUrl( QString("http://freegeoip.net/json/") ) );
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
 }
 
+#ifdef ENABLE_GPS
+bool StelLocationMgr::locationFromGPS()
+{
+#ifdef ENABLE_LIBGPS
+	if(!libGpsHelper)
+	{
+		libGpsHelper = new LibGPSLookupHelper(this);
+		connect(libGpsHelper, SIGNAL(queryFinished(StelLocation)), this, SLOT(changeLocationFromGPSQuery(StelLocation)));
+		connect(libGpsHelper, SIGNAL(queryError(QString)), this, SLOT(gpsQueryError(QString)));
+	}
+	if(libGpsHelper->isReady())
+	{
+		libGpsHelper->query();
+		return true;
+	}
+#endif
+	if(!nmeaHelper)
+	{
+		nmeaHelper = new NMEALookupHelper(this);
+		connect(nmeaHelper, SIGNAL(queryFinished(StelLocation)), this, SLOT(changeLocationFromGPSQuery(StelLocation)));
+		connect(nmeaHelper, SIGNAL(queryError(QString)), this, SLOT(gpsQueryError(QString)));
+	}
+	if(nmeaHelper->isReady())
+	{
+		nmeaHelper->query();
+		return true;
+	}
+
+	emit gpsQueryFinished(false);
+	return false;
+}
+
+void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &loc)
+{
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0f, 0.0f);
+	emit gpsQueryFinished(true);
+}
+
+void StelLocationMgr::gpsQueryError(const QString &err)
+{
+	qWarning()<<err;
+	emit gpsQueryFinished(false);
+}
+#endif
+
 // slot that receives IP-based location data from the network.
 void StelLocationMgr::changeLocationFromNetworkLookup()
 {
-	StelLocation location;
 	StelCore *core=StelApp::getInstance().getCore();
 	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
 	if (!networkReply)
 	    return;
 	if (networkReply->error() == QNetworkReply::NoError) {
 		//success
-		// Tested with and without working network connection.
-		QByteArray answer=networkReply->readAll();
-		qDebug() << "IP answer:" << answer;
-		// answer/splitline example:     "222.222.222.222","AT","Austria","","","","","47.3333","13.3333","",""
-		// The parts from freegeoip are: ip,country_code,country_name,region_code,region_name,city,zipcode,latitude,longitude,metro_code,area_code
-		// Changed before 2014-11-21 to: 222.222.222.222,AT,Austria,"","","","",Europe/Vienna,47.33,13.33,0<CR><LF> (i.e., only empty strings have "")
-		//                          Now: ip,country_code,country_name,region_code,region_name,city,zipcode,Timezone_name,latitude,longitude,metro_code
-		// longitude and latitude should always be filled.
-		// A few tests:
-		if (answer.count(',') != 10 )
-		{
-			qDebug() << "StelLocationMgr: Malformatted answer in IP-based location lookup: \n\t" << answer;
-			qDebug() << "StelLocationMgr: Will not change location.";
-			networkReply->deleteLater();
-			return;
-		}
-		const QStringList& splitline = QString(answer).split(",");
-		if (splitline.count() != 11 )
-		{
-			qDebug() << "StelLocationMgr: Unexpected answer in IP-based location lookup: \n\t" << answer;
-			qDebug() << "StelLocationMgr: Will not change location.";
-			networkReply->deleteLater();
-			return;
-		}
-		// KEEP FOR DEBUGGING:
-		//for (int i=0; i<splitline.count(); ++i)
-		//	qDebug() << "Component" << i << "length:" << splitline.at(i).length() << ":" << splitline.at(i);
-		if ((splitline.at(8)=="\"\"") || (splitline.at(9)=="\"\"")) // empty coordinates?
-		{
-			qDebug() << "StelLocationMgr: Invalid coordinates from IP-based lookup. Ignoring: \n\t" << answer;
-			networkReply->deleteLater();
-			return;
-		}
-		float latitude=splitline.at(8).toFloat();
-		float longitude=splitline.at(9).toFloat();
-		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
-				QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t0")
-				.arg(splitline.at(5) == "\"\"" ? QString("%1, %2").arg(latitude).arg(longitude) : splitline.at(5))
-				.arg(splitline.at(4) == "\"\"" ? "IPregion"  : splitline.at(4))
-				.arg(splitline.at(2) == "\"\"" ? "IPcountry" : splitline.at(2)) // countryCode
-				.arg("X") // role: X=user-defined
-				.arg(0)   // population: unknown
-				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
-				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6));
-		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
-		core->moveObserverTo(location, 0.0f, 0.0f);
+		QVariantMap locMap = StelJsonParser::parse(networkReply->readAll()).toMap();
+		QString ipRegion = locMap.value("region_name").toString();
+		QString ipCity = locMap.value("city").toString();
+		QString ipCountry = locMap.value("country_name").toString(); // NOTE: Got a short name of country
+		QString ipCountryCode = locMap.value("country_code").toString();
+		QString ipTimeZone = locMap.value("time_zone").toString();
+		float latitude=locMap.value("latitude").toFloat();
+		float longitude=locMap.value("longitude").toFloat();
+
+		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
+
+		StelLocation loc;
+		loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
+		loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
+		loc.country = StelLocaleMgr::countryCodeToString(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+		loc.role    = QChar(0x0058); // char 'X'
+		loc.population = 0;
+		loc.latitude = latitude;
+		loc.longitude = longitude;
+		loc.altitude = 0;
+		loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
+		loc.planetName = "Earth";
+		loc.landscapeKey = "";
+
+		core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
+		core->moveObserverTo(loc, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
 	}
@@ -418,9 +802,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
-void StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
+LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
 {
-	pickedLocations.clear();
+	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
 	while (iter.hasNext())
 	{
@@ -429,15 +813,15 @@ void StelLocationMgr::pickLocationsNearby(const QString planetName, const float 
 		if ( (loc->planetName == planetName) &&
 				(StelLocation::distanceDegrees(longitude, latitude, loc->longitude, loc->latitude) <= radiusDegrees) )
 		{
-			pickedLocations.insert(iter.key(), iter.value());
+			results.insert(iter.key(), iter.value());
 		}
 	}
-	modelPickedLocation->setStringList(pickedLocations.keys());
+	return results;
 }
 
-void StelLocationMgr::pickLocationsInCountry(const QString country)
+LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 {
-	pickedLocations.clear();
+	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
 	while (iter.hasNext())
 	{
@@ -445,8 +829,39 @@ void StelLocationMgr::pickLocationsInCountry(const QString country)
 		const StelLocation *loc=&iter.value();
 		if (loc->country == country)
 		{
-			pickedLocations.insert(iter.key(), iter.value());
+			results.insert(iter.key(), iter.value());
 		}
 	}
-	modelPickedLocation->setStringList(pickedLocations.keys());
+	return results;
+}
+
+// Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.
+// If timezone name starts with "UTC", always return unchanged.
+// This is required to store timezone names exactly as we know them, and not mix ours and corrent-iana spelling flavour.
+// In practice, reverse lookup to locationDBToIANAtranslations
+QString StelLocationMgr::sanitizeTimezoneStringForLocationDB(QString tzString)
+{
+	if (tzString.startsWith("UTC"))
+		return tzString;
+	QByteArray res=locationDBToIANAtranslations.key(tzString.toUtf8(), "---");
+	if ( res != "---")
+		return QString(res);
+	return tzString;
+}
+
+// Attempt to translate a timezone name from those used in Stellarium's location database to a name which is valid
+// as ckeckable by QTimeZone::availableTimeZoneIds(). That list may be updated anytime and is known to differ
+// between OSes. Some spellings may be different, or in some cases some names get simply translated to "UTC+HH:MM" style.
+// The empty string gets translated to "UTC".
+QString StelLocationMgr::sanitizeTimezoneStringFromLocationDB(QString dbString)
+{
+	if (dbString.startsWith("UTC"))
+		return dbString;
+	// Maybe silences a debug later:
+	if (dbString=="")
+		return "UTC";
+	QByteArray res=locationDBToIANAtranslations.value(dbString.toUtf8(), "---");
+	if ( res != "---")
+		return QString(res);
+	return dbString;
 }

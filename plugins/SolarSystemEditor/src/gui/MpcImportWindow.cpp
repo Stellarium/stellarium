@@ -31,6 +31,7 @@
 #include "SolarSystem.hpp"
 #include "StelProgressController.hpp"
 #include "SearchDialog.hpp"
+#include "StelUtils.hpp"
 
 #include <QGuiApplication>
 #include <QClipboard>
@@ -51,7 +52,8 @@
 #include <QDir>
 
 MpcImportWindow::MpcImportWindow()
-	: importType(ImportType())
+	: StelDialog("SolarSystemEditorMPCimport")
+	, importType(ImportType())
 	, downloadReply(0)
 	, queryReply(0)
 	, downloadProgressBar(0)
@@ -59,7 +61,6 @@ MpcImportWindow::MpcImportWindow()
 	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
-	dialogName = "SolarSystemEditorMPCimport";
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
@@ -812,7 +813,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	{
 		qWarning() << "Download error: While trying to access"
 		           << reply->url().toString()
-		           << "the following error occured:"
+			   << "the following error occured:"
 		           << reply->errorString();
 		ui->labelQueryMessage->setText(reply->errorString());//TODO: Decide if this is a good idea
 		ui->labelQueryMessage->setVisible(true);
@@ -975,13 +976,16 @@ void MpcImportWindow::loadBookmarks()
 		{
 			QVariantMap jsonRoot = StelJsonParser::parse(bookmarksFile.readAll()).toMap();
 
+			QString fileVersion = jsonRoot.value("version").toString();
+			if (fileVersion.isEmpty())
+				fileVersion = "0.0.0";
 			loadBookmarksGroup(jsonRoot.value("mpcMinorPlanets").toMap(), bookmarks[MpcMinorPlanets]);
 			loadBookmarksGroup(jsonRoot.value("mpcComets").toMap(), bookmarks[MpcComets]);
 
 			bookmarksFile.close();
 
 			//If nothing was read, continue
-			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty())
+			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty() && StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_VERSION)==0)
 				return;
 		}
 	}
@@ -989,16 +993,15 @@ void MpcImportWindow::loadBookmarks()
 	qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
 
 	//Initialize with hard-coded values
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2011", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2011/Soft00Bright.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2013", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2013/Soft00Bright.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2014", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2014/Soft00Bright.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2015", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2015/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2016", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2016/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs", "http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", "http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "http://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", "http://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", "http://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
 	bookmarks[MpcComets].insert("MPCORB: comets", "http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
 
@@ -1043,6 +1046,8 @@ void MpcImportWindow::saveBookmarks()
 		QFile bookmarksFile(bookmarksFilePath);
 		if (bookmarksFile.open(QFile::WriteOnly | QFile::Truncate | QFile::Text))
 		{
+			jsonRoot.insert("version", SOLARSYSTEMEDITOR_VERSION);
+
 			QVariantMap minorPlanetsObject;
 			saveBookmarksGroup(bookmarks[MpcMinorPlanets], minorPlanetsObject);
 			//qDebug() << minorPlanetsObject.keys();

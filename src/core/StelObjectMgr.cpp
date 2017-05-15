@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,10 +34,9 @@
 #include <QDebug>
 #include <QStringList>
 
-StelObjectMgr::StelObjectMgr() : searchRadiusPixel(25.f), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.f), distanceWeight(1.f)
 {
 	setObjectName("StelObjectMgr");
-	objectPointerVisibility = true;
 }
 
 StelObjectMgr::~StelObjectMgr()
@@ -242,41 +242,22 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 	return result;
 }
 
-
-/*************************************************************************
- Find and return the list of at most maxNbItem objects auto-completing
- passed object I18 name
-*************************************************************************/
-QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
+/*****************************************************************************************
+ Find and return the list of at most maxNbItem objects auto-completing passed object name
+*******************************************************************************************/
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-
-	// For all StelObjectmodules..
-	foreach (const StelObjectModule* m, objectsModule)
+	if (maxNbItem <= 0)
 	{
-		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
-		result += matchingObj;
-		maxNbItem-=matchingObj.size();
+		return result;
 	}
 
-	result.sort();
-	return result;
-}
-
-/*************************************************************************
- Find and return the list of at most maxNbItem objects auto-completing
- passed object English name
-*************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-
 	// For all StelObjectmodules..
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
@@ -340,6 +321,7 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["SolarSystem:dwarf planet"] = "Dwarf planets";
 			result["SolarSystem:scattered disc object"] = "Scattered disc objects";
 			result["SolarSystem:Oort cloud object"] = "Oort cloud objects";
+			result["SolarSystem:sednoid"] = "Sednoids";
 		}
 		// Deep-sky objects by type + amateur catalogues
 		if (m->objectName()=="NebulaMgr")
@@ -380,6 +362,13 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
 			result["NebulaMgr:106"] = "Collinder Catalogue";
 			result["NebulaMgr:107"] = "Melotte Catalogue";
+			result["NebulaMgr:108"] = "New General Catalogue";
+			result["NebulaMgr:109"] = "Index Catalogue";
+			result["NebulaMgr:110"] = "Lynds' Catalogue of Bright Nebulae";
+			result["NebulaMgr:111"] = "Lynds' Catalogue of Dark Nebulae";
+			result["NebulaMgr:112"] = "Principal Galaxy Catalog";
+			result["NebulaMgr:113"] = "The Uppsala General Catalogue of Galaxies";
+			result["NebulaMgr:114"] = "Cederblad Catalog";
 			result["NebulaMgr:150"] = "Dwarf galaxies";
 			result["NebulaMgr:151"] = "Herschel 400 Catalogue";
 		}
@@ -388,7 +377,25 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 		{
 			result["StarMgr:0"] = "Interesting double stars";
 			result["StarMgr:1"] = "Interesting variable stars";
+			result["StarMgr:2"] = "Bright double stars";
+			result["StarMgr:3"] = "Bright variable stars";
 		}
 	}
 	return result;
+}
+
+QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
+{
+	QVariantMap map;
+	if (!obj)
+	{
+		qDebug() << "getObjectInfo WARNING - object not found";
+		map.insert("found", false);
+	}
+	else
+	{
+		map=obj->getInfoMap(StelApp::getInstance().getCore());
+		map.insert("found", true);
+	}
+	return map;
 }

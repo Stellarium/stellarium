@@ -76,12 +76,19 @@ public:
 	//! @param action the associated action. Connections are automatically done with the signals if relevant.
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
-			   const QPixmap& pixHover=QPixmap(),
-			   class StelAction* action=NULL, bool noBackground=false);
+		   const QPixmap& pixHover=QPixmap(),
+		   class StelAction* action=NULL, bool noBackground=false);
 	
+	//! Constructor
+	//! @param parent the parent item
+	//! @param pixOn the pixmap to display when the button is toggled
+	//! @param pixOff the pixmap to display when the button is not toggled
+	//! @param pixHover a pixmap slowly blended when mouse is over the button
+	//! @param actionId the id of the associated action. Connections are automatically done with the signals if relevant.
+	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
-			   const QPixmap& pixHover=QPixmap(),
-			   const QString& actionId=QString(), bool noBackground=false);
+		   const QPixmap& pixHover,
+		   const QString& actionId, bool noBackground=false);
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
@@ -92,8 +99,8 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	//! @param isTristate define whether the button is a tristate or an on/off button
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
-			   const QPixmap& pixHover=QPixmap(),
-			   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
+		   const QPixmap& pixHover,
+		   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
 	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
@@ -110,6 +117,11 @@ public:
 
 	//! Set the background pixmap of the button.
 	void setBackgroundPixmap(const QPixmap& newBackground);
+
+	//! While configuring buttons, call this with true when after key release
+	//! focus should go back to the sky (typical for bottom buttons;
+	//! left buttons call panels which receive focus after button press, so those should be configured with b=false)
+	void setFocusOnSky(bool b) { flagChangeFocus=b; }
 
 signals:
 	//! Triggered when the button state changes
@@ -150,6 +162,7 @@ private:
 	QPixmap pixBackground;
 
 	int checked;
+	bool flagChangeFocus;
 
 	QTimeLine* timeLine;
 	class StelAction* action;

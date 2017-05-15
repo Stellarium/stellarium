@@ -38,11 +38,11 @@
 #include "StelTranslator.hpp"
 
 PulsarsDialog::PulsarsDialog()
-	: psr(NULL)
+	: StelDialog("Pulsars")
+	, psr(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_pulsarsDialog;
-	dialogName = "Pulsars";
 }
 
 PulsarsDialog::~PulsarsDialog()
@@ -259,7 +259,7 @@ void PulsarsDialog::updateCompleteReceiver(void)
 
 void PulsarsDialog::restoreDefaults(void)
 {
-	qDebug() << "Pulsars::restoreDefaults";
+	qDebug() << "[Pulsars] Restore defaults...";
 	psr->restoreDefaults();
 	psr->readSettingsFromConfig();
 	updateGuiFromSettings();

@@ -1,7 +1,7 @@
 /****************************************************************************************************************************/
 
 QLabel {
-	color: rgb(3, 3, 3);
+        color: rgb(3, 3, 3);
 	font-size: 13px;
 	background: none;
 }
@@ -34,11 +34,11 @@ QFrame {
 }
 
 QFrame#viewContent {
-	background: rgb(0, 0, 0);
+        background: rgb(0, 0, 0);
 }
 
 QFrame#bottomResizeFrame {
-background:rgb(48, 49, 52);
+        background:rgb(48, 49, 52);
 }
 
 /*QWidget QFrame {
@@ -149,7 +149,7 @@ QLineEdit {
 	font-size: 12px;
 }
 
-QLineEdit[enabled="false"] {
+QLineEdit:disabled {
 	background: rgb(90, 90, 90);
 }
 
@@ -230,7 +230,7 @@ QPushButton {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
-QPushButton::Disabled {
+QPushButton::disabled {
         color: #f0f0f0;
 }
 
@@ -425,7 +425,7 @@ QGroupBox {
 	border: 1px solid rgba(0, 0, 0, 10%);
 	border-style: inset;
 	font-weight: bold;
-	border-radius: 10px;
+        border-radius: 10px;
 }
 
 QGroupBox::title {
@@ -718,6 +718,11 @@ QComboBox {
 	padding-left: 3px;
 }
 
+QComboBox:disabled, QSpinBox:disabled {
+        color: #f0f0f0;
+}
+
+
 QProgressBar {
 	border: 1px solid rgba(102, 102, 128, 50%);
 	border-radius: 2px;
@@ -764,6 +769,14 @@ QHeaderView::section {
         font-size: 12px;
         padding-left: 4px;
         border: 1px solid rgb(108, 108, 108);
+}
+
+QHeaderView::up-arrow {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QHeaderView::down-arrow {
+        image: url(:/graphicGui/spindown.png);
 }
 
 #configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {
@@ -865,4 +878,37 @@ QTableWidget::item:selected {
 	border: none;
 	border-radius: 0px;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(177, 130, 43), stop: 1 rgb(210, 207, 133));
+}
+
+QMenu {
+        background-color: rgb(86, 87, 90); /* sets background of the menu */
+        border: 1px solid rgb(0, 0, 0);
+        color: rgb(222, 222, 222);
+}
+
+QMenu::item {
+        /* sets background of menu item. set this to something non-transparent
+        if you want menu color and menu item color to be different */
+        background-color: rgb(66, 67, 70);
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+        background-color: rgb(101, 99, 33);
+}
+
+QTabWidget::pane {
+        margin-top: 0px;
+        border-top: none;
+}
+
+QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp, QPushButton#pushButtonMoveLensUp {
+        image: url(:/graphicGui/spinup.png);
+}
+
+QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown, QPushButton#pushButtonMoveLensDown {
+        image: url(:/graphicGui/spindown.png);
+}
+
+QLabel#lensNote {
+        margin-left: 5px;
 }

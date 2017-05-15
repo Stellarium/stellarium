@@ -151,7 +151,7 @@ void Quasars::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Quasars"))
 		{
-			qDebug() << "Quasars: no Quasars section exists in main config file - creating with defaults";
+			qDebug() << "[Quasars] No Quasars section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -178,7 +178,7 @@ void Quasars::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Quasars: init error:" << e.what();
+		qWarning() << "[Quasars] init error:" << e.what();
 		return;
 	}
 
@@ -199,11 +199,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "Quasars: quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Quasars: loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
+	qDebug() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 
@@ -261,9 +261,7 @@ void Quasars::drawPointer(StelCore* core, StelPainter& painter)
 		const Vec3f& c(obj->getInfoColor());
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.setBlending(true);
 		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
@@ -324,79 +322,13 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (!flagShowQuasars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString qson;
-	bool find;
-	foreach(const QuasarP& quasar, QSO)
+	if (flagShowQuasars)
 	{
-		qson = quasar->getNameI18n();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (qson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << qson;
-		}
+		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
 	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
-	return result;
-}
-
-QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
-{
-	QStringList result;
-	if (!flagShowQuasars)
-		return result;
-
-	if (maxNbItem==0)
-		return result;
-
-	QString qson;
-	bool find;
-	foreach(const QuasarP& quasar, QSO)
-	{
-		qson = quasar->getEnglishName();
-		find = false;
-		if (useStartOfWords)
-		{
-			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
-		}
-		else
-		{
-			if (qson.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-		{
-			result << qson;
-		}
-	}
-
-	result.sort();
-	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
-
 	return result;
 }
 
@@ -435,11 +367,11 @@ void Quasars::restoreDefaultJsonFile(void)
 	QFile src(":/Quasars/quasars.json");
 	if (!src.copy(catalogJsonPath))
 	{
-		qWarning() << "Quasars: cannot copy json resource to" + QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "[Quasars] Cannot copy json resource to" + QDir::toNativeSeparators(catalogJsonPath);
 	}
 	else
 	{
-		qDebug() << "Quasars: copied default quasars.json to" << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug() << "[Quasars] Copied default quasars.json to" << QDir::toNativeSeparators(catalogJsonPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(catalogJsonPath);
@@ -462,7 +394,7 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 	QFile old(catalogJsonPath);
 	if (!old.exists())
 	{
-		qWarning() << "Quasars: no file to backup";
+		qWarning() << "[Quasars] No file to backup";
 		return false;
 	}
 
@@ -476,14 +408,14 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Quasars: WARNING - could not remove old quasars.json file";
+				qWarning() << "[Quasars] WARNING - could not remove old quasars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Quasars: WARNING - failed to copy quasars.json to quasars.json.old";
+		qWarning() << "[Quasars] WARNING - failed to copy quasars.json to quasars.json.old";
 		return false;
 	}
 
@@ -509,7 +441,7 @@ QVariantMap Quasars::loadQSOMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "[Quasars] Cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
 		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
@@ -546,7 +478,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "[Quasars] Cannot open" << QDir::toNativeSeparators(catalogJsonPath);
 		return jsonVersion;
 	}
 
@@ -558,7 +490,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	}
 
 	catalogJsonFile.close();
-	qDebug() << "Quasars: version of the format of the catalog:" << jsonVersion;
+	qDebug() << "[Quasars] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -567,7 +499,7 @@ bool Quasars::checkJsonFileFormat()
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "[Quasars] Cannot open" << QDir::toNativeSeparators(catalogJsonPath);
 		return false;
 	}
 
@@ -579,7 +511,7 @@ bool Quasars::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Quasars: file format is wrong! Error:" << e.what();
+		qDebug() << "[Quasars] File format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -637,7 +569,7 @@ void Quasars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
-	setMarkerColor(conf->value("marker_color", "1.0,0.5,0.4").toString());
+	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "1.0,0.5,0.4").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 
@@ -654,7 +586,7 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("distribution_enabled", getDisplayMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_quasars_button", flagShowQuasarsButton);
-	conf->setValue("marker_color", getMarkerColor());
+	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor()));
 
 	conf->endGroup();
 }
@@ -667,7 +599,7 @@ int Quasars::getSecondsToUpdate(void)
 
 void Quasars::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
 		updateJSON();
 }
 
@@ -675,12 +607,12 @@ void Quasars::updateJSON(void)
 {
 	if (updateState==Quasars::Updating)
 	{
-		qWarning() << "Quasars: already updating...  will not start again current update is complete.";
+		qWarning() << "[Quasars] Already updating...  will not start again current update is complete.";
 		return;
 	}
 	else
 	{
-		qDebug() << "Quasars: starting update...";
+		qDebug() << "[Quasars] Starting update...";
 	}
 
 	lastUpdate = QDateTime::currentDateTime();
@@ -711,7 +643,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Quasars: FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "[Quasars] FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -719,7 +651,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
 		if (jsonFilePath.isEmpty())
 		{
-			qWarning() << "Quasars: cannot write JSON data to file:" << QDir::toNativeSeparators(jsonFilePath);
+			qWarning() << "[Quasars] Cannot write JSON data to file:" << QDir::toNativeSeparators(jsonFilePath);
 			return;
 		}
 		QFile jsonFile(jsonFilePath);
@@ -796,15 +728,14 @@ void Quasars::setDisplayMode(bool b)
 	Quasar::distributionMode=b;
 }
 
-QString Quasars::getMarkerColor()
+Vec3f Quasars::getMarkerColor()
 {
-	Vec3f c = Quasar::markerColor;
-	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+	return Quasar::markerColor;
 }
 
-void Quasars::setMarkerColor(QString c)
+void Quasars::setMarkerColor(const Vec3f &c)
 {
-	Quasar::markerColor = StelUtils::strToVec3f(c);
+	Quasar::markerColor = c;
 }
 
 void Quasars::reloadCatalog(void)
@@ -826,5 +757,14 @@ void Quasars::reloadCatalog(void)
 	{
 		// Restore selection...
 		objMgr->setSelectedObject(selectedObject);
+	}
+}
+
+void Quasars::setFlagShowQuasars(bool b)
+{
+	if (b!=flagShowQuasars)
+	{
+		flagShowQuasars=b;
+		emit flagQuasarsVisibilityChanged(b);
 	}
 }

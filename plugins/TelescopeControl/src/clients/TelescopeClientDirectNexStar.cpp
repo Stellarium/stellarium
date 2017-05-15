@@ -74,9 +74,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	
 	#ifdef Q_OS_WIN
 	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
-		serialDeviceName = "\\\\.\\" + serialDeviceName;//"\\.\COMxx", not sure if it will work
-	else
-		serialDeviceName = serialDeviceName;
+		serialDeviceName = "\\\\.\\" + serialDeviceName; // "\\.\COMxx", not sure if it will work
 	#endif //Q_OS_WIN
 	
 	//Try to establish a connection to the telescope
@@ -96,8 +94,10 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 }
 
 //! queues a GOTO command
-void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos)
+void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
+	Q_UNUSED(selectObject);
+
 	if (!isConnected())
 		return;
 
@@ -105,7 +105,7 @@ void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos)
 	if (equinox == EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
-		position = core->j2000ToEquinoxEqu(j2000Pos);
+		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
 	}
 
 	//if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
@@ -218,7 +218,7 @@ void TelescopeClientDirectNexStar::sendPosition(unsigned int ra_int, int dec_int
 	if (equinox == EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
-		j2000Position = core->equinoxEquToJ2000(position);
+		j2000Position = core->equinoxEquToJ2000(position, StelCore::RefractionOff);
 	}
 	interpolatedPosition.add(j2000Position, getNow(), server_micros, status);
 }

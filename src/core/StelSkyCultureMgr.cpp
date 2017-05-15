@@ -1,17 +1,17 @@
 /*
  * Stellarium
  * Copyright (C) 2006 Fabien Chereau
- *
+ * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -20,6 +20,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelIniParser.hpp"
 
@@ -34,7 +35,31 @@
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
-	updateListOfAvailableSkyCultures();
+	setObjectName("StelSkyCultureMgr");
+
+	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
+	
+	foreach (const QString& dir, cultureDirNames)
+	{
+		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
+		if (pdFile.isEmpty())
+		{
+			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << QDir::toNativeSeparators(dir);
+			return;
+		}
+		QSettings pd(pdFile, StelIniFormat);
+		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
+		dirToNameEnglish[dir].author = pd.value("info/author").toString();
+		QString boundaries = pd.value("info/boundaries", "none").toString();
+		int boundariesIdx = -1;
+		if (boundaries.contains("generic", Qt::CaseInsensitive))
+			boundariesIdx = 0;
+		else if (boundaries.contains("own", Qt::CaseInsensitive))
+			boundariesIdx = 1;
+		else
+			boundariesIdx = -1;
+		dirToNameEnglish[dir].boundariesIdx = boundariesIdx;
+	}	
 }
 
 
@@ -50,37 +75,13 @@ void StelSkyCultureMgr::init()
 	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
-void StelSkyCultureMgr::updateListOfAvailableSkyCultures()
-{
-	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
-	dirToNameEnglish.clear();
-	foreach (const QString& dir, cultureDirNames)
-	{
-		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
-		if (pdFile.isEmpty())
-		{
-			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir"
-				   << QDir::toNativeSeparators(dir);
-			return;
-		}
-		QSettings pd(pdFile, StelIniFormat);
-		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
-		dirToNameEnglish[dir].author = pd.value("info/author").toString();
-	}
-
-	if (!currentSkyCultureDir.isEmpty() && !dirToNameEnglish.contains(currentSkyCultureDir))
-	{
-		if (getCurrentSkyCultureID() == defaultSkyCultureID)
-		{
-			setDefaultSkyCultureID(dirToNameEnglish.firstKey());
-		}
-		setCurrentSkyCultureID(defaultSkyCultureID);
-	}
-}
-
 //! Set the current sky culture from the passed directory
 bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {
+	//prevent unnecessary changes
+	if(cultureDir==currentSkyCultureDir)
+		return false;
+
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
@@ -89,7 +90,8 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	}
 	currentSkyCultureDir = cultureDir;
 	currentSkyCulture = dirToNameEnglish[cultureDir];
-	StelApp::getInstance().updateSkyCulture();
+
+	emit currentSkyCultureChanged(currentSkyCultureDir);
 	return true;
 }
 
@@ -106,12 +108,30 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("localization/sky_culture", id);
+
+	emit defaultSkyCultureChanged(id);
 	return true;
 }
+	
+QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
+{
+	return q_(currentSkyCulture.englishName);
+}
 
-QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
+QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
+{
+	return currentSkyCulture.englishName;
+}
 
-QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const {return currentSkyCulture.englishName;}
+int StelSkyCultureMgr::getCurrentSkyCultureBoundariesIdx() const
+{
+	return currentSkyCulture.boundariesIdx;
+}
+
+bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
+{
+	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
+}
 
 //! returns newline delimited list of human readable culture names in english
 QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
@@ -144,6 +164,39 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 QStringList StelSkyCultureMgr::getSkyCultureListIDs(void)
 {
 	return dirToNameEnglish.keys();
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
+{
+	QString skyCultureId = getCurrentSkyCultureID();
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+	{
+		lang = lang.split("_").at(0);
+	}
+	QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
+	if (descPath.isEmpty())
+	{
+		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
+		if (descPath.isEmpty())
+			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
+	}
+
+	if (descPath.isEmpty())
+	{
+		return q_("No description");
+	}
+	else
+	{
+		QFile f(descPath);
+		QString htmlFile;
+		if(f.open(QIODevice::ReadOnly))
+		{
+			htmlFile = QString::fromUtf8(f.readAll());
+			f.close();
+		}
+		return htmlFile;
+	}
 }
 
 QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)

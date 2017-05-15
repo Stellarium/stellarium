@@ -61,11 +61,7 @@ private:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString a description of the constellation.
-	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const
-	{
-		if (flags&Name) return getNameI18n() + "(" + getShortName() + ")";
-		else return "";
-	}
+	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const;
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
@@ -107,8 +103,8 @@ private:
 
 	//! Get the translated name for the Constellation.
 	QString getNameI18n() const {return nameI18;}
-	//! Get the English name for the Constellation (returns the abbreviation).
-	QString getEnglishName() const {return abbreviation;}
+	//! Get the English name for the Constellation.
+	QString getEnglishName() const {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.
@@ -160,6 +156,7 @@ private:
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
 	//! This MUST be filled and be unique within a sky culture.
 	QString abbreviation;
+	QString context;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
 	Vec3d XYname;
@@ -170,7 +167,7 @@ private:
 	//! Month of end visibility of constellation (seasonal rules)
 	int endSeason;
 	//! List of stars forming the segments
-	StelObjectP* asterism;
+	StelObjectP* constellation;
 
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;
@@ -188,6 +185,9 @@ private:
 
 	static bool singleSelected;	
 	static bool seasonalRuleEnabled;
+	// set by ConstellationMgr to fade out art on small FOV values
+	// see LP:#1294483
+	static float artIntensityFovScale;
 };
 
 #endif // _CONSTELLATION_HPP_

@@ -1,0 +1,564 @@
+/*
+ * Stellarium
+ * Copyright (C) 2016 Florian Schaukowitsch
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+/*!
+
+\page remoteControlWeb %RemoteControl plugin web interface
+
+\tableofcontents
+
+The \ref remoteControlDoc "RemoteControl plugin", by default, provides a HTML web interface through the same integrated HTTP
+server that serves the \ref remoteControlApi "RemoteControl API". All content found in the <tt>data/webroot</tt> folder is served.
+Note that the \c /api/ path is reserved for the \ref remoteControlApi "HTTP API", and therefore can not be used as a folder.
+The <tt>index.html</tt> file is mapped to the root, so you can access it using http://localhost:8090 with the default port setting
+of 8090. A slightly modified alternative interface (mainly larger buttons for now) for 7" tablets and other touch devices
+is available at http://localhost:8090/tablet7in.html.
+
+A reasonably modern browser is required to access the interface. Some features of <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5</a>
+and <a href="https://developer.mozilla.org/en/docs/Web/CSS/CSS3">CSS3</a> are used.
+
+The interface heavily relies on <a href="https://jquery.com/">jQuery</a> for easier JavaScript coding. The code is structured into modules,
+and loaded using <a href="http://requirejs.org/">require.js</a>, which automatically resolves dependencies and load order.
+
+\section remoteControlWebStructure File and directory structure
+
+Note that not all files are listed here, only those of special interest.
+
+- webroot/ - root directory
+    - index.html - Default interface, also mapped to the root folder
+    - style.css - Main stylesheet
+    - tablet7in.html - Modified interface for tablet devices
+    - style_tablet7in.css - Additional stylesheet for tablet7in.html
+    - translate_files - Defines which files are passed through StelTranslator, see \ref remoteControlWebTranslation
+    - iframestyle.css - defines the style for internal frames (landscape description, etc.)
+    - /js/ - Contains the JavaScript files required for the interfaces
+        - main.js - This is the configuration file for require.js. Loads \ref rcUiMainui as main module.
+        - settings.js - Contains some configuration options for the web interface
+        - translationdata.js - Auto-generated file containing strings to translate through StelTranslator, see \ref remoteControlWebTranslation
+        - /api/ - Contains .js modules that define the connection to the \ref remoteControlApi "RemoteControl API"
+            - \ref rcApiRemotecontrol
+            - \ref rcApiActions
+            - \ref rcApiFlags
+            - \ref rcApiLocation
+            - \ref rcApiProperties
+            - \ref rcApiScripts
+            - \ref rcApiSearch
+            - \ref rcApiTime
+            - \ref rcApiUpdatequeue
+            - \ref rcApiViewcontrol
+            - \ref rcApiViewoptions
+        - /ui/ - Contains UI-related .js modules which depend on the /api/ .js modules
+            - \ref rcUiMainui
+            - \ref rcUiActions
+            - \ref rcUiCombobox
+            - \ref rcUiJqueryuifixes
+            - \ref rcUiLocation
+            - \ref rcUiScripts
+            - \ref rcUiSearch
+            - \ref rcUiTime
+            - \ref rcUiViewcontrol
+            - \ref rcUiViewoptions
+
+\section remoteControlWebEdit Editing the interface
+
+With knowledge of HTML, CSS and JavaScript (the latter not required for basic modifications), the interface can be customized.
+
+\subsection remoteControlWebBasic Basic extension
+
+When using the standard JavaScript provided, they allow to use pre-defined CSS "marker" classes which do not style the element per-se (i.e. have no entries in the .css files),
+but allow you to add functionality to HTML elements without editing the JavaScript code.
+Some of these classes also allow you to add further attributes to the element
+(usually <a href="https://developer.mozilla.org/en/docs/Web/Guide/HTML/Using_data_attributes">HTML5 data attributes</a>)
+to further customize their behaviour.
+
+\subsubsection remoteControlWebUIClasses UI control classes
+
+Some classes allow generating UI controls that are similar to what you expect for desktop apps. These use <a href="https://jqueryui.com/">jQuery UI</a> with
+some modifications.
+
+\paragraph remoteControlWebUIspinner spinner
+If added to an HTML \c input element, it sets the control up as a numerical Spinner widget (using jQuery UI: https://api.jqueryui.com/spinner/).
+It supports the following optional parameters:
+- \p data-min - Defines the minimum value of the spinner
+- \p data-max - Defines the maximum value of the spinner
+- \p data-step - Defines the desired step size of the spinner, default is 1. May be different from the number format.
+- \p data-numberformat - Defines how the number is formatted, using <a href="https://github.com/jquery/globalize/blob/v0.1.1/README.md#numbers">globalize.js 0.1.1 syntax</a>
+
+The element will emit the custom \c spinuserinput event whenever the value changes (either through the buttons or direct keyboard input).
+An example, showing how a spinner is created and handled:
+\code
+//make a spinner from -50 to 50, always showing 2 decimal points and stepping 0.1 per click
+<input id="myspinner" class="spinner" data-min="-50" data-max="50" data-step="0.1" data-numberformat="n2"/>
+
+//input handling in javascript
+$("#myspinner").on("spinuserinput", function(evt,ui) {
+    //print the new value
+    console.log(ui.value);
+});
+\endcode
+
+\paragraph remoteControlWebUIslider slider
+If added to an HTML \c div element, it sets the control up as a numerical slider widget (using jQuery UI: https://api.jqueryui.com/slider/).
+It supports the following optional parameters:
+- \p data-min - Defines the minimum value of the slider
+- \p data-max - Defines the maximum value of the slider
+- \p data-step - Defines the desired step size of the slider, default is 1. May be different from the number format.
+
+The element will emit the \c slide event when the slider is moved.
+\code
+//make a slider from -50 to 50, stepsize 0.1
+<div id="myslider" class="slider" data-min="-50" data-max="50" data-step="0.1"/>
+
+//input handling in javascript
+$("#myslider").on("slide", function(evt,ui) {
+    //print the new value
+    console.log(ui.value);
+});
+\endcode
+
+\paragraph remoteControlWebUIjquerybutton jquerybutton
+If added to an HTML \c button element, it converts it to a <a href="https://jqueryui.com/button/">jQuery UI button</a>.
+This is mainly a cosmetic operation.
+
+\paragraph remoteControlWebUIselectmenu selectmenu
+If added to an HTML \c select element, it creates a <a href="https://jqueryui.com/selectmenu/">jQuery UI selectmenu</a> from it.
+This allows simple popup selection menus (like a QComboBox).
+
+\subsubsection remoteControlWebProp Special behaviour classes
+These classes allow automatic connection to StelProperty and StelAction elements defined in Stellarium, allowing particularly easy
+extension of the web interface.
+
+\paragraph remoteControlWebstelproperty stelproperty (Connection to StelProperty)
+Allows direct connection of an element to a StelProperty, meaning the element is automatically updated
+whenever the value in Stellarium changes --- regardless of the source of the change: it can come from the main GUI, scripting, or even
+other RemoteControl web interface instances! Together with the \ref remoteControlWebUIClasses listed above, this allows closely and easily recreating
+standard Stellarium interface elements. This is supported for:
+- \c input elements with the \c spinner class (for numerical properties)\n
+    The StelProperty to use is identified by the standard \c input attribute \p name.
+    Updates the \p value property of the \c input when the StelProperty changes, and reacts to \c spinuserinput events to update the property
+
+- \c input elements of type \c checkbox (`<input type="checkbox">` (for boolean properties)\n
+    The StelProperty to use is identified by the standard \c input attribute \p name.
+    Uses the \p checked property and the \c click event.
+
+- \c div elements with the \c slider class (for numerical properties)\n
+    The StelProperty to use is identified by the custom attribute \p data-prop.
+    Connects to the \c slider widget property \p value.
+
+- \c select elements (also supports the optional \c selectmenu classs)\n
+    The StelProperty to use is identified by the standard \c select attribute \p name.
+    Sets the \c option that has the same \p value as the StelProperty value.
+    Useful for single selection out of a list of possibilities.
+
+- \c span elements, for read-only property display with optional number format\n
+    The StelProperty to use is identified by the custom attribute \p data-prop.
+    The value is displayed using the element's text content.
+    The optional \p data-numberformat attribute is used for the number format
+    using [globalize.js 0.1.1 syntax](https://github.com/jquery/globalize/blob/v0.1.1/README.md#numbers)
+
+- \c button or `input[type="button"]` elements, for write-only setting of a StelProperty to a pre-defined value when clicked\n
+    The StelProperty to use is identified by the standard attribute \p name,
+    and the value to set it to is defined by the attribute \p value.
+
+An example, setting up a spinner for the \c MilkyWay.intensity StelProperty:
+\code{.html}
+<!-- this is all that is required, the rest is done automatically -->
+<input class="spinner stelproperty" name="MilkyWay.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/>
+\endcode
+
+Many more examples can be found by studying the `index.html` code.
+
+\paragraph remoteControlWebstelaction stelaction (Connection to StelAction)
+When this class is added to \c button elements or \c input elements of `type="button"` or `type="checkbox"`,
+this connects the control to a StelAction. The action is identified by the \p name attribute.
+If the action is a boolean action (i.e. StelAction::isCheckable is true), checkboxes show the current state of the action,
+and buttons get the \c active CSS class assigned if the action is currently true.
+
+Examples:
+\code{.html}
+<!-- This is how the main bottom button bar is defined -->
+<ul class="ui-corner-all ui-widget-content button32list margin-vertical">
+      <li><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
+      <li><button class="stelaction icon32 btConstellationLabels" name="actionShow_Constellation_Labels"></button></li>
+      <li><button class="stelaction icon32 btConstellationArt" name="actionShow_Constellation_Art"></button></li>
+      <li><button class="stelaction icon32 btEquatorialGrid" name="actionShow_Equatorial_Grid"></button></li>
+      <li><button class="stelaction icon32 btAzimuthalGrid" name="actionShow_Azimuthal_Grid"></button></li>
+      <li><button class="stelaction icon32 btGround" name="actionShow_Ground"></button></li>
+      <li><button class="stelaction icon32 btCardinalPoints" name="actionShow_Cardinal_Points"></button></li>
+      <li><button class="stelaction icon32 btAtmosphere" name="actionShow_Atmosphere"></button></li>
+      <li><button class="stelaction icon32 btNebula" name="actionShow_Nebulas"></button></li>
+      <li><button class="stelaction icon32 btPlanets" name="actionShow_Planets_Labels"></button></li>
+      <li><button class="stelaction icon32 btEquatorialMount" name="actionSwitch_Equatorial_Mount"></button></li>
+      <li><button class="stelaction icon32 btGotoSelectedObject" name="actionSet_Tracking"></button></li>
+      <li><button class="stelaction icon32 btNightView" name="actionShow_Night_Mode"></button></li>
+      <li><button class="stelaction icon32 btFullScreen" name="actionSet_Full_Screen_Global"></button></li>
+</ul>
+
+<!-- This is how to set up checkboxes -->
+<label><input type="checkbox" class="stelaction" name="actionShow_Planets" /><?= tr("Show Solar System objects")?></label>
+<label><input type="checkbox" class="stelaction" name="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
+<label><input type="checkbox" class="stelaction" name="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
+\endcode
+
+\paragraph remoteControlWebStelssc stelssc (Direct script execution)
+This class allows you to define buttons that directly execute Stellarium \ref scripting code.
+Supported for \c button and \c input elements of type \p button. The code to execute should be stored inside
+the element's \p value property. If the custom attribute \p data-useincludes attribute is added (with any value),
+the default include folder is added for optional includes, but this is not recommended unless necessary.
+
+An example:
+\code{.html}
+<!-- some buttons which move the view to predefined angles -->
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 0., 3.)">0&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 30., 3.)">30&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 60., 3.)">60&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 90., 3.)">90&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 120., 3.)">120&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 150., 3.)">150&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 180., 3.)">180&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 210., 3.)">210&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 240., 3.)">240&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 270., 3.)">270&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 300., 3.)">300&deg;</button>
+<button type="button" class="stelssc" value="core.moveToAltAzi(0., 330., 3.)">330&deg;</button>
+\endcode
+
+\warning
+The \c stelssc approach has some disadvantages, so try to use it only when necessary:
+- causes a larger overhead for Stellarium internally than other methods provided by the web interface
+- the scripts can't be executed if another script is currently running, an error message will be shown in this case
+    - this also includes the user clicking too fast on any \c stelssc buttons!
+
+\paragraph remoteControlWebStelplugin stelplugin (Plugin-specific sections)
+With the CSS class \c stelplugin, one can create special HTML sections that
+are only shown when a specified [plugin](\ref plugins) is currently loaded by Stellarium.
+If the plugin is not loaded, the whole element and all it's children are removed from the DOM.
+This class can be added to any element. The plugin which is required is defined by the
+\c data-plugin attribute, which should be set to the plugin ID.
+
+The optional \c data-pluginjs attribute can be used to define an additional JavaScript module that is only
+loaded when the plugin is loaded. This can be used to implement additional behaviour through JS, if required.
+It is recommended to put these modules into the `webroot/js/plugins` folder.
+
+An example, defining the plugin panel for the \ref archaeoLines :
+\code
+<div id="vo_archaeolines" class="smallblock stelplugin" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines">
+  <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_Archaeo_Lines"/><?= tr("ArchaeoLines")?></label></h3>
+  <div class="inline-block blocklabel">
+    <label><input type="checkbox" class="stelaction" name="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showSolsticeLines"/><?= tr("Solstices")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showCrossquarterLines"/><?= tr("Crossquarters")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showMajorStandstillLines"/><?= tr("Major Standstill")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showMinorStandstillLines"/><?= tr("Minor Standstill")?></label>
+  </div>
+  <div class="inline-block blocklabel">
+    <label><input type="checkbox" class="stelaction" name="actionAL_showZenithPassageLine"/><?= tr("Zenith Passage")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showNadirPassageLine"/><?= tr("Nadir Passage")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showSelectedObjectLine"/><?= tr("Selected Object")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showCurrentSunLine"/><?= tr("Current Sun")?></label>
+    <label><input type="checkbox" class="stelaction" name="actionAL_showCurrentMoonLine"/><?= tr("Current Moon")?></label>
+  </div>
+  <label class="display-block" for="select_ArchaeoLines_enumShowCurrentPlanet"><?= tr("Current Planet:")?></label>
+  <select id="select_ArchaeoLines_enumShowCurrentPlanet" class="selectmenu stelproperty display-block" name="ArchaeoLines.enumShowCurrentPlanet">
+    <option value="10"><?= tr("None")?></option>
+    <option value="11"><?= tr("Mercury")?></option>
+    <option value="12"><?= tr("Venus")?></option>
+    <option value="13"><?= tr("Mars")?></option>
+    <option value="14"><?= tr("Jupiter")?></option>
+    <option value="15"><?= tr("Saturn")?></option>
+  </select>
+</div>
+
+//the contents of plugins/archaeolines.js
+define(["jquery"],function($){
+        "use strict";
+
+        //this is just an example how to use additional dynamically loaded plugin files
+        console.log("Hello, this is a asynchronously loaded plugin javascript file!");
+
+});
+\endcode
+
+\subsection remoteControlWebTranslation Translation information
+
+The interface can be translated using methods similar to the main program.
+All strings in the HTML markup that should be translated can be written
+between pseudo-PHP style tags and the \c tr function to achieve the same effect as the `q_()` macro in C++, like so:
+\code
+<label><input type="checkbox" class="stelaction" name="actionShow_Planets" /><?= tr("Show Solar System objects")?></label>
+\endcode
+
+All files which are listed in the `webroot/translate_files` file will be parsed, and all `<?= tr("----")?>` tags will be
+replaced using the StelTranslator for the current application language.
+
+If you require translated strings through JavaScript, you should use the `tr` method of the \ref rcApiRemotecontrol module,
+which also works similar to the `q_()` macro. There is a special procedure for the JavaScript strings: the target
+\c RemoteControl-update-translationdata should be run whenever new JavaScript strings have been added.
+This updates the file `webroot/js/translationdata.js` with all current `tr()` strings. [Python](https://www.python.org/)
+is required to be installed for this operation.
+
+Like the main program, the strings can be extracted from the HTML/JS code using gettext/xgettext. There are CMake targets for this like
+for the C++ code (\c generate-pot-stellarium-remotecontrol, \c update-po-stellarium-remotecontrol, etc.) and they are also executed
+with the combined targets (\c generate-pot, \c update-po etc.).
+
+\subsection remoteControlJS JavaScript module reference
+
+All interface code is developed using [require.js modules](http://requirejs.org/docs/api.html#define).
+This allows defining the dependencies of each module, as well as easier maintainability.
+Each module should be defined in its own .js file. The module ID corresponds to the .js file name
+without the file extension.
+
+In short, to define a module, wrap it in a \c define call, and optionally add dependencies.
+A basic example (for more ways to do it see the require.js doc):
+\code
+//myawesomemodule.js
+//the IDs of the dependencies are listed in an array as first parameter
+//the second parameter is usually a function which takes the actual instances of the dependencies as a parameter,
+//  in the same order as they are in the array!
+define(["jquery", "api/remotecontrol"], function($,rc) {
+    "use strict"; //it is recommended to use strict mode for each module
+
+    //do something as soon as this module is loaded
+    console.log("my awesome module is being loaded!");
+
+    //do something when the DOM is ready (because that is not guaranteed while the module is first bein loaded!)
+    $(function(){
+        console.log("the document is ready, you can access the elements now!");
+        //access an element and modifiy it
+        $("#myelement").text("hey, this is awesome");
+    });
+
+    //react to the serverDataReceived event of the remotecontrol module
+    $(rc).on("serverDataReceived", function(evt,data) {
+        console.log("Stellarium just sent us new data!");
+        console.log("The current jDay is " + data.time);
+    });
+
+    //provide some public methods that other modules may call
+    return {
+        myAwesomeMethod: function() {
+            console.log("Hello there!");
+        }
+    };
+});
+
+//another module (in another file) can now reference our module as dependency to load it and use its methods
+define(["jquery", "myawesomemodule"],function($, awesome) {
+
+    awesome.myAwesomeMethod(); //prints "Hello there!"
+});
+\endcode
+
+The UI modules can depend on the API modules and other UI modules.
+The API modules can depend on other API modules.
+Circular dependencies should of course be avoided.
+
+\subsubsection rcApiRemotecontrol api/remotecontrol
+
+This is the main API module, with no further dependencies on other API modules.
+
+Its main function is that it provides automatic status updates by periodically polling (by default each second) the
+\c status operation of the MainService. Whenever this poll succeeds, the \c serverDataReceived custom event is emitted,
+with the JSON response of the server as \p data parameter. Other API modules should use this event, and process
+the data in which they are interested.
+It also keeps track of StelAction and StelProperty changes,
+and emits \c stelActionsChanged and/or \c stelPropertiesChanged, if necessary. Note that it does not process them further,
+this is the job of the \ref rcApiActions and \ref rcApiProperties modules, respectively.
+When the connection to the server is lost (i.e. the polling returned an error), the \c serverDataError event is sent.
+
+The other main function is that it provides the \c postCmd method, which is a simple wrapper around an AJAX POST call
+that is intended to be used by other modules to send commands to the server. It also includes the \c tr method used
+for [translating JS strings](\ref remoteControlWebTranslation).
+
+Finally, this module also processes the [plugin-specific sections](\ref remoteControlWebStelplugin) on load.
+
+\subsubsection rcApiActions api/actions
+
+Processes StelAction related events. Whenever it detects that boolean StelAction was changed, it emits two events:
+- A generic event \c stelActionChanged with the \c actionId as a parameter. This can be used when interested in ALL action changes
+    (like for a action list)
+- A specialied event `stelActionChanged:<actionId>` with the \c actionId as part of the event name.
+    This can be used when listening for a specific action only.
+
+On the first load of the interface, it loads a list of all actions (using the ActionService \c list operation) and emits the
+\c actionListLoaded event when this data is available.
+
+To execute/toggle an action, it provides the public \c executeAction method, which just requires the action ID as parameter.
+To find out whether an action is currently checked, use the \c isChecked method.
+
+\subsubsection rcApiFlags api/flags
+
+This is a utility module, which can be used to implement checkboxes for enum flag types, where each checkbox sets a
+specific bit of a single value. The module should be constructed with \c new, the constructor takes the parent element of a list of
+checkboxes (\c input of type checkbox) and a method which is called back when the internal value changes (i.e. the user clicks a checkbox). It provides the
+\c setValue method to set the current value and check the correct checkboxes. The bit value of each \c input should be specified
+as its \p value property, in hexadecimal string format (for example `0x0004`)
+
+\subsubsection rcApiLocation api/location
+
+Module which connects to the LocationService and the LocationSearchService.
+It emits the following events whenever the specified field changed:
+\c planetChanged,\c nameChanged, \c countryChanged, \c altitudeChanged, \c latitudeChanged, \c longitudeChanged, \c positionChanged (emitted when either lat or lon changed)
+
+It also has \c set methods for these fields.
+Furthermore, it provides \c performLocationSearch, which searches the predefined locations for a specific search string,
+and \c performNearbySearch, which searches predefined locations near a given lat/lon on the current planet.
+These methods take a callback parameter to notify the caller of the results.
+The \c setLocationById method can then be used to set the location to a result of these 2 methods.
+
+It also provides a \c loadCountryList and a \c loadPlanetList which load the specified lists and return the results with a callback.
+
+\subsubsection rcApiProperties api/properties
+
+Processes StelProperty related things. Like the \ref rcApiActions module, it emits 2 events when it detects a StelProperty changed:
+- A generic event \c stelPropertyChanged with the \c propertyId as a parameter. This can be used when interested in ALL property changes
+    (like for a list)
+- A specialied event `stelPropertyChanged:<propertyId>` with the \c propertyId as part of the event name.
+    This can be used when listening for a specific property only.
+
+It provides \c getStelProp and \c setStelProp methods which retrieve and set the value of a StelProperty,
+and also a \c setStelPropQueued convenience method to batch multiple fast interface changes (e.g. through a slider or spinner)
+into a single \c setStelProp call which is only executed after a small time has passed with no changes.
+
+It also emits the \c propertyListLoaded event when it first loads the full list of StelProperties with their type information.
+
+\subsubsection rcApiScripts api/scripts
+
+This module handles script execution (i.e. connection to the ScriptService). It provides the following methods:
+- \c loadScriptList - loads the list of all scripts, takes a callback to return this data
+- \c runScript - runs the specified script id
+- \c runDirectScript - directly runs the given script code
+- \c stopScript - stops a currently running script
+
+It also emits the \c activeScriptChanged event whenever it detects that the current script has changed or started/stopped
+
+\subsubsection rcApiSearch api/search
+
+Implements object search functionality, connecting to the ObjectService and the SimbadService. The following methods are provided:
+- \c loadObjectTypes - loads the list of object types, takes a callback
+- \c loadObjectList - loads the list of objects of a specified type, can return english or localized names
+- \c selectObjectByName - selects the object that matches the specified name
+- \c focusPosition - focuses the given coordinate (array of 3 numbers) in the J2000 frame
+- \c performSearch - performs an object lookup in Stellarium's internal catalog and Simbad. In addition to the search string,
+    2 callbacks must be given as parameters: one for the catalog results, and one for the simbad results. If a search is currently running,
+    it is aborted (meaning the callbacks won't be called for the old searches), allowing this method to be repeatedly called while
+    the user is typing. The Simbad search is only started after a small interval without typing, to reduce the overhead of the
+    external web requests.
+
+While a search is running, it emits \c simbadStateChange events to notify the UI of the current state of the lookup.
+
+\subsubsection rcApiTime api/time
+
+Contains time-related functions and conversions, similar to what StelCore does. This module keeps it's own sense of Stellariums current time,
+to provide an updated interface even between the \c status polls of the \ref rcApiRemotecontrol module.
+
+It provides following methods:
+- \c getCurrentTime - calculates the best guess to the current Stellarium simulation time. This depends on the information received with the last \c status poll,
+    the time since the last data was received and the time the last time change was performed
+- \c isRealTimeSpeed - true if the simulation time currently flows at the same rate as the real time (1 sec per sec).
+- \c jdayToDate - converts a jDay (single number) to Day/Month/Year format, this returns a JS object with \p day, \p month, \p year fields instead
+    of a JS Date object because of its limitations.
+- \c jdayToDate - returns the time component of the given jDay, as a JS object with \p hour, \p minute, \p second fields
+- \c dateTimeToJd - converts a time given in Y/M/D-H/MIN/S format to a jDay
+- \c dateTimeForRollover - like StelUtils::changeDateTimeForRollover
+- \c isTimeUpdatePending - if true, there is a time change which has not yet been sent to the server
+- \c increaseTimeRate - increases the Stellarium simulation time rate (like StelCore::increaseTimeSpeed)
+- \c decreaseTimeRate - decreases the Stellarium simulation time rate (like StelCore::decreaseTimeSpeed)
+- \c isRewind - returns true if the time currently flows backwards (at least at -0.99 sec / sec)
+- \c isFastForward - returns true if time currently is flowing faster than real time
+- \c isTimeNow - returns true if the current simulation time is very close to the actual system time
+- \c isTimeStopped - returns true if the simulation time rate is zero
+- \c togglePlayPause - toggles between timerates 0 and 1 sec/sec
+- \c setDateNow - sets the simulation time to the current system time
+- \c setJDay - sets the time to the specified JDay
+- \c setTimeFromTimeObj - sets the time from a "time object", containing both date and time in the following format
+\code
+{
+    date : {
+        year, month, day
+    },
+    time : {
+        hour, minute, second
+    }
+}
+\endcode
+- \c getTimeData - returns the current time data, containing the last response from the server (including timezone info, etc)
+    The event \c timeDataUpdated is sent whenever this changes.
+
+\subsubsection rcApiUpdatequeue api/updatequeue
+
+This implements a simple update queue class that updates the server after a specified interval if the user does nothing else inbetween.
+This is used to limit the rate at which updates are sent to the server. The \c UpdateQueue constructor takes an url and a callback for the result,
+and when the interface needs to send an update, \c enqueue can be called with the data to send.
+
+\subsubsection rcApiViewcontrol api/viewcontrol
+
+Implements the %FOV access and viewport movement methods. Use \c setFOV to set the %FOV, the \c fovChanged event is sent whenever the %FOV changes.
+There are \c moveRight, \c moveUp, \c moveUpRight etc. methods that allow the user to move the viewport. To stop the movement, use \c stopMovement.
+
+\subsubsection rcApiViewoptions api/viewoptions
+
+Implements the loading of the projection, landscape and skyculture lists.
+
+\subsubsection rcUiMainui ui/mainui
+
+This is the main module of the interface. It lists all the other UI modules as a dependency.
+It starts of the update look of the \c rcApiRemotecontrol module, handles the automatic generation
+of the [special controls](\ref remoteControlWebUIClasses) and [connection of StelProperty controls](\ref remoteControlWebstelproperty),
+and performs smooth animation of the time controls. It also keeps track of the current interface tab the user is on, and
+restores it when the page is reloaded.
+
+\subsubsection rcUiActions ui/actions
+
+Implements the action list and the [StelAction buttons and checkboxes](\ref remoteControlWebstelaction).
+
+\subsubsection rcUiCombobox ui/combobox
+
+Implements a custom combobox control, on top of the jQuery UI \c autocomplete control. This is used for example in the location controls.
+
+\subsubsection rcUiJqueryuifixes ui/jqueryuifixes
+
+Includes some fixes to the standard jQuery UI control classes, especially for the spinner, to provide a unified
+change event, prevent non-numeric input and better touch support. This module is automatically loaded whenever other modules
+load the "jquery-ui" module.
+
+\subsubsection rcUiLocation ui/location
+
+Implements the location controls, such as the map which can be clicked and the comboboxes for the current location.
+
+\subsubsection rcUiScripts ui/scripts
+
+Implements the script list and shows the active script.
+
+\subsubsection rcUiSearch ui/search
+
+Implements the object search panel and the quick select buttons.
+
+\subsubsection rcUiTime ui/time
+
+Implements the time controls, the \c updateTimeDisplay method is called repeatedly as an animation by the \ref rcUiMainui module.
+
+\subsubsection rcUiViewcontrol ui/viewcontrol
+
+Implements the %FOV slider and the "virtual joystick" for the viewport movement.
+
+\subsubsection rcUiViewoptions ui/viewoptions
+
+Implements the projection, landscape and skyculture lists, and some minor things related to other view options.
+*/

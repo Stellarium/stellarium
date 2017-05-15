@@ -68,14 +68,14 @@ public:
 	
 	void init(class StelGui* stelGui);
 	
-	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = 0);
+	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = 0) Q_DECL_OVERRIDE;
 
 	int getSkyGuiWidth() const;
 	int getSkyGuiHeight() const;
 	
 protected:
-	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
-	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
+	virtual void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE;
+	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
 	virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value) Q_DECL_OVERRIDE;
 
 private slots:

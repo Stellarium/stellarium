@@ -1,13 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Legrand Orange Book
 % LaTeX Template
-% Version 2.1 (14/11/15)
+% Version 2.1.1 (14/07/16)
 %
 % This template has been downloaded from:
 % http://www.LaTeXTemplates.com
 %
 % Mathias Legrand (legrand.mathias@gmail.com) with modifications by:
 % Vel (vel@latextemplates.com)
+% Alexander Wolf (alex.v.wolf@gmail.com)
+% Georg Zotti (georg.zotti@univie.ac.at)
 %
 % License:
 % CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
@@ -46,6 +48,7 @@
 %----------------------------------------------------------------------------------------
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+\input{version}
 %\usepackage{fancyvrb}
 \usepackage{marvosym}% For the Zodiac symbols, \Aries etc. 
 \usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
@@ -55,7 +58,6 @@
 
 %% GZ Some commands which can be used later, like version number etc.
 
-\newcommand{\StelVersion}{0.15.0}
 \newcommand{\DocumentEdition}{1}
 
 \begin{document}
@@ -72,10 +74,9 @@
 \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{bookcover}}; % Background image
 \draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]%
      {\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}%
-                                              {\centering Stellarium User Guide\\[18pt] % Book title
-                                              {\Large Matthew Gates, Alexander Wolf, Barry Gerdes, Georg Zotti}\\[15pt]% Author names
-                                              {\Large Version \StelVersion-\DocumentEdition}\\[15pt]% Version like 0.15.0-1
-                                              {\Large 2016}% Year
+                                              {\centering Stellarium \StelVersion\space User Guide\\[18pt] % Book title
+                                              {\Large Georg Zotti, Alexander Wolf, Matthew Gates, Barry Gerdes}\\[15pt]% Author names
+                                              {\Large 2017}% Year
                                              }}; % 
 \end{tikzpicture}};
 \end{tikzpicture}
@@ -90,10 +91,17 @@
 ~\vfill
 \thispagestyle{empty}
 
+\noindent Copyright \copyright\ 2014-2017 Georg Zotti.\\ % Copyright notice
+\noindent Copyright \copyright\ 2011-2017 Alexander Wolf.\\ % Copyright notice
 \noindent Copyright \copyright\ 2006-2009 Matthew Gates.\\ % Copyright notice
-\noindent Copyright \copyright\ 2011-2016 Alexander Wolf.\\ % Copyright notice
-\noindent Copyright \copyright\ 2013-2014 Barry Gerdes.\\ % Copyright notice
-\noindent Copyright \copyright\ 2014-2016 Georg Zotti.\\ % Copyright notice
+\noindent Copyright \copyright\ 2013-2014 Barry Gerdes (\dag\,2014).\\ % Copyright notice
+\ifthenelse{\equal{\StelVersion}{0.15.0}}{%
+\noindent \fbox{
+  \begin{minipage}[t]{0.8\linewidth}
+    Stellarium Version 0.15 is dedicated in memory of our team
+    member Barry Gerdes (\dag\,2014).
+  \end{minipage}
+}\\}{}
 
 \noindent \textsc{stellarium.org}\\ % URL
 
@@ -105,7 +113,14 @@ Back-Cover Texts. A copy of the license is included in
 appendix~\ref{ch:License} entitled ``GNU Free Documentation
 License''.\\ % License information
 
-\noindent \textit{A draft of version 0.15.0-1, \today} % Printing/edition date
+\small{\noindent \textit{All trademarks, third party brands, product names, trade names,
+corporate names and company names mentioned may be trademarks of their
+respective owners or registered trademarks of other companies and are
+used for purposes of explanation and to the readers' benefit, without
+implying a violation of copyright law.}}\\
+
+
+\noindent \textit{Version \StelVersion-\DocumentEdition, \today} % Printing/edition date
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
@@ -135,7 +150,7 @@ License''.\\ % License information
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t2-bg} % Chapter heading image
 
-\include{introduction}
+\include{ch_introduction}
 
 
 %----------------------------------------------------------------------------------------
@@ -143,13 +158,13 @@ License''.\\ % License information
 %----------------------------------------------------------------------------------------
 % \chapterimage{chapter-t2-bg} % Chapter heading image Did not change...
 
-\include{start}
+\include{ch_getting_started}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 3 (was called Interface Guide, but is just a first tour.)
 %----------------------------------------------------------------------------------------
 
-\include{tour}
+\include{ch_tour}
 
 
 %----------------------------------------------------------------------------------------
@@ -170,26 +185,28 @@ License''.\\ % License information
 \chapterimage{chapter-t3-bg} % Chapter heading image
 
 \include{ch_advanced_use}
-\include{ch_landscapes}
+%% GZ I propose to  replace the old chapter with course notes I have developed in late 2015. To get the old version, activate next line instead.
+%\include{ch_landscapes}
+\include{ch_landscapes_gz}
 \include{ch_dso} %% Maybe DSO is more a reference chapter? --> Appendix in this case? Or split?
 \include{ch_skycultures}
-
 %----------------------------------------------------------------------------------------
 %	PART III
 %----------------------------------------------------------------------------------------
 \part{Extending Stellarium}
 \chapterimage{chapter-t3-bg} % Chapter heading image
-\include{plugins}
+\include{ch_plugins}
 \include{plg_interfaces} % TUI, RemoteControl, (2017: D-BUS?)
 \include{plg_catalogs}
-\include{plg_ArchaeoLines}
+\include{plg_archaeolines}
 \include{plg_scenery3d} % move to historical.
 \include{plg_atTheTelescope} % TODO: TelescopeControl, Oculars, various hardware projects with Raspberry, Arduino, ...
-\include{scripting}
+\include{ch_scripting}
 
 %----------------------------------------------------------------------------------------
 %	PART IV
 %----------------------------------------------------------------------------------------
+\renewcommand{\StelTOCdepth}{0}
 \part{Practical Astronomy}
 
 %----------------------------------------------------------------------------------------
@@ -230,10 +247,10 @@ License''.\\ % License information
 \chapterimage{chapter-t1-bg} % Chapter heading image
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER A (config.ini)
+%	CHAPTER A (Hotkeys) -- N.B. "H" :-)
 %----------------------------------------------------------------------------------------
 
-\include{app_config_ini}
+\include{app_hotkeys}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER B (Bortle Scale) -- N.B. Try to keep this as Appendix "B" [for Bortle]
@@ -248,11 +265,11 @@ License''.\\ % License information
 \include{app_star_catalogue}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER D (Scripting API.)
+%	CHAPTER D (config.ini)
 %----------------------------------------------------------------------------------------
 
-\include{app_scripting_api}
-
+\include{app_config_ini}
+\include{app_ssystem_ini}
 %----------------------------------------------------------------------------------------
 %	CHAPTER E (Accuracy, and some notes about used algorithms.)
 %----------------------------------------------------------------------------------------
@@ -271,23 +288,13 @@ License''.\\ % License information
 
 \include{app_license}
 
-%----------------------------------------------------------------------------------------
-%	CHAPTER H (Hotkeys) -- N.B. "H" :-)
-%----------------------------------------------------------------------------------------
-
-\include{app_hotkeys}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 \chapter*{Bibliography}
 \addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
-\section*{Books}
-\addcontentsline{toc}{section}{Books}
-\printbibliography[heading=bibempty,type=book]
-\section*{Articles}
-\addcontentsline{toc}{section}{Articles}
-\printbibliography[heading=bibempty,type=article]
+\printbibliography[heading=bibempty]
 
 %----------------------------------------------------------------------------------------
 %	INDEX

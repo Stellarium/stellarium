@@ -20,6 +20,7 @@
 #define _STELLOCATION_HPP_
 
 #include <QString>
+#include <QMetaType>
 
 //! @class StelLocation
 //! Store the informations for a location on a planet
@@ -68,6 +69,13 @@ public:
 	//! @li @p X is an unknown or user-defined location (the default value).
 	//! @li @p ! is an invalid location.
 	QChar role;
+	//! IANA identificator of time zone.
+	//! Note that timezone names under various OSes may be different than those used in Stellarium's
+	//! location database (e.g. Ubuntu:Asia/Kolkata=Windows:Asia/Calcutta),
+	//! which requires some translation effort during the loading process.
+	//  See LP:1662132
+	// GZ renamed to more clearly indicate these are IANA names.
+	QString ianaTimeZone;
 
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);
@@ -79,7 +87,13 @@ public:
 	bool isUserLocation;
 
 	static const int DEFAULT_BORTLE_SCALE_INDEX;
+private:
+	//Register with Qt
+	static int metaTypeId;
+	static int initMetaType();
 };
+
+Q_DECLARE_METATYPE(StelLocation)
 
 //! Serialize the passed StelLocation into a binary blob.
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc);

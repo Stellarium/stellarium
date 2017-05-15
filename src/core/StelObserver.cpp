@@ -52,7 +52,6 @@ ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
 		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "", "", NULL, NULL, 0, false, true, false, true, ""), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
-	radius = 0;
 	// set parent = sun:
 	if (orig->getParent())
 	{
@@ -239,9 +238,12 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 	return getHomePlanet()->getRotEquatorialToVsop87();
 }
 
-SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds) : StelObserver(startLoc),
-		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), transitSeconds(atransitSeconds)
+SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds, double atimeToGo) : StelObserver(startLoc),
+		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
 {
+	if(timeToGo<0.0)
+		timeToGo = transitSeconds;
+
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	PlanetP targetPlanet = ssystem->searchByEnglishName(moveTargetLocation.planetName);
 	if (moveStartLocation.planetName!=moveTargetLocation.planetName)
@@ -264,7 +266,6 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 		artificialPlanet = QSharedPointer<Planet>(artPlanet);
 	}
 	planet = targetPlanet;
-	timeToGo = transitSeconds;
 }
 
 SpaceShipObserver::~SpaceShipObserver()
@@ -273,8 +274,9 @@ SpaceShipObserver::~SpaceShipObserver()
 	planet.clear();
 }
 
-void SpaceShipObserver::update(double deltaTime)
+bool SpaceShipObserver::update(double deltaTime)
 {
+	if (timeToGo <= 0.) return false; // Already over.
 	timeToGo -= deltaTime;
 
 	// If move is over
@@ -319,6 +321,7 @@ void SpaceShipObserver::update(double deltaTime)
 		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));		
 	}
+	return true;
 }
 
 const QSharedPointer<Planet> SpaceShipObserver::getHomePlanet() const

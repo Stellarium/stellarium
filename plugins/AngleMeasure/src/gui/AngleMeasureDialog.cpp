@@ -27,9 +27,9 @@
 #include "StelModuleMgr.hpp"
 
 AngleMeasureDialog::AngleMeasureDialog()
-	: am(NULL)
+	: StelDialog("AngleMeasure")
+	, am(NULL)
 {
-	dialogName = "AngleMeasure";
 	ui = new Ui_angleMeasureDialog();
 }
 

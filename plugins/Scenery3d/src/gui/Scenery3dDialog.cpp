@@ -34,10 +34,9 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent), mgr(NULL)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(NULL)
 {
 	ui = new Ui_scenery3dDialogForm;
-	dialogName = "Scenery3d";
 }
 
 Scenery3dDialog::~Scenery3dDialog()
@@ -395,7 +394,7 @@ void Scenery3dDialog::on_checkBoxDefaultScene_stateChanged(int value)
 
 	if(value)
 	{
-		QString id = SceneInfo::getIDFromName(sel.at(0)->text());
+		QString id = SceneInfo::getIDFromName(sel.at(0)->data(Qt::UserRole).toString());
 		if(!id.isEmpty())
 			mgr->setDefaultScenery3dID(id);
 	}

@@ -27,7 +27,8 @@
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
-
+#include "StelModuleMgr.hpp"
+#include "SolarSystem.hpp"
 #include <QDebug>
 
 #include <stdio.h>
@@ -44,6 +45,7 @@ void StelSkyImageTile::initCtor()
 	alphaBlend = false;
 	noTexture = false;
 	texFader = NULL;
+	birthJD = -1e10;
 }
 
 // Constructor
@@ -90,8 +92,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 	updatePercent(result.size(), numToBeLoaded);
 
 	// Draw in the good order
-	sPainter.enableTexture2d(true);
-	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
 	while (i!=result.begin())
 	{
@@ -134,6 +135,13 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 
 	if (luminance>0 && luminance<limitLuminance)
+	{
+		// Schedule a deletion
+		scheduleChildsDeletion();
+		return;
+	}
+
+	if (birthJD>-1e10 && birthJD>core->getJD())
 	{
 		// Schedule a deletion
 		scheduleChildsDeletion();
@@ -246,34 +254,70 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	}
 
 	// Draw the real texture for this image
-	float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
-	ad_lum=std::min(1.f, ad_lum);
+	float ad_lum = (luminance>0) ? qMin(1.0f, core->getToneReproducer()->adaptLuminanceScaled(luminance)) : 1.f;
 	Vec4f color;
-	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
+	if (alphaBlend || texFader->state()==QTimeLine::Running)
 	{
 		if (!alphaBlend)
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+			sPainter.setBlending(true); // Normal transparency mode
 		else
-			glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);
+			sPainter.setBlending(true, GL_ONE, GL_ONE); // additive blending
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
-		glDisable(GL_BLEND);
+		sPainter.setBlending(false);
 		color.set(ad_lum,ad_lum,ad_lum, 1.f);
 	}
 
-	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
+	const bool withExtinction=(getFrameType()!=StelCore::FrameAltAz && core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
 	
-	sPainter.enableTexture2d(true);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
 		Vec4f extinctedColor = color;
 		if (withExtinction)
 		{
-			Vec3d bary= poly->getPointInside(); // This is a J000.0 vector that points "somewhere" in the first triangle.
-			Vec3d altAz = core->j2000ToAltAz(bary, StelCore::RefractionOff);
+			Vec3d bary= poly->getPointInside(); // This is a "frame" vector that points "somewhere" in the first triangle.
+
+			// 2017-03: we need a definite J2000 vector:
+			Vec3d baryJ2000;
+			double lng, lat, ra, dec; // aux. values for coordinate transformations
+			double eclJ2000, eclJDE;
+			switch (getFrameType()) // all possible but AzAlt!
+			{
+				case StelCore::FrameJ2000:
+					baryJ2000=bary;
+					break;
+				case	StelCore::FrameEquinoxEqu:
+					baryJ2000=core->equinoxEquToJ2000(bary, StelCore::RefractionOff);
+					break;
+				case	StelCore::FrameObservercentricEclipticJ2000:
+					// For the ecliptic cases, apply clumsy trafos from StelUtil!
+					eclJ2000=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+					StelUtils::rectToSphe(&lng, &lat, bary);
+					StelUtils::eclToEqu(lng, lat, eclJ2000, &ra, &dec);
+					StelUtils::spheToRect(ra, dec, baryJ2000);
+					break;
+				case	StelCore::FrameObservercentricEclipticOfDate:
+					// Trafo to eqDate, then as above.
+					eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+					StelUtils::rectToSphe(&lng, &lat, bary);
+					StelUtils::eclToEqu(lng, lat, eclJDE, &ra, &dec); // convert to Equatorial/equinox of date
+					StelUtils::spheToRect(ra, dec, bary);
+					baryJ2000=core->equinoxEquToJ2000(bary, StelCore::RefractionOff);
+					break;
+				case	StelCore::FrameGalactic:
+					baryJ2000=core->galacticToJ2000(bary);
+					break;
+				case	StelCore::FrameSupergalactic:
+					baryJ2000=core->supergalacticToJ2000(bary);
+					break;
+				default:
+					Q_ASSERT(0);
+					qDebug() << "StelSkyImageTile: unknown FrameType. Assume J2000.";
+					baryJ2000=bary;
+			}
+			Vec3d altAz = core->j2000ToAltAz(baryJ2000, StelCore::RefractionOff);
 			float extinctionMagnitude=0.0f;
 			altAz.normalize();
 			core->getSkyDrawer()->getExtinction().forward(altAz, &extinctionMagnitude);
@@ -374,7 +418,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		luminance = map.value("maxBrightness").toFloat(&ok);
 		if (!ok)
 			throw std::runtime_error("maxBrightness expect a float value");
-		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfacebrightnessToLuminance(luminance);
+		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfaceBrightnessToLuminance(luminance);
 	}
 
 	if (map.contains("alphaBlend"))
@@ -454,6 +498,11 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	else
 		noTexture = true;
 
+	if (map.contains("birthJD"))
+		birthJD = map.value("birthJD").toDouble();
+	else
+		birthJD = -1e10;
+
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyImageTile objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
@@ -506,13 +555,15 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 	if (!shortName.isEmpty())
 		res["shortName"] = shortName;
 	if (minResolution>0)
-		 res["minResolution"]=minResolution;
+		res["minResolution"]=minResolution;
 	if (luminance>0)
 		res["maxBrightness"]=StelApp::getInstance().getCore()->getSkyDrawer()->luminanceToSurfacebrightness(luminance);
 	if (alphaBlend)
 		res["alphaBlend"]=true;
 	if (noTexture==false)
 		res["imageUrl"]=absoluteImageURI;
+	if (birthJD>-1e10)
+		res["birthJD"]=birthJD;
 
 	// Polygons
 	// TODO

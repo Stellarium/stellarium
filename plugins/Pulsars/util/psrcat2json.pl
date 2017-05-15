@@ -35,7 +35,7 @@ $PSRCAT	= "./psrcat.db";
 $JSON	= "./pulsars.json";
 
 $FORMAT = 2;
-$CATVER = 1.54;
+$CATVER = 1.56;
 
 open (PSRCAT, "<$PSRCAT");
 @catalog = <PSRCAT>;
@@ -160,6 +160,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 
 		if ($lines[$j] =~ /^DIST_DM1(\s+)([\d\.\+\-]+)/) {
 			$distance = $2;
+			$distance =~ s/\+//gi;
 		}
 
 		if ($lines[$j] =~ /^ECC(\s+)([\d\.\-E]+)/) {

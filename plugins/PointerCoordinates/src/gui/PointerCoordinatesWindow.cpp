@@ -25,12 +25,13 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelGui.hpp"
 
 PointerCoordinatesWindow::PointerCoordinatesWindow()
-	: coord(NULL)
+	: StelDialog("PointerCoordinates")
+	, coord(NULL)
 {
 	ui = new Ui_pointerCoordinatesWindowForm();
-	dialogName = "PointerCoordinates";
 }
 
 PointerCoordinatesWindow::~PointerCoordinatesWindow()
@@ -43,7 +44,7 @@ void PointerCoordinatesWindow::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		updateAboutText();
+		setAboutHtml();
 		populateCoordinatesPlacesList();
 		populateCoordinateSystemsList();
 	}
@@ -87,13 +88,20 @@ void PointerCoordinatesWindow::createDialogContent()
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
 	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
 
+	ui->checkBoxConstellation->setChecked(coord->getFlagShowConstellation());
+	connect(ui->checkBoxConstellation, SIGNAL(toggled(bool)), coord, SLOT(setFlagShowConstellation(bool)));
+
 	connect(ui->spinBoxX, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 	connect(ui->spinBoxY, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveCoordinatesSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetCoordinatesSettings()));
 
-	updateAboutText();
+	// About tab
+	setAboutHtml();
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if(gui!=NULL)
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 }
 
 void PointerCoordinatesWindow::populateValues()
@@ -106,11 +114,38 @@ void PointerCoordinatesWindow::populateValues()
 	ui->spinBoxY->setValue(cc.second);
 }
 
-void PointerCoordinatesWindow::updateAboutText()
+void PointerCoordinatesWindow::setAboutHtml(void)
 {
-	ui->labelTitle->setText(q_("Pointer Coordinates plug-in"));
-	QString version = QString(q_("Version %1")).arg(POINTERCOORDINATES_PLUGIN_VERSION);
-	ui->labelVersion->setText(version);
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + q_("Pointer Coordinates plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + POINTERCOORDINATES_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "</table>";
+
+	html += "<p>" + q_("Show coordinates of the mouse cursor on the screen.");
+	html += "<p>";
+
+	html += "<h3>" + q_("Links") + "</h3>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Pointer Coordinates plugin") + "</p>";
+	html += "<p><ul>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and catalog format, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Pointer_Coordinates_plugin\">").arg("</a>") + "</li>";
+	html += "</ul></p></body></html>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
+
+	ui->aboutTextBrowser->setHtml(html);
 }
 
 void PointerCoordinatesWindow::saveCoordinatesSettings()
@@ -168,6 +203,7 @@ void PointerCoordinatesWindow::populateCoordinateSystemsList()
 	csys->addItem(q_("Ecliptic Longitude/Latitude (J2000.0)"), "EclipticJ2000");
 	csys->addItem(q_("Altitude/Azimuth"), "AltAzi");
 	csys->addItem(q_("Galactic Longitude/Latitude"), "Galactic");
+	csys->addItem(q_("Supergalactic Longitude/Latitude"), "Supergalactic");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);

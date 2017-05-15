@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>501</height>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -275,6 +275,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="displayShowDesignationsCheckBox">
+            <property name="text">
+             <string>Enable display of designations for exoplanets</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="displayAtStartupCheckBox">
             <property name="text">
              <string>Enable display at startup</string>
@@ -414,7 +421,14 @@
              </layout>
             </item>
             <item>
-             <widget class="QComboBox" name="comboAxisY"/>
+             <widget class="QComboBox" name="comboAxisY">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -482,7 +496,14 @@
              </layout>
             </item>
             <item>
-             <widget class="QComboBox" name="comboAxisX"/>
+             <widget class="QComboBox" name="comboAxisX">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -599,7 +620,7 @@
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header>qcustomplot.h</header>
+   <header>external/qcustomplot/qcustomplot.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

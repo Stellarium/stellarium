@@ -35,6 +35,9 @@ struct bookmark
 {
 	QString name;
 	QString nameI18n;
+	QString ra;
+	QString dec;
+	bool isVisibleMarker;
 	QString jd;
 	QString location;
 };
@@ -47,6 +50,9 @@ class BookmarksDialog : public StelDialog
 public:
 	BookmarksDialog(QObject* parent);
 	virtual ~BookmarksDialog();
+
+	//! Notify that the application style changed
+	void styleChanged();
 
 public slots:
         void retranslate();
@@ -61,6 +67,9 @@ private slots:
 	void removeBookmarkButtonPressed();
 	void goToBookmarkButtonPressed();
 	void clearBookmarksButtonPressed();
+
+	void exportBookmarks();
+	void importBookmarks();
 
 	void selectCurrentBookmark(const QModelIndex &modelIdx);
 

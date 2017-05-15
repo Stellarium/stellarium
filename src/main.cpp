@@ -126,6 +126,9 @@ int main(int argc, char **argv)
 	}
 #endif
 
+	// Seed the PRNG
+	qsrand(QDateTime::currentMSecsSinceEpoch());
+
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -151,10 +154,6 @@ int main(int argc, char **argv)
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
 #endif
-	QPixmap pixmap(":/splash.png");
-	QSplashScreen splash(pixmap);
-	splash.show();
-	app.processEvents();
 
 	// QApplication sets current locale, but
 	// we need scanf()/printf() and friends to always work in the C locale,
@@ -163,6 +162,12 @@ int main(int argc, char **argv)
 
 	// Init the file manager
 	StelFileMgr::init();
+
+	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
+	QSplashScreen splash(pixmap);
+	splash.show();
+	splash.showMessage(StelUtils::getApplicationVersion() , Qt::AlignLeft, Qt::white);
+	app.processEvents();
 
 	// Log command line arguments.
 	QString argStr;
@@ -318,7 +323,7 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
 	// Support hi-dpi pixmaps
-	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);	
 
 	// Add the DejaVu font that we use everywhere in the program
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
@@ -357,8 +362,8 @@ int main(int argc, char **argv)
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	StelMainView mainWin;
-	mainWin.init(confSettings); // May exit(0) when OpenGL subsystem insufficient
+	StelMainView mainWin(confSettings);
+	mainWin.show();
 	splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();

@@ -38,11 +38,14 @@ class CCD : public QObject
 	Q_PROPERTY(double pixelWidth READ pixelWidth WRITE setPixelWidth)
 	Q_PROPERTY(double pixelHeight READ pixelHeight WRITE setPixelHeight)
 	Q_PROPERTY(double chipRotAngle READ chipRotAngle WRITE setChipRotAngle)
+	Q_PROPERTY(int binningX READ binningX WRITE setBinningX)
+	Q_PROPERTY(int binningY READ binningY WRITE setBinningY)
 	Q_PROPERTY(double hasOAG READ hasOAG WRITE setHasOAG)
 	Q_PROPERTY(double prismHeight READ prismHeight WRITE setPrismHeight)
 	Q_PROPERTY(double prismWidth READ prismWidth WRITE setPrismWidth)
 	Q_PROPERTY(double prismDistance READ prismDistance WRITE setPrismDistance)
 	Q_PROPERTY(double prismPosAngle READ prismPosAngle WRITE setPrismPosAngle)
+
 public:
 	CCD();
 	Q_INVOKABLE CCD(const QObject& other);
@@ -68,6 +71,10 @@ public:
 	void setPixelHeight(double height);
 	double chipRotAngle() const;
 	void setChipRotAngle(double angle);
+	int binningX() const;
+	void setBinningX(int binning);
+	int binningY() const;
+	void setBinningY(int binning);
 	bool hasOAG() const;
 	void setHasOAG(bool oag);
 	double prismDistance() const;
@@ -77,7 +84,7 @@ public:
 	double prismWidth() const;
 	void setPrismWidth(double width);
 	double prismPosAngle() const;
-	void setPrismPosAngle(double angle);
+	void setPrismPosAngle(double angle);	
 
 	/**
 	  * The formula for this calculation comes from the Yerkes observatory.
@@ -105,6 +112,10 @@ private:
 	double m_pixelHeight;
 	//! chip rotation angle around its axis (degrees)
 	double m_chipRotAngle;
+	//! Binning for axes X
+	int m_binningX;
+	//! Binning for axes Y
+	int m_binningY;
 	//! Show off axis guider view
 	bool m_has_oag;
 	//! OAG prism height (milimeters)
@@ -114,7 +125,7 @@ private:
 	//! OAG prisrm distance from the axis center (mimileters)
 	double m_oag_prismDistance;
 	//! OAG prisrm position angle (degrees)
-	double m_oag_prismPosAngle;
+	double m_oag_prismPosAngle;	
 };
 
 

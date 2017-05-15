@@ -5,18 +5,21 @@
 %% TODO: Update the extra lines which can now be displayed in Stellarium. (Meridian, horizon, colures, ...) 
 
 \chapter{Astronomical Concepts}
-\chapterauthor*{Barry Gerdes}
+\chapterauthor*{Barry Gerdes, with additions by Georg Zotti}
 \label{ch:Concepts}
 
 This section includes some general notes on astronomy in an effort to
 outline some concepts that are helpful to understand features of
 Stellarium. Material here is only an overview, and the reader is
-encouraged to get hold of a couple of good books on the subject. A good
-place to start is a compact guide and ephemeris such as the
-\emph{National Audubon Society Field Guide to the Night Sky}\footnote{\url{http://www.amazon.com/National-Audubon-Society-Field-Series/dp/0679408525}}. Also recommended is a
-more complete textbook such as \emph{Universe}. %%{[}universe{]}. %% REF MISSING?
+encouraged to get hold of a couple of good books on the subject. A
+good place to start is a compact guide and ephemeris such as the
+\emph{National Audubon Society Field Guide to the Night
+  Sky}\footnote{\url{http://www.amazon.com/National-Audubon-Society-Field-Series/dp/0679408525}}. Also
+recommended is a more complete textbook such as
+\emph{Universe}. %%{[}universe{]}. %% REF MISSING?
 There are also some nice resources on the net, like the
-\emph{Wikibooks Astronomy book}\footnote{\url{http://en.wikibooks.org/wiki/Subject:Astronomy}}.
+\emph{Wikibooks Astronomy
+  book}\footnote{\url{http://en.wikibooks.org/wiki/Subject:Astronomy}}.
 
 \section{The Celestial Sphere}
 \label{sec:Concepts:CelestialSphere}
@@ -101,14 +104,14 @@ equator is the line half way between the Earth's poles.
 \subsection{Altitude/Azimuth Coordinates}
 \label{sec:Concepts:AltAz}
 
-\begin{figure}[h]
-\centering\includegraphics[scale=1.8]{cs_azi}
+\begin{figure}[ht]
+\centering\includegraphics[width=\textwidth]{cs_azi}
 \caption{Altitude/Azimuth (Horizontal) Coordinate System}
 \label{fig:AltAz}
 \end{figure}
 
 The \indexterm{Altitude/Azimuth} coordinate system (also called
-\indexterm{Horizontal Coordinate System})can be used to describe a
+\indexterm{Horizontal Coordinate System}) can be used to describe a
 direction of view (the \indexterm{azimuth} angle) and an angular
 height in the sky (the \indexterm{altitude} angle). The azimuth angle
 is measured clockwise round from due North\footnote{In some textbooks
@@ -133,14 +136,28 @@ describing the general position of stars and other objects in the sky --
 the altitude and azimuth values for a celestial object change with
 time and the location of the observer.
 
-Stellarium can draw grid lines for altitude/azimuth coordinates. Use the
+Stellarium can draw grid lines for altitude/azimuth coordinates. Use the \guibutton{0.6}{bt_az_grid}
 button on the main tool-bar to activate this grid, or press the \key{Z} key.
+
+In addition, the \indexterm{cardinal points} can be highlighted using
+the \guibutton{0.6}{bt_cardinal} button or \key{Q} key.
+
+There are a few great circles with special names which Stellarium can
+draw (see section~\ref{sec:gui:view:markings}).
+\begin{description}
+\item[Meridian] This is the vertical line which runs from the North
+  point towards the zenith and further to the South point.
+\item[(Mathematical) Horizon] This is the line exactly 90\degree\ away
+  from the zenith.
+\item[First Vertical] This is the vertical line which runs from the East
+  point towards the zenith and further to the West point.
+\end{description}
 
 \subsection{Right Ascension/Declination Coordinates}
 \label{sec:Concepts:Equatorial}
 
-\begin{figure}[h]
-\centering\includegraphics[scale=1.8]{cs_equ}
+\begin{figure}[ht]
+\centering\includegraphics[width=\textwidth]{cs_equ}
 \caption{Equatorial Coordinates}
 \label{fig:EquatorialCoordinates}
 \end{figure}
@@ -155,35 +172,145 @@ The Northern celestial pole has a declination of $\delta=90\degree$, the celesti
 equator has a declination of $\delta=0\degree$, and the Southern celestial pole has a declination of $\delta=-90\degree$.
 
 Right ascension is measured as an angle round from a point in the sky
-known as the \indexterm{First Point of Aries}, in the same way that longitude
-is measured around the Earth from Greenwich. Figure~\ref{fig:EquatorialCoordinates} illustrates
-RA/Dec coordinates.
+known as the \indexterm{First Point of Aries}, in the same way that
+longitude is measured around the Earth from
+Greenwich. Figure~\ref{fig:EquatorialCoordinates} illustrates RA/Dec
+coordinates. The angle $\alpha$ is usually expressed as time with
+minute and seconds, with 15\degree\ equalling one hour.
 
 Unlike Altitude/Azimuth coordinates, RA/Dec coordinates of a star do
-not change if the observer changes latitude, and do not change over
-the course of the day due to the rotation of the Earth (the story is
-complicated a little by precession (section~\ref{sec:Concepts:Precession}) and
-parallax (section~\ref{sec:Concepts:Parallax}). RA/Dec coordinates are
-frequently used in star catalogues such as the Hipparcos catalogue.
+not change if the observer changes latitude, and do not change
+noticeably over the course of the day due to the rotation of the
+Earth.  RA/Dec coordinates are generally used nowadays in star
+catalogues such as the Hipparcos catalogue.
 
-Stellarium can draw grid lines for RA/Dec coordinates. Use the button on
-the main tool-bar to activate this grid, or press the \key{E} key.
 
-\section{Units}
-\label{sec:Concepts:Units}
+However, the story is complicated a little by precession
+(section~\ref{sec:Concepts:Precession}) and parallax
+(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift
+of the coordinates almost parallel to the ecliptic, and therefore star
+catalogues always have to specify their \indexterm{equinox} of
+validity. Current catalogs and atlases use coordinates for J2000.0.
 
-\subsection{Distance}
+
+Stellarium can draw grid lines for Equatorial coordinates. Use the
+button \guibutton{0.6}{bt_eq_grid} on the main tool-bar to activate
+this grid, or press the \key{E} key to draw the equatorial grid for
+the simulation time. The Markings dialog (\ref{sec:gui:view:markings})
+allows you to set also the grid for J2000.0 standard coordinates.
+
+In case you are observing from another celestial object, the
+equatorial coordinates use a system similar to the one referring to
+the earth-based coordinates, but parallel to the planet's rotational
+axis.
+
+There are again a few great circles with special names which
+Stellarium can draw in addition, both for simulation time and for
+J2000.0 (see section~\ref{sec:gui:view:markings}).
+\begin{description}
+\item[Celestial Equator] the line directly above the earth's (or more
+  generally, the observer's planet's) equator.
+\item[Colures] These are lines similar to meridian and first vertical
+  in the azimuthal system. The \emph{Equinoctial Colure} runs from the
+  North Celestial Pole NCP through the First Point of Aries \Aries,
+  South Celstial Pole SCP and First Point of Libra \Libra\, while the
+  \emph{Solstitial Colure} runs from the NCP through First Point of
+  Cancer \Cancer, SCP and First Point of Capricorn \Capricorn.
+\end{description}
+
+\subsection{Ecliptical Coordinates}
+\label{sec:Concepts:Ecliptical}
+
+The earth's orbit around the sun, i.e., the \indexterm{ecliptic},
+defines the ``equatorial line'' of this coordinate system, which is
+traditionally used when computing the coordinates for planets.
+
+The zero point of \indexterm{ecliptical longitude} $\lambda$ is the
+same as for equatorial coordinates, and the \indexterm{ecliptical
+  latitude} $\beta$ is counted positive towards the
+\indexterm{Northern Ecliptical Pole} NEP in the constellation of
+Draco.
+
+Moon and sun (and to a much lesser extent, the other planets) pull on
+the equatorial bulge and try to put Earth's axis normal to its orbital
+plane. Earth acts like a spinning top and evades this pull in a
+sideways motion, so that earth's axis seems to describe a small circle
+over a period of almost 26.000 years (see
+section~\ref{sec:Concepts:Precession}). 
+
+In addition, ecliptic obliquity against the equatorial coordinates,
+which mirrors the earth's axial tilt, slowly changes.
+
+Therefore, also for ecliptical coordinates is is required to specify
+which date the coordinates refer to.  Stellarium can draw two grids
+for Ecliptical coordinates. Use the \key{,} key to draw the ecliptic
+for the simulation time. The Markings dialog
+(\ref{sec:gui:view:markings}) allows you to show also a line for epoch
+J2000.0 and grids for the ecliptical coordinates for current epoch and
+epoch J2000.0. You can assign your own shortcut keys
+(section~\ref{sec:gui:help:hotkeys}) if you frequently operate with
+these coordinates.
+
+Since version 0.14.0 Stellarium can very accurately show the motions
+between the coordinate systems~\cite{2011AA:Vondrak, 2012AA:Vondrak}, and it is quite
+interesting to follow these motions for several millennia. To support
+such demonstrations, Stellarium can also draw the
+\indexterm{precession circles} between celestial and ecliptical poles
+(activate them in the Markings dialog
+(\ref{sec:gui:view:markings}). If you observe long enough, you will
+see that these circles vary in size, reflecting the changes in
+ecliptic obliquity.
+
+
+
+Many of the minor bodies are best observed around the times of their
+opposition.  Stellarium can display a great circle in the ecliptical
+coordinates which runs through the ecliptic poles and through the sun,
+thereby allowing to estimate opposition and conjunction. Activate
+display of this \indexterm{Opposition/Conjunction Line} in the Markings dialog
+(Labeled ``O./C. longitude''; \ref{sec:gui:view:markings}).
+
+
+It is interesting to note that star catalogs before \name{Tycho
+  Brahe}'s (1546--1601), most notably the one in \name{Ptolemy}'s
+\indexterm{Almagest}, used Ecliptical coordinates. The reason is
+simple: It was known since \name{Hipparch} that stellar coordinates
+slowly move along the ecliptic through \indexterm{precession}, and the
+correction to coordinates of a date of interest was a simple addition
+of a linear correction to the ecliptical longitude in the
+catalog. Changes of ecliptic obliquity was discovered much later.
+
+\subsection{Galactic Coordinates}
+\label{sec:Concepts:Galactic}
+
+The Milky Way appears to run along a great circle over the sky,
+mirroring the fact that the sun is a star in it. Coordinates for
+non-stellar objects which belong to the Milky Way like
+\indexterm{pulsars} or \indexterm{planetary nebulae} are often mapped
+in \indexterm{Galactic Coordinates}, where \indexterm{galactic longitude}
+$l$ and \indexterm{galactic latitude} $b$ are usually given in decimal
+degrees. Here, the zero point of galactic longitudes lies in the
+Galactic Center.
+
+Stellarium can also draw a galactic grid and the galactic equator by
+activating the respective options in the Markings dialog (see
+section~\ref{sec:gui:view:markings}). You can assign a keyboard
+shortcut if you frequently use these coordinates
+(see~\ref{sec:gui:help:hotkeys}).
+
+
+\section{Distance}
 \label{sec:Concepts:Distance}
 
 As \name{Douglas Adams} pointed out in the Hitchhiker's Guide to the
-Galaxy{[}hhg{]},
-
+Galaxy{\cite{THHG}},
 \begin{quote}
-  Space is big. You just won't believe how vastly, hugely,
+  Space [\ldots] is big. Really big. You just won't believe how vastly, hugely,
   mind-bogglingly big it is. I mean, you may think it's a long way
-  down the road to the chemist's, but that's just peanuts to
-  space.{[}hhg{]}
+  down the road to the chemist, but that's just peanuts to
+  space.[p.76]
 \end{quote}
+%
 Astronomers use a variety of units for distance that make sense in the
 context of the mind-boggling vastness of space.
 
@@ -208,10 +335,11 @@ context of the mind-boggling vastness of space.
   of large-scale objects like galaxies, nebulae etc.
 \end{description}
 
-\subsection{Time}\label{time}
+\section{Time}
+\label{sec:Concepts:Time}
 
-\begin{figure}[h]
-\centering\includegraphics[scale=2.2]{sidereal_day}
+\begin{figure}[ht]
+\centering\includegraphics[width=\textwidth]{sidereal_day}
 \caption{Sidereal day}
 \label{fig:SiderealDay}
 \end{figure}
@@ -253,7 +381,7 @@ year to travel round the Sun --
 $365\frac{1}{4}$ solar days. The length of a
 sidereal day is about 23 hours, 56 minutes and 4 seconds.
 
-\subsubsection{Sidereal Time}
+\subsection{Sidereal Time}
 \label{sec:Concepts:SiderealTime}
 
 It takes exactly one sidereal day for the celestial sphere to make one
@@ -262,9 +390,320 @@ useful when observing. This is the Right Ascension which is currently
 passing the meridian line.  When visiting observatories, look out for
 doctored alarm clocks that have been set to run in sidereal time!
 
+\subsection{Julian Day Number}
+\label{sec:Concepts:JulianDay}
+
+In the 19th century, astronomer \name{John Herschel} introduced the use of
+\indexterm{Julian Day} numbers (invented around the time of the Gregorian calendar
+reform). This is a simple continuous day count starting on January 1, -4712
+(4713 BC). There are no years, months etc., and the integral day
+number switches at noon, so during a single night of observation (in
+Europe) the date never changes. 
+
+The fractional part of the number is just the fraction of day that has
+elapsed since last noon. Given that a day has 86400~seconds, we should
+give a JD with 5 decimal places to capture the nearest second.
+
+This causes a problem for modern computers: even a ``double precision
+float'' can keep only about 13 decimal places. More than 2.4 million
+days have passed, so that e.g. January 1, 2000, 12:00UT is 2451545.0,
+which is an accurately storable number with 7 decimal places, but 12:34:56UT is computed as
+2451545.02426. A more accurate result would yield
+2451545.024259259259... So, for a field where sub-second accuracy
+became crucial like spacecraft operations, the \indexterm{Modified
+  Julian Date} (MJD) has been introduced. It is simply
+\begin{equation}
+  \label{eq:MJD}
+  MJD=JD-2400000.5. 
+\end{equation}
+This means, days start at midnight, and the (constant, in our era)
+decimal places of the ``big numbers'' at the begin of the number have
+been traded in for more decimal places at the end. 
+
+Don't put your expectations too high when you see MJD displayed
+(section~\ref{sec:gui:date}): Stellarium uses a double-precision
+floating point number for JD for internal timekeeping, and Stellarium's
+display of MJD is simply computed from it. So you cannot set temporal
+increments smaller than a second, and it hardly would make sense to
+expect more accuracy from the simulation algorithms.
 
 
-\subsection{Angles}
+%\subsubsection{\texorpdfstring{$\mathbf{\Delta T}$}{Delta T}}
+\subsection{Delta T}
+\label{sec:Concepts:DeltaT}
+%% GZ 2016-05-01
+
+Until around 1900, the earth's rotation was regarded as perfect
+standard of time. There were 86400~seconds per mean solar day, and the
+accuracy of reproducing time with mechanical clocks only in this time
+started to become as good as the earth's rotation itself.
+
+Astronomers who computed solar eclipses reported in texts from
+antiquity wondered about a required time shift which they originally
+attributed to a yet-unknown ``secular acceleration of the lunar
+motion''. However, it turned out that indeed the gravitational effect
+of the moon which causes the tides also has effects on earth's
+rotation: the tides slowly break earth's rotational speed. The energy
+is also transferred to the moon, and the acceleration leads to the
+moon slowly moving away from the earth\footnote{No need to worry, the
+  moon recedes from the earth only a few centimeters per year as
+  measured with the laser reflectors left by the Apollo astronauts in
+  the 1970s. In a very far future, however, there will only be annular
+  solar eclipses as a consequence!}.
+
+This led to the introduction of a time named Ephemeris Time (ET) with
+progresses in the speed of the second in the year 1900, to be used for
+positional computation in our solar system, in addition to Greenwich
+Mean Time (GMT), from which all zone times and ``civil'' clock times were
+derived.
+
+The introduction of Atomic Clocks in the middle of the 20th century
+led to a redefinition of the (temporal) second, which has been
+de-coupled from earth's rotation. This time, the International Atomic
+Time TAI, is the basis for Terrestrial Time TT which can be
+considered as constantly progressing at constant speed\footnote{We
+  don't discuss relativity here. The advanced reader is referred to
+  the presentation in the Wikipedia,
+  \url{https://en.wikipedia.org/wiki/Delta_T}.}, and is used for
+computation of the planetary positions.
+
+Still, people living on earth prefer to have the mean solar noon
+governing the run of day and night. Therefore all forms of civil time
+are linked to Coordinated Universal Time UTC. Seconds in UTC and TAI
+are of equal length. The slow and irregular divergence between TAI and
+UTC is observed by a few standardisation institutes.  When necessary,
+a leap second can be introduced to the UTC to bring the earth's
+rotation back in sync so that the Mean Sun again culminates at noon.
+
+The difference $\Delta T=TT-UT$ (or ``Delta T'') describes the
+temporal offset which amounts already to more than a minute in the 21st
+century. There have been many attempts to properly model $\Delta T$,
+and Stellarium offers several models you can choose from in the
+configuration dialog (see
+section~\ref{sec:gui:configuration:nav}). The default, ``Espenak and
+Meeus (2006)'', is a widely accepted standard. But if you are a
+researcher and want to experiment with alternative models, you will
+hopefully like this feature. you can even specify your own data for
+$a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
+(actually $\dot{n}=dn/dt$ in units of
+$\mathrm{arcseconds}/\mathrm{century}^2$) if you can model $\Delta T$
+according to the formula
+\begin{eqnarray}
+  \label{eq:DeltaT:custom}
+  \Delta T &=& a+ b\cdot u + c \cdot u^2 \, \ \ \text{where}\\
+         u &=& \frac{\mathrm{year}-y}{100}
+\end{eqnarray}
+
+\subsubsection{List of equations of $\Delta T$ in Stellarium}
+The following list describes sources and a few details about the models for $\Delta T$ implemented in Stellarium.
+\begin{description}
+\item[Without correction.] Correction is disabled. Use only if you know what you are doing!
+
+\item[Schoch (1931).] This historical formula was obtained by
+  C. Schoch~\cite{Schoch:1931} and was used by G. Henriksson in his
+  article ``Einstein's Theory of Relativity Confirmed by Ancient Solar
+  Eclipses''~\cite{2009ASPC..409..166H}. See for more
+  in~\cite{Peters:2010}.   $\dot{n}=-29.68''/\cy^2$.
+
+\item[Clemence (1948).] This empirical equation was published by
+  G. M. Clemence in the article ``On the system of astronomical
+  constants''~\cite{1948AJ.....53..169C}. Valid range of usage:
+  between years 1681 and 1900. $\dot{n}=-22.44''/\cy^2$.
+
+\item[IAU (1952).] This formula is based on a study of post-1650
+  observations of the Sun, the Moon and the planets by Spencer
+  Jones~\cite{1939MNRAS..99..541S} and used by Jean Meeus in his
+  ``Astronomical Formulae for Calculators''. It was also adopted in
+  the PC program \program{SunTracker Pro}. Valid range of usage: between years
+  1681 and 1936. $\dot{n}=-22.44''/\cy^2$.
+
+\item[Astronomical Ephemeris (1960).] This is a slightly modified
+  version of the IAU~\cite{1939MNRAS..99..541S} formula which was
+  adopted in the ``Astronomical Ephemeris''~\cite{ESAE:1961} and in
+  the ``Canon of Solar Eclipses'' by Mucke \&
+  Meeus~\cite{Mucke-Meeus:1983}. Valid range of usage: between years
+  -500 and 2000. $\dot{n}=-22.44''/\cy^2$.
+
+\item[Tuckerman (1962, 1964) \& Goldstine (1973).] The tables of
+  Tuckerman~\cite{Tuckerman:1962, Tuckerman:1964} list the positions
+  of the Sun, the Moon and the planets at 5- and 10-day intervals from
+  601 BCE to 1649 CE. The same relation was also implicitly adopted in
+  the syzygy tables of Goldstine~\cite{Goldstine:1973}. Valid range of
+  usage: between years -600 and 1649.
+
+\item[Muller \& Stephenson (1975).] This equation was published by
+  P. M. Muller and F. R. Stephenson in the article ``The accelerations
+  of the earth and moon from early astronomical
+  observations''~\cite{1975grhe.conf..459M}. Valid range of usage:
+  between years -1375 and 1975. $\dot{n}=-37.5''/\cy^2$.
+
+\item[Stephenson (1978).] This equation was published by
+  F. R. Stephenson in the article ``Pre-Telescopic Astronomical
+  Observations''~\cite{1978tfer.conf....5S}. $\dot{n}=-30.0''/\cy^2$.
+
+\item[Schmadel \& Zech (1979).] This 12th-order polynomial equation
+  (outdated and superseded by Schmadel \& Zech (1988)) was published
+  by L. D. Schmadel and G. Zech in the article ``Polynomial
+  approximations for the correction delta T E.T.-U.T. in the period
+  1800-1975''~\cite{1979AcA....29..101S} as fit through data published
+  by Brouwer~\cite{1952AJ.....57..125B}. Valid range of usage: between
+  years 1800 and 1975, with meaningless values outside this range. 
+  $\dot{n}=-23.8946''/\cy^2$.
+
+\item[Morrison \& Stephenson (1982).] This
+  algorithm~\cite{1982ASSL...96..173M} was adopted in P. Bretagnon \&
+  L. Simon's ``Planetary Programs and Tables from -4000 to
+  +2800''~\cite{Bretagnon-Simon:1986} and in the PC planetarium
+  program \program{RedShift}. Valid range of usage: between years -4000 and
+  2800. $\dot{n}=-26.0''/\cy^2$.
+
+\item[Stephenson \& Morrison (1984).] This formula was published by
+  F. R. Stephenson and L. V. Morrison in the article ``Long-term
+  changes in the rotation of the earth - 700 B.C. to
+  A.D. 1980''~\cite{1984RSPTA.313...47S}. Valid range of usage:
+  between years -391 and 1600. $\dot{n}=-26.0''/\cy^2$.
+
+\item[Stephenson \& Houlden (1986).] This
+  algorithm~\cite{houlden1986supplement} is used in the PC planetarium
+  program \program{Guide~7}. Valid range of usage: between years -600 and
+  1600.   $\dot{n}=-26.0''/\cy^2$.
+
+\item[Espenak (1987, 1989).] This algorithm was given by F. Espenak in
+  his ``Fifty Year Canon of Solar Eclipses:
+  1986-2035''~\cite{Espenak:1987} and in his ``Fifty Year Canon of
+  Lunar Eclipses: 1986-2035''~\cite{Espenak:1989}. Valid range of
+  usage: between years 1950 and 2100.
+
+\item[Borkowski (1988).] This formula was obtained by
+  K.M. Borkowski~\cite{1988A&A...205L...8B} from an analysis of 31
+  solar eclipse records dating between 2137 BCE and 1715 CE. Valid
+  range of usage: between years -2136 and 1715. $\dot{n}=-23.895''/\cy^2$.
+
+\item[Schmadel \& Zech (1988).] This 12th-order polynomial equation
+  was published by L. D. Schmadel and G. Zech in the article
+  ``Empirical Transformations from U.T. to E.T. for the Period
+  1800-1988''~\cite{1988AN....309..219S} as data fit through values
+  given by Stephenson \& Morrison (1984). Valid range of usage:
+  between years 1800 and 1988, with a mean error of less than one
+  second, max. error 1.9s, and meaningless values outside this
+  range. $\dot{n}=-26.0''/\cy^2$.
+
+\item[Chapront-Touze \& Chapront (1991).] This formula was adopted by
+  M. Chapront-Touze \& J. Chapront in the shortened version of the ELP
+  2000-85 lunar theory in their ``Lunar Tables and Programs from 4000
+  B.C. to A.D. 8000''~\cite{Chapront-Touze:1991}. The relations are
+  based on those of Stephenson \& Morrison (1984), but slightly
+  modified to make them compatible with the tidal acceleration
+  parameter of $\dot{n}=-23.8946''/\cy^2$ adopted in the ELP 2000-85 lunar
+  theory.
+
+\item[Stephenson \& Morrison (1995).] This equation was published by
+  F. R. Stephenson and L. V. Morrison in the article ``Long-Term
+  Fluctuations in the Earth's Rotation: 700 BC to AD
+  1990''~\cite{1995RSPTA.351..165S}. Valid range of usage: between
+  years -700 and 1600. $\dot{n}=-26.0''/\cy^2$.
+
+\item[Stephenson (1997).] F. R. Stephenson published this formula in
+  his book ``Historical Eclipses and Earth's
+  Rotation''~\cite{Stephenson:1997}. Valid range of usage: between
+  years -500 and 1600. $\dot{n}=-26.0''/\cy^2$.
+
+\item[Meeus (1998) (with Chapront, Chapront-Touze \& Francou (1997)).]
+  From J. Meeus, ``Astronomical
+  Algorithms''~\cite{AstronomicalAlgorithms:1998}, and widely
+  used. Table for 1620..2000, and includes a variant of Chapront,
+  Chapront-Touze \& Francou (1997) for dates outside 1620..2000. Valid
+  range of usage: between years -400 and 2150. $\dot{n}=-25.7376''/\cy^2$.
+
+\item[JPL Horizons.] The JPL Solar System Dynamics Group of the NASA
+  Jet Propulsion Laboratory use this formula in their interactive
+  website JPL
+  Horizons\footnote{\url{http://ssd.jpl.nasa.gov/?horizons}}. Valid
+  range of usage: between years -2999 and 1620, with zero values
+  outside this range. $\dot{n}=-25.7376''/\cy^2$.
+
+\item[Meeus \& Simons (2000).] This polynome was published by J. Meeus
+  and L. Simons in article ``Polynomial approximations to Delta T,
+  1620-2000 AD''~\cite{2000JBAA..110..323M}. Valid range of usage:
+  between years 1620 and 2000, with zero values outside this
+  range. $\dot{n}=-25.7376''/\cy^2$.
+
+\item[Montenbruck \& Pfleger (2000).] The fourth edition of
+  O. Montenbruck \& T. Pfleger's ``Astronomy on the Personal
+  Computer''~\cite{Montenbruck-Pfleger:2000} provides simple 3rd-order
+  polynomial data fits for the recent past. Valid range of usage:
+  between years 1825 and 2005, with a typical 1-second accuracy and
+  zero values outside this range.
+
+\item[Reingold \& Dershowitz (2002, 2007).] E. M. Reingold \&
+  N. Dershowitz present this polynomial data fit in ``Calendrical
+  Calculations''~\cite{Reingold-Dershowitz:2007} and in their
+  ``Calendrical Tabulations''~\cite{Reingold-Dershowitz:2002}. It is
+  based on Jean Meeus' ``Astronomical
+  Algorithms''~\cite{AstronomicalAlgorithms:1991}.
+
+\item[Morrison \& Stephenson (2004, 2005).] This important solution
+  was published by L. V. Morrison and F. R. Stephenson in the article
+  ``Historical values of the Earth's clock error $\Delta T$ and the
+  calculation of eclipses''~\cite{2004JHA....35..327M} with
+  addendum~\cite{2005JHA....36..339M}. Valid range of usage: between
+  years -1000 and 2000. $\dot{n}=-26.0''/\cy^2$.
+
+\item[Stephenson, Morrison \& Hohenkerk (2016).] This important new solution was published by
+  F. R. Stephenson,  L. V. Morrison and C. Y. Hohenkerk in the article 
+  ``Measurement of the Earth’s rotation: 720 BC to AD 2015''~\cite{StephensonMorrisonHohenkerk:2016}. 
+  The solution combines a spline fit to observations (used between the given limits) 
+  with a parabolic fit (used outside the range).
+  Recommended range of usage: between years -720 and 2016. $\dot{n}=-25.82''/\cy^2$.
+  
+\item[Espenak \& Meeus (2006).] This solution\footnote{This solution
+    is used by default.} by F. Espenak and J. Meeus, based on Morrison
+  \& Stephenson~2004\cite{2004JHA....35..327M} and a polynomial fit
+  through tabulated values for 1600-2000, is used for the NASA Eclipse
+  Web Site\footnote{\url{http://eclipse.gsfc.nasa.gov/eclipse.html}}
+  and in their ``Five Millennium Canon of Solar Eclipses: -1900 to
+  +3000''~\cite{Espenak-Meeus:2006}. This formula is also used in the
+  solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
+  range of usage: between years -1999 and
+  3000. $\dot{n}=-25.858''/\cy^2$.
+
+\item[Reijs (2006).] From the Length of Day (LOD; as determined by
+  Stephenson \& Morrison~\cite{2004JHA....35..327M}), Victor Reijs
+  derived a $\Delta T$ formula by using a Simplex optimisation with a
+  cosine and square
+  function\footnote{\url{http://www.iol.ie/~geniet/eng/DeltaTeval.htm}}. This
+  is based on a possible periodicy described by
+  Stephenson~\cite{2004JHA....35..327M}. Valid range of usage: between
+  years -1500 and 1100. $\dot{n}=-26.0''/\cy^2$.
+
+\item[Banjevic (2006).] This solution by B. Banjevic, based on
+  Stephenson \& Morrison (1984)~\cite{1984RSPTA.313...47S}, was
+  published in article ``Ancient eclipses and dating the fall of
+  Babylon''~\cite{2006POBeo..80..251B}. Valid range of usage: between
+  years -2020 and 1620, with zero values outside this range. 
+  $\dot{n}=-26.0''/\cy^2$.
+
+\item[Islam, Sadiq \& Qureshi (2008, 2013).] This solution by
+  S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus \&
+  Simons~\cite{2000JBAA..110..323M}, was published in article ``Error
+  Minimization of Polynomial Approximation of
+  DeltaT''~\cite{Islam-Sadiq-Qureshi:2008} and revisited by Sana Islam
+  in 2013. Valid range of usage: between years 1620 and 2007, with
+  zero values outside this range.
+
+\item[Khalid, Sultana \& Zaidi (2014).] This polynomial approximation
+  with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem
+  Zaidi was published in ``Delta T: Polynomial Approximation of Time
+  Period 1620-2013''~\cite{Khalid-Sultana-Zaidi:2014}. Valid range of
+  usage: between years 1620 and 2013, with zero values outside this
+  range.
+
+\item[Custom equation of $\Delta T$.] This is a quadratic formula for
+  calculation of $\Delta T$ with coefficients defined by the user.
+\end{description}
+
+
+\section{Angles}
 \label{sec:Concepts:Angles}
 
 Astronomers typically use degrees to measure angles. Since many
@@ -276,7 +715,7 @@ Finer grades of precision are usually expressed using the SI prefixes
 with arc-seconds, e.g. \emph{milli arc-seconds} (one milli arc-second is
 one thousandth of an arc-second).
 
-\subsubsection{Notation}
+\subsection{Notation}
 
 Degrees are denoted using the $\degree$ symbol after a number. Minutes of arc are denoted with a~$'$, and seconds of arc are denoted using~$''$. Angles are frequently given in two formats:
 
@@ -289,7 +728,7 @@ Degrees are denoted using the $\degree$ symbol after a number. Minutes of arc ar
   Decimal degrees, for example $90.2533\degree$
 \end{enumerate}
 
-\subsubsection{Handy Angles}
+\subsection{Handy Angles}
 \label{sec:Concepts:Angles:HandyAngles}
 \index{Handy Angles}
 
@@ -331,7 +770,7 @@ will work out your own ``handy angles''.
 
 
 
-\subsection{The Magnitude Scale}
+\section{The Magnitude Scale}
 \label{sec:Concepts:Magnitudes}
 
 
@@ -359,7 +798,7 @@ quantified the scale more precisely, defining it as a logarithmic scale
 where a magnitude~1 object is 100~times as bright as a magnitude~6
 object (a difference of five magnitudes). The zero-point of the modern
 scale was originally defined as the brightness of the star Vega, however
-this was re-defined more formally in 1982\cite{landolt}. Objects brighter
+this was re-defined more formally in 1982~\cite{landolt}. Objects brighter
 than Vega are given negative magnitudes.
 
 The absolute magnitude of a star is defined as the magnitude a star
@@ -391,7 +830,7 @@ Full Moon (at brightest) & -12.6 & ---\tabularnewline
 \end{table}
 
 
-\subsection{Luminosity}
+\section{Luminosity}
 \label{sec:Concepts:Luminosity}
 
 \emph{Luminosity} is an expression of the total energy radiated by a
@@ -404,38 +843,51 @@ and so on. Luminosity is related to absolute magnitude.
 \label{sec:Concepts:Precession}
 
 \begin{figure}[htb]
-\centering\includegraphics[scale=1.4]{obliquity_ecliptic}
+\centering\includegraphics[width=\textwidth]{obliquity_ecliptic}
 \caption{Ecliptic obliquity}
 \label{fig:Obliquity}
 \end{figure}
 
 As the Earth orbits the Sun throughout the year, the axis of rotation
-(the line running through the rotational poles of the Earth) seems
-to point towards the same position on the celestial sphere, as can be
-seen in figure~\ref{fig:Obliquity}. The angle between the axis
-of rotation and the perpendicular of the orbital plane is called the
-\indexterm{obliquity of the ecliptic}. It is currently about $23\degree27'$.
+(the line running through the rotational poles of the Earth) seems to
+point towards the same position on the celestial sphere, as can be
+seen in figure~\ref{fig:Obliquity}. The angle between the axis of
+rotation and the perpendicular of the orbital plane is called the
+\indexterm{obliquity of the ecliptic}. It is currently about
+$23\degree27'$ and is the angle between equatorial coordinates
+(\ref{sec:Concepts:Equatorial}) and ecliptical coordinates
+(\ref{sec:Concepts:Ecliptical}).
 
-\begin{figure}[htb]
-\centering\includegraphics[scale=2.0]{precession}
+\begin{figure}[p]
+\centering\includegraphics[width=0.75\textwidth]{precession}
 \caption{Precession}
 \label{fig:Precession}
 \end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[width=\textwidth]{P_BSC-PrecessionShift-Horizon30_85-135_1000BC-0_en}
+\caption{Precession: Change of rising positions of the stars along the
+  eastern horizon from azimuths 85 to 135 degrees, between years 1000
+  BC and 0, for latitude $\varphi=30\degree$.}
+\label{fig:Precession:AzimuthShift}
+\end{figure}
+
+
 
 
 Observed over very long periods of time the direction the axis of
 rotation points to does actually change. The angle between the axis of
 rotation and the orbital plane stays fairly constant, but the
 direction the axis points --- the position of the celestial pole ---
-transcribes a circle on the stars in the celestial sphere. The motion
+transcribes a figure similar to a circle on the stars in the celestial sphere. The motion
 is similar to the way in which a gyroscope slowly twists, as
 figure~\ref{fig:Precession} illustrates. This process is called
 \indexterm{precession}. The circles can be shown in Stellarium: From
 the View menu (\key{F4}), tab ``Markings'', switch on ``Precession
-Circles''.
+Circles'' (\ref{sec:gui:view:markings}).
 
 Precession is a slow process. The axis of rotation twists through a
-full $360\degree$ about once every 28,000 years. However, over these
+full $360\degree$ about once every 26,000 years. However, over these
 long times other gravitational perturbations (``planetary
 precession'') play a role, and what may be thought of as rigid
 ``precession circle'' can actually only show the instantaneous
@@ -449,10 +901,18 @@ Precession has some important implications:
   also include a date (``equinox'') for those coordinates. Therefore
   the current star catalogues list their objects for the epoch and
   equinox J2000.0.
-\item
-  Polaris, the pole star, won't stay a good indicator of the location of
-  the Northern celestial pole. In 14,000 years time Polaris will be
-  nearly $47\degree$ away from the celestial pole!
+\item Polaris, the pole star, won't stay a good indicator of the
+  location of the Northern celestial pole. In 14,000 years time
+  Polaris will be nearly $47\degree$ away from the celestial pole!
+\item The change in declination causes a shift in the rising and
+  setting positions of the stars along the
+  horizon. Figure~\ref{fig:Precession:AzimuthShift} shows part of the
+  horizon for latitude $\varphi=30\degree$ North. For a given year
+  (left vertical labels), make a horizontal line to find rising
+  azimuth of the bright stars indicated by the twisting
+  lines. Depending on where on the celestial sphere a star is located,
+  it may appear to move north or south, or be almost stationary for
+  several centuries.
 \end{enumerate}
 
 
@@ -482,12 +942,12 @@ in the sky. In both cases, the exact numbers refer to the
 gravitational centres of the respective bodies. However, we are
 sitting on Earth's surface, so the observed planet will be seen in a
 slightly shifted location. The amount for objects in the inner solar
-system is usually just a few arcseconds and indeed negligible when we
+system is usually just a few arcseconds and is mostly negligible when we
 just want to find an object. But it makes a difference when it comes
 to observations of stellar occultations by planets or asteroids. Such
-a body may measure only a few tens of kilometres, so the shadow track
+a body may measure only a few tens of kilometres, and the shadow track
 which it leaves on Earth's surface is of approximately the same
-size.\footnote{Unfortunately Stellarium (as of V0.14) is not accurate
+size.\footnote{Unfortunately Stellarium (as of V0.15) is not accurate
   enough to reliably compute such occultations. Even a deviation of
   0.5 arcseconds is too much here.}
 
@@ -506,7 +966,7 @@ planet you are located.
 \label{sec:Concepts:StellarParallax}
 
 \begin{figure}[tb]
-\centering\includegraphics[scale=2.0]{parallax}
+\centering\includegraphics[width=\textwidth]{parallax}
 \caption{Stellar Parallax}
 \label{fig:Parallax}
 \end{figure}
@@ -560,7 +1020,7 @@ Note however some limitations:
 \item Stellarium will stop at $\pm 100.000$ years. This limit may be
   still suitable for the stellar locations. The planetary locations
   are not trustworthy outside of a much closer temporal window (see
-  section~\ref{sec:Accuracy}). You cannot simulate the sky over the
+  section~\ref{ch:Accuracy}). You cannot simulate the sky over the
   dinosaurs or such things.
 \item Proper motion is only modelled by the linear components. True 3D
   motion in space requires more computation, which would slow down the

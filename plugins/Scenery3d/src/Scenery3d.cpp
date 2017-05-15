@@ -20,13 +20,7 @@
 
 #include <QtGlobal>
 
-#if !defined(Q_OS_WIN)
-//exclude StelOpenGL here on windows because of conflicts with GLFuncs.hpp otherwise (uses QOpenGLFunctions_1_0 directly)
-#include "StelOpenGL.hpp"
-#endif
-//needs to be included before StelOpenGL on Windows
 #include "GLFuncs.hpp"
-
 #include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
@@ -49,15 +43,8 @@
 #include <stdexcept>
 #include <cmath>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLFramebufferObject>
 
-#define GET_GLERROR()                                   \
-{                                                       \
-    GLenum err = glGetError();                          \
-    if (err != GL_NO_ERROR) {                           \
-    qWarning("[line %d] GL Error: %d",__LINE__, err);   \
-    }                                                   \
-}
+#define GET_GLERROR() StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
@@ -92,11 +79,12 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
       needsCubemapUpdate(true), needsMovementUpdate(false), lazyInterval(2.0), lastCubemapUpdate(0.0), lastCubemapUpdateRealTime(0), lastMovementEndRealTime(0),
       cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), dominantFace(0), secondDominantFace(1), cubeFBO(0), cubeSideFBO(), cubeMappingCreated(false),
-      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
+      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), transformedCubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
       lightOrthoNear(0.1f), lightOrthoFar(1000.0f), parallaxScale(0.015f)
 {
+	#ifndef NDEBUG
 	qDebug()<<"Scenery3d constructor...";
-
+	#endif
 	//the arrays should all contain only zeroes
 	Q_ASSERT(cubeMapTex[0]==0);
 	Q_ASSERT(cubeSideFBO[0]==0);
@@ -111,14 +99,16 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.geometryShader = false;
 	shaderParameters.torchLight = false;
 	shaderParameters.frustumSplits = 0;
+	shaderParameters.hwShadowSamplers = false;
 
 	sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
 
-
+	#ifndef NDEBUG
 	qDebug()<<"Scenery3d constructor...done";
+	#endif
 }
 
 Scenery3d::~Scenery3d()
@@ -251,6 +241,10 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 
 void Scenery3d::finalizeLoad()
 {
+	//must ensure the correct GL context is active!
+	//this is not guaranteed with the new QOpenGLWidget outside of init() and draw()!
+	StelApp::getInstance().ensureGLContextCurrent();
+
 	currentScene = loadingScene;
 
 	//move load data to current one
@@ -592,7 +586,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		{
 			//send size of light ortho for each frustum
 			loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_LIGHTORTHOSCALE);
-			shader->setUniformValueArray(loc,shadowFrustumSize.constData(),4);
+			shader->setUniformValueArray(loc,shadowFrustumSize.constData(),shaderParameters.frustumSplits);
 		}
 	}
 
@@ -800,7 +794,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			}
 		}
 
-
+		GET_GLERROR()
 		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, indexDataType, reinterpret_cast<const void*>(pStelModel->startIndex * indexDataTypeSize));
 		drawnTriangles+=pStelModel->triangleCount;
 	}
@@ -1128,7 +1122,7 @@ bool Scenery3d::renderShadowMaps()
 
 
 	//Unbind
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = altAzProjector->getViewport();
@@ -1574,7 +1568,7 @@ void Scenery3d::generateCubeMap()
 	}
 
 	//cubemap fbo must be released
-	glBindFramebuffer(GL_FRAMEBUFFER,0);
+	glBindFramebuffer(GL_FRAMEBUFFER,defaultFBO);
 
 	//reset GL state
 	glDepthMask(GL_FALSE);
@@ -1623,10 +1617,15 @@ void Scenery3d::drawFromCubeMap()
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
 	else // 2D tex coords are stored in the same buffer, but with an offset
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
-	cubeVertexBuffer.release();
 	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
-	cubeShader->setAttributeArray(ShaderMgr::ATTLOC_VERTEX, reinterpret_cast<const GLfloat*>(transformedCubeVertices.constData()),3);
+	cubeVertexBuffer.release();
+
+	//upload transformed vertex data
+	transformedCubeVertexBuffer.bind();
+	transformedCubeVertexBuffer.allocate(transformedCubeVertices.constData(), transformedCubeVertices.size() * sizeof(Vec3f));
+	cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_VERTEX, GL_FLOAT, 0,3);
 	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
+	transformedCubeVertexBuffer.release();
 
 	glEnable(GL_BLEND);
 	//note that GL_ONE is required here for correct blending (see drawArrays)
@@ -2045,9 +2044,11 @@ void Scenery3d::determineFeatureSupport()
 
 void Scenery3d::init()
 {
+	initializeOpenGLFunctions();
 	OBJ::setupGL();
 
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	Q_ASSERT(ctx);
 
 #ifndef QT_OPENGL_ES_2
 	//initialize additional functions needed and not provided through StelOpenGL
@@ -2063,6 +2064,8 @@ void Scenery3d::init()
 
 	cubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	cubeVertexBuffer.create();
+	transformedCubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StreamDraw);
+	transformedCubeVertexBuffer.create();
 	cubeIndexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	cubeIndexBuffer.create();
 
@@ -2360,7 +2363,7 @@ bool Scenery3d::initCubemapping()
 	}
 
 	//unbind last framebuffer
-	glBindFramebuffer(GL_FRAMEBUFFER,0);
+	glBindFramebuffer(GL_FRAMEBUFFER,defaultFBO);
 
 	//initialize cube rotations... found by trial and error :)
 	QMatrix4x4 stackBase;
@@ -2624,7 +2627,23 @@ bool Scenery3d::initShadowmapping()
 			//for OpenGL ES2, type has to be UNSIGNED_SHORT or UNSIGNED_INT for depth textures, desktop does probably not care
 			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
 
-			GLint filter = (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
+			//we use hardware-accelerated depth compare mode, unless pcss is used
+			shaderParameters.hwShadowSamplers = false;
+			//NOTE: cant use depth compare mode on ES2
+			if(!pcssEnabled)
+			{
+#ifndef QT_OPENGL_ES_2
+				if(!isEs)
+				{
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+					shaderParameters.hwShadowSamplers = true;
+				}
+#endif
+			}
+
+			//IF we support hw shadow sampling, then we may enable linear filtering, otherwise filtering depth values directly would not make much sense
+			GLint filter = shaderParameters.hwShadowSamplers && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH_HARDWARE) ? GL_LINEAR : GL_NEAREST;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
@@ -2640,18 +2659,6 @@ bool Scenery3d::initShadowmapping()
 				glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 			}
 #endif
-			//we use hardware-accelerated depth compare mode, unless pcss is used
-			//NOTE: cant use depth compare mode on ES2
-			if(!pcssEnabled)
-			{
-#ifndef QT_OPENGL_ES_2
-				if(!isEs)
-				{
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-				}
-#endif
-			}
 
 			//Attach the depthmap to the Buffer
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
@@ -2680,7 +2687,7 @@ bool Scenery3d::initShadowmapping()
 		}
 
 		//Done. Unbind and switch to normal texture unit 0
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
 		glActiveTexture(GL_TEXTURE0);
 
 		qDebug()<<"[Scenery3D] shadowmapping initialized";
@@ -2703,6 +2710,9 @@ void Scenery3d::draw(StelCore* core)
 	//cant draw if no models
 	if(!objModel || !objModel->hasStelModels())
 		return;
+
+	//find out the default FBO
+	defaultFBO = StelApp::getInstance().getDefaultFBO();
 
 	//reset render statistic
 	drawnTriangles = drawnModels = materialSwitches = shaderSwitches = 0;

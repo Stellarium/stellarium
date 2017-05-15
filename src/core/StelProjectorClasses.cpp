@@ -29,20 +29,20 @@ QString StelProjectorPerspective::getNameI18() const
 
 QString StelProjectorPerspective::getDescriptionI18() const
 {
-	return q_("Perspective projection keeps the horizon a straight line. The mathematical name for this projection method is <i>gnomonic projection</i>.");
+	return q_("Perspective projection maps the horizon and other great circles like equator, ecliptic, hour lines, etc. into straight lines. The mathematical name for this projection method is <i>gnomonic projection</i>.");
 }
 
 bool StelProjectorPerspective::forward(Vec3f &v) const
 {
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	if (v[2] < 0) {
-		v[0] /= (-v[2]);
+		v[0] *= (-widthStretch/v[2]);
 		v[1] /= (-v[2]);
 		v[2] = r;
 		return true;
 	}
 	if (v[2] > 0) {
-		v[0] /= v[2];
+		v[0] *= widthStretch/v[2];
 		v[1] /= v[2];
 		v[2] = -std::numeric_limits<float>::max();
 		return false;
@@ -55,6 +55,7 @@ bool StelProjectorPerspective::forward(Vec3f &v) const
 
 bool StelProjectorPerspective::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	v[2] = std::sqrt(1.0/(1.0+v[0]*v[0]+v[1]*v[1]));
 	v[0] *= v[2];
 	v[1] *= v[2];
@@ -88,14 +89,14 @@ QString StelProjectorEqualArea::getNameI18() const
 
 QString StelProjectorEqualArea::getDescriptionI18() const
 {
-	return q_("The full name of this projection method is, <i>Lambert azimuthal equal-area projection</i>. It preserves the area but not the angle.");
+	return q_("The full name of this projection method is <i>Lambert azimuthal equal-area projection</i>. It preserves the area but not the angle.");
 }
 
 bool StelProjectorEqualArea::forward(Vec3f &v) const
 {
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const float f = std::sqrt(2.f/(r*(r-v[2])));
-	v[0] *= f;
+	v[0] *= f*widthStretch;
 	v[1] *= f;
 	v[2] = r;
 	return true;
@@ -103,6 +104,7 @@ bool StelProjectorEqualArea::forward(Vec3f &v) const
 
 bool StelProjectorEqualArea::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	// FIXME: for high FoV, return false but don't cause crash with Mouse Pointer Coordinates.
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double l = 1.0 - 0.25*dq;
@@ -145,7 +147,7 @@ QString StelProjectorStereographic::getNameI18() const
 
 QString StelProjectorStereographic::getDescriptionI18() const
 {
-	return q_("Stereographic projection is known since the antiquity and was originally known as the planisphere projection. It preserves the angles at which curves cross each other but it does not preserve area.");
+	return q_("Stereographic projection is known since antiquity and was originally known as the planisphere projection. It preserves the angles at which curves cross each other but it does not preserve area.");
 }
 
 bool StelProjectorStereographic::forward(Vec3f &v) const
@@ -159,7 +161,7 @@ bool StelProjectorStereographic::forward(Vec3f &v) const
 		return false;
 	}
 	const float f = 1.f / h;
-	v[0] *= f;
+	v[0] *= f*widthStretch;
 	v[1] *= f;
 	v[2] = r;
 	return true;
@@ -167,10 +169,11 @@ bool StelProjectorStereographic::forward(Vec3f &v) const
 
 bool StelProjectorStereographic::backward(Vec3d &v) const
 {
-  const double lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
-  v[2] = lqq - 1.0;
-  v *= (1.0 / (lqq + 1.0));
-  return true;
+	v[0] /= widthStretch;
+	const double lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
+	v[2] = lqq - 1.0;
+	v *= (1.0 / (lqq + 1.0));
+	return true;
 }
 
 float StelProjectorStereographic::fovToViewScalingFactor(float fov) const
@@ -208,7 +211,7 @@ bool StelProjectorFisheye::forward(Vec3f &v) const
 	if (rq1 > 0.f) {
 		const float h = std::sqrt(rq1);
 		const float f = std::atan2(h,-v[2]) / h;
-		v[0] *= f;
+		v[0] *= f*widthStretch;
 		v[1] *= f;
 		v[2] = std::sqrt(rq1 + v[2]*v[2]);
 		return true;
@@ -227,6 +230,7 @@ bool StelProjectorFisheye::forward(Vec3f &v) const
 
 bool StelProjectorFisheye::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	const double a = std::sqrt(v[0]*v[0]+v[1]*v[1]);
 	const double f = (a > 0.0) ? (std::sin(a) / a) : 1.0;
 	v[0] *= f;
@@ -269,7 +273,7 @@ bool StelProjectorHammer::forward(Vec3f &v) const
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float cosDelta = std::sqrt(1.f-v[1]*v[1]/(r*r));
 	float z = std::sqrt(1.+cosDelta*std::cos(alpha/2.f));
-	v[0] = 2.f*M_SQRT2*cosDelta*std::sin(alpha/2.f)/z;
+	v[0] = 2.f*M_SQRT2*cosDelta*std::sin(alpha/2.f)/z * widthStretch;
 	v[1] = M_SQRT2*v[1]/r/z;
 	v[2] = r;
 	return true;
@@ -277,6 +281,7 @@ bool StelProjectorHammer::forward(Vec3f &v) const
 
 bool StelProjectorHammer::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	const double zsq = 1.-0.25*0.25*v[0]*v[0]-0.5*0.5*v[1]*v[1];
 	const double z = zsq<0. ? 0. : std::sqrt(zsq);
 	const bool ret = 0.25*v[0]*v[0]+v[1]*v[1]<2.0; // This is stolen from glunatic
@@ -322,7 +327,7 @@ bool StelProjectorCylinder::forward(Vec3f &v) const
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float delta = std::asin(v[1]/r);
-	v[0] = alpha;
+	v[0] = alpha*widthStretch;
 	v[1] = delta;
 	v[2] = r;
 	return rval;
@@ -330,10 +335,12 @@ bool StelProjectorCylinder::forward(Vec3f &v) const
 
 bool StelProjectorCylinder::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double cd = std::cos(v[1]);
-	v[2] = - cd * std::cos(v[0]);
-	v[0] = cd * std::sin(v[0]);
+	const double alpha=v[0];
+	v[2] = - cd * std::cos(alpha);
+	v[0] = cd * std::sin(alpha);
 	v[1] = std::sin(v[1]);
 	return rval;
 }
@@ -368,7 +375,7 @@ bool StelProjectorMercator::forward(Vec3f &v) const
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float sin_delta = v[1]/r;
-	v[0] = std::atan2(v[0],-v[2]);
+	v[0] = std::atan2(v[0],-v[2]) *widthStretch;
 	v[1] = 0.5f*std::log((1.f+sin_delta)/(1.f-sin_delta));
 	v[2] = r;
 	return rval;
@@ -377,7 +384,8 @@ bool StelProjectorMercator::forward(Vec3f &v) const
 
 bool StelProjectorMercator::backward(Vec3d &v) const
 {
-	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
+	v[0] /= widthStretch;
+	const bool rval = v[0]>-M_PI && v[0]<M_PI;
 	const double E = std::exp(v[1]);
 	const double h = E*E;
 	const double h1 = 1.0/(1.0+h);
@@ -419,7 +427,7 @@ bool StelProjectorOrthographic::forward(Vec3f &v) const
 {
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const float h = 1.f/r;
-	v[0] *= h;
+	v[0] *= h *widthStretch;
 	v[1] *= h;
 	const bool rval = (v[2] <= 0.f);
 	v[2] = r;
@@ -428,6 +436,7 @@ bool StelProjectorOrthographic::forward(Vec3f &v) const
 
 bool StelProjectorOrthographic::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double h = 1.0 - dq;
 	if (h < 0) {
@@ -472,7 +481,7 @@ bool StelProjectorSinusoidal::forward(Vec3f &v) const
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float delta = std::asin(v[1]/r);	
-	v[0] = alpha*std::cos(delta);
+	v[0] = alpha*std::cos(delta) *widthStretch;
 	v[1] = delta;
 	v[2] = r;
 	return rval;
@@ -480,6 +489,7 @@ bool StelProjectorSinusoidal::forward(Vec3f &v) const
 
 bool StelProjectorSinusoidal::backward(Vec3d &v) const
 {
+	v[0] /= widthStretch;
 	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double cd = std::cos(v[1]);
 	const double pcd = v[0]/cd;
@@ -494,6 +504,42 @@ bool StelProjectorSinusoidal::backward(Vec3d &v) const
 	v[2] = -cd * std::cos(pcd);
 	v[0] = cd * std::sin(pcd);
 	v[1] = std::sin(v[1]);
+	return rval;
+}
+
+QString StelProjectorMiller::getNameI18() const
+{
+	return q_("Miller cylindrical");
+}
+
+QString StelProjectorMiller::getDescriptionI18() const
+{
+	return q_("The Miller cylindrical projection is a modified Mercator projection, proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no longer mapped to infinity.");
+}
+
+bool StelProjectorMiller::forward(Vec3f &v) const
+{
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const bool rval = (-r < v[1] && v[1] < r);
+	const float sin_delta = v[1]/r;
+	const float delta=asin(sin_delta);
+	v[0] = std::atan2(v[0],-v[2]) * widthStretch;
+	v[1] = 1.25f*asinh(tan(0.8f*delta));
+	v[2] = r;
+	return rval;
+}
+
+bool StelProjectorMiller::backward(Vec3d &v) const
+{
+	v[0] /= widthStretch;
+	const double yMax=1.25f*asinh(tan(M_PI*2.0/5.0));
+	const bool rval = v[1]<yMax && v[1]>-yMax && v[0]>-M_PI && v[0]<M_PI;
+	const double lat = 1.25*atan(sinh(0.8*v[1]));
+	const double lng = v[0];
+	const double cos_lat=cos(lat);
+	v[0] = cos_lat*sin(lng);
+	v[1] = sin(lat);
+	v[2]= -cos_lat*cos(lng);
 	return rval;
 }
 

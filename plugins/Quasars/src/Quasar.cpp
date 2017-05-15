@@ -41,25 +41,28 @@ bool Quasar::distributionMode = false;
 Vec3f Quasar::markerColor = Vec3f(1.0f,0.5f,0.4f);
 
 Quasar::Quasar(const QVariantMap& map)
-		: initialized(false),
-		  designation(""),
-		  VMagnitude(21.),
-		  AMagnitude(21.),
-		  bV(0.),
-		  qRA(0.),
-		  qDE(0.),
-		  redshift(0.)
+	: initialized(false)
+	, designation("")
+	, VMagnitude(21.)
+	, AMagnitude(21.)
+	, bV(0.)
+	, qRA(0.)
+	, qDE(0.)
+	, redshift(0.)
 {
-	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation"))
+	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DE"))
+	{
+		qWarning() << "Quasar: INVALID quasar!" << map.value("designation").toString();
+		qWarning() << "Quasar: Please, check your 'quasars.json' catalog!";
 		return;
-		
+	}
+
 	designation  = map.value("designation").toString();
 	VMagnitude = map.value("Vmag").toFloat();
 	AMagnitude = map.value("Amag").toFloat();
 	bV = map.value("bV").toFloat();
 	qRA = StelUtils::getDecAngle(map.value("RA").toString());
-	qDE = StelUtils::getDecAngle(map.value("DE").toString());	
+	qDE = StelUtils::getDecAngle(map.value("DE").toString());
 	redshift = map.value("z").toFloat();
 
 	initialized = true;
@@ -70,7 +73,7 @@ Quasar::~Quasar()
 	//
 }
 
-QVariantMap Quasar::getMap(void)
+QVariantMap Quasar::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -134,6 +137,17 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	return str;
 }
 
+QVariantMap Quasar::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map["amag"] = AMagnitude;
+	map["bV"] = bV;
+	map["redshift"] = redshift;
+
+	return map;
+}
+
 Vec3f Quasar::getInfoColor(void) const
 {
 	return Vec3f(1.0, 1.0, 1.0);
@@ -177,8 +191,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	if (distributionMode)
 	{
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
+		painter.setBlending(true, GL_ONE, GL_ONE);
 		painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
 
 		Quasar::markerTexture->bind();

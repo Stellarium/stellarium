@@ -52,21 +52,18 @@ StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
 	: domain(adomain),
 	  langName(alangName)
 {
-	QString localePath("/"+adomain+"/"+getTrueLocaleName()+".qm");
 	translator = new QTranslator();
-	bool res = translator->load(StelFileMgr::getLocaleUserDir() + localePath);
+	bool res = translator->load(StelFileMgr::getLocaleDir()+"/"+adomain+"/"+getTrueLocaleName()+".qm");
 	if (!res)
-		res = translator->load(StelFileMgr::getLocaleDir() + localePath);
-	if (!res)
-		qWarning() << "Couldn't load translations for language " << getTrueLocaleName();
+		qWarning() << "Couldn't load translations for language " << getTrueLocaleName() << "in section" << adomain;
 	if (translator->isEmpty())
-		qWarning() << "Empty translation file for language " << getTrueLocaleName();
+		qWarning() << "Empty translation file for language " << getTrueLocaleName() << "in section" << adomain;
 }
 
 StelTranslator::~StelTranslator()
 {
 	delete translator;
-	translator = 0;
+	translator = NULL;
 }
 
 QString StelTranslator::qtranslate(const QString& s, const QString& c) const
@@ -77,6 +74,11 @@ QString StelTranslator::qtranslate(const QString& s, const QString& c) const
 	if (res.isEmpty())
 		return s;
 	return res;
+}
+
+QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
+{
+	return translator->translate("", s.toUtf8().constData(),c.toUtf8().constData());
 }
 	
 //! Initialize Translation
@@ -140,18 +142,14 @@ QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 }
 
 //! Get available native language names from directory tree
-QStringList StelTranslator::getAvailableLanguagesNamesNative() const
+QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& localeDir, const QString& section) const
 {
-	QStringList codeList = getAvailableIso639_1Codes(StelFileMgr::getLocaleDir());
-
-	QString localeUserDir = StelFileMgr::getLocaleUserDir();
-	if (QDir(localeUserDir+"/stellarium/").exists())
-	{
-		QStringList codeUserList = getAvailableIso639_1Codes(localeUserDir);
-		codeList += codeUserList;
-		codeList.removeDuplicates();
-	}
-
+	QString tmpDir = localeDir;
+	if (section.isEmpty() || section=="stellarium")
+		tmpDir.append("/stellarium/");
+	else
+		tmpDir.append("/stellarium-" + section + "/");
+	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
 	QStringList output;
 	foreach (const QString& lang, codeList)
 	{
@@ -163,7 +161,7 @@ QStringList StelTranslator::getAvailableLanguagesNamesNative() const
 //! Get available language codes from directory tree
 QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir) const
 {
-	QDir dir(localeDir+"/stellarium/");
+	QDir dir(localeDir);
 
 	if (!dir.exists())
 	{

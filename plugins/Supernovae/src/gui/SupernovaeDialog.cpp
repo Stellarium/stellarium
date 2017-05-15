@@ -38,11 +38,11 @@
 #include "StelTranslator.hpp"
 
 SupernovaeDialog::SupernovaeDialog()
-	: sn(NULL)
+	: StelDialog("Supernovae")
+	, sn(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_supernovaeDialog;
-	dialogName = "Supernovae";
 }
 
 SupernovaeDialog::~SupernovaeDialog()
@@ -222,7 +222,7 @@ void SupernovaeDialog::updateCompleteReceiver(void)
 
 void SupernovaeDialog::restoreDefaults(void)
 {
-	qDebug() << "Supernovae::restoreDefaults";
+	qDebug() << "[Supernovae] restore defaults";
 	sn->restoreDefaults();
 	sn->readSettingsFromConfig();
 	updateGuiFromSettings();

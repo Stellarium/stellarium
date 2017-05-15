@@ -35,6 +35,12 @@ class QDataStream;
 class Nebula : public StelObject
 {
 friend class NebulaMgr;
+
+	//Required for the correct working of the Q_FLAGS macro (which requires a MOC pass)
+	Q_GADGET
+	Q_FLAGS(CatalogGroup)
+	Q_FLAGS(TypeGroup)
+	Q_ENUMS(NebulaType)
 public:
 	enum CatalogGroupFlags
 	{
@@ -52,89 +58,29 @@ public:
 		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
 		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
 		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
+		CatCed		= 0x00004000  //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 	};
+	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
 	enum TypeGroupFlags
 	{
 		TypeGalaxies		= 0x00000001, //!< Galaxies
 		TypeActiveGalaxies	= 0x00000002, //!< Different Active Galaxies
-		TypeInteractingGalaxies	= 0x00000004, //!< Different Active Galaxies
+		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
 		TypeStarClusters	= 0x00000008, //!< Star Clusters
 		TypeHydrogenRegions	= 0x00000010, //!< Hydrogen Regions
 		TypeBrightNebulae	= 0x00000020, //!< Bright Nebulae
 		TypeDarkNebulae		= 0x00000040, //!< Dark Nebulae
 		TypePlanetaryNebulae	= 0x00000080, //!< Planetary Nebulae
-		TypeSupernovaRemnants	= 0x00000100, //!< Planetary Nebulae
+		TypeSupernovaRemnants	= 0x00000100, //!< Supernova Remnants
 		TypeOther		= 0x00000200  //!< Other objects
 	};
-
-
-	typedef QFlags<CatalogGroupFlags> CatalogGroup;
-	Q_FLAGS(CatalogGroup)
-	typedef QFlags<TypeGroupFlags> TypeGroup;
-	Q_FLAGS(TypeGroup)
+	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
 	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);
 	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeOther);
 
-	Nebula();
-	~Nebula();
-
-	//! Nebula support the following InfoStringGroup flags:
-	//! - Name
-	//! - CatalogNumber
-	//! - Magnitude
-	//! - RaDec
-	//! - AltAzi
-	//! - Distance
-	//! - Size
-	//! - Extra (contains the Nebula type, which might be "Galaxy", "Cluster" or similar)
-	//! - PlainText
-	//! @param core the StelCore object
-	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the Nebula.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
-	virtual QString getType() const {return "Nebula";}
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
-	virtual double getCloseViewFov(const StelCore* core = NULL) const;
-	virtual float getVMagnitude(const StelCore* core) const;
-	virtual float getSelectPriority(const StelCore* core) const;
-	virtual Vec3f getInfoColor() const;
-	virtual QString getNameI18n() const {return nameI18;}
-	virtual QString getEnglishName() const {return englishName;}
-	virtual double getAngularSize(const StelCore*) const;
-	virtual SphericalRegionP getRegion() const {return pointRegion;}
-
-	// Methods specific to Nebula
-	void setLabelColor(const Vec3f& v) {labelColor = v;}
-	void setCircleColor(const Vec3f& v) {circleColor = v;}
-
-	//! Get the printable nebula Type.
-	//! @return the nebula type code.
-	QString getTypeString() const;
-
-	//! Get the printable morphological nebula Type.
-	//! @return the nebula morphological type string.
-	QString getMorphologicalTypeString() const;
-
-	float getSurfaceBrightness(const StelCore* core) const;
-	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
-
-	//! Get the surface area.
-	//! @return surface area in square degrees.
-	float getSurfaceArea(void) const;
-
-	void setProperName(QString name) { englishName = name; }
-
-	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced)
-	//! @return a designation
-	QString getDSODesignation();
-
-private:
-	friend struct DrawNebulaFuncObject;
-	
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
@@ -155,7 +101,7 @@ private:
 		NebBn		= 14,	//!< Bipolar nebula
 		NebEn		= 15,	//!< Emission nebula
 		NebCn		= 16,	//!< Cluster associated with nebulosity
-		NebHII		= 17,	//!< HII Region		
+		NebHII		= 17,	//!< HII Region
 		NebSNR		= 18,	//!< Supernova remnant
 		NebISM		= 19,	//!< Interstellar matter
 		NebEMO		= 20,	//!< Emission object
@@ -170,8 +116,84 @@ private:
 		NebUnknown	= 29	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
+	Nebula();
+	~Nebula();
+
+	//! Nebula support the following InfoStringGroup flags:
+	//! - Name
+	//! - CatalogNumber
+	//! - Magnitude
+	//! - RaDec
+	//! - AltAzi
+	//! - Distance
+	//! - Size
+	//! - Extra (contains the Nebula type, which might be "Galaxy", "Cluster" or similar)
+	//! - PlainText
+	//! @param core the StelCore object
+	//! @param flags a set of InfoStringGroup items to include in the return value.
+	//! @return a QString containing an HMTL encoded description of the Nebula.
+	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! In addition to the entries from StelObject::getInfoMap(), Nebula objects provide
+	//! - bmag (photometric B magnitude. 99 if unknown)
+	//! - morpho (longish description; translated!)
+	//! - surface-brightness
+	//! A few entries are optional
+	//! - bV (B-V index)
+	//! - redshift
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
+	virtual QString getType() const {return "Nebula";}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZ;}
+	virtual double getCloseViewFov(const StelCore* core = NULL) const;
+	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const;
+	virtual Vec3f getInfoColor() const;
+	virtual QString getNameI18n() const {return nameI18;}
+	virtual QString getEnglishName() const {return englishName;}
+	QString getEnglishAliases() const;
+	QString getI18nAliases() const;
+	virtual double getAngularSize(const StelCore*) const;
+	virtual SphericalRegionP getRegion() const {return pointRegion;}
+
+	// Methods specific to Nebula
+	void setLabelColor(const Vec3f& v) {labelColor = v;}
+	void setCircleColor(const Vec3f& v) {circleColor = v;}
+
+	//! Get the printable nebula Type.
+	//! @return the nebula type code.
+	QString getTypeString() const;
+
+	NebulaType getDSOType() const {return nType;}
+
+	//! Get the printable morphological nebula Type.
+	//! @return the nebula morphological type string.
+	QString getMorphologicalTypeString() const;
+
+	float getSurfaceBrightness(const StelCore* core) const;
+	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
+
+	//! Get the surface area.
+	//! @return surface area in square degrees.
+	float getSurfaceArea(void) const;
+
+	void setProperName(QString name) { englishName = name; }
+	void addNameAlias(QString name) { englishAliases.append(name); }
+	void removeAllNames() { englishName=""; englishAliases.clear(); }
+
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced)
+	//! @return a designation
+	QString getDSODesignation();
+
+private:
+	friend struct DrawNebulaFuncObject;
+
 	//! Translate nebula name using the passed translator
-	void translateName(const StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
+	void translateName(const StelTranslator& trans)
+	{
+		nameI18 = trans.qtranslate(englishName);
+		nameI18Aliases.clear();
+		foreach(QString alias, englishAliases)
+			nameI18Aliases.append(trans.qtranslate(alias));
+	}
 
 	void readDSO(QDataStream& in);
 
@@ -201,7 +223,9 @@ private:
 	unsigned int UGC_nb;            // UGC number (The Uppsala General Catalogue of Galaxies)
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString englishName;            // English name
+	QStringList englishAliases;	// English aliases
 	QString nameI18;                // Nebula name
+	QStringList nameI18Aliases;     // Nebula aliases
 	QString mTypeString;		// Morphological type of object (as string)	
 	float bMag;                     // B magnitude
 	float vMag;                     // V magnitude. For Dark Nebulae, opacity is stored here.	
@@ -262,11 +286,11 @@ private:
 	static Vec3f protoplanetaryNebulaColor;		// The color of protoplanetary nebula marker texture (NebPPN)
 	static Vec3f starColor;				// The color of star marker texture (NebStar)
 
-	static float circleScale;             // Define the scaling of the hints circle. Unused in 0.15. TODO: Remove this? I see no use. (GZ)
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
+	static bool designationUsage;
 
-	static bool flagUsageTypeFilter;
+	static bool flagUseTypeFilters;
 	static CatalogGroup catalogFilters;
 	static TypeGroup typeFilters;
 };

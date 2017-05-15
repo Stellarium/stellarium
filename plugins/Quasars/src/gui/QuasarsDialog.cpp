@@ -38,11 +38,11 @@
 #include "StelTranslator.hpp"
 
 QuasarsDialog::QuasarsDialog()
-	: qsr(NULL)
+	: StelDialog("Quasars")
+	, qsr(NULL)
 	, updateTimer(NULL)
 {
 	ui = new Ui_quasarsDialog;
-	dialogName = "Quasars";
 }
 
 QuasarsDialog::~QuasarsDialog()
@@ -230,7 +230,7 @@ void QuasarsDialog::updateCompleteReceiver(void)
 
 void QuasarsDialog::restoreDefaults(void)
 {
-	qDebug() << "Quasars::restoreDefaults";
+	qDebug() << "[Quasars] Restore defaults...";
 	qsr->restoreDefaults();
 	qsr->readSettingsFromConfig();
 	updateGuiFromSettings();

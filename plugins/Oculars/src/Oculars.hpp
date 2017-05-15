@@ -32,7 +32,7 @@
 #include <QFont>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 2
+#define MIN_OCULARS_INI_VERSION 3.1f
 
 QT_BEGIN_NAMESPACE
 class QKeyEvent;
@@ -75,6 +75,13 @@ a good way to supplement your visual astronomy interests.
 class Oculars : public StelModule
 {
 	Q_OBJECT
+
+	Q_PROPERTY(bool enableOcular READ getEnableOcular WRITE enableOcular NOTIFY enableOcularChanged)
+	Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
+	Q_PROPERTY(bool enableCCD READ getEnableCCD WRITE toggleCCD NOTIFY enableCCDChanged)
+	Q_PROPERTY(bool enableTelrad READ getEnableTelrad WRITE toggleTelrad NOTIFY enableTelradChanged)
+	Q_PROPERTY(bool flagHideGridsLines READ getFlagHideGridsLines WRITE setFlagHideGridsLines NOTIFY hideGridsLinesChanged)
+
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
 	friend class OcularsGuiPanel;
@@ -92,8 +99,6 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	virtual const StelStyle getModuleStyleSheet(const StelStyle& style);
 	//! This method is needed because the MovementMgr classes handleKeys() method consumes the event.
 	//! Because we want the ocular view to track, we must intercept & process ourselves.  Only called
 	//! while flagShowOculars or flagShowCCD == true.
@@ -119,6 +124,7 @@ public slots:
 	//! This method is called with we detect that our hot key is pressed.  It handles
 	//! determining if we should do anything - based on a selected object.
 	void enableOcular(bool b);
+	bool getEnableOcular() const { return flagShowOculars; }
 	void incrementCCDIndex();
 	void incrementOcularIndex();
 	void incrementTelescopeIndex();
@@ -133,9 +139,12 @@ public slots:
 	void toggleCCD(bool show);
 	//! Toggles the sensor frame overlay (overloaded for blind switching).
 	void toggleCCD();
+	bool getEnableCCD() const { return flagShowCCD; }
 	void toggleCrosshairs(bool show = true);
+	bool getEnableCrosshairs() const { return flagShowCrosshairs; }
 	//! Toggles the Telrad sight overlay.
 	void toggleTelrad(bool show);
+	bool getEnableTelrad() const { return flagShowTelrad; }
 	//! Toggles the Telrad sight overlay (overloaded for blind switching).
 	void toggleTelrad();
 	void enableGuiPanel(bool enable = true);
@@ -149,27 +158,37 @@ public slots:
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
 
-	void setFlagUseFlipForCCD(const bool b);
-	bool getFlagUseFlipForCCD(void) const;
+	void setFlagInitDirectionUsage(const bool b);
+	bool getFlagInitDirectionUsage(void) const;
+
+	void setFlagAutosetMountForCCD(const bool b);
+	bool getFlagAutosetMountForCCD(void) const;
 
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
+	void setFlagHideGridsLines(const bool b);
+	bool getFlagHideGridsLines(void) const;
+
 signals:
+	void enableOcularChanged(bool value);
+	void enableCrosshairsChanged(bool value);
+	void enableCCDChanged(bool value);
+	void enableTelradChanged(bool value);
 	void selectedCCDChanged();
 	void selectedOcularChanged();
 	void selectedTelescopeChanged();
 	void selectedLensChanged();
+	void hideGridsLinesChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
 	void setRequireSelection(bool state);
-	void setScaleImageCircle(bool state);	
+	void setScaleImageCircle(bool state);
 	void setScreenFOVForCCD();
 	void retranslateGui();
-	void setStelStyle(const QString& style);
 	void updateOcularReticle(void);
 
 private:
@@ -203,7 +222,8 @@ private:
 	//! Once there is a valid ini file, it is loaded into the settings attribute.
 	void validateAndLoadIniFile();
 
-	//! Recordd the state of the GridLinesMgr views beforehand, so that it can be reset afterwords.
+	//!
+	//! Record the state of the GridLinesMgr views beforehand, so that it can be reset afterwards.
 	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
 	void zoom(bool zoomedIn);
@@ -240,17 +260,7 @@ private:
 	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
-	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
-	bool flagGalacticGrid;		//!< Flag to track if GalacticGrid was displayed at activation.
-	bool flagEquatorGrid;		//!< Flag to track if EquatorGrid was displayed at activation.
-	bool flagEquatorJ2000Grid;	//!< Flag to track if EquatorJ2000Grid was displayed at activation.
-	bool flagEquatorLine;		//!< Flag to track if EquatorLine was displayed at activation.
-	bool flagEclipticLine;		//!< Flag to track if EclipticLine was displayed at activation.
-	bool flagEclipticJ2000Grid;	//!< Flag to track if EclipticJ2000Grid was displayed at activation.
-	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
-	bool flagLongitudeLine;		//!< Flag to track if LongitudeLine was displayed at activation.
-	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
-	bool flagGalacticEquatorLine;	//!< Flag to track if GalacticEquatorLine was displayed at activation.
+	bool flagCardinalPoints;	//!< Flag to track if CardinalPoints was displayed at activation.
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
@@ -259,7 +269,12 @@ private:
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
 	bool flagLimitPlanets;		//!< Flag to track limit magnitude for planets, asteroids, comets etc.
 	float magLimitPlanets;		//!< Value of limited magnitude for planets, asteroids, comets etc.
-
+	float relativeStarScaleMain;	//!< Value to store the usual relative star scale when activating ocular or CCD view
+	float absoluteStarScaleMain;	//!< Value to store the usual absolute star scale when activating ocular or CCD view
+	float relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
+	float absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
+	float relativeStarScaleCCD;	//!< Value to store the relative star scale when switching off CCD view
+	float absoluteStarScaleCCD;	//!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
 
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
@@ -269,7 +284,9 @@ private:
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
-	bool flagSemiTransporency;
+	bool flagSemiTransparency;
+	bool flagHideGridsLines;
+	bool flagGridlinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
 	bool flipVert;
 	bool flipHorz;
 
@@ -301,16 +318,14 @@ private:
 
 	class OcularsGuiPanel * guiPanel;
 
-	//Styles
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
-
 	//Reticle
 	StelTextureSP reticleTexture;
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
-	bool flagUseFlipForCCD;		//!< Flag used to track if we use flips for CCD
+	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
+	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
+	bool equatorialMountEnabled;
 	double reticleRotation;
 };
 

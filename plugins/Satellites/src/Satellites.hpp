@@ -97,6 +97,7 @@ struct TleData
 	QString name;
 	QString first;
 	QString second;
+	int status;
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.
 	bool addThis;
@@ -145,10 +146,12 @@ class Satellites : public StelObjectModule
 	Q_OBJECT
 	Q_PROPERTY(bool hintsVisible
 	           READ getFlagHints
-		   WRITE setFlagHints)
+		   WRITE setFlagHints
+		   NOTIFY hintsVisibleChanged)
 	Q_PROPERTY(bool labelsVisible
 	           READ getFlagLabels
-		   WRITE setFlagLabels)
+		   WRITE setFlagLabels
+		   NOTIFY labelsVisibleChanged)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd
@@ -219,22 +222,14 @@ public:
 	//! @returns a null pointer if no such satellite is found.
 	StelObjectP searchByNoradNumber(const QString& noradNumber) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 
 	virtual QString getName() const { return "Satellites"; }
 
@@ -374,9 +369,15 @@ public:
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
 
+	//! Get depth of prediction for Iridium flares
+	int getIridiumFlaresPredictionDepth(void) { return iridiumFlaresPredictionDepth; }
+
 	IridiumFlaresPredictionList getIridiumFlaresPrediction();
 
 signals:
+	void hintsVisibleChanged(bool b);
+	void labelsVisibleChanged(bool b);
+
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
 	void settingsChanged();
@@ -464,6 +465,10 @@ public slots:
 	//! Save the current satellite catalog to disk.
 	void saveCatalog(QString path=QString());
 
+	//! Set depth of prediction for Iridium flares
+	//! @param depth in days
+	void setIridiumFlaresPredictionDepth(int depth) { iridiumFlaresPredictionDepth=depth; }
+
 private slots:
 
 private:
@@ -493,7 +498,7 @@ private:
 	void restoreDefaultQSMagFile();
 
 	//! Checks valid range dates of life of satellites
-	bool isValidRangeDates() const;
+	bool isValidRangeDates(const StelCore* core) const;
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.
@@ -593,6 +598,8 @@ private:
 	QTimer* messageTimer;
 	QList<int> messageIDs;
 	//@}
+
+	int iridiumFlaresPredictionDepth;
 
 	// GUI
 	SatellitesDialog* configDialog;	

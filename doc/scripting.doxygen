@@ -55,6 +55,7 @@ core.wait(...);
 - The public slots for each of the following classes are available in the
   scripting engine via an object with the same name as the corresponding class:
    - ConstellationMgr
+   - CustomObjectMgr
    - GridLinesMgr
    - LabelMgr
    - LandscapeMgr
@@ -63,11 +64,15 @@ core.wait(...);
    - ScreenImageMgr
    - SolarSystem
    - StarMgr
+   - StelActionMgr
    - StelAudioMgr
    - StelVideoMgr
    - StelMovementMgr
+   - StelSkyCultureMgr
    - StelSkyDrawer
    - StelSkyLayerMgr
+   - MilkyWay
+   - ZodiacalLight
    .
   For example, to access LandscapeMgr::setFlagAtmosphere(), use the scripting
   command: 
@@ -75,6 +80,22 @@ core.wait(...);
 LandscapeMgr.setFlagAtmosphere(true);
 \endcode
 \note All of these except for StelSkyDrawer are StelModule classes.
+
+- The public slots for each of the following classes of the plugins are available 
+in the scripting engine too:
+   - CompassMarks
+   - Oculars
+   - Satellites
+   - Quasars
+   - Pulsars
+   - Exoplanets
+   - Observability
+   - EquationOfTime
+   - NavStars
+   - MeteorShowersMgr (The public slots in this class are available via an object named \b MeteorShowers)
+   - ArchaeoLines
+   - TelescopeControl
+   .
 
 @section include_scripts Includes
 

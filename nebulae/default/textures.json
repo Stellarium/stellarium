@@ -10,7 +10,8 @@
 		"worldCoords" : [[[83.6970, 21.9454], [83.5510, 21.9559], [83.5621, 22.0906], [83.7082, 22.0803]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.1347774682,
-		"maxBrightness" : 13.1
+		"maxBrightness" : 13.1,
+		"birthJD": 2106215.0
 	},
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
@@ -935,10 +936,11 @@
 	{
 		"imageCredits": {"short" : "Kepler Observatory", "infoUrl": "http://kepler-observatorium.ru/"},
 		"imageUrl" : "n6960kepler.png",
-		"worldCoords" : [[[314.85, 28.997], [310.90, 28.999], [310.86, 32.434], [314.85, 32.43]]],
+		"worldCoords" : [[[314.85, 29.0], [310.905, 29.01], [310.85, 32.449], [314.91, 32.45]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 2.1216,
-		"maxBrightness" : 13.0
+		"maxBrightness" : 13.0,
+		"birthJD" : 625333.0
 	},
 	{
 		"imageCredits": {"short" : "Marc Aragnou", "infoUrl": "http://www.Multiweb.com.au/"},
@@ -1516,24 +1518,24 @@
 		"minResolution" : 0.1904768338,
 		"maxBrightness" : 12.7
 	},
-  	{
-		"imageCredits" : {"Short":"Carole Pope","infoUrl": "https://sites.google.com/site/caroleastroimaging/"},
-          	"imageUrl" : "cas.png",
+	{
+		"imageCredits" : {"Short": "Carole Pope", "infoUrl": "https://sites.google.com/site/caroleastroimaging/"},
+		"imageUrl" : "cas.png",
 		"worldCoords" : [[[15.7017, 60.7660], [14.3110, 60.5756], [13.8980, 61.2553], [15.3171, 61.4497]]],
-          	"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-          	"minResolution" : 2.1,
-          	"maxBrightness" : 13.0
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.1,
+		"maxBrightness" : 13.0
 	},
 	{
-        	"imageCredits" : {"Short":"Carole Pope","infoUrl": "https://sites.google.com/site/caroleastroimaging/"},
-        	"imageUrl" : "ic410.png",
-        	"worldCoords" : [[[81.5023, 33.2343], [80.4709, 32.8215], [79.9688, 33.6867], [81.0146, 34.1029]]],
-        	"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-        	"minResolution" : 1.1,
-        	"maxBrightness" : 14
-  	},
+		"imageCredits" : {"Short": "Carole Pope", "infoUrl": "https://sites.google.com/site/caroleastroimaging/"},
+		"imageUrl" : "ic410.png",
+		"worldCoords" : [[[81.5023, 33.2343], [80.4709, 32.8215], [79.9688, 33.6867], [81.0146, 34.1029]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1.1,
+		"maxBrightness" : 14
+	},
 	{
-        	"imageCredits" : {"Short":"Carole Pope","infoUrl": "https://sites.google.com/site/caroleastroimaging/"},
+		"imageCredits" : {"Short": "Carole Pope", "infoUrl": "https://sites.google.com/site/caroleastroimaging/"},
 		"imageUrl" : "n2359.png",
 		"worldCoords" : [[[109.9131, -13.2031], [109.6327, -13.4618], [109.3701, -13.1892], [109.6496, -12.9308]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
@@ -1547,6 +1549,78 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 1.1,
 		"maxBrightness" : 14
+	},
+	{
+		"imageCredits" : {"Short": "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration, and A. Evans (University of Virginia, Charlottesville/NRAO/Stony Brook University)", "infoUrl": "http://hubblesite.org/newscenter/archive/releases/2008/16/image/bs/"},
+		"imageUrl" : "n3690h.png",
+		"worldCoords" : [[[172.1917, 58.5431], [172.0875, 58.5367], [172.0750, 58.5903], [172.1792, 58.5964]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 14
+	},
+	{
+		"imageCredits" : {"Short": "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration, and K. Noll (STScI)", "infoUrl": "http://hubblesite.org/newscenter/archive/releases/2008/16/image/al/"},
+		"imageUrl" : "n6050h.png",
+		"worldCoords" : [[[241.3583, 17.7540], [241.3433, 17.7445], [241.3333, 17.7592], [241.3483, 17.7686]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 15
+	},
+	{
+		"imageCredits" : {"Short": "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration, and A. Evans (University of Virginia, Charlottesville/NRAO/Stony Brook University)", "infoUrl": "http://hubblesite.org/newscenter/archive/releases/2008/16/image/ba/"},
+		"imageUrl" : "ic883h.png",
+		"worldCoords" : [[[200.1662, 34.1094], [200.1150, 34.1215], [200.1300, 34.1638], [200.1808, 34.1517]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 15
+	},
+	{
+		"imageCredits" : {"Short": "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration, and A. Evans (University of Virginia, Charlottesville/NRAO/Stony Brook University)", "infoUrl": "http://hubblesite.org/newscenter/archive/releases/2008/16/image/ab/"},
+		"imageUrl" : "u9618h.png",
+		"worldCoords" : [[[224.2625, 24.5872], [224.2250, 24.6064], [224.2458, 24.6397], [224.2833, 24.6206]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 15
+	},
+	{
+		"imageCredits" : {"Short": "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration, and A. Evans (University of Virginia, Charlottesville/NRAO/Stony Brook University)", "infoUrl": "http://hubblesite.org/newscenter/archive/releases/2008/16/image/ah/"},
+		"imageUrl" : "u8335h.png",
+		"worldCoords" : [[[198.9500, 62.1189], [198.8708, 62.0989], [198.8250, 62.1375], [198.9083, 62.1569]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 15
+	},
+	{
+		"imageCredits" : {"Short": "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration, and A. Evans (University of Virginia, Charlottesville/NRAO/Stony Brook University)", "infoUrl": "http://hubblesite.org/newscenter/archive/releases/2008/16/image/bt/"},
+		"imageUrl" : "n5257h.png",
+		"worldCoords" : [[[204.9958, 0.8031], [204.9500, 0.8239], [204.9708, 0.8692], [205.0167, 0.8483]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 14
+	},
+	{
+		"imageCredits" : {"Short": "Steven Bellavia"},
+		"imageUrl" : "n40.png",
+		"worldCoords" : [[[3.4925, 72.4495], [3.0129, 72.4496], [3.0125, 72.5944], [3.4950, 72.5942]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imageCredits" : {"Short": "Steven Bellavia"},
+		"imageUrl" : "n4631-4627.png",
+		"worldCoords" : [[[190.8483, 32.7969], [190.8342, 32.2572], [190.1962, 32.2667], [190.2067, 32.8062]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imageCredits" : {"Short": "Steven Bellavia"},
+		"imageUrl" : "n4656-4657.png",
+		"worldCoords" : [[[191.3179, 32.4300], [191.3000, 31.8911], [190.6667, 31.9033], [190.6792, 32.4422]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 1,
+		"maxBrightness" : 13.5
 	},
 	{
 		"imageCredits": {"short" : "Georg Zotti", "infoUrl": "http://www.waa.at/"},

@@ -66,7 +66,7 @@ public:
 
 	//! Get a QVariantMap which describes the exoplanet. Could be used to
 	//! create a duplicate.
-	QVariantMap getMap(void);
+	QVariantMap getMap(void) const;
 
 	//! Get the type of object
 	virtual QString getType(void) const
@@ -80,6 +80,15 @@ public:
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	//! Return a map like StelObject, but with a few extra tags also available in getMap().
+	//! - distance = distance in pc
+	//! - stype = Spectral type of star
+	//! - smass = Mass of star in Msun
+	//! - smetal = [Fe/H] of star
+	//! - sradius = Radius of star in Rsun
+	//! - effectiveTemp = Effective temperature of star in K
+	//! - hasHabitablePlanets (true/false)
+	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
@@ -131,6 +140,33 @@ public:
 			case 5:
 				return angleDistanceList;
 				break;
+			case 6:
+				return effectiveTempHostStarList;
+				break;
+			case 7:
+				return yearDiscoveryList;
+				break;
+			case 8:
+				return metallicityHostStarList;
+				break;
+			case 9:
+				return vMagHostStarList;
+				break;
+			case 10:
+				return raHostStarList;
+				break;
+			case 11:
+				return decHostStarList;
+				break;
+			case 12:
+				return distanceHostStarList;
+				break;
+			case 13:
+				return massHostStarList;
+				break;
+			case 14:
+				return radiusHostStarList;
+				break;
 			default:
 				return eccentricityList;
 		}
@@ -144,13 +180,13 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
 	static Vec3f habitableExoplanetMarkerColor;
 	static Vec3f exoplanetMarkerColor;
 	static bool distributionMode;
 	static bool timelineMode;
 	static bool habitableMode;
+	static bool showDesignations;
 
 	void draw(StelCore* core, StelPainter *painter);
 
@@ -174,7 +210,9 @@ private:
 
 	QStringList englishNames, translatedNames, exoplanetDesignations;
 
-	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList;
+	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
+		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
+		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;
 
 	LinearFader labelsFader;
 };

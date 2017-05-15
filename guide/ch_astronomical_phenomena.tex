@@ -85,7 +85,7 @@ Major are widely recognised, known variously as ``the plough'', the
 picture of the bear has been removed and only a constellation diagram
 remains.
 
-\begin{figure}[h]
+\begin{figure}[hb]
 \centering\includegraphics[scale=0.8]{uma}
 \caption{Ursa Major}
 \label{fig:ursamajor}
@@ -106,20 +106,22 @@ an amateur observer is \emph{learning the constellations} --- the
 process of becoming familiar with the relative positions of the
 constellations, at what time of year a constellation is visible, and
 in which constellations observationally interesting objects reside.
-Internationally, astronomers have adopted 88 ``Western''
+The International Astronomical Union has adopted 88 ``Western''
 constellations as a common system for segmenting the sky. They are
 based on Greek/Roman mythology, but with several additions from
 Renaissance and later centuries.  As such some formalisation has been
 adopted, each constellation having a \emph{proper name}, which is in
 Latin, and a three letter abbreviation of that name.  For example,
-Ursa Major has the abbreviation UMa. Also, each ``Western''
-constellation has clearly defined boundaries, which you can draw in
+Ursa Major has the abbreviation UMa. Also, the ``Western''
+constellation have clearly defined boundaries \cite{Delporte:1930}, which you can draw in
 Stellarium when you press the \key{B} key\footnote{These boundaries or
   borders have been drawn using star maps from 1875. Due to the effect
   of \emph{precession}, these borders are no longer parallel to
-  today's coordinates.}. On the other hand, the shapes of mythological
-figures, and also stick figures, have not been canonized, so you will
-find deviations between Stellarium and printed atlases.
+  today's coordinates.}. The IAU constellation a selected object is placed in 
+is also available in the object information data \cite{1987PASP...99..695R}, 
+regardless of the currently active skyculture.  On the other hand, the shapes 
+of mythological figures, and also stick figures, have not been canonized, so 
+you will find deviations between Stellarium and printed atlases.
 
 \subsection{Star Names}
 \label{sec:Phenomena:StarNames}
@@ -265,7 +267,7 @@ the presence of various elements in its atmosphere.
   \centering
   \begin{tabular}{lll}
 \toprule
-\emph{Spectral Type} & \emph{Surface Temperature (K)} & \emph{Star Colour}\\
+\emph{Spectral Type} & \emph{Surface Temperature (K)} & \emph{Star Colour}\\\midrule
 O & 28,000---50,000 & Blue\\
 B & 10,000---28,000 & Blue-white\\
 A & 7,500---10,000 & White-blue\\
@@ -313,7 +315,7 @@ denoted by a number in roman numerals, as described in table~\ref{tab:luminosity
   \centering
   \begin{tabular}{lll}
 \toprule
-\emph{Luminosity class} & \emph{Description}\\
+\emph{Luminosity class} & \emph{Description}\\\midrule
 Ia, Ib & Super-giants\\
 II     & Bright giants\\
 III    & Normal giants\\
@@ -400,7 +402,7 @@ Waning Crescent& Less than half the disc of the moon is illuminated, and this ge
 \label{tab:moonphases}
 \end{longtabu}
 
-
+\newpage
 \section{The Major Planets}
 \label{sec:Planets}
 
@@ -517,7 +519,9 @@ most famous of which is probably Comet Halley, named after the British
 astronomer \name{Edmund Halley}, which has an orbital period of
 roughly 76~years.
 
-\section{Meteoroids}\label{meteoroids}
+
+\section{Meteoroids}
+\label{sec:Phenomena:Meteoroids}
 
 These objects are small pieces of space debris left over from the early
 days of the solar system that orbit the Sun. They come in a variety of
@@ -554,8 +558,24 @@ the \emph{Radiant}. But what we see is similar to driving through a
 mosquito swarm which all seem to come head-on. Earth itself moves
 through space, and sweeps up a dense cloud of particles which
 originates from a comet's tail. Stellarium's Meteor Shower plugin (see
-section~\ref{sec:Plugin:MeteorShowers}) can help you planning your next
+section~\ref{sec:plugins:MeteorShowers}) can help you planning your next
 meteor observing night.
+
+\section{Zodiacal Light and \emph{Gegenschein}}
+\label{sec:Phenomena:ZodiacalLight}
+
+In very clear nights on the best observing sites, far away from the
+light pollution of our cities, you can observe a feeble glow also
+known as ``false twilight'' after evening twilight in the west, or
+before dawn in the east. The glow looks like a wedge of light along
+the ecliptic. Exactly opposite the sun, there is another dim glow that
+can be observed with dark-adapted eyes in perfect skies: the
+\emph{Gegenschein} (counterglow). 
+
+This is sunlight reflected off the same dust and meteoroids in the
+plane of our solar system which is the source of meteors. Stellarium's
+sky can show the Zodiacal light~\cite{Kwon:2004:ZodiacalLight}, but
+observe how quickly light pollution kills its visibility!
 
 
 \section{The Milky Way}
@@ -763,37 +783,33 @@ side but concentrating on the object's location can often reveal it.
 \end{description}
 
 
-\section{Light Pollution}
-\label{sec:LightPollution}
+%% The following 3 were grouped to reduce the part TOC sections. 
+\section{Atmospheric effects}
+\label{sec:phenomena:Atmosphere}
 
-An ugly side effect of civilisation is a steady increase in outdoor
-illumination. Many people think it increases safety, but while this
-statement can be questioned, one definite result, aside from
-environmental issues like dangers for the nocturnal fauna, are ever
-worsening conditions for astronomical observations or just enjoyment
-of the night sky. 
-
-Stellarium can simulate light pollution, which is controlled from the
-light pollution section of the \emph{Sky} tab of the \emph{View}
-window.  Light pollution levels are set using a numerical value
-between 1 and 9 which corresponds to the \emph{Bortle Dark Sky Scale}
-(see Appendix~\ref{ch:BortleScale}).  In addition, local variations of
-the amount of light pollution can be included in a light pollution
-layer in the landscapes, see
-section~\ref{ch:landscapes} for details.
 
 %% Refraction section by GZotti 2016-04-12
-\section{Atmospheric Refraction}
-\label{sec:concepts:Refraction}
+\subsection{Atmospheric Refraction}
+\label{sec:phenomena:Refraction}
 
-\begin{figure}[tb]
+%\begin{figure}[p]
+%\centering\includegraphics[angle=90,width=.8\textwidth]{gz_refraction}
+%\caption{Refraction. The figure shows corrective values (degrees)
+%  which are subtracted from observed altitudes (left side) to reach
+%  geometric altitudes, or values to be added to computed values (right
+%  side). The models used are not directly inverse operations.}
+%\label{fig:Refraction}
+%\end{figure}
+
+\begin{sidewaysfigure}%[p]
 \centering\includegraphics[width=\textwidth]{gz_refraction}
 \caption{Refraction. The figure shows corrective values (degrees)
   which are subtracted from observed altitudes (left side) to reach
   geometric altitudes, or values to be added to computed values (right
   side). The models used are not directly inverse operations.}
 \label{fig:Refraction}
-\end{figure}
+\end{sidewaysfigure}
+
 
 \indexterm{Atmospheric Refraction} is a lifting effect of our
 atmosphere which can be observed by the fact that objects close to the
@@ -819,8 +835,8 @@ stratosphere balloon, where the height of earth's surface is several
 degrees below the mathematical horizon.
 
 %% Refraction section by GZotti 2016-04-12
-\section{Atmospheric Extinction}
-\label{sec:concepts:Extinction}
+\subsection{Atmospheric Extinction}
+\label{sec:phenomena:Extinction}
 
 \begin{figure}[tb]
 \centering\includegraphics[width=\textwidth]{gz_extinctionmag}
@@ -852,6 +868,34 @@ your atmosphere with a global factor $k$, the \emph{magnitude loss per
   airmass} (see section~\ref{sec:gui:view:sky:atmosphere}). The best
 mountaintop sites may have $k=0.15$, while $k=0.25$ seems a value
 usable for good locations in lower altitudes.
+
+\subsection{Light Pollution}
+\label{sec:phenomena:LightPollution}
+
+An ugly side effect of civilisation is a steady increase in outdoor
+illumination. Many people think it increases safety, but while this
+statement can be questioned, one definite result, aside from
+environmental issues like dangers for the nocturnal fauna, are ever
+worsening conditions for astronomical observations or just enjoyment
+of the night sky. 
+
+Stellarium can simulate the effect of light pollution on the visibility 
+of celestial objects. This is controlled from the
+light pollution section of the \emph{Sky} tab of the \emph{View}
+window (see section~\ref{fig:gui:view:sky}).  Light pollution levels are set using a numerical value
+between 1 and 9 which corresponds to the \emph{Bortle Dark Sky Scale}
+(see Appendix~\ref{ch:BortleScale}). Given that public lighting became 
+bright enough to cause adverse effects on observability only during 
+the 19th century, Stellarium presents an unpolluted sky for dates before 1825. 
+Note that of course light pollution was not switched on over night, 
+but became gradually noticeable over decades, but you have to estimate the appropriate level. 
+
+In addition, local variations of
+the amount of light pollution can be included in a light pollution
+layer in the landscapes, see
+section~\ref{ch:landscapes} for details. This foreground layer may include 
+all kinds of light, e.g.\  campfires, so this is also available for earlier 
+dates.
 
 
 %%% Local Variables: 

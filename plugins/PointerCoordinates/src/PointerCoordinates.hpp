@@ -54,7 +54,9 @@ class PointerCoordinates : public StelModule
 	Q_ENUMS(CoordinateSystem)
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
-		   WRITE enableCoordinates)
+		   WRITE enableCoordinates
+		   NOTIFY flagCoordinatesVisibilityChanged
+		   )
 
 public:
 	//! @enum CoordinatesPlace
@@ -77,7 +79,8 @@ public:
 		Ecliptic,
 		EclipticJ2000,
 		AltAzi,
-		Galactic
+		Galactic,
+		Supergalactic
 	};
 
 
@@ -129,12 +132,15 @@ public:
 		return customPosition;
 	}
 
+signals:
+	void flagCoordinatesVisibilityChanged(bool b);
+
 public slots:
 	//! Enable plugin usage
 	void enableCoordinates(bool b);
 	//! Enable plugin usage at startup
 	void setFlagEnableAtStartup(bool b)
-	{ 
+	{
 		flagEnableAtStartup=b;
 	}
 	//! Set font size for message
@@ -177,6 +183,8 @@ public slots:
 
 	void setCustomCoordinatesPlace(int x, int y);
 
+	void setFlagShowConstellation(bool b){flagShowConstellation=b;}
+	bool getFlagShowConstellation(void) const {return flagShowConstellation;}
 private:
 	PointerCoordinatesWindow* mainWindow;
 	QSettings* conf;
@@ -191,6 +199,7 @@ private:
 	bool flagShowCoordinates;
 	bool flagEnableAtStartup;
 	bool flagShowCoordinatesButton;
+	bool flagShowConstellation;
 	Vec3f textColor;
 	Vec3d coordinatesPoint;
 	int fontSize;

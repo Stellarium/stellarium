@@ -1,0 +1,1 @@
+\newcommand{\StelVersion}{@VERSION@}

@@ -1,0 +1,419 @@
+%% Part of Stellarium User Guide
+%% Status:
+%% 2016-05-16 GZ new file. This file and its handling is so complicated, it deserves proper docs.
+%% TODO: document the more obscure entries. Add links to the respective chapters.
+
+%\chapterimage{chapter-t1-bg} % Chapter heading image
+
+%\chapter{Solar System Configuration File}
+\section{Solar System Configuration File}
+\label{sec:ssystem.ini}
+
+The file \file{ssystem.ini} (default file in \file{data/} in the
+program directory, or a privately modified copy in your own
+\file{data/} directory (see~\ref{sec:FilesAndDirectories}) contains
+orbital and rotational data from which Stellarium configures the Solar
+System objects. You can edit the file either manually, or with the
+Solar System Editor plugin (see
+Section~\ref{sec:plugins:SolarSystemEditor}).
+
+
+
+%Deprecated parameters are marked by gray background. 
+%Possible new parameters are marked by yellow background.
+%% GZ This is no longer true. Reactivate somehow? 
+
+Each object's data are described in its own section which is typically
+named after the object name. Some section names (e.g.\ those using
+diacriticals, spaces or other problematic characters) appear a bit mangled.
+
+We list here examples for the major planets, larger moons with special
+coordinate functions, minor moons with generic orbital elements, minor
+planets and comets with elliptical and parabolic orbit elements.
+
+All elements are stored in alphabetic order in the file, however it
+makes more sense to present the elements in another structure which
+better reflects the meaning.
+
+\subsection{Planet section}
+\label{sec:ssystem.ini:Planet}
+
+Example:
+\begin{configfile}
+[jupiter]
+name=Jupiter
+type=planet  
+coord_func=jupiter_special
+
+lighting=true
+albedo=0.51
+atmosphere=1
+color=1., 0.983, 0.934
+tex_halo=star16x16.png
+tex_map=jupiter.png #texture courtesy of Bj\xf6rn J\xf3nsson
+halo=true
+oblateness=0.064874
+orbit_visualization_period=4331.87
+parent=Sun
+radius=71492
+rot_equator_ascending_node=-22.203
+rot_obliquity=2.222461
+rot_periode=9.92491
+rot_pole_de=64.49
+rot_pole_ra=268.05
+rot_rotation_offset=-1 # use JupiterGRS patch
+\end{configfile}
+
+
+where 
+\begin{description}
+\item[name] English name of the planet. May appear translated. 
+\item[type] Mandatory for planets: \value{planet}
+\item[parent]=Sun. The body which this object is running around.
+\item[coord\_func] The planet positions are all computed with a dedicated function (VSOP or DE43x). 
+\item[orbit\_visualization\_period] number of (earth) days for how
+  long the orbit should be made visible. Typically Stellarium shows
+  one orbit line. The orbit slowly drifts, however.
+
+\item[atmosphere] (0 or 1) flag to indicate whether observer locations should enable atmosphere drawing.
+
+\item[radius] Equator radius, km.
+\item[oblateness] Flattening of the polar diameter. ($r_{pole}/r_{eq}$)
+\item[lighting] Should be true to have shading direction from the
+  sun. The only objects where this should be false is the sun, while
+  comets are often seen to also have false here, to allow rendering a
+  diffuse body without illumination.
+\item[albedo] total albedo (reflectivity) of the planet. Used for ``generic''
+  magnitude computation, but the major planets usually have dedicated
+  magnitude formulas, so the value is not evaluated unless you are
+  observing from a location outside Earth.
+\item[color] Used to colorize halo 
+\item[tex\_halo] File name of texture map for halo texture in
+  \file{textures} folder. (Used when zoomed out far enough so that the
+  actual sphere is not visible.)
+\item[tex\_map] File name of texture map in \file{textures} folder.
+\item[halo] Should be true to draw a halo (simple light disk) when object too small to draw a sphere.
+\end{description}
+
+\paragraph{Elements for the Physical Ephemeris}
+
+\begin{description}
+\item[rot\_equator\_ascending\_node] \emph{deprecated}
+\item[rot\_obliquity] \emph{deprecated}
+\item[rot\_pole\_ra]  constant of axis right ascension in ICRF, degrees
+\item[rot\_pole\_ra1] change per century of axis right ascension in ICRF, degrees
+\item[rot\_pole\_de] constant of axis declination in ICRF, degrees
+\item[rot\_pole\_de1] change per century of axis declination in ICRF, degrees
+\item[rot\_rotation\_offset] longitude of central meridian at J2000.0. 
+                             The special value here indicates special treatment for the Great Red Spot.
+\item[rot\_periode] Duration of one sidereal rotation, in earth hours.
+\end{description}
+
+rot\_equator\_ascending\_node and rot\_obliquity are the generic
+values to specify the axis orientation with respect to the parent
+object's equator, or the VSOP87 inertial plane in case of planets. However,
+for planets the IAU has been using right ascension and declination of
+the pole in the ICRF for decades now. The elements to use for planets
+should therefore be the rot\_pole\_* values.
+
+In many cases, the attitude/rotation formula is given like
+\begin{eqnarray}
+  \label{eq:PlanetOrientation}
+  \alpha_0 &=& \mathtt{rot\_pole\_ra} + T * \mathtt{rot\_pole\_ra1}\\
+  \delta_0 &=& \mathtt{rot\_pole\_de} + T * \mathtt{rot\_pole\_de1}\\
+  W        &=& \mathtt{rot\_rotation\_offset} + d * \mathtt{rot\_periode}
+\end{eqnarray}
+
+These cases are covered by the data in \file{ssystem.ini}. Other cases are dealt with in a different way.
+
+
+\subsection{Moon section}
+\label{sec:ssystem.ini:Moon}
+
+Moons are special in that they orbit another planet. Therefore, the
+rotational elements used to be specified relative to the equatorial plane of the
+parent planet, and \texttt{orbit\_SemiMajorAxis} in kilometers. However, current IAU reference material gives axis orientation
+with right ascension and declination values for the pole in ICRF
+coordinates, with some of them in motion. So again, if one of the
+\texttt{rot\_pole\_...} values exist, we assume the current
+standard. For more complicated motion, again some special functions
+are applied.
+
+%% TODO: CHANGE THIS WHEN AXES HAVE BEEN REMADE!
+
+\begin{configfile}
+[amalthea]
+name=Amalthea
+type=moon
+parent=Jupiter
+
+coord_func=ell_orbit
+orbit_AscendingNode=141.5521520794674
+orbit_Eccentricity=0.006175744402949701
+orbit_Epoch=2454619.50000
+orbit_Inclination=0.3864576103404582
+orbit_LongOfPericenter=245.4222355150120000
+orbit_MeanLongitude=224.7924893552550000
+orbit_Period=0.5016370462116355
+orbit_SemiMajorAxis=181994.8658358799
+orbit_visualization_period=0.5016370462116355
+
+radius=73
+rot_equator_ascending_node=213.7
+rot_obliquity=15.5
+rot_periode=12.039289109079252
+rot_rotation_offset=235.50
+
+albedo=0.06
+color=1., 0.627, 0.492
+halo=true
+lighting=true
+tex_halo=star16x16.png
+tex_map=amalthea.png
+\end{configfile}
+
+where
+\begin{description}
+  \item[name] English name of planet moon. No number, just the name. May be translated.
+  \item[type] \texttt{moon}
+
+  \item[parent] English name of planet or parent body.
+
+  \item[coord\_func] Must be \texttt{ell\_orbit}
+\item[orbit\_AscendingNode] $\Omega$
+\item[orbit\_Eccentricity] $e$
+\item[orbit\_Epoch] 
+\item[orbit\_Inclination] $i$ [degrees]
+\item[orbit\_LongOfPericenter] 
+\item[orbit\_MeanLongitude]
+\item[orbit\_Period]
+\item[orbit\_SemiMajorAxis] $a$ [km]
+\item[orbit\_visualization\_period] Should be set to
+  \texttt{orbit\_Period} to show orbit as closed line. Actually, this happens when omitted. So this is
+  in fact only useful in case of special functions for positioning where \texttt{orbit\_Period} is not given.
+
+
+\item[radius]=73
+\item[rot\_equator\_ascending\_node]=213.7 TRY TO AVOID!
+\item[rot\_obliquity]=15.5                 TRY TO AVOID!
+
+\item[rot\_pole\_ra]  constant of axis right ascension in ICRF, degrees
+\item[rot\_pole\_ra1] change per century of axis right ascension in ICRF, degrees
+\item[rot\_pole\_de] constant of axis declination in ICRF, degrees
+\item[rot\_pole\_de1] change per century of axis declination in ICRF, degrees
+\item[rot\_rotation\_offset] longitude of central meridian at J2000.0. 
+\item[rot\_periode] Duration of one sidereal rotation, in earth hours.
+
+
+
+\item[albedo] (actually currently unused when lighting true)
+\item[color] for drawing halo.
+\item[halo]=true to draw a simple diffuse dot when zoomed out.
+\item[lighting]=true to show sphere illuminated.
+\item[tex\_halo] name of halo texture. Should be \file{star16x16.png}
+\item[tex\_map] name of spherical texture map. Many moons have been mapped by visiting spacecraft!
+\end{description}
+
+\subsection{Minor Planet section}
+\label{sec:ssystem.ini:MinorPlanet}
+
+\begin{configfile}
+[4vesta]
+type=asteroid  
+minor_planet_number=4
+name=Vesta
+
+coord_func=comet_orbit
+parent=Sun
+orbit_ArgOfPericenter=151.19843
+orbit_AscendingNode=103.85141
+orbit_Eccentricity=0.0887401
+orbit_Epoch=2457000.5
+orbit_Inclination=7.14043
+orbit_MeanAnomaly=20.86389
+orbit_MeanMotion=0.27154465
+orbit_SemiMajorAxis=2.3617933
+orbit_visualization_period=1325.46
+
+color=1., 1., 1.
+halo=true
+lighting=true
+oblateness=0.0
+
+albedo=0.423
+radius=280
+absolute_magnitude=3.2
+slope_parameter=0.32
+tex_halo=star16x16.png
+tex_map=vesta.png
+\end{configfile}
+
+\texttt{type} can be \texttt{asteroid, dwarf planet, cubewano,
+  plutino, scattered disc object, Oort cloud object}. With the
+exception of Pluto, all positions for minor bodies are computed with
+the orbiting elements given in this way. 
+
+Note that although all minor bodies orbit the sun in an
+elliptical orbit, the \texttt{coord\_func=comet\_orbit}. However, it
+is more common for minor planets to specify epoch, mean anomaly and
+mean motion.
+
+Visual magnitude is modelled from absolute magnitude $H$ and slope parameter $G$.
+
+Elements for rotational axis may be given just like for planets when
+they are known. It is recommended to use the modern specification
+(elements \texttt{rot\_pole\_...}).
+
+\subsection{Comet section}
+\label{sec:ssystem.ini:Comet}
+
+Comets are tiny, and their outgassing and close approaches to the
+major planets cause fast changes in their orbital elements, so that
+each apparition should be specified with a dedicated section in
+\file{ssystem.ini}. 
+
+The coord\_func is specified as \texttt{comet\_orbit}.  Note the
+specification of a time (JDE) at pericenter which is typical for
+comets.
+
+Comet brightness is evaluated from
+\begin{equation}
+  \label{eq:comet_magnitudes}
+  \mathrm{mag}=\mathtt{absolute\_magnitude}+5\cdot\log{\mathrm{distance}} + 2.5\cdot\mathtt{slope\_parameter}\cdot\log(\mathrm{CometSunDistance})
+\end{equation}
+
+The term \texttt{slope\_parameter} may be a misnomer in case of
+comets. From the literature \cite{AstronomicalAlgorithms:1998} (equation 33.13) we find
+\begin{equation}
+  \label{eq:comet_magnitudes_Meeus}
+  \mathrm{mag}=g+5\log\Delta + \kappa\log r
+\end{equation}
+from which $\kappa=2\cdot\mathtt{slope\_parameter}$. In any case, $\kappa$ is typically [5\ldots15] and specific for each comet.
+
+\texttt{albedo} is used to set the brightness for rendering the body,
+if you are close enough. Solar illumination direction in this case is
+not used.
+%% TBD: Is this intended or a relic from 0.8 or older?
+
+A large number of elements for historical comets is provided in the
+file \file{ssystem\_1000comets.ini} in the installation directory. You
+can copy\&paste what you need into your
+\file{ssystem.ini}. Unfortunately it is not possible to specify
+several sets of orbital elements for different epochs which would
+allow automatic changes.
+
+\subsubsection{Periodic Comet}
+\label{sec:ssystem.ini:Comet:Periodic}
+
+\begin{configfile}
+[1phalley]
+type=comet  
+name=1P/Halley
+
+coord_func=comet_orbit
+parent=Sun
+orbit_ArgOfPericenter=111.7154
+orbit_AscendingNode=58.8583
+orbit_Eccentricity=0.968004
+orbit_Inclination=162.2453
+orbit_PericenterDistance=0.57136
+orbit_TimeAtPericenter=2446463.12979167
+orbit_good=78
+
+color=1.0, 1.0, 1.0
+dust_brightnessfactor=1.5
+dust_lengthfactor=0.4
+dust_widthfactor=1.5
+lighting=false
+
+albedo=0.1
+radius=5
+absolute_magnitude=5.5
+slope_parameter=3.2
+tex_map=nomap.png
+\end{configfile}
+
+You may want to e.g. change the name in this entry
+to \texttt{name=1P/Halley (1982i)}. Note a very short configured
+duration of orbit\_good, which means the comet is only displayed 78
+days before and after perihel.
+
+
+\subsubsection{Parabolic/Hyperbolic Comet}
+\label{sec:ssystem.ini:Comet:Parabolic}
+
+\begin{configfile}
+[c2013us10%28catalina%29]
+type=comet
+name=C/2013 US10 (Catalina)
+
+coord_func=comet_orbit
+parent=Sun
+orbit_ArgOfPericenter=340.3533
+orbit_AscendingNode=186.141
+orbit_Eccentricity=1.000372
+orbit_Inclination=148.8766
+orbit_PericenterDistance=0.822958
+orbit_TimeAtPericenter=2457342.20748843
+orbit_good=1000
+
+color=1.0, 1.0, 1.0
+dust_brightnessfactor=1.5
+dust_lengthfactor=0.4
+dust_widthfactor=1.5
+lighting=false
+
+albedo=0.1
+radius=5
+absolute_magnitude=4.4
+slope_parameter=4
+tex_map=nomap.png
+\end{configfile}
+
+This has basically the same format. Note eccentricity is larger 1,
+this means the comet is running on a slightly hyperbolic
+orbit. Stellarium shows data for this comet for almost 3 years
+(\texttt{orbit\_good=1000} days) from perihel.
+
+
+
+\subsection{Solar System Observer}
+\label{sec:ssystem.ini:SolarSystemObserver}
+
+Stellarium is great for excursions to the surface of any object with
+known orbital elements.  Configuring a viewpoint away from a planet
+requires a special kind of location. The Solar System Observer has
+been provided as a neutral view location high above the North pole of
+the Solar System. It has been configured like this:
+\begin{configfile}
+[solar_system_observer]
+name=Solar System Observer
+parent=Sun
+albedo=0.
+color=0., 0., 0.
+halo=false
+hidden=true
+lighting=false
+coord_func=ell_orbit
+orbit_AscendingNode=0
+orbit_Eccentricity=0
+orbit_Epoch=2451545.0
+orbit_Inclination=90
+orbit_LongOfPericenter=0
+orbit_MeanLongitude=90
+orbit_Period=70000000000
+orbit_SemiMajorAxis=70000000000
+radius=1.
+rot_obliquity=90
+tex_halo=star16x16.png
+tex_map=lune.png 
+\end{configfile}
+Note the inclination and mean longitude of 90 degrees. 
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "guide"
+%%% End: 
+

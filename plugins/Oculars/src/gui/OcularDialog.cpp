@@ -43,14 +43,14 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 			   QList<Ocular *>* oculars,
 			   QList<Telescope *>* telescopes,
 			   QList<Lens *> *lense)
-	: plugin(pluginPtr)
+	: StelDialog("Oculars")
+	, plugin(pluginPtr)
 	, ccdMapper(NULL)
 	, ocularMapper(NULL)
 	, telescopeMapper(NULL)
 	, lensMapper(NULL)
 {
 	ui = new Ui_ocularDialogForm;
-	dialogName = "Oculars";
 	this->ccds = ccds;
 	ccdTableModel = new PropertyBasedTableModel(this);
 	CCD* ccdModel = CCD::ccdModel();
@@ -102,22 +102,7 @@ void OcularDialog::retranslate()
 {
 	if (dialog) {
 		ui->retranslateUi(dialog);
-	}
-}
-
-void OcularDialog::styleChanged()
-{
-	// Nothing for now
-}
-
-void OcularDialog::updateStyle()
-{
-	if(dialog) {
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		Q_ASSERT(gui);
-		const StelStyle pluginStyle = plugin->getModuleStyleSheet(gui->getStelStyle());
-		dialog->setStyleSheet(pluginStyle.qtStyleSheet);
-		ui->textBrowser->document()->setDefaultStyleSheet(QString(pluginStyle.htmlStyleSheet));
+		initAboutText();
 	}
 }
 
@@ -283,30 +268,10 @@ void OcularDialog::moveDownSelectedLens()
 #pragma mark Private Slot Methods
 #endif
 /* ********************************************************************* */
-void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* action = actionMgr->findAction("actionShow_Ocular");
-	if (action != NULL) {
-		action->setShortcut(newString.trimmed());
-	}
-}
-
-void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newString)
-{
-	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* action = actionMgr->findAction("actionShow_Ocular_Menu");
-	if (action != NULL) {
-		action->setShortcut(newString.trimmed());
-	}
-}
-
 void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
-	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool();
+	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", true).toBool();
 	if (requireSelection != requireSelectionToZoom)
 	{
 		Oculars::appSettings()->setValue("require_selection_to_zoom", requireSelection);
@@ -318,7 +283,7 @@ void OcularDialog::requireSelectionStateChanged(int state)
 void OcularDialog::scaleImageCircleStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
-	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool();
+	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle", false).toBool();
 	if (shouldScale != useMaxImageCircle)
 	{
 		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
@@ -355,12 +320,14 @@ void OcularDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
-	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));
+	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));	
 	connect(ui->semiTransparencyCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseSemiTransparency(bool)));
+	connect(ui->hideGridsLinesCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagHideGridsLines(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
-	connect(ui->checkBoxUseFlipForCCD, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseFlipForCCD(bool)));
+	connect(ui->checkBoxInitialDirection, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitDirectionUsage(bool)));
+	connect(ui->checkBoxTypeOfMount, SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -378,21 +345,7 @@ void OcularDialog::createDialogContent()
 	ui->telescopeName->setValidator(validatorName);
 	ui->lensName->setValidator(validatorName);
 
-	// The key bindings
-	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
-	ui->togglePluginLineEdit->setText(bindingString);
-	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
-	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
-	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)),
-		this, SLOT(keyBindingTogglePluginChanged(const QString&)));
-	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)),
-		this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
-	
 	initAboutText();
-	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(QString)),
-		this, SLOT(initAboutText()));
-	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(QString)),
-		this, SLOT(initAboutText()));
 
 	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
 		this, SLOT(moveUpSelectedOcular()));
@@ -423,11 +376,13 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdResX, 5);
 	ccdMapper->addMapping(ui->ccdResY, 6);
 	ccdMapper->addMapping(ui->ccdRotAngle, 7);
-	ccdMapper->addMapping(ui->OAG_checkBox, 8);
-	ccdMapper->addMapping(ui->OAGPrismH, 9);
-	ccdMapper->addMapping(ui->OAGPrismW, 10);
-	ccdMapper->addMapping(ui->OAGDist, 11);
-	ccdMapper->addMapping(ui->OAGPrismPA, 12);
+	ccdMapper->addMapping(ui->ccdBinningX, 8);
+	ccdMapper->addMapping(ui->ccdBinningY, 9);
+	ccdMapper->addMapping(ui->OAG_checkBox, 10);
+	ccdMapper->addMapping(ui->OAGPrismH, 11);
+	ccdMapper->addMapping(ui->OAGPrismW, 12);
+	ccdMapper->addMapping(ui->OAGDist, 13);
+	ccdMapper->addMapping(ui->OAGPrismPA, 14);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -444,7 +399,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularFL, 2);
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
 	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
-	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
+	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");	
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -483,13 +438,16 @@ void OcularDialog::createDialogContent()
 
 	// set the initial state
 	QSettings *settings = Oculars::appSettings();
-	if (settings->value("require_selection_to_zoom", 1.0).toBool()) {
+	if (settings->value("require_selection_to_zoom", true).toBool())
+	{
 		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
 	}
-	if (settings->value("use_max_exit_circle", 0.0).toBool()) {
+	if (settings->value("use_max_exit_circle", false).toBool())
+	{
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
-	if (settings->value("limit_stellar_magnitude", true).toBool()) {
+	if (settings->value("limit_stellar_magnitude", true).toBool())
+	{
 		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
 	}
 	if (settings->value("enable_control_panel", false).toBool())
@@ -504,22 +462,24 @@ void OcularDialog::createDialogContent()
 	{
 		ui->checkBoxInitialFOV->setChecked(true);
 	}
-	if (settings->value("use_ccd_flip", true).toBool())
+	if (settings->value("use_initial_direction", false).toBool())
 	{
-		ui->checkBoxUseFlipForCCD->setChecked(true);
+		ui->checkBoxInitialDirection->setChecked(true);
 	}
 	if (settings->value("use_semi_transparency", true).toBool())
 	{
 		ui->semiTransparencyCheckBox->setChecked(true);
 	}
-
-	//Initialize the style
-	updateStyle();
+	if (settings->value("hide_grids_and_lines", true).toBool())
+	{
+		ui->hideGridsLinesCheckBox->setChecked(true);
+	}
 }
 
 void OcularDialog::selectedCCDRotationAngleChanged()
 {
-	emit(plugin->selectedCCDChanged());
+	if (plugin->getEnableCCD())
+		emit(plugin->selectedCCDChanged());
 }
 
 void OcularDialog::setLabelsDescriptionText(bool state)
@@ -530,11 +490,13 @@ void OcularDialog::setLabelsDescriptionText(bool state)
 		ui->labelFOV->setText(q_("tFOV:"));
 		// TRANSLATORS: Magnification factor for binoculars
 		ui->labelFL->setText(q_("Magnification factor:"));
+		ui->labelFS->setText(q_("Diameter:"));
 	}
 	else
 	{
 		ui->labelFOV->setText(q_("aFOV:"));
 		ui->labelFL->setText(q_("Focal length:"));
+		ui->labelFS->setText(q_("Field stop:"));
 	}
 }
 
@@ -553,14 +515,18 @@ void OcularDialog::initAboutText()
 	html += "<h2>" + q_("Overview") + "</h2>";
 
 	html += "<p>" + q_("This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get your started.") + "</p>";
-	html += "<p>" + q_("You can choose to scale the image you see on the screen.  This is intended to show you a better comparison of what one eyepiece/telescope combination will be like as compared to another.  The same eyepiece in two different telescopes of differing focal length will produce two different exit circles, changing the view someone.  The trade-off of this is that, with the image scaled, a good deal of the screen can be wasted.  Therefore I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
+	html += "<p>" + q_("You can choose to scale the image you see on the screen.") + " ";
+	html +=         q_("This is intended to show you a better comparison of what one eyepiece/telescope combination will be like when compared to another.") + " ";
+	html +=         q_("The same eyepiece in two different telescopes of differing focal length will produce two different exit pupils, changing the view somewhat.") + " ";
+	html +=         q_("The trade-off of this is that, with the image scaled, a large part of the screen can be wasted.") + " ";
+	html +=         q_("Therefore I recommend that you leave it off, unless you feel you have a need of it.") + "</p>";
 	html += "<p>" + q_("You can toggle a crosshair in the view.  Ideally, I wanted this to be aligned to North.  I've been unable to do so.  So currently it aligns to the top of the screen.") + "</p>";
 	html += "<p>" + QString(q_("You can toggle a Telrad finder; this can only be done when you have not turned on the Ocular view.  This feature draws three concentric circles of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with the naked eye through the Telrad (or similar) finder.")).arg(QChar(0x00B0)) + "</p>";
 	html += "<p>" + q_("If you find any issues, please let me know.  Enjoy!") + "</p>";
 
 	//Keys
 	html += "<h2>" + q_("Hot Keys") + "</h2>";
-	html += "<p>" + q_("The plug-in's key bindings can be edited in the General Tab.") + "</p>";
+	html += "<p>" + q_("The plug-in's key bindings can be edited in the Keyboard shortcuts editor (F7).") + "</p>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
@@ -589,6 +555,15 @@ void OcularDialog::initAboutText()
 	html += "<li>";
 	html += QString("<strong>%1:</strong> %2").arg(menuString).arg(q_("Opens the pop-up navigation menu."));
 	html += "</li>";
+
+	html += "<li>";
+	html += QString("<strong>%1:</strong> %2").arg("Alt+M").arg(q_("Rotate reticle pattern of the eyepiece clockwise."));
+	html += "</li>";
+
+	html += "<li>";
+	html += QString("<strong>%1:</strong> %2").arg("Shift+Alt+M").arg(q_("Rotate reticle pattern of the eyepiece сounterclockwise."));
+	html += "</li>";
+
 	html += "</ul>";
 	html += "</body></html>";
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>668</width>
-    <height>594</height>
+    <width>646</width>
+    <height>677</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -179,6 +179,54 @@
            <number>0</number>
           </property>
           <item>
+           <widget class="QGroupBox" name="groupBoxInterface">
+            <property name="title">
+             <string>Interface</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxControlPanel">
+               <property name="text">
+                <string>On-screen control panel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialFOV">
+               <property name="toolTip">
+                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore FOV to initial values</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxInitialDirection">
+               <property name="toolTip">
+                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore direction to initial values</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QGroupBox" name="groupBoxOcularOptions">
             <property name="title">
              <string>Ocular view</string>
@@ -230,126 +278,10 @@
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox">
-            <property name="title">
-             <string>Key mappings</string>
-            </property>
-            <layout class="QFormLayout" name="formLayout_3">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::FieldsStayAtSizeHint</enum>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_11">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="hideGridsLinesCheckBox">
                <property name="text">
-                <string>Toggle ocular view:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="togglePluginLineEdit">
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>100</width>
-                 <height>22</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="maxLength">
-                <number>50</number>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="labelPopupMenuShortcut">
-               <property name="text">
-                <string>Open pop-up navigation menu:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="togglePopupNavigatorWindowLineEdit">
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>100</width>
-                 <height>22</height>
-                </size>
-               </property>
-               <property name="maxLength">
-                <number>50</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBoxInterface">
-            <property name="title">
-             <string>Interface</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QCheckBox" name="checkBoxControlPanel">
-               <property name="text">
-                <string>On-screen control panel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkBoxInitialFOV">
-               <property name="toolTip">
-                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
-               </property>
-               <property name="text">
-                <string>Restore FOV to initial values</string>
+                <string>Hide grids and lines when enabled</string>
                </property>
               </widget>
              </item>
@@ -361,7 +293,7 @@
             <property name="title">
              <string>Sensor view</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_11">
+            <layout class="QGridLayout" name="gridLayout_8">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -374,17 +306,20 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
+             <item row="1" column="0">
               <widget class="QCheckBox" name="checkBoxDecimalDegrees">
                <property name="text">
                 <string>Use degrees and minutes for FOV of CCD</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QCheckBox" name="checkBoxUseFlipForCCD">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxTypeOfMount">
+               <property name="toolTip">
+                <string>Enable automatic switch of mount type from the telescope settings for horizontal orientation of CCD frame.</string>
+               </property>
                <property name="text">
-                <string>Use flip for CCD</string>
+                <string>Enable automatic switch of mount type</string>
                </property>
               </widget>
              </item>
@@ -447,22 +382,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="ocularListLabel">
-               <property name="text">
-                <string>Eyepieces</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="ocularListView">
                <property name="editTriggers">
@@ -644,7 +569,7 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="ocularAFov">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="maximum">
                    <double>120.000000000000000</double>
@@ -671,7 +596,7 @@
                 <item row="2" column="1">
                  <widget class="QDoubleSpinBox" name="ocularFL">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
@@ -687,13 +612,13 @@
                 <item row="3" column="1">
                  <widget class="QDoubleSpinBox" name="ocularFieldStop">
                   <property name="decimals">
-                   <number>2</number>
+                   <number>3</number>
                   </property>
                   <property name="minimum">
                    <double>0.000000000000000</double>
                   </property>
                   <property name="maximum">
-                   <double>99.000000000000000</double>
+                   <double>200.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -773,25 +698,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="lensListLabel">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="text">
-                <string>Lenses</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="lensListView">
                <property name="editTriggers">
@@ -958,7 +870,7 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="lensMultipler">
                   <property name="decimals">
-                   <number>2</number>
+                   <number>3</number>
                   </property>
                   <property name="maximum">
                    <double>9.000000000000000</double>
@@ -1061,22 +973,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="sensorListLabel">
-               <property name="text">
-                <string>Sensors</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="ccdListView">
                <property name="editTriggers">
@@ -1303,7 +1205,7 @@
                 <item row="3" column="1">
                  <widget class="QDoubleSpinBox" name="ccdChipX">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1326,7 +1228,7 @@
                 <item row="4" column="1">
                  <widget class="QDoubleSpinBox" name="ccdChipY">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1342,7 +1244,7 @@
                 <item row="6" column="1">
                  <widget class="QDoubleSpinBox" name="ccdPixelY">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1358,7 +1260,7 @@
                 <item row="5" column="1">
                  <widget class="QDoubleSpinBox" name="ccdPixelX">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>0.100000000000000</double>
@@ -1371,34 +1273,10 @@
                   </property>
                  </widget>
                 </item>
-                <item row="9" column="1">
+                <item row="11" column="1">
                  <widget class="QDoubleSpinBox" name="OAGDist">
                   <property name="decimals">
-                   <number>1</number>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.100000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-                <item row="9" column="0">
-                 <widget class="QLabel" name="OAGDist_lbl">
-                  <property name="text">
-                   <string>Prism/CCD distance (mm):</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="10" column="0">
-                 <widget class="QLabel" name="OAGPrismH_lbl">
-                  <property name="text">
-                   <string>Prism/CCD height (mm):</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="10" column="1">
-                 <widget class="QDoubleSpinBox" name="OAGPrismH">
-                  <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1406,37 +1284,61 @@
                  </widget>
                 </item>
                 <item row="11" column="0">
-                 <widget class="QLabel" name="OAGPrismW_lbl">
+                 <widget class="QLabel" name="OAGDist_lbl">
                   <property name="text">
-                   <string>Prism/CCD width (mm):</string>
+                   <string>Prism/CCD distance (mm):</string>
                   </property>
                  </widget>
                 </item>
                 <item row="12" column="0">
-                 <widget class="QLabel" name="OAGPrismPA_lbl">
+                 <widget class="QLabel" name="OAGPrismH_lbl">
                   <property name="text">
-                   <string>Position angle (degrees):</string>
+                   <string>Prism/CCD height (mm):</string>
                   </property>
                  </widget>
                 </item>
-                <item row="11" column="1">
-                 <widget class="QDoubleSpinBox" name="OAGPrismW">
+                <item row="12" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGPrismH">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
-                <item row="8" column="0" colspan="2">
+                <item row="13" column="0">
+                 <widget class="QLabel" name="OAGPrismW_lbl">
+                  <property name="text">
+                   <string>Prism/CCD width (mm):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="14" column="0">
+                 <widget class="QLabel" name="OAGPrismPA_lbl">
+                  <property name="text">
+                   <string>Position angle (degrees):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="13" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGPrismW">
+                  <property name="decimals">
+                   <number>2</number>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="0" colspan="2">
                  <widget class="QCheckBox" name="OAG_checkBox">
                   <property name="text">
                    <string>Off-Axis guider</string>
                   </property>
                  </widget>
                 </item>
-                <item row="12" column="1">
+                <item row="14" column="1">
                  <widget class="QDoubleSpinBox" name="OAGPrismPA">
                   <property name="decimals">
                    <number>0</number>
@@ -1469,6 +1371,43 @@
                   </property>
                   <property name="maximum">
                    <double>360.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="ccdBinningX_lbl">
+                  <property name="text">
+                   <string>Binning x:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="0">
+                 <widget class="QLabel" name="ccdBinningY_lbl">
+                  <property name="text">
+                   <string>Binning y:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QSpinBox" name="ccdBinningX">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>4</number>
+                  </property>
+                  <property name="value">
+                   <number>1</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="1">
+                 <widget class="QSpinBox" name="ccdBinningY">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>4</number>
                   </property>
                  </widget>
                 </item>
@@ -1534,22 +1473,12 @@
              <property name="leftMargin">
               <number>0</number>
              </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
              <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLabel" name="telescopeListLabel">
-               <property name="text">
-                <string>Telescopes</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QListView" name="telescopeListView">
                <property name="editTriggers">
@@ -1683,6 +1612,12 @@
                 </item>
                 <item row="0" column="1">
                  <widget class="QLineEdit" name="telescopeName">
+                  <property name="baseSize">
+                   <size>
+                    <width>100</width>
+                    <height>22</height>
+                   </size>
+                  </property>
                   <property name="maxLength">
                    <number>50</number>
                   </property>
@@ -1698,13 +1633,13 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="telescopeFL">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
                   </property>
                   <property name="maximum">
-                   <double>99999.000000000000000</double>
+                   <double>9999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1721,13 +1656,13 @@
                 <item row="2" column="1">
                  <widget class="QDoubleSpinBox" name="telescopeDiameter">
                   <property name="decimals">
-                   <number>1</number>
+                   <number>2</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
                   </property>
                   <property name="maximum">
-                   <double>9999.000000000000000</double>
+                   <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1820,8 +1755,6 @@
  <tabstops>
   <tabstop>Tabs</tabstop>
   <tabstop>requireSelectionCheckBox</tabstop>
-  <tabstop>togglePluginLineEdit</tabstop>
-  <tabstop>togglePopupNavigatorWindowLineEdit</tabstop>
   <tabstop>ocularListView</tabstop>
   <tabstop>addOcular</tabstop>
   <tabstop>pushButtonMoveOcularUp</tabstop>

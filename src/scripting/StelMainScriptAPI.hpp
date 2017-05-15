@@ -23,6 +23,8 @@
 #include <QObject>
 #include <QVariant>
 #include <QStringList>
+#include "StelObject.hpp"
+#include "StelCore.hpp"
 
 class QScriptEngine;
 
@@ -142,15 +144,7 @@ public slots:
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
-	//! @return a map of object data.  Keys:
-	//! - altitude : apparent altitude angle in decimal degrees
-	//! - azimuth : apparent azimuth angle in decimal degrees
-	//! - altitude-geometric : geometric altitude angle in decimal degrees
-	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
-	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees
-	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! @return a map of object data, exactly like getObjectInfo().
 	//! @deprecated Use getObjectInfo()
 	QVariantMap getObjectPosition(const QString& name);
 
@@ -158,6 +152,7 @@ public slots:
 	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data.  Keys:
+	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
@@ -168,61 +163,40 @@ public slots:
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
+	//! - sglong : supergalactic longitude in decimal degrees
+	//! - sglat : supergalactic latitude in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
-	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)
-	//! - elatJ2000 : ecliptic latitude (J2000 frame) in decimal degrees (on Earth only!)
+	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
+	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
 	//! - size: angular size in radians
 	//! - size-dd : angular size in decimal degrees
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
-	//! - localized-name : localized name
+	//! - localized-name : localized name	
+	//! The returned map can contain other information. For example, Solar System objects add:
 	//! - distance : distance to object in AU (for Solar system objects only!)
-	//! - phase : phase of object (for Solar system objects only!)
-	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
+	//! - illumination : phase of object in percent (0..100) (for Solar system objects only!)
 	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
 	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
 	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	//! Other StelObject derivates, also those defined in plugins, may add more,
+	//! these fields are documented in the respective classes, or simply try what you get:
+	//! You can print a complete set of entries into output with the following commands:
+	//! @code
+	//! map=core.getSelectedObjectInfo();
+	//! core.output(core.mapToString(map));
+	//! @endcode
 	QVariantMap getObjectInfo(const QString& name);
 
-	//! Fetch a map with data about an latest selected object's position, magnitude and so on
-	//! @return a map of object data.  Keys:
-	//! - altitude : apparent altitude angle in decimal degrees
-	//! - azimuth : apparent azimuth angle in decimal degrees	
-	//! - altitude-geometric : geometric altitude angle in decimal degrees
-	//! - azimuth-geometric : geometric azimuth angle in decimal degrees	
-	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees	
-	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees	
-	//! - glong : galactic longitude in decimal degrees
-	//! - glat : galactic latitude in decimal degrees
-	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
-	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
-	//! - elongJ2000 : ecliptic longitude (J2000 frame) in decimal degrees (on Earth only!)
-	//! - elatJ2000 : ecliptic latitude (J2000 frame) in decimal degrees (on Earth only!)
-	//! - vmag : visual magnitude
-	//! - vmage : visual magnitude (extincted)	
-	//! - size: angular size in radians
-	//! - size-dd : angular size in decimal degrees
-	//! - size-deg : angular size in decimal degrees (formatted string)
-	//! - size-dms : angular size in DMS format
-	//! - name : english name
-	//! - localized-name : localized name
-	//! - distance : distance to object in AU (for Solar system objects only!)
-	//! - phase : phase of object (for Solar system objects only!)
-	//! - illumination : phase of object in percentages (for Solar system objects only!)
-	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
-	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
-	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
-	//! - elongation : elongation of object in radians (for Solar system objects only!)
-	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
-	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	//! Fetch a map with data about the latest selected object's position, magnitude and so on
+	//! @return a map of object data.  See description for getObjectInfo(const QString& name);
 	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
@@ -264,14 +238,16 @@ public slots:
 	//! @return the Declination angle in J2000 frame in decimal degrees.
 	double getViewDecJ2000Angle();
 
-	//! move the current viewing direction to some specified altitude and azimuth
+	//! move the current viewing direction to some specified altitude and azimuth.
+	//! The move will run in AltAz coordinates. This will look different from moveToRaDec() when timelapse is fast.
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param alt the altitude angle
 	//! @param azi the azimuth angle
 	//! @param duration the duration of the movement in seconds
 	void moveToAltAzi(const QString& alt, const QString& azi, float duration=1.);
 
-	//! move the current viewing direction to some specified right ascension and declination
+	//! move the current viewing direction to some specified right ascension and declination.
+	//! The move will run in equatorial coordinates. This will look different from moveToAltAzi() when timelapse is fast.
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
 	//! @param ra the right ascension angle
 	//! @param dec the declination angle
@@ -349,7 +325,7 @@ public slots:
 	void setMinFps(float m);
 
 	//! Get the current minimum frames per second.
-	//! @return The current minimum frames per secon setting.
+	//! @return The current minimum frames per second setting.
 	float getMinFps();
 
 	//! Set the maximum frames per second.
@@ -357,7 +333,7 @@ public slots:
 	void setMaxFps(float m);
 
 	//! Get the current maximum frames per second.
-	//! @return The current maximum frames per secon setting.
+	//! @return The current maximum frames per second setting.
 	float getMaxFps();
 
 	//! Get the mount mode as a string
@@ -382,7 +358,7 @@ public slots:
 	QString getProjectionMode();
 
 	//! Set the current projection mode
-	//! @param id the name of the projection mode to use, e.g. "Perspective" and so on.
+	//! @param id the name of the projection mode to use, e.g. "ProjectionPerspective" and so on.
 	//! valid values of id are:
 	//! - ProjectionPerspective
 	//! - ProjectionEqualArea
@@ -392,6 +368,8 @@ public slots:
 	//! - ProjectionCylinder
 	//! - ProjectionMercator
 	//! - ProjectionOrthographic
+	//! - ProjectionSinusoidal
+	//! - ProjectionMiller
 	void setProjectionMode(const QString& id);
 
 	//! Get the status of the disk viewport
@@ -410,7 +388,14 @@ public slots:
 	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
 	//! @param x -0.5...0.5 horizontal offset. This is not available in the GUI, and it is recommended to keep it at 0.
 	//! @param y -0.5...0.5 vertical offset. This is available in the GUI.
+	//! @deprecated Use StelMovementMgr::moveViewport instead
 	void setViewportOffset(const float x, const float y);
+
+	//! Set a lateral width distortion. Use this e.g. in startup.ssc.
+	//! Implemented for 0.15 for a setup with 5 projectors with edge blending. The 9600x1200 get squeezed somewhat which looks a bit odd. Use this stretch to compensate.
+	//! Experimental! To avoid overuse, there is currently no config.ini setting available.
+	//! @note Currently only the projected content is affected. ScreenImage, ScreenLabel is not stretched.
+	void setViewportStretch(const float stretch);
 
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
@@ -441,67 +426,75 @@ public slots:
 	//! @param b if true, turn on gravity labels, else turn them off
 	void setFlagGravityLabels(bool b);
 
-	//! Load an image which will have sky coordinates.
-	//! @param id a string ID to be used when referring to this
-	//! image (e.g. when changing the displayed status or deleting
-	//! it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
-	//! image is searched for using StelFileMgr.
-	//! @param ra0 The right ascension of the first corner of the image in degrees (J2000.0)
-	//! @param dec0 The declination of the first corner of the image in degrees (J2000.0)
-	//! @param ra1 The right ascension of the second corner of the image in degrees (J2000.0)
-	//! @param dec1 The declination of the second corner of the image in degrees (J2000.0)
-	//! @param ra2 The right ascension of the third corner of the image in degrees (J2000.0)
-	//! @param dec2 The declination of the third corner of the image in degrees (J2000.0)
-	//! @param ra3 The right ascension of the fourth corner of the image in degrees (J2000.0)
-	//! @param dec3 The declination of the fourth corner of the image in degrees (J2000.0)
-	//! @param minRes The minimum resolution setting for the image
-	//! @param maxBright The maximum brightness setting for the image
-	//! @param visible The initial visibility of the image
-	void loadSkyImage(const QString& id, const QString& filename,
-					  double ra0, double dec0,
-					  double ra1, double dec1,
-					  double ra2, double dec2,
-					  double ra3, double dec3,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
-
-
-	//! Convenience function which allows the user to provide RA and DEC angles
-	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by
-	//! StelUtils::getDecAngle()).
-	void loadSkyImage(const QString& id, const QString& filename,
-					  const QString& ra0, const QString& dec0,
-					  const QString& ra1, const QString& dec1,
-					  const QString& ra2, const QString& dec2,
-					  const QString& ra3, const QString& dec3,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
-
-	//! Convenience function which allows loading of a sky image based on a
-	//! central coordinate, angular size and rotation.
+	//! Load an image into the sky background at the given sky coordinates and be warped with the sky.
+	//! The image is projected like a deep-sky object, with a notion for surface magnitude of the brightest parts.
+	//! Transparent sections in the image are possibly rendered white, so make your image just RGB with black background.
+	//! The black background covers the milky way, but is brightened by the Zodiacal light.
+	//! @todo allow alpha in images?
 	//! @param id a string ID to be used when referring to this
 	//! image (e.g. when changing the displayed status or deleting it.
 	//! @param filename the file name of the image.  If a relative
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
-	//! @param ra The right ascension of the center of the image in J2000 frame degrees
-	//! @param dec The declination of the center of the image in J2000 frame degrees
-	//! @param angSize The angular size of the image in arc minutes
-	//! @param rotation The clockwise rotation angle of the image in degrees
+	//! @param lon0 The right ascension/longitude/azimuth of the first corner of the image in degrees (bottom left)
+	//! @param lat0 The declination/latitude/altitude of the first corner of the image in degrees (bottom left)
+	//! @param lon1 The right ascension/longitude/azimuth of the second corner of the image in degrees (bottom right)
+	//! @param lat1 The declination/latitude/altitude of the second corner of the image in degrees (bottom right)
+	//! @param lon2 The right ascension/longitude/azimuth of the third corner of the image in degrees (top right)
+	//! @param lat2 The declination/latitude/altitude of the third corner of the image in degrees (top right)
+	//! @param lon3 The right ascension/longitude/azimuth of the fourth corner of the image in degrees (top left)
+	//! @param lat3 The declination/latitude/altitude of the fourth corner of the image in degrees (top left)
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
+	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
+	//! @note since 2017-03, you can select Frame now.
+	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
-					  double ra, double dec, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
+					  double lon0, double lat0,
+					  double lon1, double lat1,
+					  double lon2, double lat2,
+					  double lon3, double lat3,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString &frame="EqJ2000");
 
-	//! Convenience function which allows loading of a sky image based on a
+
+	//! Convenience function which allows the user to provide longitudinal and latitudinal angles (RA/Dec or Long/Lat or Az/Alt)
+	//! as strings (e.g. "12d 14m 8s" or "5h 26m 8s" - formats accepted by StelUtils::getDecAngle()).
+	void loadSkyImage(const QString& id, const QString& filename,
+					  const QString& lon0, const QString& lat0,
+					  const QString& lon1, const QString& lat1,
+					  const QString& lon2, const QString& lat2,
+					  const QString& lon3, const QString& lat3,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+
+	//! Convenience function which allows loading of a (square) sky image based on a
+	//! central coordinate, angular size and rotation. Note that the edges will not be aligned with edges at center plus/minus size!
+	//! @param id a string ID to be used when referring to this
+	//! image (e.g. when changing the displayed status or deleting it.
+	//! @param filename the file name of the image.  If a relative
+	//! path is specified, "scripts/" will be prefixed before the
+	//! image is searched for using StelFileMgr.
+	//! @param lon The right ascension/longitude/azimuth of the center of the image in frame degrees
+	//! @param lat The declination/latitude/altitude of the center of the image in frame degrees
+	//! @param angSize The angular size of the image in arc minutes
+	//! @param rotation The clockwise rotation angle of the image in degrees. Use 0 for an image with top=north. (New from 2017 -- This used to be 90!)
+	//! @param minRes The minimum resolution setting for the image. UNCLEAR, using 2.5 seems to work well.
+	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
+	//! @param visible The initial visibility of the image
+	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
+	//! @note since 2017-03, you can select Frame now.
+	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
+	void loadSkyImage(const QString& id, const QString& filename,
+					  double lon, double lat, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+
+	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation.  Parameters are the same
 	//! as the version of this function which takes double values for the
-	//! ra and dec, except here text expressions of angles may be used.
+	//! lon and lat, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
-					  const QString& ra, const QString& dec, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
+					  const QString& lon, const QString& lat, double angSize, double rotation,
+					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
 
 	//! Load an image which will have a sky location given in alt-azimuthal coordinates.
 	//! @param id a string ID to be used when referring to this
@@ -521,6 +514,7 @@ public slots:
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
+	//! @deprecated since 2017-02 because of inconsistent name. Use loadSkyImage(,,,, "AzAlt") instead!
 	void loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double azi0, double alt0,
 					  double azi1, double alt1,
@@ -542,6 +536,7 @@ public slots:
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
+	//! @deprecated since 2017-03. Use loadSkyImage(,,,, "AzAlt") instead!
 	void loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double alt, double azi, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true);
@@ -552,8 +547,8 @@ public slots:
 
 	//! Get screen coordinates from some specified altitude and azimuth
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
-	//! @param alt the altitude angle
-	//! @param azi the azimuth angle
+	//! @param alt the altitude angle [degrees]
+	//! @param azi the azimuth angle [degrees]
 	//! @return a map of object data.  Keys:
 	//! - x : x coordinate on the screen
 	//! - y : y coordinate on the screen
@@ -584,6 +579,17 @@ public slots:
 	//! of your script.
 	//! @param id the identifier used when loadSound was called
 	void dropSound(const QString& id);
+
+	//! Get position in a playing sound.
+	//! @param id the identifier used when loadSound was called
+	//! @return position [ms] during play or pause, 0 when stopped, -1 in case of error.
+	qint64 getSoundPosition(const QString& id);
+
+	//! Get duration of a sound object (if possible).
+	//! @param id the identifier used when loadSound was called
+	//! @return duration[ms] if known, 0 if unknown (e.g. during load/before playing), -1 in case of error.
+	qint64 getSoundDuration(const QString& id);
+
 
 	//! Load a video from a file.
 	//! @param filename the name of the file to load, relative to the scripts directory.
@@ -705,14 +711,20 @@ public slots:
 
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
-	void debug(const QString& s);
+	static void debug(const QString& s);
 
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
-	void output(const QString& s);
+	void output(const QString& s) const;
+
+	//! print contents of a QVariantMap as []-delimited list of [ "key" = <value>] lists.
+	//! @param map QVariantMap e.g. from getObjectInfo() or getLocationInfo()
+	//! @note string values are surrounded with ", simple numeric types are printed as themselves.
+	//! @note More complicated value types like lists are only indicated by their type name. You must extract those (and their contents) yourself.
+	QString mapToString(const QVariantMap &map) const;
 
 	//! Reset (clear) output file
-	void resetOutput(void);
+	void resetOutput(void) const;
 
 	//! Save output file to new file (in same directory as output.txt).
 	//! This is required to allow reading with other program on Windows while output.txt is still open.
@@ -720,7 +732,7 @@ public slots:
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getAppLanguage();
+	QString getAppLanguage() const;
 
 	//! Set the current application language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
@@ -728,7 +740,7 @@ public slots:
 
 	//! Get the current sky language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
-	QString getSkyLanguage();
+	QString getSkyLanguage() const;
 
 	//! Set the current sky language.
 	//! @param langCode two letter language code, e.g. "en", or "de".
@@ -747,7 +759,7 @@ public slots:
 
 	//! Get Milky Way intensity.
 	//! @return value of Milky Way intensity, e.g. "1.2"
-	double getMilkyWayIntensity();
+	double getMilkyWayIntensity() const;
 
 	//! Show or hide the Zodiacal Light.
 	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
@@ -759,20 +771,39 @@ public slots:
 
 	//! Get Zodiacal Light intensity.
 	//! @return value of Zodiacal Light intensity, e.g. "1.2"
-	double getZodiacalLightIntensity();
+	double getZodiacalLightIntensity() const;
+
+	//! Returns the currently set Bortle scale index, which is used to simulate light pollution.
+	//! Wrapper for StelSkyDrawer::getBortleScaleIndex
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
+	//! @return the Bortle scale index in range [1,9]
+	int getBortleScaleIndex() const;
+
+	//! Changes the Bortle scale index, which is used to simulate light pollution.
+	//! Wrapper for StelSkyDrawer::setBortleScaleIndex
+	//! Valid values are in the range [1,9]
+	//! @see https://en.wikipedia.org/wiki/Bortle_scale
+	//! @param index the new Bortle scale index, must be in range [1,9]
+	void setBortleScaleIndex(int index);
+
+	//! Show or hide the DSS (photorealistic sky).
+	//! @param b if true, show the DSS, if false, hide the DSS layer.
+	void setDSSMode(bool b);
+	//! Get the current status of DSS mode.
+	//! @return The current status of DSS mode.
+	bool isDSSModeEnabled() const;
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
 	double jdFromDateString(const QString& dt, const QString& spec);
 
-	// Methods wait() and waitFor() was added for documentation.
+	// Methods wait() and waitFor() were added for documentation.
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
-
+	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	//! @note This method is pure JavaScript implementation.
-	void wait(double t) { Q_UNUSED(t) }
+	void wait(double t);
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -782,23 +813,25 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use
 	//! @param spec "local" or "utc"
-	//! @note This method is pure JavaScript implementation.
-	void waitFor(const QString& dt, const QString& spec="utc") { Q_UNUSED(dt); Q_UNUSED(spec) }
+	void waitFor(const QString& dt, const QString& spec="utc");
+
 
 signals:
+
 	void requestLoadSkyImage(const QString& id, const QString& filename,
 							 double c1, double c2,
 							 double c3, double c4,
 							 double c5, double c6,
 							 double c7, double c8,
-							 double minRes, double maxBright, bool visible);
+							 double minRes, double maxBright, bool visible, const StelCore::FrameType frameType);
+	//! @deprecated! USE requestLoadSkyImage() with frameType=AzAlt!
+	//! @todo: Remove with V0.16.0
 	void requestLoadSkyImageAltAz(const QString& id, const QString& filename,
 							 double c1, double c2,
 							 double c3, double c4,
 							 double c5, double c6,
 							 double c7, double c8,
 							 double minRes, double maxBright, bool visible);
-
 
 	void requestRemoveSkyImage(const QString& id);
 

@@ -1,61 +1,13 @@
-SET(glues_lib_SRCS
-     core/external/glues_stel/source/glues_error.c
-     core/external/glues_stel/source/glues_error.h
-     core/external/glues_stel/source/glues.h
-     core/external/glues_stel/source/libtess/dict.h
-     core/external/glues_stel/source/libtess/dict.c
-     core/external/glues_stel/source/libtess/dict-list.h
-     core/external/glues_stel/source/libtess/geom.c
-     core/external/glues_stel/source/libtess/geom.h
-     core/external/glues_stel/source/libtess/memalloc.c
-     core/external/glues_stel/source/libtess/memalloc.h
-     core/external/glues_stel/source/libtess/mesh.c
-     core/external/glues_stel/source/libtess/mesh.h
-     core/external/glues_stel/source/libtess/normal.c
-     core/external/glues_stel/source/libtess/normal.h
-     core/external/glues_stel/source/libtess/priorityq.c
-     core/external/glues_stel/source/libtess/priorityq.h
-     core/external/glues_stel/source/libtess/priorityq-heap.h
-     core/external/glues_stel/source/libtess/priorityq-heap.i
-     core/external/glues_stel/source/libtess/priorityq-sort.h
-     core/external/glues_stel/source/libtess/render.c
-     core/external/glues_stel/source/libtess/render.h
-     core/external/glues_stel/source/libtess/sweep.c
-     core/external/glues_stel/source/libtess/sweep.h
-     core/external/glues_stel/source/libtess/tess.c
-     core/external/glues_stel/source/libtess/tess.h
-     core/external/glues_stel/source/libtess/tessmono.c
-     core/external/glues_stel/source/libtess/tessmono.h
-)
+#add our external dependencies first
+add_subdirectory(external)
 
-SET(zlib_SRCS
-     core/external/zlib/adler32.c
-     core/external/zlib/compress.c
-     core/external/zlib/crc32.c
-     core/external/zlib/crc32.h
-     core/external/zlib/deflate.c
-     core/external/zlib/deflate.h
-     core/external/zlib/gzclose.c
-     core/external/zlib/gzguts.h
-     core/external/zlib/gzlib.c
-     core/external/zlib/gzread.c
-     core/external/zlib/gzwrite.c
-     core/external/zlib/infback.c
-     core/external/zlib/inffast.c
-     core/external/zlib/inffast.h
-     core/external/zlib/inffixed.h
-     core/external/zlib/inflate.c
-     core/external/zlib/inflate.h
-     core/external/zlib/inftrees.c
-     core/external/zlib/inftrees.h
-     core/external/zlib/trees.c
-     core/external/zlib/trees.h
-     core/external/zlib/uncompr.c
-     core/external/zlib/zconf.h
-     core/external/zlib/zlib.h
-     core/external/zlib/zutil.c
-     core/external/zlib/zutil.h
-)
+IF(ENABLE_SPOUT)
+    SET(spout_SRCS
+     external/SpoutLibrary.h
+     core/SpoutSender.hpp
+     core/SpoutSender.cpp
+	 )
+ENDIF()
 
 SET(stellarium_lib_SRCS
      core/StelAudioMgr.hpp
@@ -71,6 +23,7 @@ SET(stellarium_lib_SRCS
      core/StelLocation.hpp
      core/StelLocation.cpp
      core/StelLocationMgr.hpp
+     core/StelLocationMgr_p.hpp
      core/StelLocationMgr.cpp
      core/StelProjector.cpp
      core/StelProjector.hpp
@@ -111,6 +64,7 @@ SET(stellarium_lib_SRCS
      core/StelOpenGL.cpp
      core/StelOpenGL.hpp
      core/StelPluginInterface.hpp
+     core/StelRegionObject.hpp
      core/StelSkyCultureMgr.cpp
      core/StelSkyCultureMgr.hpp
      core/StelTextureMgr.cpp
@@ -152,9 +106,15 @@ SET(stellarium_lib_SRCS
      core/TrailGroup.cpp
      core/RefractionExtinction.hpp
      core/RefractionExtinction.cpp
+     core/StelToast.hpp
+     core/StelToast.cpp
+     core/StelToastGrid.hpp
+     core/StelToastGrid.cpp
      core/StelActionMgr.hpp
      core/StelActionMgr.cpp
      core/StelProgressController.hpp
+     core/StelPropertyMgr.hpp
+     core/StelPropertyMgr.cpp
      core/StelAddOnMgr.cpp
      core/StelAddOnMgr.hpp
      core/AddOn.cpp
@@ -166,9 +126,7 @@ SET(stellarium_lib_SRCS
      core/DownloadMgr.cpp
      core/DownloadMgr.hpp
 
-     ${gl_lib_SRCS}
-
-     ${glues_lib_SRCS}
+     ${spout_SRCS}
 
      core/planetsephems/calc_interpolated_elements.c
      core/planetsephems/calc_interpolated_elements.h
@@ -207,10 +165,18 @@ SET(stellarium_lib_SRCS
 
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
+     core/modules/Asterism.cpp
+     core/modules/Asterism.hpp
+     core/modules/AsterismMgr.cpp
+     core/modules/AsterismMgr.hpp
      core/modules/Constellation.cpp
      core/modules/Constellation.hpp
      core/modules/ConstellationMgr.cpp
      core/modules/ConstellationMgr.hpp
+     core/modules/CustomObject.cpp
+     core/modules/CustomObject.hpp
+     core/modules/CustomObjectMgr.cpp
+     core/modules/CustomObjectMgr.hpp
      core/modules/GridLinesMgr.cpp
      core/modules/GridLinesMgr.hpp
      core/modules/LabelMgr.hpp
@@ -252,6 +218,8 @@ SET(stellarium_lib_SRCS
      core/modules/StarMgr.hpp
      core/modules/StarWrapper.cpp
      core/modules/StarWrapper.hpp
+     core/modules/ToastMgr.hpp
+     core/modules/ToastMgr.cpp
      core/modules/ZoneArray.cpp
      core/modules/ZodiacalLight.hpp
      core/modules/ZodiacalLight.cpp
@@ -265,15 +233,23 @@ SET(stellarium_lib_SRCS
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
+     translations_countries.h
 )
 
-SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-     core/external/qtcompress/qzip.cpp
-     core/external/qtcompress/qzipreader.h
-     core/external/qtcompress/qzipwriter.h
-     core/external/qcustomplot/qcustomplot.cpp
-     core/external/qcustomplot/qcustomplot.h
-)
+### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
+### Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
+### Q_GADGET is required force the Qt MOC to run on some specific files,
+### because they do not contain QObjects, but require a MOC for Q_FLAGS or similar
+IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
+     QT5_WRAP_CPP(stellarium_lib_moc_SRCS
+         core/StelObject.hpp
+         core/StelRegionObject.hpp
+         core/modules/Nebula.hpp
+     )
+     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+          ${stellarium_lib_moc_SRCS}
+     )
+ENDIF()
 
 IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
@@ -290,18 +266,11 @@ IF(ENABLE_SCRIPTING)
      )
 ENDIF()
 
-IF(WIN32)
-     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-          ${zlib_SRCS}
-     )
-ENDIF()
-
 SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
 QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
-
 
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
@@ -341,6 +310,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AddRemoveLandscapesDialog.cpp
           gui/AtmosphereDialog.hpp
           gui/AtmosphereDialog.cpp
+          gui/ConfigureDSOColorsDialog.hpp
+          gui/ConfigureDSOColorsDialog.cpp
+          gui/ConfigureOrbitColorsDialog.hpp
+          gui/ConfigureOrbitColorsDialog.cpp
           gui/GreatRedSpotDialog.hpp
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
@@ -350,6 +323,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/BookmarksDialog.hpp
           gui/BookmarksDialog.cpp
           gui/StelDialog.hpp
+          gui/StelDialog_p.hpp
           gui/StelDialog.cpp
           gui/AddOnDialog.hpp
           gui/AddOnDialog.cpp
@@ -376,6 +350,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/astroCalcDialog.ui
           gui/bookmarksDialog.ui
           gui/addRemoveLandscapesDialog.ui
+          gui/dsoColorsDialog.ui
+          gui/orbitColorsDialog.ui
           gui/addonDialog.ui
           gui/addonScanner.ui
 	  gui/addonAboutDialog.ui
@@ -402,7 +378,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
      SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
      QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
-     SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 ENDIF()
 
@@ -445,57 +420,61 @@ ENDIF()
 ################################ Build main program #########################################
 #############################################################################################
 
-SET(extLinkerOption ${extLinkerOption} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
-IF(ENABLE_MEDIA)
-    # Forced linkage to Qt5MultimediaWidgets library when media support is enabled
-    SET(extLinkerOption ${extLinkerOption} ${Qt5MultimediaWidgets_LIBRARIES})
-ENDIF()
 IF(WIN32 AND NOT MSVC)
-# TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
-# Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
-     SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
+    # This library is required on MinGW builds for some native methods used in a fix in main.cpp
+     SET(winMMLib libwinmm.a)
 ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
      IF(RC_COMPILER_PATH)
-          ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_BINARY_DIR}/stellarium-rc.o
-                    COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
-                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
+          ADD_CUSTOM_COMMAND(
+               OUTPUT ${CMAKE_BINARY_DIR}/stellarium-rc.o
+               COMMAND ${RC_COMPILER_PATH} ${CMAKE_BINARY_DIR}/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o)
           SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
      ELSE()
           IF(MSVC)
-               SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_SOURCE_DIR}/data/stellarium.rc)
+               SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium.rc)
           ENDIF()
      ENDIF()
 ENDIF()
 
+# Setup Qt5 dependencies
+SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets)
+IF(ENABLE_MEDIA)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
+ENDIF()
+IF(ENABLE_SCRIPTING)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
+ENDIF()
+IF(USE_OLD_QGLWIDGET)
+     # The Qt5OpenGL library is only required when using the legacy viewport
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
+ENDIF()
+IF(ENABLE_GPS)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Positioning Qt5::SerialPort)
+ENDIF()
+
+IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
+     # automatically copy the spout .dll to the binary directory, if possible
+     CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+ENDIF()
+
+SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+IF(ENABLE_LIBGPS)
+     SET(STELMAIN_DEPS ${STELMAIN_DEPS} ${GPS_LIBRARY})
+ENDIF()
+
+# Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-     QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
-     IF(ENABLE_MEDIA)
-         QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
-     ENDIF()
-     IF(USE_PLUGIN_TELESCOPECONTROL)
-          QT5_USE_MODULES(stelMain SerialPort)
-     ENDIF()
+     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
      INSTALL(TARGETS stelMain DESTINATION lib)
      ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
-     TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
+     TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
 ELSE()
      ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-     # This will add the ANGLE lib if the Qt version supports it.
-     TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
-
-     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets PrintSupport)
-     IF(ENABLE_MEDIA)
-          QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
-     ENDIF()
-     IF(USE_PLUGIN_TELESCOPECONTROL)
-          QT5_USE_MODULES(stellarium SerialPort)
-     ENDIF()
+     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS})
 
      IF(APPLE)
           SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
@@ -508,7 +487,7 @@ ADD_DEPENDENCIES(stellarium AllStaticPlugins)
 IF(MSVC)
      ADD_CUSTOM_COMMAND(TARGET stellarium
           POST_BUILD
-          COMMAND "mt.exe" -nologo -manifest ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest -outputresource:$<TARGET_FILE:stellarium>
+          COMMAND "mt.exe" -nologo -manifest ${PROJECT_SOURCE_DIR}/data/stellarium.exe.manifest -outputresource:$<TARGET_FILE:stellarium>
           COMMENT "Adding manifest..."
           VERBATIM
      )
@@ -526,7 +505,7 @@ MACRO(ADD_TEST NAME)
      SET(STELLARIUM_TESTS ${STELLARIUM_TESTS} ${NAME})
 ENDMACRO()
 
-SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
+SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test)
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -537,13 +516,8 @@ SET(tests_testDates_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testDates_SRCS ${tests_testDates_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
-QT5_USE_MODULES(testDates Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testDates)
 ADD_TEST(testDates)
 
@@ -554,8 +528,7 @@ SET(tests_testStelFileMgr_SRCS
      core/StelFileMgr.cpp
 )
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
-QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 ADD_TEST(testStelFileMgr)
 
@@ -578,15 +551,9 @@ SET(tests_testStelSphereGeometry_SRCS
      core/StelFileMgr.cpp
      core/StelTranslator.hpp
      core/StelTranslator.cpp
-     ${glues_lib_SRCS}
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
-QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
-TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 ADD_TEST(testStelSphereGeometry)
 
@@ -611,8 +578,7 @@ ADD_TEST(testStelSphereGeometry)
 #     core/StelTranslator.hpp
 #     ${glues_lib_SRCS})
 #ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Test)
-#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
+#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
 #ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
 
 SET(tests_testStelJsonParser_SRCS
@@ -622,8 +588,7 @@ SET(tests_testStelJsonParser_SRCS
      core/StelJsonParser.cpp
 )
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
-QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 ADD_TEST(testStelJsonParser)
 
@@ -633,8 +598,7 @@ SET(tests_testStelVertexArray_SRCS
      core/StelVertexArray.hpp
 )
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS})
-QT5_USE_MODULES(testStelVertexArray Core Gui Test OpenGL)
-TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)
 ADD_TEST(testStelVertexArray)
 
@@ -644,13 +608,8 @@ SET(tests_testDeltaT_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testDeltaT_SRCS ${tests_testDeltaT_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
-QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 ADD_TEST(testDeltaT)
 
@@ -660,13 +619,8 @@ SET(tests_testConversions_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testConversions_SRCS ${tests_testConversions_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
-QT5_USE_MODULES(testConversions Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testConversions)
 ADD_TEST(testConversions)
 
@@ -677,8 +631,7 @@ SET(tests_testExtinction_SRCS
      core/RefractionExtinction.cpp
 )
 ADD_EXECUTABLE(testExtinction EXCLUDE_FROM_ALL ${tests_testExtinction_SRCS})
-QT5_USE_MODULES(testExtinction Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testExtinction ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testExtinction)
 ADD_TEST(testExtinction)
 
@@ -690,13 +643,8 @@ SET(tests_testRefraction_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
-QT5_USE_MODULES(testRefraction Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testRefraction)
 ADD_TEST(testRefraction)
 
@@ -708,15 +656,37 @@ SET(tests_testPrecession_SRCS
      core/StelUtils.hpp
      core/StelUtils.cpp
 )
-IF(WIN32)
-     # StelUtils required zlib sources
-     SET(tests_testPrecession_SRCS ${tests_testPrecession_SRCS} ${zlib_SRCS})
-ENDIF()
 ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
-QT5_USE_MODULES(testPrecession Core Gui Widgets Script Test)
-TARGET_LINK_LIBRARIES(testPrecession ${extLinkerOptionTest})
+TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testPrecession)
 ADD_TEST(testPrecession)
+
+SET(tests_testEphemeris_SRCS
+     tests/testEphemeris.hpp
+     tests/testEphemeris.cpp
+     core/StelFileMgr.hpp
+     core/StelFileMgr.cpp
+     core/VecMath.hpp
+     core/planetsephems/EphemWrapper.hpp
+     core/planetsephems/vsop87.h
+     core/planetsephems/vsop87.c
+     core/planetsephems/calc_interpolated_elements.h
+     core/planetsephems/calc_interpolated_elements.c
+     core/planetsephems/elliptic_to_rectangular.h
+     core/planetsephems/elliptic_to_rectangular.c
+     core/planetsephems/de430.hpp
+     core/planetsephems/de430.cpp
+     core/planetsephems/de431.hpp
+     core/planetsephems/de431.cpp
+     core/planetsephems/jpl_int.h
+     core/planetsephems/jpleph.h
+     core/planetsephems/jpleph.cpp
+)
+ADD_EXECUTABLE(testEphemeris EXCLUDE_FROM_ALL ${tests_testEphemeris_SRCS})
+TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
+TARGET_COMPILE_DEFINITIONS(testEphemeris PRIVATE UNIT_TEST)
+ADD_DEPENDENCIES(buildTests testEphemeris)
+ADD_TEST(testEphemeris)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 FOREACH(NAME ${STELLARIUM_TESTS})

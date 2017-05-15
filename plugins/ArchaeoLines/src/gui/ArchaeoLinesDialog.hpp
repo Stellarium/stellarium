@@ -56,6 +56,12 @@ public slots:
 	void setCurrentMoonColor(QColor color){currentMoonColor=color;}
 	void setCurrentPlanetColor(QColor color){currentPlanetColor=color;}
 	void setSelectedObjectColor(QColor color){selectedObjectColor=color;}
+	void setGeographicLocation1Color(QColor color){geographicLocation1Color=color;}
+	void setGeographicLocation2Color(QColor color){geographicLocation2Color=color;}
+	void setCustomAzimuth1Color(QColor color){customAzimuth1Color=color;}
+	void setCustomAzimuth2Color(QColor color){customAzimuth2Color=color;}
+	void setCustomDeclination1Color(QColor color){customDeclination1Color=color;}
+	void setCustomDeclination2Color(QColor color){customDeclination2Color=color;}
 	void askEquinoxColor();
 	void askSolsticeColor();
 	void askCrossquarterColor();
@@ -67,6 +73,12 @@ public slots:
 	void askCurrentMoonColor();
 	void askCurrentPlanetColor();
 	void askSelectedObjectColor();
+	void askGeographicLocation1Color();
+	void askGeographicLocation2Color();
+	void askCustomAzimuth1Color();
+	void askCustomAzimuth2Color();
+	void askCustomDeclination1Color();
+	void askCustomDeclination2Color();
 
 protected:
 	void createDialogContent();
@@ -86,6 +98,12 @@ private:
 	QColor currentMoonColor;
 	QColor currentPlanetColor;
 	QColor selectedObjectColor;
+	QColor geographicLocation1Color;
+	QColor geographicLocation2Color;
+	QColor customAzimuth1Color;
+	QColor customAzimuth2Color;
+	QColor customDeclination1Color;
+	QColor customDeclination2Color;
 	QPixmap equinoxColorPixmap;
 	QPixmap solsticeColorPixmap;
 	QPixmap crossquarterColorPixmap;
@@ -97,12 +115,19 @@ private:
 	QPixmap currentMoonColorPixmap;
 	QPixmap currentPlanetColorPixmap;
 	QPixmap selectedObjectColorPixmap;
+	QPixmap geographicLocation1ColorPixmap;
+	QPixmap geographicLocation2ColorPixmap;
+	QPixmap customAzimuth1ColorPixmap;
+	QPixmap customAzimuth2ColorPixmap;
+	QPixmap customDeclination1ColorPixmap;
+	QPixmap customDeclination2ColorPixmap;
 	void setAboutHtml();
 
 private slots:
 	void resetArchaeoLinesSettings();
 	//! setting planet requires a small function to link Combobox indices to line IDs.
 	void setCurrentPlanetFromGUI(int index);
+	void setCurrentPlanetFromApp();
 
 };
 

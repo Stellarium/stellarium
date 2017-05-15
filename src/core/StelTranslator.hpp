@@ -62,11 +62,19 @@ public:
 	~StelTranslator();
 
 	//! Translate input message and return it as a QString.
+	//! If the string is not translated in the current locale, the input string is returned unchanged.
 	//! @param s input string in english.
 	//! @param c disambiguation string (gettext "context" string).
 	//! @return The translated QString
 	QString qtranslate(const QString& s, const QString& c = QString()) const;
 
+	//! Try to translate input message and return it as a QString. If no translation
+	//! exist for the current StelTranslator language, a null string is returned.
+	//! @param s input string in english.
+	//! @param c disambiguation string (gettext "context" string).
+	//! @return The translated QString
+	QString tryQtranslate(const QString& s, const QString& c = QString()) const;
+	
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
 	const QString& getTrueLocaleName() const
@@ -80,8 +88,8 @@ public:
 	//! Used as a global translator by the whole app
 	static StelTranslator* globalTranslator;
 
-	//! Get available language name in native language
-	QStringList getAvailableLanguagesNamesNative() const;
+	//! Get available language name in native language from passed locales directory
+	QStringList getAvailableLanguagesNamesNative(const QString& localeDir="", const QString &section="") const;
 
 	//! Convert from ISO639-1 langage code to native language name
 	//! @param languageCode the code to look up
@@ -125,3 +133,4 @@ private:
 };
 
 #endif // _STELTRANSLATOR_HPP_
+

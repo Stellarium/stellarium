@@ -255,10 +255,9 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 			 int mag_range, int mag_steps)
 			: fname(fname), level(level), mag_min(mag_min),
 			  mag_range(mag_range), mag_steps(mag_steps),
-			  star_position_scale(0.0), zones(0), file(file)
+			  star_position_scale(0.0), nr_of_stars(0), zones(0), file(file)
 {
-	nr_of_zones = StelGeodesicGrid::nrOfZones(level);
-	nr_of_stars = 0;
+	nr_of_zones = StelGeodesicGrid::nrOfZones(level);	
 }
 
 bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
@@ -521,6 +520,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		}
 
 		int extinctedMagIndex = s->getMag();
+		float twinkleFactor=1.0f; // allow height-dependent twinkle.
 		if (withExtinction)
 		{
 			Vec3f altAz(vf);
@@ -529,12 +529,13 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
 			extinctedMagIndex = s->getMag() + (int)(extMagShift/k);
-			if (extinctedMagIndex >= cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
+			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
+			twinkleFactor=qMin(1.0f, 1.0f-0.9f*altAz[2]); // suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
 		}
-	
-		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
+
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport, twinkleFactor) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;

@@ -46,30 +46,33 @@ Vec3f Pulsar::markerColor = Vec3f(0.4f,0.5f,1.0f);
 Vec3f Pulsar::glitchColor = Vec3f(0.2f,0.3f,1.0f);
 
 Pulsar::Pulsar(const QVariantMap& map)
-		: initialized(false),
-		  designation(""),
-		  RA(0.),
-		  DE(0.),
-		  parallax(0.),
-		  period(0.),
-		  frequency(0.),
-		  pfrequency(0.),
-		  pderivative(0.),
-		  dmeasure(0.),
-		  bperiod(0.),
-		  eccentricity(0.),
-		  w50(0.),
-		  s400(0.),
-		  s600(0.),
-		  s1400(0.),
-		  distance(0.),
-		  glitch(-1),
-		  notes("")
+	: initialized(false)
+	, designation("")
+	, RA(0.)
+	, DE(0.)
+	, parallax(0.)
+	, period(0.)
+	, frequency(0.)
+	, pfrequency(0.)
+	, pderivative(0.)
+	, dmeasure(0.)
+	, bperiod(0.)
+	, eccentricity(0.)
+	, w50(0.)
+	, s400(0.)
+	, s600(0.)
+	, s1400(0.)
+	, distance(0.)
+	, glitch(-1)
+	, notes("")
 {
-	// return initialized if the mandatory fields are not present
-	if (!map.contains("designation"))
+	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DE"))
+	{
+		qWarning() << "Pulsar: INVALID pulsar!" << map.value("designation").toString();
+		qWarning() << "Pulsar: Please, check your 'pulsars.json' catalog!";
 		return;
-		
+	}
+
 	designation  = map.value("designation").toString();
 	parallax = map.value("parallax").toFloat();
 	period = map.value("period").toDouble();
@@ -78,9 +81,9 @@ Pulsar::Pulsar(const QVariantMap& map)
 	pfrequency = map.value("pfrequency").toDouble();
 	pderivative = map.value("pderivative").toDouble();
 	dmeasure = map.value("dmeasure").toDouble();
-	eccentricity = map.value("eccentricity").toDouble();	
+	eccentricity = map.value("eccentricity").toDouble();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
-	DE = StelUtils::getDecAngle(map.value("DE").toString());	
+	DE = StelUtils::getDecAngle(map.value("DE").toString());
 	w50 = map.value("w50").toFloat();
 	s400 = map.value("s400").toFloat();
 	s600 = map.value("s600").toFloat();
@@ -108,7 +111,7 @@ Pulsar::~Pulsar()
 	//
 }
 
-QVariantMap Pulsar::getMap(void)
+QVariantMap Pulsar::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
@@ -265,6 +268,28 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	return str;
 }
 
+QVariantMap Pulsar::getInfoMap(const StelCore *core) const
+{
+	QVariantMap map = StelObject::getInfoMap(core);
+
+	map["parallax"] = parallax;
+	map["bperiod"] = bperiod;
+	map["frequency"] = frequency;
+	map["pfrequency"] = pfrequency;
+	map["pderivative"] = pderivative;
+	map["dmeasure"] = dmeasure;
+	map["eccentricity"] = eccentricity;
+	map["period"] = period;
+	map["w50"] = w50;
+	map["s400"] = s400;
+	map["s600"] = s600;
+	map["s1400"] = s1400;
+	map["distance"] = distance;
+	map["glitch"] = glitch;
+	map["notes"] = notes;
+	return map;
+}
+
 Vec3f Pulsar::getInfoColor(void) const
 {
 	return Vec3f(1.0, 1.0, 1.0);
@@ -381,8 +406,8 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 	if (!(painter->getProjector()->projectCheck(XYZ, win)))
 		return;
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
+	painter->setBlending(true, GL_ONE, GL_ONE);
+
 	if (glitch>0 && glitchFlag)
 		painter->setColor(glitchColor[0], glitchColor[1], glitchColor[2], 1.f);
 	else

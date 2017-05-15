@@ -39,14 +39,14 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 
-#include "qcustomplot/qcustomplot.h"
+#include "external/qcustomplot/qcustomplot.h"
 
 ExoplanetsDialog::ExoplanetsDialog()
-	: ep(NULL)
+	: StelDialog("Exoplanets")
+	, ep(NULL)
 	, updateTimer(NULL)
 {
         ui = new Ui_exoplanetsDialog;
-	dialogName = "Exoplanets";
 }
 
 ExoplanetsDialog::~ExoplanetsDialog()
@@ -100,6 +100,8 @@ void ExoplanetsDialog::createDialogContent()
 	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
 	ui->habitableModeCheckBox->setChecked(ep->getHabitableMode());
 	connect(ui->habitableModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setHabitableEnabled(int)));
+	ui->displayShowDesignationsCheckBox->setChecked(ep->getFlagShowExoplanetsDesignations());
+	connect(ui->displayShowDesignationsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsDesignations(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -317,6 +319,12 @@ void ExoplanetsDialog::setDistributionEnabled(int checkState)
 	ep->setDisplayMode(b);
 }
 
+void ExoplanetsDialog::setDisplayShowExoplanetsDesignations(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ep->setFlagShowExoplanetsDesignations(b);
+}
+
 void ExoplanetsDialog::setTimelineEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
@@ -368,7 +376,7 @@ void ExoplanetsDialog::updateStateReceiver(Exoplanets::UpdateState state)
 
 void ExoplanetsDialog::updateCompleteReceiver(void)
 {
-	qDebug() << "Exoplanets: updating of catalog is complete";
+	qDebug() << "[Exoplanets] Updating of catalog is complete";
         ui->nextUpdateLabel->setText(QString(q_("Exoplanets is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
@@ -379,7 +387,7 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 
 void ExoplanetsDialog::restoreDefaults(void)
 {
-	qDebug() << "Exoplanets::restoreDefaults";
+	qDebug() << "[Exoplanets] Restore defaults...";
 	ep->restoreDefaults();
 	ep->loadConfiguration();
 	updateGuiFromSettings();
@@ -483,7 +491,7 @@ void ExoplanetsDialog::populateDiagramsList()
 	axisX->blockSignals(true);
 	axisY->blockSignals(true);
 	int indexX = axisX->currentIndex();
-	int indexY = axisY->currentIndex();
+	int indexY = axisY->currentIndex();	
 	QVariant selectedAxisX = axisX->itemData(indexX);
 	QVariant selectedAxisY = axisY->itemData(indexY);
 	axisX->clear();
@@ -496,6 +504,15 @@ void ExoplanetsDialog::populateDiagramsList()
 	axis.append(qMakePair(q_("Planetary Radius, Rjup"), 3));
 	axis.append(qMakePair(q_("Orbital Period, days"), 4));
 	axis.append(qMakePair(q_("Angular Distance, arcsec."), 5));
+	axis.append(qMakePair(q_("Effective temperature of a host star, K"), 6));
+	axis.append(qMakePair(q_("Year of Discovery"), 7));
+	axis.append(qMakePair(q_("Metallicity of a host star"), 8));
+	axis.append(qMakePair(q_("V magnitude of a host star, mag"), 9));
+	axis.append(qMakePair(q_("RA (J2000) of a star, deg."), 10));
+	axis.append(qMakePair(q_("Dec (J2000) of a star, deg."), 11));
+	axis.append(qMakePair(q_("Distance to a star, pc"), 12));
+	axis.append(qMakePair(q_("Mass of a host star, Msol"), 13));
+	axis.append(qMakePair(q_("Radius of a host star, Rsol"), 14));
 
 	for(int i=0; i<axis.size(); ++i)
 	{
@@ -505,7 +522,11 @@ void ExoplanetsDialog::populateDiagramsList()
 
 	//Restore the selection
 	indexX = axisX->findData(selectedAxisX, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexX<0)
+		indexX = 1;
 	indexY = axisY->findData(selectedAxisY, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexY<0)
+		indexY = 0;
 	axisX->setCurrentIndex(indexX);
 	axisY->setCurrentIndex(indexY);
 	axisX->blockSignals(false);

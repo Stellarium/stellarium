@@ -27,11 +27,10 @@
 #include "ui_MSSearchDialog.h"
 
 MSSearchDialog::MSSearchDialog(MeteorShowersMgr* mgr)
-	: m_mgr(mgr)
+	: StelDialog("MeteorShowersSearch")
+	, m_mgr(mgr)
 	, m_ui(new Ui_MSSearchDialog)
-{
-	dialogName = "MeteorShowersSearch";
-}
+{}
 
 MSSearchDialog::~MSSearchDialog()
 {
@@ -45,16 +44,8 @@ void MSSearchDialog::retranslate()
 		m_ui->retranslateUi(dialog);
 		setHeaderNames();
 
-		//Retranslate name and datatype strings
-		QTreeWidgetItemIterator it(m_ui->listEvents);
-		while (*it)
-		{
-			//Name
-			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
-			//Data type
-			(*it)->setText(ColumnDataType, q_((*it)->text(ColumnDataType)));
-			++it;
-		}
+		if (!m_ui->listEvents->findItems("", Qt::MatchContains, 0).isEmpty())
+			searchEvents();
 	}
 }
 
@@ -83,6 +74,11 @@ void MSSearchDialog::createDialogContent()
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(m_ui->listEvents, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		m_ui->listEvents, SLOT(repaint()));
+
+	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
+	QDate min = QDate(100,1,1);
+	m_ui->dateFrom->setMinimumDate(min);
+	m_ui->dateTo->setMinimumDate(min);
 
 	refreshRangeDates();
 	initListEvents();
@@ -129,7 +125,7 @@ void MSSearchDialog::searchEvents()
 		treeItem->setText(ColumnName, r.name);
 		treeItem->setText(ColumnZHR, r.zhr);
 		treeItem->setText(ColumnDataType, r.type);
-		treeItem->setText(ColumnPeak, r.peak.toString("dd/MMM/yyyy"));
+		treeItem->setText(ColumnPeak, r.peak.toString("d MMMM yyyy"));
 	}
 
 	// adjust the column width
@@ -152,7 +148,7 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 
 	// Change date
 	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
-	StelApp::getInstance().getCore()->setJD(QDate::fromString(peak, "dd/MMM/yyyy").toJulianDay());
+	StelApp::getInstance().getCore()->setJD(QDate::fromString(peak, "d MMMM yyyy").toJulianDay());
 	m_mgr->repaint();
 
 	// Find the object

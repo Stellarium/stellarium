@@ -1,4 +1,9 @@
 # Core source files
+src/core/modules/CustomObject.cpp
+src/core/modules/CustomObjectMgr.cpp
+src/core/modules/Asterism.cpp
+src/core/modules/AsterismMgr.cpp
+src/core/modules/Constellation.cpp
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
 src/core/modules/GridLinesMgr.cpp
@@ -13,6 +18,7 @@ src/core/modules/SolarSystem.cpp
 src/core/modules/StarWrapper.cpp
 src/core/modules/MilkyWay.cpp
 src/core/modules/ZodiacalLight.cpp
+src/core/modules/ToastMgr.cpp
 src/core/StelApp.cpp
 src/core/StelObserver.cpp
 src/core/StelCore.cpp
@@ -22,6 +28,7 @@ src/core/StelObject.cpp
 src/core/StelSkyLayerMgr.cpp
 src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
+src/core/StelLocaleMgr.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
@@ -35,11 +42,15 @@ src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/gui/AstroCalcDialog.cpp
 src/gui/BookmarksDialog.cpp
+src/gui/ConfigureDSOColorsDialog.cpp
+src/gui/ConfigureOrbitColorsDialog.cpp
+src/scripting/StelScriptMgr.cpp
 src/main.cpp
 src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h
+src/translations_countries.h
 
 # Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
@@ -55,6 +66,8 @@ src/ui_greatRedSpotDialog.h
 src/ui_scriptConsole.h
 src/ui_astroCalcDialog.h
 src/ui_bookmarksDialog.h
+src/ui_dsoColorsDialog.h
+src/ui_orbitColorsDialog.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building
@@ -73,6 +86,7 @@ plugins/Satellites/src/gui/SatellitesImportDialog.cpp
 plugins/Satellites/src/ui_satellitesDialog.h
 plugins/Satellites/src/ui_satellitesImportDialog.h
 plugins/TelescopeControl/src/TelescopeControl.cpp
+plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp
 plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp
 plugins/TelescopeControl/src/gui/TelescopeDialog.cpp
 plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp
@@ -81,11 +95,6 @@ plugins/TelescopeControl/src/ui_slewDialog.h
 plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h
 plugins/TelescopeControl/src/ui_telescopeDialog.h
 plugins/TelescopeControl/src/ui_storedPointsDialog.h
-plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp
-plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp
-plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp
-plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h
-plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h
 plugins/TextUserInterface/src/TextUserInterface.cpp
 plugins/TextUserInterface/src/TuiNodeBool.cpp
 plugins/TextUserInterface/src/TuiNodeColor.cpp
@@ -101,6 +110,9 @@ plugins/Supernovae/src/Supernovae.cpp
 plugins/Supernovae/src/Supernova.cpp
 plugins/Supernovae/src/gui/SupernovaeDialog.cpp
 plugins/Supernovae/src/ui_supernovaeDialog.h
+plugins/NavStars/src/NavStars.cpp
+plugins/NavStars/src/gui/NavStarsWindow.cpp
+plugins/NavStars/src/ui_navStarsWindow.h
 plugins/Novae/src/Novae.cpp
 plugins/Novae/src/Nova.cpp
 plugins/Novae/src/gui/NovaeDialog.cpp
@@ -113,6 +125,9 @@ plugins/Pulsars/src/Pulsars.cpp
 plugins/Pulsars/src/Pulsar.cpp
 plugins/Pulsars/src/gui/PulsarsDialog.cpp
 plugins/Pulsars/src/ui_pulsarsDialog.h
+plugins/RemoteControl/src/RemoteControl.cpp
+plugins/RemoteControl/src/gui/RemoteControlDialog.cpp
+plugins/RemoteControl/src/ui_remoteControlDialog.h
 plugins/Exoplanets/src/Exoplanets.cpp
 plugins/Exoplanets/src/Exoplanet.cpp
 plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp

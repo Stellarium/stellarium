@@ -40,10 +40,15 @@
 #include <QSortFilterProxyModel>
 #include <QTimer>
 #include <QStringListModel>
+#include <QTimeZone>
 
-LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
+LocationDialog::LocationDialog(QObject* parent)
+	: StelDialog("Location", parent)
+	, isEditingNew(false)
+	, allModel(NULL)
+	, pickedModel(NULL)
+	, proxyModel(NULL)
 {
-	dialogName = "Location";
 	ui = new Ui_locationDialogForm;
 }
 
@@ -59,6 +64,7 @@ void LocationDialog::retranslate()
 		ui->retranslateUi(dialog);
 		populatePlanetList();
 		populateCountryList();
+		populateTimeZonesList();
 	}
 }
 
@@ -88,8 +94,14 @@ void LocationDialog::createDialogContent()
 	ui->latitudeSpinBox->setMaximum( 90.0, true);
 	ui->latitudeSpinBox->setWrapping(false);
 
-	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
-	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelAll());
+	//initialize list model
+	allModel = new QStringListModel(this);
+	pickedModel = new QStringListModel(this);
+	StelLocationMgr *locMgr=&(StelApp::getInstance().getLocationMgr());
+	connect(locMgr, SIGNAL(locationListChanged()), this, SLOT(reloadLocations()));
+	reloadLocations();
+	proxyModel = new QSortFilterProxyModel(ui->citiesListView);
+	proxyModel->setSourceModel(allModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
@@ -103,6 +115,7 @@ void LocationDialog::createDialogContent()
 
 	populatePlanetList();
 	populateCountryList();
+	populateTimeZonesList();
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)),
@@ -127,19 +140,48 @@ void LocationDialog::createDialogContent()
 		ui->useIpQueryCheckBox->setChecked(true);
 		b = false;
 	}
-
-	setFieldsFromLocation(currentLocation);
 	updateDefaultLocationControls(b);
 
+	customTimeZone = conf->value("localization/time_zone", "").toString();
+	if (!customTimeZone.isEmpty())
+		ui->useCustomTimeZoneCheckBox->setChecked(true);
+	else
+		ui->timeZoneNameComboBox->setEnabled(false);
+
+	setFieldsFromLocation(currentLocation);
+
+#ifdef ENABLE_GPS
+	connect(ui->gpsPushButton, SIGNAL(clicked(bool)), this, SLOT(gpsQueryLocation()));
+	connect(locMgr, SIGNAL(gpsQueryFinished(bool)), this, SLOT(gpsReturn(bool)));
+#else
+	ui->gpsPushButton->setEnabled(false);
+	ui->gpsPushButton->hide();
+#endif
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
+	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateTimeZoneControls(bool)));
+
+	ui->dstCheckBox->setChecked(core->getUseDST());
+	connect(ui->dstCheckBox, SIGNAL(clicked(bool)), core, SLOT(setUseDST(bool)));
 
 	connectEditSignals();
 
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
+}
+
+void LocationDialog::handleDialogSizeChanged(QSizeF size)
+{
+	StelDialog::handleDialogSizeChanged(size);
+	StelLocation loc = locationFromFields();
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+}
+
+void LocationDialog::reloadLocations()
+{
+	allModel->setStringList(StelApp::getInstance().getLocationMgr().getAllMap().keys());
 }
 
 // Update the widget to make sure it is synchrone if the location is changed programmatically
@@ -163,22 +205,10 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	}
 
 	const QString& key1 = currentLocation.getID();
-	const QString& key2 = locationFromFields().getID();
+	const QString& key2 = locationFromFields().getID();	
 	if (key1!=key2)
 	{
 		setFieldsFromLocation(currentLocation);
-	}
-
-	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
-	if (lmgr->getFlagUseLightPollutionFromDatabase())
-	{
-		int bidx = currentLocation.bortleScaleIndex;
-		if (!currentLocation.planetName.contains("Earth")) // location not on Earth...
-			bidx = 1;
-		if (bidx<1) // ...or it observatory, or it unknown location
-			bidx = currentLocation.DEFAULT_BORTLE_SCALE_INDEX;
-		stelCore->getSkyDrawer()->setBortleScaleIndex(bidx);
-		lmgr->setAtmosphereBortleLightPollution(bidx);
 	}
 }
 
@@ -189,6 +219,7 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -199,6 +230,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
+	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -227,6 +259,25 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		idx = ui->planetNameComboBox->findData(QVariant("Earth"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->planetNameComboBox->setCurrentIndex(idx);
+
+	QString tz = loc.ianaTimeZone;
+	if (loc.planetName=="Earth" && tz.isEmpty())
+		tz = "system_default";
+	if (!customTimeZone.isEmpty())
+		tz = customTimeZone;
+	idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		if (loc.planetName=="Earth")
+			tz = "system_default";
+		else
+			tz = "LMST";
+		// Use LMST/system_default as default
+		idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->timeZoneNameComboBox->setCurrentIndex(idx);
+	StelApp::getInstance().getCore()->setCurrentTimeZone(tz);
+
 	setMapForLocation(loc);
 
 	// Set pointer position
@@ -332,11 +383,53 @@ void LocationDialog::populateCountryList()
 	{
 		countries->addItem(q_(name), name);
 	}
+	countries->addItem(QChar(0x2014), "");
 	//Restore the selection
 	index = countries->findData(selectedCountryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	countries->setCurrentIndex(index);
 	countries->model()->sort(0);
 	countries->blockSignals(false);
+
+}
+
+void LocationDialog::populateTimeZonesList()
+{
+	Q_ASSERT(ui->timeZoneNameComboBox);
+
+	QComboBox* timeZones = ui->timeZoneNameComboBox;
+	// Return a list of all the known time zone names (from Qt)
+	QStringList tzNames;
+	QList<QByteArray> tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
+	QList<QByteArray>::iterator i;
+	for (i = tzList.begin(); i!= tzList.end(); ++i)
+	{
+		tzNames.append(*i);
+		// Activate this to get a list of known TZ names...
+		//qDebug() << "Qt/IANA TZ entry: " << *i;
+	}
+
+	tzNames.sort();
+
+	//Save the current selection to be restored later
+	timeZones->blockSignals(true);
+	int index = timeZones->currentIndex();
+	QVariant selectedTzId = timeZones->itemData(index);
+	timeZones->clear();
+	//For each time zone, display the localized name and store the original as user
+	//data. Unfortunately, there's no other way to do this than with a loop.
+	foreach(const QString& name, tzNames)
+	{
+		timeZones->addItem(name, name);
+	}
+	timeZones->addItem(q_("Local Mean Solar Time"), "LMST");
+	timeZones->addItem(q_("Local True Solar Time"), "LTST");
+	timeZones->addItem(q_("System default"), "system_default");
+	//Restore the selection
+	index = timeZones->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
+	// TODO: Handle notfound!?
+	//Q_ASSERT(index!=-1);
+	timeZones->setCurrentIndex(index);
+	timeZones->blockSignals(false);
 
 }
 
@@ -359,6 +452,15 @@ StelLocation LocationDialog::locationFromFields() const
 	else
 		loc.country = ui->countryNameComboBox->itemData(index).toString();
 
+	index = ui->timeZoneNameComboBox->currentIndex();
+	if (index < 0)
+		loc.ianaTimeZone = QString(); //As returned by QComboBox::currentText()
+	else
+	{
+		QString tz=ui->timeZoneNameComboBox->itemData(index).toString();
+		loc.ianaTimeZone = tz;
+	}
+
 	return loc;
 }
 
@@ -380,15 +482,14 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	if (customTimeZone.isEmpty())
+		ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
 	// GZ: Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
-	StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 3.0f: 30.0f);
-	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
-	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelPicked());
+	LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 3.0f: 30.0f);
+	pickedModel->setStringList(results.keys());
+	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
-	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-	ui->citiesListView->setModel(proxyModel);
-	ui->citySearchLineEdit->clear();
-	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	ui->citySearchLineEdit->clear();	
 }
 
 // Called when the planet name is changed by hand
@@ -413,21 +514,22 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 
 		// GZ populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).
 		StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
-		QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
 		if (loc.planetName == "Earth")
 		{
-			proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelAll());
+			proxyModel->setSourceModel(allModel);
 		}
 		else
 		{
-			locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
-			proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelPicked());
+			LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
+			pickedModel->setStringList(results.keys());
+			proxyModel->setSourceModel(pickedModel);
+			ui->countryNameComboBox->setCurrentIndex(ui->countryNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
+			if (customTimeZone.isEmpty())
+				ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
+
 		}
 		proxyModel->sort(0, Qt::AscendingOrder);
-		proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-		ui->citiesListView->setModel(proxyModel);
 		ui->citySearchLineEdit->clear();
-		connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 		ui->citySearchLineEdit->setFocus();
 	}
 	// Planet transition time also set to null to prevent uglyness when
@@ -437,13 +539,26 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	stelCore->moveObserverTo(loc, 0., 0.);
 }
 
-void LocationDialog::setPositionFromCoords(int )
+void LocationDialog::setPositionFromCoords(int i)
 {
+	Q_UNUSED(i)
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 	//Update the position of the map pointer
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+}
+
+void LocationDialog::saveTimeZone()
+{
+	QString tz = ui->timeZoneNameComboBox->itemData(ui->timeZoneNameComboBox->currentIndex()).toString();
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setCurrentTimeZone(tz);
+	if (ui->useCustomTimeZoneCheckBox->isChecked())
+	{
+		StelApp::getInstance().getSettings()->setValue("localization/time_zone", tz);
+		core->setUseCustomTimeZone(true);
+	}
 }
 
 void LocationDialog::reportEdit()
@@ -476,6 +591,7 @@ void LocationDialog::reportEdit()
 	}
 	ui->addLocationToListPushButton->setEnabled(isEditingNew && canSave);
 	ui->deleteLocationFromListPushButton->setEnabled(locationMgr.canDeleteUserLocation(loc.getID()));
+	ui->timeZoneNameComboBox->setEnabled(isEditingNew && canSave);
 }
 
 // Called when the user clicks on the save button
@@ -538,12 +654,43 @@ void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 	ui->useAsDefaultLocationCheckBox->setEnabled(!currentIsDefault);
 }
 
+void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
+{
+	if (useCustomTimeZone)
+	{
+		ui->useCustomTimeZoneCheckBox->setChecked(true);
+		saveTimeZone();
+	}
+	else
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		StelLocation loc = core->getCurrentLocation();
+		QString tz = loc.ianaTimeZone;
+		if (loc.planetName=="Earth" && tz.isEmpty())
+			tz = "system_default";
+		int idx = ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
+		if (idx==-1)
+		{
+			QString defTZ = "LMST";
+			if (loc.planetName=="Earth")
+				defTZ = "system_default";
+			// Use LMST/system_default as default
+			idx = ui->timeZoneNameComboBox->findData(defTZ, Qt::UserRole, Qt::MatchCaseSensitive);
+		}
+		ui->timeZoneNameComboBox->setCurrentIndex(idx);
+		StelApp::getInstance().getSettings()->remove("localization/time_zone");
+		core->setUseCustomTimeZone(false);
+	}
+
+	ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);	
+}
+
 // called when the user clicks on the IP Query button
 void LocationDialog::ipQueryLocation(bool state)
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
 	if (state)
 	{
-		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/location", "auto");
 		disconnectEditSignals();
 		resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
@@ -551,38 +698,78 @@ void LocationDialog::ipQueryLocation(bool state)
 		locMgr.locationFromIP(); // This just triggers asynchronous lookup.
 		ui->useAsDefaultLocationCheckBox->setChecked(!state);
 		ui->pushButtonReturnToDefault->setEnabled(!state);
+		ui->useCustomTimeZoneCheckBox->setChecked(!state);
+		updateTimeZoneControls(!state);
 		connectEditSignals();
 		ui->citySearchLineEdit->setFocus();
 	}
+	else
+		conf->setValue("init_location/location", StelApp::getInstance().getCore()->getCurrentLocation().getID());
 }
+
+#ifdef ENABLE_GPS
+// called when the user clicks on the GPS Query button. Use gpsd or Qt's NMEA reader.
+void LocationDialog::gpsQueryLocation()
+{
+	disconnectEditSignals();
+	ui->gpsPushButton->setText(q_("GPS..."));
+
+	//only use a single call from a service class here
+	StelApp::getInstance().getLocationMgr().locationFromGPS();
+}
+
+void LocationDialog::gpsReturn(bool success)
+{
+	if (success)
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+
+		ui->gpsPushButton->setText(q_("GPS:SUCCESS"));
+		ui->useAsDefaultLocationCheckBox->setChecked(false);
+		ui->pushButtonReturnToDefault->setEnabled(true);
+		ui->useCustomTimeZoneCheckBox->setChecked(true);
+		resetCompleteList(); // in case we come back from Moon/Mars, we must get list back to show all (earth) locations...
+		updateTimeZoneControls(true);
+		StelLocation loc=core->getCurrentLocation();
+		setFieldsFromLocation(loc);
+	}
+	else
+	{
+		ui->gpsPushButton->setText(q_("GPS:FAILED"));
+	}
+	connectEditSignals();
+	ui->citySearchLineEdit->setFocus();
+
+	// Use QTimer to reset the labels after 2 seconds.
+	QTimer::singleShot(2000, this, SLOT(resetGPSbuttonLabel()));
+}
+
+void LocationDialog::resetGPSbuttonLabel()
+{
+	ui->gpsPushButton->setText(q_("Get location from GPS"));
+}
+#endif
 
 // called when user clicks "reset list"
 void LocationDialog::resetCompleteList()
 {
-	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
-	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelAll());
-	proxyModel->sort(0, Qt::AscendingOrder);
-	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-	ui->citiesListView->setModel(proxyModel);
+	//reset search before setting model, prevents unnecessary search in full list
 	ui->citySearchLineEdit->clear();
-	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	ui->citySearchLineEdit->setFocus();
+	proxyModel->setSourceModel(allModel);
+	proxyModel->sort(0, Qt::AscendingOrder);
 }
 
 // called when user clicks in the country combobox and selects a country. The locations in the list are updated to select only sites in that country.
 void LocationDialog::filterSitesByCountry()
 {
 	QString country=ui->countryNameComboBox->currentData().toString();
-	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 
-	locMgr.pickLocationsInCountry(country);
-	proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelPicked());
-
+	LocationMap results = locMgr.pickLocationsInCountry(country);
+	pickedModel->setStringList(results.keys());
+	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
-	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-	ui->citiesListView->setModel(proxyModel);
 	ui->citySearchLineEdit->clear();
-	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	ui->citySearchLineEdit->setFocus();
 }

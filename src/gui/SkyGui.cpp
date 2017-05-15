@@ -80,8 +80,16 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::ObjectType;
 		if (conf->value("flag_show_galcoord", false).toBool())
 			infoTextFilters |= StelObject::GalacticCoord;
-		if (conf->value("flag_show_eclcoord", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoord;
+		if (conf->value("flag_show_supergalcoord", false).toBool())
+			infoTextFilters |= StelObject::SupergalacticCoord;
+		if (conf->value("flag_show_eclcoordofdate", false).toBool())
+			infoTextFilters |= StelObject::EclipticCoordOfDate;
+		if (conf->value("flag_show_eclcoordj2000", false).toBool())
+			infoTextFilters |= StelObject::EclipticCoordJ2000;
+		if (conf->value("flag_show_constellation", false).toBool())
+			infoTextFilters |= StelObject::IAUConstellation;
+		if (conf->value("flag_show_sidereal_time", false).toBool())
+			infoTextFilters |= StelObject::SiderealTime;
 		conf->endGroup();
 	}
 	else
@@ -198,8 +206,12 @@ const QString InfoPanel::getSelectedText(void)
 
 SkyGui::SkyGui(QGraphicsItem * parent)
 	: QGraphicsWidget(parent)
+	, lastButtonbarWidth(0)
 	, btHorizAutoHide(NULL)
 	, btVertAutoHide(NULL)
+	, autoHidebts(NULL)
+	, autoHideHorizontalButtonBar(true)
+	, autoHideVerticalButtonBar(true)
 	, stelGui(NULL)
 {
 	setObjectName("StelSkyGui");
@@ -221,12 +233,6 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 
 	// The path drawn around the button bars
 	buttonBarPath = new StelBarsPath(this);
-
-	lastButtonbarWidth = 0;
-	autoHidebts = NULL;
-
-	autoHideHorizontalButtonBar = true;
-	autoHideVerticalButtonBar = true;
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);

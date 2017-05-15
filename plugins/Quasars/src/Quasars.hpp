@@ -69,7 +69,11 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool quasarsVisible READ getFlagShowQuasars WRITE setFlagShowQuasars)
+	Q_PROPERTY(bool quasarsVisible
+		   READ getFlagShowQuasars
+		   WRITE setFlagShowQuasars
+		   NOTIFY flagQuasarsVisibilityChanged
+		   )
 public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -110,22 +114,14 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 
 	virtual QString getName() const { return "Quasars"; }
 
@@ -155,10 +151,6 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void);
-	void setDisplayMode(bool b);
-	QString getMarkerColor(void);
-	void setMarkerColor(QString c);
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -175,9 +167,6 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
-	//! Get count of quasars from catalog
-	int getCountQuasars(void) {return QsrCount;}
-
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Quasars::UpdateState state);
@@ -185,23 +174,45 @@ signals:
 	//! emitted after a JSON update has run.
 	void jsonUpdateComplete(void);
 
+	void flagQuasarsVisibilityChanged(bool b);
+
 public slots:
 	//! Download JSON from web recources described in the module section of the
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
-	void setFlagShowQuasars(bool b) { flagShowQuasars=b; }
+	//! Enable/disable display of markers of quasars
+	//! @param b boolean flag
+	void setFlagShowQuasars(bool b);
+	//! Get status to display of markers of quasars
+	//! @return true if it's visible
 	bool getFlagShowQuasars(void) { return flagShowQuasars; }
 
 	//! Define whether the button toggling quasars should be visible
 	void setFlagShowQuasarsButton(bool b);
 	bool getFlagShowQuasarsButton(void) { return flagShowQuasarsButton; }
 
-	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
+	//! Get count of quasars from catalog
+	//! @return count of quasars
+	int getCountQuasars(void) {return QsrCount;}
 
-	void reloadCatalog(void);
+	//! Get status to display of distribution of pulsars
+	//! @return true if distribution of pulsars is enabled
+	bool getDisplayMode(void);
+	//! Enable/disable display of distribution of pulsars
+	//! @param b (set true for display quasars as markers)
+	void setDisplayMode(bool b);
+
+	//! Get color for quasars markers
+	//! @return color
+	Vec3f getMarkerColor(void);
+	//! Set color for quasars markers
+	//! @param c color
+	//! @code
+	//! // example of usage in scripts
+	//! Quasars.setMarkerColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setMarkerColor(const Vec3f& c);
 
 private:
 	// Font used for displaying our text
@@ -276,6 +287,11 @@ private slots:
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
 
+	//! Display a message. This is used for plugin-specific warnings and such
+	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void messageTimeout(void);
+
+	void reloadCatalog(void);
 };
 
 

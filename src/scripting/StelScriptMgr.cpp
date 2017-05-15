@@ -47,10 +47,9 @@
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QVariant>
+#include <QtScript>
 
 #include <cmath>
-
-Q_DECLARE_METATYPE(Vec3f)
 
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
@@ -77,8 +76,25 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	return vec3fToScriptValue(engine, c);
 }
 
+class StelScriptEngineAgent : public QScriptEngineAgent
+{
+public:
+	explicit StelScriptEngineAgent(QScriptEngine *engine);
+	virtual ~StelScriptEngineAgent() {}
+
+	void setPauseScript(bool pause) { isPaused=pause; }
+	bool getPauseScript() { return isPaused; }
+
+	void positionChange(qint64 scriptId, int lineNumber, int columnNumber);
+
+private:
+	bool isPaused;
+
+};
+
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
+	engine = new QScriptEngine(this);
 	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
 	// Scripting images
 	ScreenImageMgr* scriptImages = new ScreenImageMgr();
@@ -86,50 +102,30 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
 
 	// Allow Vec3f managment in scripts
-	qScriptRegisterMetaType(&engine, vec3fToScriptValue, vec3fFromScriptValue);
+	qScriptRegisterMetaType(engine, vec3fToScriptValue, vec3fFromScriptValue);
 	// Constructor
-	QScriptValue ctor = engine.newFunction(createVec3f);
-	engine.globalObject().setProperty("Vec3f", ctor);
+	QScriptValue ctor = engine->newFunction(createVec3f);
+	engine->globalObject().setProperty("Vec3f", ctor);
 
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
-	QScriptValue objectValue = engine.newQObject(mainAPI);
-	engine.globalObject().setProperty("core", objectValue);
+	QScriptValue objectValue = engine->newQObject(mainAPI);
+	engine->globalObject().setProperty("core", objectValue);
 
-	engine.evaluate("function mywait__(sleepDurationSec) {"
-			"if (sleepDurationSec<0) return;"
-			"var date = new Date();"
-			"var curDate = null;"
-			"do {curDate = new Date();}"
-			"while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
-	engine.evaluate("core['wait'] = mywait__;");
-
-	engine.evaluate("function mywaitFor__(dt, spec) {"
-			"if (!spec) spec=\"utc\";"
-			"var deltaJD = core.jdFromDateString(dt, spec) - core.getJDay();"
-			"var timeSpeed = core.getTimeRate();"
-			"if (timeSpeed == 0.) {core.debug(\"waitFor called with no time passing - would be infinite. not waiting!\"); return;}"
-			"var date = new Date();"
-			"var curDate = null;"
-			"do {curDate = new Date();}"
-			"while(curDate-date < deltaJD*86400000/timeSpeed);}");
-
-	engine.evaluate("core['waitFor'] = mywaitFor__;");
-	
 	// Add other classes which we want to be directly accessible from scripts
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
-		objectValue = engine.newQObject(smgr);
+		objectValue = engine->newQObject(smgr);
 
 	// For accessing star scale, twinkle etc.
-	objectValue = engine.newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
-	engine.globalObject().setProperty("StelSkyDrawer", objectValue);
+	objectValue = engine->newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
+	engine->globalObject().setProperty("StelSkyDrawer", objectValue);
 	
 	setScriptRate(1.0);
 	
-	engine.setProcessEventsInterval(10);
+	engine->setProcessEventsInterval(10);
 
-	agent = new StelScriptEngineAgent(&engine);
-	engine.setAgent(agent);
+	agent = new StelScriptEngineAgent(engine);
+	engine->setAgent(agent);
 
 	initActions();
 }
@@ -143,7 +139,7 @@ void StelScriptMgr::initActions()
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
 		StelAction* action = actionMgr->addAction(
-		    actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()", shortcut);
+					actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()", shortcut);
 		mapper->setMapping(action, script);
 	}
 	connect(mapper, SIGNAL(mapped(QString)), this, SLOT(runScript(QString)));
@@ -160,8 +156,8 @@ void StelScriptMgr::addModules()
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
 	foreach (StelModule* m, mmgr->getAllModules())
 	{
-		QScriptValue objectValue = engine.newQObject(m);
-		engine.globalObject().setProperty(m->objectName(), objectValue);
+		QScriptValue objectValue = engine->newQObject(m);
+		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
 
 }
@@ -182,18 +178,15 @@ QStringList StelScriptMgr::getScriptList()
 
 bool StelScriptMgr::scriptIsRunning()
 {
-	return engine.isEvaluating();
+	return engine->isEvaluating();
 }
 
 QString StelScriptMgr::runningScriptId()
 {
-	if (engine.isEvaluating())
-		return scriptFileName;
-	else
-		return QString();
+	return scriptFileName;
 }
 
-const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
+QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText) const
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -204,41 +197,91 @@ const QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, co
 		return QString();
 	}
 
+	//use a buffered stream instead of QFile::readLine - much faster!
+	QTextStream textStream(&file);
+	textStream.setCodec("UTF-8");
+
 	QRegExp nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
-	while (!file.atEnd())
+	while (!textStream.atEnd())
 	{
-		QString line = QString::fromUtf8(file.readLine());
+		QString line = textStream.readLine();
 		if (nameExp.exactMatch(line))
 		{
 			file.close();
-			return nameExp.capturedTexts().at(1);
+			return nameExp.capturedTexts().at(1).trimmed();
 		}
 	}
 	file.close();
 	return notFoundText;
 }
 
-const QString StelScriptMgr::getName(const QString& s)
+QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags) const
+{
+	QString html;
+	if (generateDocumentTags)
+		html += "<html><body>";
+	html += "<h2>" + q_(getName(s).trimmed()) + "</h2>";
+	QString d = getDescription(s).trimmed();
+	d.replace("\n", "<br />");
+	d.replace(QRegExp("\\s{2,}"), " ");
+	html += "<p>" + q_(d) + "</p>";
+	html += "<p>";
+
+	QString author = getAuthor(s).trimmed();
+	if (!author.isEmpty())
+	{
+		html += "<strong>" + q_("Author") + "</strong>: " + author + "<br />";
+	}
+	QString license = getLicense(s).trimmed();
+	if (!license.isEmpty())
+	{
+		html += "<strong>" + q_("License") + "</strong>: " + license + "<br />";
+	}
+	QString version = getVersion(s).trimmed();
+	if (!version.isEmpty())
+	{
+		html += "<strong>" + q_("Version") + "</strong>: " + version + "<br />";
+	}
+	QString shortcut = getShortcut(s).trimmed();
+	if (!shortcut.isEmpty())
+	{
+		html += "<strong>" + q_("Shortcut") + "</strong>: " + shortcut;
+	}
+	html += "</p>";
+
+	if (generateDocumentTags)
+		html += "</body></html>";
+
+	return html;
+}
+
+QString StelScriptMgr::getName(const QString& s) const
 {
 	return getHeaderSingleLineCommentText(s, "Name", s);
 }
 
-const QString StelScriptMgr::getAuthor(const QString& s)
+QString StelScriptMgr::getAuthor(const QString& s) const
 {
 	return getHeaderSingleLineCommentText(s, "Author");
 }
 
-const QString StelScriptMgr::getLicense(const QString& s)
+QString StelScriptMgr::getLicense(const QString& s) const
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
-const QString StelScriptMgr::getShortcut(const QString& s)
+QString StelScriptMgr::getVersion(const QString& s) const
 {
-	return getHeaderSingleLineCommentText(s, "Shortcut", "").trimmed();
+	return getHeaderSingleLineCommentText(s, "Version", "");
 }
 
-const QString StelScriptMgr::getDescription(const QString& s)
+
+QString StelScriptMgr::getShortcut(const QString& s) const
+{
+	return getHeaderSingleLineCommentText(s, "Shortcut", "");
+}
+
+QString StelScriptMgr::getDescription(const QString& s) const
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -249,14 +292,18 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		return QString();
 	}
 
+	//use a buffered stream instead of QFile::readLine - much faster!
+	QTextStream textStream(&file);
+	textStream.setCodec("UTF-8");
+
 	QString desc = "";
 	bool inDesc = false;
 	QRegExp descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
 	QRegExp descNewlineExp("^\\s*//\\s*$");
 	QRegExp descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
-	while (!file.atEnd())
+	while (!textStream.atEnd())
 	{
-		QString line = QString::fromUtf8(file.readLine());
+		QString line = textStream.readLine();
 		if (!inDesc && descExp.exactMatch(line))
 		{
 			inDesc = true;
@@ -282,37 +329,63 @@ const QString StelScriptMgr::getDescription(const QString& s)
 		}
 	}
 	file.close();
-	return desc;
+	return desc.trimmed();
 }
 
-bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
+bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, const QString& scriptId)
 {
-	if (engine.isEvaluating())
+	if (engine->isEvaluating())
 	{
 		QString msg = QString("ERROR: there is already a script running, please wait until it's over.");
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 		return false;
 	}
-	// Seed the PRNG so that script random numbers aren't always the same sequence
-	qsrand(QDateTime::currentDateTime().toTime_t());
 
 	// Make sure that the gui objects have been completely initialized (there used to be problems with startup scripts).
 	Q_ASSERT(StelApp::getInstance().getGui());
 
-	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
+	engine->globalObject().setProperty("scriptRateReadOnly", 1.0);
+
+	scriptFileName = scriptId;
 
 	// Notify that the script starts here
 	emit(scriptRunning());
+	emit runningScriptIdChanged(scriptId);
 
 	// run that script
-	engine.evaluate(preprocessedScript);
+	engine->evaluate(preprocessedScript);
 	scriptEnded();
 	return true;
 }
 
 // Run the script located at the given location
 bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
+{
+	QString preprocessedScript;
+	prepareScript(preprocessedScript,fileName,includePath);
+	return runPreprocessedScript(preprocessedScript,fileName);
+}
+
+bool StelScriptMgr::runScriptDirect(const QString &scriptCode, const QString& includePath)
+{
+	if(includePath.isNull())
+		return runPreprocessedScript(scriptCode, "<Direct script input>");
+	else
+	{
+		QString path = includePath;
+		if(includePath.isEmpty())
+			path = QStringLiteral("scripts");
+
+		QString processed;
+		bool ok = preprocessScript(scriptCode,processed, path);
+		if(ok)
+			return runPreprocessedScript(processed, "<Direct script input>");
+		return false;
+	}
+}
+
+bool StelScriptMgr::prepareScript(QString &script, const QString &fileName, const QString &includePath)
 {
 	QString absPath;
 
@@ -328,9 +401,9 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		qWarning() << msg;
 		return false;
 	}
-	
+
 	QString scriptDir = QFileInfo(absPath).dir().path();
-	
+
 	QFile fic(absPath);
 	if (!fic.open(QIODevice::ReadOnly))
 	{
@@ -340,23 +413,23 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		return false;
 	}
 
-	scriptFileName = fileName;
 	if (!includePath.isEmpty())
 		scriptDir = includePath;
-	QString preprocessedScript;
+
 	bool ok = false;
 	if (fileName.endsWith(".ssc"))
-		ok = preprocessScript(fic, preprocessedScript, scriptDir);
+		ok = preprocessScript(fic, script, scriptDir);
 	if (!ok)
 	{
 		return false;
 	}
-	return runPreprocessedScript(preprocessedScript);
+
+	return true;
 }
 
 void StelScriptMgr::stopScript()
 {
-	if (engine.isEvaluating())
+	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
 		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
@@ -366,7 +439,7 @@ void StelScriptMgr::stopScript()
 		QString msg = QString("INFO: asking running script to exit");
 		emit(scriptDebug(msg));
 		//qDebug() << msg;
-		engine.abortEvaluation();
+		engine->abortEvaluation();
 	}
 	scriptEnded();
 }
@@ -374,13 +447,13 @@ void StelScriptMgr::stopScript()
 void StelScriptMgr::setScriptRate(float r)
 {
 	//qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
-	if (!engine.isEvaluating())
+	if (!engine->isEvaluating())
 	{
-		engine.globalObject().setProperty("scriptRateReadOnly", r);
+		engine->globalObject().setProperty("scriptRateReadOnly", r);
 		return;
 	}
 	
-	float currentScriptRate = engine.globalObject().property("scriptRateReadOnly").toNumber();
+	float currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
 	
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
@@ -390,7 +463,7 @@ void StelScriptMgr::setScriptRate(float r)
 	core->setTimeRate(core->getTimeRate() * factor);
 	
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(core->getTimeRate());
-	engine.globalObject().setProperty("scriptRateReadOnly", r);
+	engine->globalObject().setProperty("scriptRateReadOnly", r);
 
 }
 
@@ -404,7 +477,7 @@ void StelScriptMgr::resumeScript() {
 
 double StelScriptMgr::getScriptRate()
 {
-	return engine.globalObject().property("scriptRateReadOnly").toNumber();
+	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }
 
 void StelScriptMgr::debug(const QString& msg)
@@ -431,14 +504,16 @@ void StelScriptMgr::saveOutputAs(const QString &filename)
 
 void StelScriptMgr::scriptEnded()
 {
-	if (engine.hasUncaughtException())
+	if (engine->hasUncaughtException())
 	{
-		QString msg = QString("script error: \"%1\" @ line %2").arg(engine.uncaughtException().toString()).arg(engine.uncaughtExceptionLineNumber());
+		QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString()).arg(engine->uncaughtExceptionLineNumber());
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 	}
 
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
+	scriptFileName = QString();
+	emit runningScriptIdChanged(scriptFileName);
 	emit(scriptStopped());
 }
 

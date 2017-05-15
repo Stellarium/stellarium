@@ -88,21 +88,14 @@ public:
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	// empty as its not celestial objects
-	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjects(bool) const { return QStringList(); }
 	virtual QString getName() const { return "Telescope Control"; }
 	virtual bool configureGui(bool show = true);
 	
@@ -111,7 +104,8 @@ public:
 	//! Send a J2000-goto-command to the specified telescope
 	//! @param telescopeNr the number of the telescope
 	//! @param j2000Pos the direction in equatorial J2000 frame
-	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos);
+	//! @param selectObject selected object (if any; NULL if move is not based on an object)
+	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = NULL);
 	
 	//! Remove all currently registered telescopes
 	void deleteAllTelescopes();
@@ -132,9 +126,9 @@ public:
 	//These are public, but not slots, because they don't use sufficient validation. Scripts shouldn't be able to add/remove telescopes, only to point them.
 	//! Adds a telescope description containing the given properties. DOES NOT VALIDATE its parameters. If serverName is specified, portSerial should be specified too. Call saveTelescopes() to write the modified configuration to disc. Call startTelescopeAtSlot() to start this telescope.
 	//! @param portSerial must be a valid serial port name for the particular platform, e.g. "COM1" for Microsoft Windows of "/dev/ttyS0" for Linux
-	bool addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host = QString("localhost"), int portTCP = DEFAULT_TCP_PORT, int delay = DEFAULT_DELAY, bool connectAtStartup = false, QList<double> circles = QList<double>(), QString serverName = QString(), QString portSerial = QString());
+	bool addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host = QString("localhost"), int portTCP = DEFAULT_TCP_PORT, int delay = DEFAULT_DELAY, bool connectAtStartup = false, QList<double> circles = QList<double>(), QString serverName = QString(), QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(), QString rts2Password = QString());
 	//! Retrieves a telescope description. Returns false if the slot is empty. Returns empty serverName and portSerial if the description contains no server.
-	bool getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& serverName, QString& portSerial);
+	bool getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& serverName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password);
 	//! Removes info from the tree. Should it include stopTelescopeAtSlot()?
 	bool removeTelescopeAtSlot(int slot);
 	
@@ -164,48 +158,118 @@ public:
 
 public slots:
 	//! Set display flag for telescope reticles
+	//! @param b boolean flag
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.setFlagTelescopeReticles(true);
+	//! @endcode
 	void setFlagTelescopeReticles(bool b) {reticleFader = b;}
 	//! Get display flag for telescope reticles
+	//! @return true if telescope reticles is visible
+	//! @code
+	//! // example of usage in scripts
+	//! var flag = TelescopeControl.getFlagTelescopeReticles();
+	//! @endcode
 	bool getFlagTelescopeReticles() const {return (bool)reticleFader;}
 	
 	//! Set display flag for telescope name labels
+	//! @param b boolean flag
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.setFlagTelescopeLabels(true);
+	//! @endcode
 	void setFlagTelescopeLabels(bool b) {labelFader = b;}
 	//! Get display flag for telescope name labels
+	//! @return true if telescope name labels is visible
+	//! @code
+	//! // example of usage in scripts
+	//! var flag = TelescopeControl.getFlagTelescopeLabels();
+	//! @endcode
 	bool getFlagTelescopeLabels() const {return labelFader==true;}
 
 	//! Set display flag for telescope field of view circles
+	//! @param b boolean flag
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.setFlagTelescopeCircles(true);
+	//! @endcode
 	void setFlagTelescopeCircles(bool b) {circleFader = b;}
 	//! Get display flag for telescope field of view circles
+	//! @return true if telescope field of view circles is visible
+	//! @code
+	//! // example of usage in scripts
+	//! var flag = TelescopeControl.getFlagTelescopeCircles();
+	//! @endcode
 	bool getFlagTelescopeCircles() const {return circleFader==true;}
 	
 	//! Set the telescope reticle color
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.setReticleColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setReticleColor(const Vec3f &c) {reticleColor = c;}
 	//! Get the telescope reticle color
+	//! @return the telescope reticle color
+	//! @code
+	//! // example of usage in scripts
+	//! color = TelescopeControl.getReticleColor();
+	//! @endcode
 	const Vec3f& getReticleColor() const {return reticleColor;}
 	
 	//! Get the telescope labels color
+	//! @return the telescope labels color
+	//! @code
+	//! // example of usage in scripts
+	//! color = TelescopeControl.getLabelColor();
+	//! @endcode
 	const Vec3f& getLabelColor() const {return labelColor;}
 	//! Set the telescope labels color
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.setLabelColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelColor(const Vec3f &c) {labelColor = c;}
 
 	//! Set the field of view circles color
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.setCircleColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setCircleColor(const Vec3f &c) {circleColor = c;}
 	//! Get the field of view circles color
+	//! @return the field of view circles color
+	//! @code
+	//! // example of usage in scripts
+	//! color = TelescopeControl.getCircleColor();
+	//! @endcode
 	const Vec3f& getCircleColor() const {return circleColor;}
 	
 	//! Define font size to use for telescope names display
+	//! @param fontSize size of font
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.setFontSize(15);
+	//! @endcode
 	void setFontSize(int fontSize);
 	
 	//! slews a telescope to the selected object.
 	//! For use from the GUI. The telescope number will be
 	//! deduced from the name of the StelAction which triggered the slot.
-	void slewTelescopeToSelectedObject();
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.slewTelescopeToSelectedObject();
+	//! @endcode
+	void slewTelescopeToSelectedObject(const int idx);
 
 	//! slews a telescope to the point of the celestial sphere currently
 	//! in the center of the screen.
 	//! For use from the GUI. The telescope number will be
 	//! deduced from the name of the StelAction which triggered the slot.
-	void slewTelescopeToViewDirection();
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.slewTelescopeToViewDirection();
+	//! @endcode
+	void slewTelescopeToViewDirection(const int idx);
 	
 	//! Used in the GUI
 	void setFlagUseTelescopeServerLogs (bool b) {useTelescopeServerLogs = b;}
@@ -215,7 +279,6 @@ signals:
 	void clientDisconnected(int slot);
 
 private slots:
-	void setStelStyle(const QString& section);
 	//! Set translated keyboard shortcut descriptions.
 	void translateActionDescriptions();
 
@@ -234,19 +297,7 @@ private:
 	//! Colour currently used to draw telescope text labels
 	Vec3f labelColor;
 	//! Colour currently used to draw field of view circles
-	Vec3f circleColor;
-	//! Colour used to draw telescope reticles in normal mode, as set in the configuration file
-	Vec3f reticleNormalColor;
-	//! Colour used to draw telescope reticles in night mode, as set in the configuration file
-	Vec3f reticleNightColor;
-	//! Colour used to draw telescope labels in normal mode, as set in the configuration file
-	Vec3f labelNormalColor;
-	//! Colour used to draw telescope labels in night mode, as set in the configuration file
-	Vec3f labelNightColor;
-	//! Colour used to draw field of view circles in normal mode, as set in the configuration file
-	Vec3f circleNormalColor;
-	//! Colour used to draw field of view circles in night mode, as set in the configuration file
-	Vec3f circleNightColor;
+	Vec3f circleColor;	
 	
 	//! Font used to draw telescope text labels
 	QFont labelFont;
@@ -294,7 +345,7 @@ private:
 	bool stopServerAtSlot(int slot);
 
 	//! A wrapper for TelescopeClient::create(). Used internally by loadTelescopes() and startTelescopeAtSlot(). Does not perform any validation on its arguments.
-	bool startClientAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString serverName = QString(), QString portSerial = QString());
+	bool startClientAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString serverName = QString(), QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(), QString rts2Password = QString());
 	
 	//! Returns true if the TelescopeClient at this slot has been stopped successfully or doesn't exist
 	bool stopClientAtSlot(int slot);
@@ -312,6 +363,8 @@ private:
 	void addLogAtSlot(int slot);
 	void logAtSlot(int slot);
 	void removeLogAtSlot(int slot);
+	
+	static void translations();
 	
 	QString actionGroupId;
 	QString moveToSelectedActionId;
