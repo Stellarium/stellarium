@@ -112,8 +112,8 @@ public:
 	//! - Sets up the star color table
 	//! - Loads the star texture
 	//! - Loads the star font (for labels on named stars)
-	//! - Loads the texture of the sar selection indicator
-	//! - Lets various display flags from the ini parser object
+	//! - Loads the texture of the star selection indicator
+	//! - Sets various display flags from the ini parser object
 	virtual void init();
 
 	//! Draw the stars and the star selection indicator if necessary.

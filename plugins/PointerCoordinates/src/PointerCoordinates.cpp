@@ -280,7 +280,7 @@ void PointerCoordinates::draw(StelCore *core)
 	QString constel;
 	if (flagShowConstellation)
 	{
-		constel=QString(" (%1)").arg(core->getIAUConstellation(mousePosition));
+		constel=QString(" (%1)").arg(core->getIAUConstellation(core->j2000ToEquinoxEqu(mousePosition)));
 	}
 	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
