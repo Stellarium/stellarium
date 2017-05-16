@@ -40,10 +40,10 @@
     border-width: 0px;
 }
 
-.ui-tabs .ui-widget-header { 
-    background: transparent; 
-    border: none; 
-    border-radius: 0px; 
+.ui-tabs .ui-widget-header {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
 }
 
 .ui-tabs .ui-widget-header .ui-state-default a {
@@ -71,14 +71,14 @@ div#srch_tab_object {
     border-top-right-radius: 10px;
 }
 
-.ui-tabs .ui-tabs-nav .ui-state-default { 
-    background: transparent; 
-    border: none; 
+.ui-tabs .ui-tabs-nav .ui-state-default {
+    background: transparent;
+    border: none;
 }
 
-.ui-tabs .ui-tabs-nav .ui-state-active { 
-    background: linear-gradient(rgb(68, 69, 72),rgb(86, 87, 90)); 
-    border: none; 
+.ui-tabs .ui-tabs-nav .ui-state-active {
+    background: linear-gradient(rgb(68, 69, 72),rgb(86, 87, 90));
+    border: none;
 }
 
 .ui-tabs .ui-tabs-panel {
@@ -156,7 +156,7 @@ div#srch_tab_object {
 	/* prevent horizontal scrollbar */
 	overflow-x: hidden;
 }
-  
+
 * html .ui-autocomplete {
 	height: 200px;
 }
@@ -256,6 +256,10 @@ h2 {
 	margin: auto;
 }
 
+.margin-none {
+    margin: 0;
+}
+
 .margin-block {
 	margin: 10px;
 }
@@ -296,7 +300,7 @@ h2 {
 .block header h2 {
 	/* font-size: 14px; */
 	margin: 0px;
-	/* display: inline-block; */
+	display: inline-block;
 }
 
 .innerblock {
@@ -431,7 +435,7 @@ header img {
 
 #timewidget {
 	font-size: 14px;
-	min-width: 295px;	
+	min-width: 295px;
 }
 
 .ui-tabs-panel.timetab {
@@ -485,7 +489,7 @@ ul.button32list {
 
 ul.buttonlist > li,
 ul.button32list > li,
-li.button32wrapper {	
+li.button32wrapper {
 	overflow: hidden;
 	vertical-align: middle;
 }
@@ -565,31 +569,31 @@ button.button32:active {
 	background-image: url("images/icons-active.png");
 }
 
-.icon32.btAtmosphere { background-position: 0 0; } 
-.icon32.btAzimuthalGrid { background-position: -37px 0; } 
-.icon32.btCardinalPoints { background-position: -74px 0; } 
-.icon32.btConstellationArt { background-position: -111px 0; } 
-.icon32.btConstellationLabels { background-position: -148px 0; } 
-.icon32.btConstellationLines { background-position: -185px 0; } 
-.icon32.btDSS { background-position: -222px 0; } 
-.icon32.btFlipHorizontal { background-position: -259px 0; } 
-.icon32.btEquatorialGrid { background-position: -296px 0; } 
-.icon32.btEquatorialMount { background-position: -333px 0; } 
-.icon32.btFlipVertical { background-position: -370px 0; } 
-.icon32.btFullScreen { background-position: -407px 0; } 
-.icon32.btGotoSelectedObject { background-position: -444px 0; } 
-.icon32.btGround { background-position: -481px 0; } 
-.icon32.btNebula { background-position: -518px 0; } 
-.icon32.btNightView { background-position: -555px 0; } 
-.icon32.btPlanets { background-position: -592px 0; } 
-.icon32.btScriptRun { background-position: -629px 0; } 
-.icon32.btTimeForward { background-position: -666px 0; } 
-.icon32.btScriptStop { background-position: -703px 0; } 
-.icon32.btTimeNow { background-position: -740px 0; } 
-.icon32.btTimeRealtime { background-position: -777px 0; } 
-.icon32.btTimeRewind { background-position: -814px 0; } 
-.icon32.glow32x32 { background-position: -851px 0; } 
-.icon32.btTimeRealtime.paused  { background-image: url("images/icons-active.png"); background-position: -851px 0; } 
+.icon32.btAtmosphere { background-position: 0 0; }
+.icon32.btAzimuthalGrid { background-position: -37px 0; }
+.icon32.btCardinalPoints { background-position: -74px 0; }
+.icon32.btConstellationArt { background-position: -111px 0; }
+.icon32.btConstellationLabels { background-position: -148px 0; }
+.icon32.btConstellationLines { background-position: -185px 0; }
+.icon32.btDSS { background-position: -222px 0; }
+.icon32.btFlipHorizontal { background-position: -259px 0; }
+.icon32.btEquatorialGrid { background-position: -296px 0; }
+.icon32.btEquatorialMount { background-position: -333px 0; }
+.icon32.btFlipVertical { background-position: -370px 0; }
+.icon32.btFullScreen { background-position: -407px 0; }
+.icon32.btGotoSelectedObject { background-position: -444px 0; }
+.icon32.btGround { background-position: -481px 0; }
+.icon32.btNebula { background-position: -518px 0; }
+.icon32.btNightView { background-position: -555px 0; }
+.icon32.btPlanets { background-position: -592px 0; }
+.icon32.btScriptRun { background-position: -629px 0; }
+.icon32.btTimeForward { background-position: -666px 0; }
+.icon32.btScriptStop { background-position: -703px 0; }
+.icon32.btTimeNow { background-position: -740px 0; }
+.icon32.btTimeRealtime { background-position: -777px 0; }
+.icon32.btTimeRewind { background-position: -814px 0; }
+.icon32.glow32x32 { background-position: -851px 0; }
+.icon32.btTimeRealtime.paused  { background-image: url("images/icons-active.png"); background-position: -851px 0; }
 
 #timejumplist ul {
 	list-style: none;
@@ -716,7 +720,7 @@ button.button32:active {
 
 #srch_results {
 	/* text-align: left; */
-	/* max-width: 367px; */
+	max-width: 367px;
 	height: 180px;
 	font-size: 14px;
 	padding-left: 10px;
@@ -884,6 +888,78 @@ button.button32:active {
 	font-weight: bold;
 }
 
-#vo_archaeolines .selectmenu + span.ui-selectmenu-button {
+.selectmenu + span.ui-selectmenu-button {
 	display: block;
+}
+
+.joystickcontainer {
+    position: relative;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 64px;
+    background: #B4B4B7;
+    /* background-image: url("images/joypad.png"); */
+    /* background-image: url("images/joypad.png"), radial-gradient(#B4B4B7, #5D5F62); */
+    background-image: radial-gradient(#B4B4B7, #5D5F62);
+    background-repeat: no-repeat;
+    width: 128px;
+    height: 128px;
+}
+
+.joystickbutton {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-image: url("images/joypad.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.joystickbutton:hover {
+    background-image: url("images/joypad-hover.png");
+}
+
+.joystickbutton:active {
+    background-image: url("images/joypad-active.png");
+}
+
+.joystickbutton-up {
+    left: 48px;
+    background-position: -48px 0px;
+}
+
+.joystickbutton-left {
+    top: 48px;
+    background-position: 0px -48px;
+}
+
+.joystickbutton-right {
+    top: 48px;
+    left: 96px;
+    background-position: -96px -48px;
+}
+
+.joystickbutton-down {
+    top: 96px;
+    left: 48px;
+    background-position: -48px -96px;
+}
+
+.joystick {
+    border: 5px double white;
+    background-color: rgb(53,53,53);
+    box-sizing: border-box;
+    border-radius: 16px;
+    top: 48px;
+    left: 48px;
+    width: 32px;
+    height: 32px;
+    cursor: move;
+}
+
+.smallblock128 {
+    max-width: 143px;
 }

@@ -489,6 +489,19 @@ double dmsStrToRad(const QString& s)
 	return dmsToRad(sign ? deg : -deg, min, sec);
 }
 
+Vec2f strToVec2f(const QStringList &s)
+{
+	if (s.size()<2)
+		 return Vec2f(0.f,0.f);
+
+	return Vec2f(s[0].toFloat(),s[1].toFloat());
+}
+
+Vec2f strToVec2f(const QString &s)
+{
+	return strToVec2f(s.split(","));
+}
+
 // Obtains a Vec3f from a string with the form x,y,z
 Vec3f strToVec3f(const QStringList& s)
 {
@@ -514,6 +527,13 @@ Vec4d strToVec4d(const QStringList &s)
 Vec4d strToVec4d(const QString& str)
 {
 	return strToVec4d(str.split(","));
+}
+
+QString vec2fToStr(const Vec2f &v)
+{
+	return QString("%1,%2")
+		.arg(v[0],0,'f',6)
+		.arg(v[1],0,'f',6);
 }
 
 QString vec3fToStr(const Vec3f &v)
@@ -1535,7 +1555,7 @@ double getDeltaTByStephenson1997(const double jDay)
 double getDeltaTBySchmadelZech1979(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-	u=qMax(-1.0, qMin(u, 0.76));  // Limit range to 1800...1975. Else we have crazy values which cause strange artefacts.
+	u=qBound(-1.0, u, 0.76);  // Limit range to 1800...1975. Else we have crazy values which cause strange artefacts.
 	double deltaT=(((((((((((-0.089491*u -0.117389)*u + 0.185489)*u + 0.247433)*u - 0.159732)*u - 0.200097)*u + 0.075456)*u
 			+ 0.076929)*u - 0.020446)*u - 0.013867)*u + 0.003081)*u + 0.001233)*u -0.000029;
 	return deltaT * 86400.0;
@@ -1556,7 +1576,7 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	// Limited years!
-	year=qMax(-391, qMin(year, 1600));
+	year=qBound(-391, year, 1600);
 
 	double u = (getDecYear(year, month, day)-1800)/100;
 
@@ -1586,7 +1606,7 @@ double getDeltaTByStephensonHoulden(const double jDay)
 
 //	double yeardec=getDecYear(year, month, day);
 //	// Limited years!?
-//	year=qMax(-600, qMin(year, 1600));
+//	year=qBound(-600, year, 1600);
 
 //	if (year <= 948)
 //	{
@@ -1624,7 +1644,7 @@ double getDeltaTByBorkowski(const double jDay)
 double getDeltaTBySchmadelZech1988(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-	u=qMax(-1.0, qMin(u, 0.89));  // Limit range to 1800...1988. Else we have crazy values which cause strange artefacts.
+	u=qBound(-1.0, u, 0.89);  // Limit range to 1800...1988. Else we have crazy values which cause strange artefacts.
 	double deltaT = (((((((((((-0.058091*u -0.067471)*u +.145932)*u +.161416)*u -.149279)*u -.146960)*u +.079441)*u +.062971)*u -.022542)*u -.012462)*u +.003357)*u +.001148)*u-.000014;
 	return deltaT * 86400.0;
 }
@@ -1637,7 +1657,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	// Limited years!
-	year=qMax(-391, qMin(year, 1600));
+	year=qBound(-391, year, 1600);
 
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
@@ -1658,7 +1678,7 @@ double getDeltaTByJPLHorizons(const double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	// Limited years!
-	year=qMax(-2999, qMin(year, 1620));
+	year=qBound(-2999, year, 1620);
 
 	if (-2999 < year && year < 948)
 	{
@@ -1889,7 +1909,7 @@ double getDeltaTByBanjevic(const double jDay)
 	double u, c;
 
 	// Limited years!
-	year=qMax(-2020, qMin(year, 1620));
+	year=qBound(-2020, year, 1620);
 
 	if (year<=-700)
 	{
@@ -1915,7 +1935,7 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	const double ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
 
 	// Limited years!
-	year=qMax(1620, qMin(year, 2007));
+	year=qBound(1620, year, 2007);
 
 	if (year <= 1698)
 	{
@@ -1967,7 +1987,7 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	const float a4[9]={   627.152f,   36.612f, -128.294f,  3129.071f,  7561.686f, 5917.585f,  4039.490f, -3210.913f,   8255.422f};
 	int i;
 	// Limited years! Deliver border values.
-	year=qMax(1620, qMin(year, 2013));
+	year=qBound(1620, year, 2013);
 
 	if (year<=1672)
 		i=0;

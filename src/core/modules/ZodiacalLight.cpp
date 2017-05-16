@@ -32,6 +32,7 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
@@ -44,6 +45,9 @@
 ZodiacalLight::ZodiacalLight()
 	: color(1.f, 1.f, 1.f)
 	, intensity(1.)
+	, intensityFovScale(1.0f)
+	, intensityMinFov(0.25f) // when zooming in further, Z.L. is no longer visible.
+	, intensityMaxFov(2.5f) // when zooming out further, Z.L. is fully visible (when enabled).
 	, lastJD(-1.0E6)
 	, vertexArray()
 {
@@ -98,6 +102,10 @@ void ZodiacalLight::update(double deltaTime)
 
 	if (!getFlagShow() || (getIntensity()<0.01) )
 		return;
+
+	//calculate FOV fade value, linear fade between intensityMaxFov and intensityMinFov
+	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+	intensityFovScale = qBound(0.0,(fov - intensityMinFov) / (intensityMaxFov - intensityMinFov),1.0);
 
 	StelCore* core=StelApp::getInstance().getCore();
 	// Test if we are not on Earth or Moon. Texture would not fit, so don't draw then.
@@ -197,7 +205,7 @@ void ZodiacalLight::draw(StelCore* core)
 	//qDebug() << "aLum=" << aLum;
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
-	c*=aLum*intensity;
+	c*=aLum*intensity*intensityFovScale;
 
 	// Better: adapt brightness by atmospheric brightness
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();

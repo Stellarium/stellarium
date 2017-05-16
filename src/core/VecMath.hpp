@@ -47,6 +47,10 @@ typedef Vector3<double>	Vec3d;
 //! A 3d vector of floats compatible with openGL.
 typedef Vector3<float>	Vec3f;
 
+//! @typedef Vec3i
+//! A 3d vector of ints compatible with openGL.
+typedef Vector3<int>	Vec3i;
+
 //! @typedef Vec4d
 //! A 4d vector of doubles compatible with openGL.
 typedef Vector4<double>	Vec4d;
@@ -82,11 +86,21 @@ typedef Matrix3<float> Mat3f;
 template<class T> class Vector2
 {
 public:
+	//! The vector is not initialized!
 	inline Vector2();
+	//! Sets all components of the vector to the same value
 	inline Vector2(T);
+	//! Explicit conversion constructor from an array (copies values)
+	//! @warning Does not check array size, make sure it has at least 2 elements
+	inline explicit Vector2(const T*);
+	//! Explicit conversion constructor from another Vec2 of any type.
+	//! Uses default primitive type conversion
+	template <class T2> inline explicit Vector2(const Vector2<T2>&);
 	inline Vector2(T, T);
 
-	inline Vector2& operator=(const T*);
+	//! Assignment from array
+	//! @warning Does not check array size, make sure it has at least 2 elements
+	inline Vector2<T>& operator=(const T*);
 	inline void set(T, T);
 
 	inline bool operator==(const Vector2<T>&) const;
@@ -97,20 +111,38 @@ public:
 	inline operator const T*() const;
 	inline operator T*();
 
-	inline void operator+=(const Vector2<T>&);
-	inline void operator-=(const Vector2<T>&);
-	inline void operator*=(T);
-	inline void operator/=(T);
+	inline Vector2<T>& operator+=(const Vector2<T>&);
+	inline Vector2<T>& operator-=(const Vector2<T>&);
+	//! Scalar multiplication
+	inline Vector2<T>& operator*=(T);
+	//! Component-wise multiplication
+	inline Vector2<T>& operator*=(const Vector2<T>&);
+	//! Scalar division
+	inline Vector2<T>& operator/=(T);
+	//! Component-wise division
+	inline Vector2<T>& operator/=(const Vector2<T>&);
 
-	inline Vector2 operator-(const Vector2<T>&) const;
-	inline Vector2 operator+(const Vector2<T>&) const;
+	inline Vector2<T> operator-(const Vector2<T>&) const;
+	inline Vector2<T> operator+(const Vector2<T>&) const;
 
-	inline Vector2 operator-() const;
-	inline Vector2 operator+() const;
+	inline Vector2<T> operator-() const;
+	inline Vector2<T> operator+() const;
 
-	inline Vector2 operator*(T) const;
-	inline Vector2 operator/(T) const;
+	//! Scalar multiplication
+	inline Vector2<T> operator*(T) const;
+	//! Component-wise multiplication
+	inline Vector2<T> operator*(const Vector2<T>&) const;
+	//! Scalar division
+	inline Vector2<T> operator/(T) const;
+	//! Component-wise division
+	inline Vector2<T> operator/(const Vector2<T>&) const;
 
+	//! Component-wise minimum determination
+	inline Vector2<T> min(const Vector2<T>&) const;
+	//! Component-wise maximum determination
+	inline Vector2<T> max(const Vector2<T>&) const;
+	//! Component-wise clamping to the specified upper and lower bounds
+	inline Vector2<T> clamp(const Vector2<T>& low, const Vector2<T>& high) const;
 
 	inline T dot(const Vector2<T>&) const;
 
@@ -119,6 +151,8 @@ public:
 	inline void normalize();
 
 	T v[2];
+
+	QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
 };
 
 
@@ -128,13 +162,19 @@ public:
 template<class T> class Vector3
 {
 public:
+	//! The vector is not initialized!
 	inline Vector3();
-	//inline Vector3(const Vector3&);
-	//template <class T2> inline Vector3(const Vector3<T2>&);
-	inline Vector3(T, T, T);
+	//! Sets all components of the vector to the same value
 	inline Vector3(T);
+	//! Explicit conversion constructor from an array (copies values)
+	//! @warning Does not check array size, make sure it has at least 3 elements
+	inline explicit Vector3(const T*);
+	inline Vector3(T, T, T);
 
 	//inline Vector3& operator=(const Vector3&);
+
+	//! Assignment from array
+	//! @warning Does not check array size, make sure it has at least 2 elements
 	inline Vector3& operator=(const T*);
 	//template <class T2> inline Vector3& operator=(const Vector3<T2>&);
 	inline void set(T, T, T);
@@ -202,8 +242,14 @@ public:
 template<class T> class Vector4
 {
 public:
+	//! The vector is not initialized!
 	inline Vector4();
+	//! Explicit conversion constructor from an array
+	//! @warning Does not check array size, make sure it has at least 4 elements
+	inline explicit Vector4(const T*);
+	//! Creates an Vector4 with xyz set to the given Vector3, and w set to 1.0
 	inline Vector4(const Vector3<T>&);
+	//! Creates an Vector4 with xyz set to the given values, and w set to 1.0
 	inline Vector4(T, T, T);
 	inline Vector4(T, T, T, T);
 
@@ -399,6 +445,16 @@ template<class T> Vector2<T>::Vector2(T x)
         v[0]=x; v[1]=x;
 }
 
+template<class T> Vector2<T>::Vector2(const T* x)
+{
+	v[0]=x[0]; v[1]=x[1];
+}
+
+template <class T> template <class T2> Vector2<T>::Vector2(const Vector2<T2>& other)
+{
+	v[0]=other[0]; v[1]=other[1];
+}
+
 template<class T> Vector2<T>::Vector2(T x, T y)
 {
 	v[0]=x; v[1]=y;
@@ -448,24 +504,40 @@ template<class T> Vector2<T>::operator T*()
 }
 
 
-template<class T> void Vector2<T>::operator+=(const Vector2<T>& a)
+template<class T> Vector2<T>& Vector2<T>::operator+=(const Vector2<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1];
+	return *this;
 }
 
-template<class T> void Vector2<T>::operator-=(const Vector2<T>& a)
+template<class T> Vector2<T>& Vector2<T>::operator-=(const Vector2<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1];
+	return *this;
 }
 
-template<class T> void Vector2<T>::operator*=(T s)
+template<class T> Vector2<T>& Vector2<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s;
+	return *this;
 }
 
-template<class T> void Vector2<T>::operator/=(T s)
+template<class T> Vector2<T>& Vector2<T>::operator*=(const Vector2<T>& b)
+{
+	v[0] *= b.v[0]; v[1] *= b.v[1];
+	return *this;
+}
+
+template<class T> Vector2<T>& Vector2<T>::operator/=(T s)
 {
 	v[0] /= s; v[1] /= s;
+	return *this;
+}
+
+template<class T> Vector2<T>& Vector2<T>::operator/=(const Vector2<T>& b)
+{
+	v[0] /= b.v[0]; v[1] /= b.v[1];
+	return *this;
 }
 
 template<class T> Vector2<T> Vector2<T>::operator-() const
@@ -493,11 +565,35 @@ template<class T> Vector2<T> Vector2<T>::operator*(T s) const
 	return Vector2<T>(s * v[0], s * v[1]);
 }
 
+template<class T> Vector2<T> Vector2<T>::operator*(const Vector2<T>& b) const
+{
+	return Vector2<T>(v[0] * b.v[0], v[1] * b.v[1]);
+}
+
 template<class T> Vector2<T> Vector2<T>::operator/(T s) const
 {
 	return Vector2<T>(v[0]/s, v[1]/s);
 }
 
+template<class T> Vector2<T> Vector2<T>::operator/(const Vector2<T>& b) const
+{
+	return Vector2<T>(v[0]/b.v[0], v[1]/b.v[1]);
+}
+
+template<class T> Vector2<T> Vector2<T>::min(const Vector2<T>& b) const
+{
+	return Vector2<T>(std::min(v[0],b.v[0]), std::min(v[1],b.v[1]));
+}
+
+template<class T> Vector2<T> Vector2<T>::max(const Vector2<T>& b) const
+{
+	return Vector2<T>(std::max(v[0],b.v[0]), std::max(v[1],b.v[1]));
+}
+
+template<class T> Vector2<T> Vector2<T>::clamp(const Vector2<T>& low, const Vector2<T>& high) const
+{
+	return this->max(low).min(high);
+}
 
 template<class T> T Vector2<T>::dot(const Vector2<T>& b) const
 {
@@ -544,6 +640,11 @@ template<class T> Vector3<T>::Vector3() {}
 template<class T> Vector3<T>::Vector3(T x)
 {
 	v[0]=x; v[1]=x; v[2]=x;
+}
+
+template<class T> Vector3<T>::Vector3(const T* x)
+{
+	v[0]=x[0]; v[1]=x[1]; v[2]=x[2];
 }
 
 template<class T> Vector3<T>::Vector3(T x, T y, T z)
@@ -751,6 +852,11 @@ template<class T> T Vector3<T>::longitude() const
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
 template<class T> Vector4<T>::Vector4() {}
+
+template<class T> Vector4<T>::Vector4(const T* x)
+{
+	v[0]=x[0]; v[1]=x[1]; v[2]=x[2]; v[3]=x[3];
+}
 
 template<class T> Vector4<T>::Vector4(const Vector3<T>& a)
 {
@@ -1586,6 +1692,7 @@ Q_DECLARE_TYPEINFO(Vec2f, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec2i, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec3d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec3f, Q_PRIMITIVE_TYPE);
+Q_DECLARE_TYPEINFO(Vec3i, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec4d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec4f, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Vec4i, Q_PRIMITIVE_TYPE);
@@ -1601,6 +1708,7 @@ Q_DECLARE_METATYPE(Vec2f)
 Q_DECLARE_METATYPE(Vec2i)
 Q_DECLARE_METATYPE(Vec3d)
 Q_DECLARE_METATYPE(Vec3f)
+Q_DECLARE_METATYPE(Vec3i)
 Q_DECLARE_METATYPE(Vec4d)
 Q_DECLARE_METATYPE(Vec4f)
 Q_DECLARE_METATYPE(Vec4i)
@@ -1608,6 +1716,33 @@ Q_DECLARE_METATYPE(Mat4d)
 Q_DECLARE_METATYPE(Mat4f)
 Q_DECLARE_METATYPE(Mat3d)
 Q_DECLARE_METATYPE(Mat3f)
+
+template <class T>
+QDebug operator<<(QDebug debug, const Vector2<T> &c)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << '[' << c[0] << ", " << c[1] << ']';
+
+    return debug;
+}
+
+template <class T>
+QDebug operator<<(QDebug debug, const Vector3<T> &c)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << '[' << c[0] << ", " << c[1] << ", " << c[2] << ']';
+
+    return debug;
+}
+
+template <class T>
+QDebug operator<<(QDebug debug, const Vector4<T> &c)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << '[' << c[0] << ", " << c[1] << ", " << c[2] << ", " << c[3] << ']';
+
+    return debug;
+}
 
 
 //! Provide Qt 3x3 matrix-vector multiplication, which does not exist for some reason

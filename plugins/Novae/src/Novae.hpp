@@ -106,6 +106,11 @@ public:
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	virtual StelObjectP searchByID(const QString &id) const
+	{
+		return qSharedPointerCast<StelObject>(getByID(id));
+	}
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
@@ -114,9 +119,10 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Bright Novae"; }
+	virtual QString getStelObjectType() const { return Nova::NOVA_TYPE; }
 
 	//! get a nova object by identifier
-	NovaP getByID(const QString& id);
+	NovaP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
@@ -262,6 +268,7 @@ class NovaeStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_NOVAE_HPP_*/

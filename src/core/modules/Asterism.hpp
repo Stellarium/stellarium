@@ -43,6 +43,7 @@ class Asterism : public StelObject
 {
 	friend class AsterismMgr;
 private:
+	static const QString ASTERISM_TYPE;
 	Asterism();
 	~Asterism();
 
@@ -57,7 +58,8 @@ private:
 
 	//! Get the module/object type string.
 	//! @return "Asterism"
-	virtual QString getType() const {return "Asterism";}
+	virtual QString getType() const {return ASTERISM_TYPE;}
+	virtual QString getID() const { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZname;}

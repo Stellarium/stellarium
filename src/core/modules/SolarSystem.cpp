@@ -37,6 +37,7 @@
 #include "Planet.hpp"
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
+#include "StelMainView.hpp"
 
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
@@ -63,10 +64,14 @@
 SolarSystem::SolarSystem()
 	: shadowPlanetCount(0)
 	, flagMoonScale(false)
-	, moonScale(1.)
+	, moonScale(1.0)
+	, flagMinorBodyScale(false)
+	, minorBodyScale(1.0)
 	, labelsAmount(false)
 	, flagOrbits(false)
 	, flagLightTravelTime(true)
+	, flagUseObjModels(false)
+	, flagShowObjSelfShadows(true)
 	, flagShow(false)
 	, flagPointer(false)
 	, flagNativePlanetNames(false)
@@ -147,6 +152,8 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
+	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toFloat());
+	setFlagMinorBodyScale(conf->value("viewing/flag_minorbodies_scaled", false).toBool());
 	setMoonScale(conf->value("viewing/moon_scale", 4.0).toFloat());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
@@ -154,6 +161,8 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
+	setFlagUseObjModels(conf->value("astro/flag_use_obj_models", false).toBool());
+	setFlagShowObjSelfShadows(conf->value("astro/flag_show_obj_self_shadows", true).toBool());
 	setFlagPointer(conf->value("astro/flag_planets_pointers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
@@ -215,6 +224,7 @@ void SolarSystem::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
+	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
@@ -229,8 +239,8 @@ void SolarSystem::init()
 
 void SolarSystem::deinit()
 {
-	if(Planet::planetShaderProgram)
-		Planet::deinitShader();
+	Planet::deinitShader();
+	Planet::deinitFBO();
 }
 
 void SolarSystem::recreateTrails()
@@ -327,6 +337,12 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 	}
 
 	updateI18n();
+}
+
+void SolarSystem::reloadShaders()
+{
+	Planet::deinitShader();
+	Planet::initShader();
 }
 
 void SolarSystem::drawPointer(const StelCore* core)
@@ -433,6 +449,7 @@ void SolarSystem::loadPlanets()
 
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
+	qDebug() << "SolarSystem: loading from :"  << filePath;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -480,7 +497,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	{
 		const QString secname = sections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString();
-		const QString strParent = pd.value(secname+"/parent").toString();
+		const QString strParent = pd.value(secname+"/parent", "Sun").toString();
 		secNameMap[englishName] = secname;
 		if (strParent!="none" && !strParent.isEmpty() && !englishName.isEmpty())
 			parentMap[englishName] = strParent;
@@ -872,25 +889,31 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();		
+		QString type = pd.value(secname+"/type").toString();
+
+		//TODO: Refactor the subclass selection to reduce duplicate code mess here,
+		// by at least using this base class pointer and using setXXX functions instead of mega-constructors
+		// that have to pass most of it on to the Planet class
 		PlanetP p;
+
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
 		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
-						    pd.value(secname+"/lighting").toBool(),
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
-						    StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-						    pd.value(secname+"/albedo").toFloat(),
-						    pd.value(secname+"/tex_map").toString(),
+						    StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
+						    pd.value(secname+"/albedo", 0.25f).toFloat(),
+						    pd.value(secname+"/roughness",0.9f).toFloat(),
+						    pd.value(secname+"/tex_map", "nomap.png").toString(),
+						    pd.value(secname+"/model").toString(),
 						    posfunc,
 						    userDataPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", 0).toBool(),						    
+						    pd.value(secname+"/hidden", false).toBool(),
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -930,22 +953,25 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else if (type == "comet")
 		{
 			p = PlanetP(new Comet(englishName,
-			               pd.value(secname+"/lighting").toBool(),
-			               pd.value(secname+"/radius").toDouble()/AU,
-			               pd.value(secname+"/oblateness", 0.0).toDouble(),
-			               StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-			               pd.value(secname+"/albedo").toFloat(),
-			               pd.value(secname+"/tex_map").toString(),
-			               posfunc,
-			               userDataPtr,
-			               osculatingFunc,
-			               closeOrbit,
-						   pd.value(secname+"/hidden", 0).toBool(),
-						   type,
-						   pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
-						   pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
-						   pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
-						  ));
+					      pd.value(secname+"/radius").toDouble()/AU,
+					      pd.value(secname+"/oblateness", 0.0).toDouble(),
+					      StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
+					      pd.value(secname+"/albedo", 0.25f).toFloat(),
+					      pd.value(secname+"/roughness",0.9f).toFloat(),
+					      pd.value(secname+"/outgas_intensity",0.1f).toFloat(),
+					      pd.value(secname+"/outgas_falloff", 0.1f).toFloat(),
+					      pd.value(secname+"/tex_map", "nomap.png").toString(),
+					      pd.value(secname+"/model").toString(),
+					      posfunc,
+					      userDataPtr,
+					      osculatingFunc,
+					      closeOrbit,
+					      pd.value(secname+"/hidden", false).toBool(),
+					      type,
+					      pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
+					      pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
+					      pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
+					      ));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
@@ -976,22 +1002,25 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Set possible default name of the normal map for avoiding yin-yang shaped moon
 			// phase when normal map key not exists. Example: moon_normals.png
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
-			QString normalMapName = englishName.toLower().append("_normals.png");
+			QString normalMapName = "";
+			if (!pd.value(secname+"/hidden", false).toBool()) // no normal maps for invisible objects!
+				normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
-					       pd.value(secname+"/lighting").toBool(),
 					       pd.value(secname+"/radius").toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
-					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
-					       pd.value(secname+"/albedo").toFloat(),
-					       pd.value(secname+"/tex_map").toString(),
+					       StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
+					       pd.value(secname+"/albedo", 0.25f).toFloat(),
+					       pd.value(secname+"/roughness",0.9f).toFloat(),
+					       pd.value(secname+"/tex_map", "nomap.png").toString(),
 					       pd.value(secname+"/normals_map", normalMapName).toString(),
+					       pd.value(secname+"/model").toString(),
 					       posfunc,
 					       userDataPtr,
 					       osculatingFunc,
 					       closeOrbit,
-					       pd.value(secname+"/hidden", 0).toBool(),
+					       pd.value(secname+"/hidden", false).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
-					       pd.value(secname+"/halo", 0).toBool(),
+					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
 			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toDouble();
 		}
@@ -1473,6 +1502,17 @@ void SolarSystem::setFlagLightTravelTime(bool b)
 	}
 }
 
+void SolarSystem::setFlagShowObjSelfShadows(bool b)
+{
+	if(b!=flagShowObjSelfShadows)
+	{
+		flagShowObjSelfShadows = b;
+		if(!b)
+			Planet::deinitFBO();
+		emit flagShowObjSelfShadowsChanged(b);
+	}
+}
+
 void SolarSystem::setSelected(PlanetP obj)
 {
 	if (obj && obj->getType() == "Planet")
@@ -1906,7 +1946,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 	}
 }
 
-// Set/Get Moon display scaling factor
+// Set/Get Moon display scaling factor. This goes directly to the Moon object.
 void SolarSystem::setMoonScale(double f)
 {
 	if(moonScale != f)
@@ -1915,6 +1955,48 @@ void SolarSystem::setMoonScale(double f)
 		if (flagMoonScale)
 			getMoon()->setSphereScale(moonScale);
 		emit moonScaleChanged(f);
+	}
+}
+
+// Set/Get if minor body display is scaled. This flag will be queried by all Planet objects except for the Moon.
+void SolarSystem::setFlagMinorBodyScale(bool b)
+{
+	if(b!=flagMinorBodyScale)
+	{
+		flagMinorBodyScale = b;
+
+		double newScale = b ? minorBodyScale : 1.0;
+		//update the bodies with the new scale
+		foreach(PlanetP p, systemPlanets)
+		{
+			if(p == moon) continue;
+			if (p->getPlanetType()!=Planet::isPlanet
+					&& p->getPlanetType()!=Planet::isStar
+					)
+				p->setSphereScale(newScale);
+		}
+		emit flagMinorBodyScaleChanged(b);
+	}
+}
+
+// Set/Get minor body display scaling factor. This will be queried by all Planet objects except for the Moon.
+void SolarSystem::setMinorBodyScale(double f)
+{
+	if(minorBodyScale != f)
+	{
+		minorBodyScale = f;
+		if(flagMinorBodyScale) //update the bodies with the new scale
+		{
+			foreach(PlanetP p, systemPlanets)
+			{
+				if(p == moon) continue;
+				if (p->getPlanetType()!=Planet::isPlanet
+						&& p->getPlanetType()!=Planet::isStar
+						)
+					p->setSphereScale(minorBodyScale);
+			}
+		}
+		emit minorBodyScaleChanged(f);
 	}
 }
 

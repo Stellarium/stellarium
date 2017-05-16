@@ -22,6 +22,10 @@
 
 #include "SyncProtocol.hpp"
 #include "StelLocation.hpp"
+#include "VecMath.hpp"
+
+namespace SyncProtocol
+{
 
 class ErrorMessage : public SyncMessage
 {
@@ -114,7 +118,13 @@ public:
 	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
 	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
 
-	QList<QString> selectedObjectNames;
+	QDebug debugOutput(QDebug dbg) const Q_DECL_OVERRIDE
+	{
+		return dbg<<selectedObjects;
+	}
+
+	//list of type/ID pairs
+	QList< QPair<QString,QString> > selectedObjects;
 };
 
 class Alive : public SyncMessage
@@ -123,5 +133,45 @@ public:
 	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE  { return SyncProtocol::ALIVE; }
 };
 
+class StelPropertyUpdate : public SyncMessage
+{
+public:
+	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::STELPROPERTY; }
+
+	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	QDebug debugOutput(QDebug dbg) const Q_DECL_OVERRIDE
+	{
+		return dbg<<propId<<value;
+	}
+
+	QString propId;
+	QVariant value;
+};
+
+class View : public SyncMessage
+{
+public:
+	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::VIEW; }
+
+	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	Vec3d viewAltAz;
+};
+
+class Fov : public SyncMessage
+{
+public:
+	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::FOV; }
+
+	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	double fov;
+};
+
+}
 
 #endif

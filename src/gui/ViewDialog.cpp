@@ -154,6 +154,8 @@ void ViewDialog::createDialogContent()
 
 	// Connect and initialize checkboxes and other widgets
 
+	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+	Q_ASSERT(ssmgr);
 	// Stars section
 	connectGroupBox(ui->starGroupBox, "actionShow_Stars");
 	connectDoubleProperty(ui->starScaleRadiusDoubleSpinBox,"StelSkyDrawer.absoluteStarScale");
@@ -200,18 +202,22 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
+	connectBoolProperty(ui->planetUseObjModelsCheckBox, "SolarSystem.flagUseObjModels");
+	connectBoolProperty(ui->planetShowObjSelfShadowsCheckBox, "SolarSystem.flagShowObjSelfShadows");
+	ui->planetShowObjSelfShadowsCheckBox->setEnabled(ssmgr->getFlagUseObjModels());
+	connect(ssmgr,SIGNAL(flagUseObjModelsChanged(bool)),ui->planetShowObjSelfShadowsCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->planetLimitMagnitudeCheckBox,"StelSkyDrawer.flagPlanetMagnitudeLimit");
 	connectDoubleProperty(ui->planetLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customPlanetMagLimit");
 	connectBoolProperty(ui->planetScaleMoonCheckBox, "SolarSystem.flagMoonScale");
 	connectDoubleProperty(ui->moonScaleFactor,"SolarSystem.moonScale");
+	connectBoolProperty(ui->planetScaleMinorBodyCheckBox, "SolarSystem.flagMinorBodyScale");
+	connectDoubleProperty(ui->minorBodyScaleFactor,"SolarSystem.minorBodyScale");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
 	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
 
 	// GreatRedSpot (Jupiter)
 	// TODO: put under Properties system!
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	Q_ASSERT(ssmgr);
 	bool grsFlag = ssmgr->getFlagCustomGrsSettings();
 	ui->customGrsSettingsCheckBox->setChecked(grsFlag);
 	connect(ui->customGrsSettingsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagCustomGrsSettings(bool)));

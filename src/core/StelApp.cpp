@@ -391,6 +391,11 @@ void StelApp::initScriptMgr()
 void StelApp::initScriptMgr() {}
 #endif
 
+QStringList StelApp::getCommandlineArguments()
+{
+	return qApp->property("stelCommandLine").toStringList();
+}
+
 void StelApp::init(QSettings* conf)
 {
 	gl = QOpenGLContext::currentContext()->functions();
@@ -406,7 +411,6 @@ void StelApp::init(QSettings* conf)
 
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
-	textureMgr->init();
 
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
@@ -597,6 +601,8 @@ void StelApp::initPlugIns()
 		if (m!=NULL)
 		{
 			moduleMgr->registerModule(m, true);
+			//load extensions after the module is registered
+			moduleMgr->loadExtensions(i.info.id);
 			m->init();
 		}
 	}

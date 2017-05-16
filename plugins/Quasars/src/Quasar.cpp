@@ -35,6 +35,7 @@
 #include <QVariant>
 #include <QList>
 
+const QString Quasar::QUASAR_TYPE = QStringLiteral("Quasar");
 StelTextureSP Quasar::markerTexture;
 
 bool Quasar::distributionMode = false;

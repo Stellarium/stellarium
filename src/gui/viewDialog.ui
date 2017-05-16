@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>755</width>
-    <height>618</height>
+    <height>627</height>
    </rect>
   </property>
   <property name="font">
@@ -783,6 +783,46 @@
               <number>0</number>
              </property>
              <item>
+              <widget class="QCheckBox" name="planetUseObjModelsCheckBox">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uses a polygonal 3D model for some selected subplanetary objects (small moons, asteroids, comets) instead of a spherical approximation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="text">
+                <string>Use more accurate 3D models (where available)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayoutSelfShadowing">
+               <item>
+                <spacer name="horizontalSpacerSelfShadowing">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="planetShowObjSelfShadowsCheckBox">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use a &amp;quot;shadow map&amp;quot; to simulate self-shadows of non-convex solar system objects.&lt;/p&gt;&lt;p&gt;May reduce shadow penumbra quality on some objects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Simulate self-shadowing</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
               <widget class="QCheckBox" name="planetMarkerCheckBox">
                <property name="text">
                 <string>Show planet markers</string>
@@ -935,6 +975,30 @@
                  </property>
                  <property name="value">
                   <double>4.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="scaleSelectedHorizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="planetScaleMinorBodyCheckBox">
+                 <property name="text">
+                  <string>Scale minor bodies:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="minorBodyScaleFactor">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.500000000000000</double>
                  </property>
                 </widget>
                </item>

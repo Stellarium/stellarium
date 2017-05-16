@@ -36,6 +36,7 @@
 
 Vec3f Asterism::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Asterism::labelColor = Vec3f(0.4,0.4,0.8);
+const QString Asterism::ASTERISM_TYPE = QStringLiteral("Asterism");
 
 Asterism::Asterism()
 	: numberOfSegments(0)

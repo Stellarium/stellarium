@@ -29,6 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 
+const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 

@@ -39,8 +39,8 @@
 #include <QJsonArray>
 
 
-MainService::MainService(const QByteArray &serviceName, QObject *parent)
-	: AbstractAPIService(serviceName,parent),
+MainService::MainService(QObject *parent)
+	: AbstractAPIService(parent),
 	  moveX(0),moveY(0),lastMoveUpdateTime(0),
 	  //100 should be more than enough
 	  //this only has to emcompass events that occur between 2 status updates
@@ -58,7 +58,7 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
-	connect(propMgr,SIGNAL(stelPropChanged(QString,QVariant)),this,SLOT(propertyChanged(QString,QVariant)));
+	connect(propMgr,SIGNAL(stelPropertyChanged(StelProperty*,QVariant)),this,SLOT(propertyChanged(StelProperty*,QVariant)));
 
 	Q_ASSERT(this->thread()==objMgr->thread());
 }
@@ -80,44 +80,15 @@ void MainService::update(double deltaTime)
 
 	if(!xZero || !yZero)
 	{
+		//qDebug()<<moveX<<moveY;
+
 		double currentFov = mvmgr->getCurrentFov();
 		// the more it is zoomed, the lower the moving speed is (in angle)
-		double depl=0.00025*deltaTime*1000*currentFov;
+		//0.0004 is the default key move speed
+		double depl=0.0004 / 30 *deltaTime*1000*currentFov;
 
-		float deltaAz = moveX;
-		float deltaAlt = moveY;
-
-		if (deltaAz<0)
-		{
-			deltaAz = -depl/30;
-			if (deltaAz<-0.2)
-				deltaAz = -0.2;
-		}
-		else
-		{
-			if (deltaAz>0)
-			{
-				deltaAz = (depl/30);
-				if (deltaAz>0.2)
-					deltaAz = 0.2;
-			}
-		}
-
-		if (deltaAlt<0)
-		{
-			deltaAlt = -depl/30;
-			if (deltaAlt<-0.2)
-				deltaAlt = -0.2;
-		}
-		else
-		{
-			if (deltaAlt>0)
-			{
-				deltaAlt = depl/30;
-				if (deltaAlt>0.2)
-					deltaAlt = 0.2;
-			}
-		}
+		double deltaAz = moveX*depl;
+		double deltaAlt = moveY*depl;
 
 		mvmgr->panView(deltaAz,deltaAlt);
 
@@ -126,7 +97,7 @@ void MainService::update(double deltaTime)
 	}
 }
 
-void MainService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void MainService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if(operation=="status")
 	{
@@ -250,7 +221,7 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 	}
 }
 
-void MainService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void MainService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 
@@ -308,6 +279,12 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 	else if(operation == "focus")
 	{
 		QString target = QString::fromUtf8(parameters.value("target"));
+		SelectionMode selMode = Center;
+
+		if(parameters.value("mode") == "zoom")
+			selMode = Zoom;
+		else if(parameters.value("mode") == "mark")
+			selMode = Mark;
 
 		//check target string first
 		if(target.isEmpty())
@@ -344,24 +321,23 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 		bool result;
 		QMetaObject::invokeMethod(this,"focusObject",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_RETURN_ARG(bool,result),
-					  Q_ARG(QString,target));
+					  Q_ARG(QString,target),
+					  Q_ARG(SelectionMode,selMode));
 
 		response.setData(result ? "true" : "false");
 	}
 	else if(operation == "move")
 	{
-		QString xs = QString::fromUtf8(parameters.value("x"));
-		QString ys = QString::fromUtf8(parameters.value("y"));
-
 		bool xOk,yOk;
-		float x = xs.toInt(&xOk);
-		float y = ys.toInt(&yOk);
+
+		double x = parameters.value("x").toDouble(&xOk);
+		double y = parameters.value("y").toDouble(&yOk);
 
 		if(xOk || yOk)
 		{
 			QMetaObject::invokeMethod(this,"updateMovement", SERVICE_DEFAULT_INVOKETYPE,
-						  Q_ARG(float,x),
-						  Q_ARG(float,y),
+						  Q_ARG(double,x),
+						  Q_ARG(double,y),
 						  Q_ARG(bool,xOk),
 						  Q_ARG(bool,yOk));
 
@@ -372,6 +348,50 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 	}
 	else if(operation == "view")
 	{
+		QByteArray j2000 = parameters.value("j2000");
+		if(!j2000.isEmpty())
+		{
+			QJsonDocument doc = QJsonDocument::fromJson(j2000);
+			QJsonArray arr = doc.array();
+			if(arr.size() == 3)
+			{
+				Vec3d pos;
+				pos[0] = arr.at(0).toDouble();
+				pos[1] = arr.at(1).toDouble();
+				pos[2] = arr.at(2).toDouble();
+
+				mvmgr->setViewDirectionJ2000(pos);
+				response.setData("ok");
+			}
+			else
+			{
+				response.writeRequestError("invalid j2000 format, use JSON array of 3 doubles");
+			}
+			return;
+		}
+
+		QByteArray rect = parameters.value("altAz");
+		if(!rect.isEmpty())
+		{
+			QJsonDocument doc = QJsonDocument::fromJson(rect);
+			QJsonArray arr = doc.array();
+			if(arr.size() == 3)
+			{
+				Vec3d pos;
+				pos[0] = arr.at(0).toDouble();
+				pos[1] = arr.at(1).toDouble();
+				pos[2] = arr.at(2).toDouble();
+
+				mvmgr->setViewDirectionJ2000(core->altAzToJ2000(pos,StelCore::RefractionOff));
+				response.setData("ok");
+			}
+			else
+			{
+				response.writeRequestError("invalid altAz format, use JSON array of 3 doubles");
+			}
+			return;
+		}
+
 		QString azs = QString::fromUtf8(parameters.value("az"));
 		QString alts = QString::fromUtf8(parameters.value("alt"));
 
@@ -390,7 +410,7 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 			response.setData("ok");
 		}
 		else
-			response.writeRequestError("requires x or y parameter");
+			response.writeRequestError("requires at least one of az,alt,j2000 parameters");
 	}
 
 	else if (operation == "fov")
@@ -413,7 +433,7 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. POST: time,focus,move,fov");
+		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov");
 	}
 }
 
@@ -433,7 +453,7 @@ QString MainService::getInfoString()
 	return selectedObject->getInfoString(core,StelObject::AllInfo | StelObject::NoFont);
 }
 
-bool MainService::focusObject(const QString &name)
+bool MainService::focusObject(const QString &name, SelectionMode mode)
 {
 	//StelDialog::gotoObject
 
@@ -441,6 +461,8 @@ bool MainService::focusObject(const QString &name)
 	if(name.isEmpty())
 	{
 		objMgr->unSelect();
+		if(mode == Zoom)
+			mvmgr->autoZoomOut();
 		return true;
 	}
 
@@ -453,8 +475,15 @@ bool MainService::focusObject(const QString &name)
 			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=core->getCurrentLocation().planetName)
 			{
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setFlagTracking(true);
+				if(mode != Mark)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+					if(mode == Zoom)
+					{
+						mvmgr->autoZoomIn();
+					}
+				}
 				result = true;
 			}
 			else
@@ -472,7 +501,7 @@ void MainService::focusPosition(const Vec3d &pos)
 	mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
 }
 
-void MainService::updateMovement(float x, float y, bool xUpdated, bool yUpdated)
+void MainService::updateMovement(double x, double y, bool xUpdated, bool yUpdated)
 {
 	if(xUpdated)
 	{
@@ -524,10 +553,10 @@ void MainService::actionToggled(const QString &id, bool val)
 	actionMutex.unlock();
 }
 
-void MainService::propertyChanged(const QString &id, const QVariant &val)
+void MainService::propertyChanged(StelProperty* prop, const QVariant& val)
 {
 	propMutex.lock();
-	propCache.append(PropertyCacheEntry(id,val));
+	propCache.append(PropertyCacheEntry(prop->getId(),val));
 	if(!propCache.areIndexesValid())
 	{
 		//in theory, this can happen, but practically not so much

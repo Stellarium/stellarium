@@ -20,16 +20,18 @@
 #include "SyncServerHandlers.hpp"
 #include "SyncServer.hpp"
 
+using namespace SyncProtocol;
+
 ServerHandler::ServerHandler(SyncServer *server)
 	: server(server)
 {
 
 }
 
-bool ServerErrorHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peerData)
+bool ServerErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peerData)
 {
 	ErrorMessage msg;
-	bool ok = msg.deserialize(stream,peerData.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream,dataSize);
 	peerData.peerLog("Received error message from client: " + msg.message);
 
 	//we don't drop the connection here, we let the remote end do that
@@ -43,10 +45,10 @@ ServerAuthHandler::ServerAuthHandler(SyncServer* server, bool allowDivergingAppV
 
 }
 
-bool ServerAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ServerAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	ClientChallengeResponse msg;
-	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
 	{
@@ -91,15 +93,15 @@ bool ServerAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	peer.peerLog("Authenticated client");
 
 	//if we got here, peer is successfully authenticated!
-	peer.isAuthenticated = true;
+	peer.authenticated = true;
 	peer.writeMessage(ServerChallengeResponseValid());
 	server->clientAuthenticated(peer);
 
 	return true;
 }
 
-bool ServerAliveHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ServerAliveHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Alive p;
-	return p.deserialize(stream,peer.msgHeader.dataSize);
+	return p.deserialize(stream,dataSize);
 }

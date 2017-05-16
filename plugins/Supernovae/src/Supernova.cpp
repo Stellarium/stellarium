@@ -36,6 +36,8 @@
 #include <QVariant>
 #include <QList>
 
+const QString Supernova::SUPERNOVA_TYPE = QStringLiteral("Supernova");
+
 Supernova::Supernova(const QVariantMap& map)
 	: initialized(false)
 	, designation("")

@@ -309,7 +309,7 @@ void LandscapeMgr::update(double deltaTime)
 	else
 	{
 		// In case we have exceptionally deep horizons ("Little Prince planet"), the sun will rise somehow over that line and demand light on the landscape.
-		sinSunAngle=sin(qMin(M_PI_2, asin(qMax(-1.0, qMin(1.0, sunPos[2]-landscape->getSinMinAltitudeLimit()))) + (0.25f *M_PI/180.)));
+		sinSunAngle=sin(qMin(M_PI_2, asin(qBound(-1.0, sunPos[2]-landscape->getSinMinAltitudeLimit(), 1.0) ) + (0.25f *M_PI/180.)));
 		if(sinSunAngle > 0.0f)
 			landscapeBrightness +=  (1.0f-landscape->getOpacity(sunPos))*sinSunAngle;
 

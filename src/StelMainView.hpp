@@ -173,6 +173,11 @@ signals:
 	//! @remark FS: is threaded access here even a possibility anymore, or a remnant of older code?
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
+	//! Emitted when the "Reload shaders" action is perfomed
+	//! Interested objects should subscribe to this signal and reload their shaders
+	//! when this is emitted
+	void reloadShadersRequested();
+
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
@@ -182,6 +187,8 @@ private slots:
 	void contextDestroyed();
 #endif
 	void updateNightModeProperty(bool b);
+
+	void reloadShaders();
 
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one

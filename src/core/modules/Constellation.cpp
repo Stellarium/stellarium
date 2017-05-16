@@ -36,6 +36,8 @@
 #include <QDebug>
 #include <QFontMetrics>
 
+const QString Constellation::CONSTELLATION_TYPE = QStringLiteral("Constellation");
+
 Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
