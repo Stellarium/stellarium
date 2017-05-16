@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 19:17+0700\n"
+"POT-Creation-Date: 2017-05-16 22:23+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1983,7 +1983,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:968 src/gui/ViewDialog.cpp:1309
+#: src/gui/ConfigurationDialog.cpp:968 src/gui/ViewDialog.cpp:1318
 msgid "Contact"
 msgstr ""
 
@@ -2613,107 +2613,119 @@ msgid "Frames per second"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1179
+#: src/gui/ViewDialog.cpp:1182
 msgid "Excellent dark-sky site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1181
+#: src/gui/ViewDialog.cpp:1184
 msgid "Typical truly dark site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1183
+#: src/gui/ViewDialog.cpp:1186
 msgid "Rural sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1185
+#: src/gui/ViewDialog.cpp:1188
 msgid "Rural/suburban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1187
+#: src/gui/ViewDialog.cpp:1190
 msgid "Suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1189
+#: src/gui/ViewDialog.cpp:1192
 msgid "Bright suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1191
+#: src/gui/ViewDialog.cpp:1194
 msgid "Suburban/urban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1193
+#: src/gui/ViewDialog.cpp:1196
 msgid "City sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1195
+#: src/gui/ViewDialog.cpp:1198
 msgid "Inner-city sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1209
+#: src/gui/ViewDialog.cpp:1212
 msgid "The naked-eye limiting magnitude is"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1233
+#: src/gui/ViewDialog.cpp:1220
+msgid ""
+"Uses a polygonal 3D model for some selected subplanetary objects (small "
+"moons, asteroids, comets) instead of a spherical approximation"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1221
+msgid ""
+"Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
+"system objects. May reduce shadow penumbra quality on some objects."
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1242
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1234
+#: src/gui/ViewDialog.cpp:1243
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1235
+#: src/gui/ViewDialog.cpp:1244
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1430
+#: src/gui/ViewDialog.cpp:1439
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1432
+#: src/gui/ViewDialog.cpp:1441
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1434
+#: src/gui/ViewDialog.cpp:1443
 msgid "Standard Orionids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1436
+#: src/gui/ViewDialog.cpp:1445
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1438
+#: src/gui/ViewDialog.cpp:1447
 msgid "Standard Geminids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1440
+#: src/gui/ViewDialog.cpp:1449
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1442
+#: src/gui/ViewDialog.cpp:1451
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1444
+#: src/gui/ViewDialog.cpp:1453
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1446
+#: src/gui/ViewDialog.cpp:1455
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1448
+#: src/gui/ViewDialog.cpp:1457
 msgid "Very high rate (1966 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1450
+#: src/gui/ViewDialog.cpp:1459
 msgid "Highest rate ever (1833 Leonids)"
 msgstr ""
 
@@ -5805,22 +5817,8 @@ msgstr ""
 msgid "Solar System objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:2094
-msgid ""
-"<html><head/><body><p>Uses a polygonal 3D model for some selected "
-"subplanetary objects (small moons, asteroids, comets) instead of a spherical "
-"approximation</p></body></html>"
-msgstr ""
-
 #: src/ui_viewDialog.h:2096
 msgid "Use more accurate 3D models (where available)"
-msgstr ""
-
-#: src/ui_viewDialog.h:2098
-msgid ""
-"<html><head/><body><p>Use a &quot;shadow map&quot; to simulate self-shadows "
-"of non-convex solar system objects.</p><p>May reduce shadow penumbra quality "
-"on some objects.</p></body></html>"
 msgstr ""
 
 #: src/ui_viewDialog.h:2100
@@ -7843,7 +7841,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
@@ -7860,7 +7858,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
@@ -7880,7 +7878,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
@@ -7899,7 +7897,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:201
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -7918,7 +7916,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
@@ -7931,7 +7929,7 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -11884,7 +11882,7 @@ msgid "Not active."
 msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:410
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:411
 msgid "Remote Control Configuration"
 msgstr ""
 
@@ -11938,12 +11936,8 @@ msgstr ""
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:54
 msgid ""
-"<p>Provides state synchronization for multiple Stellarium instances running "
-"in a network.</p> <p>This can be used, for example, to create multi-screen "
-"setups using multiple physical PCs.</p><p>Partial synchronization allows "
-"parallel setups of e.g. overview and detail views.</p><p>See manual for "
-"detailed description.</p><p>This plugin was developed during ESA SoCiS "
-"2015&amp;2016.</p>"
+"Provides state synchronization for multiple Stellarium instances running in "
+"a network. See manual for detailed description."
 msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:111
@@ -11952,7 +11946,7 @@ msgid "ERROR: %1"
 msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:128
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:416
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:417
 msgid "Start server"
 msgstr ""
 
@@ -11977,12 +11971,12 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
 #, qt-format
-msgid "Connecting to %1:%2..."
+msgid "Connecting to %1: %2..."
 msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
 #, qt-format
-msgid "Retrying connection to %1:%2..."
+msgid "Retrying connection to %1: %2..."
 msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
@@ -11996,7 +11990,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
 #, qt-format
-msgid "Connected to %1:%2"
+msgid "Connected to %1: %2"
 msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
@@ -12009,39 +12003,50 @@ msgid ""
 "Stellarium instances running in a network."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:232
-#, qt-format
-msgid "Server Name %1, IP: "
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
+msgid ""
+"This can be used, for example, to create multi-screen setups using multiple "
+"physical PCs."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:237
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
+msgid ""
+"Partial synchronization allows parallel setups of e.g. overview and detail "
+"views."
+msgstr ""
+
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+msgid "See manual for detailed description."
+msgstr ""
+
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
+msgstr ""
+
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:235
+msgid "Server Name"
+msgstr ""
+
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:243
 msgid "Server not active."
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:411
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:412
 msgid "Remote Sync Plug-in Configuration"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:413
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:414
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:414
-msgid "StatusLabel"
-msgstr ""
-
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:415
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:416
 msgid "Server mode"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:417
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:418
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:423
 msgid "Server port"
-msgstr ""
-
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:418
-msgid "Server Name, IP: "
 msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:419

@@ -52,6 +52,7 @@ protected:
 	virtual void createDialogContent();
 private slots:
 	void populateLists();
+	void populateToolTips();
 	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);
 	void projectionChanged();
