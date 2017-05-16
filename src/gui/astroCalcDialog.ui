@@ -446,6 +446,9 @@
           </item>
           <item row="2" column="0">
            <widget class="QTreeWidget" name="celestialPositionsTreeWidget">
+            <property name="toolTip">
+             <string>List of objects above horizon</string>
+            </property>
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
             </property>
