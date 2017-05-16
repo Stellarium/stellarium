@@ -403,14 +403,14 @@ public slots:
 	//New for 0.15: Vertical offset should even be available for animation, so at last with property mechanism.
 	//! Get current value for horizontal viewport offset [-50...50]
 	//! An offset of 50 percent means projective image center is on the right screen border
-	double getViewportHorizontalOffset(void);
+	double getViewportHorizontalOffset(void) const;
 	//! Set horizontal viewport offset. Argument will be clamped to be inside [-50...50]
 	//! An offset of 50 percent means projective image center is on the right screen border
 	//! Animation is available via StelMovementMgr::moveViewport()
 	void setViewportHorizontalOffset(double newOffsetPct);
 	//! Get current value for vertical viewport offset [-50...50]
 	//! An offset of 50 percent means projective image center is on the upper screen border
-	double getViewportVerticalOffset(void);
+	double getViewportVerticalOffset(void) const;
 	//! Set vertical viewport offset. Argument will be clamped to be inside [-50...50]
 	//! An offset of 50 percent means projective image center is on the upper screen border
 	//! Setting to a negative value will move the visible horizon down, this may be desired esp. in cylindrical projection.
@@ -694,10 +694,11 @@ public slots:
 	void setDe430Active(bool status);   //!< switch DE430 use to @param status (if de430IsAvailable()). DE430 is only used if date is within range of DE430.
 	void setDe431Active(bool status);   //!< switch DE431 use to @param status (if de431IsAvailable()). DE431 is only used if DE430 is not used and the date is within range of DE431.
 
-	//! Return 3-letter abbreviation of IAU constellation name for position in J2000 coordinates.
+	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
 	//! Data file from ADC catalog VI/42 with her amendment from 1999-12-30.
-	QString getIAUConstellation(const Vec3d positionJ2000) const;
+	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
+	QString getIAUConstellation(const Vec3d positionEqJnow) const;
 
 
 signals:

@@ -985,6 +985,11 @@ double getJDFromSystem()
 	return qDateTimeToJd(QDateTime::currentDateTime().toUTC());
 }
 
+double getJDFromBesselianEpoch(const float epoch)
+{
+	return 2400000.5 + (15019.81352 + (epoch - 1900.0) * 365.242198781);
+}
+
 double qTimeToJDFraction(const QTime& time)
 {
 	return (double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time)-0.5;

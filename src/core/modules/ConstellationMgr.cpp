@@ -1438,7 +1438,7 @@ void ConstellationMgr::setSelected(const StelObject *s)
 Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	QString IAUConst = core->getIAUConstellation(s->getJ2000EquatorialPos(core));
+	QString IAUConst = core->getIAUConstellation(s->getEquinoxEquatorialPos(core));
 	vector < Constellation * >::const_iterator iter;
 	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
 	{
