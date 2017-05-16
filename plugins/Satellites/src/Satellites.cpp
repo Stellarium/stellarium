@@ -337,6 +337,19 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	return NULL;
 }
 
+StelObjectP Satellites::searchByID(const QString &id) const
+{
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat->getID() == id)
+		{
+			return qSharedPointerCast<StelObject>(sat);
+		}
+	}
+
+	return NULL;
+}
+
 StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 {
 	if (!hintFader)

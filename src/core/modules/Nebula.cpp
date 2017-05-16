@@ -37,6 +37,8 @@
 #include <QDebug>
 #include <QBuffer>
 
+const QString Nebula::NEBULA_TYPE = QStringLiteral("Nebula");
+
 StelTextureSP Nebula::texCircle;
 StelTextureSP Nebula::texGalaxy;
 StelTextureSP Nebula::texOpenCluster;
@@ -702,7 +704,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
-QString Nebula::getDSODesignation()
+QString Nebula::getDSODesignation() const
 {
 	QString str = "";
 	// Get designation for DSO with priority as given here.

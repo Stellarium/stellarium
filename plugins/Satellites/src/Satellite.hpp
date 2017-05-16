@@ -96,6 +96,8 @@ class Satellite : public StelObject
 
 	Q_ENUMS(OptStatus)
 public:
+	static const QString SATELLITE_TYPE;
+
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
@@ -121,8 +123,14 @@ public:
 
 	virtual QString getType(void) const
 	{
-		return "Satellite";
+		return SATELLITE_TYPE;
 	}
+
+	virtual QString getID(void) const
+	{
+		return id;
+	}
+
 	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object

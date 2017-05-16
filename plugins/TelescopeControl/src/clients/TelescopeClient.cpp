@@ -47,6 +47,7 @@
 	#include <sys/time.h>
 #endif
 
+const QString TelescopeClient::TELESCOPECLIENT_TYPE = QStringLiteral("Telescope");
 
 TelescopeClient *TelescopeClient::create(const QString &url)
 {

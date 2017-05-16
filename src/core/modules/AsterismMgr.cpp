@@ -540,3 +540,18 @@ QStringList AsterismMgr::listAllObjects(bool inEnglish) const
 	}
 	return result;
 }
+
+StelObjectP AsterismMgr::searchByID(const QString &id) const
+{
+	vector <Asterism*>::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		if ((*iter)->getID() == id) return *iter;
+	}
+	return NULL;
+}
+
+QString AsterismMgr::getStelObjectType() const
+{
+	return Asterism::ASTERISM_TYPE;
+}

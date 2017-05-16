@@ -358,6 +358,11 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 	return 0;
 }
 
+QString TelescopeControl::getStelObjectType() const
+{
+	return TelescopeClient::TELESCOPECLIENT_TYPE;
+}
+
 bool TelescopeControl::configureGui(bool show)
 {
 	if(show)

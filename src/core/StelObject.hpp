@@ -133,6 +133,20 @@ public:
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
 
+	//! Returns a unique identifier for this object.
+	//! The ID should be unique for all objects of the same type,
+	//! but may freely conflict with IDs of other types, so getType() must also be tested.
+	//!
+	//! With this it should be possible to at least identify the same object
+	//! in a different instance of Stellarium running the same version, but
+	//! it would even be better if the ID provides some degree of forward-compatibility.
+	//! For some object types (e.g. planets) this may simply return getEnglishName(),
+	//! but better candidates may be official designations or at least (stable) internal IDs.
+	//!
+	//! An object may have multiple IDs (different catalog numbers, etc). StelObjectMgr::searchByID()
+	//! should search through all ID variants, but this method only returns one of them.
+	virtual QString getID() const = 0;
+
 	//! Return object's name in english
 	virtual QString getEnglishName() const = 0;
 

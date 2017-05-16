@@ -88,6 +88,7 @@ public:
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
@@ -97,6 +98,7 @@ public:
 	// empty as its not celestial objects
 	virtual QStringList listAllObjects(bool) const { return QStringList(); }
 	virtual QString getName() const { return "Telescope Control"; }
+	virtual QString getStelObjectType() const;
 	virtual bool configureGui(bool show = true);
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -385,6 +387,7 @@ class TelescopeControlStelPluginInterface : public QObject, public StelPluginInt
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_TELESCOPE_CONTROL_HPP_*/

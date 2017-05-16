@@ -1,5 +1,5 @@
 
-//This file is generated automatically by the stellarium-remotecontrol-update-translationdata target through update_translationdata.py from stellarium-remotecontrol-js.pot
+//This file is generated automatically by the stellarium-remotecontrol-update-translationdata target through update_translationdata.py from stellarium-remotecontrol.jst
 //It contains all strings that can be translated through the StelTranslator in the JavaScript code by calling Main.tr()
 //When this file is requested through the RemoteControl web server, the strings are translated using the current Stellarium app language
 
@@ -24,10 +24,12 @@ define({
 	"waiting" : '<?= tr("waiting")?>',
 	"Could not retrieve projection list" : '<?= tr("Could not retrieve projection list")?>',
 	"Could not retrieve landscape list" : '<?= tr("Could not retrieve landscape list")?>',
+	"-none-" : '<?= tr("-none-")?>',
+	"(Currently loading: %1)" : '<?= tr("(Currently loading: %1)")?>',
+	"Could not retrieve Scenery3d list" : '<?= tr("Could not retrieve Scenery3d list")?>',
 	"on" : '<?= tr("on")?>',
 	"off" : '<?= tr("off")?>',
 	"Show All Items" : '<?= tr("Show All Items")?>',
 	"Input did not match any item" : '<?= tr("Input did not match any item")?>',
-	"No current selection" : '<?= tr("No current selection")?>',
-	"-none-" : '<?= tr("-none-")?>'
+	"No current selection" : '<?= tr("No current selection")?>'
 });

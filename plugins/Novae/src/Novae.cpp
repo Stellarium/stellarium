@@ -502,7 +502,7 @@ bool Novae::checkJsonFileFormat()
 	return true;
 }
 
-NovaP Novae::getByID(const QString& id)
+NovaP Novae::getByID(const QString& id) const
 {
 	foreach(const NovaP& n, nova)
 	{

@@ -11,9 +11,10 @@ define(["jquery", "./remotecontrol"], function($, rc) {
 
     var searchFinished = false;
 
-    function selectObjectByName(str) {
+    function selectObjectByName(str, mode) {
         rc.postCmd("/api/main/focus", {
-            target: str
+            target: str,
+            mode: mode
         }, undefined, function(data) {
             console.log("focus change ok: " + data);
         });
@@ -22,7 +23,9 @@ define(["jquery", "./remotecontrol"], function($, rc) {
     function performSimbadSearch(str, callback) {
         //check if the normal search has finished, otherwise we wait longer
         if (!searchFinished) {
-            console.log("defer Simbad search because normal search is not finished");
+            console.log(
+                "defer Simbad search because normal search is not finished"
+            );
             simbadTimeout = setTimeout(function() {
                 performSimbadSearch(str, callback);
             }, simbadDelay);
@@ -38,7 +41,8 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             },
             success: function(data) {
                 if (data.status === "error") {
-                    changeSimbadState(rc.tr("Error (%1)", data.errorString));
+                    changeSimbadState(rc.tr("Error (%1)",
+                        data.errorString));
                 } else {
                     changeSimbadState(data.status_i18n);
                 }
@@ -47,10 +51,14 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             },
             error: function(xhr, status, errorThrown) {
                 if (status !== "abort") {
-                    console.log("Error performing simbad lookup");
+                    console.log(
+                        "Error performing simbad lookup"
+                    );
                     console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
-                    alert(rc.tr("Error performing Simbad lookup"));
+                    alert(rc.tr(
+                        "Error performing Simbad lookup"
+                    ));
                 }
             }
         });
@@ -82,12 +90,20 @@ define(["jquery", "./remotecontrol"], function($, rc) {
                 url: "/api/objects/listobjecttypes",
                 dataType: "JSON",
                 success: callback,
-                error: function(xhr, status, errorThrown) {
+                error: function(xhr, status,
+                    errorThrown) {
                     if (status !== "abort") {
-                        console.log("Error loading object types");
-                        console.log("Error: " + errorThrown.message);
-                        console.log("Status: " + status);
-                        alert(rc.tr("Error loading object types"));
+                        console.log(
+                            "Error loading object types"
+                        );
+                        console.log("Error: " +
+                            errorThrown.message
+                        );
+                        console.log("Status: " +
+                            status);
+                        alert(rc.tr(
+                            "Error loading object types"
+                        ));
                     }
                 }
             });
@@ -107,12 +123,20 @@ define(["jquery", "./remotecontrol"], function($, rc) {
                     english: (useEnglish ? 1 : 0)
                 },
                 success: callback,
-                error: function(xhr, status, errorThrown) {
+                error: function(xhr, status,
+                    errorThrown) {
                     if (status !== "abort") {
-                        console.log("Error getting object list");
-                        console.log("Error: " + errorThrown.message);
-                        console.log("Status: " + status);
-                        alert(rc.tr("Error getting object list"));
+                        console.log(
+                            "Error getting object list"
+                        );
+                        console.log("Error: " +
+                            errorThrown.message
+                        );
+                        console.log("Status: " +
+                            status);
+                        alert(rc.tr(
+                            "Error getting object list"
+                        ));
                     }
                 }
             });
@@ -145,23 +169,32 @@ define(["jquery", "./remotecontrol"], function($, rc) {
                         resultCallback(data);
                         searchFinished = true;
                     },
-                    error: function(xhr, status, errorThrown) {
+                    error: function(xhr, status,
+                        errorThrown) {
                         if (status !== "abort") {
-                            console.log("Error performing search");
-                            console.log("Error: " + errorThrown.message);
-                            console.log("Status: " + status);
+                            console.log(
+                                "Error performing search"
+                            );
+                            console.log("Error: " +
+                                errorThrown.message
+                            );
+                            console.log("Status: " +
+                                status);
 
                             //cancel a pending simbad search
                             cancelSearch();
 
-                            alert(rc.tr("Error performing search"));
+                            alert(rc.tr(
+                                "Error performing search"
+                            ));
                         }
                     }
                 });
 
                 //queue simbad search
                 simbadTimeout = setTimeout(function() {
-                    performSimbadSearch(str, simbadCallback);
+                    performSimbadSearch(str,
+                        simbadCallback);
                 }, simbadDelay);
 
                 changeSimbadState(rc.tr("waiting"));

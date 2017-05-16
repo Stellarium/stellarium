@@ -160,12 +160,56 @@ bool Location::deserialize(QDataStream &stream, tPayloadSize dataSize)
 
 void Selection::serialize(QDataStream &stream) const
 {
-	stream<<selectedObjectNames;
+	stream<<selectedObjects;
 }
 
 bool Selection::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
 	Q_UNUSED(dataSize);
-	stream>>selectedObjectNames;
+	stream>>selectedObjects;
+	return !stream.status();
+}
+
+void StelPropertyUpdate::serialize(QDataStream &stream) const
+{
+	writeString(stream,propId);
+	stream<<value;
+}
+
+bool StelPropertyUpdate::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	Q_UNUSED(dataSize);
+	propId = readString(stream);
+	stream>>value;
+	return !stream.status();
+}
+
+void View::serialize(QDataStream &stream) const
+{
+	stream<<viewAltAz;
+}
+
+bool View::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	if(dataSize != 3 * sizeof(double))
+		return false;
+
+	stream>>viewAltAz;
+
+	return !stream.status();
+}
+
+void Fov::serialize(QDataStream &stream) const
+{
+	stream<<fov;
+}
+
+bool Fov::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	if(dataSize != sizeof(double))
+		return false;
+
+	stream>>fov;
+
 	return !stream.status();
 }
