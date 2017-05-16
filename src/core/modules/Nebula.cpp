@@ -85,6 +85,7 @@ Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
 bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
+bool Nebula::flagUseArcsecSurfaceBrightness = false;
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -221,18 +222,31 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (vMag < 50 && bMag < 50)
 			oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(bMag-vMag, 'f', 2)) << "<br>";
 	}
-	if (nType != NebDn && vMag < 50 && flags&Extra)
+	float mmag = qMin(vMag,bMag);
+	if (nType != NebDn && mmag < 50 && flags&Extra)
 	{
+		QString sb = q_("Surface brightness");
+		QString ae = q_("after extinction");
+		QString mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
+		if (flagUseArcsecSurfaceBrightness)
+			mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
+
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted surface brightness much below horizon where model is meaningless.
 		{
-			if (getSurfaceBrightness(core)<99 && getSurfaceBrightnessWithExtinction(core)<99)
-				oss << q_("Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
-													     QString::number(getSurfaceBrightnessWithExtinction(core), 'f', 2)) << "<br>";
+			if (getSurfaceBrightness(core)<99)
+			{
+				if (getSurfaceBrightnessWithExtinction(core)<99)
+					oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
+												  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
+				else
+					oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
+
+			}
 		}
 		else
 		{
 			if (getSurfaceBrightness(core)<99)
-				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
+				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
 		}
 	}
 
@@ -429,18 +443,27 @@ double Nebula::getCloseViewFov(const StelCore*) const
 	return majorAxisSize>0 ? majorAxisSize * 4 : 1;
 }
 
-float Nebula::getSurfaceBrightness(const StelCore* core) const
+float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 {
-	if (getVMagnitude(core)<99.f && majorAxisSize>0 && nType!=NebDn)
-		return getVMagnitude(core) + 2.5*log10(getSurfaceArea()*3600.f);
+	float mag = getVMagnitude(core);
+	float sq = 3600.f; // arcmin^2
+	if (arcsec)
+		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
+	if (bMag < 50.f && mag > 50.f)
+		mag = bMag;
+	if (mag<99.f && majorAxisSize>0 && nType!=NebDn)
+		return mag + 2.5*log10(getSurfaceArea()*sq);
 	else
 		return 99.f;
 }
 
-float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
+float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcsec) const
 {
+	float sq = 3600.f; // arcmin^2
+	if (arcsec)
+		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
 	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0 && nType!=NebDn)
-		return getVMagnitudeWithExtinction(core) + 2.5*log10(getSurfaceArea()*3600.f);
+		return getVMagnitudeWithExtinction(core) + 2.5*log10(getSurfaceArea()*sq);
 	else
 		return 99.f;
 }

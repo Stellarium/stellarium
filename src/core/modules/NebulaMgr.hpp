@@ -667,6 +667,11 @@ public slots:
 	//! Get whether hints (symbols) are visible according to surface brightness value.
 	bool getFlagSurfaceBrightnessUsage(void) const { return Nebula::surfaceBrightnessUsage; }
 
+	//! Set flag for usage of measure unit mag/arcsec^2 to surface brightness value.
+	void setFlagSurfaceBrightnessArcsecUsage(const bool usage) { Nebula::flagUseArcsecSurfaceBrightness=usage; }
+	//! Get flag for usage of measure unit mag/arcsec^2 to surface brightness value.
+	bool getFlagSurfaceBrightnessArcsecUsage(void) const { return Nebula::flagUseArcsecSurfaceBrightness; }
+
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.

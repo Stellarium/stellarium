@@ -171,8 +171,8 @@ public:
 	//! @return the nebula morphological type string.
 	QString getMorphologicalTypeString() const;
 
-	float getSurfaceBrightness(const StelCore* core) const;
-	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
+	float getSurfaceBrightness(const StelCore* core, bool arcsec=false) const;
+	float getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcsec=false) const;
 
 	//! Get the surface area.
 	//! @return surface area in square degrees.
@@ -296,6 +296,8 @@ private:
 	static bool flagUseTypeFilters;
 	static CatalogGroup catalogFilters;
 	static TypeGroup typeFilters;
+
+	static bool flagUseArcsecSurfaceBrightness;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)
