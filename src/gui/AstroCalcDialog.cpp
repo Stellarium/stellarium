@@ -517,7 +517,7 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 void AstroCalcDialog::currentCelestialPositions()
 {
 	float ra, dec;
-	QString raStr, decStr, extra, celObjId = "";
+	QString raStr, decStr, extra, celObjName = "", celObjId = "";
 
 	initListCelestialPositions();
 
@@ -536,6 +536,9 @@ void AstroCalcDialog::currentCelestialPositions()
 
 	if (celTypeId<170)
 	{
+		QString mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
+		if (dsoMgr->getFlagSurfaceBrightnessArcsecUsage())
+			mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
 		// Deep-sky objects
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
 		foreach (const NebulaP& obj, celestialObjects)
@@ -563,15 +566,17 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 
-				celObjId = obj->getNameI18n();
-				if (celObjId.isEmpty())
-					celObjId = obj->getDSODesignation();
+				celObjName = obj->getNameI18n();
+				celObjId = obj->getDSODesignation();
+				if (celObjName.isEmpty())
+					celObjName = celObjId;
 
 				extra = QString::number(obj->getSurfaceBrightnessWithExtinction(core), 'f', 2);
 				if (extra.toFloat()>90.f)
 					extra = QChar(0x2014);
 
-				treeItem->setText(CColumnName, celObjId);
+				treeItem->setText(CColumnName, celObjName);
+				treeItem->setToolTip(CColumnName, celObjId);
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 				treeItem->setText(CColumnDec, decStr);
@@ -580,6 +585,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, mu);
 				treeItem->setText(CColumnType, q_(obj->getTypeString()));
 			}
 		}
@@ -639,6 +645,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, obj->getNameI18n());
+				treeItem->setToolTip(CColumnName, "");
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 				treeItem->setText(CColumnDec, decStr);
@@ -647,6 +654,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, "");
 				treeItem->setText(CColumnType, q_(sType));
 			}
 		}
