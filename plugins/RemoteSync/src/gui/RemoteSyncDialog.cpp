@@ -158,12 +158,12 @@ void RemoteSyncDialog::updateState()
 		if(state == RemoteSync::CLIENT_CONNECTING)
 		{
 			ui->clientButton->setText(q_("Cancel connecting"));
-			ui->statusLabel->setText(QString(q_("Connecting to %1:%2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+			ui->statusLabel->setText(QString(q_("Connecting to %1: %2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
 		}
 		else if (state == RemoteSync::CLIENT_WAIT_RECONNECT)
 		{
 			ui->clientButton->setText(q_("Cancel connecting"));
-			ui->statusLabel->setText(QString(q_("Retrying connection to %1:%2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+			ui->statusLabel->setText(QString(q_("Retrying connection to %1: %2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
 		}
 		else if (state == RemoteSync::CLIENT_CLOSING)
 		{
@@ -175,7 +175,7 @@ void RemoteSyncDialog::updateState()
 		else if (state == RemoteSync::CLIENT)
 		{
 			ui->clientButton->setText(q_("Disconnect from server"));
-			ui->statusLabel->setText(QString(q_("Connected to %1:%2")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+			ui->statusLabel->setText(QString(q_("Connected to %1: %2")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
 		}
 	}
 }
@@ -190,7 +190,10 @@ void RemoteSyncDialog::setAboutHtml(void)
 	html += "</table>";
 
 	html += "<p>" + q_("The Remote Control plugin provides state synchronization for multiple Stellarium instances running in a network.") + "</p>";
-	// TODO Add longer instructions?
+	html += "<p>" + q_("This can be used, for example, to create multi-screen setups using multiple physical PCs.") + "</p>";
+	html += "<p>" + q_("Partial synchronization allows parallel setups of e.g. overview and detail views.") + "</p>";
+	html += "<p>" + q_("See manual for detailed description.") + "</p>";
+	html += "<p>" + q_("This plugin was developed during ESA SoCiS 2015&amp;2016.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Remote Sync plugin") + "</p>";
@@ -229,7 +232,10 @@ void RemoteSyncDialog::updateIPlabel(bool running)
 				continue;
 			}
 		}
-		ui->label_serverName->setText(q_("Server Name %1, IP: ").arg(localHostName) + ipString);
+		QString info = QString("%1 %2").arg(q_("Server Name"), localHostName);
+		if (!ipString.isEmpty())
+			info.append(QString("(IP: %1)").arg(ipString));
+		ui->label_serverName->setText(info);
 		//ui->label_RemoteRunningState->show();
 	}
 	else

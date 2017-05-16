@@ -95,6 +95,7 @@ void ViewDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateZhrDescription(GETSTELMODULE(SporadicMeteorMgr)->getZHR());
 		populateLists();
+		populateToolTips();
 		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 
 		//Hack to shrink the tabs to optimal size after language change
@@ -108,6 +109,7 @@ void ViewDialog::styleChanged()
 	if (dialog)
 	{
 		populateLists();
+		populateToolTips();
 	}
 }
 
@@ -143,6 +145,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateLists();
+	populateToolTips();
 
 	// TODOs after properties merge:
 	// New method: populateLightPollution may be useful. Make sure it is.
@@ -1210,6 +1213,12 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 			.arg(nelm.at(i));
 
 	ui->lightPollutionSpinBox->setToolTip(tooltip);
+}
+
+void ViewDialog::populateToolTips()
+{
+	ui->planetUseObjModelsCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Uses a polygonal 3D model for some selected subplanetary objects (small moons, asteroids, comets) instead of a spherical approximation")));
+	ui->planetShowObjSelfShadowsCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar system objects. May reduce shadow penumbra quality on some objects.")));
 }
 
 void ViewDialog::populateLists()

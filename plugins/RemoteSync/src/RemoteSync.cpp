@@ -51,11 +51,7 @@ StelPluginInfo RemoteSyncStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Remote Sync");
 	info.authors = "Florian Schaukowitsch and Georg Zotti";
 	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
-	info.description = N_("<p>Provides state synchronization for multiple Stellarium instances running in a network.</p> "
-			      "<p>This can be used, for example, to create multi-screen setups using multiple physical PCs.</p>"
-			      "<p>Partial synchronization allows parallel setups of e.g. overview and detail views.</p>"
-			      "<p>See manual for detailed description.</p>"
-			      "<p>This plugin was developed during ESA SoCiS 2015&amp;2016.</p>");
+	info.description = N_("Provides state synchronization for multiple Stellarium instances running in a network. See manual for detailed description.");
 	info.version = REMOTESYNC_VERSION;
 	return info;
 }
