@@ -173,6 +173,7 @@ class RemoteControlStelPluginInterface : public QObject, public StelPluginInterf
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*REMOTECONTROL_HPP_*/

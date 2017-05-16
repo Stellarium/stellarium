@@ -59,6 +59,8 @@ public:
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized
 	StelModule* loadPlugin(const QString& moduleID);
 
+	QObjectList loadExtensions(const QString& moduleID);
+
 	//! Unload all plugins
 	void unloadAllPlugins();
 
@@ -100,6 +102,14 @@ public:
 	//! Return the list of all the external module found in the modules directories
 	QList<PluginDescriptor> getPluginsList();
 
+	//! Returns the list of all currently registered extensions.
+	//! If using this method, you probably also want to subscribe to
+	//! the extensionsAdded() signal to handle all possible initialization orders.
+	QObjectList getExtensionList() { return extensions; }
+signals:
+	//! Called whenever new plugin extensions are added
+	void extensionsAdded(QObjectList newExtensions);
+
 private:
 	//! Generate properly sorted calling lists for each action (e,g, draw, update)
 	//! according to modules orders dependencies
@@ -107,6 +117,9 @@ private:
 
 	//! The main module list associating name:pointer
 	QMap<QString, StelModule*> modules;
+
+	//! All currently known extensions
+	QObjectList extensions;
 
 	//! The list of all module in the correct order for each action
 	QMap<StelModule::StelModuleActionName, QList<StelModule*> > callOrders;

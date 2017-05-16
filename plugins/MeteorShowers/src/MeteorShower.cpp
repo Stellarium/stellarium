@@ -30,6 +30,8 @@
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 
+const QString MeteorShower::METEORSHOWER_TYPE = QStringLiteral("MeteorShower");
+
 MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	: m_mgr(mgr)
 	, m_status(INVALID)

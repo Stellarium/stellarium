@@ -38,7 +38,7 @@ template <class T> class QFuture;
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 //! @sa StelTextureSP
-class StelTexture: public QObject, protected QOpenGLFunctions
+class StelTexture: public QObject, public QEnableSharedFromThis<StelTexture>
 {
 	Q_OBJECT
 
@@ -67,8 +67,15 @@ public:
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
-	
 	bool bind(int slot=0);
+
+	//! Releases the currently bound texture without testing if it is currently bound,
+	//! i.e. it simply calls glBindTexture(GL_TEXTURE_2D, 0)
+	inline void release() const { gl->glBindTexture(GL_TEXTURE_2D, 0 ); }
+
+	//! Waits until the texture data is ready for usage (i.e. bind will return true after this).
+	//! Do not use this for potentially network loaded textures.
+	void waitForLoaded();
 
 	//! Return whether the texture can be binded, i.e. it is fully loaded
 	bool canBind() const {return id!=0;}
@@ -83,6 +90,9 @@ public:
 	//! Get the error message which caused the texture loading to fail
 	//! @return the human friendly error message or empty string if no errors occured
 	const QString& getErrorMessage() const {return errorMessage;}
+
+	//! Returns true if a loading error occurred
+	bool hasError() const { return errorOccured; }
 
 	//! Return the full path to the image file.
 	//! If the texture was downloaded from a remote location, this function return the full URL.
@@ -111,7 +121,8 @@ private:
 	//! data and information to create the OpenGL texture.
 	struct GLData
 	{
-		GLData() : data(NULL), width(0), height(0), format(0), type(0) {}
+		GLData() : width(0), height(0), format(0), type(0) {}
+		QString loaderError; //! can contain an error message if data is null
 		QByteArray data;
 		int width;
 		int height;
@@ -125,6 +136,9 @@ private:
 
 	//! Private constructor
 	StelTexture(StelTextureMgr* mgr);
+
+	//! Wrap an existing GL texture with this object
+	void wrapGLTexture(GLuint texId);
 
 	//! Convert a QImage into opengl compatible format.
 	static QByteArray convertToGLFormat(const QImage& image, GLint* format, GLint* type);
@@ -140,9 +154,17 @@ private:
 	//! Same as glLoad(QImage), but with an image already in OpenGl format
 	bool glLoad(const GLData& data);
 
+	//! Starts the loading process if it has not already started.
+	//! Returns true if the data was loaded, false if not yet ready.
+	bool load();
+
+	template <typename T, typename Param1, typename Arg1>
+	void startAsyncLoader(T (*functionPointer)(Param1), const Arg1 &arg1);
+
 	//! The parent texture manager
 	StelTextureMgr* textureMgr;
 
+	QOpenGLFunctions* gl;
 	StelTextureParams loadParams;
 
 	//! Used to handle the connection for remote textures.
@@ -151,9 +173,8 @@ private:
 	//! The loader object
 	QFuture<GLData>* loader;
 
-
 	//! The URL where to download the file
-	QString fullPath;	
+	QString fullPath;
 
 	//! True when something when wrong in the loading process
 	bool errorOccured;
@@ -166,9 +187,6 @@ private:
 
 	//! OpenGL id
 	GLuint id;
-
-	//! Cached average luminance
-	float avgLuminance;
 
 	GLsizei width;	//! Texture image width
 	GLsizei height;	//! Texture image height

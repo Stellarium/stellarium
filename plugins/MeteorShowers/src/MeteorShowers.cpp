@@ -197,6 +197,16 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 	return NULL;
 }
 
+StelObjectP MeteorShowers::searchByID(const QString &id) const
+{
+	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	{
+		if (ms->getID() == id)
+			return qSharedPointerCast<StelObject>(ms);
+	}
+	return NULL;
+}
+
 StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!m_mgr->getEnablePlugin())

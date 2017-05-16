@@ -115,6 +115,12 @@ SET(stellarium_lib_SRCS
      core/StelProgressController.hpp
      core/StelPropertyMgr.hpp
      core/StelPropertyMgr.cpp
+     core/StelOBJ.hpp
+     core/StelOBJ.cpp
+     core/GeomMath.hpp
+     core/GeomMath.cpp
+     core/StelOpenGLArray.hpp
+     core/StelOpenGLArray.cpp
 
      ${spout_SRCS}
 

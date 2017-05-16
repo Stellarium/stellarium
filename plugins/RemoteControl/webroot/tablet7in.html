@@ -84,7 +84,7 @@
               </ul>
             </div>
           </section>
-          
+
           <!-- part of ui/viewcontrol.js -->
           <section id="view" class="block textcenter">
             <header><h2><?= tr("View")?></h2></header>
@@ -165,7 +165,7 @@
                 <td><button type="button" class="stelssc" value="StelMovementMgr.zoomTo(230,4)">230&deg;</button></td>
                </tr>
               </table>
-              </div> 
+              </div>
               <p><?= tr("Projection")?>: <span class="stelproperty" data-prop="StelCore.currentProjectionNameI18n"></span></p>
             </div>
           </section>
@@ -251,6 +251,7 @@
                 </div>
               </div>
             </div>
+            <p><label class="bold"><?= tr("Selection mode")?><select id="select_SelectionMode" class="selectmenu inline-block valign-middle"><option value="center"><?= tr("Center on object")?></option><option value="zoom"><?= tr("Center and zoom to object")?></option><option value="mark"><?= tr("Just mark the object")?></option></select></label></p>
             <div id="quickselect">
               <h2><?= tr("Quick select")?></h2>
               <ul class="ui-corner-all ui-widget-content buttonlist">
@@ -281,13 +282,11 @@
                 <li><button title='<?= tr("Aquarius")?>' value="Aquarius">Aqr</button></li>
                 <li><button title='<?= tr("Pisces")?>' value="Pisces">Psc</button></li>
               </ul>
-              <!-- an empty value will deselect -->
-              <button class="jquerybutton" value=""><?= tr("Clear selection")?></button>
             </div>
           </section>
           <!-- part of ui/mainui.js -->
           <section id="selection" class="block flex-expand">
-            <header><h2><?= tr("Current selection")?></h2></header>
+            <header><h2><?= tr("Current selection")?></h2><button id="select_clearButton" class="jquerybutton" style="margin-left: 10px;" value=""><?= tr("Clear selection")?></button></header>
             <span id="sel_infostring"></span>
           </section>
         </div>
@@ -415,7 +414,7 @@
               </div>
             </div>
           </div>
-          <div id="vo_archaeolines" class="smallblock flex stelplugin" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines">
+          <div id="vo_archaeolines" class="smallblock flex stelplugin" data-plugin="ArchaeoLines">
             <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_ArchaeoLines"/><?= tr("ArchaeoLines")?></label></h3>
             <div class="inline-block blocklabel">
               <label><input type="checkbox" class="stelaction" name="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
@@ -637,8 +636,8 @@
         	<section class="block flex flex-column">
         	 <header><h2><?= tr("Favorites")?></h2></header>
              <div>
-                 <button type="button" class="stelaction"  title='<?= tr("Show 1")?>'  name="actionScript/show_1.ssc">Show 1</button> 
-                 <button type="button" class="stelaction"  title='<?= tr("Remove Labels and Images")?>'  name="actionScript/cleanupLabelsAndInserts.ssc"><?= tr("Cleanup Screen")?></button> 
+                 <button type="button" class="stelaction"  title='<?= tr("Show 1")?>'  name="actionScript/show_1.ssc">Show 1</button>
+                 <button type="button" class="stelaction"  title='<?= tr("Remove Labels and Images")?>'  name="actionScript/cleanupLabelsAndInserts.ssc"><?= tr("Cleanup Screen")?></button>
             </div>
            </section>
         </div-->
@@ -684,20 +683,20 @@
     </div>
     <!-- main buttons under the tabs -->
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">
-      <li><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
-      <li><button class="stelaction icon32 btConstellationLabels" name="actionShow_Constellation_Labels"></button></li>
-      <li><button class="stelaction icon32 btConstellationArt" name="actionShow_Constellation_Art"></button></li>
-      <li><button class="stelaction icon32 btEquatorialGrid" name="actionShow_Equatorial_Grid"></button></li>
-      <li><button class="stelaction icon32 btAzimuthalGrid" name="actionShow_Azimuthal_Grid"></button></li>
-      <li><button class="stelaction icon32 btGround" name="actionShow_Ground"></button></li>
-      <li><button class="stelaction icon32 btCardinalPoints" name="actionShow_Cardinal_Points"></button></li>
-      <li><button class="stelaction icon32 btAtmosphere" name="actionShow_Atmosphere"></button></li>
-      <li><button class="stelaction icon32 btNebula" name="actionShow_Nebulas"></button></li>
-      <li><button class="stelaction icon32 btPlanets" name="actionShow_Planets_Labels"></button></li>
-      <li><button class="stelaction icon32 btEquatorialMount" name="actionSwitch_Equatorial_Mount"></button></li>
-      <li><button class="stelaction icon32 btGotoSelectedObject" name="actionSet_Tracking"></button></li>
-      <li><button class="stelaction icon32 btNightView" name="actionShow_Night_Mode"></button></li>
-      <li><button class="stelaction icon32 btFullScreen" name="actionSet_Full_Screen_Global"></button></li>
+      <li title="<?= tr("Constellation lines")?>"><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
+      <li title="<?= tr("Constellation labels")?>"><button class="stelaction icon32 btConstellationLabels" name="actionShow_Constellation_Labels"></button></li>
+      <li title="<?= tr("Constellation art")?>"><button class="stelaction icon32 btConstellationArt" name="actionShow_Constellation_Art"></button></li>
+      <li title="<?= tr("Equatorial grid")?>"><button class="stelaction icon32 btEquatorialGrid" name="actionShow_Equatorial_Grid"></button></li>
+      <li title="<?= tr("Azimuthal grid")?>"><button class="stelaction icon32 btAzimuthalGrid" name="actionShow_Azimuthal_Grid"></button></li>
+      <li title="<?= tr("Ground")?>"><button class="stelaction icon32 btGround" name="actionShow_Ground"></button></li>
+      <li title="<?= tr("Cardinal points")?>"><button class="stelaction icon32 btCardinalPoints" name="actionShow_Cardinal_Points"></button></li>
+      <li title="<?= tr("Atmosphere")?>"><button class="stelaction icon32 btAtmosphere" name="actionShow_Atmosphere"></button></li>
+      <li title="<?= tr("Deep-sky objects")?>"><button class="stelaction icon32 btNebula" name="actionShow_Nebulas"></button></li>
+      <li title="<?= tr("Planet labels")?>"><button class="stelaction icon32 btPlanets" name="actionShow_Planets_Labels"></button></li>
+      <li title="<?= tr("Switch between equatorial and azimuthal mount")?>"><button class="stelaction icon32 btEquatorialMount" name="actionSwitch_Equatorial_Mount"></button></li>
+      <li title="<?= tr("Center on selected object")?>"><button class="stelaction icon32 btGotoSelectedObject" name="actionSet_Tracking"></button></li>
+      <li title="<?= tr("Night mode")?>"><button class="stelaction icon32 btNightView" name="actionShow_Night_Mode"></button></li>
+      <li title="<?= tr("Full-screen mode")?>"><button class="stelaction icon32 btFullScreen" name="actionSet_Full_Screen_Global"></button></li>
     </ul>
   </div>
   <!-- handled by mainui.js -->

@@ -40,12 +40,15 @@ class Comet : public Planet
 public:
 	friend class SolarSystem;               // Solar System initializes static constants.
 	Comet(const QString& englishName,
-	      int flagLighting,
 	      double radius,
 	      double oblateness,
 	      Vec3f halocolor,
 	      float albedo,
+	      float roughness,
+	      float outgas_intensity,
+	      float outgas_falloff,
 	      const QString& texMapName,
+	      const QString& objModelName,
 	      posFuncType _coordFunc,
 	      void* userDataPtr,
 	      OsculatingFunctType *osculatingFunc,
@@ -94,7 +97,7 @@ public:
 	//! for comets. They are used to calculate the apparent magnitude at
 	//! different distances from the Sun. They are not used in the same way
 	//! as the same parameters in MinorPlanet.
-	void setAbsoluteMagnitudeAndSlope(const double magnitude, const double slope);
+	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! set value for semi-major axis in AU
 	void setSemiMajorAxis(const double value);
@@ -131,8 +134,7 @@ private:
 	//! @param xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 	void computeParabola(const float parameter, const float topradius, const float zshift, QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
 
-	double absoluteMagnitude;
-	double slopeParameter;
+	float slopeParameter;
 	double semiMajorAxis;
 	bool isCometFragment;
 	bool nameIsProvisionalDesignation;
@@ -150,6 +152,11 @@ private:
 	float dustTailBrightnessFactor; //!< empirical individual brightness of dust tail relative to gas tail. Taken from ssystem.ini, default 1.5
 	QVector<double> comaVertexArr;
 	QVector<float> comaTexCoordArr; //  --> 2014-08: could also be declared static, but it is filled by StelPainter...
+
+	float intensityFovScale; // like for constellations: reduce brightness when zooming in.
+	float intensityMinFov;
+	float intensityMaxFov;
+
 
 	// These are to avoid having index arrays for each comet when all are equal.
 	static bool createTailIndices;

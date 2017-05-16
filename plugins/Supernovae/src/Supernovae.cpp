@@ -483,7 +483,7 @@ float Supernovae::getLowerLimitBrightness()
 	return lowerLimit;
 }
 
-SupernovaP Supernovae::getByID(const QString& id)
+SupernovaP Supernovae::getByID(const QString& id) const
 {
 	foreach(const SupernovaP& sn, snstar)
 	{

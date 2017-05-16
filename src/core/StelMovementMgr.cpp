@@ -1190,7 +1190,7 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	moveDuration /= movementsSpeedFactor;
 
 	zoomingMode = zooming;
-	move.aim=Vec3d(0);
+	move.aim=Vec3d(0.);
 	move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.)); // the new up vector. We try simply vertical axis here. (Should be same as pre-0.15)
 	move.aimUp.normalize();
 	move.start=viewDirectionJ2000;
@@ -1253,7 +1253,7 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 			return core->j2000ToSupergalactic(v);
 	}
 	Q_ASSERT(0);
-	return Vec3d(0);
+	return Vec3d(0.);
 }
 
 Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
@@ -1270,7 +1270,7 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 			return core->supergalacticToJ2000(v);
 	}
 	Q_ASSERT(0);
-	return Vec3d(0);
+	return Vec3d(0.);
 }
 
 void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
@@ -1497,8 +1497,8 @@ void StelMovementMgr::setMaxFov(double max)
 void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float duration)
 {
 	//clamp to valid range
-	offsetX = qMax(-50.f, qMin(50.f, offsetX));
-	offsetY = qMax(-50.f, qMin(50.f, offsetY));
+	offsetX = qBound(-50.f, offsetX, 50.f);
+	offsetY = qBound(-50.f, offsetY, 50.f);
 
 	Vec2f oldTargetViewportOffset = targetViewportOffset;
 	targetViewportOffset.set(offsetX, offsetY);

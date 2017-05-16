@@ -40,8 +40,8 @@ ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 # Write version of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
-# currently Qt 5.4 - 5.6 is recommended, we can still build with Qt 5.3, and 5.7 may have some bugs
-SET(MINIMAL_QT_VERSION "5.3.0")
+# currently Qt 5.4 - 5.6 is recommended, we can no longer build with Qt 5.3, and 5.7 may have some bugs (Mac?) 5.8 on Windows seems OK.
+SET(MINIMAL_QT_VERSION "5.4.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
@@ -313,7 +313,7 @@ ADD_PLUGIN(Quasars 1)
 IF(ENABLE_SCRIPTING)
      ADD_PLUGIN(RemoteControl 1)
 ENDIF()
-ADD_PLUGIN(RemoteSync 0)
+ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
@@ -798,6 +798,7 @@ INCLUDE_DIRECTORIES(
 
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data )
+ADD_SUBDIRECTORY( models )
 ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc )

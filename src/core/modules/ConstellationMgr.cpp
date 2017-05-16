@@ -1359,6 +1359,16 @@ StelObjectP ConstellationMgr::searchByName(const QString& name) const
 	return NULL;
 }
 
+StelObjectP ConstellationMgr::searchByID(const QString &id) const
+{
+	vector <Constellation*>::const_iterator iter;
+	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	{
+		if ((*iter)->getID() == id) return *iter;
+	}
+	return NULL;
+}
+
 QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
@@ -1405,6 +1415,11 @@ QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 		}
 	}
 	return result;
+}
+
+QString ConstellationMgr::getStelObjectType() const
+{
+	return Constellation::CONSTELLATION_TYPE;
 }
 
 void ConstellationMgr::setSelected(const StelObject *s)

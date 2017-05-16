@@ -95,6 +95,9 @@ private:
 	StelTextureSP tex;
 	Vec3f color; // global color
 	double intensity;
+	float intensityFovScale; // like for constellations: reduce brightness when zooming in.
+	float intensityMinFov;
+	float intensityMaxFov;
 	class LinearFader* fader;
 
 	struct StelVertexArray* vertexArray;

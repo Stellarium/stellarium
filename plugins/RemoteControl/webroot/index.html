@@ -36,6 +36,7 @@
         <li><a href="#tab_actions"><?= tr("Actions and scripts")?></a></li>
         <li><a href="#tab_location"><?= tr("Location")?></a></li>
         <li><a href="#tab_projection"><?= tr("Projection")?></a></li>
+        <li class="stelplugin" data-plugin="Scenery3d"><a href="#tab_scenery3d"><?= tr("Scenery3d")?></a></li>
       </ul>
       <div id="tab_main">
         <div class="flex">
@@ -114,8 +115,8 @@
           <!-- part of ui/viecontrol.js -->
           <section id="view" class="block textcenter">
             <header><h2><?= tr("View")?></h2></header>
-            <div id="view_controls" class="ui-corner-all ui-widget-content">
-              <div id="view_upleft" class="joybutton"><?= tr("Up/Left")?></div><div id="view_up" class="joybutton"><?= tr("Up")?></div><div id="view_upright" class="joybutton"><?= tr("Up/Right")?></div><div id="view_left" class="joybutton"><?= tr("Left")?></div><div id="view_center" class="joybutton" title='<?= tr("Focus on selected object")?>'><?= tr("Focus on selection")?></div><div id="view_right" class="joybutton"><?= tr("Right")?></div><div id="view_downleft" class="joybutton"><?= tr("Down/Left")?></div><div id="view_down" class="joybutton"><?= tr("Down")?></div><div id="view_downright" class="joybutton"><?= tr("Down/Right")?></div>
+            <div class="joystickcontainer inline-block">
+                <div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
             </div>
             <div id="view_wrapper">
               <div id="view_fov"></div>
@@ -164,6 +165,7 @@
                 </div>
               </div>
             </div>
+            <p><label class="bold"><?= tr("Selection mode")?><select id="select_SelectionMode" class="selectmenu inline-block valign-middle"><option value="center"><?= tr("Center on object")?></option><option value="zoom"><?= tr("Center and zoom to object")?></option><option value="mark"><?= tr("Just mark the object")?></option></select></label></p>
             <div id="quickselect">
               <h2><?= tr("Quick select")?></h2>
               <ul class="ui-corner-all ui-widget-content button32list">
@@ -171,13 +173,11 @@
                 <!-- try not to add whitespace between li items (inline-block layout uglyness) -->
                 <li><button title='<?= tr("Sun")?>' value="Sun">&#x2609;</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">&#x263F;</button></li><li><button title='<?= tr("Venus")?>' value="Venus">&#x2640;</button></li><li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li><li><button title='<?= tr("Moon")?>' value="Moon">&#x263D;</button></li><li><button title='<?= tr("Mars")?>' value="Mars">&#x2642;</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">&#x2643;</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">&#x2644;</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">&#x2645;</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">&#x2646;</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">&#x2647;</button></li>
               </ul>
-              <!-- an empty value will deselect -->
-              <button class="jquerybutton" value=""><?= tr("Clear selection")?></button>
             </div>
           </section>
           <!-- part of ui/mainui.js -->
           <section id="selection" class="block flex-expand">
-            <header><h2><?= tr("Current selection")?></h2></header>
+            <header><h2><?= tr("Current selection")?></h2><button id="select_clearButton" class="jquerybutton" style="margin-left: 10px;" value=""><?= tr("Clear selection")?></button></header>
             <span id="sel_infostring"></span>
           </section>
         </div>
@@ -287,10 +287,10 @@
                 <label><input type="checkbox" class="stelaction" name="actionShow_Circumpolar_Circles" /><?= tr("Circumpolar circles")?></label>
                 <label title='<?= tr("Instantaneous circles of earth´s axis on its motion around ecliptical poles. Displayed on Earth only.")?>'>
 				       <input type="checkbox" class="stelaction" name="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
-              </div>			  
+              </div>
             </div>
-			
-			<div id="vo_archaeolines" class="smallblock flex stelplugin" data-plugin="ArchaeoLines" data-pluginjs="plugins/archaeolines">
+
+			<div id="vo_archaeolines" class="smallblock flex stelplugin" data-plugin="ArchaeoLines">
               <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_ArchaeoLines"/><?= tr("ArchaeoLines")?></label></h3>
               <div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" name="actionAL_showEquinoxLine"/><?= tr("Equinox")?></label>
@@ -330,7 +330,7 @@
               <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass Marks")?></label>
             </div>
 
-			
+
           </div>
         </div>
       </div>
@@ -547,22 +547,60 @@
           <iframe id="vo_projectioninfo" class="flex-expand" src="/api/view/projectiondescription"></iframe>
         </div>
       </div>
+      <div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
+          <div class="flex">
+              <div class="smallblock">
+                  <h3><?= tr("Interaction")?></h3>
+                  <p class="margin-none"><?= tr("Current scene:")?></p>
+                  <p id="s3d_curscene" class="bold margin-none"><?= tr("-none-")?></p>
+                  <div class="innerblock inline-block">
+                      <h3><?= tr("View controls")?></h3>
+                      <div class="joystickcontainer">
+                          <div class="joystick" data-joyurl="/api/main/move" data-joymax="5"></div>
+                      </div>
+                  </div>
+                  <div class="innerblock inline-block">
+                      <h3><?= tr("Movement controls")?></h3>
+                      <div class="joystickcontainer">
+                          <div class="joystick" data-joyurl="/api/scenery3d/move" data-joymax="50"></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="smallblock flex-expand">
+                  <h3><?= tr("Options")?></h3>
+                  <div class="inline-block blocklabel">
+                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableScene" /><?= tr("Toggle 3D landscape")?></label>
+                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableLocationInfo" /><?= tr("Toggle location text")?></label>
+                      <label><input type="checkbox" class="stelproperty" name="Scenery3d.enableShadows"/><?= tr("Toggle shadows")?></label>
+                  </div>
+              </div>
+          </div>
+          <div class="smallblock flex landscapeblock">
+            <h3><?= tr("Scene selection")?></h3>
+            <div class="flex flex-column">
+            <select id="s3d_list" class="scrollselect flex-expand" size="5">
+            </select>
+            <button id="s3d_load" class="jquerybutton"><?= tr("Load selected scene")?></button>
+            </div>
+            <iframe id="s3d_info" class="flex-expand">No scene selected</iframe>
+          </div>
+      </div>
     </div>
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">
-      <li><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
-      <li><button class="stelaction icon32 btConstellationLabels" name="actionShow_Constellation_Labels"></button></li>
-      <li><button class="stelaction icon32 btConstellationArt" name="actionShow_Constellation_Art"></button></li>
-      <li><button class="stelaction icon32 btEquatorialGrid" name="actionShow_Equatorial_Grid"></button></li>
-      <li><button class="stelaction icon32 btAzimuthalGrid" name="actionShow_Azimuthal_Grid"></button></li>
-      <li><button class="stelaction icon32 btGround" name="actionShow_Ground"></button></li>
-      <li><button class="stelaction icon32 btCardinalPoints" name="actionShow_Cardinal_Points"></button></li>
-      <li><button class="stelaction icon32 btAtmosphere" name="actionShow_Atmosphere"></button></li>
-      <li><button class="stelaction icon32 btNebula" name="actionShow_Nebulas"></button></li>
-      <li><button class="stelaction icon32 btPlanets" name="actionShow_Planets_Labels"></button></li>
-      <li><button class="stelaction icon32 btEquatorialMount" name="actionSwitch_Equatorial_Mount"></button></li>
-      <li><button class="stelaction icon32 btGotoSelectedObject" name="actionSet_Tracking"></button></li>
-      <li><button class="stelaction icon32 btNightView" name="actionShow_Night_Mode"></button></li>
-      <li><button class="stelaction icon32 btFullScreen" name="actionSet_Full_Screen_Global"></button></li>
+      <li title="<?= tr("Constellation lines")?>"><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
+      <li title="<?= tr("Constellation labels")?>"><button class="stelaction icon32 btConstellationLabels" name="actionShow_Constellation_Labels"></button></li>
+      <li title="<?= tr("Constellation art")?>"><button class="stelaction icon32 btConstellationArt" name="actionShow_Constellation_Art"></button></li>
+      <li title="<?= tr("Equatorial grid")?>"><button class="stelaction icon32 btEquatorialGrid" name="actionShow_Equatorial_Grid"></button></li>
+      <li title="<?= tr("Azimuthal grid")?>"><button class="stelaction icon32 btAzimuthalGrid" name="actionShow_Azimuthal_Grid"></button></li>
+      <li title="<?= tr("Ground")?>"><button class="stelaction icon32 btGround" name="actionShow_Ground"></button></li>
+      <li title="<?= tr("Cardinal points")?>"><button class="stelaction icon32 btCardinalPoints" name="actionShow_Cardinal_Points"></button></li>
+      <li title="<?= tr("Atmosphere")?>"><button class="stelaction icon32 btAtmosphere" name="actionShow_Atmosphere"></button></li>
+      <li title="<?= tr("Deep-sky objects")?>"><button class="stelaction icon32 btNebula" name="actionShow_Nebulas"></button></li>
+      <li title="<?= tr("Planet labels")?>"><button class="stelaction icon32 btPlanets" name="actionShow_Planets_Labels"></button></li>
+      <li title="<?= tr("Switch between equatorial and azimuthal mount")?>"><button class="stelaction icon32 btEquatorialMount" name="actionSwitch_Equatorial_Mount"></button></li>
+      <li title="<?= tr("Center on selected object")?>"><button class="stelaction icon32 btGotoSelectedObject" name="actionSet_Tracking"></button></li>
+      <li title="<?= tr("Night mode")?>"><button class="stelaction icon32 btNightView" name="actionShow_Night_Mode"></button></li>
+      <li title="<?= tr("Full-screen mode")?>"><button class="stelaction icon32 btFullScreen" name="actionSet_Full_Screen_Global"></button></li>
     </ul>
   </div>
   <!-- handled by mainui.js -->

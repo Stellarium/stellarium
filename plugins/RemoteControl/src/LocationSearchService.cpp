@@ -29,8 +29,8 @@
 #include <QJsonObject>
 #include <QRegExp>
 
-LocationSearchService::LocationSearchService(const QByteArray &serviceName, QObject *parent)
-	: AbstractAPIService(serviceName,parent), locMgr(LocationList())
+LocationSearchService::LocationSearchService(QObject *parent)
+	: AbstractAPIService(parent), locMgr(LocationList())
 {
 	//this is run in the main thread
 	connect(&StelApp::getInstance().getLocationMgr(), SIGNAL(locationListChanged()), this, SLOT(mainLocationManagerUpdated()));
@@ -46,7 +46,7 @@ void LocationSearchService::mainLocationManagerUpdated()
 	locMgrMutex.unlock();
 }
 
-void LocationSearchService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void LocationSearchService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if(operation=="search")
 	{

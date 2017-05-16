@@ -75,8 +75,6 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagTranslatedNames
 		   WRITE setFlagTranslatedNames
 		   NOTIFY flagTranslatedNamesChanged)
-
-	//StelProperties
 	Q_PROPERTY(bool planetsDisplayed
 		   READ getFlagPlanets
 		   WRITE setFlagPlanets
@@ -97,6 +95,16 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagLightTravelTime
 		   NOTIFY flagLightTravelTimeChanged
 		   )
+	Q_PROPERTY(bool flagUseObjModels
+		   READ getFlagUseObjModels
+		   WRITE setFlagUseObjModels
+		   NOTIFY flagUseObjModelsChanged
+		   )
+	Q_PROPERTY(bool flagShowObjSelfShadows
+		   READ getFlagShowObjSelfShadows
+		   WRITE setFlagShowObjSelfShadows
+		   NOTIFY flagShowObjSelfShadowsChanged
+		   )
 	Q_PROPERTY(bool flagMoonScale
 		   READ getFlagMoonScale
 		   WRITE setFlagMoonScale
@@ -106,6 +114,16 @@ class SolarSystem : public StelObjectModule
 		   READ getMoonScale
 		   WRITE setMoonScale
 		   NOTIFY moonScaleChanged
+		   )
+	Q_PROPERTY(bool flagMinorBodyScale
+		   READ getFlagMinorBodyScale
+		   WRITE setFlagMinorBodyScale
+		   NOTIFY flagMinorBodyScaleChanged
+		   )
+	Q_PROPERTY(double minorBodyScale
+		   READ getMinorBodyScale
+		   WRITE setMinorBodyScale
+		   NOTIFY minorBodyScaleChanged
 		   )
 	Q_PROPERTY(double labelsAmount
 		   READ getLabelsAmount
@@ -298,9 +316,15 @@ public:
 	//! @return a StelObjectP for the object if found, else NULL.
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	virtual StelObjectP searchByID(const QString &id) const
+	{
+		return searchByName(id);
+	}
+
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Solar System"; }
+	virtual QString getStelObjectType() const { return Planet::PLANET_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -349,6 +373,16 @@ public slots:
 	//! Get the current value of the flag which determines if light travel time
 	//! calculation is used or not.
 	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}
+
+	//! Set flag whether to use OBJ models for rendering, where available
+	void setFlagUseObjModels(bool b) { if(b!=flagUseObjModels) { flagUseObjModels = b; emit flagUseObjModelsChanged(b); } }
+	//! Get the current value of the flag which determines wether to use OBJ models for rendering, where available
+	bool getFlagUseObjModels(void) const { return flagUseObjModels; }
+
+	//! Set flag whether OBJ models should render self-shadowing (using a shadow map)
+	void setFlagShowObjSelfShadows(bool b);
+	//! Get the current value of the flag which determines whether OBJ models should render self-shadowing (using a shadow map)
+	bool getFlagShowObjSelfShadows(void) const { return flagShowObjSelfShadows; }
 
 	//! Set planet names font size.
 	//! @return font size
@@ -606,6 +640,16 @@ public slots:
 	//! Get the display scaling factor for Earth's moon.
 	double getMoonScale(void) const {return moonScale;}
 
+	//! Set flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
+	void setFlagMinorBodyScale(bool b);
+	//! Get the current value of the flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
+	bool getFlagMinorBodyScale(void) const {return flagMinorBodyScale;}
+
+	//! Set the display scaling factor for minor bodies.
+	void setMinorBodyScale(double f);
+	//! Get the display scaling factor for minor bodies.
+	double getMinorBodyScale(void) const {return minorBodyScale;}
+
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
@@ -725,8 +769,12 @@ signals:
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void flagLightTravelTimeChanged(bool b);
+	void flagUseObjModelsChanged(bool b);
+	void flagShowObjSelfShadowsChanged(bool b);
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
+	void flagMinorBodyScaleChanged(bool b);
+	void minorBodyScaleChanged(double f);
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
 	void ephemerisDatesChanged(bool b);
@@ -808,6 +856,9 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! Called following StelMainView::reloadShadersRequested
+	void reloadShaders();
+
 	void setFlagEphemerisMarkers(bool b);
 	bool getFlagEphemerisMarkers() const;
 
@@ -859,9 +910,12 @@ private:
 	//! The currently selected planet.
 	PlanetP selected;
 
-	// Moon scale value
+	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
+	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
 	bool flagMoonScale;
 	double moonScale;
+	bool flagMinorBodyScale;
+	double minorBodyScale;
 
 	QFont planetNameFont;
 
@@ -874,6 +928,8 @@ private:
 	// Master settings
 	bool flagOrbits;
 	bool flagLightTravelTime;
+	bool flagUseObjModels;
+	bool flagShowObjSelfShadows;
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;

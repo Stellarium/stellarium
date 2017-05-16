@@ -51,6 +51,7 @@ class Constellation : public StelObject
 {
 	friend class ConstellationMgr;
 private:
+	static const QString CONSTELLATION_TYPE;
 	Constellation();
 	~Constellation();
 
@@ -65,7 +66,8 @@ private:
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
-	virtual QString getType() const {return "Constellation";}
+	virtual QString getType() const {return CONSTELLATION_TYPE;}
+	virtual QString getID() const { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZname;}

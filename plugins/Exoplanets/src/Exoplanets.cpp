@@ -321,6 +321,16 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 	return NULL;
 }
 
+StelObjectP Exoplanets::searchByID(const QString &id) const
+{
+	foreach(const ExoplanetP& eps, ep)
+	{
+		if(eps->getID() == id)
+			return qSharedPointerCast<StelObject>(eps);
+	}
+	return NULL;
+}
+
 StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!flagShowExoplanets)

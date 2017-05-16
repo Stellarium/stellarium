@@ -42,6 +42,8 @@ class Supernova : public StelObject
 {
 	friend class Supernovae;
 public:
+	static const QString SUPERNOVA_TYPE;
+
 	//! @param id The official designation for a supernova, e.g. "SN 1054A"
 	Supernova(const QVariantMap& map);
 	~Supernova();
@@ -59,7 +61,12 @@ public:
 
 	virtual QString getType(void) const
 	{
-		return "Supernova";
+		return SUPERNOVA_TYPE;
+	}
+
+	virtual QString getID(void) const
+	{
+		return designation;
 	}
 
 	//! Get an HTML string to describe the object

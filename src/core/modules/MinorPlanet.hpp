@@ -39,12 +39,13 @@ class MinorPlanet : public Planet
 {
 public:
 	MinorPlanet(const QString& englishName,
-		    int flagLighting,
 		    double radius,
 		    double oblateness,
 		    Vec3f halocolor,
 		    float albedo,
+		    float roughness,
 		    const QString& texMapName,
+		    const QString& objModelName,
 		    posFuncType _coordFunc,
 		    void* userDataPtr,
 		    OsculatingFunctType *osculatingFunc,
@@ -98,7 +99,7 @@ public:
 	//! These are the parameters in the IAU's two-parameter magnitude system
 	//! for minor planets. They are used to calculate the apparent magnitude at
 	//! different phase angles.
-	void setAbsoluteMagnitudeAndSlope(double magnitude, double slope);
+	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! renders the subscript in a minor planet provisional designation with HTML.
 	//! \returns an emtpy string if the source string is not a provisional
@@ -113,7 +114,6 @@ public:
 
 private:
 	int minorPlanetNumber;
-	float absoluteMagnitude;
 	float  slopeParameter;
 	double semiMajorAxis;
 

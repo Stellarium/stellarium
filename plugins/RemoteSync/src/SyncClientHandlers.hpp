@@ -22,6 +22,8 @@
 
 #include "SyncProtocol.hpp"
 
+#include <QRegularExpression>
+
 class SyncClient;
 class StelCore;
 
@@ -43,7 +45,7 @@ class ClientErrorHandler : public ClientHandler
 	Q_OBJECT
 public:
 	ClientErrorHandler(SyncClient* client);
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 };
 
 //! Reacts to Server challenge and challenge OK on the client
@@ -52,7 +54,7 @@ class ClientAuthHandler : public ClientHandler
 	Q_OBJECT
 public:
 	ClientAuthHandler(SyncClient* client);
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 signals:
 	void authenticated();
 };
@@ -60,30 +62,59 @@ signals:
 class ClientAliveHandler : public SyncMessageHandler
 {
 public:
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 };
 
 class ClientTimeHandler : public ClientHandler
 {
 public:
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 };
 
 class ClientLocationHandler : public ClientHandler
 {
 public:
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 };
 
 class StelObjectMgr;
-
 class ClientSelectionHandler : public ClientHandler
 {
 public:
 	ClientSelectionHandler();
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 private:
 	StelObjectMgr* objMgr;
+};
+
+class StelPropertyMgr;
+class ClientStelPropertyUpdateHandler : public ClientHandler
+{
+public:
+	ClientStelPropertyUpdateHandler(bool skipGuiProps, const QStringList& excludeProps);
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelPropertyMgr* propMgr;
+	QRegularExpression filter;
+};
+
+class StelMovementMgr;
+class ClientViewHandler : public ClientHandler
+{
+public:
+	ClientViewHandler();
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelMovementMgr* mvMgr;
+};
+
+class ClientFovHandler : public ClientHandler
+{
+public:
+	ClientFovHandler();
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelMovementMgr* mvMgr;
 };
 
 #endif

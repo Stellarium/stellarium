@@ -34,6 +34,7 @@ define(["jquery", "api/viewcontrol", "api/viewoptions", "api/actions", "jquery-u
 	}
 
 	function initControls() {
+		//note: this is the "old" style joystick code, the new one is handled with the "joystick" css class automatically
 		$("#view_upleft").mousedown(viewControlApi.moveUpLeft);
 		$("#view_up").mousedown(viewControlApi.moveUp);
 		$("#view_upright").mousedown(viewControlApi.moveUpRight);

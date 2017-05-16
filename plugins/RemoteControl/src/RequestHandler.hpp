@@ -72,6 +72,8 @@ public slots:
 private slots:
 	void refreshTemplates();
 
+	void addExtensionServices(QObjectList services);
+
 private:
 	//Contains the translated templates loaded from the file "translate_files" in the webroot folder
 	QMap<QByteArray,QString> templateMap;

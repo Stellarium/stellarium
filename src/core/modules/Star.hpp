@@ -29,6 +29,8 @@
 
 class StelObject;
 
+extern const QString STAR_TYPE;
+
 typedef short int Int16;
 typedef unsigned short int Uint16;
 
