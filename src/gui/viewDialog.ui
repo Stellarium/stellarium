@@ -785,7 +785,7 @@
              <item>
               <widget class="QCheckBox" name="planetUseObjModelsCheckBox">
                <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uses a polygonal 3D model for some selected subplanetary objects (small moons, asteroids, comets) instead of a spherical approximation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string/>
                </property>
                <property name="text">
                 <string>Use more accurate 3D models (where available)</string>
@@ -813,7 +813,7 @@
                <item>
                 <widget class="QCheckBox" name="planetShowObjSelfShadowsCheckBox">
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use a &amp;quot;shadow map&amp;quot; to simulate self-shadows of non-convex solar system objects.&lt;/p&gt;&lt;p&gt;May reduce shadow penumbra quality on some objects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string/>
                  </property>
                  <property name="text">
                   <string>Simulate self-shadowing</string>
@@ -3323,12 +3323,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
