@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-05-09 19:10+0700\n"
+"POT-Creation-Date: 2017-05-16 19:17+0700\n"
 "PO-Revision-Date: 2016-07-11 17:54+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-10 06:15+0000\n"
-"X-Generator: Launchpad (build 18366)\n"
+"X-Launchpad-Export-Date: 2017-05-17 06:10+0000\n"
+"X-Generator: Launchpad (build 18385)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -31,7 +31,7 @@ msgstr "Action '%1' 을 서버에 보내는데 에러가 발생했습니다. "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
-#: plugins/RemoteControl/webroot/js/api/search.js:157
+#: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
 msgstr "탐색 실행 에러 발생"
 
@@ -56,7 +56,7 @@ msgstr "특성 '%1' 은 서버에 허용되지 않습니다. "
 msgid "Error sending property '%1' to server: "
 msgstr "특성 '%1'를 서버에 보내는데 실패하였습니다. "
 
-#: plugins/RemoteControl/webroot/js/api/remotecontrol.js:193
+#: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
 msgstr "명령을 서버에 보내는데 실패하였습니다. "
 
@@ -64,32 +64,32 @@ msgstr "명령을 서버에 보내는데 실패하였습니다. "
 msgid "Could not retrieve script list"
 msgstr "스크립트 리스트를 불러오지 못했습니다."
 
-#: plugins/RemoteControl/webroot/js/api/search.js:32
+#: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
 msgstr "요청중"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:41
+#: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
 msgstr "에러 (%1)"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:53
+#: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
 msgstr ""
 
-#: plugins/RemoteControl/webroot/js/api/search.js:71 index.html:146
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
 #: tablet7in.html:230
 msgid "idle"
 msgstr "유휴상태"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:90
+#: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
 msgstr "오브젝트 타입을 불러오는데 실패하였습니다."
 
-#: plugins/RemoteControl/webroot/js/api/search.js:115
+#: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
 msgstr "오브젝트 리스틀 가져오는데 실패하였습니다."
 
-#: plugins/RemoteControl/webroot/js/api/search.js:167
+#: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
 msgstr "기다리는중"
 
@@ -101,6 +101,20 @@ msgstr "프로젝션 리스트를 불러오는데 실패하였습니다."
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
 msgstr "풍경 리스트를 불러오는데 실패하였습니다."
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
+#: index.html:555 tablet7in.html:628
+msgid "-none-"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
+msgid "(Currently loading: %1)"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
+msgid "Could not retrieve Scenery3d list"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -120,14 +134,9 @@ msgstr "모든 아이템 보기"
 msgid "Input did not match any item"
 msgstr "아무 아이템이나 입력해주세요"
 
-#: plugins/RemoteControl/webroot/js/ui/mainui.js:317
+#: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
 msgstr "선택된 것이 없습니다."
-
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
-#: tablet7in.html:629
-msgid "-none-"
-msgstr ""
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
@@ -145,10 +154,6 @@ msgstr "Stellarium 원격 조종"
 msgid "Main controls"
 msgstr "메인 컨트롤"
 
-#: index.html:31 tablet7in.html:33
-msgid "Selection"
-msgstr "선택"
-
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
 msgstr "딥스카이"
@@ -157,257 +162,261 @@ msgstr "딥스카이"
 msgid "Actions and scripts"
 msgstr ""
 
-#: index.html:76
+#: index.html:39
+msgid "Scenery3d"
+msgstr ""
+
+#: index.html:77
 msgid "Pause"
 msgstr ""
 
-#: index.html:81 tablet7in.html:178
+#: index.html:82 tablet7in.html:178
 msgid "Time jumps"
 msgstr ""
 
-#: index.html:85 tablet7in.html:182
+#: index.html:86 tablet7in.html:182
 msgid "Solar hour"
 msgstr ""
 
-#: index.html:86 tablet7in.html:183
+#: index.html:87 tablet7in.html:183
 msgid "Solar day"
 msgstr ""
 
-#: index.html:87 tablet7in.html:184
+#: index.html:88 tablet7in.html:184
 msgid "Solar week"
 msgstr ""
 
-#: index.html:89 tablet7in.html:186
+#: index.html:90 tablet7in.html:186
 msgid "Sidereal day"
 msgstr "항성일"
 
-#: index.html:90 tablet7in.html:187
+#: index.html:91 tablet7in.html:187
 msgid "Sidereal year"
 msgstr "항성년"
 
-#: index.html:91 tablet7in.html:188
+#: index.html:92 tablet7in.html:188
 msgid "Sidereal century"
 msgstr "항성세기"
 
-#: index.html:93 tablet7in.html:190
+#: index.html:94 tablet7in.html:190
 msgid "Synodic month"
 msgstr ""
 
-#: index.html:94 tablet7in.html:191
+#: index.html:95 tablet7in.html:191
 msgid "Draconic month"
 msgstr ""
 
-#: index.html:95 tablet7in.html:192
+#: index.html:96 tablet7in.html:192
 msgid "Draconic year"
 msgstr ""
 
-#: index.html:97 tablet7in.html:205
+#: index.html:98 tablet7in.html:205
 msgid "Gaussian year"
 msgstr "가우스년"
 
-#: index.html:100 tablet7in.html:195
+#: index.html:101 tablet7in.html:195
 msgid "Anomalistic month"
 msgstr ""
 
-#: index.html:101 tablet7in.html:196
+#: index.html:102 tablet7in.html:196
 msgid "Anomalistic year"
 msgstr ""
 
-#: index.html:102 tablet7in.html:197
+#: index.html:103 tablet7in.html:197
 msgid "Anomalistic century"
 msgstr ""
 
-#: index.html:104 tablet7in.html:199
+#: index.html:105 tablet7in.html:199
 msgid "Mean tropical month"
 msgstr ""
 
-#: index.html:105 tablet7in.html:200
+#: index.html:106 tablet7in.html:200
 msgid "Mean tropical year"
 msgstr ""
 
-#: index.html:106 tablet7in.html:201
+#: index.html:107 tablet7in.html:201
 msgid "Mean tropical century"
 msgstr ""
 
-#: index.html:108 tablet7in.html:203
+#: index.html:109 tablet7in.html:203
 msgid "Tropical year"
 msgstr "연"
 
-#: index.html:109 tablet7in.html:204
+#: index.html:110 tablet7in.html:204
 msgid "Julian year"
 msgstr "율리우스년"
 
-#: index.html:110 tablet7in.html:206
+#: index.html:111 tablet7in.html:206
 msgid "Julian century"
 msgstr "율리우스세기"
 
-#: index.html:118 tablet7in.html:92
-msgid "Up/Left"
-msgstr "상/좌"
-
-#: index.html:118 tablet7in.html:92
-msgid "Up"
-msgstr "상"
-
-#: index.html:118 tablet7in.html:92
-msgid "Up/Right"
-msgstr "상/우"
-
-#: index.html:118 tablet7in.html:92
-msgid "Left"
-msgstr "좌"
-
-#: index.html:118 tablet7in.html:92
-msgid "Focus on selected object"
-msgstr ""
-
-#: index.html:118 tablet7in.html:92
-msgid "Focus on selection"
-msgstr ""
-
-#: index.html:118 tablet7in.html:92
-msgid "Right"
-msgstr "우"
-
-#: index.html:118 tablet7in.html:92
-msgid "Down/Left"
-msgstr "하/좌"
-
-#: index.html:118 tablet7in.html:92
-msgid "Down"
-msgstr "하"
-
-#: index.html:118 tablet7in.html:92
-msgid "Down/Right"
-msgstr "하/우"
-
-#: index.html:122 tablet7in.html:133
+#: index.html:123 tablet7in.html:133
 msgid "FOV"
 msgstr ""
 
-#: index.html:140 tablet7in.html:224
+#: index.html:141 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "용어를 검색하세요. TAB을 눌러 결과를 확인하세요."
 
-#: index.html:141 tablet7in.html:225
+#: index.html:142 tablet7in.html:225
 msgid "Select and focus"
 msgstr ""
 
-#: index.html:168 tablet7in.html:255
+#: index.html:168 tablet7in.html:254
+msgid "Selection mode"
+msgstr ""
+
+#: index.html:168 tablet7in.html:254
+msgid "Center on object"
+msgstr ""
+
+#: index.html:168 tablet7in.html:254
+msgid "Center and zoom to object"
+msgstr ""
+
+#: index.html:168 tablet7in.html:254
+msgid "Just mark the object"
+msgstr ""
+
+#: index.html:170 tablet7in.html:256
 msgid "Quick select"
 msgstr "빠른 선택"
 
-#: index.html:172 tablet7in.html:259
+#: index.html:174 tablet7in.html:260
 msgid "Earth"
 msgstr "지구"
 
-#: index.html:172 tablet7in.html:259
+#: index.html:174 tablet7in.html:260
 msgid "Pluto"
 msgstr "명왕성"
 
-#: index.html:180 tablet7in.html:290
+#: index.html:180 tablet7in.html:289
 msgid "Current selection"
 msgstr "현재 선택"
 
-#: index.html:242 tablet7in.html:361
+#: index.html:242 tablet7in.html:360
 msgid "ZHR:"
 msgstr "정점 시율"
 
-#: index.html:288 tablet7in.html:413
+#: index.html:288 tablet7in.html:412
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
 
-#: index.html:297 tablet7in.html:422
+#: index.html:297 tablet7in.html:421
 msgid "Solstices"
 msgstr "지점"
 
-#: index.html:298 tablet7in.html:423
+#: index.html:298 tablet7in.html:422
 msgid "Crossquarters"
 msgstr ""
 
-#: index.html:299 tablet7in.html:424
+#: index.html:299 tablet7in.html:423
 msgid "Major Standstill"
 msgstr ""
 
-#: index.html:300 tablet7in.html:425
+#: index.html:300 tablet7in.html:424
 msgid "Minor Standstill"
 msgstr ""
 
-#: index.html:310 tablet7in.html:435
+#: index.html:310 tablet7in.html:434
 msgid "Current Planet:"
 msgstr "현재행성:"
 
-#: index.html:355 tablet7in.html:478
+#: index.html:355 tablet7in.html:477
 msgid "Catalog of galaxies"
 msgstr ""
 
-#: index.html:413 tablet7in.html:530
+#: index.html:413 tablet7in.html:529
 msgid "Bright Nebulae"
 msgstr ""
 
-#: index.html:414 tablet7in.html:531
+#: index.html:414 tablet7in.html:530
 msgid "Dark Nebulae"
 msgstr ""
 
-#: index.html:415 tablet7in.html:532
+#: index.html:415 tablet7in.html:531
 msgid "Planetary Nebulae"
 msgstr ""
 
-#: index.html:424 tablet7in.html:541
+#: index.html:424 tablet7in.html:540
 msgid "Labels and markers"
 msgstr "라벨과 마커"
 
-#: index.html:453 tablet7in.html:570
+#: index.html:453 tablet7in.html:569
 msgid "Show illumination"
 msgstr "조도 보기"
 
-#: index.html:458 tablet7in.html:576
+#: index.html:458 tablet7in.html:575
 msgid "Current landscape"
 msgstr "현재 풍경"
 
-#: index.html:485 tablet7in.html:604
+#: index.html:485 tablet7in.html:603
 msgid "Current sky culture"
 msgstr "현재 하늘 상태"
 
-#: index.html:498 tablet7in.html:629
+#: index.html:498 tablet7in.html:628
 msgid "Active script:"
 msgstr ""
 
-#: index.html:499 tablet7in.html:630
+#: index.html:499 tablet7in.html:629
 msgid "Run selected script"
 msgstr ""
 
-#: index.html:499 tablet7in.html:630
+#: index.html:499 tablet7in.html:629
 msgid "Stop current script"
 msgstr ""
 
-#: index.html:504 tablet7in.html:41 tablet7in.html:614
+#: index.html:504 tablet7in.html:41 tablet7in.html:613
 msgid "Actions"
 msgstr ""
 
-#: index.html:508 tablet7in.html:618
+#: index.html:508 tablet7in.html:617
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:519 tablet7in.html:653
+#: index.html:519 tablet7in.html:652
 msgid "Planet map"
 msgstr "행성지도"
 
-#: index.html:520 tablet7in.html:654
+#: index.html:520 tablet7in.html:653
 msgid "Planet map pointer"
 msgstr "행성지도포인터"
 
-#: index.html:524 tablet7in.html:658
+#: index.html:524 tablet7in.html:657
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:569 tablet7in.html:704
+#: index.html:553
+msgid "Interaction"
+msgstr ""
+
+#: index.html:554
+msgid "Current scene:"
+msgstr ""
+
+#: index.html:557
+msgid "View controls"
+msgstr ""
+
+#: index.html:563
+msgid "Movement controls"
+msgstr ""
+
+#: index.html:579
+msgid "Scene selection"
+msgstr ""
+
+#: index.html:583
+msgid "Load selected scene"
+msgstr ""
+
+#: index.html:607 tablet7in.html:703
 msgid "No response from server"
 msgstr "서버로부터 응답이 없습니다."
 
-#: index.html:570
+#: index.html:608
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
@@ -419,6 +428,46 @@ msgstr ""
 #: tablet7in.html:37
 msgid "Grids"
 msgstr ""
+
+#: tablet7in.html:92
+msgid "Up/Left"
+msgstr "상/좌"
+
+#: tablet7in.html:92
+msgid "Up"
+msgstr "상"
+
+#: tablet7in.html:92
+msgid "Up/Right"
+msgstr "상/우"
+
+#: tablet7in.html:92
+msgid "Left"
+msgstr "좌"
+
+#: tablet7in.html:92
+msgid "Focus on selected object"
+msgstr ""
+
+#: tablet7in.html:92
+msgid "Focus on selection"
+msgstr ""
+
+#: tablet7in.html:92
+msgid "Right"
+msgstr "우"
+
+#: tablet7in.html:92
+msgid "Down/Left"
+msgstr "하/좌"
+
+#: tablet7in.html:92
+msgid "Down"
+msgstr "하"
+
+#: tablet7in.html:92
+msgid "Down/Right"
+msgstr "하/우"
 
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
@@ -432,118 +481,121 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: tablet7in.html:260
+#: tablet7in.html:261
 msgid "Sirius"
 msgstr "시리우스"
 
-#: tablet7in.html:261
+#: tablet7in.html:262
 msgid "Arcturus"
 msgstr "대각성"
 
-#: tablet7in.html:262
+#: tablet7in.html:263
 msgid "Capella"
 msgstr "카펠라"
 
-#: tablet7in.html:263
+#: tablet7in.html:264
 msgid "Vega"
 msgstr "베가"
 
-#: tablet7in.html:264
+#: tablet7in.html:265
 msgid "Deneb"
 msgstr "데네브"
 
-#: tablet7in.html:265
+#: tablet7in.html:266
 msgid "Altair"
 msgstr "견우성"
 
-#: tablet7in.html:266
+#: tablet7in.html:267
 msgid "Andromeda Galaxy"
 msgstr "안드로메다 은하계"
 
-#: tablet7in.html:267
+#: tablet7in.html:268
 msgid "Hercules Cluster"
 msgstr "헤라클레스 클러스터"
 
-#: tablet7in.html:268
+#: tablet7in.html:269
 msgid "Orion Nebula"
 msgstr "오리온 성운"
 
-#: tablet7in.html:269
+#: tablet7in.html:270
 msgid "Eta Carinae Nebula"
 msgstr ""
 
-#: tablet7in.html:270
+#: tablet7in.html:271
 msgid "47 Tucanae Cluster"
 msgstr ""
 
-#: tablet7in.html:271
+#: tablet7in.html:272
 msgid "Aries"
 msgstr "양자리"
 
-#: tablet7in.html:272
+#: tablet7in.html:273
 msgid "Taurus"
 msgstr "황소자리"
 
-#: tablet7in.html:273
+#: tablet7in.html:274
 msgid "Gemini"
 msgstr "쌍둥이자리"
 
-#: tablet7in.html:274
+#: tablet7in.html:275
 msgid "Cancer"
 msgstr "게자리"
 
-#: tablet7in.html:275
+#: tablet7in.html:276
 msgid "Leo"
 msgstr "사자자리"
 
-#: tablet7in.html:276
+#: tablet7in.html:277
 msgid "Virgo"
 msgstr "처녀자리"
 
-#: tablet7in.html:277
+#: tablet7in.html:278
 msgid "Libra"
 msgstr "천칭자리"
 
-#: tablet7in.html:278
+#: tablet7in.html:279
 msgid "Scorpius"
 msgstr "전갈자리"
 
-#: tablet7in.html:279
+#: tablet7in.html:280
 msgid "Sagittarius"
 msgstr "궁수자리"
 
-#: tablet7in.html:280
+#: tablet7in.html:281
 msgid "Capricornus"
 msgstr "염소자리"
 
-#: tablet7in.html:281
+#: tablet7in.html:282
 msgid "Aquarius"
 msgstr "물병자리"
 
-#: tablet7in.html:282
+#: tablet7in.html:283
 msgid "Pisces"
 msgstr "물고기자리"
 
-#: tablet7in.html:600
+#: tablet7in.html:599
 msgid "Constellation selection isolated"
 msgstr ""
 
-#: tablet7in.html:638
+#: tablet7in.html:637
 msgid "Favorites"
 msgstr "즐겨찾기"
 
-#: tablet7in.html:640
+#: tablet7in.html:639
 msgid "Show 1"
 msgstr "보기 1"
 
-#: tablet7in.html:641
+#: tablet7in.html:640
 msgid "Remove Labels and Images"
 msgstr "레이블과 이미지 삭제하기"
 
-#: tablet7in.html:641
+#: tablet7in.html:640
 msgid "Cleanup Screen"
 msgstr "화면 정리"
 
-#: tablet7in.html:705
+#: tablet7in.html:704
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "서버로부터 %1 간 응답이 없습니다. 아직도 프로그램이 작동중인가요?"
+
+#~ msgid "Selection"
+#~ msgstr "선택"
