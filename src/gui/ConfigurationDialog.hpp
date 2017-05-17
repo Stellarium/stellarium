@@ -127,6 +127,10 @@ private slots:
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 
+	void populatePlanetMagnitudeAlgorithmsList();
+	void setPlanetMagnitudeAlgorithm(int algorithmID);
+	void setPlanetMagnitudeAlgorithmDescription();
+
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();
