@@ -37,6 +37,7 @@
 #include "StarMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
+#include "Planet.hpp"
 #include "NebulaMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
@@ -96,6 +97,7 @@ void ViewDialog::retranslate()
 		updateZhrDescription(GETSTELMODULE(SporadicMeteorMgr)->getZHR());
 		populateLists();
 		populateToolTips();
+		populatePlanetMagnitudeAlgorithmsList();
 		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 
 		//Hack to shrink the tabs to optimal size after language change
@@ -110,6 +112,7 @@ void ViewDialog::styleChanged()
 	{
 		populateLists();
 		populateToolTips();
+		populatePlanetMagnitudeAlgorithmsList();
 	}
 }
 
@@ -219,6 +222,16 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
 	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
 
+	populatePlanetMagnitudeAlgorithmsList();
+	int idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use ExplanSupl2013 as default
+		idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::Expl_Sup_2013, Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->planetMagnitudeAlgorithmComboBox->setCurrentIndex(idx);
+	connect(ui->planetMagnitudeAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setPlanetMagnitudeAlgorithm(int)));
+
 	// GreatRedSpot (Jupiter)
 	// TODO: put under Properties system!
 	bool grsFlag = ssmgr->getFlagCustomGrsSettings();
@@ -259,7 +272,7 @@ void ViewDialog::createDialogContent()
 	// Landscape section
 	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
-	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
+	connectCheckBox(ui->atmosphereCheckBox, "actionShow_Atmosphere");
 	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
 	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
@@ -1495,4 +1508,34 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 	if (!current)
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+}
+
+void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
+{
+	Q_ASSERT(ui->planetMagnitudeAlgorithmComboBox);
+
+	QComboBox* algorithms = ui->planetMagnitudeAlgorithmComboBox;
+
+	//Save the current selection to be restored later
+	algorithms->blockSignals(true);
+	int index = algorithms->currentIndex();
+	QVariant selectedAlgorithmId = algorithms->itemData(index);
+	algorithms->clear();
+	//For each algorithm, display the localized name and store the key as user data.
+	algorithms->addItem(qc_("Mueller 1893", "magnitude algorithm"), Planet::Mueller_1893);
+	algorithms->addItem(qc_("Astronomical Almanach 1984", "magnitude algorithm"), Planet::Astr_Alm_1984);
+	algorithms->addItem(qc_("Explanatory Supplement 1992", "magnitude algorithm"), Planet::Expl_Sup_1992);
+	algorithms->addItem(qc_("Explanatory Supplement 2013", "magnitude algorithm"), Planet::Expl_Sup_2013);
+	algorithms->addItem(qc_("Generic", "magnitude algorithm"), Planet::Generic);
+	//Restore the selection
+	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
+	algorithms->setCurrentIndex(index);
+	//algorithms->model()->sort(0);
+	algorithms->blockSignals(false);
+}
+
+void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
+{
+	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = (Planet::ApparentMagnitudeAlgorithm) ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt();
+	Planet::setApparentMagnitudeAlgorithm(currentAlgorithm);
 }
