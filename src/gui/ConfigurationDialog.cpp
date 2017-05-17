@@ -259,16 +259,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->jdRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
 	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
 
-	populatePlanetMagnitudeAlgorithmsList();
-	idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
-	{
-		// Use ExplanSupl2013 as default
-		idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::Expl_Sup_2013, Qt::UserRole, Qt::MatchCaseSensitive);
-	}
-	ui->planetMagnitudeAlgorithmComboBox->setCurrentIndex(idx);
-	connect(ui->planetMagnitudeAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setPlanetMagnitudeAlgorithm(int)));
-
 	// Delta-T
 	populateDeltaTAlgorithmsList();	
 	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -1425,41 +1415,6 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
 }
-
-void ConfigurationDialog::populatePlanetMagnitudeAlgorithmsList()
-{
-	Q_ASSERT(ui->planetMagnitudeAlgorithmComboBox);
-
-	QComboBox* algorithms = ui->planetMagnitudeAlgorithmComboBox;
-
-	//Save the current selection to be restored later
-	algorithms->blockSignals(true);
-	int index = algorithms->currentIndex();
-	QVariant selectedAlgorithmId = algorithms->itemData(index);
-	algorithms->clear();
-	//For each algorithm, display the localized name and store the key as user data.
-	algorithms->addItem(q_("Mueller 1893"), Planet::Mueller_1893);
-	algorithms->addItem(q_("Astronomical Almanach 1984"), Planet::Astr_Alm_1984);
-	algorithms->addItem(q_("Explanatory Supplement 1992"), Planet::Expl_Sup_1992);
-	algorithms->addItem(q_("Explanatory Supplement 2013"), Planet::Expl_Sup_2013);
-	algorithms->addItem(q_("Generic"), Planet::Generic);
-	//Restore the selection
-	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
-	algorithms->setCurrentIndex(index);
-	//algorithms->model()->sort(0);
-	algorithms->blockSignals(false);
-	setDeltaTAlgorithmDescription();
-}
-
-void ConfigurationDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
-{
-	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = (Planet::ApparentMagnitudeAlgorithm) ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt();
-	Planet::setApparentMagnitudeAlgorithm(currentAlgorithm);
-	setPlanetMagnitudeAlgorithmDescription();
-
-}
-void ConfigurationDialog::setPlanetMagnitudeAlgorithmDescription(){}
-
 
 void ConfigurationDialog::populateDeltaTAlgorithmsList()
 {

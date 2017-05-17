@@ -85,6 +85,9 @@ private slots:
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);
 
+	void populatePlanetMagnitudeAlgorithmsList();
+	void setPlanetMagnitudeAlgorithm(int algorithmID);
+
 	void setSelectedCatalogsFromCheckBoxes();
 	void setSelectedTypesFromCheckBoxes();
 
