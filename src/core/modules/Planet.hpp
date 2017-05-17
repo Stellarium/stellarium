@@ -235,9 +235,11 @@ public:
 	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
 	//! A return value of 100 signals invalid result.
 	float getMeanOppositionMagnitude() const;
-	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
-	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
-	void setApparentMagnitudeAlgorithm(QString algorithm);
+	//
+	static ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm()  { return vMagAlgorithm; }
+	static const QString getApparentMagnitudeAlgorithmString()  { return vMagAlgorithmMap.value(vMagAlgorithm); }
+	static void setApparentMagnitudeAlgorithm(QString algorithm);
+	static void setApparentMagnitudeAlgorithm(ApparentMagnitudeAlgorithm algorithm){ vMagAlgorithm=algorithm; }
 
 	//! Compute the z rotation to use from equatorial to geographic coordinates. For general applicability we need both time flavours:
 	//! @param JD is JD(UT) for Earth
@@ -533,7 +535,7 @@ protected:
 	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
 
-	ApparentMagnitudeAlgorithm vMagAlgorithm;
+	static ApparentMagnitudeAlgorithm vMagAlgorithm;
 
 	QOpenGLFunctions* gl;
 

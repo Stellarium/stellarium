@@ -116,6 +116,8 @@ GLuint Planet::shadowTex = 0;
 
 QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
+Planet::ApparentMagnitudeAlgorithm Planet::vMagAlgorithm;
+
 
 #define STRINGIFY2(a) #a
 #define STRINGIFY(a) STRINGIFY2(a)
@@ -219,7 +221,7 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
-	  vMagAlgorithm(Planet::UndefinedAlgorithm),
+	  //vMagAlgorithm(Planet::UndefinedAlgorithm),
 	  gl(NULL)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
@@ -285,8 +287,13 @@ void Planet::init()
 	vMagAlgorithmMap.insert(Planet::Mueller_1893,	"Mueller1893"); // better name
 	vMagAlgorithmMap.insert(Planet::Astr_Alm_1984,	"harris");      // deprecate in 0.16, remove later
 	vMagAlgorithmMap.insert(Planet::Astr_Alm_1984,	"AstrAlm1984"); // consistent name
-	vMagAlgorithmMap.insert(Planet::Generic,	"generic"),
+	vMagAlgorithmMap.insert(Planet::Generic,	"Generic"),
+	vMagAlgorithmMap.insert(Planet::Generic,	"generic"),     // deprecate in 0.16, remove later
 	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
+
+	QSettings *conf=StelApp::getInstance().getSettings();
+	QString vMagAlgorithmString=conf->value("astro/apparent_magnitude_algorithm", "ExplSup2013").toString();
+	setApparentMagnitudeAlgorithm(vMagAlgorithmString);
 }
 
 Planet::~Planet()
@@ -366,6 +373,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	oss << getPositionInfoString(core, flags);
+
+	// Debug help.
+	//oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
 
 	// GZ This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
 	// TODO: maybe separate this out into:
@@ -1234,7 +1244,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		// Mueller  --> Mueller_1893
 		// Harris   --> Astr_Eph_1984
 
-		switch (core->getCurrentPlanet()->getApparentMagnitudeAlgorithm())
+		switch (Planet::getApparentMagnitudeAlgorithm())
 		{
 			case UndefinedAlgorithm:	// The most recent solution should be activated by default			
 			case Expl_Sup_2013:
@@ -3014,5 +3024,5 @@ void Planet::update(int deltaTime)
 
 void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 {
-	vMagAlgorithm = vMagAlgorithmMap.key(algorithm.toLower(), Planet::UndefinedAlgorithm);
+	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::UndefinedAlgorithm);
 }
