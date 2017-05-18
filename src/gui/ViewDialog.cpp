@@ -98,6 +98,7 @@ void ViewDialog::retranslate()
 		populateLists();
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
+		populatePlanetMagnitudeAlgorithmDescription();
 		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 
 		//Hack to shrink the tabs to optimal size after language change
@@ -113,6 +114,7 @@ void ViewDialog::styleChanged()
 		populateLists();
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
+		populatePlanetMagnitudeAlgorithmDescription();
 	}
 }
 
@@ -231,6 +233,7 @@ void ViewDialog::createDialogContent()
 	}
 	ui->planetMagnitudeAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->planetMagnitudeAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setPlanetMagnitudeAlgorithm(int)));
+	populatePlanetMagnitudeAlgorithmDescription();
 
 	// GreatRedSpot (Jupiter)
 	// TODO: put under Properties system!
@@ -1522,10 +1525,10 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 	QVariant selectedAlgorithmId = algorithms->itemData(index);
 	algorithms->clear();
 	//For each algorithm, display the localized name and store the key as user data.
-	algorithms->addItem(qc_("Mueller 1893", "magnitude algorithm"), Planet::Mueller_1893);
-	algorithms->addItem(qc_("Astronomical Almanach 1984", "magnitude algorithm"), Planet::Astr_Alm_1984);
-	algorithms->addItem(qc_("Explanatory Supplement 1992", "magnitude algorithm"), Planet::Expl_Sup_1992);
-	algorithms->addItem(qc_("Explanatory Supplement 2013", "magnitude algorithm"), Planet::Expl_Sup_2013);
+	algorithms->addItem(qc_("G. Mueller (1893)", "magnitude algorithm"), Planet::Mueller_1893);
+	algorithms->addItem(qc_("Astronomical Almanach (1984)", "magnitude algorithm"), Planet::Astr_Alm_1984);
+	algorithms->addItem(qc_("Explanatory Supplement (1992)", "magnitude algorithm"), Planet::Expl_Sup_1992);
+	algorithms->addItem(qc_("Explanatory Supplement (2013)", "magnitude algorithm"), Planet::Expl_Sup_2013);
 	algorithms->addItem(qc_("Generic", "magnitude algorithm"), Planet::Generic);
 	//Restore the selection
 	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -1538,4 +1541,34 @@ void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
 {
 	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = (Planet::ApparentMagnitudeAlgorithm) ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt();
 	Planet::setApparentMagnitudeAlgorithm(currentAlgorithm);
+	populatePlanetMagnitudeAlgorithmDescription();
+}
+
+void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
+{
+	int currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (currentAlgorithm==-1)
+	{
+		// Use ExplanSupl2013 as default
+		currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::Expl_Sup_2013, Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	QString info = "";
+	switch (currentAlgorithm) {
+		case Planet::Astr_Alm_1984:
+			info = q_("Algorithm was used in <em>Astronomical Almanac</em> (1984 and later). These give V (instrumental) magnitudes (allegedly from D.L. Harris).");
+			break;
+		case Planet::Mueller_1893:
+			info = q_("Algorithm based on visual observations 1877-1891 by G. Mueller and was published in <em>Explanatory Supplement to the Astronomical Almanac</em> (1961).");
+			break;
+		case Planet::Expl_Sup_1992:
+			info = q_("Algorithm was provided by Pere Planesas (Observatorio Astronomico Nacional) was published in <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
+			break;
+		case Planet::Expl_Sup_2013:
+			info = q_("Algorithm was published in 3rd edition of <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
+			break;
+		default:
+			info = q_("Visual magnitude based on phase angle and albedo.");
+			break;
+	}
+	ui->planetMagnitudeAlgorithmDescription->setText(QString("<small>%1</small>").arg(info));
 }
