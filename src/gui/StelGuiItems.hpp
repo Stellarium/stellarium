@@ -144,15 +144,15 @@ protected:
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 private slots:
 	void animValueChanged(qreal value);
+	void updateIcon();
 private:
 	void initCtor(const QPixmap& apixOn,
                   const QPixmap& apixOff,
                   const QPixmap& apixNoChange,
                   const QPixmap& apixHover,
                   StelAction* aaction,
-                  bool noBackground,
-                  bool isTristate);
-	void updateIcon();
+		  bool noBackground,
+		  bool isTristate);
 	int toggleChecked(int);
 
 	QPixmap pixOn;

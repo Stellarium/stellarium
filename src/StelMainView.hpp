@@ -156,6 +156,11 @@ public slots:
 	//! happened.
 	bool needsMaxFPS() const;
 
+	//! Set the state of the flag of usage background for GUI buttons
+	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; }
+	//! Get the state of the flag of usage background for GUI buttons
+	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
+
 protected:
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this
@@ -177,6 +182,8 @@ signals:
 	//! Interested objects should subscribe to this signal and reload their shaders
 	//! when this is emitted
 	void reloadShadersRequested();
+
+	void updateIconsRequested();
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
@@ -233,6 +240,8 @@ private:
 	// Number of second before the mouse cursor disappears
 	float cursorTimeout;
 	bool flagCursorTimeout;
+
+	bool flagUseButtonsBackground;
 
 	double lastEventTimeSec;
 
