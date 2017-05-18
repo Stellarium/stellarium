@@ -25,6 +25,7 @@
 #include "StelProjector.hpp"
 #include "StelObjectType.hpp"
 #include <QTimeLine>
+#include <QTimer>
 #include <QCursor>
 
 //! @class StelMovementMgr
@@ -128,7 +129,7 @@ public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimuthal
-	void setEquatorialMount(bool b) {setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);}
+	void setEquatorialMount(bool b);
 
 	//! Set object tracking on/off and go to selected object
 	void setFlagTracking(bool b=true);
@@ -177,6 +178,11 @@ public slots:
 	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
 	//! Set whether mouse can control movement
 	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b;}
+
+	//! Get the state of flag for indication of mount mode
+	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
+	//! Set the state of flag for indication of mount mode
+	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; }
 
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
@@ -315,6 +321,11 @@ private slots:
 
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
+
+	//! Display a message on the screen for a few seconds.
+	void displayMessage(const QString& message, const QString hexColor="#99FF99");
+	//! Hide all messages.
+	void hideMessages();
 
 public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
@@ -455,6 +466,14 @@ private:
 	// Those two are used during viewport offset animation transitions. Both are set by moveViewport(), and irrelevant after the transition.
 	Vec2f oldViewportOffset;
 	Vec2f targetViewportOffset;
+
+	bool flagIndicationMountMode; // state of mount mode
+
+	//! @name Screen message infrastructure
+	//@{
+	QTimer* messageTimer;
+	QList<int> messageIDs;
+	//@}
 
 };
 
