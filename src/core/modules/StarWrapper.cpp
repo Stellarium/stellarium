@@ -286,6 +286,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 					oss << QString("%1 (%3): %2\"").arg(q_("Separation")).arg(QString::number(wdsSep, 'f', 3)).arg(wdsObs) << "<br />";
 			}
 		}
+
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions")).arg(QString::number(0.1*s->getDx0(), 'f', 1)).arg(QString::number(0.1*s->getDx1(), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	StelObject::postProcessInfoString(str, flags);
