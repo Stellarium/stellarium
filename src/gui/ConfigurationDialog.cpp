@@ -321,6 +321,9 @@ void ConfigurationDialog::createDialogContent()
 	ui->useButtonsBackgroundCheckBox->setChecked(StelMainView::getInstance().getFlagUseButtonsBackground());
 	connect(ui->useButtonsBackgroundCheckBox, SIGNAL(toggled(bool)), this, SLOT(usageButtonsBackgroundChanged(bool)));
 
+	ui->indicationMountModeCheckBox->setChecked(mvmgr->getFlagIndicationMountMode());
+	connect(ui->indicationMountModeCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagIndicationMountMode(bool)));
+
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
 	connect(ui->saveSettingsAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveAllSettings()));
@@ -848,6 +851,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
 	conf->setValue("gui/flag_show_buttons_background", StelMainView::getInstance().getFlagUseButtonsBackground());
+	conf->setValue("gui/flag_indication_mount_mode", mvmgr->getFlagIndicationMountMode());
 
 	// configuration dialog / navigation tab
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
