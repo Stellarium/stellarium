@@ -318,6 +318,9 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
 
+	ui->useButtonsBackgroundCheckBox->setChecked(StelMainView::getInstance().getFlagUseButtonsBackground());
+	connect(ui->useButtonsBackgroundCheckBox, SIGNAL(toggled(bool)), this, SLOT(usageButtonsBackgroundChanged(bool)));
+
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
 	connect(ui->saveSettingsAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveAllSettings()));
@@ -545,6 +548,12 @@ void ConfigurationDialog::cursorTimeOutChanged()
 {
 	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
 	StelMainView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+}
+
+void ConfigurationDialog::usageButtonsBackgroundChanged(bool b)
+{
+	StelMainView::getInstance().setFlagUseButtonsBackground(b);
+	emit StelMainView::getInstance().updateIconsRequested();
 }
 
 void ConfigurationDialog::browseForScreenshotDir()
