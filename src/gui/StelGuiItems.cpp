@@ -75,14 +75,14 @@ void StelButton::initCtor(const QPixmap& apixOn,
                           const QPixmap& apixNoChange,
                           const QPixmap& apixHover,
                           StelAction* aaction,
-                          bool noBackground,
+			  bool noBackground,
                           bool isTristate)
 {
 	pixOn = apixOn;
 	pixOff = apixOff;
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
-	noBckground = !StelApp::getInstance().getSettings()->value("gui/flag_show_buttons_background", !noBackground).toBool();
+	noBckground = noBackground;
 	isTristate_ = isTristate;
 	opacity = 1.;
 	hoverOpacity = 0.;
@@ -104,6 +104,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)),
 	        this, SLOT(animValueChanged(qreal)));
+	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));
 
 	if (action!=NULL)
 	{
@@ -124,21 +125,21 @@ StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,
                        const QPixmap& apixHover,
-                       StelAction *aaction,
-                       bool noBackground) :
+		       StelAction *aaction,
+		       bool noBackground) :
 	QGraphicsPixmapItem(apixOff, parent)
 {
 	initCtor(apixOn, apixOff, QPixmap(), apixHover, aaction, noBackground, false);
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
-                       const QPixmap& apixOn,
-                       const QPixmap& apixOff,
-                       const QPixmap& apixNoChange,
-                       const QPixmap& apixHover,
-                       const QString& aactionId,
-                       bool noBackground,
-                       bool isTristate) :
+		       const QPixmap& apixOn,
+		       const QPixmap& apixOff,
+		       const QPixmap& apixNoChange,
+		       const QPixmap& apixHover,
+		       const QString& aactionId,
+		       bool noBackground,
+		       bool isTristate) :
 	QGraphicsPixmapItem(apixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
@@ -149,8 +150,8 @@ StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,
                        const QPixmap& apixHover,
-                       const QString& aactionId,
-                       bool noBackground)
+		       const QString& aactionId,
+		       bool noBackground)
 	:QGraphicsPixmapItem(apixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
@@ -212,7 +213,7 @@ void StelButton::updateIcon()
 	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
-	if (!pixBackground.isNull() && noBckground==false)
+	if (!pixBackground.isNull() && noBckground==false && StelMainView::getInstance().getFlagUseButtonsBackground())
 		painter.drawPixmap(0, 0, pixBackground);
 
 	painter.drawPixmap(0, 0,

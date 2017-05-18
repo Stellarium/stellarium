@@ -815,6 +815,7 @@ void StelMainView::init()
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
+	setFlagUseButtonsBackground(conf->value("gui/flag_show_buttons_background", true).toBool());
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
 	// plugins, because the gui creates the QActions needed by some plugins.

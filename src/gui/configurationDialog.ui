@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>568</width>
-    <height>606</height>
+    <height>635</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1327,6 +1327,16 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west.</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="showToastSurveyButtonCheckbox">
                <property name="toolTip">
@@ -1334,16 +1344,6 @@
                </property>
                <property name="text">
                 <string>Show DSS button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
                </property>
               </widget>
              </item>
@@ -1453,16 +1453,6 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
-               <property name="toolTip">
-                <string>Activate this option to calculate azimuth from south towards west.</string>
-               </property>
-               <property name="text">
-                <string>Azimuth from South</string>
-               </property>
-              </widget>
-             </item>
              <item row="8" column="1">
               <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
                <property name="toolTip">
@@ -1514,6 +1504,26 @@
               <widget class="QCheckBox" name="showConstellationBoundariesButtonCheckBox">
                <property name="text">
                 <string>Show constellation boundaries button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="useButtonsBackgroundCheckBox">
+               <property name="toolTip">
+                <string>Toggle the usage of background under GUI buttons</string>
+               </property>
+               <property name="text">
+                <string>Use buttons background</string>
                </property>
               </widget>
              </item>
