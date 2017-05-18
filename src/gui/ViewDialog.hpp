@@ -86,6 +86,7 @@ private slots:
 	void skyLayersEnabledChanged(int);
 
 	void populatePlanetMagnitudeAlgorithmsList();
+	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);
 
 	void setSelectedCatalogsFromCheckBoxes();
