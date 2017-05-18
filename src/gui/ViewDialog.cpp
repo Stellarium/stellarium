@@ -1555,16 +1555,16 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 	QString info = "";
 	switch (currentAlgorithm) {
 		case Planet::Astr_Alm_1984:
-			info = q_("Algorithm was used in <em>Astronomical Almanac</em> (1984 and later). These give V (instrumental) magnitudes (allegedly from D.L. Harris).");
+			info = q_("Algorithm was used in <em>Astronomical Almanac</em> (1984 and later) and he gives V (instrumental) magnitudes (allegedly from D.L. Harris).");
 			break;
 		case Planet::Mueller_1893:
-			info = q_("Algorithm based on visual observations 1877-1891 by G. Mueller and was published in <em>Explanatory Supplement to the Astronomical Almanac</em> (1961).");
+			info = q_("Algorithm is based on visual observations 1877-1891 by G. Mueller and was published in <em>Explanatory Supplement to the Astronomical Almanac</em> (1961).");
 			break;
 		case Planet::Expl_Sup_1992:
-			info = q_("Algorithm was provided by Pere Planesas (Observatorio Astronomico Nacional) was published in <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
+			info = q_("Algorithm was provided by Pere Planesas (Observatorio Astronomico Nacional) and it was published in <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
 			break;
 		case Planet::Expl_Sup_2013:
-			info = q_("Algorithm was published in 3rd edition of <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
+			info = q_("Algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
 			break;
 		default:
 			info = q_("Visual magnitude based on phase angle and albedo.");
