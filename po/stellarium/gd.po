@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-05-17 02:09+0700\n"
+"POT-Creation-Date: 2017-05-19 02:49+0700\n"
 "PO-Revision-Date: 2017-04-28 22:01+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-17 05:30+0000\n"
-"X-Generator: Launchpad (build 18385)\n"
+"X-Launchpad-Export-Date: 2017-05-19 05:33+0000\n"
+"X-Generator: Launchpad (build 18386)\n"
 "Language: gd\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:194 src/core/modules/Planet.cpp:349
+#: src/core/modules/Nebula.cpp:194 src/core/modules/Planet.cpp:348
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:279
@@ -88,7 +88,7 @@ msgstr "Leubailean nan reul-bhadan"
 msgid "Constellation boundaries"
 msgstr "Crìochan nan reul-bhadan"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1429
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1441
 msgid "Select single constellation"
 msgstr "Tagh reul-bhad a-mhàin"
 
@@ -96,7 +96,7 @@ msgstr "Tagh reul-bhad a-mhàin"
 msgid "Remove selection of constellations"
 msgstr "Thoir air falbh taghadh nan reul-bhadan"
 
-#: src/core/modules/StarMgr.cpp:449 src/ui_viewDialog.h:2061
+#: src/core/modules/StarMgr.cpp:449 src/ui_viewDialog.h:2068
 #: src/ui_dsoColorsDialog.h:541
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
@@ -106,7 +106,7 @@ msgstr "Reultan"
 msgid "Stars labels"
 msgstr "Leubailean nan reultan"
 
-#: src/core/modules/GridLinesMgr.cpp:641 src/ui_viewDialog.h:2274
+#: src/core/modules/GridLinesMgr.cpp:641 src/ui_viewDialog.h:2282
 msgid "Meridian"
 msgstr "Meadhan-loidhne"
 
@@ -130,7 +130,7 @@ msgstr "Crios-meadhain"
 msgid "Precession Circle"
 msgstr "Cearcall ro-imeachd"
 
-#: src/core/modules/GridLinesMgr.cpp:666 src/ui_viewDialog.h:2263
+#: src/core/modules/GridLinesMgr.cpp:666 src/ui_viewDialog.h:2271
 msgid "Horizon"
 msgstr "Fàire"
 
@@ -143,12 +143,12 @@ msgid "Supergalactic Equator"
 msgstr "An crios-meadhain os-reul-chriosach"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:2278
+#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:2286
 msgid "O./C. longitude"
 msgstr "Domhan-fhad c./f"
 
 #: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1248
-#: src/ui_viewDialog.h:2327
+#: src/ui_viewDialog.h:2335
 msgid "Prime Vertical"
 msgstr "Prìomh-chearcall inghearach"
 
@@ -225,7 +225,7 @@ msgstr "Griodaichean is loidhnichean"
 msgid "Equatorial grid"
 msgstr "Griod meadhan-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2357
+#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2365
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "Griod azimuthach"
@@ -271,20 +271,20 @@ msgstr "Griod èiclipteach J2000"
 msgid "Ecliptic grid"
 msgstr "Griod èiclipteach"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2392
+#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2400
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr "Griod reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2247
+#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2255
 msgid "Galactic equator"
 msgstr "An crios-meadhain reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2381
+#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2389
 msgid "Supergalactic grid"
 msgstr "Grioda os-reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2270
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2278
 msgid "Supergalactic equator"
 msgstr "An crios-meadhain os-reul-chriosach"
 
@@ -325,11 +325,11 @@ msgstr "Pòlaichean èiclipteach J2000"
 msgid "Ecliptic poles"
 msgstr "Pòlaichean èiclipteach"
 
-#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2335
+#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2343
 msgid "Galactic poles"
 msgstr "Pòlaichean reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2293
+#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2301
 msgid "Supergalactic poles"
 msgstr "Pòlaichean os-reul-chriosach"
 
@@ -349,7 +349,7 @@ msgstr "Puingean grian-staid J2000"
 msgid "Solstice points"
 msgstr "Puingean grian-staid"
 
-#: src/core/modules/LandscapeMgr.cpp:422 src/ui_viewDialog.h:2073
+#: src/core/modules/LandscapeMgr.cpp:422
 msgid "Atmosphere"
 msgstr "Àile"
 
@@ -357,7 +357,7 @@ msgstr "Àile"
 msgid "Fog"
 msgstr "Ceò"
 
-#: src/core/modules/LandscapeMgr.cpp:424 src/ui_viewDialog.h:2289
+#: src/core/modules/LandscapeMgr.cpp:424 src/ui_viewDialog.h:2297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "Prìomh-phuingean combaist"
@@ -374,7 +374,7 @@ msgstr "Soillseachadh a’ chrutha-thìre"
 msgid "Landscape labels"
 msgstr "Leubailean a’ chrutha-tìre"
 
-#: src/core/modules/LandscapeMgr.cpp:428 src/ui_viewDialog.h:2077
+#: src/core/modules/LandscapeMgr.cpp:428 src/ui_viewDialog.h:2088
 msgid "Light pollution data from locations database"
 msgstr "Dàta air truailleadh solais o stòr-dàta nan ionadan"
 
@@ -408,7 +408,7 @@ msgstr "Seòrsa: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Trìd-dhoilleireachd: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:208 src/core/modules/Planet.cpp:355
+#: src/core/modules/Nebula.cpp:208 src/core/modules/Planet.cpp:354
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -416,7 +416,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Meudachd: <b>%1</b> (às dèidh a’ mhùchaidh: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:211 src/core/modules/Nebula.cpp:216
-#: src/core/modules/Planet.cpp:358 src/core/modules/MinorPlanet.cpp:210
+#: src/core/modules/Planet.cpp:357 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
@@ -882,148 +882,148 @@ msgstr "Cuspairean fad às"
 msgid "Toggle DSO type filter"
 msgstr "Toglaich criathrag nan oibseactan fad às"
 
-#: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Planet.cpp:361 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Meudachd absaloideach: %1"
 
-#: src/core/modules/Planet.cpp:365
+#: src/core/modules/Planet.cpp:364
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
 msgstr "Meudachd na comhaireachd meadhain: %1"
 
-#: src/core/modules/Planet.cpp:386 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/Planet.cpp:388 src/core/modules/MinorPlanet.cpp:239
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Astar on ghrian: %1 AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:393 src/core/modules/MinorPlanet.cpp:246
+#: src/core/modules/Planet.cpp:395 src/core/modules/MinorPlanet.cpp:246
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Astar on ghrian: %1 AU (%2 mill km)"
 
-#: src/core/modules/Planet.cpp:403 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Planet.cpp:405 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Astar: %1 AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:410 src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:412 src/core/modules/MinorPlanet.cpp:263
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Astar: %1 AU (%2 mill km)"
 
-#: src/core/modules/Planet.cpp:424 src/core/modules/Planet.cpp:428
+#: src/core/modules/Planet.cpp:426 src/core/modules/Planet.cpp:430
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Trast-thomhas san lèirsinn: %1, le fàinneachan: %2"
 
-#: src/core/modules/Planet.cpp:437 src/core/modules/Planet.cpp:441
+#: src/core/modules/Planet.cpp:439 src/core/modules/Planet.cpp:443
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "Trast-thomhas san lèirsinn: %1, air a mheudachadh gu: %2"
 
-#: src/core/modules/Planet.cpp:448 src/core/modules/Planet.cpp:450
+#: src/core/modules/Planet.cpp:450 src/core/modules/Planet.cpp:452
 #: src/core/modules/MinorPlanet.cpp:274 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Trast-thomhas san lèirsinn: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:467 src/core/modules/MinorPlanet.cpp:286
+#: src/core/modules/Planet.cpp:469 src/core/modules/MinorPlanet.cpp:286
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Ùine na cuairte reultaich: %1 latha (%2 a)"
 
-#: src/core/modules/Planet.cpp:470
+#: src/core/modules/Planet.cpp:472
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Latha reultach: %1"
 
-#: src/core/modules/Planet.cpp:471
+#: src/core/modules/Planet.cpp:473
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Latha grianail meadhain: %1"
 
-#: src/core/modules/Planet.cpp:475
+#: src/core/modules/Planet.cpp:477
 msgid "The period of rotation is chaotic"
 msgstr "Tha ùine a’ chair coimeasgach"
 
-#: src/core/modules/Planet.cpp:494
+#: src/core/modules/Planet.cpp:496
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Gealach chorranach a’ cinntinn"
 
-#: src/core/modules/Planet.cpp:496
+#: src/core/modules/Planet.cpp:498
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "A’ chiad ràith"
 
-#: src/core/modules/Planet.cpp:498
+#: src/core/modules/Planet.cpp:500
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Gealach chrotach a’ cinntinn"
 
-#: src/core/modules/Planet.cpp:500
+#: src/core/modules/Planet.cpp:502
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Làn-ghealach"
 
-#: src/core/modules/Planet.cpp:502
+#: src/core/modules/Planet.cpp:504
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Gealach chrotach a’ traoghadh"
 
-#: src/core/modules/Planet.cpp:504
+#: src/core/modules/Planet.cpp:506
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "An treas ràith"
 
-#: src/core/modules/Planet.cpp:506
+#: src/core/modules/Planet.cpp:508
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Gealach chorranach a’ traoghadh"
 
-#: src/core/modules/Planet.cpp:508
+#: src/core/modules/Planet.cpp:510
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Gealach ùr"
 
-#: src/core/modules/Planet.cpp:513 src/core/modules/Planet.cpp:518
+#: src/core/modules/Planet.cpp:515 src/core/modules/Planet.cpp:520
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:250 src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Ceàrn mùthadh an t-solais: %1"
 
-#: src/core/modules/Planet.cpp:514 src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:521
 #: src/core/modules/MinorPlanet.cpp:295 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:251 src/core/modules/Comet.cpp:256
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Sìneadh: %1"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:524
 #, qt-format
 msgid "Phase: %1"
 msgstr "Mùthadh an t-solais: %1"
 
-#: src/core/modules/Planet.cpp:526
+#: src/core/modules/Planet.cpp:528
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Soillsichte: %1%"
 
-#: src/core/modules/Planet.cpp:527
+#: src/core/modules/Planet.cpp:529
 #, qt-format
 msgid "Albedo: %1"
 msgstr "Albedo: %1"
 
-#: src/core/modules/Planet.cpp:539
+#: src/core/modules/Planet.cpp:541
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Factar an dubhraidh: %1%"
@@ -1182,6 +1182,15 @@ msgstr "Ceàrn an ionaid"
 msgid "Separation"
 msgstr "Sgaradh"
 
+#: src/core/modules/StarWrapper.cpp:290
+msgid "Proper motions"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:290
+msgctxt "milliarc second per year"
+msgid "mas/yr"
+msgstr ""
+
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
 msgstr "Slighe Chlann Uisnich"
@@ -1212,7 +1221,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "Ceann-là agus àm"
 
-#: src/core/StelCore.cpp:253 src/core/StelMovementMgr.cpp:180
+#: src/core/StelCore.cpp:253 src/core/StelMovementMgr.cpp:186
 msgid "Movement and Selection"
 msgstr "Gluasad is taghadh"
 
@@ -2021,58 +2030,68 @@ msgstr "Ùine na cuairte reultaich san lèirsinn: %1"
 msgid "Deep-sky objects background images"
 msgstr "Dealbhan cùlaibh nan cuspairean fad às"
 
-#: src/core/StelMovementMgr.cpp:181 src/gui/StelGui.cpp:209
+#: src/core/StelMovementMgr.cpp:187 src/gui/StelGui.cpp:209
 #: src/StelMainView.cpp:763 src/StelMainView.cpp:764
 msgid "Miscellaneous"
 msgstr "Measgaichte"
 
-#: src/core/StelMovementMgr.cpp:181
+#: src/core/StelMovementMgr.cpp:187
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Dèan gearr-leum eadar sorchan meadhan-chriosach is azimuthach"
 
-#: src/core/StelMovementMgr.cpp:182
+#: src/core/StelMovementMgr.cpp:188
 msgid "Center on selected object"
 msgstr "Meadhanaich air a’ chuspair a thagh thu"
 
-#: src/core/StelMovementMgr.cpp:183
+#: src/core/StelMovementMgr.cpp:189
 msgid "Zoom in on selected object"
 msgstr "Sùm an-steach dhan obseact a thagh thu"
 
-#: src/core/StelMovementMgr.cpp:184
+#: src/core/StelMovementMgr.cpp:190
 msgid "Zoom out"
 msgstr "Sùm a-mach"
 
-#: src/core/StelMovementMgr.cpp:185
+#: src/core/StelMovementMgr.cpp:191
 msgid "Track object"
 msgstr "Tracaich a’ chuspair"
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:193
 msgid "Look towards East"
 msgstr "Coimhead gu ear"
 
-#: src/core/StelMovementMgr.cpp:188
+#: src/core/StelMovementMgr.cpp:194
 msgid "Look towards West"
 msgstr "Coimhead gu iar"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:195
 msgid "Look towards North"
 msgstr "Coimhead gu tuath"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:196
 msgid "Look towards South"
 msgstr "Coimhead gu deas"
 
-#: src/core/StelMovementMgr.cpp:191
+#: src/core/StelMovementMgr.cpp:197
 msgid "Look towards Zenith"
 msgstr "Coimhead dhan bharr"
 
-#: src/core/StelMovementMgr.cpp:193
+#: src/core/StelMovementMgr.cpp:199
 msgid "Look towards North Celestial pole"
 msgstr "Seall an coinneamh a’ phòla a tuath speuraich"
 
-#: src/core/StelMovementMgr.cpp:194
+#: src/core/StelMovementMgr.cpp:200
 msgid "Look towards South Celestial pole"
 msgstr "Seall an coinneamh a’ phòla a deas speuraich"
+
+#: src/core/StelMovementMgr.cpp:217
+msgctxt "mount mode"
+msgid "Equatorial mount"
+msgstr ""
+
+#: src/core/StelMovementMgr.cpp:219
+msgctxt "mount mode"
+msgid "Alt-azimuth mount"
+msgstr ""
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2106,31 +2125,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr "FÀGI"
 
-#: src/gui/ConfigurationDialog.cpp:552
+#: src/gui/ConfigurationDialog.cpp:565
 msgid "Select screenshot directory"
 msgstr "Tagh pasgan a’ ghlacaidh-sgrìn"
 
-#: src/gui/ConfigurationDialog.cpp:897
+#: src/gui/ConfigurationDialog.cpp:913
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Raon-seallaidh tòiseachaidh: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:905
+#: src/gui/ConfigurationDialog.cpp:921
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Comhair tòiseachaidh an t-seallaidh Az/Àirde: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:967
+#: src/gui/ConfigurationDialog.cpp:983
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 msgid "Authors"
 msgstr "Ùghdaran"
 
-#: src/gui/ConfigurationDialog.cpp:968 src/gui/ViewDialog.cpp:1318
+#: src/gui/ConfigurationDialog.cpp:984 src/gui/ViewDialog.cpp:1334
 msgid "Contact"
 msgstr "Fios"
 
-#: src/gui/ConfigurationDialog.cpp:970 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:986 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
@@ -2150,15 +2169,15 @@ msgstr "Fios"
 msgid "Version"
 msgstr "Tionndadh"
 
-#: src/gui/ConfigurationDialog.cpp:1067
+#: src/gui/ConfigurationDialog.cpp:1083
 msgid "Running script: "
 msgstr "A’ ruith sgriobt: "
 
-#: src/gui/ConfigurationDialog.cpp:1074
+#: src/gui/ConfigurationDialog.cpp:1090
 msgid "Running script: [none]"
 msgstr "A’ ruith sgriobt: [gun ghin]"
 
-#: src/gui/ConfigurationDialog.cpp:1139
+#: src/gui/ConfigurationDialog.cpp:1155
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2166,16 +2185,16 @@ msgstr ""
 "Tha an luchdadh a-nuas aig catalogan nan reultan ùra dèanta!\n"
 "Ath-thòisich Stellarium gus an sealltainn."
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "All available star catalogs have been installed."
 msgstr "Chaidh a h-uile catalog nan reul a tha ri làimh a stàladh."
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1164
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Faigh catalog %1 à %2"
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1171
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2184,7 +2203,7 @@ msgstr ""
 "A’ luchdadh a-nuas %1...\n"
 "(’S urrainn dhut an uinneag seo a dhùnadh.)"
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1178
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2195,7 +2214,7 @@ msgstr ""
 "àireamh dhe reultan: %2 millean\n"
 "Rainse a’ mheudachd: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1205 src/gui/ConfigurationDialog.cpp:1241
+#: src/gui/ConfigurationDialog.cpp:1221 src/gui/ConfigurationDialog.cpp:1257
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2204,11 +2223,11 @@ msgstr ""
 "Mearachd le luchdadh a-nuas %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1294
+#: src/gui/ConfigurationDialog.cpp:1310
 msgid "Verifying file integrity..."
 msgstr "A’ dearbhadh nam faidhlichean ..."
 
-#: src/gui/ConfigurationDialog.cpp:1298
+#: src/gui/ConfigurationDialog.cpp:1314
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2217,170 +2236,170 @@ msgstr ""
 "Mearachd le luchdadh a-nuas %1:\n"
 "Tha am faidhle coirbte."
 
-#: src/gui/ConfigurationDialog.cpp:1344 src/gui/ConfigurationDialog.cpp:1353
+#: src/gui/ConfigurationDialog.cpp:1360 src/gui/ConfigurationDialog.cpp:1369
 msgid "Available"
 msgstr "Ri fhaighinn"
 
-#: src/gui/ConfigurationDialog.cpp:1346 src/gui/ConfigurationDialog.cpp:1355
+#: src/gui/ConfigurationDialog.cpp:1362 src/gui/ConfigurationDialog.cpp:1371
 msgid "Not Available"
 msgstr "Chan eil e ri fhaighinn"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1422
+#: src/gui/ConfigurationDialog.cpp:1438
 msgid "Algorithm of"
 msgstr "An t-algairim airson"
 
-#: src/gui/ConfigurationDialog.cpp:1435
+#: src/gui/ConfigurationDialog.cpp:1451
 msgid "Without correction"
 msgstr "Gun cheartachadh"
 
-#: src/gui/ConfigurationDialog.cpp:1436
+#: src/gui/ConfigurationDialog.cpp:1452
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1437
+#: src/gui/ConfigurationDialog.cpp:1453
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1438
+#: src/gui/ConfigurationDialog.cpp:1454
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1439
+#: src/gui/ConfigurationDialog.cpp:1455
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1440
+#: src/gui/ConfigurationDialog.cpp:1456
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) ⁊ Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1441
+#: src/gui/ConfigurationDialog.cpp:1457
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller ⁊ Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1442
+#: src/gui/ConfigurationDialog.cpp:1458
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1443
+#: src/gui/ConfigurationDialog.cpp:1459
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel ⁊ Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1444
+#: src/gui/ConfigurationDialog.cpp:1460
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel ⁊ Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1445
+#: src/gui/ConfigurationDialog.cpp:1461
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison ⁊ Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1446
+#: src/gui/ConfigurationDialog.cpp:1462
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson ⁊ Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1447
+#: src/gui/ConfigurationDialog.cpp:1463
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson ⁊ Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1448
+#: src/gui/ConfigurationDialog.cpp:1464
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1449
+#: src/gui/ConfigurationDialog.cpp:1465
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1450
+#: src/gui/ConfigurationDialog.cpp:1466
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze ⁊ Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1451
+#: src/gui/ConfigurationDialog.cpp:1467
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson ⁊ Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1452
+#: src/gui/ConfigurationDialog.cpp:1468
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1454
+#: src/gui/ConfigurationDialog.cpp:1470
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (còmhla ri Chapront, Chapront-Touze ⁊ Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1455
+#: src/gui/ConfigurationDialog.cpp:1471
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1456
+#: src/gui/ConfigurationDialog.cpp:1472
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus ⁊ Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1457
+#: src/gui/ConfigurationDialog.cpp:1473
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison ⁊ Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1458
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison ⁊ Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1460
+#: src/gui/ConfigurationDialog.cpp:1476
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak ⁊ Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1479
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak ⁊ Meeus (2006) gun luathachadh a bharrachd air a’ ghealach"
 
-#: src/gui/ConfigurationDialog.cpp:1465
+#: src/gui/ConfigurationDialog.cpp:1481
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1466
+#: src/gui/ConfigurationDialog.cpp:1482
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1467
+#: src/gui/ConfigurationDialog.cpp:1483
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck ⁊ Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1468
+#: src/gui/ConfigurationDialog.cpp:1484
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold ⁊ Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1469
+#: src/gui/ConfigurationDialog.cpp:1485
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq ⁊ Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1470
+#: src/gui/ConfigurationDialog.cpp:1486
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana ⁊ Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1487
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Co-aontar gnàthaichte airson %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1520 src/gui/ConfigurationDialog.cpp:1555
-#: src/gui/StelGuiItems.cpp:632 src/gui/LocationDialog.cpp:426
+#: src/gui/ConfigurationDialog.cpp:1536 src/gui/ConfigurationDialog.cpp:1571
+#: src/gui/StelGuiItems.cpp:633 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr "Roghainn bhunaiteach an t-siostaim"
 
-#: src/gui/ConfigurationDialog.cpp:1521
+#: src/gui/ConfigurationDialog.cpp:1537
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "bbbb-mm-ll (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1522
+#: src/gui/ConfigurationDialog.cpp:1538
 msgid "dd-mm-yyyy"
 msgstr "ll-mm-bbbb"
 
-#: src/gui/ConfigurationDialog.cpp:1523
+#: src/gui/ConfigurationDialog.cpp:1539
 msgid "mm-dd-yyyy"
 msgstr "mm-ll-bbbb"
 
-#: src/gui/ConfigurationDialog.cpp:1556
+#: src/gui/ConfigurationDialog.cpp:1572
 msgid "12-hour format"
 msgstr "Fòrmat 12 uair a thìde"
 
-#: src/gui/ConfigurationDialog.cpp:1557
+#: src/gui/ConfigurationDialog.cpp:1573
 msgid "24-hour format"
 msgstr "Fòrmat 24 uair a thìde"
 
@@ -2734,173 +2753,228 @@ msgstr "Fèin-fhalaich am bàr-putanan inghearach"
 msgid "Toggle visibility of GUI"
 msgstr "Toglaich am faic thu an eadar-aghaidh"
 
-#: src/gui/StelGuiItems.cpp:322 src/gui/StelGuiItems.cpp:862
+#: src/gui/StelGuiItems.cpp:323 src/gui/StelGuiItems.cpp:863
 msgid "Space"
 msgstr "Space"
 
-#: src/gui/StelGuiItems.cpp:634
+#: src/gui/StelGuiItems.cpp:635
 msgid "Time zone"
 msgstr "Roinn-tìde"
 
-#: src/gui/StelGuiItems.cpp:637 src/gui/LocationDialog.cpp:424
+#: src/gui/StelGuiItems.cpp:638 src/gui/LocationDialog.cpp:424
 msgid "Local Mean Solar Time"
 msgstr "Àm grianail meadhain ionadail"
 
-#: src/gui/StelGuiItems.cpp:640 src/gui/LocationDialog.cpp:425
+#: src/gui/StelGuiItems.cpp:641 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
 msgstr "Fìor-àm grianail ionadail"
 
-#: src/gui/StelGuiItems.cpp:677
+#: src/gui/StelGuiItems.cpp:678
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:709
+#: src/gui/StelGuiItems.cpp:710
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr "astar planaid-mheadhanach de %1 km"
 
-#: src/gui/StelGuiItems.cpp:711
+#: src/gui/StelGuiItems.cpp:712
 msgid "planetocentric observer"
 msgstr "neach-amhairc planaid-mheadhanach"
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:726
+#: src/gui/StelGuiItems.cpp:727
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "Raon seallaidh"
 
-#: src/gui/StelGuiItems.cpp:742
+#: src/gui/StelGuiItems.cpp:743
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:440
 msgid "Field of view"
 msgstr "Raon seallaidh"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:761
+#: src/gui/StelGuiItems.cpp:762
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "FPS"
 
-#: src/gui/StelGuiItems.cpp:769
+#: src/gui/StelGuiItems.cpp:770
 msgid "Frames per second"
 msgstr "Frèaman gach diog"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1182
+#: src/gui/ViewDialog.cpp:1198
 msgid "Excellent dark-sky site"
 msgstr "Sàr-ionad speura duirche"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1184
+#: src/gui/ViewDialog.cpp:1200
 msgid "Typical truly dark site"
 msgstr "Ionad speura duirche àbhaisteach"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1186
+#: src/gui/ViewDialog.cpp:1202
 msgid "Rural sky"
 msgstr "Speur dùthchail"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1188
+#: src/gui/ViewDialog.cpp:1204
 msgid "Rural/suburban transition"
 msgstr "Eadar dùthaich ’s frith-bhaile"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1190
+#: src/gui/ViewDialog.cpp:1206
 msgid "Suburban sky"
 msgstr "Speur frith-bhailteach"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1192
+#: src/gui/ViewDialog.cpp:1208
 msgid "Bright suburban sky"
 msgstr "Speur frith-bhailteach soilleir"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1194
+#: src/gui/ViewDialog.cpp:1210
 msgid "Suburban/urban transition"
 msgstr "Eadar frith-bhaile ’s baile"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1196
+#: src/gui/ViewDialog.cpp:1212
 msgid "City sky"
 msgstr "Speur bailte"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1198
+#: src/gui/ViewDialog.cpp:1214
 msgid "Inner-city sky"
 msgstr "Speur meadhan-bhaile"
 
-#: src/gui/ViewDialog.cpp:1212
+#: src/gui/ViewDialog.cpp:1228
 msgid "The naked-eye limiting magnitude is"
 msgstr "Crìochan meudachd air an t-sùil lom"
 
-#: src/gui/ViewDialog.cpp:1220
+#: src/gui/ViewDialog.cpp:1236
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1221
+#: src/gui/ViewDialog.cpp:1237
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1242
+#: src/gui/ViewDialog.cpp:1258
 msgid "Abbreviated"
 msgstr "Gearr"
 
-#: src/gui/ViewDialog.cpp:1243
+#: src/gui/ViewDialog.cpp:1259
 msgid "Native"
 msgstr "Tùsail"
 
-#: src/gui/ViewDialog.cpp:1244
+#: src/gui/ViewDialog.cpp:1260
 msgid "Translated"
 msgstr "Air eadar-theangachadh"
 
-#: src/gui/ViewDialog.cpp:1439
+#: src/gui/ViewDialog.cpp:1455
 msgid "No shooting stars"
 msgstr "Gun rionnag-earbaill"
 
-#: src/gui/ViewDialog.cpp:1441
+#: src/gui/ViewDialog.cpp:1457
 msgid "Normal rate"
 msgstr "Reat àbhaisteach"
 
-#: src/gui/ViewDialog.cpp:1443
+#: src/gui/ViewDialog.cpp:1459
 msgid "Standard Orionids rate"
 msgstr "Reat àbhaisteach aig dreagan an t-Sealgair Mhòir"
 
-#: src/gui/ViewDialog.cpp:1445
+#: src/gui/ViewDialog.cpp:1461
 msgid "Standard Perseids rate"
 msgstr "Reat àbhaisteach aig dreagan Làmh a’ Chlaidheimh"
 
-#: src/gui/ViewDialog.cpp:1447
+#: src/gui/ViewDialog.cpp:1463
 msgid "Standard Geminids rate"
 msgstr "Reat àbhaisteach aig dreagan an Dà Leth-aoin"
 
-#: src/gui/ViewDialog.cpp:1449
+#: src/gui/ViewDialog.cpp:1465
 msgid "Exceptional Perseid rate"
 msgstr "Reat anabarrach aig dreagan Pherseus"
 
-#: src/gui/ViewDialog.cpp:1451
+#: src/gui/ViewDialog.cpp:1467
 msgid "Meteor storm rate"
 msgstr "Tricead nan stoirmean dhreagan"
 
-#: src/gui/ViewDialog.cpp:1453
+#: src/gui/ViewDialog.cpp:1469
 msgid "Exceptional Draconid rate"
 msgstr "Reat anabarrach aig dreagan an Dràgoin"
 
-#: src/gui/ViewDialog.cpp:1455
+#: src/gui/ViewDialog.cpp:1471
 msgid "Exceptional Leonid rate"
 msgstr "Reat anabarrach aig dreagan an Leòmhainn"
 
-#: src/gui/ViewDialog.cpp:1457
+#: src/gui/ViewDialog.cpp:1473
 msgid "Very high rate (1966 Leonids)"
 msgstr "Reat glè àrd (1966 dreag an Leòmhainn)"
 
-#: src/gui/ViewDialog.cpp:1459
+#: src/gui/ViewDialog.cpp:1475
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "An reat as àirde a-riamh (1833 dreag an Leòmhainn)"
+
+#: src/gui/ViewDialog.cpp:1528
+msgctxt "magnitude algorithm"
+msgid "G. Mueller (1893)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1529
+msgctxt "magnitude algorithm"
+msgid "Astronomical Almanach (1984)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1530
+msgctxt "magnitude algorithm"
+msgid "Explanatory Supplement (1992)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1531
+msgctxt "magnitude algorithm"
+msgid "Explanatory Supplement (2013)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1532
+msgctxt "magnitude algorithm"
+msgid "Generic"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1558
+msgid ""
+"Algorithm was used in <em>Astronomical Almanac</em> (1984 and later) and he "
+"gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1561
+msgid ""
+"Algorithm is based on visual observations 1877-1891 by G. Mueller and was "
+"published in <em>Explanatory Supplement to the Astronomical Almanac</em> "
+"(1961)."
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1564
+msgid ""
+"Algorithm was provided by Pere Planesas (Observatorio Astronomico Nacional) "
+"and it was published in <em>Explanatory Supplement to the Astronomical "
+"Almanac</em> (1992)."
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1567
+msgid ""
+"Algorithm was published in the 3rd edition of the <em>Explanatory Supplement "
+"to the Astronomical Almanac</em> (2013)."
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:1570
+msgid "Visual magnitude based on phase angle and albedo."
+msgstr ""
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
@@ -3154,7 +3228,7 @@ msgstr "Luathachadh-linne na gealaich"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:268 src/gui/AstroCalcDialog.cpp:296
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1334
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:347
@@ -3182,7 +3256,7 @@ msgstr "meud"
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:276 src/gui/AstroCalcDialog.cpp:337
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1313
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Type"
 msgstr "Seòrsa"
@@ -3218,13 +3292,13 @@ msgid "Positions on %1"
 msgstr "Ionadan air %1"
 
 #: src/gui/AstroCalcDialog.cpp:435 src/gui/AstroCalcDialog.cpp:2139
-#: src/ui_viewDialog.h:2191 src/ui_dsoColorsDialog.h:542
+#: src/ui_viewDialog.h:2199 src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "Reul-chriosan"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:436 src/translations.h:115
-#: src/ui_viewDialog.h:2192 src/ui_dsoColorsDialog.h:507
+#: src/ui_viewDialog.h:2200 src/ui_dsoColorsDialog.h:507
 msgid "Active galaxies"
 msgstr "Reul-chriosan gnìomhach"
 
@@ -3236,7 +3310,7 @@ msgstr "Reul-chriosan rèidio"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:438 src/translations.h:119
-#: src/ui_viewDialog.h:2186 src/ui_dsoColorsDialog.h:514
+#: src/ui_viewDialog.h:2194 src/ui_dsoColorsDialog.h:514
 msgid "Interacting galaxies"
 msgstr "Reul-chriosan ag eadar-ghnìomhadh"
 
@@ -3247,7 +3321,7 @@ msgstr "Cuasaran soilleir"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:440 src/gui/AstroCalcDialog.cpp:2140
-#: src/translations.h:123 src/ui_viewDialog.h:2189 src/ui_dsoColorsDialog.h:534
+#: src/translations.h:123 src/ui_viewDialog.h:2197 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "Grioglachanan reultan"
 
@@ -3284,14 +3358,14 @@ msgstr "Deargan-doireannan"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:446 src/gui/AstroCalcDialog.cpp:1024
 #: src/gui/AstroCalcDialog.cpp:2149 src/translations.h:105
-#: src/ui_viewDialog.h:2190 src/ui_dsoColorsDialog.h:580
+#: src/ui_viewDialog.h:2198 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "Deargan-doireannan planaideach"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:447 src/gui/AstroCalcDialog.cpp:1026
 #: src/gui/AstroCalcDialog.cpp:2138 src/translations.h:107
-#: src/ui_viewDialog.h:2193 src/ui_dsoColorsDialog.h:540
+#: src/ui_viewDialog.h:2201 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "Deargan-doireannan dorcha"
 
@@ -3326,7 +3400,7 @@ msgstr "Raointean HII"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:453 src/translations.h:133
-#: src/ui_viewDialog.h:2185 src/ui_dsoColorsDialog.h:614
+#: src/ui_viewDialog.h:2193 src/ui_dsoColorsDialog.h:614
 msgid "Supernova remnants"
 msgstr "Iarmadan mòr-nòbhathan"
 
@@ -3381,13 +3455,13 @@ msgstr "Deargan-doireannan proto-phlanaideach"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:463 src/translations.h:153
-#: src/ui_viewDialog.h:2149
+#: src/ui_viewDialog.h:2157
 msgid "Messier Catalogue"
 msgstr "Catalog Mhessier"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:464 src/translations.h:155
-#: src/ui_viewDialog.h:2152
+#: src/ui_viewDialog.h:2160
 msgid "Caldwell Catalogue"
 msgstr "Catalog Chaldwell"
 
@@ -3441,11 +3515,11 @@ msgstr ""
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:475 src/ui_viewDialog.h:2176
+#: src/gui/AstroCalcDialog.cpp:475 src/ui_viewDialog.h:2184
 msgid "Principal Galaxy Catalog"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:476 src/ui_viewDialog.h:2179
+#: src/gui/AstroCalcDialog.cpp:476 src/ui_viewDialog.h:2187
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "The Uppsala General Catalogue of Galaxies"
 
@@ -3684,7 +3758,7 @@ msgstr ""
 msgid "Bright stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2137 src/ui_viewDialog.h:2194
+#: src/gui/AstroCalcDialog.cpp:2137 src/ui_viewDialog.h:2202
 msgid "Bright nebulae"
 msgstr "Deargan-doireannan soilleir"
 
@@ -3712,7 +3786,7 @@ msgstr ""
 msgid "Export bookmarks as..."
 msgstr ""
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1506
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1523
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Sgriobtaichean"
@@ -3755,7 +3829,7 @@ msgstr ""
 msgid "Full-screen mode"
 msgstr "Modh làn-sgrìn"
 
-#: src/StelMainView.cpp:920
+#: src/StelMainView.cpp:921
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3764,14 +3838,14 @@ msgstr ""
 "bathar-cruaidh na grafaigeachd no cleachd an roghainn --angle-mode (no --"
 "mesa-mode)."
 
-#: src/StelMainView.cpp:923
+#: src/StelMainView.cpp:924
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Chan fhoghainn an tionndadh dhe OpenGL. Feuch an ùraich thu na draibhearan "
 "no bathar-cruaidh na grafaigeachd."
 
-#: src/StelMainView.cpp:965
+#: src/StelMainView.cpp:966
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3782,7 +3856,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1016
+#: src/StelMainView.cpp:1017
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3793,7 +3867,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1072
+#: src/StelMainView.cpp:1073
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3804,7 +3878,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1113
+#: src/StelMainView.cpp:1114
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3815,7 +3889,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1225
+#: src/StelMainView.cpp:1226
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4612,7 +4686,7 @@ msgstr "Pasgan"
 msgid "&Choose"
 msgstr "&Tagh"
 
-#: src/translations.h:416 src/ui_configurationDialog.h:1476
+#: src/translations.h:416 src/ui_configurationDialog.h:1493
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Sguir dheth"
@@ -5723,7 +5797,7 @@ msgstr "Mu dhèidhinn"
 msgid "Log"
 msgstr "Loga"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1346
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1358
 msgid "Edit keyboard shortcuts..."
 msgstr "Deasaich ath-ghoiridean a’ mheur-chlàir ..."
 
@@ -6009,49 +6083,71 @@ msgstr "Cha lìon gu fèin-obrachail ach o thoiseach facail"
 msgid "Lock position when coordinates are used"
 msgstr "Glais an t-ionad nuair a bhios co-chomharran ’gan cleachdadh"
 
-#: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2423
-#: src/ui_viewDialog.h:2445 src/ui_viewDialog.h:2479
-#: src/ui_configurationDialog.h:1477 src/ui_configurationDialog.h:1488
+#: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2431
+#: src/ui_viewDialog.h:2453 src/ui_viewDialog.h:2487
+#: src/ui_configurationDialog.h:1494 src/ui_configurationDialog.h:1505
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Roghainnean"
 
-#: src/ui_viewDialog.h:2059
+#: src/ui_viewDialog.h:2066
 msgid "View"
 msgstr "Sealladh"
 
-#: src/ui_viewDialog.h:2062
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
-msgid "Absolute scale:"
-msgstr "Sgèile absaloideach:"
-
-#: src/ui_viewDialog.h:2063
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:262
-msgid "Relative scale:"
-msgstr "Sgèile dàimheach:"
-
-#: src/ui_viewDialog.h:2064
+#: src/ui_viewDialog.h:2069
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Twinkle:"
 msgstr "Priobadh:"
 
-#: src/ui_viewDialog.h:2066
+#: src/ui_viewDialog.h:2071
 msgid "Limit the magnitude of stars"
 msgstr "Cuingich meudachd nan reultan"
 
-#: src/ui_viewDialog.h:2068 src/ui_viewDialog.h:2124 src/ui_viewDialog.h:2207
+#: src/ui_viewDialog.h:2073 src/ui_viewDialog.h:2134 src/ui_viewDialog.h:2215
 msgid "Limit magnitude:"
 msgstr "Cuingich a’ mheudachd:"
 
-#: src/ui_viewDialog.h:2069 src/ui_viewDialog.h:2130 src/ui_viewDialog.h:2195
+#: src/ui_viewDialog.h:2074 src/ui_viewDialog.h:2109 src/ui_viewDialog.h:2203
 msgid "Labels and Markers"
 msgstr "Leubailean is comharran"
 
-#: src/ui_viewDialog.h:2071
-msgid "Show atmosphere"
-msgstr "Seall an àile"
-
 #: src/ui_viewDialog.h:2075
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:268
+msgid "Absolute scale:"
+msgstr "Sgèile absaloideach:"
+
+#: src/ui_viewDialog.h:2076
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:262
+msgid "Relative scale:"
+msgstr "Sgèile dàimheach:"
+
+#: src/ui_viewDialog.h:2077 src/ui_viewDialog.h:2493
+msgid "Sky"
+msgstr "An speur"
+
+#: src/ui_viewDialog.h:2078
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
+msgid "Light pollution:"
+msgstr "Truailleadh solais:"
+
+#: src/ui_viewDialog.h:2079
+msgid "Milky Way brightness:"
+msgstr "Soilleireachd Slighe Chlann Uisnich:"
+
+#: src/ui_viewDialog.h:2081
+msgid "Dim faint stars when a very bright object is visible"
+msgstr ""
+"Doillerich reultan fanna nuair a bhios cuspair glè shoilleir ri fhaicinn"
+
+#: src/ui_viewDialog.h:2083
+msgid "Dynamic eye adaptation"
+msgstr "Freagarraich dhan t-sùil gu h-innsgineach"
+
+#: src/ui_viewDialog.h:2084
+msgid "Zodiacal Light brightness:"
+msgstr "Soilleireachd nan solasan grian-chriosach:"
+
+#: src/ui_viewDialog.h:2086
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -6059,91 +6155,25 @@ msgstr ""
 "Cleachd dàta air truailleadh solais o stòr-dàta nan ionadan agus leig "
 "seachad na roghainnean airson truailleadh solais gu h-ìosal"
 
-#: src/ui_viewDialog.h:2078
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:444
-msgid "Light pollution:"
-msgstr "Truailleadh solais:"
-
-#: src/ui_viewDialog.h:2080
+#: src/ui_viewDialog.h:2090
 msgid "pressure, temperature, extinction coefficient"
 msgstr "brùthadh, teòthachd, co-èifeachd a’ mhùchaidh"
 
-#: src/ui_viewDialog.h:2082
+#: src/ui_viewDialog.h:2092
 msgid "Refraction/Extinction settings..."
 msgstr "Roghainnean an ath-raonaidh/a’ mhùchaidh..."
 
-#: src/ui_viewDialog.h:2084
-msgid "Settings for sporadic meteors"
-msgstr "Roghainnean airson dreagan an-dràsta ’s a-rithist"
+#: src/ui_viewDialog.h:2093
+msgid "Atmosphere visualization"
+msgstr ""
 
-#: src/ui_viewDialog.h:2086
-msgid "Shooting Stars"
-msgstr "Rionnagan-earbaill"
-
-#: src/ui_viewDialog.h:2089
-msgid "Hourly zenith rate"
-msgstr "Reat a’ bharra gach uair"
-
-#: src/ui_viewDialog.h:2091
-msgctxt "Zenithal Hourly Rate"
-msgid "ZHR:"
-msgstr "ZHR:"
-
-#: src/ui_viewDialog.h:2092
+#: src/ui_viewDialog.h:2094
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Cuspairean an rian-grèine"
 
 #: src/ui_viewDialog.h:2096
-msgid "Use more accurate 3D models (where available)"
-msgstr ""
-
-#: src/ui_viewDialog.h:2100
-msgid "Simulate self-shadowing"
-msgstr ""
-
-#: src/ui_viewDialog.h:2101
-msgid "Show planet markers"
-msgstr "Seall comharran nam planaidean"
-
-#: src/ui_viewDialog.h:2102
-msgid "Show planet orbits"
-msgstr "Seall reul-chuairtean nam planaidean"
-
-#: src/ui_viewDialog.h:2104
-msgid "Configure colors of orbit lines"
-msgstr "Rèitich dathan loidhnichean nan reul-chuairt"
-
-#: src/ui_viewDialog.h:2106
-msgid "Colors..."
-msgstr "Dathan…"
-
-#: src/ui_viewDialog.h:2108
-msgid ""
-"Deactivate this option if you want to see orbit for selected planet and its "
-"moons."
-msgstr ""
-"Cuir an roghainn seo à comas ma tha thu airson an reul-chuairt fhaicinn "
-"airson na planaid a thagh thu ’s na gealaich aige."
-
-#: src/ui_viewDialog.h:2110
-msgid "Show orbit for selected planet"
-msgstr "Seall reul-chuairt na planaid a thagh thu"
-
-#: src/ui_viewDialog.h:2112
-msgid ""
-"Deactivate this option if you want to see the trails for all Solar system "
-"bodies."
-msgstr ""
-"Cuir an roghainn seo à comas mur eil thu airson na lorgan fhaicinn airson "
-"gabh ball na rian-grèine."
-
-#: src/ui_viewDialog.h:2114
-msgid "Show trail only for selected planet"
-msgstr "Na seall na lorgan ach airson na planaid a thagh thu"
-
-#: src/ui_viewDialog.h:2116
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -6151,98 +6181,142 @@ msgstr ""
 "Cuir an roghainn seo an comas gus buaidh mas-fhìor dhe fhìor luaths an t-"
 "solais fhaighinn (mholamaid seo)."
 
-#: src/ui_viewDialog.h:2118
+#: src/ui_viewDialog.h:2098
 msgid "Simulate light speed"
 msgstr "Coltas luaths an t-solais"
 
-#: src/ui_viewDialog.h:2119
-msgid "Use custom settings of GRS:"
-msgstr "Cleachd roghainnean gnàthaichte airson an Spoit Mhòir Dheirg:"
+#: src/ui_viewDialog.h:2099
+msgid "Show planet orbits"
+msgstr "Seall reul-chuairtean nam planaidean"
 
-#: src/ui_viewDialog.h:2120
-msgid "GRS details..."
-msgstr "Mion-fhiosrachadh an Spoit Mhòir Dheirg..."
+#: src/ui_viewDialog.h:2101
+msgid "Configure colors of orbit lines"
+msgstr "Rèitich dathan loidhnichean nan reul-chuairt"
 
-#: src/ui_viewDialog.h:2122
-msgid "Limit the magnitude of solar system objects"
-msgstr "Cuingich a’ mheudachd aig cuspairean an rian-grèine"
+#: src/ui_viewDialog.h:2103
+msgid "Colors..."
+msgstr "Dathan…"
 
-#: src/ui_viewDialog.h:2125
-msgid "Scale Moon:"
-msgstr "Sgèilich a’ Ghealach:"
+#: src/ui_viewDialog.h:2105
+msgid ""
+"Deactivate this option if you want to see the trails for all Solar system "
+"bodies."
+msgstr ""
+"Cuir an roghainn seo à comas mur eil thu airson na lorgan fhaicinn airson "
+"gabh ball na rian-grèine."
 
-#: src/ui_viewDialog.h:2127
-msgid "Scale factor"
-msgstr "Am factar sgèilidh"
+#: src/ui_viewDialog.h:2107
+msgid "Show trail only for selected planet"
+msgstr "Na seall na lorgan ach airson na planaid a thagh thu"
 
-#: src/ui_viewDialog.h:2129
+#: src/ui_viewDialog.h:2108
+msgid "Show planet markers"
+msgstr "Seall comharran nam planaidean"
+
+#: src/ui_viewDialog.h:2110
 msgid "Scale minor bodies:"
 msgstr ""
 
-#: src/ui_viewDialog.h:2131 src/ui_viewDialog.h:2485
-msgid "Sky"
-msgstr "An speur"
+#: src/ui_viewDialog.h:2112
+msgid ""
+"Deactivate this option if you want to see orbit for selected planet and its "
+"moons."
+msgstr ""
+"Cuir an roghainn seo à comas ma tha thu airson an reul-chuairt fhaicinn "
+"airson na planaid a thagh thu ’s na gealaich aige."
+
+#: src/ui_viewDialog.h:2114
+msgid "Show orbit for selected planet"
+msgstr "Seall reul-chuairt na planaid a thagh thu"
+
+#: src/ui_viewDialog.h:2115
+msgid "Scale Moon:"
+msgstr "Sgèilich a’ Ghealach:"
+
+#: src/ui_viewDialog.h:2117
+msgid "Scale factor"
+msgstr "Am factar sgèilidh"
+
+#: src/ui_viewDialog.h:2122
+msgid "Simulate self-shadowing"
+msgstr ""
+
+#: src/ui_viewDialog.h:2123
+msgid "Use custom settings of GRS:"
+msgstr "Cleachd roghainnean gnàthaichte airson an Spoit Mhòir Dheirg:"
+
+#: src/ui_viewDialog.h:2124
+msgid "GRS details..."
+msgstr "Mion-fhiosrachadh an Spoit Mhòir Dheirg..."
+
+#: src/ui_viewDialog.h:2125
+msgid "Planets magnitude algorithm:"
+msgstr ""
+
+#: src/ui_viewDialog.h:2130
+msgid "Use more accurate 3D models (where available)"
+msgstr ""
 
 #: src/ui_viewDialog.h:2132
-msgid "Milky Way brightness:"
-msgstr "Soilleireachd Slighe Chlann Uisnich:"
+msgid "Limit the magnitude of solar system objects"
+msgstr "Cuingich a’ mheudachd aig cuspairean an rian-grèine"
 
-#: src/ui_viewDialog.h:2133
-msgid "Zodiacal Light brightness:"
-msgstr "Soilleireachd nan solasan grian-chriosach:"
-
-#: src/ui_viewDialog.h:2135
-msgid "Dim faint stars when a very bright object is visible"
-msgstr ""
-"Doillerich reultan fanna nuair a bhios cuspair glè shoilleir ri fhaicinn"
-
-#: src/ui_viewDialog.h:2137
-msgid "Dynamic eye adaptation"
-msgstr "Freagarraich dhan t-sùil gu h-innsgineach"
+#: src/ui_viewDialog.h:2136
+msgid "Settings for sporadic meteors"
+msgstr "Roghainnean airson dreagan an-dràsta ’s a-rithist"
 
 #: src/ui_viewDialog.h:2138
+msgctxt "Zenithal Hourly Rate"
+msgid "Shooting stars:"
+msgstr ""
+
+#: src/ui_viewDialog.h:2140 src/ui_viewDialog.h:2143
+msgid "The zenithal hourly rate for the sporadic meteors"
+msgstr ""
+
+#: src/ui_viewDialog.h:2146
 msgid "Display objects from catalogs"
 msgstr "Seall cuspairean o chatalogan"
 
-#: src/ui_viewDialog.h:2140
+#: src/ui_viewDialog.h:2148
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Index Catalogue of Nebulae and Clusters of Stars"
 
-#: src/ui_viewDialog.h:2143
+#: src/ui_viewDialog.h:2151
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "New General Catalogue of Nebulae and Clusters of Stars"
 
-#: src/ui_viewDialog.h:2146
+#: src/ui_viewDialog.h:2154
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lynds’ Catalogue of Bright Nebulae (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:2155
+#: src/ui_viewDialog.h:2163
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnard’s Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:2158
+#: src/ui_viewDialog.h:2166
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Catalogue of HII Regions (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:2161
+#: src/ui_viewDialog.h:2169
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:2164
+#: src/ui_viewDialog.h:2172
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:2167
+#: src/ui_viewDialog.h:2175
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lynds’ Catalogue of Dark Nebulae (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:2170
+#: src/ui_viewDialog.h:2178
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Catalog of Open Galactic Clusters (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:2173
+#: src/ui_viewDialog.h:2181
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -6250,32 +6324,32 @@ msgstr ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 
-#: src/ui_viewDialog.h:2182
+#: src/ui_viewDialog.h:2190
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:2184
+#: src/ui_viewDialog.h:2192
 msgid "Filter by type"
 msgstr "Criathraich a-rèir seòrsa"
 
-#: src/ui_viewDialog.h:2187 src/ui_dsoColorsDialog.h:599
+#: src/ui_viewDialog.h:2195 src/ui_dsoColorsDialog.h:599
 msgid "Hydrogen regions"
 msgstr "Raointean hàidhdreaidein"
 
-#: src/ui_viewDialog.h:2188
+#: src/ui_viewDialog.h:2196
 msgid "Other"
 msgstr "Eile"
 
-#: src/ui_viewDialog.h:2197
+#: src/ui_viewDialog.h:2205
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 "Cleachd oidheaman co-rèireach a thaobh meud ceàrnach nan cuspairean fad às"
 
-#: src/ui_viewDialog.h:2199
+#: src/ui_viewDialog.h:2207
 msgid "Use proportional hints"
 msgstr "Cleachd oidheaman co-rèireach"
 
-#: src/ui_viewDialog.h:2201
+#: src/ui_viewDialog.h:2209
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -6283,18 +6357,18 @@ msgstr ""
 "Cleachd soilleireachd uachdair nan cuspairean fad às a chum an sgèile air "
 "faicsinneachd nan comharran is leubailean aca."
 
-#: src/ui_viewDialog.h:2203
+#: src/ui_viewDialog.h:2211
 msgid "Use surface brightness"
 msgstr "Cleachd soilleireachd an uachdair"
 
-#: src/ui_viewDialog.h:2205
+#: src/ui_viewDialog.h:2213
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Cuingich meudachd (airson luchd-amhairc gun taic / glainne dhà-shùileach) "
 "nan cuspairean fad às."
 
-#: src/ui_viewDialog.h:2209
+#: src/ui_viewDialog.h:2217
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -6302,114 +6376,114 @@ msgstr ""
 "Cleachd ainmeachadh nan oibseactan fad às seach na h-ainmean cumanta aca "
 "airson leubailean na sgrìn"
 
-#: src/ui_viewDialog.h:2211
+#: src/ui_viewDialog.h:2219
 msgid "Use designations for screen labels"
 msgstr "Cleachd ainmeachaidhean air leubailean na sgrìn"
 
-#: src/ui_viewDialog.h:2212 plugins/Satellites/src/ui_satellitesDialog.h:747
+#: src/ui_viewDialog.h:2220 plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Labels"
 msgstr "Leubailean"
 
-#: src/ui_viewDialog.h:2213
+#: src/ui_viewDialog.h:2221
 msgid "Hints"
 msgstr "Oidheaman"
 
-#: src/ui_viewDialog.h:2214
+#: src/ui_viewDialog.h:2222
 msgid "Configure colors of markers"
 msgstr "Rèitich dathan nan comharran"
 
-#: src/ui_viewDialog.h:2215
+#: src/ui_viewDialog.h:2223
 msgid "Celestial Sphere"
 msgstr "Cruinne speurach"
 
-#: src/ui_viewDialog.h:2217
+#: src/ui_viewDialog.h:2225
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "Dath loidhne domhan-fhaid na comhaireachd ’s a’ cho-nasgaidh"
 
-#: src/ui_viewDialog.h:2220
+#: src/ui_viewDialog.h:2228
 msgid "Color of meridian"
 msgstr "Dath na meadhan-loidhne"
 
-#: src/ui_viewDialog.h:2223
+#: src/ui_viewDialog.h:2231
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "Seall an loidhne èiclipteach aig J2000.0 (bun-phlèana VSOP87A)."
 
-#: src/ui_viewDialog.h:2225
+#: src/ui_viewDialog.h:2233
 msgid "Ecliptic (J2000)"
 msgstr "An t-èiclipteach (J2000)"
 
-#: src/ui_viewDialog.h:2227
+#: src/ui_viewDialog.h:2235
 msgid "Show celestial equator of current planet and date."
 msgstr ""
 "Seall a’ chrios-meadhain speurach aig a’ phlanaid is ceann-là làithreach."
 
-#: src/ui_viewDialog.h:2229
+#: src/ui_viewDialog.h:2237
 msgid "Equator (of date)"
 msgstr "An crios-meadhain (an-diugh)"
 
-#: src/ui_viewDialog.h:2231
+#: src/ui_viewDialog.h:2239
 msgid "Show celestial equator of J2000.0."
 msgstr "Seall a’ chrios-meadhain speurach aig J2000.0."
 
-#: src/ui_viewDialog.h:2233
+#: src/ui_viewDialog.h:2241
 msgid "Equator (J2000)"
 msgstr "An crios-meadhain (J2000)"
 
-#: src/ui_viewDialog.h:2235
+#: src/ui_viewDialog.h:2243
 msgid "Color of equator (J2000.0)"
 msgstr "Dath a’ chriosa-mheadhain (J2000.0)"
 
-#: src/ui_viewDialog.h:2238
+#: src/ui_viewDialog.h:2246
 msgid "Show ecliptic line of current date."
 msgstr "Seall an loidhne èiclipteach airson an-diugh."
 
-#: src/ui_viewDialog.h:2240
+#: src/ui_viewDialog.h:2248
 msgid "Ecliptic (of date)"
 msgstr "An t-èiclipteach (an-diugh)"
 
-#: src/ui_viewDialog.h:2242
+#: src/ui_viewDialog.h:2250
 msgid "Color of equator (of date)"
 msgstr "Dath a’ chriosa-mheadhain (an-diugh)"
 
-#: src/ui_viewDialog.h:2245
+#: src/ui_viewDialog.h:2253
 msgid "Show Galactic equator line."
 msgstr "Seall loidhne a’ chriosa-mheadhain reul-chriosaich."
 
-#: src/ui_viewDialog.h:2249
+#: src/ui_viewDialog.h:2257
 msgid "Color of supergalactic equator"
 msgstr "Dath a’ chriosa-mheadhain os-reul-chriosaich"
 
-#: src/ui_viewDialog.h:2252
+#: src/ui_viewDialog.h:2260
 msgid "Color of ecliptic (of date)"
 msgstr "Dath an èicliptich (an-diugh)"
 
-#: src/ui_viewDialog.h:2255
+#: src/ui_viewDialog.h:2263
 msgid "Color of ecliptic (J2000.0)"
 msgstr "Dath an èicliptich (J2000.0)"
 
-#: src/ui_viewDialog.h:2258
+#: src/ui_viewDialog.h:2266
 msgid "Color of galactic equator"
 msgstr "Dath a’ chriosa-mheadhain reul-chriosaich"
 
-#: src/ui_viewDialog.h:2261
+#: src/ui_viewDialog.h:2269
 msgid "Show mathematical horizon line."
 msgstr "Seall an loidhne-fàire mhatamataigeach."
 
-#: src/ui_viewDialog.h:2265
+#: src/ui_viewDialog.h:2273
 msgid "Color of horizon"
 msgstr "Dath na fàire"
 
-#: src/ui_viewDialog.h:2268
+#: src/ui_viewDialog.h:2276
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr ""
 "Seall crios-meadhain nan comharran os-reul-chriosach aig de Vaucouleurs "
 "(1976)."
 
-#: src/ui_viewDialog.h:2272
+#: src/ui_viewDialog.h:2280
 msgid "Show meridian line."
 msgstr "Seall am meadhan-loidhne."
 
-#: src/ui_viewDialog.h:2276
+#: src/ui_viewDialog.h:2284
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
@@ -6418,105 +6492,105 @@ msgstr ""
 "domhan-fhaid èicliptich a thèid tron dà phòla èiclipteach, tron ghrian ’s "
 "tro phuing na comhaireachd."
 
-#: src/ui_viewDialog.h:2280
+#: src/ui_viewDialog.h:2288
 msgid "Color of colures"
 msgstr "Dath nan coluran"
 
-#: src/ui_viewDialog.h:2283
+#: src/ui_viewDialog.h:2291
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Seall coluran (mòr-chearcallan tro na pòlaichean agus grian-stadan/co-fhadan-"
 "thràth)."
 
-#: src/ui_viewDialog.h:2285
+#: src/ui_viewDialog.h:2293
 msgid "Colures"
 msgstr "Coluran"
 
-#: src/ui_viewDialog.h:2287
+#: src/ui_viewDialog.h:2295
 msgid "Labels for the Cardinal directions."
 msgstr "Leubailean air na prìomh-phuingean combaist."
 
-#: src/ui_viewDialog.h:2291
+#: src/ui_viewDialog.h:2299
 msgid "Color of cardinal points"
 msgstr "Dath nam prìomh-phuingean combaist"
 
-#: src/ui_viewDialog.h:2295
+#: src/ui_viewDialog.h:2303
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "Dath nam pòla èiclipteach (J2000.0)"
 
-#: src/ui_viewDialog.h:2298
+#: src/ui_viewDialog.h:2306
 msgid "Color of Prime Vertical"
 msgstr "Dath a’ phrìomh-chearcaill inghearaich"
 
-#: src/ui_viewDialog.h:2301
+#: src/ui_viewDialog.h:2309
 msgid "Show ecliptic poles of J2000.0"
 msgstr "Seall na pòlaichean èiclipteach aig J2000.0"
 
-#: src/ui_viewDialog.h:2303
+#: src/ui_viewDialog.h:2311
 msgid "Ecliptic poles (J2000)"
 msgstr "Pòlaichean èiclipteach (J2000)"
 
-#: src/ui_viewDialog.h:2305
+#: src/ui_viewDialog.h:2313
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "Dath nam pòla speurach (J2000.0)"
 
-#: src/ui_viewDialog.h:2308
+#: src/ui_viewDialog.h:2316
 msgid "Show celestial poles of current planet and date."
 msgstr "Seall na pòlaichean speurach aig a’ phlanaid is ceann-là làithreach."
 
-#: src/ui_viewDialog.h:2310
+#: src/ui_viewDialog.h:2318
 msgid "Celestial poles (of date)"
 msgstr "Pòlaichean speurach (an-diugh)"
 
-#: src/ui_viewDialog.h:2312
+#: src/ui_viewDialog.h:2320
 msgid "Color of ecliptic poles (of date)"
 msgstr "Dath nam pòla èiclipteach (an-diugh)"
 
-#: src/ui_viewDialog.h:2315
+#: src/ui_viewDialog.h:2323
 msgid "Color of celestial poles (of date)"
 msgstr "Dath nam pòla speurach (an-diugh)"
 
-#: src/ui_viewDialog.h:2318
+#: src/ui_viewDialog.h:2326
 msgid "Color of supergalactic poles"
 msgstr "Dath nam pòla os-reul-chriosach"
 
-#: src/ui_viewDialog.h:2321
+#: src/ui_viewDialog.h:2329
 msgid "Show ecliptic poles of current date."
 msgstr "Seall na pòlaichean èiclipteach airson an-diugh."
 
-#: src/ui_viewDialog.h:2323
+#: src/ui_viewDialog.h:2331
 msgid "Ecliptic poles (of date)"
 msgstr "Pòlaichean èiclipteach (an-diugh)"
 
-#: src/ui_viewDialog.h:2325
+#: src/ui_viewDialog.h:2333
 msgid "Show Prime (East-West) Vertical."
 msgstr "Seall a’ phrìomh-inghearach (ear-iar)."
 
-#: src/ui_viewDialog.h:2329
+#: src/ui_viewDialog.h:2337
 msgid "Color of galactic poles"
 msgstr "Dath nam pòla reul-chriosach"
 
-#: src/ui_viewDialog.h:2331
+#: src/ui_viewDialog.h:2339
 msgid "Zenith and Nadir"
 msgstr "Barr is nèidir"
 
-#: src/ui_viewDialog.h:2333
+#: src/ui_viewDialog.h:2341
 msgid "Color of Zenith and Nadir"
 msgstr "Dath a’ bharra is an nèidir"
 
-#: src/ui_viewDialog.h:2337
+#: src/ui_viewDialog.h:2345
 msgid "Color of circumpolar circles"
 msgstr "Dath nan cearcall pòlarach"
 
-#: src/ui_viewDialog.h:2340
+#: src/ui_viewDialog.h:2348
 msgid "Show celestial poles of J2000.0."
 msgstr "Seall na pòlaichean speurach aig J2000.0."
 
-#: src/ui_viewDialog.h:2342
+#: src/ui_viewDialog.h:2350
 msgid "Celestial poles (J2000)"
 msgstr "Pòlaichean speurach (J2000)"
 
-#: src/ui_viewDialog.h:2344
+#: src/ui_viewDialog.h:2352
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
@@ -6524,15 +6598,15 @@ msgstr ""
 "Seallaidh na cearcaill seo crìoch nan reultan a dh’fhuiricheas os cionn na "
 "fàire  matamataigich (no foidhpese) an-còmhnaidh."
 
-#: src/ui_viewDialog.h:2346
+#: src/ui_viewDialog.h:2354
 msgid "Circumpolar circles"
 msgstr "Cearcaill phòlarach"
 
-#: src/ui_viewDialog.h:2348
+#: src/ui_viewDialog.h:2356
 msgid "Color of precession circles"
 msgstr "Dath nan cearcall ro-imeachd"
 
-#: src/ui_viewDialog.h:2351
+#: src/ui_viewDialog.h:2359
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
@@ -6540,48 +6614,48 @@ msgstr ""
 "Cearcaill sa bhad aig aiseal na Talmhainn a’ gluasad timcheall nam "
 "pòlaichean èiclipteach. ’Ga shealltainn air an Talamh a-mhàin."
 
-#: src/ui_viewDialog.h:2353
+#: src/ui_viewDialog.h:2361
 msgid "Precession circles"
 msgstr "Cearcaill ro-imeachd"
 
-#: src/ui_viewDialog.h:2355
+#: src/ui_viewDialog.h:2363
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Àirdean is azimuth (’gan cunntadh on taobh tuath gun taobh an ear)."
 
-#: src/ui_viewDialog.h:2359
+#: src/ui_viewDialog.h:2367
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
 "Na co-chomharran èiclipteach an-diugh. Thèid an sealltainn on Talamh a-mhàin."
 
-#: src/ui_viewDialog.h:2361
+#: src/ui_viewDialog.h:2369
 msgid "Ecliptic grid (of date)"
 msgstr "Griod èiclipteach (an-diugh)"
 
-#: src/ui_viewDialog.h:2363
+#: src/ui_viewDialog.h:2371
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "Dath a’ ghrioda mheadhan-chriosaich (J2000.0)"
 
-#: src/ui_viewDialog.h:2366
+#: src/ui_viewDialog.h:2374
 msgid "Color of the equinox points (J2000.0)"
 msgstr "Dath nam puingean co-fhaid-thràth (J2000.0)"
 
-#: src/ui_viewDialog.h:2369
+#: src/ui_viewDialog.h:2377
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "Co-chomharran èiclipteach J2000.0."
 
-#: src/ui_viewDialog.h:2371
+#: src/ui_viewDialog.h:2379
 msgid "Ecliptic grid (J2000)"
 msgstr "Griod èiclipteach (J2000)"
 
-#: src/ui_viewDialog.h:2373
+#: src/ui_viewDialog.h:2381
 msgid "Color of the supergalactic grid"
 msgstr "Dath a’ ghrioda os-reul-chriosaich"
 
-#: src/ui_viewDialog.h:2376
+#: src/ui_viewDialog.h:2384
 msgid "Color of the galactic grid"
 msgstr "Dath a’ ghrioda reul-chriosaich"
 
-#: src/ui_viewDialog.h:2379
+#: src/ui_viewDialog.h:2387
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -6589,262 +6663,262 @@ msgstr ""
 "Seall na comharran os-reul-chriosach aig de Vaucouleurs (1976) a chaidh a "
 "mhìneachadh a-rèir sgaoileadh nan reul-chriosan am fagas."
 
-#: src/ui_viewDialog.h:2383
+#: src/ui_viewDialog.h:2391
 msgid "Equatorial coordinates of J2000.0."
 msgstr "Na co-chomharran meadhan-chriosach J2000.0."
 
-#: src/ui_viewDialog.h:2385
+#: src/ui_viewDialog.h:2393
 msgid "Equatorial grid (J2000)"
 msgstr "Griod meadhan-chriosach (J2000)"
 
-#: src/ui_viewDialog.h:2387
+#: src/ui_viewDialog.h:2395
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "Dath a’ ghrioda èicliptich (J2000.0)"
 
-#: src/ui_viewDialog.h:2390
+#: src/ui_viewDialog.h:2398
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Co-chomharran reul-chriosach, Siostam II (IAU 1958)."
 
-#: src/ui_viewDialog.h:2394
+#: src/ui_viewDialog.h:2402
 msgid "Color of the equatorial grid (of date)"
 msgstr "Dath a’ ghrioda mheadhan-chriosaich (an-diugh)"
 
-#: src/ui_viewDialog.h:2396
+#: src/ui_viewDialog.h:2404
 msgid "Equinoxes (J2000)"
 msgstr "Co-fhadan-tràth (J2000)"
 
-#: src/ui_viewDialog.h:2398
+#: src/ui_viewDialog.h:2406
 msgid "Color of the ecliptical grid (of date)"
 msgstr "Dath a’ ghrioda èicliptich (an-diugh)"
 
-#: src/ui_viewDialog.h:2401
+#: src/ui_viewDialog.h:2409
 msgid "Color of the azimuthal grid"
 msgstr "Dath a’ ghrioda azimuthaich"
 
-#: src/ui_viewDialog.h:2404
+#: src/ui_viewDialog.h:2412
 msgid "Color of the equinox points (of date)"
 msgstr "Dath nam puingean co-fhaid-thràth (an-diugh)"
 
-#: src/ui_viewDialog.h:2407
+#: src/ui_viewDialog.h:2415
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Na co-chomharran meadhan-chriosach airson na planaid an-diugh."
 
-#: src/ui_viewDialog.h:2409
+#: src/ui_viewDialog.h:2417
 msgid "Equatorial grid (of date)"
 msgstr "Griod meadhan-chriosach (an-diugh)"
 
-#: src/ui_viewDialog.h:2410
+#: src/ui_viewDialog.h:2418
 msgid "Equinoxes (of date)"
 msgstr "Co-fhadan-tràth (an-diugh)"
 
-#: src/ui_viewDialog.h:2411
+#: src/ui_viewDialog.h:2419
 msgid "Solstices (J2000)"
 msgstr "Grian-stadan (J2000)"
 
-#: src/ui_viewDialog.h:2413
+#: src/ui_viewDialog.h:2421
 msgid "Color of the solstice points (J2000.0)"
 msgstr "Dath nam puingean grian-staid (J2000.0)"
 
-#: src/ui_viewDialog.h:2416
+#: src/ui_viewDialog.h:2424
 msgid "Solstices (of date)"
 msgstr "Grian-stadan (an-diugh)"
 
-#: src/ui_viewDialog.h:2418
+#: src/ui_viewDialog.h:2426
 msgid "Color of the solstice points (of date)"
 msgstr "Dath nam puingean grian-staid (an-diugh)"
 
-#: src/ui_viewDialog.h:2421
+#: src/ui_viewDialog.h:2429
 msgid "Projection"
 msgstr "Sealladh"
 
-#: src/ui_viewDialog.h:2422
+#: src/ui_viewDialog.h:2430
 msgid "Vertical viewport offset"
 msgstr "Frith-àireamh inghearach a’ phuirt-sheallaidh"
 
-#: src/ui_viewDialog.h:2424
+#: src/ui_viewDialog.h:2432
 msgid "Show fog"
 msgstr "Seall ceò"
 
-#: src/ui_viewDialog.h:2425
+#: src/ui_viewDialog.h:2433
 msgid "Use associated planet and position"
 msgstr "Cleachd a’ phlanaid is an ionad na cois"
 
-#: src/ui_viewDialog.h:2426
+#: src/ui_viewDialog.h:2434
 msgid "Use this landscape as default"
 msgstr "Cleachd an cruth-tìre seo mar bhun-roghainn"
 
-#: src/ui_viewDialog.h:2427
+#: src/ui_viewDialog.h:2435
 msgid "Show ground"
 msgstr "Seall an làr"
 
-#: src/ui_viewDialog.h:2429
+#: src/ui_viewDialog.h:2437
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Cleachd beagan soillearachd ach an gabh an cruth-tìre faicinn san dorchadas "
 "cuideachd"
 
-#: src/ui_viewDialog.h:2431
+#: src/ui_viewDialog.h:2439
 msgid "Minimal brightness:"
 msgstr "An t-soillearachd as lugha:"
 
-#: src/ui_viewDialog.h:2433
+#: src/ui_viewDialog.h:2441
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Rainse an luach 0..1 (cruth-tìre dubh air an oidhche - cruth-tìre gu tur "
 "soilleir)"
 
-#: src/ui_viewDialog.h:2436
+#: src/ui_viewDialog.h:2444
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 "Cleachd an t-soillearachd as lugha mar a chaidh mìneachadh ann an "
 "landscape.ini ma dh’fhaoidte"
 
-#: src/ui_viewDialog.h:2438
+#: src/ui_viewDialog.h:2446
 msgid "from landscape, if given"
 msgstr "on chruth-tìre ma chaidh a shònrachadh ann"
 
-#: src/ui_viewDialog.h:2440
+#: src/ui_viewDialog.h:2448
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 "Seall breath an t-soillseachaidh (uinneagan soilleir, truailleadh solais is "
 "msaa.)"
 
-#: src/ui_viewDialog.h:2442
+#: src/ui_viewDialog.h:2450
 msgid "Show illumination "
 msgstr "Seall an t-soillseachadh "
 
-#: src/ui_viewDialog.h:2443
+#: src/ui_viewDialog.h:2451
 msgid "Show landscape labels"
 msgstr "Seall leubailean crutha-tìre"
 
-#: src/ui_viewDialog.h:2444
+#: src/ui_viewDialog.h:2452
 msgid "Add/remove landscapes..."
 msgstr "Cuir ris/Thoir air falbh cruthan-tìre..."
 
-#: src/ui_viewDialog.h:2446
+#: src/ui_viewDialog.h:2454
 msgid "Show art in brightness"
 msgstr "Soilleireachd na h-ealaine"
 
-#: src/ui_viewDialog.h:2447
+#: src/ui_viewDialog.h:2455
 msgid "Show lines with thickness"
 msgstr "Tiughad nan loidhnichean"
 
-#: src/ui_viewDialog.h:2449
+#: src/ui_viewDialog.h:2457
 msgid "Value in pixels"
 msgstr "Luach ann am piogsailean"
 
-#: src/ui_viewDialog.h:2452
+#: src/ui_viewDialog.h:2460
 msgid "Color of constellation lines"
 msgstr "Dath loidhnichean nan reul-bhadan"
 
-#: src/ui_viewDialog.h:2455
+#: src/ui_viewDialog.h:2463
 msgid "Use native names for planets from current culture"
 msgstr ""
 "Cleachd ainmean tùsail airson nam planaidean on dhualchas speura làithreach"
 
-#: src/ui_viewDialog.h:2457
+#: src/ui_viewDialog.h:2465
 msgid "Use native names for planets"
 msgstr "Cleachd ainmean tùsail airson nam planaidean"
 
-#: src/ui_viewDialog.h:2458
+#: src/ui_viewDialog.h:2466
 msgid "Use this sky culture as default"
 msgstr "Cleachd an dualchas speura seo mar bhun-roghainn"
 
-#: src/ui_viewDialog.h:2459
+#: src/ui_viewDialog.h:2467
 msgid "Show labels"
 msgstr "Seall leubailean"
 
-#: src/ui_viewDialog.h:2461
+#: src/ui_viewDialog.h:2469
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 "Tagh ma tha thu airson ainmean tùsail, air an eadar-theangachadh no air an "
 "giorrachadh"
 
-#: src/ui_viewDialog.h:2465
+#: src/ui_viewDialog.h:2473
 msgid "Color of constellation names"
 msgstr "Dath ainmean nan reul-bhadan"
 
-#: src/ui_viewDialog.h:2467
+#: src/ui_viewDialog.h:2475
 msgid "Show boundaries"
 msgstr "Seall crìochan"
 
-#: src/ui_viewDialog.h:2469
+#: src/ui_viewDialog.h:2477
 msgid "Color of constellation boundaries"
 msgstr "Dath crìochan nan reul-bhadan"
 
-#: src/ui_viewDialog.h:2471
+#: src/ui_viewDialog.h:2479
 msgid "Show asterism lines"
 msgstr "Seall loidhnichean nan astarasan"
 
-#: src/ui_viewDialog.h:2473
+#: src/ui_viewDialog.h:2481
 msgid "Color of asterism lines"
 msgstr "Dath loidhnichean nan astarasan"
 
-#: src/ui_viewDialog.h:2475
+#: src/ui_viewDialog.h:2483
 msgid "Show asterism labels"
 msgstr "Seall leubailean nan astarasan"
 
-#: src/ui_viewDialog.h:2477
+#: src/ui_viewDialog.h:2485
 msgid "Color of asterism names"
 msgstr "Dath ainmean nan astarasan"
 
-#: src/ui_viewDialog.h:2480
+#: src/ui_viewDialog.h:2488
 msgid "Visible"
 msgstr "Ri fhaicinn"
 
-#: src/ui_viewDialog.h:2487
+#: src/ui_viewDialog.h:2495
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "Fad às"
 
-#: src/ui_viewDialog.h:2489
+#: src/ui_viewDialog.h:2497
 msgid "Deep-Sky Objects"
 msgstr "Cuspairean fad às"
 
-#: src/ui_viewDialog.h:2492
+#: src/ui_viewDialog.h:2500
 msgid "Markings"
 msgstr "Comharran"
 
-#: src/ui_viewDialog.h:2494
+#: src/ui_viewDialog.h:2502
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Landscape"
 msgstr "Cruth-tìre"
 
-#: src/ui_viewDialog.h:2496
+#: src/ui_viewDialog.h:2504
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
 msgstr "Dualchas nan reul"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1247
 msgid "Configuration"
 msgstr "Rèiteachadh"
 
-#: src/ui_configurationDialog.h:1237
+#: src/ui_configurationDialog.h:1249
 msgid "Language settings"
 msgstr "Roghainnean cànain"
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1250
 msgid "Program Language"
 msgstr "Cànan a’ phrògraim"
 
-#: src/ui_configurationDialog.h:1239
+#: src/ui_configurationDialog.h:1251
 msgid "Sky Culture Language"
 msgstr "Cànan an dualchas speura"
 
-#: src/ui_configurationDialog.h:1241
+#: src/ui_configurationDialog.h:1253
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Cha deach an gleus seo a chur fo dhian-dheuchainn fhathast!"
 
-#: src/ui_configurationDialog.h:1243
+#: src/ui_configurationDialog.h:1255
 msgid "Ephemeris settings (experimental)"
 msgstr "Roghainnean ephemeris (deuchainneach)"
 
-#: src/ui_configurationDialog.h:1244 src/ui_configurationDialog.h:1245
+#: src/ui_configurationDialog.h:1256 src/ui_configurationDialog.h:1257
 msgid "Not installed"
 msgstr "Cha deach a stàladh"
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1259
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -6852,21 +6926,21 @@ msgstr ""
 "Bheir DE431 dàta nan ionadan dhut airson nam blianaichean -13000...+17000. A "
 "chum cleachdaidh shònraichte a-mhàin."
 
-#: src/ui_configurationDialog.h:1249
+#: src/ui_configurationDialog.h:1261
 msgid "Use DE431 (long-time data)"
 msgstr "Cleachd DE431 (dàta air ùine mhòr)"
 
-#: src/ui_configurationDialog.h:1251
+#: src/ui_configurationDialog.h:1263
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 "Bheir DE430 a’ phongalachd as fhearr dhut ach airson nam blianaichean "
 "1550...2650 a-mhàin."
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1265
 msgid "Use DE430 (high accuracy)"
 msgstr "Cleachd DE430 (pongalachd àrd)"
 
-#: src/ui_configurationDialog.h:1255
+#: src/ui_configurationDialog.h:1267
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6875,22 +6949,22 @@ msgstr ""
 "4000...+8000 ach bheir e ionadan feumail dhut taobh a-muigh nam "
 "bliadhnaichean sin cuideachd."
 
-#: src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1269
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "Thèid VSOP87/ELP2000-82B a chleachdadh mura deach an fheadhainn seo a "
 "stàladh no a ghnìomhachadh."
 
-#: src/ui_configurationDialog.h:1258
+#: src/ui_configurationDialog.h:1270
 msgid "Default options"
 msgstr "Roghainnean bunaiteach"
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1271
 msgid "Save View"
 msgstr "Sàbhail an sealladh"
 
-#: src/ui_configurationDialog.h:1261
+#: src/ui_configurationDialog.h:1273
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6898,7 +6972,7 @@ msgstr ""
 "Sàbhail na roghainnean a chleachdas tu an-dràsta mar na roghainnean agad "
 "nuair a thòisicheas tu Stellarium an ath-thuras"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1275
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6906,11 +6980,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Sàbhail na roghainnean"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1277
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Aisig na roghainnean bunaiteach a tha aig Stellarium bho thùs"
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1279
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6918,7 +6992,7 @@ msgstr "Aisig na roghainnean bunaiteach a tha aig Stellarium bho thùs"
 msgid "Restore defaults"
 msgstr "Aisig na roghainnean bunaiteach"
 
-#: src/ui_configurationDialog.h:1268
+#: src/ui_configurationDialog.h:1280
 msgid ""
 "Save either the current FOV and direction of view or all the current options "
 "for use at next startup. Restoring default settings requires a restart of "
@@ -6928,206 +7002,206 @@ msgstr ""
 "thèid a chleachdadh leis an ath-thòiseachadh. Bidh ath-shuidheachadh nan "
 "roghainnean tùsail feumach air ath-thòiseachadh Stellarium. "
 
-#: src/ui_configurationDialog.h:1270
-msgid "The width of your view when Stellarium starts"
-msgstr "Leud an t-seallaidh nuair a thòisicheas Stellarium"
+#: src/ui_configurationDialog.h:1282
+msgid "The vertical field (height) of your view when Stellarium starts"
+msgstr ""
 
-#: src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1285
 msgid "The direction you're looking when Stellarium starts"
 msgstr "An taobh a sheallas tu nuair a thòisicheas Stellarium"
 
-#: src/ui_configurationDialog.h:1275 src/ui_configurationDialog.h:1499
+#: src/ui_configurationDialog.h:1287 src/ui_configurationDialog.h:1516
 msgid "Selected object information"
 msgstr "Fiosrachadh mu chuspairean air an taghadh"
 
-#: src/ui_configurationDialog.h:1277
+#: src/ui_configurationDialog.h:1289
 msgid "Display all information available"
 msgstr "Seall a h-uile fiosrachadh ri làimh"
 
-#: src/ui_configurationDialog.h:1279
+#: src/ui_configurationDialog.h:1291
 msgid "All available"
 msgstr "Na h-uile ri làimh"
 
-#: src/ui_configurationDialog.h:1281
+#: src/ui_configurationDialog.h:1293
 msgid "Display no information"
 msgstr "Na seall fiosrachadh"
 
-#: src/ui_configurationDialog.h:1283 plugins/Oculars/src/Oculars.cpp:2247
+#: src/ui_configurationDialog.h:1295 plugins/Oculars/src/Oculars.cpp:2247
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Gun ghin"
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1297
 msgid "Display less information"
 msgstr "Seall nas lugha dhe dh’fhiosrachadh"
 
-#: src/ui_configurationDialog.h:1287
+#: src/ui_configurationDialog.h:1299
 msgid "Short"
 msgstr "Goirid"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1301
 msgid "Display user settings information"
 msgstr "Seall fiosrachadh air roghainnean a’ chleachdaiche"
 
-#: src/ui_configurationDialog.h:1291
+#: src/ui_configurationDialog.h:1303
 msgid "Customized"
 msgstr "Gnàthaichte"
 
-#: src/ui_configurationDialog.h:1292
+#: src/ui_configurationDialog.h:1304
 msgid "Displayed fields"
 msgstr "Raointean gan sealltainn"
 
-#: src/ui_configurationDialog.h:1294 src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1306 src/ui_configurationDialog.h:1340
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Co-chomharran meadhan-chriosach, co-fhad-thràth aig a’ cheann-là"
 
-#: src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1308
 msgid "Right ascension/Declination (of date)"
 msgstr "Dìreadh deas/Dì-chlaonadh (an-diugh)"
 
-#: src/ui_configurationDialog.h:1297
+#: src/ui_configurationDialog.h:1309
 msgid "Supergalactic coordinates"
 msgstr "Co-chomharran os-reul-chriosach"
 
-#: src/ui_configurationDialog.h:1299
+#: src/ui_configurationDialog.h:1311
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Seòrsa a’ chuspair (reul, planaid agus msaa.)"
 
-#: src/ui_configurationDialog.h:1302
+#: src/ui_configurationDialog.h:1314
 msgid "Absolute magnitude"
 msgstr "Meudachd absaloideach"
 
-#: src/ui_configurationDialog.h:1304
+#: src/ui_configurationDialog.h:1316
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr ""
 "Co-chomharran èiclipteach, co-fhad-thràth aig a’ cheann-là (airson na "
 "Talmhainn a-mhàin)"
 
-#: src/ui_configurationDialog.h:1306
+#: src/ui_configurationDialog.h:1318
 msgid "Ecliptic coordinates (of date)"
 msgstr "Co-chomharran èiclipteach (an-diugh)"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1320
 msgid "Angular or physical size"
 msgstr "Meud ceàrnach no fiosaigeach"
 
-#: src/ui_configurationDialog.h:1310
+#: src/ui_configurationDialog.h:1322
 msgid "Size"
 msgstr "Meud"
 
-#: src/ui_configurationDialog.h:1312
+#: src/ui_configurationDialog.h:1324
 msgid "Horizontal coordinates"
 msgstr "Co-chomharran còmhnard"
 
-#: src/ui_configurationDialog.h:1314
+#: src/ui_configurationDialog.h:1326
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "Àirde/Azimuth"
 
-#: src/ui_configurationDialog.h:1315
+#: src/ui_configurationDialog.h:1327
 msgid "Catalog number(s)"
 msgstr "Àireamh(an) cataloig"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1328
 msgid "Distance"
 msgstr "Astar"
 
-#: src/ui_configurationDialog.h:1317
+#: src/ui_configurationDialog.h:1329
 msgid "Galactic coordinates"
 msgstr "Co-chomharran reul-chriosach"
 
-#: src/ui_configurationDialog.h:1319
+#: src/ui_configurationDialog.h:1331
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Co-chomharran meadhan-chriosach, co-fhad-thràth aig J2000.0"
 
-#: src/ui_configurationDialog.h:1321
+#: src/ui_configurationDialog.h:1333
 msgid "Right ascension/Declination (J2000)"
 msgstr "Dìreadh deas/Dì-chlaonadh (J2000)"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1336
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "Co-chomharran èiclipteach, co-fhad-thràth aig J2000.0"
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1338
 msgid "Ecliptic coordinates (J2000)"
 msgstr "Co-chomharran èiclipteach (an-2000)"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1342
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "Ceàrn uarach/Dì-chlaonadh"
 
-#: src/ui_configurationDialog.h:1331
+#: src/ui_configurationDialog.h:1343
 msgid "Visual magnitude"
 msgstr "Meudachd lèirsinneach"
 
-#: src/ui_configurationDialog.h:1333
+#: src/ui_configurationDialog.h:1345
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr "Giorrachadh 3-litreach an IAU air reul-bhad"
 
-#: src/ui_configurationDialog.h:1335
+#: src/ui_configurationDialog.h:1347
 msgid "Constellation"
 msgstr "Reul-bhad"
 
-#: src/ui_configurationDialog.h:1337
+#: src/ui_configurationDialog.h:1349
 msgid "Spectral class, nebula type, etc."
 msgstr "Seòrsa speictreach, seòrsa deargan-doirinn is msaa."
 
-#: src/ui_configurationDialog.h:1339
+#: src/ui_configurationDialog.h:1351
 msgid "Additional information"
 msgstr "Barrachd fiosrachaidh"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1352
 msgid "Sidereal time"
 msgstr "Àm reultach"
 
-#: src/ui_configurationDialog.h:1341
+#: src/ui_configurationDialog.h:1353
 msgid "Control"
 msgstr "Uidheaman-smachd"
 
-#: src/ui_configurationDialog.h:1343
+#: src/ui_configurationDialog.h:1355
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Ceadaich panadh (slaodadh) is sùmadh (cuibhle) leis an luchag"
 
-#: src/ui_configurationDialog.h:1345
+#: src/ui_configurationDialog.h:1357
 msgid "Enable mouse navigation"
 msgstr "Cuir seòladaireachd leis an luchag an comas"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1360
 msgid "Allow keyboard to pan and zoom"
 msgstr "Ceadaich panadh is sùmadh leis a’ mheur-chlàr"
 
-#: src/ui_configurationDialog.h:1350
+#: src/ui_configurationDialog.h:1362
 msgid "Enable keyboard navigation"
 msgstr "Cuir seòladaireachd leis a’ mheur-chlàr an comas"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1364
 msgid "Hides the mouse cursor when inactive"
 msgstr "Falaichidh seo cùrsair na luchaige nuair nach eil gnìomhachd ann"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1366
 msgid "Mouse cursor timeout:"
 msgstr "Crìoch-ùine aig cùrsair na luchaige:"
 
-#: src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1368
 msgid "seconds"
 msgstr "diog"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1370
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Ceann-latha is àm tòiseachaidh"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1372
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Tòisichidh seo Stellarium le ceann-latha is àm an t-siostaim"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1374
 msgid "System date and time"
 msgstr "Ceann-latha is àm an t-siostaim"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1376
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -7135,107 +7209,104 @@ msgstr ""
 "Cuiridh seo àm a’ choltais dhan ath bhall dhe àm an latha seo nuair a "
 "thòisicheas Stellarium"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1378
 msgid "System date at:"
 msgstr "Ceann-latha an t-siostaim aig:"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1380
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Cleachd ceann-latha is àm sònraichte nuair a thòisicheas Stellarium"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1382
 msgid "Other:"
 msgstr "Eile:"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1384
 msgid "Use current local date and time"
 msgstr "Cleachd an ceann-là ’s àm ionadail làithreach"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1386
 msgid "use current"
 msgstr "cleachd am fear làithreach"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1388
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Stiùirichidh na roghainnean seo an dòigh a thèid an ceann-là ’s àm a "
 "shealltainn sa bhàr aig a’ bhonn."
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1390
 msgid "Display formats of date and time"
 msgstr "Fòrmatan taisbeanaidh a’ chinn-latha ’s an ama"
 
-#: src/ui_configurationDialog.h:1379
+#: src/ui_configurationDialog.h:1391
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Ceann-latha:"
 
-#: src/ui_configurationDialog.h:1380
+#: src/ui_configurationDialog.h:1392
 msgid "and time:"
 msgstr "agus àm:"
 
-#: src/ui_configurationDialog.h:1381
+#: src/ui_configurationDialog.h:1393
 msgid "Time correction"
 msgstr "Ceartachadh an ama"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1396
 msgid "Edit equation"
 msgstr "Deasaich an co-aontar"
 
-#: src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1398
 msgid "Planetarium options"
 msgstr "Roghainnean amharc-lainn phlanaidean"
 
-#: src/ui_configurationDialog.h:1388
+#: src/ui_configurationDialog.h:1400
+msgid "Activate this option to calculate azimuth from south towards west."
+msgstr ""
+"Gnìomhaich an roghainn seo gus an azimuth àireamhachadh on cheann deas gu "
+"taobh an iar."
+
+#: src/ui_configurationDialog.h:1402
+msgid "Azimuth from South"
+msgstr "Azimuth on taobh deas"
+
+#: src/ui_configurationDialog.h:1404
 msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr ""
 "Toglaich an dèid putan an Digitized Sky Survey a shealltainn gus nach dèid."
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1406
 msgid "Show DSS button"
 msgstr "Seall putan an DSS"
 
-#: src/ui_configurationDialog.h:1392
-msgid ""
-"When enabled, the \"auto zoom out\" key will also set the initial viewing "
-"direction"
-msgstr ""
-"Ma chuireas tu seo air, suidhichidh an iuchair “fèin-sùmadh a-mach” comhair "
-"an t-seallaidh tòiseachaidh cuideachd."
-
-#: src/ui_configurationDialog.h:1394
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
-msgid "Auto zoom out returns to initial direction of view"
-msgstr "Tillidh “fèin-sùmadh a-mach” dhan chomhair seallaidh tòiseachaidh"
-
-#: src/ui_configurationDialog.h:1396
+#: src/ui_configurationDialog.h:1408
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 "Falaich a h-uile rud taobh a-muigh cearcaill mheadhanaich sa phrìomh-"
 "shealladh"
 
-#: src/ui_configurationDialog.h:1398
+#: src/ui_configurationDialog.h:1410
 msgid "Disc viewport"
 msgstr "Port-seallaidh cruinn"
 
-#: src/ui_configurationDialog.h:1400
+#: src/ui_configurationDialog.h:1412
 msgid "Align labels with the horizon"
 msgstr "Co-thaobhaich na leubailean ris an fhàire"
 
-#: src/ui_configurationDialog.h:1402
+#: src/ui_configurationDialog.h:1414
 msgid "Gravity labels"
 msgstr "Leubailean iom-tharraing"
 
-#: src/ui_configurationDialog.h:1404
+#: src/ui_configurationDialog.h:1416
 msgid "Use decimal degrees for coordinates"
 msgstr "Cleachd ceuman deicheach airson nan co-chomharran"
 
-#: src/ui_configurationDialog.h:1406
+#: src/ui_configurationDialog.h:1418
 msgid "Use decimal degrees"
 msgstr "Cleachd ceuman deicheach"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1420
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -7244,11 +7315,11 @@ msgstr ""
 "phroiseactadh air sgathan cruinn a bhios aig siostaman amharc-lann "
 "phlanaidean saora."
 
-#: src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1422
 msgid "Spheric mirror distortion"
 msgstr "Fiaradh sgathain cruinn"
 
-#: src/ui_configurationDialog.h:1412
+#: src/ui_configurationDialog.h:1424
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -7257,181 +7328,196 @@ msgstr ""
 "(mholamaid seo). Ma thèid seo a chur dheth, cleachd sealladh planaid-"
 "mheadhanach."
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1426
 msgid "Topocentric coordinates"
 msgstr "Co-chomharran topo-mheadhanach"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1428
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Thèid an àile a chur an comas gu fèin-obrachail airson nam bodhaigean ann an "
 "uinneag an ionaid"
 
-#: src/ui_configurationDialog.h:1418
+#: src/ui_configurationDialog.h:1430
 msgid "Auto-enabling for the atmosphere"
 msgstr "Àile fèin-obrachail"
 
-#: src/ui_configurationDialog.h:1420
+#: src/ui_configurationDialog.h:1432
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 "Toglaich putanan gus flip an t-seallaidh gu inghearach no còmhnard a "
 "dhèanamh."
 
-#: src/ui_configurationDialog.h:1422
+#: src/ui_configurationDialog.h:1434
 msgid "Show flip buttons"
 msgstr "Seall putanan flipidh"
 
-#: src/ui_configurationDialog.h:1424 src/ui_configurationDialog.h:1427
+#: src/ui_configurationDialog.h:1436 src/ui_configurationDialog.h:1439
 msgid "Hide other constellations when you click one"
 msgstr "Falach na reul-bhadan eile nuair a nì thu briogadh air fear"
 
-#: src/ui_configurationDialog.h:1431
+#: src/ui_configurationDialog.h:1443
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Toglaich cùlaibhean taisbeanaidh nan deargan-doireann."
 
-#: src/ui_configurationDialog.h:1433
+#: src/ui_configurationDialog.h:1445
 msgid "Show nebula background button"
 msgstr "Seall putan cùlaibh nan deargan-doireann"
 
-#: src/ui_configurationDialog.h:1435
+#: src/ui_configurationDialog.h:1447
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "’S e luasgadh dhe bheagan àrc-dhiogan air aiseal na Talmhainn a th’ anns an "
 "nùtachadh."
 
-#: src/ui_configurationDialog.h:1437
+#: src/ui_configurationDialog.h:1449
 msgid "Include nutation"
 msgstr "Gabh a-steach an nùtachadh"
 
-#: src/ui_configurationDialog.h:1439
-msgid "Activate this option to calculate azimuth from south towards west."
-msgstr ""
-"Gnìomhaich an roghainn seo gus an azimuth àireamhachadh on cheann deas gu "
-"taobh an iar."
-
-#: src/ui_configurationDialog.h:1441
-msgid "Azimuth from South"
-msgstr "Azimuth on taobh deas"
-
-#: src/ui_configurationDialog.h:1443
+#: src/ui_configurationDialog.h:1451
 msgid "Automatic change of landscape when planet is changed"
 msgstr ""
 "Atharraich an cruth-tìre gu fèin-obrachail nuair a thèid a’ planaid "
 "atharrachadh"
 
-#: src/ui_configurationDialog.h:1445
+#: src/ui_configurationDialog.h:1453
 msgid "Auto select landscapes"
 msgstr "Tagh cruthan-tìre gu fèin-obrachail"
 
-#: src/ui_configurationDialog.h:1446
+#: src/ui_configurationDialog.h:1454
 msgid "Show bookmarks button"
 msgstr "Seall putan nan comharran-leabhair"
 
-#: src/ui_configurationDialog.h:1448
+#: src/ui_configurationDialog.h:1456
 msgid "A button to toggle equatorial J2000 grid"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1450
+#: src/ui_configurationDialog.h:1458
 msgid "Show ICRS grid button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1460
 msgid "A button to toggle galactic grid"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1454
+#: src/ui_configurationDialog.h:1462
 msgid "Show galactic grid button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1456
+#: src/ui_configurationDialog.h:1464
 msgid "A button to toggle ecliptic grid of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1466
 msgid "Show ecliptic grid button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1459
+#: src/ui_configurationDialog.h:1467
 msgid "Show constellation boundaries button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1469
+msgid ""
+"When enabled, the \"auto zoom out\" key will also set the initial viewing "
+"direction"
+msgstr ""
+"Ma chuireas tu seo air, suidhichidh an iuchair “fèin-sùmadh a-mach” comhair "
+"an t-seallaidh tòiseachaidh cuideachd."
+
+#: src/ui_configurationDialog.h:1471
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
+msgid "Auto zoom out returns to initial direction of view"
+msgstr "Tillidh “fèin-sùmadh a-mach” dhan chomhair seallaidh tòiseachaidh"
+
+#: src/ui_configurationDialog.h:1473
+msgid "Toggle the usage of background under GUI buttons"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1475
+msgid "Use buttons background"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1476
+msgid "Indication for mount mode"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1477
 msgid "Screenshots"
 msgstr "Glacaidhean-sgrìn"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1478
 msgid "Screenshot Directory"
 msgstr "Pasgan nan glacaidhean-sgrìn"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1480
 msgid "Invert colors"
 msgstr "Dathan contrarra"
 
-#: src/ui_configurationDialog.h:1464
+#: src/ui_configurationDialog.h:1481
 msgid "Star catalog updates"
 msgstr "Ùrachaidhean air catalog nan reultan"
 
-#: src/ui_configurationDialog.h:1466
+#: src/ui_configurationDialog.h:1483
 msgid "Click here to start downloading"
 msgstr "Briog an-seo gus tòiseachadh leis an luchdadh a-nuas"
 
-#: src/ui_configurationDialog.h:1468
+#: src/ui_configurationDialog.h:1485
 msgid "Download this file to view even more stars"
 msgstr ""
 "Luchdaich am faidhle seo a-nuas gus tuilleadh ’s a bharrachd reultan fhaicinn"
 
-#: src/ui_configurationDialog.h:1470
+#: src/ui_configurationDialog.h:1487
 msgid "Restart the download"
 msgstr "Ath-thòisich an luchdadh a-nuas"
 
-#: src/ui_configurationDialog.h:1472
+#: src/ui_configurationDialog.h:1489
 msgid "Retry"
 msgstr "Feuch ris a-rithist"
 
-#: src/ui_configurationDialog.h:1474
+#: src/ui_configurationDialog.h:1491
 msgid "Stop the download. You can always restart it later"
 msgstr ""
 "Sguir dhen luchdadh a-nuas. ’S urrainn dhut ath-thòiseachadh an uairsin"
 
-#: src/ui_configurationDialog.h:1479
+#: src/ui_configurationDialog.h:1496
 msgid "Close window when script runs"
 msgstr "Dùin an uinneag fhad ’s a tha an sgriobt a’ ruith"
 
-#: src/ui_configurationDialog.h:1481
+#: src/ui_configurationDialog.h:1498
 msgid "Run the selected script"
 msgstr "Ruith an sgriobt a thagh thu"
 
-#: src/ui_configurationDialog.h:1485
+#: src/ui_configurationDialog.h:1502
 msgid "Stop a running script"
 msgstr "Sguir dhe sgriobt a tha a’ ruith"
 
-#: src/ui_configurationDialog.h:1489
+#: src/ui_configurationDialog.h:1506
 msgid "Load at startup"
 msgstr "Luchdaich leis an tòiseachadh"
 
-#: src/ui_configurationDialog.h:1490
+#: src/ui_configurationDialog.h:1507
 msgid "configure"
 msgstr "rèitich"
 
-#: src/ui_configurationDialog.h:1495
+#: src/ui_configurationDialog.h:1512
 msgid "Main"
 msgstr "Prìomh-rèiteachadh"
 
-#: src/ui_configurationDialog.h:1497
+#: src/ui_configurationDialog.h:1514
 msgid "Information"
 msgstr "Fiosrachadh"
 
-#: src/ui_configurationDialog.h:1502
+#: src/ui_configurationDialog.h:1519
 msgid "Navigation"
 msgstr "Seòladaireachd"
 
-#: src/ui_configurationDialog.h:1504
+#: src/ui_configurationDialog.h:1521
 msgid "Tools"
 msgstr "Innealan"
 
-#: src/ui_configurationDialog.h:1508
+#: src/ui_configurationDialog.h:1525
 msgid "Plugins"
 msgstr "Plugain"
 
@@ -16820,6 +16906,9 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 #~ msgid "Scale Moon"
 #~ msgstr "Sgèilich a' ghealach"
 
+#~ msgid "Show atmosphere"
+#~ msgstr "Seall an àile"
+
 #~ msgid "Light pollution: "
 #~ msgstr "Truailleadh solais: "
 
@@ -16862,6 +16951,9 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 #~ "dhìth. Ma shàbhaileas tu na roghainean làithreach, gabhaidh seo a-steach an "
 #~ "raon-seallaidh làithreach is comhair an t-seallaidh a thèid a chleachdadh "
 #~ "leis an ath-thòiseachadh."
+
+#~ msgid "The width of your view when Stellarium starts"
+#~ msgstr "Leud an t-seallaidh nuair a thòisicheas Stellarium"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Raon-seallaidh tòiseachaidh: XX"
@@ -17286,6 +17378,9 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 #~ "Leubailean 's comharraidhean airson badan fad às (grioglachain rionnag, reul-"
 #~ "chriosan 's neòil-reultan)"
 
+#~ msgid "Shooting Stars"
+#~ msgstr "Rionnagan-earbaill"
+
 #~ msgid ""
 #~ "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 #~ msgstr ""
@@ -17347,6 +17442,10 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 #~ msgstr ""
 #~ "Sàbhalaiche-sgrìn le grunn thachartasan san rian-ghrèine. Tha 261 tachartas "
 #~ "ann!"
+
+#~ msgctxt "Zenithal Hourly Rate"
+#~ msgid "ZHR:"
+#~ msgstr "ZHR:"
 
 #~ msgid "Reload shaders"
 #~ msgstr "Ath-luchdaidh na sgàileadairean"
@@ -17478,6 +17577,9 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 
 #~ msgid "Palestinian Territories"
 #~ msgstr "A’ Phalastain, Ranntair fo fhor-ghlacadh"
+
+#~ msgid "Hourly zenith rate"
+#~ msgstr "Reat a’ bharra gach uair"
 
 #~ msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 #~ msgstr ""
