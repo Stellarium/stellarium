@@ -82,6 +82,9 @@ Scenery3d::Scenery3d() :
 	//get the global configuration object
 	conf = StelApp::getInstance().getSettings();
 
+	core = StelApp::getInstance().getCore();
+	mvMgr = GETSTELMODULE(StelMovementMgr);
+
 	//create scenery3d object
 	renderer = new S3DRenderer();
 	connect(renderer, SIGNAL(message(QString)), this, SLOT(showMessage(QString)));
@@ -233,9 +236,6 @@ void Scenery3d::draw(StelCore* core)
 void Scenery3d::init()
 {
 	qCDebug(scenery3d) << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
-
-	core = StelApp::getInstance().getCore();
-	mvMgr = GETSTELMODULE(StelMovementMgr);
 
 	//Initialize the renderer - this also finds out what features are supported
 	qCDebug(scenery3d) << "Initializing Scenery3d renderer...";

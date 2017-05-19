@@ -56,7 +56,14 @@ StelPluginInfo RemoteSyncStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-RemoteSync::RemoteSync() : state(IDLE), server(NULL), client(NULL)
+RemoteSync::RemoteSync()
+	: clientServerPort(20180)
+	, serverPort(20180)
+	, connectionLostBehavior(ClientBehavior::RECONNECT)
+	, quitBehavior(ClientBehavior::NONE)
+	, state(IDLE)
+	, server(NULL)
+	, client(NULL)
 {
 	setObjectName("RemoteSync");
 
