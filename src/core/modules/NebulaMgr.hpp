@@ -78,6 +78,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setFlagSurfaceBrightnessUsage
 		   NOTIFY flagSurfaceBrightnessUsageChanged
 		   )
+	Q_PROPERTY(bool flagSurfaceBrightnessArcsecUsage
+		   READ getFlagSurfaceBrightnessArcsecUsage
+		   WRITE setFlagSurfaceBrightnessArcsecUsage
+		   NOTIFY flagSurfaceBrightnessArcsecUsageChanged
+		   )
 	Q_PROPERTY(double labelsAmount
 		   READ getLabelsAmount
 		   WRITE setLabelsAmount
@@ -720,6 +725,7 @@ signals:
 	void hintsProportionalChanged(bool b);
 	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
+	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);
 

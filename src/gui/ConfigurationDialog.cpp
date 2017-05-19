@@ -198,6 +198,9 @@ void ConfigurationDialog::createDialogContent()
 		ui->customSelectedInfoRadio->setChecked(true);
 	}
 	updateSelectedInfoCheckBoxes();
+
+	// Additional settings for selected object info
+	connectBoolProperty(ui->checkBoxUMSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessArcsecUsage");
 	
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
@@ -339,7 +342,6 @@ void ConfigurationDialog::createDialogContent()
 
 	connectBoolProperty(ui->autoEnableAtmosphereCheckBox, "LandscapeMgr.flagAtmosphereAutoEnabling");
 	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");
-
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
@@ -637,14 +639,14 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_isolated_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
 	conf->setValue("astro/flag_light_travel_time",		propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
 	conf->setValue("viewing/flag_moon_scaled",		propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
-	conf->setValue("viewing/moon_scale",			propMgr->getStelPropertyValue("SolarSystem.moonScale").toDouble());
+	conf->setValue("viewing/moon_scale",			propMgr->getStelPropertyValue("SolarSystem.moonScale").toFloat());
 	conf->setValue("viewing/flag_minorbodies_scaled",	propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool());
-	conf->setValue("viewing/minorbodies_scale",		propMgr->getStelPropertyValue("SolarSystem.minorBodyScale").toDouble());
+	conf->setValue("viewing/minorbodies_scale",		propMgr->getStelPropertyValue("SolarSystem.minorBodyScale").toFloat());
 	conf->setValue("astro/meteor_zhr",			propMgr->getStelPropertyValue("SporadicMeteorMgr.zhr").toInt());
 	conf->setValue("astro/flag_milky_way",			propMgr->getStelPropertyValue("MilkyWay.flagMilkyWayDisplayed").toBool());
-	conf->setValue("astro/milky_way_intensity",		propMgr->getStelPropertyValue("MilkyWay.intensity").toDouble());
+	conf->setValue("astro/milky_way_intensity",		propMgr->getStelPropertyValue("MilkyWay.intensity").toFloat());
 	conf->setValue("astro/flag_zodiacal_light",		propMgr->getStelPropertyValue("ZodiacalLight.flagZodiacalLightDisplayed").toBool());
-	conf->setValue("astro/zodiacal_light_intensity",	propMgr->getStelPropertyValue("ZodiacalLight.intensity").toDouble());
+	conf->setValue("astro/zodiacal_light_intensity",	propMgr->getStelPropertyValue("ZodiacalLight.intensity").toFloat());
 	conf->setValue("astro/flag_grs_custom",			propMgr->getStelPropertyValue("SolarSystem.flagCustomGrsSettings").toBool());
 	conf->setValue("astro/grs_longitude",			propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
 	conf->setValue("astro/grs_drift",			propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
@@ -711,14 +713,16 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_stars",			propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
 	conf->setValue("astro/flag_star_name",			propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());
 	conf->setValue("stars/labels_amount",			propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());
-	conf->setValue("astro/nebula_hints_amount",		nmgr->getHintsAmount());
-	conf->setValue("astro/nebula_labels_amount",		nmgr->getLabelsAmount());
-	conf->setValue("astro/flag_nebula_hints_proportional",	nmgr->getHintsProportional());
-	conf->setValue("astro/flag_surface_brightness_usage",	nmgr->getFlagSurfaceBrightnessUsage());
-	conf->setValue("gui/flag_dso_designation_usage",	nmgr->getDesignationUsage());
-	conf->setValue("astro/flag_nebula_name",		nmgr->getFlagHints());
+	conf->setValue("astro/nebula_hints_amount",		propMgr->getStelPropertyValue("NebulaMgr.hintsAmount").toDouble());
+	conf->setValue("astro/nebula_labels_amount",		propMgr->getStelPropertyValue("NebulaMgr.labelsAmount").toDouble());
+	conf->setValue("astro/flag_nebula_hints_proportional",	propMgr->getStelPropertyValue("NebulaMgr.hintsProportional").toBool());
+	conf->setValue("astro/flag_surface_brightness_usage",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessUsage").toBool());
+	conf->setValue("astro/flag_surface_brightness_arcsec",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessArcsecUsage").toBool());
+	conf->setValue("gui/flag_dso_designation_usage",	propMgr->getStelPropertyValue("NebulaMgr.flagDesignationLabels").toBool());
+	conf->setValue("astro/flag_nebula_name",		propMgr->getStelPropertyValue("NebulaMgr.flagHintDisplayed").toBool());
+	conf->setValue("astro/flag_use_type_filter",		propMgr->getStelPropertyValue("NebulaMgr.flagTypeFiltersUsage").toBool());
 	conf->setValue("astro/flag_nebula_display_no_texture",	!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
-	conf->setValue("astro/flag_use_type_filter",		nmgr->getFlagUseTypeFilters());
+
 	conf->setValue("projection/type",			core->getCurrentProjectionTypeKey());
 	conf->setValue("astro/flag_nutation",			core->getUseNutation());
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
