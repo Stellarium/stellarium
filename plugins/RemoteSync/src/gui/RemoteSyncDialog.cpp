@@ -189,7 +189,7 @@ void RemoteSyncDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Georg Zotti</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("The Remote Control plugin provides state synchronization for multiple Stellarium instances running in a network.") + "</p>";
+	html += "<p>" + q_("The Remote Sync plugin provides state synchronization for multiple Stellarium instances running in a network.") + "</p>";
 	html += "<p>" + q_("This can be used, for example, to create multi-screen setups using multiple physical PCs.") + "</p>";
 	html += "<p>" + q_("Partial synchronization allows parallel setups of e.g. overview and detail views.") + "</p>";
 	html += "<p>" + q_("See manual for detailed description.") + "</p>";
