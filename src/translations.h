@@ -398,7 +398,7 @@ class Translations
 		N_("A tour around objects from the Herschel 400 Catalogue");
 		N_("Ben Crowell has created Binosky, an observing list of Deep Sky Objects for Binoculars. In the script we give a list of these 31 objects, ordered by Right Ascension (2000.0).");
 		N_("The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). The Bennett catalog was contributed by Auke Slotegraaf.");
-		N_("This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award.");
+		N_("This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC achievement award.");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
