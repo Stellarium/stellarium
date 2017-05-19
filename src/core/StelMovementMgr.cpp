@@ -91,6 +91,8 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, viewportOffsetTimeline(NULL)
 	, oldViewportOffset(0.0f, 0.0f)
 	, targetViewportOffset(0.0f, 0.0f)
+	, flagIndicationMountMode(false)
+	, messageTimer(0)
 {
 	setObjectName("StelMovementMgr");
 }
