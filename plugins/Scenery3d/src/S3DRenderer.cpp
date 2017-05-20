@@ -45,7 +45,8 @@
 
 Q_LOGGING_CATEGORY(s3drenderer, "stel.plugin.scenery3d.renderer")
 
-#define GET_GLERROR() StelOpenGL::checkGLErrors(__FILE__,__LINE__);
+// (cast return value to void to silence Coverity)
+#define GET_GLERROR() (void)StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)

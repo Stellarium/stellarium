@@ -332,7 +332,7 @@ void StelPainter::drawViewportShape(void)
 
 void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
-	Q_ASSERT(level<64);
+	Q_ASSERT(level<32);
 	float rad[64];
 	int i,j;
 	rad[level] = radius;

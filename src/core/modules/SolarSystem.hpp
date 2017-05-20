@@ -686,20 +686,20 @@ public slots:
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
 	//! Possible values:
-	//! @li @c ExpSup1992 (algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) [Explanatory Supplement to the Astronomical Almanac, 1992])
-	//! @li @c Mueller1893 (G. Mueller, based on visual observations 1877-91. [Explanatory Supplement to the Astronomical Almanac, 1961])
-	//! @li @c AstrAlm1984 (Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes)
-	//! @li @c ExpSup2013 Explanatory Supplement to the Astronomical Almanac, 3rd edition, 2013
+	//! @li @c Mueller1893 [Explanatory Supplement to the Astronomical Ephemeris, 1961] (visual magnitudes, based on visual observations by G. Mueller, 1877-91)
+	//! @li @c AstrAlm1984 [Astronomical Almanac 1984] and later. These give V (instrumental) magnitudes.
+	//! @li @c ExpSup1992 [Explanatory Supplement to the Astronomical Almanac, 1992] (algorithm contributed by Pere Planesas, Observatorio Astronomico Nacional)
+	//! @li @c ExpSup2013 [Explanatory Supplement to the Astronomical Almanac, 3rd edition, 2013]
 	//! @li @c Generic Visual magnitude based on phase angle and albedo.
 	//! Details:
-	//! @li J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.283-286.
+	//! @li J. Meeus "Astronomical Algorithms" (2nd ed. 1998, with corrections as of August 10, 2009) p.283-286.
 	//! @li O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
 	//! @li Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
-	//! @li P. Kenneth Seidelmann "Explanatory Supplement to the Astronomical Almanac" (3rd edition, 2013)
+	//! @li Sean E. Urban and P. Kenneth Seidelmann "Explanatory Supplement to the Astronomical Almanac" (3rd edition, 2013)
 	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = ExpSup2013
 	//! @param algorithm the case in-sensitive algorithm name
-	//! @note: The structure of algorithms is almost identical, just the numbers are different! You should activate
-	//! Mueller's algorithm for simulate the eye's impression. (Esp. Venus!)
+	//! @note: The structure of algorithms is almost identical, just the numbers are different!
+	//!        You should activate Mueller's algorithm to simulate the eye's impression. (Esp. Venus!)
 	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
 
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
