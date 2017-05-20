@@ -35,7 +35,7 @@ Q_DECLARE_LOGGING_CATEGORY(remoteSync)
 
 //! Main class of the RemoteSync plug-in.
 //! Provides a synchronization mechanism for multiple Stellarium instances in a network.
-//! This plugin has been developed during ESA SoCiS 2015.
+//! This plugin has been developed during ESA SoCiS 2015/2016.
 class RemoteSync : public StelModule
 {
 	Q_OBJECT

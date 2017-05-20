@@ -207,31 +207,31 @@ void StelApp::deinitStatic()
 StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
 	, mainWin(parent)
-	, core(NULL)
-	, moduleMgr(NULL)
-	, localeMgr(NULL)
-	, skyCultureMgr(NULL)
-	, actionMgr(NULL)
-	, propMgr(NULL)
-	, textureMgr(NULL)
-	, stelObjectMgr(NULL)
-	, planetLocationMgr(NULL)
-	, networkAccessManager(NULL)
-	, audioMgr(NULL)
-	, videoMgr(NULL)
-	, skyImageMgr(NULL)
+	, core(Q_NULLPTR)
+	, moduleMgr(Q_NULLPTR)
+	, localeMgr(Q_NULLPTR)
+	, skyCultureMgr(Q_NULLPTR)
+	, actionMgr(Q_NULLPTR)
+	, propMgr(Q_NULLPTR)
+	, textureMgr(Q_NULLPTR)
+	, stelObjectMgr(Q_NULLPTR)
+	, planetLocationMgr(Q_NULLPTR)
+	, networkAccessManager(Q_NULLPTR)
+	, audioMgr(Q_NULLPTR)
+	, videoMgr(Q_NULLPTR)
+	, skyImageMgr(Q_NULLPTR)
 #ifndef DISABLE_SCRIPTING
-	, scriptAPIProxy(NULL)
-	, scriptMgr(NULL)
+	, scriptAPIProxy(Q_NULLPTR)
+	, scriptMgr(Q_NULLPTR)
 #endif
-	, stelGui(NULL)
+	, stelGui(Q_NULLPTR)
 	, devicePixelsPerPixel(1.f)
 	, globalScalingRatio(1.f)
 	, fps(0)
 	, frame(0)
 	, frameTimeAccum(0.)
 	, flagNightVision(false)
-	, confSettings(NULL)
+	, confSettings(Q_NULLPTR)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
@@ -240,12 +240,13 @@ StelApp::StelApp(StelMainView *parent)
 	, nbUsedCache(0)
 	, totalUsedCacheSize(0)
 	, baseFontSize(13)
-	, renderBuffer(NULL)
-	, viewportEffect(NULL)
+	, renderBuffer(Q_NULLPTR)
+	, viewportEffect(Q_NULLPTR)
+	, gl(Q_NULLPTR)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
 	#ifdef ENABLE_SPOUT
-	, spoutSender(NULL)
+	, spoutSender(Q_NULLPTR)
 	#endif
 	, currentFbo(0)
 {
@@ -278,22 +279,22 @@ StelApp::~StelApp()
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
 	StelModuleMgr* tmp = moduleMgr;
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
-	delete tmp; tmp=NULL;
-	delete skyImageMgr; skyImageMgr=NULL;
+	delete tmp; tmp=Q_NULLPTR;
+	delete skyImageMgr; skyImageMgr=Q_NULLPTR;
 	delete core; core=NULL;
-	delete skyCultureMgr; skyCultureMgr=NULL;
-	delete localeMgr; localeMgr=NULL;
-	delete audioMgr; audioMgr=NULL;
-	delete videoMgr; videoMgr=NULL;
-	delete stelObjectMgr; stelObjectMgr=NULL; // Delete the module by hand afterward
-	delete textureMgr; textureMgr=NULL;
-	delete planetLocationMgr; planetLocationMgr=NULL;
-	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
-	delete actionMgr; actionMgr = NULL;
-	delete propMgr; propMgr = NULL;
+	delete skyCultureMgr; skyCultureMgr=Q_NULLPTR;
+	delete localeMgr; localeMgr=Q_NULLPTR;
+	delete audioMgr; audioMgr=Q_NULLPTR;
+	delete videoMgr; videoMgr=Q_NULLPTR;
+	delete stelObjectMgr; stelObjectMgr=Q_NULLPTR; // Delete the module by hand afterward
+	delete textureMgr; textureMgr=Q_NULLPTR;
+	delete planetLocationMgr; planetLocationMgr=Q_NULLPTR;
+	delete moduleMgr; moduleMgr=Q_NULLPTR; // Delete the secondary instance
+	delete actionMgr; actionMgr = Q_NULLPTR;
+	delete propMgr; propMgr = Q_NULLPTR;
 
 	Q_ASSERT(singleton);
-	singleton = NULL;
+	singleton = Q_NULLPTR;
 }
 
 void StelApp::setupNetworkProxy()
