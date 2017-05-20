@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-19 02:49+0700\n"
-"PO-Revision-Date: 2017-05-16 00:38+0000\n"
+"POT-Creation-Date: 2017-05-20 00:43+0700\n"
+"PO-Revision-Date: 2017-05-20 02:13+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-19 05:28+0000\n"
+"X-Launchpad-Export-Date: 2017-05-20 05:24+0000\n"
 "X-Generator: Launchpad (build 18386)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -89,7 +89,7 @@ msgstr "Назвы сузор'яў"
 msgid "Constellation boundaries"
 msgstr "Межы сузор'яў"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1441
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1459
 msgid "Select single constellation"
 msgstr "Выбіраць асобнае сузор'е"
 
@@ -438,11 +438,11 @@ msgstr "Паказьнік колеру (B-V): <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:228
 msgid "Surface brightness"
-msgstr ""
+msgstr "Яркасьць паверхні"
 
 #: src/core/modules/Nebula.cpp:229
 msgid "after extinction"
-msgstr ""
+msgstr "пасьля гашэньня"
 
 #: src/core/modules/Nebula.cpp:258
 #, qt-format
@@ -1184,12 +1184,12 @@ msgstr "Аддаленьне"
 
 #: src/core/modules/StarWrapper.cpp:290
 msgid "Proper motions"
-msgstr ""
+msgstr "Правільныя рухі"
 
 #: src/core/modules/StarWrapper.cpp:290
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr ""
+msgstr "марксек/сг"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -1219,7 +1219,7 @@ msgstr "Немагчыма стварыць адпраўнік Spout. Падра
 msgid "Date and Time"
 msgstr "Дата й час"
 
-#: src/core/StelCore.cpp:253 src/core/StelMovementMgr.cpp:186
+#: src/core/StelCore.cpp:253 src/core/StelMovementMgr.cpp:188
 msgid "Movement and Selection"
 msgstr "Рух і вылучэньне"
 
@@ -1867,7 +1867,7 @@ msgid ""
 msgstr ""
 "Пры праекцыі «рыбіна вока» або <i>азімутальнай роўнааддаленай праекцыі</i> "
 "прамыя лініі становяцца крывымі, калі яны апынаюцца на вялікай вуглавой "
-"адлегласьці ад цэнтра поля агляду (як скажэньні, бачныя праз аб'ектыў зь "
+"адлегласьці ад цэнтра поля зроку (як скажэньні, бачныя праз аб'ектыў зь "
 "вельмі шырокім вуглом)."
 
 #: src/core/StelProjectorClasses.cpp:261
@@ -2012,68 +2012,68 @@ msgstr "Сапраўдны зорны час: %1"
 msgid "Deep-sky objects background images"
 msgstr "Фонавыя выявы аб'ектаў глыбокага космасу"
 
-#: src/core/StelMovementMgr.cpp:187 src/gui/StelGui.cpp:209
+#: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:209
 #: src/StelMainView.cpp:763 src/StelMainView.cpp:764
 msgid "Miscellaneous"
 msgstr "Рознае"
 
-#: src/core/StelMovementMgr.cpp:187
+#: src/core/StelMovementMgr.cpp:189
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Пераключыцца паміж экватарыяльнай і азімутальнай манціроўкай"
 
-#: src/core/StelMovementMgr.cpp:188
+#: src/core/StelMovementMgr.cpp:190
 msgid "Center on selected object"
 msgstr "Цэнтроўка на вылучаным аб'екце"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:191
 msgid "Zoom in on selected object"
 msgstr "Наблізіць вылучаны аб'ект"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:192
 msgid "Zoom out"
 msgstr "Аддаліць"
 
-#: src/core/StelMovementMgr.cpp:191
+#: src/core/StelMovementMgr.cpp:193
 msgid "Track object"
 msgstr "Сачыць за аб'ектам"
 
-#: src/core/StelMovementMgr.cpp:193
+#: src/core/StelMovementMgr.cpp:195
 msgid "Look towards East"
 msgstr "Паглядзець у напрамку Ўсходу"
 
-#: src/core/StelMovementMgr.cpp:194
+#: src/core/StelMovementMgr.cpp:196
 msgid "Look towards West"
 msgstr "Паглядзець у напрамку Захаду"
 
-#: src/core/StelMovementMgr.cpp:195
+#: src/core/StelMovementMgr.cpp:197
 msgid "Look towards North"
 msgstr "Паглядзець у напрамку Поўначы"
 
-#: src/core/StelMovementMgr.cpp:196
+#: src/core/StelMovementMgr.cpp:198
 msgid "Look towards South"
 msgstr "Паглядзець у напрамку Поўдня"
 
-#: src/core/StelMovementMgr.cpp:197
+#: src/core/StelMovementMgr.cpp:199
 msgid "Look towards Zenith"
 msgstr "Паглядзець у напрамку Зэніту"
 
-#: src/core/StelMovementMgr.cpp:199
+#: src/core/StelMovementMgr.cpp:201
 msgid "Look towards North Celestial pole"
 msgstr "Глядзець у напрамку паўночнага нябеснага полюса"
 
-#: src/core/StelMovementMgr.cpp:200
+#: src/core/StelMovementMgr.cpp:202
 msgid "Look towards South Celestial pole"
 msgstr "Глядзець у напрамку паўднёвага нябеснага полюса"
 
-#: src/core/StelMovementMgr.cpp:217
-msgctxt "mount mode"
-msgid "Equatorial mount"
-msgstr ""
-
 #: src/core/StelMovementMgr.cpp:219
 msgctxt "mount mode"
+msgid "Equatorial mount"
+msgstr "Экватарыяльнае мацаваньне"
+
+#: src/core/StelMovementMgr.cpp:221
+msgctxt "mount mode"
 msgid "Alt-azimuth mount"
-msgstr ""
+msgstr "Вышыня-азімутальнае мацаваньне"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2107,31 +2107,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr "МСпСЧ"
 
-#: src/gui/ConfigurationDialog.cpp:565
+#: src/gui/ConfigurationDialog.cpp:567
 msgid "Select screenshot directory"
 msgstr "Выберы каталёґ для здымкаў экрана"
 
-#: src/gui/ConfigurationDialog.cpp:913
+#: src/gui/ConfigurationDialog.cpp:917
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Пачатковае поле зроку: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:925
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Пачатковы напрамак агляду, азімут/вышыня: %1/%2"
+msgstr "Пачатковы напрамак прагляду, азімут/вышыня: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:983
+#: src/gui/ConfigurationDialog.cpp:987
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 msgid "Authors"
 msgstr "Стваральнікі"
 
-#: src/gui/ConfigurationDialog.cpp:984 src/gui/ViewDialog.cpp:1334
+#: src/gui/ConfigurationDialog.cpp:988 src/gui/ViewDialog.cpp:1334
 msgid "Contact"
 msgstr "Кантакт"
 
-#: src/gui/ConfigurationDialog.cpp:986 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:990 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
@@ -2151,15 +2151,15 @@ msgstr "Кантакт"
 msgid "Version"
 msgstr "Вэрсія"
 
-#: src/gui/ConfigurationDialog.cpp:1083
+#: src/gui/ConfigurationDialog.cpp:1087
 msgid "Running script: "
 msgstr "Выконваецца сцэнар: "
 
-#: src/gui/ConfigurationDialog.cpp:1090
+#: src/gui/ConfigurationDialog.cpp:1094
 msgid "Running script: [none]"
 msgstr "Выконваецца сцэнар: [ніякі]"
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2167,16 +2167,16 @@ msgstr ""
 "Новыя каталёґі зорак загружаныя!\n"
 "Перазапусьці Stellarium, каб адлюстраваць іх."
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "All available star catalogs have been installed."
 msgstr "Усе аняўныя каталёґі зорак былі ўсталяваныя."
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1168
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Загрузка каталёґу %1 з %2"
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1175
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2185,7 +2185,7 @@ msgstr ""
 "Загрузка %1…\n"
 "(Гэтае вакно можна закрыць.)"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1182
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2196,7 +2196,7 @@ msgstr ""
 "Колькасьць зорак: %2 млн\n"
 "Дыяпазон велічыняў: %3 — %4"
 
-#: src/gui/ConfigurationDialog.cpp:1221 src/gui/ConfigurationDialog.cpp:1257
+#: src/gui/ConfigurationDialog.cpp:1225 src/gui/ConfigurationDialog.cpp:1261
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2205,11 +2205,11 @@ msgstr ""
 "Не атрымалася загрузіць %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1310
+#: src/gui/ConfigurationDialog.cpp:1314
 msgid "Verifying file integrity..."
 msgstr "Правяраецца суцэльнасць файла…"
 
-#: src/gui/ConfigurationDialog.cpp:1314
+#: src/gui/ConfigurationDialog.cpp:1318
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2218,170 +2218,170 @@ msgstr ""
 "Не атрымалася загрузіць %1:\n"
 "Файл пашкоджаны."
 
-#: src/gui/ConfigurationDialog.cpp:1360 src/gui/ConfigurationDialog.cpp:1369
+#: src/gui/ConfigurationDialog.cpp:1364 src/gui/ConfigurationDialog.cpp:1373
 msgid "Available"
 msgstr "У наяўнасьці"
 
-#: src/gui/ConfigurationDialog.cpp:1362 src/gui/ConfigurationDialog.cpp:1371
+#: src/gui/ConfigurationDialog.cpp:1366 src/gui/ConfigurationDialog.cpp:1375
 msgid "Not Available"
 msgstr "Адсутнічае"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1438
+#: src/gui/ConfigurationDialog.cpp:1442
 msgid "Algorithm of"
 msgstr "Алгарытм"
 
-#: src/gui/ConfigurationDialog.cpp:1451
+#: src/gui/ConfigurationDialog.cpp:1455
 msgid "Without correction"
 msgstr "Без выпраўляньня"
 
-#: src/gui/ConfigurationDialog.cpp:1452
+#: src/gui/ConfigurationDialog.cpp:1456
 msgid "Schoch (1931)"
 msgstr "Шох (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1453
+#: src/gui/ConfigurationDialog.cpp:1457
 msgid "Clemence (1948)"
 msgstr "Клемэнс (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1454
+#: src/gui/ConfigurationDialog.cpp:1458
 msgid "IAU (1952)"
 msgstr "МАЗ (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1455
+#: src/gui/ConfigurationDialog.cpp:1459
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астранамічныя эфэмэрыды (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1456
+#: src/gui/ConfigurationDialog.cpp:1460
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Такерман (1962, 1964) і Ґалдстайн (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1457
+#: src/gui/ConfigurationDialog.cpp:1461
 msgid "Muller & Stephenson (1975)"
 msgstr "Мюлер і Стэфэнсан (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1458
+#: src/gui/ConfigurationDialog.cpp:1462
 msgid "Stephenson (1978)"
 msgstr "Стэфэнсан (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1459
+#: src/gui/ConfigurationDialog.cpp:1463
 msgid "Schmadel & Zech (1979)"
 msgstr "Шмадэль і Зэх (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1460
+#: src/gui/ConfigurationDialog.cpp:1464
 msgid "Schmadel & Zech (1988)"
 msgstr "Шмадэль і Зэх (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1461
+#: src/gui/ConfigurationDialog.cpp:1465
 msgid "Morrison & Stephenson (1982)"
 msgstr "Морысан і Стэфэнсан (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1462
+#: src/gui/ConfigurationDialog.cpp:1466
 msgid "Stephenson & Morrison (1984)"
 msgstr "Стэфэнсан і Морысан (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1467
 msgid "Stephenson & Houlden (1986)"
 msgstr "Стэфэнсан і Гульдэн (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1464
+#: src/gui/ConfigurationDialog.cpp:1468
 msgid "Espenak (1987, 1989)"
 msgstr "Эспэнак (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1465
+#: src/gui/ConfigurationDialog.cpp:1469
 msgid "Borkowski (1988)"
 msgstr "Баркоўскі (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1466
+#: src/gui/ConfigurationDialog.cpp:1470
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Шапрон-Тузэ і Шапрон (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1467
+#: src/gui/ConfigurationDialog.cpp:1471
 msgid "Stephenson & Morrison (1995)"
 msgstr "Стэфэнсан і Морысан (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1468
+#: src/gui/ConfigurationDialog.cpp:1472
 msgid "Stephenson (1997)"
 msgstr "Стэфэнсан (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1470
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Мэёс (1998) (з Шапронам, Шапронам-Тузэ і Франку (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1475
 msgid "JPL Horizons"
 msgstr "Гарызонты ЛРР"
 
-#: src/gui/ConfigurationDialog.cpp:1472
+#: src/gui/ConfigurationDialog.cpp:1476
 msgid "Meeus & Simons (2000)"
 msgstr "Мэёс і Сыманс (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1473
+#: src/gui/ConfigurationDialog.cpp:1477
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Морысан і Стэфэнсан (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1478
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Стэфэнсан, Морысан і Гогенкерк (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1476
+#: src/gui/ConfigurationDialog.cpp:1480
 msgid "Espenak & Meeus (2006)"
 msgstr "Эспэнак і Мэёс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1479
+#: src/gui/ConfigurationDialog.cpp:1483
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Эспэнак і Мэёс (2006) без дадатковага паскарэння Месяца"
 
-#: src/gui/ConfigurationDialog.cpp:1481
+#: src/gui/ConfigurationDialog.cpp:1485
 msgid "Reijs (2006)"
 msgstr "Р'ейс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1482
+#: src/gui/ConfigurationDialog.cpp:1486
 msgid "Banjevic (2006)"
 msgstr "Баньевіч (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1487
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Монтэнбрук і Пфлеґер (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1484
+#: src/gui/ConfigurationDialog.cpp:1488
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Рэйнґальд і Дэршовіц (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1485
+#: src/gui/ConfigurationDialog.cpp:1489
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Іслам, Садзік і Курэшы (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1490
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Халід, Султана й Зайдзі (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1491
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Сваё раўнаньне %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1536 src/gui/ConfigurationDialog.cpp:1571
+#: src/gui/ConfigurationDialog.cpp:1540 src/gui/ConfigurationDialog.cpp:1575
 #: src/gui/StelGuiItems.cpp:633 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr "Прадвызначаны сыстэмны"
 
-#: src/gui/ConfigurationDialog.cpp:1537
+#: src/gui/ConfigurationDialog.cpp:1541
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "гггг-мм-дд (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1538
+#: src/gui/ConfigurationDialog.cpp:1542
 msgid "dd-mm-yyyy"
 msgstr "дд-мм-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1539
+#: src/gui/ConfigurationDialog.cpp:1543
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1572
+#: src/gui/ConfigurationDialog.cpp:1576
 msgid "12-hour format"
 msgstr "12-гадзінавы фармат"
 
-#: src/gui/ConfigurationDialog.cpp:1573
+#: src/gui/ConfigurationDialog.cpp:1577
 msgid "24-hour format"
 msgstr "24-гадзінавы фармат"
 
@@ -2399,7 +2399,7 @@ msgstr "Далей варта чытаць"
 
 #: src/gui/HelpDialog.cpp:151
 msgid "Pan view around the sky"
-msgstr "Перасоўваньне агляду па небе"
+msgstr "Перасоўваньне прагляду па небе"
 
 #: src/gui/HelpDialog.cpp:152
 msgid "Arrow keys & left mouse drag"
@@ -2837,12 +2837,16 @@ msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
+"Выкарыстоўвае шматкутныя трохменыя мадэлі выбраных субплянэтных аб'ектаў "
+"(малых месяцаў, астэроідаў, камэт) замест сфэрычных набліжэньняў"
 
 #: src/gui/ViewDialog.cpp:1237
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
+"Выкарыстоўваць «карту ценяў» каб удаваць сама-зацяненьне нявыпуклых аб'ектаў "
+"сонечнай сыстэмы. Можа зьменшыць якасьць паўценяў на некаторых аб'ектах."
 
 #: src/gui/ViewDialog.cpp:1258
 msgid "Abbreviated"
@@ -2903,57 +2907,56 @@ msgstr "Найбольшая калі (Леаніды ў 1833)"
 #: src/gui/ViewDialog.cpp:1528
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
-msgstr ""
+msgstr "Г. Мюлер (1893)"
 
 #: src/gui/ViewDialog.cpp:1529
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
-msgstr ""
+msgstr "Астранамічны альманах (1984)"
 
 #: src/gui/ViewDialog.cpp:1530
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr ""
+msgstr "Тлумачальны дадатак (1992)"
 
 #: src/gui/ViewDialog.cpp:1531
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr ""
+msgstr "Тлумачальны дадатак (2013)"
 
 #: src/gui/ViewDialog.cpp:1532
 msgctxt "magnitude algorithm"
 msgid "Generic"
-msgstr ""
+msgstr "Агульны"
 
 #: src/gui/ViewDialog.cpp:1558
 msgid ""
-"Algorithm was used in <em>Astronomical Almanac</em> (1984 and later) and he "
-"gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
+"The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
+"and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1561
 msgid ""
-"Algorithm is based on visual observations 1877-1891 by G. Mueller and was "
-"published in <em>Explanatory Supplement to the Astronomical Almanac</em> "
-"(1961)."
+"The algorithm is based on visual observations 1877-1891 by G. Mueller and "
+"was published in <em>Explanatory Supplement to the Astronomical "
+"Ephemeris</em> (1961)."
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1564
 msgid ""
-"Algorithm was provided by Pere Planesas (Observatorio Astronomico Nacional) "
-"and it was published in <em>Explanatory Supplement to the Astronomical "
-"Almanac</em> (1992)."
+"The algorithm was published in the <em>Explanatory Supplement to the "
+"Astronomical Almanac</em> (1992)."
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1567
 msgid ""
-"Algorithm was published in the 3rd edition of the <em>Explanatory Supplement "
-"to the Astronomical Almanac</em> (2013)."
+"The algorithm was published in the 3rd edition of the <em>Explanatory "
+"Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:1570
 msgid "Visual magnitude based on phase angle and albedo."
-msgstr ""
+msgstr "Бачная велічыня, якая ґрунтуецца на фазавым вуглу й альбэда."
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
@@ -3206,7 +3209,7 @@ msgstr "Стогадовае паскарэньне Месяца"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:268 src/gui/AstroCalcDialog.cpp:296
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1350
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:347
@@ -3234,7 +3237,7 @@ msgstr "вел."
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:276 src/gui/AstroCalcDialog.cpp:337
-#: src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1329
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Type"
 msgstr "Тып"
@@ -3764,7 +3767,7 @@ msgstr "Імпартаваць закладкі"
 msgid "Export bookmarks as..."
 msgstr "Экспартаваць закладкі як…"
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1523
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1541
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Сцэнары"
@@ -3801,7 +3804,7 @@ msgstr "Захаваць здымак экрану"
 
 #: src/StelMainView.cpp:764
 msgid "Reload shaders (for development)"
-msgstr ""
+msgstr "Перазагрузіць шэйдары (для распрацоўкі)"
 
 #: src/StelMainView.cpp:765
 msgid "Full-screen mode"
@@ -4591,12 +4594,9 @@ msgstr ""
 #: src/translations.h:401
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
-"the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC "
+"the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
-"Гэты сьпіс з 111 аб'ектаў, створаны Э.Дж. Крэёнам й Стывам Коў, "
-"выкарыстоўваецца сябрамі Астранамічнага клюбу «Саґуара» ў Фэніксе (штат "
-"Арызона, ЗША) для вызначэньня пераможцаў у назіраньнях НАК."
 
 #: src/translations.h:405
 msgid "&Undo"
@@ -4645,7 +4645,7 @@ msgstr "Тэчка"
 msgid "&Choose"
 msgstr "&Выбраць"
 
-#: src/translations.h:416 src/ui_configurationDialog.h:1493
+#: src/translations.h:416 src/ui_configurationDialog.h:1511
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Скасаваць"
@@ -5756,7 +5756,7 @@ msgstr "Пра праґраму"
 msgid "Log"
 msgstr "Часопіс"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1358
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1376
 msgid "Edit keyboard shortcuts..."
 msgstr "Правіць скароты клявіятуры…"
 
@@ -6038,7 +6038,7 @@ msgstr "Замкнуць становішча, калі выкарыстоўва
 
 #: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2431
 #: src/ui_viewDialog.h:2453 src/ui_viewDialog.h:2487
-#: src/ui_configurationDialog.h:1494 src/ui_configurationDialog.h:1505
+#: src/ui_configurationDialog.h:1512 src/ui_configurationDialog.h:1523
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Настройкі"
@@ -6117,7 +6117,7 @@ msgstr "Настройкі пераламленьня/паглынаньня"
 
 #: src/ui_viewDialog.h:2093
 msgid "Atmosphere visualization"
-msgstr ""
+msgstr "Візуалізацыя атмасфэры"
 
 #: src/ui_viewDialog.h:2094
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
@@ -6167,7 +6167,7 @@ msgstr "Паказваць пазнакі плянэт"
 
 #: src/ui_viewDialog.h:2110
 msgid "Scale minor bodies:"
-msgstr ""
+msgstr "Маштабаваньне малых целаў:"
 
 #: src/ui_viewDialog.h:2112
 msgid ""
@@ -6191,7 +6191,7 @@ msgstr "Множнік маштабу"
 
 #: src/ui_viewDialog.h:2122
 msgid "Simulate self-shadowing"
-msgstr ""
+msgstr "Удаваць сама-зацяненьне"
 
 #: src/ui_viewDialog.h:2123
 msgid "Use custom settings of GRS:"
@@ -6203,11 +6203,11 @@ msgstr "Падрабязнасьці ВЧП…"
 
 #: src/ui_viewDialog.h:2125
 msgid "Planets magnitude algorithm:"
-msgstr ""
+msgstr "Альґарытм зоркавай велічыні:"
 
 #: src/ui_viewDialog.h:2130
 msgid "Use more accurate 3D models (where available)"
-msgstr ""
+msgstr "Выкарыстоўваць больш дакладныя 3D мадэлі (калі наяўныя)"
 
 #: src/ui_viewDialog.h:2132
 msgid "Limit the magnitude of solar system objects"
@@ -6220,11 +6220,11 @@ msgstr "Настройкі спарадычных мэтэораў"
 #: src/ui_viewDialog.h:2138
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
-msgstr ""
+msgstr "Зьнічкі:"
 
 #: src/ui_viewDialog.h:2140 src/ui_viewDialog.h:2143
 msgid "The zenithal hourly rate for the sporadic meteors"
-msgstr ""
+msgstr "Зэнітная часьціня за гадзіну адзінкавых мэтэораў"
 
 #: src/ui_viewDialog.h:2146
 msgid "Display objects from catalogs"
@@ -6827,54 +6827,54 @@ msgstr "Краявід"
 msgid "Starlore"
 msgstr "Зорныя веды"
 
-#: src/ui_configurationDialog.h:1247
+#: src/ui_configurationDialog.h:1263
 msgid "Configuration"
 msgstr "Настаўленьні"
 
-#: src/ui_configurationDialog.h:1249
+#: src/ui_configurationDialog.h:1265
 msgid "Language settings"
 msgstr "Настаўленьні мовы"
 
-#: src/ui_configurationDialog.h:1250
+#: src/ui_configurationDialog.h:1266
 msgid "Program Language"
 msgstr "Мова праґрамы"
 
-#: src/ui_configurationDialog.h:1251
+#: src/ui_configurationDialog.h:1267
 msgid "Sky Culture Language"
 msgstr "Мова культуры неба:"
 
-#: src/ui_configurationDialog.h:1253
+#: src/ui_configurationDialog.h:1269
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Гэтая функцыянальнасьць не быля належным чынам правераная."
 
-#: src/ui_configurationDialog.h:1255
+#: src/ui_configurationDialog.h:1271
 msgid "Ephemeris settings (experimental)"
 msgstr "Настаўленьні эфэмэрыдаў (экспэрымэнтальныя)"
 
-#: src/ui_configurationDialog.h:1256 src/ui_configurationDialog.h:1257
+#: src/ui_configurationDialog.h:1272 src/ui_configurationDialog.h:1273
 msgid "Not installed"
 msgstr "Не ўсталявана"
 
-#: src/ui_configurationDialog.h:1259
+#: src/ui_configurationDialog.h:1275
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
 "DE431 мае зьвесткі для гадоў -13000…+17000. Толькі для адмысловых выпадкаў."
 
-#: src/ui_configurationDialog.h:1261
+#: src/ui_configurationDialog.h:1277
 msgid "Use DE431 (long-time data)"
 msgstr "Выкарыстоўваць DE431 (зьвесткі для вялікага пэрыяду)"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1279
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430 мае найвышэйшую дакладнасьць, але толькі для гадоў 1550…2650."
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1281
 msgid "Use DE430 (high accuracy)"
 msgstr "Выкарыстоўваць DE430 (высокая дакладнасьць)"
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1283
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6882,22 +6882,22 @@ msgstr ""
 "VSOP87 раіцца выкарыстоўваць для гадоў -4000…+8000, але мае таксама карысныя "
 "становішчы па-за межамі гэтага пэрыяду."
 
-#: src/ui_configurationDialog.h:1269
+#: src/ui_configurationDialog.h:1285
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP2000-82B выкарыстоўваецца, калі іншыя не ўсталяваныя ці не "
 "задзейнічаныя."
 
-#: src/ui_configurationDialog.h:1270
+#: src/ui_configurationDialog.h:1286
 msgid "Default options"
 msgstr "Прадвызначаныя настаўленьні"
 
-#: src/ui_configurationDialog.h:1271
+#: src/ui_configurationDialog.h:1287
 msgid "Save View"
 msgstr "Захаваць прагляд"
 
-#: src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1289
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6905,7 +6905,7 @@ msgstr ""
 "Захаваць настаўленьні, зьмененыя ў гэтай сэсіі, каб яны выкарыстоўваліся пры "
 "наступных запусках Stellarium"
 
-#: src/ui_configurationDialog.h:1275
+#: src/ui_configurationDialog.h:1291
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -6913,11 +6913,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Захаваць настаўленьні"
 
-#: src/ui_configurationDialog.h:1277
+#: src/ui_configurationDialog.h:1293
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Аднавіць прадвызначаныя настаўленьні Stellarium"
 
-#: src/ui_configurationDialog.h:1279
+#: src/ui_configurationDialog.h:1295
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -6925,7 +6925,7 @@ msgstr "Аднавіць прадвызначаныя настаўленьні S
 msgid "Restore defaults"
 msgstr "Аднавіць прадвызначаныя"
 
-#: src/ui_configurationDialog.h:1280
+#: src/ui_configurationDialog.h:1296
 msgid ""
 "Save either the current FOV and direction of view or all the current options "
 "for use at next startup. Restoring default settings requires a restart of "
@@ -6935,205 +6935,213 @@ msgstr ""
 "выкарыстаньня пры наступным запуску. Для аднаўленьня прадвызначаных "
 "настаўленьняў патрэбны перазапуск Stellarium. "
 
-#: src/ui_configurationDialog.h:1282
+#: src/ui_configurationDialog.h:1298
 msgid "The vertical field (height) of your view when Stellarium starts"
-msgstr ""
+msgstr "Вэртыкальнае поле зроку (вышыня) на пачатку працы Stellarium"
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1301
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Напрамак прагляду пры запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1287 src/ui_configurationDialog.h:1516
+#: src/ui_configurationDialog.h:1303 src/ui_configurationDialog.h:1534
 msgid "Selected object information"
 msgstr "Зьвесткі аб вылучаным аб'екце"
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1305
 msgid "Display all information available"
 msgstr "Адлюстроўваць усе наяўныя зьвесткі"
 
-#: src/ui_configurationDialog.h:1291
+#: src/ui_configurationDialog.h:1307
 msgid "All available"
 msgstr "Усе наяўныя"
 
-#: src/ui_configurationDialog.h:1293
+#: src/ui_configurationDialog.h:1309
 msgid "Display no information"
 msgstr "Не адлюстроўваць ніякіх зьвестак"
 
-#: src/ui_configurationDialog.h:1295 plugins/Oculars/src/Oculars.cpp:2247
+#: src/ui_configurationDialog.h:1311 plugins/Oculars/src/Oculars.cpp:2247
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "Нічога"
 
-#: src/ui_configurationDialog.h:1297
+#: src/ui_configurationDialog.h:1313
 msgid "Display less information"
 msgstr "Адлюстроўваць сьціслыя зьвесткі"
 
-#: src/ui_configurationDialog.h:1299
+#: src/ui_configurationDialog.h:1315
 msgid "Short"
 msgstr "Сьціслыя"
 
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1317
 msgid "Display user settings information"
 msgstr "Паказаць зьвесткі пра карыстальнікавы настройкі"
 
-#: src/ui_configurationDialog.h:1303
+#: src/ui_configurationDialog.h:1319
 msgid "Customized"
 msgstr "Карыстальнікавы"
 
-#: src/ui_configurationDialog.h:1304
+#: src/ui_configurationDialog.h:1320
 msgid "Displayed fields"
 msgstr "Паказаныя палі"
 
-#: src/ui_configurationDialog.h:1306 src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1322 src/ui_configurationDialog.h:1356
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Экватарыяльныя каардынаты, раўнадзенства даты"
 
-#: src/ui_configurationDialog.h:1308
+#: src/ui_configurationDialog.h:1324
 msgid "Right ascension/Declination (of date)"
 msgstr "Прамое ўзыходжаньне/Схіленьне (даты)"
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1325
 msgid "Supergalactic coordinates"
 msgstr "Звышґаляктычныя каардынаты"
 
-#: src/ui_configurationDialog.h:1311
+#: src/ui_configurationDialog.h:1327
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Тып аб'екту (зорка, плянэта,…)"
 
-#: src/ui_configurationDialog.h:1314
+#: src/ui_configurationDialog.h:1330
 msgid "Absolute magnitude"
 msgstr "Абсалютная велічыня"
 
-#: src/ui_configurationDialog.h:1316
+#: src/ui_configurationDialog.h:1332
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "Экліптычныя каардынаты, раўнадзенства даты (толькі для Зямлі)."
 
-#: src/ui_configurationDialog.h:1318
+#: src/ui_configurationDialog.h:1334
 msgid "Ecliptic coordinates (of date)"
 msgstr "Экліптычныя каардынаты (даты)"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1336
 msgid "Angular or physical size"
 msgstr "Вуглавы ці фізычны памер"
 
-#: src/ui_configurationDialog.h:1322
+#: src/ui_configurationDialog.h:1338
 msgid "Size"
 msgstr "Памер"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1340
 msgid "Horizontal coordinates"
 msgstr "Гарызантальныя каардынаты"
 
-#: src/ui_configurationDialog.h:1326
+#: src/ui_configurationDialog.h:1342
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "Вышыня/Азімут"
 
-#: src/ui_configurationDialog.h:1327
+#: src/ui_configurationDialog.h:1343
 msgid "Catalog number(s)"
 msgstr "Нумар(ы) у каталёґу"
 
-#: src/ui_configurationDialog.h:1328
+#: src/ui_configurationDialog.h:1344
 msgid "Distance"
 msgstr "Адлегласьць"
 
-#: src/ui_configurationDialog.h:1329
+#: src/ui_configurationDialog.h:1345
 msgid "Galactic coordinates"
 msgstr "Ґаляктычныя каардынаты"
 
-#: src/ui_configurationDialog.h:1331
+#: src/ui_configurationDialog.h:1347
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Экватарыяльныя каардынаты, раўнадзенства J2000.0"
 
-#: src/ui_configurationDialog.h:1333
+#: src/ui_configurationDialog.h:1349
 msgid "Right ascension/Declination (J2000)"
 msgstr "Прамое ўзыходжаньне/Схіленьне (J2000)"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1352
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "Экліптычныя каардынаты, раўнадзенства J2000.0"
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1354
 msgid "Ecliptic coordinates (J2000)"
 msgstr "Экліптычныя каардынаты (J2000)"
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1358
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "Гадзінавы вугал/Схіленьне"
 
-#: src/ui_configurationDialog.h:1343
+#: src/ui_configurationDialog.h:1359
 msgid "Visual magnitude"
 msgstr "Бачная велічыня"
 
-#: src/ui_configurationDialog.h:1345
+#: src/ui_configurationDialog.h:1361
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr "Трохлітарная абрэвіятура сузор'я МАЗ"
 
-#: src/ui_configurationDialog.h:1347
+#: src/ui_configurationDialog.h:1363
 msgid "Constellation"
 msgstr "Сузор'е"
 
-#: src/ui_configurationDialog.h:1349
+#: src/ui_configurationDialog.h:1365
 msgid "Spectral class, nebula type, etc."
 msgstr "Спэктральная кляса, тып туманнасьці, і г.д."
 
-#: src/ui_configurationDialog.h:1351
+#: src/ui_configurationDialog.h:1367
 msgid "Additional information"
 msgstr "Дадатковыя зьвесткі"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1368
 msgid "Sidereal time"
 msgstr "Зоркавы час"
 
-#: src/ui_configurationDialog.h:1353
+#: src/ui_configurationDialog.h:1369
+msgid "Additional settings"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1370
+msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1371
 msgid "Control"
 msgstr "Кіраваньне"
 
-#: src/ui_configurationDialog.h:1355
+#: src/ui_configurationDialog.h:1373
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Дазволіць перасоўваньне (перацягваньне) й набліжэньне (паварот кола) мышай"
 
-#: src/ui_configurationDialog.h:1357
+#: src/ui_configurationDialog.h:1375
 msgid "Enable mouse navigation"
 msgstr "Задзейнічаць навіґацыю мышай"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1378
 msgid "Allow keyboard to pan and zoom"
 msgstr "Дазволіць перасоўваньне й набліжэньне з дапамогай клявіятуры"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1380
 msgid "Enable keyboard navigation"
 msgstr "Задзейнічаць навіґацыю клявіятурай"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1382
 msgid "Hides the mouse cursor when inactive"
 msgstr "Хаваць курсор мышы, калі ён неактыўны"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1384
 msgid "Mouse cursor timeout:"
 msgstr "Затрымка курсора мышы:"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1386
 msgid "seconds"
 msgstr "секунды"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1388
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Пачатковыя дата й час"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1390
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Ужываць сыстэмныя дату й час на пачатку працы Stellarium"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1392
 msgid "System date and time"
 msgstr "Сыстэмныя дата й час"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1394
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -7141,99 +7149,99 @@ msgstr ""
 "Удаваць карціну пры часе дня, калі запушчаны Stellarium, але ў зададзены "
 "дзень"
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1396
 msgid "System date at:"
 msgstr "Сыстэмная дата:"
 
-#: src/ui_configurationDialog.h:1380
+#: src/ui_configurationDialog.h:1398
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Ужываць пэўныя дату й час на пачатку працы Stellarium"
 
-#: src/ui_configurationDialog.h:1382
+#: src/ui_configurationDialog.h:1400
 msgid "Other:"
 msgstr "Іншыя:"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1402
 msgid "Use current local date and time"
 msgstr "Выкарыстоўваць мясцовыя дату й час"
 
-#: src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1404
 msgid "use current"
 msgstr "ужыць бягучыя"
 
-#: src/ui_configurationDialog.h:1388
+#: src/ui_configurationDialog.h:1406
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
 "Гэтыя настаўленьні вызначаюць як будуць паказвацца дата й час на ніжняй "
 "панэлі."
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1408
 msgid "Display formats of date and time"
 msgstr "Паказваць фарматы даты й часу"
 
-#: src/ui_configurationDialog.h:1391
+#: src/ui_configurationDialog.h:1409
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Дата:"
 
-#: src/ui_configurationDialog.h:1392
+#: src/ui_configurationDialog.h:1410
 msgid "and time:"
 msgstr "і час:"
 
-#: src/ui_configurationDialog.h:1393
+#: src/ui_configurationDialog.h:1411
 msgid "Time correction"
 msgstr "Выпраўляньне часу"
 
-#: src/ui_configurationDialog.h:1396
+#: src/ui_configurationDialog.h:1414
 msgid "Edit equation"
 msgstr "Правіць раўнаньне"
 
-#: src/ui_configurationDialog.h:1398
+#: src/ui_configurationDialog.h:1416
 msgid "Planetarium options"
 msgstr "Настройкі плянэтарыя"
 
-#: src/ui_configurationDialog.h:1400
+#: src/ui_configurationDialog.h:1418
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "Задзейнічай гэты выбор, каб лічыць азімут з поўдня на захад."
 
-#: src/ui_configurationDialog.h:1402
+#: src/ui_configurationDialog.h:1420
 msgid "Azimuth from South"
 msgstr "Азімут ад поўдня"
 
-#: src/ui_configurationDialog.h:1404
+#: src/ui_configurationDialog.h:1422
 msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr "Ці паказваць ґузік лічбаванага агляду неба."
 
-#: src/ui_configurationDialog.h:1406
+#: src/ui_configurationDialog.h:1424
 msgid "Show DSS button"
 msgstr "Паказваць ґузік ЛАН"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1426
 msgid "Mask out everything outside a central circle in the main view"
-msgstr "Хаваць усё па-за цэнтральным колам галоўнага агляду"
+msgstr "Хаваць усё па-за цэнтральным колам галоўнага прагляду"
 
-#: src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1428
 msgid "Disc viewport"
 msgstr "Круглае глядзельнае вакно"
 
-#: src/ui_configurationDialog.h:1412
+#: src/ui_configurationDialog.h:1430
 msgid "Align labels with the horizon"
 msgstr "Раўнаваць назвы па лініі далягляду"
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1432
 msgid "Gravity labels"
 msgstr "Прыцягваць назвы"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1434
 msgid "Use decimal degrees for coordinates"
 msgstr "Выкарыстоўваць дзесятковыя ґрадусы для каардынат"
 
-#: src/ui_configurationDialog.h:1418
+#: src/ui_configurationDialog.h:1436
 msgid "Use decimal degrees"
 msgstr "Дзесятковыя ґрадусы"
 
-#: src/ui_configurationDialog.h:1420
+#: src/ui_configurationDialog.h:1438
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -7241,11 +7249,11 @@ msgstr ""
 "Скажэньне сфэрычнага люстра ужываецца, калі Stellarium праектуе на сфэрычнае "
 "люстра танных плянэтарыяў."
 
-#: src/ui_configurationDialog.h:1422
+#: src/ui_configurationDialog.h:1440
 msgid "Spheric mirror distortion"
 msgstr "Скажэньне сфэрычнага люстра"
 
-#: src/ui_configurationDialog.h:1424
+#: src/ui_configurationDialog.h:1442
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -7253,91 +7261,91 @@ msgstr ""
 "Задзейнічай каб праводзіць назіраньні нібы з паверхні плянэты (раіцца). Калі "
 "выключана, паказваць плянэтацэнтрычны від."
 
-#: src/ui_configurationDialog.h:1426
+#: src/ui_configurationDialog.h:1444
 msgid "Topocentric coordinates"
 msgstr "Топацэнтрычныя каардынаты"
 
-#: src/ui_configurationDialog.h:1428
+#: src/ui_configurationDialog.h:1446
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr "Аўтазадзейнічаньне атмасфэры ў вакне месцаў для целаў з атмасфэраў"
 
-#: src/ui_configurationDialog.h:1430
+#: src/ui_configurationDialog.h:1448
 msgid "Auto-enabling for the atmosphere"
 msgstr "Аўтазадзейнічаньне атмасфэры"
 
-#: src/ui_configurationDialog.h:1432
+#: src/ui_configurationDialog.h:1450
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Пераключыць ґузікі перакульваньня відарыса."
 
-#: src/ui_configurationDialog.h:1434
+#: src/ui_configurationDialog.h:1452
 msgid "Show flip buttons"
 msgstr "Паказваць ґузік перакульваньня"
 
-#: src/ui_configurationDialog.h:1436 src/ui_configurationDialog.h:1439
+#: src/ui_configurationDialog.h:1454 src/ui_configurationDialog.h:1457
 msgid "Hide other constellations when you click one"
 msgstr "Хаваць іншыя сузор'і, калі пстрыкаеш па нейкім"
 
-#: src/ui_configurationDialog.h:1443
+#: src/ui_configurationDialog.h:1461
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Ці паказваць фон туманнасьцяў."
 
-#: src/ui_configurationDialog.h:1445
+#: src/ui_configurationDialog.h:1463
 msgid "Show nebula background button"
 msgstr "Паказваць ґузік фону туманнасьцяў"
 
-#: src/ui_configurationDialog.h:1447
+#: src/ui_configurationDialog.h:1465
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Нутацыя — гэта маленькае хістаньне зямной восі, памерам да некалькіх "
 "арксэкунд."
 
-#: src/ui_configurationDialog.h:1449
+#: src/ui_configurationDialog.h:1467
 msgid "Include nutation"
 msgstr "Разам з нутацыяй"
 
-#: src/ui_configurationDialog.h:1451
+#: src/ui_configurationDialog.h:1469
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Аўтаматычна мяняць краявід пры зьмяненьні плянэты"
 
-#: src/ui_configurationDialog.h:1453
+#: src/ui_configurationDialog.h:1471
 msgid "Auto select landscapes"
 msgstr "Аўтаматычна выбіраць краявід"
 
-#: src/ui_configurationDialog.h:1454
+#: src/ui_configurationDialog.h:1472
 msgid "Show bookmarks button"
 msgstr "Паказваць ґузік закладак"
 
-#: src/ui_configurationDialog.h:1456
+#: src/ui_configurationDialog.h:1474
 msgid "A button to toggle equatorial J2000 grid"
 msgstr "Ґузік, які хавае ці паказвае экліптычную сетку J2000"
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1476
 msgid "Show ICRS grid button"
 msgstr "Паказваць ґузік сеткі МНСК"
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1478
 msgid "A button to toggle galactic grid"
 msgstr "Ґузік, які хавае ці паказвае ґаляктычную сетку"
 
-#: src/ui_configurationDialog.h:1462
+#: src/ui_configurationDialog.h:1480
 msgid "Show galactic grid button"
 msgstr "Паказваць ґузік ґаляктычнай сеткі"
 
-#: src/ui_configurationDialog.h:1464
+#: src/ui_configurationDialog.h:1482
 msgid "A button to toggle ecliptic grid of date"
 msgstr "Ґузік, які хавае ці паказвае экліптычную сетку даты"
 
-#: src/ui_configurationDialog.h:1466
+#: src/ui_configurationDialog.h:1484
 msgid "Show ecliptic grid button"
 msgstr "Паказваць ґузік экліптычнай сеткі"
 
-#: src/ui_configurationDialog.h:1467
+#: src/ui_configurationDialog.h:1485
 msgid "Show constellation boundaries button"
 msgstr "Паказваць ґузік межаў сузор'яў"
 
-#: src/ui_configurationDialog.h:1469
+#: src/ui_configurationDialog.h:1487
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -7345,96 +7353,96 @@ msgstr ""
 "Калі задзейнічана, клявіша аўтааддаленьня таксама верне пачатковы напрамак "
 "агляду"
 
-#: src/ui_configurationDialog.h:1471
+#: src/ui_configurationDialog.h:1489
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Auto zoom out returns to initial direction of view"
-msgstr "«Аўтааддаленьне» вяртае пачатковы напрамак агляду"
+msgstr "«Аўтааддаленьне» вяртае пачатковы напрамак прагляду"
 
-#: src/ui_configurationDialog.h:1473
+#: src/ui_configurationDialog.h:1491
 msgid "Toggle the usage of background under GUI buttons"
-msgstr ""
+msgstr "Паказваць ці не асноведзь пад ґузікамі ҐІК"
 
-#: src/ui_configurationDialog.h:1475
+#: src/ui_configurationDialog.h:1493
 msgid "Use buttons background"
-msgstr ""
+msgstr "Ужываць асноведзь ґузікаў"
 
-#: src/ui_configurationDialog.h:1476
+#: src/ui_configurationDialog.h:1494
 msgid "Indication for mount mode"
-msgstr ""
+msgstr "Пазначэньне рэжыму мацаваньня"
 
-#: src/ui_configurationDialog.h:1477
+#: src/ui_configurationDialog.h:1495
 msgid "Screenshots"
 msgstr "Здымкі экрана"
 
-#: src/ui_configurationDialog.h:1478
+#: src/ui_configurationDialog.h:1496
 msgid "Screenshot Directory"
 msgstr "Каталёґ для здымкаў экрана"
 
-#: src/ui_configurationDialog.h:1480
+#: src/ui_configurationDialog.h:1498
 msgid "Invert colors"
 msgstr "Інвэртаваць колеры"
 
-#: src/ui_configurationDialog.h:1481
+#: src/ui_configurationDialog.h:1499
 msgid "Star catalog updates"
 msgstr "Абнаўленьні каталёґу зорак"
 
-#: src/ui_configurationDialog.h:1483
+#: src/ui_configurationDialog.h:1501
 msgid "Click here to start downloading"
 msgstr "Пстрыкні сюды, каб пачаць загрузку"
 
-#: src/ui_configurationDialog.h:1485
+#: src/ui_configurationDialog.h:1503
 msgid "Download this file to view even more stars"
 msgstr "Загрузі гэты файл, каб убачыць яшчэ болей зорак"
 
-#: src/ui_configurationDialog.h:1487
+#: src/ui_configurationDialog.h:1505
 msgid "Restart the download"
 msgstr "Пачаць загрузку наноў"
 
-#: src/ui_configurationDialog.h:1489
+#: src/ui_configurationDialog.h:1507
 msgid "Retry"
 msgstr "Ізноў"
 
-#: src/ui_configurationDialog.h:1491
+#: src/ui_configurationDialog.h:1509
 msgid "Stop the download. You can always restart it later"
 msgstr "Спыніць загрузку. Яе заўжды можна пачаць наноў пасьля."
 
-#: src/ui_configurationDialog.h:1496
+#: src/ui_configurationDialog.h:1514
 msgid "Close window when script runs"
 msgstr "Закрыць выкно, калі выконваецца сцэнар"
 
-#: src/ui_configurationDialog.h:1498
+#: src/ui_configurationDialog.h:1516
 msgid "Run the selected script"
 msgstr "Выканаць вылучаны сцэнар"
 
-#: src/ui_configurationDialog.h:1502
+#: src/ui_configurationDialog.h:1520
 msgid "Stop a running script"
 msgstr "Спыніць сцэнар, які выконваецца"
 
-#: src/ui_configurationDialog.h:1506
+#: src/ui_configurationDialog.h:1524
 msgid "Load at startup"
 msgstr "Загружаць на пачатку працы"
 
-#: src/ui_configurationDialog.h:1507
+#: src/ui_configurationDialog.h:1525
 msgid "configure"
 msgstr "наставіць"
 
-#: src/ui_configurationDialog.h:1512
+#: src/ui_configurationDialog.h:1530
 msgid "Main"
 msgstr "Галоўныя"
 
-#: src/ui_configurationDialog.h:1514
+#: src/ui_configurationDialog.h:1532
 msgid "Information"
 msgstr "Зьвесткі"
 
-#: src/ui_configurationDialog.h:1519
+#: src/ui_configurationDialog.h:1537
 msgid "Navigation"
 msgstr "Навіґацыя"
 
-#: src/ui_configurationDialog.h:1521
+#: src/ui_configurationDialog.h:1539
 msgid "Tools"
 msgstr "Інструмэнты"
 
-#: src/ui_configurationDialog.h:1525
+#: src/ui_configurationDialog.h:1543
 msgid "Plugins"
 msgstr "Дадаткі"
 
@@ -7665,7 +7673,7 @@ msgstr "Абнавіць становішчы"
 
 #: src/ui_astroCalcDialog.h:770
 msgid "List of objects above horizon"
-msgstr ""
+msgstr "Сьпіс аб'ектаў па-над гарызонтам"
 
 #: src/ui_astroCalcDialog.h:772
 msgid "Use horizontal coordinates"
@@ -10923,7 +10931,7 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr ""
-"<b>Каб навесьці прыладу на цэнтар агляду:</b> націсьні нумар прылады, "
+"<b>Каб навесьці прыладу на цэнтар прагляду:</b> націсьні нумар прылады, "
 "трымаючы націснутай клявішу <b>Alt</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
@@ -10940,8 +10948,8 @@ msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr ""
-"Калі перасунеш агляд пасьля выдачы загаду, цэль ня будзе зьмененая пакуль ня "
-"выдасі іншы загад."
+"Калі перасунеш прагляд пасьля выдачы загаду, цэль ня будзе зьмененая пакуль "
+"ня выдасі іншы загад."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 #, qt-format
@@ -12708,74 +12716,76 @@ msgstr "Пслужнік абязьдзейнены, або праслухоўв
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:432
 msgid "Remote Sync"
-msgstr ""
+msgstr "Аддаленае сынхранізаваньне"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:54
 msgid ""
 "Provides state synchronization for multiple Stellarium instances running in "
 "a network. See manual for detailed description."
 msgstr ""
+"Забясьпечвае сынхранізаваньне стану некалькіх асобнікаў Stellarium, які "
+"працуюць у сетцы. Глядзі падрабязнасьці ў кіраўніцтве карыстальніка."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:111
 #, qt-format
 msgid "ERROR: %1"
-msgstr ""
+msgstr "ПАМЫЛКА: %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:128
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:417
 msgid "Start server"
-msgstr ""
+msgstr "Запусьціць паслужнік"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:133
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:420
 msgid "Connect to server"
-msgstr ""
+msgstr "Злучыцца з паслужнікам"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:136
 msgid "Not running"
-msgstr ""
+msgstr "Не запушчаны"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
 #, qt-format
 msgid "Running as server on port %1"
-msgstr ""
+msgstr "Запушчаны як паслужнік на порце %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:160
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
 msgid "Cancel connecting"
-msgstr ""
+msgstr "Спыніць падлучэньне"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
 #, qt-format
 msgid "Connecting to %1: %2..."
-msgstr ""
+msgstr "Злучаюся з %1: %2…"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
 #, qt-format
 msgid "Retrying connection to %1: %2..."
-msgstr ""
+msgstr "Паўтараю злучэньне з %1: %2…"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
 msgid "Disconnecting..."
-msgstr ""
+msgstr "Адлучэньне…"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
 msgid "Disconnect from server"
-msgstr ""
+msgstr "Адлучыццца ад паслужніка"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
 #, qt-format
 msgid "Connected to %1: %2"
-msgstr ""
+msgstr "Злучаны з %1: %2"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
 msgid "Remote Sync Plug-in"
-msgstr ""
+msgstr "Дадатак аддаленага сынхранізаваньня"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
 msgid ""
-"The Remote Control plugin provides state synchronization for multiple "
+"The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
 
@@ -12784,32 +12794,36 @@ msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
+"Гэта можна выкарыстоўваць, напрыклад, для стварэньня шматэкранных "
+"канфіґурацый, выкарыстоўваючы некалькі кампутараў."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
+"Частковае сынхранізаваньне дазваляе паралельныя канфіґурыцыі, напрыклад, "
+"агульнага й падрабязнага праглядаў."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 msgid "See manual for detailed description."
-msgstr ""
+msgstr "Глядзі падрабязнасьці ў кіраўніцтве карыстальніка."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
-msgstr ""
+msgstr "Гэты дадатак быў распрацаваны падчас ESA SoCiS 2015 і 2016."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:235
 msgid "Server Name"
-msgstr ""
+msgstr "Назва паслужніка"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:243
 msgid "Server not active."
-msgstr ""
+msgstr "Паслужнік не актыўны."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:412
 msgid "Remote Sync Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку аддаленага сынхранізаваньня"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:414
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
@@ -12818,52 +12832,52 @@ msgstr "Статус:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:416
 msgid "Server mode"
-msgstr ""
+msgstr "Рэжым паслужніка"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:418
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:423
 msgid "Server port"
-msgstr ""
+msgstr "Порт паслужніка"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:419
 msgid "Client mode"
-msgstr ""
+msgstr "Рэжым кліента"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:421
 msgid "Server host address/name"
-msgstr ""
+msgstr "Адрас/назва вузла паслужніка"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:422
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:424
 msgid "When connection is lost"
-msgstr ""
+msgstr "Калі злучэньне страчана"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:427
 msgid "Do nothing"
-msgstr ""
+msgstr "Нічога не рабіць"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:428
 msgid "Try reconnecting"
-msgstr ""
+msgstr "Паспрабаваць перазлучыцца"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:431
 msgid "When server quits"
-msgstr ""
+msgstr "Калі паслужнік сканчае працу"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:433
 msgid "Changes on this page require a re-connection to the server"
-msgstr ""
+msgstr "Зьмены на гэтай старонцы патрабуюць перазлучэньня з паслужнікам"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:434
 msgid "Settings applied on this client"
-msgstr ""
+msgstr "Настройкі, ужытыя для гэтага кліента"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:435
 msgid "Selection"
-msgstr ""
+msgstr "Вылучэньне"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:438
 msgid "StelProperty"
@@ -12871,23 +12885,23 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:439
 msgid "View direction"
-msgstr ""
+msgstr "Пачатковы прагляду"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:441
 msgid "Property filters"
-msgstr ""
+msgstr "Фільтар уласьцівасьцяў"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:442
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "Выключыць уласьцівасьці, зьвязаныя з ҐІК"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "Ддаткова выключаныя ўласьцівасьці:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
 msgid "Client settings"
-msgstr ""
+msgstr "Настройкі кліента"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
@@ -18149,3 +18163,70 @@ msgstr "Сваё схіленьне 2"
 #, qt-format
 #~ msgid "Now is %1"
 #~ msgstr "Цяпер %1"
+
+#~ msgid ""
+#~ "Algorithm was used in <em>Astronomical Almanac</em> (1984 and later) and he "
+#~ "gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
+#~ msgstr ""
+#~ "Альґарытм выкарыстоўваўся ў <em>Астранамічным альманаху</em> (1984 г. і "
+#~ "пазьней) і дае V-велічыні (інструмэнтальныя) (нібыта з Д.Л. Гарыса)"
+
+#~ msgid ""
+#~ "Algorithm is based on visual observations 1877-1891 by G. Mueller and was "
+#~ "published in <em>Explanatory Supplement to the Astronomical Almanac</em> "
+#~ "(1961)."
+#~ msgstr ""
+#~ "Альґарытм ґрунтуецца на візуальных назіраньнях 1877-1891 Ґ. Мюлера і быў "
+#~ "апублікаваны ў <em>Тлумачальным дадатку да Астранамічнага альманаху</em> "
+#~ "(1961 г.)."
+
+#~ msgid ""
+#~ "Algorithm was provided by Pere Planesas (Observatorio Astronomico Nacional) "
+#~ "and it was published in <em>Explanatory Supplement to the Astronomical "
+#~ "Almanac</em> (1992)."
+#~ msgstr ""
+#~ "Альґарытм быў распрацаваны Пэрэ Планэсас (Observatorio Astronomico Nacional) "
+#~ "і быў апублікаваны ў <em>Тлумачальным дадатку да Астранамічнага "
+#~ "альманаху</em> (1922 г.)"
+
+#~ msgid ""
+#~ "Algorithm was published in the 3rd edition of the <em>Explanatory Supplement "
+#~ "to the Astronomical Almanac</em> (2013)."
+#~ msgstr ""
+#~ "Альґарытм быў апублікаваны ў 3-м выданьні <em>Тлумачальнага дадатку да "
+#~ "Астранамічнага альманаху</em> (2013 г.)"
+
+#~ msgid ""
+#~ "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
+#~ "the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC "
+#~ "achievement award."
+#~ msgstr ""
+#~ "Гэты сьпіс з 111 аб'ектаў, створаны Э.Дж. Крэёнам й Стывам Коў, "
+#~ "выкарыстоўваецца сябрамі Астранамічнага клюбу «Саґуара» ў Фэніксе (штат "
+#~ "Арызона, ЗША) для вызначэньня пераможцаў у назіраньнях НАК."
+
+#~ msgid ""
+#~ "The Remote Control plugin provides state synchronization for multiple "
+#~ "Stellarium instances running in a network."
+#~ msgstr ""
+#~ "Дадатак аддаленага кіраваньня забясьпечвае сынхранізаваньне стану некалькіх "
+#~ "асобнікаў Stellarium, які працуюць у сетцы."
+
+#~ msgctxt "magnitude algorithm"
+#~ msgid "Mueller 1893"
+#~ msgstr "Мюлер 1893"
+
+#~ msgctxt "magnitude algorithm"
+#~ msgid "Astronomical Almanach 1984"
+#~ msgstr "Астранамічны альманах 1984"
+
+#~ msgctxt "magnitude algorithm"
+#~ msgid "Explanatory Supplement 1992"
+#~ msgstr "Тлумачальны дадатак 1992"
+
+#~ msgctxt "magnitude algorithm"
+#~ msgid "Explanatory Supplement 2013"
+#~ msgstr "Тлумачальны дадатак 2013"
+
+#~ msgid "Magnitude algorithm:"
+#~ msgstr "Альґарытм зоркавай велічыні"
