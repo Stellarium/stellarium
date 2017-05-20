@@ -2057,6 +2057,17 @@ void AstroCalcDialog::changePage(QListWidgetItem *current, QListWidgetItem *prev
 	if (!current)
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+
+	// special cases
+	switch (ui->stackListWidget->row(current))
+	{
+		case 0: // update planetary positions
+			currentPlanetaryPositions();
+			break;
+		case 1: // update positions of celestial bodies
+			currentCelestialPositions();
+			break;
+	}
 }
 
 void AstroCalcDialog::updateTabBarListWidgetWidth()
