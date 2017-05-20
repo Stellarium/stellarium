@@ -35,7 +35,8 @@ public:
 	//! Extension of StelOBJ::Material which provides Scenery3d specific stuff
 	struct Material : public StelOBJ::Material
 	{
-		Material() : traits(), bAlphatest(false), bBackface(false), fAlphaThreshold(0.5)
+		Material() : traits(), bAlphatest(false), bBackface(false), fAlphaThreshold(0.5),
+			     vis_fadeIn(0.0,0.0),vis_fadeOut(0.0,0.0),vis_fadeValue(1.0)
 		{
 
 		}
@@ -87,8 +88,8 @@ public:
 		bool bBackface;
 		float fAlphaThreshold;
 
-		Vec2d vis_fadeIn;
-		Vec2d vis_fadeOut;
+		Vec2d vis_fadeIn;  // JD of begin of first visibility and begin of full visibility.
+		Vec2d vis_fadeOut; // JD of end of full visibility and end of last visibility.
 		//! Updated by S3DRenderer when necessary, otherwise always 1.0
 		float vis_fadeValue;
 

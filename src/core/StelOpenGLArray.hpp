@@ -63,7 +63,7 @@ public:
 
 	//! Constructs an empty StelOpenGLArray. No OpenGL objects are created with this call,
 	//! so this can be used without a GL context.
-	StelOpenGLArray(QObject* parent = NULL);
+	StelOpenGLArray(QObject* parent = Q_NULLPTR);
 	//! Releases the OpenGL data, if it has not happened yet.
 	~StelOpenGLArray();
 

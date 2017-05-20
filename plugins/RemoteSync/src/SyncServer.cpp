@@ -32,7 +32,7 @@ Q_LOGGING_CATEGORY(syncServer,"stel.plugin.remoteSync.server")
 using namespace SyncProtocol;
 
 SyncServer::SyncServer(QObject* parent)
-	: QObject(parent), stopping(false)
+	: QObject(parent), stopping(false), timeoutTimerId(-1)
 {
 	qserver = new QTcpServer(this);
 	connect(qserver,SIGNAL(newConnection()), this, SLOT(handleNewConnection()));

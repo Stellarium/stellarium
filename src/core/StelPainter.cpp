@@ -46,10 +46,10 @@ QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
 QCache<QByteArray, StringTexture> StelPainter::texCache(TEX_CACHE_LIMIT);
-QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
-QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
-QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
-QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::texturesShaderProgram=Q_NULLPTR;
+QOpenGLShaderProgram* StelPainter::basicShaderProgram=Q_NULLPTR;
+QOpenGLShaderProgram* StelPainter::colorShaderProgram=Q_NULLPTR;
+QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=Q_NULLPTR;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
@@ -940,7 +940,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
 	Q_ASSERT(fabs(vertices[2].length()-1.)<0.00001);
 	if (clippingCap && clippingCap->containsTriangle(vertices))
-		clippingCap = NULL;
+		clippingCap = Q_NULLPTR;
 	if (clippingCap && !clippingCap->intersectsTriangle(vertices))
 		return;
 	bool cDiscontinuity1 = checkDisc1 && prj->intersectViewportDiscontinuity(vertices[0], vertices[1]);
@@ -1451,7 +1451,7 @@ class VertexArrayProjector
 {
 public:
 	VertexArrayProjector(const StelVertexArray& ar, StelPainter* apainter, const SphericalCap* aclippingCap,
-						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL, QVarLengthArray<Vec3f, 4096>* aoutColors=NULL, double amaxSqDistortion=5.)
+						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=Q_NULLPTR, QVarLengthArray<Vec3f, 4096>* aoutColors=Q_NULLPTR, double amaxSqDistortion=5.)
 		   : vertexArray(ar), painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
 			 outColors(aoutColors), outTexturePos(aoutTexturePos), maxSqDistortion(amaxSqDistortion)
 	{
@@ -1474,15 +1474,15 @@ public:
 		else if (outTexturePos)
 		{
 			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
-			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos, NULL, NULL, maxSqDistortion);
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos, Q_NULLPTR, Q_NULLPTR, maxSqDistortion);
 		}
 		else if (outColors)
 		{
 			const Vec3f tmpColor[3] = {*c0, *c1, *c2};
-			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL, tmpColor, outColors, maxSqDistortion);
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, Q_NULLPTR, Q_NULLPTR, tmpColor, outColors, maxSqDistortion);
 		}
 		else
-			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL, NULL, NULL, maxSqDistortion);
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, maxSqDistortion);
 	}
 
 	// Draw the resulting arrays
@@ -1494,7 +1494,7 @@ public:
 		if (outColors)
 			painter->setColorPointer(3, GL_FLOAT, outColors->constData());
 
-		painter->enableClientStates(true, outTexturePos != NULL, outColors != NULL);
+		painter->enableClientStates(true, outTexturePos != Q_NULLPTR, outColors != Q_NULLPTR);
 		painter->drawFromArray(StelPainter::Triangles, outVertices->size(), 0, false);
 		painter->enableClientStates(false);
 	}
@@ -1569,7 +1569,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	// the last case.  It is the slowest, it process the triangles one by one.
 	{
 		// Project all the triangles of the VertexArray into our buffer arrays.
-		VertexArrayProjector result = va.foreachTriangle(VertexArrayProjector(va, this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : NULL, colored ? &polygonColorArray : NULL, maxSqDistortion));
+		VertexArrayProjector result = va.foreachTriangle(VertexArrayProjector(va, this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : Q_NULLPTR, colored ? &polygonColorArray : Q_NULLPTR, maxSqDistortion));
 		result.drawResult();
 		return;
 	}
@@ -1778,7 +1778,7 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 		t=1.f;
 	}
 
-	const float* cos_sin_rho = NULL;
+	const float* cos_sin_rho = Q_NULLPTR;
 	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
 	if ((bottomAngle>3.1415f) && (topAngle<0.0001f)) // safety margin.
 		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
@@ -1861,7 +1861,7 @@ StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOb
 		t=1.f;
 	}
 
-	const float* cos_sin_rho = NULL; //StelUtils::ComputeCosSinRho(stacks);
+	const float* cos_sin_rho = Q_NULLPTR; //StelUtils::ComputeCosSinRho(stacks);
 	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
 	if ((bottomAngle>3.1415f) && (topAngle<0.0001f)) // safety margin.
 		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
@@ -2092,13 +2092,13 @@ void StelPainter::initGLShaders()
 void StelPainter::deinitGLShaders()
 {
 	delete basicShaderProgram;
-	basicShaderProgram = NULL;
+	basicShaderProgram = Q_NULLPTR;
 	delete colorShaderProgram;
-	colorShaderProgram = NULL;
+	colorShaderProgram = Q_NULLPTR;
 	delete texturesShaderProgram;
-	texturesShaderProgram = NULL;
+	texturesShaderProgram = Q_NULLPTR;
 	delete texturesColorShaderProgram;
-	texturesColorShaderProgram = NULL;
+	texturesColorShaderProgram = Q_NULLPTR;
 	texCache.clear();
 }
 
@@ -2138,10 +2138,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		if (indices)
 			projectedVertexArray = projectArray(vertexArray, 0, count, indices + offset);
 		else
-			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
+			projectedVertexArray = projectArray(vertexArray, offset, count, Q_NULLPTR);
 	}
 
-	QOpenGLShaderProgram* pr=NULL;
+	QOpenGLShaderProgram* pr=Q_NULLPTR;
 
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);

@@ -66,13 +66,16 @@ GLExtFuncs* glExtFuncs;
 S3DRenderer::S3DRenderer(QObject *parent)
     :
       QObject(parent),
-      //sun(NULL), moon(NULL), venus(NULL),
+      currentScene(Q_NULLPTR),
+      sun(Q_NULLPTR), moon(Q_NULLPTR), venus(Q_NULLPTR),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
+      defaultFBO(-1),
       torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
       cubemapSize(1024),shadowmapSize(1024),wasMovedInLastDrawCall(false),
-      core(NULL), landscapeMgr(NULL),
+      core(Q_NULLPTR), landscapeMgr(Q_NULLPTR),
+      backfaceCullState(true), blendEnabled(false), lastMaterial(Q_NULLPTR), curShader(Q_NULLPTR),
       drawnTriangles(0), drawnModels(0), materialSwitches(0), shaderSwitches(0),
       requiresCubemap(false), cubemappingUsedLastFrame(false),
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
@@ -99,6 +102,8 @@ S3DRenderer::S3DRenderer(QObject *parent)
 	shaderParameters.torchLight = false;
 	shaderParameters.frustumSplits = 0;
 	shaderParameters.hwShadowSamplers = false;
+
+	renderShaderParameters=shaderParameters;
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
