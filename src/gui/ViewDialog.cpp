@@ -206,8 +206,10 @@ void ViewDialog::createDialogContent()
 	// Planets section
 	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets");
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
-	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
+	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");	
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
+	ui->planetIsolatedOrbitCheckBox->setEnabled(ssmgr->getFlagOrbits());
+	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetIsolatedOrbitCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
 	connectBoolProperty(ui->planetUseObjModelsCheckBox, "SolarSystem.flagUseObjModels");
