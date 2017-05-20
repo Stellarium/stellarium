@@ -266,6 +266,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
+		if (getSurfaceBrightnessWithExtinction(core)<99)
+			oss << q_("Contrast index: %1").arg(QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
+
 		if (parallax!=0.f)
 		{
 			QString dx;
@@ -466,6 +469,20 @@ float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcs
 		return getVMagnitudeWithExtinction(core) + 2.5*log10(getSurfaceArea()*sq);
 	else
 		return 99.f;
+}
+
+float Nebula::getContrastIndex(const StelCore* core) const
+{
+	// Compute an extended object's contrast index: http://www.unihedron.com/projects/darksky/NELM2BCalc.html
+
+	// Sky brightness
+	// Source: Schaefer, B.E. Feb. 1990. Telescopic Limiting Magnitude. PASP 102:212-229
+	// URL: http://adsbit.harvard.edu/cgi-bin/nph-iarticle_query?bibcode=1990PASP..102..212S [1990PASP..102..212S]
+	float B_mpsas = 21.58 - 5*log10(std::pow(10, 1.586 - core->getSkyDrawer()->getNELMFromBortleScale()/5)-1);
+	// Compute an extended object's contrast index
+	// Source: Clark, R.N., 1990. Appendix E in Visual Astronomy of the Deep Sky, Cambridge University Press and Sky Publishing.
+	// URL: http://www.clarkvision.com/visastro/appendix-e.html
+	return -0.4 * (getSurfaceBrightnessWithExtinction(core, true) - B_mpsas);
 }
 
 float Nebula::getSurfaceArea(void) const
