@@ -1259,8 +1259,8 @@ StelOBJ::ShortIndexList StelOBJ::getShortIndexList() const
 	ShortIndexList ret;
 	if(!canUseShortIndices())
 	{
-		return ret;
 		qCWarning(stelOBJ)<<"Cannot use short indices for OBJ data, it has"<<m_vertices.size()<<"vertices";
+		return ret;
 	}
 
 	ret.reserve(m_indices.size());
