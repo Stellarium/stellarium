@@ -2615,7 +2615,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenSz)
 		//HACK: there is no texture defined, we create a 1x1 pixel texture with color*albedo
 		//this is not the most efficient method, but prevents having to rewrite the shader to work without a texture
 		//removing some complexity in managing this use-case
-		Vec3f texCol = haloColor * albedo * 255.0f + 0.5f;
+		Vec3f texCol = haloColor * (albedo * 255.0f + 0.5f);
 		//convert to byte
 		Vector3<GLubyte> colByte(texCol[0],texCol[1],texCol[2]);
 		GLuint tex;
