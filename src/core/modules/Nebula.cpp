@@ -241,12 +241,16 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				else
 					oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
 
+				oss << q_("Contrast index: %1").arg(QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
 			}
 		}
 		else
 		{
 			if (getSurfaceBrightness(core)<99)
+			{
 				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
+				oss << q_("Contrast index: %1").arg(QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
+			}
 		}
 	}
 
@@ -266,9 +270,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		if (getSurfaceBrightnessWithExtinction(core)<99)
-			oss << q_("Contrast index: %1").arg(QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
-
 		if (parallax!=0.f)
 		{
 			QString dx;
