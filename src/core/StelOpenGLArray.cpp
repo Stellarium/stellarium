@@ -85,6 +85,8 @@ StelOpenGLArray::StelOpenGLArray(QObject* parent)
 	: QObject(parent),
 	  m_vertexBuffer(QOpenGLBuffer::VertexBuffer),
 	  m_indexBuffer(QOpenGLBuffer::IndexBuffer),
+	  m_indexBufferType(GL_UNSIGNED_INT),
+	  m_indexBufferTypeSize(sizeof(GLuint)),
 	  m_indexCount(0),
 	  m_memoryUsage(0)
 {

@@ -2113,13 +2113,13 @@ void SolarSystem::reloadPlanets()
 // Set the algorithm for computation of apparent magnitudes for planets in case  observer on the Earth
 void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 {
-	getEarth()->setApparentMagnitudeAlgorithm(algorithm);
+	Planet::setApparentMagnitudeAlgorithm(algorithm);
 }
 
 // Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
-	return getEarth()->getApparentMagnitudeAlgorithmString();
+	return Planet::getApparentMagnitudeAlgorithmString();
 }
 
 void SolarSystem::setFlagPermanentOrbits(bool b)
