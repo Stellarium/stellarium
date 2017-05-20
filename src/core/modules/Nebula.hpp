@@ -173,6 +173,8 @@ public:
 
 	float getSurfaceBrightness(const StelCore* core, bool arcsec=false) const;
 	float getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcsec=false) const;
+	//! Compute an extended object's contrast index
+	float getContrastIndex(const StelCore* core) const;
 
 	//! Get the surface area.
 	//! @return surface area in square degrees.

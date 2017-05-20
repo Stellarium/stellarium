@@ -187,6 +187,8 @@ public slots:
 	//! Get the current Bortle scale index
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	int getBortleScaleIndex() const {return bortleScaleIndex;}
+	//! Get the average NELM for current Bortle scale index
+	float getNELMFromBortleScale() const;
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
