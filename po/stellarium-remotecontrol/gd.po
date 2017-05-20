@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-05-09 19:10+0700\n"
+"POT-Creation-Date: 2017-05-16 19:17+0700\n"
 "PO-Revision-Date: 2016-11-14 12:22+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-10 06:15+0000\n"
-"X-Generator: Launchpad (build 18366)\n"
+"X-Launchpad-Export-Date: 2017-05-17 06:10+0000\n"
+"X-Generator: Launchpad (build 18385)\n"
 "Language: gd\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
@@ -32,7 +32,7 @@ msgstr "Mearachd a’ cur a’ ghnìomha “%1” gun fhrithealaiche: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
-#: plugins/RemoteControl/webroot/js/api/search.js:157
+#: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
 msgstr "Mearachd leis an lorg"
 
@@ -57,7 +57,7 @@ msgstr "Cha ghabh am frithealaiche ris an roghainn “%1”: "
 msgid "Error sending property '%1' to server: "
 msgstr "Mearachd a’ cur na roghainn “%1” gun fhrithealaiche: "
 
-#: plugins/RemoteControl/webroot/js/api/remotecontrol.js:193
+#: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
 msgstr "Mearachd a’ cur na h-àithne gun fhrithealaiche: "
 
@@ -65,32 +65,32 @@ msgstr "Mearachd a’ cur na h-àithne gun fhrithealaiche: "
 msgid "Could not retrieve script list"
 msgstr "Cha deach leinn liosta nan sgriobtaichean fhaighinn"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:32
+#: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
 msgstr "a’ cur ceist"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:41
+#: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
 msgstr "Mearachd (%1)"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:53
+#: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
 msgstr "Mearachd le lorg ann an Simbad"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:71 index.html:146
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
 #: tablet7in.html:230
 msgid "idle"
 msgstr "’na thàmh"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:90
+#: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
 msgstr "Mearachd a’ luchdadh seòrsaichean nan cuspairean"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:115
+#: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
 msgstr "Mearachd a’ faighinn liosta nan cuspairean"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:167
+#: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
 msgstr "a’ feitheamh"
 
@@ -102,6 +102,20 @@ msgstr "Cha deach leinn liosta nan tilg-sheallaidhean fhaighinn"
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
 msgstr "Cha deach leinn liosta nan cruthan-tìre fhaighinn"
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
+#: index.html:555 tablet7in.html:628
+msgid "-none-"
+msgstr "-chan eil gin-"
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
+msgid "(Currently loading: %1)"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
+msgid "Could not retrieve Scenery3d list"
+msgstr ""
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -121,14 +135,9 @@ msgstr "Seall a h-uile nì"
 msgid "Input did not match any item"
 msgstr "Cha do fhreagair na chuir thu a-steach ri nì sam bith"
 
-#: plugins/RemoteControl/webroot/js/ui/mainui.js:317
+#: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
 msgstr "Cha deach dad a thaghadh"
-
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
-#: tablet7in.html:629
-msgid "-none-"
-msgstr "-chan eil gin-"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
@@ -146,10 +155,6 @@ msgstr "Uidheam-smachd cèin Stellarium"
 msgid "Main controls"
 msgstr "Na prìomh uidheaman-smachd"
 
-#: index.html:31 tablet7in.html:33
-msgid "Selection"
-msgstr "Taghadh"
-
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
 msgstr "Cuspairean fad às"
@@ -158,164 +163,144 @@ msgstr "Cuspairean fad às"
 msgid "Actions and scripts"
 msgstr "Gnìomhan is sgriobtaichean"
 
-#: index.html:76
+#: index.html:39
+msgid "Scenery3d"
+msgstr ""
+
+#: index.html:77
 msgid "Pause"
 msgstr "Cuir ’na stad"
 
-#: index.html:81 tablet7in.html:178
+#: index.html:82 tablet7in.html:178
 msgid "Time jumps"
 msgstr "Leuman ama"
 
-#: index.html:85 tablet7in.html:182
+#: index.html:86 tablet7in.html:182
 msgid "Solar hour"
 msgstr "Uair ghrianail"
 
-#: index.html:86 tablet7in.html:183
+#: index.html:87 tablet7in.html:183
 msgid "Solar day"
 msgstr "Latha grianail"
 
-#: index.html:87 tablet7in.html:184
+#: index.html:88 tablet7in.html:184
 msgid "Solar week"
 msgstr "Seachdain ghrianail"
 
-#: index.html:89 tablet7in.html:186
+#: index.html:90 tablet7in.html:186
 msgid "Sidereal day"
 msgstr "Latha reultach"
 
-#: index.html:90 tablet7in.html:187
+#: index.html:91 tablet7in.html:187
 msgid "Sidereal year"
 msgstr "Bliadhna reultach"
 
-#: index.html:91 tablet7in.html:188
+#: index.html:92 tablet7in.html:188
 msgid "Sidereal century"
 msgstr "Linn reultach"
 
-#: index.html:93 tablet7in.html:190
+#: index.html:94 tablet7in.html:190
 msgid "Synodic month"
 msgstr "Mìos co-nasgach"
 
-#: index.html:94 tablet7in.html:191
+#: index.html:95 tablet7in.html:191
 msgid "Draconic month"
 msgstr "Mìos dràgonach"
 
-#: index.html:95 tablet7in.html:192
+#: index.html:96 tablet7in.html:192
 msgid "Draconic year"
 msgstr "Bliadhna dràgonach"
 
-#: index.html:97 tablet7in.html:205
+#: index.html:98 tablet7in.html:205
 msgid "Gaussian year"
 msgstr "Bliadhna Gaussach"
 
-#: index.html:100 tablet7in.html:195
+#: index.html:101 tablet7in.html:195
 msgid "Anomalistic month"
 msgstr "Mìos neo-choitcheann"
 
-#: index.html:101 tablet7in.html:196
+#: index.html:102 tablet7in.html:196
 msgid "Anomalistic year"
 msgstr "Bliadhna neo-choitcheann"
 
-#: index.html:102 tablet7in.html:197
+#: index.html:103 tablet7in.html:197
 msgid "Anomalistic century"
 msgstr "Linn neo-choitcheann"
 
-#: index.html:104 tablet7in.html:199
+#: index.html:105 tablet7in.html:199
 msgid "Mean tropical month"
 msgstr "Mìos tropaigeach meadhain"
 
-#: index.html:105 tablet7in.html:200
+#: index.html:106 tablet7in.html:200
 msgid "Mean tropical year"
 msgstr "Bliadhna tropaigeach meadhain"
 
-#: index.html:106 tablet7in.html:201
+#: index.html:107 tablet7in.html:201
 msgid "Mean tropical century"
 msgstr "Linn tropaigeach meadhain"
 
-#: index.html:108 tablet7in.html:203
+#: index.html:109 tablet7in.html:203
 msgid "Tropical year"
 msgstr "Bliadhna tropaigeach"
 
-#: index.html:109 tablet7in.html:204
+#: index.html:110 tablet7in.html:204
 msgid "Julian year"
 msgstr "Bliadhna Iulianach"
 
-#: index.html:110 tablet7in.html:206
+#: index.html:111 tablet7in.html:206
 msgid "Julian century"
 msgstr "Linn Iulianach"
 
-#: index.html:118 tablet7in.html:92
-msgid "Up/Left"
-msgstr "Suas/Clì"
-
-#: index.html:118 tablet7in.html:92
-msgid "Up"
-msgstr "Suas"
-
-#: index.html:118 tablet7in.html:92
-msgid "Up/Right"
-msgstr "Suas/Deas"
-
-#: index.html:118 tablet7in.html:92
-msgid "Left"
-msgstr "Clì"
-
-#: index.html:118 tablet7in.html:92
-msgid "Focus on selected object"
-msgstr "Cuir am fòcas air a’ chuspair a thagh thu"
-
-#: index.html:118 tablet7in.html:92
-msgid "Focus on selection"
-msgstr "Cuir am fòcas air na thagh thu"
-
-#: index.html:118 tablet7in.html:92
-msgid "Right"
-msgstr "Deas"
-
-#: index.html:118 tablet7in.html:92
-msgid "Down/Left"
-msgstr "Sìos/Clì"
-
-#: index.html:118 tablet7in.html:92
-msgid "Down"
-msgstr "Sìos"
-
-#: index.html:118 tablet7in.html:92
-msgid "Down/Right"
-msgstr "Sìos/Deas"
-
-#: index.html:122 tablet7in.html:133
+#: index.html:123 tablet7in.html:133
 msgid "FOV"
 msgstr "Raon seallaidh"
 
-#: index.html:140 tablet7in.html:224
+#: index.html:141 tablet7in.html:224
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
 "Cuir a-steach facal-luirg. Cleachd TABA gus na toraidhean a sheòladh."
 
-#: index.html:141 tablet7in.html:225
+#: index.html:142 tablet7in.html:225
 msgid "Select and focus"
 msgstr "Tagh is cuir am fòcas air"
 
-#: index.html:168 tablet7in.html:255
+#: index.html:168 tablet7in.html:254
+msgid "Selection mode"
+msgstr ""
+
+#: index.html:168 tablet7in.html:254
+msgid "Center on object"
+msgstr ""
+
+#: index.html:168 tablet7in.html:254
+msgid "Center and zoom to object"
+msgstr ""
+
+#: index.html:168 tablet7in.html:254
+msgid "Just mark the object"
+msgstr ""
+
+#: index.html:170 tablet7in.html:256
 msgid "Quick select"
 msgstr "Grad-taghadh"
 
-#: index.html:172 tablet7in.html:259
+#: index.html:174 tablet7in.html:260
 msgid "Earth"
 msgstr "An Talamh"
 
-#: index.html:172 tablet7in.html:259
+#: index.html:174 tablet7in.html:260
 msgid "Pluto"
 msgstr "Plùto"
 
-#: index.html:180 tablet7in.html:290
+#: index.html:180 tablet7in.html:289
 msgid "Current selection"
 msgstr "Na thagh thu an-dràsta"
 
-#: index.html:242 tablet7in.html:361
+#: index.html:242 tablet7in.html:360
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: index.html:288 tablet7in.html:413
+#: index.html:288 tablet7in.html:412
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
@@ -323,95 +308,119 @@ msgstr ""
 "Cearcallan sa bhad aig aiseal na Talmhainn a’ gluasad timcheall nam "
 "pòlaichean èiclipteach. ’Ga shealltainn air an Talamh a-mhàin."
 
-#: index.html:297 tablet7in.html:422
+#: index.html:297 tablet7in.html:421
 msgid "Solstices"
 msgstr "Grian-stadan"
 
-#: index.html:298 tablet7in.html:423
+#: index.html:298 tablet7in.html:422
 msgid "Crossquarters"
 msgstr "Tar-ràitheil"
 
-#: index.html:299 tablet7in.html:424
+#: index.html:299 tablet7in.html:423
 msgid "Major Standstill"
 msgstr "Mòr-ghealach-stad"
 
-#: index.html:300 tablet7in.html:425
+#: index.html:300 tablet7in.html:424
 msgid "Minor Standstill"
 msgstr "Meanbh-ghealach-stad"
 
-#: index.html:310 tablet7in.html:435
+#: index.html:310 tablet7in.html:434
 msgid "Current Planet:"
 msgstr "A’ phlanaid làithreach:"
 
-#: index.html:355 tablet7in.html:478
+#: index.html:355 tablet7in.html:477
 msgid "Catalog of galaxies"
 msgstr ""
 
-#: index.html:413 tablet7in.html:530
+#: index.html:413 tablet7in.html:529
 msgid "Bright Nebulae"
 msgstr "Deargan-doireannan soilleir"
 
-#: index.html:414 tablet7in.html:531
+#: index.html:414 tablet7in.html:530
 msgid "Dark Nebulae"
 msgstr "Deargan-doireannan dorcha"
 
-#: index.html:415 tablet7in.html:532
+#: index.html:415 tablet7in.html:531
 msgid "Planetary Nebulae"
 msgstr "Deargan-doireannan planaideach"
 
-#: index.html:424 tablet7in.html:541
+#: index.html:424 tablet7in.html:540
 msgid "Labels and markers"
 msgstr "Leubailean is comharran"
 
-#: index.html:453 tablet7in.html:570
+#: index.html:453 tablet7in.html:569
 msgid "Show illumination"
 msgstr "Seall an t-soillseachadh"
 
-#: index.html:458 tablet7in.html:576
+#: index.html:458 tablet7in.html:575
 msgid "Current landscape"
 msgstr "An cruth-tìre làithreach"
 
-#: index.html:485 tablet7in.html:604
+#: index.html:485 tablet7in.html:603
 msgid "Current sky culture"
 msgstr "An dualchas speura làithreach"
 
-#: index.html:498 tablet7in.html:629
+#: index.html:498 tablet7in.html:628
 msgid "Active script:"
 msgstr "An sgriobt gnìomhach:"
 
-#: index.html:499 tablet7in.html:630
+#: index.html:499 tablet7in.html:629
 msgid "Run selected script"
 msgstr "Ruith an sgriobt a thagh thu"
 
-#: index.html:499 tablet7in.html:630
+#: index.html:499 tablet7in.html:629
 msgid "Stop current script"
 msgstr "Cuir stad air an sgriobt làithreach"
 
-#: index.html:504 tablet7in.html:41 tablet7in.html:614
+#: index.html:504 tablet7in.html:41 tablet7in.html:613
 msgid "Actions"
 msgstr "Gnìomhan"
 
-#: index.html:508 tablet7in.html:618
+#: index.html:508 tablet7in.html:617
 msgid "Run/toggle action"
 msgstr "Ruith/Toglaich gnìomh"
 
-#: index.html:519 tablet7in.html:653
+#: index.html:519 tablet7in.html:652
 msgid "Planet map"
 msgstr "Mapa nam planaidean"
 
-#: index.html:520 tablet7in.html:654
+#: index.html:520 tablet7in.html:653
 msgid "Planet map pointer"
 msgstr "Tomhaire air mapa nam planaidean"
 
-#: index.html:524 tablet7in.html:658
+#: index.html:524 tablet7in.html:657
 msgid "Type to search location"
 msgstr "Sgrìobh gus ionad a lorg"
 
-#: index.html:569 tablet7in.html:704
+#: index.html:553
+msgid "Interaction"
+msgstr ""
+
+#: index.html:554
+msgid "Current scene:"
+msgstr ""
+
+#: index.html:557
+msgid "View controls"
+msgstr ""
+
+#: index.html:563
+msgid "Movement controls"
+msgstr ""
+
+#: index.html:579
+msgid "Scene selection"
+msgstr ""
+
+#: index.html:583
+msgid "Load selected scene"
+msgstr ""
+
+#: index.html:607 tablet7in.html:703
 msgid "No response from server"
 msgstr "Cha do dh’fhreagair am frithealaiche"
 
-#: index.html:570
+#: index.html:608
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
@@ -426,6 +435,46 @@ msgstr "Leum ama"
 msgid "Grids"
 msgstr "Griodaichean"
 
+#: tablet7in.html:92
+msgid "Up/Left"
+msgstr "Suas/Clì"
+
+#: tablet7in.html:92
+msgid "Up"
+msgstr "Suas"
+
+#: tablet7in.html:92
+msgid "Up/Right"
+msgstr "Suas/Deas"
+
+#: tablet7in.html:92
+msgid "Left"
+msgstr "Clì"
+
+#: tablet7in.html:92
+msgid "Focus on selected object"
+msgstr "Cuir am fòcas air a’ chuspair a thagh thu"
+
+#: tablet7in.html:92
+msgid "Focus on selection"
+msgstr "Cuir am fòcas air na thagh thu"
+
+#: tablet7in.html:92
+msgid "Right"
+msgstr "Deas"
+
+#: tablet7in.html:92
+msgid "Down/Left"
+msgstr "Sìos/Clì"
+
+#: tablet7in.html:92
+msgid "Down"
+msgstr "Sìos"
+
+#: tablet7in.html:92
+msgid "Down/Right"
+msgstr "Sìos/Deas"
+
 #: tablet7in.html:96
 msgid "View towards horizon at Azimuth"
 msgstr "Sealladh an comhair na fàire aig an azimuth"
@@ -438,120 +487,123 @@ msgstr ""
 msgid "Reset"
 msgstr "Ath-shuidhich"
 
-#: tablet7in.html:260
+#: tablet7in.html:261
 msgid "Sirius"
 msgstr "Reul an Iuchair"
 
-#: tablet7in.html:261
+#: tablet7in.html:262
 msgid "Arcturus"
 msgstr "Siarag"
 
-#: tablet7in.html:262
+#: tablet7in.html:263
 msgid "Capella"
 msgstr "Gobhar Beag"
 
-#: tablet7in.html:263
+#: tablet7in.html:264
 msgid "Vega"
 msgstr "Sgleòdhag"
 
-#: tablet7in.html:264
+#: tablet7in.html:265
 msgid "Deneb"
 msgstr "Leisgeag Àrd"
 
-#: tablet7in.html:265
+#: tablet7in.html:266
 msgid "Altair"
 msgstr "Leisgeag Ìosal"
 
-#: tablet7in.html:266
+#: tablet7in.html:267
 msgid "Andromeda Galaxy"
 msgstr "Reul-chrios Andromeda"
 
-#: tablet7in.html:267
+#: tablet7in.html:268
 msgid "Hercules Cluster"
 msgstr "Grioglachan Iorcaill"
 
-#: tablet7in.html:268
+#: tablet7in.html:269
 msgid "Orion Nebula"
 msgstr "Deargan-doireann an t-Sealgair-Mhòir"
 
-#: tablet7in.html:269
+#: tablet7in.html:270
 msgid "Eta Carinae Nebula"
 msgstr "Deargan-doireann mòr an Droma Luinge"
 
-#: tablet7in.html:270
+#: tablet7in.html:271
 msgid "47 Tucanae Cluster"
 msgstr "Grioglachan an Tùcain 47"
 
-#: tablet7in.html:271
+#: tablet7in.html:272
 msgid "Aries"
 msgstr "An Reithe"
 
-#: tablet7in.html:272
+#: tablet7in.html:273
 msgid "Taurus"
 msgstr "An Tarbh"
 
-#: tablet7in.html:273
+#: tablet7in.html:274
 msgid "Gemini"
 msgstr "An Dà Leth-aon (Gaolag is Gràdhag na Caiginn)"
 
-#: tablet7in.html:274
+#: tablet7in.html:275
 msgid "Cancer"
 msgstr "Am Partan"
 
-#: tablet7in.html:275
+#: tablet7in.html:276
 msgid "Leo"
 msgstr "An Leòmhann"
 
-#: tablet7in.html:276
+#: tablet7in.html:277
 msgid "Virgo"
 msgstr "An Òigh"
 
-#: tablet7in.html:277
+#: tablet7in.html:278
 msgid "Libra"
 msgstr "A’ Mheidh"
 
-#: tablet7in.html:278
+#: tablet7in.html:279
 msgid "Scorpius"
 msgstr "An Sgairp"
 
-#: tablet7in.html:279
+#: tablet7in.html:280
 msgid "Sagittarius"
 msgstr "An Saighdear"
 
-#: tablet7in.html:280
+#: tablet7in.html:281
 msgid "Capricornus"
 msgstr "An Gobhar"
 
-#: tablet7in.html:281
+#: tablet7in.html:282
 msgid "Aquarius"
 msgstr "An Giùlanair Uisge"
 
-#: tablet7in.html:282
+#: tablet7in.html:283
 msgid "Pisces"
 msgstr "Na h-Èisg"
 
-#: tablet7in.html:600
+#: tablet7in.html:599
 msgid "Constellation selection isolated"
 msgstr "Taghadh reul-bhadan fa leth"
 
-#: tablet7in.html:638
+#: tablet7in.html:637
 msgid "Favorites"
 msgstr "Na h-annsachdan"
 
-#: tablet7in.html:640
+#: tablet7in.html:639
 msgid "Show 1"
 msgstr "Seall 1"
 
-#: tablet7in.html:641
+#: tablet7in.html:640
 msgid "Remove Labels and Images"
 msgstr "Thoir air falbh na leubailean ’s na dealbhan"
 
-#: tablet7in.html:641
+#: tablet7in.html:640
 msgid "Cleanup Screen"
 msgstr "Sgioblaich an sgrìn"
 
-#: tablet7in.html:705
+#: tablet7in.html:704
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "Cha do dh’fhreagair am frithealaiche fad %1 diog(an). A bheil Stellarium ’ga "
 "ruith fhathast?"
+
+#~ msgid "Selection"
+#~ msgstr "Taghadh"
