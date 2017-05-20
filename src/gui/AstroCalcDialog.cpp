@@ -91,6 +91,8 @@ void AstroCalcDialog::retranslate()
 		populateMajorPlanetList();
 		populateGroupCelestialBodyList();		
 		currentPlanetaryPositions();
+		currentCelestialPositions();
+		prepareAxesAndGraph();
 		drawAltVsTimeDiagram();
 		populateTimeIntervalsList();
 		populateWutGroups();
