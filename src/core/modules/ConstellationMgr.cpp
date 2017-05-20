@@ -1268,7 +1268,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	float DE, RA;
 	Vec3f XYZ;
 	unsigned num, numc;
-	vector<Vec3f> *points = NULL;
+	vector<Vec3f> *points = Q_NULLPTR;
 	QString consname;
 	i = 0;
 	while (!istr.atEnd())
@@ -1311,12 +1311,12 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		}
 
 		if (cons) cons->sharedBoundarySegments.push_back(points);
+		points=Q_NULLPTR; // Avoid Coverity resource leak warning. (CID48925).
 		i++;
-
 	}
 	dataFile.close();
 	qDebug() << "Loaded" << i << "constellation boundary segments";
-	delete points;
+	//delete points; // See if Coverity complains here? (CID48925).
 
 	return true;
 }

@@ -50,7 +50,7 @@ class S3DRenderer : public QObject, protected QOpenGLFunctions
 	Q_OBJECT
 public:
 	//! Initializes an empty Scenery3d object.
-	S3DRenderer(QObject* parent = NULL);
+	S3DRenderer(QObject* parent = Q_NULLPTR);
 	virtual ~S3DRenderer();
 
 	//! Draw scenery, called by Scenery3dMgr.

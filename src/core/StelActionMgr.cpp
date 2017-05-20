@@ -46,10 +46,10 @@ StelAction::StelAction(const QString& actionId,
 	altKeySequence(altKey),
 	defaultKeySequence(primaryKey),
 	defaultAltKeySequence(altKey),
-	target(NULL),
-	boolProperty(NULL)
+	target(Q_NULLPTR),
+	boolProperty(Q_NULLPTR)
       #ifndef USE_QUICKVIEW
-      ,qAction(NULL)
+      ,qAction(Q_NULLPTR)
       #endif
 {
 	setObjectName(actionId);

@@ -114,6 +114,10 @@ SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QVe
 	connect(sock, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(sockError(QAbstractSocket::SocketError)));
 	connect(sock, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(sockStateChanged(QAbstractSocket::SocketState)));
 
+	// silence CoverityScan...
+	msgHeader.msgType=SyncProtocol::ERROR;
+	msgHeader.dataSize=0;
+
 	lastReceiveTime = QDateTime::currentMSecsSinceEpoch();
 	lastSendTime = lastReceiveTime;
 	msgWriteBuffer.reserve(SYNC_MAX_MESSAGE_SIZE);

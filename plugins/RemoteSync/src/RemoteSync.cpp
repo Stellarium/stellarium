@@ -62,8 +62,8 @@ RemoteSync::RemoteSync()
 	, connectionLostBehavior(ClientBehavior::RECONNECT)
 	, quitBehavior(ClientBehavior::NONE)
 	, state(IDLE)
-	, server(NULL)
-	, client(NULL)
+	, server(Q_NULLPTR)
+	, client(Q_NULLPTR)
 {
 	setObjectName("RemoteSync");
 

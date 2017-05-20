@@ -221,7 +221,6 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
-	  //vMagAlgorithm(Planet::UndefinedAlgorithm),
 	  gl(NULL)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.

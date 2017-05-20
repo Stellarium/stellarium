@@ -50,7 +50,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, maxFov(100.)
 	, deltaFov(0.)
 	, core(acore)
-	, objectMgr(NULL)
+	, objectMgr(Q_NULLPTR)
 	, flagLockEquPos(false)
 	, flagTracking(false)
 	, flagInhibitAllAutomoves(false)
@@ -88,11 +88,11 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, viewDirectionMountFrame(0., 1., 0.)
 	, upVectorMountFrame(0.,0.,1.)
 	, dragTriggerDistance(4.f)
-	, viewportOffsetTimeline(NULL)
+	, viewportOffsetTimeline(Q_NULLPTR)
 	, oldViewportOffset(0.0f, 0.0f)
 	, targetViewportOffset(0.0f, 0.0f)
 	, flagIndicationMountMode(false)
-	, messageTimer(0)
+	, messageTimer(Q_NULLPTR)
 {
 	setObjectName("StelMovementMgr");
 }
@@ -102,8 +102,14 @@ StelMovementMgr::~StelMovementMgr()
 	if (viewportOffsetTimeline)
 	{
 		delete viewportOffsetTimeline;
-		viewportOffsetTimeline=NULL;
+		viewportOffsetTimeline=Q_NULLPTR;
 	}
+	if (messageTimer)
+	{
+		delete messageTimer;
+		messageTimer=Q_NULLPTR;
+	}
+
 }
 
 void StelMovementMgr::init()
