@@ -76,6 +76,9 @@ public:
 		EphemerisRA,		//! right ascension
 		EphemerisDec,		//! declination
 		EphemerisMagnitude,	//! magnitude
+		EphemerisPhase,		//! phase
+		EphemerisDistance,	//! distance
+		EphemerisElongation,	//! elongation
 		EphemerisCount		//! total number of columns
 	};
 
@@ -98,6 +101,7 @@ public:
 
 	static QVector<Vec3d> EphemerisListJ2000;
 	static QVector<QString> EphemerisListDates;
+	static QVector<float> EphemerisListMagnitudes;
 	static int DisplayedPositionIndex;
 
 public slots:

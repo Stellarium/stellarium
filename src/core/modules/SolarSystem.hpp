@@ -139,6 +139,11 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagEphemerisDates
 		   WRITE setFlagEphemerisDates
 		   NOTIFY ephemerisDatesChanged
+		   )	
+	Q_PROPERTY(bool ephemerisMagnitudesDisplayed
+		   READ getFlagEphemerisMagnitudes
+		   WRITE setFlagEphemerisMagnitudes
+		   NOTIFY ephemerisMagnitudesChanged
 		   )
 
 	Q_PROPERTY(bool flagCustomGrsSettings
@@ -781,6 +786,7 @@ signals:
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
 	void ephemerisDatesChanged(bool b);
+	void ephemerisMagnitudesChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
@@ -868,6 +874,9 @@ private slots:
 	void setFlagEphemerisDates(bool b);
 	bool getFlagEphemerisDates() const;
 
+	void setFlagEphemerisMagnitudes(bool b);
+	bool getFlagEphemerisMagnitudes() const;
+
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
@@ -946,6 +955,7 @@ private:
 	bool flagIsolatedOrbits;
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
+	bool ephemerisMagnitudesDisplayed;
 
 	class TrailGroup* allTrails;
 	StelGui* gui;
