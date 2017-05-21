@@ -176,6 +176,7 @@ void SolarSystem::init()
 
 	setFlagEphemerisMarkers(conf->value("astro/flag_ephemeris_markers", true).toBool());
 	setFlagEphemerisDates(conf->value("astro/flag_ephemeris_dates", false).toBool());
+	setFlagEphemerisMagnitudes(conf->value("astro/flag_ephemeris_magnitudes", false).toBool());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
@@ -1203,6 +1204,9 @@ void SolarSystem::draw(StelCore* core)
 		StelPainter sPainter(prj);
 
 		float size, shift;
+		bool showDates = getFlagEphemerisDates();
+		bool showMagnitudes = getFlagEphemerisMagnitudes();
+		QString info = "";
 
 		for (int i =0; i< AstroCalcDialog::EphemerisListJ2000.count(); i++)
 		{
@@ -1229,10 +1233,17 @@ void SolarSystem::draw(StelCore* core)
 			texCircle->bind();
 			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListJ2000[i], size);
 
-			if (getFlagEphemerisDates())
+			if (showDates || showMagnitudes)
 			{
 				shift = 3.f + size/1.6f;
-				sPainter.drawText(AstroCalcDialog::EphemerisListJ2000[i], AstroCalcDialog::EphemerisListDates[i], 0, shift, shift, false);
+				if (showDates && showMagnitudes)
+					info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisListDates[i], QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2));
+				if (showDates && !showMagnitudes)
+					info = AstroCalcDialog::EphemerisListDates[i];
+				if (!showDates && showMagnitudes)
+					info = QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2);
+
+				sPainter.drawText(AstroCalcDialog::EphemerisListJ2000[i], info, 0, shift, shift, false);
 			}
 		}
 	}
@@ -1661,6 +1672,21 @@ void SolarSystem::setFlagEphemerisDates(bool b)
 bool SolarSystem::getFlagEphemerisDates() const
 {
 	return ephemerisDatesDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisMagnitudes(bool b)
+{
+	if (b!=ephemerisMagnitudesDisplayed)
+	{
+		ephemerisMagnitudesDisplayed=b;
+		conf->setValue("astro/flag_ephemeris_magnitudes", b); // Immediate saving of state
+		emit ephemerisMagnitudesChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisMagnitudes() const
+{
+	return ephemerisMagnitudesDisplayed;
 }
 
 void SolarSystem::setFlagNativePlanetNames(bool b)
