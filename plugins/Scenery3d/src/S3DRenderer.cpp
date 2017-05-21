@@ -67,8 +67,8 @@ GLExtFuncs* glExtFuncs;
 S3DRenderer::S3DRenderer(QObject *parent)
     :
       QObject(parent),
-      currentScene(Q_NULLPTR),
       sun(Q_NULLPTR), moon(Q_NULLPTR), venus(Q_NULLPTR),
+      currentScene(Q_NULLPTR),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
       defaultFBO(-1),
       torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
