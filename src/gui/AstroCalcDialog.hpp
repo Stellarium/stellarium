@@ -152,7 +152,7 @@ private slots:
 	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'
 	void drawCurrentTimeDiagram();
 	//! Draw vertical line of meridian passage time on diagram 'Altitude vs. Time'
-	void drawTransitTimeDiagram(double transitTime); // time in hours
+	void drawTransitTimeDiagram();
 	//! Show info from graphs under mouse cursor
 	void mouseOverLine(QMouseEvent *event);
 
@@ -236,7 +236,7 @@ private:
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;
 	static float brightLimit;
-	static float minY, maxY;
+	static float minY, maxY, transitX;
 
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.

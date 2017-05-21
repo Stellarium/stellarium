@@ -46,6 +46,7 @@ int AstroCalcDialog::DisplayedPositionIndex = -1;
 float AstroCalcDialog::brightLimit = 10.f;
 float AstroCalcDialog::minY = -90.f;
 float AstroCalcDialog::maxY = 90.f;
+float AstroCalcDialog::transitX = -1.f;
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog("AstroCalc",parent)
@@ -1095,6 +1096,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		bool sign;
 
 		double shift = core->getUTCOffset(currentJD)/24.0;
+		double xMaxY = -100.f;
 		for(int i=-5;i<=485;i++) // 24 hours + 15 minutes in both directions
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
@@ -1108,6 +1110,12 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			if (!sign)
 				deg *= -1;
 			aY.append(deg);
+			if (deg > xMaxY)
+			{
+				xMaxY = deg;
+				transitX = ltime;
+			}
+
 			core->update(0.0);
 		}
 		core->setJD(currentJD);
@@ -1147,7 +1155,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			y.clear();
 		}
 		else
-			drawTransitTimeDiagram((currentJD + 0.5 - (int)currentJD + shift) * 24.0 - ha_sidereal);
+			drawTransitTimeDiagram();
 
 		ui->altVsTimePlot->graph(0)->setData(x, y);
 		ui->altVsTimePlot->graph(0)->setName(name);
@@ -1180,16 +1188,11 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 }
 
 // Added vertical line indicating time of transit
-void AstroCalcDialog::drawTransitTimeDiagram(double transitTime)
+void AstroCalcDialog::drawTransitTimeDiagram()
 {
-	double transit = transitTime * 3600.0;
-	if (transit>129600)
-		transit -= 86400;
-	if (transit<43200)
-		transit += 86400;
 	QList<double> ax, ay;
-	ax.append(transit);
-	ax.append(transit);
+	ax.append(transitX);
+	ax.append(transitX);
 	ay.append(minY);
 	ay.append(maxY);
 	QVector<double> x = ax.toVector(), y = ay.toVector();
