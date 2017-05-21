@@ -41,6 +41,7 @@
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
+QVector<float> AstroCalcDialog::EphemerisListMagnitudes;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 float AstroCalcDialog::brightLimit = 10.f;
 float AstroCalcDialog::minY = -90.f;
@@ -209,6 +210,7 @@ void AstroCalcDialog::createDialogContent()
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
+	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "SolarSystem.ephemerisMagnitudesDisplayed");
 
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
@@ -727,6 +729,12 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	ephemerisHeader << q_("Dec (J2000)");
 	//TRANSLATORS: magnitude
 	ephemerisHeader << q_("mag");
+	//TRANSLATORS: phase
+	ephemerisHeader << q_("phase");
+	//TRANSLATORS: distance
+	ephemerisHeader << q_("dist.");
+	//TRANSLATORS: elongation
+	ephemerisHeader << q_("elong.");
 	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
 
 	// adjust the column width
@@ -747,7 +755,12 @@ void AstroCalcDialog::initListEphemeris()
 void AstroCalcDialog::generateEphemeris()
 {
 	float currentStep, ra, dec;
+	Vec3d observerHelioPos;
 	QString currentPlanet = ui->celestialBodyComboBox->currentData().toString();
+	QString distanceInfo = q_("Planetocentric distance");
+	if (core->getUseTopocentricCoordinates())
+		distanceInfo = q_("Topocentric distance");
+	QString distanceUM = q_("AU");
 
 	initListEphemeris();
 
@@ -790,7 +803,7 @@ void AstroCalcDialog::generateEphemeris()
 			break;
 	}
 
-	StelObjectP obj = solarSystem->searchByName(currentPlanet);
+	PlanetP obj = solarSystem->searchByEnglishName(currentPlanet);
 	if (obj)
 	{
 		double currentJD = core->getJD(); // save current JD
@@ -801,6 +814,8 @@ void AstroCalcDialog::generateEphemeris()
 		EphemerisListJ2000.reserve(elements);
 		EphemerisListDates.clear();
 		EphemerisListDates.reserve(elements);
+		EphemerisListMagnitudes.clear();
+		EphemerisListMagnitudes.reserve(elements);
 		bool withTime = false;
 		if (currentStep<StelCore::JD_DAY)
 			withTime = true;
@@ -815,7 +830,11 @@ void AstroCalcDialog::generateEphemeris()
 				EphemerisListDates.append(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			else
 				EphemerisListDates.append(localeMgr->getPrintableDateLocal(JD));
+			EphemerisListMagnitudes.append(obj->getVMagnitudeWithExtinction(core));
 			StelUtils::rectToSphe(&ra,&dec,pos);
+
+			observerHelioPos = core->getObserverHeliocentricEclipticPos();
+
 			ACEphemTreeWidgetItem *treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
 			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
@@ -826,6 +845,13 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
 			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
+			treeItem->setText(EphemerisPhase, QString::number(obj->getPhase(observerHelioPos) * 100, 'f', 2) + "%");
+			treeItem->setTextAlignment(EphemerisPhase, Qt::AlignRight);
+			treeItem->setText(EphemerisDistance, QString::number(obj->getJ2000EquatorialPos(core).length(), 'f', 6));
+			treeItem->setTextAlignment(EphemerisDistance, Qt::AlignRight);
+			treeItem->setToolTip(EphemerisDistance, QString("%1, %2").arg(distanceInfo, distanceUM));
+			treeItem->setText(EphemerisElongation, StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true));
+			treeItem->setTextAlignment(EphemerisElongation, Qt::AlignRight);
 		}
 		core->setJD(currentJD); // restore time
 	}
