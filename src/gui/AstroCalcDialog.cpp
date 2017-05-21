@@ -46,7 +46,13 @@ int AstroCalcDialog::DisplayedPositionIndex = -1;
 float AstroCalcDialog::brightLimit = 10.f;
 float AstroCalcDialog::minY = -90.f;
 float AstroCalcDialog::maxY = 90.f;
+float AstroCalcDialog::minY1 = -1001.f;
+float AstroCalcDialog::maxY1 = 1001.f;
+float AstroCalcDialog::minY2 = -1001.f;
+float AstroCalcDialog::maxY2 = 1001.f;
 float AstroCalcDialog::transitX = -1.f;
+QString AstroCalcDialog::yAxis1Legend = "";
+QString AstroCalcDialog::yAxis2Legend = "";
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog("AstroCalc",parent)
@@ -95,6 +101,8 @@ void AstroCalcDialog::retranslate()
 		currentPlanetaryPositions();
 		currentCelestialPositions();
 		prepareAxesAndGraph();
+		populateFunctionsList();
+		prepareXVsTimeAxesAndGraph();
 		drawAltVsTimeDiagram();
 		populateTimeIntervalsList();
 		populateWutGroups();
@@ -142,6 +150,9 @@ void AstroCalcDialog::createDialogContent()
 	// Altitude vs. Time feature
 	prepareAxesAndGraph();
 	drawCurrentTimeDiagram();
+	// Graphs feature
+	populateFunctionsList();
+	prepareXVsTimeAxesAndGraph();
 	// WUT
 	populateTimeIntervalsList();
 	populateWutGroups();
@@ -209,6 +220,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
 
+	connect(ui->graphsCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsCelestialBody(int)));
+	connect(ui->graphsFirstComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsFirstId(int)));
+	connect(ui->graphsSecondComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsSecondId(int)));
+	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
+
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
 	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "SolarSystem.ephemerisMagnitudesDisplayed");
@@ -229,6 +245,8 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
+	updateTabBarListWidgetWidth();
 }
 
 void AstroCalcDialog::savePlanetaryPositionsAboveHorizonFlag(bool b)
@@ -911,30 +929,50 @@ void AstroCalcDialog::cleanupEphemeris()
 void AstroCalcDialog::populateCelestialBodyList()
 {
 	Q_ASSERT(ui->celestialBodyComboBox);
+	Q_ASSERT(ui->graphsCelestialBodyComboBox);
 
 	QComboBox* planets = ui->celestialBodyComboBox;
+	QComboBox* graphsp = ui->graphsCelestialBodyComboBox;
+
 	QStringList planetNames(solarSystem->getAllPlanetEnglishNames());
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	//Save the current selection to be restored later
 	planets->blockSignals(true);
-	int index = planets->currentIndex();
-	QVariant selectedPlanetId = planets->itemData(index);
+	int indexP = planets->currentIndex();
+	QVariant selectedPlanetId = planets->itemData(indexP);
 	planets->clear();
+
+	graphsp->blockSignals(true);
+	int indexG = graphsp->currentIndex();
+	QVariant selectedGraphsPId = graphsp->itemData(indexG);
+	graphsp->clear();
+
 	//For each planet, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const QString& name, planetNames)
 	{
 		if (!name.contains("Observer", Qt::CaseInsensitive) && name!="Sun" && name!=core->getCurrentPlanet()->getEnglishName())
+		{
 			planets->addItem(trans.qtranslate(name), name);
+			graphsp->addItem(trans.qtranslate(name), name);
+		}
 	}
 	//Restore the selection
-	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index<0)
-		index = planets->findData(conf->value("astrocalc/ephemeris_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-	planets->setCurrentIndex(index);
+	indexP = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexP<0)
+		indexP = planets->findData(conf->value("astrocalc/ephemeris_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+	planets->setCurrentIndex(indexP);
 	planets->model()->sort(0);
+
+	indexG = graphsp->findData(selectedGraphsPId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexG<0)
+		indexG = graphsp->findData(conf->value("astrocalc/graphs_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+	graphsp->setCurrentIndex(indexG);
+	graphsp->model()->sort(0);
+
 	planets->blockSignals(false);
+	graphsp->blockSignals(false);
 }
 
 void AstroCalcDialog::saveEphemerisCelestialBody(int index)
@@ -942,6 +980,25 @@ void AstroCalcDialog::saveEphemerisCelestialBody(int index)
 	Q_ASSERT(ui->celestialBodyComboBox);
 	QComboBox* planets = ui->celestialBodyComboBox;
 	conf->setValue("astrocalc/ephemeris_celestial_body", planets->itemData(index).toString());
+}
+
+void AstroCalcDialog::saveGraphsCelestialBody(int index)
+{
+	Q_ASSERT(ui->graphsCelestialBodyComboBox);
+	QComboBox* planets = ui->graphsCelestialBodyComboBox;
+	conf->setValue("astrocalc/graphs_celestial_body", planets->itemData(index).toString());
+}
+
+void AstroCalcDialog::saveGraphsFirstId(int index)
+{
+	Q_ASSERT(ui->graphsFirstComboBox);
+	conf->setValue("astrocalc/graphs_first_id", ui->graphsFirstComboBox->itemData(index).toInt());
+}
+
+void AstroCalcDialog::saveGraphsSecondId(int index)
+{
+	Q_ASSERT(ui->graphsSecondComboBox);
+	conf->setValue("astrocalc/graphs_second_id", ui->graphsSecondComboBox->itemData(index).toInt());
 }
 
 void AstroCalcDialog::populateEphemerisTimeStepsList()
@@ -1120,14 +1177,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		}
 		core->setJD(currentJD);
 
-		double dec_sidereal, ra_sidereal, ha_sidereal;
-		StelUtils::rectToSphe(&ra_sidereal, &dec_sidereal, selectedObject->getSiderealPosGeometric(core));
-		ha_sidereal = (2.*M_PI-ra_sidereal)*12/M_PI;
-		if (ha_sidereal>24.0)
-			ha_sidereal -= 24.0;
-
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-
 		double minYa = aY.first();
 		double maxYa = aY.first();
 
@@ -1244,6 +1294,296 @@ void AstroCalcDialog::prepareAxesAndGraph()
 	ui->altVsTimePlot->yAxis->setBasePen(axisPen);
 	ui->altVsTimePlot->yAxis->setTickPen(axisPen);
 	ui->altVsTimePlot->yAxis->setSubTickPen(axisPen);
+}
+
+void AstroCalcDialog::drawXVsTimeGraphs()
+{
+	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
+	if (!ssObj.isNull())
+	{
+		// X axis - time; Y axis - altitude
+		QList<double> aX, aY, bY;
+
+		double currentJD = core->getJD();
+		int year, month, day;
+		double startJD, JD, ltime, distance;
+		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
+		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
+
+		float width = 1.0f;
+
+		for(int i=-2;i<=367;i++)
+		{
+			JD = startJD + i;
+			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
+			aX.append(ltime);
+
+			core->setJD(JD);
+
+			switch (ui->graphsFirstComboBox->currentData().toInt())
+			{
+				case GraphMagnitudeVsTime:
+					aY.append(ssObj->getVMagnitude(core));
+					break;
+				case GraphPhaseVsTime:
+					aY.append(ssObj->getPhase(core->getObserverHeliocentricEclipticPos()) * 100.f);
+					break;
+				case GraphDistanceVsTime:
+					distance = ssObj->getJ2000EquatorialPos(core).length();
+					if (distance < 0.1)
+						distance *= AU/1000.f;
+					aY.append(distance);
+					break;
+				case GraphElongationVsTime:
+					aY.append(ssObj->getElongation(core->getObserverHeliocentricEclipticPos())*180./M_PI);
+					break;
+			}
+
+			switch (ui->graphsSecondComboBox->currentData().toInt())
+			{
+				case GraphMagnitudeVsTime:
+					bY.append(ssObj->getVMagnitude(core));
+					break;
+				case GraphPhaseVsTime:
+					bY.append(ssObj->getPhase(core->getObserverHeliocentricEclipticPos()) * 100.f);
+					break;
+				case GraphDistanceVsTime:
+					distance = ssObj->getJ2000EquatorialPos(core).length();
+					if (distance < 0.1)
+						distance *= AU/1000.f;
+					bY.append(distance);
+					break;
+				case GraphElongationVsTime:
+					bY.append(ssObj->getElongation(core->getObserverHeliocentricEclipticPos())*180./M_PI);
+					break;
+			}
+			core->update(0.0);
+		}
+		core->setJD(currentJD);
+
+		QVector<double> x = aX.toVector(), ya = aY.toVector(), yb = bY.toVector();
+
+		double minYa = aY.first();
+		double maxYa = aY.first();
+
+		foreach (double temp, aY)
+		{
+			if(maxYa < temp) maxYa = temp;
+			if(minYa > temp) minYa = temp;
+		}
+
+		width = (maxYa - minYa)/50.f;
+		minY1 = minYa - width;
+		maxY1 = maxYa + width;
+
+		minYa = bY.first();
+		maxYa = bY.first();
+
+		foreach (double temp, bY)
+		{
+			if(maxYa < temp) maxYa = temp;
+			if(minYa > temp) minYa = temp;
+		}
+
+		width = (maxYa - minYa)/50.f;
+		minY2 = minYa - width;
+		maxY2 = maxYa + width;
+
+		prepareXVsTimeAxesAndGraph();
+
+		ui->graphsPlot->clearGraphs();
+
+		ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
+		ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
+		ui->graphsPlot->graph(0)->setPen(QPen(Qt::red, 1));
+		ui->graphsPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+		ui->graphsPlot->graph(0)->rescaleAxes(true);
+		ui->graphsPlot->graph(0)->setData(x, ya);
+		ui->graphsPlot->graph(0)->setName("[0]");
+
+		ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis2);
+		ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
+		ui->graphsPlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+		ui->graphsPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+		ui->graphsPlot->graph(1)->rescaleAxes(true);
+		ui->graphsPlot->graph(1)->setData(x, yb);
+		ui->graphsPlot->graph(1)->setName("[1]");
+
+		ui->graphsPlot->replot();
+	}
+}
+
+void AstroCalcDialog::populateFunctionsList()
+{
+	Q_ASSERT(ui->graphsFirstComboBox);
+	Q_ASSERT(ui->graphsSecondComboBox);
+
+	typedef QPair<QString, GraphsTypes> graph;
+	graph cf;
+	QList<graph> functions;
+	functions.clear();
+	cf.first = q_("Magnitude vs. Time");
+	cf.second = GraphMagnitudeVsTime;
+	functions.append(cf);
+	cf.first = q_("Phase vs. Time");
+	cf.second = GraphPhaseVsTime;
+	functions.append(cf);
+	cf.first = q_("Distance vs. Time");
+	cf.second = GraphDistanceVsTime;
+	functions.append(cf);
+	cf.first = q_("Elongation vs. Time");
+	cf.second = GraphElongationVsTime;
+	functions.append(cf);
+
+
+	QComboBox* first = ui->graphsFirstComboBox;
+	QComboBox* second = ui->graphsSecondComboBox;
+	first->blockSignals(true);
+	second->blockSignals(true);
+
+	int indexF = first->currentIndex();
+	QVariant selectedFirstId = first->itemData(indexF);
+	int indexS = second->currentIndex();
+	QVariant selectedSecondId = second->itemData(indexS);
+
+	foreach(const graph& f, functions)
+	{
+		first->addItem(f.first, f.second);
+		second->addItem(f.first, f.second);
+	}
+
+	indexF = first->findData(selectedFirstId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexF<0)
+		indexF = first->findData(conf->value("astrocalc/graphs_first_id", GraphMagnitudeVsTime).toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
+	first->setCurrentIndex(indexF);
+	first->model()->sort(0);
+
+	indexS = second->findData(selectedSecondId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexS<0)
+		indexS = second->findData(conf->value("astrocalc/graphs_second_id", GraphPhaseVsTime).toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
+	second->setCurrentIndex(indexS);
+	second->model()->sort(0);
+
+	first->blockSignals(false);
+	second->blockSignals(false);
+}
+
+void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
+{
+	QString xAxisStr = q_("Date");
+	QString mu = q_("AU");
+
+	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
+	if (!ssObj.isNull())
+	{
+		if (ssObj->getJ2000EquatorialPos(core).length() < 0.1)
+			mu = q_("Mm");
+	}
+
+	bool direction1 = false;
+	bool direction2 = false;
+
+	switch (ui->graphsFirstComboBox->currentData().toInt())
+	{
+		case GraphMagnitudeVsTime:
+			yAxis1Legend = q_("Magnitude");
+			if (minY1<-1000.f) minY1 = 0.f;
+			if (maxY1>1000.f) maxY1 = 6.f;
+			direction1 = true;
+			break;
+		case GraphPhaseVsTime:
+			yAxis1Legend = QString("%1, %").arg(q_("Phase"));
+			if (minY1<-1000.f) minY1 = 0.f;
+			if (maxY1>1000.f) maxY1 = 100.f;
+			break;
+		case GraphDistanceVsTime:
+			yAxis1Legend = QString("%1, %2").arg(q_("Distance"), mu);
+			if (minY1<-1000.f) minY1 = 0.f;
+			if (maxY1>1000.f) maxY1 = 50.f;
+			break;
+		case GraphElongationVsTime:
+			yAxis1Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
+			if (minY1<-1000.f) minY1 = 0.f;
+			if (maxY1>1000.f) maxY1 = 180.f;
+			break;
+	}
+
+	switch (ui->graphsSecondComboBox->currentData().toInt())
+	{
+		case GraphMagnitudeVsTime:
+			yAxis2Legend = q_("Magnitude");
+			if (minY2<-1000.f) minY2 = 0.f;
+			if (maxY2>1000.f) maxY2 = 6.f;
+			direction2 = true;
+			break;
+		case GraphPhaseVsTime:
+			yAxis2Legend = QString("%1, %").arg(q_("Phase"));
+			if (minY2<-1000.f) minY2 = 0.f;
+			if (maxY2>1000.f) maxY2 = 100.f;
+			break;
+		case GraphDistanceVsTime:
+			yAxis2Legend = QString("%1, %2").arg(q_("Distance"), mu);
+			if (minY2<-1000.f) minY2 = 0.f;
+			if (maxY2>1000.f) maxY2 = 50.f;
+			break;
+		case GraphElongationVsTime:
+			yAxis2Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
+			if (minY2<-1000.f) minY2 = 0.f;
+			if (maxY2>1000.f) maxY2 = 180.f;
+			break;
+	}
+
+	QColor axisColor(Qt::white);
+	QPen axisPen(axisColor, 1);
+
+	ui->graphsPlot->xAxis->setLabel(xAxisStr);
+	ui->graphsPlot->yAxis->setLabel(yAxis1Legend);
+	ui->graphsPlot->yAxis2->setLabel(yAxis2Legend);
+
+	ui->graphsPlot->xAxis->setRange(0, 31536000);
+	ui->graphsPlot->xAxis->setScaleType(QCPAxis::stLinear);
+	ui->graphsPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	ui->graphsPlot->xAxis->setLabelColor(axisColor);
+	ui->graphsPlot->xAxis->setTickLabelColor(axisColor);
+	ui->graphsPlot->xAxis->setBasePen(axisPen);
+	ui->graphsPlot->xAxis->setTickPen(axisPen);
+	ui->graphsPlot->xAxis->setSubTickPen(axisPen);
+	ui->graphsPlot->xAxis->setDateTimeFormat("dd/MM");
+	ui->graphsPlot->xAxis->setDateTimeSpec(Qt::UTC);
+	ui->graphsPlot->xAxis->setAutoTickStep(true);
+	ui->graphsPlot->xAxis->setSubTickCount(10);
+
+	ui->graphsPlot->yAxis->setRange(minY1, maxY1);
+	ui->graphsPlot->yAxis->setScaleType(QCPAxis::stLinear);
+	ui->graphsPlot->yAxis->setLabelColor(axisColor);
+	ui->graphsPlot->yAxis->setTickLabelColor(axisColor);
+	ui->graphsPlot->yAxis->setBasePen(axisPen);
+	ui->graphsPlot->yAxis->setTickPen(axisPen);
+	ui->graphsPlot->yAxis->setSubTickPen(axisPen);
+	ui->graphsPlot->yAxis->setRangeReversed(direction1);
+
+	ui->graphsPlot->yAxis2->setRange(minY2, maxY2);
+	ui->graphsPlot->yAxis2->setScaleType(QCPAxis::stLinear);
+	ui->graphsPlot->yAxis2->setLabelColor(axisColor);
+	ui->graphsPlot->yAxis2->setTickLabelColor(axisColor);
+	ui->graphsPlot->yAxis2->setBasePen(axisPen);
+	ui->graphsPlot->yAxis2->setTickPen(axisPen);
+	ui->graphsPlot->yAxis2->setSubTickPen(axisPen);
+	ui->graphsPlot->yAxis2->setRangeReversed(direction2);
+	ui->graphsPlot->yAxis2->setVisible(true);
+
+	ui->graphsPlot->clearGraphs();
+	ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
+	ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->graphsPlot->graph(0)->setPen(QPen(Qt::red, 1));
+	ui->graphsPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+	ui->graphsPlot->graph(0)->rescaleAxes(true);
+
+	ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis2);
+	ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->graphsPlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->graphsPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+	ui->graphsPlot->graph(1)->rescaleAxes(true);
 }
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent *event)
