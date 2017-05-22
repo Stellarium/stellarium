@@ -39,7 +39,7 @@
 #include <QFileDialog>
 #include <QDir>
 
-QVector<Vec3d> AstroCalcDialog::EphemerisListJ2000;
+QVector<Vec3d> AstroCalcDialog::EphemerisListCoords;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
 QVector<float> AstroCalcDialog::EphemerisListMagnitudes;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
@@ -196,6 +196,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
 	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
 
+	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
+	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
+	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "SolarSystem.ephemerisMagnitudesDisplayed");
+	connectBoolProperty(ui->ephemerisHorizontalCoordinatesCheckBox, "SolarSystem.ephemerisHorizontalCoordinates");
+	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
 	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
@@ -224,10 +229,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->graphsFirstComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsFirstId(int)));
 	connect(ui->graphsSecondComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsSecondId(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
-
-	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
-	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
-	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "SolarSystem.ephemerisMagnitudesDisplayed");
 
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
@@ -662,7 +663,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					if (star.value(obj)>0.f)
 						extra = QString::number(star.value(obj), 'f', 5); // days
 					else
-						extra = QChar(0x2014);
+						extra = QChar(0x2014); // dash
 				}
 
 
@@ -739,13 +740,25 @@ void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex &modelIndex)
 
 void AstroCalcDialog::setEphemerisHeaderNames()
 {
+	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+
 	ephemerisHeader.clear();
 	ephemerisHeader << q_("Date and Time");
 	ephemerisHeader << q_("Julian Day");
-	//TRANSLATORS: right ascension
-	ephemerisHeader << q_("RA (J2000)");
-	//TRANSLATORS: declination
-	ephemerisHeader << q_("Dec (J2000)");
+	if (horizon)
+	{
+		//TRANSLATORS: azimuth
+		ephemerisHeader << q_("Azimuth");
+		//TRANSLATORS: altitude
+		ephemerisHeader << q_("Altitude");
+	}
+	else
+	{
+		//TRANSLATORS: right ascension
+		ephemerisHeader << q_("RA (J2000)");
+		//TRANSLATORS: declination
+		ephemerisHeader << q_("Dec (J2000)");
+	}
 	//TRANSLATORS: magnitude
 	ephemerisHeader << q_("mag");
 	//TRANSLATORS: phase
@@ -780,6 +793,10 @@ void AstroCalcDialog::generateEphemeris()
 	if (core->getUseTopocentricCoordinates())
 		distanceInfo = q_("Topocentric distance");
 	QString distanceUM = q_("AU");
+
+	QString elongStr = "", phaseStr = "";
+	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	initListEphemeris();
 
@@ -829,8 +846,8 @@ void AstroCalcDialog::generateEphemeris()
 		double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
 		firstJD = firstJD - core->getUTCOffset(firstJD)/24;
 		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD)/currentStep);
-		EphemerisListJ2000.clear();
-		EphemerisListJ2000.reserve(elements);
+		EphemerisListCoords.clear();
+		EphemerisListCoords.reserve(elements);
 		EphemerisListDates.clear();
 		EphemerisListDates.reserve(elements);
 		EphemerisListMagnitudes.clear();
@@ -838,13 +855,44 @@ void AstroCalcDialog::generateEphemeris()
 		bool withTime = false;
 		if (currentStep<StelCore::JD_DAY)
 			withTime = true;
+
+		if (obj==solarSystem->getSun())
+		{
+			phaseStr = QChar(0x2014); // dash
+			elongStr = QChar(0x2014); // dash
+		}
+
+		Vec3d pos;
+		QString raStr = "", decStr = "";
+
 		for (int i=0; i<elements; i++)
 		{
 			double JD = firstJD + i*currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates			
-			Vec3d pos = obj->getJ2000EquatorialPos(core);
-			EphemerisListJ2000.append(pos);
+
+			if (horizon)
+			{
+				pos = obj->getAltAzPosAuto(core);
+				StelUtils::rectToSphe(&ra, &dec, pos);
+				float direction = 3.; // N is zero, E is 90 degrees
+				if (useSouthAzimuth)
+					direction = 2.;
+				ra = direction*M_PI - ra;
+				if (ra > M_PI*2)
+					ra -= M_PI*2;
+				raStr = StelUtils::radToDmsStr(ra, true);
+				decStr = StelUtils::radToDmsStr(dec, true);
+			}
+			else
+			{
+				pos = obj->getJ2000EquatorialPos(core);
+				StelUtils::rectToSphe(&ra, &dec, pos);
+				raStr = StelUtils::radToHmsStr(ra);
+				decStr = StelUtils::radToDmsStr(dec, true);
+			}
+
+			EphemerisListCoords.append(pos);
 			if (withTime)
 				EphemerisListDates.append(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			else
@@ -854,22 +902,28 @@ void AstroCalcDialog::generateEphemeris()
 
 			observerHelioPos = core->getObserverHeliocentricEclipticPos();
 
+			if (phaseStr.isEmpty())
+				phaseStr = QString("%1%").arg(QString::number(obj->getPhase(observerHelioPos) * 100, 'f', 2));
+
+			if (elongStr.isEmpty())
+				elongStr = StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true);
+
 			ACEphemTreeWidgetItem *treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
 			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
-			treeItem->setText(EphemerisRA, StelUtils::radToHmsStr(ra));
+			treeItem->setText(EphemerisRA, raStr);
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
-			treeItem->setText(EphemerisDec, StelUtils::radToDmsStr(dec, true));
+			treeItem->setText(EphemerisDec, decStr);
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
 			treeItem->setText(EphemerisMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
-			treeItem->setText(EphemerisPhase, QString::number(obj->getPhase(observerHelioPos) * 100, 'f', 2) + "%");
+			treeItem->setText(EphemerisPhase, phaseStr);
 			treeItem->setTextAlignment(EphemerisPhase, Qt::AlignRight);
 			treeItem->setText(EphemerisDistance, QString::number(obj->getJ2000EquatorialPos(core).length(), 'f', 6));
 			treeItem->setTextAlignment(EphemerisDistance, Qt::AlignRight);
 			treeItem->setToolTip(EphemerisDistance, QString("%1, %2").arg(distanceInfo, distanceUM));
-			treeItem->setText(EphemerisElongation, StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true));
+			treeItem->setText(EphemerisElongation, elongStr);
 			treeItem->setTextAlignment(EphemerisElongation, Qt::AlignRight);
 		}
 		core->setJD(currentJD); // restore time
@@ -922,7 +976,7 @@ void AstroCalcDialog::saveEphemeris()
 
 void AstroCalcDialog::cleanupEphemeris()
 {
-	EphemerisListJ2000.clear();
+	EphemerisListCoords.clear();
 	ui->ephemerisTreeWidget->clear();
 }
 
@@ -952,7 +1006,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const QString& name, planetNames)
 	{
-		if (!name.contains("Observer", Qt::CaseInsensitive) && name!="Sun" && name!=core->getCurrentPlanet()->getEnglishName())
+		if (!name.contains("Observer", Qt::CaseInsensitive) && name!=core->getCurrentPlanet()->getEnglishName())
 		{
 			planets->addItem(trans.qtranslate(name), name);
 			graphsp->addItem(trans.qtranslate(name), name);

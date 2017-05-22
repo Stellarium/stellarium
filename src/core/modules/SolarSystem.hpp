@@ -135,6 +135,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagEphemerisMarkers
 		   NOTIFY ephemerisMarkersChanged
 		   )
+	Q_PROPERTY(bool ephemerisHorizontalCoordinates
+		   READ getFlagEphemerisHorizontalCoordinates
+		   WRITE setFlagEphemerisHorizontalCoordinates
+		   NOTIFY ephemerisHorizontalCoordinatesChanged
+		   )
 	Q_PROPERTY(bool ephemerisDatesDisplayed
 		   READ getFlagEphemerisDates
 		   WRITE setFlagEphemerisDates
@@ -785,6 +790,7 @@ signals:
 	void minorBodyScaleChanged(double f);
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
+	void ephemerisHorizontalCoordinatesChanged(bool b);
 	void ephemerisDatesChanged(bool b);
 	void ephemerisMagnitudesChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
@@ -871,6 +877,9 @@ private slots:
 	void setFlagEphemerisMarkers(bool b);
 	bool getFlagEphemerisMarkers() const;
 
+	void setFlagEphemerisHorizontalCoordinates(bool b);
+	bool getFlagEphemerisHorizontalCoordinates() const;
+
 	void setFlagEphemerisDates(bool b);
 	bool getFlagEphemerisDates() const;
 
@@ -956,6 +965,7 @@ private:
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;
+	bool ephemerisHorizontalCoordinates;
 
 	class TrailGroup* allTrails;
 	StelGui* gui;

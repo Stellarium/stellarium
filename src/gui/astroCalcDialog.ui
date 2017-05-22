@@ -653,7 +653,7 @@
                <string>Show markers of positions of the current celestial body on the sky</string>
               </property>
               <property name="text">
-               <string>Show markers of positions</string>
+               <string>Show markers</string>
               </property>
              </widget>
             </item>
@@ -663,14 +663,24 @@
                <string>Show dates of positions of current celestial body near markers</string>
               </property>
               <property name="text">
-               <string>Show dates of positions</string>
+               <string>Show dates</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="ephemerisShowMagnitudesCheckBox">
+              <property name="toolTip">
+               <string>Show magnitudes of current celestial body</string>
+              </property>
               <property name="text">
                <string>Show magnitudes</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="ephemerisHorizontalCoordinatesCheckBox">
+              <property name="text">
+               <string>Use horizontal coordinates</string>
               </property>
              </widget>
             </item>
