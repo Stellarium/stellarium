@@ -29,7 +29,7 @@
 
 PointerCoordinatesWindow::PointerCoordinatesWindow()
 	: StelDialog("PointerCoordinates")
-	, coord(NULL)
+	, coord(Q_NULLPTR)
 {
 	ui = new Ui_pointerCoordinatesWindowForm();
 }
@@ -100,7 +100,7 @@ void PointerCoordinatesWindow::createDialogContent()
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 }
 
@@ -139,7 +139,7 @@ void PointerCoordinatesWindow::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

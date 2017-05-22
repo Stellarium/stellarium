@@ -74,7 +74,7 @@ AngleMeasure::AngleMeasure()
 	, flagShowHorizontalStartSkylinked(false)
 	, flagShowHorizontalEndSkylinked(false)
 	, angleHor(0.)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 {
 	startPoint.set(0.,0.,0.);
 	endPoint.set(0.,0.,0.);
@@ -145,9 +145,9 @@ void AngleMeasure::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/angleMeasure/bt_anglemeasure_on.png"),
 						       QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -224,19 +224,19 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
 		if (frameType==StelCore::FrameEquinoxEqu)
 		{
-			painter.drawGreatCircleArc(startPoint, endPoint, NULL);
+			painter.drawGreatCircleArc(startPoint, endPoint, Q_NULLPTR);
 
 			// End lines
-			painter.drawGreatCircleArc(perp1StartPoint, perp1EndPoint, NULL);
-			painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, NULL);
+			painter.drawGreatCircleArc(perp1StartPoint, perp1EndPoint, Q_NULLPTR);
+			painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, Q_NULLPTR);
 		}
 		else
 		{
-			painter.drawGreatCircleArc(startPointHor, endPointHor, NULL);
+			painter.drawGreatCircleArc(startPointHor, endPointHor, Q_NULLPTR);
 
 			// End lines
-			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
-			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
+			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, Q_NULLPTR);
+			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, Q_NULLPTR);
 		}
 
 		painter.setLineSmooth(false);

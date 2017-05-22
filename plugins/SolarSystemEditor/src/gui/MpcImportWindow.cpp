@@ -331,7 +331,7 @@ void MpcImportWindow::selectFile()
 {
 	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
 							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
-	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directories[0]);
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, "Select a text file", directories[0]);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -528,7 +528,7 @@ void MpcImportWindow::unmarkAll()
 
 void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-	if (downloadProgressBar == NULL)
+	if (downloadProgressBar == Q_NULLPTR)
 		return;
 
 	int currentValue = 0;
@@ -552,7 +552,7 @@ void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesT
 
 void MpcImportWindow::updateQueryProgress(qint64, qint64)
 {
-	if (queryProgressBar == NULL)
+	if (queryProgressBar == Q_NULLPTR)
 		return;
 
 	//Just show activity
@@ -595,7 +595,7 @@ void MpcImportWindow::startDownload(QString urlString)
 
 void MpcImportWindow::abortDownload()
 {
-	if (downloadReply == NULL || downloadReply->isFinished())
+	if (downloadReply == Q_NULLPTR || downloadReply->isFinished())
 		return;
 
 	qDebug() << "Aborting download...";
@@ -605,7 +605,7 @@ void MpcImportWindow::abortDownload()
 
 	downloadReply->abort();
 	downloadReply->deleteLater();
-	downloadReply = NULL;
+	downloadReply = Q_NULLPTR;
 
 	enableInterface(true);
 	ui->pushButtonAbortDownload->setVisible(false);
@@ -631,7 +631,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 				   << reply->errorString();
 		enableInterface(true);
 		reply->deleteLater();
-		downloadReply = NULL;
+		downloadReply = Q_NULLPTR;
 		return;
 	}
 
@@ -673,7 +673,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 	}
 
 	reply->deleteLater();
-	downloadReply = NULL;
+	downloadReply = Q_NULLPTR;
 
 	//Temporary, until the slot/socket mechanism is ready
 	populateCandidateObjects(objects);
@@ -690,7 +690,7 @@ void MpcImportWindow::deleteDownloadProgressBar()
 	if (downloadProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(downloadProgressBar);
-		downloadProgressBar = NULL;
+		downloadProgressBar = Q_NULLPTR;
 	}
 }
 
@@ -906,7 +906,7 @@ void MpcImportWindow::deleteQueryProgressBar()
 	if (queryProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(queryProgressBar);
-		queryProgressBar = NULL;
+		queryProgressBar = Q_NULLPTR;
 	}
 }
 

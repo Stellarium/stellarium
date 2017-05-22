@@ -75,7 +75,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	else
 	{
 		qWarning() << "WARNING - telescope definition" << url << "not recognised";
-		return NULL;
+		return Q_NULLPTR;
 	}
 
 	Equinox eq = EquinoxJ2000;

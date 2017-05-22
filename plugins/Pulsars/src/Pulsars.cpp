@@ -82,7 +82,7 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 Pulsars::Pulsars()
 	: PsrCount(0)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
+	, downloadMgr(Q_NULLPTR)
 	, updateTimer(0)
 	, messageTimer(0)
 	, updatesEnabled(false)
@@ -90,11 +90,11 @@ Pulsars::Pulsars()
 	, enableAtStartup(false)
 	, flagShowPulsars(false)
 	, flagShowPulsarsButton(false)
-	, OnIcon(NULL)
-	, OffIcon(NULL)
-	, GlowIcon(NULL)
-	, toolbarButton(NULL)
-	, progressBar(NULL)
+	, OnIcon(Q_NULLPTR)
+	, OffIcon(Q_NULLPTR)
+	, GlowIcon(Q_NULLPTR)
+	, toolbarButton(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
 {
 	setObjectName("Pulsars");
 	configDialog = new PulsarsDialog();
@@ -295,7 +295,7 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 StelObjectP Pulsars::searchByName(const QString& englishName) const
 {
 	if (!flagShowPulsars)
-		return NULL;
+		return Q_NULLPTR;
 
 	foreach(const PulsarP& pulsar, psr)
 	{
@@ -303,13 +303,13 @@ StelObjectP Pulsars::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!flagShowPulsars)
-		return NULL;
+		return Q_NULLPTR;
 
 	foreach(const PulsarP& pulsar, psr)
 	{
@@ -317,7 +317,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
@@ -623,7 +623,7 @@ void Pulsars::updateJSON(void)
 	updateState = Pulsars::Updating;
 	emit(updateStateChanged(updateState));	
 
-	if (progressBar==NULL)
+	if (progressBar==Q_NULLPTR)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
@@ -671,7 +671,7 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 	{
 		progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar=NULL;
+		progressBar=Q_NULLPTR;
 	}
 }
 
@@ -705,12 +705,12 @@ void Pulsars::upgradeConfigIni(void)
 void Pulsars::setFlagShowPulsarsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 	{
 		if (b==true) {
-			if (toolbarButton==NULL) {
+			if (toolbarButton==Q_NULLPTR) {
 				// Create the pulsars button
-				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
+				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {

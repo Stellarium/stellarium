@@ -43,8 +43,8 @@
 
 ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
-	, ep(NULL)
-	, updateTimer(NULL)
+	, ep(Q_NULLPTR)
+	, updateTimer(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
 }
@@ -55,7 +55,7 @@ ExoplanetsDialog::~ExoplanetsDialog()
 	{
 		updateTimer->stop();
 		delete updateTimer;
-		updateTimer = NULL;
+		updateTimer = Q_NULLPTR;
 	}
 	delete ui;
 }
@@ -128,7 +128,7 @@ void ExoplanetsDialog::createDialogContent()
 	setInfoHtml();
 	setWebsitesHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
@@ -164,7 +164,7 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
@@ -247,7 +247,7 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
@@ -280,7 +280,7 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

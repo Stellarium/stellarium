@@ -31,7 +31,7 @@ class StoredViewDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	StoredViewDialog(QObject* parent = NULL);
+	StoredViewDialog(QObject* parent = Q_NULLPTR);
 	~StoredViewDialog();
 public slots:
 	void retranslate();

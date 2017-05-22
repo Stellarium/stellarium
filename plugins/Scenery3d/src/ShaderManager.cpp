@@ -134,7 +134,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 {
 	t_ShaderCache::iterator it = m_shaderCache.find(flags);
 
-	// This may also return NULL if the load failed.
+	// This may also return Q_NULLPTR if the load failed.
 	//We wait until user explictly forces shader reload until we try again to avoid spamming errors.
 	if(it!=m_shaderCache.end())
 		return *it;
@@ -148,7 +148,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	//load shader files & preprocess
 	QByteArray vShader,gShader,fShader;
 
-	QOpenGLShaderProgram *prog = NULL;
+	QOpenGLShaderProgram *prog = Q_NULLPTR;
 
 	if(preprocessShader(vShaderFile,flags,vShader) &&
 			preprocessShader(gShaderFile,flags,gShader) &&
@@ -178,7 +178,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 			if(!loadShader(*prog,vShader,gShader,fShader))
 			{
 				delete prog;
-				prog = NULL;
+				prog = Q_NULLPTR;
 				qCCritical(shaderMgr)<<"ERROR: Shader '"<<flags<<"' could not be compiled. Fix errors and reload shaders or restart program.";
 			}
 #ifndef NDEBUG
@@ -463,7 +463,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 
 		t_UniformStrings::iterator it = uniformStrings.find(str);
 
-		// This may also return NULL if the load failed.
+		// This may also return Q_NULLPTR if the load failed.
 		//We wait until user explictly forces shader reload until we try again to avoid spamming errors.
 		if(it!=uniformStrings.end())
 		{

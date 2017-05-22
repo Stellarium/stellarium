@@ -65,7 +65,7 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 
 gSatWrapper::~gSatWrapper()
 {
-	if (pSatellite != NULL)
+	if (pSatellite != Q_NULLPTR)
 		delete pSatellite;
 }
 
@@ -74,7 +74,7 @@ Vec3d gSatWrapper::getTEMEPos()
 {
         gVector position;
 	Vec3d returnedVector;
-	if (pSatellite != NULL)
+	if (pSatellite != Q_NULLPTR)
 	{
                 position = pSatellite->getPos();
                 returnedVector.set(position[0], position[1], position[2]);
@@ -91,7 +91,7 @@ Vec3d gSatWrapper::getTEMEVel()
 {
         gVector velocity;
 	Vec3d returnedVector;
-	if (pSatellite != NULL)
+	if (pSatellite != Q_NULLPTR)
 	{
                 velocity = pSatellite->getVel();
                 returnedVector.set(velocity[0], velocity[1], velocity[2]);
@@ -108,7 +108,7 @@ Vec3d gSatWrapper::getSubPoint()
 {
         gVector satelliteSubPoint;
 	Vec3d returnedVector;
-	if (pSatellite != NULL)
+	if (pSatellite != Q_NULLPTR)
 	{
                 satelliteSubPoint = pSatellite->getSubPoint();
                 returnedVector.set(satelliteSubPoint[0], satelliteSubPoint[1], satelliteSubPoint[2]);

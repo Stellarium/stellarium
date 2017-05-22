@@ -37,7 +37,7 @@
 
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 	: StelDialog("SolarSystemEditor")
-	, manualImportWindow(NULL)
+	, manualImportWindow(Q_NULLPTR)
 {
 	ui = new Ui_solarSystemManagerWindow();
 	mpcImportWindow = new MpcImportWindow();
@@ -128,7 +128,7 @@ void SolarSystemManagerWindow::newImportMPC()
 
 void SolarSystemManagerWindow::newImportManual()
 {
-	if (manualImportWindow == NULL)
+	if (manualImportWindow == Q_NULLPTR)
 	{
 		manualImportWindow = new ManualImportWindow();
 		connect(manualImportWindow, SIGNAL(visibleChanged(bool)), this, SLOT(resetImportManual(bool)));
@@ -150,7 +150,7 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 		populateSolarSystemList();
 
 		delete manualImportWindow;
-		manualImportWindow = NULL;
+		manualImportWindow = Q_NULLPTR;
 
 		//This window is in the background, bring it to the foreground
 		dialog->setVisible(true);

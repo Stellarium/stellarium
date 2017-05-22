@@ -867,7 +867,7 @@ void S3DRenderer::calculateLighting()
 	lightInfo.directionalSource = LightParameters::DS_Sun_Horiz;
 
 	//calculate emissive factor
-	if(l!=NULL)
+	if(l!=Q_NULLPTR)
 	{
 		if(requiresCubemap && lazyDrawing)
 		{
@@ -1281,7 +1281,7 @@ void S3DRenderer::drawFromCubeMap()
 	{
 		//can render in a single draw call
 		glBindTexture(GL_TEXTURE_CUBE_MAP,cubeMapCubeTex);
-		glDrawElements(GL_TRIANGLES,cubeIndexCount,GL_UNSIGNED_SHORT, NULL);
+		glDrawElements(GL_TRIANGLES,cubeIndexCount,GL_UNSIGNED_SHORT, Q_NULLPTR);
 	}
 	else
 	{
@@ -1863,7 +1863,7 @@ bool S3DRenderer::initCubemapping()
 		for (int i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,colorFormat,
-				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,Q_NULLPTR);
 			GET_GLERROR()
 		}
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
@@ -1886,7 +1886,7 @@ bool S3DRenderer::initCubemapping()
 			GET_GLERROR()
 
 			glTexImage2D(GL_TEXTURE_2D,0,colorFormat,
-				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,Q_NULLPTR);
 
 			GET_GLERROR()
 		}
@@ -1911,7 +1911,7 @@ bool S3DRenderer::initCubemapping()
 		for (int i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,depthFormat,
-				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,NULL);
+				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,Q_NULLPTR);
 
 			GET_GLERROR()
 		}
@@ -2274,7 +2274,7 @@ bool S3DRenderer::initShadowmapping()
 			bool pcssEnabled = shaderParameters.pcss && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW || shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH);
 
 			//for OpenGL ES2, type has to be UNSIGNED_SHORT or UNSIGNED_INT for depth textures, desktop does probably not care
-			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
+			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, Q_NULLPTR);
 
 			//we use hardware-accelerated depth compare mode, unless pcss is used
 			shaderParameters.hwShadowSamplers = false;

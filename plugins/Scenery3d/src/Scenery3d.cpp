@@ -54,15 +54,15 @@ Q_LOGGING_CATEGORY(scenery3d,"stel.plugin.scenery3d")
 #define S3D_CONFIG_PREFIX QString("Scenery3d")
 
 Scenery3d::Scenery3d() :
-	renderer(NULL),
+	renderer(Q_NULLPTR),
 	flagEnabled(false),
 	cleanedUp(false),
 	movementKeyInput(0.0,0.0,0.0),
 	oldProjectionType(StelCore::ProjectionPerspective),
 	loadCancel(false),
-	progressBar(NULL),	
+	progressBar(Q_NULLPTR),
 	currentLoadScene(),
-	currentScene(NULL),
+	currentScene(Q_NULLPTR),
 	currentLoadFuture(this)
 {
 	setObjectName("Scenery3d");
@@ -335,19 +335,19 @@ void Scenery3d::createToolbarButtons() const
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			StelButton* toolbarEnableButton =	new StelButton(NULL,
+			StelButton* toolbarEnableButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
 									       QPixmap(":/graphicGui/glow32x32.png"),
 									       "actionShow_Scenery3d");
-			StelButton* toolbarSettingsButton =	new StelButton(NULL,
+			StelButton* toolbarSettingsButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
 									       QPixmap(":/graphicGui/glow32x32.png"),
 									       "actionShow_Scenery3d_dialog");
-			StelButton* toolbarStoredViewButton =	new StelButton(NULL,
+			StelButton* toolbarStoredViewButton =	new StelButton(Q_NULLPTR,
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
 									       QPixmap(":/graphicGui/glow32x32.png"),
@@ -508,7 +508,7 @@ void Scenery3d::loadSceneCompleted()
 
 	progressBar->setValue(100);
 	StelApp::getInstance().removeProgressBar(progressBar);
-	progressBar=NULL;
+	progressBar=Q_NULLPTR;
 
 	if(!result)
 	{

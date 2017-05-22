@@ -65,21 +65,21 @@ LogBookConfigDialog::LogBookConfigDialog(QMap<QString, QSqlTableModel *> theTabl
 LogBookConfigDialog::~LogBookConfigDialog()
 {
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 	delete barlowsWidget;
-	barlowsWidget = NULL;
+	barlowsWidget = Q_NULLPTR;
 	delete filtersWidget;
-	filtersWidget = NULL;
+	filtersWidget = Q_NULLPTR;
 	delete imagersWidget;
-	imagersWidget = NULL;
+	imagersWidget = Q_NULLPTR;
 	delete observersWidget;
-	observersWidget = NULL;
+	observersWidget = Q_NULLPTR;
 	delete ocularsWidget;
-	ocularsWidget = NULL;
+	ocularsWidget = Q_NULLPTR;
 	delete opticsWidget;
-	opticsWidget = NULL;
+	opticsWidget = Q_NULLPTR;
 	delete sitesWidget;
-	sitesWidget = NULL;
+	sitesWidget = Q_NULLPTR;
 }
 
 /* ********************************************************************* */
