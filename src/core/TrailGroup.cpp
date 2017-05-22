@@ -42,7 +42,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	foreach (const Trail& trail, allTrails)
 	{
 		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());
-		if (hpl!=NULL)
+		if (hpl!=Q_NULLPTR)
 		{
 			// Avoid drawing the trails if the object is the home planet
 			QString homePlanetName = hpl->getEnglishName();
@@ -89,7 +89,7 @@ void TrailGroup::setJ2000ToTrailNative(const Mat4d& m)
 
 void TrailGroup::addObject(const StelObjectP& obj, const Vec3f* col)
 {
-	allTrails.append(TrailGroup::Trail(obj, col==NULL ? obj->getInfoColor() : *col));
+	allTrails.append(TrailGroup::Trail(obj, col==Q_NULLPTR ? obj->getInfoColor() : *col));
 }
 
 void TrailGroup::reset()

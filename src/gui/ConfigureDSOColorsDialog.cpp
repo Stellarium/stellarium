@@ -138,7 +138,7 @@ void ConfigureDSOColorsDialog::askDSOLabelsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.labelsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOLabels->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOLabels->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -153,7 +153,7 @@ void ConfigureDSOColorsDialog::askDSOMarkersColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.circlesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOMarkers->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOMarkers->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -168,7 +168,7 @@ void ConfigureDSOColorsDialog::askDSOGalaxiesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.galaxiesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOGalaxies->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOGalaxies->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -183,7 +183,7 @@ void ConfigureDSOColorsDialog::askDSOActiveGalaxiesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.activeGalaxiesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOActiveGalaxies->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOActiveGalaxies->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -198,7 +198,7 @@ void ConfigureDSOColorsDialog::askDSORadioGalaxiesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.radioGalaxiesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSORadioGalaxies->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSORadioGalaxies->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -213,7 +213,7 @@ void ConfigureDSOColorsDialog::askDSOInteractingGalaxiesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.interactingGalaxiesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOInteractingGalaxies->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOInteractingGalaxies->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -228,7 +228,7 @@ void ConfigureDSOColorsDialog::askDSOQuasarsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.quasarsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOQuasars->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOQuasars->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -243,7 +243,7 @@ void ConfigureDSOColorsDialog::askDSOPossibleQuasarsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.possibleQuasarsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOPossibleQuasars->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOPossibleQuasars->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -258,7 +258,7 @@ void ConfigureDSOColorsDialog::askDSOStarClustersColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.clustersColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOStarClusters->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOStarClusters->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -273,7 +273,7 @@ void ConfigureDSOColorsDialog::askDSOOpenStarClustersColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.openClustersColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOOpenStarClusters->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOOpenStarClusters->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -288,7 +288,7 @@ void ConfigureDSOColorsDialog::askDSOGlobularStarClustersColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.globularClustersColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOGlobularStarClusters->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOGlobularStarClusters->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -303,7 +303,7 @@ void ConfigureDSOColorsDialog::askDSOStellarAssociationsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.stellarAssociationsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOStellarAssociations->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOStellarAssociations->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -318,7 +318,7 @@ void ConfigureDSOColorsDialog::askDSOStarCloudsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.starCloudsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOStarClouds->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOStarClouds->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -333,7 +333,7 @@ void ConfigureDSOColorsDialog::askDSOPlanetaryNebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.planetaryNebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOPlanetaryNebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOPlanetaryNebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -348,7 +348,7 @@ void ConfigureDSOColorsDialog::askDSODarkNebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.darkNebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSODarkNebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSODarkNebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -363,7 +363,7 @@ void ConfigureDSOColorsDialog::askDSOReflectionNebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.reflectionNebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOReflectionNebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOReflectionNebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -378,7 +378,7 @@ void ConfigureDSOColorsDialog::askDSOBipolarNebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.bipolarNebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOBipolarNebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOBipolarNebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -393,7 +393,7 @@ void ConfigureDSOColorsDialog::askDSOEmissionNebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.emissionNebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOEmissionNebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOEmissionNebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -408,7 +408,7 @@ void ConfigureDSOColorsDialog::askDSOPossiblePlanetaryNebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.possiblePlanetaryNebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOPossiblePlanetaryNebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOPossiblePlanetaryNebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -423,7 +423,7 @@ void ConfigureDSOColorsDialog::askDSOProtoplanetaryNebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.protoplanetaryNebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOProtoplanetaryNebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOProtoplanetaryNebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -438,7 +438,7 @@ void ConfigureDSOColorsDialog::askDSONebulosityClustersColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.clusterWithNebulosityColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSONebulosityClusters->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSONebulosityClusters->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -453,7 +453,7 @@ void ConfigureDSOColorsDialog::askDSONebulaeColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.nebulaeColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSONebulae->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSONebulae->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -468,7 +468,7 @@ void ConfigureDSOColorsDialog::askDSOHydrogenRegionsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.hydrogenRegionsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOHydrogenRegions->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOHydrogenRegions->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -483,7 +483,7 @@ void ConfigureDSOColorsDialog::askDSOInterstellarMatterColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.interstellarMatterColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOInterstellarMatter->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOInterstellarMatter->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -498,7 +498,7 @@ void ConfigureDSOColorsDialog::askDSOEmissionObjectsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.emissionObjectsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOEmissionObjects->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOEmissionObjects->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -513,7 +513,7 @@ void ConfigureDSOColorsDialog::askDSOMolecularCloudsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.molecularCloudsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOMolecularClouds->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOMolecularClouds->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -528,7 +528,7 @@ void ConfigureDSOColorsDialog::askDSOBLLacObjectsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.blLacObjectsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOBLLacObjects->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOBLLacObjects->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -543,7 +543,7 @@ void ConfigureDSOColorsDialog::askDSOBlazarsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.blazarsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOBlazars->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOBlazars->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -558,7 +558,7 @@ void ConfigureDSOColorsDialog::askDSOYoungStellarObjectsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.youngStellarObjectsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOYoungStellarObjects->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOYoungStellarObjects->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -573,7 +573,7 @@ void ConfigureDSOColorsDialog::askDSOSupernovaRemnantsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.supernovaRemnantsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOSupernovaRemnants->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOSupernovaRemnants->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -588,7 +588,7 @@ void ConfigureDSOColorsDialog::askDSOStarsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.starsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorDSOStars->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOStars->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());

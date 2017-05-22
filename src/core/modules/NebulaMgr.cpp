@@ -1283,7 +1283,7 @@ void NebulaMgr::updateI18n()
 }
 
 
-//! Return the matching Nebula object's pointer if exists or NULL
+//! Return the matching Nebula object's pointer if exists or an "empty" StelObjectP
 StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
@@ -1461,8 +1461,9 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 }
 
 
-//! Return the matching Nebula object's pointer if exists or NULL
+//! Return the matching Nebula object's pointer if exists or Q_NULLPTR
 //! TODO split common parts of this and I18 fn above into a separate fn.
+//! TODO Decide whether empty StelObjectP or Q_NULLPTR is the better return type and select the same for both.
 StelObjectP NebulaMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
@@ -1635,7 +1636,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		}
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name

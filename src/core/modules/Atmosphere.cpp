@@ -39,10 +39,10 @@ Atmosphere::Atmosphere(void)
 	: viewport(0,0,0,0)
 	, skyResolutionY(44)
 	, skyResolutionX(44)
-	, posGrid(NULL)
+	, posGrid(Q_NULLPTR)
 	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, indicesBuffer(QOpenGLBuffer::IndexBuffer)
-	, colorGrid(NULL)
+	, colorGrid(Q_NULLPTR)
 	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, averageLuminance(0.f)
 	, overrideAverageLuminance(false)
@@ -106,11 +106,11 @@ Atmosphere::Atmosphere(void)
 Atmosphere::~Atmosphere(void)
 {
 	delete [] posGrid;
-	posGrid = NULL;
+	posGrid = Q_NULLPTR;
 	delete[] colorGrid;
-	colorGrid = NULL;
+	colorGrid = Q_NULLPTR;
 	delete atmoShaderProgram;
-	atmoShaderProgram = NULL;
+	atmoShaderProgram = Q_NULLPTR;
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
@@ -172,7 +172,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		indicesBuffer.allocate(indices, (skyResolutionX+1)*skyResolutionY*2*2);
 		indicesBuffer.release();
 		delete[] indices;
-		indices=NULL;
+		indices=Q_NULLPTR;
 		
 		colorGridBuffer.destroy();
 		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);

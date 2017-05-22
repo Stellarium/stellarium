@@ -44,7 +44,7 @@ void StelSkyImageTile::initCtor()
 	luminance = -1;
 	alphaBlend = false;
 	noTexture = false;
-	texFader = NULL;
+	texFader = Q_NULLPTR;
 	birthJD = -1e10;
 }
 
@@ -52,7 +52,7 @@ void StelSkyImageTile::initCtor()
 StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	if (parent!=NULL)
+	if (parent!=Q_NULLPTR)
 	{
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
@@ -64,7 +64,7 @@ StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent)
 StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	if (parent!=NULL)
+	if (parent!=Q_NULLPTR)
 	{
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
@@ -113,7 +113,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	// - the parent tile is intersecting FOV
 	// - the parent tile is not scheduled for deletion
 	const StelSkyImageTile* parent = qobject_cast<StelSkyImageTile*>(QObject::parent());
-	if (parent!=NULL)
+	if (parent!=Q_NULLPTR)
 	{
 		Q_ASSERT(isDeletionScheduled()==false);
 		const double degPerPixel = 1./core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()*180./M_PI;
@@ -333,7 +333,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
-	if (debugFont==NULL)
+	if (debugFont==Q_NULLPTR)
 	{
 		debugFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), 12);
 	}
@@ -379,14 +379,14 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	if (map.contains("description"))
 	{
 		htmlDescription = map.value("description").toString();
-		if (parent()==NULL)
+		if (parent()==Q_NULLPTR)
 		{
 			htmlDescription+= "<h3>URL: "+contructorUrl+"</h3>";
 		}
 	}
 	else
 	{
-		if (parent()==NULL)
+		if (parent()==Q_NULLPTR)
 		{
 			htmlDescription= "<h3>URL: "+contructorUrl+"</h3>";
 		}

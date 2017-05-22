@@ -283,10 +283,10 @@ public:
 	//! Splits the vertex data into separate arrays.
 	//! If a given parameter vector is null, it is not filled.
 	void splitVertexData(V3Vec* position,
-			     V2Vec* texCoord = NULL,
-			     V3Vec* normal = NULL,
-			     V3Vec* tangent = NULL,
-			     V3Vec* bitangent = NULL) const;
+			     V2Vec* texCoord = Q_NULLPTR,
+			     V3Vec* normal = Q_NULLPTR,
+			     V3Vec* tangent = Q_NULLPTR,
+			     V3Vec* bitangent = Q_NULLPTR) const;
 
 	//! Clears the internal vertex list to save space, meaning getVertexList() returns
 	//! an empty list! The other members are unaffected (indices, materials,

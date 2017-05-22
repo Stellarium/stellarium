@@ -30,14 +30,14 @@
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: StelDialog("ArchaeoLines")
-	, al(NULL)
+	, al(Q_NULLPTR)
 {
 	ui = new Ui_archaeoLinesDialog();
 }
 
 ArchaeoLinesDialog::~ArchaeoLinesDialog()
 {
-	delete ui;          ui=NULL;
+	delete ui;          ui=Q_NULLPTR;
 }
 
 void ArchaeoLinesDialog::retranslate()
@@ -285,7 +285,7 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
@@ -361,7 +361,7 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 // These are called by the respective buttons.
 void ArchaeoLinesDialog::askEquinoxColor()
 {
-	QColor c=QColorDialog::getColor(equinoxColor, NULL, q_("Select color for equinox line"));
+	QColor c=QColorDialog::getColor(equinoxColor, Q_NULLPTR, q_("Select color for equinox line"));
 	if (c.isValid())
 	{
 		equinoxColor=c;
@@ -372,7 +372,7 @@ void ArchaeoLinesDialog::askEquinoxColor()
 }
 void ArchaeoLinesDialog::askSolsticeColor()
 {
-	QColor c=QColorDialog::getColor(solsticeColor, NULL, q_("Select color for solstice lines"));
+	QColor c=QColorDialog::getColor(solsticeColor, Q_NULLPTR, q_("Select color for solstice lines"));
 	if (c.isValid())
 	{
 		solsticeColor=c;
@@ -383,7 +383,7 @@ void ArchaeoLinesDialog::askSolsticeColor()
 }
 void ArchaeoLinesDialog::askCrossquarterColor()
 {
-	QColor c=QColorDialog::getColor(crossquarterColor, NULL, q_("Select color for crossquarter lines"));
+	QColor c=QColorDialog::getColor(crossquarterColor, Q_NULLPTR, q_("Select color for crossquarter lines"));
 	if (c.isValid())
 	{
 		crossquarterColor=c;
@@ -394,7 +394,7 @@ void ArchaeoLinesDialog::askCrossquarterColor()
 }
 void ArchaeoLinesDialog::askMajorStandstillColor()
 {
-	QColor c=QColorDialog::getColor(majorStandstillColor, NULL, q_("Select color for major standstill lines"));
+	QColor c=QColorDialog::getColor(majorStandstillColor, Q_NULLPTR, q_("Select color for major standstill lines"));
 	if (c.isValid())
 	{
 		majorStandstillColor=c;
@@ -405,7 +405,7 @@ void ArchaeoLinesDialog::askMajorStandstillColor()
 }
 void ArchaeoLinesDialog::askMinorStandstillColor()
 {
-	QColor c=QColorDialog::getColor(minorStandstillColor, NULL, q_("Select color for minor standstill lines"));
+	QColor c=QColorDialog::getColor(minorStandstillColor, Q_NULLPTR, q_("Select color for minor standstill lines"));
 	if (c.isValid())
 	{
 		minorStandstillColor=c;
@@ -416,7 +416,7 @@ void ArchaeoLinesDialog::askMinorStandstillColor()
 }
 void ArchaeoLinesDialog::askZenithPassageColor()
 {
-	QColor c=QColorDialog::getColor(zenithPassageColor, NULL, q_("Select color for zenith passage line"));
+	QColor c=QColorDialog::getColor(zenithPassageColor, Q_NULLPTR, q_("Select color for zenith passage line"));
 	if (c.isValid())
 	{
 		zenithPassageColor=c;
@@ -427,7 +427,7 @@ void ArchaeoLinesDialog::askZenithPassageColor()
 }
 void ArchaeoLinesDialog::askNadirPassageColor()
 {
-	QColor c=QColorDialog::getColor(nadirPassageColor, NULL, q_("Select color for nadir passage line"));
+	QColor c=QColorDialog::getColor(nadirPassageColor, Q_NULLPTR, q_("Select color for nadir passage line"));
 	if (c.isValid())
 	{
 		nadirPassageColor=c;
@@ -438,7 +438,7 @@ void ArchaeoLinesDialog::askNadirPassageColor()
 }
 void ArchaeoLinesDialog::askSelectedObjectColor()
 {
-	QColor c=QColorDialog::getColor(selectedObjectColor, NULL, q_("Select color for selected object line"));
+	QColor c=QColorDialog::getColor(selectedObjectColor, Q_NULLPTR, q_("Select color for selected object line"));
 	if (c.isValid())
 	{
 		selectedObjectColor=c;
@@ -449,7 +449,7 @@ void ArchaeoLinesDialog::askSelectedObjectColor()
 }
 void ArchaeoLinesDialog::askCurrentSunColor()
 {
-	QColor c=QColorDialog::getColor(currentSunColor, NULL, q_("Select color for current sun line"));
+	QColor c=QColorDialog::getColor(currentSunColor, Q_NULLPTR, q_("Select color for current sun line"));
 	if (c.isValid())
 	{
 		currentSunColor=c;
@@ -460,7 +460,7 @@ void ArchaeoLinesDialog::askCurrentSunColor()
 }
 void ArchaeoLinesDialog::askCurrentMoonColor()
 {
-	QColor c=QColorDialog::getColor(currentMoonColor, NULL, q_("Select color for current moon line"));
+	QColor c=QColorDialog::getColor(currentMoonColor, Q_NULLPTR, q_("Select color for current moon line"));
 	if (c.isValid())
 	{
 		currentMoonColor=c;
@@ -471,7 +471,7 @@ void ArchaeoLinesDialog::askCurrentMoonColor()
 }
 void ArchaeoLinesDialog::askCurrentPlanetColor()
 {
-	QColor c=QColorDialog::getColor(currentPlanetColor, NULL, q_("Select color for current planet line"));
+	QColor c=QColorDialog::getColor(currentPlanetColor, Q_NULLPTR, q_("Select color for current planet line"));
 	if (c.isValid())
 	{
 		currentPlanetColor=c;
@@ -482,7 +482,7 @@ void ArchaeoLinesDialog::askCurrentPlanetColor()
 }
 void ArchaeoLinesDialog::askGeographicLocation1Color()
 {
-	QColor c=QColorDialog::getColor(geographicLocation1Color, NULL, q_("Select color for Geographic Location 1 line"));
+	QColor c=QColorDialog::getColor(geographicLocation1Color, Q_NULLPTR, q_("Select color for Geographic Location 1 line"));
 	if (c.isValid())
 	{
 		geographicLocation1Color=c;
@@ -493,7 +493,7 @@ void ArchaeoLinesDialog::askGeographicLocation1Color()
 }
 void ArchaeoLinesDialog::askGeographicLocation2Color()
 {
-	QColor c=QColorDialog::getColor(geographicLocation2Color, NULL, q_("Select color for Geographic Location 2 line"));
+	QColor c=QColorDialog::getColor(geographicLocation2Color, Q_NULLPTR, q_("Select color for Geographic Location 2 line"));
 	if (c.isValid())
 	{
 		geographicLocation2Color=c;
@@ -504,7 +504,7 @@ void ArchaeoLinesDialog::askGeographicLocation2Color()
 }
 void ArchaeoLinesDialog::askCustomAzimuth1Color()
 {
-	QColor c=QColorDialog::getColor(customAzimuth1Color, NULL, q_("Select color for Custom Azimuth 1 line"));
+	QColor c=QColorDialog::getColor(customAzimuth1Color, Q_NULLPTR, q_("Select color for Custom Azimuth 1 line"));
 	if (c.isValid())
 	{
 		customAzimuth1Color=c;
@@ -515,7 +515,7 @@ void ArchaeoLinesDialog::askCustomAzimuth1Color()
 }
 void ArchaeoLinesDialog::askCustomAzimuth2Color()
 {
-	QColor c=QColorDialog::getColor(customAzimuth2Color, NULL, q_("Select color for Custom Azimuth 2 line"));
+	QColor c=QColorDialog::getColor(customAzimuth2Color, Q_NULLPTR, q_("Select color for Custom Azimuth 2 line"));
 	if (c.isValid())
 	{
 		customAzimuth2Color=c;
@@ -526,7 +526,7 @@ void ArchaeoLinesDialog::askCustomAzimuth2Color()
 }
 void ArchaeoLinesDialog::askCustomDeclination1Color()
 {
-	QColor c=QColorDialog::getColor(customDeclination1Color, NULL, q_("Select color for Custom Declination 1 line"));
+	QColor c=QColorDialog::getColor(customDeclination1Color, Q_NULLPTR, q_("Select color for Custom Declination 1 line"));
 	if (c.isValid())
 	{
 		customDeclination1Color=c;
@@ -537,7 +537,7 @@ void ArchaeoLinesDialog::askCustomDeclination1Color()
 }
 void ArchaeoLinesDialog::askCustomDeclination2Color()
 {
-	QColor c=QColorDialog::getColor(customDeclination2Color, NULL, q_("Select color for Custom Declination 2 line"));
+	QColor c=QColorDialog::getColor(customDeclination2Color, Q_NULLPTR, q_("Select color for Custom Declination 2 line"));
 	if (c.isValid())
 	{
 		customDeclination2Color=c;

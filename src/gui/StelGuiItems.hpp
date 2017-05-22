@@ -53,7 +53,7 @@ class CornerButtons : public QObject, public QGraphicsItem
 	Q_OBJECT
 	Q_INTERFACES(QGraphicsItem)
 public:
-	CornerButtons(QGraphicsItem* parent=NULL);
+	CornerButtons(QGraphicsItem* parent=Q_NULLPTR);
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
 	virtual QRectF boundingRect() const;
 	void setOpacity(double opacity);
@@ -77,7 +77,7 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover=QPixmap(),
-		   class StelAction* action=NULL, bool noBackground=false);
+		   class StelAction* action=Q_NULLPTR, bool noBackground=false);
 	
 	//! Constructor
 	//! @param parent the parent item
@@ -276,8 +276,8 @@ private:
 	struct ButtonGroup
 	{
 		ButtonGroup() : leftMargin(0), rightMargin(0),
-						pixBackgroundLeft(NULL), pixBackgroundRight(NULL),
-						pixBackgroundMiddle(NULL), pixBackgroundSingle(NULL) {;}
+						pixBackgroundLeft(Q_NULLPTR), pixBackgroundRight(Q_NULLPTR),
+						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {;}
 		//! Elements of the group
 		QList<StelButton*> elems;
 		//! Left margin size in pixel

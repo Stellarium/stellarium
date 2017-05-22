@@ -82,7 +82,7 @@ SolarSystem::SolarSystem()
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
 	, ephemerisHorizontalCoordinates(false)
-	, allTrails(NULL)
+	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
@@ -102,7 +102,7 @@ SolarSystem::~SolarSystem()
 	foreach (Orbit* orb, orbits)
 	{
 		delete orb;
-		orb = NULL;
+		orb = Q_NULLPTR;
 	}
 	sun.clear();
 	moon.clear();
@@ -114,7 +114,7 @@ SolarSystem::~SolarSystem()
 	texPointer.clear();
 
 	delete allTrails;
-	allTrails = NULL;
+	allTrails = Q_NULLPTR;
 
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
 	foreach (PlanetP p, systemPlanets)
@@ -250,12 +250,12 @@ void SolarSystem::deinit()
 void SolarSystem::recreateTrails()
 {
 	// Create a trail group containing all the planets orbiting the sun (not including satellites)
-	if (allTrails!=NULL)
+	if (allTrails!=Q_NULLPTR)
 		delete allTrails;
 	allTrails = new TrailGroup(365.f);
 
 	PlanetP p = getSelected();
-	if (p!=NULL && getFlagIsolatedTrails())
+	if (p!=Q_NULLPTR && getFlagIsolatedTrails())
 	{
 		allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
 	}
@@ -565,8 +565,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		const QString funcName = pd.value(secname+"/coord_func").toString();
-		posFuncType posfunc=NULL;
-		void* userDataPtr=NULL;
+		posFuncType posfunc=Q_NULLPTR;
+		void* userDataPtr=Q_NULLPTR;
 		OsculatingFunctType *osculatingFunc = 0;
 		bool closeOrbit = pd.value(secname+"/closeOrbit", true).toBool();
 
@@ -886,7 +886,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			posfunc = &get_pluto_helio_coordsv;
 
 
-		if (posfunc==NULL)
+		if (posfunc==Q_NULLPTR)
 		{
 			qCritical() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
 			exit(-1);
@@ -2103,7 +2103,7 @@ void SolarSystem::reloadPlanets()
 	foreach (Orbit* orb, orbits)
 	{
 		delete orb;
-		orb = NULL;
+		orb = Q_NULLPTR;
 	}
 	orbits.clear();
 
@@ -2113,7 +2113,7 @@ void SolarSystem::reloadPlanets()
 	Planet::texEarthShadow.clear(); //Loaded in loadPlanets()
 
 	delete allTrails;
-	allTrails = NULL;
+	allTrails = Q_NULLPTR;
 
 	foreach (PlanetP p, systemPlanets)
 	{

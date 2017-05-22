@@ -46,7 +46,7 @@ QMap<QString, QString> StelTranslator::iso639codes;
 QString StelTranslator::systemLangName;
 
 // Use system locale language by default
-StelTranslator* StelTranslator::globalTranslator = NULL;
+StelTranslator* StelTranslator::globalTranslator = Q_NULLPTR;
 
 StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
 	: domain(adomain),
@@ -63,7 +63,7 @@ StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
 StelTranslator::~StelTranslator()
 {
 	delete translator;
-	translator = NULL;
+	translator = Q_NULLPTR;
 }
 
 QString StelTranslator::qtranslate(const QString& s, const QString& c) const
@@ -88,7 +88,7 @@ void StelTranslator::init(const QString& fileName)
 	StelTranslator::initSystemLanguage();
 	StelTranslator::initIso639_1LanguageCodes(fileName);
 	
-	Q_ASSERT(StelTranslator::globalTranslator==NULL);
+	Q_ASSERT(StelTranslator::globalTranslator==Q_NULLPTR);
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", "system");
 }
 

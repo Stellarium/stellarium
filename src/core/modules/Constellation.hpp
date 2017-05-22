@@ -72,7 +72,7 @@ private:
 	//! observer centered J2000 coordinates.
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZname;}
 
-	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;} // TODO
+	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0.;} // TODO
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
@@ -94,7 +94,7 @@ private:
 	//! This member tests to see if a star is one of those which make up
 	//! the lines of a Constellation.
 	//! @return a pointer to the constellation which the star is a part of,
-	//! or NULL if the star is not part of a constellation
+	//! or Q_NULLPTR if the star is not part of a constellation
 	const Constellation* isStarIn(const StelObject*) const;
 
 	//! Get the brightest star in a Constellation.
@@ -164,9 +164,9 @@ private:
 	Vec3d XYname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
-	//! Month of start visibility of constellation (seasonal rules)
+	//! Month [1..12] of start visibility of constellation (seasonal rules)
 	int beginSeason;
-	//! Month of end visibility of constellation (seasonal rules)
+	//! Month [1..12] of end visibility of constellation (seasonal rules)
 	int endSeason;
 	//! List of stars forming the segments
 	StelObjectP* constellation;

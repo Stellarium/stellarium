@@ -64,11 +64,11 @@
 #include <QColorDialog>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
-	, addRemoveLandscapesDialog(NULL)
-	, atmosphereDialog(NULL)
-	, greatRedSpotDialog(NULL)
-	, configureDSOColorsDialog(NULL)
-	, configureOrbitColorsDialog(NULL)
+	, addRemoveLandscapesDialog(Q_NULLPTR)
+	, atmosphereDialog(Q_NULLPTR)
+	, greatRedSpotDialog(Q_NULLPTR)
+	, configureDSOColorsDialog(Q_NULLPTR)
+	, configureOrbitColorsDialog(Q_NULLPTR)
 {
 	ui = new Ui_viewDialogForm;	
 }
@@ -76,17 +76,17 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 ViewDialog::~ViewDialog()
 {
 	delete ui;
-	ui=NULL;
+	ui=Q_NULLPTR;
 	delete addRemoveLandscapesDialog;
-	addRemoveLandscapesDialog = NULL;
+	addRemoveLandscapesDialog = Q_NULLPTR;
 	delete atmosphereDialog;
-	atmosphereDialog = NULL;
+	atmosphereDialog = Q_NULLPTR;
 	delete greatRedSpotDialog;
-	greatRedSpotDialog = NULL;
+	greatRedSpotDialog = Q_NULLPTR;
 	delete configureDSOColorsDialog;
-	configureDSOColorsDialog = NULL;
+	configureDSOColorsDialog = Q_NULLPTR;
 	delete configureOrbitColorsDialog;
-	configureOrbitColorsDialog = NULL;
+	configureOrbitColorsDialog = Q_NULLPTR;
 }
 
 void ViewDialog::retranslate()
@@ -466,7 +466,7 @@ void ViewDialog::askEclipticJ2000GridColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticJ2000GridColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticGridJ2000->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEclipticGridJ2000->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -481,7 +481,7 @@ void ViewDialog::askEclipticGridColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticGridColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticGridOfDate->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEclipticGridOfDate->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -496,7 +496,7 @@ void ViewDialog::askEquatorJ2000GridColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.equatorJ2000GridColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEquatorialJ2000Grid->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEquatorialJ2000Grid->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -511,7 +511,7 @@ void ViewDialog::askEquatorGridColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.equatorGridColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEquatorialGrid->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEquatorialGrid->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -526,7 +526,7 @@ void ViewDialog::askGalacticGridColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.galacticGridColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGalacticGrid->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGalacticGrid->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -541,7 +541,7 @@ void ViewDialog::askSupergalacticGridColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.supergalacticGridColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSupergalacticGrid->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorSupergalacticGrid->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -556,7 +556,7 @@ void ViewDialog::askAzimuthalGridColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.azimuthalGridColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorAzimuthalGrid->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorAzimuthalGrid->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -571,7 +571,7 @@ void ViewDialog::askEclipticLineJ2000Color()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticJ2000LineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticLineJ2000->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEclipticLineJ2000->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -586,7 +586,7 @@ void ViewDialog::askEclipticLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticLineOfDate->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEclipticLineOfDate->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -601,7 +601,7 @@ void ViewDialog::askEquatorLineJ2000Color()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.equatorJ2000LineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEquatorJ2000Line->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEquatorJ2000Line->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -616,7 +616,7 @@ void ViewDialog::askEquatorLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.equatorLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEquatorLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEquatorLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -631,7 +631,7 @@ void ViewDialog::askGalacticEquatorLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.galacticEquatorLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGalacticEquatorLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGalacticEquatorLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -646,7 +646,7 @@ void ViewDialog::askSupergalacticEquatorLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.supergalacticEquatorLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSupergalacticEquatorLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorSupergalacticEquatorLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -661,7 +661,7 @@ void ViewDialog::askHorizonLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.horizonLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorHorizonLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorHorizonLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -676,7 +676,7 @@ void ViewDialog::askLongitudeLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.longitudeLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorLongitudeLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorLongitudeLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -691,7 +691,7 @@ void ViewDialog::askColureLinesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.colureLinesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorColuresLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorColuresLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -706,7 +706,7 @@ void ViewDialog::askCircumpolarCirclesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.circumpolarCirclesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorCircumpolarCircles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorCircumpolarCircles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -721,7 +721,7 @@ void ViewDialog::askPrecessionCirclesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.precessionCirclesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorPrecessionCircles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorPrecessionCircles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -736,7 +736,7 @@ void ViewDialog::askPrimeVerticalLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.primeVerticalLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorPrimeVerticalLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorPrimeVerticalLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -751,7 +751,7 @@ void ViewDialog::askMeridianLineColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.meridianLineColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMeridianLine->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMeridianLine->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -766,7 +766,7 @@ void ViewDialog::askCelestialJ2000PolesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.celestialJ2000PolesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorCelestialJ2000Poles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorCelestialJ2000Poles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -781,7 +781,7 @@ void ViewDialog::askCelestialPolesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.celestialPolesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorCelestialPoles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorCelestialPoles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -796,7 +796,7 @@ void ViewDialog::askZenithNadirColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.zenithNadirColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorZenithNadir->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorZenithNadir->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -811,7 +811,7 @@ void ViewDialog::askEclipticJ2000PolesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticJ2000PolesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticJ2000Poles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEclipticJ2000Poles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -826,7 +826,7 @@ void ViewDialog::askEclipticPolesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticPolesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEclipticPoles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEclipticPoles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -841,7 +841,7 @@ void ViewDialog::askGalacticPolesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.galacticPolesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGalacticPoles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGalacticPoles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -856,7 +856,7 @@ void ViewDialog::askSupergalacticPolesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.supergalacticPolesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSupergalacticPoles->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorSupergalacticPoles->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -871,7 +871,7 @@ void ViewDialog::askEquinoxJ2000PointsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.equinoxJ2000PointsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEquinoxJ2000Points->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEquinoxJ2000Points->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -886,7 +886,7 @@ void ViewDialog::askEquinoxPointsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.equinoxPointsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorEquinoxPoints->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEquinoxPoints->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -901,7 +901,7 @@ void ViewDialog::askSolsticeJ2000PointsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.solsticeJ2000PointsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSolsticeJ2000Points->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorSolsticeJ2000Points->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -916,7 +916,7 @@ void ViewDialog::askSolsticePointsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.solsticePointsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorSolsticePoints->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorSolsticePoints->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -931,7 +931,7 @@ void ViewDialog::askCardinalPointsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("LandscapeMgr.cardinalsPointsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorCardinalPoints->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorCardinalPoints->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -946,7 +946,7 @@ void ViewDialog::askConstellationBoundariesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.boundariesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationBoundaries->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorConstellationBoundaries->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -961,7 +961,7 @@ void ViewDialog::askConstellationLabelsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.namesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationLabels->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorConstellationLabels->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -976,7 +976,7 @@ void ViewDialog::askConstellationLinesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("ConstellationMgr.linesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorConstellationLines->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorConstellationLines->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -991,7 +991,7 @@ void ViewDialog::askAsterismLabelsColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("AsterismMgr.namesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorAsterismLabels->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorAsterismLabels->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -1006,7 +1006,7 @@ void ViewDialog::askAsterismLinesColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("AsterismMgr.linesColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorAsterismLines->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorAsterismLines->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -1159,7 +1159,7 @@ void ViewDialog::setFlagCustomGrsSettings(bool b)
 	GETSTELMODULE(SolarSystem)->setFlagCustomGrsSettings(b);
 	ui->pushButtonGrsDetails->setEnabled(b);
 
-	if (!b && greatRedSpotDialog!=NULL)
+	if (!b && greatRedSpotDialog!=Q_NULLPTR)
 		greatRedSpotDialog->setVisible(false);
 }
 
@@ -1412,7 +1412,7 @@ void ViewDialog::landscapeChanged(QString id, QString name)
 
 void ViewDialog::showAddRemoveLandscapesDialog()
 {
-	if(addRemoveLandscapesDialog == NULL)
+	if(addRemoveLandscapesDialog == Q_NULLPTR)
 		addRemoveLandscapesDialog = new AddRemoveLandscapesDialog();
 
 	addRemoveLandscapesDialog->setVisible(true);
@@ -1420,7 +1420,7 @@ void ViewDialog::showAddRemoveLandscapesDialog()
 
 void ViewDialog::showAtmosphereDialog()
 {
-	if(atmosphereDialog == NULL)
+	if(atmosphereDialog == Q_NULLPTR)
 		atmosphereDialog = new AtmosphereDialog();
 
 	atmosphereDialog->setVisible(true);
@@ -1428,7 +1428,7 @@ void ViewDialog::showAtmosphereDialog()
 
 void ViewDialog::showGreatRedSpotDialog()
 {
-	if(greatRedSpotDialog == NULL)
+	if(greatRedSpotDialog == Q_NULLPTR)
 		greatRedSpotDialog = new GreatRedSpotDialog();
 
 	greatRedSpotDialog->setVisible(true);
@@ -1436,7 +1436,7 @@ void ViewDialog::showGreatRedSpotDialog()
 
 void ViewDialog::showConfigureDSOColorsDialog()
 {
-	if(configureDSOColorsDialog == NULL)
+	if(configureDSOColorsDialog == Q_NULLPTR)
 		configureDSOColorsDialog = new ConfigureDSOColorsDialog();
 
 	configureDSOColorsDialog->setVisible(true);
@@ -1444,7 +1444,7 @@ void ViewDialog::showConfigureDSOColorsDialog()
 
 void ViewDialog::showConfigureOrbitColorsDialog()
 {
-	if(configureOrbitColorsDialog == NULL)
+	if(configureOrbitColorsDialog == Q_NULLPTR)
 		configureOrbitColorsDialog = new ConfigureOrbitColorsDialog();
 
 	configureOrbitColorsDialog->setVisible(true);

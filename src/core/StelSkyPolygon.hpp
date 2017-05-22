@@ -36,7 +36,7 @@ public:
 	StelSkyPolygon() {initCtor();}
 
 	//! Constructor
-	StelSkyPolygon(const QString& url, StelSkyPolygon* parent=NULL);
+	StelSkyPolygon(const QString& url, StelSkyPolygon* parent=Q_NULLPTR);
 	//! Constructor
 	StelSkyPolygon(const QVariantMap& map, StelSkyPolygon* parent);
 

@@ -56,7 +56,7 @@ QString AstroCalcDialog::yAxis2Legend = "";
 
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog("AstroCalc",parent)
-	, currentTimeLine(NULL)
+	, currentTimeLine(Q_NULLPTR)
 	, delimiter(", ")
 	, acEndl("\n")
 {
@@ -79,7 +79,7 @@ AstroCalcDialog::~AstroCalcDialog()
 	{
 		currentTimeLine->stop();
 		delete currentTimeLine;
-		currentTimeLine = NULL;
+		currentTimeLine = Q_NULLPTR;
 	}
 	delete ui;
 }
@@ -2176,7 +2176,7 @@ bool AstroCalcDialog::findPrecise(QPair<double, double> *out, PlanetP object1, P
 	int sgn;
 	double dist, prevDist;
 
-	if (out==NULL)
+	if (out==Q_NULLPTR)
 		return false;
 
 	prevDist = findDistance(JD, object1, object2, opposition);
@@ -2337,7 +2337,7 @@ bool AstroCalcDialog::findPrecise(QPair<double, double> *out, PlanetP object1, N
 	int sgn;
 	double dist, prevDist;
 
-	if (out==NULL)
+	if (out==Q_NULLPTR)
 		return false;
 
 	prevDist = findDistance(JD, object1, object2);
@@ -2492,7 +2492,7 @@ bool AstroCalcDialog::findPrecise(QPair<double, double> *out, PlanetP object1, S
 	int sgn;
 	double dist, prevDist;
 
-	if (out==NULL)
+	if (out==Q_NULLPTR)
 		return false;
 
 	prevDist = findDistance(JD, object1, object2);

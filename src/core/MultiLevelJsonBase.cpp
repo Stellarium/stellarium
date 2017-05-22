@@ -40,11 +40,11 @@
 // #include <QNetworkDiskCache>
 
 // Init statics
-QNetworkAccessManager* MultiLevelJsonBase::networkAccessManager = NULL;
+QNetworkAccessManager* MultiLevelJsonBase::networkAccessManager = Q_NULLPTR;
 
 QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 {
-	if (networkAccessManager==NULL)
+	if (networkAccessManager==Q_NULLPTR)
 	{
 		networkAccessManager = new QNetworkAccessManager(&StelApp::getInstance());
 // Cache on JSON files doesn't work, and I don't know why.
@@ -92,14 +92,14 @@ void JsonLoadThread::run()
 MultiLevelJsonBase::MultiLevelJsonBase(MultiLevelJsonBase* parent) : StelSkyLayer(parent)
 	, errorOccured(false)
 	, downloading(false)
-	, httpReply(NULL)
+	, httpReply(Q_NULLPTR)
 	, deletionDelay(2.)
-	, loadThread(NULL)
+	, loadThread(Q_NULLPTR)
 	, timeWhenDeletionScheduled(-1.) // Avoid tiles to be deleted just after constructed
 	, loadingState(false)
 	, lastPercent(0)
 {
-	if (parent!=NULL)
+	if (parent!=Q_NULLPTR)
 	{
 		deletionDelay = parent->deletionDelay;
 	}
@@ -109,13 +109,13 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 {
 	const MultiLevelJsonBase* parent = qobject_cast<MultiLevelJsonBase*>(QObject::parent());
 	contructorUrl = url;
-	if (!url.startsWith("http://") && (parent==NULL || !parent->getBaseUrl().startsWith("http://")))
+	if (!url.startsWith("http://") && (parent==Q_NULLPTR || !parent->getBaseUrl().startsWith("http://")))
 	{
 		// Assume a local file
 		QString fileName = StelFileMgr::findFile(url);
 		if (fileName.isEmpty())
 		{
-			if (parent==NULL)
+			if (parent==Q_NULLPTR)
 			{
 				qWarning() << "NULL parent";
 				errorOccured = true;
@@ -165,7 +165,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 			Q_ASSERT(parent->getBaseUrl().startsWith("http://"));
 			qurl.setUrl(parent->getBaseUrl()+url);
 		}
-		Q_ASSERT(httpReply==NULL);
+		Q_ASSERT(httpReply==Q_NULLPTR);
 		QNetworkRequest req(qurl);
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		httpReply = getNetworkAccessManager().get(req);
@@ -185,7 +185,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map)
 {
 	const MultiLevelJsonBase* parent = qobject_cast<MultiLevelJsonBase*>(QObject::parent());
-	if (parent!=NULL)
+	if (parent!=Q_NULLPTR)
 	{
 		baseUrl = parent->getBaseUrl();
 		contructorUrl = parent->contructorUrl + "/?";
@@ -215,7 +215,7 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 		// It should be fixed with Qt 4.5.1
 		// It causes a nasty memory leak, but prevents an even more nasty
 		//httpReply->deleteLater();
-		httpReply = NULL;
+		httpReply = Q_NULLPTR;
 	}
 	if (loadThread && loadThread->isRunning())
 	{
@@ -297,7 +297,7 @@ void MultiLevelJsonBase::downloadFinished()
 			qWarning() << "WARNING : Problem while downloading JSON description for " << httpReply->request().url().path() << ": "<< httpReply->errorString();
 		errorOccured = true;
 		httpReply->deleteLater();
-		httpReply=NULL;
+		httpReply=Q_NULLPTR;
 		downloading=false;
 		timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
 		return;
@@ -309,7 +309,7 @@ void MultiLevelJsonBase::downloadFinished()
 		qWarning() << "WARNING : empty JSON description for " << httpReply->request().url().path();
 		errorOccured = true;
 		httpReply->deleteLater();
-		httpReply=NULL;
+		httpReply=Q_NULLPTR;
 		downloading=false;
 		return;
 	}
@@ -317,9 +317,9 @@ void MultiLevelJsonBase::downloadFinished()
 	const bool qZcompressed = httpReply->request().url().path().endsWith(".qZ");
 	const bool gzCompressed = httpReply->request().url().path().endsWith(".gz");
 	httpReply->deleteLater();
-	httpReply=NULL;
+	httpReply=Q_NULLPTR;
 
-	Q_ASSERT(loadThread==NULL);
+	Q_ASSERT(loadThread==Q_NULLPTR);
 	loadThread = new JsonLoadThread(this, content, qZcompressed, gzCompressed);
 	connect(loadThread, SIGNAL(finished()), this, SLOT(jsonLoadFinished()));
 	loadThread->start(QThread::LowestPriority);
@@ -330,7 +330,7 @@ void MultiLevelJsonBase::jsonLoadFinished()
 {
 	loadThread->wait();
 	delete loadThread;
-	loadThread = NULL;
+	loadThread = Q_NULLPTR;
 	downloading = false;
 	if (errorOccured)
 		return;

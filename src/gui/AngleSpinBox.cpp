@@ -248,7 +248,7 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 	QRegExp badRx("[^hdms0-9 \\x00b0'\"\\.]", Qt::CaseInsensitive);
 
 	QValidator::State dummy;
-	if (state == NULL)
+	if (state == Q_NULLPTR)
 	{
 		state = &dummy;
 	}

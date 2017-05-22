@@ -29,7 +29,7 @@ class StelProgressController : public QObject
 	Q_OBJECT
 	
 public:
-	StelProgressController(QObject* parent = NULL) : QObject(parent), format("%p%"), min(0), max(100), value(0) {;}
+	StelProgressController(QObject* parent = Q_NULLPTR) : QObject(parent), format("%p%"), min(0), max(100), value(0) {;}
 	
 	//! This property holds the string used to generate the current text.
 	//! %p - is replaced by the percentage completed.

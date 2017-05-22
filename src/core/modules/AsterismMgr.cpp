@@ -216,7 +216,7 @@ void AsterismMgr::loadLines(const QString &fileName)
 		delete(*iter);
 
 	asterisms.clear();
-	Asterism *aster = NULL;
+	Asterism *aster = Q_NULLPTR;
 
 	// read the file of line patterns, adding a record per non-comment line
 	int currentLineNumber = 0;	// line in file
@@ -307,7 +307,7 @@ Asterism *AsterismMgr::isStarIn(const StelObject* s) const
 			return (*iter);
 		}
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
@@ -318,7 +318,7 @@ Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 		if ((*iter)->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
 			return (*iter);
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 
@@ -382,7 +382,7 @@ void AsterismMgr::loadNames(const QString& namesFile)
 			shortName = recRx.capturedTexts().at(1);
 			aster = findFromAbbreviation(shortName);
 			// If the asterism exists, set the English name
-			if (aster != NULL)
+			if (aster != Q_NULLPTR)
 			{
 				ctxt = recRx.capturedTexts().at(2);
 				if (ctxRx.exactMatch(ctxt))
@@ -475,7 +475,7 @@ StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 		QString objwcap = (*iter)->nameI18.toUpper();
 		if (objwcap==objw) return *iter;
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP AsterismMgr::searchByName(const QString& name) const
@@ -490,7 +490,7 @@ StelObjectP AsterismMgr::searchByName(const QString& name) const
 		objwcap = (*iter)->abbreviation.toUpper();
 		if (objwcap==objw) return *iter;
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList AsterismMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
@@ -548,7 +548,7 @@ StelObjectP AsterismMgr::searchByID(const QString &id) const
 	{
 		if ((*iter)->getID() == id) return *iter;
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QString AsterismMgr::getStelObjectType() const

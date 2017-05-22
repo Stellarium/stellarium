@@ -49,14 +49,14 @@ Constellation::Constellation()
 	: numberOfSegments(0)
 	, beginSeason(0)
 	, endSeason(0)
-	, constellation(NULL)
+	, constellation(Q_NULLPTR)
 {
 }
 
 Constellation::~Constellation()
 {
 	delete[] constellation;
-	constellation = NULL;
+	constellation = Q_NULLPTR;
 }
 
 bool Constellation::read(const QString& record, StarMgr *starMgr)
@@ -200,7 +200,7 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 			return this;
 		}
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 void Constellation::update(int deltaTime)

@@ -131,12 +131,12 @@ public:
 	//! Return a list containing the stars located inside the limFov circle around position v
 	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching Stars object's pointer if exists or NULL
+	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensistive star common name or HP
 	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching star if exists or NULL
+	//! Return the matching star if exists or Q_NULLPTR
 	//! @param name The case in-sensistive standard program planet name
 	virtual StelObjectP searchByName(const QString& name) const;
 

@@ -177,12 +177,12 @@ void noDelete(StelSkyLayer*) {;}
 void StelSkyLayerMgr::loadingStateChanged(bool b)
 {
 	StelSkyLayer* tile = qobject_cast<StelSkyLayer*>(QObject::sender());
-	Q_ASSERT(tile!=0);
+	Q_ASSERT(tile!=Q_NULLPTR);
 	SkyLayerElem* elem = skyLayerElemForLayer(tile);
-	Q_ASSERT(elem!=NULL);
+	Q_ASSERT(elem!=Q_NULLPTR);
 	if (b)
 	{
-		Q_ASSERT(elem->progressBar==NULL);
+		Q_ASSERT(elem->progressBar==Q_NULLPTR);
 		elem->progressBar = StelApp::getInstance().addProgressBar();
 		QString serverStr = elem->layer->getShortServerCredits();
 		if (!serverStr.isEmpty())
@@ -192,9 +192,9 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 	}
 	else
 	{
-		Q_ASSERT(elem->progressBar!=NULL);
+		Q_ASSERT(elem->progressBar!=Q_NULLPTR);
 		StelApp::getInstance().removeProgressBar(elem->progressBar);
-		elem->progressBar = NULL;
+		elem->progressBar = Q_NULLPTR;
 	}
 }
 
@@ -204,8 +204,8 @@ void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 	StelSkyLayer* tile = qobject_cast<StelSkyLayer*>(QObject::sender());
 	Q_ASSERT(tile!=0);
 	SkyLayerElem* elem = skyLayerElemForLayer(tile);
-	Q_ASSERT(elem!=NULL);
-	Q_ASSERT(elem->progressBar!=NULL);
+	Q_ASSERT(elem!=Q_NULLPTR);
+	Q_ASSERT(elem->progressBar!=Q_NULLPTR);
 	elem->progressBar->setValue(percentage);
 }
 
@@ -218,7 +218,7 @@ StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelS
 			return e;
 		}
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QString StelSkyLayerMgr::keyForLayer(const StelSkyLayer* t)
@@ -226,14 +226,14 @@ QString StelSkyLayerMgr::keyForLayer(const StelSkyLayer* t)
 	return allSkyLayers.key(skyLayerElemForLayer(t));
 }
 
-StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer(t), progressBar(NULL), show(ashow)
+StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer(t), progressBar(Q_NULLPTR), show(ashow)
 {;}
 
 StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
 {
 	if (progressBar)
 		StelApp::getInstance().removeProgressBar(progressBar);
-	progressBar = NULL;
+	progressBar = Q_NULLPTR;
 }
 
 bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
@@ -383,7 +383,7 @@ void StelSkyLayerMgr::showLayer(const QString& id, bool b)
 {
 	if (allSkyLayers.contains(id))
 	{
-		if (allSkyLayers[id]!=NULL)
+		if (allSkyLayers[id]!=Q_NULLPTR)
 			allSkyLayers[id]->show = b;
 	}
 }
@@ -392,7 +392,7 @@ bool StelSkyLayerMgr::getShowLayer(const QString& id) const
 {
 	if (allSkyLayers.contains(id))
 	{
-		if (allSkyLayers[id]!=NULL)
+		if (allSkyLayers[id]!=Q_NULLPTR)
 			return allSkyLayers[id]->show;
 	}
 	return false;

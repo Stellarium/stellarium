@@ -47,7 +47,7 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 DateTimeDialog::~DateTimeDialog()
 {
 	delete ui;
-	ui=NULL;
+	ui=Q_NULLPTR;
 }
 
 void DateTimeDialog::createDialogContent()
