@@ -72,7 +72,7 @@
 #include <clocale>
 
 // Initialize static variables
-StelMainView* StelMainView::singleton = NULL;
+StelMainView* StelMainView::singleton = Q_NULLPTR;
 
 #ifdef USE_OLD_QGLWIDGET
 class StelGLWidget : public QGLWidget
@@ -168,9 +168,9 @@ private:
 class NightModeGraphicsEffect : public QGraphicsEffect
 {
 public:
-	NightModeGraphicsEffect(StelMainView* parent = NULL)
+	NightModeGraphicsEffect(StelMainView* parent = Q_NULLPTR)
 		: QGraphicsEffect(parent),
-		  parent(parent), fbo(NULL)
+		  parent(parent), fbo(Q_NULLPTR)
 	{
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 
@@ -223,7 +223,7 @@ protected:
 		if (fbo && fbo->size() != size)
 		{
 			delete fbo;
-			fbo = NULL;
+			fbo = Q_NULLPTR;
 		}
 		if (!fbo)
 		{
@@ -308,7 +308,7 @@ private:
 class StelRootItem : public QGraphicsObject
 {
 public:
-	StelRootItem(StelMainView* mainView, QGraphicsItem* parent = NULL)
+	StelRootItem(StelMainView* mainView, QGraphicsItem* parent = Q_NULLPTR)
 		: QGraphicsObject(parent), mainView(mainView)
 	{
 		setFlag(QGraphicsItem::ItemClipsToShape);
@@ -523,7 +523,7 @@ private:
 class StelGuiItem : public QGraphicsWidget
 {
 public:
-	StelGuiItem(QGraphicsItem* parent = NULL)
+	StelGuiItem(QGraphicsItem* parent = Q_NULLPTR)
 		: QGraphicsWidget(parent)
 	{
 		StelApp::getInstance().getGui()->init(this);
@@ -543,9 +543,9 @@ private:
 
 StelMainView::StelMainView(QSettings* settings)
 	: QGraphicsView(),
-	  guiItem(NULL),
-	  gui(NULL),
-	  stelApp(NULL),
+	  guiItem(Q_NULLPTR),
+	  gui(Q_NULLPTR),
+	  stelApp(Q_NULLPTR),
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
@@ -826,7 +826,7 @@ void StelMainView::init()
 
 	// Set the global stylesheet, this is only useful for the tooltips.
 	StelGui* gui = dynamic_cast<StelGui*>(stelApp->getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 
@@ -1217,7 +1217,7 @@ void StelMainView::deinit()
 	glContextMakeCurrent();
 	deinitGL();
 	delete stelApp;
-	stelApp = NULL;
+	stelApp = Q_NULLPTR;
 }
 
 // Update the translated title
@@ -1343,7 +1343,7 @@ void StelMainView::deinitGL()
 
 	stelApp->deinit();
 	delete gui;
-	gui = NULL;
+	gui = Q_NULLPTR;
 }
 
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)

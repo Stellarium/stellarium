@@ -58,10 +58,10 @@ ZodiacalLight::ZodiacalLight()
 ZodiacalLight::~ZodiacalLight()
 {
 	delete fader;
-	fader = NULL;
+	fader = Q_NULLPTR;
 	
 	delete vertexArray;
-	vertexArray = NULL;
+	vertexArray = Q_NULLPTR;
 }
 
 void ZodiacalLight::init()

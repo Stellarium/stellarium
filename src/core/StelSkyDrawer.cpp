@@ -67,7 +67,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	customPlanetMagLimit(0.0),
 	bortleScaleIndex(3),
 	inScale(1.f),
-	starShaderProgram(NULL),
+	starShaderProgram(Q_NULLPTR),
 	starShaderVars(StarShaderVars()),
 	nbPointSources(0),
 	maxPointSources(1000),
@@ -143,12 +143,12 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 StelSkyDrawer::~StelSkyDrawer()
 {
 	delete[] vertexArray;
-	vertexArray = NULL;
+	vertexArray = Q_NULLPTR;
 	delete[] textureCoordArray;
-	textureCoordArray = NULL;
+	textureCoordArray = Q_NULLPTR;
 	
 	delete starShaderProgram;
-	starShaderProgram = NULL;
+	starShaderProgram = Q_NULLPTR;
 }
 
 // Init parameters from config file

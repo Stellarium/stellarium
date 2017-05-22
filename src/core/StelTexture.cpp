@@ -34,7 +34,7 @@
 #include <QFuture>
 #include <QtConcurrent>
 
-StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0),
+StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(Q_NULLPTR), loader(Q_NULLPTR), errorOccured(false), alphaChannel(false), id(0),
 	width(-1), height(-1), glSize(0)
 {
 }
@@ -72,11 +72,11 @@ StelTexture::~StelTexture()
 		networkReply->abort();
 		//networkReply->deleteLater();
 		delete networkReply;
-		networkReply = NULL;
+		networkReply = Q_NULLPTR;
 	}
-	if (loader != NULL) {
+	if (loader != Q_NULLPTR) {
 		delete loader;
-		loader = NULL;
+		loader = Q_NULLPTR;
 	}
 }
 
@@ -174,7 +174,7 @@ bool StelTexture::bind(int slot)
 		// Finally load the data in the main thread.
 		glLoad(loader->result());
 		delete loader;
-		loader = NULL;
+		loader = Q_NULLPTR;
 		if (id != 0)
 		{
 			// The texture is already fully loaded, just bind and return true;
@@ -202,7 +202,7 @@ void StelTexture::waitForLoaded()
 template <typename T, typename Param, typename Arg>
 void StelTexture::startAsyncLoader(T (*functionPointer)(Param), const Arg &arg)
 {
-	Q_ASSERT(loader==NULL);
+	Q_ASSERT(loader==Q_NULLPTR);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,4,0))
 	//own thread pool only supported with Qt 5.4+
 	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, arg));
@@ -216,7 +216,7 @@ void StelTexture::startAsyncLoader(T (*functionPointer)(Param), const Arg &arg)
 bool StelTexture::load()
 {
 	// If the file is remote, start a network connection.
-	if (loader == NULL && networkReply == NULL && fullPath.startsWith("http://")) {
+	if (loader == Q_NULLPTR && networkReply == Q_NULLPTR && fullPath.startsWith("http://")) {
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
@@ -226,10 +226,10 @@ bool StelTexture::load()
 		return false;
 	}
 	// The network connection is still running.
-	if (networkReply != NULL)
+	if (networkReply != Q_NULLPTR)
 		return false;
 	// Not a remote file, start a loader from local file.
-	if (loader == NULL)
+	if (loader == Q_NULLPTR)
 	{
 		startAsyncLoader(loadFromPath,fullPath);
 		return false;
@@ -240,7 +240,7 @@ bool StelTexture::load()
 
 void StelTexture::onNetworkReply()
 {
-	Q_ASSERT(loader == NULL);
+	Q_ASSERT(loader == Q_NULLPTR);
 	if (networkReply->error() != QNetworkReply::NoError)
 	{
 		reportError(networkReply->errorString());
@@ -254,7 +254,7 @@ void StelTexture::onNetworkReply()
 			startAsyncLoader(loadFromData, data);
 	}
 	networkReply->deleteLater();
-	networkReply = NULL;
+	networkReply = Q_NULLPTR;
 }
 
 /*************************************************************************

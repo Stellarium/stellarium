@@ -45,9 +45,9 @@
 LocationDialog::LocationDialog(QObject* parent)
 	: StelDialog("Location", parent)
 	, isEditingNew(false)
-	, allModel(NULL)
-	, pickedModel(NULL)
-	, proxyModel(NULL)
+	, allModel(Q_NULLPTR)
+	, pickedModel(Q_NULLPTR)
+	, proxyModel(Q_NULLPTR)
 {
 	ui = new Ui_locationDialogForm;
 }

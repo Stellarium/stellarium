@@ -248,7 +248,7 @@ int main(int argc, char **argv)
 			qFatal("Could not create configuration file %s.", qPrintable(configName));
 	}
 
-	QSettings* confSettings = NULL;
+	QSettings* confSettings = Q_NULLPTR;
 	if (StelFileMgr::exists(configFileFullPath))
 	{
 		// Implement "restore default settings" feature.
@@ -259,7 +259,7 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			confSettings = new QSettings(configFileFullPath, StelIniFormat, NULL);
+			confSettings = new QSettings(configFileFullPath, StelIniFormat, Q_NULLPTR);
 			restoreDefaultConfigFile = confSettings->value("main/restore_defaults", false).toBool();
 		}
 		if (!restoreDefaultConfigFile)

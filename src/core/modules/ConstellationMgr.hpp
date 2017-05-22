@@ -127,11 +127,11 @@ public:
 	// Methods defined in StelObjectManager class
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching constellation object's pointer if exists or NULL
+	//! Return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensistive constellation name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching constellation if exists or NULL
+	//! Return the matching constellation if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const QString& name) const;
 
@@ -357,7 +357,7 @@ private:
 	//! Define which constellation is selected from a star number.
 	void setSelected(const StelObject* s);
 	//! Remove all selected constellations.
-	void deselect() { setSelected(NULL); }
+	void deselect() { setSelected(Q_NULLPTR); }
 	//! Get the first selected constellation.
 	//! NOTE: this function should return a list of all, or may be deleted. Please
 	//! do not use until it exhibits the proper behaviour.

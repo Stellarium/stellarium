@@ -163,7 +163,7 @@ StelObjectP StelObjectMgr::searchByID(const QString &type, const QString &id) co
 		return (*it)->searchByID(id);;
 	}
 	qWarning()<<"StelObject type"<<type<<"unknown";
-	return NULL;
+	return Q_NULLPTR;
 }
 
 //! Find and select an object from its translated name
@@ -360,7 +360,7 @@ QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigne
 QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
 {
 	// search for module
-	StelObjectModule* module = NULL;
+	StelObjectModule* module = Q_NULLPTR;
 	QStringList result, list;
 	QString objModule, objType;
 	bool subSet = false;
@@ -381,7 +381,7 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 			break;
 		}
 	}
-	if (module == NULL)
+	if (module == Q_NULLPTR)
 	{
 		qWarning() << "Can't find module with id " << objModule;
 		return QStringList();

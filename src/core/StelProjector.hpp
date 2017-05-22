@@ -314,7 +314,7 @@ protected:
 	//! Initialize the bounding cap.
 	virtual void computeBoundingCap();
 
-	ModelViewTranformP modelViewTransform;	// Operator to apply (if not NULL) before the modelview projection step
+	ModelViewTranformP modelViewTransform;	// Operator to apply (if not Q_NULLPTR) before the modelview projection step
 
 	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk

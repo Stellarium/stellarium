@@ -36,7 +36,7 @@ float CustomObject::markerSize = 1.f;
 CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
 	: initialized(false)
 	, XYZ(coordinates)
-	, markerTexture(NULL)
+	, markerTexture(Q_NULLPTR)
 	, designation(codesignation)
 	, isMarker(isVisible)
 {
@@ -125,7 +125,7 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 	if (isMarker)
 	{
 		markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = markerSize + size/1.6f;
 
 		painter->drawSprite2dMode(XYZ, markerSize);

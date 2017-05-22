@@ -94,7 +94,7 @@ void LibGPSLookupHelper::query()
 		}
 
 		struct gps_data_t* newdata;
-		if ((newdata = gps_rec->read()) == NULL)
+		if ((newdata = gps_rec->read()) == Q_NULLPTR)
 		{
 			emit queryError("GPSD query: Read error.");
 			return;
@@ -161,7 +161,7 @@ void LibGPSLookupHelper::query()
 #endif
 
 NMEALookupHelper::NMEALookupHelper(QObject *parent)
-	: GPSLookupHelper(parent), serial(NULL), nmea(NULL)
+	: GPSLookupHelper(parent), serial(Q_NULLPTR), nmea(Q_NULLPTR)
 {
 	//use RAII
 	// Getting a list of ports may enable auto-detection!
@@ -296,7 +296,7 @@ void NMEALookupHelper::nmeaTimeout()
 #endif
 
 StelLocationMgr::StelLocationMgr()
-	: nmeaHelper(NULL), libGpsHelper(NULL)
+	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
 	// initialize the static QMap first if necessary.
 	if (locationDBToIANAtranslations.count()==0)
@@ -359,7 +359,7 @@ StelLocationMgr::~StelLocationMgr()
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
-	: nmeaHelper(NULL), libGpsHelper(NULL)
+	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
 	setLocations(locations);
 
