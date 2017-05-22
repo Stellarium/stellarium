@@ -172,7 +172,7 @@
             <property name="title">
              <string>Language settings</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_4">
+            <layout class="QGridLayout" name="gridLayoutLanguageSettings">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -276,7 +276,7 @@
             <property name="title">
              <string>Ephemeris settings (experimental)</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_ephemeris">
+            <layout class="QGridLayout" name="gridLayoutEphemeris">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -520,7 +520,7 @@
             <property name="title">
              <string>Selected object information</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_2">
+            <layout class="QGridLayout" name="gridLayoutSelectedObjInfo">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -818,7 +818,7 @@
             <property name="title">
              <string>Additional settings</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout">
+            <layout class="QGridLayout" name="gridLayoutAdditionalSettings">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -878,7 +878,7 @@
             <property name="title">
              <string>Control</string>
             </property>
-            <layout class="QGridLayout" name="gridLayoutStartup">
+            <layout class="QGridLayout" name="gridLayoutNavStartup">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -978,7 +978,7 @@
             <property name="title">
              <string>Startup date and time</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_3">
+            <layout class="QGridLayout" name="gridLayoutStartup">
              <property name="leftMargin">
               <number>0</number>
              </property>
