@@ -28,7 +28,7 @@
 #include "StelModuleMgr.hpp"
 
 RemoteSyncDialog::RemoteSyncDialog()
-	: rs(NULL)
+	: rs(Q_NULLPTR)
 {
 	ui = new Ui_remoteSyncDialog();
 	dialogName="RemoteSync";
@@ -117,8 +117,8 @@ void RemoteSyncDialog::updateState()
 	RemoteSync::SyncState state = rs->getState();
 
 	//disconnect the click signals from whatever is connected
-	disconnect(ui->serverButton, SIGNAL(clicked(bool)), NULL, NULL);
-	disconnect(ui->clientButton, SIGNAL(clicked(bool)), NULL, NULL);
+	disconnect(ui->serverButton, SIGNAL(clicked(bool)), Q_NULLPTR, Q_NULLPTR);
+	disconnect(ui->clientButton, SIGNAL(clicked(bool)), Q_NULLPTR, Q_NULLPTR);
 	ui->statusLabel->setStyleSheet("");
 
 	if(state == RemoteSync::IDLE)
@@ -209,7 +209,7 @@ void RemoteSyncDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

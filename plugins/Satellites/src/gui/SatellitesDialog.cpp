@@ -64,7 +64,7 @@ SatellitesDialog::~SatellitesDialog()
 	{
 		updateTimer->stop();
 		delete updateTimer;
-		updateTimer = NULL;
+		updateTimer = Q_NULLPTR;
 	}
 
 	if (importWindow)
@@ -538,7 +538,7 @@ void SatellitesDialog::saveEditedSource()
 
 	// Changes to item data (text or check state) are connected to
 	// saveSourceList(), so there's no need to call it explicitly.
-	if (ui->sourceList->currentItem()!=NULL)
+	if (ui->sourceList->currentItem()!=Q_NULLPTR)
 		ui->sourceList->currentItem()->setText(u);
 	else if (ui->sourceList->findItems(u, Qt::MatchExactly).count() <= 0)
 	{
@@ -572,7 +572,7 @@ void SatellitesDialog::deleteSourceRow(void)
 
 void SatellitesDialog::addSourceRow(void)
 {
-	ui->sourceList->setCurrentItem(NULL);
+	ui->sourceList->setCurrentItem(Q_NULLPTR);
 	ui->sourceEdit->setText(q_("[new source]"));
 	ui->sourceEdit->selectAll();
 	ui->sourceEdit->setFocus();

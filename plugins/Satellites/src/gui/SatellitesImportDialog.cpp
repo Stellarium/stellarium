@@ -42,7 +42,7 @@ SatellitesImportDialog::SatellitesImportDialog()
 	, numberDownloadsComplete(0)
 	, downloadMgr(0)
 	, progressBar(0)
-	, filterProxyModel(NULL)
+	, filterProxyModel(Q_NULLPTR)
 {
 	ui = new Ui_satellitesImportDialog;
 	newSatellitesModel = new QStandardItemModel(this);

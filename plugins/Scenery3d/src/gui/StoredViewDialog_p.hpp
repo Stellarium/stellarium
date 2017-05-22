@@ -32,7 +32,7 @@ class CustomTextEdit : public QTextEdit
 {
 	Q_OBJECT
 public:
-	CustomTextEdit(QWidget* parent = NULL) : QTextEdit(parent), textChanged(false), trackChange(false)
+	CustomTextEdit(QWidget* parent = Q_NULLPTR) : QTextEdit(parent), textChanged(false), trackChange(false)
 	{
 		connect(this,&QTextEdit::textChanged,this,&CustomTextEdit::handleTextChange);
 	}
@@ -73,7 +73,7 @@ class StoredViewModel : public QAbstractListModel
 {
 	Q_OBJECT
 public:
-	StoredViewModel(QObject* parent = NULL) : QAbstractListModel(parent)
+	StoredViewModel(QObject* parent = Q_NULLPTR) : QAbstractListModel(parent)
 	{ }
 
 	int rowCount(const QModelIndex &parent) const

@@ -67,8 +67,8 @@ SolarSystemEditor::SolarSystemEditor()
 	setObjectName("SolarSystemEditor");
 
 	isInitialized = false;
-	mainWindow = NULL;
-	solarSystemConfigurationFile = NULL;
+	mainWindow = Q_NULLPTR;
+	solarSystemConfigurationFile = Q_NULLPTR;
 	solarSystemManager = GETSTELMODULE(SolarSystem);
 
 	//I really hope that the file manager is instantiated before this
@@ -78,7 +78,7 @@ SolarSystemEditor::SolarSystemEditor()
 
 SolarSystemEditor::~SolarSystemEditor()
 {
-	if (solarSystemConfigurationFile != NULL)
+	if (solarSystemConfigurationFile != Q_NULLPTR)
 	{
 		delete solarSystemConfigurationFile;
 	}
@@ -1263,7 +1263,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	}
 	solarSystemSettings->sync();
 	delete solarSystemSettings;
-	solarSystemSettings = NULL;
+	solarSystemSettings = Q_NULLPTR;
 
 	//Write to file
 	//TODO: The usual validation

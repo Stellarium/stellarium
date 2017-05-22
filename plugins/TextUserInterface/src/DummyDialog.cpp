@@ -68,8 +68,8 @@ class CustomProxy : public QGraphicsProxyWidget
 };
 
 DummyDialog::DummyDialog(StelModule* eventHandler)
-	: proxy(NULL)
-	, dialog(NULL)
+	: proxy(Q_NULLPTR)
+	, dialog(Q_NULLPTR)
 	, evtHandler(eventHandler)
 {
 }
@@ -96,11 +96,11 @@ void DummyDialog::setVisible(bool v)
 			proxy->setFocus();
 			return;
 		}
-		dialog = new QDialog(NULL);
+		dialog = new QDialog(Q_NULLPTR);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 		
-		proxy = new CustomProxy(NULL, Qt::Tool);
+		proxy = new CustomProxy(Q_NULLPTR, Qt::Tool);
 		proxy->setWidget(dialog);
 		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);

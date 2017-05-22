@@ -88,7 +88,7 @@ Exoplanets::Exoplanets()
 	, EPCountAll(0)
 	, EPCountPH(0)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
+	, downloadMgr(Q_NULLPTR)
 	, updateTimer(0)
 	, messageTimer(0)
 	, updatesEnabled(false)
@@ -96,8 +96,8 @@ Exoplanets::Exoplanets()
 	, enableAtStartup(false)
 	, flagShowExoplanets(false)
 	, flagShowExoplanetsButton(false)
-	, toolbarButton(NULL)
-	, progressBar(NULL)
+	, toolbarButton(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
 {
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
@@ -289,7 +289,7 @@ QList<StelObjectP> Exoplanets::searchAround(const Vec3d& av, double limitFov, co
 StelObjectP Exoplanets::searchByName(const QString& englishName) const
 {
 	if (!flagShowExoplanets)
-		return NULL;
+		return Q_NULLPTR;
 
 	foreach(const ExoplanetP& eps, ep)
 	{
@@ -318,7 +318,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Exoplanets::searchByID(const QString &id) const
@@ -328,13 +328,13 @@ StelObjectP Exoplanets::searchByID(const QString &id) const
 		if(eps->getID() == id)
 			return qSharedPointerCast<StelObject>(eps);
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!flagShowExoplanets)
-		return NULL;
+		return Q_NULLPTR;
 
 	foreach(const ExoplanetP& eps, ep)
 	{
@@ -352,7 +352,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
@@ -748,7 +748,7 @@ void Exoplanets::updateJSON(void)
 	updateState = Exoplanets::Updating;
 	emit(updateStateChanged(updateState));
 
-	if (progressBar==NULL)
+	if (progressBar==Q_NULLPTR)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
@@ -799,7 +799,7 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 	{
 		progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 
 	readJsonFile();
@@ -835,13 +835,13 @@ void Exoplanets::upgradeConfigIni(void)
 void Exoplanets::setFlagShowExoplanetsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 	{
 		if (b==true)
 		{
-			if (toolbarButton==NULL) {
+			if (toolbarButton==Q_NULLPTR) {
 				// Create the exoplanets button
-				toolbarButton = new StelButton(NULL,
+				toolbarButton = new StelButton(Q_NULLPTR,
 							       QPixmap(":/Exoplanets/btExoplanets-on.png"),
 							       QPixmap(":/Exoplanets/btExoplanets-off.png"),
 							       QPixmap(":/graphicGui/glow32x32.png"),

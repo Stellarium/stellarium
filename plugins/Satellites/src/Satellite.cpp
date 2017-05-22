@@ -84,7 +84,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	, rangeRate(0.)
 	, hintColor(0.0,0.0,0.0)
 	, lastUpdated()
-	, pSatWrapper(NULL)
+	, pSatWrapper(Q_NULLPTR)
 	, visibility(0)
 	, phaseAngle(0.)
 	, lastEpochCompForOrbit(0.)
@@ -172,10 +172,10 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 Satellite::~Satellite()
 {
-	if (pSatWrapper != NULL)
+	if (pSatWrapper != Q_NULLPTR)
 	{
 		delete pSatWrapper;
-		pSatWrapper = NULL;
+		pSatWrapper = Q_NULLPTR;
 	}
 }
 
@@ -731,7 +731,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	if (pSatWrapper)
 	{
 		gSatWrapper *old = pSatWrapper;
-		pSatWrapper = NULL;
+		pSatWrapper = Q_NULLPTR;
 		delete old;
 	}
 

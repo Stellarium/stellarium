@@ -588,7 +588,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	QString fullName;
 	QString multiplerString;
-	if (lens != NULL)
+	if (lens != Q_NULLPTR)
 	{
 		QString name = lens->getName();
 		if (name.isEmpty())

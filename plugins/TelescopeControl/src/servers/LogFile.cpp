@@ -39,4 +39,4 @@ QTextStream &operator<<(QTextStream &o, const Now &now)
 	return o;
 }
 
-QTextStream * log_file = NULL;
+QTextStream * log_file = Q_NULLPTR;

@@ -12,7 +12,7 @@ HttpConnectionHandlerPool::HttpConnectionHandlerPool(const HttpConnectionHandler
 {
     this->settings=settings;
     this->requestHandler=requestHandler;
-    this->sslConfiguration=NULL;
+    this->sslConfiguration=Q_NULLPTR;
     loadSslConfig();
     cleanupTimer.start(settings.cleanupInterval);
     connect(&cleanupTimer, SIGNAL(timeout()), SLOT(cleanup()));

@@ -90,7 +90,7 @@ private:
 
 		//the parent node in case of a non-root node
 		QuadTreeNode* parent;
-		//either NULL in case of a leaf, or array of size 4
+		//either Q_NULLPTR in case of a leaf, or array of size 4
 		QuadTreeNode* children;
 
 		//! The level of this node, starting with 0 for the root node

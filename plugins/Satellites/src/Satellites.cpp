@@ -74,14 +74,14 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 }
 
 Satellites::Satellites()
-	: satelliteListModel(NULL)
-	, toolbarButton(NULL)
-	, earth(NULL)
+	: satelliteListModel(Q_NULLPTR)
+	, toolbarButton(Q_NULLPTR)
+	, earth(Q_NULLPTR)
 	, defaultHintColor(0.0f, 0.4f, 0.6f)
 	, defaultOrbitColor(0.0f, 0.3f, 0.6f)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
-	, progressBar(NULL)
+	, downloadMgr(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
 	, numberDownloadsComplete(0)
 	, updateTimer(0)
 	, updatesEnabled(false)
@@ -147,9 +147,9 @@ void Satellites::init()
 
 		// Gui toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/satellites/bt_satellites_on.png"),
 						       QPixmap(":/satellites/bt_satellites_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -286,11 +286,11 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!hintFader)
-		return NULL;
+		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
-		return NULL;
+		return Q_NULLPTR;
 	
 	QString objw = nameI18n.toUpper();
 	
@@ -307,17 +307,17 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Satellites::searchByName(const QString& englishName) const
 {
 	if (!hintFader)
-		return NULL;
+		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
-		return NULL;
+		return Q_NULLPTR;
 
 	QString objw = englishName.toUpper();
 	
@@ -334,7 +334,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 		}
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Satellites::searchByID(const QString &id) const
@@ -347,17 +347,17 @@ StelObjectP Satellites::searchByID(const QString &id) const
 		}
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 {
 	if (!hintFader)
-		return NULL;
+		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
-		return NULL;
+		return Q_NULLPTR;
 	
 	// If the search string is a catalog number...
 	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
@@ -1186,7 +1186,7 @@ void Satellites::updateFromOnlineSources()
 	updateSources.clear();
 	numberDownloadsComplete = 0;
 
-	if (progressBar==NULL)
+	if (progressBar==Q_NULLPTR)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
