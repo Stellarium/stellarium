@@ -99,7 +99,8 @@ public:
 		GraphMagnitudeVsTime	= 1,
 		GraphPhaseVsTime	= 2,
 		GraphDistanceVsTime	= 3,
-		GraphElongationVsTime	= 4
+		GraphElongationVsTime	= 4,
+		GraphAngularSizeVsTime	= 5
 	};
 
 	AstroCalcDialog(QObject* parent);
