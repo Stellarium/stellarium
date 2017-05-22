@@ -229,6 +229,7 @@ public:
 
 	//! Read a message directly from the stream. SyncMessage::deserialize of the correct class should be used to deserialize the message.
 	//! @param stream The stream to be used to read data. The current position is after the header.
+        //! @param dataSize The data size from the message header
 	//! @param peer The remote peer this message originated from. Can be used to send replies through SyncRemotePeer::writeMessage
 	//! @return return false if the message is found to be invalid. The connection to the client/server will be dropped.
 	virtual bool handleMessage(QDataStream& stream, SyncProtocol::tPayloadSize dataSize,  SyncRemotePeer& peer) = 0;
