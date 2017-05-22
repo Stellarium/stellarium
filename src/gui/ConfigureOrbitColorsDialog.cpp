@@ -139,7 +139,7 @@ void ConfigureOrbitColorsDialog::askGenericOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.orbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGenericOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGenericOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -154,7 +154,7 @@ void ConfigureOrbitColorsDialog::askMajorPlanetsGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.majorPlanetsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsMajorPlanetsOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsMajorPlanetsOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -169,7 +169,7 @@ void ConfigureOrbitColorsDialog::askMinorPlanetsGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.minorPlanetsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsMinorPlanetsOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsMinorPlanetsOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -184,7 +184,7 @@ void ConfigureOrbitColorsDialog::askDwarfPlanetsGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.dwarfPlanetsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsDwarfPlanetsOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsDwarfPlanetsOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -199,7 +199,7 @@ void ConfigureOrbitColorsDialog::askCometsGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.cometsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsCometsOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsCometsOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -214,7 +214,7 @@ void ConfigureOrbitColorsDialog::askSednoidsGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.sednoidsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsSednoidsOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsSednoidsOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -229,7 +229,7 @@ void ConfigureOrbitColorsDialog::askMoonsGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.moonsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsMoonsOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsMoonsOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -244,7 +244,7 @@ void ConfigureOrbitColorsDialog::askCubewanosGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.cubewanosOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsCubewanosOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsCubewanosOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -259,7 +259,7 @@ void ConfigureOrbitColorsDialog::askPlutinosGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.plutinosOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsPlutinosOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsPlutinosOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -274,7 +274,7 @@ void ConfigureOrbitColorsDialog::askSDOGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.scatteredDiskObjectsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsSDOOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsSDOOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -289,7 +289,7 @@ void ConfigureOrbitColorsDialog::askOCOGroupOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.oortCloudObjectsOrbitsColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorGroupsOCOOrbits->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsOCOOrbits->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -304,7 +304,7 @@ void ConfigureOrbitColorsDialog::askMercuryOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.mercuryOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPMercuryOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPMercuryOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -319,7 +319,7 @@ void ConfigureOrbitColorsDialog::askVenusOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.venusOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPVenusOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPVenusOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -334,7 +334,7 @@ void ConfigureOrbitColorsDialog::askEarthOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.earthOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPEarthOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPEarthOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -349,7 +349,7 @@ void ConfigureOrbitColorsDialog::askMarsOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.marsOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPMarsOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPMarsOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -364,7 +364,7 @@ void ConfigureOrbitColorsDialog::askJupiterOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.jupiterOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPJupiterOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPJupiterOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -379,7 +379,7 @@ void ConfigureOrbitColorsDialog::askSaturnOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.saturnOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPSaturnOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPSaturnOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -394,7 +394,7 @@ void ConfigureOrbitColorsDialog::askUranusOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.uranusOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPUranusOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPUranusOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
@@ -409,7 +409,7 @@ void ConfigureOrbitColorsDialog::askNeptuneOrbitColor()
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.neptuneOrbitColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, NULL, q_(ui->colorMPNeptuneOrbit->toolTip()));
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorMPNeptuneOrbit->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());

@@ -820,7 +820,7 @@ QString julianDayToISO8601String(const double jd, bool addMS)
 {
 	int year, month, day, hour, minute, second,millis;
 	getDateFromJulianDay(jd, &year, &month, &day);
-	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : NULL );
+	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : Q_NULLPTR );
 
 	QString res = QString("%1-%2-%3T%4:%5:%6")
 				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))

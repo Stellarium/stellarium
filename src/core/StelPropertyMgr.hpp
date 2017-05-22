@@ -289,7 +289,7 @@ public:
 	//! Returns a map from property IDs to StelProperty objects
 	const StelPropertyMap& getPropertyMap() const { return propMap; }
 
-	//! Returns the StelProperty with the specified ID, or NULL if not registered
+	//! Returns the StelProperty with the specified ID, or Q_NULLPTR if not registered
 	StelProperty* getProperty(const QString& id) const;
 
 	//! Retrieves the current value of the given StelProperty,

@@ -41,11 +41,11 @@
 
 StelDialog::StelDialog(QString dialogName, QObject* parent)
 	: QObject(parent)
-	, dialog(NULL)
-	, proxy(NULL)
+	, dialog(Q_NULLPTR)
+	, proxy(Q_NULLPTR)
 	, dialogName(dialogName)
 {
-	if (parent == NULL)
+	if (parent == Q_NULLPTR)
 		setParent(StelMainView::getInstance().getGuiWidget());
 }
 
@@ -60,7 +60,7 @@ void StelDialog::close()
 
 bool StelDialog::visible() const
 {
-	return dialog!=NULL && dialog->isVisible();
+	return dialog!=Q_NULLPTR && dialog->isVisible();
 }
 
 void StelDialog::setVisible(bool v)
@@ -88,7 +88,7 @@ void StelDialog::setVisible(bool v)
 		else
 		{
 			QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
-			dialog = new QDialog(NULL);
+			dialog = new QDialog(Q_NULLPTR);
 			// dialog->setParent(parent);
 			StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 			Q_ASSERT(gui);

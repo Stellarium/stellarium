@@ -49,7 +49,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", NULL, NULL, 0, false, true, false, true, ""), dest(0),
+		Planet("", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, 0, false, true, false, true, ""), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	// set parent = sun:
@@ -169,7 +169,7 @@ StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 {
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	planet = ssystem->searchByEnglishName(loc.planetName);
-	if (planet==NULL)
+	if (planet==Q_NULLPTR)
 	{
 		qWarning() << "Can't create StelObserver on planet " + loc.planetName + " because it is unknown. Use Earth as default.";
 		planet=ssystem->getEarth();
@@ -239,7 +239,7 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 }
 
 SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds, double atimeToGo) : StelObserver(startLoc),
-		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
+		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(Q_NULLPTR), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
 {
 	if(timeToGo<0.0)
 		timeToGo = transitSeconds;
@@ -253,7 +253,7 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 		{
 			qWarning() << "Can't move from planet " + moveStartLocation.planetName + " to planet " + moveTargetLocation.planetName + " because it is unknown";
 			timeToGo = -1.;	// Will abort properly the move
-			if (targetPlanet==NULL)
+			if (targetPlanet==Q_NULLPTR)
 			{
 				// Stay at the same position as a failover
 				moveTargetLocation = moveStartLocation;
@@ -326,6 +326,6 @@ bool SpaceShipObserver::update(double deltaTime)
 
 const QSharedPointer<Planet> SpaceShipObserver::getHomePlanet() const
 {
-	return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : artificialPlanet;
+	return (isObserverLifeOver() || artificialPlanet==Q_NULLPTR)  ? planet : artificialPlanet;
 }
 

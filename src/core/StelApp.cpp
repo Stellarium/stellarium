@@ -187,7 +187,7 @@ Q_IMPORT_PLUGIN(RemoteSyncStelPluginInterface)
 #endif
 
 // Initialize static variables
-StelApp* StelApp::singleton = NULL;
+StelApp* StelApp::singleton = Q_NULLPTR;
 qint64 StelApp::startMSecs = 0;
 float StelApp::animationScale = 1.f;
 
@@ -281,7 +281,7 @@ StelApp::~StelApp()
 	moduleMgr = new StelModuleMgr(); // Create a secondary instance to avoid crashes at other deinit
 	delete tmp; tmp=Q_NULLPTR;
 	delete skyImageMgr; skyImageMgr=Q_NULLPTR;
-	delete core; core=NULL;
+	delete core; core=Q_NULLPTR;
 	delete skyCultureMgr; skyCultureMgr=Q_NULLPTR;
 	delete localeMgr; localeMgr=Q_NULLPTR;
 	delete audioMgr; audioMgr=Q_NULLPTR;
@@ -599,7 +599,7 @@ void StelApp::initPlugIns()
 		if (i.loadAtStartup==false)
 			continue;
 		StelModule* m = moduleMgr->loadPlugin(i.info.id);
-		if (m!=NULL)
+		if (m!=Q_NULLPTR)
 		{
 			moduleMgr->registerModule(m, true);
 			//load extensions after the module is registered
@@ -737,7 +737,7 @@ void StelApp::glWindowHasBeenResized(const QRectF& rect)
 	{
 		ensureGLContextCurrent();
 		delete renderBuffer;
-		renderBuffer = NULL;
+		renderBuffer = Q_NULLPTR;
 	}
 #ifdef ENABLE_SPOUT
 	if (spoutSender)
@@ -934,12 +934,12 @@ void StelApp::setViewportEffect(const QString& name)
 	{
 		ensureGLContextCurrent();
 		delete renderBuffer;
-		renderBuffer = NULL;
+		renderBuffer = Q_NULLPTR;
 	}
 	if (viewportEffect)
 	{
 		delete viewportEffect;
-		viewportEffect = NULL;
+		viewportEffect = Q_NULLPTR;
 	}
 	if (name == "none") return;
 

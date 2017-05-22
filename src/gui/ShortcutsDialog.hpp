@@ -81,7 +81,7 @@ public slots:
 	void switchToEditors(const QModelIndex& index);
 	//! update shortcut representation in tree correspondingly to its actual contents.
 	//! if no item is specified, search for it in tree, if no items found, create new item
-	void updateShortcutsItem(class StelAction* action, QStandardItem* shortcutItem = NULL);
+	void updateShortcutsItem(class StelAction* action, QStandardItem* shortcutItem = Q_NULLPTR);
 	void restoreDefaultShortcuts();
 	void updateTreeData();
 

@@ -91,7 +91,7 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCustomDeclination1(false)
 	, flagShowCustomDeclination2(false)
 	, lastJDE(0.0)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("ArchaeoLines");
 	font.setPixelSize(16);
@@ -140,33 +140,33 @@ ArchaeoLines::ArchaeoLines()
 
 ArchaeoLines::~ArchaeoLines()
 {
-	delete equinoxLine; equinoxLine=NULL;
-	delete northernSolsticeLine; northernSolsticeLine=NULL;
-	delete southernSolsticeLine; southernSolsticeLine=NULL;
-	delete northernCrossquarterLine; northernCrossquarterLine=NULL;
-	delete southernCrossquarterLine; southernCrossquarterLine=NULL;
-	delete northernMajorStandstillLine0; northernMajorStandstillLine0=NULL;
-	delete northernMajorStandstillLine1; northernMajorStandstillLine1=NULL;
-	delete northernMinorStandstillLine2; northernMinorStandstillLine2=NULL;
-	delete northernMinorStandstillLine3; northernMinorStandstillLine3=NULL;
-	delete southernMinorStandstillLine4; southernMinorStandstillLine4=NULL;
-	delete southernMinorStandstillLine5; southernMinorStandstillLine5=NULL;
-	delete southernMajorStandstillLine6; southernMajorStandstillLine6=NULL;
-	delete southernMajorStandstillLine7; southernMajorStandstillLine7=NULL;
-	delete zenithPassageLine;  zenithPassageLine=NULL;
-	delete nadirPassageLine;   nadirPassageLine=NULL;
-	delete selectedObjectLine; selectedObjectLine=NULL;
-	delete currentSunLine;     currentSunLine=NULL;
-	delete currentMoonLine;    currentMoonLine=NULL;
-	delete currentPlanetLine;  currentPlanetLine=NULL;
-	delete geographicLocation1Line; geographicLocation1Line=NULL;
-	delete geographicLocation2Line; geographicLocation2Line=NULL;
-	delete customAzimuth1Line; customAzimuth1Line=NULL;
-	delete customAzimuth2Line; customAzimuth2Line=NULL;
-	delete customDeclination1Line; customDeclination1Line=NULL;
-	delete customDeclination2Line; customDeclination2Line=NULL;
+	delete equinoxLine; equinoxLine=Q_NULLPTR;
+	delete northernSolsticeLine; northernSolsticeLine=Q_NULLPTR;
+	delete southernSolsticeLine; southernSolsticeLine=Q_NULLPTR;
+	delete northernCrossquarterLine; northernCrossquarterLine=Q_NULLPTR;
+	delete southernCrossquarterLine; southernCrossquarterLine=Q_NULLPTR;
+	delete northernMajorStandstillLine0; northernMajorStandstillLine0=Q_NULLPTR;
+	delete northernMajorStandstillLine1; northernMajorStandstillLine1=Q_NULLPTR;
+	delete northernMinorStandstillLine2; northernMinorStandstillLine2=Q_NULLPTR;
+	delete northernMinorStandstillLine3; northernMinorStandstillLine3=Q_NULLPTR;
+	delete southernMinorStandstillLine4; southernMinorStandstillLine4=Q_NULLPTR;
+	delete southernMinorStandstillLine5; southernMinorStandstillLine5=Q_NULLPTR;
+	delete southernMajorStandstillLine6; southernMajorStandstillLine6=Q_NULLPTR;
+	delete southernMajorStandstillLine7; southernMajorStandstillLine7=Q_NULLPTR;
+	delete zenithPassageLine;  zenithPassageLine=Q_NULLPTR;
+	delete nadirPassageLine;   nadirPassageLine=Q_NULLPTR;
+	delete selectedObjectLine; selectedObjectLine=Q_NULLPTR;
+	delete currentSunLine;     currentSunLine=Q_NULLPTR;
+	delete currentMoonLine;    currentMoonLine=Q_NULLPTR;
+	delete currentPlanetLine;  currentPlanetLine=Q_NULLPTR;
+	delete geographicLocation1Line; geographicLocation1Line=Q_NULLPTR;
+	delete geographicLocation2Line; geographicLocation2Line=Q_NULLPTR;
+	delete customAzimuth1Line; customAzimuth1Line=Q_NULLPTR;
+	delete customAzimuth2Line; customAzimuth2Line=Q_NULLPTR;
+	delete customDeclination1Line; customDeclination1Line=Q_NULLPTR;
+	delete customDeclination2Line; customDeclination2Line=Q_NULLPTR;
 
-	delete configDialog; configDialog=NULL;
+	delete configDialog; configDialog=Q_NULLPTR;
 }
 
 bool ArchaeoLines::configureGui(bool show)
@@ -228,9 +228,9 @@ void ArchaeoLines::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -1359,9 +1359,9 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 				rotFpt.transfo4d(rotLonP90);
 				Vec3d rotFpt2=fpt;
 				rotFpt2.transfo4d(rotLonM90);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, alViewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, alViewportEdgeIntersectCallback, &userData);
-				//sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+				//sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 				return;
 //			}
 //			//else
@@ -1374,8 +1374,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 //			middlePoint*=-1.;
 
 //		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-//		sPainter.drawGreatCircleArc(p1, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
-//		sPainter.drawGreatCircleArc(p2, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
+//		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+//		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 
 //		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 //		#ifdef GL_LINE_SMOOTH

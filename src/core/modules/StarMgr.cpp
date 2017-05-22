@@ -504,22 +504,22 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 		// The file is not checked but we found it, maybe from a previous download/version
 		qWarning() << "Found file " << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum..";
 
-		QFile fic(catalogFilePath);
-		if(fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
+		QFile file(catalogFilePath);
+		if(file.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
 		{
 			// Compute the MD5 sum
 			QCryptographicHash md5Hash(QCryptographicHash::Md5);
-			const qint64 cat_sz = fic.size();
+			const qint64 cat_sz = file.size();
 			qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
-			uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
+			uchar *cat = maxStarBufMd5 ? file.map(0, maxStarBufMd5) : Q_NULLPTR;
 			if (!cat)
 			{
 				// The OS was not able to map the file, revert to slower not mmap based method
 				static const qint64 maxStarBufMd5 = 1024*1024*8;
 				char* mmd5buf = (char*)malloc(maxStarBufMd5);
-				while (!fic.atEnd())
+				while (!file.atEnd())
 				{
-					qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
+					qint64 sz = file.read(mmd5buf, maxStarBufMd5);
 					md5Hash.addData(mmd5buf, sz);
 				}
 				free(mmd5buf);
@@ -527,13 +527,13 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			else
 			{
 				md5Hash.addData((const char*)cat, cat_sz);
-				fic.unmap(cat);
+				file.unmap(cat);
 			}
-			fic.close();
+			file.close();
 			if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 			{
 				qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
-				fic.remove();
+				file.remove();
 				return false;
 			}
 			qWarning() << "MD5 sum correct!";

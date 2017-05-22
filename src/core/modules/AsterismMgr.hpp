@@ -95,11 +95,11 @@ public:
 	// Methods defined in StelObjectManager class
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching asterism object's pointer if exists or NULL
+	//! Return the matching asterism object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensistive asterism name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching asterism if exists or NULL
+	//! Return the matching asterism if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const QString& name) const;
 

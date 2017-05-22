@@ -72,11 +72,11 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, nextStarCatalogToDownloadIndex(0)
 	, starCatalogsCount(0)
 	, hasDownloadedStarCatalog(false)
-	, starCatalogDownloadReply(NULL)
-	, currentDownloadFile(NULL)
-	, progressBar(NULL)
+	, starCatalogDownloadReply(Q_NULLPTR)
+	, currentDownloadFile(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
 	, gui(agui)
-	, customDeltaTEquationDialog(NULL)
+	, customDeltaTEquationDialog(Q_NULLPTR)
 	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
 	ui = new Ui_configurationDialogForm;
@@ -85,9 +85,9 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 	delete customDeltaTEquationDialog;
-	customDeltaTEquationDialog = NULL;
+	customDeltaTEquationDialog = Q_NULLPTR;
 }
 
 void ConfigurationDialog::retranslate()
@@ -564,7 +564,7 @@ void ConfigurationDialog::usageButtonsBackgroundChanged(bool b)
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
-	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
+	QString newScreenshotDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash
@@ -993,7 +993,7 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
 			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);
-			if (pmod != NULL)
+			if (pmod != Q_NULLPTR)
 				ui->pluginConfigureButton->setEnabled(pmod->configureGui(false));
 			else
 				ui->pluginConfigureButton->setEnabled(false);
@@ -1015,7 +1015,7 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 		if (id == desc.info.id)
 		{
 			StelModule* pmod = moduleMgr.getModule(desc.info.id, QObject::sender()->objectName()=="pluginsListWidget");
-			if (pmod != NULL)
+			if (pmod != Q_NULLPTR)
 			{
 				pmod->configureGui(true);
 			}
@@ -1211,9 +1211,9 @@ void ConfigurationDialog::downloadStars()
 {
 	Q_ASSERT(!nextStarCatalogToDownload.isEmpty());
 	Q_ASSERT(!isDownloadingStarCatalog);
-	Q_ASSERT(starCatalogDownloadReply==NULL);
-	Q_ASSERT(currentDownloadFile==NULL);
-	Q_ASSERT(progressBar==NULL);
+	Q_ASSERT(starCatalogDownloadReply==Q_NULLPTR);
+	Q_ASSERT(currentDownloadFile==Q_NULLPTR);
+	Q_ASSERT(progressBar==Q_NULLPTR);
 
 	QString path = StelFileMgr::getUserDir()+QString("/stars/default/")+nextStarCatalogToDownload.value("fileName").toString();
 	currentDownloadFile = new QFile(path);
@@ -1221,7 +1221,7 @@ void ConfigurationDialog::downloadStars()
 	{
 		qWarning() << "Can't open a writable file for storing new star catalog: " << QDir::toNativeSeparators(path);
 		currentDownloadFile->deleteLater();
-		currentDownloadFile = NULL;
+		currentDownloadFile = Q_NULLPTR;
 		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
 		ui->downloadRetryButton->setVisible(true);
 		return;
@@ -1274,12 +1274,12 @@ void ConfigurationDialog::downloadFinished()
 	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError)
 	{
 		starCatalogDownloadReply->deleteLater();
-		starCatalogDownloadReply = NULL;
+		starCatalogDownloadReply = Q_NULLPTR;
 		currentDownloadFile->close();
 		currentDownloadFile->deleteLater();
-		currentDownloadFile = NULL;
+		currentDownloadFile = Q_NULLPTR;
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar=NULL;
+		progressBar=Q_NULLPTR;
 		return;
 	}
 
@@ -1305,11 +1305,11 @@ void ConfigurationDialog::downloadFinished()
 	isDownloadingStarCatalog = false;
 	currentDownloadFile->close();
 	currentDownloadFile->deleteLater();
-	currentDownloadFile = NULL;
+	currentDownloadFile = Q_NULLPTR;
 	starCatalogDownloadReply->deleteLater();
-	starCatalogDownloadReply = NULL;
+	starCatalogDownloadReply = Q_NULLPTR;
 	StelApp::getInstance().removeProgressBar(progressBar);
-	progressBar=NULL;
+	progressBar=Q_NULLPTR;
 
 	ui->downloadLabel->setText(q_("Verifying file integrity..."));
 	if (GETSTELMODULE(StarMgr)->checkAndLoadCatalog(nextStarCatalogToDownload)==false)
@@ -1518,7 +1518,7 @@ void ConfigurationDialog::setDeltaTAlgorithmDescription()
 
 void ConfigurationDialog::showCustomDeltaTEquationDialog()
 {
-	if (customDeltaTEquationDialog == NULL)
+	if (customDeltaTEquationDialog == Q_NULLPTR)
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);

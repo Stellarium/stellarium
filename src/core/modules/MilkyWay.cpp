@@ -55,10 +55,10 @@ MilkyWay::MilkyWay()
 MilkyWay::~MilkyWay()
 {
 	delete fader;
-	fader = NULL;
+	fader = Q_NULLPTR;
 	
 	delete vertexArray;
-	vertexArray = NULL;
+	vertexArray = Q_NULLPTR;
 }
 
 void MilkyWay::init()

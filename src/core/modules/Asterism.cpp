@@ -40,14 +40,14 @@ const QString Asterism::ASTERISM_TYPE = QStringLiteral("Asterism");
 
 Asterism::Asterism()
 	: numberOfSegments(0)
-	, asterism(NULL)
+	, asterism(Q_NULLPTR)
 {
 }
 
 Asterism::~Asterism()
 {
 	delete[] asterism;
-	asterism = NULL;
+	asterism = Q_NULLPTR;
 }
 
 bool Asterism::read(const QString& record, StarMgr *starMgr)
@@ -137,7 +137,7 @@ const Asterism* Asterism::isStarIn(const StelObject* s) const
 		if (asterism[i]->getEnglishName()==s->getEnglishName())
 			return this;
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 void Asterism::update(int deltaTime)

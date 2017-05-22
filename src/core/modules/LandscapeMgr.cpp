@@ -143,10 +143,10 @@ void Cardinals::updateI18n()
 
 LandscapeMgr::LandscapeMgr()
 	: StelModule()
-	, atmosphere(NULL)
-	, cardinalsPoints(NULL)
-	, landscape(NULL)
-	, oldLandscape(NULL)
+	, atmosphere(Q_NULLPTR)
+	, cardinalsPoints(Q_NULLPTR)
+	, landscape(Q_NULLPTR)
+	, oldLandscape(Q_NULLPTR)
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
@@ -176,10 +176,10 @@ LandscapeMgr::~LandscapeMgr()
 	if (oldLandscape)
 	{
 		delete oldLandscape;
-		oldLandscape=NULL;
+		oldLandscape=Q_NULLPTR;
 	}
 	delete landscape;
-	landscape = NULL;
+	landscape = Q_NULLPTR;
 	qDebug() << "LandscapeMgr: Clearing cache of" << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
 	landscapeCache.clear(); // deletes all objects within.
 }
@@ -217,7 +217,7 @@ void LandscapeMgr::update(double deltaTime)
 				//qDebug() << "LandscapeMgr::update: moving oldLandscape " << oldLandscape->getId() << "to Cache. Cost:" << oldLandscape->getMemorySize()/(1024*1024)+1;
 				landscapeCache.insert(oldLandscape->getId(), oldLandscape, oldLandscape->getMemorySize()/(1024*1024)+1);
 				//qDebug() << "--> LandscapeMgr::update(): cache now contains " << landscapeCache.size() << "landscapes totalling about " << landscapeCache.totalCost() << "MB.";
-				oldLandscape=NULL;
+				oldLandscape=Q_NULLPTR;
 			}
 		}
 	}
@@ -927,28 +927,28 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	else
 		s = landscapeIni.value("landscape/type").toString();
 
-	Landscape* ldscp = NULL;
+	Landscape* landscape = Q_NULLPTR;
 	if (s=="old_style")
-		ldscp = new LandscapeOldStyle();
+		landscape = new LandscapeOldStyle();
 	else if (s=="spherical")
-		ldscp = new LandscapeSpherical();
+		landscape = new LandscapeSpherical();
 	else if (s=="fisheye")
-		ldscp = new LandscapeFisheye();
+		landscape = new LandscapeFisheye();
 	else if (s=="polygonal")
-		ldscp = new LandscapePolygonal();
+		landscape = new LandscapePolygonal();
 	else
 	{
 		qDebug() << "Unknown landscape type: \"" << s << "\"";
 
 		// to avoid making this a fatal error, will load as a fisheye
 		// if this fails, it just won't draw
-		ldscp = new LandscapeFisheye();
+		landscape = new LandscapeFisheye();
 	}
 
-	ldscp->load(landscapeIni, landscapeId);
+	landscape->load(landscapeIni, landscapeId);
 	QSettings *conf=StelApp::getInstance().getSettings();
-	ldscp->setLabelFontSize(conf->value("landscape/label_font_size", 15).toInt());
-	return ldscp;
+	landscape->setLabelFontSize(conf->value("landscape/label_font_size", 15).toInt());
+	return landscape;
 }
 
 

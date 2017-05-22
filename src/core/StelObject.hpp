@@ -85,11 +85,11 @@ public:
 
 	//! Default implementation of the getRegion method.
 	//! Return the spatial region of the object.
-	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));}
+	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
 
 	//! Default implementation of the getPointInRegion method.
 	//! Return the J2000 Equatorial Position of the object.
-	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(NULL);}
+	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(Q_NULLPTR);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use

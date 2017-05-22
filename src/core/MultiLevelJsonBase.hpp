@@ -39,7 +39,7 @@ class MultiLevelJsonBase : public StelSkyLayer
 
 public:
 	//! Default constructor.
-	MultiLevelJsonBase(MultiLevelJsonBase* parent=NULL);
+	MultiLevelJsonBase(MultiLevelJsonBase* parent=Q_NULLPTR);
 
 	//! Init the element from a URL.
 	//! This method should be called by the constructors of the subclass.
@@ -59,7 +59,7 @@ public:
 	bool hasErrorOccured() const {return errorOccured;}
 
 	//! Get the depth level in the tree.
-	int getLevel() const {return parent()==NULL ? 0 : (qobject_cast<MultiLevelJsonBase*>(parent()))->getLevel()+1;}
+	int getLevel() const {return parent()==Q_NULLPTR ? 0 : (qobject_cast<MultiLevelJsonBase*>(parent()))->getLevel()+1;}
 
 	//! Convert the image informations to a map following the JSON structure.
 	//! It can be saved as JSON using the StelJsonParser methods.

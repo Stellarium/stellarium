@@ -58,7 +58,7 @@ HelpDialog::HelpDialog(QObject* parent)
 HelpDialog::~HelpDialog()
 {
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 }
 
 void HelpDialog::retranslate()

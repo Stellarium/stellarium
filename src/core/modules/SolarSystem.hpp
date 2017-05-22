@@ -318,12 +318,12 @@ public:
 
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param nameI18n the case in-sensistive translated planet name.
-	//! @return a StelObjectP for the object if found, else NULL.
+	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensistive English planet name.
-	//! @return a StelObjectP for the object if found, else NULL.
+	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByName(const QString& name) const;
 
 	virtual StelObjectP searchByID(const QString &id) const
@@ -827,7 +827,7 @@ public:
 	// Other public methods
 	//! Get a pointer to a Planet object.
 	//! @param planetEnglishName the English name of the desired planet.
-	//! @return The matching planet pointer if exists or NULL.
+	//! @return The matching planet pointer if exists or Q_NULLPTR.
 	PlanetP searchByEnglishName(QString planetEnglishName) const;
 
 	//! Get the Planet object pointer for the Sun.
@@ -891,7 +891,7 @@ private:
 	//! in earth equatorial position.
 	//! @param v A position in earth equatorial position.
 	//! @param core the StelCore object.
-	//! @return a pointer to a StelObject if found, else NULL
+	//! @return a pointer to a StelObject if found, else Q_NULLPTR
 	StelObjectP search(Vec3d v, const StelCore* core) const;
 
 	//! Compute the transformation matrix for every elements of the solar system.

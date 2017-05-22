@@ -82,7 +82,7 @@ private:
 	//! This member tests to see if a star is one of those which make up
 	//! the lines of a Asterism.
 	//! @return a pointer to the asterism which the star is a part of,
-	//! or NULL if the star is not part of a asterism
+	//! or Q_NULLPTR if the star is not part of a asterism
 	const Asterism* isStarIn(const StelObject*) const;
 
 	//! Get the translated name for the Asterism.
