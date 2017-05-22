@@ -32,7 +32,7 @@ class Scenery3dDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	Scenery3dDialog(QObject* parent = NULL);
+	Scenery3dDialog(QObject* parent = Q_NULLPTR);
 	~Scenery3dDialog();
 
 public slots:

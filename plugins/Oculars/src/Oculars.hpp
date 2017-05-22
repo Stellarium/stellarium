@@ -239,14 +239,14 @@ private:
 	//! Creates the sub-menu listing telescopes in the pop-up menu.
 	QMenu* addTelescopeSubmenu(QMenu* parent);
 
-	//! Returns selected lens,or NULL if no lens is selected
+	//! Returns selected lens,or Q_NULLPTR if no lens is selected
 	Lens* selectedLens();
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
-	QList<Lens *> lense;
+	QList<Lens *> lenses;
 
 	int selectedCCDIndex; //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
 	int selectedOcularIndex; //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.

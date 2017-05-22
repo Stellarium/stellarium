@@ -628,7 +628,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	if (mag <= mlimit)
 	{		
 		Exoplanet::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);

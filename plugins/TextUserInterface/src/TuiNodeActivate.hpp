@@ -38,7 +38,7 @@ public:
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)
-	TuiNodeActivate(const QString& text, QObject* receiver, const char* method, TuiNode* parent=NULL, TuiNode* prev=NULL);
+	TuiNodeActivate(const QString& text, QObject* receiver, const char* method, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleKey(int key);
 	virtual QString getDisplayText();
 

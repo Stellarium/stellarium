@@ -71,7 +71,7 @@ PointerCoordinates::PointerCoordinates()
 	, textColor(Vec3f(1,0.5,0))
 	, coordinatesPoint(Vec3d(0,0,0))
 	, fontSize(14)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("PointerCoordinates");
 	mainWindow = new PointerCoordinatesWindow();
@@ -362,12 +362,12 @@ void PointerCoordinates::saveConfiguration(void)
 
 void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 {
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 	{
 		if (b==true) {
-			if (toolbarButton==NULL) {
+			if (toolbarButton==Q_NULLPTR) {
 				// Create the button
-				toolbarButton = new StelButton(NULL,
+				toolbarButton = new StelButton(Q_NULLPTR,
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
 							       QPixmap(":/graphicGui/glow32x32.png"),

@@ -106,8 +106,8 @@ public:
 	//! Send a J2000-goto-command to the specified telescope
 	//! @param telescopeNr the number of the telescope
 	//! @param j2000Pos the direction in equatorial J2000 frame
-	//! @param selectObject selected object (if any; NULL if move is not based on an object)
-	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = NULL);
+	//! @param selectObject selected object (if any; Q_NULLPTR if move is not based on an object)
+	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
 	
 	//! Remove all currently registered telescopes
 	void deleteAllTelescopes();

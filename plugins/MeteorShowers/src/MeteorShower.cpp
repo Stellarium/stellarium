@@ -367,7 +367,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 		if (m_mgr->getEnableLabels())
 		{
 			painter.setFont(m_mgr->getFont());
-			float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+			float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			float shift = 8.f + size/1.8f;
 			if ((mag+1.f)<mlimit)
 				painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);

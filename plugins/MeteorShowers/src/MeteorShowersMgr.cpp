@@ -37,9 +37,9 @@
 #include "SporadicMeteorMgr.hpp"
 
 MeteorShowersMgr::MeteorShowersMgr()
-	: m_meteorShowers(NULL)
-	, m_configDialog(NULL)
-	, m_searchDialog(NULL)
+	: m_meteorShowers(Q_NULLPTR)
+	, m_configDialog(Q_NULLPTR)
+	, m_searchDialog(Q_NULLPTR)
 	, m_conf(StelApp::getInstance().getSettings())
 	, m_onEarth(false)
 	, m_enablePlugin(false)
@@ -49,13 +49,13 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableMarker(true)
 	, m_showEnableButton(true)
 	, m_showSearchButton(true)
-	, m_messageTimer(NULL)
+	, m_messageTimer(Q_NULLPTR)
 	, m_isUpdating(false)
 	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
 	, m_statusOfLastUpdate(OUTDATED)
-	, m_downloadMgr(NULL)
-	, m_progressBar(NULL)
+	, m_downloadMgr(Q_NULLPTR)
+	, m_progressBar(Q_NULLPTR)
 {
 	setObjectName("MeteorShowers");
 }
@@ -124,11 +124,11 @@ void MeteorShowersMgr::deinit()
 	m_radiantTexture.clear();
 	m_pointerTexture.clear();
 	delete m_meteorShowers;
-	m_meteorShowers = NULL;
+	m_meteorShowers = Q_NULLPTR;
 	delete m_configDialog;
-	m_configDialog = NULL;
+	m_configDialog = Q_NULLPTR;
 	delete m_searchDialog;
-	m_searchDialog = NULL;
+	m_searchDialog = Q_NULLPTR;
 }
 
 double MeteorShowersMgr::getCallOrder(StelModuleActionName actionName) const
@@ -328,7 +328,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 	{
 		m_progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(m_progressBar);
-		m_progressBar = NULL;
+		m_progressBar = Q_NULLPTR;
 	}
 
 	if (reply->error() != QNetworkReply::NoError)
@@ -392,7 +392,7 @@ void MeteorShowersMgr::setShowEnableButton(const bool& show)
 
 		if (show)
 		{
-			StelButton* enablePlugin = new StelButton(NULL,
+			StelButton* enablePlugin = new StelButton(Q_NULLPTR,
 								  QPixmap(":/MeteorShowers/btMS-on.png"),
 								  QPixmap(":/MeteorShowers/btMS-off.png"),
 								  QPixmap(":/graphicGui/glow32x32.png"),
@@ -425,7 +425,7 @@ void MeteorShowersMgr::setShowSearchButton(const bool& show)
 
 		if (show)
 		{
-			StelButton* searchMS = new StelButton(NULL,
+			StelButton* searchMS = new StelButton(Q_NULLPTR,
 							      QPixmap(":/MeteorShowers/btMS-search-on.png"),
 							      QPixmap(":/MeteorShowers/btMS-search-off.png"),
 							      QPixmap(":/graphicGui/glow32x32.png"),

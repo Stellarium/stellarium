@@ -38,7 +38,7 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 	: TelescopeClient(name)
 	, time_delay(0)
 	, equinox(eq)
-	, lx200(NULL)
+	, lx200(Q_NULLPTR)
 	, long_format_used(false)
 	, answers_received(false)
 	, last_ra(0)

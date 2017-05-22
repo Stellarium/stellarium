@@ -193,9 +193,9 @@ time_t gTime::toTime() const
 void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 {
 
-	assert(pYear != NULL);
-	assert(pMonth != NULL);
-	assert(pDom != NULL);
+	assert(pYear != Q_NULLPTR);
+	assert(pMonth != Q_NULLPTR);
+	assert(pDom != Q_NULLPTR);
 
 	double jdAdj, F, alpha, A, B, DOM;
 	int Z, C, D, E, month, year;

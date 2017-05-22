@@ -39,8 +39,8 @@
 
 QuasarsDialog::QuasarsDialog()
 	: StelDialog("Quasars")
-	, qsr(NULL)
-	, updateTimer(NULL)
+	, qsr(Q_NULLPTR)
+	, updateTimer(Q_NULLPTR)
 {
 	ui = new Ui_quasarsDialog;
 }
@@ -51,7 +51,7 @@ QuasarsDialog::~QuasarsDialog()
 	{
 		updateTimer->stop();
 		delete updateTimer;
-		updateTimer = NULL;
+		updateTimer = Q_NULLPTR;
 	}
 	delete ui;
 }
@@ -105,7 +105,7 @@ void QuasarsDialog::createDialogContent()
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
@@ -140,7 +140,7 @@ void QuasarsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

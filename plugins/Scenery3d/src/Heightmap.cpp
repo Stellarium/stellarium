@@ -90,7 +90,7 @@ float Heightmap::getHeight(const float x, const float y) const
 	timer.start();*/
 
 	Heightmap::GridSpace* space = getSpace(x, y);
-	if (space == NULL)
+	if (space == Q_NULLPTR)
 	{
 		return nullHeight;
 	}
@@ -217,7 +217,7 @@ Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
 
 	if ((ix < 0) || (ix >= GRID_LENGTH) || (iy < 0) || (iy >= GRID_LENGTH))
 	{
-		return NULL;
+		return Q_NULLPTR;
 	}
 	else
 	{

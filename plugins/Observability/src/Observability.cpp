@@ -103,7 +103,7 @@ Observability::Observability()
 	, MoonCulm(0.)	
 	, lastJDMoon(0.)	
 	, ObserverLoc(0.)
-	, myPlanet(NULL)
+	, myPlanet(Q_NULLPTR)
 	, nDays(0)
 	, dmyFormat(false)
 	, hasRisen(false)
@@ -117,7 +117,7 @@ Observability::Observability()
 	, show_FullMoon(false)
 	, flagShowReport(false)
 	, fontSize(14)	
-	, button(NULL)	
+	, button(Q_NULLPTR)
 {
 	setObjectName("Observability");
 
@@ -163,7 +163,7 @@ Observability::Observability()
 Observability::~Observability()
 {
 	// Shouldn't this be in the deinit()? --BM
-	if (configDialog != NULL)
+	if (configDialog != Q_NULLPTR)
 		delete configDialog;
 }
 
@@ -243,9 +243,9 @@ void Observability::init()
 	          configDialog, "visible");
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 	{
-		button = new StelButton(NULL,
+		button = new StelButton(Q_NULLPTR,
 					QPixmap(":/observability/bt_observab_on.png"),
 					QPixmap(":/observability/bt_observab_off.png"),
 					QPixmap(":/graphicGui/glow32x32.png"),
@@ -413,7 +413,7 @@ void Observability::draw(StelCore* core)
 			selName = name;
 
 			Planet* planet = dynamic_cast<Planet*>(selectedObject.data());
-			isStar = (planet == NULL);
+			isStar = (planet == Q_NULLPTR);
 
 			if (!isStar && !isMoon && !isSun)  // Object in the Solar System, but is not Sun nor Moon.
 			{ 

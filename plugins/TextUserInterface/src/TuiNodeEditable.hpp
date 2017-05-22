@@ -29,7 +29,7 @@ class TuiNodeEditable : public TuiNode
 {
 	Q_OBJECT
 public:
-	TuiNodeEditable(const QString& text, TuiNode* parent=NULL, TuiNode* prev=NULL);
+	TuiNodeEditable(const QString& text, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleKey(int key);
 	virtual TuiNodeResponse handleEditingKey(int key) = 0;
 

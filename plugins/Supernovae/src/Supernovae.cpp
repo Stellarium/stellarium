@@ -82,8 +82,8 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 Supernovae::Supernovae()
 	: SNCount(0)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
-	, progressBar(NULL)
+	, downloadMgr(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
 	, updateTimer(0)
 	, messageTimer(0)
 	, updatesEnabled(false)
@@ -265,7 +265,7 @@ StelObjectP Supernovae::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(sn);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
@@ -276,7 +276,7 @@ StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(sn);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList Supernovae::listAllObjects(bool inEnglish) const
@@ -574,7 +574,7 @@ void Supernovae::updateJSON(void)
 	updateState = Supernovae::Updating;
 	emit(updateStateChanged(updateState));
 
-	if (progressBar==NULL)
+	if (progressBar==Q_NULLPTR)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
@@ -622,7 +622,7 @@ void Supernovae::updateDownloadComplete(QNetworkReply* reply)
 	{
 		progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 
 	readJsonFile();
