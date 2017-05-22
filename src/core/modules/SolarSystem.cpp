@@ -80,6 +80,7 @@ SolarSystem::SolarSystem()
 	, flagIsolatedOrbits(true)
 	, ephemerisMarkersDisplayed(true)
 	, ephemerisDatesDisplayed(false)
+	, ephemerisMagnitudesDisplayed(false)
 	, allTrails(NULL)
 	, conf(StelApp::getInstance().getSettings())
 {
