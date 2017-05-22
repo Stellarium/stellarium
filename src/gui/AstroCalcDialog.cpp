@@ -140,7 +140,6 @@ void AstroCalcDialog::createDialogContent()
 
 	initListPlanetaryPositions();
 	initListCelestialPositions();
-	initListEphemeris();
 	initListPhenomena();
 	populateCelestialBodyList();
 	populateCelestialCategoryList();
@@ -200,7 +199,8 @@ void AstroCalcDialog::createDialogContent()
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
 	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "SolarSystem.ephemerisMagnitudesDisplayed");
 	connectBoolProperty(ui->ephemerisHorizontalCoordinatesCheckBox, "SolarSystem.ephemerisHorizontalCoordinates");
-	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(generateEphemeris()));
+	initListEphemeris();
+	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
 	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
@@ -782,6 +782,14 @@ void AstroCalcDialog::initListEphemeris()
 	ui->ephemerisTreeWidget->setColumnCount(EphemerisCount);
 	setEphemerisHeaderNames();
 	ui->ephemerisTreeWidget->header()->setSectionsMovable(false);
+}
+
+void AstroCalcDialog::reGenerateEphemeris()
+{
+	if (EphemerisListCoords.size()>0)
+		generateEphemeris(); // Update list of ephemeris
+	else
+		initListEphemeris(); // Just update headers
 }
 
 void AstroCalcDialog::generateEphemeris()

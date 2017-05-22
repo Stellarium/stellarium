@@ -143,6 +143,7 @@ private slots:
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 	void saveEphemeris();
 	void onChangedEphemerisPosition(const QModelIndex &modelIndex);	
+	void reGenerateEphemeris();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
