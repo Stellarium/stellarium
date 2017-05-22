@@ -1201,6 +1201,10 @@ void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
+	// Avoid crash!
+	if(core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
+		return;
+
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
 	{
