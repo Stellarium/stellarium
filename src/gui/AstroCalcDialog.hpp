@@ -109,7 +109,7 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 
-	static QVector<Vec3d> EphemerisListJ2000;
+	static QVector<Vec3d> EphemerisListCoords;
 	static QVector<QString> EphemerisListDates;
 	static QVector<float> EphemerisListMagnitudes;
 	static int DisplayedPositionIndex;
@@ -142,7 +142,7 @@ private slots:
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 	void saveEphemeris();
-	void onChangedEphemerisPosition(const QModelIndex &modelIndex);
+	void onChangedEphemerisPosition(const QModelIndex &modelIndex);	
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
