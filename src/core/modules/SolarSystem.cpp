@@ -81,6 +81,7 @@ SolarSystem::SolarSystem()
 	, ephemerisMarkersDisplayed(true)
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
+	, ephemerisHorizontalCoordinates(false)
 	, allTrails(NULL)
 	, conf(StelApp::getInstance().getSettings())
 {
@@ -178,6 +179,7 @@ void SolarSystem::init()
 	setFlagEphemerisMarkers(conf->value("astro/flag_ephemeris_markers", true).toBool());
 	setFlagEphemerisDates(conf->value("astro/flag_ephemeris_dates", false).toBool());
 	setFlagEphemerisMagnitudes(conf->value("astro/flag_ephemeris_magnitudes", false).toBool());
+	setFlagEphemerisHorizontalCoordinates(conf->value("astro/flag_ephemeris_horizontal", false).toBool());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
@@ -1201,7 +1203,11 @@ void SolarSystem::draw(StelCore* core)
 	// AstroCalcDialog
 	if (getFlagEphemerisMarkers())
 	{
-		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
+		StelProjectorP prj;
+		if (getFlagEphemerisHorizontalCoordinates())
+			prj = core->getProjection(StelCore::FrameAltAz);
+		else
+			prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
 		StelPainter sPainter(prj);
 
 		float size, shift;
@@ -1209,13 +1215,13 @@ void SolarSystem::draw(StelCore* core)
 		bool showMagnitudes = getFlagEphemerisMagnitudes();
 		QString info = "";
 
-		for (int i =0; i< AstroCalcDialog::EphemerisListJ2000.count(); i++)
+		for (int i =0; i< AstroCalcDialog::EphemerisListCoords.count(); i++)
 		{
 			// draw EphemerisListJ2000[i];
 			Vec3d win;
 
 			// Check visibility of pointer
-			if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListJ2000[i], win)))
+			if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListCoords[i], win)))
 				continue;
 
 			if (i == AstroCalcDialog::DisplayedPositionIndex)
@@ -1232,7 +1238,7 @@ void SolarSystem::draw(StelCore* core)
 			sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 			texCircle->bind();
-			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListJ2000[i], size);
+			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListCoords[i], size);
 
 			if (showDates || showMagnitudes)
 			{
@@ -1244,7 +1250,7 @@ void SolarSystem::draw(StelCore* core)
 				if (!showDates && showMagnitudes)
 					info = QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2);
 
-				sPainter.drawText(AstroCalcDialog::EphemerisListJ2000[i], info, 0, shift, shift, false);
+				sPainter.drawText(AstroCalcDialog::EphemerisListCoords[i], info, 0, shift, shift, false);
 			}
 		}
 	}
@@ -1658,6 +1664,21 @@ void SolarSystem::setFlagEphemerisMarkers(bool b)
 bool SolarSystem::getFlagEphemerisMarkers() const
 {
 	return ephemerisMarkersDisplayed;
+}
+
+void SolarSystem::setFlagEphemerisHorizontalCoordinates(bool b)
+{
+	if (b!=ephemerisHorizontalCoordinates)
+	{
+		ephemerisHorizontalCoordinates=b;
+		conf->setValue("astro/flag_ephemeris_horizontal", b); // Immediate saving of state
+		emit ephemerisHorizontalCoordinatesChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisHorizontalCoordinates() const
+{
+	return ephemerisHorizontalCoordinates;
 }
 
 void SolarSystem::setFlagEphemerisDates(bool b)
