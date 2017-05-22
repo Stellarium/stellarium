@@ -1405,6 +1405,9 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 						angularSize *= 60.;
 					aY.append(angularSize);
 					break;
+				case GraphPhaseAngleVsTime:
+					aY.append(ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos())*180./M_PI);
+					break;
 			}
 
 			switch (ui->graphsSecondComboBox->currentData().toInt())
@@ -1429,6 +1432,9 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 					if (angularSize<1.)
 						angularSize *= 60.;
 					bY.append(angularSize);
+					break;
+				case GraphPhaseAngleVsTime:
+					bY.append(ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos())*180./M_PI);
 					break;
 			}
 
@@ -1512,7 +1518,9 @@ void AstroCalcDialog::populateFunctionsList()
 	cf.first = q_("Angular size vs. Time");
 	cf.second = GraphAngularSizeVsTime;
 	functions.append(cf);
-
+	cf.first = q_("Phase angle vs. Time");
+	cf.second = GraphPhaseAngleVsTime;
+	functions.append(cf);
 
 	QComboBox* first = ui->graphsFirstComboBox;
 	QComboBox* second = ui->graphsSecondComboBox;
@@ -1595,6 +1603,11 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			if (minY1<-1000.f) minY1 = 0.f;
 			if (maxY1>1000.f) maxY1 = 30.f;
 			break;
+		case GraphPhaseAngleVsTime:
+			yAxis1Legend = QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0));
+			if (minY1<-1000.f) minY1 = 0.f;
+			if (maxY1>1000.f) maxY1 = 180.f;
+			break;
 	}
 
 	switch (ui->graphsSecondComboBox->currentData().toInt())
@@ -1624,6 +1637,11 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			yAxis2Legend = QString("%1, %2").arg(q_("Angular size"), asMU);
 			if (minY2<-1000.f) minY2 = 0.f;
 			if (maxY2>1000.f) maxY2 = 30.f;
+			break;
+		case GraphPhaseAngleVsTime:
+			yAxis2Legend = QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0));
+			if (minY2<-1000.f) minY2 = 0.f;
+			if (maxY2>1000.f) maxY2 = 180.f;
 			break;
 	}
 
