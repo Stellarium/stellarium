@@ -328,8 +328,6 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Transit of Venus");
 		// TRANSLATORS: Name of script
-		N_("Analemma");
-		// TRANSLATORS: Name of script
 		N_("Sky Culture Tour");
 		// TRANSLATORS: Name and description of script
 		N_("Earth Events from Mercury");
@@ -386,7 +384,6 @@ class Translations
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
-		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
 		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");

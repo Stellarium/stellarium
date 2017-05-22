@@ -176,10 +176,10 @@ void SolarSystem::init()
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
-	setFlagEphemerisMarkers(conf->value("astro/flag_ephemeris_markers", true).toBool());
-	setFlagEphemerisDates(conf->value("astro/flag_ephemeris_dates", false).toBool());
-	setFlagEphemerisMagnitudes(conf->value("astro/flag_ephemeris_magnitudes", false).toBool());
-	setFlagEphemerisHorizontalCoordinates(conf->value("astro/flag_ephemeris_horizontal", false).toBool());
+	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
+	setFlagEphemerisDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
+	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
+	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
 	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
@@ -1656,7 +1656,7 @@ void SolarSystem::setFlagEphemerisMarkers(bool b)
 	if (b!=ephemerisMarkersDisplayed)
 	{
 		ephemerisMarkersDisplayed=b;
-		conf->setValue("astro/flag_ephemeris_markers", b); // Immediate saving of state
+		conf->setValue("astrocalc/flag_ephemeris_markers", b); // Immediate saving of state
 		emit ephemerisMarkersChanged(b);
 	}
 }
@@ -1671,7 +1671,7 @@ void SolarSystem::setFlagEphemerisHorizontalCoordinates(bool b)
 	if (b!=ephemerisHorizontalCoordinates)
 	{
 		ephemerisHorizontalCoordinates=b;
-		conf->setValue("astro/flag_ephemeris_horizontal", b); // Immediate saving of state
+		conf->setValue("astrocalc/flag_ephemeris_horizontal", b); // Immediate saving of state
 		emit ephemerisHorizontalCoordinatesChanged(b);
 	}
 }
@@ -1686,7 +1686,7 @@ void SolarSystem::setFlagEphemerisDates(bool b)
 	if (b!=ephemerisDatesDisplayed)
 	{
 		ephemerisDatesDisplayed=b;
-		conf->setValue("astro/flag_ephemeris_dates", b); // Immediate saving of state
+		conf->setValue("astrocalc/flag_ephemeris_dates", b); // Immediate saving of state
 		emit ephemerisDatesChanged(b);
 	}
 }
@@ -1701,7 +1701,7 @@ void SolarSystem::setFlagEphemerisMagnitudes(bool b)
 	if (b!=ephemerisMagnitudesDisplayed)
 	{
 		ephemerisMagnitudesDisplayed=b;
-		conf->setValue("astro/flag_ephemeris_magnitudes", b); // Immediate saving of state
+		conf->setValue("astrocalc/flag_ephemeris_magnitudes", b); // Immediate saving of state
 		emit ephemerisMagnitudesChanged(b);
 	}
 }
