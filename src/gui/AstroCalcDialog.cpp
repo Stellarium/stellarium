@@ -1306,7 +1306,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime, distance;
+		double startJD, JD, ltime, distance, angularSize;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
@@ -1337,6 +1337,12 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 				case GraphElongationVsTime:
 					aY.append(ssObj->getElongation(core->getObserverHeliocentricEclipticPos())*180./M_PI);
 					break;
+				case GraphAngularSizeVsTime:
+					angularSize = ssObj->getAngularSize(core)*360./M_PI;
+					if (angularSize<1.)
+						angularSize *= 60.;
+					aY.append(angularSize);
+					break;
 			}
 
 			switch (ui->graphsSecondComboBox->currentData().toInt())
@@ -1356,7 +1362,14 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 				case GraphElongationVsTime:
 					bY.append(ssObj->getElongation(core->getObserverHeliocentricEclipticPos())*180./M_PI);
 					break;
+				case GraphAngularSizeVsTime:
+					angularSize = ssObj->getAngularSize(core)*360./M_PI;
+					if (angularSize<1.)
+						angularSize *= 60.;
+					bY.append(angularSize);
+					break;
 			}
+
 			core->update(0.0);
 		}
 		core->setJD(currentJD);
@@ -1434,6 +1447,9 @@ void AstroCalcDialog::populateFunctionsList()
 	cf.first = q_("Elongation vs. Time");
 	cf.second = GraphElongationVsTime;
 	functions.append(cf);
+	cf.first = q_("Angular size vs. Time");
+	cf.second = GraphAngularSizeVsTime;
+	functions.append(cf);
 
 
 	QComboBox* first = ui->graphsFirstComboBox;
@@ -1471,13 +1487,19 @@ void AstroCalcDialog::populateFunctionsList()
 void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 {
 	QString xAxisStr = q_("Date");
-	QString mu = q_("AU");
+	QString distMU = q_("AU");
+	QString asMU = QString("'");
 
 	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
 	if (!ssObj.isNull())
 	{
 		if (ssObj->getJ2000EquatorialPos(core).length() < 0.1)
-			mu = q_("Mm");
+		{
+			// TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
+			distMU = q_("Mm");
+		}
+		if ((ssObj->getAngularSize(core)*360./M_PI) < 1.)
+			asMU = QString("\"");
 	}
 
 	bool direction1 = false;
@@ -1497,7 +1519,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			if (maxY1>1000.f) maxY1 = 100.f;
 			break;
 		case GraphDistanceVsTime:
-			yAxis1Legend = QString("%1, %2").arg(q_("Distance"), mu);
+			yAxis1Legend = QString("%1, %2").arg(q_("Distance"), distMU);
 			if (minY1<-1000.f) minY1 = 0.f;
 			if (maxY1>1000.f) maxY1 = 50.f;
 			break;
@@ -1505,6 +1527,11 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			yAxis1Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
 			if (minY1<-1000.f) minY1 = 0.f;
 			if (maxY1>1000.f) maxY1 = 180.f;
+			break;
+		case GraphAngularSizeVsTime:
+			yAxis1Legend = QString("%1, %2").arg(q_("Angular size"), asMU);
+			if (minY1<-1000.f) minY1 = 0.f;
+			if (maxY1>1000.f) maxY1 = 30.f;
 			break;
 	}
 
@@ -1522,7 +1549,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			if (maxY2>1000.f) maxY2 = 100.f;
 			break;
 		case GraphDistanceVsTime:
-			yAxis2Legend = QString("%1, %2").arg(q_("Distance"), mu);
+			yAxis2Legend = QString("%1, %2").arg(q_("Distance"), distMU);
 			if (minY2<-1000.f) minY2 = 0.f;
 			if (maxY2>1000.f) maxY2 = 50.f;
 			break;
@@ -1530,6 +1557,11 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			yAxis2Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
 			if (minY2<-1000.f) minY2 = 0.f;
 			if (maxY2>1000.f) maxY2 = 180.f;
+			break;
+		case GraphAngularSizeVsTime:
+			yAxis2Legend = QString("%1, %2").arg(q_("Angular size"), asMU);
+			if (minY2<-1000.f) minY2 = 0.f;
+			if (maxY2>1000.f) maxY2 = 30.f;
 			break;
 	}
 
