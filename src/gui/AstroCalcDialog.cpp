@@ -861,13 +861,14 @@ void AstroCalcDialog::generateEphemeris()
 		EphemerisListMagnitudes.clear();
 		EphemerisListMagnitudes.reserve(elements);
 		bool withTime = false;
+		QString dash = QChar(0x2014); // dash
 		if (currentStep<StelCore::JD_DAY)
 			withTime = true;
 
 		if (obj==solarSystem->getSun())
 		{
-			phaseStr = QChar(0x2014); // dash
-			elongStr = QChar(0x2014); // dash
+			phaseStr = dash;
+			elongStr = dash;
 		}
 
 		Vec3d pos;
@@ -910,10 +911,10 @@ void AstroCalcDialog::generateEphemeris()
 
 			observerHelioPos = core->getObserverHeliocentricEclipticPos();
 
-			if (phaseStr.isEmpty())
+			if (phaseStr!=dash)
 				phaseStr = QString("%1%").arg(QString::number(obj->getPhase(observerHelioPos) * 100, 'f', 2));
 
-			if (elongStr.isEmpty())
+			if (elongStr!=dash)
 				elongStr = StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true);
 
 			ACEphemTreeWidgetItem *treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
