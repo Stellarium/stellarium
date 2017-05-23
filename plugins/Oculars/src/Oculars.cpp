@@ -130,35 +130,35 @@ Oculars::Oculars():
 	flagGridlinesDisplayedMain(true),
 	flipVert(false),
 	flipHorz(false),
-	ccdRotationSignalMapper(0),
-	ccdsSignalMapper(0),
-	ocularsSignalMapper(0),
-	telescopesSignalMapper(0),
-	lenseSignalMapper(0),
+	ccdRotationSignalMapper(Q_NULLPTR),
+	ccdsSignalMapper(Q_NULLPTR),
+	ocularsSignalMapper(Q_NULLPTR),
+	telescopesSignalMapper(Q_NULLPTR),
+	lensesSignalMapper(Q_NULLPTR),
 	pxmapGlow(Q_NULLPTR),
 	pxmapOnIcon(Q_NULLPTR),
 	pxmapOffIcon(Q_NULLPTR),
 	toolbarButton(Q_NULLPTR),
 	ocularDialog(Q_NULLPTR),
 	ready(false),
-	actionShowOcular(0),
-	actionShowCrosshairs(0),
-	actionShowSensor(0),
-	actionShowTelrad(0),
-	actionConfiguration(0),
-	actionMenu(0),
-	actionTelescopeIncrement(0),
-	actionTelescopeDecrement(0),
-	actionOcularIncrement(0),
-	actionOcularDecrement(0),
-	guiPanel(0),
-	actualFOV(0),
-	initialFOV(0),
+	actionShowOcular(Q_NULLPTR),
+	actionShowCrosshairs(Q_NULLPTR),
+	actionShowSensor(Q_NULLPTR),
+	actionShowTelrad(Q_NULLPTR),
+	actionConfiguration(Q_NULLPTR),
+	actionMenu(Q_NULLPTR),
+	actionTelescopeIncrement(Q_NULLPTR),
+	actionTelescopeDecrement(Q_NULLPTR),
+	actionOcularIncrement(Q_NULLPTR),
+	actionOcularDecrement(Q_NULLPTR),
+	guiPanel(Q_NULLPTR),
+	actualFOV(0.),
+	initialFOV(0.),
 	flagInitFOVUsage(false),
 	flagInitDirectionUsage(false),
 	flagAutosetMountForCCD(false),
 	equatorialMountEnabled(false),
-	reticleRotation(0)
+	reticleRotation(0.)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
@@ -172,7 +172,7 @@ Oculars::Oculars():
 	ccdsSignalMapper = new QSignalMapper(this);
 	ocularsSignalMapper = new QSignalMapper(this);
 	telescopesSignalMapper = new QSignalMapper(this);
-	lenseSignalMapper = new QSignalMapper(this);
+	lensesSignalMapper = new QSignalMapper(this);
 	
 	setObjectName("Oculars");
 
@@ -1469,7 +1469,7 @@ void Oculars::initializeActivationActions()
 	connect(ocularsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectOcularAtIndex(QString)));
 	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectTelescopeAtIndex(QString)));
 	connect(telescopesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(setScreenFOVForCCD()));
-	connect(lenseSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectLensAtIndex(QString)));
+	connect(lensesSignalMapper, SIGNAL(mapped(QString)), this, SLOT(selectLensAtIndex(QString)));
 }
 
 bool Oculars::isBinocularDefined()
@@ -2257,13 +2257,13 @@ QMenu* Oculars::addLensSubmenu(QMenu* parent)
 		{
 			label = lenses[index]->getName();
 		}
-		QAction* action = submenu->addAction(label, lenseSignalMapper, SLOT(map()));
+		QAction* action = submenu->addAction(label, lensesSignalMapper, SLOT(map()));
 		if (index == selectedLensIndex)
 		{
 			action->setCheckable(true);
 			action->setChecked(true);
 		}
-		lenseSignalMapper->setMapping(action, QString("%1").arg(index));
+		lensesSignalMapper->setMapping(action, QString("%1").arg(index));
 	}
 	return submenu;
 }
