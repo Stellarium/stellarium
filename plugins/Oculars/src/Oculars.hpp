@@ -294,7 +294,7 @@ private:
 	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
 	QSignalMapper * ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
 	QSignalMapper * telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
-	QSignalMapper * lenseSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
+	QSignalMapper * lensesSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
 
 	// for toolbar button
 	QPixmap * pxmapGlow;
