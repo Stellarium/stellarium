@@ -50,9 +50,9 @@
 SatellitesDialog::SatellitesDialog()
 	: StelDialog("Satellites")
 	, satelliteModified(false)
-	, updateTimer(0)
-	, importWindow(0)
-	, filterModel(0)
+	, updateTimer(Q_NULLPTR)
+	, importWindow(Q_NULLPTR)
+	, filterModel(Q_NULLPTR)
 	, checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
@@ -70,7 +70,7 @@ SatellitesDialog::~SatellitesDialog()
 	if (importWindow)
 	{
 		delete importWindow;
-		importWindow = 0;
+		importWindow = Q_NULLPTR;
 	}
 
 	delete ui;
