@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-22 15:16+0700\n"
-"PO-Revision-Date: 2017-05-19 22:21+0000\n"
+"PO-Revision-Date: 2017-05-23 21:21+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-23 05:30+0000\n"
-"X-Generator: Launchpad (build 18387)\n"
+"X-Launchpad-Export-Date: 2017-05-24 05:25+0000\n"
+"X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
@@ -448,7 +448,7 @@ msgstr "nach Extinktion"
 #: src/core/modules/Nebula.cpp:244 src/core/modules/Nebula.cpp:252
 #, qt-format
 msgid "Contrast index: %1"
-msgstr ""
+msgstr "Kontrastindex: %1"
 
 #: src/core/modules/Nebula.cpp:262
 #, qt-format
@@ -3570,25 +3570,25 @@ msgstr "Julianischer Tag"
 #. TRANSLATORS: phase
 #: src/gui/AstroCalcDialog.cpp:765
 msgid "phase"
-msgstr ""
+msgstr "Phase"
 
 #. TRANSLATORS: distance
 #: src/gui/AstroCalcDialog.cpp:767
 msgid "dist."
-msgstr ""
+msgstr "Entf."
 
 #. TRANSLATORS: elongation
 #: src/gui/AstroCalcDialog.cpp:769
 msgid "elong."
-msgstr ""
+msgstr "Elong."
 
 #: src/gui/AstroCalcDialog.cpp:800
 msgid "Planetocentric distance"
-msgstr ""
+msgstr "Planetozentrische Entfernung"
 
 #: src/gui/AstroCalcDialog.cpp:802
 msgid "Topocentric distance"
-msgstr ""
+msgstr "Topozentrische Entfernung"
 
 #: src/gui/AstroCalcDialog.cpp:803 src/gui/AstroCalcDialog.cpp:1560
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
@@ -3736,36 +3736,36 @@ msgstr "Ortszeit"
 
 #: src/gui/AstroCalcDialog.cpp:1506
 msgid "Magnitude vs. Time"
-msgstr ""
+msgstr "Helligkeit vs. Zeit"
 
 #: src/gui/AstroCalcDialog.cpp:1509
 msgid "Phase vs. Time"
-msgstr ""
+msgstr "Phase vs. Zeit"
 
 #: src/gui/AstroCalcDialog.cpp:1512
 msgid "Distance vs. Time"
-msgstr ""
+msgstr "Entfernung vs. Zeit"
 
 #: src/gui/AstroCalcDialog.cpp:1515
 msgid "Elongation vs. Time"
-msgstr ""
+msgstr "Elongation vs. Zeit"
 
 #: src/gui/AstroCalcDialog.cpp:1518
 msgid "Angular size vs. Time"
-msgstr ""
+msgstr "Winkeldurchmesser vs. Zeit"
 
 #: src/gui/AstroCalcDialog.cpp:1521
 msgid "Phase angle vs. Time"
-msgstr ""
+msgstr "Phasenwinkel vs. Zeit"
 
 #: src/gui/AstroCalcDialog.cpp:1559
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
 #: src/gui/AstroCalcDialog.cpp:1569
 msgid "Mm"
-msgstr ""
+msgstr "Mm"
 
 #: src/gui/AstroCalcDialog.cpp:1581 src/gui/AstroCalcDialog.cpp:1616
 msgid "Magnitude"
@@ -3773,7 +3773,7 @@ msgstr "Visuelle Helligkeit"
 
 #: src/gui/AstroCalcDialog.cpp:1587 src/gui/AstroCalcDialog.cpp:1622
 msgid "Phase"
-msgstr ""
+msgstr "Phase"
 
 #: src/gui/AstroCalcDialog.cpp:1592 src/gui/AstroCalcDialog.cpp:1627
 #: src/ui_configurationDialog.h:1344
@@ -3782,15 +3782,15 @@ msgstr "Entfernung"
 
 #: src/gui/AstroCalcDialog.cpp:1597 src/gui/AstroCalcDialog.cpp:1632
 msgid "Elongation"
-msgstr ""
+msgstr "Elongation"
 
 #: src/gui/AstroCalcDialog.cpp:1602 src/gui/AstroCalcDialog.cpp:1637
 msgid "Angular size"
-msgstr ""
+msgstr "Winkeldurchmesser"
 
 #: src/gui/AstroCalcDialog.cpp:1607 src/gui/AstroCalcDialog.cpp:1642
 msgid "Phase angle"
-msgstr ""
+msgstr "Phasenwinkel"
 
 #: src/gui/AstroCalcDialog.cpp:1718
 #, qt-format
@@ -7762,11 +7762,11 @@ msgstr "Höhe und Zeit"
 
 #: src/ui_astroCalcDialog.h:861
 msgid "Graphs"
-msgstr ""
+msgstr "Kurven"
 
 #: src/ui_astroCalcDialog.h:863 src/ui_astroCalcDialog.h:936
 msgid "Graphs on the current year"
-msgstr ""
+msgstr "Kurvendiagramme für das aktuelle Jahr"
 
 #: src/ui_astroCalcDialog.h:866
 msgctxt "What's Up Tonight"
@@ -7847,7 +7847,7 @@ msgstr "Zeige Positionsmarkierungen des gewählten Himmelskörpers am Himmel"
 
 #: src/ui_astroCalcDialog.h:906
 msgid "Show markers"
-msgstr ""
+msgstr "Zeige Markierungen"
 
 #: src/ui_astroCalcDialog.h:908
 msgid "Show dates of positions of current celestial body near markers"
@@ -7856,15 +7856,15 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:910
 msgid "Show dates"
-msgstr ""
+msgstr "Zeige Daten"
 
 #: src/ui_astroCalcDialog.h:912
 msgid "Show magnitudes of current celestial body"
-msgstr ""
+msgstr "Zeige Helligkeit des aktuellen Kimmelskörpers"
 
 #: src/ui_astroCalcDialog.h:914
 msgid "Show magnitudes"
-msgstr ""
+msgstr "Zeigre Helligkeiten"
 
 #: src/ui_astroCalcDialog.h:916
 msgid "Maximum allowed separation:"
@@ -7904,15 +7904,15 @@ msgstr "Bitte Objekt wählen um den Verlauf 'Höhe vs. Zeit' zu zeichnen."
 
 #: src/ui_astroCalcDialog.h:932
 msgid "Second graph (yellow):"
-msgstr ""
+msgstr "Zweite Kurve (gelb):"
 
 #: src/ui_astroCalcDialog.h:933
 msgid "First graph (red):"
-msgstr ""
+msgstr "Erste Kurve (rot):"
 
 #: src/ui_astroCalcDialog.h:935
 msgid "Draw graphs"
-msgstr ""
+msgstr "Zeichne Kurven"
 
 #: src/ui_astroCalcDialog.h:938
 msgid "Select a category:"
