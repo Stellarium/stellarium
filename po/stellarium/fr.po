@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-22 15:16+0700\n"
-"PO-Revision-Date: 2017-05-21 15:13+0000\n"
+"PO-Revision-Date: 2017-05-23 15:56+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-23 05:29+0000\n"
-"X-Generator: Launchpad (build 18387)\n"
+"X-Launchpad-Export-Date: 2017-05-24 05:25+0000\n"
+"X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
@@ -3729,36 +3729,36 @@ msgstr "Heure locale"
 
 #: src/gui/AstroCalcDialog.cpp:1506
 msgid "Magnitude vs. Time"
-msgstr ""
+msgstr "Magnitude en fct. du temps"
 
 #: src/gui/AstroCalcDialog.cpp:1509
 msgid "Phase vs. Time"
-msgstr ""
+msgstr "Phase en fct. du temps"
 
 #: src/gui/AstroCalcDialog.cpp:1512
 msgid "Distance vs. Time"
-msgstr ""
+msgstr "Distance en fct. du temps"
 
 #: src/gui/AstroCalcDialog.cpp:1515
 msgid "Elongation vs. Time"
-msgstr ""
+msgstr "Élongation en fct. du temps"
 
 #: src/gui/AstroCalcDialog.cpp:1518
 msgid "Angular size vs. Time"
-msgstr ""
+msgstr "Diamètre angulaire en fct. du temps"
 
 #: src/gui/AstroCalcDialog.cpp:1521
 msgid "Phase angle vs. Time"
-msgstr ""
+msgstr "Angle de phase en fct. du temps"
 
 #: src/gui/AstroCalcDialog.cpp:1559
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
 #: src/gui/AstroCalcDialog.cpp:1569
 msgid "Mm"
-msgstr ""
+msgstr "Mm"
 
 #: src/gui/AstroCalcDialog.cpp:1581 src/gui/AstroCalcDialog.cpp:1616
 msgid "Magnitude"
@@ -3766,7 +3766,7 @@ msgstr "Magnitude"
 
 #: src/gui/AstroCalcDialog.cpp:1587 src/gui/AstroCalcDialog.cpp:1622
 msgid "Phase"
-msgstr ""
+msgstr "Phase"
 
 #: src/gui/AstroCalcDialog.cpp:1592 src/gui/AstroCalcDialog.cpp:1627
 #: src/ui_configurationDialog.h:1344
@@ -3775,15 +3775,15 @@ msgstr "Distance"
 
 #: src/gui/AstroCalcDialog.cpp:1597 src/gui/AstroCalcDialog.cpp:1632
 msgid "Elongation"
-msgstr ""
+msgstr "Élongation"
 
 #: src/gui/AstroCalcDialog.cpp:1602 src/gui/AstroCalcDialog.cpp:1637
 msgid "Angular size"
-msgstr ""
+msgstr "Diamètre angulaire"
 
 #: src/gui/AstroCalcDialog.cpp:1607 src/gui/AstroCalcDialog.cpp:1642
 msgid "Phase angle"
-msgstr ""
+msgstr "Angle de phase"
 
 #: src/gui/AstroCalcDialog.cpp:1718
 #, qt-format
@@ -7770,7 +7770,7 @@ msgstr "Hauteur en fonction du temps"
 
 #: src/ui_astroCalcDialog.h:861
 msgid "Graphs"
-msgstr ""
+msgstr "Graphiques"
 
 #: src/ui_astroCalcDialog.h:863 src/ui_astroCalcDialog.h:936
 msgid "Graphs on the current year"
@@ -7863,7 +7863,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:910
 msgid "Show dates"
-msgstr ""
+msgstr "Afficher les dates"
 
 #: src/ui_astroCalcDialog.h:912
 msgid "Show magnitudes of current celestial body"
@@ -7913,15 +7913,15 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:932
 msgid "Second graph (yellow):"
-msgstr ""
+msgstr "Second graphique (jaune) :"
 
 #: src/ui_astroCalcDialog.h:933
 msgid "First graph (red):"
-msgstr ""
+msgstr "Premier graphique (rouge) :"
 
 #: src/ui_astroCalcDialog.h:935
 msgid "Draw graphs"
-msgstr ""
+msgstr "Dessiner les graphiques"
 
 #: src/ui_astroCalcDialog.h:938
 msgid "Select a category:"
@@ -13008,7 +13008,7 @@ msgstr "Consulter le manuel pour une description détaillée."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
-msgstr ""
+msgstr "Ce plugin a été développé durant l'ESA SoCiS 2015&amp;2016."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:235
 msgid "Server Name"
