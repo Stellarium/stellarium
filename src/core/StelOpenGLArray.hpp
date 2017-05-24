@@ -37,9 +37,8 @@ Q_DECLARE_LOGGING_CATEGORY(stelOpenGLArray)
 //! without repeated CPU-GPU data uploads.
 //! Each StelOpenGLArray uses a single vertex buffer for vertex data, an element index buffer,
 //! and a vertex array object for faster binding if the hardware supports it.
-class StelOpenGLArray : public QObject
+class StelOpenGLArray
 {
-    Q_OBJECT
 public:
 	//! Specifies the attribute location used for the glVertexAttribPointer calls.
 	//! Shaders should be configured to use these locations before linking,
@@ -63,7 +62,7 @@ public:
 
 	//! Constructs an empty StelOpenGLArray. No OpenGL objects are created with this call,
 	//! so this can be used without a GL context.
-	StelOpenGLArray(QObject* parent = Q_NULLPTR);
+	StelOpenGLArray();
 	//! Releases the OpenGL data, if it has not happened yet.
 	~StelOpenGLArray();
 
@@ -99,7 +98,7 @@ public:
 	//! Does not bind the array first.
 	inline void draw(int offset, int count) const
 	{
-        gl->glDrawElements(GL_TRIANGLES, count, m_indexBufferType, reinterpret_cast<const GLvoid*>(offset * m_indexBufferTypeSize));
+		gl->glDrawElements(GL_TRIANGLES, count, m_indexBufferType, reinterpret_cast<const GLvoid*>(offset * m_indexBufferTypeSize));
 	}
 
 	//! Returns the buffer used for the vertex data.
@@ -138,7 +137,7 @@ private:
 	int m_indexCount;
 	size_t m_memoryUsage;
 
-	size_t m_offsets[ATTLOC_SIZE];
+	quintptr m_offsets[ATTLOC_SIZE];
 	GLint m_sizes[ATTLOC_SIZE];
 	GLenum m_types[ATTLOC_SIZE];
 	GLsizei m_strides[ATTLOC_SIZE];
