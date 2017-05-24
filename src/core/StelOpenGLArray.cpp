@@ -81,20 +81,19 @@ void StelOpenGLArray::initGL()
 	}
 }
 
-StelOpenGLArray::StelOpenGLArray(QObject* parent)
-	: QObject(parent),
-	  m_vertexBuffer(QOpenGLBuffer::VertexBuffer),
+StelOpenGLArray::StelOpenGLArray()
+	: m_vertexBuffer(QOpenGLBuffer::VertexBuffer),
 	  m_indexBuffer(QOpenGLBuffer::IndexBuffer),
 	  m_indexBufferType(GL_UNSIGNED_INT),
 	  m_indexBufferTypeSize(sizeof(GLuint)),
 	  m_indexCount(0),
-	  m_memoryUsage(0)
+	  m_memoryUsage(0),
+	  m_offsets(),
+	  m_sizes(),
+	  m_types(),
+	  m_strides()
 {
-	for (int i =0;i<ATTLOC_SIZE;++i)
-	{
-		//an offset of -1 means this is currently an invalid attribute location
-		m_offsets[i] = -1;
-	}
+
 }
 
 StelOpenGLArray::~StelOpenGLArray()
@@ -104,16 +103,25 @@ StelOpenGLArray::~StelOpenGLArray()
 
 void StelOpenGLArray::clear()
 {
+	//QOpenGLBuffer has no good copy constructor/assignment operator
+	//so we can't just do *this = StelOpenGLArray() here
 	if(m_vao.isCreated())
 		m_vao.destroy();
-	m_indexBuffer.destroy();
 	m_vertexBuffer.destroy();
+	m_indexBuffer.destroy();
+
+	m_indexBufferType = GL_UNSIGNED_INT;
+	m_indexBufferTypeSize = sizeof(GLuint);
+	m_indexCount = 0;
+	m_memoryUsage = 0;
+
 	for (int i =0;i<ATTLOC_SIZE;++i)
 	{
-		//an offset of -1 means this is currently an invalid attribute location
-		m_offsets[i] = -1;
+		m_offsets[i] = 0;
+		m_sizes[i] = 0;
+		m_types[i] = 0;
+		m_strides[i] = 0;
 	}
-	m_indexCount = 0;
 }
 
 bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
@@ -283,9 +291,9 @@ void StelOpenGLArray::bindBuffers()
 	// this is a bit incorrect, because the following is global state that does not depend on a shader
 	// (but may be stored in a VAO to enable faster binding/unbinding)
 
-	for(int i = 0; i<ATTLOC_SIZE;++i)
+	for(GLuint i = 0; i<ATTLOC_SIZE;++i)
 	{
-		if(m_offsets[i]>=0) //a negative offset disables the location
+		if(m_sizes[i]>0) //zero size disables the location
 		{
 			gl->glEnableVertexAttribArray(i);
 			gl->glVertexAttribPointer(i, m_sizes[i], m_types[i], GL_FALSE, m_strides[i], reinterpret_cast<const void *>(m_offsets[i]) );
@@ -303,9 +311,9 @@ void StelOpenGLArray::releaseBuffers()
 {
 	m_indexBuffer.release();
 
-	for(int i = 0; i<ATTLOC_SIZE;++i)
+	for(GLuint i = 0; i<ATTLOC_SIZE;++i)
 	{
-		if(m_offsets[i]>=0)
+		if(m_sizes[i]>0) //zero size disables the location
 		{
 			gl->glDisableVertexAttribArray(i);
 		}
