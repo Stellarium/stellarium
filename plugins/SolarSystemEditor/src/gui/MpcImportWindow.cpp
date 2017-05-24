@@ -54,10 +54,10 @@
 MpcImportWindow::MpcImportWindow()
 	: StelDialog("SolarSystemEditorMPCimport")
 	, importType(ImportType())
-	, downloadReply(0)
-	, queryReply(0)
-	, downloadProgressBar(0)
-	, queryProgressBar(0)
+	, downloadReply(Q_NULLPTR)
+	, queryReply(Q_NULLPTR)
+	, downloadProgressBar(Q_NULLPTR)
+	, queryProgressBar(Q_NULLPTR)
 	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
