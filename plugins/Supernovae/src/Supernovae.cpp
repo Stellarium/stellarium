@@ -416,7 +416,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 	}
 }
 
-int Supernovae::getJsonFileVersion(void)
+int Supernovae::getJsonFileVersion(void) const
 {	
 	int jsonVersion = -1;
 	QFile sneJsonFile(sneJsonPath);
@@ -438,7 +438,7 @@ int Supernovae::getJsonFileVersion(void)
 	return jsonVersion;
 }
 
-bool Supernovae::checkJsonFileFormat()
+bool Supernovae::checkJsonFileFormat() const
 {
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
@@ -462,7 +462,7 @@ bool Supernovae::checkJsonFileFormat()
 	return true;
 }
 
-float Supernovae::getLowerLimitBrightness()
+float Supernovae::getLowerLimitBrightness() const
 {
 	float lowerLimit = 10.f;
 	QFile sneJsonFile(sneJsonPath);
@@ -642,7 +642,7 @@ void Supernovae::messageTimeout(void)
 	}
 }
 
-QString Supernovae::getSupernovaeList()
+QString Supernovae::getSupernovaeList() const
 {
 	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QStringList out;

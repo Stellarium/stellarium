@@ -403,16 +403,16 @@ public slots:
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
 	// called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
-	QColor getLineColor(ArchaeoLine::Line whichLine);
+	QColor getLineColor(ArchaeoLine::Line whichLine) const;
 	//! query a line for its current defining angle. Returns declination or azimuth, respectively.
-	double getLineAngle(ArchaeoLine::Line whichLine);
-	QString getLineLabel(ArchaeoLine::Line whichLine);	
+	double getLineAngle(ArchaeoLine::Line whichLine) const;
+	QString getLineLabel(ArchaeoLine::Line whichLine) const;
 
 private slots:
 	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.
 	void updateObserverLocation(StelLocation loc);
 	//! Compute azimuth (from North) towards Target. All angles (args and result) are in degrees.
-	double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget) const;
+	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
 
 private:
 	QFont font;

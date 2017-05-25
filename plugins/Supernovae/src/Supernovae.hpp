@@ -158,13 +158,13 @@ public:
 	UpdateState getUpdateState(void) {return updateState;}
 
 	//! Get list of supernovae
-	QString getSupernovaeList();
+	QString getSupernovaeList() const;
 
 	//! Get lower limit of  brightness for displayed supernovae
-	float getLowerLimitBrightness();
+	float getLowerLimitBrightness() const;
 
 	//! Get count of supernovae from catalog
-	int getCountSupernovae(void) {return SNCount;}
+	int getCountSupernovae(void) const {return SNCount;}
 
 signals:
 	//! @param state the new update state.
@@ -206,11 +206,11 @@ private:
 
 	//! Get the version from the "version" value in the supernovas.json file
 	//! @return version string, e.g. "1"
-	int getJsonFileVersion(void);
+	int getJsonFileVersion(void) const;
 
 	//! Check format of the catalog of supernovae
 	//! @return valid boolean, e.g. "true"
-	bool checkJsonFileFormat(void);
+	bool checkJsonFileFormat(void) const;
 
 	//! Parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());

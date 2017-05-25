@@ -74,7 +74,7 @@ public:
 	double getQuickFOV(const int item) const;
 
 private slots:
-	void setFOV(const int idx);
+	void setFOV(const int idx) const;
 
 private:
 	// if existing, delete Satellites section in main config.ini, then create with default values
