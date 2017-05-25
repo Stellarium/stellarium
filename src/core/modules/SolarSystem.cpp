@@ -403,11 +403,25 @@ void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
 // Init and load the solar system data
 void SolarSystem::loadPlanets()
 {
-	qDebug() << "Loading Solar System data ...";
-	QStringList solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem.ini");
+	qDebug() << "Loading Solar System data (1: planets and moons) ...";
+	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
+	if (solarSystemFile.isEmpty())
+	{
+		qWarning() << "ERROR while loading ssystem_major.ini (unable to find data/ssystem_major.ini): " << endl;
+		return;
+	}
+
+	if (!loadPlanets(solarSystemFile))
+	{
+		qWarning() << "ERROR while loading ssysyem_major.ini: " << endl;
+		return;
+	}
+
+	qDebug() << "Loading Solar System data (2: minor bodies)...";
+	QStringList solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem_minor.ini");
 	if (solarSystemFiles.isEmpty())
 	{
-		qWarning() << "ERROR while loading ssysyem.ini (unable to find data/ssystem.ini): " << endl;
+		qWarning() << "ERROR while loading ssystem_minor.ini (unable to find data/ssystem_minor.ini): " << endl;
 		return;
 	}
 
@@ -417,16 +431,20 @@ void SolarSystem::loadPlanets()
 			break;
 		else
 		{
-			sun.clear();
-			moon.clear();
-			earth.clear();
+//			sun.clear();
+//			moon.clear();
+//			earth.clear();
 
 			foreach (PlanetP p, systemPlanets)
 			{
-				p->satellites.clear();
-				p.clear();
+				// We can only delete minor objects now!
+				if (p->pType >= Planet::isAsteroid)
+				{
+					p->satellites.clear();
+					p.clear();
+				}
 			}
-			systemPlanets.clear();
+			//systemPlanets.clear();
 			//Memory leak? What's the proper way of cleaning shared pointers?
 
 			//If the file is in the user data directory, rename it:
@@ -466,7 +484,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// InitParser used to so we can no longer assume that.
 	//
 	// This means we must first decide what order to read the sections
-	// of the file in (each section contains one planet) to avoid setting
+	// of the file in (each section contains one planet/moon/asteroid/comet/...) to avoid setting
 	// the parent Planet* to one which has not yet been created.
 	//
 	// Stage 1: Make a map of body names back to the section names
@@ -486,9 +504,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	//     2 -> Moon
 	//     etc.
 	// 2b: Populate an ordered list of section names by iterating over
-	//     the QMultiMap.  This type of contains is always sorted on the
-	//     key, so it's easy.
-	//     i.e. [sol, earth, moon] is fine, but not [sol, moon, earth]
+	//     the QMultiMap.  This type of container is always sorted on the
+	//     key in ascending order, so it's easy.
+	//     i.e. [sun, earth, moon] is fine, but not [sun, moon, earth]
 	//
 	// Stage 3: iterate over the ordered sections decided in stage 2,
 	// creating the planet objects from the QSettings data.
@@ -543,7 +561,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		totalPlanets++;
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString().simplified();
-		const QString strParent = pd.value(secname+"/parent").toString();
+		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
 		PlanetP parent;
 		if (strParent!="none")
 		{
@@ -566,12 +584,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		const QString funcName = pd.value(secname+"/coord_func").toString();
 		posFuncType posfunc=Q_NULLPTR;
-		void* userDataPtr=Q_NULLPTR;
+		void* orbitPtr=Q_NULLPTR;
 		OsculatingFunctType *osculatingFunc = 0;
 		bool closeOrbit = pd.value(secname+"/closeOrbit", true).toBool();
 
 		if (funcName=="ell_orbit")
 		{
+			// GZ TODO: It seems ell_orbit is only used for planet moons. Just assert eccentricity<1 and remove a few extra calculations?
 			// Read the orbital elements
 			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity").toDouble();
@@ -670,7 +689,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 								   parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 
-			userDataPtr = orb;
+			orbitPtr = orb;
 			posfunc = &ellipticalOrbitPosFunc;
 		}
 		else if (funcName=="comet_orbit")
@@ -775,7 +794,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							 parent_rot_asc_node,
 							 parent_rot_j2000_longitude);
 			orbits.push_back(orb);
-			userDataPtr = orb;
+			orbitPtr = orb;
 			posfunc = &cometOrbitPosFunc;
 		}
 
@@ -888,7 +907,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		if (posfunc==Q_NULLPTR)
 		{
-			qCritical() << "ERROR : can't find posfunc " << funcName << " for " << englishName;
+			qCritical() << "ERROR: can't find posfunc " << funcName << " for " << englishName;
 			exit(-1);
 		}
 
@@ -914,7 +933,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
 						    pd.value(secname+"/model").toString(),
 						    posfunc,
-						    userDataPtr,
+						    orbitPtr,
 						    osculatingFunc,
 						    closeOrbit,
 						    pd.value(secname+"/hidden", false).toBool(),
@@ -967,7 +986,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					      pd.value(secname+"/tex_map", "nomap.png").toString(),
 					      pd.value(secname+"/model").toString(),
 					      posfunc,
-					      userDataPtr,
+					      orbitPtr,
 					      osculatingFunc,
 					      closeOrbit,
 					      pd.value(secname+"/hidden", false).toBool(),
@@ -1019,7 +1038,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,
-					       userDataPtr,
+					       orbitPtr,
 					       osculatingFunc,
 					       closeOrbit,
 					       pd.value(secname+"/hidden", false).toBool(),
@@ -1093,12 +1112,15 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	}
 
 	// special case: load earth shadow texture
-	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
+	if (!Planet::texEarthShadow)
+		Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
 
 	// Also comets just have static textures.
-	Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	if (!Comet::comaTexture)
+		Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 	//tail textures. We use paraboloid tail bodies, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
-	Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	if (!Comet::tailTexture)
+		Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	return true;
 }
@@ -2071,6 +2093,7 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 	return res;
 }
 
+// GZ TODO: This could be modified to only delete&reload the minor objects. For now, we really load both parts again like in the 0.10?-0.15 series.
 void SolarSystem::reloadPlanets()
 {
 	// Save flag states
@@ -2100,6 +2123,8 @@ void SolarSystem::reloadPlanets()
 	}
 	// Unload all Solar System objects
 	selected.clear();//Release the selected one
+
+	// GZ TODO in case this methods gets converted to only reload minor bodies: Only delete Orbits which are not referenced by some Planet.
 	foreach (Orbit* orb, orbits)
 	{
 		delete orb;
@@ -2127,7 +2152,7 @@ void SolarSystem::reloadPlanets()
 	Comet::tailTexture.clear();
 	Comet::comaTexture.clear();
 
-	// Re-load the ssystem.ini file
+	// Re-load the ssystem_major.ini and ssystem_minor.ini file
 	loadPlanets();	
 	computePositions(core->getJDE());
 	setSelected("");
