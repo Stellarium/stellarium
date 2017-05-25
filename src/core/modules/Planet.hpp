@@ -140,7 +140,7 @@ public:
 	       const QString& normalMapName,
 	       const QString& objModelName,
 	       posFuncType _coordFunc,
-	       void* userDataPtr,
+	       void* anOrbitPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden,
@@ -522,7 +522,7 @@ protected:
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;
-	void* userDataPtr;               // this is always used with an Orbit object.
+	void* orbitPtr;               // this is always used with an Orbit object.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
