@@ -46,7 +46,7 @@ public:
 	TuiNodeInt(const QString& text, QObject* receiver, const char* method, int defValue, 
 		   int min, int max, int inc, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleEditingKey(int key);
-	virtual QString getDisplayText();
+	virtual QString getDisplayText() const;
 
 signals:
 	void setValue(int b);
