@@ -198,7 +198,7 @@ void EquationOfTime::readSettingsFromConfig(void)
 	conf->endGroup();
 }
 
-void EquationOfTime::saveSettingsToConfig(void)
+void EquationOfTime::saveSettingsToConfig(void) const
 {
 	conf->beginGroup("EquationOfTime");
 

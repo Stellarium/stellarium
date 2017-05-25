@@ -111,7 +111,7 @@ TuiNodeResponse TuiNodeDateTime::handleEditingKey(int key)
 	return response;
 }
 
-QString TuiNodeDateTime::getDisplayText() 
+QString TuiNodeDateTime::getDisplayText() const
 {
 	QList<int> parts = getParts(value);
 	QString yy = QString("%1").arg(parts.at(0));
@@ -195,7 +195,7 @@ void TuiNodeDateTime::incPart(int part, bool add)
 	}
 }
 
-QList<int> TuiNodeDateTime::getParts(double jd)
+QList<int> TuiNodeDateTime::getParts(double jd) const
 {
 	int year, month, day, hour, minute, second;
 	StelUtils::getDateFromJulianDay(jd, &year, &month, &day);
