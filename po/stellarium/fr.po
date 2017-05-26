@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-22 15:16+0700\n"
-"PO-Revision-Date: 2017-05-23 15:56+0000\n"
+"PO-Revision-Date: 2017-05-25 20:10+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-24 05:25+0000\n"
+"X-Launchpad-Export-Date: 2017-05-26 05:23+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -2978,7 +2978,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:1572
 msgid "Visual magnitude based on phase angle and albedo."
-msgstr ""
+msgstr "Magnitude visuelle en fonction de l'angle de phase et de l'albédo."
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
@@ -6276,7 +6276,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2140
 msgid "Use more accurate 3D models (where available)"
-msgstr ""
+msgstr "Utiliser les modèles 3D plus précis (si disponibles)"
 
 #: src/ui_viewDialog.h:2141
 msgid "Show planet markers"
@@ -7066,6 +7066,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1298
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr ""
+"Le champ vertical (hauteur) de la vue lors du démarrage de Stellarium"
 
 #: src/ui_configurationDialog.h:1301
 msgid "The direction you're looking when Stellarium starts"
@@ -7217,7 +7218,7 @@ msgstr "Paramètres supplémentaires"
 
 #: src/ui_configurationDialog.h:1370
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
-msgstr ""
+msgstr "Utiliser l'unité mag/arcsec^2 pour la luminosité de surface"
 
 #: src/ui_configurationDialog.h:1371
 msgid "Control"
@@ -7489,10 +7490,12 @@ msgstr "Le zoom arrière automatique renvoie au point de vue initial"
 #: src/ui_configurationDialog.h:1491
 msgid "Toggle the usage of background under GUI buttons"
 msgstr ""
+"Activer/désactiver l'utilisation d'un fond sous les boutons de l'interface "
+"graphique"
 
 #: src/ui_configurationDialog.h:1493
 msgid "Use buttons background"
-msgstr ""
+msgstr "Utiliser un fond pour les boutons"
 
 #: src/ui_configurationDialog.h:1494
 msgid "Indication for mount mode"
@@ -7774,7 +7777,7 @@ msgstr "Graphiques"
 
 #: src/ui_astroCalcDialog.h:863 src/ui_astroCalcDialog.h:936
 msgid "Graphs on the current year"
-msgstr ""
+msgstr "Graphiques de l'année actuelle"
 
 #: src/ui_astroCalcDialog.h:866
 msgctxt "What's Up Tonight"
@@ -7854,7 +7857,7 @@ msgstr "Afficher les marqueurs de position de l'objet actuel"
 
 #: src/ui_astroCalcDialog.h:906
 msgid "Show markers"
-msgstr ""
+msgstr "Afficher les marqueurs"
 
 #: src/ui_astroCalcDialog.h:908
 msgid "Show dates of positions of current celestial body near markers"
@@ -7867,7 +7870,7 @@ msgstr "Afficher les dates"
 
 #: src/ui_astroCalcDialog.h:912
 msgid "Show magnitudes of current celestial body"
-msgstr ""
+msgstr "Afficher les magnitudes du corps céleste actuel"
 
 #: src/ui_astroCalcDialog.h:914
 msgid "Show magnitudes"
