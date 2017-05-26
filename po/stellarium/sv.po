@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-22 15:16+0700\n"
-"PO-Revision-Date: 2017-05-23 10:14+0000\n"
+"PO-Revision-Date: 2017-05-25 07:33+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-24 05:26+0000\n"
+"X-Launchpad-Export-Date: 2017-05-26 05:24+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -446,7 +446,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:244 src/core/modules/Nebula.cpp:252
 #, qt-format
 msgid "Contrast index: %1"
-msgstr ""
+msgstr "Kontrastindex: %1"
 
 #: src/core/modules/Nebula.cpp:262
 #, qt-format
@@ -1026,7 +1026,7 @@ msgstr "Upplyst: %1%"
 #: src/core/modules/Planet.cpp:528
 #, qt-format
 msgid "Albedo: %1"
-msgstr ""
+msgstr "Albedo: %1"
 
 #: src/core/modules/Planet.cpp:540
 #, qt-format
@@ -2430,7 +2430,7 @@ msgstr "Ctrl & vänster musknappsdragning"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Tidskrollning: minuter"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl & mouse wheel"
@@ -2438,7 +2438,7 @@ msgstr "Ctrl & mushjul"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Tidskrollning: timmar"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Shift & mouse wheel"
@@ -2446,7 +2446,7 @@ msgstr "Ctrl+shift & mushjul"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Tidskrollning: dagar"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Ctrl+Alt & mouse wheel"
@@ -2454,7 +2454,7 @@ msgstr "Ctrl+alt & mushjul"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Tidskrollning: år"
 
 #: src/gui/HelpDialog.cpp:170
 msgid "Ctrl+Alt+Shift & mouse wheel"
@@ -2490,7 +2490,7 @@ msgstr "Shift & vänsterklicka"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete marker closest to mouse cursor"
-msgstr ""
+msgstr "Radera markör närmast muspekaren"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2746,7 +2746,7 @@ msgstr "Lokal genomsnittlig soltid"
 
 #: src/gui/StelGuiItems.cpp:641 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
-msgstr ""
+msgstr "Lokal sann soltid"
 
 #: src/gui/StelGuiItems.cpp:678
 #, c-format, qt-format
@@ -2766,7 +2766,7 @@ msgstr "planetocentrisk betraktare"
 #: src/gui/StelGuiItems.cpp:727
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:743
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:440
@@ -2777,7 +2777,7 @@ msgstr "Synfält"
 #: src/gui/StelGuiItems.cpp:762
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr ""
+msgstr "FPS"
 
 #: src/gui/StelGuiItems.cpp:770
 msgid "Frames per second"
@@ -2903,7 +2903,7 @@ msgstr "Högsta frekvens någonsin (1833 års leonider)"
 #: src/gui/ViewDialog.cpp:1530
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
-msgstr ""
+msgstr "G. Mueller (1893)"
 
 #: src/gui/ViewDialog.cpp:1531
 msgctxt "magnitude algorithm"
