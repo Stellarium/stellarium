@@ -80,8 +80,9 @@ declinations very slightly move as well.
 class ArchaeoLine : QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(Vec3f color READ getColor WRITE setColor)
-	Q_PROPERTY(bool flagLabel READ isLabelVisible WRITE setLabelVisible)
+	Q_PROPERTY(Vec3f color READ getColor WRITE setColor NOTIFY colorChanged)
+	Q_PROPERTY(bool flagLabel READ isLabelVisible WRITE setLabelVisible NOTIFY flagLabelChanged)
+	Q_PROPERTY(double definingAngle READ getDefiningAngle WRITE setDefiningAngle NOTIFY definingAngleChanged)
 
 	//Need to register Enum with Qt to be able to use it as Q_PROPERTY
 	//or in signals/slots
@@ -117,19 +118,22 @@ public:
 	void draw(StelCore* core, float intensity=1.0f) const;
 	const Vec3f& getColor() const {return color;}
 	bool isDisplayed(void) const {return fader;}
-
+signals:
+	void colorChanged(Vec3f c);
+	void flagLabelChanged(bool on);
+	void definingAngleChanged(double angle);
 public slots:
-	void setColor(const Vec3f& c) {color = c;}
+	void setColor(const Vec3f& c);
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	void setFontSize(double newSize){font.setPixelSize(newSize);}
 	//! reset declination/azimuth angle (degrees) of this arc.
-	void setDefiningAngle(double angle){definingAngle=angle;}
+	void setDefiningAngle(double angle);
 	double getDefiningAngle(void) const {return definingAngle;} // returns declination for most, or azimuth.
 	//! Re-translates the label.
 	void updateLabel();
-	void setLabelVisible(bool b){flagLabel=b;}
+	void setLabelVisible(bool b);
 	bool isLabelVisible() const{return flagLabel;}
 	void setLineType(ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
 	//! change label. Used only for selected-object line - the other labels should not be changed!
