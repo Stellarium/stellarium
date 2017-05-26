@@ -1832,7 +1832,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 2: // Bright double stars
 		{
-			foreach (const starData& star, doubleHipStars)
+			foreach (const StelACStarData& star, doubleHipStars)
 			{
 				if (inEnglish)
 					result << star.firstKey()->getEnglishName();
@@ -1843,7 +1843,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 3: // Bright variable stars
 		{
-			foreach (const starData& star, variableHipStars)
+			foreach (const StelACStarData& star, variableHipStars)
 			{
 				if (inEnglish)
 					result << star.firstKey()->getEnglishName();

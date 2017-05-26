@@ -62,6 +62,8 @@ typedef struct
 	float separation;	//! Separation at date of last satisfactory observation, arcsec
 } wds;
 
+typedef QMap<StelObjectP, float> StelACStarData;
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
@@ -352,9 +354,6 @@ signals:
 	void labelsAmountChanged(float a);
 
 private:
-
-	typedef QMap<StelObjectP, float> starData;
-
 	void setCheckFlag(const QString& catalogId, bool b);
 
 	void copyDefaultConfigFile();
