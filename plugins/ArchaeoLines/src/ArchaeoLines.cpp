@@ -1438,3 +1438,28 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
 }
+
+void ArchaeoLine::setColor(const Vec3f& c)
+{
+	if (c!=color)
+	{
+		color = c;
+		emit colorChanged(c);
+	}
+}
+void ArchaeoLine::setDefiningAngle(double angle)
+{
+	if (angle != definingAngle)
+	{
+		definingAngle=angle;
+		emit definingAngleChanged(angle);
+	}
+}
+void ArchaeoLine::setLabelVisible(bool b)
+{
+	if (b!=flagLabel)
+	{
+		flagLabel=b;
+		emit flagLabelChanged(b);
+	}
+}
