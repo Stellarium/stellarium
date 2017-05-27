@@ -400,7 +400,7 @@ void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
 	static_cast<CometOrbit*>(userDataPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz);
 }
 
-// Init and load the solar system data
+// Init and load the solar system data (2 files)
 void SolarSystem::loadPlanets()
 {
 	qDebug() << "Loading Solar System data (1: planets and moons) ...";
@@ -413,7 +413,7 @@ void SolarSystem::loadPlanets()
 
 	if (!loadPlanets(solarSystemFile))
 	{
-		qWarning() << "ERROR while loading ssysyem_major.ini: " << endl;
+		qWarning() << "ERROR while loading ssystem_major.ini: " << endl;
 		return;
 	}
 
@@ -428,13 +428,17 @@ void SolarSystem::loadPlanets()
 	foreach (const QString& solarSystemFile, solarSystemFiles)
 	{
 		if (loadPlanets(solarSystemFile))
+		{
+			qDebug() << "ssystem_minor.ini loaded";
 			break;
+		}
 		else
 		{
 //			sun.clear();
 //			moon.clear();
 //			earth.clear();
 
+			qDebug() << "removing minor bodies";
 			foreach (PlanetP p, systemPlanets)
 			{
 				// We can only delete minor objects now!
@@ -444,7 +448,7 @@ void SolarSystem::loadPlanets()
 					p.clear();
 				}
 			}
-			//systemPlanets.clear();
+			systemPlanets.clear();
 			//Memory leak? What's the proper way of cleaning shared pointers?
 
 			//If the file is in the user data directory, rename it:
@@ -585,7 +589,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString funcName = pd.value(secname+"/coord_func").toString();
 		posFuncType posfunc=Q_NULLPTR;
 		void* orbitPtr=Q_NULLPTR;
-		OsculatingFunctType *osculatingFunc = 0;
+		OsculatingFunctType *osculatingFunc = Q_NULLPTR;
 		bool closeOrbit = pd.value(secname+"/closeOrbit", true).toBool();
 
 		if (funcName=="ell_orbit")
@@ -798,110 +802,110 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			posfunc = &cometOrbitPosFunc;
 		}
 
-		if (funcName=="sun_special")
+		else if (funcName=="sun_special")
 			posfunc = &get_sun_helio_coordsv;
 
-		if (funcName=="mercury_special") {
+		else if (funcName=="mercury_special") {
 			posfunc = &get_mercury_helio_coordsv;
 			osculatingFunc = &get_mercury_helio_osculating_coords;
 		}
 
-		if (funcName=="venus_special") {
+		else if (funcName=="venus_special") {
 			posfunc = &get_venus_helio_coordsv;
 			osculatingFunc = &get_venus_helio_osculating_coords;
 		}
 
-		if (funcName=="earth_special") {
+		else if (funcName=="earth_special") {
 			posfunc = &get_earth_helio_coordsv;
 			osculatingFunc = &get_earth_helio_osculating_coords;
 		}
 
-		if (funcName=="lunar_special")
+		else if (funcName=="lunar_special")
 			posfunc = &get_lunar_parent_coordsv;
 
-		if (funcName=="mars_special") {
+		else if (funcName=="mars_special") {
 			posfunc = &get_mars_helio_coordsv;
 			osculatingFunc = &get_mars_helio_osculating_coords;
 		}
 
-		if (funcName=="phobos_special")
+		else if (funcName=="phobos_special")
 			posfunc = posFuncType(get_phobos_parent_coordsv);
 
-		if (funcName=="deimos_special")
+		else if (funcName=="deimos_special")
 			posfunc = &get_deimos_parent_coordsv;
 
-		if (funcName=="jupiter_special") {
+		else if (funcName=="jupiter_special") {
 			posfunc = &get_jupiter_helio_coordsv;
 			osculatingFunc = &get_jupiter_helio_osculating_coords;
 		}
 
-		if (funcName=="europa_special")
+		else if (funcName=="europa_special")
 			posfunc = &get_europa_parent_coordsv;
 
-		if (funcName=="calisto_special")
+		else if (funcName=="calisto_special")
 			posfunc = &get_callisto_parent_coordsv;
 
-		if (funcName=="io_special")
+		else if (funcName=="io_special")
 			posfunc = &get_io_parent_coordsv;
 
-		if (funcName=="ganymede_special")
+		else if (funcName=="ganymede_special")
 			posfunc = &get_ganymede_parent_coordsv;
 
-		if (funcName=="saturn_special") {
+		else if (funcName=="saturn_special") {
 			posfunc = &get_saturn_helio_coordsv;
 			osculatingFunc = &get_saturn_helio_osculating_coords;
 		}
 
-		if (funcName=="mimas_special")
+		else if (funcName=="mimas_special")
 			posfunc = &get_mimas_parent_coordsv;
 
-		if (funcName=="enceladus_special")
+		else if (funcName=="enceladus_special")
 			posfunc = &get_enceladus_parent_coordsv;
 
-		if (funcName=="tethys_special")
+		else if (funcName=="tethys_special")
 			posfunc = &get_tethys_parent_coordsv;
 
-		if (funcName=="dione_special")
+		else if (funcName=="dione_special")
 			posfunc = &get_dione_parent_coordsv;
 
-		if (funcName=="rhea_special")
+		else if (funcName=="rhea_special")
 			posfunc = &get_rhea_parent_coordsv;
 
-		if (funcName=="titan_special")
+		else if (funcName=="titan_special")
 			posfunc = &get_titan_parent_coordsv;
 
-		if (funcName=="iapetus_special")
+		else if (funcName=="iapetus_special")
 			posfunc = &get_iapetus_parent_coordsv;
 
-		if (funcName=="hyperion_special")
+		else if (funcName=="hyperion_special")
 			posfunc = &get_hyperion_parent_coordsv;
 
-		if (funcName=="uranus_special") {
+		else if (funcName=="uranus_special") {
 			posfunc = &get_uranus_helio_coordsv;
 			osculatingFunc = &get_uranus_helio_osculating_coords;
 		}
 
-		if (funcName=="miranda_special")
+		else if (funcName=="miranda_special")
 			posfunc = &get_miranda_parent_coordsv;
 
-		if (funcName=="ariel_special")
+		else if (funcName=="ariel_special")
 			posfunc = &get_ariel_parent_coordsv;
 
-		if (funcName=="umbriel_special")
+		else if (funcName=="umbriel_special")
 			posfunc = &get_umbriel_parent_coordsv;
 
-		if (funcName=="titania_special")
+		else if (funcName=="titania_special")
 			posfunc = &get_titania_parent_coordsv;
 
-		if (funcName=="oberon_special")
+		else if (funcName=="oberon_special")
 			posfunc = &get_oberon_parent_coordsv;
 
-		if (funcName=="neptune_special") {
+		else if (funcName=="neptune_special") {
 			posfunc = posFuncType(get_neptune_helio_coordsv);
 			osculatingFunc = &get_neptune_helio_osculating_coords;
 		}
 
-		if (funcName=="pluto_special")
+		else if (funcName=="pluto_special")
 			posfunc = &get_pluto_helio_coordsv;
 
 
