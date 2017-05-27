@@ -124,7 +124,7 @@ public:
 
 	//! Draw a curve defined by a list of points.
 	//! The points should be already tesselated to ensure that the path will look smooth.
-	//! The algorithm take care of cutting the path if it crosses a viewport discontinutiy.
+	//! The algorithm take care of cutting the path if it crosses a viewport discontinuity.
 	void drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors);
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
