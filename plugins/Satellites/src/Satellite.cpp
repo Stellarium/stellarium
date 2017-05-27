@@ -935,7 +935,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 {
-	Vec3d position, onscreen, orbitPoint;
+	Vec3d position, onscreen;
 	Vec3f drawColor;
 	int size = orbitPoints.size();
 
@@ -950,8 +950,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 	//Rest of points
 	for (int i=1; i<size; i++)
 	{
-		orbitPoint = core->altAzToJ2000(orbitPoints[i].toVec3d());
-		position.set(orbitPoint[0], orbitPoint[1], orbitPoint[2]);
+		position = core->altAzToJ2000(orbitPoints[i].toVec3d());
 		position.normalize();
 
 		if (prj->project(position, onscreen)) // check position on the screen
