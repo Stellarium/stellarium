@@ -54,7 +54,7 @@ class CornerButtons : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	CornerButtons(QGraphicsItem* parent=Q_NULLPTR);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 	virtual QRectF boundingRect() const;
 	void setOpacity(double opacity);
 private:
@@ -180,7 +180,7 @@ class LeftStelBar : public QObject, public QGraphicsItem
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
@@ -203,7 +203,7 @@ class BottomStelBar : public QObject, public QGraphicsItem
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual ~BottomStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 	virtual QRectF boundingRect() const;
 	QRectF boundingRectNoHelpLabel() const;
 

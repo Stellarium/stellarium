@@ -494,7 +494,7 @@ float Nebula::getSurfaceArea(void) const
 		return M_PI*(majorAxisSize/2.f)*(minorAxisSize/2.f); // S = pi*a*b
 }
 
-void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
+void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	float lim = qMin(vMag, bMag);
@@ -687,7 +687,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 }
 
-void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
+void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
 

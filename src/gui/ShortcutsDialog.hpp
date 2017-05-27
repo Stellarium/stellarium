@@ -42,7 +42,7 @@ class ShortcutsFilterModel : public QSortFilterProxyModel
 	Q_OBJECT
 	
 public:
-	ShortcutsFilterModel(QObject* parent = 0);
+	ShortcutsFilterModel(QObject* parent = Q_NULLPTR);
 	
 protected:
 	bool filterAcceptsRow(int source_row,

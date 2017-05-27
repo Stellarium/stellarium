@@ -68,7 +68,7 @@ public:
 	
 	void init(class StelGui* stelGui);
 	
-	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = 0) Q_DECL_OVERRIDE;
+	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = Q_NULLPTR) Q_DECL_OVERRIDE;
 
 	int getSkyGuiWidth() const;
 	int getSkyGuiHeight() const;

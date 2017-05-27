@@ -34,7 +34,7 @@ public:
 	//! Constructs an APIController
 	//! @param prefixLength Determines how many characters to strip from the front of the request path
 	//! @param parent passed on to QObject constructor
-	APIController(int prefixLength, QObject* parent = 0);
+	APIController(int prefixLength, QObject* parent = Q_NULLPTR);
 	virtual ~APIController();
 
 	//! Should be called each frame from the main thread, like from StelModule::update.

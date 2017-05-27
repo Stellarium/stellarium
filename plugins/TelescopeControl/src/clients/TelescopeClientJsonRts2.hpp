@@ -40,7 +40,7 @@ public:
 	~TelescopeClientJsonRts2(void);
 	virtual bool isConnected(void) const;
 
-	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const;
 
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);
 	bool hasKnownPosition(void) const;

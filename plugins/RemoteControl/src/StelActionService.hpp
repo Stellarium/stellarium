@@ -34,7 +34,7 @@ class StelActionService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	StelActionService(QObject* parent = 0);
+	StelActionService(QObject* parent = Q_NULLPTR);
 
 	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("stelaction"); }
 	//! @brief Implements the HTTP GET method

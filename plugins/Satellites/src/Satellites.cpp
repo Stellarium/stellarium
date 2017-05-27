@@ -873,7 +873,7 @@ void Satellites::addGroup(const QString& groupId)
 	groups.insert(groupId);
 }
 
-QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis)
+QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis) const
 {
 	QHash<QString,QString> result;
 
@@ -902,7 +902,7 @@ SatellitesListModel* Satellites::getSatellitesListModel()
 	return satelliteListModel;
 }
 
-SatelliteP Satellites::getById(const QString& id)
+SatelliteP Satellites::getById(const QString& id) const
 {
 	foreach(const SatelliteP& sat, satellites)
 	{
@@ -912,7 +912,7 @@ SatelliteP Satellites::getById(const QString& id)
 	return SatelliteP();
 }
 
-QStringList Satellites::listAllIds()
+QStringList Satellites::listAllIds() const
 {
 	QStringList result;
 	foreach(const SatelliteP& sat, satellites)
@@ -1060,7 +1060,7 @@ void Satellites::saveTleSources(const QStringList& urls)
 	conf->endGroup();
 }
 
-bool Satellites::getFlagLabels()
+bool Satellites::getFlagLabels() const
 {
 	return Satellite::showLabels;
 }
@@ -1092,7 +1092,7 @@ void Satellites::enableAutoRemove(bool enabled)
 	}
 }
 
-bool Satellites::getFlagRealisticMode()
+bool Satellites::getFlagRealisticMode() const
 {
 	return Satellite::realisticModeFlag;
 }
@@ -1308,7 +1308,7 @@ void Satellites::setOrbitLinesFlag(bool b)
 	Satellite::orbitLinesFlag = b;
 }
 
-bool Satellites::getOrbitLinesFlag()
+bool Satellites::getOrbitLinesFlag() const
 {
 	return Satellite::orbitLinesFlag;
 }
@@ -1956,7 +1956,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		predictionJD = nextJD;
 	}
 
-	Satellite::timeShift = 0.;
+	//Satellite::timeShift = 0.;
 	if (isTimeNow)
 		pcore->setTimeNow();
 	else

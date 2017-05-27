@@ -139,7 +139,7 @@ public:
 	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
 	int hasComponentID(void) const;
-	void print(void);
+	void print(void) const;
 };
 
 
@@ -217,7 +217,7 @@ public:
 	QString getNameI18n(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
 	bool hasName() const {return false;}
-	void print(void);
+	void print(void) const;
 };
 
 struct Star3 {  // 6 byte
