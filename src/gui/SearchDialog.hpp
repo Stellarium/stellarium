@@ -46,7 +46,7 @@ class CompletionLabel : public QLabel
 	Q_OBJECT
 
 public:
-	CompletionLabel(QWidget* parent=0);
+	CompletionLabel(QWidget* parent=Q_NULLPTR);
 	~CompletionLabel();
 
 	QString getSelected(void);

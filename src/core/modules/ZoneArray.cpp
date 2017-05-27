@@ -163,7 +163,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		qDebug() << dbStr;
 		return 0;
 	}
-	ZoneArray *rval = 0;
+	ZoneArray *rval = Q_NULLPTR;
 	dbStr += QString("%1_%2v%3_%4; ").arg(level).arg(type).arg(major).arg(minor);
 
 	switch (type)
@@ -202,7 +202,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 				Q_ASSERT(sizeof(Star2) == 10);
 #endif
 				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-				if (rval == 0)
+				if (rval == Q_NULLPTR)
 				{
 					dbStr += "error - no memory ";
 				}
@@ -223,7 +223,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 				Q_ASSERT(sizeof(Star3) == 6);
 #endif
 				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-				if (rval == 0)
+				if (rval == Q_NULLPTR)
 				{
 					dbStr += "error - no memory ";
 				}
@@ -245,7 +245,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		if (rval)
 		{
 			delete rval;
-			rval = 0;
+			rval = Q_NULLPTR;
 		}
 	}
 	return rval;
@@ -324,7 +324,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 	if (nr_of_zones > 0)
 	{
 		zones = new SpecialZoneData<Star>[nr_of_zones];
-		if (zones == 0)
+		if (zones == Q_NULLPTR)
 		{
 			qDebug() << "ERROR: SpecialZoneArray(" << level
 				 << ")::SpecialZoneArray: no memory (1)";
@@ -332,7 +332,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 		}
 
 		unsigned int *zone_size = new unsigned int[nr_of_zones];
-		if (zone_size == 0)
+		if (zone_size == Q_NULLPTR)
 		{
 			qDebug() << "ERROR: SpecialZoneArray(" << level
 				 << ")::SpecialZoneArray: no memory (2)";
@@ -343,7 +343,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 			qDebug() << "Error reading zones from catalog:"
 				 << file->fileName();
 			delete[] getZones();
-			zones = 0;
+			zones = Q_NULLPTR;
 			nr_of_zones = 0;
 		}
 		else
@@ -364,7 +364,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 		{
 			// no stars ?
 			if (zones) delete[] getZones();
-			zones = 0;
+			zones = Q_NULLPTR;
 			nr_of_zones = 0;
 		}
 		else
@@ -372,17 +372,17 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 			if (use_mmap)
 			{
 				mmap_start = file->map(file->pos(), sizeof(Star)*nr_of_stars);
-				if (mmap_start == 0)
+				if (mmap_start == Q_NULLPTR)
 				{
 					qDebug() << "ERROR: SpecialZoneArray(" << level
 						 << ")::SpecialZoneArray: QFile(" << file->fileName()
 						 << ".map(" << file->pos()
 						 << ',' << sizeof(Star)*nr_of_stars
 						 << ") failed: " << file->errorString();
-					stars = 0;
+					stars = Q_NULLPTR;
 					nr_of_stars = 0;
 					delete[] getZones();
-					zones = 0;
+					zones = Q_NULLPTR;
 					nr_of_zones = 0;
 				}
 				else
@@ -401,7 +401,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 			else
 			{
 				stars = new Star[nr_of_stars];
-				if (stars == 0)
+				if (stars == Q_NULLPTR)
 				{
 					qDebug() << "ERROR: SpecialZoneArray(" << level
 						 << ")::SpecialZoneArray: no memory (3)";
@@ -410,10 +410,10 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 				if (!readFile(*file,stars,sizeof(Star)*nr_of_stars))
 				{
 					delete[] stars;
-					stars = 0;
+					stars = Q_NULLPTR;
 					nr_of_stars = 0;
 					delete[] getZones();
-					zones = 0;
+					zones = Q_NULLPTR;
 					nr_of_zones = 0;
 				}
 				else
@@ -438,7 +438,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 {
 	if (stars)
 	{
-		if (mmap_start != 0)
+		if (mmap_start != Q_NULLPTR)
 		{
 			file->unmap(mmap_start);
 		}
@@ -447,7 +447,7 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 			delete[] stars;
 		}
 		delete file;
-		stars = 0;
+		stars = Q_NULLPTR;
 	}
 	if (zones)
 	{

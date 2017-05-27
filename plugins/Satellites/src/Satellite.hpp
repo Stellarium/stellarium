@@ -192,7 +192,7 @@ public:
 	bool isNew() const {return newlyAdded;}
 	
 	//! Get internal flags as a single value.
-	SatFlags getFlags();
+	SatFlags getFlags() const;
 	//! Sets the internal flags in one operation (only display flags)!
 	void setFlags(const SatFlags& flags);
 	
@@ -291,10 +291,10 @@ private:
 	static QString myText;
 #endif
 
-	int	visibility;
+	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
 	static double sunReflAngle; // for Iridium satellites
-	static double timeShift; // for Iridium satellites
+	//static double timeShift; // for Iridium satellites UNUSED
 
 	//Satellite Orbit Draw
 	QFont     font;
@@ -302,7 +302,7 @@ private:
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
-	QList<int> visibilityPoints; //orbit visibility points
+	QList<gSatWrapper::Visibility> visibilityPoints; //orbit visibility points
 };
 
 typedef QSharedPointer<Satellite> SatelliteP;

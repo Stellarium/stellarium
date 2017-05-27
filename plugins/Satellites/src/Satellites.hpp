@@ -264,15 +264,15 @@ public:
 
 	//! get satellite objects filtered by group.  If an empty string is used for the
 	//! group name, return all satallites
-	QHash<QString,QString> getSatellites(const QString& group=QString(), Status vis=Both);
+	QHash<QString,QString> getSatellites(const QString& group=QString(), Status vis=Both) const;
 	//! Get a model representing the list of satellites.
 	SatellitesListModel* getSatellitesListModel();
 
 	//! Get a satellite object by its identifier (i.e. NORAD number).
-	SatelliteP getById(const QString& id);
+	SatelliteP getById(const QString& id) const;
 	
 	//! Returns a list of all satellite IDs.
-	QStringList listAllIds();
+	QStringList listAllIds() const;
 	
 	//! Add to the current collection the satellites described by the data list.
 	//! The changes are not saved to file.
@@ -285,13 +285,13 @@ public:
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
-	bool getUpdatesEnabled(void) {return updatesEnabled;}
+	bool getUpdatesEnabled(void) const {return updatesEnabled;}
 
 	//! get the date and time the TLE elements were updated
-	QDateTime getLastUpdate(void) {return lastUpdate;}
+	QDateTime getLastUpdate(void) const {return lastUpdate;}
 
 	//! get the update frequency in hours
-	int getUpdateFrequencyHours(void) {return updateFrequencyHours;}
+	int getUpdateFrequencyHours(void) const {return updateFrequencyHours;}
 
 	//! get the number of seconds till the next update
 	int getSecondsToUpdate(void);
@@ -300,12 +300,12 @@ public:
 	//void setUpdateFrequencyHours(int hours);
 
 	//! Get the current updateState
-	UpdateState getUpdateState(void) {return updateState;}
+	UpdateState getUpdateState(void) const {return updateState;}
 
 	//! Get a list of URLs which are sources of TLE data.
 	//! @returns a list of URL strings, some with prefixes - see #updateUrls
 	//! for details.
-	QStringList getTleSources(void) {return updateUrls;}
+	QStringList getTleSources(void) const {return updateUrls;}
 
 	//! Set the list of URLs which are sources of TLE data.
 	//! In addition to replacing the current list of sources, it also
@@ -361,19 +361,19 @@ public:
 	//! @param name of file
 	void parseQSMagFile(QString qsMagFile);
 	
-	bool getFlagHints() {return hintFader;}
+	bool getFlagHints() const {return hintFader;}
 	//! get the label font size.
 	//! @return the pixel size of the font
-	int getLabelFontSize() {return labelFont.pixelSize();}
-	bool getFlagLabels();
-	bool getFlagRealisticMode();
+	int getLabelFontSize() const {return labelFont.pixelSize();}
+	bool getFlagLabels() const;
+	bool getFlagRealisticMode() const;
 	//! Get the current status of the orbit line rendering flag.
-	bool getOrbitLinesFlag();
+	bool getOrbitLinesFlag() const;
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
 
 	//! Get depth of prediction for Iridium flares
-	int getIridiumFlaresPredictionDepth(void) { return iridiumFlaresPredictionDepth; }
+	int getIridiumFlaresPredictionDepth(void) const { return iridiumFlaresPredictionDepth; }
 
 	IridiumFlaresPredictionList getIridiumFlaresPrediction();
 

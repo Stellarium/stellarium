@@ -67,7 +67,7 @@ Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 QString Satellite::myText = "";
 #endif
 double Satellite::sunReflAngle = 180.;
-double Satellite::timeShift = 0.;
+//double Satellite::timeShift = 0.;
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	: initialized(false)
@@ -85,7 +85,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	, hintColor(0.0,0.0,0.0)
 	, lastUpdated()
 	, pSatWrapper(Q_NULLPTR)
-	, visibility(0)
+	, visibility(gSatWrapper::UNKNOWN)
 	, phaseAngle(0.)
 	, lastEpochCompForOrbit(0.)
 	, epochTime(0.)
@@ -349,16 +349,16 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//TODO: Move to a more prominent place.
 		switch (visibility)
 		{
-			case RADAR_SUN:
+			case gSatWrapper::RADAR_SUN:
 				oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
 				break;
-			case VISIBLE:
+			case gSatWrapper::VISIBLE:
 				oss << q_("The satellite is visible.") << "<br/>";
 				break;
-			case RADAR_NIGHT:
+			case gSatWrapper::RADAR_NIGHT:
 				oss << q_("The satellite is eclipsed.") << "<br/>";
 				break;
-			case NOT_VISIBLE:
+			case gSatWrapper::NOT_VISIBLE:
 				oss << q_("The satellite is not visible") << "<br/>";
 				break;
 			default:
@@ -436,17 +436,17 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	QString visibilityState;
 	switch (visibility)
 	{
-		case RADAR_SUN:
+		case gSatWrapper::RADAR_SUN:
 			visibilityState = "The satellite and the observer are in sunlight.";
 			break;
-		case VISIBLE:
+		case gSatWrapper::VISIBLE:
 			visibilityState =  "The satellite is visible.";
 			break;
-		case RADAR_NIGHT:
+		case gSatWrapper::RADAR_NIGHT:
 			visibilityState =  "The satellite is eclipsed.";
 			break;
-		case NOT_VISIBLE:
-			visibilityState =  "The satellite is not visible";
+		case gSatWrapper::NOT_VISIBLE:
+			visibilityState =  "The satellite is not visible.";
 			break;
 		default:
 			break;
@@ -502,14 +502,14 @@ float Satellite::getVMagnitude(const StelCore* core) const
 	if (!realisticModeFlag)
 		vmag = 5.0;
 
-	if (realisticModeFlag && visibility != VISIBLE)
+	if (realisticModeFlag && visibility != gSatWrapper::VISIBLE)
 		vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
 
 	if (stdMag!=99.f)
 	{
 		sunReflAngle = -1.;
 		// OK, artificial satellite has value for standard magnitude
-		if (visibility==VISIBLE)
+		if (visibility==gSatWrapper::VISIBLE)
 		{
 			// Calculation of approx. visual magnitude for artificial satellites
 			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
@@ -546,7 +546,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 						.arg(Vx.z())
 						+ "<br>\n";
 #endif
-				QVector3D SatPos(position.data()[0],position.data()[1],position.data()[2]);
+				//QVector3D SatPos(position.data()[0],position.data()[1],position.data()[2]);
 				Vec3d vy = (position^velocity);
 				QVector3D Vy(vy.data()[0],vy.data()[1],vy.data()[2]); Vy.normalize();
 
@@ -585,9 +585,23 @@ float Satellite::getVMagnitude(const StelCore* core) const
 				m[1].rotate(120, Vz);
 				m[2].rotate(-120, Vz);
 
-				QVector3D mirror;
-				sunReflAngle = 180.;
+				StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
+				const double  radLatitude    = loc.latitude * KDEG2RAD;
+				const double  theta          = pSatWrapper->getEpoch().toThetaLMST(loc.longitude * KDEG2RAD);
+				const double sinRadLatitude=sin(radLatitude);
+				const double cosRadLatitude=cos(radLatitude);
+				const double sinTheta=sin(theta);
+				const double cosTheta=cos(theta);
 
+				Vec3d observerECIPos;
+				Vec3d observerECIVel;
+				pSatWrapper->calcObserverECIPosition(observerECIPos, observerECIVel);
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+				myText += "ObsPos = " + observerECIPos.toString() + " (" + observerECIPos.toStringLonLat() + ")<br>\n";
+				myText += "ObsVel = " + observerECIVel.toString() + " (" + observerECIVel.toStringLonLat() + ")<br>\n";
+#endif
+				sunReflAngle = 180.;
+				QVector3D mirror;
 				for (int i = 0; i<3; i++)
 				{
 					mirror = m[i].mapVector(Vx0);
@@ -607,36 +621,21 @@ float Satellite::getVMagnitude(const StelCore* core) const
 					myText += "rSun = " + rSun.toString() + "<br>\n";
 #endif
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-					StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
-					Vec3d topoRSunPos;
-					Vec3d observerECIPos;
-					Vec3d observerECIVel;
-
-					double  radLatitude    = loc.latitude * KDEG2RAD;
-					double  theta          = pSatWrapper->getEpoch().toThetaLMST(loc.longitude * KDEG2RAD);
-
-					pSatWrapper->calcObserverECIPosition(observerECIPos, observerECIVel);
-#ifdef IRIDIUM_SAT_TEXT_DEBUG
-					myText += "ObsPos = " + observerECIPos.toString() + " (" + observerECIPos.toStringLonLat() + ")<br>\n";
-					myText += "ObsVel = " + observerECIVel.toString() + " (" + observerECIVel.toStringLonLat() + ")<br>\n";
-#endif
-
 					//Vec3d satECIPos  = getTEMEPos();
 					Vec3d slantRange = rSun - observerECIPos;
-
+					Vec3d topoRSunPos;
 					//top_s
-					topoRSunPos[0] = (sin(radLatitude) * cos(theta) * slantRange[0]
-							+ sin(radLatitude) * sin(theta) * slantRange[1]
-							- cos(radLatitude) * slantRange[2]);
+					topoRSunPos[0] = (sinRadLatitude * cosTheta * slantRange[0]
+							+ sinRadLatitude * sinTheta * slantRange[1]
+							- cosRadLatitude * slantRange[2]);
 					//top_e
-					topoRSunPos[1] = ((-1.0) * sin(theta) * slantRange[0]
-							+ cos(theta) * slantRange[1]);
+					topoRSunPos[1] = ((-1.0) * sinTheta * slantRange[0]
+							+ cosTheta * slantRange[1]);
 
 					//top_z
-					topoRSunPos[2] = (cos(radLatitude) * cos(theta) * slantRange[0]
-							+ cos(radLatitude) * sin(theta) * slantRange[1]
-							+ sin(radLatitude) * slantRange[2]);
+					topoRSunPos[2] = (cosRadLatitude * cosTheta * slantRange[0]
+							+ cosRadLatitude * sinTheta * slantRange[1]
+							+ sinRadLatitude * slantRange[2]);
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 					myText += "SunRefl = " + topoRSunPos.toString() + " (" + topoRSunPos.toStringLonLat() + ")<br>\n";
 #endif
@@ -752,21 +751,21 @@ void Satellite::update(double)
 	if (pSatWrapper && orbitValid)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		epochTime = core->getJD() + timeShift; // We have "true" JD from core, satellites don't need JDE!
+		epochTime = core->getJD(); // + timeShift; // We have "true" JD (UTC) from core, satellites don't need JDE!
 
 		pSatWrapper->setEpoch(epochTime);
 		position                 = pSatWrapper->getTEMEPos();
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
-		if (height <= 50.0)
+		if (height <= 150.0)
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital
 			// degradation and re-entry of a satellite.  In any of these cases
 			// we might end up with a problem - usually a crash of Stellarium
 			// because of a div/0 or something.  To prevent this, we turn off
-			// the satellite when the computed height is 50km. (We can assume bogus at 250km or so...)
+			// the satellite when the computed height is 150km. (We can assume bogus at 250km or so...)
 			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
 			displayed = false; // It shouldn't be displayed!
@@ -799,7 +798,7 @@ void Satellite::recalculateOrbitLines(void)
 	visibilityPoints.clear();
 }
 
-SatFlags Satellite::getFlags()
+SatFlags Satellite::getFlags() const
 {
 	// There's also a faster, but less readable way: treating them as uint.
 	SatFlags flags;
@@ -875,7 +874,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 	XYZ = getJ2000EquatorialPos(core);
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	Vec3f drawColor = invisibleSatelliteColor;
-	if (visibility == VISIBLE) // Use hintColor for visible satellites only
+	if (visibility == gSatWrapper::VISIBLE) // Use hintColor for visible satellites only
 		drawColor = hintColor;
 	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
 
@@ -904,7 +903,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			sd->postDrawPointSource(&painter);
 
 			float txtMag = mag;
-			if (visibility != VISIBLE)
+			if (visibility != gSatWrapper::VISIBLE)
 			{
 				txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
 				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1.f);
@@ -916,7 +915,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (txtMag <= sd->getLimitMagnitude() && Satellite::showLabels)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
 
-			painter.setProjector(origP); // Restrore projector state
+			painter.setProjector(origP); // Restore projector state
 		}
 		else
 		{
@@ -961,7 +960,7 @@ void Satellite::drawOrbit(StelPainter& painter)
 		{
 			vertexArray.append(position);
 			drawColor = invisibleSatelliteColor;
-			if (visibilityPoints[i] == VISIBLE)
+			if (visibilityPoints[i] == gSatWrapper::VISIBLE)
 				drawColor = orbitColor;
 			colorArray.append(Vec4f(drawColor[0], drawColor[1], drawColor[2], hintBrightness * calculateOrbitSegmentIntensity(i)));
 		}

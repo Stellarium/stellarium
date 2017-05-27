@@ -38,7 +38,7 @@ class SyncServer : public QObject
 	Q_OBJECT
 
 public:
-	SyncServer(QObject* parent = 0);
+	SyncServer(QObject* parent = Q_NULLPTR);
 	virtual ~SyncServer();
 
 	//! This should be called in the StelModule::update function
