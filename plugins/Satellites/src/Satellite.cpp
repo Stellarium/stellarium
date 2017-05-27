@@ -950,7 +950,6 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 	vertexArray.resize(size);
 	colorArray.resize(size);
 
-	painter.enableClientStates(true, false, false);
 	//Rest of points
 	for (int i=1; i<size; i++)
 	{
@@ -960,14 +959,11 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 		if (prj->project(position, onscreen)) // check position on the screen
 		{
 			vertexArray.append(position);
-			drawColor = invisibleSatelliteColor;
-			if (visibilityPoints[i] == gSatWrapper::VISIBLE)
-				drawColor = orbitColor;
+			drawColor = (visibilityPoints[i] == gSatWrapper::VISIBLE) ? orbitColor : invisibleSatelliteColor;
 			colorArray.append(Vec4f(drawColor[0], drawColor[1], drawColor[2], hintBrightness * calculateOrbitSegmentIntensity(i)));
 		}
 	}
-	painter.drawPath(vertexArray, colorArray);
-	painter.enableClientStates(false);
+	painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)
 }
 
 
