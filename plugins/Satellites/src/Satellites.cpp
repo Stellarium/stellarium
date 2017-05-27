@@ -1682,7 +1682,7 @@ void Satellites::draw(StelCore* core)
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->displayed)
-			sat->draw(core, painter, 1.0);
+			sat->draw(core, painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())

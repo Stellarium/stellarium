@@ -278,7 +278,7 @@ private:
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
 
-	void draw(StelCore *core, StelPainter& painter, float maxMagHints);
+	void draw(StelCore *core, StelPainter& painter);
 
 	//Satellite Orbit Position calculation
 	gSatWrapper *pSatWrapper;
