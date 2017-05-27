@@ -34,7 +34,7 @@ class ViewService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	ViewService(QObject* parent = 0);
+	ViewService(QObject* parent = Q_NULLPTR);
 
 	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("view"); }
 	//! @brief Implements the HTTP GET operations

@@ -33,7 +33,7 @@ class AbstractAPIService : public QObject, public RemoteControlServiceInterface
 	Q_INTERFACES(RemoteControlServiceInterface)
 public:
 	//! Only calls QObject constructor
-	AbstractAPIService(QObject* parent = 0) : QObject(parent)
+	AbstractAPIService(QObject* parent = Q_NULLPTR) : QObject(parent)
 	{
 	}
 

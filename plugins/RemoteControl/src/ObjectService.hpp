@@ -36,7 +36,7 @@ class ObjectService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	ObjectService(QObject* parent = 0);
+	ObjectService(QObject* parent = Q_NULLPTR);
 
 	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("objects"); }
 	//! @brief Implements the HTTP GET method

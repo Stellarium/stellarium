@@ -34,7 +34,7 @@ class LocationService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	LocationService(QObject* parent = 0);
+	LocationService(QObject* parent = Q_NULLPTR);
 
 	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("location"); }
 	//! @brief Implements the HTTP GET requests

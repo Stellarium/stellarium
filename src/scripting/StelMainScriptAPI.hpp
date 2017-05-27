@@ -41,7 +41,7 @@ class StelMainScriptAPI : public QObject
 	Q_PROPERTY(double timeSpeed READ getTimeRate WRITE setTimeRate)
 
 public:
-	StelMainScriptAPI(QObject *parent = 0);
+	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
 	~StelMainScriptAPI();
 
 // These functions will be available in scripts

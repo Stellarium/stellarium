@@ -51,7 +51,7 @@ public:
 	};
 	Q_DECLARE_FLAGS(SyncOptions, SyncOption)
 
-	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = 0);
+	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = Q_NULLPTR);
 	virtual ~SyncClient();
 
 	QString errorString() const { return errorStr; }
