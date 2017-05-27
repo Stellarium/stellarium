@@ -1671,7 +1671,7 @@ void Satellites::draw(StelCore* core)
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return;
 
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
+	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();

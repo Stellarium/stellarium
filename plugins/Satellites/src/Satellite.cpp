@@ -877,7 +877,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 	if (core->getJD()<jdLaunchYearJan1 || qAbs(core->getTimeRate())>=1.)
 		return;
 
-	XYZ = getAltAzPosAuto(core);
+	XYZ = getJ2000EquatorialPos(core);
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	Vec3f drawColor = invisibleSatelliteColor;
 	if (visibility == gSatWrapper::VISIBLE) // Use hintColor for visible satellites only
@@ -929,18 +929,15 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 	}
 
 	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid)
-		drawOrbit(painter);
+		drawOrbit(core, painter);
 }
 
 
-void Satellite::drawOrbit(StelPainter& painter)
+void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 {
-	Vec3d position, onscreen;
+	Vec3d position, onscreen, orbitPoint;
 	Vec3f drawColor;
 	int size = orbitPoints.size();
-
-	QList<Vec3d>::iterator it= orbitPoints.begin();
-	it++;
 
 	QVector<Vec3d> vertexArray;
 	QVector<Vec4f> colorArray;
@@ -953,8 +950,8 @@ void Satellite::drawOrbit(StelPainter& painter)
 	//Rest of points
 	for (int i=1; i<size; i++)
 	{
-		position.set(it->operator [](0), it->operator [](1), it->operator [](2));
-		it++;
+		orbitPoint = core->altAzToJ2000(orbitPoints[i].toVec3d());
+		position.set(orbitPoint[0], orbitPoint[1], orbitPoint[2]);
 		position.normalize();
 
 		if (prj->project(position, onscreen)) // check position on the screen
