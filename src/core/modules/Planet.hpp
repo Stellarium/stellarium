@@ -101,6 +101,7 @@ public:
 		isStar,			// ssystem.ini: type="star"
 		isPlanet,		// ssystem.ini: type="planet"
 		isMoon,			// ssystem.ini: type="moon"
+		isObserver,		// ssystem.ini: type="observer"
 		isAsteroid,		// ssystem.ini: type="asteroid"
 		isPlutino,		// ssystem.ini: type="plutino"
 		isComet,		// ssystem.ini: type="comet"
