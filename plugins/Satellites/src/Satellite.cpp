@@ -868,7 +868,13 @@ bool Satellite::operator <(const Satellite& another) const
 
 void Satellite::draw(StelCore* core, StelPainter& painter, float)
 {
-	if (core->getJD()<jdLaunchYearJan1 || !displayed)
+	// Separated because first test should be very fast.
+	if (!displayed)
+		return;
+
+	// 1) Do not show satellites before Space Era begins!
+	// 2) Do not show satellites when time rate is over JD/sec!
+	if (core->getJD()<jdLaunchYearJan1 || qAbs(core->getTimeRate())>=1.)
 		return;
 
 	XYZ = getJ2000EquatorialPos(core);
