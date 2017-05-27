@@ -260,6 +260,9 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 	if (!hintFader)
 		return result;
 
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
+		return result;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
@@ -289,6 +292,10 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
+		return Q_NULLPTR;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 	
@@ -316,6 +323,10 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
+		return Q_NULLPTR;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 
@@ -356,6 +367,10 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
+		return Q_NULLPTR;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 	
@@ -385,6 +400,10 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 		return result;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
+		return result;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
@@ -436,6 +455,10 @@ QStringList Satellites::listAllObjects(bool inEnglish) const
 		return result;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
+		return result;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
@@ -1620,6 +1643,10 @@ void Satellites::update(double deltaTime)
 		return;
 
 	StelCore *core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
+		return;
+
 	if (core->getCurrentPlanet() != earth || !isValidRangeDates(core))
 		return;
 
@@ -1636,6 +1663,9 @@ void Satellites::draw(StelCore* core)
 {
 	// Separated because first test should be very fast.
 	if (!hintFader && hintFader.getInterstate() <= 0.)
+		return;
+
+	if (qAbs(core->getTimeRate())>=1.) // Do not show satellites when time rate is over JD/sec
 		return;
 
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
