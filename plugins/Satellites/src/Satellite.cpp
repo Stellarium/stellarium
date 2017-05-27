@@ -866,7 +866,7 @@ bool Satellite::operator <(const Satellite& another) const
 		return false;
 }
 
-void Satellite::draw(StelCore* core, StelPainter& painter, float)
+void Satellite::draw(StelCore* core, StelPainter& painter)
 {
 	// Separated because first test should be very fast.
 	if (!displayed)
@@ -884,48 +884,52 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 		drawColor = hintColor;
 	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
 
-	if (realisticModeFlag)
+	Vec3d win;
+	if (painter.getProjector()->projectCheck(XYZ, win))
 	{
-		double mag = getVMagnitude(core);
-
-		RCMag rcMag;
-		Vec3f color = Vec3f(1.f,1.f,1.f);
-
-		//StelProjectorP origP = painter.getProjector(); // Save projector state
-		//painter.setProjector(prj);
-
-		// Draw the satellite
-		sd->preDrawPointSource(&painter);
-		if (mag <= sd->getLimitMagnitude())
+		if (realisticModeFlag)
 		{
-			sd->computeRCMag(mag, &rcMag);
-			sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, true);
-		}
-		sd->postDrawPointSource(&painter);
+			double mag = getVMagnitude(core);
 
-		float txtMag = mag;
-		if (visibility != gSatWrapper::VISIBLE)
-		{
-			txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
-			painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1.f);
+			RCMag rcMag;
+			Vec3f color = Vec3f(1.f,1.f,1.f);
+
+			//StelProjectorP origP = painter.getProjector(); // Save projector state
+			//painter.setProjector(prj);
+
+			// Draw the satellite
+			sd->preDrawPointSource(&painter);
+			if (mag <= sd->getLimitMagnitude())
+			{
+				sd->computeRCMag(mag, &rcMag);
+				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, true);
+			}
+			sd->postDrawPointSource(&painter);
+
+			float txtMag = mag;
+			if (visibility != gSatWrapper::VISIBLE)
+			{
+				txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
+				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1.f);
+			}
+			else
+				painter.setColor(color[0], color[1], color[2], 1.f);
+
+			// Draw the label of the satellite when it enabled
+			if (txtMag <= sd->getLimitMagnitude() && Satellite::showLabels)
+				painter.drawText(XYZ, name, 0, 10, 10, false);
+
 		}
 		else
-			painter.setColor(color[0], color[1], color[2], 1.f);
+		{
+			if (Satellite::showLabels)
+				painter.drawText(XYZ, name, 0, 10, 10, false);
 
-		// Draw the label of the satellite when it enabled
-		if (txtMag <= sd->getLimitMagnitude() && Satellite::showLabels)
-			painter.drawText(XYZ, name, 0, 10, 10, false);
+			painter.setBlending(true, GL_ONE, GL_ONE);
 
-	}
-	else
-	{
-		if (Satellite::showLabels)
-			painter.drawText(XYZ, name, 0, 10, 10, false);
-
-		painter.setBlending(true, GL_ONE, GL_ONE);
-
-		Satellite::hintTexture->bind();
-		painter.drawSprite2dMode(XYZ, 11);
+			Satellite::hintTexture->bind();
+			painter.drawSprite2dMode(XYZ, 11);
+		}
 	}
 
 	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid)
