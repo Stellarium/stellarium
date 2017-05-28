@@ -59,7 +59,7 @@ void TestStelFileMgr::initTestCase()
 			 << partialPath2+"/landscapes/ls1"
 			 << partialPath2+"/landscapes/ls3";
 
-	testFiles << "data/ssystem.ini"
+	testFiles << "data/ssystem_major.ini"
 			  << partialPath1+"/landscapes/ls1/landscape.ini"
 			  << partialPath1+"/landscapes/ls2/landscape.ini"
 			  << partialPath1+"/config.ini"

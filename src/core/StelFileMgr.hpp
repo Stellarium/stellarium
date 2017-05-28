@@ -20,7 +20,7 @@
 #ifndef _STELFILEMGR_HPP_
 #define _STELFILEMGR_HPP_
 
-#define CHECK_FILE "data/ssystem.ini"
+#define CHECK_FILE "data/ssystem_major.ini"
 
 #include <stdexcept>
 #include <QSet>
