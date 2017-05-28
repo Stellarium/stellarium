@@ -278,6 +278,8 @@ private:
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
 
+	static double timeRateLimit;
+
 	void draw(StelCore *core, StelPainter& painter);
 
 	//Satellite Orbit Position calculation

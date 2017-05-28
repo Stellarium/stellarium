@@ -605,7 +605,7 @@ private:
 	int iridiumFlaresPredictionDepth;
 
 	// GUI
-	SatellitesDialog* configDialog;	
+	SatellitesDialog* configDialog;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

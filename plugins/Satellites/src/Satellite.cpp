@@ -63,6 +63,8 @@ bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
 Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 
+double Satellite::timeRateLimit = 1.0; // one JD per second by default
+
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 QString Satellite::myText = "";
 #endif
@@ -873,8 +875,8 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		return;
 
 	// 1) Do not show satellites before Space Era begins!
-	// 2) Do not show satellites when time rate is over JD/sec!
-	if (core->getJD()<jdLaunchYearJan1 || qAbs(core->getTimeRate())>=1.)
+	// 2) Do not show satellites when time rate is over limit (JD/sec)!
+	if (core->getJD()<jdLaunchYearJan1 || qAbs(core->getTimeRate())>=timeRateLimit)
 		return;
 
 	XYZ = getJ2000EquatorialPos(core);
