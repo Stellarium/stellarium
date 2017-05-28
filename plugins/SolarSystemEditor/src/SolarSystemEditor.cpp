@@ -343,17 +343,17 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	if (QFile::exists(customSolarSystemFilePath))
 	{
 
-		QSettings minor(customSolarSystemFilePath, StelIniFormat);
+		QSettings minorBodies(customSolarSystemFilePath, StelIniFormat);
 
 		// add and overwrite existing data in the user's ssystem_minor.ini by the data in the new file.
-		qDebug() << "ADD OBJECTS: Data for " << newData.childGroups().count() << "objects to minor file with " << minor.childGroups().count() << "entries";
+		qDebug() << "ADD OBJECTS: Data for " << newData.childGroups().count() << "objects to minor file with " << minorBodies.childGroups().count() << "entries";
 		foreach (QString group, newData.childGroups())
 		{
 			QString fixedGroupName=fixGroupName(group);
 			newData.beginGroup(group);
 			qDebug() << "  Group: " << group << "for object " << newData.value("name");
 			qDebug() << "   ";
-			QStringList minorChildGroups=minor.childGroups();
+			QStringList minorChildGroups=minorBodies.childGroups();
 			if (minorChildGroups.contains(fixedGroupName))
 			{
 				qDebug() << "This group " << fixedGroupName << "already exists. Updating values";
@@ -361,25 +361,25 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 			else
 				qDebug() << "This group " << fixedGroupName << "does not yet exist. Adding values";
 
-			minor.beginGroup(fixedGroupName);
+			minorBodies.beginGroup(fixedGroupName);
 			QStringList newKeys=newData.allKeys(); // limited to the group!
 			foreach (QString key, newKeys)
 			{
-				minor.setValue(key, newData.value(key));
+				minorBodies.setValue(key, newData.value(key));
 			}
-			minor.endGroup();
+			minorBodies.endGroup();
 			newData.endGroup();
 		}
-		minor.sync();
-		qDebug() << "Minor groups now: " << minor.childGroups();
+		minorBodies.sync();
+		qDebug() << "Minor groups now: " << minorBodies.childGroups();
 		qDebug() << "Checking for stupid General group.";
 		// There may be a generic group "General" in the updated file, created from comments. We must remove it.
-		if (minor.childGroups().contains("General"))
+		if (minorBodies.childGroups().contains("General"))
 		{
-			minor.remove("General");
+			minorBodies.remove("General");
 		}
-		qDebug() << "Minor groups after fix now: " << minor.childGroups();
-		minor.sync();
+		qDebug() << "Minor groups after fix now: " << minorBodies.childGroups();
+		minorBodies.sync();
 
 		solarSystem->reloadPlanets();
 		emit solarSystemChanged();
