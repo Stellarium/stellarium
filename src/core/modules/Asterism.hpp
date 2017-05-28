@@ -70,7 +70,7 @@ private:
 	//! separated fields: abbreviation - a three character abbreviation
 	//! for the asterism, a number of lines (pairs), and a list of Hipparcos
 	//! catalogue numbers which, when connected pairwise, form the lines of the
-	//! constellation.
+	//! asterism.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record, else true.
 	bool read(const QString& record, StarMgr *starMgr);
