@@ -54,9 +54,10 @@ private slots:
 	//! \todo Find a way to suggest a default file name (select directory instead of file?)
 	void copyConfiguration();
 	void replaceConfiguration();
+	void addConfiguration();
 
 	void populateSolarSystemList();
-	void removeObject();
+	void removeObjects();
 
 	void newImportMPC();
 
@@ -67,7 +68,7 @@ private:
 	MpcImportWindow* mpcImportWindow;
 	ManualImportWindow * manualImportWindow;
 
-	SolarSystemEditor * ssoManager;
+	SolarSystemEditor * ssEditor;
 
 	QHash<QString,QString> unlocalizedNames;
 	
