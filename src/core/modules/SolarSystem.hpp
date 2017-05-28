@@ -851,6 +851,9 @@ public:
 	//! Reload the planets
 	void reloadPlanets();
 
+	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
+	bool removePlanet(QString name);
+
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
 
@@ -976,7 +979,14 @@ private:
 
 	QHash<QString, QString> planetNativeNamesMap;
 
-	QList<Orbit*> orbits;           // Pointers on created elliptical orbits
+	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
+	// while the planets don't own their orbit objects.
+	// Would it not be better to hand over the orbit object ownership to the Planet object?
+	// This list could then be removed.
+	// In case this was originally intended to provide some fast access for time-dependent computation with the same JD,
+	// note that we must also always compensate to light time travel, so likely each computation has to be done twice,
+	// with current JDE and JDE-lightTime(distance).
+	QList<Orbit*> orbits;           // Pointers on created elliptical orbits. 0.16pre: WHY DO WE NEED THIS???
 };
 
 

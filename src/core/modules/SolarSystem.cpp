@@ -437,6 +437,7 @@ void SolarSystem::loadPlanets()
 //			sun.clear();
 //			moon.clear();
 //			earth.clear();
+			qCritical() << "We should not be here!";
 
 			qDebug() << "removing minor bodies";
 			foreach (PlanetP p, systemPlanets)
@@ -450,6 +451,8 @@ void SolarSystem::loadPlanets()
 			}
 			systemPlanets.clear();
 			//Memory leak? What's the proper way of cleaning shared pointers?
+
+			// TODO: 0.16pre what about the orbits list?
 
 			//If the file is in the user data directory, rename it:
 			if (solarSystemFile.contains(StelFileMgr::getUserDir()))
@@ -519,6 +522,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	QMap<QString, QString> secNameMap;
 	QMap<QString, QString> parentMap;
 	QStringList sections = pd.childGroups();
+	qDebug() << "Stage 1: load ini file with" << sections.size() << "entries: "<< sections;
 	for (int i=0; i<sections.size(); ++i)
 	{
 		const QString secname = sections.at(i);
@@ -526,7 +530,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString();
 		secNameMap[englishName] = secname;
 		if (strParent!="none" && !strParent.isEmpty() && !englishName.isEmpty())
+		{
 			parentMap[englishName] = strParent;
+			qDebug() << "parentmap[" << englishName << "] = " << strParent;
+		}
 	}
 
 	// Stage 2a (as described above).
@@ -546,9 +553,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		depLevelMap.insert(level, secNameMap[englishName]);
+		qDebug() << "2a: Level" << level << "secNameMap[" << englishName << "]="<< secNameMap[englishName];
 	}
 
 	// Stage 2b (as described above).
+	qDebug() << "Stage 2b:";
 	QStringList orderedSections;
 	QMapIterator<int, QString> levelMapIt(depLevelMap);
 	while(levelMapIt.hasNext())
@@ -556,13 +565,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		levelMapIt.next();
 		orderedSections << levelMapIt.value();
 	}
+	qDebug() << orderedSections;
 
 	// Stage 3 (as described above).
-	int readOk=0;
-	int totalPlanets=0;
+	//int readOk=0;
+	//int totalPlanets=0;
+
+	qDebug() << "Adding " << orderedSections.size() << "objects...";
 	for (int i = 0;i<orderedSections.size();++i)
 	{
-		totalPlanets++;
+		qDebug() << "Processing entry" << orderedSections.at(i);
+
+		//totalPlanets++;
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString().simplified();
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
@@ -587,6 +601,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		const QString funcName = pd.value(secname+"/coord_func").toString();
+		qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << funcName;
 		posFuncType posfunc=Q_NULLPTR;
 		void* orbitPtr=Q_NULLPTR;
 		OsculatingFunctType *osculatingFunc = Q_NULLPTR;
@@ -829,7 +844,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		else if (funcName=="phobos_special")
-			posfunc = posFuncType(get_phobos_parent_coordsv);
+			posfunc = &get_phobos_parent_coordsv;
 
 		else if (funcName=="deimos_special")
 			posfunc = &get_deimos_parent_coordsv;
@@ -901,7 +916,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			posfunc = &get_oberon_parent_coordsv;
 
 		else if (funcName=="neptune_special") {
-			posfunc = posFuncType(get_neptune_helio_coordsv);
+			posfunc = &get_neptune_helio_coordsv;
 			osculatingFunc = &get_neptune_helio_osculating_coords;
 		}
 
@@ -911,7 +926,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		if (posfunc==Q_NULLPTR)
 		{
-			qCritical() << "ERROR: can't find posfunc " << funcName << " for " << englishName;
+			qCritical() << "ERROR in section " << secname << ": can't find posfunc " << funcName << " for " << englishName;
 			exit(-1);
 		}
 
@@ -1106,7 +1121,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		systemPlanets.push_back(p);
-		readOk++;
+		//readOk++;
 	}
 
 	if (systemPlanets.isEmpty())
@@ -2356,4 +2371,28 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 	}
 
 	return final_illumination;
+}
+
+bool SolarSystem::removePlanet(QString name)
+{
+	PlanetP candidate = searchByEnglishName(name);
+	if (!candidate)
+	{
+		qWarning() << "Cannot remove planet " << name << ": Not found.";
+		return false;
+	}
+	// TODO: In case we want major bodies or Pluto to be deleted, think about proper handling of moons!
+	//candidate->satellites.clear();
+	if (candidate->pType < Planet::isAsteroid)
+	{
+		qWarning() << "SolarSystem: REMOVING MAJOR OBJECT:" << name;
+		qWarning() << "             This is likely not what you want, but will be accepted.";
+		Q_ASSERT(0);
+	}
+	Orbit* orbPtr=(Orbit*) candidate->orbitPtr;
+	if (orbPtr)
+		orbits.removeOne(orbPtr);
+	systemPlanets.removeOne(candidate);
+	candidate.clear();
+	return true;
 }

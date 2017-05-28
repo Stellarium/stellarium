@@ -42,7 +42,7 @@ SolarSystemManagerWindow::SolarSystemManagerWindow()
 	ui = new Ui_solarSystemManagerWindow();
 	mpcImportWindow = new MpcImportWindow();
 
-	ssoManager = GETSTELMODULE(SolarSystemEditor);
+	ssEditor = GETSTELMODULE(SolarSystemEditor);
 }
 
 SolarSystemManagerWindow::~SolarSystemManagerWindow()
@@ -73,12 +73,13 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
-	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObject()));
+	connect(ui->pushButtonAddFile, SIGNAL(clicked()), this, SLOT(addConfiguration()));
+	connect(ui->pushButtonRemove, SIGNAL(clicked()), this, SLOT(removeObjects()));
 	connect(ui->pushButtonImportMPC, SIGNAL(clicked()), this, SLOT(newImportMPC()));
 	//connect(ui->pushButtonManual, SIGNAL(clicked()), this, SLOT(newImportManual()));
 
-	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
-	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
+	connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
+	connect(ui->pushButtonReset, SIGNAL(clicked()), ssEditor, SLOT(resetSolarSystemToDefault()));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), ui->listWidgetObjects, SLOT(repaint()));
@@ -89,7 +90,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	//Rebuild the list if any planets have been imported
 	connect(mpcImportWindow, SIGNAL(objectsImported()), this, SLOT(populateSolarSystemList()));
 
-	ui->lineEditUserFilePath->setText(ssoManager->getCustomSolarSystemFilePath());
+	ui->lineEditUserFilePath->setText(ssEditor->getCustomSolarSystemFilePath());
 	populateSolarSystemList();
 }
 
@@ -162,7 +163,9 @@ void SolarSystemManagerWindow::populateSolarSystemList()
 	unlocalizedNames.clear();
 	foreach (const PlanetP & object, GETSTELMODULE(SolarSystem)->getAllPlanets())
 	{
-		unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
+		// GZ new for 0.16: only insert objects which are minor bodies.
+		if (object->getPlanetType() >= Planet::isAsteroid)
+			unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
 	}
 
 	ui->listWidgetObjects->clear();
@@ -170,28 +173,45 @@ void SolarSystemManagerWindow::populateSolarSystemList()
 	//No explicit sorting is necessary: sortingEnabled is set in the .ui
 }
 
-void SolarSystemManagerWindow::removeObject()
+void SolarSystemManagerWindow::removeObjects()
 {
-	if(ui->listWidgetObjects->currentItem())
+	if (ui->listWidgetObjects->selectedItems().length()>0)
 	{
-		QString ssoI18nName = ui->listWidgetObjects->currentItem()->text();
-		QString ssoEnglishName = unlocalizedNames.value(ssoI18nName);
-		//qDebug() << ssoId;
-		//TODO: Ask for confirmation first?
-		ssoManager->removeSsoWithName(ssoEnglishName);
+		// we must disconnect the signal or else the list will be rebuilt after the first deletion.
+		disconnect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
+		// This is slow for many objects.
+		// TODO: For more than 50, it may be better to remove from ini file and reload all ini files.
+		foreach (QListWidgetItem *item, ui->listWidgetObjects->selectedItems())
+		{
+			QString ssoI18nName = item->text();
+			QString ssoEnglishName = unlocalizedNames.value(ssoI18nName);
+			//qDebug() << ssoId;
+			//TODO: Ask for confirmation first?
+			ssEditor->removeSsoWithName(ssoEnglishName);
+		}
+		connect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
+		populateSolarSystemList();
 	}
 }
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the Solar System configuration file as..."), QDir::homePath() + "/ssystem.ini");
-	ssoManager->copySolarSystemConfigurationFileTo(filePath);
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the minor Solar System bodies as..."), QDir::homePath() + "/ssystem_minor.ini");
+	ssEditor->copySolarSystemConfigurationFileTo(filePath);
 }
 
 void SolarSystemManagerWindow::replaceConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System configuration file"), QDir::homePath(), filter);
-	ssoManager->replaceSolarSystemConfigurationFileWith(filePath);
+	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);
+	ssEditor->replaceSolarSystemConfigurationFileWith(filePath);
+}
+
+void SolarSystemManagerWindow::addConfiguration()
+{
+	QString filter = q_("Configuration files");
+	filter.append(" (*.ini)");
+	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
+	ssEditor->addFromSolarSystemConfigurationFile(filePath);
 }
