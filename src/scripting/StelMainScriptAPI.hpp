@@ -709,6 +709,9 @@ public slots:
 	//! Close Stellarium
 	void quitStellarium();
 
+	//! Return a QStringlist of all available properties. Useful for script development...
+	QStringList getPropertyList() const;
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	static void debug(const QString& s);

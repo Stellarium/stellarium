@@ -571,8 +571,13 @@ where on one screen you show the constellation figures, another screen shows the
 distribution of deep-sky objects in the same frame, and a third screen may show
 a close-up view of the currently centered object.
 
-%% TODO The names of all available StelProperties can be found ... 
-%% <Maybe a scripting function is missing which calls StelPropertyMgr::getAllProperties() and dumps a map to output.txt?>
+The names of all available StelProperties to be excluded from synchronisation can currently 
+only be found with a little scripting. Open the script console \key{F12} and enter the following call:
+\begin{commands}
+core.output(core.getPropertyList());
+\end{commands}
+Run the script and inspect the output tab. It may take a little guesswork to select the right names, but the structure of 
+\texttt{<Module>.<Property>} should help you to find your way around.
 
 \subsection*{Author and Acknowledgements}
 

@@ -42,6 +42,7 @@
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
@@ -729,6 +730,11 @@ void StelMainScriptAPI::exit()
 void StelMainScriptAPI::quitStellarium()
 {
 	QCoreApplication::exit();
+}
+
+QStringList StelMainScriptAPI::getPropertyList() const
+{
+	return StelApp::getInstance().getStelPropertyManager()->getPropertyList();
 }
 
 void StelMainScriptAPI::debug(const QString& s)
