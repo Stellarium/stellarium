@@ -549,9 +549,9 @@ By default, the following things are synchronized:
 Because there is currently no full time correction implemented, for the best
 results all client computers should make sure their system clocks are set as
 close as possible to the server computer's clock (preferably a few milliseconds
-difference at most). This can be done for example by using a NTP server.
+difference at most). This can be done for example by using an NTP server.\footnote{
 Instructions on how to use the public NTP server pool for the most common
-operating systems can be found here: \url{http://www.pool.ntp.org/en/use.html}. 
+operating systems can be found at \url{http://www.pool.ntp.org/en/use.html}.} 
 If all your Stellarium instances run on the same device, this is of course not 
 necessary.
 
@@ -570,6 +570,9 @@ have different settings. This could allow installations with several screens
 where on one screen you show the constellation figures, another screen shows the
 distribution of deep-sky objects in the same frame, and a third screen may show
 a close-up view of the currently centered object.
+
+%% TODO The names of all available StelProperties can be found ... 
+%% <Maybe a scripting function is missing which calls StelPropertyMgr::getAllProperties() and dumps a map to output.txt?>
 
 \subsection*{Author and Acknowledgements}
 

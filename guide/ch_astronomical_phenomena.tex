@@ -787,6 +787,40 @@ side but concentrating on the object's location can often reveal it.
 \section{Atmospheric effects}
 \label{sec:phenomena:Atmosphere}
 
+%% Refraction section by GZotti 2016-04-12
+\subsection{Atmospheric Extinction}
+\label{sec:phenomena:Extinction}
+
+\begin{figure}[tb]
+\centering\includegraphics[width=\textwidth]{gz_extinctionmag}
+\caption{Airmass and Extinction.  The figure shows Airmass (blue)
+  along the line of sight in the altitude labeled on the left side.
+  The green curves show how many magnitudes an object is dimmed down,
+  depending on extinction factor $k$ (called $k_v$ in the figure). The
+  red curves indicate at which altitude a star of given magnitude can
+  be seen with good eyesight, again depending on $k$. The black dots
+  are observed values found in the literature.}
+\label{fig:Extinction}
+\end{figure}
+
+\indexterm{Atmospheric Extinction} is the attenuation of light of a
+celestial body by Earth's atmosphere. In the last split-second of its
+travel into our eyes or detectors, light from outer space has to pass
+our atmosphere, through layers of mixed gas, water vapour and dust. If
+a star is in the zenith, its light must pass one \indexterm{air mass}
+and is reduced by whatever amount of water and dust is above you. When
+the star is on the horizon, it has to pass about 40 times longer
+through the atmosphere: 40 air masses (Fig.~\ref{fig:Extinction}. The
+number of air masses increases fast in low altitudes, this is why we
+see so few stars along the horizon. Usually blue light is extinguished
+more, this is why the sun and moon (and brigher stars) appear reddish
+on the horizon.
+
+Stellarium can simulate extinction, and you can set the opacity of
+your atmosphere with a global factor $k$, the \emph{magnitude loss per
+  airmass} (see section~\ref{sec:gui:view:sky:atmosphere}). The best
+mountaintop sites may have $k=0.15$, while $k=0.25$ seems a value
+usable for good locations in lower altitudes.
 
 %% Refraction section by GZotti 2016-04-12
 \subsection{Atmospheric Refraction}
@@ -823,7 +857,7 @@ mathematical horizon.
 
 Note that these models can only give approximate conditions. There are
 many weird effects in the real atmosphere, when temperature inversion
-layers can create light ducts, cause double sunsets etc.
+layers can create light ducts, double sunsets etc.
 
 Also note that the models give meaningful results only for altitudes
 above approximately $-2\degree$. Below that, in nature, there is
@@ -834,40 +868,29 @@ able to properly recreate the atmospheric distortions as seen from a
 stratosphere balloon, where the height of earth's surface is several
 degrees below the mathematical horizon.
 
-%% Refraction section by GZotti 2016-04-12
-\subsection{Atmospheric Extinction}
-\label{sec:phenomena:Extinction}
+\subsubsection{Scintillation}
+\label{sec:phenomena:Scintillation}
+\indexterm[scintillation]{Scintillation} is the scientific name of the twinkling which stars show
+in turbulent atmosphere. The twinkling is caused by moving pockets of air with different temperature. 
+Observe a star low on the horizon with a telescope, and you will note it does not stand still 
+but dances around a bit, often also changing color to show red or blue hues.
+While the twinkling of stars may look fine and comforting to the naked eye on a nice warm summer evening, 
+telescopic observers and astrophotographers don't like it at all. They rather complain about ``bad seeing'', 
+because it deteriorates the optical resolution of their instruments and photographs. 
 
-\begin{figure}[tb]
-\centering\includegraphics[width=\textwidth]{gz_extinctionmag}
-\caption{Airmass and Extinction.  The figure shows Airmass (blue)
-  along the line of sight in the altitude labeled on the left side.
-  The green curves show how many magnitudes an object is dimmed down,
-  depending on extinction factor $k$ (called $k_v$ in the figure). The
-  red curves indicate at which altitude a star of given magnitude can
-  be seen with good eyesight, again depending on $k$. The black dots
-  are observed values found in the literature.}
-\label{fig:Extinction}
-\end{figure}
+Just like extinction and refraction are stronger along the horizon, 
+stars in low altitude in general show more twinkling than stars higher up in the sky. 
 
-\indexterm{Atmospheric Extinction} is the attenuation of light of a
-celestial body by Earth's atmosphere. In the last split-second of its
-travel into our eyes or detectors, light from outer space has to pass
-our atmosphere, through layers of mixed gas, water vapour and dust. If
-a star is in the zenith, its light must pass one \indexterm{air mass}
-and is reduced by whatever amount of water and dust is above you. When
-the star is on the horizon, it has to pass about 40 times longer
-through the atmosphere: 40 air masses (Fig.~\ref{fig:Extinction}. The
-number of air masses increases fast in low altitudes, this is why we
-see so few stars along the horizon. Usually blue light is extinguished
-more, this is why the sun and moon (and brigher stars) appear reddish
-on the horizon.
+Note that planets seem to be affected less by scintillation: they are not point sources, but little disks, 
+and so the effect of the turbulent pockets of air distorting different parts of the disks cancels out a bit 
+when observing with the naked eye: planets appear to be more stable.
+Of course, the view in a telescope will still be deteriorated by the turbulent atmosphere.
 
-Stellarium can simulate extinction, and you can set the opacity of
-your atmosphere with a global factor $k$, the \emph{magnitude loss per
-  airmass} (see section~\ref{sec:gui:view:sky:atmosphere}). The best
-mountaintop sites may have $k=0.15$, while $k=0.25$ seems a value
-usable for good locations in lower altitudes.
+While bad seeing was one key motivation of sending telescopes into earth orbit since the 1970s, 
+the latest generation of ground-based giant telescopes is able to compensate for the turbulent 
+motion by rapidly deforming their secondary mirror. 
+
+
 
 \subsection{Light Pollution}
 \label{sec:phenomena:LightPollution}
