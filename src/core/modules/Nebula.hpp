@@ -60,7 +60,10 @@ public:
 		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
 		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
 		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		CatCed		= 0x00004000  //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
+		CatCed		= 0x00004000, //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
+		CatArp		= 0x00008000, //!< Atlas of Peculiar Galaxies (Arp)
+		CatVV		= 0x00010000, //!< Interacting galaxies catalogue by Vorontsov-Velyaminov (VV)
+		CatPK		= 0x00020000  //!< Catalogue of Galactic Planetary Nebulae (PK)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -80,7 +83,7 @@ public:
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);
+	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK);
 	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeOther);
 
 	//! @enum NebulaType Nebula types
@@ -226,7 +229,10 @@ private:
 	unsigned int Mel_nb;            // Melotte Catalog number
 	unsigned int PGC_nb;            // PGC number (Catalog of galaxies)
 	unsigned int UGC_nb;            // UGC number (The Uppsala General Catalogue of Galaxies)
+	unsigned int Arp_nb;            // Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
+	unsigned int VV_nb;             // VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
+	QString PK_nb;			// PK number (Catalogue of Galactic Planetary Nebulae)
 	QString englishName;            // English name
 	QStringList englishAliases;	// English aliases
 	QString nameI18;                // Nebula name
