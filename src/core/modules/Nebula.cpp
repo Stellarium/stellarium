@@ -103,7 +103,10 @@ Nebula::Nebula()
 	, Mel_nb(0)
 	, PGC_nb(0)
 	, UGC_nb(0)
-	, Ced_nb()
+	, Arp_nb(0)
+	, VV_nb(0)
+	, Ced_nb("")
+	, PK_nb("")
 	, nameI18("")
 	, mTypeString()
 	, bMag(99.)
@@ -176,7 +179,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (UGC_nb > 0)
 			catIds << QString("UGC %1").arg(UGC_nb);
 		if (!Ced_nb.isEmpty())
-			catIds << QString("Ced %1").arg(Ced_nb);		
+			catIds << QString("Ced %1").arg(Ced_nb);
+		if (Arp_nb > 0)
+			catIds << QString("Arp %1").arg(Arp_nb);
+		if (VV_nb > 0)
+			catIds << QString("VV %1").arg(VV_nb);
+		if (!PK_nb.isEmpty())
+			catIds << QString("PK %1").arg(PK_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -779,6 +788,12 @@ QString Nebula::getDSODesignation() const
 		str = QString("UGC %1").arg(UGC_nb);
 	else if (catalogFilters&CatCed && !Ced_nb.isEmpty())
 		str = QString("Ced %1").arg(Ced_nb);
+	else if (catalogFilters&CatArp && Arp_nb > 0)
+		str = QString("Arp %1").arg(Arp_nb);
+	else if (catalogFilters&CatVV && VV_nb > 0)
+		str = QString("VV %1").arg(VV_nb);
+	else if (catalogFilters&CatPK && !PK_nb.isEmpty())
+		str = QString("PK %1").arg(PK_nb);
 
 	return str;
 }
@@ -791,7 +806,7 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
