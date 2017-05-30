@@ -746,6 +746,9 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("flag_show_ced",	(bool) (cflags & Nebula::CatCed));
 	conf->setValue("flag_show_pgc",	(bool) (cflags & Nebula::CatPGC));
 	conf->setValue("flag_show_ugc",	(bool) (cflags & Nebula::CatUGC));
+	conf->setValue("flag_show_arp",	(bool) (cflags & Nebula::CatArp));
+	conf->setValue("flag_show_vv",	(bool) (cflags & Nebula::CatVV));
+	conf->setValue("flag_show_pk",	(bool) (cflags & Nebula::CatPK));
 	conf->endGroup();
 
 	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();
