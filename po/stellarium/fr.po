@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-22 15:16+0700\n"
-"PO-Revision-Date: 2017-05-26 15:12+0000\n"
+"PO-Revision-Date: 2017-05-29 19:30+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-27 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-05-30 05:24+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -2871,6 +2871,9 @@ msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
+"Utiliser une « shadow map » pour simuler les ombres propres des objets non "
+"convexes du système solaire. Pourrait réduire la qualité de la pénombre de "
+"certains objets."
 
 #: src/gui/ViewDialog.cpp:1260
 msgid "Abbreviated"
@@ -2958,6 +2961,8 @@ msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
 "and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
+"Cet algorithme était utilisé dans <em>Astronomical Almanac</em> (1984 et "
+"après) et fournit les magnitudes V instrumentales (attribué à D.L. Harris)."
 
 #: src/gui/ViewDialog.cpp:1563
 msgid ""
@@ -2965,18 +2970,25 @@ msgid ""
 "was published in <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
+"Cet algorithme se fonde sur les observations visuelles de G. Mueller entre "
+"1877 et 1891. Il a été publié dans <em>Explanatory Supplement to the "
+"Astronomical Ephemeris</em> (1961)."
 
 #: src/gui/ViewDialog.cpp:1566
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
 msgstr ""
+"Cet algorithme a été publié dans <em>Explanatory Supplement to the "
+"Astronomical Almanac</em> (1992)."
 
 #: src/gui/ViewDialog.cpp:1569
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
+"Cet algorithme a été publié dans la 3ème édition de <em>Explanatory "
+"Supplement to the Astronomical Almanac</em> (2013)."
 
 #: src/gui/ViewDialog.cpp:1572
 msgid "Visual magnitude based on phase angle and albedo."
