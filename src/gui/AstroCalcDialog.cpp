@@ -499,9 +499,9 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Principal Galaxy Catalog"), "112");
 	category->addItem(q_("The Uppsala General Catalogue of Galaxies"), "113");
 	category->addItem(q_("Cederblad Catalog"), "114");
-	category->addItem(q_("Catalogue of Peculiar Galaxies"), "115");
+	category->addItem(q_("The Catalogue of Peculiar Galaxies"), "115");
 	category->addItem(q_("The Catalogue of Interacting Galaxies"), "116");
-	category->addItem(q_("Catalogue of Galactic Planetary Nebulae"), "117");
+	category->addItem(q_("The Catalogue of Galactic Planetary Nebulae"), "117");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");
