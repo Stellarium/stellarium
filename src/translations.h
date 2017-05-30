@@ -176,11 +176,11 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Cederblad Catalog");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Catalogue of Peculiar Galaxies");
+		N_("The Catalogue of Peculiar Galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("The Catalogue of Interacting Galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("Catalogue of Galactic Planetary Nebulae");
+		N_("The Catalogue of Galactic Planetary Nebulae");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
