@@ -7,22 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-22 15:16+0700\n"
+"POT-Creation-Date: 2017-05-30 22:32+0700\n"
 "PO-Revision-Date: 2017-05-14 15:47+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-23 05:47+0000\n"
-"X-Generator: Launchpad (build 18387)\n"
+"X-Launchpad-Export-Date: 2017-05-31 05:47+0000\n"
+"X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:194 src/core/modules/Planet.cpp:347
+#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:347
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
-#: plugins/Satellites/src/Satellite.cpp:279
+#: plugins/Satellites/src/Satellite.cpp:281
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Quasars/src/Quasar.cpp:102
 #: plugins/Pulsars/src/Pulsar.cpp:159 plugins/Exoplanets/src/Exoplanet.cpp:293
 #, qt-format
@@ -48,7 +48,7 @@ msgstr "星群"
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
 #: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
-#: src/core/modules/NebulaMgr.cpp:367 src/core/modules/NebulaMgr.cpp:368
+#: src/core/modules/NebulaMgr.cpp:373 src/core/modules/NebulaMgr.cpp:374
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:544 src/core/StelCore.cpp:254
@@ -95,7 +95,7 @@ msgstr "选择单一星座"
 msgid "Remove selection of constellations"
 msgstr "取消所选星座"
 
-#: src/core/modules/StarMgr.cpp:449 src/ui_viewDialog.h:2092
+#: src/core/modules/StarMgr.cpp:449 src/ui_viewDialog.h:2116
 #: src/ui_dsoColorsDialog.h:541
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
@@ -105,7 +105,7 @@ msgstr "恒星"
 msgid "Stars labels"
 msgstr "恒星标签"
 
-#: src/core/modules/GridLinesMgr.cpp:641 src/ui_viewDialog.h:2305
+#: src/core/modules/GridLinesMgr.cpp:641 src/ui_viewDialog.h:2338
 msgid "Meridian"
 msgstr "子午线"
 
@@ -129,7 +129,7 @@ msgstr "赤道"
 msgid "Precession Circle"
 msgstr "岁差圈"
 
-#: src/core/modules/GridLinesMgr.cpp:666 src/ui_viewDialog.h:2294
+#: src/core/modules/GridLinesMgr.cpp:666 src/ui_viewDialog.h:2327
 msgid "Horizon"
 msgstr "地平线"
 
@@ -142,12 +142,12 @@ msgid "Supergalactic Equator"
 msgstr "超星系赤道"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:2309
+#: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:2342
 msgid "O./C. longitude"
 msgstr "二分/至黄经圈"
 
 #: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1248
-#: src/ui_viewDialog.h:2358
+#: src/ui_viewDialog.h:2391
 msgid "Prime Vertical"
 msgstr "卯酉线"
 
@@ -224,7 +224,7 @@ msgstr "网格和线"
 msgid "Equatorial grid"
 msgstr "赤道坐标网格"
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2388
+#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2421
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "地平坐标网格"
@@ -270,20 +270,20 @@ msgstr "黄道网格（J2000）"
 msgid "Ecliptic grid"
 msgstr "黄道网格"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2423
+#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr "银道坐标网格"
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2278
+#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2311
 msgid "Galactic equator"
 msgstr "银道"
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2412
+#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2445
 msgid "Supergalactic grid"
 msgstr "超星系坐标网格"
 
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2301
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2334
 msgid "Supergalactic equator"
 msgstr "超星系赤道"
 
@@ -324,11 +324,11 @@ msgstr "黄极（J2000）"
 msgid "Ecliptic poles"
 msgstr "黄极"
 
-#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2366
+#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2399
 msgid "Galactic poles"
 msgstr "银极"
 
-#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2324
+#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2357
 msgid "Supergalactic poles"
 msgstr "超星系坐标极点"
 
@@ -356,7 +356,7 @@ msgstr "大气层"
 msgid "Fog"
 msgstr "雾"
 
-#: src/core/modules/LandscapeMgr.cpp:424 src/ui_viewDialog.h:2320
+#: src/core/modules/LandscapeMgr.cpp:424 src/ui_viewDialog.h:2353
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "基点"
@@ -373,7 +373,7 @@ msgstr "地景亮度"
 msgid "Landscape labels"
 msgstr "地景标签"
 
-#: src/core/modules/LandscapeMgr.cpp:428 src/ui_viewDialog.h:2112
+#: src/core/modules/LandscapeMgr.cpp:428 src/ui_viewDialog.h:2136
 msgid "Light pollution data from locations database"
 msgstr "当地数据库的光污染数据"
 
@@ -396,26 +396,26 @@ msgstr ", %1 米"
 msgid "Celestial body:"
 msgstr "天体"
 
-#: src/core/modules/Nebula.cpp:196 src/core/modules/Comet.cpp:169
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Comet.cpp:169
 #: plugins/Novae/src/Nova.cpp:147 plugins/Pulsars/src/Pulsar.cpp:170
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "类型： <b>%1</b> (%2)"
 
-#: src/core/modules/Nebula.cpp:203
+#: src/core/modules/Nebula.cpp:212
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "不透明度：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:208 src/core/modules/Planet.cpp:353
+#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:353
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "星等 <b>%1</b> (消光至: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:211 src/core/modules/Nebula.cpp:216
+#: src/core/modules/Nebula.cpp:220 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Planet.cpp:356 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
@@ -425,46 +425,46 @@ msgstr "星等 <b>%1</b> (消光至: <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "星等：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:217
+#: src/core/modules/Nebula.cpp:226
 msgid " (Photometric system: B)"
 msgstr " (测光系统: B)"
 
-#: src/core/modules/Nebula.cpp:223 src/core/modules/StarWrapper.cpp:68
+#: src/core/modules/Nebula.cpp:232 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:213 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "色指数（B-V）：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:228
+#: src/core/modules/Nebula.cpp:237
 msgid "Surface brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:229
+#: src/core/modules/Nebula.cpp:238
 msgid "after extinction"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:244 src/core/modules/Nebula.cpp:252
+#: src/core/modules/Nebula.cpp:253 src/core/modules/Nebula.cpp:261
 #, qt-format
 msgid "Contrast index: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:262
+#: src/core/modules/Nebula.cpp:271
 #, qt-format
 msgid "Size: %1"
 msgstr "大小: %1"
 
-#: src/core/modules/Nebula.cpp:265
+#: src/core/modules/Nebula.cpp:274
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr "大小: %1 x %2"
 
-#: src/core/modules/Nebula.cpp:267
+#: src/core/modules/Nebula.cpp:276
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr "定向角:%1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:291 src/core/modules/StarWrapper.cpp:243
+#: src/core/modules/Nebula.cpp:300 src/core/modules/StarWrapper.cpp:243
 #: plugins/Supernovae/src/Supernova.cpp:152 plugins/Novae/src/Nova.cpp:167
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 #, qt-format
@@ -472,418 +472,418 @@ msgid "Distance: %1 ly"
 msgstr "距离: %1 光年"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:301
+#: src/core/modules/Nebula.cpp:310
 msgid "kpc"
 msgstr "千秒差距"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:303
+#: src/core/modules/Nebula.cpp:312
 msgid "ly"
 msgstr "光年"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:310
+#: src/core/modules/Nebula.cpp:319
 msgid "Mpc"
 msgstr "兆秒差距"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:312
+#: src/core/modules/Nebula.cpp:321
 msgid "Mio. ly"
 msgstr "兆光年"
 
-#: src/core/modules/Nebula.cpp:326
+#: src/core/modules/Nebula.cpp:335
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
 msgstr "距离: %1 %2 (%3 %4)"
 
-#: src/core/modules/Nebula.cpp:340
+#: src/core/modules/Nebula.cpp:349
 #, qt-format
 msgid "Redshift: %1"
 msgstr "红移t: %1"
 
-#: src/core/modules/Nebula.cpp:351 src/core/modules/StarWrapper.cpp:252
+#: src/core/modules/Nebula.cpp:360 src/core/modules/StarWrapper.cpp:252
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "视差: %1\""
 
-#: src/core/modules/Nebula.cpp:355
+#: src/core/modules/Nebula.cpp:364
 msgid "Morphological description: "
 msgstr "形态描述: "
 
-#: src/core/modules/Nebula.cpp:917
+#: src/core/modules/Nebula.cpp:932
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "中心高度密集"
 
-#: src/core/modules/Nebula.cpp:920
+#: src/core/modules/Nebula.cpp:935
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "中心稠密"
 
-#: src/core/modules/Nebula.cpp:923
+#: src/core/modules/Nebula.cpp:938
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "核心的恒星丰富"
 
-#: src/core/modules/Nebula.cpp:926
+#: src/core/modules/Nebula.cpp:941
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "中等丰富聚集"
 
-#: src/core/modules/Nebula.cpp:931
+#: src/core/modules/Nebula.cpp:946
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "中等聚集"
 
-#: src/core/modules/Nebula.cpp:934
+#: src/core/modules/Nebula.cpp:949
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "较为松散的趋向中心"
 
-#: src/core/modules/Nebula.cpp:937
+#: src/core/modules/Nebula.cpp:952
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "松散的趋向中心"
 
-#: src/core/modules/Nebula.cpp:940
+#: src/core/modules/Nebula.cpp:955
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "松散"
 
-#: src/core/modules/Nebula.cpp:943
+#: src/core/modules/Nebula.cpp:958
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "非常松散"
 
-#: src/core/modules/Nebula.cpp:946
+#: src/core/modules/Nebula.cpp:961
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "几乎没有向中心聚集"
 
-#: src/core/modules/Nebula.cpp:949
+#: src/core/modules/Nebula.cpp:964
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "未记录集中度等级"
 
-#: src/core/modules/Nebula.cpp:969
+#: src/core/modules/Nebula.cpp:984
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "中心强壮"
 
-#: src/core/modules/Nebula.cpp:972
+#: src/core/modules/Nebula.cpp:987
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "中心较小"
 
-#: src/core/modules/Nebula.cpp:975
+#: src/core/modules/Nebula.cpp:990
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "没有明显的集中"
 
-#: src/core/modules/Nebula.cpp:978
+#: src/core/modules/Nebula.cpp:993
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "星场集中度"
 
-#: src/core/modules/Nebula.cpp:981
+#: src/core/modules/Nebula.cpp:996
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "未记录集中度等级"
 
-#: src/core/modules/Nebula.cpp:987
+#: src/core/modules/Nebula.cpp:1002
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "成员的亮度差异小"
 
-#: src/core/modules/Nebula.cpp:990
+#: src/core/modules/Nebula.cpp:1005
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "成员中等亮度差异"
 
-#: src/core/modules/Nebula.cpp:993
+#: src/core/modules/Nebula.cpp:1008
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "成员亮度差异大"
 
-#: src/core/modules/Nebula.cpp:996
+#: src/core/modules/Nebula.cpp:1011
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "未记录亮度差异"
 
-#: src/core/modules/Nebula.cpp:1002
+#: src/core/modules/Nebula.cpp:1017
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "不到50颗恒星的贫星团"
 
-#: src/core/modules/Nebula.cpp:1005
+#: src/core/modules/Nebula.cpp:1020
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "包含50-100颗恒星的中等星团"
 
-#: src/core/modules/Nebula.cpp:1008
+#: src/core/modules/Nebula.cpp:1023
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "超过100颗恒星的富星团"
 
-#: src/core/modules/Nebula.cpp:1011
+#: src/core/modules/Nebula.cpp:1026
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "无法确定成员数量"
 
-#: src/core/modules/Nebula.cpp:1015
+#: src/core/modules/Nebula.cpp:1030
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "位于星云内的星团"
 
-#: src/core/modules/Nebula.cpp:1036
+#: src/core/modules/Nebula.cpp:1051
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "非常明亮"
 
-#: src/core/modules/Nebula.cpp:1039
+#: src/core/modules/Nebula.cpp:1054
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "明亮"
 
-#: src/core/modules/Nebula.cpp:1042
+#: src/core/modules/Nebula.cpp:1057
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1045
+#: src/core/modules/Nebula.cpp:1060
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "暗淡"
 
-#: src/core/modules/Nebula.cpp:1048
+#: src/core/modules/Nebula.cpp:1063
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "非常暗淡"
 
-#: src/core/modules/Nebula.cpp:1051
+#: src/core/modules/Nebula.cpp:1066
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "不确定亮度"
 
-#: src/core/modules/Nebula.cpp:1054
+#: src/core/modules/Nebula.cpp:1069
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "未记录亮度"
 
-#: src/core/modules/Nebula.cpp:1060
+#: src/core/modules/Nebula.cpp:1075
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "照亮星云的恒星在星云内部"
 
-#: src/core/modules/Nebula.cpp:1063
+#: src/core/modules/Nebula.cpp:1078
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "恒星位于被照亮星云之外"
 
-#: src/core/modules/Nebula.cpp:1066
+#: src/core/modules/Nebula.cpp:1081
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "恒星位于被照亮星云角落"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1071
+#: src/core/modules/Nebula.cpp:1086
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "恒星位于被照亮的特殊星云之外"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1077
+#: src/core/modules/Nebula.cpp:1092
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "发光的特殊星云"
 
-#: src/core/modules/Nebula.cpp:1081
+#: src/core/modules/Nebula.cpp:1096
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "未定反射星云"
 
-#: src/core/modules/Nebula.cpp:1104
+#: src/core/modules/Nebula.cpp:1119
 msgid "circular form"
 msgstr "圆形"
 
-#: src/core/modules/Nebula.cpp:1107
+#: src/core/modules/Nebula.cpp:1122
 msgid "elliptical form"
 msgstr "椭圆"
 
-#: src/core/modules/Nebula.cpp:1110
+#: src/core/modules/Nebula.cpp:1125
 msgid "irregular form"
 msgstr "不规则"
 
-#: src/core/modules/Nebula.cpp:1113
+#: src/core/modules/Nebula.cpp:1128
 msgid "undocumented form"
 msgstr "不能确定形态"
 
-#: src/core/modules/Nebula.cpp:1119
+#: src/core/modules/Nebula.cpp:1134
 msgid "amorphous structure"
 msgstr "无定形"
 
-#: src/core/modules/Nebula.cpp:1122
+#: src/core/modules/Nebula.cpp:1137
 msgid "conventional structure"
 msgstr "常规结构"
 
-#: src/core/modules/Nebula.cpp:1125
+#: src/core/modules/Nebula.cpp:1140
 msgid "filamentary structure"
 msgstr "纤维结构"
 
-#: src/core/modules/Nebula.cpp:1128
+#: src/core/modules/Nebula.cpp:1143
 msgid "undocumented structure"
 msgstr "不能确定结构"
 
-#: src/core/modules/Nebula.cpp:1134
+#: src/core/modules/Nebula.cpp:1149
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "极暗淡"
 
-#: src/core/modules/Nebula.cpp:1137
+#: src/core/modules/Nebula.cpp:1152
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1140
+#: src/core/modules/Nebula.cpp:1155
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "极明亮"
 
-#: src/core/modules/Nebula.cpp:1143
+#: src/core/modules/Nebula.cpp:1158
 msgid "undocumented brightness"
 msgstr "未记录亮度"
 
-#: src/core/modules/Nebula.cpp:1159
+#: src/core/modules/Nebula.cpp:1174
 msgid "galaxy"
 msgstr "星系"
 
-#: src/core/modules/Nebula.cpp:1162
+#: src/core/modules/Nebula.cpp:1177
 msgid "active galaxy"
 msgstr "活动星系"
 
-#: src/core/modules/Nebula.cpp:1165
+#: src/core/modules/Nebula.cpp:1180
 msgid "radio galaxy"
 msgstr "射电星系"
 
-#: src/core/modules/Nebula.cpp:1168
+#: src/core/modules/Nebula.cpp:1183
 msgid "interacting galaxy"
 msgstr "互扰星系"
 
-#: src/core/modules/Nebula.cpp:1171 plugins/Quasars/src/Quasar.cpp:102
+#: src/core/modules/Nebula.cpp:1186 plugins/Quasars/src/Quasar.cpp:102
 msgid "quasar"
 msgstr "类星体"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1189
 msgid "star cluster"
 msgstr "星团"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1192
 msgid "open star cluster"
 msgstr "疏散星团"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1195
 msgid "globular star cluster"
 msgstr "球状星团"
 
-#: src/core/modules/Nebula.cpp:1183
+#: src/core/modules/Nebula.cpp:1198
 msgid "nebula"
 msgstr "星云"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1201
 msgid "planetary nebula"
 msgstr "行星状星云"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1204
 msgid "dark nebula"
 msgstr "暗星云"
 
-#: src/core/modules/Nebula.cpp:1192
+#: src/core/modules/Nebula.cpp:1207
 msgid "cluster associated with nebulosity"
 msgstr "与星云相关的星团"
 
-#: src/core/modules/Nebula.cpp:1195
+#: src/core/modules/Nebula.cpp:1210
 msgid "bipolar nebula"
 msgstr "双极星云"
 
-#: src/core/modules/Nebula.cpp:1198
+#: src/core/modules/Nebula.cpp:1213
 msgid "emission nebula"
 msgstr "发射星云"
 
-#: src/core/modules/Nebula.cpp:1201
+#: src/core/modules/Nebula.cpp:1216
 msgid "HII region"
 msgstr "电离氢区"
 
-#: src/core/modules/Nebula.cpp:1204
+#: src/core/modules/Nebula.cpp:1219
 msgid "reflection nebula"
 msgstr "反射星云"
 
-#: src/core/modules/Nebula.cpp:1207
+#: src/core/modules/Nebula.cpp:1222
 msgid "supernova remnant"
 msgstr "超新星遗迹"
 
-#: src/core/modules/Nebula.cpp:1210
+#: src/core/modules/Nebula.cpp:1225
 msgid "stellar association"
 msgstr "星协"
 
-#: src/core/modules/Nebula.cpp:1213
+#: src/core/modules/Nebula.cpp:1228
 msgid "star cloud"
 msgstr "恒星云"
 
-#: src/core/modules/Nebula.cpp:1216
+#: src/core/modules/Nebula.cpp:1231
 msgid "interstellar matter"
 msgstr "星际物质"
 
-#: src/core/modules/Nebula.cpp:1219
+#: src/core/modules/Nebula.cpp:1234
 msgid "emission object"
 msgstr "发射线天体"
 
-#: src/core/modules/Nebula.cpp:1222
+#: src/core/modules/Nebula.cpp:1237
 msgid "BL Lac object"
 msgstr "蝎虎座BL型天体"
 
-#: src/core/modules/Nebula.cpp:1225
+#: src/core/modules/Nebula.cpp:1240
 msgid "blazar"
 msgstr "耀变体"
 
-#: src/core/modules/Nebula.cpp:1228
+#: src/core/modules/Nebula.cpp:1243
 msgid "molecular cloud"
 msgstr "分子云"
 
-#: src/core/modules/Nebula.cpp:1231
+#: src/core/modules/Nebula.cpp:1246
 msgid "young stellar object"
 msgstr "初期恒星体"
 
-#: src/core/modules/Nebula.cpp:1234
+#: src/core/modules/Nebula.cpp:1249
 msgid "possible quasar"
 msgstr "可能的类星体"
 
-#: src/core/modules/Nebula.cpp:1237
+#: src/core/modules/Nebula.cpp:1252
 msgid "possible planetary nebula"
 msgstr "可能的行星状星云"
 
-#: src/core/modules/Nebula.cpp:1240
+#: src/core/modules/Nebula.cpp:1255
 msgid "protoplanetary nebula"
 msgstr "原行星云"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1243 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1258 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
 msgid "star"
 msgstr "恒星"
 
-#: src/core/modules/Nebula.cpp:1246
+#: src/core/modules/Nebula.cpp:1261
 msgid "object of unknown nature"
 msgstr "性质不明对象"
 
-#: src/core/modules/Nebula.cpp:1249
+#: src/core/modules/Nebula.cpp:1264
 msgid "undocumented type"
 msgstr "无法识别的对象"
 
-#: src/core/modules/NebulaMgr.cpp:367
+#: src/core/modules/NebulaMgr.cpp:373
 msgid "Deep-sky objects"
 msgstr "深空天体"
 
-#: src/core/modules/NebulaMgr.cpp:368
+#: src/core/modules/NebulaMgr.cpp:374
 msgid "Toggle DSO type filter"
 msgstr "切换深空天体类型过滤器"
 
@@ -1070,8 +1070,8 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "彗尾长度（估计）: %1 兆千米"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1159
-#: src/gui/AstroCalcDialog.cpp:2629 src/translations.h:68
+#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1169
+#: src/gui/AstroCalcDialog.cpp:2643 src/translations.h:68
 msgid "Planets"
 msgstr "行星"
 
@@ -1181,7 +1181,7 @@ msgid "Position angle"
 msgstr "方位角"
 
 #: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
-#: src/gui/AstroCalcDialog.cpp:1747
+#: src/gui/AstroCalcDialog.cpp:1761
 msgid "Separation"
 msgstr "间距"
 
@@ -1215,7 +1215,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr "无法创建喷口发件人。 有关详细信息，请参阅日志。"
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
-#: src/gui/AstroCalcDialog.cpp:746 src/gui/AstroCalcDialog.cpp:1744
+#: src/gui/AstroCalcDialog.cpp:755 src/gui/AstroCalcDialog.cpp:1758
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -2055,27 +2055,27 @@ msgstr "LTST"
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:920
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视野大小: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:925
+#: src/gui/ConfigurationDialog.cpp:928
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:987
+#: src/gui/ConfigurationDialog.cpp:990
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:988 src/gui/ViewDialog.cpp:1336
+#: src/gui/ConfigurationDialog.cpp:991 src/gui/ViewDialog.cpp:1345
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:990 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:993 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
@@ -2095,15 +2095,15 @@ msgstr "联系信息"
 msgid "Version"
 msgstr "版本"
 
-#: src/gui/ConfigurationDialog.cpp:1087
+#: src/gui/ConfigurationDialog.cpp:1090
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:1094
+#: src/gui/ConfigurationDialog.cpp:1097
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2111,16 +2111,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1171
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1178
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2129,7 +2129,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1185
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2140,7 +2140,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1225 src/gui/ConfigurationDialog.cpp:1261
+#: src/gui/ConfigurationDialog.cpp:1228 src/gui/ConfigurationDialog.cpp:1264
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2149,11 +2149,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1314
+#: src/gui/ConfigurationDialog.cpp:1317
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:1318
+#: src/gui/ConfigurationDialog.cpp:1321
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2162,170 +2162,170 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "文件被损坏。"
 
-#: src/gui/ConfigurationDialog.cpp:1364 src/gui/ConfigurationDialog.cpp:1373
+#: src/gui/ConfigurationDialog.cpp:1367 src/gui/ConfigurationDialog.cpp:1376
 msgid "Available"
 msgstr "连接可用"
 
-#: src/gui/ConfigurationDialog.cpp:1366 src/gui/ConfigurationDialog.cpp:1375
+#: src/gui/ConfigurationDialog.cpp:1369 src/gui/ConfigurationDialog.cpp:1378
 msgid "Not Available"
 msgstr "连接不可用"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1442
+#: src/gui/ConfigurationDialog.cpp:1445
 msgid "Algorithm of"
 msgstr "ΔT的算法"
 
-#: src/gui/ConfigurationDialog.cpp:1455
+#: src/gui/ConfigurationDialog.cpp:1458
 msgid "Without correction"
 msgstr "未校正"
 
-#: src/gui/ConfigurationDialog.cpp:1456
+#: src/gui/ConfigurationDialog.cpp:1459
 msgid "Schoch (1931)"
 msgstr "Schoch（1931年）"
 
-#: src/gui/ConfigurationDialog.cpp:1457
+#: src/gui/ConfigurationDialog.cpp:1460
 msgid "Clemence (1948)"
 msgstr "克莱曼斯"
 
-#: src/gui/ConfigurationDialog.cpp:1458
+#: src/gui/ConfigurationDialog.cpp:1461
 msgid "IAU (1952)"
 msgstr "IAU （1952年）"
 
-#: src/gui/ConfigurationDialog.cpp:1459
+#: src/gui/ConfigurationDialog.cpp:1462
 msgid "Astronomical Ephemeris (1960)"
 msgstr "星历表（1960年）"
 
-#: src/gui/ConfigurationDialog.cpp:1460
+#: src/gui/ConfigurationDialog.cpp:1463
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "塔克曼（1962, 1964）和哥斯廷（1973）"
 
-#: src/gui/ConfigurationDialog.cpp:1461
+#: src/gui/ConfigurationDialog.cpp:1464
 msgid "Muller & Stephenson (1975)"
 msgstr "穆勒和斯蒂芬森（1975）"
 
-#: src/gui/ConfigurationDialog.cpp:1462
+#: src/gui/ConfigurationDialog.cpp:1465
 msgid "Stephenson (1978)"
 msgstr "斯蒂芬森（1978）"
 
-#: src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1466
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel和 Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1464
+#: src/gui/ConfigurationDialog.cpp:1467
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel 和 Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1465
+#: src/gui/ConfigurationDialog.cpp:1468
 msgid "Morrison & Stephenson (1982)"
 msgstr "莫里森和斯蒂芬森（1982）"
 
-#: src/gui/ConfigurationDialog.cpp:1466
+#: src/gui/ConfigurationDialog.cpp:1469
 msgid "Stephenson & Morrison (1984)"
 msgstr "斯蒂芬森和莫里森（1984）"
 
-#: src/gui/ConfigurationDialog.cpp:1467
+#: src/gui/ConfigurationDialog.cpp:1470
 msgid "Stephenson & Houlden (1986)"
 msgstr "斯蒂芬森和胡尔登（1986）"
 
-#: src/gui/ConfigurationDialog.cpp:1468
+#: src/gui/ConfigurationDialog.cpp:1471
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1469
+#: src/gui/ConfigurationDialog.cpp:1472
 msgid "Borkowski (1988)"
 msgstr "博尔科夫斯基（1988）"
 
-#: src/gui/ConfigurationDialog.cpp:1470
+#: src/gui/ConfigurationDialog.cpp:1473
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze 和 Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "Stephenson & Morrison (1995)"
 msgstr "斯蒂芬森和莫里森（1995）"
 
-#: src/gui/ConfigurationDialog.cpp:1472
+#: src/gui/ConfigurationDialog.cpp:1475
 msgid "Stephenson (1997)"
 msgstr "斯蒂芬森（1997）"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1477
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (以及 Chapront, Chapront-Touze 和 Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1475
+#: src/gui/ConfigurationDialog.cpp:1478
 msgid "JPL Horizons"
 msgstr "JPL 新视野"
 
-#: src/gui/ConfigurationDialog.cpp:1476
+#: src/gui/ConfigurationDialog.cpp:1479
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus 和 Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1477
+#: src/gui/ConfigurationDialog.cpp:1480
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "莫里森和斯蒂芬森（2004, 2005）"
 
-#: src/gui/ConfigurationDialog.cpp:1478
+#: src/gui/ConfigurationDialog.cpp:1481
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1480
+#: src/gui/ConfigurationDialog.cpp:1483
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak 和 Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1486
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak 和 Meeus (2006)不提供额外的月球加速"
 
-#: src/gui/ConfigurationDialog.cpp:1485
+#: src/gui/ConfigurationDialog.cpp:1488
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1489
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1490
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck 和 Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1488
+#: src/gui/ConfigurationDialog.cpp:1491
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold 和 Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1489
+#: src/gui/ConfigurationDialog.cpp:1492
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq和 Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1490
+#: src/gui/ConfigurationDialog.cpp:1493
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana 和 Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1491
+#: src/gui/ConfigurationDialog.cpp:1494
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
-#: src/gui/ConfigurationDialog.cpp:1540 src/gui/ConfigurationDialog.cpp:1575
+#: src/gui/ConfigurationDialog.cpp:1543 src/gui/ConfigurationDialog.cpp:1578
 #: src/gui/StelGuiItems.cpp:633 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr "系统默认"
 
-#: src/gui/ConfigurationDialog.cpp:1541
+#: src/gui/ConfigurationDialog.cpp:1544
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "年-月-日（ISO 8601）"
 
-#: src/gui/ConfigurationDialog.cpp:1542
+#: src/gui/ConfigurationDialog.cpp:1545
 msgid "dd-mm-yyyy"
 msgstr "日-月-年"
 
-#: src/gui/ConfigurationDialog.cpp:1543
+#: src/gui/ConfigurationDialog.cpp:1546
 msgid "mm-dd-yyyy"
 msgstr "月-日-年"
 
-#: src/gui/ConfigurationDialog.cpp:1576
+#: src/gui/ConfigurationDialog.cpp:1579
 msgid "12-hour format"
 msgstr "12小时制"
 
-#: src/gui/ConfigurationDialog.cpp:1577
+#: src/gui/ConfigurationDialog.cpp:1580
 msgid "24-hour format"
 msgstr "24小时制"
 
@@ -2712,173 +2712,173 @@ msgid "Frames per second"
 msgstr "帧每秒"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1200
+#: src/gui/ViewDialog.cpp:1209
 msgid "Excellent dark-sky site"
 msgstr "完美的黑暗天空观测地"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1202
+#: src/gui/ViewDialog.cpp:1211
 msgid "Typical truly dark site"
 msgstr "典型的真正黑暗观测地"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1204
+#: src/gui/ViewDialog.cpp:1213
 msgid "Rural sky"
 msgstr "乡村的星空"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1206
+#: src/gui/ViewDialog.cpp:1215
 msgid "Rural/suburban transition"
 msgstr "乡村/郊区的过渡"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1208
+#: src/gui/ViewDialog.cpp:1217
 msgid "Suburban sky"
 msgstr "郊区的天空"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1210
+#: src/gui/ViewDialog.cpp:1219
 msgid "Bright suburban sky"
 msgstr "明亮郊区的天空"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1212
+#: src/gui/ViewDialog.cpp:1221
 msgid "Suburban/urban transition"
 msgstr "郊区/城市过渡"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1214
+#: src/gui/ViewDialog.cpp:1223
 msgid "City sky"
 msgstr "城市天空"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1216
+#: src/gui/ViewDialog.cpp:1225
 msgid "Inner-city sky"
 msgstr "市中心的天空"
 
-#: src/gui/ViewDialog.cpp:1230
+#: src/gui/ViewDialog.cpp:1239
 msgid "The naked-eye limiting magnitude is"
 msgstr "祼眼极限星等"
 
-#: src/gui/ViewDialog.cpp:1238
+#: src/gui/ViewDialog.cpp:1247
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1239
+#: src/gui/ViewDialog.cpp:1248
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1260
+#: src/gui/ViewDialog.cpp:1269
 msgid "Abbreviated"
 msgstr "缩写"
 
-#: src/gui/ViewDialog.cpp:1261
+#: src/gui/ViewDialog.cpp:1270
 msgid "Native"
 msgstr "原生"
 
-#: src/gui/ViewDialog.cpp:1262
+#: src/gui/ViewDialog.cpp:1271
 msgid "Translated"
 msgstr "已翻译"
 
-#: src/gui/ViewDialog.cpp:1457
+#: src/gui/ViewDialog.cpp:1466
 msgid "No shooting stars"
 msgstr "无流星"
 
-#: src/gui/ViewDialog.cpp:1459
+#: src/gui/ViewDialog.cpp:1468
 msgid "Normal rate"
 msgstr "日常频率"
 
-#: src/gui/ViewDialog.cpp:1461
+#: src/gui/ViewDialog.cpp:1470
 msgid "Standard Orionids rate"
 msgstr "常规猎户座流星雨"
 
-#: src/gui/ViewDialog.cpp:1463
+#: src/gui/ViewDialog.cpp:1472
 msgid "Standard Perseids rate"
 msgstr "常规英仙座流星雨"
 
-#: src/gui/ViewDialog.cpp:1465
+#: src/gui/ViewDialog.cpp:1474
 msgid "Standard Geminids rate"
 msgstr "常规双子座流星雨"
 
-#: src/gui/ViewDialog.cpp:1467
+#: src/gui/ViewDialog.cpp:1476
 msgid "Exceptional Perseid rate"
 msgstr "超量英仙座流星雨"
 
-#: src/gui/ViewDialog.cpp:1469
+#: src/gui/ViewDialog.cpp:1478
 msgid "Meteor storm rate"
 msgstr "流星数率"
 
-#: src/gui/ViewDialog.cpp:1471
+#: src/gui/ViewDialog.cpp:1480
 msgid "Exceptional Draconid rate"
 msgstr "超量天龙座流星雨"
 
-#: src/gui/ViewDialog.cpp:1473
+#: src/gui/ViewDialog.cpp:1482
 msgid "Exceptional Leonid rate"
 msgstr "超量狮子座流星雨"
 
-#: src/gui/ViewDialog.cpp:1475
+#: src/gui/ViewDialog.cpp:1484
 msgid "Very high rate (1966 Leonids)"
 msgstr "超强爆发(1966 狮子座流星雨)"
 
-#: src/gui/ViewDialog.cpp:1477
+#: src/gui/ViewDialog.cpp:1486
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "最强爆发(1833 狮子座流星雨)"
 
-#: src/gui/ViewDialog.cpp:1530
+#: src/gui/ViewDialog.cpp:1539
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1531
+#: src/gui/ViewDialog.cpp:1540
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1532
+#: src/gui/ViewDialog.cpp:1541
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1533
+#: src/gui/ViewDialog.cpp:1542
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1534
+#: src/gui/ViewDialog.cpp:1543
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1560
+#: src/gui/ViewDialog.cpp:1569
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
 "and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1563
+#: src/gui/ViewDialog.cpp:1572
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1566
+#: src/gui/ViewDialog.cpp:1575
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1569
+#: src/gui/ViewDialog.cpp:1578
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1572
+#: src/gui/ViewDialog.cpp:1581
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
@@ -3051,15 +3051,15 @@ msgstr "赤纬"
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:255 src/gui/AstroCalcDialog.cpp:324
-#: src/gui/AstroCalcDialog.cpp:751
+#: src/gui/AstroCalcDialog.cpp:760
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:947
 msgid "Azimuth"
 msgstr "方位角"
 
 #. TRANSLATORS: altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:326
-#: src/gui/AstroCalcDialog.cpp:753 src/gui/AstroCalcDialog.cpp:1323
-#: src/gui/AstroCalcDialog.cpp:1724 src/gui/AstroCalcDialog.cpp:1726
+#: src/gui/AstroCalcDialog.cpp:762 src/gui/AstroCalcDialog.cpp:1337
+#: src/gui/AstroCalcDialog.cpp:1738 src/gui/AstroCalcDialog.cpp:1740
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "高度角"
@@ -3142,19 +3142,19 @@ msgstr "名称"
 
 #. TRANSLATORS: right ascension
 #: src/gui/AstroCalcDialog.cpp:294 src/gui/AstroCalcDialog.cpp:331
-#: src/gui/AstroCalcDialog.cpp:758
+#: src/gui/AstroCalcDialog.cpp:767
 msgid "RA (J2000)"
 msgstr "赤经（J2000）"
 
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:296 src/gui/AstroCalcDialog.cpp:333
-#: src/gui/AstroCalcDialog.cpp:760
+#: src/gui/AstroCalcDialog.cpp:769
 msgid "Dec (J2000)"
 msgstr "赤纬（J2000）"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:298 src/gui/AstroCalcDialog.cpp:343
-#: src/gui/AstroCalcDialog.cpp:763
+#: src/gui/AstroCalcDialog.cpp:772
 msgid "mag"
 msgstr "星等"
 
@@ -3190,19 +3190,19 @@ msgstr "天"
 msgid "S.B."
 msgstr "表面亮度"
 
-#: src/gui/AstroCalcDialog.cpp:384 src/gui/AstroCalcDialog.cpp:554
+#: src/gui/AstroCalcDialog.cpp:384 src/gui/AstroCalcDialog.cpp:557
 #, qt-format
 msgid "Positions on %1"
 msgstr "坐标 %1"
 
-#: src/gui/AstroCalcDialog.cpp:459 src/gui/AstroCalcDialog.cpp:2633
-#: src/ui_viewDialog.h:2222 src/ui_dsoColorsDialog.h:542
+#: src/gui/AstroCalcDialog.cpp:459 src/gui/AstroCalcDialog.cpp:2647
+#: src/ui_viewDialog.h:2255 src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "星系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:460 src/translations.h:115
-#: src/ui_viewDialog.h:2223 src/ui_dsoColorsDialog.h:507
+#: src/ui_viewDialog.h:2256 src/ui_dsoColorsDialog.h:507
 msgid "Active galaxies"
 msgstr "活动星系"
 
@@ -3214,7 +3214,7 @@ msgstr "电波星系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:462 src/translations.h:119
-#: src/ui_viewDialog.h:2217 src/ui_dsoColorsDialog.h:514
+#: src/ui_viewDialog.h:2250 src/ui_dsoColorsDialog.h:514
 msgid "Interacting galaxies"
 msgstr "互扰星系"
 
@@ -3224,8 +3224,8 @@ msgid "Bright quasars"
 msgstr "明亮的类星体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:464 src/gui/AstroCalcDialog.cpp:2634
-#: src/translations.h:123 src/ui_viewDialog.h:2220 src/ui_dsoColorsDialog.h:534
+#: src/gui/AstroCalcDialog.cpp:464 src/gui/AstroCalcDialog.cpp:2648
+#: src/translations.h:123 src/ui_viewDialog.h:2253 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "星团"
 
@@ -3260,16 +3260,16 @@ msgid "Nebulae"
 msgstr "星云"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:1172
-#: src/gui/AstroCalcDialog.cpp:2643 src/translations.h:105
-#: src/ui_viewDialog.h:2221 src/ui_dsoColorsDialog.h:580
+#: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:1182
+#: src/gui/AstroCalcDialog.cpp:2657 src/translations.h:105
+#: src/ui_viewDialog.h:2254 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "行星状星云"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:471 src/gui/AstroCalcDialog.cpp:1174
-#: src/gui/AstroCalcDialog.cpp:2632 src/translations.h:107
-#: src/ui_viewDialog.h:2224 src/ui_dsoColorsDialog.h:540
+#: src/gui/AstroCalcDialog.cpp:471 src/gui/AstroCalcDialog.cpp:1184
+#: src/gui/AstroCalcDialog.cpp:2646 src/translations.h:107
+#: src/ui_viewDialog.h:2257 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "暗星云"
 
@@ -3304,7 +3304,7 @@ msgstr "电离氢区"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:477 src/translations.h:133
-#: src/ui_viewDialog.h:2216 src/ui_dsoColorsDialog.h:614
+#: src/ui_viewDialog.h:2249 src/ui_dsoColorsDialog.h:614
 msgid "Supernova remnants"
 msgstr "超新星遗迹"
 
@@ -3359,13 +3359,13 @@ msgstr "原行星云"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:487 src/translations.h:153
-#: src/ui_viewDialog.h:2180
+#: src/ui_viewDialog.h:2204
 msgid "Messier Catalogue"
 msgstr "梅西耶目录"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:488 src/translations.h:155
-#: src/ui_viewDialog.h:2183
+#: src/ui_viewDialog.h:2207
 msgid "Caldwell Catalogue"
 msgstr "考德威尔目录"
 
@@ -3419,11 +3419,11 @@ msgstr "Lynds亮星云目录"
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr "Lynds暗星云目录"
 
-#: src/gui/AstroCalcDialog.cpp:499 src/ui_viewDialog.h:2207
+#: src/gui/AstroCalcDialog.cpp:499 src/ui_viewDialog.h:2231
 msgid "Principal Galaxy Catalog"
 msgstr "PGC目录"
 
-#: src/gui/AstroCalcDialog.cpp:500 src/ui_viewDialog.h:2210
+#: src/gui/AstroCalcDialog.cpp:500 src/ui_viewDialog.h:2234
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "乌普萨拉星系总目录UGC目录"
 
@@ -3432,323 +3432,338 @@ msgstr "乌普萨拉星系总目录UGC目录"
 msgid "Cederblad Catalog"
 msgstr "Cederblad目录"
 
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:502 src/translations.h:179
+msgid "The Catalogue of Peculiar Galaxies"
+msgstr ""
+
+#. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:181
+msgid "The Catalogue of Interacting Galaxies"
+msgstr ""
+
+#. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:504 src/translations.h:183
+msgid "The Catalogue of Galactic Planetary Nebulae"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:505 src/translations.h:185
 msgid "Dwarf galaxies"
 msgstr "矮星系"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:181
+#: src/gui/AstroCalcDialog.cpp:506 src/translations.h:187
 msgid "Herschel 400 Catalogue"
 msgstr "Herschel 400目录"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:504 src/gui/AstroCalcDialog.cpp:2644
-#: src/translations.h:190
+#: src/gui/AstroCalcDialog.cpp:507 src/gui/AstroCalcDialog.cpp:2658
+#: src/translations.h:196
 msgid "Bright double stars"
 msgstr "亮双星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:505 src/gui/AstroCalcDialog.cpp:2645
-#: src/translations.h:192
+#: src/gui/AstroCalcDialog.cpp:508 src/gui/AstroCalcDialog.cpp:2659
+#: src/translations.h:198
 msgid "Bright variable stars"
 msgstr "亮变星"
 
-#: src/gui/AstroCalcDialog.cpp:747 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:756 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr "儒略日"
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:765
+#: src/gui/AstroCalcDialog.cpp:774
 msgid "phase"
 msgstr ""
 
 #. TRANSLATORS: distance
-#: src/gui/AstroCalcDialog.cpp:767
+#: src/gui/AstroCalcDialog.cpp:776
 msgid "dist."
 msgstr ""
 
 #. TRANSLATORS: elongation
-#: src/gui/AstroCalcDialog.cpp:769
+#: src/gui/AstroCalcDialog.cpp:778
 msgid "elong."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:800
+#: src/gui/AstroCalcDialog.cpp:809
 msgid "Planetocentric distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:802
+#: src/gui/AstroCalcDialog.cpp:811
 msgid "Topocentric distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:803 src/gui/AstroCalcDialog.cpp:1560
+#: src/gui/AstroCalcDialog.cpp:812 src/gui/AstroCalcDialog.cpp:1574
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "AU"
 msgstr "天文单位"
 
-#: src/gui/AstroCalcDialog.cpp:952 src/gui/AstroCalcDialog.cpp:2015
+#: src/gui/AstroCalcDialog.cpp:962 src/gui/AstroCalcDialog.cpp:2029
 msgid "CSV (Comma delimited)"
 msgstr "CSV (逗号分隔)"
 
-#: src/gui/AstroCalcDialog.cpp:954
+#: src/gui/AstroCalcDialog.cpp:964
 msgid "Save calculated ephemerides as..."
 msgstr "将计算的星历另存为..."
 
-#: src/gui/AstroCalcDialog.cpp:1076
+#: src/gui/AstroCalcDialog.cpp:1086
 msgid "10 minutes"
 msgstr "10分钟"
 
-#: src/gui/AstroCalcDialog.cpp:1077
+#: src/gui/AstroCalcDialog.cpp:1087
 msgid "30 minutes"
 msgstr "30分钟"
 
-#: src/gui/AstroCalcDialog.cpp:1078
+#: src/gui/AstroCalcDialog.cpp:1088
 msgid "1 hour"
 msgstr "1小时"
 
-#: src/gui/AstroCalcDialog.cpp:1079
+#: src/gui/AstroCalcDialog.cpp:1089
 msgid "6 hours"
 msgstr "6小时"
 
-#: src/gui/AstroCalcDialog.cpp:1080
+#: src/gui/AstroCalcDialog.cpp:1090
 msgid "12 hours"
 msgstr "12小时"
 
-#: src/gui/AstroCalcDialog.cpp:1081
+#: src/gui/AstroCalcDialog.cpp:1091
 msgid "1 day"
 msgstr "1天"
 
-#: src/gui/AstroCalcDialog.cpp:1082
+#: src/gui/AstroCalcDialog.cpp:1092
 msgid "5 days"
 msgstr "5天"
 
-#: src/gui/AstroCalcDialog.cpp:1083
+#: src/gui/AstroCalcDialog.cpp:1093
 msgid "10 days"
 msgstr "10天"
 
-#: src/gui/AstroCalcDialog.cpp:1084
+#: src/gui/AstroCalcDialog.cpp:1094
 msgid "15 days"
 msgstr "15天"
 
-#: src/gui/AstroCalcDialog.cpp:1085
+#: src/gui/AstroCalcDialog.cpp:1095
 msgid "30 days"
 msgstr "30 天"
 
-#: src/gui/AstroCalcDialog.cpp:1086
+#: src/gui/AstroCalcDialog.cpp:1096
 msgid "60 days"
 msgstr "60天"
 
-#: src/gui/AstroCalcDialog.cpp:1158
+#: src/gui/AstroCalcDialog.cpp:1168
 msgid "Solar system"
 msgstr "太阳系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1160 src/gui/AstroCalcDialog.cpp:2635
+#: src/gui/AstroCalcDialog.cpp:1170 src/gui/AstroCalcDialog.cpp:2649
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "小行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1161 src/gui/AstroCalcDialog.cpp:2637
+#: src/gui/AstroCalcDialog.cpp:1171 src/gui/AstroCalcDialog.cpp:2651
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr "冥族小天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1162 src/gui/AstroCalcDialog.cpp:2636
+#: src/gui/AstroCalcDialog.cpp:1172 src/gui/AstroCalcDialog.cpp:2650
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "彗星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1163 src/gui/AstroCalcDialog.cpp:2638
+#: src/gui/AstroCalcDialog.cpp:1173 src/gui/AstroCalcDialog.cpp:2652
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr "矮行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1164 src/gui/AstroCalcDialog.cpp:2639
+#: src/gui/AstroCalcDialog.cpp:1174 src/gui/AstroCalcDialog.cpp:2653
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr "经典柯伊伯带天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1165 src/gui/AstroCalcDialog.cpp:2640
+#: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:2654
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr "离散盘天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1166 src/gui/AstroCalcDialog.cpp:2641
+#: src/gui/AstroCalcDialog.cpp:1176 src/gui/AstroCalcDialog.cpp:2655
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr "奥尔特云天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1167 src/gui/AstroCalcDialog.cpp:2642
+#: src/gui/AstroCalcDialog.cpp:1177 src/gui/AstroCalcDialog.cpp:2656
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr "类塞德娜天体"
 
-#: src/gui/AstroCalcDialog.cpp:1168
+#: src/gui/AstroCalcDialog.cpp:1178
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "亮星 (<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1169
+#: src/gui/AstroCalcDialog.cpp:1179
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "亮双星 (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1170
+#: src/gui/AstroCalcDialog.cpp:1180
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "亮变星 (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1171
+#: src/gui/AstroCalcDialog.cpp:1181
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "亮星团(<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1173
+#: src/gui/AstroCalcDialog.cpp:1183
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "亮星云 (<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1175
+#: src/gui/AstroCalcDialog.cpp:1185
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "亮星系 (<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1322 src/gui/AstroCalcDialog.cpp:1724
-#: src/gui/AstroCalcDialog.cpp:1726
+#: src/gui/AstroCalcDialog.cpp:1336 src/gui/AstroCalcDialog.cpp:1738
+#: src/gui/AstroCalcDialog.cpp:1740
 msgid "Local Time"
 msgstr "当地时间"
 
-#: src/gui/AstroCalcDialog.cpp:1506
+#: src/gui/AstroCalcDialog.cpp:1520
 msgid "Magnitude vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1509
+#: src/gui/AstroCalcDialog.cpp:1523
 msgid "Phase vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1512
+#: src/gui/AstroCalcDialog.cpp:1526
 msgid "Distance vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1515
+#: src/gui/AstroCalcDialog.cpp:1529
 msgid "Elongation vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1518
+#: src/gui/AstroCalcDialog.cpp:1532
 msgid "Angular size vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1521
+#: src/gui/AstroCalcDialog.cpp:1535
 msgid "Phase angle vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1559
+#: src/gui/AstroCalcDialog.cpp:1573
 msgid "Date"
 msgstr ""
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:1569
+#: src/gui/AstroCalcDialog.cpp:1583
 msgid "Mm"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1581 src/gui/AstroCalcDialog.cpp:1616
+#: src/gui/AstroCalcDialog.cpp:1595 src/gui/AstroCalcDialog.cpp:1630
 msgid "Magnitude"
 msgstr "星等"
 
-#: src/gui/AstroCalcDialog.cpp:1587 src/gui/AstroCalcDialog.cpp:1622
+#: src/gui/AstroCalcDialog.cpp:1601 src/gui/AstroCalcDialog.cpp:1636
 msgid "Phase"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1592 src/gui/AstroCalcDialog.cpp:1627
+#: src/gui/AstroCalcDialog.cpp:1606 src/gui/AstroCalcDialog.cpp:1641
 #: src/ui_configurationDialog.h:1344
 msgid "Distance"
 msgstr "距离"
 
-#: src/gui/AstroCalcDialog.cpp:1597 src/gui/AstroCalcDialog.cpp:1632
+#: src/gui/AstroCalcDialog.cpp:1611 src/gui/AstroCalcDialog.cpp:1646
 msgid "Elongation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1602 src/gui/AstroCalcDialog.cpp:1637
+#: src/gui/AstroCalcDialog.cpp:1616 src/gui/AstroCalcDialog.cpp:1651
 msgid "Angular size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1607 src/gui/AstroCalcDialog.cpp:1642
+#: src/gui/AstroCalcDialog.cpp:1621 src/gui/AstroCalcDialog.cpp:1656
 msgid "Phase angle"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1718
+#: src/gui/AstroCalcDialog.cpp:1732
 #, qt-format
 msgid "Now about %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1720
+#: src/gui/AstroCalcDialog.cpp:1734
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1743
+#: src/gui/AstroCalcDialog.cpp:1757
 msgid "Phenomenon"
 msgstr "事件"
 
-#: src/gui/AstroCalcDialog.cpp:1745
+#: src/gui/AstroCalcDialog.cpp:1759
 msgid "Object 1"
 msgstr "对象1"
 
-#: src/gui/AstroCalcDialog.cpp:1746
+#: src/gui/AstroCalcDialog.cpp:1760
 msgid "Object 2"
 msgstr "对象2"
 
-#: src/gui/AstroCalcDialog.cpp:2017
+#: src/gui/AstroCalcDialog.cpp:2031
 msgid "Save calculated phenomena as..."
 msgstr "将事件计算另存为"
 
-#: src/gui/AstroCalcDialog.cpp:2056 src/gui/AstroCalcDialog.cpp:2231
-#: src/gui/AstroCalcDialog.cpp:2389
+#: src/gui/AstroCalcDialog.cpp:2070 src/gui/AstroCalcDialog.cpp:2245
+#: src/gui/AstroCalcDialog.cpp:2403
 msgid "Conjunction"
 msgstr "合"
 
-#: src/gui/AstroCalcDialog.cpp:2063
+#: src/gui/AstroCalcDialog.cpp:2077
 msgid "Opposition"
 msgstr "冲"
 
-#: src/gui/AstroCalcDialog.cpp:2071
+#: src/gui/AstroCalcDialog.cpp:2085
 msgid "Transit"
 msgstr "凌"
 
-#: src/gui/AstroCalcDialog.cpp:2073 src/gui/AstroCalcDialog.cpp:2236
-#: src/gui/AstroCalcDialog.cpp:2394
+#: src/gui/AstroCalcDialog.cpp:2087 src/gui/AstroCalcDialog.cpp:2250
+#: src/gui/AstroCalcDialog.cpp:2408
 msgid "Occultation"
 msgstr "掩星"
 
-#: src/gui/AstroCalcDialog.cpp:2077
+#: src/gui/AstroCalcDialog.cpp:2091
 msgid "Eclipse"
 msgstr "食"
 
-#: src/gui/AstroCalcDialog.cpp:2609
+#: src/gui/AstroCalcDialog.cpp:2623
 msgid "In the Evening"
 msgstr "晚间"
 
-#: src/gui/AstroCalcDialog.cpp:2610
+#: src/gui/AstroCalcDialog.cpp:2624
 msgid "In the Morning"
 msgstr "早间"
 
-#: src/gui/AstroCalcDialog.cpp:2611
+#: src/gui/AstroCalcDialog.cpp:2625
 msgid "Any Time Tonight"
 msgstr "今晚任何时间"
 
-#: src/gui/AstroCalcDialog.cpp:2630
+#: src/gui/AstroCalcDialog.cpp:2644
 msgid "Bright stars"
 msgstr "亮星"
 
-#: src/gui/AstroCalcDialog.cpp:2631 src/ui_viewDialog.h:2225
+#: src/gui/AstroCalcDialog.cpp:2645 src/ui_viewDialog.h:2258
 msgid "Bright nebulae"
 msgstr "亮星云"
 
@@ -3967,468 +3982,468 @@ msgid "Bright galaxies"
 msgstr "亮星系"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:186
+#: src/translations.h:192
 msgid "Interesting double stars"
 msgstr "有趣的双星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:188
+#: src/translations.h:194
 msgid "Interesting variable stars"
 msgstr "有趣的变星"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:197
+#: src/translations.h:203
 msgid "Arabic"
 msgstr "阿拉伯语"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:199
+#: src/translations.h:205
 msgid "Arabic Moon Stations"
 msgstr "阿拉伯的月球站"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:201
+#: src/translations.h:207
 msgid "Aztec"
 msgstr "阿兹特克"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:203
+#: src/translations.h:209
 msgid "Boorong"
 msgstr "萨满教"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:205
+#: src/translations.h:211
 msgid "Chinese"
 msgstr "中国"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:207
+#: src/translations.h:213
 msgid "Egyptian"
 msgstr "埃及"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:209
+#: src/translations.h:215
 msgid "Inuit"
 msgstr "因纽特(爱斯基摩)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:211
+#: src/translations.h:217
 msgid "Indian Vedic"
 msgstr "印度吠陀"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:213
+#: src/translations.h:219
 msgid "Japanese Moon Stations"
 msgstr "日本月球站"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:215
+#: src/translations.h:221
 msgid "Kamilaroi/Euahlayi"
 msgstr "卡米罗伊/"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:217
+#: src/translations.h:223
 msgid "Korean"
 msgstr "韩语"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:219
+#: src/translations.h:225
 msgid "Dakota/Lakota/Nakota"
 msgstr "达科他/拉科塔/纳科塔"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:221
+#: src/translations.h:227
 msgid "Macedonian"
 msgstr "马其顿"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:223
+#: src/translations.h:229
 msgid "Maori"
 msgstr "毛利"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:225
+#: src/translations.h:231
 msgid "Mongolian"
 msgstr "蒙古"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:227
+#: src/translations.h:233
 msgid "Navajo"
 msgstr "纳瓦霍"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:229
+#: src/translations.h:235
 msgid "Norse"
 msgstr "挪威"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:231
+#: src/translations.h:237
 msgid "Ojibwe"
 msgstr "欧及布威族"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:233
+#: src/translations.h:239
 msgid "Polynesian"
 msgstr "波利尼西亚"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:235
+#: src/translations.h:241
 msgid "Romanian"
 msgstr "罗马尼亚"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:237
+#: src/translations.h:243
 msgid "Sami"
 msgstr "萨米"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:239
+#: src/translations.h:245
 msgid "Sardinian"
 msgstr "撒丁"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:241
+#: src/translations.h:247
 msgid "Siberian"
 msgstr "西伯利亚"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:243
+#: src/translations.h:249
 msgid "Tukano"
 msgstr "图卡诺"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:245
+#: src/translations.h:251
 msgid "Tupi-Guarani"
 msgstr "图皮-瓜拉尼"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:247
+#: src/translations.h:253
 msgid "Tongan"
 msgstr "汤加"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:249
+#: src/translations.h:255
 msgid "Western"
 msgstr "西方"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:251
+#: src/translations.h:257
 msgid "Western (H.A.Rey)"
 msgstr "西方 (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:257
+#: src/translations.h:263
 msgid "Guereins"
 msgstr "古尔瑞恩（Guereins，地名）"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:259
+#: src/translations.h:265
 msgid "Trees"
 msgstr "树木"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:261 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
+#: src/translations.h:267 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
 msgid "Moon"
 msgstr "月球"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:263
+#: src/translations.h:269
 msgid "Hurricane"
 msgstr "飓风"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:265
+#: src/translations.h:271
 msgid "Ocean"
 msgstr "海洋"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:267
+#: src/translations.h:273
 msgid "Garching"
 msgstr "慕尼黑"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:269 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
+#: src/translations.h:275 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
 msgid "Mars"
 msgstr "火星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1299
+#: src/translations.h:277 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1298
 msgid "Jupiter"
 msgstr "木星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:273 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
+#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 msgid "Saturn"
 msgstr "土星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:275
+#: src/translations.h:281
 msgid "Uranus"
 msgstr "天王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:277
+#: src/translations.h:283
 msgid "Neptune"
 msgstr "海王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:279
+#: src/translations.h:285
 msgid "Geneva"
 msgstr "日内瓦"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:281
+#: src/translations.h:287
 msgid "Grossmugl"
 msgstr "大穆格尔"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:283
+#: src/translations.h:289
 msgid "Zero Horizon"
 msgstr "零地平线"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:288
+#: src/translations.h:294
 msgid "Vienna Sterngarten"
 msgstr "维也纳斯滕加登"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:290
+#: src/translations.h:296
 msgid "Testscene"
 msgstr "实验场景"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:295
+#: src/translations.h:301
 msgid "Landscape Tour"
 msgstr "游览"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:297
+#: src/translations.h:303
 msgid "Partial Lunar Eclipse"
 msgstr "月偏食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:299
+#: src/translations.h:305
 msgid "Total Lunar Eclipse"
 msgstr "月全食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:307
 msgid "Screensaver"
 msgstr "屏幕保护程序"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:309
 msgid "Solar Eclipse 2009"
 msgstr "2009年日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:311
 msgid "Startup Script"
 msgstr "启动脚本"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:313
 msgid "Zodiac"
 msgstr "黄道"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:315
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "水星上的三次日出与日落"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:317
 msgid "Double eclipse from Deimos in 2017"
 msgstr "2017年从火卫二观测到的双重食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:319
 msgid "Double eclipse from Deimos in 2031"
 msgstr "2031年从火卫二观测到的双重食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:321
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "2068年1月10日从奥林匹斯山观测到的日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:323
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "2048年火卫一掩地球和木星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:325
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "2027年火卫二上看到的三次凌日和两次日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:327
 msgid "Solar System Screensaver"
 msgstr "太阳系屏保"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:329
 msgid "Constellations Tour"
 msgstr "星座通览"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:331
 msgid "Sun from different planets"
 msgstr "从不同行星所见的太阳"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:333
 msgid "Earth best views from other bodies"
 msgstr "其他太阳系天体上看到的地球"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:335
 msgid "Transit of Venus"
 msgstr "金星凌日"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:337
 msgid "Sky Culture Tour"
 msgstr "星空文化之旅"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:333
+#: src/translations.h:339
 msgid "Earth Events from Mercury"
 msgstr "水星上看到的地球天象"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:335
+#: src/translations.h:341
 msgid "Earth Events from a floating city on Venus"
 msgstr "在金星上以漂浮城市形式模拟地球事件"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:337
+#: src/translations.h:343
 msgid "Earth Events from Mars"
 msgstr "火星上看到的地球天象"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:345
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "从火星观测地球和其它行星的大距和冲"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:347
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "在木卫四观测地球和火星的大距和凌日"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:343
+#: src/translations.h:349
 msgid "Tycho's Supernova"
 msgstr "SN 1572A"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:345
+#: src/translations.h:351
 msgid "Earth and other Planets from Ceres"
 msgstr "从谷神星观测地球和其它行星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:347
+#: src/translations.h:353
 msgid "Messier Objects Tour"
 msgstr "梅西耶天体之旅"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:355
 msgid "Binocular Highlights"
 msgstr "双筒望远镜精华"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:357
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20个有趣的裸眼双星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:359
 msgid "List of largest known stars"
 msgstr "已知最大恒星列表"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:361
 msgid "Herschel 400 Tour"
 msgstr "Herschel 400 之旅"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:363
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky：双筒望远镜里的深空天体"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:365
 msgid "The Jack Bennett Catalog"
 msgstr "杰克·贝内特目录"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:361
+#: src/translations.h:367
 msgid "Best objects in the New General Catalog"
 msgstr "新通用目录内的最佳天体"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:367
+#: src/translations.h:373
 msgid "Look around each installed landscape."
 msgstr "搜索已安装地景"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:369
+#: src/translations.h:375
 msgid "Look at each installed sky culture."
 msgstr "逐一浏览已安装的星空文化。"
 
-#: src/translations.h:370
+#: src/translations.h:376
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "月偏食演示脚本"
 
-#: src/translations.h:371
+#: src/translations.h:377
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "月全食演示脚本"
 
-#: src/translations.h:372
+#: src/translations.h:378
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "随机天体演示"
 
-#: src/translations.h:373
+#: src/translations.h:379
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "2009年日全食演示（地点为孟加拉国兰格普，Rangpur）"
 
-#: src/translations.h:374
+#: src/translations.h:380
 msgid "Script which runs automatically at startup"
 msgstr "在启动时自动运行的脚本"
 
-#: src/translations.h:375
+#: src/translations.h:381
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr "黄道星座演示脚本。黄道星座是位于黄道带上，太阳在一年中会经过的一系列星座的统称。"
 
-#: src/translations.h:376
+#: src/translations.h:382
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr "由于水星公转轨道与自转周期的巧合，在某些时候和地点，一水星日能出现三次太阳升落。"
 
-#: src/translations.h:377
+#: src/translations.h:383
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr "就在火星掩食太阳之前，火卫一从火星后面赶上并先行遮挡太阳。这发生在2017年4月26日，位于天蝎座和人马座之间。"
 
-#: src/translations.h:378
+#: src/translations.h:384
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr "就在火星掩食太阳之前，火卫一从火星后面赶上并先行遮挡太阳。这发生在2031年7月23日，位于金牛座和双子座之间。"
 
-#: src/translations.h:379
+#: src/translations.h:385
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "从奥林匹斯山上看2068年1月10日的火卫一日食"
 
-#: src/translations.h:380
+#: src/translations.h:386
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -4436,7 +4451,7 @@ msgid ""
 msgstr ""
 "从火星上看，火卫一时常遮掩地球或木星（掩星），但在一天之内遮掩到它们两个的情况就非常罕见了。这里是其中的一次，2048年 1月23日，按真实时间速度播放。"
 
-#: src/translations.h:381
+#: src/translations.h:387
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4448,41 +4463,41 @@ msgstr ""
 "火卫一运行在火星之前并穿过太阳表面，然后退行回来并再次部分地穿过太阳表面（仅在火卫二的南半球可见），然后当火卫一穿过火星和火卫二之间是火星会造成全日食。当"
 "火卫一穿过火星，到达火星的半影区是天空依旧是灰暗的，还要再过一会才会亮起来。"
 
-#: src/translations.h:382
+#: src/translations.h:388
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr "太阳系中各种事件的屏幕保护程序。包含287个事件！"
 
-#: src/translations.h:383
+#: src/translations.h:389
 msgid "A tour of the western constellations."
 msgstr "西方星座游览"
 
-#: src/translations.h:384
+#: src/translations.h:390
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "从太阳系的各大行星（以及冥王星）观看太阳"
 
-#: src/translations.h:385
+#: src/translations.h:391
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "21世纪中从其它太阳系天体观看地球的最佳角度"
 
-#: src/translations.h:386
+#: src/translations.h:392
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "金星凌日，2012年6月6日，澳大利亚悉尼"
 
-#: src/translations.h:387
+#: src/translations.h:393
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr "演示第谷·布拉赫于1572年观测到的超新星爆发。需启用超新星插件。"
 
-#: src/translations.h:388
+#: src/translations.h:394
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr "公元2000-3000年间从火星观测地球和其它行星的大距和冲"
 
-#: src/translations.h:389
+#: src/translations.h:395
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4492,24 +4507,24 @@ msgstr ""
 "公元2000-3000年，木卫四上观察地球的大距和凌日。为什么选择木卫四？ 在4个伽利略卫星中，木卫四是唯一在木星辐射带以外的一个。 "
 "因此，如果人类殖民木星的卫星，木卫四将是一个。"
 
-#: src/translations.h:390
+#: src/translations.h:396
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr "公元2000-3000年间从谷神星观测地球其它可见行星的大距和冲"
 
-#: src/translations.h:391
+#: src/translations.h:397
 msgid "A tour of Messier Objects"
 msgstr "游历梅西耶天体"
 
-#: src/translations.h:392
+#: src/translations.h:398
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr "用双筒望远镜观测方式来游历有趣天体。脚本数据取自加里施和尼的同名书刊。"
 
-#: src/translations.h:393
+#: src/translations.h:399
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -4518,15 +4533,15 @@ msgstr ""
 "此脚本有助你游历20组有趣的双星。列表由积里洛迪古斯搜集并发布于《天空和望远镜》杂志2014年9月刊，数据取自他的网站 "
 "http://www.astropix.com/doubles"
 
-#: src/translations.h:394
+#: src/translations.h:400
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "这个脚本帮助你游览已知最大的多个恒星。"
 
-#: src/translations.h:395
+#: src/translations.h:401
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "游历Herschel 400目录里的天体"
 
-#: src/translations.h:396
+#: src/translations.h:402
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -4534,156 +4549,156 @@ msgid ""
 msgstr ""
 "本·克罗韦尔创立了Binosky，一种双筒望远镜内的深空天体观测列表。在此脚本中，我们提供了其中31个这类天体，按升起顺序排列(2000.0)。"
 
-#: src/translations.h:397
+#: src/translations.h:403
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr "Jack Bennett南方深空天体目录（共152个天体）"
 
-#: src/translations.h:398
+#: src/translations.h:404
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:402
+#: src/translations.h:408
 msgid "&Undo"
 msgstr "&撤销"
 
-#: src/translations.h:403
+#: src/translations.h:409
 msgid "&Redo"
 msgstr "&重做"
 
-#: src/translations.h:404
+#: src/translations.h:410
 msgid "Cu&t"
 msgstr "&剪切"
 
-#: src/translations.h:405
+#: src/translations.h:411
 msgid "&Copy"
 msgstr "&复制"
 
-#: src/translations.h:406
+#: src/translations.h:412
 msgid "&Paste"
 msgstr "&粘贴"
 
-#: src/translations.h:407 plugins/Oculars/src/ui_ocularDialog.h:1164
+#: src/translations.h:413 plugins/Oculars/src/ui_ocularDialog.h:1164
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
 msgid "Delete"
 msgstr "删除"
 
-#: src/translations.h:408
+#: src/translations.h:414
 msgid "Select All"
 msgstr "全选"
 
-#: src/translations.h:409
+#: src/translations.h:415
 msgid "Look in:"
 msgstr "浏览:"
 
-#: src/translations.h:410
+#: src/translations.h:416
 msgid "Directory:"
 msgstr "目录："
 
-#: src/translations.h:411
+#: src/translations.h:417
 msgid "Folder"
 msgstr "文件夹"
 
-#: src/translations.h:412
+#: src/translations.h:418
 msgid "&Choose"
 msgstr "&选择"
 
-#: src/translations.h:413 src/ui_configurationDialog.h:1511
+#: src/translations.h:419 src/ui_configurationDialog.h:1511
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "取消"
 
-#: src/translations.h:414
+#: src/translations.h:420
 msgid "&Cancel"
 msgstr "取消"
 
-#: src/translations.h:415
+#: src/translations.h:421
 msgid "Files of type:"
 msgstr "文件类型："
 
-#: src/translations.h:416
+#: src/translations.h:422
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: src/translations.h:417
+#: src/translations.h:423
 msgid "Directories"
 msgstr "目录"
 
-#: src/translations.h:418
+#: src/translations.h:424
 msgid "Computer"
 msgstr "计算机"
 
-#: src/translations.h:419
+#: src/translations.h:425
 msgid "&Open"
 msgstr "&打开"
 
-#: src/translations.h:420
+#: src/translations.h:426
 msgid "File &name:"
 msgstr "文件 &名:"
 
-#: src/translations.h:421
+#: src/translations.h:427
 msgid "Copy &Link Location"
 msgstr "复制链接位置"
 
-#: src/translations.h:422
+#: src/translations.h:428
 msgid "Abort"
 msgstr "取消"
 
-#: src/translations.h:423
+#: src/translations.h:429
 msgid "Ignore"
 msgstr "忽略"
 
-#: src/translations.h:424
+#: src/translations.h:430
 msgid "&Basic colors"
 msgstr "&简单颜色"
 
-#: src/translations.h:425
+#: src/translations.h:431
 msgid "&Pick Screen Color"
 msgstr "＆选择颜色"
 
-#: src/translations.h:426
+#: src/translations.h:432
 msgid "&Custom colors"
 msgstr "&自定义颜色"
 
-#: src/translations.h:427
+#: src/translations.h:433
 msgid "&Add to Custom Colors"
 msgstr "&添加到自定义颜色"
 
-#: src/translations.h:428
+#: src/translations.h:434
 msgid "Hu&e:"
 msgstr "色&调:"
 
-#: src/translations.h:429
+#: src/translations.h:435
 msgid "&Sat:"
 msgstr "&饱和度:"
 
-#: src/translations.h:430
+#: src/translations.h:436
 msgid "&Val:"
 msgstr "&明度:"
 
-#: src/translations.h:431
+#: src/translations.h:437
 msgid "&Red:"
 msgstr "&红:"
 
-#: src/translations.h:432
+#: src/translations.h:438
 msgid "&Green:"
 msgstr "&绿:"
 
-#: src/translations.h:433
+#: src/translations.h:439
 msgid "Bl&ue:"
 msgstr "蓝&:"
 
-#: src/translations.h:434
+#: src/translations.h:440
 msgid "Select Color"
 msgstr "选择颜色"
 
-#: src/translations.h:435
+#: src/translations.h:441
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "光标在%1, %2 按ESC取消"
@@ -5980,764 +5995,776 @@ msgstr "仅从词汇开头自动填充"
 msgid "Lock position when coordinates are used"
 msgstr "使用坐标时锁定位置"
 
-#: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2454
-#: src/ui_viewDialog.h:2476 src/ui_viewDialog.h:2510
+#: src/ui_searchDialogGui.h:715 src/ui_viewDialog.h:2487
+#: src/ui_viewDialog.h:2509 src/ui_viewDialog.h:2543
 #: src/ui_configurationDialog.h:1512 src/ui_configurationDialog.h:1523
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "选项"
 
-#: src/ui_viewDialog.h:2090
+#: src/ui_viewDialog.h:2114
 msgid "View"
 msgstr "显示"
 
-#: src/ui_viewDialog.h:2093
+#: src/ui_viewDialog.h:2117
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Twinkle:"
 msgstr "闪烁:"
 
-#: src/ui_viewDialog.h:2095
+#: src/ui_viewDialog.h:2119
 msgid "Limit the magnitude of stars"
 msgstr "限制恒星星等"
 
-#: src/ui_viewDialog.h:2097 src/ui_viewDialog.h:2136 src/ui_viewDialog.h:2238
+#: src/ui_viewDialog.h:2121 src/ui_viewDialog.h:2160 src/ui_viewDialog.h:2271
 msgid "Limit magnitude:"
 msgstr "限制星等"
 
-#: src/ui_viewDialog.h:2098 src/ui_viewDialog.h:2142 src/ui_viewDialog.h:2226
+#: src/ui_viewDialog.h:2122 src/ui_viewDialog.h:2166 src/ui_viewDialog.h:2259
 msgid "Labels and Markers"
 msgstr "标签和标识"
 
-#: src/ui_viewDialog.h:2099
+#: src/ui_viewDialog.h:2123
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Absolute scale:"
 msgstr "绝对大小:"
 
-#: src/ui_viewDialog.h:2100
+#: src/ui_viewDialog.h:2124
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Relative scale:"
 msgstr "相对大小:"
 
-#: src/ui_viewDialog.h:2101 src/ui_viewDialog.h:2516
+#: src/ui_viewDialog.h:2125 src/ui_viewDialog.h:2549
 msgid "Sky"
 msgstr "天空"
 
-#: src/ui_viewDialog.h:2102
+#: src/ui_viewDialog.h:2126
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:444
 msgid "Light pollution:"
 msgstr "光污染："
 
-#: src/ui_viewDialog.h:2103
+#: src/ui_viewDialog.h:2127
 msgid "Milky Way brightness:"
 msgstr "银河亮度:"
 
-#: src/ui_viewDialog.h:2105
+#: src/ui_viewDialog.h:2129
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "降低明亮天体附近其馀天体的亮度"
 
-#: src/ui_viewDialog.h:2107
+#: src/ui_viewDialog.h:2131
 msgid "Dynamic eye adaptation"
 msgstr "人眼动态视觉调适"
 
-#: src/ui_viewDialog.h:2108
+#: src/ui_viewDialog.h:2132
 msgid "Zodiacal Light brightness:"
 msgstr "黄道光亮度"
 
-#: src/ui_viewDialog.h:2110
+#: src/ui_viewDialog.h:2134
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr "使用位置数据库中的光污染数据，并忽略以下的光污染设置"
 
-#: src/ui_viewDialog.h:2114
+#: src/ui_viewDialog.h:2138
 msgid "pressure, temperature, extinction coefficient"
 msgstr "压力，温度，消光系数"
 
-#: src/ui_viewDialog.h:2116
+#: src/ui_viewDialog.h:2140
 msgid "Refraction/Extinction settings..."
 msgstr "折射/光吸收设置..."
 
-#: src/ui_viewDialog.h:2117
+#: src/ui_viewDialog.h:2141
 msgid "Atmosphere visualization"
 msgstr ""
 
-#: src/ui_viewDialog.h:2118
+#: src/ui_viewDialog.h:2142
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "太阳系的天体"
 
-#: src/ui_viewDialog.h:2120
+#: src/ui_viewDialog.h:2144
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr "激活此选项以模拟实际光速的影响（推荐）。"
 
-#: src/ui_viewDialog.h:2122
+#: src/ui_viewDialog.h:2146
 msgid "Simulate light speed"
 msgstr "模拟光速"
 
-#: src/ui_viewDialog.h:2123
+#: src/ui_viewDialog.h:2147
 msgid "Use custom settings of GRS:"
 msgstr "使用自定义大红斑设置"
 
-#: src/ui_viewDialog.h:2124
+#: src/ui_viewDialog.h:2148
 msgid "GRS details..."
 msgstr "大红斑明细"
 
-#: src/ui_viewDialog.h:2128
+#: src/ui_viewDialog.h:2152
 msgid "Simulate self-shadowing"
 msgstr ""
 
-#: src/ui_viewDialog.h:2129
+#: src/ui_viewDialog.h:2153
 msgid "Scale Moon:"
 msgstr "月球比例："
 
-#: src/ui_viewDialog.h:2131
+#: src/ui_viewDialog.h:2155
 msgid "Scale factor"
 msgstr "缩放比例"
 
-#: src/ui_viewDialog.h:2134
+#: src/ui_viewDialog.h:2158
 msgid "Limit the magnitude of solar system objects"
 msgstr "限制太阳系天体的星等"
 
-#: src/ui_viewDialog.h:2140
+#: src/ui_viewDialog.h:2164
 msgid "Use more accurate 3D models (where available)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2141
+#: src/ui_viewDialog.h:2165
 msgid "Show planet markers"
 msgstr "显示行星标识"
 
-#: src/ui_viewDialog.h:2144
+#: src/ui_viewDialog.h:2168
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr "如果您想查看所选行星及其卫星的轨道，请停用此选项。"
 
-#: src/ui_viewDialog.h:2146
+#: src/ui_viewDialog.h:2170
 msgid "Show orbit for selected planet"
 msgstr "显示所选行星的轨道"
 
-#: src/ui_viewDialog.h:2148
+#: src/ui_viewDialog.h:2172
 msgid "Settings for sporadic meteors"
 msgstr "零星流星配置"
 
-#: src/ui_viewDialog.h:2150
+#: src/ui_viewDialog.h:2174
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr ""
 
-#: src/ui_viewDialog.h:2152 src/ui_viewDialog.h:2155
+#: src/ui_viewDialog.h:2176 src/ui_viewDialog.h:2179
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr ""
 
-#: src/ui_viewDialog.h:2158
+#: src/ui_viewDialog.h:2182
 msgid "Show planet orbits"
 msgstr "显示行星轨道"
 
-#: src/ui_viewDialog.h:2160
+#: src/ui_viewDialog.h:2184
 msgid "Configure colors of orbit lines"
 msgstr "设置轨道颜色"
 
-#: src/ui_viewDialog.h:2162
+#: src/ui_viewDialog.h:2186
 msgid "Colors..."
 msgstr "颜色设置"
 
-#: src/ui_viewDialog.h:2163
+#: src/ui_viewDialog.h:2187
 msgid "Scale minor bodies:"
 msgstr ""
 
-#: src/ui_viewDialog.h:2164
+#: src/ui_viewDialog.h:2188
 msgid "Planets magnitude algorithm:"
 msgstr ""
 
-#: src/ui_viewDialog.h:2166
+#: src/ui_viewDialog.h:2190
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr "如果要查看太阳系的所有轨道，请停用此选项。"
 
-#: src/ui_viewDialog.h:2168
+#: src/ui_viewDialog.h:2192
 msgid "Show trail only for selected planet"
 msgstr "只显示所选行星的轨道"
 
-#: src/ui_viewDialog.h:2169
+#: src/ui_viewDialog.h:2193
 msgid "Display objects from catalogs"
 msgstr "选择目录中的天体"
 
-#: src/ui_viewDialog.h:2171
+#: src/ui_viewDialog.h:2195
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "星云和星团索引目录"
 
-#: src/ui_viewDialog.h:2174
+#: src/ui_viewDialog.h:2198
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "星云和星团新总表"
 
-#: src/ui_viewDialog.h:2177
+#: src/ui_viewDialog.h:2201
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lynds亮星云目录(Lynds, 1965)"
 
-#: src/ui_viewDialog.h:2186
+#: src/ui_viewDialog.h:2210
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnard 349暗天体目录(Barnard, 1927)"
 
-#: src/ui_viewDialog.h:2189
+#: src/ui_viewDialog.h:2213
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "电离氢区目录(Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:2192
+#: src/ui_viewDialog.h:2216
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "反射星云目录（Van den Bergh，1966）"
 
-#: src/ui_viewDialog.h:2195
+#: src/ui_viewDialog.h:2219
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr "南天银河系内H-α辐射区目录"
 
-#: src/ui_viewDialog.h:2198
+#: src/ui_viewDialog.h:2222
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lynds的暗星云目录（Lynds，1962）"
 
-#: src/ui_viewDialog.h:2201
+#: src/ui_viewDialog.h:2225
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "银河系疏散星团目录(Collinder, 1931)"
 
-#: src/ui_viewDialog.h:2204
+#: src/ui_viewDialog.h:2228
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr "富兰克林 - 亚当斯图表上显示的星团目录（Melotte，1915）"
 
-#: src/ui_viewDialog.h:2213
+#: src/ui_viewDialog.h:2237
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "亮弥漫星云目录 (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:2215
+#: src/ui_viewDialog.h:2240
+msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
+msgstr ""
+
+#: src/ui_viewDialog.h:2243
+msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
+msgstr ""
+
+#: src/ui_viewDialog.h:2246
+msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
+msgstr ""
+
+#: src/ui_viewDialog.h:2248
 msgid "Filter by type"
 msgstr "按类别过滤"
 
-#: src/ui_viewDialog.h:2218 src/ui_dsoColorsDialog.h:599
+#: src/ui_viewDialog.h:2251 src/ui_dsoColorsDialog.h:599
 msgid "Hydrogen regions"
 msgstr "氢区"
 
-#: src/ui_viewDialog.h:2219
+#: src/ui_viewDialog.h:2252
 msgid "Other"
 msgstr "其他"
 
-#: src/ui_viewDialog.h:2228
+#: src/ui_viewDialog.h:2261
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr "使用深空天体比例提示"
 
-#: src/ui_viewDialog.h:2230
+#: src/ui_viewDialog.h:2263
 msgid "Use proportional hints"
 msgstr "使用比例提示"
 
-#: src/ui_viewDialog.h:2232
+#: src/ui_viewDialog.h:2265
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr "使用深空天体表面亮度限制"
 
-#: src/ui_viewDialog.h:2234
+#: src/ui_viewDialog.h:2267
 msgid "Use surface brightness"
 msgstr "使用表面亮度"
 
-#: src/ui_viewDialog.h:2236
+#: src/ui_viewDialog.h:2269
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr "限制星等 (为目视/无辅助观测者)"
 
-#: src/ui_viewDialog.h:2240
+#: src/ui_viewDialog.h:2273
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr "使用深天空对象的编号名称，而不是屏幕标签的常用名称"
 
-#: src/ui_viewDialog.h:2242
+#: src/ui_viewDialog.h:2275
 msgid "Use designations for screen labels"
 msgstr "屏幕标签使用编号"
 
-#: src/ui_viewDialog.h:2243 plugins/Satellites/src/ui_satellitesDialog.h:747
+#: src/ui_viewDialog.h:2276 plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Labels"
 msgstr "标签"
 
-#: src/ui_viewDialog.h:2244
+#: src/ui_viewDialog.h:2277
 msgid "Hints"
 msgstr "提示"
 
-#: src/ui_viewDialog.h:2245
+#: src/ui_viewDialog.h:2278
 msgid "Configure colors of markers"
 msgstr "配置标识的颜色"
 
-#: src/ui_viewDialog.h:2246
+#: src/ui_viewDialog.h:2279
 msgid "Celestial Sphere"
 msgstr "天球"
 
-#: src/ui_viewDialog.h:2248
+#: src/ui_viewDialog.h:2281
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "二分/至黄经圈颜色"
 
-#: src/ui_viewDialog.h:2251
+#: src/ui_viewDialog.h:2284
 msgid "Color of meridian"
 msgstr "子午线颜色"
 
-#: src/ui_viewDialog.h:2254
+#: src/ui_viewDialog.h:2287
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "显示黄道线（ J2000.0，VSOP87A基准面）"
 
-#: src/ui_viewDialog.h:2256
+#: src/ui_viewDialog.h:2289
 msgid "Ecliptic (J2000)"
 msgstr "黄道（J2000）"
 
-#: src/ui_viewDialog.h:2258
+#: src/ui_viewDialog.h:2291
 msgid "Show celestial equator of current planet and date."
 msgstr "显示当前行星天赤道"
 
-#: src/ui_viewDialog.h:2260
+#: src/ui_viewDialog.h:2293
 msgid "Equator (of date)"
 msgstr "赤道（当前）"
 
-#: src/ui_viewDialog.h:2262
+#: src/ui_viewDialog.h:2295
 msgid "Show celestial equator of J2000.0."
 msgstr "显示天赤道（J2000.0）"
 
-#: src/ui_viewDialog.h:2264
+#: src/ui_viewDialog.h:2297
 msgid "Equator (J2000)"
 msgstr "赤道（J2000）"
 
-#: src/ui_viewDialog.h:2266
+#: src/ui_viewDialog.h:2299
 msgid "Color of equator (J2000.0)"
 msgstr "赤道颜色（ J2000.0）"
 
-#: src/ui_viewDialog.h:2269
+#: src/ui_viewDialog.h:2302
 msgid "Show ecliptic line of current date."
 msgstr "显示当前黄道线"
 
-#: src/ui_viewDialog.h:2271
+#: src/ui_viewDialog.h:2304
 msgid "Ecliptic (of date)"
 msgstr "黄道（当前）"
 
-#: src/ui_viewDialog.h:2273
+#: src/ui_viewDialog.h:2306
 msgid "Color of equator (of date)"
 msgstr "赤道颜色（当前）"
 
-#: src/ui_viewDialog.h:2276
+#: src/ui_viewDialog.h:2309
 msgid "Show Galactic equator line."
 msgstr "显示银道"
 
-#: src/ui_viewDialog.h:2280
+#: src/ui_viewDialog.h:2313
 msgid "Color of supergalactic equator"
 msgstr "超星系赤道颜色"
 
-#: src/ui_viewDialog.h:2283
+#: src/ui_viewDialog.h:2316
 msgid "Color of ecliptic (of date)"
 msgstr "黄岛颜色 （当前）"
 
-#: src/ui_viewDialog.h:2286
+#: src/ui_viewDialog.h:2319
 msgid "Color of ecliptic (J2000.0)"
 msgstr "黄道颜色（ J2000.0）"
 
-#: src/ui_viewDialog.h:2289
+#: src/ui_viewDialog.h:2322
 msgid "Color of galactic equator"
 msgstr "银道颜色"
 
-#: src/ui_viewDialog.h:2292
+#: src/ui_viewDialog.h:2325
 msgid "Show mathematical horizon line."
 msgstr "显示数学地平线"
 
-#: src/ui_viewDialog.h:2296
+#: src/ui_viewDialog.h:2329
 msgid "Color of horizon"
 msgstr "地平线颜色"
 
-#: src/ui_viewDialog.h:2299
+#: src/ui_viewDialog.h:2332
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr "显示de Vaucouleurs超标准坐标的赤道（1976）。"
 
-#: src/ui_viewDialog.h:2303
+#: src/ui_viewDialog.h:2336
 msgid "Show meridian line."
 msgstr "显示子午线"
 
-#: src/ui_viewDialog.h:2307
+#: src/ui_viewDialog.h:2340
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr "二分/至黄经圈 - 穿过两个黄极，太阳和所对点的黄经线。"
 
-#: src/ui_viewDialog.h:2311
+#: src/ui_viewDialog.h:2344
 msgid "Color of colures"
 msgstr "分至圈颜色"
 
-#: src/ui_viewDialog.h:2314
+#: src/ui_viewDialog.h:2347
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr "显示颜色（通过极点和昼夜等分点的大圆）"
 
-#: src/ui_viewDialog.h:2316
+#: src/ui_viewDialog.h:2349
 msgid "Colures"
 msgstr "分至圈"
 
-#: src/ui_viewDialog.h:2318
+#: src/ui_viewDialog.h:2351
 msgid "Labels for the Cardinal directions."
 msgstr "基本方向的标签。"
 
-#: src/ui_viewDialog.h:2322
+#: src/ui_viewDialog.h:2355
 msgid "Color of cardinal points"
 msgstr "基点颜色"
 
-#: src/ui_viewDialog.h:2326
+#: src/ui_viewDialog.h:2359
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "黄极颜色（ J2000.0）"
 
-#: src/ui_viewDialog.h:2329
+#: src/ui_viewDialog.h:2362
 msgid "Color of Prime Vertical"
 msgstr "卯酉线亚颜色"
 
-#: src/ui_viewDialog.h:2332
+#: src/ui_viewDialog.h:2365
 msgid "Show ecliptic poles of J2000.0"
 msgstr "显示黄极（ J2000.0）"
 
-#: src/ui_viewDialog.h:2334
+#: src/ui_viewDialog.h:2367
 msgid "Ecliptic poles (J2000)"
 msgstr "黄极（J2000）"
 
-#: src/ui_viewDialog.h:2336
+#: src/ui_viewDialog.h:2369
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "天极颜色（J2000.0）"
 
-#: src/ui_viewDialog.h:2339
+#: src/ui_viewDialog.h:2372
 msgid "Show celestial poles of current planet and date."
 msgstr "显示当前行星天极"
 
-#: src/ui_viewDialog.h:2341
+#: src/ui_viewDialog.h:2374
 msgid "Celestial poles (of date)"
 msgstr "天极（当前）"
 
-#: src/ui_viewDialog.h:2343
+#: src/ui_viewDialog.h:2376
 msgid "Color of ecliptic poles (of date)"
 msgstr "黄极颜色（当前）"
 
-#: src/ui_viewDialog.h:2346
+#: src/ui_viewDialog.h:2379
 msgid "Color of celestial poles (of date)"
 msgstr "天极颜色（当前）"
 
-#: src/ui_viewDialog.h:2349
+#: src/ui_viewDialog.h:2382
 msgid "Color of supergalactic poles"
 msgstr "超星系极点颜色"
 
-#: src/ui_viewDialog.h:2352
+#: src/ui_viewDialog.h:2385
 msgid "Show ecliptic poles of current date."
 msgstr "显示当前黄极"
 
-#: src/ui_viewDialog.h:2354
+#: src/ui_viewDialog.h:2387
 msgid "Ecliptic poles (of date)"
 msgstr "黄极（当前）"
 
-#: src/ui_viewDialog.h:2356
+#: src/ui_viewDialog.h:2389
 msgid "Show Prime (East-West) Vertical."
 msgstr "显示主垂直（东西）。"
 
-#: src/ui_viewDialog.h:2360
+#: src/ui_viewDialog.h:2393
 msgid "Color of galactic poles"
 msgstr "银极颜色"
 
-#: src/ui_viewDialog.h:2362
+#: src/ui_viewDialog.h:2395
 msgid "Zenith and Nadir"
 msgstr "天顶和天底"
 
-#: src/ui_viewDialog.h:2364
+#: src/ui_viewDialog.h:2397
 msgid "Color of Zenith and Nadir"
 msgstr "天顶和天底颜色"
 
-#: src/ui_viewDialog.h:2368
+#: src/ui_viewDialog.h:2401
 msgid "Color of circumpolar circles"
 msgstr "极地圈颜色"
 
-#: src/ui_viewDialog.h:2371
+#: src/ui_viewDialog.h:2404
 msgid "Show celestial poles of J2000.0."
 msgstr "显示天极（J2000.0）"
 
-#: src/ui_viewDialog.h:2373
+#: src/ui_viewDialog.h:2406
 msgid "Celestial poles (J2000)"
 msgstr "天极（J2000）"
 
-#: src/ui_viewDialog.h:2375
+#: src/ui_viewDialog.h:2408
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr "这些圆圈限定了总是保持在数学水平线之上（分别在下方）的恒星。"
 
-#: src/ui_viewDialog.h:2377
+#: src/ui_viewDialog.h:2410
 msgid "Circumpolar circles"
 msgstr "极地圈"
 
-#: src/ui_viewDialog.h:2379
+#: src/ui_viewDialog.h:2412
 msgid "Color of precession circles"
 msgstr "岁差圈颜色"
 
-#: src/ui_viewDialog.h:2382
+#: src/ui_viewDialog.h:2415
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr "地球轴的瞬时圆在其绕黄极的运动。 仅在地球上显示。"
 
-#: src/ui_viewDialog.h:2384
+#: src/ui_viewDialog.h:2417
 msgid "Precession circles"
 msgstr "岁差圈"
 
-#: src/ui_viewDialog.h:2386
+#: src/ui_viewDialog.h:2419
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "高度角和方位角（从北到东）。"
 
-#: src/ui_viewDialog.h:2390
+#: src/ui_viewDialog.h:2423
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "当前黄道坐标，仅用于地球"
 
-#: src/ui_viewDialog.h:2392
+#: src/ui_viewDialog.h:2425
 msgid "Ecliptic grid (of date)"
 msgstr "黄道网格（当前）"
 
-#: src/ui_viewDialog.h:2394
+#: src/ui_viewDialog.h:2427
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "赤道网格颜色（J2000.0）"
 
-#: src/ui_viewDialog.h:2397
+#: src/ui_viewDialog.h:2430
 msgid "Color of the equinox points (J2000.0)"
 msgstr "昼夜平分点颜色（J2000.0）"
 
-#: src/ui_viewDialog.h:2400
+#: src/ui_viewDialog.h:2433
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "黄道坐标（J2000.0）"
 
-#: src/ui_viewDialog.h:2402
+#: src/ui_viewDialog.h:2435
 msgid "Ecliptic grid (J2000)"
 msgstr "黄道网格（J2000）"
 
-#: src/ui_viewDialog.h:2404
+#: src/ui_viewDialog.h:2437
 msgid "Color of the supergalactic grid"
 msgstr "超星系坐标网格颜色"
 
-#: src/ui_viewDialog.h:2407
+#: src/ui_viewDialog.h:2440
 msgid "Color of the galactic grid"
 msgstr "银道坐标网格颜色"
 
-#: src/ui_viewDialog.h:2410
+#: src/ui_viewDialog.h:2443
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr ""
 
-#: src/ui_viewDialog.h:2414
+#: src/ui_viewDialog.h:2447
 msgid "Equatorial coordinates of J2000.0."
 msgstr "赤道坐标（J2000.0）"
 
-#: src/ui_viewDialog.h:2416
+#: src/ui_viewDialog.h:2449
 msgid "Equatorial grid (J2000)"
 msgstr "赤道网格（J2000）"
 
-#: src/ui_viewDialog.h:2418
+#: src/ui_viewDialog.h:2451
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "黄道网格颜色（J2000.0）"
 
-#: src/ui_viewDialog.h:2421
+#: src/ui_viewDialog.h:2454
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "银道坐标系 II (IAU 1958)."
 
-#: src/ui_viewDialog.h:2425
+#: src/ui_viewDialog.h:2458
 msgid "Color of the equatorial grid (of date)"
 msgstr "赤道网格的颜色（当前）"
 
-#: src/ui_viewDialog.h:2427
+#: src/ui_viewDialog.h:2460
 msgid "Equinoxes (J2000)"
 msgstr "昼夜平分点（J2000）"
 
-#: src/ui_viewDialog.h:2429
+#: src/ui_viewDialog.h:2462
 msgid "Color of the ecliptical grid (of date)"
 msgstr "黄道网格的颜色（当前）"
 
-#: src/ui_viewDialog.h:2432
+#: src/ui_viewDialog.h:2465
 msgid "Color of the azimuthal grid"
 msgstr "方位网格颜色"
 
-#: src/ui_viewDialog.h:2435
+#: src/ui_viewDialog.h:2468
 msgid "Color of the equinox points (of date)"
 msgstr "昼夜平分点颜色（当前）"
 
-#: src/ui_viewDialog.h:2438
+#: src/ui_viewDialog.h:2471
 msgid "Equatorial coordinates of current date and planet."
 msgstr "当前日期和行星的赤道坐标"
 
-#: src/ui_viewDialog.h:2440
+#: src/ui_viewDialog.h:2473
 msgid "Equatorial grid (of date)"
 msgstr "赤道网格（当前）"
 
-#: src/ui_viewDialog.h:2441
+#: src/ui_viewDialog.h:2474
 msgid "Equinoxes (of date)"
 msgstr "昼夜平分点（当前）"
 
-#: src/ui_viewDialog.h:2442
+#: src/ui_viewDialog.h:2475
 msgid "Solstices (J2000)"
 msgstr "至点 (J2000)"
 
-#: src/ui_viewDialog.h:2444
+#: src/ui_viewDialog.h:2477
 msgid "Color of the solstice points (J2000.0)"
 msgstr "至点的颜色 (J2000.0)"
 
-#: src/ui_viewDialog.h:2447
+#: src/ui_viewDialog.h:2480
 msgid "Solstices (of date)"
 msgstr "二至点(实时)"
 
-#: src/ui_viewDialog.h:2449
+#: src/ui_viewDialog.h:2482
 msgid "Color of the solstice points (of date)"
 msgstr "至点的颜色(实时)"
 
-#: src/ui_viewDialog.h:2452
+#: src/ui_viewDialog.h:2485
 msgid "Projection"
 msgstr "投影方式"
 
-#: src/ui_viewDialog.h:2453
+#: src/ui_viewDialog.h:2486
 msgid "Vertical viewport offset"
 msgstr "垂直视图偏移"
 
-#: src/ui_viewDialog.h:2455
+#: src/ui_viewDialog.h:2488
 msgid "Show fog"
 msgstr "显示雾气"
 
-#: src/ui_viewDialog.h:2456
+#: src/ui_viewDialog.h:2489
 msgid "Use associated planet and position"
 msgstr "使用与此地景关联的位置与行星"
 
-#: src/ui_viewDialog.h:2457
+#: src/ui_viewDialog.h:2490
 msgid "Use this landscape as default"
 msgstr "将此背景设定为预设值"
 
-#: src/ui_viewDialog.h:2458
+#: src/ui_viewDialog.h:2491
 msgid "Show ground"
 msgstr "显示地面"
 
-#: src/ui_viewDialog.h:2460
+#: src/ui_viewDialog.h:2493
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "使用最小亮度使景观在黑暗中也可见"
 
-#: src/ui_viewDialog.h:2462
+#: src/ui_viewDialog.h:2495
 msgid "Minimal brightness:"
 msgstr "最小亮度"
 
-#: src/ui_viewDialog.h:2464
+#: src/ui_viewDialog.h:2497
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "值范围0..1（夜间黑色 - 完全明亮）"
 
-#: src/ui_viewDialog.h:2467
+#: src/ui_viewDialog.h:2500
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "在landscape.ini中指定的最小亮度"
 
-#: src/ui_viewDialog.h:2469
+#: src/ui_viewDialog.h:2502
 msgid "from landscape, if given"
 msgstr "如有提供则取自地景"
 
-#: src/ui_viewDialog.h:2471
+#: src/ui_viewDialog.h:2504
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "显示光照（明亮的窗户，光污染等）"
 
-#: src/ui_viewDialog.h:2473
+#: src/ui_viewDialog.h:2506
 msgid "Show illumination "
 msgstr "显示光照 "
 
-#: src/ui_viewDialog.h:2474
+#: src/ui_viewDialog.h:2507
 msgid "Show landscape labels"
 msgstr "显示地景标签"
 
-#: src/ui_viewDialog.h:2475
+#: src/ui_viewDialog.h:2508
 msgid "Add/remove landscapes..."
 msgstr "添加或移除地景..."
 
-#: src/ui_viewDialog.h:2477
+#: src/ui_viewDialog.h:2510
 msgid "Show art in brightness"
 msgstr "按亮度显示图案"
 
-#: src/ui_viewDialog.h:2478
+#: src/ui_viewDialog.h:2511
 msgid "Show lines with thickness"
 msgstr "按粗细显示线条"
 
-#: src/ui_viewDialog.h:2480
+#: src/ui_viewDialog.h:2513
 msgid "Value in pixels"
 msgstr "值以像素为单位"
 
-#: src/ui_viewDialog.h:2483
+#: src/ui_viewDialog.h:2516
 msgid "Color of constellation lines"
 msgstr "星座连线的颜色"
 
-#: src/ui_viewDialog.h:2486
+#: src/ui_viewDialog.h:2519
 msgid "Use native names for planets from current culture"
 msgstr "对当前文化中为行星使用本地名称"
 
-#: src/ui_viewDialog.h:2488
+#: src/ui_viewDialog.h:2521
 msgid "Use native names for planets"
 msgstr "行星使用本地名称"
 
-#: src/ui_viewDialog.h:2489
+#: src/ui_viewDialog.h:2522
 msgid "Use this sky culture as default"
 msgstr "将此星空述语设为预设值"
 
-#: src/ui_viewDialog.h:2490
+#: src/ui_viewDialog.h:2523
 msgid "Show labels"
 msgstr "显示星座名称"
 
-#: src/ui_viewDialog.h:2492
+#: src/ui_viewDialog.h:2525
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "选择 缩写，原生或翻译名称"
 
-#: src/ui_viewDialog.h:2496
+#: src/ui_viewDialog.h:2529
 msgid "Color of constellation names"
 msgstr "星座名称的颜色"
 
-#: src/ui_viewDialog.h:2498
+#: src/ui_viewDialog.h:2531
 msgid "Show boundaries"
 msgstr "显示星座界线"
 
-#: src/ui_viewDialog.h:2500
+#: src/ui_viewDialog.h:2533
 msgid "Color of constellation boundaries"
 msgstr "星座界限的颜色"
 
-#: src/ui_viewDialog.h:2502
+#: src/ui_viewDialog.h:2535
 msgid "Show asterism lines"
 msgstr "显示星群线"
 
-#: src/ui_viewDialog.h:2504
+#: src/ui_viewDialog.h:2537
 msgid "Color of asterism lines"
 msgstr "星群线的颜色"
 
-#: src/ui_viewDialog.h:2506
+#: src/ui_viewDialog.h:2539
 msgid "Show asterism labels"
 msgstr "显示星群标签"
 
-#: src/ui_viewDialog.h:2508
+#: src/ui_viewDialog.h:2541
 msgid "Color of asterism names"
 msgstr "星群名称的颜色"
 
-#: src/ui_viewDialog.h:2511
+#: src/ui_viewDialog.h:2544
 msgid "Visible"
 msgstr "可见"
 
-#: src/ui_viewDialog.h:2518
+#: src/ui_viewDialog.h:2551
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "深空天体"
 
-#: src/ui_viewDialog.h:2520
+#: src/ui_viewDialog.h:2553
 msgid "Deep-Sky Objects"
 msgstr "深空天体"
 
-#: src/ui_viewDialog.h:2523
+#: src/ui_viewDialog.h:2556
 msgid "Markings"
 msgstr "标示"
 
-#: src/ui_viewDialog.h:2525
+#: src/ui_viewDialog.h:2558
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Landscape"
 msgstr "地景"
 
-#: src/ui_viewDialog.h:2527
+#: src/ui_viewDialog.h:2560
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
 msgstr "星空术语"
@@ -9081,77 +9108,77 @@ msgid ""
 msgstr "旧版本的 satellites.json 文件已不再适用，将使用默认文件。"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1975
+#: plugins/Satellites/src/Satellites.cpp:2007
 msgid "visual"
 msgstr "目视可见"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1977
+#: plugins/Satellites/src/Satellites.cpp:2009
 msgid "scientific"
 msgstr "科研"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1979
+#: plugins/Satellites/src/Satellites.cpp:2011
 msgid "communications"
 msgstr "通讯"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1981
+#: plugins/Satellites/src/Satellites.cpp:2013
 msgid "navigation"
 msgstr "导航"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1983
+#: plugins/Satellites/src/Satellites.cpp:2015
 msgid "amateur"
 msgstr "业余无线电"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1985
+#: plugins/Satellites/src/Satellites.cpp:2017
 msgid "weather"
 msgstr "气象"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1987
+#: plugins/Satellites/src/Satellites.cpp:2019
 msgid "geostationary"
 msgstr "同步卫星"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1989
+#: plugins/Satellites/src/Satellites.cpp:2021
 msgid "non-operational"
 msgstr "不再工作"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1991
+#: plugins/Satellites/src/Satellites.cpp:2023
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1993
+#: plugins/Satellites/src/Satellites.cpp:2025
 msgid "glonass"
 msgstr "格洛纳斯"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1995
+#: plugins/Satellites/src/Satellites.cpp:2027
 msgid "galileo"
 msgstr "伽利略"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1997
+#: plugins/Satellites/src/Satellites.cpp:2029
 msgid "iridium"
 msgstr "铱星"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1999
+#: plugins/Satellites/src/Satellites.cpp:2031
 msgid "stations"
 msgstr "空间站"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2001
+#: plugins/Satellites/src/Satellites.cpp:2033
 msgid "education"
 msgstr "教育"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2003
+#: plugins/Satellites/src/Satellites.cpp:2035
 msgid "observatory"
 msgstr "气象"
 
@@ -9161,187 +9188,187 @@ msgstr "气象"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2013
+#: plugins/Satellites/src/Satellites.cpp:2045
 msgid "The Hubble Space Telescope"
 msgstr "哈勃太空望远镜"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2015
+#: plugins/Satellites/src/Satellites.cpp:2047
 msgid "The International Space Station"
 msgstr "国际空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2017
+#: plugins/Satellites/src/Satellites.cpp:2049
 msgid "China's first space station"
 msgstr "中国第一个空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2019
+#: plugins/Satellites/src/Satellites.cpp:2051
 msgid "The russian space radio telescope RadioAstron"
 msgstr "俄罗斯空间射电望远镜RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2021
+#: plugins/Satellites/src/Satellites.cpp:2053
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "国际伽马射线天体物理实验室"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2023
+#: plugins/Satellites/src/Satellites.cpp:2055
 msgid "The Gamma-Ray Observatory"
 msgstr "伽玛射线观测台"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2027
+#: plugins/Satellites/src/Satellites.cpp:2059
 msgid "ISS (ZARYA)"
 msgstr "国际空间站(ISS)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2029
+#: plugins/Satellites/src/Satellites.cpp:2061
 msgid "HST"
 msgstr "哈勃太空望远镜(HST)"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2031
+#: plugins/Satellites/src/Satellites.cpp:2063
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R空间天文台"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2033
+#: plugins/Satellites/src/Satellites.cpp:2065
 msgid "INTEGRAL"
 msgstr "国际伽玛射线天体物理实验室(INTEGRAL)"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2035
+#: plugins/Satellites/src/Satellites.cpp:2067
 msgid "TIANGONG 1"
 msgstr "天宫1号"
 
-#: plugins/Satellites/src/Satellite.cpp:266
-#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Satellites/src/Satellite.cpp:268
+#: plugins/Satellites/src/Satellite.cpp:272
 msgid "Catalog #"
 msgstr "类别 #"
 
-#: plugins/Satellites/src/Satellite.cpp:272
+#: plugins/Satellites/src/Satellite.cpp:274
 msgid "International Designator"
 msgstr "国际标准化命名"
 
-#: plugins/Satellites/src/Satellite.cpp:279
+#: plugins/Satellites/src/Satellite.cpp:281
 msgid "artificial satellite"
 msgstr "人造卫星"
 
-#: plugins/Satellites/src/Satellite.cpp:286
+#: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "大致星等: <b>%1</b> (消光至: <b>%2</b>)"
 
-#: plugins/Satellites/src/Satellite.cpp:289
+#: plugins/Satellites/src/Satellite.cpp:291
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "大致大小: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:303
+#: plugins/Satellites/src/Satellite.cpp:305
 #, qt-format
 msgid "Range (km): %1"
 msgstr "倾斜 (千米): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:308
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "距离变率：%1 千米/秒"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:309
+#: plugins/Satellites/src/Satellite.cpp:311
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "高度: %1 千米"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:312
+#: plugins/Satellites/src/Satellite.cpp:314
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "投影点纬度：%1%2，经度：%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:326
+#: plugins/Satellites/src/Satellite.cpp:328
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "地心惯性坐标：%1 千米"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:334
+#: plugins/Satellites/src/Satellite.cpp:336
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "地心惯性速度：%1 千米/秒"
 
-#: plugins/Satellites/src/Satellite.cpp:339
+#: plugins/Satellites/src/Satellite.cpp:341
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "太阳反射角: %1%2"
 
-#: plugins/Satellites/src/Satellite.cpp:346
+#: plugins/Satellites/src/Satellite.cpp:348
 #, qt-format
 msgid "Operational status: %1"
 msgstr "操作状态: %1"
 
-#: plugins/Satellites/src/Satellite.cpp:353
+#: plugins/Satellites/src/Satellite.cpp:355
 msgid "The satellite and the observer are in sunlight."
 msgstr "此卫星与观测者均位于阳光下。"
 
-#: plugins/Satellites/src/Satellite.cpp:356
+#: plugins/Satellites/src/Satellite.cpp:358
 msgid "The satellite is visible."
 msgstr "此卫星可见"
 
-#: plugins/Satellites/src/Satellite.cpp:359
+#: plugins/Satellites/src/Satellite.cpp:361
 msgid "The satellite is eclipsed."
 msgstr "此卫星被遮挡。"
 
-#: plugins/Satellites/src/Satellite.cpp:362
+#: plugins/Satellites/src/Satellite.cpp:364
 msgid "The satellite is not visible"
 msgstr "此卫星不可见"
 
-#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:389
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 兆赫兹(%2%3 千赫兹)"
 
-#: plugins/Satellites/src/Satellite.cpp:692
-#: plugins/Satellites/src/Satellite.cpp:717
+#: plugins/Satellites/src/Satellite.cpp:693
+#: plugins/Satellites/src/Satellite.cpp:718
 msgctxt "operational status"
 msgid "unknown"
 msgstr "未知"
 
-#: plugins/Satellites/src/Satellite.cpp:696
+#: plugins/Satellites/src/Satellite.cpp:697
 msgctxt "operational status"
 msgid "operational"
 msgstr "使用中"
 
-#: plugins/Satellites/src/Satellite.cpp:699
+#: plugins/Satellites/src/Satellite.cpp:700
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "非使用"
 
-#: plugins/Satellites/src/Satellite.cpp:702
+#: plugins/Satellites/src/Satellite.cpp:703
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "部分使用"
 
-#: plugins/Satellites/src/Satellite.cpp:705
+#: plugins/Satellites/src/Satellite.cpp:706
 msgctxt "operational status"
 msgid "standby"
 msgstr "支持"
 
-#: plugins/Satellites/src/Satellite.cpp:708
+#: plugins/Satellites/src/Satellite.cpp:709
 msgctxt "operational status"
 msgid "spare"
 msgstr "备用"
 
-#: plugins/Satellites/src/Satellite.cpp:711
+#: plugins/Satellites/src/Satellite.cpp:712
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "扩展任务"
 
-#: plugins/Satellites/src/Satellite.cpp:714
+#: plugins/Satellites/src/Satellite.cpp:715
 msgctxt "operational status"
 msgid "decayed"
 msgstr "损坏"
@@ -12549,7 +12576,7 @@ msgstr "质量"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1280
 msgid "Sun"
 msgstr "太阳"
 
@@ -13870,7 +13897,7 @@ msgstr "切换辐射点标签"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:157
 #: plugins/Scenery3d/src/Scenery3d.cpp:323
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 msgid "Show settings dialog"
 msgstr "显示设置对话框"
 
@@ -15312,8 +15339,8 @@ msgid "Title:"
 msgstr "标题："
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:58
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:222
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:576
 msgid "ArchaeoLines"
 msgstr "考古系"
@@ -15322,112 +15349,112 @@ msgstr "考古系"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "一个对史前/民间天文校准研究的工具"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Equinox"
 msgstr "显示昼夜平分线"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Solstices"
 msgstr "显示二至线"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Crossquarter"
 msgstr "显示跨季线"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Major Standstill"
 msgstr "显示主要停变线"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Minor Standstill"
 msgstr "显示次要停变线"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Zenith Passage"
 msgstr "显示天顶通道"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Nadir Passage"
 msgstr "显示天底通道"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
 msgid "Show Line for Selected Object"
 msgstr "显示所选对象轨道"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
 msgid "Show Line for Current Sun"
 msgstr "显示当前太阳轨道"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Moon"
 msgstr "显示当前月球轨道"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Geographic Location 1"
 msgstr "显示地理位置1"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Line for Geographic Location 2"
 msgstr "显示地理位置2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
 msgid "Show Line for Custom Azimuth 1"
 msgstr "显示自定义方位线1"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Line for Custom Azimuth 2"
 msgstr "显示自定义方位线2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Line for Custom Declination 1"
 msgstr "显示自定义赤纬线1"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 2"
 msgstr "显示自定义赤纬线2"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1257
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1256
 msgid "Equinox"
 msgstr "昼夜平分点"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1260
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1259
 msgid "Solstice"
 msgstr "二至线"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1263
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1262
 msgid "Crossquarter"
 msgstr "跨季期"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1266
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1265
 msgid "Major Lunar Standstill"
 msgstr "主要的月球停变期"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1269
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1268
 msgid "Minor Lunar Standstill"
 msgstr "次要的月球停变期"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1272
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1271
 msgid "Zenith Passage"
 msgstr "天顶通道"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1275
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
 msgid "Nadir Passage"
 msgstr "天底通道"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1277
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
 msgstr "选定的对象"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1286
 msgid "error if you can read this"
 msgstr "错误，你可以读这个"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
 msgid "Mercury"
 msgstr "水星"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1293
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1292
 msgid "Venus"
 msgstr "金星"
 
