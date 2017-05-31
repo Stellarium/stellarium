@@ -40,7 +40,7 @@ ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 # Write version of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
-# currently Qt 5.4 - 5.6 is recommended, we can no longer build with Qt 5.3, and 5.7 may have some bugs (Mac?) 5.8 on Windows seems OK.
+# currently Qt 5.4 - 5.6 is recommended, we can no longer build with Qt 5.3, and 5.7 may have some bugs (on Mac? 5.7 is fine on Windows) 5.8 on Windows seems OK.
 SET(MINIMAL_QT_VERSION "5.4.0")
 
 # Use customized cmake macros
@@ -335,10 +335,10 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 ########### Find packages ###########
 FIND_PACKAGE(Qt5Core REQUIRED)
 GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
-IF(${Qt5Core_VERSION_STRING} VERSION_LESS MINIMAL_QT_VERSION)
-     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+IF(${Qt5Core_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
+     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION}\", required is \"${MINIMAL_QT_VERSION}\")")
 ELSE()
-     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION_STRING}\")")
+     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION}\")")
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
@@ -382,9 +382,9 @@ IF(WIN32)
 ENDIF()
 
 # when using Qt 5.3, default to using the old QGLWidget, but warn
-IF(${Qt5Core_VERSION_STRING} VERSION_LESS "5.4")
+IF(${Qt5Core_VERSION} VERSION_LESS "5.4")
      SET(USE_OLD_QGLWIDGET 1)
-     MESSAGE(WARNING "You are using Qt ${Qt5Core_VERSION_STRING} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
+     MESSAGE(WARNING "You are using Qt ${Qt5Core_VERSION} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
 ELSE()
      # offer the old widget as an alternative, default off
      SET(USE_OLD_QGLWIDGET 0 CACHE BOOL "Use the legacy QGLWidget instead of the new QOpenGLWidget for the main viewport, and link to the QtOpenGL module")
