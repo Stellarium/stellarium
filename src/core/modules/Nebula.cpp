@@ -120,7 +120,7 @@ Nebula::Nebula()
 	, redshiftErr(0.)
 	, parallax(0.)
 	, parallaxErr(0.)
-	, nType()	
+	, nType()
 {
 }
 
