@@ -843,6 +843,8 @@ private:
 	// For DSO convertor
 	bool flagConverter;
 	bool flagDecimalCoordinates;
+
+	bool flagReloading;
 };
 
 #endif // _NEBULAMGR_HPP_

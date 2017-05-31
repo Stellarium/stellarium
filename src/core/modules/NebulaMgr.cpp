@@ -124,6 +124,7 @@ NebulaMgr::NebulaMgr(void)
 	, labelsAmount(0)
 	, flagConverter(false)
 	, flagDecimalCoordinates(true)
+	, flagReloading(false)
 {
 	setObjectName("NebulaMgr");
 }
@@ -421,12 +422,17 @@ void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 
 		StelApp::getInstance().getStelObjectMgr().unSelect();
 
-		qWarning() << "Reloading DSO data...";
+		if (flagReloading)
+			qWarning() << "Reloading DSO data...";
+		else
+			qWarning() << "Loading DSO data...";
 		setFlagShow(false);
 		loadNebulaSet("default");		
 		setFlagShow(status);
 
 		updateI18n(); // OK, update localized names of DSO
+
+		flagReloading = true; // OK, first load is complete
 
 		emit catalogFiltersChanged(cflags);
 	}
@@ -571,7 +577,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	if (flagConverter)
 	{
 		if (!srcCatalogPath.isEmpty())
-			convertDSOCatalog(srcCatalogPath, dsoCatalogPath, flagDecimalCoordinates);
+			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack"), flagDecimalCoordinates);
 		else
 			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;			
 
@@ -806,7 +812,10 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 	QFile dsoOut(out);
 	if (!dsoOut.open(QIODevice::WriteOnly))
+	{
+		qDebug() << "Error converting DSO data! Cannot open file" << QDir::toNativeSeparators(out);
 		return;
+	}
 
 	int totalRecords=0;
 	QString record;
@@ -1040,6 +1049,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	dsoOut.flush();
 	dsoOut.close();
 	qDebug() << "Converted" << readOk << "/" << totalRecords << "DSO records";
+	qDebug() << "[...] Please use 'gzip -nc9 catalog.pack > catalog.dat' to pack the catalog.";
 }
 
 bool NebulaMgr::loadDSOCatalog(const QString &filename)
@@ -1048,9 +1058,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
-	// TODO: Let's begin use gzipped data
-	// QDataStream ins(StelUtils::uncompress(in.readAll()));
-	QDataStream ins(&in);
+	// Let's begin use gzipped data
+	QDataStream ins(StelUtils::uncompress(in.readAll()));
 	ins.setVersion(QDataStream::Qt_5_2);
 
 	int totalRecords=0;
