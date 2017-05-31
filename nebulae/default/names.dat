@@ -36,6 +36,7 @@ NGC  247             _("Burbidge Chain") # NED
 NGC  253             _("Sculptor Galaxy")
 NGC  253             _("Silver Coin Galaxy")
 NGC  253             _("Silver Dollar Galaxy")
+NGC  375             _("Pisces Cloud") # NED
 NGC  262             _("Markarian 348")
 NGC  292             _("Small Magellanic Cloud")
 NGC  404             _("Mirach's Ghost")
@@ -279,6 +280,9 @@ NGC  5102            _("Iota's Ghost") # B500
 NGC  5128            _("Centaurus A") # NED
 NGC  5139            _("ω Cen Cluster")
 NGC  5189            _("Spiral planetary nebula")
+NGC  5194            _("Whirlpool Galaxy") # NED
+NGC  5194            _("Question Mark Galaxy") # NED
+NGC  5194            _("Rosse's Galaxy") # NED
 NGC  5216            _("Keenan's System") # NED
 NGC  5218            _("Keenan's System") # NED
 NGC  5236            _("Southern Pinwheel Galaxy")
@@ -560,14 +564,11 @@ PGC  120             _("Taffy System")
 PGC  129             _("Taffy Galaxies")
 PGC  129             _("Taffy System")
 PGC  143             _("Wolf-Lundmark-Melotte Object (WLM)") # NED
-PGC  621             _("Sculptor Dwarf Irregular Galaxy") # NED
 PGC  2121            _("Andromeda III Dwarf Galaxy")
 PGC  2248            _("Cartwheel Galaxy") # NED
 PGC  2248            _("Zwicky's Ellipse") # NED
 PGC  2666            _("Andromeda I Dwarf Galaxy")
 PGC  2796            _("Burbidge Chain") # NED
-PGC  2906            _("Baade's Galaxy A") # NED
-PGC  2907            _("Baade's Galaxy B") # NED
 PGC  3589            _("Sculptor Dwarf Galaxy") # NED
 PGC  3792            _("Pisces Dwarf Galaxy") # NED
 PGC  3792            _("Pisces I") # NED
@@ -597,7 +598,6 @@ PGC  26269           _("Hydra A") # NED
 PGC  27605           _("Holmberg I")
 PGC  28757           _("Holmberg IX")
 PGC  28913           _("Sextans B")
-PGC  29167           _("The Garland Galaxy") # NED
 PGC  29194           _("Antlia Dwarf Galaxy")
 PGC  29653           _("Sextans A") # NED
 PGC  31141           _("Haro II")
@@ -605,11 +605,10 @@ PGC  33423           _("Mayall's Object") # NED
 PGC  34176           _("Leo II Dwarf Galaxy") # NED
 PGC  34176           _("Leo B") # NED
 PGC  34176           _("Harrington-Wilson #2") # NED
-PGC  34658           _("Arp's Galaxy") # NED
-PGC  36723           _("Wild's Triplet")
-PGC  36733           _("Wild's Triplet")
+PGC  36723           _("Wild's Triplet") # NED
+PGC  36733           _("Wild's Triplet") # NED
+PGC  36742           _("Wild's Triplet") # NED
 PGC  41861           _("Holmberg VII")
-PGC  42102           _("Malin 1") # NED
 PGC  43345           _("Shapley-Ames 3") # NED
 PGC  44014           _("Shapley-Ames 4") # NED
 PGC  44491           _("Imprint of a Foot Galaxy") # NED
@@ -622,10 +621,9 @@ PGC  49448           _("Holmberg IV")
 PGC  50779           _("Circinus Galaxy") # NED
 PGC  54074           _("Ursa Minor Dwarf Galaxy") # NED
 PGC  54817           _("Hooked Galaxy")
-PGC  59061           _("Zwicky's Triplet")
-PGC  59085           _("Zwicky's Triplet")
-PGC  59102           _("Zwicky's Triplet")
-PGC  59117           _("Hercules A") # NED
+PGC  59061           _("Zwicky's Triplet") # NED
+PGC  59085           _("Zwicky's Triplet") # NED
+PGC  59102           _("Zwicky's Triplet") # NED
 PGC  60095           _("Draco Dwarf Galaxy") # NED
 PGC  63287           _("Sagittarius Dwarf Galaxy") # NED
 PGC  63287           _("Kowal's Object") # NED
@@ -636,7 +634,6 @@ PGC  66669           _("Shapley-Ames 6") # NED
 PGC  69519           _("Tucana Dwarf Galaxy")
 PGC  71538           _("Pegasus Dwarf Galaxy") # NED
 PGC  71938           _("Barbon's Galaxy") # NED
-PGC  73957           _("Minkowski's Object") # NED
 PGC  84913           _("Superantennae Galaxy") # NED
 PGC  86622           _("Malin II")
 PGC  88608           _("Sextans Dwarf Spheroidal Galaxy")
@@ -662,18 +659,11 @@ UGC  5470            _("Harrington-Wilson #1") # NED
 UGC  6132            _("Markarian 421")
 UGC  6955            _("Zwicky #2") # NED
 UGC  8058            _("Markarian 231")
-UGC  8091            _("Imprint of a Foot")
 UGC  9618            _("Exclamation Point Galaxy")
 UGC  9792            _("Serpens Dwarf Galaxy") # NED
 UGC  10214           _("Tadpole Galaxy")
 UGC  11668           _("Egg Nebula")
 UGC  12613           _("Pegasus Dwarf Irregular Galaxy")
-ARP  85              _("Whirlpool Galaxy") # NED
-ARP  85              _("Question Mark Galaxy") # NED
-ARP  85              _("Rosse's Galaxy") # NED
-ARP  103             _("Zwicky's Triplet") # NED
-ARP  248             _("Wild's Triplet") # NED
-ARP  331             _("Pisces Cloud") # NED
      18              _("Calabash Nebula")
      18              _("Rotten Egg Nebula")
      19              _("Frosty Leo Nebula")
