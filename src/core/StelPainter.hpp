@@ -287,11 +287,11 @@ public:
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
 
 	//! convenience method that enable and set all the given arrays.
-	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
+	//! It is equivalent to calling enableClientStates() and set the array pointer for each array.
 	void setArrays(const Vec3d* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
 	void setArrays(const Vec3f* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
 
-	//! Draws primitives using vertices from the arrays specified by setVertexArray().
+	//! Draws primitives using vertices from the arrays specified by setArrays() or enabled via enableClientStates().
 	//! @param mode The type of primitive to draw.
 	//! If @param indices is Q_NULLPTR, this operation will consume @param count values from the enabled arrays, starting at @param offset.
 	//! Else it will consume @param count elements of @param indices, starting at @param offset, which are used to index into the
