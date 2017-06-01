@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-30 22:32+0700\n"
-"PO-Revision-Date: 2017-05-20 07:51+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2017-05-31 12:39+0000\n"
+"Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-31 05:26+0000\n"
+"X-Launchpad-Export-Date: 2017-06-01 05:22+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 "Language: bn\n"
 
@@ -438,11 +438,11 @@ msgstr "বর্ণাঙ্ক (B-V) : <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:237
 msgid "Surface brightness"
-msgstr ""
+msgstr "পৃষ্ঠের উজ্জ্ব্যলতা"
 
 #: src/core/modules/Nebula.cpp:238
 msgid "after extinction"
-msgstr ""
+msgstr "হ্রাস পেয়ে"
 
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Nebula.cpp:261
 #, qt-format
@@ -1189,12 +1189,12 @@ msgstr "চ্যুতি"
 
 #: src/core/modules/StarWrapper.cpp:290
 msgid "Proper motions"
-msgstr ""
+msgstr "সরণ"
 
 #: src/core/modules/StarWrapper.cpp:290
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr ""
+msgstr "মিলি আর্ক সে/বছর"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -2077,12 +2077,12 @@ msgstr "দক্ষিন মেরুর দিকে তাক করুন"
 #: src/core/StelMovementMgr.cpp:225
 msgctxt "mount mode"
 msgid "Equatorial mount"
-msgstr ""
+msgstr "নিরক্ষীয় বিচলন"
 
 #: src/core/StelMovementMgr.cpp:227
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
-msgstr ""
+msgstr "দিগংশিক বিচলন"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2496,7 +2496,7 @@ msgstr "Shift ও left click"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete marker closest to mouse cursor"
-msgstr ""
+msgstr "কার্সারের কাছের বিন্দুটি মুছুন"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2843,6 +2843,8 @@ msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
+"সৌরজগতের কিছু বস্তুদের (ছোটো উপগ্রহ, গ্রহাণু, ধূমকেতু) ক্ষেত্রে গোলকাকার "
+"প্রতিকৃতির বদলে সেগুলির ত্রিমাতৃক প্রতিকৃতি ব্যবহৃত হবে"
 
 #: src/gui/ViewDialog.cpp:1248
 msgid ""
@@ -2909,22 +2911,22 @@ msgstr "সর্বকালের সর্বোচ্চ হার (১৮�
 #: src/gui/ViewDialog.cpp:1539
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
-msgstr ""
+msgstr "G. Mueller (১৮৯৩)"
 
 #: src/gui/ViewDialog.cpp:1540
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
-msgstr ""
+msgstr "জ্যোতির্বৈজ্ঞানিক পঞ্জিকা (১৯৮৪)"
 
 #: src/gui/ViewDialog.cpp:1541
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr ""
+msgstr "ব্যাখ্যা সংযুক্তি (১৯৯২)"
 
 #: src/gui/ViewDialog.cpp:1542
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr ""
+msgstr "ব্যাখ্যা সংযুক্তি (২০১৩)"
 
 #: src/gui/ViewDialog.cpp:1543
 msgctxt "magnitude algorithm"
@@ -3019,7 +3021,7 @@ msgstr "মোছার জন্য কোন একটি ভূমিরূ�
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 msgid "Do you really want to remove this landscape?"
-msgstr ""
+msgstr "আপনি কি সত্যিই ভূমিরূপটি মুছে ফেলতে চান ?"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -7713,7 +7715,7 @@ msgstr "গ্রহ, গ্রহাণু ইত্যাদির অবস�
 
 #: src/ui_astroCalcDialog.h:849
 msgid "Celestial bodies above horizon"
-msgstr "দিগন্তের উপরে"
+msgstr "দিগন্তের উপরে থাকা মহাজাগতিক জ্যোতিষ্ক সমূহ"
 
 #: src/ui_astroCalcDialog.h:852
 msgid "Ephemeris"
@@ -7761,7 +7763,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:882
 msgid "Above horizon"
-msgstr "দিগন্তের উপরে"
+msgstr "দিগন্তের উপরে অবস্থান"
 
 #: src/ui_astroCalcDialog.h:884
 msgid "Update of planetary positions"
