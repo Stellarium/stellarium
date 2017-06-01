@@ -278,7 +278,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags & ObjectType)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
+		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite"))  << "<br/>";
 	}
 	
 	if ((flags & Magnitude) && (stdMag!=99.f))
@@ -300,7 +300,6 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if (flags & Extra)
 	{
-		oss << "<br/>";
 		// TRANSLATORS: Slant range: distance between the satellite and the observer
 		oss << QString(q_("Range (km): %1")).arg(range, 5, 'f', 2);
 		oss << "<br/>";
@@ -316,7 +315,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		       .arg(QChar(0x00B0))
 		       .arg(latLongSubPointPosition[1], 5, 'f', 3)
 		       .arg(QChar(0x00B0));
-		oss << "<br/><br/>";
+		oss << "<br/>";
 		
 		//TODO: This one can be done better
 		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";
@@ -342,6 +341,20 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(sunReflAngle,0,'f',1)
 			       .arg(QChar(0x00B0)); // Degree sign
 			oss << "<br/>";
+		}
+
+		// Groups of the artificial satellites
+		QStringList groupList;
+		foreach(const QString &g, groups)
+			groupList << q_(g);
+
+		if (!groupList.isEmpty())
+		{
+			QString group = q_("Group");
+			if (groups.count()>1)
+				group = q_("Groups");
+
+			oss << QString("%1: %2").arg(group, groupList.join(", ")) << "<br/>";
 		}
 
 		if (status!=StatusUnknown)
