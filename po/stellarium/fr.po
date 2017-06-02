@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 22:32+0700\n"
-"PO-Revision-Date: 2017-05-30 18:50+0000\n"
+"POT-Creation-Date: 2017-06-01 23:04+0700\n"
+"PO-Revision-Date: 2017-06-01 20:54+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-31 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-06-02 05:29+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -58,7 +58,7 @@ msgstr "astérisme"
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
 #: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
-#: src/core/modules/NebulaMgr.cpp:373 src/core/modules/NebulaMgr.cpp:374
+#: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:544 src/core/StelCore.cpp:254
@@ -889,11 +889,11 @@ msgstr "objet de nature inconnue"
 msgid "undocumented type"
 msgstr "type non documenté"
 
-#: src/core/modules/NebulaMgr.cpp:373
+#: src/core/modules/NebulaMgr.cpp:374
 msgid "Deep-sky objects"
 msgstr "Objets du ciel profond"
 
-#: src/core/modules/NebulaMgr.cpp:374
+#: src/core/modules/NebulaMgr.cpp:375
 msgid "Toggle DSO type filter"
 msgstr "Activer/désactiver le filtre DSO"
 
@@ -6350,7 +6350,7 @@ msgstr "Couleurs..."
 
 #: src/ui_viewDialog.h:2187
 msgid "Scale minor bodies:"
-msgstr ""
+msgstr "Mettre à l'échelle les objets mineurs :"
 
 #: src/ui_viewDialog.h:2188
 msgid "Planets magnitude algorithm:"
@@ -9591,109 +9591,117 @@ msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Magnitude approx. : <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:305
+#: plugins/Satellites/src/Satellite.cpp:304
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Distance (km) : %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:308
+#: plugins/Satellites/src/Satellite.cpp:307
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Évolution de la distance (km/s) : %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:311
+#: plugins/Satellites/src/Satellite.cpp:310
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Altitude (km) : %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:314
+#: plugins/Satellites/src/Satellite.cpp:313
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Sous-point (Lat./Long.) : %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:328
+#: plugins/Satellites/src/Satellite.cpp:327
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Coordonnées TEME (km) : %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:336
+#: plugins/Satellites/src/Satellite.cpp:335
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Vitesse TEME (km/s) : %1"
 
-#: plugins/Satellites/src/Satellite.cpp:341
+#: plugins/Satellites/src/Satellite.cpp:340
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "Angle de réflexion du Soleil : %1%2"
 
-#: plugins/Satellites/src/Satellite.cpp:348
+#: plugins/Satellites/src/Satellite.cpp:353
+msgid "Group"
+msgstr "Groupe"
+
+#: plugins/Satellites/src/Satellite.cpp:355
+msgid "Groups"
+msgstr "Groupes"
+
+#: plugins/Satellites/src/Satellite.cpp:361
 #, qt-format
 msgid "Operational status: %1"
 msgstr "Statut opérationnel : %1"
 
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:368
 msgid "The satellite and the observer are in sunlight."
 msgstr "Le satellite et l'observateur sont dans la lumière du Soleil."
 
-#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:371
 msgid "The satellite is visible."
 msgstr "Le satellite est visible."
 
-#: plugins/Satellites/src/Satellite.cpp:361
+#: plugins/Satellites/src/Satellite.cpp:374
 msgid "The satellite is eclipsed."
 msgstr "Le satellite est éclipsé."
 
-#: plugins/Satellites/src/Satellite.cpp:364
+#: plugins/Satellites/src/Satellite.cpp:377
 msgid "The satellite is not visible"
 msgstr "Le satellite n'est pas visible"
 
-#: plugins/Satellites/src/Satellite.cpp:389
+#: plugins/Satellites/src/Satellite.cpp:402
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/Satellite.cpp:693
-#: plugins/Satellites/src/Satellite.cpp:718
+#: plugins/Satellites/src/Satellite.cpp:706
+#: plugins/Satellites/src/Satellite.cpp:731
 msgctxt "operational status"
 msgid "unknown"
 msgstr "Inconnu"
 
-#: plugins/Satellites/src/Satellite.cpp:697
+#: plugins/Satellites/src/Satellite.cpp:710
 msgctxt "operational status"
 msgid "operational"
 msgstr "Opérationnel"
 
-#: plugins/Satellites/src/Satellite.cpp:700
+#: plugins/Satellites/src/Satellite.cpp:713
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "Non opérationnel"
 
-#: plugins/Satellites/src/Satellite.cpp:703
+#: plugins/Satellites/src/Satellite.cpp:716
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "Partiellement opérationnel"
 
-#: plugins/Satellites/src/Satellite.cpp:706
+#: plugins/Satellites/src/Satellite.cpp:719
 msgctxt "operational status"
 msgid "standby"
 msgstr "En attente"
 
-#: plugins/Satellites/src/Satellite.cpp:709
+#: plugins/Satellites/src/Satellite.cpp:722
 msgctxt "operational status"
 msgid "spare"
 msgstr "Intermittent"
 
-#: plugins/Satellites/src/Satellite.cpp:712
+#: plugins/Satellites/src/Satellite.cpp:725
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "Mission prolongée"
 
-#: plugins/Satellites/src/Satellite.cpp:715
+#: plugins/Satellites/src/Satellite.cpp:728
 msgctxt "operational status"
 msgid "decayed"
 msgstr "retombé"
@@ -12995,7 +13003,7 @@ msgstr "Arrêté"
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
 #, qt-format
 msgid "Running as server on port %1"
-msgstr ""
+msgstr "Serveur tournant sur le port %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:160
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
@@ -13028,25 +13036,31 @@ msgstr "Connecté à %1 : %2"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
 msgid "Remote Sync Plug-in"
-msgstr ""
+msgstr "Plugin de synchro à distance"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
+"Le plugin de synchro à distance permet de synchroniser l'état de plusieurs "
+"instances de Stellarium en réseau."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
+"Ceci peut être utilisé, par exemple, pour créer un usage multi-écrans en "
+"utilisant plusieurs PC."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
+"Une synchronisation partielle permet des réglages parallèles par exemple des "
+"vues complètes et en détail."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 msgid "See manual for detailed description."
@@ -13066,7 +13080,7 @@ msgstr "Serveur inactif."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:412
 msgid "Remote Sync Plug-in Configuration"
-msgstr ""
+msgstr "Plugin synchro à distance"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:414
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
@@ -13088,7 +13102,7 @@ msgstr "Mode client"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:421
 msgid "Server host address/name"
-msgstr ""
+msgstr "Serveur hôte adresse/nom"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:422
 msgid "127.0.0.1"
@@ -13113,10 +13127,11 @@ msgstr "Quand le serveur s'arrête"
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:433
 msgid "Changes on this page require a re-connection to the server"
 msgstr ""
+"Les changements sur cette page nécessitent une reconnexion au serveur"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:434
 msgid "Settings applied on this client"
-msgstr ""
+msgstr "Paramètres appliqués sur ce client"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:435
 msgid "Selection"
@@ -13128,19 +13143,19 @@ msgstr "StelProperty"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:439
 msgid "View direction"
-msgstr ""
+msgstr "Direction de la vue"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:441
 msgid "Property filters"
-msgstr ""
+msgstr "Filtres de propriétés"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:442
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "Exclure les propriétés de l'interface graphique"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "Propriétés supplémentaires exclues :"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
 msgid "Client settings"
