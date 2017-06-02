@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 22:32+0700\n"
+"POT-Creation-Date: 2017-06-01 23:04+0700\n"
 "PO-Revision-Date: 2017-05-02 04:21+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-05-31 05:45+0000\n"
+"X-Launchpad-Export-Date: 2017-06-02 05:45+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -48,7 +48,7 @@ msgstr ""
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
 #: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
-#: src/core/modules/NebulaMgr.cpp:373 src/core/modules/NebulaMgr.cpp:374
+#: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:544 src/core/StelCore.cpp:254
@@ -879,11 +879,11 @@ msgstr "vật thể không rõ bản chất"
 msgid "undocumented type"
 msgstr "loại không có dữ liệu"
 
-#: src/core/modules/NebulaMgr.cpp:373
+#: src/core/modules/NebulaMgr.cpp:374
 msgid "Deep-sky objects"
 msgstr "Vật thể xa"
 
-#: src/core/modules/NebulaMgr.cpp:374
+#: src/core/modules/NebulaMgr.cpp:375
 msgid "Toggle DSO type filter"
 msgstr ""
 
@@ -9479,109 +9479,117 @@ msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Độ sáng xấp xỉ: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:305
+#: plugins/Satellites/src/Satellite.cpp:304
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Phạm vi (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:308
+#: plugins/Satellites/src/Satellite.cpp:307
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Độ dịch chuyển (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:311
+#: plugins/Satellites/src/Satellite.cpp:310
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Độ cao (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:314
+#: plugins/Satellites/src/Satellite.cpp:313
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Điểm phụ (vĩ độ/kinh độ): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:328
+#: plugins/Satellites/src/Satellite.cpp:327
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Tọa độ TEME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:336
+#: plugins/Satellites/src/Satellite.cpp:335
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Tốc độ TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:341
+#: plugins/Satellites/src/Satellite.cpp:340
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "Góc phản chiếu mặt trời: %1%2"
 
-#: plugins/Satellites/src/Satellite.cpp:348
+#: plugins/Satellites/src/Satellite.cpp:353
+msgid "Group"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:355
+msgid "Groups"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:361
 #, qt-format
 msgid "Operational status: %1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:368
 msgid "The satellite and the observer are in sunlight."
 msgstr "Vệ tinh và người quan sát thì trong ánh nắng mặt trời"
 
-#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:371
 msgid "The satellite is visible."
 msgstr "Vệ tinh thì nhìn thấy được"
 
-#: plugins/Satellites/src/Satellite.cpp:361
+#: plugins/Satellites/src/Satellite.cpp:374
 msgid "The satellite is eclipsed."
 msgstr "Vệ tinh bị che khuất"
 
-#: plugins/Satellites/src/Satellite.cpp:364
+#: plugins/Satellites/src/Satellite.cpp:377
 msgid "The satellite is not visible"
 msgstr "Vệ tinh không thể nhìn thấy"
 
-#: plugins/Satellites/src/Satellite.cpp:389
+#: plugins/Satellites/src/Satellite.cpp:402
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/Satellite.cpp:693
-#: plugins/Satellites/src/Satellite.cpp:718
+#: plugins/Satellites/src/Satellite.cpp:706
+#: plugins/Satellites/src/Satellite.cpp:731
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:697
+#: plugins/Satellites/src/Satellite.cpp:710
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:700
+#: plugins/Satellites/src/Satellite.cpp:713
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:703
+#: plugins/Satellites/src/Satellite.cpp:716
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:706
+#: plugins/Satellites/src/Satellite.cpp:719
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:709
+#: plugins/Satellites/src/Satellite.cpp:722
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:712
+#: plugins/Satellites/src/Satellite.cpp:725
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:715
+#: plugins/Satellites/src/Satellite.cpp:728
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
