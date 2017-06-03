@@ -182,7 +182,7 @@ public:
 	void update(double deltaTime);
 
 	double getDoppler(double freq) const;
-	static float showLabels;
+	static bool showLabels;
 	static double roundToDp(float n, int dp);
 
 	// when the observer location changes we need to

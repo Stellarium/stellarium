@@ -52,7 +52,7 @@ const QString Satellite::SATELLITE_TYPE = QStringLiteral("Satellite");
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
-float Satellite::showLabels = true;
+bool Satellite::showLabels = true;
 float Satellite::hintBrightness = 0.f;
 float Satellite::hintScale = 1.f;
 SphericalCap Satellite::viewportHalfspace = SphericalCap();

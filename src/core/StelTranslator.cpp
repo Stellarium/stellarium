@@ -21,17 +21,6 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 
-#include <cstdio>
-#include <algorithm>
-#include <fstream>
-#include <clocale>
-#include <cstdlib>
-#include <QtGlobal>
-#ifdef Q_OS_WIN
-#include <winsock2.h>
-#include <windows.h>
-#endif
-
 #include <QFile>
 #include <QDebug>
 #include <QStringList>
