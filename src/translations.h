@@ -206,6 +206,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
 		// TRANSLATORS: Name of the sky culture
+		N_("Belarusian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Boorong");
 		// TRANSLATORS: Name of the sky culture
 		N_("Chinese");
