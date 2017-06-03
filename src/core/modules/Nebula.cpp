@@ -506,6 +506,12 @@ float Nebula::getSurfaceArea(void) const
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
+
+	Vec3d win;
+	// Check visibility of DSO hints
+	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
+		return;
+
 	float lim = qMin(vMag, bMag);
 
 	if (surfaceBrightnessUsage)
@@ -539,11 +545,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	}
 
 	if (lim>maxMagHints)
-		return;
-
-	Vec3d win;
-	// Check visibility of DSO hints
-	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
@@ -700,8 +701,12 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
 
-	float lim = qMin(vMag, bMag);
+	Vec3d win;
+	// Check visibility of DSO labels
+	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
+		return;
 
+	float lim = qMin(vMag, bMag);
 
 	if (surfaceBrightnessUsage)
 	{
@@ -731,11 +736,6 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 	}
 
 	if (lim>maxMagLabel)
-		return;
-
-	Vec3d win;
-	// Check visibility of DSO labels
-	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
