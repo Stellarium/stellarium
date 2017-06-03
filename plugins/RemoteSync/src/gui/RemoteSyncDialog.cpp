@@ -26,6 +26,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 RemoteSyncDialog::RemoteSyncDialog()
 	: rs(Q_NULLPTR)
@@ -96,12 +97,12 @@ void RemoteSyncDialog::createDialogContent()
 	connect(rs, SIGNAL(clientSyncOptionsChanged(SyncClient::SyncOptions)), this, SLOT(updateCheckboxesFromSyncOptions()));
 	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
 
-	setTextboxFromList(rs->getStelPropFilter());
-	connect(rs, SIGNAL(stelPropFilterChanged(QStringList)), this, SLOT(setTextboxFromList(QStringList)));
-	connect(ui->textStelPropertyExclude, SIGNAL(textChanged()), this, SLOT(setExcludesFromTextbox()));
-
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rs, SLOT(restoreDefaultSettings()));
+
+	populateExclusionLists();
+	connect(ui->pushButtonSelectProperties, SIGNAL(clicked()), this, SLOT(addPropertiesForExclusion()));
+	connect(ui->pushButtonDeselectProperties, SIGNAL(clicked()), this, SLOT(removePropertiesForExclusion()));
 
 	setAboutHtml();
 }
@@ -266,28 +267,70 @@ void RemoteSyncDialog::checkboxToggled(int id, bool state)
 	rs->setClientSyncOptions(options);
 }
 
-void RemoteSyncDialog::setTextboxFromList(const QStringList &list)
+void RemoteSyncDialog::populateExclusionLists()
 {
-	bool val = ui->textStelPropertyExclude->blockSignals(true);
-	ui->textStelPropertyExclude->setPlainText(list.join('\n'));
-	ui->textStelPropertyExclude->blockSignals(val);
+	ui->listWidgetAllProperties->clear();
+	ui->listWidgetSelectedProperties->clear();
+
+	QStringList excluded=rs->getStelPropFilter();
+	ui->listWidgetSelectedProperties->addItems(excluded);
+	QStringList allProps=StelApp::getInstance().getStelPropertyManager()->getPropertyList();
+	foreach (QString str, excluded)
+	{
+		allProps.removeOne(str);
+	}
+	ui->listWidgetAllProperties->addItems(allProps);
+
+	ui->listWidgetAllProperties->sortItems();
+	ui->listWidgetSelectedProperties->sortItems();
 }
 
-void RemoteSyncDialog::setExcludesFromTextbox()
+void RemoteSyncDialog::addPropertiesForExclusion()
 {
-	bool val = ui->textStelPropertyExclude->blockSignals(true);
-	QString text = ui->textStelPropertyExclude->toPlainText();
-	QStringList lines = text.split('\n', QString::SkipEmptyParts);
-
-	//trim strings
-	for(QStringList::iterator it = lines.begin();it!=lines.end();++it)
+	QStringList strings;
+	if (ui->listWidgetAllProperties->selectedItems().length()>0)
 	{
-		(*it) = (*it).trimmed();
-	}
-	lines.removeDuplicates();
+		foreach (QListWidgetItem *item, ui->listWidgetAllProperties->selectedItems())
+		{
+			strings.append(item->text());
+		}
+		// Now we have 	a stringlist with properties to be added.
 
-	rs->setStelPropFilter(lines);
-	ui->textStelPropertyExclude->blockSignals(val);
+		QStringList currentFilter=rs->getStelPropFilter();
+		// Add the selected to currentFilter...
+		currentFilter=currentFilter+strings;
+
+		// ...and activate new selection
+		rs->setStelPropFilter(currentFilter);
+
+		// update lists.
+		populateExclusionLists();
+	}
+}
+
+void RemoteSyncDialog::removePropertiesForExclusion()
+{
+	QStringList strings;
+	if (ui->listWidgetSelectedProperties->selectedItems().length()>0)
+	{
+		foreach (QListWidgetItem *item, ui->listWidgetSelectedProperties->selectedItems())
+		{
+			strings.append(item->text());
+		}
+		// Now we have 	a stringlist with properties to be removed.
+
+		QStringList currentFilter=rs->getStelPropFilter();
+		// Remove the selected from currentFilter...
+		foreach (QString str, strings)
+		{
+			currentFilter.removeOne(str);
+		}
+		// and activate new selection
+		rs->setStelPropFilter(currentFilter);
+
+		// update lists.
+		populateExclusionLists();
+	}
 }
 
 void RemoteSyncDialog::setConnectionLostBehavior(int idx)
