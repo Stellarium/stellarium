@@ -146,6 +146,9 @@ private:
 
 	SyncState applyClientBehavior(ClientBehavior bh);
 
+	static QString packStringList(const QStringList props);
+	static QStringList unpackStringList(const QString packedProps);
+
 	//The host string/IP addr to connect to
 	QString clientServerHost;
 	//The host port to connect to

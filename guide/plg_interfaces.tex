@@ -563,16 +563,18 @@ necessary.
 
 It is also possible to exclude some state from being synchronized. On each
 client, the GUI seen in \autoref{fig:plugins:RemoteSync:client} allows to
-disable specific settings from being applied on this client. Also, you can
-specify which StelProperties should be excluded from synchronization, if you
-know their ID, by entering them in the text box (one per line). Each client can
-have different settings. This could allow installations with several screens
+disable specific settings from being synchronized on this client. Also, you can
+fine-tune which named StelProperties (which hold parts of the internal program state) 
+should be excluded from synchronization. 
+The configuration dialog lists properties which usually have easy to understand names. 
+Each client can have different settings. This could allow installations with several screens
 where on one screen you show the constellation figures, another screen shows the
 distribution of deep-sky objects in the same frame, and a third screen may show
 a close-up view of the currently centered object.
 
-The names of all available StelProperties to be excluded from synchronisation can currently 
-only be found with a little scripting. Open the script console \key{F12} and enter the following call:
+The names of all available StelProperties from which you might want to select a few to exclude  
+from synchronisation can also be found with a little scripting. 
+Open the script console \key{F12} and enter the following call:
 \begin{commands}
 core.output(core.getPropertyList());
 \end{commands}

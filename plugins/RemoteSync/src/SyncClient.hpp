@@ -74,7 +74,7 @@ private:
 	void checkTimeout();
 
 	SyncOptions options;
-	QStringList stelPropFilter;
+	QStringList stelPropFilter; // list of excluded properties
 	QString errorStr;
 	bool isConnecting;
 	SyncRemotePeer* server;

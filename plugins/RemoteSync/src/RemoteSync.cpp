@@ -320,7 +320,7 @@ void RemoteSync::loadSettings()
 	setClientServerPort(conf->value("clientServerPort",20180).toInt());
 	setServerPort(conf->value("serverPort",20180).toInt());
 	setClientSyncOptions(SyncClient::SyncOptions(conf->value("clientSyncOptions", SyncClient::ALL).toInt()));
-	setStelPropFilter(conf->value("stelPropFilter").toStringList());
+	setStelPropFilter(unpackStringList(conf->value("stelPropFilter").toString()));
 	setConnectionLostBehavior(static_cast<ClientBehavior>(conf->value("connectionLostBehavior",1).toInt()));
 	setQuitBehavior(static_cast<ClientBehavior>(conf->value("quitBehavior").toInt()));
 	reconnectTimer.setInterval(conf->value("clientReconnectInterval", 5000).toInt());
@@ -334,11 +334,21 @@ void RemoteSync::saveSettings()
 	conf->setValue("clientServerPort",clientServerPort);
 	conf->setValue("serverPort",serverPort);
 	conf->setValue("clientSyncOptions",static_cast<int>(syncOptions));
-	conf->setValue("stelPropFilter", stelPropFilter);
+	conf->setValue("stelPropFilter", packStringList(stelPropFilter));
 	conf->setValue("connectionLostBehavior", connectionLostBehavior);
 	conf->setValue("quitBehavior", quitBehavior);
 	conf->setValue("clientReconnectInterval", reconnectTimer.interval());
 	conf->endGroup();
+}
+
+QString RemoteSync::packStringList(const QStringList props)
+{
+	return props.join("|");
+}
+
+QStringList RemoteSync::unpackStringList(const QString packedProps)
+{
+	return packedProps.split("|");
 }
 
 void RemoteSync::setState(RemoteSync::SyncState state)
