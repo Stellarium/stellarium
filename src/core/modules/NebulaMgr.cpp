@@ -391,11 +391,13 @@ struct DrawNebulaFuncObject
 		Nebula* n = static_cast<Nebula*>(obj);
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
-		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->vMag > drawer->getCustomNebulaMagnitudeLimit())) return;
+		float mag = qMin(n->vMag, n->bMag);
+		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > drawer->getCustomNebulaMagnitudeLimit())) return;
 
-		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || (checkMaxMagHints && n->vMag <= maxMagHints))
+		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || (checkMaxMagHints && mag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
+
 			sPainter->getProjector()->project(n->XYZ,n->XY);
 			n->drawLabel(*sPainter, maxMagLabels-refmag_add);
 			n->drawHints(*sPainter, maxMagHints -refmag_add);
