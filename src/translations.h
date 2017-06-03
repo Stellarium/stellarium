@@ -196,6 +196,8 @@ class Translations
 		N_("Bright double stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright variable stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright stars with high proper motion");
 		
 		// =====================================================================
 		// Constellation cultures
