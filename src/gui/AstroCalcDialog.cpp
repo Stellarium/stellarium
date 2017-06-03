@@ -352,6 +352,12 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		//TRANSLATORS: period, days
 		positionsHeader << QString("%1, %2").arg(q_("Per."), qc_("d", "days"));
 	}
+	else if (celType==172)
+	{
+		//TRANSLATORS: proper motion, milliarc second per year
+		positionsHeader << QString("%1, %2").arg(q_("P.M."), qc_("mas/yr", "milliarc second per year"));
+
+	}
 	else
 	{
 		//TRANSLATORS: surface brightness
@@ -506,6 +512,7 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");
 	category->addItem(q_("Bright variable stars"), "171");
+	category->addItem(q_("Bright stars with high proper motion"), "172");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -630,11 +637,18 @@ void AstroCalcDialog::currentCelestialPositions()
 			celestialObjects = starMgr->getHipparcosDoubleStars();
 			sType = "double star";
 		}
-		else
+		else if (celTypeId==171)
 		{
 			// variable stars
 			celestialObjects = starMgr->getHipparcosVariableStars();
 			sType = "variable star";
+		}
+		else
+		{
+			// stars with high proper motion
+			celestialObjects = starMgr->getHipparcosHighPMStars();
+			sType = "star with high proper motion";
+
 		}
 
 		foreach (const StelACStarData& star, celestialObjects)
@@ -661,19 +675,21 @@ void AstroCalcDialog::currentCelestialPositions()
 					decStr = StelUtils::radToDmsStr(dec, true);
 				}
 
-				if (celTypeId==170)
+				if (celTypeId==170) // double stars
 				{
 					wdsSep = star.value(obj);
 					extra = QString::number(wdsSep, 'f', 3); // arcseconds
 					sToolTip = StelUtils::decDegToDmsStr(wdsSep/3600.f);
 				}
-				else
+				else if (celTypeId==171) // variable stars
 				{
 					if (star.value(obj)>0.f)
 						extra = QString::number(star.value(obj), 'f', 5); // days
 					else
 						extra = QChar(0x2014); // dash
 				}
+				else // stars with high proper motion
+					extra = QString::number(star.value(obj), 'f', 2); // mas/yr
 
 
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
@@ -1818,7 +1834,7 @@ void AstroCalcDialog::calculatePhenomena()
 	star.clear();
 	doubleStar.clear();
 	variableStar.clear();
-	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
+	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();	
 	QList<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars();
 	QList<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars();
 

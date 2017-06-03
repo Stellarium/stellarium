@@ -641,8 +641,10 @@ void StarMgr::loadData(QVariantMap starsConfig)
 void StarMgr::populateHipparcosLists()
 {
 	hipparcosStars.clear();
+	hipStarsHighPM.clear();
 	doubleHipStars.clear();
 	variableHipStars.clear();
+	const int pmLimit = 500; // 500 milliarc second per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
 		const Star1 *const s = hipIndex[hip].s;
@@ -663,6 +665,16 @@ void StarMgr::populateHipparcosLists()
 				QMap<StelObjectP, float> sd;
 				sd[so] = getWdsLastSeparation(s->getHip());
 				doubleHipStars.push_back(sd);
+			}
+			// use separate variables for avoid the overflow (esp. for Barnard's star)
+			float pmX = 0.1 * s->getDx0();
+			float pmY = 0.1 * s->getDx1();
+			float pm = std::sqrt((pmX*pmX) + (pmY*pmY));
+			if (qAbs(pm)>=pmLimit)
+			{
+				QMap<StelObjectP, float> spm;
+				spm[so] = pm;
+				hipStarsHighPM.push_back(spm);
 			}
 		}
 	}
@@ -1851,6 +1863,16 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 					result << star.firstKey()->getNameI18n();
 			}
 			break;
+		}
+		case 4:
+		{
+			foreach (const StelACStarData& star, hipStarsHighPM)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
 		}
 		default:
 		{
