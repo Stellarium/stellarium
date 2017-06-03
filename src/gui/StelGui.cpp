@@ -509,18 +509,18 @@ void StelGui::update()
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	if (core->getTimeRate()<-0.99*StelCore::JD_SECOND) {
-		if (buttonTimeRewind->isChecked()==false)
+        if ( ! buttonTimeRewind->isChecked())
 			buttonTimeRewind->setChecked(true);
 	} else {
-		if (buttonTimeRewind->isChecked()==true)
+        if (buttonTimeRewind->isChecked())
 			buttonTimeRewind->setChecked(false);
 	}
 	if (core->getTimeRate()>1.01*StelCore::JD_SECOND) {
-		if (buttonTimeForward->isChecked()==false) {
+        if ( ! buttonTimeForward->isChecked()) {
 			buttonTimeForward->setChecked(true);
 		}
 	} else {
-		if (buttonTimeForward->isChecked()==true)
+        if (buttonTimeForward->isChecked())
 			buttonTimeForward->setChecked(false);
 	}
 	if (core->getTimeRate() == 0) {
@@ -533,12 +533,12 @@ void StelGui::update()
 		buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateOff);
 	}
 	const bool isTimeNow=core->getIsTimeNow();
-	if (buttonTimeCurrent->isChecked()!=isTimeNow) {
+	if (static_cast<bool>(buttonTimeCurrent->isChecked())!=isTimeNow) {
 		buttonTimeCurrent->setChecked(isTimeNow);
 	}
 	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	const bool b = mmgr->getFlagTracking();
-	if (buttonGotoSelectedObject->isChecked()!=b) {
+	if (static_cast<bool>(buttonGotoSelectedObject->isChecked())!=b) {
 		buttonGotoSelectedObject->setChecked(b);
 	}
 

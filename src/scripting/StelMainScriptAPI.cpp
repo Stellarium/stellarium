@@ -762,7 +762,7 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map) const
 	QVariantMap::const_iterator i=map.constBegin();
 	while (i != map.constEnd()){
 
-		if (i.value().type()==QMetaType::QString)
+		if (i.value().type()==QVariant::String)
 		{
 			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key()).arg(i.value().toString()));
 		}

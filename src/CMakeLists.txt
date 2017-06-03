@@ -403,9 +403,9 @@ ENDIF()
 ################################ Build main program #########################################
 #############################################################################################
 
-IF(WIN32 AND NOT MSVC)
-    # This library is required on MinGW builds for some native methods used in a fix in main.cpp
-     SET(winMMLib libwinmm.a)
+IF(WIN32)
+    # This library is required for some native methods used in a fix in main.cpp
+     SET(winMMLib winmm)
 ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
@@ -452,11 +452,12 @@ IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
      INSTALL(TARGETS stelMain DESTINATION lib)
-     ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
+     # WIN32 creates a windows app without console, no effect on non-win platforms
+     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
      TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
 ELSE()
-     ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
      TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS})
 
      IF(APPLE)
