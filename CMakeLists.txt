@@ -129,17 +129,28 @@ IF(STELLARIUM_USE_CPP11)
 ENDIF()
 
 IF(WIN32)
+     # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
+     # This should also prevent some Winsock.h warnings
+     ADD_DEFINITIONS(-DWIN32_LEAN_AND_MEAN)
      IF(NOT MSVC)
           # MinGW requires enabling of exceptions, version number storage and MinGW-specific threading
           SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
-          # -mwindows generates a windows GUI app
-          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${STEL_MINGW_FLAGS} -mwindows")
      ELSE() # MSVC
+          # Additional flags:
+          # Disabled warnings
+          # C4244: implicit type conversion to a smaller type
+          # C4305: type truncation
+          # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
+          # C4996: deprecated POSIX names (used in zlib)
+          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_MSVC_FLAGS}")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_MSVC_FLAGS}")
+          # Additional defines:
           # NOMINMAX So that windows.h does not redefine min and max
-          # _WINSOCKAPI_ Prevent window.s from including winsock.h
-          ADD_DEFINITIONS(-DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805)
+          # _CRT_SECURE_NO_WARNINGS Removes warnings about using "insecure" C standard functions like scanf instead of MSVC-specific ones
+          ADD_DEFINITIONS(-DNOMINMAX -D_CRT_SECURE_NO_WARNINGS)
      ENDIF()
 ELSE()
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS}")

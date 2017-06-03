@@ -757,7 +757,6 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 		path = catalogPath;
 
 	QFile jsonFile(path);
-	StelJsonParser parser;
 
 	if (jsonFile.exists())
 		jsonFile.remove();
@@ -770,7 +769,7 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 	else
 	{
 		qDebug() << "[Satellites] writing to:" << QDir::toNativeSeparators(path);
-		parser.write(map, &jsonFile);
+		StelJsonParser::write(map, &jsonFile);
 		jsonFile.close();
 		return true;
 	}

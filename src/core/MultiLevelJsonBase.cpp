@@ -258,7 +258,6 @@ void MultiLevelJsonBase::cancelDeletion()
 // Load the tile information from a JSON file
 QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed, bool gzCompressed)
 {
-	StelJsonParser parser;
 	QVariantMap map;
 	if (qZcompressed && input.size()>0)
 	{
@@ -266,18 +265,18 @@ QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed
 		input.close();
 		QBuffer buf(&ar);
 		buf.open(QIODevice::ReadOnly);
-		map = parser.parse(&buf).toMap();
+		map = StelJsonParser::parse(&buf).toMap();
 		buf.close();
 	}
 	else if (gzCompressed)
 	{
 		QByteArray ar = StelUtils::uncompress(input.readAll());
 		input.close();
-		map = parser.parse(ar).toMap();
+		map = StelJsonParser::parse(ar).toMap();
 	}
 	else
 	{
-		map = parser.parse(&input).toMap();
+		map = StelJsonParser::parse(&input).toMap();
 	}
 
 	if (map.isEmpty())

@@ -56,11 +56,9 @@
 
 #ifdef Q_OS_WIN
 	#include <windows.h>
-	#ifdef _MSC_BUILD
-		#include <MMSystem.h>
-		#pragma comment(lib,"Winmm.lib")
-		#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") // Hide console
-	#endif
+	//we use WIN32_LEAN_AND_MEAN so this needs to be included
+	//to use timeBeginPeriod/timeEndPeriod
+	#include <mmsystem.h>
 #endif //Q_OS_WIN
 
 //! @class CustomQTranslator
