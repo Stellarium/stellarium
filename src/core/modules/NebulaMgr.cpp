@@ -1049,7 +1049,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	dsoOut.flush();
 	dsoOut.close();
 	qDebug() << "Converted" << readOk << "/" << totalRecords << "DSO records";
-	qDebug() << "[...] Please use 'gzip -nc9 catalog.pack > catalog.dat' to pack the catalog.";
+	qDebug() << "[...] Please use 'gzip -nc catalog.pack > catalog.dat' to pack the catalog.";
 }
 
 bool NebulaMgr::loadDSOCatalog(const QString &filename)
