@@ -164,7 +164,7 @@ void SolarSystemManagerWindow::populateSolarSystemList()
 	foreach (const PlanetP & object, GETSTELMODULE(SolarSystem)->getAllPlanets())
 	{
 		// GZ new for 0.16: only insert objects which are minor bodies.
-		if (object->getPlanetType() >= Planet::isAsteroid)
+		if ((object->getPlanetType() >= Planet::isAsteroid) && (object->getEnglishName()!="Pluto"))
 			unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
 	}
 
