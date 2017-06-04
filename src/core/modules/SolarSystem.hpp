@@ -851,6 +851,9 @@ public:
 	//! Reload the planets
 	void reloadPlanets();
 
+	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
+	bool removePlanet(QString name);
+
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
 
@@ -860,7 +863,9 @@ public:
 	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.	
-	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}	
+	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+	//! Get the list of all minor bodies names.
+	const QStringList getMinorBodiesList() const { return minorBodies; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -901,9 +906,9 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
-	//! Load planet data from the Solar System configuration file.
+	//! Load planet data from the Solar System configuration files.
 	//! This function attempts to load every possible instance of the
-	//! Solar System configuration file in the file paths, falling back if a
+	//! Solar System configuration files in the file paths, falling back if a
 	//! given path can't be loaded.
 	void loadPlanets();
 
@@ -975,8 +980,16 @@ private:
 	Vec3f pointerColor;
 
 	QHash<QString, QString> planetNativeNamesMap;
+	QStringList minorBodies;
 
-	QList<Orbit*> orbits;           // Pointers on created elliptical orbits
+	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
+	// while the planets don't own their orbit objects.
+	// Would it not be better to hand over the orbit object ownership to the Planet object?
+	// This list could then be removed.
+	// In case this was originally intended to provide some fast access for time-dependent computation with the same JD,
+	// note that we must also always compensate to light time travel, so likely each computation has to be done twice,
+	// with current JDE and JDE-lightTime(distance).
+	QList<Orbit*> orbits;           // Pointers on created elliptical orbits. 0.16pre: WHY DO WE NEED THIS???
 };
 
 

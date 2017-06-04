@@ -50,7 +50,7 @@ public:
 	      const QString& texMapName,
 	      const QString& objModelName,
 	      posFuncType _coordFunc,
-	      void* userDataPtr,
+	      void* orbitPtr,
 	      OsculatingFunctType *osculatingFunc,
 	      bool closeOrbit,
 	      bool hidden,
