@@ -627,7 +627,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	else
 	{
 		// stars
-		QString sType = "star";
+		QString sType = q_("star");
 		QString sToolTip = "";
 		float wdsSep;
 		QList<StelACStarData> celestialObjects;
@@ -635,19 +635,19 @@ void AstroCalcDialog::currentCelestialPositions()
 		{
 			// double stars
 			celestialObjects = starMgr->getHipparcosDoubleStars();
-			sType = "double star";
+			sType = q_("double star");
 		}
 		else if (celTypeId==171)
 		{
 			// variable stars
 			celestialObjects = starMgr->getHipparcosVariableStars();
-			sType = "variable star";
+			sType = q_("variable star");
 		}
 		else
 		{
 			// stars with high proper motion
 			celestialObjects = starMgr->getHipparcosHighPMStars();
-			sType = "star with high proper motion";
+			sType = q_("star with high proper motion");
 
 		}
 
@@ -704,7 +704,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
-				treeItem->setText(CColumnType, q_(sType));
+				treeItem->setText(CColumnType, sType);
 			}
 		}
 	}
