@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-04 03:40+0700\n"
+"POT-Creation-Date: 2017-06-04 11:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2021,7 +2021,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:187
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:188
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
@@ -2485,7 +2485,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:511
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:189
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Contributors"
 msgstr ""
 
@@ -2500,7 +2500,7 @@ msgstr ""
 msgid "Windows"
 msgstr ""
 
-#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:429
+#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Quit"
 msgstr ""
 
@@ -2621,7 +2621,7 @@ msgid "FOV"
 msgstr ""
 
 #: src/gui/StelGuiItems.cpp:743
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:440
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Field of view"
 msgstr ""
 
@@ -3739,7 +3739,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:188
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:189
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
@@ -5651,7 +5651,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:437
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Location"
 msgstr ""
 
@@ -8084,7 +8084,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
@@ -8101,7 +8101,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
@@ -8121,7 +8121,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
@@ -8140,7 +8140,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -8159,7 +8159,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
@@ -8172,7 +8172,7 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -8231,7 +8231,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:250
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:446
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
@@ -8250,7 +8250,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:261
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:445
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:514
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:410
@@ -9536,7 +9536,7 @@ msgid "Select TLE Update File"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Time"
 msgstr ""
 
@@ -9661,7 +9661,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:251
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:447
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
@@ -12133,7 +12133,7 @@ msgid "Not active."
 msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:411
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:456
 msgid "Remote Control Configuration"
 msgstr ""
 
@@ -12181,7 +12181,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr ""
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:432
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
 msgid "Remote Sync"
 msgstr ""
 
@@ -12191,176 +12191,200 @@ msgid ""
 "a network. See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:111
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:112
 #, qt-format
 msgid "ERROR: %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:128
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:417
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:129
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:462
 msgid "Start server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:133
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:420
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:134
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Connect to server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:136
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
 msgid "Not running"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:147
 #, qt-format
 msgid "Running as server on port %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:160
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
 msgid "Cancel connecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:162
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
 msgid "Disconnecting..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
 msgid "Disconnect from server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:187
 msgid "Remote Sync Plug-in"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid "See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:235
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:236
 msgid "Server Name"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:243
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:244
 msgid "Server not active."
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:412
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:457
 msgid "Remote Sync Plug-in Configuration"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:414
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:416
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
 msgid "Server mode"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:418
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:423
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Server port"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:419
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Client mode"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:421
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Server host address/name"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:422
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "127.0.0.1"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:424
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "When connection is lost"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:427
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
 msgid "Do nothing"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:428
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Try reconnecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:431
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "When server quits"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:433
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "Changes on this page require a re-connection to the server"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:434
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Settings applied on this client"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:435
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Selection"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:438
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "StelProperty"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:439
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "View direction"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:441
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "Property filters"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:442
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Exclude GUI-related properties"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
+msgid "These are all available properties."
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
+msgid "-->"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
+msgid "<--"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
+msgid "These are the properties currently excluded from synchronisation."
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
+msgid "Excluded Properties"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
+msgid "Synchronized Properties"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
 msgid "Client settings"
 msgstr ""
 
