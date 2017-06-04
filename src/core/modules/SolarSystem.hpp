@@ -863,7 +863,9 @@ public:
 	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.	
-	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}	
+	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+	//! Get the list of all minor bodies names.
+	const QStringList getMinorBodiesList() const { return minorBodies; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -978,6 +980,7 @@ private:
 	Vec3f pointerColor;
 
 	QHash<QString, QString> planetNativeNamesMap;
+	QStringList minorBodies;
 
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
 	// while the planets don't own their orbit objects.

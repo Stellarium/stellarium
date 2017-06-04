@@ -290,7 +290,7 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 	QFile planetNamesFile(namesFile);
 	if (!planetNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
+		qDebug() << " Cannot open file" << QDir::toNativeSeparators(namesFile);
 		return;
 	}
 
@@ -403,6 +403,7 @@ void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
 // Init and load the solar system data (2 files)
 void SolarSystem::loadPlanets()
 {
+	minorBodies.clear();
 	qDebug() << "Loading Solar System data (1: planets and moons) ...";
 	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
 	if (solarSystemFile.isEmpty())
@@ -429,7 +430,7 @@ void SolarSystem::loadPlanets()
 	{
 		if (loadPlanets(solarSystemFile))
 		{
-			qDebug() << "ssystem_minor.ini loaded";
+			qDebug() << "File ssystem_minor.ini is loaded successfully...";
 			break;
 		}
 		else
@@ -437,9 +438,9 @@ void SolarSystem::loadPlanets()
 //			sun.clear();
 //			moon.clear();
 //			earth.clear();
-			qCritical() << "We should not be here!";
+			//qCritical() << "We should not be here!";
 
-			qDebug() << "removing minor bodies";
+			qDebug() << "Removing minor bodies";
 			foreach (PlanetP p, systemPlanets)
 			{
 				// We can only delete minor objects now!
@@ -478,7 +479,8 @@ void SolarSystem::loadPlanets()
 
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
-	qDebug() << "SolarSystem: loading from :"  << filePath;
+	qDebug() << "Loading from :"  << filePath;
+	int readOk = 0;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -522,7 +524,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	QMap<QString, QString> secNameMap;
 	QMap<QString, QString> parentMap;
 	QStringList sections = pd.childGroups();
-	qDebug() << "Stage 1: load ini file with" << sections.size() << "entries: "<< sections;
+	// qDebug() << "Stage 1: load ini file with" << sections.size() << "entries: "<< sections;
 	for (int i=0; i<sections.size(); ++i)
 	{
 		const QString secname = sections.at(i);
@@ -532,7 +534,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (strParent!="none" && !strParent.isEmpty() && !englishName.isEmpty())
 		{
 			parentMap[englishName] = strParent;
-			qDebug() << "parentmap[" << englishName << "] = " << strParent;
+			// qDebug() << "parentmap[" << englishName << "] = " << strParent;
 		}
 	}
 
@@ -553,11 +555,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		depLevelMap.insert(level, secNameMap[englishName]);
-		qDebug() << "2a: Level" << level << "secNameMap[" << englishName << "]="<< secNameMap[englishName];
+		// qDebug() << "2a: Level" << level << "secNameMap[" << englishName << "]="<< secNameMap[englishName];
 	}
 
 	// Stage 2b (as described above).
-	qDebug() << "Stage 2b:";
+	// qDebug() << "Stage 2b:";
 	QStringList orderedSections;
 	QMapIterator<int, QString> levelMapIt(depLevelMap);
 	while(levelMapIt.hasNext())
@@ -565,16 +567,16 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		levelMapIt.next();
 		orderedSections << levelMapIt.value();
 	}
-	qDebug() << orderedSections;
+	// qDebug() << orderedSections;
 
 	// Stage 3 (as described above).
 	//int readOk=0;
 	//int totalPlanets=0;
 
-	qDebug() << "Adding " << orderedSections.size() << "objects...";
+	// qDebug() << "Adding " << orderedSections.size() << "objects...";
 	for (int i = 0;i<orderedSections.size();++i)
 	{
-		qDebug() << "Processing entry" << orderedSections.at(i);
+		// qDebug() << "Processing entry" << orderedSections.at(i);
 
 		//totalPlanets++;
 		const QString secname = orderedSections.at(i);
@@ -601,7 +603,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		const QString funcName = pd.value(secname+"/coord_func").toString();
-		qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << funcName;
+		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << funcName;
 		posFuncType posfunc=Q_NULLPTR;
 		void* orbitPtr=Q_NULLPTR;
 		OsculatingFunctType *osculatingFunc = Q_NULLPTR;
@@ -620,7 +622,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
 					qDebug() << "ERROR: " << englishName
-						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
+						 << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
 					//abort();
 					continue;
 				} else {
@@ -727,7 +729,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
 					qWarning() << "ERROR: " << englishName
-						<< ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
+						   << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
 					//abort();
 					continue;
 				} else {
@@ -745,8 +747,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				if (period <= -1e100) {
 					if (parent->getParent()) {
 						qWarning() << "ERROR: " << englishName
-							<< ": when the parent body is not the sun, you must provide "
-							<< "either orbit_MeanMotion or orbit_Period";
+							   << ": when the parent body is not the sun, you must provide "
+							   << "either orbit_MeanMotion or orbit_Period";
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
@@ -771,8 +773,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble();
 				if (epoch <= -1e100 || mean_anomaly <= -1e100) {
 					qWarning() << "ERROR: " << englishName
-						<< ": when you do not provide orbit_TimeAtPericenter, you must provide both "
-						<< "orbit_Epoch and orbit_MeanAnomaly";
+						   << ": when you do not provide orbit_TimeAtPericenter, you must provide both "
+						   << "orbit_Epoch and orbit_MeanAnomaly";
 					//abort();
 					continue;
 				} else {
@@ -943,6 +945,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
 		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
+			minorBodies << englishName;
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -994,6 +997,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else if (type == "comet")
 		{
+			minorBodies << englishName;
 			p = PlanetP(new Comet(englishName,
 					      pd.value(secname+"/radius").toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -1121,7 +1125,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		systemPlanets.push_back(p);
-		//readOk++;
+		readOk++;
 	}
 
 	if (systemPlanets.isEmpty())
@@ -1140,6 +1144,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	//tail textures. We use paraboloid tail bodies, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
 	if (!Comet::tailTexture)
 		Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+
+	if (readOk>0)
+		qDebug() << "Loaded" << readOk << "Solar System bodies";
 
 	return true;
 }
@@ -2385,8 +2392,8 @@ bool SolarSystem::removePlanet(QString name)
 	//candidate->satellites.clear();
 	if (candidate->pType < Planet::isAsteroid)
 	{
-		qWarning() << "SolarSystem: REMOVING MAJOR OBJECT:" << name;
-		qWarning() << "             This is likely not what you want, but will be accepted.";
+		qWarning() << "REMOVING MAJOR OBJECT:" << name;
+		qWarning() << "              This is likely not what you want, but will be accepted.";
 		Q_ASSERT(0);
 	}
 	Orbit* orbPtr=(Orbit*) candidate->orbitPtr;
