@@ -59,7 +59,7 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 	pSatellite = new gSatTEME(designation.toLatin1().data(),
 	                          t1.data(),
 	                          t2.data());
-	updateEpoch();
+	setEpoch(StelApp::getInstance().getCore()->getJD());
 }
 
 
@@ -70,13 +70,12 @@ gSatWrapper::~gSatWrapper()
 }
 
 
-Vec3d gSatWrapper::getTEMEPos()
+Vec3d gSatWrapper::getTEMEPos() const
 {
-        gVector position;
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
 	{
-                position = pSatellite->getPos();
+		gVector position = pSatellite->getPos();
                 returnedVector.set(position[0], position[1], position[2]);
 	}
 	else
@@ -87,13 +86,12 @@ Vec3d gSatWrapper::getTEMEPos()
 }
 
 
-Vec3d gSatWrapper::getTEMEVel()
+Vec3d gSatWrapper::getTEMEVel() const
 {
-        gVector velocity;
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
 	{
-                velocity = pSatellite->getVel();
+		gVector velocity = pSatellite->getVel();
                 returnedVector.set(velocity[0], velocity[1], velocity[2]);
 	}
 	else
@@ -104,13 +102,12 @@ Vec3d gSatWrapper::getTEMEVel()
 }
 
 
-Vec3d gSatWrapper::getSubPoint()
+Vec3d gSatWrapper::getSubPoint() const
 {
-        gVector satelliteSubPoint;
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
 	{
-                satelliteSubPoint = pSatellite->getSubPoint();
+		gVector satelliteSubPoint = pSatellite->getSubPoint();
                 returnedVector.set(satelliteSubPoint[0], satelliteSubPoint[1], satelliteSubPoint[2]);
 	}
 	else
@@ -119,91 +116,85 @@ Vec3d gSatWrapper::getSubPoint()
 	return returnedVector;
 }
 
-
-void gSatWrapper::updateEpoch()
-{
-	double jul_utc = StelApp::getInstance().getCore()->getJD();
-        epoch = jul_utc;
-
-	if (pSatellite)
-                pSatellite->setEpoch(epoch);
-}
-
 void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 {
     epoch = ai_julianDaysEpoch;
     if (pSatellite)
-		pSatellite->setEpoch(ai_julianDaysEpoch);
+		pSatellite->setEpoch(epoch);
 }
 
 
 void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity)
 {
 
-	StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
+	if (epoch != lastCalcObserverECIPosition)
+	{
+		StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 
-	double radLatitude = loc.latitude * KDEG2RAD;
-        double theta       = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
-	double r;
-	double c,sq;
+		double radLatitude = loc.latitude * KDEG2RAD;
+		double theta       = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+		double r;
+		double c,sq;
 
-	/* Reference:  Explanatory supplement to the Astronomical Almanac 1992, page 209-210. */
-	/* Elipsoid earth model*/
-	/* c = Nlat/a */
-	c = 1/std::sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
-	sq = Sqr(1 - __f)*c;
+		/* Reference:  Explanatory supplement to the Astronomical Almanac 1992, page 209-210. */
+		/* Elipsoid earth model*/
+		/* c = Nlat/a */
+		c = 1/std::sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
+		sq = Sqr(1 - __f)*c;
 
-	r = (KEARTHRADIUS*c + (loc.altitude/1000))*cos(radLatitude);
-	ao_position[0] = r * cos(theta);/*kilometers*/
-	ao_position[1] = r * sin(theta);
-	ao_position[2] = (KEARTHRADIUS*sq + (loc.altitude/1000))*sin(radLatitude);
-        ao_velocity[0] = -KMFACTOR*ao_position[1];/*kilometers/second*/
-        ao_velocity[1] =  KMFACTOR*ao_position[0];
-        ao_velocity[2] =  0;
+		r = (KEARTHRADIUS*c + (loc.altitude/1000))*cos(radLatitude);
+		ao_position[0] = r * cos(theta);/*kilometers*/
+		ao_position[1] = r * sin(theta);
+		ao_position[2] = (KEARTHRADIUS*sq + (loc.altitude/1000))*sin(radLatitude);
+		ao_velocity[0] = -KMFACTOR*ao_position[1];/*kilometers/second*/
+		ao_velocity[1] =  KMFACTOR*ao_position[0];
+		ao_velocity[2] =  0;
+
+		lastCalcObserverECIPosition=epoch;
+	}
 }
 
 
 
-Vec3d gSatWrapper::getAltAz()
+Vec3d gSatWrapper::getAltAz() const
 {
-
 	StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 	Vec3d topoSatPos;
-	Vec3d observerECIPos;
-	Vec3d observerECIVel;
 
-	double  radLatitude    = loc.latitude * KDEG2RAD;
-        double  theta          = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+	const double  radLatitude    = loc.latitude * KDEG2RAD;
+	const double  theta          = epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+	const double sinRadLatitude=sin(radLatitude);
+	const double cosRadLatitude=cos(radLatitude);
+	const double sinTheta=sin(theta);
+	const double cosTheta=cos(theta);
 
+	// This now only updates if required.
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
 	Vec3d satECIPos  = getTEMEPos();
 	Vec3d slantRange = satECIPos - observerECIPos;
 
 	//top_s
-	topoSatPos[0] = (sin(radLatitude) * cos(theta)*slantRange[0]
-	                 + sin(radLatitude)* sin(theta)*slantRange[1]
-                         - cos(radLatitude)* slantRange[2]);
+	topoSatPos[0] = (sinRadLatitude * cosTheta*slantRange[0]
+			 + sinRadLatitude* sinTheta*slantRange[1]
+			 - cosRadLatitude* slantRange[2]);
 	//top_e
-	topoSatPos[1] = ((-1.0)* sin(theta)*slantRange[0]
-                         + cos(theta)*slantRange[1]);
+	topoSatPos[1] = ((-1.0)* sinTheta*slantRange[0]
+			 + cosTheta*slantRange[1]);
 
 	//top_z
-	topoSatPos[2] = (cos(radLatitude) * cos(theta)*slantRange[0]
-	                 + cos(radLatitude) * sin(theta)*slantRange[1]
-                         + sin(radLatitude) *slantRange[2]);
+	topoSatPos[2] = (cosRadLatitude * cosTheta*slantRange[0]
+			 + cosRadLatitude * sinTheta*slantRange[1]
+			 + sinRadLatitude *slantRange[2]);
 
 	return topoSatPos;
 }
 
-void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRate)
+void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRate) const
 {
-
-	Vec3d observerECIPos;
-	Vec3d observerECIVel;
-
+	//Vec3d observerECIPos;
+	//Vec3d observerECIVel;
 	calcObserverECIPosition(observerECIPos, observerECIVel);
-
 
         Vec3d satECIPos            = getTEMEPos();
         Vec3d satECIVel            = getTEMEVel();
@@ -214,79 +205,82 @@ void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRat
         ao_slantRangeRate = slantRange.dot(slantRangeVelocity)/ao_slantRange;
 }
 
-Vec3d gSatWrapper::getSunECIPos()
+// Does the actual computation only if necessary (0.1s apart) and caches the result in a static variable.
+void gSatWrapper::updateSunECIPos()
 {
 	// All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
-	Vec3d observerECIPos;
-	Vec3d observerECIVel;
-	Vec3d sunECIPos;
-	Vec3d sunEquinoxEqPos;
-
+	//Vec3d observerECIPos;
+	//Vec3d observerECIVel;
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
-	SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+	static const SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	Vec3d sunEquinoxEqPos = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
 
-	//sunEquinoxEqPos is measured in AU. we need meassure it in Km
+	//sunEquinoxEqPos is measured in AU. we need measure it in Km
+	//Vec3d sunECIPos;
 	sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
 	sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
 
+
+
+}
+
+Vec3d gSatWrapper::getSunECIPos()
+{
+	if (epoch != lastSunECIepoch)
+	{
+		updateSunECIPos();
+		lastSunECIepoch=epoch;
+	}
 	return sunECIPos;
 }
 
 // Operation getVisibilityPredict
-// @brief This operation predicts the satellite visibility contidions.
-int gSatWrapper::getVisibilityPredict()
+// @brief This operation predicts the satellite visibility conditions.
+gSatWrapper::Visibility gSatWrapper::getVisibilityPredict()
 {
-	Vec3d satECIPos;
-	Vec3d satAltAzPos;
-	Vec3d sunECIPos;
-	Vec3d sunAltAzPos;
-
-	double sunSatAngle, Dist;
-	int   visibility;
-
-	satAltAzPos = getAltAz();
+	Vec3d satAltAzPos = getAltAz();
 
 	if (satAltAzPos[2] > 0)
 	{
-		satECIPos = getTEMEPos();
-		SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");		
-		sunAltAzPos        = solsystem->getSun()->getAltAzPosGeometric(StelApp::getInstance().getCore());
-
-		sunECIPos = getSunECIPos();
+		Vec3d satECIPos = getTEMEPos();
+		static const SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+		Vec3d sunAltAzPos = solsystem->getSun()->getAltAzPosGeometric(StelApp::getInstance().getCore());
+		Vec3d sunECIPos = getSunECIPos();
 
 		if (sunAltAzPos[2] > 0.0)
 		{
-			visibility = RADAR_SUN;
+			return RADAR_SUN;
 		}
 		else
 		{
-			sunSatAngle = sunECIPos.angle(satECIPos);
-			Dist = satECIPos.length()*cos(sunSatAngle - (M_PI/2));
+			double sunSatAngle = sunECIPos.angle(satECIPos);
+			double Dist = satECIPos.length()*cos(sunSatAngle - (M_PI/2));
 
 			if (Dist > KEARTHRADIUS)
 			{
-				visibility = VISIBLE;
+				return VISIBLE;
 			}
 			else
 			{
-				visibility = RADAR_NIGHT;
+				return RADAR_NIGHT;
 			}
 		}
 	}
 	else
-		visibility = NOT_VISIBLE;
-
-	return visibility; //TODO: put correct return
+		return NOT_VISIBLE;
 }
 
-double gSatWrapper::getPhaseAngle()
+double gSatWrapper::getPhaseAngle() const
 {
 	Vec3d sunECIPos = getSunECIPos();
 	return sunECIPos.angle(getTEMEPos());
 }
 
+gTime gSatWrapper::epoch;
+gTime gSatWrapper::lastSunECIepoch=0.0; // store last time of computation to avoid all-1 computations.
+gTime gSatWrapper::lastCalcObserverECIPosition;
 
-
-
+Vec3d gSatWrapper::sunECIPos; // enough to have this once.
+Vec3d gSatWrapper::observerECIPos;
+Vec3d gSatWrapper::observerECIVel;

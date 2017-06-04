@@ -37,7 +37,7 @@ class PropertyBasedTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	PropertyBasedTableModel(QObject *parent = 0);
+	PropertyBasedTableModel(QObject *parent = Q_NULLPTR);
 	virtual ~PropertyBasedTableModel();
 
 	//! Initializes this instance for use.  If you do not call this method, and use this class, your app will crash.

@@ -40,7 +40,7 @@ public:
 	//! @param prev the previous node in the current menu (typically shares the same parent)
 	TuiNodeColor(const QString& text, QObject* receiver, const char* method, Vec3f defValue, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleEditingKey(int key);
-	virtual QString getDisplayText();
+	virtual QString getDisplayText() const;
 
 signals:
 	void setValue(Vec3f c);

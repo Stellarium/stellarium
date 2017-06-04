@@ -33,7 +33,7 @@ class LocationSearchService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	LocationSearchService(QObject* parent = 0);
+	LocationSearchService(QObject* parent = Q_NULLPTR);
 
 	//! We work on a copy of the StelLocationMgr, to prevent hitches as the web user is typing
 	//! @returns true

@@ -66,7 +66,7 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 	return response;
 }
 
-QString TuiNodeEnum::getDisplayText() 
+QString TuiNodeEnum::getDisplayText() const
 {
     if (!stringList.isEmpty())
     {

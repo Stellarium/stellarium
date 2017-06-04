@@ -31,7 +31,7 @@
 class CustomProxy : public QGraphicsProxyWidget
 {
 	public:
-		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}

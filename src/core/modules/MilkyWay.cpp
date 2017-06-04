@@ -98,7 +98,15 @@ double MilkyWay::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void MilkyWay::setFlagShow(bool b){*fader = b; emit milkyWayDisplayedChanged(b);}
+void MilkyWay::setFlagShow(bool b)
+{
+	if (*fader != b)
+	{
+		*fader = b;
+		emit milkyWayDisplayedChanged(b);
+	}
+}
+
 bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)

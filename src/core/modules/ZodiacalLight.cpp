@@ -157,8 +157,11 @@ double ZodiacalLight::getCallOrder(StelModuleActionName actionName) const
 
 void ZodiacalLight::setFlagShow(bool b)
 {
-	*fader = b;
-	emit zodiacalLightDisplayedChanged(b);
+	if (*fader != b)
+	{
+		*fader = b;
+		emit zodiacalLightDisplayedChanged(b);
+	}
 }
 
 bool ZodiacalLight::getFlagShow() const

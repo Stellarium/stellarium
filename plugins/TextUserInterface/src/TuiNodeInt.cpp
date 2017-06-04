@@ -122,7 +122,7 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 	return response;
 }
 
-QString TuiNodeInt::getDisplayText() 
+QString TuiNodeInt::getDisplayText() const
 {
 	if (!editing)
 	{

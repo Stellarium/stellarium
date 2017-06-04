@@ -52,8 +52,6 @@ flag\_planets\_hints      & bool & true  & Set to \emph{false} to hide the plane
 flag\_planets\_orbits     & bool & false & Set to \emph{true} to show the planet orbits on startup\\\midrule
 flag\_permanent\_orbits   & bool & false & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\\\midrule
 flag\_planets\_pointers   & bool & false & Set to \emph{true} to show the planet pointer markers on startup\\\midrule
-flag\_ephemeris\_markers  & bool & true  & Set to \emph{true} to show the calculated ephemeris markers for Solar system bodies.\\\midrule
-flag\_ephemeris\_dates    & bool & true  & Set to \emph{true} to show the dates of calculated ephemeris for Solar system bodies.\\\midrule
 flag\_light\_travel\_time & bool & true  & Should be \emph{true} to improve accuracy in the movement of the planets by compensating 
                                            for the time it takes for light to travel. This has a slight impact on performance, 
                                            but is essential e.g.\ for Jupiter's moons.\\\midrule
@@ -91,6 +89,36 @@ toast\_survey\_host				   & string &       & Host of Digitized Sky Survey storag
 toast\_survey\_directory		   & string & results & Directory name of Digitized Sky Survey storage data.\\\midrule
 toast\_survey\_levels			   & int    & 11    & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
 \end{longtabu}
+
+\subsection{\big[astrocalc\big]}
+\label{sec:config.ini:astrocalc}
+
+This section includes settings for the Astronomical Calculations feature.
+
+\begin{longtabu} to \textwidth {l|l|l|X}
+\toprule
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+flag\_ephemeris\_markers  & bool & true  & Set to \emph{true} to show the calculated ephemeris markers for Solar system bodies.\\\midrule
+flag\_ephemeris\_dates    & bool & false  & Set to \emph{true} to show the dates of calculated ephemeris for Solar system bodies.\\\midrule
+flag\_ephemeris\_magnitudes & bool & false  & Set to \emph{true} to show the magnitude of Solar system body for the calculated ephemeride.\\\midrule
+flag\_ephemeris\_horizontal & bool & false  & Set to \emph{true} to use horizontal coordinates for ephemerides.\\\midrule
+ephemeris\_celestial\_body & string & Moon  & Default celestial body for computation of ephemerides.\\\midrule
+ephemeris\_time\_step & int & 6  & Identificator for time step category.\\\midrule
+positions\_magnitude\_limit & float & 12.0  & Value of limiting magnitude for the Solar system objects in computation of their positions.\\\midrule
+flag\_positions\_above\_horizon & bool & false  & Set to \emph{true} to compute of positions for the Solar system objects above horizon only.\\\midrule
+celestial\_magnitude\_limit & float & 6.0  & Value of limiting magnitude for the celestial objects in computation of their positions.\\\midrule
+celestial\_category & int & 100  & Identificator for default category of celestial bodies.\\\midrule
+flag\_horizontal\_coordinates & bool & false  & Set to \emph{true} to use horizontal coordinates for compute of positions for the celestial objects.\\\midrule
+flag\_phenomena\_opposition & bool & false  & Set to \emph{true} to compute of opposition phenomenon between the Solar system bodies.\\\midrule
+phenomena\_celestial\_body & string & Venus & Default celestial body for computation of phenomena.\\\midrule
+phenomena\_celestial\_group & int & 0 & Identificator for group of celestial bodies for computation of phenomenae.\\\midrule
+wut\_magnitude\_limit & float & 10.0  & Value of limiting magnitude for calculations within What's Up Tonight feature.\\\midrule
+wut\_time\_interval & int & 0 & Identificator for time interval within What's Up Tonight feature computations.\\\midrule
+graphs\_celestial\_body & string & Moon  & Default celestial body for draw of graphs.\\\midrule
+graphs\_first\_id & int & 1  & Identificator for left graph (blue line).\\\midrule
+graphs\_second\_id & int & 2 & Identificator for right graph (yellow line).\\\bottomrule
+\end{longtabu}
+
 
 \subsection{\big[color\big]}
 \label{sec:config.ini:color}
@@ -287,7 +315,10 @@ flag\_show\_cr  & bool & false & Collinder Catalogue (Cr). \\\midrule
 flag\_show\_mel & bool & false & Melotte Catalogue of Deep Sky Objects (Mel).  \\\midrule
 flag\_show\_pgc & bool & false & HYPERLEDA. I. Catalog of galaxies (PGC). \\\midrule
 flag\_show\_ced & bool & false & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). \\\midrule
-flag\_show\_ugc & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\bottomrule
+flag\_show\_ugc & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\midrule
+flag\_show\_arp & bool & false & Atlas of Peculiar Galaxies (Arp). \\\midrule
+flag\_show\_vv  & bool & false & The Catalogue of Interacting Galaxies (VV). \\\midrule
+flag\_show\_pk  & bool & false & The Catalogue of Galactic Planetary Nebulae (PK). \\\bottomrule
 \end{longtabu}
 
 \subsection{\big[dso\_type\_filters\big]}

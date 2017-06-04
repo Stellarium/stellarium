@@ -451,7 +451,7 @@ void Exoplanets::restoreDefaultJsonFile(void)
 /*
   Creates a backup of the exoplanets.json file called exoplanets.json.old
 */
-bool Exoplanets::backupJsonFile(bool deleteOriginal)
+bool Exoplanets::backupJsonFile(bool deleteOriginal) const
 {
 	QFile old(jsonCatalogPath);
 	if (!old.exists())
@@ -595,7 +595,7 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 	}
 }
 
-int Exoplanets::getJsonFileFormatVersion(void)
+int Exoplanets::getJsonFileFormatVersion(void) const
 {
 	int jsonVersion = -1;
 	QFile jsonEPCatalogFile(jsonCatalogPath);
@@ -617,7 +617,7 @@ int Exoplanets::getJsonFileFormatVersion(void)
 	return jsonVersion;
 }
 
-bool Exoplanets::checkJsonFileFormat()
+bool Exoplanets::checkJsonFileFormat() const
 {
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
@@ -855,7 +855,7 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 	flagShowExoplanetsButton = b;
 }
 
-bool Exoplanets::getDisplayMode()
+bool Exoplanets::getDisplayMode() const
 {
 	return Exoplanet::distributionMode;
 }
@@ -865,7 +865,7 @@ void Exoplanets::setDisplayMode(bool b)
 	Exoplanet::distributionMode=b;
 }
 
-bool Exoplanets::getFlagShowExoplanetsDesignations()
+bool Exoplanets::getFlagShowExoplanetsDesignations() const
 {
 	return Exoplanet::showDesignations;
 }
@@ -875,7 +875,7 @@ void Exoplanets::setFlagShowExoplanetsDesignations(bool b)
 	Exoplanet::showDesignations=b;
 }
 
-bool Exoplanets::getTimelineMode()
+bool Exoplanets::getTimelineMode() const
 {
 	return Exoplanet::timelineMode;
 }
@@ -885,7 +885,7 @@ void Exoplanets::setTimelineMode(bool b)
 	Exoplanet::timelineMode=b;
 }
 
-bool Exoplanets::getHabitableMode()
+bool Exoplanets::getHabitableMode() const
 {
 	return Exoplanet::habitableMode;
 }
@@ -895,7 +895,7 @@ void Exoplanets::setHabitableMode(bool b)
 	Exoplanet::habitableMode=b;
 }
 
-Vec3f Exoplanets::getMarkerColor(bool habitable)
+Vec3f Exoplanets::getMarkerColor(bool habitable) const
 {
 	Vec3f c = Exoplanet::exoplanetMarkerColor;
 	if (habitable)

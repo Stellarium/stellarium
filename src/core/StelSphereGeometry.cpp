@@ -1125,8 +1125,7 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2,
 ///////////////////////////////////////////////////////////////////////////////
 SphericalRegionP SphericalRegionP::loadFromJson(QIODevice* in)
 {
-	StelJsonParser parser;
-	return loadFromQVariant(parser.parse(in).toMap());
+    return loadFromQVariant(StelJsonParser::parse(in).toMap());
 }
 
 SphericalRegionP SphericalRegionP::loadFromJson(const QByteArray& a)

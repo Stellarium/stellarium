@@ -148,17 +148,17 @@ public:
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
 	//! Get the date and time the novae were updated
-	QDateTime getLastUpdate(void) {return lastUpdate;}
+	QDateTime getLastUpdate(void) const {return lastUpdate;}
 
 	//! Get the update frequency in days
-	int getUpdateFrequencyDays(void) {return updateFrequencyDays;}
+	int getUpdateFrequencyDays(void) const {return updateFrequencyDays;}
 	void setUpdateFrequencyDays(int days) {updateFrequencyDays = days;}
 
 	//! Get the number of seconds till the next update
 	int getSecondsToUpdate(void);
 
 	//! Get the current updateState
-	UpdateState getUpdateState(void) {return updateState;}
+	UpdateState getUpdateState(void) const {return updateState;}
 
 	//! Get list of novae
 	QString getNovaeList();
@@ -167,7 +167,7 @@ public:
 	float getLowerLimitBrightness();
 
 	//! Get count of novae from catalog
-	int getCountNovae(void) {return NovaCnt;}
+	int getCountNovae(void) const {return NovaCnt;}
 
 signals:
 	//! @param state the new update state.
@@ -185,7 +185,7 @@ public slots:
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
+	void messageTimeout(void) const;
 
 	void reloadCatalog(void);
 
@@ -209,11 +209,11 @@ private:
 
 	//! Get the version from the "version" value in the novae.json file
 	//! @return version string, e.g. "1"
-	int getJsonFileVersion(void);
+	int getJsonFileVersion(void) const;
 
 	//! Check format of the catalog of novae
 	//! @return valid boolean, e.g. "true"
-	bool checkJsonFileFormat(void);
+	bool checkJsonFileFormat(void) const;
 
 	//! Parse JSON file and load novae to map
 	QVariantMap loadNovaeMap(QString path=QString());

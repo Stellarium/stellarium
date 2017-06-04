@@ -113,7 +113,7 @@ void BookmarksDialog::setBookmarksHeaderNames()
 
 void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString nameI18n, QString Date, QString Location)
 {
-	QStandardItem* tempItem = 0;
+	QStandardItem* tempItem = Q_NULLPTR;
 
 	tempItem = new QStandardItem(uuid);
 	tempItem->setEditable(false);

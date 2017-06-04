@@ -40,7 +40,7 @@ public:
 	//! shares the same parent)
 	TuiNodeActivate(const QString& text, QObject* receiver, const char* method, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleKey(int key);
-	virtual QString getDisplayText();
+	virtual QString getDisplayText() const;
 
 signals:
 	void activate();

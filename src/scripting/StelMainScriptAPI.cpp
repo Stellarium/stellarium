@@ -42,6 +42,7 @@
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
@@ -731,6 +732,11 @@ void StelMainScriptAPI::quitStellarium()
 	QCoreApplication::exit();
 }
 
+QStringList StelMainScriptAPI::getPropertyList() const
+{
+	return StelApp::getInstance().getStelPropertyManager()->getPropertyList();
+}
+
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
@@ -756,7 +762,7 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map) const
 	QVariantMap::const_iterator i=map.constBegin();
 	while (i != map.constEnd()){
 
-		if (i.value().type()==QMetaType::QString)
+		if (i.value().type()==QVariant::String)
 		{
 			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key()).arg(i.value().toString()));
 		}

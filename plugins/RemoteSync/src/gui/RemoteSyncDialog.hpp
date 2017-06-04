@@ -20,11 +20,12 @@
 #ifndef REMOTESYNCDIALOG_HPP_
 #define REMOTESYNCDIALOG_HPP_
 
+#include <QString>
+#include <QListWidgetItem>
+
 #include "StelDialog.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
-
-#include <QString>
 
 class Ui_remoteSyncDialog;
 class RemoteSync;
@@ -51,8 +52,9 @@ private slots:
 	void updateCheckboxesFromSyncOptions();
 	void checkboxToggled(int id, bool state);
 
-	void setTextboxFromList(const QStringList& list);
-	void setExcludesFromTextbox();
+	void addPropertiesForExclusion();
+	void removePropertiesForExclusion();
+	void populateExclusionLists();
 
 	void setConnectionLostBehavior(int idx);
 	void setQuitBehavior(int idx);
@@ -61,6 +63,7 @@ private:
 	RemoteSync* rs;
 
 	void setAboutHtml();
+	static QStringList listFromItemList(QList<QListWidgetItem*> list);
 };
 
 

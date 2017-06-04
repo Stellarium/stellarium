@@ -965,7 +965,7 @@ void StelOBJ::generateNormals()
 {
 	//Code adapted from old OBJ loader (Andrei Borza)
 
-	const unsigned int *pTriangle = 0;
+	const unsigned int *pTriangle = Q_NULLPTR;
 	Vertex *pVertex0 = Q_NULLPTR;
 	Vertex *pVertex1 = Q_NULLPTR;
 	Vertex *pVertex2 = Q_NULLPTR;
