@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-01 23:04+0700\n"
+"POT-Creation-Date: 2017-06-04 11:40+0700\n"
 "PO-Revision-Date: 2017-05-02 04:25+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-02 05:41+0000\n"
+"X-Launchpad-Export-Date: 2017-06-04 05:38+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -1070,8 +1070,8 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Dĺžka plynového chvosta (odhad): %1 mil. km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1169
-#: src/gui/AstroCalcDialog.cpp:2643 src/translations.h:68
+#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1185
+#: src/gui/AstroCalcDialog.cpp:2659 src/translations.h:68
 msgid "Planets"
 msgstr "Planéty"
 
@@ -1184,7 +1184,7 @@ msgid "Position angle"
 msgstr "Pozičný uhol"
 
 #: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
-#: src/gui/AstroCalcDialog.cpp:1761
+#: src/gui/AstroCalcDialog.cpp:1777
 msgid "Separation"
 msgstr "Uhlová vzdialenosť"
 
@@ -1192,7 +1192,7 @@ msgstr "Uhlová vzdialenosť"
 msgid "Proper motions"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:290
+#: src/core/modules/StarWrapper.cpp:290 src/gui/AstroCalcDialog.cpp:358
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
@@ -1218,7 +1218,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
-#: src/gui/AstroCalcDialog.cpp:755 src/gui/AstroCalcDialog.cpp:1758
+#: src/gui/AstroCalcDialog.cpp:771 src/gui/AstroCalcDialog.cpp:1774
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -2132,7 +2132,7 @@ msgstr "Kontakt"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:187
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:188
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
@@ -2620,7 +2620,7 @@ msgstr "Vývoj pre OSX: %1"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:511
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:189
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Contributors"
 msgstr "Prispievatelia"
 
@@ -2637,7 +2637,7 @@ msgstr ""
 msgid "Windows"
 msgstr "Okná"
 
-#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:429
+#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Quit"
 msgstr "Ukončiť"
 
@@ -2758,7 +2758,7 @@ msgid "FOV"
 msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:743
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:440
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Field of view"
 msgstr "Zorné pole"
 
@@ -3113,15 +3113,15 @@ msgstr "Deklinácia"
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:255 src/gui/AstroCalcDialog.cpp:324
-#: src/gui/AstroCalcDialog.cpp:760
+#: src/gui/AstroCalcDialog.cpp:776
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:947
 msgid "Azimuth"
 msgstr "Azimut"
 
 #. TRANSLATORS: altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:326
-#: src/gui/AstroCalcDialog.cpp:762 src/gui/AstroCalcDialog.cpp:1337
-#: src/gui/AstroCalcDialog.cpp:1738 src/gui/AstroCalcDialog.cpp:1740
+#: src/gui/AstroCalcDialog.cpp:778 src/gui/AstroCalcDialog.cpp:1353
+#: src/gui/AstroCalcDialog.cpp:1754 src/gui/AstroCalcDialog.cpp:1756
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "Výška"
@@ -3204,24 +3204,24 @@ msgstr "Názov"
 
 #. TRANSLATORS: right ascension
 #: src/gui/AstroCalcDialog.cpp:294 src/gui/AstroCalcDialog.cpp:331
-#: src/gui/AstroCalcDialog.cpp:767
+#: src/gui/AstroCalcDialog.cpp:783
 msgid "RA (J2000)"
 msgstr "RA (J2000)"
 
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:296 src/gui/AstroCalcDialog.cpp:333
-#: src/gui/AstroCalcDialog.cpp:769
+#: src/gui/AstroCalcDialog.cpp:785
 msgid "Dec (J2000)"
 msgstr "Dec (J2000)"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:298 src/gui/AstroCalcDialog.cpp:343
-#: src/gui/AstroCalcDialog.cpp:772
+#: src/gui/AstroCalcDialog.cpp:788
 msgid "mag"
 msgstr ""
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:300 src/gui/AstroCalcDialog.cpp:361
+#: src/gui/AstroCalcDialog.cpp:300 src/gui/AstroCalcDialog.cpp:367
 #: src/ui_configurationDialog.h:1329
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Type"
@@ -3247,585 +3247,595 @@ msgctxt "days"
 msgid "d"
 msgstr ""
 
-#. TRANSLATORS: surface brightness
+#. TRANSLATORS: proper motion, milliarc second per year
 #: src/gui/AstroCalcDialog.cpp:358
+msgid "P.M."
+msgstr ""
+
+#. TRANSLATORS: surface brightness
+#: src/gui/AstroCalcDialog.cpp:364
 msgid "S.B."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:384 src/gui/AstroCalcDialog.cpp:557
+#: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:564
 #, qt-format
 msgid "Positions on %1"
 msgstr "Polohy na %1"
 
-#: src/gui/AstroCalcDialog.cpp:459 src/gui/AstroCalcDialog.cpp:2647
+#: src/gui/AstroCalcDialog.cpp:465 src/gui/AstroCalcDialog.cpp:2663
 #: src/ui_viewDialog.h:2255 src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "Galaxie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:460 src/translations.h:115
+#: src/gui/AstroCalcDialog.cpp:466 src/translations.h:115
 #: src/ui_viewDialog.h:2256 src/ui_dsoColorsDialog.h:507
 msgid "Active galaxies"
 msgstr "Aktívne galaxie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:461 src/translations.h:117
+#: src/gui/AstroCalcDialog.cpp:467 src/translations.h:117
 #: src/ui_dsoColorsDialog.h:533
 msgid "Radio galaxies"
 msgstr "Rádiové galaxie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:462 src/translations.h:119
+#: src/gui/AstroCalcDialog.cpp:468 src/translations.h:119
 #: src/ui_viewDialog.h:2250 src/ui_dsoColorsDialog.h:514
 msgid "Interacting galaxies"
 msgstr "Interagujúce galaxie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:463 src/translations.h:121
+#: src/gui/AstroCalcDialog.cpp:469 src/translations.h:121
 msgid "Bright quasars"
 msgstr "Jasné kvazary"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:464 src/gui/AstroCalcDialog.cpp:2648
+#: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:2664
 #: src/translations.h:123 src/ui_viewDialog.h:2253 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "Hviezdokopy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:465 src/translations.h:99
+#: src/gui/AstroCalcDialog.cpp:471 src/translations.h:99
 #: src/ui_dsoColorsDialog.h:500
 msgid "Open star clusters"
 msgstr "Otvorené hviezdokopy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:466 src/translations.h:101
+#: src/gui/AstroCalcDialog.cpp:472 src/translations.h:101
 #: src/ui_dsoColorsDialog.h:536
 msgid "Globular star clusters"
 msgstr "Guľové hviezdokopy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:467 src/translations.h:125
+#: src/gui/AstroCalcDialog.cpp:473 src/translations.h:125
 #: src/ui_dsoColorsDialog.h:485
 msgid "Stellar associations"
 msgstr "Hviezdne asociácie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:468 src/translations.h:127
+#: src/gui/AstroCalcDialog.cpp:474 src/translations.h:127
 #: src/ui_dsoColorsDialog.h:519
 msgid "Star clouds"
 msgstr "Hviezdne oblaky"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:469 src/translations.h:103
+#: src/gui/AstroCalcDialog.cpp:475 src/translations.h:103
 #: src/ui_dsoColorsDialog.h:550
 msgid "Nebulae"
 msgstr "Hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:1182
-#: src/gui/AstroCalcDialog.cpp:2657 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:476 src/gui/AstroCalcDialog.cpp:1198
+#: src/gui/AstroCalcDialog.cpp:2673 src/translations.h:105
 #: src/ui_viewDialog.h:2254 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "Planetárne hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:471 src/gui/AstroCalcDialog.cpp:1184
-#: src/gui/AstroCalcDialog.cpp:2646 src/translations.h:107
+#: src/gui/AstroCalcDialog.cpp:477 src/gui/AstroCalcDialog.cpp:1200
+#: src/gui/AstroCalcDialog.cpp:2662 src/translations.h:107
 #: src/ui_viewDialog.h:2257 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "Tmavé hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:472 src/translations.h:113
+#: src/gui/AstroCalcDialog.cpp:478 src/translations.h:113
 #: src/ui_dsoColorsDialog.h:572
 msgid "Reflection nebulae"
 msgstr "Reflexné hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:473 src/translations.h:129
+#: src/gui/AstroCalcDialog.cpp:479 src/translations.h:129
 #: src/ui_dsoColorsDialog.h:571
 msgid "Bipolar nebulae"
 msgstr "Bipolárne hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:474 src/translations.h:131
+#: src/gui/AstroCalcDialog.cpp:480 src/translations.h:131
 #: src/ui_dsoColorsDialog.h:595
 msgid "Emission nebulae"
 msgstr "Emisné hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:475 src/translations.h:109
+#: src/gui/AstroCalcDialog.cpp:481 src/translations.h:109
 #: src/ui_dsoColorsDialog.h:497
 msgid "Clusters associated with nebulosity"
 msgstr "Hviezdokopy spojené s hmlovinami"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:476 src/translations.h:111
+#: src/gui/AstroCalcDialog.cpp:482 src/translations.h:111
 msgid "HII regions"
 msgstr "Oblasti HII"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:477 src/translations.h:133
+#: src/gui/AstroCalcDialog.cpp:483 src/translations.h:133
 #: src/ui_viewDialog.h:2249 src/ui_dsoColorsDialog.h:614
 msgid "Supernova remnants"
 msgstr "Pozostatky supernov"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:478 src/translations.h:135
+#: src/gui/AstroCalcDialog.cpp:484 src/translations.h:135
 #: src/ui_dsoColorsDialog.h:564
 msgid "Interstellar matter"
 msgstr "Medzihviezdna hmota"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:479 src/translations.h:137
+#: src/gui/AstroCalcDialog.cpp:485 src/translations.h:137
 #: src/ui_dsoColorsDialog.h:489
 msgid "Emission objects"
 msgstr "Žiariace objekty"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:480 src/translations.h:139
+#: src/gui/AstroCalcDialog.cpp:486 src/translations.h:139
 #: src/ui_dsoColorsDialog.h:576
 msgid "BL Lac objects"
 msgstr "Objekty typu BL Lac"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:481 src/translations.h:141
+#: src/gui/AstroCalcDialog.cpp:487 src/translations.h:141
 #: src/ui_dsoColorsDialog.h:535
 msgid "Blazars"
 msgstr "Blazary"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:482 src/translations.h:143
+#: src/gui/AstroCalcDialog.cpp:488 src/translations.h:143
 msgid "Molecular Clouds"
 msgstr "Molekulárne oblaky"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:483 src/translations.h:145
+#: src/gui/AstroCalcDialog.cpp:489 src/translations.h:145
 msgid "Young Stellar Objects"
 msgstr "Mladé hviezdne objekty"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:484 src/translations.h:147
+#: src/gui/AstroCalcDialog.cpp:490 src/translations.h:147
 msgid "Possible Quasars"
 msgstr "Možné kvazary"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:485 src/translations.h:149
+#: src/gui/AstroCalcDialog.cpp:491 src/translations.h:149
 msgid "Possible Planetary Nebulae"
 msgstr "Možné planetárne hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:486 src/translations.h:151
+#: src/gui/AstroCalcDialog.cpp:492 src/translations.h:151
 msgid "Protoplanetary Nebulae"
 msgstr "Protoplanetárne hmloviny"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:487 src/translations.h:153
+#: src/gui/AstroCalcDialog.cpp:493 src/translations.h:153
 #: src/ui_viewDialog.h:2204
 msgid "Messier Catalogue"
 msgstr "Messierov katalóg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:488 src/translations.h:155
+#: src/gui/AstroCalcDialog.cpp:494 src/translations.h:155
 #: src/ui_viewDialog.h:2207
 msgid "Caldwell Catalogue"
 msgstr "Caldwellov katalóg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:489 src/translations.h:157
+#: src/gui/AstroCalcDialog.cpp:495 src/translations.h:157
 msgid "Barnard Catalogue"
 msgstr "Barnardov katalóg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:490 src/translations.h:159
+#: src/gui/AstroCalcDialog.cpp:496 src/translations.h:159
 msgid "Sharpless Catalogue"
 msgstr "Sharplessov katalóg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:491 src/translations.h:161
+#: src/gui/AstroCalcDialog.cpp:497 src/translations.h:161
 msgid "Van den Bergh Catalogue"
 msgstr "Van den Berghov katalóg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:492 src/translations.h:163
+#: src/gui/AstroCalcDialog.cpp:498 src/translations.h:163
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr "Katalóg Rodgersa, Campbella a Whiteoaka"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:493 src/translations.h:165
+#: src/gui/AstroCalcDialog.cpp:499 src/translations.h:165
 msgid "Collinder Catalogue"
 msgstr "Collinderov katalóg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:494 src/translations.h:167
+#: src/gui/AstroCalcDialog.cpp:500 src/translations.h:167
 msgid "Melotte Catalogue"
 msgstr "Melottov katalóg"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:495 src/translations.h:169
+#: src/gui/AstroCalcDialog.cpp:501 src/translations.h:169
 msgid "New General Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:496 src/translations.h:171
+#: src/gui/AstroCalcDialog.cpp:502 src/translations.h:171
 msgid "Index Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:497 src/translations.h:173
+#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:173
 msgid "Lynds' Catalogue of Bright Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:498 src/translations.h:175
+#: src/gui/AstroCalcDialog.cpp:504 src/translations.h:175
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:499 src/ui_viewDialog.h:2231
+#: src/gui/AstroCalcDialog.cpp:505 src/ui_viewDialog.h:2231
 msgid "Principal Galaxy Catalog"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:500 src/ui_viewDialog.h:2234
+#: src/gui/AstroCalcDialog.cpp:506 src/ui_viewDialog.h:2234
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Uppsalský všeobecný katalóg galaxií"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:501 src/translations.h:177
+#: src/gui/AstroCalcDialog.cpp:507 src/translations.h:177
 msgid "Cederblad Catalog"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:502 src/translations.h:179
+#: src/gui/AstroCalcDialog.cpp:508 src/translations.h:179
 msgid "The Catalogue of Peculiar Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:181
+#: src/gui/AstroCalcDialog.cpp:509 src/translations.h:181
 msgid "The Catalogue of Interacting Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:504 src/translations.h:183
+#: src/gui/AstroCalcDialog.cpp:510 src/translations.h:183
 msgid "The Catalogue of Galactic Planetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:505 src/translations.h:185
+#: src/gui/AstroCalcDialog.cpp:511 src/translations.h:185
 msgid "Dwarf galaxies"
 msgstr "Trpasličie galaxie"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:506 src/translations.h:187
+#: src/gui/AstroCalcDialog.cpp:512 src/translations.h:187
 msgid "Herschel 400 Catalogue"
 msgstr "Katalóg Herschel 400"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:507 src/gui/AstroCalcDialog.cpp:2658
+#: src/gui/AstroCalcDialog.cpp:513 src/gui/AstroCalcDialog.cpp:2674
 #: src/translations.h:196
 msgid "Bright double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:508 src/gui/AstroCalcDialog.cpp:2659
+#: src/gui/AstroCalcDialog.cpp:514 src/gui/AstroCalcDialog.cpp:2675
 #: src/translations.h:198
 msgid "Bright variable stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:756 src/ui_dateTimeDialogGui.h:382
+#. TRANSLATORS: Type of stars (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
+msgid "Bright stars with high proper motion"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:772 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr "Juliánsky deň"
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:774
+#: src/gui/AstroCalcDialog.cpp:790
 msgid "phase"
 msgstr ""
 
 #. TRANSLATORS: distance
-#: src/gui/AstroCalcDialog.cpp:776
+#: src/gui/AstroCalcDialog.cpp:792
 msgid "dist."
 msgstr ""
 
 #. TRANSLATORS: elongation
-#: src/gui/AstroCalcDialog.cpp:778
+#: src/gui/AstroCalcDialog.cpp:794
 msgid "elong."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:809
+#: src/gui/AstroCalcDialog.cpp:825
 msgid "Planetocentric distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:811
+#: src/gui/AstroCalcDialog.cpp:827
 msgid "Topocentric distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:812 src/gui/AstroCalcDialog.cpp:1574
+#: src/gui/AstroCalcDialog.cpp:828 src/gui/AstroCalcDialog.cpp:1590
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "AU"
 msgstr "AU"
 
-#: src/gui/AstroCalcDialog.cpp:962 src/gui/AstroCalcDialog.cpp:2029
+#: src/gui/AstroCalcDialog.cpp:978 src/gui/AstroCalcDialog.cpp:2045
 msgid "CSV (Comma delimited)"
 msgstr "CSV (oddelené čiarkou)"
 
-#: src/gui/AstroCalcDialog.cpp:964
+#: src/gui/AstroCalcDialog.cpp:980
 msgid "Save calculated ephemerides as..."
 msgstr "Uložiť vypočítané efemeridy ako..."
 
-#: src/gui/AstroCalcDialog.cpp:1086
+#: src/gui/AstroCalcDialog.cpp:1102
 msgid "10 minutes"
 msgstr "10 minút"
 
-#: src/gui/AstroCalcDialog.cpp:1087
+#: src/gui/AstroCalcDialog.cpp:1103
 msgid "30 minutes"
 msgstr "30 minút"
 
-#: src/gui/AstroCalcDialog.cpp:1088
+#: src/gui/AstroCalcDialog.cpp:1104
 msgid "1 hour"
 msgstr "1 hodina"
 
-#: src/gui/AstroCalcDialog.cpp:1089
+#: src/gui/AstroCalcDialog.cpp:1105
 msgid "6 hours"
 msgstr "6 hodín"
 
-#: src/gui/AstroCalcDialog.cpp:1090
+#: src/gui/AstroCalcDialog.cpp:1106
 msgid "12 hours"
 msgstr "12 hodín"
 
-#: src/gui/AstroCalcDialog.cpp:1091
+#: src/gui/AstroCalcDialog.cpp:1107
 msgid "1 day"
 msgstr "1 deň"
 
-#: src/gui/AstroCalcDialog.cpp:1092
+#: src/gui/AstroCalcDialog.cpp:1108
 msgid "5 days"
 msgstr "5 dní"
 
-#: src/gui/AstroCalcDialog.cpp:1093
+#: src/gui/AstroCalcDialog.cpp:1109
 msgid "10 days"
 msgstr "10 dní"
 
-#: src/gui/AstroCalcDialog.cpp:1094
+#: src/gui/AstroCalcDialog.cpp:1110
 msgid "15 days"
 msgstr "15 dní"
 
-#: src/gui/AstroCalcDialog.cpp:1095
+#: src/gui/AstroCalcDialog.cpp:1111
 msgid "30 days"
 msgstr "30 dní"
 
-#: src/gui/AstroCalcDialog.cpp:1096
+#: src/gui/AstroCalcDialog.cpp:1112
 msgid "60 days"
 msgstr "60 dní"
 
-#: src/gui/AstroCalcDialog.cpp:1168
+#: src/gui/AstroCalcDialog.cpp:1184
 msgid "Solar system"
 msgstr "Slnečná sústava"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1170 src/gui/AstroCalcDialog.cpp:2649
+#: src/gui/AstroCalcDialog.cpp:1186 src/gui/AstroCalcDialog.cpp:2665
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Asteroidy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1171 src/gui/AstroCalcDialog.cpp:2651
+#: src/gui/AstroCalcDialog.cpp:1187 src/gui/AstroCalcDialog.cpp:2667
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr "Plutiná"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1172 src/gui/AstroCalcDialog.cpp:2650
+#: src/gui/AstroCalcDialog.cpp:1188 src/gui/AstroCalcDialog.cpp:2666
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Kométy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1173 src/gui/AstroCalcDialog.cpp:2652
+#: src/gui/AstroCalcDialog.cpp:1189 src/gui/AstroCalcDialog.cpp:2668
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr "Trpasličie planéty"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1174 src/gui/AstroCalcDialog.cpp:2653
+#: src/gui/AstroCalcDialog.cpp:1190 src/gui/AstroCalcDialog.cpp:2669
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr "Kjúbívanos (QB1)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:2654
+#: src/gui/AstroCalcDialog.cpp:1191 src/gui/AstroCalcDialog.cpp:2670
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr "Objekty roztrúseného disku"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1176 src/gui/AstroCalcDialog.cpp:2655
+#: src/gui/AstroCalcDialog.cpp:1192 src/gui/AstroCalcDialog.cpp:2671
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr "Objekty Oortovho oblaku"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1177 src/gui/AstroCalcDialog.cpp:2656
+#: src/gui/AstroCalcDialog.cpp:1193 src/gui/AstroCalcDialog.cpp:2672
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1178
+#: src/gui/AstroCalcDialog.cpp:1194
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Jasné hviezdy (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1179
+#: src/gui/AstroCalcDialog.cpp:1195
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1180
+#: src/gui/AstroCalcDialog.cpp:1196
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1181
+#: src/gui/AstroCalcDialog.cpp:1197
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Jasné hviezdokopy (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1183
+#: src/gui/AstroCalcDialog.cpp:1199
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Jasné hmloviny (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1185
+#: src/gui/AstroCalcDialog.cpp:1201
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Jasné galaxie (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1336 src/gui/AstroCalcDialog.cpp:1738
-#: src/gui/AstroCalcDialog.cpp:1740
+#: src/gui/AstroCalcDialog.cpp:1352 src/gui/AstroCalcDialog.cpp:1754
+#: src/gui/AstroCalcDialog.cpp:1756
 msgid "Local Time"
 msgstr "Miestny čas"
 
-#: src/gui/AstroCalcDialog.cpp:1520
+#: src/gui/AstroCalcDialog.cpp:1536
 msgid "Magnitude vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1523
+#: src/gui/AstroCalcDialog.cpp:1539
 msgid "Phase vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1526
+#: src/gui/AstroCalcDialog.cpp:1542
 msgid "Distance vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1529
+#: src/gui/AstroCalcDialog.cpp:1545
 msgid "Elongation vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1532
+#: src/gui/AstroCalcDialog.cpp:1548
 msgid "Angular size vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1535
+#: src/gui/AstroCalcDialog.cpp:1551
 msgid "Phase angle vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1573
+#: src/gui/AstroCalcDialog.cpp:1589
 msgid "Date"
 msgstr ""
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:1583
+#: src/gui/AstroCalcDialog.cpp:1599
 msgid "Mm"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1595 src/gui/AstroCalcDialog.cpp:1630
+#: src/gui/AstroCalcDialog.cpp:1611 src/gui/AstroCalcDialog.cpp:1646
 msgid "Magnitude"
 msgstr "Magnitúda"
 
-#: src/gui/AstroCalcDialog.cpp:1601 src/gui/AstroCalcDialog.cpp:1636
+#: src/gui/AstroCalcDialog.cpp:1617 src/gui/AstroCalcDialog.cpp:1652
 msgid "Phase"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1606 src/gui/AstroCalcDialog.cpp:1641
+#: src/gui/AstroCalcDialog.cpp:1622 src/gui/AstroCalcDialog.cpp:1657
 #: src/ui_configurationDialog.h:1344
 msgid "Distance"
 msgstr "Vzdialenosť"
 
-#: src/gui/AstroCalcDialog.cpp:1611 src/gui/AstroCalcDialog.cpp:1646
+#: src/gui/AstroCalcDialog.cpp:1627 src/gui/AstroCalcDialog.cpp:1662
 msgid "Elongation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1616 src/gui/AstroCalcDialog.cpp:1651
+#: src/gui/AstroCalcDialog.cpp:1632 src/gui/AstroCalcDialog.cpp:1667
 msgid "Angular size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1621 src/gui/AstroCalcDialog.cpp:1656
+#: src/gui/AstroCalcDialog.cpp:1637 src/gui/AstroCalcDialog.cpp:1672
 msgid "Phase angle"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1732
+#: src/gui/AstroCalcDialog.cpp:1748
 #, qt-format
 msgid "Now about %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1734
+#: src/gui/AstroCalcDialog.cpp:1750
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1757
+#: src/gui/AstroCalcDialog.cpp:1773
 msgid "Phenomenon"
 msgstr "Fenomén"
 
-#: src/gui/AstroCalcDialog.cpp:1759
+#: src/gui/AstroCalcDialog.cpp:1775
 msgid "Object 1"
 msgstr "Objekt 1"
 
-#: src/gui/AstroCalcDialog.cpp:1760
+#: src/gui/AstroCalcDialog.cpp:1776
 msgid "Object 2"
 msgstr "Objekt 2"
 
-#: src/gui/AstroCalcDialog.cpp:2031
+#: src/gui/AstroCalcDialog.cpp:2047
 msgid "Save calculated phenomena as..."
 msgstr "Uložiť vypočítané fenomény ako..."
 
-#: src/gui/AstroCalcDialog.cpp:2070 src/gui/AstroCalcDialog.cpp:2245
-#: src/gui/AstroCalcDialog.cpp:2403
+#: src/gui/AstroCalcDialog.cpp:2086 src/gui/AstroCalcDialog.cpp:2261
+#: src/gui/AstroCalcDialog.cpp:2419
 msgid "Conjunction"
 msgstr "Konjunkcia"
 
-#: src/gui/AstroCalcDialog.cpp:2077
+#: src/gui/AstroCalcDialog.cpp:2093
 msgid "Opposition"
 msgstr "Opozícia"
 
-#: src/gui/AstroCalcDialog.cpp:2085
+#: src/gui/AstroCalcDialog.cpp:2101
 msgid "Transit"
 msgstr "Prechod"
 
-#: src/gui/AstroCalcDialog.cpp:2087 src/gui/AstroCalcDialog.cpp:2250
-#: src/gui/AstroCalcDialog.cpp:2408
+#: src/gui/AstroCalcDialog.cpp:2103 src/gui/AstroCalcDialog.cpp:2266
+#: src/gui/AstroCalcDialog.cpp:2424
 msgid "Occultation"
 msgstr "Zákryt"
 
-#: src/gui/AstroCalcDialog.cpp:2091
+#: src/gui/AstroCalcDialog.cpp:2107
 msgid "Eclipse"
 msgstr "Zatmenie"
 
-#: src/gui/AstroCalcDialog.cpp:2623
+#: src/gui/AstroCalcDialog.cpp:2639
 msgid "In the Evening"
 msgstr "Večer"
 
-#: src/gui/AstroCalcDialog.cpp:2624
+#: src/gui/AstroCalcDialog.cpp:2640
 msgid "In the Morning"
 msgstr "Ráno"
 
-#: src/gui/AstroCalcDialog.cpp:2625
+#: src/gui/AstroCalcDialog.cpp:2641
 msgid "Any Time Tonight"
 msgstr "Kedykoľvek dnes"
 
-#: src/gui/AstroCalcDialog.cpp:2644
+#: src/gui/AstroCalcDialog.cpp:2660
 msgid "Bright stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2645 src/ui_viewDialog.h:2258
+#: src/gui/AstroCalcDialog.cpp:2661 src/ui_viewDialog.h:2258
 msgid "Bright nebulae"
 msgstr "Jasné hmloviny"
 
@@ -3867,7 +3877,7 @@ msgstr "Skripty"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:188
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:189
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
@@ -4061,419 +4071,424 @@ msgid "Interesting variable stars"
 msgstr "Zaujímavé premenné hviezdy"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:203
+#: src/translations.h:205
 msgid "Arabic"
 msgstr "Arabská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:205
+#: src/translations.h:207
 msgid "Arabic Moon Stations"
 msgstr "Arabské mesačné základne"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:207
+#: src/translations.h:209
 msgid "Aztec"
 msgstr "Aztécka"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:209
+#: src/translations.h:211
+msgid "Belarusian"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:213
 msgid "Boorong"
 msgstr "Boorong"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Chinese"
 msgstr "Čínska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "Egyptian"
 msgstr "Egyptská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Inuit"
 msgstr "Inuitská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:217
+#: src/translations.h:221
 msgid "Indian Vedic"
 msgstr "Indiánsko-védske"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:219
+#: src/translations.h:223
 msgid "Japanese Moon Stations"
 msgstr "Japonské mesačné základne"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:221
+#: src/translations.h:225
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroi/Euahlayi"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:223
+#: src/translations.h:227
 msgid "Korean"
 msgstr "Kórejská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:225
+#: src/translations.h:229
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakota/Lakota/Nakota"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:227
+#: src/translations.h:231
 msgid "Macedonian"
 msgstr "Macedónska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:229
+#: src/translations.h:233
 msgid "Maori"
 msgstr "Maorská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:231
+#: src/translations.h:235
 msgid "Mongolian"
 msgstr "Mongolské"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:233
+#: src/translations.h:237
 msgid "Navajo"
 msgstr "Navaho"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:235
+#: src/translations.h:239
 msgid "Norse"
 msgstr "Škandinávska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:237
+#: src/translations.h:241
 msgid "Ojibwe"
 msgstr "Ojibwe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:239
+#: src/translations.h:243
 msgid "Polynesian"
 msgstr "Polynézska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:241
+#: src/translations.h:245
 msgid "Romanian"
 msgstr "Románske"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:243
+#: src/translations.h:247
 msgid "Sami"
 msgstr "Laponská (Saami)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:245
+#: src/translations.h:249
 msgid "Sardinian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:247
+#: src/translations.h:251
 msgid "Siberian"
 msgstr "Sibírske"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:249
+#: src/translations.h:253
 msgid "Tukano"
 msgstr "Tukan"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:251
+#: src/translations.h:255
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:253
+#: src/translations.h:257
 msgid "Tongan"
 msgstr "Tongan"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:255
+#: src/translations.h:259
 msgid "Western"
 msgstr "Západná"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:257
+#: src/translations.h:261
 msgid "Western (H.A.Rey)"
 msgstr "Západné (H. A. Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:263
+#: src/translations.h:267
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:265
+#: src/translations.h:269
 msgid "Trees"
 msgstr "Stromy"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:267 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
+#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
 msgid "Moon"
 msgstr "Mesiac"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:269
+#: src/translations.h:273
 msgid "Hurricane"
 msgstr "Hrebeň Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:271
+#: src/translations.h:275
 msgid "Ocean"
 msgstr "Oceán"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:273
+#: src/translations.h:277
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:275 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
+#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:277 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1298
+#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1298
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
+#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 msgid "Saturn"
 msgstr "Saturn"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:281
+#: src/translations.h:285
 msgid "Uranus"
 msgstr "Urán"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:283
+#: src/translations.h:287
 msgid "Neptune"
 msgstr "Neptún"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:285
+#: src/translations.h:289
 msgid "Geneva"
 msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:287
+#: src/translations.h:291
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:289
+#: src/translations.h:293
 msgid "Zero Horizon"
 msgstr "Plochý horizont"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:294
+#: src/translations.h:298
 msgid "Vienna Sterngarten"
 msgstr "Viedenská Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:296
+#: src/translations.h:300
 msgid "Testscene"
 msgstr "Testovacia scéna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:305
 msgid "Landscape Tour"
 msgstr "Prehliadka terénov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:307
 msgid "Partial Lunar Eclipse"
 msgstr "Čiastočné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:309
 msgid "Total Lunar Eclipse"
 msgstr "Úplné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:311
 msgid "Screensaver"
 msgstr "Šetrič obrazovky"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:313
 msgid "Solar Eclipse 2009"
 msgstr "Zatmenie Slnka 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:315
 msgid "Startup Script"
 msgstr "Skript pri spustení"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:317
 msgid "Zodiac"
 msgstr "Zvieratník"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:319
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Trojitý východ a západ Slnka na Merkúre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:321
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dvojité zatmenie na Deimose v r. 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:323
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dvojité zatmenie na Deimose v r. 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:325
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Zatmenie na Olympus Mons 10. januára 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:327
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Zákryt Zeme a Jupitera v r. 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:329
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 prechody a 2 zatmenia z Deimosu v r. 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:331
 msgid "Solar System Screensaver"
 msgstr "Sporič obrazovky so Slnečnou sústavou"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:333
 msgid "Constellations Tour"
 msgstr "Prehliadka súhvezdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:335
 msgid "Sun from different planets"
 msgstr "Slnko z ostatných planét"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:337
 msgid "Earth best views from other bodies"
 msgstr "Najlepšie pohľady na Zem z iných telies"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:339
 msgid "Transit of Venus"
 msgstr "Prechod Venuše"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:341
 msgid "Sky Culture Tour"
 msgstr "Prehliadka nebeskej kultúry"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:339
+#: src/translations.h:343
 msgid "Earth Events from Mercury"
 msgstr "Úkazy Zeme z Merkúra"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:341
+#: src/translations.h:345
 msgid "Earth Events from a floating city on Venus"
 msgstr "Pozemské úkazy zo vznášajúceho sa mesta v atmosfére Venuše"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:343
+#: src/translations.h:347
 msgid "Earth Events from Mars"
 msgstr "Úkazy Zeme z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:345
+#: src/translations.h:349
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "Najväčšie elongácie Zeme a opozície ostatných planét z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:347
+#: src/translations.h:351
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Najväčšie elongácie a prechody Zeme a Marsu pri pohľade z Kalista."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:353
 msgid "Tycho's Supernova"
 msgstr "Tychónova supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:355
 msgid "Earth and other Planets from Ceres"
 msgstr "Zem a ostatné planéty z Ceresu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:357
 msgid "Messier Objects Tour"
 msgstr "Prehliadka Messierových objektov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:359
 msgid "Binocular Highlights"
 msgstr "To najlepšie pre triéder"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:361
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 zábavných dvojhviezd na pozorovanie voľným okom"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:363
 msgid "List of largest known stars"
 msgstr "Zoznam najväčších známych hviezd"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:361
+#: src/translations.h:365
 msgid "Herschel 400 Tour"
 msgstr "Prehliadka Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:363
+#: src/translations.h:367
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Objekty oblohy pre triédre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:365
+#: src/translations.h:369
 msgid "The Jack Bennett Catalog"
 msgstr "Katalóg Jacka Bennetta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:371
 msgid "Best objects in the New General Catalog"
 msgstr "Najlepšie objekty z katalógu NGC"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:373
+#: src/translations.h:377
 msgid "Look around each installed landscape."
 msgstr "Rozhliadnutie okolo každého nainštalovaného terénu."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:375
+#: src/translations.h:379
 msgid "Look at each installed sky culture."
 msgstr "Prehliadnite si všetky nainštalované kultúry súhvezdí."
 
-#: src/translations.h:376
+#: src/translations.h:380
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript na demonštrovanie čiastočného zatmenia Mesiaca."
 
-#: src/translations.h:377
+#: src/translations.h:381
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript na demonštrovanie úplného zatmenia Mesiaca."
 
-#: src/translations.h:378
+#: src/translations.h:382
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Pomalá, nekonečná prehliadka náhodných objektov na oblohe."
 
-#: src/translations.h:379
+#: src/translations.h:383
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -4481,11 +4496,11 @@ msgstr ""
 "Skript na demonštrovanie úplného zatmenia Slnka, ktoré nastalo v roku 2009 "
 "(poloha=Rangpur, Bangladéš)."
 
-#: src/translations.h:380
+#: src/translations.h:384
 msgid "Script which runs automatically at startup"
 msgstr "Skript, ktorý sa vykoná pri spustení programu"
 
-#: src/translations.h:381
+#: src/translations.h:385
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -4495,7 +4510,7 @@ msgstr ""
 "ktoré ležia pozdĺž čiary, po ktorej sa pohybuje Slnko cez nebeskú sféru "
 "počas roka."
 
-#: src/translations.h:382
+#: src/translations.h:386
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -4504,7 +4519,7 @@ msgstr ""
 "niektorých miestach pozorovať východ a západ Slnka trikrát za jeden deň na "
 "Merkúre."
 
-#: src/translations.h:383
+#: src/translations.h:387
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -4512,7 +4527,7 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Škorpiónom a Strelcom 26. apríla 2017."
 
-#: src/translations.h:384
+#: src/translations.h:388
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -4520,13 +4535,13 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Býkom a Blížencami 23. júla 2031."
 
-#: src/translations.h:385
+#: src/translations.h:389
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Mesiac Fobos prechádza pred Slnkom pri pohľade z hory Olympus Mons 10. "
 "januára 2068."
 
-#: src/translations.h:386
+#: src/translations.h:390
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -4536,7 +4551,7 @@ msgstr ""
 "zákryt oboch telies v rovnaký deň je vzácny úkaz. Takto bude prebiehať "
 "dvojitý zákryt 21. januára 2048. Zobrazenie prebieha reálnou rýchlosťou."
 
-#: src/translations.h:387
+#: src/translations.h:391
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4551,32 +4566,32 @@ msgstr ""
 "Marsom a Deimosom. Keď Fobos opäť vyjde spoza Marsu, stále je ešte zatienený "
 "Marsom, ale po chvíli ho zaleje slnečný svit."
 
-#: src/translations.h:388
+#: src/translations.h:392
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 
-#: src/translations.h:389
+#: src/translations.h:393
 msgid "A tour of the western constellations."
 msgstr "Prechádza súhvezdiami západnej kultúry."
 
-#: src/translations.h:390
+#: src/translations.h:394
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Pohľad na Slnko z veľkých planét Slnečnej sústavy a z Pluta."
 
-#: src/translations.h:391
+#: src/translations.h:395
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Najlepšie pohľady na Zem z iných telies Slnečnej sústavy v priebehu 21. "
 "storočia."
 
-#: src/translations.h:392
+#: src/translations.h:396
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Prechod Venuše pri pohľade z austrálskeho mesta Sydney, 6. júna 2012."
 
-#: src/translations.h:393
+#: src/translations.h:397
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -4584,14 +4599,14 @@ msgstr ""
 "Záblesk supernovy, ktorú pozoroval Tycho Brahe v roku 1572. Musí byť zapnutý "
 "modul Supernovy."
 
-#: src/translations.h:394
+#: src/translations.h:398
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 "Elongácie Zeme a opozície ostatných planét z Marsu v období 2000-3000"
 
-#: src/translations.h:395
+#: src/translations.h:399
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4603,18 +4618,18 @@ msgstr ""
 "pásu Jupitera. Ak niekedy ľudia bukú kolonizovať Jupiterove mesiace, Kalisto "
 "bude naporúdzi."
 
-#: src/translations.h:396
+#: src/translations.h:400
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 "Elongácie Zeme a opozície ostatných planét z Ceresu v období 2000-3000"
 
-#: src/translations.h:397
+#: src/translations.h:401
 msgid "A tour of Messier Objects"
 msgstr "Prehliadka Messierových objektov"
 
-#: src/translations.h:398
+#: src/translations.h:402
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -4623,7 +4638,7 @@ msgstr ""
 "Prehliadka zaujímavých objektov, ktoré sú pozorovateľné triédrom. Údaje v "
 "skripte sú prevzaté zo známej knihy Garyho Seronika."
 
-#: src/translations.h:399
+#: src/translations.h:403
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -4633,15 +4648,15 @@ msgstr ""
 "Jerry Lodriguss a vyšiel v časopise Sky & Telescope 09/2014. Údaje "
 "pochádzajú z jeho stránky http://www.astropix.com/doubles/"
 
-#: src/translations.h:400
+#: src/translations.h:404
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "Skript predvedie najväčšie známe hviezdy."
 
-#: src/translations.h:401
+#: src/translations.h:405
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Prehliadka objektov z katalógu Herschel 400"
 
-#: src/translations.h:402
+#: src/translations.h:406
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -4651,156 +4666,156 @@ msgstr ""
 "pozorovanie triédrom. Skript postupne ukáže 31 objektov zoradených podľa "
 "hodinového uhla (epocha 2000.0)."
 
-#: src/translations.h:403
+#: src/translations.h:407
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:404
+#: src/translations.h:408
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:408
+#: src/translations.h:412
 msgid "&Undo"
 msgstr "V&rátiť späť"
 
-#: src/translations.h:409
+#: src/translations.h:413
 msgid "&Redo"
 msgstr "&Opakovať vrátené"
 
-#: src/translations.h:410
+#: src/translations.h:414
 msgid "Cu&t"
 msgstr "Vys&trihnúť"
 
-#: src/translations.h:411
+#: src/translations.h:415
 msgid "&Copy"
 msgstr "&Kopírovať"
 
-#: src/translations.h:412
+#: src/translations.h:416
 msgid "&Paste"
 msgstr "V&ložiť"
 
-#: src/translations.h:413 plugins/Oculars/src/ui_ocularDialog.h:1164
+#: src/translations.h:417 plugins/Oculars/src/ui_ocularDialog.h:1164
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
 msgid "Delete"
 msgstr "Vymazať"
 
-#: src/translations.h:414
+#: src/translations.h:418
 msgid "Select All"
 msgstr "Vybrať všetko"
 
-#: src/translations.h:415
+#: src/translations.h:419
 msgid "Look in:"
 msgstr "Hľadať v:"
 
-#: src/translations.h:416
+#: src/translations.h:420
 msgid "Directory:"
 msgstr "Priečinok:"
 
-#: src/translations.h:417
+#: src/translations.h:421
 msgid "Folder"
 msgstr "Priečinok"
 
-#: src/translations.h:418
+#: src/translations.h:422
 msgid "&Choose"
 msgstr "&Zvoliť"
 
-#: src/translations.h:419 src/ui_configurationDialog.h:1511
+#: src/translations.h:423 src/ui_configurationDialog.h:1511
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/translations.h:420
+#: src/translations.h:424
 msgid "&Cancel"
 msgstr "&Zrušiť"
 
-#: src/translations.h:421
+#: src/translations.h:425
 msgid "Files of type:"
 msgstr "Súbory typu:"
 
-#: src/translations.h:422
+#: src/translations.h:426
 msgid "Date Modified"
 msgstr "Dátum zmeny"
 
-#: src/translations.h:423
+#: src/translations.h:427
 msgid "Directories"
 msgstr "Priečinky"
 
-#: src/translations.h:424
+#: src/translations.h:428
 msgid "Computer"
 msgstr "Počítač"
 
-#: src/translations.h:425
+#: src/translations.h:429
 msgid "&Open"
 msgstr "&Otvoriť"
 
-#: src/translations.h:426
+#: src/translations.h:430
 msgid "File &name:"
 msgstr "&Názov súboru:"
 
-#: src/translations.h:427
+#: src/translations.h:431
 msgid "Copy &Link Location"
 msgstr "Kopírovať &umiestnenie odkazu"
 
-#: src/translations.h:428
+#: src/translations.h:432
 msgid "Abort"
 msgstr "Zrušiť"
 
-#: src/translations.h:429
+#: src/translations.h:433
 msgid "Ignore"
 msgstr "Ignorovať"
 
-#: src/translations.h:430
+#: src/translations.h:434
 msgid "&Basic colors"
 msgstr "&Základné farby"
 
-#: src/translations.h:431
+#: src/translations.h:435
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:432
+#: src/translations.h:436
 msgid "&Custom colors"
 msgstr "&Vlastné farby"
 
-#: src/translations.h:433
+#: src/translations.h:437
 msgid "&Add to Custom Colors"
 msgstr "Pridať k &vlastným farbám"
 
-#: src/translations.h:434
+#: src/translations.h:438
 msgid "Hu&e:"
 msgstr "Od&tieň:"
 
-#: src/translations.h:435
+#: src/translations.h:439
 msgid "&Sat:"
 msgstr "&Sýtosť:"
 
-#: src/translations.h:436
+#: src/translations.h:440
 msgid "&Val:"
 msgstr "&Hodnota:"
 
-#: src/translations.h:437
+#: src/translations.h:441
 msgid "&Red:"
 msgstr "Če&rvená:"
 
-#: src/translations.h:438
+#: src/translations.h:442
 msgid "&Green:"
 msgstr "Ze&lená:"
 
-#: src/translations.h:439
+#: src/translations.h:443
 msgid "Bl&ue:"
 msgstr "Mo&drá:"
 
-#: src/translations.h:440
+#: src/translations.h:444
 msgid "Select Color"
 msgstr "Vyberte farbu"
 
-#: src/translations.h:441
+#: src/translations.h:445
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kurzor na %1, %2 Zrušíte stlačením ESC"
@@ -5832,7 +5847,7 @@ msgstr "Obnoviť"
 
 #: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:437
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Location"
 msgstr "Zemepisná poloha"
 
@@ -8330,7 +8345,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
@@ -8347,7 +8362,7 @@ msgstr "Linky"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
@@ -8369,7 +8384,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
@@ -8388,7 +8403,7 @@ msgstr "Ak máte otázku, odpoveď môžete %1získať tu%2"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -8407,7 +8422,7 @@ msgstr "Chyby môžete ohlásiť %1tu%2."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
@@ -8422,7 +8437,7 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -8483,7 +8498,7 @@ msgstr "Uhly zobrazovať vo formáte dms (minúty a sekundy)"
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:250
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:446
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
@@ -8502,7 +8517,7 @@ msgstr "Obnoviť pôvodné nastavenia"
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:261
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:445
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:514
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:410
@@ -9305,77 +9320,77 @@ msgstr ""
 "použije sa predvolený súbor"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2007
+#: plugins/Satellites/src/Satellites.cpp:2006
 msgid "visual"
 msgstr "Viditeľné"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2009
+#: plugins/Satellites/src/Satellites.cpp:2008
 msgid "scientific"
 msgstr "Vedecké"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2011
+#: plugins/Satellites/src/Satellites.cpp:2010
 msgid "communications"
 msgstr "Komunikačné"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2013
+#: plugins/Satellites/src/Satellites.cpp:2012
 msgid "navigation"
 msgstr "Navigačné"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2015
+#: plugins/Satellites/src/Satellites.cpp:2014
 msgid "amateur"
 msgstr "Amatérske"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2017
+#: plugins/Satellites/src/Satellites.cpp:2016
 msgid "weather"
 msgstr "Meterologické"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2019
+#: plugins/Satellites/src/Satellites.cpp:2018
 msgid "geostationary"
 msgstr "Geostacionárne"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2021
+#: plugins/Satellites/src/Satellites.cpp:2020
 msgid "non-operational"
 msgstr "Nefunkčné"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2023
+#: plugins/Satellites/src/Satellites.cpp:2022
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2025
+#: plugins/Satellites/src/Satellites.cpp:2024
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2027
+#: plugins/Satellites/src/Satellites.cpp:2026
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2029
+#: plugins/Satellites/src/Satellites.cpp:2028
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2031
+#: plugins/Satellites/src/Satellites.cpp:2030
 msgid "stations"
 msgstr "stanice"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2033
+#: plugins/Satellites/src/Satellites.cpp:2032
 msgid "education"
 msgstr "vzdelávacie"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2035
+#: plugins/Satellites/src/Satellites.cpp:2034
 msgid "observatory"
 msgstr "observatóriá"
 
@@ -9385,57 +9400,57 @@ msgstr "observatóriá"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2045
+#: plugins/Satellites/src/Satellites.cpp:2044
 msgid "The Hubble Space Telescope"
 msgstr "Hubblov vesmírny teleskop"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2047
+#: plugins/Satellites/src/Satellites.cpp:2046
 msgid "The International Space Station"
 msgstr "Medzinárodná vesmírna stanica"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2049
+#: plugins/Satellites/src/Satellites.cpp:2048
 msgid "China's first space station"
 msgstr "prvá čínska vesmírna stanica"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2051
+#: plugins/Satellites/src/Satellites.cpp:2050
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2053
+#: plugins/Satellites/src/Satellites.cpp:2052
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2055
+#: plugins/Satellites/src/Satellites.cpp:2054
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2059
+#: plugins/Satellites/src/Satellites.cpp:2058
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2061
+#: plugins/Satellites/src/Satellites.cpp:2060
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2063
+#: plugins/Satellites/src/Satellites.cpp:2062
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2065
+#: plugins/Satellites/src/Satellites.cpp:2064
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2067
+#: plugins/Satellites/src/Satellites.cpp:2066
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -9853,7 +9868,7 @@ msgid "Select TLE Update File"
 msgstr "Vyberte súbor s novými TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Time"
 msgstr "Čas"
 
@@ -9980,7 +9995,7 @@ msgstr "Realistický režim umelých družíc"
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:251
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:447
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
@@ -12641,7 +12656,7 @@ msgid "Not active."
 msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:411
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:456
 msgid "Remote Control Configuration"
 msgstr ""
 
@@ -12689,7 +12704,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr ""
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:432
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
 msgid "Remote Sync"
 msgstr ""
 
@@ -12699,176 +12714,200 @@ msgid ""
 "a network. See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:111
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:112
 #, qt-format
 msgid "ERROR: %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:128
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:417
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:129
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:462
 msgid "Start server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:133
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:420
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:134
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Connect to server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:136
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
 msgid "Not running"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:147
 #, qt-format
 msgid "Running as server on port %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:160
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
 msgid "Cancel connecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:162
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
 msgid "Disconnecting..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
 msgid "Disconnect from server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:187
 msgid "Remote Sync Plug-in"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid "See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:235
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:236
 msgid "Server Name"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:243
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:244
 msgid "Server not active."
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:412
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:457
 msgid "Remote Sync Plug-in Configuration"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:414
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
 msgstr "Stav:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:416
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
 msgid "Server mode"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:418
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:423
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Server port"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:419
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Client mode"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:421
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Server host address/name"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:422
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "127.0.0.1"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:424
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "When connection is lost"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:427
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
 msgid "Do nothing"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:428
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Try reconnecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:431
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "When server quits"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:433
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "Changes on this page require a re-connection to the server"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:434
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Settings applied on this client"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:435
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Selection"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:438
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "StelProperty"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:439
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "View direction"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:441
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "Property filters"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:442
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Exclude GUI-related properties"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
+msgid "These are all available properties."
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
+msgid "-->"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
+msgid "<--"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
+msgid "These are the properties currently excluded from synchronisation."
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
+msgid "Excluded Properties"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
+msgid "Synchronized Properties"
+msgstr ""
+
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
 msgid "Client settings"
 msgstr ""
 
