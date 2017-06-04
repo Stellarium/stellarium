@@ -171,13 +171,11 @@ Planet::Planet(const QString& englishName,
 	       Vec3f halocolor,
 	       float albedo,
 	       float roughness,
-	       //float outgas_intensity,
-	       //float outgas_falloff,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
 	       const QString& aobjModelName,
 	       posFuncType coordFunc,
-	       void* auserDataPtr,
+	       void* anOrbitPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool acloseOrbit,
 	       bool hidden,
@@ -214,7 +212,7 @@ Planet::Planet(const QString& englishName,
 	  sphereScale(1.f),
 	  lastJDE(J2000),
 	  coordFunc(coordFunc),
-	  userDataPtr(auserDataPtr),
+	  orbitPtr(anOrbitPtr),
 	  osculatingFunc(osculatingFunc),
 	  parent(Q_NULLPTR),
 	  flagLabels(true),
@@ -226,10 +224,13 @@ Planet::Planet(const QString& englishName,
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
 	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
-	if (pType != isComet)
+	// 0.16: Ensure type is always given!
+	if (pType==Planet::isUNDEFINED)
 	{
-		outgas_intensity=0.f;
+		qCritical() << "Planet " << englishName << "has no type. Please edit one of ssystem_major.ini or ssystem_minor.ini to ensure operation.";
+		exit(-1);
 	}
+	Q_ASSERT(pType != Planet::isUNDEFINED);
 
 	//only try loading textures when there is actually something to load!
 	//prevents some overhead when starting
@@ -264,6 +265,7 @@ void Planet::init()
 	pTypeMap.insert(Planet::isStar,		"star");
 	pTypeMap.insert(Planet::isPlanet,	"planet");
 	pTypeMap.insert(Planet::isMoon,		"moon");
+	pTypeMap.insert(Planet::isObserver,	"observer");
 	pTypeMap.insert(Planet::isAsteroid,	"asteroid");
 	pTypeMap.insert(Planet::isPlutino,	"plutino");
 	pTypeMap.insert(Planet::isComet,	"comet");
@@ -654,7 +656,7 @@ void Planet::computePositionWithoutOrbits(const double dateJDE)
 {
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
-		coordFunc(dateJDE, eclipticPos, userDataPtr);
+		coordFunc(dateJDE, eclipticPos, orbitPtr);
 		lastJDE = dateJDE;
 	}
 }
@@ -771,7 +773,7 @@ void Planet::computePosition(const double dateJDE)
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos, userDataPtr);
+						coordFunc(calc_date, eclipticPos, orbitPtr);
 					}
 					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
@@ -801,7 +803,7 @@ void Planet::computePosition(const double dateJDE)
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos, userDataPtr);
+						coordFunc(calc_date, eclipticPos, orbitPtr);
 					}
 					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
@@ -830,7 +832,7 @@ void Planet::computePosition(const double dateJDE)
 				}
 				else
 				{
-					coordFunc(calc_date, eclipticPos, userDataPtr);
+					coordFunc(calc_date, eclipticPos, orbitPtr);
 				}
 				orbitP[d] = eclipticPos;
 				orbit[d] = getHeliocentricEclipticPos();
@@ -842,7 +844,7 @@ void Planet::computePosition(const double dateJDE)
 
 
 		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, userDataPtr);
+		coordFunc(dateJDE, eclipticPos, orbitPtr);
 
 		lastJDE = dateJDE;
 
@@ -850,7 +852,7 @@ void Planet::computePosition(const double dateJDE)
 	else if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, userDataPtr);
+		coordFunc(dateJDE, eclipticPos, orbitPtr);
 		if (orbitFader.getInterstate()>0.000001)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 				orbit[d]=getHeliocentricPos(orbitP[d]);
@@ -1136,8 +1138,8 @@ float Planet::getMeanOppositionMagnitude() const
 		semimajorAxis=39.48211675;
 	else if (pType>= isAsteroid)
 	{
-		if (userDataPtr)
-			semimajorAxis=((CometOrbit*)userDataPtr)->getSemimajorAxis();
+		if (orbitPtr)
+			semimajorAxis=((CometOrbit*)orbitPtr)->getSemimajorAxis();
 	}
 
 	if (semimajorAxis>0.)
