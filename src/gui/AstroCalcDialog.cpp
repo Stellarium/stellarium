@@ -352,6 +352,12 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		//TRANSLATORS: period, days
 		positionsHeader << QString("%1, %2").arg(q_("Per."), qc_("d", "days"));
 	}
+	else if (celType==172)
+	{
+		//TRANSLATORS: proper motion, arcsecond per year
+		positionsHeader << QString("%1, %2").arg(q_("P.M."), qc_("\"/yr", "arcsecond per year"));
+
+	}
 	else
 	{
 		//TRANSLATORS: surface brightness
@@ -499,10 +505,14 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Principal Galaxy Catalog"), "112");
 	category->addItem(q_("The Uppsala General Catalogue of Galaxies"), "113");
 	category->addItem(q_("Cederblad Catalog"), "114");
+	category->addItem(q_("The Catalogue of Peculiar Galaxies"), "115");
+	category->addItem(q_("The Catalogue of Interacting Galaxies"), "116");
+	category->addItem(q_("The Catalogue of Galactic Planetary Nebulae"), "117");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");
 	category->addItem(q_("Bright variable stars"), "171");
+	category->addItem(q_("Bright stars with high proper motion"), "172");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -617,22 +627,31 @@ void AstroCalcDialog::currentCelestialPositions()
 	else
 	{
 		// stars
-		QString sType = "star";
-		QList<starData> celestialObjects;
+		QString sType = q_("star");
+		QString sToolTip = "";
+		float wdsSep;
+		QList<StelACStarData> celestialObjects;
 		if (celTypeId==170)
 		{
 			// double stars
 			celestialObjects = starMgr->getHipparcosDoubleStars();
-			sType = "double star";
+			sType = q_("double star");
 		}
-		else
+		else if (celTypeId==171)
 		{
 			// variable stars
 			celestialObjects = starMgr->getHipparcosVariableStars();
-			sType = "variable star";
+			sType = q_("variable star");
+		}
+		else
+		{
+			// stars with high proper motion
+			celestialObjects = starMgr->getHipparcosHighPMStars();
+			sType = q_("star with high proper motion");
+
 		}
 
-		foreach (const starData& star, celestialObjects)
+		foreach (const StelACStarData& star, celestialObjects)
 		{
 			StelObjectP obj = star.firstKey();
 			if (obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
@@ -656,15 +675,21 @@ void AstroCalcDialog::currentCelestialPositions()
 					decStr = StelUtils::radToDmsStr(dec, true);
 				}
 
-				if (celTypeId==170)
-					extra = QString::number(star.value(obj), 'f', 3); // arcseconds
-				else
+				if (celTypeId==170) // double stars
+				{
+					wdsSep = star.value(obj);
+					extra = QString::number(wdsSep, 'f', 3); // arcseconds
+					sToolTip = StelUtils::decDegToDmsStr(wdsSep/3600.f);
+				}
+				else if (celTypeId==171) // variable stars
 				{
 					if (star.value(obj)>0.f)
 						extra = QString::number(star.value(obj), 'f', 5); // days
 					else
 						extra = QChar(0x2014); // dash
 				}
+				else // stars with high proper motion
+					extra = QString::number(star.value(obj), 'f', 5); // "/yr
 
 
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
@@ -678,8 +703,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-				treeItem->setToolTip(CColumnExtra, "");
-				treeItem->setText(CColumnType, q_(sType));
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, sType);
 			}
 		}
 	}
@@ -1809,9 +1834,9 @@ void AstroCalcDialog::calculatePhenomena()
 	star.clear();
 	doubleStar.clear();
 	variableStar.clear();
-	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
-	QList<starData> doubleHipStars = starMgr->getHipparcosDoubleStars();
-	QList<starData> variableHipStars = starMgr->getHipparcosVariableStars();
+	QList<StelObjectP> hipStars = starMgr->getHipparcosStars();	
+	QList<StelACStarData> doubleHipStars = starMgr->getHipparcosDoubleStars();
+	QList<StelACStarData> variableHipStars = starMgr->getHipparcosVariableStars();
 
 	int obj2Type = ui->object2ComboBox->currentData().toInt();
 	switch (obj2Type)
@@ -1894,14 +1919,14 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 			break;
 		case 11: // Double stars
-			foreach(const starData& object, doubleHipStars)
+			foreach(const StelACStarData& object, doubleHipStars)
 			{
 				if (object.firstKey()->getVMagnitude(core)<(brightLimit-5.0f))
 					star.append(object.firstKey());
 			}
 			break;
 		case 12: // Variable stars
-			foreach(const starData& object, variableHipStars)
+			foreach(const StelACStarData& object, variableHipStars)
 			{
 				if (object.firstKey()->getVMagnitude(core)<(brightLimit-5.0f))
 					star.append(object.firstKey());
@@ -2675,8 +2700,8 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<PlanetP> allObjects = solarSystem->getAllPlanets();
 		QVector<NebulaP> allDSO = dsoMgr->getAllDeepSkyObjects();
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
-		QList<starData> dblHipStars = starMgr->getHipparcosDoubleStars();
-		QList<starData> varHipStars = starMgr->getHipparcosVariableStars();
+		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
+		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
 
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
 		double highLimit = 6.0;
@@ -2921,7 +2946,7 @@ void AstroCalcDialog::calculateWutObjects()
 				}
 				break;
 			case 15: // Bright double stars
-				foreach(const starData& dblStar, dblHipStars)
+				foreach(const StelACStarData& dblStar, dblHipStars)
 				{
 					StelObjectP object = dblStar.firstKey();
 					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
@@ -2934,7 +2959,7 @@ void AstroCalcDialog::calculateWutObjects()
 				}
 				break;
 			case 16: // Bright variale stars
-				foreach(const starData& varStar, varHipStars)
+				foreach(const StelACStarData& varStar, varHipStars)
 				{
 					StelObjectP object = varStar.firstKey();
 					if (object->getVMagnitudeWithExtinction(core)<=magLimit)

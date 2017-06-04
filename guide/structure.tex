@@ -85,7 +85,10 @@
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
 \newcommand{\name}[1]{\textsc{#1}\index{#1}}
 %% Some new term that is presented here with emphasis and also goes immediately to the index. 
-\newcommand{\indexterm}[1]{\emph{#1}\index{#1}}
+%% If you want to have a different argument for the index command, use an optional first argument here. (E.g. different capitalisation, or index structuring, ...)
+%\newcommand{\indexterm}[1]{\emph{#2}\index{#2}}
+\newcommand{\indexterm}[2][]{%
+	\ifthenelse{\equal{#1}{}}{\emph{#2}\index{#2}}{\emph{#2}\index{#1}}}
 
 %% A command to show the version number when a feature was introduced in the margin. Give only the version number. TODO Decide on formatting etc.
 \newcommand{\newFeature}[1]{\marginpar{#1}}

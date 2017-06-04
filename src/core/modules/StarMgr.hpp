@@ -62,6 +62,8 @@ typedef struct
 	float separation;	//! Separation at date of last satisfactory observation, arcsec
 } wds;
 
+typedef QMap<StelObjectP, float> StelACStarData;
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
@@ -333,7 +335,8 @@ public:
 	bool checkAndLoadCatalog(const QVariantMap& m);
 
 	//! Get the list of all Hipparcos stars.
-	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }
+	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
+	const QList<QMap<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
 	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }
 	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
 
@@ -352,9 +355,6 @@ signals:
 	void labelsAmountChanged(float a);
 
 private:
-
-	typedef QMap<StelObjectP, float> starData;
-
 	void setCheckFlag(const QString& catalogId, bool b);
 
 	void copyDefaultConfigFile();
@@ -397,7 +397,7 @@ private:
 
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars;
-	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars;
+	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, hipStarsHighPM;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;

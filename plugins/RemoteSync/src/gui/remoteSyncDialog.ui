@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>644</width>
-    <height>545</height>
+    <width>634</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -461,7 +461,66 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QPlainTextEdit" name="textStelPropertyExclude"/>
+           <layout class="QGridLayout" name="gridLayoutMoveToGroupbox2">
+            <item row="1" column="0">
+             <widget class="QListWidget" name="listWidgetAllProperties">
+              <property name="toolTip">
+               <string>These are all available properties.</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <layout class="QVBoxLayout" name="verticalLayoutExclusionButtons">
+              <property name="topMargin">
+               <number>120</number>
+              </property>
+              <property name="bottomMargin">
+               <number>120</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="pushButtonSelectProperties">
+                <property name="text">
+                 <string notr="true">--&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonDeselectProperties">
+                <property name="text">
+                 <string notr="true">&lt;--</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="2">
+             <widget class="QListWidget" name="listWidgetSelectedProperties">
+              <property name="toolTip">
+               <string>These are the properties currently excluded from synchronisation.</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="labelExcluded">
+              <property name="text">
+               <string>Excluded Properties</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelSynced">
+              <property name="text">
+               <string>Synchronized Properties</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_5">

@@ -160,6 +160,7 @@ SerialPort::~SerialPort(void)
 		// restore original settings
 		tcsetattr(fd, TCSANOW, &termios_original);
 		close(fd);
+		fd=INVALID_SOCKET; // fix Coverity 48939?
 	}
 #endif
 }

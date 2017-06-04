@@ -51,7 +51,7 @@ public:
 	};
 	Q_DECLARE_FLAGS(SyncOptions, SyncOption)
 
-	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = 0);
+	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = Q_NULLPTR);
 	virtual ~SyncClient();
 
 	QString errorString() const { return errorStr; }
@@ -74,7 +74,7 @@ private:
 	void checkTimeout();
 
 	SyncOptions options;
-	QStringList stelPropFilter;
+	QStringList stelPropFilter; // list of excluded properties
 	QString errorStr;
 	bool isConnecting;
 	SyncRemotePeer* server;

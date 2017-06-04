@@ -456,7 +456,7 @@ void Novae::setNovaeMap(const QVariantMap& map)
 	}
 }
 
-int Novae::getJsonFileVersion(void)
+int Novae::getJsonFileVersion(void) const
 {	
 	int jsonVersion = -1;
 	QFile novaeJsonFile(novaeJsonPath);
@@ -478,7 +478,7 @@ int Novae::getJsonFileVersion(void)
 	return jsonVersion;
 }
 
-bool Novae::checkJsonFileFormat()
+bool Novae::checkJsonFileFormat() const
 {
 	QFile novaeJsonFile(novaeJsonPath);
 	if (!novaeJsonFile.open(QIODevice::ReadOnly))
@@ -656,7 +656,7 @@ void Novae::displayMessage(const QString& message, const QString hexColor)
 	messageTimer->start();
 }
 
-void Novae::messageTimeout(void)
+void Novae::messageTimeout(void) const
 {
 	foreach(int i, messageIDs)
 	{

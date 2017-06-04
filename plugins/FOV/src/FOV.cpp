@@ -170,7 +170,7 @@ void FOV::setQuickFOV(const double value, const int item)
 	FOVitem[item] = value;
 }
 
-void FOV::setFOV(const int idx)
+void FOV::setFOV(const int idx) const
 {
 	StelMovementMgr *movementManager = StelApp::getInstance().getCore()->getMovementMgr();
 	movementManager->zoomTo(getQuickFOV(idx), 1.f); // One second for zooming

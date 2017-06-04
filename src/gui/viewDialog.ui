@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
-    <height>628</height>
+    <width>755</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="font">
@@ -1417,6 +1417,45 @@
                </property>
                <property name="text">
                 <string notr="true">Ced</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QCheckBox" name="checkBoxArp">
+               <property name="toolTip">
+                <string>Atlas of Peculiar Galaxies (Arp, 1966)</string>
+               </property>
+               <property name="text">
+                <string notr="true">Arp</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="5">
+              <widget class="QCheckBox" name="checkBoxVV">
+               <property name="toolTip">
+                <string>The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)</string>
+               </property>
+               <property name="text">
+                <string notr="true">VV</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="5">
+              <widget class="QCheckBox" name="checkBoxPK">
+               <property name="toolTip">
+                <string>The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)</string>
+               </property>
+               <property name="text">
+                <string notr="true">PK</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -3355,12 +3394,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

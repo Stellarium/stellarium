@@ -58,7 +58,7 @@ public:
 		Mark
 	};
 
-	MainService(QObject* parent = 0);
+	MainService(QObject* parent = Q_NULLPTR);
 
 	//! Used to implement move functionality
 	virtual void update(double deltaTime) Q_DECL_OVERRIDE;

@@ -66,7 +66,7 @@ private:
 	friend class StelApp;
 
 	//! Private constructor, use StelApp::getTextureManager for the correct instance
-	StelTextureMgr(QObject* parent = 0);
+	StelTextureMgr(QObject* parent = Q_NULLPTR);
 
 	unsigned int glMemoryUsage;
 

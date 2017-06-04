@@ -260,6 +260,9 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 	if (!hintFader)
 		return result;
 
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return result;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
@@ -289,6 +292,10 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return Q_NULLPTR;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 	
@@ -316,6 +323,10 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return Q_NULLPTR;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 
@@ -356,6 +367,10 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 		return Q_NULLPTR;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return Q_NULLPTR;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return Q_NULLPTR;
 	
@@ -385,6 +400,10 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 		return result;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return result;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
@@ -436,6 +455,10 @@ QStringList Satellites::listAllObjects(bool inEnglish) const
 		return result;
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return result;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return result;
 
@@ -656,6 +679,8 @@ void Satellites::loadSettings()
 
 	Satellite::invisibleSatelliteColor = StelUtils::strToVec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString());
 
+	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
+
 	// realistic mode
 	setFlagRelisticMode(conf->value("realistic_mode_enabled", true).toBool());
 
@@ -732,7 +757,6 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 		path = catalogPath;
 
 	QFile jsonFile(path);
-	StelJsonParser parser;
 
 	if (jsonFile.exists())
 		jsonFile.remove();
@@ -745,7 +769,7 @@ bool Satellites::saveDataMap(const QVariantMap& map, QString path)
 	else
 	{
 		qDebug() << "[Satellites] writing to:" << QDir::toNativeSeparators(path);
-		parser.write(map, &jsonFile);
+		StelJsonParser::write(map, &jsonFile);
 		jsonFile.close();
 		return true;
 	}
@@ -873,7 +897,7 @@ void Satellites::addGroup(const QString& groupId)
 	groups.insert(groupId);
 }
 
-QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis)
+QHash<QString,QString> Satellites::getSatellites(const QString& group, Status vis) const
 {
 	QHash<QString,QString> result;
 
@@ -902,7 +926,7 @@ SatellitesListModel* Satellites::getSatellitesListModel()
 	return satelliteListModel;
 }
 
-SatelliteP Satellites::getById(const QString& id)
+SatelliteP Satellites::getById(const QString& id) const
 {
 	foreach(const SatelliteP& sat, satellites)
 	{
@@ -912,7 +936,7 @@ SatelliteP Satellites::getById(const QString& id)
 	return SatelliteP();
 }
 
-QStringList Satellites::listAllIds()
+QStringList Satellites::listAllIds() const
 {
 	QStringList result;
 	foreach(const SatelliteP& sat, satellites)
@@ -1060,7 +1084,7 @@ void Satellites::saveTleSources(const QStringList& urls)
 	conf->endGroup();
 }
 
-bool Satellites::getFlagLabels()
+bool Satellites::getFlagLabels() const
 {
 	return Satellite::showLabels;
 }
@@ -1092,7 +1116,7 @@ void Satellites::enableAutoRemove(bool enabled)
 	}
 }
 
-bool Satellites::getFlagRealisticMode()
+bool Satellites::getFlagRealisticMode() const
 {
 	return Satellite::realisticModeFlag;
 }
@@ -1308,7 +1332,7 @@ void Satellites::setOrbitLinesFlag(bool b)
 	Satellite::orbitLinesFlag = b;
 }
 
-bool Satellites::getOrbitLinesFlag()
+bool Satellites::getOrbitLinesFlag() const
 {
 	return Satellite::orbitLinesFlag;
 }
@@ -1620,6 +1644,10 @@ void Satellites::update(double deltaTime)
 		return;
 
 	StelCore *core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return;
+
 	if (core->getCurrentPlanet() != earth || !isValidRangeDates(core))
 		return;
 
@@ -1638,10 +1666,13 @@ void Satellites::draw(StelCore* core)
 	if (!hintFader && hintFader.getInterstate() <= 0.)
 		return;
 
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return;
+
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return;
 
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionAuto);
+	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
@@ -1652,7 +1683,7 @@ void Satellites::draw(StelCore* core)
 	foreach (const SatelliteP& sat, satellites)
 	{
 		if (sat && sat->initialized && sat->displayed)
-			sat->draw(core, painter, 1.0);
+			sat->draw(core, painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -1956,7 +1987,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		predictionJD = nextJD;
 	}
 
-	Satellite::timeShift = 0.;
+	//Satellite::timeShift = 0.;
 	if (isTimeNow)
 		pcore->setTimeNow();
 	else

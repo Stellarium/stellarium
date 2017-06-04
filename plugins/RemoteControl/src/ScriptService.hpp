@@ -32,7 +32,7 @@ class ScriptService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	ScriptService(QObject* parent = 0);
+	ScriptService(QObject* parent = Q_NULLPTR);
 
 	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("scripts"); }
 	//! @brief Implements the HTTP GET method

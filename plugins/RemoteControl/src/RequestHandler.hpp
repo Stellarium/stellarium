@@ -37,7 +37,7 @@ public:
 	//! and an APIController.
 	//!
 	//! To see the default services that are registered here, see \ref rcApiReference.
-	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = 0);
+	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = Q_NULLPTR);
 	//! The internal APIController, and all registered services are deleted
 	virtual ~RequestHandler();
 

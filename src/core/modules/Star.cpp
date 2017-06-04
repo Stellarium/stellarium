@@ -55,7 +55,7 @@ int Star1::hasComponentID(void) const
 	return 0;
 }
 
-void Star1::print(void)
+void Star1::print(void) const
 {
 	qDebug() << "hip: " << getHip()
 		 << ", componentIds: " << getComponentIds()
@@ -69,7 +69,7 @@ void Star1::print(void)
 		 << ", plx: " << getPlx();
 }
 
-void Star2::print(void)
+void Star2::print(void) const
 {
 	qDebug() << "x0: " << getX0()
 		 << ", x1: " << getX1()
