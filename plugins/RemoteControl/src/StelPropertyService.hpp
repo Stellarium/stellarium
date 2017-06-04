@@ -33,7 +33,7 @@ class StelPropertyService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	StelPropertyService(QObject* parent = 0);
+	StelPropertyService(QObject* parent = Q_NULLPTR);
 
 	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("stelproperty"); }
 	//! @brief Implements the HTTP GET method

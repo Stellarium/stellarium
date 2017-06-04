@@ -135,7 +135,6 @@ ArchaeoLines::ArchaeoLines()
 	conf = StelApp::getInstance().getSettings();
 
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
-
 }
 
 ArchaeoLines::~ArchaeoLines()
@@ -980,10 +979,10 @@ void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
 }
 
 // called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
-QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
+QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine) const
 {
 	QColor color(0,0,0);
-	Vec3f* vColor;
+	const Vec3f* vColor;
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
 			vColor=&equinoxColor;
@@ -1049,7 +1048,7 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
 	return color;
 }
 
-double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine)
+double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine) const
 {
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
@@ -1116,7 +1115,7 @@ double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine)
 	return -100.0;
 }
 
-QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine)
+QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 {
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
@@ -1181,7 +1180,7 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine)
 	}
 }
 
-double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget) const
+double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
 {
 	longObs    *= (M_PI/180.0);
 	latObs     *= (M_PI/180.0);
@@ -1438,4 +1437,29 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
+}
+
+void ArchaeoLine::setColor(const Vec3f& c)
+{
+	if (c!=color)
+	{
+		color = c;
+		emit colorChanged(c);
+	}
+}
+void ArchaeoLine::setDefiningAngle(double angle)
+{
+	if (angle != definingAngle)
+	{
+		definingAngle=angle;
+		emit definingAngleChanged(angle);
+	}
+}
+void ArchaeoLine::setLabelVisible(bool b)
+{
+	if (b!=flagLabel)
+	{
+		flagLabel=b;
+		emit flagLabelChanged(b);
+	}
 }

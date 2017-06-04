@@ -33,7 +33,7 @@ HttpConnectionHandlerPool::~HttpConnectionHandlerPool()
 
 HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler()
 {
-    HttpConnectionHandler* freeHandler=0;
+    HttpConnectionHandler* freeHandler=Q_NULLPTR;
     mutex.lock();
     // find a free handler in pool
     foreach(HttpConnectionHandler* handler, pool)

@@ -1,6 +1,7 @@
 ADD_SUBDIRECTORY( arabic )
 ADD_SUBDIRECTORY( arabic_moon_stations )
 ADD_SUBDIRECTORY( aztec )
+ADD_SUBDIRECTORY( belarusian )
 ADD_SUBDIRECTORY( boorong )
 ADD_SUBDIRECTORY( chinese )
 ADD_SUBDIRECTORY( dakota )

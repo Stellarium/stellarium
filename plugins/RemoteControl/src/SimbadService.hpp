@@ -34,7 +34,7 @@ class SimbadService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	SimbadService(QObject* parent = 0);
+	SimbadService(QObject* parent = Q_NULLPTR);
 
 	//! Simbad lookups dont block the main thread
 	virtual bool isThreadSafe() const Q_DECL_OVERRIDE { return true; }

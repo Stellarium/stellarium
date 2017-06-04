@@ -523,7 +523,7 @@ void TelescopeDialog::addModelRow(int number,
 {
 	Q_ASSERT(telescopeListModel);
 	
-	QStandardItem* tempItem = 0;
+	QStandardItem* tempItem = Q_NULLPTR;
 	int lastRow = telescopeListModel->rowCount();
 	// Number
 	tempItem = new QStandardItem(QString::number(number));

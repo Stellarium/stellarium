@@ -194,8 +194,6 @@ private:
 	QHash<QString,QString> wutObjects;
 	QHash<QString,int> wutCategories;
 
-	typedef QMap<StelObjectP, float> starData;
-
 	//! Update header names for planetary and celestial positions tables
 	void setPlanetaryPositionsHeaderNames();
 	void setCelestialPositionsHeaderNames();

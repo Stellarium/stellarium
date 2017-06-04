@@ -175,6 +175,12 @@ class Translations
 		N_("Lynds' Catalogue of Dark Nebulae");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Cederblad Catalog");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Peculiar Galaxies");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Interacting Galaxies");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Galactic Planetary Nebulae");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -190,6 +196,8 @@ class Translations
 		N_("Bright double stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright variable stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright stars with high proper motion");
 		
 		// =====================================================================
 		// Constellation cultures
@@ -199,6 +207,8 @@ class Translations
 		N_("Arabic Moon Stations");
 		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
+		// TRANSLATORS: Name of the sky culture
+		N_("Belarusian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Boorong");
 		// TRANSLATORS: Name of the sky culture

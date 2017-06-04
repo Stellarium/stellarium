@@ -73,7 +73,7 @@ TuiNodeResponse TuiNode::navigation(int key)
 	return response;
 }
 
-QString TuiNode::getDisplayText()
+QString TuiNode::getDisplayText() const
 {
 	return prefixText + q_(displayText);
 }

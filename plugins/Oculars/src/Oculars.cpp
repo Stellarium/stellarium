@@ -1035,7 +1035,7 @@ void Oculars::displayPopupMenu()
 					label = oculars[index]->name();
 				}
 				//BM: Does this happen at all any more?
-				QAction* action = 0;
+				QAction* action = Q_NULLPTR;
 				if (selectedTelescopeIndex != -1 || oculars[index]->isBinoculars())
 				{
 						action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));

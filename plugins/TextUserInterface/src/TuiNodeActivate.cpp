@@ -43,7 +43,7 @@ TuiNodeResponse TuiNodeActivate::handleKey(int key)
 	}
 }
 
-QString TuiNodeActivate::getDisplayText() 
+QString TuiNodeActivate::getDisplayText() const
 {
 	return prefixText + q_(displayText) + q_(" [RETURN to activate]");
 }
