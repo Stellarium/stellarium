@@ -644,7 +644,7 @@ void StarMgr::populateHipparcosLists()
 	hipStarsHighPM.clear();
 	doubleHipStars.clear();
 	variableHipStars.clear();
-	const int pmLimit = 500; // 500 milliarc second per year!
+	const int pmLimit = 1; // arcsecond per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
 		const Star1 *const s = hipIndex[hip].s;
@@ -669,7 +669,7 @@ void StarMgr::populateHipparcosLists()
 			// use separate variables for avoid the overflow (esp. for Barnard's star)
 			float pmX = 0.1 * s->getDx0();
 			float pmY = 0.1 * s->getDx1();
-			float pm = std::sqrt((pmX*pmX) + (pmY*pmY));
+			float pm = 0.001 * std::sqrt((pmX*pmX) + (pmY*pmY));
 			if (qAbs(pm)>=pmLimit)
 			{
 				QMap<StelObjectP, float> spm;

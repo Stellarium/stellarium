@@ -354,8 +354,8 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 	}
 	else if (celType==172)
 	{
-		//TRANSLATORS: proper motion, milliarc second per year
-		positionsHeader << QString("%1, %2").arg(q_("P.M."), qc_("mas/yr", "milliarc second per year"));
+		//TRANSLATORS: proper motion, arcsecond per year
+		positionsHeader << QString("%1, %2").arg(q_("P.M."), qc_("\"/yr", "arcsecond per year"));
 
 	}
 	else
@@ -689,7 +689,7 @@ void AstroCalcDialog::currentCelestialPositions()
 						extra = QChar(0x2014); // dash
 				}
 				else // stars with high proper motion
-					extra = QString::number(star.value(obj), 'f', 2); // mas/yr
+					extra = QString::number(star.value(obj), 'f', 5); // "/yr
 
 
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
