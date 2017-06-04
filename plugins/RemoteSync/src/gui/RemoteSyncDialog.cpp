@@ -61,6 +61,9 @@ void RemoteSyncDialog::createDialogContent()
 	installKineticScrolling(addscroll);
 #endif
 
+	ui->pushButtonSelectProperties->setText(QChar(0x2192));
+	ui->pushButtonDeselectProperties->setText(QChar(0x2190));
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -273,12 +276,13 @@ void RemoteSyncDialog::populateExclusionLists()
 	ui->listWidgetSelectedProperties->clear();
 
 	QStringList excluded=rs->getStelPropFilter();
+	excluded.removeOne(""); // Special case
 	ui->listWidgetSelectedProperties->addItems(excluded);
 	QStringList allProps=StelApp::getInstance().getStelPropertyManager()->getPropertyList();
 	foreach (QString str, excluded)
 	{
 		allProps.removeOne(str);
-	}
+	}	
 	ui->listWidgetAllProperties->addItems(allProps);
 
 	ui->listWidgetAllProperties->sortItems();
