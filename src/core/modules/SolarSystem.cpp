@@ -2125,6 +2125,8 @@ void SolarSystem::reloadPlanets()
 	// Save flag states
 	bool flagScaleMoon = getFlagMoonScale();
 	float moonScale = getMoonScale();
+	bool flagScaleMinorBodies=getFlagMinorBodyScale();
+	float minorScale= getMinorBodyScale();
 	bool flagPlanets = getFlagPlanets();
 	bool flagHints = getFlagHints();
 	bool flagLabels = getFlagLabels();
@@ -2190,6 +2192,9 @@ void SolarSystem::reloadPlanets()
 	// Restore flag states
 	setFlagMoonScale(flagScaleMoon);
 	setMoonScale(moonScale);
+	setFlagMinorBodyScale(flagScaleMinorBodies);
+	setMinorBodyScale(1.0); // force-reset first to really reach the objects in the next call.
+	setMinorBodyScale(minorScale);
 	setFlagPlanets(flagPlanets);
 	setFlagHints(flagHints);
 	setFlagLabels(flagLabels);
