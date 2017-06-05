@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-04 11:40+0700\n"
+"POT-Creation-Date: 2017-06-05 12:39+0700\n"
 "PO-Revision-Date: 2017-05-14 15:47+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-04 05:44+0000\n"
+"X-Launchpad-Export-Date: 2017-06-05 05:47+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:347
+#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:349
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:281
@@ -408,7 +408,7 @@ msgstr "类型： <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "不透明度：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:353
+#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:355
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -416,7 +416,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "星等 <b>%1</b> (消光至: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:220 src/core/modules/Nebula.cpp:225
-#: src/core/modules/Planet.cpp:356 src/core/modules/MinorPlanet.cpp:210
+#: src/core/modules/Planet.cpp:358 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
@@ -867,7 +867,8 @@ msgstr "原行星云"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1258 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
+#: src/core/modules/StarWrapper.cpp:185 src/gui/AstroCalcDialog.cpp:630
+#: src/translations.h:46
 msgid "star"
 msgstr "恒星"
 
@@ -887,148 +888,148 @@ msgstr "深空天体"
 msgid "Toggle DSO type filter"
 msgstr "切换深空天体类型过滤器"
 
-#: src/core/modules/Planet.cpp:360 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "绝对星等: %1"
 
-#: src/core/modules/Planet.cpp:363
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
 msgstr "平衡星等: %1"
 
-#: src/core/modules/Planet.cpp:387 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:239
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "距太阳距离: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:394 src/core/modules/MinorPlanet.cpp:246
+#: src/core/modules/Planet.cpp:396 src/core/modules/MinorPlanet.cpp:246
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "距太阳距离: %1AU (%2兆km)"
 
-#: src/core/modules/Planet.cpp:404 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Planet.cpp:406 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "距离: %1 天文单位(%2 千米)"
 
-#: src/core/modules/Planet.cpp:411 src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:413 src/core/modules/MinorPlanet.cpp:263
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "距离: %1AU (%2兆km)"
 
-#: src/core/modules/Planet.cpp:425 src/core/modules/Planet.cpp:429
+#: src/core/modules/Planet.cpp:427 src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "视直径: %1, 包括环: %2"
 
-#: src/core/modules/Planet.cpp:438 src/core/modules/Planet.cpp:442
+#: src/core/modules/Planet.cpp:440 src/core/modules/Planet.cpp:444
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "视直径r: %1, 放大到: %2"
 
-#: src/core/modules/Planet.cpp:449 src/core/modules/Planet.cpp:451
+#: src/core/modules/Planet.cpp:451 src/core/modules/Planet.cpp:453
 #: src/core/modules/MinorPlanet.cpp:274 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "视直径: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:468 src/core/modules/MinorPlanet.cpp:286
+#: src/core/modules/Planet.cpp:470 src/core/modules/MinorPlanet.cpp:286
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "公转轨道周期：%1天 (%2儒略年)"
 
-#: src/core/modules/Planet.cpp:471
+#: src/core/modules/Planet.cpp:473
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "恒星日: %1"
 
-#: src/core/modules/Planet.cpp:472
+#: src/core/modules/Planet.cpp:474
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "平太阳日: %1"
 
-#: src/core/modules/Planet.cpp:476
+#: src/core/modules/Planet.cpp:478
 msgid "The period of rotation is chaotic"
 msgstr "自转周期不规则"
 
-#: src/core/modules/Planet.cpp:495
+#: src/core/modules/Planet.cpp:497
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "娥眉月"
 
-#: src/core/modules/Planet.cpp:497
+#: src/core/modules/Planet.cpp:499
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "上弦月"
 
-#: src/core/modules/Planet.cpp:499
+#: src/core/modules/Planet.cpp:501
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "盈凸月"
 
-#: src/core/modules/Planet.cpp:501
+#: src/core/modules/Planet.cpp:503
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "满月"
 
-#: src/core/modules/Planet.cpp:503
+#: src/core/modules/Planet.cpp:505
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "亏凸月"
 
-#: src/core/modules/Planet.cpp:505
+#: src/core/modules/Planet.cpp:507
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "下弦月"
 
-#: src/core/modules/Planet.cpp:507
+#: src/core/modules/Planet.cpp:509
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "残月"
 
-#: src/core/modules/Planet.cpp:509
+#: src/core/modules/Planet.cpp:511
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "新月"
 
-#: src/core/modules/Planet.cpp:514 src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:521
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:250 src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "位相角: %1"
 
-#: src/core/modules/Planet.cpp:515 src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:522
 #: src/core/modules/MinorPlanet.cpp:295 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:251 src/core/modules/Comet.cpp:256
 #, qt-format
 msgid "Elongation: %1"
 msgstr "距角: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Phase: %1"
 msgstr "相: %1"
 
-#: src/core/modules/Planet.cpp:527
+#: src/core/modules/Planet.cpp:529
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "被照亮的部分: %1%"
 
-#: src/core/modules/Planet.cpp:528
+#: src/core/modules/Planet.cpp:530
 #, qt-format
 msgid "Albedo: %1"
 msgstr "反照率： %1"
 
-#: src/core/modules/Planet.cpp:540
+#: src/core/modules/Planet.cpp:542
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "蚀率: %1%"
@@ -1122,11 +1123,11 @@ msgstr "激变变星"
 msgid "eclipsing binary system"
 msgstr "食双星系统"
 
-#: src/core/modules/StarWrapper.cpp:179
+#: src/core/modules/StarWrapper.cpp:179 src/gui/AstroCalcDialog.cpp:644
 msgid "variable star"
 msgstr "变星"
 
-#: src/core/modules/StarWrapper.cpp:183
+#: src/core/modules/StarWrapper.cpp:183 src/gui/AstroCalcDialog.cpp:638
 msgid "double star"
 msgstr "双星"
 
@@ -1189,7 +1190,7 @@ msgstr "间距"
 msgid "Proper motions"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:290 src/gui/AstroCalcDialog.cpp:358
+#: src/core/modules/StarWrapper.cpp:290
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
@@ -2086,7 +2087,7 @@ msgstr "联系信息"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:188
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
@@ -2561,7 +2562,7 @@ msgstr "OSX开发: %1"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:511
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
 msgid "Contributors"
 msgstr "贡献者"
 
@@ -2576,7 +2577,7 @@ msgstr "这几个人对该项目做出了贡献，他们的工作使Stellarium�
 msgid "Windows"
 msgstr "窗口"
 
-#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
+#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "Quit"
 msgstr "退出"
 
@@ -2697,7 +2698,7 @@ msgid "FOV"
 msgstr "视场角"
 
 #: src/gui/StelGuiItems.cpp:743
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr "视场"
 
@@ -3185,9 +3186,14 @@ msgctxt "days"
 msgid "d"
 msgstr "天"
 
-#. TRANSLATORS: proper motion, milliarc second per year
+#. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:358
 msgid "P.M."
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:358
+msgctxt "arcsecond per year"
+msgid "\"/yr"
 msgstr ""
 
 #. TRANSLATORS: surface brightness
@@ -3477,6 +3483,10 @@ msgstr "亮变星"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
 msgid "Bright stars with high proper motion"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:650
+msgid "star with high proper motion"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:772 src/ui_dateTimeDialogGui.h:382
@@ -3815,7 +3825,7 @@ msgstr "脚本"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:189
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
@@ -5745,7 +5755,7 @@ msgstr "重新整理"
 
 #: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Location"
 msgstr "所在位置"
 
@@ -6092,8 +6102,6 @@ msgid "Atmosphere visualization"
 msgstr ""
 
 #: src/ui_viewDialog.h:2142
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "太阳系的天体"
 
@@ -7394,7 +7402,7 @@ msgstr "安装完毕后立即使用新地景"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Remove"
 msgstr "移除"
 
@@ -8184,7 +8192,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
@@ -8201,7 +8209,7 @@ msgstr "链接"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
@@ -8221,7 +8229,7 @@ msgstr "您可在 Launchpad 网站获得我们的技术支持。提交报告时�
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
@@ -8240,7 +8248,7 @@ msgstr "如果您仍存在问题，可以%1从此处得到回答%2。"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -8259,7 +8267,7 @@ msgstr "如果有 Bug 需要报告，请点击%1这里%2。"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
@@ -8272,7 +8280,7 @@ msgstr "如果您需要其他功能，则可以创建一个错误报告，并将
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -8343,7 +8351,7 @@ msgstr "恢复默认设置"
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:315
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
@@ -9645,7 +9653,7 @@ msgid "Select TLE Update File"
 msgstr "选择两行式轨道数据(TLE)更新文件"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "Time"
 msgstr "时间"
 
@@ -11357,7 +11365,7 @@ msgid " [RETURN to activate]"
 msgstr " [请按回车键以启用]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
 msgid "Solar System Editor"
 msgstr "太阳系编辑器"
 
@@ -11368,8 +11376,8 @@ msgid ""
 "its online database."
 msgstr "导入小行星和彗星到Stellarium的一个接口。可以从小行星中心下载天体列表并在线搜索它的数据库。"
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "Import orbital elements in MPC format..."
 msgstr "导入 MPC 格式的轨道参数..."
 
@@ -11405,12 +11413,12 @@ msgid "Select bookmark..."
 msgstr "选择书签..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
 msgid "website"
 msgstr "网站"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:105
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -11421,28 +11429,33 @@ msgstr ""
 "您可以导入使用国际天文学联合会(IAU)小行星中心(MPC)的输出格式的彗星与小行星数据(%1)。您可以导入列表文件，从互联网下载这种的列表，或是使用在线"
 "的小行星和彗星星历服务(MPES)进行检索。"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 msgid "Solar System Editor plug-in"
 msgstr "太阳系编辑器插件"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:110
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 #, qt-format
 msgid "Version %1"
 msgstr "版本 %1"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
-msgid "Save the Solar System configuration file as..."
-msgstr "将太阳系统配置文件另存为..."
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
+msgid "Save the minor Solar System bodies as..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
 msgid "Configuration files"
 msgstr "配置文件"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
-msgid "Select a file to replace the Solar System configuration file"
-msgstr "选择一个文件以替换太阳系配置文件"
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
+msgid "Select a file to replace the Solar System minor bodies"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
+msgid "Select a file to add the Solar System minor bodies"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -11520,53 +11533,63 @@ msgstr "仅更新轨道参数"
 msgid "Add objects"
 msgstr "导入天体"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
-msgid "Warning"
-msgstr "警告"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+msgid "Minor Solar System objects"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+msgid "Note"
+msgstr "说明"
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
-"This plug-in uses a custom Solar System configuration file. If something "
-"goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-"manually that file from:"
-msgstr "此插件使用了自定义的太阳系配置文件。如果出现错误，导致 Stellarium 崩溃，或是无法启动，那么您可以手动从以下路径删除该文件："
+"This plug-in edits a custom Solar System configuration file for the minor "
+"bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
+"you can delete manually that file from:"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr "同时，您也可以重置所有修改，恢复默认设置："
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Reset to defaults"
 msgstr "恢复默认设置"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
-msgid "Copy/replace the Solar System file"
-msgstr "复制/覆盖太阳系配置文件"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+msgid "Export/replace the Solar System minor bodies file"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
-"You can create a backup copy of the custom Solar System configuration file "
+"You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
-msgstr "您可以为这个自定义的太阳系配置文件在某一便利的位置创建备份，或是使用备份覆盖当前配置。"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
-msgid "Copy the Solar System file..."
-msgstr "备份太阳系配置文件..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+msgid "Export the Solar System minor bodies to file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
-msgid "Replace the Solar System file..."
-msgstr "覆盖当前太阳系配置文件..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+msgid "Import and replace the Solar System minor bodies from file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+msgid "Import and add Solar System minor bodies from file..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
 msgstr "配置文件"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
-msgid "Add new Solar System objects"
-msgstr "新建太阳系天体"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+msgid "Add new Minor Solar System objects"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
 msgstr "太阳系"
 
@@ -12169,10 +12192,6 @@ msgstr ""
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "当前目录包含 %1 个脉冲星的信息。"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-msgid "Note"
-msgstr "说明"
-
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "脉冲星的标识符有“PSR”前缀"
@@ -12287,7 +12306,7 @@ msgid "Not active."
 msgstr "不活跃。"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:456
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:458
 msgid "Remote Control Configuration"
 msgstr "远程控制配置"
 
@@ -12336,7 +12355,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr "服务器被禁用 - 或服务器侦听IP：aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Remote Sync"
 msgstr ""
 
@@ -12346,181 +12365,173 @@ msgid ""
 "a network. See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:112
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:115
 #, qt-format
 msgid "ERROR: %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:129
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:462
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:132
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Start server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:134
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "Connect to server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:147
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
 msgid "Running as server on port %1"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:164
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 msgid "Cancel connecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:162
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:170
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:176
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
 msgid "Disconnecting..."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnect from server"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:182
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:187
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Remote Sync Plug-in"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "See manual for detailed description."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:236
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:239
 msgid "Server Name"
 msgstr ""
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:244
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server not active."
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:457
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Sync Plug-in Configuration"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
 msgstr "状态："
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
 msgid "Server mode"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server port"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Client mode"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Server host address/name"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "127.0.0.1"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "When connection is lost"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Do nothing"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Try reconnecting"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When server quits"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Changes on this page require a re-connection to the server"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Settings applied on this client"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Selection"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "StelProperty"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Exclude GUI-related properties"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
-msgid "These are all available properties."
-msgstr ""
-
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
-msgid "-->"
-msgstr ""
-
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
-msgid "<--"
+msgid "These are all available properties."
 msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
@@ -16532,6 +16543,26 @@ msgstr "为自定义赤纬线2"
 #~ msgstr "CD/DVD 脚本"
 
 #~ msgid ""
+#~ "This plug-in uses a custom Solar System configuration file. If something "
+#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
+#~ "manually that file from:"
+#~ msgstr "此插件使用了自定义的太阳系配置文件。如果出现错误，导致 Stellarium 崩溃，或是无法启动，那么您可以手动从以下路径删除该文件："
+
+#~ msgid "Warning"
+#~ msgstr "警告"
+
+#~ msgid "Copy the Solar System file..."
+#~ msgstr "备份太阳系配置文件..."
+
+#~ msgid ""
+#~ "You can create a backup copy of the custom Solar System configuration file "
+#~ "in a convenient location, or replace it with such a copy."
+#~ msgstr "您可以为这个自定义的太阳系配置文件在某一便利的位置创建备份，或是使用备份覆盖当前配置。"
+
+#~ msgid "Copy/replace the Solar System file"
+#~ msgstr "复制/覆盖太阳系配置文件"
+
+#~ msgid ""
 #~ "A plugin that shows some historical supernovae brighter than 10 visual "
 #~ "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
 #~ "1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
@@ -16543,6 +16574,12 @@ msgstr "为自定义赤纬线2"
 #~ "1006A（4月29日）、SN 1054A（7月3日）、SN 1181A（8月4日）、SN 1572A（11月5日）、SN "
 #~ "1604A（10月8日）、SN 1680A（8月15日）、SN 1885A（8月17日）、SN 1895B（7月5日）、SN "
 #~ "1937C（8月21日）、SN 1972E（5月8日）、SN 1987A（2月24日）和SN 2011FE（9月13日）。"
+
+#~ msgid "Add new Solar System objects"
+#~ msgstr "新建太阳系天体"
+
+#~ msgid "Replace the Solar System file..."
+#~ msgstr "覆盖当前太阳系配置文件..."
 
 #~ msgid "Netherlands Antilles"
 #~ msgstr "荷属安地列斯"
@@ -17275,3 +17312,9 @@ msgstr "为自定义赤纬线2"
 
 #~ msgid "Reload shaders"
 #~ msgstr "重新加载着色器"
+
+#~ msgid "Select a file to replace the Solar System configuration file"
+#~ msgstr "选择一个文件以替换太阳系配置文件"
+
+#~ msgid "Save the Solar System configuration file as..."
+#~ msgstr "将太阳系统配置文件另存为..."

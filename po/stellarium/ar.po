@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-04 11:40+0700\n"
-"PO-Revision-Date: 2017-06-03 21:45+0000\n"
+"POT-Creation-Date: 2017-06-04 16:04+0700\n"
+"PO-Revision-Date: 2017-06-04 11:06+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-04 05:21+0000\n"
+"X-Launchpad-Export-Date: 2017-06-05 05:23+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -867,7 +867,8 @@ msgstr "‎سديم في مرحلة ماقبل الشكل الكوكبي‎"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1258 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
+#: src/core/modules/StarWrapper.cpp:185 src/gui/AstroCalcDialog.cpp:630
+#: src/translations.h:46
 msgid "star"
 msgstr "نجم"
 
@@ -1122,11 +1123,11 @@ msgstr "نجم متغيِّر مدمِّر"
 msgid "eclipsing binary system"
 msgstr "نظام ثنائي كسوفي"
 
-#: src/core/modules/StarWrapper.cpp:179
+#: src/core/modules/StarWrapper.cpp:179 src/gui/AstroCalcDialog.cpp:644
 msgid "variable star"
 msgstr "نجم متغيِّر"
 
-#: src/core/modules/StarWrapper.cpp:183
+#: src/core/modules/StarWrapper.cpp:183 src/gui/AstroCalcDialog.cpp:638
 msgid "double star"
 msgstr "نجم ثنائي"
 
@@ -1189,7 +1190,7 @@ msgstr "‎البعد الزاوي‎"
 msgid "Proper motions"
 msgstr "‎الحركة الحقيقية‎"
 
-#: src/core/modules/StarWrapper.cpp:290 src/gui/AstroCalcDialog.cpp:358
+#: src/core/modules/StarWrapper.cpp:290
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "‎ميللي ثانية قوسية في السنة‎"
@@ -2128,7 +2129,7 @@ msgstr "<P DIR=RTL>للمراسلة"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:188
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
@@ -2616,7 +2617,7 @@ msgstr "مطور نظام %1 :OSX"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:511
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
 msgid "Contributors"
 msgstr "المساهمون"
 
@@ -2633,7 +2634,7 @@ msgstr ""
 msgid "Windows"
 msgstr "النوافذ"
 
-#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
+#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "Quit"
 msgstr "خروج"
 
@@ -2754,7 +2755,7 @@ msgid "FOV"
 msgstr "ح ر"
 
 #: src/gui/StelGuiItems.cpp:743
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr "حقل الرؤية"
 
@@ -3258,10 +3259,15 @@ msgctxt "days"
 msgid "d"
 msgstr "يوم"
 
-#. TRANSLATORS: proper motion, milliarc second per year
+#. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:358
 msgid "P.M."
 msgstr "الحركة الحقيقية"
+
+#: src/gui/AstroCalcDialog.cpp:358
+msgctxt "arcsecond per year"
+msgid "\"/yr"
+msgstr "\"/السنة"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:364
@@ -3551,6 +3557,10 @@ msgstr "النجوم المتغيرة اللامعة"
 #: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr "النجوم  اللامعة ذات الحركة الحقيقية الكبيرة"
+
+#: src/gui/AstroCalcDialog.cpp:650
+msgid "star with high proper motion"
+msgstr "نجم ذو حركة حقيقية كبيرة"
 
 #: src/gui/AstroCalcDialog.cpp:772 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -3888,7 +3898,7 @@ msgstr "البرامج النصية‏"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:189
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
@@ -5853,7 +5863,7 @@ msgstr "تحديث"
 
 #: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Location"
 msgstr "الموقع"
 
@@ -8347,7 +8357,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
@@ -8364,7 +8374,7 @@ msgstr "<P DIR=RTL>روابط"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
@@ -8386,7 +8396,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
@@ -8405,7 +8415,7 @@ msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول ع�
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -8424,7 +8434,7 @@ msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
@@ -8439,7 +8449,7 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -9871,7 +9881,7 @@ msgid "Select TLE Update File"
 msgstr "TLE اختر ملف التحديث"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "Time"
 msgstr "الوقت"
 
@@ -12739,7 +12749,7 @@ msgid "Not active."
 msgstr "غير نشط."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:456
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:458
 msgid "Remote Control Configuration"
 msgstr "إعدادات التحكم عن بعد"
 
@@ -12790,7 +12800,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr "الخادم غير نشط - أو أن الخادم يستمع على الآي بي: IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Remote Sync"
 msgstr "المزامنة عن بعد"
 
@@ -12802,64 +12812,64 @@ msgstr ""
 "يوفر مزامنة للحالة لعدة برامج ستيللاريوم يجري تشغيلها في شبكة. انظر دليل "
 "الاستعمال لشرح مفصل"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:112
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:115
 #, qt-format
 msgid "ERROR: %1"
 msgstr "خطأ: %1"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:129
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:462
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:132
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Start server"
 msgstr "إبدأ الخادم"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:134
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "Connect to server"
 msgstr "وصل مع الخادم"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
 msgstr "لايعمل"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:147
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
 msgid "Running as server on port %1"
 msgstr "يعمل كخادم في المنفذ: %1"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:164
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 msgid "Cancel connecting"
 msgstr "إلغ التوصيل"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:162
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr "التوصيل جارٍ مع %1: %2..."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:170
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr "إعادة المحاولة للتوصيل مع %1: %2"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:176
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
 msgid "Disconnecting..."
 msgstr "جار قطع الاتصال"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnect from server"
 msgstr "اقطع الاتصال مع الخادم"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:182
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr "متصل مع %1: %2"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:187
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Remote Sync Plug-in"
 msgstr "<p dir=rtl>إضافة المزامنة البعيدة"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
@@ -12867,7 +12877,7 @@ msgstr ""
 "<p dir=rtl>إضافة المزامنة عن بعد توفر إمكانية مزامنة عدة تشغيلات لستيللاريوم "
 "تعمل في نفس الشبكة."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
@@ -12875,125 +12885,117 @@ msgstr ""
 "<p dir=rtl>يمكن الاستفادة من ذلك بإنشاء شاشات متعددة كأجزاء من شاشة كبيرة "
 "باستخدام عدة حواسيب"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr "<p dir=rtl>المزامنة الجزئية تمكن إعدادات متوازية لمشهد كبير أو مفصل"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "See manual for detailed description."
 msgstr "<p dir=rtl>إرجع إلى دليل استخدام ستيللاريوم للشرح المفصل."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr "<p dir=rtl>ESA SoCiS 2015&amp;2016.هذه الإضافة طورت خلال"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:236
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:239
 msgid "Server Name"
 msgstr "اسم الخادم"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:244
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server not active."
 msgstr "الخادم غير نشط"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:457
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Sync Plug-in Configuration"
 msgstr "إعدادات إضافة المزامنة عن بعد"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
 msgstr ":الحالة"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
 msgid "Server mode"
 msgstr "وضع الخادم"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server port"
 msgstr "منفذ الخادم"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Client mode"
 msgstr "وضع العميل"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Server host address/name"
 msgstr "اسم أو عنوان مضيف الخادم"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "When connection is lost"
 msgstr "عندما يفقد الاتصال"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Do nothing"
 msgstr "لاتفعل شيئاً"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Try reconnecting"
 msgstr "حاول إعادة الاتصال"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When server quits"
 msgstr "عندما يتوقف الخادم"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Changes on this page require a re-connection to the server"
 msgstr "التعديلات في هذه الصفحة تتطلب إعادة الاتصال مع الخادم"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Settings applied on this client"
 msgstr "الإعدادات مطبقة على هذا العميل"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Selection"
 msgstr "الاختيار"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "StelProperty"
 msgstr "StelProperty"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
 msgstr "اتجاه الرؤية"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
 msgstr "Property filters"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Exclude GUI-related properties"
 msgstr "Exclude GUI-related properties"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
-msgid "These are all available properties."
-msgstr ""
-
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
-msgid "-->"
-msgstr ""
-
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
-msgid "<--"
-msgstr ""
+msgid "These are all available properties."
+msgstr "هذه هي كل الخصائص المتاحة"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "هذه هي الخصائص المستثناة حالياً من التزامن"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "الخصائص المستثناة"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "الخصائص المتزامنة"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
