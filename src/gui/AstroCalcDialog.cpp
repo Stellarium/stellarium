@@ -2673,6 +2673,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Planetary nebulae"), 14);
 	wutCategories.insert(q_("Bright double stars"), 15);
 	wutCategories.insert(q_("Bright variable stars"), 16);
+	wutCategories.insert(q_("Bright stars with high proper motion"), 17);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -2702,6 +2703,7 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelObjectP> hipStars = starMgr->getHipparcosStars();
 		QList<StelACStarData> dblHipStars = starMgr->getHipparcosDoubleStars();
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
+		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
 		double highLimit = 6.0;
@@ -2962,6 +2964,19 @@ void AstroCalcDialog::calculateWutObjects()
 				foreach(const StelACStarData& varStar, varHipStars)
 				{
 					StelObjectP object = varStar.firstKey();
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
+					{
+						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
+						alt = std::fmod(alt,2.0*M_PI);
+						if (alt*180./M_PI >= highLimit)
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+				}
+				break;
+			case 17: // Bright stars with high proper motion
+				foreach(const StelACStarData& hpmStar, hpmHipStars)
+				{
+					StelObjectP object = hpmStar.firstKey();
 					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
 					{
 						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
