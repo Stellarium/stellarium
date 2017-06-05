@@ -1094,6 +1094,7 @@ GridLinesMgr::GridLinesMgr()
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectEarthFromSolarSystem()));
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -1259,6 +1260,11 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
 	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
 	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
+}
+
+void GridLinesMgr::connectEarthFromSolarSystem()
+{
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
 }
 
 void GridLinesMgr::update(double deltaTime)
