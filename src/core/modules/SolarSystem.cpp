@@ -1624,9 +1624,9 @@ bool SolarSystem::nearLunarEclipse()
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000/AU) return 0;   // not visible so don't bother drawing
+	if(mdist.length() > r_penumbra + 2000/AU) return false;   // not visible so don't bother drawing
 
-	return 1;
+	return true;
 }
 
 QStringList SolarSystem::listAllObjects(bool inEnglish) const
