@@ -86,7 +86,7 @@ void StelSkyLayerMgr::init()
 	conf->endGroup();
 
 	setFlagShow(!conf->value("astro/flag_nebula_display_no_texture", false).toBool());
-	addAction("actionShow_DSS", N_("Display Options"), N_("Deep-sky objects background images"), "flagShow", "I");
+	addAction("actionShow_DSO_Textures", N_("Display Options"), N_("Deep-sky objects background images"), "flagShow", "I");
 }
 
 QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
