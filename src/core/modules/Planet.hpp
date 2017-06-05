@@ -493,7 +493,7 @@ protected:
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system around the parent body. To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	// centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
-	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
+//	Vec3d previousScreenPos;         // The position of this planet in the previous frame. 0.16pre: DEAD CODE!
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
 	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
