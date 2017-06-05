@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-04 11:40+0700\n"
-"PO-Revision-Date: 2017-06-03 21:43+0000\n"
+"POT-Creation-Date: 2017-06-04 16:04+0700\n"
+"PO-Revision-Date: 2017-06-04 09:34+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-04 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-06-05 05:25+0000\n"
 "X-Generator: Launchpad (build 18391)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -869,7 +869,8 @@ msgstr "протаплянэтная туманнасьць"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1258 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:185 src/translations.h:46
+#: src/core/modules/StarWrapper.cpp:185 src/gui/AstroCalcDialog.cpp:630
+#: src/translations.h:46
 msgid "star"
 msgstr "зорка"
 
@@ -1124,11 +1125,11 @@ msgstr "катаклізьмічная зьменная зорка"
 msgid "eclipsing binary system"
 msgstr "зацьменная падвойная сыстэма"
 
-#: src/core/modules/StarWrapper.cpp:179
+#: src/core/modules/StarWrapper.cpp:179 src/gui/AstroCalcDialog.cpp:644
 msgid "variable star"
 msgstr "зьменная зорка"
 
-#: src/core/modules/StarWrapper.cpp:183
+#: src/core/modules/StarWrapper.cpp:183 src/gui/AstroCalcDialog.cpp:638
 msgid "double star"
 msgstr "падвойная зорка"
 
@@ -1192,7 +1193,7 @@ msgstr "Аддаленьне"
 msgid "Proper motions"
 msgstr "Правільныя рухі"
 
-#: src/core/modules/StarWrapper.cpp:290 src/gui/AstroCalcDialog.cpp:358
+#: src/core/modules/StarWrapper.cpp:290
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "марксек/сг"
@@ -2148,7 +2149,7 @@ msgstr "Кантакт"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:188
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
@@ -2637,7 +2638,7 @@ msgstr "Распрацоўнік для OSX: %1"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:511
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
 msgid "Contributors"
 msgstr "Укладальнікі"
 
@@ -2654,7 +2655,7 @@ msgstr ""
 msgid "Windows"
 msgstr "Вокны"
 
-#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
+#: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "Quit"
 msgstr "Выйсьці"
 
@@ -2775,7 +2776,7 @@ msgid "FOV"
 msgstr "ПЗ"
 
 #: src/gui/StelGuiItems.cpp:743
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr "Поле зроку"
 
@@ -3278,10 +3279,15 @@ msgctxt "days"
 msgid "d"
 msgstr "дз."
 
-#. TRANSLATORS: proper motion, milliarc second per year
+#. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:358
 msgid "P.M."
 msgstr "У.Р."
+
+#: src/gui/AstroCalcDialog.cpp:358
+msgctxt "arcsecond per year"
+msgid "\"/yr"
+msgstr "\"/год"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:364
@@ -3571,6 +3577,10 @@ msgstr "Яркія зьменныя зоркі"
 #: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr "Яркія зоркі зь вялікім уласным рухам"
+
+#: src/gui/AstroCalcDialog.cpp:650
+msgid "star with high proper motion"
+msgstr "зорка з высокім уласным рухам"
 
 #: src/gui/AstroCalcDialog.cpp:772 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -3908,7 +3918,7 @@ msgstr "Сцэнары"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:189
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
@@ -4121,7 +4131,7 @@ msgstr "Ацтэцкія"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:211
 msgid "Belarusian"
-msgstr "Беларуская"
+msgstr "Беларускія"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:213
@@ -5888,7 +5898,7 @@ msgstr "Абнавіць"
 
 #: src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Location"
 msgstr "Месца"
 
@@ -8403,7 +8413,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
@@ -8420,7 +8430,7 @@ msgstr "Спасылкі"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
@@ -8442,7 +8452,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
@@ -8461,7 +8471,7 @@ msgstr "Калі маеш пытаньні, можна %1атрымаць адк
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -8480,7 +8490,7 @@ msgstr "Паведамленьні пра хібы можна рабіць %1т�
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
@@ -8495,7 +8505,7 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -9934,7 +9944,7 @@ msgid "Select TLE Update File"
 msgstr "Выберы файл з абнаўленьнямі TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "Time"
 msgstr "Час"
 
@@ -12830,7 +12840,7 @@ msgid "Not active."
 msgstr "Не актыўны."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:456
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:458
 msgid "Remote Control Configuration"
 msgstr "Настаўленьні аддаленага кіраваньня"
 
@@ -12881,7 +12891,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr "Пслужнік абязьдзейнены, або праслухоўвае на IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Remote Sync"
 msgstr "Аддаленае сынхранізаваньне"
 
@@ -12893,64 +12903,64 @@ msgstr ""
 "Забясьпечвае сынхранізаваньне стану некалькіх асобнікаў Stellarium, які "
 "працуюць у сетцы. Глядзі падрабязнасьці ў кіраўніцтве карыстальніка."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:112
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:115
 #, qt-format
 msgid "ERROR: %1"
 msgstr "ПАМЫЛКА: %1"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:129
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:462
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:132
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Start server"
 msgstr "Запусьціць паслужнік"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:134
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "Connect to server"
 msgstr "Злучыцца з паслужнікам"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
 msgstr "Не запушчаны"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:147
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
 msgid "Running as server on port %1"
 msgstr "Запушчаны як паслужнік на порце %1"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:161
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:164
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 msgid "Cancel connecting"
 msgstr "Спыніць падлучэньне"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:162
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr "Злучаюся з %1: %2…"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:170
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr "Паўтараю злучэньне з %1: %2…"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:176
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
 msgid "Disconnecting..."
 msgstr "Адлучэньне…"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnect from server"
 msgstr "Адлучыццца ад паслужніка"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:182
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr "Злучаны з %1: %2"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:187
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Remote Sync Plug-in"
 msgstr "Дадатак аддаленага сынхранізаваньня"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:193
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
@@ -12958,7 +12968,7 @@ msgstr ""
 "Гэты дадатак забясьпечвае сынхранізаваньне стану некалькіх асобнікаў "
 "Stellarium, які працуюць у сетцы."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
@@ -12966,7 +12976,7 @@ msgstr ""
 "Гэта можна выкарыстоўваць, напрыклад, для стварэньня шматэкранных "
 "канфіґурацый, выкарыстоўваючы некалькі кампутараў."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
@@ -12974,119 +12984,111 @@ msgstr ""
 "Частковае сынхранізаваньне дазваляе паралельныя канфіґурыцыі, напрыклад, "
 "агульнага й падрабязнага праглядаў."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "See manual for detailed description."
 msgstr "Глядзі падрабязнасьці ў кіраўніцтве карыстальніка."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr "Гэты дадатак быў распрацаваны падчас ESA SoCiS 2015 і 2016."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:236
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:239
 msgid "Server Name"
 msgstr "Назва паслужніка"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:244
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server not active."
 msgstr "Паслужнік не актыўны."
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:457
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Sync Plug-in Configuration"
 msgstr "Настаўленьні дадатку аддаленага сынхранізаваньня"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
 msgstr "Статус:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
 msgid "Server mode"
 msgstr "Рэжым паслужніка"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server port"
 msgstr "Порт паслужніка"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Client mode"
 msgstr "Рэжым кліента"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Server host address/name"
 msgstr "Адрас/назва вузла паслужніка"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "When connection is lost"
 msgstr "Калі злучэньне страчана"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Do nothing"
 msgstr "Нічога не рабіць"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Try reconnecting"
 msgstr "Паспрабаваць перазлучыцца"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When server quits"
 msgstr "Калі паслужнік сканчае працу"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Changes on this page require a re-connection to the server"
 msgstr "Зьмены на гэтай старонцы патрабуюць перазлучэньня з паслужнікам"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Settings applied on this client"
 msgstr "Настройкі, ужытыя для гэтага кліента"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Selection"
 msgstr "Вылучэньне"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "StelProperty"
 msgstr ""
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
 msgstr "Пачатковы прагляду"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
 msgstr "Фільтар уласьцівасьцяў"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Exclude GUI-related properties"
 msgstr "Выключыць уласьцівасьці, зьвязаныя з ҐІК"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
-msgid "These are all available properties."
-msgstr ""
-
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
-msgid "-->"
-msgstr ""
-
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
-msgid "<--"
-msgstr ""
+msgid "These are all available properties."
+msgstr "Усе наяўныя ўласьцівасьці."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "Уласьцівасьці, якія не падлягаюць сынхранізаваньню."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "Выключаныя ўласьцівасьці"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "Сынхранізаваныя ўласьцівасьці"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
