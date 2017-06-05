@@ -113,7 +113,7 @@ Atmosphere::~Atmosphere(void)
 	atmoShaderProgram = Q_NULLPTR;
 }
 
-void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
+void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude,
 							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -250,7 +250,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// Calculate the date from the julian day.
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-	skyb.setDate(year, month, moonPhase);
+	skyb.setDate(year, month, moonPhase, moonMagnitude);
 
 	// Variables used to compute the average sky luminance
 	float sum_lum = 0.f;
