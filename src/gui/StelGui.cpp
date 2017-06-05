@@ -546,8 +546,8 @@ void StelGui::update()
 	bool flag;
 
 	flag = propMgr->getProperty("StelSkyLayerMgr.flagShow")->getValue().toBool();
-	if (getAction("actionShow_DSS")->isChecked() != flag)
-		getAction("actionShow_DSS")->setChecked(flag);
+	if (getAction("actionShow_DSO_Textures")->isChecked() != flag)
+		getAction("actionShow_DSO_Textures")->setChecked(flag);
 
 	flag = propMgr->getProperty("ToastMgr.surveyDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Toast_Survey")->isChecked() != flag)
@@ -710,11 +710,11 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 			QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
 			QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
-			btShowNebulaeBackground = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSS");
+			btShowNebulaeBackground = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSO_Textures");
 		}
 		getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
 	} else {
-		getButtonBar()->hideButton("actionShow_DSS");
+		getButtonBar()->hideButton("actionShow_DSO_Textures");
 	}
 	flagShowNebulaBackgroundButton = b;
 	if (initDone) {
