@@ -10,19 +10,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-04 16:04+0700\n"
-"PO-Revision-Date: 2017-06-04 20:56+0000\n"
+"POT-Creation-Date: 2017-06-06 01:03+0700\n"
+"PO-Revision-Date: 2017-06-05 11:38+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-05 05:26+0000\n"
-"X-Generator: Launchpad (build 18391)\n"
+"X-Launchpad-Export-Date: 2017-06-06 05:27+0000\n"
+"X-Generator: Launchpad (build 18399)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:347
+#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:349
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:281
@@ -50,7 +50,7 @@ msgstr "asterisme"
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
-#: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
+#: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
@@ -149,7 +149,7 @@ msgstr "Equador supergalàctic"
 msgid "O./C. longitude"
 msgstr "Longitud o./c."
 
-#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1248
+#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1249
 #: src/ui_viewDialog.h:2391
 msgid "Prime Vertical"
 msgstr "Primer Vertical"
@@ -218,136 +218,136 @@ msgstr "PNSG"
 msgid "SSGP"
 msgstr "PSSG"
 
-#: src/core/modules/GridLinesMgr.cpp:1230
+#: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
 msgstr "Quadrícules i línies"
 
-#: src/core/modules/GridLinesMgr.cpp:1231
+#: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr "Graella equatorial"
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2421
+#: src/core/modules/GridLinesMgr.cpp:1233 src/ui_viewDialog.h:2421
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "Graella azimutal"
 
-#: src/core/modules/GridLinesMgr.cpp:1233
+#: src/core/modules/GridLinesMgr.cpp:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr "Línia de l'eclíptica"
 
-#: src/core/modules/GridLinesMgr.cpp:1234
+#: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Ecliptic J2000 line"
 msgstr "Línia de l'eclíptica de J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1235
+#: src/core/modules/GridLinesMgr.cpp:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr "Línia de l'equador"
 
-#: src/core/modules/GridLinesMgr.cpp:1236
+#: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Equator J2000 line"
 msgstr "Línia de l'equador de J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:1237
+#: src/core/modules/GridLinesMgr.cpp:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr "Línia del meridià"
 
-#: src/core/modules/GridLinesMgr.cpp:1238
+#: src/core/modules/GridLinesMgr.cpp:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:393
 msgid "Horizon line"
 msgstr "línia d'horitzó"
 
-#: src/core/modules/GridLinesMgr.cpp:1239
+#: src/core/modules/GridLinesMgr.cpp:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr "Graella equatorial J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1240
+#: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 grid"
 msgstr "Graella eclíptica J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1241
+#: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic grid"
 msgstr "Graella de l'eclíptica"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2456
+#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr "Graella galàctica"
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2311
+#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2311
 msgid "Galactic equator"
 msgstr "Equador galàctic"
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2445
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2445
 msgid "Supergalactic grid"
 msgstr "Graella supergalàctica"
 
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2334
+#: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2334
 msgid "Supergalactic equator"
 msgstr "Equador supergalàctic"
 
-#: src/core/modules/GridLinesMgr.cpp:1246
+#: src/core/modules/GridLinesMgr.cpp:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Opposition/conjunction longitude line"
 msgstr "Línia de longitud d'oposició/conjunció"
 
-#: src/core/modules/GridLinesMgr.cpp:1247
+#: src/core/modules/GridLinesMgr.cpp:1248
 msgid "Precession Circles"
 msgstr "Cercles de precessió"
 
-#: src/core/modules/GridLinesMgr.cpp:1249
+#: src/core/modules/GridLinesMgr.cpp:1250
 msgid "Colure Lines"
 msgstr "Línies Colur"
 
-#: src/core/modules/GridLinesMgr.cpp:1250
+#: src/core/modules/GridLinesMgr.cpp:1251
 msgid "Circumpolar Circles"
 msgstr "Cercles circumpolars"
 
-#: src/core/modules/GridLinesMgr.cpp:1251
+#: src/core/modules/GridLinesMgr.cpp:1252
 msgid "Celestial J2000 poles"
 msgstr "Pols celestes J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1252
+#: src/core/modules/GridLinesMgr.cpp:1253
 msgid "Celestial poles"
 msgstr "Pols"
 
-#: src/core/modules/GridLinesMgr.cpp:1253
+#: src/core/modules/GridLinesMgr.cpp:1254
 msgid "Zenith and nadir"
 msgstr "Zènit i nadir"
 
-#: src/core/modules/GridLinesMgr.cpp:1254
+#: src/core/modules/GridLinesMgr.cpp:1255
 msgid "Ecliptic J2000 poles"
 msgstr "Pols ecliptíca J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1255
+#: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
 msgstr "Pols eclíptica"
 
-#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2399
+#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2399
 msgid "Galactic poles"
 msgstr "Pols galàctics"
 
-#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2357
+#: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2357
 msgid "Supergalactic poles"
 msgstr "Pols supergalàctics"
 
-#: src/core/modules/GridLinesMgr.cpp:1258
+#: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
 msgstr "Punts equinocci J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1259
+#: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
 msgstr "Punts equinocci"
 
-#: src/core/modules/GridLinesMgr.cpp:1260
+#: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
 msgstr "Punts de solstici J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1261
+#: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
 msgstr "Punts de solstici"
 
@@ -411,7 +411,7 @@ msgstr "Tipus: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Opacitat: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:353
+#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:355
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -419,7 +419,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (després de l'extinció: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:220 src/core/modules/Nebula.cpp:225
-#: src/core/modules/Planet.cpp:356 src/core/modules/MinorPlanet.cpp:210
+#: src/core/modules/Planet.cpp:358 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
@@ -891,148 +891,148 @@ msgstr "Objectes de l'Espai Profund"
 msgid "Toggle DSO type filter"
 msgstr "Commuta filtre de tipus d'OEP"
 
-#: src/core/modules/Planet.cpp:360 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitud absoluta: %1"
 
-#: src/core/modules/Planet.cpp:363
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
 msgstr "Magnitud mitjana en Oposició: %1"
 
-#: src/core/modules/Planet.cpp:387 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:239
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Distància del Sol: %1UA (%2 km)"
 
-#: src/core/modules/Planet.cpp:394 src/core/modules/MinorPlanet.cpp:246
+#: src/core/modules/Planet.cpp:396 src/core/modules/MinorPlanet.cpp:246
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Distància del Sol: %1UA (%2 Milions km)"
 
-#: src/core/modules/Planet.cpp:404 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Planet.cpp:406 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Distància: %1UA (%2 km)"
 
-#: src/core/modules/Planet.cpp:411 src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:413 src/core/modules/MinorPlanet.cpp:263
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Distancia: %1UA (%2 Milions km)"
 
-#: src/core/modules/Planet.cpp:425 src/core/modules/Planet.cpp:429
+#: src/core/modules/Planet.cpp:427 src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Diàmetre aparent: %1, amb anells: %2"
 
-#: src/core/modules/Planet.cpp:438 src/core/modules/Planet.cpp:442
+#: src/core/modules/Planet.cpp:440 src/core/modules/Planet.cpp:444
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "Diàmetre aparent: %1, escalat fins: %2"
 
-#: src/core/modules/Planet.cpp:449 src/core/modules/Planet.cpp:451
+#: src/core/modules/Planet.cpp:451 src/core/modules/Planet.cpp:453
 #: src/core/modules/MinorPlanet.cpp:274 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diàmetre aparent: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:468 src/core/modules/MinorPlanet.cpp:286
+#: src/core/modules/Planet.cpp:470 src/core/modules/MinorPlanet.cpp:286
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Període sideral: %1 dies (%2 a)"
 
-#: src/core/modules/Planet.cpp:471
+#: src/core/modules/Planet.cpp:473
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Dia sideral: %1"
 
-#: src/core/modules/Planet.cpp:472
+#: src/core/modules/Planet.cpp:474
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Dia solar mitjà: %1"
 
-#: src/core/modules/Planet.cpp:476
+#: src/core/modules/Planet.cpp:478
 msgid "The period of rotation is chaotic"
 msgstr "El període de rotació és caòtic"
 
-#: src/core/modules/Planet.cpp:495
+#: src/core/modules/Planet.cpp:497
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Nova visible"
 
-#: src/core/modules/Planet.cpp:497
+#: src/core/modules/Planet.cpp:499
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Quart creixent"
 
-#: src/core/modules/Planet.cpp:499
+#: src/core/modules/Planet.cpp:501
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Gibosa creixent"
 
-#: src/core/modules/Planet.cpp:501
+#: src/core/modules/Planet.cpp:503
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Lluna plena"
 
-#: src/core/modules/Planet.cpp:503
+#: src/core/modules/Planet.cpp:505
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Gibosa Minvant"
 
-#: src/core/modules/Planet.cpp:505
+#: src/core/modules/Planet.cpp:507
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Minvant"
 
-#: src/core/modules/Planet.cpp:507
+#: src/core/modules/Planet.cpp:509
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Quart minvant"
 
-#: src/core/modules/Planet.cpp:509
+#: src/core/modules/Planet.cpp:511
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Lluna nova"
 
-#: src/core/modules/Planet.cpp:514 src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:521
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:250 src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Angle de fase: %1"
 
-#: src/core/modules/Planet.cpp:515 src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:522
 #: src/core/modules/MinorPlanet.cpp:295 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:251 src/core/modules/Comet.cpp:256
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongació: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fase: %1"
 
-#: src/core/modules/Planet.cpp:527
+#: src/core/modules/Planet.cpp:529
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Il·luminat: %1%"
 
-#: src/core/modules/Planet.cpp:528
+#: src/core/modules/Planet.cpp:530
 #, qt-format
 msgid "Albedo: %1"
 msgstr "Albedo: %1"
 
-#: src/core/modules/Planet.cpp:540
+#: src/core/modules/Planet.cpp:542
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Factor d'eclipsi: %1%"
@@ -3582,7 +3582,8 @@ msgid "Bright variable stars"
 msgstr "Estels variables brillants"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
+#: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:2676
+#: src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr "Estels brillants amb un alt moviment propi"
 
@@ -6271,8 +6272,6 @@ msgid "Atmosphere visualization"
 msgstr "Visualització d'atmosfera"
 
 #: src/ui_viewDialog.h:2142
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Objectes del sistema solar"
 
@@ -7632,7 +7631,7 @@ msgstr "Canvia al nou paisatge després de la instal·lació"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Remove"
 msgstr "Suprimeix"
 
@@ -8607,7 +8606,7 @@ msgstr "Restableix la configuració predterminada"
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:315
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
@@ -11903,7 +11902,7 @@ msgid " [RETURN to activate]"
 msgstr " [RETORN per activar]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
 msgid "Solar System Editor"
 msgstr "Editor del Sistema Solar"
 
@@ -11917,8 +11916,8 @@ msgstr ""
 "descarregar llistes d'objectes de la pàgina web del Centre de Planetes "
 "Menors i fer cerques a la base de dades en línia."
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "Import orbital elements in MPC format..."
 msgstr "Importa elements orbitals en format MPC..."
 
@@ -11958,12 +11957,12 @@ msgid "Select bookmark..."
 msgstr "Seleccionar marcador ..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
 msgid "website"
 msgstr "lloc web"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:105
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -11977,30 +11976,34 @@ msgstr ""
 "tipus a través d'Internet o buscar, en línia, al Servei de Efemèrides de "
 "Planetes Menors i Cometes (MPES)."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 msgid "Solar System Editor plug-in"
 msgstr "Connector Editor del Sistema Solar"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:110
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 #, qt-format
 msgid "Version %1"
 msgstr "Versió %1"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
-msgid "Save the Solar System configuration file as..."
-msgstr "Deseu el fitxer de configuració del Sistema Solar com..."
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
+msgid "Save the minor Solar System bodies as..."
+msgstr "Guardar els cossos menors del Sistema Solar com..."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
 msgid "Configuration files"
 msgstr "Fitxers de configuració"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
-msgid "Select a file to replace the Solar System configuration file"
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
+msgid "Select a file to replace the Solar System minor bodies"
 msgstr ""
-"Seleccioneu un fitxer per reemplaçar el fitxer de configuració del Sistema "
-"Solar"
+"Selecciona un fitxer per reemplaçar els cossos menors del Sistema Solar"
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
+msgid "Select a file to add the Solar System minor bodies"
+msgstr "Selecciona un fitxer per afegir els cossos menors del Sistema Solar"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -12082,59 +12085,72 @@ msgstr "Actualitza només els elements orbitals"
 msgid "Add objects"
 msgstr "Afegeix objectes"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
-msgid "Warning"
-msgstr "Advertència"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+msgid "Minor Solar System objects"
+msgstr "Objectes menors del Sistema Solar"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+msgid "Note"
+msgstr "Informació"
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid ""
-"This plug-in uses a custom Solar System configuration file. If something "
-"goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-"manually that file from:"
+"This plug-in edits a custom Solar System configuration file for the minor "
+"bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
+"you can delete manually that file from:"
 msgstr ""
-"Aquest connector utilitza un fitxer personalitzat de configuració del "
-"Sistema Solar. Si alguna cosa surt malament i Stellarium es bloqueja i/o no "
-"s'inicia, podeu eliminar manualment el fitxer a:"
+"Aquest connector edita un arxiu de configuració del Sistema Solar a mida per "
+"als cossos menors. Si alguna cosa va malament i Stellarium es bloqueja i/o "
+"no s'inicia, pot eliminar manualment l'arxiu de:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
 "També podeu restablir tots els canvis i tornar a la configuració per defecte:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Reset to defaults"
 msgstr "Restableix els valors predeterminats"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
-msgid "Copy/replace the Solar System file"
-msgstr "Copia/reemplaça el fitxer del Sistema Solar"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+msgid "Export/replace the Solar System minor bodies file"
+msgstr "Exportar/reemplaçar fitxer de cossos menors del Sistema Solar"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
-"You can create a backup copy of the custom Solar System configuration file "
+"You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"Podeu fer una còpia de seguretat del fitxer personalitzat de configuració "
-"del Sistema Solar, o substituir-la per una còpia ja existent."
+"Es pot crear una còpia de seguretat del seu fitxer de configuració "
+"personalitzat del Sistema Solara en un lloc que especifiqui, o substituir-lo "
+"per aquesta còpia."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
-msgid "Copy the Solar System file..."
-msgstr "Copia el fitxer del Sistema Solar..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+msgid "Export the Solar System minor bodies to file..."
+msgstr "Exportar els cossos menors del Sistema Solar al fitxer..."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
-msgid "Replace the Solar System file..."
-msgstr "Reemplaça el fitxer del Sistema Solar"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+msgid "Import and replace the Solar System minor bodies from file..."
+msgstr ""
+"Importar i reemplaçar des d'un fitxer els cossos menors del Sistema Solar..."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+msgid "Import and add Solar System minor bodies from file..."
+msgstr ""
+"Importar i afegir des d'un fitxer els cossos menors del Sistema Solar..."
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
 msgstr "Fitxer de configuració"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
-msgid "Add new Solar System objects"
-msgstr "Afegeix nous objectes del sistema solar"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+msgid "Add new Minor Solar System objects"
+msgstr "Afegir nous objectes Menors del Sistema Solar"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
 msgstr "Sistema solar"
 
@@ -12779,10 +12795,6 @@ msgstr ""
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "Catàleg actual conté informació sobre %1 púlsars."
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-msgid "Note"
-msgstr "Informació"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -17571,6 +17583,12 @@ msgstr "Declinació Personalitzada 2"
 #~ msgid "User-defined:"
 #~ msgstr "Definit per l'usuari:"
 
+#~ msgid "Add new Solar System objects"
+#~ msgstr "Afegeix nous objectes del sistema solar"
+
+#~ msgid "Warning"
+#~ msgstr "Advertència"
+
 #, qt-format
 #~ msgid "Type of pulsar: %1"
 #~ msgstr "Tipus du púlsar: %1"
@@ -17602,6 +17620,15 @@ msgstr "Declinació Personalitzada 2"
 
 #~ msgid "Magnitude scaling multiplier"
 #~ msgstr "Multiplicador de l'escala de magnitud"
+
+#~ msgid "Copy the Solar System file..."
+#~ msgstr "Copia el fitxer del Sistema Solar..."
+
+#~ msgid "Copy/replace the Solar System file"
+#~ msgstr "Copia/reemplaça el fitxer del Sistema Solar"
+
+#~ msgid "Replace the Solar System file..."
+#~ msgstr "Reemplaça el fitxer del Sistema Solar"
 
 #~ msgid "globular cluster association"
 #~ msgstr "associació de cúmuls globulars"
@@ -17788,6 +17815,22 @@ msgstr "Declinació Personalitzada 2"
 #~ "sobre cadascun. Les dades dels púlsars s'han obtingut de \"Catalog of "
 #~ "Pulsars\" (Taylor + 1995) <br> Nota: Els identificadors dels púlsars tenen "
 #~ "el prefix \"PSR\""
+
+#~ msgid ""
+#~ "This plug-in uses a custom Solar System configuration file. If something "
+#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
+#~ "manually that file from:"
+#~ msgstr ""
+#~ "Aquest connector utilitza un fitxer personalitzat de configuració del "
+#~ "Sistema Solar. Si alguna cosa surt malament i Stellarium es bloqueja i/o no "
+#~ "s'inicia, podeu eliminar manualment el fitxer a:"
+
+#~ msgid ""
+#~ "You can create a backup copy of the custom Solar System configuration file "
+#~ "in a convenient location, or replace it with such a copy."
+#~ msgstr ""
+#~ "Podeu fer una còpia de seguretat del fitxer personalitzat de configuració "
+#~ "del Sistema Solar, o substituir-la per una còpia ja existent."
 
 #~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
 #~ msgstr "Emissió de polsos òptics, de raigs X o de raigs gamma (alta energia)"
@@ -18453,6 +18496,14 @@ msgstr "Declinació Personalitzada 2"
 
 #~ msgid "Show markers of positions"
 #~ msgstr "Mostrar les marques de posicions"
+
+#~ msgid "Select a file to replace the Solar System configuration file"
+#~ msgstr ""
+#~ "Seleccioneu un fitxer per reemplaçar el fitxer de configuració del Sistema "
+#~ "Solar"
+
+#~ msgid "Save the Solar System configuration file as..."
+#~ msgstr "Deseu el fitxer de configuració del Sistema Solar com..."
 
 #~ msgid "Angular Distance, arcsec."
 #~ msgstr "Distància Angular, arcseg."

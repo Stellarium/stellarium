@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-05 12:39+0700\n"
+"POT-Creation-Date: 2017-06-06 01:03+0700\n"
 "PO-Revision-Date: 2014-04-26 16:01+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Xhosa <xh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-05 05:45+0000\n"
-"X-Generator: Launchpad (build 18391)\n"
+"X-Launchpad-Export-Date: 2017-06-06 05:45+0000\n"
+"X-Generator: Launchpad (build 18399)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
@@ -47,7 +47,7 @@ msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
-#: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
+#: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
@@ -146,7 +146,7 @@ msgstr ""
 msgid "O./C. longitude"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1248
+#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1249
 #: src/ui_viewDialog.h:2391
 msgid "Prime Vertical"
 msgstr ""
@@ -215,136 +215,136 @@ msgstr ""
 msgid "SSGP"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1230
+#: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1231
+#: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2421
+#: src/core/modules/GridLinesMgr.cpp:1233 src/ui_viewDialog.h:2421
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1233
+#: src/core/modules/GridLinesMgr.cpp:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1234
+#: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Ecliptic J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1235
+#: src/core/modules/GridLinesMgr.cpp:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1236
+#: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Equator J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1237
+#: src/core/modules/GridLinesMgr.cpp:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1238
+#: src/core/modules/GridLinesMgr.cpp:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:393
 msgid "Horizon line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1239
+#: src/core/modules/GridLinesMgr.cpp:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1240
+#: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1241
+#: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2456
+#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2311
+#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2311
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2445
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2445
 msgid "Supergalactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2334
+#: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2334
 msgid "Supergalactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1246
+#: src/core/modules/GridLinesMgr.cpp:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1247
+#: src/core/modules/GridLinesMgr.cpp:1248
 msgid "Precession Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1249
+#: src/core/modules/GridLinesMgr.cpp:1250
 msgid "Colure Lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1250
+#: src/core/modules/GridLinesMgr.cpp:1251
 msgid "Circumpolar Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1251
+#: src/core/modules/GridLinesMgr.cpp:1252
 msgid "Celestial J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1252
+#: src/core/modules/GridLinesMgr.cpp:1253
 msgid "Celestial poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1253
+#: src/core/modules/GridLinesMgr.cpp:1254
 msgid "Zenith and nadir"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1254
+#: src/core/modules/GridLinesMgr.cpp:1255
 msgid "Ecliptic J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1255
+#: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2399
+#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2399
 msgid "Galactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2357
+#: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2357
 msgid "Supergalactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1258
+#: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1259
+#: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1260
+#: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1261
+#: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
 msgstr ""
 
@@ -3405,7 +3405,8 @@ msgid "Bright variable stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
+#: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:2676
+#: src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr ""
 
