@@ -114,9 +114,9 @@ void CustomObject::update(double deltaTime)
 void CustomObject::draw(StelCore* core, StelPainter *painter)
 {
 	Q_UNUSED(core);
-	Vec3d win;
+	Vec3d pos;
 	// Check visibility of custom object
-	if (!(painter->getProjector()->projectCheck(XYZ, win)))
+	if (!(painter->getProjector()->projectCheck(XYZ, pos)))
 		return;
 
 	painter->setBlending(true, GL_ONE, GL_ONE);
@@ -128,11 +128,11 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = markerSize + size/1.6f;
 
-		painter->drawSprite2dMode(XYZ, markerSize);
+		painter->drawSprite2dMode(pos[0], pos[1], markerSize);
 
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
+			painter->drawText(pos[0], pos[1], getNameI18n(), 0, shift, shift, false);
 		}
 	}
 }
