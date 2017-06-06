@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-04 16:04+0700\n"
+"POT-Creation-Date: 2017-06-06 01:03+0700\n"
 "PO-Revision-Date: 2017-04-28 22:01+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-05 05:30+0000\n"
-"X-Generator: Launchpad (build 18391)\n"
+"X-Launchpad-Export-Date: 2017-06-06 05:30+0000\n"
+"X-Generator: Launchpad (build 18399)\n"
 "Language: gd\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:347
+#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:349
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:281
@@ -48,7 +48,7 @@ msgstr "astaras"
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
-#: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
+#: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
@@ -147,7 +147,7 @@ msgstr "An crios-meadhain os-reul-chriosach"
 msgid "O./C. longitude"
 msgstr "Domhan-fhad c./f"
 
-#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1248
+#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1249
 #: src/ui_viewDialog.h:2391
 msgid "Prime Vertical"
 msgstr "Prìomh-chearcall inghearach"
@@ -216,136 +216,136 @@ msgstr "Pòla a tuath os-reul-chriosach"
 msgid "SSGP"
 msgstr "Pòla a deas os-reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1230
+#: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
 msgstr "Griodaichean is loidhnichean"
 
-#: src/core/modules/GridLinesMgr.cpp:1231
+#: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr "Griod meadhan-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2421
+#: src/core/modules/GridLinesMgr.cpp:1233 src/ui_viewDialog.h:2421
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "Griod azimuthach"
 
-#: src/core/modules/GridLinesMgr.cpp:1233
+#: src/core/modules/GridLinesMgr.cpp:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr "Loidhne èiclipteach"
 
-#: src/core/modules/GridLinesMgr.cpp:1234
+#: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Ecliptic J2000 line"
 msgstr "Loidhne èiclipteach J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1235
+#: src/core/modules/GridLinesMgr.cpp:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr "Loidhne mheadhan-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1236
+#: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Equator J2000 line"
 msgstr "Loidhne mheadhan-chriosach J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1237
+#: src/core/modules/GridLinesMgr.cpp:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr "Meadhan-loidhne"
 
-#: src/core/modules/GridLinesMgr.cpp:1238
+#: src/core/modules/GridLinesMgr.cpp:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:393
 msgid "Horizon line"
 msgstr "Loidhne na fàire"
 
-#: src/core/modules/GridLinesMgr.cpp:1239
+#: src/core/modules/GridLinesMgr.cpp:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr "Griod meadhan-chriosach J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1240
+#: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 grid"
 msgstr "Griod èiclipteach J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1241
+#: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic grid"
 msgstr "Griod èiclipteach"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2456
+#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr "Griod reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2311
+#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2311
 msgid "Galactic equator"
 msgstr "An crios-meadhain reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2445
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2445
 msgid "Supergalactic grid"
 msgstr "Grioda os-reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2334
+#: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2334
 msgid "Supergalactic equator"
 msgstr "An crios-meadhain os-reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1246
+#: src/core/modules/GridLinesMgr.cpp:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Opposition/conjunction longitude line"
 msgstr "Loidhne domhan-fhaid na comhaireachd ’s a’ cho-nasgaidh"
 
-#: src/core/modules/GridLinesMgr.cpp:1247
+#: src/core/modules/GridLinesMgr.cpp:1248
 msgid "Precession Circles"
 msgstr "Cearcaill ro-imeachd"
 
-#: src/core/modules/GridLinesMgr.cpp:1249
+#: src/core/modules/GridLinesMgr.cpp:1250
 msgid "Colure Lines"
 msgstr "Loidhnichean colur"
 
-#: src/core/modules/GridLinesMgr.cpp:1250
+#: src/core/modules/GridLinesMgr.cpp:1251
 msgid "Circumpolar Circles"
 msgstr "Cearcaill phòlarach"
 
-#: src/core/modules/GridLinesMgr.cpp:1251
+#: src/core/modules/GridLinesMgr.cpp:1252
 msgid "Celestial J2000 poles"
 msgstr "Pòlaichean speurach J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1252
+#: src/core/modules/GridLinesMgr.cpp:1253
 msgid "Celestial poles"
 msgstr "Pòlaichean speurach"
 
-#: src/core/modules/GridLinesMgr.cpp:1253
+#: src/core/modules/GridLinesMgr.cpp:1254
 msgid "Zenith and nadir"
 msgstr "Barr is nèidir"
 
-#: src/core/modules/GridLinesMgr.cpp:1254
+#: src/core/modules/GridLinesMgr.cpp:1255
 msgid "Ecliptic J2000 poles"
 msgstr "Pòlaichean èiclipteach J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1255
+#: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
 msgstr "Pòlaichean èiclipteach"
 
-#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2399
+#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2399
 msgid "Galactic poles"
 msgstr "Pòlaichean reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2357
+#: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2357
 msgid "Supergalactic poles"
 msgstr "Pòlaichean os-reul-chriosach"
 
-#: src/core/modules/GridLinesMgr.cpp:1258
+#: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
 msgstr "Puingean co-fhaid-thràth J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1259
+#: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
 msgstr "Puingean co-fhaid-thràth"
 
-#: src/core/modules/GridLinesMgr.cpp:1260
+#: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
 msgstr "Puingean grian-staid J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1261
+#: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
 msgstr "Puingean grian-staid"
 
@@ -409,7 +409,7 @@ msgstr "Seòrsa: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Trìd-dhoilleireachd: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:353
+#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:355
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -417,7 +417,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Meudachd: <b>%1</b> (às dèidh a’ mhùchaidh: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:220 src/core/modules/Nebula.cpp:225
-#: src/core/modules/Planet.cpp:356 src/core/modules/MinorPlanet.cpp:210
+#: src/core/modules/Planet.cpp:358 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
@@ -889,148 +889,148 @@ msgstr "Cuspairean fad às"
 msgid "Toggle DSO type filter"
 msgstr "Toglaich criathrag nan oibseactan fad às"
 
-#: src/core/modules/Planet.cpp:360 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Meudachd absaloideach: %1"
 
-#: src/core/modules/Planet.cpp:363
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
 msgstr "Meudachd na comhaireachd meadhain: %1"
 
-#: src/core/modules/Planet.cpp:387 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:239
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Astar on ghrian: %1 AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:394 src/core/modules/MinorPlanet.cpp:246
+#: src/core/modules/Planet.cpp:396 src/core/modules/MinorPlanet.cpp:246
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Astar on ghrian: %1 AU (%2 mill km)"
 
-#: src/core/modules/Planet.cpp:404 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Planet.cpp:406 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Astar: %1 AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:411 src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:413 src/core/modules/MinorPlanet.cpp:263
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Astar: %1 AU (%2 mill km)"
 
-#: src/core/modules/Planet.cpp:425 src/core/modules/Planet.cpp:429
+#: src/core/modules/Planet.cpp:427 src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Trast-thomhas san lèirsinn: %1, le fàinneachan: %2"
 
-#: src/core/modules/Planet.cpp:438 src/core/modules/Planet.cpp:442
+#: src/core/modules/Planet.cpp:440 src/core/modules/Planet.cpp:444
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "Trast-thomhas san lèirsinn: %1, air a mheudachadh gu: %2"
 
-#: src/core/modules/Planet.cpp:449 src/core/modules/Planet.cpp:451
+#: src/core/modules/Planet.cpp:451 src/core/modules/Planet.cpp:453
 #: src/core/modules/MinorPlanet.cpp:274 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Trast-thomhas san lèirsinn: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:468 src/core/modules/MinorPlanet.cpp:286
+#: src/core/modules/Planet.cpp:470 src/core/modules/MinorPlanet.cpp:286
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Ùine na cuairte reultaich: %1 latha (%2 a)"
 
-#: src/core/modules/Planet.cpp:471
+#: src/core/modules/Planet.cpp:473
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Latha reultach: %1"
 
-#: src/core/modules/Planet.cpp:472
+#: src/core/modules/Planet.cpp:474
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Latha grianail meadhain: %1"
 
-#: src/core/modules/Planet.cpp:476
+#: src/core/modules/Planet.cpp:478
 msgid "The period of rotation is chaotic"
 msgstr "Tha ùine a’ chair coimeasgach"
 
-#: src/core/modules/Planet.cpp:495
+#: src/core/modules/Planet.cpp:497
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Gealach chorranach a’ cinntinn"
 
-#: src/core/modules/Planet.cpp:497
+#: src/core/modules/Planet.cpp:499
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "A’ chiad ràith"
 
-#: src/core/modules/Planet.cpp:499
+#: src/core/modules/Planet.cpp:501
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Gealach chrotach a’ cinntinn"
 
-#: src/core/modules/Planet.cpp:501
+#: src/core/modules/Planet.cpp:503
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Làn-ghealach"
 
-#: src/core/modules/Planet.cpp:503
+#: src/core/modules/Planet.cpp:505
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Gealach chrotach a’ traoghadh"
 
-#: src/core/modules/Planet.cpp:505
+#: src/core/modules/Planet.cpp:507
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "An treas ràith"
 
-#: src/core/modules/Planet.cpp:507
+#: src/core/modules/Planet.cpp:509
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Gealach chorranach a’ traoghadh"
 
-#: src/core/modules/Planet.cpp:509
+#: src/core/modules/Planet.cpp:511
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Gealach ùr"
 
-#: src/core/modules/Planet.cpp:514 src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:521
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:250 src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Ceàrn mùthadh an t-solais: %1"
 
-#: src/core/modules/Planet.cpp:515 src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:522
 #: src/core/modules/MinorPlanet.cpp:295 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:251 src/core/modules/Comet.cpp:256
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Sìneadh: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Phase: %1"
 msgstr "Mùthadh an t-solais: %1"
 
-#: src/core/modules/Planet.cpp:527
+#: src/core/modules/Planet.cpp:529
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Soillsichte: %1%"
 
-#: src/core/modules/Planet.cpp:528
+#: src/core/modules/Planet.cpp:530
 #, qt-format
 msgid "Albedo: %1"
 msgstr "Albedo: %1"
 
-#: src/core/modules/Planet.cpp:540
+#: src/core/modules/Planet.cpp:542
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Factar an dubhraidh: %1%"
@@ -3583,7 +3583,8 @@ msgid "Bright variable stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
+#: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:2676
+#: src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr ""
 
@@ -6285,8 +6286,6 @@ msgid "Atmosphere visualization"
 msgstr ""
 
 #: src/ui_viewDialog.h:2142
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Cuspairean an rian-grèine"
 
@@ -7672,7 +7671,7 @@ msgstr "Gearr leum dhan chruth-tìre ùr às dèidh an stàlaidh"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Remove"
 msgstr "Thoir air falbh"
 
@@ -8647,7 +8646,7 @@ msgstr "Aisig na bun-roghainnean"
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:315
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
@@ -11988,7 +11987,7 @@ msgid " [RETURN to activate]"
 msgstr " [ENTER gus a ghnìomhachadh]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
 msgid "Solar System Editor"
 msgstr "Deasaiche an rian-grèine"
 
@@ -12002,8 +12001,8 @@ msgstr ""
 "’S urrainn dha liostaichean dhe chuspairean a luchdadh a-nuas o làrach-lìn "
 "Minor Planet Center agus lorg san stòr-dàta air loidhne aige."
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "Import orbital elements in MPC format..."
 msgstr "Ion-phortaich eileamaidean reul-cuairte san fhòrmat MPC..."
 
@@ -12044,12 +12043,12 @@ msgid "Select bookmark..."
 msgstr "Tagh comharra-leabhair..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
 msgid "website"
 msgstr "làrach-lìn"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:105
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -12063,28 +12062,33 @@ msgstr ""
 "liostaichean mar sin on eadar-lìon no lorg ann an Minor Planet and Comet "
 "Ephemeris Service (MPES) air loidhne."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 msgid "Solar System Editor plug-in"
 msgstr "Plugan deasaiche an rian-grèine"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:110
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 #, qt-format
 msgid "Version %1"
 msgstr "Tionndadh %1"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
-msgid "Save the Solar System configuration file as..."
-msgstr "Sàbhail faidhle rèiteachaidh an rian-ghrèine mar..."
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
+msgid "Save the minor Solar System bodies as..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
 msgid "Configuration files"
 msgstr "Faidhlichean rèiteachaidh"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
-msgid "Select a file to replace the Solar System configuration file"
-msgstr "Tagh faidhle gus a chur an àite faidhle rèiteachaidh an rian-ghrèine"
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
+msgid "Select a file to replace the Solar System minor bodies"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
+msgid "Select a file to add the Solar System minor bodies"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -12166,61 +12170,65 @@ msgstr "Na ùraich ach na h-eileamaidean reul-cuairte"
 msgid "Add objects"
 msgstr "Cuir cuspairean ris"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
-msgid "Warning"
-msgstr "Rabhadh"
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
-msgid ""
-"This plug-in uses a custom Solar System configuration file. If something "
-"goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-"manually that file from:"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+msgid "Minor Solar System objects"
 msgstr ""
-"Cleachdaidh am plugan seo faidhle rèiteachaidh an rian-grèine gnàthaichte. "
-"Ma thèid rudeigin cearr ’s ma thuislicheas Stellarium no mura tòisich e, ’s "
-"urrainn dhut am faidhle sin a sguabadh às a làimh o:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+msgid "Note"
+msgstr "An aire"
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
+msgid ""
+"This plug-in edits a custom Solar System configuration file for the minor "
+"bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
+"you can delete manually that file from:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
 "’S urrainn dhut cuideachd gach atharrachadh ath-shuidheachadh agus tilleadh "
 "dhan rèiteachadh tùsail:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Reset to defaults"
 msgstr "Ath-shuidhich air a’ bhun-roghainn"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
-msgid "Copy/replace the Solar System file"
-msgstr "Dèan lethbhreac/cuir na àite faidhle na rian-grèine"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+msgid "Export/replace the Solar System minor bodies file"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
-"You can create a backup copy of the custom Solar System configuration file "
+"You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"’S urrainn dhut lethbhreac-glèidhidh a dhèanamh dhen fhaidhle rèiteachaidh "
-"gnàthaichte an rian-grèine ann an ionad goireasach no lethbhreac dhen "
-"leithid a chur ’na àite."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
-msgid "Copy the Solar System file..."
-msgstr "Dèan lethbhreac dhe dh’fhaidhle na rian-grèine ..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+msgid "Export the Solar System minor bodies to file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
-msgid "Replace the Solar System file..."
-msgstr "Cuir an àite faidhle an rian-grèine ..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+msgid "Import and replace the Solar System minor bodies from file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+msgid "Import and add Solar System minor bodies from file..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
 msgstr "Faidhle rèiteachaidh"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
-msgid "Add new Solar System objects"
-msgstr "Cuir cuspairean an rian-grèine ùra ris"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+msgid "Add new Minor Solar System objects"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
 msgstr "An rian-grèine"
 
@@ -12870,10 +12878,6 @@ msgstr ""
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "Tha fiosrachadh air %1 pulsar sa chatalog làithreach."
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-msgid "Note"
-msgstr "An aire"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -17324,6 +17328,12 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 #~ msgid "Show horizon line"
 #~ msgstr "Seall loidhne na fàire"
 
+#~ msgid "Copy/replace the Solar System file"
+#~ msgstr "Dèan lethbhreac/cuir na àite faidhle na rian-grèine"
+
+#~ msgid "Replace the Solar System file..."
+#~ msgstr "Cuir an àite faidhle an rian-grèine ..."
+
 #~ msgid "Nights above horizon: "
 #~ msgstr "Oidhcheannan os cionn na fàire: "
 
@@ -17460,6 +17470,9 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 
 #~ msgid "CD/DVD script"
 #~ msgstr "Sgriobt CD/DVD"
+
+#~ msgid "Warning"
+#~ msgstr "Rabhadh"
 
 #, qt-format
 #~ msgid " (at %1 deg.)"
@@ -17708,6 +17721,9 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 #~ "Seo an catalog aig Jack Bennett de na cuspairean fad às deasach. Chaidh "
 #~ "catalog Bhennett a thoirt dhuinn le Auke Slotegraaf."
 
+#~ msgid "Add new Solar System objects"
+#~ msgstr "Cuir cuspairean an rian-grèine ùra ris"
+
 #~ msgid ""
 #~ "with a mean error of less than one second, max. error 1.9s, and meaningless "
 #~ "values outside this range"
@@ -17809,6 +17825,32 @@ msgstr "Dì-chlaonadh gnàthaichte 2"
 
 #~ msgid "User-defined:"
 #~ msgstr "Roghainn a’ chleachdaiche:"
+
+#~ msgid "Save the Solar System configuration file as..."
+#~ msgstr "Sàbhail faidhle rèiteachaidh an rian-ghrèine mar..."
+
+#~ msgid "Select a file to replace the Solar System configuration file"
+#~ msgstr "Tagh faidhle gus a chur an àite faidhle rèiteachaidh an rian-ghrèine"
+
+#~ msgid ""
+#~ "This plug-in uses a custom Solar System configuration file. If something "
+#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
+#~ "manually that file from:"
+#~ msgstr ""
+#~ "Cleachdaidh am plugan seo faidhle rèiteachaidh an rian-grèine gnàthaichte. "
+#~ "Ma thèid rudeigin cearr ’s ma thuislicheas Stellarium no mura tòisich e, ’s "
+#~ "urrainn dhut am faidhle sin a sguabadh às a làimh o:"
+
+#~ msgid ""
+#~ "You can create a backup copy of the custom Solar System configuration file "
+#~ "in a convenient location, or replace it with such a copy."
+#~ msgstr ""
+#~ "’S urrainn dhut lethbhreac-glèidhidh a dhèanamh dhen fhaidhle rèiteachaidh "
+#~ "gnàthaichte an rian-grèine ann an ionad goireasach no lethbhreac dhen "
+#~ "leithid a chur ’na àite."
+
+#~ msgid "Copy the Solar System file..."
+#~ msgstr "Dèan lethbhreac dhe dh’fhaidhle na rian-grèine ..."
 
 #~ msgid "Color of lines of constellations"
 #~ msgstr "An dath aig loidhnichean nan reul-bhadan"
