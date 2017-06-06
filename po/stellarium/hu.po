@@ -8,20 +8,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-04 16:04+0700\n"
+"POT-Creation-Date: 2017-06-06 01:03+0700\n"
 "PO-Revision-Date: 2017-05-02 04:05+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-05 05:32+0000\n"
-"X-Generator: Launchpad (build 18391)\n"
+"X-Launchpad-Export-Date: 2017-06-06 05:32+0000\n"
+"X-Generator: Launchpad (build 18399)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:347
+#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:349
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:281
@@ -49,7 +49,7 @@ msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
-#: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
+#: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
@@ -148,7 +148,7 @@ msgstr "Szupergalaktikus egyenlítő"
 msgid "O./C. longitude"
 msgstr "O./C. hosszúság"
 
-#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1248
+#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1249
 #: src/ui_viewDialog.h:2391
 msgid "Prime Vertical"
 msgstr "Elsődleges függőleges"
@@ -217,136 +217,136 @@ msgstr ""
 msgid "SSGP"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1230
+#: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1231
+#: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr "Egyenlítői rács"
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2421
+#: src/core/modules/GridLinesMgr.cpp:1233 src/ui_viewDialog.h:2421
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "Azimut háló"
 
-#: src/core/modules/GridLinesMgr.cpp:1233
+#: src/core/modules/GridLinesMgr.cpp:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr "Ekliptika vonala"
 
-#: src/core/modules/GridLinesMgr.cpp:1234
+#: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Ecliptic J2000 line"
 msgstr "Ekliptika vonala (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:1235
+#: src/core/modules/GridLinesMgr.cpp:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr "Egyenlítő vonala"
 
-#: src/core/modules/GridLinesMgr.cpp:1236
+#: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Equator J2000 line"
 msgstr "Egyenlítő vonala (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:1237
+#: src/core/modules/GridLinesMgr.cpp:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr "Meridiánvonal"
 
-#: src/core/modules/GridLinesMgr.cpp:1238
+#: src/core/modules/GridLinesMgr.cpp:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:393
 msgid "Horizon line"
 msgstr "Horizontvonal"
 
-#: src/core/modules/GridLinesMgr.cpp:1239
+#: src/core/modules/GridLinesMgr.cpp:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr "Egyenlítői rács (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:1240
+#: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptikus háló J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1241
+#: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic grid"
 msgstr "Ekliptikus háló"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2456
+#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr "Galaktikus háló"
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2311
+#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2311
 msgid "Galactic equator"
 msgstr "Galaktikus egyenlítő"
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2445
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2445
 msgid "Supergalactic grid"
 msgstr "Szupergalaktikus háló"
 
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2334
+#: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2334
 msgid "Supergalactic equator"
 msgstr "Szupergalaktikus egyenlítő"
 
-#: src/core/modules/GridLinesMgr.cpp:1246
+#: src/core/modules/GridLinesMgr.cpp:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Opposition/conjunction longitude line"
 msgstr "Oppozíció/együttállás hosszúsági vonala"
 
-#: src/core/modules/GridLinesMgr.cpp:1247
+#: src/core/modules/GridLinesMgr.cpp:1248
 msgid "Precession Circles"
 msgstr "Precessziós körök"
 
-#: src/core/modules/GridLinesMgr.cpp:1249
+#: src/core/modules/GridLinesMgr.cpp:1250
 msgid "Colure Lines"
 msgstr "Kolur vonalak"
 
-#: src/core/modules/GridLinesMgr.cpp:1250
+#: src/core/modules/GridLinesMgr.cpp:1251
 msgid "Circumpolar Circles"
 msgstr "Cirkumpoláris körök"
 
-#: src/core/modules/GridLinesMgr.cpp:1251
+#: src/core/modules/GridLinesMgr.cpp:1252
 msgid "Celestial J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1252
+#: src/core/modules/GridLinesMgr.cpp:1253
 msgid "Celestial poles"
 msgstr "Égi pólusok"
 
-#: src/core/modules/GridLinesMgr.cpp:1253
+#: src/core/modules/GridLinesMgr.cpp:1254
 msgid "Zenith and nadir"
 msgstr "Zenit és nadír"
 
-#: src/core/modules/GridLinesMgr.cpp:1254
+#: src/core/modules/GridLinesMgr.cpp:1255
 msgid "Ecliptic J2000 poles"
 msgstr "Ekliptikus pólusok (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:1255
+#: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
 msgstr "Ekliptikus pólusok"
 
-#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2399
+#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2399
 msgid "Galactic poles"
 msgstr "Galaktikus pólusok"
 
-#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2357
+#: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2357
 msgid "Supergalactic poles"
 msgstr "Szupergalaktikus pólusok"
 
-#: src/core/modules/GridLinesMgr.cpp:1258
+#: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
 msgstr "Napéjegyenlőségi pontok (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:1259
+#: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
 msgstr "Napéjegyenlőségi pontok"
 
-#: src/core/modules/GridLinesMgr.cpp:1260
+#: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1261
+#: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
 msgstr "Napfordulók pontjai"
 
@@ -410,7 +410,7 @@ msgstr "Típus: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Átlátszatlanság: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:353
+#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:355
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -418,7 +418,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "Magnitúdó: <b>%1</b> (kioltás után: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:220 src/core/modules/Nebula.cpp:225
-#: src/core/modules/Planet.cpp:356 src/core/modules/MinorPlanet.cpp:210
+#: src/core/modules/Planet.cpp:358 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
@@ -890,148 +890,148 @@ msgstr "Mélyég-objektumok"
 msgid "Toggle DSO type filter"
 msgstr "DSO típusú szűrő ki/be"
 
-#: src/core/modules/Planet.cpp:360 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Abszolút fényesség: %1"
 
-#: src/core/modules/Planet.cpp:363
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
 msgstr "Átlagos oppozíciós magnitúdó: %1"
 
-#: src/core/modules/Planet.cpp:387 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:239
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Távolság a Naptól: %1CsE (%2 km)"
 
-#: src/core/modules/Planet.cpp:394 src/core/modules/MinorPlanet.cpp:246
+#: src/core/modules/Planet.cpp:396 src/core/modules/MinorPlanet.cpp:246
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Távolság a Naptól: %1CsE (%2 millió km)"
 
-#: src/core/modules/Planet.cpp:404 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Planet.cpp:406 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Távolság: %1 CSE (%2 km)"
 
-#: src/core/modules/Planet.cpp:411 src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:413 src/core/modules/MinorPlanet.cpp:263
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Távolság: %1CsE (%2 millió km)"
 
-#: src/core/modules/Planet.cpp:425 src/core/modules/Planet.cpp:429
+#: src/core/modules/Planet.cpp:427 src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Látszó átmérő: %1, gyűrűkkel: %2"
 
-#: src/core/modules/Planet.cpp:438 src/core/modules/Planet.cpp:442
+#: src/core/modules/Planet.cpp:440 src/core/modules/Planet.cpp:444
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "Látszó átmérő: %1, felskálázva: %2"
 
-#: src/core/modules/Planet.cpp:449 src/core/modules/Planet.cpp:451
+#: src/core/modules/Planet.cpp:451 src/core/modules/Planet.cpp:453
 #: src/core/modules/MinorPlanet.cpp:274 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Látszó átmérő: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:468 src/core/modules/MinorPlanet.cpp:286
+#: src/core/modules/Planet.cpp:470 src/core/modules/MinorPlanet.cpp:286
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Sziderikus periódus: %1 nap (%2 év)"
 
-#: src/core/modules/Planet.cpp:471
+#: src/core/modules/Planet.cpp:473
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Sziderikus nap: %1"
 
-#: src/core/modules/Planet.cpp:472
+#: src/core/modules/Planet.cpp:474
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Középnap: %1"
 
-#: src/core/modules/Planet.cpp:476
+#: src/core/modules/Planet.cpp:478
 msgid "The period of rotation is chaotic"
 msgstr "A forgási periódus kaotikus"
 
-#: src/core/modules/Planet.cpp:495
+#: src/core/modules/Planet.cpp:497
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Növő félhold"
 
-#: src/core/modules/Planet.cpp:497
+#: src/core/modules/Planet.cpp:499
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Első negyed"
 
-#: src/core/modules/Planet.cpp:499
+#: src/core/modules/Planet.cpp:501
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Növekvő Hold"
 
-#: src/core/modules/Planet.cpp:501
+#: src/core/modules/Planet.cpp:503
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Holdtölte"
 
-#: src/core/modules/Planet.cpp:503
+#: src/core/modules/Planet.cpp:505
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Fogyó Hold"
 
-#: src/core/modules/Planet.cpp:505
+#: src/core/modules/Planet.cpp:507
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Harmadik negyed"
 
-#: src/core/modules/Planet.cpp:507
+#: src/core/modules/Planet.cpp:509
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Fogyó Hold"
 
-#: src/core/modules/Planet.cpp:509
+#: src/core/modules/Planet.cpp:511
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Újhold"
 
-#: src/core/modules/Planet.cpp:514 src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:521
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:250 src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Fázisszög: %1"
 
-#: src/core/modules/Planet.cpp:515 src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:522
 #: src/core/modules/MinorPlanet.cpp:295 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:251 src/core/modules/Comet.cpp:256
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongáció: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fázis: %1"
 
-#: src/core/modules/Planet.cpp:527
+#: src/core/modules/Planet.cpp:529
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Megvilágítva: %1%"
 
-#: src/core/modules/Planet.cpp:528
+#: src/core/modules/Planet.cpp:530
 #, qt-format
 msgid "Albedo: %1"
 msgstr "Albedo: %1"
 
-#: src/core/modules/Planet.cpp:540
+#: src/core/modules/Planet.cpp:542
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Fogyatkozási tényező: %1%"
@@ -3553,7 +3553,8 @@ msgid "Bright variable stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
+#: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:2676
+#: src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr ""
 
@@ -6218,8 +6219,6 @@ msgid "Atmosphere visualization"
 msgstr ""
 
 #: src/ui_viewDialog.h:2142
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "Naprendszerbeli objektumok"
 
@@ -7560,7 +7559,7 @@ msgstr "Felrakás után átváltás az új tájképre"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Remove"
 msgstr "Eltávolítás"
 
@@ -8518,7 +8517,7 @@ msgstr "Alap beállítások visszaállítása"
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:315
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
@@ -11635,7 +11634,7 @@ msgid " [RETURN to activate]"
 msgstr " [Enter aktiválja]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
 msgid "Solar System Editor"
 msgstr "Naprendszer szerkesztő"
 
@@ -11648,8 +11647,8 @@ msgstr ""
 "Kisbolygók és üstökösök hozzáadása a Stellarium programhoz. Az objektumok "
 "listáit a Minor Planet Center webhelyéről tölti le, ami online kereshető is."
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "Import orbital elements in MPC format..."
 msgstr "Pályaelemek importálása MPC formátumban..."
 
@@ -11689,12 +11688,12 @@ msgid "Select bookmark..."
 msgstr "Könyvjelző választása..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
 msgid "website"
 msgstr "weblap"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:105
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -11707,29 +11706,33 @@ msgstr ""
 "formátumban. Lehet meglévő fájlt beolvasni; letölteni az internetről; vagy "
 "online keresni a Minor Planet and Comet Ephemeris Service (MPES) webhelyén."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 msgid "Solar System Editor plug-in"
 msgstr "Naprendszer szerkesztő bővítmény"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:110
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 #, qt-format
 msgid "Version %1"
 msgstr "Verzió: %1"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
-msgid "Save the Solar System configuration file as..."
-msgstr "Naprendszer konfigurációs fájl mentése más néven..."
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
+msgid "Save the minor Solar System bodies as..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
 msgid "Configuration files"
 msgstr "Beállítófájlok"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
-msgid "Select a file to replace the Solar System configuration file"
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
+msgid "Select a file to replace the Solar System minor bodies"
 msgstr ""
-"Fájlt kiválasztani a Naprendszer konfigurációs fájljának felülírásához"
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
+msgid "Select a file to add the Solar System minor bodies"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -11809,57 +11812,63 @@ msgstr "Csak a pályaelemek frissítése"
 msgid "Add objects"
 msgstr "Objektumok hozzáadása"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
-msgid "Warning"
-msgstr "Figyelem!"
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
-msgid ""
-"This plug-in uses a custom Solar System configuration file. If something "
-"goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-"manually that file from:"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+msgid "Minor Solar System objects"
 msgstr ""
-"Ez a bővítmény egyéni naprendszer-fájlt használ. Ha a Stellarium ettől "
-"összeomlik, vagy nem indul, kézzel törölhető a fájl:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+msgid "Note"
+msgstr "Megjegyzés"
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
+msgid ""
+"This plug-in edits a custom Solar System configuration file for the minor "
+"bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
+"you can delete manually that file from:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr "A változtatásokat vissza lehet vonni:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Reset to defaults"
 msgstr "Az alapértelmezések visszaállítása"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
-msgid "Copy/replace the Solar System file"
-msgstr "A naprendszer fájl másolása vagy felülírása"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+msgid "Export/replace the Solar System minor bodies file"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
-"You can create a backup copy of the custom Solar System configuration file "
+"You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"A naprendszer fájlt le lehet másolni más néven, vagy a konfigurációt "
-"másikkal helyettesíteni."
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
-msgid "Copy the Solar System file..."
-msgstr "Naprendszer-fájl másolása..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+msgid "Export the Solar System minor bodies to file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
-msgid "Replace the Solar System file..."
-msgstr "Naprendszer-fájl felülírása..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+msgid "Import and replace the Solar System minor bodies from file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+msgid "Import and add Solar System minor bodies from file..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
 msgstr "Beállítófájl"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
-msgid "Add new Solar System objects"
-msgstr "Naprendszerbeli új objektumok hozzáadása"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+msgid "Add new Minor Solar System objects"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
 msgstr "Naprendszer"
 
@@ -12484,10 +12493,6 @@ msgstr ""
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "A jelenlegi katalógus %1 pulzárról tartalmaz információt."
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-msgid "Note"
-msgstr "Megjegyzés"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -17106,6 +17111,9 @@ msgstr ""
 #~ msgid "Any changes will take effect the next time Stellarium is started."
 #~ msgstr "A változások a Stellarium újraindítása után jutnak érvényre."
 
+#~ msgid "Warning"
+#~ msgstr "Figyelem!"
+
 #~ msgid "Greatest elongation: "
 #~ msgstr "Legnagyobb elongáció: "
 
@@ -17253,6 +17261,15 @@ msgstr ""
 #~ msgid "CD/DVD script"
 #~ msgstr "CD/DVD szkript"
 
+#~ msgid "Add new Solar System objects"
+#~ msgstr "Naprendszerbeli új objektumok hozzáadása"
+
+#~ msgid "Copy the Solar System file..."
+#~ msgstr "Naprendszer-fájl másolása..."
+
+#~ msgid "Replace the Solar System file..."
+#~ msgstr "Naprendszer-fájl felülírása..."
+
 #~ msgid "Display mode for quasars"
 #~ msgstr "Kvazárok megjelenítési módja"
 
@@ -17322,6 +17339,16 @@ msgstr ""
 #~ msgstr ""
 #~ "Néhány rejtett beállítást lehetővé tevő felület. Beállítható az időzóna és "
 #~ "hogy hogyan jelenjen meg a dátum és idő az alsó sorban."
+
+#~ msgid "Copy/replace the Solar System file"
+#~ msgstr "A naprendszer fájl másolása vagy felülírása"
+
+#~ msgid ""
+#~ "You can create a backup copy of the custom Solar System configuration file "
+#~ "in a convenient location, or replace it with such a copy."
+#~ msgstr ""
+#~ "A naprendszer fájlt le lehet másolni más néven, vagy a konfigurációt "
+#~ "másikkal helyettesíteni."
 
 #~ msgid "Largest Sun separation: "
 #~ msgstr "Legnagyobb Naptávolság: "
@@ -17443,6 +17470,14 @@ msgstr ""
 
 #~ msgid "Time Zone plug-in"
 #~ msgstr "Időzóna bővítmény"
+
+#~ msgid ""
+#~ "This plug-in uses a custom Solar System configuration file. If something "
+#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
+#~ "manually that file from:"
+#~ msgstr ""
+#~ "Ez a bővítmény egyéni naprendszer-fájlt használ. Ha a Stellarium ettől "
+#~ "összeomlik, vagy nem indul, kézzel törölhető a fájl:"
 
 #, qt-format
 #~ msgid ""
@@ -17754,6 +17789,9 @@ msgstr ""
 #~ msgid "Show dates of positions"
 #~ msgstr "Pozíciók dátumának mutatása"
 
+#~ msgid "Save the Solar System configuration file as..."
+#~ msgstr "Naprendszer konfigurációs fájl mentése más néven..."
+
 #~ msgid "Color of boundaries of constellations"
 #~ msgstr "Csillagképek határainak színe"
 
@@ -17770,3 +17808,7 @@ msgstr ""
 #, qt-format
 #~ msgid "Now is %1"
 #~ msgstr "Most %1"
+
+#~ msgid "Select a file to replace the Solar System configuration file"
+#~ msgstr ""
+#~ "Fájlt kiválasztani a Naprendszer konfigurációs fájljának felülírásához"

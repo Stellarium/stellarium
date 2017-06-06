@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-04 16:04+0700\n"
+"POT-Creation-Date: 2017-06-06 01:03+0700\n"
 "PO-Revision-Date: 2017-03-12 20:44+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-05 05:43+0000\n"
-"X-Generator: Launchpad (build 18391)\n"
+"X-Launchpad-Export-Date: 2017-06-06 05:44+0000\n"
+"X-Generator: Launchpad (build 18399)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:347
+#: src/core/modules/Nebula.cpp:203 src/core/modules/Planet.cpp:349
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:281
@@ -49,7 +49,7 @@ msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
-#: src/core/modules/GridLinesMgr.cpp:1229 src/core/modules/LandscapeMgr.cpp:421
+#: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
@@ -148,7 +148,7 @@ msgstr "เส้นศูนย์สูตรพิกัดมหาดาร
 msgid "O./C. longitude"
 msgstr "ลองจิจูดตรงข้าม/ร่วมทิศ"
 
-#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1248
+#: src/core/modules/GridLinesMgr.cpp:683 src/core/modules/GridLinesMgr.cpp:1249
 #: src/ui_viewDialog.h:2391
 msgid "Prime Vertical"
 msgstr "วงกลมดิ่งต้น"
@@ -217,136 +217,136 @@ msgstr "ขั้วเหนือของมหาดาราจักร"
 msgid "SSGP"
 msgstr "ขั้วใต้ของมหาดาราจักร"
 
-#: src/core/modules/GridLinesMgr.cpp:1230
+#: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1231
+#: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr "กริดพิกัดศูนย์สูตร"
 
-#: src/core/modules/GridLinesMgr.cpp:1232 src/ui_viewDialog.h:2421
+#: src/core/modules/GridLinesMgr.cpp:1233 src/ui_viewDialog.h:2421
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "กริดพิกัดขอบฟ้า"
 
-#: src/core/modules/GridLinesMgr.cpp:1233
+#: src/core/modules/GridLinesMgr.cpp:1234
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr "เส้นสุริยวิถี"
 
-#: src/core/modules/GridLinesMgr.cpp:1234
+#: src/core/modules/GridLinesMgr.cpp:1235
 msgid "Ecliptic J2000 line"
 msgstr "เส้นสุริยวิถี J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1235
+#: src/core/modules/GridLinesMgr.cpp:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr "เส้นศูนย์สูตร"
 
-#: src/core/modules/GridLinesMgr.cpp:1236
+#: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Equator J2000 line"
 msgstr "เส้นศูนย์สูตร J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1237
+#: src/core/modules/GridLinesMgr.cpp:1238
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr "เส้นเมริเดียน"
 
-#: src/core/modules/GridLinesMgr.cpp:1238
+#: src/core/modules/GridLinesMgr.cpp:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:393
 msgid "Horizon line"
 msgstr "เส้นขอบฟ้า"
 
-#: src/core/modules/GridLinesMgr.cpp:1239
+#: src/core/modules/GridLinesMgr.cpp:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr "กริดพิกัดศูนย์สูตร J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1240
+#: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 grid"
 msgstr "กริดพิกัดสุริยวิถี J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1241
+#: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic grid"
 msgstr "กริดพิกัดสุริยวิถี"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2456
+#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
 msgid "Galactic grid"
 msgstr "กริดพิกัดดาราจักร"
 
-#: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2311
+#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2311
 msgid "Galactic equator"
 msgstr "ศูนย์สูตรดาราจักร"
 
-#: src/core/modules/GridLinesMgr.cpp:1244 src/ui_viewDialog.h:2445
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2445
 msgid "Supergalactic grid"
 msgstr "กริดพิกัดมหาดาราจักร"
 
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2334
+#: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2334
 msgid "Supergalactic equator"
 msgstr "เส้นศูนย์สูตรมหาดาราจักร"
 
-#: src/core/modules/GridLinesMgr.cpp:1246
+#: src/core/modules/GridLinesMgr.cpp:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Opposition/conjunction longitude line"
 msgstr "เส้นการอยู่ตรงข้าม/ร่วมทิศ ตามแนวลองจิจูดฟ้า"
 
-#: src/core/modules/GridLinesMgr.cpp:1247
+#: src/core/modules/GridLinesMgr.cpp:1248
 msgid "Precession Circles"
 msgstr "วงกลมการหมุนควง"
 
-#: src/core/modules/GridLinesMgr.cpp:1249
+#: src/core/modules/GridLinesMgr.cpp:1250
 msgid "Colure Lines"
 msgstr "เส้นคอลัวร์"
 
-#: src/core/modules/GridLinesMgr.cpp:1250
+#: src/core/modules/GridLinesMgr.cpp:1251
 msgid "Circumpolar Circles"
 msgstr "วงกลมรอบขั้วฟ้า"
 
-#: src/core/modules/GridLinesMgr.cpp:1251
+#: src/core/modules/GridLinesMgr.cpp:1252
 msgid "Celestial J2000 poles"
 msgstr "ขั้วฟ้า J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1252
+#: src/core/modules/GridLinesMgr.cpp:1253
 msgid "Celestial poles"
 msgstr "ขั้วฟ้า"
 
-#: src/core/modules/GridLinesMgr.cpp:1253
+#: src/core/modules/GridLinesMgr.cpp:1254
 msgid "Zenith and nadir"
 msgstr "จุดจอมฟ้าและจุดดิ่ง"
 
-#: src/core/modules/GridLinesMgr.cpp:1254
+#: src/core/modules/GridLinesMgr.cpp:1255
 msgid "Ecliptic J2000 poles"
 msgstr "ขั้วสุริยวิถี J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1255
+#: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
 msgstr "ขั้วสุริยวิถี"
 
-#: src/core/modules/GridLinesMgr.cpp:1256 src/ui_viewDialog.h:2399
+#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2399
 msgid "Galactic poles"
 msgstr "ขั้วดาราจักร"
 
-#: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2357
+#: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2357
 msgid "Supergalactic poles"
 msgstr "ขั้วมหาดาราจักร"
 
-#: src/core/modules/GridLinesMgr.cpp:1258
+#: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
 msgstr "จุดวิษุวัต J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1259
+#: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
 msgstr "จุดวิษุวัต"
 
-#: src/core/modules/GridLinesMgr.cpp:1260
+#: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
 msgstr "จุดอายัน J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1261
+#: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
 msgstr "จุดอายัน"
 
@@ -410,7 +410,7 @@ msgstr "ชนิด: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "ความทึบแสง: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:353
+#: src/core/modules/Nebula.cpp:217 src/core/modules/Planet.cpp:355
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
@@ -418,7 +418,7 @@ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (เมื่อคิดการสูญหาย: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:220 src/core/modules/Nebula.cpp:225
-#: src/core/modules/Planet.cpp:356 src/core/modules/MinorPlanet.cpp:210
+#: src/core/modules/Planet.cpp:358 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:205
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
@@ -890,148 +890,148 @@ msgstr "วัตถุท้องฟ้าห้วงลึก"
 msgid "Toggle DSO type filter"
 msgstr "สลับการกรองชนิดของวัตถุท้องฟ้าห้วงลึก"
 
-#: src/core/modules/Planet.cpp:360 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "โชติมาตรสัมบูรณ์: %1"
 
-#: src/core/modules/Planet.cpp:363
+#: src/core/modules/Planet.cpp:365
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:387 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:239
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 กม.)"
 
-#: src/core/modules/Planet.cpp:394 src/core/modules/MinorPlanet.cpp:246
+#: src/core/modules/Planet.cpp:396 src/core/modules/MinorPlanet.cpp:246
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 ล้าน กม.)"
 
-#: src/core/modules/Planet.cpp:404 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Planet.cpp:406 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร์ (%2 กม.)"
 
-#: src/core/modules/Planet.cpp:411 src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:413 src/core/modules/MinorPlanet.cpp:263
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "ระยะห่าง : %1AU (%2 ล้าน กม.)"
 
-#: src/core/modules/Planet.cpp:425 src/core/modules/Planet.cpp:429
+#: src/core/modules/Planet.cpp:427 src/core/modules/Planet.cpp:431
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1, วงแหวน: %2"
 
-#: src/core/modules/Planet.cpp:438 src/core/modules/Planet.cpp:442
+#: src/core/modules/Planet.cpp:440 src/core/modules/Planet.cpp:444
 #, qt-format
 msgid "Apparent diameter: %1, scaled up to: %2"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1, ขยายถึง: %2"
 
-#: src/core/modules/Planet.cpp:449 src/core/modules/Planet.cpp:451
+#: src/core/modules/Planet.cpp:451 src/core/modules/Planet.cpp:453
 #: src/core/modules/MinorPlanet.cpp:274 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:468 src/core/modules/MinorPlanet.cpp:286
+#: src/core/modules/Planet.cpp:470 src/core/modules/MinorPlanet.cpp:286
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "คาบดาราคติ: %1 วัน (%2 a)"
 
-#: src/core/modules/Planet.cpp:471
+#: src/core/modules/Planet.cpp:473
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "วันดาราคติ: %1"
 
-#: src/core/modules/Planet.cpp:472
+#: src/core/modules/Planet.cpp:474
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "วันสุริยคติปานกลาง: %1"
 
-#: src/core/modules/Planet.cpp:476
+#: src/core/modules/Planet.cpp:478
 msgid "The period of rotation is chaotic"
 msgstr "คาบการหมุนไม่แน่นอน"
 
-#: src/core/modules/Planet.cpp:495
+#: src/core/modules/Planet.cpp:497
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "เสี้ยวข้างขึ้น"
 
-#: src/core/modules/Planet.cpp:497
+#: src/core/modules/Planet.cpp:499
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "กึ่งดวงข้างขึ้น"
 
-#: src/core/modules/Planet.cpp:499
+#: src/core/modules/Planet.cpp:501
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "ค่อนดวงข้างขึ้น"
 
-#: src/core/modules/Planet.cpp:501
+#: src/core/modules/Planet.cpp:503
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "จันทร์เพ็ญ"
 
-#: src/core/modules/Planet.cpp:503
+#: src/core/modules/Planet.cpp:505
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "ค่อนดวงข้างแรม"
 
-#: src/core/modules/Planet.cpp:505
+#: src/core/modules/Planet.cpp:507
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "กึ่งดวงข้างแรม"
 
-#: src/core/modules/Planet.cpp:507
+#: src/core/modules/Planet.cpp:509
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "เสี้ยวข้างแรม"
 
-#: src/core/modules/Planet.cpp:509
+#: src/core/modules/Planet.cpp:511
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "จันทร์ดับ"
 
-#: src/core/modules/Planet.cpp:514 src/core/modules/Planet.cpp:519
+#: src/core/modules/Planet.cpp:516 src/core/modules/Planet.cpp:521
 #: src/core/modules/MinorPlanet.cpp:294 src/core/modules/MinorPlanet.cpp:299
 #: src/core/modules/Comet.cpp:250 src/core/modules/Comet.cpp:255
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "มุมดิถี: %1"
 
-#: src/core/modules/Planet.cpp:515 src/core/modules/Planet.cpp:520
+#: src/core/modules/Planet.cpp:517 src/core/modules/Planet.cpp:522
 #: src/core/modules/MinorPlanet.cpp:295 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:251 src/core/modules/Comet.cpp:256
 #, qt-format
 msgid "Elongation: %1"
 msgstr "มุมห่างจากดวงอาทิตย์: %1"
 
-#: src/core/modules/Planet.cpp:523
+#: src/core/modules/Planet.cpp:525
 #, qt-format
 msgid "Phase: %1"
 msgstr "ดิถี: %1"
 
-#: src/core/modules/Planet.cpp:527
+#: src/core/modules/Planet.cpp:529
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "ส่วนสว่าง: %1%"
 
-#: src/core/modules/Planet.cpp:528
+#: src/core/modules/Planet.cpp:530
 #, qt-format
 msgid "Albedo: %1"
 msgstr "อัตราส่วนสะท้อน: %1"
 
-#: src/core/modules/Planet.cpp:540
+#: src/core/modules/Planet.cpp:542
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "ขนาดอุปราคา: %1%"
@@ -3517,7 +3517,8 @@ msgid "Bright variable stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:200
+#: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:2676
+#: src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr ""
 
@@ -6174,8 +6175,6 @@ msgid "Atmosphere visualization"
 msgstr ""
 
 #: src/ui_viewDialog.h:2142
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
 msgstr "วัตถุในระบบสุริยะ"
 
@@ -7501,7 +7500,7 @@ msgstr "สลับไปที่ภูมิทัศน์ใหม่หล
 
 #: src/ui_addRemoveLandscapesDialog.h:274
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Remove"
 msgstr "เอาออก"
 
@@ -8464,7 +8463,7 @@ msgstr "คืนค่าเริ่มต้นเดิม"
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:315
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:214
 #: plugins/Novae/src/ui_novaeDialog.h:244
@@ -11513,7 +11512,7 @@ msgid " [RETURN to activate]"
 msgstr " [RETURN เพื่อเปิดใช้งาน]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
 msgid "Solar System Editor"
 msgstr "เครื่องมือปรับแต่งระบบสุริยะ"
 
@@ -11524,8 +11523,8 @@ msgid ""
 "its online database."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:134
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:313
 msgid "Import orbital elements in MPC format..."
 msgstr "นำเข้าองค์ประกอบวงโคจรในรูปแบบ MPC..."
 
@@ -11564,12 +11563,12 @@ msgid "Select bookmark..."
 msgstr "เลือกที่คั่นหน้า ..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:100
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
 msgid "website"
 msgstr "เว็บไซต์"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:105
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -11582,27 +11581,32 @@ msgstr ""
 "ซึ่งรายชื่อดังกล่าวสามารถดาวน์โหลดได้จากอินเทอร์เน็ต หรือค้นหาจาก Minor "
 "Planet and Comet Ephemeris Service (MPES)"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
 msgid "Solar System Editor plug-in"
 msgstr "โปรแกรมเสริมสำหรับการปรับแต่งระบบสุริยะ"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:109
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:110
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 #, qt-format
 msgid "Version %1"
 msgstr "รุ่น %1"
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:187
-msgid "Save the Solar System configuration file as..."
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
+msgid "Save the minor Solar System bodies as..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:193
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
 msgid "Configuration files"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:195
-msgid "Select a file to replace the Solar System configuration file"
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
+msgid "Select a file to replace the Solar System minor bodies"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
+msgid "Select a file to add the Solar System minor bodies"
 msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
@@ -11684,59 +11688,64 @@ msgstr "ปรับปรุงเฉพาะองค์ประกอบว
 msgid "Add objects"
 msgstr "เพิ่มวัตถุ"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
-msgid "Warning"
-msgstr "คำเตือน"
-
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
-msgid ""
-"This plug-in uses a custom Solar System configuration file. If something "
-"goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-"manually that file from:"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
+msgid "Minor Solar System objects"
 msgstr ""
-"โปรแกรมเสริมนี้ใช้แฟ้มการปรับแต่งระบบสุริยะแบบกำหนดเอง หากเกิดสิ่งผิดปกติ "
-"ซึ่งทำให้โปรแกรม Stellarium ปิดตัวลง หรือไม่ทำงาน "
-"คุณสามารถลบแฟ้มดังกล่าวออกจาก:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+msgid "Note"
+msgstr "หมายเหตุ"
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
+msgid ""
+"This plug-in edits a custom Solar System configuration file for the minor "
+"bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
+"you can delete manually that file from:"
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
 "คุณสามารถยกเลิกการเปลี่ยนแปลงทั้งหมด แล้วกลับไปใช้การปรับแต่งแบบปริยาย:"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Reset to defaults"
 msgstr "กลับไปใช้ค่าปริยาย"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
-msgid "Copy/replace the Solar System file"
-msgstr "คัดลอก/แทนที่ แฟ้มข้อมูลระบบสุริยะ"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
+msgid "Export/replace the Solar System minor bodies file"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
-"You can create a backup copy of the custom Solar System configuration file "
+"You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"คุณสามารถสร้างแฟ้มสำรองของไฟล์การปรับแต่งระบบสุริยะแบบกำหนดเองไว้ในที่ที่ต้อง"
-"การ หรือแทนที่มันด้วยแฟ้มสำรองนั้น"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
-msgid "Copy the Solar System file..."
-msgstr "คัดลอกแฟ้มข้อมูลระบบสุริยะ..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
+msgid "Export the Solar System minor bodies to file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
-msgid "Replace the Solar System file..."
-msgstr "แทนที่แฟ้มข้อมูลระบบสุริยะ..."
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
+msgid "Import and replace the Solar System minor bodies from file..."
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+msgid "Import and add Solar System minor bodies from file..."
+msgstr ""
+
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
 msgstr "แฟ้มการปรับแต่ง"
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
-msgid "Add new Solar System objects"
-msgstr "เพิ่มวัตถุในระบบสุริยะดวงใหม่"
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
+msgid "Add new Minor Solar System objects"
+msgstr ""
 
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
 msgstr "ระบบสุริยะ"
 
@@ -12353,10 +12362,6 @@ msgstr ""
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "บัญชีปัจจุบันมีข้อมูลพัลซาร์ประมาณ %1 ดวง"
-
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-msgid "Note"
-msgstr "หมายเหตุ"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -16705,6 +16710,12 @@ msgstr "เดคลิเนชันที่กำหนดเอง 2"
 #~ msgid "Magnitude scaling multiplier"
 #~ msgstr "ตัวคูณการปรับตามโชติมาตร"
 
+#~ msgid "Warning"
+#~ msgstr "คำเตือน"
+
+#~ msgid "Add new Solar System objects"
+#~ msgstr "เพิ่มวัตถุในระบบสุริยะดวงใหม่"
+
 #~ msgid ""
 #~ "A plugin that shows some historical supernovae brighter than 10 visual "
 #~ "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
@@ -16728,6 +16739,15 @@ msgstr "เดคลิเนชันที่กำหนดเอง 2"
 
 #~ msgid "NORAD two line element orbit data"
 #~ msgstr "ข้อมูลวงโคจรแบบ 2 บรรทัดจาก NORAD"
+
+#~ msgid "Copy/replace the Solar System file"
+#~ msgstr "คัดลอก/แทนที่ แฟ้มข้อมูลระบบสุริยะ"
+
+#~ msgid "Copy the Solar System file..."
+#~ msgstr "คัดลอกแฟ้มข้อมูลระบบสุริยะ..."
+
+#~ msgid "Replace the Solar System file..."
+#~ msgstr "แทนที่แฟ้มข้อมูลระบบสุริยะ..."
 
 #~ msgid "CD/DVD script"
 #~ msgstr "สคริปต์จาก CD/DVD"
@@ -16912,6 +16932,22 @@ msgstr "เดคลิเนชันที่กำหนดเอง 2"
 
 #~ msgid "Nebula label frequency:"
 #~ msgstr "ความถี่ของการแสดงชื่อเนบิวลา:"
+
+#~ msgid ""
+#~ "You can create a backup copy of the custom Solar System configuration file "
+#~ "in a convenient location, or replace it with such a copy."
+#~ msgstr ""
+#~ "คุณสามารถสร้างแฟ้มสำรองของไฟล์การปรับแต่งระบบสุริยะแบบกำหนดเองไว้ในที่ที่ต้อง"
+#~ "การ หรือแทนที่มันด้วยแฟ้มสำรองนั้น"
+
+#~ msgid ""
+#~ "This plug-in uses a custom Solar System configuration file. If something "
+#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
+#~ "manually that file from:"
+#~ msgstr ""
+#~ "โปรแกรมเสริมนี้ใช้แฟ้มการปรับแต่งระบบสุริยะแบบกำหนดเอง หากเกิดสิ่งผิดปกติ "
+#~ "ซึ่งทำให้โปรแกรม Stellarium ปิดตัวลง หรือไม่ทำงาน "
+#~ "คุณสามารถลบแฟ้มดังกล่าวออกจาก:"
 
 #~ msgid "(offset = local time - UTC time)"
 #~ msgstr "(เวลาผลต่าง = เวลาท้องถิ่น - เวลาสากลเชิงพิกัด)"
