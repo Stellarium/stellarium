@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-06 01:03+0700\n"
-"PO-Revision-Date: 2017-02-01 14:09+0000\n"
+"PO-Revision-Date: 2017-06-06 10:20+0000\n"
 "Last-Translator: renier meyer <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-06 05:22+0000\n"
+"X-Launchpad-Export-Date: 2017-06-07 05:23+0000\n"
 "X-Generator: Launchpad (build 18399)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -54,7 +54,7 @@ msgstr ""
 #: src/core/StelApp.cpp:544 src/core/StelCore.cpp:254
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:765
 msgid "Display Options"
-msgstr "Vertoon Opsies"
+msgstr "Vertoonopsies"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
@@ -71,7 +71,7 @@ msgstr "konstellasie"
 #: src/core/modules/ConstellationMgr.cpp:144
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation lines"
-msgstr ""
+msgstr "konstellasielyne"
 
 #: src/core/modules/ConstellationMgr.cpp:145
 msgid "Constellation art"
@@ -177,7 +177,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:910
 msgctxt "zenith"
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:912
@@ -188,22 +188,22 @@ msgstr ""
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:919 src/core/modules/GridLinesMgr.cpp:928
 msgid "NEP"
-msgstr ""
+msgstr "NEP"
 
 #. TRANSLATORS: South Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:921 src/core/modules/GridLinesMgr.cpp:930
 msgid "SEP"
-msgstr ""
+msgstr "SEP"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:937
 msgid "NGP"
-msgstr ""
+msgstr "NMP"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:939
 msgid "SGP"
-msgstr ""
+msgstr "SMP"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:946
@@ -217,7 +217,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
-msgstr ""
+msgstr "Ruitenet en lyne"
 
 #: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -264,11 +264,11 @@ msgstr "Ekwatoriale J2000 rooster"
 
 #: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Ekliptiese J2000- rooster"
 
 #: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Ekliptiese rooster"
 
 #: src/core/modules/GridLinesMgr.cpp:1243 src/ui_viewDialog.h:2456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:398
@@ -281,11 +281,11 @@ msgstr "Stêrrestelsel ewenaar"
 
 #: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2445
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Heelal rooster"
 
 #: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2334
 msgid "Supergalactic equator"
-msgstr ""
+msgstr "Heelalewenaar"
 
 #: src/core/modules/GridLinesMgr.cpp:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
@@ -330,7 +330,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2357
 msgid "Supergalactic poles"
-msgstr ""
+msgstr "Heelal pole"
 
 #: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
@@ -342,11 +342,11 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
-msgstr ""
+msgstr "J2000-Tippelaarstêr punte"
 
 #: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
-msgstr ""
+msgstr "Tippelaarstêr punte"
 
 #: src/core/modules/LandscapeMgr.cpp:422
 msgid "Atmosphere"
@@ -367,11 +367,11 @@ msgstr "Grond"
 
 #: src/core/modules/LandscapeMgr.cpp:426
 msgid "Landscape illumination"
-msgstr ""
+msgstr "Landskap beligting"
 
 #: src/core/modules/LandscapeMgr.cpp:427
 msgid "Landscape labels"
-msgstr ""
+msgstr "Landskap byskrifte"
 
 #: src/core/modules/LandscapeMgr.cpp:428 src/ui_viewDialog.h:2136
 msgid "Light pollution data from locations database"
@@ -437,16 +437,16 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:237
 msgid "Surface brightness"
-msgstr ""
+msgstr "Oppervlakte helderheid"
 
 #: src/core/modules/Nebula.cpp:238
 msgid "after extinction"
-msgstr ""
+msgstr "na uitsterwing"
 
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Nebula.cpp:261
 #, qt-format
 msgid "Contrast index: %1"
-msgstr ""
+msgstr "Kontras indeks: %1"
 
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
@@ -461,7 +461,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:276
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "Oriëntasiehoek: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:300 src/core/modules/StarWrapper.cpp:243
@@ -469,32 +469,32 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Afstand: %1 lj"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:310
 msgid "kpc"
-msgstr ""
+msgstr "kps"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:312
 msgid "ly"
-msgstr ""
+msgstr "lj"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:319
 msgid "Mpc"
-msgstr ""
+msgstr "mps"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:321
 msgid "Mio. ly"
-msgstr ""
+msgstr "Mill. lj"
 
 #: src/core/modules/Nebula.cpp:335
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
-msgstr ""
+msgstr "Afstand: %1 %2 (%3 %4)"
 
 #: src/core/modules/Nebula.cpp:349
 #, qt-format
@@ -508,77 +508,77 @@ msgstr "Parallaks: %1\""
 
 #: src/core/modules/Nebula.cpp:364
 msgid "Morphological description: "
-msgstr ""
+msgstr "Morfologiese beskrywing "
 
 #: src/core/modules/Nebula.cpp:932
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "hoë konsentrasie van sterre na die middelpunt"
 
 #: src/core/modules/Nebula.cpp:935
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "Hoë middelpuntsdigtheid van stêrre"
 
 #: src/core/modules/Nebula.cpp:938
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "sterk binne-kern van stêrre"
 
 #: src/core/modules/Nebula.cpp:941
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "middelslag konsentrasie van stêrre"
 
 #: src/core/modules/Nebula.cpp:946
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "middelslag konsentrasie van stêrre"
 
 #: src/core/modules/Nebula.cpp:949
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
-msgstr ""
+msgstr "redelike verspreide konsentrasies van stêrre na die middelpunt"
 
 #: src/core/modules/Nebula.cpp:952
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
-msgstr ""
+msgstr "los konsentrasie van stêrre na die middelpunt"
 
 #: src/core/modules/Nebula.cpp:955
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "los konsentrasie van stêrre"
 
 #: src/core/modules/Nebula.cpp:958
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "baie los konsentrasie van stêrre na die middelpunt"
 
 #: src/core/modules/Nebula.cpp:961
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "byna geen konsentrasie na die middelpunt nie"
 
 #: src/core/modules/Nebula.cpp:964
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "ongedokumenteerde konsentrasie van stêrre"
 
 #: src/core/modules/Nebula.cpp:984
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
-msgstr ""
+msgstr "Sterk sentrale konsentrasie van stêrre"
 
 #: src/core/modules/Nebula.cpp:987
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
-msgstr ""
+msgstr "effens sentrale konsentrasie van stêrre"
 
 #: src/core/modules/Nebula.cpp:990
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
-msgstr ""
+msgstr "geen merkbare konsentrasie van stêrre nie"
 
 #: src/core/modules/Nebula.cpp:993
 msgctxt "Trumpler's Concentration Class"
@@ -638,32 +638,32 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:1051
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
-msgstr ""
+msgstr "baie helder"
 
 #: src/core/modules/Nebula.cpp:1054
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "helder"
 
 #: src/core/modules/Nebula.cpp:1057
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "middelmatige helderheid"
 
 #: src/core/modules/Nebula.cpp:1060
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "dof"
 
 #: src/core/modules/Nebula.cpp:1063
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "baie dof"
 
 #: src/core/modules/Nebula.cpp:1066
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "onvasgestelde helderheid"
 
 #: src/core/modules/Nebula.cpp:1069
 msgctxt "Reflection Nebulae Brightness"
@@ -704,19 +704,19 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1119
 msgid "circular form"
-msgstr ""
+msgstr "sirkulêre form"
 
 #: src/core/modules/Nebula.cpp:1122
 msgid "elliptical form"
-msgstr ""
+msgstr "ekliptiese form"
 
 #: src/core/modules/Nebula.cpp:1125
 msgid "irregular form"
-msgstr ""
+msgstr "onreëlmatige form"
 
 #: src/core/modules/Nebula.cpp:1128
 msgid "undocumented form"
-msgstr ""
+msgstr "ongedokumenteerde form"
 
 #: src/core/modules/Nebula.cpp:1134
 msgid "amorphous structure"
@@ -732,42 +732,42 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1143
 msgid "undocumented structure"
-msgstr ""
+msgstr "ongedokumenteerde struktuur"
 
 #: src/core/modules/Nebula.cpp:1149
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "dofste"
 
 #: src/core/modules/Nebula.cpp:1152
 msgctxt "HII region brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "middelmatige helderheid"
 
 #: src/core/modules/Nebula.cpp:1155
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "helderste"
 
 #: src/core/modules/Nebula.cpp:1158
 msgid "undocumented brightness"
-msgstr ""
+msgstr "ongedokumenteerde helderheid"
 
 #: src/core/modules/Nebula.cpp:1174
 msgid "galaxy"
-msgstr ""
+msgstr "stêrrestelsel"
 
 #: src/core/modules/Nebula.cpp:1177
 msgid "active galaxy"
-msgstr ""
+msgstr "aktiewe stêrrestelsel"
 
 #: src/core/modules/Nebula.cpp:1180
 msgid "radio galaxy"
-msgstr ""
+msgstr "radio stêrrestelsel"
 
 #: src/core/modules/Nebula.cpp:1183
 msgid "interacting galaxy"
-msgstr ""
+msgstr "meedoenende stêrrestelsel"
 
 #: src/core/modules/Nebula.cpp:1186 plugins/Quasars/src/Quasar.cpp:102
 msgid "quasar"
@@ -775,15 +775,15 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1189
 msgid "star cluster"
-msgstr ""
+msgstr "stêrre klomp"
 
 #: src/core/modules/Nebula.cpp:1192
 msgid "open star cluster"
-msgstr ""
+msgstr "oop stêrre klomp"
 
 #: src/core/modules/Nebula.cpp:1195
 msgid "globular star cluster"
-msgstr ""
+msgstr "bolvormige stêrre klomp"
 
 #: src/core/modules/Nebula.cpp:1198
 msgid "nebula"
@@ -827,7 +827,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1228
 msgid "star cloud"
-msgstr ""
+msgstr "stêrre wolk"
 
 #: src/core/modules/Nebula.cpp:1231
 msgid "interstellar matter"

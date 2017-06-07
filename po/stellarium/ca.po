@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-06 01:03+0700\n"
-"PO-Revision-Date: 2017-06-05 11:38+0000\n"
+"PO-Revision-Date: 2017-06-06 20:18+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-06 05:27+0000\n"
+"X-Launchpad-Export-Date: 2017-06-07 05:23+0000\n"
 "X-Generator: Launchpad (build 18399)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -889,7 +889,7 @@ msgstr "Objectes de l'Espai Profund"
 
 #: src/core/modules/NebulaMgr.cpp:375
 msgid "Toggle DSO type filter"
-msgstr "Commuta filtre de tipus d'OEP"
+msgstr "Commuta filtre de tipus de DSO"
 
 #: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
@@ -4512,7 +4512,7 @@ msgstr "Tour Herschel 400"
 #. TRANSLATORS: Name of script
 #: src/translations.h:367
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr "Binosky: Objectes de cel profund per Prismàtics"
+msgstr "Binosky: Objectes de l'Espai Profund per Prismàtics"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:369
@@ -4726,17 +4726,17 @@ msgid ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
-"Ben Crowell ha creat Binosky, una llista d'observació d'objectes de cel "
-"profund per als prismàtics. En el script donem una llista d'aquests 31 "
-"objectes, ordenats per ascensió recta (2000.0)."
+"Ben Crowell ha creat Binosky, una llista d'observació d'Objectes de l'Espai "
+"Profund per Prismàtics. En el script donem una llista d'aquests 31 objectes, "
+"ordenats per Ascensió Recta (2000.0)."
 
 #: src/translations.h:407
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
-"Catàleg Jack Bennett d'Objectes del Cel Profund del Sud (152 objectes en "
-"total). El catàleg de Bennett va ser aportat per Auke Slotegraaf."
+"El catàleg de Jack Bennett d'Objectes Medirionals de l'Espai Profund (152 "
+"objectes en total). El catàleg de Bennett va ser aportat per Auke Slotegraaf."
 
 #: src/translations.h:408
 msgid ""
@@ -5929,11 +5929,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:467
 msgid "Reset location list to show all known locations"
-msgstr "Restablir llista d'ubicació per mostrar tots els llocs coneguts"
+msgstr "Restablir llista per mostrar tots els llocs"
 
 #: src/ui_locationDialogGui.h:469
 msgid "Reset Location List"
-msgstr "Restablir llista d'ubicació per mostrar tots els llocs coneguts"
+msgstr "Restablir llista d'ubicació"
 
 #: src/ui_locationDialogGui.h:470
 msgid "Current location information"
@@ -6153,7 +6153,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:704
 msgid "names in English"
-msgstr "noms en Angles"
+msgstr "noms en anglès"
 
 #: src/ui_searchDialogGui.h:705
 msgid "Search in list..."
@@ -6457,7 +6457,8 @@ msgstr "Altre"
 #: src/ui_viewDialog.h:2261
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
-"Utilitza pistes proporcionals a la mida angular dels objectes de cel profund"
+"Utilitza pistes proporcionals a la mida angular dels objectes de l'espai "
+"profund"
 
 #: src/ui_viewDialog.h:2263
 msgid "Use proportional hints"
@@ -6468,7 +6469,7 @@ msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
-"Utilitzar brillantor de la superfície dels objectes de cel profund per "
+"Utilitzar brillantor de la superfície dels objectes de l'espai profund per "
 "l'escala de la visibilitat dels seus marcadors i etiquetes."
 
 #: src/ui_viewDialog.h:2267
@@ -6479,16 +6480,16 @@ msgstr "Utilitzar brillantor de la superfície"
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"Magnitud límit d'objectes de cel profund (per als observadors d'ull "
-"nu/binoculars)."
+"Magnitud límit (per als observadors d'ull nu/binoculars) d'objectes de "
+"l'espai profund."
 
 #: src/ui_viewDialog.h:2273
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr ""
-"Utilitza les denominacions d'objectes de cel profund en lloc dels seus noms "
-"comuns per a les etiquetes de pantalla"
+"Utilitza les denominacions d'objectes de l'espai profund en lloc dels seus "
+"noms comuns per a les etiquetes de pantalla"
 
 #: src/ui_viewDialog.h:2275
 msgid "Use designations for screen labels"
@@ -6979,7 +6980,7 @@ msgstr "DSO"
 
 #: src/ui_viewDialog.h:2553
 msgid "Deep-Sky Objects"
-msgstr "Objectes del Cel Profund"
+msgstr "Deep-Sky Objects (Objectes  de l'Espai Profund)"
 
 #: src/ui_viewDialog.h:2556
 msgid "Markings"
@@ -7093,7 +7094,7 @@ msgstr "Retorna a la configuració per defecte de Stellarium"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:310
 msgid "Restore defaults"
-msgstr "Restaura per omissió"
+msgstr "Restaura predeterminats"
 
 #: src/ui_configurationDialog.h:1296
 msgid ""
@@ -7649,7 +7650,7 @@ msgstr "Dreceres de teclat"
 
 #: src/ui_shortcutsDialog.h:199
 msgid "Restore Defaults"
-msgstr "Restablir valors predeterminats"
+msgstr "Restablir predeterminats"
 
 #: src/ui_shortcutsDialog.h:200
 msgid "Apply"
@@ -8010,7 +8011,7 @@ msgstr "Arranjament dels colors"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr "Colors de les etiquetes i marques d'objecte del cel profund"
+msgstr "Colors de les etiquetes i marques d'objecte de l'espai profund"
 
 #: src/ui_dsoColorsDialog.h:480
 msgid "Color of markers of open star clusters"
@@ -8066,11 +8067,11 @@ msgstr "Color dels marcadors de galàxies interactives"
 
 #: src/ui_dsoColorsDialog.h:524
 msgid "Markers of deep-sky objects"
-msgstr "Marcadors d'objectes de cel profund"
+msgstr "Marcadors d'objectes de l'espai profund"
 
 #: src/ui_dsoColorsDialog.h:526
 msgid "Markers of DSOs"
-msgstr "Marcadors de OCP"
+msgstr "Marcadors de DSO"
 
 #: src/ui_dsoColorsDialog.h:528
 msgid "Color of markers of possible quasars"
@@ -8103,19 +8104,19 @@ msgstr "Color dels marcadors d'objecte d'emissió"
 
 #: src/ui_dsoColorsDialog.h:555
 msgid "Color of markers of deep-sky objects"
-msgstr "Color dels marcadors d'objectes de cel profund"
+msgstr "Color dels marcadors d'objectes de l'espai profund"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Labels of deep-sky objects"
-msgstr "Etiquetes d'objectes de cel profund"
+msgstr "Etiquetes d'objectes de l'espai profund"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Labels of DSOs"
-msgstr "Etiquetes d'OCP"
+msgstr "Etiquetes de DSO"
 
 #: src/ui_dsoColorsDialog.h:562
 msgid "Color of labels of deep-sky objects"
-msgstr "Color de les etiquetes d'objectes de cel profund"
+msgstr "Color de les etiquetes d'objectes de l'espai profund"
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interstellar matter"
