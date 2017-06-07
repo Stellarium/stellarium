@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-06-06 01:03+0700\n"
-"PO-Revision-Date: 2017-05-31 12:02+0000\n"
+"PO-Revision-Date: 2017-06-06 10:20+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-06 05:42+0000\n"
+"X-Launchpad-Export-Date: 2017-06-07 05:24+0000\n"
 "X-Generator: Launchpad (build 18399)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -3294,12 +3294,12 @@ msgstr "d"
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:358
 msgid "P.M."
-msgstr ""
+msgstr "P.M."
 
 #: src/gui/AstroCalcDialog.cpp:358
 msgctxt "arcsecond per year"
 msgid "\"/yr"
-msgstr ""
+msgstr "\"/annu"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:364
@@ -3589,11 +3589,11 @@ msgstr "Istellas variabiles luminosas"
 #: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:2676
 #: src/translations.h:200
 msgid "Bright stars with high proper motion"
-msgstr ""
+msgstr "Istellas luminosas con un alrtu movimentu curretu"
 
 #: src/gui/AstroCalcDialog.cpp:650
 msgid "star with high proper motion"
-msgstr ""
+msgstr "istella cun artu movimentu curretu"
 
 #: src/gui/AstroCalcDialog.cpp:772 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -4146,7 +4146,7 @@ msgstr "Aztecos"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:211
 msgid "Belarusian"
-msgstr ""
+msgstr "Bielorussu"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:213
@@ -9663,11 +9663,11 @@ msgstr "Angulu de riflessione de su Sole: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:353
 msgid "Group"
-msgstr ""
+msgstr "Grupu"
 
 #: plugins/Satellites/src/Satellite.cpp:355
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 #: plugins/Satellites/src/Satellite.cpp:361
 #, qt-format
@@ -12058,7 +12058,7 @@ msgstr "Versione %1"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
-msgstr ""
+msgstr "Sarva sos corpos minores de su sistema solare comente..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
@@ -12068,10 +12068,12 @@ msgstr "File de configuratzione"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
 msgid "Select a file to replace the Solar System minor bodies"
 msgstr ""
+"Sebera unu file po cambiare cussu de sos corpos minores de su sistema solare"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
 msgid "Select a file to add the Solar System minor bodies"
 msgstr ""
+"Sebera unu file po du azunghere sos corpos minores de su sistema solare"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -12156,7 +12158,7 @@ msgstr "Azunge ogettos"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "Oggetos minores de su sistema solare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
@@ -12169,6 +12171,10 @@ msgid ""
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
 "you can delete manually that file from:"
 msgstr ""
+"Custu plugin modificat unu file de configuratzione personalizau de su "
+"Sistema Solare po sos corpos minures. Si cach cosa non andat bene, "
+"Stellarium si frimat e/o non torrat a partire, bastat cantzellare a manos su "
+"file dae:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
@@ -12184,24 +12190,30 @@ msgstr "Torra a sa configuratzione predefinia"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Export/replace the Solar System minor bodies file"
 msgstr ""
+"Isportare / cambia su file de sos corpos minores de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Est possibile faere una copia de backup de su file de configuratzione "
+"personalizzau de su Sistema Solare in logu comodu e cambire su file cun sa "
+"copia fatta."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Export the Solar System minor bodies to file..."
-msgstr ""
+msgstr "Isportare su file de sos corpos minores de su Sistema Solare in..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import and replace the Solar System minor bodies from file..."
 msgstr ""
+"Isportare et cambia sos corpos minores de su Sistema Solare dae su file..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import and add Solar System minor bodies from file..."
 msgstr ""
+"Isportare et azunghe sos corpos minores de su Sistema Solare dae su file..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
@@ -12209,7 +12221,7 @@ msgstr "File de configuratzione"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "Azunghe unu oggetu minore nou de su Sistema Solare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
@@ -13222,19 +13234,19 @@ msgstr "Iscludi sas propriedades de sa GUI"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "These are all available properties."
-msgstr ""
+msgstr "Custas suni totu propriedades disponibiles."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "Custas suni sas propriedades esclusas como dae sa sincronizatzione."
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "Propriedades esclusas"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "Propriedades sincronizadas"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
