@@ -1502,10 +1502,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		viewportBufferSz+=125.f;
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
+
 	if ((prj->project(Vec3d(0.), screenPos)
 	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+viewportBufferSz
-	     && screenPos[0]>viewport_left - viewportBufferSz && screenPos[0] < viewport_left + prj->getViewportWidth() + viewportBufferSz)
-			|| permanentDrawingOrbits)
+	     && screenPos[0]>viewport_left - viewportBufferSz && screenPos[0] < viewport_left + prj->getViewportWidth() + viewportBufferSz))
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (e.g. for Jupiter's satellites)
@@ -1528,6 +1528,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 
 		draw3dModel(core,transfo,screenSz);
 	}
+	else if (permanentDrawingOrbits) // A special case for demos
+		drawOrbit(core);
+
 	return;
 }
 
