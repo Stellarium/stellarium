@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-06 01:03+0700\n"
+"POT-Creation-Date: 2017-06-08 00:35+0700\n"
 "PO-Revision-Date: 2014-04-26 16:01+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Xhosa <xh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-06 05:45+0000\n"
-"X-Generator: Launchpad (build 18399)\n"
+"X-Launchpad-Export-Date: 2017-06-08 05:44+0000\n"
+"X-Generator: Launchpad (build 18402)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
@@ -47,7 +47,7 @@ msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
-#: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:421
+#: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:422
 #: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
@@ -348,50 +348,50 @@ msgstr ""
 msgid "Solstice points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:422
+#: src/core/modules/LandscapeMgr.cpp:423
 msgid "Atmosphere"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:423
+#: src/core/modules/LandscapeMgr.cpp:424
 msgid "Fog"
 msgstr "Inkungu"
 
-#: src/core/modules/LandscapeMgr.cpp:424 src/ui_viewDialog.h:2353
+#: src/core/modules/LandscapeMgr.cpp:425 src/ui_viewDialog.h:2353
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:425
+#: src/core/modules/LandscapeMgr.cpp:426
 msgid "Ground"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:426
+#: src/core/modules/LandscapeMgr.cpp:427
 msgid "Landscape illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:427
+#: src/core/modules/LandscapeMgr.cpp:428
 msgid "Landscape labels"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:428 src/ui_viewDialog.h:2136
+#: src/core/modules/LandscapeMgr.cpp:429 src/ui_viewDialog.h:2136
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:788
+#: src/core/modules/LandscapeMgr.cpp:789
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 msgid "Author: "
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:794
+#: src/core/modules/LandscapeMgr.cpp:795
 msgid "Location: "
 msgstr "Indawo ekuyo: "
 
-#: src/core/modules/LandscapeMgr.cpp:797
+#: src/core/modules/LandscapeMgr.cpp:798
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:802 src/ui_astroCalcDialog.h:892
+#: src/core/modules/LandscapeMgr.cpp:803 src/ui_astroCalcDialog.h:892
 #: src/ui_astroCalcDialog.h:934
 msgid "Celestial body:"
 msgstr ""
@@ -1186,13 +1186,21 @@ msgstr ""
 msgid "Separation"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:290
-msgid "Proper motions"
+#: src/core/modules/StarWrapper.cpp:295
+msgid "Proper motions by axes"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:290
+#: src/core/modules/StarWrapper.cpp:295 src/core/modules/StarWrapper.cpp:297
 msgctxt "milliarc second per year"
 msgid "mas/yr"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:296
+msgid "Position angle of the proper motion"
+msgstr ""
+
+#: src/core/modules/StarWrapper.cpp:297
+msgid "Angular velocity of the proper motion"
 msgstr ""
 
 #: src/core/modules/MilkyWay.cpp:79
