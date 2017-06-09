@@ -82,8 +82,11 @@
 
 % Will become a boxed text, representing a GUI button label.
 \newcommand{\button}[1]{\textbf{\textsf{\fbox{\scriptsize #1}}}}
-%% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index:
-\newcommand{\name}[1]{\textsc{#1}\index{#1}}
+%% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index.
+%% Names should be given with First names and surnames like \name[Johann]{Bayer}. The index will be built sorted by entry surnames.
+\newcommand{\name}[2][]{%
+	\ifthenelse{\equal{#1}{}}{\textsc{#2}\index{#2}}%
+	                         {\textsc{#1 #2}\index{#2, #1}}}
 %% Some new term that is presented here with emphasis and also goes immediately to the index. 
 %% If you want to have a different argument for the index command, use an optional first argument here. (E.g. different capitalisation, or index structuring, ...)
 %\newcommand{\indexterm}[1]{\emph{#2}\index{#2}}
