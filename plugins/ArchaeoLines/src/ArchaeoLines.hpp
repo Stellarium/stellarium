@@ -281,7 +281,13 @@ class ArchaeoLines : public StelModule
 				WRITE setCustomDeclination2
 				NOTIFY customDeclination2Changed)
 
-	// TODO: Maybe add properties for geo locations and custom azimuths/declinations: labels.
+	// More "forwarding properties" for geo locations and custom azimuths/declination labels.
+	Q_PROPERTY(QString geographicLocation1Label READ getGeographicLocation1Label WRITE setGeographicLocation1Label NOTIFY geographicLocation1LabelChanged)
+	Q_PROPERTY(QString geographicLocation2Label READ getGeographicLocation2Label WRITE setGeographicLocation2Label NOTIFY geographicLocation2LabelChanged)
+	Q_PROPERTY(QString customAzimuth1Label READ getCustomAzimuth1Label WRITE setCustomAzimuth1Label NOTIFY customAzimuth1LabelChanged)
+	Q_PROPERTY(QString customAzimuth2Label READ getCustomAzimuth2Label WRITE setCustomAzimuth2Label NOTIFY customAzimuth2LabelChanged)
+	Q_PROPERTY(QString customDeclination1Label READ getCustomDeclination1Label WRITE setCustomDeclination1Label NOTIFY customDeclination1LabelChanged)
+	Q_PROPERTY(QString customDeclination2Label READ getCustomDeclination2Label WRITE setCustomDeclination2Label NOTIFY customDeclination2LabelChanged)
 
 public:
 	ArchaeoLines();
@@ -338,6 +344,12 @@ signals:
 	void customDeclination1Changed(double dec);
 	void customDeclination2Changed(double dec);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
+	void geographicLocation1LabelChanged(QString label);
+	void geographicLocation2LabelChanged(QString label);
+	void customAzimuth1LabelChanged(QString label);
+	void customAzimuth2LabelChanged(QString label);
+	void customDeclination1LabelChanged(QString label);
+	void customDeclination2LabelChanged(QString label);
 
 public slots:
 	void enableArchaeoLines(bool b);
@@ -383,6 +395,8 @@ public slots:
 	void setGeographicLocation2Latitude(double lat);
 	void setGeographicLocation1Label(QString label);
 	void setGeographicLocation2Label(QString label);
+	QString getGeographicLocation1Label(){return geographicLocation1Line->getLabel();}
+	QString getGeographicLocation2Label(){return geographicLocation2Line->getLabel();}
 	double getGeographicLocation1Longitude() const {return geographicLocation1Longitude; }
 	double getGeographicLocation1Latitude()  const {return geographicLocation1Latitude; }
 	double getGeographicLocation2Longitude() const {return geographicLocation2Longitude; }
@@ -395,6 +409,8 @@ public slots:
 	double getCustomAzimuth2() const { return customAzimuth2Line->getDefiningAngle(); }
 	void setCustomAzimuth1Label(QString label);
 	void setCustomAzimuth2Label(QString label);
+	QString getCustomAzimuth1Label(){return customAzimuth1Line->getLabel();}
+	QString getCustomAzimuth2Label(){return customAzimuth2Line->getLabel();}
 	void showCustomDeclination1(bool b);
 	void showCustomDeclination2(bool b);
 	void setCustomDeclination1(double dec);
@@ -403,6 +419,8 @@ public slots:
 	double getCustomDeclination2() const { return customDeclination2Line->getDefiningAngle(); }
 	void setCustomDeclination1Label(QString label);
 	void setCustomDeclination2Label(QString label);
+	QString getCustomDeclination1Label(){return customDeclination1Line->getLabel();}
+	QString getCustomDeclination2Label(){return customDeclination2Line->getLabel();}
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);

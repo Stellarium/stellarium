@@ -251,10 +251,10 @@ void ArchaeoLines::init()
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
-	addAction("actionAL_showGeographicLocation1Line",section, N_("Show Line for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
-	addAction("actionAL_showGeographicLocation2Line",section, N_("Show Line for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
-	addAction("actionAL_showCustomAzimuth1Line",     section, N_("Show Line for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
-	addAction("actionAL_showCustomAzimuth2Line",     section, N_("Show Line for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation1Line",section, N_("Show Vertical for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation2Line",section, N_("Show Vertical for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomAzimuth1Line",     section, N_("Show Vertical for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomAzimuth2Line",     section, N_("Show Vertical for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomDeclination1Line", section, N_("Show Line for Custom Declination 1"),   "flagShowCustomDeclination1"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomDeclination2Line", section, N_("Show Line for Custom Declination 2"),   "flagShowCustomDeclination2"  ); // No Shortcuts configured.
 }
@@ -783,6 +783,7 @@ void ArchaeoLines::setGeographicLocation1Label(QString label)
 {
 	geographicLocation1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/geographic_location_1_label", label);
+	emit geographicLocation1LabelChanged(label);
 }
 void ArchaeoLines::setGeographicLocation2Longitude(double lng)
 {
@@ -804,6 +805,7 @@ void ArchaeoLines::setGeographicLocation2Label(QString label)
 {
 	geographicLocation2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/geographic_location_2_label", label);
+	emit geographicLocation2LabelChanged(label);
 }
 
 void ArchaeoLines::updateObserverLocation(StelLocation loc)
@@ -835,11 +837,13 @@ void ArchaeoLines::setCustomAzimuth1Label(QString label)
 {
 	customAzimuth1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_azimuth_1_label", label);
+	emit customAzimuth1LabelChanged(label);
 }
 void ArchaeoLines::setCustomAzimuth2Label(QString label)
 {
 	customAzimuth2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_azimuth_2_label", label);
+	emit customAzimuth2LabelChanged(label);
 }
 void ArchaeoLines::setCustomDeclination1(double dec)
 {
@@ -863,11 +867,13 @@ void ArchaeoLines::setCustomDeclination1Label(QString label)
 {
 	customDeclination1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_declination_1_label", label);
+	emit customDeclination1LabelChanged(label);
 }
 void ArchaeoLines::setCustomDeclination2Label(QString label)
 {
 	customDeclination2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_declination_2_label", label);
+	emit customDeclination2LabelChanged(label);
 }
 
 
