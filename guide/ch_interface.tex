@@ -367,10 +367,10 @@ opacity factor for extinction, \emph{magnitude loss per airmass} $k$
 
 
 \indexterm{Deep-sky objects} or DSO are extended objects which are
-external to the solar system, and are not point-sources like stars.
+external to the solar system, and are not point sources like stars.
 DSO include galaxies, planetary nebulae and star clusters. These
 objects may or may not have images associated with them. Stellarium
-comes with a catalogue with over 83,000 extended objects containing
+comes with a catalogue of over 83,000 extended objects containing
 the combined data from many catalogues, with 200 images.  The DSO tab
 (Fig.~\ref{fig:gui:view:dso}) allows you to specify which catalogs or
 which object types you are interested in. See chapter~\ref{ch:DSO} for
@@ -502,7 +502,7 @@ website\footnote{\url{http://stellarium.org/wiki/index.php/Landscapes}}
 or create yourself (see ch.~\ref{ch:landscapes} Landscapes), or remove
 these custom landscapes.
 
-Loading large landscapes may take several seconds. 
+Loading large landscapes may take several seconds. \newFeature{V0.15.2}
 If you like to switch rapidly between several landscapes and have enough memory, 
 you can increase the default cache size to keep more landscapes loaded previously 
 available in memory. Note that a large landscape can take up 200MB or more! 
@@ -531,8 +531,8 @@ Western and Inuit), and the rest do not. Configurable options include
 \item[Show lines with thickness\ldots] Activate display of stick
   figures, like \guibutton{0.6}{bt_constellation} or \keys{C}, and you
   can configure constellation line thickness here.
-  \item[Show asterism lines\ldots] Activate display of stick figures of asterisms 
-  (like the shortcut \keys{Alt+A}) and you can configure asterism line thickness here.
+  \item[Show asterism lines\ldots] Activate display of asterism stick figures   
+  (like the shortcut \keys{Alt+A}) and you can configure asterism line thickness here.\newFeature{V0.16.0}
 \item[Show boundaries] Activate display of constellation boundaries,
   like \keys{B}. Currently, boundaries have been defined only for
   ``Western'' skycultures.
@@ -598,17 +598,14 @@ Mimas. We can either press \key{\tab} a few times to highlight Mimas
 and then hit \key{\return}, or we can continue to type the name until
 it is the first/only object in the list.
 
-
 The Position tab provides a convenient way to enter a set
 of coordinates.
-
 
 The List Search tab allows selection of an object from predefined
 sets.  The number of choices is governed by the loaded plug
 ins. Simply scroll down the first window to select the type. The name
 of an object can then be selected from the list. Press \key{\return} and
 Stellarium will go to that object.
-
 
 The Options tab provides a few settings to fine-tune your search experience.
 When the name of an object to find is typed in the object
@@ -623,38 +620,51 @@ selected from the scroll window.
 \section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
-\newFeature{V0.15.0} This window provides advanced functionality and is still in an experimental phase. You can call it by pressing \key{F10} or button \guibutton{0.6}{btd_astrocalc} on the left bar. The Astronomical Calculations window shows four tabs with different functionality.
+\newFeature{V0.15.0} This window provides advanced functionality, some of which is still in an experimental phase. 
+You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc} on the left menu bar. 
+The Astronomical Calculations window shows six tabs with different functionality.
 
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
-\newFeature{V0.16.0} Shows J2000.0 or horizontal positions, magnitudes and additional parameter (e.g. surface brightness for deep-sky objects or angular separation for double stars) for various lists of celestial objects above horizon at the moment with magnitude filter. Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
+\newFeature{V0.16.0} This tab shows J2000.0 or horizontal positions, magnitudes and additional parameters 
+(e.g.\ surface brightness for deep-sky objects or angular separation for double stars) for various 
+lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
+Double-clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
 
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_positions_tab}
-\caption{Astronomical Calculations (AstroCalc): Celestial positions.}
+\caption{Astronomical Calculations (AstroCalc): Celestial positions}
 \label{fig:gui:AstroCalc:Positions}
 \end{figure}
 
 \subsection{The Ephemeris Tab}
 \label{sec:gui:AstroCalc:Ephemeris}
 
-Select an object, start and end time, and compute an ephemeris (list of positions and magnitude evolving over time) for that object. The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a date, an orange circle indicates this date and/or magnitude. Double-clicking sets the respective date and brings object to focus. Dates and/or magnitudes near markers of positions will showuing when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes marked.
+Select an object, start and end time, and compute an ephemeris (list of positions and magnitudes evolving over time) for that object. 
+The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). 
 
-You can export the calculated ephemeris into CSV file. 
+When you click on a date, an orange circle indicates this date and/or magnitude. 
+Double-clicking sets the respective date and brings the object to focus. 
+Dates and/or magnitudes will show near position markers when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes are active.
+
+You can export the calculated ephemeris into a CSV file. 
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.92\textwidth]{astrocalc_dialog_ephemeris_tab}
-\caption{Astronomical Calculations (AstroCalc): Plot traces of planets.}
+\caption{Astronomical Calculations (AstroCalc): Plot traces of planets}
 \label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
 
-Other interesting sight in this tool --- using horizontal coordinates for plot traces of the Solar system objects. For example you can get an analemma of the Sun for any location (Figure~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}).
+Anther interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
+In this mode, the circle marks are not linked with the sky, but with the horizontal coordinate system.
+For example, you can get an analemma of the Sun for any location (Figure~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}), 
+or observe the visibility of Mercury or Venus in the twilight sky.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.92\textwidth]{astrocalc_dialog_ephemeris_analemma}
-\caption{Astronomical Calculations (AstroCalc): Analemma.}
+\caption{Astronomical Calculations (AstroCalc): Analemma}
 \label{fig:gui:AstroCalc:Ephemeris:Analemma}
 \end{figure}
 
@@ -662,24 +672,26 @@ Other interesting sight in this tool --- using horizontal coordinates for plot t
 \subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
 
-Compute phenomena like conjunctions, oppositions, occultations and eclipses (in special cases) between planetary objects (Figure~\ref{fig:gui:AstroCalc:Phenomena}). 
-
-You can export the calculated phenomenae into CSV file.
+This tab allows you to compute phenomena like conjunctions, oppositions, 
+occultations and  eclipses (in special cases) between planetary objects 
+(Figure~\ref{fig:gui:AstroCalc:Phenomena}). 
+You can export the calculated phenomena into a CSV file.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_phenomena_tab}
-\caption{Astronomical Calculations (AstroCalc): Phenomena.}
+\caption{Astronomical Calculations (AstroCalc): Phenomena}
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
 
-\subsection{The ``Altitude vs Time'' Tab}
+
+\subsection{The ``Altitude vs.\ Time'' Tab}
 \label{sec:gui:AstroCalc:AltVsTime}
   
 Compute horizontal positions of object and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
     
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_altvstime_tab}
-\caption{Astronomical Calculations (AstroCalc): Altitude vs Time.}
+\caption{Astronomical Calculations (AstroCalc): Altitude vs.\ Time}
 \label{fig:gui:AstroCalc:AltVsTime}
 \end{figure}
 
@@ -690,7 +702,7 @@ Compute horizontal positions of object and draw it as a graph (Figure~\ref{fig:g
     
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_graphs_tab}
-\caption{Astronomical Calculations (AstroCalc): Graphs.}
+\caption{Astronomical Calculations (AstroCalc): Graphs}
 \label{fig:gui:AstroCalc:Graphs}
 \end{figure}
 
@@ -705,7 +717,7 @@ The idea for this tool has been obtained from the SkytechX planetarium\footnote{
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_wut_tab}
-\caption{Astronomical Calculations (AstroCalc): What's Up Tonight (WUT).}
+\caption{Astronomical Calculations (AstroCalc): What's Up Tonight (WUT)}
 \label{fig:gui:AstroCalc:WUT}
 \end{figure}
 
