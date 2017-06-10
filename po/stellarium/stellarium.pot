@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-08 00:35+0700\n"
+"POT-Creation-Date: 2017-06-10 15:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -418,7 +418,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:220 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Planet.cpp:358 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:205
+#: src/core/modules/StarWrapper.cpp:204
 #: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
 #: plugins/Quasars/src/Quasar.cpp:113 plugins/Exoplanets/src/Exoplanet.cpp:307
 #, qt-format
@@ -430,7 +430,7 @@ msgid " (Photometric system: B)"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:232 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:213 plugins/Quasars/src/Quasar.cpp:123
+#: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr ""
@@ -464,7 +464,7 @@ msgid "Orientation angle: %1%2"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:300 src/core/modules/StarWrapper.cpp:243
+#: src/core/modules/Nebula.cpp:300 src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:152 plugins/Novae/src/Nova.cpp:167
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 #, qt-format
@@ -501,7 +501,7 @@ msgstr ""
 msgid "Redshift: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:360 src/core/modules/StarWrapper.cpp:252
+#: src/core/modules/Nebula.cpp:360 src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Parallax: %1\""
 msgstr ""
@@ -890,7 +890,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:362 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:187
-#: src/core/modules/StarWrapper.cpp:209 plugins/Quasars/src/Quasar.cpp:117
+#: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:117
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr ""
@@ -1136,70 +1136,70 @@ msgstr ""
 msgid "Type: <b>%1, %2</b>"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:231
+#: src/core/modules/StarWrapper.cpp:227
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:233
+#: src/core/modules/StarWrapper.cpp:229
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:249
+#: src/core/modules/StarWrapper.cpp:245
 #: plugins/Exoplanets/src/Exoplanet.cpp:317
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:255
+#: src/core/modules/StarWrapper.cpp:251
 #, qt-format
 msgid "Period: %1 days"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:264
+#: src/core/modules/StarWrapper.cpp:260
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:266
+#: src/core/modules/StarWrapper.cpp:262
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:273
+#: src/core/modules/StarWrapper.cpp:269
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:275
+#: src/core/modules/StarWrapper.cpp:271
 #, qt-format
 msgid "Rising time: %1%"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:280
+#: src/core/modules/StarWrapper.cpp:276
 msgid "Position angle"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:284 src/core/modules/StarWrapper.cpp:286
+#: src/core/modules/StarWrapper.cpp:280 src/core/modules/StarWrapper.cpp:282
 #: src/gui/AstroCalcDialog.cpp:1777
 msgid "Separation"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:295
+#: src/core/modules/StarWrapper.cpp:292
 msgid "Proper motions by axes"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:295 src/core/modules/StarWrapper.cpp:297
+#: src/core/modules/StarWrapper.cpp:292 src/core/modules/StarWrapper.cpp:294
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:296
+#: src/core/modules/StarWrapper.cpp:293
 msgid "Position angle of the proper motion"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:297
+#: src/core/modules/StarWrapper.cpp:294
 msgid "Angular velocity of the proper motion"
 msgstr ""
 
@@ -4092,7 +4092,7 @@ msgid "Trees"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
+#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
 msgid "Moon"
 msgstr ""
 
@@ -4112,17 +4112,17 @@ msgid "Garching"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
+#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 msgid "Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1298
+#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
 msgid "Jupiter"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
+#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
 msgid "Saturn"
 msgstr ""
 
@@ -12488,7 +12488,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1280
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1286
 msgid "Sun"
 msgstr ""
 
@@ -15225,19 +15225,19 @@ msgid "Show Line for Current Moon"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
-msgid "Show Line for Geographic Location 1"
+msgid "Show Vertical for Geographic Location 1"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
-msgid "Show Line for Geographic Location 2"
+msgid "Show Vertical for Geographic Location 2"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
-msgid "Show Line for Custom Azimuth 1"
+msgid "Show Vertical for Custom Azimuth 1"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
-msgid "Show Line for Custom Azimuth 2"
+msgid "Show Vertical for Custom Azimuth 2"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
@@ -15248,48 +15248,48 @@ msgstr ""
 msgid "Show Line for Custom Declination 2"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1256
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1262
 msgid "Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1259
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1265
 msgid "Solstice"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1262
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1268
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1265
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1271
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1268
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1271
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1277
 msgid "Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1274
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1280
 msgid "Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1277
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1283
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1286
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1292
 msgid "error if you can read this"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1295
 msgid "Mercury"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1292
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1298
 msgid "Venus"
 msgstr ""
 
