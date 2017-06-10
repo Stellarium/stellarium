@@ -235,9 +235,18 @@ Planet::Planet(const QString& englishName,
 	//only try loading textures when there is actually something to load!
 	//prevents some overhead when starting
 	if(!texMapName.isEmpty())
-		texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	{
+		QString texMapFile = StelFileMgr::findFile("textures/"+texMapName, StelFileMgr::File);
+		if (!texMapFile.isEmpty())
+			texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	}
+
 	if(!normalMapName.isEmpty())
-		normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	{
+		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
+		if (!normalMapFile.isEmpty())
+			normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	}
 	//the OBJ is lazily loaded when first required
 	if(!aobjModelName.isEmpty())
 	{
