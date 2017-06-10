@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-08 00:35+0700\n"
-"PO-Revision-Date: 2017-06-01 11:43+0000\n"
+"PO-Revision-Date: 2017-06-10 04:53+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-08 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-06-10 05:24+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 "Language: bn\n"
 
@@ -1190,7 +1190,7 @@ msgstr "চ্যুতি"
 
 #: src/core/modules/StarWrapper.cpp:295
 msgid "Proper motions by axes"
-msgstr ""
+msgstr "অক্ষ বরারর সরণ"
 
 #: src/core/modules/StarWrapper.cpp:295 src/core/modules/StarWrapper.cpp:297
 msgctxt "milliarc second per year"
@@ -1199,11 +1199,11 @@ msgstr "মিলি আর্ক সে/বছর"
 
 #: src/core/modules/StarWrapper.cpp:296
 msgid "Position angle of the proper motion"
-msgstr ""
+msgstr "সরণের আপেক্ষিক অভিমুখ"
 
 #: src/core/modules/StarWrapper.cpp:297
 msgid "Angular velocity of the proper motion"
-msgstr ""
+msgstr "কৌণিক সরণ"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -3280,12 +3280,12 @@ msgstr "দিন"
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:358
 msgid "P.M."
-msgstr ""
+msgstr "সরণ"
 
 #: src/gui/AstroCalcDialog.cpp:358
 msgctxt "arcsecond per year"
 msgid "\"/yr"
-msgstr ""
+msgstr "/বছর"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:364
@@ -3576,11 +3576,11 @@ msgstr "উজ্জ্বল অসম ঔজ্জ্বল্যের তা
 #: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:2676
 #: src/translations.h:200
 msgid "Bright stars with high proper motion"
-msgstr ""
+msgstr "বেশি সরণ যুক্ত উজ্জ্বল নক্ষত্র"
 
 #: src/gui/AstroCalcDialog.cpp:650
 msgid "star with high proper motion"
-msgstr ""
+msgstr "বেশি সরণ যুক্ত নক্ষত্র"
 
 #: src/gui/AstroCalcDialog.cpp:772 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -4131,7 +4131,7 @@ msgstr "অ্যাজটেক"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:211
 msgid "Belarusian"
-msgstr ""
+msgstr "বেলারুশীয়"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:213
@@ -4802,7 +4802,7 @@ msgstr "খুলু&ন"
 
 #: src/translations.h:430
 msgid "File &name:"
-msgstr "ফাইলের &নাম :"
+msgstr "ফাইলের না&ম :"
 
 #: src/translations.h:431
 msgid "Copy &Link Location"
@@ -6332,7 +6332,7 @@ msgstr "রং বাছুন ..."
 
 #: src/ui_viewDialog.h:2187
 msgid "Scale minor bodies:"
-msgstr "বিবর্ধিত গৌন জ্যোতিষ্ক :"
+msgstr "বিবর্ধিত গ্রহাণু :"
 
 #: src/ui_viewDialog.h:2188
 msgid "Planets magnitude algorithm:"
@@ -11871,7 +11871,7 @@ msgstr "সংস্করণ %1"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
-msgstr ""
+msgstr "পছন্দসই নামে গ্রহাণুটির তথ্য সঞ্চয় করুন ..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
@@ -11880,11 +11880,11 @@ msgstr "বিন্যাস সংক্রান্ত নথিসমূহ"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
 msgid "Select a file to replace the Solar System minor bodies"
-msgstr ""
+msgstr "গ্রহাণুর তথ্য সম্বলিত পছন্দসই একটি ফাইল বেছে নিন"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
 msgid "Select a file to add the Solar System minor bodies"
-msgstr ""
+msgstr "পছন্দসই গ্রহাণু যোগ করতে একটি ফাইল বেছে নিন"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -11967,7 +11967,7 @@ msgstr "তালিকায় যোগ করুন"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "গ্রহাণু"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
@@ -11980,6 +11980,9 @@ msgid ""
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
 "you can delete manually that file from:"
 msgstr ""
+"এই সরঞ্জামের সাহায্যে গ্রহাণু সংক্রান্ত তথ্য সম্পাদনা করা যায় । যদি কোনো "
+"ত্রুটির কারনে স্টীলারিয়াম বন্ধ হয়ে যায় ও চালু না হয় তাহলে এখান থেকে ফাইলটি "
+"মুছে ফেলতে পারেন :"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
@@ -11993,25 +11996,26 @@ msgstr "স্বাভাবিক বিন্যাসে ফিরুন"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Export/replace the Solar System minor bodies file"
-msgstr ""
+msgstr "গ্রহাণু তথ্য ফাইলে সঞ্চয় করুন"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"আপনি পছন্দসই স্থানে সৌরজগৎ সংক্রান্ত তথ্যের ফাইলটি সঞ্চয় করে রাখতে পারেন ।"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Export the Solar System minor bodies to file..."
-msgstr ""
+msgstr "গ্রহাণুর তথ্যগুলি সঞ্চয় করুন .."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import and replace the Solar System minor bodies from file..."
-msgstr ""
+msgstr "পুরান তথ্য মুছে ফাইল থেকে গ্রহাণুর নতুন তথ্য যোগ করুন ..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import and add Solar System minor bodies from file..."
-msgstr ""
+msgstr "ফাইল থেকে নতুন গ্রহাণু আমদানি বা যোগ করুন ..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
@@ -12019,7 +12023,7 @@ msgstr "বিন্যাস সংক্রান্ত নথি"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "নতুন গ্রহাণু যোগ করুন"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
@@ -12835,13 +12839,15 @@ msgstr "সার্ভার বন্ধ কিংবা IP: aaa.bbb.ccc.ddd �
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Remote Sync"
-msgstr ""
+msgstr "সমলয়"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:54
 msgid ""
 "Provides state synchronization for multiple Stellarium instances running in "
 "a network. See manual for detailed description."
 msgstr ""
+"এই সরঞ্জাম একই নেটওয়ার্কে চালু থাকা একাধিক স্টীলারিয়ামের সাথে সমলয় স্থাপন "
+"করে ।"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:115
 #, qt-format
@@ -12898,19 +12904,22 @@ msgstr "%1: %2 সার্ভারে সংযুক্ত"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Remote Sync Plug-in"
-msgstr ""
+msgstr "সমলয় সরঞ্জাম"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr ""
+"এই সরঞ্জাম একই নেটওয়ার্কে চালু থাকা একাধিক স্টীলারিয়ামের সাথে সমলয় স্থাপন "
+"করে ।"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr ""
+"উদাহরন স্বরূপ, একাধিক কম্পিউটার ব্যবহার করে একাধিক স্ক্রিন ব্যবহার করতে হলে ।"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 msgid ""
@@ -12936,7 +12945,7 @@ msgstr "সার্ভার বন্ধ"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Sync Plug-in Configuration"
-msgstr ""
+msgstr "সমলয় সংক্রান্ত তথ্য বিন্যাস"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:461
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
@@ -12945,7 +12954,7 @@ msgstr "পরিস্থিতি :"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
 msgid "Server mode"
-msgstr ""
+msgstr "সার্ভার হিসাবে ব্যবহার"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
@@ -12954,11 +12963,11 @@ msgstr "সার্ভারের পোর্ট"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Client mode"
-msgstr ""
+msgstr "ব্যাবহারকারী হিসাবে ব্যবহার"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Server host address/name"
-msgstr ""
+msgstr "সার্ভারের নাম/ঠিকানা"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "127.0.0.1"
@@ -15108,17 +15117,17 @@ msgstr "স্বোয়াশম্যান-ওয্যাচম্যান �
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr "গৌন গ্রহ ২০০৩ ই এইচ ১ ও সি/১৪৯০ ধূমকেতু"
+msgstr "২০০৩ ই এইচ ১ গ্রহাণু ও সি/১৪৯০ ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:197
 msgid "Minor planet (4450) Pan"
-msgstr "গৌন গ্রহ (৪৪৫০) প্যান"
+msgstr "প্যান গ্রহাণু (৪৪৫০)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:199
 msgid "Minor planet 2008 ED69"
-msgstr "গৌন গ্রহ ২০০৮ ই ডি ৬৯"
+msgstr "২০০৮ ই ডি ৬৯ গ্রহাণু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:201
@@ -15128,12 +15137,12 @@ msgstr "২পি/এনকে ধূমকেতু"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:203
 msgid "Minor planet 2004 TG10"
-msgstr "গৌন গ্রহ ২০০৪ টি জি ১০"
+msgstr "২০০৪ টি জি ১০ গ্রহাণু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:205
 msgid "Minor planet (3200) Phaethon"
-msgstr "গৌন গ্রহ (৩২০০) ফেইথন"
+msgstr "ফেইথন গ্রহাণু (৩২০০)"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:132
 msgid "Updating..."
