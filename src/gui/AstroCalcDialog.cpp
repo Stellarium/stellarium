@@ -122,7 +122,7 @@ void AstroCalcDialog::createDialogContent()
 #ifdef Q_OS_WIN
 	// Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
-	addscroll << ui->planetaryPositionsTreeWidget;
+	addscroll << ui->celestialPositionsTreeWidget << ui->ephemerisTreeWidget << ui->phenomenaTreeWidget << ui->wutCategoryListWidget << ui->wutMatchingObjectsListWidget;
 	installKineticScrolling(addscroll);
 	acEndl="\r\n";
 #else
