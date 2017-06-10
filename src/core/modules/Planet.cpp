@@ -236,13 +236,17 @@ Planet::Planet(const QString& englishName,
 	//prevents some overhead when starting
 	if(!texMapName.isEmpty())
 	{
+		// TODO: use StelFileMgr::findFileInAllPaths() after introducing an Add-On Manager
 		QString texMapFile = StelFileMgr::findFile("textures/"+texMapName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
 			texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		else
+			qWarning()<<"Cannot resolve path to texture file"<<texMapName<<"of object"<<englishName;
 	}
 
 	if(!normalMapName.isEmpty())
 	{
+		// TODO: use StelFileMgr::findFileInAllPaths() after introducing an Add-On Manager
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
 			normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
@@ -250,6 +254,7 @@ Planet::Planet(const QString& englishName,
 	//the OBJ is lazily loaded when first required
 	if(!aobjModelName.isEmpty())
 	{
+		// TODO: use StelFileMgr::findFileInAllPaths() after introducing an Add-On Manager
 		objModelPath = StelFileMgr::findFile("models/"+aobjModelName, StelFileMgr::File);
 		if(objModelPath.isEmpty())
 		{
