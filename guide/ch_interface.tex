@@ -658,9 +658,9 @@ You can export the calculated ephemeris into a CSV file.
 \end{figure}
 
 Anther interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
-In this mode, the circle marks are not linked with the sky, but with the horizontal coordinate system.
+In this mode, the circle marks are not linked to the sky, but to the horizontal coordinate system.
 For example, you can get an analemma of the Sun for any location (Figure~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}), 
-or observe the visibility of Mercury or Venus in the twilight sky.
+or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.92\textwidth]{astrocalc_dialog_ephemeris_analemma}
@@ -673,12 +673,12 @@ or observe the visibility of Mercury or Venus in the twilight sky.
 \label{sec:gui:AstroCalc:Phenomena}
 
 This tab allows you to compute phenomena like conjunctions, oppositions, 
-occultations and  eclipses (in special cases) between planetary objects 
+occultations and eclipses (in special cases) between planetary objects 
 (Figure~\ref{fig:gui:AstroCalc:Phenomena}). 
 You can export the calculated phenomena into a CSV file.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_phenomena_tab}
+\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_phenomena_tab}
 \caption{Astronomical Calculations (AstroCalc): Phenomena}
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
@@ -687,45 +687,68 @@ You can export the calculated phenomena into a CSV file.
 \subsection{The ``Altitude vs.\ Time'' Tab}
 \label{sec:gui:AstroCalc:AltVsTime}
   
-Compute horizontal positions of object and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
+On this tab you can compute the geometrical altitude of the currently selected object 
+and date and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
     
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_altvstime_tab}
+\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_altvstime_tab}
 \caption{Astronomical Calculations (AstroCalc): Altitude vs.\ Time}
 \label{fig:gui:AstroCalc:AltVsTime}
 \end{figure}
 
+\newpage
 \subsection{The Graphs Tab}
 \label{sec:gui:AstroCalc:Graphs}
-  
-\newFeature{V0.16.0} Compute two functions by time for the current year and draw graphs for them on one desk (Figure~\ref{fig:gui:AstroCalc:Graphs}). This tool may be very helpful for educational and statistics purposes.
     
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_graphs_tab}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab}
 \caption{Astronomical Calculations (AstroCalc): Graphs}
 \label{fig:gui:AstroCalc:Graphs}
 \end{figure}
+  
+\noindent\newFeature{V0.16.0}This tab can show two functions over time for the current year and draw graphs for them in one screen (Figure~\ref{fig:gui:AstroCalc:Graphs}). 
+You can select from 
+\begin{itemize}
+\item Magnitude vs. Time
+\item Phase vs. Time
+\item Distance vs. Time 
+\item Elongation vs. Time 
+\item Angular size vs. Time
+\item Phase angle vs. Time
+\end{itemize}
 
-The list of possible functions for computations: \emph{Magnitude vs. Time}, \emph{Phase vs. Time}, \emph{Distance vs. Time}, \emph{Elongation vs. Time}, \emph{Angular size vs. Time} and \emph{Phase angle vs. Time}.
-
-The idea for this tool has been obtained from the SkytechX planetarium\footnote{SkytechX --- \url{http://www.skytechx.eu/}}.
+This tool may be very helpful for educational and statistics purposes.%
+	\footnote{The idea for this tool has been obtained from \program{SkytechX}: \url{http://www.skytechx.eu/}}
 
 \subsection{The ``What's Up Tonight'' (WUT) Tab}
 \label{sec:gui:AstroCalc:WUT}
 
-\newFeature{V0.16.0} The ``What's Up Tonight'' (WUT) tool displays a list of objects that will be visible at night from any location, on any date. By default, the Date and Location are taken from the current settings in the Date and Time (see section~\ref{sec:gui:date}) and Location (see section~\ref{sec:gui:location}) windows.
+\newFeature{V0.16.0} The ``What's Up Tonight'' (WUT) tool%
+	\footnote{This tool has been partially ported from the \program{KStars} planetarium: \url{https://edu.kde.org/kstars/}}
+ displays a list of objects that will be visible at night for the current date and location.
+
+%% GZ I think the next sentence does not make sense. There is no other location than the current location, right? 
+%% By default, the Date and Location are taken from the current settings in the Date and Time (see section~\ref{sec:gui:date}) and Location (see section~\ref{sec:gui:location}) windows.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_wut_tab}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_wut_tab}
 \caption{Astronomical Calculations (AstroCalc): What's Up Tonight (WUT)}
 \label{fig:gui:AstroCalc:WUT}
 \end{figure}
 
-The objects are organized into type categories. Select an object type in the box labeled \emph{Select a Category}, and all objects of that type which are above the horizon on the selected night will be displayed in the box labeled \emph{Matching Objects}. For example, in the screenshot, the Planets category has been selected, and three planets which are up on the selected night are displayed (Jupiter, Mars and Mercury). 
+The objects are organized into type categories. Select an object type in the box labeled 
+\emph{Select a Category}, and all objects of that type which are above the horizon on the selected night 
+will be displayed in the box labeled \emph{Matching Objects}. For example, in the screenshot, 
+the Planets category has been selected, and three planets which are up in the selected night are displayed (Jupiter, Mars and Mercury). 
 
-By default, the WUT will display objects which are above the horizon between sunset and midnight (i.e. \emph{in the evening}). You can choose to show objects which are up between midnight and dawn (\emph{in the morning}), or between dusk and dawn (\emph{any time tonight}) using the combobox near the top of the window. You can also choose to see only those objects that are brighter than a magnitude by setting a minimum magnitude using the \emph{Show objects brighter than magnitude} spinbox. You may center the object in the sky map just by select of then.
+By default, the WUT will display objects which are above the horizon between sunset and midnight (i.e.\ \emph{in the evening}). 
+You can choose to show objects which are up between midnight and dawn (\emph{in the morning}), 
+or between dusk and dawn (\emph{any time tonight}) using the combobox near the top of the window. 
+You can also choose to see only those objects that are brighter than a certain magnitude by 
+setting a minimum magnitude using the \emph{Show objects brighter than magnitude} spinbox. 
+You may center an object from the right list in the sky map just by selecting it.
 
-This tool has been partially ported from the KStars planetarium\footnote{KStars --- \url{https://edu.kde.org/kstars/}}.
+
     
 \section{Help Window}
 \label{sec:gui:help}
