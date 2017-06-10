@@ -194,27 +194,11 @@
           <string>Positions</string>
          </property>
          <property name="toolTip">
-          <string>Planetary positions</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignLeading|AlignVCenter</set>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-PlanetPos.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Positions</string>
-         </property>
-         <property name="toolTip">
           <string>Celestial bodies above horizon</string>
          </property>
          <property name="icon">
           <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-CelPos.png</normalon>
+           <normalon>:/graphicGui/tabicon-AstroCalc-PlanetPos.png</normalon>
           </iconset>
          </property>
         </item>
@@ -288,112 +272,6 @@
          <number>0</number>
         </property>
         <widget class="QWidget" name="stackedWidgetPage1">
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="planetaryMagnitudeLimitLabel">
-              <property name="toolTip">
-               <string/>
-              </property>
-              <property name="text">
-               <string>Show objects brighter than magnitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="planetaryMagnitudeDoubleSpinBox">
-              <property name="toolTip">
-               <string/>
-              </property>
-              <property name="maximum">
-               <double>25.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>12.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="aboveHorizonCheckBox">
-              <property name="toolTip">
-               <string>Calculate positions for celestial bodies which are above the horizon at the moment.</string>
-              </property>
-              <property name="text">
-               <string>Above horizon</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QTreeWidget" name="planetaryPositionsTreeWidget">
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
-            <property name="rootIsDecorated">
-             <bool>false</bool>
-            </property>
-            <property name="uniformRowHeights">
-             <bool>true</bool>
-            </property>
-            <property name="itemsExpandable">
-             <bool>false</bool>
-            </property>
-            <property name="sortingEnabled">
-             <bool>true</bool>
-            </property>
-            <property name="expandsOnDoubleClick">
-             <bool>false</bool>
-            </property>
-            <property name="columnCount">
-             <number>0</number>
-            </property>
-            <attribute name="headerShowSortIndicator" stdset="0">
-             <bool>true</bool>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_14">
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="planetaryPositionsTimeLabel">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="planetaryPositionsUpdateButton">
-              <property name="text">
-               <string>Update of planetary positions</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="stackedWidgetPage2">
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -497,7 +375,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage3">
+        <widget class="QWidget" name="stackedWidgetPage2">
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout">
@@ -688,7 +566,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage4">
+        <widget class="QWidget" name="stackedWidgetPage3">
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="3" column="0" colspan="2">
            <widget class="QTreeWidget" name="phenomenaTreeWidget">
@@ -883,7 +761,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage5">
+        <widget class="QWidget" name="stackedWidgetPage4">
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0" colspan="2">
            <widget class="QCustomPlot" name="altVsTimePlot" native="true">
@@ -919,7 +797,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage6">
+        <widget class="QWidget" name="stackedWidgetPage5">
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="4" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_20">
@@ -1005,7 +883,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage7">
+        <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
