@@ -625,38 +625,27 @@ selected from the scroll window.
 
 \newFeature{V0.15.0} This window provides advanced functionality and is still in an experimental phase. You can call it by pressing \key{F10} or button \guibutton{0.6}{btd_astrocalc} on the left bar. The Astronomical Calculations window shows four tabs with different functionality.
 
-\subsection{The Planet Positions Tab}
+\subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
-Shows J2000.0 positions and magnitudes for all installed planets, planet moons, minor bodies (asteroids, comets, etc.) with horizon and magnitude filters. Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
+\newFeature{V0.16.0} Shows J2000.0 or horizontal positions, magnitudes and additional parameter (e.g. surface brightness for deep-sky objects or angular separation for double stars) for various lists of celestial objects above horizon at the moment with magnitude filter. Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
 
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_positions_tab}
-\caption{Astronomical Calculations (AstroCalc): Planetary positions.}
+\caption{Astronomical Calculations (AstroCalc): Celestial positions.}
 \label{fig:gui:AstroCalc:Positions}
 \end{figure}
-
-\subsection{The Celestial Positions Tab}
-\label{sec:gui:AstroCalc:CelestialPositions}
-
-\newFeature{V0.16.0} Shows J2000.0 or horizontal positions, magnitudes and additional parameter (e.g. surface brightness for deep-sky objects or angular separation for double stars) for various lists of celestial objects above horizon with magnitude filter. Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:CelestialPositions}).
-
-
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_positions2_tab}
-\caption{Astronomical Calculations (AstroCalc): Celestial positions.}
-\label{fig:gui:AstroCalc:CelestialPositions}
-\end{figure}
-
 
 \subsection{The Ephemeris Tab}
 \label{sec:gui:AstroCalc:Ephemeris}
 
-Select an object, start and end time, and compute an ephemeris (list of positions and magnitude evolving over time) for that object. The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a \emph{Show dates} and/or \emph{Show magnitudes} checkboxes, an orange circle indicates this date and/or magnitude. Double-clicking sets the respective date and brings object to focus. You can export the calculated ephemeris into CSV file. 
+Select an object, start and end time, and compute an ephemeris (list of positions and magnitude evolving over time) for that object. The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a date, an orange circle indicates this date and/or magnitude. Double-clicking sets the respective date and brings object to focus. Dates and/or magnitudes near markers of positions will showuing when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes marked.
+
+You can export the calculated ephemeris into CSV file. 
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=\textwidth]{astrocalc_dialog_ephemeris_tab}
+\centering\includegraphics[width=0.92\textwidth]{astrocalc_dialog_ephemeris_tab}
 \caption{Astronomical Calculations (AstroCalc): Plot traces of planets.}
 \label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
@@ -664,15 +653,18 @@ Select an object, start and end time, and compute an ephemeris (list of position
 Other interesting sight in this tool --- using horizontal coordinates for plot traces of the Solar system objects. For example you can get an analemma of the Sun for any location (Figure~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}).
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=\textwidth]{astrocalc_dialog_ephemeris_analemma}
+\centering\includegraphics[width=0.92\textwidth]{astrocalc_dialog_ephemeris_analemma}
 \caption{Astronomical Calculations (AstroCalc): Analemma.}
 \label{fig:gui:AstroCalc:Ephemeris:Analemma}
 \end{figure}
 
+\newpage
 \subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
 
-Compute phenomena like conjunctions, oppositions, occultations and eclipses (in special cases) between planetary objects (Figure~\ref{fig:gui:AstroCalc:Phenomena}). You can export the calculated phenomenae into CSV file.
+Compute phenomena like conjunctions, oppositions, occultations and eclipses (in special cases) between planetary objects (Figure~\ref{fig:gui:AstroCalc:Phenomena}). 
+
+You can export the calculated phenomenae into CSV file.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_phenomena_tab}
@@ -680,7 +672,6 @@ Compute phenomena like conjunctions, oppositions, occultations and eclipses (in 
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
 
-\newpage
 \subsection{The ``Altitude vs Time'' Tab}
 \label{sec:gui:AstroCalc:AltVsTime}
   

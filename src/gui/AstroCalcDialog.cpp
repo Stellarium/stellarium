@@ -89,7 +89,6 @@ void AstroCalcDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		setPlanetaryPositionsHeaderNames();
 		setCelestialPositionsHeaderNames();
 		setEphemerisHeaderNames();
 		setPhenomenaHeaderNames();
@@ -97,8 +96,7 @@ void AstroCalcDialog::retranslate()
 		populateCelestialCategoryList();
 		populateEphemerisTimeStepsList();
 		populateMajorPlanetList();
-		populateGroupCelestialBodyList();		
-		currentPlanetaryPositions();
+		populateGroupCelestialBodyList();				
 		currentCelestialPositions();
 		prepareAxesAndGraph();
 		populateFunctionsList();
@@ -138,7 +136,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	initListPlanetaryPositions();
 	initListCelestialPositions();
 	initListPhenomena();
 	populateCelestialBodyList();
@@ -171,19 +168,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenToDateEdit->setMinimumDate(min);
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
-	connect(ui->planetaryPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
-		ui->planetaryPositionsTreeWidget, SLOT(repaint()));
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		ui->celestialPositionsTreeWidget, SLOT(repaint()));
-
-	ui->planetaryMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/positions_magnitude_limit", 12.0).toDouble());
-	connect(ui->planetaryMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(savePlanetaryPositionsMagnitudeLimit(double)));
-
-	ui->aboveHorizonCheckBox->setChecked(conf->value("astrocalc/flag_positions_above_horizon", false).toBool());
-	connect(ui->aboveHorizonCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePlanetaryPositionsAboveHorizonFlag(bool)));
-
-	connect(ui->planetaryPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentPlanetaryPosition(QModelIndex)));
-	connect(ui->planetaryPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentPlanetaryPositions()));
 
 	ui->celestialMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/celestial_magnitude_limit", 6.0).toDouble());
 	connect(ui->celestialMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveCelestialPositionsMagnitudeLimit(double)));
@@ -237,7 +223,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutMatchingObjectsListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectWutObject()));	
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 
-	currentPlanetaryPositions();
 	currentCelestialPositions();
 
 	currentTimeLine = new QTimer(this);
@@ -250,30 +235,6 @@ void AstroCalcDialog::createDialogContent()
 	updateTabBarListWidgetWidth();
 }
 
-void AstroCalcDialog::savePlanetaryPositionsAboveHorizonFlag(bool b)
-{
-	conf->setValue("astrocalc/flag_positions_above_horizon", b);
-	// Refresh the planetary positions table
-	currentPlanetaryPositions();
-}
-
-void AstroCalcDialog::savePlanetaryPositionsMagnitudeLimit(double mag)
-{
-	conf->setValue("astrocalc/positions_magnitude_limit", QString::number(mag, 'f', 2));
-	// Refresh the planetary positions table
-	currentPlanetaryPositions();
-}
-
-void AstroCalcDialog::initListPlanetaryPositions()
-{
-	ui->planetaryPositionsTreeWidget->clear();
-	ui->planetaryPositionsTreeWidget->setColumnCount(ColumnCount);
-
-	setPlanetaryPositionsHeaderNames();
-
-	ui->planetaryPositionsTreeWidget->header()->setSectionsMovable(false);
-}
-
 void AstroCalcDialog::initListCelestialPositions()
 {
 	ui->celestialPositionsTreeWidget->clear();
@@ -282,29 +243,6 @@ void AstroCalcDialog::initListCelestialPositions()
 	setCelestialPositionsHeaderNames();
 
 	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
-}
-
-
-void AstroCalcDialog::setPlanetaryPositionsHeaderNames()
-{
-	positionsHeader.clear();
-	//TRANSLATORS: name of object
-	positionsHeader << q_("Name");
-	//TRANSLATORS: right ascension
-	positionsHeader << q_("RA (J2000)");
-	//TRANSLATORS: declination
-	positionsHeader << q_("Dec (J2000)");
-	//TRANSLATORS: magnitude
-	positionsHeader << q_("mag");
-	//TRANSLATORS: type of object
-	positionsHeader << q_("Type");
-	ui->planetaryPositionsTreeWidget->setHeaderLabels(positionsHeader);
-
-	// adjust the column width
-	for(int i = 0; i < ColumnCount; ++i)
-	{
-	    ui->planetaryPositionsTreeWidget->resizeColumnToContents(i);
-	}
 }
 
 void AstroCalcDialog::setCelestialPositionsHeaderNames()
@@ -345,12 +283,17 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 	if (celType==170)
 	{
 		//TRANSLATORS: separation, arcseconds
-		positionsHeader << QString("%1, \"").arg(q_("Sep."));
+		positionsHeader << QString("%1, \"").arg(q_("sep."));
 	}
 	else if (celType==171)
 	{
 		//TRANSLATORS: period, days
-		positionsHeader << QString("%1, %2").arg(q_("Per."), qc_("d", "days"));
+		positionsHeader << QString("%1, %2").arg(q_("per."), qc_("d", "days"));
+	}
+	else if (celType==200)
+	{
+		//TRANSLATORS: distance, AU
+		positionsHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "astronomical unit"));
 	}
 	else if (celType==172)
 	{
@@ -374,79 +317,9 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 	}
 }
 
-void AstroCalcDialog::currentPlanetaryPositions()
-{
-	float ra, dec;
-	QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
-
-	initListPlanetaryPositions();
-
-	PlanetP sun = solarSystem->getSun();
-	double mag = ui->planetaryMagnitudeDoubleSpinBox->value();
-	bool horizon = ui->aboveHorizonCheckBox->isChecked();
-
-	StelCore* core = StelApp::getInstance().getCore();	
-	double JD = core->getJD();
-	ui->planetaryPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
-
-	foreach (const PlanetP& planet, allPlanets)
-	{
-		if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag)
-		{
-			if (horizon && !planet->isAboveRealHorizon(core))
-				continue;
-
-			StelUtils::rectToSphe(&ra,&dec,planet->getJ2000EquatorialPos(core));
-			ACPlanPosTreeWidgetItem *treeItem = new ACPlanPosTreeWidgetItem(ui->planetaryPositionsTreeWidget);
-			treeItem->setText(ColumnName, planet->getNameI18n());
-			treeItem->setText(ColumnRA, StelUtils::radToHmsStr(ra));
-			treeItem->setTextAlignment(ColumnRA, Qt::AlignRight);
-			treeItem->setText(ColumnDec, StelUtils::radToDmsStr(dec, true));
-			treeItem->setTextAlignment(ColumnDec, Qt::AlignRight);
-			treeItem->setText(ColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
-			treeItem->setTextAlignment(ColumnMagnitude, Qt::AlignRight);			
-			treeItem->setText(ColumnType, q_(planet->getPlanetTypeString()));
-		}
-	}
-
-	// adjust the column width
-	for(int i = 0; i < ColumnCount; ++i)
-	{
-	    ui->planetaryPositionsTreeWidget->resizeColumnToContents(i);
-	}
-
-	// sort-by-name
-	ui->planetaryPositionsTreeWidget->sortItems(ColumnName, Qt::AscendingOrder);
-}
-
 void AstroCalcDialog::onChangedEphemerisPosition(const QModelIndex &modelIndex)
 {
 	DisplayedPositionIndex = modelIndex.row();
-}
-
-void AstroCalcDialog::selectCurrentPlanetaryPosition(const QModelIndex &modelIndex)
-{
-	// Find the object
-	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
-
-	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
-	{
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName()!=core->getCurrentLocation().planetName)
-			{
-				StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
 }
 
 void AstroCalcDialog::populateCelestialCategoryList()
@@ -513,12 +386,13 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Bright double stars"), "170");
 	category->addItem(q_("Bright variable stars"), "171");
 	category->addItem(q_("Bright stars with high proper motion"), "172");
+	category->addItem(q_("Solar system objects"), "200");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
 	{
 		// default step: Messier Catalogue
-		index = category->findData(conf->value("astrocalc/celestial_category", "100").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+		index = category->findData(conf->value("astrocalc/celestial_category", "200").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	category->setCurrentIndex(index);
 	category->model()->sort(0);
@@ -550,7 +424,7 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 
 void AstroCalcDialog::currentCelestialPositions()
 {
-	float ra, dec;
+	float ra, dec;	
 	QString raStr, decStr, extra, celObjName = "", celObjId = "";
 
 	initListCelestialPositions();
@@ -621,6 +495,38 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, mu);
 				treeItem->setText(CColumnType, q_(obj->getTypeString()));
+			}
+		}
+	}
+	else if (celTypeId==200)
+	{
+		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
+		PlanetP sun = solarSystem->getSun();
+		QString sToolTip = "";
+		Vec3d pos;
+		foreach (const PlanetP& planet, allPlanets)
+		{
+			if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			{
+				pos = planet->getJ2000EquatorialPos(core);
+				StelUtils::rectToSphe(&ra, &dec, pos);
+				raStr = StelUtils::radToHmsStr(ra);
+				decStr = StelUtils::radToDmsStr(dec, true);
+
+				extra = QString::number(pos.length(), 'f', 5); // A.U.
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, planet->getNameI18n());
+				treeItem->setToolTip(CColumnName, "");
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -788,8 +694,8 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	ephemerisHeader << q_("mag");
 	//TRANSLATORS: phase
 	ephemerisHeader << q_("phase");
-	//TRANSLATORS: distance
-	ephemerisHeader << q_("dist.");
+	//TRANSLATORS: distance, AU
+	ephemerisHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "astronomical unit"));
 	//TRANSLATORS: elongation
 	ephemerisHeader << q_("elong.");
 	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
@@ -2569,16 +2475,9 @@ void AstroCalcDialog::changePage(QListWidgetItem *current, QListWidgetItem *prev
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 
-	// special cases
-	switch (ui->stackListWidget->row(current))
-	{
-		case 0: // update planetary positions
-			currentPlanetaryPositions();
-			break;
-		case 1: // update positions of celestial bodies
-			currentCelestialPositions();
-			break;
-	}
+	// special case
+	if (ui->stackListWidget->row(current)==0)
+		currentCelestialPositions();
 }
 
 void AstroCalcDialog::updateTabBarListWidgetWidth()
@@ -2621,7 +2520,7 @@ void AstroCalcDialog::updateSolarSystemData()
 	{
 		populateCelestialBodyList();
 		populateGroupCelestialBodyList();
-		currentPlanetaryPositions();
+		currentCelestialPositions();
 		calculateWutObjects();
 	}
 }
