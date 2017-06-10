@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-08 00:35+0700\n"
-"PO-Revision-Date: 2017-05-17 07:43+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2017-06-08 19:11+0000\n"
+"Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-08 05:41+0000\n"
+"X-Launchpad-Export-Date: 2017-06-10 05:25+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 "Language: es_ES\n"
 
@@ -62,11 +62,11 @@ msgstr "Opciones de pantalla"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
-msgstr ""
+msgstr "Líneas de asterismo"
 
 #: src/core/modules/AsterismMgr.cpp:95
 msgid "Asterism labels"
-msgstr ""
+msgstr "Etiquetas de asterismo"
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
@@ -221,7 +221,7 @@ msgstr "PSSG"
 
 #: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
-msgstr ""
+msgstr "Cuadricula y líneas"
 
 #: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -446,12 +446,12 @@ msgstr "Brillo superficial"
 
 #: src/core/modules/Nebula.cpp:238
 msgid "after extinction"
-msgstr ""
+msgstr "Después de la extinción"
 
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Nebula.cpp:261
 #, qt-format
 msgid "Contrast index: %1"
-msgstr ""
+msgstr "Índice de contraste: %1"
 
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
@@ -1194,7 +1194,7 @@ msgstr "Separación"
 
 #: src/core/modules/StarWrapper.cpp:295
 msgid "Proper motions by axes"
-msgstr ""
+msgstr "Movimientos adecuados por ejes"
 
 #: src/core/modules/StarWrapper.cpp:295 src/core/modules/StarWrapper.cpp:297
 msgctxt "milliarc second per year"
@@ -1203,11 +1203,11 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:296
 msgid "Position angle of the proper motion"
-msgstr ""
+msgstr "Ángulo de posición del movimiento propio"
 
 #: src/core/modules/StarWrapper.cpp:297
 msgid "Angular velocity of the proper motion"
-msgstr ""
+msgstr "Velocidad angular del movimiento propio"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -2090,12 +2090,12 @@ msgstr "Mira hacia el polo sur celeste"
 #: src/core/StelMovementMgr.cpp:225
 msgctxt "mount mode"
 msgid "Equatorial mount"
-msgstr ""
+msgstr "Montura ecuatorial"
 
 #: src/core/StelMovementMgr.cpp:227
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
-msgstr ""
+msgstr "Montura Alt-azimut"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2509,7 +2509,7 @@ msgstr "Mayús & clic izquierdo"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete marker closest to mouse cursor"
-msgstr ""
+msgstr "Eliminar marcador más cercano al cursor del ratón"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
@@ -2521,7 +2521,7 @@ msgstr "Eliminar todos los marcadores personalizados"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Shift & Alt & right click"
-msgstr ""
+msgstr "Mayús y Alt y clic derecho"
 
 #: src/gui/HelpDialog.cpp:194
 #, qt-format
@@ -2858,12 +2858,18 @@ msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
+"Utiliza un modelo 3D poligonal para algunos objetos subplanetarios "
+"seleccionados (pequeñas lunas, asteroides, cometas) en lugar de una "
+"aproximación esférica"
 
 #: src/gui/ViewDialog.cpp:1248
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
+"Utilice un &quot;mapa sombra&quot; para simular auto-sombras de objetos del "
+"sistema solar no convexos. Puede reducir la calidad de penumbra de sombra en "
+"algunos objetos."
 
 #: src/gui/ViewDialog.cpp:1269
 msgid "Abbreviated"
@@ -2924,33 +2930,35 @@ msgstr "Tasa máxima alcanzada (Leónidas de 1833)"
 #: src/gui/ViewDialog.cpp:1539
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
-msgstr ""
+msgstr "G. Mueller (1893)"
 
 #: src/gui/ViewDialog.cpp:1540
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
-msgstr ""
+msgstr "Almanaque astronomico (1984)"
 
 #: src/gui/ViewDialog.cpp:1541
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr ""
+msgstr "Suplemento explicativo (1992)"
 
 #: src/gui/ViewDialog.cpp:1542
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr ""
+msgstr "Suplemento explicativo (2013)"
 
 #: src/gui/ViewDialog.cpp:1543
 msgctxt "magnitude algorithm"
 msgid "Generic"
-msgstr ""
+msgstr "Genérico"
 
 #: src/gui/ViewDialog.cpp:1569
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
 "and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
+"El algoritmo se utilizó en el <em> Almanaque astronómico </ em> (1984 y "
+"posteriores) y da magnitudes V (instrumental) (supuestamente de D.L. Harris)."
 
 #: src/gui/ViewDialog.cpp:1572
 msgid ""
@@ -2958,22 +2966,29 @@ msgid ""
 "was published in <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
+"El algoritmo se basa en observaciones visuales 1877-1891 de G. Mueller y se "
+"publicó en <em> Suplemento explicativo de la Efemérides Astronómicas </ em> "
+"(1961)."
 
 #: src/gui/ViewDialog.cpp:1575
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
 msgstr ""
+"El algoritmo se publicó en el  <em>Explanatory Supplement to the "
+"Astronomical Almanac</em>  (1992)."
 
 #: src/gui/ViewDialog.cpp:1578
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
+"El algoritmo fue publicado en la 3ª edición del <em>Explanatory Supplement "
+"to the Astronomical Almanac </ em> (2013)."
 
 #: src/gui/ViewDialog.cpp:1581
 msgid "Visual magnitude based on phase angle and albedo."
-msgstr ""
+msgstr "Magnitud visual basada en ángulo de fase y albedo."
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
@@ -3033,7 +3048,7 @@ msgstr "Quitar un paisaje instalado"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 msgid "Do you really want to remove this landscape?"
-msgstr ""
+msgstr "¿Realmente desea eliminar este paisaje?"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3263,37 +3278,37 @@ msgstr "Tipo"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:338
 msgid "opacity"
-msgstr ""
+msgstr "opacidad"
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:348
 msgid "Sep."
-msgstr ""
+msgstr "Sep."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:353
 msgid "Per."
-msgstr ""
+msgstr "Per."
 
 #: src/gui/AstroCalcDialog.cpp:353
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:358
 msgid "P.M."
-msgstr ""
+msgstr "P.M."
 
 #: src/gui/AstroCalcDialog.cpp:358
 msgctxt "arcsecond per year"
 msgid "\"/yr"
-msgstr ""
+msgstr "\"/año"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:364
 msgid "S.B."
-msgstr ""
+msgstr "S.B."
 
 #: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:564
 #, qt-format
@@ -3507,26 +3522,26 @@ msgstr "Catálogo Melotte"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:501 src/translations.h:169
 msgid "New General Catalogue"
-msgstr ""
+msgstr "Nuevo Catálogo General"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:502 src/translations.h:171
 msgid "Index Catalogue"
-msgstr ""
+msgstr "Catálogo índices"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:503 src/translations.h:173
 msgid "Lynds' Catalogue of Bright Nebulae"
-msgstr ""
+msgstr "Catálogo de Nebulosas Brillantes de Lynds"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:504 src/translations.h:175
 msgid "Lynds' Catalogue of Dark Nebulae"
-msgstr ""
+msgstr "Catálogo de nebulosas oscuras de Lynds"
 
 #: src/gui/AstroCalcDialog.cpp:505 src/ui_viewDialog.h:2231
 msgid "Principal Galaxy Catalog"
-msgstr ""
+msgstr "Catálogo Principal Galasias"
 
 #: src/gui/AstroCalcDialog.cpp:506 src/ui_viewDialog.h:2234
 msgid "The Uppsala General Catalogue of Galaxies"
@@ -3535,22 +3550,22 @@ msgstr "El Catálogo General de Galaxias de Uppsala"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:507 src/translations.h:177
 msgid "Cederblad Catalog"
-msgstr ""
+msgstr "Catálogo Cederblad"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:508 src/translations.h:179
 msgid "The Catalogue of Peculiar Galaxies"
-msgstr ""
+msgstr "Catálogo Galaxias Peculiares"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:509 src/translations.h:181
 msgid "The Catalogue of Interacting Galaxies"
-msgstr ""
+msgstr "Catálogo Galaxias Interactivas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:510 src/translations.h:183
 msgid "The Catalogue of Galactic Planetary Nebulae"
-msgstr ""
+msgstr "Catálogo Nebulosas Planetarias Galácticas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:511 src/translations.h:185
@@ -3566,7 +3581,7 @@ msgstr "Catalago Herschel 400"
 #: src/gui/AstroCalcDialog.cpp:513 src/gui/AstroCalcDialog.cpp:2674
 #: src/translations.h:196
 msgid "Bright double stars"
-msgstr ""
+msgstr "Estrellas dobles brillantes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:514 src/gui/AstroCalcDialog.cpp:2675
@@ -3592,17 +3607,17 @@ msgstr "Día Juliano"
 #. TRANSLATORS: phase
 #: src/gui/AstroCalcDialog.cpp:790
 msgid "phase"
-msgstr ""
+msgstr "Fase"
 
 #. TRANSLATORS: distance
 #: src/gui/AstroCalcDialog.cpp:792
 msgid "dist."
-msgstr ""
+msgstr "dist."
 
 #. TRANSLATORS: elongation
 #: src/gui/AstroCalcDialog.cpp:794
 msgid "elong."
-msgstr ""
+msgstr "elong."
 
 #: src/gui/AstroCalcDialog.cpp:825
 msgid "Planetocentric distance"
@@ -3610,7 +3625,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:827
 msgid "Topocentric distance"
-msgstr ""
+msgstr "Distancia topocentrica"
 
 #: src/gui/AstroCalcDialog.cpp:828 src/gui/AstroCalcDialog.cpp:1590
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
@@ -3729,12 +3744,12 @@ msgstr "Estrellas brillantes (<%1 mag)"
 #: src/gui/AstroCalcDialog.cpp:1195
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr ""
+msgstr "Estrellas dobles brillantes (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1196
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
-msgstr ""
+msgstr "Estrellas variables brillantes (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1197
 #, qt-format
@@ -3782,12 +3797,12 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1589
 msgid "Date"
-msgstr ""
+msgstr "Fecha:"
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
 #: src/gui/AstroCalcDialog.cpp:1599
 msgid "Mm"
-msgstr ""
+msgstr "Mm"
 
 #: src/gui/AstroCalcDialog.cpp:1611 src/gui/AstroCalcDialog.cpp:1646
 msgid "Magnitude"
@@ -3795,7 +3810,7 @@ msgstr "Magnitud"
 
 #: src/gui/AstroCalcDialog.cpp:1617 src/gui/AstroCalcDialog.cpp:1652
 msgid "Phase"
-msgstr ""
+msgstr "Fase"
 
 #: src/gui/AstroCalcDialog.cpp:1622 src/gui/AstroCalcDialog.cpp:1657
 #: src/ui_configurationDialog.h:1344
@@ -3804,7 +3819,7 @@ msgstr "Distancia"
 
 #: src/gui/AstroCalcDialog.cpp:1627 src/gui/AstroCalcDialog.cpp:1662
 msgid "Elongation"
-msgstr ""
+msgstr "Eloganción"
 
 #: src/gui/AstroCalcDialog.cpp:1632 src/gui/AstroCalcDialog.cpp:1667
 msgid "Angular size"
@@ -3943,7 +3958,7 @@ msgstr "Guardar captura de pantalla"
 
 #: src/StelMainView.cpp:764
 msgid "Reload shaders (for development)"
-msgstr ""
+msgstr "Recargar sombras (para desarrollo)"
 
 #: src/StelMainView.cpp:765
 msgid "Full-screen mode"
@@ -4732,6 +4747,8 @@ msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
+"Catálogo Jack Bennett de Objetos del Cielo Profundo del Sur (152 objetos en "
+"total). El catálogo de Bennett fue aportado por Auke Slotegraaf."
 
 #: src/translations.h:408
 msgid ""
@@ -4739,6 +4756,9 @@ msgid ""
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
+"Esta lista de 111 objetos por A.J. Crayon y Steve Coe es utilizado por los "
+"miembros del Club de Astronomía Saguaro de Phoenix, AZ, para el mejor de los "
+"premios NGC."
 
 #: src/translations.h:412
 msgid "&Undo"
@@ -6265,7 +6285,7 @@ msgstr "Ajustes de Refracción/Extinción ..."
 
 #: src/ui_viewDialog.h:2141
 msgid "Atmosphere visualization"
-msgstr ""
+msgstr "Visualización atmósfera"
 
 #: src/ui_viewDialog.h:2142
 msgid "Solar System objects"
@@ -6293,7 +6313,7 @@ msgstr "Detalles GRS..."
 
 #: src/ui_viewDialog.h:2152
 msgid "Simulate self-shadowing"
-msgstr ""
+msgstr "Simular auto-sombra"
 
 #: src/ui_viewDialog.h:2153
 msgid "Scale Moon:"
@@ -6358,7 +6378,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2188
 msgid "Planets magnitude algorithm:"
-msgstr ""
+msgstr "Algoritmo magnitud planetas:"
 
 #: src/ui_viewDialog.h:2190
 msgid ""
@@ -7247,11 +7267,12 @@ msgstr "Tiempo sidereo"
 
 #: src/ui_configurationDialog.h:1369
 msgid "Additional settings"
-msgstr ""
+msgstr "Ajustes adicionales"
 
 #: src/ui_configurationDialog.h:1370
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
 msgstr ""
+"Utilice la unidad de medida mag/arcsec^2 para el brillo de la superficie"
 
 #: src/ui_configurationDialog.h:1371
 msgid "Control"
@@ -7480,7 +7501,7 @@ msgstr "Mostrar botón de favoritos"
 
 #: src/ui_configurationDialog.h:1474
 msgid "A button to toggle equatorial J2000 grid"
-msgstr ""
+msgstr "botón para alternar la cuadrícula J2000 ecuatorial"
 
 #: src/ui_configurationDialog.h:1476
 msgid "Show ICRS grid button"
@@ -7521,15 +7542,15 @@ msgstr "El zoom automático vuelve a la dirección inicial de la vista"
 
 #: src/ui_configurationDialog.h:1491
 msgid "Toggle the usage of background under GUI buttons"
-msgstr ""
+msgstr "Cambiar el uso del fondo bajo los botones GUI"
 
 #: src/ui_configurationDialog.h:1493
 msgid "Use buttons background"
-msgstr ""
+msgstr "Usar botones del fondo"
 
 #: src/ui_configurationDialog.h:1494
 msgid "Indication for mount mode"
-msgstr ""
+msgstr "Indicación para el modo montura"
 
 #: src/ui_configurationDialog.h:1495
 msgid "Screenshots"
@@ -7782,7 +7803,7 @@ msgstr "Posiciones planetarias"
 
 #: src/ui_astroCalcDialog.h:849
 msgid "Celestial bodies above horizon"
-msgstr ""
+msgstr "Cuerpos celestes por encima del horizonte"
 
 #: src/ui_astroCalcDialog.h:852
 msgid "Ephemeris"
@@ -7802,7 +7823,7 @@ msgstr "Altitud vs. Tiempo"
 
 #: src/ui_astroCalcDialog.h:861
 msgid "Graphs"
-msgstr ""
+msgstr "Gráficos"
 
 #: src/ui_astroCalcDialog.h:863 src/ui_astroCalcDialog.h:936
 msgid "Graphs on the current year"
@@ -7896,7 +7917,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:910
 msgid "Show dates"
-msgstr ""
+msgstr "Mostrar fechas"
 
 #: src/ui_astroCalcDialog.h:912
 msgid "Show magnitudes of current celestial body"
@@ -7996,7 +8017,7 @@ msgstr "&Ir a..."
 
 #: src/ui_bookmarksDialog.h:205
 msgid "Export bookmarks"
-msgstr ""
+msgstr "Exportar marcadores"
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:378
 msgid "Color settings"
@@ -9622,11 +9643,11 @@ msgstr "Ángulo de reflexión solar: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:353
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 #: plugins/Satellites/src/Satellite.cpp:355
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 #: plugins/Satellites/src/Satellite.cpp:361
 #, qt-format

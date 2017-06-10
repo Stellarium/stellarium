@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-08 00:35+0700\n"
-"PO-Revision-Date: 2017-06-04 21:33+0000\n"
+"PO-Revision-Date: 2017-06-08 19:36+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-08 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-06-10 05:24+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -1192,7 +1192,7 @@ msgstr "Winkeldistanz"
 
 #: src/core/modules/StarWrapper.cpp:295
 msgid "Proper motions by axes"
-msgstr ""
+msgstr "Eigenbewegung in den Achsen"
 
 #: src/core/modules/StarWrapper.cpp:295 src/core/modules/StarWrapper.cpp:297
 msgctxt "milliarc second per year"
@@ -1201,11 +1201,11 @@ msgstr "mas/yr"
 
 #: src/core/modules/StarWrapper.cpp:296
 msgid "Position angle of the proper motion"
-msgstr ""
+msgstr "Positionswinkel der Eigenbewegung"
 
 #: src/core/modules/StarWrapper.cpp:297
 msgid "Angular velocity of the proper motion"
-msgstr ""
+msgstr "Winkelgeschwindigkeit der Eigenbewegung"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -11989,7 +11989,7 @@ msgstr "Version %1"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
-msgstr ""
+msgstr "Kleinkörper des Sonnensystems speichern als..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
@@ -11999,10 +11999,11 @@ msgstr "Konfigurationsdateien"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
 msgid "Select a file to replace the Solar System minor bodies"
 msgstr ""
+"Wählen Sie eine Datei, um die Kleinkörper des Sonnensystems  zu ersetzen"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
 msgid "Select a file to add the Solar System minor bodies"
-msgstr ""
+msgstr "Wählen Sie eine Datei, um Kleinkörper des Sonnensystems hinzuzufügen"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -12085,7 +12086,7 @@ msgstr "Objekte hinzufügen"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "Kleinkörper des Sonnensystems"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
@@ -12098,6 +12099,9 @@ msgid ""
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
 "you can delete manually that file from:"
 msgstr ""
+"Dieses Plugin erlaubt die Bearbeitung der Konfigurationsdatei für "
+"Kleinkörper des Sonnensystems. Falls etwas schiefgeht und Stellarium "
+"abstürzt oder nicht mehr startet, kann diese Datei gelöscht werden:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
@@ -12112,25 +12116,27 @@ msgstr "Auf Standardeinstellungen zurücksetzen"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Export/replace the Solar System minor bodies file"
-msgstr ""
+msgstr "Exportiere/ersetze die Datei der Kleinkörper des Sonnensystems"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
+"Hier kann eine Sicherheitskopie der Kleinkörper-Bahnelementedatei angelegt "
+"oder die existierende Datei ersetzt bzw. ergänzt werden."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Export the Solar System minor bodies to file..."
-msgstr ""
+msgstr "Konfiguration der Kleinkörper des Sonnensystems exportieren nach..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import and replace the Solar System minor bodies from file..."
-msgstr ""
+msgstr "Kleinkörper des Sonnensystems importieren und ersetzen aus..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import and add Solar System minor bodies from file..."
-msgstr ""
+msgstr "Kleinkörper des Sonnensystems importieren und ergänzen aus..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
@@ -12138,7 +12144,7 @@ msgstr "Konfigurationsdatei"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "Kleinkörper des Sonnensystems hinzufügen"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
