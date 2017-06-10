@@ -289,7 +289,7 @@ which is available by pressing the \button{configure} button on this tab.
 The View settings window controls many display features of Stellarium
 which are not available via the main toolbar.
 
-\subsection{Sky Tab}
+\subsection{The Sky Tab}
 \label{sec:gui:view:sky}
 
 \begin{figure}[t]
@@ -356,7 +356,7 @@ opacity factor for extinction, \emph{magnitude loss per airmass} $k$
 (see section~\ref{sec:phenomena:Extinction}).
 
 
-\subsection{DSO Tab}
+\subsection{The Deep-Sky Objects (DSO) Tab}
 \label{sec:gui:view:dso}
 
 \begin{figure}[t]
@@ -370,7 +370,7 @@ opacity factor for extinction, \emph{magnitude loss per airmass} $k$
 external to the solar system, and are not point-sources like stars.
 DSO include galaxies, planetary nebulae and star clusters. These
 objects may or may not have images associated with them. Stellarium
-comes with a catalogue with over 50,000 extended objects containing
+comes with a catalogue with over 83,000 extended objects containing
 the combined data from many catalogues, with 200 images.  The DSO tab
 (Fig.~\ref{fig:gui:view:dso}) allows you to specify which catalogs or
 which object types you are interested in. See chapter~\ref{ch:DSO} for
@@ -380,7 +380,7 @@ details about the catalog, and how to extend it with your own photographs.
 
 
 
-\subsection{Markings Tab}
+\subsection{The Markings Tab}
 \label{sec:gui:view:markings}
 
 \begin{figure}[t]
@@ -445,7 +445,7 @@ The Markings tab of the View window
   \end{description}
 \end{description}
 
-\subsection{Landscape Tab}
+\subsection{The Landscape Tab}
 \label{sec:gui:view:landscape}
 
 \begin{figure}[t]
@@ -502,13 +502,13 @@ website\footnote{\url{http://stellarium.org/wiki/index.php/Landscapes}}
 or create yourself (see ch.~\ref{ch:landscapes} Landscapes), or remove
 these custom landscapes.
 
-\newFeature{V0.15.2} Loading large landscapes may take several seconds. 
+Loading large landscapes may take several seconds. 
 If you like to switch rapidly between several landscapes and have enough memory, 
 you can increase the default cache size to keep more landscapes loaded previously 
 available in memory. Note that a large landscape can take up 200MB or more! 
 See section \ref{sec:config.ini:landscape}.
 
-\subsection{Starlore Tab}
+\subsection{The Starlore Tab}
 \label{sec:gui:view:starlore}
 
 \begin{figure}[t]
@@ -530,7 +530,9 @@ Western and Inuit), and the rest do not. Configurable options include
   translated names.
 \item[Show lines with thickness\ldots] Activate display of stick
   figures, like \guibutton{0.6}{bt_constellation} or \keys{C}, and you
-  can configure line thickness here.
+  can configure constellation line thickness here.
+  \item[Show asterism lines\ldots] Activate display of stick figures of asterisms 
+  (like the shortcut \keys{Alt+A}) and you can configure asterism line thickness here.
 \item[Show boundaries] Activate display of constellation boundaries,
   like \keys{B}. Currently, boundaries have been defined only for
   ``Western'' skycultures.
@@ -540,6 +542,7 @@ Western and Inuit), and the rest do not. Configurable options include
 \item[Show art in brightness\ldots] Activate display of constellation
   art (if available), like \guibutton{0.6}{bt_constellation_art} or
   \keys{R}. You can also select the brightness here.
+\item[Show asterism labels] Activate display of asterism labels, like \keys{Alt+V}.
 \end{description}
 
 
@@ -547,26 +550,26 @@ Western and Inuit), and the rest do not. Configurable options include
 \label{sec:gui:search}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.7\linewidth]{search_dialog}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog}
 \caption{The Search Window: Objects}
 \label{fig:gui:search}
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.7\linewidth]{search_dialog_position}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog_position}
 \caption{The Search Window: Positions}
 \label{fig:gui:search:position}
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.7\linewidth]{search_dialog_list}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog_list}
 \caption{The Search Window: Lists}
 \label{fig:gui:search:lists}
 \end{figure}
 
 
 \begin{figure}[tp]
-\centering\includegraphics[width=0.7\linewidth]{search_dialog_option}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog_option}
 \caption{The Search Window: Options}
 \label{fig:gui:search:options}
 \end{figure}
@@ -611,7 +614,7 @@ The Options tab provides a few settings to fine-tune your search experience.
 When the name of an object to find is typed in the object
 window and you are connected to the internet and ``Extend search'' is
 ticked, Stellarium will search the SIMBAD on-line  data bases for its
-coordinates. You can then click the \button{go} button or press return.
+coordinates. You can then click the \guibutton{0.6}{bt_search} button or press return.
 Stellarium will point you at that object in the sky even if there is no
 object displayed on the screen. The SIMBAD server being used can be
 selected from the scroll window.
@@ -620,15 +623,12 @@ selected from the scroll window.
 \section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
-\newFeature{V0.15} This window provides advanced functionality and is
-still in an experimental phase. You can call it by pressing \key{F10}. The Astronomical Calculations window shows four tabs with different functionality.
+\newFeature{V0.15.0} This window provides advanced functionality and is still in an experimental phase. You can call it by pressing \key{F10} or button \guibutton{0.6}{btd_astrocalc} on the left bar. The Astronomical Calculations window shows four tabs with different functionality.
 
-% TODO: Add button on left side.
-
-\subsection{Planet Positions}
+\subsection{The Planet Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
-Shows J2000.0 positions and magnitudes for all installed planets, planet moons, minor bodies (asteroids, comets, etc.). Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
+Shows J2000.0 positions and magnitudes for all installed planets, planet moons, minor bodies (asteroids, comets, etc.) with horizon and magnitude filters. Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
 
 
 \begin{figure}[htbp]
@@ -637,10 +637,23 @@ Shows J2000.0 positions and magnitudes for all installed planets, planet moons, 
 \label{fig:gui:AstroCalc:Positions}
 \end{figure}
 
-\subsection{Ephemeris}
+\subsection{The Celestial Positions Tab}
+\label{sec:gui:AstroCalc:CelestialPositions}
+
+\newFeature{V0.16.0} Shows J2000.0 or horizontal positions, magnitudes and additional parameter (e.g. surface brightness for deep-sky objects or angular separation for double stars) for various lists of celestial objects above horizon with magnitude filter. Clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:CelestialPositions}).
+
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_positions2_tab}
+\caption{Astronomical Calculations (AstroCalc): Celestial positions.}
+\label{fig:gui:AstroCalc:CelestialPositions}
+\end{figure}
+
+
+\subsection{The Ephemeris Tab}
 \label{sec:gui:AstroCalc:Ephemeris}
 
-Select an object and start and end time, and compute an ephemeris (list of positions and magnitude evolving over time) for that object. The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a date, an orange circle indicates this date. Double-clicking sets the respective date and brings object to focus. You can export the calculated ephemeris into CSV file. 
+Select an object, start and end time, and compute an ephemeris (list of positions and magnitude evolving over time) for that object. The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). When you click on a \emph{Show dates} and/or \emph{Show magnitudes} checkboxes, an orange circle indicates this date and/or magnitude. Double-clicking sets the respective date and brings object to focus. You can export the calculated ephemeris into CSV file. 
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=\textwidth]{astrocalc_dialog_ephemeris_tab}
@@ -648,10 +661,18 @@ Select an object and start and end time, and compute an ephemeris (list of posit
 \label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
 
-\subsection{Phenomena}
+Other interesting sight in this tool --- using horizontal coordinates for plot traces of the Solar system objects. For example you can get an analemma of the Sun for any location (Figure~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}).
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=\textwidth]{astrocalc_dialog_ephemeris_analemma}
+\caption{Astronomical Calculations (AstroCalc): Analemma.}
+\label{fig:gui:AstroCalc:Ephemeris:Analemma}
+\end{figure}
+
+\subsection{The Phenomena Tab}
 \label{sec:gui:AstroCalc:Phenomena}
 
-Compute phenomena like conjunctions, oppositions, occultations and eclipses (in special cases) between planetary objects (Figure~\ref{fig:gui:AstroCalc:Phenomena}). You can export the calculated conjunctions and oppositions into CSV file.
+Compute phenomena like conjunctions, oppositions, occultations and eclipses (in special cases) between planetary objects (Figure~\ref{fig:gui:AstroCalc:Phenomena}). You can export the calculated phenomenae into CSV file.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_phenomena_tab}
@@ -660,10 +681,10 @@ Compute phenomena like conjunctions, oppositions, occultations and eclipses (in 
 \end{figure}
 
 \newpage
-\subsection{Altitude vs Time}
+\subsection{The ``Altitude vs Time'' Tab}
 \label{sec:gui:AstroCalc:AltVsTime}
   
-\newFeature{V0.15.1} Compute horizontal positions of object and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
+Compute horizontal positions of object and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
     
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_altvstime_tab}
@@ -671,11 +692,43 @@ Compute phenomena like conjunctions, oppositions, occultations and eclipses (in 
 \label{fig:gui:AstroCalc:AltVsTime}
 \end{figure}
 
+\subsection{The Graphs Tab}
+\label{sec:gui:AstroCalc:Graphs}
+  
+\newFeature{V0.16.0} Compute two functions by time for the current year and draw graphs for them on one desk (Figure~\ref{fig:gui:AstroCalc:Graphs}). This tool may be very helpful for educational and statistics purposes.
+    
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_graphs_tab}
+\caption{Astronomical Calculations (AstroCalc): Graphs.}
+\label{fig:gui:AstroCalc:Graphs}
+\end{figure}
+
+The list of possible functions for computations: \emph{Magnitude vs. Time}, \emph{Phase vs. Time}, \emph{Distance vs. Time}, \emph{Elongation vs. Time}, \emph{Angular size vs. Time} and \emph{Phase angle vs. Time}.
+
+The idea for this tool has been obtained from the SkytechX planetarium\footnote{SkytechX --- \url{http://www.skytechx.eu/}}.
+
+\subsection{The ``What's Up Tonight'' (WUT) Tab}
+\label{sec:gui:AstroCalc:WUT}
+
+\newFeature{V0.16.0} The ``What's Up Tonight'' (WUT) tool displays a list of objects that will be visible at night from any location, on any date. By default, the Date and Location are taken from the current settings in the Date and Time (see section~\ref{sec:gui:date}) and Location (see section~\ref{sec:gui:location}) windows.
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.68\textwidth]{astrocalc_dialog_wut_tab}
+\caption{Astronomical Calculations (AstroCalc): What's Up Tonight (WUT).}
+\label{fig:gui:AstroCalc:WUT}
+\end{figure}
+
+The objects are organized into type categories. Select an object type in the box labeled \emph{Select a Category}, and all objects of that type which are above the horizon on the selected night will be displayed in the box labeled \emph{Matching Objects}. For example, in the screenshot, the Planets category has been selected, and three planets which are up on the selected night are displayed (Jupiter, Mars and Mercury). 
+
+By default, the WUT will display objects which are above the horizon between sunset and midnight (i.e. \emph{in the evening}). You can choose to show objects which are up between midnight and dawn (\emph{in the morning}), or between dusk and dawn (\emph{any time tonight}) using the combobox near the top of the window. You can also choose to see only those objects that are brighter than a magnitude by setting a minimum magnitude using the \emph{Show objects brighter than magnitude} spinbox. You may center the object in the sky map just by select of then.
+
+This tool has been partially ported from the KStars planetarium\footnote{KStars --- \url{https://edu.kde.org/kstars/}}.
+    
 \section{Help Window}
 \label{sec:gui:help}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.7\textwidth]{help_dialog}
+\centering\includegraphics[width=0.68\textwidth]{help_dialog}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
@@ -703,7 +756,7 @@ the key has been taken already, a message will tell you.
 \label{fig:gui:help:about}
 \end{figure}
 
-The About tab (Fig.~\ref{fig:gui:help:about}) shows version and licensing information, and a list
+The About Tab (Fig.~\ref{fig:gui:help:about}) shows version and licensing information, and a list
 of people who helped to produce the program.
 
 \begin{figure}[htbp]
@@ -712,7 +765,7 @@ of people who helped to produce the program.
 \label{fig:gui:help:log}
 \end{figure}
 
-The log tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
+The Log Tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
 stellarium runs. It is useful to locate the files that stellarium writes
 to your computer. The same information is written to  the file \file{log.txt} that you will
 find in your user directory (see~\ref{sec:Directories}).
