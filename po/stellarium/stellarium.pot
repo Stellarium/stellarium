@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 22:19+0700\n"
+"POT-Creation-Date: 2017-06-11 16:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9560,22 +9560,30 @@ msgid ""
 "wait..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:186
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:246
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:188
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:248
 msgid "Processing data..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "No data could be downloaded. Try again later."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:374
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
+msgid "Download aborted."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
+msgid "Get data"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr ""
