@@ -509,9 +509,24 @@ void AstroCalcDialog::currentCelestialPositions()
 			if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
-				StelUtils::rectToSphe(&ra, &dec, pos);
-				raStr = StelUtils::radToHmsStr(ra);
-				decStr = StelUtils::radToDmsStr(dec, true);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, pos);
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
