@@ -137,7 +137,7 @@ void SatellitesImportDialog::getData()
 	
 	if (satMgr->getUpdatesEnabled())
 	{
-		sourceUrls = satMgr->getTleSources();
+		sourceUrls = satMgr->getTleSources();		
 		qDeleteAll(sourceFiles);
 		sourceFiles.clear();
 		numberDownloadsComplete = 0;
@@ -156,7 +156,8 @@ void SatellitesImportDialog::getData()
 		
 		for (int i = 0; i < sourceUrls.size(); i++)
 		{
-			QUrl url(sourceUrls.at(i));
+			QStringList urlData = sourceUrls.at(i).split(",");
+			QUrl url(urlData.at(1));
 			QNetworkReply* reply = downloadMgr->get(QNetworkRequest(url));
 			activeDownloads.append(reply);
 		}
@@ -260,7 +261,7 @@ void SatellitesImportDialog::abortDownloads()
 		activeDownloads[i]->deleteLater();
 	}
 	reset();
-	displayMessage("Download aborted.");
+	displayMessage(q_("Download aborted."));
 }
 
 void SatellitesImportDialog::acceptNewSatellites()
@@ -305,7 +306,7 @@ void SatellitesImportDialog::reset()
 	ui->pushButtonAbort->setVisible(false);
 	ui->labelMessage->setVisible(false);
 	ui->labelMessage->clear();
-	ui->groupBoxWorking->setTitle("Get data");
+	ui->groupBoxWorking->setTitle(q_("Get data"));
 	newSatellitesModel->clear();
 	ui->lineEditSearch->clear();
 	
