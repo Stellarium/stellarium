@@ -156,8 +156,8 @@ void SatellitesImportDialog::getData()
 		
 		for (int i = 0; i < sourceUrls.size(); i++)
 		{
-			QStringList urlData = sourceUrls.at(i).split(",");
-			QUrl url(urlData.at(1));
+			QString urlData = sourceUrls.at(i);
+			QUrl url(urlData.remove("1,", Qt::CaseInsensitive));
 			QNetworkReply* reply = downloadMgr->get(QNetworkRequest(url));
 			activeDownloads.append(reply);
 		}
