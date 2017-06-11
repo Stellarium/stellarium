@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-03 19:06+0700\n"
+"POT-Creation-Date: 2017-06-10 19:37+0700\n"
 "PO-Revision-Date: 2016-07-24 12:33+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-04 06:08+0000\n"
-"X-Generator: Launchpad (build 18391)\n"
+"X-Launchpad-Export-Date: 2017-06-11 06:14+0000\n"
+"X-Generator: Launchpad (build 18402)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -77,7 +77,7 @@ msgid "Error performing Simbad lookup"
 msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
-#: tablet7in.html:230
+#: tablet7in.html:235
 msgid "idle"
 msgstr ""
 
@@ -103,8 +103,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Không thể khôi phục danh sách quang cảnh"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:498
-#: index.html:555 tablet7in.html:628
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:505
+#: index.html:562 tablet7in.html:683 tablet7in.html:743
 msgid "-none-"
 msgstr "-không-"
 
@@ -162,7 +162,7 @@ msgstr "Vật thể xa"
 msgid "Actions and scripts"
 msgstr "Các hành động và các kịch bản"
 
-#: index.html:39
+#: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
 msgstr ""
 
@@ -170,257 +170,261 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
-#: index.html:82 tablet7in.html:178
+#: index.html:82 tablet7in.html:183
 msgid "Time jumps"
 msgstr "Bước nhảy thời gian"
 
-#: index.html:86 tablet7in.html:182
+#: index.html:86 tablet7in.html:187
 msgid "Solar hour"
 msgstr "Giờ mặt trời"
 
-#: index.html:87 tablet7in.html:183
+#: index.html:87 tablet7in.html:188
 msgid "Solar day"
 msgstr "ngày mặt trời"
 
-#: index.html:88 tablet7in.html:184
+#: index.html:88 tablet7in.html:189
 msgid "Solar week"
 msgstr "tuần mặt trời"
 
-#: index.html:90 tablet7in.html:186
+#: index.html:90 tablet7in.html:191
 msgid "Sidereal day"
 msgstr "Ngày thiên văn"
 
-#: index.html:91 tablet7in.html:187
+#: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
 msgstr "Năm thiên văn"
 
-#: index.html:92 tablet7in.html:188
+#: index.html:92 tablet7in.html:193
 msgid "Sidereal century"
 msgstr "Thế kỉ thiên văn"
 
-#: index.html:94 tablet7in.html:190
+#: index.html:94 tablet7in.html:195
 msgid "Synodic month"
 msgstr "Tháng giao hội"
 
-#: index.html:95 tablet7in.html:191
+#: index.html:95 tablet7in.html:196
 msgid "Draconic month"
 msgstr ""
 
-#: index.html:96 tablet7in.html:192
+#: index.html:96 tablet7in.html:197
 msgid "Draconic year"
 msgstr ""
 
-#: index.html:98 tablet7in.html:205
+#: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
 msgstr ""
 
-#: index.html:101 tablet7in.html:195
+#: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
 msgstr "Tháng cận điểm"
 
-#: index.html:102 tablet7in.html:196
+#: index.html:102 tablet7in.html:201
 msgid "Anomalistic year"
 msgstr "Năm cận điểm"
 
-#: index.html:103 tablet7in.html:197
+#: index.html:103 tablet7in.html:202
 msgid "Anomalistic century"
 msgstr "Thế kỉ cận điểm"
 
-#: index.html:105 tablet7in.html:199
+#: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
 msgstr "Tháng nhiệt đới trung bình"
 
-#: index.html:106 tablet7in.html:200
+#: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
 msgstr "Năm nhiệt đới trung bình"
 
-#: index.html:107 tablet7in.html:201
+#: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
 msgstr "Thế kỉ nhiệt đới trung bình"
 
-#: index.html:109 tablet7in.html:203
+#: index.html:109 tablet7in.html:208
 msgid "Tropical year"
 msgstr "Năm nhiệt đới"
 
-#: index.html:110 tablet7in.html:204
+#: index.html:110 tablet7in.html:209
 msgid "Julian year"
 msgstr "Năm Julian"
 
-#: index.html:111 tablet7in.html:206
+#: index.html:111 tablet7in.html:211
 msgid "Julian century"
 msgstr "Thế kỉ Julian"
 
-#: index.html:123 tablet7in.html:133
+#: index.html:123 tablet7in.html:138
 msgid "FOV"
 msgstr ""
 
-#: index.html:141 tablet7in.html:224
+#: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "Nhập giới hạn tìm kiếm. Sử dụng phím TAB để"
 
-#: index.html:142 tablet7in.html:225
+#: index.html:142 tablet7in.html:230
 msgid "Select and focus"
 msgstr "Chọn và tập trung"
 
-#: index.html:168 tablet7in.html:254
+#: index.html:168 tablet7in.html:259
 msgid "Selection mode"
 msgstr ""
 
-#: index.html:168 tablet7in.html:254
+#: index.html:168 tablet7in.html:259
 msgid "Center on object"
 msgstr ""
 
-#: index.html:168 tablet7in.html:254
+#: index.html:168 tablet7in.html:259
 msgid "Center and zoom to object"
 msgstr ""
 
-#: index.html:168 tablet7in.html:254
+#: index.html:168 tablet7in.html:259
 msgid "Just mark the object"
 msgstr ""
 
-#: index.html:170 tablet7in.html:256
+#: index.html:170 tablet7in.html:261
 msgid "Quick select"
 msgstr "Chọn nhanh"
 
-#: index.html:174 tablet7in.html:260
+#: index.html:174 tablet7in.html:265
 msgid "Earth"
 msgstr "Trái Đất"
 
-#: index.html:174 tablet7in.html:260
+#: index.html:174 tablet7in.html:265
 msgid "Pluto"
 msgstr "Diêm Vương Tinh"
 
-#: index.html:180 tablet7in.html:289
+#: index.html:180 tablet7in.html:294
 msgid "Current selection"
 msgstr "Chọn lựa hiện tại"
 
-#: index.html:241 tablet7in.html:359
+#: index.html:200 tablet7in.html:333
+msgid "Digitized Sky Survey"
+msgstr ""
+
+#: index.html:243 tablet7in.html:399
 msgid "Shooting Stars"
 msgstr ""
 
-#: index.html:242 tablet7in.html:360
+#: index.html:244 tablet7in.html:400
 msgid "ZHR:"
 msgstr "Tần suất theo giờ:"
 
-#: index.html:288 tablet7in.html:412
+#: index.html:288 tablet7in.html:452
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
 
-#: index.html:297 tablet7in.html:421
+#: index.html:297 tablet7in.html:461
 msgid "Solstices"
 msgstr "Các điểm chí"
 
-#: index.html:298 tablet7in.html:422
+#: index.html:298 tablet7in.html:462
 msgid "Crossquarters"
 msgstr ""
 
-#: index.html:299 tablet7in.html:423
+#: index.html:299 tablet7in.html:463
 msgid "Major Standstill"
 msgstr ""
 
-#: index.html:300 tablet7in.html:424
+#: index.html:300 tablet7in.html:464
 msgid "Minor Standstill"
 msgstr ""
 
-#: index.html:310 tablet7in.html:434
+#: index.html:310 tablet7in.html:474
 msgid "Current Planet:"
 msgstr "Hành tinh hiện tại:"
 
-#: index.html:355 tablet7in.html:477
-msgid "Catalog of galaxies"
-msgstr ""
-
-#: index.html:413 tablet7in.html:529
+#: index.html:419 tablet7in.html:578
 msgid "Bright Nebulae"
 msgstr ""
 
-#: index.html:414 tablet7in.html:530
+#: index.html:420 tablet7in.html:579
 msgid "Dark Nebulae"
 msgstr ""
 
-#: index.html:415 tablet7in.html:531
+#: index.html:421 tablet7in.html:580
 msgid "Planetary Nebulae"
 msgstr ""
 
-#: index.html:424 tablet7in.html:540
+#: index.html:430 tablet7in.html:589
 msgid "Labels and markers"
 msgstr "Các nhãn và đánh dấu"
 
-#: index.html:453 tablet7in.html:569
+#: index.html:459 tablet7in.html:618
 msgid "Show illumination"
 msgstr "Hiển thị sự rọi sáng"
 
-#: index.html:458 tablet7in.html:575
+#: index.html:464 tablet7in.html:624
 msgid "Current landscape"
 msgstr "Quang cảnh hiện tại"
 
-#: index.html:485 tablet7in.html:603
+#: index.html:481 tablet7in.html:642
+msgid "Show asterisms with thickness"
+msgstr ""
+
+#: index.html:492 tablet7in.html:658
 msgid "Current sky culture"
 msgstr "Văn hóa bầu trời hiện tại"
 
-#: index.html:498 tablet7in.html:628
+#: index.html:505 tablet7in.html:683
 msgid "Active script:"
 msgstr "Kịch bản hoạt động:"
 
-#: index.html:499 tablet7in.html:629
+#: index.html:506 tablet7in.html:684
 msgid "Run selected script"
 msgstr "Chạy kịch bản được chọn"
 
-#: index.html:499 tablet7in.html:629
+#: index.html:506 tablet7in.html:684
 msgid "Stop current script"
 msgstr "Dừng kịch bản hiện tại"
 
-#: index.html:504 tablet7in.html:41 tablet7in.html:613
+#: index.html:511 tablet7in.html:41 tablet7in.html:668
 msgid "Actions"
 msgstr "Các hành động"
 
-#: index.html:508 tablet7in.html:617
+#: index.html:515 tablet7in.html:672
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:519 tablet7in.html:652
+#: index.html:526 tablet7in.html:707
 msgid "Planet map"
 msgstr "Bản đồ hành tinh"
 
-#: index.html:520 tablet7in.html:653
+#: index.html:527 tablet7in.html:708
 msgid "Planet map pointer"
 msgstr ""
 
-#: index.html:524 tablet7in.html:657
+#: index.html:531 tablet7in.html:712
 msgid "Type to search location"
 msgstr "Nhập để tìm kiếm vị trí"
 
-#: index.html:553
+#: index.html:560 tablet7in.html:741
 msgid "Interaction"
 msgstr ""
 
-#: index.html:554
+#: index.html:561 tablet7in.html:742
 msgid "Current scene:"
 msgstr ""
 
-#: index.html:557
+#: index.html:564 tablet7in.html:745
 msgid "View controls"
 msgstr ""
 
-#: index.html:563
+#: index.html:570 tablet7in.html:751
 msgid "Movement controls"
 msgstr ""
 
-#: index.html:579
+#: index.html:586 tablet7in.html:767
 msgid "Scene selection"
 msgstr ""
 
-#: index.html:583
+#: index.html:590 tablet7in.html:771
 msgid "Load selected scene"
 msgstr ""
 
-#: index.html:607 tablet7in.html:703
+#: index.html:614 tablet7in.html:796
 msgid "No response from server"
 msgstr "Không có phản hồi từ máy chủ"
 
-#: index.html:608
+#: index.html:615
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
@@ -434,171 +438,171 @@ msgstr "Bước nhảy thời gian"
 msgid "Grids"
 msgstr "Lưới"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Up/Left"
 msgstr "Lên/Trái"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Up"
 msgstr "Lên"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Up/Right"
 msgstr "Lên/Phải"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Left"
 msgstr "Trái"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Focus on selected object"
 msgstr "Tập trung vào đối tượng được chọn"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Focus on selection"
 msgstr "Tập trung vào lựa chọn"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Right"
 msgstr "Phải"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Down/Left"
 msgstr "Xuống/Trái"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Down"
 msgstr "Xuống"
 
-#: tablet7in.html:92
+#: tablet7in.html:97
 msgid "Down/Right"
 msgstr "Xuống/Phải"
 
-#: tablet7in.html:96
+#: tablet7in.html:101
 msgid "View towards horizon at Azimuth"
 msgstr "Xem hướng tới chân trời ở Góc phương vị"
 
-#: tablet7in.html:118
+#: tablet7in.html:123
 msgid "Vertical View offset"
 msgstr ""
 
-#: tablet7in.html:128
+#: tablet7in.html:133
 msgid "Reset"
 msgstr "Thiết lập lại"
 
-#: tablet7in.html:261
+#: tablet7in.html:266
 msgid "Sirius"
 msgstr "Thiên Lang"
 
-#: tablet7in.html:262
+#: tablet7in.html:267
 msgid "Arcturus"
 msgstr "Arcturus"
 
-#: tablet7in.html:263
+#: tablet7in.html:268
 msgid "Capella"
 msgstr "Capella"
 
-#: tablet7in.html:264
+#: tablet7in.html:269
 msgid "Vega"
 msgstr "Chức Nữ"
 
-#: tablet7in.html:265
+#: tablet7in.html:270
 msgid "Deneb"
 msgstr "Thiên Tân"
 
-#: tablet7in.html:266
+#: tablet7in.html:271
 msgid "Altair"
 msgstr "Ngưu Lang"
 
-#: tablet7in.html:267
+#: tablet7in.html:272
 msgid "Andromeda Galaxy"
 msgstr "Thiên hà Tiên Nữ"
 
-#: tablet7in.html:268
+#: tablet7in.html:273
 msgid "Hercules Cluster"
 msgstr "Cụm sao Hercules"
 
-#: tablet7in.html:269
+#: tablet7in.html:274
 msgid "Orion Nebula"
 msgstr "Tinh vân Orion"
 
-#: tablet7in.html:270
+#: tablet7in.html:275
 msgid "Eta Carinae Nebula"
 msgstr "Tinh vân Eta Carinae"
 
-#: tablet7in.html:271
+#: tablet7in.html:276
 msgid "47 Tucanae Cluster"
 msgstr "Cụm sao 47 Tucanae"
 
-#: tablet7in.html:272
+#: tablet7in.html:277
 msgid "Aries"
 msgstr "Bạch Dương"
 
-#: tablet7in.html:273
+#: tablet7in.html:278
 msgid "Taurus"
 msgstr "Kim Ngưu"
 
-#: tablet7in.html:274
+#: tablet7in.html:279
 msgid "Gemini"
 msgstr "Song Tử"
 
-#: tablet7in.html:275
+#: tablet7in.html:280
 msgid "Cancer"
 msgstr "Cự Giải"
 
-#: tablet7in.html:276
+#: tablet7in.html:281
 msgid "Leo"
 msgstr "Sư Tử"
 
-#: tablet7in.html:277
+#: tablet7in.html:282
 msgid "Virgo"
 msgstr "Xử Nữ"
 
-#: tablet7in.html:278
+#: tablet7in.html:283
 msgid "Libra"
 msgstr "Thiên Bình"
 
-#: tablet7in.html:279
+#: tablet7in.html:284
 msgid "Scorpius"
 msgstr "Bò Cạp"
 
-#: tablet7in.html:280
+#: tablet7in.html:285
 msgid "Sagittarius"
 msgstr "Nhân Mã"
 
-#: tablet7in.html:281
+#: tablet7in.html:286
 msgid "Capricornus"
 msgstr "Ma Kết"
 
-#: tablet7in.html:282
+#: tablet7in.html:287
 msgid "Aquarius"
 msgstr "Bảo Bình"
 
-#: tablet7in.html:283
+#: tablet7in.html:288
 msgid "Pisces"
 msgstr "Song Ngư"
 
-#: tablet7in.html:599
+#: tablet7in.html:654
 msgid "Constellation selection isolated"
 msgstr ""
 
-#: tablet7in.html:637
+#: tablet7in.html:692
 msgid "Favorites"
 msgstr "Mục yêu thích"
 
-#: tablet7in.html:639
+#: tablet7in.html:694
 msgid "Show 1"
 msgstr "Hiển thị 1"
 
-#: tablet7in.html:640
+#: tablet7in.html:695
 msgid "Remove Labels and Images"
 msgstr "Xóa các nhãn và hình ảnh"
 
-#: tablet7in.html:640
+#: tablet7in.html:695
 msgid "Cleanup Screen"
 msgstr "Thu gọn màn hình"
 
-#: tablet7in.html:704
+#: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "Không có phản hồi từ máy chủ khoảng %1 giây. Stellarium có còn đang chạy "
