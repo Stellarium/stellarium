@@ -510,7 +510,11 @@ void AstroCalcDialog::currentCelestialPositions()
 	{
 		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
 		PlanetP sun = solarSystem->getSun();
-		QString sToolTip = "";
+		QString distanceInfo = q_("Planetocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
+		QString distanceUM = qc_("AU", "astronomical unit");
+		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		Vec3d pos;
 		foreach (const PlanetP& planet, allPlanets)
 		{
@@ -754,7 +758,7 @@ void AstroCalcDialog::generateEphemeris()
 	QString distanceInfo = q_("Planetocentric distance");
 	if (core->getUseTopocentricCoordinates())
 		distanceInfo = q_("Topocentric distance");
-	QString distanceUM = q_("AU");
+	QString distanceUM = qc_("AU", "astronomical unit");
 
 	QString elongStr = "", phaseStr = "";
 	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
@@ -1517,7 +1521,7 @@ void AstroCalcDialog::populateFunctionsList()
 void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 {
 	QString xAxisStr = q_("Date");
-	QString distMU = q_("AU");
+	QString distMU = qc_("AU", "astronomical unit");
 	QString asMU = QString("'");
 
 	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
