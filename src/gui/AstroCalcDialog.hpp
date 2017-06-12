@@ -160,6 +160,8 @@ private slots:
 	void calculateWutObjects();
 	void selectWutObject();
 
+	void updateAstroCalcData();
+
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 	void updateSolarSystemData();
