@@ -207,7 +207,6 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
 
@@ -230,10 +229,19 @@ void AstroCalcDialog::createDialogContent()
 	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
 	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAstroCalcData()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
 	updateTabBarListWidgetWidth();
 }
+
+void AstroCalcDialog::updateAstroCalcData()
+{
+	drawAltVsTimeDiagram();
+	populateCelestialBodyList();
+	populateMajorPlanetList();
+}
+
 
 void AstroCalcDialog::initListCelestialPositions()
 {
@@ -1324,8 +1332,9 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
 		float width = 1.0f;
+		int dYear = (int)core->getCurrentPlanet()->getSiderealPeriod() + 3;
 
-		for(int i=-2;i<=367;i++)
+		for(int i=-2;i<=dYear;i++)
 		{
 			JD = startJD + i;
 			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
@@ -1603,7 +1612,8 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->yAxis->setLabel(yAxis1Legend);
 	ui->graphsPlot->yAxis2->setLabel(yAxis2Legend);
 
-	ui->graphsPlot->xAxis->setRange(0, 31536000);
+	int dYear = ((int)core->getCurrentPlanet()->getSiderealPeriod() + 1)*86400;
+	ui->graphsPlot->xAxis->setRange(0, dYear);
 	ui->graphsPlot->xAxis->setScaleType(QCPAxis::stLinear);
 	ui->graphsPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
 	ui->graphsPlot->xAxis->setLabelColor(axisColor);
