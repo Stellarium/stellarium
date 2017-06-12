@@ -157,6 +157,7 @@ private slots:
 
 	// WUT
 	void saveWutMagnitudeLimit(double mag);
+	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
 	void selectWutObject();
 

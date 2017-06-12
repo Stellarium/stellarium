@@ -217,8 +217,8 @@ void AstroCalcDialog::createDialogContent()
 
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
-	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(calculateWutObjects()));
-	connect(ui->wutCategoryListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(calculateWutObjects()));
+	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
+	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(ui->wutMatchingObjectsListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectWutObject()));	
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 
@@ -2613,6 +2613,16 @@ void AstroCalcDialog::populateWutGroups()
 void AstroCalcDialog::saveWutMagnitudeLimit(double mag)
 {
 	conf->setValue("astrocalc/wut_magnitude_limit", QString::number(mag, 'f', 2));
+	calculateWutObjects();
+}
+
+void AstroCalcDialog::saveWutTimeInterval(int index)
+{
+	Q_ASSERT(ui->wutComboBox);
+	QComboBox* wutTimeInterval = ui->wutComboBox;
+	conf->setValue("astrocalc/wut_time_interval", wutTimeInterval->itemData(index).toInt());
+
+	// Calculate WUT objects!
 	calculateWutObjects();
 }
 
