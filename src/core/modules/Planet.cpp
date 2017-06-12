@@ -225,11 +225,14 @@ Planet::Planet(const QString& englishName,
 	// The latter condition should obviously never happen.
 	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
 	// 0.16: Ensure type is always given!
+	// AW: I've commented the code to the allow flying on spaceship (implemented as an artificial planet)!
+	/*
 	if (pType==Planet::isUNDEFINED)
 	{
 		qCritical() << "Planet " << englishName << "has no type. Please edit one of ssystem_major.ini or ssystem_minor.ini to ensure operation.";
 		exit(-1);
 	}
+	*/
 	Q_ASSERT(pType != Planet::isUNDEFINED);
 
 	//only try loading textures when there is actually something to load!
