@@ -2620,38 +2620,50 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
-		double highLimit = 6.0;
+		double highLimit = 5.0; // 5 degrees above horizon is limit for visible for celestial object
 		double JD = core->getJD();
 		double wutJD = (int)JD;
 		double az, alt;
 
 		// Dirty hack to calculate sunrise/sunset
 		// FIXME: This block of code should be replaced in future!
-		float phi = core->getCurrentLocation().latitude;
-		double dec_sidereal, ra_sidereal, ha_sidereal;
-		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,GETSTELMODULE(SolarSystem)->getSun()->getSiderealPosGeometric(core));
-		ha_sidereal = (2.*M_PI-ra_sidereal)*12/M_PI;
-		if (ha_sidereal>24.)
-			ha_sidereal -= 24.;
-		double cost = (-0.01483475 - sin(phi)*sin(dec_sidereal))/(cos(phi)*cos(dec_sidereal));
-		if (cost>1)
-			cost -= 1.;
-		if (cost<-1)
-			cost += 1.;
-		double h = std::abs(std::acos(cost)*180./M_PI)/360.;
-		wutJD += ((JD - wutJD)*24.0 - ha_sidereal)/24.0;
+		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+		double sunset = -1, sunrise = -1, midnight = -1, lc = 100.0;
+		bool flag = false;
+		for (int i=0; i<144; i++)
+		{
+			wutJD = (int)JD + i*0.006944;
+			core->setJD(wutJD);
+			core->update(0);
+			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
+			alt = std::fmod(alt,2.0*M_PI)*180./M_PI;
+			if (alt>=-10 && alt<=-8 && !flag)
+			{
+				sunset = wutJD;
+				flag = true;
+			}
+			if (alt>=-10 && alt<=-8 && flag)
+				sunrise = wutJD;
+
+			if (alt<lc)
+			{
+				midnight = wutJD;
+				lc = alt;
+			}
+		}
+		core->setJD(JD);
 
 		QComboBox* wut = ui->wutComboBox;
 		switch (wut->itemData(wut->currentIndex()).toInt())
 		{
 			case 1: // Morning
-				wutJD += 0.5 + h;
+				wutJD = sunrise;
 				break;
 			case 2: // Night
-				wutJD += 0.5;
+				wutJD = midnight;
 				break;
 			default: // Evening
-				wutJD += 0.5 - h;
+				wutJD = sunset;
 				break;
 		}
 		core->setJD(wutJD);
