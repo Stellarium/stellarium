@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 22:19+0700\n"
-"PO-Revision-Date: 2017-06-10 11:38+0000\n"
+"POT-Creation-Date: 2017-06-11 16:25+0700\n"
+"PO-Revision-Date: 2017-06-11 12:27+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 05:45+0000\n"
+"X-Launchpad-Export-Date: 2017-06-12 05:46+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -3286,12 +3286,12 @@ msgstr "m"
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:286
 msgid "sep."
-msgstr ""
+msgstr "відх."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:291
 msgid "per."
-msgstr ""
+msgstr "пер."
 
 #: src/gui/AstroCalcDialog.cpp:291
 msgctxt "days"
@@ -3306,7 +3306,7 @@ msgstr "відст."
 #: src/gui/AstroCalcDialog.cpp:296 src/gui/AstroCalcDialog.cpp:698
 msgctxt "astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "а.о."
 
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:301
@@ -3611,7 +3611,7 @@ msgstr "Яскраві зірки із швидким власним рухом"
 
 #: src/gui/AstroCalcDialog.cpp:389
 msgid "Solar system objects"
-msgstr ""
+msgstr "Об’єкти Сонячної системи"
 
 #: src/gui/AstroCalcDialog.cpp:438
 #, qt-format
@@ -10008,22 +10008,30 @@ msgstr ""
 "Stellarium отримує дані щодо супутників з джерел оновлення. Зачекайте, будь "
 "ласка…"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
 msgstr "Виберіть файли даних TLE…"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:186
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:246
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:188
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:248
 msgid "Processing data..."
 msgstr "Обробка даних…"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "No data could be downloaded. Try again later."
 msgstr "Не вдалося завантажити жодних даних. Повторіть спробу пізніше."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:374
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
+msgid "Download aborted."
+msgstr "Отримання даних перервано."
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
+msgid "Get data"
+msgstr "Отримати дані"
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "Номер у каталозі: %1"

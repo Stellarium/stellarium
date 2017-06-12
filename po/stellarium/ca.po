@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 22:19+0700\n"
-"PO-Revision-Date: 2017-06-10 10:41+0000\n"
+"POT-Creation-Date: 2017-06-11 16:25+0700\n"
+"PO-Revision-Date: 2017-06-11 20:37+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 05:27+0000\n"
+"X-Launchpad-Export-Date: 2017-06-12 05:28+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -3272,12 +3272,12 @@ msgstr "mag"
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:286
 msgid "sep."
-msgstr ""
+msgstr "sep."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:291
 msgid "per."
-msgstr ""
+msgstr "per."
 
 #: src/gui/AstroCalcDialog.cpp:291
 msgctxt "days"
@@ -3292,7 +3292,7 @@ msgstr "dist."
 #: src/gui/AstroCalcDialog.cpp:296 src/gui/AstroCalcDialog.cpp:698
 msgctxt "astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "UA"
 
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:301
@@ -3597,7 +3597,7 @@ msgstr "Estels brillants amb un alt moviment propi"
 
 #: src/gui/AstroCalcDialog.cpp:389
 msgid "Solar system objects"
-msgstr ""
+msgstr "Objectes del Sistema Solar"
 
 #: src/gui/AstroCalcDialog.cpp:438
 #, qt-format
@@ -9991,22 +9991,30 @@ msgstr ""
 "Stellarium està descarregant dades de satèl·lits des de la font "
 "d'actualització. Espereu, si us plau..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
 msgstr "Seleccioneu el(s) fitxer(s) d'origen TLE"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:186
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:246
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:188
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:248
 msgid "Processing data..."
 msgstr "S'estan processant les dades..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "No data could be downloaded. Try again later."
 msgstr "No s'han pogut descarregar les dades. Torneu-ho a provar més tard."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:374
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
+msgid "Download aborted."
+msgstr "Descàrrega cancel·lada."
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
+msgid "Get data"
+msgstr "Obtenir les dades"
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "Nombre del catàleg: %1"
