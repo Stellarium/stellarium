@@ -2620,7 +2620,6 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
-		double highLimit = 5.0; // 5 degrees above horizon is limit for visible for celestial object
 		double JD = core->getJD();
 		double wutJD = (int)JD;
 		double az, alt;
@@ -2674,31 +2673,21 @@ void AstroCalcDialog::calculateWutObjects()
 			case 1: // Bright stars
 				foreach(const StelObjectP& object, hipStars)
 				{
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 2: // Bright nebulae
 				foreach(const NebulaP& object, allDSO)
 				{
 					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					if ((ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-						{
-							QString d = object->getDSODesignation();
-							if (object->getNameI18n().isEmpty())
-								wutObjects.insert(d, d);
-							else
-								wutObjects.insert(object->getNameI18n(), d);
-						}
+						QString d = object->getDSODesignation();
+						if (object->getNameI18n().isEmpty())
+							wutObjects.insert(d, d);
+						else
+							wutObjects.insert(object->getNameI18n(), d);
 					}
 				}
 				break;
@@ -2706,18 +2695,13 @@ void AstroCalcDialog::calculateWutObjects()
 				foreach(const NebulaP& object, allDSO)
 				{
 					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					if ((ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-						{
-							QString d = object->getDSODesignation();
-							if (object->getNameI18n().isEmpty())
-								wutObjects.insert(d, d);
-							else
-								wutObjects.insert(object->getNameI18n(), d);
-						}
+						QString d = object->getDSODesignation();
+						if (object->getNameI18n().isEmpty())
+							wutObjects.insert(d, d);
+						else
+							wutObjects.insert(object->getNameI18n(), d);
 					}
 				}
 				break;
@@ -2725,18 +2709,13 @@ void AstroCalcDialog::calculateWutObjects()
 				foreach(const NebulaP& object, allDSO)
 				{
 					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					if ((ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-						{
-							QString d = object->getDSODesignation();
-							if (object->getNameI18n().isEmpty())
-								wutObjects.insert(d, d);
-							else
-								wutObjects.insert(object->getNameI18n(), d);
-						}
+						QString d = object->getDSODesignation();
+						if (object->getNameI18n().isEmpty())
+							wutObjects.insert(d, d);
+						else
+							wutObjects.insert(object->getNameI18n(), d);
 					}
 				}
 				break;
@@ -2744,132 +2723,82 @@ void AstroCalcDialog::calculateWutObjects()
 				foreach(const NebulaP& object, allDSO)
 				{
 					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					if ((ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-						{
-							QString d = object->getDSODesignation();
-							if (object->getNameI18n().isEmpty())
-								wutObjects.insert(d, d);
-							else
-								wutObjects.insert(object->getNameI18n(), d);
-						}
+						QString d = object->getDSODesignation();
+						if (object->getNameI18n().isEmpty())
+							wutObjects.insert(d, d);
+						else
+							wutObjects.insert(object->getNameI18n(), d);
 					}
 				}
 				break;
 			case 6: // Asteroids
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isAsteroid && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isAsteroid && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 7: // Comets
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isComet && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isComet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 8: // Plutinos
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isPlutino && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isPlutino && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 9: // Dwarf planets
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 10: // Cubewanos
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isCubewano && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isCubewano && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 11: // Scattered disc objects
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isSDO && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isSDO && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 12: // Oort cloud objects
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isOCO && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isOCO && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 13: // Sednoids
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isSednoid && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isSednoid && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 14: // Planetary nebulae
 				foreach(const NebulaP& object, allDSO)
 				{
 					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit)
+					if ((ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-						{
-							if (object->getNameI18n().isEmpty())
-								wutObjects.insert(object->getDSODesignation(), object->getDSODesignation());
-							else
-								wutObjects.insert(object->getNameI18n(), object->getDSODesignation());
-						}
+						if (object->getNameI18n().isEmpty())
+							wutObjects.insert(object->getDSODesignation(), object->getDSODesignation());
+						else
+							wutObjects.insert(object->getNameI18n(), object->getDSODesignation());
 					}
 				}
 				break;
@@ -2877,51 +2806,31 @@ void AstroCalcDialog::calculateWutObjects()
 				foreach(const StelACStarData& dblStar, dblHipStars)
 				{
 					StelObjectP object = dblStar.firstKey();
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 16: // Bright variale stars
 				foreach(const StelACStarData& varStar, varHipStars)
 				{
 					StelObjectP object = varStar.firstKey();
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			case 17: // Bright stars with high proper motion
 				foreach(const StelACStarData& hpmStar, hpmHipStars)
 				{
 					StelObjectP object = hpmStar.firstKey();
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 			default: // Planets
 				foreach(const PlanetP& object, allObjects)
 				{
-					if (object->getPlanetType()==Planet::isPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit)
-					{
-						StelUtils::rectToSphe(&az, &alt, object->getAltAzPosAuto(core));
-						alt = std::fmod(alt,2.0*M_PI);
-						if (alt*180./M_PI >= highLimit)
-							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-					}
+					if (object->getPlanetType()==Planet::isPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 				}
 				break;
 		}
