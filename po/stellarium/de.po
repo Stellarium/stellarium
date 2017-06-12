@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 22:19+0700\n"
-"PO-Revision-Date: 2017-06-10 08:48+0000\n"
-"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
+"POT-Creation-Date: 2017-06-11 16:25+0700\n"
+"PO-Revision-Date: 2017-06-11 19:50+0000\n"
+"Last-Translator: wschmidt <Unknown>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-06-12 05:31+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -3279,12 +3279,12 @@ msgstr "mag"
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:286
 msgid "sep."
-msgstr ""
+msgstr "sep."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:291
 msgid "per."
-msgstr ""
+msgstr "per."
 
 #: src/gui/AstroCalcDialog.cpp:291
 msgctxt "days"
@@ -3299,7 +3299,7 @@ msgstr "Entf."
 #: src/gui/AstroCalcDialog.cpp:296 src/gui/AstroCalcDialog.cpp:698
 msgctxt "astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "AE"
 
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:301
@@ -3604,7 +3604,7 @@ msgstr "Helle Sterne mit großer Eigenbewegung"
 
 #: src/gui/AstroCalcDialog.cpp:389
 msgid "Solar system objects"
-msgstr ""
+msgstr "Objekte des Sonnensystems"
 
 #: src/gui/AstroCalcDialog.cpp:438
 #, qt-format
@@ -9988,23 +9988,31 @@ msgstr ""
 "Stellarium lädt Satellitendaten von den aktualisierten Quellen herunter. "
 "Bitte warten …"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
 msgstr "TLE-Quelldatei(en) wählen …"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:186
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:246
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:188
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:248
 msgid "Processing data..."
 msgstr "Daten werden verarbeitet …"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "No data could be downloaded. Try again later."
 msgstr ""
 "Es konnten keine Daten heruntergeladen werden. Bitte später erneut versuchen."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:374
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
+msgid "Download aborted."
+msgstr "Herunterladen abgebrochen."
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
+msgid "Get data"
+msgstr "Übertrage Daten"
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "Katalognummer: %1"
@@ -14769,18 +14777,18 @@ msgid ""
 "date.</li></ul></p>"
 msgstr ""
 "<p> Dieses Plugin ermöglicht es, periodische Meteorschauer zu simulieren und "
-"eine Markierung für die Anzeige des jeweils aktiven und inaktiven Radianten "
+"eine Markierung für die Anzeige der jeweils aktiven und inaktiven Radianten "
 "zu setzen. </p> <p> Mit einem einzigen Klick auf den Radianten der "
-"Markierung können Sie alle Details über seine Position sehen und auch die "
-"Aktivitäten. Die meisten Daten, die von diesem Plugin verwendet wird, stammt "
-"aus dem offiziellen <a href=\"http://imo.net\"> Internationalen Meteor "
-"Organization </a> Katalog </p> <p> Es gibt drei Arten von Markierungen: <ul> "
-"<li> <b> Confirmed/Bestätigt: </b> der Radiant ist aktiv und seine Daten "
-"sind bestätigt. Somit ist dies eine historische (wirklich in der "
+"Markierung können Sie alle Details über seine Position und Aktivität sehen. "
+"Die meisten Daten, die von diesem Plugin verwendet werden, stammen aus dem "
+"offiziellen  Katalog der <a href=\"http://imo.net\"> Internationalen Meteor "
+"Organization </a></p> <p> Es gibt drei Arten von Markierungen: <ul> <li> <b> "
+"Confirmed/Bestätigt: </b> der Radiant ist aktiv und seine Daten sind "
+"bestätigt. Somit ist dies eine historische Simulation (wirklich in der "
 "Vergangenheit) oder ein vorhergesagter Meteorschauer </li> <li> <b> "
 "Generic/Allg.: </b> der Radiant ist aktiv, aber seine Daten wurden nicht "
 "bestätigt. Es bedeutet, dass diese in der Praxis auftreten, aber, dass wir "
-"keine sicheren Daten über den Verlauf kennen </ li> <li> <b> Inaktiv:. </b> "
+"keine sicheren Daten über den Verlauf kennen </ li> <li> <b> Inaktiv: </b> "
 "der Radiant ist für den aktuellen Himmel inaktiv. </li> </ul> </p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:127
