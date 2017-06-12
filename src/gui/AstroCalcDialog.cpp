@@ -2636,12 +2636,12 @@ void AstroCalcDialog::calculateWutObjects()
 			core->update(0);
 			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
 			alt = std::fmod(alt,2.0*M_PI)*180./M_PI;
-			if (alt>=-10 && alt<=-8 && !flag)
+			if (alt>=-7 && alt<=-5 && !flag)
 			{
 				sunset = wutJD;
 				flag = true;
 			}
-			if (alt>=-10 && alt<=-8 && flag)
+			if (alt>=-7 && alt<=-5 && flag)
 				sunrise = wutJD;
 
 			if (alt<lc)
