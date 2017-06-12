@@ -2550,9 +2550,9 @@ void AstroCalcDialog::populateTimeIntervalsList()
 	QVariant selectedIntervalId = wut->itemData(index);
 
 	wut->clear();
-	wut->addItem(q_("In the Evening"), "0");
-	wut->addItem(q_("In the Morning"), "1");
-	wut->addItem(q_("Any Time Tonight"), "2");
+	wut->addItem(qc_("In the Evening", "Celestial object is observed..."), "0");
+	wut->addItem(qc_("In the Morning", "Celestial object is observed..."), "1");
+	wut->addItem(qc_("All Night", "Celestial object is observed..."), "2");
 
 	index = wut->findData(selectedIntervalId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
