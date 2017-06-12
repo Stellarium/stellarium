@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 22:19+0700\n"
-"PO-Revision-Date: 2017-05-17 07:17+0000\n"
+"POT-Creation-Date: 2017-06-11 16:25+0700\n"
+"PO-Revision-Date: 2017-06-11 18:55+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-06-12 05:30+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -9920,22 +9920,30 @@ msgid ""
 "wait..."
 msgstr "Stellarium hakee satelliittien tietoja päivityslähteistä. Odota..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
 msgstr "Valitse TLE-lähdetiedosto(t)..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:186
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:246
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:188
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:248
 msgid "Processing data..."
 msgstr "Käsitellään tietoja..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "No data could be downloaded. Try again later."
 msgstr "Tietoja ei voitu hakea. Yritä myöhemmin uudelleen."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:374
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
+msgid "Download aborted."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
+msgid "Get data"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "Luettelonumero: %1"
@@ -12855,11 +12863,11 @@ msgstr ""
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "Connect to server"
-msgstr ""
+msgstr "Yhdistä palvelimeen"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
-msgstr ""
+msgstr "Ei käynnissä"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
@@ -12884,7 +12892,7 @@ msgstr ""
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:176
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
 msgid "Disconnecting..."
-msgstr ""
+msgstr "Katkaistaan yhteyttä..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnect from server"
@@ -12927,7 +12935,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:239
 msgid "Server Name"
-msgstr ""
+msgstr "Palvelimen nimi"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server not active."
@@ -12949,7 +12957,7 @@ msgstr ""
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server port"
-msgstr ""
+msgstr "Palvelimen portti"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Client mode"
@@ -12969,7 +12977,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Do nothing"
-msgstr ""
+msgstr "Älä tee mitään"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Try reconnecting"

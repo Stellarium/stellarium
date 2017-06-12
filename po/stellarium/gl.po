@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 22:19+0700\n"
+"POT-Creation-Date: 2017-06-11 16:25+0700\n"
 "PO-Revision-Date: 2017-05-23 22:43+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 05:31+0000\n"
+"X-Launchpad-Export-Date: 2017-06-12 05:32+0000\n"
 "X-Generator: Launchpad (build 18402)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -9966,22 +9966,30 @@ msgstr ""
 "Stellarium está a descargar datos de satélites dende fontes actualizadas. "
 "Por favor, agarda..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:171
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
 msgstr "Selecciona o(s) arquivo(s) fonte TLE..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:186
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:246
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:188
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:248
 msgid "Processing data..."
 msgstr "Procesando datos..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "No data could be downloaded. Try again later."
 msgstr "Os datos non se poden descargar. Proba máis tarde."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:374
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
+msgid "Download aborted."
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
+msgid "Get data"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "Número de Catálogo: %1"
