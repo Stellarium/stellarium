@@ -2629,9 +2629,9 @@ void AstroCalcDialog::calculateWutObjects()
 		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 		double sunset = -1, sunrise = -1, midnight = -1, lc = 100.0;
 		bool flag = false;
-		for (int i=0; i<144; i++)
+		for (int i=0; i<288; i++) // Check position every 5 minutes...
 		{
-			wutJD = (int)JD + i*0.006944;
+			wutJD = (int)JD + i*0.0034722;
 			core->setJD(wutJD);
 			core->update(0);
 			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
