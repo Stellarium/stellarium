@@ -295,6 +295,7 @@ void Scenery3d::loadConfig()
 	renderer->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());
 	renderer->setShadowFilterQuality( static_cast<S3DEnum::ShadowFilterQuality>(conf->value("shadow_filter_quality", 1).toInt()) );
 	renderer->setPCSS(conf->value("flag_pcss").toBool());
+	renderer->setTorchEnabled(conf->value("torch_enabled", false).toBool());
 	renderer->setTorchBrightness(conf->value("torch_brightness", 0.5f).toFloat());
 	renderer->setTorchRange(conf->value("torch_range",5.0f).toFloat());
 	renderer->setBumpsEnabled(conf->value("flag_bumpmap", false).toBool());
@@ -304,6 +305,7 @@ void Scenery3d::loadConfig()
 	renderer->setLazyCubemapEnabled(conf->value("flag_lazy_cubemap", true).toBool());
 	renderer->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	renderer->setPixelLightingEnabled(conf->value("flag_pixel_lighting", false).toBool());
+	renderer->setLocationInfoEnabled(conf->value("flag_location_info", false).toBool());
 
 	bool v1 = conf->value("flag_lazy_dominantface",false).toBool();
 	bool v2 = conf->value("flag_lazy_seconddominantface",true).toBool();
@@ -828,6 +830,9 @@ void Scenery3d::setEnableLocationInfo(const bool enableLocationInfo)
 	if(enableLocationInfo != getEnableLocationInfo())
 	{
 		renderer->setLocationInfoEnabled(enableLocationInfo);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/flag_location_info",enableLocationInfo);
+
 		emit enableLocationInfoChanged(enableLocationInfo);
 	}
 }
@@ -842,6 +847,9 @@ void Scenery3d::setEnableTorchLight(const bool enableTorchLight)
 	if(enableTorchLight != getEnableTorchLight())
 	{
 		renderer->setTorchEnabled(enableTorchLight);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/torch_enabled",enableTorchLight);
+
 		emit enableTorchLightChanged(enableTorchLight);
 	}
 }
