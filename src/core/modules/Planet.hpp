@@ -102,7 +102,9 @@ public:
 		isPlanet,		// ssystem.ini: type="planet"
 		isMoon,			// ssystem.ini: type="moon"
 		isObserver,		// ssystem.ini: type="observer"
-		isAsteroid,		// ssystem.ini: type="asteroid"
+		isArtificial,		// Used in transitions from planet to planet.
+		isAsteroid,		// ssystem.ini: type="asteroid". all types >= isAsteroid are "Minor Bodies".
+					// Put other things (spacecraft etc) before isAsteroid.
 		isPlutino,		// ssystem.ini: type="plutino"
 		isComet,		// ssystem.ini: type="comet"
 		isDwarfPlanet,		// ssystem.ini: type="dwarf planet"
@@ -110,7 +112,7 @@ public:
 		isSDO,			// ssystem.ini: type="scattered disc object"
 		isOCO,			// ssystem.ini: type="oco"
 		isSednoid,		// ssystem.ini: type="sednoid"
-		isUNDEFINED		// ssystem.ini: type=<anything else>
+		isUNDEFINED		// ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
 
 	enum PlanetOrbitColorStyle
