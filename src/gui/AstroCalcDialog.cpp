@@ -180,6 +180,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
 	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
@@ -461,7 +462,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
 		foreach (const NebulaP& obj, celestialObjects)
 		{
-			if (obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
+			if (dsoMgr->objectInDisplayedCatalog(obj) && obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
 				{
