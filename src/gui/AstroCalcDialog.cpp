@@ -221,6 +221,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(ui->wutMatchingObjectsListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(selectWutObject()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
+	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
 
 	currentCelestialPositions();
 
@@ -2650,6 +2651,8 @@ void AstroCalcDialog::calculateWutObjects()
 		QList<StelACStarData> varHipStars = starMgr->getHipparcosVariableStars();
 		QList<StelACStarData> hpmHipStars = starMgr->getHipparcosHighPMStars();
 
+		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
+
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
 		double JD = core->getJD();
 		double wutJD = (int)JD;
@@ -2721,7 +2724,7 @@ void AstroCalcDialog::calculateWutObjects()
 					foreach(const NebulaP& object, allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
-						if ((ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						if ((bool)(tflags & Nebula::TypeBrightNebulae) && (ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
@@ -2742,7 +2745,7 @@ void AstroCalcDialog::calculateWutObjects()
 					foreach(const NebulaP& object, allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
-						if ((ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->isAboveRealHorizon(core))
+						if ((bool)(tflags & Nebula::TypeDarkNebulae) && (ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
@@ -2763,7 +2766,7 @@ void AstroCalcDialog::calculateWutObjects()
 					foreach(const NebulaP& object, allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
-						if ((ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						if ((bool)(tflags & Nebula::TypeGalaxies) && (ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
@@ -2784,7 +2787,7 @@ void AstroCalcDialog::calculateWutObjects()
 					foreach(const NebulaP& object, allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
-						if ((ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						if ((bool)(tflags & Nebula::TypeStarClusters) && (ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
@@ -2861,7 +2864,7 @@ void AstroCalcDialog::calculateWutObjects()
 					foreach(const NebulaP& object, allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
-						if ((ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						if ((bool)(tflags & Nebula::TypePlanetaryNebulae) && (ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
