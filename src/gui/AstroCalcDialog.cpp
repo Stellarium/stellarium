@@ -219,7 +219,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
 	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
 	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
-	connect(ui->wutMatchingObjectsListWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectWutObject()));	
+	connect(ui->wutMatchingObjectsListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(selectWutObject()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 
 	currentCelestialPositions();
@@ -455,6 +455,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
 		if (dsoMgr->getFlagSurfaceBrightnessArcsecUsage())
 			mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
+		QString dsoName;
 		// Deep-sky objects
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
 		foreach (const NebulaP& obj, celestialObjects)
@@ -484,15 +485,18 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				celObjName = obj->getNameI18n();
 				celObjId = obj->getDSODesignation();
-				if (celObjName.isEmpty())
-					celObjName = celObjId;
+				if (celObjId.isEmpty())
+					dsoName = celObjName;
+				else if (celObjName.isEmpty())
+					dsoName = celObjId;
+				else
+					dsoName = QString("%1 (%2)").arg(celObjId, celObjName);
 
 				extra = QString::number(obj->getSurfaceBrightnessWithExtinction(core), 'f', 2);
 				if (extra.toFloat()>90.f)
 					extra = QChar(0x2014);
 
-				treeItem->setText(CColumnName, celObjName);
-				treeItem->setToolTip(CColumnName, celObjId);
+				treeItem->setText(CColumnName, dsoName);
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 				treeItem->setText(CColumnDec, decStr);
@@ -542,8 +546,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-				treeItem->setText(CColumnName, planet->getNameI18n());
-				treeItem->setToolTip(CColumnName, "");
+				treeItem->setText(CColumnName, planet->getNameI18n());				
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 				treeItem->setText(CColumnDec, decStr);
@@ -626,8 +629,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-				treeItem->setText(CColumnName, obj->getNameI18n());
-				treeItem->setToolTip(CColumnName, "");
+				treeItem->setText(CColumnName, obj->getNameI18n());				
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 				treeItem->setText(CColumnDec, decStr);
@@ -656,6 +658,10 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelInd
 {
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
+
+	QStringList list = nameI18n.split("(");
+	if (list.count()>0)
+		nameI18n = list.at(0).trimmed();
 
 	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{
@@ -2566,7 +2572,8 @@ void AstroCalcDialog::populateTimeIntervalsList()
 	wut->clear();
 	wut->addItem(qc_("In the Evening", "Celestial object is observed..."), "0");
 	wut->addItem(qc_("In the Morning", "Celestial object is observed..."), "1");
-	wut->addItem(qc_("All Night", "Celestial object is observed..."), "2");
+	wut->addItem(qc_("Around Midnight", "Celestial object is observed..."), "2");
+	wut->addItem(qc_("In Any Time of the Night", "Celestial object is observed..."), "3");
 
 	index = wut->findData(selectedIntervalId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -2676,187 +2683,218 @@ void AstroCalcDialog::calculateWutObjects()
 		}
 		core->setJD(JD);
 
+		QList<double> wutJDList;
+		wutJDList.clear();
+
 		QComboBox* wut = ui->wutComboBox;
 		switch (wut->itemData(wut->currentIndex()).toInt())
 		{
 			case 1: // Morning
-				wutJD = sunrise;
+				wutJDList << sunrise;
 				break;
 			case 2: // Night
-				wutJD = midnight;
+				wutJDList << midnight;
+				break;
+			case 3:
+				wutJDList << sunrise << midnight << sunset;
 				break;
 			default: // Evening
-				wutJD = sunset;
+				wutJDList << sunset;
 				break;
 		}
-		core->setJD(wutJD);
-		core->update(0);
 
-		switch (categoryId)
+		for (int i=0; i<wutJDList.count(); i++)
 		{
-			case 1: // Bright stars
-				foreach(const StelObjectP& object, hipStars)
-				{
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 2: // Bright nebulae
-				foreach(const NebulaP& object, allDSO)
-				{
-					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+			core->setJD(wutJDList.at(i));
+			core->update(0);
+
+			switch (categoryId)
+			{
+				case 1: // Bright stars
+					foreach(const StelObjectP& object, hipStars)
 					{
-						QString d = object->getDSODesignation();
-						if (object->getNameI18n().isEmpty())
-							wutObjects.insert(d, d);
-						else
-							wutObjects.insert(object->getNameI18n(), d);
+						if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
-				}
-				break;
-			case 3: // Dark nebulae
-				foreach(const NebulaP& object, allDSO)
-				{
-					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+					break;
+				case 2: // Bright nebulae
+					foreach(const NebulaP& object, allDSO)
 					{
-						QString d = object->getDSODesignation();
-						if (object->getNameI18n().isEmpty())
-							wutObjects.insert(d, d);
-						else
-							wutObjects.insert(object->getNameI18n(), d);
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((ntype==Nebula::NebN || ntype==Nebula::NebBn || ntype==Nebula::NebEn || ntype==Nebula::NebRn || ntype==Nebula::NebHII || ntype==Nebula::NebISM || ntype==Nebula::NebCn || ntype==Nebula::NebSNR) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
 					}
-				}
-				break;
-			case 4: // Galaxies
-				foreach(const NebulaP& object, allDSO)
-				{
-					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+					break;
+				case 3: // Dark nebulae
+					foreach(const NebulaP& object, allDSO)
 					{
-						QString d = object->getDSODesignation();
-						if (object->getNameI18n().isEmpty())
-							wutObjects.insert(d, d);
-						else
-							wutObjects.insert(object->getNameI18n(), d);
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((ntype==Nebula::NebDn || ntype==Nebula::NebMolCld || ntype==Nebula::NebYSO) && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
 					}
-				}
-				break;
-			case 5: // Star clusters
-				foreach(const NebulaP& object, allDSO)
-				{
-					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+					break;
+				case 4: // Galaxies
+					foreach(const NebulaP& object, allDSO)
 					{
-						QString d = object->getDSODesignation();
-						if (object->getNameI18n().isEmpty())
-							wutObjects.insert(d, d);
-						else
-							wutObjects.insert(object->getNameI18n(), d);
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((ntype==Nebula::NebGx || ntype==Nebula::NebAGx || ntype==Nebula::NebRGx || ntype==Nebula::NebQSO || ntype==Nebula::NebPossQSO || ntype==Nebula::NebBLL || ntype==Nebula::NebBLA || ntype==Nebula::NebIGx) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
 					}
-				}
-				break;
-			case 6: // Asteroids
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isAsteroid && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 7: // Comets
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isComet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 8: // Plutinos
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isPlutino && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 9: // Dwarf planets
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 10: // Cubewanos
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isCubewano && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 11: // Scattered disc objects
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isSDO && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 12: // Oort cloud objects
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isOCO && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 13: // Sednoids
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isSednoid && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 14: // Planetary nebulae
-				foreach(const NebulaP& object, allDSO)
-				{
-					Nebula::NebulaType ntype = object->getDSOType();
-					if ((ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+					break;
+				case 5: // Star clusters
+					foreach(const NebulaP& object, allDSO)
 					{
-						if (object->getNameI18n().isEmpty())
-							wutObjects.insert(object->getDSODesignation(), object->getDSODesignation());
-						else
-							wutObjects.insert(object->getNameI18n(), object->getDSODesignation());
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((ntype==Nebula::NebCl || ntype==Nebula::NebOc || ntype==Nebula::NebGc || ntype==Nebula::NebSA || ntype==Nebula::NebSC || ntype==Nebula::NebCn) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
 					}
-				}
-				break;
-			case 15: // Bright double stars
-				foreach(const StelACStarData& dblStar, dblHipStars)
-				{
-					StelObjectP object = dblStar.firstKey();
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 16: // Bright variale stars
-				foreach(const StelACStarData& varStar, varHipStars)
-				{
-					StelObjectP object = varStar.firstKey();
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			case 17: // Bright stars with high proper motion
-				foreach(const StelACStarData& hpmStar, hpmHipStars)
-				{
-					StelObjectP object = hpmStar.firstKey();
-					if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
-			default: // Planets
-				foreach(const PlanetP& object, allObjects)
-				{
-					if (object->getPlanetType()==Planet::isPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
-						wutObjects.insert(object->getNameI18n(), object->getEnglishName());
-				}
-				break;
+					break;
+				case 6: // Asteroids
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isAsteroid && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 7: // Comets
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isComet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 8: // Plutinos
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isPlutino && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 9: // Dwarf planets
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 10: // Cubewanos
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isCubewano && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 11: // Scattered disc objects
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isSDO && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 12: // Oort cloud objects
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isOCO && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 13: // Sednoids
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isSednoid && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 14: // Planetary nebulae
+					foreach(const NebulaP& object, allDSO)
+					{
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((ntype==Nebula::NebPn || ntype==Nebula::NebPossPN || ntype==Nebula::NebPPN) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
+					}
+					break;
+				case 15: // Bright double stars
+					foreach(const StelACStarData& dblStar, dblHipStars)
+					{
+						StelObjectP object = dblStar.firstKey();
+						if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 16: // Bright variale stars
+					foreach(const StelACStarData& varStar, varHipStars)
+					{
+						StelObjectP object = varStar.firstKey();
+						if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 17: // Bright stars with high proper motion
+					foreach(const StelACStarData& hpmStar, hpmHipStars)
+					{
+						StelObjectP object = hpmStar.firstKey();
+						if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				default: // Planets
+					foreach(const PlanetP& object, allObjects)
+					{
+						if (object->getPlanetType()==Planet::isPlanet && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+			}
 		}
 
 		core->setJD(JD);
