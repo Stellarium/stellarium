@@ -336,7 +336,7 @@ hightlights:
   \emph{Scale Moon} option will increase the apparent size of the moon
   in the sky, which can be nice for wide field of view shots.
 \item[Labels and markers] you can independantly change the amount of
-  labels displayed for planets, stars and nebuulae. The further to the
+  labels displayed for planets, stars and nebulae. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
 \item[Shooting stars] Stellarium has a simple meteor simulation
@@ -352,7 +352,7 @@ hightlights:
 An auxiliary dialog contains detail settings for the atmosphere. Here
 you can set atmospheric pressure and temperature which influence
 refraction (see section~\ref{sec:phenomena:Refraction}), and the
-opacity factor for extinction, \emph{magnitude loss per airmass} $k$
+opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
 (see section~\ref{sec:phenomena:Extinction}).
 
 
@@ -360,24 +360,26 @@ opacity factor for extinction, \emph{magnitude loss per airmass} $k$
 \label{sec:gui:view:dso}
 
 \begin{figure}[t]
-\includegraphics[width=\textwidth,trim=0 70 0 0,clip]{view_dialog_dso_tab}
+\includegraphics[width=\textwidth,trim=0 120 0 0,clip]{view_dialog_dso_tab}
 \caption{View Settings Window: DSO Tab}
 \label{fig:gui:view:dso}
 \end{figure}
-
 
 \indexterm{Deep-sky objects} or DSO are extended objects which are
 external to the solar system, and are not point sources like stars.
 DSO include galaxies, planetary nebulae and star clusters. These
 objects may or may not have images associated with them. Stellarium
 comes with a catalogue of over 83,000 extended objects containing
-the combined data from many catalogues, with 200 images.  The DSO tab
-(Fig.~\ref{fig:gui:view:dso}) allows you to specify which catalogs or
-which object types you are interested in. See chapter~\ref{ch:DSO} for
-details about the catalog, and how to extend it with your own photographs.
+the combined data from many catalogues, with 200 images.  
 
+The DSO tab (Fig.~\ref{fig:gui:view:dso}) allows you to specify which 
+catalogs or which object types you are interested in. This selection 
+will also be respected in other parts of the program, 
+most notably AstroCalc/WUT (section~\ref{sec:gui:AstroCalc:WUT}) 
+will not find objects from catalogs which you have not selected here. 
 
-
+See chapter~\ref{ch:DSO} for details about the catalog, 
+and how to extend it with your own photographs.
 
 
 \subsection{The Markings Tab}
@@ -743,13 +745,17 @@ the Planets category has been selected, and three planets which are up in the se
 
 By default, the WUT will display objects which are above the horizon between sunset and midnight (i.e.\ \emph{in the evening}). 
 You can choose to show objects which are up between midnight and dawn (\emph{in the morning}), 
-or between dusk and dawn (\emph{any time tonight}) using the combobox near the top of the window. 
+\emph{around midnight}, 
+or any time between dusk and dawn (\emph{any time tonight}) using the combobox near the top of the window. 
 You can also choose to see only those objects that are brighter than a certain magnitude by 
 setting a minimum magnitude using the \emph{Show objects brighter than magnitude} spinbox. 
 You may center an object from the right list in the sky map just by selecting it.
 
+Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
 
-    
+
+\newpage 
+   
 \section{Help Window}
 \label{sec:gui:help}
 
