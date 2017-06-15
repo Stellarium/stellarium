@@ -1130,7 +1130,7 @@ bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
 		r = true;
 
 	// Special case: objects without ID from current catalogs
-	if (catalogFilters==Nebula::AllCatalogs)
+	if (n->withoutID)
 		r = true;
 
 	return r;
