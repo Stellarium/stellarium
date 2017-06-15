@@ -2636,7 +2636,7 @@ void AstroCalcDialog::saveWutTimeInterval(int index)
 void AstroCalcDialog::calculateWutObjects()
 {
 	ui->wutMatchingObjectsListWidget->clear();
-	if(ui->wutCategoryListWidget->currentItem())
+	if (ui->wutCategoryListWidget->currentItem())
 	{
 		QString categoryName = ui->wutCategoryListWidget->currentItem()->text();
 		int categoryId = wutCategories.value(categoryName);
@@ -2726,6 +2726,9 @@ void AstroCalcDialog::calculateWutObjects()
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
 
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
 							if (d.isEmpty())
 								wutObjects.insert(n, n);
 							else if (n.isEmpty())
@@ -2743,6 +2746,9 @@ void AstroCalcDialog::calculateWutObjects()
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
 
 							if (d.isEmpty())
 								wutObjects.insert(n, n);
@@ -2762,6 +2768,9 @@ void AstroCalcDialog::calculateWutObjects()
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
 
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
 							if (d.isEmpty())
 								wutObjects.insert(n, n);
 							else if (n.isEmpty())
@@ -2779,6 +2788,9 @@ void AstroCalcDialog::calculateWutObjects()
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
 
 							if (d.isEmpty())
 								wutObjects.insert(n, n);
@@ -2853,6 +2865,9 @@ void AstroCalcDialog::calculateWutObjects()
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
 
 							if (d.isEmpty())
 								wutObjects.insert(n, n);

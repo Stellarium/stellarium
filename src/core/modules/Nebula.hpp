@@ -233,6 +233,7 @@ private:
 	unsigned int VV_nb;             // VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;			// PK number (Catalogue of Galactic Planetary Nebulae)
+	bool withoutID;
 	QString englishName;            // English name
 	QStringList englishAliases;	// English aliases
 	QString nameI18;                // Nebula name
