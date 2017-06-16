@@ -192,29 +192,59 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 }
 
 // Used to approximate solution with assuming a spherical planet.
-// Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
+// Since V0.14, we follow Meeus, Astr. Alg. 2nd ed, Ch.11., but used offset rho in a wrong way. (offset angle phi in distance rho.)
 double StelObserver::getDistanceFromCenter(void) const
 {
-	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet od SpaceShipObserver has this
+	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
 		return currentLocation.altitude/(1000*AU);
 
-	double a=getHomePlanet()->getRadius();
-	double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
+	const double a=getHomePlanet()->getRadius();
+	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
 	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
 		return a * bByA;
 
-	double latRad=currentLocation.latitude*(M_PI/180.0);
-	double u = atan( bByA * tan(latRad));
+	const double latRad=currentLocation.latitude*(M_PI/180.0);
+	const double u = atan( bByA * tan(latRad));
 	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	Q_ASSERT(fabs(u)<= fabs(latRad));
-	double altFix=(currentLocation.altitude/(1000.0*AU)) / a;
+	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 
-	double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
-	double rhoCosPhiPrime= cos(u) + altFix*cos(latRad);
+	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	//double rhoCosPhiPrime= bByA * cos(u) + altFix*cos(latRad); // WARNING! bByA is not in the book!!! THIS IS A TEST!
+	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
 
-	double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
 	return rho*a;
+}
+
+// Used to approximate solution with assuming a spherical planet.
+// Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
+// Since V0.16, we can produce the usual offset values plus geocentric latitude phi'.
+Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
+{
+	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
+		return currentLocation.altitude/(1000*AU);
+
+	const double a=getHomePlanet()->getRadius();
+	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
+
+	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
+		return a * bByA;
+
+	const double latRad=currentLocation.latitude*(M_PI/180.0);
+	const double u = atan( bByA * tan(latRad));
+	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	Q_ASSERT(fabs(u)<= fabs(latRad));
+	const double altFix = currentLocation.altitude/(1000.0*AU*a);
+
+	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
+
+	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	//return rho*a;
+	double phiPrime=asin(rhoSinPhiPrime/rho);
+	return Vec3d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime);
 }
 
 // For Earth we require JD, for other planets JDE to describe rotation!
