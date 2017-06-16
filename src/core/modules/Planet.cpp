@@ -2898,7 +2898,7 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
 }
 
-Vec3f Planet::getCurrentOrbitColor()
+Vec3f Planet::getCurrentOrbitColor() const
 {
 	Vec3f orbColor = orbitColor;
 	switch(orbitColorStyle)
