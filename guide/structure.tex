@@ -70,7 +70,8 @@
 %% console commands, CLI arguments, etc.
 \newcommand{\command}[1]{\texttt{#1}}
 %% Names of 3rd-party software products like Photoshop, Sketchup etc. Not for OS names, they are too common. 
-\newcommand{\program}[1]{\textsf{\textbf{\small #1}}}
+%% The footnotesize is required for a better size match.
+\newcommand{\program}[1]{\textsf{\textbf{\footnotesize #1}}}
 \newcommand{\var}[1]{\texttt{#1}} %% variable name
 
 %% Color boxes for config.ini 
