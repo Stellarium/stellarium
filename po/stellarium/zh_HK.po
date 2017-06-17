@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-15 17:36+0700\n"
-"PO-Revision-Date: 2017-06-15 17:36+0000\n"
+"PO-Revision-Date: 2017-06-16 22:46+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Taiwan) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-16 05:37+0000\n"
-"X-Generator: Launchpad (build 18413)\n"
+"X-Launchpad-Export-Date: 2017-06-17 05:20+0000\n"
+"X-Generator: Launchpad (build 18416)\n"
 "Language: zh_HK\n"
 "X-Language: zh_HK\n"
 "X-Source-Language: C\n"
@@ -2130,7 +2130,7 @@ msgstr "所有可用的星表已被安裝."
 #: src/gui/ConfigurationDialog.cpp:1171
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "取得星表 %1/%2"
+msgstr "取得星體資料庫 %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:1178
 #, qt-format
@@ -2415,7 +2415,7 @@ msgstr "Ctrl+Alt+Shift滑鼠滾輪"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Select object"
-msgstr "選取物件"
+msgstr "選取天體"
 
 #: src/gui/HelpDialog.cpp:174
 msgid "Left click"
@@ -2590,7 +2590,7 @@ msgstr "視窗"
 
 #: src/gui/StelGui.cpp:210 plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "Quit"
-msgstr "離開"
+msgstr "退出"
 
 #: src/gui/StelGui.cpp:211
 msgid "Speed up the script execution rate"
@@ -4068,7 +4068,7 @@ msgstr "波榮(Boorong)"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:215
 msgid "Chinese"
-msgstr "中國"
+msgstr "中國古星空文化"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:217
