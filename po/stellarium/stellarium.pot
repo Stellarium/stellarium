@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 16:13+0700\n"
+"POT-Creation-Date: 2017-06-17 16:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2593,7 +2593,7 @@ msgstr ""
 msgid "Toggle visibility of GUI"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:323 src/gui/StelGuiItems.cpp:892
+#: src/gui/StelGuiItems.cpp:323 src/gui/StelGuiItems.cpp:890
 msgid "Space"
 msgstr ""
 
@@ -2609,72 +2609,66 @@ msgstr ""
 msgid "Local True Solar Time"
 msgstr ""
 
-#. TRANSLATORS: unit of measurement: seconds per second
-#: src/gui/StelGuiItems.cpp:644
-msgctxt "unit of measurement"
-msgid "sec/s"
-msgstr ""
-
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:650
+#: src/gui/StelGuiItems.cpp:644
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:656
+#: src/gui/StelGuiItems.cpp:652
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:662
+#: src/gui/StelGuiItems.cpp:658
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:668
+#: src/gui/StelGuiItems.cpp:664
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:670
-msgid "Time speed"
+#: src/gui/StelGuiItems.cpp:666 src/gui/StelGuiItems.cpp:668
+msgid "Simulation speed"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:707
+#: src/gui/StelGuiItems.cpp:705
 #, c-format, qt-format
 msgid "%1m"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:739
+#: src/gui/StelGuiItems.cpp:737
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:741
+#: src/gui/StelGuiItems.cpp:739
 msgid "planetocentric observer"
 msgstr ""
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:756
+#: src/gui/StelGuiItems.cpp:754
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:772
+#: src/gui/StelGuiItems.cpp:770
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr ""
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:791
+#: src/gui/StelGuiItems.cpp:789
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:799
+#: src/gui/StelGuiItems.cpp:797
 msgid "Frames per second"
 msgstr ""
 
