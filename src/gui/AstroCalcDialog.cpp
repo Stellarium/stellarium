@@ -514,8 +514,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	}
 	else if (celTypeId==200)
 	{
-		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
-		PlanetP sun = solarSystem->getSun();
+		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();		
 		QString distanceInfo = q_("Planetocentric distance");
 		if (core->getUseTopocentricCoordinates())
 			distanceInfo = q_("Topocentric distance");
@@ -524,7 +523,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		Vec3d pos;
 		foreach (const PlanetP& planet, allPlanets)
 		{
-			if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=sun && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			if ((planet->getPlanetType()!=Planet::isUNDEFINED && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
 				if (horizon)
