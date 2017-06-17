@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-15 17:36+0700\n"
-"PO-Revision-Date: 2017-06-16 01:59+0000\n"
+"PO-Revision-Date: 2017-06-16 08:06+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-16 05:38+0000\n"
-"X-Generator: Launchpad (build 18413)\n"
+"X-Launchpad-Export-Date: 2017-06-17 05:21+0000\n"
+"X-Generator: Launchpad (build 18416)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
@@ -441,7 +441,7 @@ msgstr "表面亮度"
 
 #: src/core/modules/Nebula.cpp:238
 msgid "after extinction"
-msgstr ""
+msgstr "消光后"
 
 #: src/core/modules/Nebula.cpp:253 src/core/modules/Nebula.cpp:261
 #, qt-format
@@ -2885,7 +2885,7 @@ msgstr "该算法发表在 <em>天文历解释性补充</em>（1992）中。"
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
-msgstr ""
+msgstr "该算法在<em>天文历解释性补充</em>（2013）第3版中发表。"
 
 #: src/gui/ViewDialog.cpp:1581
 msgid "Visual magnitude based on phase angle and albedo."
@@ -3203,7 +3203,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:309
 msgctxt "arcsecond per year"
 msgid "\"/yr"
-msgstr ""
+msgstr "\"/年"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:315
@@ -3530,7 +3530,7 @@ msgstr "相位"
 #. TRANSLATORS: elongation
 #: src/gui/AstroCalcDialog.cpp:733
 msgid "elong."
-msgstr ""
+msgstr "距角"
 
 #: src/gui/AstroCalcDialog.cpp:917 src/gui/AstroCalcDialog.cpp:1986
 msgid "CSV (Comma delimited)"
@@ -3702,7 +3702,7 @@ msgstr "日期"
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
 #: src/gui/AstroCalcDialog.cpp:1539
 msgid "Mm"
-msgstr ""
+msgstr "兆米"
 
 #: src/gui/AstroCalcDialog.cpp:1551 src/gui/AstroCalcDialog.cpp:1586
 msgid "Magnitude"
@@ -3732,12 +3732,12 @@ msgstr "相位角"
 #: src/gui/AstroCalcDialog.cpp:1689
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "现在约%1"
 
 #: src/gui/AstroCalcDialog.cpp:1691
 #, qt-format
 msgid "Passage of meridian at approximately %1"
-msgstr ""
+msgstr "子午线通道在约 %1 附近"
 
 #: src/gui/AstroCalcDialog.cpp:1714
 msgid "Phenomenon"
@@ -6203,7 +6203,7 @@ msgstr "颜色设置"
 
 #: src/ui_viewDialog.h:2187
 msgid "Scale minor bodies:"
-msgstr ""
+msgstr "小天体"
 
 #: src/ui_viewDialog.h:2188
 msgid "Planets magnitude algorithm:"
@@ -6911,7 +6911,7 @@ msgstr "保存当前FOV和视图方向或当前设置以供下次启动使用。
 
 #: src/ui_configurationDialog.h:1298
 msgid "The vertical field (height) of your view when Stellarium starts"
-msgstr ""
+msgstr "打开Stellarium时，您的视野的垂直场（高度）"
 
 #: src/ui_configurationDialog.h:1301
 msgid "The direction you're looking when Stellarium starts"
@@ -7294,7 +7294,7 @@ msgstr "显示银道网格按钮"
 
 #: src/ui_configurationDialog.h:1482
 msgid "A button to toggle ecliptic grid of date"
-msgstr ""
+msgstr "用于切换某日期的黄道网格的按钮"
 
 #: src/ui_configurationDialog.h:1484
 msgid "Show ecliptic grid button"
@@ -7317,7 +7317,7 @@ msgstr "自动缩小时回到原本的观看方向"
 
 #: src/ui_configurationDialog.h:1491
 msgid "Toggle the usage of background under GUI buttons"
-msgstr ""
+msgstr "在GUI按钮下切换背景的使用"
 
 #: src/ui_configurationDialog.h:1493
 msgid "Use buttons background"
@@ -7568,7 +7568,7 @@ msgstr "坐标位置"
 
 #: src/ui_astroCalcDialog.h:767
 msgid "Celestial bodies above horizon"
-msgstr ""
+msgstr "地平线以上天体"
 
 #: src/ui_astroCalcDialog.h:770
 msgid "Ephemeris"
@@ -7656,7 +7656,7 @@ msgstr "显示当前天体标识和位置"
 
 #: src/ui_astroCalcDialog.h:811
 msgid "Show markers"
-msgstr ""
+msgstr "显示标记"
 
 #: src/ui_astroCalcDialog.h:813
 msgid "Show dates of positions of current celestial body near markers"
@@ -7664,7 +7664,7 @@ msgstr "在天体标注边显示当前天位置"
 
 #: src/ui_astroCalcDialog.h:815
 msgid "Show dates"
-msgstr ""
+msgstr "显示日期"
 
 #: src/ui_astroCalcDialog.h:817
 msgid "Show magnitudes of current celestial body"
@@ -7696,7 +7696,7 @@ msgstr "与"
 
 #: src/ui_astroCalcDialog.h:829
 msgid "Cleanup of phenomena"
-msgstr ""
+msgstr "清理现象"
 
 #: src/ui_astroCalcDialog.h:830
 msgid "Save phenomena"
@@ -9692,11 +9692,11 @@ msgstr "无法下载数据。请稍候再试。"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
 msgid "Download aborted."
-msgstr ""
+msgstr "下载已中止。"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
 msgid "Get data"
-msgstr ""
+msgstr "获取数据"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
@@ -9967,17 +9967,17 @@ msgstr "任何与Meade LX200兼容的望远镜或望远镜安装。"
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
-msgstr ""
+msgstr "Meade's ETX70具有＃494 Autostar控制器和＃506连接器电缆套件。"
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1655
 msgid "Losmandy's G-11 telescope mount."
-msgstr ""
+msgstr "Losmandy's G-11望远镜安装座。"
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1657
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
-msgstr ""
+msgstr "Wildcard Innovations' Argo Navis DTC in Meade LX200仿真模式。"
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1659
@@ -9989,25 +9989,25 @@ msgstr "任何与Celestron NexStar兼容的望远镜或望远镜安装。"
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
-msgstr ""
+msgstr "任何使用SynScan手控制器版本3或更高版本的Sky-Watcher安装架。"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1663
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
-msgstr ""
+msgstr "he Sky-Watcher SynScan AZ GOTO底座用于多台望远镜型号。"
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:241
 msgid "Read-only telescope"
-msgstr ""
+msgstr "只读望远镜"
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
 msgid "Telescope position: "
-msgstr ""
+msgstr "望远镜位置: "
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:246
 msgid "Distance to target position: "
-msgstr ""
+msgstr "与目标位置的距离: "
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
 msgid "Add New Telescope"
@@ -11000,7 +11000,7 @@ msgstr "外部程序或远程计算机"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:535
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
-msgstr ""
+msgstr "望远镜可通过 RTS2(.org) JSON API访问"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:537
 msgid "RTS2 telescope"
@@ -11064,7 +11064,7 @@ msgstr "TCP端口："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:562
 msgid "RTS2 telescope settings"
-msgstr ""
+msgstr "RTS2望远镜设置"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
 msgid "URL:"
@@ -11080,15 +11080,15 @@ msgstr "密码："
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
 msgid "RTS2 username"
-msgstr ""
+msgstr "RTS2用户名"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
 msgid "RTS2 password"
-msgstr ""
+msgstr "RTS2密码"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:573
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
-msgstr ""
+msgstr "托管RTS2 JSON（httpd）服务器的机器的URL"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
 msgid "User interface settings"
@@ -11450,7 +11450,7 @@ msgstr "版本 %1"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
-msgstr ""
+msgstr "将太阳系小天体保存为..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:205
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:213
@@ -11459,11 +11459,11 @@ msgstr "配置文件"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:207
 msgid "Select a file to replace the Solar System minor bodies"
-msgstr ""
+msgstr "选择一个文件来替换太阳系小天体"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:215
 msgid "Select a file to add the Solar System minor bodies"
-msgstr ""
+msgstr "选择一个文件来添加太阳系小天体"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -11544,7 +11544,7 @@ msgstr "导入天体"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:310
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "太阳系小天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
@@ -11556,7 +11556,7 @@ msgid ""
 "This plug-in edits a custom Solar System configuration file for the minor "
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
 "you can delete manually that file from:"
-msgstr ""
+msgstr "该插件会为太阳系小天体定制一个配置文件。 如果出现问题，Stellarium崩溃和/或不启动，您可以手动删除该文件："
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
@@ -11569,25 +11569,25 @@ msgstr "恢复默认设置"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Export/replace the Solar System minor bodies file"
-msgstr ""
+msgstr "导出/更换太阳系小天体文件"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
-msgstr ""
+msgstr "您可以在方便的位置创建您的自定义太阳能系统配置文件的备份副本，或将其替换为此类副本。"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Export the Solar System minor bodies to file..."
-msgstr ""
+msgstr "将太阳系小天体另存为"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import and replace the Solar System minor bodies from file..."
-msgstr ""
+msgstr "从文件导入和更换太阳系小天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import and add Solar System minor bodies from file..."
-msgstr ""
+msgstr "从文件导入和添加太阳系小天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
@@ -11595,7 +11595,7 @@ msgstr "配置文件"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:312
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "添加新的太阳系小物体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:314
 msgid "Solar System"
@@ -12371,7 +12371,7 @@ msgstr "远程同步"
 msgid ""
 "Provides state synchronization for multiple Stellarium instances running in "
 "a network. See manual for detailed description."
-msgstr ""
+msgstr "为在网络中运行的多个Stellarium实例提供状态同步。 详细说明请参见手册。"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:115
 #, qt-format
@@ -12381,36 +12381,36 @@ msgstr "错误: %1"
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:132
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Start server"
-msgstr ""
+msgstr "启动服务器"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "Connect to server"
-msgstr ""
+msgstr "连接到服务器"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
-msgstr ""
+msgstr "未运行"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
 msgid "Running as server on port %1"
-msgstr ""
+msgstr "在 %1端口上作为服务器运行"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:164
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 msgid "Cancel connecting"
-msgstr ""
+msgstr "取消连接"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
 #, qt-format
 msgid "Connecting to %1: %2..."
-msgstr ""
+msgstr "连接到%1: %2..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:170
 #, qt-format
 msgid "Retrying connection to %1: %2..."
-msgstr ""
+msgstr "重试连接到%1: %2..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:176
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
@@ -12419,12 +12419,12 @@ msgstr "正在断开..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnect from server"
-msgstr ""
+msgstr "断开服务器"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:182
 #, qt-format
 msgid "Connected to %1: %2"
-msgstr ""
+msgstr "连接到%1: %2"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Remote Sync Plug-in"
@@ -12440,29 +12440,29 @@ msgstr "远程同步插件为在网络中运行的多个Stellarium实例提供�
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
-msgstr ""
+msgstr "这可以用于使用多个物理PC创建多屏幕设置。"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
-msgstr ""
+msgstr "部分同步允许平行的设置示例、 概述和细节视图。"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "See manual for detailed description."
-msgstr ""
+msgstr "详细说明请参见手册。"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
-msgstr ""
+msgstr "这个插件是在ESA 的合作伙伴 2015和2016年开发的。"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:239
 msgid "Server Name"
-msgstr ""
+msgstr "服务器名称"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server not active."
-msgstr ""
+msgstr "服务器未激活"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Sync Plug-in Configuration"
@@ -12475,20 +12475,20 @@ msgstr "状态："
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:463
 msgid "Server mode"
-msgstr ""
+msgstr "服务器模式"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server port"
-msgstr ""
+msgstr "服务器端口"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Client mode"
-msgstr ""
+msgstr "客户端模式"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Server host address/name"
-msgstr ""
+msgstr "服务器主机地址/名称"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "127.0.0.1"
@@ -12496,71 +12496,71 @@ msgstr "127.0.0.1"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "When connection is lost"
-msgstr ""
+msgstr "当连接丢失时"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Do nothing"
-msgstr ""
+msgstr "不处理"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Try reconnecting"
-msgstr ""
+msgstr "尝试重新连接"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When server quits"
-msgstr ""
+msgstr "服务器退出时"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Changes on this page require a re-connection to the server"
-msgstr ""
+msgstr "此页面上的更改需要重新连接到服务器"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Settings applied on this client"
-msgstr ""
+msgstr "在此客户端上应用这些设置"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Selection"
-msgstr ""
+msgstr "选择"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "StelProperty"
-msgstr ""
+msgstr "高性能"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
-msgstr ""
+msgstr "查看方向"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
-msgstr ""
+msgstr "属性过滤"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "排除与GUI相关的属性"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "These are all available properties."
-msgstr ""
+msgstr "可用的属性。"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "当前同步中排除同步的属性。"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "排除的属性"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "同步属性"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "附加排除的属性："
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
 msgid "Client settings"
-msgstr ""
+msgstr "客户端设置"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
@@ -14387,7 +14387,7 @@ msgstr "十一月猎户座流星雨"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr ""
+msgstr "八月雕具座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
