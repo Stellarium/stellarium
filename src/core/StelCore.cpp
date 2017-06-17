@@ -2518,7 +2518,6 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 Vec3d StelCore::getMouseJ2000Pos() const
 {
 	const StelProjectorP prj = getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
-	float ppx = getCurrentStelProjectorParams().devicePixelsPerPixel;
 
 	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 	Vec3d mousePosition;
@@ -2528,14 +2527,14 @@ Vec3d StelCore::getMouseJ2000Pos() const
 	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
 	// If coordinates are invalid, don't draw them.
-	bool coordsValid = prj->unProject((prj->getViewportPosX()+wh+mx)/ppx, (prj->getViewportPosY()+hh+1-my)/ppx, mousePosition);
+	bool coordsValid = prj->unProject((prj->getViewportPosX()+wh+mx), (prj->getViewportPosY()+hh+1-my), mousePosition);
 	if (coordsValid)
 	{ // Nick Fedoseev patch
 		Vec3d win;
 		prj->project(mousePosition,win);
 		float dx = prj->getViewportPosX()+wh+mx - win.v[0];
 		float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-		prj->unProject((prj->getViewportPosX()+wh+mx+dx)/ppx, (prj->getViewportPosY()+hh+1-my+dy)/ppx, mousePosition);
+		prj->unProject((prj->getViewportPosX()+wh+mx+dx), (prj->getViewportPosY()+hh+1-my+dy), mousePosition);
 	}
 
 	return mousePosition;
