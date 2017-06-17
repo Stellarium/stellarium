@@ -640,34 +640,32 @@ void BottomStelBar::updateText(bool updatePos)
 	if (tzName.contains("LTST"))
 		currTZ = q_("Local True Solar Time");
 
-	// TRANSLATORS: unit of measurement: seconds per second
-	QString timeRateMU = qc_("sec/s", "unit of measurement");
+	// TRANSLATORS: unit of measurement: minutes per second
+	QString timeRateMU = qc_("min/s", "unit of measurement");
 	float timeRate = qAbs(core->getTimeRate()/StelCore::JD_SECOND);
-	if (timeRate>=60.)
+	float timeSpeed = timeRate/60.f;
+
+	if (timeSpeed>=60.f)
 	{
-		timeRate /= 60.;
-		// TRANSLATORS: unit of measurement: minutes per second
-		timeRateMU = qc_("min/s", "unit of measurement");
-	}
-	if (timeRate>=60.)
-	{
-		timeRate /= 60.;
+		timeSpeed /= 60.f;
 		// TRANSLATORS: unit of measurement: hours per second
 		timeRateMU = qc_("hr/s", "unit of measurement");
 	}
-	if (timeRate>=24.)
+	if (timeSpeed>=24.f)
 	{
-		timeRate /= 24.;
+		timeSpeed /= 24.f;
 		// TRANSLATORS: unit of measurement: days per second
 		timeRateMU = qc_("d/s", "unit of measurement");
 	}
-	if (timeRate>=365.25)
+	if (timeSpeed>=365.25f)
 	{
-		timeRate /= 365.25;
+		timeSpeed /= 365.25f;
 		// TRANSLATORS: unit of measurement: years per second
 		timeRateMU = qc_("yr/s", "unit of measurement");
 	}
-	QString timeRateInfo = QString("%1: %2 %3").arg(q_("Time speed"), QString::number(timeRate, 'f', 3), timeRateMU);
+	QString timeRateInfo = QString("%1: x%2").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0));
+	if (timeRate>60.)
+		timeRateInfo = QString("%1: x%2 (%3 %4)").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0), QString::number(timeSpeed, 'f', 2), timeRateMU);
 
 	updatePos = true;
 	datetime->setText(newDateInfo);
