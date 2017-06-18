@@ -226,15 +226,16 @@ in appendix~\ref{sec:config.ini} Configuration File.
 \label{sec:ExtraData:stars}
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
-in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.35]{2}{btd_config} or
+in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{btd_config} or
 \key{F2}).
 
-\subsection{More Dee-Sky Objects}
+\subsection{More Deep-Sky Objects}
 \label{sec:ExtraData:DSOs}
 
 \noindent\newFeature{v0.16.0}Stellarium is packaged with over 83 thousand deep-sky objects in the normal
-program download (the standard edition of Stellarium DSO catalog --- see section \ref{sec:dso:catalog}), but the larger catalog with over one million objects (the extended edition of Stellarium DSO catalog contains data up to $19.0^m$) may be downloaded
-from the SourceForge website\footnote{\url{https://sourceforge.net/projects/stellarium/files/Extra-data-files/DSO/3.1/}}:
+program download (the standard edition of Stellarium DSO catalog, see section \ref{sec:dso:catalog}), 
+but an extended DSO catalog with over one million objects (up to $19.0^m$) may be downloaded
+from Stellarium's SourceForge website\footnote{\url{https://sourceforge.net/projects/stellarium/files/Extra-data-files/DSO/3.1/}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
@@ -244,7 +245,7 @@ from the SourceForge website\footnote{\url{https://sourceforge.net/projects/stel
 
 The file can be placed in a folder named \file{nebulae/default} inside either
 the \emph{installation directory} (replacing of standard catalog) or the \emph{user directory}
-(see section \ref{sec:FilesAndDirectories:DirectoryStructure}). 
+(see section~\ref{sec:FilesAndDirectories:DirectoryStructure}). 
 
 \subsection{Alternative Planet Ephemerides: DE430, DE431}
 \label{sec:ExtraData:ephemerides}
@@ -265,8 +266,9 @@ DE431 covers years $-13000\ldots+17000$, which allows e.g.\
 archaeoastronomical research on Mesolithic landscapes. Outside these
 year ranges, positional computation falls back to VSOP87.
 
-The integration of this feature is still somewhat experimental.  Please compare to  JPL
-Horizon for quotable results.
+The integration of this feature is still somewhat experimental, and some other current 
+approximations will lead to numerical data which differ slightly from best possible ephemerides.  
+Please az least compare with JPL Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} for dependable results.
 
 To enable use of these data, download the files from
 JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
