@@ -198,6 +198,8 @@ void AstroCalcDialog::createDialogContent()
 
 	ui->phenomenaOppositionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_opposition", false).toBool());
 	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
+	ui->allowedSeparationDoubleSpinBox->setValue(conf->value("astrocalc/phenomena_angular_separation", 1.0).toDouble());
+	connect(ui->allowedSeparationDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(savePhenomenaAngularSeparation(double)));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupPhenomena()));
@@ -1163,6 +1165,11 @@ void AstroCalcDialog::cleanupPhenomena()
 void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
 {
 	conf->setValue("astrocalc/flag_phenomena_opposition", b);
+}
+
+void AstroCalcDialog::savePhenomenaAngularSeparation(double v)
+{
+	conf->setValue("astrocalc/phenomena_angular_separation", QString::number(v, 'f', 4));
 }
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
