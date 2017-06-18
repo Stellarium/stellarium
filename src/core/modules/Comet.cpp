@@ -458,7 +458,7 @@ void Comet::update(int deltaTime)
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
 			float extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
-			gastailColorArr.append(gasColor*extinctionFactor* brightnessPerVertexFromHead);
+			gastailColorArr.append(gasColor*extinctionFactor* brightnessPerVertexFromHead*intensityFovScale);
 
 			// dusttail extinction:
 			vertAltAz=core->j2000ToAltAz(dusttailVertexArr.at(i), StelCore::RefractionOn);
@@ -467,15 +467,15 @@ void Comet::update(int deltaTime)
 			oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
 			extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
-			dusttailColorArr.append(dustColor*extinctionFactor * brightnessPerVertexFromHead);
+			dusttailColorArr.append(dustColor*extinctionFactor * brightnessPerVertexFromHead*intensityFovScale);
 
 			brightnessPerVertexFromHead-=brightnessDecreasePerVertexFromHead;
 		}
 	}
 	else // no atmosphere: set all vertices to same brightness.
 	{
-		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
-		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
+		gastailColorArr.fill(gasColor  *intensityFovScale, gastailVertexArr.length());
+		dusttailColorArr.fill(dustColor*intensityFovScale, dusttailVertexArr.length());
 	}
 	//qDebug() << "Comet " << getEnglishName() <<  "JDE: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
