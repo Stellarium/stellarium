@@ -235,13 +235,14 @@ in the \emph{Tools} tab of the \emph{Configuration} dialog.
 \newFeature{0.15}
 By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
 an analytical solution which is able to deliver planetary positions
-for any input date. However, its use is recommended only for the year
+for any input date~\cite{1988A&A...202..309B}. However, its use is recommended only for the year
 range $-4000\ldots+8000$. Outside this range, it seems to be usable
 for a few more millennia without too great errors, but with degrading accuracy. 
+Likewise for the moon, Stellarium by default uses ELP~2000-82B~\cite{1982CeMec..26...63C, 1983A&A...124...50C, ELP2000-82B}.
 
 Since V0.15 you can install extra data files which allow access to the
 numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL)\cite{DE43x}. The data files have to be
+from NASA's Jet Propulsion Laboratory (JPL)~\cite{DE43x}. The data files have to be
 downloaded separately, and most users will likely not need them. DE430
 provides highly accurate data for the years $+1550\ldots+2650$, while
 DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
@@ -255,11 +256,11 @@ To enable use of these data, download the files from
 JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
   download from this directory if you are not running Linux!)}:
 
-\begin{tabular}{ccc}
+\noindent\begin{tabular}{lllr}
 \toprule
-\emph{Ephemeris}&\emph{Filename}& \emph{MD5 hash}\\\midrule
-DE430& \file{linux\_p1550p2650.430} &\texttt{707c4262533d52d59abaaaa5e69c5738}\\
-DE431& \file{lnxm13000p17000.431}   &\texttt{fad0f432ae18c330f9e14915fbf8960a}\\\bottomrule
+\emph{Ephemeris}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
+DE430& \file{linux\_p1550p2650.430} &\texttt{707c4262533d52d59abaaaa5e69c5738}& 97.5\,MB\\
+DE431& \file{lnxm13000p17000.431}   &\texttt{fad0f432ae18c330f9e14915fbf8960a}& 2.59\,GB\\\bottomrule
 \end{tabular}
 
 
