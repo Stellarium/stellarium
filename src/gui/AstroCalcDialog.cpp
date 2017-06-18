@@ -1169,7 +1169,7 @@ void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
 
 void AstroCalcDialog::savePhenomenaAngularSeparation(double v)
 {
-	conf->setValue("astrocalc/phenomena_angular_separation", QString::number(v, 'f', 4));
+	conf->setValue("astrocalc/phenomena_angular_separation", QString::number(v, 'f', 5));
 }
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
