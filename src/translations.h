@@ -216,6 +216,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Egyptian");
 		// TRANSLATORS: Name of the sky culture
+		N_("Hawaiian Starlines");
+		// TRANSLATORS: Name of the sky culture
 		N_("Inuit");
 		// TRANSLATORS: Name of the sky culture
 		N_("Indian Vedic");
