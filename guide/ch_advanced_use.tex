@@ -226,14 +226,30 @@ in appendix~\ref{sec:config.ini} Configuration File.
 \label{sec:ExtraData:stars}
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
-in the \emph{Tools} tab of the \emph{Configuration} dialog.
+in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.35]{2}{btd_config} or
+\key{F2}).
 
+\subsection{More Dee-Sky Objects}
+\label{sec:ExtraData:DSOs}
+
+\noindent\newFeature{V0.16.0}Stellarium is packaged with over 83 thousand deep-sky objects in the normal
+program download (the standard edition of Stellarium DSO catalog --- see section \ref{sec:dso:catalog}), but the larger catalog with over one million objects (the extended edition of Stellarium DSO catalog) may be downloaded
+from the SourceForge website\footnote{\url{https://sourceforge.net/projects/stellarium/files/Extra-data-files/DSO/3.1/}}:
+
+\noindent\begin{tabular}{lllr}
+\toprule
+\emph{Version}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
+3.1& \file{catalog.dat} &\texttt{6a2b0deb8deccb6af98f74d9d5cd7177}& 28.2\,MB\\\bottomrule
+\end{tabular}
+
+The file can be placed in a folder named \file{nebulae/default} inside either
+the \emph{installation directory} (replacing of standard catalog) or the \emph{user directory}
+(see section \ref{sec:FilesAndDirectories:DirectoryStructure}). 
 
 \subsection{Alternative Planet Ephemerides: DE430, DE431}
 \label{sec:ExtraData:ephemerides}
 
-\newFeature{0.15}
-By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
+\noindent\newFeature{V0.15.0}By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
 an analytical solution which is able to deliver planetary positions
 for any input date~\cite{1988A&A...202..309B}. However, its use is recommended only for the year
 range $-4000\ldots+8000$. Outside this range, it seems to be usable
@@ -278,7 +294,7 @@ de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
 
 For fast access avoid storing them on a network drive or USB pendrive!
 
-You activate use of either ephemeris in the configuration panel
+You activate use of either ephemeris in the \emph{Configuration} panel
 (\key{F2}). If you activate both, preference will be given for DE430
 if the simulation time allows it. Outside of the valid times, VSOP87
 will always be used.
@@ -290,7 +306,7 @@ Code 2015 initiative.
 \subsection{GPS Position}
 \label{sec:ExtraData:GPS}
 
-\noindent In the Location panel (see section~\ref{sec:gui:location})
+\noindent In the \emph{Location} panel (see section~\ref{sec:gui:location})
 you can receive your location from a \indexterm{GPS} device.
 \newFeature{0.16} The exact way to receive GPS location depends on
 your operating system.
