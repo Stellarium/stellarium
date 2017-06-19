@@ -242,8 +242,6 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Ojibwe");
 		// TRANSLATORS: Name of the sky culture
-		N_("Polynesian");
-		// TRANSLATORS: Name of the sky culture
 		N_("Romanian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Sami");
