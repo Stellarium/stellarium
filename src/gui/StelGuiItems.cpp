@@ -810,9 +810,13 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (updatePos)
 	{
-		int fovShift = 170;
+		QFontMetrics fpsMetrics(fps->font());
+		int fpsShift = fpsMetrics.width(fpsstr) + 50;
+
+		QFontMetrics fovMetrics(fov->font());
+		int fovShift = fpsShift + fovMetrics.width(fovstr) + 80;
 		if (getFlagFovDms())
-			fovShift = 195;
+			fovShift += 25;
 
 		QRectF rectCh = getButtonsBoundingRect();
 		location->setPos(0, 0);		
@@ -820,7 +824,7 @@ void BottomStelBar::updateText(bool updatePos)
 		if ((dtp%2) == 1) dtp--; // make even pixel
 		datetime->setPos(dtp,0);
 		fov->setPos(datetime->x()-fovShift, 0);
-		fps->setPos(datetime->x()-75, 0);
+		fps->setPos(datetime->x()-fpsShift, 0);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPos(0,0);
@@ -828,7 +832,7 @@ void BottomStelBar::updateText(bool updatePos)
 			if ((dtp%2) == 1) dtp--; // make even pixel
 			datetimePixmap->setPos(dtp,0);
 			fovPixmap->setPos(datetime->x()-fovShift, 0);
-			fpsPixmap->setPos(datetime->x()-75, 0);
+			fpsPixmap->setPos(datetime->x()-fpsShift, 0);
 		}
 	}
 }
