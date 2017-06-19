@@ -1,20 +1,20 @@
 # English (United Kingdom) translation for stellarium
-# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the stellarium package.
-# Matthew Gates <matthew@porpoisehead.net>, 2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 16:41+0700\n"
-"PO-Revision-Date: 2017-06-13 21:06+0000\n"
-"Last-Translator: Andi Chandler <Unknown>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-06-18 13:16+0700\n"
+"PO-Revision-Date: 2017-06-18 08:30+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-18 05:49+0000\n"
+"X-Launchpad-Export-Date: 2017-06-19 07:03+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -4173,389 +4173,394 @@ msgstr "Egyptian"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:219
+msgid "Hawaiian Starlines"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:221
 msgid "Inuit"
 msgstr "Inuit"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:221
+#: src/translations.h:223
 msgid "Indian Vedic"
 msgstr "Indian Vedic"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:223
+#: src/translations.h:225
 msgid "Japanese Moon Stations"
 msgstr "Japanese Moon Stations"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:225
+#: src/translations.h:227
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroi/Euahlayi"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:227
+#: src/translations.h:229
 msgid "Korean"
 msgstr "Korean"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakota/Lakota/Nakota"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:231
+#: src/translations.h:233
 msgid "Macedonian"
 msgstr "Macedonian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:233
+#: src/translations.h:235
 msgid "Maori"
 msgstr "Maori"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:235
+#: src/translations.h:237
 msgid "Mongolian"
 msgstr "Mongolian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:237
+#: src/translations.h:239
 msgid "Navajo"
 msgstr "Navajo"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:239
+#: src/translations.h:241
 msgid "Norse"
 msgstr "Norse"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:241
+#: src/translations.h:243
 msgid "Ojibwe"
 msgstr "Ojibwe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:243
+#: src/translations.h:245
 msgid "Polynesian"
 msgstr "Polynesian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:245
+#: src/translations.h:247
 msgid "Romanian"
 msgstr "Romanian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:247
+#: src/translations.h:249
 msgid "Sami"
 msgstr "Sami"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:249
+#: src/translations.h:251
 msgid "Sardinian"
 msgstr "Sardinian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:251
+#: src/translations.h:253
 msgid "Siberian"
 msgstr "Siberian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:253
+#: src/translations.h:255
 msgid "Tukano"
 msgstr "Tukano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:255
+#: src/translations.h:257
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:257
+#: src/translations.h:259
 msgid "Tongan"
 msgstr "Tongan"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:259
+#: src/translations.h:261
 msgid "Western"
 msgstr "Western"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:261
+#: src/translations.h:263
 msgid "Western (H.A.Rey)"
 msgstr "Western (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:267
+#: src/translations.h:269
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:269
+#: src/translations.h:271
 msgid "Trees"
 msgstr "Trees"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
+#: src/translations.h:273 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
 msgid "Moon"
 msgstr "Moon"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:273
+#: src/translations.h:275
 msgid "Hurricane"
 msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:275
+#: src/translations.h:277
 msgid "Ocean"
 msgstr "Ocean"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:277
+#: src/translations.h:279
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
+#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
+#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
+#: src/translations.h:285 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
 msgid "Saturn"
 msgstr "Saturn"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:285
+#: src/translations.h:287
 msgid "Uranus"
 msgstr "Uranus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:287
+#: src/translations.h:289
 msgid "Neptune"
 msgstr "Neptune"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:289
+#: src/translations.h:291
 msgid "Geneva"
 msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:291
+#: src/translations.h:293
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:293
+#: src/translations.h:295
 msgid "Zero Horizon"
 msgstr "Zero Horizon"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:298
+#: src/translations.h:300
 msgid "Vienna Sterngarten"
 msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:300
+#: src/translations.h:302
 msgid "Testscene"
 msgstr "Testscene"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "Landscape Tour"
 msgstr "Landscape Tour"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "Partial Lunar Eclipse"
 msgstr "Partial Lunar Eclipse"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Total Lunar Eclipse"
 msgstr "Total Lunar Eclipse"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Screensaver"
 msgstr "Screensaver"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Solar Eclipse 2009"
 msgstr "Solar Eclipse 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:317
 msgid "Startup Script"
 msgstr "Startup Script"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:319
 msgid "Zodiac"
 msgstr "Zodiac"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:321
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Mercury Triple Sunrise and Sunset"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Double eclipse from Deimos in 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Double eclipse from Deimos in 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Eclipse from Olympus Mons Jan 10 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Occultation of Earth and Jupiter 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 Transits and 2 Eclipses from Deimos 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar System Screensaver"
 msgstr "Solar System Screensaver"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Constellations Tour"
 msgstr "Constellations Tour"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Sun from different planets"
 msgstr "Sun from different planets"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Earth best views from other bodies"
 msgstr "Earth best views from other bodies"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Transit of Venus"
 msgstr "Transit of Venus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Sky Culture Tour"
 msgstr "Sky Culture Tour"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Earth Events from Mercury"
 msgstr "Earth Events from Mercury"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Earth Events from a floating city on Venus"
 msgstr "Earth Events from a floating city on Venus"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "Earth Events from Mars"
 msgstr "Earth Events from Mars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Earth and Mars Greatest Elongations and Transits from Callisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Tycho's Supernova"
 msgstr "Tycho's Supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth and other Planets from Ceres"
 msgstr "Earth and other Planets from Ceres"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Messier Objects Tour"
 msgstr "Messier Objects Tour"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Binocular Highlights"
 msgstr "Binocular Highlights"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 Fun Naked-Eye Double Stars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "List of largest known stars"
 msgstr "List of largest known stars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Herschel 400 Tour"
 msgstr "Herschel 400 Tour"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Deep Sky Objects for Binoculars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "The Jack Bennett Catalog"
 msgstr "The Jack Bennett Catalogue"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Best objects in the New General Catalog"
 msgstr "Best objects in the New General Catalogue"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Look around each installed landscape."
 msgstr "Look around each installed landscape."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "Look at each installed sky culture."
 msgstr "Look at each installed sky culture."
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Script to demonstrate a partial lunar eclipse."
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Script to demonstrate a total lunar eclipse."
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "A slow, infinite tour of the sky, looking at random objects."
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -4563,11 +4568,11 @@ msgstr ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid "Script which runs automatically at startup"
 msgstr "Script which runs automatically at startup"
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -4577,35 +4582,35 @@ msgstr ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere, over the course of a year."
 
-#: src/translations.h:386
-msgid ""
-"Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
-"will rise & set 3 different times in one Mercury day."
-msgstr ""
-"Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
-"will rise & set 3 different times in one Mercury day."
-
-#: src/translations.h:387
-msgid ""
-"Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
-"it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
-msgstr ""
-"Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
-"it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
-
 #: src/translations.h:388
 msgid ""
+"Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
+"will rise & set 3 different times in one Mercury day."
+msgstr ""
+"Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
+"will rise & set 3 different times in one Mercury day."
+
+#: src/translations.h:389
+msgid ""
+"Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
+"it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
+msgstr ""
+"Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
+"it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
+
+#: src/translations.h:390
+msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -4615,7 +4620,7 @@ msgstr ""
 "occultations of both on the same day are very rare. Here is one that takes "
 "place 1/23/2048. In real speed."
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4631,30 +4636,30 @@ msgstr ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "A tour of the western constellations."
 msgstr "A tour of the western constellations."
 
-#: src/translations.h:394
+#: src/translations.h:396
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Look at the Sun from big planets of Solar System and Pluto."
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -4662,7 +4667,7 @@ msgstr ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plug-"
 "in has to be enabled."
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -4670,7 +4675,7 @@ msgstr ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4682,7 +4687,7 @@ msgstr ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -4690,39 +4695,39 @@ msgstr ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "A tour of Messier Objects"
 msgstr "A tour of Messier Objects"
 
-#: src/translations.h:402
-msgid ""
-"Tours around interesting objects, which accessible to observation with "
-"binoculars. The data for the script are taken from the eponymous book by "
-"Gary Seronik."
-msgstr ""
-"Tours around interesting objects, which accessible to observation with "
-"binoculars. The data for the script are taken from the eponymous book by "
-"Gary Seronik."
-
-#: src/translations.h:403
-msgid ""
-"This script helps you make an excursion around 20 fun double stars. The list "
-"has been collected by Jerry Lodriguss and published in Sky & Telescope "
-"09/2014. Data taken from his website, http://www.astropix.com/doubles/"
-msgstr ""
-"This script helps you make an excursion around 20 fun double stars. The list "
-"has been collected by Jerry Lodriguss and published in Sky & Telescope "
-"09/2014. Data taken from his website, http://www.astropix.com/doubles/"
-
 #: src/translations.h:404
+msgid ""
+"Tours around interesting objects, which accessible to observation with "
+"binoculars. The data for the script are taken from the eponymous book by "
+"Gary Seronik."
+msgstr ""
+"Tours around interesting objects, which accessible to observation with "
+"binoculars. The data for the script are taken from the eponymous book by "
+"Gary Seronik."
+
+#: src/translations.h:405
+msgid ""
+"This script helps you make an excursion around 20 fun double stars. The list "
+"has been collected by Jerry Lodriguss and published in Sky & Telescope "
+"09/2014. Data taken from his website, http://www.astropix.com/doubles/"
+msgstr ""
+"This script helps you make an excursion around 20 fun double stars. The list "
+"has been collected by Jerry Lodriguss and published in Sky & Telescope "
+"09/2014. Data taken from his website, http://www.astropix.com/doubles/"
+
+#: src/translations.h:406
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "This script helps you make an excursion around largest known stars."
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "A tour around objects from the Herschel 400 Catalogue"
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -4732,156 +4737,156 @@ msgstr ""
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "&Undo"
 msgstr "&Undo"
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "&Redo"
 msgstr "&Redo"
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Cu&t"
 msgstr "Cu&t"
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "&Copy"
 msgstr "&Copy"
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "&Paste"
 msgstr "&Paste"
 
-#: src/translations.h:417 plugins/Oculars/src/ui_ocularDialog.h:1164
+#: src/translations.h:419 plugins/Oculars/src/ui_ocularDialog.h:1164
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
 msgid "Delete"
 msgstr "Delete"
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "Select All"
 msgstr "Select All"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "Look in:"
 msgstr "Look in:"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "Directory:"
 msgstr "Directory:"
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "Folder"
 msgstr "Folder"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "&Choose"
 msgstr "&Choose"
 
-#: src/translations.h:423 src/ui_configurationDialog.h:1511
+#: src/translations.h:425 src/ui_configurationDialog.h:1511
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid "&Cancel"
 msgstr "&Cancel"
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid "Files of type:"
 msgstr "Files of type:"
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid "Date Modified"
 msgstr "Date Modified"
 
-#: src/translations.h:427
+#: src/translations.h:429
 msgid "Directories"
 msgstr "Directories"
 
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "Computer"
 msgstr "Computer"
 
-#: src/translations.h:429
+#: src/translations.h:431
 msgid "&Open"
 msgstr "&Open"
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "File &name:"
 msgstr "File &name:"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "Copy &Link Location"
 msgstr "Copy &Link Location"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Abort"
 msgstr "Abort"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "Ignore"
 msgstr "Ignore"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Basic colors"
 msgstr "&Basic colours"
 
-#: src/translations.h:435
+#: src/translations.h:437
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "&Custom colors"
 msgstr "&Custom colours"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "&Add to Custom Colors"
 msgstr "&Add to Custom Colours"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Hu&e:"
 msgstr "Hu&e:"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "&Sat:"
 msgstr "&Sat:"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Val:"
 msgstr "&Val:"
 
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "&Red:"
 msgstr "&Red:"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Green:"
 msgstr "&Green:"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Bl&ue:"
 msgstr "Bl&ue:"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Select Color"
 msgstr "Select Colour"
 
-#: src/translations.h:445
+#: src/translations.h:447
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Cursor at %1, %2 Press ESC to cancel"
@@ -16537,1817 +16542,3 @@ msgstr "Major Lunar Standstill lines"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
 msgstr ""
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Equatorial Grid"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimuthal Grid"
-
-#~ msgid "Equator Line"
-#~ msgstr "Equator Line"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ecliptic Line"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Cardinal Points"
-
-#~ msgid "Sky Language: "
-#~ msgstr "Sky Language: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Sky Culture: "
-
-#~ msgid "Language"
-#~ msgstr "Language"
-
-#~ msgid "Date & Time"
-#~ msgstr "Date & Time"
-
-#~ msgid "Set Location "
-#~ msgstr "Set Location "
-
-#~ msgid "Set Time "
-#~ msgstr "Set Time "
-
-#~ msgid "General "
-#~ msgstr "General "
-
-#~ msgid "Stars "
-#~ msgstr "Stars "
-
-#~ msgid "Colors "
-#~ msgstr "Colours "
-
-#~ msgid "Effects "
-#~ msgstr "Effects "
-
-#~ msgid "Scripts "
-#~ msgstr "Scripts "
-
-#~ msgid "Administration "
-#~ msgstr "Administration "
-
-#~ msgid "Latitude: "
-#~ msgstr "Latitude: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Longitude: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Altitude (m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Solar System Body: "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Sky Time: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Set Time Zone: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Preset Sky Time: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Sky Time At Start-up: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Actual Time"
-
-#~ msgid "Preset Time"
-#~ msgstr "Preset Time"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Time Display Format: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Date Display Format: "
-
-#~ msgid "Show: "
-#~ msgstr "Show: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Maximum Magnitude to Label: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Twinkling: "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Constellation Lines"
-
-#~ msgid "Constellation Names"
-#~ msgstr "Constellation Names"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Constallation Art Intensity"
-
-#~ msgid "Planet Names"
-#~ msgstr "Planet Names"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Planet Orbits"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Planet Trails"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Meridian Line"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Nebula Names"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Nebula Circles"
-
-#~ msgid "Landscape: "
-#~ msgstr "Landscape: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Manual zoom: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Object Sizing Rule: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Milky Way intensity: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Maximum Nebula Magnitude to Label: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Zoom Duration: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Cursor Timeout: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Local Script: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD Script: "
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Load Default Configuration: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Save Current Configuration as Default: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Shut Down: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Update me via Internet: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Set UI Locale: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Arrow down to load list."
-
-#~ msgid "Earth"
-#~ msgstr "Earth"
-
-#~ msgid "Deimos"
-#~ msgstr "Deimos"
-
-#~ msgid "Phobos"
-#~ msgstr "Phobos"
-
-#~ msgid "Io"
-#~ msgstr "Io"
-
-#~ msgid "Europa"
-#~ msgstr "Europa"
-
-#~ msgid "Ganymede"
-#~ msgstr "Ganymede"
-
-#~ msgid "Callisto"
-#~ msgstr "Callisto"
-
-#~ msgid "Mimas"
-#~ msgstr "Mimas"
-
-#~ msgid "Enceladus"
-#~ msgstr "Enceladus"
-
-#~ msgid "Tethys"
-#~ msgstr "Tethys"
-
-#~ msgid "Dione"
-#~ msgstr "Dione"
-
-#~ msgid "Rhea"
-#~ msgstr "Rhea"
-
-#~ msgid "Titan"
-#~ msgstr "Titan"
-
-#~ msgid "Hyperion"
-#~ msgstr "Hyperion"
-
-#~ msgid "Iapetus"
-#~ msgstr "Iapetus"
-
-#~ msgid "Phoebe"
-#~ msgstr "Phoebe"
-
-#~ msgid "Pluto"
-#~ msgstr "Pluto"
-
-#~ msgid "Charon"
-#~ msgstr "Charon"
-
-#~ msgid "Solar System Observer"
-#~ msgstr "Solar System Observer"
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Select and exit to run."
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Magnitude Sizing Multiplier: "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Light Pollution Luminance: "
-
-#~ msgid "Lakota"
-#~ msgstr "Lakota"
-
-#~ msgid "Planet: "
-#~ msgstr "Planet: "
-
-#~ msgid "USB Script: "
-#~ msgstr "USB Script: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Star Value Multiplier: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Magnitude Scaling Multiplier: "
-
-#~ msgid "Sidereal"
-#~ msgstr "Sidereal"
-
-#~ msgid "Calendar"
-#~ msgstr "Calendar"
-
-#~ msgid "Day keys: "
-#~ msgstr "Day keys: "
-
-#~ msgid "Nebula"
-#~ msgstr "Nebula"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Limiting Magnitude: "
-
-#~ msgid "Planetary nebula"
-#~ msgstr "Planetary nebula"
-
-#~ msgid "Nebulas"
-#~ msgstr "Nebulae"
-
-#~ msgid "Highest rate ever (1966 Leonids)"
-#~ msgstr "Highest rate ever (1966 Leonids)"
-
-#~ msgid "Form"
-#~ msgstr "Form"
-
-#~ msgid "10000"
-#~ msgstr "10000"
-
-#~ msgid "Scale Moon"
-#~ msgstr "Scale Moon"
-
-#~ msgid "Show atmosphere"
-#~ msgstr "Show atmosphere"
-
-#~ msgid "Show lines"
-#~ msgstr "Show lines"
-
-#~ msgid "Show art"
-#~ msgstr "Show art"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
-#~ msgstr "Magnitude: <b>%1</b> (B-V: %2)"
-
-#, no-c-format, qt-format
-#~ msgid "Distance: %1AU"
-#~ msgstr "Distance: %1AU"
-
-#~ msgid "Undocumented type"
-#~ msgstr "Undocumented type"
-
-#~ msgid "Unknown"
-#~ msgstr "Unknown"
-
-#~ msgid "Cluster associated with nebulosity"
-#~ msgstr "Cluster associated with nebulosity"
-
-#~ msgid "Globular cluster"
-#~ msgstr "Globular cluster"
-
-#~ msgid "Galaxy"
-#~ msgstr "Galaxy"
-
-#~ msgid "Open cluster"
-#~ msgstr "Open cluster"
-
-#, qt-format
-#~ msgid "Distance: %1 Light Years"
-#~ msgstr "Distance: %1 Light Years"
-
-#~ msgid ""
-#~ "The full name of this projection method is, <i>Lambert azimuthal equal-area "
-#~ "projection</i>. It preserves the area but not the angle."
-#~ msgstr ""
-#~ "The full name of this projection method is, <i>Lambert azimuthal equal-area "
-#~ "projection</i>. It preserves the area but not the angle."
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Correct for light travel time: "
-
-#~ msgid ""
-#~ "Perspective projection keeps the horizon a straight line. The mathematical "
-#~ "name for this projection method is <i>gnomonic projection</i>."
-#~ msgstr ""
-#~ "Perspective projection keeps the horizon a straight line. The mathematical "
-#~ "name for this projection method is <i>gnomonic projection</i>."
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + Left click"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Up/Down"
-
-#~ msgid "Add 1 solar week"
-#~ msgstr "Add 1 solar week"
-
-#~ msgid "Subtract 1 solar week"
-#~ msgstr "Subtract 1 solar week"
-
-#~ msgid "No description"
-#~ msgstr "No description"
-
-#~ msgid "This system does not support OpenGL."
-#~ msgstr "This system does not support OpenGL."
-
-#~ msgid "Add 1 sidereal week"
-#~ msgstr "Add 1 sidereal week"
-
-#~ msgid "Subtract 1 sidereal week"
-#~ msgstr "Subtract 1 sidereal week"
-
-#~ msgid "10"
-#~ msgstr "10"
-
-#~ msgid "80"
-#~ msgstr "80"
-
-#~ msgid "Shooting Stars"
-#~ msgstr "Shooting Stars"
-
-#~ msgid "144000"
-#~ msgstr "144000"
-
-#~ msgid "Art brightness: "
-#~ msgstr "Art brightness: "
-
-#~ msgid "Mouse cursor timeout (seconds):"
-#~ msgstr "Mouse cursor timeout (seconds):"
-
-#, qt-format
-#~ msgid "RA/DE (of date): %1/%2"
-#~ msgstr "RA/DE (of date): %1/%2"
-
-#, qt-format
-#~ msgid "RA/DE (J2000): %1/%2"
-#~ msgstr "RA/DE (J2000): %1/%2"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "Program language"
-#~ msgstr "Program language"
-
-#~ msgid "Hourly zenith rate:"
-#~ msgstr "Hourly zenith rate:"
-
-#~ msgid "Planets and satellites"
-#~ msgstr "Planets and satellites"
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "/"
-#~ msgstr "/"
-
-#~ msgid "Light pollution: "
-#~ msgstr "Light pollution: "
-
-#~ msgid "Show planets"
-#~ msgstr "Show planets"
-
-#~ msgid "Use as default"
-#~ msgstr "Use as default"
-
-#~ msgid ""
-#~ "Restoring default settings requires a restart of Stellarium. Saving all the "
-#~ "current options includes the current FOV and direction of view for use at "
-#~ "next startup."
-#~ msgstr ""
-#~ "Restoring default settings requires a restart of Stellarium. Saving all the "
-#~ "current options includes the current FOV and direction of view for use at "
-#~ "next startup."
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Startup FOV: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Startup direction of view: xxxx"
-
-#~ msgid "RA/Dec (J2000):"
-#~ msgstr "RA/Dec (J2000):"
-
-#~ msgid "The width of your view when Stellarium starts"
-#~ msgstr "The width of your view when Stellarium starts"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Get catalogue x of y"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Finished downloading all star catalogues!"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Constellation Boundaries"
-
-#~ msgid "Vesta"
-#~ msgstr "Vesta"
-
-#~ msgid "Juno"
-#~ msgstr "Juno"
-
-#~ msgid "Ceres"
-#~ msgstr "Ceres"
-
-#~ msgid "Pallas"
-#~ msgstr "Pallas"
-
-#~ msgid "Titania"
-#~ msgstr "Titania"
-
-#~ msgid "Umbriel"
-#~ msgstr "Umbriel"
-
-#~ msgid "Ariel"
-#~ msgstr "Ariel"
-
-#~ msgid "Miranda"
-#~ msgstr "Miranda"
-
-#~ msgid "Eris"
-#~ msgstr "Eris"
-
-#~ msgid "Oberon"
-#~ msgstr "Oberon"
-
-#~ msgid "Iris"
-#~ msgstr "Iris"
-
-#~ msgid "Flora"
-#~ msgstr "Flora"
-
-#~ msgid "Astraea"
-#~ msgstr "Astraea"
-
-#~ msgid "Hebe"
-#~ msgstr "Hebe"
-
-#~ msgid "Hektor"
-#~ msgstr "Hektor"
-
-#~ msgid "Eros"
-#~ msgstr "Eros"
-
-#~ msgid "Chiron"
-#~ msgstr "Chiron"
-
-#~ msgid "Apophis"
-#~ msgstr "Apophis"
-
-#~ msgid "Amor"
-#~ msgstr "Amor"
-
-#~ msgid "Hygiea"
-#~ msgstr "Hygiea"
-
-#~ msgid "Metis"
-#~ msgstr "Metis"
-
-#~ msgid "Plugin Key Bindings"
-#~ msgstr "Plug-in Key Bindings"
-
-#~ msgid ""
-#~ "A convenient interface for some of the more obscure options in Stellarium's "
-#~ "configuration file. Allows setting the time zone and changing the way the "
-#~ "time and the date are displayed in the bottom bar."
-#~ msgstr ""
-#~ "A convenient interface for some of the more obscure options in Stellarium's "
-#~ "configuration file. Allows setting the time zone and changing the way the "
-#~ "time and the date are displayed in the bottom bar."
-
-#~ msgid "Time Zone"
-#~ msgstr "Time Zone"
-
-#~ msgid "Ecliptic"
-#~ msgstr "Ecliptic"
-
-#~ msgid ""
-#~ "Stereographic projection is known since the antiquity and was originally "
-#~ "known as the planisphere projection. It preserves the angles at which curves "
-#~ "cross each other but it does not preserve area."
-#~ msgstr ""
-#~ "Stereographic projection is known since antiquity and was originally known "
-#~ "as the planisphere projection. It preserves the angles at which curves cross "
-#~ "each other but it does not preserve area."
-
-#~ msgid ""
-#~ "The mercator projection is one of the most used world map projection. It "
-#~ "preserves direction and shapes but distorts size, in an increasing degree "
-#~ "away from the equator."
-#~ msgstr ""
-#~ "The Mercator projection is one of the most used world map projections. It "
-#~ "preserves direction and shapes but distorts size, in an increasing degree "
-#~ "away from the equator."
-
-#~ msgid "When a Script is Running"
-#~ msgstr "When a script is running"
-
-#~ msgid "Nebulas background images"
-#~ msgstr "Nebulas' background images"
-
-#~ msgid "Planets labels"
-#~ msgstr "Planet labels"
-
-#~ msgid ""
-#~ "An interface for adding asteroids and comets to Stellarium. It can download "
-#~ "object lists from the Minor Planet Center's website and perform searches in "
-#~ "its online database. Still a work in progress."
-#~ msgstr ""
-#~ "An interface for adding asteroids and comets to Stellarium. It can download "
-#~ "object lists from the Minor Planet Center's Web site and perform searches in "
-#~ "its online database. Still a work in progress."
-
-#~ msgid "Amalthea"
-#~ msgstr "Amalthea"
-
-#~ msgid "Himalia"
-#~ msgstr "Himalia"
-
-#~ msgid "Elara"
-#~ msgstr "Elara"
-
-#~ msgid "Nix"
-#~ msgstr "Nix"
-
-#~ msgid "Triton"
-#~ msgstr "Triton"
-
-#~ msgid "Adrastea"
-#~ msgstr "Adrastea"
-
-#~ msgid "Thebe"
-#~ msgstr "Thebe"
-
-#~ msgid "Leda"
-#~ msgstr "Leda"
-
-#~ msgid "Ananke"
-#~ msgstr "Ananke"
-
-#~ msgid "Pasiphae"
-#~ msgstr "Pasiphae"
-
-#~ msgid "Lysithea"
-#~ msgstr "Lysithea"
-
-#~ msgid "Carme"
-#~ msgstr "Carme"
-
-#~ msgid "Sinope"
-#~ msgstr "Sinope"
-
-#~ msgid "Sao"
-#~ msgstr "Sao"
-
-#~ msgid "Larissa"
-#~ msgstr "Larissa"
-
-#~ msgid "Proteus"
-#~ msgstr "Proteus"
-
-#~ msgid "Halimede"
-#~ msgstr "Halimede"
-
-#~ msgid "Galatea"
-#~ msgstr "Galatea"
-
-#~ msgid "Despina"
-#~ msgstr "Despina"
-
-#~ msgid "Thalassa"
-#~ msgstr "Thalassa"
-
-#~ msgid "Naiad"
-#~ msgstr "Naiad"
-
-#~ msgid "Nereid"
-#~ msgstr "Nereid"
-
-#~ msgid "Psamathe"
-#~ msgstr "Psamathe"
-
-#~ msgid "Laomedeia"
-#~ msgstr "Laomedeia"
-
-#~ msgid "Neso"
-#~ msgstr "Neso"
-
-#~ msgid "Kepler's Supernova"
-#~ msgstr "Kepler's Supernova"
-
-#~ msgid "(geometric)"
-#~ msgstr "(geometric)"
-
-#~ msgid "Find Object or Position"
-#~ msgstr "Find Object or Position"
-
-#, qt-format
-#~ msgid "Ecliptic Geocentric (of date): %1/%2"
-#~ msgstr "Ecliptic Geocentric (of date): %1/%2"
-
-#, qt-format
-#~ msgid "Obliquity (of date): %1"
-#~ msgstr "Obliquity (of date): %1"
-
-#~ msgid "SpaceShip"
-#~ msgstr "Spaceship"
-
-#, qt-format
-#~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-#~ msgstr "Apparent Magnitude: <b>%1</b> (by extinction)"
-
-#~ msgid "Galactic plane"
-#~ msgstr "Galactic plane"
-
-#~ msgid "Galactic Plane"
-#~ msgstr "Galactic Plane"
-
-#~ msgid "Sedna"
-#~ msgstr "Sedna"
-
-#~ msgid "Orcus"
-#~ msgstr "Orcus"
-
-#~ msgid "Quaoar"
-#~ msgstr "Quaoar"
-
-#~ msgid "Haumea"
-#~ msgstr "Haumea"
-
-#~ msgid "Hydra (moon)"
-#~ msgstr "Hydra (moon)"
-
-#~ msgid "Netherlands Antilles"
-#~ msgstr "Netherlands Antilles"
-
-#~ msgid "American Samoa"
-#~ msgstr "American Samoa"
-
-#~ msgid "Bosnia and Herzegowina"
-#~ msgstr "Bosnia and Herzegowina"
-
-#~ msgid "Brunei Darussalam"
-#~ msgstr "Brunei Darussalam"
-
-#~ msgid "Cocos Islands"
-#~ msgstr "Cocos Islands"
-
-#~ msgid "Democratic Republic of the Congo"
-#~ msgstr "Democratic Republic of the Congo"
-
-#~ msgid "Central African Republic"
-#~ msgstr "Central African Republic"
-
-#~ msgid "Republic of the Congo"
-#~ msgstr "Republic of the Congo"
-
-#~ msgid "Cote d'Ivoire"
-#~ msgstr "Cote d'Ivoire"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-#~ msgstr "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-#~ msgstr "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-
-#~ msgid "Serbia and Montenegro"
-#~ msgstr "Serbia and Montenegro"
-
-#~ msgid "United Kingdom"
-#~ msgstr "United Kingdom"
-
-#~ msgid "Saint Kitts and Nevis"
-#~ msgstr "Saint Kitts and Nevis"
-
-#~ msgid "Democratic People's Republic of Korea"
-#~ msgstr "Democratic People's Republic of Korea"
-
-#~ msgid "Republic of Korea"
-#~ msgstr "Republic of Korea"
-
-#~ msgid "Saint Lucia"
-#~ msgstr "Saint Lucia"
-
-#~ msgid "Lao"
-#~ msgstr "Lao"
-
-#~ msgid "Libyan Arab Jamahiriya"
-#~ msgstr "Libyan Arab Jamahiriya"
-
-#~ msgid "Myanmar"
-#~ msgstr "Myanmar"
-
-#~ msgid "Saint Pierre and Miquelon"
-#~ msgstr "Saint Pierre and Miquelon"
-
-#~ msgid "Palestinian Territories"
-#~ msgstr "Palestinian Territories"
-
-#~ msgid "Russian Federation"
-#~ msgstr "Russian Federation"
-
-#~ msgid "Saint Helena"
-#~ msgstr "Saint Helena"
-
-#~ msgid "French Southern Territories"
-#~ msgstr "French Southern Territories"
-
-#~ msgid "Turks and Caicos Islands"
-#~ msgstr "Turks and Caicos Islands"
-
-#~ msgid "Syrian Arab Republic"
-#~ msgstr "Syrian Arab Republic"
-
-#~ msgid "Vatican City State"
-#~ msgstr "Vatican City State"
-
-#~ msgid "Saint Vincent and the Grenadines"
-#~ msgstr "Saint Vincent and the Grenadines"
-
-#~ msgid "United States Minor Outlying Islands"
-#~ msgstr "United States Minor Outlying Islands"
-
-#~ msgid "British Virgin Islands"
-#~ msgstr "British Virgin Islands"
-
-#~ msgid "United States Virgin Islands"
-#~ msgstr "United States Virgin Islands"
-
-#~ msgid "Samoa"
-#~ msgstr "Samoa"
-
-#~ msgid "Yugoslavia"
-#~ msgstr "Yugoslavia"
-
-#~ msgid "Galactic plane line"
-#~ msgstr "Galactic plane line"
-
-#~ msgid "Crosshairs"
-#~ msgstr "Crosshairs"
-
-#~ msgid "Magnification provided by this ocular/telescope combination"
-#~ msgstr "Magnification provided by this ocular/telescope combination"
-
-#~ msgid "Actual field of view provided by this ocular/telescope combination"
-#~ msgstr "Actual field of view provided by this ocular/telescope combination"
-
-#~ msgid "Key mappings"
-#~ msgstr "Key mappings"
-
-#~ msgid "Toggle ocular view:"
-#~ msgstr "Toggle ocular view:"
-
-#~ msgid "Open pop-up navigation menu:"
-#~ msgstr "Open pop-up navigation menu:"
-
-#~ msgid ""
-#~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
-#~ "plugin\" in the subject when posting."
-#~ msgstr ""
-#~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
-#~ "plugin\" in the subject when posting."
-
-#, qt-format
-#~ msgid "Updated %1/%2 satellite(s); %3 missing"
-#~ msgstr "Updated %1/%2 satellite(s); %3 missing"
-
-#~ msgid "Update TLE lists from Internet sources"
-#~ msgstr "Update TLE lists from Internet sources"
-
-#~ msgid "TLE data:"
-#~ msgstr "TLE data:"
-
-#~ msgid "Comma separated list of groups"
-#~ msgstr "Comma separated list of groups"
-
-#~ msgid "NORAD two line element orbit data"
-#~ msgstr "NORAD two line element orbit data"
-
-#~ msgid "First week"
-#~ msgstr "First week"
-
-#~ msgid "Second week"
-#~ msgstr "Second week"
-
-#~ msgid "Third week"
-#~ msgstr "Third week"
-
-#~ msgid "Thursday"
-#~ msgstr "Thursday"
-
-#~ msgid "Friday"
-#~ msgstr "Friday"
-
-#~ msgid "Tuesday"
-#~ msgstr "Tuesday"
-
-#~ msgid "Wednesday"
-#~ msgstr "Wednesday"
-
-#~ msgid "Sunday"
-#~ msgstr "Sunday"
-
-#~ msgid "Monday"
-#~ msgstr "Monday"
-
-#~ msgid "Saturday"
-#~ msgstr "Saturday"
-
-#~ msgid "Time Zone plug-in"
-#~ msgstr "Time Zone plug-in"
-
-#~ msgid "Last week"
-#~ msgstr "Last week"
-
-#~ msgid "Fourth week"
-#~ msgstr "Fourth week"
-
-#~ msgid "Time of change:"
-#~ msgstr "Time of change:"
-
-#~ msgid "Day:"
-#~ msgstr "Day:"
-
-#~ msgid "Timezone name:"
-#~ msgstr "Timezone name:"
-
-#~ msgid "DST timezone name:"
-#~ msgstr "DST timezone name:"
-
-#~ msgid "Daylight saving time (summer time)"
-#~ msgstr "Daylight saving time (summer time)"
-
-#~ msgid "Daylight saving time start"
-#~ msgstr "Daylight saving time start"
-
-#~ msgid "DST offset from UTC (hours):"
-#~ msgstr "DST offset from UTC (hours):"
-
-#~ msgid "Define a time zone"
-#~ msgstr "Define a time zone"
-
-#~ msgid "Offset from UTC (hours):"
-#~ msgstr "Offset from UTC (hours):"
-
-#~ msgid "(offset = local time - UTC time)"
-#~ msgstr "(offset = local time - UTC time)"
-
-#~ msgid "Daylight saving time end"
-#~ msgstr "Daylight saving time end"
-
-#~ msgid "Use this definition"
-#~ msgstr "Use this definition"
-
-#~ msgid ""
-#~ "By default, the time displayed in Stellarium is interpreted as the local "
-#~ "time in the system's time zone, not in the displayed location's time zone. "
-#~ "This behaviour can be changed by changing Stellarium's global time zone "
-#~ "settings."
-#~ msgstr ""
-#~ "By default, the time displayed in Stellarium is interpreted as the local "
-#~ "time in the system's time zone, not in the displayed location's time zone. "
-#~ "This behaviour can be changed by changing Stellarium's global time zone "
-#~ "settings."
-
-#~ msgid "Use system settings (default)"
-#~ msgstr "Use system settings (default)"
-
-#~ msgid "Universal Coordinated Time (UTC)"
-#~ msgstr "Universal Coordinated Time (UTC)"
-
-#~ msgid "User-defined:"
-#~ msgstr "User-defined:"
-
-#~ msgid "Any changes will take effect the next time Stellarium is started."
-#~ msgstr "Any changes will take effect the next time Stellarium is started."
-
-#~ msgid "Display formats"
-#~ msgstr "Display formats"
-
-#~ msgid "Magnitude scaling multiplier"
-#~ msgstr "Magnitude scaling multiplier"
-
-#~ msgid "Manual zoom"
-#~ msgstr "Manual zoom"
-
-#~ msgid "Nebula label frequency:"
-#~ msgstr "Nebula label frequency:"
-
-#~ msgid "Cursor timeout:"
-#~ msgstr "Cursor timeout:"
-
-#~ msgid "CD/DVD script"
-#~ msgstr "CD/DVD script"
-
-#~ msgid ""
-#~ "This plug-in uses a custom Solar System configuration file. If something "
-#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-#~ "manually that file from:"
-#~ msgstr ""
-#~ "This plug-in uses a custom Solar System configuration file. If something "
-#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-#~ "manually that file from:"
-
-#~ msgid "Warning"
-#~ msgstr "Warning"
-
-#~ msgid "Copy/replace the Solar System file"
-#~ msgstr "Copy/replace the Solar System file"
-
-#~ msgid ""
-#~ "A plugin that shows some historical supernovae brighter than 10 visual "
-#~ "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
-#~ "1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
-#~ "October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
-#~ "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
-#~ "(13 September)."
-#~ msgstr ""
-#~ "A plugin that shows some historical supernovae brighter than 10 visual "
-#~ "magnitude: SN 185A (7 December), SN 386A (24 April), SN 1006A (29 April), SN "
-#~ "1054A (3 July), SN 1181A (4 August), SN 1572A (5 November), SN 1604A (8 "
-#~ "October), SN 1680A (15 August), SN 1885A (17 August), SN 1895B (5 July), SN "
-#~ "1937C (21 August), SN 1972E (8 May), SN 1987A (24 February) and SN 2011FE "
-#~ "(13 September)."
-
-#~ msgid "Add new Solar System objects"
-#~ msgstr "Add new Solar System objects"
-
-#~ msgid "Copy the Solar System file..."
-#~ msgstr "Copy the Solar System file..."
-
-#~ msgid ""
-#~ "You can create a backup copy of the custom Solar System configuration file "
-#~ "in a convenient location, or replace it with such a copy."
-#~ msgstr ""
-#~ "You can create a backup copy of the custom Solar System configuration file "
-#~ "in a convenient location, or replace it with such a copy."
-
-#~ msgid "Replace the Solar System file..."
-#~ msgstr "Replace the Solar System file..."
-
-#~ msgid "Viet Nam"
-#~ msgstr "Vietnam"
-
-#~ msgid ""
-#~ "This plugin plots the position of various pulsars, with object information "
-#~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-#~ "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
-#~ msgstr ""
-#~ "This plugin plots the position of various pulsars, with object information "
-#~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
-#~ "1995).<br><br>Note: pulsar identifiers have the prefix \"PSR\""
-
-#, qt-format
-#~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
-#~ msgstr "Equivalent width of the integrated pulse profile: %1 ms"
-
-#, qt-format
-#~ msgid "Distance: %1 kpc (%2 ly)"
-#~ msgstr "Distance: %1 kpc (%2 ly)"
-
-#, qt-format
-#~ msgid "Type of pulsar: %1"
-#~ msgstr "Type of pulsar: %1"
-
-#~ msgid "globular cluster association"
-#~ msgstr "globular cluster association"
-
-#~ msgid "extragalactic (in MC) pulsar"
-#~ msgstr "extragalactic (in MC) pulsar"
-
-#~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-#~ msgstr "optical, X-ray or Gamma-ray pulsed emission (high energy)"
-
-#~ msgid "millisecond pulsar"
-#~ msgstr "millisecond pulsar"
-
-#~ msgid "binary or multiple pulsar"
-#~ msgstr "binary or multiple pulsar"
-
-#~ msgid "radio interpulse"
-#~ msgstr "radio interpulse"
-
-#~ msgid "recycled pulsar"
-#~ msgstr "recycled pulsar"
-
-#~ msgid "SNR association"
-#~ msgstr "SNR association"
-
-#~ msgid "glitches in period"
-#~ msgstr "glitches in period"
-
-#~ msgid "pre-process script using STS preprocessor"
-#~ msgstr "pre-process script using STS preprocessor"
-
-#~ msgid "clear script"
-#~ msgstr "clear script"
-
-#~ msgid "Past Developers"
-#~ msgstr "Past Developers"
-
-#~ msgid "Extend search with SIMBAD"
-#~ msgstr "Extend search with SIMBAD"
-
-#~ msgid "On-line astronomical database SIMBAD"
-#~ msgstr "On-line astronomical database SIMBAD"
-
-#~ msgid "Add 1 sidereal month"
-#~ msgstr "Add 1 sidereal month"
-
-#~ msgid "Subtract 1 sidereal month"
-#~ msgstr "Subtract 1 sidereal month"
-
-#~ msgid "A Quintuple eclipse from Deimos 2027"
-#~ msgstr "A Quintuple eclipse from Deimos 2027"
-
-#~ msgid ""
-#~ "Phobos races ahead of Mars and eclipses the sun, passes thru it and then "
-#~ "retrogrades back towards the sun and just partially eclipses it (only seen "
-#~ "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-#~ "Phobos emerges from the sun it passes through Mars' shadow and dims."
-#~ msgstr ""
-#~ "Phobos races ahead of Mars and eclipses the sun, passes thru it and then "
-#~ "retrogrades back towards the sun and just partially eclipses it (only seen "
-#~ "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-#~ "Phobos emerges from the sun it passes through Mars' shadow and dims."
-
-#~ msgid ""
-#~ "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
-#~ "Occultations of both on the same day are very rare. Here's one that takes "
-#~ "place 1/23/2048. In real speed."
-#~ msgstr ""
-#~ "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
-#~ "Occultations of both on the same day are very rare. Here's one that takes "
-#~ "place 1/23/2048. In real speed."
-
-#~ msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
-#~ msgstr "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 171 events in all!"
-#~ msgstr ""
-#~ "Screensaver of various happenings in the Solar System. 171 events in all!"
-
-#~ msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
-#~ msgstr "Transit of Venus as seen from Sydney Australia 6th June 2012."
-
-#~ msgid "Earth best views from other Solar system bodies in the 21st Century."
-#~ msgstr "Earth best views from other Solar system bodies in the 21st Century."
-
-#~ msgid "A tour via western constellations."
-#~ msgstr "A tour via western constellations."
-
-#~ msgid "Look at Sun from big planets of Solar system and Pluto."
-#~ msgstr "Look at Sun from big planets of Solar system and Pluto."
-
-#~ msgid "Show equator line"
-#~ msgstr "Show equator line"
-
-#~ msgid "Show meridian line"
-#~ msgstr "Show meridian line"
-
-#~ msgid "Show ecliptic line"
-#~ msgstr "Show ecliptic line"
-
-#~ msgid "Show horizon line"
-#~ msgstr "Show horizon line"
-
-#~ msgid "Show Galactic plane line"
-#~ msgstr "Show Galactic plane line"
-
-#~ msgid "Additional information 3"
-#~ msgstr "Additional information 3"
-
-#~ msgid "Additional information 1"
-#~ msgstr "Additional information 1"
-
-#~ msgid "Additional information 2"
-#~ msgstr "Additional information 2"
-
-#~ msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-#~ msgstr "Geocentric equatorial coordinates, equinox of J2000.0"
-
-#~ msgid "Geocentric equatorial coordinates, equinox of date"
-#~ msgstr "Geocentric equatorial coordinates, equinox of date"
-
-#~ msgid "Topocentric equatorial coordinates"
-#~ msgstr "Topocentric equatorial coordinates"
-
-#~ msgid ""
-#~ "A plugin that shows some historical supernovae brighter than 10 visual "
-#~ "magnitude."
-#~ msgstr ""
-#~ "A plugin that shows some historical supernovae brighter than 10 visual "
-#~ "magnitude."
-
-#~ msgid "The plug-in's key bindings can be edited in the General Tab."
-#~ msgstr "The plug-in's key bindings can be edited in the General Tab."
-
-#~ msgid ""
-#~ "The Quasars plugin provides visualization of some quasars brighter than 16 "
-#~ "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
-#~ "Galactic Nuclei\" (13th Ed.)"
-#~ msgstr ""
-#~ "The Quasars plugin provides visualisation of some quasars brighter than 16 "
-#~ "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
-#~ "Galactic Nuclei\" (13th Ed.)"
-
-#~ msgid "Display mode for pulsars"
-#~ msgstr "Display mode for pulsars"
-
-#~ msgid ""
-#~ "You can choose to scale the image you see on the screen.  This is intended "
-#~ "to show you a better comparison of what one eyepiece/telescope combination "
-#~ "will be like as compared to another.  The same eyepiece in two different "
-#~ "telescopes of differing focal length will produce two different exit "
-#~ "circles, changing the view someone.  The trade-off of this is that, with the "
-#~ "image scaled, a good deal of the screen can be wasted.  Therefore I "
-#~ "recommend that you leave it off, unless you feel you have a need of it."
-#~ msgstr ""
-#~ "You can choose to scale the image you see on the screen.  This is intended "
-#~ "to show you a better comparison of what one eyepiece/telescope combination "
-#~ "will be like as compared to another.  The same eyepiece in two different "
-#~ "telescopes of differing focal length will produce two different exit "
-#~ "circles, changing the view someone.  The trade-off of this is that, with the "
-#~ "image scaled, a good deal of the screen can be wasted.  Therefore I "
-#~ "recommend that you leave it off, unless you feel you have a need of it."
-
-#~ msgid ""
-#~ "A plugin that shows some historical supernovae brighter than visual "
-#~ "magnitude 10: "
-#~ msgstr ""
-#~ "A plugin that shows some historical supernovae brighter than visual "
-#~ "magnitude 10: "
-
-#, qt-format
-#~ msgid ""
-#~ "If you want read full information about plugin, his history and format of "
-#~ "catalog you can %1get info here%2."
-#~ msgstr ""
-#~ "If you want read full information about plugin, his history and format of "
-#~ "catalogue you can %1get info here%2."
-
-#~ msgid "Display mode for quasars"
-#~ msgstr "Display mode for quasars"
-
-#~ msgid "Observability analysis"
-#~ msgstr "Observability analysis"
-
-#~ msgid "No Acronychal rise/set."
-#~ msgstr "No Acronychal rise/set."
-
-#~ msgid "Largest Sun separation: "
-#~ msgstr "Largest Sun separation: "
-
-#~ msgid "Acronychal rise/set"
-#~ msgstr "Acronychal rise/set"
-
-#~ msgid "Cosmical rise/set"
-#~ msgstr "Cosmical rise/set"
-
-#~ msgid ""
-#~ "The Acronychal rise (or set) of an object happens when the object rises (or "
-#~ "sets) just when the Sun sets (or rises), respectively. The exact dates of "
-#~ "these ephemeris depend on the Observer's location. The dates between the "
-#~ "Acronychal set and rise are those when the altitude of the celestial object "
-#~ "uses to be high when the Sun is well below the horizon (hence the object can "
-#~ "be well observed). On the contrary, the Cosmical rise (or set) happens when "
-#~ "both, the object and the Sun, rise (or set) simultaneously. It is obvious "
-#~ "that the source is hardly observable (or not observable at all) in the dates "
-#~ "between Cosmical set and rise."
-#~ msgstr ""
-#~ "The Acronychal rise (or set) of an object happens when the object rises (or "
-#~ "sets) just when the Sun sets (or rises), respectively. The exact dates of "
-#~ "these ephemeris depend on the Observer's location. The dates between the "
-#~ "Acronychal set and rise are those when the altitude of the celestial object "
-#~ "uses to be high when the Sun is well below the horizon (hence the object can "
-#~ "be well observed). On the contrary, the Cosmical rise (or set) happens when "
-#~ "both, the object and the Sun, rise (or set) simultaneously. It is obvious "
-#~ "that the source is hardly observable (or not observable at all) in the dates "
-#~ "between Cosmical set and rise."
-
-#~ msgid "Acronychal/Cosmical rise/set:"
-#~ msgstr "Acronychal/Cosmical rise/set:"
-
-#~ msgid "Showing Options"
-#~ msgstr "Showing Options"
-
-#~ msgid "deg."
-#~ msgstr "deg."
-
-#~ msgid "Sun altitude at twilight"
-#~ msgstr "Sun altitude at twilight"
-
-#~ msgid "Dates of Acronychal and Cosmical rise/set"
-#~ msgstr "Dates of Acronychal and Cosmical rise/set"
-
-#~ msgid ""
-#~ "This script shows the analemma - the path of the Sun across the sky during "
-#~ "the year."
-#~ msgstr ""
-#~ "This script shows the analemma - the path of the Sun across the sky during "
-#~ "the year."
-
-#~ msgid "Return to default"
-#~ msgstr "Return to default"
-
-#~ msgid "Analemma"
-#~ msgstr "Analemma"
-
-#~ msgid ""
-#~ "Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
-#~ "need enable plugin for supernovae."
-#~ msgstr ""
-#~ "Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
-#~ "need enable plug-in for supernovae."
-
-#~ msgid "0 deg."
-#~ msgstr "0 deg."
-
-#, qt-format
-#~ msgid " (at %1 deg.)"
-#~ msgstr " (at %1 deg.)"
-
-#~ msgid ""
-#~ "Reports an analysis of source observability (rise, set, and transit times), "
-#~ "as well as the epochs of year when the source is best observed. It assumes "
-#~ "that a source is observable if it is above the horizon during a fraction of "
-#~ "the night. The plugin also gives the day for largest separation from the Sun "
-#~ "and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
-#~ "the quantities shown by this script is given in the 'About' tab of the "
-#~ "configuration window"
-#~ msgstr ""
-#~ "Reports an analysis of source observability (rise, set, and transit times), "
-#~ "as well as the epochs of year when the source is best observed. It assumes "
-#~ "that a source is observable if it is above the horizon during a fraction of "
-#~ "the night. The plug-in also gives the day for largest separation from the "
-#~ "Sun and the days of Acronychal and Cosmical rise/set.<br><br> An explanation "
-#~ "of the quantities shown by this script is given in the 'About' tab of the "
-#~ "configuration window"
-
-#~ msgid "Nights above horizon: "
-#~ msgstr "Nights above horizon: "
-
-#~ msgid "Greatest elongation: "
-#~ msgstr "Greatest elongation: "
-
-#~ msgid "Longitude/Latitude (J2000)"
-#~ msgstr "Longitude/Latitude (J2000)"
-
-#, qt-format
-#~ msgid "Galactic longitude/latitude (J2000): %1/%2"
-#~ msgstr "Galactic longitude/latitude (J2000): %1/%2"
-
-#~ msgid "Galactic coordinates, equinox of J2000.0"
-#~ msgstr "Galactic coordinates, equinox of J2000.0"
-
-#~ msgid "F7"
-#~ msgstr "F7"
-
-#~ msgid "Show and edit all keyboard shortcuts"
-#~ msgstr "Show and edit all keyboard shortcuts"
-
-#~ msgid "Angle Measure Plugin"
-#~ msgstr "Angle Measure Plug-in"
-
-#~ msgid "Compass Marks Plugin"
-#~ msgstr "Compass Marks Plug-in"
-
-#~ msgid "Oculars Plugin"
-#~ msgstr "Oculars Plug-in"
-
-#~ msgid "Observability analysis Plugin"
-#~ msgstr "Observability analysis Plug-in"
-
-#~ msgid "Show and zoom Moon"
-#~ msgstr "Show and zoom Moon"
-
-#~ msgid "Historical Supernovae Plugin"
-#~ msgstr "Historical Supernovae Plug-in"
-
-#~ msgid "Quasars Plugin"
-#~ msgstr "Quasars Plug-in"
-
-#~ msgid "Pulsars Plugin"
-#~ msgstr "Pulsars Plug-in"
-
-#~ msgid "Run landscapes script from file"
-#~ msgstr "Run landscapes script from file"
-
-#~ msgid "Telescope Control Plugin"
-#~ msgstr "Telescope Control Plug-in"
-
-#~ msgid "Render Solar Shadows"
-#~ msgstr "Render Solar Shadows"
-
-#~ msgid "Edit Alternative Shortcut"
-#~ msgstr "Edit Alternative Shortcut"
-
-#~ msgid "Satellites Plugin"
-#~ msgstr "Satellites Plug-in"
-
-#~ msgid "Exoplanets Plugin"
-#~ msgstr "Exoplanets Plug-in"
-
-#~ msgid "Edit Primary Shortcut"
-#~ msgstr "Edit Primary Shortcut"
-
-#~ msgid "Makemake"
-#~ msgstr "Makemake"
-
-#~ msgid "Varuna"
-#~ msgstr "Varuna"
-
-#, qt-format
-#~ msgid "Ecliptic Topocentric (of date): %1/%2"
-#~ msgstr "Ecliptic Topocentric (of date): %1/%2"
-
-#, qt-format
-#~ msgid "Obliquity (of date, for Earth): %1"
-#~ msgstr "Obliquity (of date, for Earth): %1"
-
-#~ msgid ""
-#~ "A demonstration of the analemma - the path of the Sun across the sky during "
-#~ "the year."
-#~ msgstr ""
-#~ "A demonstration of the analemma - the path of the Sun across the sky during "
-#~ "the year."
-
-#~ msgid "Subtract 1 mean tropical century"
-#~ msgstr "Subtract 1 mean tropical century"
-
-#~ msgid "Subtract 1 sidereal century"
-#~ msgstr "Subtract 1 sidereal century"
-
-#~ msgid "Add 1 mean tropical century"
-#~ msgstr "Add 1 mean tropical century"
-
-#~ msgid "Add 1 sidereal century"
-#~ msgstr "Add 1 sidereal century"
-
-#~ msgid "plutoid"
-#~ msgstr "plutoid"
-
-#~ msgid "Sun altitude at twilight: 0 deg."
-#~ msgstr "Sun altitude at twilight: 0 deg."
-
-#~ msgid "Horizon altitude: 0 deg."
-#~ msgstr "Horizon altitude: 0 deg."
-
-#~ msgid "Dark Nebula"
-#~ msgstr "Dark Nebula"
-
-#~ msgid "Display the equatorial position (J2000 ref)"
-#~ msgstr "Display the equatorial position (J2000 ref)"
-
-#~ msgid "Display  info about an absolute magnitude"
-#~ msgstr "Display info about an absolute magnitude"
-
-#~ msgid "Display the equatorial position (of date)"
-#~ msgstr "Display the equatorial position (of date)"
-
-#~ msgid "The equatorial coordinates (J2000 ref)"
-#~ msgstr "The equatorial coordinates (J2000 ref)"
-
-#~ msgid "Custom Info Settings"
-#~ msgstr "Custom Info Settings"
-
-#~ msgid "Display info about an object's name"
-#~ msgstr "Display info about an object's name"
-
-#~ msgid "An object's name"
-#~ msgstr "An object's name"
-
-#~ msgid "Catalog numbers"
-#~ msgstr "Catalogue numbers"
-
-#~ msgid "Display  info about a visual magnitude"
-#~ msgstr "Display info about a visual magnitude"
-
-#~ msgid "Display the altitude and azimuth position"
-#~ msgstr "Display the altitude and azimuth position"
-
-#~ msgid "The equatorial coordinates (of date)"
-#~ msgstr "The equatorial coordinates (of date)"
-
-#~ msgid "Display the hour angle + DE (of date)"
-#~ msgstr "Display the hour angle + DE (of date)"
-
-#~ msgid "The alt-azimuthal coordinates"
-#~ msgstr "The alt-azimuthal coordinates"
-
-#~ msgid "Display info about an object's size"
-#~ msgstr "Display info about an object's size"
-
-#~ msgid "Object's distance"
-#~ msgstr "Object's distance"
-
-#~ msgid "Display info about an object's distance"
-#~ msgstr "Display info about an object's distance"
-
-#~ msgid "The hour angle"
-#~ msgstr "The hour angle"
-
-#~ msgid "Object's size"
-#~ msgstr "Object's size"
-
-#~ msgid "Additional info (Extra 2)"
-#~ msgstr "Additional info (Extra 2)"
-
-#~ msgid "Additional info (Extra 1)"
-#~ msgstr "Additional info (Extra 1)"
-
-#~ msgid "Additional info (Extra 3)"
-#~ msgstr "Additional info (Extra 3)"
-
-#~ msgid ""
-#~ "with a mean error of less than one second, max. error 1.9s, and meaningless "
-#~ "values outside this range"
-#~ msgstr ""
-#~ "with a mean error of less than one second, max. error 1.9s, and meaningless "
-#~ "values outside this range"
-
-#~ msgid "Hourly zenith rate"
-#~ msgstr "Hourly zenith rate"
-
-#~ msgid "Limit Magnitudes (for unaided/binocular observers)"
-#~ msgstr "Limit Magnitudes (for unaided/binocular observers)"
-
-#~ msgid "with meaningless values outside this range"
-#~ msgstr "with meaningless values outside this range"
-
-#~ msgid "Limit Magnitudes"
-#~ msgstr "Limit Magnitudes"
-
-#, qt-format
-#~ msgid "Epoch for minimum light: %1 JD"
-#~ msgstr "Epoch for minimum light: %1 JD"
-
-#, qt-format
-#~ msgid "Epoch for maximum light: %1 JD"
-#~ msgstr "Epoch for maximum light: %1 JD"
-
-#~ msgid ""
-#~ "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-#~ msgstr ""
-#~ "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-
-#~ msgid ""
-#~ "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-#~ msgstr ""
-#~ "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-
-#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-#~ msgstr "Earth Greatest Elongations from Jupiter 2000-3000"
-
-#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-#~ msgstr "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-
-#~ msgid "Earth Events from Venus"
-#~ msgstr "Earth Events from Venus"
-
-#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
-#~ msgstr "Earth Greatest Elongations and Brilliancies from Mars"
-
-#~ msgctxt "Deep-sky objects"
-#~ msgid "DSOs"
-#~ msgstr "DSOs"
-
-#~ msgctxt "Zenithal Hourly Rate"
-#~ msgid "ZHR:"
-#~ msgstr "ZHR:"
-
-#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
-#~ msgstr "Earth and Mars Greatest Elongations from Jupiter"
-
-#~ msgid "1000"
-#~ msgstr "1000"
-
-#~ msgid "IAU Comission 53: Extrasolar Planets"
-#~ msgstr "IAU Comission 53: Extrasolar Planets"
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
-#~ msgstr ""
-#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
-
-#~ msgid "Use brightness settings for landscapes"
-#~ msgstr "Use brightness settings for landscapes"
-
-#~ msgid ""
-#~ "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
-#~ "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
-#~ "0.3 in all cases)."
-#~ msgstr ""
-#~ "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
-#~ "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
-#~ "0.3 in all cases)."
-
-#~ msgid ""
-#~ "This plugin can display potential habitable exoplanets (orange marker) and "
-#~ "some information about those planets - habitable class, mean surface "
-#~ "temperature and Earth Similarity Index."
-#~ msgstr ""
-#~ "This plugin can display potential habitable exoplanets (orange marker) and "
-#~ "some information about those planets - habitable class, mean surface "
-#~ "temperature and Earth Similarity Index."
-
-#~ msgid "Habitable Class"
-#~ msgstr "Habitable Class"
-
-#~ msgid ""
-#~ "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
-#~ "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
-#~ "medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
-#~ "or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
-#~ "life, whereas class O or E would only support extremophilic life. Non-"
-#~ "habitable planets are simply given the class X (or NH)."
-#~ msgstr ""
-#~ "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
-#~ "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
-#~ "medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
-#~ "or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
-#~ "life, whereas class O or E would only support extremophilic life. Non-"
-#~ "habitable planets are simply given the class X (or NH)."
-
-#~ msgid "Mean Surface Temperature"
-#~ msgstr "Mean Surface Temperature"
-
-#~ msgid "Mean surface temp."
-#~ msgstr "Mean surface temp."
-
-#~ msgid "Habitable class"
-#~ msgstr "Habitable class"
-
-#~ msgid "Daphne"
-#~ msgstr "Daphne"
-
-#~ msgid "Great Comet of 1680 (C/1680 V1)"
-#~ msgstr "Great Comet of 1680 (C/1680 V1)"
-
-#~ msgid ""
-#~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
-#~ "also tabulated in the Nautical Almanac."
-#~ msgstr ""
-#~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
-#~ "also tabulated in the Nautical Almanac."
-
-#, qt-format
-#~ msgid "Set FOV to %1%2"
-#~ msgstr "Set FOV to %1%2"
-
-#, qt-format
-#~ msgid "This version of Stellarium is outdated! Latest version is %1."
-#~ msgstr "This version of Stellarium is outdated! Latest version is %1."
-
-#~ msgid "This is latest stable version of Stellarium."
-#~ msgstr "This is latest stable version of Stellarium."
-
-#, qt-format
-#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
-#~ msgstr "Ecliptic Topocentric (of J2000): %1/%2"
-
-#~ msgid "Oops... Stellarium can't check latest version."
-#~ msgstr "Oops... Stellarium can't check latest version."
-
-#~ msgid "Looks like you are using the development version of Stellarium."
-#~ msgstr "Looks like you are using the development version of Stellarium."
-
-#~ msgid "Equatorial grid (on J2000)"
-#~ msgstr "Equatorial grid (on J2000)"
-
-#~ msgid ""
-#~ "Enable checking updates of Stellarium via Internet. Info for updates of "
-#~ "stable versions you can look on the tab \"About\" of \"Help\" window."
-#~ msgstr ""
-#~ "Enable checking updates of Stellarium via Internet. Info for updates of "
-#~ "stable versions you can look on the tab \"About\" of \"Help\" window."
-
-#~ msgid "Check updates"
-#~ msgstr "Check updates"
-
-#~ msgid "Ecliptic grid (on J2000)"
-#~ msgstr "Ecliptic grid (on J2000)"
-
-#~ msgid ""
-#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
-#~ msgstr ""
-#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
-
-#~ msgid "Ecliptic coordinates"
-#~ msgstr "Ecliptic coordinates"
-
-#~ msgid "Equatorial grid (on date)"
-#~ msgstr "Equatorial grid (on date)"
-
-#, qt-format
-#~ msgid "Surface brightness: <b>%1</b>"
-#~ msgstr "Surface brightness: <b>%1</b>"
-
-#, qt-format
-#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-#~ msgstr "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-
-#~ msgid ""
-#~ "This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
-#~ "stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
-#~ "by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
-#~ "1958; consequently, these stars are also used in navigational aids such as "
-#~ "the 2102D Star Finder and Identifier."
-#~ msgstr ""
-#~ "This plugin marks 58 navigational stars - Polaris and the 57 \"selected "
-#~ "stars\" that are listed in <em>The Nautical Almanac</em> jointly published "
-#~ "by Her Majesty's Nautical Almanac Office and the US Naval Observatory since "
-#~ "1958; consequently, these stars are also used in navigational aids such as "
-#~ "the 2102D Star Finder and Identifier."
-
-#~ msgid "Active"
-#~ msgstr "Active"
-
-#~ msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
-#~ msgstr "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
-
-#~ msgid "Illumination"
-#~ msgstr "Illumination"
-
-#~ msgid "Use flip for CCD"
-#~ msgstr "Use flip for CCD"
-
-#~ msgid "Show names"
-#~ msgstr "Show names"
-
-#~ msgid ""
-#~ "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
-#~ "older version."
-#~ msgstr ""
-#~ "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
-#~ "older version."
-
-#~ msgid "Cannot acquire necessary OpenGL resources."
-#~ msgstr "Cannot acquire necessary OpenGL resources."
-
-#~ msgid "Display a derived class-specific extra fields"
-#~ msgstr "Display derived class-specific extra fields"
-
-#~ msgid "Display  info about a catalog numbers"
-#~ msgstr "Display info about catalogue numbers"
-
-#~ msgid "Reload shaders"
-#~ msgstr "Reload shaders"
-
-#~ msgid "Show horizon line."
-#~ msgstr "Show horizon line."
-
-#, qt-format
-#~ msgid "Distance: %1 %2"
-#~ msgstr "Distance: %1 %2"
-
-#~ msgid "AstroCalc window"
-#~ msgstr "AstroCalc window"
-
-#~ msgid "JD"
-#~ msgstr "JD"
-
-#~ msgid "Mag."
-#~ msgstr "Mag."
-
-#~ msgid "Catalog of galaxies"
-#~ msgstr "Catalog of galaxies"
-
-#~ msgid "Planetary Nebulae"
-#~ msgstr "Planetary Nebulae"
-
-#~ msgid "Dark Nebulae"
-#~ msgstr "Dark Nebulae"
-
-#~ msgid "Bright Nebulae"
-#~ msgstr "Bright Nebulae"
-
-#~ msgid "Planetary positions every 5 minutes."
-#~ msgstr "Planetary positions every 5 minutes."
-
-#~ msgid ""
-#~ "Activate this option to calculate azimuth from south towards west (as in old "
-#~ "astronomical literature)."
-#~ msgstr ""
-#~ "Activate this option to calculate azimuth from south towards west (as in old "
-#~ "astronomical literature)."
-
-#~ msgid "Planetary positions"
-#~ msgstr "Planetary positions"
-
-#~ msgid "AstroCalc"
-#~ msgstr "AstroCalc"
-
-#~ msgid "yyyy.MM.dd"
-#~ msgstr "yyyy.MM.dd"
-
-#~ msgid "Show Solar System objects"
-#~ msgstr "Show Solar System objects"
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 261 events in all!"
-#~ msgstr ""
-#~ "Screensaver of various happenings in the Solar System. 261 events in all!"
-
-#~ msgid "Angular Distance, arcsec."
-#~ msgstr "Angular Distance, arcsec."
-
-#~ msgid ""
-#~ "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
-#~ "was contributed by Auke Slotegraaf."
-#~ msgstr ""
-#~ "The Jack Bennett Catalogue of Southern Deep-Sky Objects. The Bennett "
-#~ "Catalogue was contributed by Auke Slotegraaf."
-
-#~ msgid ""
-#~ "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
-#~ "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
-#~ msgstr ""
-#~ "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
-#~ "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
-
-#, qt-format
-#~ msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-#~ msgstr "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-
-#~ msgid "Show Line for Custom Azimuth 1"
-#~ msgstr "Show Line for Custom Azimuth 1"
-
-#~ msgid "Show Line for Custom Azimuth 2"
-#~ msgstr "Show Line for Custom Azimuth 2"
-
-#~ msgid "Show Line for Geographic Location 2"
-#~ msgstr "Show Line for Geographic Location 2"
-
-#~ msgid "Show Line for Geographic Location 1"
-#~ msgstr "Show Line for Geographic Location 1"
-
-#~ msgid "Show markers of positions"
-#~ msgstr "Show markers of positions"
-
-#~ msgid "Update of planetary positions"
-#~ msgstr "Update of planetary positions"
-
-#~ msgid "Show dates of positions"
-#~ msgstr "Show dates of positions"
-
-#~ msgid "Select a file to replace the Solar System configuration file"
-#~ msgstr "Select a file to replace the Solar System configuration file"
-
-#~ msgid "Save the Solar System configuration file as..."
-#~ msgstr "Save the Solar System configuration file as..."
-
-#~ msgid "Angular velocity of the proper motion"
-#~ msgstr "Angular velocity of the proper motion"
