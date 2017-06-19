@@ -656,8 +656,9 @@ The following list describes sources and a few details about the models for $\De
   F. R. Stephenson,  L. V. Morrison and C. Y. Hohenkerk in the article 
   ``Measurement of the Earth’s rotation: 720 BC to AD 2015''~\cite{StephensonMorrisonHohenkerk:2016}. 
   The solution combines a spline fit to observations (used between the given limits) 
-  with a parabolic fit (used outside the range).
-  Recommended range of usage: between years -720 and 2016. $\dot{n}=-25.82''/\cy^2$.
+  with a parabolic fit (used as fallback outside the range, but without smooth transitions at the limits, i.e., 
+  values for 2016 and later deviate notably from current estimates, and should not be used for dates after 2015).
+  Recommended range of usage: between years -720.0 and 2016.0 $\dot{n}=-25.82''/\cy^2$.
   
 \item[Espenak \& Meeus (2006).] This solution\footnote{This solution
     is used by default.} by F. Espenak and J. Meeus, based on Morrison
