@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 16:41+0700\n"
-"PO-Revision-Date: 2017-06-18 04:45+0000\n"
+"POT-Creation-Date: 2017-06-18 13:16+0700\n"
+"PO-Revision-Date: 2017-06-18 09:58+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-18 05:25+0000\n"
+"X-Launchpad-Export-Date: 2017-06-19 05:23+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 "Language: bn\n"
 
@@ -2933,7 +2933,7 @@ msgstr "প্রবল উল্কা বৃষ্টির হার"
 
 #: src/gui/ViewDialog.cpp:1480
 msgid "Exceptional Draconid rate"
-msgstr "ড্রাকো মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
+msgstr "ড্রাগন মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
 #: src/gui/ViewDialog.cpp:1482
 msgid "Exceptional Leonid rate"
@@ -3283,7 +3283,7 @@ msgstr "বিষুবলম্ব (J2000 অনুযায়ী):"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:286
 msgid "opacity"
-msgstr ""
+msgstr "স্বচ্ছতা"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:291 src/gui/AstroCalcDialog.cpp:728
@@ -3298,7 +3298,7 @@ msgstr "চ্যুতি"
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:301
 msgid "per."
-msgstr ""
+msgstr "সময়কাল"
 
 #: src/gui/AstroCalcDialog.cpp:301
 msgctxt "days"
@@ -3621,7 +3621,7 @@ msgstr "বেশি সরণ যুক্ত উজ্জ্বল নক্�
 
 #: src/gui/AstroCalcDialog.cpp:399
 msgid "Solar system objects"
-msgstr ""
+msgstr "সৌরজগতের জ্যোতিষ্কসমূহ"
 
 #: src/gui/AstroCalcDialog.cpp:448
 #, qt-format
@@ -3989,7 +3989,7 @@ msgstr "দৃশ্যপটের ছবি সংরক্ষণ"
 
 #: src/StelMainView.cpp:764
 msgid "Reload shaders (for development)"
-msgstr ""
+msgstr "নতুন করে প্রতিকৃতি গঠন করুন"
 
 #: src/StelMainView.cpp:765
 msgid "Full-screen mode"
@@ -4198,400 +4198,405 @@ msgstr "মিশরীয়"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:219
+msgid "Hawaiian Starlines"
+msgstr "হাওয়াই"
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:221
 msgid "Inuit"
 msgstr "ইনুইটিয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:221
+#: src/translations.h:223
 msgid "Indian Vedic"
 msgstr "বৈদিক ভারতীয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:223
+#: src/translations.h:225
 msgid "Japanese Moon Stations"
 msgstr "জাপানী - চাঁদ সম্পর্কীত"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:225
+#: src/translations.h:227
 msgid "Kamilaroi/Euahlayi"
 msgstr "কামিলারোই/ইউয়ালেই"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:227
+#: src/translations.h:229
 msgid "Korean"
 msgstr "কোরীয়ান"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Dakota/Lakota/Nakota"
 msgstr "ডাকোটা/লাকোটা/নাকোটা"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:231
+#: src/translations.h:233
 msgid "Macedonian"
 msgstr "ম্যাসিডোনীয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:233
+#: src/translations.h:235
 msgid "Maori"
 msgstr "মাওরী"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:235
+#: src/translations.h:237
 msgid "Mongolian"
 msgstr "মোঙ্গোলীয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:237
+#: src/translations.h:239
 msgid "Navajo"
 msgstr "নাভাজো"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:239
+#: src/translations.h:241
 msgid "Norse"
 msgstr "নর দেশীয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:241
+#: src/translations.h:243
 msgid "Ojibwe"
 msgstr "ওজিবোয়ে"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:243
+#: src/translations.h:245
 msgid "Polynesian"
 msgstr "পলিনেশীয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:245
+#: src/translations.h:247
 msgid "Romanian"
 msgstr "রোমানীয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:247
+#: src/translations.h:249
 msgid "Sami"
 msgstr "সামী"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:249
+#: src/translations.h:251
 msgid "Sardinian"
 msgstr "সার্ডিনীয়"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:251
+#: src/translations.h:253
 msgid "Siberian"
 msgstr "সাইবেরিয়ান"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:253
+#: src/translations.h:255
 msgid "Tukano"
 msgstr "টুকানো"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:255
+#: src/translations.h:257
 msgid "Tupi-Guarani"
 msgstr "তাপী-গুয়ারানী"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:257
+#: src/translations.h:259
 msgid "Tongan"
 msgstr "তোংয়া"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:259
+#: src/translations.h:261
 msgid "Western"
 msgstr "পশ্চিমী"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:261
+#: src/translations.h:263
 msgid "Western (H.A.Rey)"
 msgstr "পশ্চিমী (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:267
+#: src/translations.h:269
 msgid "Guereins"
 msgstr "গুয়েরেইন"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:269
+#: src/translations.h:271
 msgid "Trees"
 msgstr "উদ্যান"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
+#: src/translations.h:273 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
 msgid "Moon"
 msgstr "চাঁদ"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:273
+#: src/translations.h:275
 msgid "Hurricane"
 msgstr "হ্যরিকেন"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:275
+#: src/translations.h:277
 msgid "Ocean"
 msgstr "সমুদ্র"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:277
+#: src/translations.h:279
 msgid "Garching"
 msgstr "গারচিং"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
+#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 msgid "Mars"
 msgstr "মঙ্গল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
+#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
 msgid "Jupiter"
 msgstr "বৃহস্পতি"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
+#: src/translations.h:285 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
 msgid "Saturn"
 msgstr "শনি"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:285
+#: src/translations.h:287
 msgid "Uranus"
 msgstr "ইউরেনাস"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:287
+#: src/translations.h:289
 msgid "Neptune"
 msgstr "নেপচুন"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:289
+#: src/translations.h:291
 msgid "Geneva"
 msgstr "জেনিভা"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:291
+#: src/translations.h:293
 msgid "Grossmugl"
 msgstr "গ্রসমুগল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:293
+#: src/translations.h:295
 msgid "Zero Horizon"
 msgstr "সোজাসাপটা"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:298
+#: src/translations.h:300
 msgid "Vienna Sterngarten"
 msgstr "ভিয়েনা স্টার্নগার্টেন"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:300
+#: src/translations.h:302
 msgid "Testscene"
 msgstr "পরীক্ষামূলক"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "Landscape Tour"
 msgstr "ভূমিরূপগুলি ঘুরে দেখা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "Partial Lunar Eclipse"
 msgstr "খন্ডগ্রাস চন্দ্রগ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Total Lunar Eclipse"
 msgstr "পূর্ণগ্রাস চন্দ্রগ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Screensaver"
 msgstr "স্ক্রীনসেভার (Screensaver)"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Solar Eclipse 2009"
 msgstr "২০০৯ এর সূর্যগ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:317
 msgid "Startup Script"
 msgstr "শুরুর কার্যলিপি"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:319
 msgid "Zodiac"
 msgstr "রাশিচক্র"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:321
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "বুধের আকাশে এক দিনে তিনটি সূর্যোদয় ও সূর্যাস্ত"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "Double eclipse from Deimos in 2017"
 msgstr "ডিমোসের আকাশে দৃশ্যমান ২০১৭ এর দ্বৈত গ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Double eclipse from Deimos in 2031"
 msgstr "ডিমোসের আকাশে দৃশ্যমান ২০৩১ এর দ্বৈত গ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 "১০ই জানুয়ারি, ২০৬৮ সালে অলিম্পাস পর্বত থেকে মঙ্গলের আকাশে দৃশ্যমান গ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "২০৪৮ সাল : পৃথিবী ও বৃহস্পতির সমাপতন"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "ডিমোসের আকাশে দৃশ্যমান ২০২৭ এর ২টি গ্রহণ ও ৩টি সরণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar System Screensaver"
 msgstr "সৌরজগত স্ক্রিনসেভার"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Constellations Tour"
 msgstr "তারামণ্ডল গুলি ঘুরে দেখা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Sun from different planets"
 msgstr "অন্যান্য গ্রহগুলির আকাশে সূর্যের দৃশ্যমান চেহারা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Earth best views from other bodies"
 msgstr "অন্যান্য গ্রহ উপগ্রহ থেকে পৃথিবীর দৃশ্যমান চেহারা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Transit of Venus"
 msgstr "শুক্রের সরণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Sky Culture Tour"
 msgstr "মহাকাশচর্চার নানা সংস্কৃতিগুলি ঘুরে দেখা"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Earth Events from Mercury"
 msgstr "বুধের আকাশে পৃথিবীর কার্যকলাপ"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Earth Events from a floating city on Venus"
 msgstr "শুক্রের আকাশে পৃথিবীর কার্যকলাপ"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "Earth Events from Mars"
 msgstr "মঙ্গলের আকাশে পৃথিবীর কার্যকলাপ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "মঙ্গলের আকাশে পৃথিবী ও অন্য গ্রহের প্রতিযোগ ও সর্বোচ্চ অবস্থান"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "ক্যালিস্টোর আকাশে মঙ্গল ও পৃথিবীর সর্বোচ্চ অবস্থান ও তাদের সরণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Tycho's Supernova"
 msgstr "টাইকোর অতিনোভা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth and other Planets from Ceres"
 msgstr "সেরেসের আকাশে পৃথিবী ও অন্য গ্রহেরা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Messier Objects Tour"
 msgstr "মেসিয়ার জ্যোতিষ্ক গুলি ঘুরে দেখা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Binocular Highlights"
 msgstr "দূরবীন দিয়ে দেখা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "খালি চোখে দৃশ্যমান ২০টি বিচিত্র দ্বৈত তারা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "List of largest known stars"
 msgstr "প্রকান্ড তারাদের তালিকা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Herschel 400 Tour"
 msgstr "হার্শেল ৪০০ তালিকা ঘুরে দেখা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "দূরবীনাকাশ : দূরবীনে দেখতে পাওয়া মহাজাগতিক জ্যোতিষ্ক"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "The Jack Bennett Catalog"
 msgstr "জ্যাক বেনেট তালিকা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Best objects in the New General Catalog"
 msgstr "নতুন সাধারণ তালিকার সর্বোৎকৃষ্ট জ্যোতিষ্ক সমূহ"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Look around each installed landscape."
 msgstr "সবকটি ভূমিরূপ ঘুরে দেখুন ।"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "Look at each installed sky culture."
 msgstr "মহাকাশচর্চার বিভিন্ন সংস্কৃতিগুলি ঘুরে দেখুন ।"
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "খন্ডগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "পূর্ণগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "ধীরসুস্থে অসীম মহাকাশের পরিভ্রমণ ।"
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 "২০০৯ এর পূর্ণগ্রাস সূর্যগ্রহণ দেখানোর কার্যলিপি । (বাংলাদেশের রংপুর থেকে)"
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid "Script which runs automatically at startup"
 msgstr "প্রারম্ভে স্বয়ংক্রিয়রূপে সঞ্চালিত কার্যলিপি"
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -4600,7 +4605,7 @@ msgstr ""
 "এই কার্যলিপিটি রাশিচক্রগুলি দেখায় মানে সেই সমস্ত নক্ষত্রমন্ডলগুলি, যারা "
 "সৌরপথের উপর পড়ে ।"
 
-#: src/translations.h:386
+#: src/translations.h:388
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -4608,7 +4613,7 @@ msgstr ""
 "বার্ষিক ও আহ্নিক গতির অদ্ভূত বিশিষ্টতার জন্য বুধের কোথাও কোথাও এক দিনে "
 "তিনবার সূর্যোদয় ও সূর্যাস্ত হয় ।"
 
-#: src/translations.h:387
+#: src/translations.h:389
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -4616,7 +4621,7 @@ msgstr ""
 "২৬ শে এপ্রিল, ২০১৭ সাল : বৃশ্চিক ও ধনু রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:388
+#: src/translations.h:390
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -4624,13 +4629,13 @@ msgstr ""
 "২৩ শে এপ্রিল, ২০৩১ সাল : বৃষ ও মিথুন রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "১০ই জানুয়ারি, ২০৬৮ সালে মঙ্গলের অলিম্পাস পর্বত থেকে ফোবস দ্বারা সূর্যের "
 "গ্রহণ দেখা য়ায ।"
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -4639,7 +4644,7 @@ msgstr ""
 "ফোবোস-পৃথিবী সমাপতন ও ফোবোস-বৃহস্পতি সমাপতন খুবই সাধারণ ব্যাপার । তবে একসাথে "
 "একই দিনে দুটো ঘটা খুবই দুর্লভ, যার একটা ২৩/০১/২০৪৮ তে হবে ।"
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4653,32 +4658,32 @@ msgstr ""
 "এরপর মঙ্গল সূর্যের পূর্ণ গ্রহণ ঘটায়, আর ফোবোস মঙ্গলের ছায়ায় ঢাকা পড়ে যায় । "
 "ফোবসের নিষ্ক্রমণের পরও তা মঙ্গলের ছায়ায় আরও কিছু সময় অনুজ্জ্বল হয়ে থাকে ।"
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr "উল্লেখযোগ্য কিছু ঘটনা (মোট ২৮৭টি) !"
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "A tour of the western constellations."
 msgstr "এটি পশ্চিমী সংস্কৃতির তারামন্ডলগুলির একটি ভ্রমণ মাত্র ।"
 
-#: src/translations.h:394
+#: src/translations.h:396
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "প্লুটো ও সৌরজগতের বড় গ্রহগুলি থেকে সূর্যকে দেখা ।"
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "এটি (একবিংশ শতাব্দীতে) সৌরজগতের অন্যান্য বস্তুগুলির আকাশে দৃশ্যমান পৃথিবীর "
 "শ্রেষ্ঠ দৃশ্যগুলির একটি সংগ্রহ ।"
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "৬ই জুন, ২০১২ সালে অস্ট্রেলিয়ার সিডনি থেকে দৃশ্যমান শুক্রের সরণটি দেখায় ।"
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -4686,7 +4691,7 @@ msgstr ""
 "১৫৭২ সালে টাইকো ব্রাহের দেখা অতিনোভা বিস্ফোরণটি দেখায় । তবে এক্ষেত্রে "
 "অতিনোভা সরঞ্জামটি অবশ্যই সক্রিয় থাকতে হবে ।"
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -4694,7 +4699,7 @@ msgstr ""
 "মঙ্গলের আকাশে পৃথিবী ও অন্য গ্রহের প্রতিযোগ ও সর্বোচ্চ অবস্থান (২০০০ থেকে "
 "৩০০০ সালের মধ্যে)"
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4707,7 +4712,7 @@ msgstr ""
 "বেষ্টনীর বাইরে অবস্থিত । তাই যদি কোনো দিন মানুষ বৃহস্পতির কাছে বসতি গড়ে তোলে "
 "তবে এটাই হবে সবচেয়ে আদর্শ স্থান ।"
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -4715,11 +4720,11 @@ msgstr ""
 "সেরেসের আকাশে পৃথিবী ও অন্য গ্রহের প্রতিযোগ ও সর্বোচ্চ অবস্থান (২০০০ থেকে "
 "৩০০০ সালের মধ্যে)"
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "A tour of Messier Objects"
 msgstr "মেসিয়ার জ্যোতিষ্ক গুলি পরপর ঘুরে দেখা"
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -4728,7 +4733,7 @@ msgstr ""
 "এটি দূরবীন দিয়ে রাতের আকাশ পর্যবেক্ষনের পথপ্রদর্শক হিসাবে কাজ করে । Gary "
 "Seronik এর লেখা বই অনুকরনে এই কার্যলিপিটি তৈরী করা হয়েছে ।"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -4739,15 +4744,15 @@ msgstr ""
 "কার্যলিপিটি সমস্ত তথ্য তাঁর ওয়েবসাইট http://www.astropix.com/doubles/ থেকে "
 "নেওয়া হয়েছে ।"
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "এর সাহায্যে প্রকান্ড তারাগুলির সম্পর্কে জানা যায় ।"
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "হার্শেল ৪০০ তালিকায় থাকা জ্যোতিষ্ক গুলি ঘুরে দেখা"
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -4757,7 +4762,7 @@ msgstr ""
 "Ben Crowell । বর্তমানে এই কার্যলিপিটিতে বিষুবাংশ (২০০০) অনুসারে পরপর ৩১টি "
 "জ্যোতিষ্ক অন্তর্ভুক্ত করা আছে ।"
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -4765,150 +4770,153 @@ msgstr ""
 "জ্যাক বেনেট প্রবর্তিত দক্ষিন গোলার্ধের ১৫২ টি মহাজাগতিক জ্যোতিষ্কের তালিকা । "
 "Auke Slotegraaf এটি যুক্ত করেছেন ।"
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
+"সর্বসেরা NGC achievement পুরস্কার প্রাপ্ত ই ১১১টি জ্যোতিষ্কের তালিকাটি তৈরী "
+"করেছেন A.J. Crayon এবং Steve Coe যা ফিনিক্সের সুগুয়ারো জ্যোতির্বৈজ্ঞানিক "
+"ক্লাবের সদস্যরা ব্যবহার করে থাকেন ।"
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "&Undo"
 msgstr "পূর্বা&বস্থায় ফিরুন"
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "&Redo"
 msgstr "পুনরা&য় করুন"
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Cu&t"
 msgstr "কেটে নি&ন"
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "&Copy"
 msgstr "&অনুকরন করুন"
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "&Paste"
 msgstr "অনুলে&পন করুন"
 
-#: src/translations.h:417 plugins/Oculars/src/ui_ocularDialog.h:1164
+#: src/translations.h:419 plugins/Oculars/src/ui_ocularDialog.h:1164
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "Select All"
 msgstr "সব নির্বাচন করুন"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "Look in:"
 msgstr "নির্বাচন স্থল :"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "Directory:"
 msgstr "ডিরেক্টরি :"
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "Folder"
 msgstr "ফোল্ডার"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "&Choose"
 msgstr "বেছে নি&ন"
 
-#: src/translations.h:423 src/ui_configurationDialog.h:1511
+#: src/translations.h:425 src/ui_configurationDialog.h:1511
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid "&Cancel"
 msgstr "বাতি&ল"
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid "Files of type:"
 msgstr "ধরণ :"
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid "Date Modified"
 msgstr "শেষ সম্পাদনা"
 
-#: src/translations.h:427
+#: src/translations.h:429
 msgid "Directories"
 msgstr "ডিরেক্টরি সমূহ"
 
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "Computer"
 msgstr "কম্পিউটার"
 
-#: src/translations.h:429
+#: src/translations.h:431
 msgid "&Open"
 msgstr "খুলু&ন"
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "File &name:"
 msgstr "ফাইলের না&ম :"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "Copy &Link Location"
 msgstr "সংযো&গটির ঠিকানা অনুকরন করুন"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Abort"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "Ignore"
 msgstr "উপেক্ষা করুন"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Basic colors"
 msgstr "প্রা&থমিক রং"
 
-#: src/translations.h:435
+#: src/translations.h:437
 msgid "&Pick Screen Color"
 msgstr "স্ক্রীন থেকে &রং বাছুন"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "&Custom colors"
 msgstr "প&ছন্দসই রং"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "&Add to Custom Colors"
 msgstr "পছন্দসই রঙের তালিকায় যো&গ করুন"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Hu&e:"
 msgstr "&ধরন :"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "&Sat:"
 msgstr "গা&ড়ত্ব :"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Val:"
 msgstr "&উজ্জ্বল্যতা :"
 
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "&Red:"
 msgstr "লা&ল :"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Green:"
 msgstr "সবু&জ :"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Bl&ue:"
 msgstr "&নীল :"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Select Color"
 msgstr "রং নির্বাচন করুন"
 
-#: src/translations.h:445
+#: src/translations.h:447
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "কার্সারের অবস্থান : %1, %2 । বাতিল করতে ESC চাপুন ।"
@@ -10296,7 +10304,7 @@ msgstr "Sky-Watcher SynScan AZ GoTo বিচলন বা আলম্বযু
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:241
 msgid "Read-only telescope"
-msgstr ""
+msgstr "শুধু ব্যবহারযোগ্য দূরবীন"
 
 #: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
 msgid "Telescope position: "
@@ -12963,6 +12971,8 @@ msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr ""
+"আংশিক সমলয়ের মাধ্যমে একাধিক সিস্টেমে আলাদা আলাদা বৈশিষ্ট্যাবলী ব্যবহার করা "
+"যায় ।"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "See manual for detailed description."
@@ -13032,7 +13042,7 @@ msgstr "এখানে কিছু পরিবর্তন করার প�
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Settings applied on this client"
-msgstr ""
+msgstr "ব্যবহারকারীর দিকের বৈশিষ্ট্যাবলী"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Selection"
@@ -13044,39 +13054,39 @@ msgstr "স্টীলারিয়াম বৈশিষ্টাবলী"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
-msgstr ""
+msgstr "অভিমূখ"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
-msgstr ""
+msgstr "উপলভ্য বৈশিষ্ট্যাবলী"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "পছন্দসই GUI-বৈশিষ্ট্যাবলীর সমলয়"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "These are all available properties."
-msgstr ""
+msgstr "সমস্ত উপলভ্য বৈশিষ্ট্যাবলী"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "এই বৈশিষ্ট্যগুলি বর্তমানে সমলয়ে নেই ।"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "সমলয়ে না থাকা বৈশিষ্ট্যাবলী"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "সমলয়ে থাকা বৈশিষ্ট্যাবলী"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "সমলয়ে থাকা বৈশিষ্ট্যাবলীগুলি বাদ দিন :"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
 msgid "Client settings"
-msgstr ""
+msgstr "ব্যবহারকারী"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
@@ -14763,272 +14773,272 @@ msgstr "প্রাক বাৎসরিক"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:35
 msgid "Lyrids"
-msgstr "লাইরিডস্"
+msgstr "বীনা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
 msgid "α-Centaurids"
-msgstr "α-সেন্টুরিডস্"
+msgstr "α-অশ্বমানব মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
 msgid "γ-Normids"
-msgstr "γ-নর্মিডস্"
+msgstr "γ-মাপদন্ড মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr "η-অ্যাকোয়ারিডস্"
+msgstr "η-কুম্ভ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr "জুন মাসিক বুটিডস্"
+msgstr "জুনের রাখাল মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
 msgid "Piscis Austrinids"
-msgstr "পাইসিস অস্ট্রিনিডস্"
+msgstr "দক্ষিন মীন মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:47
 msgid "Southern δ-Aquariids"
-msgstr "দক্ষিন δ-অ্যাকোয়ারিডস্"
+msgstr "দক্ষিন δ-কুম্ভ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:49
 msgid "α-Capricornids"
-msgstr "α-ক্যাপ্রিকর্নিডস্"
+msgstr "α-মকর মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:51
 msgid "α-Aurigids"
-msgstr "α-অরাইগিডস্"
+msgstr "α-সারথী মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:53
 msgid "September ε-Perseids"
-msgstr "সেপ্টেম্বর মাসিক ε-পারসেইডস্"
+msgstr "সেপ্টেম্বরের ε-পারসিউস মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:55
 msgid "Draconids"
-msgstr "ড্রাকোনিডস্"
+msgstr "ড্রাগন মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:57
 msgid "Leonids"
-msgstr "লিওনিডস্"
+msgstr "সিংহ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:59
 msgid "Phoenicids"
-msgstr "ফিনিসিডস্"
+msgstr "ফিনিক্স মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:61
 msgid "Puppid-Velids"
-msgstr "পাপিড-ভেলিডস্"
+msgstr "জাহাজ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:63
 msgid "Ursids"
-msgstr "আরসিডস্"
+msgstr "সপ্তর্ষি মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:65
 msgid "Perseids"
-msgstr "পারসেইডস্"
+msgstr "পারসিউস মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
 msgid "δ-Leonids"
-msgstr "δ-লিওনিডস্"
+msgstr "δ-সিংহ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:69
 msgid "π-Puppids"
-msgstr "π-পাপিডস্"
+msgstr "π-জাহাজ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:71
 msgid "June Lyrids"
-msgstr "জুন মাসিক লাইরিডস্"
+msgstr "জুনের বীনা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:73
 msgid "κ-Cygnids"
-msgstr "κ-সিডনিডস্"
+msgstr "κ-হাঁস মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:75
 msgid "ε-Lyrids"
-msgstr "এপসাইলন লাইরিডস্"
+msgstr "ε-বীনা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:77
 msgid "δ-Aurigids"
-msgstr "δ-অরাইগিডস্"
+msgstr "δ-সারথী মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:79
 msgid "ε-Geminids"
-msgstr "ε-জেমিনিডস্"
+msgstr "ε-মিথুন মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:81
 msgid "Southern Taurids"
-msgstr "দক্ষিন টরাইডস্"
+msgstr "দক্ষিন বৃষ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:83
 msgid "Northern Taurids"
-msgstr "উত্তর টরাইডস্"
+msgstr "উত্তর বৃষ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:85
 msgid "Monocerotids"
-msgstr "মোনোসেরোটিডস"
+msgstr "একশৃঙ্গী মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:87
 msgid "α-Monocerotids"
-msgstr "α-মোনোসেরোটিডস"
+msgstr "α-একশৃঙ্গী মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:89
 msgid "σ-Hydrids"
-msgstr "σ-হাইড্রিডস্"
+msgstr "σ-সর্পদৈত্য মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:91
 msgid "Geminids"
-msgstr "জেমিনিডস্"
+msgstr "মিথুন মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:93
 msgid "Leonis Minorids"
-msgstr "লিওনিস মাইনরিডস্"
+msgstr "সিংহ শাবক মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:95
 msgid "December Leonis Minorids"
-msgstr "ডিসেম্বর মাসিক লিওনিস মাইনরিডস্"
+msgstr "ডিসেম্বরের সিংহ শাবক মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:97
 msgid "Comae Berenicids"
-msgstr "কোমা বেরিনিসিডস্"
+msgstr "বেরিনিসের কেশমন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:99
 msgid "Orionids"
-msgstr "ওরাইনিডস্"
+msgstr "কালপুরুষ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:101
 msgid "Andromedids"
-msgstr "অ্যান্ড্রোমিডিস্"
+msgstr "অ্যান্ড্রোমিডা মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:103
 msgid "η-Lyrids"
-msgstr "η-লাইরিডস্"
+msgstr "η-বীনা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:105
 msgid "α-Scorpiids"
-msgstr "α-স্করপিডস্"
+msgstr "α-বৃশ্চিক মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
 msgid "Ophiuchids"
-msgstr "অফিউকিডস্"
+msgstr "সাপুড়ে মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:109
 msgid "θ-Ophiuchids"
-msgstr "θ-অফিউকিডস্"
+msgstr "θ-সাপুড়ে মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:111
 msgid "κ-Serpentids"
-msgstr "κ-সারপেন্টিডস্"
+msgstr "κ-সর্প মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:113
 msgid "θ-Centaurids"
-msgstr "θ-সেন্টুরিডস্"
+msgstr "θ-অশ্বমানব মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:115
 msgid "ω-Cetids"
-msgstr "ω-সেটিডস্"
+msgstr "ω-তিমি মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:117
 msgid "Southern ω-Scorpiids"
-msgstr "দক্ষিন ω-স্করপিডস্"
+msgstr "দক্ষিন ω-বৃশ্চিক মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:119
 msgid "Northern ω-Scorpiids"
-msgstr "উত্তর ω-স্করপিডস্"
+msgstr "উত্তর ω-বৃশ্চিক মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:121
 msgid "Arietids"
-msgstr "এরিটিডস্"
+msgstr "মেষ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:123
 msgid "π-Cetids"
-msgstr "π-সেটিডস্"
+msgstr "π-তিমি মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:125
 msgid "δ-Cancrids"
-msgstr "δ-ক্যানসিরিডস্"
+msgstr "δ-কর্কট মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:127
 msgid "τ-Herculids"
-msgstr "τ-হারকিউলিডস্"
+msgstr "τ-হারকিউলিস মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:129
 msgid "ρ-Geminids"
-msgstr "ρ-জেমিনিডস্"
+msgstr "ρ-মিথুন মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:131
 msgid "η-Carinids"
-msgstr "η-ক্যারিনিডস্"
+msgstr "η-ক্যারিনা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:133
 msgid "η-Craterids"
-msgstr "η-ক্রেটারিডস্"
+msgstr "η-পেয়ালা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:135
 msgid "π-Virginids"
-msgstr "π-ভার্গোনিডস্"
+msgstr "π-কন্যা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:137
 msgid "θ-Virginids"
-msgstr "θ-ভার্গোনিডস্"
+msgstr "θ-কন্যা মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:139
 msgid "May Librids"
-msgstr "মে মাসিক লিব্রিডস্"
+msgstr "মেএর তুলা মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:141
 msgid "June Scutids"
-msgstr "জুন মাসিক স্কুটিডস্"
+msgstr "জুনের ঢাল মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:143
@@ -15038,47 +15048,47 @@ msgstr "α-পাইসিস অস্ট্রিনিডস্"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:145
 msgid "Southern ι-Aquariids"
-msgstr "দক্ষিন ι-অ্যাকোয়ারিডস্"
+msgstr "দক্ষিন ι-কুম্ভ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:147
 msgid "Northern ι-Aquariids"
-msgstr "উত্তর ι-অ্যাকোয়ারিডস্"
+msgstr "উত্তর ι-কুম্ভ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr "γ-অ্যাকোয়ারিডস্"
+msgstr "γ-কুম্ভ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
 msgid "Autumn Arietids"
-msgstr "শরৎ কালীন এরিটিডস্"
+msgstr "শরতের মেষ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:153
 msgid "χ-Orionids"
-msgstr "χ-ওরাইনিডস্"
+msgstr "χ-কালপুরুষ মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr "সেক্সট্যানিডস্"
+msgstr "সেক্সট্যান্ট মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr "নভেম্বর মাসিক ওরাইনিডস্"
+msgstr "নভেম্বরের কালপুরুষ মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr "আগষ্ট মাসিক কায়েলিডস"
+msgstr "আগষ্টের বাটালি মন্ডলের উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "ε-Gruids"
-msgstr "ε-গ্রুইডস"
+msgstr "ε-সারস মন্ডলীয় উল্কাবৃষ্টি"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
@@ -15278,8 +15288,8 @@ msgid ""
 "the constellation of Perseus."
 msgstr ""
 "উৎস বিন্দু হল আকাশের এমন একটি কাল্পনিক বিন্দু যেদিক থেকে উল্কাগুলি ধেয়ে আসছে "
-"বলে মনে হয় । যেমন - পারসেইড উল্কাবৃষ্টি, এক্ষেত্রে উল্কাগুলিকে পারসিউস "
-"মন্ডলের একটি বিন্দু থেকে ধেয়ে আসছে বলে মনে হয় ।"
+"বলে মনে হয় । যেমন - পারসিউস মন্ডলের উল্কাবৃষ্টি, এক্ষেত্রে উল্কাগুলিকে "
+"পারসিউস মন্ডলের একটি বিন্দু থেকে ধেয়ে আসছে বলে মনে হয় ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:271
 msgid ""
@@ -15300,8 +15310,8 @@ msgid ""
 "drifts by more than a degree per night."
 msgstr ""
 "অনেক সময় উল্কাবৃষ্টির উৎস বিন্দু আাকাশে তারাদের পটভূমিতে তাদের স্থান "
-"পরিবর্তন করে থাকে । যেমন - ডেল্টা অরাইগিডস উল্কাবৃষ্টির উৎস বিন্দু প্রতি "
-"রাতে এক ডিগ্রিরও বেশি স্থান পরিবর্তন করে ।"
+"পরিবর্তন করে থাকে । যেমন - ডেল্টা সারথী মন্ডলীয় উল্কাবৃষ্টির উৎস বিন্দু "
+"প্রতি রাতে এক ডিগ্রিরও বেশি স্থান পরিবর্তন করে ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:280
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -16203,19 +16213,19 @@ msgstr "চাঁদের অক্ষাংশ দেখুন"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Vertical for Geographic Location 1"
-msgstr ""
+msgstr "পছন্দসই অবস্থান ১ এর অভিলম্ব"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Vertical for Geographic Location 2"
-msgstr ""
+msgstr "পছন্দসই অবস্থান ২ এর অভিলম্ব"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
 msgid "Show Vertical for Custom Azimuth 1"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ১ এর অভিলম্ব"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Vertical for Custom Azimuth 2"
-msgstr ""
+msgstr "পছন্দসই দিগংশ ২ এর অভিলম্ব"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Line for Custom Declination 1"
@@ -18135,6 +18145,3 @@ msgstr "পছন্দসই অক্ষাংশ ২"
 
 #~ msgid "Planetary positions"
 #~ msgstr "গ্রহ, গ্রহাণু ইত্যাদির অবস্থান"
-
-#~ msgid "Angular velocity of the proper motion"
-#~ msgstr "কৌণিক সরণ"

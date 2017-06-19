@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-10 19:37+0700\n"
+"POT-Creation-Date: 2017-06-18 13:16+0700\n"
 "PO-Revision-Date: 2016-12-23 12:38+0000\n"
 "Last-Translator: Ozan Ozdemir <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 06:14+0000\n"
-"X-Generator: Launchpad (build 18402)\n"
+"X-Launchpad-Export-Date: 2017-06-19 06:08+0000\n"
+"X-Generator: Launchpad (build 18416)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -23,11 +23,11 @@ msgstr "İşlem listesine ulaşılamadı"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "'%1' işlemi sunucu tarafından kabul edilmiyor: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "'%1' işlemini sunucuya gönderirken hata oluştu: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -45,16 +45,16 @@ msgstr "Gezegen listesine ulaşılamadı"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "Özellik listesi alınamadı"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "'%1' özelliği sunucu tarafından kabul edilmiyor: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "'%1' özelliğini sunucuya gönderirken hata oluştu: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
@@ -83,11 +83,11 @@ msgstr "boşta"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr ""
+msgstr "Nesne türleri yüklenirken hata oluştu"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr ""
+msgstr "Nesne listesi alınırken hata oluştu"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
@@ -95,12 +95,12 @@ msgstr "bekliyor"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr ""
+msgstr "İzleme listesi alınamadı."
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr ""
+msgstr "Manzara listesi alınamadı"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:505
@@ -110,11 +110,11 @@ msgstr "-Yok-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Şu anda yükleniyor: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Scenery3d listesi alınamadı."
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -132,7 +132,7 @@ msgstr "Tüm Ögeleri Göster"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr ""
+msgstr "Girdi hiç bir öğeyle eşleşmedi"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
@@ -164,7 +164,7 @@ msgstr ""
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
@@ -172,7 +172,7 @@ msgstr "Duraklat"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr ""
+msgstr "Zaman atlaması"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
@@ -188,27 +188,27 @@ msgstr "Güneş haftası"
 
 #: index.html:90 tablet7in.html:191
 msgid "Sidereal day"
-msgstr ""
+msgstr "Yıldız günü"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
-msgstr ""
+msgstr "Yıldız yılı"
 
 #: index.html:92 tablet7in.html:193
 msgid "Sidereal century"
-msgstr ""
+msgstr "Yıldız yüzyılı"
 
 #: index.html:94 tablet7in.html:195
 msgid "Synodic month"
-msgstr ""
+msgstr "Kavuşum ayı"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr ""
+msgstr "Drakonik ay"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr ""
+msgstr "Drakonik yıl"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
@@ -216,15 +216,15 @@ msgstr ""
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
-msgstr ""
+msgstr "Ayrıksı ay"
 
 #: index.html:102 tablet7in.html:201
 msgid "Anomalistic year"
-msgstr ""
+msgstr "Ayrıksı yıl"
 
 #: index.html:103 tablet7in.html:202
 msgid "Anomalistic century"
-msgstr ""
+msgstr "Ayrıksı yüzyıl"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
@@ -240,15 +240,15 @@ msgstr ""
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
-msgstr ""
+msgstr "Tropikal yılı"
 
 #: index.html:110 tablet7in.html:209
 msgid "Julian year"
-msgstr ""
+msgstr "Jülyen yılı"
 
 #: index.html:111 tablet7in.html:211
 msgid "Julian century"
-msgstr ""
+msgstr "Jülyen yüzyılı"
 
 #: index.html:123 tablet7in.html:138
 msgid "FOV"
@@ -256,15 +256,15 @@ msgstr ""
 
 #: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
-msgstr ""
+msgstr "Arama terimini girin. Sonuçlarda gezinmek için TAB tuşunu kullanın."
 
 #: index.html:142 tablet7in.html:230
 msgid "Select and focus"
-msgstr ""
+msgstr "Seçin ve odaklayın"
 
 #: index.html:168 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Seçim modu"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center on object"
@@ -272,15 +272,15 @@ msgstr ""
 
 #: index.html:168 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Nesneye ortala ve yakınlaştır"
 
 #: index.html:168 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Nesneyi işaretle"
 
 #: index.html:170 tablet7in.html:261
 msgid "Quick select"
-msgstr ""
+msgstr "Hızlı seçim"
 
 #: index.html:174 tablet7in.html:265
 msgid "Earth"
@@ -296,11 +296,11 @@ msgstr "Geçerli seçim"
 
 #: index.html:200 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Dijitalleştirilmiş Gökyüzü Araştırması"
 
 #: index.html:243 tablet7in.html:399
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Yıldız Kayması"
 
 #: index.html:244 tablet7in.html:400
 msgid "ZHR:"
@@ -334,31 +334,31 @@ msgstr "Şu Anki Gezegen"
 
 #: index.html:419 tablet7in.html:578
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Parlak Bulutsular"
 
 #: index.html:420 tablet7in.html:579
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Karanlık Bulutsular"
 
 #: index.html:421 tablet7in.html:580
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Gezegenimsi Bulutsu"
 
 #: index.html:430 tablet7in.html:589
 msgid "Labels and markers"
-msgstr ""
+msgstr "Etiketler ve işaretleyiciler"
 
 #: index.html:459 tablet7in.html:618
 msgid "Show illumination"
-msgstr ""
+msgstr "Işıklandırmayı aç"
 
 #: index.html:464 tablet7in.html:624
 msgid "Current landscape"
-msgstr ""
+msgstr "Mevcut manzara"
 
 #: index.html:481 tablet7in.html:642
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "Yıldız kümelerini kalınlaştır"
 
 #: index.html:492 tablet7in.html:658
 msgid "Current sky culture"
@@ -390,15 +390,15 @@ msgstr "Gezegen haritası"
 
 #: index.html:527 tablet7in.html:708
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Gezegen harita işaretçisi"
 
 #: index.html:531 tablet7in.html:712
 msgid "Type to search location"
-msgstr ""
+msgstr "Aramak istediğiniz yeri yazın"
 
 #: index.html:560 tablet7in.html:741
 msgid "Interaction"
-msgstr ""
+msgstr "Etkileşim"
 
 #: index.html:561 tablet7in.html:742
 msgid "Current scene:"
@@ -406,19 +406,19 @@ msgstr ""
 
 #: index.html:564 tablet7in.html:745
 msgid "View controls"
-msgstr ""
+msgstr "Görüntüleme kontrolleri"
 
 #: index.html:570 tablet7in.html:751
 msgid "Movement controls"
-msgstr ""
+msgstr "Hareket kontrolleri"
 
 #: index.html:586 tablet7in.html:767
 msgid "Scene selection"
-msgstr ""
+msgstr "Sahne seçimi"
 
 #: index.html:590 tablet7in.html:771
 msgid "Load selected scene"
-msgstr ""
+msgstr "Seçili sahneyi yükle"
 
 #: index.html:614 tablet7in.html:796
 msgid "No response from server"
@@ -427,11 +427,11 @@ msgstr "Sunucu yanıt vermiyor"
 #: index.html:615
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
-msgstr ""
+msgstr "%1 saniyeden beri sunucudan yanıt yok. Stellarium hala çalışıyor mu?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Zaman atlaması"
 
 #: tablet7in.html:37
 msgid "Grids"
@@ -439,7 +439,7 @@ msgstr "Izgaralar"
 
 #: tablet7in.html:97
 msgid "Up/Left"
-msgstr ""
+msgstr "Yukarı/Sol"
 
 #: tablet7in.html:97
 msgid "Up"
@@ -447,7 +447,7 @@ msgstr "Yukarı"
 
 #: tablet7in.html:97
 msgid "Up/Right"
-msgstr ""
+msgstr "Yukarı/Sağ"
 
 #: tablet7in.html:97
 msgid "Left"
@@ -455,11 +455,11 @@ msgstr "Sola"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr ""
+msgstr "Seçilen nesneye odaklan"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr ""
+msgstr "Seçime odaklan"
 
 #: tablet7in.html:97
 msgid "Right"
@@ -467,7 +467,7 @@ msgstr "Sağ"
 
 #: tablet7in.html:97
 msgid "Down/Left"
-msgstr ""
+msgstr "Aşağı/Sol"
 
 #: tablet7in.html:97
 msgid "Down"
@@ -475,7 +475,7 @@ msgstr "Aşağı"
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr ""
+msgstr "Aşağı/Sağ"
 
 #: tablet7in.html:101
 msgid "View towards horizon at Azimuth"
@@ -491,11 +491,11 @@ msgstr "Sıfırla"
 
 #: tablet7in.html:266
 msgid "Sirius"
-msgstr ""
+msgstr "Sirius"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr ""
+msgstr "Arktürüs"
 
 #: tablet7in.html:268
 msgid "Capella"
@@ -511,7 +511,7 @@ msgstr "Deneb"
 
 #: tablet7in.html:271
 msgid "Altair"
-msgstr ""
+msgstr "Altair"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
@@ -519,7 +519,7 @@ msgstr "Andromeda Galaksisi"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
-msgstr ""
+msgstr "Herkül Kümesi"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
@@ -604,6 +604,7 @@ msgstr "Temizleme Ekranı"
 #: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"%1 saniye boyunca sunucudan yanıt gelmedi. Stellarium hala çalışıyor mu?"
 
 #~ msgid "Selection"
 #~ msgstr "Seçim"
