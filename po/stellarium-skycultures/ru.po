@@ -1,23 +1,21 @@
 # Russian translation for stellarium
-# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
-# Koptev Oleg <koptev.oleg@gmail.com>, 2009
-# Alexander Wolf <alex.v.wolf@gmail.com>, 2010
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 19:37+0700\n"
-"PO-Revision-Date: 2017-06-10 12:56+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
-"Language-Team: Koptev Oleg\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-06-18 15:04+0700\n"
+"PO-Revision-Date: 2017-06-18 08:30+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 06:05+0000\n"
-"X-Generator: Launchpad (build 18402)\n"
-"Language: ru\n"
+"X-Launchpad-Export-Date: 2017-06-19 07:20+0000\n"
+"X-Generator: Launchpad (build 18416)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -321,6 +319,7 @@ msgstr "Орк"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: skycultures/translations.fab:93
+#: skycultures/hawaiian_starlines/star_names.fab:44
 msgid "Haumea"
 msgstr "Хаумеа"
 
@@ -6439,6 +6438,377 @@ msgstr "Хор, который связывает две страны (Юпит�
 msgid "Horus, the Bull of Heaven (Saturn)"
 msgstr "Хор, небесный бык (Сатурн)"
 
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
+msgid "The Canoe Bailer of Makali`i"
+msgstr "Сборщик каноэ из Макали"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:2
+msgid "The Cat's Cradle"
+msgstr "Колыбель для кошки"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:3
+msgid "The Backbone"
+msgstr "Магистраль"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:4
+#: skycultures/western/constellation_names.eng.fab:49
+#: skycultures/western_rey/constellation_names.eng.fab:23
+msgid "Leo"
+msgstr "Лев"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:5
+msgid "The Chief's Fishline"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:6
+msgid "The Chief's Eyes"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:7
+#: skycultures/polynesian/constellation_names.eng.fab:8
+msgid "Kite of Kawelo"
+msgstr "Коршун Кавело"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:8
+#: skycultures/polynesian/constellation_names.eng.fab:5
+msgid "The Seven"
+msgstr "Семерка"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:9
+#: skycultures/polynesian/constellation_names.eng.fab:4
+msgid "Voice of Joy"
+msgstr "Голос радости"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:10
+msgid "Chief Frigate Bird"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:11
+#: skycultures/polynesian/constellation_names.eng.fab:10
+msgid "Cared for by Moon"
+msgstr "Лелеянный луной"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:12
+msgid "The Pointers"
+msgstr "Указатели"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:13
+#: skycultures/polynesian/constellation_names.eng.fab:7
+msgid "Navigator's Triangle"
+msgstr "Треугольник штурмана"
+
+#: skycultures/hawaiian_starlines/star_names.fab:1
+#: skycultures/polynesian/star_names.fab:1
+msgid "Hokulei"
+msgstr "Хокулеи"
+
+#: skycultures/hawaiian_starlines/star_names.fab:2
+#: skycultures/polynesian/star_names.fab:2
+msgid "Nana-mua"
+msgstr "Нана-муа (Смотри вперёд)"
+
+#: skycultures/hawaiian_starlines/star_names.fab:3
+#: skycultures/polynesian/star_names.fab:3
+msgid "Nana-hope"
+msgstr "Нана-хоп (Смотри назад)"
+
+#: skycultures/hawaiian_starlines/star_names.fab:4
+#: skycultures/polynesian/star_names.fab:4
+msgid "Puana"
+msgstr "Пуана (Цветок)"
+
+#: skycultures/hawaiian_starlines/star_names.fab:5
+msgid "A‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:6
+#: skycultures/polynesian/star_names.fab:6
+msgid "Puana-kau"
+msgstr "Пуана-кау (Висящий цветок)"
+
+#: skycultures/hawaiian_starlines/star_names.fab:7
+#: skycultures/polynesian/star_names.fab:7
+#: skycultures/polynesian/star_names.fab:19
+msgid "Pu'uhonua"
+msgstr "Пу'ухонуа"
+
+#: skycultures/hawaiian_starlines/star_names.fab:8
+#: skycultures/polynesian/star_names.fab:8
+msgid "Kaulua-koko"
+msgstr "Каулуа-коко"
+
+#: skycultures/hawaiian_starlines/star_names.fab:9
+msgid "Hokupa‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:10
+msgid "Hokule‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:11
+#: skycultures/polynesian/star_names.fab:11
+msgid "Hiki-analia"
+msgstr "Хики-аналиа"
+
+#: skycultures/hawaiian_starlines/star_names.fab:12
+#: skycultures/polynesian/star_names.fab:12
+msgid "Holopuni"
+msgstr "Холопуни"
+
+#: skycultures/hawaiian_starlines/star_names.fab:13
+#: skycultures/polynesian/star_names.fab:13
+msgid "Hawaiki"
+msgstr "Хаваики"
+
+#: skycultures/hawaiian_starlines/star_names.fab:14
+#: skycultures/polynesian/star_names.fab:14
+msgid "Humu"
+msgstr "Хуму"
+
+#: skycultures/hawaiian_starlines/star_names.fab:15
+#: skycultures/polynesian/star_names.fab:15
+msgid "Keoe"
+msgstr "Кеое"
+
+#: skycultures/hawaiian_starlines/star_names.fab:16
+msgid "Hoku‘ula"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:17
+#: skycultures/polynesian/star_names.fab:17
+msgid "Lehua-Kona"
+msgstr "Лехуа-Кона"
+
+#: skycultures/hawaiian_starlines/star_names.fab:18
+#: skycultures/polynesian/star_names.fab:18
+msgid "Ke ali'i o kona i ka lewa"
+msgstr "Ке али'и о кона и ка лева"
+
+#: skycultures/hawaiian_starlines/star_names.fab:19
+msgid "Pu‘uhonua"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:20
+#: skycultures/polynesian/star_names.fab:20
+msgid "Hiku-kahi"
+msgstr "Хику-кахи"
+
+#: skycultures/hawaiian_starlines/star_names.fab:21
+#: skycultures/polynesian/star_names.fab:21
+msgid "Hiku-lua"
+msgstr "Хику-луа"
+
+#: skycultures/hawaiian_starlines/star_names.fab:22
+#: skycultures/polynesian/star_names.fab:22
+msgid "Hiku-kolu"
+msgstr "Хику-колу"
+
+#: skycultures/hawaiian_starlines/star_names.fab:23
+#: skycultures/polynesian/star_names.fab:23
+msgid "Hiku-ha"
+msgstr "Хику-ха"
+
+#: skycultures/hawaiian_starlines/star_names.fab:24
+#: skycultures/polynesian/star_names.fab:24
+msgid "Hiku-lima"
+msgstr "Хику-лима"
+
+#: skycultures/hawaiian_starlines/star_names.fab:25
+#: skycultures/hawaiian_starlines/star_names.fab:55
+#: skycultures/polynesian/star_names.fab:25
+msgid "Hiku-ono"
+msgstr "Хику-оно"
+
+#: skycultures/hawaiian_starlines/star_names.fab:26
+#: skycultures/polynesian/star_names.fab:26
+msgid "Hiku-pau"
+msgstr "Хику-пау"
+
+#: skycultures/hawaiian_starlines/star_names.fab:27
+#: skycultures/polynesian/star_names.fab:27
+msgid "Kaulia"
+msgstr "Каулиа"
+
+#: skycultures/hawaiian_starlines/star_names.fab:28
+msgid "Ka Mole Honua"
+msgstr "Ка Моле Хонуа"
+
+#: skycultures/hawaiian_starlines/star_names.fab:29
+#: skycultures/polynesian/star_names.fab:29
+msgid "Ka-maile-mua"
+msgstr "Ка-маиле-муа"
+
+#: skycultures/hawaiian_starlines/star_names.fab:30
+#: skycultures/polynesian/star_names.fab:30
+msgid "Ka-maile-hope"
+msgstr "Ка-маиле-хопе"
+
+#: skycultures/hawaiian_starlines/star_names.fab:31
+#: skycultures/polynesian/star_names.fab:31
+msgid "Ka Maka"
+msgstr "Ка Мака"
+
+#: skycultures/hawaiian_starlines/star_names.fab:32
+msgid "Kapuahi"
+msgstr "Капуахи"
+
+#: skycultures/hawaiian_starlines/star_names.fab:33
+msgid "Keawe"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:34
+msgid "Manokalanipo"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:35
+msgid "Pi‘ilani"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:36
+msgid "Kakuhihewa"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:37
+msgid "Pi‘ikea"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:38
+msgid "Kaikilani"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:39
+#: skycultures/hawaiian_starlines/star_names.fab:46
+msgid "Kukaniloko"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:40
+msgid "Kealohalani-po-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:41
+msgid "Kamoanalipoli-po-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:42
+msgid "Kaheihiwahiwa-o-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:43
+msgid "Kapalinihinihi-o-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:45
+msgid "Mirzim"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:47
+msgid "‘Ekekeu’ena’ena"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:48
+msgid "‘Ekekeuehuehu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:49
+msgid "‘Ekekeuhe’ehe’e"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:50
+msgid "‘Ekekeukolokolo"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:51
+#: skycultures/romanian/star_names.fab:48
+#: skycultures/western/star_names.fab:542
+msgid "Bellatrix"
+msgstr "Беллатрикс"
+
+#: skycultures/hawaiian_starlines/star_names.fab:52
+#: skycultures/romanian/star_names.fab:56
+#: skycultures/western/star_names.fab:545
+msgid "Alnitak"
+msgstr "Альнитак"
+
+#: skycultures/hawaiian_starlines/star_names.fab:53
+#: skycultures/romanian/star_names.fab:54
+#: skycultures/western/star_names.fab:544
+msgid "Alnilam"
+msgstr "Альнилам"
+
+#: skycultures/hawaiian_starlines/star_names.fab:54
+#: skycultures/romanian/star_names.fab:51
+#: skycultures/western/star_names.fab:543
+msgid "Mintaka"
+msgstr "Минтака"
+
+#: skycultures/hawaiian_starlines/star_names.fab:56
+msgid "Pua‘i"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:57
+msgid "Mili’opu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:58
+msgid "Kahe"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:59
+msgid "Hihiwai"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:60
+msgid "Kawelaokapo"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:61
+msgid "‘Ohelokulu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:62
+msgid "‘Ohelokoko"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:63
+msgid "‘Ohelouli"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:64
+msgid "‘Oheloawa"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:65
+msgid "‘Ohelowaha"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:66
+msgid "Kawilikolokio"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:67
+msgid "Ka‘ielawei‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:68
+msgid "Lele"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:69
+msgid "Kalipo‘eu‘eu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:70
+msgid "Momonapikowalu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:71
+msgid "Mokopapa‘i"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:72
+msgid "Wainielela"
+msgstr ""
+
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
 msgstr "Два солнечных луча"
@@ -8608,70 +8978,21 @@ msgstr "Ковш"
 msgid "Cat's Cradle"
 msgstr "Колыбель для кошки"
 
-#: skycultures/polynesian/constellation_names.eng.fab:4
-msgid "Voice of Joy"
-msgstr "Голос радости"
-
-#: skycultures/polynesian/constellation_names.eng.fab:5
-msgid "The Seven"
-msgstr "Семерка"
-
 #: skycultures/polynesian/constellation_names.eng.fab:6
 msgid "Maui's Fishhook"
 msgstr "Крючок Мауи"
-
-#: skycultures/polynesian/constellation_names.eng.fab:7
-msgid "Navigator's Triangle"
-msgstr "Треугольник штурмана"
-
-#: skycultures/polynesian/constellation_names.eng.fab:8
-msgid "Kite of Kawelo"
-msgstr "Коршун Кавело"
 
 #: skycultures/polynesian/constellation_names.eng.fab:9
 msgid "Frigate Bird"
 msgstr "Птица-фрегат"
 
-#: skycultures/polynesian/constellation_names.eng.fab:10
-msgid "Cared for by Moon"
-msgstr "Лелеянный луной"
-
 #: skycultures/polynesian/constellation_names.eng.fab:11
 msgid "Dolphin"
 msgstr "Дельфин"
 
-#: skycultures/polynesian/star_names.fab:1
-msgid "Hokulei"
-msgstr "Хокулеи"
-
-#: skycultures/polynesian/star_names.fab:2
-msgid "Nana-mua"
-msgstr "Нана-муа (Смотри вперёд)"
-
-#: skycultures/polynesian/star_names.fab:3
-msgid "Nana-hope"
-msgstr "Нана-хоп (Смотри назад)"
-
-#: skycultures/polynesian/star_names.fab:4
-msgid "Puana"
-msgstr "Пуана (Цветок)"
-
 #: skycultures/polynesian/star_names.fab:5
 msgid "A'a"
 msgstr "А'а (Горящая ярко)"
-
-#: skycultures/polynesian/star_names.fab:6
-msgid "Puana-kau"
-msgstr "Пуана-кау (Висящий цветок)"
-
-#: skycultures/polynesian/star_names.fab:7
-#: skycultures/polynesian/star_names.fab:19
-msgid "Pu'uhonua"
-msgstr "Пу'ухонуа"
-
-#: skycultures/polynesian/star_names.fab:8
-msgid "Kaulua-koko"
-msgstr "Каулуа-коко"
 
 #: skycultures/polynesian/star_names.fab:9
 msgid "Hokupa'a"
@@ -8681,85 +9002,13 @@ msgstr "Хокупа'а"
 msgid "Hokule'a"
 msgstr "Хокуле'а"
 
-#: skycultures/polynesian/star_names.fab:11
-msgid "Hiki-analia"
-msgstr "Хики-аналиа"
-
-#: skycultures/polynesian/star_names.fab:12
-msgid "Holopuni"
-msgstr "Холопуни"
-
-#: skycultures/polynesian/star_names.fab:13
-msgid "Hawaiki"
-msgstr "Хаваики"
-
-#: skycultures/polynesian/star_names.fab:14
-msgid "Humu"
-msgstr "Хуму"
-
-#: skycultures/polynesian/star_names.fab:15
-msgid "Keoe"
-msgstr "Кеое"
-
 #: skycultures/polynesian/star_names.fab:16
 msgid "Hoku'ula"
 msgstr "Хоку'ула"
 
-#: skycultures/polynesian/star_names.fab:17
-msgid "Lehua-Kona"
-msgstr "Лехуа-Кона"
-
-#: skycultures/polynesian/star_names.fab:18
-msgid "Ke ali'i o kona i ka lewa"
-msgstr "Ке али'и о кона и ка лева"
-
-#: skycultures/polynesian/star_names.fab:20
-msgid "Hiku-kahi"
-msgstr "Хику-кахи"
-
-#: skycultures/polynesian/star_names.fab:21
-msgid "Hiku-lua"
-msgstr "Хику-луа"
-
-#: skycultures/polynesian/star_names.fab:22
-msgid "Hiku-kolu"
-msgstr "Хику-колу"
-
-#: skycultures/polynesian/star_names.fab:23
-msgid "Hiku-ha"
-msgstr "Хику-ха"
-
-#: skycultures/polynesian/star_names.fab:24
-msgid "Hiku-lima"
-msgstr "Хику-лима"
-
-#: skycultures/polynesian/star_names.fab:25
-msgid "Hiku-ono"
-msgstr "Хику-оно"
-
-#: skycultures/polynesian/star_names.fab:26
-msgid "Hiku-pau"
-msgstr "Хику-пау"
-
-#: skycultures/polynesian/star_names.fab:27
-msgid "Kaulia"
-msgstr "Каулиа"
-
 #: skycultures/polynesian/star_names.fab:28
 msgid "Mole Honua"
 msgstr "Моле Хонуа"
-
-#: skycultures/polynesian/star_names.fab:29
-msgid "Ka-maile-mua"
-msgstr "Ка-маиле-муа"
-
-#: skycultures/polynesian/star_names.fab:30
-msgid "Ka-maile-hope"
-msgstr "Ка-маиле-хопе"
-
-#: skycultures/polynesian/star_names.fab:31
-msgid "Ka Maka"
-msgstr "Ка Мака"
 
 #: skycultures/romanian/constellation_names.eng.fab:1
 msgid "The Great Chariot"
@@ -9111,11 +9360,6 @@ msgstr "Ригель"
 msgid "Capella"
 msgstr "Капелла"
 
-#: skycultures/romanian/star_names.fab:48
-#: skycultures/western/star_names.fab:542
-msgid "Bellatrix"
-msgstr "Беллатрикс"
-
 #: skycultures/romanian/star_names.fab:49
 msgid "Alnath"
 msgstr "Альнас"
@@ -9124,11 +9368,6 @@ msgstr "Альнас"
 #: skycultures/western/star_names.fab:483
 msgid "Nihal"
 msgstr "Нихаль"
-
-#: skycultures/romanian/star_names.fab:51
-#: skycultures/western/star_names.fab:543
-msgid "Mintaka"
-msgstr "Минтака"
 
 #: skycultures/romanian/star_names.fab:52
 #: skycultures/western/star_names.fab:482
@@ -9140,20 +9379,10 @@ msgstr "Арнеб"
 msgid "Meissa"
 msgstr "Меисса"
 
-#: skycultures/romanian/star_names.fab:54
-#: skycultures/western/star_names.fab:544
-msgid "Alnilam"
-msgstr "Альнилам"
-
 #: skycultures/romanian/star_names.fab:55
 #: skycultures/western/star_names.fab:249
 msgid "Phact"
 msgstr "Факт"
-
-#: skycultures/romanian/star_names.fab:56
-#: skycultures/western/star_names.fab:545
-msgid "Alnitak"
-msgstr "Альнитак"
 
 #: skycultures/romanian/star_names.fab:57
 #: skycultures/western/star_names.fab:546
@@ -10534,11 +10763,6 @@ msgstr "Единорог"
 #: skycultures/western_rey/constellation_names.eng.fab:78
 msgid "Lepus"
 msgstr "Заяц"
-
-#: skycultures/western/constellation_names.eng.fab:49
-#: skycultures/western_rey/constellation_names.eng.fab:23
-msgid "Leo"
-msgstr "Лев"
 
 #: skycultures/western/constellation_names.eng.fab:50
 #: skycultures/western_rey/constellation_names.eng.fab:165
@@ -12352,7 +12576,7 @@ msgstr "Мирфак"
 
 #: skycultures/western/star_names.fab:593
 msgid "Gorgonea Prima"
-msgstr "Горгонея Прима"
+msgstr "Горгонеа Прима"
 
 #: skycultures/western/star_names.fab:594
 msgid "Gorgona"
@@ -12372,7 +12596,7 @@ msgstr "Горгонеа Секунда"
 
 #: skycultures/western/star_names.fab:601
 msgid "Gorgonea Tertia"
-msgstr "Горгонеа Тертиа"
+msgstr "Горгонеа Терция"
 
 #: skycultures/western/star_names.fab:602
 msgid "Gorgonea Quarta"
@@ -13227,696 +13451,3 @@ msgstr "Альфа Центавра"
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
 msgstr "Бета Центавра"
-
-#~ msgid "Schrine of Sky"
-#~ msgstr "Небесная шрина"
-
-#~ msgid "Office for Chariot"
-#~ msgstr "Место для колесницы"
-
-#~ msgid "Ofice for Construction"
-#~ msgstr "Офис для строительства"
-
-#~ msgid "Cerficate of Sky"
-#~ msgstr "Небесный сертификат"
-
-#~ msgid "Animal"
-#~ msgstr "Животоное"
-
-#~ msgid "Race Track"
-#~ msgstr "Гоночная трасса"
-
-#~ msgid "Turtle"
-#~ msgstr "Черепаха"
-
-#~ msgid "Salamander"
-#~ msgstr "Саламандра"
-
-#~ msgid "Dried Willow"
-#~ msgstr "Засохшая ива"
-
-#~ msgid "Seven Little Girls"
-#~ msgstr "Семь юных дев"
-
-#~ msgid "Snake"
-#~ msgstr "Змея"
-
-#~ msgid "Fireplace"
-#~ msgstr "Очаг"
-
-#~ msgid "Hand"
-#~ msgstr "Рука"
-
-#~ msgid "Bear's Lodge"
-#~ msgstr "Медвежья берлога"
-
-#~ msgid "Thunderbird"
-#~ msgstr "Буревестник"
-
-#~ msgid "Barnard's galaxy"
-#~ msgstr "Галактика Барнарда"
-
-#~ msgid "Bear Paw galaxy"
-#~ msgstr "Галактика Медвежья лапа"
-
-#~ msgid "Beehive cluster"
-#~ msgstr "Скопление Улей"
-
-#~ msgid "Black-eye galaxy"
-#~ msgstr "Галактика Чёрный глаз"
-
-#~ msgid "Bode's nebulae"
-#~ msgstr "Туманность Бодэ"
-
-#~ msgid "Box nebula"
-#~ msgstr "Туманность Коробка"
-
-#~ msgid "Bubble nebula"
-#~ msgstr "Туманность Пузырь"
-
-#~ msgid "Bug nebula"
-#~ msgstr "Туманность Жук"
-
-#~ msgid "Butterfly cluster"
-#~ msgstr "Скопление Бабочка"
-
-#~ msgid "Butterfly nebula"
-#~ msgstr "Туманность Бабочка"
-
-#~ msgid "California nebula"
-#~ msgstr "Туманность Калифорния"
-
-#~ msgid "Christmas Tree cluster"
-#~ msgstr "Скопление Ёлка"
-
-#~ msgid "Cocoon nebula"
-#~ msgstr "Туманность Кокон"
-
-#~ msgid "Cone nebula"
-#~ msgstr "Туманность Конус"
-
-#~ msgid "Crab nebula"
-#~ msgstr "Крабовидная туманность"
-
-#~ msgid "Crescent nebula"
-#~ msgstr "Туманность Полумесяц"
-
-#~ msgid "Double cluster"
-#~ msgstr "Хи-Аш Персея"
-
-#~ msgid "Dumbbell nebula"
-#~ msgstr "Туманность Гантель"
-
-#~ msgid "Eagle nebula"
-#~ msgstr "Туманность Орёл"
-
-#~ msgid "Eight-burst planetary"
-#~ msgstr "Планетарная туманность Восьмерка"
-
-#~ msgid "Filamentary nebula"
-#~ msgstr "Волокнистая туманность"
-
-#~ msgid "Flaming Star nebula"
-#~ msgstr "Туманность Пламенеющая звезда"
-
-#~ msgid "Ghost of Jupiter"
-#~ msgstr "Призрак Юпитера"
-
-#~ msgid "Great Nebula in Andromeda"
-#~ msgstr "Туманность Андромеды"
-
-#~ msgid "Great Nebula in Orion"
-#~ msgstr "Большая туманность Ориона"
-
-#~ msgid "Helix galaxy"
-#~ msgstr "Галактика Улитка"
-
-#~ msgid "Helix nebula"
-#~ msgstr "Туманность Улитка"
-
-#~ msgid "Hind's variable nebula"
-#~ msgstr "Туманность Лань"
-
-#~ msgid "Horsehead nebula"
-#~ msgstr "Туманность Конская голова"
-
-#~ msgid "Hourglass nebula"
-#~ msgstr "Туманность Песочные часы"
-
-#~ msgid "Hubble's variable neb"
-#~ msgstr "Туманность Кочка"
-
-#~ msgid "Lace-work nebula"
-#~ msgstr "Туманность Кружево"
-
-#~ msgid "Lagoon nebula"
-#~ msgstr "Туманность Лагуна"
-
-#~ msgid "Little Dumbbell"
-#~ msgstr "Малая Гантель"
-
-#~ msgid "Little Gem"
-#~ msgstr "Малая Жемчужина"
-
-#~ msgid "Maia nebula"
-#~ msgstr "Туманность Майя"
-
-#~ msgid "Merope nebula"
-#~ msgstr "Туманность Меропа"
-
-#~ msgid "Network nebula"
-#~ msgstr "Туманность Сеть"
-
-#~ msgid "North America nebula"
-#~ msgstr "Туманность Северная Америка"
-
-#~ msgid "Omega nebula"
-#~ msgstr "Туманность Омега"
-
-#~ msgid "Owl nebula"
-#~ msgstr "Туманность Сова"
-
-#~ msgid "Pelican nebula"
-#~ msgstr "Туманность Пеликан"
-
-#~ msgid "Pin-wheel nebula"
-#~ msgstr "Туманность Вертушка"
-
-#~ msgid "Ring nebula in Lyra"
-#~ msgstr "Туманность Кольцо в Лире"
-
-#~ msgid "Rosette nebula"
-#~ msgstr "Туманность Розетка"
-
-#~ msgid "Saturn nebula"
-#~ msgstr "Туманность Сатурн"
-
-#~ msgid "Sculptor galaxy"
-#~ msgstr "Галактика Скульптор"
-
-#~ msgid "Sombrero galaxy"
-#~ msgstr "Галактика Сомбреро"
-
-#~ msgid "Spindle galaxy"
-#~ msgstr "Галактика Веретено"
-
-#~ msgid "Star Queen nebula"
-#~ msgstr "Туманность Звезда королевы"
-
-#~ msgid "Struve's Lost nebula"
-#~ msgstr "Потерянная туманность Струве"
-
-#~ msgid "Sunflower galaxy"
-#~ msgstr "Галактика Подсолнух"
-
-#~ msgid "Tarantula nebula"
-#~ msgstr "Туманность Тарантул"
-
-#~ msgid "The Mice"
-#~ msgstr "Мышь"
-
-#~ msgid "Toby Jug nebula"
-#~ msgstr "Туманность Тоби Джуг"
-
-#~ msgid "Triangulum galaxy"
-#~ msgstr "Галактика в Треугольнике"
-
-#~ msgid "Trifid nebula"
-#~ msgstr "Трехраздельная туманность"
-
-#~ msgid "Veil nebula"
-#~ msgstr "Туманность Вуаль"
-
-#~ msgid "Whirlpool galaxy"
-#~ msgstr "Галактика Водоворот"
-
-#~ msgid "Wild Duck cluster"
-#~ msgstr "Скопление Дикие утки"
-
-#~ msgid "Witch Head nebula"
-#~ msgstr "Туманность Голова ведьмы"
-
-#~ msgid "κ Cru cluster"
-#~ msgstr "Звёздное скопление κ Cru"
-
-#~ msgid "η Car nebula"
-#~ msgstr "Туманность η Car"
-
-#~ msgid "γ Cas nebula"
-#~ msgstr "Туманность γ Cas"
-
-#~ msgid "ρ Oph nebula"
-#~ msgstr "Туманность ρ Oph"
-
-#~ msgid "λ Cen nebula"
-#~ msgstr "Туманность λ Cen"
-
-#~ msgid "The announcer of the southern Shinning one"
-#~ msgstr "Предвестница южной сияющей (Мирзам)"
-
-#~ msgid "The northern Shinning one"
-#~ msgstr "Северная сияющая (Процион)"
-
-#~ msgid "The southern Shinning one"
-#~ msgstr "Южная сияющая (Сириус)"
-
-#~ msgid "The announcer of the northern Shinning one"
-#~ msgstr "Предвестница северной сияющей (Гомейcа)"
-
-#~ msgid "Eskimo nebula"
-#~ msgstr "Туманность Эскимос"
-
-#~ msgid "Rim nebula"
-#~ msgstr "Туманность Обод"
-
-#~ msgid "Cat's Paw nebula"
-#~ msgstr "Туманность Кошачья лапа"
-
-#~ msgid "Little Ghost nebula"
-#~ msgstr "Туманность Малый призрак"
-
-#~ msgid "Little Gem nebula"
-#~ msgstr "Туманность Малая жемчужина"
-
-#~ msgid "Bear's Paw galaxy"
-#~ msgstr "Галактика Медвежья лапа"
-
-#~ msgid "Hubble's variable nebula"
-#~ msgstr "Туманность Кочка"
-
-#~ msgid "ω Cen cluster"
-#~ msgstr "Скопление ω Cen"
-
-#~ msgid "War and Peace nebula"
-#~ msgstr "Туманность Война и мир"
-
-#~ msgid "Pencil nebula"
-#~ msgstr "Туманность Карандаш"
-
-#~ msgid "τ Canis Majoris cluster"
-#~ msgstr "Скопление τ Малого Пса"
-
-#~ msgid "de Mairan's nebula"
-#~ msgstr "Туманность де Мэйран"
-
-#~ msgid "Caroline's cluster"
-#~ msgstr "Скопление Каролины"
-
-#~ msgid "Satellite cluster"
-#~ msgstr "Скопление Спутник"
-
-#~ msgid "Flame nebula"
-#~ msgstr "Туманность Пламя"
-
-#~ msgid "Galaxy cluster"
-#~ msgstr "Скопление галактик"
-
-#~ msgid "Southern Pinwheel galaxy"
-#~ msgstr "Галактика Южная вертушка"
-
-#~ msgid "Pinwheel galaxy"
-#~ msgstr "Галактика Вертушка"
-
-#~ msgid "Atoms for Peace galaxy"
-#~ msgstr "Галактика Атом для мира"
-
-#~ msgid "Grand Design galaxy"
-#~ msgstr "Галактика Великий замысел"
-
-#~ msgid "Monkey Head nebula"
-#~ msgstr "Туманность Обезьянья голова"
-
-#~ msgid "Red spider nebula"
-#~ msgstr "Туманность Красный паук"
-
-#~ msgid "Spirograph nebula"
-#~ msgstr "Туманность Спирограф"
-
-#~ msgid "Cleopatra's Eye"
-#~ msgstr "Глаз Клеопатры"
-
-#~ msgid "Dragonfly cluster"
-#~ msgstr "Скопление Стрекоза"
-
-#~ msgid "Dragon nebula"
-#~ msgstr "Туманность Друкон"
-
-#~ msgid "Heart nebula"
-#~ msgstr "Туманность Сердце"
-
-#~ msgid "Hole in a cluster"
-#~ msgstr "Дыра в скоплении"
-
-#~ msgid "Sailboat cluster"
-#~ msgstr "Скопление Парусник"
-
-#~ msgid "Soul nebula"
-#~ msgstr "Туманность Дух"
-
-#~ msgid "Starfish cluster"
-#~ msgstr "Скопление Морская звезда"
-
-#~ msgid "Lemon slice nebula"
-#~ msgstr "Туманность Ломтик лимона"
-
-#~ msgid "Retina nebula"
-#~ msgstr "Туманность Сетчатка"
-
-#~ msgid "20 Vulpeculae cluster"
-#~ msgstr "Скопление 20 Лисички"
-
-#~ msgid "Crowbar galaxy"
-#~ msgstr "Галактика Лом"
-
-#~ msgid "Sagittarius Star Cloud"
-#~ msgstr "Звёздное облако Стрельца"
-
-#~ msgid "Kidney Bean galaxy"
-#~ msgstr "Галактика Фасоль"
-
-#~ msgid "Heart-Shaped cluster"
-#~ msgstr "Сердцеобразное скопление"
-
-#~ msgid "Herring galaxy"
-#~ msgstr "Галактика Селёдка"
-
-#~ msgid "Toloa"
-#~ msgstr "Толоа"
-
-#~ msgid "Lua tangata"
-#~ msgstr "Луа тангата"
-
-#~ msgid "Toloatonga"
-#~ msgstr "Толоатонга"
-
-#~ msgid "Ae e'Uvea"
-#~ msgstr "Аэ э'Увэа"
-
-#~ msgid "Fatanalua"
-#~ msgstr "Фатаналуа"
-
-#~ msgid "Fungasia"
-#~ msgstr "Фунагасиа"
-
-#~ msgid "Tuinga ika"
-#~ msgstr "Туинга ика"
-
-#~ msgid "Tu'ulalupe"
-#~ msgstr "Ту'улалупе"
-
-#~ msgid "Toloalahi"
-#~ msgstr "Толоалахи"
-
-#~ msgid "Kapakau'o'tafahi"
-#~ msgstr "Капакау'о'тафахи"
-
-#~ msgid "Whale galaxy"
-#~ msgstr "Галактика Кит"
-
-#~ msgid "Fireworks galaxy"
-#~ msgstr "Галактика Фейерверк"
-
-#~ msgid "Iris nebula"
-#~ msgstr "Туманность Ирис"
-
-#~ msgid "Bow-Tie nebula"
-#~ msgstr "Туманность Бабочка (Галстук)"
-
-#~ msgid "Needle galaxy"
-#~ msgstr "Галактика Игла"
-
-#~ msgid "Pearl cluster"
-#~ msgstr "Скопление Жемчужина"
-
-#~ msgid "S Normae cluster"
-#~ msgstr "Скопление S Наугольника"
-
-#~ msgid "Elephant's Trunk nebula"
-#~ msgstr "Туманность Хобот Слона"
-
-#~ msgid "Houmatoloa"
-#~ msgstr "Хоуматолоа"
-
-#~ msgid "Plaskett's star"
-#~ msgstr "Звезда Пласкетта"
-
-#~ msgid "Graff's cluster"
-#~ msgstr "Скопление Граффа"
-
-#~ msgid "Fleming's Triangular nebula"
-#~ msgstr "Туманность Треугольник Флеминга"
-
-#~ msgid "Spiral cluster"
-#~ msgstr "Скопление Спираль"
-
-#~ msgid "Vacuum Cleaner galaxy"
-#~ msgstr "Галактика Пылесос"
-
-#~ msgid "Surfboard galaxy"
-#~ msgstr "Галактика Доска для серфинга"
-
-#~ msgid "Coddington's nebula"
-#~ msgstr "Туманность Коддингтона"
-
-#~ msgid "Blowdryer galaxy"
-#~ msgstr "Галактика Фен"
-
-#~ msgid "ε Ori nebula"
-#~ msgstr "Туманность ε Ориона"
-
-#~ msgid "Lost galaxy"
-#~ msgstr "Потерянная галактика"
-
-#~ msgid "White Eyed Pea"
-#~ msgstr "Белый горох"
-
-#~ msgid "Cocoon galaxy"
-#~ msgstr "Галактика Кокон"
-
-#~ msgid "Jellyfish nebula"
-#~ msgstr "Туманность Медуза"
-
-#~ msgid "Marfark"
-#~ msgstr "Марфарк"
-
-#~ msgid "Hoedus II"
-#~ msgstr "Гоедус II"
-
-#~ msgid "Cleeia"
-#~ msgstr "Клийа"
-
-#~ msgid "Hydrobius"
-#~ msgstr "Гидробиус"
-
-#~ msgid "Tarf"
-#~ msgstr "Тарф"
-
-#~ msgid "Hatsya"
-#~ msgstr "Хатсья"
-
-#~ msgid "Al Kurud"
-#~ msgstr "Аль Куруд"
-
-#~ msgid "Tseen Ke"
-#~ msgstr "Цинь-Ки"
-
-#~ msgid "Alphekka Meridiana"
-#~ msgstr "Альфекка Меридиана"
-
-#~ msgid "Lukida"
-#~ msgstr "Лукида"
-
-#~ msgid "Rukh"
-#~ msgstr "Рух"
-
-#~ msgid "Castra"
-#~ msgstr "Кастра"
-
-#~ msgid "Jih"
-#~ msgstr "Джи"
-
-#~ msgid "Okul"
-#~ msgstr "Окул"
-
-#~ msgid "Pennae Caudalis"
-#~ msgstr "Пенна Каудалис"
-
-#~ msgid "Prawn nebula"
-#~ msgstr "Туманность Креветка"
-
-#~ msgid "The Foxhead cluster"
-#~ msgstr "Скопление Лисья голова"
-
-#~ msgid "Summer Beehive cluster"
-#~ msgstr "Скопление Летний улей"
-
-#~ msgid "Alkaphrah"
-#~ msgstr "Алькафра"
-
-#~ msgid "Labr"
-#~ msgstr "Лабр"
-
-#~ msgid "Al'dzhabkhakh"
-#~ msgstr "Альджабхах"
-
-#~ msgid "Printseps"
-#~ msgstr "Принтсепс"
-
-#~ msgid "Sinistra"
-#~ msgstr "Синистра"
-
-#~ msgid "Marsik"
-#~ msgstr "Марсик"
-
-#~ msgid "Deneb Okab"
-#~ msgstr "Денеб Окаб"
-
-#~ msgid "Manubrij"
-#~ msgstr "Манубриж"
-
-#~ msgid "Han"
-#~ msgstr "Хан"
-
-#~ msgid "Ruby Star"
-#~ msgstr "Рубиновая звезда"
-
-#~ msgid "Elder sister"
-#~ msgstr "Старшая сестра"
-
-#~ msgid "Sulphur-crested white cockatoo"
-#~ msgstr "Большой желтохохлый какаду"
-
-#~ msgid "Quoll"
-#~ msgstr "Пятнистая сумчатая куница"
-
-#~ msgid "Day"
-#~ msgstr "День"
-
-#~ msgid "La'a"
-#~ msgstr "Лайа"
-
-#~ msgid "Mahina"
-#~ msgstr "Махина"
-
-#~ msgid "Tapukitea"
-#~ msgstr "Тапукитеа"
-
-#~ msgid "Matamemea"
-#~ msgstr "Матамемеа"
-
-#~ msgid "Night Star"
-#~ msgstr "Ночная звёздочка"
-
-#~ msgid "Parrot's Head"
-#~ msgstr "Голова попугая"
-
-#~ msgid "Running Chicken nebula"
-#~ msgstr "Туманность Бегущая курица"
-
-#~ msgid "Khonsu, the Traveler"
-#~ msgstr "Хонсу, Путешественник"
-
-#~ msgid "Star that Crosses / The God of the Morning"
-#~ msgstr "Звезда, которая пересекает / Бог утра"
-
-#~ msgid "God of Sun"
-#~ msgstr "Бог Солнца"
-
-#~ msgid "Unknown"
-#~ msgstr "Неизвестная"
-
-#~ msgid "Horus, the Bull of Heaven"
-#~ msgstr "Хор, небесный бык"
-
-#~ msgid "Red Horus"
-#~ msgstr "Красный Хор"
-
-#~ msgid "Horus Who Binds the Two Lands"
-#~ msgstr "Хор, который связывает две страны"
-
-#~ msgid "Wichapi Owanjila"
-#~ msgstr "Вичапи Ованьила"
-
-#~ msgid "Oglechkutepi"
-#~ msgstr "Оглечкутепи"
-
-#~ msgid "Hamburger Galaxy (Leo Triplet)"
-#~ msgstr "Галактика Гамбургер (Триплет Льва)"
-
-#~ msgid "Sprinter cluster"
-#~ msgstr "Скопление Спринтер"
-
-#~ msgid "Gemini nebula"
-#~ msgstr "Туманность Близнецы"
-
-#~ msgid "Ptolemy cluster"
-#~ msgstr "Скопление Птолемея"
-
-#~ msgid "Northern Jewel Box"
-#~ msgstr "Северная шкатулка"
-
-#~ msgid "Little Scorpion cluster"
-#~ msgstr "Скопление Малый скорпион"
-
-#~ msgid "Fly nebula"
-#~ msgstr "Туманность Муха"
-
-#~ msgid "R CrA nebula"
-#~ msgstr "Туманность R Южной короны"
-
-#~ msgid "Omicron Velorum Cluster"
-#~ msgstr "Скопление омикрона Парусов"
-
-#~ msgid "Taurus Poniatovii cluster"
-#~ msgstr "Скопление Телец Понятова"
-
-#~ msgid "Markarian 18 cluster"
-#~ msgstr "Скопление Маркариан 18"
-
-#~ msgid "η Car cluster"
-#~ msgstr "Скопление η Киля"
-
-#~ msgid "Coathanger (Brocchi's Cluster)"
-#~ msgstr "Вешалка (Скопление Брокки)"
-
-#~ msgid "Armus"
-#~ msgstr "Армус"
-
-#~ msgid "The Phantom Streak Nebula"
-#~ msgstr "Туманность Фантомный штрих"
-
-#~ msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
-#~ msgstr "Туманность След (След Минковского; M1-92)"
-
-#~ msgid "Water lily nebula"
-#~ msgstr "Туманность Водная лилия"
-
-#~ msgid "Minkowski's Butterfly (M2-9)"
-#~ msgstr "Бабочка Минковского (M2-9)"
-
-#~ msgid "Blue Flash nebula"
-#~ msgstr "Туманность Синяя вспышка"
-
-#~ msgid "Seashell galaxy"
-#~ msgstr "Галактика Морская ракушка"
-
-#~ msgid "Cassiopeia Dwarf Galaxy"
-#~ msgstr "Карликовая галактика Кассиопеи"
-
-#~ msgid "Sextans Dwarf Galaxy"
-#~ msgstr "Карликовая галактика Секстанта"
-
-#~ msgid "Wolf-Lundmark-Melotte (WLM)"
-#~ msgstr "Вольф-Ландмарк-Мелотт (WLM)"
-
-#~ msgid "Imprint of a Foot"
-#~ msgstr "Отпечаток ступни"
-
-#~ msgid "Lord Rosse's Galaxy"
-#~ msgstr "Галактика лорда Росса"
-
-#~ msgid "Golf of Mexico Nebula"
-#~ msgstr "Туманность Мексиканский залив"
-
-#~ msgid "Serpens Dwarf Cluster"
-#~ msgstr "Карликовое скопление Змеи"
