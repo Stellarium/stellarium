@@ -1,20 +1,20 @@
 # Slovak translation for stellarium
-# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 16:41+0700\n"
-"PO-Revision-Date: 2017-06-12 09:25+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-06-18 13:16+0700\n"
+"PO-Revision-Date: 2017-06-18 08:30+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-18 05:43+0000\n"
+"X-Launchpad-Export-Date: 2017-06-19 06:58+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -4163,388 +4163,393 @@ msgstr "Egyptská"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:219
+msgid "Hawaiian Starlines"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:221
 msgid "Inuit"
 msgstr "Inuitská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:221
+#: src/translations.h:223
 msgid "Indian Vedic"
 msgstr "Indiánsko-védske"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:223
+#: src/translations.h:225
 msgid "Japanese Moon Stations"
 msgstr "Japonské mesačné základne"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:225
+#: src/translations.h:227
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroi/Euahlayi"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:227
+#: src/translations.h:229
 msgid "Korean"
 msgstr "Kórejská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakota/Lakota/Nakota"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:231
+#: src/translations.h:233
 msgid "Macedonian"
 msgstr "Macedónska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:233
+#: src/translations.h:235
 msgid "Maori"
 msgstr "Maorská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:235
+#: src/translations.h:237
 msgid "Mongolian"
 msgstr "Mongolské"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:237
+#: src/translations.h:239
 msgid "Navajo"
 msgstr "Navaho"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:239
+#: src/translations.h:241
 msgid "Norse"
 msgstr "Škandinávska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:241
+#: src/translations.h:243
 msgid "Ojibwe"
 msgstr "Ojibwe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:243
+#: src/translations.h:245
 msgid "Polynesian"
 msgstr "Polynézska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:245
+#: src/translations.h:247
 msgid "Romanian"
 msgstr "Románske"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:247
+#: src/translations.h:249
 msgid "Sami"
 msgstr "Laponská (Saami)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:249
+#: src/translations.h:251
 msgid "Sardinian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:251
+#: src/translations.h:253
 msgid "Siberian"
 msgstr "Sibírske"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:253
+#: src/translations.h:255
 msgid "Tukano"
 msgstr "Tukan"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:255
+#: src/translations.h:257
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:257
+#: src/translations.h:259
 msgid "Tongan"
 msgstr "Tongan"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:259
+#: src/translations.h:261
 msgid "Western"
 msgstr "Západná"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:261
+#: src/translations.h:263
 msgid "Western (H.A.Rey)"
 msgstr "Západné (H. A. Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:267
+#: src/translations.h:269
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:269
+#: src/translations.h:271
 msgid "Trees"
 msgstr "Stromy"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
+#: src/translations.h:273 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
 msgid "Moon"
 msgstr "Mesiac"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:273
+#: src/translations.h:275
 msgid "Hurricane"
 msgstr "Hrebeň Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:275
+#: src/translations.h:277
 msgid "Ocean"
 msgstr "Oceán"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:277
+#: src/translations.h:279
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
+#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
+#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
+#: src/translations.h:285 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
 msgid "Saturn"
 msgstr "Saturn"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:285
+#: src/translations.h:287
 msgid "Uranus"
 msgstr "Urán"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:287
+#: src/translations.h:289
 msgid "Neptune"
 msgstr "Neptún"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:289
+#: src/translations.h:291
 msgid "Geneva"
 msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:291
+#: src/translations.h:293
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:293
+#: src/translations.h:295
 msgid "Zero Horizon"
 msgstr "Plochý horizont"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:298
+#: src/translations.h:300
 msgid "Vienna Sterngarten"
 msgstr "Viedenská Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:300
+#: src/translations.h:302
 msgid "Testscene"
 msgstr "Testovacia scéna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "Landscape Tour"
 msgstr "Prehliadka terénov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "Partial Lunar Eclipse"
 msgstr "Čiastočné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Total Lunar Eclipse"
 msgstr "Úplné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Screensaver"
 msgstr "Šetrič obrazovky"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Solar Eclipse 2009"
 msgstr "Zatmenie Slnka 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:317
 msgid "Startup Script"
 msgstr "Skript pri spustení"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:319
 msgid "Zodiac"
 msgstr "Zvieratník"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:321
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Trojitý východ a západ Slnka na Merkúre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dvojité zatmenie na Deimose v r. 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dvojité zatmenie na Deimose v r. 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Zatmenie na Olympus Mons 10. januára 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Zákryt Zeme a Jupitera v r. 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 prechody a 2 zatmenia z Deimosu v r. 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar System Screensaver"
 msgstr "Sporič obrazovky so Slnečnou sústavou"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Constellations Tour"
 msgstr "Prehliadka súhvezdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Sun from different planets"
 msgstr "Slnko z ostatných planét"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Earth best views from other bodies"
 msgstr "Najlepšie pohľady na Zem z iných telies"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Transit of Venus"
 msgstr "Prechod Venuše"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Sky Culture Tour"
 msgstr "Prehliadka nebeskej kultúry"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Earth Events from Mercury"
 msgstr "Úkazy Zeme z Merkúra"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Earth Events from a floating city on Venus"
 msgstr "Pozemské úkazy zo vznášajúceho sa mesta v atmosfére Venuše"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "Earth Events from Mars"
 msgstr "Úkazy Zeme z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "Najväčšie elongácie Zeme a opozície ostatných planét z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Najväčšie elongácie a prechody Zeme a Marsu pri pohľade z Kalista."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Tycho's Supernova"
 msgstr "Tychónova supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth and other Planets from Ceres"
 msgstr "Zem a ostatné planéty z Ceresu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Messier Objects Tour"
 msgstr "Prehliadka Messierových objektov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Binocular Highlights"
 msgstr "To najlepšie pre triéder"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 zábavných dvojhviezd na pozorovanie voľným okom"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "List of largest known stars"
 msgstr "Zoznam najväčších známych hviezd"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Herschel 400 Tour"
 msgstr "Prehliadka Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Objekty oblohy pre triédre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "The Jack Bennett Catalog"
 msgstr "Katalóg Jacka Bennetta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Best objects in the New General Catalog"
 msgstr "Najlepšie objekty z katalógu NGC"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Look around each installed landscape."
 msgstr "Rozhliadnutie okolo každého nainštalovaného terénu."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "Look at each installed sky culture."
 msgstr "Prehliadnite si všetky nainštalované kultúry súhvezdí."
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript na demonštrovanie čiastočného zatmenia Mesiaca."
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript na demonštrovanie úplného zatmenia Mesiaca."
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Pomalá, nekonečná prehliadka náhodných objektov na oblohe."
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -4552,11 +4557,11 @@ msgstr ""
 "Skript na demonštrovanie úplného zatmenia Slnka, ktoré nastalo v roku 2009 "
 "(poloha=Rangpur, Bangladéš)."
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid "Script which runs automatically at startup"
 msgstr "Skript, ktorý sa vykoná pri spustení programu"
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -4566,7 +4571,7 @@ msgstr ""
 "ktoré ležia pozdĺž čiary, po ktorej sa pohybuje Slnko cez nebeskú sféru "
 "počas roka."
 
-#: src/translations.h:386
+#: src/translations.h:388
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -4575,7 +4580,7 @@ msgstr ""
 "niektorých miestach pozorovať východ a západ Slnka trikrát za jeden deň na "
 "Merkúre."
 
-#: src/translations.h:387
+#: src/translations.h:389
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -4583,7 +4588,7 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Škorpiónom a Strelcom 26. apríla 2017."
 
-#: src/translations.h:388
+#: src/translations.h:390
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -4591,13 +4596,13 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Býkom a Blížencami 23. júla 2031."
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Mesiac Fobos prechádza pred Slnkom pri pohľade z hory Olympus Mons 10. "
 "januára 2068."
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -4607,7 +4612,7 @@ msgstr ""
 "zákryt oboch telies v rovnaký deň je vzácny úkaz. Takto bude prebiehať "
 "dvojitý zákryt 21. januára 2048. Zobrazenie prebieha reálnou rýchlosťou."
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4622,32 +4627,32 @@ msgstr ""
 "Marsom a Deimosom. Keď Fobos opäť vyjde spoza Marsu, stále je ešte zatienený "
 "Marsom, ale po chvíli ho zaleje slnečný svit."
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "A tour of the western constellations."
 msgstr "Prechádza súhvezdiami západnej kultúry."
 
-#: src/translations.h:394
+#: src/translations.h:396
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Pohľad na Slnko z veľkých planét Slnečnej sústavy a z Pluta."
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Najlepšie pohľady na Zem z iných telies Slnečnej sústavy v priebehu 21. "
 "storočia."
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Prechod Venuše pri pohľade z austrálskeho mesta Sydney, 6. júna 2012."
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -4655,14 +4660,14 @@ msgstr ""
 "Záblesk supernovy, ktorú pozoroval Tycho Brahe v roku 1572. Musí byť zapnutý "
 "modul Supernovy."
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 "Elongácie Zeme a opozície ostatných planét z Marsu v období 2000-3000"
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4674,18 +4679,18 @@ msgstr ""
 "pásu Jupitera. Ak niekedy ľudia bukú kolonizovať Jupiterove mesiace, Kalisto "
 "bude naporúdzi."
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 "Elongácie Zeme a opozície ostatných planét z Ceresu v období 2000-3000"
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "A tour of Messier Objects"
 msgstr "Prehliadka Messierových objektov"
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -4694,7 +4699,7 @@ msgstr ""
 "Prehliadka zaujímavých objektov, ktoré sú pozorovateľné triédrom. Údaje v "
 "skripte sú prevzaté zo známej knihy Garyho Seronika."
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -4704,15 +4709,15 @@ msgstr ""
 "Jerry Lodriguss a vyšiel v časopise Sky & Telescope 09/2014. Údaje "
 "pochádzajú z jeho stránky http://www.astropix.com/doubles/"
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "Skript predvedie najväčšie známe hviezdy."
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Prehliadka objektov z katalógu Herschel 400"
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -4722,156 +4727,156 @@ msgstr ""
 "pozorovanie triédrom. Skript postupne ukáže 31 objektov zoradených podľa "
 "hodinového uhla (epocha 2000.0)."
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "&Undo"
 msgstr "V&rátiť späť"
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "&Redo"
 msgstr "&Opakovať vrátené"
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Cu&t"
 msgstr "Vys&trihnúť"
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "&Copy"
 msgstr "&Kopírovať"
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "&Paste"
 msgstr "V&ložiť"
 
-#: src/translations.h:417 plugins/Oculars/src/ui_ocularDialog.h:1164
+#: src/translations.h:419 plugins/Oculars/src/ui_ocularDialog.h:1164
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
 msgid "Delete"
 msgstr "Vymazať"
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "Select All"
 msgstr "Vybrať všetko"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "Look in:"
 msgstr "Hľadať v:"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "Directory:"
 msgstr "Priečinok:"
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "Folder"
 msgstr "Priečinok"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "&Choose"
 msgstr "&Zvoliť"
 
-#: src/translations.h:423 src/ui_configurationDialog.h:1511
+#: src/translations.h:425 src/ui_configurationDialog.h:1511
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid "&Cancel"
 msgstr "&Zrušiť"
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid "Files of type:"
 msgstr "Súbory typu:"
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid "Date Modified"
 msgstr "Dátum zmeny"
 
-#: src/translations.h:427
+#: src/translations.h:429
 msgid "Directories"
 msgstr "Priečinky"
 
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "Computer"
 msgstr "Počítač"
 
-#: src/translations.h:429
+#: src/translations.h:431
 msgid "&Open"
 msgstr "&Otvoriť"
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "File &name:"
 msgstr "&Názov súboru:"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "Copy &Link Location"
 msgstr "Kopírovať &umiestnenie odkazu"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Abort"
 msgstr "Zrušiť"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "Ignore"
 msgstr "Ignorovať"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Basic colors"
 msgstr "&Základné farby"
 
-#: src/translations.h:435
+#: src/translations.h:437
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "&Custom colors"
 msgstr "&Vlastné farby"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "&Add to Custom Colors"
 msgstr "Pridať k &vlastným farbám"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Hu&e:"
 msgstr "Od&tieň:"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "&Sat:"
 msgstr "&Sýtosť:"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Val:"
 msgstr "&Hodnota:"
 
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "&Red:"
 msgstr "Če&rvená:"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Green:"
 msgstr "Ze&lená:"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Bl&ue:"
 msgstr "Mo&drá:"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Select Color"
 msgstr "Vyberte farbu"
 
-#: src/translations.h:445
+#: src/translations.h:447
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kurzor na %1, %2 Zrušíte stlačením ESC"
@@ -16156,1670 +16161,3 @@ msgstr "Hlavné čiary zastávky Mesiaca"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
 msgstr ""
-
-#~ msgid "Cardinal Points"
-#~ msgstr "Svetové strany"
-
-#~ msgid "Sky Culture: "
-#~ msgstr "Kultúra (týka sa súhvezdí): "
-
-#~ msgid "Language"
-#~ msgstr "Jazyk"
-
-#~ msgid "Date & Time"
-#~ msgstr "Dátum a čas"
-
-#~ msgid "General "
-#~ msgstr "Hlavné "
-
-#~ msgid "Stars "
-#~ msgstr "Hviezdy "
-
-#~ msgid "Colors "
-#~ msgstr "Farby "
-
-#~ msgid "Effects "
-#~ msgstr "Efekty "
-
-#~ msgid "Scripts "
-#~ msgstr "Skripty "
-
-#~ msgid "Administration "
-#~ msgstr "Administrácia "
-
-#~ msgid "Latitude: "
-#~ msgstr "Zemepisná šírka: "
-
-#~ msgid "Longitude: "
-#~ msgstr "Zemepisná dĺžka: "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "Výška (m): "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "Teleso Slnečnej sústavy: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "Prednastavený čas oblohy: "
-
-#~ msgid "Actual Time"
-#~ msgstr "Aktuálny čas"
-
-#~ msgid "Preset Time"
-#~ msgstr "Prednastaviť čas"
-
-#~ msgid "Time Display Format: "
-#~ msgstr "Formát zobrazovania času: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "Formát zobrazovania dátumu: "
-
-#~ msgid "Show: "
-#~ msgstr "Ukázať: "
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "Popisky iba do magnitúdy: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "Mihotanie: "
-
-#~ msgid "Constellation Names"
-#~ msgstr "Názvy súhvezdí"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "Intenzita kresieb súhvezdí"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "Hranice súhvezdí"
-
-#~ msgid "Planet Names"
-#~ msgstr "Názvy planét"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "Dráhy planét"
-
-#~ msgid "Planet Trails"
-#~ msgstr "Stopy planét"
-
-#~ msgid "Landscape: "
-#~ msgstr "Terén: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "Ručné zväčšenie: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "Pravidlo pre zmenu veľkosti objektu: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "Miznutie kurzora (sekundy): "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "Skript z CD/DVD: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "Vypnúť: "
-
-#~ msgid "Earth"
-#~ msgstr "Zem"
-
-#~ msgid "Deimos"
-#~ msgstr "Deimos"
-
-#~ msgid "Phobos"
-#~ msgstr "Fobos"
-
-#~ msgid "Io"
-#~ msgstr "Io"
-
-#~ msgid "Europa"
-#~ msgstr "Európa"
-
-#~ msgid "Ganymede"
-#~ msgstr "Ganymedes"
-
-#~ msgid "Callisto"
-#~ msgstr "Callisto"
-
-#~ msgid "Mimas"
-#~ msgstr "Mimas"
-
-#~ msgid "Enceladus"
-#~ msgstr "Enceladus"
-
-#~ msgid "Tethys"
-#~ msgstr "Tethys"
-
-#~ msgid "Dione"
-#~ msgstr "Dione"
-
-#~ msgid "Rhea"
-#~ msgstr "Rhea"
-
-#~ msgid "Titan"
-#~ msgstr "Titan"
-
-#~ msgid "Hyperion"
-#~ msgstr "Hyperion"
-
-#~ msgid "Iapetus"
-#~ msgstr "Iapetus"
-
-#~ msgid "Phoebe"
-#~ msgstr "Phoebe"
-
-#~ msgid "Pluto"
-#~ msgstr "Pluto"
-
-#~ msgid "Solar System Observer"
-#~ msgstr "Pozorovateľ Slnečnej sústavy"
-
-#~ msgid "Hydra"
-#~ msgstr "Hydra"
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "Jas svetelneho znečistenia: "
-
-#~ msgid "Lakota"
-#~ msgstr "Indiánska - kmeň Lakota"
-
-#~ msgid "Planet: "
-#~ msgstr "Planéta: "
-
-#~ msgid "Calendar"
-#~ msgstr "Kalendár"
-
-#~ msgid "Sidereal"
-#~ msgstr "Siderický"
-
-#~ msgid "Day keys: "
-#~ msgstr "Kľúče dní: "
-
-#~ msgid "Galaxy"
-#~ msgstr "Galaxia"
-
-#, no-c-format, qt-format
-#~ msgid "Distance: %1AU"
-#~ msgstr "Vzdialenosť: %1 AU"
-
-#~ msgid "Undocumented type"
-#~ msgstr "Nedokumentovaný typ"
-
-#~ msgid "Unknown"
-#~ msgstr "Neznáme"
-
-#~ msgid "Planetary nebula"
-#~ msgstr "Planetárna hmlovina"
-
-#~ msgid "Nebula"
-#~ msgstr "Hmlovina"
-
-#~ msgid "Globular cluster"
-#~ msgstr "Guľová hviezdokopa"
-
-#~ msgid "Open cluster"
-#~ msgstr "Otvorená hviezdokopa"
-
-#, qt-format
-#~ msgid "Distance: %1 Light Years"
-#~ msgstr "Vzdialenosť: %1 svetelných rokov"
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "Limitná magnitúda: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "Oprava na rýchlosť svetla: "
-
-#~ msgid ""
-#~ "The full name of this projection method is, <i>Lambert azimuthal equal-area "
-#~ "projection</i>. It preserves the area but not the angle."
-#~ msgstr ""
-#~ "Úplný názov tejto metódy premietania je <i>Lambertova azimutálna ekviplošná "
-#~ "projekcia</i>. Zachováva rovnaké obsahy plôch, ale nie uhly."
-
-#~ msgid ""
-#~ "Perspective projection keeps the horizon a straight line. The mathematical "
-#~ "name for this projection method is <i>gnomonic projection</i>."
-#~ msgstr ""
-#~ "Perspektívna projekcia zachováva rovný horizont. Matematický názov tejto "
-#~ "metódy premietania je <i>gnómonická projekcia</i>."
-
-#, qt-format
-#~ msgid "RA/DE (of date): %1/%2"
-#~ msgstr "Rektascenzia/deklinácia (k dátumu): %1/%2"
-
-#~ msgid "Show art"
-#~ msgstr "Zobraziť kresby"
-
-#~ msgid "10000"
-#~ msgstr "10000"
-
-#~ msgid "Scale Moon"
-#~ msgstr "Zväčšiť Mesiac"
-
-#~ msgid "Show atmosphere"
-#~ msgstr "Zobraziť atmosféru"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + ľavé tlačidlo myši"
-
-#~ msgid "No description"
-#~ msgstr "Bez popisu"
-
-#~ msgid "This system does not support OpenGL."
-#~ msgstr "Tento systém nepodporuje OpenGL."
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "/"
-#~ msgstr "/"
-
-#~ msgid "Planets and satellites"
-#~ msgstr "Planéty a obežnice"
-
-#~ msgid "Use as default"
-#~ msgstr "Použiť ako predvolené"
-
-#~ msgid "Light pollution: "
-#~ msgstr "Svetelné znečistenie: "
-
-#~ msgid "10"
-#~ msgstr "10"
-
-#~ msgid "80"
-#~ msgstr "80"
-
-#~ msgid "Shooting Stars"
-#~ msgstr "Meteory"
-
-#~ msgid "144000"
-#~ msgstr "144000"
-
-#~ msgid "Hourly zenith rate:"
-#~ msgstr "Zenitová hodinová frekvencia (ZHR):"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#, qt-format
-#~ msgid "RA/DE (J2000): %1/%2"
-#~ msgstr "Rektascenzia/deklinácia (J2000): %1/%2"
-
-#~ msgid "Add 1 solar week"
-#~ msgstr "Pridať týždeň"
-
-#~ msgid "Subtract 1 sidereal week"
-#~ msgstr "Ubrať hviezdny týždeň"
-
-#~ msgid "Subtract 1 solar week"
-#~ msgstr "Ubrať týždeň"
-
-#~ msgid "Add 1 sidereal week"
-#~ msgstr "Pridať hviezdny týždeň"
-
-#~ msgid "Highest rate ever (1966 Leonids)"
-#~ msgstr "Najvyššia zaznamenaná aktivita (Leonidy 1966)"
-
-#~ msgid "Form"
-#~ msgstr "Formát"
-
-#~ msgid "Show planets"
-#~ msgstr "Zobraziť planéty"
-
-#~ msgid "Show lines"
-#~ msgstr "Zobraziť čiary"
-
-#~ msgid "Art brightness: "
-#~ msgstr "Jas kresieb: "
-
-#~ msgid "Program language"
-#~ msgstr "Jazyk programu"
-
-#~ msgid "Mouse cursor timeout (seconds):"
-#~ msgstr "Čas do zmiznutia kurzoru (sekundy):"
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "Šírka zorného poľa pri spustení: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "Smer pohľadu pri spustení: xxxx"
-
-#~ msgid ""
-#~ "Stereographic projection is known since the antiquity and was originally "
-#~ "known as the planisphere projection. It preserves the angles at which curves "
-#~ "cross each other but it does not preserve area."
-#~ msgstr ""
-#~ "Stereografická projekcia je známa od antických čias, i keď pôvodne sa "
-#~ "označovala ako planisférická. Zachováva uhly, pod ktorými sa pretínajú "
-#~ "čiary, ale nezachováva plochy."
-
-#~ msgid ""
-#~ "The mercator projection is one of the most used world map projection. It "
-#~ "preserves direction and shapes but distorts size, in an increasing degree "
-#~ "away from the equator."
-#~ msgstr ""
-#~ "Mercatorovo premietanie je najčastejšie používaným na mapách. Zachováva "
-#~ "smery a tvary, ale veľkosť plôch narastá smerom od rovníka."
-
-#~ msgid "Nebulas background images"
-#~ msgstr "Obrázky Deep-Sky objektov"
-
-#~ msgid "Nebulas"
-#~ msgstr "Deep-Sky objekty"
-
-#~ msgid ""
-#~ "Restoring default settings requires a restart of Stellarium. Saving all the "
-#~ "current options includes the current FOV and direction of view for use at "
-#~ "next startup."
-#~ msgstr ""
-#~ "Na obnovenie predvolených nastavení je potrebné reštartovať Stellarium. Pri "
-#~ "ukladaní nastavení sa uloží aj smer pohľadu a šírka zorného poľa."
-
-#~ msgid "Planets labels"
-#~ msgstr "Popisky planét"
-
-#~ msgid "RA/Dec (J2000):"
-#~ msgstr "RA/Dec (J2000):"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "The width of your view when Stellarium starts"
-#~ msgstr "Šírka vášho pohľadu pri spustení Stellaria"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "Získať katalóg x z y"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "Stahovanie všetkých hviezdnych katalógov ukončené!"
-
-#~ msgid "Set Location "
-#~ msgstr "Zadajte polohu "
-
-#~ msgid "Set Time "
-#~ msgstr "Nastavte čas "
-
-#~ msgid "Sky Time: "
-#~ msgstr "Čas na oblohe: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "Nastaviť časové pásmo: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "Čas oblohy pri spustení: "
-
-#~ msgid "Sky Language: "
-#~ msgstr "Jazyk popisu oblohy: "
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "Faktor jasu hviezd "
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "Faktor hviezdnych veľkostí "
-
-#~ msgid "Constellation Lines"
-#~ msgstr "Spojnice súhvezdí"
-
-#~ msgid "Meridian Line"
-#~ msgstr "Miestny poludník"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "Azimutálna sieť"
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "Ekvatoriálna sieť"
-
-#~ msgid "Equator Line"
-#~ msgstr "Rovník"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "Ekliptika"
-
-#~ msgid "Nebula Names"
-#~ msgstr "Názvy Deep-Sky objektov"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "Značky Deep-Sky objektov"
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "Faktor hviezdnej veľkosti: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "Jas Mliečnej dráhy "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "Popisky Deep-Sky objektov do magnitúdy: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "Čas potrebný na zväčšenie: "
-
-#~ msgid "Local Script: "
-#~ msgstr "Miestny skript: "
-
-#~ msgid "USB Script: "
-#~ msgstr "Skript z USB: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "Zoznam sa nahrá šípkou dolu."
-
-#~ msgid "Select and exit to run."
-#~ msgstr "Spustíte vybratím a ukončením."
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "Nahrať predvolené nastavenie: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "Uložiť aktuálne nastavenie ako predvolené: "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "Aktualizovať cez internet: "
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "Nastavenie jazyka aplikácie: "
-
-#~ msgid "Charon"
-#~ msgstr "Cháron"
-
-#~ msgid "Umbriel"
-#~ msgstr "Umbriel"
-
-#~ msgid "Ariel"
-#~ msgstr "Ariel"
-
-#~ msgid "Miranda"
-#~ msgstr "Miranda"
-
-#~ msgid "Ceres"
-#~ msgstr "Ceres"
-
-#~ msgid "Pallas"
-#~ msgstr "Pallas"
-
-#~ msgid "Ecliptic"
-#~ msgstr "Ekliptika"
-
-#~ msgid "Flora"
-#~ msgstr "Flora"
-
-#~ msgid "Titania"
-#~ msgstr "Titania"
-
-#~ msgid "Eris"
-#~ msgstr "Eris"
-
-#~ msgid "Oberon"
-#~ msgstr "Oberon"
-
-#~ msgid "Hygiea"
-#~ msgstr "Hygiea"
-
-#~ msgid "Metis"
-#~ msgstr "Metis"
-
-#~ msgid "Iris"
-#~ msgstr "Iris"
-
-#~ msgid "Astraea"
-#~ msgstr "Astraea"
-
-#~ msgid "Hebe"
-#~ msgstr "Hebe"
-
-#~ msgid "Eros"
-#~ msgstr "Eros"
-
-#~ msgid "Apophis"
-#~ msgstr "Apophis"
-
-#~ msgid "Hektor"
-#~ msgstr "Hektor"
-
-#~ msgid "Chiron"
-#~ msgstr "Chirón"
-
-#~ msgid "Amor"
-#~ msgstr "Amor"
-
-#~ msgid "Juno"
-#~ msgstr "Juno"
-
-#~ msgid "Vesta"
-#~ msgstr "Vesta"
-
-#~ msgid "Plugin Key Bindings"
-#~ msgstr "Priradenie klávesov modulom"
-
-#~ msgid ""
-#~ "A convenient interface for some of the more obscure options in Stellarium's "
-#~ "configuration file. Allows setting the time zone and changing the way the "
-#~ "time and the date are displayed in the bottom bar."
-#~ msgstr ""
-#~ "Praktické rozhranie na ovládanie niektorých menej obvyklých nastavení v "
-#~ "konfiguračnom súbore programu Stellarium. Umožňuje nastaviť časovú zónu a "
-#~ "zmeniť spôsob, akým je v stavovom riadku zobrazovaný čas a dátum."
-
-#~ msgid "Time Zone"
-#~ msgstr "Časové pásmo"
-
-#~ msgid ""
-#~ "An interface for adding asteroids and comets to Stellarium. It can download "
-#~ "object lists from the Minor Planet Center's website and perform searches in "
-#~ "its online database. Still a work in progress."
-#~ msgstr ""
-#~ "Rozhranie na zadávanie nových planétok a komét do programu Stellarium. "
-#~ "Umožňuje nahrať zoznamy objektov z webovej stránky Minor Planet Center a "
-#~ "vyhľadávať v ich online databáze. Zatiaľ ide o experimentálnu funkciu."
-
-#, qt-format
-#~ msgid "Ecliptic Geocentric (of date): %1/%2"
-#~ msgstr "Ekliptika geocentricky (pre dátum): %1/%2"
-
-#, qt-format
-#~ msgid "Obliquity (of date): %1"
-#~ msgstr "Sklon ekliptiky (pre dátum): %1"
-
-#~ msgid "(geometric)"
-#~ msgstr "(geometricky)"
-
-#~ msgid "Pasiphae"
-#~ msgstr "Pasiphae"
-
-#~ msgid "Amalthea"
-#~ msgstr "Amalthea"
-
-#~ msgid "Himalia"
-#~ msgstr "Himalia"
-
-#~ msgid "Elara"
-#~ msgstr "Elara"
-
-#~ msgid "Triton"
-#~ msgstr "Triton"
-
-#~ msgid "Naiad"
-#~ msgstr "Naiad"
-
-#~ msgid "Nereid"
-#~ msgstr "Nereid"
-
-#~ msgid "Adrastea"
-#~ msgstr "Adrastea"
-
-#~ msgid "Thebe"
-#~ msgstr "Thebe"
-
-#~ msgid "Leda"
-#~ msgstr "Leda"
-
-#~ msgid "Ananke"
-#~ msgstr "Ananke"
-
-#~ msgid "Lysithea"
-#~ msgstr "Lysithea"
-
-#~ msgid "Carme"
-#~ msgstr "Carme"
-
-#~ msgid "Sinope"
-#~ msgstr "Sinope"
-
-#~ msgid "Sao"
-#~ msgstr "Sao"
-
-#~ msgid "Laomedeia"
-#~ msgstr "Laomedeia"
-
-#~ msgid "Neso"
-#~ msgstr "Neso"
-
-#~ msgid "Larissa"
-#~ msgstr "Larissa"
-
-#~ msgid "Proteus"
-#~ msgstr "Proteus"
-
-#~ msgid "Halimede"
-#~ msgstr "Halimede"
-
-#~ msgid "Psamathe"
-#~ msgstr "Psamathe"
-
-#~ msgid "Galatea"
-#~ msgstr "Galatea"
-
-#~ msgid "Despina"
-#~ msgstr "Despina"
-
-#~ msgid "Thalassa"
-#~ msgstr "Thalassa"
-
-#~ msgid "Kepler's Supernova"
-#~ msgstr "Keplerova supernova"
-
-#~ msgid "Find Object or Position"
-#~ msgstr "Nájsť objekt alebo polohu"
-
-#~ msgid "Galactic Plane"
-#~ msgstr "Galaktická rovina"
-
-#~ msgid "SpaceShip"
-#~ msgstr "Kozmická loď"
-
-#~ msgid "Add 1 sidereal month"
-#~ msgstr "Pridať hviezdny mesiac"
-
-#~ msgid "Subtract 1 sidereal month"
-#~ msgstr "Ubrať hviezdny mesiac"
-
-#~ msgid "Galactic plane"
-#~ msgstr "Galaktická rovina"
-
-#~ msgid "Sedna"
-#~ msgstr "Sedna"
-
-#~ msgid "Hydra (moon)"
-#~ msgstr "Hydra (mesiac)"
-
-#~ msgid "Orcus"
-#~ msgstr "Orcus"
-
-#~ msgid "Quaoar"
-#~ msgstr "Quaoar"
-
-#~ msgid "Nix"
-#~ msgstr "Nix"
-
-#~ msgid "Haumea"
-#~ msgstr "Haumea"
-
-#~ msgid "American Samoa"
-#~ msgstr "Americká Samoa"
-
-#~ msgid "Netherlands Antilles"
-#~ msgstr "Holandské Antily"
-
-#~ msgid "Toggle ocular view:"
-#~ msgstr "Prepnúť zobrazenie okulára:"
-
-#~ msgid "Open pop-up navigation menu:"
-#~ msgstr "Otvoriť vyskakovacie navigačné menu:"
-
-#~ msgid "Timezone name:"
-#~ msgstr "Názov časového pásma:"
-
-#~ msgid "(offset = local time - UTC time)"
-#~ msgstr "(posun = miestny čas - čas UTC)"
-
-#~ msgid "Offset from UTC (hours):"
-#~ msgstr "Posun od UTC (v hodinách):"
-
-#~ msgid "Daylight saving time end"
-#~ msgstr "Koniec letného času"
-
-#~ msgid "Daylight saving time (summer time)"
-#~ msgstr "Čas šetriaci denné svetlo (letný čas)"
-
-#~ msgid "Daylight saving time start"
-#~ msgstr "Začiatok letného času"
-
-#~ msgid "Day:"
-#~ msgstr "Deň:"
-
-#~ msgid "Time of change:"
-#~ msgstr "Čas zmeny:"
-
-#~ msgid "Define a time zone"
-#~ msgstr "Definovanie časového pásma"
-
-#~ msgid "Use this definition"
-#~ msgstr "Použiť túto definíciu"
-
-#~ msgid "Any changes will take effect the next time Stellarium is started."
-#~ msgstr ""
-#~ "Akékoľvek zmeny nadobudnú platnosť až po ďalšom spustení programu Stellarium."
-
-#~ msgid ""
-#~ "By default, the time displayed in Stellarium is interpreted as the local "
-#~ "time in the system's time zone, not in the displayed location's time zone. "
-#~ "This behaviour can be changed by changing Stellarium's global time zone "
-#~ "settings."
-#~ msgstr ""
-#~ "V programe Stellarium sa predvolene zobrazovaný čas interpretuje ako miestny "
-#~ "čas v časovom pásme systému, nie v časovom pásme zobrazovanej zemepisnej "
-#~ "polohy. Toto správanie možno zmeniť zmenou nastavení globálneho časového "
-#~ "pásma programu Stellarium."
-
-#~ msgid "Universal Coordinated Time (UTC)"
-#~ msgstr "Koordinovaný svetový čas (UTC)"
-
-#~ msgid "User-defined:"
-#~ msgstr "Definované používateľom:"
-
-#~ msgid "Use system settings (default)"
-#~ msgstr "Použiť systémové nastavenia (predvolené)"
-
-#~ msgid "Bosnia and Herzegowina"
-#~ msgstr "Bosna a Hercegovina"
-
-#~ msgid "Brunei Darussalam"
-#~ msgstr "Brunej"
-
-#~ msgid "Cocos Islands"
-#~ msgstr "Kokosové ostrovy"
-
-#~ msgid "Democratic Republic of the Congo"
-#~ msgstr "Konžská demokratická republika"
-
-#~ msgid "Central African Republic"
-#~ msgstr "Stredoafrická republika"
-
-#~ msgid "Cote d'Ivoire"
-#~ msgstr "Pobrežie Slonoviny"
-
-#~ msgid "Republic of the Congo"
-#~ msgstr "Konžská republika"
-
-#~ msgid "Serbia and Montenegro"
-#~ msgstr "Srbsko a Čierna Hora"
-
-#~ msgid "United Kingdom"
-#~ msgstr "Spojené kráľovstvo"
-
-#~ msgid "Saint Kitts and Nevis"
-#~ msgstr "Svätý Krištof a Nevis"
-
-#~ msgid "Democratic People's Republic of Korea"
-#~ msgstr "Kórejská ľudovodemokratická republika"
-
-#~ msgid "Republic of Korea"
-#~ msgstr "Kórejská republika"
-
-#~ msgid "Saint Lucia"
-#~ msgstr "Svätá Lucia"
-
-#~ msgid "Myanmar"
-#~ msgstr "Mjanmarsko"
-
-#~ msgid "Saint Pierre and Miquelon"
-#~ msgstr "Saint Pierre a Miquelon"
-
-#~ msgid "Palestinian Territories"
-#~ msgstr "Palestínske okupované územia"
-
-#~ msgid "Russian Federation"
-#~ msgstr "Ruská federácia"
-
-#~ msgid "Saint Helena"
-#~ msgstr "Svätá Helena"
-
-#~ msgid "French Southern Territories"
-#~ msgstr "Francúzske južné a antarktické územia"
-
-#~ msgid "Turks and Caicos Islands"
-#~ msgstr "Ostrovy Turks a Caicos"
-
-#~ msgid "Syrian Arab Republic"
-#~ msgstr "Sýrska arabská republika"
-
-#~ msgid "Saint Vincent and the Grenadines"
-#~ msgstr "Svätý Vincent a Grenadíny"
-
-#~ msgid "Vatican City State"
-#~ msgstr "Vatikánsky mestský štát"
-
-#~ msgid "United States Minor Outlying Islands"
-#~ msgstr "Menšie odľahlé ostrovy USA"
-
-#~ msgid "British Virgin Islands"
-#~ msgstr "Britské Panenské ostrovy"
-
-#~ msgid "Viet Nam"
-#~ msgstr "Vietnam"
-
-#~ msgid "United States Virgin Islands"
-#~ msgstr "Americké Panenské ostrovy"
-
-#~ msgid "Samoa"
-#~ msgstr "Samoa"
-
-#~ msgid "Yugoslavia"
-#~ msgstr "Juhoslávia"
-
-#~ msgid "On-line astronomical database SIMBAD"
-#~ msgstr "On-line astronomická databáza SIMBAD"
-
-#~ msgid "Display formats"
-#~ msgstr "Formáty zobrazenia"
-
-#~ msgid "Update TLE lists from Internet sources"
-#~ msgstr "Aktualizácia zoznamov TLE z internetových zdrojov"
-
-#~ msgid "Show meridian line"
-#~ msgstr "Zobraziť poludníkovú čiaru"
-
-#~ msgid "The hour angle"
-#~ msgstr "Hodinový uhol"
-
-#~ msgid "Display  info about a visual magnitude"
-#~ msgstr "Zobraziť informácie o vizuálnej magnitúde"
-
-#~ msgid "Display  info about an absolute magnitude"
-#~ msgstr "Zobraziť informácie o absolútnej magnitúde"
-
-#~ msgid "Display info about an object's size"
-#~ msgstr "Zobraziť informácie o veľkosti objektu"
-
-#~ msgid "Object's distance"
-#~ msgstr "Vzdialenosť objektu"
-
-#~ msgid "Display info about an object's distance"
-#~ msgstr "Zobraziť informácie o vzdialenosti objektu"
-
-#~ msgid "Display info about an object's name"
-#~ msgstr "Zobraziť informácie o názve objektu"
-
-#~ msgid "An object's name"
-#~ msgstr "Názov objektu"
-
-#~ msgid "Object's size"
-#~ msgstr "Veľkosť objektu"
-
-#~ msgid "Key mappings"
-#~ msgstr "Priradenie klávesov"
-
-#~ msgid "A Quintuple eclipse from Deimos 2027"
-#~ msgstr "Štvornásobné zatmenie z Deimosu v r. 2027"
-
-#~ msgid "Analemma"
-#~ msgstr "Analema"
-
-#~ msgid "Earth best views from other Solar system bodies in the 21st Century."
-#~ msgstr ""
-#~ "Najkrajšie pohľady na Zem z iných telies Slnečnej sústavy v priebehu 21. "
-#~ "storočia."
-
-#~ msgid "Transit of Venus as seen from Sydney Australia 6th June 2012."
-#~ msgstr ""
-#~ "Tranzit Venuše cez disk Slnka, ako bol viditeľný v austrálskom Sydney 6. "
-#~ "júna 2012."
-
-#~ msgid ""
-#~ "This script shows the analemma - the path of the Sun across the sky during "
-#~ "the year."
-#~ msgstr "Tento skript ukazuje analemu - dráhu Slnka na oblohe počas roka."
-
-#~ msgid ""
-#~ "Phobos races ahead of Mars and eclipses the sun, passes thru it and then "
-#~ "retrogrades back towards the sun and just partially eclipses it (only seen "
-#~ "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
-#~ "Phobos emerges from the sun it passes through Mars' shadow and dims."
-#~ msgstr ""
-#~ "Fobos predbehne Mars a zakryje Slnko, prejde pred ním a potom sa vráti "
-#~ "naspäť, takže čiastočne zakryje Slnko ešte raz. Potom Mars zakryje Slnko aj "
-#~ "Fobos a nakoniec vyjde Fobos a zmizne v tieni Marsu."
-
-#~ msgid ""
-#~ "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
-#~ "Occultations of both on the same day are very rare. Here's one that takes "
-#~ "place 1/23/2048. In real speed."
-#~ msgstr ""
-#~ "Zákryty Zeme Fobosom sú časté, rovnako ako zákryty Jupitera. Ale zákryt "
-#~ "oboch planét v jeden deň sú veľmi vzácne. Toto je úkaz, ktorý nastane 23. 1. "
-#~ "2048. Reálna rýchlosť času."
-
-#~ msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
-#~ msgstr "Fobos zakryje Slnko pri pohľade z Olympus Mons 10. januára 2068."
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 171 events in all!"
-#~ msgstr ""
-#~ "Sporič obrazovky zobrazuje rôzne úkazy v Slnečnej sústave. Celkove 171 "
-#~ "úkazov!"
-
-#~ msgid "A tour via western constellations."
-#~ msgstr "Prehliadka súhvezdí známych v západnej civilizácii."
-
-#~ msgid "Look at Sun from big planets of Solar system and Pluto."
-#~ msgstr "Pohľad na Slnko z planét Slnečnej sústavy a z Pluta."
-
-#~ msgid ""
-#~ "Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos "
-#~ "need enable plugin for supernovae."
-#~ msgstr ""
-#~ "Vzplanutie supernovy, ktorú pozoroval Tycho Brahe v roku 1572. Na zobrazenie "
-#~ "je potrebné povoliť zásuvný modul Supernovy."
-
-#~ msgid "Libyan Arab Jamahiriya"
-#~ msgstr "Líbya"
-
-#~ msgid "Return to default"
-#~ msgstr "Východzie hodnoty"
-
-#~ msgid "Lao"
-#~ msgstr "Laos"
-
-#~ msgid "Extend search with SIMBAD"
-#~ msgstr "Rozšírenie hľadania so SIMBAD"
-
-#~ msgid "Show equator line"
-#~ msgstr "Zobrazenie rovníka"
-
-#~ msgid "Show ecliptic line"
-#~ msgstr "Zobrazenie ekliptiky"
-
-#~ msgid "Show horizon line"
-#~ msgstr "Zobrazenie obzoru"
-
-#~ msgid "Show Galactic plane line"
-#~ msgstr "Zobrazenie galaktického rovníka"
-
-#~ msgid "Cluster associated with nebulosity"
-#~ msgstr "Hviezdokopa s hmlovinou"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
-#~ msgstr "Magnitúda: <b>%1 m</b> (B-V index: %2)"
-
-#, qt-format
-#~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-#~ msgstr "Zdanlivá magnitúda: <b>%1</b> (s extinkciou)"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
-#~ msgstr "Magnitúda: <b>%1</b> (extinkcia: <b>%2</b>. B-V: <b>%3</b>)"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-#~ msgstr "Magnitúda: <b>%1</b> (B-V: <b>%2</b>)"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Hore/Dolu"
-
-#~ msgid "When a Script is Running"
-#~ msgstr "Keď je spustený skript"
-
-#~ msgid "Past Developers"
-#~ msgstr "Predchádzajúci vývojári"
-
-#~ msgid "Crosshairs"
-#~ msgstr "Nitkový kríž"
-
-#~ msgid "Thursday"
-#~ msgstr "Štvrtok"
-
-#~ msgid "Friday"
-#~ msgstr "Piatok"
-
-#~ msgid "Tuesday"
-#~ msgstr "Utorok"
-
-#~ msgid "Wednesday"
-#~ msgstr "Streda"
-
-#~ msgid "Sunday"
-#~ msgstr "Nedeľa"
-
-#~ msgid "Monday"
-#~ msgstr "Pondelok"
-
-#~ msgid "Last week"
-#~ msgstr "Posledný týždeň"
-
-#~ msgid "Saturday"
-#~ msgstr "Sobota"
-
-#~ msgid "Warning"
-#~ msgstr "Varovanie"
-
-#~ msgid "Third week"
-#~ msgstr "Tretí týždeň"
-
-#~ msgid "Second week"
-#~ msgstr "Druhý týždeň"
-
-#~ msgid "First week"
-#~ msgstr "Prvý týždeň"
-
-#~ msgid "Fourth week"
-#~ msgstr "Štvrtý týždeň"
-
-#~ msgid "Galactic plane line"
-#~ msgstr "Galaktická rovina"
-
-#~ msgid "Copy the Solar System file..."
-#~ msgstr "Kopírovať súbor Slnečnej sústavy..."
-
-#~ msgid "Copy/replace the Solar System file"
-#~ msgstr "Kopírovať/nahradiť súbor Slnečnej sústavy"
-
-#~ msgid "Replace the Solar System file..."
-#~ msgstr "Nahradiť súbor Slnečnej sústavy..."
-
-#~ msgid "Display mode for quasars"
-#~ msgstr "Režim zobrazenia kvazarov"
-
-#~ msgid "Display mode for pulsars"
-#~ msgstr "Režim zobrazenia pulzarov"
-
-#~ msgid "Nights above horizon: "
-#~ msgstr "Počet nocí nad horizontom: "
-
-#, qt-format
-#~ msgid " (at %1 deg.)"
-#~ msgstr " (na %1 stup.)"
-
-#~ msgid "deg."
-#~ msgstr "stup."
-
-#~ msgid "0 deg."
-#~ msgstr "0 stup."
-
-#~ msgid "Sun altitude at twilight"
-#~ msgstr "Výška Slnka počas súmraku"
-
-#~ msgid "Additional information 3"
-#~ msgstr "Dodatočné informácie 3"
-
-#~ msgid "Additional information 1"
-#~ msgstr "Dodatočné informácie 1"
-
-#~ msgid "Additional information 2"
-#~ msgstr "Dodatočné informácie 2"
-
-#~ msgid "Topocentric equatorial coordinates"
-#~ msgstr "Topocentrické rovníkové súradnice"
-
-#~ msgid "clear script"
-#~ msgstr "vyčistiť skript"
-
-#~ msgid "pre-process script using STS preprocessor"
-#~ msgstr "predspracovať skript preprocesorom STS"
-
-#, qt-format
-#~ msgid "Updated %1/%2 satellite(s); %3 missing"
-#~ msgstr "Aktualizovaných %1/%2 satelitov; %3 chýbajú"
-
-#~ msgid "Manual zoom"
-#~ msgstr "Ručné priblíženie"
-
-#~ msgid "CD/DVD script"
-#~ msgstr "CD/DVD skript"
-
-#~ msgid "Add new Solar System objects"
-#~ msgstr "Pridať nové objekty Slnečnej sústavy"
-
-#, qt-format
-#~ msgid ""
-#~ "If you want read full information about plugin, his history and format of "
-#~ "catalog you can %1get info here%2."
-#~ msgstr ""
-#~ "Ak si chcete pričítať kompletné informácie o tomto module, jeho histórii a "
-#~ "formáte katalógov môžete tak %1urobiť tu%2."
-
-#~ msgid "Observability analysis"
-#~ msgstr "Pozorovateľnosť"
-
-#, qt-format
-#~ msgid "Ecliptic Topocentric (of date): %1/%2"
-#~ msgstr "Ekliptika voči stredu Zeme (k dátumu): %1/%2"
-
-#~ msgid "Makemake"
-#~ msgstr "Makemake"
-
-#~ msgid "Varuna"
-#~ msgstr "Varuna"
-
-#~ msgid "F7"
-#~ msgstr "F7"
-
-#~ msgid "Show and edit all keyboard shortcuts"
-#~ msgstr "Zobraziť a upraviť všetky klávesové skratky"
-
-#, qt-format
-#~ msgid "Galactic longitude/latitude (J2000): %1/%2"
-#~ msgstr "Galaktická dĺžka/šírka (J2000): %1/%2"
-
-#~ msgid "Show and zoom Moon"
-#~ msgstr "Zobraziť a zväčšiť Mesiac"
-
-#~ msgid "Run landscapes script from file"
-#~ msgstr "Spustiť skript s terénmi z tohto súboru"
-
-#~ msgid "Longitude/Latitude (J2000)"
-#~ msgstr "Dĺžka/Šírka (J2000)"
-
-#~ msgid "Galactic coordinates, equinox of J2000.0"
-#~ msgstr "Galaktické súradnice (J2000)"
-
-#~ msgid "Edit Primary Shortcut"
-#~ msgstr "Upraviť hlavnú skratku"
-
-#~ msgid "Edit Alternative Shortcut"
-#~ msgstr "Upraviť alternatívnu skratku"
-
-#~ msgid "Render Solar Shadows"
-#~ msgstr "Zobraziť slnečné tiene"
-
-#~ msgid "Magnification provided by this ocular/telescope combination"
-#~ msgstr "Zväčšenie pri použití týchto okulárov a teleskopov"
-
-#~ msgid "Actual field of view provided by this ocular/telescope combination"
-#~ msgstr "Skutočné zorné pole pri použití týchto okulárov a teleskopov"
-
-#~ msgid "The plug-in's key bindings can be edited in the General Tab."
-#~ msgstr "Priradenie kláves v module môžete nastaviť na záložke Hlavné."
-
-#~ msgid "Comma separated list of groups"
-#~ msgstr "Čiarkami oddelený zoznam skupín"
-
-#~ msgid "TLE data:"
-#~ msgstr "Údaje TLE:"
-
-#~ msgid "NORAD two line element orbit data"
-#~ msgstr "Dvojriadkové orbitálne elementy NORAD"
-
-#~ msgid "Angle Measure Plugin"
-#~ msgstr "Modul uhlomer"
-
-#~ msgid "Compass Marks Plugin"
-#~ msgstr "Modul značky kompasu"
-
-#~ msgid "Pulsars Plugin"
-#~ msgstr "Modul pulzary"
-
-#~ msgid "Quasars Plugin"
-#~ msgstr "Modul kvazary"
-
-#~ msgid "Oculars Plugin"
-#~ msgstr "Modul okuláre"
-
-#~ msgid "Observability analysis Plugin"
-#~ msgstr "Modul analýza pozorovateľnosti"
-
-#~ msgid "Exoplanets Plugin"
-#~ msgstr "Modul exoplanéty"
-
-#~ msgid ""
-#~ "You can choose to scale the image you see on the screen.  This is intended "
-#~ "to show you a better comparison of what one eyepiece/telescope combination "
-#~ "will be like as compared to another.  The same eyepiece in two different "
-#~ "telescopes of differing focal length will produce two different exit "
-#~ "circles, changing the view someone.  The trade-off of this is that, with the "
-#~ "image scaled, a good deal of the screen can be wasted.  Therefore I "
-#~ "recommend that you leave it off, unless you feel you have a need of it."
-#~ msgstr ""
-#~ "Môžete zväčšiť obraz, ktorý vidíte na obrazovke. Zámerom je umožniť lepšie "
-#~ "porovnanie či je určitá kombinácia okuláru/ďalekohľadu lepšia ako iná. "
-#~ "Rovnaký okulár na rôznych ďalekohľadoch s rozličným ohniskom zobrazia rôzne "
-#~ "veľké výstupné pupily a tým sa zmení zorné pole. Je potrebné si uvedomiť, že "
-#~ "zväčšenie obrazu zbytočne zaberá veľkú časť obrazovky. Odporúčame preto "
-#~ "zväčšenie nepoužívať, pokiaľ nie je potrebné."
-
-#~ msgid "Historical Supernovae Plugin"
-#~ msgstr "Modul historické supernovy"
-
-#~ msgid "Satellites Plugin"
-#~ msgstr "Modul satelity"
-
-#~ msgid "Telescope Control Plugin"
-#~ msgstr "Modul ovládanie ďalekohľadu"
-
-#~ msgid "DST timezone name:"
-#~ msgstr "Názov časovej zóny letného času:"
-
-#~ msgid "DST offset from UTC (hours):"
-#~ msgstr "Posun letného času voči UTC (v hodinách):"
-
-#~ msgid "Magnitude scaling multiplier"
-#~ msgstr "Faktor násobenia jasnosti"
-
-#~ msgid "Time Zone plug-in"
-#~ msgstr "Modul časové pásma"
-
-#~ msgid "Cursor timeout:"
-#~ msgstr "Čas skrytia kurzora:"
-
-#~ msgid "Nebula label frequency:"
-#~ msgstr "Frekvencia menovky hmlovín:"
-
-#~ msgid ""
-#~ "This plug-in uses a custom Solar System configuration file. If something "
-#~ "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
-#~ "manually that file from:"
-#~ msgstr ""
-#~ "tento modul používa vlastný konfiguračný súbor pre slnečnú sústavu. Ak sa "
-#~ "niečo pokazí a Stellarium havaruje alebo sa nespustí, môžete ho ručne "
-#~ "vymazať z adresára:"
-
-#~ msgid ""
-#~ "You can create a backup copy of the custom Solar System configuration file "
-#~ "in a convenient location, or replace it with such a copy."
-#~ msgstr ""
-#~ "Záložnú kópiu vlastného konfiguračného súboru slnečnej sústavy si môžete "
-#~ "uložiť na vhodnom mieste, alebo ho môžete nahradiť takouto kópiou."
-
-#~ msgid ""
-#~ "A plugin that shows some historical supernovae brighter than 10 visual "
-#~ "magnitude."
-#~ msgstr ""
-#~ "Modul, ktorý zobrazuje niektoré historické supernovy jasnejšie ako 10. "
-#~ "vizuálna magnitúda."
-
-#~ msgid "Greatest elongation: "
-#~ msgstr "Najväčšia elongácia: "
-
-#~ msgid "Cosmical rise/set"
-#~ msgstr "Kozmikálny východ/západ"
-
-#~ msgid "No Acronychal rise/set."
-#~ msgstr "Nenastáva akronychálny východ/západ."
-
-#~ msgid "Largest Sun separation: "
-#~ msgstr "Najväčšia odchýlka od Slnka: "
-
-#~ msgid "Acronychal rise/set"
-#~ msgstr "Akronychálny východ/západ"
-
-#~ msgid ""
-#~ "The Acronychal rise (or set) of an object happens when the object rises (or "
-#~ "sets) just when the Sun sets (or rises), respectively. The exact dates of "
-#~ "these ephemeris depend on the Observer's location. The dates between the "
-#~ "Acronychal set and rise are those when the altitude of the celestial object "
-#~ "uses to be high when the Sun is well below the horizon (hence the object can "
-#~ "be well observed). On the contrary, the Cosmical rise (or set) happens when "
-#~ "both, the object and the Sun, rise (or set) simultaneously. It is obvious "
-#~ "that the source is hardly observable (or not observable at all) in the dates "
-#~ "between Cosmical set and rise."
-#~ msgstr ""
-#~ "Akronychálny východ (alebo západ) telesa nastáva pri východe (alebo západe) "
-#~ "telesa v okamihu západu (alebo východu) Slnka. Presné dátumy týchto "
-#~ "predpovedí závisia od polohy pozorovateľa. Dátumy medzi akronychálnym "
-#~ "západom a východom sú tie, kedy je nebeské teleso nad obzorom a Slnko je pod "
-#~ "obzorom (takže objekt je možné pozorovať). Naopak, kozmikálny východ (alebo "
-#~ "západ) nastáva vtedy, keď je objekt aj Slnko súčasne nad obzorom (alebo "
-#~ "obidve zapadli). Je zrejmé, že medzi kozmikálnym východom a západom je "
-#~ "objekt ťažko alebo vôbec pozorovateľný."
-
-#~ msgid "Acronychal/Cosmical rise/set:"
-#~ msgstr "Akronychálny/kozmikálny východ/západ:"
-
-#~ msgid ""
-#~ "A plugin that shows some historical supernovae brighter than visual "
-#~ "magnitude 10: "
-#~ msgstr ""
-#~ "Modul zobrazuje niektoré historické supernovy jasnejšie ako 10. vizuálna "
-#~ "magnitúda: "
-
-#~ msgid ""
-#~ "The Quasars plugin provides visualization of some quasars brighter than 16 "
-#~ "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
-#~ "Galactic Nuclei\" (13th Ed.)"
-#~ msgstr ""
-#~ "Modul kvazary poskytuje zobrazenie niektorých kvazarov jasnejších ako 16. "
-#~ "vizuálna magnitúda. Katalóg kvazarov je prevzatý z práce \"Quasars and "
-#~ "Active Galactic Nuclei\" (13th Ed.)"
-
-#~ msgid "Showing Options"
-#~ msgstr "Zobrazenie nastavení"
-
-#~ msgid ""
-#~ "Reports an analysis of source observability (rise, set, and transit times), "
-#~ "as well as the epochs of year when the source is best observed. It assumes "
-#~ "that a source is observable if it is above the horizon during a fraction of "
-#~ "the night. The plugin also gives the day for largest separation from the Sun "
-#~ "and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
-#~ "the quantities shown by this script is given in the 'About' tab of the "
-#~ "configuration window"
-#~ msgstr ""
-#~ "Zobrazí analýzu pozorovateľnosti objektu (čas východu, tranzitu, západu) a "
-#~ "epochy v roku, kedy je objekt najlepšie pozorovateľný. Predpokladom je, že "
-#~ "objekt je pozorovateľný, ak je nad horizontom aspoň počas časti noci. Modul "
-#~ "vypočíta aj deň najväčšej uhlovej vzdialenosti od Slnka a dni akronychálneho "
-#~ "a kozmikálneho východu/západu. <br><br>Vysvetlenie údajov vypočítaných týmto "
-#~ "skriptom nájdete v záložke \"Informácie\" v okne nastavení."
-
-#~ msgid "Dates of Acronychal and Cosmical rise/set"
-#~ msgstr "Dátumy akronychálneho a kozmikálneho východu/západu"
-
-#, qt-format
-#~ msgid "Obliquity (of date, for Earth): %1"
-#~ msgstr "Sklon (k dátumu, pre Zem): %1"
-
-#~ msgid ""
-#~ "A demonstration of the analemma - the path of the Sun across the sky during "
-#~ "the year."
-#~ msgstr "Ukážka analemy - dráhy Slnka na oblohe počas roka."
-
-#~ msgid "Add 1 sidereal century"
-#~ msgstr "Pripočítať 1 siderické storočie"
-
-#~ msgid "plutoid"
-#~ msgstr "plutino"
-
-#~ msgid "Subtract 1 mean tropical century"
-#~ msgstr "Odpočítať 1 stredné tropické storočie"
-
-#~ msgid "Subtract 1 sidereal century"
-#~ msgstr "Odpočítať 1 siderické storočie"
-
-#~ msgid "Add 1 mean tropical century"
-#~ msgstr "Pripočítať 1 stredné tropické storočie"
-
-#~ msgid "Sun altitude at twilight: 0 deg."
-#~ msgstr "Výška slnka pri úsvite: 0 stupňov."
-
-#~ msgid "Horizon altitude: 0 deg."
-#~ msgstr "Výška horizontu: 0 stupňov."
-
-#~ msgid "Dark Nebula"
-#~ msgstr "Tmavá hmlovina"
-
-#~ msgid "with meaningless values outside this range"
-#~ msgstr "s nezmyselnou hodnotou mimo rozsahu"
-
-#~ msgid ""
-#~ "with a mean error of less than one second, max. error 1.9s, and meaningless "
-#~ "values outside this range"
-#~ msgstr ""
-#~ "so strednou chybou menšou ako 1 sekunda, max. chyba 1,9 s, a nezmyselná "
-#~ "hodnota mimo rozsahu"
-
-#~ msgid "Limit Magnitudes"
-#~ msgstr "Limitná magnitúda"
-
-#~ msgid "Hourly zenith rate"
-#~ msgstr "Hodinová zenitová rýchlosť"
-
-#~ msgid "Limit Magnitudes (for unaided/binocular observers)"
-#~ msgstr "Limitná magnitúda (pre voľné oko/binokulár)"
-
-#, qt-format
-#~ msgid "Epoch for minimum light: %1 JD"
-#~ msgstr "Obdobie minima: %1 JD"
-
-#, qt-format
-#~ msgid "Epoch for maximum light: %1 JD"
-#~ msgstr "Obdobie maxima: %1 JD"
-
-#~ msgid ""
-#~ "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-#~ msgstr ""
-#~ "Limitná jasnosť vesmírnych objektov (hviezdokopy, galaxie a hmloviny)"
-
-#~ msgid ""
-#~ "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-#~ msgstr ""
-#~ "Názvy a značky pre vesmírne objekty (hviezdokopy, galaxie a hmloviny)"
-
-#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
-#~ msgstr "Najväčšie elongácie Zeme a Marsu z Jupitera"
-
-#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-#~ msgstr "Najväčšie elongácie Zeme z Jupitera v rokoch 2000-3000"
-
-#~ msgid "Earth Events from Venus"
-#~ msgstr "Úkazy Zeme z Venuše"
-
-#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
-#~ msgstr "Najväčšie elongácie a jasy Zeme z Marsu"
-
-#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-#~ msgstr "Najväčšie elongácie a jasnosti Zeme z Marsu v rokoch 2000-3000"
-
-#~ msgctxt "Deep-sky objects"
-#~ msgid "DSOs"
-#~ msgstr "OHV"
-
-#~ msgctxt "Zenithal Hourly Rate"
-#~ msgid "ZHR:"
-#~ msgstr "ZHR:"
-
-#~ msgid "1000"
-#~ msgstr "1000"
-
-#~ msgid "IAU Comission 53: Extrasolar Planets"
-#~ msgstr "Komisia IAU 53: extrasolárne planéty"
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
-#~ msgstr ""
-#~ "Šetrič obrazovky zobrazujúci rozličné udalosti v slnečnej sústave. Dokopy je "
-#~ "ich 187!"
-
-#~ msgid "Habitable Class"
-#~ msgstr "Trieda obývateľnosti"
-
-#~ msgid "Mean Surface Temperature"
-#~ msgstr "Priemerná teplota povrchu"
-
-#~ msgid "Mean surface temp."
-#~ msgstr "Priem. teplota povrchu"
-
-#~ msgid "Habitable class"
-#~ msgstr "Trieda obývateľnosti"
-
-#~ msgid ""
-#~ "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
-#~ "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
-#~ "medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
-#~ "or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
-#~ "life, whereas class O or E would only support extremophilic life. Non-"
-#~ "habitable planets are simply given the class X (or NH)."
-#~ msgstr ""
-#~ "Klasifikuje obývateľné planéty na základe teploty: hypopsychroplanéty (O "
-#~ "alebo hP) = veľmi studené (menej ako −50°C); psychroplanéty (P) = studené; "
-#~ "mezoplanéty (M) = strednej teploty (0–50°C); termoplanéty (T) = teplé; "
-#~ "hypertermoplanéty (E alebo hT) = veľmi teplé (nad 100°C). Mezoplanéty by "
-#~ "boli ideálne pre komplexný život, zatiaľ čo trieda O alebo E by mohla "
-#~ "podporiť len extrémofílny život. Neobývateľné planéty sú zaradené do triedy "
-#~ "X (alebo NH)."
-
-#~ msgid ""
-#~ "This plugin can display potential habitable exoplanets (orange marker) and "
-#~ "some information about those planets - habitable class, mean surface "
-#~ "temperature and Earth Similarity Index."
-#~ msgstr ""
-#~ "Tento zásuvný modul dokáže zobraziť potenciálne obývateľné exoplanéty "
-#~ "(oranžovým symbolom) a nejaké informácie o týchto planétach - triedu "
-#~ "obývateľnosti, priemernú teplotu povrchu a index podobnosti so Zemou."
-
-#~ msgid ""
-#~ "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
-#~ "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
-#~ "0.3 in all cases)."
-#~ msgstr ""
-#~ "Teplota v (°C) založená na predpoklade, že pomer atmosféry k hmotnosti "
-#~ "planéty je podobný zemskému, pričom uvažujeme skleníkový efekt kvôli "
-#~ "prítomnosti 1 percenta CO2 a albedo 0,3."
-
-#~ msgid "Daphne"
-#~ msgstr "Daphne"
-
-#~ msgid "Great Comet of 1680 (C/1680 V1)"
-#~ msgstr "Veľká kométa roku 1680 (C/1680 V1)"
-
-#~ msgid "Use brightness settings for landscapes"
-#~ msgstr "Používať nastavenia jasu terénov"
-
-#, qt-format
-#~ msgid "This version of Stellarium is outdated! Latest version is %1."
-#~ msgstr "Táto verzia programu je zastaralá! Najnovšia verzia je %1."
-
-#~ msgid "This is latest stable version of Stellarium."
-#~ msgstr "Toto je najnovšia stabilná verzia programu."
-
-#~ msgid "Oops... Stellarium can't check latest version."
-#~ msgstr "Ale nie... Nebolo možné získať informácie o najnovšej verzii."
-
-#~ msgid "Looks like you are using the development version of Stellarium."
-#~ msgstr "Zdá sa, že používate vývojovú verziu programu."
-
-#~ msgid ""
-#~ "Enable checking updates of Stellarium via Internet. Info for updates of "
-#~ "stable versions you can look on the tab \"About\" of \"Help\" window."
-#~ msgstr ""
-#~ "Povoliť kontrolu dostupných aktualizácií programu cez internet. Informácie "
-#~ "ohľadom aktualizácií stabilných verzií nájdete v karte \"O aplikácii\" okna "
-#~ "\"Pomoc\"."
-
-#~ msgid "Check updates"
-#~ msgstr "Skontrolovať aktualizácie"
-
-#~ msgid "Ecliptic coordinates"
-#~ msgstr "Ekliptikálne súradnice"
-
-#~ msgid "Ecliptic grid (on J2000)"
-#~ msgstr "Ekliptikálna sieť (pre J2000)"
-
-#~ msgid ""
-#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
-#~ msgstr ""
-#~ "Ekliptikálne topocentrické súradnice, ekvinokcium pre nastavený dátum a pre "
-#~ "J2000 (len na Zemi)"
-
-#, qt-format
-#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
-#~ msgstr "Ekliptikálne topocentrické (pre J2000): %1/%2"
-
-#~ msgid "Equatorial grid (on J2000)"
-#~ msgstr "Ekvatoriálna sieť (pre J2000)"
-
-#~ msgid "Equatorial grid (on date)"
-#~ msgstr "Ekvatoriálna sieť (pre nastavený dátum)"
-
-#~ msgid ""
-#~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
-#~ "also tabulated in the Nautical Almanac."
-#~ msgstr ""
-#~ "Modul zvýrazní 58 navigačných hviezd podľa 2102-D Rude Star Finder, ktoré sa "
-#~ "nachádzajú aj v Námorníckej ročenke."
-
-#, qt-format
-#~ msgid "Set FOV to %1%2"
-#~ msgstr "Nastav zorné pole na %1%2"
-
-#, qt-format
-#~ msgid "Surface brightness: <b>%1</b>"
-#~ msgstr "Plošná jasnosť: <b>%1</b>"
-
-#~ msgid "Active"
-#~ msgstr "Aktívny"
-
-#~ msgid "Illumination"
-#~ msgstr "Osvetlenie"
-
-#, qt-format
-#~ msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-#~ msgstr "Povrchový jas: <b>%1</b> (zoslabenie na: <b>%2</b>)"
-
-#~ msgid ""
-#~ "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
-#~ "older version."
-#~ msgstr ""
-#~ "Na tomto systéme nebol nájdený OpenGL 2. Vymeňte hardvér, použite MESA, "
-#~ "alebo nainštalujte staršiu verziu programu."
-
-#~ msgid "Cannot acquire necessary OpenGL resources."
-#~ msgstr "Nepodarilo sa získať potrebné prostriedky OpenGL."
-
-#~ msgid "Show names"
-#~ msgstr "Zobraziť názvy"
-
-#, qt-format
-#~ msgid "Distance: %1 %2"
-#~ msgstr "Vzdialenosť: %1 %2"
-
-#~ msgid "AstroCalc window"
-#~ msgstr "Okno AstroCalc"
-
-#~ msgid "Mag."
-#~ msgstr "Mag."
-
-#~ msgid "JD"
-#~ msgstr "JD"
-
-#~ msgid "Show Solar System objects"
-#~ msgstr "Zobraziť objekty Slnečnej sústavy"
-
-#~ msgid "Catalog of galaxies"
-#~ msgstr "Katalóg galaxií"
-
-#~ msgid "Planetary Nebulae"
-#~ msgstr "Planetárne hmloviny"
-
-#~ msgid "Dark Nebulae"
-#~ msgstr "Tmavé hmloviny"
-
-#~ msgid "Bright Nebulae"
-#~ msgstr "Jasné hmloviny"
-
-#~ msgid "Show horizon line."
-#~ msgstr "Zobrazí čiaru horizontu."
-
-#~ msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-#~ msgstr "Geocentrické rovníkové súradnice, ekvinokcium pre J2000"
-
-#~ msgid "Geocentric equatorial coordinates, equinox of date"
-#~ msgstr "Geocentrické rovníkové súradnice, ekvinokcium pre dátum"
-
-#~ msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
-#~ msgstr "Ekliptikálne súradnice, ekvinokcium pre dátum a J2000 (iba pre Zem)"
-
-#~ msgid "Planetary positions every 5 minutes."
-#~ msgstr "Polohy planét každých 5 minút."
-
-#~ msgid ""
-#~ "Activate this option to calculate azimuth from south towards west (as in old "
-#~ "astronomical literature)."
-#~ msgstr ""
-#~ "Aktiváciou tohto prepínača sa bude počítať azimut z juhu smerom na západ "
-#~ "(ako v starej astronomickej literatúre)."
-
-#~ msgid "AstroCalc"
-#~ msgstr "AstroCalc"
-
-#~ msgid "yyyy.MM.dd"
-#~ msgstr "rrrr.MM.dd"
-
-#, qt-format
-#~ msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
-#~ msgstr "Povrchový jas: <b>%1</b> (s extinkciou: <b>%2</b>)"
-
-#~ msgid ""
-#~ "Screensaver of various happenings in the Solar System. 261 events in all!"
-#~ msgstr ""
-#~ "Automatická prehliadka rozličných úkazov v Slnečnej sústave. Je ich 261!"
-
-#~ msgid ""
-#~ "The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog "
-#~ "was contributed by Auke Slotegraaf."
-#~ msgstr ""
-#~ "Katalóg objektov južnej oblohy od Jacka Bennetta. Bennettov katalóg poskytol "
-#~ "Auke Slotegraaf."
-
-#~ msgid ""
-#~ "This list by A.J. Crayon and Steve Coe is used by members of the Saguaro "
-#~ "Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award."
-#~ msgstr ""
-#~ "Zoznam A. J. Crayona a Steva Coea používajú členovia astronomického klubu "
-#~ "Saguaro Astronomy Club v meste Phoenix, AZ. pri súťaži o najlepšieho "
-#~ "pozorovateľa objektov NGC."
-
-#~ msgid "Update of planetary positions"
-#~ msgstr "Aktualizácia polôh planét"
-
-#~ msgid "Planetary positions"
-#~ msgstr "Polohy planét"
-
-#~ msgid "Show dates of positions"
-#~ msgstr "Zobraziť dátumy polôh"
-
-#~ msgid "Show markers of positions"
-#~ msgstr "Zobraziť značky polohy"
-
-#~ msgid "Use flip for CCD"
-#~ msgstr "Použiť prevrátenie pre CCD"
-
-#, qt-format
-#~ msgid "Now is %1"
-#~ msgstr "Teraz je %1"

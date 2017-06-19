@@ -1,20 +1,20 @@
 # Japanese translation for stellarium
-# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-17 16:41+0700\n"
-"PO-Revision-Date: 2016-07-17 20:58+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-06-18 13:16+0700\n"
+"PO-Revision-Date: 2017-06-18 08:30+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-18 05:35+0000\n"
+"X-Launchpad-Export-Date: 2017-06-19 06:51+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -4028,434 +4028,439 @@ msgstr "エジプト"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:219
+msgid "Hawaiian Starlines"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:221
 msgid "Inuit"
 msgstr "イヌイット"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:221
+#: src/translations.h:223
 msgid "Indian Vedic"
 msgstr "ヴェーダ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:223
+#: src/translations.h:225
 msgid "Japanese Moon Stations"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:225
+#: src/translations.h:227
 msgid "Kamilaroi/Euahlayi"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:227
+#: src/translations.h:229
 msgid "Korean"
 msgstr "韓国"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Dakota/Lakota/Nakota"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:231
+#: src/translations.h:233
 msgid "Macedonian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:233
+#: src/translations.h:235
 msgid "Maori"
 msgstr "マオリ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:235
+#: src/translations.h:237
 msgid "Mongolian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:237
+#: src/translations.h:239
 msgid "Navajo"
 msgstr "ナバホ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:239
+#: src/translations.h:241
 msgid "Norse"
 msgstr "北欧"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:241
+#: src/translations.h:243
 msgid "Ojibwe"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:243
+#: src/translations.h:245
 msgid "Polynesian"
 msgstr "ポリネシア"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:245
+#: src/translations.h:247
 msgid "Romanian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:247
+#: src/translations.h:249
 msgid "Sami"
 msgstr "サーミ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:249
+#: src/translations.h:251
 msgid "Sardinian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:251
+#: src/translations.h:253
 msgid "Siberian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:253
+#: src/translations.h:255
 msgid "Tukano"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:255
+#: src/translations.h:257
 msgid "Tupi-Guarani"
 msgstr "トゥピ・グアラニー"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:257
+#: src/translations.h:259
 msgid "Tongan"
 msgstr "トンガ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:259
+#: src/translations.h:261
 msgid "Western"
 msgstr "西洋"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:261
+#: src/translations.h:263
 msgid "Western (H.A.Rey)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:267
+#: src/translations.h:269
 msgid "Guereins"
 msgstr "ゲラン"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:269
+#: src/translations.h:271
 msgid "Trees"
 msgstr "木々"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:271 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
+#: src/translations.h:273 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1289
 msgid "Moon"
 msgstr "月"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:273
+#: src/translations.h:275
 msgid "Hurricane"
 msgstr "ハリケーン"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:275
+#: src/translations.h:277
 msgid "Ocean"
 msgstr "海"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:277
+#: src/translations.h:279
 msgid "Garching"
 msgstr "ガーヒンク"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:279 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
+#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1301
 msgid "Mars"
 msgstr "火星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:281 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
+#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1304
 msgid "Jupiter"
 msgstr "木星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:283 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
+#: src/translations.h:285 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1307
 msgid "Saturn"
 msgstr "土星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:285
+#: src/translations.h:287
 msgid "Uranus"
 msgstr "天王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:287
+#: src/translations.h:289
 msgid "Neptune"
 msgstr "海王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:289
+#: src/translations.h:291
 msgid "Geneva"
 msgstr "ジュネーブ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:291
+#: src/translations.h:293
 msgid "Grossmugl"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:293
+#: src/translations.h:295
 msgid "Zero Horizon"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:298
+#: src/translations.h:300
 msgid "Vienna Sterngarten"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:300
+#: src/translations.h:302
 msgid "Testscene"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "Landscape Tour"
 msgstr "風景ツアー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "Partial Lunar Eclipse"
 msgstr "部分月食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Total Lunar Eclipse"
 msgstr "皆既月食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Screensaver"
 msgstr "スクリーンセーバー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:313
+#: src/translations.h:315
 msgid "Solar Eclipse 2009"
 msgstr "2009年の日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:315
+#: src/translations.h:317
 msgid "Startup Script"
 msgstr "スタートアップスクリプト"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:319
 msgid "Zodiac"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:321
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar System Screensaver"
 msgstr "太陽系スクリーンセーバー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Constellations Tour"
 msgstr "星座ツアー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Sky Culture Tour"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Earth Events from Mercury"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "Earth Events from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Tycho's Supernova"
 msgstr "ティコの超新星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth and other Planets from Ceres"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Messier Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Binocular Highlights"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "List of largest known stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Herschel 400 Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "The Jack Bennett Catalog"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Best objects in the New General Catalog"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Look around each installed landscape."
 msgstr ""
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "部分月食をデモンストレーションするスクリプト"
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "皆既月食をデモンストレーションするスクリプト"
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "2009年に起こった皆既日食をデモンストレーションするスクリプト (位置=ランプル, バングラディッシュ)"
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid "Script which runs automatically at startup"
 msgstr "起動時に自動実行するスクリプト"
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:386
+#: src/translations.h:388
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:387
+#: src/translations.h:389
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:388
+#: src/translations.h:390
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -4465,41 +4470,41 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:394
+#: src/translations.h:396
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -4507,195 +4512,195 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "A tour of Messier Objects"
 msgstr ""
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr ""
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "&Undo"
 msgstr ""
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Cu&t"
 msgstr ""
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "&Copy"
 msgstr ""
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:417 plugins/Oculars/src/ui_ocularDialog.h:1164
+#: src/translations.h:419 plugins/Oculars/src/ui_ocularDialog.h:1164
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
 msgid "Delete"
 msgstr "削除"
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "Select All"
 msgstr ""
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "Directory:"
 msgstr ""
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "Folder"
 msgstr ""
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:423 src/ui_configurationDialog.h:1511
+#: src/translations.h:425 src/ui_configurationDialog.h:1511
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:427
+#: src/translations.h:429
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "Computer"
 msgstr ""
 
-#: src/translations.h:429
+#: src/translations.h:431
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "File &name:"
 msgstr ""
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "Copy &Link Location"
 msgstr ""
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "Ignore"
 msgstr ""
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Basic colors"
 msgstr ""
 
-#: src/translations.h:435
+#: src/translations.h:437
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "&Custom colors"
 msgstr ""
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "&Add to Custom Colors"
 msgstr ""
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "&Red:"
 msgstr ""
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Green:"
 msgstr ""
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Bl&ue:"
 msgstr ""
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Select Color"
 msgstr ""
 
-#: src/translations.h:445
+#: src/translations.h:447
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
@@ -15602,877 +15607,3 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
 msgstr ""
-
-#~ msgid "Equatorial Grid"
-#~ msgstr "赤道座標"
-
-#~ msgid "Azimuthal Grid"
-#~ msgstr "地平座標"
-
-#~ msgid "Equator Line"
-#~ msgstr "赤道線"
-
-#~ msgid "Ecliptic Line"
-#~ msgstr "黄道線"
-
-#~ msgid "Cardinal Points"
-#~ msgstr "方位"
-
-#~ msgid "Sky Language: "
-#~ msgstr "天体名の言語: "
-
-#~ msgid "Sky Culture: "
-#~ msgstr "星座の地域: "
-
-#~ msgid "Language"
-#~ msgstr "言語"
-
-#~ msgid "Date & Time"
-#~ msgstr "日付と時刻"
-
-#~ msgid "Set Time "
-#~ msgstr "時刻の設定 "
-
-#~ msgid "General "
-#~ msgstr "一般 "
-
-#~ msgid "Stars "
-#~ msgstr "恒星 "
-
-#~ msgid "Colors "
-#~ msgstr "色 "
-
-#~ msgid "Effects "
-#~ msgstr "効果 "
-
-#~ msgid "Scripts "
-#~ msgstr "スクリプト "
-
-#~ msgid "Administration "
-#~ msgstr "管理 "
-
-#~ msgid "Altitude (m): "
-#~ msgstr "標高(m): "
-
-#~ msgid "Sky Time: "
-#~ msgstr "天の時間 : "
-
-#~ msgid "Actual Time"
-#~ msgstr "現在の時刻"
-
-#~ msgid "Preset Time"
-#~ msgstr "設定された時刻"
-
-#~ msgid "Constellation Lines"
-#~ msgstr "星座線"
-
-#~ msgid "Constellation Names"
-#~ msgstr "星座名"
-
-#~ msgid "Constellation Art Intensity"
-#~ msgstr "星座絵の明るさ"
-
-#~ msgid "Constellation Boundaries"
-#~ msgstr "星座の境界線"
-
-#~ msgid "Planet Names"
-#~ msgstr "惑星の名前"
-
-#~ msgid "Planet Orbits"
-#~ msgstr "惑星の軌道"
-
-#~ msgid "Planet Trails"
-#~ msgstr "惑星の通った跡"
-
-#~ msgid "Meridian Line"
-#~ msgstr "子午線"
-
-#~ msgid "Nebula Names"
-#~ msgstr "星雲の名前"
-
-#~ msgid "Nebula Circles"
-#~ msgstr "星雲の円"
-
-#~ msgid "Set UI Locale: "
-#~ msgstr "操作パネルの言語: "
-
-#~ msgid "Earth"
-#~ msgstr "地球"
-
-#~ msgid "Deimos"
-#~ msgstr "ダイモス"
-
-#~ msgid "Phobos"
-#~ msgstr "フォボス"
-
-#~ msgid "Io"
-#~ msgstr "イオ"
-
-#~ msgid "Europa"
-#~ msgstr "エウロパ"
-
-#~ msgid "Ganymede"
-#~ msgstr "ガニメデ"
-
-#~ msgid "Callisto"
-#~ msgstr "カリスト"
-
-#~ msgid "Mimas"
-#~ msgstr "ミマス"
-
-#~ msgid "Enceladus"
-#~ msgstr "エンケラドス"
-
-#~ msgid "Tethys"
-#~ msgstr "テティス"
-
-#~ msgid "Dione"
-#~ msgstr "ディオーネ"
-
-#~ msgid "Rhea"
-#~ msgstr "レア"
-
-#~ msgid "Titan"
-#~ msgstr "タイタン"
-
-#~ msgid "Hyperion"
-#~ msgstr "ヒペリオン"
-
-#~ msgid "Iapetus"
-#~ msgstr "イアペトゥス"
-
-#~ msgid "Phoebe"
-#~ msgstr "フェーベ"
-
-#~ msgid "Pluto"
-#~ msgstr "冥王星"
-
-#~ msgid "Charon"
-#~ msgstr "カロン"
-
-#~ msgid "Solar System Observer"
-#~ msgstr "太陽系の外から"
-
-#~ msgid "Hydra"
-#~ msgstr "うみへび"
-
-#~ msgid "Select and exit to run."
-#~ msgstr "選択しメニューを抜けるとスタートします。"
-
-#~ msgid "Magnitude Sizing Multiplier: "
-#~ msgstr "等級による倍率 : "
-
-#~ msgid "Light Pollution Luminance: "
-#~ msgstr "光害の明るさ: "
-
-#~ msgid "Lakota"
-#~ msgstr "ラコタ"
-
-#~ msgid "Star Value Multiplier: "
-#~ msgstr "星の明るさの倍率: "
-
-#~ msgid "Sidereal"
-#~ msgstr "恒星時"
-
-#~ msgid "Planet: "
-#~ msgstr "惑星: "
-
-#~ msgid "USB Script: "
-#~ msgstr "USBスクリプト: "
-
-#~ msgid "Galaxy"
-#~ msgstr "銀河系"
-
-#, no-c-format, qt-format
-#~ msgid "Distance: %1AU"
-#~ msgstr "距離: %1天文単位"
-
-#~ msgid "Unknown"
-#~ msgstr "不明"
-
-#~ msgid "Planetary nebula"
-#~ msgstr "惑星状星雲"
-
-#~ msgid "Nebula"
-#~ msgstr "星雲"
-
-#~ msgid "Globular cluster"
-#~ msgstr "球状星団"
-
-#~ msgid "Open cluster"
-#~ msgstr "散開星団"
-
-#~ msgid "Undocumented type"
-#~ msgstr "未登録"
-
-#, qt-format
-#~ msgid "Distance: %1 Light Years"
-#~ msgstr "距離: %1 光年"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
-#~ msgstr "等級: <b>%1</b> (B-V: %2)"
-
-#~ msgid "Cluster associated with nebulosity"
-#~ msgstr "星雲を伴う星団"
-
-#~ msgid "Calendar"
-#~ msgstr "カレンダー"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + 左クリック"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + ↑/↓"
-
-#~ msgid "Nebulas"
-#~ msgstr "星雲"
-
-#~ msgid "Highest rate ever (1966 Leonids)"
-#~ msgstr "1966年のしし座流星群"
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "/"
-#~ msgstr "/"
-
-#~ msgid "Show planets"
-#~ msgstr "惑星を表示"
-
-#~ msgid "Planets and satellites"
-#~ msgstr "惑星と衛星"
-
-#~ msgid "Shooting Stars"
-#~ msgstr "流れ星"
-
-#~ msgid "10"
-#~ msgstr "10"
-
-#~ msgid "80"
-#~ msgstr "80"
-
-#~ msgid "10000"
-#~ msgstr "10000"
-
-#~ msgid "144000"
-#~ msgstr "144000"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "Show lines"
-#~ msgstr "星座線の表示"
-
-#~ msgid "Show art"
-#~ msgstr "星座絵の表示"
-
-#~ msgid "Startup FOV: XX"
-#~ msgstr "起動時の限界視野: XX"
-
-#~ msgid "Startup direction of view: xxxx"
-#~ msgstr "起動時の方位: xxxx"
-
-#~ msgid "Mouse cursor timeout (seconds):"
-#~ msgstr "カーソルを消すまでの時間"
-
-#~ msgid "Form"
-#~ msgstr "フォーム"
-
-#~ msgid ""
-#~ "Stereographic projection is known since the antiquity and was originally "
-#~ "known as the planisphere projection. It preserves the angles at which curves "
-#~ "cross each other but it does not preserve area."
-#~ msgstr ""
-#~ "ステレオ投影は、球面を平面に投影する方法の一つ。写像は滑らかで、全単射である。また、角度が保存される等角写像である。一方、面積は保存されない。"
-
-#~ msgid ""
-#~ "Perspective projection keeps the horizon a straight line. The mathematical "
-#~ "name for this projection method is <i>gnomonic projection</i>."
-#~ msgstr ""
-#~ "遠近は正確には透視図法とも言える。\r\n"
-#~ "透視図法は遠近法を用いた投影法である。遠近法の基本は視点の前に置いた「投影面」に、それを通過する光を写し取ることであり、それは窓ガラスを通して見える光景を"
-#~ "窓ガラス表面に直接描画することに似ている。ガラスに写し取られた図は3次元の光景を縮小し2次元平面上に変換したものとなる。"
-
-#~ msgid ""
-#~ "The full name of this projection method is, <i>Lambert azimuthal equal-area "
-#~ "projection</i>. It preserves the area but not the angle."
-#~ msgstr "ランベルト正積方位図法とは、地図投影法の一つである。方位図法の一種であり、かつ正積図法の性質を持つ。"
-
-#~ msgid "Nebulas background images"
-#~ msgstr "星雲の背景"
-
-#~ msgid "xxx"
-#~ msgstr "xxx"
-
-#~ msgid "When a Script is Running"
-#~ msgstr "スクリプトの実行中に"
-
-#~ msgid "Finished downloading all star catalogs!"
-#~ msgstr "すべてのスターカタログのダウンロードが終了しました！"
-
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "名前を表示する最大等級: "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "名前を表示する星雲・星団の最大等級: "
-
-#~ msgid "Planets labels"
-#~ msgstr "惑星名"
-
-#~ msgid "No description"
-#~ msgstr "説明がありません"
-
-#~ msgid "This system does not support OpenGL."
-#~ msgstr "このシステムは Open GL に対応していません."
-
-#~ msgid "Set Location "
-#~ msgstr "場所の設定 "
-
-#~ msgid "Longitude: "
-#~ msgstr "経度: "
-
-#~ msgid "Latitude: "
-#~ msgstr "緯度: "
-
-#~ msgid "Solar System Body: "
-#~ msgstr "太陽系惑星・天体: "
-
-#~ msgid "Set Time Zone: "
-#~ msgstr "タイムゾーンの設定: "
-
-#~ msgid "Preset Sky Time: "
-#~ msgstr "天の時間の設定: "
-
-#~ msgid "Sky Time At Start-up: "
-#~ msgstr "起動時の天の時間: "
-
-#~ msgid "Twinkling: "
-#~ msgstr "またたき: "
-
-#~ msgid "Show: "
-#~ msgstr "表示: "
-
-#~ msgid "Time Display Format: "
-#~ msgstr "時間の表示形式: "
-
-#~ msgid "Date Display Format: "
-#~ msgstr "日付の表示形式: "
-
-#~ msgid "Limiting Magnitude: "
-#~ msgstr "限界等級: "
-
-#~ msgid "Landscape: "
-#~ msgstr "背景: "
-
-#~ msgid "Manual zoom: "
-#~ msgstr "手動ズーム: "
-
-#~ msgid "Object Sizing Rule: "
-#~ msgstr "天体の大きさの設定: "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "カーソル表示時間: "
-
-#~ msgid "Correct for light travel time: "
-#~ msgstr "光の到達時間を補正する: "
-
-#~ msgid "Magnitude Scaling Multiplier: "
-#~ msgstr "等級による倍率: "
-
-#~ msgid "Milky Way intensity: "
-#~ msgstr "天の川の明るさ: "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "ズーム時間: "
-
-#~ msgid "CD/DVD Script: "
-#~ msgstr "CD/DVD スクリプト: "
-
-#~ msgid "Local Script: "
-#~ msgstr "ローカルスクリプト: "
-
-#~ msgid "Arrow down to load list."
-#~ msgstr "下矢印キーで一覧を表示します。"
-
-#~ msgid "Load Default Configuration: "
-#~ msgstr "デフォルトの設定を読み込む: "
-
-#~ msgid "Shut Down: "
-#~ msgstr "終了: "
-
-#~ msgid "Save Current Configuration as Default: "
-#~ msgstr "現在の設定をデフォルトとして保存 : "
-
-#~ msgid "Update me via Internet: "
-#~ msgstr "インターネット経由で更新: "
-
-#~ msgid "Use as default"
-#~ msgstr "デフォルトとして利用する"
-
-#~ msgid "RA/Dec (J2000):"
-#~ msgstr "赤経/赤緯 (J2000):"
-
-#~ msgid "Light pollution: "
-#~ msgstr "光害: "
-
-#~ msgid "Scale Moon"
-#~ msgstr "月を拡大"
-
-#~ msgid "Show atmosphere"
-#~ msgstr "大気を表示"
-
-#~ msgid "Hourly zenith rate:"
-#~ msgstr "1時間あたりの流星の数:"
-
-#~ msgid "Art brightness: "
-#~ msgstr "星座絵の明るさ: "
-
-#~ msgid "Program language"
-#~ msgstr "プログラムの言語"
-
-#~ msgid ""
-#~ "Restoring default settings requires a restart of Stellarium. Saving all the "
-#~ "current options includes the current FOV and direction of view for use at "
-#~ "next startup."
-#~ msgstr ""
-#~ "デフォルト設定に戻すと Stellarium の再起動が必要になります。次に起動した時のために、現在の視野や方位を含むすべてのオプションを保存します。"
-
-#~ msgid "The width of your view when Stellarium starts"
-#~ msgstr "Stellarium 起動時の視界の幅"
-
-#~ msgid "Get catalog x of y"
-#~ msgstr "カタログ x / y を取得"
-
-#~ msgid ""
-#~ "The mercator projection is one of the most used world map projection. It "
-#~ "preserves direction and shapes but distorts size, in an increasing degree "
-#~ "away from the equator."
-#~ msgstr ""
-#~ "メルカトル投影は世界地図の投影の際に最もよく用いられています。この投影法は方角と形状を保つことができますが、赤道から離れるにしたがってサイズがゆがんでしま"
-#~ "います。"
-
-#~ msgid "Day keys: "
-#~ msgstr "日付キー: "
-
-#~ msgid "Ecliptic"
-#~ msgstr "黄道"
-
-#~ msgid "Pallas"
-#~ msgstr "パラス"
-
-#~ msgid "Juno"
-#~ msgstr "ジュノー"
-
-#~ msgid "Ceres"
-#~ msgstr "ケレス"
-
-#~ msgid "SpaceShip"
-#~ msgstr "宇宙船"
-
-#~ msgid "Leda"
-#~ msgstr "レダ"
-
-#~ msgid "Ananke"
-#~ msgstr "アナンケ"
-
-#~ msgid "Vesta"
-#~ msgstr "ベスタ"
-
-#~ msgid "Lysithea"
-#~ msgstr "リシテア"
-
-#~ msgid "Carme"
-#~ msgstr "カルメ"
-
-#~ msgid "Amalthea"
-#~ msgstr "アマルテア"
-
-#~ msgid "Pasiphae"
-#~ msgstr "パシファエ"
-
-#~ msgid "Sinope"
-#~ msgstr "シノーペ"
-
-#~ msgid "Himalia"
-#~ msgstr "ヒマリア"
-
-#~ msgid "Elara"
-#~ msgstr "エララ"
-
-#~ msgid "Eris"
-#~ msgstr "エリス"
-
-#~ msgid "Titania"
-#~ msgstr "チタニア"
-
-#~ msgid "Umbriel"
-#~ msgstr "ウンブリエル"
-
-#~ msgid "Miranda"
-#~ msgstr "ミランダ"
-
-#~ msgid "Nix"
-#~ msgstr "ニクス"
-
-#~ msgid "Oberon"
-#~ msgstr "オベロン"
-
-#~ msgid "Metis"
-#~ msgstr "メティス"
-
-#~ msgid "Adrastea"
-#~ msgstr "アドラステア"
-
-#~ msgid "Thebe"
-#~ msgstr "テーベ"
-
-#~ msgid "Ariel"
-#~ msgstr "アリエル"
-
-#~ msgid "Larissa"
-#~ msgstr "ラリッサ"
-
-#~ msgid "Halimede"
-#~ msgstr "ハリメデ"
-
-#~ msgid "Thalassa"
-#~ msgstr "タラッサ"
-
-#~ msgid "Nereid"
-#~ msgstr "ネレイド"
-
-#~ msgid "Galatea"
-#~ msgstr "ガラテア"
-
-#~ msgid "Despina"
-#~ msgstr "デスピーナ"
-
-#~ msgid "Naiad"
-#~ msgstr "ナーイアス"
-
-#~ msgid "Triton"
-#~ msgstr "トリトン"
-
-#~ msgid "Proteus"
-#~ msgstr "プロテウス"
-
-#~ msgid "Psamathe"
-#~ msgstr "プサマテー"
-
-#~ msgid "Sao"
-#~ msgstr "サオ"
-
-#~ msgid "Laomedeia"
-#~ msgstr "ラオメデイア"
-
-#~ msgid "Flora"
-#~ msgstr "フローラ"
-
-#~ msgid "Chiron"
-#~ msgstr "キロン"
-
-#~ msgid "Apophis"
-#~ msgstr "アポフィス"
-
-#~ msgid "Amor"
-#~ msgstr "アモール"
-
-#~ msgid "Hygiea"
-#~ msgstr "ヒギエア"
-
-#~ msgid "Neso"
-#~ msgstr "ネソ"
-
-#~ msgid "Iris"
-#~ msgstr "イリス"
-
-#~ msgid "Astraea"
-#~ msgstr "アストラエア"
-
-#~ msgid "Hebe"
-#~ msgstr "ヘーベ"
-
-#~ msgid "Kepler's Supernova"
-#~ msgstr "ケプラーの超新星"
-
-#~ msgid "Hektor"
-#~ msgstr "ヘクトール"
-
-#~ msgid "Eros"
-#~ msgstr "エロース"
-
-#~ msgid "Time Zone"
-#~ msgstr "タイムゾーン"
-
-#~ msgid "Netherlands Antilles"
-#~ msgstr "オランダ領アンチル"
-
-#~ msgid "Brunei Darussalam"
-#~ msgstr "ブルネイ・ダルサラーム国"
-
-#~ msgid "Democratic Republic of the Congo"
-#~ msgstr "コンゴ民主共和国"
-
-#~ msgid "Central African Republic"
-#~ msgstr "中央アフリカ共和国"
-
-#~ msgid "Republic of the Congo"
-#~ msgstr "コンゴ共和国"
-
-#~ msgid "Serbia and Montenegro"
-#~ msgstr "セルビア・モンテネグロ"
-
-#~ msgid "United Kingdom"
-#~ msgstr "イギリス"
-
-#~ msgid "Saint Kitts and Nevis"
-#~ msgstr "セントクリストファー・ネイビス"
-
-#~ msgid "Democratic People's Republic of Korea"
-#~ msgstr "北朝鮮 (朝鮮民主主義人民共和国)"
-
-#~ msgid "Republic of Korea"
-#~ msgstr "韓国 (大韓民国)"
-
-#~ msgid "Saint Lucia"
-#~ msgstr "セントルシア"
-
-#~ msgid "Libyan Arab Jamahiriya"
-#~ msgstr "社会主義人民リビア・アラブ国"
-
-#~ msgid "Myanmar"
-#~ msgstr "ミャンマー"
-
-#~ msgid "Saint Pierre and Miquelon"
-#~ msgstr "サンピェール島・ミクロン島"
-
-#~ msgid "Russian Federation"
-#~ msgstr "ロシア連邦"
-
-#~ msgid "Saint Helena"
-#~ msgstr "セントヘレナ島"
-
-#~ msgid "French Southern Territories"
-#~ msgstr "フランス領極南諸島"
-
-#~ msgid "Turks and Caicos Islands"
-#~ msgstr "タークス諸島・カイコス諸島"
-
-#~ msgid "Syrian Arab Republic"
-#~ msgstr "シリア・アラブ共和国"
-
-#~ msgid "United States Minor Outlying Islands"
-#~ msgstr "アメリカ合衆国外諸島"
-
-#~ msgid "Viet Nam"
-#~ msgstr "ベトナム社会主義共和国"
-
-#~ msgid "Samoa"
-#~ msgstr "サモア"
-
-#~ msgid "Yugoslavia"
-#~ msgstr "ユーゴスラビア"
-
-#~ msgid "Crosshairs"
-#~ msgstr "十字線"
-
-#~ msgid "Tuesday"
-#~ msgstr "火曜日"
-
-#~ msgid "Sunday"
-#~ msgstr "日曜日"
-
-#~ msgid "Monday"
-#~ msgstr "月曜日"
-
-#~ msgid "Thursday"
-#~ msgstr "木曜日"
-
-#~ msgid "Friday"
-#~ msgstr "金曜日"
-
-#~ msgid "Wednesday"
-#~ msgstr "水曜日"
-
-#~ msgid "Saturday"
-#~ msgstr "土曜日"
-
-#~ msgid "Galactic Plane"
-#~ msgstr "銀河面"
-
-#~ msgid "Galactic plane"
-#~ msgstr "銀河面"
-
-#, qt-format
-#~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
-#~ msgstr "等級: <b>%1</b> (B-V: <b>%2</b>)"
-
-#~ msgid "Bosnia and Herzegowina"
-#~ msgstr "ボスニア・ヘルツェゴビナ"
-
-#~ msgid "Past Developers"
-#~ msgstr "過去の開発者"
-
-#~ msgid "plutoid"
-#~ msgstr "冥王星型天体"
-
-#~ msgid "Analemma"
-#~ msgstr "アナレンマ"
-
-#~ msgid "Show Galactic plane line"
-#~ msgstr "銀河面の線を表示"
-
-#~ msgid "Galactic plane line"
-#~ msgstr "銀河面の線"
-
-#~ msgid "Return to default"
-#~ msgstr "デフォルトに戻す"
-
-#~ msgid "Find Object or Position"
-#~ msgstr "天体または位置を検索"
-
-#~ msgid "Render Solar Shadows"
-#~ msgstr "太陽の影を描画"
-
-#~ msgid "(geometric)"
-#~ msgstr "(幾何学上の)"
-
-#~ msgid "Show meridian line"
-#~ msgstr "子午線を表示"
-
-#~ msgid "Show equator line"
-#~ msgstr "天の赤道を表示"
-
-#~ msgid "Additional information 1"
-#~ msgstr "追加情報1"
-
-#~ msgid "Additional information 3"
-#~ msgstr "追加情報3"
-
-#~ msgid "Additional information 2"
-#~ msgstr "追加情報2"
-
-#~ msgid "Show horizon line"
-#~ msgstr "地平線を表示"
-
-#~ msgid "Longitude/Latitude (J2000)"
-#~ msgstr "銀経/銀緯 (J2000)"
-
-#~ msgid "Show ecliptic line"
-#~ msgstr "黄道を表示"
-
-#, qt-format
-#~ msgid "RA/DE (of date): %1/%2"
-#~ msgstr "赤経/赤緯 (瞬時): %1/%2"
-
-#, qt-format
-#~ msgid "RA/DE (J2000): %1/%2"
-#~ msgstr "赤経/赤緯 (J2000): %1/%2"
-
-#~ msgid "Hourly zenith rate"
-#~ msgstr "天頂出現数"
-
-#~ msgid "Limit Magnitudes"
-#~ msgstr "等級の制限"
-
-#~ msgid "Add 1 sidereal month"
-#~ msgstr "恒星時で1ヶ月進む"
-
-#~ msgid "Add 1 sidereal century"
-#~ msgstr "恒星時で1世紀進む"
-
-#~ msgid "Subtract 1 sidereal century"
-#~ msgstr "恒星時で1世紀戻る"
-
-#~ msgid "Subtract 1 sidereal month"
-#~ msgstr "恒星時で1ヶ月戻る"
-
-#~ msgid "Add 1 sidereal week"
-#~ msgstr "恒星時で1週間進む"
-
-#~ msgid "Subtract 1 sidereal week"
-#~ msgstr "恒星時で1週間戻る"
-
-#~ msgid "Add 1 solar week"
-#~ msgstr "太陽時で1週間進む"
-
-#~ msgid "Subtract 1 solar week"
-#~ msgstr "太陽時で1週間戻る"
-
-#~ msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-#~ msgstr "J2000.0分点による赤道座標"
-
-#~ msgid "Geocentric equatorial coordinates, equinox of date"
-#~ msgstr "瞬時分点による赤道座標"
-
-#~ msgid "Galactic coordinates, equinox of J2000.0"
-#~ msgstr "J2000.0分点による銀河座標"
-
-#~ msgid "CD/DVD script"
-#~ msgstr "CD/DVDスクリプト"
-
-#~ msgid ""
-#~ "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-#~ msgstr "深宇宙天体 (星団、銀河、星雲) の等級を制限する"
-
-#~ msgid ""
-#~ "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-#~ msgstr "深宇宙天体 (星団、銀河、星雲) の名前とマーカー"
-
-#~ msgid "Cocos Islands"
-#~ msgstr "ココス諸島"
-
-#~ msgid "Cote d'Ivoire"
-#~ msgstr "コートジボワール"
-
-#~ msgid "Lao"
-#~ msgstr "ラオス"
-
-#~ msgid "Palestinian Territories"
-#~ msgstr "パレスチナ自治区"
-
-#~ msgid "Vatican City State"
-#~ msgstr "バチカン市国"
-
-#~ msgid "British Virgin Islands"
-#~ msgstr "イギリス領ヴァージン諸島"
-
-#~ msgid "United States Virgin Islands"
-#~ msgstr "アメリカ領ヴァージン諸島"
-
-#~ msgid "American Samoa"
-#~ msgstr "アメリカ領サモア"
-
-#~ msgid "Hydra (moon)"
-#~ msgstr "ヒドラ (衛星)"
-
-#~ msgid "Quaoar"
-#~ msgstr "クワオアー"
-
-#~ msgid "Orcus"
-#~ msgstr "オルクス"
-
-#~ msgid "Haumea"
-#~ msgstr "ハウメア"
-
-#~ msgid "Varuna"
-#~ msgstr "ヴァルナ"
-
-#~ msgid "Makemake"
-#~ msgstr "マケマケ"
-
-#~ msgid "Saint Vincent and the Grenadines"
-#~ msgstr "セントビンセントおよびグレナディーン諸島"
-
-#~ msgid "Sedna"
-#~ msgstr "セドナ"
-
-#~ msgid "Dark Nebula"
-#~ msgstr "暗黒星雲"
-
-#~ msgid "Display formats"
-#~ msgstr "表示形式"
-
-#~ msgid "Planetary Nebulae"
-#~ msgstr "惑星状星雲"
