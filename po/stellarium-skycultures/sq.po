@@ -1,20 +1,38 @@
-# Albanian translation for stellarium
-# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
+# Albanian translation of stellarium-skycultures
+# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# Elian Myftiu, 2008
+# Besnik Bleta, 2009.
+#
+#
+# Shënim. Pjesa ime e përkthimi është bërë duke u bazuar në dijet e mia të cekta
+#         në astronomi, pa u këshilluar me ndonjë libër astronomie Shqip. Ndaj
+#         kërkoj ndjesë paraprakisht, nëse do të gjeni ripërkthime të ndonjë
+#         përkthimi ekzistues. Shumë nga emrat e yjësive janë përkthyer lirisht,
+#         duke ruajtur traditën e emrave të "çuditshëm" që përdoren për yjësitë.
+#         Sidoqoftë, (e veçanërisht në rastet kur ajo që shihet nuk përputhet me
+#         emrin që po i jepet përmes këtij përkthimi), nëse ju vjen në mendje një
+#         përkthim tjetër, mos hezitoni ta këshilloni.
+#
+#         Për një pakicë termash, rreth 50, kam shfletuar edhe përkthimet e tyre në Italisht,
+#         Frëngjisht dhe Greqisht.
+#                                                                              B.B.
+#
+#
+#
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-18 15:04+0700\n"
-"PO-Revision-Date: 2017-06-18 08:30+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Albanian <sq@li.org>\n"
+"Project-Id-Version: stellarium-skycultures 0.10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-19 21:17+0700\n"
+"PO-Revision-Date: 2014-11-29 14:24+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
+"Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-19 07:06+0000\n"
+"X-Launchpad-Export-Date: 2017-06-20 05:42+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 
 #: skycultures/translations.fab:9
@@ -6465,17 +6483,14 @@ msgid "The Chief's Eyes"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:7
-#: skycultures/polynesian/constellation_names.eng.fab:8
 msgid "Kite of Kawelo"
 msgstr "Balona e Kauelos"
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:8
-#: skycultures/polynesian/constellation_names.eng.fab:5
 msgid "The Seven"
 msgstr "Të shtatët"
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:9
-#: skycultures/polynesian/constellation_names.eng.fab:4
 msgid "Voice of Joy"
 msgstr "Zëri i Gëzimit"
 
@@ -6484,7 +6499,6 @@ msgid "Chief Frigate Bird"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:11
-#: skycultures/polynesian/constellation_names.eng.fab:10
 msgid "Cared for by Moon"
 msgstr "Kanakar'i Hënës"
 
@@ -6493,27 +6507,22 @@ msgid "The Pointers"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:13
-#: skycultures/polynesian/constellation_names.eng.fab:7
 msgid "Navigator's Triangle"
 msgstr "Trekëndëshi i Lundërtarit"
 
 #: skycultures/hawaiian_starlines/star_names.fab:1
-#: skycultures/polynesian/star_names.fab:1
 msgid "Hokulei"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:2
-#: skycultures/polynesian/star_names.fab:2
 msgid "Nana-mua"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:3
-#: skycultures/polynesian/star_names.fab:3
 msgid "Nana-hope"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:4
-#: skycultures/polynesian/star_names.fab:4
 msgid "Puana"
 msgstr ""
 
@@ -6522,18 +6531,14 @@ msgid "A‘a"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:6
-#: skycultures/polynesian/star_names.fab:6
 msgid "Puana-kau"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:7
-#: skycultures/polynesian/star_names.fab:7
-#: skycultures/polynesian/star_names.fab:19
 msgid "Pu'uhonua"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:8
-#: skycultures/polynesian/star_names.fab:8
 msgid "Kaulua-koko"
 msgstr ""
 
@@ -6546,27 +6551,22 @@ msgid "Hokule‘a"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:11
-#: skycultures/polynesian/star_names.fab:11
 msgid "Hiki-analia"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:12
-#: skycultures/polynesian/star_names.fab:12
 msgid "Holopuni"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:13
-#: skycultures/polynesian/star_names.fab:13
 msgid "Hawaiki"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:14
-#: skycultures/polynesian/star_names.fab:14
 msgid "Humu"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:15
-#: skycultures/polynesian/star_names.fab:15
 msgid "Keoe"
 msgstr ""
 
@@ -6575,12 +6575,10 @@ msgid "Hoku‘ula"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:17
-#: skycultures/polynesian/star_names.fab:17
 msgid "Lehua-Kona"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:18
-#: skycultures/polynesian/star_names.fab:18
 msgid "Ke ali'i o kona i ka lewa"
 msgstr ""
 
@@ -6589,43 +6587,35 @@ msgid "Pu‘uhonua"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:20
-#: skycultures/polynesian/star_names.fab:20
 msgid "Hiku-kahi"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:21
-#: skycultures/polynesian/star_names.fab:21
 msgid "Hiku-lua"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:22
-#: skycultures/polynesian/star_names.fab:22
 msgid "Hiku-kolu"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:23
-#: skycultures/polynesian/star_names.fab:23
 msgid "Hiku-ha"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:24
-#: skycultures/polynesian/star_names.fab:24
 msgid "Hiku-lima"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:25
 #: skycultures/hawaiian_starlines/star_names.fab:55
-#: skycultures/polynesian/star_names.fab:25
 msgid "Hiku-ono"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:26
-#: skycultures/polynesian/star_names.fab:26
 msgid "Hiku-pau"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:27
-#: skycultures/polynesian/star_names.fab:27
 msgid "Kaulia"
 msgstr ""
 
@@ -6634,17 +6624,14 @@ msgid "Ka Mole Honua"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:29
-#: skycultures/polynesian/star_names.fab:29
 msgid "Ka-maile-mua"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:30
-#: skycultures/polynesian/star_names.fab:30
 msgid "Ka-maile-hope"
 msgstr ""
 
 #: skycultures/hawaiian_starlines/star_names.fab:31
-#: skycultures/polynesian/star_names.fab:31
 msgid "Ka Maka"
 msgstr ""
 
@@ -8968,46 +8955,6 @@ msgstr ""
 
 #: skycultures/ojibwe/planet_names.fab:1
 msgid "Womens Star (Venus)"
-msgstr ""
-
-#: skycultures/polynesian/constellation_names.eng.fab:2
-msgid "Bailer"
-msgstr ""
-
-#: skycultures/polynesian/constellation_names.eng.fab:3
-msgid "Cat's Cradle"
-msgstr "Foleja ' Dacit"
-
-#: skycultures/polynesian/constellation_names.eng.fab:6
-msgid "Maui's Fishhook"
-msgstr "Grep Maui"
-
-#: skycultures/polynesian/constellation_names.eng.fab:9
-msgid "Frigate Bird"
-msgstr ""
-
-#: skycultures/polynesian/constellation_names.eng.fab:11
-msgid "Dolphin"
-msgstr "Delfini"
-
-#: skycultures/polynesian/star_names.fab:5
-msgid "A'a"
-msgstr ""
-
-#: skycultures/polynesian/star_names.fab:9
-msgid "Hokupa'a"
-msgstr ""
-
-#: skycultures/polynesian/star_names.fab:10
-msgid "Hokule'a"
-msgstr ""
-
-#: skycultures/polynesian/star_names.fab:16
-msgid "Hoku'ula"
-msgstr ""
-
-#: skycultures/polynesian/star_names.fab:28
-msgid "Mole Honua"
 msgstr ""
 
 #: skycultures/romanian/constellation_names.eng.fab:1
@@ -13451,3 +13398,234 @@ msgstr ""
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
 msgstr ""
+
+#~ msgid "Schrine of Sky"
+#~ msgstr "Tempulli i Qiellit"
+
+#~ msgid "Office for Chariot"
+#~ msgstr "Nëpunësi për Qerren"
+
+#~ msgid "Ofice for Construction"
+#~ msgstr "Zyrë Ndërtimesh"
+
+#~ msgid "Cerficate of Sky"
+#~ msgstr "Dëshmia e Qiellit"
+
+#~ msgid "Hand"
+#~ msgstr "Dora"
+
+#~ msgid "Snake"
+#~ msgstr "Gjarpri"
+
+#~ msgid "Fireplace"
+#~ msgstr "Vatra"
+
+#~ msgid "Animal"
+#~ msgstr "Shtaza"
+
+#~ msgid "Seven Little Girls"
+#~ msgstr "Shtatë Çupkat"
+
+#~ msgid "Dried Willow"
+#~ msgstr "Shelgu i Tharë"
+
+#~ msgid "Salamander"
+#~ msgstr "Salamandra"
+
+#~ msgid "Turtle"
+#~ msgstr "Breshka"
+
+#~ msgid "Bear's Lodge"
+#~ msgstr "Strofulla e Ariut"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Foleja ' Dacit"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Grep Maui"
+
+#~ msgid "Dolphin"
+#~ msgstr "Delfini"
+
+#~ msgid "Barnard's galaxy"
+#~ msgstr "Galaktika e Barnardit"
+
+#~ msgid "Bear Paw galaxy"
+#~ msgstr "Galaktika e Putrës së Ariut"
+
+#~ msgid "Beehive cluster"
+#~ msgstr "Grumbulli i Zgjuas"
+
+#~ msgid "Black-eye galaxy"
+#~ msgstr "Galaktika e Syrit të Zi"
+
+#~ msgid "Bode's nebulae"
+#~ msgstr "Nebula e Bodes"
+
+#~ msgid "Butterfly cluster"
+#~ msgstr "Grumbullimi i Fluturës"
+
+#~ msgid "Butterfly nebula"
+#~ msgstr "Mjegullnaja e Fluturës"
+
+#~ msgid "California nebula"
+#~ msgstr "Mjegullnaja e Kalifornisë"
+
+#~ msgid "Christmas Tree cluster"
+#~ msgstr "Grumbullimi i Pemës së Vitit të Ri"
+
+#~ msgid "Box nebula"
+#~ msgstr "Mjegullnaja e Kutisë"
+
+#~ msgid "Bug nebula"
+#~ msgstr "Mjegullnaja e Tatabiqit"
+
+#~ msgid "Bubble nebula"
+#~ msgstr "Mjegullnaja e Flluskës"
+
+#~ msgid "Cocoon nebula"
+#~ msgstr "Nebula e Fshikëzës"
+
+#~ msgid "Cone nebula"
+#~ msgstr "Mjegullnaja e Konit"
+
+#~ msgid "Crescent nebula"
+#~ msgstr "Mjegullnaja e Hënës së Re"
+
+#~ msgid "Double cluster"
+#~ msgstr "Grumbull i dyfishtë"
+
+#~ msgid "Crab nebula"
+#~ msgstr "Mjegullnaja e Gaforres"
+
+#~ msgid "Eight-burst planetary"
+#~ msgstr "Planetarja Tetë-hovsh"
+
+#~ msgid "Eagle nebula"
+#~ msgstr "Mjegullnaja e Shqiponjës"
+
+#~ msgid "Dumbbell nebula"
+#~ msgstr "Mjegullnaja e Girës"
+
+#~ msgid "Filamentary nebula"
+#~ msgstr "Mjegullnaja Fijëzore"
+
+#~ msgid "Eskimo nebula"
+#~ msgstr "Mjegullnaja Eskimeze"
+
+#~ msgid "Ghost of Jupiter"
+#~ msgstr "Fantazma e Jupiterit"
+
+#~ msgid "Hourglass nebula"
+#~ msgstr "Mjegullnaja e Xhamit të Orës"
+
+#~ msgid "Horsehead nebula"
+#~ msgstr "Mjegullnaja e Kokës së Kalit"
+
+#~ msgid "Helix nebula"
+#~ msgstr "Mjegullnaja Spirale"
+
+#~ msgid "Hind's variable nebula"
+#~ msgstr "Mjegullnaja e Drenushës së Ndryshyeshme"
+
+#~ msgid "Great Nebula in Orion"
+#~ msgstr "Mjegullnaja e Madhe në Orion"
+
+#~ msgid "Helix galaxy"
+#~ msgstr "Galaktika Spirale"
+
+#~ msgid "Great Nebula in Andromeda"
+#~ msgstr "Mjegullnaja e Madhe në Andromedë"
+
+#~ msgid "Flaming Star nebula"
+#~ msgstr "Mjegullnaja e Yllit Flakërues"
+
+#~ msgid "The Mice"
+#~ msgstr "Minjtë"
+
+#~ msgid "Merope nebula"
+#~ msgstr "Mjegullnaja e Meropes"
+
+#~ msgid "Little Dumbbell"
+#~ msgstr "Gira e Vogël"
+
+#~ msgid "Lagoon nebula"
+#~ msgstr "Mjegullnaja e Lagunës"
+
+#~ msgid "Maia nebula"
+#~ msgstr "Mjegullnaja e Maias"
+
+#~ msgid "Little Gem"
+#~ msgstr "Perla e Vogël"
+
+#~ msgid "Hubble's variable neb"
+#~ msgstr "Mjegullnaja e Ndryshueshme e Habëllit"
+
+#~ msgid "Lace-work nebula"
+#~ msgstr "Mjegullnaja e Punës me Dantellë"
+
+#~ msgid "Network nebula"
+#~ msgstr "Mjegullnaja e Rrjetit"
+
+#~ msgid "North America nebula"
+#~ msgstr "Mjegullnaja e Amerikës së Veriut"
+
+#~ msgid "Omega nebula"
+#~ msgstr "Mjegullnaja Omega"
+
+#~ msgid "Owl nebula"
+#~ msgstr "Mjegullnaja e Bufit"
+
+#~ msgid "Pelican nebula"
+#~ msgstr "Mjegullnaja e Pelikanit"
+
+#~ msgid "Pin-wheel nebula"
+#~ msgstr "Mjegullnaja e Timonit të Gjilpërës"
+
+#~ msgid "Star Queen nebula"
+#~ msgstr "Mjegullnaja e Mbretëreshës së Yjëve"
+
+#~ msgid "Sombrero galaxy"
+#~ msgstr "Galaktika Sombrero"
+
+#~ msgid "Sculptor galaxy"
+#~ msgstr "Galaktika e Skulptorit"
+
+#~ msgid "Saturn nebula"
+#~ msgstr "Mjegullnaja e Saturnit"
+
+#~ msgid "Rosette nebula"
+#~ msgstr "Mjegullnaja e Rozetës"
+
+#~ msgid "Ring nebula in Lyra"
+#~ msgstr "Mjegullnaja e Unazës në Lirë"
+
+#~ msgid "Spindle galaxy"
+#~ msgstr "Galaktika e Gishtit"
+
+#~ msgid "Veil nebula"
+#~ msgstr "Mjegullnaja e Perdes"
+
+#~ msgid "Whirlpool galaxy"
+#~ msgstr "Galaktika e Vorbullës"
+
+#~ msgid "Struve's Lost nebula"
+#~ msgstr "Mjegullnaja e Struvit të Humbur"
+
+#~ msgid "Sunflower galaxy"
+#~ msgstr "Galaktika e Lulediellit"
+
+#~ msgid "Triangulum galaxy"
+#~ msgstr "Galaktika Triangulum"
+
+#~ msgid "Trifid nebula"
+#~ msgstr "Mjegullnaja e Trilobëve"
+
+#~ msgid "Tarantula nebula"
+#~ msgstr "Mjegullnaja e Tarantulës"
+
+#~ msgid "Toby Jug nebula"
+#~ msgstr "Mjegullnaja e Formës së Njeriut"
+
+#~ msgid "Wild Duck cluster"
+#~ msgstr "Grumbullimi e Rosës së Egër"
