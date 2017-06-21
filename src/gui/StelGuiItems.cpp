@@ -640,6 +640,33 @@ void BottomStelBar::updateText(bool updatePos)
 	if (tzName.contains("LTST"))
 		currTZ = q_("Local True Solar Time");
 
+	// TRANSLATORS: unit of measurement: minutes per second
+	QString timeRateMU = qc_("min/s", "unit of measurement");
+	float timeRate = qAbs(core->getTimeRate()/StelCore::JD_SECOND);
+	float timeSpeed = timeRate/60.f;
+
+	if (timeSpeed>=60.f)
+	{
+		timeSpeed /= 60.f;
+		// TRANSLATORS: unit of measurement: hours per second
+		timeRateMU = qc_("hr/s", "unit of measurement");
+	}
+	if (timeSpeed>=24.f)
+	{
+		timeSpeed /= 24.f;
+		// TRANSLATORS: unit of measurement: days per second
+		timeRateMU = qc_("d/s", "unit of measurement");
+	}
+	if (timeSpeed>=365.25f)
+	{
+		timeSpeed /= 365.25f;
+		// TRANSLATORS: unit of measurement: years per second
+		timeRateMU = qc_("yr/s", "unit of measurement");
+	}
+	QString timeRateInfo = QString("%1: x%2").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0));
+	if (timeRate>60.)
+		timeRateInfo = QString("%1: x%2 (%3 %4)").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0), QString::number(timeSpeed, 'f', 2), timeRateMU);
+
 	updatePos = true;
 	datetime->setText(newDateInfo);
 	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
@@ -658,10 +685,10 @@ void BottomStelBar::updateText(bool updatePos)
 		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
 		float ndot=( (core->de430IsActive() || core->de431IsActive()) ? -25.8f : -23.8946f );
 
-		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)));
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)).arg(timeRateInfo));
 	}
 	else
-		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2<br>%3</p>").arg(newDateAppx).arg(currTZ).arg(timeRateInfo));
 
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 	{
@@ -783,9 +810,13 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (updatePos)
 	{
-		int fovShift = 170;
+		QFontMetrics fpsMetrics(fps->font());
+		int fpsShift = fpsMetrics.width(fpsstr) + 50;
+
+		QFontMetrics fovMetrics(fov->font());
+		int fovShift = fpsShift + fovMetrics.width(fovstr) + 80;
 		if (getFlagFovDms())
-			fovShift = 195;
+			fovShift += 25;
 
 		QRectF rectCh = getButtonsBoundingRect();
 		location->setPos(0, 0);		
@@ -793,7 +824,7 @@ void BottomStelBar::updateText(bool updatePos)
 		if ((dtp%2) == 1) dtp--; // make even pixel
 		datetime->setPos(dtp,0);
 		fov->setPos(datetime->x()-fovShift, 0);
-		fps->setPos(datetime->x()-75, 0);
+		fps->setPos(datetime->x()-fpsShift, 0);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPos(0,0);
@@ -801,7 +832,7 @@ void BottomStelBar::updateText(bool updatePos)
 			if ((dtp%2) == 1) dtp--; // make even pixel
 			datetimePixmap->setPos(dtp,0);
 			fovPixmap->setPos(datetime->x()-fovShift, 0);
-			fpsPixmap->setPos(datetime->x()-75, 0);
+			fpsPixmap->setPos(datetime->x()-fpsShift, 0);
 		}
 	}
 }
