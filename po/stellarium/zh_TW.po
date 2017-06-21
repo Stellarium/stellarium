@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-19 21:17+0700\n"
-"PO-Revision-Date: 2017-06-15 08:56+0000\n"
+"POT-Creation-Date: 2017-06-20 19:42+0700\n"
+"PO-Revision-Date: 2017-06-20 08:34+0000\n"
 "Last-Translator: Freeman Li <freeman.tam@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-20 05:39+0000\n"
+"X-Launchpad-Export-Date: 2017-06-21 05:43+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 "Language: zh_TW\n"
 
@@ -1202,7 +1202,7 @@ msgstr "自行的方位角"
 
 #: src/core/modules/StarWrapper.cpp:294
 msgid "Angular speed of the proper motion"
-msgstr ""
+msgstr "自行的角速率"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -2690,29 +2690,29 @@ msgstr "地方真太陽時"
 #: src/gui/StelGuiItems.cpp:644
 msgctxt "unit of measurement"
 msgid "min/s"
-msgstr ""
+msgstr "min/s"
 
 #. TRANSLATORS: unit of measurement: hours per second
 #: src/gui/StelGuiItems.cpp:652
 msgctxt "unit of measurement"
 msgid "hr/s"
-msgstr ""
+msgstr "hr/s"
 
 #. TRANSLATORS: unit of measurement: days per second
 #: src/gui/StelGuiItems.cpp:658
 msgctxt "unit of measurement"
 msgid "d/s"
-msgstr ""
+msgstr "d/s"
 
 #. TRANSLATORS: unit of measurement: years per second
 #: src/gui/StelGuiItems.cpp:664
 msgctxt "unit of measurement"
 msgid "yr/s"
-msgstr ""
+msgstr "yr/s"
 
 #: src/gui/StelGuiItems.cpp:666 src/gui/StelGuiItems.cpp:668
 msgid "Simulation speed"
-msgstr ""
+msgstr "模擬速率"
 
 #: src/gui/StelGuiItems.cpp:705
 #, c-format, qt-format
@@ -3208,12 +3208,12 @@ msgstr "等"
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:298
 msgid "sep."
-msgstr ""
+msgstr "sep."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:303
 msgid "per."
-msgstr ""
+msgstr "per."
 
 #: src/gui/AstroCalcDialog.cpp:303
 msgctxt "days"
@@ -3235,12 +3235,12 @@ msgstr "AU"
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:313
 msgid "P.M."
-msgstr ""
+msgstr "自行"
 
 #: src/gui/AstroCalcDialog.cpp:313
 msgctxt "arcsecond per year"
 msgid "\"/yr"
-msgstr ""
+msgstr "\"/yr"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:319
@@ -3827,12 +3827,12 @@ msgstr "在早上"
 #: src/gui/AstroCalcDialog.cpp:2583
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
-msgstr ""
+msgstr "午夜左右"
 
 #: src/gui/AstroCalcDialog.cpp:2584
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
-msgstr ""
+msgstr "夜晚的任何時刻"
 
 #: src/gui/AstroCalcDialog.cpp:2603
 msgid "Bright stars"
@@ -4104,7 +4104,7 @@ msgstr "古埃及"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:219
 msgid "Hawaiian Starlines"
-msgstr ""
+msgstr "夏威夷星空"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:221
@@ -9173,77 +9173,77 @@ msgid ""
 msgstr "舊的 satellites.json 已不再相容；使用預設檔案"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2006
+#: plugins/Satellites/src/Satellites.cpp:2010
 msgid "visual"
 msgstr "可視的"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2008
+#: plugins/Satellites/src/Satellites.cpp:2012
 msgid "scientific"
 msgstr "科學"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2010
+#: plugins/Satellites/src/Satellites.cpp:2014
 msgid "communications"
 msgstr "通訊"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2012
+#: plugins/Satellites/src/Satellites.cpp:2016
 msgid "navigation"
 msgstr "導航"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2014
+#: plugins/Satellites/src/Satellites.cpp:2018
 msgid "amateur"
 msgstr "業餘無線電"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2016
+#: plugins/Satellites/src/Satellites.cpp:2020
 msgid "weather"
 msgstr "氣象"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2018
+#: plugins/Satellites/src/Satellites.cpp:2022
 msgid "geostationary"
 msgstr "與地球同步"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2020
+#: plugins/Satellites/src/Satellites.cpp:2024
 msgid "non-operational"
 msgstr "不再運作"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2022
+#: plugins/Satellites/src/Satellites.cpp:2026
 msgid "gps"
 msgstr "全球定位系統(gps)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2024
+#: plugins/Satellites/src/Satellites.cpp:2028
 msgid "glonass"
 msgstr "全球導航衛星系統(glonass)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2026
+#: plugins/Satellites/src/Satellites.cpp:2030
 msgid "galileo"
 msgstr "伽利略(galileo)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2028
+#: plugins/Satellites/src/Satellites.cpp:2032
 msgid "iridium"
 msgstr "銥衛星"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2030
+#: plugins/Satellites/src/Satellites.cpp:2034
 msgid "stations"
 msgstr "太空站"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2036
 msgid "education"
 msgstr "教育"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2038
 msgid "observatory"
 msgstr "觀測台"
 
@@ -9253,57 +9253,57 @@ msgstr "觀測台"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2044
+#: plugins/Satellites/src/Satellites.cpp:2048
 msgid "The Hubble Space Telescope"
 msgstr "哈伯(Hubble)太空望遠鏡"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2046
+#: plugins/Satellites/src/Satellites.cpp:2050
 msgid "The International Space Station"
 msgstr "國際太空站(ISS)"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2052
 msgid "China's first space station"
 msgstr "中國第一個太空站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2054
 msgid "The russian space radio telescope RadioAstron"
 msgstr "俄國太空無線電望遠鏡 RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2056
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "國際 γ 射線天體物理實驗室"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2058
 msgid "The Gamma-Ray Observatory"
 msgstr "γ 射線觀測台"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2062
 msgid "ISS (ZARYA)"
 msgstr "ISS(曙光號功能貨艙)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2064
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2062
+#: plugins/Satellites/src/Satellites.cpp:2066
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2068
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2070
 msgid "TIANGONG 1"
 msgstr "天宮一號"
 
@@ -9373,11 +9373,11 @@ msgstr "太陽反射角: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:353
 msgid "Group"
-msgstr ""
+msgstr "群組"
 
 #: plugins/Satellites/src/Satellite.cpp:355
 msgid "Groups"
-msgstr ""
+msgstr "群組"
 
 #: plugins/Satellites/src/Satellite.cpp:361
 #, qt-format
@@ -11608,6 +11608,7 @@ msgid ""
 "bodies. If something goes wrong and Stellarium crashes and/or doesn't start, "
 "you can delete manually that file from:"
 msgstr ""
+"這個外掛程式可編輯自製的太陽系小型天體的的組態檔案，如果因某些錯誤導致Stellarium掛掉和/或無法啟動，您可以手動將檔案從下述位置中刪除:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid ""
@@ -11620,25 +11621,25 @@ msgstr "重置回預設值"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Export/replace the Solar System minor objects file"
-msgstr ""
+msgstr "匯出/置換太陽系小型天體檔案"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:305
 msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
-msgstr ""
+msgstr "您可以建立太陽系組態檔案的複製備份於方便的位置，或是以該複製檔案更換。"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Export the Solar System minor objects to file..."
-msgstr ""
+msgstr "匯出太陽系小型天體到檔案..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import and replace the Solar System minor objects from file..."
-msgstr ""
+msgstr "匯入並更換太陽系小型天體資料從檔案..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Import and add Solar System minor objects from file..."
-msgstr ""
+msgstr "匯入並增加太陽系小型天體資料從檔案..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
 msgid "Configuration file"
@@ -12599,15 +12600,15 @@ msgstr "這些是所有可用的屬性"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "這些屬性目前排除在同步之外"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "排除的屬性"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "排除的屬性"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
@@ -15555,19 +15556,19 @@ msgstr "顯示當日月球所在的赤緯線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Vertical for Geographic Location 1"
-msgstr ""
+msgstr "顯示地理位置1的垂直線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Vertical for Geographic Location 2"
-msgstr ""
+msgstr "顯示地理位置2的垂直線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
 msgid "Show Vertical for Custom Azimuth 1"
-msgstr ""
+msgstr "顯示自製方位角1的垂直線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Vertical for Custom Azimuth 2"
-msgstr ""
+msgstr "顯示自製方位角2的垂直線"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Line for Custom Declination 1"
