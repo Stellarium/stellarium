@@ -969,7 +969,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 		position = core->altAzToJ2000(orbitPoints[i].toVec3d());
 		position.normalize();
 
-		if (prj->projectCheck(position, onscreen)) // check position on the screen
+		if (prj->project(position, onscreen)) // check position on the screen
 		{
 			vertexArray.append(position);
 			drawColor = (visibilityPoints[i] == gSatWrapper::VISIBLE) ? orbitColor : invisibleSatelliteColor;

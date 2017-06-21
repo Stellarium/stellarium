@@ -291,7 +291,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 		oss << QString("%1: %2%3").arg(q_("Position angle of the proper motion")).arg(QString::number(pa,'f', 1)).arg(QChar(0x00B0)) << "<br />";
-		oss << QString("%1: %2 (%3)").arg(q_("Angular velocity of the proper motion")).arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
+		oss << QString("%1: %2 (%3)").arg(q_("Angular speed of the proper motion")).arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	StelObject::postProcessInfoString(str, flags);

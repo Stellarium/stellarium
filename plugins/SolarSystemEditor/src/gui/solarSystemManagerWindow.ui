@@ -212,7 +212,7 @@
        <item>
         <widget class="QGroupBox" name="groupBoxSystemFile">
          <property name="title">
-          <string>Export/replace the Solar System minor bodies file</string>
+          <string>Export/replace the Solar System minor objects file</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayoutImportExport">
           <item>
@@ -228,21 +228,21 @@
           <item>
            <widget class="QPushButton" name="pushButtonCopyFile">
             <property name="text">
-             <string>Export the Solar System minor bodies to file...</string>
+             <string>Export the Solar System minor objects to file...</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonReplaceFile">
             <property name="text">
-             <string>Import and replace the Solar System minor bodies from file...</string>
+             <string>Import and replace the Solar System minor objects from file...</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonAddFile">
             <property name="text">
-             <string>Import and add Solar System minor bodies from file...</string>
+             <string>Import and add Solar System minor objects from file...</string>
             </property>
            </widget>
           </item>

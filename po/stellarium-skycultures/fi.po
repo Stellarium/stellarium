@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-10 19:37+0700\n"
-"PO-Revision-Date: 2017-05-26 15:36+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2017-06-19 21:17+0700\n"
+"PO-Revision-Date: 2017-06-11 21:42+0000\n"
+"Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-11 05:55+0000\n"
-"X-Generator: Launchpad (build 18402)\n"
+"X-Launchpad-Export-Date: 2017-06-20 05:46+0000\n"
+"X-Generator: Launchpad (build 18416)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -319,6 +319,7 @@ msgstr "Orcus"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
 #: skycultures/translations.fab:93
+#: skycultures/hawaiian_starlines/star_names.fab:44
 msgid "Haumea"
 msgstr "Haumea"
 
@@ -1169,7 +1170,7 @@ msgstr "Rusettisumu"
 
 #: nebulae/default/names.dat:25
 msgid "Scarab Nebula"
-msgstr ""
+msgstr "Pillerinpyrörittäjäsumu"
 
 #: nebulae/default/names.dat:26 nebulae/default/names.dat:27
 #: nebulae/default/names.dat:28 nebulae/default/names.dat:29
@@ -1186,11 +1187,11 @@ msgstr "Jättiläiskalmarigalaksi"
 
 #: nebulae/default/names.dat:32
 msgid "Polarissima Cluster"
-msgstr ""
+msgstr "Polarissima-joukko"
 
 #: nebulae/default/names.dat:33
 msgid "Great Star Cloud in Andromeda Galaxy"
-msgstr ""
+msgstr "Andromedan galaksin suuri tähtipilvi"
 
 #: nebulae/default/names.dat:34
 msgid "Andromeda Galaxy"
@@ -1210,11 +1211,11 @@ msgstr "Pääkallosumu"
 
 #: nebulae/default/names.dat:38
 msgid "Soap Bubble Nebula"
-msgstr ""
+msgstr "Saippuakuplasumu"
 
 #: nebulae/default/names.dat:39
 msgid "Voodoo Mask Nebula"
-msgstr ""
+msgstr "Voodoonaamiosumu"
 
 #: nebulae/default/names.dat:40 nebulae/default/names.dat:583
 msgid "Burbidge Chain"
@@ -1234,7 +1235,7 @@ msgstr "Hopeadollarigalaksi"
 
 #: nebulae/default/names.dat:44
 msgid "Pisces Cloud"
-msgstr ""
+msgstr "Kalojen pilvi"
 
 #: nebulae/default/names.dat:45
 msgid "Markarian 348"
@@ -1262,7 +1263,7 @@ msgstr "E.T.-joukko"
 
 #: nebulae/default/names.dat:51
 msgid "Whirligig Galaxy"
-msgstr ""
+msgstr "Väkkärägalaksi"
 
 #: nebulae/default/names.dat:52
 msgid "Triangulum Galaxy"
@@ -1274,11 +1275,11 @@ msgstr "Kolmion tuulimyllygalaksi"
 
 #: nebulae/default/names.dat:54
 msgid "Little Spindle Galaxy"
-msgstr ""
+msgstr "Pieni värttinägalaksi"
 
 #: nebulae/default/names.dat:55
 msgid "Phantom Galaxy"
-msgstr ""
+msgstr "Kummitusgalaksi"
 
 #: nebulae/default/names.dat:56
 msgid "Little Dumbbell Nebula"
@@ -6437,6 +6438,346 @@ msgstr "Horus, kahden maan yhdistäjä (Jupiter)"
 msgid "Horus, the Bull of Heaven (Saturn)"
 msgstr "Horus, taivaan härkä (Saturnus)"
 
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:1
+msgid "The Canoe Bailer of Makali`i"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:2
+msgid "The Cat's Cradle"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:3
+msgid "The Backbone"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:4
+#: skycultures/western/constellation_names.eng.fab:49
+#: skycultures/western_rey/constellation_names.eng.fab:23
+msgid "Leo"
+msgstr "Leijona"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:5
+msgid "The Chief's Fishline"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:6
+msgid "The Chief's Eyes"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:7
+msgid "Kite of Kawelo"
+msgstr "Kawelon leija"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:8
+msgid "The Seven"
+msgstr "Seitsemän"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:9
+msgid "Voice of Joy"
+msgstr "Ilon ääni"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:10
+msgid "Chief Frigate Bird"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:11
+msgid "Cared for by Moon"
+msgstr "Kuun kaitsema"
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:12
+msgid "The Pointers"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/constellation_names.eng.fab:13
+msgid "Navigator's Triangle"
+msgstr "Merenkulkijan kolmio"
+
+#: skycultures/hawaiian_starlines/star_names.fab:1
+msgid "Hokulei"
+msgstr "Hokulei"
+
+#: skycultures/hawaiian_starlines/star_names.fab:2
+msgid "Nana-mua"
+msgstr "Nana-mua"
+
+#: skycultures/hawaiian_starlines/star_names.fab:3
+msgid "Nana-hope"
+msgstr "Nana-hope"
+
+#: skycultures/hawaiian_starlines/star_names.fab:4
+msgid "Puana"
+msgstr "Puana"
+
+#: skycultures/hawaiian_starlines/star_names.fab:5
+msgid "A‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:6
+msgid "Puana-kau"
+msgstr "Puana-kau"
+
+#: skycultures/hawaiian_starlines/star_names.fab:7
+msgid "Pu'uhonua"
+msgstr "Pu'uhonua"
+
+#: skycultures/hawaiian_starlines/star_names.fab:8
+msgid "Kaulua-koko"
+msgstr "Kaulua-koko"
+
+#: skycultures/hawaiian_starlines/star_names.fab:9
+msgid "Hokupa‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:10
+msgid "Hokule‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:11
+msgid "Hiki-analia"
+msgstr "Hiki-analia"
+
+#: skycultures/hawaiian_starlines/star_names.fab:12
+msgid "Holopuni"
+msgstr "Holopuni"
+
+#: skycultures/hawaiian_starlines/star_names.fab:13
+msgid "Hawaiki"
+msgstr "Hawaiki"
+
+#: skycultures/hawaiian_starlines/star_names.fab:14
+msgid "Humu"
+msgstr "Humu"
+
+#: skycultures/hawaiian_starlines/star_names.fab:15
+msgid "Keoe"
+msgstr "Keoe"
+
+#: skycultures/hawaiian_starlines/star_names.fab:16
+msgid "Hoku‘ula"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:17
+msgid "Lehua-Kona"
+msgstr "Lehua-Kona"
+
+#: skycultures/hawaiian_starlines/star_names.fab:18
+msgid "Ke ali'i o kona i ka lewa"
+msgstr "Ke ali'i o kona i ka lewa"
+
+#: skycultures/hawaiian_starlines/star_names.fab:19
+msgid "Pu‘uhonua"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:20
+msgid "Hiku-kahi"
+msgstr "Hiku-kahi"
+
+#: skycultures/hawaiian_starlines/star_names.fab:21
+msgid "Hiku-lua"
+msgstr "Hiku-lua"
+
+#: skycultures/hawaiian_starlines/star_names.fab:22
+msgid "Hiku-kolu"
+msgstr "Hiku-kolu"
+
+#: skycultures/hawaiian_starlines/star_names.fab:23
+msgid "Hiku-ha"
+msgstr "Hiku-ha"
+
+#: skycultures/hawaiian_starlines/star_names.fab:24
+msgid "Hiku-lima"
+msgstr "Hiku-lima"
+
+#: skycultures/hawaiian_starlines/star_names.fab:25
+#: skycultures/hawaiian_starlines/star_names.fab:55
+msgid "Hiku-ono"
+msgstr "Hiku-ono"
+
+#: skycultures/hawaiian_starlines/star_names.fab:26
+msgid "Hiku-pau"
+msgstr "Hiku-pau"
+
+#: skycultures/hawaiian_starlines/star_names.fab:27
+msgid "Kaulia"
+msgstr "Kaulia"
+
+#: skycultures/hawaiian_starlines/star_names.fab:28
+msgid "Ka Mole Honua"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:29
+msgid "Ka-maile-mua"
+msgstr "Ka-maile-mua"
+
+#: skycultures/hawaiian_starlines/star_names.fab:30
+msgid "Ka-maile-hope"
+msgstr "Ka-maile-hope"
+
+#: skycultures/hawaiian_starlines/star_names.fab:31
+msgid "Ka Maka"
+msgstr "Ka Maka"
+
+#: skycultures/hawaiian_starlines/star_names.fab:32
+msgid "Kapuahi"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:33
+msgid "Keawe"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:34
+msgid "Manokalanipo"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:35
+msgid "Pi‘ilani"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:36
+msgid "Kakuhihewa"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:37
+msgid "Pi‘ikea"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:38
+msgid "Kaikilani"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:39
+#: skycultures/hawaiian_starlines/star_names.fab:46
+msgid "Kukaniloko"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:40
+msgid "Kealohalani-po-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:41
+msgid "Kamoanalipoli-po-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:42
+msgid "Kaheihiwahiwa-o-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:43
+msgid "Kapalinihinihi-o-keao"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:45
+msgid "Mirzim"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:47
+msgid "‘Ekekeu’ena’ena"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:48
+msgid "‘Ekekeuehuehu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:49
+msgid "‘Ekekeuhe’ehe’e"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:50
+msgid "‘Ekekeukolokolo"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:51
+#: skycultures/romanian/star_names.fab:48
+#: skycultures/western/star_names.fab:542
+msgid "Bellatrix"
+msgstr "Bellatrix"
+
+#: skycultures/hawaiian_starlines/star_names.fab:52
+#: skycultures/romanian/star_names.fab:56
+#: skycultures/western/star_names.fab:545
+msgid "Alnitak"
+msgstr "Alnitak"
+
+#: skycultures/hawaiian_starlines/star_names.fab:53
+#: skycultures/romanian/star_names.fab:54
+#: skycultures/western/star_names.fab:544
+msgid "Alnilam"
+msgstr "Alnilam"
+
+#: skycultures/hawaiian_starlines/star_names.fab:54
+#: skycultures/romanian/star_names.fab:51
+#: skycultures/western/star_names.fab:543
+msgid "Mintaka"
+msgstr "Mintaka"
+
+#: skycultures/hawaiian_starlines/star_names.fab:56
+msgid "Pua‘i"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:57
+msgid "Mili’opu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:58
+msgid "Kahe"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:59
+msgid "Hihiwai"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:60
+msgid "Kawelaokapo"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:61
+msgid "‘Ohelokulu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:62
+msgid "‘Ohelokoko"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:63
+msgid "‘Ohelouli"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:64
+msgid "‘Oheloawa"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:65
+msgid "‘Ohelowaha"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:66
+msgid "Kawilikolokio"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:67
+msgid "Ka‘ielawei‘a"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:68
+msgid "Lele"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:69
+msgid "Kalipo‘eu‘eu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:70
+msgid "Momonapikowalu"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:71
+msgid "Mokopapa‘i"
+msgstr ""
+
+#: skycultures/hawaiian_starlines/star_names.fab:72
+msgid "Wainielela"
+msgstr ""
+
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
 msgstr "Kaksi auringonsädettä"
@@ -8598,167 +8939,6 @@ msgstr "Madoo’asinik (Hikoilevat kivet)"
 msgid "Womens Star (Venus)"
 msgstr "Naistentähti (Venus)"
 
-#: skycultures/polynesian/constellation_names.eng.fab:2
-msgid "Bailer"
-msgstr "Äyskäri"
-
-#: skycultures/polynesian/constellation_names.eng.fab:3
-msgid "Cat's Cradle"
-msgstr "Kissankehto"
-
-#: skycultures/polynesian/constellation_names.eng.fab:4
-msgid "Voice of Joy"
-msgstr "Ilon ääni"
-
-#: skycultures/polynesian/constellation_names.eng.fab:5
-msgid "The Seven"
-msgstr "Seitsemän"
-
-#: skycultures/polynesian/constellation_names.eng.fab:6
-msgid "Maui's Fishhook"
-msgstr "Mauin kalastuskoukku"
-
-#: skycultures/polynesian/constellation_names.eng.fab:7
-msgid "Navigator's Triangle"
-msgstr "Merenkulkijan kolmio"
-
-#: skycultures/polynesian/constellation_names.eng.fab:8
-msgid "Kite of Kawelo"
-msgstr "Kawelon leija"
-
-#: skycultures/polynesian/constellation_names.eng.fab:9
-msgid "Frigate Bird"
-msgstr "Fregattilintu"
-
-#: skycultures/polynesian/constellation_names.eng.fab:10
-msgid "Cared for by Moon"
-msgstr "Kuun kaitsema"
-
-#: skycultures/polynesian/constellation_names.eng.fab:11
-msgid "Dolphin"
-msgstr "Delfiini"
-
-#: skycultures/polynesian/star_names.fab:1
-msgid "Hokulei"
-msgstr "Hokulei"
-
-#: skycultures/polynesian/star_names.fab:2
-msgid "Nana-mua"
-msgstr "Nana-mua"
-
-#: skycultures/polynesian/star_names.fab:3
-msgid "Nana-hope"
-msgstr "Nana-hope"
-
-#: skycultures/polynesian/star_names.fab:4
-msgid "Puana"
-msgstr "Puana"
-
-#: skycultures/polynesian/star_names.fab:5
-msgid "A'a"
-msgstr "A'a"
-
-#: skycultures/polynesian/star_names.fab:6
-msgid "Puana-kau"
-msgstr "Puana-kau"
-
-#: skycultures/polynesian/star_names.fab:7
-#: skycultures/polynesian/star_names.fab:19
-msgid "Pu'uhonua"
-msgstr "Pu'uhonua"
-
-#: skycultures/polynesian/star_names.fab:8
-msgid "Kaulua-koko"
-msgstr "Kaulua-koko"
-
-#: skycultures/polynesian/star_names.fab:9
-msgid "Hokupa'a"
-msgstr "Hokupa'a"
-
-#: skycultures/polynesian/star_names.fab:10
-msgid "Hokule'a"
-msgstr "Hokule'a"
-
-#: skycultures/polynesian/star_names.fab:11
-msgid "Hiki-analia"
-msgstr "Hiki-analia"
-
-#: skycultures/polynesian/star_names.fab:12
-msgid "Holopuni"
-msgstr "Holopuni"
-
-#: skycultures/polynesian/star_names.fab:13
-msgid "Hawaiki"
-msgstr "Hawaiki"
-
-#: skycultures/polynesian/star_names.fab:14
-msgid "Humu"
-msgstr "Humu"
-
-#: skycultures/polynesian/star_names.fab:15
-msgid "Keoe"
-msgstr "Keoe"
-
-#: skycultures/polynesian/star_names.fab:16
-msgid "Hoku'ula"
-msgstr "Hoku'ula"
-
-#: skycultures/polynesian/star_names.fab:17
-msgid "Lehua-Kona"
-msgstr "Lehua-Kona"
-
-#: skycultures/polynesian/star_names.fab:18
-msgid "Ke ali'i o kona i ka lewa"
-msgstr "Ke ali'i o kona i ka lewa"
-
-#: skycultures/polynesian/star_names.fab:20
-msgid "Hiku-kahi"
-msgstr "Hiku-kahi"
-
-#: skycultures/polynesian/star_names.fab:21
-msgid "Hiku-lua"
-msgstr "Hiku-lua"
-
-#: skycultures/polynesian/star_names.fab:22
-msgid "Hiku-kolu"
-msgstr "Hiku-kolu"
-
-#: skycultures/polynesian/star_names.fab:23
-msgid "Hiku-ha"
-msgstr "Hiku-ha"
-
-#: skycultures/polynesian/star_names.fab:24
-msgid "Hiku-lima"
-msgstr "Hiku-lima"
-
-#: skycultures/polynesian/star_names.fab:25
-msgid "Hiku-ono"
-msgstr "Hiku-ono"
-
-#: skycultures/polynesian/star_names.fab:26
-msgid "Hiku-pau"
-msgstr "Hiku-pau"
-
-#: skycultures/polynesian/star_names.fab:27
-msgid "Kaulia"
-msgstr "Kaulia"
-
-#: skycultures/polynesian/star_names.fab:28
-msgid "Mole Honua"
-msgstr "Mole Honua"
-
-#: skycultures/polynesian/star_names.fab:29
-msgid "Ka-maile-mua"
-msgstr "Ka-maile-mua"
-
-#: skycultures/polynesian/star_names.fab:30
-msgid "Ka-maile-hope"
-msgstr "Ka-maile-hope"
-
-#: skycultures/polynesian/star_names.fab:31
-msgid "Ka Maka"
-msgstr "Ka Maka"
-
 #: skycultures/romanian/constellation_names.eng.fab:1
 msgid "The Great Chariot"
 msgstr "Suuri sotavaunu"
@@ -9109,11 +9289,6 @@ msgstr "Rigel"
 msgid "Capella"
 msgstr "Capella"
 
-#: skycultures/romanian/star_names.fab:48
-#: skycultures/western/star_names.fab:542
-msgid "Bellatrix"
-msgstr "Bellatrix"
-
 #: skycultures/romanian/star_names.fab:49
 msgid "Alnath"
 msgstr "Alnath"
@@ -9122,11 +9297,6 @@ msgstr "Alnath"
 #: skycultures/western/star_names.fab:483
 msgid "Nihal"
 msgstr "Nihal"
-
-#: skycultures/romanian/star_names.fab:51
-#: skycultures/western/star_names.fab:543
-msgid "Mintaka"
-msgstr "Mintaka"
 
 #: skycultures/romanian/star_names.fab:52
 #: skycultures/western/star_names.fab:482
@@ -9138,20 +9308,10 @@ msgstr "Arneb"
 msgid "Meissa"
 msgstr "Meissa"
 
-#: skycultures/romanian/star_names.fab:54
-#: skycultures/western/star_names.fab:544
-msgid "Alnilam"
-msgstr "Alnilam"
-
 #: skycultures/romanian/star_names.fab:55
 #: skycultures/western/star_names.fab:249
 msgid "Phact"
 msgstr "Phact"
-
-#: skycultures/romanian/star_names.fab:56
-#: skycultures/western/star_names.fab:545
-msgid "Alnitak"
-msgstr "Alnitak"
 
 #: skycultures/romanian/star_names.fab:57
 #: skycultures/western/star_names.fab:546
@@ -10532,11 +10692,6 @@ msgstr "Yksisarvinen"
 #: skycultures/western_rey/constellation_names.eng.fab:78
 msgid "Lepus"
 msgstr "Jänis"
-
-#: skycultures/western/constellation_names.eng.fab:49
-#: skycultures/western_rey/constellation_names.eng.fab:23
-msgid "Leo"
-msgstr "Leijona"
 
 #: skycultures/western/constellation_names.eng.fab:50
 #: skycultures/western_rey/constellation_names.eng.fab:165
@@ -13253,6 +13408,18 @@ msgstr "Beta Centauri"
 #~ msgid "Dried Willow"
 #~ msgstr "Kuivanut paju"
 
+#~ msgid "Bailer"
+#~ msgstr "Äyskäri"
+
+#~ msgid "Cat's Cradle"
+#~ msgstr "Kissankehto"
+
+#~ msgid "Dolphin"
+#~ msgstr "Delfiini"
+
+#~ msgid "Frigate Bird"
+#~ msgstr "Fregattilintu"
+
 #~ msgid "Snake"
 #~ msgstr "Käärme"
 
@@ -13408,6 +13575,21 @@ msgstr "Beta Centauri"
 
 #~ msgid "Pin-wheel nebula"
 #~ msgstr "Tuulimyllysumu"
+
+#~ msgid "A'a"
+#~ msgstr "A'a"
+
+#~ msgid "Hokupa'a"
+#~ msgstr "Hokupa'a"
+
+#~ msgid "Hokule'a"
+#~ msgstr "Hokule'a"
+
+#~ msgid "Hoku'ula"
+#~ msgstr "Hoku'ula"
+
+#~ msgid "Mole Honua"
+#~ msgstr "Mole Honua"
 
 #~ msgid "Toby Jug nebula"
 #~ msgstr "Tobyjug-sumu"
@@ -13828,6 +14010,9 @@ msgstr "Beta Centauri"
 
 #~ msgid "Little Dumbbell"
 #~ msgstr "Pieni nostopainosumu"
+
+#~ msgid "Maui's Fishhook"
+#~ msgstr "Mauin kalastuskoukku"
 
 #~ msgid "Spindle galaxy"
 #~ msgstr "Värttinägalaksi"

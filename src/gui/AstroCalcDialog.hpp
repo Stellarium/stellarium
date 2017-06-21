@@ -136,6 +136,7 @@ private slots:
 	void cleanupPhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
+	void savePhenomenaAngularSeparation(double v);
 
 	void savePhenomenaCelestialBody(int index);
 	void savePhenomenaCelestialGroup(int index);
@@ -157,8 +158,11 @@ private slots:
 
 	// WUT
 	void saveWutMagnitudeLimit(double mag);
+	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
 	void selectWutObject();
+
+	void updateAstroCalcData();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
@@ -258,7 +262,7 @@ private:
 
 		if (column == AstroCalcDialog::CColumnName)
 		{
-			QRegExp dso("^(\\w+)\\s*(\\d+)$");
+			QRegExp dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
 			int a = 0, b = 0;
 			if (dso.exactMatch(text(column)))
 				a = dso.capturedTexts().at(2).toInt();

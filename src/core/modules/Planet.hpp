@@ -102,7 +102,9 @@ public:
 		isPlanet,		// ssystem.ini: type="planet"
 		isMoon,			// ssystem.ini: type="moon"
 		isObserver,		// ssystem.ini: type="observer"
-		isAsteroid,		// ssystem.ini: type="asteroid"
+		isArtificial,		// Used in transitions from planet to planet.
+		isAsteroid,		// ssystem.ini: type="asteroid". all types >= isAsteroid are "Minor Bodies".
+					// Put other things (spacecraft etc) before isAsteroid.
 		isPlutino,		// ssystem.ini: type="plutino"
 		isComet,		// ssystem.ini: type="comet"
 		isDwarfPlanet,		// ssystem.ini: type="dwarf planet"
@@ -110,7 +112,7 @@ public:
 		isSDO,			// ssystem.ini: type="scattered disc object"
 		isOCO,			// ssystem.ini: type="oco"
 		isSednoid,		// ssystem.ini: type="sednoid"
-		isUNDEFINED		// ssystem.ini: type=<anything else>
+		isUNDEFINED		// ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
 
 	enum PlanetOrbitColorStyle
@@ -210,8 +212,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
-	//! Get the radius of the planet in AU.
-	//! @return the radius of the planet in astronomical units.
+	//! Get the equator radius of the planet in AU.
+	//! @return the equator radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
 	//! Get the value (1-f) for oblateness f.
 	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
@@ -327,15 +329,15 @@ public:
 	LinearFader orbitFader;
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
-	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
-	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
+	Vec3d orbit[ORBIT_SEGMENTS+1];  // store heliocentric coordinates for drawing the orbit
+	Vec3d orbitP[ORBIT_SEGMENTS+1]; // store local coordinate for orbit
 	double lastOrbitJDE;
-	double deltaJDE;                 // time difference between positional updates.
+	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;
-	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
-	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
-	// the end: good for elliptical orbits, bad for parabolic
-	// and hyperbolic orbits
+	bool orbitCached;               // whether orbit calculations are cached for drawing orbit yet
+	bool closeOrbit;                // whether to connect the beginning of the orbit line to
+					// the end: good for elliptical orbits, bad for parabolic
+					// and hyperbolic orbits
 
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
@@ -455,7 +457,7 @@ protected:
 
 	void computeModelMatrix(Mat4d &result) const;
 
-	Vec3f getCurrentOrbitColor();
+	Vec3f getCurrentOrbitColor() const;
 	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
