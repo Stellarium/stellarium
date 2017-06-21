@@ -76,8 +76,8 @@ public:
 
 	//! Create and initialize the main Stellarium application.
 	//! @param parent the QObject parent
-	//! The configFile will be search for in the search path by the StelFileMgr,
-	//! it is therefor possible to specify either just a file name or path within the
+	//! The configFile will be searched for in the search path by the StelFileMgr,
+	//! it is therefore possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
 	StelApp(StelMainView* parent);
 

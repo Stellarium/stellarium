@@ -70,7 +70,8 @@
 %% console commands, CLI arguments, etc.
 \newcommand{\command}[1]{\texttt{#1}}
 %% Names of 3rd-party software products like Photoshop, Sketchup etc. Not for OS names, they are too common. 
-\newcommand{\program}[1]{\textsf{\textbf{\small #1}}}
+%% The footnotesize is required for a better size match.
+\newcommand{\program}[1]{\textsf{\textbf{\footnotesize #1}}}
 \newcommand{\var}[1]{\texttt{#1}} %% variable name
 
 %% Color boxes for config.ini 
@@ -93,8 +94,10 @@
 \newcommand{\indexterm}[2][]{%
 	\ifthenelse{\equal{#1}{}}{\emph{#2}\index{#2}}{\emph{#2}\index{#1}}}
 
+%% This will avoid overshooting of the margin notes out of the page.
+\setlength{\marginparwidth}{0.6\marginparwidth}
 %% A command to show the version number when a feature was introduced in the margin. Give only the version number. TODO Decide on formatting etc.
-\newcommand{\newFeature}[1]{\marginpar{#1}}
+\newcommand{\newFeature}[1]{\marginpar{\centering{\small #1}}}
 
 %% A few units. Add what you need in the same style here.
 \newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}

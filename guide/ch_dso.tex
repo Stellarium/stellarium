@@ -24,7 +24,9 @@ section~\ref{sec:dso:modifyingTexturesJson} for details of the file format.
 \section{Stellarium DSO Catalog}
 \label{sec:dso:catalog}
 
-Stellarium's DSO Catalog contains over 83000 objects\footnote{The package of Stellarium includes standard edition of version 3.1 of the DSO catalog with over 83000 objects. The extended edition of this catalog contains over one million objects and she download separately from the URL \url{https://sourceforge.net/projects/stellarium/files/Extra-data-files/DSO/3.1/} and installed by hands to the \file{\emph{user directory}/nebulae/default/} or replaced in \emph{installation directory}.} and is available for end users as collection of files:
+Stellarium's DSO Catalog contains over 83000 objects\footnote{An extended edition of this catalog 
+with over one million objects may be downloaded and installed manually (see section \ref{sec:ExtraData:DSOs}).} 
+(up to $15.5^m$) and is available for end users as collection of files:
 
 \begin{longtabu} to \textwidth {lX}
 %\emph{File} & \emph{Description}\\
@@ -64,9 +66,9 @@ follow catalogues:
 \item[\textbf{PGC}]  HYPERLEDA. I. Catalog of galaxies\footnote{The PGC and UGC catalogues have a partial support}
 \item[\textbf{UGC}]  The Uppsala General Catalogue of Galaxies
 \item[\textbf{Ced}]  Cederblad Catalog of bright diffuse Galactic nebulae~\cite{1946MeLuS.119....1C}
-\item[\textbf{Arp}]  Atlas of peculiar galaxies~\cite{1966ApJS...14....1A}
-\item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\cite{2001A&AT...20..717V}
-\item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\cite{2001A&A...378..843K}
+\item[\textbf{Arp}]  Atlas of peculiar galaxies~\cite{1966ApJS...14....1A}\newFeature{V0.16.0}
+\item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\cite{2001A&AT...20..717V}\newFeature{V0.16.0}
+\item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\cite{2001A&A...378..843K}\newFeature{V0.16.0}
 \end{description}
 
 Cross-index data for Stellarium DSO Catalog is partially obtained from ``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M} and astronomical databases SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr/simbad/}}~\cite{2000A&AS..143....9W} and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.

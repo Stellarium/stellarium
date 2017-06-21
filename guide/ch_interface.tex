@@ -313,7 +313,7 @@ hightlights:
   constellations.
 \item[Twinkle] controls how much the stars twinkle when atmosphere is
   enabled (\indexterm{scintillation}, see section~\ref{sec:phenomena:Scintillation}). 
-  Since V0.15, the twinkling is reduced in higher altitudes,
+  Since v0.15.0, the twinkling is reduced in higher altitudes,
   where the star light passes the atmosphere in a steeper angle and is
   less distorted.
 \item[Limit magnitude] Inhibits automatic addition of fainter stars
@@ -336,7 +336,7 @@ hightlights:
   \emph{Scale Moon} option will increase the apparent size of the moon
   in the sky, which can be nice for wide field of view shots.
 \item[Labels and markers] you can independantly change the amount of
-  labels displayed for planets, stars and nebuulae. The further to the
+  labels displayed for planets, stars and nebulae. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
 \item[Shooting stars] Stellarium has a simple meteor simulation
@@ -352,7 +352,7 @@ hightlights:
 An auxiliary dialog contains detail settings for the atmosphere. Here
 you can set atmospheric pressure and temperature which influence
 refraction (see section~\ref{sec:phenomena:Refraction}), and the
-opacity factor for extinction, \emph{magnitude loss per airmass} $k$
+opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
 (see section~\ref{sec:phenomena:Extinction}).
 
 
@@ -360,24 +360,27 @@ opacity factor for extinction, \emph{magnitude loss per airmass} $k$
 \label{sec:gui:view:dso}
 
 \begin{figure}[t]
-\includegraphics[width=\textwidth,trim=0 70 0 0,clip]{view_dialog_dso_tab}
+\includegraphics[width=\textwidth,trim=0 120 0 0,clip]{view_dialog_dso_tab}
 \caption{View Settings Window: DSO Tab}
 \label{fig:gui:view:dso}
 \end{figure}
-
 
 \indexterm{Deep-sky objects} or DSO are extended objects which are
 external to the solar system, and are not point sources like stars.
 DSO include galaxies, planetary nebulae and star clusters. These
 objects may or may not have images associated with them. Stellarium
 comes with a catalogue of over 83,000 extended objects containing
-the combined data from many catalogues, with 200 images.  The DSO tab
-(Fig.~\ref{fig:gui:view:dso}) allows you to specify which catalogs or
-which object types you are interested in. See chapter~\ref{ch:DSO} for
-details about the catalog, and how to extend it with your own photographs.
+the combined data from many catalogues, with 200 images.  
 
+The DSO tab (Fig.~\ref{fig:gui:view:dso}) allows you to specify which 
+catalogs or which object types you are interested in. This selection 
+will also be respected in other parts of the program, 
+most notably Search (section~\ref{sec:gui:search}) and 
+AstroCalc/WUT (section~\ref{sec:gui:AstroCalc:WUT}) 
+will not find objects from catalogs which you have not selected here. 
 
-
+See chapter~\ref{ch:DSO} for details about the catalog, 
+and how to extend it with your own photographs.
 
 
 \subsection{The Markings Tab}
@@ -502,7 +505,7 @@ website\footnote{\url{http://stellarium.org/wiki/index.php/Landscapes}}
 or create yourself (see ch.~\ref{ch:landscapes} Landscapes), or remove
 these custom landscapes.
 
-Loading large landscapes may take several seconds. \newFeature{V0.15.2}
+Loading large landscapes may take several seconds. \newFeature{v0.15.2}
 If you like to switch rapidly between several landscapes and have enough memory, 
 you can increase the default cache size to keep more landscapes loaded previously 
 available in memory. Note that a large landscape can take up 200MB or more! 
@@ -532,7 +535,7 @@ Western and Inuit), and the rest do not. Configurable options include
   figures, like \guibutton{0.6}{bt_constellation} or \keys{C}, and you
   can configure constellation line thickness here.
   \item[Show asterism lines\ldots] Activate display of asterism stick figures   
-  (like the shortcut \keys{Alt+A}) and you can configure asterism line thickness here.\newFeature{V0.16.0}
+  (like the shortcut \keys{Alt+A}) and you can configure asterism line thickness here.\newFeature{v0.16.0}
 \item[Show boundaries] Activate display of constellation boundaries,
   like \keys{B}. Currently, boundaries have been defined only for
   ``Western'' skycultures.
@@ -542,7 +545,7 @@ Western and Inuit), and the rest do not. Configurable options include
 \item[Show art in brightness\ldots] Activate display of constellation
   art (if available), like \guibutton{0.6}{bt_constellation_art} or
   \keys{R}. You can also select the brightness here.
-\item[Show asterism labels] Activate display of asterism labels, like \keys{Alt+V}.
+\item[Show asterism labels] Activate display of asterism labels, like \keys{Alt+V}.\newFeature{v0.16.0}
 \end{description}
 
 
@@ -584,30 +587,29 @@ will be highlighted. If you press the \key{\tab} key, the selection will change
 to the next item in the list. Hitting the \key{\return} key will go to the
 currently highlighted object and close the search dialog.
 
-For example, suppose we want to locate Mimas (a moon of Saturn). After
-typing the first letter of the name, \emph{m}, Stellarium makes a list
-of objects whose name contains M: Haumea, Miranda, Umbriel, \ldots 
+For example, suppose we want to locate Saturn's moon Mimas. 
+Type the first letter of the name, \emph{m}, to see a list
+of objects whose name contains \emph{m}: Hau\emph{m}ea, \emph{M}iranda, U\emph{m}briel, \ldots 
 
 You may want at this point to have Stellarium rather propose object
 names with start with the string you enter. Do that in the Options tab
-of this panel. Now repeat searching (delete, and re-enter M to start
+of this panel. Now repeat searching (delete, and re-enter \emph{m} to start
 over). Now the list is shorter and contains only objects which start
-with M: Maia, Mars, \ldots The first item in this list, Maia, is
+with \emph{m}: \emph{M}aia, \emph{M}ars, \ldots The first item in this list, Maia, is
 highlighted. Pressing \key{\return} now would go to Maia, but we want
 Mimas. We can either press \key{\tab} a few times to highlight Mimas
 and then hit \key{\return}, or we can continue to type the name until
 it is the first/only object in the list.
 
-The Position tab provides a convenient way to enter a set
+The Position tab (Fig.~\ref{fig:gui:search:position}) provides a convenient way to enter a set
 of coordinates.
 
-The List Search tab allows selection of an object from predefined
-sets.  The number of choices is governed by the loaded plug
-ins. Simply scroll down the first window to select the type. The name
-of an object can then be selected from the list. Press \key{\return} and
-Stellarium will go to that object.
+The List Search tab (Fig.~\ref{fig:gui:search:options}) allows selection of an object from predefined
+sets.  The number of choices is governed by the loaded DSO catalogs and plug-ins. 
+Scroll down the first window to select the type. Click on the name
+and Stellarium will go to that object.
 
-The Options tab provides a few settings to fine-tune your search experience.
+The Options tab (Fig.~\ref{fig:gui:search:options}) provides a few settings to fine-tune your search experience.
 When the name of an object to find is typed in the object
 window and you are connected to the internet and ``Extend search'' is
 ticked, Stellarium will search the SIMBAD on-line  data bases for its
@@ -620,14 +622,14 @@ selected from the scroll window.
 \section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
-\newFeature{V0.15.0} This window provides advanced functionality, some of which is still in an experimental phase. 
+\newFeature{v0.15.0} This window provides advanced functionality, some of which is still in an experimental phase. 
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc} on the left menu bar. 
 The Astronomical Calculations window shows six tabs with different functionality.
 
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
-\newFeature{V0.16.0} This tab shows J2000.0 or horizontal positions, magnitudes and additional parameters 
+\newFeature{v0.16.0} This tab shows J2000.0 or horizontal positions, magnitudes and additional parameters 
 (e.g.\ surface brightness for deep-sky objects or angular separation for double stars) for various 
 lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
 Double-clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
@@ -651,18 +653,18 @@ Dates and/or magnitudes will show near position markers when \emph{Show dates} a
 
 You can export the calculated ephemeris into a CSV file. 
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.92\textwidth]{astrocalc_dialog_ephemeris_tab}
 \caption{Astronomical Calculations (AstroCalc): Plot traces of planets}
 \label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
 
-Anther interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
+Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
 In this mode, the circle marks are not linked to the sky, but to the horizontal coordinate system.
 For example, you can get an analemma of the Sun for any location (Figure~\ref{fig:gui:AstroCalc:Ephemeris:Analemma}), 
 or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 \centering\includegraphics[width=0.92\textwidth]{astrocalc_dialog_ephemeris_analemma}
 \caption{Astronomical Calculations (AstroCalc): Analemma}
 \label{fig:gui:AstroCalc:Ephemeris:Analemma}
@@ -706,7 +708,7 @@ and date and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
 \label{fig:gui:AstroCalc:Graphs}
 \end{figure}
   
-\noindent\newFeature{V0.16.0}This tab can show two functions over time for the current year and draw graphs for them in one screen (Figure~\ref{fig:gui:AstroCalc:Graphs}). 
+\noindent\newFeature{v0.16.0}This tab can show two functions over time for the current year and draw graphs for them in one screen (Figure~\ref{fig:gui:AstroCalc:Graphs}). 
 You can select from 
 \begin{itemize}
 \item Magnitude vs. Time
@@ -723,7 +725,7 @@ This tool may be very helpful for educational and statistics purposes.%
 \subsection{The ``What's Up Tonight'' (WUT) Tab}
 \label{sec:gui:AstroCalc:WUT}
 
-\newFeature{V0.16.0} The ``What's Up Tonight'' (WUT) tool%
+The ``What's Up Tonight'' (WUT) tool\newFeature{v0.16.0}%
 	\footnote{This tool has been partially ported from the \program{KStars} planetarium: \url{https://edu.kde.org/kstars/}}
  displays a list of objects that will be visible at night for the current date and location.
 
@@ -743,13 +745,17 @@ the Planets category has been selected, and three planets which are up in the se
 
 By default, the WUT will display objects which are above the horizon between sunset and midnight (i.e.\ \emph{in the evening}). 
 You can choose to show objects which are up between midnight and dawn (\emph{in the morning}), 
-or between dusk and dawn (\emph{any time tonight}) using the combobox near the top of the window. 
+\emph{around midnight}, 
+or any time between dusk and dawn (\emph{any time tonight}) using the combobox near the top of the window. 
 You can also choose to see only those objects that are brighter than a certain magnitude by 
 setting a minimum magnitude using the \emph{Show objects brighter than magnitude} spinbox. 
 You may center an object from the right list in the sky map just by selecting it.
 
+Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
 
-    
+
+\newpage 
+   
 \section{Help Window}
 \label{sec:gui:help}
 

@@ -53,7 +53,7 @@
 #include <iostream>
 #include <fstream>
 
-// Init statics transfo matrices
+// Init static transfo matrices
 // See vsop87.doc:
 const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
 const Mat4d StelCore::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
@@ -951,22 +951,47 @@ void StelCore::updateTransformMatrices()
 	// These two next have to take into account the position of the observer on the earth/planet of observation.
 	// GZ tmp could be called matAltAzToVsop87
 	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
+	//Mat4d tmp1 = matJ2000ToVsop87 * matEquinoxEquToJ2000;
 
 	// Before 0.14 getDistanceFromCenter assumed spherical planets. Now uses rectangular coordinates for observer!
+	// In series 0.14 and 0.15, this was erroneous: offset by distance rho, but in the wrong direction.
+	// Attempt to fix LP:1275092. This improves the situation, but is still not perfect.
+	// Please keep the commented stuff until situation is really solved.
 	if (flagUseTopocentricCoordinates)
 	{
-		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
-				Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
+		Vec3d offset=position->getTopographicOffsetFromCenter(); // [rho cosPhi', rho sinPhi', phi'_rad]
+		const double sigma=position->getCurrentLocation().latitude*M_PI/180.0 - offset.v[2];
+		const double rho=position->getDistanceFromCenter();
 
-		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+				Mat4d::translation(Vec3d(rho*sin(sigma), 0., rho*cos(sigma) ));
+
+		matHeliocentricEclipticJ2000ToAltAz =
+				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * tmp.transpose() *
 				Mat4d::translation(-position->getCenterVsop87Pos());
+
+		// Here I tried to split tmp matrix. This does not work:
+//		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp1 *
+//				Mat4d::translation(Vec3d(rho*sin(sigma), 0., rho*cos(sigma) )) * matAltAzToEquinoxEqu;
+
+//		matHeliocentricEclipticJ2000ToAltAz =
+//				matEquinoxEquToAltAz *
+//				Mat4d::translation(Vec3d(-rho*sin(sigma), 0., -rho*cos(sigma))) * tmp1.transpose() *
+//				Mat4d::translation(-position->getCenterVsop87Pos());
+
+
+//		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+//				Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
+
+//		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
+//				Mat4d::translation(-position->getCenterVsop87Pos());
+
+
 	}
 	else
 	{
 		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp;
-
-		matHeliocentricEclipticJ2000ToAltAz =  tmp.transpose() *
-				Mat4d::translation(-position->getCenterVsop87Pos());
+		matHeliocentricEclipticJ2000ToAltAz =  tmp.transpose() * Mat4d::translation(-position->getCenterVsop87Pos());
 	}
 }
 
@@ -2499,18 +2524,18 @@ Vec3d StelCore::getMouseJ2000Pos() const
 	Vec3d mousePosition;
 	float wh = prj->getViewportWidth()/2.; // get half of width of the screen
 	float hh = prj->getViewportHeight()/2.; // get half of height of the screen
-	float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
-	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
+	float mx = p.x()*ppx-wh; // point 0 in center of the screen, axis X directed to right
+	float my = p.y()*ppx-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
 	// If coordinates are invalid, don't draw them.
-	bool coordsValid = prj->unProject((prj->getViewportPosX()+wh+mx)*ppx, (prj->getViewportPosY()+hh+1-my)*ppx, mousePosition);
+	bool coordsValid = prj->unProject((prj->getViewportPosX()+wh+mx), (prj->getViewportPosY()+hh+1-my), mousePosition);
 	if (coordsValid)
 	{ // Nick Fedoseev patch
 		Vec3d win;
 		prj->project(mousePosition,win);
 		float dx = prj->getViewportPosX()+wh+mx - win.v[0];
 		float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
-		prj->unProject((prj->getViewportPosX()+wh+mx+dx)*ppx, (prj->getViewportPosY()+hh+1-my+dy)*ppx, mousePosition);
+		prj->unProject((prj->getViewportPosX()+wh+mx+dx), (prj->getViewportPosY()+hh+1-my+dy), mousePosition);
 	}
 
 	return mousePosition;

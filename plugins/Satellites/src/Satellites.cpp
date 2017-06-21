@@ -1178,6 +1178,10 @@ void Satellites::checkForUpdate(void)
 
 void Satellites::updateFromOnlineSources()
 {
+	// never update TLE's for any date before Oct 4, 1957, 19:28:34GMT ;-)
+	if (StelApp::getInstance().getCore()->getJD()<2436116.3115)
+		return;
+
 	if (updateState==Satellites::Updating)
 	{
 		qWarning() << "[Satellites] Internet update already in progress!";

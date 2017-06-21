@@ -31,6 +31,7 @@
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
+#include "planetsephems/precession.h"
 
 #include <QRegExp>
 #include <QDebug>
@@ -268,7 +269,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 	if ((flags&EclipticCoordOfDate) && (QString("Earth Sun").contains(currentPlanet)))
 	{
-		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+		double jde=core->getJDE();
+		double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+		if (StelApp::getInstance().getCore()->getUseNutation())
+		{
+			double deltaEps, deltaPsi;
+			getNutationAngles(jde, &deltaPsi, &deltaEps);
+			eclJDE+=deltaEps;
+		}
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));

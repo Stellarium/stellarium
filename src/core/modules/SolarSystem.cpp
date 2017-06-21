@@ -1161,11 +1161,27 @@ void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 		{
 			p->computePositionWithoutOrbits(dateJDE);
 		}
+		// BEGIN HACK: 0.16.0pre for solar aberration/light time correction: (This fixes eclipse bug LP:#1275092)
+		Vec3d earthPosJDE=getEarth()->getHeliocentricEclipticPos();
+		const double earthDist=earthPosJDE.length();
+		getEarth()->computePosition(dateJDE-earthDist * (AU / (SPEED_OF_LIGHT * 86400)));
+		Vec3d earthPosJDEbefore=getEarth()->getHeliocentricEclipticPos();
+		getSun()->setHeliocentricEclipticPos(earthPosJDE-earthPosJDEbefore);
+
+		// We must reset Earth for the next step!
+		getEarth()->computePosition(dateJDE);
+		// END HACK FOR SOLAR LOGHT TIME/ABERRATION
 		foreach (PlanetP p, systemPlanets)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			p->computePosition(dateJDE-light_speed_correction);
 		}
+
+		// BEGIN HACK PART 2
+		getSun()->setHeliocentricEclipticPos(earthPosJDE-earthPosJDEbefore);
+		// END HACK PART 2
+
+
 	}
 	else
 	{

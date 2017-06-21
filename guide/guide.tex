@@ -56,6 +56,9 @@
 %\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
 
+%% This can be used to verify general page layout with the command \layout given later.
+%% \usepackage{layout}
+
 %% GZ Some commands which can be used later, like version number etc.
 
 \newcommand{\DocumentEdition}{1}
@@ -152,6 +155,8 @@ implying a violation of copyright law.}}\\
 
 \include{ch_introduction}
 
+%% Activate this if you want to check the page layout.
+%%\layout
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 2 (Installation)
@@ -245,6 +250,7 @@ implying a violation of copyright law.}}\\
 \renewcommand{\StelTOCdepth}{0}% reset this to 0 before appendix!
 
 \part{Appendices}
+\renewcommand{\chaptername}{Appendix}
 \chapterimage{chapter-t1-bg} % Chapter heading image
 
 %----------------------------------------------------------------------------------------
@@ -294,6 +300,7 @@ implying a violation of copyright law.}}\\
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 \chapter*{Bibliography}
+\markboth{\textsf{\textbf{BIBLIOGRAPHY}}}{\textsf{\textbf{BIBLIOGRAPHY}}}
 \addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
 \printbibliography[heading=bibempty]
 
@@ -305,6 +312,7 @@ implying a violation of copyright law.}}\\
 \phantomsection
 \setlength{\columnsep}{0.75cm}
 \addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
+\markboth{\textsf{\textbf{INDEX}}}{\textsf{\textbf{INDEX}}}
 \printindex
 
 %----------------------------------------------------------------------------------------
