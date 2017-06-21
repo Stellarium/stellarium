@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-19 21:17+0700\n"
-"PO-Revision-Date: 2017-06-19 17:56+0000\n"
+"POT-Creation-Date: 2017-06-20 19:42+0700\n"
+"PO-Revision-Date: 2017-06-20 17:04+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-20 05:39+0000\n"
+"X-Launchpad-Export-Date: 2017-06-21 05:43+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -2873,17 +2873,17 @@ msgstr "G. Mueller (1893)"
 #: src/gui/ViewDialog.cpp:1540
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
-msgstr "天文历（1984）"
+msgstr "Astronomical Almanach"
 
 #: src/gui/ViewDialog.cpp:1541
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr "解释性补编（1992）"
+msgstr "Explanatory Supplement（1992）"
 
 #: src/gui/ViewDialog.cpp:1542
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr "补充说明（2013）"
+msgstr "Explanatory Supplement（2013）"
 
 #: src/gui/ViewDialog.cpp:1543
 msgctxt "magnitude algorithm"
@@ -2894,7 +2894,8 @@ msgstr "通用"
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
 "and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
-msgstr "该算法被用于 <em>天文历</em> (1984 及以后)并给出V（工具）量级（据称来自D.L.Harris）。"
+msgstr ""
+"该算法被用于 <em>Astronomical Almanach</em> (1984 及以后)并给出V（工具）量级（据称来自D.L.Harris）。"
 
 #: src/gui/ViewDialog.cpp:1572
 msgid ""
@@ -3456,7 +3457,7 @@ msgstr "NGC目录"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:387 src/translations.h:171
 msgid "Index Catalogue"
-msgstr "索引目录"
+msgstr "IC目录"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:388 src/translations.h:173
@@ -3489,7 +3490,7 @@ msgstr "特殊星系目录"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:394 src/translations.h:181
 msgid "The Catalogue of Interacting Galaxies"
-msgstr "相互作用的星系目录"
+msgstr "相互作用星系目录"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:395 src/translations.h:183
@@ -4060,7 +4061,7 @@ msgstr "有趣的变星"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:205
 msgid "Arabic"
-msgstr "阿拉伯语"
+msgstr "阿拉伯"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:207
@@ -4100,7 +4101,7 @@ msgstr "夏威夷星空"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:221
 msgid "Inuit"
-msgstr "因纽特(爱斯基摩)"
+msgstr "因纽特"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:223
@@ -4115,12 +4116,12 @@ msgstr "日本月球站"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:227
 msgid "Kamilaroi/Euahlayi"
-msgstr "卡米罗伊/"
+msgstr "卡米罗伊/伊乌拉伊"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:229
 msgid "Korean"
-msgstr "韩语"
+msgstr "韩国"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:231
@@ -6304,7 +6305,7 @@ msgstr "特殊星系图集 (Arp, 1966)"
 
 #: src/ui_viewDialog.h:2243
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
-msgstr "相互作用的星系目录 (Vorontsov-Velyaminov+, 2001)"
+msgstr "相互作用星系目录 (Vorontsov-Velyaminov+, 2001)"
 
 #: src/ui_viewDialog.h:2246
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
@@ -9159,77 +9160,77 @@ msgid ""
 msgstr "旧版本的 satellites.json 文件已不再适用，将使用默认文件。"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2006
+#: plugins/Satellites/src/Satellites.cpp:2010
 msgid "visual"
 msgstr "目视可见"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2008
+#: plugins/Satellites/src/Satellites.cpp:2012
 msgid "scientific"
 msgstr "科研"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2010
+#: plugins/Satellites/src/Satellites.cpp:2014
 msgid "communications"
 msgstr "通讯"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2012
+#: plugins/Satellites/src/Satellites.cpp:2016
 msgid "navigation"
 msgstr "导航"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2014
+#: plugins/Satellites/src/Satellites.cpp:2018
 msgid "amateur"
 msgstr "业余无线电"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2016
+#: plugins/Satellites/src/Satellites.cpp:2020
 msgid "weather"
 msgstr "气象"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2018
+#: plugins/Satellites/src/Satellites.cpp:2022
 msgid "geostationary"
 msgstr "同步卫星"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2020
+#: plugins/Satellites/src/Satellites.cpp:2024
 msgid "non-operational"
 msgstr "不再工作"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2022
+#: plugins/Satellites/src/Satellites.cpp:2026
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2024
+#: plugins/Satellites/src/Satellites.cpp:2028
 msgid "glonass"
 msgstr "格洛纳斯"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2026
+#: plugins/Satellites/src/Satellites.cpp:2030
 msgid "galileo"
 msgstr "伽利略"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2028
+#: plugins/Satellites/src/Satellites.cpp:2032
 msgid "iridium"
 msgstr "铱星"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2030
+#: plugins/Satellites/src/Satellites.cpp:2034
 msgid "stations"
 msgstr "空间站"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2036
 msgid "education"
 msgstr "教育"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2038
 msgid "observatory"
 msgstr "气象"
 
@@ -9239,57 +9240,57 @@ msgstr "气象"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2044
+#: plugins/Satellites/src/Satellites.cpp:2048
 msgid "The Hubble Space Telescope"
 msgstr "哈勃太空望远镜"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2046
+#: plugins/Satellites/src/Satellites.cpp:2050
 msgid "The International Space Station"
 msgstr "国际空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2052
 msgid "China's first space station"
 msgstr "中国第一个空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2054
 msgid "The russian space radio telescope RadioAstron"
 msgstr "俄罗斯空间射电望远镜RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2056
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "国际伽马射线天体物理实验室"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2058
 msgid "The Gamma-Ray Observatory"
 msgstr "伽玛射线观测台"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2062
 msgid "ISS (ZARYA)"
 msgstr "国际空间站(ISS)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2064
 msgid "HST"
 msgstr "哈勃太空望远镜(HST)"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2062
+#: plugins/Satellites/src/Satellites.cpp:2066
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R空间天文台"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2068
 msgid "INTEGRAL"
 msgstr "国际伽玛射线天体物理实验室(INTEGRAL)"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2070
 msgid "TIANGONG 1"
 msgstr "天宫1号"
 
