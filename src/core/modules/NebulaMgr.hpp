@@ -83,6 +83,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setFlagSurfaceBrightnessArcsecUsage
 		   NOTIFY flagSurfaceBrightnessArcsecUsageChanged
 		   )
+	Q_PROPERTY(bool flagSurfaceBrightnessShortNotationUsage
+		   READ getFlagSurfaceBrightnessShortNotationUsage
+		   WRITE setFlagSurfaceBrightnessShortNotationUsage
+		   NOTIFY flagSurfaceBrightnessShortNotationUsageChanged
+		   )
 	Q_PROPERTY(double labelsAmount
 		   READ getLabelsAmount
 		   WRITE setLabelsAmount
@@ -677,6 +682,11 @@ public slots:
 	//! Get flag for usage of measure unit mag/arcsec^2 to surface brightness value.
 	bool getFlagSurfaceBrightnessArcsecUsage(void) const { return Nebula::flagUseArcsecSurfaceBrightness; }
 
+	//! Set flag for usage of short notation for measure unit to surface brightness value.
+	void setFlagSurfaceBrightnessShortNotationUsage(const bool usage) { Nebula::flagUseShortNotationSurfaceBrightness=usage; }
+	//! Get flag for usage of short notation for measure unit to surface brightness value.
+	bool getFlagSurfaceBrightnessShortNotationUsage(void) const { return Nebula::flagUseShortNotationSurfaceBrightness; }
+
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
@@ -726,6 +736,7 @@ signals:
 	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
+	void flagSurfaceBrightnessShortNotationUsageChanged(bool b);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);
 
