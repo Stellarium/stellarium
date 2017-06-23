@@ -279,7 +279,7 @@ void TestStelSphericalGeometry::testGreatCircleIntersection()
 	StelUtils::spheToRect(-deg5, +deg5, v0);
 
 	bool ok;
-	Vec3d v(0);
+	Vec3d v(0.0);
 	QBENCHMARK {
 		v = greatCircleIntersection(v3, v1, v0, v2, ok);
 	}
