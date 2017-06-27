@@ -2154,6 +2154,8 @@ void Oculars::zoomOcular()
 	{
 		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+		GETSTELMODULE(ConstellationMgr)->setFlagLines(false);
+		GETSTELMODULE(AsterismMgr)->setFlagLines(false);
 	}
 
 	skyDrawer->setFlagLuminanceAdaptation(false);
@@ -2403,6 +2405,8 @@ void Oculars::setFlagHideGridsLines(const bool b)
 			flagAsterismLines = GETSTELMODULE(AsterismMgr)->getFlagLines();
 			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
 			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+			GETSTELMODULE(ConstellationMgr)->setFlagLines(false);
+			GETSTELMODULE(AsterismMgr)->setFlagLines(false);
 		}
 		else if (!b && flagShowOculars)
 		{
