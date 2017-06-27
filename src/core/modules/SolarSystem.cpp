@@ -150,7 +150,7 @@ void SolarSystem::init()
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
-	computePositions(StelApp::getInstance().getCore()->getJDE());
+	computePositions(StelApp::getInstance().getCore()->getJDE(), getSun());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
@@ -1153,7 +1153,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
-void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
+void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	if (flagLightTravelTime)
 	{
@@ -1161,27 +1161,25 @@ void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 		{
 			p->computePositionWithoutOrbits(dateJDE);
 		}
-		// BEGIN HACK: 0.16.0pre for solar aberration/light time correction: (This fixes eclipse bug LP:#1275092)
-		Vec3d earthPosJDE=getEarth()->getHeliocentricEclipticPos();
-		const double earthDist=earthPosJDE.length();
-		getEarth()->computePosition(dateJDE-earthDist * (AU / (SPEED_OF_LIGHT * 86400)));
-		Vec3d earthPosJDEbefore=getEarth()->getHeliocentricEclipticPos();
-		getSun()->setHeliocentricEclipticPos(earthPosJDE-earthPosJDEbefore);
+		// BEGIN HACK: 0.16.0post for solar aberration/light time correction
+		// This fixes eclipse bug LP:#1275092) and outer planet rendering bug (LP:#1699648) introduced by the first fix in 0.16.0.
+		// We compute a "light time corrected position" for the sun and apply it only for rendering, not for other computations.
+		// A complete solution should likely "just" implement aberration for all objects.
+		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
+		const double obsDist=obsPosJDE.length();
 
-		// We must reset Earth for the next step!
-		getEarth()->computePosition(dateJDE);
-		// END HACK FOR SOLAR LOGHT TIME/ABERRATION
+		observerPlanet->computePosition(dateJDE-obsDist * (AU / (SPEED_OF_LIGHT * 86400.)));
+		const Vec3d obsPosJDEbefore=observerPlanet->getHeliocentricEclipticPos();
+		lightTimeSunPosition=obsPosJDE-obsPosJDEbefore;
+
+		// We must reset observerPlanet for the next step!
+		observerPlanet->computePosition(dateJDE);
+		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
 		foreach (PlanetP p, systemPlanets)
 		{
-			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			p->computePosition(dateJDE-light_speed_correction);
 		}
-
-		// BEGIN HACK PART 2
-		getSun()->setHeliocentricEclipticPos(earthPosJDE-earthPosJDEbefore);
-		// END HACK PART 2
-
-
 	}
 	else
 	{
@@ -1189,8 +1187,9 @@ void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 		{
 			p->computePosition(dateJDE);
 		}
+		lightTimeSunPosition.set(0.,0.,0.);
 	}
-	computeTransMatrices(dateJDE, observerPos);
+	computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 }
 
 // Compute the transformation matrix for every elements of the solar system.
@@ -2198,7 +2197,7 @@ void SolarSystem::reloadPlanets()
 
 	// Re-load the ssystem_major.ini and ssystem_minor.ini file
 	loadPlanets();	
-	computePositions(core->getJDE());
+	computePositions(core->getJDE(), getSun());
 	setSelected("");
 	recreateTrails();
 	
@@ -2329,7 +2328,7 @@ QString SolarSystem::getOrbitColorStyle() const
 
 double SolarSystem::getEclipseFactor(const StelCore* core) const
 {
-	Vec3d Lp = sun->getEclipticPos();
+	Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
 	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
 	const double RS = sun->getRadius();
 
@@ -2343,7 +2342,7 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 		Mat4d trans;
 		planet->computeModelMatrix(trans);
 
-		const Vec3d C = trans * Vec3d(0, 0, 0);
+		const Vec3d C = trans * Vec3d(0., 0., 0.);
 		const double radius = planet->getRadius();
 
 		Vec3d v1 = Lp - P3;
@@ -2360,27 +2359,23 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 		const double d = ( v1 - v2 ).length();
 
 		if(planet->englishName == "Moon")
-			v1 = planet->getHeliocentricEclipticPos();
+			v1 = planet->getHeliocentricEclipticPos(); // ??? This assignment is dead code!
 
 		double illumination;
 
-		// distance too far
-		if(d >= R + r)
+		if(d >= R + r) // distance too far
 		{
 			illumination = 1.0;
 		}
-		// umbra
-		else if(r >= R + d)
+		else if(d <= r - R) // umbra
 		{
 			illumination = 0.0;
 		}
-		// penumbra completely inside
-		else if(d + r <= R)
+		else if(d <= R - r) // penumbra completely inside
 		{
 			illumination = 1.0 - r * r / (R * R);
 		}
-		// penumbra partially inside
-		else
+		else // penumbra partially inside
 		{
 			const double x = (R * R + d * d - r * r) / (2.0 * d);
 
