@@ -389,9 +389,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// GZ This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
 	// TODO: maybe separate this out into:
 	//if (flags&EclipticCoordXYZ)
-	// For now: add to EclipticCoord
-	//if (flags&EclipticCoord)
-	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
+	// For now: add to EclipticCoordJ2000 group
+	//if (flags&EclipticCoordJ2000)
+	//{
+	//	Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
+	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
+	//}
 
 	if (flags&Distance)
 	{
@@ -663,7 +666,10 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 
 Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 {
-	return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - core->getObserverHeliocentricEclipticPos());
+	if (englishName=="Sun")
+		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() - core->getObserverHeliocentricEclipticPos());
+	else
+		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - core->getObserverHeliocentricEclipticPos());
 }
 
 // Compute the position in the parent Planet coordinate system
@@ -1488,7 +1494,16 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		return;
 	}
 
-	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
+	Mat4d mat;
+	if (englishName=="Sun")
+	{
+		mat = Mat4d::translation(GETSTELMODULE(SolarSystem)->getLightTimeSunPosition()) * rotLocalToParent;
+	}
+	else
+	{
+		mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
+	}
+
 	PlanetP p = parent;
 	while (p && p->parent)
 	{
@@ -2123,7 +2138,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			allowDrawHalo = false;
 	}
 
-	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
+	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)
 	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
 	{
 		// Prepare openGL lighting parameters according to luminance
@@ -2360,9 +2375,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = (int)(screenSz * 40.f/50.f);	// 40 facets for 1024 pixels diameter on screen
-	if (nb_facet<10) nb_facet = 10;
-	if (nb_facet>100) nb_facet = 100;
+	int nb_facet = qBound(10, (int)(screenSz * 40.f/50.f), 100);	// 40 facets for 1024 pixels diameter on screen
 
 	// Generates the vertice
 	Planet3DModel model;

@@ -40,6 +40,7 @@ public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
+	virtual void computePosition(const double dateJDE);
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -135,6 +136,12 @@ Vec3d ArtificialPlanet::getRot(const Planet* p)
 		r[2] = atan2( m.r[8],m.r[0]);
 	}
 	return r;
+}
+
+void ArtificialPlanet::computePosition(const double dateJDE)
+{
+	Q_UNUSED(dateJDE)
+	// This does nothing, but avoids a crash.
 }
 
 void ArtificialPlanet::computeAverage(double f1)
