@@ -22,6 +22,8 @@
 
 #include "GridLinesMgr.hpp"
 #include "LabelMgr.hpp"
+#include "ConstellationMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "SkyGui.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
@@ -127,7 +129,9 @@ Oculars::Oculars():
 	flagDecimalDegrees(false),
 	flagSemiTransparency(false),
 	flagHideGridsLines(false),
-	flagGridlinesDisplayedMain(true),
+	flagGridLinesDisplayedMain(true),
+	flagConstellationLines(true),
+	flagAsterismLines(true),
 	flipVert(false),
 	flipHorz(false),
 	ccdRotationSignalMapper(Q_NULLPTR),
@@ -2049,8 +2053,10 @@ void Oculars::unzoomOcular()
 
 	if (flagHideGridsLines)
 	{
-		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridlinesDisplayedMain);
+		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridLinesDisplayedMain);
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
+		GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLines);
+		GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLines);
 	}
 
 	skyDrawer->setFlagLuminanceAdaptation(flagAdaptation);
@@ -2101,8 +2107,10 @@ void Oculars::zoom(bool zoomedIn)
 			if (flagHideGridsLines)
 			{
 				// Store current state for later resetting
-				flagGridlinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
+				flagGridLinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
 				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+				flagConstellationLines = GETSTELMODULE(ConstellationMgr)->getFlagLines();
+				flagAsterismLines = GETSTELMODULE(AsterismMgr)->getFlagLines();
 			}
 
 			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -2389,16 +2397,20 @@ void Oculars::setFlagHideGridsLines(const bool b)
 		if (b && flagShowOculars)
 		{
 			// Store current state for later resetting
-			flagGridlinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
+			flagGridLinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
 			flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+			flagConstellationLines = GETSTELMODULE(ConstellationMgr)->getFlagLines();
+			flagAsterismLines = GETSTELMODULE(AsterismMgr)->getFlagLines();
 			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
 			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
 		}
 		else if (!b && flagShowOculars)
 		{
 			// Restore main program state
-			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridlinesDisplayedMain);
+			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridLinesDisplayedMain);
 			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
+			GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLines);
+			GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLines);
 		}
 	}
 }
