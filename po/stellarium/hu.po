@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-23 21:18+0700\n"
-"PO-Revision-Date: 2017-06-12 16:30+0000\n"
+"PO-Revision-Date: 2017-07-01 12:15+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-27 05:13+0000\n"
-"X-Generator: Launchpad (build 18416)\n"
+"X-Launchpad-Export-Date: 2017-07-02 05:10+0000\n"
+"X-Generator: Launchpad (build 18419)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -449,15 +449,15 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:468 src/gui/AstroCalcDialog.cpp:470
 msgctxt "magnitude"
 msgid "mag"
-msgstr ""
+msgstr "mag."
 
 #: src/core/modules/Nebula.cpp:250 src/gui/AstroCalcDialog.cpp:468
 msgid "arcmin"
-msgstr ""
+msgstr "szögperc"
 
 #: src/core/modules/Nebula.cpp:252 src/gui/AstroCalcDialog.cpp:470
 msgid "arcsec"
-msgstr ""
+msgstr "szögmásodperc"
 
 #: src/core/modules/Nebula.cpp:266 src/core/modules/Nebula.cpp:274
 #, qt-format
@@ -2773,13 +2773,13 @@ msgstr "Helyi valódi nap idő"
 #: src/gui/StelGuiItems.cpp:644
 msgctxt "unit of measurement"
 msgid "min/s"
-msgstr ""
+msgstr "min/s"
 
 #. TRANSLATORS: unit of measurement: hours per second
 #: src/gui/StelGuiItems.cpp:652
 msgctxt "unit of measurement"
 msgid "hr/s"
-msgstr ""
+msgstr "h/s"
 
 #. TRANSLATORS: unit of measurement: days per second
 #: src/gui/StelGuiItems.cpp:658
@@ -2795,7 +2795,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:666 src/gui/StelGuiItems.cpp:668
 msgid "Simulation speed"
-msgstr ""
+msgstr "szimuláció sebessége"
 
 #: src/gui/StelGuiItems.cpp:705
 #, c-format, qt-format
@@ -3309,7 +3309,7 @@ msgstr ""
 #. TRANSLATORS: distance, AU
 #: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:745
 msgid "dist."
-msgstr ""
+msgstr "CsE"
 
 #: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:534
 #: src/gui/AstroCalcDialog.cpp:745 src/gui/AstroCalcDialog.cpp:781
@@ -3565,7 +3565,7 @@ msgstr "Sötét ködök Lynds katalógusa"
 
 #: src/gui/AstroCalcDialog.cpp:390 src/ui_viewDialog.h:2231
 msgid "Principal Galaxy Catalog"
-msgstr ""
+msgstr "Principal Galaxy Catalog"
 
 #: src/gui/AstroCalcDialog.cpp:391 src/ui_viewDialog.h:2234
 msgid "The Uppsala General Catalogue of Galaxies"
@@ -3634,11 +3634,11 @@ msgstr "Bolygóközépponti távolság"
 
 #: src/gui/AstroCalcDialog.cpp:533 src/gui/AstroCalcDialog.cpp:780
 msgid "Topocentric distance"
-msgstr ""
+msgstr "Topocentrikus távolság"
 
 #: src/gui/AstroCalcDialog.cpp:600
 msgid "star with high proper motion"
-msgstr ""
+msgstr "csillag nagy sajátmozgással"
 
 #: src/gui/AstroCalcDialog.cpp:725 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -3913,12 +3913,12 @@ msgstr "Reggel"
 #: src/gui/AstroCalcDialog.cpp:2594
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
-msgstr ""
+msgstr "Éjfél körül"
 
 #: src/gui/AstroCalcDialog.cpp:2595
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
-msgstr ""
+msgstr "Éjszaka bármikor"
 
 #: src/gui/AstroCalcDialog.cpp:2614
 msgid "Bright stars"
@@ -6328,7 +6328,7 @@ msgstr "Naprendszerbeli objektumok magnitúdó behatárolása"
 
 #: src/ui_viewDialog.h:2164
 msgid "Use more accurate 3D models (where available)"
-msgstr ""
+msgstr "Pontosabb 3D modell használata (ha van)"
 
 #: src/ui_viewDialog.h:2165
 msgid "Show planet markers"
@@ -7494,11 +7494,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1485
 msgid "A button to toggle galactic grid"
-msgstr ""
+msgstr "Galaktikus háló gombja"
 
 #: src/ui_configurationDialog.h:1487
 msgid "Show galactic grid button"
-msgstr ""
+msgstr "Galaktikus háló gombja"
 
 #: src/ui_configurationDialog.h:1489
 msgid "A button to toggle ecliptic grid of date"
@@ -7506,7 +7506,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1491
 msgid "Show ecliptic grid button"
-msgstr ""
+msgstr "Ekliptikus háló gombja"
 
 #: src/ui_configurationDialog.h:1492
 msgid "Show constellation boundaries button"
@@ -9952,7 +9952,7 @@ msgstr "Letöltés megszakítva."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
 msgid "Get data"
-msgstr ""
+msgstr "Adatlekérés"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
@@ -12640,7 +12640,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:115
 msgid "It is also possible to send commands via command line, e.g.."
-msgstr ""
+msgstr "Lehetséges a parancssorból is utasítást küldeni, például:"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:121
 msgid "This allows triggering automatic show setups for museums etc."
@@ -12806,7 +12806,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
 msgid "See manual for detailed description."
-msgstr ""
+msgstr "Részletes információk a kézikönyvben"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
@@ -12884,7 +12884,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
-msgstr ""
+msgstr "Nézési irány"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
@@ -12896,7 +12896,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "These are all available properties."
-msgstr ""
+msgstr "A hozzáférhető tulajdonságok"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
@@ -14847,7 +14847,7 @@ msgstr "Novemberi Orionidák"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr ""
+msgstr "Augusztusi Caelidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
