@@ -642,7 +642,12 @@ private:
 	static bool initFBO();
 	static void deinitFBO();
 
-	static QOpenGLShaderProgram* createShader(const QString& name, PlanetShaderVars& vars, const QByteArray& vSrc, const QByteArray& fSrc, const QByteArray& prefix=QByteArray(), const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
+	static QOpenGLShaderProgram* createShader(const QString& name,
+						  PlanetShaderVars& vars,
+						  const QByteArray& vSrc,
+						  const QByteArray& fSrc,
+						  const QByteArray& prefix=QByteArray(),
+						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
 };
 
 #endif // _PLANET_HPP_
