@@ -456,9 +456,20 @@ void AstroCalcDialog::currentCelestialPositions()
 
 	if (celTypeId<170)
 	{
-		QString mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
-		if (dsoMgr->getFlagSurfaceBrightnessArcsecUsage())
-			mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
+		QString mu;
+		if (dsoMgr->getFlagSurfaceBrightnessShortNotationUsage())
+		{
+			mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
+			if (dsoMgr->getFlagSurfaceBrightnessArcsecUsage())
+				mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
+		}
+		else
+		{
+			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcmin"));
+			if (dsoMgr->getFlagSurfaceBrightnessArcsecUsage())
+				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
+
+		}
 		QString dsoName;
 		// Deep-sky objects
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);

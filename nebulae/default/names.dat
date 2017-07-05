@@ -18,6 +18,7 @@
 #   SEDS: A Collection of Some Common Names for Deep Sky Objects; http://messier.seds.org/xtra/supp/d-names.html
 #   W1: PGC 6240; https://en.wikipedia.org/wiki/PGC_6240
 #   WP: Wikipedia entries for the respective objects
+#   OGSC: Observer’s Guide to Star Clusters by Mike Inglis, Springer, 2013; https://books.google.ru/books?id=ewHABAAAQBAJ
 #   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
 #   TBD:  ADD OTHERS HERE!
 #
@@ -94,7 +95,7 @@ NGC  1555            _("Hind's variable Nebula")
 NGC  1595            _("Carafe Group")
 NGC  1598            _("Carafe Group")
 NGC  1647            _("Pirate Moon Cluster") # B500
-NGC  1817            _("Poor Man's Double Cluster") # B500
+NGC  1817            _("Poor Man's Double Cluster") # B500, OGSC
 NGC  1912            _("Starfish Cluster")
 NGC  1922            _("Starfish Cluster")
 NGC  1931            _("Fly Nebula")
@@ -137,7 +138,7 @@ NGC  2246            _("Rosette Nebula") # WK
 NGC  2246            _("Rosette B")
 NGC  2261            _("Hubble's variable Nebula") # WK
 NGC  2264            _("Cone Nebula") # WK
-NGC  2264            _("Christmas Tree Cluster") # WK
+NGC  2264            _("Christmas Tree Cluster") # WK, OGSC
 NGc  2269            _("Head Hunter Cluster") # B500
 NGc  2269            _("Starfighter Cluster") # B500
 NGC  2281            _("Broken Heart Cluster") # B500
@@ -148,7 +149,7 @@ NGC  2346            _("Butterfly Nebula")
 NGC  2346            _("Hourglass Planetary Nebula")
 NGC  2359            _("Thor's Helmet")
 NGC  2359            _("Duck Nebula")
-NGC  2360            _("Caroline's Cluster")
+NGC  2360            _("Caroline's Cluster") # OGSC
 NGC  2362            _("τ Canis Majoris Cluster")
 NGC  2362            _("Mexican Jumping Star")
 NGC  2362            _("Pirate's Jewels Cluster") # B500
@@ -158,7 +159,7 @@ NGC  2371            _("Double Bubble Nebula") # B500
 NGC  2371            _("Peanut Nebula") # B500
 NGC  2392            _("Eskimo Nebula") # WK
 NGC  2392            _("Clown Face Nebula")
-NGC  2419            _("Intergalactic Wanderer/Tramp")
+NGC  2419            _("Intergalactic Wanderer/Tramp") # OGSC
 NGC  2420            _("Twinkling Comet Cluster") # B500
 NGC  2440            _("Albino Butterfly Nebula") # B500
 NGC  2440            _("Burning Ember Nebula") # B500
@@ -170,6 +171,7 @@ NGC  2467            _("Chained Brooch Nebula") # B500
 NGC  2477            _("Electric Guitar Cluster")
 NGC  2477            _("Termite Hole Cluster") # B500
 NGC  2516            _("Sprinter Cluster")
+NGC  2516            _("Diamond Cluster") # OGSC
 NGC  2537            _("Bear's Paw Galaxy") # NED
 NGC  2539            _("The Dish Cluster") # B500
 NGC  2546            _("Heart and Dagger Cluster") # B500
@@ -201,13 +203,16 @@ NGC  3132            _("Southern Ring Nebula") # WK
 NGC  3172            _("Polarissima Borealis") # WK
 NGC  3242            _("Ghost of Jupiter Nebula") # WK
 NGC  3242            _("Eye Nebula")
+NGC  3293            _("Gem Cluster") # OGSC
 NGC  3324            _("Keyhole Nebula")
 NGC  3344            _("Sliced Onion Galaxy") # B500
 NGC  3372            _("η Car Nebula") # WK
 NGC  3372            _("Homunculus Nebula") # WK
 NGC  3372            _("Keyhole Nebula") # WK
 NGC  3432            _("Knitting Needle Galaxy") # B500
-NGC  3532            _("Wishing Well Cluster")
+NGC  3532            _("Wishing Well Cluster") # OGSC
+NGC  3532            _("Firefly Party Cluster") # OGSC
+NGC  3532            _("Pincushion Cluster") # OGSC
 NGC  3556            _("Surfboard Galaxy")
 NGC  3561            _("Ambartsumian's Knot") # NED
 NGC  3576            _("Statue of Liberty Nebula")
@@ -276,9 +281,9 @@ NGC  4666            _("Superwind-Galaxy")
 NGC  4676            _("Mice Galaxies") # NED
 NGC  4669            _("Vinyl LP Galaxy") # B500
 NGC  4736            _("Croc's Eye Galaxy") # B500
-NGC  4755            _("Jewel Box") # WK
+NGC  4755            _("Jewel Box") # WK, OGSC
 NGC  4755            _("Herschel's Jewel Box") # WK
-NGC  4755            _("κ Cru Cluster")
+NGC  4755            _("κ Cru Cluster") # OGSC
 NGC  4774            _("Kidney Bean Galaxy")
 NGC  4826            _("Black Eye Galaxy") # NED
 NGC  4826            _("Evil Eye Galaxy")
@@ -287,7 +292,7 @@ NGC  4889            _("Coma B")
 NGC  5055            _("Sunflower Galaxy")
 NGC  5102            _("Iota's Ghost") # B500
 NGC  5128            _("Centaurus A") # NED
-NGC  5139            _("ω Cen Cluster") # WK
+NGC  5139            _("ω Cen Cluster") # WK, OGSC
 NGC  5189            _("Spiral planetary nebula")
 NGC  5194            _("Whirlpool Galaxy") # NED
 NGC  5194            _("Question Mark Galaxy") # NED
@@ -317,7 +322,7 @@ NGC  6121            _("Crab Globular Cluster") # B500
 NGC  6121            _("Spider Globular Cluster") # B500
 NGC  6171            _("The Crucifix Cluster") # B500
 NGC  6188            _("Rim Nebula")
-NGC  6169            _("μ Normae Cluster")
+NGC  6169            _("μ Normae Cluster") # OGSC
 NGC  6205            _("Great Cluster in Hercules")
 NGC  6205            _("Hercules Globular Cluster") # WK
 NGC  6210            _("Turtle planetary nebula")
@@ -334,17 +339,18 @@ NGC  6357            _("Lobster Nebula") # WK
 NGC  6357            _("War and Peace Nebula") # WP
 NGC  6369            _("Little Ghost Nebula")
 NGC  6400            _("Phantom Cluster") # B500
-NGC  6405            _("Butterfly Cluster")
+NGC  6405            _("Butterfly Cluster") # OGSC
 NGC  6405            _("Splendors of the Heavens")
 NGC  6441            _("Silver Nugget Cluster") # B500
 NGC  6445            _("Little Gem Nebula")
 NGC  6451            _("Tom Thumb Cluster")
-NGC  6475            _("Ptolemy's Cluster")
+NGC  6475            _("Ptolemy's Cluster") # OGSC
 NGC  6503            _("Lost in Space Galaxy") # B500
 NGC  6514            _("Trifid Nebula") # WK
 NGC  6520            _("Dead Man's Chest Cluster") # B500
 NGC  6530            _("Herschel 36")
 NGC  6530            _("Hourglass Cluster")
+NGC  6531            _("Webb's Cross") # OGSC
 NGC  6537            _("Red spider Nebula")
 NGC  6543            _("Cat's Eye Nebula")
 NGC  6544            _("Starfish Cluster") # B500
@@ -363,7 +369,7 @@ NGC  6621            _("Edward's Galaxy") # ST2
 NGC  6622            _("Edward's Galaxy") # ST2
 NGC  6656            _("Great Sagittarius Cluster") # B500
 NGC  6664            _("Santa's Sleigh Cluster") # B500
-NGC  6705            _("Wild Duck Cluster")
+NGC  6705            _("Wild Duck Cluster") # OGSC
 NGC  6705            _("July Salt-and-Pepper Cluster")
 NGC  6705            _("Scutum Salt-and-Pepper Cluster")
 NGC  6720            _("Ring Nebula") # WK
@@ -373,6 +379,8 @@ NGC  6741            _("Phantom Streak Nebula")
 NGC  6745            _("Bird's Head")
 NGC  6751            _("Dandelion Puffball Nebula")
 NGC  6752            _("Pavo Globular Cluster")
+NGC  6752            _("The Starfish") # OGSC
+NGC  6752            _("The Windmill") # OGSC
 NGC  6774            _("Ruprecht 147")
 NGC  6781            _("Snowball Nebula")
 NGC  6809            _("Specter Cluster") # B500
@@ -397,6 +405,7 @@ NGC  6894            _("Little Ring Nebula")
 NGC  6905            _("Blue Flash Nebula")
 NGC  6907            _("Giant Behemoth Galaxy")
 NGC  6910            _("The Inchworm Cluster") # B500
+NGC  6910            _("The Rocking Horse Cluster") # OGSC
 NGC  6913            _("Cooling Tower")
 NGC  6939            _("Ghost Bush Cluster") # B500
 NGC  6939            _("Flying Geese Cluster") # B500
@@ -443,7 +452,7 @@ NGC  7654            _("October Salt-and-Pepper Cluster")
 NGC  7662            _("Blue Snowball") # WK
 NGC  7635            _("Bubble Nebula") # WK
 NGC  7742            _("Fried-egg Galaxy")
-NGC  7789            _("Caroline's Rose Cluster")
+NGC  7789            _("Caroline's Rose Cluster") # OGSC
 NGC  7789            _("Ghost Cluster") # B500
 NGC  7789            _("Star Mist Cluster") # B500
 NGC  7790            _("The Widow's Web Cluster") # B500
@@ -469,9 +478,9 @@ IC   1848            _("Soul Nebula")
 IC   2118            _("Witch Head Nebula") # WK
 IC   2220            _("Butterfly Nebula")
 IC   2220            _("Toby Jug Nebula")
-IC   2391            _("ο Vel Cluster")
+IC   2391            _("ο Vel Cluster") # OGSC
 IC   2574            _("Coddington's Nebula") # NED
-IC   2602            _("Southern Pleiades") # WK
+IC   2602            _("Southern Pleiades") # WK, OGSC
 IC   2602            _("θ Carinae Cluster")
 IC   2944            _("Running Chicken Nebula")
 IC   2948            _("λ Cen Nebula")
@@ -500,6 +509,7 @@ M    45              _("Pleiades") # WK
 M    45              _("Seven Sisters") # WK
 M    45              _("Subaru") # just Japanese WK
 MEL  20              _("α Per Cluster")
+MEL  20              _("α Per Moving Group") # OGSC
 MEL  111             _("Coma Berenices Cluster")
 MEL  186             _("Taurus Poniatovii Cluster")
 B    22              _("Taurus Dark Cloud Nebula")
@@ -521,14 +531,15 @@ C    41              _("Hyades") # WK
 C    99              _("Coalsack Nebula") # WK
 CR   69              _("Orion Cluster")
 CR   70              _("Orion Belt Cluster")
+CR   135             _("π Pup Cluster") # OGSC
 CR   140             _("Tuft in the Tail of the Dog Cluster")
 CR   205             _("Markarian 18 Cluster")
 CR   233             _("η Car Cluster")
 CR   285             _("Ursa Major Cluster")
 CR   302             _("Antares Cluster")
-CR   399             _("Coathanger")
+CR   399             _("Coathanger") # OGSC
 CR   399             _("Al Sufi's Cluster")
-CR   399             _("Brocchi's Cluster")
+CR   399             _("Brocchi's Cluster") # OGSC
 CED  32C             _("Burnham's Nebula")
 CED  32C             _("T Tauri Nebula")
 CED  55R             _("Orion Loop Nebula")
