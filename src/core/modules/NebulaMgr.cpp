@@ -176,6 +176,7 @@ void NebulaMgr::init()
 	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("astro/flag_surface_brightness_arcsec", false).toBool());
+	setFlagSurfaceBrightnessShortNotationUsage(conf->value("astro/flag_surface_brightness_short", true).toBool());
 
 	// Load colors from config file
 	// Upgrade config keys

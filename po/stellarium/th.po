@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-19 21:17+0700\n"
-"PO-Revision-Date: 2017-03-12 20:44+0000\n"
+"POT-Creation-Date: 2017-06-23 21:18+0700\n"
+"PO-Revision-Date: 2017-06-20 23:50+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-20 05:37+0000\n"
+"X-Launchpad-Export-Date: 2017-06-27 05:22+0000\n"
 "X-Generator: Launchpad (build 18416)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:204 src/core/modules/Planet.cpp:365
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:365
 #: src/core/modules/MinorPlanet.cpp:201 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
 #: plugins/Satellites/src/Satellite.cpp:281
@@ -45,12 +45,12 @@ msgstr "เครื่องหมาย"
 
 #: src/core/modules/Asterism.cpp:159
 msgid "asterism"
-msgstr ""
+msgstr "ดาวเรียงเด่น"
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
 #: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:422
-#: src/core/modules/NebulaMgr.cpp:374 src/core/modules/NebulaMgr.cpp:375
+#: src/core/modules/NebulaMgr.cpp:375 src/core/modules/NebulaMgr.cpp:376
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:544 src/core/StelCore.cpp:254
@@ -60,11 +60,11 @@ msgstr "ตัวเลือกการแสดงผล"
 
 #: src/core/modules/AsterismMgr.cpp:94
 msgid "Asterism lines"
-msgstr ""
+msgstr "เส้นดาวเรียงเด่น"
 
 #: src/core/modules/AsterismMgr.cpp:95
 msgid "Asterism labels"
-msgstr ""
+msgstr "ป้ายชื่อดาวเรียงเด่น"
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
@@ -89,7 +89,7 @@ msgstr "ชื่อกลุ่มดาว"
 msgid "Constellation boundaries"
 msgstr "ขอบเขตของกลุ่มดาว"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1459
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1466
 msgid "Select single constellation"
 msgstr "เลือกกลุ่มดาวหนึ่ง"
 
@@ -219,7 +219,7 @@ msgstr "ขั้วใต้ของมหาดาราจักร"
 
 #: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
-msgstr ""
+msgstr "กริดและเส้นต่าง ๆ"
 
 #: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -398,26 +398,26 @@ msgstr ", %1 ม."
 msgid "Celestial body:"
 msgstr "วัตถุท้องฟ้า:"
 
-#: src/core/modules/Nebula.cpp:206 src/core/modules/Comet.cpp:169
+#: src/core/modules/Nebula.cpp:207 src/core/modules/Comet.cpp:169
 #: plugins/Novae/src/Nova.cpp:147 plugins/Pulsars/src/Pulsar.cpp:170
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "ชนิด: <b>%1</b> (%2)"
 
-#: src/core/modules/Nebula.cpp:213
+#: src/core/modules/Nebula.cpp:214
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "ความทึบแสง: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:218 src/core/modules/Planet.cpp:371
+#: src/core/modules/Nebula.cpp:219 src/core/modules/Planet.cpp:371
 #: src/core/modules/MinorPlanet.cpp:207 src/core/modules/Comet.cpp:175
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
 #, qt-format
 msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (เมื่อคิดการสูญหาย: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:221 src/core/modules/Nebula.cpp:226
+#: src/core/modules/Nebula.cpp:222 src/core/modules/Nebula.cpp:227
 #: src/core/modules/Planet.cpp:374 src/core/modules/MinorPlanet.cpp:210
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:204
@@ -427,46 +427,60 @@ msgstr "โชติมาตร: <b>%1</b> (เมื่อคิดการ�
 msgid "Magnitude: <b>%1</b>"
 msgstr "โชติมาตร: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:227
+#: src/core/modules/Nebula.cpp:228
 msgid " (Photometric system: B)"
 msgstr " (ระบบการวัดแสง: B)"
 
-#: src/core/modules/Nebula.cpp:233 src/core/modules/StarWrapper.cpp:68
+#: src/core/modules/Nebula.cpp:234 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:123
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "ดัชนีสี (B-V): <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:238
-msgid "Surface brightness"
-msgstr ""
-
 #: src/core/modules/Nebula.cpp:239
+msgid "Surface brightness"
+msgstr "ความสว่างพื้นผิว"
+
+#: src/core/modules/Nebula.cpp:240
 msgid "after extinction"
+msgstr "หลังคิดการสูญหาย"
+
+#: src/core/modules/Nebula.cpp:250 src/core/modules/Nebula.cpp:252
+#: src/gui/AstroCalcDialog.cpp:468 src/gui/AstroCalcDialog.cpp:470
+msgctxt "magnitude"
+msgid "mag"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:254 src/core/modules/Nebula.cpp:262
+#: src/core/modules/Nebula.cpp:250 src/gui/AstroCalcDialog.cpp:468
+msgid "arcmin"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:252 src/gui/AstroCalcDialog.cpp:470
+msgid "arcsec"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:266 src/core/modules/Nebula.cpp:274
 #, qt-format
 msgid "Contrast index: %1"
-msgstr ""
+msgstr "ดัชนีความเปรียบต่าง: %1"
 
-#: src/core/modules/Nebula.cpp:272
+#: src/core/modules/Nebula.cpp:284
 #, qt-format
 msgid "Size: %1"
 msgstr "ขนาด: %1"
 
-#: src/core/modules/Nebula.cpp:275
+#: src/core/modules/Nebula.cpp:287
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr "ขนาด: %1 x %2"
 
-#: src/core/modules/Nebula.cpp:277
+#: src/core/modules/Nebula.cpp:289
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr "มุมของการวางตัว: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:301 src/core/modules/StarWrapper.cpp:239
+#: src/core/modules/Nebula.cpp:313 src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:152 plugins/Novae/src/Nova.cpp:167
 #: plugins/Exoplanets/src/Exoplanet.cpp:323
 #, qt-format
@@ -474,419 +488,419 @@ msgid "Distance: %1 ly"
 msgstr "ระยะห่าง: %1 ปีแสง"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:311
+#: src/core/modules/Nebula.cpp:323
 msgid "kpc"
 msgstr "กิโลพาร์เซก"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:313
+#: src/core/modules/Nebula.cpp:325
 msgid "ly"
 msgstr "ปีแสง"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:320
+#: src/core/modules/Nebula.cpp:332
 msgid "Mpc"
 msgstr "เมกะพาร์เซก"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:322
+#: src/core/modules/Nebula.cpp:334
 msgid "Mio. ly"
 msgstr "ล้านปีแสง"
 
-#: src/core/modules/Nebula.cpp:336
+#: src/core/modules/Nebula.cpp:348
 #, qt-format
 msgid "Distance: %1 %2 (%3 %4)"
 msgstr "ระยะห่าง: %1 %2 (%3 %4)"
 
-#: src/core/modules/Nebula.cpp:350
+#: src/core/modules/Nebula.cpp:362
 #, qt-format
 msgid "Redshift: %1"
 msgstr "การเลื่อนไปทางแดง: %1"
 
-#: src/core/modules/Nebula.cpp:361 src/core/modules/StarWrapper.cpp:248
+#: src/core/modules/Nebula.cpp:373 src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "แพรัลแลกซ์: %1\""
 
-#: src/core/modules/Nebula.cpp:365
+#: src/core/modules/Nebula.cpp:377
 msgid "Morphological description: "
 msgstr "คำอธิบายสัณฐาน: "
 
-#: src/core/modules/Nebula.cpp:937
+#: src/core/modules/Nebula.cpp:949
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "มีการกระจุกตัวของดาวที่ใจกลางสูง"
 
-#: src/core/modules/Nebula.cpp:940
+#: src/core/modules/Nebula.cpp:952
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "มีการกระจุกตัวของดาวที่ใจกลางอย่างหนาแน่น"
 
-#: src/core/modules/Nebula.cpp:943
+#: src/core/modules/Nebula.cpp:955
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "ใจกลางด้านในมีดาวหนาแน่น"
 
-#: src/core/modules/Nebula.cpp:946
+#: src/core/modules/Nebula.cpp:958
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "การกระจุกตัวของดาวหนาแน่นปานกลาง"
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:963
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "การกระจุกตัวของดาวปานกลาง"
 
-#: src/core/modules/Nebula.cpp:954
+#: src/core/modules/Nebula.cpp:966
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "การกระจุกตัวของดาวไปยังศูนย์กลางค่อนข้างหลวม"
 
-#: src/core/modules/Nebula.cpp:957
+#: src/core/modules/Nebula.cpp:969
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "การกระจุกตัวของดาวไปยังศูนย์กลางหลวม"
 
-#: src/core/modules/Nebula.cpp:960
+#: src/core/modules/Nebula.cpp:972
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "การกระจุกตัวของดาวหลวม"
 
-#: src/core/modules/Nebula.cpp:963
+#: src/core/modules/Nebula.cpp:975
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "การกระจุกตัวของดาวไปยังศูนย์กลางหลวมมาก"
 
-#: src/core/modules/Nebula.cpp:966
+#: src/core/modules/Nebula.cpp:978
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "แทบไม่มีการกระจุกตัวของดาวไปยังศูนย์กลาง"
 
-#: src/core/modules/Nebula.cpp:969
+#: src/core/modules/Nebula.cpp:981
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "ชั้นการกระจุกตัวไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:989
+#: src/core/modules/Nebula.cpp:1001
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "การกระจุกตัวของดาวที่ศูนย์กลางหนาแน่น"
 
-#: src/core/modules/Nebula.cpp:992
+#: src/core/modules/Nebula.cpp:1004
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "การกระจุกตัวของดาวที่ศูนย์กลางต่ำ"
 
-#: src/core/modules/Nebula.cpp:995
+#: src/core/modules/Nebula.cpp:1007
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "ไม่มีการกระจุกตัวของดาวที่ศูนย์กลางให้สังเกตได้"
 
-#: src/core/modules/Nebula.cpp:998
+#: src/core/modules/Nebula.cpp:1010
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "การกระจุกตัวต่ำจนแทบแยกไม่ออกจากดาวที่อยู่โดยรอบ"
 
-#: src/core/modules/Nebula.cpp:1001
+#: src/core/modules/Nebula.cpp:1013
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "ชั้นการกระจุกตัวไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1007
+#: src/core/modules/Nebula.cpp:1019
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "พิสัยความสว่างของดาวสมาชิกในกระจุกต่ำ"
 
-#: src/core/modules/Nebula.cpp:1010
+#: src/core/modules/Nebula.cpp:1022
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "พิสัยความสว่างของดาวสมาชิกในกระจุกปานกลาง"
 
-#: src/core/modules/Nebula.cpp:1013
+#: src/core/modules/Nebula.cpp:1025
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "พิสัยความสว่างของดาวสมาชิกในกระจุกสูง"
 
-#: src/core/modules/Nebula.cpp:1016
+#: src/core/modules/Nebula.cpp:1028
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "พิสัยความสว่างของดาวสมาชิกในกระจุกไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1022
+#: src/core/modules/Nebula.cpp:1034
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "กระจุกดาวขนาดเล็กที่มีดาวน้อยกว่า 50 ดวง"
 
-#: src/core/modules/Nebula.cpp:1025
+#: src/core/modules/Nebula.cpp:1037
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "กระจุกดาวขนาดปานกลางที่มีดาว 50-100 ดวง"
 
-#: src/core/modules/Nebula.cpp:1028
+#: src/core/modules/Nebula.cpp:1040
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "กระจุกดาวขนาดใหญ่ที่มีดาวมากกว่า 100 ดวง"
 
-#: src/core/modules/Nebula.cpp:1031
+#: src/core/modules/Nebula.cpp:1043
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "ชั้นจำนวนดาวในกระจุกดาวไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1035
+#: src/core/modules/Nebula.cpp:1047
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "กระจุกดาวอยู่ในเนบิวลา"
 
-#: src/core/modules/Nebula.cpp:1056
+#: src/core/modules/Nebula.cpp:1068
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "สว่างมาก"
 
-#: src/core/modules/Nebula.cpp:1059
+#: src/core/modules/Nebula.cpp:1071
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "สว่าง"
 
-#: src/core/modules/Nebula.cpp:1062
+#: src/core/modules/Nebula.cpp:1074
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "สว่างปานกลาง"
 
-#: src/core/modules/Nebula.cpp:1065
+#: src/core/modules/Nebula.cpp:1077
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "จาง"
 
-#: src/core/modules/Nebula.cpp:1068
+#: src/core/modules/Nebula.cpp:1080
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "จางมาก"
 
-#: src/core/modules/Nebula.cpp:1071
+#: src/core/modules/Nebula.cpp:1083
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "ความสว่างไม่แน่นอน"
 
-#: src/core/modules/Nebula.cpp:1074
+#: src/core/modules/Nebula.cpp:1086
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "ความสว่างของเนบิวลาสะท้อนแสงไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1080
+#: src/core/modules/Nebula.cpp:1092
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "ดาวที่เป็นแหล่งของแสงอยู่ภายในเนบิวลา"
 
-#: src/core/modules/Nebula.cpp:1083
+#: src/core/modules/Nebula.cpp:1095
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "ดาวที่เป็นแหล่งของแสงอยู่นอกเนบิวลา"
 
-#: src/core/modules/Nebula.cpp:1086
+#: src/core/modules/Nebula.cpp:1098
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "ดาวที่เป็นแหล่งของแสงอยู่ริมเนบิวลา"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1091
+#: src/core/modules/Nebula.cpp:1103
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1097
+#: src/core/modules/Nebula.cpp:1109
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1101
+#: src/core/modules/Nebula.cpp:1113
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "เนบิวลาสะท้อนแสงไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1124
+#: src/core/modules/Nebula.cpp:1136
 msgid "circular form"
 msgstr "รูปแบบทรงกลม"
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1139
 msgid "elliptical form"
 msgstr "รูปแบบทรงรี"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1142
 msgid "irregular form"
 msgstr "รูปแบบไม่แน่นอน"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1145
 msgid "undocumented form"
 msgstr "รูปแบบไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1151
 msgid "amorphous structure"
 msgstr "โครงสร้างอสัณฐาน"
 
-#: src/core/modules/Nebula.cpp:1142
+#: src/core/modules/Nebula.cpp:1154
 msgid "conventional structure"
 msgstr "โครงสร้างสัญนิยม"
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1157
 msgid "filamentary structure"
 msgstr "โครงสร้างเส้นใย"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1160
 msgid "undocumented structure"
 msgstr "โครงสร้างไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1154
+#: src/core/modules/Nebula.cpp:1166
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "จางที่สุด"
 
-#: src/core/modules/Nebula.cpp:1157
+#: src/core/modules/Nebula.cpp:1169
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "สว่างปานกลาง"
 
-#: src/core/modules/Nebula.cpp:1160
+#: src/core/modules/Nebula.cpp:1172
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "สว่างที่สุด"
 
-#: src/core/modules/Nebula.cpp:1163
+#: src/core/modules/Nebula.cpp:1175
 msgid "undocumented brightness"
 msgstr "ความสว่างไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:1179
+#: src/core/modules/Nebula.cpp:1191
 msgid "galaxy"
 msgstr "ดาราจักร"
 
-#: src/core/modules/Nebula.cpp:1182
+#: src/core/modules/Nebula.cpp:1194
 msgid "active galaxy"
 msgstr "ดาราจักรกัมมันต์"
 
-#: src/core/modules/Nebula.cpp:1185
+#: src/core/modules/Nebula.cpp:1197
 msgid "radio galaxy"
 msgstr "ดาราจักรวิทยุ"
 
-#: src/core/modules/Nebula.cpp:1188
+#: src/core/modules/Nebula.cpp:1200
 msgid "interacting galaxy"
 msgstr "ดาราจักรที่มีอันตรกิริยาต่อกัน"
 
-#: src/core/modules/Nebula.cpp:1191 plugins/Quasars/src/Quasar.cpp:102
+#: src/core/modules/Nebula.cpp:1203 plugins/Quasars/src/Quasar.cpp:102
 msgid "quasar"
 msgstr "เควซาร์"
 
-#: src/core/modules/Nebula.cpp:1194
+#: src/core/modules/Nebula.cpp:1206
 msgid "star cluster"
 msgstr "กระจุกดาว"
 
-#: src/core/modules/Nebula.cpp:1197
+#: src/core/modules/Nebula.cpp:1209
 msgid "open star cluster"
 msgstr "กระจุกดาวเปิด"
 
-#: src/core/modules/Nebula.cpp:1200
+#: src/core/modules/Nebula.cpp:1212
 msgid "globular star cluster"
 msgstr "กระจุกดาวทรงกลม"
 
-#: src/core/modules/Nebula.cpp:1203
+#: src/core/modules/Nebula.cpp:1215
 msgid "nebula"
 msgstr "เนบิวลา"
 
-#: src/core/modules/Nebula.cpp:1206
+#: src/core/modules/Nebula.cpp:1218
 msgid "planetary nebula"
 msgstr "เนบิวลาดาวเคราะห์"
 
-#: src/core/modules/Nebula.cpp:1209
+#: src/core/modules/Nebula.cpp:1221
 msgid "dark nebula"
 msgstr "เนบิวลามืด"
 
-#: src/core/modules/Nebula.cpp:1212
+#: src/core/modules/Nebula.cpp:1224
 msgid "cluster associated with nebulosity"
 msgstr "เนบิวลาที่มีกระจุกดาว"
 
-#: src/core/modules/Nebula.cpp:1215
+#: src/core/modules/Nebula.cpp:1227
 msgid "bipolar nebula"
 msgstr "เนบิวลาสองขั้ว"
 
-#: src/core/modules/Nebula.cpp:1218
+#: src/core/modules/Nebula.cpp:1230
 msgid "emission nebula"
 msgstr "เนบิวลาเปล่งแสง"
 
-#: src/core/modules/Nebula.cpp:1221
+#: src/core/modules/Nebula.cpp:1233
 msgid "HII region"
 msgstr "บริเวณเอช 2"
 
-#: src/core/modules/Nebula.cpp:1224
+#: src/core/modules/Nebula.cpp:1236
 msgid "reflection nebula"
 msgstr "เนบิวลาสะท้อนแสง"
 
-#: src/core/modules/Nebula.cpp:1227
+#: src/core/modules/Nebula.cpp:1239
 msgid "supernova remnant"
 msgstr "ซากซูเปอร์โนวา"
 
-#: src/core/modules/Nebula.cpp:1230
+#: src/core/modules/Nebula.cpp:1242
 msgid "stellar association"
 msgstr "ชุมนุมดาว"
 
-#: src/core/modules/Nebula.cpp:1233
+#: src/core/modules/Nebula.cpp:1245
 msgid "star cloud"
 msgstr "เมฆดาว"
 
-#: src/core/modules/Nebula.cpp:1236
+#: src/core/modules/Nebula.cpp:1248
 msgid "interstellar matter"
 msgstr "สสารระหว่างดาว"
 
-#: src/core/modules/Nebula.cpp:1239
+#: src/core/modules/Nebula.cpp:1251
 msgid "emission object"
 msgstr "วัตถุเปล่งแสง"
 
-#: src/core/modules/Nebula.cpp:1242
+#: src/core/modules/Nebula.cpp:1254
 msgid "BL Lac object"
 msgstr "วัตถุบีแอลกิ้งก่า"
 
-#: src/core/modules/Nebula.cpp:1245
+#: src/core/modules/Nebula.cpp:1257
 msgid "blazar"
 msgstr "เบลซาร์"
 
-#: src/core/modules/Nebula.cpp:1248
+#: src/core/modules/Nebula.cpp:1260
 msgid "molecular cloud"
 msgstr "เมฆโมเลกุล"
 
-#: src/core/modules/Nebula.cpp:1251
+#: src/core/modules/Nebula.cpp:1263
 msgid "young stellar object"
 msgstr "วายเอสโอ"
 
-#: src/core/modules/Nebula.cpp:1254
+#: src/core/modules/Nebula.cpp:1266
 msgid "possible quasar"
 msgstr "วัตถุที่อาจเป็นเควซาร์"
 
-#: src/core/modules/Nebula.cpp:1257
+#: src/core/modules/Nebula.cpp:1269
 msgid "possible planetary nebula"
 msgstr "วัตถุที่อาจเป็นเนบิวลาดาวเคราะห์"
 
-#: src/core/modules/Nebula.cpp:1260
+#: src/core/modules/Nebula.cpp:1272
 msgid "protoplanetary nebula"
 msgstr "เนบิวลาดาวเคราะห์ก่อนเกิด"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1263 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:185 src/gui/AstroCalcDialog.cpp:569
+#: src/core/modules/Nebula.cpp:1275 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/StarWrapper.cpp:185 src/gui/AstroCalcDialog.cpp:580
 #: src/translations.h:46
 msgid "star"
 msgstr "ดาวฤกษ์"
 
-#: src/core/modules/Nebula.cpp:1266
+#: src/core/modules/Nebula.cpp:1278
 msgid "object of unknown nature"
 msgstr "วัตถุที่ไม่ทราบธรรมชาติที่แท้จริง"
 
-#: src/core/modules/Nebula.cpp:1269
+#: src/core/modules/Nebula.cpp:1281
 msgid "undocumented type"
 msgstr "ชนิดไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/NebulaMgr.cpp:374
+#: src/core/modules/NebulaMgr.cpp:375
 msgid "Deep-sky objects"
 msgstr "วัตถุท้องฟ้าห้วงลึก"
 
-#: src/core/modules/NebulaMgr.cpp:375
+#: src/core/modules/NebulaMgr.cpp:376
 msgid "Toggle DSO type filter"
 msgstr "สลับการกรองชนิดของวัตถุท้องฟ้าห้วงลึก"
 
@@ -900,7 +914,7 @@ msgstr "โชติมาตรสัมบูรณ์: %1"
 #: src/core/modules/Planet.cpp:381
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
-msgstr ""
+msgstr "โชติมาตรปานกลางขณะอยู่ตรงข้ามดวงอาทิตย์: %1"
 
 #: src/core/modules/Planet.cpp:405 src/core/modules/MinorPlanet.cpp:239
 #: src/core/modules/Comet.cpp:199
@@ -1073,8 +1087,8 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "ความยาวของหางแก๊ส (โดยประมาณ): %1 ล้าน กม."
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1127
-#: src/gui/AstroCalcDialog.cpp:2602 src/translations.h:68
+#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1138
+#: src/gui/AstroCalcDialog.cpp:2613 src/translations.h:68
 msgid "Planets"
 msgstr "ดาวเคราะห์"
 
@@ -1125,11 +1139,11 @@ msgstr "ดาวแปรแสงรุนแรง"
 msgid "eclipsing binary system"
 msgstr "ระบบดาวคู่อุปราคา"
 
-#: src/core/modules/StarWrapper.cpp:179 src/gui/AstroCalcDialog.cpp:583
+#: src/core/modules/StarWrapper.cpp:179 src/gui/AstroCalcDialog.cpp:594
 msgid "variable star"
 msgstr "ดาวแปรแสง"
 
-#: src/core/modules/StarWrapper.cpp:183 src/gui/AstroCalcDialog.cpp:577
+#: src/core/modules/StarWrapper.cpp:183 src/gui/AstroCalcDialog.cpp:588
 msgid "double star"
 msgstr "ดาวคู่"
 
@@ -1184,7 +1198,7 @@ msgid "Position angle"
 msgstr "มุมตำแหน่ง"
 
 #: src/core/modules/StarWrapper.cpp:280 src/core/modules/StarWrapper.cpp:282
-#: src/gui/AstroCalcDialog.cpp:1726
+#: src/gui/AstroCalcDialog.cpp:1737
 msgid "Separation"
 msgstr "ระยะห่าง"
 
@@ -1195,15 +1209,15 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:292 src/core/modules/StarWrapper.cpp:294
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr ""
+msgstr "มิลลิพิลิปดา/ปี"
 
 #: src/core/modules/StarWrapper.cpp:293
 msgid "Position angle of the proper motion"
-msgstr ""
+msgstr "มุมตำแหน่งของการเคลื่อนที่เฉพาะ"
 
 #: src/core/modules/StarWrapper.cpp:294
 msgid "Angular speed of the proper motion"
-msgstr ""
+msgstr "ความเร็วเชิงมุมของการเคลื่อนที่เฉพาะ"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -1226,7 +1240,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
-#: src/gui/AstroCalcDialog.cpp:713 src/gui/AstroCalcDialog.cpp:1723
+#: src/gui/AstroCalcDialog.cpp:724 src/gui/AstroCalcDialog.cpp:1734
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -2041,12 +2055,12 @@ msgstr "มองไปที่ขั้วฟ้าใต้"
 #: src/core/StelMovementMgr.cpp:225
 msgctxt "mount mode"
 msgid "Equatorial mount"
-msgstr ""
+msgstr "ฐานยึดพิกัดศูนย์สูตร"
 
 #: src/core/StelMovementMgr.cpp:227
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
-msgstr ""
+msgstr "ฐานยึดพิกัดมุมเงยมุมทิศ"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2080,31 +2094,31 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr "LTST"
 
-#: src/gui/ConfigurationDialog.cpp:567
+#: src/gui/ConfigurationDialog.cpp:568
 msgid "Select screenshot directory"
 msgstr "เลือกไดเร็กทอรีสำหรับเก็บภาพหน้าจอ"
 
-#: src/gui/ConfigurationDialog.cpp:920
+#: src/gui/ConfigurationDialog.cpp:921
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "พื้นที่การมองเห็นเริ่มต้น: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:928
+#: src/gui/ConfigurationDialog.cpp:929
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "ทิศทางการเริ่มต้นของการมองมุมทิศ/มุมเงย: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:990
+#: src/gui/ConfigurationDialog.cpp:991
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 msgid "Authors"
 msgstr "ผู้สร้าง"
 
-#: src/gui/ConfigurationDialog.cpp:991 src/gui/ViewDialog.cpp:1345
+#: src/gui/ConfigurationDialog.cpp:992 src/gui/ViewDialog.cpp:1345
 msgid "Contact"
 msgstr "ติดต่อ"
 
-#: src/gui/ConfigurationDialog.cpp:993 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:994 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
@@ -2124,15 +2138,15 @@ msgstr "ติดต่อ"
 msgid "Version"
 msgstr "รุ่น"
 
-#: src/gui/ConfigurationDialog.cpp:1090
+#: src/gui/ConfigurationDialog.cpp:1091
 msgid "Running script: "
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: "
 
-#: src/gui/ConfigurationDialog.cpp:1097
+#: src/gui/ConfigurationDialog.cpp:1098
 msgid "Running script: [none]"
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: [ไม่มี]"
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2140,16 +2154,16 @@ msgstr ""
 "เสร็จสิ้นการดาวน์โหลดบัญชีดาวใหม่!\n"
 "เริ่ม Stellarium ใหม่เพื่อแสดง"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "All available star catalogs have been installed."
 msgstr "บัญชีดาวที่มีอยู่ทั้งหมดได้รับการติดตั้งแล้ว"
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1172
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "รับวัตถุหรือดวงดาว %1 จาก %2"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1179
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2158,7 +2172,7 @@ msgstr ""
 "กำลังดาวน์โหลด %1...\n"
 "(คุณสามารถปิดหน้าต่างนี้ได้)"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1186
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2169,7 +2183,7 @@ msgstr ""
 "จำนวนดาว: %2 ล้านดวง\n"
 "พิสัยโชติมาตร: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1228 src/gui/ConfigurationDialog.cpp:1264
+#: src/gui/ConfigurationDialog.cpp:1229 src/gui/ConfigurationDialog.cpp:1265
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2178,11 +2192,11 @@ msgstr ""
 "เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1317
+#: src/gui/ConfigurationDialog.cpp:1318
 msgid "Verifying file integrity..."
 msgstr "กำลังทวนสอบบูรณภาพของแฟ้มข้อมูล..."
 
-#: src/gui/ConfigurationDialog.cpp:1321
+#: src/gui/ConfigurationDialog.cpp:1322
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2191,171 +2205,171 @@ msgstr ""
 "เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
 "ไฟล์เสียหาย"
 
-#: src/gui/ConfigurationDialog.cpp:1367 src/gui/ConfigurationDialog.cpp:1376
+#: src/gui/ConfigurationDialog.cpp:1368 src/gui/ConfigurationDialog.cpp:1377
 msgid "Available"
 msgstr "มีอยู่"
 
-#: src/gui/ConfigurationDialog.cpp:1369 src/gui/ConfigurationDialog.cpp:1378
+#: src/gui/ConfigurationDialog.cpp:1370 src/gui/ConfigurationDialog.cpp:1379
 msgid "Not Available"
 msgstr "ไม่มี"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1445
+#: src/gui/ConfigurationDialog.cpp:1446
 msgid "Algorithm of"
 msgstr "วิธีคำนวณ"
 
-#: src/gui/ConfigurationDialog.cpp:1458
+#: src/gui/ConfigurationDialog.cpp:1459
 msgid "Without correction"
 msgstr "ไม่มีการปรับแก้"
 
-#: src/gui/ConfigurationDialog.cpp:1459
+#: src/gui/ConfigurationDialog.cpp:1460
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1460
+#: src/gui/ConfigurationDialog.cpp:1461
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1461
+#: src/gui/ConfigurationDialog.cpp:1462
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1462
+#: src/gui/ConfigurationDialog.cpp:1463
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1464
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1464
+#: src/gui/ConfigurationDialog.cpp:1465
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1465
+#: src/gui/ConfigurationDialog.cpp:1466
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1466
+#: src/gui/ConfigurationDialog.cpp:1467
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1467
+#: src/gui/ConfigurationDialog.cpp:1468
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1468
+#: src/gui/ConfigurationDialog.cpp:1469
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1469
+#: src/gui/ConfigurationDialog.cpp:1470
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1470
+#: src/gui/ConfigurationDialog.cpp:1471
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1472
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1472
+#: src/gui/ConfigurationDialog.cpp:1473
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1473
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1475
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1475
+#: src/gui/ConfigurationDialog.cpp:1476
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1477
+#: src/gui/ConfigurationDialog.cpp:1478
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 "Meeus (ค.ศ. 1998) (กับ Chapront, Chapront-Touze & Francou (ค.ศ. 1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1478
+#: src/gui/ConfigurationDialog.cpp:1479
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1479
+#: src/gui/ConfigurationDialog.cpp:1480
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1480
+#: src/gui/ConfigurationDialog.cpp:1481
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1481
+#: src/gui/ConfigurationDialog.cpp:1482
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1484
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1487
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1488
+#: src/gui/ConfigurationDialog.cpp:1489
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1489
+#: src/gui/ConfigurationDialog.cpp:1490
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1490
+#: src/gui/ConfigurationDialog.cpp:1491
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1491
+#: src/gui/ConfigurationDialog.cpp:1492
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1492
+#: src/gui/ConfigurationDialog.cpp:1493
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1493
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1494
+#: src/gui/ConfigurationDialog.cpp:1495
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "สมการ %1T ที่กำหนดเอง"
 
-#: src/gui/ConfigurationDialog.cpp:1543 src/gui/ConfigurationDialog.cpp:1578
+#: src/gui/ConfigurationDialog.cpp:1544 src/gui/ConfigurationDialog.cpp:1579
 #: src/gui/StelGuiItems.cpp:633 src/gui/LocationDialog.cpp:426
 msgid "System default"
 msgstr "ค่าปริยายของระบบ"
 
-#: src/gui/ConfigurationDialog.cpp:1544
+#: src/gui/ConfigurationDialog.cpp:1545
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "yyyy-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1545
+#: src/gui/ConfigurationDialog.cpp:1546
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1546
+#: src/gui/ConfigurationDialog.cpp:1547
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1579
+#: src/gui/ConfigurationDialog.cpp:1580
 msgid "12-hour format"
 msgstr "รูปแบบ 12 ชั่วโมง"
 
-#: src/gui/ConfigurationDialog.cpp:1580
+#: src/gui/ConfigurationDialog.cpp:1581
 msgid "24-hour format"
 msgstr "รูปแบบ 24 ชั่วโมง"
 
@@ -2903,27 +2917,27 @@ msgstr "อัตราสูงสุดเท่าที่เคยมีม
 #: src/gui/ViewDialog.cpp:1539
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
-msgstr ""
+msgstr "G. Mueller (1893)"
 
 #: src/gui/ViewDialog.cpp:1540
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
-msgstr ""
+msgstr "Astronomical Almanach (1984)"
 
 #: src/gui/ViewDialog.cpp:1541
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr ""
+msgstr "Explanatory Supplement (1992)"
 
 #: src/gui/ViewDialog.cpp:1542
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr ""
+msgstr "Explanatory Supplement (2013)"
 
 #: src/gui/ViewDialog.cpp:1543
 msgctxt "magnitude algorithm"
 msgid "Generic"
-msgstr ""
+msgstr "ทั่วไป"
 
 #: src/gui/ViewDialog.cpp:1569
 msgid ""
@@ -3124,15 +3138,15 @@ msgstr "เดคลิเนชัน"
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:255 src/gui/AstroCalcDialog.cpp:274
-#: src/gui/AstroCalcDialog.cpp:718
+#: src/gui/AstroCalcDialog.cpp:729
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:947
 msgid "Azimuth"
 msgstr "มุมทิศ"
 
 #. TRANSLATORS: altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:276
-#: src/gui/AstroCalcDialog.cpp:720 src/gui/AstroCalcDialog.cpp:1300
-#: src/gui/AstroCalcDialog.cpp:1703 src/gui/AstroCalcDialog.cpp:1705
+#: src/gui/AstroCalcDialog.cpp:731 src/gui/AstroCalcDialog.cpp:1311
+#: src/gui/AstroCalcDialog.cpp:1714 src/gui/AstroCalcDialog.cpp:1716
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "มุมเงย"
@@ -3204,7 +3218,7 @@ msgid "Secular acceleration of the Moon"
 msgstr ""
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:270 src/ui_configurationDialog.h:1350
+#: src/gui/AstroCalcDialog.cpp:270 src/ui_configurationDialog.h:1356
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:347
@@ -3213,74 +3227,74 @@ msgid "Name"
 msgstr "ชื่อ"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:281 src/gui/AstroCalcDialog.cpp:725
+#: src/gui/AstroCalcDialog.cpp:281 src/gui/AstroCalcDialog.cpp:736
 msgid "RA (J2000)"
 msgstr "RA (J2000)"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:283 src/gui/AstroCalcDialog.cpp:727
+#: src/gui/AstroCalcDialog.cpp:283 src/gui/AstroCalcDialog.cpp:738
 msgid "Dec (J2000)"
 msgstr "Dec (J2000)"
 
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:288
 msgid "opacity"
-msgstr ""
+msgstr "ความทึบแสง"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:293 src/gui/AstroCalcDialog.cpp:730
+#: src/gui/AstroCalcDialog.cpp:293 src/gui/AstroCalcDialog.cpp:741
 msgid "mag"
-msgstr ""
+msgstr "โชติมาตร"
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:298
 msgid "sep."
-msgstr ""
+msgstr "ระยะห่าง"
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:303
 msgid "per."
-msgstr ""
+msgstr "คาบ"
 
 #: src/gui/AstroCalcDialog.cpp:303
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "วัน"
 
 #. TRANSLATORS: distance, AU
-#: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:734
+#: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:745
 msgid "dist."
-msgstr ""
+msgstr "ระยะห่าง"
 
-#: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:523
-#: src/gui/AstroCalcDialog.cpp:734 src/gui/AstroCalcDialog.cpp:770
-#: src/gui/AstroCalcDialog.cpp:1538
+#: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:534
+#: src/gui/AstroCalcDialog.cpp:745 src/gui/AstroCalcDialog.cpp:781
+#: src/gui/AstroCalcDialog.cpp:1549
 msgctxt "astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "หน่วยดาราศาสตร์"
 
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:313
 msgid "P.M."
-msgstr ""
+msgstr "การเคลื่อนที่เฉพาะ"
 
 #: src/gui/AstroCalcDialog.cpp:313
 msgctxt "arcsecond per year"
 msgid "\"/yr"
-msgstr ""
+msgstr "พิลิปดา/ปี"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:319
 msgid "S.B."
-msgstr ""
+msgstr "ความสว่างพื้นผิว"
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:322 src/ui_configurationDialog.h:1329
+#: src/gui/AstroCalcDialog.cpp:322 src/ui_configurationDialog.h:1335
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Type"
 msgstr "ชนิด"
 
-#: src/gui/AstroCalcDialog.cpp:350 src/gui/AstroCalcDialog.cpp:2606
+#: src/gui/AstroCalcDialog.cpp:350 src/gui/AstroCalcDialog.cpp:2617
 #: src/ui_viewDialog.h:2255 src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "ดาราจักร"
@@ -3309,7 +3323,7 @@ msgid "Bright quasars"
 msgstr "เควซาร์สว่าง"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:355 src/gui/AstroCalcDialog.cpp:2607
+#: src/gui/AstroCalcDialog.cpp:355 src/gui/AstroCalcDialog.cpp:2618
 #: src/translations.h:123 src/ui_viewDialog.h:2253 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "กระจุกดาว"
@@ -3345,15 +3359,15 @@ msgid "Nebulae"
 msgstr "เนบิวลา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:361 src/gui/AstroCalcDialog.cpp:1140
-#: src/gui/AstroCalcDialog.cpp:2616 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:361 src/gui/AstroCalcDialog.cpp:1151
+#: src/gui/AstroCalcDialog.cpp:2627 src/translations.h:105
 #: src/ui_viewDialog.h:2254 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "เนบิวลาดาวเคราะห์"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:362 src/gui/AstroCalcDialog.cpp:1142
-#: src/gui/AstroCalcDialog.cpp:2605 src/translations.h:107
+#: src/gui/AstroCalcDialog.cpp:362 src/gui/AstroCalcDialog.cpp:1153
+#: src/gui/AstroCalcDialog.cpp:2616 src/translations.h:107
 #: src/ui_viewDialog.h:2257 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "เนบิวลามืด"
@@ -3487,12 +3501,12 @@ msgstr "บัญชีเมลอตต์"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:386 src/translations.h:169
 msgid "New General Catalogue"
-msgstr ""
+msgstr "New General Catalogue"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:387 src/translations.h:171
 msgid "Index Catalogue"
-msgstr ""
+msgstr "Index Catalogue"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:388 src/translations.h:173
@@ -3543,329 +3557,329 @@ msgid "Herschel 400 Catalogue"
 msgstr "บัญชีเฮอร์เชล 400"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:398 src/gui/AstroCalcDialog.cpp:2617
+#: src/gui/AstroCalcDialog.cpp:398 src/gui/AstroCalcDialog.cpp:2628
 #: src/translations.h:196
 msgid "Bright double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:399 src/gui/AstroCalcDialog.cpp:2618
+#: src/gui/AstroCalcDialog.cpp:399 src/gui/AstroCalcDialog.cpp:2629
 #: src/translations.h:198
 msgid "Bright variable stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:400 src/gui/AstroCalcDialog.cpp:2619
+#: src/gui/AstroCalcDialog.cpp:400 src/gui/AstroCalcDialog.cpp:2630
 #: src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:401
 msgid "Solar system objects"
-msgstr ""
+msgstr "วัตถุในระบบสุริยะ"
 
 #: src/gui/AstroCalcDialog.cpp:450
 #, qt-format
 msgid "Positions on %1"
 msgstr "ตำแหน่งเมื่อ %1"
 
-#: src/gui/AstroCalcDialog.cpp:520 src/gui/AstroCalcDialog.cpp:767
+#: src/gui/AstroCalcDialog.cpp:531 src/gui/AstroCalcDialog.cpp:778
 msgid "Planetocentric distance"
-msgstr ""
+msgstr "ระยะห่างจากศูนย์กลางดาว"
 
-#: src/gui/AstroCalcDialog.cpp:522 src/gui/AstroCalcDialog.cpp:769
+#: src/gui/AstroCalcDialog.cpp:533 src/gui/AstroCalcDialog.cpp:780
 msgid "Topocentric distance"
-msgstr ""
+msgstr "ระยะห่างจากผิวดาว"
 
-#: src/gui/AstroCalcDialog.cpp:589
+#: src/gui/AstroCalcDialog.cpp:600
 msgid "star with high proper motion"
-msgstr ""
+msgstr "ดาวที่มีการเคลื่อนที่เฉพาะสูง"
 
-#: src/gui/AstroCalcDialog.cpp:714 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:725 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
-msgstr "วันจูเลียน"
+msgstr "วันจูเลียส"
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:732
+#: src/gui/AstroCalcDialog.cpp:743
 msgid "phase"
-msgstr ""
+msgstr "ดิถี"
 
 #. TRANSLATORS: elongation
-#: src/gui/AstroCalcDialog.cpp:736
+#: src/gui/AstroCalcDialog.cpp:747
 msgid "elong."
-msgstr ""
+msgstr "มุมห่าง"
 
-#: src/gui/AstroCalcDialog.cpp:920 src/gui/AstroCalcDialog.cpp:1994
+#: src/gui/AstroCalcDialog.cpp:931 src/gui/AstroCalcDialog.cpp:2005
 msgid "CSV (Comma delimited)"
-msgstr ""
+msgstr "CSV (Comma delimited)"
 
-#: src/gui/AstroCalcDialog.cpp:922
+#: src/gui/AstroCalcDialog.cpp:933
 msgid "Save calculated ephemerides as..."
 msgstr "บันทึกอิเฟเมอริสเป็น..."
 
-#: src/gui/AstroCalcDialog.cpp:1044
+#: src/gui/AstroCalcDialog.cpp:1055
 msgid "10 minutes"
 msgstr "10 นาที"
 
-#: src/gui/AstroCalcDialog.cpp:1045
+#: src/gui/AstroCalcDialog.cpp:1056
 msgid "30 minutes"
-msgstr ""
+msgstr "30 นาที"
 
-#: src/gui/AstroCalcDialog.cpp:1046
+#: src/gui/AstroCalcDialog.cpp:1057
 msgid "1 hour"
 msgstr "1 ชั่วโมง"
 
-#: src/gui/AstroCalcDialog.cpp:1047
+#: src/gui/AstroCalcDialog.cpp:1058
 msgid "6 hours"
-msgstr ""
+msgstr "6 ชั่วโมง"
 
-#: src/gui/AstroCalcDialog.cpp:1048
+#: src/gui/AstroCalcDialog.cpp:1059
 msgid "12 hours"
-msgstr ""
+msgstr "12 ชั่วโมง"
 
-#: src/gui/AstroCalcDialog.cpp:1049
+#: src/gui/AstroCalcDialog.cpp:1060
 msgid "1 day"
 msgstr "1 วัน"
 
-#: src/gui/AstroCalcDialog.cpp:1050
+#: src/gui/AstroCalcDialog.cpp:1061
 msgid "5 days"
 msgstr "5 วัน"
 
-#: src/gui/AstroCalcDialog.cpp:1051
+#: src/gui/AstroCalcDialog.cpp:1062
 msgid "10 days"
 msgstr "10 วัน"
 
-#: src/gui/AstroCalcDialog.cpp:1052
+#: src/gui/AstroCalcDialog.cpp:1063
 msgid "15 days"
 msgstr "15 วัน"
 
-#: src/gui/AstroCalcDialog.cpp:1053
+#: src/gui/AstroCalcDialog.cpp:1064
 msgid "30 days"
 msgstr "30 วัน"
 
-#: src/gui/AstroCalcDialog.cpp:1054
+#: src/gui/AstroCalcDialog.cpp:1065
 msgid "60 days"
 msgstr "60 วัน"
 
-#: src/gui/AstroCalcDialog.cpp:1126
+#: src/gui/AstroCalcDialog.cpp:1137
 msgid "Solar system"
 msgstr "ระบบสุริยะ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1128 src/gui/AstroCalcDialog.cpp:2608
+#: src/gui/AstroCalcDialog.cpp:1139 src/gui/AstroCalcDialog.cpp:2619
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "ดาวเคราะห์น้อย"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1129 src/gui/AstroCalcDialog.cpp:2610
+#: src/gui/AstroCalcDialog.cpp:1140 src/gui/AstroCalcDialog.cpp:2621
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr "พลูติโน"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1130 src/gui/AstroCalcDialog.cpp:2609
+#: src/gui/AstroCalcDialog.cpp:1141 src/gui/AstroCalcDialog.cpp:2620
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "ดาวหาง"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1131 src/gui/AstroCalcDialog.cpp:2611
+#: src/gui/AstroCalcDialog.cpp:1142 src/gui/AstroCalcDialog.cpp:2622
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr "ดาวเคราะห์แคระ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1132 src/gui/AstroCalcDialog.cpp:2612
+#: src/gui/AstroCalcDialog.cpp:1143 src/gui/AstroCalcDialog.cpp:2623
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr "คิวบีวันโอ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1133 src/gui/AstroCalcDialog.cpp:2613
+#: src/gui/AstroCalcDialog.cpp:1144 src/gui/AstroCalcDialog.cpp:2624
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr "วัตถุกระจายบนจานกำเนิดระบบสุริยะ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1134 src/gui/AstroCalcDialog.cpp:2614
+#: src/gui/AstroCalcDialog.cpp:1145 src/gui/AstroCalcDialog.cpp:2625
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr "วัตถุในเมฆของออร์ต"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1135 src/gui/AstroCalcDialog.cpp:2615
+#: src/gui/AstroCalcDialog.cpp:1146 src/gui/AstroCalcDialog.cpp:2626
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1136
+#: src/gui/AstroCalcDialog.cpp:1147
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "ดาวสว่าง (โชติมาตร <%1)"
 
-#: src/gui/AstroCalcDialog.cpp:1137
+#: src/gui/AstroCalcDialog.cpp:1148
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1138
+#: src/gui/AstroCalcDialog.cpp:1149
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1139
+#: src/gui/AstroCalcDialog.cpp:1150
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "กระจุกดาวสว่าง (โชติมาตร <%1)"
 
-#: src/gui/AstroCalcDialog.cpp:1141
+#: src/gui/AstroCalcDialog.cpp:1152
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "เนบิวลาสว่าง (โชติมาตร <%1)"
 
-#: src/gui/AstroCalcDialog.cpp:1143
+#: src/gui/AstroCalcDialog.cpp:1154
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "ดาราจักรสว่าง (โชติมาตร <%1)"
 
-#: src/gui/AstroCalcDialog.cpp:1299 src/gui/AstroCalcDialog.cpp:1703
-#: src/gui/AstroCalcDialog.cpp:1705
+#: src/gui/AstroCalcDialog.cpp:1310 src/gui/AstroCalcDialog.cpp:1714
+#: src/gui/AstroCalcDialog.cpp:1716
 msgid "Local Time"
 msgstr "เวลาท้องถิ่น"
 
-#: src/gui/AstroCalcDialog.cpp:1484
+#: src/gui/AstroCalcDialog.cpp:1495
 msgid "Magnitude vs. Time"
-msgstr ""
+msgstr "โชติมาตรต่อเวลา"
 
-#: src/gui/AstroCalcDialog.cpp:1487
+#: src/gui/AstroCalcDialog.cpp:1498
 msgid "Phase vs. Time"
-msgstr ""
+msgstr "ดิถีต่อเวลา"
 
-#: src/gui/AstroCalcDialog.cpp:1490
+#: src/gui/AstroCalcDialog.cpp:1501
 msgid "Distance vs. Time"
-msgstr ""
+msgstr "ระยะห่างต่อเวลา"
 
-#: src/gui/AstroCalcDialog.cpp:1493
+#: src/gui/AstroCalcDialog.cpp:1504
 msgid "Elongation vs. Time"
-msgstr ""
+msgstr "มุมห่างต่อเวลา"
 
-#: src/gui/AstroCalcDialog.cpp:1496
+#: src/gui/AstroCalcDialog.cpp:1507
 msgid "Angular size vs. Time"
-msgstr ""
+msgstr "ขนาดเชิงมุมต่อเวลา"
 
-#: src/gui/AstroCalcDialog.cpp:1499
+#: src/gui/AstroCalcDialog.cpp:1510
 msgid "Phase angle vs. Time"
-msgstr ""
+msgstr "มุมดิถีต่อเวลา"
 
-#: src/gui/AstroCalcDialog.cpp:1537
+#: src/gui/AstroCalcDialog.cpp:1548
 msgid "Date"
 msgstr ""
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:1547
+#: src/gui/AstroCalcDialog.cpp:1558
 msgid "Mm"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1559 src/gui/AstroCalcDialog.cpp:1594
+#: src/gui/AstroCalcDialog.cpp:1570 src/gui/AstroCalcDialog.cpp:1605
 msgid "Magnitude"
 msgstr "ความสว่าง"
 
-#: src/gui/AstroCalcDialog.cpp:1565 src/gui/AstroCalcDialog.cpp:1600
+#: src/gui/AstroCalcDialog.cpp:1576 src/gui/AstroCalcDialog.cpp:1611
 msgid "Phase"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1570 src/gui/AstroCalcDialog.cpp:1605
-#: src/ui_configurationDialog.h:1344
+#: src/gui/AstroCalcDialog.cpp:1581 src/gui/AstroCalcDialog.cpp:1616
+#: src/ui_configurationDialog.h:1350
 msgid "Distance"
 msgstr "ระยะห่าง"
 
-#: src/gui/AstroCalcDialog.cpp:1575 src/gui/AstroCalcDialog.cpp:1610
+#: src/gui/AstroCalcDialog.cpp:1586 src/gui/AstroCalcDialog.cpp:1621
 msgid "Elongation"
-msgstr ""
+msgstr "มุมห่าง"
 
-#: src/gui/AstroCalcDialog.cpp:1580 src/gui/AstroCalcDialog.cpp:1615
+#: src/gui/AstroCalcDialog.cpp:1591 src/gui/AstroCalcDialog.cpp:1626
 msgid "Angular size"
-msgstr ""
+msgstr "ขนาดเชิงมุม"
 
-#: src/gui/AstroCalcDialog.cpp:1585 src/gui/AstroCalcDialog.cpp:1620
+#: src/gui/AstroCalcDialog.cpp:1596 src/gui/AstroCalcDialog.cpp:1631
 msgid "Phase angle"
-msgstr ""
+msgstr "มุมดิถี"
 
-#: src/gui/AstroCalcDialog.cpp:1697
+#: src/gui/AstroCalcDialog.cpp:1708
 #, qt-format
 msgid "Now about %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1699
+#: src/gui/AstroCalcDialog.cpp:1710
 #, qt-format
 msgid "Passage of meridian at approximately %1"
-msgstr ""
+msgstr "ผ่านเมริเดียนประมาณ %1"
 
-#: src/gui/AstroCalcDialog.cpp:1722
+#: src/gui/AstroCalcDialog.cpp:1733
 msgid "Phenomenon"
 msgstr "ปรากฏการณ์"
 
-#: src/gui/AstroCalcDialog.cpp:1724
+#: src/gui/AstroCalcDialog.cpp:1735
 msgid "Object 1"
 msgstr "วัตถุ 1"
 
-#: src/gui/AstroCalcDialog.cpp:1725
+#: src/gui/AstroCalcDialog.cpp:1736
 msgid "Object 2"
 msgstr "วัตถุ 2"
 
-#: src/gui/AstroCalcDialog.cpp:1996
+#: src/gui/AstroCalcDialog.cpp:2007
 msgid "Save calculated phenomena as..."
 msgstr "บันทึกผลการคำนวณปรากฏการณ์เป็น..."
 
-#: src/gui/AstroCalcDialog.cpp:2035 src/gui/AstroCalcDialog.cpp:2210
-#: src/gui/AstroCalcDialog.cpp:2368
+#: src/gui/AstroCalcDialog.cpp:2046 src/gui/AstroCalcDialog.cpp:2221
+#: src/gui/AstroCalcDialog.cpp:2379
 msgid "Conjunction"
 msgstr "การร่วมทิศ"
 
-#: src/gui/AstroCalcDialog.cpp:2042
+#: src/gui/AstroCalcDialog.cpp:2053
 msgid "Opposition"
 msgstr "ตำแหน่งตรงข้าม"
 
-#: src/gui/AstroCalcDialog.cpp:2050
+#: src/gui/AstroCalcDialog.cpp:2061
 msgid "Transit"
 msgstr "การผ่านหน้า"
 
-#: src/gui/AstroCalcDialog.cpp:2052 src/gui/AstroCalcDialog.cpp:2215
-#: src/gui/AstroCalcDialog.cpp:2373
+#: src/gui/AstroCalcDialog.cpp:2063 src/gui/AstroCalcDialog.cpp:2226
+#: src/gui/AstroCalcDialog.cpp:2384
 msgid "Occultation"
 msgstr "การบัง"
 
-#: src/gui/AstroCalcDialog.cpp:2056
+#: src/gui/AstroCalcDialog.cpp:2067
 msgid "Eclipse"
 msgstr "อุปราคา"
 
-#: src/gui/AstroCalcDialog.cpp:2581
+#: src/gui/AstroCalcDialog.cpp:2592
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
-msgstr ""
+msgstr "ในเวลาหัวค่ำ"
 
-#: src/gui/AstroCalcDialog.cpp:2582
+#: src/gui/AstroCalcDialog.cpp:2593
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
-msgstr ""
+msgstr "ในเวลาเช้ามืด"
 
-#: src/gui/AstroCalcDialog.cpp:2583
+#: src/gui/AstroCalcDialog.cpp:2594
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
-msgstr ""
+msgstr "ประมาณเที่ยงคืน"
 
-#: src/gui/AstroCalcDialog.cpp:2584
+#: src/gui/AstroCalcDialog.cpp:2595
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
-msgstr ""
+msgstr "ในเวลาใด ๆ ของกลางคืน"
 
-#: src/gui/AstroCalcDialog.cpp:2603
+#: src/gui/AstroCalcDialog.cpp:2614
 msgid "Bright stars"
-msgstr ""
+msgstr "ดาวฤกษ์สว่าง"
 
-#: src/gui/AstroCalcDialog.cpp:2604 src/ui_viewDialog.h:2258
+#: src/gui/AstroCalcDialog.cpp:2615 src/ui_viewDialog.h:2258
 msgid "Bright nebulae"
 msgstr "เนบิวลาสว่าง"
 
@@ -3893,7 +3907,7 @@ msgstr ""
 msgid "Export bookmarks as..."
 msgstr ""
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1541
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1548
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "สคริปต์"
@@ -4080,7 +4094,7 @@ msgstr "วัตถุที่กำหนดเอง"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:92
 msgid "Asterisms"
-msgstr ""
+msgstr "ดาวเรียงเด่น"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
@@ -4747,7 +4761,7 @@ msgstr "โฟลเดอร์"
 msgid "&Choose"
 msgstr "เลือก"
 
-#: src/translations.h:423 src/ui_configurationDialog.h:1511
+#: src/translations.h:423 src/ui_configurationDialog.h:1518
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -5858,7 +5872,7 @@ msgstr "เกี่ยวกับ"
 msgid "Log"
 msgstr "บันทึก"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1376
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1383
 msgid "Edit keyboard shortcuts..."
 msgstr "แก้ปุ่มลัดแป้นพิมพ์..."
 
@@ -6138,7 +6152,7 @@ msgstr "ตรึงตำแหน่งไว้เมื่อพิกัด
 
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2487
 #: src/ui_viewDialog.h:2509 src/ui_viewDialog.h:2543
-#: src/ui_configurationDialog.h:1512 src/ui_configurationDialog.h:1523
+#: src/ui_configurationDialog.h:1519 src/ui_configurationDialog.h:1530
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "ตัวเลือก"
@@ -6284,11 +6298,11 @@ msgstr "การตั้งค่าสำหรับดาวตกทั่
 #: src/ui_viewDialog.h:2174
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
-msgstr ""
+msgstr "ดาวตก:"
 
 #: src/ui_viewDialog.h:2176 src/ui_viewDialog.h:2179
 msgid "The zenithal hourly rate for the sporadic meteors"
-msgstr ""
+msgstr "อัตราตกรายชั่วโมงที่จุดเหนือศีรษะสำหรับดาวตกทั่วไป"
 
 #: src/ui_viewDialog.h:2182
 msgid "Show planet orbits"
@@ -6296,7 +6310,7 @@ msgstr "แสดงวงโคจรของดาวเคราะห์"
 
 #: src/ui_viewDialog.h:2184
 msgid "Configure colors of orbit lines"
-msgstr ""
+msgstr "ปรับแต่งสีของเส้นแสดงวงโคจร"
 
 #: src/ui_viewDialog.h:2186
 msgid "Colors..."
@@ -6308,7 +6322,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2188
 msgid "Planets magnitude algorithm:"
-msgstr ""
+msgstr "ขั้นตอนวิธีการคำนวณโชติมาตรของดาวเคราะห์:"
 
 #: src/ui_viewDialog.h:2190
 msgid ""
@@ -6755,19 +6769,19 @@ msgstr "วิษุวัต (ของวัน)"
 
 #: src/ui_viewDialog.h:2475
 msgid "Solstices (J2000)"
-msgstr ""
+msgstr "จุดอายัน (J2000)"
 
 #: src/ui_viewDialog.h:2477
 msgid "Color of the solstice points (J2000.0)"
-msgstr ""
+msgstr "สีของจุดอายัน (J2000.0)"
 
 #: src/ui_viewDialog.h:2480
 msgid "Solstices (of date)"
-msgstr ""
+msgstr "จุดอายัน (ของวัน)"
 
 #: src/ui_viewDialog.h:2482
 msgid "Color of the solstice points (of date)"
-msgstr ""
+msgstr "สีของจุดอายัน (ของวัน)"
 
 #: src/ui_viewDialog.h:2485
 msgid "Projection"
@@ -6845,7 +6859,7 @@ msgstr "ค่าเป็นจุดภาพ"
 
 #: src/ui_viewDialog.h:2516
 msgid "Color of constellation lines"
-msgstr ""
+msgstr "สีของเส้นแสดงกลุ่มดาว"
 
 #: src/ui_viewDialog.h:2519
 msgid "Use native names for planets from current culture"
@@ -6869,7 +6883,7 @@ msgstr "เลือกเมื่อต้องการชื่อย่อ
 
 #: src/ui_viewDialog.h:2529
 msgid "Color of constellation names"
-msgstr ""
+msgstr "สีของชื่อกลุ่มดาว"
 
 #: src/ui_viewDialog.h:2531
 msgid "Show boundaries"
@@ -6877,23 +6891,23 @@ msgstr "แสดงขอบเขต"
 
 #: src/ui_viewDialog.h:2533
 msgid "Color of constellation boundaries"
-msgstr ""
+msgstr "สีของเส้นแบ่งเขตกลุ่มดาว"
 
 #: src/ui_viewDialog.h:2535
 msgid "Show asterism lines"
-msgstr ""
+msgstr "แสดงเส้นดาวเรียงเด่น"
 
 #: src/ui_viewDialog.h:2537
 msgid "Color of asterism lines"
-msgstr ""
+msgstr "สีของเส้นแสดงดาวเรียงเด่น"
 
 #: src/ui_viewDialog.h:2539
 msgid "Show asterism labels"
-msgstr ""
+msgstr "แสดงชื่อดาวเรียงเด่น"
 
 #: src/ui_viewDialog.h:2541
 msgid "Color of asterism names"
-msgstr ""
+msgstr "สีของชื่อดาวเรียงเด่น"
 
 #: src/ui_viewDialog.h:2544
 msgid "Visible"
@@ -6922,54 +6936,54 @@ msgstr "ภูมิทัศน์"
 msgid "Starlore"
 msgstr "ตำนานดาว"
 
-#: src/ui_configurationDialog.h:1263
+#: src/ui_configurationDialog.h:1269
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
-#: src/ui_configurationDialog.h:1265
+#: src/ui_configurationDialog.h:1271
 msgid "Language settings"
 msgstr "การตั้งค่าภาษา"
 
-#: src/ui_configurationDialog.h:1266
+#: src/ui_configurationDialog.h:1272
 msgid "Program Language"
 msgstr "ภาษาในโปรแกรม"
 
-#: src/ui_configurationDialog.h:1267
+#: src/ui_configurationDialog.h:1273
 msgid "Sky Culture Language"
 msgstr "ภาษาของกลุ่มดาวตามวัฒนธรรม"
 
-#: src/ui_configurationDialog.h:1269
+#: src/ui_configurationDialog.h:1275
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "คุณลักษณะนี้ยังไม่ได้รับการตรวจสอบอย่างละเอียด!"
 
-#: src/ui_configurationDialog.h:1271
+#: src/ui_configurationDialog.h:1277
 msgid "Ephemeris settings (experimental)"
-msgstr ""
+msgstr "การตั้งค่าอิเฟเมอริส (อยู่ระหว่างการทดลอง)"
 
-#: src/ui_configurationDialog.h:1272 src/ui_configurationDialog.h:1273
+#: src/ui_configurationDialog.h:1278 src/ui_configurationDialog.h:1279
 msgid "Not installed"
-msgstr ""
+msgstr "ไม่ได้ติดตั้ง"
 
-#: src/ui_configurationDialog.h:1275
+#: src/ui_configurationDialog.h:1281
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
 "DE431 ให้ข้อมูลตำแหน่งระหว่าง ค.ศ. -13000...+17000 ใช้สำหรับกรณีพิเศษเท่านั้น"
 
-#: src/ui_configurationDialog.h:1277
+#: src/ui_configurationDialog.h:1283
 msgid "Use DE431 (long-time data)"
 msgstr "ใช้ DE431 (ข้อมูลระยะยาว)"
 
-#: src/ui_configurationDialog.h:1279
+#: src/ui_configurationDialog.h:1285
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430 ให้ความแม่นยำสูงสุด เฉพาะ ค.ศ. 1550...2650"
 
-#: src/ui_configurationDialog.h:1281
+#: src/ui_configurationDialog.h:1287
 msgid "Use DE430 (high accuracy)"
 msgstr "ใช้ DE430 (ความแม่นยำสูง)"
 
-#: src/ui_configurationDialog.h:1283
+#: src/ui_configurationDialog.h:1289
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -6977,20 +6991,20 @@ msgstr ""
 "แนะนำให้ใช้ VSOP87 สำหรับช่วง ค.ศ.  -4000...+8000 เท่านั้น "
 "แต่ยังคงพอใช้ได้นอกช่วงเวลาดังกล่าว"
 
-#: src/ui_configurationDialog.h:1285
+#: src/ui_configurationDialog.h:1291
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr "โปรแกรมจะใช้ VSOP87/ELP2000-82B เมื่อไม่มีการติดตั้งหรือปิดใช้งาน"
 
-#: src/ui_configurationDialog.h:1286
+#: src/ui_configurationDialog.h:1292
 msgid "Default options"
 msgstr "ตัวเลือกปริยาย"
 
-#: src/ui_configurationDialog.h:1287
+#: src/ui_configurationDialog.h:1293
 msgid "Save View"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1289
+#: src/ui_configurationDialog.h:1295
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -6998,7 +7012,7 @@ msgstr ""
 "บันทึกการตั้งค่าที่คุณได้เปลี่ยนแปลงนี้ ให้เป็นแบบเดียวกันเมื่อเริ่ม "
 "Stellarium ในครั้งต่อไป"
 
-#: src/ui_configurationDialog.h:1291
+#: src/ui_configurationDialog.h:1297
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -7006,11 +7020,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "บันทึกการตั้งค่าต่าง ๆ"
 
-#: src/ui_configurationDialog.h:1293
+#: src/ui_configurationDialog.h:1299
 msgid "Restore the default settings that came with Stellarium"
 msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
 
-#: src/ui_configurationDialog.h:1295
+#: src/ui_configurationDialog.h:1301
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -7018,312 +7032,316 @@ msgstr "คืนค่าเดิมที่มาพร้อมกับ St
 msgid "Restore defaults"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
-#: src/ui_configurationDialog.h:1296
+#: src/ui_configurationDialog.h:1302
 msgid ""
 "Save either the current FOV and direction of view or all the current options "
 "for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
 
-#: src/ui_configurationDialog.h:1298
+#: src/ui_configurationDialog.h:1304
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1301
+#: src/ui_configurationDialog.h:1307
 msgid "The direction you're looking when Stellarium starts"
 msgstr "ทิศทางที่คุณต้องการเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:1303 src/ui_configurationDialog.h:1534
+#: src/ui_configurationDialog.h:1309 src/ui_configurationDialog.h:1541
 msgid "Selected object information"
 msgstr "ข้อมูลวัตถุที่เลือก"
 
-#: src/ui_configurationDialog.h:1305
+#: src/ui_configurationDialog.h:1311
 msgid "Display all information available"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: src/ui_configurationDialog.h:1307
+#: src/ui_configurationDialog.h:1313
 msgid "All available"
 msgstr "ทั้งหมดที่มี"
 
-#: src/ui_configurationDialog.h:1309
+#: src/ui_configurationDialog.h:1315
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:1311 plugins/Oculars/src/Oculars.cpp:2247
+#: src/ui_configurationDialog.h:1317 plugins/Oculars/src/Oculars.cpp:2247
 #: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "ไม่มี"
 
-#: src/ui_configurationDialog.h:1313
+#: src/ui_configurationDialog.h:1319
 msgid "Display less information"
 msgstr "แสดงข้อมูลโดยสังเขป"
 
-#: src/ui_configurationDialog.h:1315
+#: src/ui_configurationDialog.h:1321
 msgid "Short"
 msgstr "อย่างย่อ"
 
-#: src/ui_configurationDialog.h:1317
+#: src/ui_configurationDialog.h:1323
 msgid "Display user settings information"
 msgstr "แสดงข้อมูลตามการตั้งค่าโดยผู้ใช้"
 
-#: src/ui_configurationDialog.h:1319
+#: src/ui_configurationDialog.h:1325
 msgid "Customized"
 msgstr "ตามที่มีการปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1320
+#: src/ui_configurationDialog.h:1326
 msgid "Displayed fields"
 msgstr "รายละเอียดที่แสดง"
 
-#: src/ui_configurationDialog.h:1322 src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1328 src/ui_configurationDialog.h:1362
 msgid "Equatorial coordinates, equinox of date"
 msgstr "พิกัดศูนย์สูตร, วิษุวัตของวัน"
 
-#: src/ui_configurationDialog.h:1324
+#: src/ui_configurationDialog.h:1330
 msgid "Right ascension/Declination (of date)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน)"
 
-#: src/ui_configurationDialog.h:1325
+#: src/ui_configurationDialog.h:1331
 msgid "Supergalactic coordinates"
 msgstr "พิกัดมหาดาราจักร"
 
-#: src/ui_configurationDialog.h:1327
+#: src/ui_configurationDialog.h:1333
 msgid "The type of the object (star, planet, etc.)"
 msgstr "ชนิดของวัตถุ (ดาวฤกษ์, ดาวเคราะห์ ฯลฯ)"
 
-#: src/ui_configurationDialog.h:1330
+#: src/ui_configurationDialog.h:1336
 msgid "Absolute magnitude"
 msgstr "โชติมาตรสัมบูรณ์"
 
-#: src/ui_configurationDialog.h:1332
+#: src/ui_configurationDialog.h:1338
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "พิกัดสุริยวิถี, วิษุวัตของวัน (ใช้กับโลกเท่านั้น)"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1340
 msgid "Ecliptic coordinates (of date)"
 msgstr "พิกัดสุริยวิถี (ของวัน)"
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1342
 msgid "Angular or physical size"
 msgstr "ขนาดจริงหรือขนาดเชิงมุม"
 
-#: src/ui_configurationDialog.h:1338
+#: src/ui_configurationDialog.h:1344
 msgid "Size"
 msgstr "ขนาด"
 
-#: src/ui_configurationDialog.h:1340
+#: src/ui_configurationDialog.h:1346
 msgid "Horizontal coordinates"
 msgstr "พิกัดขอบฟ้า"
 
-#: src/ui_configurationDialog.h:1342
+#: src/ui_configurationDialog.h:1348
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Altitude/Azimuth"
 msgstr "มุมเงย/มุมทิศ"
 
-#: src/ui_configurationDialog.h:1343
+#: src/ui_configurationDialog.h:1349
 msgid "Catalog number(s)"
 msgstr "หมายเลขบัญชี"
 
-#: src/ui_configurationDialog.h:1345
+#: src/ui_configurationDialog.h:1351
 msgid "Galactic coordinates"
 msgstr "พิกัดดาราจักร"
 
-#: src/ui_configurationDialog.h:1347
+#: src/ui_configurationDialog.h:1353
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "พิกัดศูนย์สูตร, วิษุวัต J2000.0"
 
-#: src/ui_configurationDialog.h:1349
+#: src/ui_configurationDialog.h:1355
 msgid "Right ascension/Declination (J2000)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000)"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1358
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "พิกัดสุริยวิถี, วิษุวัต J2000.0"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1360
 msgid "Ecliptic coordinates (J2000)"
 msgstr "พิกัดสุริยวิถี (J2000)"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1364
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Hour angle/Declination"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
-#: src/ui_configurationDialog.h:1359
+#: src/ui_configurationDialog.h:1365
 msgid "Visual magnitude"
 msgstr "โชติมาตรปรากฏ"
 
-#: src/ui_configurationDialog.h:1361
+#: src/ui_configurationDialog.h:1367
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "3-letter IAU constellation abbreviation"
 msgstr "ตัวอักษรย่อ 3 ตัว ของกลุ่มดาวโดยไอเอยู"
 
-#: src/ui_configurationDialog.h:1363
+#: src/ui_configurationDialog.h:1369
 msgid "Constellation"
 msgstr "กลุ่มดาว"
 
-#: src/ui_configurationDialog.h:1365
+#: src/ui_configurationDialog.h:1371
 msgid "Spectral class, nebula type, etc."
 msgstr "ชนิดสเปกตรัม, ชนิดเนบิวลา, ฯลฯ"
 
-#: src/ui_configurationDialog.h:1367
+#: src/ui_configurationDialog.h:1373
 msgid "Additional information"
 msgstr "รายละเอียดเพิ่มเติม"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1374
 msgid "Sidereal time"
-msgstr ""
+msgstr "เวลาดาราคติ"
 
-#: src/ui_configurationDialog.h:1369
+#: src/ui_configurationDialog.h:1375
 msgid "Additional settings"
-msgstr ""
+msgstr "การตั้งค่าเพิ่มเติม"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1376
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
+msgstr "ใช้หน่วยวัด โชติมาตร/พิลิปดา^2 สำหรับความสว่างพื้นผิว"
+
+#: src/ui_configurationDialog.h:1377
+msgid "Use short notation for unit of measurement of surface brightness"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1371
+#: src/ui_configurationDialog.h:1378
 msgid "Control"
 msgstr "ควบคุม"
 
-#: src/ui_configurationDialog.h:1373
+#: src/ui_configurationDialog.h:1380
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "ใช้เมาส์ในการกวาด (ลากเมาส์) และซูม (หมุนล้อของเมาส์)"
 
-#: src/ui_configurationDialog.h:1375
+#: src/ui_configurationDialog.h:1382
 msgid "Enable mouse navigation"
 msgstr "เปิดใช้การนำทางด้วยเมาส์"
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1385
 msgid "Allow keyboard to pan and zoom"
 msgstr "ใช้แป้นพิมพ์เพื่อกวาดและซูม"
 
-#: src/ui_configurationDialog.h:1380
+#: src/ui_configurationDialog.h:1387
 msgid "Enable keyboard navigation"
 msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
 
-#: src/ui_configurationDialog.h:1382
+#: src/ui_configurationDialog.h:1389
 msgid "Hides the mouse cursor when inactive"
 msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1391
 msgid "Mouse cursor timeout:"
 msgstr "เวลาที่แสดงตัวชี้เมาส์:"
 
-#: src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1393
 msgid "seconds"
 msgstr "วินาที"
 
-#: src/ui_configurationDialog.h:1388
+#: src/ui_configurationDialog.h:1395
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "วันและเวลาเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1397
 msgid "Starts Stellarium at system clock date and time"
 msgstr "เริ่ม Stellarium ตามวันและเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1392
+#: src/ui_configurationDialog.h:1399
 msgid "System date and time"
 msgstr "ใช้วันที่และเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1394
+#: src/ui_configurationDialog.h:1401
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "ตั้งค่าเวลาของการจำลองเหตุการณ์หากวันที่ตรงกับการใช้งาน Stellarium"
 
-#: src/ui_configurationDialog.h:1396
+#: src/ui_configurationDialog.h:1403
 msgid "System date at:"
 msgstr "เวลาของระบบ:"
 
-#: src/ui_configurationDialog.h:1398
+#: src/ui_configurationDialog.h:1405
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:1400
+#: src/ui_configurationDialog.h:1407
 msgid "Other:"
 msgstr "อื่น ๆ :"
 
-#: src/ui_configurationDialog.h:1402
+#: src/ui_configurationDialog.h:1409
 msgid "Use current local date and time"
 msgstr "ใช้วันและเวลาท้องถิ่นในขณะนี้"
 
-#: src/ui_configurationDialog.h:1404
+#: src/ui_configurationDialog.h:1411
 msgid "use current"
 msgstr "ใช้ค่าขณะนี้"
 
-#: src/ui_configurationDialog.h:1406
+#: src/ui_configurationDialog.h:1413
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr "การตั้งค่าเหล่านี้จะควบคุมการแสดงวันที่และเวลาบนแถบด้านล่าง"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1415
 msgid "Display formats of date and time"
 msgstr "รูปแบบของวันที่และเวลา"
 
-#: src/ui_configurationDialog.h:1409
+#: src/ui_configurationDialog.h:1416
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "วันที่:"
 
-#: src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1417
 msgid "and time:"
 msgstr "และเวลา:"
 
-#: src/ui_configurationDialog.h:1411
+#: src/ui_configurationDialog.h:1418
 msgid "Time correction"
 msgstr "ค่าตรวจแก้เวลา"
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1421
 msgid "Edit equation"
 msgstr "แก้ไขสมการ"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1423
 msgid "Planetarium options"
 msgstr "ตัวเลือกท้องฟ้าจำลอง"
 
-#: src/ui_configurationDialog.h:1418
+#: src/ui_configurationDialog.h:1425
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "เปิดใช้งานตัวเลือกนี้เพื่อคำนวณมุมทิศที่วัดจากทิศใต้ไปทางทิศตะวันตก"
 
-#: src/ui_configurationDialog.h:1420
+#: src/ui_configurationDialog.h:1427
 msgid "Azimuth from South"
 msgstr "มุมทิศจากทิศใต้"
 
-#: src/ui_configurationDialog.h:1422
+#: src/ui_configurationDialog.h:1429
 msgid "Toggle display of the button for Digitized Sky Survey."
 msgstr "สลับการแสดงปุ่มสำหรับ Digitized Sky Survey"
 
-#: src/ui_configurationDialog.h:1424
+#: src/ui_configurationDialog.h:1431
 msgid "Show DSS button"
 msgstr "แสดงปุ่ม DSS"
 
-#: src/ui_configurationDialog.h:1426
+#: src/ui_configurationDialog.h:1433
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "บังส่วนที่อยู่นอกมุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1428
+#: src/ui_configurationDialog.h:1435
 msgid "Disc viewport"
 msgstr "มุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1430
+#: src/ui_configurationDialog.h:1437
 msgid "Align labels with the horizon"
 msgstr ""
 "วางป้ายชื่อให้อยู่ในแนวขนานกับขอบฟ้าเมื่อเลื่อนให้จุดจอมฟ้ามาอยู่กลางจอ"
 
-#: src/ui_configurationDialog.h:1432
+#: src/ui_configurationDialog.h:1439
 msgid "Gravity labels"
 msgstr "แนวการวางป้ายชื่อ"
 
-#: src/ui_configurationDialog.h:1434
+#: src/ui_configurationDialog.h:1441
 msgid "Use decimal degrees for coordinates"
 msgstr "ใช้องศาแบบทศนิยมสำหรับพิกัด"
 
-#: src/ui_configurationDialog.h:1436
+#: src/ui_configurationDialog.h:1443
 msgid "Use decimal degrees"
 msgstr "ใช้องศาแบบทศนิยม"
 
-#: src/ui_configurationDialog.h:1438
+#: src/ui_configurationDialog.h:1445
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -7331,11 +7349,11 @@ msgstr ""
 "ปรับภาพเป็นการสะท้อนผิวโค้งสำหรับการใช้ในการฉายภาพลงบนกระจกโค้งของระบบท้องฟ้า"
 "จำลองราคาประหยัด"
 
-#: src/ui_configurationDialog.h:1440
+#: src/ui_configurationDialog.h:1447
 msgid "Spheric mirror distortion"
 msgstr "ปรับภาพให้เหมือนสะท้อนกระจกโค้งทรงกลม"
 
-#: src/ui_configurationDialog.h:1442
+#: src/ui_configurationDialog.h:1449
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -7343,90 +7361,90 @@ msgstr ""
 "ใช้ตัวเลือกนี้เพื่อแสดงตำแหน่งในมุมมองจากผิวของดาว (แนะนำ) หากปิดการใช้งาน "
 "โปรแกรมจะแสดงตำแหน่งวัตถุท้องฟ้าเมื่อสังเกตจากศูนย์กลางดาว"
 
-#: src/ui_configurationDialog.h:1444
+#: src/ui_configurationDialog.h:1451
 msgid "Topocentric coordinates"
 msgstr "พิกัดเมื่อสังเกตจากผิวดาว"
 
-#: src/ui_configurationDialog.h:1446
+#: src/ui_configurationDialog.h:1453
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "เปิดการใช้งานบรรยากาศของวัตถุที่มีบรรยากาศโดยอัตโนมัติในหน้าต่างสถานที่"
 
-#: src/ui_configurationDialog.h:1448
+#: src/ui_configurationDialog.h:1455
 msgid "Auto-enabling for the atmosphere"
 msgstr "เปิดการใช้งานบรรยากาศโดยอัตโนมัติ"
 
-#: src/ui_configurationDialog.h:1450
+#: src/ui_configurationDialog.h:1457
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "สลับปุ่มพลิกภาพแนวตั้งและแนวนอน"
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1459
 msgid "Show flip buttons"
 msgstr "แสดงปุ่มพลิก"
 
-#: src/ui_configurationDialog.h:1454 src/ui_configurationDialog.h:1457
+#: src/ui_configurationDialog.h:1461 src/ui_configurationDialog.h:1464
 msgid "Hide other constellations when you click one"
 msgstr "ซ่อนกลุ่มดาวอื่นเมื่อคลิกที่กลุ่มดาวกลุ่มหนึ่ง"
 
-#: src/ui_configurationDialog.h:1461
+#: src/ui_configurationDialog.h:1468
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "สลับการแสดงภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1463
+#: src/ui_configurationDialog.h:1470
 msgid "Show nebula background button"
 msgstr "แสดงปุ่มภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1465
+#: src/ui_configurationDialog.h:1472
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr "การส่ายคือการแกว่งเล็ก ๆ ในแกนหมุนของโลก มีปริมาณไม่กี่พิลิปดา"
 
-#: src/ui_configurationDialog.h:1467
+#: src/ui_configurationDialog.h:1474
 msgid "Include nutation"
 msgstr "คิดผลจากการส่าย"
 
-#: src/ui_configurationDialog.h:1469
+#: src/ui_configurationDialog.h:1476
 msgid "Automatic change of landscape when planet is changed"
 msgstr "เปลี่ยนภูมิทัศน์โดยอัตโนมัติเมื่อเปลี่ยนดาวอันเป็นที่ตั้ง"
 
-#: src/ui_configurationDialog.h:1471
+#: src/ui_configurationDialog.h:1478
 msgid "Auto select landscapes"
 msgstr "เลือกภูมิทัศน์โดยอัตโนมัติ"
 
-#: src/ui_configurationDialog.h:1472
+#: src/ui_configurationDialog.h:1479
 msgid "Show bookmarks button"
 msgstr "แสดงปุ่มที่คั่นหน้า"
 
-#: src/ui_configurationDialog.h:1474
+#: src/ui_configurationDialog.h:1481
 msgid "A button to toggle equatorial J2000 grid"
-msgstr ""
+msgstr "ปุ่มสำหรับสลับการใช้กริดศูนย์สูตร J2000"
 
-#: src/ui_configurationDialog.h:1476
+#: src/ui_configurationDialog.h:1483
 msgid "Show ICRS grid button"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1478
-msgid "A button to toggle galactic grid"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1480
-msgid "Show galactic grid button"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1482
-msgid "A button to toggle ecliptic grid of date"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1484
-msgid "Show ecliptic grid button"
-msgstr ""
+msgstr "แสดงปุ่มกริด ICRS"
 
 #: src/ui_configurationDialog.h:1485
-msgid "Show constellation boundaries button"
-msgstr ""
+msgid "A button to toggle galactic grid"
+msgstr "ปุ่มสำหรับสลับการใช้กริดดาราจักร"
 
 #: src/ui_configurationDialog.h:1487
+msgid "Show galactic grid button"
+msgstr "แสดงปุ่มกริดดาราจักร"
+
+#: src/ui_configurationDialog.h:1489
+msgid "A button to toggle ecliptic grid of date"
+msgstr "ปุ่มสำหรับสลับการใช้กริดสุริยวิถีของวัน"
+
+#: src/ui_configurationDialog.h:1491
+msgid "Show ecliptic grid button"
+msgstr "แสดงปุ่มกริดสุริยวิถี"
+
+#: src/ui_configurationDialog.h:1492
+msgid "Show constellation boundaries button"
+msgstr "แสดงปุ่มเส้นแบ่งเขตกลุ่มดาว"
+
+#: src/ui_configurationDialog.h:1494
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -7434,96 +7452,96 @@ msgstr ""
 "เมื่อกำหนดให้ทำงาน, ปุ่ม \"ย่อภาพอัตโนมัติ\" "
 "จะถูกกำหนดเป็นค่าเริ่มต้นในทิศทางการมอง"
 
-#: src/ui_configurationDialog.h:1489
+#: src/ui_configurationDialog.h:1496
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:461
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "ซูมออกอัตโนมัติเพื่อกลับไปยังทิศทางของมุมมองเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1491
+#: src/ui_configurationDialog.h:1498
 msgid "Toggle the usage of background under GUI buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1493
+#: src/ui_configurationDialog.h:1500
 msgid "Use buttons background"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1494
+#: src/ui_configurationDialog.h:1501
 msgid "Indication for mount mode"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1495
+#: src/ui_configurationDialog.h:1502
 msgid "Screenshots"
 msgstr "ภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1496
+#: src/ui_configurationDialog.h:1503
 msgid "Screenshot Directory"
 msgstr "ไดเร็กทอรีที่บันทึกภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1498
+#: src/ui_configurationDialog.h:1505
 msgid "Invert colors"
 msgstr "กลับสี"
 
-#: src/ui_configurationDialog.h:1499
+#: src/ui_configurationDialog.h:1506
 msgid "Star catalog updates"
 msgstr "ปรับปรุงบัญชีดาว"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1508
 msgid "Click here to start downloading"
 msgstr "คลิกที่นี่เพื่อเริ่มการดาวน์โหลด"
 
-#: src/ui_configurationDialog.h:1503
+#: src/ui_configurationDialog.h:1510
 msgid "Download this file to view even more stars"
 msgstr "ดาวน์โหลดแฟ้มนี้เพื่อเพิ่มจำนวนดาวให้มากขึ้น"
 
-#: src/ui_configurationDialog.h:1505
+#: src/ui_configurationDialog.h:1512
 msgid "Restart the download"
 msgstr "เริ่มต้นการดาวน์โหลดใหม่"
 
-#: src/ui_configurationDialog.h:1507
+#: src/ui_configurationDialog.h:1514
 msgid "Retry"
 msgstr "ลองซ้ำ"
 
-#: src/ui_configurationDialog.h:1509
+#: src/ui_configurationDialog.h:1516
 msgid "Stop the download. You can always restart it later"
 msgstr "หยุดการดาวน์โหลด คุณสามารถเริ่มต้นใหม่ได้ในภายหลัง"
 
-#: src/ui_configurationDialog.h:1514
+#: src/ui_configurationDialog.h:1521
 msgid "Close window when script runs"
 msgstr "ปิดหน้าต่างเมื่อสคริปต์ทำงาน"
 
-#: src/ui_configurationDialog.h:1516
+#: src/ui_configurationDialog.h:1523
 msgid "Run the selected script"
 msgstr "สั่งให้สคริปต์ที่เลือกไว้ทำงาน"
 
-#: src/ui_configurationDialog.h:1520
+#: src/ui_configurationDialog.h:1527
 msgid "Stop a running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงานอยู่"
 
-#: src/ui_configurationDialog.h:1524
+#: src/ui_configurationDialog.h:1531
 msgid "Load at startup"
 msgstr "โหลดเมื่อเริ่มต้นระบบ"
 
-#: src/ui_configurationDialog.h:1525
+#: src/ui_configurationDialog.h:1532
 msgid "configure"
 msgstr "ปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1530
+#: src/ui_configurationDialog.h:1537
 msgid "Main"
 msgstr "หลัก"
 
-#: src/ui_configurationDialog.h:1532
+#: src/ui_configurationDialog.h:1539
 msgid "Information"
 msgstr "ข้อมูล"
 
-#: src/ui_configurationDialog.h:1537
+#: src/ui_configurationDialog.h:1544
 msgid "Navigation"
 msgstr "นำทาง"
 
-#: src/ui_configurationDialog.h:1539
+#: src/ui_configurationDialog.h:1546
 msgid "Tools"
 msgstr "เครื่องมือ"
 
-#: src/ui_configurationDialog.h:1543
+#: src/ui_configurationDialog.h:1550
 msgid "Plugins"
 msgstr "โปรแกรมเสริม"
 
@@ -7698,7 +7716,7 @@ msgstr "ตำแหน่ง"
 
 #: src/ui_astroCalcDialog.h:767
 msgid "Celestial bodies above horizon"
-msgstr ""
+msgstr "วัตถุท้องฟ้าที่อยู่เหนือขอบฟ้า"
 
 #: src/ui_astroCalcDialog.h:770
 msgid "Ephemeris"
@@ -7718,36 +7736,36 @@ msgstr "มุมเงยต่อเวลา"
 
 #: src/ui_astroCalcDialog.h:779
 msgid "Graphs"
-msgstr ""
+msgstr "กราฟ"
 
 #: src/ui_astroCalcDialog.h:781 src/ui_astroCalcDialog.h:841
 msgid "Graphs on the current year"
-msgstr ""
+msgstr "กราฟสำหรับปีปัจจุบัน"
 
 #: src/ui_astroCalcDialog.h:784
 msgctxt "What's Up Tonight"
 msgid "WUT"
-msgstr ""
+msgstr "คืนนี้มีอะไร"
 
 #: src/ui_astroCalcDialog.h:786
 msgid "What's Up Tonight"
-msgstr ""
+msgstr "คืนนี้มีอะไร"
 
 #: src/ui_astroCalcDialog.h:791
 msgid "Update positions"
-msgstr ""
+msgstr "อัปเดตตำแหน่ง"
 
 #: src/ui_astroCalcDialog.h:792 src/ui_astroCalcDialog.h:842
 msgid "Show objects brighter than magnitude:"
-msgstr ""
+msgstr "แสดงวัตถุที่สว่างกว่าโชติมาตร:"
 
 #: src/ui_astroCalcDialog.h:794
 msgid "List of objects above horizon"
-msgstr ""
+msgstr "รายชื่อวัตถุที่อยู่เหนือขอบฟ้า"
 
 #: src/ui_astroCalcDialog.h:796 src/ui_astroCalcDialog.h:820
 msgid "Use horizontal coordinates"
-msgstr ""
+msgstr "ใช้พิกัดขอบฟ้า"
 
 #: src/ui_astroCalcDialog.h:799 src/ui_astroCalcDialog.h:825
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -7774,7 +7792,7 @@ msgstr "บันทึกอิเฟเมอริส"
 #: src/ui_astroCalcDialog.h:805 src/ui_astroCalcDialog.h:832
 #: plugins/Satellites/src/ui_satellitesDialog.h:822
 msgid "Calculations require time, please be patient"
-msgstr ""
+msgstr "การคำนวณใช้เวลานาน กรุณาใช้ความอดทน"
 
 #: src/ui_astroCalcDialog.h:807
 msgid "Calculate ephemeris"
@@ -7794,15 +7812,15 @@ msgstr "แสดงวันที่ตรงเครื่องหมาย
 
 #: src/ui_astroCalcDialog.h:815
 msgid "Show dates"
-msgstr ""
+msgstr "แสดงวันที่"
 
 #: src/ui_astroCalcDialog.h:817
 msgid "Show magnitudes of current celestial body"
-msgstr ""
+msgstr "แสดงโชติมาตรของวัตถุปัจจุบัน"
 
 #: src/ui_astroCalcDialog.h:819
 msgid "Show magnitudes"
-msgstr ""
+msgstr "แสดงโชติมาตร"
 
 #: src/ui_astroCalcDialog.h:821
 msgid "Maximum allowed separation:"
@@ -7814,7 +7832,7 @@ msgstr "หน่วยองศาในระบบทศนิยม"
 
 #: src/ui_astroCalcDialog.h:826
 msgid "Calculate oppositions"
-msgstr ""
+msgstr "คำนวณวันที่อยู่ ณ ตำแหน่งตรงข้าม"
 
 #: src/ui_astroCalcDialog.h:827
 msgid "Between objects:"
@@ -7826,7 +7844,7 @@ msgstr "และ"
 
 #: src/ui_astroCalcDialog.h:829
 msgid "Cleanup of phenomena"
-msgstr ""
+msgstr "ล้างปรากฏการณ์"
 
 #: src/ui_astroCalcDialog.h:830
 msgid "Save phenomena"
@@ -7842,23 +7860,23 @@ msgstr "กรุณาเลือกวัตถุเพื่อแสดง
 
 #: src/ui_astroCalcDialog.h:837
 msgid "Second graph (yellow):"
-msgstr ""
+msgstr "กราฟที่สอง (สีเหลือง):"
 
 #: src/ui_astroCalcDialog.h:838
 msgid "First graph (red):"
-msgstr ""
+msgstr "กราฟแรก (สีแดง):"
 
 #: src/ui_astroCalcDialog.h:840
 msgid "Draw graphs"
-msgstr ""
+msgstr "วาดกราฟ"
 
 #: src/ui_astroCalcDialog.h:843
 msgid "Select a category:"
-msgstr ""
+msgstr "เลือกหมวด:"
 
 #: src/ui_astroCalcDialog.h:844
 msgid "Matching objects:"
-msgstr ""
+msgstr "วัตถุที่พบ:"
 
 #: src/ui_astroCalcDialog.h:845
 msgid "Show objects which are up:"
@@ -7898,7 +7916,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:476 src/ui_orbitColorsDialog.h:378
 msgid "Color settings"
-msgstr ""
+msgstr "การตั้งค่าสี"
 
 #: src/ui_dsoColorsDialog.h:478
 msgid "Colors of labels and markers of deep-sky objects"
@@ -8079,7 +8097,7 @@ msgstr "สีของเครื่องหมายแสดงซากซ
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
-msgstr ""
+msgstr "รูปแบบของสีวงโคจร"
 
 #: src/ui_orbitColorsDialog.h:381
 msgid "One color for all orbits"
@@ -8087,7 +8105,7 @@ msgstr "สีเดียวสำหรับทุกวงโคจร"
 
 #: src/ui_orbitColorsDialog.h:382
 msgid "Separate colors for orbits by object type"
-msgstr ""
+msgstr "สีต่างกันสำหรับวงโคจรของวัตถุต่างชนิด"
 
 #: src/ui_orbitColorsDialog.h:383
 msgid "Separate colors for orbits of major planets only"
@@ -8099,7 +8117,7 @@ msgstr "สีของวงโคจรสำหรับวัตถุใน
 
 #: src/ui_orbitColorsDialog.h:386
 msgid "Color of comet orbits"
-msgstr ""
+msgstr "สีของวงโคจรดาวหาง"
 
 #: src/ui_orbitColorsDialog.h:388
 msgid "Orbit of Uranus"
@@ -9284,77 +9302,77 @@ msgid ""
 msgstr "แฟ้ม satellites.json แฟ้มเก่าเข้ากันไม่ได้แล้ว กำลังใช้แฟ้มปริยาย"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2006
+#: plugins/Satellites/src/Satellites.cpp:2010
 msgid "visual"
 msgstr "เห็นได้"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2008
+#: plugins/Satellites/src/Satellites.cpp:2012
 msgid "scientific"
 msgstr "วิทยาศาสตร์"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2010
+#: plugins/Satellites/src/Satellites.cpp:2014
 msgid "communications"
 msgstr "สื่อสาร"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2012
+#: plugins/Satellites/src/Satellites.cpp:2016
 msgid "navigation"
 msgstr "นำทาง"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2014
+#: plugins/Satellites/src/Satellites.cpp:2018
 msgid "amateur"
 msgstr "วิทยุสมัครเล่น"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2016
+#: plugins/Satellites/src/Satellites.cpp:2020
 msgid "weather"
 msgstr "สภาพอากาศ"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2018
+#: plugins/Satellites/src/Satellites.cpp:2022
 msgid "geostationary"
 msgstr "ค้างฟ้า"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2020
+#: plugins/Satellites/src/Satellites.cpp:2024
 msgid "non-operational"
 msgstr "ยุติการทำงาน"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2022
+#: plugins/Satellites/src/Satellites.cpp:2026
 msgid "gps"
 msgstr "จีพีเอส"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2024
+#: plugins/Satellites/src/Satellites.cpp:2028
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2026
+#: plugins/Satellites/src/Satellites.cpp:2030
 msgid "galileo"
 msgstr "กาลิเลโอ"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2028
+#: plugins/Satellites/src/Satellites.cpp:2032
 msgid "iridium"
 msgstr "อิริเดียม"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2030
+#: plugins/Satellites/src/Satellites.cpp:2034
 msgid "stations"
 msgstr "สถานีอวกาศ"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2036
 msgid "education"
 msgstr "การศึกษา"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2038
 msgid "observatory"
 msgstr "หอสังเกตการณ์"
 
@@ -9364,57 +9382,57 @@ msgstr "หอสังเกตการณ์"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2044
+#: plugins/Satellites/src/Satellites.cpp:2048
 msgid "The Hubble Space Telescope"
 msgstr "กล้องโทรทรรศน์อวกาศฮับเบิล"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2046
+#: plugins/Satellites/src/Satellites.cpp:2050
 msgid "The International Space Station"
 msgstr "สถานีอวกาศนานาชาติ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2052
 msgid "China's first space station"
 msgstr "สถานีอวกาศแรกของจีน"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2054
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2056
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2058
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2062
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2064
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2062
+#: plugins/Satellites/src/Satellites.cpp:2066
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2068
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2070
 msgid "TIANGONG 1"
 msgstr ""
 

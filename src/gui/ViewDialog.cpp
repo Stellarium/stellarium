@@ -1512,9 +1512,9 @@ void ViewDialog::updateDefaultLandscape()
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
-	bool b = lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID();
-	ui->useAsDefaultLandscapeCheckBox->setChecked(b);
-	ui->useAsDefaultLandscapeCheckBox->setEnabled(!b);
+	bool isDefault = lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID();
+	ui->useAsDefaultLandscapeCheckBox->setChecked(isDefault);
+	ui->useAsDefaultLandscapeCheckBox->setEnabled(!isDefault);
 }
 
 void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)

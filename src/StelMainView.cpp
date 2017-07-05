@@ -99,6 +99,7 @@ public:
 		//because we always draw the full background,
 		//lets skip drawing the system background
 		setAttribute(Qt::WA_OpaquePaintEvent);
+		setAttribute(Qt::WA_AcceptTouchEvents);
 		setAutoFillBackground(false);
 	}
 
@@ -554,6 +555,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  cursorTimeout(-1.f), flagCursorTimeout(false), maxfps(10000.f)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
+	setAttribute(Qt::WA_AcceptTouchEvents);
 	setAutoFillBackground(false);
 
 	configuration = settings;

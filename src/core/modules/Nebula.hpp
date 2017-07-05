@@ -307,6 +307,7 @@ private:
 	static TypeGroup typeFilters;
 
 	static bool flagUseArcsecSurfaceBrightness;
+	static bool flagUseShortNotationSurfaceBrightness;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)

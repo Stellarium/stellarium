@@ -206,7 +206,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	if ((core->getCurrentLocation().planetName=="Earth") && (separation_angle < touch_angle))
 	{
 		float dark_angle = moon_angular_size - sun_angular_size;
-		float min = 0.0001f;  // so bright stars show up at total eclipse
+		float min = 0.0025f; // 0.005f; // 0.0001f;  // so bright stars show up at total eclipse
 		if (dark_angle < 0.f)
 		{
 			// annular eclipse

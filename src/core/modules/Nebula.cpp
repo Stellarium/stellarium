@@ -86,6 +86,7 @@ bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 bool Nebula::flagUseArcsecSurfaceBrightness = false;
+bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -237,9 +238,20 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		QString sb = q_("Surface brightness");
 		QString ae = q_("after extinction");
-		QString mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
-		if (flagUseArcsecSurfaceBrightness)
-			mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
+		QString mu;
+		if (flagUseShortNotationSurfaceBrightness)
+		{
+			mu = QString("<sup>m</sup>/%1'").arg(QChar(0x2B1C));
+			if (flagUseArcsecSurfaceBrightness)
+				mu = QString("<sup>m</sup>/%1\"").arg(QChar(0x2B1C));
+		}
+		else
+		{
+			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcmin"));
+			if (flagUseArcsecSurfaceBrightness)
+				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
+
+		}
 
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted surface brightness much below horizon where model is meaningless.
 		{
