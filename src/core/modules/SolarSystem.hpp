@@ -858,14 +858,17 @@ public:
 	double getEclipseFactor(const StelCore *core) const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
-	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
-	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
+	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).
+	void computePositions(double dateJDE, PlanetP observerPlanet);
 
 	//! Get the list of all the bodies of the solar system.	
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
+
+	//! Get lighttime corrected solar position (essential to draw the sun during solar eclipse and compute things like eclipse factor etc, until we get aberration working.)
+	const Vec3d getLightTimeSunPosition() const { return lightTimeSunPosition; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -982,6 +985,8 @@ private:
 	QHash<QString, QString> planetNativeNamesMap;
 	QStringList minorBodies;
 
+	Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
+							// Direct shift caused problems (LP:#1699648), circumvented with this construction.
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
 	// while the planets don't own their orbit objects.
 	// Would it not be better to hand over the orbit object ownership to the Planet object?

@@ -286,7 +286,9 @@ private:
 	bool flagDecimalDegrees;
 	bool flagSemiTransparency;
 	bool flagHideGridsLines;
-	bool flagGridlinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
+	bool flagGridLinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
+	bool flagConstellationLines;
+	bool flagAsterismLines;
 	bool flipVert;
 	bool flipHorz;
 

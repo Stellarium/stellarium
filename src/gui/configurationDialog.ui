@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>568</width>
-    <height>635</height>
+    <height>654</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -835,6 +835,13 @@
               <widget class="QCheckBox" name="checkBoxUMSurfaceBrightness">
                <property name="text">
                 <string>Use unit of measurement mag/arcsec^2 for surface brightness</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxUMShortNotationSurfaceBrightness">
+               <property name="text">
+                <string>Use short notation for unit of measurement of surface brightness</string>
                </property>
               </widget>
              </item>
