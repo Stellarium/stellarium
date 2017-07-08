@@ -1069,6 +1069,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
 			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toDouble();
+
+			// Moon designation (planet index + IAU moon number)
+			QString moonDesignation = pd.value(secname+"/iau_moon_number", "").toString();
+			if (!moonDesignation.isEmpty())
+			{
+				p->setIAUMoonNumber(moonDesignation);
+			}
 		}
 
 
