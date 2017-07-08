@@ -52,7 +52,8 @@ public:
 		CColumnRA,		//! right ascension
 		CColumnDec,		//! declination
 		CColumnMagnitude,	//! magnitude
-		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnAngularSize,	//! angular size
+		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)		
 		CColumnType,		//! type of object
 		CColumnCount		//! total number of columns
 	};
@@ -282,7 +283,7 @@ private:
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
-		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnExtra)
+		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnAngularSize || column == AstroCalcDialog::CColumnExtra)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}

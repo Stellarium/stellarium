@@ -426,7 +426,7 @@ double Nebula::getAngularSize(const StelCore *) const
 {
 	float size = majorAxisSize;
 	if (majorAxisSize!=minorAxisSize || minorAxisSize>0)
-		size = (majorAxisSize+minorAxisSize)/2.f;
+		size = majorAxisSize+minorAxisSize;
 	return size*0.5f;
 }
 
