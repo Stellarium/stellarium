@@ -163,6 +163,24 @@ void MinorPlanet::setProvisionalDesignation(QString designation)
 	provisionalDesignationHtml = renderProvisionalDesignationinHtml(designation);
 }
 
+QString MinorPlanet::getEnglishName() const
+{
+	QString r = englishName;
+	if (minorPlanetNumber)
+		r = QString("(%1) %2").arg(minorPlanetNumber).arg(englishName);
+
+	return r;
+}
+
+QString MinorPlanet::getNameI18n() const
+{
+	QString r = nameI18;
+	if (minorPlanetNumber)
+		r = QString("(%1) %2").arg(minorPlanetNumber).arg(nameI18);
+
+	return r;
+}
+
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
@@ -178,10 +196,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Name)
 	{
 		oss << "<h2>";
-		if (minorPlanetNumber)
-			oss << QString("(%1) ").arg(minorPlanetNumber);
 		if (nameIsProvisionalDesignation)
+		{
+			if (minorPlanetNumber)
+				oss << QString("(%1) ").arg(minorPlanetNumber);
 			oss << provisionalDesignationHtml;
+		}
 		else
 			oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
