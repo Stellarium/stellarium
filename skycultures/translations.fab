@@ -44,6 +44,12 @@ _("Titan");
 _("Hyperion");
 _("Iapetus");
 _("Phoebe");
+_("Atlas");
+_("Helene");
+_("Telesto");
+_("Calypso");
+_("Pandora");
+_("Pan");
 _("Neptune");
 _("Uranus");
 _("Miranda");
@@ -69,12 +75,16 @@ _("Psamathe");
 _("Sao");
 _("Laomedeia");
 _("Neso");
-_("Metis (moon)");
-_("Prometheus (moon)");
-_("Epimetheus (moon)");
-_("Bianca (moon)");
+# TRANSLATORS: Asteroid (9) Metis and moon of Jupiter (XVI)
+_("Metis");
+# TRANSLATORS: Asteroid (1809) Prometheus and moon of Saturn (XVI)
+_("Prometheus");
+# TRANSLATORS: Asteroid (1810) Epimetheus and moon of Saturn (XI)
+_("Epimetheus");
+# TRANSLATORS: Asteroid (218) Bianca and moon of Uranus (VIII)
+_("Bianca");
 # TRANSLATORS: Moon of Pluto (III)
-_("Hydra (moon)");
+_("Hydra");
 _("Solar System Observer");
 _("Earth Observer");
 # TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
@@ -104,7 +114,7 @@ _("Varda");
 
 
 #
-# Asteroids that are not in the default ssystem.ini
+# Asteroids that are not in the default ssystem_minor.ini
 #
 # TRANSLATORS: Asteroid (5) Astraea
 _("Astraea");
@@ -114,8 +124,6 @@ _("Hebe");
 _("Iris");
 # TRANSLATORS: Asteroid (8) Flora
 _("Flora");
-# TRANSLATORS: Asteroid (9) Metis and moon of Jupiter
-_("Metis");
 # TRANSLATORS: Asteroid (10) Hygiea
 _("Hygiea");
 # TRANSLATORS: Asteroid (41) Daphne
@@ -138,16 +146,10 @@ _("Sisyphus");
 _("Daedalus");
 # TRANSLATORS: Asteroid (1566) Icarus
 _("Icarus");
-# TRANSLATORS: Asteroid (1809) Prometheus
-_("Prometheus");
-# TRANSLATORS: Asteroid (1810) Epimetheus
-_("Epimetheus");
 # TRANSLATORS: Asteroid (951) Gaspra
 _("Gaspra");
 # TRANSLATORS: Asteroid (243) Ida
 _("Ida");
-# TRANSLATORS: Asteroid (218) Bianca
-_("Bianca");
 # TRANSLATORS: Asteroid (3753) Cruithne
 _("Cruithne")
 # TRANSLATORS: Asteroid (5261) Eureka

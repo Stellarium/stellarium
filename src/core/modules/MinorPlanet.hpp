@@ -77,8 +77,8 @@ public:
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overriden to handle the problem with name conflicts.
 	virtual void translateName(const StelTranslator& trans);
-	virtual QString getEnglishName(void) const {return englishName;}
-	virtual QString getNameI18n(void) const {return nameI18;}
+	virtual QString getEnglishName(void) const;
+	virtual QString getNameI18n(void) const;
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
