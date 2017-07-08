@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-23 21:18+0700\n"
-"PO-Revision-Date: 2017-06-20 16:14+0000\n"
+"PO-Revision-Date: 2017-07-07 10:55+0000\n"
 "Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-27 05:20+0000\n"
-"X-Generator: Launchpad (build 18416)\n"
+"X-Launchpad-Export-Date: 2017-07-08 05:07+0000\n"
+"X-Generator: Launchpad (build 18419)\n"
 "Language: es_ES\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -452,15 +452,15 @@ msgstr "Después de la extinción"
 #: src/gui/AstroCalcDialog.cpp:468 src/gui/AstroCalcDialog.cpp:470
 msgctxt "magnitude"
 msgid "mag"
-msgstr ""
+msgstr "mag"
 
 #: src/core/modules/Nebula.cpp:250 src/gui/AstroCalcDialog.cpp:468
 msgid "arcmin"
-msgstr ""
+msgstr "minutos de arco"
 
 #: src/core/modules/Nebula.cpp:252 src/gui/AstroCalcDialog.cpp:470
 msgid "arcsec"
-msgstr ""
+msgstr "arcseg"
 
 #: src/core/modules/Nebula.cpp:266 src/core/modules/Nebula.cpp:274
 #, qt-format
@@ -7331,6 +7331,8 @@ msgstr ""
 #: src/ui_configurationDialog.h:1377
 msgid "Use short notation for unit of measurement of surface brightness"
 msgstr ""
+"Utilizar la notación corta para la unidad de medida del brillo de la "
+"superficie"
 
 #: src/ui_configurationDialog.h:1378
 msgid "Control"
