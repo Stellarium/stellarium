@@ -287,13 +287,28 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << "<br>";
 	}
 
-	float aSize = 2.*getAngularSize(core)*M_PI/180.;
-	if (flags&Size && aSize>1e-6)
+	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+	if (flags&Size && angularSize>=4.8e-7)
 	{
-		if (withDecimalDegree)
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(aSize,5,false,true)) << "<br>";
+		if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+		{
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1, scaled up to: %2")
+				       .arg(StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true))
+				       .arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			else
+				oss << q_("Apparent diameter: %1, scaled up to: %2")
+				       .arg(StelUtils::radToDmsStr(angularSize / sphereScale, true))
+				       .arg(StelUtils::radToDmsStr(angularSize, true));
+		}
 		else
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+		{
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			else
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+		}
+		oss << "<br>";
 	}
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days

@@ -292,6 +292,8 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		//TRANSLATORS: magnitude
 		positionsHeader << q_("mag");
 	}
+	//TRANSLATORS: angular size, arcminutes
+	positionsHeader << QString("%1, '").arg(q_("A.S."));
 	if (celType==170)
 	{
 		//TRANSLATORS: separation, arcseconds
@@ -437,7 +439,7 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 void AstroCalcDialog::currentCelestialPositions()
 {
 	float ra, dec;	
-	QString raStr, decStr, extra, celObjName = "", celObjId = "";
+	QString raStr, decStr, extra, angularSize, celObjName = "", celObjId = "";
 
 	initListCelestialPositions();
 
@@ -511,6 +513,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (extra.toFloat()>90.f)
 					extra = QChar(0x2014);
 
+				// Convert to arcminutes the average angular size of deep-sky object
+				angularSize = QString::number(obj->getAngularSize(core)*120.f, 'f', 3);
+				if (angularSize.toFloat()<0.01f)
+					angularSize = QChar(0x2014);
+
 				treeItem->setText(CColumnName, dsoName);
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
@@ -518,6 +525,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
 				treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, angularSize);
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, q_("Average angular size"));
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, mu);
@@ -559,6 +569,12 @@ void AstroCalcDialog::currentCelestialPositions()
 				}
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
+
+				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
+				angularSize = QString::number(planet->getAngularSize(core)*120.f, 'f', 4);
+				if (angularSize.toFloat()<1e-4 || planet->getPlanetType()==Planet::isComet)
+					angularSize = QChar(0x2014);
+
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, planet->getNameI18n());				
 				treeItem->setText(CColumnRA, raStr);
@@ -567,6 +583,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
 				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, angularSize);
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, q_("Angular size (with rings, if any)"));
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
@@ -650,6 +669,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
 				treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, QChar(0x2014)); // No angular size of stars!
+				treeItem->setToolTip(CColumnAngularSize, "");
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
