@@ -219,7 +219,8 @@ Planet::Planet(const QString& englishName,
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
-	  gl(Q_NULLPTR)
+	  gl(Q_NULLPTR),
+	  iauMoonNumber("")
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
@@ -329,6 +330,14 @@ void Planet::translateName(const StelTranslator& trans)
 	}
 }
 
+void Planet::setIAUMoonNumber(QString designation)
+{
+	if (!iauMoonNumber.isEmpty())
+		return;
+
+	iauMoonNumber = designation;
+}
+
 QString Planet::getEnglishName() const
 {
 	return englishName;
@@ -353,6 +362,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
+		if (!iauMoonNumber.isEmpty())
+			oss << QString(" (%1)").arg(iauMoonNumber);
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)

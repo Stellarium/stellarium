@@ -233,6 +233,9 @@ public:
 
 	void setNativeName(QString planet) { nativeName = planet; }
 
+	//! set the IAU moon number (designation of the moon), if any.
+	void setIAUMoonNumber(QString designation);
+
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
 	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
@@ -555,6 +558,8 @@ protected:
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 
 private:
+	QString iauMoonNumber;
+
 	// Shader-related variables
 	struct PlanetShaderVars {
 		// Vertex attributes
