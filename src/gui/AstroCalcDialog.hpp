@@ -263,11 +263,16 @@ private:
 		if (column == AstroCalcDialog::CColumnName)
 		{
 			QRegExp dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			QRegExp mp("^[(](\\d+)[)]\\s(.+)$");
 			int a = 0, b = 0;
 			if (dso.exactMatch(text(column)))
 				a = dso.capturedTexts().at(2).toInt();
+			if (a==0 && mp.exactMatch(text(column)))
+				a = mp.capturedTexts().at(1).toInt();
 			if (dso.exactMatch(other.text(column)))
 				b = dso.capturedTexts().at(2).toInt();
+			if (b==0 && mp.exactMatch(other.text(column)))
+				b = mp.capturedTexts().at(1).toInt();
 			if (a>0 && b>0)
 				return a < b;
 			else
