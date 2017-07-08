@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-23 21:18+0700\n"
-"PO-Revision-Date: 2017-06-25 06:40+0000\n"
-"Last-Translator: sunshuwei <Unknown>\n"
+"PO-Revision-Date: 2017-07-07 09:05+0000\n"
+"Last-Translator: Allen Zhong <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-27 05:24+0000\n"
-"X-Generator: Launchpad (build 18416)\n"
+"X-Launchpad-Export-Date: 2017-07-08 05:07+0000\n"
+"X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
 #: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
@@ -31,7 +31,7 @@ msgstr "类型: <b>%1</b>"
 
 #: src/core/modules/CustomObject.cpp:79
 msgid "custom marker"
-msgstr "标识"
+msgstr "自定义标识"
 
 #: src/core/modules/CustomObject.cpp:81
 msgid "custom object"
@@ -161,7 +161,7 @@ msgstr "二至圈"
 
 #: src/core/modules/GridLinesMgr.cpp:696
 msgid "Circumpolar Circle"
-msgstr "极地圈"
+msgstr "拱极圈"
 
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:892 src/core/modules/GridLinesMgr.cpp:901
@@ -298,15 +298,15 @@ msgstr "岁差圈"
 
 #: src/core/modules/GridLinesMgr.cpp:1250
 msgid "Colure Lines"
-msgstr "彩色线"
+msgstr "至圈线"
 
 #: src/core/modules/GridLinesMgr.cpp:1251
 msgid "Circumpolar Circles"
-msgstr "极地圈"
+msgstr "拱极圈"
 
 #: src/core/modules/GridLinesMgr.cpp:1252
 msgid "Celestial J2000 poles"
-msgstr "天极（J2000）"
+msgstr "天极(J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1253
 msgid "Celestial poles"
@@ -318,7 +318,7 @@ msgstr "天顶和天底"
 
 #: src/core/modules/GridLinesMgr.cpp:1255
 msgid "Ecliptic J2000 poles"
-msgstr "黄极（J2000）"
+msgstr "黄极(J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
@@ -334,11 +334,11 @@ msgstr "超星系坐标极点"
 
 #: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
-msgstr "昼夜平分点（ J2000）"
+msgstr "春分点(J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
-msgstr "昼夜平分点"
+msgstr "春分点"
 
 #: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
@@ -447,15 +447,15 @@ msgstr "消光后"
 #: src/gui/AstroCalcDialog.cpp:468 src/gui/AstroCalcDialog.cpp:470
 msgctxt "magnitude"
 msgid "mag"
-msgstr ""
+msgstr "星等"
 
 #: src/core/modules/Nebula.cpp:250 src/gui/AstroCalcDialog.cpp:468
 msgid "arcmin"
-msgstr ""
+msgstr "角分"
 
 #: src/core/modules/Nebula.cpp:252 src/gui/AstroCalcDialog.cpp:470
 msgid "arcsec"
-msgstr ""
+msgstr "角秒"
 
 #: src/core/modules/Nebula.cpp:266 src/core/modules/Nebula.cpp:274
 #, qt-format
@@ -1207,7 +1207,7 @@ msgstr "轴自行"
 #: src/core/modules/StarWrapper.cpp:292 src/core/modules/StarWrapper.cpp:294
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr ""
+msgstr "毫角秒"
 
 #: src/core/modules/StarWrapper.cpp:293
 msgid "Position angle of the proper motion"
@@ -2703,25 +2703,25 @@ msgstr "本地真太阳时"
 #: src/gui/StelGuiItems.cpp:644
 msgctxt "unit of measurement"
 msgid "min/s"
-msgstr ""
+msgstr "分/秒"
 
 #. TRANSLATORS: unit of measurement: hours per second
 #: src/gui/StelGuiItems.cpp:652
 msgctxt "unit of measurement"
 msgid "hr/s"
-msgstr ""
+msgstr "时/秒"
 
 #. TRANSLATORS: unit of measurement: days per second
 #: src/gui/StelGuiItems.cpp:658
 msgctxt "unit of measurement"
 msgid "d/s"
-msgstr ""
+msgstr "天/秒"
 
 #. TRANSLATORS: unit of measurement: years per second
 #: src/gui/StelGuiItems.cpp:664
 msgctxt "unit of measurement"
 msgid "yr/s"
-msgstr ""
+msgstr "年/秒"
 
 #: src/gui/StelGuiItems.cpp:666 src/gui/StelGuiItems.cpp:668
 msgid "Simulation speed"
@@ -3214,12 +3214,12 @@ msgstr "星等"
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:298
 msgid "sep."
-msgstr ""
+msgstr "张角"
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:303
 msgid "per."
-msgstr ""
+msgstr "周期"
 
 #: src/gui/AstroCalcDialog.cpp:303
 msgctxt "days"
@@ -3229,7 +3229,7 @@ msgstr "天"
 #. TRANSLATORS: distance, AU
 #: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:745
 msgid "dist."
-msgstr ""
+msgstr "距离"
 
 #: src/gui/AstroCalcDialog.cpp:308 src/gui/AstroCalcDialog.cpp:534
 #: src/gui/AstroCalcDialog.cpp:745 src/gui/AstroCalcDialog.cpp:781
@@ -3241,7 +3241,7 @@ msgstr "天文单位"
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:313
 msgid "P.M."
-msgstr ""
+msgstr "进动"
 
 #: src/gui/AstroCalcDialog.cpp:313
 msgctxt "arcsecond per year"
@@ -6482,7 +6482,7 @@ msgstr "分至圈颜色"
 
 #: src/ui_viewDialog.h:2347
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
-msgstr "显示颜色（通过极点和昼夜等分点的大圆）"
+msgstr "显示至圈（通过极点和二分二至点的大圈）"
 
 #: src/ui_viewDialog.h:2349
 msgid "Colures"
@@ -6562,7 +6562,7 @@ msgstr "天顶和天底颜色"
 
 #: src/ui_viewDialog.h:2401
 msgid "Color of circumpolar circles"
-msgstr "极地圈颜色"
+msgstr "拱极圈颜色"
 
 #: src/ui_viewDialog.h:2404
 msgid "Show celestial poles of J2000.0."
@@ -6580,7 +6580,7 @@ msgstr "这些圆圈限定了总是保持在数学水平线之上（分别在下
 
 #: src/ui_viewDialog.h:2410
 msgid "Circumpolar circles"
-msgstr "极地圈"
+msgstr "拱极圈"
 
 #: src/ui_viewDialog.h:2412
 msgid "Color of precession circles"
@@ -6614,7 +6614,7 @@ msgstr "赤道网格颜色（J2000.0）"
 
 #: src/ui_viewDialog.h:2430
 msgid "Color of the equinox points (J2000.0)"
-msgstr "昼夜平分点颜色（J2000.0）"
+msgstr "春分点颜色(J2000)"
 
 #: src/ui_viewDialog.h:2433
 msgid "Ecliptical coordinates for J2000.0."
@@ -6660,7 +6660,7 @@ msgstr "赤道网格的颜色（当前）"
 
 #: src/ui_viewDialog.h:2460
 msgid "Equinoxes (J2000)"
-msgstr "昼夜平分点（J2000）"
+msgstr "二至点(J2000)"
 
 #: src/ui_viewDialog.h:2462
 msgid "Color of the ecliptical grid (of date)"
@@ -6672,7 +6672,7 @@ msgstr "方位网格颜色"
 
 #: src/ui_viewDialog.h:2468
 msgid "Color of the equinox points (of date)"
-msgstr "昼夜平分点颜色（当前）"
+msgstr "春分点颜色(当前)"
 
 #: src/ui_viewDialog.h:2471
 msgid "Equatorial coordinates of current date and planet."
@@ -6684,7 +6684,7 @@ msgstr "赤道网格（当前）"
 
 #: src/ui_viewDialog.h:2474
 msgid "Equinoxes (of date)"
-msgstr "昼夜平分点（当前）"
+msgstr "二至点(当前)"
 
 #: src/ui_viewDialog.h:2475
 msgid "Solstices (J2000)"
@@ -7003,7 +7003,7 @@ msgstr "显示区域"
 
 #: src/ui_configurationDialog.h:1328 src/ui_configurationDialog.h:1362
 msgid "Equatorial coordinates, equinox of date"
-msgstr "赤道坐标，昼夜平分点（当前）"
+msgstr "赤道坐标春分点(当前)"
 
 #: src/ui_configurationDialog.h:1330
 msgid "Right ascension/Declination (of date)"
@@ -7023,7 +7023,7 @@ msgstr "绝对星等"
 
 #: src/ui_configurationDialog.h:1338
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr "换到坐标，昼夜平分点（仅用于地球）"
+msgstr "黄道坐标春分点(当前，仅地球)"
 
 #: src/ui_configurationDialog.h:1340
 msgid "Ecliptic coordinates (of date)"
@@ -7056,7 +7056,7 @@ msgstr "银道坐标"
 
 #: src/ui_configurationDialog.h:1353
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr "赤道坐标，昼夜平分点J2000.0）"
+msgstr "赤道坐标春分点(J2000)"
 
 #: src/ui_configurationDialog.h:1355
 msgid "Right ascension/Declination (J2000)"
@@ -7064,7 +7064,7 @@ msgstr "赤经/赤纬（J2000）"
 
 #: src/ui_configurationDialog.h:1358
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr "黄道坐标（J2000.0）"
+msgstr "黄道坐标春分点(J2000)"
 
 #: src/ui_configurationDialog.h:1360
 msgid "Ecliptic coordinates (J2000)"
@@ -7110,7 +7110,7 @@ msgstr "使用单位mag/arcsec^2 表示亮度"
 
 #: src/ui_configurationDialog.h:1377
 msgid "Use short notation for unit of measurement of surface brightness"
-msgstr ""
+msgstr "表面亮度使用短单位符号"
 
 #: src/ui_configurationDialog.h:1378
 msgid "Control"
@@ -9458,7 +9458,7 @@ msgstr "Stellarium 卫星插件"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:414
 #: plugins/Satellites/src/ui_satellitesDialog.h:825
 msgid "Iridium flares"
-msgstr "铱耀斑"
+msgstr "铱星闪光"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
 msgid ""
@@ -9932,11 +9932,11 @@ msgstr "来源"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:820
 msgid "Flare prediction (days):"
-msgstr "耀斑预测（天）："
+msgstr "铱闪预测（天）："
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid "Predict Iridium flares"
-msgstr "预测铱耀斑"
+msgstr "预测铱星闪光"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -10493,7 +10493,7 @@ msgid ""
 "updated and now interpret the coordinates they receive as coordinates that "
 "use the equinox of the date (EOD, also known as JNow), making necessary this "
 "override."
-msgstr "<b>坐标系</b>：有些星特朗望远镜固件更新后使用当前二分点(EOD亦被认作JNow)解释它们接收到的坐标，这种更替有必要。"
+msgstr "<b>坐标系</b>：有些星特朗望远镜固件更新后使用当前春分点(EOD, 或 JNow)解释它们接收到的坐标，这种更替有必要。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
 msgid ""
@@ -15468,7 +15468,7 @@ msgstr "一个对史前/民间天文校准研究的工具"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:244
 msgid "Show Line for Equinox"
-msgstr "显示昼夜平分线"
+msgstr "显示春分线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Solstices"
@@ -15532,7 +15532,7 @@ msgstr "显示自定义赤纬线2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1262
 msgid "Equinox"
-msgstr "昼夜平分点"
+msgstr "春分点"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1265
 msgid "Solstice"
@@ -15654,7 +15654,7 @@ msgstr "此外，最多两条可具有任意方位角的垂直线和带自定义
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:364
 msgid "Select color for equinox line"
-msgstr "选择昼夜平分线颜色"
+msgstr "选择春分线颜色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:375
 msgid "Select color for solstice lines"
@@ -15820,7 +15820,7 @@ msgstr "跨季线"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
-msgstr "昼夜平分线（赤道）"
+msgstr "春分线(赤道)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Major Lunar Standstill lines"
