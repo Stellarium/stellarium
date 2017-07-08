@@ -447,9 +447,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<br>";
 	}
 
-	if (flags&Size)
+	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+	if (flags&Size && angularSize>=4.8e-7)
 	{
-		double angularSize = 2.*getAngularSize(core)*M_PI/180.;
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
