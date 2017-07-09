@@ -313,6 +313,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			res += q_("Supergalactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(sglong,true), StelUtils::radToDmsStr(sglat,true)) + "<br>";
 	}
 
+	return res;
+}
+
+QString StelObject::getAdditionalInfoString(const StelCore *core, const InfoStringGroup& flags) const
+{
+	QString res;
+	QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
+
 	if (flags&IAUConstellation)
 	{
 		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));

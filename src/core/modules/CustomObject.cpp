@@ -83,6 +83,7 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
+	oss << getAdditionalInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }

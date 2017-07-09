@@ -158,6 +158,8 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
+	oss << getAdditionalInfoString(core, flags);
+
 	if (flags&Extra)
 	{
 		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
