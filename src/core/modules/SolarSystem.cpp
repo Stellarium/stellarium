@@ -2129,7 +2129,7 @@ QStringList SolarSystem::getAllPlanetEnglishNames() const
 {
 	QStringList res;
 	foreach (const PlanetP& p, systemPlanets)
-		res.append(p->englishName);
+		res.append(p->getEnglishName());
 	return res;
 }
 
@@ -2137,7 +2137,7 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 {
 	QStringList res;
 	foreach (const PlanetP& p, systemPlanets)
-		res.append(p->nameI18);
+		res.append(p->getNameI18n());
 	return res;
 }
 

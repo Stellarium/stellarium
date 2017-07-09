@@ -22,12 +22,14 @@
 #include "StelProjector.hpp"
 
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
 #include "StelGuiItems.hpp"
 #include "StelGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelMainView.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelObserver.hpp"
@@ -628,6 +630,7 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	QString planetName = core->getCurrentLocation().planetName;
+	QString planetNameI18n = GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName)->getNameI18n();
 	QString tzName = core->getCurrentTimeZone();
 	if (tzName.contains("system_default") || (tzName.isEmpty() && planetName=="Earth"))
 		tzName = q_("System default");
@@ -699,14 +702,13 @@ void BottomStelBar::updateText(bool updatePos)
 	// build location tooltip
 	QString newLocation = "";
 	const StelLocation* loc = &core->getCurrentLocation();
-	const StelTranslator& trans = locmgr.getSkyTranslator();
 	if (getFlagShowLocation() && !loc->name.isEmpty())
 	{
-		newLocation = trans.qtranslate(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
+		newLocation = planetNameI18n +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
 	}
 	if (getFlagShowLocation() && loc->name.isEmpty())
 	{
-		newLocation = trans.qtranslate(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
 	if (location->text()!=newLocation || updatePos)
