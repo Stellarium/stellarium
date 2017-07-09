@@ -180,7 +180,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
 	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(populateCelestialCategoryList()));
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));	
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
@@ -342,10 +343,11 @@ void AstroCalcDialog::populateCelestialCategoryList()
 
 	QComboBox* category = ui->celestialCategoryComboBox;
 
-
 	category->blockSignals(true);
 	int index = category->currentIndex();
 	QVariant selectedCategoryId = category->itemData(index);
+
+	const Nebula::CatalogGroup& catalogFilters = dsoMgr->getCatalogFilters();
 
 	category->clear();
 	// TODO: Automatic sync list with QMap<QString, QString> StelObjectMgr::objectModulesMap() data
@@ -377,24 +379,42 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Possible Quasars"), "25");
 	category->addItem(q_("Possible Planetary Nebulae"), "26");
 	category->addItem(q_("Protoplanetary Nebulae"), "27");
-	category->addItem(q_("Messier Catalogue"), "100");
-	category->addItem(q_("Caldwell Catalogue"), "101");
-	category->addItem(q_("Barnard Catalogue"), "102");
-	category->addItem(q_("Sharpless Catalogue"), "103");
-	category->addItem(q_("Van den Bergh Catalogue"), "104");
-	category->addItem(q_("The Catalogue of Rodgers, Campbell, and Whiteoak"), "105");
-	category->addItem(q_("Collinder Catalogue"), "106");
-	category->addItem(q_("Melotte Catalogue"), "107");
-	category->addItem(q_("New General Catalogue"), "108");
-	category->addItem(q_("Index Catalogue"), "109");
-	category->addItem(q_("Lynds' Catalogue of Bright Nebulae"), "110");
-	category->addItem(q_("Lynds' Catalogue of Dark Nebulae"), "111");
-	category->addItem(q_("Principal Galaxy Catalog"), "112");
-	category->addItem(q_("The Uppsala General Catalogue of Galaxies"), "113");
-	category->addItem(q_("Cederblad Catalog"), "114");
-	category->addItem(q_("The Catalogue of Peculiar Galaxies"), "115");
-	category->addItem(q_("The Catalogue of Interacting Galaxies"), "116");
-	category->addItem(q_("The Catalogue of Galactic Planetary Nebulae"), "117");
+	if (catalogFilters&Nebula::CatM)
+		category->addItem(q_("Messier Catalogue"), "100");
+	if (catalogFilters&Nebula::CatC)
+		category->addItem(q_("Caldwell Catalogue"), "101");
+	if (catalogFilters&Nebula::CatB)
+		category->addItem(q_("Barnard Catalogue"), "102");
+	if (catalogFilters&Nebula::CatSh2)
+		category->addItem(q_("Sharpless Catalogue"), "103");
+	if (catalogFilters&Nebula::CatVdB)
+		category->addItem(q_("Van den Bergh Catalogue"), "104");
+	if (catalogFilters&Nebula::CatRCW)
+		category->addItem(q_("The Catalogue of Rodgers, Campbell, and Whiteoak"), "105");
+	if (catalogFilters&Nebula::CatCr)
+		category->addItem(q_("Collinder Catalogue"), "106");
+	if (catalogFilters&Nebula::CatMel)
+		category->addItem(q_("Melotte Catalogue"), "107");
+	if (catalogFilters&Nebula::CatNGC)
+		category->addItem(q_("New General Catalogue"), "108");
+	if (catalogFilters&Nebula::CatIC)
+		category->addItem(q_("Index Catalogue"), "109");
+	if (catalogFilters&Nebula::CatLBN)
+		category->addItem(q_("Lynds' Catalogue of Bright Nebulae"), "110");
+	if (catalogFilters&Nebula::CatLDN)
+		category->addItem(q_("Lynds' Catalogue of Dark Nebulae"), "111");
+	if (catalogFilters&Nebula::CatPGC)
+		category->addItem(q_("Principal Galaxy Catalog"), "112");
+	if (catalogFilters&Nebula::CatUGC)
+		category->addItem(q_("The Uppsala General Catalogue of Galaxies"), "113");
+	if (catalogFilters&Nebula::CatCed)
+		category->addItem(q_("Cederblad Catalog"), "114");
+	if (catalogFilters&Nebula::CatArp)
+		category->addItem(q_("The Catalogue of Peculiar Galaxies"), "115");
+	if (catalogFilters&Nebula::CatVV)
+		category->addItem(q_("The Catalogue of Interacting Galaxies"), "116");
+	if (catalogFilters&Nebula::CatPK)
+		category->addItem(q_("The Catalogue of Galactic Planetary Nebulae"), "117");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");
@@ -403,11 +423,12 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Solar system objects"), "200");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index<0)
-	{
-		// default step: Messier Catalogue
+	if (index<0) // read config data
 		index = category->findData(conf->value("astrocalc/celestial_category", "200").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-	}
+
+	if (index<0) // Unknown yet? Default step: Solar system objects
+		index = category->findData("200", Qt::UserRole, Qt::MatchCaseSensitive);
+
 	category->setCurrentIndex(index);
 	category->model()->sort(0);
 	category->blockSignals(false);
@@ -477,7 +498,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
 		foreach (const NebulaP& obj, celestialObjects)
 		{
-			if (dsoMgr->objectInDisplayedCatalog(obj) && obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
+			if (obj->objectInDisplayedCatalog() && obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
 				{

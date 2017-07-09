@@ -437,8 +437,8 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	if (!nebMgr->getFlagHints())
 		return StelObject::getSelectPriority(core)+3.f;
 
-	if (!objectInDisplayedType())
-		return StelObject::getSelectPriority(core)+3.f;
+	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
+		return StelObject::getSelectPriority(core)+15.f;
 	
 	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
 	// make very easy to select if labeled
@@ -912,6 +912,53 @@ bool Nebula::objectInDisplayedType() const
 	else if (typeFilters&TypeStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
 		r = true;
 	else if (typeFilters&TypeOther && cntype==10)
+		r = true;
+
+	return r;
+}
+
+bool Nebula::objectInDisplayedCatalog() const
+{
+	bool r = false;
+	if ((catalogFilters&CatM) && (M_nb>0))
+		r = true;
+	else if ((catalogFilters&CatC) && (C_nb>0))
+		r = true;
+	else if ((catalogFilters&CatNGC) && (NGC_nb>0))
+		r = true;
+	else if ((catalogFilters&CatIC) && (IC_nb>0))
+		r = true;
+	else if ((catalogFilters&CatB) && (B_nb>0))
+		r = true;
+	else if ((catalogFilters&CatSh2) && (Sh2_nb>0))
+		r = true;
+	else if ((catalogFilters&CatVdB) && (VdB_nb>0))
+		r = true;
+	else if ((catalogFilters&CatRCW) && (RCW_nb>0))
+		r = true;
+	else if ((catalogFilters&CatLDN) && (LDN_nb>0))
+		r = true;
+	else if ((catalogFilters&CatLBN) && (LBN_nb>0))
+		r = true;
+	else if ((catalogFilters&CatCr) && (Cr_nb>0))
+		r = true;
+	else if ((catalogFilters&CatMel) && (Mel_nb>0))
+		r = true;
+	else if ((catalogFilters&CatPGC) && (PGC_nb>0))
+		r = true;
+	else if ((catalogFilters&CatUGC) && (UGC_nb>0))
+		r = true;
+	else if ((catalogFilters&CatCed) && !(Ced_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&CatArp) && (Arp_nb>0))
+		r = true;
+	else if ((catalogFilters&CatVV) && (VV_nb>0))
+		r = true;
+	else if ((catalogFilters&CatPK) && !(PK_nb.isEmpty()))
+		r = true;
+
+	// Special case: objects without ID from current catalogs
+	if (withoutID)
 		r = true;
 
 	return r;

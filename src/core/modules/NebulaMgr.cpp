@@ -361,8 +361,7 @@ void NebulaMgr::init()
 	// 3. flag in nebula_textures.fab (yuk)
 	// 4. info.ini file in each set containing a "load at startup" item
 	// For now (0.9.0), just load the default set
-	// NB: nebula set loaded inside setter of catalog filter --AW
-	// loadNebulaSet("default");
+	loadNebulaSet("default");
 
 	updateI18n();
 	
@@ -370,7 +369,6 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
-	connect(this, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateDSONames()));
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
@@ -399,6 +397,9 @@ struct DrawNebulaFuncObject
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > drawer->getCustomNebulaMagnitudeLimit()))
 			return;
 
+		if (!n->objectInDisplayedCatalog())
+			return;
+
 		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f)
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
@@ -421,26 +422,6 @@ void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
 	if(static_cast<int>(cflags) != static_cast<int>(Nebula::catalogFilters))
 	{
 		Nebula::catalogFilters = cflags;
-
-		dsoArray.clear();
-		dsoIndex.clear();
-		nebGrid.clear();
-		bool status = getFlagShow();
-
-		StelApp::getInstance().getStelObjectMgr().unSelect();
-
-		if (flagReloading)
-			qWarning() << "Reloading DSO data...";
-		else
-			qWarning() << "Loading DSO data...";
-		setFlagShow(false);
-		loadNebulaSet("default");		
-		setFlagShow(status);
-
-		updateI18n(); // OK, update localized names of DSO
-
-		flagReloading = true; // OK, first load is complete
-
 		emit catalogFiltersChanged(cflags);
 	}
 }
@@ -580,6 +561,9 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
 	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 
+	dsoArray.clear();
+	dsoIndex.clear();
+	nebGrid.clear();
 
 	if (flagConverter)
 	{
@@ -1065,6 +1049,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	if (!in.open(QIODevice::ReadOnly))
 		return false;
 
+	qDebug() << "Loading DSO data ...";
+
 	// Let's begin use gzipped data
 	QDataStream ins(StelUtils::uncompress(in.readAll()));
 	ins.setVersion(QDataStream::Qt_5_2);
@@ -1076,8 +1062,6 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 		NebulaP e = NebulaP(new Nebula);
 		e->readDSO(ins);
 
-		if (!objectInDisplayedCatalog(e)) continue;
-
 		dsoArray.append(e);
 		nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
 		if (e->DSO_nb!=0)
@@ -1087,54 +1071,6 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	in.close();
 	qDebug() << "Loaded" << totalRecords << "DSO records";
 	return true;
-}
-
-bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
-{
-	bool r = false;
-	Nebula::CatalogGroup catalogFilters = getCatalogFilters();
-	if ((catalogFilters&Nebula::CatM) && (n->M_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatC) && (n->C_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatNGC) && (n->NGC_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatIC) && (n->IC_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatB) && (n->B_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatSh2) && (n->Sh2_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatVdB) && (n->VdB_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatRCW) && (n->RCW_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatLDN) && (n->LDN_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatLBN) && (n->LBN_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatCr) && (n->Cr_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatMel) && (n->Mel_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatPGC) && (n->PGC_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatUGC) && (n->UGC_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatCed) && !(n->Ced_nb.isEmpty()))
-		r = true;
-	else if ((catalogFilters&Nebula::CatArp) && (n->Arp_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatVV) && (n->VV_nb>0))
-		r = true;
-	else if ((catalogFilters&Nebula::CatPK) && !(n->PK_nb.isEmpty()))
-		r = true;
-
-	// Special case: objects without ID from current catalogs
-	if (n->withoutID)
-		r = true;
-
-	return r;
 }
 
 bool NebulaMgr::loadDSONames(const QString &filename)
@@ -1260,13 +1196,6 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	dsoNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
 	return true;
-}
-
-
-void NebulaMgr::updateDSONames()
-{
-	updateSkyCulture(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
-	updateI18n();
 }
 
 void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
