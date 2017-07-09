@@ -864,6 +864,8 @@ public:
 
 	//! Get the list of all the bodies of the solar system.	
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+	//! Get the list of all the bodies of the solar system.
+	const QList<PlanetP>& getAllMinorBodies() const {return systemMinorBodies;}
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
 
@@ -953,6 +955,8 @@ private:
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;
+	//! List of all the minor bodies of the solar system.
+	QList<PlanetP> systemMinorBodies;
 
 	// Master settings
 	bool flagOrbits;

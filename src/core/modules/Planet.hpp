@@ -196,6 +196,8 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;
+	QString getCommonEnglishName(void) const {return englishName;}
+	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
