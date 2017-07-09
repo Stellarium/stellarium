@@ -70,6 +70,8 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	
 	oss << getPositionInfoString(core, flags);
 
+	oss << getAdditionalInfoString(core, flags);
+
 	StelObject::postProcessInfoString(str, flags);
 
 	return str;
@@ -232,6 +234,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	oss << getPositionInfoString(core, flags);
+
+	oss << getAdditionalInfoString(core, flags);
 
 	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
