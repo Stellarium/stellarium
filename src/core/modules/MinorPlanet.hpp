@@ -79,6 +79,8 @@ public:
 	virtual void translateName(const StelTranslator& trans);
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;
+	QString getCommonEnglishName(void) const {return englishName;}
+	QString getCommonNameI18n(void) const {return nameI18;}
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
