@@ -328,7 +328,7 @@ QString radToHmsStrAdapt(const double angle)
 /*************************************************************************
  Convert an angle in radian to a hms formatted string
  If decimal is true,  output should be like this: "  16h29m55.3s"
- If decimal is true,  output should be like this: "  16h20m0.4s"
+ If decimal is true,  output should be like this: "  16h20m00.4s"
  If decimal is false, output should be like this: "0h26m5s"
 *************************************************************************/
 QString radToHmsStr(const double angle, const bool decimal)
@@ -337,7 +337,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 	double s;
 	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
 	int width, precision;
-	QString carry;
+	QString carry, r;
 	if (decimal)
 	{
 		width=5;
@@ -365,7 +365,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 	if (h==24 && m==0 && s==0)
 		h=0;
 
-	return QString("%1h%2m%3s").arg(h, width).arg(m,2,10,QLatin1Char('0')).arg(s, 0, 'f', precision);
+	return QString("%1h%2m%3s").arg(h, width).arg(m, 2, 10, QChar('0')).arg(s, 3+precision, 'f', precision, QChar('0'));
 }
 
 /*************************************************************************
