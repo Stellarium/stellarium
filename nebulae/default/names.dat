@@ -17,7 +17,6 @@
 #   NED: Named Galaxies; https://ned.ipac.caltech.edu/level5/CATALOGS/naga.html
 #   SEDS: A Collection of Some Common Names for Deep Sky Objects; http://messier.seds.org/xtra/supp/d-names.html
 #   SIMBAD: 2000,A&AS,143,9, "The SIMBAD astronomical database", Wenger et al.; http://simbad.u-strasbg.fr/simbad/
-#   W1: PGC 6240; https://en.wikipedia.org/wiki/PGC_6240
 #   WP: Wikipedia entries for the respective objects
 #   OGSC: Observer’s Guide to Star Clusters by Mike Inglis, Springer, 2013; https://books.google.ru/books?id=ewHABAAAQBAJ
 #   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
@@ -224,6 +223,7 @@ NGC  3242            _("Ghost of Jupiter Nebula") # WK, SIMBAD
 NGC  3242            _("Eye Nebula")
 NGC  3293            _("Gem Cluster") # OGSC
 NGC  3324            _("Keyhole Nebula")
+NGC  3324            _("The Gabriela Mistral Nebula") # WP
 NGC  3344            _("Sliced Onion Galaxy") # B500
 NGC  3372            _("η Car Nebula") # WK, SIMBAD
 NGC  3372            _("Homunculus Nebula") # WK
@@ -644,7 +644,7 @@ PGC  3792            _("Pisces Dwarf Galaxy") # NED
 PGC  3792            _("Pisces I") # NED
 PGC  3853            _("Shapley-Ames 1") # NED
 PGC  4601            _("Andromeda II Dwarf Galaxy")
-PGC  6240            _("White Rose Galaxy") #W1
+PGC  6240            _("White Rose Galaxy") #WP
 PGC  6830            _("Phoenix Dwarf Galaxy")
 PGC  9892            _("Maffei 1") # NED
 PGC  12737           _("Holmberg VI")
