@@ -161,11 +161,10 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 void SolarSystemManagerWindow::populateSolarSystemList()
 {
 	unlocalizedNames.clear();
-	foreach (const PlanetP & object, GETSTELMODULE(SolarSystem)->getAllPlanets())
+	foreach (const PlanetP& object, GETSTELMODULE(SolarSystem)->getAllMinorBodies())
 	{
 		// GZ new for 0.16: only insert objects which are minor bodies.
-		if ((object->getPlanetType() >= Planet::isAsteroid) && (object->getEnglishName()!="Pluto"))
-			unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
+		unlocalizedNames.insert(object->getCommonNameI18n(), object->getCommonEnglishName());
 	}
 
 	ui->listWidgetObjects->clear();

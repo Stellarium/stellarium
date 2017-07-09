@@ -994,6 +994,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
 
+			systemMinorBodies.push_back(p);
 		}
 		else if (type == "comet")
 		{
@@ -1042,6 +1043,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			{
 				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
 			}
+			systemMinorBodies.push_back(p);
 		}
 		else
 		{
