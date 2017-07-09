@@ -319,8 +319,6 @@ public:
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
 
-	bool objectInDisplayedCatalog(NebulaP n);
-
 	//! Get designation for latest selected DSO with priority
 	//! @note using for bookmarks feature as example
 	//! @return a designation
@@ -782,10 +780,6 @@ private slots:
 	//! Loads native names of deep-sky objects for a given sky culture.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
-
-	//! Called when the filter of DSO is updated.
-	//! Loads native names of deep-sky objects for a current sky culture.
-	void updateDSONames();
 
 private:
 

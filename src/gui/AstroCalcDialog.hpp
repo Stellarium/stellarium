@@ -115,6 +115,7 @@ protected:
 
 private slots:
 	void currentCelestialPositions();
+	void populateCelestialCategoryList();
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
@@ -199,8 +200,7 @@ private:
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateCelestialBodyList();
-	void populateCelestialCategoryList();
+	void populateCelestialBodyList();	
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
 	//! Populates the drop-down list of major planets.

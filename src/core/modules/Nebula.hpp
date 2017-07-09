@@ -191,6 +191,8 @@ public:
 	//! @return a designation
 	QString getDSODesignation() const;
 
+	bool objectInDisplayedCatalog() const;
+
 private:
 	friend struct DrawNebulaFuncObject;
 
