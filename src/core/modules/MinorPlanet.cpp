@@ -247,6 +247,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	oss << getPositionInfoString(core, flags);
 
+	oss << getAdditionalInfoString(core, flags);
+
 	if (flags&Distance)
 	{
 		double hdistanceAu = getHeliocentricEclipticPos().length();
