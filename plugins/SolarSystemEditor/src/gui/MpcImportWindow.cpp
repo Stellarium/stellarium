@@ -351,11 +351,11 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 	candidatesForAddition.clear();
 
 	//Get a list of the current objects
-	QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
+	//QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
 	QHash<QString,QString> loadedSsoIdentifiers = ssoManager->listAllLoadedSsoIdentifiers();
 
 	//Separating the objects into visual groups in the list
-	int newDefaultSsoIndex = 0;
+	//int newDefaultSsoIndex = 0;
 	int newLoadedSsoIndex = 0;
 	int newNovelSsoIndex = 0;
 	int insertionIndex = 0;
@@ -389,21 +389,22 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 		item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 		item->setCheckState(Qt::Unchecked);
 
-		if (defaultSsoIdentifiers.contains(name))
-		{
-			//Duplicate of a default solar system object
-			QFont itemFont(item->font());
-			itemFont.setBold(true);
-			item->setFont(itemFont);
+//		if (defaultSsoIdentifiers.contains(name))
+//		{
+//			//Duplicate of a default solar system object
+//			QFont itemFont(item->font());
+//			itemFont.setBold(true);
+//			item->setFont(itemFont);
 
-			candidatesForUpdate.append(object);
+//			candidatesForUpdate.append(object);
 
-			insertionIndex = newDefaultSsoIndex;
-			newDefaultSsoIndex++;
-			newLoadedSsoIndex++;
-			newNovelSsoIndex++;
-		}
-		else if (loadedSsoIdentifiers.contains(name))
+//			insertionIndex = newDefaultSsoIndex;
+//			newDefaultSsoIndex++;
+//			newLoadedSsoIndex++;
+//			newNovelSsoIndex++;
+//		}
+//		else
+		if (loadedSsoIdentifiers.contains(name))
 		{
 			//Duplicate of another existing object
 			QFont itemFont(item->font());

@@ -830,6 +830,8 @@ public:
 	//! @return The matching planet pointer if exists or Q_NULLPTR.
 	PlanetP searchByEnglishName(QString planetEnglishName) const;
 
+	PlanetP searchMinorPlanetByEnglishName(QString planetEnglishName) const;
+
 	//! Get the Planet object pointer for the Sun.
 	PlanetP getSun() const {return sun;}
 
@@ -852,7 +854,7 @@ public:
 	void reloadPlanets();
 
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
-	bool removePlanet(QString name);
+	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
