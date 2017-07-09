@@ -434,12 +434,12 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 		return false;
 
 	//qDebug() << name;
-	if (defaultSsoIdentifiers.keys().contains(name))
-	{
-		qWarning() << "You can't delete the default Solar System objects like" << name << "for the moment.";
-		qCritical() << "As of 0.16, this line should be impossible to reach!";
-		return false;
-	}
+//	if (defaultSsoIdentifiers.keys().contains(name))
+//	{
+//		qWarning() << "You can't delete the default Solar System objects like" << name << "for the moment.";
+//		qCritical() << "As of 0.16, this line should be impossible to reach!";
+//		return false;
+//	}
 
 	//Make sure that the file exists
 	if (!QFile::exists(customSolarSystemFilePath))
@@ -474,7 +474,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	//Reload the Solar System
 	//solarSystem->reloadPlanets();
 	// Better: just remove this one object!
-	solarSystem->removePlanet(name);
+	solarSystem->removeMinorPlanet(name);
 	emit solarSystemChanged();
 
 	return true;
