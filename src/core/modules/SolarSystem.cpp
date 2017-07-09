@@ -404,6 +404,7 @@ void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
 void SolarSystem::loadPlanets()
 {
 	minorBodies.clear();
+	systemMinorBodies.clear();
 	qDebug() << "Loading Solar System data (1: planets and moons) ...";
 	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
 	if (solarSystemFile.isEmpty())
@@ -449,8 +450,8 @@ void SolarSystem::loadPlanets()
 					p->satellites.clear();
 					p.clear();
 				}
-			}
-			systemPlanets.clear();
+			}			
+			systemPlanets.clear();			
 			//Memory leak? What's the proper way of cleaning shared pointers?
 
 			// TODO: 0.16pre what about the orbits list?
@@ -1332,17 +1333,28 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getEnglishName() == planetEnglishName)
+		if (p->getEnglishName() == planetEnglishName || p->getCommonEnglishName() == planetEnglishName)
 			return p;
 	}
 	return PlanetP();
 }
 
+PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) const
+{
+	foreach (const PlanetP& p, systemMinorBodies)
+	{
+		if (p->getEnglishName() == planetEnglishName || p->getCommonEnglishName() == planetEnglishName)
+			return p;
+	}
+	return PlanetP();
+}
+
+
 StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getNameI18n() == planetNameI18)
+		if (p->getNameI18n() == planetNameI18 || p->getCommonNameI18n() == planetNameI18)
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -1353,7 +1365,7 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getEnglishName() == name)
+		if (p->getEnglishName() == name || p->getCommonEnglishName() == name)
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -2198,6 +2210,7 @@ void SolarSystem::reloadPlanets()
 		p.clear();
 	}
 	systemPlanets.clear();
+	systemMinorBodies.clear();
 	// Memory leak? What's the proper way of cleaning shared pointers?
 
 	// Also delete Comet textures (loaded in loadPlanets()
@@ -2405,26 +2418,19 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 	return final_illumination;
 }
 
-bool SolarSystem::removePlanet(QString name)
+bool SolarSystem::removeMinorPlanet(QString name)
 {
-	PlanetP candidate = searchByEnglishName(name);
+	PlanetP candidate = searchMinorPlanetByEnglishName(name);
 	if (!candidate)
 	{
 		qWarning() << "Cannot remove planet " << name << ": Not found.";
 		return false;
 	}
-	// TODO: In case we want major bodies or Pluto to be deleted, think about proper handling of moons!
-	//candidate->satellites.clear();
-	if (candidate->pType < Planet::isAsteroid)
-	{
-		qWarning() << "REMOVING MAJOR OBJECT:" << name;
-		qWarning() << "              This is likely not what you want, but will be accepted.";
-		Q_ASSERT(0);
-	}
 	Orbit* orbPtr=(Orbit*) candidate->orbitPtr;
 	if (orbPtr)
 		orbits.removeOne(orbPtr);
 	systemPlanets.removeOne(candidate);
+	systemMinorBodies.removeOne(candidate);
 	candidate.clear();
 	return true;
 }
