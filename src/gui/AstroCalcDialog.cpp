@@ -997,8 +997,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	QComboBox* planets = ui->celestialBodyComboBox;
 	QComboBox* graphsp = ui->graphsCelestialBodyComboBox;
 
-	QStringList planetNames(solarSystem->getAllPlanetEnglishNames());
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	QList<PlanetP> ss = solarSystem->getAllPlanets();
 
 	//Save the current selection to be restored later
 	planets->blockSignals(true);
@@ -1013,12 +1012,12 @@ void AstroCalcDialog::populateCelestialBodyList()
 
 	//For each planet, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
-	foreach(const QString& name, planetNames)
+	foreach(const PlanetP& p, ss)
 	{
-		if (!name.contains("Observer", Qt::CaseInsensitive) && name!=core->getCurrentPlanet()->getEnglishName())
+		if (!p->getEnglishName().contains("Observer", Qt::CaseInsensitive) && p->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
 		{
-			planets->addItem(trans.qtranslate(name), name);
-			graphsp->addItem(trans.qtranslate(name), name);
+			planets->addItem(p->getNameI18n(), p->getEnglishName());
+			graphsp->addItem(p->getNameI18n(), p->getEnglishName());
 		}
 	}
 	//Restore the selection
