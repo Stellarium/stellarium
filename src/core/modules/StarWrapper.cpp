@@ -68,9 +68,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(getBV(), 'f', 2)) << "<br>";
 	}
 	
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	StelObject::postProcessInfoString(str, flags);
 
@@ -233,9 +231,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		}
 	}
 
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{

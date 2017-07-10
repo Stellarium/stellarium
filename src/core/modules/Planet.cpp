@@ -392,9 +392,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << q_("Mean Opposition Magnitude: %1").arg(moMag, 0, 'f', 2) << "<br>";
 	}
 
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	// Debug help.
 	//oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";

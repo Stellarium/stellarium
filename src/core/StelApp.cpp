@@ -245,6 +245,7 @@ StelApp::StelApp(StelMainView *parent)
 	, gl(Q_NULLPTR)
 	, flagShowDecimalDegrees(false)
 	, flagUseAzimuthFromSouth(false)
+	, flagUseFormattingOutput(false)
 	#ifdef ENABLE_SPOUT
 	, spoutSender(Q_NULLPTR)
 	#endif
@@ -545,6 +546,7 @@ void StelApp::init(QSettings* conf)
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
 	setFlagSouthAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
+	setFlagUseFormattingOutput(confSettings->value("gui/flag_use_formatting_output", false).toBool());
 
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.f).toFloat();
@@ -867,6 +869,11 @@ void StelApp::setVisionModeNight(bool b)
 void StelApp::setFlagShowDecimalDegrees(bool b)
 {
 	flagShowDecimalDegrees = b;
+}
+
+void StelApp::setFlagUseFormattingOutput(bool b)
+{
+	flagUseFormattingOutput = b;
 }
 
 // Update translations and font for sky everywhere in the program
