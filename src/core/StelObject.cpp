@@ -416,6 +416,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		else
 			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(eclJDE, true)) + "<br>";
 	}
+	else if (withTables)
+		 res += "</table>";
 
 	if (flags&IAUConstellation)
 	{
