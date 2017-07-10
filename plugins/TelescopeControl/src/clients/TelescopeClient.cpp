@@ -136,12 +136,8 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 		oss << "<h2>" << nameI18n << "</h2>";
 	}
 
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
-
+	oss << getCommonInfoString(core, flags);
 	oss << getTelescopeInfoString(core, flags);
-
 	postProcessInfoString(str, flags);
 
 	return str;

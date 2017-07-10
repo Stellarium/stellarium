@@ -245,9 +245,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Distance)
 	{

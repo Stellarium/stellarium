@@ -276,9 +276,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 	}
 
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (majorAxisSize>0 && flags&Size)
 	{

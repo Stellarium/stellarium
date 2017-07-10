@@ -202,6 +202,8 @@ void ConfigurationDialog::createDialogContent()
 	// Additional settings for selected object info
 	connectBoolProperty(ui->checkBoxUMSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessArcsecUsage");
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
+	ui->checkBoxUseFormattingOutput->setChecked(StelApp::getInstance().getFlagUseFormattingOutput());
+	connect(ui->checkBoxUseFormattingOutput, SIGNAL(toggled(bool)), this, SLOT(updateSettingFormattingOutput(bool)));
 	
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
@@ -550,6 +552,11 @@ void ConfigurationDialog::updateStartPointForAzimuth(bool b)
 	StelApp::getInstance().setFlagSouthAzimuthUsage(b);
 }
 
+void ConfigurationDialog::updateSettingFormattingOutput(bool b)
+{
+	StelApp::getInstance().setFlagUseFormattingOutput(b);
+}
+
 void ConfigurationDialog::cursorTimeOutChanged()
 {
 	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
@@ -857,6 +864,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_boundaries_button", gui->getFlagShowConstellationBoundariesButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
+	conf->setValue("gui/flag_use_formatting_output", StelApp::getInstance().getFlagUseFormattingOutput());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
 	conf->setValue("gui/flag_show_buttons_background", StelMainView::getInstance().getFlagUseButtonsBackground());
 	conf->setValue("gui/flag_indication_mount_mode", mvmgr->getFlagIndicationMountMode());
