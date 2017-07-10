@@ -187,9 +187,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
 	}
 
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Distance)
 	{

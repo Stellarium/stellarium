@@ -296,10 +296,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
-	oss << getAdditionalInfoString(core, flags);
-	
 	if (flags & Extra)
 	{
 		// TRANSLATORS: Slant range: distance between the satellite and the observer

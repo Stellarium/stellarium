@@ -172,9 +172,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
-
-	oss << getAdditionalInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{
