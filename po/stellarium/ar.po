@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-08 22:23+0700\n"
-"PO-Revision-Date: 2017-06-19 11:26+0000\n"
+"POT-Creation-Date: 2017-07-09 16:10+0700\n"
+"PO-Revision-Date: 2017-07-10 03:57+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-09 05:08+0000\n"
+"X-Launchpad-Export-Date: 2017-07-10 05:08+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -447,15 +447,15 @@ msgstr "‎بعد الانطفاء‎"
 #: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:472
 msgctxt "magnitude"
 msgid "mag"
-msgstr ""
+msgstr "‎القدر‎"
 
 #: src/core/modules/Nebula.cpp:250 src/gui/AstroCalcDialog.cpp:470
 msgid "arcmin"
-msgstr ""
+msgstr "‎دقيقة قوسية‎"
 
 #: src/core/modules/Nebula.cpp:252 src/gui/AstroCalcDialog.cpp:472
 msgid "arcsec"
-msgstr ""
+msgstr "‎ثانية قوسية‎"
 
 #: src/core/modules/Nebula.cpp:266 src/core/modules/Nebula.cpp:274
 #, qt-format
@@ -3287,7 +3287,7 @@ msgstr "القدر"
 #. TRANSLATORS: angular size, arcminutes
 #: src/gui/AstroCalcDialog.cpp:296
 msgid "A.S."
-msgstr ""
+msgstr "الحجم الزاوي"
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:300
@@ -3628,7 +3628,7 @@ msgstr "الموقع في %1"
 
 #: src/gui/AstroCalcDialog.cpp:530
 msgid "Average angular size"
-msgstr ""
+msgstr "متوسط الحجم الزاوي بالدقائق القوسية"
 
 #: src/gui/AstroCalcDialog.cpp:541 src/gui/AstroCalcDialog.cpp:800
 msgid "Planetocentric distance"
@@ -3640,7 +3640,7 @@ msgstr "المسافة السطحية"
 
 #: src/gui/AstroCalcDialog.cpp:588
 msgid "Angular size (with rings, if any)"
-msgstr ""
+msgstr "الحجم الزاوي مع الحلقات - إن وجدت"
 
 #: src/gui/AstroCalcDialog.cpp:619
 msgid "star with high proper motion"
@@ -7265,7 +7265,7 @@ msgstr "استخدم وحدة القدر/مربع الثانية القوسية 
 
 #: src/ui_configurationDialog.h:1377
 msgid "Use short notation for unit of measurement of surface brightness"
-msgstr ""
+msgstr "استخدم الصيغة المختصرة لوحدات قياس السطوع السطحي"
 
 #: src/ui_configurationDialog.h:1378
 msgid "Control"
@@ -9484,7 +9484,7 @@ msgstr "‎المحطة الفضائية الدولية‎"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2052
 msgid "China's first space station"
-msgstr "محطة الصين الفضائية الأولى"
+msgstr "‎محطة الصين الفضائية الأولى‎"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2054
