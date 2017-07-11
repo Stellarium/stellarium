@@ -494,6 +494,7 @@ void AstroCalcDialog::currentCelestialPositions()
 
 		}
 		QString dsoName;
+		QString asToolTip = QString("%1, %2").arg(q_("Average angular size"), q_("arcmin"));
 		// Deep-sky objects
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
 		foreach (const NebulaP& obj, celestialObjects)
@@ -548,7 +549,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
 				treeItem->setText(CColumnAngularSize, angularSize);
 				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setToolTip(CColumnAngularSize, q_("Average angular size"));
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, mu);
@@ -564,6 +565,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			distanceInfo = q_("Topocentric distance");
 		QString distanceUM = qc_("AU", "astronomical unit");
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
 		Vec3d pos;
 		foreach (const PlanetP& planet, allPlanets)
 		{
@@ -606,7 +608,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
 				treeItem->setText(CColumnAngularSize, angularSize);
 				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setToolTip(CColumnAngularSize, q_("Angular size (with rings, if any)"));
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
