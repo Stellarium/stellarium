@@ -404,6 +404,8 @@ void StelApp::init(QSettings* conf)
 	confSettings = conf;
 
 	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	if (devicePixelsPerPixel>1)
+		qDebug() << "Detected a high resolution device! Device pixel ratio:" << devicePixelsPerPixel;
 
 	setBaseFontSize(confSettings->value("gui/base_font_size", 13).toInt());
 	
