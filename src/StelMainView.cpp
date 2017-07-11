@@ -732,8 +732,7 @@ void StelMainView::init()
 	qDebug()<<"CurCtxPtr:"<<QOpenGLContext::currentContext();
 #endif
 
-	//qDebug()<<"StelMainView::init";
-	qDebug() << "Device pixel ratio:" << stelScene->width() << stelScene->height();
+	qDebug()<<"StelMainView::init";
 
 	glInfo.mainContext = QOpenGLContext::currentContext();
 	glInfo.functions = glInfo.mainContext->functions();
