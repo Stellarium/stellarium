@@ -171,7 +171,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		apparent += q_("(apparent)");
 
 	if (withTables)
-		res += "<table style='margin:-1em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+		res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
 	// TRANSLATORS: Right ascension/Declination
 	QString RADec = qc_("RA/Dec", "celestial coordinate system");
@@ -444,11 +444,21 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		// GZ Only for now: display epsilon_A, angle between Earth's Axis and ecl. of date.
 		if (withDecimalDegree)
-			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(eclJDE)) + "<br>";
+			firstCoordinate = StelUtils::radToDecDegStr(eclJDE);
 		else
-			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(eclJDE, true)) + "<br>";
+			firstCoordinate = StelUtils::radToDmsStr(eclJDE, true);
+
+		QString eqlObl = q_("Ecliptic obliquity");
+		if (withTables)
+		{
+			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+			res += QString("<tr><td>%1 (%4):</td><td>%2</td></tr>").arg(eqlObl, firstCoordinate, cepoch);
+		}
+		else
+			res += QString("%1 (%3): %2").arg(eqlObl, firstCoordinate, cepoch) + "<br>";
 	}
-	else if (withTables)
+
+	if (withTables)
 		 res += "</table>";
 
 	if ((flags&SiderealTime) && (currentPlanet=="Earth"))
@@ -461,7 +471,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString STd = StelUtils::hoursToHmsStr(sidereal);
 		if (withTables)
 		{
-			res += "<table style='margin:-1em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
 		}
 		else
@@ -495,6 +505,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
+	// hack for avoiding an empty line before table
+	str.replace(QRegExp("<br(\\s*/)?><table"), "<table");
 	// chomp trailing line breaks
 	str.replace(QRegExp("<br(\\s*/)?>\\s*$"), "");
 
@@ -505,6 +517,12 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
 		str.replace(QRegExp("<br(\\s*/)?>"), "\n");
+		str.replace("<tr>", "");
+		str.replace(QRegExp("<td(\\w*)?>"), "");
+		str.replace("<td>", "");
+		str.replace("</tr>", "\n");
+		str.replace(QRegExp("<table(\\w*)?>"), "");
+		str.replace("</table>", "");
 	}
 	else if(!(flags&NoFont))
 	{
