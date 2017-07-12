@@ -45,27 +45,36 @@ Dynamic plugin libriaries need to be installed in a proper place in Stellarium's
    - <tt>MyPlugin/</tt>
     - <tt>libMyPlugin.dll</tt>
 
+On Windows 7 and later, this would be:	
+ - <tt>C:/Users/&lt;YOU&gt;/AppData/Roaming/Stellarium/</tt> (user data directory)
+  - <tt>modules/</tt>
+   - <tt>MyPlugin/</tt>
+    - <tt>libMyPlugin.dll</tt>
+	
 See the implementation of StelModuleMgr::getPluginsList() for more details.
 
 @section listPlugins List of Static Plugins
-A some details for static plugins you can find in each item of list of plugins:
+You can find some details for static plugins in each item of the list of plugins:
  - @ref angleMeasure
  - @ref compassMarks
  - @ref oculars
+ - @ref telescopeControl
  - @ref satellites
- - @ref historicalSupernovae
  - @ref quasars
  - @ref pulsars
  - @ref exoplanets
  - @ref observability
  - @ref brightNovae
+ - @ref historicalSupernovae
  - @ref equationOfTime
- - @ref fieldOfView
  - @ref navigationalStars
  - @ref meteorShowers
+ - @ref fieldOfView
  - @ref pointerCoordinates
+ - @ref scenery3D
  - @ref archaeoLines
  - @ref remoteControl
+ - @ref remoteSync
 
 You can find some untechnical details on our wiki [Plugins](http://www.stellarium.org/wiki/index.php/Plugins) page.
 
