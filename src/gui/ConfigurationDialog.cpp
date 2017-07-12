@@ -860,6 +860,7 @@ void ConfigurationDialog::saveAllSettings()
 	}
 
 	// toolbar auto-hide status
+	StelApp& app = StelApp::getInstance();
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
@@ -869,9 +870,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_galactic_grid_button", gui->getFlagShowGalacticGridButton());
 	conf->setValue("gui/flag_show_ecliptic_grid_button", gui->getFlagShowEclipticGridButton());
 	conf->setValue("gui/flag_show_boundaries_button", gui->getFlagShowConstellationBoundariesButton());
-	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
-	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagSouthAzimuthUsage());
-	conf->setValue("gui/flag_use_formatting_output", StelApp::getInstance().getFlagUseFormattingOutput());
+	conf->setValue("gui/flag_show_decimal_degrees", app.getFlagShowDecimalDegrees());
+	conf->setValue("gui/flag_use_azimuth_from_south", app.getFlagSouthAzimuthUsage());
+	conf->setValue("gui/flag_use_formatting_output", app.getFlagUseFormattingOutput());
+	conf->setValue("gui/flag_use_ccs_designations", app.getFlagUseCCSDesignation());
 	conf->setValue("gui/flag_time_jd", gui->getButtonBar()->getFlagTimeJd());
 	conf->setValue("gui/flag_show_buttons_background", StelMainView::getInstance().getFlagUseButtonsBackground());
 	conf->setValue("gui/flag_indication_mount_mode", mvmgr->getFlagIndicationMountMode());
@@ -896,7 +898,7 @@ void ConfigurationDialog::saveAllSettings()
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
-	conf->setValue("video/viewport_effect", StelApp::getInstance().getViewportEffect());
+	conf->setValue("video/viewport_effect", app.getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("projection/viewport_center_offset_x", core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
 	conf->setValue("projection/viewport_center_offset_y", core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
