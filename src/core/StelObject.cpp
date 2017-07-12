@@ -154,10 +154,12 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 // Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
 QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
+	StelApp& app = StelApp::getInstance();
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
+	bool withDecimalDegree = app.getFlagShowDecimalDegrees();
+	bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
+	bool withTables = app.getFlagUseFormattingOutput();
+	bool withDesignations = app.getFlagUseCCSDesignation();
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app);
@@ -170,6 +172,11 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (withTables)
 		res += "<table style='margin:-1em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+
+	// TRANSLATORS: Right ascension/Declination
+	QString RADec = qc_("RA/Dec", "celestial coordinate system");
+	if (withDesignations)
+		RADec = QString("%1/%2").arg(QChar(0x03B1), QChar(0x03B4));
 
 	if (flags&RaDecJ2000)
 	{
@@ -187,9 +194,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		if (withTables)
-			res += QString("<tr><td>%1 (J2000.0):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(q_("Right ascension/Declination"), firstCoordinate, secondCoordinate);
+			res += QString("<tr><td>%1 (J2000.0):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(RADec, firstCoordinate, secondCoordinate);
 		else
-			res += q_("Right ascension/Declination") + QString(" (J2000.0): %1/%2").arg(firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1 (J2000.0): %2/%3").arg(RADec, firstCoordinate, secondCoordinate) + "<br>";
 	}
 
 	if (flags&RaDecOfDate)
@@ -208,9 +215,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		if (withTables)
-			res += QString("<tr><td>%1 (%4):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(q_("Right ascension/Declination"), firstCoordinate, secondCoordinate, cepoch);
+			res += QString("<tr><td>%1 (%4):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(RADec, firstCoordinate, secondCoordinate, cepoch);
 		else
-			res += q_("Right ascension/Declination") + QString(" (%3): %1/%2").arg(firstCoordinate, secondCoordinate, cepoch) + "<br>";
+			res += QString("%1 (%4): %2/%3").arg(RADec, firstCoordinate, secondCoordinate, cepoch) + "<br>";
 	}
 
 	if (flags&HourAngle)
@@ -255,10 +262,15 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			}
 		}
 
+		// TRANSLATORS: Hour angle/Declination
+		QString HADec = qc_("HA/Dec", "celestial coordinate system");
+		if (withDesignations)
+			HADec = QString("h/%1").arg(QChar(0x03B4));
+
 		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(q_("Hour angle/Declination"), firstCoordinate, secondCoordinate, apparent);
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
 		else
-			res += q_("Hour angle/Declination") + QString(": %1/%2 %3").arg(firstCoordinate, secondCoordinate, apparent) + "<br>";
+			res += QString("%1: %2/%3 %4").arg(HADec, firstCoordinate, secondCoordinate, apparent) + "<br>";
 
 	}
 
@@ -300,10 +312,15 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			}
 		}
 
+		// TRANSLATORS: Azimuth/Altitude
+		QString AzAlt = qc_("Az./Alt.", "celestial coordinate system");
+		if (withDesignations)
+			AzAlt = "A/a";
+
 		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(q_("Azimuth/Altitude"), firstCoordinate, secondCoordinate, apparent);
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(AzAlt, firstCoordinate, secondCoordinate, apparent);
 		else
-			res += q_("Azimuth/Altitude") + QString(": %1/%2 %3").arg(firstCoordinate, secondCoordinate, apparent) + "<br>";
+			res += QString("%1: %2/%3 %4").arg(AzAlt, firstCoordinate, secondCoordinate, apparent) + "<br>";
 	}
 
 	if (flags&GalacticCoord)
@@ -321,10 +338,15 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(glat,true);
 		}
 
+		// TRANSLATORS: Galactic longitude/latitude
+		QString GalLongLat = qc_("Gal. long./lat.", "celestial coordinate system");
+		if (withDesignations)
+			GalLongLat = "l/b";
+
 		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(q_("Galactic longitude/latitude"), firstCoordinate, secondCoordinate);
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(GalLongLat, firstCoordinate, secondCoordinate);
 		else
-			res += q_("Galactic longitude/latitude") + QString(": %1/%2").arg(firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1: %2/%3").arg(GalLongLat, firstCoordinate, secondCoordinate) + "<br>";
 	}
 
 	if (flags&SupergalacticCoord)
@@ -342,10 +364,15 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			secondCoordinate = StelUtils::radToDmsStr(sglat,true);
 		}
 
+		// TRANSLATORS: Supergalactic longitude/latitude
+		QString SGalLongLat = qc_("Supergal. long./lat.", "celestial coordinate system");
+		if (withDesignations)
+			SGalLongLat = "SGL/SGB";
+
 		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(q_("Supergalactic longitude/latitude"), firstCoordinate, secondCoordinate);
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(SGalLongLat, firstCoordinate, secondCoordinate);
 		else
-			res += q_("Supergalactic longitude/latitude") + QString(": %1/%2").arg(firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1: %2/%3").arg(SGalLongLat, firstCoordinate, secondCoordinate) + "<br>";
 	}
 
 	// N.B. Ecliptical coordinates are particularly earth-bound.
@@ -354,6 +381,11 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	// The formulation here has never computed the true position of any observer planet's orbital plane except for Earth,
 	// or ever displayed the coordinates in the observer planet's equivalent to Earth's ecliptical coordinates.
 	// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
+
+	// TRANSLATORS: Ecliptic longitude/latitude
+	QString EqlLongLat = qc_("Ecl. long./lat.", "celestial coordinate system");
+	if (withDesignations)
+		EqlLongLat = QString("%1/%2").arg(QChar(0x03BB), QChar(0x03B2));
 
 	if (flags&EclipticCoordJ2000)
 	{
@@ -374,9 +406,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		if (withTables)
-			res += QString("<tr><td>%1 (J2000.0):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(q_("Ecliptic longitude/latitude"), firstCoordinate, secondCoordinate);
+			res += QString("<tr><td>%1 (J2000.0):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(EqlLongLat, firstCoordinate, secondCoordinate);
 		else
-			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(firstCoordinate, secondCoordinate) + "<br>";
+			res += QString("%1 (J2000.0): %2/%3").arg(EqlLongLat, firstCoordinate, secondCoordinate) + "<br>";
 	}
 
 	if ((flags&EclipticCoordOfDate) && (QString("Earth Sun").contains(currentPlanet)))
@@ -406,9 +438,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		if (withTables)
-			res += QString("<tr><td>%1 (%4):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(q_("Ecliptic longitude/latitude"), firstCoordinate, secondCoordinate, cepoch) + "</table>";
+			res += QString("<tr><td>%1 (%4):</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td></td></tr>").arg(EqlLongLat, firstCoordinate, secondCoordinate, cepoch) + "</table>";
 		else
-			res += q_("Ecliptic longitude/latitude") + QString(" (%3): %1/%2").arg(firstCoordinate, secondCoordinate, cepoch) + "<br>";
+			res += QString("%1 (%4): %2/%3").arg(EqlLongLat, firstCoordinate, secondCoordinate, cepoch) + "<br>";
 
 		// GZ Only for now: display epsilon_A, angle between Earth's Axis and ecl. of date.
 		if (withDecimalDegree)
@@ -419,26 +451,42 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	else if (withTables)
 		 res += "</table>";
 
-	if (flags&IAUConstellation)
-	{
-		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
-		res += q_("IAU Constellation: %1").arg(constel) + "<br>";
-	}
-
 	if ((flags&SiderealTime) && (currentPlanet=="Earth"))
 	{
 		double longitude=core->getCurrentLocation().longitude;
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=fmod(sidereal, 24.);
 		if (sidereal < 0.) sidereal+=24.;
-		res += q_("Mean Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
+		QString STc = q_("Mean Sidereal Time");
+		QString STd = StelUtils::hoursToHmsStr(sidereal);
+		if (withTables)
+		{
+			res += "<table style='margin:-1em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+		}
+		else
+			res += QString("%1: %2").arg(STc, STd) + "<br>";
+
 		if (core->getUseNutation())
 		{
 			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 			sidereal=fmod(sidereal, 24.);
 			if (sidereal < 0.) sidereal+=24.;
-			res += q_("Apparent Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
+			QString STc = q_("Apparent Sidereal Time");
+			QString STd = StelUtils::hoursToHmsStr(sidereal);
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
+			else
+				res += QString("%1: %2").arg(STc, STd) + "<br>";
 		}
+		if (withTables)
+			res += "</table>";
+	}
+
+	if (flags&IAUConstellation)
+	{
+		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
+		res += q_("IAU Constellation: %1").arg(constel) + "<br>";
 	}
 
 	return res;

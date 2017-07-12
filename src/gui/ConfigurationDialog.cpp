@@ -204,6 +204,8 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
 	ui->checkBoxUseFormattingOutput->setChecked(StelApp::getInstance().getFlagUseFormattingOutput());
 	connect(ui->checkBoxUseFormattingOutput, SIGNAL(toggled(bool)), this, SLOT(updateSettingFormattingOutput(bool)));
+	ui->checkBoxUseCCSDesignations->setChecked(StelApp::getInstance().getFlagUseCCSDesignation());
+	connect(ui->checkBoxUseCCSDesignations, SIGNAL(toggled(bool)), this, SLOT(updateSettingCCSDesignations(bool)));
 	
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
@@ -555,6 +557,11 @@ void ConfigurationDialog::updateStartPointForAzimuth(bool b)
 void ConfigurationDialog::updateSettingFormattingOutput(bool b)
 {
 	StelApp::getInstance().setFlagUseFormattingOutput(b);
+}
+
+void ConfigurationDialog::updateSettingCCSDesignations(bool b)
+{
+	StelApp::getInstance().setFlagUseCCSDesignation(b);
 }
 
 void ConfigurationDialog::cursorTimeOutChanged()
