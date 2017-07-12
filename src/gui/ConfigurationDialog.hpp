@@ -96,6 +96,7 @@ private slots:
 
 	void updateStartPointForAzimuth(bool b);
 	void updateSettingFormattingOutput(bool b);
+	void updateSettingCCSDesignations(bool b);
 
 	void newStarCatalogData();
 	void downloadStars();

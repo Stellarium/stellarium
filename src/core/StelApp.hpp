@@ -239,6 +239,11 @@ public slots:
 	//! Get flag for using of formatting output for coordinates
 	bool getFlagUseFormattingOutput() const {return flagUseFormattingOutput;}
 
+	//! Set flag for using designations for celestial coordinate systems
+	void setFlagUseCCSDesignation(bool b);
+	//! Get flag for using designations for celestial coordinate systems
+	bool getFlagUseCCSDesignation() const {return flagUseCCSDesignation;}
+
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
@@ -411,6 +416,7 @@ private:
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
 	bool flagUseFormattingOutput;
+	bool flagUseCCSDesignation;
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

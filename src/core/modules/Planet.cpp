@@ -552,12 +552,11 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
 			}
 
-			oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2);
-			if (!moonPhase.isEmpty())
-				oss << " (" << moonPhase << ")";
-			oss << "<br>";
 			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
 			oss << QString(q_("Albedo: %1")).arg(QString::number(getAlbedo(), 'f', 3)) << "<br>";
+			if (!moonPhase.isEmpty())
+				oss << QString(q_("Phase: %1")).arg(moonPhase) << "<br>";
+
 		}
 		if (englishName=="Sun")
 		{
