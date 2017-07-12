@@ -482,8 +482,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 			sidereal=fmod(sidereal, 24.);
 			if (sidereal < 0.) sidereal+=24.;
-			QString STc = q_("Apparent Sidereal Time");
-			QString STd = StelUtils::hoursToHmsStr(sidereal);
+			STc = q_("Apparent Sidereal Time");
+			STd = StelUtils::hoursToHmsStr(sidereal);
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(STc, STd);
 			else
