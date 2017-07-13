@@ -33,7 +33,7 @@ class StelScriptSyntaxHighlighter : public QSyntaxHighlighter
 	Q_OBJECT
 
 public:
-	StelScriptSyntaxHighlighter(QTextDocument*  parent=0);
+	StelScriptSyntaxHighlighter(QTextDocument*  parent=Q_NULLPTR);
 	void setFormats(void);
 
 protected:

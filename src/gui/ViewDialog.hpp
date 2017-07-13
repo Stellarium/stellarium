@@ -52,6 +52,7 @@ protected:
 	virtual void createDialogContent();
 private slots:
 	void populateLists();
+	void populateToolTips();
 	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);
 	void projectionChanged();
@@ -83,6 +84,10 @@ private slots:
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);
+
+	void populatePlanetMagnitudeAlgorithmsList();
+	void populatePlanetMagnitudeAlgorithmDescription();
+	void setPlanetMagnitudeAlgorithm(int algorithmID);
 
 	void setSelectedCatalogsFromCheckBoxes();
 	void setSelectedTypesFromCheckBoxes();

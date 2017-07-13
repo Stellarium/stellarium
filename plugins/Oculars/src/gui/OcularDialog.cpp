@@ -45,10 +45,10 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 			   QList<Lens *> *lense)
 	: StelDialog("Oculars")
 	, plugin(pluginPtr)
-	, ccdMapper(NULL)
-	, ocularMapper(NULL)
-	, telescopeMapper(NULL)
-	, lensMapper(NULL)
+	, ccdMapper(Q_NULLPTR)
+	, ocularMapper(Q_NULLPTR)
+	, telescopeMapper(Q_NULLPTR)
+	, lensMapper(Q_NULLPTR)
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
@@ -89,7 +89,7 @@ OcularDialog::~OcularDialog()
 	lensTableModel->disconnect();
 
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 }
 
 /* ********************************************************************* */

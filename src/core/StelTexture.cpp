@@ -34,9 +34,7 @@
 #include <QFuture>
 #include <QtConcurrent>
 
-#include <cstdlib>
-
-StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f),
+StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(Q_NULLPTR), loader(Q_NULLPTR), errorOccured(false), alphaChannel(false), id(0),
 	width(-1), height(-1), glSize(0)
 {
 }
@@ -48,20 +46,21 @@ StelTexture::~StelTexture()
 		//make sure the correct GL context is bound!
 		StelApp::getInstance().ensureGLContextCurrent();
 
-		if (glIsTexture(id)==GL_FALSE)
+		if (gl->glIsTexture(id)==GL_FALSE)
 		{
-			GLenum err = glGetError();
+			GLenum err = gl->glGetError();
 			qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
 		}
 		else
 		{
-			glDeleteTextures(1, &id);
+			gl->glDeleteTextures(1, &id);
 			textureMgr->glMemoryUsage -= glSize;
+			textureMgr->idMap.remove(id);
 			glSize = 0;
 		}
-		#ifndef NDEBUG
+#ifndef NDEBUG
 		qDebug()<<"Deleted StelTexture"<<id<<", total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
-		#endif
+#endif
 		id = 0;
 	}
 	else if (id)
@@ -73,11 +72,29 @@ StelTexture::~StelTexture()
 		networkReply->abort();
 		//networkReply->deleteLater();
 		delete networkReply;
-		networkReply = NULL;
+		networkReply = Q_NULLPTR;
 	}
-	if (loader != NULL) {
+	if (loader != Q_NULLPTR) {
 		delete loader;
-		loader = NULL;
+		loader = Q_NULLPTR;
+	}
+}
+
+void StelTexture::wrapGLTexture(GLuint texId)
+{
+	gl = QOpenGLContext::currentContext()->functions();
+	bool valid = gl->glIsTexture(texId);
+	if(valid)
+	{
+		id = texId;
+		//Note: there is no way to retrieve texture width/height on OpenGL ES
+		//so the members will be wrong
+		//also we can't estimate memory usage because of this
+	}
+	else
+	{
+		errorMessage="No valid OpenGL texture name";
+		errorOccured=true;
 	}
 }
 
@@ -108,12 +125,32 @@ StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
  *************************************************************************/
 StelTexture::GLData StelTexture::loadFromPath(const QString &path)
 {
-	return imageToGLData(QImage(path));
+	try
+	{
+		return imageToGLData(QImage(path));
+	}
+	catch(std::exception& ex) //this catches out-of-memory errors from file conversion
+	{
+		qCritical()<<"Failed loading texture from"<<path<<"error:"<<ex.what();
+		GLData ret;
+		ret.loaderError = ex.what();
+		return ret;
+	}
 }
 
 StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
 {
-	return imageToGLData(QImage::fromData(data));
+	try
+	{
+		return imageToGLData(QImage::fromData(data));
+	}
+	catch(std::exception& ex)  //this catches out-of-memory errors from file conversion
+	{
+		qCritical()<<"Failed loading texture"<<ex.what();
+		GLData ret;
+		ret.loaderError = ex.what();
+		return ret;
+	}
 }
 
 /*************************************************************************
@@ -125,45 +162,85 @@ bool StelTexture::bind(int slot)
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-		glActiveTexture(GL_TEXTURE0 + slot);
-		glBindTexture(GL_TEXTURE_2D, id);
+		gl->glActiveTexture(GL_TEXTURE0 + slot);
+		gl->glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
 	if (errorOccured)
 		return false;
 
+	if(load())
+	{
+		// Finally load the data in the main thread.
+		glLoad(loader->result());
+		delete loader;
+		loader = Q_NULLPTR;
+		if (id != 0)
+		{
+			// The texture is already fully loaded, just bind and return true;
+			gl->glActiveTexture(GL_TEXTURE0 + slot);
+			gl->glBindTexture(GL_TEXTURE_2D, id);
+			return true;
+		}
+		if (errorOccured)
+			return false;
+	}
+	return false;
+}
+
+void StelTexture::waitForLoaded()
+{
+	if(networkReply)
+	{
+		qWarning()<<"StelTexture::waitForLoaded called for a network-loaded texture"<<fullPath;
+		Q_ASSERT(0);
+	}
+	if(loader)
+		loader->waitForFinished();
+}
+
+template <typename T, typename Param, typename Arg>
+void StelTexture::startAsyncLoader(T (*functionPointer)(Param), const Arg &arg)
+{
+	Q_ASSERT(loader==Q_NULLPTR);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,4,0))
+	//own thread pool only supported with Qt 5.4+
+	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, arg));
+#else
+	//this restores compatibility with Qt 5.3, with the drawback of potentially using
+	//more memory while loading textures (because more than one can be loaded at a time)
+	loader = new QFuture<GLData>(QtConcurrent::run(functionPointer, arg));
+#endif
+}
+
+bool StelTexture::load()
+{
 	// If the file is remote, start a network connection.
-	if (loader == NULL && networkReply == NULL && fullPath.startsWith("http://")) {
+	if (loader == Q_NULLPTR && networkReply == Q_NULLPTR && fullPath.startsWith("http://")) {
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));		
+		connect(networkReply, SIGNAL(finished()), this, SLOT(onNetworkReply()));
 		return false;
 	}
 	// The network connection is still running.
-	if (networkReply != NULL)
+	if (networkReply != Q_NULLPTR)
 		return false;
 	// Not a remote file, start a loader from local file.
-	if (loader == NULL)
+	if (loader == Q_NULLPTR)
 	{
-		loader = new QFuture<GLData>(QtConcurrent::run(loadFromPath, fullPath));
+		startAsyncLoader(loadFromPath,fullPath);
 		return false;
 	}
 	// Wait until the loader finish.
-	if (!loader->isFinished())
-		return false;
-	// Finally load the data in the main thread.
-	glLoad(loader->result());
-	delete loader;
-	loader = NULL;
-	return true;
+	return loader->isFinished();
 }
 
 void StelTexture::onNetworkReply()
 {
-	Q_ASSERT(loader == NULL);
+	Q_ASSERT(loader == Q_NULLPTR);
 	if (networkReply->error() != QNetworkReply::NoError)
 	{
 		reportError(networkReply->errorString());
@@ -174,10 +251,10 @@ void StelTexture::onNetworkReply()
 		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
 			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
 		else
-			loader = new QFuture<GLData>(QtConcurrent::run(loadFromData, data));
+			startAsyncLoader(loadFromData, data);
 	}
 	networkReply->deleteLater();
-	networkReply = NULL;
+	networkReply = Q_NULLPTR;
 }
 
 /*************************************************************************
@@ -219,9 +296,9 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 		*format = GL_RGB;
 	*type = GL_UNSIGNED_BYTE;
 	int bpp = *format == GL_LUMINANCE_ALPHA ? 2 :
-			  *format == GL_LUMINANCE ? 1 :
-			  *format == GL_RGBA ? 4 :
-			  3;
+						  *format == GL_LUMINANCE ? 1 :
+									    *format == GL_RGBA ? 4 :
+												 3;
 
 	ret.reserve(width * height * bpp);
 	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
@@ -247,22 +324,22 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 			const char* ptr = (const char*)&c;
 			switch (*format)
 			{
-			case GL_RGBA:
-				ret.append(ptr + 1, 3);
-				ret.append(ptr, 1);
-				break;
-			case GL_RGB:
-				ret.append(ptr + 1, 3);
-				break;
-			case GL_LUMINANCE:
-				ret.append(ptr + 1, 1);
-				break;
-			case GL_LUMINANCE_ALPHA:
-				ret.append(ptr + 1, 1);
-				ret.append(ptr, 1);
-				break;
-			default:
-				Q_ASSERT(false);
+				case GL_RGBA:
+					ret.append(ptr + 1, 3);
+					ret.append(ptr, 1);
+					break;
+				case GL_RGB:
+					ret.append(ptr + 1, 3);
+					break;
+				case GL_LUMINANCE:
+					ret.append(ptr + 1, 1);
+					break;
+				case GL_LUMINANCE_ALPHA:
+					ret.append(ptr + 1, 1);
+					ret.append(ptr, 1);
+					break;
+				default:
+					Q_ASSERT(false);
 			}
 		}
 	}
@@ -273,7 +350,7 @@ bool StelTexture::glLoad(const GLData& data)
 {
 	if (data.data.isEmpty())
 	{
-		reportError("Unknown error");
+		reportError(data.loaderError.isEmpty()?"Unknown error":data.loaderError);
 		return false;
 	}
 
@@ -282,70 +359,76 @@ bool StelTexture::glLoad(const GLData& data)
 
 	//make sure the correct GL context is bound!
 	StelApp::getInstance().ensureGLContextCurrent();
-	initializeOpenGLFunctions();
+	gl = QOpenGLContext::currentContext()->functions();
 
 	//check minimum texture size
 	GLint maxSize;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE,&maxSize);
+	gl->glGetIntegerv(GL_MAX_TEXTURE_SIZE,&maxSize);
 	if(maxSize < width || maxSize < height)
 	{
 		reportError(QString("Texture size (%1/%2) is larger than GL_MAX_TEXTURE_SIZE (%3)!").arg(width).arg(height).arg(maxSize));
 		return false;
 	}
 
-	glActiveTexture(GL_TEXTURE0);
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
+	gl->glActiveTexture(GL_TEXTURE0);
+	gl->glGenTextures(1, &id);
+	gl->glBindTexture(GL_TEXTURE_2D, id);
+	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
+	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
 
 	//the conversion from QImage may result in tightly packed scanlines that are no longer 4-byte aligned!
 	//--> we have to set the GL_UNPACK_ALIGNMENT accordingly
 
 	//remember current alignment
 	GLint oldalignment;
-	glGetIntegerv(GL_UNPACK_ALIGNMENT,&oldalignment);
+	gl->glGetIntegerv(GL_UNPACK_ALIGNMENT,&oldalignment);
 
 	switch(data.format)
 	{
 		case GL_RGBA:
 			//RGBA pixels are always in 4 byte aligned rows
-			glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+			gl->glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 			alphaChannel = true;
 			break;
 		case GL_LUMINANCE_ALPHA:
 			//these ones are at least always in 2 byte aligned rows, but may also be 4 aligned
-			glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
+			gl->glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
 			alphaChannel = true;
 			break;
 		default:
 			//for the other cases, they may be on any alignment (depending on image width)
-			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+			gl->glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			alphaChannel = false;
 	}
 
 	//do pixel transfer
-	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
-				 data.type, data.data.constData());
+	gl->glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
+			 data.type, data.data.constData());
 
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = data.data.size();
-	textureMgr->glMemoryUsage += glSize;
 
-	#ifndef NDEBUG
+#ifndef NDEBUG
 	qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
-	#endif
+#endif
 
 	//restore old value
-	glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
+	gl->glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
+	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
+	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
 	if (loadParams.generateMipmaps)
 	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filterMipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR_MIPMAP_NEAREST);
-		glGenerateMipmap(GL_TEXTURE_2D);
+		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filterMipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR_MIPMAP_NEAREST);
+		gl->glGenerateMipmap(GL_TEXTURE_2D);
+		glSize = glSize + glSize/3; //mipmaps require 1/3 more mem
 	}
+
+	//register ID with textureMgr and increment size
+	textureMgr->glMemoryUsage += glSize;
+	textureMgr->idMap.insert(id,sharedFromThis());
+
+
 	// Report success of texture loading
 	emit(loadingProcessFinished(false));
 	return true;

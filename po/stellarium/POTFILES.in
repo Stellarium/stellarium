@@ -1,6 +1,8 @@
 # Core source files
 src/core/modules/CustomObject.cpp
 src/core/modules/CustomObjectMgr.cpp
+src/core/modules/Asterism.cpp
+src/core/modules/AsterismMgr.cpp
 src/core/modules/Constellation.cpp
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
@@ -42,6 +44,7 @@ src/gui/AstroCalcDialog.cpp
 src/gui/BookmarksDialog.cpp
 src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
+src/scripting/StelScriptMgr.cpp
 src/main.cpp
 src/StelMainView.cpp
 
@@ -125,6 +128,9 @@ plugins/Pulsars/src/ui_pulsarsDialog.h
 plugins/RemoteControl/src/RemoteControl.cpp
 plugins/RemoteControl/src/gui/RemoteControlDialog.cpp
 plugins/RemoteControl/src/ui_remoteControlDialog.h
+plugins/RemoteSync/src/RemoteSync.cpp
+plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp
+plugins/RemoteSync/src/ui_remoteSyncDialog.h
 plugins/Exoplanets/src/Exoplanets.cpp
 plugins/Exoplanets/src/Exoplanet.cpp
 plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp
@@ -152,7 +158,7 @@ plugins/PointerCoordinates/src/PointerCoordinates.cpp
 plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp
 plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h
 plugins/Scenery3d/src/Scenery3d.cpp
-plugins/Scenery3d/src/Scenery3dMgr.cpp
+plugins/Scenery3d/src/S3DRenderer.cpp
 plugins/Scenery3d/src/gui/Scenery3dDialog.cpp
 plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp
 plugins/Scenery3d/src/gui/StoredViewDialog.cpp

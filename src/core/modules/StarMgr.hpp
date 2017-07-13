@@ -62,6 +62,8 @@ typedef struct
 	float separation;	//! Separation at date of last satisfactory observation, arcsec
 } wds;
 
+typedef QMap<StelObjectP, float> StelACStarData;
+
 //! @class StarMgr
 //! Stores the star catalogue data.
 //! Used to render the stars themselves, as well as determine the color table
@@ -112,8 +114,8 @@ public:
 	//! - Sets up the star color table
 	//! - Loads the star texture
 	//! - Loads the star font (for labels on named stars)
-	//! - Loads the texture of the sar selection indicator
-	//! - Lets various display flags from the ini parser object
+	//! - Loads the texture of the star selection indicator
+	//! - Sets various display flags from the ini parser object
 	virtual void init();
 
 	//! Draw the stars and the star selection indicator if necessary.
@@ -131,14 +133,16 @@ public:
 	//! Return a list containing the stars located inside the limFov circle around position v
 	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching Stars object's pointer if exists or NULL
+	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensistive star common name or HP
 	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching star if exists or NULL
+	//! Return the matching star if exists or Q_NULLPTR
 	//! @param name The case in-sensistive standard program planet name
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -150,6 +154,7 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const;	
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Stars"; }
+	virtual QString getStelObjectType() const;
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -330,7 +335,10 @@ public:
 	bool checkAndLoadCatalog(const QVariantMap& m);
 
 	//! Get the list of all Hipparcos stars.
-	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }
+	const QList<StelObjectP>& getHipparcosStars() const { return hipparcosStars; }	
+	const QList<QMap<StelObjectP, float>>& getHipparcosHighPMStars() const { return hipStarsHighPM; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosDoubleStars() const { return doubleHipStars; }
+	const QList<QMap<StelObjectP, float>>& getHipparcosVariableStars() const { return variableHipStars; }
 
 private slots:
 	//! Translate text.
@@ -347,7 +355,6 @@ signals:
 	void labelsAmountChanged(float a);
 
 private:
-
 	void setCheckFlag(const QString& catalogId, bool b);
 
 	void copyDefaultConfigFile();
@@ -385,8 +392,12 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(StelPainter& sPainter, const StelCore* core);
 
+	void populateHipparcosLists();
+	void populateStarsDesignations();
+
 	//! List of all Hipparcos stars.
 	QList<StelObjectP> hipparcosStars;
+	QList<QMap<StelObjectP, float>> doubleHipStars, variableHipStars, hipStarsHighPM;
 
 	LinearFader labelsFader;
 	LinearFader starsFader;

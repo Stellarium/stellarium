@@ -42,6 +42,7 @@
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
@@ -53,6 +54,7 @@
 #include "StelGuiBase.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
+#include "ToastMgr.hpp"
 
 #include <QDateTime>
 #include <QDebug>
@@ -730,6 +732,11 @@ void StelMainScriptAPI::quitStellarium()
 	QCoreApplication::exit();
 }
 
+QStringList StelMainScriptAPI::getPropertyList() const
+{
+	return StelApp::getInstance().getStelPropertyManager()->getPropertyList();
+}
+
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
@@ -755,7 +762,7 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map) const
 	QVariantMap::const_iterator i=map.constBegin();
 	while (i != map.constEnd()){
 
-		if (i.value().type()==QMetaType::QString)
+		if (i.value().type()==QVariant::String)
 		{
 			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key()).arg(i.value().toString()));
 		}
@@ -1384,6 +1391,16 @@ int StelMainScriptAPI::getBortleScaleIndex() const
 void StelMainScriptAPI::setBortleScaleIndex(int index)
 {
 	StelApp::getInstance().getCore()->getSkyDrawer()->setBortleScaleIndex(index);
+}
+
+void StelMainScriptAPI::setDSSMode(bool b)
+{
+	GETSTELMODULE(ToastMgr)->setFlagSurveyShow(b);
+}
+
+bool StelMainScriptAPI::isDSSModeEnabled() const
+{
+	return GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
 }
 
 QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)

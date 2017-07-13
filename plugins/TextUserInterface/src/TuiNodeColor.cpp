@@ -82,7 +82,7 @@ TuiNodeResponse TuiNodeColor::handleEditingKey(int key)
 	return response;
 }
 
-QString TuiNodeColor::getDisplayText() 
+QString TuiNodeColor::getDisplayText() const
 {
 	QString red   = QString("%1").arg(value[0], 2, 'f', 2);
 	QString green = QString("%1").arg(value[1], 2, 'f', 2);

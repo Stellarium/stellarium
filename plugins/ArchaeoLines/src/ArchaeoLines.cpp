@@ -91,7 +91,7 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCustomDeclination1(false)
 	, flagShowCustomDeclination2(false)
 	, lastJDE(0.0)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("ArchaeoLines");
 	font.setPixelSize(16);
@@ -135,38 +135,37 @@ ArchaeoLines::ArchaeoLines()
 	conf = StelApp::getInstance().getSettings();
 
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
-
 }
 
 ArchaeoLines::~ArchaeoLines()
 {
-	delete equinoxLine; equinoxLine=NULL;
-	delete northernSolsticeLine; northernSolsticeLine=NULL;
-	delete southernSolsticeLine; southernSolsticeLine=NULL;
-	delete northernCrossquarterLine; northernCrossquarterLine=NULL;
-	delete southernCrossquarterLine; southernCrossquarterLine=NULL;
-	delete northernMajorStandstillLine0; northernMajorStandstillLine0=NULL;
-	delete northernMajorStandstillLine1; northernMajorStandstillLine1=NULL;
-	delete northernMinorStandstillLine2; northernMinorStandstillLine2=NULL;
-	delete northernMinorStandstillLine3; northernMinorStandstillLine3=NULL;
-	delete southernMinorStandstillLine4; southernMinorStandstillLine4=NULL;
-	delete southernMinorStandstillLine5; southernMinorStandstillLine5=NULL;
-	delete southernMajorStandstillLine6; southernMajorStandstillLine6=NULL;
-	delete southernMajorStandstillLine7; southernMajorStandstillLine7=NULL;
-	delete zenithPassageLine;  zenithPassageLine=NULL;
-	delete nadirPassageLine;   nadirPassageLine=NULL;
-	delete selectedObjectLine; selectedObjectLine=NULL;
-	delete currentSunLine;     currentSunLine=NULL;
-	delete currentMoonLine;    currentMoonLine=NULL;
-	delete currentPlanetLine;  currentPlanetLine=NULL;
-	delete geographicLocation1Line; geographicLocation1Line=NULL;
-	delete geographicLocation2Line; geographicLocation2Line=NULL;
-	delete customAzimuth1Line; customAzimuth1Line=NULL;
-	delete customAzimuth2Line; customAzimuth2Line=NULL;
-	delete customDeclination1Line; customDeclination1Line=NULL;
-	delete customDeclination2Line; customDeclination2Line=NULL;
+	delete equinoxLine; equinoxLine=Q_NULLPTR;
+	delete northernSolsticeLine; northernSolsticeLine=Q_NULLPTR;
+	delete southernSolsticeLine; southernSolsticeLine=Q_NULLPTR;
+	delete northernCrossquarterLine; northernCrossquarterLine=Q_NULLPTR;
+	delete southernCrossquarterLine; southernCrossquarterLine=Q_NULLPTR;
+	delete northernMajorStandstillLine0; northernMajorStandstillLine0=Q_NULLPTR;
+	delete northernMajorStandstillLine1; northernMajorStandstillLine1=Q_NULLPTR;
+	delete northernMinorStandstillLine2; northernMinorStandstillLine2=Q_NULLPTR;
+	delete northernMinorStandstillLine3; northernMinorStandstillLine3=Q_NULLPTR;
+	delete southernMinorStandstillLine4; southernMinorStandstillLine4=Q_NULLPTR;
+	delete southernMinorStandstillLine5; southernMinorStandstillLine5=Q_NULLPTR;
+	delete southernMajorStandstillLine6; southernMajorStandstillLine6=Q_NULLPTR;
+	delete southernMajorStandstillLine7; southernMajorStandstillLine7=Q_NULLPTR;
+	delete zenithPassageLine;  zenithPassageLine=Q_NULLPTR;
+	delete nadirPassageLine;   nadirPassageLine=Q_NULLPTR;
+	delete selectedObjectLine; selectedObjectLine=Q_NULLPTR;
+	delete currentSunLine;     currentSunLine=Q_NULLPTR;
+	delete currentMoonLine;    currentMoonLine=Q_NULLPTR;
+	delete currentPlanetLine;  currentPlanetLine=Q_NULLPTR;
+	delete geographicLocation1Line; geographicLocation1Line=Q_NULLPTR;
+	delete geographicLocation2Line; geographicLocation2Line=Q_NULLPTR;
+	delete customAzimuth1Line; customAzimuth1Line=Q_NULLPTR;
+	delete customAzimuth2Line; customAzimuth2Line=Q_NULLPTR;
+	delete customDeclination1Line; customDeclination1Line=Q_NULLPTR;
+	delete customDeclination2Line; customDeclination2Line=Q_NULLPTR;
 
-	delete configDialog; configDialog=NULL;
+	delete configDialog; configDialog=Q_NULLPTR;
 }
 
 bool ArchaeoLines::configureGui(bool show)
@@ -228,9 +227,9 @@ void ArchaeoLines::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -252,10 +251,10 @@ void ArchaeoLines::init()
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
-	addAction("actionAL_showGeographicLocation1Line",section, N_("Show Line for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
-	addAction("actionAL_showGeographicLocation2Line",section, N_("Show Line for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
-	addAction("actionAL_showCustomAzimuth1Line",     section, N_("Show Line for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
-	addAction("actionAL_showCustomAzimuth2Line",     section, N_("Show Line for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation1Line",section, N_("Show Vertical for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
+	addAction("actionAL_showGeographicLocation2Line",section, N_("Show Vertical for Geographic Location 2"),   "flagShowGeographicLocation2"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomAzimuth1Line",     section, N_("Show Vertical for Custom Azimuth 1"),   "flagShowCustomAzimuth1"  ); // No Shortcuts configured.
+	addAction("actionAL_showCustomAzimuth2Line",     section, N_("Show Vertical for Custom Azimuth 2"),   "flagShowCustomAzimuth2"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomDeclination1Line", section, N_("Show Line for Custom Declination 1"),   "flagShowCustomDeclination1"  ); // No Shortcuts configured.
 	addAction("actionAL_showCustomDeclination2Line", section, N_("Show Line for Custom Declination 2"),   "flagShowCustomDeclination2"  ); // No Shortcuts configured.
 }
@@ -784,6 +783,7 @@ void ArchaeoLines::setGeographicLocation1Label(QString label)
 {
 	geographicLocation1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/geographic_location_1_label", label);
+	emit geographicLocation1LabelChanged(label);
 }
 void ArchaeoLines::setGeographicLocation2Longitude(double lng)
 {
@@ -805,6 +805,7 @@ void ArchaeoLines::setGeographicLocation2Label(QString label)
 {
 	geographicLocation2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/geographic_location_2_label", label);
+	emit geographicLocation2LabelChanged(label);
 }
 
 void ArchaeoLines::updateObserverLocation(StelLocation loc)
@@ -836,11 +837,13 @@ void ArchaeoLines::setCustomAzimuth1Label(QString label)
 {
 	customAzimuth1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_azimuth_1_label", label);
+	emit customAzimuth1LabelChanged(label);
 }
 void ArchaeoLines::setCustomAzimuth2Label(QString label)
 {
 	customAzimuth2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_azimuth_2_label", label);
+	emit customAzimuth2LabelChanged(label);
 }
 void ArchaeoLines::setCustomDeclination1(double dec)
 {
@@ -864,11 +867,13 @@ void ArchaeoLines::setCustomDeclination1Label(QString label)
 {
 	customDeclination1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_declination_1_label", label);
+	emit customDeclination1LabelChanged(label);
 }
 void ArchaeoLines::setCustomDeclination2Label(QString label)
 {
 	customDeclination2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_declination_2_label", label);
+	emit customDeclination2LabelChanged(label);
 }
 
 
@@ -980,10 +985,10 @@ void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
 }
 
 // called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
-QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
+QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine) const
 {
 	QColor color(0,0,0);
-	Vec3f* vColor;
+	const Vec3f* vColor;
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
 			vColor=&equinoxColor;
@@ -1049,7 +1054,7 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
 	return color;
 }
 
-double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine)
+double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine) const
 {
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
@@ -1116,7 +1121,7 @@ double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine)
 	return -100.0;
 }
 
-QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine)
+QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 {
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
@@ -1181,7 +1186,7 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine)
 	}
 }
 
-double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget) const
+double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget)
 {
 	longObs    *= (M_PI/180.0);
 	latObs     *= (M_PI/180.0);
@@ -1359,9 +1364,9 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 				rotFpt.transfo4d(rotLonP90);
 				Vec3d rotFpt2=fpt;
 				rotFpt2.transfo4d(rotLonM90);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, alViewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, alViewportEdgeIntersectCallback, &userData);
-				//sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+				//sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 				return;
 //			}
 //			//else
@@ -1374,8 +1379,8 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 //			middlePoint*=-1.;
 
 //		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-//		sPainter.drawGreatCircleArc(p1, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
-//		sPainter.drawGreatCircleArc(p2, middlePoint, NULL, alViewportEdgeIntersectCallback, &userData);
+//		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
+//		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, alViewportEdgeIntersectCallback, &userData);
 
 //		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 //		#ifdef GL_LINE_SMOOTH
@@ -1438,4 +1443,29 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
+}
+
+void ArchaeoLine::setColor(const Vec3f& c)
+{
+	if (c!=color)
+	{
+		color = c;
+		emit colorChanged(c);
+	}
+}
+void ArchaeoLine::setDefiningAngle(double angle)
+{
+	if (angle != definingAngle)
+	{
+		definingAngle=angle;
+		emit definingAngleChanged(angle);
+	}
+}
+void ArchaeoLine::setLabelVisible(bool b)
+{
+	if (b!=flagLabel)
+	{
+		flagLabel=b;
+		emit flagLabelChanged(b);
+	}
 }

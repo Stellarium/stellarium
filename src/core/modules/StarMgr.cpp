@@ -421,6 +421,10 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
+
+	populateStarsDesignations();
+	populateHipparcosLists();
+
 	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
@@ -500,22 +504,22 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 		// The file is not checked but we found it, maybe from a previous download/version
 		qWarning() << "Found file " << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum..";
 
-		QFile fic(catalogFilePath);
-		if(fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
+		QFile file(catalogFilePath);
+		if(file.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
 		{
 			// Compute the MD5 sum
 			QCryptographicHash md5Hash(QCryptographicHash::Md5);
-			const qint64 cat_sz = fic.size();
+			const qint64 cat_sz = file.size();
 			qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
-			uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
+			uchar *cat = maxStarBufMd5 ? file.map(0, maxStarBufMd5) : Q_NULLPTR;
 			if (!cat)
 			{
 				// The OS was not able to map the file, revert to slower not mmap based method
 				static const qint64 maxStarBufMd5 = 1024*1024*8;
 				char* mmd5buf = (char*)malloc(maxStarBufMd5);
-				while (!fic.atEnd())
+				while (!file.atEnd())
 				{
-					qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
+					qint64 sz = file.read(mmd5buf, maxStarBufMd5);
 					md5Hash.addData(mmd5buf, sz);
 				}
 				free(mmd5buf);
@@ -523,13 +527,13 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			else
 			{
 				md5Hash.addData((const char*)cat, cat_sz);
-				fic.unmap(cat);
+				file.unmap(cat);
 			}
-			fic.close();
+			file.close();
 			if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 			{
 				qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
-				fic.remove();
+				file.remove();
 				return false;
 			}
 			qWarning() << "MD5 sum correct!";
@@ -631,9 +635,16 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
-	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;
+	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;	
+}
 
+void StarMgr::populateHipparcosLists()
+{
 	hipparcosStars.clear();
+	hipStarsHighPM.clear();
+	doubleHipStars.clear();
+	variableHipStars.clear();
+	const int pmLimit = 1; // arcsecond per year!
 	for (int hip=0; hip<=NR_OF_HIP; hip++)
 	{
 		const Star1 *const s = hipIndex[hip].s;
@@ -641,7 +652,30 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		{
 			const SpecialZoneArray<Star1> *const a = hipIndex[hip].a;
 			const SpecialZoneData<Star1> *const z = hipIndex[hip].z;
-			hipparcosStars.push_back(s->createStelObject(a,z));
+			StelObjectP so = s->createStelObject(a,z);
+			hipparcosStars.push_back(so);
+			if (!getGcvsVariabilityType(s->getHip()).isEmpty())
+			{
+				QMap<StelObjectP, float> sa;
+				sa[so] = getGcvsPeriod(s->getHip());
+				variableHipStars.push_back(sa);
+			}
+			if (!getWdsName(s->getHip()).isEmpty())
+			{
+				QMap<StelObjectP, float> sd;
+				sd[so] = getWdsLastSeparation(s->getHip());
+				doubleHipStars.push_back(sd);
+			}
+			// use separate variables for avoid the overflow (esp. for Barnard's star)
+			float pmX = 0.1 * s->getDx0();
+			float pmY = 0.1 * s->getDx1();
+			float pm = 0.001 * std::sqrt((pmX*pmX) + (pmY*pmY));
+			if (qAbs(pm)>=pmLimit)
+			{
+				QMap<StelObjectP, float> spm;
+				spm[so] = pm;
+				hipStarsHighPM.push_back(spm);
+			}
 		}
 	}
 }
@@ -767,7 +801,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	sciAdditionalNamesMapI18n.clear();
 	sciAdditionalNamesIndexI18n.clear();
 
-	qDebug() << "Loading star names from" << QDir::toNativeSeparators(sciNameFile);
+	qDebug() << "Loading scientific star names from" << QDir::toNativeSeparators(sciNameFile);
 	QFile snFile(sciNameFile);
 	if (!snFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
@@ -1438,6 +1472,11 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
+StelObjectP StarMgr::searchByID(const QString &id) const
+{
+	return searchByName(id);
+}
+
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
@@ -1686,12 +1725,20 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	else
 		loadCommonNames(fic);
 
+	// Turn on sci names/catalog names for western culture only
+	setFlagSciNames(skyCultureDir.startsWith("western"));
+	updateI18n();
+}
+
+void StarMgr::populateStarsDesignations()
+{
+	QString fic;
 	fic = StelFileMgr::findFile("stars/default/name.fab");
 	if (fic.isEmpty())
 		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
 	else
 		loadSciNames(fic);
-	
+
 	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
 	if (fic.isEmpty())
 		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
@@ -1709,10 +1756,6 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
 	else
 		loadCrossIdentificationData(fic);
-
-	// Turn on sci names/catalog names for western culture only
-	setFlagSciNames(skyCultureDir.startsWith("western"));
-	updateI18n();
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const
@@ -1747,7 +1790,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	switch (type)
 	{
-		case 0: // Double stars
+		case 0: // Interesting double stars
 		{
 			QStringList doubleStars;
 			doubleStars  << "Asterope" << "Atlas" << "77 Tau" << "δ1 Tau" << "V1016 Ori"
@@ -1773,7 +1816,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			break;
 		}
-		case 1: // Variable stars
+		case 1: // Interesting variable stars
 		{
 			QStringList variableStars;
 			variableStars << "δ Cep" << "Algol" << "Mira" << "λ Tau" << "Sheliak" << "ζ Gem" << "μ Cep"
@@ -1799,6 +1842,38 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			break;
 		}
+		case 2: // Bright double stars
+		{
+			foreach (const StelACStarData& star, doubleHipStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 3: // Bright variable stars
+		{
+			foreach (const StelACStarData& star, variableHipStars)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+			break;
+		}
+		case 4:
+		{
+			foreach (const StelACStarData& star, hipStarsHighPM)
+			{
+				if (inEnglish)
+					result << star.firstKey()->getEnglishName();
+				else
+					result << star.firstKey()->getNameI18n();
+			}
+		}
 		default:
 		{
 			// No stars yet?
@@ -1808,4 +1883,9 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 
 	result.removeDuplicates();
 	return result;
+}
+
+QString StarMgr::getStelObjectType() const
+{
+	return STAR_TYPE;
 }

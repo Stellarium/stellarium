@@ -53,7 +53,7 @@ Landscape::Landscape(float _radius)
 	, defaultExtinctionCoefficient(-1.)
 	, defaultTemperature(-1000.)
 	, defaultPressure(-2.)
-	, horizonPolygon(NULL)
+	, horizonPolygon(Q_NULLPTR)
 	, fontSize(18)
 {
 }
@@ -339,7 +339,7 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 			int textWidth=fm.width(landscapeLabels.at(i).name);
 			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
 		}
-		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, NULL);
+		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, Q_NULLPTR);
 	}
 
 	painter->setLineSmooth(false);
@@ -349,10 +349,10 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 
 LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	: Landscape(_radius)
-	, sideTexs(NULL)
+	, sideTexs(Q_NULLPTR)
 	, nbSideTexs(0)
 	, nbSide(0)
-	, sides(NULL)
+	, sides(Q_NULLPTR)
 	, nbDecorRepeat(0)
 	, fogAltAngle(0.)
 	, fogAngleShift(0.)
@@ -371,7 +371,7 @@ LandscapeOldStyle::~LandscapeOldStyle()
 	if (sideTexs)
 	{
 		delete [] sideTexs;
-		sideTexs = NULL;
+		sideTexs = Q_NULLPTR;
 	}
 
 	if (sides) delete [] sides;
@@ -705,7 +705,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 		if (side.light==drawLight)
 		{
 			side.tex->bind();
-			sPainter.drawSphericalTriangles(side.arr, true, false, NULL, false);
+			sPainter.drawSphericalTriangles(side.arr, true, false, Q_NULLPTR, false);
 		}
 	}
 }
@@ -893,7 +893,7 @@ LandscapeFisheye::LandscapeFisheye(float _radius)
 	, mapTex(StelTextureSP())
 	, mapTexFog(StelTextureSP())
 	, mapTexIllum(StelTextureSP())
-	, mapImage(NULL)
+	, mapImage(Q_NULLPTR)
 	, texFov(360.)
 	, memorySize(0)
 {}
@@ -1051,7 +1051,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius)
 	, fogTexBottom(0.)
 	, illumTexTop(0.)
 	, illumTexBottom(0.)
-	, mapImage(NULL)
+	, mapImage(Q_NULLPTR)
 	, memorySize(sizeof(LandscapeSpherical))
 {}
 

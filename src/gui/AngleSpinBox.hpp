@@ -60,7 +60,7 @@ public:
  		Unknown
 	};
 	
-	AngleSpinBox(QWidget* parent=0, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
+	AngleSpinBox(QWidget* parent=Q_NULLPTR, DisplayFormat format=DMSSymbols, PrefixType prefix=Normal);
 	~AngleSpinBox();
 
 	// QAbstractSpinBox virtual members

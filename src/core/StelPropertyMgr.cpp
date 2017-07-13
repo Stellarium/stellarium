@@ -29,6 +29,11 @@ bool StelProperty::isReadOnly() const
 	return !prop.isWritable();
 }
 
+bool StelProperty::isSynchronizable() const
+{
+	return prop.isWritable() && prop.isStored();
+}
+
 bool StelProperty::canNotify() const
 {
 	return prop.hasNotifySignal();
@@ -116,7 +121,7 @@ void StelPropertyMgr::onStelPropChanged(const QVariant &val)
 #ifndef NDEBUG
 	qDebug()<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
 #endif
-	emit stelPropChanged(prop->getId(),val);
+	emit stelPropertyChanged(prop, val);
 }
 
 QStringList StelPropertyMgr::getPropertyList() const

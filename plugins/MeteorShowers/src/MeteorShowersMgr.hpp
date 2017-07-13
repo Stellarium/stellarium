@@ -47,10 +47,10 @@ file (section [MeteorShowers]).
 */
 
 //! @class MeteorShowersMgr
-//! Main class of the %Meteor Showers plugin, inherits from StelObjectModule.
+//! Main class of the %Meteor Showers plugin, inherits from StelModule.
 //! @author Marcos Cardinot <mcardinot@gmail.com>
 //! @ingroup meteorShowers
-class MeteorShowersMgr : public StelObjectModule
+class MeteorShowersMgr : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enablePlugin READ getEnablePlugin WRITE actionEnablePlugin NOTIFY enablePluginChanged)
@@ -124,16 +124,6 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual bool configureGui(bool show=true);
-
-	//
-	// Methods defined in StelObjectModule class
-	//
-	virtual QList<StelObjectP> searchAround(const Vec3d&, double, const StelCore*) const { return QList<StelObjectP>(); }
-	virtual StelObjectP searchByNameI18n(const QString&) const { return StelObjectP(); }
-	virtual StelObjectP searchByName(const QString&) const { return StelObjectP(); }
-	virtual QStringList listMatchingObjects(const QString&, int, bool, bool) const { return QStringList(); }
-	virtual QStringList listAllObjects(bool) const { return QStringList(); }
-	virtual QString getName() const { return QString(); }
 
 signals:
 	void downloadStatusChanged(DownloadStatus);
@@ -350,6 +340,7 @@ class MeteorShowersStelPluginInterface : public QObject, public StelPluginInterf
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*METEORSHOWERSMGR_HPP_*/

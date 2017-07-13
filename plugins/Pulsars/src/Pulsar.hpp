@@ -42,6 +42,8 @@ class Pulsar : public StelObject
 {
 	friend class Pulsars;
 public:
+	static const QString PULSAR_TYPE;
+
 	//! @param id The official designation for a pulsar, e.g. "PSR J1919+21"
 	Pulsar(const QVariantMap& map);
 	~Pulsar();
@@ -71,7 +73,12 @@ public:
 	//! Get the type of object
 	virtual QString getType(void) const
 	{
-		return "Pulsar";
+		return PULSAR_TYPE;
+	}
+
+	virtual QString getID(void) const
+	{
+		return designation;
 	}
 
 	virtual float getSelectPriority(const StelCore* core) const;

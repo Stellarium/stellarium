@@ -32,17 +32,15 @@ class ScriptService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	ScriptService(const QByteArray& serviceName, QObject* parent = 0);
+	ScriptService(QObject* parent = Q_NULLPTR);
 
-	virtual ~ScriptService() {}
-
-protected:
+	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("scripts"); }
 	//! @brief Implements the HTTP GET method
 	//! @see \ref rcScriptServiceGET
-	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 	//! @brief Implements the HTTP POST method
 	//! @see \ref rcScriptServicePOST
-	virtual void postImpl(const QByteArray &operation, const APIParameters& parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
+	virtual void post(const QByteArray &operation, const APIParameters& parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelScriptMgr* scriptMgr;
 };

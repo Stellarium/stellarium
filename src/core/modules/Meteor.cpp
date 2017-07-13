@@ -50,7 +50,7 @@ Meteor::~Meteor()
 void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		  const float& speed, const QList<ColorPair> colors)
 {
-	// meteor velocity in km/s
+	// meteor speed in km/s
 	m_speed = speed;
 
 	// find the radiant in horizontal coordinates

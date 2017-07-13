@@ -42,7 +42,7 @@ namespace StelOpenGL
 
 	//! Converts a GLenum from glGetError to a string
 	const char* getGLErrorText(GLenum code);
-	//! Retrieves and prints all current OpenGL errors to console (glGetError in a loop)
+	//! Retrieves and prints all current OpenGL errors to console (glGetError in a loop). Returns number of errors.
 	int checkGLErrors(const char *file, int line);
 	//! Clears all queued-up OpenGL errors without handling them
 	void clearGLErrors();

@@ -24,13 +24,14 @@ section~\ref{sec:dso:modifyingTexturesJson} for details of the file format.
 \section{Stellarium DSO Catalog}
 \label{sec:dso:catalog}
 
-Stellarium's DSO Catalog contains over 50000 objects and is available
-for end users as collection of files:
+Stellarium's DSO Catalog contains over 83000 objects\footnote{An extended edition of this catalog 
+with over one million objects may be downloaded and installed manually (see section \ref{sec:ExtraData:DSOs}).} 
+(up to $15.5^m$) and is available for end users as collection of files:
 
 \begin{longtabu} to \textwidth {lX}
 %\emph{File} & \emph{Description}\\
 \file{catalog.txt} &Stellarium DSO Catalog in ASCII format for editing data\\
-\file{catalog.dat} &Stellarium DSO Catalog in binary format for usage within Stellarium\\
+\file{catalog.dat} &Stellarium DSO Catalog in zipped binary format for usage within Stellarium\\
 \file{names.dat}   &List of proper names of the objects from file \file{catalog.dat}
 \end{longtabu}
 
@@ -41,7 +42,10 @@ convert_dso_catalog = true
 \end{configfile}
 
 The file \file{catalog.txt} should be put into the directory
-\file{.../nebulae/default/}.
+\file{.../nebulae/default/} and you should create an empty 
+file \file{catalog.pack} to storing the binary catalog. 
+After converting the data into binary format you should 
+zipped them by command \command{gzip -nc catalog.pack > catalog.dat}.
 
 Stellarium DSO Catalog contains data and supports the designations for
 follow catalogues:
@@ -62,9 +66,12 @@ follow catalogues:
 \item[\textbf{PGC}]  HYPERLEDA. I. Catalog of galaxies\footnote{The PGC and UGC catalogues have a partial support}
 \item[\textbf{UGC}]  The Uppsala General Catalogue of Galaxies
 \item[\textbf{Ced}]  Cederblad Catalog of bright diffuse Galactic nebulae~\cite{1946MeLuS.119....1C}
+\item[\textbf{Arp}]  Atlas of peculiar galaxies~\cite{1966ApJS...14....1A}\newFeature{V0.16.0}
+\item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\cite{2001A&AT...20..717V}\newFeature{V0.16.0}
+\item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\cite{2001A&A...378..843K}\newFeature{V0.16.0}
 \end{description}
 
-Cross-index data for Stellarium DSO Catalog is partially obtained from ``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M} and astronomical database SIMBAD~\cite{2000A&AS..143....9W}.
+Cross-index data for Stellarium DSO Catalog is partially obtained from ``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M} and astronomical databases SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr/simbad/}}~\cite{2000A&AS..143....9W} and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
 
 \subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
@@ -111,6 +118,9 @@ fields with \emph{tab} char as delimiter:
 29 & integer & PGC number (HYPERLEDA. I. Catalog of galaxies); partial\\
 30 & integer & UGC number (The Uppsala General Catalogue of Galaxies); partial\\
 31 & string  & Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)\\
+32 & integer & Arp number (Atlas of Peculiar Galaxies)\\
+33 & integer & VV number (The catalogue of interacting galaxies)\\
+34 & string  & PK number (Catalogue of Galactic Planetary Nebulae)\\
 \bottomrule
 \end{longtabu}
 

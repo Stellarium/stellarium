@@ -24,14 +24,14 @@
 #include "StelDialog.hpp"
 #include "ui_storedViewDialog.h"
 
-class Scenery3dMgr;
+class Scenery3d;
 class StoredViewModel;
 
 class StoredViewDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	StoredViewDialog(QObject* parent = NULL);
+	StoredViewDialog(QObject* parent = Q_NULLPTR);
 	~StoredViewDialog();
 public slots:
 	void retranslate();
@@ -49,7 +49,7 @@ private slots:
 private:
 	Ui_storedViewDialogForm* ui;
 
-	Scenery3dMgr* mgr;
+	Scenery3d* mgr;
 	StoredViewModel* viewModel;
 };
 

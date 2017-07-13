@@ -7,19 +7,37 @@
 % GZ Content OK for 0.15+.
 % 20160329 GZ: typo&grammar check 
 % 20160407 GZ: Split Bortle Scale into chapter for reference appendix
+% 20170416 AW: Updated data from Wikipedia, added references, added image
 
 \chapter{The Bortle Scale of Light Pollution}
 \label{ch:BortleScale}
 
-In Sky\&Telescope February 2001 \name{John E.\ Bortle} published a sky
-quality scale which describes the amount of light
-pollution. Stellarium's light pollution setting tries to follow this
-scale. For completeness we reproduce from Wikipedia: 
+The Bortle scale is a nine-level numeric scale that 
+measures the night sky's brightness of a particular 
+location. It quantifies the astronomical observability 
+of celestial objects and the interference caused by 
+light pollution. \name[John E.\ ]{Bortle} created the 
+scale and published it in \emph{Sky \& Telescope} 
+magazine to help amateur astronomers evaluate the 
+darkness of an observing site, and secondarily, 
+to compare the darkness of observing sites. The 
+scale ranges from Class 1, the darkest skies available 
+on Earth, through Class 9, inner-city skies. 
+It gives several criteria for each level beyond 
+naked-eye limiting magnitude (NELM)~\cite{Bortle}. 
+The accuracy and utility of the scale have been questioned in 
+recent research~\cite{2014MNRAS.442.2600C}.
 
+\begin{figure}[ht]\centering
+\includegraphics[trim=0 55 0 0,clip,width=\textwidth]{bortle_scale.jpg}
+\caption{Light Pollution Simulation / Bortle Scale}
+\label{fig:BortleScale}
+\end{figure}
 
 \section{Excellent dark sky site}
 \textbf{Level:} 1 \\
-\textbf{Limiting magnitude (eye):} 7.6 -- 8.0
+\textbf{Naked-eye limiting magnitude:} 7.6 -- 8.0 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} 21.7 -- 22.0\footnote{Dark Skies Awareness -- \url{http://www.darkskiesawareness.org/nomogram.php}}
 
 Zodiacal light, gegenschein, zodiacal band visible; M33 direct vision
 naked-eye object; Scorpius and Sagittarius regions of the Milky Way
@@ -29,7 +47,8 @@ invisible.
 
 \section{Typical truly dark site}
 \textbf{Level:} 2 \\
-\textbf{Limiting magnitude (eye):} 7.1 -- 7.5
+\textbf{Naked-eye limiting magnitude:} 7.1 -- 7.5 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} 21.5 -- 21.7
 
 Airglow weakly visible near horizon; M33 easily seen with naked eye;
 highly structured Summer Milky Way; distinctly yellowish zodiacal
@@ -40,7 +59,8 @@ distinct naked-eye objects.
 
 \section{Rural sky}
 \textbf{Level:} 3 \\
-\textbf{Limiting magnitude (eye):} 6.6 -- 7.0
+\textbf{Naked-eye limiting magnitude:} 6.6 -- 7.0 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} 21.3 -- 21.5
 
 Some light pollution evident at the horizon; clouds illuminated near
 horizon, dark overhead; Milky Way still appears complex; M15, M4, M5,
@@ -50,7 +70,8 @@ visible; nearer surroundings vaguely visible.
 
 \section{Rural/suburban transition}
 \textbf{Level:} 4 \\
-\textbf{Limiting magnitude (eye):} 6.1 -- 6.5
+\textbf{Naked-eye limiting magnitude:} 6.1 -- 6.5 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} 20.4 -- 21.3
 
 Light pollution domes visible in various directions over the horizon;
 zodiacal light is still visible, but not even halfway extending to the
@@ -60,9 +81,11 @@ object, only visible when higher than 55$\degree$; clouds illuminated
 in the directions of the light sources, but still dark overhead;
 surroundings clearly visible, even at a distance.
 
+\newpage
 \section{Suburban sky}
 \textbf{Level:} 5 \\
-\textbf{Limiting magnitude (eye):} 5.6 -- 6.0
+\textbf{Naked-eye limiting magnitude:} 5.6 -- 6.0 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} 19.1 -- 20.4
 
 Only hints of zodiacal light are seen on the best nights in autumn and
 spring; Milky Way is very weak or invisible near the horizon and looks
@@ -71,7 +94,8 @@ directions; clouds are noticeably brighter than the sky.
 
 \section{Bright suburban sky}
 \textbf{Level:} 6 \\
-\textbf{Limiting magnitude (eye):} 5.1 -- 5.5
+\textbf{Naked-eye limiting magnitude:} 5.1 -- 5.5 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} 18.0 -- 19.1
 
 Zodiacal light is invisible; Milky Way only visible near the zenith;
 sky within 35$\degree$ from the horizon glows grayish white; clouds
@@ -81,7 +105,8 @@ apparent to the unaided eye.
 
 \section{Suburban/urban transition}
 \textbf{Level:} 7 \\
-\textbf{Limiting magnitude (eye):} 5.0 at best
+\textbf{Naked-eye limiting magnitude:} 4.6 -- 5.0 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} 18.0 -- 19.1
 
 Entire sky has a grayish-white hue; strong light sources evident in
 all directions; Milky Way invisible; M31 and M44 may be glimpsed with
@@ -91,16 +116,18 @@ ghosts of their true selves.
 
 \section{City sky}
 \textbf{Level:} 8 \\
-\textbf{Limiting magnitude (eye):} 4.5 at best
+\textbf{Naked-eye limiting magnitude:} 4.1 -- 4.5 \\
+\textbf{Approx. SQM mag/arcsec$^2$:} <18.0
 
 Sky glows white or orange --- you can easily read; M31 and M44 are
 barely glimpsed by an experienced observer on good nights; even with
 telescope, only bright Messier objects can be detected; stars forming
 familiar constellation patterns may be weak or completely invisible.
 
-\section{Inner City sky}
+\section{Inner-city sky}
 \textbf{Level:} 9 \\
-\textbf{Limiting magnitude (eye):} 4.0 at best
+\textbf{Naked-eye limiting magnitude:} 4.0 at best \\
+\textbf{Approx. SQM mag/arcsec$^2$:} <18.0
 
 Sky is brilliantly lit with many stars forming constellations
 invisible and many weaker constellations invisible; aside from

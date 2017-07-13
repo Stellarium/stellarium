@@ -65,7 +65,7 @@ EquationOfTime::EquationOfTime()
 	, flagEnableAtStartup(false)
 	, flagShowEOTButton(false)
 	, fontSize(20)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("EquationOfTime");
 	mainWindow = new EquationOfTimeWindow();
@@ -198,7 +198,7 @@ void EquationOfTime::readSettingsFromConfig(void)
 	conf->endGroup();
 }
 
-void EquationOfTime::saveSettingsToConfig(void)
+void EquationOfTime::saveSettingsToConfig(void) const
 {
 	conf->beginGroup("EquationOfTime");
 
@@ -224,9 +224,9 @@ void EquationOfTime::updateMessageText()
 void EquationOfTime::setFlagShowEOTButton(bool b)
 {
 	if (b==true) {
-		if (toolbarButton==NULL) {
+		if (toolbarButton==Q_NULLPTR) {
 			// Create the button
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_On.png"),
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_Off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),

@@ -22,7 +22,7 @@
 #define _SCENERY3DDIALOG_P_HPP_
 
 #include "S3DEnum.hpp"
-#include "Scenery3dMgr.hpp"
+#include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
@@ -34,13 +34,13 @@ class CubemapModeListModel : public QAbstractListModel
 {
 	Q_OBJECT
 private:
-	Scenery3dMgr* mgr;
+	Scenery3d* mgr;
 public:
 
 
-	CubemapModeListModel(QObject* parent = NULL) : QAbstractListModel(parent)
+	CubemapModeListModel(QObject* parent = Q_NULLPTR) : QAbstractListModel(parent)
 	{
-		mgr = GETSTELMODULE(Scenery3dMgr);
+		mgr = GETSTELMODULE(Scenery3d);
 		Q_ASSERT(mgr);
 	}
 

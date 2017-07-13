@@ -18,8 +18,12 @@
  */
 
 #include "APIController.hpp"
+#include "StelApp.hpp"
 #include <QJsonDocument>
+#include <QThread>
 
+int APIServiceResponse::metaTypeId = qRegisterMetaType<APIServiceResponse>();
+int APIServiceResponse::parametersMetaTypeId = qRegisterMetaType<APIParameters>();
 
 APIController::APIController(int prefixLength, QObject* parent) : HttpRequestHandler(parent), m_prefixLength(prefixLength)
 {
@@ -28,23 +32,39 @@ APIController::APIController(int prefixLength, QObject* parent) : HttpRequestHan
 
 APIController::~APIController()
 {
-	qDeleteAll(m_serviceMap);
-	m_serviceMap.clear();
+	//Services are not deleted here
+	//use the QObject parent relationship for that
 }
 
 void APIController::update(double deltaTime)
 {
-	mutex.lock();
-	foreach(AbstractAPIService* service, m_serviceMap)
+	for(ServiceMap::iterator it = m_serviceMap.begin();it!=m_serviceMap.end();++it)
 	{
-		service->update(deltaTime);
+		(*it)->update(deltaTime);
 	}
-	mutex.unlock();
 }
 
-void APIController::registerService(AbstractAPIService *service)
+void APIController::registerService(RemoteControlServiceInterface *service)
 {
-	m_serviceMap.insert(service->serviceName(), service);
+	QByteArray key = service->getPath().latin1();
+	if(m_serviceMap.contains(key))
+	{
+		qWarning()<<"Service"<<key<<"already registered, skipping...";
+		return;
+	}
+	m_serviceMap.insert(key, service);
+}
+
+void APIController::performGet(RemoteControlServiceInterface *service, const QByteArray &operation, const APIParameters &parameters, APIServiceResponse *response)
+{
+	Q_ASSERT(QThread::currentThread() == StelApp::getInstance().thread());
+	service->get(operation, parameters, *response);
+}
+
+void APIController::performPost(RemoteControlServiceInterface *service, const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse *response)
+{
+	Q_ASSERT(QThread::currentThread() == StelApp::getInstance().thread());
+	service->post(operation, parameters, data, *response);
 }
 
 void APIController::service(HttpRequest &request, HttpResponse &response)
@@ -69,56 +89,54 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	}
 
 	//try to find service
-	//the mutex here is to prevent a very strange crash I had, in which sv is an invalid pointer (but m_serviceMap is ok)
-	//probably caused by the foreach loop in update in the main thread?
-	mutex.lock();
 	ServiceMap::iterator it = m_serviceMap.find(serviceString);
 	if(it!=m_serviceMap.end())
 	{
-		AbstractAPIService* sv = *it;
-		mutex.unlock();
+		RemoteControlServiceInterface* sv = *it;
 
 		//create the response object
 		APIServiceResponse apiresponse;
 		if(request.getMethod()=="GET")
 		{
 #ifdef FORCE_THREADED_SERVICES
-			apiresponse = sv->get(operation, request.getParameterMap());
+			sv->get(operation, request.getParameterMap(), apiresponse);
 #else
-			if(sv->supportsThreadedOperation())
+			if(sv->isThreadSafe())
 			{
-				apiresponse = sv->get(operation, request.getParameterMap());
+				sv->get(operation,request.getParameterMap(), apiresponse);
 			}
 			else
 			{
 				//invoke it in the main thread!
-				QMetaObject::invokeMethod(sv,"get",Qt::BlockingQueuedConnection,
-							  Q_RETURN_ARG(APIServiceResponse, apiresponse),
+				QMetaObject::invokeMethod(this,"performGet",Qt::BlockingQueuedConnection,
+							  Q_ARG(RemoteControlServiceInterface*, sv),
 							  Q_ARG(QByteArray, operation),
-							  Q_ARG(APIParameters, request.getParameterMap()));
+							  Q_ARG(APIParameters, request.getParameterMap()),
+							  Q_ARG(APIServiceResponse*, &apiresponse));
 			}
 #endif
-			apiresponse.applyResponse(&response);
+			applyAPIResponse(apiresponse,response);
 		}
 		else if (request.getMethod()=="POST")
 		{
 #ifdef FORCE_THREADED_SERVICES
-			apiresponse = sv->post(operation, request.getParameterMap(), request.getBody());
+			sv->post(operation, request.getParameterMap(), request.getBody(), apiresponse);
 #else
-			if(sv->supportsThreadedOperation())
+			if(sv->isThreadSafe())
 			{
-				apiresponse = sv->post(operation, request.getParameterMap(), request.getBody());
+				sv->post(operation, request.getParameterMap(), request.getBody(), apiresponse);
 			}
 			else
 			{
-				QMetaObject::invokeMethod(sv,"post",Qt::BlockingQueuedConnection,
-							  Q_RETURN_ARG(APIServiceResponse, apiresponse),
+				QMetaObject::invokeMethod(this,"performPost",Qt::BlockingQueuedConnection,
+							  Q_ARG(RemoteControlServiceInterface*, sv),
 							  Q_ARG(QByteArray, operation),
 							  Q_ARG(APIParameters, request.getParameterMap()),
-							  Q_ARG(QByteArray, request.getBody()));
+							  Q_ARG(QByteArray, request.getBody()),
+							  Q_ARG(APIServiceResponse*, &apiresponse));
 			}
 #endif
-			apiresponse.applyResponse(&response);
+			applyAPIResponse(apiresponse,response);
 		}
 		else
 		{
@@ -129,7 +147,6 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	}
 	else
 	{
-		mutex.unlock();
 		response.setStatus(400,"Bad Request");
 		QString str(QStringLiteral("Unknown service: '%1'\n\nAvailable services:\n").arg(QString::fromUtf8(pathWithoutPrefix)));
 		for(ServiceMap::iterator it = m_serviceMap.begin();it!=m_serviceMap.end();++it)
@@ -139,4 +156,24 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 		}
 		response.write(str.toUtf8(),true);
 	}
+}
+
+void APIController::applyAPIResponse(const APIServiceResponse &apiresponse, HttpResponse &httpresponse)
+{
+	if(apiresponse.status != -1)
+	{
+		httpresponse.setStatus(apiresponse.status, apiresponse.statusText);
+	}
+
+	//apply headers
+	httpresponse.getHeaders().unite(apiresponse.headers);
+
+	//send response data, if any
+	if(apiresponse.responseData.isEmpty())
+	{
+		httpresponse.getHeaders().clear();
+		httpresponse.setStatus(500,"Internal Server Error");
+		httpresponse.write("Service provided no response",true);
+	}
+	httpresponse.write(apiresponse.responseData,true);
 }

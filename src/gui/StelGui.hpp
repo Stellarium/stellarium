@@ -98,6 +98,18 @@ public:
 	//! Get whether the button toggling bookmarks is visible
 	bool getFlagShowBookmarksButton() const;
 
+	//! Get whether the button toggling ICRS grid is visible
+	bool getFlagShowICRSGridButton() const;
+
+	//! Get whether the button toggling galactic grid is visible
+	bool getFlagShowGalacticGridButton() const;
+
+	//! Get whether the button toggling ecliptic grid is visible
+	bool getFlagShowEclipticGridButton() const;
+
+	//! Get whether the button toggling constellation boundaries is visible
+	bool getFlagShowConstellationBoundariesButton() const;
+
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
@@ -131,6 +143,18 @@ public slots:
 
 	//! Define whether the button toggling bookmarks should be visible
 	void setFlagShowBookmarksButton(bool b);
+
+	//! Define whether the button toggling ICRS grid should be visible
+	void setFlagShowICRSGridButton(bool b);
+
+	//! Define whether the button toggling galactic grid should be visible
+	void setFlagShowGalacticGridButton(bool b);
+
+	//! Define whether the button toggling ecliptic grid should be visible
+	void setFlagShowEclipticGridButton(bool b);
+
+	//! Define whether the button toggling constellation boundaries should be visible
+	void setFlagShowConstellationBoundariesButton(bool b);
 
 	void setFlagShowDecimalDegrees(bool b);
 
@@ -224,6 +248,18 @@ private:
 	bool flagShowBookmarksButton;
 	StelButton* btShowBookmarks;
 
+	bool flagShowICRSGridButton;
+	StelButton* btShowICRSGrid;
+
+	bool flagShowGalacticGridButton;
+	StelButton* btShowGalacticGrid;
+
+	bool flagShowEclipticGridButton;
+	StelButton* btShowEclipticGrid;
+
+	bool flagShowConstellationBoundariesButton;
+	StelButton* btShowConstellationBoundaries;
+
 	bool initDone;
 
 	QSizeF savedProgressBarSize;
@@ -253,7 +289,7 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
 	virtual QProgressBar* addProgressBar() {return new QProgressBar;}
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return NULL;}
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return Q_NULLPTR;}
 	virtual void forceRefreshGui() {;}
 	virtual void setVisible(bool b) {visible=b;}
 	virtual bool getVisible() const {return visible;}

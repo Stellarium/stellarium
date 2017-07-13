@@ -57,7 +57,7 @@ ObservationsDialog::ObservationsDialog(QMap<QString, QSqlTableModel *> theTableM
 ObservationsDialog::~ObservationsDialog()
 {
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 }
 
 /* ********************************************************************* */

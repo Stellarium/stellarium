@@ -51,14 +51,17 @@ QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
 QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.
 
 Comet::Comet(const QString& englishName,
-	     int flagLighting,
 	     double radius,
 	     double oblateness,
 	     Vec3f halocolor,
 	     float albedo,
+	     float roughness,
+	     float outgas_intensity,
+	     float outgas_falloff,
 	     const QString& atexMapName,
+	     const QString& aobjModelName,
 	     posFuncType coordFunc,
-	     void* auserDataPtr,
+	     void* orbitPtr,
 	     OsculatingFunctType *osculatingFunc,
 	     bool acloseOrbit,
 	     bool hidden,
@@ -67,23 +70,23 @@ Comet::Comet(const QString& englishName,
 	     float dustTailLengthFact,
 	     float dustTailBrightnessFact)
 	: Planet (englishName,
-		  flagLighting,
 		  radius,
 		  oblateness,
 		  halocolor,
 		  albedo,
+		  roughness,
 		  atexMapName,
-		  "",
+		  "", // no normalmap.
+		  aobjModelName,
 		  coordFunc,
-		  auserDataPtr,
+		  orbitPtr,
 		  osculatingFunc,
 		  acloseOrbit,
 		  hidden,
 		  false, //No atmosphere
 		  true, //halo
 		  pTypeStr),
-	  absoluteMagnitude(0.),
-	  slopeParameter(-1.), //== uninitialized: used in getVMagnitude()
+	  slopeParameter(-1.f), //== uninitialized: used in getVMagnitude()
 	  semiMajorAxis(0.),
 	  isCometFragment(false),
 	  nameIsProvisionalDesignation(false),
@@ -94,12 +97,13 @@ Comet::Comet(const QString& englishName,
 	  lastJDEtail(0.0),
 	  dustTailWidthFactor(dustTailWidthFact),
 	  dustTailLengthFactor(dustTailLengthFact),
-	  dustTailBrightnessFactor(dustTailBrightnessFact)
+	  dustTailBrightnessFactor(dustTailBrightnessFact),
+	  intensityFovScale(1.0f),
+	  intensityMinFov(0.001f), // when zooming in further, Coma is no longer visible.
+	  intensityMaxFov(0.010f) // when zooming out further, MilkyComa is fully visible (when enabled).
 {
-	eclipticPos=Vec3d(0.,0.,0.);
-	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-
+	this->outgas_intensity =outgas_intensity;
+	this->outgas_falloff   =outgas_falloff;
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
@@ -113,7 +117,7 @@ Comet::~Comet()
 {
 }
 
-void Comet::setAbsoluteMagnitudeAndSlope(const double magnitude, const double slope)
+void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
 	if (slope < 0 || slope > 20.0)
 	{
@@ -183,7 +187,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
 	}
 
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Distance)
 	{
@@ -235,7 +239,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		// GZ: Add speed. I don't know where else to place that bit of information.
 		// xgettext:no-c-format
 		oss << QString(q_("Speed: %1 km/s"))
-			   .arg(((CometOrbit*)userDataPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
+			   .arg(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
 		oss << "<br>";
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
@@ -326,25 +330,29 @@ void Comet::update(int deltaTime)
 {
 	Planet::update(deltaTime);
 
+	//calculate FOV fade value, linear fade between intensityMaxFov and intensityMinFov
+	const double vfov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+	intensityFovScale = qBound(0.25,(vfov - intensityMinFov) / (intensityMaxFov - intensityMinFov),1.0);
+
 	// The rest deals with updating tail geometries and brightness
 	StelCore* core=StelApp::getInstance().getCore();
 	double dateJDE=core->getJDE();
 
 	// The CometOrbit is in fact available in userDataPtr!
-	CometOrbit* orbit=(CometOrbit*)userDataPtr;
+	CometOrbit* orbit=(CometOrbit*)orbitPtr;
 	Q_ASSERT(orbit);
 	if (!orbit->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
-	//deltaJDtail=StelCore::JD_SECOND * qMax(1.0, qMin(eclipticPos.length(), 20.0));
+	//deltaJDtail=StelCore::JD_SECOND * qBound(1.0, eclipticPos.length(), 20.0);
 
 	if (fabs(lastJDEtail-dateJDE)>deltaJDEtail)
 	{
 		lastJDEtail=dateJDE;
 
 		// The CometOrbit is in fact available in userDataPtr!
-		CometOrbit* orbit=(CometOrbit*)userDataPtr;
+		CometOrbit* orbit=(CometOrbit*)orbitPtr;
 		Q_ASSERT(orbit);
 		if (!orbit->objectDateValid(dateJDE)) return; // out of useful date range. This should allow having hundreds of comet elements.
 
@@ -401,7 +409,7 @@ void Comet::update(int deltaTime)
 	const bool withAtmosphere=(core->getSkyDrawer()->getFlagHasAtmosphere());
 
 	StelToneReproducer* eye = core->getToneReproducer();
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
+	float lum = core->getSkyDrawer()->surfaceBrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum);
 
@@ -450,7 +458,7 @@ void Comet::update(int deltaTime)
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
 			float extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
-			gastailColorArr.append(gasColor*extinctionFactor* brightnessPerVertexFromHead);
+			gastailColorArr.append(gasColor*extinctionFactor* brightnessPerVertexFromHead*intensityFovScale);
 
 			// dusttail extinction:
 			vertAltAz=core->j2000ToAltAz(dusttailVertexArr.at(i), StelCore::RefractionOn);
@@ -459,15 +467,15 @@ void Comet::update(int deltaTime)
 			oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
 			extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
-			dusttailColorArr.append(dustColor*extinctionFactor * brightnessPerVertexFromHead);
+			dusttailColorArr.append(dustColor*extinctionFactor * brightnessPerVertexFromHead*intensityFovScale);
 
 			brightnessPerVertexFromHead-=brightnessDecreasePerVertexFromHead;
 		}
 	}
 	else // no atmosphere: set all vertices to same brightness.
 	{
-		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
-		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
+		gastailColorArr.fill(gasColor  *intensityFovScale, gastailVertexArr.length());
+		dusttailColorArr.fill(dustColor*intensityFovScale, dusttailVertexArr.length());
 	}
 	//qDebug() << "Comet " << getEnglishName() <<  "JDE: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
@@ -497,7 +505,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		return;
 	}
 	// The CometOrbit is in fact available in userDataPtr!
-	CometOrbit* orbit=(CometOrbit*)userDataPtr;
+	CometOrbit* orbit=(CometOrbit*)orbitPtr;
 	Q_ASSERT(orbit);
 	if (!orbit->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
@@ -511,7 +519,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0), screenPos)
+	if (prj->project(Vec3d(0.), screenPos)
 		&& screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
 		&& screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
 	{
@@ -586,10 +594,10 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	sPainter.setCullFace(false);
 
 	StelToneReproducer* eye = core->getToneReproducer();
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
+	float lum = core->getSkyDrawer()->surfaceBrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum);
-	float magFactor=qMin(qMax(aLum, 0.25f), 2.0f);
+	float magFactor=qBound(0.25f*intensityFovScale, aLum*intensityFovScale, 2.0f);
 	comaTexture->bind();
 	sPainter.setColor(0.3f*magFactor,0.7*magFactor,magFactor);
 	sPainter.setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());

@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
 #include "StelOpenGL.hpp"
+#include "StelOpenGLArray.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -56,6 +57,7 @@
 #include <QWidget>
 #include <QWindow>
 #include <QMessageBox>
+#include <QStandardPaths>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
 #endif
@@ -70,7 +72,7 @@
 #include <clocale>
 
 // Initialize static variables
-StelMainView* StelMainView::singleton = NULL;
+StelMainView* StelMainView::singleton = Q_NULLPTR;
 
 #ifdef USE_OLD_QGLWIDGET
 class StelGLWidget : public QGLWidget
@@ -97,6 +99,7 @@ public:
 		//because we always draw the full background,
 		//lets skip drawing the system background
 		setAttribute(Qt::WA_OpaquePaintEvent);
+		setAttribute(Qt::WA_AcceptTouchEvents);
 		setAutoFillBackground(false);
 	}
 
@@ -166,9 +169,9 @@ private:
 class NightModeGraphicsEffect : public QGraphicsEffect
 {
 public:
-	NightModeGraphicsEffect(StelMainView* parent = NULL)
+	NightModeGraphicsEffect(StelMainView* parent = Q_NULLPTR)
 		: QGraphicsEffect(parent),
-		  parent(parent), fbo(NULL)
+		  parent(parent), fbo(Q_NULLPTR)
 	{
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 
@@ -221,7 +224,7 @@ protected:
 		if (fbo && fbo->size() != size)
 		{
 			delete fbo;
-			fbo = NULL;
+			fbo = Q_NULLPTR;
 		}
 		if (!fbo)
 		{
@@ -306,7 +309,7 @@ private:
 class StelRootItem : public QGraphicsObject
 {
 public:
-	StelRootItem(StelMainView* mainView, QGraphicsItem* parent = NULL)
+	StelRootItem(StelMainView* mainView, QGraphicsItem* parent = Q_NULLPTR)
 		: QGraphicsObject(parent), mainView(mainView)
 	{
 		setFlag(QGraphicsItem::ItemClipsToShape);
@@ -521,7 +524,7 @@ private:
 class StelGuiItem : public QGraphicsWidget
 {
 public:
-	StelGuiItem(QGraphicsItem* parent = NULL)
+	StelGuiItem(QGraphicsItem* parent = Q_NULLPTR)
 		: QGraphicsWidget(parent)
 	{
 		StelApp::getInstance().getGui()->init(this);
@@ -541,9 +544,9 @@ private:
 
 StelMainView::StelMainView(QSettings* settings)
 	: QGraphicsView(),
-	  guiItem(NULL),
-	  gui(NULL),
-	  stelApp(NULL),
+	  guiItem(Q_NULLPTR),
+	  gui(Q_NULLPTR),
+	  stelApp(Q_NULLPTR),
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
@@ -552,6 +555,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  cursorTimeout(-1.f), flagCursorTimeout(false), maxfps(10000.f)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
+	setAttribute(Qt::WA_AcceptTouchEvents);
 	setAutoFillBackground(false);
 
 	configuration = settings;
@@ -749,8 +753,9 @@ void StelMainView::init()
 	//create and initialize main app
 	stelApp = new StelApp(this);
 	stelApp->setGui(gui);
-
 	stelApp->init(conf);
+	//setup StelOpenGLArray global state
+	StelOpenGLArray::initGL();
 	//this makes sure the app knows how large the window is
 	connect(stelScene,SIGNAL(sceneRectChanged(QRectF)),stelApp,SLOT(glWindowHasBeenResized(QRectF)));
 	//also immediately set the current values
@@ -758,6 +763,7 @@ void StelMainView::init()
 
 	StelActionMgr *actionMgr = stelApp->getStelActionManager();
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
+	actionMgr->addAction("actionReload_Shaders", N_("Miscellaneous"), N_("Reload shaders (for development)"), this, "reloadShaders()", "Ctrl+R, P");
 	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
 	
 	StelPainter::initGLShaders();
@@ -811,6 +817,7 @@ void StelMainView::init()
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
+	setFlagUseButtonsBackground(conf->value("gui/flag_show_buttons_background", true).toBool());
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
 	// plugins, because the gui creates the QActions needed by some plugins.
@@ -821,7 +828,7 @@ void StelMainView::init()
 
 	// Set the global stylesheet, this is only useful for the tooltips.
 	StelGui* gui = dynamic_cast<StelGui*>(stelApp->getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 
@@ -845,6 +852,13 @@ void StelMainView::updateNightModeProperty(bool b)
 	// So that the bottom bar tooltips get properly rendered in night mode.
 	setProperty("nightMode", b);
 	nightModeEffect->setEnabled(b);
+}
+
+void StelMainView::reloadShaders()
+{
+	//make sure GL context is bound
+	glContextMakeCurrent();
+	emit reloadShadersRequested();
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
@@ -1205,7 +1219,7 @@ void StelMainView::deinit()
 	glContextMakeCurrent();
 	deinitGL();
 	delete stelApp;
-	stelApp = NULL;
+	stelApp = Q_NULLPTR;
 }
 
 // Update the translated title
@@ -1331,7 +1345,7 @@ void StelMainView::deinitGL()
 
 	stelApp->deinit();
 	delete gui;
-	gui = NULL;
+	gui = Q_NULLPTR;
 }
 
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
@@ -1365,6 +1379,28 @@ void StelMainView::doScreenshot(void)
 
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
+
+	if (StelFileMgr::getScreenshotDir().isEmpty())
+	{
+		qWarning() << "Oops, the directory for screenshots is not set! Let's try create and set it...";
+		// Create a directory for screenshots if main/screenshot_dir option is unset and user do screenshot at the moment!
+		QString screenshotDirSuffix = "/Stellarium";
+		QString screenshotDir;
+		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+		else
+			screenshotDir = StelFileMgr::getUserDir().append(screenshotDirSuffix);
+
+		try
+		{
+			StelFileMgr::setScreenshotDir(screenshotDir);
+			StelApp::getInstance().getSettings()->setValue("main/screenshot_dir", screenshotDir);
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug("Error: cannot create screenshot directory: %s", e.what());
+		}
+	}
 
 	if (screenShotDir == "")
 		shotDir = QFileInfo(StelFileMgr::getScreenshotDir());

@@ -88,11 +88,11 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: toolbarButton(NULL)
+	: toolbarButton(Q_NULLPTR)
 	, useTelescopeServerLogs(false)
 	, useServerExecutables(false)
-	, telescopeDialog(NULL)
-	, slewDialog(NULL)
+	, telescopeDialog(Q_NULLPTR)
+	, slewDialog(Q_NULLPTR)
 	, actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
@@ -190,9 +190,9 @@ void TelescopeControl::init()
 
 		//Create toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			toolbarButton =	new StelButton(NULL,
+			toolbarButton =	new StelButton(Q_NULLPTR,
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -358,6 +358,11 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 			return qSharedPointerCast<StelObject>(telescope);
 	}
 	return 0;
+}
+
+QString TelescopeControl::getStelObjectType() const
+{
+	return TelescopeClient::TELESCOPECLIENT_TYPE;
 }
 
 bool TelescopeControl::configureGui(bool show)
@@ -1608,6 +1613,40 @@ void TelescopeControl::logAtSlot(int slot)
 {
 	if(telescopeServerLogStreams.contains(slot))
 		log_file = telescopeServerLogStreams.value(slot);
+}
+
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+{
+	QStringList result;
+	if (maxNbItem<=0)
+		return result;
+
+	QString tn;
+	bool find;
+	foreach (const TelescopeClientP& telescope, telescopeClients)
+	{
+		tn = inEnglish ? telescope->getEnglishName() : telescope->getNameI18n();
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==tn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (tn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << tn;
+		}
+	}
+	result.sort();
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
+
+	return result;
 }
 
 void TelescopeControl::translations()

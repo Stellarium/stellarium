@@ -33,17 +33,15 @@ class LocationSearchService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	LocationSearchService(const QByteArray& serviceName, QObject* parent = 0);
-
-	virtual ~LocationSearchService() {}
+	LocationSearchService(QObject* parent = Q_NULLPTR);
 
 	//! We work on a copy of the StelLocationMgr, to prevent hitches as the web user is typing
 	//! @returns true
-	bool supportsThreadedOperation() const Q_DECL_OVERRIDE { return true; }
-protected:
+	virtual bool isThreadSafe() const Q_DECL_OVERRIDE { return true; }
+	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("locationsearch"); }
 	//! @brief Implements the GET method.
 	//! @see \ref rcLocationSearchServiceGET
-	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 private slots:
 	// connected to the main location manager in the main thread
 	void mainLocationManagerUpdated();

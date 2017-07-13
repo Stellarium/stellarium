@@ -156,6 +156,11 @@ public slots:
 	//! happened.
 	bool needsMaxFPS() const;
 
+	//! Set the state of the flag of usage background for GUI buttons
+	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; }
+	//! Get the state of the flag of usage background for GUI buttons
+	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
+
 protected:
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this
@@ -173,6 +178,13 @@ signals:
 	//! @remark FS: is threaded access here even a possibility anymore, or a remnant of older code?
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
+	//! Emitted when the "Reload shaders" action is perfomed
+	//! Interested objects should subscribe to this signal and reload their shaders
+	//! when this is emitted
+	void reloadShadersRequested();
+
+	void updateIconsRequested();
+
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
@@ -182,6 +194,8 @@ private slots:
 	void contextDestroyed();
 #endif
 	void updateNightModeProperty(bool b);
+
+	void reloadShaders();
 
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
@@ -226,6 +240,8 @@ private:
 	// Number of second before the mouse cursor disappears
 	float cursorTimeout;
 	bool flagCursorTimeout;
+
+	bool flagUseButtonsBackground;
 
 	double lastEventTimeSec;
 

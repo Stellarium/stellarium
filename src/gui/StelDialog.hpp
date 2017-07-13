@@ -74,7 +74,7 @@ class StelDialog : public QObject
 	Q_OBJECT
 	Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 public:
-	StelDialog(QString dialogName="Default", QObject* parent=NULL);
+	StelDialog(QString dialogName="Default", QObject* parent=Q_NULLPTR);
 	virtual ~StelDialog();
 
 	//! Returns true if the dialog contents have been constructed and are currently shown
@@ -171,7 +171,7 @@ class CustomProxy : public QGraphicsProxyWidget
 {	private:
 	Q_OBJECT
 	public:
-		CustomProxy(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = 0) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}

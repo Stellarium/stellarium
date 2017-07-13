@@ -35,16 +35,15 @@ This section includes settings for the commonly displayed objects.
 \begin{longtabu} to \textwidth {l|l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-apparent\_magnitude\_algorithm & string & Harris & Set algorithm for computation of apparent magnitude of the planets. 
-                                                   Possible values: \emph{Planesas}, \emph{Mueller}, \emph{Harris} 
-                                                   and \emph{Generic}.\\\midrule
-nebula\_magnitude\_limit         & float & 8.5  & Value of limiting magnitude for the deep-sky objects.\\\midrule
-star\_magnitude\_limit           & float & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\\midrule
-planet\_magnitude\_limit  		 & float & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\\midrule
+apparent\_magnitude\_algorithm & string & ExpSup2013 & Set algorithm for computation of apparent magnitude of the planets. 
+                                                   Possible values: \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\\midrule
+nebula\_magnitude\_limit         & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\\midrule
+star\_magnitude\_limit           & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\\midrule
+planet\_magnitude\_limit  		 & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\\midrule
 planets\_orbits\_color\_style    & string & one\_color & Set the style of orbits color. Possible values: \emph{one\_color}, \emph{groups} and \emph{max}.\\\midrule
-flag\_nebula\_magnitude\_limit   & bool & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\\midrule
-flag\_star\_magnitude\_limit     & bool & false & Set to \emph{true} to activate limit for showing stars\\\midrule
-flag\_planet\_magnitude\_limit   & bool & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
+flag\_nebula\_magnitude\_limit   & bool   & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\\midrule
+flag\_star\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing stars\\\midrule
+flag\_planet\_magnitude\_limit   & bool   & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
 extinction\_mode\_below\_horizon & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\\midrule
 flag\_stars               & bool & true  & Set to \emph{false} to hide the stars on start-up\\\midrule
 flag\_star\_name          & bool & true  & Set to \emph{false} to hide the star labels on start-up\\\midrule
@@ -53,44 +52,72 @@ flag\_planets\_hints      & bool & true  & Set to \emph{false} to hide the plane
 flag\_planets\_orbits     & bool & false & Set to \emph{true} to show the planet orbits on startup\\\midrule
 flag\_permanent\_orbits   & bool & false & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\\\midrule
 flag\_planets\_pointers   & bool & false & Set to \emph{true} to show the planet pointer markers on startup\\\midrule
-flag\_ephemeris\_markers  & bool & true & Set to \emph{true} to show the calculated ephemeris markers for Solar system bodies.\\\midrule
-flag\_ephemeris\_dates    & bool & true & Set to \emph{true} to show the dates of calculated ephemeris for Solar system bodies.\\\midrule
 flag\_light\_travel\_time & bool & true  & Should be \emph{true} to improve accuracy in the movement of the planets by compensating 
                                            for the time it takes for light to travel. This has a slight impact on performance, 
                                            but is essential e.g.\ for Jupiter's moons.\\\midrule
 flag\_object\_trails      & bool & false & Turns on and off drawing of object trails (which show the movement of the planets over time).\\\midrule
-flag\_isolated\_trails    & bool & true & Turns on and off drawing of isolated trails.\\\midrule
-flag\_isolated\_orbits    & bool & true & Turns on and off drawing of isolated orbits.\\\midrule
+flag\_isolated\_trails    & bool & true  & Turns on and off drawing of isolated trails.\\\midrule
+flag\_isolated\_orbits    & bool & true  & Turns on and off drawing of isolated orbits.\\\midrule
 flag\_nebula              & bool & true  & Set to \emph{false} to hide the nebulae on start-up. \\\midrule
 flag\_nebula\_name        & bool & false & Set to \emph{true} to show the nebula labels on start-up. \\\midrule
-flag\_nebula\_display\_no\_texture & bool  & false & Set to \emph{true} to suppress displaying of nebula textures. \\\midrule
-nebula\_hints\_amount              & float & 3.0   & Sets the amount of hints [0\ldots10]. \\\midrule
-nebula\_labels\_amount             & float & 3.0   & Sets the amount of labels [0\ldots10].\\\midrule
-flag\_milky\_way                   & bool  & true  & Set to \emph{false} to hide the Milky Way.\\\midrule
-milky\_way\_intensity              & float & 1.0   & Sets the relative brightness with which the milky way is drawn. Typical [1\ldots3]. \\\midrule
-flag\_zodiacal\_light              & bool  & true  & Set to \emph{false} to hide the zodiacal light\\\midrule
-zodiacal\_light\_intensity         & float & 1.0   & Sets the relative brightness with which the zodiacal light is drawn. \\\midrule
-max\_mag\_nebula\_name             & float & 8.0   & Sets the magnitude of the nebulae whose name is shown. \\\midrule
-flag\_nebula\_hints\_proportional & bool & false &Enables/disables proportional markers for deep-sky objects. \\\midrule
-flag\_surface\_brightness\_usage  & bool & false &Enables/disables usage surface brightness for markers for deep-sky objects.\\\midrule
-flag\_use\_type\_filter           & bool & false &Enables/disables usage of the type filters for deep-sky objects. \\\midrule
-flag\_nutation  				  & bool & true & Enables/disables usage nutation.\\\midrule
-flag\_topocentric\_coordinates	  & bool & true & Enables/disables usage topocentric coordinates.\\\midrule
-flag\_grs\_custom                 & bool & false & Turns on and off to using custom settings for calculation of position of Great Red Spot on Jupiter.\\\midrule
-grs\_longitude                    & int  & 216 & Longitude of Great Red Spot on Jupiter in degrees.\\\midrule
-grs\_drift                        & float & 15.0 & Annual drift of Great Red Spot on Jupiter in degrees.\\\midrule
-grs\_jd                           & float & 2456901.5 & Initial JD for calculation of position of Great Red Spot on Jupiter.\\\midrule
-grs\_measurements\_url            & string &  & URL of recent measurements of GRS' position\footnote{Default value is \url{http://jupos.privat.t-online.de/rGrs.htm}}. \\\midrule
-meteor\_zhr                       & int & 10 & ZHR for sporadic meteors.\\\midrule
-de430\_path	  					  & string &  & Path to JPL DE430 ephemerides.\\\midrule
-flag\_use\_de430				  & bool & false & Enables/disables usage JPL DE430 ephemerides (if available).\\\midrule
-de431\_path	  					  & string &  & Path to JPL DE431 ephemerides.\\\midrule
-flag\_use\_de431				  & bool & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\midrule
-flag\_toast\_survey				  & bool & false & Enables/disables usage Digitized Sky Survey in TOAST format.\\\midrule
-toast\_survey\_host				  & string &  & Host of Digitized Sky Survey storage data.\\\midrule
-toast\_survey\_directory		  & string & results & Directory name of Digitized Sky Survey storage data.\\\midrule
-toast\_survey\_levels			  & int & 11 & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
+flag\_nebula\_display\_no\_texture & bool   & false & Set to \emph{true} to suppress displaying of nebula textures. \\\midrule
+nebula\_hints\_amount              & float  & 3.0   & Sets the amount of hints [0\ldots10]. \\\midrule
+nebula\_labels\_amount             & float  & 3.0   & Sets the amount of labels [0\ldots10].\\\midrule
+flag\_milky\_way                   & bool   & true  & Set to \emph{false} to hide the Milky Way.\\\midrule
+milky\_way\_intensity              & float  & 1.0   & Sets the relative brightness with which the milky way is drawn. Typical [1\ldots3]. \\\midrule
+flag\_zodiacal\_light              & bool   & true  & Set to \emph{false} to hide the zodiacal light\\\midrule
+zodiacal\_light\_intensity         & float  & 1.0   & Sets the relative brightness with which the zodiacal light is drawn. \\\midrule
+max\_mag\_nebula\_name             & float  & 8.0   & Sets the magnitude of the nebulae whose name is shown. \\\midrule
+flag\_nebula\_hints\_proportional  & bool   & false & Enables/disables proportional markers for deep-sky objects. \\\midrule
+flag\_surface\_brightness\_usage   & bool   & false & Enables/disables usage surface brightness for markers for deep-sky objects.\\\midrule
+flag\_surface\_brightness\_arcsec  & bool   & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\\midrule
+flag\_use\_type\_filter            & bool   & false & Enables/disables usage of the type filters for deep-sky objects. \\\midrule
+flag\_nutation  				   & bool   & true  & Enables/disables usage nutation.\\\midrule
+flag\_topocentric\_coordinates	   & bool   & true  & Enables/disables usage topocentric coordinates.\\\midrule
+flag\_grs\_custom                  & bool   & false & Turns on and off to using custom settings for calculation of position of Great Red Spot on Jupiter.\\\midrule
+grs\_longitude                     & int    & 216   & Longitude of Great Red Spot on Jupiter in degrees.\\\midrule
+grs\_drift                         & float  & 15.0  & Annual drift of Great Red Spot on Jupiter in degrees.\\\midrule
+grs\_jd                            & float  & 2456901.5 & Initial JD for calculation of position of Great Red Spot on Jupiter.\\\midrule
+grs\_measurements\_url             & string &       & URL of recent measurements of GRS' position\footnote{Default value is \url{http://jupos.privat.t-online.de/rGrs.htm}}. \\\midrule
+meteor\_zhr                        & int    & 10    & ZHR for sporadic meteors.\\\midrule
+de430\_path	  					   & string &       & Path to JPL DE430 ephemerides file.\\\midrule
+flag\_use\_de430				   & bool   & false & Enables/disables usage JPL DE430 ephemerides (if available).\\\midrule
+de431\_path	  					   & string &       & Path to JPL DE431 ephemerides file.\\\midrule
+flag\_use\_de431				   & bool   & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\midrule
+flag\_toast\_survey				   & bool   & false & Enables/disables usage Digitized Sky Survey in TOAST format.\\\midrule
+toast\_survey\_host				   & string &       & Host of Digitized Sky Survey storage data.\\\midrule
+toast\_survey\_directory		   & string & results & Directory name of Digitized Sky Survey storage data.\\\midrule
+toast\_survey\_levels			   & int    & 11    & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
 \end{longtabu}
+
+\subsection{\big[astrocalc\big]}
+\label{sec:config.ini:astrocalc}
+
+This section includes settings for the Astronomical Calculations feature.
+
+\begin{longtabu} to \textwidth {l|l|l|X}
+\toprule
+\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+flag\_ephemeris\_markers  & bool & true  & Set to \emph{true} to show the calculated ephemeris markers for Solar system bodies.\\\midrule
+flag\_ephemeris\_dates    & bool & false  & Set to \emph{true} to show the dates of calculated ephemeris for Solar system bodies.\\\midrule
+flag\_ephemeris\_magnitudes & bool & false  & Set to \emph{true} to show the magnitude of Solar system body for the calculated ephemeride.\\\midrule
+flag\_ephemeris\_horizontal & bool & false  & Set to \emph{true} to use horizontal coordinates for ephemerides.\\\midrule
+ephemeris\_celestial\_body & string & Moon  & Default celestial body for computation of ephemerides.\\\midrule
+ephemeris\_time\_step & int & 6  & Identificator for time step category.\\\midrule
+celestial\_magnitude\_limit & float & 6.0  & Value of limiting magnitude for the celestial objects in computation of their positions.\\\midrule
+celestial\_category & int & 200  & Identificator for default category of celestial bodies.\\\midrule
+flag\_horizontal\_coordinates & bool & false  & Set to \emph{true} to use horizontal coordinates for compute of positions for the celestial objects.\\\midrule
+flag\_phenomena\_opposition & bool & false  & Set to \emph{true} to compute of opposition phenomenon between the Solar system bodies.\\\midrule
+phenomena\_angular\_separation & float & 1.0 & Allowed angular separation between celestial bodies for computation of phenomena.\\\midrule
+phenomena\_celestial\_body & string & Venus & Default celestial body for computation of phenomena.\\\midrule
+phenomena\_celestial\_group & int & 0 & Identificator for group of celestial bodies for computation of phenomenae.\\\midrule
+wut\_magnitude\_limit & float & 10.0  & Value of limiting magnitude for calculations within What's Up Tonight feature.\\\midrule
+wut\_time\_interval & int & 0 & Identificator for time interval within What's Up Tonight feature computations.\\\midrule
+graphs\_celestial\_body & string & Moon  & Default celestial body for draw of graphs.\\\midrule
+graphs\_first\_id & int & 1  & Identificator for left graph (blue line).\\\midrule
+graphs\_second\_id & int & 2 & Identificator for right graph (yellow line).\\\bottomrule
+\end{longtabu}
+
 
 \subsection{\big[color\big]}
 \label{sec:config.ini:color}
@@ -182,28 +209,29 @@ dso\_star\_cloud\_color                 & \ccbox{1.0,1.0,0.1} & star clouds symb
 dso\_star\_color                        & \ccbox{1.0,0.7,0.2} & star symbols. \\\midrule
 dso\_emission\_object\_color            & \ccbox{1.0,0.7,0.2} & emission objects symbols. \\\midrule
 dso\_young\_stellar\_object\_color      & \ccbox{1.0,0.7,0.2} & young stellar objects symbols. \\\midrule
-star\_label\_color                      & \ccbox{0.4,0.3,0.5} &  star labels. \\\midrule
-planet\_names\_color                    & \ccbox{0.5,0.5,0.7} &  planet names. \\\midrule
-planet\_pointers\_color                 & \ccbox{1.0,0.3,0.3} &  planet pointers. \\\midrule
-sso\_orbits\_color                      & \ccbox{0.7,0.2,0.2} &  default orbits. \\\midrule
-major\_planet\_orbits\_color            & \ccbox{0.7,0.2,0.2} &  major planet orbits. \\\midrule
-minor\_planet\_orbits\_color            & \ccbox{0.7,0.5,0.5} &  minor planet orbits. \\\midrule
-dwarf\_planet\_orbits\_color            & \ccbox{0.7,0.5,0.5} &  dwarf planet orbits. \\\midrule
-moon\_orbits\_color                     & \ccbox{0.7,0.2,0.2} &  moon of planet orbits. \\\midrule
-cubewano\_orbits\_color                 & \ccbox{0.7,0.5,0.5} &  cubewano orbits. \\\midrule
-plutino\_orbits\_color                  & \ccbox{0.7,0.5,0.5} &  plutino orbits. \\\midrule
-sdo\_orbits\_color                      & \ccbox{0.7,0.5,0.5} &  scattered disk object orbits. \\\midrule
-oco\_orbits\_color                      & \ccbox{0.7,0.5,0.5} &  Oort cloud object orbits. \\\midrule
-comet\_orbits\_color                    & \ccbox{0.7,0.8,0.8} &  comet orbits. \\\midrule
-mercury\_orbit\_color                   & \ccbox{0.5,0.5,0.5} &  orbit of Mercury. \\\midrule
-venus\_orbit\_color                     & \ccbox{0.9,0.9,0.7} &  orbit of Venus. \\\midrule
-earth\_orbit\_color                     & \ccbox{0.0,0.0,1.0} &  orbit of Earth. \\\midrule
-mars\_orbit\_color                      & \ccbox{0.8,0.4,0.1} &  orbit of Mars. \\\midrule
-jupiter\_orbit\_color                   & \ccbox{1.0,0.6,0.0} &  orbit of Jupiter. \\\midrule
-saturn\_orbit\_color                    & \ccbox{1.0,0.8,0.0} &  orbit of Saturn. \\\midrule
-uranus\_orbit\_color                    & \ccbox{0.0,0.7,1.0} &  orbit of Uranus. \\\midrule
-neptune\_orbit\_color                   & \ccbox{0.0,0.3,1.0} &  orbit of Neptune. \\\midrule
-object\_trails\_color                   & \ccbox{1.0,0.7,0.0} &  planet trails. \\\midrule
+star\_label\_color                      & \ccbox{0.4,0.3,0.5} & star labels. \\\midrule
+planet\_names\_color                    & \ccbox{0.5,0.5,0.7} & planet names. \\\midrule
+planet\_pointers\_color                 & \ccbox{1.0,0.3,0.3} & planet pointers. \\\midrule
+sso\_orbits\_color                      & \ccbox{0.7,0.2,0.2} & default orbits. \\\midrule
+major\_planet\_orbits\_color            & \ccbox{0.7,0.2,0.2} & major planet orbits. \\\midrule
+minor\_planet\_orbits\_color            & \ccbox{0.7,0.5,0.5} & minor planet orbits. \\\midrule
+dwarf\_planet\_orbits\_color            & \ccbox{0.7,0.5,0.5} & dwarf planet orbits. \\\midrule
+moon\_orbits\_color                     & \ccbox{0.7,0.2,0.2} & moon of planet orbits. \\\midrule
+cubewano\_orbits\_color                 & \ccbox{0.7,0.5,0.5} & cubewano orbits. \\\midrule
+plutino\_orbits\_color                  & \ccbox{0.7,0.5,0.5} & plutino orbits. \\\midrule
+sdo\_orbits\_color                      & \ccbox{0.7,0.5,0.5} & scattered disk object orbits. \\\midrule
+oco\_orbits\_color                      & \ccbox{0.7,0.5,0.5} & Oort cloud object orbits. \\\midrule
+comet\_orbits\_color                    & \ccbox{0.7,0.8,0.8} & comet orbits. \\\midrule
+mercury\_orbit\_color                   & \ccbox{0.5,0.5,0.5} & orbit of Mercury. \\\midrule
+venus\_orbit\_color                     & \ccbox{0.9,0.9,0.7} & orbit of Venus. \\\midrule
+earth\_orbit\_color                     & \ccbox{0.0,0.0,1.0} & orbit of Earth. \\\midrule
+mars\_orbit\_color                      & \ccbox{0.8,0.4,0.1} & orbit of Mars. \\\midrule
+jupiter\_orbit\_color                   & \ccbox{1.0,0.6,0.0} & orbit of Jupiter. \\\midrule
+saturn\_orbit\_color                    & \ccbox{1.0,0.8,0.0} & orbit of Saturn. \\\midrule
+uranus\_orbit\_color                    & \ccbox{0.0,0.7,1.0} & orbit of Uranus. \\\midrule
+neptune\_orbit\_color                   & \ccbox{0.0,0.3,1.0} & orbit of Neptune. \\\midrule
+object\_trails\_color                   & \ccbox{1.0,0.7,0.0} & planet trails. \\\midrule
+custom\_marker\_color                   & \ccbox{0.1,1.0,0.1} & custom marker. \\\midrule
 script\_console\_keyword\_color         & \ccbox{1.0,0.0,1.0} & syntax highlight for keywords in the script console. \\\midrule
 script\_console\_module\_color          & \ccbox{0.0,1.0,1.0} & syntax highlight for modules in the script console. \\\midrule
 script\_console\_comment\_color         & \ccbox{1.0,1.0,0.0} & syntax highlight for comments in the script console. \\\midrule
@@ -286,7 +314,10 @@ flag\_show\_cr  & bool & false & Collinder Catalogue (Cr). \\\midrule
 flag\_show\_mel & bool & false & Melotte Catalogue of Deep Sky Objects (Mel).  \\\midrule
 flag\_show\_pgc & bool & false & HYPERLEDA. I. Catalog of galaxies (PGC). \\\midrule
 flag\_show\_ced & bool & false & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). \\\midrule
-flag\_show\_ugc & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\bottomrule
+flag\_show\_ugc & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\midrule
+flag\_show\_arp & bool & false & Atlas of Peculiar Galaxies (Arp). \\\midrule
+flag\_show\_vv  & bool & false & The Catalogue of Interacting Galaxies (VV). \\\midrule
+flag\_show\_pk  & bool & false & The Catalogue of Galactic Planetary Nebulae (PK). \\\bottomrule
 \end{longtabu}
 
 \subsection{\big[dso\_type\_filters\big]}
@@ -336,6 +367,8 @@ selected\_object\_info            & string & all  & Values: \emph{all}, \emph{sh
                                                     and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule
 auto\_hide\_horizontal\_toolbar  & bool   & true & Set to \emph{true} if you want auto hide the horizontal toolbar.\\\midrule
 auto\_hide\_vertical\_toolbar    & bool   & true & Set to \emph{true} if you want auto hide the vertical toolbar.\\\midrule
+custom\_marker\_size             & float   & 5.0 & Size of custom marker.\\\midrule
+custom\_marker\_radius\_limit    & int   & 15 & Limit the click radius for mouse cursor position in any direction for removing of closest custom marker.\\\midrule
 %% NO LONGER HERE!
 %day\_key\_mode                  & string & Specifies the amount of time which is added and subtracted when the 
 %                                                    {[} {]} - and = keys are pressed - calendar days, or sidereal days. 
@@ -708,7 +741,7 @@ Help          & int,int     &  58,39        & Position of Help panel\\\midrule
 DateTime      & int,int     &  1338,944     & Position of time panel\\\bottomrule
 \end{longtabu}
 
-\newpage
+%\newpage
 
 \subsection{\big[DialogSizes\big]}\label{sec:config.ini:DialogSizes}
 

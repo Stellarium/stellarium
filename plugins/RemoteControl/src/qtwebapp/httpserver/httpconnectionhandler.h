@@ -80,9 +80,9 @@ public:
       Constructor.
       @param settings Configuration settings of the HTTP webserver
       @param requestHandler Handler that will process each incoming HTTP request
-      @param sslConfiguration SSL (HTTPS) will be used if not NULL
+      @param sslConfiguration SSL (HTTPS) will be used if not Q_NULLPTR
     */
-    HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, HttpSslConfiguration* sslConfiguration=NULL);
+    HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, HttpSslConfiguration* sslConfiguration=Q_NULLPTR);
 
     /** Destructor */
     virtual ~HttpConnectionHandler();

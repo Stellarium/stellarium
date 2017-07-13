@@ -20,22 +20,26 @@
 #ifndef REMOTESYNC_HPP_
 #define REMOTESYNC_HPP_
 
+#include "StelModule.hpp"
+#include "SyncClient.hpp"
+#include "SyncServer.hpp"
+
 #include <QFont>
 #include <QKeyEvent>
-
-#include "StelModule.hpp"
+#include <QLoggingCategory>
+#include <QTimer>
 
 class RemoteSyncDialog;
-class SyncServer;
-class SyncClient;
+
+Q_DECLARE_LOGGING_CATEGORY(remoteSync)
 
 //! Main class of the RemoteSync plug-in.
 //! Provides a synchronization mechanism for multiple Stellarium instances in a network.
-//! This plugin has been developed during ESA SoCiS 2015.
+//! This plugin has been developed during ESA SoCiS 2015/2016.
 class RemoteSync : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(SyncState)
+	Q_ENUMS(SyncState ClientBehaviour)
 
 public:
 	enum SyncState
@@ -43,7 +47,17 @@ public:
 		IDLE, //Plugin is disabled
 		SERVER, //Plugin is running as server
 		CLIENT, //Plugin is connected as a client to a server
-		CLIENT_CONNECTING //Plugin is currently trying to connect to a server
+		CLIENT_CONNECTING, //Plugin is currently trying to connect to a server
+		CLIENT_CLOSING, //Plugin is disconnecting from the server
+		CLIENT_WAIT_RECONNECT //Plugin is waiting to try reconnecting again
+	};
+
+	//! Defines behavior when client connection is lost/server quits
+	enum ClientBehavior
+	{
+		NONE, //do nothing
+		RECONNECT, //automatically try to reconnect
+		QUIT //quit the client
 	};
 
 	RemoteSync();
@@ -62,12 +76,21 @@ public:
 	QString getClientServerHost() const { return clientServerHost; }
 	int getClientServerPort() const { return clientServerPort; }
 	int getServerPort() const { return serverPort; }
+	SyncClient::SyncOptions getClientSyncOptions() const { return syncOptions; }
+	QStringList getStelPropFilter() const { return stelPropFilter; }
+	ClientBehavior getConnectionLostBehavior() const { return connectionLostBehavior; }
+	ClientBehavior getQuitBehavior() const { return quitBehavior; }
+
 	SyncState getState() const { return state; }
 
 public slots:
 	void setClientServerHost(const QString& clientServerHost);
 	void setClientServerPort(const int port);
 	void setServerPort(const int port);
+	void setClientSyncOptions(SyncClient::SyncOptions options);
+	void setStelPropFilter(const QStringList& stelPropFilter);
+	void setConnectionLostBehavior(const ClientBehavior bh);
+	void setQuitBehavior(const ClientBehavior bh);
 
 	//! Starts the plugin in server mode, on the port specified by the serverPort property.
 	//! If currently in a state other than IDLE, this call has no effect.
@@ -78,7 +101,7 @@ public slots:
 	void stopServer();
 
 	//! Connects the plugin to the server specified by the clientServerHost and clientServerPort properties.
-	//! If currently in a state other than IDLE, this call has no effect.
+	//! If currently in a state other than IDLE or CLIENT_WAIT_RECONNECT, this call has no effect.
 	void connectToServer();
 
 	//! Disconnects from the server and returns to the IDLE state.
@@ -103,19 +126,28 @@ public slots:
 	void restoreDefaultSettings();
 
 signals:
-	void errorOccurred(const QString errorString);
-	void clientServerHostChanged(const QString clientServerHost);
+	void errorOccurred(const QString& errorString);
+	void clientServerHostChanged(const QString& clientServerHost);
 	void clientServerPortChanged(const int port);
 	void serverPortChanged(const int port);
+	void clientSyncOptionsChanged(const SyncClient::SyncOptions options);
+	void stelPropFilterChanged(const QStringList& stelPropFilter);
+	void connectionLostBehaviorChanged(const ClientBehavior bh);
+	void quitBehaviorChanged(const ClientBehavior bh);
+
 	void stateChanged(RemoteSync::SyncState state);
 
 private slots:
-	void clientDisconnected();
+	void clientDisconnected(bool clean);
 	void clientConnected();
-	void clientConnectionFailed();
 private:
 	void setState(RemoteSync::SyncState state);
 	void setError(const QString& errorString);
+
+	SyncState applyClientBehavior(ClientBehavior bh);
+
+	static QString packStringList(const QStringList props);
+	static QStringList unpackStringList(const QString packedProps);
 
 	//The host string/IP addr to connect to
 	QString clientServerHost;
@@ -123,8 +155,14 @@ private:
 	int clientServerPort;
 	//the port used in server mode
 	int serverPort;
-	SyncState state;
+	SyncClient::SyncOptions syncOptions;
+	QStringList stelPropFilter;
+	ClientBehavior connectionLostBehavior;
+	ClientBehavior quitBehavior;
 
+	QTimer reconnectTimer;
+
+	SyncState state;
 	SyncServer* server;
 	SyncClient* client;
 
@@ -153,6 +191,7 @@ class RemoteSyncStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*REMOTESYNC_HPP_*/

@@ -54,7 +54,7 @@ protected:
 	virtual void update() {}
 
 	//! Subclasses can call this to broadcast a message to all valid connected clients
-	void broadcastMessage(const SyncMessage& msg);
+	void broadcastMessage(const SyncProtocol::SyncMessage& msg);
 	//! Free to use by sublasses. Recommendation: use to track if update() should broadcast a message.
 	bool isDirty;
 	//! Direct access to StelCore
@@ -98,34 +98,78 @@ void TypedSyncServerEventSender<T>::update()
 }
 
 //! Notifies clients of simulation time jumps and time scale changes
-class TimeEventSender : public TypedSyncServerEventSender<Time>
+class TimeEventSender : public TypedSyncServerEventSender<SyncProtocol::Time>
 {
 	Q_OBJECT
 
 public:
 	TimeEventSender();
 protected:
-	Time constructMessage() Q_DECL_OVERRIDE;
+	SyncProtocol::Time constructMessage() Q_DECL_OVERRIDE;
 };
 
-class LocationEventSender : public TypedSyncServerEventSender<Location>
+class LocationEventSender : public TypedSyncServerEventSender<SyncProtocol::Location>
 {
 	Q_OBJECT
 public:
 	LocationEventSender();
 protected:
-	Location constructMessage() Q_DECL_OVERRIDE;
+	SyncProtocol::Location constructMessage() Q_DECL_OVERRIDE;
 };
 
-class SelectionEventSender : public TypedSyncServerEventSender<Selection>
+class SelectionEventSender : public TypedSyncServerEventSender<SyncProtocol::Selection>
 {
 	Q_OBJECT
 public:
 	SelectionEventSender();
 protected:
-	Selection constructMessage() Q_DECL_OVERRIDE;
+	SyncProtocol::Selection constructMessage() Q_DECL_OVERRIDE;
 private:
 	StelObjectMgr* objMgr;
+};
+
+class StelProperty;
+class StelPropertyMgr;
+class StelPropertyEventSender : public SyncServerEventSender
+{
+	Q_OBJECT
+public:
+	StelPropertyEventSender();
+protected slots:
+	//! Sends all current StelProperties to the client
+	virtual void newClientConnected(SyncRemotePeer& client) Q_DECL_OVERRIDE;
+	void sendStelPropChange(StelProperty* prop, const QVariant& val);
+private:
+	StelPropertyMgr* propMgr;
+};
+
+class StelMovementMgr;
+class ViewEventSender : public TypedSyncServerEventSender<SyncProtocol::View>
+{
+	Q_OBJECT
+public:
+	ViewEventSender();
+protected:
+	SyncProtocol::View constructMessage() Q_DECL_OVERRIDE;
+
+	void update() Q_DECL_OVERRIDE;
+private:
+	StelMovementMgr* mvMgr;
+	Vec3d lastView;
+};
+
+class FovEventSender : public TypedSyncServerEventSender<SyncProtocol::Fov>
+{
+	Q_OBJECT
+public:
+	FovEventSender();
+protected:
+	SyncProtocol::Fov constructMessage() Q_DECL_OVERRIDE;
+
+	void update() Q_DECL_OVERRIDE;
+private:
+	StelMovementMgr* mvMgr;
+	double lastFov;
 };
 
 #endif

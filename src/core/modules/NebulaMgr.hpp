@@ -78,6 +78,16 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setFlagSurfaceBrightnessUsage
 		   NOTIFY flagSurfaceBrightnessUsageChanged
 		   )
+	Q_PROPERTY(bool flagSurfaceBrightnessArcsecUsage
+		   READ getFlagSurfaceBrightnessArcsecUsage
+		   WRITE setFlagSurfaceBrightnessArcsecUsage
+		   NOTIFY flagSurfaceBrightnessArcsecUsageChanged
+		   )
+	Q_PROPERTY(bool flagSurfaceBrightnessShortNotationUsage
+		   READ getFlagSurfaceBrightnessShortNotationUsage
+		   WRITE setFlagSurfaceBrightnessShortNotationUsage
+		   NOTIFY flagSurfaceBrightnessShortNotationUsageChanged
+		   )
 	Q_PROPERTY(double labelsAmount
 		   READ getLabelsAmount
 		   WRITE setLabelsAmount
@@ -283,14 +293,16 @@ public:
 	//! @return an list containing the nebulae located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching nebula object's pointer if exists or NULL.
+	//! Return the matching nebula object's pointer if exists or an "empty" StelObjectP.
 	//! @param nameI18n The case in-sensistive nebula name or NGC M catalog name : format can
 	//! be M31, M 31, NGC31, NGC 31
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching nebula if exists or NULL.
+	//! Return the matching nebula if exists or Q_NULLPTR.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -302,19 +314,21 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Deep-sky objects"; }
+	virtual QString getStelObjectType() const { return Nebula::NEBULA_TYPE; }
 
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
-
-	bool objectInDisplayedCatalog(NebulaP n);
 
 	//! Get designation for latest selected DSO with priority
 	//! @note using for bookmarks feature as example
 	//! @return a designation
 	QString getLatestSelectedDSODesignation();
 
-	//! Get the list of all the bodies of the solar system.
+	//! Get the list of all deep-sky objects.
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
+
+	//! Get the list of deep-sky objects by type.
+	QList<NebulaP> getDeepSkyObjectsByType(const QString& objType);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -661,6 +675,16 @@ public slots:
 	//! Get whether hints (symbols) are visible according to surface brightness value.
 	bool getFlagSurfaceBrightnessUsage(void) const { return Nebula::surfaceBrightnessUsage; }
 
+	//! Set flag for usage of measure unit mag/arcsec^2 to surface brightness value.
+	void setFlagSurfaceBrightnessArcsecUsage(const bool usage) { Nebula::flagUseArcsecSurfaceBrightness=usage; }
+	//! Get flag for usage of measure unit mag/arcsec^2 to surface brightness value.
+	bool getFlagSurfaceBrightnessArcsecUsage(void) const { return Nebula::flagUseArcsecSurfaceBrightness; }
+
+	//! Set flag for usage of short notation for measure unit to surface brightness value.
+	void setFlagSurfaceBrightnessShortNotationUsage(const bool usage) { Nebula::flagUseShortNotationSurfaceBrightness=usage; }
+	//! Get flag for usage of short notation for measure unit to surface brightness value.
+	bool getFlagSurfaceBrightnessShortNotationUsage(void) const { return Nebula::flagUseShortNotationSurfaceBrightness; }
+
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
@@ -709,6 +733,8 @@ signals:
 	void hintsProportionalChanged(bool b);
 	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
+	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
+	void flagSurfaceBrightnessShortNotationUsageChanged(bool b);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);
 
@@ -790,6 +816,9 @@ private:
 	NebulaP searchPGC(unsigned int PGC);
 	NebulaP searchUGC(unsigned int UGC);
 	NebulaP searchCed(QString Ced);	
+	NebulaP searchArp(unsigned int Arp);
+	NebulaP searchVV(unsigned int VV);
+	NebulaP searchPK(QString PK);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
@@ -819,6 +848,8 @@ private:
 	// For DSO convertor
 	bool flagConverter;
 	bool flagDecimalCoordinates;
+
+	bool flagReloading;
 };
 
 #endif // _NEBULAMGR_HPP_

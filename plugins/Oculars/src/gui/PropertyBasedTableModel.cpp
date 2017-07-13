@@ -27,8 +27,8 @@
 /* ********************************************************************* */
 PropertyBasedTableModel::PropertyBasedTableModel(QObject *parent)
 	: QAbstractTableModel(parent)
-	, content(NULL)
-	, modelObject(NULL)
+	, content(Q_NULLPTR)
+	, modelObject(Q_NULLPTR)
 {
 }
 
@@ -36,7 +36,7 @@ PropertyBasedTableModel::PropertyBasedTableModel(QObject *parent)
 PropertyBasedTableModel::~PropertyBasedTableModel()
 {
 	delete modelObject;
-	modelObject = NULL;
+	modelObject = Q_NULLPTR;
 }
 
 void PropertyBasedTableModel::init(QList<QObject *>* content, QObject *model, QMap<int,QString> mappings)

@@ -132,7 +132,7 @@ QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent)
 	: StelDialog("Search", parent)
-	, simbadReply(NULL)
+	, simbadReply(Q_NULLPTR)
 	, flagHasSelectedText(false)
 {
 	ui = new Ui_searchDialogForm;
@@ -154,7 +154,7 @@ SearchDialog::~SearchDialog()
 	if (simbadReply)
 	{
 		simbadReply->deleteLater();
-		simbadReply = NULL;
+		simbadReply = Q_NULLPTR;
 	}
 }
 
@@ -404,7 +404,8 @@ void SearchDialog::setHasSelectedFlag()
 void SearchDialog::enableSimbadSearch(bool enable)
 {
 	useSimbad = enable;	
-	conf->setValue("search/flag_search_online", useSimbad);	
+	conf->setValue("search/flag_search_online", useSimbad);
+	ui->simbadStatusLabel->clear();
 }
 
 void SearchDialog::enableStartOfWordsAutofill(bool enable)
@@ -547,7 +548,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 				   this,
 				   SLOT(onSimbadStatusChanged()));
 			delete simbadReply;
-			simbadReply=NULL;
+			simbadReply=Q_NULLPTR;
 		}
 		simbadResults.clear();
 	}
@@ -632,7 +633,7 @@ void SearchDialog::onSimbadStatusChanged()
 	{
 		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		delete simbadReply;
-		simbadReply=NULL;
+		simbadReply=Q_NULLPTR;
 
 		// Update push button enabled state
 		ui->pushButtonGotoSearchSkyObject->setEnabled(!ui->completionLabel->isEmpty());

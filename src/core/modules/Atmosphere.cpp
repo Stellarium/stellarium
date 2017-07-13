@@ -39,10 +39,10 @@ Atmosphere::Atmosphere(void)
 	: viewport(0,0,0,0)
 	, skyResolutionY(44)
 	, skyResolutionX(44)
-	, posGrid(NULL)
+	, posGrid(Q_NULLPTR)
 	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, indicesBuffer(QOpenGLBuffer::IndexBuffer)
-	, colorGrid(NULL)
+	, colorGrid(Q_NULLPTR)
 	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, averageLuminance(0.f)
 	, overrideAverageLuminance(false)
@@ -106,14 +106,14 @@ Atmosphere::Atmosphere(void)
 Atmosphere::~Atmosphere(void)
 {
 	delete [] posGrid;
-	posGrid = NULL;
+	posGrid = Q_NULLPTR;
 	delete[] colorGrid;
-	colorGrid = NULL;
+	colorGrid = Q_NULLPTR;
 	delete atmoShaderProgram;
-	atmoShaderProgram = NULL;
+	atmoShaderProgram = Q_NULLPTR;
 }
 
-void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
+void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude,
 							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -172,7 +172,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		indicesBuffer.allocate(indices, (skyResolutionX+1)*skyResolutionY*2*2);
 		indicesBuffer.release();
 		delete[] indices;
-		indices=NULL;
+		indices=Q_NULLPTR;
 		
 		colorGridBuffer.destroy();
 		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
@@ -206,7 +206,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	if ((core->getCurrentLocation().planetName=="Earth") && (separation_angle < touch_angle))
 	{
 		float dark_angle = moon_angular_size - sun_angular_size;
-		float min = 0.0001f;  // so bright stars show up at total eclipse
+		float min = 0.0025f; // 0.005f; // 0.0001f;  // so bright stars show up at total eclipse
 		if (dark_angle < 0.f)
 		{
 			// annular eclipse
@@ -250,7 +250,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// Calculate the date from the julian day.
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-	skyb.setDate(year, month, moonPhase);
+	skyb.setDate(year, month, moonPhase, moonMagnitude);
 
 	// Variables used to compute the average sky luminance
 	float sum_lum = 0.f;

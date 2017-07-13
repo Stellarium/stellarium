@@ -110,8 +110,9 @@ equator is the line half way between the Earth's poles.
 \label{fig:AltAz}
 \end{figure}
 
-The \indexterm{Altitude/Azimuth} coordinate system (also called
-\indexterm{Horizontal Coordinate System}) can be used to describe a
+The 
+\indexterm[Coordinate System!Horizontal]{Horizontal Coordinate System} (also called Altitude/Azimuth 
+coordinate system) can be used to describe a
 direction of view (the \indexterm{azimuth} angle) and an angular
 height in the sky (the \indexterm{altitude} angle). The azimuth angle
 is measured clockwise round from due North\footnote{In some textbooks
@@ -163,7 +164,7 @@ draw (see section~\ref{sec:gui:view:markings}).
 \end{figure}
 
 Like the Altitude/Azimuth system, the \indexterm{Right Ascension/Declination}
-(RA/Dec) Coordinate System (or \indexterm{Equatorial Coordinate System}) uses two angles to describe positions in the
+(RA/Dec) Coordinate System (or \indexterm[Coordinate System!Equatorial]{Equatorial Coordinate System}) uses two angles to describe positions in the
 sky. These angles are measured from standard points on the celestial
 sphere. \indexterm{Right ascension} $\alpha$ and \indexterm{declination} $\delta$ are to the celestial sphere what
 longitude and latitude are to terrestrial map makers.
@@ -220,6 +221,7 @@ J2000.0 (see section~\ref{sec:gui:view:markings}).
 
 \subsection{Ecliptical Coordinates}
 \label{sec:Concepts:Ecliptical}
+\index{Coordinate System!Ecliptical}
 
 The earth's orbit around the sun, i.e., the \indexterm{ecliptic},
 defines the ``equatorial line'' of this coordinate system, which is
@@ -271,10 +273,10 @@ display of this \indexterm{Opposition/Conjunction Line} in the Markings dialog
 (Labeled ``O./C. longitude''; \ref{sec:gui:view:markings}).
 
 
-It is interesting to note that star catalogs before \name{Tycho
-  Brahe}'s (1546--1601), most notably the one in \name{Ptolemy}'s
+It is interesting to note that star catalogs before \name[Tycho]{Brahe}'s 
+(1546--1601), most notably the one in \name{Ptolemy}'s
 \indexterm{Almagest}, used Ecliptical coordinates. The reason is
-simple: It was known since \name{Hipparch} that stellar coordinates
+simple: It was known since \name{Hipparchus} that stellar coordinates
 slowly move along the ecliptic through \indexterm{precession}, and the
 correction to coordinates of a date of interest was a simple addition
 of a linear correction to the ecliptical longitude in the
@@ -287,8 +289,9 @@ The Milky Way appears to run along a great circle over the sky,
 mirroring the fact that the sun is a star in it. Coordinates for
 non-stellar objects which belong to the Milky Way like
 \indexterm{pulsars} or \indexterm{planetary nebulae} are often mapped
-in \indexterm{Galactic Coordinates}, where \indexterm{galactic longitude}
-$l$ and \indexterm{galactic latitude} $b$ are usually given in decimal
+in \indexterm[Coordinate System!Galactic]{Galactic Coordinates}, 
+where \indexterm{galactic longitude} $l$ and 
+\indexterm{galactic latitude} $b$ are usually given in decimal
 degrees. Here, the zero point of galactic longitudes lies in the
 Galactic Center.
 
@@ -302,8 +305,8 @@ shortcut if you frequently use these coordinates
 \section{Distance}
 \label{sec:Concepts:Distance}
 
-As \name{Douglas Adams} pointed out in the Hitchhiker's Guide to the
-Galaxy{\cite{THHG}},
+As \name[Douglas]{Adams} (1952--2001) pointed out in the \emph{Hitchhiker's Guide to the
+Galaxy}{\cite{THHG}},
 \begin{quote}
   Space [\ldots] is big. Really big. You just won't believe how vastly, hugely,
   mind-bogglingly big it is. I mean, you may think it's a long way
@@ -393,7 +396,7 @@ doctored alarm clocks that have been set to run in sidereal time!
 \subsection{Julian Day Number}
 \label{sec:Concepts:JulianDay}
 
-In the 19th century, astronomer \name{John Herschel} introduced the use of
+In the 19th century, astronomer \name[John]{Herschel} (1792--1871) introduced the use of
 \indexterm{Julian Day} numbers (invented around the time of the Gregorian calendar
 reform). This is a simple continuous day count starting on January 1, -4712
 (4713 BC). There are no years, months etc., and the integral day
@@ -410,8 +413,8 @@ days have passed, so that e.g. January 1, 2000, 12:00UT is 2451545.0,
 which is an accurately storable number with 7 decimal places, but 12:34:56UT is computed as
 2451545.02426. A more accurate result would yield
 2451545.024259259259... So, for a field where sub-second accuracy
-became crucial like spacecraft operations, the \indexterm{Modified
-  Julian Date} (MJD) has been introduced. It is simply
+became crucial like spacecraft operations, the \indexterm[Julian Day!Modified]{Modified
+  Julian Day} (MJD) has been introduced. It is simply
 \begin{equation}
   \label{eq:MJD}
   MJD=JD-2400000.5. 
@@ -595,7 +598,7 @@ The following list describes sources and a few details about the models for $\De
   based on those of Stephenson \& Morrison (1984), but slightly
   modified to make them compatible with the tidal acceleration
   parameter of $\dot{n}=-23.8946''/\cy^2$ adopted in the ELP 2000-85 lunar
-  theory.
+  theory~\cite{1988A&A...190..342C}.
 
 \item[Stephenson \& Morrison (1995).] This equation was published by
   F. R. Stephenson and L. V. Morrison in the article ``Long-Term
@@ -653,8 +656,9 @@ The following list describes sources and a few details about the models for $\De
   F. R. Stephenson,  L. V. Morrison and C. Y. Hohenkerk in the article 
   ``Measurement of the Earth’s rotation: 720 BC to AD 2015''~\cite{StephensonMorrisonHohenkerk:2016}. 
   The solution combines a spline fit to observations (used between the given limits) 
-  with a parabolic fit (used outside the range).
-  Recommended range of usage: between years -720 and 2016. $\dot{n}=-25.82''/\cy^2$.
+  with a parabolic fit (used as fallback outside the range, but without smooth transitions at the limits, i.e., 
+  values for 2016 and later deviate notably from current estimates, and should not be used for dates after 2015).
+  Recommended range of usage: between years -720.0 and 2016.0 $\dot{n}=-25.82''/\cy^2$.
   
 \item[Espenak \& Meeus (2006).] This solution\footnote{This solution
     is used by default.} by F. Espenak and J. Meeus, based on Morrison
@@ -793,7 +797,7 @@ apparent magnitude.
 The magnitude scale has its roots in antiquity. The Greek astronomer
 \name{Hipparchus} defined the brightest stars in the sky to be \emph{first
 magnitude}, and the dimmest visible to the naked eye to be \emph{sixth
-magnitude}. In the 19th century British astronomer \name{Norman Pogson}
+magnitude}. In the 19th century British astronomer \name[Norman]{Pogson} (1829--1891)
 quantified the scale more precisely, defining it as a logarithmic scale
 where a magnitude~1 object is 100~times as bright as a magnitude~6
 object (a difference of five magnitudes). The zero-point of the modern
@@ -947,7 +951,7 @@ just want to find an object. But it makes a difference when it comes
 to observations of stellar occultations by planets or asteroids. Such
 a body may measure only a few tens of kilometres, and the shadow track
 which it leaves on Earth's surface is of approximately the same
-size.\footnote{Unfortunately Stellarium (as of V0.15) is not accurate
+size.\footnote{Unfortunately Stellarium (as of v0.15.0) is not accurate
   enough to reliably compute such occultations. Even a deviation of
   0.5 arcseconds is too much here.}
 

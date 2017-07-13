@@ -47,16 +47,14 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 DateTimeDialog::~DateTimeDialog()
 {
 	delete ui;
-	ui=NULL;
+	ui=Q_NULLPTR;
 }
 
 void DateTimeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	StelCore *core = StelApp::getInstance().getCore();
-	double jd = core->getJD();
-	// UTC -> local tz
-	setDateTime(jd + (core->getUTCOffset(jd)/24.0));
+	setDateTime(core->getJD());
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));

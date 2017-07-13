@@ -19,7 +19,7 @@
 #include "StelOpenGL.hpp"
 #include <QDebug>
 
-QOpenGLContext* StelOpenGL::mainContext = NULL;
+QOpenGLContext* StelOpenGL::mainContext = Q_NULLPTR;
 
 const char* StelOpenGL::getGLErrorText(GLenum code) {
 	switch (code) {

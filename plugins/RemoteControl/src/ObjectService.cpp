@@ -38,7 +38,7 @@
 #include <QRunnable>
 #include <QWaitCondition>
 
-ObjectService::ObjectService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+ObjectService::ObjectService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
@@ -71,7 +71,7 @@ QString ObjectService::substituteGreek(const QString &text)
 	return SearchDialog::substituteGreek(text);
 }
 
-void ObjectService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void ObjectService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	//make sure the object still "lives" in the main Stel thread, even though
 	//we may currently be in the HTTP thread

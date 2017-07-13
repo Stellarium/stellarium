@@ -163,7 +163,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 	{
 		if (ms->enabled())
 		{
-			equPos = ms->getJ2000EquatorialPos(NULL);
+			equPos = ms->getJ2000EquatorialPos(Q_NULLPTR);
 			equPos.normalize();
 			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2] >= cosLimFov)
 			{
@@ -178,7 +178,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 {
 	if (!m_mgr->getEnablePlugin())
 	{
-		return NULL;
+		return Q_NULLPTR;
 	}
 
 	foreach(const MeteorShowerP& ms, m_meteorShowers)
@@ -194,14 +194,24 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 			}
 		}
 	}
-	return NULL;
+	return Q_NULLPTR;
+}
+
+StelObjectP MeteorShowers::searchByID(const QString &id) const
+{
+	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	{
+		if (ms->getID() == id)
+			return qSharedPointerCast<StelObject>(ms);
+	}
+	return Q_NULLPTR;
 }
 
 StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!m_mgr->getEnablePlugin())
 	{
-		return NULL;
+		return Q_NULLPTR;
 	}
 
 	foreach(const MeteorShowerP& ms, m_meteorShowers)
@@ -214,7 +224,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 			}
 		}
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const

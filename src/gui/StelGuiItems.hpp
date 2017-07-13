@@ -53,8 +53,8 @@ class CornerButtons : public QObject, public QGraphicsItem
 	Q_OBJECT
 	Q_INTERFACES(QGraphicsItem)
 public:
-	CornerButtons(QGraphicsItem* parent=NULL);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	CornerButtons(QGraphicsItem* parent=Q_NULLPTR);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 	virtual QRectF boundingRect() const;
 	void setOpacity(double opacity);
 private:
@@ -77,7 +77,7 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover=QPixmap(),
-		   class StelAction* action=NULL, bool noBackground=false);
+		   class StelAction* action=Q_NULLPTR, bool noBackground=false);
 	
 	//! Constructor
 	//! @param parent the parent item
@@ -144,15 +144,15 @@ protected:
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 private slots:
 	void animValueChanged(qreal value);
+	void updateIcon();
 private:
 	void initCtor(const QPixmap& apixOn,
                   const QPixmap& apixOff,
                   const QPixmap& apixNoChange,
                   const QPixmap& apixHover,
                   StelAction* aaction,
-                  bool noBackground,
-                  bool isTristate);
-	void updateIcon();
+		  bool noBackground,
+		  bool isTristate);
 	int toggleChecked(int);
 
 	QPixmap pixOn;
@@ -180,7 +180,7 @@ class LeftStelBar : public QObject, public QGraphicsItem
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 	virtual QRectF boundingRect() const;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
@@ -203,7 +203,7 @@ class BottomStelBar : public QObject, public QGraphicsItem
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual ~BottomStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
 	virtual QRectF boundingRect() const;
 	QRectF boundingRectNoHelpLabel() const;
 
@@ -276,8 +276,8 @@ private:
 	struct ButtonGroup
 	{
 		ButtonGroup() : leftMargin(0), rightMargin(0),
-						pixBackgroundLeft(NULL), pixBackgroundRight(NULL),
-						pixBackgroundMiddle(NULL), pixBackgroundSingle(NULL) {;}
+						pixBackgroundLeft(Q_NULLPTR), pixBackgroundRight(Q_NULLPTR),
+						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {;}
 		//! Elements of the group
 		QList<StelButton*> elems;
 		//! Left margin size in pixel

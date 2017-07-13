@@ -40,8 +40,8 @@ ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 # Write version of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
-# currently Qt 5.4 - 5.6 is recommended, we can still build with Qt 5.3, and 5.7 may have some bugs
-SET(MINIMAL_QT_VERSION "5.3.0")
+# currently Qt 5.4 - 5.6 is recommended, we can no longer build with Qt 5.3, and 5.7 may have some bugs (on Mac? 5.7 is fine on Windows) 5.8 on Windows seems OK.
+SET(MINIMAL_QT_VERSION "5.4.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
@@ -129,17 +129,28 @@ IF(STELLARIUM_USE_CPP11)
 ENDIF()
 
 IF(WIN32)
+     # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
+     # This should also prevent some Winsock.h warnings
+     ADD_DEFINITIONS(-DWIN32_LEAN_AND_MEAN)
      IF(NOT MSVC)
           # MinGW requires enabling of exceptions, version number storage and MinGW-specific threading
           SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
-          # -mwindows generates a windows GUI app
-          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${STEL_MINGW_FLAGS} -mwindows")
      ELSE() # MSVC
+          # Additional flags:
+          # Disabled warnings
+          # C4244: implicit type conversion to a smaller type
+          # C4305: type truncation
+          # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
+          # C4996: deprecated POSIX names (used in zlib)
+          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_MSVC_FLAGS}")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_MSVC_FLAGS}")
+          # Additional defines:
           # NOMINMAX So that windows.h does not redefine min and max
-          # _WINSOCKAPI_ Prevent window.s from including winsock.h
-          ADD_DEFINITIONS(-DNOMINMAX -D_WINSOCKAPI_ /D_CRT_SECURE_NO_WARNINGS /wd4244 /wd4005 /wd4101 /wd4996 /wd4305 /wd4805)
+          # _CRT_SECURE_NO_WARNINGS Removes warnings about using "insecure" C standard functions like scanf instead of MSVC-specific ones
+          ADD_DEFINITIONS(-DNOMINMAX -D_CRT_SECURE_NO_WARNINGS)
      ENDIF()
 ELSE()
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS}")
@@ -313,7 +324,7 @@ ADD_PLUGIN(Quasars 1)
 IF(ENABLE_SCRIPTING)
      ADD_PLUGIN(RemoteControl 1)
 ENDIF()
-ADD_PLUGIN(RemoteSync 0)
+ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
@@ -335,10 +346,10 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 ########### Find packages ###########
 FIND_PACKAGE(Qt5Core REQUIRED)
 GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
-IF(${Qt5Core_VERSION_STRING} VERSION_LESS MINIMAL_QT_VERSION)
-     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+IF(${Qt5Core_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
+     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION}\", required is \"${MINIMAL_QT_VERSION}\")")
 ELSE()
-     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION_STRING}\")")
+     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION}\")")
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
@@ -382,9 +393,9 @@ IF(WIN32)
 ENDIF()
 
 # when using Qt 5.3, default to using the old QGLWidget, but warn
-IF(${Qt5Core_VERSION_STRING} VERSION_LESS "5.4")
+IF(${Qt5Core_VERSION} VERSION_LESS "5.4")
      SET(USE_OLD_QGLWIDGET 1)
-     MESSAGE(WARNING "You are using Qt ${Qt5Core_VERSION_STRING} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
+     MESSAGE(WARNING "You are using Qt ${Qt5Core_VERSION} to build, falling back to legacy QGLWidget rendering. Consider using at least Qt 5.4 if possible.")
 ELSE()
      # offer the old widget as an alternative, default off
      SET(USE_OLD_QGLWIDGET 0 CACHE BOOL "Use the legacy QGLWidget instead of the new QOpenGLWidget for the main viewport, and link to the QtOpenGL module")
@@ -798,6 +809,7 @@ INCLUDE_DIRECTORIES(
 
 ########### Subdirectories ###############
 ADD_SUBDIRECTORY( data )
+ADD_SUBDIRECTORY( models )
 ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc )

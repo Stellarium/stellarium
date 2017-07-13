@@ -29,6 +29,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QString>
+#include <QMessageBox>
 
 AddRemoveLandscapesDialog::AddRemoveLandscapesDialog() : StelDialog("AddRemoveLandscapes")
 {
@@ -114,7 +115,7 @@ void AddRemoveLandscapesDialog::browseForArchiveClicked()
 	// TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 	QString filter = q_("ZIP archives");
 	filter += " (*.zip)";
-	QString sourceArchivePath = QFileDialog::getOpenFileName(NULL, caption, lastUsedDirectoryPath, filter);
+	QString sourceArchivePath = QFileDialog::getOpenFileName(Q_NULLPTR, caption, lastUsedDirectoryPath, filter);
 	bool useLandscape = ui->checkBoxUseLandscape->isChecked();
 	if (!sourceArchivePath.isEmpty() && QFile::exists(sourceArchivePath))
 	{
@@ -148,26 +149,33 @@ void AddRemoveLandscapesDialog::browseForArchiveClicked()
 
 void AddRemoveLandscapesDialog::removeClicked()
 {
-	QString landscapeID = ui->listWidgetUserLandscapes->currentItem()->data(0).toString();
-	if(landscapeManager->removeLandscape(landscapeID))
+	int reply = QMessageBox(QMessageBox::Question,
+				q_("Remove an installed landscape"),
+				q_("Do you really want to remove this landscape?"),
+				QMessageBox::Yes|QMessageBox::No).exec();
+
+	if (reply == QMessageBox::Yes)
 	{
-		//populateLists();//No longer needed after the migration to signals/slots
-		QString successMessage  = QString(q_("Landscape \"%1\" has been removed successfully.")).arg(landscapeID);
-		displayMessage(q_("Success"), successMessage);
-	}
-	else
-	{
-		//If no error message has been displayed by the signal/slot mechanism,
-		//display a generic message.
-		if (!ui->groupBoxMessage->isVisible())
+		QString landscapeID = ui->listWidgetUserLandscapes->currentItem()->data(0).toString();
+		if(landscapeManager->removeLandscape(landscapeID))
 		{
-			//Show an error message
-			//NB! This string is used elsewhere. Modify both to avoid two nearly identical translations.
-			QString failureMessage = q_("The selected landscape could not be (completely) removed.");
-			displayMessage(q_("Error!"), failureMessage);
+			//populateLists();//No longer needed after the migration to signals/slots
+			QString successMessage  = QString(q_("Landscape \"%1\" has been removed successfully.")).arg(landscapeID);
+			displayMessage(q_("Success"), successMessage);
+		}
+		else
+		{
+			//If no error message has been displayed by the signal/slot mechanism,
+			//display a generic message.
+			if (!ui->groupBoxMessage->isVisible())
+			{
+				//Show an error message
+				//NB! This string is used elsewhere. Modify both to avoid two nearly identical translations.
+				QString failureMessage = q_("The selected landscape could not be (completely) removed.");
+				displayMessage(q_("Error!"), failureMessage);
+			}
 		}
 	}
-
 }
 
 void AddRemoveLandscapesDialog::updateSidePane(int newRow)

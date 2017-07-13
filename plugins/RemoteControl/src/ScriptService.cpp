@@ -28,13 +28,13 @@
 #include <QJsonArray>
 #include <QVariant>
 
-ScriptService::ScriptService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+ScriptService::ScriptService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
 }
 
-void ScriptService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void ScriptService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if(operation=="list")
 	{
@@ -53,8 +53,7 @@ void ScriptService::getImpl(const QByteArray& operation, const APIParameters &pa
 			if(parameters.contains("html"))
 			{
 				QString html = scriptMgr->getHtmlDescription(scriptId, false);
-				response.setHeader("Content-Type","text/html; charset=UTF-8");
-				response.setData(wrapHtml(html, scriptId).toUtf8());
+				response.writeWrappedHTML(html, scriptId);
 				return;
 			}
 
@@ -69,6 +68,7 @@ void ScriptService::getImpl(const QByteArray& operation, const APIParameters &pa
 			obj.insert("description_localized", StelTranslator::globalTranslator->qtranslate(d));
 			obj.insert("author",scriptMgr->getAuthor(scriptId).trimmed());
 			obj.insert("license",scriptMgr->getLicense(scriptId).trimmed());
+			obj.insert("version",scriptMgr->getVersion(scriptId).trimmed());
 			//shortcut often causes a large delay because the whole file gets searched, and it is usually missing, so we ignore it
 			//obj.insert("shortcut",scriptMgr->getShortcut(scriptId));
 
@@ -95,7 +95,7 @@ void ScriptService::getImpl(const QByteArray& operation, const APIParameters &pa
 	}
 }
 
-void ScriptService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void ScriptService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 

@@ -210,6 +210,10 @@ This exporter swaps Y/Z coordinates, but you can add a key to the config file to
 correct swapped axes, see below. Other exporters may also provide coordinates in
 any order of X, Y, Z -- all those can be properly configured.
 
+Another quirk has to be fixed manually though: in the material description file (MTL), TIG's exporter writes both \texttt{d} and \texttt{Tr} lines with the same value.
+Actually, $\mathtt{Tr}=1.0-\mathtt{d}$ according to OBJ/MTL documentation, so you should edit away one line, or else the later line overwrites the value given earlier. 
+Moreover, given that \texttt{Tr=1} should actually specify fully transparent objects, such a line will make your object entirely invisible!
+
 Another (almost) working alternative: \file{ObjExporter.rb} by author
 Honing.  Here, export with settings \texttt{0xxx00}. This will not create a
 \file{TX...} folder but dump all textures in the same directory as the OBJ
@@ -474,7 +478,7 @@ language code.
 \end{longtabu}
 
 \noindent Optional section to specify geographic longitude $\lambda$, latitude $\varphi$,
-and altitude. The secton is required if \verb|coord/convergence_angle=from_grid|, else
+and altitude. The section is required if \verb|coord/convergence_angle=from_grid|, else
 location is inherited from landscape.
 \begin{longtabu}to \textwidth {lX} 
 \multicolumn{2}{l}{\texttt{planet = Earth}}\\
@@ -697,6 +701,91 @@ size=<int>              Defines how many entries are in this file.
 2/view_fov    = 84.315399,-8.187078,83.000000
 \end{configfile}
 
+\section{Example}
+\label{sec:scenery3d:example}
+Let us add a quick example here. A recent paper~\cite{Pollard:2017:UffingtonHorse} claims that the Uffington White Horse, 
+a geoglyph carved into a hillsite in England during the Bronze Age,  may depict the mythical ``Sun Horse'', a common conception of that period.
+
+Unfortunately, as of 2017, the official UK Lidar repository does not include the Uffington area, 
+so a detailed GIS-based model is not available. We could use EUdem25 data with aerial imagery, 
+or for a quick look, we just use \program{Sketchup}.
+Yet another unfortunate development: Trimble declared that after the 5-year transition 
+period from Google to Trimble is over in May 2017, terrain modelling will be limited to \program{Sketchup Pro}. 
+But note that a fresh installation comes with a 30-day Pro trial time, this should be enough for this example.
+
+First, locate the site in \program{Google Earth} at $\lambda=-1.56718, \varphi=51.582843$. (Or just search for ``Uffington''.)
+Try to identify which parts of the landscape may be visible from your site, so you can estimate which parts of terrain should be included in the model.
+Open \program{Sketchup}, select the meter-based ``Landscape Architecture'' template, add \menu{View>Toolbars\ldots}: Locations. 
+Click on the ``Add Location'' button of that toolbar. Enter ``Uffington'' into the location search dialog. 
+This brings you close to our site of interest. Clip a part of terrain to import it to Sketchup. Optionally, add more terrain. 
+
+If installed, TIG's OBJ exporter is available from the \menu{File} menu, or you can use \program{Sketchup Pro}'s built-in OBJ export. 
+Export \file{UffingtonHorse.obj} to a subdirectory  \file{scenery3d/Uffington} in your Stellarium user data directory.
+The geolocation is stored in an ``AttributeDictionary''. To read this, press \menu{Window>Ruby Console} to open the Ruby Console. 
+Then write a few lines of Ruby to get access to the \texttt{Georeference} dictionary and other data:
+\begin{commands}
+model=Sketchup.active_model
+attrdicts=model.attribute_dictionaries
+attrdicts.each {|d|
+  puts "AttributeDictionary: %s" % d.name
+  d.each_pair { |k, v| puts "  %s=%s" % [k, v] }
+}
+model.shadow_info.each{|k,v| puts " #{k} #{v}"}
+utm=model.point_to_utm Geom::Point3d.new(0,0,0) 
+puts("grid_name=UTM %i %s (%s)" % 
+    [ utm.zone_number, utm.zone_letter, model.get_datum])
+\end{commands}						
+						
+
+Note the \texttt{ModelTranslation} values. Those are inches (of all units!) in the UTM reference frame 
+and define the model coordinate origin in world coordinates. (Actually, it uses the negative values.) 
+Multiplication by 2.54 gives cm, and by 0.0254, meters in the UTM coordinate system. 
+We will use the negatives of these values as \texttt{orig\_E}, \texttt{orig\_N}, \texttt{orig\_H}. 
+Additionally, we have found information about meridian convergence correction (\program{Sketchup}'s \texttt{NorthAngle}), 
+UTM zone number etc. All this goes into our configuration file. 
+Create this file \file{scenery3d.ini} with the content seen in fig.~\ref{fig:scenery3d:UffingtonIni}
+\begin{figure}[p]
+\begin{configfile}
+[model]
+name=UffingtonHorse
+;Either a fitting landscape or just 'Zero Horizon':
+landscape=Zero Horizon
+scenery=UffingtonHorse.obj
+;activate the next line if you have a separate ground layer 
+;ground=UffingtonHorse_ground.obj
+;If model Y-axis points up, activate the next line
+;obj_order=XZY
+author=Georg Zotti
+copyright=(c) 2017 Georg Zotti
+description=Uffington Horse may represent the Sun Horse. \
+        See Joshua Pollard in Antiquity 91 356(2017): 406-20.
+[location]
+name=UffingtonHorse
+country=UK
+planetName=Earth
+;Set the following to a fitting landscape
+landscapeKey=Zero Horizon
+longitude=-1.56718254089355
+latitude=51.5828432749823
+altitude=137
+[coord]
+grid_name=UTM 30 U (WGS 84)
+gridType=UTM
+orig_E=599273.02119578
+orig_N=5715615.15079106
+orig_H=136.295297626736
+convergence_angle=1.12284363771988
+;Height used outside the terrain, to not "fall off" the rim.
+zero_ground_height=137
+;You may want to reset these coordinates. 
+;Observer is set to those on loading the scenery.
+start_E=599273.02119578
+start_N=5715615.15079106
+start_az_alt_fov=50,10,83
+\end{configfile}
+\caption{\file{scenery3d.ini} for the Uffington example.}
+\label{fig:scenery3d:UffingtonIni}
+\end{figure}
 
 \section*{Authors and Acknowledgements}
 \label{sec:scenery3d:Acknowledgments}
@@ -714,12 +803,12 @@ Andrei Borza in 2011/12 further improved rendering quality (shadow
 mapping, normal mapping) and
 speed~\cite{Zotti-Neubauer:VSMM2012,Zotti-Neubauer:EuroMed2012,Zotti:2012:SpringerAA}.
 
-In 2014/15,
+In 2014--17,
 Florian Schaukowitsch adapted the code to work with Qt~5 and the 
 Stellarium~0.13 codebase, replaced the renderer with a more efficient, fully
 shader-based system, implemented various performance, quality and usability
 enhancements, and did some code cleanup. Both Andrei and Florian were again
-supervised by Michael Wimmer~\cite{Zotti:CHNT2015,Zotti:SEAC2015}. % when they are published.
+supervised by Michael Wimmer~\cite{Zotti:CHNT2015,Zotti:SEAC2015}. % TODO: add more (SEAC2016, SEAC2017) when they are published.
 
 This work has been originally created during the ASTROSIM project supported 2008-2012 by
 the Austrian Science Fund (FWF) under grant number P~21208-G19.

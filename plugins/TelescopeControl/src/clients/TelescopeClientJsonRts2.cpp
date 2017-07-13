@@ -48,6 +48,8 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, reconnectTimer(-1)
 	, refresh_delay(500)
 {
+	telescopeManager = GETSTELMODULE(TelescopeControl);
+
 	// Example params:
 	// 1000:test:1234@localhost:8889/tel
 
@@ -263,6 +265,8 @@ void TelescopeClientJsonRts2::timerEvent(QTimerEvent *event)
 
 QString TelescopeClientJsonRts2::getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
+	Q_UNUSED(core);
+	Q_UNUSED(flags);
 	QString str;
 	QTextStream oss(&str);
 	
@@ -301,7 +305,6 @@ void TelescopeClientJsonRts2::setReadOnly(bool readonly)
 	QSettings* settings = StelApp::getInstance().getSettings();
 	Q_ASSERT(settings);
 
-	telescopeManager = GETSTELMODULE(TelescopeControl);
 	if (telescopeManager)
 	{
 		if (telReadonly)

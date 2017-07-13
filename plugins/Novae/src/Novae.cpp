@@ -81,12 +81,12 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 */
 Novae::Novae()
 	: NovaCnt(0)
-	, texPointer(NULL)
+	, texPointer(Q_NULLPTR)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
-	, progressBar(NULL)
-	, updateTimer(NULL)
-	, messageTimer(NULL)
+	, downloadMgr(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
+	, updateTimer(Q_NULLPTR)
+	, messageTimer(Q_NULLPTR)
 	, updatesEnabled(false)
 	, updateFrequencyDays(0)
 {
@@ -262,7 +262,7 @@ StelObjectP Novae::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(n);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
@@ -273,7 +273,7 @@ StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(n);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
@@ -456,7 +456,7 @@ void Novae::setNovaeMap(const QVariantMap& map)
 	}
 }
 
-int Novae::getJsonFileVersion(void)
+int Novae::getJsonFileVersion(void) const
 {	
 	int jsonVersion = -1;
 	QFile novaeJsonFile(novaeJsonPath);
@@ -478,7 +478,7 @@ int Novae::getJsonFileVersion(void)
 	return jsonVersion;
 }
 
-bool Novae::checkJsonFileFormat()
+bool Novae::checkJsonFileFormat() const
 {
 	QFile novaeJsonFile(novaeJsonPath);
 	if (!novaeJsonFile.open(QIODevice::ReadOnly))
@@ -502,7 +502,7 @@ bool Novae::checkJsonFileFormat()
 	return true;
 }
 
-NovaP Novae::getByID(const QString& id)
+NovaP Novae::getByID(const QString& id) const
 {
 	foreach(const NovaP& n, nova)
 	{
@@ -593,7 +593,7 @@ void Novae::updateJSON(void)
 	updateState = Novae::Updating;
 	emit(updateStateChanged(updateState));
 
-	if (progressBar==NULL)
+	if (progressBar==Q_NULLPTR)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
@@ -644,7 +644,7 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 	{
 		progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 
 	readJsonFile();
@@ -656,7 +656,7 @@ void Novae::displayMessage(const QString& message, const QString hexColor)
 	messageTimer->start();
 }
 
-void Novae::messageTimeout(void)
+void Novae::messageTimeout(void) const
 {
 	foreach(int i, messageIDs)
 	{

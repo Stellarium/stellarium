@@ -235,7 +235,7 @@ void LogBook::initializeActions()
 		pxmapOnIcon = new QPixmap(":/logbook/bt_Logbook_on.png");
 		pxmapOffIcon = new QPixmap(":/logbook/bt_Logbook_off.png");
 
-		toolbarButton = new StelButton(NULL,
+		toolbarButton = new StelButton(Q_NULLPTR,
 									   *pxmapOffIcon,
 									   *pxmapOnIcon,
 									   *pxmapGlow,

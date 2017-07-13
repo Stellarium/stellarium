@@ -155,7 +155,7 @@ void StelVideoMgr::playVideo(const QString& id, const bool keepVisibleAtEnd)
 	if (videoObjects.contains(id))
 	{
 		videoObjects[id]->keepVisible=keepVisibleAtEnd;
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			// if already playing, stop and play from the start
 			if (videoObjects[id]->player->state() == QMediaPlayer::PlayingState)
@@ -205,7 +205,7 @@ void StelVideoMgr::playVideoPopout(const QString& id, float fromX, float fromY, 
 	if (videoObjects.contains(id))
 	{
 		videoObjects[id]->keepVisible=frozenInTransition;
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			// if already playing, stop and play from the start
 			if (videoObjects[id]->player->state() == QMediaPlayer::PlayingState)
@@ -307,7 +307,7 @@ void StelVideoMgr::pauseVideo(const QString& id)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			// Maybe we can only pause while already playing?
 			if (videoObjects[id]->player->state()==QMediaPlayer::StoppedState)
@@ -325,7 +325,7 @@ void StelVideoMgr::stopVideo(const QString& id)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			videoObjects[id]->player->stop();
 		}
@@ -339,7 +339,7 @@ void StelVideoMgr::seekVideo(const QString& id, const qint64 ms, bool pause)
 		qDebug() << "StelVideoMgr::seekVideo: " << id << " to:" << ms <<  (pause ? " (pausing)" : " (playing)");
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			if (videoObjects[id]->player->isSeekable())
 			{
@@ -363,7 +363,7 @@ void StelVideoMgr::dropVideo(const QString& id)
 {
 	if (!videoObjects.contains(id))
 		return;
-	if (videoObjects[id]->player!=NULL)
+	if (videoObjects[id]->player!=Q_NULLPTR)
 	{
 		if (verbose)
 			qDebug() << "About to drop (unload) video " << id << "(" << videoObjects[id]->player->mediaStatus() << ")";
@@ -386,7 +386,7 @@ void StelVideoMgr::setVideoXY(const QString& id, const float x, const float y, c
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->videoItem!=NULL)
+		if (videoObjects[id]->videoItem!=Q_NULLPTR)
 		{
 			// if w or h < 1 we scale proportional to mainview!
 			int viewportWidth=StelMainView::getInstance().size().width();
@@ -415,7 +415,7 @@ void StelVideoMgr::setVideoAlpha(const QString& id, const float alpha)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->videoItem!=NULL)
+		if (videoObjects[id]->videoItem!=Q_NULLPTR)
 		{
 			videoObjects[id]->videoItem->setOpacity(alpha);
 		}
@@ -427,7 +427,7 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->videoItem!=NULL)
+		if (videoObjects[id]->videoItem!=Q_NULLPTR)
 		{
 			// if w or h <= 1 we scale proportional to mainview!
 			// Note that w or h thus cannot be set to 1.0, i.e. single-pixel rows/columns!
@@ -485,7 +485,7 @@ void StelVideoMgr::showVideo(const QString& id, const bool show)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->videoItem!=NULL)
+		if (videoObjects[id]->videoItem!=Q_NULLPTR)
 		{
 			videoObjects[id]->videoItem->setVisible(show);
 		}
@@ -555,7 +555,7 @@ void StelVideoMgr::muteVideo(const QString& id, bool mute)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			videoObjects[id]->player->setMuted(mute);
 		}
@@ -567,7 +567,7 @@ void StelVideoMgr::setVideoVolume(const QString& id, int newVolume)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			videoObjects[id]->player->setVolume(newVolume);
 		}
@@ -580,7 +580,7 @@ int StelVideoMgr::getVideoVolume(const QString& id)
 	int volume=-1;
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			volume=videoObjects[id]->player->volume();
 		}
@@ -594,7 +594,7 @@ bool StelVideoMgr::isVideoPlaying(const QString& id)
 	bool playing=false;
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->player!=NULL)
+		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 			playing= (videoObjects[id]->player->state() == QMediaPlayer::PlayingState );
 		}

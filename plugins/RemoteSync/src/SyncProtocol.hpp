@@ -32,7 +32,7 @@ namespace SyncProtocol
 //Important: All data should use the sized typedefs provided by Qt (i.e. qint32 instead of 4 byte int on x86)
 
 //! Should be changed with every breaking change
-const quint8 SYNC_PROTOCOL_VERSION = 1;
+const quint8 SYNC_PROTOCOL_VERSION = 2;
 const QDataStream::Version SYNC_DATASTREAM_VERSION = QDataStream::Qt_5_0;
 //! Magic value for protocol used during connection. Should NEVER change.
 const QByteArray SYNC_MAGIC_VALUE = "StellariumSyncPluginProtocol";
@@ -44,7 +44,6 @@ struct SyncHeader
 {
 	quint8 msgType; //The SyncMessageType of the data
 	SyncProtocol::tPayloadSize dataSize; //The size of the data part
-	//TODO maybe add checksum?
 };
 
 //! Write a SyncHeader to a DataStream
@@ -64,14 +63,17 @@ enum SyncMessageType
 	SERVER_CHALLENGE, //sent as a challenge to the client on establishment of connection
 	CLIENT_CHALLENGE_RESPONSE, //sent as a reply to the challenge
 	SERVER_CHALLENGERESPONSEVALID, //sent from the server to the client after valid client hello was received.
+	ALIVE, //sent from a peer after no data was sent for about 5 seconds to indicate it is still alive
 
 	//all messages below here can only be sent from authenticated peers
 	TIME, //time jumps + time scale updates
 	LOCATION, //location changes
-	SELECTION,
+	SELECTION, //current selection changed
+	STELPROPERTY, //stelproperty updates
+	VIEW, //view change
+	FOV, //fov change
 
-	ALIVE, //sent from a peer after no data was sent for about 5 seconds to indicate it is still alive
-	MSGTYPE_MAX = ALIVE,
+	MSGTYPE_MAX = FOV,
 	MSGTYPE_SIZE = MSGTYPE_MAX+1
 };
 
@@ -99,6 +101,15 @@ inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
 		case SyncProtocol::SELECTION:
 			deb<<"SELECTION";
 			break;
+		case SyncProtocol::STELPROPERTY:
+			deb<<"STELPROPERTY";
+			break;
+		case SyncProtocol::VIEW:
+			deb<<"VIEW";
+			break;
+		case SyncProtocol::FOV:
+			deb<<"FOV";
+			break;
 		case SyncProtocol::ALIVE:
 			deb<<"ALIVE";
 			break;
@@ -107,8 +118,6 @@ inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
 			break;
 	}
 	return deb;
-}
-
 }
 
 //! Base interface for the messages themselves, allowing to serialize/deserialize them
@@ -131,39 +140,75 @@ public:
 	//! The default implementation expects a zero dataSize, and reads nothing.
 	virtual bool deserialize(QDataStream& stream, SyncProtocol::tPayloadSize dataSize);
 
+	//! Subclasses can override this to provide proper debug output.
+	//! The default just prints the message type.
+	virtual QDebug debugOutput(QDebug dbg) const
+	{
+		return dbg;
+	}
+
+	friend QDebug operator<<(QDebug dbg, const SyncMessage& msg)
+	{
+		dbg = dbg<<msg.getMessageType()<<'[';
+		dbg = msg.debugOutput(dbg);
+		return dbg<<']';
+	}
+
 protected:
 	static void writeString(QDataStream& stream, const QString& str);
 	static QString readString(QDataStream& stream);
 };
 
+}
+
 class SyncMessageHandler;
 
 //! Handling the connection to a remote peer (i.e. all clients on the server, and the server on the client)
-class SyncRemotePeer
+class SyncRemotePeer : public QObject
 {
+	Q_OBJECT
 public:
-	SyncRemotePeer();
 	SyncRemotePeer(QAbstractSocket* socket, bool isServer, const QVector<SyncMessageHandler*>& handlerList);
+	~SyncRemotePeer();
 
-	//! Call this to try to receive message data from the socket.
-	//! If a fully formed message is currently buffered, it is processed.
-	void receiveMessage();
+
 
 	//! Sends a message to this peer
-	void writeMessage(const SyncMessage& msg);
+	void writeMessage(const SyncProtocol::SyncMessage& msg);
 	//! Writes this data packet to the socket without processing
 	void writeData(const QByteArray& data, int size=-1);
 	//! Can be used to write an error message to the peer and drop the connection
 	void writeError(const QString& err);
 
 	//! Log a message for this peer
-	void peerLog(const QString& msg);
+	void peerLog(const QString& msg) const;
+	QDebug peerLog() const;
 
-	bool isValid;
+	bool isAuthenticated() const { return authenticated; }
+	QUuid getID() const { return id; }
+
+	void checkTimeout();
+	void disconnectPeer();
+
+	QString getError() const { return errorString; }
+signals:
+	void disconnected(bool cleanDisconnect);
+private slots:
+	void sockDisconnected();
+	void sockError(QAbstractSocket::SocketError err);
+	void sockStateChanged(QAbstractSocket::SocketState state);
+
+	//! Call this to try to read message data from the socket.
+	//! If a fully formed message is currently buffered, it is processed.
+	void receiveMessage();
+private:
 	QAbstractSocket* sock; // The socket for communication with this peer
+	QDataStream stream;
+	QString errorString;
+	bool expectDisconnect;
 	bool isPeerAServer; // True if this identifies a server
 	QUuid id; // An ID value, currently not used for anything else than auth. The server always has a NULL UUID.
-	bool isAuthenticated; // True if the peer ran through the HELLO process and can receive/send all message types
+	bool authenticated; // True if the peer ran through the HELLO process and can receive/send all message types
 	bool authResponseSent; //only for client use, tracks if the client has sent a resonse to the server challenge
 	bool waitingForBody; //True if waiting for full message body (after header was received)
 	SyncProtocol::SyncHeader msgHeader; //the last message header read/currently being processed
@@ -171,6 +216,9 @@ public:
 	qint64 lastSendTime; //The time the last data was written to this peer
 	QVector<SyncMessageHandler*> handlerList;
 	QByteArray msgWriteBuffer; //Byte array used to construct messages before writing them
+
+	friend class ServerAuthHandler;
+	friend class ClientAuthHandler;
 };
 
 //! Base interface for message handlers, i.e. reacting to messages
@@ -180,9 +228,22 @@ public:
 	virtual ~SyncMessageHandler() {}
 
 	//! Read a message directly from the stream. SyncMessage::deserialize of the correct class should be used to deserialize the message.
+	//! @param stream The stream to be used to read data. The current position is after the header.
+        //! @param dataSize The data size from the message header
 	//! @param peer The remote peer this message originated from. Can be used to send replies through SyncRemotePeer::writeMessage
 	//! @return return false if the message is found to be invalid. The connection to the client/server will be dropped.
-	virtual bool handleMessage(QDataStream& stream, SyncRemotePeer& peer) = 0;
+	virtual bool handleMessage(QDataStream& stream, SyncProtocol::tPayloadSize dataSize,  SyncRemotePeer& peer) = 0;
+};
+
+//! Skips the message, and does nothing else.
+class DummyMessageHandler : public SyncMessageHandler
+{
+public:
+	virtual bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
+	{
+		stream.skipRawData(dataSize);
+		return !stream.status();
+	}
 };
 
 Q_DECLARE_INTERFACE(SyncMessageHandler,"Stellarium/RemoteSync/SyncMessageHandler/1.0")
