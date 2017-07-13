@@ -742,6 +742,67 @@ Increase this value if the reticle is skipping.</string>
             </property>
            </widget>
           </item>
+	  <item row="4" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayoutRTSRefresh">
+            <item>
+             <widget class="QLabel" name="labelRTS2Refresh">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Refresh every:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxRTS2Refresh">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+		      <string>Refresh rate of the RTS2 telescope. Delay before sending next telescope
+status request. Usuall value of 0.5 second works fine with most of the setups.</string>
+              </property>
+              <property name="suffix">
+               <string notr="true" comment="seconds">s</string>
+              </property>
+              <property name="decimals">
+               <number>2</number>
+              </property>
+              <property name="minimum">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>10.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.500000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>

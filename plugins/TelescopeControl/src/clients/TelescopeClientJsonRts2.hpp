@@ -61,16 +61,19 @@ private:
 	double telAltitude;
 	double telTargetDist;
 	QNetworkRequest request;
-	Vec3d position;
+	Vec3d lastPos;
 	InterpolatedPosition interpolatedPosition;
 	int time_delay;
 	int reconnectTimer;
+	int refresh_delay;
+	qint64 server_micros;
 
 	TelescopeControl *telescopeManager;
 
 	void setReadOnly(bool readonly);
 
 private slots:
+	void refreshTimer();
 	void replyFinished(QNetworkReply *reply);
 };
 
