@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>446</height>
+    <height>350</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>530</width>
-    <height>400</height>
+    <height>350</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -153,17 +153,23 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>10</height>
+      </size>
      </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
      <widget class="QWidget" name="tabTelescopes">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -641,12 +647,30 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tabHelp">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>10</height>
+       </size>
+      </property>
       <attribute name="title">
        <string>Help</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayoutHelp">
        <item>
         <widget class="QTextBrowser" name="textBrowserHelp">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>10</height>
+          </size>
+         </property>
          <property name="openExternalLinks">
           <bool>true</bool>
          </property>
@@ -655,12 +679,24 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tabAbout">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <attribute name="title">
        <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTextBrowser" name="textBrowserAbout">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="openExternalLinks">
           <bool>true</bool>
          </property>
