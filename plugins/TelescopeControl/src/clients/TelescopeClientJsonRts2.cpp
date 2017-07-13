@@ -135,19 +135,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 		QJsonArray arr = doc.array();
 		telName = arr[0].toString();
 
-		QUrl diurl(baseurl);
-
-		diurl.setPath(baseurl.path() + "/api/deviceinfo");
-
-		QUrlQuery query;
-		query.addQueryItem("d", telName);
-		diurl.setQuery(query);
-
-		request.setUrl(diurl);
-
-		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << diurl.toString();
-
-		networkManager.get(request);
+		getReadOnly();
 	}
 	else if (reply->url().path().endsWith("/api/deviceinfo"))
 	{
@@ -188,12 +176,17 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 		lastPos.set(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 		interpolatedPosition.add(lastPos, getNow(), server_micros, 0);
 
-		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << request.url().toString();
 		QTimer::singleShot(refresh_delay, this, SLOT(refreshTimer()));
 	}
 	else if (reply->url().path().endsWith("/api/cmd"))
 	{
-		qDebug() << "Move command finished: " << (QString) data;
+		QJsonObject docObject = doc.object();
+		int cmdRet = docObject["ret"].toInt();
+		qDebug() << "Move command finished: " << cmdRet;
+		if (cmdRet == 0)
+			getReadOnly();
+		else
+			setReadOnly(true);
 	}
 	else
 	{
@@ -209,10 +202,8 @@ bool TelescopeClientJsonRts2::isConnected(void) const
 
 Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore*) const
 {
-//	const qint64 now = getNow() - time_delay;
-//	Vec3d pos = interpolatedPosition.get(now);
-//	qDebug() << "get " << pos.toString() << " " << pos.toStringLonLat();
-	return lastPos;
+	const qint64 now = getNow() - time_delay;
+	return interpolatedPosition.get(now);
 }
 
 void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
@@ -285,6 +276,23 @@ QString TelescopeClientJsonRts2::getTelescopeInfoString(const StelCore* core, co
 	oss << q_("Distance to target position: ") << StelUtils::radToDmsStr(telTargetDist,true) << "<br />";
 
 	return str;
+}
+
+void TelescopeClientJsonRts2::getReadOnly()
+{
+	QUrl diurl(baseurl);
+
+	diurl.setPath(baseurl.path() + "/api/deviceinfo");
+
+	QUrlQuery query;
+	query.addQueryItem("d", telName);
+	diurl.setQuery(query);
+
+	request.setUrl(diurl);
+
+	qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << diurl.toString();
+
+	networkManager.get(request);
 }
 
 void TelescopeClientJsonRts2::setReadOnly(bool readonly)
