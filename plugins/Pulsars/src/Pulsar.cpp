@@ -38,6 +38,7 @@
 
 #define PSR_INERTIA 1.0e45 /* Typical moment of inertia for a pulsar */
 
+const QString Pulsar::PULSAR_TYPE = QStringLiteral("Pulsar");
 StelTextureSP Pulsar::markerTexture;
 
 bool Pulsar::distributionMode = false;
@@ -171,7 +172,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{
@@ -417,7 +418,7 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 	if (mag <= mlimit)
 	{		
 		Pulsar::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;		
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);

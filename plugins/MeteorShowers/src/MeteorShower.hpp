@@ -37,6 +37,8 @@
 class MeteorShower : public StelObject
 {
 public:
+	static const QString METEORSHOWER_TYPE;
+
 	//! @enum Meteor Shower status.
 	enum Status {
 		INVALID,          // not initialized properly
@@ -105,6 +107,7 @@ public:
 	// Methods defined in StelObject class
 	//
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+
 	//! Return a map like StelObject, but with a few extra tags:
 	// TODO: Describe the fields!
 	//! - status
@@ -115,7 +118,8 @@ public:
 	//! - parent
 	//! - zhr-max (information string)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual QString getType(void) const { return "MeteorShower"; }
+	virtual QString getType(void) const { return METEORSHOWER_TYPE; }
+	virtual QString getID(void) const { return m_showerID; }
 	virtual QString getEnglishName(void) const { return m_designation.trimmed(); }
 	virtual QString getNameI18n(void) const	{ return q_(m_designation.trimmed()); }
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const { return m_position; }
@@ -158,7 +162,7 @@ private:
 	//! @param current julian day
 	int calculateZHR(const double& currentJD);
 
-	//! Gets the solar longitude for a specified date
+	//! Gets the mean solar longitude for a specified date (approximate formula)
 	//! @param date QDate
 	//! @return solar longitude in degree
 	static QString getSolarLongitude(QDate date);

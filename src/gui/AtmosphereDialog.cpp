@@ -24,8 +24,8 @@
 
 AtmosphereDialog::AtmosphereDialog()
 	: StelDialog("Atmosphere")
-	, refraction(NULL)
-	, extinction(NULL)
+	, refraction(Q_NULLPTR)
+	, extinction(Q_NULLPTR)
 
 {
 	ui = new Ui_atmosphereDialogForm;

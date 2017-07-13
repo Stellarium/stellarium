@@ -47,7 +47,8 @@ public:
 	//! @param year the year in YYYY format
 	//! @param month the month: 1=Jan, 12=Dec
 	//! @param moonPhase the moon phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-	void setDate(const int year, const int month, const float moonPhase);
+	//! @param moonMag visual magnitude of the moon. Could be computed from geometry, but in case of eclipses we should deliver it here.
+	void setDate(const int year, const int month, const float moonPhase, const float moonMag);
 
 	//! Set the position parameters to use for atmosphere computation
 	//! @param latitude observer latitude in radian

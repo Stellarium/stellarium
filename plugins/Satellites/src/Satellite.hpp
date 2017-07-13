@@ -96,6 +96,8 @@ class Satellite : public StelObject
 
 	Q_ENUMS(OptStatus)
 public:
+	static const QString SATELLITE_TYPE;
+
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
@@ -121,8 +123,14 @@ public:
 
 	virtual QString getType(void) const
 	{
-		return "Satellite";
+		return SATELLITE_TYPE;
 	}
+
+	virtual QString getID(void) const
+	{
+		return id;
+	}
+
 	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
@@ -174,7 +182,7 @@ public:
 	void update(double deltaTime);
 
 	double getDoppler(double freq) const;
-	static float showLabels;
+	static bool showLabels;
 	static double roundToDp(float n, int dp);
 
 	// when the observer location changes we need to
@@ -184,7 +192,7 @@ public:
 	bool isNew() const {return newlyAdded;}
 	
 	//! Get internal flags as a single value.
-	SatFlags getFlags();
+	SatFlags getFlags() const;
 	//! Sets the internal flags in one operation (only display flags)!
 	void setFlags(const SatFlags& flags);
 	
@@ -205,7 +213,7 @@ public:
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
-	void drawOrbit(StelPainter& painter);
+	void drawOrbit(StelCore* core, StelPainter& painter);
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
@@ -270,7 +278,9 @@ private:
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
 
-	void draw(StelCore *core, StelPainter& painter, float maxMagHints);
+	static double timeRateLimit;
+
+	void draw(StelCore *core, StelPainter& painter);
 
 	//Satellite Orbit Position calculation
 	gSatWrapper *pSatWrapper;
@@ -283,10 +293,10 @@ private:
 	static QString myText;
 #endif
 
-	int	visibility;
+	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
 	static double sunReflAngle; // for Iridium satellites
-	static double timeShift; // for Iridium satellites
+	//static double timeShift; // for Iridium satellites UNUSED
 
 	//Satellite Orbit Draw
 	QFont     font;
@@ -294,7 +304,7 @@ private:
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
-	QList<int> visibilityPoints; //orbit visibility points
+	QList<gSatWrapper::Visibility> visibilityPoints; //orbit visibility points
 };
 
 typedef QSharedPointer<Satellite> SatelliteP;

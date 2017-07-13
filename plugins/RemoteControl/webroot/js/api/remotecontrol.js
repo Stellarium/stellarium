@@ -11,7 +11,7 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
     var lastActionId = -2;
     var lastPropId = -2;
 
-    // Translates a string using Stellariums current locale. 
+    // Translates a string using Stellariums current locale.
     // String must be present in translationdata.js
     // All strings from tr() calls in the .js files will be written in translationdata.js when update_translationdata.py is executed
     function tr(str) {
@@ -133,6 +133,10 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
     // load plugin list, and disable/load elements if required
     function loadPlugins() {
         $.ajax({
+            //we somehow should make sure this always finishes before the UI starts loading
+            //or we may have a race condition
+            //probably make the mainui wait on an event from this, and all the other UIs on the mainui
+            async: false, //TODO fix so this can be removed
             url: '/api/main/plugins',
             type: 'GET',
             dataType: 'json',

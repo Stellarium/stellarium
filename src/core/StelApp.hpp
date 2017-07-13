@@ -76,8 +76,8 @@ public:
 
 	//! Create and initialize the main Stellarium application.
 	//! @param parent the QObject parent
-	//! The configFile will be search for in the search path by the StelFileMgr,
-	//! it is therefor possible to specify either just a file name or path within the
+	//! The configFile will be searched for in the search path by the StelFileMgr,
+	//! it is therefore possible to specify either just a file name or path within the
 	//! search path, or use a full path or even a relative path to an existing file
 	StelApp(StelMainView* parent);
 
@@ -94,6 +94,11 @@ public:
 
 	//! Registers all loaded StelModules with the ScriptMgr, and queues starting of the startup script.
 	void initScriptMgr();
+
+	//! Returns all arguments passed on the command line, together with the contents of the STEL_OPTS environment variable.
+	//! You can use the CLIProcessor class to help parse it.
+	//! @return the arguments passed to Stellarium on the command line concatenated with the STEL_OPTS environment variable
+	static QStringList getCommandlineArguments();
 
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
@@ -229,13 +234,15 @@ public slots:
 	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
 	void setFlagSouthAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
 	
-	//! Set flag for using calculation of azimuth from south towards west (as in older astronomical literature)
-	//! @deprecated Use getFlagSouthAzimuthUsage() instead.
-	bool getFlagOldAzimuthUsage() const { return getFlagSouthAzimuthUsage(); }
-	//! Get flag for using calculation of azimuth from south towards west (as in older astronomical literature)
-	//! @deprecated Use setFlagSouthAzimuthUsage() instead.
-	void setFlagOldAzimuthUsage(bool use) { setFlagSouthAzimuthUsage(use); }
+	//! Set flag for using of formatting output for coordinates
+	void setFlagUseFormattingOutput(bool b);
+	//! Get flag for using of formatting output for coordinates
+	bool getFlagUseFormattingOutput() const {return flagUseFormattingOutput;}
 
+	//! Set flag for using designations for celestial coordinate systems
+	void setFlagUseCCSDesignation(bool b);
+	//! Get flag for using designations for celestial coordinate systems
+	bool getFlagUseCCSDesignation() const {return flagUseCCSDesignation;}
 
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
@@ -408,6 +415,8 @@ private:
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+	bool flagUseFormattingOutput;
+	bool flagUseCCSDesignation;
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

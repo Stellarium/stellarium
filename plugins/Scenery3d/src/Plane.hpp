@@ -21,7 +21,7 @@
 #ifndef _PLANE_HPP_
 #define _PLANE_HPP_
 
-#include "Line.hpp"
+#include "GeomMath.hpp"
 #include "SPolygon.hpp"
 
 class Plane

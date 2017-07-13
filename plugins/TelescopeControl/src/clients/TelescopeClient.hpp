@@ -54,6 +54,7 @@ class TelescopeClient : public QObject, public StelObject
 {
 	Q_OBJECT
 public:
+	static const QString TELESCOPECLIENT_TYPE;
 	static TelescopeClient *create(const QString &url);
 	virtual ~TelescopeClient(void) {}
 	
@@ -73,7 +74,8 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	QString getType(void) const {return "Telescope";}
+	QString getType(void) const {return TELESCOPECLIENT_TYPE;}
+	QString getID() const {return name;}
 	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
@@ -91,7 +93,12 @@ protected:
 	QString nameI18n;
 	const QString name;
 
-	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const {return "";}
+	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
+	{
+		Q_UNUSED(core);
+		Q_UNUSED(flags);
+		return QString();
+	}
 private:
 	virtual bool isInitialized(void) const {return true;}
 	float getSelectPriority(const StelCore* core) const {Q_UNUSED(core); return -10.f;}
@@ -169,7 +176,7 @@ public:
 	}
 	
 private:
-	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const;
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);

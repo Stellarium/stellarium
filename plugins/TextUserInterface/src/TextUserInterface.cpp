@@ -103,7 +103,7 @@ TextUserInterface::TextUserInterface()
 	, tuiDateTime(false)
 	, tuiObjInfo(false)
 	, tuiGravityUi(false)
-	, currentNode(NULL)
+	, currentNode(Q_NULLPTR)
 {
 	setObjectName("TextUserInterface");	
 }
@@ -169,7 +169,7 @@ void TextUserInterface::init()
 	m1_1->loopToTheLast();
 	m1->setChildNode(m1_1);
 
-	TuiNode* m2 = new TuiNode(N_("Date and Time"), NULL, m1);
+	TuiNode* m2 = new TuiNode(N_("Date and Time"), Q_NULLPTR, m1);
 	m2->setParent(this);
 	m1->setNextNode(m2);
 	TuiNode* m2_1 = new TuiNodeDateTime(N_("Current date/time"),
@@ -223,7 +223,7 @@ void TextUserInterface::init()
 	m2_1->loopToTheLast();
 	m2->setChildNode(m2_1);
 
-	TuiNode* m3 = new TuiNode(N_("General"), NULL, m2);
+	TuiNode* m3 = new TuiNode(N_("General"), Q_NULLPTR, m2);
 	m3->setParent(this);
 	m2->setNextNode(m3);
 	StelSkyCultureMgr& skyCultureMgr = StelApp::getInstance().getSkyCultureMgr();
@@ -251,7 +251,7 @@ void TextUserInterface::init()
 	m3_1->loopToTheLast();
 	m3->setChildNode(m3_1);
 
-	TuiNode* m4 = new TuiNode(N_("Stars"), NULL, m3);
+	TuiNode* m4 = new TuiNode(N_("Stars"), Q_NULLPTR, m3);
 	m4->setParent(this);
 	m3->setNextNode(m4);
 	StarMgr* starMgr = GETSTELMODULE(StarMgr);
@@ -283,7 +283,7 @@ void TextUserInterface::init()
 	m4_1->loopToTheLast();
 	m4->setChildNode(m4_1);
 
-	TuiNode* m5 = new TuiNode(N_("Colors"), NULL, m4);
+	TuiNode* m5 = new TuiNode(N_("Colors"), Q_NULLPTR, m4);
 	m5->setParent(this);
 	m4->setNextNode(m5);
 	ConstellationMgr* constellationMgr = GETSTELMODULE(ConstellationMgr);
@@ -438,7 +438,7 @@ void TextUserInterface::init()
 	m5_1->loopToTheLast();
 	m5->setChildNode(m5_1);
 
-	TuiNode* m6 = new TuiNode(N_("Effects"), NULL, m5);
+	TuiNode* m6 = new TuiNode(N_("Effects"), Q_NULLPTR, m5);
 	m6->setParent(this);
 	m5->setNextNode(m6);
 	TuiNode* m6_1 = new TuiNodeInt(N_("Light pollution:"),
@@ -492,7 +492,7 @@ void TextUserInterface::init()
 	m6->setChildNode(m6_1);
 
 	#ifndef DISABLE_SCRIPTING
-	TuiNode* m7 = new TuiNode(N_("Scripts"), NULL, m6);
+	TuiNode* m7 = new TuiNode(N_("Scripts"), Q_NULLPTR, m6);
 	m7->setParent(this);
 	m6->setNextNode(m7);	
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
@@ -513,11 +513,11 @@ void TextUserInterface::init()
 	m7->setChildNode(m7_1);
 
 
-	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m7);
+	TuiNode* m8 = new TuiNode(N_("Administration"), Q_NULLPTR, m7);
 	m8->setParent(this);
 	m7->setNextNode(m8);
 	#else
-	TuiNode* m8 = new TuiNode(N_("Administration"), NULL, m6);
+	TuiNode* m8 = new TuiNode(N_("Administration"), Q_NULLPTR, m6);
 	m8->setParent(this);
 	m6->setNextNode(m8);
 	#endif
@@ -569,7 +569,7 @@ void TextUserInterface::draw(StelCore* core)
 	bool fovMaskDisk = false;
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 	{
 		if (gui->getVisible())
 		{
@@ -604,7 +604,7 @@ void TextUserInterface::draw(StelCore* core)
 		}
 			
 		QString tuiText = q_("[no TUI node]");
-		if (currentNode!=NULL) {
+		if (currentNode!=Q_NULLPTR) {
 			tuiText = currentNode->getDisplayText();
 		}
 
@@ -664,7 +664,7 @@ void TextUserInterface::draw(StelCore* core)
 
 void TextUserInterface::handleKeys(QKeyEvent* event)
 {
-	if (currentNode == NULL)
+	if (currentNode == Q_NULLPTR)
 	{
 		qWarning() << "WARNING: no current node in TextUserInterface plugin";
 		event->setAccepted(false);

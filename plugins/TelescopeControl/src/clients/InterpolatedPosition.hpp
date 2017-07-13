@@ -26,6 +26,7 @@
 #ifndef _INTERPOLATED_POSITION_HPP_
 #define _INTERPOLATED_POSITION_HPP_
 
+#include <stdint.h>
 #ifndef INT64_MAX
 #define INT64_MAX 0x7FFFFFFFFFFFFFFFLL
 #endif

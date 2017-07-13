@@ -35,6 +35,8 @@
 #include <QVariant>
 #include <QList>
 
+const QString Nova::NOVA_TYPE = QStringLiteral("Nova");
+
 Nova::Nova(const QVariantMap& map)
 	: initialized(false)
 	, designation("")
@@ -107,7 +109,16 @@ QString Nova::getEnglishName() const
 
 QString Nova::getNameI18n() const
 {
-	return novaName;
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	// Parse the nova name to get parts to translation
+	QRegExp nn("^Nova\\s+(\\w+|\\w+\\s+\\w+)\\s+(\\d+|\\d+\\s+#\\d+)$");
+	QString nameI18n = novaName;
+	if (nn.exactMatch(novaName))
+		nameI18n = QString("%1 %2 %3").arg(trans.qtranslate("Nova", "Nova template"), trans.qtranslate(nn.capturedTexts().at(1).trimmed(), "Genitive name of constellation"), nn.capturedTexts().at(2).trimmed());
+	else
+		nameI18n = trans.qtranslate(novaName);
+
+	return nameI18n;
 }
 
 QString Nova::getDesignation() const
@@ -128,7 +139,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 
 	if (flags&Name)
 	{
-		QString name = novaName.isEmpty() ? QString("<h2>%1</h2>").arg(designation) : QString("<h2>%1 (%2)</h2>").arg(novaName).arg(designation);
+		QString name = novaName.isEmpty() ? QString("<h2>%1</h2>").arg(designation) : QString("<h2>%1 (%2)</h2>").arg(getNameI18n()).arg(designation);
 		oss << name;
 	}
 
@@ -145,7 +156,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{
@@ -332,7 +343,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 		sd->computeRCMag(mag, &rcMag);
 		sd->drawPointSource(painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, false);
 		painter->setColor(color[0], color[1], color[2], 1.f);
-		size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
 		{

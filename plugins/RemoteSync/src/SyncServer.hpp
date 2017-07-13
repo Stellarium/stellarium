@@ -24,10 +24,13 @@
 #include <QObject>
 #include <QAbstractSocket>
 #include <QDateTime>
+#include <QLoggingCategory>
 #include <QUuid>
 
 class QTcpServer;
 class SyncServerEventSender;
+
+Q_DECLARE_LOGGING_CATEGORY(syncServer)
 
 //! Implements a server to which SyncClients can connect and receive state changes
 class SyncServer : public QObject
@@ -35,14 +38,14 @@ class SyncServer : public QObject
 	Q_OBJECT
 
 public:
-	SyncServer(QObject* parent = 0);
+	SyncServer(QObject* parent = Q_NULLPTR);
 	virtual ~SyncServer();
 
 	//! This should be called in the StelModule::update function
 	void update();
 
 	//! Broadcasts this message to all connected and authenticated clients
-	void broadcastMessage(const SyncMessage& msg);
+	void broadcastMessage(const SyncProtocol::SyncMessage& msg);
 public slots:
 	//! Starts the SyncServer on the specified port. If the server is already running, stops it first.
 	//! Returns true if successful (false usually means port was in use, use getErrorString)
@@ -51,6 +54,9 @@ public slots:
 	void stop();
 	//! Returns a string of the last server error.
 	QString errorString() const;
+signals:
+	//! Emitted when the server is completely stopped, and all clients have disconnected
+	void serverStopped();
 
 protected:
 	void timerEvent(QTimerEvent* evt) Q_DECL_OVERRIDE;
@@ -58,25 +64,24 @@ private slots:
 	void handleNewConnection();
 	void connectionError(QAbstractSocket::SocketError err);
 
-	//! On receipt of new client data
-	void clientDataReceived();
-	void clientError(QAbstractSocket::SocketError);
 	void clientAuthenticated(SyncRemotePeer& peer);
-	void clientDisconnected();
+	void clientDisconnected(bool clean);
 
 private:
 	void addSender(SyncServerEventSender* snd);
 	void checkTimeouts();
-	void clientLog(QAbstractSocket* cl, const QString& msg);
+	void checkStopState();
 	//use composition instead of inheritance, cleaner interfaace this way
 	//for now, we use TCP, but will test multicast UDP later if the basic setup is working
 	QTcpServer* qserver;
 	QVector<SyncMessageHandler*> handlerList;
 	QVector<SyncServerEventSender*> senderList;
 
-	// a map to associate sockets with the client data
-	typedef QMap<QAbstractSocket*,SyncRemotePeer> tClientMap;
-	tClientMap clients;
+	bool stopping;
+
+	// client list
+	typedef QVector<SyncRemotePeer*> tClientList;
+	tClientList clients;
 
 	QByteArray broadcastBuffer;
 	int timeoutTimerId;

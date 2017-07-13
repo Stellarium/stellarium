@@ -28,13 +28,13 @@
 #include <QJsonObject>
 #include <QStringList>
 
-StelActionService::StelActionService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+StelActionService::StelActionService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
 	actionMgr = StelApp::getInstance().getStelActionManager();
 }
 
-void StelActionService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void StelActionService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	Q_UNUSED(parameters);
 
@@ -67,7 +67,7 @@ void StelActionService::getImpl(const QByteArray& operation, const APIParameters
 	}
 }
 
-void StelActionService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void StelActionService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 

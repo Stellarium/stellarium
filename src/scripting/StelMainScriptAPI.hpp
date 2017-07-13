@@ -41,7 +41,7 @@ class StelMainScriptAPI : public QObject
 	Q_PROPERTY(double timeSpeed READ getTimeRate WRITE setTimeRate)
 
 public:
-	StelMainScriptAPI(QObject *parent = 0);
+	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
 	~StelMainScriptAPI();
 
 // These functions will be available in scripts
@@ -152,6 +152,7 @@ public slots:
 	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data.  Keys:
+	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
@@ -174,7 +175,7 @@ public slots:
 	//! - size-dd : angular size in decimal degrees
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
-	//! - localized-name : localized name
+	//! - localized-name : localized name	
 	//! The returned map can contain other information. For example, Solar System objects add:
 	//! - distance : distance to object in AU (for Solar system objects only!)
 	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
@@ -324,7 +325,7 @@ public slots:
 	void setMinFps(float m);
 
 	//! Get the current minimum frames per second.
-	//! @return The current minimum frames per secon setting.
+	//! @return The current minimum frames per second setting.
 	float getMinFps();
 
 	//! Set the maximum frames per second.
@@ -332,7 +333,7 @@ public slots:
 	void setMaxFps(float m);
 
 	//! Get the current maximum frames per second.
-	//! @return The current maximum frames per secon setting.
+	//! @return The current maximum frames per second setting.
 	float getMaxFps();
 
 	//! Get the mount mode as a string
@@ -357,7 +358,7 @@ public slots:
 	QString getProjectionMode();
 
 	//! Set the current projection mode
-	//! @param id the name of the projection mode to use, e.g. "Perspective" and so on.
+	//! @param id the name of the projection mode to use, e.g. "ProjectionPerspective" and so on.
 	//! valid values of id are:
 	//! - ProjectionPerspective
 	//! - ProjectionEqualArea
@@ -367,6 +368,8 @@ public slots:
 	//! - ProjectionCylinder
 	//! - ProjectionMercator
 	//! - ProjectionOrthographic
+	//! - ProjectionSinusoidal
+	//! - ProjectionMiller
 	void setProjectionMode(const QString& id);
 
 	//! Get the status of the disk viewport
@@ -706,6 +709,9 @@ public slots:
 	//! Close Stellarium
 	void quitStellarium();
 
+	//! Return a QStringlist of all available properties. Useful for script development...
+	QStringList getPropertyList() const;
+
 	//! print a debugging message to the console
 	//! @param s the message to be displayed on the console.
 	static void debug(const QString& s);
@@ -782,6 +788,13 @@ public slots:
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	//! @param index the new Bortle scale index, must be in range [1,9]
 	void setBortleScaleIndex(int index);
+
+	//! Show or hide the DSS (photorealistic sky).
+	//! @param b if true, show the DSS, if false, hide the DSS layer.
+	void setDSSMode(bool b);
+	//! Get the current status of DSS mode.
+	//! @return The current status of DSS mode.
+	bool isDSSModeEnabled() const;
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().

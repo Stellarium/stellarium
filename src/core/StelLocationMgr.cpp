@@ -94,7 +94,7 @@ void LibGPSLookupHelper::query()
 		}
 
 		struct gps_data_t* newdata;
-		if ((newdata = gps_rec->read()) == NULL)
+		if ((newdata = gps_rec->read()) == Q_NULLPTR)
 		{
 			emit queryError("GPSD query: Read error.");
 			return;
@@ -161,7 +161,7 @@ void LibGPSLookupHelper::query()
 #endif
 
 NMEALookupHelper::NMEALookupHelper(QObject *parent)
-	: GPSLookupHelper(parent), serial(NULL), nmea(NULL)
+	: GPSLookupHelper(parent), serial(Q_NULLPTR), nmea(Q_NULLPTR)
 {
 	//use RAII
 	// Getting a list of ports may enable auto-detection!
@@ -296,7 +296,7 @@ void NMEALookupHelper::nmeaTimeout()
 #endif
 
 StelLocationMgr::StelLocationMgr()
-	: nmeaHelper(NULL), libGpsHelper(NULL)
+	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
 	// initialize the static QMap first if necessary.
 	if (locationDBToIANAtranslations.count()==0)
@@ -331,8 +331,10 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("Pacific/Pohnpei",   "Pacific/Ponape");
 		locationDBToIANAtranslations.insert("Pacific/Norfolk",   "UTC+11:00");
 		locationDBToIANAtranslations.insert("Pacific/Pitcairn",  "UTC-08:00");
-		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18
-		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon"); // UTC+6:30 Missing on Ubuntu/Qt5.5.1.
+		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18:
+		// NOTE: We must add these following zones for lookup in both ways: When the binary file is being created for publication on Linux, Rangoon/Yangon is being translated.
+		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon");  // UTC+6:30 Yangon missing on Ubuntu/Qt5.5.1.
+		locationDBToIANAtranslations.insert("Asia/Yangon",       "Asia/Rangoon"); // This can translate from the binary location file back to the zone name as known on Windows.
 		locationDBToIANAtranslations.insert( "", "UTC");
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
@@ -357,7 +359,7 @@ StelLocationMgr::~StelLocationMgr()
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
-	: nmeaHelper(NULL), libGpsHelper(NULL)
+	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
 	setLocations(locations);
 

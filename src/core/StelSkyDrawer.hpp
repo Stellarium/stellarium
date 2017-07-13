@@ -134,7 +134,7 @@ public:
 	//! Compute the luminance for an extended source with the given surface brightness
 	//! @param sb surface brightness in V magnitude/arcmin^2
 	//! @return the luminance in cd/m^2
-	static float surfacebrightnessToLuminance(float sb);
+	static float surfaceBrightnessToLuminance(float sb);
 	//! Compute the surface brightness from the luminance of an extended source
 	//! @param lum luminance in cd/m^2
 	//! @return surface brightness in V magnitude/arcmin^2
@@ -187,6 +187,8 @@ public slots:
 	//! Get the current Bortle scale index
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	int getBortleScaleIndex() const {return bortleScaleIndex;}
+	//! Get the average NELM for current Bortle scale index
+	float getNELMFromBortleScale() const;
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters

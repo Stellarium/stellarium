@@ -38,7 +38,7 @@ protected:
 class ServerErrorHandler : public SyncMessageHandler
 {
 public:
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peerData) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peerData) Q_DECL_OVERRIDE;
 };
 
 //! Server-side auth handler
@@ -47,7 +47,7 @@ class ServerAuthHandler : public ServerHandler
 	Q_OBJECT
 public:
 	ServerAuthHandler(SyncServer* server, bool allowDivergingAppVersions);
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 private:
 	bool allowDivergingAppVersions;
 };
@@ -55,7 +55,7 @@ private:
 class ServerAliveHandler : public SyncMessageHandler
 {
 public:
-	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 };
 
 #endif

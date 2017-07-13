@@ -39,7 +39,7 @@ public:
 	// Set the matrix to use to post process J2000 positions before storing in the trail
 	void setJ2000ToTrailNative(const Mat4d& m);
 
-	void addObject(const StelObjectP&, const Vec3f* col=NULL);
+	void addObject(const StelObjectP&, const Vec3f* col=Q_NULLPTR);
 
 	void setOpacity(float op) {opacity=op;}
 

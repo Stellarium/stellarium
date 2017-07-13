@@ -126,6 +126,9 @@ private:
 	StelTextureSP tex;
 	Vec3f color; // global color
 	double intensity;
+	float intensityFovScale; // like for constellations: reduce brightness when zooming in.
+	float intensityMinFov;
+	float intensityMaxFov;
 	class LinearFader* fader;
 	double lastJD; // keep date of last computation. Position will be updated only if far enough away from last computation.
 

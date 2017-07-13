@@ -20,8 +20,11 @@
 #ifndef SYNCCLIENT_HPP_
 #define SYNCCLIENT_HPP_
 
+#include <QLoggingCategory>
 #include <QObject>
 #include <QTcpSocket>
+
+Q_DECLARE_LOGGING_CATEGORY(syncClient)
 
 class SyncMessageHandler;
 class SyncRemotePeer;
@@ -30,12 +33,27 @@ class SyncRemotePeer;
 class SyncClient : public QObject
 {
 	Q_OBJECT
+	Q_FLAGS(SyncOptions)
 public:
-	SyncClient(QObject* parent = 0);
+	//! Bitflag-enum which determines the message types the client instance reacts to,
+	//! and other boolean options
+	enum SyncOption
+	{
+		NONE		= 0x0000,
+		SyncTime	= 0x0001,
+		SyncLocation	= 0x0002,
+		SyncSelection	= 0x0004,
+		SyncStelProperty= 0x0008,
+		SyncView	= 0x0010,
+		SyncFov		= 0x0020,
+		SkipGUIProps	= 0x0040,
+		ALL		= 0xFFFF
+	};
+	Q_DECLARE_FLAGS(SyncOptions, SyncOption)
+
+	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = Q_NULLPTR);
 	virtual ~SyncClient();
 
-	//! True if the connection has been established completely
-	bool isConnected() const;
 	QString errorString() const { return errorStr; }
 
 public slots:
@@ -46,18 +64,17 @@ protected:
 	void timerEvent(QTimerEvent* evt) Q_DECL_OVERRIDE;
 signals:
 	void connected();
-	void disconnected();
-	void connectionError();
+	void disconnected(bool cleanExit);
 private slots:
-	void dataReceived();
+	void serverDisconnected(bool clean);
 	void socketConnected();
-	void socketDisconnected();
-	void socketError(QAbstractSocket::SocketError err);
-	void emitError(const QString& msg);
+	void emitServerError(const QString& errorStr);
 
 private:
 	void checkTimeout();
 
+	SyncOptions options;
+	QStringList stelPropFilter; // list of excluded properties
 	QString errorStr;
 	bool isConnecting;
 	SyncRemotePeer* server;
@@ -67,5 +84,6 @@ private:
 	friend class ClientErrorHandler;
 };
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(SyncClient::SyncOptions)
 
 #endif

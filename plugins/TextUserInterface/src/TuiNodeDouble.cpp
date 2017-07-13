@@ -142,7 +142,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 	return response;
 }
 
-QString TuiNodeDouble::getDisplayText() 
+QString TuiNodeDouble::getDisplayText() const
 {
 	if (!editing)
 	{

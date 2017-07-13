@@ -38,7 +38,7 @@ CustomDeltaTEquationDialog::CustomDeltaTEquationDialog() : StelDialog("CustomDel
 CustomDeltaTEquationDialog::~CustomDeltaTEquationDialog()
 {
 	delete ui;
-	ui=NULL;
+	ui=Q_NULLPTR;
 }
 
 void CustomDeltaTEquationDialog::retranslate()

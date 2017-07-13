@@ -95,13 +95,15 @@ public:
 	// Methods defined in StelObjectManager class
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching asterism object's pointer if exists or NULL
+	//! Return the matching asterism object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensistive asterism name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching asterism if exists or NULL
+	//! Return the matching asterism if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -111,6 +113,7 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Asterisms"; }
+	virtual QString getStelObjectType() const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters

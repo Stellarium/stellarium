@@ -88,7 +88,7 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 		return;
 	}
 	modules.remove(moduleID);
-	m->setParent(NULL);
+	m->setParent(Q_NULLPTR);
 	callingListsToRegenerate = true;
 	if (alsoDelete)
 	{
@@ -98,12 +98,12 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 }
 
 /*************************************************************************
- Get the corresponding module or NULL if can't find it.
+ Get the corresponding module or Q_NULLPTR if can't find it.
 *************************************************************************/
 StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning)
 {
-	StelModule* module = modules.value(moduleID, NULL);
-	if (module == NULL)
+	StelModule* module = modules.value(moduleID, Q_NULLPTR);
+	if (module == Q_NULLPTR)
 	{
 		if (noWarning==false)
 			qWarning() << "Unable to find module called" << moduleID;
@@ -129,7 +129,29 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		}
 	}
 	qWarning() << "Unable to find plugin called" << moduleID;
-	return NULL;
+	return Q_NULLPTR;
+}
+
+QObjectList StelModuleMgr::loadExtensions(const QString &moduleID)
+{
+	foreach (const PluginDescriptor& desc, getPluginsList())
+	{
+		if (desc.info.id==moduleID)
+		{
+			Q_ASSERT(desc.pluginInterface);
+			QObjectList exts = desc.pluginInterface->getExtensionList();
+			if(!exts.isEmpty())
+			{
+				extensions.append(exts);
+				emit extensionsAdded(exts);
+				qDebug() << "Loaded"<<exts.size()<<"extensions for"<<moduleID;
+			}
+
+			return exts;
+		}
+	}
+	qWarning() << "Unable to find plugin called" << moduleID;
+	return QObjectList();
 }
 
 struct StelModuleOrderComparator

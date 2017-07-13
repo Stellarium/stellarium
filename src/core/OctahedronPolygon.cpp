@@ -523,7 +523,7 @@ void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLflo
 	bool newFlag=false;
 	for (int i=0;i<4;++i)
 	{
-		if (vertex_data[i]==NULL)
+		if (vertex_data[i]==Q_NULLPTR)
 			break;
 		newFlag = newFlag || vertex_data[i]->edgeFlag;
 	}

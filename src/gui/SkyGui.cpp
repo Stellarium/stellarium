@@ -32,7 +32,7 @@
 #include <QTextDocument>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
-	infoPixmap(NULL)
+	infoPixmap(Q_NULLPTR)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -106,7 +106,7 @@ InfoPanel::~InfoPanel()
 	if (infoPixmap)
 	{
 		delete infoPixmap;
-		infoPixmap=NULL;
+		infoPixmap=Q_NULLPTR;
 	}
 }
 
@@ -207,12 +207,12 @@ const QString InfoPanel::getSelectedText(void)
 SkyGui::SkyGui(QGraphicsItem * parent)
 	: QGraphicsWidget(parent)
 	, lastButtonbarWidth(0)
-	, btHorizAutoHide(NULL)
-	, btVertAutoHide(NULL)
-	, autoHidebts(NULL)
+	, btHorizAutoHide(Q_NULLPTR)
+	, btVertAutoHide(Q_NULLPTR)
+	, autoHidebts(Q_NULLPTR)
 	, autoHideHorizontalButtonBar(true)
 	, autoHideVerticalButtonBar(true)
-	, stelGui(NULL)
+	, stelGui(Q_NULLPTR)
 {
 	setObjectName("StelSkyGui");
 

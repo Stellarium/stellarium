@@ -231,7 +231,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	{
 		// Even if do not have anything selected, KEEP constellation selection intact
 		// (allows viewing constellations without distraction from star pointer animation)
-		// setSelected(NULL);
+		// setSelected(Q_NULLPTR);
 		return;
 	}
 
@@ -263,7 +263,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 		}
 		else
 		{
-			setSelected(NULL);
+			setSelected(Q_NULLPTR);
 		}
 	}
 }
@@ -408,7 +408,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		delete(*iter);
 
 	constellations.clear();
-	Constellation *cons = NULL;
+	Constellation *cons = Q_NULLPTR;
 
 	// read the file of line patterns, adding a record per non-comment line
 	int currentLineNumber = 0;	// line in file
@@ -502,7 +502,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 // 		lb.SetMessage(q_("Loading Constellation Art: %1/%2").arg(currentLineNumber).arg(totalRecords));
 // 		lb.Draw((float)(currentLineNumber)/totalRecords);
 
-		cons = NULL;
+		cons = Q_NULLPTR;
 		cons = findFromAbbreviation(shortname);
 		if (!cons)
 		{
@@ -520,7 +520,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
 
 			int texSizeX = 0, texSizeY = 0;
-			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
+			if (cons->artTexture==Q_NULLPTR || !cons->artTexture->getDimensions(texSizeX, texSizeY))
 			{
 				qWarning() << "Texture dimension not available";
 			}
@@ -649,7 +649,7 @@ Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
 			return (*iter);
 		}
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviation) const
@@ -669,7 +669,7 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 		}
 		//else qDebug() << "Comparison mismatch: " << abbreviation << "vs." << (*iter)->abbreviation;
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 // Can't find constellation from a position because it's not well localized
@@ -736,7 +736,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 			shortName = recRx.capturedTexts().at(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
-			if (aster != NULL)
+			if (aster != Q_NULLPTR)
 			{
 				aster->nativeName = recRx.capturedTexts().at(2);
 				ctxt = recRx.capturedTexts().at(3);
@@ -831,7 +831,7 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 			shortName = recRx.capturedTexts().at(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
-			if (aster != NULL)
+			if (aster != Q_NULLPTR)
 			{
 				aster->beginSeason = recRx.capturedTexts().at(2).toInt();
 				aster->endSeason = recRx.capturedTexts().at(3).toInt();
@@ -1094,24 +1094,24 @@ StelObject* ConstellationMgr::getSelected(void) const
 void ConstellationMgr::setSelected(const QString& abbreviation)
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
-	if(c != NULL) setSelectedConst(c);
+	if(c != Q_NULLPTR) setSelectedConst(c);
 }
 
 StelObjectP ConstellationMgr::setSelectedStar(const QString& abbreviation)
 {
 	Constellation * c = findFromAbbreviation(abbreviation);
-	if(c != NULL)
+	if(c != Q_NULLPTR)
 	{
 		setSelectedConst(c);
 		return c->getBrightestStarInConstellation();
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 void ConstellationMgr::setSelectedConst(Constellation * c)
 {
 	// update states for other constellations to fade them out
-	if (c != NULL)
+	if (c != Q_NULLPTR)
 	{
 		selected.push_back(c);
 
@@ -1194,7 +1194,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 //! Remove a constellation from the selected constellation list
 void ConstellationMgr::unsetSelectedConst(Constellation * c)
 {
-	if (c != NULL)
+	if (c != Q_NULLPTR)
 	{
 
 		vector < Constellation * >::const_iterator iter;
@@ -1242,7 +1242,7 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 
 bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 {
-	Constellation *cons = NULL;
+	Constellation *cons = Q_NULLPTR;
 	unsigned int i, j;
 
 	// delete existing boundaries if any exist
@@ -1268,7 +1268,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	float DE, RA;
 	Vec3f XYZ;
 	unsigned num, numc;
-	vector<Vec3f> *points = NULL;
+	vector<Vec3f> *points = Q_NULLPTR;
 	QString consname;
 	i = 0;
 	while (!istr.atEnd())
@@ -1310,13 +1310,20 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 				cons->isolatedBoundarySegments.push_back(points);
 		}
 
-		if (cons) cons->sharedBoundarySegments.push_back(points);
+		if (cons)
+		{
+			cons->sharedBoundarySegments.push_back(points);
+			points=Q_NULLPTR; // Avoid Coverity resource leak warning. (CID48925).
+		}
 		i++;
-
 	}
 	dataFile.close();
 	qDebug() << "Loaded" << i << "constellation boundary segments";
-	delete points;
+	if (points)
+	{
+		delete points; // See if Coverity complains here? (CID48925).
+		points=Q_NULLPTR;
+	}
 
 	return true;
 }
@@ -1341,7 +1348,7 @@ StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 		QString objwcap = (*iter)->nameI18.toUpper();
 		if (objwcap==objw) return *iter;
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP ConstellationMgr::searchByName(const QString& name) const
@@ -1356,7 +1363,17 @@ StelObjectP ConstellationMgr::searchByName(const QString& name) const
 		objwcap = (*iter)->abbreviation.toUpper();
 		if (objwcap==objw) return *iter;
 	}
-	return NULL;
+	return Q_NULLPTR;
+}
+
+StelObjectP ConstellationMgr::searchByID(const QString &id) const
+{
+	vector <Constellation*>::const_iterator iter;
+	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	{
+		if ((*iter)->getID() == id) return *iter;
+	}
+	return Q_NULLPTR;
 }
 
 QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
@@ -1407,10 +1424,15 @@ QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 	return result;
 }
 
+QString ConstellationMgr::getStelObjectType() const
+{
+	return Constellation::CONSTELLATION_TYPE;
+}
+
 void ConstellationMgr::setSelected(const StelObject *s)
 {
 	if (!s)
-		setSelectedConst(NULL);
+		setSelectedConst(Q_NULLPTR);
 	else
 	{
 		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
@@ -1423,7 +1445,7 @@ void ConstellationMgr::setSelected(const StelObject *s)
 Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	QString IAUConst = core->getIAUConstellation(s->getJ2000EquatorialPos(core));
+	QString IAUConst = core->getIAUConstellation(s->getEquinoxEquatorialPos(core));
 	vector < Constellation * >::const_iterator iter;
 	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
 	{
@@ -1431,5 +1453,5 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 		if ((*iter)->getShortName().toUpper()==IAUConst.toUpper())
 			return (*iter);
 	}
-	return NULL;
+	return Q_NULLPTR;
 }

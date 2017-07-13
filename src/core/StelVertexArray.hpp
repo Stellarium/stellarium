@@ -78,7 +78,7 @@ private:
 	// Below we define a few methods that are templated to be optimized according to different types of VertexArray :
 	// The template parameter <bool T> defines whether the array has a texture.
 	// The template parameter <bool I> defines whether the array is indexed.
-	// The template parameter <bool C> defines whether the array is colored. // NEW GZ
+	// The template parameter <bool C> defines whether the array is colored.
 	template <bool I>
 	const Vec3d* specVertexAt(int i) const {
 		return &vertex.at(specIndiceAt<I>(i));
@@ -86,13 +86,12 @@ private:
 
 	template <bool T, bool I>
 	const Vec2f* specTexCoordAt(int i) const {
-		return T ? &texCoords.at(specIndiceAt<I>(i)) : NULL;
+		return T ? &texCoords.at(specIndiceAt<I>(i)) : Q_NULLPTR;
 	}
 
-	// NEW GZ
 	template <bool C, bool I>
 	const Vec3f* specColorAt(int i) const {
-		return C ? &colors.at(specIndiceAt<I>(i)) : NULL;
+		return C ? &colors.at(specIndiceAt<I>(i)) : Q_NULLPTR;
 	}
 
 	template<bool I>
@@ -100,7 +99,7 @@ private:
 		return I ? indices.at(i) : i;
 	}
 
-	template<bool T, bool I, bool C, class Func> // GZ added bool C
+	template<bool T, bool I, bool C, class Func>
 	inline Func specForeachTriangle(Func func) const;
 
 };
@@ -112,7 +111,7 @@ QDataStream& operator>>(QDataStream& in, StelVertexArray&);
 template<class Func>
 Func StelVertexArray::foreachTriangle(Func func) const
 {
-	// Here we just dispatch the method into one of the 8 possible cases // GZ NEW: 8, not 4, cases
+	// Here we just dispatch the method into one of the 8 possible cases
 	bool textured = isTextured();
 	bool colored  = isColored();
 	bool useIndice = isIndexed();

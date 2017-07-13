@@ -46,7 +46,7 @@ friend class ScriptConsole;
 #endif
 
 public:
-	StelScriptMgr(QObject *parent=0);
+	StelScriptMgr(QObject *parent=Q_NULLPTR);
 	~StelScriptMgr();
 
 	QStringList getScriptList();
@@ -99,6 +99,14 @@ public slots:
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
 	QString getLicense(const QString& s) const;
+
+	//! Gets the version of the script
+	//! @param s the file name of the script whose name is to be returned.
+	//! @return text following a comment with Version: at the start.  If no
+	//! such comment is found, "" is returned.  If the file
+	//! is not found or cannot be opened for some reason, an Empty string
+	//! will be returned.
+	QString getVersion(const QString& s) const;
 
 	//! Gets a description of the script.
 	//! @param s the file name of the script whose name is to be returned.

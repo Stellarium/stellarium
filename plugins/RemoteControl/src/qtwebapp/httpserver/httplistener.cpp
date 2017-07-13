@@ -12,7 +12,7 @@ HttpListener::HttpListener(const HttpListenerSettings &settings, HttpRequestHand
     : QTcpServer(parent)
 {
     Q_ASSERT(requestHandler!=0);
-    pool=NULL;
+    pool=Q_NULLPTR;
     this->settings=settings;
     this->requestHandler=requestHandler;
     // Reqister type of socketDescriptor for signal/slot handling
@@ -53,7 +53,7 @@ void HttpListener::close() {
     qDebug("HttpListener: closed");
     if (pool) {
         delete pool;
-        pool=NULL;
+	pool=Q_NULLPTR;
     }
 }
 
@@ -62,7 +62,7 @@ void HttpListener::incomingConnection(tSocketDescriptor socketDescriptor) {
     qDebug("HttpListener: New connection");
 #endif
 
-    HttpConnectionHandler* freeHandler=NULL;
+    HttpConnectionHandler* freeHandler=Q_NULLPTR;
     if (pool)
     {
         freeHandler=pool->getConnectionHandler();

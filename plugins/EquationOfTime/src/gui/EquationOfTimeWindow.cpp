@@ -28,7 +28,7 @@
 
 EquationOfTimeWindow::EquationOfTimeWindow()
 	: StelDialog("EquationOfTime")
-	, eq(NULL)
+	, eq(Q_NULLPTR)
 {
 	ui = new Ui_equationOfTimeWindowForm();
 }

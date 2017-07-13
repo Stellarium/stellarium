@@ -44,7 +44,7 @@ class SatellitesListModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	SatellitesListModel(QList<SatelliteP>* satellites, QObject *parent = 0);
+	SatellitesListModel(QList<SatelliteP>* satellites, QObject *parent = Q_NULLPTR);
 	
 	void setSatelliteList(QList<SatelliteP>* satellites);
 	

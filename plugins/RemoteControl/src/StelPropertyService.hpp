@@ -33,16 +33,15 @@ class StelPropertyService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	StelPropertyService(const QByteArray& serviceName, QObject* parent = 0);
+	StelPropertyService(QObject* parent = Q_NULLPTR);
 
-	virtual ~StelPropertyService() {}
-protected:
+	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("stelproperty"); }
 	//! @brief Implements the HTTP GET method
 	//! @see \ref rcStelPropertyServiceGET
-	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 	//! @brief Implements the HTTP POST method
 	//! @see \ref rcStelPropertyServicePOST
-	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
+	virtual void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelPropertyMgr* propMgr;
 };

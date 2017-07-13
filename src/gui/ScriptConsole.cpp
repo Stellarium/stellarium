@@ -40,7 +40,7 @@
 
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
-	, highlighter(NULL)
+	, highlighter(Q_NULLPTR)
 {
 	ui = new Ui_scriptConsoleForm;
 }

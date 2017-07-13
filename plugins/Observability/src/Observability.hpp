@@ -420,6 +420,7 @@ class ObservabilityStelPluginInterface : public QObject, public StelPluginInterf
 public:
        virtual StelModule* getStelModule() const;
        virtual StelPluginInfo getPluginInfo() const;
+       virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*OBSERVABILITY_HPP_*/

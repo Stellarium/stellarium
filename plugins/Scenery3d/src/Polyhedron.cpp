@@ -88,11 +88,11 @@ void Polyhedron::add(const QVector<Vec3f> &verts, const Vec3f &normal)
 	polygons.append(p);
 }
 
-void Polyhedron::intersect(const AABB &bb)
+void Polyhedron::intersect(const AABBox &bb)
 {
-	for(unsigned int i=0; i<AABB::PLANECOUNT; i++)
+	for(unsigned int i=0; i<AABBox::FACECOUNT; i++)
 	{
-		intersect(Plane(bb.getEquation(static_cast<AABB::Plane>(i))));
+		intersect(Plane(bb.getPlane(static_cast<AABBox::Face>(i))));
 	}
 }
 
@@ -202,7 +202,7 @@ bool Polyhedron::clip(float p, float q, float &u1, float &u2) const
 	}
 }
 
-void Polyhedron::extrude(const Vec3f &dir, const AABB &bb)
+void Polyhedron::extrude(const Vec3f &dir, const AABBox &bb)
 {
 	makeUniqueVerts();
 

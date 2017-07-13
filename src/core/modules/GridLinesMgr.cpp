@@ -24,6 +24,7 @@
 #include "StelProjector.hpp"
 #include "StelFader.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
@@ -142,6 +143,7 @@ public:
 	//! Re-translates the label.
 	void updateLabel();
 private:
+	QSharedPointer<Planet> earth, sun;
 	SKY_LINE_TYPE line_type;
 	Vec3f color;
 	StelCore::FrameType frameType;
@@ -222,7 +224,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	QString text;
 	if (d->text.isEmpty())
@@ -444,9 +446,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, NULL, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -460,8 +462,8 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint*=-1.;
 
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
-		sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 
 		fpt.transfo4d(rotLon);
 	}
@@ -486,8 +488,8 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortSphericalCap.contains(middlePoint))
 				middlePoint*=-1;
 
-			sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 
 			fpt.transfo4d(rotLon);
 		}
@@ -615,6 +617,9 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
 
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	sun = GETSTELMODULE(SolarSystem)->getSun();
+
 	updateLabel();
 }
 
@@ -669,7 +674,7 @@ void SkyLine::updateLabel()
 			label = q_("Supergalactic Equator");
 			break;
 		case LONGITUDE:
-			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
 			label = q_("O./C. longitude");
 			break;
@@ -805,10 +810,15 @@ void SkyLine::draw(StelCore *core) const
 	}
 	if (line_type==LONGITUDE)
 	{
-		Vec3d coord;
-		double lambda, beta;
-		StelUtils::rectToSphe(&lambda, &beta, core->getCurrentPlanet()->getHeliocentricEclipticPos());
-		StelUtils::spheToRect(lambda + M_PI/2., 0., coord);
+		Vec3d coord;		
+		double eclJDE = earth->getRotObliquity(core->getJDE());
+		double ra_equ, dec_equ, lambdaJDE, betaJDE;
+
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, sun->getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
+		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
+
+		StelUtils::spheToRect(lambdaJDE + M_PI/2., 0., coord);
 		meridianSphericalCap.n.set(coord[0],coord[1],coord[2]);
 		fpt.set(0,0,1);
 	}
@@ -825,9 +835,9 @@ void SkyLine::draw(StelCore *core) const
 			rotFpt.transfo4d(rotLon120);
 			Vec3d rotFpt2=rotFpt;
 			rotFpt2.transfo4d(rotLon120);
-			sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, NULL, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			return;
 		}
 		else
@@ -841,8 +851,8 @@ void SkyLine::draw(StelCore *core) const
 		middlePoint*=-1.;
 
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-	sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
-	sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
+	sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+	sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
@@ -1044,8 +1054,10 @@ void SkyPoint::draw(StelCore *core) const
 
 
 GridLinesMgr::GridLinesMgr()
+	: gridlinesDisplayed(true)
 {
 	setObjectName("GridLinesMgr");
+
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
 	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEclipticJ2000);
@@ -1080,6 +1092,9 @@ GridLinesMgr::GridLinesMgr()
 	equinoxPoints = new SkyPoint(SkyPoint::EQUINOXES_OF_DATE);
 	solsticeJ2000Points = new SkyPoint(SkyPoint::SOLSTICES_J2000);
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
+
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectEarthFromSolarSystem()));
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -1142,6 +1157,7 @@ void GridLinesMgr::init()
 		conf->remove("color/longitude_color");
 	}
 
+	setFlagGridlines(conf->value("viewing/flag_gridlines", true).toBool());
 	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
 	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
@@ -1212,6 +1228,7 @@ void GridLinesMgr::init()
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
 	
 	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Gridlines", displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
 	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
 	addAction("actionShow_Azimuthal_Grid", displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
 	addAction("actionShow_Ecliptic_Line", displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
@@ -1243,6 +1260,11 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
 	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
 	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
+}
+
+void GridLinesMgr::connectEarthFromSolarSystem()
+{
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -1286,30 +1308,36 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
+	if (!gridlinesDisplayed)
+		return;
+
 	galacticGrid->draw(core);
 	supergalacticGrid->draw(core);
 	eclJ2000Grid->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
 	// Of course, orbital plane of respective planet would be better, but is not implemented.
-	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+	if (core->getCurrentPlanet()==earth)
+	{
 		eclGrid->draw(core);
+		eclipticLine->draw(core);
+		precessionCircleN->draw(core);
+		precessionCircleS->draw(core);
+		colureLine_1->draw(core);
+		colureLine_2->draw(core);
+		eclipticPoles->draw(core);
+		equinoxPoints->draw(core);
+		solsticePoints->draw(core);
+		longitudeLine->draw(core);
+	}
+
 	equJ2000Grid->draw(core);
 	equGrid->draw(core);
 	aziGrid->draw(core);
 	// Lines after grids, to be able to e.g. draw equators in different color!
 	galacticEquatorLine->draw(core);
 	supergalacticEquatorLine->draw(core);
-	eclipticJ2000Line->draw(core);
-	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
-	{
-		eclipticLine->draw(core);
-		precessionCircleN->draw(core);
-		precessionCircleS->draw(core);
-		colureLine_1->draw(core);
-		colureLine_2->draw(core);
-	}
-	longitudeLine->draw(core);
+	eclipticJ2000Line->draw(core);	
 	equatorJ2000Line->draw(core);
 	equatorLine->draw(core);
 	meridianLine->draw(core);
@@ -1321,13 +1349,10 @@ void GridLinesMgr::draw(StelCore* core)
 	celestialPoles->draw(core);
 	zenithNadir->draw(core);
 	eclipticJ2000Poles->draw(core);
-	eclipticPoles->draw(core);
 	galacticPoles->draw(core);
 	supergalacticPoles->draw(core);
 	equinoxJ2000Points->draw(core);
-	equinoxPoints->draw(core);
-	solsticeJ2000Points->draw(core);
-	solsticePoints->draw(core);
+	solsticeJ2000Points->draw(core);	
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -1359,6 +1384,20 @@ void GridLinesMgr::updateLineLabels()
 	equinoxPoints->updateLabel();
 	solsticeJ2000Points->updateLabel();
 	solsticePoints->updateLabel();
+}
+
+//! Setter ("master switch") for displaying any grid/line.
+void GridLinesMgr::setFlagGridlines(const bool displayed)
+{
+	if(displayed != gridlinesDisplayed) {
+		gridlinesDisplayed=displayed;
+		emit gridlinesDisplayedChanged(displayed);
+	}
+}
+//! Accessor ("master switch") for displaying any grid/line.
+bool GridLinesMgr::getFlagGridlines(void) const
+{
+	return gridlinesDisplayed;
 }
 
 //! Set flag for displaying Azimuthal Grid

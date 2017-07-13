@@ -34,14 +34,12 @@ class ViewService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	ViewService(const QByteArray& serviceName, QObject* parent = 0);
+	ViewService(QObject* parent = Q_NULLPTR);
 
-	virtual ~ViewService() {}
-
-protected:
+	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("view"); }
 	//! @brief Implements the HTTP GET operations
 	//! @see \ref rcViewServiceGET
-	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 private:
 	StelCore* core;
 	LandscapeMgr* lsMgr;

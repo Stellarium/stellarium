@@ -36,7 +36,7 @@ GreatRedSpotDialog::GreatRedSpotDialog() : StelDialog("GreatRedSpot")
 GreatRedSpotDialog::~GreatRedSpotDialog()
 {
 	delete ui;
-	ui=NULL;
+	ui=Q_NULLPTR;
 }
 
 void GreatRedSpotDialog::retranslate()

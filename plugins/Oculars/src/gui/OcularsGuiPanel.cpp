@@ -42,7 +42,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	QGraphicsWidget(parent, wFlags),
 	ocularsPlugin(plugin),
 	parentWidget(parent),
-	borderPath(0)
+	borderPath(Q_NULLPTR)
 {
 	setMaximumSize(300, 400);
 	setContentsMargins(0, 0, 0, 0);
@@ -176,24 +176,24 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
 	QPixmap nextArrowOff = naOff.scaledToHeight(scale, Qt::SmoothTransformation);
 
-	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
-	actionsMgr->addAction("actionToggle_Oculars_Previous_Ocular", ocularsGroup, N_("Previous ocular"), this, "updateOcularControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Next_Ocular", ocularsGroup, N_("Next ocular"), this, "updateOcularControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Previous_Lens", ocularsGroup, N_("Previous lens"), this, "updateLensControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Next_Lens", ocularsGroup, N_("Next lens"), this, "updateLensControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Previous_CCD", ocularsGroup, N_("Previous CCD frame"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Next_CCD", ocularsGroup, N_("Next CCD frame"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Previous_Telescope", ocularsGroup, N_("Previous telescope"), this, "updateTelescopeControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Next_Telescope", ocularsGroup, N_("Next telescope"), this, "updateTelescopeControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_Ocular", ocularsGroup, N_("Previous ocular"), this, "updateOcularControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_Ocular", ocularsGroup, N_("Next ocular"), this, "updateOcularControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_Lens", ocularsGroup, N_("Previous lens"), this, "updateLensControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_Lens", ocularsGroup, N_("Next lens"), this, "updateLensControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_CCD", ocularsGroup, N_("Previous CCD frame"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_CCD", ocularsGroup, N_("Next CCD frame"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_Telescope", ocularsGroup, N_("Previous telescope"), this, "updateTelescopeControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_Telescope", ocularsGroup, N_("Next telescope"), this, "updateTelescopeControls()", "", "");
 
-	actionsMgr->addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree counterclockwise"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Clockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Clockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionsMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Clockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree clockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees counterclockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees counterclockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree counterclockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Clockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees clockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Clockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees clockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Clockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree clockwise"), this, "updateCcdControls()", "", "");
 
 	prevOcularButton = new StelButton(ocularControls,
 					  prevArrow,
@@ -588,7 +588,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	QString fullName;
 	QString multiplerString;
-	if (lens != NULL)
+	if (lens != Q_NULLPTR)
 	{
 		QString name = lens->getName();
 		if (name.isEmpty())
@@ -600,7 +600,7 @@ void OcularsGuiPanel::updateLensControls()
 			fullName = QString(q_("Lens #%1: %2")).arg(index).arg(name);
 		}
 		multiplerString = QString(q_("Multiplicity: %1")).arg(lens->getMultipler());
-		multiplerString.append(QChar(0x00D7));
+		multiplerString.append(QChar(0x02E3)); // Was 0x00D7
 	}
 	else
 	{
@@ -857,10 +857,11 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		double mag = ocular->magnification(telescope, lens);
 		QString magnificationString = QString::number(mag, 'f', 1);
-		magnificationString.append(QChar(0x00D7));
+		magnificationString.append(QChar(0x02E3)); // Was 0x00D7
+		magnificationString.append(QString(" (%1D)").arg(QString::number(mag/telescope->diameter(), 'f', 2)));
 		QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
 		fieldMagnification->setPlainText(magnificationLabel);
-		fieldMagnification->setPos(posX, posY);
+		fieldMagnification->setPos(posX, posY);		
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 

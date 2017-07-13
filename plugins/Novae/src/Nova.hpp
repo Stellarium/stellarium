@@ -42,6 +42,8 @@ class Nova : public StelObject
 {
 	friend class Novae;
 public:
+	static const QString NOVA_TYPE;
+
 	//! @param id The official designation for a nova, e.g. "........"
 	Nova(const QVariantMap& map);
 	~Nova();
@@ -49,7 +51,15 @@ public:
 	//! Get a QVariantMap which describes the nova.  Could be used to create a duplicate.
 	QVariantMap getMap(void) const;
 
-	virtual QString getType(void) const {return "Nova";}
+	virtual QString getType(void) const
+	{
+		return NOVA_TYPE;
+	}
+
+	virtual QString getID(void) const
+	{
+		return getDesignation();
+	}
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core

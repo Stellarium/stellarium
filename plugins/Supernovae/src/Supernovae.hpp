@@ -100,20 +100,26 @@ public:
 	//! @return an list containing the satellites located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or NULL.
+	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensistive satellite name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or NULL.
+	//! Return the matching satellite if exists or Q_NULLPTR.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const
+	{
+		return qSharedPointerCast<StelObject>(getByID(id));
+	}
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
 	virtual QString getName() const { return "Historical Supernovae"; }
+	virtual QString getStelObjectType() const { return Supernova::SUPERNOVA_TYPE; }
 
 	//! get a supernova object by identifier
-	SupernovaP getByID(const QString& id);
+	SupernovaP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
@@ -152,13 +158,13 @@ public:
 	UpdateState getUpdateState(void) {return updateState;}
 
 	//! Get list of supernovae
-	QString getSupernovaeList();
+	QString getSupernovaeList() const;
 
 	//! Get lower limit of  brightness for displayed supernovae
-	float getLowerLimitBrightness();
+	float getLowerLimitBrightness() const;
 
 	//! Get count of supernovae from catalog
-	int getCountSupernovae(void) {return SNCount;}
+	int getCountSupernovae(void) const {return SNCount;}
 
 signals:
 	//! @param state the new update state.
@@ -200,11 +206,11 @@ private:
 
 	//! Get the version from the "version" value in the supernovas.json file
 	//! @return version string, e.g. "1"
-	int getJsonFileVersion(void);
+	int getJsonFileVersion(void) const;
 
 	//! Check format of the catalog of supernovae
 	//! @return valid boolean, e.g. "true"
-	bool checkJsonFileFormat(void);
+	bool checkJsonFileFormat(void) const;
 
 	//! Parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());
@@ -260,6 +266,7 @@ class SupernovaeStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_SUPERNOVAE_HPP_*/

@@ -43,8 +43,8 @@
 
 ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
-	, ep(NULL)
-	, updateTimer(NULL)
+	, ep(Q_NULLPTR)
+	, updateTimer(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
 }
@@ -55,7 +55,7 @@ ExoplanetsDialog::~ExoplanetsDialog()
 	{
 		updateTimer->stop();
 		delete updateTimer;
-		updateTimer = NULL;
+		updateTimer = Q_NULLPTR;
 	}
 	delete ui;
 }
@@ -128,7 +128,7 @@ void ExoplanetsDialog::createDialogContent()
 	setInfoHtml();
 	setWebsitesHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
@@ -164,7 +164,7 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
@@ -247,7 +247,7 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
@@ -280,7 +280,7 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
@@ -491,7 +491,7 @@ void ExoplanetsDialog::populateDiagramsList()
 	axisX->blockSignals(true);
 	axisY->blockSignals(true);
 	int indexX = axisX->currentIndex();
-	int indexY = axisY->currentIndex();
+	int indexY = axisY->currentIndex();	
 	QVariant selectedAxisX = axisX->itemData(indexX);
 	QVariant selectedAxisY = axisY->itemData(indexY);
 	axisX->clear();
@@ -503,7 +503,16 @@ void ExoplanetsDialog::populateDiagramsList()
 	axis.append(qMakePair(q_("Planetary Mass, Mjup"), 2));
 	axis.append(qMakePair(q_("Planetary Radius, Rjup"), 3));
 	axis.append(qMakePair(q_("Orbital Period, days"), 4));
-	axis.append(qMakePair(q_("Angular Distance, arcsec."), 5));
+	axis.append(qMakePair(q_("Angular Distance, arcsec"), 5));
+	axis.append(qMakePair(q_("Effective temperature of host star, K"), 6));
+	axis.append(qMakePair(q_("Year of Discovery"), 7));
+	axis.append(qMakePair(q_("Metallicity of host star"), 8));
+	axis.append(qMakePair(q_("V magnitude of host star, mag"), 9));
+	axis.append(qMakePair(q_("RA (J2000) of star, deg"), 10));
+	axis.append(qMakePair(q_("Dec (J2000) of star, deg"), 11));
+	axis.append(qMakePair(q_("Distance to star, pc"), 12));
+	axis.append(qMakePair(q_("Mass of host star, Msol"), 13));
+	axis.append(qMakePair(q_("Radius of host star, Rsol"), 14));
 
 	for(int i=0; i<axis.size(); ++i)
 	{
@@ -513,7 +522,11 @@ void ExoplanetsDialog::populateDiagramsList()
 
 	//Restore the selection
 	indexX = axisX->findData(selectedAxisX, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexX<0)
+		indexX = 1;
 	indexY = axisY->findData(selectedAxisY, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexY<0)
+		indexY = 0;
 	axisX->setCurrentIndex(indexX);
 	axisY->setCurrentIndex(indexY);
 	axisX->blockSignals(false);

@@ -21,7 +21,7 @@
 #include <QKeyEvent>
 
 TuiNode::TuiNode(const QString& text, TuiNode* parent, TuiNode* prev)
-	: QObject(parent), parentNode(parent), childNode(NULL), prevNode(prev), nextNode(NULL), displayText(text)
+	: QObject(parent), parentNode(parent), childNode(Q_NULLPTR), prevNode(prev), nextNode(Q_NULLPTR), displayText(text)
 {
 	updateNodeNumber();
 }
@@ -39,7 +39,7 @@ TuiNodeResponse TuiNode::navigation(int key)
 
 	if (key==Qt::Key_Left)
 	{
-		if (parentNode != NULL)
+		if (parentNode != Q_NULLPTR)
 		{
 			parentNode->setChildNode(this);
 			response.newNode = this->parentNode;
@@ -48,7 +48,7 @@ TuiNodeResponse TuiNode::navigation(int key)
 	}
 	else if (key==Qt::Key_Right)
 	{
-		if (childNode != NULL)
+		if (childNode != Q_NULLPTR)
 		{
 			response.newNode = childNode;
 		}
@@ -56,7 +56,7 @@ TuiNodeResponse TuiNode::navigation(int key)
 	}
 	else if (key==Qt::Key_Up)
 	{
-		if (prevNode != NULL)
+		if (prevNode != Q_NULLPTR)
 		{
 			response.newNode = prevNode;
 		}
@@ -64,7 +64,7 @@ TuiNodeResponse TuiNode::navigation(int key)
 	}
 	else if (key==Qt::Key_Down)
 	{
-		if (nextNode != NULL)
+		if (nextNode != Q_NULLPTR)
 		{
 			response.newNode = nextNode;
 		}
@@ -73,7 +73,7 @@ TuiNodeResponse TuiNode::navigation(int key)
 	return response;
 }
 
-QString TuiNode::getDisplayText()
+QString TuiNode::getDisplayText() const
 {
 	return prefixText + q_(displayText);
 }
@@ -81,7 +81,7 @@ QString TuiNode::getDisplayText()
 void TuiNode::loopToTheLast()
 {
 	TuiNode* node = nextNode;
-	while (node != NULL && node != this)
+	while (node != Q_NULLPTR && node != this)
 	{
 		prevNode = node;
 		node = node->getNextNode();
@@ -94,7 +94,7 @@ void TuiNode::updateNodeNumber()
 	ancestorsNumbers.clear();
 	prefixText.clear();
 	
-	if (prevNode == NULL)
+	if (prevNode == Q_NULLPTR)
 	{
 		nodeNumber = 1;
 	}
@@ -103,7 +103,7 @@ void TuiNode::updateNodeNumber()
 		nodeNumber = prevNode->getNodeNumber() + 1;
 	}
 	
-	if (parentNode != NULL)
+	if (parentNode != Q_NULLPTR)
 	{
 		ancestorsNumbers = parentNode->getAncestorsNumbers();
 	}

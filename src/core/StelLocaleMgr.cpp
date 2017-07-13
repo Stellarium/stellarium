@@ -34,7 +34,7 @@
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
 StelLocaleMgr::StelLocaleMgr()
-	: skyTranslator(NULL)
+	: skyTranslator(Q_NULLPTR)
 	, timeFormat()
 	, dateFormat()	
 {
@@ -62,7 +62,7 @@ StelLocaleMgr::StelLocaleMgr()
 StelLocaleMgr::~StelLocaleMgr()
 {
 	delete skyTranslator;
-	skyTranslator=NULL;
+	skyTranslator=Q_NULLPTR;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
@@ -263,7 +263,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		QString timeZone = "UTC";
+		QString timeZone = "";
 		QString currTZ = core->getCurrentTimeZone();
 		QString timeZoneST = "";
 
@@ -282,12 +282,12 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 		float shift = core->getUTCOffset(JD);		
 		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
 		if(shift<0.0f)
-			timeZone.append("-" + tz.toString("hh:mm"));
+			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
 		else
-			timeZone.append("+" + tz.toString("hh:mm"));
+			timeZone = QString("UTC+%1").arg(tz.toString("hh:mm"));
 
 		if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
-			timeZone.append(" (" + timeZoneST + ")");
+			timeZone = QString("%1 (%2)").arg(timeZone, timeZoneST);
 
 		return timeZone;
 	}

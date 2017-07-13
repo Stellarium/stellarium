@@ -25,14 +25,14 @@
 #include "S3DEnum.hpp"
 #include "ui_scenery3dDialog.h"
 
-class Scenery3dMgr;
+class Scenery3d;
 struct SceneInfo;
 
 class Scenery3dDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	Scenery3dDialog(QObject* parent = NULL);
+	Scenery3dDialog(QObject* parent = Q_NULLPTR);
 	~Scenery3dDialog();
 
 public slots:
@@ -76,7 +76,7 @@ private:
 
 	QVector<QAbstractButton*> shortcutButtons;
 	Ui_scenery3dDialogForm* ui;
-	Scenery3dMgr* mgr;
+	Scenery3d* mgr;
 };
 
 #endif

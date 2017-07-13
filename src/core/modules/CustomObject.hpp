@@ -35,13 +35,20 @@ class CustomObject : public StelObject
 {
 	friend class CustomObjectMgr;
 public:
+	static const QString CUSTOMOBJECT_TYPE;
+
 	CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible);
 	~CustomObject();
 
 	//! Get the type of object
 	virtual QString getType(void) const
 	{
-		return "CustomObject";
+		return CUSTOMOBJECT_TYPE;
+	}
+
+	virtual QString getID(void) const
+	{
+		return designation;
 	}
 
 	virtual float getSelectPriority(const StelCore* core) const;

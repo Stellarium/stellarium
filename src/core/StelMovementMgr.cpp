@@ -30,6 +30,9 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StelPainter.hpp"
+#include "StelProjector.hpp"
+#include "LabelMgr.hpp"
 
 #include <cmath>
 #include <QString>
@@ -37,6 +40,8 @@
 #include <QSettings>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QFont>
+#include <QFontMetrics>
 
 StelMovementMgr::StelMovementMgr(StelCore* acore)
 	: currentFov(60.)
@@ -45,7 +50,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, maxFov(100.)
 	, deltaFov(0.)
 	, core(acore)
-	, objectMgr(NULL)
+	, objectMgr(Q_NULLPTR)
 	, flagLockEquPos(false)
 	, flagTracking(false)
 	, flagInhibitAllAutomoves(false)
@@ -83,9 +88,11 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, viewDirectionMountFrame(0., 1., 0.)
 	, upVectorMountFrame(0.,0.,1.)
 	, dragTriggerDistance(4.f)
-	, viewportOffsetTimeline(NULL)
+	, viewportOffsetTimeline(Q_NULLPTR)
 	, oldViewportOffset(0.0f, 0.0f)
 	, targetViewportOffset(0.0f, 0.0f)
+	, flagIndicationMountMode(false)
+	, messageTimer(Q_NULLPTR)
 {
 	setObjectName("StelMovementMgr");
 }
@@ -95,8 +102,14 @@ StelMovementMgr::~StelMovementMgr()
 	if (viewportOffsetTimeline)
 	{
 		delete viewportOffsetTimeline;
-		viewportOffsetTimeline=NULL;
+		viewportOffsetTimeline=Q_NULLPTR;
 	}
+	if (messageTimer)
+	{
+		delete messageTimer;
+		messageTimer=Q_NULLPTR;
+	}
+
 }
 
 void StelMovementMgr::init()
@@ -118,6 +131,7 @@ void StelMovementMgr::init()
 	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
+	flagIndicationMountMode = conf->value("gui/flag_indication_mount_mode", false).toBool();
 
 	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
@@ -197,6 +211,28 @@ void StelMovementMgr::init()
 	viewportOffsetTimeline->setFrameRange(0, 100);
 	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
+
+	// A timer for hiding alert messages
+	messageTimer = new QTimer(this);
+	messageTimer->setSingleShot(true);   // recurring check for update
+	messageTimer->setInterval(1000);
+	messageTimer->stop();
+	connect(messageTimer, SIGNAL(timeout()), this, SLOT(hideMessages()));
+}
+
+void StelMovementMgr::setEquatorialMount(bool b)
+{
+	QString mode = qc_("Equatorial mount", "mount mode");
+	if (!b)
+		mode = qc_("Alt-azimuth mount", "mount mode");
+
+	setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);
+
+	if (getFlagIndicationMountMode())
+	{
+		hideMessages();
+		displayMessage(mode);
+	}
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -1190,7 +1226,7 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	moveDuration /= movementsSpeedFactor;
 
 	zoomingMode = zooming;
-	move.aim=Vec3d(0);
+	move.aim=Vec3d(0.);
 	move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.)); // the new up vector. We try simply vertical axis here. (Should be same as pre-0.15)
 	move.aimUp.normalize();
 	move.start=viewDirectionJ2000;
@@ -1253,7 +1289,7 @@ Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 			return core->j2000ToSupergalactic(v);
 	}
 	Q_ASSERT(0);
-	return Vec3d(0);
+	return Vec3d(0.);
 }
 
 Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
@@ -1270,7 +1306,7 @@ Vec3d StelMovementMgr::mountFrameToJ2000(const Vec3d& v) const
 			return core->supergalacticToJ2000(v);
 	}
 	Q_ASSERT(0);
-	return Vec3d(0);
+	return Vec3d(0.);
 }
 
 void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
@@ -1497,8 +1533,8 @@ void StelMovementMgr::setMaxFov(double max)
 void StelMovementMgr::moveViewport(float offsetX, float offsetY, const float duration)
 {
 	//clamp to valid range
-	offsetX = qMax(-50.f, qMin(50.f, offsetX));
-	offsetY = qMax(-50.f, qMin(50.f, offsetY));
+	offsetX = qBound(-50.f, offsetX, 50.f);
+	offsetY = qBound(-50.f, offsetY, 50.f);
 
 	Vec2f oldTargetViewportOffset = targetViewportOffset;
 	targetViewportOffset.set(offsetX, offsetY);
@@ -1533,4 +1569,28 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	float offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
 	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
 	core->setViewportOffset(offsetX, offsetY);
+}
+
+void StelMovementMgr::displayMessage(const QString& message, const QString hexColor)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	QFont font;
+
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelPainter painter(prj);
+	painter.setFont(font);
+
+	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
+	int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0] - 0.5 * (painter.getFontMetrics().width(message));
+	int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1] - 0.5 * (painter.getFontMetrics().height());
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, xPosition, yPosition, true, StelApp::getInstance().getBaseFontSize() + 3, hexColor);
+	messageTimer->start();
+}
+
+void StelMovementMgr::hideMessages()
+{
+	foreach(const int& id, messageIDs)
+	{
+		GETSTELMODULE(LabelMgr)->deleteLabel(id);
+	}
 }

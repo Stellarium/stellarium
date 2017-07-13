@@ -2,8 +2,8 @@
 // Name: The Jack Bennett Catalog
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.0
-// Description: The Jack Bennett Catalog of Southern Deep-Sky Objects. The Bennett catalog was contributed by Auke Slotegraaf.
+// Version: 1.1
+// Description: The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). The Bennett catalog was contributed by Auke Slotegraaf.
 //
 
 // List of Bennett's objects
@@ -43,24 +43,34 @@ var objlist = [["NGC 55", "Ben 1"], ["NGC 104", "Ben 2"], ["NGC 247", "Ben 3"], 
 core.clear("deepspace");
 NebulaMgr.setFlagHints(true);
 var id = LabelMgr.labelScreen("The Jack Bennett Catalog of Southern Deep-Sky Objects", 20, 20, false, 24, "#00AAFF");
+var cnt = LabelMgr.labelScreen(objlist.length + " objects in all", 20, 50, false, 20, "#00AAFF");
 LabelMgr.setLabelShow(id, true);
+LabelMgr.setLabelShow(cnt, true);
 core.wait(5);
 LabelMgr.setLabelShow(id, false);
+LabelMgr.setLabelShow(cnt, false);
 LabelMgr.deleteLabel(id);
+LabelMgr.deleteLabel(cnt);
+var dss = core.isDSSModeEnabled();
 
 for (i=0; i<objlist.length; i++)
 {
 	core.selectObjectByName(objlist[i][0], true);
 	p = core.getScreenWidth()/2 - 20;
-	id = LabelMgr.labelScreen(objlist[i][1], p, 20, false, 22, "#00AAFF");
+	id = LabelMgr.labelScreen(objlist[i][1], p, 40, false, 24, "#00AAFF");
 	LabelMgr.setLabelShow(id, true);
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.autoZoomIn(2);
-	core.wait(5);
+	core.wait(1);
+	core.setDSSMode(true);
+	core.wait(9);
 
 	LabelMgr.setLabelShow(id, false);
 	StelMovementMgr.zoomTo(30, 5);
+	core.wait(3);
+	core.setDSSMode(false);
 	core.wait(5);
 }
 core.clear("natural");
+core.setDSSMode(dss);
 core.goHome();

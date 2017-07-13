@@ -34,17 +34,15 @@ class StelActionService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	StelActionService(const QByteArray& serviceName, QObject* parent = 0);
+	StelActionService(QObject* parent = Q_NULLPTR);
 
-	virtual ~StelActionService() {}
-
-protected:
+	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("stelaction"); }
 	//! @brief Implements the HTTP GET method
 	//! @see \ref rcStelActionServiceGET
-	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 	//! @brief Implements the HTTP POST method
 	//! @see \ref rcStelActionServicePOST
-	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
+	virtual void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelActionMgr* actionMgr;
 };
