@@ -28,6 +28,7 @@
 #include "QJsonParseError"
 #include "QJsonObject"
 #include "QUrlQuery"
+#include "QTimerEvent"
 
 #include "TelescopeClientJsonRts2.hpp"
 
@@ -43,9 +44,10 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, telAltitude(NAN)
 	, telTargetDist(NAN)
 	, time_delay(500)
+	, reconnectTimer(-1)
 {
 	// Example params:
-	// petr:test@localhost:8889/tel
+	// test:1234@localhost:8889/tel
 
 	qDebug() << "TelescopeRTS2(" << name << ") paramaters: " << params;
 
@@ -63,8 +65,6 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	QUrlQuery query;
 	query.addQueryItem("t", "2");
 	rurl.setQuery(query);
-
-	QNetworkRequest cfgRequest;
 
 	cfgRequest.setUrl(rurl);
 
@@ -90,7 +90,16 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 		}
 		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: error " << reply->error() << " url: " << reply->url().toString();
 		telName = "";
+		if (reconnectTimer < 0)
+			reconnectTimer = startTimer(15000);
+
 		return;
+	}
+
+	if (reconnectTimer > 0)
+	{
+		killTimer(reconnectTimer);
+		reconnectTimer = -1;
 	}
 
 	QByteArray data = reply->readAll();
@@ -225,6 +234,15 @@ void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP s
 bool TelescopeClientJsonRts2::hasKnownPosition(void) const
 {
 	return interpolatedPosition.isKnown();
+}
+
+void TelescopeClientJsonRts2::timerEvent(QTimerEvent *event)
+{
+	if (event->timerId() == reconnectTimer)
+	{
+		qDebug() << "Telescope reconnect";
+		networkManager.get(cfgRequest);
+	}
 }
 
 QString TelescopeClientJsonRts2::getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
