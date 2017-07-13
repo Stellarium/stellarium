@@ -28,6 +28,7 @@
 #include "QJsonParseError"
 #include "QJsonObject"
 #include "QUrlQuery"
+#include "QTimer"
 #include "QTimerEvent"
 
 #include "TelescopeClientJsonRts2.hpp"
@@ -43,18 +44,32 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, telLongitude(NAN)
 	, telAltitude(NAN)
 	, telTargetDist(NAN)
-	, time_delay(500)
+	, time_delay(50)
 	, reconnectTimer(-1)
+	, refresh_delay(500)
 {
 	// Example params:
-	// test:1234@localhost:8889/tel
+	// 1000:test:1234@localhost:8889/tel
 
-	qDebug() << "TelescopeRTS2(" << name << ") paramaters: " << params;
+	QRegExp paramRx("^(\\d+):(.*)$");
+	QString url;
+	if (paramRx.exactMatch(params))
+	{
+		refresh_delay = paramRx.capturedTexts().at(1).toInt() / 1000; // convert microseconds to milliseconds
+		url           = paramRx.capturedTexts().at(2).trimmed();
+	}
+	else
+	{
+		qWarning() << "ERROR creating TelescopeClientJsonRts2: invalid parameters.";
+		return;
+	}
 
-	baseurl.setUrl(params);
+	qDebug() << "TelescopeRTS2(" << name << ") URL, refresh timeout: " << url << "," << refresh_delay;
+
+	baseurl.setUrl(url);
 	if (!baseurl.isValid())
 	{
-		qWarning() << "TelescopeRTS2(" << name << ") invalid URL";
+		qWarning() << "TelescopeRTS2(" << name << ") invalid URL: " << url;
 		return;
 	}
 
@@ -77,6 +92,12 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 
 TelescopeClientJsonRts2::~TelescopeClientJsonRts2(void)
 {
+}
+
+void TelescopeClientJsonRts2::refreshTimer()
+{
+	server_micros = getNow();
+	networkManager.get(request);
 }
 
 void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
@@ -145,7 +166,7 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 
 		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << rurl.toString();
 
-		networkManager.get(request);
+		refreshTimer();
 	}
 	else if (reply->url().path().endsWith("/api/get"))
 	{
@@ -164,12 +185,15 @@ void TelescopeClientJsonRts2::replyFinished(QNetworkReply *reply)
 	
 		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: RADEC" << ra << dec;
 
-		Vec3d pos(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
-		interpolatedPosition.add(pos, getNow(), getNow(), 0);
+		lastPos.set(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
+		interpolatedPosition.add(lastPos, getNow(), server_micros, 0);
 
 		qDebug() << "TelescopeRTS2(" << name << ")::replyFinished: request url:" << request.url().toString();
-	
-		networkManager.get(request);
+		QTimer::singleShot(refresh_delay, this, SLOT(refreshTimer()));
+	}
+	else if (reply->url().path().endsWith("/api/cmd"))
+	{
+		qDebug() << "Move command finished: " << (QString) data;
 	}
 	else
 	{
@@ -183,11 +207,12 @@ bool TelescopeClientJsonRts2::isConnected(void) const
 	return telName.isEmpty() == false;
 }
 
-Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore* core) const
+Vec3d TelescopeClientJsonRts2::getJ2000EquatorialPos(const StelCore*) const
 {
-	Q_UNUSED(core);
-	const qint64 now = getNow() - time_delay;
-	return interpolatedPosition.get(now);
+//	const qint64 now = getNow() - time_delay;
+//	Vec3d pos = interpolatedPosition.get(now);
+//	qDebug() << "get " << pos.toString() << " " << pos.toStringLonLat();
+	return lastPos;
 }
 
 void TelescopeClientJsonRts2::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
