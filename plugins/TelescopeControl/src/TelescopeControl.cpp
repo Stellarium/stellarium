@@ -61,6 +61,8 @@
 
 #include <QDebug>
 
+#define DEFAULT_RTS2_REFRESH    500000
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 StelModule* TelescopeControlStelPluginInterface::getStelModule() const
@@ -806,7 +808,7 @@ void TelescopeControl::loadTelescopes()
 			}
 			rts2Username = telescope.value("username").toString();
 			rts2Password = telescope.value("password").toString();
-			rts2Refresh = telescope.value("refresh").toInt();
+			rts2Refresh = telescope.value("refresh", DEFAULT_RTS2_REFRESH).toInt();
 		}
 
 		if (connectionType != ConnectionVirtual)
@@ -1037,7 +1039,7 @@ bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionTy
 		rts2Url = telescope.value("url").toString();
 		rts2Username = telescope.value("username").toString();
 		rts2Password = telescope.value("password").toString();
-		rts2Refresh = telescope.value("refresh", 0.5).toInt();
+		rts2Refresh = telescope.value("refresh", DEFAULT_RTS2_REFRESH).toInt();
 	}
 
 	return true;
