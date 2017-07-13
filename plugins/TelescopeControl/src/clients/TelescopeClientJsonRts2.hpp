@@ -70,6 +70,7 @@ private:
 
 	TelescopeControl *telescopeManager;
 
+	void getReadOnly();
 	void setReadOnly(bool readonly);
 
 private slots:
