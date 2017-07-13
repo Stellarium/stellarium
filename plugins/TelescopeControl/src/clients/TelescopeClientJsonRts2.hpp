@@ -46,10 +46,12 @@ public:
 	bool hasKnownPosition(void) const;
 
 protected:
+	void timerEvent(QTimerEvent *event);
 	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 
 private:
 	QNetworkAccessManager networkManager;
+	QNetworkRequest cfgRequest;
 	Equinox equinox;
 	QUrl baseurl;
 	QString telName;
@@ -62,6 +64,7 @@ private:
 	Vec3d position;
 	InterpolatedPosition interpolatedPosition;
 	int time_delay;
+	int reconnectTimer;
 
 	TelescopeControl *telescopeManager;
 
