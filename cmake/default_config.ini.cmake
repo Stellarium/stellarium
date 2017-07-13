@@ -257,6 +257,8 @@ flag_cardinal_points                = true
 flag_gravity_labels                 = false
 flag_moon_scaled                    = false
 moon_scale                          = 4
+flag_minorbodies_scaled             = false
+minorbodies_scale                   = 10
 constellation_art_intensity         = 0.45
 constellation_art_fade_duration     = 1.5
 # GZ I found this unused, 2015-04.

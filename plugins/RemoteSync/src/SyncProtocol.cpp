@@ -70,7 +70,7 @@ qint64 SyncMessage::createFullMessage(QByteArray &target) const
 	else
 	{
 		//write header in front
-		SyncHeader header = { getMessageType(), static_cast<tPayloadSize>(writtenSize) };
+		SyncHeader header = { (quint8)getMessageType(), static_cast<tPayloadSize>(writtenSize) };
 		tmpStream.device()->seek(0);
 		tmpStream<<header;
 
@@ -101,26 +101,108 @@ QString SyncMessage::readString(QDataStream &stream)
 	return QString::fromUtf8(arr);
 }
 
-SyncRemotePeer::SyncRemotePeer()
-	: isValid(false)
-{
-
-}
-
 SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QVector<SyncMessageHandler *> &handlerList)
-	: isValid(true), sock(socket), isPeerAServer(isServer), isAuthenticated(false), authResponseSent(false), waitingForBody(false),
+	: sock(socket), stream(sock), expectDisconnect(false), isPeerAServer(isServer), authenticated(false), authResponseSent(false), waitingForBody(false),
 	  handlerList(handlerList)
 {
+	Q_ASSERT(sock);
+	sock->setParent(this); //reparent
+	sock->setSocketOption(QAbstractSocket::LowDelayOption, 1);
+	stream.setVersion(SYNC_DATASTREAM_VERSION);
+	connect(sock, SIGNAL(readyRead()), this, SLOT(receiveMessage()));
+	connect(sock, SIGNAL(disconnected()), this, SLOT(sockDisconnected()));
+	connect(sock, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(sockError(QAbstractSocket::SocketError)));
+	connect(sock, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(sockStateChanged(QAbstractSocket::SocketState)));
+
+	// silence CoverityScan...
+	msgHeader.msgType=SyncProtocol::ERROR;
+	msgHeader.dataSize=0;
+
 	lastReceiveTime = QDateTime::currentMSecsSinceEpoch();
 	lastSendTime = lastReceiveTime;
 	msgWriteBuffer.reserve(SYNC_MAX_MESSAGE_SIZE);
+
+	if(!isServer)
+		id = QUuid::createUuid();
+}
+
+SyncRemotePeer::~SyncRemotePeer()
+{
+	peerLog()<<"Destroyed";
+	delete sock;
+}
+
+void SyncRemotePeer::checkTimeout()
+{
+	if(sock->state() == QAbstractSocket::UnconnectedState || sock->state() == QAbstractSocket::ClosingState)
+		return;
+
+	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+	qint64 writeDiff = currentTime - lastSendTime;
+	qint64 readDiff = currentTime - lastReceiveTime;
+
+	if(writeDiff > 5000 && authenticated) //only send ALIVE to authenticated peers
+	{
+		//no data sent to this peer for some time, send a ALIVE
+		Alive msg;
+		writeMessage(msg);
+	}
+
+	if(readDiff > 15000)
+	{
+		//no data received for some time, assume client timed out
+		peerLog(QString("No data received for %1ms, timing out").arg(readDiff));
+		errorString = "Connection timed out";
+
+		if(sock->state()==QAbstractSocket::ConnectedState)
+			sock->disconnectFromHost();
+		else
+		{
+			sock->abort();
+			sockDisconnected();
+		}
+	}
+}
+
+void SyncRemotePeer::disconnectPeer()
+{
+	expectDisconnect = true;
+	if(sock->state()==QAbstractSocket::ConnectedState)
+		sock->disconnectFromHost();
+	else if(sock->state()!=QAbstractSocket::UnconnectedState)
+	{
+		sock->abort();
+		sockDisconnected();
+	}
+}
+
+void SyncRemotePeer::sockDisconnected()
+{
+	peerLog()<<"Socket disconnected";
+	emit disconnected(expectDisconnect);
+}
+
+void SyncRemotePeer::sockError(QAbstractSocket::SocketError err)
+{
+	errorString = sock->errorString();
+	peerLog()<<"Socket error:"<<errorString;
+
+	if(err == QAbstractSocket::RemoteHostClosedError) //handle remote close as normal disconnect
+		expectDisconnect = true;
+
+	if(sock->state()==QAbstractSocket::ConnectedState) // it is still connected, wait for automatic disconnect
+		sock->disconnectFromHost();
+	else if(sock->state()==QAbstractSocket::UnconnectedState) //in this case, we have to emit the signal manually
+		sockDisconnected();
+}
+
+void SyncRemotePeer::sockStateChanged(QAbstractSocket::SocketState state)
+{
+	peerLog()<<"Socket state:"<<state;
 }
 
 void SyncRemotePeer::receiveMessage()
 {
-	QDataStream dataStream(sock);
-	dataStream.setVersion(SYNC_DATASTREAM_VERSION);
-
 	//to debug read buffer contents, uncomment
 	//QByteArray peekData = sock->peek(SYNC_MAX_MESSAGE_SIZE);
 
@@ -135,21 +217,21 @@ void SyncRemotePeer::receiveMessage()
 			if(sock->bytesAvailable() < SYNC_HEADER_SIZE)
 				return;
 
-			dataStream>>msgHeader;
+			stream>>msgHeader;
 			//check if msgtype is valid
 			if(msgHeader.msgType>MSGTYPE_MAX)
 			{
 				writeError("invalid message type " + QString::number(msgHeader.msgType));
 				return;
 			}
-			if(!isAuthenticated && msgHeader.msgType > SERVER_CHALLENGERESPONSEVALID)
+			if(!authenticated && msgHeader.msgType > SERVER_CHALLENGERESPONSEVALID)
 			{
 				//if not fully authenticated, it is an error to send messages other than auth messages
 				writeError("not authenticated");
 				return;
 			}
 
-			qDebug()<<"received header for "<<SyncMessageType(msgHeader.msgType);
+			peerLog()<<"received header for"<<SyncMessageType(msgHeader.msgType);
 		}
 
 		if(sock->bytesAvailable() < msgHeader.dataSize)
@@ -160,7 +242,7 @@ void SyncRemotePeer::receiveMessage()
 		else
 		{
 			waitingForBody = false;
-			qDebug()<<"received body, processing";
+			peerLog()<<"received body, processing";
 
 			//full packet available, pass to handler
 			SyncMessageHandler* handler = handlerList[msgHeader.msgType];
@@ -170,25 +252,28 @@ void SyncRemotePeer::receiveMessage()
 				writeError("unregistered message type " + QString::number(msgHeader.msgType));
 				return;
 			}
-			if(!handlerList[msgHeader.msgType]->handleMessage(dataStream,*this))
+			if(!handlerList[msgHeader.msgType]->handleMessage(stream, msgHeader.dataSize, *this))
 			{
 				writeError("last message of type " + QString::number(msgHeader.msgType) + " was rejected");
 			}
 		}
 	}
-
-	qDebug()<<"Available bytes after receiveMessage"<<sock->bytesAvailable();
 }
 
-void SyncRemotePeer::peerLog(const QString &msg)
+void SyncRemotePeer::peerLog(const QString &msg) const
 {
-	qDebug()<<"[Sync][Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:"<<msg;
+	peerLog()<<msg;
+}
+
+QDebug SyncRemotePeer::peerLog() const
+{
+	return qDebug()<<"[Sync][Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:";
 }
 
 void SyncRemotePeer::writeMessage(const SyncMessage &msg)
 {
 	qint64 size = msg.createFullMessage(msgWriteBuffer);
-	qDebug()<<"[SyncPeer] Send message"<<msg.getMessageType();
+	peerLog()<<"Send message"<<msg;
 
 	if(!size)
 	{
@@ -210,9 +295,7 @@ void SyncRemotePeer::writeData(const QByteArray &data, int size)
 	//Only write if connected
 	if(sock->state() == QAbstractSocket::ConnectedState)
 	{
-		sock->write(data.constData(),size>0?size:data.size());
-		//flush immediately if possible to reduce delay
-		sock->flush();
+		stream.writeRawData(data.constData(),size>0?size:data.size());
 		lastSendTime = QDateTime::currentMSecsSinceEpoch();
 	}
 	else
@@ -223,5 +306,6 @@ void SyncRemotePeer::writeError(const QString &err)
 {
 	qWarning()<<"[SyncPlugin] Disconnecting with error:"<<err;
 	writeMessage(ErrorMessage(err));
+	errorString = err;
 	sock->disconnectFromHost();
 }

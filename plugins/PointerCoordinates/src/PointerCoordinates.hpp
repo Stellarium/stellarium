@@ -220,6 +220,7 @@ class PointerCoordinatesStelPluginInterface : public QObject, public StelPluginI
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /* _POINTERCOORDINATES_HPP_ */

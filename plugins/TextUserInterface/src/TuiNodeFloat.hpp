@@ -46,9 +46,9 @@ public:
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)
 	TuiNodeFloat(const QString& text, QObject* receiver, const char* method, float defValue, 
-		      float min, float max, float inc, TuiNode* parent=NULL, TuiNode* prev=NULL);
+		      float min, float max, float inc, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleEditingKey(int key);
-	virtual QString getDisplayText();
+	virtual QString getDisplayText() const;
 
 signals:
 	void setValue(float b);

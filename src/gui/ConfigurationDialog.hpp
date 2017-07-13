@@ -92,8 +92,11 @@ private slots:
 	void setSphericMirror(bool);
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double) {cursorTimeOutChanged();}
+	void usageButtonsBackgroundChanged(bool b);
 
 	void updateStartPointForAzimuth(bool b);
+	void updateSettingFormattingOutput(bool b);
+	void updateSettingCCSDesignations(bool b);
 
 	void newStarCatalogData();
 	void downloadStars();

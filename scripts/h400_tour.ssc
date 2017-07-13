@@ -2,6 +2,7 @@
 // Name: Herschel 400 Tour
 // License: Public Domain
 // Author: Alexander Wolf
+// Version: 1.1
 // Description: A tour around objects from the Herschel 400 Catalogue
 
 include("common_objects.inc");
@@ -48,20 +49,26 @@ LabelMgr.deleteLabel(stat5);
 
 NebulaMgr.setFlagShow(true);
 NebulaMgr.setFlagHints(true);
+var dss = core.isDSSModeEnabled();
 
 for (i=0; i<herschel400.length; i++)
 {
-	core.selectObjectByName(ngc, true);
+	core.selectObjectByName(herschel400[i], true);
 	id = LabelMgr.labelScreen(herschel400[i], 20, 20, false, 30, color);
 	LabelMgr.setLabelShow(id, true);
-	StelMovementMgr.autoZoomIn(5);
-	core.wait(10);
+	StelMovementMgr.autoZoomIn(3);
+	core.wait(2);
+	core.setDSSMode(true);
+	core.wait(13);
 	LabelMgr.setLabelShow(id, false);
-	StelMovementMgr.zoomTo(40,2);
-	core.wait(3);	
+	StelMovementMgr.zoomTo(40, 3);
+	core.wait(2);
+	core.setDSSMode(false);
+	core.wait(3);
 }
 
 core.clear("natural");
+core.setDSSMode(dss);
 core.setGuiVisible(true);
 core.goHome();
 

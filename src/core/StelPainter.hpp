@@ -96,14 +96,14 @@ public:
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
 	//! @param drawMode define whether to draw the outline or the fill or both.
-	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
+	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
 	//! @param doSubDivise if true tesselates the object to follow projection distortions.
 	//! Typically set that to false if you think that the region is fully contained in the viewport.
-	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=NULL, bool doSubDivise=true, double maxSqDistortion=5.);
+	void drawSphericalRegion(const SphericalRegion* region, SphericalPolygonDrawMode drawMode=SphericalPolygonDrawModeFill, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivise=true, double maxSqDistortion=5.);
 
-	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
+	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=Q_NULLPTR);
 
-	void drawSphericalTriangles(const StelVertexArray& va, bool textured, bool colored, const SphericalCap* clippingCap=NULL, bool doSubDivide=true, double maxSqDistortion=5.);
+	void drawSphericalTriangles(const StelVertexArray& va, bool textured, bool colored, const SphericalCap* clippingCap=Q_NULLPTR, bool doSubDivide=true, double maxSqDistortion=5.);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
@@ -112,19 +112,19 @@ public:
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
 	//! Example: A latitude circle has 0/0/sin(latitude) as rotCenter.
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
-	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
+	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=Q_NULLPTR, void* userData=Q_NULLPTR);
 
 	//! Draw a great circle arc between points start and stop.
 	//! The angle between start and stop must be < 180 deg.
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
-	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
-	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=NULL, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
+	//! @param clippingCap if not set to Q_NULLPTR, tells the painter to try to clip part of the region outside the cap.
+	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=Q_NULLPTR, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=Q_NULLPTR, void* userData=Q_NULLPTR);
 
 	//! Draw a curve defined by a list of points.
 	//! The points should be already tesselated to ensure that the path will look smooth.
-	//! The algorithm take care of cutting the path if it crosses a viewport discontinutiy.
+	//! The algorithm take care of cutting the path if it crosses a viewport discontinuity.
 	void drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors);
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
@@ -287,16 +287,16 @@ public:
 	void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
 
 	//! convenience method that enable and set all the given arrays.
-	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
-	void setArrays(const Vec3d* vertices, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
-	void setArrays(const Vec3f* vertices, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
+	//! It is equivalent to calling enableClientStates() and set the array pointer for each array.
+	void setArrays(const Vec3d* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
+	void setArrays(const Vec3f* vertices, const Vec2f* texCoords=Q_NULLPTR, const Vec3f* colorArray=Q_NULLPTR, const Vec3f* normalArray=Q_NULLPTR);
 
-	//! Draws primitives using vertices from the arrays specified by setVertexArray().
+	//! Draws primitives using vertices from the arrays specified by setArrays() or enabled via enableClientStates().
 	//! @param mode The type of primitive to draw.
-	//! If @param indices is NULL, this operation will consume @param count values from the enabled arrays, starting at @param offset.
+	//! If @param indices is Q_NULLPTR, this operation will consume @param count values from the enabled arrays, starting at @param offset.
 	//! Else it will consume @param count elements of @param indices, starting at @param offset, which are used to index into the
 	//! enabled arrays.
-	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned short *indices=NULL);
+	void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned short *indices=Q_NULLPTR);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
@@ -340,7 +340,7 @@ private:
 	//! Struct describing one opengl array
 	typedef struct ArrayDesc
 	{
-		ArrayDesc() : size(0), type(0), pointer(NULL), enabled(false) {}
+		ArrayDesc() : size(0), type(0), pointer(Q_NULLPTR), enabled(false) {}
 		int size;				// The number of coordinates per vertex.
 		int type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
 		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.
@@ -349,18 +349,18 @@ private:
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
+	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=Q_NULLPTR);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
 	//! The size of each edge must be < 180 deg.
 	//! @param vertices a pointer to an array of 3 vertices.
 	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
-	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
-	//! @param colors a pointer to an array of 3 colors, or NULL if the triangle should not be vertex-colored. If texture and color coords are present, texture is modulated by vertex colors. (e.g. extinction)
+	//! @param texturePos a pointer to an array of 3 texture coordinates, or Q_NULLPTR if the triangle should not be textured.
+	//! @param colors a pointer to an array of 3 colors, or Q_NULLPTR if the triangle should not be vertex-colored. If texture and color coords are present, texture is modulated by vertex colors. (e.g. extinction)
 	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
-			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,
-			const Vec3f* colors=NULL, QVarLengthArray<Vec3f, 4096>* outColors=NULL,
+			const Vec2f* texturePos=Q_NULLPTR, QVarLengthArray<Vec2f, 4096>* outTexturePos=Q_NULLPTR,
+			const Vec3f* colors=Q_NULLPTR, QVarLengthArray<Vec3f, 4096>* outColors=Q_NULLPTR,
             double maxSqDistortion=5., int nbI=0,
             bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
 

@@ -170,6 +170,15 @@ When a binocular is active, you can not select a telescope, as it is not relevan
 Changing the eyepiece to a non-binocular will again allow the telescope to be selected. 
 Also notice that when your mouse cursor is very near the right hand border of the screen, the popup menu's sub-menus display to the left, not the right.
 
+\subsubsection{Star Scales}
+\newFeature{0.16.0}As you know from section~\ref{sec:gui:view:sky}, the number and relative size of stars of various magnitudes 
+can be adjusted to your personal preferences in the view settings window to approximate the appearance of the stars as seen by the naked eye. 
+Some observers prefer to have a simulated ocular view with very small, or more, stars, quite different from what Stellarium usually shows. 
+The Oculars plugin therefore keeps two additional sets of scaling values for ocular views and CCD views, which are activated 
+automatically when you switch to ocular or CCD view, and which are stored immediately and permanently in the plugin's \file{ocular.ini} file.\footnote{%
+The appearance of stars may depend on various other factors: telescope type, ocular type, quality of optics, seeing, \ldots 
+Such details with all combinations cannot meaningfully be stored, though. These values should allow a rapid toggle on any single night.}
+
 \subsection{Configuration}
 \label{sec:sec:plugins:Oculars:Configuration}
 All configuration is done through the user interface in the application. 
@@ -374,7 +383,6 @@ the $82\degree$ is smaller, and the $62\degree$ is smallest yet, filling $62\%$ 
 Note that in each image, the field of view that you see changes. The larger the aFOV, the more you can see of the sky. 
 So in this example, if you had an 8" telescope, you would want to use the 17\mm\ $100\degree$ Ethos eyepiece to see as much of the nebula as possible.
 
-
 \newpage
 \section{TelescopeControl Plugin}
 \label{sec:plugins:TelescopeControl}
@@ -414,7 +422,7 @@ protection.
 
 
 \subsection{Abilities and limitations}
-\label{sec:sec:plugins:TelescopeControl:Limitations}
+\label{sec:plugins:TelescopeControl:Limitations}
 
 This plug-in allows Stellarium to send only 'slew' ('go to') commands
 to the device and to receive its current position. It cannot issue any
@@ -422,9 +430,10 @@ other commands, so users should be aware of the possibility for mount
 collisions and similar situations. (To abort a slew, you can start
 another one to a safe position.)
 
-Currently this plug-in does not allow satellite tracking, and is not
-very suitable for lunar or planetary observations. Many mounts can be set 
-to a 'lunar' tracking speed, you may prefer this. 
+Currently this plug-in does not allow satellite tracking unless the controlled 
+telescope is an RTS2 system (see section~\ref{sec:plugins:TelescopeControl:RTS2}), 
+and is not very suitable for lunar or planetary observations. 
+Many mounts can be set to a 'lunar' tracking speed, you may prefer this. 
 
 \subsection{Using this plug-in}
 \label{sec:plugins:TelescopeControl:using}
@@ -509,7 +518,7 @@ Telescope controlled by:
 \begin{description}
 \item[Stellarium, directly through a serial port] is the DIRECT case
 \item[External software or a remote computer] is an INDIRECT case
-\item[RTS2 Telescope] is another INDIRECT case
+\item[RTS2 Telescope] is another INDIRECT case\newFeature{v0.16.0}
 \item[Nothing, just simulate one (a moving reticle)] is a \emph{virtual telescope} (no connection)
 \end{description}
 
@@ -579,8 +588,8 @@ Both fields here refer to INDIRECT connections, which implies communication over
 \end{description}
 
 \paragraph{RTS2 settings} (see also \ref{sec:plugins:TelescopeControl:RTS2})
-You will need access to RTS2 HTTPD server through HTTP/JSON calls. Please see
-RTS2 documentation (man rts2-httpd) for details. You will as well need username
+You will need access to RTS2 HTTPD server through HTTP/JSON calls.\newFeature{v0.16.0}
+Please see RTS2 documentation (man rts2-httpd) for details. You will as well need username
 and password for HTTPD. Please be aware that in order to move the telescope,
 your user must have the telescope in the list of allowed devices in the database. Please see \texttt{man
 rts2-user} for details on how to manipulate RTS2 users.
@@ -644,7 +653,11 @@ and it appears as an object in the 'Search' window.
 To point a device to an object: Select an object (e.g. a star) and
 press the number of the device while holding down the \keys{\ctrl} key. (For
 example, \keys{\ctrl+1} for telescope \#1.) This will move the telescope to the
-selected object.
+selected object. Note that most telescopes can only execute a single command to 
+move to that object's position, but if the telescope is an RTS2 telescope, 
+you can even track a satellite (if the mount then is fast enough to support it).%
+\footnote{Actually, the TLE orbital elements of the selected satellite are transmitted 
+to RTS2, which does then compute the satellite position itself.}
 
 To point a device to the center of the view: Press the number of the
 device while holding down the Alt key. (For example, \keys{\Alt+1} for
@@ -694,13 +707,14 @@ The device list contains the following:
 \end{description}
 
 \subsubsection{RTS2 telescopes}
-Setting up RTS2 for Stellarium to be able to connect and command the telescope
-is beyond scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:RTS2} for a few notes.
-Please refer to the RTS2 Web pages\footnote{\url{http://rts2.org/}} for details.
+\newFeature{v0.16.0}Setting up a robotic telescope and dome control system with RTS2 
+is beyond the scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:RTS2} 
+for a few notes to be able to connect and command the telescope with Stellarium.
+Please refer to the RTS2 Web pages\footnote{\url{http://rts2.org/}} for further details.
 
-Please be aware that some username might have only read-only access. If this is
-case for used username, the telescope marker will be painted red (or
-color\_telescope\_readonly entered in Stellarium settings).
+Please be aware that some RTS2 usernames might have only read-only access. If this is
+case for your username, the telescope marker will be painted red (or
+\texttt{color\_telescope\_readonly} from Stellarium's settings file).
 
 \subsubsection{Virtual telescope}
 If you want to test this plug-in without an actual device connected to
@@ -719,21 +733,25 @@ circles).
 \section{RTS2}
 \label{sec:plugins:TelescopeControl:RTS2}
 
-\indexterm{RTS2}, the Remote Telescope System 2, is a complete robotic observatory control system by Petr Kub\'{a}nek who kindly provided the plugin code to make RTS2 interoperate with Stellarium.
-We cannot give a full manual or any further support of RTS2 here, please refer to its website\footnote{\url{http://rts2.org}} for complete instructions. A few notes may be useful for beginners, though. 
+\indexterm{RTS2}, \newFeature{v0.16.0}the Remote Telescope System 2, is a complete robotic observatory control system for Linux 
+by Petr Kub\'{a}nek, who kindly provided the plugin code to make RTS2 interoperate with Stellarium.
+We cannot give a full manual or any further support for RTS2 here, please refer to its website\footnote{\url{http://rts2.org}} 
+for complete instructions about dome control, cameras, filter wheels, weather sensors, etc. 
+A few notes may be useful for beginners, though. 
 
 RTS2's central piece is a daemon. Start the system:
 \begin{commands}
 sudo service rts2 start
 \end{commands}
 RTS2's main control screen is text-based, \program{rts2-mon}. For a quick check, switch on the system using \key{F9}. 
-Telescope \texttt{T0} is a dummy telescope which you can select and operate with commands like \texttt{move 120 35} (this moves to RA=120°=8h, DEC=35°).
+Telescope \texttt{T0} is a dummy telescope which you can select and operate with commands like \texttt{move 120 35} 
+(this moves to RA=120°=8h, DEC=35°, but only when this position is above your horizon).
 
-Stellarium can communicate with RTS2 using its web interface. You must run \program{rts2-httpd} for this, 
+Stellarium's Telescope plugin can communicate with RTS2 using the RTS2 web interface. You must run \program{rts2-httpd} for this, 
 which may require the right permissions to write the lock files in \file{/var/run}. This program requires 
-that a database has been created as described in \file{RUN} and on the RTS2 website\footnote{\url{http://rts2.org/faq.html}}.   
-Also, you must create a user for RTS2. This is not a regular Linux account, but an entry in the database. 
-Create a user with \program{rts2-user -a <user>}. You should use a password different from your regular password, 
+that a database has been created as described in the file \file{RUN} in RTS2's source directory and on the RTS2 website\footnote{\url{http://rts2.org/faq.html}}.   
+Also, you must create a 'user' for RTS2. This is not a regular Linux account, but an entry in the RTS2 database. 
+Create a user with \program{rts2-user -a <user>}. You should use a password different from your regular Linux password, 
 as this will be transmitted in plain text between the computer running Stellarium and the RTS2 control computer, 
 and may also be written into Stellarium's logfile. Then you can enable device control for the respective user. 
 If you want to send slew commands from Stellarium, make sure to allow access to telescope \texttt{T0}. 
@@ -746,6 +764,9 @@ update users set allowed_devices = '*';
 
 In case you cannot properly connect to the RTS2 telescope or cannot send slew commands, check Stellarium's logfile \file{log.txt} for some diagnostic messages.
 
+RTS2 is the only type of telescope supported by Stellarium which can autonomously track satellites. 
+Tracking accuracy fully depends on Stellarium's TLE satellite elements being up-to-date 
+(see section~\ref{sec:plugins:Satellites}) and the accuracy of your RTS2 installation.
 
 \newpage
 \section{StellariumScope}

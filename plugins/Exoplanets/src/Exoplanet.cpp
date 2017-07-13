@@ -38,6 +38,7 @@
 #include <QVariant>
 #include <QList>
 
+const QString Exoplanet::EXOPLANET_TYPE=QStringLiteral("Exoplanet");
 StelTextureSP Exoplanet::markerTexture;
 bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
@@ -92,6 +93,15 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	englishNames.clear();
 	translatedNames.clear();
 	exoplanetDesignations.clear();
+	effectiveTempHostStarList.clear();
+	yearDiscoveryList.clear();
+	metallicityHostStarList.clear();
+	vMagHostStarList.clear();
+	raHostStarList.clear();
+	decHostStarList.clear();
+	distanceHostStarList.clear();
+	massHostStarList.clear();
+	radiusHostStarList.clear();
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -155,6 +165,19 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 				periodList.append(p.period);
 			else
 				periodList.append(0);
+
+			if (p.discovered>0)
+				yearDiscoveryList.append(p.discovered);
+
+			effectiveTempHostStarList.append(effectiveTemp);
+			metallicityHostStarList.append(smetal);
+			if (Vmag<99)
+				vMagHostStarList.append(Vmag);
+			raHostStarList.append(RA);
+			decHostStarList.append(DE);
+			distanceHostStarList.append(distance);
+			massHostStarList.append(smass);
+			radiusHostStarList.append(sradius);
 		}
 	}
 
@@ -287,7 +310,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra && !stype.isEmpty())
 	{
@@ -605,7 +628,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	if (mag <= mlimit)
 	{		
 		Exoplanet::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);

@@ -38,7 +38,7 @@ class OcularsGuiPanel : public QGraphicsWidget
 
 public:
 	OcularsGuiPanel(Oculars* ocularsPlugin,
-	                QGraphicsWidget * parent = 0,
+			QGraphicsWidget * parent = Q_NULLPTR,
 	                Qt::WindowFlags wFlags = 0);
 	~OcularsGuiPanel();
 

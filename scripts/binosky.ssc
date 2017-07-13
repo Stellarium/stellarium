@@ -2,7 +2,7 @@
 // Name: Binosky: Deep Sky Objects for Binoculars
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.0
+// Version: 1.1
 // Description: Ben Crowell has created Binosky, an observing list of Deep Sky Objects for Binoculars. In the script we give a list of these 31 objects, ordered by Right Ascension (2000.0).
 //
 
@@ -15,17 +15,21 @@ var objlist = ["NGC 104", "M31", "NGC 292", "NGC 869", "NGC 884", "Mel 20", "M45
 core.clear("deepspace");
 NebulaMgr.setFlagHints(true);
 var id = LabelMgr.labelScreen("Binosky: Deep Sky Objects for Binoculars", 20, 20, false, 30, "#00AAFF");
+var cnt = LabelMgr.labelScreen(objlist.length + " objects in all", 20, 60, false, 24, "#00AAFF");
 LabelMgr.setLabelShow(id, true);
+LabelMgr.setLabelShow(cnt, true);
 core.wait(5);
 LabelMgr.setLabelShow(id, false);
+LabelMgr.setLabelShow(cnt, false);
 LabelMgr.deleteLabel(id);
+LabelMgr.deleteLabel(cnt);
 
 for (i=0; i<objlist.length; i++)
 {
 	core.selectObjectByName(objlist[i], true);
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.autoZoomIn(2);
-	core.wait(5);
+	core.wait(7);
 
 	StelMovementMgr.zoomTo(40, 5);
 	core.wait(5);

@@ -237,6 +237,11 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	{
 		html += "<strong>" + q_("License") + "</strong>: " + license + "<br />";
 	}
+	QString version = getVersion(s).trimmed();
+	if (!version.isEmpty())
+	{
+		html += "<strong>" + q_("Version") + "</strong>: " + version + "<br />";
+	}
 	QString shortcut = getShortcut(s).trimmed();
 	if (!shortcut.isEmpty())
 	{
@@ -264,6 +269,12 @@ QString StelScriptMgr::getLicense(const QString& s) const
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
+
+QString StelScriptMgr::getVersion(const QString& s) const
+{
+	return getHeaderSingleLineCommentText(s, "Version", "");
+}
+
 
 QString StelScriptMgr::getShortcut(const QString& s) const
 {

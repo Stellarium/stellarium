@@ -23,6 +23,7 @@
 
 #include "VecMath.hpp"
 #include "StelModule.hpp"
+#include "Planet.hpp"
 
 class SkyGrid;
 class SkyLine;
@@ -35,6 +36,11 @@ class SkyPoint;
 class GridLinesMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool gridlinesDisplayed
+		   READ getFlagGridlines
+		   WRITE setFlagGridlines
+		   NOTIFY gridlinesDisplayedChanged)
+
 	Q_PROPERTY(bool azimuthalGridDisplayed
 		   READ getFlagAzimuthalGrid
 		   WRITE setFlagAzimuthalGrid
@@ -347,6 +353,11 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
 public slots:
+	//! Setter ("master switch") for displaying any grid/line.
+	void setFlagGridlines(const bool displayed);
+	//! Accessor ("master switch") for displaying any grid/line.
+	bool getFlagGridlines(void) const;
+
 	//! Setter for displaying Azimuthal Grid.
 	void setFlagAzimuthalGrid(const bool displayed);
 	//! Accessor for displaying Azimuthal Grid.
@@ -788,6 +799,7 @@ public slots:
 	void setColorSolsticePoints(const Vec3f& newColor);
 
 signals:
+	void gridlinesDisplayedChanged(const bool) const;
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
 	void equatorGridDisplayedChanged(const bool displayed) const;
@@ -855,8 +867,13 @@ private slots:
 	//! Re-translate the labels of the great circles.
 	//! Contains only calls to SkyLine::updateLabel().
 	void updateLineLabels();
+	//! Connect the earth shared pointer.
+	//! Must be connected to SolarSystem::solarSystemDataReloaded()
+	void connectEarthFromSolarSystem();
 
 private:
+	QSharedPointer<Planet> earth;           // shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
+	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
 	SkyGrid * equGrid;			// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
 	SkyGrid * galacticGrid;			// Galactic grid

@@ -35,7 +35,7 @@
 #include <QJsonObject>
 #include <QStringListModel>
 
-LocationService::LocationService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+LocationService::LocationService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
@@ -43,7 +43,7 @@ LocationService::LocationService(const QByteArray &serviceName, QObject *parent)
 	ssys = GETSTELMODULE(SolarSystem);
 }
 
-void LocationService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void LocationService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if(operation=="list")
 	{
@@ -73,15 +73,13 @@ void LocationService::getImpl(const QByteArray& operation, const APIParameters &
 	}
 	else if(operation == "planetlist")
 	{
-		const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-
-		QStringList allPlanets = ssys->getAllPlanetEnglishNames();
+		QList<PlanetP> ss = ssys->getAllPlanets();
 		QJsonArray list;
-		foreach(QString str, allPlanets)
+		foreach(const PlanetP& p, ss)
 		{
 			QJsonObject obj;
-			obj.insert("name",str);
-			obj.insert("name_i18n",trans.qtranslate(str));
+			obj.insert("name", p->getEnglishName());
+			obj.insert("name_i18n", p->getNameI18n());
 			list.append(obj);
 		}
 
@@ -106,35 +104,7 @@ void LocationService::getImpl(const QByteArray& operation, const APIParameters &
 		if (p)
 		{
 			QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
-			QFile file(path);
-			if (path.isEmpty() || !file.exists())
-			{
-				response.setStatus(404,"not found");
-				response.setData("planet image not available");
-				qWarning() << "ERROR - could not find planet map for " << planet;
-				return;
-			}
-
-			QMimeType mime = QMimeDatabase().mimeTypeForFile(path);
-
-			if(file.open(QIODevice::ReadOnly))
-			{
-				//allow the image to be cached by browser (1 hour)
-				response.setHeader("Cache-Control","max-age="+QByteArray::number(60*60));
-				//response.setHeader("Content-Length",static_cast<int>(file.size()));
-				if(!mime.isDefault())
-				{
-					response.setHeader("Content-Type", mime.name().toLatin1());
-				}
-
-				//load and write data
-				response.setData(file.readAll());
-			}
-			else
-			{
-				response.setStatus(500,"internal server error");
-				response.setData("could not open image file");
-			}
+			response.writeFile(path, true);
 		}
 		else
 		{
@@ -151,7 +121,7 @@ void LocationService::getImpl(const QByteArray& operation, const APIParameters &
 	}
 }
 
-void LocationService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
+void LocationService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
 	Q_UNUSED(data);
 

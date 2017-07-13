@@ -20,7 +20,7 @@
 
 #include "Scenery3dDialog.hpp"
 #include "Scenery3dDialog_p.hpp"
-#include "Scenery3dMgr.hpp"
+#include "Scenery3d.hpp"
 #include "SceneInfo.hpp"
 #include "S3DEnum.hpp"
 #include "StoredViewDialog.hpp"
@@ -34,7 +34,7 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(NULL)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(Q_NULLPTR)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
@@ -71,7 +71,7 @@ void Scenery3dDialog::retranslate()
 void Scenery3dDialog::createDialogContent()
 {
 	//manager should be created at this point
-	mgr = GETSTELMODULE(Scenery3dMgr);
+	mgr = GETSTELMODULE(Scenery3d);
 	Q_ASSERT(mgr);
 
 	//additionally, Scenery3dMgr::init should have been called to make sure the correct values are set for hardware support
@@ -99,14 +99,14 @@ void Scenery3dDialog::createDialogContent()
 		SLOT(setEnableShadows(bool)));
 	connect(ui->checkBoxEnableBump, SIGNAL(clicked(bool)), mgr,
 		SLOT(setEnableBumps(bool)));
-	connect(ui->checkBoxEnableLazyDrawing, &QCheckBox::clicked, mgr, &Scenery3dMgr::setEnableLazyDrawing);
-	connect(ui->checkBoxDominantFace, &QCheckBox::clicked, mgr, &Scenery3dMgr::setOnlyDominantFaceWhenMoving);
-	connect(ui->checkBoxSecondDominantFace, &QCheckBox::clicked, mgr, &Scenery3dMgr::setSecondDominantFaceWhenMoving);
-	connect(ui->checkBoxPCSS, &QCheckBox::clicked, mgr, &Scenery3dMgr::setEnablePCSS);
-	connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3dMgr::setLazyDrawingInterval);
+	connect(ui->checkBoxEnableLazyDrawing, &QCheckBox::clicked, mgr, &Scenery3d::setEnableLazyDrawing);
+	connect(ui->checkBoxDominantFace, &QCheckBox::clicked, mgr, &Scenery3d::setOnlyDominantFaceWhenMoving);
+	connect(ui->checkBoxSecondDominantFace, &QCheckBox::clicked, mgr, &Scenery3d::setSecondDominantFaceWhenMoving);
+	connect(ui->checkBoxPCSS, &QCheckBox::clicked, mgr, &Scenery3d::setEnablePCSS);
+	connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3d::setLazyDrawingInterval);
 
-	connect(ui->checkBoxSimpleShadows, &QCheckBox::clicked, mgr, &Scenery3dMgr::setUseSimpleShadows);
-	connect(ui->checkBoxCubemapShadows, &QCheckBox::clicked, mgr, &Scenery3dMgr::setUseFullCubemapShadows);
+	connect(ui->checkBoxSimpleShadows, &QCheckBox::clicked, mgr, &Scenery3d::setUseSimpleShadows);
+	connect(ui->checkBoxCubemapShadows, &QCheckBox::clicked, mgr, &Scenery3d::setUseFullCubemapShadows);
 
 	//hook up some Scenery3d actions
 	StelActionMgr* acMgr = StelApp::getInstance().getStelActionManager();
@@ -144,7 +144,7 @@ void Scenery3dDialog::createDialogContent()
 	connect(ui->sliderTorchRange, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
 	connect(ui->checkBoxDefaultScene, &QCheckBox::stateChanged, this, &Scenery3dDialog::on_checkBoxDefaultScene_stateChanged);
 
-	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, mgr, &Scenery3dMgr::showStoredViewDialog);
+	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, mgr, &Scenery3d::showStoredViewDialog);
 
 	updateShortcutStrings();
 	createUpdateConnections();
@@ -207,36 +207,36 @@ void Scenery3dDialog::createDialogContent()
 void Scenery3dDialog::createUpdateConnections()
 {
 	//connect Scenery3d update events
-	connect(mgr, &Scenery3dMgr::enablePixelLightingChanged, ui->checkBoxEnablePixelLight, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::enablePixelLightingChanged, ui->checkBoxEnableShadows, &QCheckBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::enablePixelLightingChanged, ui->checkBoxEnableBump, &QCheckBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxEnableShadows, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::enableBumpsChanged, ui->checkBoxEnableBump, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::enablePCSSChanged,ui->checkBoxPCSS,&QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::enablePixelLightingChanged, ui->checkBoxEnablePixelLight, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::enablePixelLightingChanged, ui->checkBoxEnableShadows, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3d::enablePixelLightingChanged, ui->checkBoxEnableBump, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3d::enableShadowsChanged, ui->checkBoxEnableShadows, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::enableBumpsChanged, ui->checkBoxEnableBump, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::enablePCSSChanged,ui->checkBoxPCSS,&QCheckBox::setChecked);
 
-	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxSimpleShadows, &QCheckBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::useSimpleShadowsChanged, ui->checkBoxSimpleShadows, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::useFullCubemapShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::enableShadowsChanged, ui->checkBoxSimpleShadows, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3d::enableShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3d::useSimpleShadowsChanged, ui->checkBoxSimpleShadows, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::useFullCubemapShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setChecked);
 
-	connect(mgr, &Scenery3dMgr::cubemappingModeChanged, ui->comboBoxCubemapMode, &QComboBox::setCurrentIndex);
-	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged, this, &Scenery3dDialog::updateShadowFilterQuality);
+	connect(mgr, &Scenery3d::cubemappingModeChanged, ui->comboBoxCubemapMode, &QComboBox::setCurrentIndex);
+	connect(mgr, &Scenery3d::shadowFilterQualityChanged, this, &Scenery3dDialog::updateShadowFilterQuality);
 
-	connect(mgr, &Scenery3dMgr::torchStrengthChanged, this, &Scenery3dDialog::updateTorchStrength);
-	connect(mgr, &Scenery3dMgr::torchRangeChanged, this, &Scenery3dDialog::updateTorchRange);
+	connect(mgr, &Scenery3d::torchStrengthChanged, this, &Scenery3dDialog::updateTorchStrength);
+	connect(mgr, &Scenery3d::torchRangeChanged, this, &Scenery3dDialog::updateTorchRange);
 
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->checkBoxEnableLazyDrawing, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->labelLazyDrawingInterval, &QCheckBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->spinLazyDrawingInterval, &QCheckBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->checkBoxDominantFace, &QCheckBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, this, &Scenery3dDialog::updateSecondDominantFaceEnabled);
+	connect(mgr, &Scenery3d::enableLazyDrawingChanged, ui->checkBoxEnableLazyDrawing, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::enableLazyDrawingChanged, ui->labelLazyDrawingInterval, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3d::enableLazyDrawingChanged, ui->spinLazyDrawingInterval, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3d::enableLazyDrawingChanged, ui->checkBoxDominantFace, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3d::enableLazyDrawingChanged, this, &Scenery3dDialog::updateSecondDominantFaceEnabled);
 
-	connect(mgr, &Scenery3dMgr::lazyDrawingIntervalChanged, this, &Scenery3dDialog::updateLazyDrawingInterval);
-	connect(mgr, &Scenery3dMgr::onlyDominantFaceWhenMovingChanged, ui->checkBoxDominantFace, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::onlyDominantFaceWhenMovingChanged, this, &Scenery3dDialog::updateSecondDominantFaceEnabled);
-	connect(mgr, &Scenery3dMgr::secondDominantFaceWhenMovingChanged, ui->checkBoxSecondDominantFace, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::lazyDrawingIntervalChanged, this, &Scenery3dDialog::updateLazyDrawingInterval);
+	connect(mgr, &Scenery3d::onlyDominantFaceWhenMovingChanged, ui->checkBoxDominantFace, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3d::onlyDominantFaceWhenMovingChanged, this, &Scenery3dDialog::updateSecondDominantFaceEnabled);
+	connect(mgr, &Scenery3d::secondDominantFaceWhenMovingChanged, ui->checkBoxSecondDominantFace, &QCheckBox::setChecked);
 
-	connect(mgr, &Scenery3dMgr::currentSceneChanged, this, &Scenery3dDialog::updateCurrentScene);
+	connect(mgr, &Scenery3d::currentSceneChanged, this, &Scenery3dDialog::updateCurrentScene);
 }
 
 void Scenery3dDialog::updateToolTipStrings()

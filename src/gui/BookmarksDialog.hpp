@@ -35,6 +35,9 @@ struct bookmark
 {
 	QString name;
 	QString nameI18n;
+	QString ra;
+	QString dec;
+	bool isVisibleMarker;
 	QString jd;
 	QString location;
 };
@@ -64,6 +67,9 @@ private slots:
 	void removeBookmarkButtonPressed();
 	void goToBookmarkButtonPressed();
 	void clearBookmarksButtonPressed();
+
+	void exportBookmarks();
+	void importBookmarks();
 
 	void selectCurrentBookmark(const QModelIndex &modelIdx);
 

@@ -99,7 +99,7 @@ class SimbadSearcher : public QObject
 	Q_OBJECT
 
 public:
-	SimbadSearcher(QObject* parent = NULL);
+	SimbadSearcher(QObject* parent = Q_NULLPTR);
 
 	//! Lookup in Simbad for object which have a name starting with @em objectName.
 	//! @param serverUrl URL of the SIMBAD mirror server.

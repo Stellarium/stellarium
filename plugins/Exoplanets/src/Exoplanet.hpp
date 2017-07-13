@@ -60,6 +60,8 @@ class Exoplanet : public StelObject
 {
 	friend class Exoplanets;
 public:
+	static const QString EXOPLANET_TYPE;
+
 	//! @param id The official designation for a exoplanet, e.g. "Kepler-10 b"
 	Exoplanet(const QVariantMap& map);
 	~Exoplanet();
@@ -71,7 +73,12 @@ public:
 	//! Get the type of object
 	virtual QString getType(void) const
 	{
-		return "Exoplanet";
+		return EXOPLANET_TYPE;
+	}
+
+	virtual QString getID(void) const
+	{
+		return getDesignation();
 	}
 
 	virtual float getSelectPriority(const StelCore* core) const;
@@ -140,6 +147,33 @@ public:
 			case 5:
 				return angleDistanceList;
 				break;
+			case 6:
+				return effectiveTempHostStarList;
+				break;
+			case 7:
+				return yearDiscoveryList;
+				break;
+			case 8:
+				return metallicityHostStarList;
+				break;
+			case 9:
+				return vMagHostStarList;
+				break;
+			case 10:
+				return raHostStarList;
+				break;
+			case 11:
+				return decHostStarList;
+				break;
+			case 12:
+				return distanceHostStarList;
+				break;
+			case 13:
+				return massHostStarList;
+				break;
+			case 14:
+				return radiusHostStarList;
+				break;
 			default:
 				return eccentricityList;
 		}
@@ -183,7 +217,9 @@ private:
 
 	QStringList englishNames, translatedNames, exoplanetDesignations;
 
-	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList;
+	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
+		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
+		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;
 
 	LinearFader labelsFader;
 };

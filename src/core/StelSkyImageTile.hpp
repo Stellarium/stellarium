@@ -72,7 +72,7 @@ public:
 	StelSkyImageTile();
 
 	//! Constructor
-	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=NULL);
+	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=Q_NULLPTR);
 	//! Constructor
 	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent);
 

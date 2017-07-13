@@ -31,6 +31,13 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <winsock2.h>
 #include <fcntl.h>
 
+//FIXME: Remove these macro-redefinitions, we have no business messing with them
+//ESPECIALLY if the change the values and are not commented
+#ifdef _MSC_VER
+//for now, this warning is disabled when this header is included
+#pragma warning(disable: 4005)
+#endif
+
 #define ERRNO WSAGetLastError()
 #undef EAGAIN
 #define EAGAIN WSAEWOULDBLOCK
@@ -55,6 +62,7 @@ static inline int SetNonblocking(int s)
 #include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/select.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>

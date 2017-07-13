@@ -48,25 +48,25 @@ public:
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)
-	TuiNode(const QString& text, TuiNode* parent=NULL, TuiNode* prev=NULL);
+	TuiNode(const QString& text, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleKey(int key);
 	virtual TuiNodeResponse navigation(int key);
-	virtual QString getDisplayText();
-	virtual TuiNode* getParentNode() {return parentNode;}
+	virtual QString getDisplayText() const;
+	virtual TuiNode* getParentNode() const {return parentNode;}
 	virtual void setParentNode(TuiNode* n) {parentNode=n; updateNodeNumber();}
-	virtual TuiNode* getChildNode() {return childNode;}
+	virtual TuiNode* getChildNode() const {return childNode;}
 	//! This also takes ownership of the child through OObject->setParent
 	virtual void setChildNode(TuiNode* n) {childNode=n; n->setParent(this);}
-	virtual TuiNode* getPrevNode() {return prevNode;}
+	virtual TuiNode* getPrevNode() const {return prevNode;}
 	virtual void setPrevNode(TuiNode* n) {prevNode=n; updateNodeNumber();}
-	virtual TuiNode* getNextNode() {return nextNode;}
+	virtual TuiNode* getNextNode() const {return nextNode;}
 	virtual void setNextNode(TuiNode* n) {nextNode=n;}
 	//! Set prevNode to the last of the chain of nextNode-s.
 	//! Call for the first node of a menu after all others have been added.
 	virtual void loopToTheLast();
 	
-	int getNodeNumber() {return nodeNumber;}
-	QList<int> getAncestorsNumbers() {return ancestorsNumbers;}
+	int getNodeNumber() const {return nodeNumber;}
+	QList<int> getAncestorsNumbers() const {return ancestorsNumbers;}
 
 protected:	
 	TuiNode* parentNode;

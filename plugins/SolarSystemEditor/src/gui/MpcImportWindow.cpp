@@ -54,10 +54,10 @@
 MpcImportWindow::MpcImportWindow()
 	: StelDialog("SolarSystemEditorMPCimport")
 	, importType(ImportType())
-	, downloadReply(0)
-	, queryReply(0)
-	, downloadProgressBar(0)
-	, queryProgressBar(0)
+	, downloadReply(Q_NULLPTR)
+	, queryReply(Q_NULLPTR)
+	, downloadProgressBar(Q_NULLPTR)
+	, queryProgressBar(Q_NULLPTR)
 	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
@@ -331,7 +331,7 @@ void MpcImportWindow::selectFile()
 {
 	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
 							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
-	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directories[0]);
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, "Select a text file", directories[0]);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -351,11 +351,11 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 	candidatesForAddition.clear();
 
 	//Get a list of the current objects
-	QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
+	//QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
 	QHash<QString,QString> loadedSsoIdentifiers = ssoManager->listAllLoadedSsoIdentifiers();
 
 	//Separating the objects into visual groups in the list
-	int newDefaultSsoIndex = 0;
+	//int newDefaultSsoIndex = 0;
 	int newLoadedSsoIndex = 0;
 	int newNovelSsoIndex = 0;
 	int insertionIndex = 0;
@@ -389,21 +389,22 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 		item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 		item->setCheckState(Qt::Unchecked);
 
-		if (defaultSsoIdentifiers.contains(name))
-		{
-			//Duplicate of a default solar system object
-			QFont itemFont(item->font());
-			itemFont.setBold(true);
-			item->setFont(itemFont);
+//		if (defaultSsoIdentifiers.contains(name))
+//		{
+//			//Duplicate of a default solar system object
+//			QFont itemFont(item->font());
+//			itemFont.setBold(true);
+//			item->setFont(itemFont);
 
-			candidatesForUpdate.append(object);
+//			candidatesForUpdate.append(object);
 
-			insertionIndex = newDefaultSsoIndex;
-			newDefaultSsoIndex++;
-			newLoadedSsoIndex++;
-			newNovelSsoIndex++;
-		}
-		else if (loadedSsoIdentifiers.contains(name))
+//			insertionIndex = newDefaultSsoIndex;
+//			newDefaultSsoIndex++;
+//			newLoadedSsoIndex++;
+//			newNovelSsoIndex++;
+//		}
+//		else
+		if (loadedSsoIdentifiers.contains(name))
 		{
 			//Duplicate of another existing object
 			QFont itemFont(item->font());
@@ -528,7 +529,7 @@ void MpcImportWindow::unmarkAll()
 
 void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-	if (downloadProgressBar == NULL)
+	if (downloadProgressBar == Q_NULLPTR)
 		return;
 
 	int currentValue = 0;
@@ -552,7 +553,7 @@ void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesT
 
 void MpcImportWindow::updateQueryProgress(qint64, qint64)
 {
-	if (queryProgressBar == NULL)
+	if (queryProgressBar == Q_NULLPTR)
 		return;
 
 	//Just show activity
@@ -595,7 +596,7 @@ void MpcImportWindow::startDownload(QString urlString)
 
 void MpcImportWindow::abortDownload()
 {
-	if (downloadReply == NULL || downloadReply->isFinished())
+	if (downloadReply == Q_NULLPTR || downloadReply->isFinished())
 		return;
 
 	qDebug() << "Aborting download...";
@@ -605,7 +606,7 @@ void MpcImportWindow::abortDownload()
 
 	downloadReply->abort();
 	downloadReply->deleteLater();
-	downloadReply = NULL;
+	downloadReply = Q_NULLPTR;
 
 	enableInterface(true);
 	ui->pushButtonAbortDownload->setVisible(false);
@@ -631,7 +632,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 				   << reply->errorString();
 		enableInterface(true);
 		reply->deleteLater();
-		downloadReply = NULL;
+		downloadReply = Q_NULLPTR;
 		return;
 	}
 
@@ -673,7 +674,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 	}
 
 	reply->deleteLater();
-	downloadReply = NULL;
+	downloadReply = Q_NULLPTR;
 
 	//Temporary, until the slot/socket mechanism is ready
 	populateCandidateObjects(objects);
@@ -690,7 +691,7 @@ void MpcImportWindow::deleteDownloadProgressBar()
 	if (downloadProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(downloadProgressBar);
-		downloadProgressBar = NULL;
+		downloadProgressBar = Q_NULLPTR;
 	}
 }
 
@@ -906,7 +907,7 @@ void MpcImportWindow::deleteQueryProgressBar()
 	if (queryProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(queryProgressBar);
-		queryProgressBar = NULL;
+		queryProgressBar = Q_NULLPTR;
 	}
 }
 

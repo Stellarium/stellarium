@@ -55,7 +55,7 @@ TargetsDialog::TargetsDialog(QMap<QString, QSqlTableModel *> theTableModels)
 TargetsDialog::~TargetsDialog()
 {
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 }
 
 /* ********************************************************************* */

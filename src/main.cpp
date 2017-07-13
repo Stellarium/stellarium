@@ -56,11 +56,9 @@
 
 #ifdef Q_OS_WIN
 	#include <windows.h>
-	#ifdef _MSC_BUILD
-		#include <MMSystem.h>
-		#pragma comment(lib,"Winmm.lib")
-		#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") // Hide console
-	#endif
+	//we use WIN32_LEAN_AND_MEAN so this needs to be included
+	//to use timeBeginPeriod/timeEndPeriod
+	#include <mmsystem.h>
 #endif //Q_OS_WIN
 
 //! @class CustomQTranslator
@@ -184,6 +182,9 @@ int main(int argc, char **argv)
 		argList+= envStelOpts.split(" ");
 		argStr += " " + envStelOpts;
 	}
+	//save the modified arg list as an app property for later use
+	qApp->setProperty("stelCommandLine", argList);
+
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version
 	CLIProcessor::parseCLIArgsPreConfig(argList);
@@ -245,7 +246,7 @@ int main(int argc, char **argv)
 			qFatal("Could not create configuration file %s.", qPrintable(configName));
 	}
 
-	QSettings* confSettings = NULL;
+	QSettings* confSettings = Q_NULLPTR;
 	if (StelFileMgr::exists(configFileFullPath))
 	{
 		// Implement "restore default settings" feature.
@@ -256,7 +257,7 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			confSettings = new QSettings(configFileFullPath, StelIniFormat, NULL);
+			confSettings = new QSettings(configFileFullPath, StelIniFormat, Q_NULLPTR);
 			restoreDefaultConfigFile = confSettings->value("main/restore_defaults", false).toBool();
 		}
 		if (!restoreDefaultConfigFile)

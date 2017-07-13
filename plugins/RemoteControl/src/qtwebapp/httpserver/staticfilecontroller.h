@@ -72,7 +72,7 @@ class DECLSPEC StaticFileController : public HttpRequestHandler  {
 public:
 
     /** Constructor */
-    StaticFileController(const StaticFileControllerSettings& settings, QObject* parent = NULL);
+    StaticFileController(const StaticFileControllerSettings& settings, QObject* parent = Q_NULLPTR);
 
     /** Generates the response */
     void service(HttpRequest& request, HttpResponse& response);

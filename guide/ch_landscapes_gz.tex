@@ -134,7 +134,7 @@ Where:
   selection box.
 \end{description}
 %
-Since V0.11, there are a few more optional parameters that can be
+Since v0.11.0, there are a few more optional parameters that can be
 loaded if the according switch is active in the landscape selection
 panel. If they are missing, the parameters do not change to defaults.
 
@@ -230,10 +230,10 @@ Where:
 \item[\var{minimal\_altitude}] (optional, default=-2) Some sky
   elements, e.g.\ stars, are not drawn below this altitude to increase
   performance. Under certain circumstances you may want to specify
-  something else here. (since V0.14)
+  something else here. (since v0.14.0)
 \item[\var{polygonal\_horizon\_inverted}] (optional, default=false) In
   rare cases like horizon lines for high mountain peaks with many
-  negative horizon values this should be set to true. (since V0.15)
+  negative horizon values this should be set to true. (since v0.15.0)
 \end{description}
 
 
@@ -334,10 +334,10 @@ Where:
   efficiency. Under certain circumstances (e.g.\ for space station
   panoramas where you may have sky below your feet, or for deep
   valleys/high mountains, you may want to specify something else
-  here. (since V0.14)
+  here. (since v0.14.0)
 \end{description}
 %
-To save texture memory, %since V0.13 
+To save texture memory, %since v0.13.0 
 you can trim away the transparent
 sky and define the angle \var{maptex\_top}. Likewise,
 \var{fogtex\_top}, \var{fogtex\_bottom}, \var{maptex\_illum\_top} and
@@ -460,7 +460,7 @@ Where:
   are rendered exactly over the \var{tex<...>} files even when the PNG
   files have different size. If you need your light pollution higher in
   the sky, you must use a spherical or fisheye
-  landscape.% (New feature, V0.13.1)
+  landscape.\newFeature{v0.13.1}
 \item[\var{nbside}] is the number of side textures
 \item[\var{side0 \ldots side<nbside-1>}] are the descriptions of how
   the side textures should be arranged in the program. Each
@@ -507,7 +507,7 @@ Where:
 \item[\var{draw\_ground\_first}] if 1 the ground is drawn in front of
   the scenery, i.e. the side textures will overlap over the ground
   texture.
-\item[\var{calibrated}] (optional). New since V0.10.6: Only if true,
+\item[\var{calibrated}] (optional).\newFeature{v0.10.6} Only if true,
   \var{decor\_alt\_angle} etc. really work as documented above. The
   (buggy) old code was left to work with the landscapes already
   existing. Note that with ``uncalibrated'' landscapes, sunrise
@@ -517,7 +517,7 @@ Where:
   panorama image must be in in cylindrical, not equirectangular
   projection. Finding \var{decor\_alt\_angle} and
   \var{decor\_angle\_shift} may be a bit more difficult with this, but
-  now (V0.13) works also with calibrated. A fog image created as
+  now (v0.13.0) works also with calibrated. A fog image created as
   overlay on the pano will be perfectly placed.
 \item[\var{decor\_angle\_rotatez}] angular rotation of the scenery
   around the vertical axis. This is handy for rotating the landscape
@@ -543,7 +543,7 @@ Where:
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal} %Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g. when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
 \item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}  % (optional, default: invisible) used to draw a polygonal horizon line.
 \item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal} % (optional, default=-1, i.e. use landscape/minimal\_brightness from global config.ini) Some minimum brightness to keep landscape visible.
-\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal}  % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since V0.14) 
+\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal}  % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0) 
 \end{description}
 
 
@@ -614,7 +614,7 @@ Where:
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal} % Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g.\ when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
 \item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal} % (optional, default: invisible) used to draw a polygonal horizon line.
 \item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal} % (optional, default=-1, i.e. use preset \var{landscape/minimal\_brightness} from global \file{config.ini}) Some minimum brightness to keep landscape visible.
-\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal} % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since V0.14) 
+\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal} % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0) 
 \end{description}
 
 
@@ -1359,7 +1359,7 @@ again.
 \begin{figure}[tb]
   \centering
     \includegraphics[width=\textwidth]{FastPreview.png}
-    \caption{H\program{ugin}'s Fast Panorama Preview can be used to check which
+    \caption{\program{Hugin}'s Fast Panorama Preview can be used to check which
       images are connected to its neighbours. Most important are good
       matches along the horizon, the images in the lower rows are
       clearly less important. If captured on a tripod, they should

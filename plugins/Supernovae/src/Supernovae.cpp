@@ -82,10 +82,10 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 Supernovae::Supernovae()
 	: SNCount(0)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
-	, progressBar(NULL)
-	, updateTimer(0)
-	, messageTimer(0)
+	, downloadMgr(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
+	, updateTimer(Q_NULLPTR)
+	, messageTimer(Q_NULLPTR)
 	, updatesEnabled(false)
 	, updateFrequencyDays(0)
 {
@@ -265,7 +265,7 @@ StelObjectP Supernovae::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(sn);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
@@ -276,7 +276,7 @@ StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(sn);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList Supernovae::listAllObjects(bool inEnglish) const
@@ -416,7 +416,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 	}
 }
 
-int Supernovae::getJsonFileVersion(void)
+int Supernovae::getJsonFileVersion(void) const
 {	
 	int jsonVersion = -1;
 	QFile sneJsonFile(sneJsonPath);
@@ -438,7 +438,7 @@ int Supernovae::getJsonFileVersion(void)
 	return jsonVersion;
 }
 
-bool Supernovae::checkJsonFileFormat()
+bool Supernovae::checkJsonFileFormat() const
 {
 	QFile sneJsonFile(sneJsonPath);
 	if (!sneJsonFile.open(QIODevice::ReadOnly))
@@ -462,7 +462,7 @@ bool Supernovae::checkJsonFileFormat()
 	return true;
 }
 
-float Supernovae::getLowerLimitBrightness()
+float Supernovae::getLowerLimitBrightness() const
 {
 	float lowerLimit = 10.f;
 	QFile sneJsonFile(sneJsonPath);
@@ -483,7 +483,7 @@ float Supernovae::getLowerLimitBrightness()
 	return lowerLimit;
 }
 
-SupernovaP Supernovae::getByID(const QString& id)
+SupernovaP Supernovae::getByID(const QString& id) const
 {
 	foreach(const SupernovaP& sn, snstar)
 	{
@@ -574,7 +574,7 @@ void Supernovae::updateJSON(void)
 	updateState = Supernovae::Updating;
 	emit(updateStateChanged(updateState));
 
-	if (progressBar==NULL)
+	if (progressBar==Q_NULLPTR)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
@@ -622,7 +622,7 @@ void Supernovae::updateDownloadComplete(QNetworkReply* reply)
 	{
 		progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 
 	readJsonFile();
@@ -642,7 +642,7 @@ void Supernovae::messageTimeout(void)
 	}
 }
 
-QString Supernovae::getSupernovaeList()
+QString Supernovae::getSupernovaeList() const
 {
 	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QStringList out;

@@ -8,13 +8,9 @@ INCLUDE_DIRECTORIES(
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(Scenery3d_SRCS
-     AABB.hpp
-     AABB.cpp
      Frustum.hpp
      Frustum.cpp
      GLFuncs.hpp
-     Line.hpp
-     Line.cpp
      Plane.hpp
      Plane.cpp
      SPolygon.hpp
@@ -24,10 +20,14 @@ SET(Scenery3d_SRCS
      S3DEnum.hpp
      SceneInfo.hpp
      SceneInfo.cpp
+     S3DScene.hpp
+     S3DScene.cpp
      Scenery3d.hpp
      Scenery3d.cpp
-     Scenery3dMgr.hpp
-     Scenery3dMgr.cpp
+     Scenery3dRemoteControlService.hpp
+     Scenery3dRemoteControlService.cpp
+     S3DRenderer.hpp
+     S3DRenderer.cpp
      gui/Scenery3dDialog.hpp
      gui/Scenery3dDialog_p.hpp
      gui/Scenery3dDialog.cpp
@@ -36,8 +36,6 @@ SET(Scenery3d_SRCS
      gui/StoredViewDialog.cpp
      ShaderManager.hpp
      ShaderManager.cpp
-     OBJ.hpp
-     OBJ.cpp
      Heightmap.hpp
      Heightmap.cpp
 )

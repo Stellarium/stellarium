@@ -25,6 +25,7 @@
 #include "StelProjector.hpp"
 #include "StelObjectType.hpp"
 #include <QTimeLine>
+#include <QTimer>
 #include <QCursor>
 
 //! @class StelMovementMgr
@@ -128,7 +129,7 @@ public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimuthal
-	void setEquatorialMount(bool b) {setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);}
+	void setEquatorialMount(bool b);
 
 	//! Set object tracking on/off and go to selected object
 	void setFlagTracking(bool b=true);
@@ -178,6 +179,11 @@ public slots:
 	//! Set whether mouse can control movement
 	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b;}
 
+	//! Get the state of flag for indication of mount mode
+	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
+	//! Set the state of flag for indication of mount mode
+	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; }
+
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
 	//! @param aimUp Up vector. Can be usually (0/0/1) but may have to be exact for looking into the zenith/pole
@@ -223,8 +229,9 @@ public slots:
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();
 
-	//! Return the current viewing direction in equatorial J2000 frame.
+	//! Return the current viewing direction in the equatorial J2000 frame.
 	Vec3d getViewDirectionJ2000() const {return viewDirectionJ2000;}
+	//! Set the current viewing direction in the equatorial J2000 frame.
 	void setViewDirectionJ2000(const Vec3d& v);
 
 	//! Set the maximum field of View in degrees.
@@ -315,6 +322,11 @@ private slots:
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
 
+	//! Display a message on the screen for a few seconds.
+	void displayMessage(const QString& message, const QString hexColor="#99FF99");
+	//! Hide all messages.
+	void hideMessages();
+
 public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
@@ -327,7 +339,7 @@ private:
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
-		currentFov=qMax(minFov, qMin(f, maxFov));
+		currentFov=qBound(minFov, f, maxFov);
 	}
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
@@ -454,6 +466,14 @@ private:
 	// Those two are used during viewport offset animation transitions. Both are set by moveViewport(), and irrelevant after the transition.
 	Vec2f oldViewportOffset;
 	Vec2f targetViewportOffset;
+
+	bool flagIndicationMountMode; // state of mount mode
+
+	//! @name Screen message infrastructure
+	//@{
+	QTimer* messageTimer;
+	QList<int> messageIDs;
+	//@}
 
 };
 

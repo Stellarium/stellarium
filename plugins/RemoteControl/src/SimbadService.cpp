@@ -104,13 +104,13 @@ private:
 	QThread* parentThread;
 };
 
-SimbadService::SimbadService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+SimbadService::SimbadService(QObject *parent) : AbstractAPIService(parent)
 {
 	//this is run in the main thread
 	simbadServerUrl = StelApp::getInstance().getSettings()->value("search/simbad_server_url", SearchDialog::DEF_SIMBAD_URL).toString();
 }
 
-void SimbadService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
+void SimbadService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	if (operation == "lookup")
 	{

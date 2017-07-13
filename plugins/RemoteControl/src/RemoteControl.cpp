@@ -64,8 +64,8 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 }
 
 RemoteControl::RemoteControl()
-	: httpListener(NULL)
-	, requestHandler(NULL)
+	: httpListener(Q_NULLPTR)
+	, requestHandler(Q_NULLPTR)
 	, enabled(false)
 	, autoStart(false)
 	, usePassword(false)
@@ -73,7 +73,7 @@ RemoteControl::RemoteControl()
 	, port(8090)
 	, minThreads(1)
 	, maxThreads(30)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("RemoteControl");
 
@@ -151,9 +151,9 @@ void RemoteControl::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/RemoteControl/resources/bt_remote_on.png"),
 						       QPixmap(":/RemoteControl/resources/bt_remote_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -237,7 +237,7 @@ void RemoteControl::setPort(const int port)
 
 void RemoteControl::startServer()
 {
-	Q_ASSERT(httpListener == NULL);
+	Q_ASSERT(httpListener == Q_NULLPTR);
 
 	//set request handler password settings
 	requestHandler->setPassword(password);
@@ -254,7 +254,7 @@ void RemoteControl::stopServer()
 	if(httpListener)
 	{
 		delete httpListener;
-		httpListener = NULL;
+		httpListener = Q_NULLPTR;
 	}
 }
 

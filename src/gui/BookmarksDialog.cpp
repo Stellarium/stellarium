@@ -26,10 +26,14 @@
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
+#include "CustomObjectMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "AngleSpinBox.hpp"
 #include "NebulaMgr.hpp"
+
+#include <QFileDialog>
+#include <QDir>
 
 #include "BookmarksDialog.hpp"
 #include "ui_bookmarksDialog.h"
@@ -79,6 +83,9 @@ void BookmarksDialog::createDialogContent()
 	connect(ui->clearBookmarksButton, SIGNAL(clicked()), this, SLOT(clearBookmarksButtonPressed()));
 	connect(ui->bookmarksTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentBookmark(QModelIndex)));
 
+	connect(ui->importBookmarksButton, SIGNAL(clicked()), this, SLOT(importBookmarks()));
+	connect(ui->exportBookmarksButton, SIGNAL(clicked()), this, SLOT(exportBookmarks()));
+
 	//Initializing the list of bookmarks
 	bookmarksListModel->setColumnCount(ColumnCount);
 	setBookmarksHeaderNames();
@@ -97,7 +104,7 @@ void BookmarksDialog::setBookmarksHeaderNames()
 	QStringList headerStrings;
 	headerStrings << "UUID"; // Hide the column
 	headerStrings << q_("Object");
-	headerStrings << q_("Localized name");
+	headerStrings << q_("Localized name");	
 	headerStrings << q_("Date and Time");	
 	headerStrings << q_("Location of observer");
 
@@ -106,7 +113,7 @@ void BookmarksDialog::setBookmarksHeaderNames()
 
 void BookmarksDialog::addModelRow(int number, QString uuid, QString name, QString nameI18n, QString Date, QString Location)
 {
-	QStandardItem* tempItem = 0;
+	QStandardItem* tempItem = Q_NULLPTR;
 
 	tempItem = new QStandardItem(uuid);
 	tempItem->setEditable(false);
@@ -144,48 +151,68 @@ void BookmarksDialog::addBookmarkButtonPressed()
 		if (selected[0]->getType()=="Nebula")
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
-		if (!name.isEmpty()) // Don't allow adding objects without name!
+		QString raStr = "", decStr = "";
+		bool visibleFlag = false;
+		if (selected[0]->getType()=="CustomObject")
 		{
-			bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
-			bool locationFlag = ui->locationCheckBox->isChecked();
-
-			QString JDs = "";
-			double JD = -1.;
-
-			if (dateTimeFlag)
+			if (name.isEmpty())
 			{
-				JD = core->getJD();
-				JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)/24.).replace("T", " ");
+				name = "Unnamed object";
+				nameI18n = q_("Unnamed object");
 			}
-
-			QString Location = "";
-			if (locationFlag)
-			{
-				StelLocation loc = core->getCurrentLocation();
-				if (loc.name.isEmpty())
-					Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
-				else
-					Location = QString("%1, %2").arg(loc.name).arg(loc.country);
-			}
-
-			int lastRow = bookmarksListModel->rowCount();
-
-			QString uuid = QUuid::createUuid().toString();
-			addModelRow(lastRow, uuid, name, nameI18n, JDs, Location);
-
-			bookmark bm;
-			bm.name	= name;
-			if (!nameI18n.isEmpty())
-				bm.nameI18n = nameI18n;
-			if (!JDs.isEmpty())
-				bm.jd	= QString::number(JD, 'f', 6);
-			if (!Location.isEmpty())
-				bm.location = Location;
-
-			bookmarksCollection.insert(uuid, bm);
-
-			saveBookmarks();
+			float ra, dec;
+			StelUtils::rectToSphe(&ra, &dec, selected[0]->getJ2000EquatorialPos(core));
+			raStr = StelUtils::radToHmsStr(ra, false);
+			decStr = StelUtils::radToDmsStr(dec, false);
+			if (name.contains("marker", Qt::CaseInsensitive))
+				visibleFlag = true;
 		}
+
+		bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
+		bool locationFlag = ui->locationCheckBox->isChecked();
+
+		QString JDs = "";
+		double JD = -1.;
+
+		if (dateTimeFlag)
+		{
+			JD = core->getJD();
+			JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)/24.).replace("T", " ");
+		}
+
+		QString Location = "";
+		if (locationFlag)
+		{
+			StelLocation loc = core->getCurrentLocation();
+			if (loc.name.isEmpty())
+				Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
+			else
+				Location = QString("%1, %2").arg(loc.name).arg(loc.country);
+		}
+
+		int lastRow = bookmarksListModel->rowCount();
+
+		QString uuid = QUuid::createUuid().toString();
+		addModelRow(lastRow, uuid, name, nameI18n, JDs, Location);
+
+		bookmark bm;
+		bm.name	= name;
+		if (!nameI18n.isEmpty())
+			bm.nameI18n = nameI18n;
+		if (!raStr.isEmpty())
+			bm.ra = raStr;
+		if (!decStr.isEmpty())
+			bm.dec = decStr;
+		if (!JDs.isEmpty())
+			bm.jd	= QString::number(JD, 'f', 6);
+		if (!Location.isEmpty())
+			bm.location = Location;
+		if (!visibleFlag)
+			bm.isVisibleMarker = visibleFlag;
+
+		bookmarksCollection.insert(uuid, bm);
+
+		saveBookmarks();
 	}
 }
 
@@ -232,13 +259,23 @@ void BookmarksDialog::goToBookmark(QString uuid)
 			core->moveObserverTo(locationMgr->locationForString(bm.location));
 		}
 
+		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 		objectMgr->unSelect();
-		if (objectMgr->findAndSelect(bm.name))
+		bool status = objectMgr->findAndSelect(bm.name);
+		if (!bm.ra.isEmpty() && !bm.dec.isEmpty() && !status)
+		{
+			Vec3d pos;
+			StelUtils::spheToRect(StelUtils::getDecAngle(bm.ra.trimmed()), StelUtils::getDecAngle(bm.dec.trimmed()), pos);
+			// Add a custom object on the sky
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(bm.name, pos, bm.isVisibleMarker);
+			status = objectMgr->findAndSelect(bm.name);
+		}
+
+		if (status)
 		{
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())
 			{
-				StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
 				mvmgr->setFlagTracking(true);
 			}
@@ -281,11 +318,44 @@ void BookmarksDialog::loadBookmarks()
 		QString Location = bookmarkData.value("location").toString();
 		if (!Location.isEmpty())
 			bm.location = Location;
+		QString RA = bookmarkData.value("ra").toString();
+		if (!RA.isEmpty())
+			bm.ra = RA;
+		QString Dec = bookmarkData.value("dec").toString();
+		if (!Dec.isEmpty())
+			bm.dec = Dec;
+
+		bm.isVisibleMarker = bookmarkData.value("isVisibleMarker", false).toBool();
 
 		bookmarksCollection.insert(bookmarkKey, bm);
 		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 		i++;
 	}
+}
+
+void BookmarksDialog::importBookmarks()
+{
+	QString originalBookmarksFile = bookmarksJsonPath;
+
+	QString filter = "JSON (*.json)";
+	bookmarksJsonPath = QFileDialog::getOpenFileName(0, q_("Import bookmarks"), QDir::homePath(), filter);
+
+	loadBookmarks();
+
+	bookmarksJsonPath = originalBookmarksFile;
+	saveBookmarks();
+}
+
+void BookmarksDialog::exportBookmarks()
+{
+	QString originalBookmarksFile = bookmarksJsonPath;
+
+	QString filter = "JSON (*.json)";
+	bookmarksJsonPath = QFileDialog::getSaveFileName(0, q_("Export bookmarks as..."), QDir::homePath() + "/bookmarks.json", filter);
+
+	saveBookmarks();
+
+	bookmarksJsonPath = originalBookmarksFile;
 }
 
 void BookmarksDialog::saveBookmarks()
@@ -314,10 +384,16 @@ void BookmarksDialog::saveBookmarks()
 	    bm.insert("name",	sp.name);
 	    if (!sp.nameI18n.isEmpty())
 		    bm.insert("nameI18n", sp.nameI18n);
+	    if (!sp.ra.isEmpty())
+		    bm.insert("ra", sp.ra);
+	    if (!sp.dec.isEmpty())
+		    bm.insert("dec", sp.dec);
 	    if (!sp.jd.isEmpty())
 		    bm.insert("jd", sp.jd);
 	    if (!sp.location.isEmpty())
 		    bm.insert("location", sp.location);
+	    if (sp.isVisibleMarker)
+		    bm.insert("isVisibleMarker", sp.isVisibleMarker);
 
 	    bookmarksDataList.insert(i.key(), bm);
 	}

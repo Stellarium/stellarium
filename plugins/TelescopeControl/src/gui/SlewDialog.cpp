@@ -36,7 +36,7 @@ using namespace TelescopeControlGlobals;
 
 SlewDialog::SlewDialog()
 	: StelDialog("TelescopeControlSlew")
-	, storedPointsDialog(NULL)
+	, storedPointsDialog(Q_NULLPTR)
 {
 	ui = new Ui_slewDialog();
 	
@@ -47,7 +47,7 @@ SlewDialog::SlewDialog()
 SlewDialog::~SlewDialog()
 {	
 	delete ui;
-	storedPointsDialog = NULL;
+	storedPointsDialog = Q_NULLPTR;
 }
 
 void SlewDialog::retranslate()

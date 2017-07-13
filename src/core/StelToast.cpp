@@ -181,7 +181,7 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	Q_ASSERT(vertexArray.size() == textureArray.size());
 
 	sPainter->setCullFace(true);
-	// sPainter.drawArrays(GL_TRIANGLES, vertexArray.size(), vertexArray.data(), textureArray.data(), NULL, NULL, indexArray.size(), indexArray.constData());
+	// sPainter.drawArrays(GL_TRIANGLES, vertexArray.size(), vertexArray.data(), textureArray.data(), Q_NULLPTR, Q_NULLPTR, indexArray.size(), indexArray.constData());
 	sPainter->setArrays(vertexArray.constData(), textureArray.constData());
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 
@@ -228,7 +228,7 @@ ToastSurvey::ToastSurvey(const QString& path, int amaxLevel)
 ToastSurvey::~ToastSurvey()
 {
 	delete rootTile;
-	rootTile = NULL;
+	rootTile = Q_NULLPTR;
 }
 
 

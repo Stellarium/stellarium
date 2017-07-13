@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>512</width>
-    <height>579</height>
+    <width>568</width>
+    <height>654</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -172,7 +172,7 @@
             <property name="title">
              <string>Language settings</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_4">
+            <layout class="QGridLayout" name="gridLayoutLanguageSettings">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -276,7 +276,7 @@
             <property name="title">
              <string>Ephemeris settings (experimental)</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_ephemeris">
+            <layout class="QGridLayout" name="gridLayoutEphemeris">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -451,7 +451,7 @@
              <item>
               <widget class="QLabel" name="startupFOVLabel">
                <property name="statusTip">
-                <string>The width of your view when Stellarium starts</string>
+                <string>The vertical field (height) of your view when Stellarium starts</string>
                </property>
                <property name="text">
                 <string notr="true">Startup FOV: XX</string>
@@ -510,7 +510,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QGroupBox" name="groupBox_4">
+           <widget class="QGroupBox" name="selectedInfoGroupBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -520,7 +520,7 @@
             <property name="title">
              <string>Selected object information</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_2">
+            <layout class="QGridLayout" name="gridLayoutSelectedObjInfo">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -678,7 +678,7 @@
                 <string>Horizontal coordinates</string>
                </property>
                <property name="text">
-                <string>Altitude/Azimuth</string>
+                <string>Azimuth/Altitude</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
@@ -814,6 +814,55 @@
            </widget>
           </item>
           <item>
+           <widget class="QGroupBox" name="groupBoxAdditionalSettings">
+            <property name="title">
+             <string>Additional settings</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutAdditionalSettings">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxUMShortNotationSurfaceBrightness">
+               <property name="text">
+                <string>Use short notation for unit of measurement of surface brightness</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxUMSurfaceBrightness">
+               <property name="text">
+                <string>Use unit of measurement mag/arcsec^2 for surface brightness</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
+               <property name="text">
+                <string>Use formatting output for coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxUseCCSDesignations">
+               <property name="text">
+                <string>Use designations for celestial coordinate systems</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -850,7 +899,7 @@
             <property name="title">
              <string>Control</string>
             </property>
-            <layout class="QGridLayout" name="gridLayoutStartup">
+            <layout class="QGridLayout" name="gridLayoutNavStartup">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -950,7 +999,7 @@
             <property name="title">
              <string>Startup date and time</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_3">
+            <layout class="QGridLayout" name="gridLayoutStartup">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -1327,13 +1376,23 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="8" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
                <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+                <string>Activate this option to calculate azimuth from south towards west.</string>
                </property>
                <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
+                <string>Azimuth from South</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="showToastSurveyButtonCheckbox">
+               <property name="toolTip">
+                <string>Toggle display of the button for Digitized Sky Survey.</string>
+               </property>
+               <property name="text">
+                <string>Show DSS button</string>
                </property>
               </widget>
              </item>
@@ -1357,7 +1416,7 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="6" column="1">
               <widget class="QCheckBox" name="decimalDegreeCheckBox">
                <property name="toolTip">
                 <string>Use decimal degrees for coordinates</string>
@@ -1380,7 +1439,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="7" column="1">
               <widget class="QCheckBox" name="topocentricCheckBox">
                <property name="toolTip">
                 <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
@@ -1390,7 +1449,7 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="6" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
                 <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
@@ -1433,7 +1492,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="7" column="0">
               <widget class="QCheckBox" name="nutationCheckBox">
                <property name="toolTip">
                 <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
@@ -1443,27 +1502,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
-               <property name="toolTip">
-                <string>Activate this option to calculate azimuth from south towards west.</string>
-               </property>
-               <property name="text">
-                <string>Azimuth from South</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="showToastSurveyButtonCheckbox">
-               <property name="toolTip">
-                <string>Toggle display of the button for Digitized Sky Survey.</string>
-               </property>
-               <property name="text">
-                <string>Show DSS button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
+             <item row="8" column="1">
               <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
                <property name="toolTip">
                 <string>Automatic change of landscape when planet is changed</string>
@@ -1477,6 +1516,70 @@
               <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
                <property name="text">
                 <string>Show bookmarks button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="showICRSGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle equatorial J2000 grid</string>
+               </property>
+               <property name="text">
+                <string>Show ICRS grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="showGalacticGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle galactic grid</string>
+               </property>
+               <property name="text">
+                <string>Show galactic grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="showEclipticGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle ecliptic grid of date</string>
+               </property>
+               <property name="text">
+                <string>Show ecliptic grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="showConstellationBoundariesButtonCheckBox">
+               <property name="text">
+                <string>Show constellation boundaries button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QCheckBox" name="useButtonsBackgroundCheckBox">
+               <property name="toolTip">
+                <string>Toggle the usage of background under GUI buttons</string>
+               </property>
+               <property name="text">
+                <string>Use buttons background</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QCheckBox" name="indicationMountModeCheckBox">
+               <property name="text">
+                <string>Indication for mount mode</string>
                </property>
               </widget>
              </item>

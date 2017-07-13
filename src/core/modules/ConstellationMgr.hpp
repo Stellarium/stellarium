@@ -127,13 +127,15 @@ public:
 	// Methods defined in StelObjectManager class
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching constellation object's pointer if exists or NULL
+	//! Return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensistive constellation name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching constellation if exists or NULL
+	//! Return the matching constellation if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const;
 
 	// GZ: I see dubious descriptions and non-fitting var names: objPrefix should just be "string" or "obj",
 	// and useStartOfWord likely should be described as "decide if start of word is searched"  (2x)
@@ -145,6 +147,7 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Constellations"; }
+	virtual QString getStelObjectType() const;
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
 	{
@@ -354,7 +357,7 @@ private:
 	//! Define which constellation is selected from a star number.
 	void setSelected(const StelObject* s);
 	//! Remove all selected constellations.
-	void deselect() { setSelected(NULL); }
+	void deselect() { setSelected(Q_NULLPTR); }
 	//! Get the first selected constellation.
 	//! NOTE: this function should return a list of all, or may be deleted. Please
 	//! do not use until it exhibits the proper behaviour.

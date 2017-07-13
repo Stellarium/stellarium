@@ -1,4 +1,4 @@
-define(["jquery", "api/search", "./combobox"], function($, searchApi) {
+define(["jquery", "api/remotecontrol", "api/search", "./combobox"], function($, rc, searchApi) {
 	"use strict";
 
 	//Private variables
@@ -10,6 +10,9 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 	var $srch_list_objecttype;
 	var $srch_list_objectlist;
 	var $srch_list_english;
+	var $select_SelectionMode;
+	var $select_clearButton;
+	var sel_infostring;
 
 	var $selectedElem;
 
@@ -69,6 +72,11 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 		parent.prepend($srch_list_objecttype);
 	}
 
+	function selectObjectByName(name) {
+		searchApi.selectObjectByName(name,
+			$select_SelectionMode.val());
+	}
+
 	function handleObjectListResults(data) {
 		var parent = $srch_list_objectlist.parent();
 		$srch_list_objectlist.detach();
@@ -118,7 +126,7 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 			searchApi.focusPosition(pos);
 		} else {
 			//post by name
-			searchApi.selectObjectByName($selectedElem.data("value"));
+			selectObjectByName(str);
 		}
 		$srch_input[0].value = "";
 		startSearch("");
@@ -194,6 +202,9 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 		$srch_list_objecttype = $("#srch_list_objecttype");
 		$srch_list_objectlist = $("#srch_list_objectlist");
 		$srch_list_english = $("#srch_list_english");
+		$select_SelectionMode = $("#select_SelectionMode");
+		$select_clearButton = $("#select_clearButton");
+		sel_infostring = document.getElementById("sel_infostring");
 
 		$srch_list_english.change(function(evt) {
 			reloadObjectTypes();
@@ -204,7 +215,7 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 			var e = $srch_list_objectlist[0];
 			if (e.selectedIndex >= 0) {
 				var loc = e.options[e.selectedIndex].text;
-				searchApi.selectObjectByName(loc);
+				selectObjectByName(loc);
 			}
 		});
 
@@ -216,7 +227,8 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 			select: function(evt, data) {
 				//empty the list before searching
 				$srch_list_objectlist.empty();
-				searchApi.loadObjectList(data.item.value, $srch_list_english[0].checked, handleObjectListResults);
+				searchApi.loadObjectList(data.item.value, $srch_list_english[0].checked,
+					handleObjectListResults);
 			}
 		});
 
@@ -253,11 +265,28 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 		searchApi.loadObjectTypes(fillObjectTypes);
 
 		//setup quick select buttons
-		$("#quickselect").on("click", "button",function(evt){
+		$("#quickselect").on("click", "button", function(evt) {
 			console.log("selecting " + evt.target.value);
-			searchApi.selectObjectByName(evt.target.value);
+			selectObjectByName(evt.target.value);
+		});
+
+		$("#selection button").click(function(evt) {
+			console.log("selecting " + evt.target.value);
+			selectObjectByName(evt.target.value);
 		});
 	}
+
+	$(rc).on("serverDataReceived", function(evt, data) {
+		if (data.selectioninfo) {
+			sel_infostring.innerHTML = data.selectioninfo;
+			sel_infostring.className = "";
+			$select_clearButton.show();
+		} else {
+			sel_infostring.innerHTML = rc.tr("No current selection");
+			sel_infostring.className = "bold";
+			$select_clearButton.hide();
+		}
+	});
 
 	$(searchApi).on("simbadStateChanged", function(evt, state) {
 		$srch_simbad.text(state);

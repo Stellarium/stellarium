@@ -98,13 +98,18 @@ public:
 	//! @return an list containing the satellites located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or NULL.
+	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensistive satellite name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or NULL.
+	//! Return the matching satellite if exists or Q_NULLPTR.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const
+	{
+		return qSharedPointerCast<StelObject>(getByID(id));
+	}
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -114,9 +119,10 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Bright Novae"; }
+	virtual QString getStelObjectType() const { return Nova::NOVA_TYPE; }
 
 	//! get a nova object by identifier
-	NovaP getByID(const QString& id);
+	NovaP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
@@ -142,17 +148,17 @@ public:
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
 	//! Get the date and time the novae were updated
-	QDateTime getLastUpdate(void) {return lastUpdate;}
+	QDateTime getLastUpdate(void) const {return lastUpdate;}
 
 	//! Get the update frequency in days
-	int getUpdateFrequencyDays(void) {return updateFrequencyDays;}
+	int getUpdateFrequencyDays(void) const {return updateFrequencyDays;}
 	void setUpdateFrequencyDays(int days) {updateFrequencyDays = days;}
 
 	//! Get the number of seconds till the next update
 	int getSecondsToUpdate(void);
 
 	//! Get the current updateState
-	UpdateState getUpdateState(void) {return updateState;}
+	UpdateState getUpdateState(void) const {return updateState;}
 
 	//! Get list of novae
 	QString getNovaeList();
@@ -161,7 +167,7 @@ public:
 	float getLowerLimitBrightness();
 
 	//! Get count of novae from catalog
-	int getCountNovae(void) {return NovaCnt;}
+	int getCountNovae(void) const {return NovaCnt;}
 
 signals:
 	//! @param state the new update state.
@@ -179,7 +185,7 @@ public slots:
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
+	void messageTimeout(void) const;
 
 	void reloadCatalog(void);
 
@@ -203,11 +209,11 @@ private:
 
 	//! Get the version from the "version" value in the novae.json file
 	//! @return version string, e.g. "1"
-	int getJsonFileVersion(void);
+	int getJsonFileVersion(void) const;
 
 	//! Check format of the catalog of novae
 	//! @return valid boolean, e.g. "true"
-	bool checkJsonFileFormat(void);
+	bool checkJsonFileFormat(void) const;
 
 	//! Parse JSON file and load novae to map
 	QVariantMap loadNovaeMap(QString path=QString());
@@ -262,6 +268,7 @@ class NovaeStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_NOVAE_HPP_*/

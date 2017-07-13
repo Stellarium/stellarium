@@ -28,7 +28,7 @@
 
 FOVWindow::FOVWindow()
 	: StelDialog("FOV")
-	, fov(NULL)
+	, fov(Q_NULLPTR)
 {
 	ui = new Ui_fovWindowForm();
 }

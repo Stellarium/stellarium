@@ -56,8 +56,10 @@ public:
 	//! Load dynamically a module
 	//! @param moduleID the name of the module = name of the dynamic library file without extension
 	//! (e.g "mymodule" for mymodule.so or mymodule.dll)
-	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized
+	//! @return the loaded module or Q_NULLPTR in case of error. The returned Stelmodule still needs to be initialized
 	StelModule* loadPlugin(const QString& moduleID);
+
+	QObjectList loadExtensions(const QString& moduleID);
 
 	//! Unload all plugins
 	void unloadAllPlugins();
@@ -67,7 +69,7 @@ public:
 	//! @param b the value to set.
 	void setPluginLoadAtStartup(const QString& key, bool b);
 
-	//! Get the corresponding module or NULL if can't find it.
+	//! Get the corresponding module or Q_NULLPTR if can't find it.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	//! @param noWarning if true, don't display any warning if the module is not found.
 	StelModule* getModule(const QString& moduleID, bool noWarning=false);
@@ -84,7 +86,7 @@ public:
 	//! Contains the information read from the module.ini file
 	struct PluginDescriptor
 	{
-		PluginDescriptor() : loadAtStartup(false), loaded(false), pluginInterface(NULL) {;}
+		PluginDescriptor() : loadAtStartup(false), loaded(false), pluginInterface(Q_NULLPTR) {;}
 		//! The static info for the plugin.
 		StelPluginInfo info;
 		//! If true, the module is automatically loaded at startup
@@ -100,6 +102,14 @@ public:
 	//! Return the list of all the external module found in the modules directories
 	QList<PluginDescriptor> getPluginsList();
 
+	//! Returns the list of all currently registered extensions.
+	//! If using this method, you probably also want to subscribe to
+	//! the extensionsAdded() signal to handle all possible initialization orders.
+	QObjectList getExtensionList() { return extensions; }
+signals:
+	//! Called whenever new plugin extensions are added
+	void extensionsAdded(QObjectList newExtensions);
+
 private:
 	//! Generate properly sorted calling lists for each action (e,g, draw, update)
 	//! according to modules orders dependencies
@@ -107,6 +117,9 @@ private:
 
 	//! The main module list associating name:pointer
 	QMap<QString, StelModule*> modules;
+
+	//! All currently known extensions
+	QObjectList extensions;
 
 	//! The list of all module in the correct order for each action
 	QMap<StelModule::StelModuleActionName, QList<StelModule*> > callOrders;

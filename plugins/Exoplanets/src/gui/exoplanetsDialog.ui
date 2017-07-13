@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>501</height>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -421,7 +421,14 @@
              </layout>
             </item>
             <item>
-             <widget class="QComboBox" name="comboAxisY"/>
+             <widget class="QComboBox" name="comboAxisY">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -489,7 +496,14 @@
              </layout>
             </item>
             <item>
-             <widget class="QComboBox" name="comboAxisX"/>
+             <widget class="QComboBox" name="comboAxisX">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_2">

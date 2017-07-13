@@ -36,42 +36,43 @@
 #include "gsatellite/gSatTEME.hpp"
 #include "gsatellite/gTime.hpp"
 
-//constants for predict visibility
-#define  RADAR_SUN   1
-#define  VISIBLE     2
-#define  RADAR_NIGHT 3
-#define  NOT_VISIBLE 4
-
 //! Wrapper allowing compatibility between gsat and Stellarium/Qt.
 //! @ingroup satellites
 class gSatWrapper
 {
 
 public:
+	enum Visibility
+	{
+		//constants for visibility prediction
+		UNKNOWN=0,
+		RADAR_SUN=1,
+		VISIBLE=2,
+		RADAR_NIGHT=3,
+		NOT_VISIBLE=4
+	};
         gSatWrapper(QString designation, QString tle1,QString tle2);
         ~gSatWrapper();
 
-	// Operation updateEpoch
+	// Operation setEpoch
 	//! @brief This operation update Epoch timestamp for gSatTEME object
 	//! from Stellarium Julian Date.
-	void updateEpoch();
-
 	void setEpoch(double ai_julianDaysEpoch);
 
 	// Operation getTEMEPos
 	//! @brief This operation isolate gSatTEME getPos operation.
 	//! @return Vec3d with TEME position. Units measured in Km.
-	Vec3d getTEMEPos();
+	Vec3d getTEMEPos() const;
 
 	// Operation getSunECIPos
 	//! @brief Get Sun positions in ECI system.
 	//! @return Vec3d with ECI position.
-	Vec3d getSunECIPos();
+	static Vec3d getSunECIPos();
 
 	// Operation getTEMEVel
 	//! @brief This operation isolate gSatTEME getVel operation.
 	//! @return Vec3d with TEME speed. Units measured in Km/s.
-	Vec3d getTEMEVel();
+	Vec3d getTEMEVel() const;
 
 	// Operation:  getSubPoint
 	//! @brief This operation isolate getSubPoint method of gSatTEME object.
@@ -79,7 +80,7 @@ public:
 	//!    Latitude:  Coord[0]  measured in degrees\n
 	//!    Longitude: Coord[1]  measured in degrees\n
         //!    Altitude:  Coord[2]  measured in Km.\n
-	Vec3d getSubPoint();
+	Vec3d getSubPoint() const;
 
 	// Operation getAltAz
 	//! @brief This operation compute the coordinates in StelCore::FrameAltAz
@@ -88,7 +89,7 @@ public:
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
 	//!   http://www.celestrak.com/columns/v02n02/
-	Vec3d getAltAz();
+	Vec3d getAltAz() const;
 
         // Operation getSlantRange
         //! @brief This operation compute the slant range (distance between the
@@ -96,34 +97,34 @@ public:
         //! @param &ao_slantRange Reference to a output variable where the method store the slant range measured in Km
         //! @param &ao_slantRangeRate Reference to a output variable where the method store the slant range variation in Km/s
         //! @return void
-	void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate); //meassured in km and km/s
+	void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate) const; //measured in km and km/s
 
 
         // Operation getVisibilityPredict
         //! @brief This operation predicts the satellite visibility contidions.
         //! This prediction can return 4 different states
-        //!   RADAR_SUN when satellite an observer are in the sunlit
-        //!   VISIBLE   when satellite is in sunlit and observer is in the dark. Satellite could be visible in the sky.
+	//!   RADAR_SUN when satellite and observer are in the sunlight
+	//!   VISIBLE   when satellite is in sunlight and observer is in the dark. Satellite could be visible in the sky.
         //!   RADAR_NIGHT when satellite is eclipsed by the earth shadow.
         //!   NOT_VISIBLE The satellite is under the observer horizon
         //! @return
         //!     1 if RADAR_SUN
         //!     2 if VISIBLE
-        //!     3 if RADAR_NIGHt
+	//!     3 if RADAR_NIGHT
         //!     3 if NOT_VISIBLE
         //! @par References
         //!   Fundamentals of Astrodynamis and Applications (Third Edition) pg 898
         //!   David A. Vallado
-        int getVisibilityPredict();
+	Visibility getVisibilityPredict();
 
-	double getPhaseAngle();
-	gTime	getEpoch() { return epoch; }
+	double getPhaseAngle() const;
+	gTime	getEpoch() const { return epoch; }
 
 
 //private:
         // Operation calcObserverECIPosition
-        //! @brief This operation compute the observer ECI coordinates in Geocentric
-        //! Ecuatorial Coordinate System (IJK) for the ai_epoch time.
+	//! @brief This operation computes the observer ECI coordinates in Geocentric
+	//! Equatorial Coordinate System (IJK) for the ai_epoch time.
         //! This position can be asumed as observer position in TEME framework without an appreciable error.
         //! ECI axis (IJK) are parallel to StelCore::EquinoxEQ Framework but centered in the earth centre
         //! instead the observer position.
@@ -133,12 +134,22 @@ public:
 	//!   http://www.celestrak.com/columns/v02n02/
         //! @param[out] ao_position Observer ECI position vector measured in Km
         //! @param[out] ao_vel Observer ECI velocity vector measured in Km/s
-        void calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel);
+	static void calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel) ;
 
 
 private:
+	//! do the actual work to compute a cached value.
+	static void updateSunECIPos();
+
 	gSatTEME *pSatellite;
-        gTime	 epoch;
+	static gTime	 epoch;
+
+	// GZ We can avoid many computations (solar and observer positions for every satellite) by computing them only once for all objects.
+	static gTime lastSunECIepoch; // store last time of computation to avoid all-1 computations.
+	static Vec3d sunECIPos;       // enough to have these once.
+	static Vec3d observerECIPos;
+	static Vec3d observerECIVel;
+	static gTime lastCalcObserverECIPosition;
 
 };
 

@@ -34,17 +34,15 @@ class LocationService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	LocationService(const QByteArray& serviceName, QObject* parent = 0);
+	LocationService(QObject* parent = Q_NULLPTR);
 
-	virtual ~LocationService() {}
-
-protected:
+	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("location"); }
 	//! @brief Implements the HTTP GET requests
 	//! @see \ref rcLocationServiceGET
-	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 	//! @brief Implements the HTTP POST requests
 	//! @see \ref rcLocationServicePOST
-	virtual void postImpl(const QByteArray &operation, const APIParameters& parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
+	virtual void post(const QByteArray &operation, const APIParameters& parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelCore* core;
 	StelLocationMgr* locMgr;

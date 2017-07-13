@@ -27,23 +27,28 @@
 
 Skybright::Skybright() : SN(1.f)
 {
-	setDate(2003, 8, 0);
+	setDate(2003, 8, 0.f, 0.f);
 	setLocation(M_PI_4, 1000., 25.f, 40.f);
 	setSunMoon(0.5, 0.5);
 }
 
 // month : 1=Jan, 12=Dec
 // moonPhase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-void Skybright::setDate(const int year, const int month, const float moonPhase)
+void Skybright::setDate(const int year, const int month, const float moonPhase, const float moonMag)
 {
-	magMoon = -12.73f + 1.4896903f * fabsf(moonPhase) + 0.04310727f * powf(moonPhase, 4.f);
+	// GZ The original formula set by Schaefer computes lunar magnitude here. But it does not take eclipse into account.
+	//    For 0.16 we changed that. (Bug LP:#1471546)
+	// Maybe we can use the moon mag formula elsewhere, don't delete yet!
+	Q_UNUSED(moonPhase);
+	//magMoon = -12.73f + 1.4896903f * fabsf(moonPhase) + 0.04310727f * powf(moonPhase, 4.f);
+	magMoon=moonMag;
 
 	// GZ: Bah, a very crude estimate for the solar position...
-	RA = (month - 3.f) * 0.52359878f;
+	RA = (month - 3) * 0.52359878f;
 
 	// Term for dark sky brightness computation.
 	// GZ: This works for a few 11-year solar cycles around 1992... ... cos((y-1992)/11 * 2pi)
-	bNightTerm = 1.0e-13 + 0.3e-13 * cosf(0.57118f * (year-1992.f));
+	bNightTerm = 1.0e-13 + 0.3e-13 * cosf(0.57118f * (year-1992));
 }
 
 

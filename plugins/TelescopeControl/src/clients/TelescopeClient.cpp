@@ -47,6 +47,7 @@
 	#include <sys/time.h>
 #endif
 
+const QString TelescopeClient::TELESCOPECLIENT_TYPE = QStringLiteral("Telescope");
 
 TelescopeClient *TelescopeClient::create(const QString &url)
 {
@@ -74,7 +75,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	else
 	{
 		qWarning() << "WARNING - telescope definition" << url << "not recognised";
-		return NULL;
+		return Q_NULLPTR;
 	}
 
 	Equinox eq = EquinoxJ2000;
@@ -83,7 +84,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 
 	qDebug() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == EquinoxJNow) ? "JNow" : "J2000") << params;
 
-	TelescopeClient * newTelescope = 0;
+	TelescopeClient * newTelescope = Q_NULLPTR;
 	
 	//if (type == "Dummy")
 	if (type == "TelescopeServerDummy")
@@ -135,10 +136,8 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 		oss << "<h2>" << nameI18n << "</h2>";
 	}
 
-	oss << getPositionInfoString(core, flags);
-
+	oss << getCommonInfoString(core, flags);
 	oss << getTelescopeInfoString(core, flags);
-
 	postProcessInfoString(str, flags);
 
 	return str;
@@ -267,6 +266,8 @@ void TelescopeTCP::hangup(void)
 //! "Stellarium telescope control protocol" text file
 void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 {
+	Q_UNUSED(selectObject);
+
 	if (!isConnected())
 		return;
 

@@ -37,7 +37,7 @@ class ShortcutLineEdit : public QLineEdit
 	Q_OBJECT
 
 public:
-	ShortcutLineEdit(QWidget* parent = 0);
+	ShortcutLineEdit(QWidget* parent = Q_NULLPTR);
 
 	QKeySequence getKeySequence();
 	bool isEmpty() const;

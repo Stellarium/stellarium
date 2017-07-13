@@ -23,6 +23,7 @@
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
 #include "VecMath.hpp"
+#include "GeomMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
@@ -42,7 +43,16 @@ typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
 class StelFont;
 class StelPainter;
 class StelTranslator;
+class StelOBJ;
+class StelOpenGLArray;
+template <class T> class QFuture;
+class QOpenGLBuffer;
+class QOpenGLFunctions;
 class QOpenGLShaderProgram;
+class QOpenGLTexture;
+#ifdef DEBUG_SHADOWMAP
+class QOpenGLFramebufferObject;
+#endif
 
 // Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
@@ -73,6 +83,7 @@ public:
 class Planet : public StelObject
 {
 public:
+	static const QString PLANET_TYPE;
 	friend class SolarSystem;
 
 	Q_ENUMS(PlanetType)
@@ -82,12 +93,18 @@ public:
 	// GZ: Until 0.13 QStrings were used for types.
 	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
 	// GZ: If other types are introduced, add here and the string in init().
+	// GZ TODO for 0.16: Preferably convert this into a bitfield and allow several bits set:
+	// Cubewanos, SDO, OCO, Sednoids are Asteroids, Pluto is a Plutino and DwarfPlanet, Ceres is Asteroid and DwarfPlanet etc.!
+	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
 	{
 		isStar,			// ssystem.ini: type="star"
 		isPlanet,		// ssystem.ini: type="planet"
 		isMoon,			// ssystem.ini: type="moon"
-		isAsteroid,		// ssystem.ini: type="asteroid"
+		isObserver,		// ssystem.ini: type="observer"
+		isArtificial,		// Used in transitions from planet to planet.
+		isAsteroid,		// ssystem.ini: type="asteroid". all types >= isAsteroid are "Minor Bodies".
+					// Put other things (spacecraft etc) before isAsteroid.
 		isPlutino,		// ssystem.ini: type="plutino"
 		isComet,		// ssystem.ini: type="comet"
 		isDwarfPlanet,		// ssystem.ini: type="dwarf planet"
@@ -95,7 +112,7 @@ public:
 		isSDO,			// ssystem.ini: type="scattered disc object"
 		isOCO,			// ssystem.ini: type="oco"
 		isSednoid,		// ssystem.ini: type="sednoid"
-		isUNDEFINED		// ssystem.ini: type=<anything else>
+		isUNDEFINED		// ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
 
 	enum PlanetOrbitColorStyle
@@ -105,39 +122,28 @@ public:
 		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
 
-/*	enum ApparentMagnitudeAlgorithm
-	{
-		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Harris,			// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
-		UndefinedAlgorithm,
-		Generic			// Visual magnitude based on phase angle and albedo
-	};
-*/
 	enum ApparentMagnitudeAlgorithm
 	{
-		Mueller_1893,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Astr_Alm_1984,	// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
-		Expl_Sup_1992,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
-		Expl_Sup_2013,	// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
-//		Planesas,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-//		Mueller,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-//		Harris,			// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		Mueller_1893,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Astr_Alm_1984,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
+		Expl_Sup_1992,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
+		Expl_Sup_2013,		// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
 		UndefinedAlgorithm,
-		Generic		// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
+		Generic			// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
 
 
 	Planet(const QString& englishName,
-	       int flagLighting,
 	       double radius,
 	       double oblateness,
 	       Vec3f halocolor,
 	       float albedo,
+	       float roughness,
 	       const QString& texMapName,
 	       const QString& normalMapName,
+	       const QString& objModelName,
 	       posFuncType _coordFunc,
-	       void* userDataPtr,
+	       void* anOrbitPtr,
 	       OsculatingFunctType *osculatingFunc,
 	       bool closeOrbit,
 	       bool hidden,
@@ -185,10 +191,13 @@ public:
 	virtual float getVMagnitude(const StelCore* core) const;
 	virtual float getSelectPriority(const StelCore* core) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual QString getType(void) const {return "Planet";}
+	virtual QString getType(void) const {return PLANET_TYPE;}
+	virtual QString getID(void) const { return englishName; }
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;
+	QString getCommonEnglishName(void) const {return englishName;}
+	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
@@ -205,8 +214,8 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
-	//! Get the radius of the planet in AU.
-	//! @return the radius of the planet in astronomical units.
+	//! Get the equator radius of the planet in AU.
+	//! @return the equator radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
 	//! Get the value (1-f) for oblateness f.
 	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
@@ -220,20 +229,25 @@ public:
 	//! Get albedo
 	double getAlbedo(void) const { return albedo; }
 
-	const QString& getTextMapName() const {return texMapName;}	
+	const QString& getTextMapName() const {return texMapName;}
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
 	PlanetType getPlanetType() const {return pType;}
 
 	void setNativeName(QString planet) { nativeName = planet; }
+
+	//! set the IAU moon number (designation of the moon), if any.
+	void setIAUMoonNumber(QString designation);
 
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
 	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
 	//! A return value of 100 signals invalid result.
 	float getMeanOppositionMagnitude() const;
-	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
-	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
-	void setApparentMagnitudeAlgorithm(QString algorithm);
+	//
+	static ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm()  { return vMagAlgorithm; }
+	static const QString getApparentMagnitudeAlgorithmString()  { return vMagAlgorithmMap.value(vMagAlgorithm); }
+	static void setApparentMagnitudeAlgorithm(QString algorithm);
+	static void setApparentMagnitudeAlgorithm(ApparentMagnitudeAlgorithm algorithm){ vMagAlgorithm=algorithm; }
 
 	//! Compute the z rotation to use from equatorial to geographic coordinates. For general applicability we need both time flavours:
 	//! @param JD is JD(UT) for Earth
@@ -247,7 +261,7 @@ public:
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingnode(void) const {return re.ascendingNode;}
+	double getRotAscendingNode(void) const {return re.ascendingNode;}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
@@ -256,7 +270,7 @@ public:
 
 	//! Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double dateJDE);
-	void computePosition(const double dateJDE);
+	virtual void computePosition(const double dateJDE);
 
 	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
 	//! This requires both flavours of JD in cases involving Earth.
@@ -268,7 +282,7 @@ public:
 	double getElongation(const Vec3d& obsPos) const;
 	//! Get the angular size of the spheroid of the planet (i.e. without the rings)
 	double getSpheroidAngularSize(const StelCore* core) const;
-	//! Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
+	//! Get the planet phase [0=dark..1=full] for an observer at pos obsPos in heliocentric coordinates (in AU)
 	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
@@ -287,8 +301,7 @@ public:
 
 	void setRings(Ring* r) {rings = r;}
 
-	void setSphereScale(float s) {sphereScale = s;}
-	float getSphereScale(void) const {return sphereScale;}
+	void setSphereScale(float s) { if(s!=sphereScale) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
@@ -321,15 +334,15 @@ public:
 	LinearFader orbitFader;
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
-	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
-	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
+	Vec3d orbit[ORBIT_SEGMENTS+1];  // store heliocentric coordinates for drawing the orbit
+	Vec3d orbitP[ORBIT_SEGMENTS+1]; // store local coordinate for orbit
 	double lastOrbitJDE;
-	double deltaJDE;                 // time difference between positional updates.
+	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;
-	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
-	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
-					 // the end: good for elliptical orbits, bad for parabolic
-					 // and hyperbolic orbits
+	bool orbitCached;               // whether orbit calculations are cached for drawing orbit yet
+	bool closeOrbit;                // whether to connect the beginning of the orbit line to
+					// the end: good for elliptical orbits, bad for parabolic
+					// and hyperbolic orbits
 
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
@@ -414,11 +427,42 @@ public:
 	QVector<const Planet*> getCandidatesForShadow() const;
 	
 protected:
+	struct PlanetOBJModel
+	{
+		PlanetOBJModel();
+		~PlanetOBJModel();
+
+		//! Loads the data from the StelOBJ into the StelOpenGLArray
+		bool loadGL();
+
+		void performScaling(double scale);
+
+		//! The BBox of the original model before any transformations
+		AABBox bbox;
+		//! Contains the original positions in model space in km, they need scaling and projection
+		QVector<Vec3f> posArray;
+		//! True when the positions need to be rescaled before drawing
+		bool needsRescale;
+		//! Contains the scaled positions (sphere scale in AU), need StelProjector transformation for display
+		QVector<Vec3f> scaledArray;
+		//! Used to store the projected array data, avoids re-allocation each frame
+		QVector<Vec3f> projectedPosArray;
+		//! An OpenGL buffer for the projected positions
+		QOpenGLBuffer* projPosBuffer;
+		//! The single texture to use
+		StelTextureSP texture;
+		//! The original StelOBJ data, deleted after loading to GL
+		StelOBJ* obj;
+		//! The opengl array, created by loadObjModel() but filled later in main thread
+		StelOpenGLArray* arr;
+
+	};
+
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	void computeModelMatrix(Mat4d &result) const;
 
-	Vec3f getCurrentOrbitColor();
+	Vec3f getCurrentOrbitColor() const;
 	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
@@ -426,45 +470,67 @@ protected:
 	// Draw the 3d model. Call the proper functions if there are rings etc..
 	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
 
+	// Draws the OBJ model, assuming it is available
+	// @return false if the model can currently not be drawn (not loaded)
+	bool drawObjModel(StelPainter* painter, float screenSz);
+
+	bool drawObjShadowMap(StelPainter* painter, QMatrix4x4 &shadowMatrix);
+
+	//! Starts the OBJ loading process, if it has not been done yet.
+	//! Returns true when the OBJ is ready to draw
+	bool ensureObjLoaded();
+
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
 
+	PlanetOBJModel* loadObjModel() const;
+
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString nativeName;              // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;              // Texture file path
-	int flagLighting;                // Set whether light computation has to be proceed
+	//int flagLighting;                // Set whether light computation has to be proceed. NO LONGER USED (always on!)
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
-	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system
-					 // centered on the parent Planet
+	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system around the parent body. To get heliocentric coordinates, use getHeliocentricEclipticPos()
+	// centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
-	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
-	Vec3f haloColor;                 // exclusively used for drawing the planet halo
+//	Vec3d previousScreenPos;         // The position of this planet in the previous frame. 0.16pre: DEAD CODE!
+	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
-	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
-	float absoluteMagnitude;         // since 2017: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
+	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
 					 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
+	float albedo;                    // Planet albedo. Used for magnitude computation when no other formula in use. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
+	float roughness;                 // Oren-Nayar roughness for Moon and OBJ-based models
+	float outgas_intensity;          // The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
+					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
+	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
+					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
-					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+	// Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
 	float axisRotation;              // Rotation angle of the Planet on its axis.
-					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
+	// For Earth, this should be Greenwich Mean Sidereal Time GMST.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
+	PlanetOBJModel* objModel;               // Planet model (when it has been loaded)
+	QFuture<PlanetOBJModel*>* objModelLoader;// For async loading of the OBJ file
+
+	QString objModelPath;
+
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
-					 // it is used for sorting while drawing
-	float sphereScale;               // Artificial scaling for better viewing
+	// it is used for sorting while drawing
+	float sphereScale;               // Artificial scaling for better viewing.
 	double lastJDE;                  // caches JDE of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;
-	void* userDataPtr;               // this is always used with an Orbit object.
+	void* orbitPtr;               // this is always used with an Orbit object.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
@@ -474,13 +540,17 @@ protected:
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
-	bool halo;                       // Does the planet have a halo?	
+	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
 
-	ApparentMagnitudeAlgorithm vMagAlgorithm;
+	static ApparentMagnitudeAlgorithm vMagAlgorithm;
+
+	QOpenGLFunctions* gl;
+
+	static bool shaderError;		// True if loading shaders caused errors
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex;	
+	static StelTextureSP hintCircleTex;
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 
@@ -488,14 +558,21 @@ protected:
 	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
 	static int customGrsLongitude;		// Longitude of Great Red Spot (System II, degrees)
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
-	
+
+private:
+	QString iauMoonNumber;
+
 	// Shader-related variables
 	struct PlanetShaderVars {
-		int projectionMatrix;
+		// Vertex attributes
 		int texCoord;
 		int unprojectedVertex;
 		int vertex;
-		int texture;
+		int normalIn;
+
+		// Common uniforms
+		int projectionMatrix;
+		int tex;
 		int lightDirection;
 		int eyeDirection;
 		int diffuseLight;
@@ -504,34 +581,80 @@ protected:
 		int shadowData;
 		int sunInfo;
 		int skyBrightness;
-		
-		void initLocations(QOpenGLShaderProgram*);
-	};
-	static PlanetShaderVars planetShaderVars;
-	static QOpenGLShaderProgram* planetShaderProgram;
+		int orenNayarParameters;
+		int outgasParameters;
 
-	// Shader-related variables
-	struct RingPlanetShaderVars : public PlanetShaderVars {
+		// Moon-specific variables
+		int earthShadow;
+		int normalMap;
+
 		// Rings-specific variables
 		int isRing;
 		int ring;
 		int outerRadius;
 		int innerRadius;
 		int ringS;
+
+		// Shadowmap variables
+		int shadowMatrix;
+		int shadowTex;
+		int poissonDisk;
+		
+		void initLocations(QOpenGLShaderProgram*);
 	};
-	static RingPlanetShaderVars ringPlanetShaderVars;
+
+	//! Encapsulates some calculated information used for rendering
+	struct RenderData
+	{
+		Mat4d modelMatrix;
+		Mat4d mTarget;
+		QVector<const Planet*> shadowCandidates;
+		QMatrix4x4 shadowCandidatesData;
+		Vec3d eyePos;
+	};
+
+	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
+	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const;
+
+	static PlanetShaderVars planetShaderVars;
+	static QOpenGLShaderProgram* planetShaderProgram;
+
+	static PlanetShaderVars ringPlanetShaderVars;
 	static QOpenGLShaderProgram* ringPlanetShaderProgram;
 	
-	struct MoonShaderVars : public PlanetShaderVars {
-		// Moon-specific variables
-		int earthShadow;
-		int normalMap;
-	};
-	static MoonShaderVars moonShaderVars;
+	static PlanetShaderVars moonShaderVars;
 	static QOpenGLShaderProgram* moonShaderProgram;
+
+	static PlanetShaderVars objShaderVars;
+	static QOpenGLShaderProgram* objShaderProgram;
+
+	static PlanetShaderVars objShadowShaderVars;
+	static QOpenGLShaderProgram* objShadowShaderProgram;
+
+	static PlanetShaderVars transformShaderVars;
+	static QOpenGLShaderProgram* transformShaderProgram;
+
+	static bool shadowInitialized;
+	static Vec2f shadowPolyOffset;
+#ifdef DEBUG_SHADOWMAP
+	static QOpenGLFramebufferObject* shadowFBO;
+#else
+	static unsigned int shadowFBO;
+#endif
+	static unsigned int shadowTex;
+
 	
 	static void initShader();
 	static void deinitShader();
+	static bool initFBO();
+	static void deinitFBO();
+
+	static QOpenGLShaderProgram* createShader(const QString& name,
+						  PlanetShaderVars& vars,
+						  const QByteArray& vSrc,
+						  const QByteArray& fSrc,
+						  const QByteArray& prefix=QByteArray(),
+						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
 };
 
 #endif // _PLANET_HPP_

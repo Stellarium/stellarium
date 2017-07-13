@@ -65,7 +65,7 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 	return response;
 }
 
-QString TuiNodeBool::getDisplayText() 
+QString TuiNodeBool::getDisplayText() const
 {
 	// TODO: The label/value separation needs to be reworked. This way of using
 	// the colon is not i18n-friendly. --BM

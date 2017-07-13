@@ -27,16 +27,59 @@
 #include <QTcpSocket>
 #include <QTimerEvent>
 
+Q_LOGGING_CATEGORY(syncClient,"stel.plugin.remoteSync.client")
+
 using namespace SyncProtocol;
 
-SyncClient::SyncClient(QObject *parent)
-	: QObject(parent), isConnecting(false), server(NULL), timeoutTimerId(-1)
+SyncClient::SyncClient(SyncOptions options, const QStringList &excludeProperties, QObject *parent)
+	: QObject(parent),
+	  options(options),
+	  stelPropFilter(excludeProperties),
+	  isConnecting(false),
+	  server(Q_NULLPTR),
+	  timeoutTimerId(-1)
 {
+	handlerList.resize(MSGTYPE_SIZE);
+	handlerList[ERROR] = new ClientErrorHandler(this);
+	handlerList[SERVER_CHALLENGE] = new ClientAuthHandler(this);
+	handlerList[SERVER_CHALLENGERESPONSEVALID] = new ClientAuthHandler(this);
+	handlerList[ALIVE] = new ClientAliveHandler();
+
+	//these are the actual sync handlers
+	if(options.testFlag(SyncTime))
+		handlerList[TIME] = new ClientTimeHandler();
+	if(options.testFlag(SyncLocation))
+		handlerList[LOCATION] = new ClientLocationHandler();
+	if(options.testFlag(SyncSelection))
+		handlerList[SELECTION] = new ClientSelectionHandler();
+	if(options.testFlag(SyncStelProperty))
+		handlerList[STELPROPERTY] = new ClientStelPropertyUpdateHandler(options.testFlag(SkipGUIProps), stelPropFilter);
+	if(options.testFlag(SyncView))
+		handlerList[VIEW] = new ClientViewHandler();
+	if(options.testFlag(SyncFov))
+		handlerList[FOV] = new ClientFovHandler();
+
+	//fill unused handlers with dummies
+	for(int t = TIME;t<MSGTYPE_SIZE;++t)
+	{
+		if(!handlerList[t]) handlerList[t] = new DummyMessageHandler();
+	}
 }
 
 SyncClient::~SyncClient()
 {
 	disconnectFromServer();
+	delete server;
+
+	//delete handlers
+	foreach(SyncMessageHandler* h, handlerList)
+	{
+		if(h)
+			delete h;
+	}
+	handlerList.clear();
+
+	qCDebug(syncClient)<<"Destroyed";
 }
 
 void SyncClient::connectToServer(const QString &host, const int port)
@@ -46,64 +89,22 @@ void SyncClient::connectToServer(const QString &host, const int port)
 		disconnectFromServer();
 	}
 
-	handlerList.resize(MSGTYPE_SIZE);
-	handlerList[ERROR] = new ClientErrorHandler(this);
-	handlerList[SERVER_CHALLENGE] = new ClientAuthHandler(this);
-	handlerList[SERVER_CHALLENGERESPONSEVALID] = new ClientAuthHandler(this);
-	handlerList[ALIVE] = new ClientAliveHandler();
-
-	//these are the actual sync handlers
-	handlerList[TIME] = new ClientTimeHandler();
-	handlerList[LOCATION] = new ClientLocationHandler();
-	handlerList[SELECTION] = new ClientSelectionHandler();
-
-	server = new SyncRemotePeer(new QTcpSocket(this), true, handlerList );
-	connect(server->sock, SIGNAL(connected()), this, SLOT(socketConnected()));
-	connect(server->sock, SIGNAL(disconnected()),this, SLOT(socketDisconnected()));
-	connect(server->sock, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketError(QAbstractSocket::SocketError)));
-	connect(server->sock, SIGNAL(readyRead()), this, SLOT(dataReceived()));
+	QTcpSocket* sock = new QTcpSocket();
+	connect(sock, SIGNAL(connected()), this, SLOT(socketConnected()));
+	server = new SyncRemotePeer(sock, true, handlerList );
+	connect(server, SIGNAL(disconnected(bool)), this, SLOT(serverDisconnected(bool)));
 
 	isConnecting = true;
-	qDebug()<<"[SyncClient] Connecting to"<<(host + ":" + QString::number(port));
-	server->sock->connectToHost(host,port);
+	qCDebug(syncClient)<<"Connecting to"<<(host + ":" + QString::number(port))<<", with options"<<options;
 	timeoutTimerId = startTimer(2000,Qt::VeryCoarseTimer); //the connection is checked all 5 seconds
+	sock->connectToHost(host,port);
 }
 
 void SyncClient::disconnectFromServer()
 {
 	if(server)
 	{
-		if(server->sock->state()!= QAbstractSocket::UnconnectedState)
-		{
-			server->sock->disconnectFromHost();
-			if(!server)
-				return;
-
-			if(server->sock->state() != QAbstractSocket::UnconnectedState && !server->sock->waitForDisconnected(500))
-			{
-				qDebug()<<"[SyncClient] Error disconnecting, aborting socket:"<<server->sock->error();
-				server->sock->abort();
-			}
-		}
-
-		//this must be tested AGAIN because waitForDisconnected might re-enter here trough the disconnected signal
-		if(server)
-		{
-			killTimer(timeoutTimerId);
-
-			isConnecting = false;
-			server->sock->deleteLater();
-			delete server;
-			server = NULL;
-
-			//delete handlers
-			foreach(SyncMessageHandler* h, handlerList)
-			{
-				if(h)
-					delete h;
-			}
-			handlerList.clear();
-		}
+		server->disconnectPeer();
 	}
 }
 
@@ -121,65 +122,25 @@ void SyncClient::checkTimeout()
 	if(!server)
 		return;
 
-	qint64 curTime = QDateTime::currentMSecsSinceEpoch();
-	qint64 diff = curTime - server->lastReceiveTime;
-	qint64 writeDiff = curTime - server->lastSendTime;
-
-
-	if(writeDiff>5000)
-	{
-		//send an ALIVE message
-		Alive msg;
-		server->writeMessage(msg);
-	}
-
-
-	if(diff > 15000)
-	{
-		qDebug()<<"[SyncClient] No data received for"<<diff<<"ms, timing out";
-		emitError(q_("Connection timed out"));
-		emit connectionError();
-	}
+	server->checkTimeout();
 }
 
-
-bool SyncClient::isConnected() const
+void SyncClient::serverDisconnected(bool clean)
 {
-	return server->sock->state() == QAbstractSocket::ConnectedState;
+	qCDebug(syncClient)<<"Disconnected from server";
+	if(!clean)
+		errorStr = server->getError();
+	server->deleteLater();
+	server = Q_NULLPTR;
+	emit disconnected(errorStr.isEmpty());
 }
 
 void SyncClient::socketConnected()
 {
-	isConnecting = false;
-	qDebug()<<"[SyncClient] Socket connection established, waiting for challenge";
-	//set low delay option
-	server->sock->setSocketOption(QAbstractSocket::LowDelayOption,1);
+	qCDebug(syncClient)<<"Socket connected";
 }
 
-void SyncClient::socketDisconnected()
+void SyncClient::emitServerError(const QString &errorStr)
 {
-	qDebug()<<"[SyncClient] Socket disconnected";
-	disconnectFromServer();
-	emit disconnected();
-}
-
-void SyncClient::socketError(QAbstractSocket::SocketError err)
-{
-	Q_UNUSED(err);
-	emitError(server->sock->errorString());
-}
-
-void SyncClient::emitError(const QString &msg)
-{
-	errorStr = msg;
-	qDebug()<<"[SyncClient] Connection error:"<<msg<<", connection state:"<<server->sock->state();
-	disconnectFromServer();
-	emit connectionError();
-}
-
-void SyncClient::dataReceived()
-{
-	qDebug()<<"[SyncClient] server data received";
-	//a chunk of data is avaliable for reading
-	server->receiveMessage();
+	this->errorStr = errorStr;
 }

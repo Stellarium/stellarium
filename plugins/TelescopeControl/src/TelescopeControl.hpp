@@ -88,9 +88,17 @@ public:
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	// empty as its not celestial objects
 	virtual QStringList listAllObjects(bool) const { return QStringList(); }
 	virtual QString getName() const { return "Telescope Control"; }
+	virtual QString getStelObjectType() const;
 	virtual bool configureGui(bool show = true);
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -98,8 +106,8 @@ public:
 	//! Send a J2000-goto-command to the specified telescope
 	//! @param telescopeNr the number of the telescope
 	//! @param j2000Pos the direction in equatorial J2000 frame
-	//! @param selectObject selected object (if any; NULL if move is not based on an object)
-	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = NULL);
+	//! @param selectObject selected object (if any; Q_NULLPTR if move is not based on an object)
+	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
 	
 	//! Remove all currently registered telescopes
 	void deleteAllTelescopes();
@@ -379,6 +387,7 @@ class TelescopeControlStelPluginInterface : public QObject, public StelPluginInt
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_TELESCOPE_CONTROL_HPP_*/

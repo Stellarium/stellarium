@@ -40,6 +40,7 @@ public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
+	virtual void computePosition(const double dateJDE);
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -49,8 +50,8 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "", "", NULL, NULL, 0, false, true, false, true, ""), dest(0),
-		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
+		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, true, "artificial"),
+		dest(Q_NULLPTR), orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	// set parent = sun:
 	if (orig->getParent())
@@ -137,6 +138,12 @@ Vec3d ArtificialPlanet::getRot(const Planet* p)
 	return r;
 }
 
+void ArtificialPlanet::computePosition(const double dateJDE)
+{
+	Q_UNUSED(dateJDE)
+	// This does nothing, but avoids a crash.
+}
+
 void ArtificialPlanet::computeAverage(double f1)
 {
 	const double f2 = 1.0 - f1;
@@ -169,7 +176,7 @@ StelObserver::StelObserver(const StelLocation &loc) : currentLocation(loc)
 {
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	planet = ssystem->searchByEnglishName(loc.planetName);
-	if (planet==NULL)
+	if (planet==Q_NULLPTR)
 	{
 		qWarning() << "Can't create StelObserver on planet " + loc.planetName + " because it is unknown. Use Earth as default.";
 		planet=ssystem->getEarth();
@@ -192,29 +199,59 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 }
 
 // Used to approximate solution with assuming a spherical planet.
-// Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
+// Since V0.14, we follow Meeus, Astr. Alg. 2nd ed, Ch.11., but used offset rho in a wrong way. (offset angle phi in distance rho.)
 double StelObserver::getDistanceFromCenter(void) const
 {
-	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet od SpaceShipObserver has this
+	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
 		return currentLocation.altitude/(1000*AU);
 
-	double a=getHomePlanet()->getRadius();
-	double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
+	const double a=getHomePlanet()->getRadius();
+	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
 	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
 		return a * bByA;
 
-	double latRad=currentLocation.latitude*(M_PI/180.0);
-	double u = atan( bByA * tan(latRad));
+	const double latRad=currentLocation.latitude*(M_PI/180.0);
+	const double u = atan( bByA * tan(latRad));
 	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	Q_ASSERT(fabs(u)<= fabs(latRad));
-	double altFix=(currentLocation.altitude/(1000.0*AU)) / a;
+	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 
-	double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
-	double rhoCosPhiPrime= cos(u) + altFix*cos(latRad);
+	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	//double rhoCosPhiPrime= bByA * cos(u) + altFix*cos(latRad); // WARNING! bByA is not in the book!!! THIS IS A TEST!
+	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
 
-	double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
 	return rho*a;
+}
+
+// Used to approximate solution with assuming a spherical planet.
+// Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
+// Since V0.16, we can produce the usual offset values plus geocentric latitude phi'.
+Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
+{
+	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
+		return currentLocation.altitude/(1000*AU);
+
+	const double a=getHomePlanet()->getRadius();
+	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
+
+	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
+		return a * bByA;
+
+	const double latRad=currentLocation.latitude*(M_PI/180.0);
+	const double u = atan( bByA * tan(latRad));
+	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	Q_ASSERT(fabs(u)<= fabs(latRad));
+	const double altFix = currentLocation.altitude/(1000.0*AU*a);
+
+	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
+
+	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	//return rho*a;
+	double phiPrime=asin(rhoSinPhiPrime/rho);
+	return Vec3d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime);
 }
 
 // For Earth we require JD, for other planets JDE to describe rotation!
@@ -239,7 +276,7 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 }
 
 SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds, double atimeToGo) : StelObserver(startLoc),
-		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(NULL), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
+		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(Q_NULLPTR), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
 {
 	if(timeToGo<0.0)
 		timeToGo = transitSeconds;
@@ -253,7 +290,7 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 		{
 			qWarning() << "Can't move from planet " + moveStartLocation.planetName + " to planet " + moveTargetLocation.planetName + " because it is unknown";
 			timeToGo = -1.;	// Will abort properly the move
-			if (targetPlanet==NULL)
+			if (targetPlanet==Q_NULLPTR)
 			{
 				// Stay at the same position as a failover
 				moveTargetLocation = moveStartLocation;
@@ -284,19 +321,21 @@ bool SpaceShipObserver::update(double deltaTime)
 	{
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
-		LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 		SolarSystem* ss = GETSTELMODULE(SolarSystem);
-		if (ls->getFlagLandscapeAutoSelection())
+
+		// we have to avoid auto-select landscape in case the selected new landscape is on our target planet (true if landscape sets location). (LP:#1700199)
+		if ( (lmgr->getFlagLandscapeAutoSelection()) && !(lmgr->getFlagLandscapeSetsLocation()) )
 		{
 			QString pType = ss->getPlanetType(currentLocation.planetName);
 			// If we have a landscape for target planet then set it or check and use
 			// landscape type of target planet, otherwise use default landscape
-			if (ls->getAllLandscapeNames().indexOf(currentLocation.planetName)>0)
-				ls->setCurrentLandscapeName(currentLocation.planetName);
-			else if (ls->getAllLandscapeIDs().indexOf(pType)>0)
-				ls->setCurrentLandscapeID(pType);
+			if (lmgr->getAllLandscapeNames().indexOf(currentLocation.planetName)>0)
+				lmgr->setCurrentLandscapeName(currentLocation.planetName);
+			else if (lmgr->getAllLandscapeIDs().indexOf(pType)>0)
+				lmgr->setCurrentLandscapeID(pType);
 			else
-				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+				lmgr->setCurrentLandscapeID(lmgr->getDefaultLandscapeID());
 		}
 	}
 	else
@@ -326,6 +365,6 @@ bool SpaceShipObserver::update(double deltaTime)
 
 const QSharedPointer<Planet> SpaceShipObserver::getHomePlanet() const
 {
-	return (isObserverLifeOver() || artificialPlanet==NULL)  ? planet : artificialPlanet;
+	return (isObserverLifeOver() || artificialPlanet==Q_NULLPTR)  ? planet : artificialPlanet;
 }
 

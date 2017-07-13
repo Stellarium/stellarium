@@ -85,11 +85,11 @@ public:
 
 	//! Default implementation of the getRegion method.
 	//! Return the spatial region of the object.
-	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));}
+	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
 
 	//! Default implementation of the getPointInRegion method.
 	//! Return the J2000 Equatorial Position of the object.
-	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(NULL);}
+	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(Q_NULLPTR);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
@@ -103,6 +103,7 @@ public:
 	//! Derived objects can add their own special information tags.
 	//! @param core the current StelCore
 	//! @return a map of object data.  Keys:
+	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
@@ -126,11 +127,25 @@ public:
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
 	//! - name : english name of the object
-	//! - localized-name : localized name
+	//! - localized-name : localized name	
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
+
+	//! Returns a unique identifier for this object.
+	//! The ID should be unique for all objects of the same type,
+	//! but may freely conflict with IDs of other types, so getType() must also be tested.
+	//!
+	//! With this it should be possible to at least identify the same object
+	//! in a different instance of Stellarium running the same version, but
+	//! it would even be better if the ID provides some degree of forward-compatibility.
+	//! For some object types (e.g. planets) this may simply return getEnglishName(),
+	//! but better candidates may be official designations or at least (stable) internal IDs.
+	//!
+	//! An object may have multiple IDs (different catalog numbers, etc). StelObjectMgr::searchByID()
+	//! should search through all ID variants, but this method only returns one of them.
+	virtual QString getID() const = 0;
 
 	//! Return object's name in english
 	virtual QString getEnglishName() const = 0;
@@ -181,6 +196,14 @@ public:
 	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
+	//! Checking position an object above mathematical horizon for current location.
+	//! @return true if object an above mathematical horizon
+	bool isAboveHorizon(const StelCore* core) const;
+
+	//! Checking position an object above real horizon for current location.
+	//! @return true if object an above real horizon (uses test for landscapes)
+	bool isAboveRealHorizon(const StelCore* core) const;
+
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
 	
@@ -209,8 +232,8 @@ public:
 
 protected:
 
-	//! Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
-	QString getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Format the positional info string contain J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
+	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
