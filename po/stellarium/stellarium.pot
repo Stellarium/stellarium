@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 23:33+0700\n"
+"POT-Creation-Date: 2017-07-15 00:17+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -423,8 +423,8 @@ msgstr ""
 msgid "extincted to"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:223
-msgid "Photometric system: B"
+#: src/core/modules/Nebula.cpp:223 src/core/modules/StarWrapper.cpp:228
+msgid "Photometric system"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:228 src/core/modules/StarWrapper.cpp:66
@@ -470,7 +470,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298 src/core/modules/Nebula.cpp:311
-#: src/core/modules/StarWrapper.cpp:237
+#: src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
 #: plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
@@ -479,7 +479,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:299 src/core/modules/Nebula.cpp:334
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:285
-#: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:240
 #: src/gui/AstroCalcDialog.cpp:1631 src/gui/AstroCalcDialog.cpp:1666
 #: src/ui_configurationDialog.h:1362 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:318
@@ -508,7 +508,7 @@ msgstr ""
 msgid "Redshift"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:359
+#: src/core/modules/Nebula.cpp:359 src/core/modules/StarWrapper.cpp:249
 msgid "Parallax"
 msgstr ""
 
@@ -940,6 +940,7 @@ msgid "Apparent diameter"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:325
+#: src/core/modules/StarWrapper.cpp:252
 msgctxt "duration"
 msgid "days"
 msgstr ""
@@ -1021,9 +1022,9 @@ msgstr ""
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:574
-#, qt-format
-msgid "Phase: %1"
+#: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1626
+#: src/gui/AstroCalcDialog.cpp:1661
+msgid "Phase"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:587
@@ -1142,74 +1143,59 @@ msgstr ""
 msgid "double star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:225
-#, qt-format
-msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
+#: src/core/modules/StarWrapper.cpp:228
+msgid "Magnitude range"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:227
-#, qt-format
-msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
+#: src/core/modules/StarWrapper.cpp:246
+#: plugins/Exoplanets/src/Exoplanet.cpp:312
+msgid "Spectral Type"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:244
-#, qt-format
-msgid "Spectral Type: %1"
+#: src/core/modules/StarWrapper.cpp:252
+#: plugins/Exoplanets/src/Exoplanet.cpp:343
+msgid "Period"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:247
-#, qt-format
-msgid "Parallax: %1\""
+#: src/core/modules/StarWrapper.cpp:260
+msgid "Next maximum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:250
-#, qt-format
-msgid "Period: %1 days"
+#: src/core/modules/StarWrapper.cpp:262
+msgid "Next minimum light"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:259
-#, qt-format
-msgid "Next minimum light: %1 UTC"
+#: src/core/modules/StarWrapper.cpp:269
+msgid "Rising time"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:261
-#, qt-format
-msgid "Next maximum light: %1 UTC"
+#: src/core/modules/StarWrapper.cpp:271
+msgid "Duration of eclipse"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:268
-#, qt-format
-msgid "Duration of eclipse: %1%"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:270
-#, qt-format
-msgid "Rising time: %1%"
-msgstr ""
-
-#: src/core/modules/StarWrapper.cpp:275
+#: src/core/modules/StarWrapper.cpp:278
 msgid "Position angle"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:279 src/core/modules/StarWrapper.cpp:281
+#: src/core/modules/StarWrapper.cpp:282 src/core/modules/StarWrapper.cpp:284
 #: src/gui/AstroCalcDialog.cpp:1787
 msgid "Separation"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:291
+#: src/core/modules/StarWrapper.cpp:294
 msgid "Proper motions by axes"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:291 src/core/modules/StarWrapper.cpp:293
+#: src/core/modules/StarWrapper.cpp:294 src/core/modules/StarWrapper.cpp:296
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:292
+#: src/core/modules/StarWrapper.cpp:295
 msgid "Position angle of the proper motion"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:293
+#: src/core/modules/StarWrapper.cpp:296
 msgid "Angular speed of the proper motion"
 msgstr ""
 
@@ -3671,10 +3657,6 @@ msgstr ""
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
 #: src/gui/AstroCalcDialog.cpp:1608
 msgid "Mm"
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:1626 src/gui/AstroCalcDialog.cpp:1661
-msgid "Phase"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1641 src/gui/AstroCalcDialog.cpp:1676
@@ -9916,15 +9898,15 @@ msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:275
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:276
 msgid "Read-only telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:278
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:279
 msgid "Telescope position: "
 msgstr ""
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:280
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:281
 msgid "Distance to target position: "
 msgstr ""
 
@@ -12501,10 +12483,6 @@ msgstr ""
 msgid "planetary system"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:312
-msgid "Spectral Type"
-msgstr ""
-
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 msgid "Metallicity"
 msgstr ""
@@ -12536,10 +12514,6 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 msgid "Exoplanet"
-msgstr ""
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:343
-msgid "Period"
 msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:343
