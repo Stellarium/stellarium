@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 00:17+0700\n"
+"POT-Creation-Date: 2017-07-15 00:48+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -907,18 +907,26 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
+#: src/core/modules/Comet.cpp:202 src/gui/AstroCalcDialog.cpp:311
+#: src/gui/AstroCalcDialog.cpp:572 src/gui/AstroCalcDialog.cpp:796
+#: src/gui/AstroCalcDialog.cpp:832 src/gui/AstroCalcDialog.cpp:1599
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
+msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Comet.cpp:193
+msgctxt "distance"
 msgid "km"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
 #: src/core/modules/MinorPlanet.cpp:268 src/core/modules/MinorPlanet.cpp:283
+#: src/core/modules/Comet.cpp:195
+msgctxt "distance"
 msgid "Mio km"
 msgstr ""
 
@@ -1044,24 +1052,6 @@ msgstr ""
 #: src/core/modules/Comet.cpp:167
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
-
-#. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/Comet.cpp:193
-msgctxt "distance"
-msgid "km"
-msgstr ""
-
-#. TRANSLATORS: Unit of measure for distance - milliones kilometers
-#: src/core/modules/Comet.cpp:195
-msgctxt "distance"
-msgid "Mio km"
-msgstr ""
-
-#. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Comet.cpp:202
-msgctxt "distance"
-msgid "AU"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
@@ -3139,13 +3129,6 @@ msgstr ""
 #. TRANSLATORS: distance, AU
 #: src/gui/AstroCalcDialog.cpp:311 src/gui/AstroCalcDialog.cpp:796
 msgid "dist."
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:311 src/gui/AstroCalcDialog.cpp:572
-#: src/gui/AstroCalcDialog.cpp:796 src/gui/AstroCalcDialog.cpp:832
-#: src/gui/AstroCalcDialog.cpp:1599
-msgctxt "astronomical unit"
-msgid "AU"
 msgstr ""
 
 #. TRANSLATORS: proper motion, arcsecond per year

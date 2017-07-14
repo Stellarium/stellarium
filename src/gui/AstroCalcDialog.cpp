@@ -308,7 +308,7 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 	else if (celType==200)
 	{
 		//TRANSLATORS: distance, AU
-		positionsHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "astronomical unit"));
+		positionsHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "distance, astronomical unit"));
 	}
 	else if (celType==172)
 	{
@@ -569,7 +569,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString distanceInfo = q_("Planetocentric distance");
 		if (core->getUseTopocentricCoordinates())
 			distanceInfo = q_("Topocentric distance");
-		QString distanceUM = qc_("AU", "astronomical unit");
+		QString distanceUM = qc_("AU", "distance, astronomical unit");
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
 		Vec3d pos;
@@ -793,7 +793,7 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	//TRANSLATORS: phase
 	ephemerisHeader << q_("phase");
 	//TRANSLATORS: distance, AU
-	ephemerisHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "astronomical unit"));
+	ephemerisHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "distance, astronomical unit"));
 	//TRANSLATORS: elongation
 	ephemerisHeader << q_("elong.");
 	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
@@ -829,7 +829,7 @@ void AstroCalcDialog::generateEphemeris()
 	QString distanceInfo = q_("Planetocentric distance");
 	if (core->getUseTopocentricCoordinates())
 		distanceInfo = q_("Topocentric distance");
-	QString distanceUM = qc_("AU", "astronomical unit");
+	QString distanceUM = qc_("AU", "distance, astronomical unit");
 
 	QString elongStr = "", phaseStr = "";
 	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
@@ -1596,7 +1596,7 @@ void AstroCalcDialog::populateFunctionsList()
 void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 {
 	QString xAxisStr = q_("Date");
-	QString distMU = qc_("AU", "astronomical unit");
+	QString distMU = qc_("AU", "distance, astronomical unit");
 	QString asMU = QString("'");
 
 	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
