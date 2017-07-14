@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 23:26+0700\n"
+"POT-Creation-Date: 2017-07-14 23:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1002,8 +1002,9 @@ msgid "New Moon"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:345
-#: src/core/modules/Comet.cpp:264
-msgid "Phase Angle"
+#: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1646
+#: src/gui/AstroCalcDialog.cpp:1681
+msgid "Phase angle"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:346
@@ -3678,10 +3679,6 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1641 src/gui/AstroCalcDialog.cpp:1676
 msgid "Angular size"
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:1646 src/gui/AstroCalcDialog.cpp:1681
-msgid "Phase angle"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1758
