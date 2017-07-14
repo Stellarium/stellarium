@@ -55,6 +55,7 @@ protected:
 private:
 	QStringList* listSerialPorts();
 	void initConfigurationDialog();
+	void populateToolTips();
 	
 private slots:
 	void buttonSavePressed();
