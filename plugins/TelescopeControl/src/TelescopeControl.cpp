@@ -757,7 +757,7 @@ void TelescopeControl::loadTelescopes()
 		QString rts2Url("localhost");
 		QString rts2Username("");
 		QString rts2Password("");
-		int rts2Refresh;
+		int rts2Refresh = DEFAULT_RTS2_REFRESH;
 
 		if (connectionType == ConnectionInternal)
 		{
