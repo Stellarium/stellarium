@@ -155,10 +155,10 @@ private:
 	Vec3d desired_pos;
 };
 
-//! This TelescopeClient class can controll a telescope by communicating
+//! This TelescopeClient class can control a telescope by communicating
 //! to a server process ("telescope server") via 
 //! the "Stellarium telescope control protocol" over TCP/IP.
-//! The "Stellarium telescope control protocol" is specified in a seperate
+//! The "Stellarium telescope control protocol" is specified in a separate
 //! document along with the telescope server software.
 class TelescopeTCP : public TelescopeClient
 {
