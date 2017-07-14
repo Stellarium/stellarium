@@ -571,7 +571,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: %2%").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100, 'f', 1)) << "<br />";
 			oss << QString("%1: %2").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3)) << "<br />";
 			if (!moonPhase.isEmpty())
-				oss << QString(q_("Phase: %1")).arg(moonPhase) << "<br>";
+				oss << QString("%1: %2").arg(q_("Phase"), moonPhase) << "<br />";
 
 		}
 		if (englishName=="Sun")
