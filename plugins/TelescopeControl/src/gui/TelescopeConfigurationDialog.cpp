@@ -115,7 +115,10 @@ QStringList* TelescopeConfigurationDialog::listSerialPorts()
 void TelescopeConfigurationDialog::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		populateToolTips();
+	}
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -145,6 +148,14 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
 	ui->comboSerialPort->setValidator(serialPortValidator);
+
+	populateToolTips();
+}
+
+void TelescopeConfigurationDialog::populateToolTips()
+{
+	ui->doubleSpinBoxTelescopeDelay->setToolTip(QString("<p>%1</p>").arg(q_("The approximate time it takes for the signals from the telescope to reach Stellarium. Increase this value if the reticle is skipping.")));
+	ui->doubleSpinBoxRTS2Refresh->setToolTip(QString("<p>%1</p>").arg(q_("Refresh rate of the RTS2 telescope. Delay before sending next telescope status request. The default value of 0.5 second works fine with most setups.")));
 }
 
 //Set the configuration panel in a predictable state
