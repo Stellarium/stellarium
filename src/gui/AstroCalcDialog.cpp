@@ -493,10 +493,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
 
 		}
+		float magOp;
 		QString dsoName;
 		QString asToolTip = QString("%1, %2").arg(q_("Average angular size"), q_("arcmin"));
 		// Deep-sky objects
-		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
+		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);		
 		foreach (const NebulaP& obj, celestialObjects)
 		{
 			if (obj->objectInDisplayedCatalog() && obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
@@ -535,6 +536,14 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (extra.toFloat()>90.f)
 					extra = QChar(0x2014);
 
+				if (celTypeId==12 || celTypeId==102 || celTypeId==111) // opacity cannot be extincted
+				{
+					magOp = obj->getVMagnitude(core);
+					extra = QChar(0x2014);
+				}
+				else
+					magOp = obj->getVMagnitudeWithExtinction(core);
+
 				// Convert to arcminutes the average angular size of deep-sky object
 				angularSize = QString::number(obj->getAngularSize(core)*120.f, 'f', 3);
 				if (angularSize.toFloat()<0.01f)
@@ -545,7 +554,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 				treeItem->setText(CColumnDec, decStr);
 				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-				treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setText(CColumnMagnitude, QString::number(magOp, 'f', 2));
 				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
 				treeItem->setText(CColumnAngularSize, angularSize);
 				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
