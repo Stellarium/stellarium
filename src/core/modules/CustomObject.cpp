@@ -75,10 +75,11 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if (flags&ObjectType)
 	{
+		QString type = q_("custom object");
 		if (isMarker)
-			oss << q_("Type: <b>%1</b>").arg(q_("custom marker")) << "<br />";
-		else
-			oss << q_("Type: <b>%1</b>").arg(q_("custom object")) << "<br />";
+			type = q_("custom marker");
+
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), type);
 	}
 
 	// Ra/Dec etc.

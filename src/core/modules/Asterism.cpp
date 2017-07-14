@@ -156,7 +156,7 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(q_("asterism")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("asterism")) << "<br />";
 
 	postProcessInfoString(str, flags);
 

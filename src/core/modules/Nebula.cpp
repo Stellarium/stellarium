@@ -202,9 +202,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		QString mt = getMorphologicalTypeString();
 		if (mt.isEmpty())
-			oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getTypeString()) << "<br>";
 		else
-			oss << q_("Type: <b>%1</b> (%2)").arg(getTypeString()).arg(mt) << "<br>";
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getTypeString(), mt) << "<br>";
 	}
 
 	if (vMag < 50.f && flags&Magnitude)
@@ -215,23 +215,20 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		else
 		{
+			QString emag = "";
 			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-				oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-												    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-			else
-				oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+				emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+			oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 		}
 	}
 	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
-	{
-		oss << q_("Magnitude: <b>%1</b>").arg(bMag, 0, 'f', 2)
-		    << q_(" (Photometric system: B)")
-		    << "<br>";
-	}
+		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Magnitude"), QString::number(bMag, 'f', 2), q_("Photometric system: B")) << "<br />";
+
 	if (flags&Extra)
 	{
 		if (vMag < 50 && bMag < 50)
-			oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(bMag-vMag, 'f', 2)) << "<br>";
+			oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bMag-vMag, 'f', 2)) << "<br />";
 	}
 	float mmag = qMin(vMag,bMag);
 	if (nType != NebDn && mmag < 50 && flags&Extra)
@@ -309,8 +306,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			if (oDistance==0.f)
 			{
-				//TRANSLATORS: Unit of measure for distance - Light Years
-				oss << q_("Distance: %1 ly").arg(dx) << "<br>";
+				// TRANSLATORS: Unit of measure for distance - Light Years
+				QString ly = q_("ly");
+				oss << QString("%1: %2 %3").arg(q_("Distance"), dx, ly) << "<br />";
 			}
 		}
 
@@ -345,7 +343,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				dy = QString("%1").arg(QString::number(oDistance*dc, 'f', ms));
 			}
 
-			oss << q_("Distance: %1 %2 (%3 %4)").arg(dx).arg(dupc).arg(dy).arg(duly) << "<br>";
+			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), dx, dupc, dy, duly) << "<br />";
 		}
 	}
 
