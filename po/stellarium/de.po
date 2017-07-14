@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-13 02:10+0700\n"
-"PO-Revision-Date: 2017-07-12 08:55+0000\n"
+"PO-Revision-Date: 2017-07-13 16:20+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-13 05:19+0000\n"
+"X-Launchpad-Export-Date: 2017-07-14 05:14+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
@@ -1999,37 +1999,37 @@ msgstr "(scheinbar)"
 #: src/core/StelObject.cpp:177
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
-msgstr ""
+msgstr "Rekt/Dekl"
 
 #. TRANSLATORS: Hour angle/Declination
 #: src/core/StelObject.cpp:266
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
-msgstr ""
+msgstr "StuWi/Dek"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:316
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
-msgstr ""
+msgstr "Az/H"
 
 #. TRANSLATORS: Galactic longitude/latitude
 #: src/core/StelObject.cpp:342
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
-msgstr ""
+msgstr "Gal. Lng./Br."
 
 #. TRANSLATORS: Supergalactic longitude/latitude
 #: src/core/StelObject.cpp:368
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
-msgstr ""
+msgstr "Supergal. Lng./Br."
 
 #. TRANSLATORS: Ecliptic longitude/latitude
 #: src/core/StelObject.cpp:386
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "Ekl. Lng./Br."
 
 #: src/core/StelObject.cpp:451
 msgid "Ecliptic obliquity"
@@ -2037,11 +2037,11 @@ msgstr "Schiefe der Ekliptik"
 
 #: src/core/StelObject.cpp:470
 msgid "Mean Sidereal Time"
-msgstr ""
+msgstr "Mittlere Sternzeit"
 
 #: src/core/StelObject.cpp:485
 msgid "Apparent Sidereal Time"
-msgstr ""
+msgstr "Scheinbare Sternzeit"
 
 #: src/core/StelObject.cpp:499
 #, qt-format
@@ -7347,7 +7347,7 @@ msgstr "Verwendet die Formatierungsausgabe für Koordinaten"
 
 #: src/ui_configurationDialog.h:1391
 msgid "Use designations for celestial coordinate systems"
-msgstr ""
+msgstr "Verwende Bezeichnungen für Koordinatensysteme"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Control"
@@ -11654,7 +11654,7 @@ msgstr "TCP Port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:562
 msgid "RTS2 telescope settings"
-msgstr "EInstellungen für RTS2 Teleskop"
+msgstr "Einstellungen für RTS2 Teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
 msgid "URL:"
