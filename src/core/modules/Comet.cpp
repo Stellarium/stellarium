@@ -199,7 +199,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		double hdistanceAu = getHeliocentricEclipticPos().length();
 		double hdistanceKm = AU * hdistanceAu;
 		// TRANSLATORS: Unit of measure for distance - astronomical unit
-		QString au = qc_("AU", "distance");
+		QString au = qc_("AU", "distance, astronomical unit");
 		bool useKM = true;
 		if (hdistanceAu < 0.1)
 		{
