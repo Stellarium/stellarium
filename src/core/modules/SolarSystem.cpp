@@ -1333,7 +1333,7 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getEnglishName() == planetEnglishName || p->getCommonEnglishName() == planetEnglishName)
+		if (p->getEnglishName() == planetEnglishName)
 			return p;
 	}
 	return PlanetP();
@@ -1343,7 +1343,7 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) c
 {
 	foreach (const PlanetP& p, systemMinorBodies)
 	{
-		if (p->getEnglishName() == planetEnglishName || p->getCommonEnglishName() == planetEnglishName)
+		if (p->getCommonEnglishName() == planetEnglishName)
 			return p;
 	}
 	return PlanetP();
@@ -1354,7 +1354,7 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getNameI18n() == planetNameI18 || p->getCommonNameI18n() == planetNameI18)
+		if (p->getNameI18n() == planetNameI18)
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -1374,6 +1374,8 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	float r = 0.f;
 	if (withExtinction)
 		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
@@ -1385,12 +1387,16 @@ float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) 
 QString SolarSystem::getPlanetType(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	return p->getPlanetTypeString();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	double r = 0.f;
 	r = p->getDistance();
 	return r;
@@ -1399,6 +1405,8 @@ double SolarSystem::getDistanceToPlanet(QString planetName) const
 double SolarSystem::getElongationForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	double r = 0.f;
 	r = p->getElongation(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
@@ -1407,6 +1415,8 @@ double SolarSystem::getElongationForPlanet(QString planetName) const
 double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	double r = 0.f;
 	r = p->getPhaseAngle(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
@@ -1415,6 +1425,8 @@ double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
 float SolarSystem::getPhaseForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	float r = 0.f;
 	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
