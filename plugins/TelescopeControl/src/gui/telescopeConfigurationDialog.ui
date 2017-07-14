@@ -265,9 +265,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>546</width>
-        <height>555</height>
+        <y>-432</y>
+        <width>549</width>
+        <height>704</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">
@@ -378,8 +378,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>The approximate time it takes for the signals from the telescope to reach Stellarium.
-Increase this value if the reticle is skipping.</string>
+               <string/>
               </property>
               <property name="suffix">
                <string notr="true" comment="seconds">s</string>
@@ -778,8 +777,7 @@ Increase this value if the reticle is skipping.</string>
                </size>
               </property>
               <property name="toolTip">
-               <string>Refresh rate of the RTS2 telescope. Delay before sending next telescope
-status request. The default value of 0.5 second works fine with most setups.</string>
+               <string/>
               </property>
               <property name="suffix">
                <string notr="true" comment="seconds">s</string>
