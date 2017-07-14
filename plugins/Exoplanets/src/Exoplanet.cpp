@@ -314,7 +314,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&Distance && distance>0)
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
-		QString ly = q_("ly");
+		QString ly = qc_("ly", "distance");
 		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance/0.306601, 'f', 2), ly) << "<br />";
 	}
 
@@ -322,19 +322,19 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	{
 		if (smetal!=0)
 		{
-			oss << QString("%1 [Fe/H]: %2").arg(q_("Metallicity")).arg(smetal) << "<br>";
+			oss << QString("%1 [Fe/H]: %2").arg(q_("Metallicity"), smetal) << "<br />";
 		}
 		if (smass>0)
 		{
-			oss << QString("%1: %2 M<sub>%3</sub>").arg(q_("Mass")).arg(QString::number(smass, 'f', 3)).arg(q_("Sun")) << "<br>";
+			oss << QString("%1: %2 M<sub>%3</sub>").arg(q_("Mass"), QString::number(smass, 'f', 3), q_("Sun")) << "<br />";
 		}
 		if (sradius>0)
 		{
-			oss << QString("%1: %2 R<sub>%3</sub>").arg(q_("Radius")).arg(QString::number(sradius, 'f', 5)).arg(q_("Sun")) << "<br>";
+			oss << QString("%1: %2 R<sub>%3</sub>").arg(q_("Radius"), QString::number(sradius, 'f', 5), q_("Sun")) << "<br />";
 		}
 		if (effectiveTemp>0)
 		{
-			oss << q_("Effective temperature: %1 K").arg(effectiveTemp) << "<br>";
+			oss << QString("%1: %2 %3").arg(q_("Effective temperature")).arg(effectiveTemp).arg(qc_("K", "temperature")) << "<br />";
 		}
 		if (exoplanets.size() > 0)
 		{
