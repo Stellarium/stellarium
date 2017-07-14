@@ -500,7 +500,12 @@ void AstroCalcDialog::currentCelestialPositions()
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);		
 		foreach (const NebulaP& obj, celestialObjects)
 		{
-			if (obj->objectInDisplayedCatalog() && obj->getVMagnitudeWithExtinction(core)<=mag && obj->isAboveRealHorizon(core))
+			if (celTypeId==12 || celTypeId==102 || celTypeId==111) // opacity cannot be extincted
+				magOp = obj->getVMagnitude(core);
+			else
+				magOp = obj->getVMagnitudeWithExtinction(core);
+
+			if (obj->objectInDisplayedCatalog() && magOp<=mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
 				{
@@ -535,14 +540,6 @@ void AstroCalcDialog::currentCelestialPositions()
 				extra = QString::number(obj->getSurfaceBrightnessWithExtinction(core), 'f', 2);
 				if (extra.toFloat()>90.f)
 					extra = QChar(0x2014);
-
-				if (celTypeId==12 || celTypeId==102 || celTypeId==111) // opacity cannot be extincted
-				{
-					magOp = obj->getVMagnitude(core);
-					extra = QChar(0x2014);
-				}
-				else
-					magOp = obj->getVMagnitudeWithExtinction(core);
 
 				// Convert to arcminutes the average angular size of deep-sky object
 				angularSize = QString::number(obj->getAngularSize(core)*120.f, 'f', 3);
