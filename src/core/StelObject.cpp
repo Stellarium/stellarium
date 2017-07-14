@@ -496,7 +496,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (flags&IAUConstellation)
 	{
 		QString constel=core->getIAUConstellation(getEquinoxEquatorialPos(core));
-		res += q_("IAU Constellation: %1").arg(constel) + "<br>";
+		res += QString("%1: %2").arg(q_("IAU Constellation"), constel) + "<br>";
 	}
 
 	return res;

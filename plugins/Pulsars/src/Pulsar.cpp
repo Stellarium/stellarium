@@ -156,7 +156,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 
 		if (glitch==0)
-			oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("pulsar")) << "<br />";
 		else
 		{
 			QString sglitch;
@@ -167,7 +167,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				// TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 				sglitch = q_("has %1 registered glitches").arg(glitch);
 			}
-			oss << q_("Type: <b>%1</b> (%2)").arg(q_("pulsar with glitches")).arg(sglitch) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("pulsar with glitches")).arg(sglitch) << "<br />";
 		}
 	}
 

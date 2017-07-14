@@ -99,29 +99,22 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << designation << "</h2>";
 	}
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("quasar")) << "<br />";
 
 	if (flags&Magnitude)
 	{
+		QString emag = "";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		{
-			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-											QString::number(getVMagnitudeWithExtinction(core),  'f', 2)) << "<br />";
-		}
-		else
-		{
-			oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
-		}
-		if (AMagnitude!=0)
-		{
-			oss << q_("Absolute Magnitude: %1").arg(AMagnitude, 0, 'f', 2) << "<br />";
-		}
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(mag, 'f', 2), emag) << "<br />";
 	}
 
+	if (flags&AbsoluteMagnitude && AMagnitude!=0)
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(AMagnitude, 0, 'f', 2) << "<br />";
+
 	if (flags&Extra)
-	{
-		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(bV, 'f', 2)) << "<br>";
-	}
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bV, 'f', 2)) << "<br />";
 	
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);

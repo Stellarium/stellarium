@@ -373,20 +373,20 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getPlanetTypeString())) << "<br />";
 	}
 
 	if (flags&Magnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
 	{
+		QString emag = "";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-			oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-											    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-		else
-			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 	if (flags&AbsoluteMagnitude && (getAbsoluteMagnitude() > -99.))
 	{
-		oss << q_("Absolute Magnitude: %1").arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br>";
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br>";
 		const float moMag=getMeanOppositionMagnitude();
 		if (moMag<50.f)
 			oss << q_("Mean Opposition Magnitude: %1").arg(moMag, 0, 'f', 2) << "<br>";
@@ -411,40 +411,42 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		double hdistanceAu = getHeliocentricEclipticPos().length();
 		double hdistanceKm = AU * hdistanceAu;
+		// TRANSLATORS: Unit of measure for distance - astronomical unit
+		QString au = q_("AU");
+		// TRANSLATORS: Unit of measure for distance - kilometers
+		QString km = q_("km");
+		QString distAU, distKM;
 		if (englishName!="Sun")
 		{
 			if (hdistanceAu < 0.1)
 			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
-				       .arg(hdistanceAu, 0, 'f', 6)
-				       .arg(hdistanceKm, 0, 'f', 3);
+				distAU = QString::number(hdistanceAu, 'f', 6);
+				distKM = QString::number(hdistanceKm, 'f', 3);
 			}
 			else
 			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
-				       .arg(hdistanceAu, 0, 'f', 3)
-				       .arg(hdistanceKm / 1.0e6, 0, 'f', 3);
+				distAU = QString::number(hdistanceAu, 'f', 3);
+				distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
+				// TRANSLATORS: Unit of measure for distance - milliones kilometers
+				km = q_("Mio km");
 			}
-			oss << "<br>";
+
+			oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
 		}
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance: %1AU (%2 km)"))
-			       .arg(distanceAu, 0, 'f', 6)
-			       .arg(distanceKm, 0, 'f', 3);
-		}
+			distAU = QString::number(distanceAu, 'f', 6);
+			distKM = QString::number(distanceKm, 'f', 3);		}
 		else
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
-			       .arg(distanceAu, 0, 'f', 3)
-			       .arg(distanceKm / 1.0e6, 0, 'f', 3);
+			distAU = QString::number(distanceAu, 'f', 3);
+			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - milliones kilometers
+			km = q_("Mio km");
 		}
-		oss << "<br>";
+
+		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 	}
 
 	double angularSize = 2.*getAngularSize(core)*M_PI/180.;

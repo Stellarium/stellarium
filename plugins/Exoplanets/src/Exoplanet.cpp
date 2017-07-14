@@ -290,22 +290,18 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	
 	if (flags&ObjectType)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("planetary system")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
 		if (Vmag<99 && !distributionMode)
 		{
+			QString emag = "";
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-			}
-			else
-			{
-				oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
-			}
+				emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+			oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 		}
 	}
 
@@ -313,14 +309,13 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra && !stype.isEmpty())
-	{
-		oss << q_("Spectral Type: %1").arg(stype) << "<br>";
-	}
+		oss <<  QString("%1: <b>%2</b>").arg(q_("Spectral Type"), stype) << "<br />";
 
 	if (flags&Distance && distance>0)
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
-		oss << q_("Distance: %1 ly").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
+		QString ly = q_("ly");
+		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance/0.306601, 'f', 2), ly) << "<br />";
 	}
 
 	if (flags&Extra)
