@@ -47,6 +47,7 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	, time_delay(50)
 	, reconnectTimer(-1)
 	, refresh_delay(500)
+	, server_micros(0)
 {
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 
