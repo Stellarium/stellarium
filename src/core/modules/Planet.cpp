@@ -412,9 +412,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		double hdistanceAu = getHeliocentricEclipticPos().length();
 		double hdistanceKm = AU * hdistanceAu;
 		// TRANSLATORS: Unit of measure for distance - astronomical unit
-		QString au = q_("AU");
+		QString au = qc_("AU", "distance, astronomical unit");
 		// TRANSLATORS: Unit of measure for distance - kilometers
-		QString km = q_("km");
+		QString km = qc_("km", "distance");
 		QString distAU, distKM;
 		if (englishName!="Sun")
 		{
@@ -428,7 +428,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				distAU = QString::number(hdistanceAu, 'f', 3);
 				distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
 				// TRANSLATORS: Unit of measure for distance - milliones kilometers
-				km = q_("Mio km");
+				km = qc_("Mio km", "distance");
 			}
 
 			oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
@@ -443,7 +443,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			distAU = QString::number(distanceAu, 'f', 3);
 			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = q_("Mio km");
+			km = qc_("Mio km", "distance");
 		}
 
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
