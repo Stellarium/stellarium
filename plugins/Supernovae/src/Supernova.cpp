@@ -151,7 +151,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		if (distance>0)
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
-			QString ly = q_("ly");
+			QString ly = qc_("ly", "distance");
 			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance*1000, 'f', 2), ly) << "<br />";
 		}
 	}

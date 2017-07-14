@@ -452,40 +452,49 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && angularSize>=4.8e-7)
 	{
+		QString s1, s2, sizeStr = "";
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
 			if (withDecimalDegree)
-				oss << q_("Apparent diameter: %1, with rings: %2")
-				       .arg(StelUtils::radToDecDegStr(withoutRings,4,false,true),
-					    StelUtils::radToDecDegStr(angularSize,4,false,true));
+			{
+				s1 = StelUtils::radToDecDegStr(withoutRings,4,false,true);
+				s2 = StelUtils::radToDecDegStr(angularSize,4,false,true);
+			}
 			else
-				oss << q_("Apparent diameter: %1, with rings: %2")
-				       .arg(StelUtils::radToDmsStr(withoutRings, true),
-					    StelUtils::radToDmsStr(angularSize, true));
+			{
+				s1 = StelUtils::radToDmsStr(withoutRings, true);
+				s2 = StelUtils::radToDmsStr(angularSize, true);
+			}
+
+			sizeStr = QString("%1, %2: %3").arg(s1, q_("with rings"), s2);
 		}
 		else
 		{
 			if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
 			{
 				if (withDecimalDegree)
-					oss << q_("Apparent diameter: %1, scaled up to: %2")
-					       .arg(StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true))
-					       .arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+				{
+					s1 = StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true);
+					s2 = StelUtils::radToDecDegStr(angularSize,5,false,true);
+				}
 				else
-					oss << q_("Apparent diameter: %1, scaled up to: %2")
-					       .arg(StelUtils::radToDmsStr(angularSize / sphereScale, true))
-					       .arg(StelUtils::radToDmsStr(angularSize, true));
+				{
+					s1 = StelUtils::radToDmsStr(angularSize / sphereScale, true);
+					s2 = StelUtils::radToDmsStr(angularSize, true);
+				}
+
+				sizeStr = QString("%1, %2: %3").arg(s1, q_("scaled up to"), s2);
 			}
 			else
 			{
 				if (withDecimalDegree)
-					oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+					sizeStr = StelUtils::radToDecDegStr(angularSize,5,false,true);
 				else
-					oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+					sizeStr = StelUtils::radToDmsStr(angularSize, true);
 			}
 		}
-		oss << "<br>";
+		oss << QString("%1: %2").arg(q_("Apparent diameter"), sizeStr) << "<br />";
 	}
 
 	double siderealPeriod = getSiderealPeriod();
@@ -498,16 +507,18 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		// oss << q_("Planetocentric distance &rho;: %1 (km)").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU) <<"<br>";
 		if (siderealPeriod>0)
 		{
-			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+			QString days = qc_("days", "duration");
+			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
+
 			if (qAbs(siderealDay)>0)
 			{
-				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br>";
-				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br>";
+				oss << QString("%1: %2").arg(q_("Sidereal day"), StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br />";
+				oss << QString("%1: %2").arg(q_("Mean solar day"), StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br />";
 			}
 			else if (re.period==0.)
 			{
-				oss << q_("The period of rotation is chaotic") << "<br>";
+				oss << q_("The period of rotation is chaotic") << "<br />";
 			}
 		}
 		if (englishName != "Sun")
@@ -543,19 +554,22 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 					moonPhase = qc_("New Moon", "Moon phase");
 			}
 
+			QString pha, elo;
 			if (withDecimalDegree)
 			{
-				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
-				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+				pha = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
+				elo = StelUtils::radToDecDegStr(elongation,4,false,true);
 			}
 			else
 			{
-				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
-				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+				pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
+				elo = StelUtils::radToDmsStr(elongation, true);
 			}
 
-			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
-			oss << QString(q_("Albedo: %1")).arg(QString::number(getAlbedo(), 'f', 3)) << "<br>";
+			oss << QString("%1: %2").arg(q_("Phase Angle"), pha) << "<br />";
+			oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
+			oss << QString("%1: %2%").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100, 'f', 1)) << "<br />";
+			oss << QString("%1: %2").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3)) << "<br />";
 			if (!moonPhase.isEmpty())
 				oss << QString(q_("Phase: %1")).arg(moonPhase) << "<br>";
 
@@ -570,7 +584,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			// Release version:
 			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
 			if (eclipseFactor>1.e-7) // needed to avoid false display of 1e-14 or so.
-				oss << QString(q_("Eclipse Factor: %1%")).arg(eclipseFactor) << "<br>";
+				oss << QString("%1: %2%").arg(q_("Eclipse Factor")).arg(eclipseFactor) << "<br />";
 
 		}
 	}
