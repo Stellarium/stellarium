@@ -566,7 +566,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				elo = StelUtils::radToDmsStr(elongation, true);
 			}
 
-			oss << QString("%1: %2").arg(q_("Phase Angle"), pha) << "<br />";
+			oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
 			oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
 			oss << QString("%1: %2%").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100, 'f', 1)) << "<br />";
 			oss << QString("%1: %2").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3)) << "<br />";
