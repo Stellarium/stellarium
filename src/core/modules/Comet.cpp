@@ -189,15 +189,18 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	oss << getCommonInfoString(core, flags);
 
+	// TRANSLATORS: Unit of measure for distance - kilometers
+	QString km = qc_("km", "distance");
+	// TRANSLATORS: Unit of measure for distance - milliones kilometers
+	QString Mkm = qc_("Mio km", "distance");
+	QString distAU, distKM;
 	if (flags&Distance)
 	{
 		double hdistanceAu = getHeliocentricEclipticPos().length();
 		double hdistanceKm = AU * hdistanceAu;
 		// TRANSLATORS: Unit of measure for distance - astronomical unit
-		QString au = q_("AU");
-		// TRANSLATORS: Unit of measure for distance - kilometers
-		QString km = q_("km");
-		QString distAU, distKM;
+		QString au = qc_("AU", "distance");
+		bool useKM = true;
 		if (hdistanceAu < 0.1)
 		{
 			distAU = QString::number(hdistanceAu, 'f', 6);
@@ -207,69 +210,67 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		{
 			distAU = QString::number(hdistanceAu, 'f', 3);
 			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
-			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = q_("Mio km");
+			useKM = false;
 		}
-		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
+		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
 
 		double distanceAu = getJ2000EquatorialPos(core).length();
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
 			distAU = QString::number(distanceAu, 'f', 6);
-			distKM = QString::number(distanceKm, 'f', 3);		}
+			distKM = QString::number(distanceKm, 'f', 3);
+			useKM = true;
+		}
 		else
 		{
 			distAU = QString::number(distanceAu, 'f', 3);
 			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
-			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = q_("Mio km");
+			useKM = false;
 		}
-		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
+		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
 	}
+
 	if (flags&Extra)
 	{
 		// If semi-major axis not zero then calculate and display orbital period for comet in days
 		double siderealPeriod = getSiderealPeriod();
 		if (siderealPeriod>0)
 		{
-			// TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
-			oss << q_("Sidereal period: %1 a").arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+			// Sidereal (orbital) period for comets in Julian years (symbol: a)
+			oss << QString("%1: %2 a").arg(q_("Sidereal period"), QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 		}
 
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("km/s", "speed");
 		// GZ: Add speed. I don't know where else to place that bit of information.
-		// xgettext:no-c-format
-		oss << QString(q_("Speed: %1 km/s"))
-			   .arg(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
-		oss << "<br>";
+		oss << QString("%1: %2 %3").arg(q_("Speed"), QString::number(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 'f', 3), kms) << "<br />";
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
 
+		QString pha, elo;
 		if (withDecimalDegree)
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			pha = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
+			elo = StelUtils::radToDecDegStr(elongation,4,false,true);
 		}
 		else
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
+			elo = StelUtils::radToDmsStr(elongation, true);
 		}
+
+		oss << QString("%1: %2").arg(q_("Phase Angle"), pha) << "<br />";
+		oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
 	}
 
 
 	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
 		// GZ: Add estimates for coma diameter and tail length.
-		// xgettext:no-c-format
-		oss << QString(q_("Coma diameter (estimate): %1 km"))
-			   .arg(floor(tailFactors[0]*AU/1000.0f)*1000.0f, 0, 'f', 0);
-		oss << "<br>";
-		// xgettext:no-c-format
-		oss << QString(q_("Gas tail length (estimate): %1 Mio km"))
-			   .arg(tailFactors[1]*AU*1e-6, 0, 'G', 3);
-		oss << "<br>";
+		oss << QString("%1: %2 %3").arg(q_("Coma diameter (estimate)"), QString::number(floor(tailFactors[0]*AU/1000.0f)*1000.0f, 'f', 0), km) << "<br />";
+		oss << QString("%1: %2 %3").arg(q_("Gas tail length (estimate)"), QString::number(tailFactors[1]*AU*1e-6, 'G', 3), Mkm) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);

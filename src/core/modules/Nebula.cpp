@@ -209,18 +209,15 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (vMag < 50.f && flags&Magnitude)
 	{
+		QString emag = "";
+		QString tmag = q_("Magnitude");
 		if (nType == NebDn)
-		{
-			oss << q_("Opacity: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
-		}
-		else
-		{
-			QString emag = "";
-			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-				emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+			tmag = q_("Opacity");
 
-			oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
-		}
+		if (nType != NebDn && core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(tmag, QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Magnitude"), QString::number(bMag, 'f', 2), q_("Photometric system: B")) << "<br />";
@@ -250,26 +247,17 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		}
 
-		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted surface brightness much below horizon where model is meaningless.
+		if (getSurfaceBrightness(core)<99)
 		{
-			if (getSurfaceBrightness(core)<99)
+			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
-				if (getSurfaceBrightnessWithExtinction(core)<99)
-					oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
-												  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
-				else
-					oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
+				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
+											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
+			}
+			else
+				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
 
-				oss << q_("Contrast index: %1").arg(QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
-			}
-		}
-		else
-		{
-			if (getSurfaceBrightness(core)<99)
-			{
-				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br>";
-				oss << q_("Contrast index: %1").arg(QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
-			}
+			oss << QString("%1: %2").arg(q_("Contrast index"), QString::number(getContrastIndex(core), 'f', 2)) << "<br />";
 		}
 	}
 
@@ -278,12 +266,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (majorAxisSize>0 && flags&Size)
 	{
 		if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
-			oss << q_("Size: %1").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br>";
+			oss << QString("%1: %2").arg(q_("Size"), StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br />";
 		else
 		{
-			oss << q_("Size: %1 x %2").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)).arg(StelUtils::radToDmsStr(minorAxisSize*M_PI/180.)) << "<br>";
-			if (orientationAngle>0.f)
-				oss << q_("Orientation angle: %1%2").arg(orientationAngle).arg(QChar(0x00B0)) << "<br>";
+			oss << QString("%1: %2 x %3").arg(q_("Size"), StelUtils::radToDmsStr(majorAxisSize*M_PI/180.), StelUtils::radToDmsStr(minorAxisSize*M_PI/180.)) << "<br />";
+			if (orientationAngle>0)
+				oss << QString("%1: %2%3").arg(q_("Orientation angle"), orientationAngle, QChar(0x00B0)) << "<br />";
 		}
 	}
 
@@ -307,7 +295,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			if (oDistance==0.f)
 			{
 				// TRANSLATORS: Unit of measure for distance - Light Years
-				QString ly = q_("ly");
+				QString ly = qc_("ly", "distance");
 				oss << QString("%1: %2 %3").arg(q_("Distance"), dx, ly) << "<br />";
 			}
 		}
@@ -318,18 +306,18 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			float dc = 3262.f;
 			int ms = 1;
 			//TRANSLATORS: Unit of measure for distance - kiloparsecs
-			QString dupc = q_("kpc");
+			QString dupc = qc_("kpc", "distance");
 			//TRANSLATORS: Unit of measure for distance - Light Years
-			QString duly = q_("ly");
+			QString duly = qc_("ly", "distance");
 
 			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO)
 			{
 				dc = 3.262f;
 				ms = 3;
 				//TRANSLATORS: Unit of measure for distance - Megaparsecs
-				dupc = q_("Mpc");
+				dupc = qc_("Mpc", "distance");
 				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
-				duly = q_("Mio. ly");
+				duly = qc_("Mio. ly", "distance");
 			}
 
 			if (oDistanceErr>0.f)
@@ -357,7 +345,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				z = QString("%1").arg(QString::number(redshift, 'f', 6));
 
-			oss << q_("Redshift: %1").arg(z) << "<br>";
+			oss << QString("%1: %2").arg(q_("Redshift"), z) << "<br />";
 		}
 		if (parallax!=0.f)
 		{
@@ -368,11 +356,11 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
 
-			oss << q_("Parallax: %1\"").arg(px) << "<br>";
+			oss << QString("%1: %2\"").arg(q_("Parallax"), px) << "<br />";
 		}
 
 		if (!getMorphologicalTypeDescription().isEmpty())
-			oss << q_("Morphological description: ") << getMorphologicalTypeDescription() << ".<br>";
+			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
 
 	}
 

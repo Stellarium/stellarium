@@ -288,25 +288,32 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && angularSize>=4.8e-7)
 	{
+		QString sizeStr = "";
 		if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
 		{
+			QString sizeOrig, sizeScaled;
 			if (withDecimalDegree)
-				oss << q_("Apparent diameter: %1, scaled up to: %2")
-				       .arg(StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true))
-				       .arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			{
+				sizeOrig   = StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true);
+				sizeScaled = StelUtils::radToDecDegStr(angularSize,5,false,true);
+			}
 			else
-				oss << q_("Apparent diameter: %1, scaled up to: %2")
-				       .arg(StelUtils::radToDmsStr(angularSize / sphereScale, true))
-				       .arg(StelUtils::radToDmsStr(angularSize, true));
+			{
+				sizeOrig   = StelUtils::radToDmsStr(angularSize / sphereScale, true);
+				sizeScaled = StelUtils::radToDmsStr(angularSize, true);
+			}
+
+			sizeStr = QString("%1, %2: %3").arg(sizeOrig, q_("scaled up to"), sizeScaled);
 		}
 		else
 		{
 			if (withDecimalDegree)
-				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+				sizeStr = StelUtils::radToDecDegStr(angularSize,5,false,true);
 			else
-				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+				sizeStr = StelUtils::radToDmsStr(angularSize, true);
 		}
-		oss << "<br>";
+
+		oss << QString("%1: %2").arg(q_("Apparent diameter"), sizeStr) << "<br />";
 	}
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
@@ -315,23 +322,28 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	{
 		if (siderealPeriod>0)
 		{
-			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+			QString days = qc_("days", "duration");
+			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 		}
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
 
+		QString pha, elo;
 		if (withDecimalDegree)
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			pha = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
+			elo = StelUtils::radToDecDegStr(elongation,4,false,true);
 		}
 		else
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
+			elo = StelUtils::radToDmsStr(elongation, true);
 		}
+
+		oss << QString("%1: %2").arg(q_("Phase Angle"), pha) << "<br />";
+		oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);

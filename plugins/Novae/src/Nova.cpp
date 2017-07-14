@@ -160,11 +160,11 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 
 	if (flags&Extra)
 	{
-		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
+		oss << QString("%1: %2").arg(q_("Maximum brightness"), getMaxBrightnessDate(peakJD)) << "<br />";
 		if (distance>0)
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
-			QString ly = q_("ly");
+			QString ly = qc_("ly", "distance");
 			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance*1000, 'f', 2), ly) << "<br />";
 		}
 	}

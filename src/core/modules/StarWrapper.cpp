@@ -234,7 +234,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
-		QString ly = q_("ly");
+		QString ly = qc_("ly", "distance");
 		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number((AU/(SPEED_OF_LIGHT*86400*365.25))/(s->getPlx()*((0.00001/3600)*(M_PI/180))), 'f', 2), ly) << "<br />";
 	}
 
