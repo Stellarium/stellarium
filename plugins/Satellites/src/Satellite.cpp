@@ -278,17 +278,17 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags & ObjectType)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite"))  << "<br/>";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
 	}
 	
 	if ((flags & Magnitude) && (stdMag!=99.f))
 	{
-		float mag = getVMagnitude(core);
+		QString emag = "";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << q_("Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-		else
-			oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(mag, 'f', 2)) << "<br/>";
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
+
 
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 		oss << myText << "<br/>";

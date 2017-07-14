@@ -50,23 +50,20 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	if (flags&ObjectType)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("star")) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
+		QString emag = "";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-			oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)")
-			       .arg(QString::number(getVMagnitude(core), 'f', 2))
-			       .arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-		else
-			oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 	
 	if (flags&Extra)
-	{
-		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(getBV(), 'f', 2)) << "<br>";
-	}
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
 	
 	oss << getCommonInfoString(core, flags);
 
@@ -186,30 +183,31 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		if (!varType.isEmpty())
 		{
+			QString vtt = varstartype;
 			if (s->getComponentIds() || wdsObs>0)
-				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype);
-			else
-				oss << q_("Type: <b>%1</b>").arg(varstartype);
-			oss << " (" << varType << ")<br />";
-		} else
-			oss << q_("Type: <b>%1</b>").arg(startype) << "<br />";
+				vtt = QString("%1, %2").arg(varstartype, startype);
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), vtt, varType) << "<br />";
+		}
+		else
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), startype) << "<br />";
 
 	}
 
 	if (flags&Magnitude)
 	{
+		QString emag = "";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2)).arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br />";
-		else
-			oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br />";
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 
 	if ((flags&AbsoluteMagnitude) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";
 
 	if (flags&Extra)
 	{
-		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(s->getBV(), 'f', 2)) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(s->getBV(), 'f', 2)) << "<br />";
 
 		if (!varType.isEmpty())
 		{
@@ -236,7 +234,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
-		oss << q_("Distance: %1 ly").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br />";
+		QString ly = q_("ly");
+		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number((AU/(SPEED_OF_LIGHT*86400*365.25))/(s->getPlx()*((0.00001/3600)*(M_PI/180))), 'f', 2), ly) << "<br />";
 	}
 
 	if (flags&Extra)

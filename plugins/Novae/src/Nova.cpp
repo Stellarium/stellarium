@@ -144,15 +144,15 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	}
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b> (%2)").arg(q_("nova")).arg(novaType) << "<br />";
+		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("nova"), novaType) << "<br />";
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-									       QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+		QString emag = "";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(mag, 'f', 2), emag) << "<br />";
 	}
 
 	// Ra/Dec etc.
@@ -164,7 +164,8 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 		if (distance>0)
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
-			oss << q_("Distance: %1 ly").arg(distance*1000) << "<br>";
+			QString ly = q_("ly");
+			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance*1000, 'f', 2), ly) << "<br />";
 		}
 	}
 
