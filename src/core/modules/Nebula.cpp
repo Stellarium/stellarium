@@ -220,7 +220,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		oss << QString("%1: <b>%2</b>%3").arg(tmag, QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
-		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Magnitude"), QString::number(bMag, 'f', 2), q_("Photometric system: B")) << "<br />";
+		oss << QString("%1: <b>%2</b> (%3: B)").arg(q_("Magnitude"), QString::number(bMag, 'f', 2), q_("Photometric system")) << "<br />";
 
 	if (flags&Extra)
 	{

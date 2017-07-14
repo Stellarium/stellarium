@@ -221,10 +221,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 			if (maxVMag!=99.f) // seems it is not eruptive variable star
 			{
-				if (min2VMag==99.f)
-					oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(photoVSys) << "<br />";
-				else
-					oss << q_("Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2)).arg(photoVSys) << "<br />";
+				QString minStr = QString::number(minimumM1, 'f', 2);
+				if (min2VMag<99.f)
+					minStr = QString("%1/%2").arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2));
+
+				oss << QString("%1: <b>%2</b>%3<b>%4</b> (%5: %6)").arg(q_("Magnitude range"), QString::number(maxVMag, 'f', 2), QChar(0x00F7), minStr, q_("Photometric system"), photoVSys) << "<br />";
+
 			}
 		}
 	}
@@ -241,13 +243,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&Extra)
 	{
 		if (s->getSpInt())
-			oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
+			oss << QString("%1: %2").arg(q_("Spectral Type"), StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
 
 		if (s->getPlx())
-			oss << q_("Parallax: %1\"").arg(0.00001*s->getPlx(), 0, 'f', 5) << "<br />";
+			oss << QString("%1: %2\"").arg(q_("Parallax"), QString::number(0.00001*s->getPlx(), 'f', 5)) << "<br />";
 
 		if (vPeriod>0)
-			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Period")).arg(vPeriod).arg(qc_("days", "duration")) << "<br />";
 
 		if (vEpoch>0 && vPeriod>0)
 		{
@@ -255,19 +257,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			double vsEpoch = 2400000+vEpoch;
 			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJDE() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
+			QString dateStr = q_("Next maximum light");
 			if (ebsFlag)
-				oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
-			else
-				oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
+				dateStr = q_("Next minimum light");
 
+			oss << QString("%1: %2 UTC").arg(dateStr, nextDate) << "<br />";
 		}
 
 		if (vMm>0)
 		{
+			QString mmStr = q_("Rising time");
 			if (ebsFlag)
-				oss << q_("Duration of eclipse: %1%").arg(vMm) << "<br />";
-			else
-				oss << q_("Rising time: %1%").arg(vMm) << "<br />";
+				mmStr = q_("Duration of eclipse");
+
+			oss << QString("%1: %2%").arg(mmStr).arg(vMm) << "<br />";
 		}
 
 		if (wdsObs>0)
