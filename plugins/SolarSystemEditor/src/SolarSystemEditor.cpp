@@ -402,7 +402,7 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 		return QHash<QString,QString>();
 
 	QStringList groups = solarSystemIni.childGroups();
-	QStringList planetNames = solarSystem->getAllPlanetEnglishNames();
+	QStringList planetNames = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
 	foreach (QString group, groups)
 	{
