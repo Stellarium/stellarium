@@ -81,9 +81,8 @@ QString getUserAgentString()
 //! Return the stellarium series, i.e. "0.9"
 QString getApplicationSeries()
 {
-	QString v = getApplicationVersion();
-	v.truncate(v.lastIndexOf("."));
-	return v;
+	QStringList v = getApplicationVersion().split(".");
+	return v.at(0) + "." + v.at(1);
 }
 
 QString getOperatingSystemInfo()

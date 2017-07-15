@@ -36,11 +36,7 @@ DownloadMgr::DownloadMgr(StelAddOnMgr* mgr)
 	m_networkRequest.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
 	m_networkRequest.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	m_networkRequest.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	// set user agent as "Stellarium/$version$ ($platform$)"
-	m_networkRequest.setRawHeader("User-Agent", QString("Stellarium/%1 (%2)")
-				      .arg(StelUtils::getApplicationVersion())
-				      .arg(StelUtils::getOperatingSystemInfo())
-				      .toLatin1());
+	m_networkRequest.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 
 	connect(this, SIGNAL(updateTableViews()), m_pMgr, SIGNAL(updateTableViews()));
 
@@ -86,7 +82,7 @@ void DownloadMgr::downloadNextAddOn()
 
 	m_networkRequest.setUrl(m_downloadingAddOn->getDownloadURL());
 	m_networkReply = StelApp::getInstance().getNetworkAccessManager()->get(m_networkRequest);
-	m_networkReply->setReadBufferSize(1024*1024*2);
+	m_networkReply->setReadBufferSize(1024*1024*2);	
 	connect(m_networkReply, SIGNAL(readyRead()), this, SLOT(newDataAvailable()));
 	connect(m_networkReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 
@@ -115,9 +111,9 @@ void DownloadMgr::downloadFinished()
 			m_networkReply->deleteLater();
 			QNetworkRequest req(redirect.toUrl());
 			req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-			req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+			req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 			m_networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-			m_networkReply->setReadBufferSize(1024*1024*2);
+			m_networkReply->setReadBufferSize(1024*1024*2);			
 			connect(m_networkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
 			connect(m_networkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
 			return;
