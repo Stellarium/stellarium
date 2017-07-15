@@ -271,7 +271,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		{
 			oss << QString("%1: %2 x %3").arg(q_("Size"), StelUtils::radToDmsStr(majorAxisSize*M_PI/180.), StelUtils::radToDmsStr(minorAxisSize*M_PI/180.)) << "<br />";
 			if (orientationAngle>0)
-				oss << QString("%1: %2%3").arg(q_("Orientation angle"), orientationAngle, QChar(0x00B0)) << "<br />";
+				oss << QString("%1: %2%3").arg(q_("Orientation angle")).arg(orientationAngle).arg(QChar(0x00B0)) << "<br />";
 		}
 	}
 
