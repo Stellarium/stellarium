@@ -7,35 +7,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-13 02:10+0700\n"
+"POT-Creation-Date: 2017-07-15 00:48+0700\n"
 "PO-Revision-Date: 2017-07-13 15:53+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-14 05:14+0000\n"
+"X-Launchpad-Export-Date: 2017-07-15 05:25+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
-#: src/core/modules/CustomObject.cpp:79 src/core/modules/CustomObject.cpp:81
-#: src/core/modules/Asterism.cpp:159 src/core/modules/Constellation.cpp:292
-#: src/core/modules/Nebula.cpp:205 src/core/modules/Planet.cpp:376
-#: src/core/modules/MinorPlanet.cpp:221 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:192 src/core/modules/StarWrapper.cpp:195
-#: plugins/Satellites/src/Satellite.cpp:281
-#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Quasars/src/Quasar.cpp:102
-#: plugins/Pulsars/src/Pulsar.cpp:159 plugins/Exoplanets/src/Exoplanet.cpp:293
-#, qt-format
-msgid "Type: <b>%1</b>"
-msgstr "类型: <b>%1</b>"
+#: src/core/modules/CustomObject.cpp:78
+msgid "custom object"
+msgstr "自定义对象"
 
-#: src/core/modules/CustomObject.cpp:79
+#: src/core/modules/CustomObject.cpp:80
 msgid "custom marker"
 msgstr "自定义标识"
 
-#: src/core/modules/CustomObject.cpp:81
-msgid "custom object"
-msgstr "自定义对象"
+#. TRANSLATORS: type of object
+#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:159
+#: src/core/modules/Constellation.cpp:292 src/core/modules/Nebula.cpp:205
+#: src/core/modules/Nebula.cpp:207 src/core/modules/Planet.cpp:376
+#: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:169
+#: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:189
+#: src/core/modules/StarWrapper.cpp:192 src/gui/AstroCalcDialog.cpp:325
+#: src/ui_configurationDialog.h:1347 plugins/Satellites/src/Satellite.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
+#: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
+#: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:159
+#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:293
+#: plugins/MeteorShowers/src/MeteorShower.cpp:552
+msgid "Type"
+msgstr "类型"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
@@ -396,502 +400,489 @@ msgstr ", %1 米"
 msgid "Celestial body:"
 msgstr "天体"
 
-#: src/core/modules/Nebula.cpp:207 src/core/modules/Comet.cpp:169
-#: plugins/Novae/src/Nova.cpp:147 plugins/Pulsars/src/Pulsar.cpp:170
-#: plugins/MeteorShowers/src/MeteorShower.cpp:552
-#, qt-format
-msgid "Type: <b>%1</b> (%2)"
-msgstr "类型： <b>%1</b> (%2)"
-
-#: src/core/modules/Nebula.cpp:214
-#, qt-format
-msgid "Opacity: <b>%1</b>"
-msgstr "不透明度：<b>%1</b>"
-
-#: src/core/modules/Nebula.cpp:219 src/core/modules/Planet.cpp:382
-#: src/core/modules/MinorPlanet.cpp:227 src/core/modules/Comet.cpp:175
-#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:202
-#, qt-format
-msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
-msgstr "星等 <b>%1</b> (消光至: <b>%2</b>)"
-
-#: src/core/modules/Nebula.cpp:222 src/core/modules/Nebula.cpp:227
+#: src/core/modules/Nebula.cpp:213 src/core/modules/Nebula.cpp:223
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:230
-#: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:204
-#: plugins/Supernovae/src/Supernova.cpp:139 plugins/Novae/src/Nova.cpp:155
-#: plugins/Quasars/src/Quasar.cpp:113 plugins/Exoplanets/src/Exoplanet.cpp:307
-#, qt-format
-msgid "Magnitude: <b>%1</b>"
-msgstr "星等：<b>%1</b>"
+#: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:62
+#: src/core/modules/StarWrapper.cpp:202 src/gui/AstroCalcDialog.cpp:1620
+#: src/gui/AstroCalcDialog.cpp:1655 plugins/Supernovae/src/Supernova.cpp:140
+#: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
+#: plugins/Exoplanets/src/Exoplanet.cpp:304
+msgid "Magnitude"
+msgstr "星等"
 
-#: src/core/modules/Nebula.cpp:228
-msgid " (Photometric system: B)"
-msgstr " (测光系统: B)"
+#: src/core/modules/Nebula.cpp:215
+msgid "Opacity"
+msgstr ""
 
-#: src/core/modules/Nebula.cpp:234 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:123
-#, qt-format
-msgid "Color Index (B-V): <b>%1</b>"
-msgstr "色指数（B-V）：<b>%1</b>"
+#: src/core/modules/Nebula.cpp:218 src/core/modules/Planet.cpp:383
+#: src/core/modules/MinorPlanet.cpp:228 src/core/modules/Comet.cpp:176
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:200
+#: plugins/Satellites/src/Satellite.cpp:288
+#: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
+#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
+msgid "extincted to"
+msgstr ""
 
-#: src/core/modules/Nebula.cpp:239
+#: src/core/modules/Nebula.cpp:223 src/core/modules/StarWrapper.cpp:228
+msgid "Photometric system"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:228 src/core/modules/StarWrapper.cpp:66
+#: src/core/modules/StarWrapper.cpp:210 plugins/Quasars/src/Quasar.cpp:117
+msgid "Color Index (B-V)"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:233
 msgid "Surface brightness"
 msgstr "面亮度"
 
-#: src/core/modules/Nebula.cpp:240
+#: src/core/modules/Nebula.cpp:234
 msgid "after extinction"
 msgstr "消光后"
 
-#: src/core/modules/Nebula.cpp:250 src/core/modules/Nebula.cpp:252
+#: src/core/modules/Nebula.cpp:244 src/core/modules/Nebula.cpp:246
 #: src/gui/AstroCalcDialog.cpp:491 src/gui/AstroCalcDialog.cpp:493
 msgctxt "magnitude"
 msgid "mag"
 msgstr "星等"
 
-#: src/core/modules/Nebula.cpp:250 src/gui/AstroCalcDialog.cpp:491
-#: src/gui/AstroCalcDialog.cpp:497 src/gui/AstroCalcDialog.cpp:568
+#: src/core/modules/Nebula.cpp:244 src/gui/AstroCalcDialog.cpp:491
+#: src/gui/AstroCalcDialog.cpp:498 src/gui/AstroCalcDialog.cpp:574
 msgid "arcmin"
 msgstr "角分"
 
-#: src/core/modules/Nebula.cpp:252 src/gui/AstroCalcDialog.cpp:493
+#: src/core/modules/Nebula.cpp:246 src/gui/AstroCalcDialog.cpp:493
 msgid "arcsec"
 msgstr "角秒"
 
-#: src/core/modules/Nebula.cpp:266 src/core/modules/Nebula.cpp:274
-#, qt-format
-msgid "Contrast index: %1"
-msgstr "对比度: %1"
+#: src/core/modules/Nebula.cpp:260
+msgid "Contrast index"
+msgstr ""
 
-#: src/core/modules/Nebula.cpp:284
-#, qt-format
-msgid "Size: %1"
-msgstr "大小: %1"
+#: src/core/modules/Nebula.cpp:269 src/core/modules/Nebula.cpp:272
+#: src/ui_configurationDialog.h:1356
+msgid "Size"
+msgstr "大小"
 
-#: src/core/modules/Nebula.cpp:287
-#, qt-format
-msgid "Size: %1 x %2"
-msgstr "大小: %1 x %2"
-
-#: src/core/modules/Nebula.cpp:289
-#, qt-format
-msgid "Orientation angle: %1%2"
-msgstr "定向角:%1%2"
+#: src/core/modules/Nebula.cpp:274
+msgid "Orientation angle"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:313 src/core/modules/StarWrapper.cpp:239
-#: plugins/Supernovae/src/Supernova.cpp:152 plugins/Novae/src/Nova.cpp:167
-#: plugins/Exoplanets/src/Exoplanet.cpp:323
-#, qt-format
-msgid "Distance: %1 ly"
-msgstr "距离: %1 光年"
+#: src/core/modules/Nebula.cpp:298 src/core/modules/Nebula.cpp:311
+#: src/core/modules/StarWrapper.cpp:239
+#: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
+#: plugins/Exoplanets/src/Exoplanet.cpp:317
+msgctxt "distance"
+msgid "ly"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:299 src/core/modules/Nebula.cpp:334
+#: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:285
+#: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:240
+#: src/gui/AstroCalcDialog.cpp:1631 src/gui/AstroCalcDialog.cpp:1666
+#: src/ui_configurationDialog.h:1362 plugins/Supernovae/src/Supernova.cpp:155
+#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:318
+msgid "Distance"
+msgstr "距离"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:323
+#: src/core/modules/Nebula.cpp:309
+msgctxt "distance"
 msgid "kpc"
-msgstr "千秒差距"
-
-#. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:325
-msgid "ly"
-msgstr "光年"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:332
+#: src/core/modules/Nebula.cpp:318
+msgctxt "distance"
 msgid "Mpc"
-msgstr "兆秒差距"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:334
+#: src/core/modules/Nebula.cpp:320
+msgctxt "distance"
 msgid "Mio. ly"
-msgstr "兆光年"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:348
-#, qt-format
-msgid "Distance: %1 %2 (%3 %4)"
-msgstr "距离: %1 %2 (%3 %4)"
+msgid "Redshift"
+msgstr ""
 
-#: src/core/modules/Nebula.cpp:362
-#, qt-format
-msgid "Redshift: %1"
-msgstr "红移t: %1"
+#: src/core/modules/Nebula.cpp:359 src/core/modules/StarWrapper.cpp:249
+msgid "Parallax"
+msgstr ""
 
-#: src/core/modules/Nebula.cpp:373 src/core/modules/StarWrapper.cpp:248
-#, qt-format
-msgid "Parallax: %1\""
-msgstr "视差: %1\""
+#: src/core/modules/Nebula.cpp:363
+msgid "Morphological description"
+msgstr ""
 
-#: src/core/modules/Nebula.cpp:377
-msgid "Morphological description: "
-msgstr "形态描述: "
-
-#: src/core/modules/Nebula.cpp:996
+#: src/core/modules/Nebula.cpp:982
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "中心高度密集"
 
-#: src/core/modules/Nebula.cpp:999
+#: src/core/modules/Nebula.cpp:985
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "中心稠密"
 
-#: src/core/modules/Nebula.cpp:1002
+#: src/core/modules/Nebula.cpp:988
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "核心的恒星丰富"
 
-#: src/core/modules/Nebula.cpp:1005
+#: src/core/modules/Nebula.cpp:991
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "中等丰富聚集"
 
-#: src/core/modules/Nebula.cpp:1010
+#: src/core/modules/Nebula.cpp:996
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "中等聚集"
 
-#: src/core/modules/Nebula.cpp:1013
+#: src/core/modules/Nebula.cpp:999
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "较为松散的趋向中心"
 
-#: src/core/modules/Nebula.cpp:1016
+#: src/core/modules/Nebula.cpp:1002
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "松散的趋向中心"
 
-#: src/core/modules/Nebula.cpp:1019
+#: src/core/modules/Nebula.cpp:1005
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "松散"
 
-#: src/core/modules/Nebula.cpp:1022
+#: src/core/modules/Nebula.cpp:1008
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "非常松散"
 
-#: src/core/modules/Nebula.cpp:1025
+#: src/core/modules/Nebula.cpp:1011
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "几乎没有向中心聚集"
 
-#: src/core/modules/Nebula.cpp:1028
+#: src/core/modules/Nebula.cpp:1014
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "未记录集中度等级"
 
-#: src/core/modules/Nebula.cpp:1048
+#: src/core/modules/Nebula.cpp:1034
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "中心强壮"
 
-#: src/core/modules/Nebula.cpp:1051
+#: src/core/modules/Nebula.cpp:1037
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "中心较小"
 
-#: src/core/modules/Nebula.cpp:1054
+#: src/core/modules/Nebula.cpp:1040
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "没有明显的集中"
 
-#: src/core/modules/Nebula.cpp:1057
+#: src/core/modules/Nebula.cpp:1043
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "星场集中度"
 
-#: src/core/modules/Nebula.cpp:1060
+#: src/core/modules/Nebula.cpp:1046
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "未记录集中度等级"
 
-#: src/core/modules/Nebula.cpp:1066
+#: src/core/modules/Nebula.cpp:1052
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "成员的亮度差异小"
 
-#: src/core/modules/Nebula.cpp:1069
+#: src/core/modules/Nebula.cpp:1055
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "成员中等亮度差异"
 
-#: src/core/modules/Nebula.cpp:1072
+#: src/core/modules/Nebula.cpp:1058
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "成员亮度差异大"
 
-#: src/core/modules/Nebula.cpp:1075
+#: src/core/modules/Nebula.cpp:1061
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "未记录亮度差异"
 
-#: src/core/modules/Nebula.cpp:1081
+#: src/core/modules/Nebula.cpp:1067
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "不到50颗恒星的贫星团"
 
-#: src/core/modules/Nebula.cpp:1084
+#: src/core/modules/Nebula.cpp:1070
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "包含50-100颗恒星的中等星团"
 
-#: src/core/modules/Nebula.cpp:1087
+#: src/core/modules/Nebula.cpp:1073
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "超过100颗恒星的富星团"
 
-#: src/core/modules/Nebula.cpp:1090
+#: src/core/modules/Nebula.cpp:1076
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "无法确定成员数量"
 
-#: src/core/modules/Nebula.cpp:1094
+#: src/core/modules/Nebula.cpp:1080
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "位于星云内的星团"
 
-#: src/core/modules/Nebula.cpp:1115
+#: src/core/modules/Nebula.cpp:1101
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "非常明亮"
 
-#: src/core/modules/Nebula.cpp:1118
+#: src/core/modules/Nebula.cpp:1104
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "明亮"
 
-#: src/core/modules/Nebula.cpp:1121
+#: src/core/modules/Nebula.cpp:1107
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1124
+#: src/core/modules/Nebula.cpp:1110
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "暗淡"
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1113
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "非常暗淡"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1116
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "不确定亮度"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1119
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "未记录亮度"
 
-#: src/core/modules/Nebula.cpp:1139
+#: src/core/modules/Nebula.cpp:1125
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "照亮星云的恒星在星云内部"
 
-#: src/core/modules/Nebula.cpp:1142
+#: src/core/modules/Nebula.cpp:1128
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "恒星位于被照亮星云之外"
 
-#: src/core/modules/Nebula.cpp:1145
+#: src/core/modules/Nebula.cpp:1131
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "恒星位于被照亮星云角落"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1150
+#: src/core/modules/Nebula.cpp:1136
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "恒星位于被照亮的特殊星云之外"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1156
+#: src/core/modules/Nebula.cpp:1142
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "发光的特殊星云"
 
-#: src/core/modules/Nebula.cpp:1160
+#: src/core/modules/Nebula.cpp:1146
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "未定反射星云"
 
-#: src/core/modules/Nebula.cpp:1183
+#: src/core/modules/Nebula.cpp:1169
 msgid "circular form"
 msgstr "圆形"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1172
 msgid "elliptical form"
 msgstr "椭圆"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1175
 msgid "irregular form"
 msgstr "不规则"
 
-#: src/core/modules/Nebula.cpp:1192
+#: src/core/modules/Nebula.cpp:1178
 msgid "undocumented form"
 msgstr "不能确定形态"
 
-#: src/core/modules/Nebula.cpp:1198
+#: src/core/modules/Nebula.cpp:1184
 msgid "amorphous structure"
 msgstr "无定形"
 
-#: src/core/modules/Nebula.cpp:1201
+#: src/core/modules/Nebula.cpp:1187
 msgid "conventional structure"
 msgstr "常规结构"
 
-#: src/core/modules/Nebula.cpp:1204
+#: src/core/modules/Nebula.cpp:1190
 msgid "filamentary structure"
 msgstr "纤维结构"
 
-#: src/core/modules/Nebula.cpp:1207
+#: src/core/modules/Nebula.cpp:1193
 msgid "undocumented structure"
 msgstr "不能确定结构"
 
-#: src/core/modules/Nebula.cpp:1213
+#: src/core/modules/Nebula.cpp:1199
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "极暗淡"
 
-#: src/core/modules/Nebula.cpp:1216
+#: src/core/modules/Nebula.cpp:1202
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "中等亮度"
 
-#: src/core/modules/Nebula.cpp:1219
+#: src/core/modules/Nebula.cpp:1205
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "极明亮"
 
-#: src/core/modules/Nebula.cpp:1222
+#: src/core/modules/Nebula.cpp:1208
 msgid "undocumented brightness"
 msgstr "未记录亮度"
 
-#: src/core/modules/Nebula.cpp:1238
+#: src/core/modules/Nebula.cpp:1224
 msgid "galaxy"
 msgstr "星系"
 
-#: src/core/modules/Nebula.cpp:1241
+#: src/core/modules/Nebula.cpp:1227
 msgid "active galaxy"
 msgstr "活动星系"
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1230
 msgid "radio galaxy"
 msgstr "射电星系"
 
-#: src/core/modules/Nebula.cpp:1247
+#: src/core/modules/Nebula.cpp:1233
 msgid "interacting galaxy"
 msgstr "互扰星系"
 
-#: src/core/modules/Nebula.cpp:1250 plugins/Quasars/src/Quasar.cpp:102
+#: src/core/modules/Nebula.cpp:1236 plugins/Quasars/src/Quasar.cpp:102
 msgid "quasar"
 msgstr "类星体"
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1239
 msgid "star cluster"
 msgstr "星团"
 
-#: src/core/modules/Nebula.cpp:1256
+#: src/core/modules/Nebula.cpp:1242
 msgid "open star cluster"
 msgstr "疏散星团"
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1245
 msgid "globular star cluster"
 msgstr "球状星团"
 
-#: src/core/modules/Nebula.cpp:1262
+#: src/core/modules/Nebula.cpp:1248
 msgid "nebula"
 msgstr "星云"
 
-#: src/core/modules/Nebula.cpp:1265
+#: src/core/modules/Nebula.cpp:1251
 msgid "planetary nebula"
 msgstr "行星状星云"
 
-#: src/core/modules/Nebula.cpp:1268
+#: src/core/modules/Nebula.cpp:1254
 msgid "dark nebula"
 msgstr "暗星云"
 
-#: src/core/modules/Nebula.cpp:1271
+#: src/core/modules/Nebula.cpp:1257
 msgid "cluster associated with nebulosity"
 msgstr "与星云相关的星团"
 
-#: src/core/modules/Nebula.cpp:1274
+#: src/core/modules/Nebula.cpp:1260
 msgid "bipolar nebula"
 msgstr "双极星云"
 
-#: src/core/modules/Nebula.cpp:1277
+#: src/core/modules/Nebula.cpp:1263
 msgid "emission nebula"
 msgstr "发射星云"
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1266
 msgid "HII region"
 msgstr "电离氢区"
 
-#: src/core/modules/Nebula.cpp:1283
+#: src/core/modules/Nebula.cpp:1269
 msgid "reflection nebula"
 msgstr "反射星云"
 
-#: src/core/modules/Nebula.cpp:1286
+#: src/core/modules/Nebula.cpp:1272
 msgid "supernova remnant"
 msgstr "超新星遗迹"
 
-#: src/core/modules/Nebula.cpp:1289
+#: src/core/modules/Nebula.cpp:1275
 msgid "stellar association"
 msgstr "星协"
 
-#: src/core/modules/Nebula.cpp:1292
+#: src/core/modules/Nebula.cpp:1278
 msgid "star cloud"
 msgstr "恒星云"
 
-#: src/core/modules/Nebula.cpp:1295
+#: src/core/modules/Nebula.cpp:1281
 msgid "interstellar matter"
 msgstr "星际物质"
 
-#: src/core/modules/Nebula.cpp:1298
+#: src/core/modules/Nebula.cpp:1284
 msgid "emission object"
 msgstr "发射线天体"
 
-#: src/core/modules/Nebula.cpp:1301
+#: src/core/modules/Nebula.cpp:1287
 msgid "BL Lac object"
 msgstr "蝎虎座BL型天体"
 
-#: src/core/modules/Nebula.cpp:1304
+#: src/core/modules/Nebula.cpp:1290
 msgid "blazar"
 msgstr "耀变体"
 
-#: src/core/modules/Nebula.cpp:1307
+#: src/core/modules/Nebula.cpp:1293
 msgid "molecular cloud"
 msgstr "分子云"
 
-#: src/core/modules/Nebula.cpp:1310
+#: src/core/modules/Nebula.cpp:1296
 msgid "young stellar object"
 msgstr "初期恒星体"
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1299
 msgid "possible quasar"
 msgstr "可能的类星体"
 
-#: src/core/modules/Nebula.cpp:1316
+#: src/core/modules/Nebula.cpp:1302
 msgid "possible planetary nebula"
 msgstr "可能的行星状星云"
 
-#: src/core/modules/Nebula.cpp:1319
+#: src/core/modules/Nebula.cpp:1305
 msgid "protoplanetary nebula"
 msgstr "原行星云"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1322 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:185 src/gui/AstroCalcDialog.cpp:622
+#: src/core/modules/Nebula.cpp:1308 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/StarWrapper.cpp:182 src/gui/AstroCalcDialog.cpp:628
 #: src/translations.h:46
 msgid "star"
 msgstr "恒星"
 
-#: src/core/modules/Nebula.cpp:1325
+#: src/core/modules/Nebula.cpp:1311
 msgid "object of unknown nature"
 msgstr "性质不明对象"
 
-#: src/core/modules/Nebula.cpp:1328
+#: src/core/modules/Nebula.cpp:1314
 msgid "undocumented type"
 msgstr "无法识别的对象"
 
@@ -903,152 +894,150 @@ msgstr "深空天体"
 msgid "Toggle DSO type filter"
 msgstr "切换深空天体类型过滤器"
 
-#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:240
-#: src/core/modules/MinorPlanet.cpp:244 src/core/modules/Comet.cpp:187
-#: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:117
-#, qt-format
-msgid "Absolute Magnitude: %1"
-msgstr "绝对星等: %1"
+#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:239
+#: src/core/modules/MinorPlanet.cpp:243 src/core/modules/Comet.cpp:187
+#: src/core/modules/StarWrapper.cpp:206 plugins/Quasars/src/Quasar.cpp:114
+msgid "Absolute Magnitude"
+msgstr ""
 
 #: src/core/modules/Planet.cpp:392
 #, qt-format
 msgid "Mean Opposition Magnitude: %1"
 msgstr "平衡星等: %1"
 
-#: src/core/modules/Planet.cpp:419 src/core/modules/MinorPlanet.cpp:259
-#: src/core/modules/Comet.cpp:199
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "距太阳距离: %1AU (%2 km)"
+#. TRANSLATORS: Unit of measure for distance - astronomical unit
+#: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
+#: src/core/modules/Comet.cpp:202 src/gui/AstroCalcDialog.cpp:311
+#: src/gui/AstroCalcDialog.cpp:572 src/gui/AstroCalcDialog.cpp:796
+#: src/gui/AstroCalcDialog.cpp:832 src/gui/AstroCalcDialog.cpp:1599
+#: plugins/Exoplanets/src/Exoplanet.cpp:346
+msgctxt "distance, astronomical unit"
+msgid "AU"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:426 src/core/modules/MinorPlanet.cpp:266
-#: src/core/modules/Comet.cpp:206
-#, no-c-format, qt-format
-msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "距太阳距离: %1AU (%2兆km)"
+#. TRANSLATORS: Unit of measure for distance - kilometers
+#: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Comet.cpp:193
+msgctxt "distance"
+msgid "km"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:436 src/core/modules/MinorPlanet.cpp:276
-#: src/core/modules/Comet.cpp:216
-#, no-c-format, qt-format
-msgid "Distance: %1AU (%2 km)"
-msgstr "距离: %1 天文单位(%2 千米)"
+#. TRANSLATORS: Unit of measure for distance - milliones kilometers
+#: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
+#: src/core/modules/MinorPlanet.cpp:268 src/core/modules/MinorPlanet.cpp:283
+#: src/core/modules/Comet.cpp:195
+msgctxt "distance"
+msgid "Mio km"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:443 src/core/modules/MinorPlanet.cpp:283
-#: src/core/modules/Comet.cpp:223
-#, no-c-format, qt-format
-msgid "Distance: %1AU (%2 Mio km)"
-msgstr "距离: %1AU (%2兆km)"
+#: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:270
+#: src/core/modules/Comet.cpp:215
+msgid "Distance from Sun"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:457 src/core/modules/Planet.cpp:461
-#, qt-format
-msgid "Apparent diameter: %1, with rings: %2"
-msgstr "视直径: %1, 包括环: %2"
+#: src/core/modules/Planet.cpp:470
+msgid "with rings"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:470 src/core/modules/Planet.cpp:474
-#: src/core/modules/MinorPlanet.cpp:296 src/core/modules/MinorPlanet.cpp:300
-#, qt-format
-msgid "Apparent diameter: %1, scaled up to: %2"
-msgstr "视直径r: %1, 放大到: %2"
+#: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:306
+msgid "scaled up to"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:481 src/core/modules/Planet.cpp:483
-#: src/core/modules/MinorPlanet.cpp:307 src/core/modules/MinorPlanet.cpp:309
-#, qt-format
-msgid "Apparent diameter: %1"
-msgstr "视直径: %1"
+#: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:316
+msgid "Apparent diameter"
+msgstr ""
 
-#. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:500 src/core/modules/MinorPlanet.cpp:321
-#, qt-format
-msgid "Sidereal period: %1 days (%2 a)"
-msgstr "公转轨道周期：%1天 (%2儒略年)"
+#: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:325
+#: src/core/modules/StarWrapper.cpp:252
+msgctxt "duration"
+msgid "days"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:503
-#, qt-format
-msgid "Sidereal day: %1"
-msgstr "恒星日: %1"
+#: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:327
+#: src/core/modules/Comet.cpp:241
+msgid "Sidereal period"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:504
-#, qt-format
-msgid "Mean solar day: %1"
-msgstr "平太阳日: %1"
+#: src/core/modules/Planet.cpp:516
+msgid "Sidereal day"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:508
+#: src/core/modules/Planet.cpp:517
+msgid "Mean solar day"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:521
 msgid "The period of rotation is chaotic"
 msgstr "自转周期不规则"
 
-#: src/core/modules/Planet.cpp:527
+#: src/core/modules/Planet.cpp:540
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "娥眉月"
 
-#: src/core/modules/Planet.cpp:529
+#: src/core/modules/Planet.cpp:542
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "上弦月"
 
-#: src/core/modules/Planet.cpp:531
+#: src/core/modules/Planet.cpp:544
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "盈凸月"
 
-#: src/core/modules/Planet.cpp:533
+#: src/core/modules/Planet.cpp:546
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "满月"
 
-#: src/core/modules/Planet.cpp:535
+#: src/core/modules/Planet.cpp:548
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "亏凸月"
 
-#: src/core/modules/Planet.cpp:537
+#: src/core/modules/Planet.cpp:550
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "下弦月"
 
-#: src/core/modules/Planet.cpp:539
+#: src/core/modules/Planet.cpp:552
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "残月"
 
-#: src/core/modules/Planet.cpp:541
+#: src/core/modules/Planet.cpp:554
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "新月"
 
-#: src/core/modules/Planet.cpp:546 src/core/modules/Planet.cpp:551
-#: src/core/modules/MinorPlanet.cpp:329 src/core/modules/MinorPlanet.cpp:334
-#: src/core/modules/Comet.cpp:250 src/core/modules/Comet.cpp:255
-#, qt-format
-msgid "Phase Angle: %1"
-msgstr "位相角: %1"
+#: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:345
+#: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1646
+#: src/gui/AstroCalcDialog.cpp:1681
+msgid "Phase angle"
+msgstr "相位角"
 
-#: src/core/modules/Planet.cpp:547 src/core/modules/Planet.cpp:552
-#: src/core/modules/MinorPlanet.cpp:330 src/core/modules/MinorPlanet.cpp:335
-#: src/core/modules/Comet.cpp:251 src/core/modules/Comet.cpp:256
-#, qt-format
-msgid "Elongation: %1"
-msgstr "距角: %1"
-
-#: src/core/modules/Planet.cpp:555
-#, qt-format
-msgid "Illuminated: %1%"
-msgstr "被照亮的部分: %1%"
-
-#: src/core/modules/Planet.cpp:556
-#, qt-format
-msgid "Albedo: %1"
-msgstr "反照率： %1"
-
-#: src/core/modules/Planet.cpp:558
-#, qt-format
-msgid "Phase: %1"
-msgstr "相: %1"
+#: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:346
+#: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1636
+#: src/gui/AstroCalcDialog.cpp:1671
+msgid "Elongation"
+msgstr "距角"
 
 #: src/core/modules/Planet.cpp:571
-#, qt-format
-msgid "Eclipse Factor: %1%"
-msgstr "蚀率: %1%"
+msgid "Illuminated"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:572
+msgid "Albedo"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1626
+#: src/gui/AstroCalcDialog.cpp:1661
+msgid "Phase"
+msgstr "相位"
+
+#: src/core/modules/Planet.cpp:587
+msgid "Eclipse Factor"
+msgstr ""
 
 #: src/core/modules/MinorPlanet.cpp:214
 #, qt-format
@@ -1065,30 +1054,27 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "周期彗星"
 
-#. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
-#: src/core/modules/Comet.cpp:236
-#, qt-format
-msgid "Sidereal period: %1 a"
-msgstr "恒星周期: %1 年"
+#. TRANSLATORS: Unit of measure for speed - kilometers per second
+#: src/core/modules/Comet.cpp:245
+msgctxt "speed"
+msgid "km/s"
+msgstr ""
 
-#: src/core/modules/Comet.cpp:241
-#, no-c-format, qt-format
-msgid "Speed: %1 km/s"
-msgstr "速度: %1 km/s"
+#: src/core/modules/Comet.cpp:247
+msgid "Speed"
+msgstr ""
 
-#: src/core/modules/Comet.cpp:265
-#, no-c-format, qt-format
-msgid "Coma diameter (estimate): %1 km"
-msgstr "彗尾直径（估计）: %1 千米"
+#: src/core/modules/Comet.cpp:272
+msgid "Coma diameter (estimate)"
+msgstr ""
 
-#: src/core/modules/Comet.cpp:269
-#, no-c-format, qt-format
-msgid "Gas tail length (estimate): %1 Mio km"
-msgstr "彗尾长度（估计）: %1 兆千米"
+#: src/core/modules/Comet.cpp:273
+msgid "Gas tail length (estimate)"
+msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1182
-#: src/gui/AstroCalcDialog.cpp:2657 src/translations.h:68
+#: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1188
+#: src/gui/AstroCalcDialog.cpp:2663 src/translations.h:68
 msgid "Planets"
 msgstr "行星"
 
@@ -1119,103 +1105,87 @@ msgstr "行星标识"
 msgid "Native planet names (from starlore)"
 msgstr "本地行星名 (来自 starlore)"
 
-#: src/core/modules/StarWrapper.cpp:166
+#: src/core/modules/StarWrapper.cpp:163
 msgid "eruptive variable star"
 msgstr "爆发变星"
 
-#: src/core/modules/StarWrapper.cpp:168
+#: src/core/modules/StarWrapper.cpp:165
 msgid "pulsating variable star"
 msgstr "脉动变星"
 
-#: src/core/modules/StarWrapper.cpp:170
+#: src/core/modules/StarWrapper.cpp:167
 msgid "rotating variable star"
 msgstr "自转变星"
 
-#: src/core/modules/StarWrapper.cpp:172
+#: src/core/modules/StarWrapper.cpp:169
 msgid "cataclysmic variable star"
 msgstr "激变变星"
 
-#: src/core/modules/StarWrapper.cpp:175
+#: src/core/modules/StarWrapper.cpp:172
 msgid "eclipsing binary system"
 msgstr "食双星系统"
 
-#: src/core/modules/StarWrapper.cpp:179 src/gui/AstroCalcDialog.cpp:636
+#: src/core/modules/StarWrapper.cpp:176 src/gui/AstroCalcDialog.cpp:642
 msgid "variable star"
 msgstr "变星"
 
-#: src/core/modules/StarWrapper.cpp:183 src/gui/AstroCalcDialog.cpp:630
+#: src/core/modules/StarWrapper.cpp:180 src/gui/AstroCalcDialog.cpp:636
 msgid "double star"
 msgstr "双星"
 
-#: src/core/modules/StarWrapper.cpp:190
-#, qt-format
-msgid "Type: <b>%1, %2</b>"
-msgstr "类型：<b>%1, %2</b>"
+#: src/core/modules/StarWrapper.cpp:228
+msgid "Magnitude range"
+msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:227
-#, qt-format
-msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr "星等范围：<b>%1</b>%2<b>%3</b> (测光系统：%4)"
+#: src/core/modules/StarWrapper.cpp:246
+#: plugins/Exoplanets/src/Exoplanet.cpp:312
+msgid "Spectral Type"
+msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:229
-#, qt-format
-msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr "星等范围：<b>%1</b>%2<b>%3/%4</b> (测光系统：%5)"
-
-#: src/core/modules/StarWrapper.cpp:245
-#: plugins/Exoplanets/src/Exoplanet.cpp:317
-#, qt-format
-msgid "Spectral Type: %1"
-msgstr "光谱类型: %1"
-
-#: src/core/modules/StarWrapper.cpp:251
-#, qt-format
-msgid "Period: %1 days"
-msgstr "周期：%1天"
+#: src/core/modules/StarWrapper.cpp:252
+#: plugins/Exoplanets/src/Exoplanet.cpp:343
+msgid "Period"
+msgstr "周期"
 
 #: src/core/modules/StarWrapper.cpp:260
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr "下次极小亮度：%1 UTC"
+msgid "Next maximum light"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:262
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr "下次极大亮度：%1 UTC"
+msgid "Next minimum light"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:269
-#, qt-format
-msgid "Duration of eclipse: %1%"
-msgstr "掩食时间：%1%"
+msgid "Rising time"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:271
-#, qt-format
-msgid "Rising time: %1%"
-msgstr "升起时间: %1%"
+msgid "Duration of eclipse"
+msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:276
+#: src/core/modules/StarWrapper.cpp:278
 msgid "Position angle"
 msgstr "方位角"
 
-#: src/core/modules/StarWrapper.cpp:280 src/core/modules/StarWrapper.cpp:282
-#: src/gui/AstroCalcDialog.cpp:1781
+#: src/core/modules/StarWrapper.cpp:282 src/core/modules/StarWrapper.cpp:284
+#: src/gui/AstroCalcDialog.cpp:1787
 msgid "Separation"
 msgstr "间距"
 
-#: src/core/modules/StarWrapper.cpp:292
+#: src/core/modules/StarWrapper.cpp:294
 msgid "Proper motions by axes"
 msgstr "轴自行"
 
-#: src/core/modules/StarWrapper.cpp:292 src/core/modules/StarWrapper.cpp:294
+#: src/core/modules/StarWrapper.cpp:294 src/core/modules/StarWrapper.cpp:296
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "毫角秒"
 
-#: src/core/modules/StarWrapper.cpp:293
+#: src/core/modules/StarWrapper.cpp:295
 msgid "Position angle of the proper motion"
 msgstr "自行位置角"
 
-#: src/core/modules/StarWrapper.cpp:294
+#: src/core/modules/StarWrapper.cpp:296
 msgid "Angular speed of the proper motion"
 msgstr "自行的角速度"
 
@@ -1240,7 +1210,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr "无法创建喷口发件人。 有关详细信息，请参阅日志。"
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
-#: src/gui/AstroCalcDialog.cpp:769 src/gui/AstroCalcDialog.cpp:1778
+#: src/gui/AstroCalcDialog.cpp:775 src/gui/AstroCalcDialog.cpp:1784
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -1974,9 +1944,8 @@ msgid "Apparent Sidereal Time"
 msgstr "真恒星时"
 
 #: src/core/StelObject.cpp:499
-#, qt-format
-msgid "IAU Constellation: %1"
-msgstr "IAU星座: %1"
+msgid "IAU Constellation"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -2093,7 +2062,7 @@ msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:1008
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 msgid "Authors"
 msgstr "作者"
 
@@ -2105,7 +2074,7 @@ msgstr "联系信息"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:88
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
@@ -2331,7 +2300,7 @@ msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
 #: src/gui/ConfigurationDialog.cpp:1561 src/gui/ConfigurationDialog.cpp:1596
-#: src/gui/StelGuiItems.cpp:636 src/gui/LocationDialog.cpp:425
+#: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:425
 msgid "System default"
 msgstr "系统默认"
 
@@ -2686,82 +2655,82 @@ msgstr "自动隐藏垂直工具栏"
 msgid "Toggle visibility of GUI"
 msgstr "显示/隐藏工具栏"
 
-#: src/gui/StelGuiItems.cpp:325 src/gui/StelGuiItems.cpp:896
+#: src/gui/StelGuiItems.cpp:325 src/gui/StelGuiItems.cpp:904
 msgid "Space"
 msgstr "空格键"
 
-#: src/gui/StelGuiItems.cpp:638
+#: src/gui/StelGuiItems.cpp:646
 msgid "Time zone"
 msgstr "时区"
 
-#: src/gui/StelGuiItems.cpp:641 src/gui/LocationDialog.cpp:423
+#: src/gui/StelGuiItems.cpp:649 src/gui/LocationDialog.cpp:423
 msgid "Local Mean Solar Time"
 msgstr "本地平太阳时"
 
-#: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:424
+#: src/gui/StelGuiItems.cpp:652 src/gui/LocationDialog.cpp:424
 msgid "Local True Solar Time"
 msgstr "本地真太阳时"
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:647
+#: src/gui/StelGuiItems.cpp:655
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr "分/秒"
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:655
+#: src/gui/StelGuiItems.cpp:663
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr "时/秒"
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:661
+#: src/gui/StelGuiItems.cpp:669
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr "天/秒"
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:667
+#: src/gui/StelGuiItems.cpp:675
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr "年/秒"
 
-#: src/gui/StelGuiItems.cpp:669 src/gui/StelGuiItems.cpp:671
+#: src/gui/StelGuiItems.cpp:677 src/gui/StelGuiItems.cpp:679
 msgid "Simulation speed"
 msgstr "仿真速度"
 
-#: src/gui/StelGuiItems.cpp:707
+#: src/gui/StelGuiItems.cpp:715
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1 米"
 
-#: src/gui/StelGuiItems.cpp:739
+#: src/gui/StelGuiItems.cpp:747
 #, qt-format
 msgid "planetocentric distance %1 km"
 msgstr "行星中心距离%1 千米"
 
-#: src/gui/StelGuiItems.cpp:741
+#: src/gui/StelGuiItems.cpp:749
 msgid "planetocentric observer"
 msgstr "行星中心观察者"
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:756
+#: src/gui/StelGuiItems.cpp:764
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "视场角"
 
-#: src/gui/StelGuiItems.cpp:772
+#: src/gui/StelGuiItems.cpp:780
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr "视场"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:791
+#: src/gui/StelGuiItems.cpp:799
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "帧数"
 
-#: src/gui/StelGuiItems.cpp:799
+#: src/gui/StelGuiItems.cpp:807
 msgid "Frames per second"
 msgstr "帧每秒"
 
@@ -3106,15 +3075,15 @@ msgstr "赤纬"
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:255 src/gui/AstroCalcDialog.cpp:275
-#: src/gui/AstroCalcDialog.cpp:774
+#: src/gui/AstroCalcDialog.cpp:780
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:947
 msgid "Azimuth"
 msgstr "方位角"
 
 #. TRANSLATORS: altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:277
-#: src/gui/AstroCalcDialog.cpp:776 src/gui/AstroCalcDialog.cpp:1355
-#: src/gui/AstroCalcDialog.cpp:1758 src/gui/AstroCalcDialog.cpp:1760
+#: src/gui/AstroCalcDialog.cpp:782 src/gui/AstroCalcDialog.cpp:1361
+#: src/gui/AstroCalcDialog.cpp:1764 src/gui/AstroCalcDialog.cpp:1766
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "高度角"
@@ -3187,20 +3156,20 @@ msgstr "月球的长期加速度"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:271 src/ui_configurationDialog.h:1368
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
+#: plugins/Exoplanets/src/Exoplanet.cpp:342
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:181
 msgid "Name"
 msgstr "名称"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:282 src/gui/AstroCalcDialog.cpp:781
+#: src/gui/AstroCalcDialog.cpp:282 src/gui/AstroCalcDialog.cpp:787
 msgid "RA (J2000)"
 msgstr "赤经（J2000）"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:284 src/gui/AstroCalcDialog.cpp:783
+#: src/gui/AstroCalcDialog.cpp:284 src/gui/AstroCalcDialog.cpp:789
 msgid "Dec (J2000)"
 msgstr "赤纬（J2000）"
 
@@ -3210,7 +3179,7 @@ msgid "opacity"
 msgstr "不透明度"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:294 src/gui/AstroCalcDialog.cpp:786
+#: src/gui/AstroCalcDialog.cpp:294 src/gui/AstroCalcDialog.cpp:792
 msgid "mag"
 msgstr "星等"
 
@@ -3235,16 +3204,9 @@ msgid "d"
 msgstr "天"
 
 #. TRANSLATORS: distance, AU
-#: src/gui/AstroCalcDialog.cpp:311 src/gui/AstroCalcDialog.cpp:790
+#: src/gui/AstroCalcDialog.cpp:311 src/gui/AstroCalcDialog.cpp:796
 msgid "dist."
 msgstr "距离"
-
-#: src/gui/AstroCalcDialog.cpp:311 src/gui/AstroCalcDialog.cpp:566
-#: src/gui/AstroCalcDialog.cpp:790 src/gui/AstroCalcDialog.cpp:826
-#: src/gui/AstroCalcDialog.cpp:1593
-msgctxt "astronomical unit"
-msgid "AU"
-msgstr "天文单位"
 
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:316
@@ -3261,13 +3223,7 @@ msgstr "\"/年"
 msgid "S.B."
 msgstr "面亮度"
 
-#. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:325 src/ui_configurationDialog.h:1347
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
-msgid "Type"
-msgstr "类型"
-
-#: src/gui/AstroCalcDialog.cpp:354 src/gui/AstroCalcDialog.cpp:2661
+#: src/gui/AstroCalcDialog.cpp:354 src/gui/AstroCalcDialog.cpp:2667
 #: src/ui_viewDialog.h:2255 src/ui_dsoColorsDialog.h:542
 msgid "Galaxies"
 msgstr "星系"
@@ -3296,7 +3252,7 @@ msgid "Bright quasars"
 msgstr "明亮的类星体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:359 src/gui/AstroCalcDialog.cpp:2662
+#: src/gui/AstroCalcDialog.cpp:359 src/gui/AstroCalcDialog.cpp:2668
 #: src/translations.h:123 src/ui_viewDialog.h:2253 src/ui_dsoColorsDialog.h:534
 msgid "Star clusters"
 msgstr "星团"
@@ -3332,15 +3288,15 @@ msgid "Nebulae"
 msgstr "星云"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:365 src/gui/AstroCalcDialog.cpp:1195
-#: src/gui/AstroCalcDialog.cpp:2671 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:365 src/gui/AstroCalcDialog.cpp:1201
+#: src/gui/AstroCalcDialog.cpp:2677 src/translations.h:105
 #: src/ui_viewDialog.h:2254 src/ui_dsoColorsDialog.h:580
 msgid "Planetary nebulae"
 msgstr "行星状星云"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:366 src/gui/AstroCalcDialog.cpp:1197
-#: src/gui/AstroCalcDialog.cpp:2660 src/translations.h:107
+#: src/gui/AstroCalcDialog.cpp:366 src/gui/AstroCalcDialog.cpp:1203
+#: src/gui/AstroCalcDialog.cpp:2666 src/translations.h:107
 #: src/ui_viewDialog.h:2257 src/ui_dsoColorsDialog.h:540
 msgid "Dark nebulae"
 msgstr "暗星云"
@@ -3530,19 +3486,19 @@ msgid "Herschel 400 Catalogue"
 msgstr "Herschel 400目录"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:420 src/gui/AstroCalcDialog.cpp:2672
+#: src/gui/AstroCalcDialog.cpp:420 src/gui/AstroCalcDialog.cpp:2678
 #: src/translations.h:196
 msgid "Bright double stars"
 msgstr "亮双星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:421 src/gui/AstroCalcDialog.cpp:2673
+#: src/gui/AstroCalcDialog.cpp:421 src/gui/AstroCalcDialog.cpp:2679
 #: src/translations.h:198
 msgid "Bright variable stars"
 msgstr "亮变星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:422 src/gui/AstroCalcDialog.cpp:2674
+#: src/gui/AstroCalcDialog.cpp:422 src/gui/AstroCalcDialog.cpp:2680
 #: src/translations.h:200
 msgid "Bright stars with high proper motion"
 msgstr "高自行亮星目录"
@@ -3556,311 +3512,290 @@ msgstr "太阳系天体"
 msgid "Positions on %1"
 msgstr "坐标 %1"
 
-#: src/gui/AstroCalcDialog.cpp:497
+#: src/gui/AstroCalcDialog.cpp:498
 msgid "Average angular size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:563 src/gui/AstroCalcDialog.cpp:823
+#: src/gui/AstroCalcDialog.cpp:569 src/gui/AstroCalcDialog.cpp:829
 msgid "Planetocentric distance"
 msgstr "与行星中心距离"
 
-#: src/gui/AstroCalcDialog.cpp:565 src/gui/AstroCalcDialog.cpp:825
+#: src/gui/AstroCalcDialog.cpp:571 src/gui/AstroCalcDialog.cpp:831
 msgid "Topocentric distance"
 msgstr "地面距离"
 
-#: src/gui/AstroCalcDialog.cpp:568
+#: src/gui/AstroCalcDialog.cpp:574
 msgid "Angular size (with rings, if any)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:642
+#: src/gui/AstroCalcDialog.cpp:648
 msgid "star with high proper motion"
 msgstr "高自行星"
 
-#: src/gui/AstroCalcDialog.cpp:770 src/ui_dateTimeDialogGui.h:382
+#: src/gui/AstroCalcDialog.cpp:776 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
 msgstr "儒略日"
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:788
+#: src/gui/AstroCalcDialog.cpp:794
 msgid "phase"
 msgstr "相位"
 
 #. TRANSLATORS: elongation
-#: src/gui/AstroCalcDialog.cpp:792
+#: src/gui/AstroCalcDialog.cpp:798
 msgid "elong."
 msgstr "距角"
 
-#: src/gui/AstroCalcDialog.cpp:976 src/gui/AstroCalcDialog.cpp:2049
+#: src/gui/AstroCalcDialog.cpp:982 src/gui/AstroCalcDialog.cpp:2055
 msgid "CSV (Comma delimited)"
 msgstr "CSV (逗号分隔)"
 
-#: src/gui/AstroCalcDialog.cpp:978
+#: src/gui/AstroCalcDialog.cpp:984
 msgid "Save calculated ephemerides as..."
 msgstr "将计算的星历另存为..."
 
-#: src/gui/AstroCalcDialog.cpp:1099
+#: src/gui/AstroCalcDialog.cpp:1105
 msgid "10 minutes"
 msgstr "10分钟"
 
-#: src/gui/AstroCalcDialog.cpp:1100
+#: src/gui/AstroCalcDialog.cpp:1106
 msgid "30 minutes"
 msgstr "30分钟"
 
-#: src/gui/AstroCalcDialog.cpp:1101
+#: src/gui/AstroCalcDialog.cpp:1107
 msgid "1 hour"
 msgstr "1小时"
 
-#: src/gui/AstroCalcDialog.cpp:1102
+#: src/gui/AstroCalcDialog.cpp:1108
 msgid "6 hours"
 msgstr "6小时"
 
-#: src/gui/AstroCalcDialog.cpp:1103
+#: src/gui/AstroCalcDialog.cpp:1109
 msgid "12 hours"
 msgstr "12小时"
 
-#: src/gui/AstroCalcDialog.cpp:1104
+#: src/gui/AstroCalcDialog.cpp:1110
 msgid "1 day"
 msgstr "1天"
 
-#: src/gui/AstroCalcDialog.cpp:1105
+#: src/gui/AstroCalcDialog.cpp:1111
 msgid "5 days"
 msgstr "5天"
 
-#: src/gui/AstroCalcDialog.cpp:1106
+#: src/gui/AstroCalcDialog.cpp:1112
 msgid "10 days"
 msgstr "10天"
 
-#: src/gui/AstroCalcDialog.cpp:1107
+#: src/gui/AstroCalcDialog.cpp:1113
 msgid "15 days"
 msgstr "15天"
 
-#: src/gui/AstroCalcDialog.cpp:1108
+#: src/gui/AstroCalcDialog.cpp:1114
 msgid "30 days"
 msgstr "30 天"
 
-#: src/gui/AstroCalcDialog.cpp:1109
+#: src/gui/AstroCalcDialog.cpp:1115
 msgid "60 days"
 msgstr "60天"
 
-#: src/gui/AstroCalcDialog.cpp:1181
+#: src/gui/AstroCalcDialog.cpp:1187
 msgid "Solar system"
 msgstr "太阳系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1183 src/gui/AstroCalcDialog.cpp:2663
+#: src/gui/AstroCalcDialog.cpp:1189 src/gui/AstroCalcDialog.cpp:2669
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "小行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1184 src/gui/AstroCalcDialog.cpp:2665
+#: src/gui/AstroCalcDialog.cpp:1190 src/gui/AstroCalcDialog.cpp:2671
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr "冥族小天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1185 src/gui/AstroCalcDialog.cpp:2664
+#: src/gui/AstroCalcDialog.cpp:1191 src/gui/AstroCalcDialog.cpp:2670
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "彗星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1186 src/gui/AstroCalcDialog.cpp:2666
+#: src/gui/AstroCalcDialog.cpp:1192 src/gui/AstroCalcDialog.cpp:2672
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr "矮行星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1187 src/gui/AstroCalcDialog.cpp:2667
+#: src/gui/AstroCalcDialog.cpp:1193 src/gui/AstroCalcDialog.cpp:2673
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr "经典柯伊伯带天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1188 src/gui/AstroCalcDialog.cpp:2668
+#: src/gui/AstroCalcDialog.cpp:1194 src/gui/AstroCalcDialog.cpp:2674
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr "离散盘天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1189 src/gui/AstroCalcDialog.cpp:2669
+#: src/gui/AstroCalcDialog.cpp:1195 src/gui/AstroCalcDialog.cpp:2675
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr "奥尔特云天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1190 src/gui/AstroCalcDialog.cpp:2670
+#: src/gui/AstroCalcDialog.cpp:1196 src/gui/AstroCalcDialog.cpp:2676
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr "类塞德娜天体"
 
-#: src/gui/AstroCalcDialog.cpp:1191
+#: src/gui/AstroCalcDialog.cpp:1197
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "亮星 (<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1192
+#: src/gui/AstroCalcDialog.cpp:1198
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "亮双星 (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1193
+#: src/gui/AstroCalcDialog.cpp:1199
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "亮变星 (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:1194
+#: src/gui/AstroCalcDialog.cpp:1200
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "亮星团(<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1196
+#: src/gui/AstroCalcDialog.cpp:1202
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "亮星云 (<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1198
+#: src/gui/AstroCalcDialog.cpp:1204
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "亮星系 (<%1 星等)"
 
-#: src/gui/AstroCalcDialog.cpp:1354 src/gui/AstroCalcDialog.cpp:1758
-#: src/gui/AstroCalcDialog.cpp:1760
+#: src/gui/AstroCalcDialog.cpp:1360 src/gui/AstroCalcDialog.cpp:1764
+#: src/gui/AstroCalcDialog.cpp:1766
 msgid "Local Time"
 msgstr "当地时间"
 
-#: src/gui/AstroCalcDialog.cpp:1539
+#: src/gui/AstroCalcDialog.cpp:1545
 msgid "Magnitude vs. Time"
 msgstr "亮度vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:1542
+#: src/gui/AstroCalcDialog.cpp:1548
 msgid "Phase vs. Time"
 msgstr "相位 vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:1545
+#: src/gui/AstroCalcDialog.cpp:1551
 msgid "Distance vs. Time"
 msgstr "距离vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:1548
+#: src/gui/AstroCalcDialog.cpp:1554
 msgid "Elongation vs. Time"
 msgstr "距角vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:1551
+#: src/gui/AstroCalcDialog.cpp:1557
 msgid "Angular size vs. Time"
 msgstr "角度大小vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:1554
+#: src/gui/AstroCalcDialog.cpp:1560
 msgid "Phase angle vs. Time"
 msgstr "相位角 vs. 时间"
 
-#: src/gui/AstroCalcDialog.cpp:1592
+#: src/gui/AstroCalcDialog.cpp:1598
 msgid "Date"
 msgstr "日期"
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:1602
+#: src/gui/AstroCalcDialog.cpp:1608
 msgid "Mm"
 msgstr "兆米"
 
-#: src/gui/AstroCalcDialog.cpp:1614 src/gui/AstroCalcDialog.cpp:1649
-msgid "Magnitude"
-msgstr "星等"
-
-#: src/gui/AstroCalcDialog.cpp:1620 src/gui/AstroCalcDialog.cpp:1655
-msgid "Phase"
-msgstr "相位"
-
-#: src/gui/AstroCalcDialog.cpp:1625 src/gui/AstroCalcDialog.cpp:1660
-#: src/ui_configurationDialog.h:1362
-msgid "Distance"
-msgstr "距离"
-
-#: src/gui/AstroCalcDialog.cpp:1630 src/gui/AstroCalcDialog.cpp:1665
-msgid "Elongation"
-msgstr "距角"
-
-#: src/gui/AstroCalcDialog.cpp:1635 src/gui/AstroCalcDialog.cpp:1670
+#: src/gui/AstroCalcDialog.cpp:1641 src/gui/AstroCalcDialog.cpp:1676
 msgid "Angular size"
 msgstr "角度大小"
 
-#: src/gui/AstroCalcDialog.cpp:1640 src/gui/AstroCalcDialog.cpp:1675
-msgid "Phase angle"
-msgstr "相位角"
-
-#: src/gui/AstroCalcDialog.cpp:1752
+#: src/gui/AstroCalcDialog.cpp:1758
 #, qt-format
 msgid "Now about %1"
 msgstr "现在约%1"
 
-#: src/gui/AstroCalcDialog.cpp:1754
+#: src/gui/AstroCalcDialog.cpp:1760
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr "子午线通道在约 %1 附近"
 
-#: src/gui/AstroCalcDialog.cpp:1777
+#: src/gui/AstroCalcDialog.cpp:1783
 msgid "Phenomenon"
 msgstr "事件"
 
-#: src/gui/AstroCalcDialog.cpp:1779
+#: src/gui/AstroCalcDialog.cpp:1785
 msgid "Object 1"
 msgstr "对象1"
 
-#: src/gui/AstroCalcDialog.cpp:1780
+#: src/gui/AstroCalcDialog.cpp:1786
 msgid "Object 2"
 msgstr "对象2"
 
-#: src/gui/AstroCalcDialog.cpp:2051
+#: src/gui/AstroCalcDialog.cpp:2057
 msgid "Save calculated phenomena as..."
 msgstr "将事件计算另存为"
 
-#: src/gui/AstroCalcDialog.cpp:2090 src/gui/AstroCalcDialog.cpp:2265
-#: src/gui/AstroCalcDialog.cpp:2423
+#: src/gui/AstroCalcDialog.cpp:2096 src/gui/AstroCalcDialog.cpp:2271
+#: src/gui/AstroCalcDialog.cpp:2429
 msgid "Conjunction"
 msgstr "合"
 
-#: src/gui/AstroCalcDialog.cpp:2097
+#: src/gui/AstroCalcDialog.cpp:2103
 msgid "Opposition"
 msgstr "冲"
 
-#: src/gui/AstroCalcDialog.cpp:2105
+#: src/gui/AstroCalcDialog.cpp:2111
 msgid "Transit"
 msgstr "凌"
 
-#: src/gui/AstroCalcDialog.cpp:2107 src/gui/AstroCalcDialog.cpp:2270
-#: src/gui/AstroCalcDialog.cpp:2428
+#: src/gui/AstroCalcDialog.cpp:2113 src/gui/AstroCalcDialog.cpp:2276
+#: src/gui/AstroCalcDialog.cpp:2434
 msgid "Occultation"
 msgstr "掩星"
 
-#: src/gui/AstroCalcDialog.cpp:2111
+#: src/gui/AstroCalcDialog.cpp:2117
 msgid "Eclipse"
 msgstr "食"
 
-#: src/gui/AstroCalcDialog.cpp:2636
+#: src/gui/AstroCalcDialog.cpp:2642
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "在晚间"
 
-#: src/gui/AstroCalcDialog.cpp:2637
+#: src/gui/AstroCalcDialog.cpp:2643
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "在早间"
 
-#: src/gui/AstroCalcDialog.cpp:2638
+#: src/gui/AstroCalcDialog.cpp:2644
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "午夜左右"
 
-#: src/gui/AstroCalcDialog.cpp:2639
+#: src/gui/AstroCalcDialog.cpp:2645
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "夜晚任意时间"
 
-#: src/gui/AstroCalcDialog.cpp:2658
+#: src/gui/AstroCalcDialog.cpp:2664
 msgid "Bright stars"
 msgstr "亮星"
 
-#: src/gui/AstroCalcDialog.cpp:2659 src/ui_viewDialog.h:2258
+#: src/gui/AstroCalcDialog.cpp:2665 src/ui_viewDialog.h:2258
 msgid "Bright nebulae"
 msgstr "亮星云"
 
@@ -4713,7 +4648,7 @@ msgid "&Choose"
 msgstr "&选择"
 
 #: src/translations.h:423 src/ui_configurationDialog.h:1532
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:619
 msgid "Cancel"
 msgstr "取消"
 
@@ -5811,7 +5746,7 @@ msgid "Modified Julian Day"
 msgstr "简化儒略日"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:430
 msgid "Help"
 msgstr "帮助"
 
@@ -6049,7 +5984,7 @@ msgid ""
 msgstr "注意：此工具不适用于坐标折射校正"
 
 #: src/ui_searchDialogGui.h:700
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:546
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
 msgid "Coordinate system:"
 msgstr "指标系统："
 
@@ -6101,7 +6036,7 @@ msgstr "使用坐标时锁定位置"
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2487
 #: src/ui_viewDialog.h:2509 src/ui_viewDialog.h:2543
 #: src/ui_configurationDialog.h:1533 src/ui_configurationDialog.h:1544
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "选项"
 
@@ -7049,10 +6984,6 @@ msgstr "黄道坐标（当前）"
 msgid "Angular or physical size"
 msgstr "角面积或物理面积"
 
-#: src/ui_configurationDialog.h:1356
-msgid "Size"
-msgstr "大小"
-
 #: src/ui_configurationDialog.h:1358
 msgid "Horizontal coordinates"
 msgstr "地平坐标"
@@ -7490,7 +7421,7 @@ msgid "Switch to the new landscape after installation"
 msgstr "安装完毕后立即使用新地景"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:311
 msgid "Remove"
 msgstr "移除"
@@ -8255,7 +8186,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:448
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
@@ -8272,7 +8203,7 @@ msgstr "链接"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:449
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
@@ -8292,7 +8223,7 @@ msgstr "您可在 Launchpad 网站获得我们的技术支持。提交报告时�
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:99
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
@@ -8311,7 +8242,7 @@ msgstr "如果您仍存在问题，可以%1从此处得到回答%2。"
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
@@ -8330,7 +8261,7 @@ msgstr "如果有 Bug 需要报告，请点击%1这里%2。"
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
@@ -8420,7 +8351,7 @@ msgstr "恢复默认设置"
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:315
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:214
@@ -9053,7 +8984,7 @@ msgstr "一般"
 #: plugins/Oculars/src/ui_ocularDialog.h:1178
 #: plugins/Oculars/src/ui_ocularDialog.h:1196
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr "添加"
 
@@ -9062,7 +8993,7 @@ msgstr "添加"
 #: plugins/Oculars/src/ui_ocularDialog.h:1180
 #: plugins/Oculars/src/ui_ocularDialog.h:1198
 #: plugins/Satellites/src/ui_satellitesDialog.h:789
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:540
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "名称："
@@ -9166,8 +9097,8 @@ msgid "Equatorial Mount"
 msgstr "赤道仪"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1204
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
 msgid "Telescopes"
 msgstr "望远镜"
 
@@ -9348,15 +9279,9 @@ msgstr "国际标准化命名"
 msgid "artificial satellite"
 msgstr "人造卫星"
 
-#: plugins/Satellites/src/Satellite.cpp:288
-#, qt-format
-msgid "Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "大致星等: <b>%1</b> (消光至: <b>%2</b>)"
-
-#: plugins/Satellites/src/Satellite.cpp:291
-#, qt-format
-msgid "Approx. magnitude: <b>%1</b>"
-msgstr "大致星等: <b>%1</b>"
+#: plugins/Satellites/src/Satellite.cpp:290
+msgid "Approx. magnitude"
+msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
@@ -9993,97 +9918,109 @@ msgstr "取消全选"
 msgid "Discard"
 msgstr "丢弃列表"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:78
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:160
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:187
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:80
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:189
 msgid "Telescope Control"
 msgstr "望远镜控制"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:81
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:83
 msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr "此插件使 Stellarium 能够使用“转动”命令向已经载入计算机的天文望远镜发出转向指令（“GoTo望远镜”）。"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:167
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:220
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:169
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:222
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "将天文望远镜 %1 移至选中对象"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:174
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:224
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:176
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:226
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr "将天文望远镜 %1 对准当前屏幕的中心"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:187
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:189
 msgid "Move a telescope to a given set of coordinates"
 msgstr "将天文望远镜对准某一坐标"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1649
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1656
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar controller."
 msgstr "任何与Meade的AutoStar控制器兼容的望远镜或望远镜安装。"
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1651
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1658
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr "任何与Meade LX200兼容的望远镜或望远镜安装。"
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1653
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1660
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
 msgstr "Meade's ETX70具有＃494 Autostar控制器和＃506连接器电缆套件。"
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1655
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1662
 msgid "Losmandy's G-11 telescope mount."
 msgstr "Losmandy's G-11望远镜安装座。"
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1657
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1664
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr "Wildcard Innovations' Argo Navis DTC in Meade LX200仿真模式。"
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1659
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1666
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr "任何与Celestron NexStar兼容的望远镜或望远镜安装。"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1661
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1668
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr "任何使用SynScan手控制器版本3或更高版本的Sky-Watcher安装架。"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1663
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1670
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr "he Sky-Watcher SynScan AZ GOTO底座用于多台望远镜型号。"
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:241
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:276
 msgid "Read-only telescope"
 msgstr "只读望远镜"
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:244
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:279
 msgid "Telescope position: "
 msgstr "望远镜位置: "
 
-#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:246
+#: plugins/TelescopeControl/src/clients/TelescopeClientJsonRts2.cpp:281
 msgid "Distance to target position: "
 msgstr "与目标位置的距离: "
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:210
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:157
+msgid ""
+"The approximate time it takes for the signals from the telescope to reach "
+"Stellarium. Increase this value if the reticle is skipping."
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
+msgid ""
+"Refresh rate of the RTS2 telescope. Delay before sending next telescope "
+"status request. The default value of 0.5 second works fine with most setups."
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:221
 msgid "Add New Telescope"
 msgstr "添加新望远镜"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:220
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:231
 msgid "Configure Telescope"
 msgstr "配置望远镜"
 
@@ -10111,25 +10048,25 @@ msgstr "连接已断开"
 msgid "Stopped"
 msgstr "已停止"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:254
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Telescope Control plug-in"
 msgstr "望远镜控制插件"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 msgid "Plug-in and GUI programming"
 msgstr "插件和GUI编程"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 msgid "RTS2 support"
 msgstr "RTS2支持"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
 msgstr "这个插件是基于并重用了大量的GNU通用公共许可证下的代码："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 msgid ""
 "the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in "
 "Stellarium's code (the client side of Stellarium's original telescope "
@@ -10138,17 +10075,17 @@ msgstr ""
 "Telescope, TelescopeDummy, TelescopeTcp 和TelescopeMgr classes在 "
 "Stellarium的代码（Stellarium的原生望远镜控制功能的客户端）"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "the telescope server core code (licensed under the LGPL)"
 msgstr "望远镜服务器核心代码（根据LGPL许可）"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
 msgstr "TelescopeServerLx200望远镜服务器核心代码（原始授权下LGPL）"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid ""
 "Author of all of the above - the client, the server core, and the LX200 "
 "server, along with the Stellarium telescope control network protocol (over "
@@ -10157,7 +10094,7 @@ msgstr ""
 "所有上述 - 客户端，服务器核心和LX200服务器，以及Stellarium望远镜控制网络协议（通过TCP / IP）的作者，是<b> Johannes "
 "Gajdosik </ b>。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
@@ -10166,7 +10103,7 @@ msgstr ""
 "<b>Michael Heinz </ b>。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 #, qt-format
@@ -10175,90 +10112,90 @@ msgid ""
 "format of catalog, you can %1get info here%2."
 msgstr "如果您想了解此插件的完整信息、其历史以及编录格式，请%1点击此处%2。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
 msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the %1Telescope Control%2 page in the Stellarium Wiki."
 msgstr "一份面向这插件更完整和新鲜的文档可以在Stellarium维基的 %1望远镜控制%2页面找到。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 msgid "Contents"
 msgstr "目录"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 msgid "Abilities and limitations"
 msgstr "功能与局限"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:286
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid "The original telescope control feature"
 msgstr "原生望远镜控制功能"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid "Using this plug-in"
 msgstr "使用此插件"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid "Main window ('Telescopes')"
 msgstr "主窗口（'望远镜'）"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "Telescope configuration window"
 msgstr "望远镜配置窗口"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 msgid "Connection type"
 msgstr "连接类型"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:539
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:569
 msgid "Telescope properties"
 msgstr "望远镜属性"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:553
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:582
 msgid "Device settings"
 msgstr "设备设置"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:556
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:585
 msgid "Connection settings"
 msgstr "连接设置"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 msgid "Field of view indicators"
 msgstr "视场指示器"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
 msgid "'Slew telescope to' window"
 msgstr "\"旋转望远镜至\"窗口"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 msgid "Telescope commands"
 msgstr "望远镜命令"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:414
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
 msgid "Supported devices"
 msgstr "支持的设备"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 msgid "Virtual telescope"
 msgstr "虚拟望远镜"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 msgid ""
 "This plug-in allows Stellarium to send only '<b>slew</b>' ('go to') commands "
 "to the device and to receive its current position. It cannot issue any other "
@@ -10269,26 +10206,26 @@ msgstr ""
 "此插件允许Stellarium仅向设备发送“<b>转动 </ b>”（“go to”）命令，并接收其当前位置。 "
 "它不能发出任何其他命令，因此用户应该意识到安装冲突和类似情况的可能性。 （要中止旋转，您可以启动另一个到安全位置。）"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr "截至目前的版本，这个插件不允许卫星跟踪，并不是非常适合月球或行星观察。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr "警告： Stellarium不能阻止你的望远镜指向太阳。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
 "Never point your telescope at the Sun without a proper solar filter "
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr "无合适日光滤镜安装情况下不要使你的望远镜指向太阳。望远镜强力增光功能会造成你的眼睛或设备不可挽回的伤害。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
 msgid ""
 "Even if you don't do it deliberately, a slew during daylight hours may cause "
 "your telescope to point at the sun on its way to the given destination, so "
@@ -10297,51 +10234,51 @@ msgid ""
 msgstr ""
 "即使你不是故意做，在白天小时可能会导致你的望远镜指向太阳在到达给定目的地的路上，所以没有适当的保护，强烈建议避免在日落之前使用望远镜控制功能。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:370
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:435
 msgid "Back to top"
 msgstr "返回顶部"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid ""
 "As of Stellarium 0.10.5, the original telescope control feature has been "
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr "从Stellarium 0.10.5，原生的望远镜控制功能已被删除。 没有这个插件就没有办法控制Stellarium的望远镜了"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
 msgstr "以下是根据情况使用此插件控制设备的两种一般方法："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid "DIRECT CONNECTION"
 msgstr "直接连接"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 #, qt-format
 msgid ""
 "A %1device supported by the plug-in%2 is connected with a cable to the "
 "computer running Stellarium;"
 msgstr "一个%1受支持的设备%2通过缆线连接到运行着Stellarium的电脑；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid "INDIRECT CONNECTION"
 msgstr "间接连接"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 #, qt-format
 msgid ""
 "A device is connected to the same computer but it is driven by a %1stand-"
@@ -10350,7 +10287,7 @@ msgid ""
 msgstr ""
 "一个设备连接到一台电脑但它由%1单独的望远镜服务端程序%2或者一个 <b>可以与Stellarium“交流”</b>的%3第三方应用驱动%4；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
 "A device is connected to a remote computer and the software that drives it "
 "can 'talk' to Stellarium <i>over the network</i>; this software can be "
@@ -10360,14 +10297,14 @@ msgstr ""
 "设备连接到远程计算机，并且驱动它的软件可以通过网络“与Stellarium”交流; "
 "这个软件可以是Stellarium的独立望远镜服务器之一，也可以是第三方应用程序。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
 #, qt-format
 msgid ""
 "Most older telescopes use cables that connect to a %1serial port%2 (RS-232), "
 "the newer ones use %3USB%4 (Universal Serial Bus)."
 msgstr "大多数旧式望远镜使用缆线连接到一个 %1串口%2(RS-232)，新式的使用 %3USB%4(通用串行总线)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
 msgid ""
 "On Linux and Mac OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
@@ -10375,30 +10312,30 @@ msgid ""
 msgstr ""
 "在Linux和Mac OS X都会相同地由此插件执行。在Windows，一个USB连接若未得到线缆或望远镜支持则可能要求一个“虚拟串口”软件。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
 msgstr "如此一个软件创建一个虚拟(“假的”)COM口匹配实际USB口来使用此插件。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid ""
 "On all three platforms, if the computer has no 'classic' serial ports and "
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
 "USB) adapter may be necessary."
 msgstr "在所有三种平台中，如果电脑没有“经典”的串口而望远镜又只能通过串口连接，则一套串口转USB(RS-232转USB)适配器是必须的。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr "望远镜设置（设置地理坐标，执行对准等）应在连接望远镜到Stellarium之前完成。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid "The plug-in's main window can be opened:"
 msgstr "可以打开插件的主窗口："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid ""
 "By pressing the 'configure' button for the plug-in in the 'Plugins' tab of "
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
@@ -10406,7 +10343,7 @@ msgid ""
 msgstr ""
 "在Stellarium的配置窗口的“插件”标签页里点击对应插件的“配置”按钮(通过按下<b> F2 </ b>或者点击左边工具栏的独立按钮打开)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
 #, qt-format
 msgid ""
 "By pressing the 'Configure telescopes...' button in the %1'Slew to' window%2 "
@@ -10414,54 +10351,54 @@ msgid ""
 "toolbar)."
 msgstr "通过按下%1'转动到'窗口%2中的'配置望远镜...'按钮（通过按下<b> Ctrl + 0 </ b>或底部工具栏上的相应按钮打开）。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr "<b>望远镜</ b>选项卡显示已设置的望远镜连接列表："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr "数字（<b>＃</ b>）列显示用于控制此望远镜的数字。 例如，对于望远镜＃2，快捷键为Ctrl + 2。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
 msgid ""
 "The <b>Status</b> column indicates if this connection is currently active or "
 "not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr "<b>状态</ b>列指示此连接当前是否处于活动状态。 不幸的是，在某些情况下，当没有工作连接存在时，显示“已连接”。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:332
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
 msgstr "<b>类型</ b>字段表示此类连接的种类："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:334
 #, qt-format
 msgid "<b>virtual</b> means a %1virtual telescope%2;"
 msgstr "<b>虚拟</ b>表示%1虚拟望远镜%2；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:334
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
 #, qt-format
 msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "%1above%2);"
 msgstr "<b>本地, Stellarium</b>意味着直接连接到望远镜（见%1上%2）；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr "<b>本地，扩展</b>指间接链接到运行在相同电脑上的一个程序；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr "<b>远程，不明</b>意味着通过网络间接连接到远程机器。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
 msgid ""
 "To set up a new telescope connection, press the <b>Add</b> button. To modify "
 "the configuration of an existing connection, select it in the list and press "
@@ -10471,46 +10408,46 @@ msgstr ""
 "要设置新的望远镜连接，请按<b>添加</ b>按钮。 要修改现有连接的配置，请在列表中选择它，然后按<b>配置</ b>按钮。 "
 "在这两种情况下，将打开望远镜连接配置窗口。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
 #, qt-format
 msgid ""
 "The topmost field represents the choice between the two types of connections "
 "(see %1above%2):"
 msgstr "最上面的字段表示两种类型的连接之间的选择（见%1上面%2）："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:525
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:555
 msgid "Telescope controlled by:"
 msgstr "望远镜控制方式："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr "<b>Stellarium，直接通过串口连接</ b>是直接连接的情况"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:346
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr "<b>外部软件或者远程电脑</b>是间接连接"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 #, qt-format
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual "
 "telescope%2 (no connection)"
 msgstr "<b>空缺，纯模拟(移动准星)</ b>是 %1虚拟望远镜 %2（无连接）"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr "<b>名称</ b>就是显示在望远镜准星旁边屏幕上的标签。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
 msgstr "<b>连接延迟</ b>：如果屏幕上的望远镜准星移动不均匀，你可以尝试增减这个数值。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
 msgid ""
 "<b>Coordinate system</b>: Some Celestron telescopes have had their firmware "
 "updated and now interpret the coordinates they receive as coordinates that "
@@ -10518,7 +10455,7 @@ msgid ""
 "override."
 msgstr "<b>坐标系</b>：有些星特朗望远镜固件更新后使用当前春分点(EOD, 或 JNow)解释它们接收到的坐标，这种更替有必要。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to "
 "attempt to connect to the telescope immediately after it starts."
@@ -10526,221 +10463,221 @@ msgstr ""
 "<b>启动/启动时连接</b>:若要Stellarium在启动时尝试立即连接到望远镜则选中此项。 "
 "否则，要启动望远镜，你需要开启主窗口，选择该望远镜再点击“启动/连接”按钮。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
 msgstr "否则，要启动望远镜，你需要开启主窗口，选择该望远镜再点击“启动/连接”按钮。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 #, qt-format
 msgid "This section is active only for DIRECT connections (see %1above%2)."
 msgstr "这部份只在直接连接后激活(见%1上面%2)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr "<b>串口</b>设置由望远镜使用的串口。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
 msgid "There is a pop-up box that suggests some default values:"
 msgstr "有个弹出窗口提供若干默认值："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
 msgid "On Windows, serial ports COM1 to COM10;"
 msgstr "在Windows，串口使用COM1到COM10；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
 msgstr "在Linux，串口使用/dev/ttyS0到/dev/ttyS3，USB口使用/dev/ttyUSB0到/dev/ttyUSB3；"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr "在Mac OS X，列表空白就是该端口有特殊用途。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr "若你在使用USB线缆，你的望远镜默认串口往往不在建议列表当中。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr "要在Mac OS X里列出所有可用串口名称，打开一个终端并输入："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
 msgstr "这将列出所有设备，你的串口全称将出现在列表某处(例如“/dev/cu.usbserial-FTDFZVMK”)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:368
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 #, qt-format
 msgid "<b>Device model</b>: see %1Supported devices%2 below."
 msgstr "<b>设备模式l</b>：见%1受支持设备%2下面。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 #, qt-format
 msgid "Both fields here refer to communication over a network (%1TCP/IP%2)."
 msgstr "此处各字段均指网络上的通信 (%1TCP/IP%2)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
 #, qt-format
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections  (see "
 "%1above%2)."
 msgstr "仅对间接连接而言对它们进行某些处理是必须的(见%1上面%2)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
 #, qt-format
 msgid ""
 "<b>Host</b> can be either a host name or an %1IPv4%2 address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr "<b>主机</b>可以是主机名或者%1IPv4%2地址，如“127.0.0.1”。默认值“localhost”指“本机”。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value "
 "depends on the telescope number and ranges between 10001 and 10009."
 msgstr "<b>端口</b>指明用于通信的TCP端口。默认值依赖望远镜数量，取值范围在10001到10009之间。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
 msgid "Both values are ignored for DIRECT connections."
 msgstr "直接连接时忽略所有取值。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
 msgstr "对于间接连接，如果你正在尝试一个网络上的远程连接则修改默认主机名称是有作用的。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
 msgstr "这种情况下，它应该是运行此望远镜的程序所在电脑的名称或IP地址。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
 msgid ""
 "A series of circles representing different fields of view can be added "
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr "一系列表示不同视场的圆环可被添加到望远镜标记。这是<strong>目镜</strong> 插件出现前的遗留情况。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr "在望远镜配置窗口中，单击“用户界面设置”。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
 msgstr "标记“使用视场指示器”选项，然后进入区域下方按半角逗号区分数值的列表。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid "The values are interpreted as degrees of arc."
 msgstr "该值被解释为弧度。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
 #, qt-format
 msgid ""
 "This can be used in combination with a %1virtual telescope%2 to display a "
 "moving reticle with the Telrad circles."
 msgstr "这可用来组合 %1虚拟望远镜%2和Telrad活动环。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:390
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
 msgstr "“转动望远镜”窗口可通过按下<b>Ctrl+0</b> 或点击下方工具栏独立按钮来打开。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 msgid ""
 "It contains two fields for entering celestial coordinates, selectors for the "
 "preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal "
 "degrees), a drop-down list and two buttons."
 msgstr "它包含两个用于进入天体坐标的字段、用于选择格式(时分秒、度分秒、十进制度数)的选择器、下拉列表和两个按钮。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr "下拉列表包含当前连接中的设备的名称。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr "若无设备连接，将保持空白，“转动”按钮也会失效。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
 msgstr "按下移<b>转动</b>来转动设备到选中的坐标。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 #, qt-format
 msgid ""
 "See the section about %1keyboard commands%2 below for other ways of "
 "controlling the device."
 msgstr "看下方关于%1键盘命令%2 的部份用于以其它方式控制设备。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 #, qt-format
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 "
 "of the plug-in."
 msgstr "按下配置望远镜…按钮打开插件%1主窗口%2。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr "<b>提示：</b>在“转动”窗体内，带下划线表示同时按“Alt + 下划线字母”可代替点击。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
 msgstr "例如，按下 <b>Alt+S</b> 相当于点击“转动”按钮，按下<b>Alt+E</b>转换十进制格式等等。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
 msgid "Sending commands"
 msgstr "指令发送中"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid ""
 "Once a telescope is successfully started/connected, Stellarium displays a "
 "telescope reticle labelled with the telescope's name on its current position "
 "in the sky."
 msgstr "一旦某个望远镜成功启动/连接，Stellarium会显示一个以该望远镜名称标记的准星在天空当前位置。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
 msgid ""
 "The reticle is an object like every other in Stellarium - it can be selected "
 "with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr "该准星是一个像Stellarium里其它部件一样的对象——可被鼠标选中，可被跟踪，可在“搜索”窗体里显示。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:404
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
 msgstr "<b>指定设备到天体：</b>选中一个天体(例如一颗星)然后按住 <b>Ctrl</b>键同时按下该设备的编码值。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid "For example, Ctrl+1 for telescope #1."
 msgstr "例如，Ctrl+1 就是选中望远镜#1号。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 msgid "This will move the telescope to the selected object."
 msgstr "这将移动望远镜到所选天体。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
@@ -10748,29 +10685,29 @@ msgstr ""
 "Copy text \t\r\n"
 "<b>指定设备到视场中央：</b>按住<b>Alt</b> 键同时按下该设备的编码值。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
 msgid "For example, Alt+1 for telescope #1."
 msgstr "例如，Alt+1 就是选中望远镜#1号。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:409
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr "这将会转动设备到当前视场的中央。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
 msgstr "若你发出指令后才移动视场，目标不会改变除非你重新发送其它指令。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:411
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 #, qt-format
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the %1'Slew to' "
 "window%2 (press <b>Ctrl+0</b>)."
 msgstr "<b>指定设备到既定坐标系：</b>使用%1“转动”窗体%2 (按下 <b>Ctrl+0</b>)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
 #, qt-format
 msgid ""
 "All devices listed in the %1'Device model' list%2 are convenience "
@@ -10780,44 +10717,44 @@ msgstr ""
 "所有列出在 "
 "%1“设备模式”列表%2的设备使用以下两个内置界面中的一个来简单定义：米德LX200(米德Autostar控制器)界面和星特朗NexStar界面。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
 msgid "The device list contains the following:"
 msgstr "设备列表包含如下："
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:417
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
 msgid "Any device using the NexStar interface."
 msgstr "任何采用NexStar界面的设备。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
 msgstr "由洛斯文迪制作的电脑式望远镜接件(米德LX200/Autostar界面)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
 msgid "Any device using the LX-200/Autostar interface."
 msgstr "任何采用LX200/Autostar界面的设备。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
 msgstr "米德ETX-70望远镜采用#494号Autostar控制器和#506号连接器线缆组合。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 #, qt-format
 msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
 "%1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds."
 msgstr "经用户测试，有一点慢，故此%1“连接延迟”%2的默认值由0.5秒改为1.5秒。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr "信达SynScan自动跟踪式接件广泛用于望远镜。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
 msgid ""
 "<b>SynScan</b> is also the name of the hand controller used in other Sky-"
 "Watcher GoTo mounts, and it seems that any mount that uses a SynScan "
@@ -10827,25 +10764,25 @@ msgstr ""
 "<b>SynScan</b> "
 "也是用于信达另一种跟踪接件手动控制器的名称，看起来任意采用3.0或更高版本SynScan控制器的接件都被此使用NexStar协议的插件支持。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr "南船座是一种由Wildcard创新制作的“数码望远镜电脑”。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses "
 "a computer to find targets and human power to move the telescope itself)."
 msgstr "这是一种先进的数码设定环能将一个普通(如道布森式)望远镜变成一台“推送”型望远镜(使用电脑查找目标和人力移动望远镜本身)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 #, qt-format
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B%1."
 msgstr "别忘了将其设置成米德兼容模式并设置波特率为9600B%1。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:432
 msgid ""
 "If you want to test this plug-in without an actual device connected to the "
 "computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the "
@@ -10856,14 +10793,14 @@ msgstr ""
 "如果你实际没有连接设备到这台电脑而又想测试这个插件，在 <b>望远镜控制器</b> ：字段选择 <b>空缺 "
 "，纯模拟(移动准星)</b>。它将显示一个望远镜准星按真实望远镜一样的方式由此插件控制。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:432
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
 #, qt-format
 msgid ""
 "See the section above about %1field of view indicators%2 for a possible "
 "practical application (emulating 'Telrad' circles)."
 msgstr "看上面关于%1视场指示器字段%2的部份来作为一个有可能的实际应用(模拟“Telrad”活动环)。"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
 #, qt-format
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
@@ -10871,16 +10808,16 @@ msgid ""
 msgstr "由 %1Stellarium原生望远镜控制属性%2支持的这个属性相当于望远镜的“仿真”属性。"
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "#"
 msgstr "#"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid "Status"
 msgstr "状态"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:470
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -10891,7 +10828,7 @@ msgstr ""
 "要将望远镜对准一个物体（比如恒星），选中该物体，然后按下%1和带有望远镜序号的键。如果要将其对准当前视图的中心，按下Alt和带有望远镜序号的键."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an "
@@ -10899,70 +10836,70 @@ msgid ""
 msgstr "目前暂无设备型号的描述符。Stellarium 将无法独自控制望远镜，但您仍可能通过外部程序或者连接至远程主机来完成这一操作。"
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "按下%1键以创建新的望远镜连接。"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:495
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:496
 msgid "local, Stellarium"
 msgstr "本地，Stellarium"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:499
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid "local, external"
 msgstr "本地，外部"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:504
 msgid "remote, unknown"
 msgstr "远程，未知"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:507
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:508
 msgid "virtual"
 msgstr "虚拟"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:511
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:512
 msgid "RTS2"
 msgstr "RTS2"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:933
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:934
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Start"
 msgstr "启动"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:934
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:935
 msgid "Start the selected local telescope"
 msgstr "启动选中的望远镜"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:939
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:940
 msgid "Stop"
 msgstr "停止"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:940
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:941
 msgid "Stop the selected local telescope"
 msgstr "停止选中的望远镜"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:945
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:946
 msgid "Connect"
 msgstr "连接"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:946
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:947
 msgid "Connect to the selected telescope"
 msgstr "连接选中的望远镜"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:951
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:952
 msgid "Disconnect"
 msgstr "断开"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:952
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:953
 msgid "Disconnect from the selected telescope"
 msgstr "断开选中的望远镜"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:973
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:974
 msgid "Select a directory"
 msgstr "选择目录"
 
@@ -11044,195 +10981,190 @@ msgstr "指向 (&S)"
 msgid "Configure &telescopes..."
 msgstr "配置望远镜..."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:523
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:553
 msgid "Telescope Configuration"
 msgstr "望远镜配置"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:527
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:557
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr "望远镜通过串口连接到本机，并被Stellarium直接控制。"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:529
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:559
 msgid "Stellarium, directly through a serial port"
 msgstr "Stellarium 直接通过串口控制"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:531
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:561
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr "望远镜被外部程序控制，不在本机就在远程计算机。"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:533
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
 msgid "External software or a remote computer"
 msgstr "外部程序或远程计算机"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:535
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:565
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
 msgstr "望远镜可通过 RTS2(.org) JSON API访问"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:537
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
 msgid "RTS2 telescope"
 msgstr "RTS2望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:538
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:568
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr "模拟一个"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:541
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:571
 msgid "Connection delay:"
 msgstr "连接延迟："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:543
-msgid ""
-"The approximate time it takes for the signals from the telescope to reach "
-"Stellarium.\n"
-"Increase this value if the reticle is skipping."
-msgstr ""
-"望远镜的信号传入 Stellarium 所用的近似时间。\n"
-"如果您发现十字丝在跳动，请增大这一数值。"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:547
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:576
 msgid "J2000 (default)"
 msgstr "J2000 (默认)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:548
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:577
 msgid "Equinox of the date (JNow)"
 msgstr "本日历元 (JNow)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:550
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:579
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr "启动时自动尝试连接望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:552
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:581
 msgid "Start/connect at startup"
 msgstr "启动/连接时连接"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:554
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:583
 msgid "Serial port:"
 msgstr "串口："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:555
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:584
 msgid "Device model:"
 msgstr "设备型号:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:557
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
 msgid "Host:"
 msgstr "主机："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:559
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:588
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr "望远镜服务器主机名或IPv4地址"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:561
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:590
 msgid "TCP port:"
 msgstr "TCP端口："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:562
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:591
 msgid "RTS2 telescope settings"
 msgstr "RTS2望远镜设置"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:592
 msgid "URL:"
 msgstr "URL："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:564
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:593
 msgid "Username:"
 msgstr "用户名："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:565
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:594
 msgid "Password:"
 msgstr "密码："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:596
 msgid "RTS2 username"
 msgstr "RTS2用户名"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:599
 msgid "RTS2 password"
 msgstr "RTS2密码"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:573
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:602
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
 msgstr "托管RTS2 JSON（httpd）服务器的机器的URL"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:604
+msgid "Refresh every:"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:608
 msgid "User interface settings"
 msgstr "用户界面设置"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:577
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:610
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr "在望远镜十字丝周围显示指定视角的圆圈"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:579
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:612
 msgid "Use field of view indicators"
 msgstr "使用视场标记"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:580
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:613
 msgid "Circle size(s):"
 msgstr "圆圈大小："
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:582
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:615
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr "最多十个角度，以逗号分隔。"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:585
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:618
 msgid "OK"
 msgstr "确定"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:394
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
 msgid "Telescopes Controlled"
 msgstr "望远镜控制"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:397
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
 msgid "Configure the selected telescope"
 msgstr "配置所选定的望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:399
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Configure"
 msgstr "配置"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:401
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
 msgid "Add a new telescope"
 msgstr "增加一个新望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:405
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Remove the selected telescope"
 msgstr "移除所选的望远镜"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
 msgid "GUI"
 msgstr "用户图形界面"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
 msgid "Show telescope labels"
 msgstr "显示望远镜标签"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
 msgid "Show telescope reticles"
 msgstr "显示望远镜十字丝"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:412
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:424
 msgid "Show field of view indicators"
 msgstr "显示视场标记"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:425
 msgid "Files"
 msgstr "文件"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:426
 msgid "Log telescope driver messages to files"
 msgstr "将望远镜设备消息记录至文件"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:427
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr "使用望远镜服务器的可执行文件（用以覆盖内置驱动）"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:428
 msgid "Executables directory:"
 msgstr "可执行文件目录:"
 
@@ -11736,21 +11668,13 @@ msgstr "十二月"
 msgid "supernova"
 msgstr "超新星"
 
-#: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:152
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
-#, qt-format
-msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
+#: plugins/Supernovae/src/Supernova.cpp:149
+msgid "Type of supernova"
+msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:147
-#, qt-format
-msgid "Type of supernova: %1"
-msgstr "超新星类型：%1"
-
-#: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:163
-#, qt-format
-msgid "Maximum brightness: %1"
-msgstr "最大亮度:%1"
+#: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:163
+msgid "Maximum brightness"
+msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
@@ -12034,7 +11958,7 @@ msgstr "显示类星体"
 msgid "Quasars configuration window"
 msgstr "类星体设置窗口"
 
-#: plugins/Quasars/src/Quasar.cpp:133
+#: plugins/Quasars/src/Quasar.cpp:126
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z（红移）：%1"
@@ -12697,83 +12621,79 @@ msgstr "海王星型"
 msgid "planetary system"
 msgstr "行星系统"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:330
+#: plugins/Exoplanets/src/Exoplanet.cpp:325
 msgid "Metallicity"
 msgstr "金属丰度"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:334
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/Exoplanets/src/Exoplanet.cpp:344
 msgid "Mass"
 msgstr "质量"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:334
-#: plugins/Exoplanets/src/Exoplanet.cpp:338
+#: plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1286
 msgid "Sun"
 msgstr "太阳"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:338
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
+#: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgid "Radius"
 msgstr "半径"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:342
-#, qt-format
-msgid "Effective temperature: %1 K"
-msgstr "有效温度：%1 K"
+#: plugins/Exoplanets/src/Exoplanet.cpp:337
+msgid "Effective temperature"
+msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:346
+#: plugins/Exoplanets/src/Exoplanet.cpp:337
+msgctxt "temperature"
+msgid "K"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:341
 msgid "Exoplanet"
 msgstr "系外行星"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
-msgid "Period"
-msgstr "周期"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:343
 msgid "days"
 msgstr "天"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:344
+#: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgid "Jup"
 msgstr "木星"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgid "Semi-Major Axis"
 msgstr "长半轴"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
-msgid "AU"
-msgstr "天文单位"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Exoplanets/src/Exoplanet.cpp:347
 msgid "Eccentricity"
 msgstr "离心率"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:348
 msgid "Inclination"
 msgstr "倾角"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:354
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Angle Distance"
 msgstr "角距离"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
 msgid "Discovered year"
 msgstr "发现年份"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:356
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Planetary class"
 msgstr "行星分类"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:358
+#: plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Equilibrium temp."
 msgstr "平衡温度"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:360
+#: plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "ESI"
 msgstr "地球相似指数"
 
@@ -15853,6 +15773,9 @@ msgstr "主要的月球停变线"
 msgid "Custom Declination 2"
 msgstr "为自定义赤纬线2"
 
+#~ msgid "AU"
+#~ msgstr "天文单位"
+
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道坐标网格"
 
@@ -15986,6 +15909,10 @@ msgstr "为自定义赤纬线2"
 #~ msgstr "日历"
 
 #, qt-format
+#~ msgid "Type: <b>%1</b>"
+#~ msgstr "类型: <b>%1</b>"
+
+#, qt-format
 #~ msgid "Az/Alt: %1/%2"
 #~ msgstr "方位角/高度角: %1/%2"
 
@@ -16018,11 +15945,19 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Distance: %1AU"
 #~ msgstr "距离: %1 天文单位"
 
+#, qt-format
+#~ msgid "Size: %1"
+#~ msgstr "大小: %1"
+
 #~ msgid "Solar System Body: "
 #~ msgstr "太阳系天体: "
 
 #~ msgid "Arrow down to load list."
 #~ msgstr "按向下键以载入列表"
+
+#, qt-format
+#~ msgid "Absolute Magnitude: %1"
+#~ msgstr "绝对星等: %1"
 
 #~ msgid ":"
 #~ msgstr ":"
@@ -16067,6 +16002,10 @@ msgstr "为自定义赤纬线2"
 #~ msgstr "行星： "
 
 #, qt-format
+#~ msgid "Magnitude: <b>%1</b>"
+#~ msgstr "星等：<b>%1</b>"
+
+#, qt-format
 #~ msgid "Hour angle/DE: %1/%2"
 #~ msgstr "时角/赤纬: %1/%2"
 
@@ -16074,8 +16013,16 @@ msgstr "为自定义赤纬线2"
 #~ msgstr "未收录类型"
 
 #, qt-format
+#~ msgid "Apparent diameter: %1"
+#~ msgstr "视直径: %1"
+
+#, qt-format
 #~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
 #~ msgstr "视星等: <b>%1</b> (B-V: %2)"
+
+#, qt-format
+#~ msgid "Parallax: %1\""
+#~ msgstr "视差: %1\""
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "星等限制: "
@@ -16300,6 +16247,10 @@ msgstr "为自定义赤纬线2"
 
 #~ msgid "Sidereal"
 #~ msgstr "恒星"
+
+#, qt-format
+#~ msgid "Spectral Type: %1"
+#~ msgstr "光谱类型: %1"
 
 #~ msgid "Ecliptic"
 #~ msgstr "黄道"
@@ -16773,6 +16724,10 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Extend search with SIMBAD"
 #~ msgstr "使用 SIMBAD 深度搜索"
 
+#, qt-format
+#~ msgid "Type of supernova: %1"
+#~ msgstr "超新星类型：%1"
+
 #~ msgid ""
 #~ "This plugin plots the position of various pulsars, with object information "
 #~ "about each one. Pulsar data is derived from 'Catalog of Pulsars' (Taylor+ "
@@ -16801,8 +16756,28 @@ msgstr "为自定义赤纬线2"
 #~ msgstr "星等：<b>%1</b> (B-V: <b>%2</b>)"
 
 #, qt-format
+#~ msgid "Apparent diameter: %1, with rings: %2"
+#~ msgstr "视直径: %1, 包括环: %2"
+
+#, qt-format
+#~ msgid "Illuminated: %1%"
+#~ msgstr "被照亮的部分: %1%"
+
+#, qt-format
+#~ msgid "Phase: %1"
+#~ msgstr "相: %1"
+
+#, qt-format
 #~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 #~ msgstr "星等: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
+
+#, qt-format
+#~ msgid "Elongation: %1"
+#~ msgstr "距角: %1"
+
+#, qt-format
+#~ msgid "Phase Angle: %1"
+#~ msgstr "位相角: %1"
 
 #~ msgid "Add 1 sidereal month"
 #~ msgstr "恒星月加1"
@@ -16942,6 +16917,10 @@ msgstr "为自定义赤纬线2"
 #~ msgstr "脉冲星显示模式"
 
 #, qt-format
+#~ msgid "Effective temperature: %1 K"
+#~ msgstr "有效温度：%1 K"
+
+#, qt-format
 #~ msgid ""
 #~ "If you want read full information about plugin, his history and format of "
 #~ "catalog you can %1get info here%2."
@@ -17021,6 +17000,14 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Galactic longitude/latitude (J2000): %1/%2"
 #~ msgstr "银经/银纬 (J2000): %1/%2"
 
+#, qt-format
+#~ msgid "Sidereal day: %1"
+#~ msgstr "恒星日: %1"
+
+#, qt-format
+#~ msgid "Mean solar day: %1"
+#~ msgstr "平太阳日: %1"
+
 #~ msgid "Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068."
 #~ msgstr "2068年1月10日在火星的奥林匹斯山上能看到火卫一食日。"
 
@@ -17081,6 +17068,10 @@ msgstr "为自定义赤纬线2"
 
 #~ msgid "Nights above horizon: "
 #~ msgstr "在地平线上的夜晚： "
+
+#, qt-format
+#~ msgid "Sidereal period: %1 days (%2 a)"
+#~ msgstr "公转轨道周期：%1天 (%2儒略年)"
 
 #~ msgid "Oculars Plugin"
 #~ msgstr "目镜视角插件"
@@ -17219,6 +17210,10 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Ecliptic Topocentric (of date): %1/%2"
 #~ msgstr "站心黄道坐标(当前日期纪元): %1/%2"
 
+#, no-c-format, qt-format
+#~ msgid "Distance: %1AU (%2 km)"
+#~ msgstr "距离: %1 天文单位(%2 千米)"
+
 #, qt-format
 #~ msgid "RA/DE (of date): %1/%2"
 #~ msgstr "赤经/赤纬(当前日期纪元): %1/%2"
@@ -17259,12 +17254,44 @@ msgstr "为自定义赤纬线2"
 #~ msgstr "限制星等（适用于裸眼、双筒望远镜观测者）"
 
 #, qt-format
+#~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
+
+#, qt-format
+#~ msgid "Type: <b>%1, %2</b>"
+#~ msgstr "类型：<b>%1, %2</b>"
+
+#, qt-format
+#~ msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
+#~ msgstr "星等范围：<b>%1</b>%2<b>%3</b> (测光系统：%4)"
+
+#, qt-format
+#~ msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
+#~ msgstr "星等范围：<b>%1</b>%2<b>%3/%4</b> (测光系统：%5)"
+
+#, qt-format
 #~ msgid "Epoch for minimum light: %1 JD"
 #~ msgstr "最小亮度时间：%1 JD"
 
 #, qt-format
 #~ msgid "Epoch for maximum light: %1 JD"
 #~ msgstr "最大亮度时间：%1 JD"
+
+#, qt-format
+#~ msgid "Period: %1 days"
+#~ msgstr "周期：%1天"
+
+#, qt-format
+#~ msgid "Next minimum light: %1 UTC"
+#~ msgstr "下次极小亮度：%1 UTC"
+
+#, qt-format
+#~ msgid "Next maximum light: %1 UTC"
+#~ msgstr "下次极大亮度：%1 UTC"
+
+#, qt-format
+#~ msgid "Duration of eclipse: %1%"
+#~ msgstr "掩食时间：%1%"
 
 #, qt-format
 #~ msgid "Galactic longitude/latitude: %1/%2"
@@ -17301,11 +17328,23 @@ msgstr "为自定义赤纬线2"
 #~ msgid "ZHR:"
 #~ msgstr "ZHR(每小时天顶流星数)："
 
+#, qt-format
+#~ msgid "Rising time: %1%"
+#~ msgstr "升起时间: %1%"
+
 #~ msgid "Daphne"
 #~ msgstr "桂神星"
 
 #~ msgid "Great Comet of 1680 (C/1680 V1)"
 #~ msgstr "1680年大彗星(C/1680 V1)"
+
+#, qt-format
+#~ msgid "Maximum brightness: %1"
+#~ msgstr "最大亮度:%1"
+
+#, qt-format
+#~ msgid "Type: <b>%1</b> (%2)"
+#~ msgstr "类型： <b>%1</b> (%2)"
 
 #~ msgid "Mean surface temp."
 #~ msgstr "平均表面温度"
@@ -17331,11 +17370,23 @@ msgstr "为自定义赤纬线2"
 #~ "values outside this range"
 #~ msgstr "平均误差小于1秒，最大误差1.9秒，其余都是超出范围的无意义数值"
 
+#, qt-format
+#~ msgid "Color Index (B-V): <b>%1</b>"
+#~ msgstr "色指数（B-V）：<b>%1</b>"
+
 #~ msgid "1000"
 #~ msgstr "1000"
 
 #~ msgid "Use brightness settings for landscapes"
 #~ msgstr "为地景使用亮度设定"
+
+#, no-c-format, qt-format
+#~ msgid "Speed: %1 km/s"
+#~ msgstr "速度: %1 km/s"
+
+#, no-c-format, qt-format
+#~ msgid "Distance from Sun: %1AU (%2 km)"
+#~ msgstr "距太阳距离: %1AU (%2 km)"
 
 #~ msgid "This is latest stable version of Stellarium."
 #~ msgstr "您当前使用的是Stellarium的最新版本。"
@@ -17356,12 +17407,41 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Looks like you are using the development version of Stellarium."
 #~ msgstr "您正在使用的似乎是Stellarium的开发版本。"
 
+#, qt-format
+#~ msgid "Orientation angle: %1%2"
+#~ msgstr "定向角:%1%2"
+
+#~ msgid "Mpc"
+#~ msgstr "兆秒差距"
+
+#~ msgid "kpc"
+#~ msgstr "千秒差距"
+
+#, qt-format
+#~ msgid "Opacity: <b>%1</b>"
+#~ msgstr "不透明度：<b>%1</b>"
+
 #~ msgid "Catalog of galaxies"
 #~ msgstr "星系列表"
 
 #, qt-format
 #~ msgid "Surface brightness: <b>%1</b> (after extinction: <b>%2</b>)"
 #~ msgstr "表面亮度: <b>%1</b> (消失后: <b>%2</b>)"
+
+#, qt-format
+#~ msgid "Redshift: %1"
+#~ msgstr "红移t: %1"
+
+#~ msgid "ly"
+#~ msgstr "光年"
+
+#, qt-format
+#~ msgid "Distance: %1 %2 (%3 %4)"
+#~ msgstr "距离: %1 %2 (%3 %4)"
+
+#, qt-format
+#~ msgid "Distance: %1 ly"
+#~ msgstr "距离: %1 光年"
 
 #~ msgid "Mag."
 #~ msgstr "星等"
@@ -17440,11 +17520,38 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Apparent Sidereal Time: %1"
 #~ msgstr "真恒星时: %1"
 
+#, qt-format
+#~ msgid "IAU Constellation: %1"
+#~ msgstr "IAU星座: %1"
+
 #~ msgid "Angular Distance, arcsec."
 #~ msgstr "角距离,秒"
 
 #~ msgid "Reload shaders"
 #~ msgstr "重新加载着色器"
+
+#, qt-format
+#~ msgid "Size: %1 x %2"
+#~ msgstr "大小: %1 x %2"
+
+#~ msgid "Morphological description: "
+#~ msgstr "形态描述: "
+
+#, qt-format
+#~ msgid "Apparent diameter: %1, scaled up to: %2"
+#~ msgstr "视直径r: %1, 放大到: %2"
+
+#, qt-format
+#~ msgid "Sidereal period: %1 a"
+#~ msgstr "恒星周期: %1 年"
+
+#, no-c-format, qt-format
+#~ msgid "Coma diameter (estimate): %1 km"
+#~ msgstr "彗尾直径（估计）: %1 千米"
+
+#, qt-format
+#~ msgid "Eclipse Factor: %1%"
+#~ msgstr "蚀率: %1%"
 
 #~ msgid "Select a file to replace the Solar System configuration file"
 #~ msgstr "选择一个文件以替换太阳系配置文件"
@@ -17452,11 +17559,55 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Save the Solar System configuration file as..."
 #~ msgstr "将太阳系统配置文件另存为..."
 
+#~ msgid "Mio. ly"
+#~ msgstr "兆光年"
+
+#, no-c-format, qt-format
+#~ msgid "Distance from Sun: %1AU (%2 Mio km)"
+#~ msgstr "距太阳距离: %1AU (%2兆km)"
+
+#, no-c-format, qt-format
+#~ msgid "Gas tail length (estimate): %1 Mio km"
+#~ msgstr "彗尾长度（估计）: %1 兆千米"
+
+#, no-c-format, qt-format
+#~ msgid "Distance: %1AU (%2 Mio km)"
+#~ msgstr "距离: %1AU (%2兆km)"
+
+#, qt-format
+#~ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
+#~ msgstr "星等 <b>%1</b> (消光至: <b>%2</b>)"
+
+#~ msgid " (Photometric system: B)"
+#~ msgstr " (测光系统: B)"
+
+#, qt-format
+#~ msgid "Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
+#~ msgstr "大致星等: <b>%1</b> (消光至: <b>%2</b>)"
+
+#, qt-format
+#~ msgid "Albedo: %1"
+#~ msgstr "反照率： %1"
+
+#~ msgid ""
+#~ "The approximate time it takes for the signals from the telescope to reach "
+#~ "Stellarium.\n"
+#~ "Increase this value if the reticle is skipping."
+#~ msgstr ""
+#~ "望远镜的信号传入 Stellarium 所用的近似时间。\n"
+#~ "如果您发现十字丝在跳动，请增大这一数值。"
+
+#~ msgctxt "astronomical unit"
+#~ msgid "AU"
+#~ msgstr "天文单位"
+
+#, qt-format
+#~ msgid "Contrast index: %1"
+#~ msgstr "对比度: %1"
+
 #~ msgid "StelProperty"
 #~ msgstr "高性能"
 
-#~ msgid "Supergalactic longitude/latitude"
-#~ msgstr "超星系经/纬度"
-
-#~ msgid "Galactic longitude/latitude"
-#~ msgstr "银经/银纬"
+#, qt-format
+#~ msgid "Approx. magnitude: <b>%1</b>"
+#~ msgstr "大致星等: <b>%1</b>"
