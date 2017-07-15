@@ -850,6 +850,9 @@ public:
 	//! Get the list of all the planet localized names
 	QStringList getAllPlanetLocalizedNames() const;
 
+	//! Get the list of all the minor planet english names
+	QStringList getAllMinorPlanetCommonEnglishNames() const;
+
 	//! Reload the planets
 	void reloadPlanets();
 
