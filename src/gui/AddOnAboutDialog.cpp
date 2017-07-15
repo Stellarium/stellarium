@@ -25,7 +25,7 @@
 #include "StelTranslator.hpp"
 
 AddOnAboutDialog::AddOnAboutDialog(AddOnDialog* pAddOnDialog)
-	: StelDialog(pAddOnDialog->parent())
+	: StelDialog("AddOnAboutDialog", pAddOnDialog->parent())
 {
 	ui = new Ui_addonAboutDialogForm;
 }

@@ -1212,7 +1212,6 @@ void ViewDialog::populateLists()
 {
 	// Fill the culture list widget from the available list
 	StelSkyCultureMgr& skyCultureMgr = StelApp::getInstance().getSkyCultureMgr();
-	skyCultureMgr.updateListOfAvailableSkyCultures();
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();

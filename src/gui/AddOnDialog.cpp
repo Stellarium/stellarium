@@ -32,7 +32,7 @@
 #include "ui_addonDialog.h"
 
 AddOnDialog::AddOnDialog(QObject* parent)
-	: StelDialog(parent)
+	: StelDialog("AddOnDialog", parent)
 	, m_pAboutDialog(new AddOnAboutDialog(this))
 {
 	ui = new Ui_addonDialogForm;
