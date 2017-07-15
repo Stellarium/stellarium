@@ -36,9 +36,11 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QDir>
 #include <QFile>
+#include <QPluginLoader>
 
 const QByteArray RequestHandler::AUTH_REALM = "Basic realm=\"Stellarium remote control\"";
 
@@ -90,15 +92,18 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	//register the services
 	//they "live" in the main thread in the QObject sense, but their service methods are actually
 	//executed in the HTTP handler threads
-	apiController->registerService(new MainService("main",apiController));
-	apiController->registerService(new ObjectService("objects",apiController));
-	apiController->registerService(new ScriptService("scripts",apiController));
-	apiController->registerService(new SimbadService("simbad",apiController));
-	apiController->registerService(new StelActionService("stelaction",apiController));
-	apiController->registerService(new StelPropertyService("stelproperty",apiController));
-	apiController->registerService(new LocationService("location",apiController));
-	apiController->registerService(new LocationSearchService("locationsearch",apiController));
-	apiController->registerService(new ViewService("view",apiController));
+	apiController->registerService(new MainService(apiController));
+	apiController->registerService(new ObjectService(apiController));
+	apiController->registerService(new ScriptService(apiController));
+	apiController->registerService(new SimbadService(apiController));
+	apiController->registerService(new StelActionService(apiController));
+	apiController->registerService(new StelPropertyService(apiController));
+	apiController->registerService(new LocationService(apiController));
+	apiController->registerService(new LocationSearchService(apiController));
+	apiController->registerService(new ViewService(apiController));
+
+	connect(&StelApp::getInstance().getModuleMgr(), SIGNAL(extensionsAdded(QObjectList)), this, SLOT(addExtensionServices(QObjectList)));
+	addExtensionServices(StelApp::getInstance().getModuleMgr().getExtensionList());
 
 	staticFiles = new StaticFileController(settings,this);
 	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshTemplates()));
@@ -107,6 +112,19 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 
 RequestHandler::~RequestHandler()
 {
+}
+
+void RequestHandler::addExtensionServices(QObjectList services)
+{
+	foreach(QObject* obj, services)
+	{
+		RemoteControlServiceInterface* sv = qobject_cast<RemoteControlServiceInterface*>(obj);
+		if(sv)
+		{
+			qDebug()<<"Registering RemoteControl extension service:"<<sv->getPath();
+			apiController->registerService(sv);
+		}
+	}
 }
 
 void RequestHandler::update(double deltaTime)

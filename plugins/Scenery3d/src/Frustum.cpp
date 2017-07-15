@@ -22,7 +22,7 @@
 #include "GLFuncs.hpp"
 #include <limits>
 
-Frustum::Frustum() : bbox(Vec3f(0),Vec3f(0)),drawBbox(Vec3f(0),Vec3f(0))
+Frustum::Frustum()
 {
 	for(unsigned int i=0; i<CORNERCOUNT; i++)
 	{
@@ -109,19 +109,12 @@ void Frustum::calcFrustum(Vec3d p, Vec3d l, Vec3d u)
 
 
 	//reset bbox
-	bbox.min = Vec3f(std::numeric_limits<float>::max());
-	bbox.max = Vec3f(-std::numeric_limits<float>::max());
+	bbox.reset();
 
 	for(unsigned int i=0; i<CORNERCOUNT; i++)
 	{
 		Vec3f curVert = corners[i];
-		bbox.min = Vec3f(std::min(static_cast<float>(curVert[0]), bbox.min[0]),
-				 std::min(static_cast<float>(curVert[1]), bbox.min[1]),
-				 std::min(static_cast<float>(curVert[2]), bbox.min[2]));
-
-		bbox.max = Vec3f(std::max(static_cast<float>(curVert[0]), bbox.max[0]),
-				 std::max(static_cast<float>(curVert[1]), bbox.max[1]),
-				 std::max(static_cast<float>(curVert[2]), bbox.max[2]));
+		bbox.expand(curVert);
 	}
 }
 
@@ -139,7 +132,7 @@ int Frustum::pointInFrustum(const Vec3f& p)
 	return result;
 }
 
-int Frustum::boxInFrustum(const AABB& bbox)
+int Frustum::boxInFrustum(const AABBox &bbox)
 {
 	int result = INSIDE;
 	for(unsigned int i=0; i<PLANECOUNT; i++)
@@ -277,6 +270,6 @@ void Frustum::drawFrustum() const
 		glExtFuncs->glVertex3f(b.v[0],b.v[1],b.v[2]);
 	glExtFuncs->glEnd();
 
-	drawBbox.render();
+	//drawBbox.render();
 #endif
 }

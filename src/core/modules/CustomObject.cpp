@@ -29,13 +29,14 @@
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 
+const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 
 CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
 	: initialized(false)
 	, XYZ(coordinates)
-	, markerTexture(NULL)
+	, markerTexture(Q_NULLPTR)
 	, designation(codesignation)
 	, isMarker(isVisible)
 {
@@ -74,14 +75,15 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if (flags&ObjectType)
 	{
+		QString type = q_("custom object");
 		if (isMarker)
-			oss << q_("Type: <b>%1</b>").arg(q_("custom marker")) << "<br />";
-		else
-			oss << q_("Type: <b>%1</b>").arg(q_("custom object")) << "<br />";
+			type = q_("custom marker");
+
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), type);
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -113,9 +115,9 @@ void CustomObject::update(double deltaTime)
 void CustomObject::draw(StelCore* core, StelPainter *painter)
 {
 	Q_UNUSED(core);
-	Vec3d win;
+	Vec3d pos;
 	// Check visibility of custom object
-	if (!(painter->getProjector()->projectCheck(XYZ, win)))
+	if (!(painter->getProjector()->projectCheck(XYZ, pos)))
 		return;
 
 	painter->setBlending(true, GL_ONE, GL_ONE);
@@ -124,14 +126,14 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 	if (isMarker)
 	{
 		markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = markerSize + size/1.6f;
 
-		painter->drawSprite2dMode(XYZ, markerSize);
+		painter->drawSprite2dMode(pos[0], pos[1], markerSize);
 
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter->drawText(XYZ, getNameI18n(), 0, shift, shift, false);
+			painter->drawText(pos[0], pos[1], getNameI18n(), 0, shift, shift, false);
 		}
 	}
 }

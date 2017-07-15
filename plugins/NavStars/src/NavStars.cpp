@@ -61,7 +61,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
@@ -112,12 +112,12 @@ void NavStars::init()
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 	{
-		if (toolbarButton == NULL)
+		if (toolbarButton == Q_NULLPTR)
 		{
 			// Create the nav. stars button
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/NavStars/btNavStars-on.png"),
 						       QPixmap(":/NavStars/btNavStars-off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),

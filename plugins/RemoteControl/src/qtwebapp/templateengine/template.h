@@ -118,7 +118,7 @@ public:
       @see TemplateLoader
       @see TemplateCache
     */
-    Template(QFile& file, QTextCodec* textCodec = NULL);
+    Template(QFile& file, QTextCodec* textCodec = Q_NULLPTR);
 
     virtual ~Template() { }
 

@@ -30,6 +30,8 @@
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 
+const QString MeteorShower::METEORSHOWER_TYPE = QStringLiteral("MeteorShower");
+
 MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	: m_mgr(mgr)
 	, m_status(INVALID)
@@ -365,7 +367,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 		if (m_mgr->getEnableLabels())
 		{
 			painter.setFont(m_mgr->getFont());
-			float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+			float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			float shift = 8.f + size/1.8f;
 			if ((mag+1.f)<mlimit)
 				painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
@@ -547,11 +549,11 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if (flags&Extra)
 	{
-		oss << q_("Type: <b>%1</b> (%2)").arg(q_("meteor shower"), mstdata) << "<br />";
+		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("meteor shower"), mstdata) << "<br />";
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{

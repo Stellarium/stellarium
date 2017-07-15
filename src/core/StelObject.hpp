@@ -85,11 +85,11 @@ public:
 
 	//! Default implementation of the getRegion method.
 	//! Return the spatial region of the object.
-	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));}
+	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
 
 	//! Default implementation of the getPointInRegion method.
 	//! Return the J2000 Equatorial Position of the object.
-	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(NULL);}
+	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(Q_NULLPTR);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
@@ -132,6 +132,20 @@ public:
 
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
+
+	//! Returns a unique identifier for this object.
+	//! The ID should be unique for all objects of the same type,
+	//! but may freely conflict with IDs of other types, so getType() must also be tested.
+	//!
+	//! With this it should be possible to at least identify the same object
+	//! in a different instance of Stellarium running the same version, but
+	//! it would even be better if the ID provides some degree of forward-compatibility.
+	//! For some object types (e.g. planets) this may simply return getEnglishName(),
+	//! but better candidates may be official designations or at least (stable) internal IDs.
+	//!
+	//! An object may have multiple IDs (different catalog numbers, etc). StelObjectMgr::searchByID()
+	//! should search through all ID variants, but this method only returns one of them.
+	virtual QString getID() const = 0;
 
 	//! Return object's name in english
 	virtual QString getEnglishName() const = 0;
@@ -218,8 +232,8 @@ public:
 
 protected:
 
-	//! Format the positional info string contain J2000/of date/altaz/hour angle positions for the object
-	QString getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	//! Format the positional info string contain J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
+	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;

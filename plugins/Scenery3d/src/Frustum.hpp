@@ -23,7 +23,7 @@
 
 #include <vector>
 #include "Plane.hpp"
-#include "AABB.hpp"
+#include "GeomMath.hpp"
 
 class Frustum
 {
@@ -63,7 +63,7 @@ public:
 	const Vec3f &getCorner(Corner corner) const;
 	const Plane &getPlane(FrustumPlane plane) const;
 	int pointInFrustum(const Vec3f &p);
-	int boxInFrustum(const AABB &bbox);
+	int boxInFrustum(const AABBox &bbox);
 
 	void drawFrustum() const;
 	void saveDrawingCorners();
@@ -73,10 +73,10 @@ public:
 	float zNear;
 	float zFar;
 	Mat4d m;
-	AABB bbox;
+	AABBox bbox;
 
 	std::vector<Vec3f> drawCorners;
-	AABB drawBbox;
+	AABBox drawBbox;
 
 	std::vector<Vec3f> corners;
 	std::vector<Plane*> planes;

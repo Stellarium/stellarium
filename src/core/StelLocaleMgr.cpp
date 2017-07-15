@@ -34,7 +34,7 @@
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
 StelLocaleMgr::StelLocaleMgr()
-	: skyTranslator(NULL)
+	: skyTranslator(Q_NULLPTR)
 	, timeFormat()
 	, dateFormat()	
 {
@@ -62,7 +62,7 @@ StelLocaleMgr::StelLocaleMgr()
 StelLocaleMgr::~StelLocaleMgr()
 {
 	delete skyTranslator;
-	skyTranslator=NULL;
+	skyTranslator=Q_NULLPTR;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names

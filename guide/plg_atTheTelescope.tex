@@ -518,7 +518,7 @@ Telescope controlled by:
 \begin{description}
 \item[Stellarium, directly through a serial port] is the DIRECT case
 \item[External software or a remote computer] is an INDIRECT case
-\item[RTS2 Telescope] is another INDIRECT case
+\item[RTS2 Telescope] is another INDIRECT case\newFeature{v0.16.0}
 \item[Nothing, just simulate one (a moving reticle)] is a \emph{virtual telescope} (no connection)
 \end{description}
 
@@ -588,8 +588,8 @@ Both fields here refer to INDIRECT connections, which implies communication over
 \end{description}
 
 \paragraph{RTS2 settings} (see also \ref{sec:plugins:TelescopeControl:RTS2})
-You will need access to RTS2 HTTPD server through HTTP/JSON calls. Please see
-RTS2 documentation (man rts2-httpd) for details. You will as well need username
+You will need access to RTS2 HTTPD server through HTTP/JSON calls.\newFeature{v0.16.0}
+Please see RTS2 documentation (man rts2-httpd) for details. You will as well need username
 and password for HTTPD. Please be aware that in order to move the telescope,
 your user must have the telescope in the list of allowed devices in the database. Please see \texttt{man
 rts2-user} for details on how to manipulate RTS2 users.
@@ -707,7 +707,7 @@ The device list contains the following:
 \end{description}
 
 \subsubsection{RTS2 telescopes}
-Setting up a robotic telescope and dome control system with RTS2 
+\newFeature{v0.16.0}Setting up a robotic telescope and dome control system with RTS2 
 is beyond the scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:RTS2} 
 for a few notes to be able to connect and command the telescope with Stellarium.
 Please refer to the RTS2 Web pages\footnote{\url{http://rts2.org/}} for further details.
@@ -733,7 +733,7 @@ circles).
 \section{RTS2}
 \label{sec:plugins:TelescopeControl:RTS2}
 
-\indexterm{RTS2}, the Remote Telescope System 2, is a complete robotic observatory control system for Linux 
+\indexterm{RTS2}, \newFeature{v0.16.0}the Remote Telescope System 2, is a complete robotic observatory control system for Linux 
 by Petr Kub\'{a}nek, who kindly provided the plugin code to make RTS2 interoperate with Stellarium.
 We cannot give a full manual or any further support for RTS2 here, please refer to its website\footnote{\url{http://rts2.org}} 
 for complete instructions about dome control, cameras, filter wheels, weather sensors, etc. 

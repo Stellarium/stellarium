@@ -31,7 +31,7 @@
 
 #include <QSettings>
 
-ToastMgr::ToastMgr() : survey(NULL)
+ToastMgr::ToastMgr() : survey(Q_NULLPTR)
 {	
 	setObjectName("ToastMgr");
 	fader = new LinearFader();
@@ -40,7 +40,7 @@ ToastMgr::ToastMgr() : survey(NULL)
 ToastMgr::~ToastMgr()
 {
 	delete fader;
-	fader = NULL;
+	fader = Q_NULLPTR;
 }
 
 void ToastMgr::init()
@@ -63,7 +63,7 @@ void ToastMgr::init()
 void ToastMgr::deinit()
 {
 	delete survey;
-	survey = NULL;
+	survey = Q_NULLPTR;
 }
 
 void ToastMgr::draw(StelCore* core)

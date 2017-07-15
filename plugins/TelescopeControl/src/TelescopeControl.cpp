@@ -61,6 +61,8 @@
 
 #include <QDebug>
 
+#define DEFAULT_RTS2_REFRESH    500000
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 StelModule* TelescopeControlStelPluginInterface::getStelModule() const
@@ -86,11 +88,11 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: toolbarButton(NULL)
+	: toolbarButton(Q_NULLPTR)
 	, useTelescopeServerLogs(false)
 	, useServerExecutables(false)
-	, telescopeDialog(NULL)
-	, slewDialog(NULL)
+	, telescopeDialog(Q_NULLPTR)
+	, slewDialog(Q_NULLPTR)
 	, actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
@@ -188,9 +190,9 @@ void TelescopeControl::init()
 
 		//Create toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui!=NULL)
+		if (gui!=Q_NULLPTR)
 		{
-			toolbarButton =	new StelButton(NULL,
+			toolbarButton =	new StelButton(Q_NULLPTR,
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -356,6 +358,11 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 			return qSharedPointerCast<StelObject>(telescope);
 	}
 	return 0;
+}
+
+QString TelescopeControl::getStelObjectType() const
+{
+	return TelescopeClient::TELESCOPECLIENT_TYPE;
 }
 
 bool TelescopeControl::configureGui(bool show)
@@ -750,6 +757,7 @@ void TelescopeControl::loadTelescopes()
 		QString rts2Url("localhost");
 		QString rts2Username("");
 		QString rts2Password("");
+		int rts2Refresh = DEFAULT_RTS2_REFRESH;
 
 		if (connectionType == ConnectionInternal)
 		{
@@ -805,6 +813,7 @@ void TelescopeControl::loadTelescopes()
 			}
 			rts2Username = telescope.value("username").toString();
 			rts2Password = telescope.value("password").toString();
+			rts2Refresh = telescope.value("refresh", DEFAULT_RTS2_REFRESH).toInt();
 		}
 
 		if (connectionType != ConnectionVirtual)
@@ -900,7 +909,7 @@ void TelescopeControl::loadTelescopes()
 			}
 			else
 			{
-				if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password))
+				if(!startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh))
 				{
 					qDebug() << "[TelescopeControl] Unable to create a telescope client at slot" << slot;
 					//Unnecessary due to if-else construction;
@@ -924,7 +933,7 @@ void TelescopeControl::loadTelescopes()
 	telescopeDescriptions = result;
 }
 
-bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password)
+bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh)
 {
 	//Validation
 	if(!isValidSlotNumber(slot) || name.isEmpty() || equinox.isEmpty() || connectionType <= ConnectionNA || connectionType >= ConnectionCount)
@@ -951,6 +960,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("url", rts2Url);
 		telescope.insert("username", rts2Username);
 		telescope.insert("password", rts2Password);
+		telescope.insert("refresh", rts2Refresh);
 	}
 
 	if(connectionType == ConnectionInternal)
@@ -993,7 +1003,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	return true;
 }
 
-bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password)
+bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& deviceModelName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password, int& rts2Refresh)
 {
 	//Validation
 	if(!isValidSlotNumber(slot))
@@ -1034,6 +1044,7 @@ bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionTy
 		rts2Url = telescope.value("url").toString();
 		rts2Username = telescope.value("username").toString();
 		rts2Password = telescope.value("password").toString();
+		rts2Refresh = telescope.value("refresh", DEFAULT_RTS2_REFRESH).toInt();
 	}
 
 	return true;
@@ -1069,7 +1080,8 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	QString rts2Url;
 	QString rts2Username;
 	QString rts2Password;
-	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password))
+	int rts2Refresh;
+	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh))
 	{
 		//TODO: Add debug
 		return false;
@@ -1105,7 +1117,7 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	}
 	else
 	{
-		if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password))
+		if (startClientAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh))
 		{
 			emit clientConnected(slot, name);
 			return true;
@@ -1241,7 +1253,7 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 	return true;
 }
 
-bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password)
+bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh)
 {
 	//Validation
 	if(!isValidSlotNumber(slotNumber))
@@ -1274,7 +1286,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 
 		case ConnectionRTS2:
 			if (!rts2Url.isEmpty())
-				initString = QString("%1:RTS2:%2:http://%3:%4@%5").arg(name, equinox, rts2Username, rts2Password, rts2Url);
+				initString = QString("%1:RTS2:%2:%3:http://%4:%5@%6").arg(name, equinox, QString::number(rts2Refresh), rts2Username, rts2Password, rts2Url);
 			break;
 
 		case ConnectionRemote:

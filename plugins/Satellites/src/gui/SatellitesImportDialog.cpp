@@ -40,9 +40,9 @@ SatellitesImportDialog::SatellitesImportDialog()
 	: StelDialog("SatellitesImport")
 	, isGettingData(false)
 	, numberDownloadsComplete(0)
-	, downloadMgr(0)
-	, progressBar(0)
-	, filterProxyModel(NULL)
+	, downloadMgr(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
+	, filterProxyModel(Q_NULLPTR)
 {
 	ui = new Ui_satellitesImportDialog;
 	newSatellitesModel = new QStandardItemModel(this);
@@ -56,14 +56,14 @@ SatellitesImportDialog::~SatellitesImportDialog()
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = 0;
+		progressBar = Q_NULLPTR;
 	}
 	
 	if (newSatellitesModel)
 	{
 		newSatellitesModel->clear();
 		delete newSatellitesModel;
-		newSatellitesModel = 0;
+		newSatellitesModel = Q_NULLPTR;
 	}
 }
 
@@ -137,7 +137,7 @@ void SatellitesImportDialog::getData()
 	
 	if (satMgr->getUpdatesEnabled())
 	{
-		sourceUrls = satMgr->getTleSources();
+		sourceUrls = satMgr->getTleSources();		
 		qDeleteAll(sourceFiles);
 		sourceFiles.clear();
 		numberDownloadsComplete = 0;
@@ -156,7 +156,8 @@ void SatellitesImportDialog::getData()
 		
 		for (int i = 0; i < sourceUrls.size(); i++)
 		{
-			QUrl url(sourceUrls.at(i));
+			QString urlData = sourceUrls.at(i);
+			QUrl url(urlData.remove("1,", Qt::CaseInsensitive));
 			QNetworkReply* reply = downloadMgr->get(QNetworkRequest(url));
 			activeDownloads.append(reply);
 		}
@@ -260,7 +261,7 @@ void SatellitesImportDialog::abortDownloads()
 		activeDownloads[i]->deleteLater();
 	}
 	reset();
-	displayMessage("Download aborted.");
+	displayMessage(q_("Download aborted."));
 }
 
 void SatellitesImportDialog::acceptNewSatellites()
@@ -305,7 +306,7 @@ void SatellitesImportDialog::reset()
 	ui->pushButtonAbort->setVisible(false);
 	ui->labelMessage->setVisible(false);
 	ui->labelMessage->clear();
-	ui->groupBoxWorking->setTitle("Get data");
+	ui->groupBoxWorking->setTitle(q_("Get data"));
 	newSatellitesModel->clear();
 	ui->lineEditSearch->clear();
 	

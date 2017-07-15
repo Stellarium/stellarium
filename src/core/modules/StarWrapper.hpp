@@ -45,7 +45,8 @@ class StarWrapperBase : public StelObject
 protected:
 	StarWrapperBase(void) : ref_count(0) {;}
 	virtual ~StarWrapperBase(void) {;}
-	QString getType(void) const {return "Star";}
+	QString getType(void) const {return STAR_TYPE;}
+	QString getID(void) const { return getEnglishName(); } //TODO: add a proper ID here (probably based on position?)
 
 	QString getEnglishName(void) const {return "";}
 	QString getNameI18n(void) const = 0;

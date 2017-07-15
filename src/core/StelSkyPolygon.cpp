@@ -31,7 +31,7 @@
 void StelSkyPolygon::initCtor()
 {
 	minResolution = -1;
-	texFader = NULL;
+	texFader = Q_NULLPTR;
 }
 
 // Constructor

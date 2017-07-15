@@ -42,7 +42,7 @@ class ShortcutsFilterModel : public QSortFilterProxyModel
 	Q_OBJECT
 	
 public:
-	ShortcutsFilterModel(QObject* parent = 0);
+	ShortcutsFilterModel(QObject* parent = Q_NULLPTR);
 	
 protected:
 	bool filterAcceptsRow(int source_row,
@@ -81,7 +81,7 @@ public slots:
 	void switchToEditors(const QModelIndex& index);
 	//! update shortcut representation in tree correspondingly to its actual contents.
 	//! if no item is specified, search for it in tree, if no items found, create new item
-	void updateShortcutsItem(class StelAction* action, QStandardItem* shortcutItem = NULL);
+	void updateShortcutsItem(class StelAction* action, QStandardItem* shortcutItem = Q_NULLPTR);
 	void restoreDefaultShortcuts();
 	void updateTreeData();
 

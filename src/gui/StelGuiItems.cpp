@@ -22,12 +22,14 @@
 #include "StelProjector.hpp"
 
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
 #include "StelGuiItems.hpp"
 #include "StelGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelMainView.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelObserver.hpp"
@@ -75,14 +77,14 @@ void StelButton::initCtor(const QPixmap& apixOn,
                           const QPixmap& apixNoChange,
                           const QPixmap& apixHover,
                           StelAction* aaction,
-                          bool noBackground,
+			  bool noBackground,
                           bool isTristate)
 {
 	pixOn = apixOn;
 	pixOff = apixOff;
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
-	noBckground = !StelApp::getInstance().getSettings()->value("gui/flag_show_buttons_background", !noBackground).toBool();
+	noBckground = noBackground;
 	isTristate_ = isTristate;
 	opacity = 1.;
 	hoverOpacity = 0.;
@@ -104,8 +106,9 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)),
 	        this, SLOT(animValueChanged(qreal)));
+	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));
 
-	if (action!=NULL)
+	if (action!=Q_NULLPTR)
 	{
 		if (action->isCheckable())
 		{
@@ -124,21 +127,21 @@ StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,
                        const QPixmap& apixHover,
-                       StelAction *aaction,
-                       bool noBackground) :
+		       StelAction *aaction,
+		       bool noBackground) :
 	QGraphicsPixmapItem(apixOff, parent)
 {
 	initCtor(apixOn, apixOff, QPixmap(), apixHover, aaction, noBackground, false);
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
-                       const QPixmap& apixOn,
-                       const QPixmap& apixOff,
-                       const QPixmap& apixNoChange,
-                       const QPixmap& apixHover,
-                       const QString& aactionId,
-                       bool noBackground,
-                       bool isTristate) :
+		       const QPixmap& apixOn,
+		       const QPixmap& apixOff,
+		       const QPixmap& apixNoChange,
+		       const QPixmap& apixHover,
+		       const QString& aactionId,
+		       bool noBackground,
+		       bool isTristate) :
 	QGraphicsPixmapItem(apixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
@@ -149,8 +152,8 @@ StelButton::StelButton(QGraphicsItem* parent,
                        const QPixmap& apixOn,
                        const QPixmap& apixOff,
                        const QPixmap& apixHover,
-                       const QString& aactionId,
-                       bool noBackground)
+		       const QString& aactionId,
+		       bool noBackground)
 	:QGraphicsPixmapItem(apixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(aactionId);
@@ -197,7 +200,7 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent*)
 
 void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent*)
 {
-	if (action!=NULL && !action->isCheckable())
+	if (action!=Q_NULLPTR && !action->isCheckable())
 		setChecked(toggleChecked(checked));
 
 	if (flagChangeFocus) // true if button is on bottom bar
@@ -212,7 +215,7 @@ void StelButton::updateIcon()
 	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
-	if (!pixBackground.isNull() && noBckground==false)
+	if (!pixBackground.isNull() && noBckground==false && StelMainView::getInstance().getFlagUseButtonsBackground())
 		painter.drawPixmap(0, 0, pixBackground);
 
 	painter.drawPixmap(0, 0,
@@ -248,8 +251,8 @@ void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 	: QGraphicsItem(parent)
-	, hideTimeLine(NULL)
-	, helpLabelPixmap(NULL)
+	, hideTimeLine(Q_NULLPTR)
+	, helpLabelPixmap(Q_NULLPTR)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
@@ -260,7 +263,7 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 
 LeftStelBar::~LeftStelBar()
 {
-	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=NULL; }
+	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=Q_NULLPTR; }
 }
 
 void LeftStelBar::addButton(StelButton* button)
@@ -355,15 +358,15 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
                              const QPixmap& pixMiddle,
                              const QPixmap& pixSingle) :
 	QGraphicsItem(parent),
-	locationPixmap(NULL),
-	datetimePixmap(NULL),
-	fovPixmap(NULL),
-	fpsPixmap(NULL),
+	locationPixmap(Q_NULLPTR),
+	datetimePixmap(Q_NULLPTR),
+	fovPixmap(Q_NULLPTR),
+	fpsPixmap(Q_NULLPTR),
 	pixBackgroundLeft(pixLeft),
 	pixBackgroundRight(pixRight),
 	pixBackgroundMiddle(pixMiddle),
 	pixBackgroundSingle(pixSingle),
-	helpLabelPixmap(NULL)
+	helpLabelPixmap(Q_NULLPTR)
 {
 	// The text is dummy just for testing
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
@@ -413,15 +416,15 @@ BottomStelBar::~BottomStelBar()
 			if (b->parentItem()==0)
 			{
 				delete b;
-				b=NULL;
+				b=Q_NULLPTR;
 			}
 		}
 	}
-	if (datetimePixmap) { delete datetimePixmap; datetimePixmap=NULL; }
-	if (locationPixmap) { delete locationPixmap; locationPixmap=NULL; }
-	if (fovPixmap) { delete fovPixmap; fovPixmap=NULL; }
-	if (fpsPixmap) { delete fpsPixmap; fpsPixmap=NULL; }
-	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=NULL; }
+	if (datetimePixmap) { delete datetimePixmap; datetimePixmap=Q_NULLPTR; }
+	if (locationPixmap) { delete locationPixmap; locationPixmap=Q_NULLPTR; }
+	if (fovPixmap) { delete fovPixmap; fovPixmap=Q_NULLPTR; }
+	if (fpsPixmap) { delete fpsPixmap; fpsPixmap=Q_NULLPTR; }
+	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=Q_NULLPTR; }
 }
 
 void BottomStelBar::addButton(StelButton* button, const QString& groupName, const QString& beforeActionName)
@@ -452,7 +455,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 StelButton* BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;
-	StelButton* bToRemove = NULL;
+	StelButton* bToRemove = Q_NULLPTR;
 	for (QMap<QString, ButtonGroup>::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
 	{
 		int i=0;
@@ -468,15 +471,15 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 			++i;
 		}
 	}
-	if (bToRemove == NULL)
-		return NULL;
+	if (bToRemove == Q_NULLPTR)
+		return Q_NULLPTR;
 	if (buttonGroups[gName].elems.size() == 0)
 	{
 		buttonGroups.remove(gName);
 	}
 	// Cannot really delete because some part of the GUI depend on the presence of some buttons
 	// so just make invisible
-	bToRemove->setParentItem(NULL);
+	bToRemove->setParentItem(Q_NULLPTR);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
 	emit sizeChanged();
@@ -552,14 +555,14 @@ void BottomStelBar::updateButtonsGroups()
 			{
 				if (buttons.size() == 1)
 				{
-					if (group.pixBackgroundSingle == NULL)
+					if (group.pixBackgroundSingle == Q_NULLPTR)
 						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
 				else
 				{
-					if (group.pixBackgroundLeft == NULL)
+					if (group.pixBackgroundLeft == Q_NULLPTR)
 						b->setBackgroundPixmap(pixBackgroundLeft);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundLeft);
@@ -569,19 +572,19 @@ void BottomStelBar::updateButtonsGroups()
 			{
 				if (buttons.size() != 1)
 				{
-					if (group.pixBackgroundSingle == NULL)
+					if (group.pixBackgroundSingle == Q_NULLPTR)
 						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
-				if (group.pixBackgroundRight == NULL)
+				if (group.pixBackgroundRight == Q_NULLPTR)
 					b->setBackgroundPixmap(pixBackgroundRight);
 				else
 					b->setBackgroundPixmap(*group.pixBackgroundRight);
 			}
 			else
 			{
-				if (group.pixBackgroundMiddle == NULL)
+				if (group.pixBackgroundMiddle == Q_NULLPTR)
 					b->setBackgroundPixmap(pixBackgroundMiddle);
 				else
 					b->setBackgroundPixmap(*group.pixBackgroundMiddle);
@@ -627,6 +630,15 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	QString planetName = core->getCurrentLocation().planetName;
+	QString planetNameI18n;
+	if (planetName=="SpaceShip") // Avoid crash
+	{
+		const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+		planetNameI18n = trans.qtranslate(planetName);
+	}
+	else
+		planetNameI18n = GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName)->getNameI18n();
+
 	QString tzName = core->getCurrentTimeZone();
 	if (tzName.contains("system_default") || (tzName.isEmpty() && planetName=="Earth"))
 		tzName = q_("System default");
@@ -638,6 +650,33 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (tzName.contains("LTST"))
 		currTZ = q_("Local True Solar Time");
+
+	// TRANSLATORS: unit of measurement: minutes per second
+	QString timeRateMU = qc_("min/s", "unit of measurement");
+	float timeRate = qAbs(core->getTimeRate()/StelCore::JD_SECOND);
+	float timeSpeed = timeRate/60.f;
+
+	if (timeSpeed>=60.f)
+	{
+		timeSpeed /= 60.f;
+		// TRANSLATORS: unit of measurement: hours per second
+		timeRateMU = qc_("hr/s", "unit of measurement");
+	}
+	if (timeSpeed>=24.f)
+	{
+		timeSpeed /= 24.f;
+		// TRANSLATORS: unit of measurement: days per second
+		timeRateMU = qc_("d/s", "unit of measurement");
+	}
+	if (timeSpeed>=365.25f)
+	{
+		timeSpeed /= 365.25f;
+		// TRANSLATORS: unit of measurement: years per second
+		timeRateMU = qc_("yr/s", "unit of measurement");
+	}
+	QString timeRateInfo = QString("%1: x%2").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0));
+	if (timeRate>60.)
+		timeRateInfo = QString("%1: x%2 (%3 %4)").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0), QString::number(timeSpeed, 'f', 2), timeRateMU);
 
 	updatePos = true;
 	datetime->setText(newDateInfo);
@@ -657,10 +696,10 @@ void BottomStelBar::updateText(bool updatePos)
 		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
 		float ndot=( (core->de430IsActive() || core->de431IsActive()) ? -25.8f : -23.8946f );
 
-		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)));
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)).arg(timeRateInfo));
 	}
 	else
-		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2</p>").arg(newDateAppx).arg(currTZ));
+		datetime->setToolTip(QString("<p style='white-space:pre'>%1<br>%2<br>%3</p>").arg(newDateAppx).arg(currTZ).arg(timeRateInfo));
 
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 	{
@@ -671,14 +710,13 @@ void BottomStelBar::updateText(bool updatePos)
 	// build location tooltip
 	QString newLocation = "";
 	const StelLocation* loc = &core->getCurrentLocation();
-	const StelTranslator& trans = locmgr.getSkyTranslator();
 	if (getFlagShowLocation() && !loc->name.isEmpty())
 	{
-		newLocation = trans.qtranslate(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
+		newLocation = planetNameI18n +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
 	}
 	if (getFlagShowLocation() && loc->name.isEmpty())
 	{
-		newLocation = trans.qtranslate(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
 	if (location->text()!=newLocation || updatePos)
@@ -782,9 +820,13 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (updatePos)
 	{
-		int fovShift = 170;
+		QFontMetrics fpsMetrics(fps->font());
+		int fpsShift = fpsMetrics.width(fpsstr) + 50;
+
+		QFontMetrics fovMetrics(fov->font());
+		int fovShift = fpsShift + fovMetrics.width(fovstr) + 80;
 		if (getFlagFovDms())
-			fovShift = 195;
+			fovShift += 25;
 
 		QRectF rectCh = getButtonsBoundingRect();
 		location->setPos(0, 0);		
@@ -792,7 +834,7 @@ void BottomStelBar::updateText(bool updatePos)
 		if ((dtp%2) == 1) dtp--; // make even pixel
 		datetime->setPos(dtp,0);
 		fov->setPos(datetime->x()-fovShift, 0);
-		fps->setPos(datetime->x()-75, 0);
+		fps->setPos(datetime->x()-fpsShift, 0);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPos(0,0);
@@ -800,7 +842,7 @@ void BottomStelBar::updateText(bool updatePos)
 			if ((dtp%2) == 1) dtp--; // make even pixel
 			datetimePixmap->setPos(dtp,0);
 			fovPixmap->setPos(datetime->x()-fovShift, 0);
-			fpsPixmap->setPos(datetime->x()-75, 0);
+			fpsPixmap->setPos(datetime->x()-fpsShift, 0);
 		}
 	}
 }
@@ -941,7 +983,7 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	pb->setMinimum(p->getMin());
 	pb->setMaximum(p->getMax());
 	pb->setFormat(p->getFormat());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 		pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
@@ -998,7 +1040,7 @@ void CornerButtons::setOpacity(double opacity)
 	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
 	{
 		StelButton* sb = qgraphicsitem_cast<StelButton*>(child);
-		Q_ASSERT(sb!=NULL);
+		Q_ASSERT(sb!=Q_NULLPTR);
 		sb->setOpacity(opacity);
 	}
 }

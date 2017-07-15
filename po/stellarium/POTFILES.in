@@ -128,6 +128,9 @@ plugins/Pulsars/src/ui_pulsarsDialog.h
 plugins/RemoteControl/src/RemoteControl.cpp
 plugins/RemoteControl/src/gui/RemoteControlDialog.cpp
 plugins/RemoteControl/src/ui_remoteControlDialog.h
+plugins/RemoteSync/src/RemoteSync.cpp
+plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp
+plugins/RemoteSync/src/ui_remoteSyncDialog.h
 plugins/Exoplanets/src/Exoplanets.cpp
 plugins/Exoplanets/src/Exoplanet.cpp
 plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp
@@ -155,7 +158,7 @@ plugins/PointerCoordinates/src/PointerCoordinates.cpp
 plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp
 plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h
 plugins/Scenery3d/src/Scenery3d.cpp
-plugins/Scenery3d/src/Scenery3dMgr.cpp
+plugins/Scenery3d/src/S3DRenderer.cpp
 plugins/Scenery3d/src/gui/Scenery3dDialog.cpp
 plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp
 plugins/Scenery3d/src/gui/StoredViewDialog.cpp

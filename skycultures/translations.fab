@@ -12,69 +12,151 @@ _("Venus");
 _("Earth");
 _("Moon");
 _("Mars");
+# TRANSLATORS: Moon of Mars (MII)
 _("Deimos");
+# TRANSLATORS: Moon of Mars (MI)
 _("Phobos");
+# TRANSLATORS: Dwarf planet (1) Ceres
 _("Ceres");
+# TRANSLATORS: Asteroid (2) Pallas
 _("Pallas");
+# TRANSLATORS: Asteroid (3) Juno
 _("Juno");
+# TRANSLATORS: Asteroid (4) Vesta
 _("Vesta");
 _("Jupiter");
+# TRANSLATORS: Moon of Jupiter (JI)
 _("Io");
+# TRANSLATORS: Moon of Jupiter (JII)
 _("Europa");
+# TRANSLATORS: Moon of Jupiter (JIII)
 _("Ganymede");
+# TRANSLATORS: Moon of Jupiter (JIV)
 _("Callisto");
+# TRANSLATORS: Moon of Jupiter (JV)
 _("Amalthea");
+# TRANSLATORS: Moon of Jupiter (JVI)
 _("Himalia");
+# TRANSLATORS: Moon of Jupiter (JVII)
 _("Elara");
+# TRANSLATORS: Moon of Jupiter (JVIII)
 _("Pasiphae");
+# TRANSLATORS: Moon of Jupiter (JIX)
 _("Sinope");
+# TRANSLATORS: Moon of Jupiter (JX)
 _("Lysithea");
+# TRANSLATORS: Moon of Jupiter (JXI)
 _("Carme");
+# TRANSLATORS: Moon of Jupiter (JXII)
 _("Ananke");
+# TRANSLATORS: Moon of Jupiter (JXIII)
 _("Leda");
+# TRANSLATORS: Moon of Jupiter (JXIV)
 _("Thebe");
+# TRANSLATORS: Moon of Jupiter (JXV)
 _("Adrastea");
+# TRANSLATORS: Asteroid (9) Metis and moon of Jupiter (JXVI)
+_("Metis");
 _("Saturn");
+# TRANSLATORS: Moon of Saturn (SI)
 _("Mimas");
+# TRANSLATORS: Moon of Saturn (SII)
 _("Enceladus");
+# TRANSLATORS: Moon of Saturn (SIII)
 _("Tethys");
+# TRANSLATORS: Asteroid (106) Dione and moon of Saturn (SIV)
 _("Dione");
+# TRANSLATORS: Moon of Saturn (SV)
 _("Rhea");
+# TRANSLATORS: Moon of Saturn (SVI)
 _("Titan");
+# TRANSLATORS: Moon of Saturn (SVII)
 _("Hyperion");
+# TRANSLATORS: Moon of Saturn (SVIII)
 _("Iapetus");
+# TRANSLATORS: Moon of Saturn (SIX)
 _("Phoebe");
-_("Neptune");
+# TRANSLATORS: Moon of Saturn (SX)
+_("Janus");
+# TRANSLATORS: Asteroid (1810) Epimetheus and moon of Saturn (SXI)
+_("Epimetheus");
+# TRANSLATORS: Moon of Saturn (SXII)
+_("Helene");
+# TRANSLATORS: Moon of Saturn (SXIII)
+_("Telesto");
+# TRANSLATORS: Moon of Saturn (SXIV)
+_("Calypso");
+# TRANSLATORS: Moon of Saturn (SXV)
+_("Atlas");
+# TRANSLATORS: Asteroid (1809) Prometheus and moon of Saturn (SXVI)
+_("Prometheus");
+# TRANSLATORS: Asteroid (55) Pandora and moon of Saturn (SXVII)
+_("Pandora");
+# TRANSLATORS: Asteroid (4450) Pan and moon of Saturn (SXVIII)
+_("Pan");
 _("Uranus");
-_("Miranda");
+# TRANSLATORS: Moon of Uranus (UI)
 _("Ariel");
+# TRANSLATORS: Moon of Uranus (UII)
 _("Umbriel");
+# TRANSLATORS: Asteroid (593) Titania and moon of Uranus (UIII)
 _("Titania");
+# TRANSLATORS: Moon of Uranus (UIV)
 _("Oberon");
-_("Pluto");
-_("Charon");
-# TRANSLATORS: Moon of Pluto (II)
-_("Nix");
-_("Eris");
+# TRANSLATORS: Moon of Uranus (UV)
+_("Miranda");
+# TRANSLATORS: Asteroid (2758) Cordelia and moon of Uranus (UVI)
+_("Cordelia");
+# TRANSLATORS: Asteroid (171) Ophelia and moon of Uranus (UVII)
+_("Ophelia");
+# TRANSLATORS: Asteroid (218) Bianca and moon of Uranus (UVIII)
+_("Bianca");
+# TRANSLATORS: Moon of Uranus (UIX)
+_("Cressida");
+# TRANSLATORS: Asteroid (666) Desdemona and moon of Uranus (UX)
+_("Desdemona");
+# TRANSLATORS: Moon of Uranus (UXI)
+_("Juliet");
+_("Neptune");
+# TRANSLATORS: Moon of Neptune (NI)
 _("Triton");
+# TRANSLATORS: Moon of Neptune (NII)
 _("Nereid");
+# TRANSLATORS: Moon of Neptune (NIII)
 _("Naiad");
+# TRANSLATORS: Moon of Neptune (NIV)
 _("Thalassa");
+# TRANSLATORS: Moon of Neptune (NV)
 _("Despina");
+# TRANSLATORS: Asteroid (74) Galatea and moon of Neptune (NVI)
 _("Galatea");
+# TRANSLATORS: Asteroid (1162) Larissa and moon of Neptune (NVII)
 _("Larissa");
+# TRANSLATORS: Moon of Neptune (NVIII)
 _("Proteus");
+# TRANSLATORS: Moon of Neptune (NIX)
 _("Halimede");
+# TRANSLATORS: Moon of Neptune (NX)
 _("Psamathe");
+# TRANSLATORS: Moon of Neptune (NXI)
 _("Sao");
+# TRANSLATORS: Moon of Neptune (NXII)
 _("Laomedeia");
+# TRANSLATORS: Moon of Neptune (NXIII)
 _("Neso");
-_("Metis (moon)");
-_("Prometheus (moon)");
-_("Epimetheus (moon)");
-_("Bianca (moon)");
-# TRANSLATORS: Moon of Pluto (III)
-_("Hydra (moon)");
+_("Pluto");
+# TRANSLATORS: Moon of Pluto (PI)
+_("Charon");
+# TRANSLATORS: Moon of Pluto (PII)
+_("Nix");
+# TRANSLATORS: Moon of Pluto (PIII)
+_("Hydra");
+# TRANSLATORS: Moon of Pluto (PIV)
+_("Kerberos");
+# TRANSLATORS: Moon of Pluto (PV)
+_("Styx");
+# TRANSLATORS: Asteroid (136199) Eris
+_("Eris");
 _("Solar System Observer");
 _("Earth Observer");
 # TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
@@ -104,7 +186,7 @@ _("Varda");
 
 
 #
-# Asteroids that are not in the default ssystem.ini
+# Asteroids that are not in the default ssystem_minor.ini
 #
 # TRANSLATORS: Asteroid (5) Astraea
 _("Astraea");
@@ -114,8 +196,6 @@ _("Hebe");
 _("Iris");
 # TRANSLATORS: Asteroid (8) Flora
 _("Flora");
-# TRANSLATORS: Asteroid (9) Metis and moon of Jupiter
-_("Metis");
 # TRANSLATORS: Asteroid (10) Hygiea
 _("Hygiea");
 # TRANSLATORS: Asteroid (41) Daphne
@@ -138,16 +218,10 @@ _("Sisyphus");
 _("Daedalus");
 # TRANSLATORS: Asteroid (1566) Icarus
 _("Icarus");
-# TRANSLATORS: Asteroid (1809) Prometheus
-_("Prometheus");
-# TRANSLATORS: Asteroid (1810) Epimetheus
-_("Epimetheus");
 # TRANSLATORS: Asteroid (951) Gaspra
 _("Gaspra");
 # TRANSLATORS: Asteroid (243) Ida
 _("Ida");
-# TRANSLATORS: Asteroid (218) Bianca
-_("Bianca");
 # TRANSLATORS: Asteroid (3753) Cruithne
 _("Cruithne")
 # TRANSLATORS: Asteroid (5261) Eureka

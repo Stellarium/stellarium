@@ -34,6 +34,7 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -42,6 +43,9 @@
 MilkyWay::MilkyWay()
 	: color(1.f, 1.f, 1.f)
 	, intensity(1.)
+	, intensityFovScale(1.0f)
+	, intensityMinFov(0.25f) // when zooming in further, MilkyWay is no longer visible.
+	, intensityMaxFov(2.5f) // when zooming out further, MilkyWay is fully visible (when enabled).
 	, vertexArray()
 {
 	setObjectName("MilkyWay");
@@ -51,10 +55,10 @@ MilkyWay::MilkyWay()
 MilkyWay::~MilkyWay()
 {
 	delete fader;
-	fader = NULL;
-
+	fader = Q_NULLPTR;
+	
 	delete vertexArray;
-	vertexArray = NULL;
+	vertexArray = Q_NULLPTR;
 }
 
 void MilkyWay::init()
@@ -79,6 +83,9 @@ void MilkyWay::init()
 void MilkyWay::update(double deltaTime)
 {
 	fader->update((int)(deltaTime*1000));
+	//calculate FOV fade value, linear fade between intensityMaxFov and intensityMinFov
+	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
+	intensityFovScale = qBound(0.0,(fov - intensityMinFov) / (intensityMaxFov - intensityMinFov),1.0);
 }
 
 /*************************************************************************
@@ -91,7 +98,15 @@ double MilkyWay::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void MilkyWay::setFlagShow(bool b){*fader = b; emit milkyWayDisplayedChanged(b);}
+void MilkyWay::setFlagShow(bool b)
+{
+	if (*fader != b)
+	{
+		*fader = b;
+		emit milkyWayDisplayedChanged(b);
+	}
+}
+
 bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)
@@ -132,7 +147,7 @@ void MilkyWay::draw(StelCore* core)
 
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
-	c*=aLum*intensity;
+	c*=aLum*intensity*intensityFovScale;
 
 
 	// TODO: Find an even better balance with sky brightness, MW should be hard to see during Full Moon and at least somewhat reduced in smaller phases.

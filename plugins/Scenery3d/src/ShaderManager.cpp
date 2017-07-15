@@ -27,6 +27,8 @@
 #include <QCryptographicHash>
 #include <QDebug>
 
+Q_LOGGING_CATEGORY(shaderMgr, "stel.plugin.scenery3d.shadermgr")
+
 ShaderMgr::t_UniformStrings ShaderMgr::uniformStrings;
 ShaderMgr::t_FeatureFlagStrings ShaderMgr::featureFlagsStrings;
 
@@ -113,7 +115,7 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::clearCache()
 {
-	qDebug()<<"[ShaderMgr] Clearing"<<m_shaderContentCache.size()<<"shaders";
+	qCDebug(shaderMgr)<<"Clearing"<<m_shaderContentCache.size()<<"shaders";
 
 	//iterate over the shaderContentCache - this contains the same amount of shaders as actually exist!
 	//the shaderCache could contain duplicate entries
@@ -132,7 +134,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 {
 	t_ShaderCache::iterator it = m_shaderCache.find(flags);
 
-	// This may also return NULL if the load failed.
+	// This may also return Q_NULLPTR if the load failed.
 	//We wait until user explictly forces shader reload until we try again to avoid spamming errors.
 	if(it!=m_shaderCache.end())
 		return *it;
@@ -141,12 +143,12 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	QString vShaderFile = getVShaderName(flags);
 	QString gShaderFile = getGShaderName(flags);
 	QString fShaderFile = getFShaderName(flags);
-	qDebug()<<"[ShaderMgr] Loading Scenery3d shader: flags:"<<flags<<", vs:"<<vShaderFile<<", gs:"<<gShaderFile<<", fs:"<<fShaderFile<<"";
+	qCDebug(shaderMgr)<<"Loading Scenery3d shader: flags:"<<flags<<", vs:"<<vShaderFile<<", gs:"<<gShaderFile<<", fs:"<<fShaderFile<<"";
 
 	//load shader files & preprocess
 	QByteArray vShader,gShader,fShader;
 
-	QOpenGLShaderProgram *prog = NULL;
+	QOpenGLShaderProgram *prog = Q_NULLPTR;
 
 	if(preprocessShader(vShaderFile,flags,vShader) &&
 			preprocessShader(gShaderFile,flags,gShader) &&
@@ -164,7 +166,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 		if(m_shaderContentCache.contains(contentHash))
 		{
 #ifndef NDEBUG
-			qDebug()<<"[ShaderMgr] Using existing shader with content-hash"<<contentHash.toHex();
+			//qCDebug(shaderMgr)<<"Using existing shader with content-hash"<<contentHash.toHex();
 #endif
 			prog = m_shaderContentCache[contentHash];
 		}
@@ -176,13 +178,13 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 			if(!loadShader(*prog,vShader,gShader,fShader))
 			{
 				delete prog;
-				prog = NULL;
-				qCritical()<<"[ShaderMgr] ERROR: Shader '"<<flags<<"' could not be compiled. Fix errors and reload shaders or restart program.";
+				prog = Q_NULLPTR;
+				qCCritical(shaderMgr)<<"ERROR: Shader '"<<flags<<"' could not be compiled. Fix errors and reload shaders or restart program.";
 			}
 #ifndef NDEBUG
 			else
 			{
-				qDebug()<<"[ShaderMgr] Shader '"<<flags<<"' created, content-hash"<<contentHash.toHex();
+				//qCDebug(shaderMgr)<<"Shader '"<<flags<<"' created, content-hash"<<contentHash.toHex();
 			}
 #endif
 			m_shaderContentCache[contentHash] = prog;
@@ -190,7 +192,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	}
 	else
 	{
-		qCritical()<<"[ShaderMgr] ERROR: Shader '"<<flags<<"' could not be loaded/preprocessed.";
+		qCCritical(shaderMgr)<<"ERROR: Shader '"<<flags<<"' could not be loaded/preprocessed.";
 	}
 
 
@@ -289,11 +291,11 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 	//open and load file
 	QFile file(filePath);
 #ifndef NDEBUG
-	qDebug()<<"File path:"<<filePath;
+	//qCDebug(shaderMgr)<<"File path:"<<filePath;
 #endif
 	if(!file.open(QFile::ReadOnly))
 	{
-		qCritical()<<"Could not open file"<<filePath;
+		qCCritical(shaderMgr)<<"Could not open file"<<filePath;
 		return false;
 	}
 
@@ -328,11 +330,11 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 			}
 #else
 				//output matches for debugging
-				qDebug()<<"preprocess match: "<<line <<" --> "<<write;
+				//qCDebug(shaderMgr)<<"preprocess match: "<<line <<" --> "<<write;
 			}
 			else
 			{
-				qDebug()<<"unknown define, ignoring: "<<line;
+				//qCDebug(shaderMgr)<<"unknown define, ignoring: "<<line;
 			}
 #endif
 		}
@@ -353,8 +355,8 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	{
 		if(!program.addShaderFromSourceCode(QOpenGLShader::Vertex,vShader))
 		{
-			qCritical() << "[ShaderMgr] Unable to compile vertex shader";
-			qCritical() << program.log();
+			qCCritical(shaderMgr) << "Unable to compile vertex shader";
+			qCCritical(shaderMgr) << program.log();
 			return false;
 		}
 		else
@@ -364,8 +366,8 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<"[ShaderMgr] Vertex shader warnings:";
-				qWarning()<<log;
+				qCWarning(shaderMgr)<<"Vertex shader warnings:";
+				qCWarning(shaderMgr)<<log;
 			}
 		}
 	}
@@ -374,8 +376,8 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	{
 		if(!program.addShaderFromSourceCode(QOpenGLShader::Geometry,gShader))
 		{
-			qCritical() << "[ShaderMgr] Unable to compile geometry shader";
-			qCritical() << program.log();
+			qCCritical(shaderMgr) << "Unable to compile geometry shader";
+			qCCritical(shaderMgr) << program.log();
 			return false;
 		}
 		else
@@ -385,8 +387,8 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<"[ShaderMgr] Geometry shader warnings:";
-				qWarning()<<log;
+				qCWarning(shaderMgr)<<"Geometry shader warnings:";
+				qCWarning(shaderMgr)<<log;
 			}
 		}
 	}
@@ -395,8 +397,8 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	{
 		if(!program.addShaderFromSourceCode(QOpenGLShader::Fragment,fShader))
 		{
-			qCritical() << "[ShaderMgr] Unable to compile fragment shader";
-			qCritical() << program.log();
+			qCCritical(shaderMgr) << "Unable to compile fragment shader";
+			qCCritical(shaderMgr) << program.log();
 			return false;
 		}
 		else
@@ -406,26 +408,26 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<"[ShaderMgr] Fragment shader warnings:";
-				qWarning()<<log;
+				qCWarning(shaderMgr)<<"Fragment shader warnings:";
+				qCWarning(shaderMgr)<<log;
 			}
 		}
 	}
 
 	//Set attribute locations to hardcoded locations.
 	//This enables us to use a single VAO configuration for all shaders!
-	program.bindAttributeLocation("a_vertex",ATTLOC_VERTEX);
-	program.bindAttributeLocation("a_normal", ATTLOC_NORMAL);
-	program.bindAttributeLocation("a_texcoord",ATTLOC_TEXCOORD);
-	program.bindAttributeLocation("a_tangent",ATTLOC_TANGENT);
-	program.bindAttributeLocation("a_bitangent",ATTLOC_BITANGENT);
+	program.bindAttributeLocation("a_vertex",StelOpenGLArray::ATTLOC_VERTEX);
+	program.bindAttributeLocation("a_normal", StelOpenGLArray::ATTLOC_NORMAL);
+	program.bindAttributeLocation("a_texcoord",StelOpenGLArray::ATTLOC_TEXCOORD);
+	program.bindAttributeLocation("a_tangent",StelOpenGLArray::ATTLOC_TANGENT);
+	program.bindAttributeLocation("a_bitangent",StelOpenGLArray::ATTLOC_BITANGENT);
 
 
 	//link program
 	if(!program.link())
 	{
-		qCritical()<<"[ShaderMgr] unable to link shader";
-		qCritical()<<program.log();
+		qCCritical(shaderMgr)<<"[ShaderMgr] unable to link shader";
+		qCCritical(shaderMgr)<<program.log();
 		return false;
 	}
 
@@ -449,7 +451,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 	GLenum type;
 
 #ifndef NDEBUG
-	qDebug()<<"[ShaderMgr] Shader has"<<numUniforms<<"uniforms";
+	//qCDebug(shaderMgr)<<"Shader has"<<numUniforms<<"uniforms";
 #endif
 	for(int i =0;i<numUniforms;++i)
 	{
@@ -461,23 +463,19 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 
 		t_UniformStrings::iterator it = uniformStrings.find(str);
 
-		// This may also return NULL if the load failed.
+		// This may also return Q_NULLPTR if the load failed.
 		//We wait until user explictly forces shader reload until we try again to avoid spamming errors.
 		if(it!=uniformStrings.end())
 		{
 			//this is uniform we recognize
 			//need to get the uniforms location (!= index)
 			m_uniformCache[&program][*it] = loc;
-#ifdef NDEBUG
-		}
-#else
 			//output mapping for debugging
-			qDebug()<<i<<loc<<str<<size<<type<<" mapped to "<<*it;
+			//qCDebug(shaderMgr)<<i<<loc<<str<<size<<type<<" mapped to "<<*it;
 		}
 		else
 		{
-			qWarning()<<i<<loc<<str<<size<<type<<" --- unknown ---";
+			qCWarning(shaderMgr)<<i<<loc<<str<<size<<type<<" --- unknown uniform! ---";
 		}
-#endif
 	}
 }

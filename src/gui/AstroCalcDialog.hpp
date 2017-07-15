@@ -45,17 +45,6 @@ class AstroCalcDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	//! Defines the number and the order of the columns in the table that lists planetary positions
-	//! @enum PositionsColumns
-	enum PositionsColumns {
-		ColumnName,		//! name of object
-		ColumnRA,		//! right ascension
-		ColumnDec,		//! declination
-		ColumnMagnitude,	//! magnitude
-		ColumnType,		//! type of object
-		ColumnCount		//! total number of columns
-	};
-
 	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
 	//! @enum CPositionsColumns
 	enum CPositionsColumns {
@@ -63,7 +52,8 @@ public:
 		CColumnRA,		//! right ascension
 		CColumnDec,		//! declination
 		CColumnMagnitude,	//! magnitude
-		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnAngularSize,	//! angular size
+		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)		
 		CColumnType,		//! type of object
 		CColumnCount		//! total number of columns
 	};
@@ -76,6 +66,9 @@ public:
 		EphemerisRA,		//! right ascension
 		EphemerisDec,		//! declination
 		EphemerisMagnitude,	//! magnitude
+		EphemerisPhase,		//! phase
+		EphemerisDistance,	//! distance
+		EphemerisElongation,	//! elongation
 		EphemerisCount		//! total number of columns
 	};
 
@@ -90,14 +83,26 @@ public:
 		PhenomenaCount		//! total number of columns
 	};
 
+	//! Defines the type of graphs
+	//! @enum GraphsTypes
+	enum GraphsTypes {
+		GraphMagnitudeVsTime	= 1,
+		GraphPhaseVsTime	= 2,
+		GraphDistanceVsTime	= 3,
+		GraphElongationVsTime	= 4,
+		GraphAngularSizeVsTime	= 5,
+		GraphPhaseAngleVsTime	= 6
+	};
+
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog();
 
 	//! Notify that the application style changed
 	void styleChanged();
 
-	static QVector<Vec3d> EphemerisListJ2000;
+	static QVector<Vec3d> EphemerisListCoords;
 	static QVector<QString> EphemerisListDates;
+	static QVector<float> EphemerisListMagnitudes;
 	static int DisplayedPositionIndex;
 
 public slots:
@@ -109,14 +114,8 @@ protected:
         Ui_astroCalcDialogForm *ui;
 
 private slots:
-	//! Search planetary positions and fill the list.
-	void currentPlanetaryPositions();
-	void selectCurrentPlanetaryPosition(const QModelIndex &modelIndex);	
-
-	void savePlanetaryPositionsMagnitudeLimit(double mag);
-	void savePlanetaryPositionsAboveHorizonFlag(bool b);
-
 	void currentCelestialPositions();
+	void populateCelestialCategoryList();
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
@@ -128,7 +127,8 @@ private slots:
 	void cleanupEphemeris();
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
 	void saveEphemeris();
-	void onChangedEphemerisPosition(const QModelIndex &modelIndex);
+	void onChangedEphemerisPosition(const QModelIndex &modelIndex);	
+	void reGenerateEphemeris();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
@@ -138,6 +138,7 @@ private slots:
 	void cleanupPhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
+	void savePhenomenaAngularSeparation(double v);
 
 	void savePhenomenaCelestialBody(int index);
 	void savePhenomenaCelestialGroup(int index);
@@ -148,14 +149,22 @@ private slots:
 	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'
 	void drawCurrentTimeDiagram();
 	//! Draw vertical line of meridian passage time on diagram 'Altitude vs. Time'
-	void drawTransitTimeDiagram(double transitTime); // time in hours
+	void drawTransitTimeDiagram();
 	//! Show info from graphs under mouse cursor
 	void mouseOverLine(QMouseEvent *event);
 
+	void saveGraphsCelestialBody(int index);
+	void saveGraphsFirstId(int index);
+	void saveGraphsSecondId(int index);
+	void drawXVsTimeGraphs();
+
 	// WUT
 	void saveWutMagnitudeLimit(double mag);
+	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
 	void selectWutObject();
+
+	void updateAstroCalcData();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
@@ -173,18 +182,14 @@ private:
 	QHash<QString,QString> wutObjects;
 	QHash<QString,int> wutCategories;
 
-	typedef QMap<StelObjectP, float> starData;
-
-	//! Update header names for planetary and celestial positions tables
-	void setPlanetaryPositionsHeaderNames();
+	//! Update header names for celestial positions tables
 	void setCelestialPositionsHeaderNames();
 	//! Update header names for ephemeris table
 	void setEphemerisHeaderNames();
 	//! Update header names for phenomena table
 	void setPhenomenaHeaderNames();
 
-	//! Init header and list of planetary and celestial positions
-	void initListPlanetaryPositions();
+	//! Init header and list of celestial positions
 	void initListCelestialPositions();
 	//! Init header and list of ephemeris
 	void initListEphemeris();
@@ -195,8 +200,7 @@ private:
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateCelestialBodyList();
-	void populateCelestialCategoryList();
+	void populateCelestialBodyList();	
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
 	//! Populates the drop-down list of major planets.
@@ -205,10 +209,13 @@ private:
 	void populateGroupCelestialBodyList();	
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
+	void prepareXVsTimeAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();
 	//! Populates the list of groups for WUT tool.
 	void populateWutGroups();
+
+	void populateFunctionsList();
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
@@ -232,40 +239,12 @@ private:
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;
 	static float brightLimit;
-	static float minY, maxY;
+	static float minY, maxY, transitX, minY1, maxY1, minY2, maxY2;
+	static QString yAxis1Legend, yAxis2Legend;
 
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
-};
-
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
-class ACPlanPosTreeWidgetItem : public QTreeWidgetItem
-{
-public:
-	ACPlanPosTreeWidgetItem(QTreeWidget* parent)
-		: QTreeWidgetItem(parent)
-	{
-	}
-
-private:
-	bool operator < (const QTreeWidgetItem &other) const
-	{
-		int column = treeWidget()->sortColumn();
-
-		if (column == AstroCalcDialog::ColumnRA || column == AstroCalcDialog::ColumnDec)
-		{
-			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
-		}
-		else if (column == AstroCalcDialog::ColumnMagnitude)
-		{
-			return text(column).toFloat() < other.text(column).toFloat();
-		}
-		else
-		{
-			return text(column).toLower() < other.text(column).toLower();
-		}
-	}
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
@@ -284,12 +263,17 @@ private:
 
 		if (column == AstroCalcDialog::CColumnName)
 		{
-			QRegExp dso("^(\\w+)\\s*(\\d+)$");
+			QRegExp dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			QRegExp mp("^[(](\\d+)[)]\\s(.+)$");
 			int a = 0, b = 0;
 			if (dso.exactMatch(text(column)))
 				a = dso.capturedTexts().at(2).toInt();
+			if (a==0 && mp.exactMatch(text(column)))
+				a = mp.capturedTexts().at(1).toInt();
 			if (dso.exactMatch(other.text(column)))
 				b = dso.capturedTexts().at(2).toInt();
+			if (b==0 && mp.exactMatch(other.text(column)))
+				b = mp.capturedTexts().at(1).toInt();
 			if (a>0 && b>0)
 				return a < b;
 			else
@@ -299,7 +283,7 @@ private:
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
-		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnExtra)
+		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnAngularSize || column == AstroCalcDialog::CColumnExtra)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}

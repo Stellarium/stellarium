@@ -38,6 +38,7 @@
 
 #define PSR_INERTIA 1.0e45 /* Typical moment of inertia for a pulsar */
 
+const QString Pulsar::PULSAR_TYPE = QStringLiteral("Pulsar");
 StelTextureSP Pulsar::markerTexture;
 
 bool Pulsar::distributionMode = false;
@@ -155,7 +156,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 
 		if (glitch==0)
-			oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("pulsar")) << "<br />";
 		else
 		{
 			QString sglitch;
@@ -166,12 +167,12 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				// TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 				sglitch = q_("has %1 registered glitches").arg(glitch);
 			}
-			oss << q_("Type: <b>%1</b> (%2)").arg(q_("pulsar with glitches")).arg(sglitch) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("pulsar with glitches")).arg(sglitch) << "<br />";
 		}
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{
@@ -417,7 +418,7 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 	if (mag <= mlimit)
 	{		
 		Pulsar::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;		
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);

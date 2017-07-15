@@ -293,7 +293,7 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
 	virtual QProgressBar* addProgressBar() {return new QProgressBar;}
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return NULL;}
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return Q_NULLPTR;}
 	virtual void forceRefreshGui() {;}
 	virtual void setVisible(bool b) {visible=b;}
 	virtual bool getVisible() const {return visible;}

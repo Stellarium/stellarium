@@ -140,7 +140,7 @@ public:
 	int getTilesSize() const {return 256;}
 
 	//! Returns a cached, non-active but recently used tile with the specified coordinates
-	//! or NULL if not currently cached. The ownership of the tile transfers to the caller.
+	//! or Q_NULLPTR if not currently cached. The ownership of the tile transfers to the caller.
 	ToastTile* getCachedTile(int level, int x, int y);
 	//! Puts the given tile into the tile cache. The ownership of the tile will be taken.
 	void putIntoCache(ToastTile* tile);

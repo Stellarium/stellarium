@@ -84,7 +84,7 @@ public:
 	void readSettingsFromConfig(void);
 
 	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	void saveSettingsToConfig(void) const;
 
 	//! Is plugin enabled?
 	bool isEnabled() const
@@ -93,7 +93,7 @@ public:
 	}
 
 	//! Get font size for messages
-	int getFontSize(void)
+	int getFontSize(void) const
 	{
 		return fontSize;
 	}
@@ -171,6 +171,7 @@ class EquationOfTimeStelPluginInterface : public QObject, public StelPluginInter
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /* _EQUATIONOFTIME_HPP_ */

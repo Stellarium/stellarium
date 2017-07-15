@@ -43,6 +43,7 @@ class Asterism : public StelObject
 {
 	friend class AsterismMgr;
 private:
+	static const QString ASTERISM_TYPE;
 	Asterism();
 	~Asterism();
 
@@ -57,7 +58,8 @@ private:
 
 	//! Get the module/object type string.
 	//! @return "Asterism"
-	virtual QString getType() const {return "Asterism";}
+	virtual QString getType() const {return ASTERISM_TYPE;}
+	virtual QString getID() const { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZname;}
@@ -68,7 +70,7 @@ private:
 	//! separated fields: abbreviation - a three character abbreviation
 	//! for the asterism, a number of lines (pairs), and a list of Hipparcos
 	//! catalogue numbers which, when connected pairwise, form the lines of the
-	//! constellation.
+	//! asterism.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record, else true.
 	bool read(const QString& record, StarMgr *starMgr);
@@ -80,7 +82,7 @@ private:
 	//! This member tests to see if a star is one of those which make up
 	//! the lines of a Asterism.
 	//! @return a pointer to the asterism which the star is a part of,
-	//! or NULL if the star is not part of a asterism
+	//! or Q_NULLPTR if the star is not part of a asterism
 	const Asterism* isStarIn(const StelObject*) const;
 
 	//! Get the translated name for the Asterism.

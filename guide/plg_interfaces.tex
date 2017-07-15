@@ -385,7 +385,7 @@ The Remote Control plugin was developed in 2015 during the
 initiative. It enables the user to control Stellarium through an external web 
 interface using a standard web browser like Firefox or Chrome, instead of using 
 the main GUI. This works on the same computer Stellarium runs as well as over 
-the network. Even more, multiple "remote controls" can access the same 
+the network. Even more, multiple ``remote controls'' can access the same 
 Stellarium instance at the same time, without getting in the way of each other. 
 Much of the functionality the main interface provides is already available 
 through it, and it is still getting extended.
@@ -492,15 +492,132 @@ This allows triggering automatic show setups for museums etc.\ via  some central
 If you are a developer and would like to add functionality to the Remote 
 Control API, customize the web interface or access the API through another 
 program, further information can be found in the 
-\href{http://stellarium.org/doc-plugins/head/}{plugin's developer 
-documentation}.
+\href{http://stellarium.org/doc-plugins/head/}{plugin's developer documentation}.
 
+\newpage
+\section{Remote Sync Plugin}
+\label{sec:plugin:RemoteSync}
+
+\newFeature{0.16.0}%
+The Remote Sync plugin enables setups which connect several instances of
+Stellarium running on a network. This may be useful in installations where one
+presenter wants to allow a larger audience to follow the actions on several
+dim screens (e.g., when you need to avoid a projector's bright light in a 
+public observatory). The actions 
+performed on a ``master'' instance, which acts as a server, are automatically 
+replicated on all connected clients. These clients may run on the same device 
+the server runs, or may access the server over a network.
+
+The plugin is still quite experimental, but is provided for testing purposes.
+You can configure it through the standard plugin settings dialog 
+(\autoref{fig:plugins:RemoteSync:settings}). One Stellarium instance
+can either run in the server mode or connect to an existing server as a client.
+A custom TCP protocol is used for the connection. The port used by the server is
+configurable, and the clients must know the IP address or host name and the port
+of the server.
+
+\begin{figure}[h]
+	\centering\includegraphics[width=\columnwidth]{remotesync_settings}
+	\caption{RemoteSync settings window}
+	\label{fig:plugins:RemoteSync:settings}
+\end{figure}
+
+Alternatively, you may start the plugin through command line arguments. This is
+useful for automated setups or when multiple instances are running on the same
+computer. To start the instance as a server, use the
+\texttt{-{}-syncMode=server} argument with the optional \texttt{-{}-syncPort}
+parameter to specify the port to listen on. To start a client instance, use
+\texttt{-{}-syncMode=client} and use \texttt{-{}-syncHost} and
+\texttt{-{}-syncPort} to specify the server to connect to.
+
+In the settings window, you can also specify what should happen when the client 
+loses the connection to its server, and what to do when the server quits 
+normally. You can choose between 
+\begin{description}
+\item[Do nothing:] connection is lost and will not be re-established. Stellarium slave keeps running 
+     in whatever state it was, waiting for keyboard/mouse interaction. 
+\item[Try reconnecting:] Assume Stellarium is switched off on the server
+      but may come back online again, or assume some temporary network problem. 
+	  Stellarium slave just keeps running in whatever state it was, but tries to reconnect.
+\item[Quit:] Assume the server always runs until switched off at the end of operating hours. 
+      This is intended for pure slave screens without keyboards. When the server (``master PC'') 
+	  is shut down, assume this is the end of the day, and exit Stellarium. An enclosing run script 
+	  can then shutdown the slave computer. 
+\end{description}
+By default, the following things are synchronized:
+\begin{itemize}
+	\item simulation time
+	\item viewer location
+	\item the selected object
+	\item view direction
+	\item current field of view
+	\item all StelProperty-based settings except for GUI-related properties. 
+	This includes almost all settings visible in the configuration dialogs such 
+	as projection type, sky and view options, landscape settings, line colors, etc.
+\end{itemize}
+
+Because there is currently no full time synchronisation implemented, for the best
+results all client computers should make sure their system clocks are set as
+close as possible to the server computer's clock (preferably a few milliseconds
+difference at most). This can be done for example by using an NTP server.\footnote{
+Instructions on how to use the public NTP server pool for the most common
+operating systems can be found at \url{http://www.pool.ntp.org/en/use.html}.} 
+If all your Stellarium instances run on the same device, this is of course not 
+necessary.
+
+\begin{figure}[h]
+	\centering\includegraphics[width=\columnwidth]{remotesync_client}
+	\caption{RemoteSync client settings window}
+	\label{fig:plugins:RemoteSync:client}
+\end{figure}
+
+It is also possible to exclude some state from being synchronized. On each
+client, the client configuration GUI (\autoref{fig:plugins:RemoteSync:client}) allows to
+disable specific settings from being synchronized on this client. 
+
+The lower part of this dialog allows you to 
+fine-tune which named StelProperties (which hold parts of the internal program state) 
+should be excluded from synchronization. 
+The configuration dialog lists all available properties which usually have easy to understand 
+names on the left side. Highlight one or more properties which you don't want synchronized 
+and press the arrow button to move them to the list of excluded properties.
+
+For historic reasons there are two kinds of Properties: Actions 
+(Boolean switches, for which also hotkeys can be assigned) and (genuine) StelProperties. 
+The latter have names indicating which module they belong to and may have other data types (numbers, colors, \ldots). 
+Note that the actions frequently are just alias names of Boolean StelProperties, 
+so in order to inhibit a certain property from being synchronized, you must find both entries.
+
+Properties of plugins will only be visible when the respective plugin has been enabled. 
+When a plugin has been disabled, its properties may vanish from the stored list of non-synchronized properties.
+
+Each client can have different settings. This could allow installations with several screens
+where on one screen you show the constellation figures, another screen shows the
+distribution of deep-sky objects in the same frame, and a third screen may show
+a close-up view of the currently centered object. Or just show several sky cultures, 
+or show the sky at different locations, \ldots. 
+
+The names of all available StelProperties from which you might want to select a few to exclude  
+from synchronisation can also be found with a little scripting. 
+Open the script console \key{F12} and enter the following call:
+\begin{commands}
+core.output(core.getPropertyList());
+\end{commands}
+Run the script and inspect the output tab. It may take a little guesswork to select the right names, 
+but the general structure of property names like 
+\texttt{<Module>.<Property>} should help you to find your way around.
+
+\subsection*{Author and Acknowledgements}
+
+This plugin was created by Florian Schaukowitsch in the 2015-16 campaigns of the 
+\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} 
+programme. 
 
 % \newpage
 % \section{D-Bus Interface}
 % \label{sec:plugin:DBus}
 % 
-% [This may come as user documentation from SoCiS2016 (?) work]
+% [This may come as user documentation from SoCiS2017/18 (?) work]
 
 
 \newpage
@@ -509,28 +626,33 @@ documentation}.
 \label{sec:plugins:SolarSystemEditor}
 
 Stellarium stores its data (orbital elements and other details) about
-solar system objects (planets, their moons, minor bodies) in the file
-\file{data/ssystem.ini}. The file will be taken from the user data
+solar system objects (planets, their moons, minor bodies) in two files.  
+File \file{data/ssystem\_major.ini} in the installation directory contains data for the planets and their moons.
+File \file{data/ssystem\_minor.ini} contains data for minor bodies, i.e., planetoids and comets.
+ The file will be taken from the user data
 directory if it also exists there, which means, users can add minor
 planets or comets as they become observable by editing this file.
 
 
 This plugin provides a window to the Minor Planet Center (MPC) where the
 latest Solar System information can be found. When this plugin is
-loaded (see section~\ref{sec:Plugins:EnablingPlugins}) the first tab
-allows to import, export or reset your \file{ssystem.ini}.
+loaded (see section~\ref{sec:Plugins:EnablingPlugins}) and you call the configuration dialog, the first tab
+allows to import, export or reset your \file{ssystem\_minor.ini}, 
+and also to load extra data for minor bodies in Stellarium's \file{.ini} format. 
+For example, the installation directory contains a file \file{ssystem\_1000comets.ini} which contains 
+data for over 1000 historical comets. Currently it is not possible to select only a few from that, 
+so try loading this only on a reasonably fast computer, and think about deleting comets again (or resetting the file) when 
+you don't require them.
 
-The second tab lists all currently loaded objects.  It is recommended
-to remove old entries of last year's comets if you don't need them any
-longer.
+The second tab lists all currently loaded minor bodies.  It is recommended
+to remove old entries of yesteryear's comets if you don't need them any
+longer. Just select one or more objects and press \button{Remove}.
 If you have a very weak computer, you may want to reduce the number of
-minor bodies (and maybe even planetary moons) to improve performance.
+minor bodies to just a handful to improve performance.
 
-On this tab, you find the option to connect to the MPC and download current orbital elements. 
+On this tab, you also find the option to connect to the MPC and download current orbital elements, 
+or load a text file in the format provided by MPC. 
 
-%% TODO: Obviously, we should adapt our TZ handling to make this
-%% possible! Store TZ in location list, and suggest/guess TZ from
-%% longitude of map-clicked location.
 
 
 %%% Local Variables: 

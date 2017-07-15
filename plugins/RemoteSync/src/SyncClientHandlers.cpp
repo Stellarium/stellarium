@@ -24,13 +24,15 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelPropertyMgr.hpp"
 
 using namespace SyncProtocol;
 
 ClientHandler::ClientHandler()
-	: client(NULL)
+	: client(Q_NULLPTR)
 {
 	core = StelApp::getInstance().getCore();
 }
@@ -49,13 +51,13 @@ ClientErrorHandler::ClientErrorHandler(SyncClient *client)
 
 }
 
-bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	ErrorMessage msg;
-	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream,dataSize);
 	peer.peerLog("Received error message from server: " + msg.message);
 
-	client->emitError(msg.message);
+	client->emitServerError(msg.message);
 
 	//we don't drop the connection here, we let the remote end do that
 	return ok;
@@ -68,14 +70,14 @@ ClientAuthHandler::ClientAuthHandler(SyncClient *client)
 }
 
 
-bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	//get message type
 	SyncMessageType type = SyncMessageType(peer.msgHeader.msgType);
 
 	if(type == SERVER_CHALLENGE)
 	{
-		if(peer.isAuthenticated)
+		if(peer.isAuthenticated())
 		{
 			//we are already authenticated, another challenge is an error
 			qWarning()<<"[SyncClient] received server challenge when not expecting one";
@@ -83,7 +85,7 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 		}
 
 		ServerChallenge msg;
-		bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+		bool ok = msg.deserialize(stream,dataSize);
 
 		if(!ok)
 		{
@@ -132,7 +134,7 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 		if(peer.authResponseSent)
 		{
 			//we authenticated correctly, yay!
-			peer.isAuthenticated = true;
+			peer.authenticated = true;
 			qDebug()<<"[SyncClient] Connection authenticated";
 			emit authenticated();
 			return true;
@@ -152,16 +154,16 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	}
 }
 
-bool ClientAliveHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientAliveHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Alive p;
-	return p.deserialize(stream,peer.msgHeader.dataSize);
+	return p.deserialize(stream,dataSize);
 }
 
-bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Time msg;
-	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
 		return false;
@@ -175,18 +177,15 @@ bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	return true;
 }
 
-bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Location msg;
-	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream,dataSize);
 
 	if(!ok)
 		return false;
 
 	//replicated from StelCore::moveObserverTo
-	//first, emit a locationChanged like StelCore does
-	emit core->locationChanged(msg.stelLocation);
-
 	if(msg.totalDuration>0.0)
 	{
 		//for optimal results, the network latency should be subtracted from the timeToGo...
@@ -208,6 +207,9 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncRemotePeer &p
 		//create a normal observer
 		core->setObserver(new StelObserver(msg.stelLocation));
 	}
+	emit core->targetLocationChanged(msg.stelLocation);
+	emit core->locationChanged(core->getCurrentLocation());
+
 
 	return true;
 }
@@ -217,27 +219,132 @@ ClientSelectionHandler::ClientSelectionHandler()
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 }
 
-bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 {
 	Selection msg;
-	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
 		return false;
+
+	qDebug()<<msg;
 
 	//lookup the objects from their names
 	//this might cause problems if 2 objects of different types have the same name!
 	QList<StelObjectP> selection;
 
-	for(QList<QString>::iterator it = msg.selectedObjectNames.begin(); it!=msg.selectedObjectNames.end();++it)
+	for(QList< QPair<QString,QString> >::iterator it = msg.selectedObjects.begin(); it!=msg.selectedObjects.end();++it)
 	{
-		StelObjectP obj = objMgr->searchByName(*it);
-		if(!obj.isNull())
+		StelObjectP obj = objMgr->searchByID(it->first, it->second);
+		if(obj)
 			selection.append(obj);
+		else
+			qWarning()<<"Object not found"<<it->first<<it->second;
 	}
 
-	//set selection
-	objMgr->setSelectedObject(selection,StelModule::ReplaceSelection);
+	if(selection.isEmpty())
+		objMgr->unSelect();
+	else
+	{
+		//set selection
+		objMgr->setSelectedObject(selection,StelModule::ReplaceSelection);
+	}
 
+	return true;
+}
+
+ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(bool skipGuiProps, const QStringList &excludeProps)
+{
+	propMgr = StelApp::getInstance().getStelPropertyManager();
+
+	QString pattern("^(");
+	//construct a regular expression for the excludes
+	bool first = true;
+	foreach(QString str, excludeProps)
+	{
+		QString tmp = QRegularExpression::escape(str);
+		// replace escaped asterisks with the regex "all"
+		tmp.replace("\\*",".*");
+		if(!first)
+		{
+			pattern += '|';
+		}
+		first = false;
+		pattern += tmp;
+	}
+
+	if(skipGuiProps)
+	{
+		if(!first)
+		{
+			pattern += '|';
+		}
+		first = false;
+
+		//this is an attempt to filter out the GUI related properties
+		pattern += "(actionShow_.*(Window_Global|_dialog))"; //most dialogs follow one of these patterns
+		pattern += "|actionShow_Scenery3d_storedViewDialog"; //add other dialogs here
+	}
+
+	//finish the pattern
+	pattern += ")$";
+	filter.setPattern(pattern);
+
+	if(!filter.isValid())
+		qWarning()<<"Invalid StelProperty filter:"<<filter.errorString();
+	else
+		qDebug()<<"Constructed regex"<<filter;
+
+	filter.optimize();
+}
+
+bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
+{
+	StelPropertyUpdate msg;
+	bool ok = msg.deserialize(stream, dataSize);
+
+	if(!ok)
+		return false;
+
+	qDebug()<<msg;
+
+	QRegularExpressionMatch match = filter.match(msg.propId);
+	if(match.hasMatch())
+	{
+		//filtered property
+		qDebug()<<"Filtered"<<msg;
+		return true;
+	}
+	propMgr->setStelPropertyValue(msg.propId,msg.value);
+	return true;
+}
+
+ClientViewHandler::ClientViewHandler()
+{
+	mvMgr = core->getMovementMgr();
+}
+
+bool ClientViewHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
+{
+	View msg;
+	bool ok = msg.deserialize(stream, dataSize);
+	if(!ok) return false;
+
+	mvMgr->setViewDirectionJ2000(core->altAzToJ2000(msg.viewAltAz, StelCore::RefractionOff));
+	return true;
+}
+
+ClientFovHandler::ClientFovHandler()
+{
+	mvMgr = core->getMovementMgr();
+}
+
+bool ClientFovHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
+{
+	Fov msg;
+	bool ok = msg.deserialize(stream, dataSize);
+	if(!ok) return false;
+
+	mvMgr->zoomTo(msg.fov, 0.0f);
 	return true;
 }

@@ -254,35 +254,35 @@ void CCD::setBinningY(int binning)
 
 double CCD::getInnerOAGRadius(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
 	double radius = RADIAN_TO_DEGREES * 2 * qAtan(this->prismDistance() /(2.0 * telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
 double CCD::getOuterOAGRadius(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
 	double radius = RADIAN_TO_DEGREES * 2 * qAtan((this->prismDistance() + this->prismHeight()) /(2.0 * telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
 double CCD::getOAGActualFOVx(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
 	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->prismWidth() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovX;
 }
 
 double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
 	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->chipWidth() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovX;
 }
 
 double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 {
-	const double lens_multipler = (lens != NULL ? lens->getMultipler() : 1.0f);
+	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
 	double fovY = RADIAN_TO_DEGREES * 2 * qAtan(this->chipHeight() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovY;
 }

@@ -27,19 +27,37 @@
 #include <QTimerEvent>
 
 
+Q_LOGGING_CATEGORY(syncServer,"stel.plugin.remoteSync.server")
+
 using namespace SyncProtocol;
 
 SyncServer::SyncServer(QObject* parent)
-	: QObject(parent)
+	: QObject(parent), stopping(false), timeoutTimerId(-1)
 {
 	qserver = new QTcpServer(this);
 	connect(qserver,SIGNAL(newConnection()), this, SLOT(handleNewConnection()));
 	connect(qserver,SIGNAL(acceptError(QAbstractSocket::SocketError)),this,SLOT(connectionError(QAbstractSocket::SocketError)));
+
+	//create message handlers
+	handlerList.resize(MSGTYPE_SIZE);
+	handlerList[ERROR] =  new ServerErrorHandler();
+	handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, false);
+	handlerList[ALIVE] = new ServerAliveHandler();
 }
 
 SyncServer::~SyncServer()
 {
 	stop();
+
+	//delete handlers
+	foreach(SyncMessageHandler* h, handlerList)
+	{
+		if(h)
+			delete h;
+	}
+	handlerList.clear();
+
+	qCDebug(syncServer)<<"Destroyed";
 }
 
 bool SyncServer::start(int port)
@@ -50,22 +68,20 @@ bool SyncServer::start(int port)
 	bool ok = qserver->listen(QHostAddress::Any, port);
 	if(ok)
 	{
-		qDebug()<<"[SyncServer] Started on port"<<port;
+		qCDebug(syncServer)<<"Started on port"<<port;
 
-		//create message handlers
-		handlerList.resize(MSGTYPE_SIZE);
-		handlerList[ERROR] =  new ServerErrorHandler();
-		handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, true);
-		handlerList[ALIVE] = new ServerAliveHandler();
+		timeoutTimerId = startTimer(5000,Qt::VeryCoarseTimer);
 
+		//create senders
 		addSender(new TimeEventSender());
 		addSender(new LocationEventSender());
 		addSender(new SelectionEventSender());
-
-		timeoutTimerId = startTimer(5000,Qt::VeryCoarseTimer);
+		addSender(new StelPropertyEventSender());
+		addSender(new ViewEventSender());
+		addSender(new FovEventSender());
 	}
 	else
-		qDebug()<<"[SyncServer] Error while starting:"<<errorString();
+		qCCritical(syncServer)<<"Error while starting:"<<qserver->errorString();
 	return ok;
 }
 
@@ -77,26 +93,26 @@ void SyncServer::addSender(SyncServerEventSender *snd)
 
 void SyncServer::broadcastMessage(const SyncMessage &msg)
 {
-	qDebug()<<"[SyncServer] Broadcast message"<<msg.getMessageType();
+	qCDebug(syncServer)<<"Broadcast message"<<msg;
 	qint64 size = msg.createFullMessage(broadcastBuffer);
 
 	if(!size)
 	{
 		//crash here when message is too large in debugging
 		Q_ASSERT(true);
-		qCritical()<<"[SyncServer] A message is too large for broadcast! Message buffer contents follow...";
-		qCritical()<<broadcastBuffer.toHex();
+		qCCritical(syncServer)<<"A message is too large for broadcast! Message buffer contents follow...";
+		qCCritical(syncServer)<<broadcastBuffer.toHex();
 		//stop server
 		stop();
 		return;
 	}
 
-	for(tClientMap::iterator it = clients.begin();it!=clients.end();++it)
+	for(tClientList::iterator it = clients.begin();it!=clients.end();++it)
 	{
-		SyncRemotePeer& client = it.value();
-		if(client.isAuthenticated)
+		SyncRemotePeer* client = *it;
+		if(client->isAuthenticated())
 		{
-			client.writeData(broadcastBuffer,size);
+			client->writeData(broadcastBuffer,size);
 		}
 	}
 }
@@ -105,44 +121,10 @@ void SyncServer::stop()
 {
 	if(qserver->isListening())
 	{
+		stopping = true;
 		killTimer(timeoutTimerId);
 
 		qserver->close();
-
-		for(tClientMap::iterator it = clients.begin();it!=clients.end(); )
-		{
-			//this may cause disconnected signal, which will remove the client
-			QAbstractSocket* sock = it.key();
-			sock->disconnectFromHost();
-			if(sock->state() != QAbstractSocket::UnconnectedState)
-			{
-				if(!sock->waitForDisconnected(500))
-				{
-					sock->abort();
-					sock->deleteLater();
-					++it;
-				}
-				else
-				{
-					//restart iterator because it is most likely invalid
-					it = clients.begin();
-				}
-			}
-			else
-			{
-				//restart iterator because it is most likely invalid
-				it = clients.begin();
-			}
-		}
-		clients.clear();
-
-		//delete handlers
-		foreach(SyncMessageHandler* h, handlerList)
-		{
-			if(h)
-				delete h;
-		}
-		handlerList.clear();
 
 		//delete senders
 		foreach(SyncServerEventSender* s, senderList)
@@ -152,7 +134,16 @@ void SyncServer::stop()
 		}
 		senderList.clear();
 
-		qDebug()<<"[SyncServer] Stopped";
+		for(tClientList::iterator it = clients.begin();it!=clients.end(); )
+		{
+			//this may cause disconnected signal, which will remove the client
+			SyncRemotePeer* peer = *it;
+			peer->disconnectPeer();
+		}
+
+		qCDebug(syncServer)<<"Stopped listening";
+
+		checkStopState();
 	}
 }
 
@@ -175,36 +166,23 @@ void SyncServer::timerEvent(QTimerEvent *evt)
 
 void SyncServer::checkTimeouts()
 {
-	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
-
 	//iterate over the connected clients
-	for(tClientMap::iterator it = clients.begin(); it!=clients.end(); )
+	for(tClientList::iterator it = clients.begin(); it!=clients.end(); ++it)
 	{
-		qint64 writeDiff = currentTime - it.value().lastSendTime;
-		qint64 readDiff = currentTime - it.value().lastReceiveTime;
+		(*it)->checkTimeout();
+	}
+}
 
-		if(writeDiff > 5000)
+void SyncServer::checkStopState()
+{
+	if(stopping)
+	{
+		if(clients.isEmpty())
 		{
-			//no data sent to this client for some time, send a ALIVE
-			Alive msg;
-			it.value().writeMessage(msg);
+			qCDebug(syncServer)<<"All clients disconnected";
+			stopping = false;
+			emit serverStopped();
 		}
-
-
-		if(readDiff > 15000)
-		{
-			if(it.key()->state() == QAbstractSocket::ConnectedState)
-			{
-				//no data received for some time, assume client timed out
-				clientLog(it.key(),QString("No data received for %1ms, timing out").arg(readDiff));
-				it.key()->disconnectFromHost();
-
-				//restart iterator, disconnect may have modified client list
-				it = clients.begin();
-			}
-		}
-		else
-			++it;
 	}
 }
 
@@ -216,51 +194,21 @@ QString SyncServer::errorString() const
 void SyncServer::handleNewConnection()
 {
 	QTcpSocket* newConn = qserver->nextPendingConnection();
-	clientLog(newConn,"New Connection");
 
+	SyncRemotePeer* newClient = new SyncRemotePeer(newConn,false,handlerList);
+	newClient->peerLog("New client connection");
 	//add to client list
-	clients.insert(newConn,SyncRemotePeer(newConn,false,handlerList));
-	SyncRemotePeer& peer = clients.last();
-	//assign an ID to the client
-	peer.id = QUuid::createUuid();
+	clients.append(newClient);
 
-	qDebug()<<"[SyncServer] "<<clients.size()<<" current connections";
+	qCDebug(syncServer)<<clients.size()<<"current connections";
 
-	//hook up disconnect, error and data signals
-	connect(newConn, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
-	connect(newConn, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(clientError(QAbstractSocket::SocketError)));
-	connect(newConn, SIGNAL(readyRead()), this, SLOT(clientDataReceived()));
-
-	//set low delay option
-	newConn->setSocketOption(QAbstractSocket::LowDelayOption,1);
+	//hook up disconnect signal
+	connect(newClient, SIGNAL(disconnected(bool)), this, SLOT(clientDisconnected(bool)));
 
 	//write challenge
 	ServerChallenge msg;
-	msg.clientId = peer.id;
-	peer.writeMessage(msg);
-}
-
-void SyncServer::clientDataReceived()
-{
-	qDebug()<<"[SyncServer] client data received";
-	QAbstractSocket* sock = qobject_cast<QAbstractSocket*>(sender());
-	tClientMap::iterator it = clients.find(sock);
-	if(it!=clients.end())
-		(*it).receiveMessage();
-	else
-	{
-		Q_ASSERT(false);
-		qCritical()<<"Received data from socket without client";
-		sock->disconnectFromHost();
-		sock->deleteLater();
-	}
-}
-
-void SyncServer::clientError(QAbstractSocket::SocketError)
-{
-	//Note: we also get an error if the client has disconnected, handle it differently?
-	QAbstractSocket* sock = qobject_cast<QAbstractSocket*>(sender());
-	clientLog(sock, "Socket error: " + sock->errorString());
+	msg.clientId = newClient->getID();
+	newClient->writeMessage(msg);
 }
 
 void SyncServer::clientAuthenticated(SyncRemotePeer &peer)
@@ -272,23 +220,22 @@ void SyncServer::clientAuthenticated(SyncRemotePeer &peer)
 	}
 }
 
-void SyncServer::clientDisconnected()
+void SyncServer::clientDisconnected(bool clean)
 {
-	QAbstractSocket* sock = qobject_cast<QAbstractSocket*>(sender());
-	clientLog(sock, "Socket disconnected");
-	clients.remove(sock);
-	sock->deleteLater();
-	qDebug()<<"[SyncServer] "<<clients.size()<<" current connections";
+	SyncRemotePeer* peer = qobject_cast<SyncRemotePeer*>(sender());
+
+	if(!clean)
+	{
+		qCWarning(syncServer)<<"Client disconnected with error"<<peer->getError();
+	}
+	clients.removeAll(peer);
+	peer->deleteLater();
+	qCDebug(syncServer)<<clients.size()<<"current connections";
+	checkStopState();
 }
 
 void SyncServer::connectionError(QAbstractSocket::SocketError err)
 {
-	qWarning()<<"[SyncServer] Could not accept an incoming connection, socket error is: "<<err;
-}
-
-
-
-void SyncServer::clientLog(QAbstractSocket *cl, const QString &msg)
-{
-	qDebug()<<"[SyncServer][Client"<<(cl->peerAddress().toString() + ":" + QString::number(cl->peerPort()))<<"]:"<<msg;
+	Q_UNUSED(err);
+	qCWarning(syncServer)<<"Could not accept an incoming connection, socket error is: "<<qserver->errorString();
 }

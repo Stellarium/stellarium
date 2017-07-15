@@ -46,7 +46,7 @@ friend class ScriptConsole;
 #endif
 
 public:
-	StelScriptMgr(QObject *parent=0);
+	StelScriptMgr(QObject *parent=Q_NULLPTR);
 	~StelScriptMgr();
 
 	QStringList getScriptList();

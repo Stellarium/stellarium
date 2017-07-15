@@ -30,7 +30,7 @@ class MapLabel : public QLabel
 	Q_OBJECT
 
 public:
-	MapLabel(QWidget *parent = 0);
+	MapLabel(QWidget *parent = Q_NULLPTR);
 	~MapLabel();
 	//! Set the current cursor position
 	//! @param longitude longitude in degree in range [-180;180[

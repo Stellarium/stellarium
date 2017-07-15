@@ -80,8 +80,9 @@ declinations very slightly move as well.
 class ArchaeoLine : QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(Vec3f color READ getColor WRITE setColor)
-	Q_PROPERTY(bool flagLabel READ isLabelVisible WRITE setLabelVisible)
+	Q_PROPERTY(Vec3f color READ getColor WRITE setColor NOTIFY colorChanged)
+	Q_PROPERTY(bool flagLabel READ isLabelVisible WRITE setLabelVisible NOTIFY flagLabelChanged)
+	Q_PROPERTY(double definingAngle READ getDefiningAngle WRITE setDefiningAngle NOTIFY definingAngleChanged)
 
 	//Need to register Enum with Qt to be able to use it as Q_PROPERTY
 	//or in signals/slots
@@ -117,19 +118,22 @@ public:
 	void draw(StelCore* core, float intensity=1.0f) const;
 	const Vec3f& getColor() const {return color;}
 	bool isDisplayed(void) const {return fader;}
-
+signals:
+	void colorChanged(Vec3f c);
+	void flagLabelChanged(bool on);
+	void definingAngleChanged(double angle);
 public slots:
-	void setColor(const Vec3f& c) {color = c;}
+	void setColor(const Vec3f& c);
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	void setFontSize(double newSize){font.setPixelSize(newSize);}
 	//! reset declination/azimuth angle (degrees) of this arc.
-	void setDefiningAngle(double angle){definingAngle=angle;}
+	void setDefiningAngle(double angle);
 	double getDefiningAngle(void) const {return definingAngle;} // returns declination for most, or azimuth.
 	//! Re-translates the label.
 	void updateLabel();
-	void setLabelVisible(bool b){flagLabel=b;}
+	void setLabelVisible(bool b);
 	bool isLabelVisible() const{return flagLabel;}
 	void setLineType(ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
 	//! change label. Used only for selected-object line - the other labels should not be changed!
@@ -277,7 +281,13 @@ class ArchaeoLines : public StelModule
 				WRITE setCustomDeclination2
 				NOTIFY customDeclination2Changed)
 
-	// TODO: Maybe add properties for geo locations and custom azimuths/declinations: labels.
+	// More "forwarding properties" for geo locations and custom azimuths/declination labels.
+	Q_PROPERTY(QString geographicLocation1Label READ getGeographicLocation1Label WRITE setGeographicLocation1Label NOTIFY geographicLocation1LabelChanged)
+	Q_PROPERTY(QString geographicLocation2Label READ getGeographicLocation2Label WRITE setGeographicLocation2Label NOTIFY geographicLocation2LabelChanged)
+	Q_PROPERTY(QString customAzimuth1Label READ getCustomAzimuth1Label WRITE setCustomAzimuth1Label NOTIFY customAzimuth1LabelChanged)
+	Q_PROPERTY(QString customAzimuth2Label READ getCustomAzimuth2Label WRITE setCustomAzimuth2Label NOTIFY customAzimuth2LabelChanged)
+	Q_PROPERTY(QString customDeclination1Label READ getCustomDeclination1Label WRITE setCustomDeclination1Label NOTIFY customDeclination1LabelChanged)
+	Q_PROPERTY(QString customDeclination2Label READ getCustomDeclination2Label WRITE setCustomDeclination2Label NOTIFY customDeclination2LabelChanged)
 
 public:
 	ArchaeoLines();
@@ -334,6 +344,12 @@ signals:
 	void customDeclination1Changed(double dec);
 	void customDeclination2Changed(double dec);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
+	void geographicLocation1LabelChanged(QString label);
+	void geographicLocation2LabelChanged(QString label);
+	void customAzimuth1LabelChanged(QString label);
+	void customAzimuth2LabelChanged(QString label);
+	void customDeclination1LabelChanged(QString label);
+	void customDeclination2LabelChanged(QString label);
 
 public slots:
 	void enableArchaeoLines(bool b);
@@ -379,6 +395,8 @@ public slots:
 	void setGeographicLocation2Latitude(double lat);
 	void setGeographicLocation1Label(QString label);
 	void setGeographicLocation2Label(QString label);
+	QString getGeographicLocation1Label(){return geographicLocation1Line->getLabel();}
+	QString getGeographicLocation2Label(){return geographicLocation2Line->getLabel();}
 	double getGeographicLocation1Longitude() const {return geographicLocation1Longitude; }
 	double getGeographicLocation1Latitude()  const {return geographicLocation1Latitude; }
 	double getGeographicLocation2Longitude() const {return geographicLocation2Longitude; }
@@ -391,6 +409,8 @@ public slots:
 	double getCustomAzimuth2() const { return customAzimuth2Line->getDefiningAngle(); }
 	void setCustomAzimuth1Label(QString label);
 	void setCustomAzimuth2Label(QString label);
+	QString getCustomAzimuth1Label(){return customAzimuth1Line->getLabel();}
+	QString getCustomAzimuth2Label(){return customAzimuth2Line->getLabel();}
 	void showCustomDeclination1(bool b);
 	void showCustomDeclination2(bool b);
 	void setCustomDeclination1(double dec);
@@ -399,20 +419,22 @@ public slots:
 	double getCustomDeclination2() const { return customDeclination2Line->getDefiningAngle(); }
 	void setCustomDeclination1Label(QString label);
 	void setCustomDeclination2Label(QString label);
+	QString getCustomDeclination1Label(){return customDeclination1Line->getLabel();}
+	QString getCustomDeclination2Label(){return customDeclination2Line->getLabel();}
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
 	// called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
-	QColor getLineColor(ArchaeoLine::Line whichLine);
+	QColor getLineColor(ArchaeoLine::Line whichLine) const;
 	//! query a line for its current defining angle. Returns declination or azimuth, respectively.
-	double getLineAngle(ArchaeoLine::Line whichLine);
-	QString getLineLabel(ArchaeoLine::Line whichLine);	
+	double getLineAngle(ArchaeoLine::Line whichLine) const;
+	QString getLineLabel(ArchaeoLine::Line whichLine) const;
 
 private slots:
 	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.
 	void updateObserverLocation(StelLocation loc);
 	//! Compute azimuth (from North) towards Target. All angles (args and result) are in degrees.
-	double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget) const;
+	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
 
 private:
 	QFont font;
@@ -512,6 +534,7 @@ class ArchaeoLinesStelPluginInterface : public QObject, public StelPluginInterfa
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*ARCHAEOLINES_HPP_*/

@@ -280,7 +280,7 @@ StelObjectP CustomObjectMgr::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(cObj);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
@@ -291,7 +291,7 @@ StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(cObj);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList CustomObjectMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const

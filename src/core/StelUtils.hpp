@@ -135,6 +135,13 @@ namespace StelUtils
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
+	//TODO these Vector-String converters should be removed, and missing functionality added to
+	//the VecMath classes and QVariant-based conversion
+
+	//! Reads a Vec2f from a string list
+	Vec2f strToVec2f(const QStringList& s);
+	//! Reads a Vec2f from a string, separated by commas. Example: 1.0,2.0
+	Vec2f strToVec2f(const QString& s);
 	//! Obtains a Vec3f from a string.
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector
@@ -147,6 +154,8 @@ namespace StelUtils
 	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
 	Vec4d strToVec4d(const QString& s);
 
+	// Converts a Vec2f to a string in the same format that can be read by strToVec2f
+	QString vec2fToStr(const Vec2f& v);
 	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
 	QString vec3fToStr(const Vec3f& v);
 	//! Converts a Vec4d to a string in the same format that can be read by strToVec4d
@@ -237,7 +246,7 @@ namespace StelUtils
 	void getDateFromJulianDay(const double julianDay, int *year, int *month, int *day);
 
 	//! Make from julianDay an hour, minute, second.
-	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=NULL);
+	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
 
 	//! Parse an ISO8601 date string.
 	//! Also handles negative and distant years.
@@ -266,8 +275,9 @@ namespace StelUtils
 	//! @return the current Julian Date
 	double getJDFromSystem();
 
-	//! Get the Julian Date from Besselian epoch.
-	//! @return Julian Date
+	//! Get the Julian Day Number (JD) from Besselian epoch.
+	//! @param epoch Besselian epoch, expressed as year
+	//! @return Julian Day number (JD) for B<Year>
 	double getJDFromBesselianEpoch(const float epoch);
 
 	//! Convert a time of day to the fraction of a Julian Day.

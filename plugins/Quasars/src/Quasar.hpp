@@ -42,6 +42,8 @@ class Quasar : public StelObject
 {
 	friend class Quasars;
 public:
+	static const QString QUASAR_TYPE;
+
 	//! @param id The official designation for a quasar, e.g. "RXS J00066+4342"
 	Quasar(const QVariantMap& map);
 	~Quasar();
@@ -58,7 +60,12 @@ public:
 
 	virtual QString getType(void) const
 	{
-		return "Quasar";
+		return QUASAR_TYPE;
+	}
+
+	virtual QString getID(void) const
+	{
+		return designation;
 	}
 
 	virtual float getSelectPriority(const StelCore *core) const;

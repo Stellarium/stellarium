@@ -67,7 +67,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	customPlanetMagLimit(0.0),
 	bortleScaleIndex(3),
 	inScale(1.f),
-	starShaderProgram(NULL),
+	starShaderProgram(Q_NULLPTR),
 	starShaderVars(StarShaderVars()),
 	nbPointSources(0),
 	maxPointSources(1000),
@@ -143,12 +143,12 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 StelSkyDrawer::~StelSkyDrawer()
 {
 	delete[] vertexArray;
-	vertexArray = NULL;
+	vertexArray = Q_NULLPTR;
 	delete[] textureCoordArray;
-	textureCoordArray = NULL;
+	textureCoordArray = Q_NULLPTR;
 	
 	delete starShaderProgram;
-	starShaderProgram = NULL;
+	starShaderProgram = Q_NULLPTR;
 }
 
 // Init parameters from config file
@@ -682,6 +682,40 @@ void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 	}
 }
 
+float StelSkyDrawer::getNELMFromBortleScale() const
+{
+	float nelm = 0.f;
+	switch (getBortleScaleIndex()) {
+		case 1:
+			nelm = 7.8f; // Class 1 = NELM 7.6–8.0; average NELM is 7.8
+			break;
+		case 2:
+			nelm = 7.3f; // Class 2 = NELM 7.1–7.5; average NELM is 7.3
+			break;
+		case 3:
+			nelm = 6.8f; // Class 3 = NELM 6.6–7.0; average NELM is 6.8
+			break;
+		case 4:
+			nelm = 6.3f; // Class 4 = NELM 6.1–6.5; average NELM is 6.3
+			break;
+		case 5:
+			nelm = 5.8f; // Class 5 = NELM 5.6–6.0; average NELM is 5.8
+			break;
+		case 6:
+			nelm = 5.3f; // Class 6 = NELM 5.1-5.5; average NELM is 5.3
+			break;
+		case 7:
+			nelm = 4.8f; // Class 7 = NELM 4.6–5.0; average NELM is 4.8
+			break;
+		case 8:
+			nelm = 4.3f; // Class 8 = NELM 4.1–4.5; average NELM is 4.3
+			break;
+		case 9:
+			nelm = 4.0f; // Class 8 = NELM 4.0
+			break;
+	}
+	return nelm;
+}
 
 // New colors
 Vec3f StelSkyDrawer::colorTable[128] = {

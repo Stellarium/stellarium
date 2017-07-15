@@ -54,7 +54,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 };
 
-StelDialogLogBook::StelDialogLogBook() : dialog(NULL)
+StelDialogLogBook::StelDialogLogBook() : dialog(Q_NULLPTR)
 {
 }
 
@@ -94,11 +94,11 @@ void StelDialogLogBook::setVisible(bool v)
 			proxy->setFocus();
 			return;
 		}
-		dialog = new QDialog(NULL);
+		dialog = new QDialog(Q_NULLPTR);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 		
-		proxy = new CustomProxy(NULL, Qt::Tool);
+		proxy = new CustomProxy(Q_NULLPTR, Qt::Tool);
 		proxy->setWidget(dialog);
 		QRectF bound = proxy->boundingRect();
 		

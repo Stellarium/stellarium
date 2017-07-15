@@ -123,7 +123,7 @@ StelGeodesicGrid::~StelGeodesicGrid(void)
 		delete[] triangles;
 	}
 	delete cacheSearchResult;
-	cacheSearchResult = NULL;
+	cacheSearchResult = Q_NULLPTR;
 }
 
 void StelGeodesicGrid::getTriangleCorners(int lev,int index,

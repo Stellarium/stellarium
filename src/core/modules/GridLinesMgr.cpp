@@ -224,7 +224,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
+	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	QString text;
 	if (d->text.isEmpty())
@@ -446,9 +446,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, NULL, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -462,8 +462,8 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint*=-1.;
 
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
-		sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 
 		fpt.transfo4d(rotLon);
 	}
@@ -488,8 +488,8 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortSphericalCap.contains(middlePoint))
 				middlePoint*=-1;
 
-			sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 
 			fpt.transfo4d(rotLon);
 		}
@@ -835,9 +835,9 @@ void SkyLine::draw(StelCore *core) const
 			rotFpt.transfo4d(rotLon120);
 			Vec3d rotFpt2=rotFpt;
 			rotFpt2.transfo4d(rotLon120);
-			sPainter.drawGreatCircleArc(fpt, rotFpt, NULL, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, NULL, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(rotFpt2, fpt, NULL, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 			return;
 		}
 		else
@@ -851,8 +851,8 @@ void SkyLine::draw(StelCore *core) const
 		middlePoint*=-1.;
 
 	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-	sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
-	sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
+	sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+	sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 
 	sPainter.setLineSmooth(false);
 	sPainter.setBlending(false);
@@ -1094,6 +1094,7 @@ GridLinesMgr::GridLinesMgr()
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectEarthFromSolarSystem()));
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -1259,6 +1260,11 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
 	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
 	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
+}
+
+void GridLinesMgr::connectEarthFromSolarSystem()
+{
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
 }
 
 void GridLinesMgr::update(double deltaTime)

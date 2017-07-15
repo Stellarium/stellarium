@@ -57,7 +57,7 @@ SessionsDialog::SessionsDialog(QMap<QString, QSqlTableModel *> theTableModels)
 SessionsDialog::~SessionsDialog()
 {
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 }
 
 /* ********************************************************************* */

@@ -83,19 +83,19 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 Quasars::Quasars()
 	: QsrCount(0)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
-	, updateTimer(0)
-	, messageTimer(0)
+	, downloadMgr(Q_NULLPTR)
+	, updateTimer(Q_NULLPTR)
+	, messageTimer(Q_NULLPTR)
 	, updatesEnabled(false)
 	, updateFrequencyDays(0)
 	, enableAtStartup(false)
 	, flagShowQuasars(false)
 	, flagShowQuasarsButton(false)
-	, OnIcon(NULL)
-	, OffIcon(NULL)
-	, GlowIcon(NULL)
-	, toolbarButton(NULL)
-	, progressBar(NULL)
+	, OnIcon(Q_NULLPTR)
+	, OffIcon(Q_NULLPTR)
+	, GlowIcon(Q_NULLPTR)
+	, toolbarButton(Q_NULLPTR)
+	, progressBar(Q_NULLPTR)
 
 {
 	setObjectName("Quasars");
@@ -297,7 +297,7 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 StelObjectP Quasars::searchByName(const QString& englishName) const
 {
 	if (!flagShowQuasars)
-		return NULL;
+		return Q_NULLPTR;
 
 	foreach(const QuasarP& quasar, QSO)
 	{
@@ -305,13 +305,13 @@ StelObjectP Quasars::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(quasar);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!flagShowQuasars)
-		return NULL;
+		return Q_NULLPTR;
 
 	foreach(const QuasarP& quasar, QSO)
 	{
@@ -319,7 +319,7 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(quasar);
 	}
 
-	return NULL;
+	return Q_NULLPTR;
 }
 
 QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
@@ -518,7 +518,7 @@ bool Quasars::checkJsonFileFormat()
 	return true;
 }
 
-QuasarP Quasars::getByID(const QString& id)
+QuasarP Quasars::getByID(const QString& id) const
 {
 	foreach(const QuasarP& quasar, QSO)
 	{
@@ -621,7 +621,7 @@ void Quasars::updateJSON(void)
 	updateState = Quasars::Updating;
 	emit(updateStateChanged(updateState));	
 
-	if (progressBar==NULL)
+	if (progressBar==Q_NULLPTR)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
@@ -669,7 +669,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	{
 		progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 }
 
@@ -703,12 +703,12 @@ void Quasars::upgradeConfigIni(void)
 void Quasars::setFlagShowQuasarsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=NULL)
+	if (gui!=Q_NULLPTR)
 	{
 		if (b==true) {
-			if (toolbarButton==NULL) {
+			if (toolbarButton==Q_NULLPTR) {
 				// Create the quasars button
-				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
+				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {

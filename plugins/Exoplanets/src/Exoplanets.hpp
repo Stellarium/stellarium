@@ -107,13 +107,15 @@ public:
 	//! @return an list containing the exoplanets located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or NULL.
+	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensistive satellite name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or NULL.
+	//! Return the matching satellite if exists or Q_NULLPTR.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -125,6 +127,7 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
 	virtual QString getName() const { return "Exoplanets"; }
+	virtual QString getStelObjectType() const { return Exoplanet::EXOPLANET_TYPE; }
 
 	//! get a exoplanet object by identifier
 	ExoplanetP getByID(const QString& id);
@@ -147,28 +150,28 @@ public:
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
-	bool getUpdatesEnabled(void) {return updatesEnabled;}
+	bool getUpdatesEnabled(void) const {return updatesEnabled;}
 	//! set whether or not the plugin will try to update TLE data from the internet
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
-	bool getEnableAtStartup(void) { return enableAtStartup; }
+	bool getEnableAtStartup(void) const { return enableAtStartup; }
 
 	//! get the date and time the TLE elements were updated
-	QDateTime getLastUpdate(void) {return lastUpdate;}
+	QDateTime getLastUpdate(void) const {return lastUpdate;}
 
 	//! get the update frequency in hours
-	int getUpdateFrequencyHours(void) {return updateFrequencyHours;}
+	int getUpdateFrequencyHours(void) const {return updateFrequencyHours;}
 	void setUpdateFrequencyHours(int hours) {updateFrequencyHours = hours;}
 
 	//! get the number of seconds till the next update
 	int getSecondsToUpdate(void);
 
 	//! Get the current updateState
-	UpdateState getUpdateState(void) {return updateState;}
+	UpdateState getUpdateState(void) const {return updateState;}
 
-	QList<double> getExoplanetsData(int mode)
+	QList<double> getExoplanetsData(int mode) const
 	{
 		switch(mode)
 		{
@@ -238,14 +241,14 @@ public slots:
 	void setFlagShowExoplanets(bool b);
 	//! Get status to display of markers of exoplanetary systems
 	//! @return true if it's visible
-	bool getFlagShowExoplanets(void) { return flagShowExoplanets; }
+	bool getFlagShowExoplanets(void) const { return flagShowExoplanets; }
 
 	//! Enable/disable display of designations of exoplanetary systems
 	//! @param b boolean flag
 	void setFlagShowExoplanetsDesignations(bool b);
 	//! Get status to display of designations of exoplanetary systems
 	//! @return true if it's visible
-	bool getFlagShowExoplanetsDesignations(void);
+	bool getFlagShowExoplanetsDesignations(void) const;
 
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
@@ -253,21 +256,21 @@ public slots:
 
 	//! Get status to display of distribution of exoplanetary systems
 	//! @return true if distribution of exoplanetary systems is enabled
-	bool getDisplayMode(void);
+	bool getDisplayMode(void) const;
 	//! Enable/disable display of distribution of exoplanetary systems
 	//! @param b
 	void setDisplayMode(bool b);
 
 	//! Get status to display of systems with exoplanets after their discovery
 	//! @return true if markers of exoplanetary systems are visible after discovery of exoplanets
-	bool getTimelineMode(void);
+	bool getTimelineMode(void) const;
 	//! Enable/disable display of systems with exoplanets after their discovery only
 	//! @param b
 	void setTimelineMode(bool b);
 
 	//! Get status to display of exoplanetary systems with the potentially habitable exoplanets
 	//! @return true if systems with only potentially habitable exoplanets are visible
-	bool getHabitableMode(void);
+	bool getHabitableMode(void) const;
 	//! Enable/disable display of exoplanetary systems with the potentially habitable exoplanets only
 	//! @param b
 	void setHabitableMode(bool b);
@@ -275,7 +278,7 @@ public slots:
 	//! Get color for markers of exoplanetary systems
 	//! @param h set false if you want get color of markers of potentially habitable exoplanets
 	//! @return color
-	Vec3f getMarkerColor(bool habitable);
+	Vec3f getMarkerColor(bool habitable) const;
 	//! Set color for markers of exoplanetary systems
 	//! @param c color
 	//! @param h set true if you want set color for potentially habitable exoplanets
@@ -325,15 +328,15 @@ private:
 	//! Creates a backup of the exoplanets.json file called exoplanets.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
-	bool backupJsonFile(bool deleteOriginal=false);
+	bool backupJsonFile(bool deleteOriginal=false) const;
 
 	//! Get the version of catalog format from the "version of the format" value in the exoplanets.json file
 	//! @return version string, e.g. "1"
-	int getJsonFileFormatVersion(void);
+	int getJsonFileFormatVersion(void) const;
 
 	//! Check format of the catalog of exoplanets
 	//! @return valid boolean, e.g. "true"
-	bool checkJsonFileFormat(void);
+	bool checkJsonFileFormat(void) const;
 
 	//! parse JSON file and load exoplanets to map
 	QVariantMap loadEPMap(QString path=QString());
@@ -409,6 +412,7 @@ class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_EXOPLANETS_HPP_*/

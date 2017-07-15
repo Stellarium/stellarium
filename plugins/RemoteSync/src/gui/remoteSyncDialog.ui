@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>396</height>
+    <width>634</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -145,6 +145,20 @@
        <string>Remote Sync</string>
       </attribute>
       <layout class="QFormLayout" name="formLayout">
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Status:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="statusLabel">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
        <item row="5" column="0" colspan="2">
         <widget class="QGroupBox" name="serverGroupBox">
          <property name="title">
@@ -202,68 +216,11 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_serverName">
             <property name="text">
-             <string>Server Name, IP: </string>
+             <string notr="true">Server Name, IP: </string>
             </property>
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>120</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="9" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QPushButton" name="restoreDefaultsButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Restore default settings</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="saveSettingsButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Save settings as default</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Status:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="statusLabel">
-         <property name="text">
-          <string>StatusLabel</string>
-         </property>
         </widget>
        </item>
        <item row="7" column="0" colspan="2">
@@ -299,6 +256,9 @@
                <property name="text">
                 <string>Server host address/name</string>
                </property>
+               <property name="buddy">
+                <cstring>clientServerHostEdit</cstring>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -312,6 +272,9 @@
               <widget class="QLabel" name="label_4">
                <property name="text">
                 <string>Server port</string>
+               </property>
+               <property name="buddy">
+                <cstring>clientServerPortSpinBox</cstring>
                </property>
               </widget>
              </item>
@@ -328,7 +291,242 @@
                </property>
               </widget>
              </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>When connection is lost</string>
+               </property>
+               <property name="buddy">
+                <cstring>comboBoxClientConnectionLost</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="comboBoxClientConnectionLost">
+               <item>
+                <property name="text">
+                 <string>Do nothing</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Try reconnecting</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Quit</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>When server quits</string>
+               </property>
+               <property name="buddy">
+                <cstring>comboBoxClientServerQuits</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QComboBox" name="comboBoxClientServerQuits"/>
+             </item>
             </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>120</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="clientSettingsTab">
+      <attribute name="title">
+       <string>Client settings</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="text">
+          <string>Changes on this page require a re-connection to the server</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Settings applied on this client</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="checkBoxOptionSelection">
+            <property name="text">
+             <string>Selection</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupSyncOptions</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBoxOptionTime">
+            <property name="text">
+             <string>Time</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupSyncOptions</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBoxOptionLocation">
+            <property name="text">
+             <string>Location</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupSyncOptions</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBoxOptionStelProperty">
+            <property name="text">
+             <string notr="true">StelProperty</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupSyncOptions</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="checkBoxOptionView">
+            <property name="text">
+             <string>View direction</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupSyncOptions</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="checkBoxOptionFov">
+            <property name="text">
+             <string>Field of view</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupSyncOptions</string>
+            </attribute>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Property filters</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBoxExcludeGUIProps">
+            <property name="text">
+             <string>Exclude GUI-related properties</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupSyncOptions</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <layout class="QGridLayout" name="gridLayoutMoveToGroupbox2">
+            <item row="1" column="0">
+             <widget class="QListWidget" name="listWidgetAllProperties">
+              <property name="toolTip">
+               <string>These are all available properties.</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <layout class="QVBoxLayout" name="verticalLayoutExclusionButtons">
+              <property name="topMargin">
+               <number>120</number>
+              </property>
+              <property name="bottomMargin">
+               <number>120</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="pushButtonSelectProperties">
+                <property name="text">
+                 <string notr="true">--&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonDeselectProperties">
+                <property name="text">
+                 <string notr="true">&lt;--</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="2">
+             <widget class="QListWidget" name="listWidgetSelectedProperties">
+              <property name="toolTip">
+               <string>These are the properties currently excluded from synchronisation.</string>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="labelExcluded">
+              <property name="text">
+               <string>Excluded Properties</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelSynced">
+              <property name="text">
+               <string>Synchronized Properties</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Additional excluded properties:</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -358,6 +556,48 @@
      </widget>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <property name="leftMargin">
+      <number>9</number>
+     </property>
+     <property name="topMargin">
+      <number>9</number>
+     </property>
+     <property name="rightMargin">
+      <number>9</number>
+     </property>
+     <property name="bottomMargin">
+      <number>9</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="restoreDefaultsButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Restore default settings</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveSettingsButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Save settings as default</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -370,4 +610,11 @@
  </customwidgets>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroupSyncOptions">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

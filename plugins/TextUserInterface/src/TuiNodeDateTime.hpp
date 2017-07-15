@@ -39,9 +39,9 @@ public:
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically 
 	//! shares the same parent)
-	TuiNodeDateTime(const QString& text, QObject* receiver, const char* method, double defValue, TuiNode* parent=NULL, TuiNode* prev=NULL);
+	TuiNodeDateTime(const QString& text, QObject* receiver, const char* method, double defValue, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
 	virtual TuiNodeResponse handleEditingKey(int key);
-	virtual QString getDisplayText();
+	virtual QString getDisplayText() const;
 
 signals:
 	void setValue(double d);
@@ -51,7 +51,7 @@ private:
 	int editingPart;
 	bool typing;
 	void incPart(int part, bool add);
-	QList<int> getParts(double jd);
+	QList<int> getParts(double jd) const;
 	bool setPart(int part, int val);
 
 };

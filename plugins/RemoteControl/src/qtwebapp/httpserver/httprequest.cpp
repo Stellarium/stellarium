@@ -445,7 +445,7 @@ void HttpRequest::parseMultiPartFile()
 #ifdef SUPERVERBOSE
 		qDebug("HttpRequest: reading multpart data");
 #endif
-		QTemporaryFile* uploadedFile=0;
+		QTemporaryFile* uploadedFile=Q_NULLPTR;
 		QByteArray fieldValue;
 		while (!tempFile.atEnd() && !finished && !tempFile.error())
 		{
@@ -467,6 +467,7 @@ void HttpRequest::parseMultiPartFile()
 #ifdef SUPERVERBOSE
 					qDebug("HttpRequest: finishing writing to uploaded file");
 #endif
+					Q_ASSERT(uploadedFile);
 					uploadedFile->resize(uploadedFile->size()-2);
 					uploadedFile->flush();
 					uploadedFile->seek(0);

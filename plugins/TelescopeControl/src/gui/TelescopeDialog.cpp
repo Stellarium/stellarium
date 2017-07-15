@@ -179,7 +179,8 @@ void TelescopeDialog::createDialogContent()
 		QString rts2Url;
 		QString rts2Username;
 		QString rts2Password;
-		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial, rts2Url, rts2Username, rts2Password))
+		int rts2Refresh;
+		if(!telescopeManager->getTelescopeAtSlot(slotNumber, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, serverName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh))
 			continue;
 		
 		//Determine the server type
@@ -523,7 +524,7 @@ void TelescopeDialog::addModelRow(int number,
 {
 	Q_ASSERT(telescopeListModel);
 	
-	QStandardItem* tempItem = 0;
+	QStandardItem* tempItem = Q_NULLPTR;
 	int lastRow = telescopeListModel->rowCount();
 	// Number
 	tempItem = new QStandardItem(QString::number(number));

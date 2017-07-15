@@ -12,7 +12,7 @@ HttpConnectionHandlerPool::HttpConnectionHandlerPool(const HttpConnectionHandler
 {
     this->settings=settings;
     this->requestHandler=requestHandler;
-    this->sslConfiguration=NULL;
+    this->sslConfiguration=Q_NULLPTR;
     loadSslConfig();
     cleanupTimer.start(settings.cleanupInterval);
     connect(&cleanupTimer, SIGNAL(timeout()), SLOT(cleanup()));
@@ -33,7 +33,7 @@ HttpConnectionHandlerPool::~HttpConnectionHandlerPool()
 
 HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler()
 {
-    HttpConnectionHandler* freeHandler=0;
+    HttpConnectionHandler* freeHandler=Q_NULLPTR;
     mutex.lock();
     // find a free handler in pool
     foreach(HttpConnectionHandler* handler, pool)

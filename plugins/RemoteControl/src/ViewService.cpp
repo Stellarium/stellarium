@@ -32,14 +32,14 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
-ViewService::ViewService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+ViewService::ViewService(QObject *parent) : AbstractAPIService(parent)
 {
 	core = StelApp::getInstance().getCore();
 	lsMgr = GETSTELMODULE(LandscapeMgr);
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 }
 
-void ViewService::getImpl(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)
+void ViewService::get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)
 {
 	Q_UNUSED(parameters);
 
@@ -70,8 +70,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 		{
 			//return the HTML description of the current landscape
 			QString str = lsMgr->getCurrentLandscapeHtmlDescription();
-			response.setHeader("Content-Type","text/html; charset=UTF-8");
-			response.setData(wrapHtml(str, lsMgr->getCurrentLandscapeName()).toUtf8());
+			response.writeWrappedHTML(str, lsMgr->getCurrentLandscapeName());
 		}
 		else
 		{
@@ -79,33 +78,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 			QString baseFolder = StelFileMgr::findFile("landscapes/" + lsMgr->getCurrentLandscapeID());
 			QString pathString = baseFolder + '/' + QString::fromUtf8(path);
 
-			QFile file(pathString);
-			if (pathString.isEmpty() || !file.exists())
-			{
-				response.setStatus(404,"not found");
-				response.setData("requested landscape resource not found");
-				return;
-			}
-
-			QMimeType mime = QMimeDatabase().mimeTypeForFile(pathString);
-
-			if(file.open(QIODevice::ReadOnly))
-			{
-				//reply with correct mime type if possible
-				if(!mime.isDefault())
-				{
-					response.setHeader("Content-Type", mime.name().toLatin1());
-				}
-
-				//load and write data
-				response.setData(file.readAll());
-			}
-			else
-			{
-				response.setStatus(500,"internal server error");
-				response.setData("could not open resource file");
-			}
-
+			response.writeFile(pathString);
 		}
 	}
 	else if (operation=="listskyculture")
@@ -133,8 +106,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 		{
 			//return the HTML description of the current landscape
 			QString str = skyCulMgr->getCurrentSkyCultureHtmlDescription();
-			response.setHeader("Content-Type","text/html; charset=UTF-8");
-			response.setData(wrapHtml(str, skyCulMgr->getCurrentSkyCultureNameI18()).toUtf8());
+			response.writeWrappedHTML(str, skyCulMgr->getCurrentSkyCultureNameI18());
 		}
 		else
 		{
@@ -142,33 +114,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 			QString baseFolder = StelFileMgr::findFile("skycultures/" + skyCulMgr->getCurrentSkyCultureID());
 			QString pathString = baseFolder + '/' + QString::fromUtf8(path);
 
-			QFile file(pathString);
-			if (pathString.isEmpty() || !file.exists())
-			{
-				response.setStatus(404,"not found");
-				response.setData("requested skyculture resource not found");
-				return;
-			}
-
-			QMimeType mime = QMimeDatabase().mimeTypeForFile(pathString);
-
-			if(file.open(QIODevice::ReadOnly))
-			{
-				//reply with correct mime type if possible
-				if(!mime.isDefault())
-				{
-					response.setHeader("Content-Type", mime.name().toLatin1());
-				}
-
-				//load and write data
-				response.setData(file.readAll());
-			}
-			else
-			{
-				response.setStatus(500,"internal server error");
-				response.setData("could not open resource file");
-			}
-
+			response.writeFile(pathString);
 		}
 	}
 	else if (operation=="listprojection")
@@ -190,8 +136,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 	{
 		//returns the description of the current projection
 		QString str = core->getProjection(StelCore::FrameJ2000)->getHtmlSummary();
-		response.setHeader("Content-Type","text/html; charset=UTF-8");
-		response.setData(wrapHtml(str, core->getCurrentProjectionNameI18n()).toUtf8());
+		response.writeWrappedHTML(str, core->getCurrentProjectionNameI18n());
 	}
 	else
 	{

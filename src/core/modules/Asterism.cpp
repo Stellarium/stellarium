@@ -36,17 +36,18 @@
 
 Vec3f Asterism::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Asterism::labelColor = Vec3f(0.4,0.4,0.8);
+const QString Asterism::ASTERISM_TYPE = QStringLiteral("Asterism");
 
 Asterism::Asterism()
 	: numberOfSegments(0)
-	, asterism(NULL)
+	, asterism(Q_NULLPTR)
 {
 }
 
 Asterism::~Asterism()
 {
 	delete[] asterism;
-	asterism = NULL;
+	asterism = Q_NULLPTR;
 }
 
 bool Asterism::read(const QString& record, StarMgr *starMgr)
@@ -136,7 +137,7 @@ const Asterism* Asterism::isStarIn(const StelObject* s) const
 		if (asterism[i]->getEnglishName()==s->getEnglishName())
 			return this;
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 void Asterism::update(int deltaTime)
@@ -155,7 +156,7 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(q_("asterism")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("asterism")) << "<br />";
 
 	postProcessInfoString(str, flags);
 

@@ -44,7 +44,7 @@ class StelMainScriptAPIProxy : public QObject
 	Q_OBJECT
 
 public:
-	StelMainScriptAPIProxy(QObject* parent=0) : QObject(parent) {;}
+	StelMainScriptAPIProxy(QObject* parent=Q_NULLPTR) : QObject(parent) {;}
 	~StelMainScriptAPIProxy() {;}
 
 public slots:

@@ -105,6 +105,7 @@ class TextUserInterfaceStelPluginInterface : public QObject, public StelPluginIn
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_TEXTUSERINTERFACE_HPP_*/

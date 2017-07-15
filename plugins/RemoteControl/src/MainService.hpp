@@ -36,6 +36,7 @@ class StelLocaleMgr;
 class StelMovementMgr;
 class StelObjectMgr;
 class StelPropertyMgr;
+class StelProperty;
 class StelScriptMgr;
 class StelSkyCultureMgr;
 
@@ -47,21 +48,27 @@ class StelSkyCultureMgr;
 class MainService : public AbstractAPIService
 {
 	Q_OBJECT
-public:
-	MainService(const QByteArray& serviceName, QObject* parent = 0);
 
-	virtual ~MainService() {}
+	Q_ENUMS(SelectionMode)
+public:
+	enum SelectionMode
+	{
+		Center,
+		Zoom,
+		Mark
+	};
+
+	MainService(QObject* parent = Q_NULLPTR);
 
 	//! Used to implement move functionality
 	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-
-protected:
+	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("main"); }
 	//! @brief Implements the GET operations
 	//! @see @ref rcMainServiceGET
-	virtual void getImpl(const QByteArray& operation,const APIParameters &parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void get(const QByteArray& operation,const APIParameters &parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 	//! @brief Implements the HTTP POST operations
 	//! @see @ref rcMainServicePOST
-	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
+	virtual void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 
 private slots:
 	StelObjectP getSelectedObject();
@@ -70,16 +77,16 @@ private slots:
 	QString getInfoString();
 
 	//! Like StelDialog::gotoObject
-	bool focusObject(const QString& name);
+	bool focusObject(const QString& name, SelectionMode mode);
 	void focusPosition(const Vec3d& pos);
 
-	void updateMovement(float x, float y, bool xUpdated, bool yUpdated);
+	void updateMovement(double x, double y, bool xUpdated, bool yUpdated);
 	// Allow azimut/altitude changes. Values must be in Radians.
 	void updateView(double az, double alt, bool azUpdated, bool altUpdated);
 	void setFov(double fov);
 
 	void actionToggled(const QString& id, bool val);
-	void propertyChanged(const QString& id, const QVariant& val);
+	void propertyChanged(StelProperty* prop, const QVariant &val);
 
 private:
 	StelCore* core;
@@ -92,7 +99,7 @@ private:
 	StelScriptMgr* scriptMgr;
 	StelSkyCultureMgr* skyCulMgr;
 
-	float moveX,moveY;
+	double moveX,moveY;
 	qint64 lastMoveUpdateTime;
 
 	struct ActionCacheEntry

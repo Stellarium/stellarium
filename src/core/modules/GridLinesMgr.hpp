@@ -867,9 +867,12 @@ private slots:
 	//! Re-translate the labels of the great circles.
 	//! Contains only calls to SkyLine::updateLabel().
 	void updateLineLabels();
+	//! Connect the earth shared pointer.
+	//! Must be connected to SolarSystem::solarSystemDataReloaded()
+	void connectEarthFromSolarSystem();
 
 private:
-	QSharedPointer<Planet> earth;
+	QSharedPointer<Planet> earth;           // shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
 	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
 	SkyGrid * equGrid;			// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid

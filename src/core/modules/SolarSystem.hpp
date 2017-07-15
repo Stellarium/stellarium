@@ -75,8 +75,6 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagTranslatedNames
 		   WRITE setFlagTranslatedNames
 		   NOTIFY flagTranslatedNamesChanged)
-
-	//StelProperties
 	Q_PROPERTY(bool planetsDisplayed
 		   READ getFlagPlanets
 		   WRITE setFlagPlanets
@@ -97,6 +95,16 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagLightTravelTime
 		   NOTIFY flagLightTravelTimeChanged
 		   )
+	Q_PROPERTY(bool flagUseObjModels
+		   READ getFlagUseObjModels
+		   WRITE setFlagUseObjModels
+		   NOTIFY flagUseObjModelsChanged
+		   )
+	Q_PROPERTY(bool flagShowObjSelfShadows
+		   READ getFlagShowObjSelfShadows
+		   WRITE setFlagShowObjSelfShadows
+		   NOTIFY flagShowObjSelfShadowsChanged
+		   )
 	Q_PROPERTY(bool flagMoonScale
 		   READ getFlagMoonScale
 		   WRITE setFlagMoonScale
@@ -106,6 +114,16 @@ class SolarSystem : public StelObjectModule
 		   READ getMoonScale
 		   WRITE setMoonScale
 		   NOTIFY moonScaleChanged
+		   )
+	Q_PROPERTY(bool flagMinorBodyScale
+		   READ getFlagMinorBodyScale
+		   WRITE setFlagMinorBodyScale
+		   NOTIFY flagMinorBodyScaleChanged
+		   )
+	Q_PROPERTY(double minorBodyScale
+		   READ getMinorBodyScale
+		   WRITE setMinorBodyScale
+		   NOTIFY minorBodyScaleChanged
 		   )
 	Q_PROPERTY(double labelsAmount
 		   READ getLabelsAmount
@@ -117,10 +135,20 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagEphemerisMarkers
 		   NOTIFY ephemerisMarkersChanged
 		   )
+	Q_PROPERTY(bool ephemerisHorizontalCoordinates
+		   READ getFlagEphemerisHorizontalCoordinates
+		   WRITE setFlagEphemerisHorizontalCoordinates
+		   NOTIFY ephemerisHorizontalCoordinatesChanged
+		   )
 	Q_PROPERTY(bool ephemerisDatesDisplayed
 		   READ getFlagEphemerisDates
 		   WRITE setFlagEphemerisDates
 		   NOTIFY ephemerisDatesChanged
+		   )	
+	Q_PROPERTY(bool ephemerisMagnitudesDisplayed
+		   READ getFlagEphemerisMagnitudes
+		   WRITE setFlagEphemerisMagnitudes
+		   NOTIFY ephemerisMagnitudesChanged
 		   )
 
 	Q_PROPERTY(bool flagCustomGrsSettings
@@ -290,17 +318,23 @@ public:
 
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param nameI18n the case in-sensistive translated planet name.
-	//! @return a StelObjectP for the object if found, else NULL.
+	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensistive English planet name.
-	//! @return a StelObjectP for the object if found, else NULL.
+	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const
+	{
+		return searchByName(id);
+	}
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Solar System"; }
+	virtual QString getStelObjectType() const { return Planet::PLANET_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -349,6 +383,16 @@ public slots:
 	//! Get the current value of the flag which determines if light travel time
 	//! calculation is used or not.
 	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}
+
+	//! Set flag whether to use OBJ models for rendering, where available
+	void setFlagUseObjModels(bool b) { if(b!=flagUseObjModels) { flagUseObjModels = b; emit flagUseObjModelsChanged(b); } }
+	//! Get the current value of the flag which determines wether to use OBJ models for rendering, where available
+	bool getFlagUseObjModels(void) const { return flagUseObjModels; }
+
+	//! Set flag whether OBJ models should render self-shadowing (using a shadow map)
+	void setFlagShowObjSelfShadows(bool b);
+	//! Get the current value of the flag which determines whether OBJ models should render self-shadowing (using a shadow map)
+	bool getFlagShowObjSelfShadows(void) const { return flagShowObjSelfShadows; }
 
 	//! Set planet names font size.
 	//! @return font size
@@ -606,6 +650,16 @@ public slots:
 	//! Get the display scaling factor for Earth's moon.
 	double getMoonScale(void) const {return moonScale;}
 
+	//! Set flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
+	void setFlagMinorBodyScale(bool b);
+	//! Get the current value of the flag which determines if minor bodies (everything except the 8 planets) are drawn scaled or not.
+	bool getFlagMinorBodyScale(void) const {return flagMinorBodyScale;}
+
+	//! Set the display scaling factor for minor bodies.
+	void setMinorBodyScale(double f);
+	//! Get the display scaling factor for minor bodies.
+	double getMinorBodyScale(void) const {return minorBodyScale;}
+
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
@@ -642,17 +696,20 @@ public slots:
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
 	//! Possible values:
-	//! @li @c Planesas (algorithm provided by Pere Planesas (Observatorio Astronomico Nacional))
-	//! @li @c Mueller (G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961])
-	//! @li @c Harris (Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes)
+	//! @li @c Mueller1893 [Explanatory Supplement to the Astronomical Ephemeris, 1961] (visual magnitudes, based on visual observations by G. Mueller, 1877-91)
+	//! @li @c AstrAlm1984 [Astronomical Almanac 1984] and later. These give V (instrumental) magnitudes.
+	//! @li @c ExpSup1992 [Explanatory Supplement to the Astronomical Almanac, 1992] (algorithm contributed by Pere Planesas, Observatorio Astronomico Nacional)
+	//! @li @c ExpSup2013 [Explanatory Supplement to the Astronomical Almanac, 3rd edition, 2013]
+	//! @li @c Generic Visual magnitude based on phase angle and albedo.
 	//! Details:
-	//! @li J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.283-286.
+	//! @li J. Meeus "Astronomical Algorithms" (2nd ed. 1998, with corrections as of August 10, 2009) p.283-286.
 	//! @li O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
 	//! @li Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
-	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = Harris
+	//! @li Sean E. Urban and P. Kenneth Seidelmann "Explanatory Supplement to the Astronomical Almanac" (3rd edition, 2013)
+	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = ExpSup2013
 	//! @param algorithm the case in-sensitive algorithm name
-	//! @note: The structure of algorithms is almost identical, just the numbers are different! You should activate
-	//! Mueller's algorithm for simulate the eye's impression. (Esp. Venus!)
+	//! @note: The structure of algorithms is almost identical, just the numbers are different!
+	//!        You should activate Mueller's algorithm to simulate the eye's impression. (Esp. Venus!)
 	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
 
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
@@ -725,11 +782,17 @@ signals:
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void flagLightTravelTimeChanged(bool b);
+	void flagUseObjModelsChanged(bool b);
+	void flagShowObjSelfShadowsChanged(bool b);
 	void flagMoonScaleChanged(bool b);
 	void moonScaleChanged(double f);
+	void flagMinorBodyScaleChanged(bool b);
+	void minorBodyScaleChanged(double f);
 	void labelsAmountChanged(double f);
 	void ephemerisMarkersChanged(bool b);
+	void ephemerisHorizontalCoordinatesChanged(bool b);
 	void ephemerisDatesChanged(bool b);
+	void ephemerisMagnitudesChanged(bool b);
 	void flagCustomGrsSettingsChanged(bool b);
 	void customGrsLongitudeChanged(int l);
 	void customGrsDriftChanged(double drift);
@@ -764,8 +827,10 @@ public:
 	// Other public methods
 	//! Get a pointer to a Planet object.
 	//! @param planetEnglishName the English name of the desired planet.
-	//! @return The matching planet pointer if exists or NULL.
+	//! @return The matching planet pointer if exists or Q_NULLPTR.
 	PlanetP searchByEnglishName(QString planetEnglishName) const;
+
+	PlanetP searchMinorPlanetByEnglishName(QString planetEnglishName) const;
 
 	//! Get the Planet object pointer for the Sun.
 	PlanetP getSun() const {return sun;}
@@ -788,16 +853,26 @@ public:
 	//! Reload the planets
 	void reloadPlanets();
 
+	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
+	bool removeMinorPlanet(QString name);
+
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
-	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
-	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
+	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).
+	void computePositions(double dateJDE, PlanetP observerPlanet);
 
 	//! Get the list of all the bodies of the solar system.	
-	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}	
+	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+	//! Get the list of all the bodies of the solar system.
+	const QList<PlanetP>& getAllMinorBodies() const {return systemMinorBodies;}
+	//! Get the list of all minor bodies names.
+	const QStringList getMinorBodiesList() const { return minorBodies; }
+
+	//! Get lighttime corrected solar position (essential to draw the sun during solar eclipse and compute things like eclipse factor etc, until we get aberration working.)
+	const Vec3d getLightTimeSunPosition() const { return lightTimeSunPosition; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -808,18 +883,27 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! Called following StelMainView::reloadShadersRequested
+	void reloadShaders();
+
 	void setFlagEphemerisMarkers(bool b);
 	bool getFlagEphemerisMarkers() const;
 
+	void setFlagEphemerisHorizontalCoordinates(bool b);
+	bool getFlagEphemerisHorizontalCoordinates() const;
+
 	void setFlagEphemerisDates(bool b);
 	bool getFlagEphemerisDates() const;
+
+	void setFlagEphemerisMagnitudes(bool b);
+	bool getFlagEphemerisMagnitudes() const;
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
 	//! @param v A position in earth equatorial position.
 	//! @param core the StelCore object.
-	//! @return a pointer to a StelObject if found, else NULL
+	//! @return a pointer to a StelObject if found, else Q_NULLPTR
 	StelObjectP search(Vec3d v, const StelCore* core) const;
 
 	//! Compute the transformation matrix for every elements of the solar system.
@@ -829,9 +913,9 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
-	//! Load planet data from the Solar System configuration file.
+	//! Load planet data from the Solar System configuration files.
 	//! This function attempts to load every possible instance of the
-	//! Solar System configuration file in the file paths, falling back if a
+	//! Solar System configuration files in the file paths, falling back if a
 	//! given path can't be loaded.
 	void loadPlanets();
 
@@ -859,9 +943,12 @@ private:
 	//! The currently selected planet.
 	PlanetP selected;
 
-	// Moon scale value
+	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
+	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
 	bool flagMoonScale;
 	double moonScale;
+	bool flagMinorBodyScale;
+	double minorBodyScale;
 
 	QFont planetNameFont;
 
@@ -870,10 +957,14 @@ private:
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;
+	//! List of all the minor bodies of the solar system.
+	QList<PlanetP> systemMinorBodies;
 
 	// Master settings
 	bool flagOrbits;
 	bool flagLightTravelTime;
+	bool flagUseObjModels;
+	bool flagShowObjSelfShadows;
 
 	//! The selection pointer texture.
 	StelTextureSP texPointer;
@@ -887,6 +978,8 @@ private:
 	bool flagIsolatedOrbits;
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
+	bool ephemerisMagnitudesDisplayed;
+	bool ephemerisHorizontalCoordinates;
 
 	class TrailGroup* allTrails;
 	StelGui* gui;
@@ -896,8 +989,18 @@ private:
 	Vec3f pointerColor;
 
 	QHash<QString, QString> planetNativeNamesMap;
+	QStringList minorBodies;
 
-	QList<Orbit*> orbits;           // Pointers on created elliptical orbits
+	Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
+							// Direct shift caused problems (LP:#1699648), circumvented with this construction.
+	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
+	// while the planets don't own their orbit objects.
+	// Would it not be better to hand over the orbit object ownership to the Planet object?
+	// This list could then be removed.
+	// In case this was originally intended to provide some fast access for time-dependent computation with the same JD,
+	// note that we must also always compensate to light time travel, so likely each computation has to be done twice,
+	// with current JDE and JDE-lightTime(distance).
+	QList<Orbit*> orbits;           // Pointers on created elliptical orbits. 0.16pre: WHY DO WE NEED THIS???
 };
 
 

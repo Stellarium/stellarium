@@ -50,7 +50,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.
 	//! Registered modules can have selected objects
-	void registerStelObjectMgr(StelObjectModule* mgr);
+	void registerStelObjectMgr(StelObjectModule* m);
 
 	//! Find and select an object near given equatorial J2000 position.
 	//! @param core the StelCore instance to use for computations
@@ -107,7 +107,7 @@ public:
 	//! @return true if at least 1 object was sucessfully selected
 	bool setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
-	//! Get the list objects which was recently selected by the user.
+	//! Get the list of objects which was recently selected by the user.
 	const QList<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
 
 	//! Return the list objects of type "withType" which was recently selected by the user.
@@ -125,6 +125,15 @@ public:
 	//! Find any kind of object by its standard program name.
 	StelObjectP searchByName(const QString &name) const;
 
+	//! Find an object of the given type and ID
+	//! @param type the type of the object as given by StelObject::getType()
+	//! @param id the ID of the object as given by StelObject::getID()
+	//! @return an null/invalid pointer when nothing is found, the given object otherwise.
+	//! @note
+	//! a StelObject may be found by multiple IDs (different catalog numbers, etc),
+	//! so StelObject::getID() of the returned object may not be the same as the query parameter \p id.
+	StelObjectP searchByID(const QString& type, const QString& id) const;
+
 	//! Set the radius in pixel in which objects will be searched when clicking on a point in sky.
 	void setObjectSearchRadius(float radius) {searchRadiusPixel=radius;}
 
@@ -134,7 +143,7 @@ public:
 
 	//! Return a QMap of data about the object (calls obj->getInfoMap()).
 	//! If obj is valid, add an element ["found", true].
-	//! If obj is NULL, returns a 1-element map [["found", false]]
+	//! If obj is Q_NULLPTR, returns a 1-element map [["found", false]]
 	static QVariantMap getObjectInfo(const StelObjectP obj);
 
 signals:
@@ -145,6 +154,9 @@ signals:
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
 	QList<StelObjectModule*> objectsModule;
+	QMap<QString, StelObjectModule*> typeToModuleMap;
+	QMap<QString, QString> objModulesMap;
+
 	// The last selected object in stellarium
 	QList<StelObjectP> lastSelectedObjects;
 	// Should selected object pointer be drawn

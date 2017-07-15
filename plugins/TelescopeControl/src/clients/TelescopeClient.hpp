@@ -54,6 +54,7 @@ class TelescopeClient : public QObject, public StelObject
 {
 	Q_OBJECT
 public:
+	static const QString TELESCOPECLIENT_TYPE;
 	static TelescopeClient *create(const QString &url);
 	virtual ~TelescopeClient(void) {}
 	
@@ -73,7 +74,8 @@ public:
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	QString getType(void) const {return "Telescope";}
+	QString getType(void) const {return TELESCOPECLIENT_TYPE;}
+	QString getID() const {return name;}
 	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
@@ -153,10 +155,10 @@ private:
 	Vec3d desired_pos;
 };
 
-//! This TelescopeClient class can controll a telescope by communicating
+//! This TelescopeClient class can control a telescope by communicating
 //! to a server process ("telescope server") via 
 //! the "Stellarium telescope control protocol" over TCP/IP.
-//! The "Stellarium telescope control protocol" is specified in a seperate
+//! The "Stellarium telescope control protocol" is specified in a separate
 //! document along with the telescope server software.
 class TelescopeTCP : public TelescopeClient
 {
@@ -174,7 +176,7 @@ public:
 	}
 	
 private:
-	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const;
 	bool prepareCommunication();
 	void performCommunication();
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);

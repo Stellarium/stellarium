@@ -36,6 +36,8 @@
 #include <QDebug>
 #include <QFontMetrics>
 
+const QString Constellation::CONSTELLATION_TYPE = QStringLiteral("Constellation");
+
 Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
@@ -47,14 +49,14 @@ Constellation::Constellation()
 	: numberOfSegments(0)
 	, beginSeason(0)
 	, endSeason(0)
-	, constellation(NULL)
+	, constellation(Q_NULLPTR)
 {
 }
 
 Constellation::~Constellation()
 {
 	delete[] constellation;
-	constellation = NULL;
+	constellation = Q_NULLPTR;
 }
 
 bool Constellation::read(const QString& record, StarMgr *starMgr)
@@ -198,7 +200,7 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 			return this;
 		}
 	}
-	return NULL;
+	return Q_NULLPTR;
 }
 
 void Constellation::update(int deltaTime)
@@ -287,7 +289,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	}
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(q_("constellation")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("constellation")) << "<br />";
 
 	postProcessInfoString(str, flags);
 

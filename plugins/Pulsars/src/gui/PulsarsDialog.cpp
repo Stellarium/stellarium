@@ -39,8 +39,8 @@
 
 PulsarsDialog::PulsarsDialog()
 	: StelDialog("Pulsars")
-	, psr(NULL)
-	, updateTimer(NULL)
+	, psr(Q_NULLPTR)
+	, updateTimer(Q_NULLPTR)
 {
 	ui = new Ui_pulsarsDialog;
 }
@@ -51,7 +51,7 @@ PulsarsDialog::~PulsarsDialog()
 	{
 		updateTimer->stop();
 		delete updateTimer;
-		updateTimer = NULL;
+		updateTimer = Q_NULLPTR;
 	}
 	delete ui;
 }
@@ -114,7 +114,7 @@ void PulsarsDialog::createDialogContent()
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
@@ -163,7 +163,7 @@ void PulsarsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if(gui!=Q_NULLPTR)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

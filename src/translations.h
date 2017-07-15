@@ -175,6 +175,12 @@ class Translations
 		N_("Lynds' Catalogue of Dark Nebulae");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Cederblad Catalog");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Peculiar Galaxies");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Interacting Galaxies");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Galactic Planetary Nebulae");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -190,6 +196,8 @@ class Translations
 		N_("Bright double stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright variable stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright stars with high proper motion");
 		
 		// =====================================================================
 		// Constellation cultures
@@ -200,11 +208,15 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
 		// TRANSLATORS: Name of the sky culture
+		N_("Belarusian");
+		// TRANSLATORS: Name of the sky culture
 		N_("Boorong");
 		// TRANSLATORS: Name of the sky culture
 		N_("Chinese");
 		// TRANSLATORS: Name of the sky culture
 		N_("Egyptian");
+		// TRANSLATORS: Name of the sky culture
+		N_("Hawaiian Starlines");
 		// TRANSLATORS: Name of the sky culture
 		N_("Inuit");
 		// TRANSLATORS: Name of the sky culture
@@ -229,8 +241,6 @@ class Translations
 		N_("Norse");
 		// TRANSLATORS: Name of the sky culture
 		N_("Ojibwe");
-		// TRANSLATORS: Name of the sky culture
-		N_("Polynesian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Romanian");
 		// TRANSLATORS: Name of the sky culture
@@ -328,8 +338,6 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Transit of Venus");
 		// TRANSLATORS: Name of script
-		N_("Analemma");
-		// TRANSLATORS: Name of script
 		N_("Sky Culture Tour");
 		// TRANSLATORS: Name and description of script
 		N_("Earth Events from Mercury");
@@ -386,7 +394,6 @@ class Translations
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
-		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
 		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
@@ -398,7 +405,7 @@ class Translations
 		N_("A tour around objects from the Herschel 400 Catalogue");
 		N_("Ben Crowell has created Binosky, an observing list of Deep Sky Objects for Binoculars. In the script we give a list of these 31 objects, ordered by Right Ascension (2000.0).");
 		N_("The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). The Bennett catalog was contributed by Auke Slotegraaf.");
-		N_("This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ. for the Best of the NGC achievement award.");
+		N_("This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC achievement award.");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)

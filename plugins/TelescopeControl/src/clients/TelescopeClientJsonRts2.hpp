@@ -40,16 +40,18 @@ public:
 	~TelescopeClientJsonRts2(void);
 	virtual bool isConnected(void) const;
 
-	Vec3d getJ2000EquatorialPos(const StelCore* core=0) const;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const;
 
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject);
 	bool hasKnownPosition(void) const;
 
 protected:
+	void timerEvent(QTimerEvent *event);
 	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 
 private:
 	QNetworkAccessManager networkManager;
+	QNetworkRequest cfgRequest;
 	Equinox equinox;
 	QUrl baseurl;
 	QString telName;
@@ -59,15 +61,20 @@ private:
 	double telAltitude;
 	double telTargetDist;
 	QNetworkRequest request;
-	Vec3d position;
+	Vec3d lastPos;
 	InterpolatedPosition interpolatedPosition;
 	int time_delay;
+	int reconnectTimer;
+	int refresh_delay;
+	qint64 server_micros;
 
 	TelescopeControl *telescopeManager;
 
+	void getReadOnly();
 	void setReadOnly(bool readonly);
 
 private slots:
+	void refreshTimer();
 	void replyFinished(QNetworkReply *reply);
 };
 

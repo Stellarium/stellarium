@@ -58,7 +58,7 @@ HelpDialog::HelpDialog(QObject* parent)
 HelpDialog::~HelpDialog()
 {
 	delete ui;
-	ui = NULL;
+	ui = Q_NULLPTR;
 }
 
 void HelpDialog::retranslate()
@@ -184,7 +184,7 @@ void HelpDialog::updateHelpText(void)
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Shift & left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete one custom marker
-	htmlText += "<tr><td>" + q_("Delete the one closest marker to mouse cursor").toHtmlEscaped() + "</td>";
+	htmlText += "<tr><td>" + q_("Delete marker closest to mouse cursor").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Shift & right click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete all custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
@@ -279,12 +279,12 @@ void HelpDialog::updateAboutText(void)
 		     << "Roland Bosa" << "Łukasz 'sil2100' Zemczak" << "Gábor Péterffy"
 		     << "Mircea Lite" << "Alexey Dokuchaev" << "William Formyduval" << "Daniel De Mickey"
 		     << "François Scholder" << "Anton Samoylov" << "Mykyta Sytyi" << "Shantanu Agarwal"
-		     << "Teemu Nätkinniemi" << "Kutaibaa Akraa" << "J.L.Canales" << "Froenchenko Leonid"
+		     << "Teemu Nätkinniemi" << "Kutaibaa Akraa" << "J.L.Canales" << "Leonid Froenchenko"
 		     << "Peter Mousley" << "Greg Alexander" << "Yuri Chornoivan" << "Daniel Michalik"
 		     << "Hleb Valoshka" << "Matthias Drochner" << "Kenan Dervišević" << "Alex Gamper"
 		     << "Volker Hören" << "Max Digruber" << "Dan Smale" << "Victor Reijs"
 		     << "Tanmoy Saha" << "Oleg Ginzburg" << "Peter Hickey" << "Bernd Kreuss"
-		     << "Alexander Miller" << "Maciej Serylak" << "Eleni Maria Stea" << "Kirill Snezhko"
+		     << "Alexander Miller" << "Eleni Maria Stea" << "Kirill Snezhko"
 		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Allan Johnson"
 		     << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell" << "David Baucum"
 		     << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony" << "Tony Furr"

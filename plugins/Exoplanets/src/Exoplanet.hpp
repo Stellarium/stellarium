@@ -60,6 +60,8 @@ class Exoplanet : public StelObject
 {
 	friend class Exoplanets;
 public:
+	static const QString EXOPLANET_TYPE;
+
 	//! @param id The official designation for a exoplanet, e.g. "Kepler-10 b"
 	Exoplanet(const QVariantMap& map);
 	~Exoplanet();
@@ -71,7 +73,12 @@ public:
 	//! Get the type of object
 	virtual QString getType(void) const
 	{
-		return "Exoplanet";
+		return EXOPLANET_TYPE;
+	}
+
+	virtual QString getID(void) const
+	{
+		return getDesignation();
 	}
 
 	virtual float getSelectPriority(const StelCore* core) const;

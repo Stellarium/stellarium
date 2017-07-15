@@ -37,7 +37,7 @@ public:
 	//! and an APIController.
 	//!
 	//! To see the default services that are registered here, see \ref rcApiReference.
-	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = 0);
+	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = Q_NULLPTR);
 	//! The internal APIController, and all registered services are deleted
 	virtual ~RequestHandler();
 
@@ -71,6 +71,8 @@ public slots:
 
 private slots:
 	void refreshTemplates();
+
+	void addExtensionServices(QObjectList services);
 
 private:
 	//Contains the translated templates loaded from the file "translate_files" in the webroot folder

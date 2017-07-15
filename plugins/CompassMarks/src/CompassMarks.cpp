@@ -60,7 +60,7 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 CompassMarks::CompassMarks()
 	: displayedAtStartup(false)
 	, markColor(1,1,1)
-	, toolbarButton(NULL)
+	, toolbarButton(Q_NULLPTR)
 	, cardinalPointsState(false)
 {
 	setObjectName("CompassMarks");
@@ -95,9 +95,9 @@ void CompassMarks::init()
 		addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
 
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui != NULL)
+		if (gui != Q_NULLPTR)
 		{
-			toolbarButton = new StelButton(NULL,
+			toolbarButton = new StelButton(Q_NULLPTR,
 						       QPixmap(":/compassMarks/bt_compass_on.png"),
 						       QPixmap(":/compassMarks/bt_compass_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
@@ -154,7 +154,7 @@ void CompassMarks::draw(StelCore* core)
 		// Limit arcs to those that are visible for improved performance
 		if (prj->project(pos, screenPos) && 
 		     screenPos[0]>prj->getViewportPosX() && screenPos[0] < prj->getViewportPosX() + prj->getViewportWidth()) {
-			painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
+			painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), Q_NULLPTR);
 		}
 	}
 	painter.setBlending(false);

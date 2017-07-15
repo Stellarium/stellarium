@@ -239,14 +239,14 @@ private:
 	//! Creates the sub-menu listing telescopes in the pop-up menu.
 	QMenu* addTelescopeSubmenu(QMenu* parent);
 
-	//! Returns selected lens,or NULL if no lens is selected
+	//! Returns selected lens,or Q_NULLPTR if no lens is selected
 	Lens* selectedLens();
 
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
-	QList<Lens *> lense;
+	QList<Lens *> lenses;
 
 	int selectedCCDIndex; //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
 	int selectedOcularIndex; //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.
@@ -286,7 +286,9 @@ private:
 	bool flagDecimalDegrees;
 	bool flagSemiTransparency;
 	bool flagHideGridsLines;
-	bool flagGridlinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
+	bool flagGridLinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
+	bool flagConstellationLines;
+	bool flagAsterismLines;
 	bool flipVert;
 	bool flipHorz;
 
@@ -294,7 +296,7 @@ private:
 	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
 	QSignalMapper * ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
 	QSignalMapper * telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
-	QSignalMapper * lenseSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
+	QSignalMapper * lensesSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
 
 	// for toolbar button
 	QPixmap * pxmapGlow;
@@ -343,6 +345,7 @@ class OcularsStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const;
 	virtual StelPluginInfo getPluginInfo() const;
+	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
 #endif /*_OCULARS_HPP_*/

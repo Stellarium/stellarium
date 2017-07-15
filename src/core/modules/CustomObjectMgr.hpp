@@ -58,13 +58,15 @@ public:
 	//! @return an list containing the satellites located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or NULL.
+	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensistive satellite name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or NULL.
+	//! Return the matching satellite if exists or Q_NULLPTR.
 	//! @param name The case in-sensistive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	virtual StelObjectP searchByID(const QString &id) const { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -74,6 +76,7 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Custom Objects"; }
+	virtual QString getStelObjectType() const { return CustomObject::CUSTOMOBJECT_TYPE; }
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
 	//! @return set the event as accepted if it was intercepted
@@ -84,7 +87,7 @@ public slots:
 	// Other public methods
 	//! Get a pointer to a custom object.
 	//! @param customObjectEnglishName the English name of the desired object.
-	//! @return The matching custom object pointer if exists or NULL.
+	//! @return The matching custom object pointer if exists or Q_NULLPTR.
 	CustomObjectP searchByEnglishName(QString customObjectEnglishName) const;
 
 	//! Add custom object on the sky

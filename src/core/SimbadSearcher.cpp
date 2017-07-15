@@ -27,7 +27,7 @@
 
 SimbadLookupReply::SimbadLookupReply(const QString& aurl, QNetworkAccessManager* anetMgr, int delayMs)
 	: url(aurl)
-	, reply(NULL)
+	, reply(Q_NULLPTR)
 	, netMgr(anetMgr)
 	, currentStatus(SimbadLookupQuerying)
 {
@@ -48,7 +48,7 @@ SimbadLookupReply::~SimbadLookupReply()
 		reply->abort();
 		//do not use delete here
 		reply->deleteLater();
-		reply = NULL;
+		reply = Q_NULLPTR;
 	}
 }
 
@@ -60,7 +60,7 @@ void SimbadLookupReply::deleteNetworkReply()
 		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 		reply->abort();
 		delete reply;
-		reply = NULL;
+		reply = Q_NULLPTR;
 	}
 }
 
