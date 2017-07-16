@@ -2114,9 +2114,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 		foreach(PlanetP p, systemPlanets)
 		{
 			if(p == moon) continue;
-			if (p->getPlanetType()!=Planet::isPlanet
-					&& p->getPlanetType()!=Planet::isStar
-					)
+			if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
 				p->setSphereScale(newScale);
 		}
 		emit flagMinorBodyScaleChanged(b);
@@ -2134,9 +2132,7 @@ void SolarSystem::setMinorBodyScale(double f)
 			foreach(PlanetP p, systemPlanets)
 			{
 				if(p == moon) continue;
-				if (p->getPlanetType()!=Planet::isPlanet
-						&& p->getPlanetType()!=Planet::isStar
-						)
+				if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
 					p->setSphereScale(minorBodyScale);
 			}
 		}
