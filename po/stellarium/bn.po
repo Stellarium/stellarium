@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-15 00:48+0700\n"
-"PO-Revision-Date: 2017-07-14 17:38+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2017-07-15 14:06+0000\n"
+"Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-15 05:09+0000\n"
+"X-Launchpad-Export-Date: 2017-07-16 04:35+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 "Language: bn\n"
 
@@ -413,7 +413,7 @@ msgstr "উজ্জ্বলতা"
 
 #: src/core/modules/Nebula.cpp:215
 msgid "Opacity"
-msgstr ""
+msgstr "স্বচ্ছতা"
 
 #: src/core/modules/Nebula.cpp:218 src/core/modules/Planet.cpp:383
 #: src/core/modules/MinorPlanet.cpp:228 src/core/modules/Comet.cpp:176
@@ -422,16 +422,16 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "extincted to"
-msgstr ""
+msgstr "হ্রাস পেয়ে"
 
 #: src/core/modules/Nebula.cpp:223 src/core/modules/StarWrapper.cpp:228
 msgid "Photometric system"
-msgstr ""
+msgstr "আলোকমিতি ব্যবস্থায়"
 
 #: src/core/modules/Nebula.cpp:228 src/core/modules/StarWrapper.cpp:66
 #: src/core/modules/StarWrapper.cpp:210 plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "বর্নাঙ্ক (নীল-দৃশ্যমান)"
 
 #: src/core/modules/Nebula.cpp:233
 msgid "Surface brightness"
@@ -458,7 +458,7 @@ msgstr "আর্ক সে"
 
 #: src/core/modules/Nebula.cpp:260
 msgid "Contrast index"
-msgstr ""
+msgstr "দৃশ্যমানতা গুণাঙ্ক"
 
 #: src/core/modules/Nebula.cpp:269 src/core/modules/Nebula.cpp:272
 #: src/ui_configurationDialog.h:1356
@@ -467,7 +467,7 @@ msgstr "আকার"
 
 #: src/core/modules/Nebula.cpp:274
 msgid "Orientation angle"
-msgstr ""
+msgstr "কৌণিক স্থিতি"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298 src/core/modules/Nebula.cpp:311
@@ -507,15 +507,15 @@ msgstr "মিলিয়ন আলোকবর্ষ"
 
 #: src/core/modules/Nebula.cpp:348
 msgid "Redshift"
-msgstr ""
+msgstr "লোহিত সরণ"
 
 #: src/core/modules/Nebula.cpp:359 src/core/modules/StarWrapper.cpp:249
 msgid "Parallax"
-msgstr ""
+msgstr "লম্বন"
 
 #: src/core/modules/Nebula.cpp:363
 msgid "Morphological description"
-msgstr ""
+msgstr "গঠনগত বৈশিষ্ট্য"
 
 #: src/core/modules/Nebula.cpp:982
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -899,7 +899,7 @@ msgstr "পছন্দসই মহাজাগতিক জ্যোতিষ�
 #: src/core/modules/MinorPlanet.cpp:243 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:206 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "প্রমান উজ্জ্ব্যলতা"
 
 #: src/core/modules/Planet.cpp:392
 #, qt-format
@@ -914,14 +914,14 @@ msgstr "গড় প্রতিযোগ ঔজ্জ্বল্যতা : %1"
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "জ্যোঃ এঃ"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:193
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "কিমি"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -929,35 +929,35 @@ msgstr ""
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
-msgstr ""
+msgstr "মিলিয়ন কিমি"
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:270
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
-msgstr ""
+msgstr "সূর্য থেকে দূরত্ব"
 
 #: src/core/modules/Planet.cpp:470
 msgid "with rings"
-msgstr ""
+msgstr "বলয় সহ"
 
 #: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:306
 msgid "scaled up to"
-msgstr ""
+msgstr "বিবর্ধিত হয়ে"
 
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:316
 msgid "Apparent diameter"
-msgstr ""
+msgstr "আপাত ব্যাস"
 
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:325
 #: src/core/modules/StarWrapper.cpp:252
 msgctxt "duration"
 msgid "days"
-msgstr ""
+msgstr "দিন"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:327
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
-msgstr ""
+msgstr "বার্ষিক গতি"
 
 #: src/core/modules/Planet.cpp:516
 msgid "Sidereal day"
@@ -965,7 +965,7 @@ msgstr "দিন (আহ্নিক গতি অনুসারে)"
 
 #: src/core/modules/Planet.cpp:517
 msgid "Mean solar day"
-msgstr ""
+msgstr "গড় সৌরদিন"
 
 #: src/core/modules/Planet.cpp:521
 msgid "The period of rotation is chaotic"
@@ -1025,11 +1025,11 @@ msgstr "দ্রাঘন"
 
 #: src/core/modules/Planet.cpp:571
 msgid "Illuminated"
-msgstr ""
+msgstr "দৃশ্যমান অংশ"
 
 #: src/core/modules/Planet.cpp:572
 msgid "Albedo"
-msgstr ""
+msgstr "প্রতিফলনানুপাত"
 
 #: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1626
 #: src/gui/AstroCalcDialog.cpp:1661
@@ -1038,7 +1038,7 @@ msgstr "দশা"
 
 #: src/core/modules/Planet.cpp:587
 msgid "Eclipse Factor"
-msgstr ""
+msgstr "গ্রহণের পরিমান"
 
 #: src/core/modules/MinorPlanet.cpp:214
 #, qt-format
@@ -1059,19 +1059,19 @@ msgstr "পর্যায়ক্রমিক"
 #: src/core/modules/Comet.cpp:245
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "কিমি/সে"
 
 #: src/core/modules/Comet.cpp:247
 msgid "Speed"
-msgstr ""
+msgstr "গতিবেগ"
 
 #: src/core/modules/Comet.cpp:272
 msgid "Coma diameter (estimate)"
-msgstr ""
+msgstr "ধূমকেতুর মাথার ব্যাস (মোটামুটি)"
 
 #: src/core/modules/Comet.cpp:273
 msgid "Gas tail length (estimate)"
-msgstr ""
+msgstr "গ্যাস লেজের দৈর্ঘ্য (মোটামুটি)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1188
@@ -1136,12 +1136,12 @@ msgstr "দ্বৈত নক্ষত্র"
 
 #: src/core/modules/StarWrapper.cpp:228
 msgid "Magnitude range"
-msgstr ""
+msgstr "উজ্জ্ব্যলতার পরিধি"
 
 #: src/core/modules/StarWrapper.cpp:246
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Spectral Type"
-msgstr ""
+msgstr "বর্নালী"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:343
@@ -1150,19 +1150,19 @@ msgstr "পর্যায়কাল"
 
 #: src/core/modules/StarWrapper.cpp:260
 msgid "Next maximum light"
-msgstr ""
+msgstr "পরবর্তী সর্বোচ্চ উজ্জ্ব্যলতা"
 
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Next minimum light"
-msgstr ""
+msgstr "পরবর্তী সর্বনিম্ন উজ্জ্ব্যলতা"
 
 #: src/core/modules/StarWrapper.cpp:269
 msgid "Rising time"
-msgstr ""
+msgstr "উদয়"
 
 #: src/core/modules/StarWrapper.cpp:271
 msgid "Duration of eclipse"
-msgstr ""
+msgstr "গ্রহণের সময়কাল"
 
 #: src/core/modules/StarWrapper.cpp:278
 msgid "Position angle"
@@ -1963,37 +1963,37 @@ msgstr "(আপাত)"
 #: src/core/StelObject.cpp:177
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
-msgstr ""
+msgstr "বিষুবাংশ / বিষুবলম্ব"
 
 #. TRANSLATORS: Hour angle/Declination
 #: src/core/StelObject.cpp:266
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
-msgstr ""
+msgstr "ঘন্টাকোণ / বিষুবলম্ব"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:316
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
-msgstr ""
+msgstr "দিগংশ / উন্নতি"
 
 #. TRANSLATORS: Galactic longitude/latitude
 #: src/core/StelObject.cpp:342
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
-msgstr ""
+msgstr "ছায়াপথীয় দ্রাঘিমাংশ / অক্ষাংশ"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
 #: src/core/StelObject.cpp:368
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
-msgstr ""
+msgstr "নক্ষত্রলোকীয় দ্রাঘিমাংশ / অক্ষাংশ"
 
 #. TRANSLATORS: Ecliptic longitude/latitude
 #: src/core/StelObject.cpp:386
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "সৌরপথীয় দ্রাঘিমাংশ / অক্ষাংশ"
 
 #: src/core/StelObject.cpp:451
 msgid "Ecliptic obliquity"
@@ -2001,15 +2001,15 @@ msgstr "অক্ষের তীর্যকতা"
 
 #: src/core/StelObject.cpp:470
 msgid "Mean Sidereal Time"
-msgstr ""
+msgstr "গড় নাক্ষত্রিক সময়"
 
 #: src/core/StelObject.cpp:485
 msgid "Apparent Sidereal Time"
-msgstr ""
+msgstr "আপাত নাক্ষত্রিক সময়"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr ""
+msgstr "আঃজ্যোঃসঃ নক্ষত্রমন্ডল"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -7167,7 +7167,7 @@ msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক"
 
 #: src/ui_configurationDialog.h:1360
 msgid "Azimuth/Altitude"
-msgstr ""
+msgstr "দিগংশ / উন্নতি"
 
 #: src/ui_configurationDialog.h:1361
 msgid "Catalog number(s)"
@@ -7237,11 +7237,11 @@ msgstr "উজ্জ্ব্যলতা/আর্ক সে^2 এককে প
 
 #: src/ui_configurationDialog.h:1390
 msgid "Use formatting output for coordinates"
-msgstr ""
+msgstr "স্থানাঙ্ক পরপর সাজিয়ে প্রদর্শন"
 
 #: src/ui_configurationDialog.h:1391
 msgid "Use designations for celestial coordinate systems"
-msgstr ""
+msgstr "স্থানাঙ্কের প্রতীক ব্যবহার"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Control"
@@ -9517,7 +9517,7 @@ msgstr "কৃত্রিম উপগ্রহ"
 
 #: plugins/Satellites/src/Satellite.cpp:290
 msgid "Approx. magnitude"
-msgstr ""
+msgstr "আপাত উজ্জ্ব্যলতা"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
@@ -12108,11 +12108,11 @@ msgstr "অতিনোভা"
 
 #: plugins/Supernovae/src/Supernova.cpp:149
 msgid "Type of supernova"
-msgstr ""
+msgstr "অতিনোভার ধরন"
 
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:163
 msgid "Maximum brightness"
-msgstr ""
+msgstr "সর্বোচ্চ উজ্জ্ব্যলতা"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
@@ -13136,12 +13136,12 @@ msgstr "ব্যাসার্ধ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgid "Effective temperature"
-msgstr ""
+msgstr "কর্যকরী উষ্ণতা"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgctxt "temperature"
 msgid "K"
-msgstr ""
+msgstr "কেলভিন"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 msgid "Exoplanet"
