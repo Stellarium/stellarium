@@ -42,7 +42,12 @@ various modules of Stellarium, and also activated plugins, can be
 called in scripts to calculate, move the scene, switch on and off
 display of objects, etc.  You can write text output into text files
 with the \command{output()} command.  You can call all public slots
-which are documented in the scripting API documentation\footnote{\url{http://www.stellarium.org/doc/0.15.0/scripting.html}}.
+which are documented in the scripting API documentation\footnote{%
+% Give current version in production PDFs, and at least some valid version in betas.
+\ifthenelse{\equal{\StelVersion}{0.90.0}}%
+	{\url{http://www.stellarium.org/doc/0.16.0/scripting.html}}%
+	{\url{http://www.stellarium.org/doc/\StelVersion/scripting.html}}%
+}.
 
 
 \section{Script Console}
@@ -66,12 +71,13 @@ include("common_objects.inc");
 
 \section{Minimal Scripts}
 \label{sec:scripting:MinimalScript}
-This script prints ``Hello Universe'' in the Script Console log window and into \file{log.txt}. 
+This script prints ``Hello Universe'' in the Script Console log window and into \file{log.txt}:
 \begin{script}
 core.debug("Hello Universe");
 \end{script}
 
-\noindent This script prints ``Hello Universe'' in the Script Console output window and \file{output.txt}. 
+\noindent This script prints ``Hello Universe'' in the Script Console output window and into the file \file{output.txt} 
+which you will also find in the user data directory. The absolute path to the file will also be given in \file{log.txt}.
 \begin{script}
 core.output("Hello Universe");
 \end{script}
@@ -108,7 +114,7 @@ planet Mars (Fig.~\ref{fig:Mars2005}).
 \label{fig:Mars2005}
 \end{figure}
 
-\subsection{Script header...}
+\subsection{Script header}
 Any ``complex'' script should contain a few lines in the first part 
 of the file, which contains important data for humans --- the 
 name of the script and its description --- and some rules for 
@@ -128,7 +134,7 @@ and should therefore be the last entry of the header.
 //
 \end{script}
 
-\subsection{A body of script...}
+\subsection{A body of script}
 At the first stage of writing of the script for a demo of 
 retrograde motion of Mars we should set some limits for 
 our demo. For example we want to see motion of Mars every 
@@ -189,7 +195,7 @@ core.setGuiVisible(true);
 \end{script}
 
 It's better, but let's draw the ``path'' of Mars! Add 
-those line before loop:
+those line before the loop:
 \begin{script}
 core.selectObjectByName("Mars", false);
 SolarSystem.setFlagIsolatedTrails(true);
