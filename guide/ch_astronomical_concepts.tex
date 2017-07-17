@@ -1017,21 +1017,22 @@ If you want to simulate the effect of proper motion with Stellarium,
 put the map into equatorial view mode, switch off ground and cardinal
 marks, and set some high time lapse speed. You will see a few stars
 change their locations quite soon, those are usually stars in our
-galactic neighbourhood.
+galactic neighbourhood (see section~\ref{sec:Exercises:ProperMotion}).
 
 Note however some limitations:
 \begin{enumerate}
 \item Stellarium will stop at $\pm 100.000$ years. This limit may be
-  still suitable for the stellar locations. The planetary locations
-  are not trustworthy outside of a much closer temporal window (see
+  still suitable for most stellar locations. The planetary locations
+  are not trustworthy outside of a much narrower temporal window (see
   section~\ref{ch:Accuracy}). You cannot simulate the sky over the
   dinosaurs or such things.
 \item Proper motion is only modelled by the linear components. True 3D
   motion in space requires more computation, which would slow down the
   program.
 \item Double stars are listed in catalogs as two individual stars with
-  their current proper motion. They may be seen flying apart, which is
-  of course not realistic.
+  their current proper motion which consists of spatial motion and the 
+  orbital motion around their center of gravity. They may be seen flying 
+  apart, which is of course not realistic.
 \end{enumerate}
 
 %%% Local Variables: 
