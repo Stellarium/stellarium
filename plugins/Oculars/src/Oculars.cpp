@@ -2209,7 +2209,11 @@ void Oculars::zoomOcular()
 			diameter = ocular->fieldStop();
 		else
 			diameter = telescope!=Q_NULLPTR ? telescope->diameter() : 0.; // Avoid a potential call of null pointer
-		double limitMag = 2.1 + 5*std::log10(diameter); // TODO: document source of this formula!
+		
+		// A better formula for telescopic limiting magnitudes?
+		// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
+		// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
+		double limitMag = 4.5 + 4.4*std::log10(diameter);
 
 		skyDrawer->setFlagStarMagnitudeLimit(true);
 		skyDrawer->setFlagNebulaMagnitudeLimit(true);
