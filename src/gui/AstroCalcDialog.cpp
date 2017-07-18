@@ -32,6 +32,10 @@
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 
+#ifdef USE_STATIC_PLUGIN_SATELLITES
+#include "../plugins/Satellites/src/Satellites.hpp"
+#endif
+
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
 #include "external/qcustomplot/qcustomplot.h"
@@ -1240,6 +1244,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+
 	if (!selectedObjects.isEmpty())
 	{
 		// X axis - time; Y axis - altitude
@@ -1254,11 +1259,20 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		double shift = core->getUTCOffset(currentJD)/24.0;
 		double xMaxY = -100.f;
-		for(int i=-5;i<=485;i++) // 24 hours + 15 minutes in both directions
+		int step = 180;
+		int limit = 485;
+		bool isSatellite = false;
+		if (selectedObject->getType()=="Satellite") // Reduce accuracy for satellites
+		{
+			limit = 121;
+			step = 720;
+			isSatellite = true;
+		}
+		for(int i=-5;i<=limit;i++) // 24 hours + 15 minutes in both directions
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
-			double ltime = i*180 + 43200;
+			double ltime = i*step + 43200;
 			aX.append(ltime);
 			double JD = noon + ltime/86400 - shift - 0.5;
 			core->setJD(JD);
@@ -1273,7 +1287,14 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				transitX = ltime;
 			}
 
-			core->update(0.0);
+			if (isSatellite)
+			{
+				#ifdef USE_STATIC_PLUGIN_SATELLITES
+				GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
+				#endif
+			}
+			else
+				core->update(0.0);
 		}
 		core->setJD(currentJD);
 
@@ -1297,15 +1318,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		if (name.isEmpty() && selectedObject->getType()=="Nebula")
 			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
 
-		// FIXME: Satellites have different values for equatorial coordinates and same values for horizontal coordinates - a caching?
-		// NOTE: Drawing a line of transit time was added to else block to avoid troubles with satellites.
-		if (selectedObject->getType()=="Satellite")
-		{
-			x.clear();
-			y.clear();
-		}
-		else
-			drawTransitTimeDiagram();
+		drawTransitTimeDiagram();
 
 		ui->altVsTimePlot->graph(0)->setData(x, y);
 		ui->altVsTimePlot->graph(0)->setName(name);
