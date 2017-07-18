@@ -135,6 +135,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldMagnification = new QGraphicsTextItem(telescopeControls);
 	fieldExitPupil = new QGraphicsTextItem(telescopeControls);
 	fieldFov = new QGraphicsTextItem(telescopeControls);
+	fieldRayleighCriterion = new QGraphicsTextItem(telescopeControls);
+	fieldDawesCriterion = new QGraphicsTextItem(telescopeControls);
+	fieldAbbeyCriterion = new QGraphicsTextItem(telescopeControls);
+	fieldSparrowCriterion = new QGraphicsTextItem(telescopeControls);
 
 	fieldLensName = new QGraphicsTextItem(lensControls);
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
@@ -162,6 +166,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldMagnification->setTextWidth(maxWidth);
 	fieldExitPupil->setTextWidth(maxWidth);
 	fieldFov->setTextWidth(maxWidth);
+	fieldRayleighCriterion->setTextWidth(maxWidth);
+	fieldDawesCriterion->setTextWidth(maxWidth);
+	fieldAbbeyCriterion->setTextWidth(maxWidth);
+	fieldSparrowCriterion->setTextWidth(maxWidth);
 
 	fieldLensName->setTextWidth(maxWidth);
 	fieldLensMultipler->setTextWidth(maxWidth);
@@ -512,13 +520,16 @@ void OcularsGuiPanel::updateOcularControls()
 	Q_ASSERT(ocular);
 	QString name = ocular->name();
 	QString fullName;
+	QString ocularI18n = q_("Ocular");
+	if (ocular->isBinoculars())
+		ocularI18n = q_("Binocular");
 	if (name.isEmpty())
 	{
-		fullName = QString(q_("Ocular #%1")).arg(index);
+		fullName = QString("%1 #%2").arg(ocularI18n).arg(index);
 	}
 	else
 	{
-		fullName = QString(q_("Ocular #%1: %2")).arg(index).arg(name);
+		fullName = QString("%1 #%2: %3").arg(ocularI18n).arg(index).arg(name);
 	}
 	fieldOcularName->setPlainText(fullName);
 
@@ -877,10 +888,11 @@ void OcularsGuiPanel::updateTelescopeControls()
 			widgetHeight += fieldExitPupil->boundingRect().height();
 		}
 
-		QString fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 1) + QChar(0x00B0);
+		QString fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 4) + QChar(0x00B0);
 		QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
 		fieldFov->setPlainText(fovLabel);
 		fieldFov->setPos(posX, posY);
+		posY += fieldFov->boundingRect().height();
 		widgetHeight += fieldFov->boundingRect().height();
 
 		fieldMagnification->setVisible(true);
@@ -899,6 +911,51 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldMagnification->setVisible(false);
 		fieldFov->setVisible(false);
 		fieldExitPupil->setVisible(false);
+	}
+
+	double diameter = telescope->diameter();
+	if (diameter>0.0 && ocularsPlugin->getFlagShowResolutionCriterions())
+	{
+		QString rayleighLabel = QString("%1: %2\"").arg(q_("Rayleigh criterion")).arg(QString::number(138/diameter, 'f', 2));
+		fieldRayleighCriterion->setPlainText(rayleighLabel);
+		fieldRayleighCriterion->setToolTip(q_("Rayleigh resolution criterion"));
+		fieldRayleighCriterion->setPos(posX, posY);
+		posY += fieldRayleighCriterion->boundingRect().height();
+		widgetHeight += fieldRayleighCriterion->boundingRect().height();
+
+		QString dawesLabel = QString("%1: %2\"").arg(q_("Dawes criterion")).arg(QString::number(116/diameter, 'f', 2));
+		fieldDawesCriterion->setPlainText(dawesLabel);
+		fieldDawesCriterion->setToolTip(q_("Dawes resolution criterion"));
+		fieldDawesCriterion->setPos(posX, posY);
+		posY += fieldDawesCriterion->boundingRect().height();
+		widgetHeight += fieldDawesCriterion->boundingRect().height();
+
+		QString abbeyLabel = QString("%1: %2\"").arg(q_("Abbey limit")).arg(QString::number(113/diameter, 'f', 2));
+		fieldAbbeyCriterion->setPlainText(abbeyLabel);
+		fieldAbbeyCriterion->setToolTip(q_("Abbey resolution limit"));
+		fieldAbbeyCriterion->setPos(posX, posY);
+		posY += fieldAbbeyCriterion->boundingRect().height();
+		widgetHeight += fieldAbbeyCriterion->boundingRect().height();
+
+		QString sparrowLabel = QString("%1: %2\"").arg(q_("Sparrow criterion")).arg(QString::number(108/diameter, 'f', 2));
+		fieldSparrowCriterion->setPlainText(sparrowLabel);
+		fieldSparrowCriterion->setToolTip(q_("Sparrow resolution criterion"));
+		fieldSparrowCriterion->setPos(posX, posY);
+		posY += fieldSparrowCriterion->boundingRect().height();
+		widgetHeight += fieldSparrowCriterion->boundingRect().height();
+
+
+		fieldRayleighCriterion->setVisible(true);
+		fieldDawesCriterion->setVisible(true);
+		fieldAbbeyCriterion->setVisible(true);
+		fieldSparrowCriterion->setVisible(true);
+	}
+	else
+	{
+		fieldRayleighCriterion->setVisible(false);
+		fieldDawesCriterion->setVisible(false);
+		fieldAbbeyCriterion->setVisible(false);
+		fieldSparrowCriterion->setVisible(false);
 	}
 
 	telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
@@ -1053,6 +1110,10 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldMagnification);
 	Q_ASSERT(fieldExitPupil);
 	Q_ASSERT(fieldFov);
+	Q_ASSERT(fieldRayleighCriterion);
+	Q_ASSERT(fieldDawesCriterion);
+	Q_ASSERT(fieldAbbeyCriterion);
+	Q_ASSERT(fieldSparrowCriterion);
 	Q_ASSERT(fieldLensName);
 	Q_ASSERT(fieldLensMultipler);
 
@@ -1068,6 +1129,10 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldMagnification->setDefaultTextColor(color);
 	fieldFov->setDefaultTextColor(color);
 	fieldExitPupil->setDefaultTextColor(color);
+	fieldRayleighCriterion->setDefaultTextColor(color);
+	fieldDawesCriterion->setDefaultTextColor(color);
+	fieldAbbeyCriterion->setDefaultTextColor(color);
+	fieldSparrowCriterion->setDefaultTextColor(color);
 	fieldLensName->setDefaultTextColor(color);
 	fieldLensMultipler->setDefaultTextColor(color);
 }
@@ -1086,6 +1151,10 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldMagnification);
 	Q_ASSERT(fieldExitPupil);
 	Q_ASSERT(fieldFov);
+	Q_ASSERT(fieldRayleighCriterion);
+	Q_ASSERT(fieldDawesCriterion);
+	Q_ASSERT(fieldAbbeyCriterion);
+	Q_ASSERT(fieldSparrowCriterion);
 	Q_ASSERT(fieldLensName);
 	Q_ASSERT(fieldLensMultipler);
 
@@ -1101,6 +1170,10 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldMagnification->setFont(font);
 	fieldFov->setFont(font);
 	fieldExitPupil->setFont(font);
+	fieldRayleighCriterion->setFont(font);
+	fieldDawesCriterion->setFont(font);
+	fieldAbbeyCriterion->setFont(font);
+	fieldSparrowCriterion->setFont(font);
 	fieldLensName->setFont(font);
 	fieldLensMultipler->setFont(font);
 }
