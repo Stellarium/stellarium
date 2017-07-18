@@ -114,6 +114,11 @@ private:
 	QGraphicsTextItem* fieldMagnification;
 	QGraphicsTextItem* fieldExitPupil;
 	QGraphicsTextItem* fieldFov;
+	QGraphicsTextItem* fieldRayleighCriterion;
+	QGraphicsTextItem* fieldDawesCriterion;
+	QGraphicsTextItem* fieldAbbeyCriterion;
+	QGraphicsTextItem* fieldSparrowCriterion;
+
 
 	//Sensor frame rotation controls
 	StelButton* rotateCcdMinus15Button;
