@@ -328,6 +328,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
 	connect(ui->checkBoxInitialDirection, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitDirectionUsage(bool)));
 	connect(ui->checkBoxTypeOfMount, SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
+	connect(ui->checkBoxResolutionCriterion, SIGNAL(clicked(bool)), plugin, SLOT(setFlagShowResolutionCriterions(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -473,6 +474,10 @@ void OcularDialog::createDialogContent()
 	if (settings->value("hide_grids_and_lines", true).toBool())
 	{
 		ui->hideGridsLinesCheckBox->setChecked(true);
+	}
+	if (settings->value("show_resolution_criterions", true).toBool())
+	{
+		ui->checkBoxResolutionCriterion->setChecked(true);
 	}
 }
 

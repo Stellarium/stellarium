@@ -161,6 +161,7 @@ Oculars::Oculars():
 	flagInitFOVUsage(false),
 	flagInitDirectionUsage(false),
 	flagAutosetMountForCCD(false),
+	flagShowResolutionCriterions(false),
 	equatorialMountEnabled(false),
 	reticleRotation(0.)
 {
@@ -655,6 +656,7 @@ void Oculars::init()
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
+		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
@@ -1837,13 +1839,16 @@ void Oculars::paintText(const StelCore* core)
 	{
 		QString ocularNumberLabel;
 		QString name = ocular->name();
+		QString ocularI18n = q_("Ocular");
+		if (ocular->isBinoculars())
+			ocularI18n = q_("Binocular");
 		if (name.isEmpty())
 		{
-			ocularNumberLabel = QString(q_("Ocular #%1")).arg(selectedOcularIndex);
+			ocularNumberLabel = QString("%1 #%2").arg(ocularI18n).arg(selectedOcularIndex);
 		}
 		else
 		{
-			ocularNumberLabel = QString(q_("Ocular #%1: %2")).arg(selectedOcularIndex).arg(name);
+			ocularNumberLabel = QString("%1 #%2: %3").arg(ocularI18n).arg(selectedOcularIndex).arg(name);
 		}
 		// The name of the ocular could be really long.
 		if (name.length() > widthString.length())
@@ -2389,6 +2394,18 @@ void Oculars::setFlagUseSemiTransparency(const bool b)
 bool Oculars::getFlagUseSemiTransparency() const
 {
 	return flagSemiTransparency;
+}
+
+void Oculars::setFlagShowResolutionCriterions(const bool b)
+{
+	flagShowResolutionCriterions = b;
+	settings->setValue("show_resolution_criterions", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagShowResolutionCriterions() const
+{
+	return flagShowResolutionCriterions;
 }
 
 void Oculars::setFlagHideGridsLines(const bool b)
