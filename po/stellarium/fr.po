@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-15 00:48+0700\n"
-"PO-Revision-Date: 2017-07-14 17:51+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2017-07-17 16:08+0000\n"
+"Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-15 05:12+0000\n"
+"X-Launchpad-Export-Date: 2017-07-18 05:09+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -422,7 +422,7 @@ msgstr "Magnitude"
 
 #: src/core/modules/Nebula.cpp:215
 msgid "Opacity"
-msgstr ""
+msgstr "Opacité"
 
 #: src/core/modules/Nebula.cpp:218 src/core/modules/Planet.cpp:383
 #: src/core/modules/MinorPlanet.cpp:228 src/core/modules/Comet.cpp:176
@@ -431,16 +431,16 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "extincted to"
-msgstr ""
+msgstr "atténué à"
 
 #: src/core/modules/Nebula.cpp:223 src/core/modules/StarWrapper.cpp:228
 msgid "Photometric system"
-msgstr ""
+msgstr "Système photométrique"
 
 #: src/core/modules/Nebula.cpp:228 src/core/modules/StarWrapper.cpp:66
 #: src/core/modules/StarWrapper.cpp:210 plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "Index de couleur (B-V)"
 
 #: src/core/modules/Nebula.cpp:233
 msgid "Surface brightness"
@@ -467,7 +467,7 @@ msgstr "s d'arc"
 
 #: src/core/modules/Nebula.cpp:260
 msgid "Contrast index"
-msgstr ""
+msgstr "Index de contraste"
 
 #: src/core/modules/Nebula.cpp:269 src/core/modules/Nebula.cpp:272
 #: src/ui_configurationDialog.h:1356
@@ -476,7 +476,7 @@ msgstr "Grandeur"
 
 #: src/core/modules/Nebula.cpp:274
 msgid "Orientation angle"
-msgstr ""
+msgstr "Angle d'orientation"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:298 src/core/modules/Nebula.cpp:311
@@ -512,11 +512,11 @@ msgstr "Mpc"
 #: src/core/modules/Nebula.cpp:320
 msgctxt "distance"
 msgid "Mio. ly"
-msgstr "Mio al"
+msgstr "mio al"
 
 #: src/core/modules/Nebula.cpp:348
 msgid "Redshift"
-msgstr ""
+msgstr "Décalage vers le rouge"
 
 #: src/core/modules/Nebula.cpp:359 src/core/modules/StarWrapper.cpp:249
 msgid "Parallax"
@@ -524,7 +524,7 @@ msgstr "Parallaxe"
 
 #: src/core/modules/Nebula.cpp:363
 msgid "Morphological description"
-msgstr ""
+msgstr "Description morphologique"
 
 #: src/core/modules/Nebula.cpp:982
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -908,7 +908,7 @@ msgstr "Activer/désactiver le filtre DSO"
 #: src/core/modules/MinorPlanet.cpp:243 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:206 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "Magnitude absolue"
 
 #: src/core/modules/Planet.cpp:392
 #, qt-format
@@ -923,14 +923,14 @@ msgstr "Magnitude à l'opposition moyenne : %1"
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "UA"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:193
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -938,35 +938,35 @@ msgstr ""
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
-msgstr ""
+msgstr "mio km"
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:270
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
-msgstr ""
+msgstr "Distance du Soleil"
 
 #: src/core/modules/Planet.cpp:470
 msgid "with rings"
-msgstr ""
+msgstr "avec anneaux"
 
 #: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:306
 msgid "scaled up to"
-msgstr ""
+msgstr "mis à l'échelle à"
 
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:316
 msgid "Apparent diameter"
-msgstr ""
+msgstr "Diamètre apparent"
 
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:325
 #: src/core/modules/StarWrapper.cpp:252
 msgctxt "duration"
 msgid "days"
-msgstr ""
+msgstr "jours"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:327
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
-msgstr ""
+msgstr "Période sidérale"
 
 #: src/core/modules/Planet.cpp:516
 msgid "Sidereal day"
@@ -974,7 +974,7 @@ msgstr "Jour sidéral"
 
 #: src/core/modules/Planet.cpp:517
 msgid "Mean solar day"
-msgstr ""
+msgstr "Jour solaire moyen"
 
 #: src/core/modules/Planet.cpp:521
 msgid "The period of rotation is chaotic"
@@ -1034,11 +1034,11 @@ msgstr "Élongation"
 
 #: src/core/modules/Planet.cpp:571
 msgid "Illuminated"
-msgstr ""
+msgstr "Illuminé"
 
 #: src/core/modules/Planet.cpp:572
 msgid "Albedo"
-msgstr ""
+msgstr "Albedo"
 
 #: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1626
 #: src/gui/AstroCalcDialog.cpp:1661
@@ -1047,7 +1047,7 @@ msgstr "Phase"
 
 #: src/core/modules/Planet.cpp:587
 msgid "Eclipse Factor"
-msgstr ""
+msgstr "Facteur d'éclipse"
 
 #: src/core/modules/MinorPlanet.cpp:214
 #, qt-format
@@ -1068,19 +1068,19 @@ msgstr "périodique"
 #: src/core/modules/Comet.cpp:245
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "km/s"
 
 #: src/core/modules/Comet.cpp:247
 msgid "Speed"
-msgstr ""
+msgstr "Vitesse"
 
 #: src/core/modules/Comet.cpp:272
 msgid "Coma diameter (estimate)"
-msgstr ""
+msgstr "Diamètre de la coma (estimé)"
 
 #: src/core/modules/Comet.cpp:273
 msgid "Gas tail length (estimate)"
-msgstr ""
+msgstr "Longueur de la queue de gaz (estimée)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1188
@@ -1145,12 +1145,12 @@ msgstr "étoile double"
 
 #: src/core/modules/StarWrapper.cpp:228
 msgid "Magnitude range"
-msgstr ""
+msgstr "Plage de magnitudes"
 
 #: src/core/modules/StarWrapper.cpp:246
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Spectral Type"
-msgstr ""
+msgstr "Type spectral"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:343
@@ -1159,19 +1159,19 @@ msgstr "Période"
 
 #: src/core/modules/StarWrapper.cpp:260
 msgid "Next maximum light"
-msgstr ""
+msgstr "Prochain max. de luminosité"
 
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Next minimum light"
-msgstr ""
+msgstr "Prochain min. de luminosité"
 
 #: src/core/modules/StarWrapper.cpp:269
 msgid "Rising time"
-msgstr ""
+msgstr "Heure du lever"
 
 #: src/core/modules/StarWrapper.cpp:271
 msgid "Duration of eclipse"
-msgstr ""
+msgstr "Durée de l'éclipse"
 
 #: src/core/modules/StarWrapper.cpp:278
 msgid "Position angle"
@@ -2024,7 +2024,7 @@ msgstr "Temps sidéral apparent"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr ""
+msgstr "Constellation UAI"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -9606,7 +9606,7 @@ msgstr "satellite artificiel"
 
 #: plugins/Satellites/src/Satellite.cpp:290
 msgid "Approx. magnitude"
-msgstr ""
+msgstr "Magnitude approx."
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
@@ -10384,12 +10384,18 @@ msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
 msgstr ""
+"La durée approximative que met le signal du télescope pour atteindre "
+"Stellarium. Augmenter cette valeur si le réticule se déplace de manière "
+"saccadée."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
 msgstr ""
+"Le taux de rafraîchissement du télescope RTS2. C'est le délai avant "
+"d'envoyer la prochaine requête de l'état du télescope. La valeur par défaut "
+"de 0.5 secondes fonctionne correctement avec la plupart des configurations."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:221
 msgid "Add New Telescope"
@@ -11649,7 +11655,7 @@ msgstr "URL de l'ordinateur qui héberge le serveur RTS2 JSON (httpd)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:604
 msgid "Refresh every:"
-msgstr ""
+msgstr "Rafraîchir tous les :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:608
 msgid "User interface settings"
@@ -12262,11 +12268,11 @@ msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:149
 msgid "Type of supernova"
-msgstr ""
+msgstr "Type de supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:163
 msgid "Maximum brightness"
-msgstr ""
+msgstr "Luminosité maximale"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
@@ -13303,12 +13309,12 @@ msgstr "Rayon"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgid "Effective temperature"
-msgstr ""
+msgstr "Température effective"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgctxt "temperature"
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 msgid "Exoplanet"
