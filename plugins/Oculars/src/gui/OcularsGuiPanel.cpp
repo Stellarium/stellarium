@@ -918,28 +918,28 @@ void OcularsGuiPanel::updateTelescopeControls()
 	{
 		QString rayleighLabel = QString("%1: %2\"").arg(q_("Rayleigh criterion")).arg(QString::number(138/diameter, 'f', 2));
 		fieldRayleighCriterion->setPlainText(rayleighLabel);
-		fieldRayleighCriterion->setToolTip(q_("Rayleigh resolution criterion"));
+		fieldRayleighCriterion->setToolTip(q_("The Rayleigh resolution criterion"));
 		fieldRayleighCriterion->setPos(posX, posY);
 		posY += fieldRayleighCriterion->boundingRect().height();
 		widgetHeight += fieldRayleighCriterion->boundingRect().height();
 
-		QString dawesLabel = QString("%1: %2\"").arg(q_("Dawes criterion")).arg(QString::number(116/diameter, 'f', 2));
+		QString dawesLabel = QString("%1: %2\"").arg(q_("Dawes' limit")).arg(QString::number(116/diameter, 'f', 2));
 		fieldDawesCriterion->setPlainText(dawesLabel);
-		fieldDawesCriterion->setToolTip(q_("Dawes resolution criterion"));
+		fieldDawesCriterion->setToolTip(q_("Dawes' resolution criterion"));
 		fieldDawesCriterion->setPos(posX, posY);
 		posY += fieldDawesCriterion->boundingRect().height();
 		widgetHeight += fieldDawesCriterion->boundingRect().height();
 
-		QString abbeyLabel = QString("%1: %2\"").arg(q_("Abbey limit")).arg(QString::number(113/diameter, 'f', 2));
+		QString abbeyLabel = QString("%1: %2\"").arg(q_("Abbe's limit")).arg(QString::number(113/diameter, 'f', 2));
 		fieldAbbeyCriterion->setPlainText(abbeyLabel);
-		fieldAbbeyCriterion->setToolTip(q_("Abbey resolution limit"));
+		fieldAbbeyCriterion->setToolTip(q_("Abbe’s diffraction resolution limit"));
 		fieldAbbeyCriterion->setPos(posX, posY);
 		posY += fieldAbbeyCriterion->boundingRect().height();
 		widgetHeight += fieldAbbeyCriterion->boundingRect().height();
 
-		QString sparrowLabel = QString("%1: %2\"").arg(q_("Sparrow criterion")).arg(QString::number(108/diameter, 'f', 2));
+		QString sparrowLabel = QString("%1: %2\"").arg(q_("Sparrow's limit")).arg(QString::number(108/diameter, 'f', 2));
 		fieldSparrowCriterion->setPlainText(sparrowLabel);
-		fieldSparrowCriterion->setToolTip(q_("Sparrow resolution criterion"));
+		fieldSparrowCriterion->setToolTip(q_("Sparrow's resolution limit"));
 		fieldSparrowCriterion->setPos(posX, posY);
 		posY += fieldSparrowCriterion->boundingRect().height();
 		widgetHeight += fieldSparrowCriterion->boundingRect().height();
