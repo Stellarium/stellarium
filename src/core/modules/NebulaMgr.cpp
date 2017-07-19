@@ -127,8 +127,7 @@ NebulaMgr::NebulaMgr(void)
 	, hintsAmount(0)
 	, labelsAmount(0)
 	, flagConverter(false)
-	, flagDecimalCoordinates(true)
-	, flagReloading(false)
+	, flagDecimalCoordinates(true)	
 {
 	setObjectName("NebulaMgr");
 }
@@ -2397,6 +2396,18 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("Cr %1").arg(n->Cr_nb);
 					else if (n->Mel_nb>0)
 						result << QString("Mel %1").arg(n->Mel_nb);
+					else if (!n->Ced_nb.isEmpty())
+						result << QString("Ced %1").arg(n->Ced_nb);
+					else if (n->Arp_nb>0)
+						result << QString("Arp %1").arg(n->Arp_nb);
+					else if (n->VV_nb>0)
+						result << QString("VV %1").arg(n->VV_nb);
+					else if (!n->PK_nb.isEmpty())
+						result << QString("PK %1").arg(n->PK_nb);
+					else if (n->PGC_nb>0)
+						result << QString("PGC %1").arg(n->PGC_nb);
+					else if (n->UGC_nb > 0)
+						result << QString("UGC %1").arg(n->UGC_nb);
 
 				}
 			}
