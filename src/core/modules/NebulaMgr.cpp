@@ -925,15 +925,14 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			if (vMag <= 0.f) vMag = 99.f;
 
 			QStringList oTypes;
-			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
-			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
-			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
-			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL" << "PPN" << "GIG" << "OPC" << "MGR" << "IG2"
-			       << "IG3" << "SY*" << "PA*" << "CV*" << "Y*?" << "CGB" << "SNRG" << "Y*O"
-			       << "SR*" << "EM*" << "AB*" << "MI*" << "MI?" << "TT*" << "WR*" << "C*"
-			       << "WD*" << "EL*" << "NL*" << "NO*" << "HS*" << "LP*" << "OH*" << "S?R"
-			       << "IR*" << "POC" << "PNB" << "GXCL" << "AL*" << "PR*" << "RS*" << "S*B";
+			oTypes << "G"	<< "GX"	 << "GC"  << "OC"  << "NB"  << "PN"  << "DN"  << "RN"  << "C+N"  << "RNE"
+			       << "HII" << "SNR" << "BN"  << "EN"  << "SA"  << "SC"  << "CL"  << "IG"  << "RG"   << "AGX"
+			       << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN" << "BLL" << "BLA" << "MOC"  << "YSO"
+			       << "Q?"	<< "PN?" << "*"	  << "SFR" << "IR"  << "**"  << "MUL" << "PPN" << "GIG"  << "OPC"
+			       << "MGR" << "IG2" << "IG3" << "SY*" << "PA*" << "CV*" << "Y*?" << "CGB" << "SNRG" << "Y*O"
+			       << "SR*" << "EM*" << "AB*" << "MI*" << "MI?" << "TT*" << "WR*" << "C*"  << "WD*"  << "EL*"
+			       << "NL*" << "NO*" << "HS*" << "LP*" << "OH*" << "S?R" << "IR*" << "POC" << "PNB"  << "GXCL"
+			       << "AL*" << "PR*" << "RS*" << "S*B";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -1047,7 +1046,6 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 54:
 				case 55:
 				case 56:
-				case 57:
 				case 58:
 				case 59:
 				case 60:
@@ -1071,6 +1069,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebSymbioticStar;
 					break;
 				case 51:
+				case 57:
 					nType = (unsigned int)Nebula::NebEmissionLineStar;
 					break;
 				default:
