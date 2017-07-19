@@ -198,6 +198,10 @@ class Translations
 		N_("Bright variable stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright stars with high proper motion");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Symbiotic stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Emission-line stars");
 		
 		// =====================================================================
 		// Constellation cultures

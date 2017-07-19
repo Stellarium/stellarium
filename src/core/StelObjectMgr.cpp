@@ -101,6 +101,8 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:25"] = "Possible Quasars";
 		objModulesMap["NebulaMgr:26"] = "Possible Planetary Nebulae";
 		objModulesMap["NebulaMgr:27"] = "Protoplanetary Nebulae";
+		objModulesMap["NebulaMgr:29"] = "Symbiotic stars";
+		objModulesMap["NebulaMgr:30"] = "Emission-line stars";
 		objModulesMap["NebulaMgr:100"] = "Messier Catalogue";
 		objModulesMap["NebulaMgr:101"] = "Caldwell Catalogue";
 		objModulesMap["NebulaMgr:102"] = "Barnard Catalogue";

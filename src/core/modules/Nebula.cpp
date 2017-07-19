@@ -82,6 +82,8 @@ Vec3f Nebula::possibleQuasarColor = Vec3f(1.0f,0.2f,0.2f);
 Vec3f Nebula::possiblePlanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::symbioticStarColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::emissionLineStarColor = Vec3f(1.0f,1.0f,0.1f);
 bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -1306,6 +1308,12 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebStar:
 			wsType = q_("star");
+			break;
+		case NebSymbioticStar:
+			wsType = q_("symbiotic star");
+			break;
+		case NebEmissionLineStar:
+			wsType = q_("emission-line star");
 			break;
 		case NebUnknown:
 			wsType = q_("object of unknown nature");
