@@ -70,6 +70,8 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	colorButton(ui->colorDSOStellarAssociations,		"NebulaMgr.stellarAssociationsColor");
 	colorButton(ui->colorDSOStarClouds,			"NebulaMgr.starCloudsColor");
 	colorButton(ui->colorDSOStars,				"NebulaMgr.starsColor");
+	colorButton(ui->colorDSOSymbioticStars,			"NebulaMgr.symbioticStarsColor");
+	colorButton(ui->colorDSOEmissionLineStars,		"NebulaMgr.emissionLineStarsColor");
 	colorButton(ui->colorDSONebulae,			"NebulaMgr.nebulaeColor");
 	colorButton(ui->colorDSOPlanetaryNebulae,		"NebulaMgr.planetaryNebulaeColor");
 	colorButton(ui->colorDSODarkNebulae,			"NebulaMgr.darkNebulaeColor");
@@ -102,6 +104,8 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	connect(ui->colorDSOStellarAssociations,		SIGNAL(released()), this, SLOT(askDSOStellarAssociationsColor()));
 	connect(ui->colorDSOStarClouds,				SIGNAL(released()), this, SLOT(askDSOStarCloudsColor()));
 	connect(ui->colorDSOStars,				SIGNAL(released()), this, SLOT(askDSOStarsColor()));
+	connect(ui->colorDSOSymbioticStars,			SIGNAL(released()), this, SLOT(askDSOSymbioticStarsColor()));
+	connect(ui->colorDSOEmissionLineStars,			SIGNAL(released()), this, SLOT(askDSOEmissionLineStarsColor()));
 	connect(ui->colorDSONebulae,				SIGNAL(released()), this, SLOT(askDSONebulaeColor()));
 	connect(ui->colorDSOPlanetaryNebulae,			SIGNAL(released()), this, SLOT(askDSOPlanetaryNebulaeColor()));
 	connect(ui->colorDSODarkNebulae,			SIGNAL(released()), this, SLOT(askDSODarkNebulaeColor()));
@@ -595,5 +599,35 @@ void ConfigureDSOColorsDialog::askDSOStarsColor()
 		GETSTELMODULE(NebulaMgr)->setStarColor(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/dso_star_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOStars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ConfigureDSOColorsDialog::askDSOSymbioticStarsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.symbioticStarsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOSymbioticStars->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(NebulaMgr)->setSymbioticStarColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/dso_symbiotic_star_color", StelUtils::vec3fToStr(vColor));
+		ui->colorDSOSymbioticStars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ConfigureDSOColorsDialog::askDSOEmissionLineStarsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.emissionLineStarsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOEmissionLineStars->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(NebulaMgr)->setEmissionLineStarColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/dso_emission_star_color", StelUtils::vec3fToStr(vColor));
+		ui->colorDSOEmissionLineStars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }

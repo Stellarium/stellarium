@@ -113,6 +113,10 @@ void NebulaMgr::setProtoplanetaryNebulaColor(const Vec3f& c) {Nebula::protoplane
 const Vec3f NebulaMgr::getProtoplanetaryNebulaColor(void) const {return Nebula::protoplanetaryNebulaColor;}
 void NebulaMgr::setStarColor(const Vec3f& c) {Nebula::starColor = c; emit starsColorChanged(c);}
 const Vec3f NebulaMgr::getStarColor(void) const {return Nebula::starColor;}
+void NebulaMgr::setSymbioticStarColor(const Vec3f& c) {Nebula::symbioticStarColor = c; emit symbioticStarsColorChanged(c);}
+const Vec3f NebulaMgr::getSymbioticStarColor(void) const {return Nebula::symbioticStarColor;}
+void NebulaMgr::setEmissionLineStarColor(const Vec3f& c) {Nebula::emissionLineStarColor = c; emit emissionLineStarsColorChanged(c);}
+const Vec3f NebulaMgr::getEmissionLineStarColor(void) const {return Nebula::emissionLineStarColor;}
 void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
@@ -274,6 +278,8 @@ void NebulaMgr::init()
 
 	QString defaultStellarColor = conf->value("color/dso_star_color", "1.0,0.7,0.2").toString();
 	setStarColor(StelUtils::strToVec3f(defaultStellarColor));
+	setSymbioticStarColor(StelUtils::strToVec3f(conf->value("color/dso_symbiotic_star_color", defaultStellarColor).toString()));
+	setEmissionLineStarColor(StelUtils::strToVec3f(conf->value("color/dso_emission_star_color", defaultStellarColor).toString()));
 	setEmissionObjectColor(StelUtils::strToVec3f(conf->value("color/dso_emission_object_color", defaultStellarColor).toString()));
 	setYoungStellarObjectColor(StelUtils::strToVec3f(conf->value("color/dso_young_stellar_object_color", defaultStellarColor).toString()));
 
@@ -923,7 +929,11 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
 			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL" << "PPN" << "GIG";
+			       << "IR" << "**" << "MUL" << "PPN" << "GIG" << "OPC" << "MGR" << "IG2"
+			       << "IG3" << "SY*" << "PA*" << "CV*" << "Y*?" << "CGB" << "SNRG" << "Y*O"
+			       << "SR*" << "EM*" << "AB*" << "MI*" << "MI?" << "TT*" << "WR*" << "C*"
+			       << "WD*" << "EL*" << "NL*" << "NO*" << "HS*" << "LP*" << "OH*" << "S?R"
+			       << "IR*" << "POC" << "PNB" << "GXCL" << "AL*" << "PR*" << "RS*" << "S*B";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -935,12 +945,14 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebGc;
 					break;
 				case 3:
+				case 39:
 					nType = (unsigned int)Nebula::NebOc;
 					break;
 				case 4:
 					nType = (unsigned int)Nebula::NebN;
 					break;
 				case 5:
+				case 68:
 					nType = (unsigned int)Nebula::NebPn;
 					break;
 				case 6:
@@ -959,6 +971,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebHII;
 					break;
 				case 11:
+				case 48:
 					nType = (unsigned int)Nebula::NebSNR;
 					break;
 				case 12:
@@ -968,6 +981,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebEn;
 					break;
 				case 14:
+				case 40:
 					nType = (unsigned int)Nebula::NebSA;
 					break;
 				case 15:
@@ -978,6 +992,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					break;
 				case 17:
 				case 38:
+				case 41:
+				case 42:
+				case 69:
 					nType = (unsigned int)Nebula::NebIGx;
 					break;
 				case 18:
@@ -992,6 +1009,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					break;
 				case 21:
 				case 24:
+				case 47:
 					nType = (unsigned int)Nebula::NebISM;
 					break;
 				case 22:
@@ -1005,9 +1023,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					break;
 				case 28:
 				case 33:
+				case 67:
 					nType = (unsigned int)Nebula::NebMolCld;
 					break;
 				case 29:
+				case 46:
+				case 49:
 					nType = (unsigned int)Nebula::NebYSO;
 					break;
 				case 30:
@@ -1019,14 +1040,45 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 32:
 				case 35:
 				case 36:
+				case 45:
+				case 50:
+				case 52:
+				case 53:
+				case 54:
+				case 55:
+				case 56:
+				case 57:
+				case 58:
+				case 59:
+				case 60:
+				case 61:
+				case 62:
+				case 63:
+				case 64:
+				case 65:
+				case 66:
+				case 70:
+				case 71:
+				case 72:
+				case 73:
 					nType = (unsigned int)Nebula::NebStar;
 					break;
 				case 37:
+				case 44:
 					nType = (unsigned int)Nebula::NebPPN;
 					break;
-				default:
-					nType = (unsigned int)Nebula::NebUnknown;
+				case 43:
+					nType = (unsigned int)Nebula::NebSymbioticStar;
 					break;
+				case 51:
+					nType = (unsigned int)Nebula::NebEmissionLineStar;
+					break;
+				default:
+				{
+					nType = (unsigned int)Nebula::NebUnknown;
+					qDebug() << "Record with ID" << id <<"has unknown type of object:" << oType;
+					break;
+				}
 			}
 
 			++readOk;

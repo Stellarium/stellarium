@@ -89,36 +89,38 @@ public:
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx		= 0,	//!< Galaxy
-		NebAGx		= 1,	//!< Active galaxy
-		NebRGx		= 2,	//!< Radio galaxy
-		NebIGx		= 3,	//!< Interacting galaxy
-		NebQSO		= 4,	//!< Quasar
-		NebCl		= 5,	//!< Star cluster
-		NebOc		= 6,	//!< Open star cluster
-		NebGc		= 7,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA		= 8,	//!< Stellar association
-		NebSC		= 9,	//!< Star cloud
-		NebN		= 10,	//!< A nebula
-		NebPn		= 11,	//!< Planetary nebula
-		NebDn		= 12,	//!< Dark Nebula
-		NebRn		= 13,	//!< Reflection nebula
-		NebBn		= 14,	//!< Bipolar nebula
-		NebEn		= 15,	//!< Emission nebula
-		NebCn		= 16,	//!< Cluster associated with nebulosity
-		NebHII		= 17,	//!< HII Region
-		NebSNR		= 18,	//!< Supernova remnant
-		NebISM		= 19,	//!< Interstellar matter
-		NebEMO		= 20,	//!< Emission object
-		NebBLL		= 21,	//!< BL Lac object
-		NebBLA		= 22,	//!< Blazar
-		NebMolCld	= 23, 	//!< Molecular Cloud
-		NebYSO		= 24, 	//!< Young Stellar Object
-		NebPossQSO	= 25, 	//!< Possible Quasar
-		NebPossPN	= 26, 	//!< Possible Planetary Nebula
-		NebPPN		= 27, 	//!< Protoplanetary Nebula
-		NebStar		= 28, 	//!< Star
-		NebUnknown	= 29	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebGx			= 0,	//!< Galaxy
+		NebAGx			= 1,	//!< Active galaxy
+		NebRGx			= 2,	//!< Radio galaxy
+		NebIGx			= 3,	//!< Interacting galaxy
+		NebQSO			= 4,	//!< Quasar
+		NebCl			= 5,	//!< Star cluster
+		NebOc			= 6,	//!< Open star cluster
+		NebGc			= 7,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA			= 8,	//!< Stellar association
+		NebSC			= 9,	//!< Star cloud
+		NebN			= 10,	//!< A nebula
+		NebPn			= 11,	//!< Planetary nebula
+		NebDn			= 12,	//!< Dark Nebula
+		NebRn			= 13,	//!< Reflection nebula
+		NebBn			= 14,	//!< Bipolar nebula
+		NebEn			= 15,	//!< Emission nebula
+		NebCn			= 16,	//!< Cluster associated with nebulosity
+		NebHII			= 17,	//!< HII Region
+		NebSNR			= 18,	//!< Supernova remnant
+		NebISM			= 19,	//!< Interstellar matter
+		NebEMO			= 20,	//!< Emission object
+		NebBLL			= 21,	//!< BL Lac object
+		NebBLA			= 22,	//!< Blazar
+		NebMolCld		= 23, 	//!< Molecular Cloud
+		NebYSO			= 24, 	//!< Young Stellar Object
+		NebPossQSO		= 25, 	//!< Possible Quasar
+		NebPossPN		= 26, 	//!< Possible Planetary Nebula
+		NebPPN			= 27, 	//!< Protoplanetary Nebula
+		NebStar			= 28, 	//!< Star
+		NebSymbioticStar	= 29, 	//!< Symbiotic Star
+		NebEmissionLineStar	= 30, 	//!< Emission-line Star
+		NebUnknown		= 31	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();
@@ -299,6 +301,8 @@ private:
 	static Vec3f possiblePlanetaryNebulaColor;	// The color of possible planetary nebula marker texture (NebPossPN)
 	static Vec3f protoplanetaryNebulaColor;		// The color of protoplanetary nebula marker texture (NebPPN)
 	static Vec3f starColor;				// The color of star marker texture (NebStar)
+	static Vec3f symbioticStarColor;		// The color of star marker texture (NebSymbioticStar)
+	static Vec3f emissionLineStarColor;		// The color of star marker texture (NebEmissionLineStar)
 
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
