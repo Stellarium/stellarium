@@ -662,6 +662,18 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			Nebula::texCircle->bind();
 			color=emissionObjectColor;
 			break;
+		case NebStar:
+			Nebula::texCircle->bind();
+			color=starColor;
+			break;
+		case NebSymbioticStar:
+			Nebula::texCircle->bind();
+			color=symbioticStarColor;
+			break;
+		case NebEmissionLineStar:
+			Nebula::texCircle->bind();
+			color=emissionLineStarColor;
+			break;
 		default:
 			Nebula::texCircle->bind();
 	}
