@@ -174,6 +174,16 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setStarColor
 		   NOTIFY starsColorChanged
 		   )
+	Q_PROPERTY(Vec3f symbioticStarsColor
+		   READ getSymbioticStarColor
+		   WRITE setSymbioticStarColor
+		   NOTIFY symbioticStarsColorChanged
+		   )
+	Q_PROPERTY(Vec3f emissionLineStarsColor
+		   READ getEmissionLineStarColor
+		   WRITE setEmissionLineStarColor
+		   NOTIFY emissionLineStarsColorChanged
+		   )
 	Q_PROPERTY(Vec3f nebulaeColor
 		   READ getNebulaColor
 		   WRITE setNebulaColor
@@ -651,6 +661,26 @@ public slots:
 	//! Get current value of the star symbol color.
 	const Vec3f getStarColor(void) const;
 
+	//! Set the color used to draw the symbiotic stars symbols.
+	//! @param c The color of the symbiotic stars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSymbioticStarColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setSymbioticStarColor(const Vec3f& c);
+	//! Get current value of the symbiotic star symbol color.
+	const Vec3f getSymbioticStarColor(void) const;
+
+	//! Set the color used to draw the emission-line stars symbols.
+	//! @param c The color of the emission-line stars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setEmissionLineStarColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setEmissionLineStarColor(const Vec3f& c);
+	//! Get current value of the emission-line star symbol color.
+	const Vec3f getEmissionLineStarColor(void) const;
+
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
@@ -752,6 +782,8 @@ signals:
 	void stellarAssociationsColorChanged(const Vec3f & color) const;
 	void starCloudsColorChanged(const Vec3f & color) const;
 	void starsColorChanged(const Vec3f & color) const;
+	void symbioticStarsColorChanged(const Vec3f & color) const;
+	void emissionLineStarsColorChanged(const Vec3f & color) const;
 	void nebulaeColorChanged(const Vec3f & color) const;
 	void planetaryNebulaeColorChanged(const Vec3f & color) const;
 	void darkNebulaeColorChanged(const Vec3f & color) const;

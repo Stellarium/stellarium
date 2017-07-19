@@ -383,6 +383,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Possible Quasars"), "25");
 	category->addItem(q_("Possible Planetary Nebulae"), "26");
 	category->addItem(q_("Protoplanetary Nebulae"), "27");
+	category->addItem(q_("Symbiotic stars"), "29");
+	category->addItem(q_("Emission-line stars"), "30");
 	if (catalogFilters&Nebula::CatM)
 		category->addItem(q_("Messier Catalogue"), "100");
 	if (catalogFilters&Nebula::CatC)
@@ -1206,6 +1208,8 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Bright nebulae (<%1 mag)").arg(brLimit), "15");
 	groups->addItem(q_("Dark nebulae"), "16");
 	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "17");
+	groups->addItem(q_("Symbiotic stars"), "18");
+	groups->addItem(q_("Emission-line stars"), "19");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -1990,6 +1994,20 @@ void AstroCalcDialog::calculatePhenomena()
 					dso.append(object);
 			}
 			break;
+		case 18: // Symbiotic stars
+			foreach(const NebulaP& object, allDSO)
+			{
+				if (object->getDSOType()==Nebula::NebSymbioticStar)
+					dso.append(object);
+			}
+			break;
+		case 19: // Emission-line stars
+			foreach(const NebulaP& object, allDSO)
+			{
+				if (object->getDSOType()==Nebula::NebEmissionLineStar)
+					dso.append(object);
+			}
+			break;
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
@@ -2691,6 +2709,8 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Bright double stars"), 15);
 	wutCategories.insert(q_("Bright variable stars"), 16);
 	wutCategories.insert(q_("Bright stars with high proper motion"), 17);
+	wutCategories.insert(q_("Symbiotic stars"), 18);
+	wutCategories.insert(q_("Emission-line stars"), 19);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -2984,6 +3004,48 @@ void AstroCalcDialog::calculateWutObjects()
 						StelObjectP object = hpmStar.firstKey();
 						if (object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+					}
+					break;
+				case 18: // Symbiotic stars
+					foreach(const NebulaP& object, allDSO)
+					{
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((bool)(tflags & Nebula::TypeOther) && (ntype==Nebula::NebSymbioticStar) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
+					}
+					break;
+				case 19: // Emission-line stars
+					foreach(const NebulaP& object, allDSO)
+					{
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((bool)(tflags & Nebula::TypeOther) && (ntype==Nebula::NebEmissionLineStar) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
 					}
 					break;
 				default: // Planets

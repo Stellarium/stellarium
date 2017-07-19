@@ -53,6 +53,8 @@ private slots:
 	void askDSOStellarAssociationsColor();
 	void askDSOStarCloudsColor();
 	void askDSOStarsColor();
+	void askDSOSymbioticStarsColor();
+	void askDSOEmissionLineStarsColor();
 	void askDSONebulaeColor();
 	void askDSOPlanetaryNebulaeColor();
 	void askDSODarkNebulaeColor();
