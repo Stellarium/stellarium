@@ -1263,7 +1263,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		QFile* tmpFile = new QFile(path, this);
 		if (tmpFile->exists())
 			tmpFile->remove();
-		
+
 		if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text))
 		{
 			tmpFile->write(reply->readAll());
