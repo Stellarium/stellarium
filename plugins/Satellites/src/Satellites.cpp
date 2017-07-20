@@ -42,6 +42,8 @@
 #include "StelProgressController.hpp"
 #include "StelUtils.hpp"
 
+#include "external/qtcompress/qzipreader.h"
+
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
@@ -52,6 +54,7 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QDir>
+#include <QTemporaryFile>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -1266,7 +1269,41 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 
 		if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text))
 		{
-			tmpFile->write(reply->readAll());
+			QByteArray fd = reply->readAll();
+			// qWarning() << "[Satellites] Processing an URL:" << reply->url().toString();
+			if (reply->url().toString().contains(".zip", Qt::CaseInsensitive))
+			{
+				QTemporaryFile zip;
+				if (zip.open())
+				{
+					// qWarning() << "[Satellites] Processing a ZIP archive...";
+					zip.write(fd);
+					zip.close();
+					QString archive = zip.fileName();
+					QByteArray data;
+
+					Stel::QZipReader reader(archive);
+					if (reader.status() != Stel::QZipReader::NoError)
+						qWarning() << "[Satellites] Unable to open as a ZIP archive";
+					else
+					{
+						QList<Stel::QZipReader::FileInfo> infoList = reader.fileInfoList();
+						foreach(Stel::QZipReader::FileInfo info, infoList)
+						{
+							// qWarning() << "[Satellites] Processing:" << info.filePath;
+							if (info.isFile)
+								data.append(reader.fileData(info.filePath));
+						}
+						// qWarning() << "[Satellites] Extracted data:" << data;
+						fd = data;
+					}
+					reader.close();
+					zip.remove();
+				}
+				else
+					qWarning() << "[Satellites] Unable to open a temporary file";
+			}
+			tmpFile->write(fd);
 			tmpFile->close();
 			
 			// The reply URL can be different form the requested one...
