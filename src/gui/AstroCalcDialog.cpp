@@ -1588,6 +1588,9 @@ void AstroCalcDialog::populateFunctionsList()
 	int indexS = second->currentIndex();
 	QVariant selectedSecondId = second->itemData(indexS);
 
+	first->clear();
+	second->clear();
+
 	foreach(const graph& f, functions)
 	{
 		first->addItem(f.first, f.second);
