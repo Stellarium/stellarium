@@ -559,7 +559,7 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/geodetic.txt"
 	     << "http://www.celestrak.com/NORAD/elements/radar.txt"
 	     << "http://www.celestrak.com/NORAD/elements/cubesat.txt"
-	     << "http://www.celestrak.com/NORAD/elements/other.txt";
+	     << "http://www.celestrak.com/NORAD/elements/other.txt"
 	     << "1,https://www.prismnet.com/~mmccants/tles/classfd.zip";
 
 	saveTleSources(urls);
