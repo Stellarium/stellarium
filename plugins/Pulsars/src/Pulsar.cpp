@@ -191,10 +191,10 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(q_("Dispersion measure:"))
 			       .arg(QString::number(dmeasure, 'f', 3))
 			       //TRANSLATORS: Unit of measure for distance - centimeters
-			       .arg(q_("cm"))
+			       .arg(qc_("cm", "distance"))
 			       .arg(QChar(0x00B7))
 			       //TRANSLATORS: Unit of measure for distance - parsecs
-			       .arg(q_("pc"));
+			       .arg(qc_("pc", "distance"));
 			oss << "<br>";
 		}
 		double edot = getEdot(period, pderivative);
@@ -230,7 +230,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(q_("Time averaged flux density at"))
 			       .arg(400)
 			       // TRANSLATORS: Unit of measurement of frequency
-			       .arg(q_("MHz"))
+			       .arg(qc_("MHz", "frequency"))
 			       .arg(QString::number(s400, 'f', 2))
 			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 			       .arg(q_("mJy")) << "<br>";
@@ -242,7 +242,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(q_("Time averaged flux density at"))
 			       .arg(600)
 			       // TRANSLATORS: Unit of measurement of frequency
-			       .arg(q_("MHz"))
+			       .arg(qc_("MHz", "frequency"))
 			       .arg(QString::number(s600, 'f', 2))
 			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 			       .arg(q_("mJy")) << "<br>";
@@ -254,7 +254,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(q_("Time averaged flux density at"))
 			       .arg(1400)
 			       // TRANSLATORS: Unit of measurement of frequency
-			       .arg(q_("MHz"))
+			       .arg(qc_("MHz", "frequency"))
 			       .arg(QString::number(s1400, 'f', 2))
 			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 			       .arg(q_("mJy")) << "<br>";

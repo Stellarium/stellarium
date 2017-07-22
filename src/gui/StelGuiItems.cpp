@@ -712,7 +712,8 @@ void BottomStelBar::updateText(bool updatePos)
 	const StelLocation* loc = &core->getCurrentLocation();
 	if (getFlagShowLocation() && !loc->name.isEmpty())
 	{
-		newLocation = planetNameI18n +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
+		//TRANSLATORS: Unit of measure for distance - meter
+		newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
 	}
 	if (getFlagShowLocation() && loc->name.isEmpty())
 	{
@@ -744,7 +745,7 @@ void BottomStelBar::updateText(bool updatePos)
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
 		QString rho;
 		if (core->getUseTopocentricCoordinates())
-			rho = q_("planetocentric distance %1 km").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU);
+			rho = QString("%1 %2 %3").arg(q_("planetocentric distance").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU).arg(qc_("km", "distance")));
 		else
 			rho = q_("planetocentric observer");
 
