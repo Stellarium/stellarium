@@ -100,6 +100,7 @@ public:
 		//lets skip drawing the system background
 		setAttribute(Qt::WA_OpaquePaintEvent);
 		setAttribute(Qt::WA_AcceptTouchEvents);
+		setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 		setAutoFillBackground(false);
 	}
 
@@ -556,6 +557,7 @@ StelMainView::StelMainView(QSettings* settings)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
+	setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 	setAutoFillBackground(false);
 
 	configuration = settings;
