@@ -745,7 +745,7 @@ void BottomStelBar::updateText(bool updatePos)
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
 		QString rho;
 		if (core->getUseTopocentricCoordinates())
-			rho = QString("%1 %2 %3").arg(q_("planetocentric distance").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU).arg(qc_("km", "distance")));
+			rho = QString("%1 %2 %3").arg(q_("planetocentric distance")).arg(core->getCurrentObserver()->getDistanceFromCenter() * AU).arg(qc_("km", "distance"));
 		else
 			rho = q_("planetocentric observer");
 
