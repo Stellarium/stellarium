@@ -418,29 +418,9 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	if (flagEnableMouseNavigation==false)
 		return;
 
-	// NOTE: This option caused seriously slow-down works of trackpads on macOS
-	// Previously:
-	// ------------------------------------------------------------------------
-	// if (event->orientation() != Qt::Vertical)
-	// 	return;
-	//
-	// const float numSteps = event->delta() / 120.f;
-	// ------------------------------------------------------------------------
-	// Let's try to fix trackpad behaviour on macOS:
-	float numSteps;
-	if (event->modifiers() & Qt::NoModifier)
-	{
-		if (event->orientation() != Qt::Vertical)
-			return;
-
-		numSteps = event->delta() / 120.f;
-	}
-	else
-	{
-		// This managed only vertical wheel events.
-		// However, Alt-wheel switches this to horizontal, so allow alt-wheel and handle angles properly!
-		numSteps = (event->angleDelta().x() + event->angleDelta().y()) / 120.f;
-	}
+	// This managed only vertical wheel events.
+	// However, Alt-wheel switches this to horizontal, so allow alt-wheel and handle angles properly!
+	const float numSteps = (event->angleDelta().x() + event->angleDelta().y()) / 120.f;
 
 	if (event->modifiers() & Qt::ControlModifier)
 	{
