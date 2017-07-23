@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-19 17:52+0700\n"
+"POT-Creation-Date: 2017-07-23 04:15+0700\n"
 "PO-Revision-Date: 2017-07-18 15:08+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-20 05:28+0000\n"
+"X-Launchpad-Export-Date: 2017-07-23 05:27+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -58,11 +58,11 @@ msgstr "астеризм"
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
 #: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:422
-#: src/core/modules/NebulaMgr.cpp:379 src/core/modules/NebulaMgr.cpp:380
+#: src/core/modules/NebulaMgr.cpp:378 src/core/modules/NebulaMgr.cpp:379
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:548 src/core/StelCore.cpp:254
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:767
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:769
 msgid "Display Options"
 msgstr "Параметри показу"
 
@@ -409,8 +409,8 @@ msgstr "Небесне тіло:"
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:230
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:62
-#: src/core/modules/StarWrapper.cpp:202 src/gui/AstroCalcDialog.cpp:1637
-#: src/gui/AstroCalcDialog.cpp:1672 plugins/Supernovae/src/Supernova.cpp:140
+#: src/core/modules/StarWrapper.cpp:202 src/gui/AstroCalcDialog.cpp:1640
+#: src/gui/AstroCalcDialog.cpp:1675 plugins/Supernovae/src/Supernova.cpp:140
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
 #: plugins/Exoplanets/src/Exoplanet.cpp:304
 msgid "Magnitude"
@@ -486,7 +486,7 @@ msgstr "св.р."
 #: src/core/modules/Nebula.cpp:301 src/core/modules/Nebula.cpp:336
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:285
 #: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:240
-#: src/gui/AstroCalcDialog.cpp:1648 src/gui/AstroCalcDialog.cpp:1683
+#: src/gui/AstroCalcDialog.cpp:1651 src/gui/AstroCalcDialog.cpp:1686
 #: src/ui_configurationDialog.h:1362 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:318
 msgid "Distance"
@@ -522,389 +522,389 @@ msgstr "Паралакс"
 msgid "Morphological description"
 msgstr "Морфологічний опис"
 
-#: src/core/modules/Nebula.cpp:984
+#: src/core/modules/Nebula.cpp:996
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "висока концентрація зірок у напрямку до центра"
 
-#: src/core/modules/Nebula.cpp:987
+#: src/core/modules/Nebula.cpp:999
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "щільна центральна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:990
+#: src/core/modules/Nebula.cpp:1002
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "потужне зовнішнє ядро зірок"
 
-#: src/core/modules/Nebula.cpp:993
+#: src/core/modules/Nebula.cpp:1005
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "помірно збагачена концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:998
+#: src/core/modules/Nebula.cpp:1010
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "помірна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:1001
+#: src/core/modules/Nebula.cpp:1013
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "доволі розсіяна концентрація зірок у напрямку центра"
 
-#: src/core/modules/Nebula.cpp:1004
+#: src/core/modules/Nebula.cpp:1016
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "розсіяна концентрація зірок у напрямку центра"
 
-#: src/core/modules/Nebula.cpp:1007
+#: src/core/modules/Nebula.cpp:1019
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "розсіяна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:1010
+#: src/core/modules/Nebula.cpp:1022
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "дуже розсіяна концентрація зірок у напрямку центра"
 
-#: src/core/modules/Nebula.cpp:1013
+#: src/core/modules/Nebula.cpp:1025
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "майже порожня у центрі"
 
-#: src/core/modules/Nebula.cpp:1016
+#: src/core/modules/Nebula.cpp:1028
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "невідомий клас концентрації"
 
-#: src/core/modules/Nebula.cpp:1036
+#: src/core/modules/Nebula.cpp:1048
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "потужна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:1039
+#: src/core/modules/Nebula.cpp:1051
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "незначна центральна концентрація зірок"
 
-#: src/core/modules/Nebula.cpp:1042
+#: src/core/modules/Nebula.cpp:1054
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "немає помітної концентрації зірок"
 
-#: src/core/modules/Nebula.cpp:1045
+#: src/core/modules/Nebula.cpp:1057
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "конденсація зоряного поля"
 
-#: src/core/modules/Nebula.cpp:1048
+#: src/core/modules/Nebula.cpp:1060
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "невідомий клас концентрації"
 
-#: src/core/modules/Nebula.cpp:1054
+#: src/core/modules/Nebula.cpp:1066
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "вузький діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:1057
+#: src/core/modules/Nebula.cpp:1069
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "середній діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:1060
+#: src/core/modules/Nebula.cpp:1072
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "широкий діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:1063
+#: src/core/modules/Nebula.cpp:1075
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "невідомий діапазон яскравостей зірок скупчення"
 
-#: src/core/modules/Nebula.cpp:1069
+#: src/core/modules/Nebula.cpp:1081
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "бідне скупчення з кількістю зірок < 50"
 
-#: src/core/modules/Nebula.cpp:1072
+#: src/core/modules/Nebula.cpp:1084
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "помірно багате скупчення з кількістю зірок 50-100"
 
-#: src/core/modules/Nebula.cpp:1075
+#: src/core/modules/Nebula.cpp:1087
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "багате скупчення з понад 100 зірок"
 
-#: src/core/modules/Nebula.cpp:1078
+#: src/core/modules/Nebula.cpp:1090
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "невідомий клас за кількістю компонентів"
 
-#: src/core/modules/Nebula.cpp:1082
+#: src/core/modules/Nebula.cpp:1094
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "скупчення перебуває у туманності"
 
-#: src/core/modules/Nebula.cpp:1103
+#: src/core/modules/Nebula.cpp:1115
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "дуже яскрава"
 
-#: src/core/modules/Nebula.cpp:1106
+#: src/core/modules/Nebula.cpp:1118
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "яскрава"
 
-#: src/core/modules/Nebula.cpp:1109
+#: src/core/modules/Nebula.cpp:1121
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "помірно яскрава"
 
-#: src/core/modules/Nebula.cpp:1112
+#: src/core/modules/Nebula.cpp:1124
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "тьмяна"
 
-#: src/core/modules/Nebula.cpp:1115
+#: src/core/modules/Nebula.cpp:1127
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "дуже тьмяна"
 
-#: src/core/modules/Nebula.cpp:1118
+#: src/core/modules/Nebula.cpp:1130
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "невідома яскравість"
 
-#: src/core/modules/Nebula.cpp:1121
+#: src/core/modules/Nebula.cpp:1133
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "невідома яскравість відбивної туманності"
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1139
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "зірка-джерело світла перебуває у туманності"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1142
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "зірку розташовано поза підсвіченою туманністю"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1145
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "зірку розташовано на краю підсвіченою туманності"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1150
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "зірку розташовано поза підсвіченою особливою туманністю"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1156
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "підсвічена особлива туманність"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1160
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "невідома відбивна туманність"
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1183
 msgid "circular form"
 msgstr "кругова форма"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1186
 msgid "elliptical form"
 msgstr "еліптична форма"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1189
 msgid "irregular form"
 msgstr "неправильна форма"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1192
 msgid "undocumented form"
 msgstr "невідома форма"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1198
 msgid "amorphous structure"
 msgstr "аморфна структура"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1201
 msgid "conventional structure"
 msgstr "звичайна структура"
 
-#: src/core/modules/Nebula.cpp:1192
+#: src/core/modules/Nebula.cpp:1204
 msgid "filamentary structure"
 msgstr "ниткоподібна структура"
 
-#: src/core/modules/Nebula.cpp:1195
+#: src/core/modules/Nebula.cpp:1207
 msgid "undocumented structure"
 msgstr "невідома структура"
 
-#: src/core/modules/Nebula.cpp:1201
+#: src/core/modules/Nebula.cpp:1213
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "найтьмяніша"
 
-#: src/core/modules/Nebula.cpp:1204
+#: src/core/modules/Nebula.cpp:1216
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "помірно яскрава"
 
-#: src/core/modules/Nebula.cpp:1207
+#: src/core/modules/Nebula.cpp:1219
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "найяскравіша"
 
-#: src/core/modules/Nebula.cpp:1210
+#: src/core/modules/Nebula.cpp:1222
 msgid "undocumented brightness"
 msgstr "недокументована яскравість"
 
-#: src/core/modules/Nebula.cpp:1226
+#: src/core/modules/Nebula.cpp:1238
 msgid "galaxy"
 msgstr "галактика"
 
-#: src/core/modules/Nebula.cpp:1229
+#: src/core/modules/Nebula.cpp:1241
 msgid "active galaxy"
 msgstr "активна галактика"
 
-#: src/core/modules/Nebula.cpp:1232
+#: src/core/modules/Nebula.cpp:1244
 msgid "radio galaxy"
 msgstr "радіогалактика"
 
-#: src/core/modules/Nebula.cpp:1235
+#: src/core/modules/Nebula.cpp:1247
 msgid "interacting galaxy"
 msgstr "взаємодія галактик"
 
-#: src/core/modules/Nebula.cpp:1238 plugins/Quasars/src/Quasar.cpp:102
+#: src/core/modules/Nebula.cpp:1250 plugins/Quasars/src/Quasar.cpp:102
 msgid "quasar"
 msgstr "квазар"
 
-#: src/core/modules/Nebula.cpp:1241
+#: src/core/modules/Nebula.cpp:1253
 msgid "star cluster"
 msgstr "зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1256
 msgid "open star cluster"
 msgstr "розсіяне зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:1247
+#: src/core/modules/Nebula.cpp:1259
 msgid "globular star cluster"
 msgstr "кулясте зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:1250
+#: src/core/modules/Nebula.cpp:1262
 msgid "nebula"
 msgstr "туманність"
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1265
 msgid "planetary nebula"
 msgstr "планетарна туманність"
 
-#: src/core/modules/Nebula.cpp:1256
+#: src/core/modules/Nebula.cpp:1268
 msgid "dark nebula"
 msgstr "темна туманність"
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1271
 msgid "cluster associated with nebulosity"
 msgstr "скупчення, пов’язане із туманністю"
 
-#: src/core/modules/Nebula.cpp:1262
+#: src/core/modules/Nebula.cpp:1274
 msgid "bipolar nebula"
 msgstr "біполярна туманність"
 
-#: src/core/modules/Nebula.cpp:1265
+#: src/core/modules/Nebula.cpp:1277
 msgid "emission nebula"
 msgstr "емісійна туманність"
 
-#: src/core/modules/Nebula.cpp:1268
+#: src/core/modules/Nebula.cpp:1280
 msgid "HII region"
 msgstr "Область HII"
 
-#: src/core/modules/Nebula.cpp:1271
+#: src/core/modules/Nebula.cpp:1283
 msgid "reflection nebula"
 msgstr "відбивна туманність"
 
-#: src/core/modules/Nebula.cpp:1274
+#: src/core/modules/Nebula.cpp:1286
 msgid "supernova remnant"
 msgstr "залишок наднової"
 
-#: src/core/modules/Nebula.cpp:1277
+#: src/core/modules/Nebula.cpp:1289
 msgid "stellar association"
 msgstr "зоряна асоціація"
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1292
 msgid "star cloud"
 msgstr "зоряна хмара"
 
-#: src/core/modules/Nebula.cpp:1283
+#: src/core/modules/Nebula.cpp:1295
 msgid "interstellar matter"
 msgstr "міжзоряна речовина"
 
-#: src/core/modules/Nebula.cpp:1286
+#: src/core/modules/Nebula.cpp:1298
 msgid "emission object"
 msgstr "емісійний об’єкт"
 
-#: src/core/modules/Nebula.cpp:1289
+#: src/core/modules/Nebula.cpp:1301
 msgid "BL Lac object"
 msgstr "Лацертид"
 
-#: src/core/modules/Nebula.cpp:1292
+#: src/core/modules/Nebula.cpp:1304
 msgid "blazar"
 msgstr "блазар"
 
-#: src/core/modules/Nebula.cpp:1295
+#: src/core/modules/Nebula.cpp:1307
 msgid "molecular cloud"
 msgstr "молекулярна хмара"
 
-#: src/core/modules/Nebula.cpp:1298
+#: src/core/modules/Nebula.cpp:1310
 msgid "young stellar object"
 msgstr "молодий зоряний об’єкт"
 
-#: src/core/modules/Nebula.cpp:1301
+#: src/core/modules/Nebula.cpp:1313
 msgid "possible quasar"
 msgstr "можливий квазар"
 
-#: src/core/modules/Nebula.cpp:1304
+#: src/core/modules/Nebula.cpp:1316
 msgid "possible planetary nebula"
 msgstr "можлива планетарна туманність"
 
-#: src/core/modules/Nebula.cpp:1307
+#: src/core/modules/Nebula.cpp:1319
 msgid "protoplanetary nebula"
 msgstr "протопланетна туманність"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1310 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1322 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:182 src/gui/AstroCalcDialog.cpp:634
 #: src/translations.h:46
 msgid "star"
 msgstr "зірка"
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1325
 msgid "symbiotic star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1316
+#: src/core/modules/Nebula.cpp:1328
 msgid "emission-line star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1319
+#: src/core/modules/Nebula.cpp:1331
 msgid "object of unknown nature"
 msgstr "об’єкт невідомої природи"
 
-#: src/core/modules/Nebula.cpp:1322
+#: src/core/modules/Nebula.cpp:1334
 msgid "undocumented type"
 msgstr "невідомий тип"
 
-#: src/core/modules/NebulaMgr.cpp:379
+#: src/core/modules/NebulaMgr.cpp:378
 msgid "Deep-sky objects"
 msgstr "Віддалені об’єкти"
 
-#: src/core/modules/NebulaMgr.cpp:380
+#: src/core/modules/NebulaMgr.cpp:379
 msgid "Toggle DSO type filter"
 msgstr "Увімкнути або вимкнути фільтрування віддалених об’єктів за типом"
 
@@ -923,7 +923,7 @@ msgstr "Середня величина у протистоянні: %1"
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
 #: src/core/modules/Comet.cpp:202 src/gui/AstroCalcDialog.cpp:315
 #: src/gui/AstroCalcDialog.cpp:578 src/gui/AstroCalcDialog.cpp:802
-#: src/gui/AstroCalcDialog.cpp:838 src/gui/AstroCalcDialog.cpp:1616
+#: src/gui/AstroCalcDialog.cpp:838 src/gui/AstroCalcDialog.cpp:1619
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -931,7 +931,7 @@ msgstr "а.о."
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
-#: src/core/modules/Comet.cpp:193
+#: src/core/modules/Comet.cpp:193 src/gui/StelGuiItems.cpp:748
 msgctxt "distance"
 msgid "km"
 msgstr "км"
@@ -1025,14 +1025,14 @@ msgid "New Moon"
 msgstr "Молодик"
 
 #: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:345
-#: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1663
-#: src/gui/AstroCalcDialog.cpp:1698
+#: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1666
+#: src/gui/AstroCalcDialog.cpp:1701
 msgid "Phase angle"
 msgstr "Фазовий кут"
 
 #: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:346
-#: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1653
-#: src/gui/AstroCalcDialog.cpp:1688
+#: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1656
+#: src/gui/AstroCalcDialog.cpp:1691
 msgid "Elongation"
 msgstr "Видовження"
 
@@ -1044,8 +1044,8 @@ msgstr "Освітлено"
 msgid "Albedo"
 msgstr "Альбедо"
 
-#: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1643
-#: src/gui/AstroCalcDialog.cpp:1678
+#: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1646
+#: src/gui/AstroCalcDialog.cpp:1681
 msgid "Phase"
 msgstr "Фаза"
 
@@ -1088,7 +1088,7 @@ msgstr "Довжина газового хвоста (оцінка)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1194
-#: src/gui/AstroCalcDialog.cpp:2694 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:2697 src/translations.h:68
 msgid "Planets"
 msgstr "Планети"
 
@@ -1182,7 +1182,7 @@ msgid "Position angle"
 msgstr "Позиційний кут"
 
 #: src/core/modules/StarWrapper.cpp:282 src/core/modules/StarWrapper.cpp:284
-#: src/gui/AstroCalcDialog.cpp:1804
+#: src/gui/AstroCalcDialog.cpp:1807
 msgid "Separation"
 msgstr "Роз’єднання"
 
@@ -1224,7 +1224,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr "Не вдалося створити надсилання Spout. Докладніше про це у журналі."
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
-#: src/gui/AstroCalcDialog.cpp:781 src/gui/AstroCalcDialog.cpp:1801
+#: src/gui/AstroCalcDialog.cpp:781 src/gui/AstroCalcDialog.cpp:1804
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -2042,7 +2042,7 @@ msgid "Deep-sky objects background images"
 msgstr "Зображення тла для далеких об’єктів"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:765 src/StelMainView.cpp:766
+#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
 msgid "Miscellaneous"
 msgstr "Інше"
 
@@ -2761,7 +2761,7 @@ msgstr "Автоматично ховати вертикальні клавіш�
 msgid "Toggle visibility of GUI"
 msgstr "Увімкнути/Вимкнути графічний інтерфейс"
 
-#: src/gui/StelGuiItems.cpp:325 src/gui/StelGuiItems.cpp:904
+#: src/gui/StelGuiItems.cpp:325 src/gui/StelGuiItems.cpp:905
 msgid "Space"
 msgstr "Пробіл"
 
@@ -2805,38 +2805,38 @@ msgstr "р/с"
 msgid "Simulation speed"
 msgstr "Швидкість імітації"
 
-#: src/gui/StelGuiItems.cpp:715
-#, c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
+#. TRANSLATORS: Unit of measure for distance - meter
+#: src/gui/StelGuiItems.cpp:716
+msgctxt "distance"
+msgid "m"
+msgstr ""
 
-#: src/gui/StelGuiItems.cpp:747
-#, qt-format
-msgid "planetocentric distance %1 km"
-msgstr "планетоцентрична відстань: %1 км"
+#: src/gui/StelGuiItems.cpp:748
+msgid "planetocentric distance"
+msgstr ""
 
-#: src/gui/StelGuiItems.cpp:749
+#: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
 msgstr "планетоцентричний спостерігач"
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:764
+#: src/gui/StelGuiItems.cpp:765
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr "ПЗ"
 
-#: src/gui/StelGuiItems.cpp:780
+#: src/gui/StelGuiItems.cpp:781
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr "Поле зору"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:799
+#: src/gui/StelGuiItems.cpp:800
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr "кд/c"
 
-#: src/gui/StelGuiItems.cpp:807
+#: src/gui/StelGuiItems.cpp:808
 msgid "Frames per second"
 msgstr "Кадрів в секунду"
 
@@ -3204,7 +3204,7 @@ msgstr "Азимут"
 #. TRANSLATORS: altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:281
 #: src/gui/AstroCalcDialog.cpp:788 src/gui/AstroCalcDialog.cpp:1378
-#: src/gui/AstroCalcDialog.cpp:1781 src/gui/AstroCalcDialog.cpp:1783
+#: src/gui/AstroCalcDialog.cpp:1784 src/gui/AstroCalcDialog.cpp:1786
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "Висота"
@@ -3344,7 +3344,7 @@ msgstr "\"/р"
 msgid "S.B."
 msgstr "Я.П."
 
-#: src/gui/AstroCalcDialog.cpp:358 src/gui/AstroCalcDialog.cpp:2698
+#: src/gui/AstroCalcDialog.cpp:358 src/gui/AstroCalcDialog.cpp:2701
 #: src/ui_viewDialog.h:2255 src/ui_dsoColorsDialog.h:566
 msgid "Galaxies"
 msgstr "Галактики"
@@ -3373,7 +3373,7 @@ msgid "Bright quasars"
 msgstr "Яскраві квазари"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:363 src/gui/AstroCalcDialog.cpp:2699
+#: src/gui/AstroCalcDialog.cpp:363 src/gui/AstroCalcDialog.cpp:2702
 #: src/translations.h:123 src/ui_viewDialog.h:2253 src/ui_dsoColorsDialog.h:558
 msgid "Star clusters"
 msgstr "Скупчення зірок"
@@ -3410,14 +3410,14 @@ msgstr "Туманності"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:369 src/gui/AstroCalcDialog.cpp:1207
-#: src/gui/AstroCalcDialog.cpp:2708 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:2711 src/translations.h:105
 #: src/ui_viewDialog.h:2254 src/ui_dsoColorsDialog.h:604
 msgid "Planetary nebulae"
 msgstr "Планетарні туманності"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:370 src/gui/AstroCalcDialog.cpp:1209
-#: src/gui/AstroCalcDialog.cpp:2697 src/translations.h:107
+#: src/gui/AstroCalcDialog.cpp:2700 src/translations.h:107
 #: src/ui_viewDialog.h:2257 src/ui_dsoColorsDialog.h:564
 msgid "Dark nebulae"
 msgstr "Темні туманності"
@@ -3508,77 +3508,77 @@ msgstr "Протопланетні туманності"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:386 src/gui/AstroCalcDialog.cpp:1211
-#: src/gui/AstroCalcDialog.cpp:2712 src/translations.h:202
+#: src/gui/AstroCalcDialog.cpp:2715 src/translations.h:153
 #: src/ui_dsoColorsDialog.h:642
 msgid "Symbiotic stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:387 src/gui/AstroCalcDialog.cpp:1212
-#: src/gui/AstroCalcDialog.cpp:2713 src/translations.h:204
+#: src/gui/AstroCalcDialog.cpp:2716 src/translations.h:155
 #: src/ui_dsoColorsDialog.h:646
 msgid "Emission-line stars"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:389 src/translations.h:153
+#: src/gui/AstroCalcDialog.cpp:389 src/translations.h:157
 #: src/ui_viewDialog.h:2204
 msgid "Messier Catalogue"
 msgstr "Каталог Месьє"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:391 src/translations.h:155
+#: src/gui/AstroCalcDialog.cpp:391 src/translations.h:159
 #: src/ui_viewDialog.h:2207
 msgid "Caldwell Catalogue"
 msgstr "Каталог Колдвелла"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:393 src/translations.h:157
+#: src/gui/AstroCalcDialog.cpp:393 src/translations.h:161
 msgid "Barnard Catalogue"
 msgstr "Каталог Барнарда"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:395 src/translations.h:159
+#: src/gui/AstroCalcDialog.cpp:395 src/translations.h:163
 msgid "Sharpless Catalogue"
 msgstr "Каталог Шарплеса"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:397 src/translations.h:161
+#: src/gui/AstroCalcDialog.cpp:397 src/translations.h:165
 msgid "Van den Bergh Catalogue"
 msgstr "Каталог ван ден Берга"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:399 src/translations.h:163
+#: src/gui/AstroCalcDialog.cpp:399 src/translations.h:167
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr "Каталог Роджерса, Кемпбела та Вайтоука"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:401 src/translations.h:165
+#: src/gui/AstroCalcDialog.cpp:401 src/translations.h:169
 msgid "Collinder Catalogue"
 msgstr "Каталог Колліндера"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:403 src/translations.h:167
+#: src/gui/AstroCalcDialog.cpp:403 src/translations.h:171
 msgid "Melotte Catalogue"
 msgstr "Каталог Мелотта"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:405 src/translations.h:169
+#: src/gui/AstroCalcDialog.cpp:405 src/translations.h:173
 msgid "New General Catalogue"
 msgstr "Новий загальний каталог"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:407 src/translations.h:171
+#: src/gui/AstroCalcDialog.cpp:407 src/translations.h:175
 msgid "Index Catalogue"
 msgstr "Каталог покажчика"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:409 src/translations.h:173
+#: src/gui/AstroCalcDialog.cpp:409 src/translations.h:177
 msgid "Lynds' Catalogue of Bright Nebulae"
 msgstr "Каталог яскравих туманностей Ліндса"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:411 src/translations.h:175
+#: src/gui/AstroCalcDialog.cpp:411 src/translations.h:179
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr "Каталог темних туманностей Ліндса"
 
@@ -3591,50 +3591,50 @@ msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Упсальський загальний каталог галактик"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:417 src/translations.h:177
+#: src/gui/AstroCalcDialog.cpp:417 src/translations.h:181
 msgid "Cederblad Catalog"
 msgstr "Каталог Седерблада"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:419 src/translations.h:179
+#: src/gui/AstroCalcDialog.cpp:419 src/translations.h:183
 msgid "The Catalogue of Peculiar Galaxies"
 msgstr "Каталог аномальних галактик"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:181
+#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:185
 msgid "The Catalogue of Interacting Galaxies"
 msgstr "Каталог галактик, які взаємодіють"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:423 src/translations.h:183
+#: src/gui/AstroCalcDialog.cpp:423 src/translations.h:187
 msgid "The Catalogue of Galactic Planetary Nebulae"
 msgstr "Каталог галактичних планетарних туманностей"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:424 src/translations.h:185
+#: src/gui/AstroCalcDialog.cpp:424 src/translations.h:189
 msgid "Dwarf galaxies"
 msgstr "Карликові галактики"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:425 src/translations.h:187
+#: src/gui/AstroCalcDialog.cpp:425 src/translations.h:191
 msgid "Herschel 400 Catalogue"
 msgstr "Каталог 400 зірок Гершеля"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:426 src/gui/AstroCalcDialog.cpp:2709
-#: src/translations.h:196
+#: src/gui/AstroCalcDialog.cpp:426 src/gui/AstroCalcDialog.cpp:2712
+#: src/translations.h:200
 msgid "Bright double stars"
 msgstr "Яскраві подвійні зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:427 src/gui/AstroCalcDialog.cpp:2710
-#: src/translations.h:198
+#: src/gui/AstroCalcDialog.cpp:427 src/gui/AstroCalcDialog.cpp:2713
+#: src/translations.h:202
 msgid "Bright variable stars"
 msgstr "Яскраві змінні зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:428 src/gui/AstroCalcDialog.cpp:2711
-#: src/translations.h:200
+#: src/gui/AstroCalcDialog.cpp:428 src/gui/AstroCalcDialog.cpp:2714
+#: src/translations.h:204
 msgid "Bright stars with high proper motion"
 msgstr "Яскраві зірки із швидким власним рухом"
 
@@ -3682,7 +3682,7 @@ msgstr "фаза"
 msgid "elong."
 msgstr "видовж."
 
-#: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcDialog.cpp:2086
+#: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcDialog.cpp:2089
 msgid "CSV (Comma delimited)"
 msgstr "CSV (із відокремленням комами)"
 
@@ -3739,49 +3739,49 @@ msgid "Solar system"
 msgstr "Сонячна система"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1195 src/gui/AstroCalcDialog.cpp:2700
+#: src/gui/AstroCalcDialog.cpp:1195 src/gui/AstroCalcDialog.cpp:2703
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Asteroids"
 msgstr "Астероїди"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1196 src/gui/AstroCalcDialog.cpp:2702
+#: src/gui/AstroCalcDialog.cpp:1196 src/gui/AstroCalcDialog.cpp:2705
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr "Плутино"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1197 src/gui/AstroCalcDialog.cpp:2701
+#: src/gui/AstroCalcDialog.cpp:1197 src/gui/AstroCalcDialog.cpp:2704
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Comets"
 msgstr "Комети"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1198 src/gui/AstroCalcDialog.cpp:2703
+#: src/gui/AstroCalcDialog.cpp:1198 src/gui/AstroCalcDialog.cpp:2706
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr "Карликові планети"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1199 src/gui/AstroCalcDialog.cpp:2704
+#: src/gui/AstroCalcDialog.cpp:1199 src/gui/AstroCalcDialog.cpp:2707
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr "К’юбівано"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1200 src/gui/AstroCalcDialog.cpp:2705
+#: src/gui/AstroCalcDialog.cpp:1200 src/gui/AstroCalcDialog.cpp:2708
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr "Об’єкти розсіяного диска"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1201 src/gui/AstroCalcDialog.cpp:2706
+#: src/gui/AstroCalcDialog.cpp:1201 src/gui/AstroCalcDialog.cpp:2709
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr "Об’єкти поясу Оорта"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1202 src/gui/AstroCalcDialog.cpp:2707
+#: src/gui/AstroCalcDialog.cpp:1202 src/gui/AstroCalcDialog.cpp:2710
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr "Седноїди"
@@ -3816,8 +3816,8 @@ msgstr "Яскраві туманності (<%1 вел.)"
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Яскраві галактики (<%1 вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:1377 src/gui/AstroCalcDialog.cpp:1781
-#: src/gui/AstroCalcDialog.cpp:1783
+#: src/gui/AstroCalcDialog.cpp:1377 src/gui/AstroCalcDialog.cpp:1784
+#: src/gui/AstroCalcDialog.cpp:1786
 msgid "Local Time"
 msgstr "Місцевий час"
 
@@ -3845,92 +3845,92 @@ msgstr "Кутовий розмір-час"
 msgid "Phase angle vs. Time"
 msgstr "Фазовий кут-час"
 
-#: src/gui/AstroCalcDialog.cpp:1615
+#: src/gui/AstroCalcDialog.cpp:1618
 msgid "Date"
 msgstr "Дата"
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:1625
+#: src/gui/AstroCalcDialog.cpp:1628
 msgid "Mm"
 msgstr "Мм"
 
-#: src/gui/AstroCalcDialog.cpp:1658 src/gui/AstroCalcDialog.cpp:1693
+#: src/gui/AstroCalcDialog.cpp:1661 src/gui/AstroCalcDialog.cpp:1696
 msgid "Angular size"
 msgstr "Кутовий розмір"
 
-#: src/gui/AstroCalcDialog.cpp:1775
+#: src/gui/AstroCalcDialog.cpp:1778
 #, qt-format
 msgid "Now about %1"
 msgstr "Зараз приблизно %1"
 
-#: src/gui/AstroCalcDialog.cpp:1777
+#: src/gui/AstroCalcDialog.cpp:1780
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr "Перехід через меридіан приблизно о %1"
 
-#: src/gui/AstroCalcDialog.cpp:1800
+#: src/gui/AstroCalcDialog.cpp:1803
 msgid "Phenomenon"
 msgstr "Подія"
 
-#: src/gui/AstroCalcDialog.cpp:1802
+#: src/gui/AstroCalcDialog.cpp:1805
 msgid "Object 1"
 msgstr "Об'єкт 1"
 
-#: src/gui/AstroCalcDialog.cpp:1803
+#: src/gui/AstroCalcDialog.cpp:1806
 msgid "Object 2"
 msgstr "Об'єкт 2"
 
-#: src/gui/AstroCalcDialog.cpp:2088
+#: src/gui/AstroCalcDialog.cpp:2091
 msgid "Save calculated phenomena as..."
 msgstr "Зберегти обчислені події як…"
 
-#: src/gui/AstroCalcDialog.cpp:2127 src/gui/AstroCalcDialog.cpp:2302
-#: src/gui/AstroCalcDialog.cpp:2460
+#: src/gui/AstroCalcDialog.cpp:2130 src/gui/AstroCalcDialog.cpp:2305
+#: src/gui/AstroCalcDialog.cpp:2463
 msgid "Conjunction"
 msgstr "З’єднання"
 
-#: src/gui/AstroCalcDialog.cpp:2134
+#: src/gui/AstroCalcDialog.cpp:2137
 msgid "Opposition"
 msgstr "Протистояння"
 
-#: src/gui/AstroCalcDialog.cpp:2142
+#: src/gui/AstroCalcDialog.cpp:2145
 msgid "Transit"
 msgstr "Кульмінація"
 
-#: src/gui/AstroCalcDialog.cpp:2144 src/gui/AstroCalcDialog.cpp:2307
-#: src/gui/AstroCalcDialog.cpp:2465
+#: src/gui/AstroCalcDialog.cpp:2147 src/gui/AstroCalcDialog.cpp:2310
+#: src/gui/AstroCalcDialog.cpp:2468
 msgid "Occultation"
 msgstr "Затінення"
 
-#: src/gui/AstroCalcDialog.cpp:2148
+#: src/gui/AstroCalcDialog.cpp:2151
 msgid "Eclipse"
 msgstr "Затьмарення"
 
-#: src/gui/AstroCalcDialog.cpp:2673
+#: src/gui/AstroCalcDialog.cpp:2676
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "Ввечері"
 
-#: src/gui/AstroCalcDialog.cpp:2674
+#: src/gui/AstroCalcDialog.cpp:2677
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "На світанку"
 
-#: src/gui/AstroCalcDialog.cpp:2675
+#: src/gui/AstroCalcDialog.cpp:2678
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "Близько опівночі"
 
-#: src/gui/AstroCalcDialog.cpp:2676
+#: src/gui/AstroCalcDialog.cpp:2679
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "Будь-коли протягом ночі"
 
-#: src/gui/AstroCalcDialog.cpp:2695
+#: src/gui/AstroCalcDialog.cpp:2698
 msgid "Bright stars"
 msgstr "Яскраві зірки"
 
-#: src/gui/AstroCalcDialog.cpp:2696 src/ui_viewDialog.h:2258
+#: src/gui/AstroCalcDialog.cpp:2699 src/ui_viewDialog.h:2258
 msgid "Bright nebulae"
 msgstr "Яскраві туманності"
 
@@ -3989,19 +3989,19 @@ msgstr "Ліцензія"
 msgid "Shortcut"
 msgstr "Комбінація клавіш"
 
-#: src/StelMainView.cpp:765
+#: src/StelMainView.cpp:767
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/StelMainView.cpp:766
+#: src/StelMainView.cpp:768
 msgid "Reload shaders (for development)"
 msgstr "Перезавантажити шейдери (для розробників)"
 
-#: src/StelMainView.cpp:767
+#: src/StelMainView.cpp:769
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/StelMainView.cpp:923
+#: src/StelMainView.cpp:925
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4010,14 +4010,14 @@ msgstr ""
 "графічної підсистеми або скористайтеся параметром --angle-mode (або --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:926
+#: src/StelMainView.cpp:928
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери або графічне "
 "обладнання."
 
-#: src/StelMainView.cpp:968
+#: src/StelMainView.cpp:970
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4028,7 +4028,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1019
+#: src/StelMainView.cpp:1021
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4039,7 +4039,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1075
+#: src/StelMainView.cpp:1077
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4050,7 +4050,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1116
+#: src/StelMainView.cpp:1118
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4061,7 +4061,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1228
+#: src/StelMainView.cpp:1230
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4162,12 +4162,12 @@ msgid "Bright galaxies"
 msgstr "Яскраві галактики"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Interesting double stars"
 msgstr "Цікаві подвійні зірки"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Interesting variable stars"
 msgstr "Цікаві змінні зірки"
 
@@ -9278,8 +9278,8 @@ msgid "On-screen control panel"
 msgstr "Екранна панель керування"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
-msgid "Show resolution criterions"
-msgstr "Показувати критерії роздільності"
+msgid "Show resolution criteria"
+msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1148
 msgid ""
@@ -9469,32 +9469,32 @@ msgstr "Екваторіальний лафет"
 msgid "Telescopes"
 msgstr "Телескопи"
 
-#: plugins/Satellites/src/Satellites.cpp:68
-#: plugins/Satellites/src/Satellites.cpp:143
+#: plugins/Satellites/src/Satellites.cpp:71
+#: plugins/Satellites/src/Satellites.cpp:146
 #: plugins/Satellites/src/ui_satellitesDialog.h:806
 msgid "Satellites"
 msgstr "Супутники"
 
-#: plugins/Satellites/src/Satellites.cpp:71
+#: plugins/Satellites/src/Satellites.cpp:74
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
 "Визначення позицій штучних супутників на орбіті Землі на основі даних NORAD"
 
-#: plugins/Satellites/src/Satellites.cpp:144
+#: plugins/Satellites/src/Satellites.cpp:147
 msgid "Satellite hints"
 msgstr "Підказки щодо супутників"
 
-#: plugins/Satellites/src/Satellites.cpp:145
+#: plugins/Satellites/src/Satellites.cpp:148
 msgid "Satellite labels"
 msgstr "Мітки супутників"
 
-#: plugins/Satellites/src/Satellites.cpp:146
+#: plugins/Satellites/src/Satellites.cpp:149
 msgid "Satellites configuration window"
 msgstr "Вікно налаштування супутників"
 
-#: plugins/Satellites/src/Satellites.cpp:178
+#: plugins/Satellites/src/Satellites.cpp:181
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -9502,77 +9502,77 @@ msgstr ""
 "використано типовий файл."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2010
+#: plugins/Satellites/src/Satellites.cpp:2050
 msgid "visual"
 msgstr "видимі"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2012
+#: plugins/Satellites/src/Satellites.cpp:2052
 msgid "scientific"
 msgstr "наукові"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2014
+#: plugins/Satellites/src/Satellites.cpp:2054
 msgid "communications"
 msgstr "комунікаційні"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2016
+#: plugins/Satellites/src/Satellites.cpp:2056
 msgid "navigation"
 msgstr "навігаційні"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2018
+#: plugins/Satellites/src/Satellites.cpp:2058
 msgid "amateur"
 msgstr "аматорське радіомовлення"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2020
+#: plugins/Satellites/src/Satellites.cpp:2060
 msgid "weather"
 msgstr "метеорологічні"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2022
+#: plugins/Satellites/src/Satellites.cpp:2062
 msgid "geostationary"
 msgstr "геостаціонарні"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2024
+#: plugins/Satellites/src/Satellites.cpp:2064
 msgid "non-operational"
 msgstr "недієздатні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2026
+#: plugins/Satellites/src/Satellites.cpp:2066
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2028
+#: plugins/Satellites/src/Satellites.cpp:2068
 msgid "glonass"
 msgstr "глонасс"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2030
+#: plugins/Satellites/src/Satellites.cpp:2070
 msgid "galileo"
 msgstr "галілео"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2072
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "stations"
 msgstr "станції"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2036
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "education"
 msgstr "освітні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2038
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "observatory"
 msgstr "обсерваторії"
 
@@ -9582,57 +9582,57 @@ msgstr "обсерваторії"
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "The Hubble Space Telescope"
 msgstr "Космічний телескоп «Хаббл»"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "The International Space Station"
 msgstr "Міжнародна космічна станція"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "China's first space station"
 msgstr "перша китайська космічна станція"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "The russian space radio telescope RadioAstron"
 msgstr "Російський космічний радіотелескоп «РадіоАстрон»"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "Міжнародна гамма-променева астрофізична лабораторія"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2098
 msgid "The Gamma-Ray Observatory"
 msgstr "Гамма-променева обсерваторія"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2062
+#: plugins/Satellites/src/Satellites.cpp:2102
 msgid "ISS (ZARYA)"
 msgstr "МКС (Заря)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2104
 msgid "HST"
 msgstr "Космічний телескоп «Хаббл»"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2106
 msgid "SPEKTR-R"
 msgstr "Спектр-Р"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2068
+#: plugins/Satellites/src/Satellites.cpp:2108
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2070
+#: plugins/Satellites/src/Satellites.cpp:2110
 msgid "TIANGONG 1"
 msgstr "Тянгунь 1"
 
@@ -12775,13 +12775,15 @@ msgstr "Степінь розсіювання:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:194
+msgctxt "distance"
 msgid "cm"
-msgstr "см"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
+msgctxt "distance"
 msgid "pc"
-msgstr "пк"
+msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
@@ -12824,8 +12826,9 @@ msgstr "Осереднена щільність потоку при"
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Pulsars/src/Pulsar.cpp:245
 #: plugins/Pulsars/src/Pulsar.cpp:257
+msgctxt "frequency"
 msgid "MHz"
-msgstr "МГц"
+msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:236 plugins/Pulsars/src/Pulsar.cpp:248
@@ -17041,6 +17044,10 @@ msgstr "Нетипове схилення 2"
 #~ msgid "Subtract 1 sidereal week"
 #~ msgstr "Відняти 1 зірковий тиждень"
 
+#, c-format, qt-format
+#~ msgid "%1m"
+#~ msgstr "%1m"
+
 #~ msgid "No description"
 #~ msgstr "Немає опису"
 
@@ -17886,6 +17893,9 @@ msgstr "Нетипове схилення 2"
 #~ msgid "Type of pulsar: %1"
 #~ msgstr "Тип пульсара: %1"
 
+#~ msgid "MHz"
+#~ msgstr "МГц"
+
 #~ msgid "globular cluster association"
 #~ msgstr "прив’язка до кульового скупчення"
 
@@ -18039,6 +18049,12 @@ msgstr "Нетипове схилення 2"
 
 #~ msgid "Show Galactic plane line"
 #~ msgstr "Показувати лінію галактичної площини"
+
+#~ msgid "cm"
+#~ msgstr "см"
+
+#~ msgid "pc"
+#~ msgstr "пк"
 
 #, qt-format
 #~ msgid ""
@@ -18769,6 +18785,10 @@ msgstr "Нетипове схилення 2"
 
 #~ msgid "Bright Nebulae"
 #~ msgstr "Яскрава туманність"
+
+#, qt-format
+#~ msgid "planetocentric distance %1 km"
+#~ msgstr "планетоцентрична відстань: %1 км"
 
 #~ msgid ""
 #~ "Activate this option to calculate azimuth from south towards west (as in old "

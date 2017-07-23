@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-19 17:52+0700\n"
+"POT-Creation-Date: 2017-07-23 04:15+0700\n"
 "PO-Revision-Date: 2017-05-02 05:26+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-20 05:21+0000\n"
+"X-Launchpad-Export-Date: 2017-07-23 05:19+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 "Language: ko\n"
 
@@ -53,11 +53,11 @@ msgstr "성좌"
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
 #: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:422
-#: src/core/modules/NebulaMgr.cpp:379 src/core/modules/NebulaMgr.cpp:380
+#: src/core/modules/NebulaMgr.cpp:378 src/core/modules/NebulaMgr.cpp:379
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:548 src/core/StelCore.cpp:254
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:767
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:769
 msgid "Display Options"
 msgstr "화면 설정"
 
@@ -404,8 +404,8 @@ msgstr "천체:"
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:230
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:62
-#: src/core/modules/StarWrapper.cpp:202 src/gui/AstroCalcDialog.cpp:1637
-#: src/gui/AstroCalcDialog.cpp:1672 plugins/Supernovae/src/Supernova.cpp:140
+#: src/core/modules/StarWrapper.cpp:202 src/gui/AstroCalcDialog.cpp:1640
+#: src/gui/AstroCalcDialog.cpp:1675 plugins/Supernovae/src/Supernova.cpp:140
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
 #: plugins/Exoplanets/src/Exoplanet.cpp:304
 msgid "Magnitude"
@@ -481,7 +481,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:301 src/core/modules/Nebula.cpp:336
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:285
 #: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:240
-#: src/gui/AstroCalcDialog.cpp:1648 src/gui/AstroCalcDialog.cpp:1683
+#: src/gui/AstroCalcDialog.cpp:1651 src/gui/AstroCalcDialog.cpp:1686
 #: src/ui_configurationDialog.h:1362 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:318
 msgid "Distance"
@@ -517,389 +517,389 @@ msgstr ""
 msgid "Morphological description"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:984
+#: src/core/modules/Nebula.cpp:996
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:987
+#: src/core/modules/Nebula.cpp:999
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:990
+#: src/core/modules/Nebula.cpp:1002
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:993
+#: src/core/modules/Nebula.cpp:1005
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:998
+#: src/core/modules/Nebula.cpp:1010
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1001
+#: src/core/modules/Nebula.cpp:1013
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1004
+#: src/core/modules/Nebula.cpp:1016
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1007
+#: src/core/modules/Nebula.cpp:1019
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1010
+#: src/core/modules/Nebula.cpp:1022
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1013
+#: src/core/modules/Nebula.cpp:1025
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1016
+#: src/core/modules/Nebula.cpp:1028
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1036
+#: src/core/modules/Nebula.cpp:1048
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1039
+#: src/core/modules/Nebula.cpp:1051
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1042
+#: src/core/modules/Nebula.cpp:1054
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1045
+#: src/core/modules/Nebula.cpp:1057
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1048
+#: src/core/modules/Nebula.cpp:1060
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1054
+#: src/core/modules/Nebula.cpp:1066
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "성단 중에서 작은 밝은 범위를 가짐"
 
-#: src/core/modules/Nebula.cpp:1057
+#: src/core/modules/Nebula.cpp:1069
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "성단 중에서 중간 밝은 범위를 가짐"
 
-#: src/core/modules/Nebula.cpp:1060
+#: src/core/modules/Nebula.cpp:1072
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "성단 중에서 넓은 밝은 범위를 가짐"
 
-#: src/core/modules/Nebula.cpp:1063
+#: src/core/modules/Nebula.cpp:1075
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "성단 중에서 밝은 범위가 정의되지 않음"
 
-#: src/core/modules/Nebula.cpp:1069
+#: src/core/modules/Nebula.cpp:1081
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1072
+#: src/core/modules/Nebula.cpp:1084
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "약 50-100개의 별이 적당히 존재하는 성단"
 
-#: src/core/modules/Nebula.cpp:1075
+#: src/core/modules/Nebula.cpp:1087
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "100개 이상의 별이 풍부히 존재하는 성단"
 
-#: src/core/modules/Nebula.cpp:1078
+#: src/core/modules/Nebula.cpp:1090
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1082
+#: src/core/modules/Nebula.cpp:1094
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1103
+#: src/core/modules/Nebula.cpp:1115
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "매우 밝음"
 
-#: src/core/modules/Nebula.cpp:1106
+#: src/core/modules/Nebula.cpp:1118
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "밝음"
 
-#: src/core/modules/Nebula.cpp:1109
+#: src/core/modules/Nebula.cpp:1121
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "보통 밝기"
 
-#: src/core/modules/Nebula.cpp:1112
+#: src/core/modules/Nebula.cpp:1124
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "희미함"
 
-#: src/core/modules/Nebula.cpp:1115
+#: src/core/modules/Nebula.cpp:1127
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "매우 희미함"
 
-#: src/core/modules/Nebula.cpp:1118
+#: src/core/modules/Nebula.cpp:1130
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "불확실한 밝기"
 
-#: src/core/modules/Nebula.cpp:1121
+#: src/core/modules/Nebula.cpp:1133
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "반사성운의 증명되지 않은 밝기"
 
-#: src/core/modules/Nebula.cpp:1127
+#: src/core/modules/Nebula.cpp:1139
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "성운을 밝게하는 별이 포함되어있음"
 
-#: src/core/modules/Nebula.cpp:1130
+#: src/core/modules/Nebula.cpp:1142
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "별이 밝은 성운의 바깥쪽에 위치해있음"
 
-#: src/core/modules/Nebula.cpp:1133
+#: src/core/modules/Nebula.cpp:1145
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "별이 밝은 성운의 코너에 위치해있음"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1138
+#: src/core/modules/Nebula.cpp:1150
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "별이 밝고 독특한 성운의 바깥쪽에 위치해있음"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1144
+#: src/core/modules/Nebula.cpp:1156
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "밝고 독특한 성운"
 
-#: src/core/modules/Nebula.cpp:1148
+#: src/core/modules/Nebula.cpp:1160
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1171
+#: src/core/modules/Nebula.cpp:1183
 msgid "circular form"
 msgstr "원형"
 
-#: src/core/modules/Nebula.cpp:1174
+#: src/core/modules/Nebula.cpp:1186
 msgid "elliptical form"
 msgstr "타원형"
 
-#: src/core/modules/Nebula.cpp:1177
+#: src/core/modules/Nebula.cpp:1189
 msgid "irregular form"
 msgstr "불규칙한 형태"
 
-#: src/core/modules/Nebula.cpp:1180
+#: src/core/modules/Nebula.cpp:1192
 msgid "undocumented form"
 msgstr "증명되지 않은 형태"
 
-#: src/core/modules/Nebula.cpp:1186
+#: src/core/modules/Nebula.cpp:1198
 msgid "amorphous structure"
 msgstr "무정형 구조"
 
-#: src/core/modules/Nebula.cpp:1189
+#: src/core/modules/Nebula.cpp:1201
 msgid "conventional structure"
 msgstr "평범한 구조"
 
-#: src/core/modules/Nebula.cpp:1192
+#: src/core/modules/Nebula.cpp:1204
 msgid "filamentary structure"
 msgstr "필라멘트 구조"
 
-#: src/core/modules/Nebula.cpp:1195
+#: src/core/modules/Nebula.cpp:1207
 msgid "undocumented structure"
 msgstr "증명되지 않은 구조"
 
-#: src/core/modules/Nebula.cpp:1201
+#: src/core/modules/Nebula.cpp:1213
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "희미함"
 
-#: src/core/modules/Nebula.cpp:1204
+#: src/core/modules/Nebula.cpp:1216
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "보통 밝기"
 
-#: src/core/modules/Nebula.cpp:1207
+#: src/core/modules/Nebula.cpp:1219
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "밝음"
 
-#: src/core/modules/Nebula.cpp:1210
+#: src/core/modules/Nebula.cpp:1222
 msgid "undocumented brightness"
 msgstr "증명되지 않은 밝기"
 
-#: src/core/modules/Nebula.cpp:1226
+#: src/core/modules/Nebula.cpp:1238
 msgid "galaxy"
 msgstr "은하"
 
-#: src/core/modules/Nebula.cpp:1229
+#: src/core/modules/Nebula.cpp:1241
 msgid "active galaxy"
 msgstr "활성은하"
 
-#: src/core/modules/Nebula.cpp:1232
+#: src/core/modules/Nebula.cpp:1244
 msgid "radio galaxy"
 msgstr "전파은하"
 
-#: src/core/modules/Nebula.cpp:1235
+#: src/core/modules/Nebula.cpp:1247
 msgid "interacting galaxy"
 msgstr "상호작용은하"
 
-#: src/core/modules/Nebula.cpp:1238 plugins/Quasars/src/Quasar.cpp:102
+#: src/core/modules/Nebula.cpp:1250 plugins/Quasars/src/Quasar.cpp:102
 msgid "quasar"
 msgstr "퀘이사"
 
-#: src/core/modules/Nebula.cpp:1241
+#: src/core/modules/Nebula.cpp:1253
 msgid "star cluster"
 msgstr "성단"
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1256
 msgid "open star cluster"
 msgstr "산개성단"
 
-#: src/core/modules/Nebula.cpp:1247
+#: src/core/modules/Nebula.cpp:1259
 msgid "globular star cluster"
 msgstr "구상성단"
 
-#: src/core/modules/Nebula.cpp:1250
+#: src/core/modules/Nebula.cpp:1262
 msgid "nebula"
 msgstr "성운"
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1265
 msgid "planetary nebula"
 msgstr "행성상성운"
 
-#: src/core/modules/Nebula.cpp:1256
+#: src/core/modules/Nebula.cpp:1268
 msgid "dark nebula"
 msgstr "암흑성운"
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1271
 msgid "cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/core/modules/Nebula.cpp:1262
+#: src/core/modules/Nebula.cpp:1274
 msgid "bipolar nebula"
 msgstr "쌍극성운"
 
-#: src/core/modules/Nebula.cpp:1265
+#: src/core/modules/Nebula.cpp:1277
 msgid "emission nebula"
 msgstr "발광성운"
 
-#: src/core/modules/Nebula.cpp:1268
+#: src/core/modules/Nebula.cpp:1280
 msgid "HII region"
 msgstr "전리수소영역(HII region)"
 
-#: src/core/modules/Nebula.cpp:1271
+#: src/core/modules/Nebula.cpp:1283
 msgid "reflection nebula"
 msgstr "반사성운"
 
-#: src/core/modules/Nebula.cpp:1274
+#: src/core/modules/Nebula.cpp:1286
 msgid "supernova remnant"
 msgstr "초신성잔해"
 
-#: src/core/modules/Nebula.cpp:1277
+#: src/core/modules/Nebula.cpp:1289
 msgid "stellar association"
 msgstr "성협"
 
-#: src/core/modules/Nebula.cpp:1280
+#: src/core/modules/Nebula.cpp:1292
 msgid "star cloud"
 msgstr "별 구름"
 
-#: src/core/modules/Nebula.cpp:1283
+#: src/core/modules/Nebula.cpp:1295
 msgid "interstellar matter"
 msgstr "성간 물질"
 
-#: src/core/modules/Nebula.cpp:1286
+#: src/core/modules/Nebula.cpp:1298
 msgid "emission object"
 msgstr "방출 천체"
 
-#: src/core/modules/Nebula.cpp:1289
+#: src/core/modules/Nebula.cpp:1301
 msgid "BL Lac object"
 msgstr "BL Lac 천체"
 
-#: src/core/modules/Nebula.cpp:1292
+#: src/core/modules/Nebula.cpp:1304
 msgid "blazar"
 msgstr "blazar"
 
-#: src/core/modules/Nebula.cpp:1295
+#: src/core/modules/Nebula.cpp:1307
 msgid "molecular cloud"
 msgstr "분자구름"
 
-#: src/core/modules/Nebula.cpp:1298
+#: src/core/modules/Nebula.cpp:1310
 msgid "young stellar object"
 msgstr "젊은 항성체"
 
-#: src/core/modules/Nebula.cpp:1301
+#: src/core/modules/Nebula.cpp:1313
 msgid "possible quasar"
 msgstr "퀘이사일 가능성 있음"
 
-#: src/core/modules/Nebula.cpp:1304
+#: src/core/modules/Nebula.cpp:1316
 msgid "possible planetary nebula"
 msgstr "원시행성상성운일 가능성 있음"
 
-#: src/core/modules/Nebula.cpp:1307
+#: src/core/modules/Nebula.cpp:1319
 msgid "protoplanetary nebula"
 msgstr "원시행성상성운"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1310 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1322 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:182 src/gui/AstroCalcDialog.cpp:634
 #: src/translations.h:46
 msgid "star"
 msgstr "항성"
 
-#: src/core/modules/Nebula.cpp:1313
+#: src/core/modules/Nebula.cpp:1325
 msgid "symbiotic star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1316
+#: src/core/modules/Nebula.cpp:1328
 msgid "emission-line star"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1319
+#: src/core/modules/Nebula.cpp:1331
 msgid "object of unknown nature"
 msgstr "알 수 없는 천체"
 
-#: src/core/modules/Nebula.cpp:1322
+#: src/core/modules/Nebula.cpp:1334
 msgid "undocumented type"
 msgstr "증명되지 않은 종류"
 
-#: src/core/modules/NebulaMgr.cpp:379
+#: src/core/modules/NebulaMgr.cpp:378
 msgid "Deep-sky objects"
 msgstr "딥스카이 천체"
 
-#: src/core/modules/NebulaMgr.cpp:380
+#: src/core/modules/NebulaMgr.cpp:379
 msgid "Toggle DSO type filter"
 msgstr ""
 
@@ -918,7 +918,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
 #: src/core/modules/Comet.cpp:202 src/gui/AstroCalcDialog.cpp:315
 #: src/gui/AstroCalcDialog.cpp:578 src/gui/AstroCalcDialog.cpp:802
-#: src/gui/AstroCalcDialog.cpp:838 src/gui/AstroCalcDialog.cpp:1616
+#: src/gui/AstroCalcDialog.cpp:838 src/gui/AstroCalcDialog.cpp:1619
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -926,7 +926,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
-#: src/core/modules/Comet.cpp:193
+#: src/core/modules/Comet.cpp:193 src/gui/StelGuiItems.cpp:748
 msgctxt "distance"
 msgid "km"
 msgstr ""
@@ -1020,14 +1020,14 @@ msgid "New Moon"
 msgstr "삭월"
 
 #: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:345
-#: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1663
-#: src/gui/AstroCalcDialog.cpp:1698
+#: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1666
+#: src/gui/AstroCalcDialog.cpp:1701
 msgid "Phase angle"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:346
-#: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1653
-#: src/gui/AstroCalcDialog.cpp:1688
+#: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1656
+#: src/gui/AstroCalcDialog.cpp:1691
 msgid "Elongation"
 msgstr ""
 
@@ -1039,8 +1039,8 @@ msgstr ""
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1643
-#: src/gui/AstroCalcDialog.cpp:1678
+#: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1646
+#: src/gui/AstroCalcDialog.cpp:1681
 msgid "Phase"
 msgstr ""
 
@@ -1083,7 +1083,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1194
-#: src/gui/AstroCalcDialog.cpp:2694 src/translations.h:68
+#: src/gui/AstroCalcDialog.cpp:2697 src/translations.h:68
 msgid "Planets"
 msgstr "행성"
 
@@ -1177,7 +1177,7 @@ msgid "Position angle"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:282 src/core/modules/StarWrapper.cpp:284
-#: src/gui/AstroCalcDialog.cpp:1804
+#: src/gui/AstroCalcDialog.cpp:1807
 msgid "Separation"
 msgstr ""
 
@@ -1219,7 +1219,7 @@ msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
-#: src/gui/AstroCalcDialog.cpp:781 src/gui/AstroCalcDialog.cpp:1801
+#: src/gui/AstroCalcDialog.cpp:781 src/gui/AstroCalcDialog.cpp:1804
 #: src/gui/BookmarksDialog.cpp:108 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
@@ -1959,7 +1959,7 @@ msgid "Deep-sky objects background images"
 msgstr "딥스카이 천체 배경 이미지"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:765 src/StelMainView.cpp:766
+#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -2664,7 +2664,7 @@ msgstr "수직 버튼 바 자동 숨기기"
 msgid "Toggle visibility of GUI"
 msgstr "GUI 켜기/끄기"
 
-#: src/gui/StelGuiItems.cpp:325 src/gui/StelGuiItems.cpp:904
+#: src/gui/StelGuiItems.cpp:325 src/gui/StelGuiItems.cpp:905
 msgid "Space"
 msgstr "Space"
 
@@ -2708,38 +2708,38 @@ msgstr ""
 msgid "Simulation speed"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:715
-#, c-format, qt-format
-msgid "%1m"
-msgstr "%1m"
-
-#: src/gui/StelGuiItems.cpp:747
-#, qt-format
-msgid "planetocentric distance %1 km"
+#. TRANSLATORS: Unit of measure for distance - meter
+#: src/gui/StelGuiItems.cpp:716
+msgctxt "distance"
+msgid "m"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:749
+#: src/gui/StelGuiItems.cpp:748
+msgid "planetocentric distance"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
 msgstr ""
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:764
+#: src/gui/StelGuiItems.cpp:765
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:780
+#: src/gui/StelGuiItems.cpp:781
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr "시야각"
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:799
+#: src/gui/StelGuiItems.cpp:800
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:807
+#: src/gui/StelGuiItems.cpp:808
 msgid "Frames per second"
 msgstr "초당 프레임 수"
 
@@ -3091,7 +3091,7 @@ msgstr "방위각"
 #. TRANSLATORS: altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:281
 #: src/gui/AstroCalcDialog.cpp:788 src/gui/AstroCalcDialog.cpp:1378
-#: src/gui/AstroCalcDialog.cpp:1781 src/gui/AstroCalcDialog.cpp:1783
+#: src/gui/AstroCalcDialog.cpp:1784 src/gui/AstroCalcDialog.cpp:1786
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "고도"
@@ -3231,7 +3231,7 @@ msgstr ""
 msgid "S.B."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:358 src/gui/AstroCalcDialog.cpp:2698
+#: src/gui/AstroCalcDialog.cpp:358 src/gui/AstroCalcDialog.cpp:2701
 #: src/ui_viewDialog.h:2255 src/ui_dsoColorsDialog.h:566
 msgid "Galaxies"
 msgstr "은하"
@@ -3260,7 +3260,7 @@ msgid "Bright quasars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:363 src/gui/AstroCalcDialog.cpp:2699
+#: src/gui/AstroCalcDialog.cpp:363 src/gui/AstroCalcDialog.cpp:2702
 #: src/translations.h:123 src/ui_viewDialog.h:2253 src/ui_dsoColorsDialog.h:558
 msgid "Star clusters"
 msgstr "성단"
@@ -3297,14 +3297,14 @@ msgstr "성운"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:369 src/gui/AstroCalcDialog.cpp:1207
-#: src/gui/AstroCalcDialog.cpp:2708 src/translations.h:105
+#: src/gui/AstroCalcDialog.cpp:2711 src/translations.h:105
 #: src/ui_viewDialog.h:2254 src/ui_dsoColorsDialog.h:604
 msgid "Planetary nebulae"
 msgstr "행성상성운"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:370 src/gui/AstroCalcDialog.cpp:1209
-#: src/gui/AstroCalcDialog.cpp:2697 src/translations.h:107
+#: src/gui/AstroCalcDialog.cpp:2700 src/translations.h:107
 #: src/ui_viewDialog.h:2257 src/ui_dsoColorsDialog.h:564
 msgid "Dark nebulae"
 msgstr "암흑성운"
@@ -3395,77 +3395,77 @@ msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:386 src/gui/AstroCalcDialog.cpp:1211
-#: src/gui/AstroCalcDialog.cpp:2712 src/translations.h:202
+#: src/gui/AstroCalcDialog.cpp:2715 src/translations.h:153
 #: src/ui_dsoColorsDialog.h:642
 msgid "Symbiotic stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:387 src/gui/AstroCalcDialog.cpp:1212
-#: src/gui/AstroCalcDialog.cpp:2713 src/translations.h:204
+#: src/gui/AstroCalcDialog.cpp:2716 src/translations.h:155
 #: src/ui_dsoColorsDialog.h:646
 msgid "Emission-line stars"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:389 src/translations.h:153
+#: src/gui/AstroCalcDialog.cpp:389 src/translations.h:157
 #: src/ui_viewDialog.h:2204
 msgid "Messier Catalogue"
 msgstr "메시에 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:391 src/translations.h:155
+#: src/gui/AstroCalcDialog.cpp:391 src/translations.h:159
 #: src/ui_viewDialog.h:2207
 msgid "Caldwell Catalogue"
 msgstr "콜드웰 목록"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:393 src/translations.h:157
+#: src/gui/AstroCalcDialog.cpp:393 src/translations.h:161
 msgid "Barnard Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:395 src/translations.h:159
+#: src/gui/AstroCalcDialog.cpp:395 src/translations.h:163
 msgid "Sharpless Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:397 src/translations.h:161
+#: src/gui/AstroCalcDialog.cpp:397 src/translations.h:165
 msgid "Van den Bergh Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:399 src/translations.h:163
+#: src/gui/AstroCalcDialog.cpp:399 src/translations.h:167
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:401 src/translations.h:165
+#: src/gui/AstroCalcDialog.cpp:401 src/translations.h:169
 msgid "Collinder Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:403 src/translations.h:167
+#: src/gui/AstroCalcDialog.cpp:403 src/translations.h:171
 msgid "Melotte Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:405 src/translations.h:169
+#: src/gui/AstroCalcDialog.cpp:405 src/translations.h:173
 msgid "New General Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:407 src/translations.h:171
+#: src/gui/AstroCalcDialog.cpp:407 src/translations.h:175
 msgid "Index Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:409 src/translations.h:173
+#: src/gui/AstroCalcDialog.cpp:409 src/translations.h:177
 msgid "Lynds' Catalogue of Bright Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:411 src/translations.h:175
+#: src/gui/AstroCalcDialog.cpp:411 src/translations.h:179
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr ""
 
@@ -3478,50 +3478,50 @@ msgid "The Uppsala General Catalogue of Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:417 src/translations.h:177
+#: src/gui/AstroCalcDialog.cpp:417 src/translations.h:181
 msgid "Cederblad Catalog"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:419 src/translations.h:179
+#: src/gui/AstroCalcDialog.cpp:419 src/translations.h:183
 msgid "The Catalogue of Peculiar Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:181
+#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:185
 msgid "The Catalogue of Interacting Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:423 src/translations.h:183
+#: src/gui/AstroCalcDialog.cpp:423 src/translations.h:187
 msgid "The Catalogue of Galactic Planetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:424 src/translations.h:185
+#: src/gui/AstroCalcDialog.cpp:424 src/translations.h:189
 msgid "Dwarf galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:425 src/translations.h:187
+#: src/gui/AstroCalcDialog.cpp:425 src/translations.h:191
 msgid "Herschel 400 Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:426 src/gui/AstroCalcDialog.cpp:2709
-#: src/translations.h:196
+#: src/gui/AstroCalcDialog.cpp:426 src/gui/AstroCalcDialog.cpp:2712
+#: src/translations.h:200
 msgid "Bright double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:427 src/gui/AstroCalcDialog.cpp:2710
-#: src/translations.h:198
+#: src/gui/AstroCalcDialog.cpp:427 src/gui/AstroCalcDialog.cpp:2713
+#: src/translations.h:202
 msgid "Bright variable stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:428 src/gui/AstroCalcDialog.cpp:2711
-#: src/translations.h:200
+#: src/gui/AstroCalcDialog.cpp:428 src/gui/AstroCalcDialog.cpp:2714
+#: src/translations.h:204
 msgid "Bright stars with high proper motion"
 msgstr ""
 
@@ -3569,7 +3569,7 @@ msgstr ""
 msgid "elong."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcDialog.cpp:2086
+#: src/gui/AstroCalcDialog.cpp:988 src/gui/AstroCalcDialog.cpp:2089
 msgid "CSV (Comma delimited)"
 msgstr ""
 
@@ -3626,49 +3626,49 @@ msgid "Solar system"
 msgstr "태양계"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1195 src/gui/AstroCalcDialog.cpp:2700
+#: src/gui/AstroCalcDialog.cpp:1195 src/gui/AstroCalcDialog.cpp:2703
 #: src/translations.h:72 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Asteroids"
 msgstr "소행성"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1196 src/gui/AstroCalcDialog.cpp:2702
+#: src/gui/AstroCalcDialog.cpp:1196 src/gui/AstroCalcDialog.cpp:2705
 #: src/translations.h:76
 msgid "Plutinos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1197 src/gui/AstroCalcDialog.cpp:2701
+#: src/gui/AstroCalcDialog.cpp:1197 src/gui/AstroCalcDialog.cpp:2704
 #: src/translations.h:70 plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Comets"
 msgstr "혜성"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1198 src/gui/AstroCalcDialog.cpp:2703
+#: src/gui/AstroCalcDialog.cpp:1198 src/gui/AstroCalcDialog.cpp:2706
 #: src/translations.h:78
 msgid "Dwarf planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1199 src/gui/AstroCalcDialog.cpp:2704
+#: src/gui/AstroCalcDialog.cpp:1199 src/gui/AstroCalcDialog.cpp:2707
 #: src/translations.h:80
 msgid "Cubewanos"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1200 src/gui/AstroCalcDialog.cpp:2705
+#: src/gui/AstroCalcDialog.cpp:1200 src/gui/AstroCalcDialog.cpp:2708
 #: src/translations.h:82
 msgid "Scattered disc objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1201 src/gui/AstroCalcDialog.cpp:2706
+#: src/gui/AstroCalcDialog.cpp:1201 src/gui/AstroCalcDialog.cpp:2709
 #: src/translations.h:84
 msgid "Oort cloud objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1202 src/gui/AstroCalcDialog.cpp:2707
+#: src/gui/AstroCalcDialog.cpp:1202 src/gui/AstroCalcDialog.cpp:2710
 #: src/translations.h:86
 msgid "Sednoids"
 msgstr ""
@@ -3703,8 +3703,8 @@ msgstr ""
 msgid "Bright galaxies (<%1 mag)"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1377 src/gui/AstroCalcDialog.cpp:1781
-#: src/gui/AstroCalcDialog.cpp:1783
+#: src/gui/AstroCalcDialog.cpp:1377 src/gui/AstroCalcDialog.cpp:1784
+#: src/gui/AstroCalcDialog.cpp:1786
 msgid "Local Time"
 msgstr "지방시"
 
@@ -3732,92 +3732,92 @@ msgstr ""
 msgid "Phase angle vs. Time"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1615
+#: src/gui/AstroCalcDialog.cpp:1618
 msgid "Date"
 msgstr ""
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the metric system, equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:1625
+#: src/gui/AstroCalcDialog.cpp:1628
 msgid "Mm"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1658 src/gui/AstroCalcDialog.cpp:1693
+#: src/gui/AstroCalcDialog.cpp:1661 src/gui/AstroCalcDialog.cpp:1696
 msgid "Angular size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1775
+#: src/gui/AstroCalcDialog.cpp:1778
 #, qt-format
 msgid "Now about %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1777
+#: src/gui/AstroCalcDialog.cpp:1780
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1800
+#: src/gui/AstroCalcDialog.cpp:1803
 msgid "Phenomenon"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1802
+#: src/gui/AstroCalcDialog.cpp:1805
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:1803
+#: src/gui/AstroCalcDialog.cpp:1806
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2088
+#: src/gui/AstroCalcDialog.cpp:2091
 msgid "Save calculated phenomena as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2127 src/gui/AstroCalcDialog.cpp:2302
-#: src/gui/AstroCalcDialog.cpp:2460
+#: src/gui/AstroCalcDialog.cpp:2130 src/gui/AstroCalcDialog.cpp:2305
+#: src/gui/AstroCalcDialog.cpp:2463
 msgid "Conjunction"
 msgstr "합"
 
-#: src/gui/AstroCalcDialog.cpp:2134
+#: src/gui/AstroCalcDialog.cpp:2137
 msgid "Opposition"
 msgstr "충"
 
-#: src/gui/AstroCalcDialog.cpp:2142
+#: src/gui/AstroCalcDialog.cpp:2145
 msgid "Transit"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2144 src/gui/AstroCalcDialog.cpp:2307
-#: src/gui/AstroCalcDialog.cpp:2465
+#: src/gui/AstroCalcDialog.cpp:2147 src/gui/AstroCalcDialog.cpp:2310
+#: src/gui/AstroCalcDialog.cpp:2468
 msgid "Occultation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2148
+#: src/gui/AstroCalcDialog.cpp:2151
 msgid "Eclipse"
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:2673
-msgctxt "Celestial object is observed..."
-msgid "In the Evening"
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:2674
-msgctxt "Celestial object is observed..."
-msgid "In the Morning"
-msgstr ""
-
-#: src/gui/AstroCalcDialog.cpp:2675
-msgctxt "Celestial object is observed..."
-msgid "Around Midnight"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:2676
 msgctxt "Celestial object is observed..."
+msgid "In the Evening"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:2677
+msgctxt "Celestial object is observed..."
+msgid "In the Morning"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:2678
+msgctxt "Celestial object is observed..."
+msgid "Around Midnight"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:2679
+msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2695
+#: src/gui/AstroCalcDialog.cpp:2698
 msgid "Bright stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2696 src/ui_viewDialog.h:2258
+#: src/gui/AstroCalcDialog.cpp:2699 src/ui_viewDialog.h:2258
 msgid "Bright nebulae"
 msgstr ""
 
@@ -3876,30 +3876,30 @@ msgstr "라이선스"
 msgid "Shortcut"
 msgstr "단축키"
 
-#: src/StelMainView.cpp:765
+#: src/StelMainView.cpp:767
 msgid "Save screenshot"
 msgstr "스크린샷 저장"
 
-#: src/StelMainView.cpp:766
+#: src/StelMainView.cpp:768
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:767
+#: src/StelMainView.cpp:769
 msgid "Full-screen mode"
 msgstr "전체 화면 모드"
 
-#: src/StelMainView.cpp:923
+#: src/StelMainView.cpp:925
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:926
+#: src/StelMainView.cpp:928
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL 버전이 낮습니다. 드라이브나 그래픽 하드웨어를 업데이트해주세요."
 
-#: src/StelMainView.cpp:968
+#: src/StelMainView.cpp:970
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3908,7 +3908,7 @@ msgstr ""
 "DirectX/OpenGL ES 의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:1019
+#: src/StelMainView.cpp:1021
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3917,7 +3917,7 @@ msgstr ""
 "OpenGL/Mesa 의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:1075
+#: src/StelMainView.cpp:1077
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3926,7 +3926,7 @@ msgstr ""
 "OpenGL의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:1116
+#: src/StelMainView.cpp:1118
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3935,7 +3935,7 @@ msgstr ""
 "OpenGL ES의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:1228
+#: src/StelMainView.cpp:1230
 #, qt-format
 msgid "Stellarium %1"
 msgstr "스텔라리움 %1"
@@ -4036,12 +4036,12 @@ msgid "Bright galaxies"
 msgstr "발광은하"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:192
+#: src/translations.h:196
 msgid "Interesting double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:194
+#: src/translations.h:198
 msgid "Interesting variable stars"
 msgstr ""
 
@@ -8995,7 +8995,7 @@ msgid "On-screen control panel"
 msgstr "화면상의 컨트롤 패널"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
-msgid "Show resolution criterions"
+msgid "Show resolution criteria"
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1148
@@ -9178,107 +9178,107 @@ msgstr ""
 msgid "Telescopes"
 msgstr "망원경"
 
-#: plugins/Satellites/src/Satellites.cpp:68
-#: plugins/Satellites/src/Satellites.cpp:143
+#: plugins/Satellites/src/Satellites.cpp:71
+#: plugins/Satellites/src/Satellites.cpp:146
 #: plugins/Satellites/src/ui_satellitesDialog.h:806
 msgid "Satellites"
 msgstr "인공위성"
 
-#: plugins/Satellites/src/Satellites.cpp:71
+#: plugins/Satellites/src/Satellites.cpp:74
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr "지구상에서 보이는 인공위성의 위치 예측은 NORAD TLE 데이터를 기반으로 합니다."
 
-#: plugins/Satellites/src/Satellites.cpp:144
+#: plugins/Satellites/src/Satellites.cpp:147
 msgid "Satellite hints"
 msgstr "인공위성"
 
-#: plugins/Satellites/src/Satellites.cpp:145
+#: plugins/Satellites/src/Satellites.cpp:148
 msgid "Satellite labels"
 msgstr "인공위성 이름표"
 
-#: plugins/Satellites/src/Satellites.cpp:146
+#: plugins/Satellites/src/Satellites.cpp:149
 msgid "Satellites configuration window"
 msgstr "인공위성 설정창"
 
-#: plugins/Satellites/src/Satellites.cpp:178
+#: plugins/Satellites/src/Satellites.cpp:181
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr "예전 satellites.json 파일은 더이상 호환이 되지 않습니다 - 기본 파일 사용중"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2010
+#: plugins/Satellites/src/Satellites.cpp:2050
 msgid "visual"
 msgstr "눈으로 보이는 위성"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2012
+#: plugins/Satellites/src/Satellites.cpp:2052
 msgid "scientific"
 msgstr "과학위성"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2014
+#: plugins/Satellites/src/Satellites.cpp:2054
 msgid "communications"
 msgstr "통신위성"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2016
+#: plugins/Satellites/src/Satellites.cpp:2056
 msgid "navigation"
 msgstr "항행위성"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2018
+#: plugins/Satellites/src/Satellites.cpp:2058
 msgid "amateur"
 msgstr "아마츄어"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2020
+#: plugins/Satellites/src/Satellites.cpp:2060
 msgid "weather"
 msgstr "기상위성"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2022
+#: plugins/Satellites/src/Satellites.cpp:2062
 msgid "geostationary"
 msgstr "정지위성"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2024
+#: plugins/Satellites/src/Satellites.cpp:2064
 msgid "non-operational"
 msgstr "작동 중지"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2026
+#: plugins/Satellites/src/Satellites.cpp:2066
 msgid "gps"
 msgstr "GPS 위성"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2028
+#: plugins/Satellites/src/Satellites.cpp:2068
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2030
+#: plugins/Satellites/src/Satellites.cpp:2070
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2072
 msgid "iridium"
 msgstr "이리듐 위성"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2036
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:2038
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "observatory"
 msgstr ""
 
@@ -9288,57 +9288,57 @@ msgstr ""
 #. Satellite descriptions - bright and/or famous objects
 #. Just A FEW objects please! (I'm looking at you, Alex!)
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "The Hubble Space Telescope"
 msgstr "허블우주망원경"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "The International Space Station"
 msgstr "국제우주정거장"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2098
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2062
+#: plugins/Satellites/src/Satellites.cpp:2102
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2104
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2106
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2068
+#: plugins/Satellites/src/Satellites.cpp:2108
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2070
+#: plugins/Satellites/src/Satellites.cpp:2110
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -12152,13 +12152,15 @@ msgstr "분산 측정:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:194
+msgctxt "distance"
 msgid "cm"
-msgstr "cm"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
+msgctxt "distance"
 msgid "pc"
-msgstr "pc"
+msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
@@ -12200,8 +12202,9 @@ msgstr "시간 평균 플럭스 밀도"
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Pulsars/src/Pulsar.cpp:245
 #: plugins/Pulsars/src/Pulsar.cpp:257
+msgctxt "frequency"
 msgid "MHz"
-msgstr "MHz"
+msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:236 plugins/Pulsars/src/Pulsar.cpp:248
@@ -16087,6 +16090,10 @@ msgstr ""
 #~ msgid "Apparent diameter: %1"
 #~ msgstr "시직경: %1"
 
+#, c-format, qt-format
+#~ msgid "%1m"
+#~ msgstr "%1m"
+
 #~ msgid "Mouse cursor timeout (seconds):"
 #~ msgstr "마우스 커서 정지 시간 (초):"
 
@@ -16676,8 +16683,14 @@ msgstr ""
 #~ msgid "Copy/replace the Solar System file"
 #~ msgstr "태양계 파일 복사/대체"
 
+#~ msgid "cm"
+#~ msgstr "cm"
+
 #~ msgid "Use brightness settings for landscapes"
 #~ msgstr "풍경 밝기 설정을 사용"
+
+#~ msgid "MHz"
+#~ msgstr "MHz"
 
 #~ msgid ""
 #~ "Screensaver of various happenings in the Solar System. 187 events in all!"
@@ -17169,6 +17182,9 @@ msgstr ""
 #, qt-format
 #~ msgid "Type: <b>%1</b> (%2)"
 #~ msgstr "종류: <b>%1</b>(%2)"
+
+#~ msgid "pc"
+#~ msgstr "pc"
 
 #, qt-format
 #~ msgid "Effective temperature: %1 K"
