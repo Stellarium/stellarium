@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-23 04:15+0700\n"
-"PO-Revision-Date: 2017-07-14 17:49+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2017-07-23 19:43+0000\n"
+"Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 05:12+0000\n"
+"X-Launchpad-Export-Date: 2017-07-24 05:09+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -414,7 +414,7 @@ msgstr "Зоркавая велічыня"
 
 #: src/core/modules/Nebula.cpp:217
 msgid "Opacity"
-msgstr ""
+msgstr "Непразрыстасьць"
 
 #: src/core/modules/Nebula.cpp:220 src/core/modules/Planet.cpp:383
 #: src/core/modules/MinorPlanet.cpp:228 src/core/modules/Comet.cpp:176
@@ -423,16 +423,16 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "extincted to"
-msgstr ""
+msgstr "згасла да"
 
 #: src/core/modules/Nebula.cpp:225 src/core/modules/StarWrapper.cpp:228
 msgid "Photometric system"
-msgstr ""
+msgstr "Фотамэтрычная сыстэма"
 
 #: src/core/modules/Nebula.cpp:230 src/core/modules/StarWrapper.cpp:66
 #: src/core/modules/StarWrapper.cpp:210 plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "Каэфіцыент колеру (B-V)"
 
 #: src/core/modules/Nebula.cpp:235
 msgid "Surface brightness"
@@ -459,7 +459,7 @@ msgstr "сэк. дуг."
 
 #: src/core/modules/Nebula.cpp:262
 msgid "Contrast index"
-msgstr ""
+msgstr "Каэфіцыент кантрастнасьці"
 
 #: src/core/modules/Nebula.cpp:271 src/core/modules/Nebula.cpp:274
 #: src/ui_configurationDialog.h:1356
@@ -468,7 +468,7 @@ msgstr "Памер"
 
 #: src/core/modules/Nebula.cpp:276
 msgid "Orientation angle"
-msgstr ""
+msgstr "Вугал напрамку"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:300 src/core/modules/Nebula.cpp:313
@@ -508,15 +508,15 @@ msgstr "Млн с.г."
 
 #: src/core/modules/Nebula.cpp:350
 msgid "Redshift"
-msgstr ""
+msgstr "Чырвоны зрух"
 
 #: src/core/modules/Nebula.cpp:361 src/core/modules/StarWrapper.cpp:249
 msgid "Parallax"
-msgstr ""
+msgstr "Паралякс"
 
 #: src/core/modules/Nebula.cpp:365
 msgid "Morphological description"
-msgstr ""
+msgstr "Марфаляґічнае апісаньне"
 
 #: src/core/modules/Nebula.cpp:996
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -882,11 +882,11 @@ msgstr "зорка"
 
 #: src/core/modules/Nebula.cpp:1325
 msgid "symbiotic star"
-msgstr ""
+msgstr "сымбіятычная зорка"
 
 #: src/core/modules/Nebula.cpp:1328
 msgid "emission-line star"
-msgstr ""
+msgstr "зорка з эмісійнай лініяй"
 
 #: src/core/modules/Nebula.cpp:1331
 msgid "object of unknown nature"
@@ -908,7 +908,7 @@ msgstr "Укл/выкл фільтар тыпаў АГК"
 #: src/core/modules/MinorPlanet.cpp:243 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:206 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "Абсалютная велічыня"
 
 #: src/core/modules/Planet.cpp:392
 #, qt-format
@@ -923,14 +923,14 @@ msgstr "Сярэдняя велічыня супрацьстаяньня: %1"
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "АА"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:193 src/gui/StelGuiItems.cpp:748
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "км"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -938,35 +938,35 @@ msgstr ""
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
-msgstr ""
+msgstr "млн км"
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:270
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
-msgstr ""
+msgstr "Адлегласьць ад Сонца"
 
 #: src/core/modules/Planet.cpp:470
 msgid "with rings"
-msgstr ""
+msgstr "з колцамі"
 
 #: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:306
 msgid "scaled up to"
-msgstr ""
+msgstr "маштабаваны да"
 
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:316
 msgid "Apparent diameter"
-msgstr ""
+msgstr "Сапраўдны дыямэтар"
 
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:325
 #: src/core/modules/StarWrapper.cpp:252
 msgctxt "duration"
 msgid "days"
-msgstr ""
+msgstr "дзён"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:327
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
-msgstr ""
+msgstr "Сыдэрычны пэрыяд"
 
 #: src/core/modules/Planet.cpp:516
 msgid "Sidereal day"
@@ -974,7 +974,7 @@ msgstr "Зоркавы дзень"
 
 #: src/core/modules/Planet.cpp:517
 msgid "Mean solar day"
-msgstr ""
+msgstr "Сярэднія сонечны дзень"
 
 #: src/core/modules/Planet.cpp:521
 msgid "The period of rotation is chaotic"
@@ -1034,11 +1034,11 @@ msgstr "Эланґацыя"
 
 #: src/core/modules/Planet.cpp:571
 msgid "Illuminated"
-msgstr ""
+msgstr "Асьветлены"
 
 #: src/core/modules/Planet.cpp:572
 msgid "Albedo"
-msgstr ""
+msgstr "Альбэда"
 
 #: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1646
 #: src/gui/AstroCalcDialog.cpp:1681
@@ -1047,7 +1047,7 @@ msgstr "Фаза"
 
 #: src/core/modules/Planet.cpp:587
 msgid "Eclipse Factor"
-msgstr ""
+msgstr "Каэфіцыент зацьменьня"
 
 #: src/core/modules/MinorPlanet.cpp:214
 #, qt-format
@@ -1068,19 +1068,19 @@ msgstr "пэрыядычныя"
 #: src/core/modules/Comet.cpp:245
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "км/с"
 
 #: src/core/modules/Comet.cpp:247
 msgid "Speed"
-msgstr ""
+msgstr "Хуткасьць"
 
 #: src/core/modules/Comet.cpp:272
 msgid "Coma diameter (estimate)"
-msgstr ""
+msgstr "Дыямэтар галавы (ацэнка)"
 
 #: src/core/modules/Comet.cpp:273
 msgid "Gas tail length (estimate)"
-msgstr ""
+msgstr "Даўжыня ґазавага хваста (ацэнка)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1194
@@ -1145,12 +1145,12 @@ msgstr "падвойная зорка"
 
 #: src/core/modules/StarWrapper.cpp:228
 msgid "Magnitude range"
-msgstr ""
+msgstr "Прамежак велічынь"
 
 #: src/core/modules/StarWrapper.cpp:246
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Spectral Type"
-msgstr ""
+msgstr "Спэктральны тып"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:343
@@ -1159,19 +1159,19 @@ msgstr "Пэрыяд"
 
 #: src/core/modules/StarWrapper.cpp:260
 msgid "Next maximum light"
-msgstr ""
+msgstr "Наступны максымум бляску"
 
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Next minimum light"
-msgstr ""
+msgstr "Наступны мінімум бляску"
 
 #: src/core/modules/StarWrapper.cpp:269
 msgid "Rising time"
-msgstr ""
+msgstr "Час узыходжаньня"
 
 #: src/core/modules/StarWrapper.cpp:271
 msgid "Duration of eclipse"
-msgstr ""
+msgstr "Працягласьць зацьменьня"
 
 #: src/core/modules/StarWrapper.cpp:278
 msgid "Position angle"
@@ -1980,25 +1980,25 @@ msgstr "ГВ/Сх"
 #: src/core/StelObject.cpp:316
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
-msgstr ""
+msgstr "Аз/Выш"
 
 #. TRANSLATORS: Galactic longitude/latitude
 #: src/core/StelObject.cpp:342
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
-msgstr ""
+msgstr "Ґал. Д/Ш"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
 #: src/core/StelObject.cpp:368
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
-msgstr ""
+msgstr "Звышґ. Д/Ш"
 
 #. TRANSLATORS: Ecliptic longitude/latitude
 #: src/core/StelObject.cpp:386
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "Экл. Д/Ш"
 
 #: src/core/StelObject.cpp:451
 msgid "Ecliptic obliquity"
@@ -2006,15 +2006,15 @@ msgstr "Экліптычнае нахіленьне"
 
 #: src/core/StelObject.cpp:470
 msgid "Mean Sidereal Time"
-msgstr ""
+msgstr "Сярэдні сыдэрычны час"
 
 #: src/core/StelObject.cpp:485
 msgid "Apparent Sidereal Time"
-msgstr ""
+msgstr "Сапраўдны сыдэрычны час"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr ""
+msgstr "Сузор'е МАЗ"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -2788,11 +2788,11 @@ msgstr "Хуткасьць удаваньня"
 #: src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "м"
 
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
-msgstr ""
+msgstr "плянэтацэнтрычная адлегласьць"
 
 #: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
@@ -3489,14 +3489,14 @@ msgstr "Протаплянэтная туманнасьць"
 #: src/gui/AstroCalcDialog.cpp:2715 src/translations.h:153
 #: src/ui_dsoColorsDialog.h:642
 msgid "Symbiotic stars"
-msgstr ""
+msgstr "Сымбіятычныя зоркі"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:387 src/gui/AstroCalcDialog.cpp:1212
 #: src/gui/AstroCalcDialog.cpp:2716 src/translations.h:155
 #: src/ui_dsoColorsDialog.h:646
 msgid "Emission-line stars"
-msgstr ""
+msgstr "Зоркі з эмісійнай лініяй"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:389 src/translations.h:157
@@ -7196,7 +7196,7 @@ msgstr "Гарызантальныя каардынаты"
 
 #: src/ui_configurationDialog.h:1360
 msgid "Azimuth/Altitude"
-msgstr ""
+msgstr "Вышыня/Азімут"
 
 #: src/ui_configurationDialog.h:1361
 msgid "Catalog number(s)"
@@ -7267,11 +7267,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1390
 msgid "Use formatting output for coordinates"
-msgstr ""
+msgstr "Выводзіць каардынаты з фарматаваньнем"
 
 #: src/ui_configurationDialog.h:1391
 msgid "Use designations for celestial coordinate systems"
-msgstr ""
+msgstr "Выкарыстоўваць абазначэньні для нябесных сыстэм каардынат"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Control"
@@ -8175,11 +8175,11 @@ msgstr "Колер пазнак рэштак звышновых"
 
 #: src/ui_dsoColorsDialog.h:644
 msgid "Color of markers of symbiotic stars"
-msgstr ""
+msgstr "Колер пазнак сымбіятычных зорак"
 
 #: src/ui_dsoColorsDialog.h:648
 msgid "Color of markers of emission-line stars"
-msgstr ""
+msgstr "Колер пазнак зорак з эмісійнай лініяй"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -8757,12 +8757,12 @@ msgstr "\"/пкс"
 #: plugins/Oculars/src/Oculars.cpp:1842
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:523
 msgid "Ocular"
-msgstr ""
+msgstr "Акуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:1844
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
 msgid "Binocular"
-msgstr ""
+msgstr "Бінокль"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1864
@@ -9030,35 +9030,35 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:919
 msgid "Rayleigh criterion"
-msgstr ""
+msgstr "Крытэр Рэлея"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 msgid "The Rayleigh resolution criterion"
-msgstr ""
+msgstr "Крытэр разрозьненьня Рэлея"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Dawes' limit"
-msgstr ""
+msgstr "Граніца Доза"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Dawes' resolution criterion"
-msgstr ""
+msgstr "Крытэр разрозьненьня Доза"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
 msgid "Abbe's limit"
-msgstr ""
+msgstr "Граніца Аббэ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:935
 msgid "Abbe’s diffraction resolution limit"
-msgstr ""
+msgstr "Граніца дыфракцыйнага разрозьненьня Аббэ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:940
 msgid "Sparrow's limit"
-msgstr ""
+msgstr "Граніца Спэроў"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgid "Sparrow's resolution limit"
-msgstr ""
+msgstr "Крытэр разрозьненьня Спэроў"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
@@ -9233,7 +9233,7 @@ msgstr "Кіроўная панэль на экране"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid "Show resolution criteria"
-msgstr ""
+msgstr "Паказваць крытэр разрозьненьня"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1148
 msgid ""
@@ -9604,7 +9604,7 @@ msgstr "штучны спадарожнік"
 
 #: plugins/Satellites/src/Satellite.cpp:290
 msgid "Approx. magnitude"
-msgstr ""
+msgstr "Прыбл. велічыня"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
@@ -10375,12 +10375,17 @@ msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
 msgstr ""
+"Прыблізны час, патрэбны каб сыґнал тэлескопа дасягнуў Stellarium. Павяліч "
+"гэтае значэньне, калі акулярная сетка скача."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
 msgstr ""
+"Часьціня абнаўленьня тэлескопа RTS2. Затрымка перад дасыланьнем наступны "
+"запыт аб стане тэлескопа. Прадвызначанае значэньне 0,5 сэкунд выдатна працуе "
+"ў бальныні выпадкаў."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:221
 msgid "Add New Telescope"
@@ -11627,7 +11632,7 @@ msgstr "URL кампутара, на якім запушчаны паслужн�
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:604
 msgid "Refresh every:"
-msgstr ""
+msgstr "Абнаўляць праз:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:608
 msgid "User interface settings"
@@ -11972,7 +11977,7 @@ msgstr "Выберы закладку…"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "Select a text file"
-msgstr ""
+msgstr "Выберы тэкставы файл"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
@@ -12235,11 +12240,11 @@ msgstr "звышновая"
 
 #: plugins/Supernovae/src/Supernova.cpp:149
 msgid "Type of supernova"
-msgstr ""
+msgstr "Тып звышновай"
 
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:163
 msgid "Maximum brightness"
-msgstr ""
+msgstr "Найбольшая яркасьць"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
@@ -12678,13 +12683,13 @@ msgstr "Вымеры дыспэрсіі:"
 #: plugins/Pulsars/src/Pulsar.cpp:194
 msgctxt "distance"
 msgid "cm"
-msgstr ""
+msgstr "см"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
 msgctxt "distance"
 msgid "pc"
-msgstr ""
+msgstr "парс"
 
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
@@ -12729,7 +12734,7 @@ msgstr "Спасярэдненая па часе шчыльнасьць плын
 #: plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "МГц"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:236 plugins/Pulsars/src/Pulsar.cpp:248
@@ -13266,7 +13271,7 @@ msgstr "Радыюс"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgid "Effective temperature"
-msgstr ""
+msgstr "Эфэктыўная тэмпэратура"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgctxt "temperature"

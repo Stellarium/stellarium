@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-23 04:15+0700\n"
-"PO-Revision-Date: 2017-07-15 14:06+0000\n"
+"PO-Revision-Date: 2017-07-23 07:10+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 05:12+0000\n"
+"X-Launchpad-Export-Date: 2017-07-24 05:09+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 "Language: bn\n"
 
@@ -881,11 +881,11 @@ msgstr "নক্ষত্র"
 
 #: src/core/modules/Nebula.cpp:1325
 msgid "symbiotic star"
-msgstr ""
+msgstr "মিথোজীবি নক্ষত্র"
 
 #: src/core/modules/Nebula.cpp:1328
 msgid "emission-line star"
-msgstr ""
+msgstr "নির্দিষ্ট-তরঙ্গ নক্ষত্র"
 
 #: src/core/modules/Nebula.cpp:1331
 msgid "object of unknown nature"
@@ -2788,11 +2788,11 @@ msgstr "সময়ের হার"
 #: src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "মি"
 
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
-msgstr ""
+msgstr "গ্রহকেন্দ্রীক দূরত্ব"
 
 #: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
@@ -3490,14 +3490,14 @@ msgstr "প্রাকগ্রহরূপী নীহারিকা"
 #: src/gui/AstroCalcDialog.cpp:2715 src/translations.h:153
 #: src/ui_dsoColorsDialog.h:642
 msgid "Symbiotic stars"
-msgstr ""
+msgstr "মিথোজীবি নক্ষত্র"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:387 src/gui/AstroCalcDialog.cpp:1212
 #: src/gui/AstroCalcDialog.cpp:2716 src/translations.h:155
 #: src/ui_dsoColorsDialog.h:646
 msgid "Emission-line stars"
-msgstr ""
+msgstr "নির্দিষ্ট-তরঙ্গ নক্ষত্র"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:389 src/translations.h:157
@@ -8169,11 +8169,11 @@ msgstr "আতিনোভার ধ্বংসাবশেষ নির্দ�
 
 #: src/ui_dsoColorsDialog.h:644
 msgid "Color of markers of symbiotic stars"
-msgstr ""
+msgstr "মিথোজীবি নক্ষত্র নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:648
 msgid "Color of markers of emission-line stars"
-msgstr ""
+msgstr "নির্দিষ্ট-তরঙ্গ নক্ষত্র নির্দেশকের রং"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -8747,12 +8747,12 @@ msgstr "\"/পিক্সেল"
 #: plugins/Oculars/src/Oculars.cpp:1842
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:523
 msgid "Ocular"
-msgstr ""
+msgstr "অভিনেত্র"
 
 #: plugins/Oculars/src/Oculars.cpp:1844
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
 msgid "Binocular"
-msgstr ""
+msgstr "দূরবীন"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1864
@@ -9014,35 +9014,35 @@ msgstr "এই অভিনেত্র/লেন্স/দূরবীন স�
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:919
 msgid "Rayleigh criterion"
-msgstr ""
+msgstr "র‍্যালে সীমা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 msgid "The Rayleigh resolution criterion"
-msgstr ""
+msgstr "র‍্যালে এর কৌণিক রেজোল্যুশন সীমা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Dawes' limit"
-msgstr ""
+msgstr "ডাউয়ে সীমা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Dawes' resolution criterion"
-msgstr ""
+msgstr "ডাউয়ে এর কৌণিক রেজোল্যুশন সীমা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
 msgid "Abbe's limit"
-msgstr ""
+msgstr "অ্যাবে সীমা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:935
 msgid "Abbe’s diffraction resolution limit"
-msgstr ""
+msgstr "অ্যাবে এর কৌণিক রেজোল্যুশন সীমা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:940
 msgid "Sparrow's limit"
-msgstr ""
+msgstr "স্প্যারো সীমা"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgid "Sparrow's resolution limit"
-msgstr ""
+msgstr "স্প্যারো এর কৌণিক রেজোল্যুশন সীমা"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
@@ -9210,7 +9210,7 @@ msgstr "দৃশ্যপটে এটি ব্যবহারের সরঞ
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid "Show resolution criteria"
-msgstr ""
+msgstr "কৌণিক রেজোল্যুশন সীমা দেখানো হবে"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1148
 msgid ""
@@ -9294,7 +9294,7 @@ msgstr "নাম :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1176
 msgid "Binoculars"
-msgstr "দূরবীনগুলি"
+msgstr "দূরবীন"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Has permanent cross-hairs"
@@ -11917,7 +11917,7 @@ msgstr "বুকমার্ক বাছুন ..."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "Select a text file"
-msgstr ""
+msgstr "একটি টেক্সট্ ফাইল বেছে নিন"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
@@ -12620,13 +12620,13 @@ msgstr "বিক্ষেপ :"
 #: plugins/Pulsars/src/Pulsar.cpp:194
 msgctxt "distance"
 msgid "cm"
-msgstr ""
+msgstr "সেমি"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
 msgctxt "distance"
 msgid "pc"
-msgstr ""
+msgstr "পারসেক"
 
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
@@ -12670,7 +12670,7 @@ msgstr "সময় সাপেক্ষে প্রাবল্য ঘনত্
 #: plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "মেগাহার্জ"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:236 plugins/Pulsars/src/Pulsar.cpp:248
