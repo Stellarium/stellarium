@@ -2419,3 +2419,85 @@ bool SolarSystem::removePlanet(QString name)
 	candidate.clear();
 	return true;
 }
+
+void SolarSystem::surfaceNomenclature(const QString& dataDir)
+{
+    planetNativeNamesMap.clear(); // MODIFICAR
+    
+    QString surfNamesFile = StelFileMgr::findFile("data/" + dataDir + "/surface_nomenclature.fab");
+    
+    if (surfNamesFile.isEmpty())
+    {
+        foreach (const PlanetP& p, systemPlanets)
+        {
+            if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+                p->setNativeName("");
+        }
+        updateI18n();
+        return;
+    }
+    
+    // Open file
+    QFile planetSurfNamesFile(surfNamesFile);
+    if (!planetSurfNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << " Cannot open file" << QDir::toNativeSeparators(surfNamesFile);
+        return;
+    }
+    
+    // Now parse the file
+    // lines to ignore which start with a # or are empty
+    QRegExp commentRx("^(\\s*#.*|\\s*)$");
+    
+    // lines which look like records - we use the RE to extract the fields
+    // which will be available in recRx.capturedTexts()
+    QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
+    
+    //QString record, planetId, nativeName;
+    QString record, body, featureId, featureName, featureType, featureCoord, featureSize;
+    
+    // keep track of how many records we processed.
+    int totalRecords=0;
+    int readOk=0;
+    int lineNumber=0;
+    while (!planetSurfNamesFile.atEnd())
+    {
+        record = QString::fromUtf8(planetSurfNamesFile.readLine());
+        lineNumber++;
+        
+        // Skip comments
+        if (commentRx.exactMatch(record))
+            continue;
+        
+        totalRecords++;
+        
+        if (!recRx.exactMatch(record))
+        {
+            qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in planet names file" << QDir::toNativeSeparators(surfNamesFile);
+        }
+        else
+        {
+            //planetId = recRx.capturedTexts().at(1).trimmed();
+            //nativeName = recRx.capturedTexts().at(3).trimmed(); // Use translatable text
+            //planetNativeNamesMap[planetId] = nativeName;
+            body = recRx.capturedTexts().at(1).trimmed();
+            featureId = recRx.capturedTexts().at(2).trimmed();
+            featureName = recRx.capturedTexts().at(3).trimmed();
+            featureType = recRx.capturedTexts().at(4).trimmed();
+            featureCoord = recRx.capturedTexts().at(5).trimmed();
+            featureCoord = recRx.capturedTexts().at(6).trimmed();
+            readOk++;
+        }
+    }
+    planetSurfNamesFile.close();
+    qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
+    
+    foreach (const PlanetP& p, systemPlanets)
+    {
+        if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+            p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
+    }
+    
+    updateI18n();
+}
+

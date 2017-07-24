@@ -922,6 +922,9 @@ private:
 
 	//! Set flag who enable display a permanent orbits for objects or not
 	void setFlagPermanentOrbits(bool b);
+    
+    // Get "geographical names" of each planet
+    void surfaceNomenclature(const QString& dataDir);
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
