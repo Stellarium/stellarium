@@ -386,10 +386,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 	if (flags&AbsoluteMagnitude && (getAbsoluteMagnitude() > -99.))
 	{
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br>";
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br />";
 		const float moMag=getMeanOppositionMagnitude();
 		if (moMag<50.f)
-			oss << q_("Mean Opposition Magnitude: %1").arg(moMag, 0, 'f', 2) << "<br>";
+			oss << QString("%1: %2").arg(q_("Mean Opposition Magnitude")).arg(moMag, 0, 'f', 2) << "<br />";
 	}
 
 	oss << getCommonInfoString(core, flags);
