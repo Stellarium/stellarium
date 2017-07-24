@@ -245,6 +245,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (w50>0)
 		{
 			oss << QString("%1: %2 %3")
+			       // xgettext:no-c-format
 			       .arg(q_("Profile width at 50% of peak"))
 			       .arg(QString::number(w50, 'f', 2))
 			       //TRANSLATORS: Unit of measure for time - milliseconds
