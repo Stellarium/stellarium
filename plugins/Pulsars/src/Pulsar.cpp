@@ -270,7 +270,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1 %2%3: %4 %5").arg(flux).arg(1400).arg(freq).arg(QString::number(s1400, 'f', 2)).arg(sfd) << "<br />";
 
 		if (notes.length()>0)
-			oss << "<br />" << q_("Notes: %1").arg(getPulsarTypeInfoString(notes)) << "<br />";
+			oss << "<br />" << QString("%1: %2").arg(q_("Notes")).arg(getPulsarTypeInfoString(notes)) << "<br />";
 
 	}
 
