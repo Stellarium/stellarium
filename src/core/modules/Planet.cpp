@@ -578,13 +578,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			// Only show during eclipse, show percent?
 			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			// Debug solution:
-			//			float eclipseFactor = ssystem->getEclipseFactor(core);
-			//			oss << QString(q_("Eclipse Factor: %1 alpha: %2")).arg(eclipseFactor).arg(-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor))) << "<br>";
-			// Release version:
 			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
 			if (eclipseFactor>1.e-7) // needed to avoid false display of 1e-14 or so.
-				oss << QString("%1: %2%").arg(q_("Eclipse Factor")).arg(eclipseFactor) << "<br />";
+				oss << QString("%1: %2%").arg(q_("Eclipse Factor")).arg(QString::number(eclipseFactor, 'f', 2)) << "<br />";
 
 		}
 	}
