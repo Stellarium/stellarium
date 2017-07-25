@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 04:15+0700\n"
+"POT-Creation-Date: 2017-07-24 21:25+0700\n"
 "PO-Revision-Date: 2017-07-19 00:55+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 05:28+0000\n"
+"X-Launchpad-Export-Date: 2017-07-25 05:27+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -56,7 +56,7 @@ msgstr "星群"
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:548 src/core/StelCore.cpp:254
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:769
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:777
 msgid "Display Options"
 msgstr "显示选项"
 
@@ -469,10 +469,12 @@ msgid "Orientation angle"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
+#. TRANSLATORS: Unit of measure for distance - light years
+#. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:300 src/core/modules/Nebula.cpp:313
 #: src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Exoplanets/src/Exoplanet.cpp:317
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
 msgid "ly"
 msgstr ""
@@ -487,7 +489,7 @@ msgid "Distance"
 msgstr "距离"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:311
+#: src/core/modules/Nebula.cpp:311 plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "distance"
 msgid "kpc"
 msgstr ""
@@ -504,7 +506,7 @@ msgctxt "distance"
 msgid "Mio. ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:350
+#: src/core/modules/Nebula.cpp:350 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
 msgstr "红移"
 
@@ -909,9 +911,8 @@ msgid "Absolute Magnitude"
 msgstr "绝对星等"
 
 #: src/core/modules/Planet.cpp:392
-#, qt-format
-msgid "Mean Opposition Magnitude: %1"
-msgstr "平衡星等: %1"
+msgid "Mean Opposition Magnitude"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
@@ -926,6 +927,9 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:193 src/gui/StelGuiItems.cpp:748
+#: plugins/Satellites/src/Satellite.cpp:304
+#: plugins/Satellites/src/Satellite.cpp:308
+#: plugins/Satellites/src/Satellite.cpp:324
 msgctxt "distance"
 msgid "km"
 msgstr ""
@@ -1043,7 +1047,7 @@ msgstr "反照率"
 msgid "Phase"
 msgstr "相位"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:583
 msgid "Eclipse Factor"
 msgstr "阴影率"
 
@@ -1063,7 +1067,9 @@ msgid "periodic"
 msgstr "周期彗星"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/Comet.cpp:245
+#: src/core/modules/Comet.cpp:245 plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
 msgstr ""
@@ -1960,7 +1966,7 @@ msgid "Deep-sky objects background images"
 msgstr "深空天体背景图像"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
+#: src/StelMainView.cpp:775 src/StelMainView.cpp:776
 msgid "Miscellaneous"
 msgstr "杂项"
 
@@ -3089,9 +3095,11 @@ msgid "Azimuth"
 msgstr "方位角"
 
 #. TRANSLATORS: altitude
+#. TRANSLATORS: Satellite altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:281
 #: src/gui/AstroCalcDialog.cpp:788 src/gui/AstroCalcDialog.cpp:1378
 #: src/gui/AstroCalcDialog.cpp:1784 src/gui/AstroCalcDialog.cpp:1786
+#: plugins/Satellites/src/Satellite.cpp:308
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "高度角"
@@ -3876,30 +3884,30 @@ msgstr "授权条款"
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: src/StelMainView.cpp:767
+#: src/StelMainView.cpp:775
 msgid "Save screenshot"
 msgstr "储存画面快照"
 
-#: src/StelMainView.cpp:768
+#: src/StelMainView.cpp:776
 msgid "Reload shaders (for development)"
 msgstr "重新加载着色器（用于开发）"
 
-#: src/StelMainView.cpp:769
+#: src/StelMainView.cpp:777
 msgid "Full-screen mode"
 msgstr "全屏模式"
 
-#: src/StelMainView.cpp:925
+#: src/StelMainView.cpp:933
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr "OpenGL版本不足。 请更新驱动程序，图形硬件或使用--angle模式（或--mesa模式）选项。"
 
-#: src/StelMainView.cpp:928
+#: src/StelMainView.cpp:936
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL版本不足。 请更新驱动程序或图形硬件。"
 
-#: src/StelMainView.cpp:970
+#: src/StelMainView.cpp:978
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3908,7 +3916,7 @@ msgstr ""
 "您的DirectX / OpenGL ES驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1021
+#: src/StelMainView.cpp:1029
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3917,7 +3925,7 @@ msgstr ""
 "您的OpenGL / Mesa驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1085
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3926,7 +3934,7 @@ msgstr ""
 "您的OpenGL驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1118
+#: src/StelMainView.cpp:1126
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3935,7 +3943,7 @@ msgstr ""
 "您的OpenGL驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1230
+#: src/StelMainView.cpp:1238
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -9349,116 +9357,108 @@ msgstr "大约星等"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
-#, qt-format
-msgid "Range (km): %1"
-msgstr "倾斜 (千米): %1"
+msgid "Range"
+msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:307
-#, qt-format
-msgid "Range rate (km/s): %1"
-msgstr "距离变率：%1 千米/秒"
+#: plugins/Satellites/src/Satellite.cpp:306
+msgid "Range rate"
+msgstr ""
 
-#. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:310
-#, qt-format
-msgid "Altitude (km): %1"
-msgstr "高度: %1 千米"
-
-#. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:313
-#, qt-format
-msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "投影点纬度：%1%2，经度：%3%4"
+msgid "SubPoint (Lat./Long.)"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:327
-#, qt-format
-msgid "TEME coordinates (km): %1"
-msgstr "地心惯性坐标：%1 千米"
+#: plugins/Satellites/src/Satellite.cpp:324
+msgid "TEME coordinates"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+#: plugins/Satellites/src/Satellite.cpp:331
+msgid "TEME velocity"
+msgstr ""
+
 #: plugins/Satellites/src/Satellite.cpp:335
-#, qt-format
-msgid "TEME velocity (km/s): %1"
-msgstr "地心惯性速度：%1 千米/秒"
+msgid "Sun reflection angle"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:340
-#, qt-format
-msgid "Sun reflection angle: %1%2"
-msgstr "太阳反射角: %1%2"
-
-#: plugins/Satellites/src/Satellite.cpp:353
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
 msgstr "组"
 
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:350
 msgid "Groups"
 msgstr "组群"
 
-#: plugins/Satellites/src/Satellite.cpp:361
-#, qt-format
-msgid "Operational status: %1"
-msgstr "操作状态: %1"
+#: plugins/Satellites/src/Satellite.cpp:356
+msgid "Operational status"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:368
+#: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
 msgstr "此卫星与观测者均位于阳光下。"
 
-#: plugins/Satellites/src/Satellite.cpp:371
+#: plugins/Satellites/src/Satellite.cpp:366
 msgid "The satellite is visible."
 msgstr "此卫星可见"
 
-#: plugins/Satellites/src/Satellite.cpp:374
+#: plugins/Satellites/src/Satellite.cpp:369
 msgid "The satellite is eclipsed."
 msgstr "此卫星被遮挡。"
 
-#: plugins/Satellites/src/Satellite.cpp:377
+#: plugins/Satellites/src/Satellite.cpp:372
 msgid "The satellite is not visible"
 msgstr "此卫星不可见"
 
-#: plugins/Satellites/src/Satellite.cpp:402
-#, qt-format
-msgid "%1 MHz (%2%3 kHz)"
-msgstr "%1 兆赫兹(%2%3 千赫兹)"
+#. TRANSLATORS: Unit of measurement of frequency
+#: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:259
+msgctxt "frequency"
+msgid "MHz"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:706
-#: plugins/Satellites/src/Satellite.cpp:731
+#: plugins/Satellites/src/Satellite.cpp:402
+msgctxt "frequency"
+msgid "kHz"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:703
+#: plugins/Satellites/src/Satellite.cpp:728
 msgctxt "operational status"
 msgid "unknown"
 msgstr "未知"
 
-#: plugins/Satellites/src/Satellite.cpp:710
+#: plugins/Satellites/src/Satellite.cpp:707
 msgctxt "operational status"
 msgid "operational"
 msgstr "使用中"
 
-#: plugins/Satellites/src/Satellite.cpp:713
+#: plugins/Satellites/src/Satellite.cpp:710
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "非使用"
 
-#: plugins/Satellites/src/Satellite.cpp:716
+#: plugins/Satellites/src/Satellite.cpp:713
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "部分使用"
 
-#: plugins/Satellites/src/Satellite.cpp:719
+#: plugins/Satellites/src/Satellite.cpp:716
 msgctxt "operational status"
 msgid "standby"
 msgstr "支持"
 
-#: plugins/Satellites/src/Satellite.cpp:722
+#: plugins/Satellites/src/Satellite.cpp:719
 msgctxt "operational status"
 msgid "spare"
 msgstr "备用"
 
-#: plugins/Satellites/src/Satellite.cpp:725
+#: plugins/Satellites/src/Satellite.cpp:722
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "扩展任务"
 
-#: plugins/Satellites/src/Satellite.cpp:728
+#: plugins/Satellites/src/Satellite.cpp:725
 msgctxt "operational status"
 msgid "decayed"
 msgstr "损坏"
@@ -12026,11 +12026,6 @@ msgstr "显示类星体"
 msgid "Quasars configuration window"
 msgstr "类星体设置窗口"
 
-#: plugins/Quasars/src/Quasar.cpp:126
-#, qt-format
-msgid "Z (redshift): %1"
-msgstr "Z（红移）：%1"
-
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
 msgstr "类星体插件"
@@ -12133,25 +12128,22 @@ msgstr "有%1已登记的问题"
 msgid "pulsar with glitches"
 msgstr "有Glitch现象的脉冲星"
 
-#. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:182
-#, qt-format
-msgid "Barycentric period: %1 s"
-msgstr "自转周期: %1 s"
+msgid "Barycentric period"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
-#, qt-format
-msgid "Time derivative of barycentric period: %1"
-msgstr "自转周期变化率:%1"
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:185
+msgctxt "period"
+msgid "s"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:191
-msgid "Dispersion measure:"
-msgstr "频散量"
+#: plugins/Pulsars/src/Pulsar.cpp:189
+msgid "Time derivative of barycentric period"
+msgstr ""
 
-#. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:194
-msgctxt "distance"
-msgid "cm"
+msgid "Dispersion measure"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
@@ -12160,87 +12152,104 @@ msgctxt "distance"
 msgid "pc"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:203
-#, qt-format
-msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr "自转能量损失速率：%1尔格/秒"
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:199
+msgctxt "distance"
+msgid "cm"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:207
-#, qt-format
-msgid "Binary period of pulsar: %1 days"
-msgstr "脉冲双星轨道周期：%1 天"
+#: plugins/Pulsars/src/Pulsar.cpp:206
+msgid "Spin down energy loss rate"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:211
-#, qt-format
-msgid "Eccentricity: %1"
-msgstr "偏心率： %1"
+#. TRANSLATORS: Unit of measure for power - erg per second
+#: plugins/Pulsars/src/Pulsar.cpp:209
+msgctxt "power"
+msgid "ergs/s"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:215
+msgid "Binary period of pulsar"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for period - days
+#: plugins/Pulsars/src/Pulsar.cpp:218
+msgctxt "period"
+msgid "days"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
+msgid "Eccentricity"
+msgstr "离心率"
+
+#: plugins/Pulsars/src/Pulsar.cpp:227
+msgid "Annual parallax"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:216
-#, qt-format
-msgid "Annual parallax: %1 mas"
-msgstr "周年视差：%1 毫弧秒"
+#: plugins/Pulsars/src/Pulsar.cpp:230
+msgctxt "parallax"
+msgid "mas"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:220
-#, qt-format
-msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr "基于电子密度分布模型估算的距离：%1 千秒差距（%2 光年）"
+#: plugins/Pulsars/src/Pulsar.cpp:236
+msgid "Distance based on electron density model"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:224
-#, qt-format
-msgid "Profile width at 50% of peak: %1 ms"
-msgstr "半峰值宽度：%1 毫秒"
+#: plugins/Pulsars/src/Pulsar.cpp:249
+#, no-c-format
+msgid "Profile width at 50% of peak"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for time - milliseconds
+#: plugins/Pulsars/src/Pulsar.cpp:252
+msgctxt "time"
+msgid "ms"
+msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:230 plugins/Pulsars/src/Pulsar.cpp:242
-#: plugins/Pulsars/src/Pulsar.cpp:254
+#: plugins/Pulsars/src/Pulsar.cpp:257
 msgid "Time averaged flux density at"
 msgstr "时均流量密度在"
 
-#. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Pulsars/src/Pulsar.cpp:245
-#: plugins/Pulsars/src/Pulsar.cpp:257
-msgctxt "frequency"
-msgid "MHz"
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:261
+msgctxt "spectral flux density"
+msgid "mJy"
 msgstr ""
 
-#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:236 plugins/Pulsars/src/Pulsar.cpp:248
-#: plugins/Pulsars/src/Pulsar.cpp:260
-msgid "mJy"
-msgstr "毫央"
+#: plugins/Pulsars/src/Pulsar.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
+msgid "Notes"
+msgstr "备注："
 
-#: plugins/Pulsars/src/Pulsar.cpp:264
-#, qt-format
-msgid "Notes: %1"
-msgstr "说明：%1"
-
-#: plugins/Pulsars/src/Pulsar.cpp:353
+#: plugins/Pulsars/src/Pulsar.cpp:362
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr "反常X射线脉冲星和软伽玛射线再现源"
 
-#: plugins/Pulsars/src/Pulsar.cpp:358
+#: plugins/Pulsars/src/Pulsar.cpp:367
 msgid "has one or more binary companions"
 msgstr "存在至少一个伴星"
 
-#: plugins/Pulsars/src/Pulsar.cpp:363
+#: plugins/Pulsars/src/Pulsar.cpp:372
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "有在从无线电到红外线波段或更高频率的脉冲发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:368
+#: plugins/Pulsars/src/Pulsar.cpp:377
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "有只在红外线波段或更高频率的脉冲发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:373
+#: plugins/Pulsars/src/Pulsar.cpp:382
 msgid "with pulsed emission in the radio band"
 msgstr "有在无线电波段的脉冲发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:378
+#: plugins/Pulsars/src/Pulsar.cpp:387
 msgid "with intermittently pulsed radio emission"
 msgstr "有间歇性的脉冲无线电发射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:383
+#: plugins/Pulsars/src/Pulsar.cpp:392
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -12738,10 +12747,6 @@ msgstr "木星"
 msgid "Semi-Major Axis"
 msgstr "长半轴"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
-msgid "Eccentricity"
-msgstr "离心率"
-
 #: plugins/Exoplanets/src/Exoplanet.cpp:348
 msgid "Inclination"
 msgstr "倾角"
@@ -13151,11 +13156,6 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr "是拉丁文<em>fortitude（坚韧）</em>。坚韧是逆境中的情感和精神力量的体现，鹰(天鹰座那只)就是一个象征。"
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
-msgid "Notes"
-msgstr "备注："
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
@@ -14093,36 +14093,32 @@ msgstr "流星雨"
 msgid "Radiant drift (per day)"
 msgstr "辐射点漂移"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:576
-#, qt-format
-msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr "地心流星速度: %1 km/s"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
+msgid "Geocentric meteoric velocity"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:581
-#, qt-format
-msgid "The population index: %1"
-msgstr "亮度比: %1"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:585
+msgid "The population index"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:586
-#, qt-format
-msgid "Parent body: %1"
-msgstr "母体: %1"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:588
+msgid "Parent body"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:595
-#: plugins/MeteorShowers/src/MeteorShower.cpp:603
+#: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
 msgstr "活动"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:608
+#: plugins/MeteorShowers/src/MeteorShower.cpp:610
 #, qt-format
 msgid "Maximum: %1"
 msgstr "最大值: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:611
+#: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"
 msgstr "太阳经度"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:621
+#: plugins/MeteorShowers/src/MeteorShower.cpp:623
 msgid "variable"
 msgstr "可变的"
 
@@ -16531,6 +16527,22 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Key mappings"
 #~ msgstr "快捷键"
 
+#, qt-format
+#~ msgid "TEME coordinates (km): %1"
+#~ msgstr "地心惯性坐标：%1 千米"
+
+#, qt-format
+#~ msgid "TEME velocity (km/s): %1"
+#~ msgstr "地心惯性速度：%1 千米/秒"
+
+#, qt-format
+#~ msgid "Range rate (km/s): %1"
+#~ msgstr "距离变率：%1 千米/秒"
+
+#, qt-format
+#~ msgid "SubPoint (Lat./Long.): %1%2/%3%4"
+#~ msgstr "投影点纬度：%1%2，经度：%3%4"
+
 #~ msgid ""
 #~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 #~ "plugin\" in the subject when posting."
@@ -16707,6 +16719,10 @@ msgstr "为自定义赤纬线2"
 
 #~ msgid "Replace the Solar System file..."
 #~ msgstr "覆盖当前太阳系配置文件..."
+
+#, qt-format
+#~ msgid "Z (redshift): %1"
+#~ msgstr "Z（红移）：%1"
 
 #~ msgid "Netherlands Antilles"
 #~ msgstr "荷属安地列斯"
@@ -16952,8 +16968,15 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Object's size"
 #~ msgstr "天体大小"
 
+#, qt-format
+#~ msgid "Barycentric period: %1 s"
+#~ msgstr "自转周期: %1 s"
+
 #~ msgid "recycled pulsar"
 #~ msgstr "循环脉冲星"
+
+#~ msgid "mJy"
+#~ msgstr "毫央"
 
 #~ msgid "Saint Helena"
 #~ msgstr "圣赫勒拿"
@@ -16995,6 +17018,10 @@ msgstr "为自定义赤纬线2"
 #~ msgid "cm"
 #~ msgstr "厘米"
 
+#, qt-format
+#~ msgid "Eccentricity: %1"
+#~ msgstr "偏心率： %1"
+
 #~ msgid "pc"
 #~ msgstr "秒差距"
 
@@ -17005,8 +17032,20 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Ecliptic Geocentric (of date): %1/%2"
 #~ msgstr "地心黄道坐标轴（对日期）：%1/%2"
 
+#, qt-format
+#~ msgid "Notes: %1"
+#~ msgstr "说明：%1"
+
+#, qt-format
+#~ msgid "Annual parallax: %1 mas"
+#~ msgstr "周年视差：%1 毫弧秒"
+
 #~ msgid "Display mode for pulsars"
 #~ msgstr "脉冲星显示模式"
+
+#, qt-format
+#~ msgid "Profile width at 50% of peak: %1 ms"
+#~ msgstr "半峰值宽度：%1 毫秒"
 
 #, qt-format
 #~ msgid "Effective temperature: %1 K"
@@ -17165,6 +17204,10 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Sidereal period: %1 days (%2 a)"
 #~ msgstr "公转轨道周期：%1天 (%2儒略年)"
 
+#, qt-format
+#~ msgid "Spin down energy loss rate: %1 ergs/s"
+#~ msgstr "自转能量损失速率：%1尔格/秒"
+
 #~ msgid "Oculars Plugin"
 #~ msgstr "目镜视角插件"
 
@@ -17207,6 +17250,17 @@ msgstr "为自定义赤纬线2"
 #~ "您可以选择缩放您在屏幕上看到的图像。这是为了向您展示一个更好的某套目镜/主镜的结合和其他组合的比较。同一个目镜在不同焦距的主镜上会产生不同的成像圈，使得我"
 #~ "们看到的图像不同。然而，图像缩放后，屏幕的大部分面积会被浪费。因此我建议您除非需要，不要使用这个功能。"
 
+#~ msgid "Dispersion measure:"
+#~ msgstr "频散量"
+
+#, qt-format
+#~ msgid "%1 MHz (%2%3 kHz)"
+#~ msgstr "%1 兆赫兹(%2%3 千赫兹)"
+
+#, qt-format
+#~ msgid "Binary period of pulsar: %1 days"
+#~ msgstr "脉冲双星轨道周期：%1 天"
+
 #, qt-format
 #~ msgid "Obliquity (of date, for Earth): %1"
 #~ msgstr "自转轴倾角(当前日期，相对于地球轨道面): %1"
@@ -17237,6 +17291,10 @@ msgstr "为自定义赤纬线2"
 
 #~ msgid "Cosmical rise/set"
 #~ msgstr "偕日升/偕日落(合日)"
+
+#, qt-format
+#~ msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+#~ msgstr "基于电子密度分布模型估算的距离：%1 千秒差距（%2 光年）"
 
 #~ msgid "Greatest elongation: "
 #~ msgstr "对太阳最大角距离(大距): "
@@ -17278,6 +17336,10 @@ msgstr "为自定义赤纬线2"
 #~ "Phobos emerges from the sun it passes through Mars' shadow and dims."
 #~ msgstr "火卫一超过火星，食太阳后穿过它并逆行返回，部分挡住太阳（只能在SH看到），以后火星完全食太阳和火卫一，接着火卫一进入火星的阴影里变暗。"
 
+#, qt-format
+#~ msgid "Time derivative of barycentric period: %1"
+#~ msgstr "自转周期变化率:%1"
+
 #~ msgid ""
 #~ "A demonstration of the analemma - the path of the Sun across the sky during "
 #~ "the year."
@@ -17305,6 +17367,10 @@ msgstr "为自定义赤纬线2"
 #, no-c-format, qt-format
 #~ msgid "Distance: %1AU (%2 km)"
 #~ msgstr "距离: %1 天文单位(%2 千米)"
+
+#, qt-format
+#~ msgid "Altitude (km): %1"
+#~ msgstr "高度: %1 千米"
 
 #, qt-format
 #~ msgid "RA/DE (of date): %1/%2"
@@ -17572,6 +17638,10 @@ msgstr "为自定义赤纬线2"
 #~ msgid "Supergalactic longitude/latitude: %1/%2"
 #~ msgstr "超星系经度/纬度: %1/%2"
 
+#, qt-format
+#~ msgid "Operational status: %1"
+#~ msgstr "操作状态: %1"
+
 #~ msgid "Show Line for Custom Azimuth 1"
 #~ msgstr "显示自定义方位线1"
 
@@ -17616,8 +17686,24 @@ msgstr "为自定义赤纬线2"
 #~ msgid "IAU Constellation: %1"
 #~ msgstr "IAU星座: %1"
 
+#, qt-format
+#~ msgid "Geocentric meteoric velocity: %1 km/s"
+#~ msgstr "地心流星速度: %1 km/s"
+
+#, qt-format
+#~ msgid "Parent body: %1"
+#~ msgstr "母体: %1"
+
 #~ msgid "Angular Distance, arcsec."
 #~ msgstr "角距离,秒"
+
+#, qt-format
+#~ msgid "The population index: %1"
+#~ msgstr "亮度比: %1"
+
+#, qt-format
+#~ msgid "Range (km): %1"
+#~ msgstr "倾斜 (千米): %1"
 
 #~ msgid "Reload shaders"
 #~ msgstr "重新加载着色器"
@@ -17648,6 +17734,10 @@ msgstr "为自定义赤纬线2"
 #, qt-format
 #~ msgid "planetocentric distance %1 km"
 #~ msgstr "行星中心距离%1 千米"
+
+#, qt-format
+#~ msgid "Sun reflection angle: %1%2"
+#~ msgstr "太阳反射角: %1%2"
 
 #~ msgid "Select a file to replace the Solar System configuration file"
 #~ msgstr "选择一个文件以替换太阳系配置文件"
@@ -17692,6 +17782,10 @@ msgstr "为自定义赤纬线2"
 #~ msgstr ""
 #~ "望远镜的信号传入 Stellarium 所用的近似时间。\n"
 #~ "如果您发现十字丝在跳动，请增大这一数值。"
+
+#, qt-format
+#~ msgid "Mean Opposition Magnitude: %1"
+#~ msgstr "平衡星等: %1"
 
 #~ msgctxt "astronomical unit"
 #~ msgid "AU"
