@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 04:15+0700\n"
-"PO-Revision-Date: 2017-07-13 07:33+0000\n"
+"POT-Creation-Date: 2017-07-24 21:25+0700\n"
+"PO-Revision-Date: 2017-07-24 14:19+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-07-25 05:22+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -47,7 +47,7 @@ msgstr "Маркер"
 
 #: src/core/modules/Asterism.cpp:159
 msgid "asterism"
-msgstr ""
+msgstr "астеризам"
 
 #: src/core/modules/AsterismMgr.cpp:93
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:448
@@ -56,7 +56,7 @@ msgstr ""
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:548 src/core/StelCore.cpp:254
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:769
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:777
 msgid "Display Options"
 msgstr "Подешавања приказа"
 
@@ -425,16 +425,16 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:225 src/core/modules/StarWrapper.cpp:228
 msgid "Photometric system"
-msgstr ""
+msgstr "Фотометријски систем"
 
 #: src/core/modules/Nebula.cpp:230 src/core/modules/StarWrapper.cpp:66
 #: src/core/modules/StarWrapper.cpp:210 plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "Боја (П-В)"
 
 #: src/core/modules/Nebula.cpp:235
 msgid "Surface brightness"
-msgstr ""
+msgstr "Површински сјај"
 
 #: src/core/modules/Nebula.cpp:236
 msgid "after extinction"
@@ -466,16 +466,18 @@ msgstr "Величина"
 
 #: src/core/modules/Nebula.cpp:276
 msgid "Orientation angle"
-msgstr ""
+msgstr "Оријентациони угао"
 
+#. TRANSLATORS: Unit of measure for distance - Light Years
+#. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:300 src/core/modules/Nebula.cpp:313
 #: src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Exoplanets/src/Exoplanet.cpp:317
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
 msgid "ly"
-msgstr ""
+msgstr "св. г."
 
 #: src/core/modules/Nebula.cpp:301 src/core/modules/Nebula.cpp:336
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:285
@@ -487,16 +489,16 @@ msgid "Distance"
 msgstr "Растојање"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:311
+#: src/core/modules/Nebula.cpp:311 plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "distance"
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:320
 msgctxt "distance"
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:322
@@ -504,17 +506,17 @@ msgctxt "distance"
 msgid "Mio. ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:350
+#: src/core/modules/Nebula.cpp:350 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
-msgstr ""
+msgstr "Црвени помак"
 
 #: src/core/modules/Nebula.cpp:361 src/core/modules/StarWrapper.cpp:249
 msgid "Parallax"
-msgstr ""
+msgstr "Паралакса"
 
 #: src/core/modules/Nebula.cpp:365
 msgid "Morphological description"
-msgstr ""
+msgstr "Морфолошки опис"
 
 #: src/core/modules/Nebula.cpp:996
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -781,19 +783,19 @@ msgstr "квазар"
 
 #: src/core/modules/Nebula.cpp:1253
 msgid "star cluster"
-msgstr ""
+msgstr "звездано јато"
 
 #: src/core/modules/Nebula.cpp:1256
 msgid "open star cluster"
-msgstr ""
+msgstr "расејана звездано јато"
 
 #: src/core/modules/Nebula.cpp:1259
 msgid "globular star cluster"
-msgstr ""
+msgstr "збијена звездано јато"
 
 #: src/core/modules/Nebula.cpp:1262
 msgid "nebula"
-msgstr ""
+msgstr "маглина"
 
 #: src/core/modules/Nebula.cpp:1265
 msgid "planetary nebula"
@@ -801,7 +803,7 @@ msgstr "планетарна маглина"
 
 #: src/core/modules/Nebula.cpp:1268
 msgid "dark nebula"
-msgstr ""
+msgstr "тамне маглине"
 
 #: src/core/modules/Nebula.cpp:1271
 msgid "cluster associated with nebulosity"
@@ -813,7 +815,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1277
 msgid "emission nebula"
-msgstr ""
+msgstr "емисионе маглине"
 
 #: src/core/modules/Nebula.cpp:1280
 msgid "HII region"
@@ -821,7 +823,7 @@ msgstr "HII регион"
 
 #: src/core/modules/Nebula.cpp:1283
 msgid "reflection nebula"
-msgstr ""
+msgstr "рефлексионе маглине"
 
 #: src/core/modules/Nebula.cpp:1286
 msgid "supernova remnant"
@@ -869,7 +871,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1319
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "протопланетарне маглине"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1322 src/core/modules/StarWrapper.cpp:53
@@ -906,11 +908,10 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:243 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:206 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "Апсолутна величина"
 
 #: src/core/modules/Planet.cpp:392
-#, qt-format
-msgid "Mean Opposition Magnitude: %1"
+msgid "Mean Opposition Magnitude"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
@@ -921,14 +922,17 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "АЈ"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:193 src/gui/StelGuiItems.cpp:748
+#: plugins/Satellites/src/Satellite.cpp:304
+#: plugins/Satellites/src/Satellite.cpp:308
+#: plugins/Satellites/src/Satellite.cpp:324
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "км"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -941,7 +945,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:270
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
-msgstr ""
+msgstr "Даљина од Сунца"
 
 #: src/core/modules/Planet.cpp:470
 msgid "with rings"
@@ -959,20 +963,20 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:252
 msgctxt "duration"
 msgid "days"
-msgstr ""
+msgstr "дана"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:327
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
-msgstr ""
+msgstr "Сидерички период"
 
 #: src/core/modules/Planet.cpp:516
 msgid "Sidereal day"
-msgstr ""
+msgstr "Сидерички дан"
 
 #: src/core/modules/Planet.cpp:517
 msgid "Mean solar day"
-msgstr ""
+msgstr "Средњи сунчев дан"
 
 #: src/core/modules/Planet.cpp:521
 msgid "The period of rotation is chaotic"
@@ -1022,17 +1026,17 @@ msgstr "Нови месец"
 #: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1666
 #: src/gui/AstroCalcDialog.cpp:1701
 msgid "Phase angle"
-msgstr ""
+msgstr "Фазни угао"
 
 #: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:346
 #: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1656
 #: src/gui/AstroCalcDialog.cpp:1691
 msgid "Elongation"
-msgstr ""
+msgstr "Елонгација"
 
 #: src/core/modules/Planet.cpp:571
 msgid "Illuminated"
-msgstr ""
+msgstr "Осветљен"
 
 #: src/core/modules/Planet.cpp:572
 msgid "Albedo"
@@ -1043,7 +1047,7 @@ msgstr ""
 msgid "Phase"
 msgstr "Фаза"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:583
 msgid "Eclipse Factor"
 msgstr ""
 
@@ -1063,22 +1067,24 @@ msgid "periodic"
 msgstr "периодично"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/Comet.cpp:245
+#: src/core/modules/Comet.cpp:245 plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "километар/секунда"
 
 #: src/core/modules/Comet.cpp:247
 msgid "Speed"
-msgstr ""
+msgstr "Брзина"
 
 #: src/core/modules/Comet.cpp:272
 msgid "Coma diameter (estimate)"
-msgstr ""
+msgstr "Пречник коме (приближна вредност)"
 
 #: src/core/modules/Comet.cpp:273
 msgid "Gas tail length (estimate)"
-msgstr ""
+msgstr "Дужина гасног репа (процена)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1194
@@ -1143,12 +1149,12 @@ msgstr "двојна звезда"
 
 #: src/core/modules/StarWrapper.cpp:228
 msgid "Magnitude range"
-msgstr ""
+msgstr "Опсег магнитуде"
 
 #: src/core/modules/StarWrapper.cpp:246
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Spectral Type"
-msgstr ""
+msgstr "Спектрални тип"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:343
@@ -1157,15 +1163,15 @@ msgstr "Период"
 
 #: src/core/modules/StarWrapper.cpp:260
 msgid "Next maximum light"
-msgstr ""
+msgstr "Следећи максимум светлости"
 
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Next minimum light"
-msgstr ""
+msgstr "Следећи минимум светлости"
 
 #: src/core/modules/StarWrapper.cpp:269
 msgid "Rising time"
-msgstr ""
+msgstr "Време изласка"
 
 #: src/core/modules/StarWrapper.cpp:271
 msgid "Duration of eclipse"
@@ -1992,7 +1998,7 @@ msgid "Deep-sky objects background images"
 msgstr "позадинске слике дубоког неба"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
+#: src/StelMainView.cpp:775 src/StelMainView.cpp:776
 msgid "Miscellaneous"
 msgstr "Остало"
 
@@ -3137,9 +3143,11 @@ msgid "Azimuth"
 msgstr "Азимут"
 
 #. TRANSLATORS: altitude
+#. TRANSLATORS: Satellite altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:281
 #: src/gui/AstroCalcDialog.cpp:788 src/gui/AstroCalcDialog.cpp:1378
 #: src/gui/AstroCalcDialog.cpp:1784 src/gui/AstroCalcDialog.cpp:1786
+#: plugins/Satellites/src/Satellite.cpp:308
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "Висина"
@@ -3924,32 +3932,32 @@ msgstr "Дозвола"
 msgid "Shortcut"
 msgstr "Пречица"
 
-#: src/StelMainView.cpp:767
+#: src/StelMainView.cpp:775
 msgid "Save screenshot"
 msgstr "Сачувај снимак екрана"
 
-#: src/StelMainView.cpp:768
+#: src/StelMainView.cpp:776
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:769
+#: src/StelMainView.cpp:777
 msgid "Full-screen mode"
 msgstr "Приказ преко целог екрана"
 
-#: src/StelMainView.cpp:925
+#: src/StelMainView.cpp:933
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:928
+#: src/StelMainView.cpp:936
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Немаш одговарајућу верзију \"aOpenGl\"-a. Молимо те ажурирај драјвере или "
 "графички хардвер."
 
-#: src/StelMainView.cpp:970
+#: src/StelMainView.cpp:978
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3960,7 +3968,7 @@ msgstr ""
 "Желиш ли да занемариш ово обавештење у будућности и покушаш да наставиш у "
 "деградираном режиму?"
 
-#: src/StelMainView.cpp:1021
+#: src/StelMainView.cpp:1029
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3971,7 +3979,7 @@ msgstr ""
 "Желиш ли да занемариш ово обавештење у будућности и покушаш да наставите у "
 "деградираном режиму?"
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1085
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3982,7 +3990,7 @@ msgstr ""
 "Желиш ли да занемариш ово обавештење у будућности и покушаш да наставиш у "
 "деградираном режиму?"
 
-#: src/StelMainView.cpp:1118
+#: src/StelMainView.cpp:1126
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3992,7 +4000,7 @@ msgstr ""
 "Занемари и склони ову поруку убудуће и покушај да наставиш у деградираном "
 "режиму?"
 
-#: src/StelMainView.cpp:1230
+#: src/StelMainView.cpp:1238
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Стеларијум %1"
@@ -9487,116 +9495,108 @@ msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
-#, qt-format
-msgid "Range (km): %1"
-msgstr "Домет (kилометар): %1"
+msgid "Range"
+msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:307
-#, qt-format
-msgid "Range rate (km/s): %1"
-msgstr "Брзина домета (километар/секунда): %1"
+#: plugins/Satellites/src/Satellite.cpp:306
+msgid "Range rate"
+msgstr ""
 
-#. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:310
-#, qt-format
-msgid "Altitude (km): %1"
-msgstr "Висина (километар): %1"
-
-#. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:313
-#, qt-format
-msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "Подтачка (Шир./Дуж.): %1%2/%3%4"
+msgid "SubPoint (Lat./Long.)"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:327
-#, qt-format
-msgid "TEME coordinates (km): %1"
-msgstr "Координате ТЕМЕ (km): %1"
+#: plugins/Satellites/src/Satellite.cpp:324
+msgid "TEME coordinates"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+#: plugins/Satellites/src/Satellite.cpp:331
+msgid "TEME velocity"
+msgstr ""
+
 #: plugins/Satellites/src/Satellite.cpp:335
-#, qt-format
-msgid "TEME velocity (km/s): %1"
-msgstr "Брзина ТЕМЕ (километар/секунда): %1"
+msgid "Sun reflection angle"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:340
-#, qt-format
-msgid "Sun reflection angle: %1%2"
-msgstr "Угао Сунчеве рефлексије : %1 %2"
-
-#: plugins/Satellites/src/Satellite.cpp:353
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
 msgstr "Група"
 
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:350
 msgid "Groups"
 msgstr "Групе"
 
-#: plugins/Satellites/src/Satellite.cpp:361
-#, qt-format
-msgid "Operational status: %1"
+#: plugins/Satellites/src/Satellite.cpp:356
+msgid "Operational status"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:368
+#: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
 msgstr "Сателит и посматрач су изложени Сунчевој светлости."
 
-#: plugins/Satellites/src/Satellite.cpp:371
+#: plugins/Satellites/src/Satellite.cpp:366
 msgid "The satellite is visible."
 msgstr "Сателит је видљив"
 
-#: plugins/Satellites/src/Satellite.cpp:374
+#: plugins/Satellites/src/Satellite.cpp:369
 msgid "The satellite is eclipsed."
 msgstr "Сателит је замрачен"
 
-#: plugins/Satellites/src/Satellite.cpp:377
+#: plugins/Satellites/src/Satellite.cpp:372
 msgid "The satellite is not visible"
 msgstr "Сателит није видљив"
 
-#: plugins/Satellites/src/Satellite.cpp:402
-#, qt-format
-msgid "%1 MHz (%2%3 kHz)"
-msgstr "%1 MHz (%2%3 kHz)"
+#. TRANSLATORS: Unit of measurement of frequency
+#: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:259
+msgctxt "frequency"
+msgid "MHz"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:706
-#: plugins/Satellites/src/Satellite.cpp:731
+#: plugins/Satellites/src/Satellite.cpp:402
+msgctxt "frequency"
+msgid "kHz"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:703
+#: plugins/Satellites/src/Satellite.cpp:728
 msgctxt "operational status"
 msgid "unknown"
 msgstr "непознато"
 
-#: plugins/Satellites/src/Satellite.cpp:710
+#: plugins/Satellites/src/Satellite.cpp:707
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:713
+#: plugins/Satellites/src/Satellite.cpp:710
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:716
+#: plugins/Satellites/src/Satellite.cpp:713
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:719
+#: plugins/Satellites/src/Satellite.cpp:716
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:722
+#: plugins/Satellites/src/Satellite.cpp:719
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:725
+#: plugins/Satellites/src/Satellite.cpp:722
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:728
+#: plugins/Satellites/src/Satellite.cpp:725
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
@@ -12209,11 +12209,6 @@ msgstr "Прикажи квазаре"
 msgid "Quasars configuration window"
 msgstr "прозор за конфигурацију квазара"
 
-#: plugins/Quasars/src/Quasar.cpp:126
-#, qt-format
-msgid "Z (redshift): %1"
-msgstr "Z (црвени помак): %1"
-
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
 msgstr "Додатак квазари"
@@ -12321,25 +12316,22 @@ msgstr "Има %1  регистрованих аномалија."
 msgid "pulsar with glitches"
 msgstr "Пулсар са аномалијом"
 
-#. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:182
-#, qt-format
-msgid "Barycentric period: %1 s"
-msgstr "Барицентричко доба: %1 s"
+msgid "Barycentric period"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
-#, qt-format
-msgid "Time derivative of barycentric period: %1"
-msgstr "Време изведеног барицентричног доба: %1"
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:185
+msgctxt "period"
+msgid "s"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:191
-msgid "Dispersion measure:"
-msgstr "Мера расипања:"
+#: plugins/Pulsars/src/Pulsar.cpp:189
+msgid "Time derivative of barycentric period"
+msgstr ""
 
-#. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:194
-msgctxt "distance"
-msgid "cm"
+msgid "Dispersion measure"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
@@ -12348,91 +12340,107 @@ msgctxt "distance"
 msgid "pc"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:203
-#, qt-format
-msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr "Брзина потрошње енергије за споре ротације: %1 ergs/s"
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:199
+msgctxt "distance"
+msgid "cm"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:207
-#, qt-format
-msgid "Binary period of pulsar: %1 days"
-msgstr "Период ротације пулсара: %1 дана"
+#: plugins/Pulsars/src/Pulsar.cpp:206
+msgid "Spin down energy loss rate"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:211
-#, qt-format
-msgid "Eccentricity: %1"
-msgstr "Неуравнотеженост: %1"
+#. TRANSLATORS: Unit of measure for power - erg per second
+#: plugins/Pulsars/src/Pulsar.cpp:209
+msgctxt "power"
+msgid "ergs/s"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:215
+msgid "Binary period of pulsar"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for period - days
+#: plugins/Pulsars/src/Pulsar.cpp:218
+msgctxt "period"
+msgid "days"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
+msgid "Eccentricity"
+msgstr "Ексцентричност"
+
+#: plugins/Pulsars/src/Pulsar.cpp:227
+msgid "Annual parallax"
+msgstr "Годишња паралакса"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:216
-#, qt-format
-msgid "Annual parallax: %1 mas"
-msgstr "Годишња паралакса: %1 mas"
-
-#: plugins/Pulsars/src/Pulsar.cpp:220
-#, qt-format
-msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+#: plugins/Pulsars/src/Pulsar.cpp:230
+msgctxt "parallax"
+msgid "mas"
 msgstr ""
-"Удаљеност обрачунава на основу модела густине електрона : %1 kpc (%2 св. г.)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:224
-#, qt-format
-msgid "Profile width at 50% of peak: %1 ms"
-msgstr "Ширина профила на 50% од врхунца: %1 ms"
+#: plugins/Pulsars/src/Pulsar.cpp:236
+msgid "Distance based on electron density model"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:249
+#, no-c-format
+msgid "Profile width at 50% of peak"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for time - milliseconds
+#: plugins/Pulsars/src/Pulsar.cpp:252
+msgctxt "time"
+msgid "ms"
+msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:230 plugins/Pulsars/src/Pulsar.cpp:242
-#: plugins/Pulsars/src/Pulsar.cpp:254
+#: plugins/Pulsars/src/Pulsar.cpp:257
 msgid "Time averaged flux density at"
 msgstr "Просечно време густине флукса"
 
-#. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Pulsars/src/Pulsar.cpp:245
-#: plugins/Pulsars/src/Pulsar.cpp:257
-msgctxt "frequency"
-msgid "MHz"
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:261
+msgctxt "spectral flux density"
+msgid "mJy"
 msgstr ""
 
-#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:236 plugins/Pulsars/src/Pulsar.cpp:248
-#: plugins/Pulsars/src/Pulsar.cpp:260
-msgid "mJy"
-msgstr "mJy"
+#: plugins/Pulsars/src/Pulsar.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
+msgid "Notes"
+msgstr "Белешке"
 
-#: plugins/Pulsars/src/Pulsar.cpp:264
-#, qt-format
-msgid "Notes: %1"
-msgstr "Белешке: %1"
-
-#: plugins/Pulsars/src/Pulsar.cpp:353
+#: plugins/Pulsars/src/Pulsar.cpp:362
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "неправилан рендген пулсар или слаб гама -зрак репетитор са откривеним "
 "пулсирањем"
 
-#: plugins/Pulsars/src/Pulsar.cpp:358
+#: plugins/Pulsars/src/Pulsar.cpp:367
 msgid "has one or more binary companions"
 msgstr "има један или више компоненти"
 
-#: plugins/Pulsars/src/Pulsar.cpp:363
+#: plugins/Pulsars/src/Pulsar.cpp:372
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "пулсирајући са емисијом  радио до инфрацрвених или виших фреквенција"
 
-#: plugins/Pulsars/src/Pulsar.cpp:368
+#: plugins/Pulsars/src/Pulsar.cpp:377
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "са променљивим зрачењем само инфрацрвеним или  на вишим фреквенцијама"
 
-#: plugins/Pulsars/src/Pulsar.cpp:373
+#: plugins/Pulsars/src/Pulsar.cpp:382
 msgid "with pulsed emission in the radio band"
 msgstr "са променљививим зрачењем у радио фреквенцији"
 
-#: plugins/Pulsars/src/Pulsar.cpp:378
+#: plugins/Pulsars/src/Pulsar.cpp:387
 msgid "with intermittently pulsed radio emission"
 msgstr "у размацима пулсирајуће радио емисије"
 
-#: plugins/Pulsars/src/Pulsar.cpp:383
+#: plugins/Pulsars/src/Pulsar.cpp:392
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -12936,10 +12944,6 @@ msgstr "Јуп"
 msgid "Semi-Major Axis"
 msgstr "Велика полуоса"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
-msgid "Eccentricity"
-msgstr "Ексцентричност"
-
 #: plugins/Exoplanets/src/Exoplanet.cpp:348
 msgid "Inclination"
 msgstr "Нагиб путањске равни (инклинација)"
@@ -13353,11 +13357,6 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
-msgid "Notes"
-msgstr "Белешке"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
@@ -14335,36 +14334,32 @@ msgstr "киша метеора"
 msgid "Radiant drift (per day)"
 msgstr "Радијан померај (по дану)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:576
-#, qt-format
-msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr "Геоцентрична метеорска брзина: %1 km/s"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
+msgid "Geocentric meteoric velocity"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:581
-#, qt-format
-msgid "The population index: %1"
-msgstr "Индекс популације: %1"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:585
+msgid "The population index"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:586
-#, qt-format
-msgid "Parent body: %1"
-msgstr "Родитељско тело: %1"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:588
+msgid "Parent body"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:595
-#: plugins/MeteorShowers/src/MeteorShower.cpp:603
+#: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
 msgstr "Активност"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:608
+#: plugins/MeteorShowers/src/MeteorShower.cpp:610
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Највише: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:611
+#: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:621
+#: plugins/MeteorShowers/src/MeteorShower.cpp:623
 msgid "variable"
 msgstr "променљива"
 
@@ -17033,6 +17028,18 @@ msgstr ""
 #~ msgid "Toggle ocular view:"
 #~ msgstr "Де(активирај) приказ окулара:"
 
+#, qt-format
+#~ msgid "%1 MHz (%2%3 kHz)"
+#~ msgstr "%1 MHz (%2%3 kHz)"
+
+#, qt-format
+#~ msgid "TEME coordinates (km): %1"
+#~ msgstr "Координате ТЕМЕ (km): %1"
+
+#, qt-format
+#~ msgid "SubPoint (Lat./Long.): %1%2/%3%4"
+#~ msgstr "Подтачка (Шир./Дуж.): %1%2/%3%4"
+
 #~ msgid "Show meridian line"
 #~ msgstr "Прикажи линију меридијана"
 
@@ -17095,6 +17102,10 @@ msgstr ""
 #~ msgstr "Време неактивности показивача:"
 
 #, qt-format
+#~ msgid "Barycentric period: %1 s"
+#~ msgstr "Барицентричко доба: %1 s"
+
+#, qt-format
 #~ msgid "Distance: %1 kpc (%2 ly)"
 #~ msgstr "Растојање: %1 kpc (%2 св.год.)"
 
@@ -17119,6 +17130,9 @@ msgstr ""
 #~ msgid "glitches in period"
 #~ msgstr "застоји у епохи"
 
+#~ msgid "mJy"
+#~ msgstr "mJy"
+
 #~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
 #~ msgstr ""
 #~ "оптички, рендген или гама - зрак пулсирајуће емисије (велика енргија)"
@@ -17129,6 +17143,10 @@ msgstr ""
 #~ msgid "cm"
 #~ msgstr "cm"
 
+#, qt-format
+#~ msgid "Eccentricity: %1"
+#~ msgstr "Неуравнотеженост: %1"
+
 #~ msgid "Update TLE lists from Internet sources"
 #~ msgstr "Ажурирајте TLE листе из Интернет извора"
 
@@ -17136,11 +17154,30 @@ msgstr ""
 #~ msgid "Type of supernova: %1"
 #~ msgstr "Тип супернове: %1"
 
+#~ msgid "Dispersion measure:"
+#~ msgstr "Мера расипања:"
+
+#, qt-format
+#~ msgid "Time derivative of barycentric period: %1"
+#~ msgstr "Време изведеног барицентричног доба: %1"
+
+#, qt-format
+#~ msgid "Binary period of pulsar: %1 days"
+#~ msgstr "Период ротације пулсара: %1 дана"
+
+#, qt-format
+#~ msgid "Notes: %1"
+#~ msgstr "Белешке: %1"
+
 #~ msgid "NORAD two line element orbit data"
 #~ msgstr "NORAD-ови дволинијски подаци о орбитама"
 
 #~ msgid "Display formats"
 #~ msgstr "Прикази формата"
+
+#, qt-format
+#~ msgid "Profile width at 50% of peak: %1 ms"
+#~ msgstr "Ширина профила на 50% од врхунца: %1 ms"
 
 #~ msgid ""
 #~ "A plugin that shows some historical supernovae brighter than 10 visual "
@@ -17369,8 +17406,24 @@ msgstr ""
 #~ msgid "Cannot acquire necessary OpenGL resources."
 #~ msgstr "Није могуће набавити неопходне \"OpenGl\" ресурсе."
 
+#, qt-format
+#~ msgid "Sun reflection angle: %1%2"
+#~ msgstr "Угао Сунчеве рефлексије : %1 %2"
+
+#, qt-format
+#~ msgid "Parent body: %1"
+#~ msgstr "Родитељско тело: %1"
+
+#, qt-format
+#~ msgid "The population index: %1"
+#~ msgstr "Индекс популације: %1"
+
 #~ msgid "Use flip for CCD"
 #~ msgstr "Користи прекидач за CCD"
+
+#, qt-format
+#~ msgid "Geocentric meteoric velocity: %1 km/s"
+#~ msgstr "Геоцентрична метеорска брзина: %1 km/s"
 
 #~ msgid "Active"
 #~ msgstr "Активан"
@@ -17546,6 +17599,22 @@ msgstr ""
 #~ msgid "Open pop-up navigation menu:"
 #~ msgstr "Отвори искачући навигациони изборник :"
 
+#, qt-format
+#~ msgid "Range rate (km/s): %1"
+#~ msgstr "Брзина домета (километар/секунда): %1"
+
+#, qt-format
+#~ msgid "Altitude (km): %1"
+#~ msgstr "Висина (километар): %1"
+
+#, qt-format
+#~ msgid "Range (km): %1"
+#~ msgstr "Домет (kилометар): %1"
+
+#, qt-format
+#~ msgid "TEME velocity (km/s): %1"
+#~ msgstr "Брзина ТЕМЕ (километар/секунда): %1"
+
 #~ msgid "DST timezone name:"
 #~ msgstr "Назив временске зоне за летње рачунање времена:"
 
@@ -17585,6 +17654,15 @@ msgstr ""
 
 #~ msgid "Add new Solar System objects"
 #~ msgstr "Додај нове објекте Сунчевог система"
+
+#, qt-format
+#~ msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+#~ msgstr ""
+#~ "Удаљеност обрачунава на основу модела густине електрона : %1 kpc (%2 св. г.)"
+
+#, qt-format
+#~ msgid "Spin down energy loss rate: %1 ergs/s"
+#~ msgstr "Брзина потрошње енергије за споре ротације: %1 ergs/s"
 
 #~ msgid "pc"
 #~ msgstr "pc"
@@ -17665,6 +17743,14 @@ msgstr ""
 
 #~ msgid "Show horizon line."
 #~ msgstr "Прикажи хоризонтску линију"
+
+#, qt-format
+#~ msgid "Annual parallax: %1 mas"
+#~ msgstr "Годишња паралакса: %1 mas"
+
+#, qt-format
+#~ msgid "Z (redshift): %1"
+#~ msgstr "Z (црвени помак): %1"
 
 #, qt-format
 #~ msgid "Size: %1 x %2"

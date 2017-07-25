@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 04:15+0700\n"
+"POT-Creation-Date: 2017-07-24 21:25+0700\n"
 "PO-Revision-Date: 2017-07-23 03:09+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-24 05:09+0000\n"
+"X-Launchpad-Export-Date: 2017-07-25 05:09+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -56,7 +56,7 @@ msgstr "تشكيل نجمي"
 #: src/core/modules/SolarSystem.cpp:233 src/core/modules/MilkyWay.cpp:78
 #: src/core/modules/ZodiacalLight.cpp:85 src/core/modules/ToastMgr.cpp:60
 #: src/core/StelApp.cpp:548 src/core/StelCore.cpp:254
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:769
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:777
 msgid "Display Options"
 msgstr "اختيارات العرض"
 
@@ -469,10 +469,12 @@ msgid "Orientation angle"
 msgstr "‎زاوية الاتجاه‎"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
+#. TRANSLATORS: Unit of measure for distance - light years
+#. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:300 src/core/modules/Nebula.cpp:313
 #: src/core/modules/StarWrapper.cpp:239
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Exoplanets/src/Exoplanet.cpp:317
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
 msgid "ly"
 msgstr "‎سنة ضوئية‎"
@@ -487,7 +489,7 @@ msgid "Distance"
 msgstr "‎المسافة‎"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:311
+#: src/core/modules/Nebula.cpp:311 plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "distance"
 msgid "kpc"
 msgstr "‎كيلو بارسك‎"
@@ -504,7 +506,7 @@ msgctxt "distance"
 msgid "Mio. ly"
 msgstr "‎مليون سنة ضوئية‎"
 
-#: src/core/modules/Nebula.cpp:350
+#: src/core/modules/Nebula.cpp:350 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
 msgstr "‎الإنزياح للأحمر‎"
 
@@ -909,9 +911,8 @@ msgid "Absolute Magnitude"
 msgstr "‎القدر المطلق‎"
 
 #: src/core/modules/Planet.cpp:392
-#, qt-format
-msgid "Mean Opposition Magnitude: %1"
-msgstr "‎متوسط قدر التقابل‎:‎%1‎"
+msgid "Mean Opposition Magnitude"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
@@ -926,6 +927,9 @@ msgstr "‎وحدة فلكية‎"
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/Comet.cpp:193 src/gui/StelGuiItems.cpp:748
+#: plugins/Satellites/src/Satellite.cpp:304
+#: plugins/Satellites/src/Satellite.cpp:308
+#: plugins/Satellites/src/Satellite.cpp:324
 msgctxt "distance"
 msgid "km"
 msgstr "‎كم‎"
@@ -1043,7 +1047,7 @@ msgstr "‎البياض‎"
 msgid "Phase"
 msgstr "الطور"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:583
 msgid "Eclipse Factor"
 msgstr "‎نسبة الكسوف‎"
 
@@ -1063,7 +1067,9 @@ msgid "periodic"
 msgstr "‎دوري‎"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/Comet.cpp:245
+#: src/core/modules/Comet.cpp:245 plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
 msgstr "‎كم في الثانية‎"
@@ -2002,7 +2008,7 @@ msgid "Deep-sky objects background images"
 msgstr "الصور الخلفية لأجرام الفضاء السحيق"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
+#: src/StelMainView.cpp:775 src/StelMainView.cpp:776
 msgid "Miscellaneous"
 msgstr "منوعات"
 
@@ -3161,9 +3167,11 @@ msgid "Azimuth"
 msgstr "السمت"
 
 #. TRANSLATORS: altitude
+#. TRANSLATORS: Satellite altitude
 #: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:281
 #: src/gui/AstroCalcDialog.cpp:788 src/gui/AstroCalcDialog.cpp:1378
 #: src/gui/AstroCalcDialog.cpp:1784 src/gui/AstroCalcDialog.cpp:1786
+#: plugins/Satellites/src/Satellite.cpp:308
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:946
 msgid "Altitude"
 msgstr "الارتفاع"
@@ -3948,19 +3956,19 @@ msgstr "<P DIR=RTL><b>الرخصة</b>"
 msgid "Shortcut"
 msgstr "الاختصار"
 
-#: src/StelMainView.cpp:767
+#: src/StelMainView.cpp:775
 msgid "Save screenshot"
 msgstr "احفظ لقطة الشاشة"
 
-#: src/StelMainView.cpp:768
+#: src/StelMainView.cpp:776
 msgid "Reload shaders (for development)"
 msgstr "أعد تحميل برنامج الضوء والظل (للمطورين)"
 
-#: src/StelMainView.cpp:769
+#: src/StelMainView.cpp:777
 msgid "Full-screen mode"
 msgstr "نَسَق الشاشة الكاملة"
 
-#: src/StelMainView.cpp:925
+#: src/StelMainView.cpp:933
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -3969,7 +3977,7 @@ msgstr ""
 "(drivers, graphics hardware) أو استخدم هذه الخيارات  --angle-mode أو --mesa-"
 "mode فضلا"
 
-#: src/StelMainView.cpp:928
+#: src/StelMainView.cpp:936
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
@@ -3977,7 +3985,7 @@ msgstr ""
 "شاشة حديث. Insufficient OpenGL version. Please update drivers, or graphics "
 "hardware."
 
-#: src/StelMainView.cpp:970
+#: src/StelMainView.cpp:978
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3986,7 +3994,7 @@ msgstr ""
 "التفاصيل في السجل. . DirectX/OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1021
+#: src/StelMainView.cpp:1029
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -3995,7 +4003,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL/Mesa لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1085
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4004,7 +4012,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1118
+#: src/StelMainView.cpp:1126
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4013,7 +4021,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1230
+#: src/StelMainView.cpp:1238
 #, qt-format
 msgid "Stellarium %1"
 msgstr "ستيللاريوم %1"
@@ -9549,116 +9557,108 @@ msgstr "‎قدر السطوع التقريبي‎"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
-#, qt-format
-msgid "Range (km): %1"
-msgstr "‎البعد عن الراصد بالكيلومترات: ‎%1"
+msgid "Range"
+msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:307
-#, qt-format
-msgid "Range rate (km/s): %1"
-msgstr "‎معدل تغير السرعة كم/ث: ‎%1"
+#: plugins/Satellites/src/Satellite.cpp:306
+msgid "Range rate"
+msgstr ""
 
-#. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:310
-#, qt-format
-msgid "Altitude (km): %1"
-msgstr "‎الارتفاع بالكيلومتر: ‎%1"
-
-#. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:313
-#, qt-format
-msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "‎ إحداثيات الموقع الأرضي تحت القمر مباشرة - الطول/العرض: ‎%1%2/%3%4"
+msgid "SubPoint (Lat./Long.)"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:327
-#, qt-format
-msgid "TEME coordinates (km): %1"
-msgstr "‎TEME الإحداثيات بالكيلومتر حسب: ‎%1"
+#: plugins/Satellites/src/Satellite.cpp:324
+msgid "TEME coordinates"
+msgstr ""
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+#: plugins/Satellites/src/Satellite.cpp:331
+msgid "TEME velocity"
+msgstr ""
+
 #: plugins/Satellites/src/Satellite.cpp:335
-#, qt-format
-msgid "TEME velocity (km/s): %1"
-msgstr "‎TEME السرعة كم/ث حسب:‎%1"
+msgid "Sun reflection angle"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:340
-#, qt-format
-msgid "Sun reflection angle: %1%2"
-msgstr "‎زاوية انعكاس الشمس‎: %1%2‎"
-
-#: plugins/Satellites/src/Satellite.cpp:353
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
 msgstr "مجموعة"
 
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:350
 msgid "Groups"
 msgstr "مجموعات"
 
-#: plugins/Satellites/src/Satellite.cpp:361
-#, qt-format
-msgid "Operational status: %1"
-msgstr "‎حالة التشغيل‎: %1‎"
+#: plugins/Satellites/src/Satellite.cpp:356
+msgid "Operational status"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:368
+#: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
 msgstr "القمر الصناعي والراصد في ضوء الشمس"
 
-#: plugins/Satellites/src/Satellite.cpp:371
+#: plugins/Satellites/src/Satellite.cpp:366
 msgid "The satellite is visible."
 msgstr "القمر الصناعي ممكن أن يرى"
 
-#: plugins/Satellites/src/Satellite.cpp:374
+#: plugins/Satellites/src/Satellite.cpp:369
 msgid "The satellite is eclipsed."
 msgstr "القمر الصناعي في ظل الأرض"
 
-#: plugins/Satellites/src/Satellite.cpp:377
+#: plugins/Satellites/src/Satellite.cpp:372
 msgid "The satellite is not visible"
 msgstr "القمر الصناعي لايمكن رؤيته"
 
-#: plugins/Satellites/src/Satellite.cpp:402
-#, qt-format
-msgid "%1 MHz (%2%3 kHz)"
-msgstr "%1 ‎ميجا هرتز ‎(%2%3 ‎كيلوهرتز ‎)"
+#. TRANSLATORS: Unit of measurement of frequency
+#: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:259
+msgctxt "frequency"
+msgid "MHz"
+msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:706
-#: plugins/Satellites/src/Satellite.cpp:731
+#: plugins/Satellites/src/Satellite.cpp:402
+msgctxt "frequency"
+msgid "kHz"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:703
+#: plugins/Satellites/src/Satellite.cpp:728
 msgctxt "operational status"
 msgid "unknown"
 msgstr "‎غير معروفة‎"
 
-#: plugins/Satellites/src/Satellite.cpp:710
+#: plugins/Satellites/src/Satellite.cpp:707
 msgctxt "operational status"
 msgid "operational"
 msgstr "‎عامل‎"
 
-#: plugins/Satellites/src/Satellite.cpp:713
+#: plugins/Satellites/src/Satellite.cpp:710
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr "‎غير عامل‎"
 
-#: plugins/Satellites/src/Satellite.cpp:716
+#: plugins/Satellites/src/Satellite.cpp:713
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "‎عامل جزئياً‎"
 
-#: plugins/Satellites/src/Satellite.cpp:719
+#: plugins/Satellites/src/Satellite.cpp:716
 msgctxt "operational status"
 msgid "standby"
 msgstr "‎جاهز‎"
 
-#: plugins/Satellites/src/Satellite.cpp:722
+#: plugins/Satellites/src/Satellite.cpp:719
 msgctxt "operational status"
 msgid "spare"
 msgstr "‎احتياطي‎"
 
-#: plugins/Satellites/src/Satellite.cpp:725
+#: plugins/Satellites/src/Satellite.cpp:722
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "‎مهمة ممددة‎"
 
-#: plugins/Satellites/src/Satellite.cpp:728
+#: plugins/Satellites/src/Satellite.cpp:725
 msgctxt "operational status"
 msgid "decayed"
 msgstr "‎متفتت‎"
@@ -12457,11 +12457,6 @@ msgstr "أظهر الكوازارات"
 msgid "Quasars configuration window"
 msgstr "نافذة إعدادات الكوازارات"
 
-#: plugins/Quasars/src/Quasar.cpp:126
-#, qt-format
-msgid "Z (redshift): %1"
-msgstr "‎ Z (الإزاحة الحمراء‎): %1"
-
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
 msgstr "إضافة الكوازارات"
@@ -12570,25 +12565,22 @@ msgstr "له %1 تغير مفاجيء مسجل لتردده الدوراني"
 msgid "pulsar with glitches"
 msgstr "النجوم النابضة ذات التغيرات المفاجئة في ترددها الدوراني"
 
-#. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:182
-#, qt-format
-msgid "Barycentric period: %1 s"
-msgstr "‎دورة المركز الكتلي‎:%1 ثانية"
+msgid "Barycentric period"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:186
-#, qt-format
-msgid "Time derivative of barycentric period: %1"
-msgstr "‎الوقت المشتق من دورة المركز الكتلي‎: %1"
+#. TRANSLATORS: Unit of measure for period - seconds
+#: plugins/Pulsars/src/Pulsar.cpp:185
+msgctxt "period"
+msgid "s"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:191
-msgid "Dispersion measure:"
-msgstr "‎مقياس التشتت‎:"
+#: plugins/Pulsars/src/Pulsar.cpp:189
+msgid "Time derivative of barycentric period"
+msgstr ""
 
-#. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:194
-msgctxt "distance"
-msgid "cm"
+msgid "Dispersion measure"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
@@ -12597,91 +12589,106 @@ msgctxt "distance"
 msgid "pc"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:203
-#, qt-format
-msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr "‎معدّل فقدان طاقة سرعة الدوران التنازلية‎: %1 ‎ إرج في الثانية"
+#. TRANSLATORS: Unit of measure for distance - centimeters
+#: plugins/Pulsars/src/Pulsar.cpp:199
+msgctxt "distance"
+msgid "cm"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:207
-#, qt-format
-msgid "Binary period of pulsar: %1 days"
-msgstr "‎الدرة الثنائية للنجم النابض‎: %1‎ يوم"
+#: plugins/Pulsars/src/Pulsar.cpp:206
+msgid "Spin down energy loss rate"
+msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:211
-#, qt-format
-msgid "Eccentricity: %1"
-msgstr "‎اختلاف المركز‎: %1"
+#. TRANSLATORS: Unit of measure for power - erg per second
+#: plugins/Pulsars/src/Pulsar.cpp:209
+msgctxt "power"
+msgid "ergs/s"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:215
+msgid "Binary period of pulsar"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for period - days
+#: plugins/Pulsars/src/Pulsar.cpp:218
+msgctxt "period"
+msgid "days"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
+msgid "Eccentricity"
+msgstr "الشذوذ المداري"
+
+#: plugins/Pulsars/src/Pulsar.cpp:227
+msgid "Annual parallax"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:216
-#, qt-format
-msgid "Annual parallax: %1 mas"
-msgstr "‎اختلاف المنظر السنوي‎: %1‎ ميللي ثانية قوسية"
-
-#: plugins/Pulsars/src/Pulsar.cpp:220
-#, qt-format
-msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+#: plugins/Pulsars/src/Pulsar.cpp:230
+msgctxt "parallax"
+msgid "mas"
 msgstr ""
-"‎المسافة بالاعتماد على نموذج كثافة الإلكترون‎: %1 ‎ كيلو فرسخ نجمي ‎ (%2‎ "
-"سنة ضوئية ‎)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:224
-#, qt-format
-msgid "Profile width at 50% of peak: %1 ms"
-msgstr "‎عرض قوة إشارة النبض عند 50% من أقصى حد‎: %1 ms"
+#: plugins/Pulsars/src/Pulsar.cpp:236
+msgid "Distance based on electron density model"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:249
+#, no-c-format
+msgid "Profile width at 50% of peak"
+msgstr ""
+
+#. TRANSLATORS: Unit of measure for time - milliseconds
+#: plugins/Pulsars/src/Pulsar.cpp:252
+msgctxt "time"
+msgid "ms"
+msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:230 plugins/Pulsars/src/Pulsar.cpp:242
-#: plugins/Pulsars/src/Pulsar.cpp:254
+#: plugins/Pulsars/src/Pulsar.cpp:257
 msgid "Time averaged flux density at"
 msgstr "كثافة معدل التدفق الوقتي عند‎"
 
-#. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Pulsars/src/Pulsar.cpp:245
-#: plugins/Pulsars/src/Pulsar.cpp:257
-msgctxt "frequency"
-msgid "MHz"
+#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+#: plugins/Pulsars/src/Pulsar.cpp:261
+msgctxt "spectral flux density"
+msgid "mJy"
 msgstr ""
 
-#. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:236 plugins/Pulsars/src/Pulsar.cpp:248
-#: plugins/Pulsars/src/Pulsar.cpp:260
-msgid "mJy"
-msgstr "mJy"
+#: plugins/Pulsars/src/Pulsar.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
+msgid "Notes"
+msgstr "<p dir=rtl>ملاحظات"
 
-#: plugins/Pulsars/src/Pulsar.cpp:264
-#, qt-format
-msgid "Notes: %1"
-msgstr "‎ملاحظات‎: %1"
-
-#: plugins/Pulsars/src/Pulsar.cpp:353
+#: plugins/Pulsars/src/Pulsar.cpp:362
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr "نجم نابض شاذ ذو أشعة سينية أو مردّد أشعة جاما ضعيفة مع نبضات مكتشفة"
 
-#: plugins/Pulsars/src/Pulsar.cpp:358
+#: plugins/Pulsars/src/Pulsar.cpp:367
 msgid "has one or more binary companions"
 msgstr "لديه مرافق ثنائي أو أكثر"
 
-#: plugins/Pulsars/src/Pulsar.cpp:363
+#: plugins/Pulsars/src/Pulsar.cpp:372
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 "مع إشعاعات نابضة في نطاق الموجات الراديوية وماتحت الحمراء أو الترددات الأعلى"
 
-#: plugins/Pulsars/src/Pulsar.cpp:368
+#: plugins/Pulsars/src/Pulsar.cpp:377
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "مع إشعاعات نابضة في نطاق الموجات ماتحت الحمراء أو الترددات الأعلى فقط"
 
-#: plugins/Pulsars/src/Pulsar.cpp:373
+#: plugins/Pulsars/src/Pulsar.cpp:382
 msgid "with pulsed emission in the radio band"
 msgstr "مع إشعاعات نابضة في نطاق الموجات الراديوية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:378
+#: plugins/Pulsars/src/Pulsar.cpp:387
 msgid "with intermittently pulsed radio emission"
 msgstr "مع إشعاعات نابضة متقطعة في نطاق الموجات الراديوية"
 
-#: plugins/Pulsars/src/Pulsar.cpp:383
+#: plugins/Pulsars/src/Pulsar.cpp:392
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -13203,10 +13210,6 @@ msgstr "المشتري"
 msgid "Semi-Major Axis"
 msgstr "نصف المحور الأكبر"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
-msgid "Eccentricity"
-msgstr "الشذوذ المداري"
-
 #: plugins/Exoplanets/src/Exoplanet.cpp:348
 msgid "Inclination"
 msgstr "الميل"
@@ -13684,11 +13687,6 @@ msgid ""
 msgstr ""
 "<p dir=rtl>فورتيتودو من اللاتينية ومهناها القوة العقلية والعاطفية في مواجهة "
 "الأعداء كما أنها متضنة بانسر الذي تمثله كوكبة العقاب."
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
-msgid "Notes"
-msgstr "<p dir=rtl>ملاحظات"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
@@ -14696,36 +14694,32 @@ msgstr "‎زخة شهب‎"
 msgid "Radiant drift (per day)"
 msgstr "‎تزحزح نقطة المنشأ يومياً‎"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:576
-#, qt-format
-msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr "‎سرعة الشهب حسب مركز الأرض‎: %1    الثانية/كم"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
+msgid "Geocentric meteoric velocity"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:581
-#, qt-format
-msgid "The population index: %1"
-msgstr "‎مؤشر كثافة الشهب اللامعة‎: %1"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:585
+msgid "The population index"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:586
-#, qt-format
-msgid "Parent body: %1"
-msgstr "‎الجرم المسبب‎: %1"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:588
+msgid "Parent body"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:595
-#: plugins/MeteorShowers/src/MeteorShower.cpp:603
+#: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
 msgstr "‎النشاط‎ ‎"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:608
+#: plugins/MeteorShowers/src/MeteorShower.cpp:610
 #, qt-format
 msgid "Maximum: %1"
 msgstr "‎الذروة‎: %1‎"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:611
+#: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"
 msgstr "‎خط الطول الشمسي‎"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:621
+#: plugins/MeteorShowers/src/MeteorShower.cpp:623
 msgid "variable"
 msgstr "متغير"
 
@@ -17221,6 +17215,30 @@ msgstr "الميل المخصص 2"
 #~ msgid "Open pop-up navigation menu:"
 #~ msgstr "فتح قائمة الخيارات المنبثقة"
 
+#, qt-format
+#~ msgid "Range (km): %1"
+#~ msgstr "‎البعد عن الراصد بالكيلومترات: ‎%1"
+
+#, qt-format
+#~ msgid "Range rate (km/s): %1"
+#~ msgstr "‎معدل تغير السرعة كم/ث: ‎%1"
+
+#, qt-format
+#~ msgid "Altitude (km): %1"
+#~ msgstr "‎الارتفاع بالكيلومتر: ‎%1"
+
+#, qt-format
+#~ msgid "TEME coordinates (km): %1"
+#~ msgstr "‎TEME الإحداثيات بالكيلومتر حسب: ‎%1"
+
+#, qt-format
+#~ msgid "TEME velocity (km/s): %1"
+#~ msgstr "‎TEME السرعة كم/ث حسب:‎%1"
+
+#, qt-format
+#~ msgid "%1 MHz (%2%3 kHz)"
+#~ msgstr "%1 ‎ميجا هرتز ‎(%2%3 ‎كيلوهرتز ‎)"
+
 #~ msgid ""
 #~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "
 #~ "plugin\" in the subject when posting."
@@ -17440,6 +17458,14 @@ msgstr "الميل المخصص 2"
 #~ msgid "Quaoar"
 #~ msgstr "كواأور"
 
+#, qt-format
+#~ msgid "SubPoint (Lat./Long.): %1%2/%3%4"
+#~ msgstr "‎ إحداثيات الموقع الأرضي تحت القمر مباشرة - الطول/العرض: ‎%1%2/%3%4"
+
+#, qt-format
+#~ msgid "Z (redshift): %1"
+#~ msgstr "‎ Z (الإزاحة الحمراء‎): %1"
+
 #~ msgid "American Samoa"
 #~ msgstr "ساموا الأمريكية"
 
@@ -17575,6 +17601,10 @@ msgstr "الميل المخصص 2"
 #~ "1995. <br><br> لاحظ أن النجوم النابضة يبدأ اسمها ب \"PSR\""
 
 #, qt-format
+#~ msgid "Barycentric period: %1 s"
+#~ msgstr "‎دورة المركز الكتلي‎:%1 ثانية"
+
+#, qt-format
 #~ msgid "Distance: %1 kpc (%2 ly)"
 #~ msgstr "‎المسافة‎: %1 ‎كيلو بارسك‎(%2 ‎سنة ضوئية‎)"
 
@@ -17586,8 +17616,15 @@ msgstr "الميل المخصص 2"
 #~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
 #~ msgstr "‎العرض المكافيء لمعدل قوة إشارة النبض‎: %1 ms"
 
+#, qt-format
+#~ msgid "Profile width at 50% of peak: %1 ms"
+#~ msgstr "‎عرض قوة إشارة النبض عند 50% من أقصى حد‎: %1 ms"
+
 #~ msgid "MHz"
 #~ msgstr "‎MHz‎"
+
+#~ msgid "mJy"
+#~ msgstr "mJy"
 
 #~ msgid "globular cluster association"
 #~ msgstr "متعلق بحشد نجمي كروي"
@@ -17731,11 +17768,44 @@ msgstr "الميل المخصص 2"
 #~ msgid "Show ecliptic line"
 #~ msgstr "أظهر الخط الكسوفي"
 
+#, qt-format
+#~ msgid "Time derivative of barycentric period: %1"
+#~ msgstr "‎الوقت المشتق من دورة المركز الكتلي‎: %1"
+
+#~ msgid "Dispersion measure:"
+#~ msgstr "‎مقياس التشتت‎:"
+
 #~ msgid "cm"
 #~ msgstr "سم"
 
 #~ msgid "pc"
 #~ msgstr "فرسخ نجمي"
+
+#, qt-format
+#~ msgid "Spin down energy loss rate: %1 ergs/s"
+#~ msgstr "‎معدّل فقدان طاقة سرعة الدوران التنازلية‎: %1 ‎ إرج في الثانية"
+
+#, qt-format
+#~ msgid "Binary period of pulsar: %1 days"
+#~ msgstr "‎الدرة الثنائية للنجم النابض‎: %1‎ يوم"
+
+#, qt-format
+#~ msgid "Eccentricity: %1"
+#~ msgstr "‎اختلاف المركز‎: %1"
+
+#, qt-format
+#~ msgid "Annual parallax: %1 mas"
+#~ msgstr "‎اختلاف المنظر السنوي‎: %1‎ ميللي ثانية قوسية"
+
+#, qt-format
+#~ msgid "Distance based on electron density model: %1 kpc (%2 ly)"
+#~ msgstr ""
+#~ "‎المسافة بالاعتماد على نموذج كثافة الإلكترون‎: %1 ‎ كيلو فرسخ نجمي ‎ (%2‎ "
+#~ "سنة ضوئية ‎)"
+
+#, qt-format
+#~ msgid "Notes: %1"
+#~ msgstr "‎ملاحظات‎: %1"
 
 #~ msgid ""
 #~ "The Quasars plugin provides visualization of some quasars brighter than 16 "
@@ -18300,8 +18370,20 @@ msgstr "الميل المخصص 2"
 #~ "عام 1958 م؛ ولذلك فإن هذه النجوم تستخدم كأداة مساعدة في الملاحة مثل أداة "
 #~ "البحث عن النجوم والتعرف عليها 2102D Star Finder and Identifier."
 
+#, qt-format
+#~ msgid "The population index: %1"
+#~ msgstr "‎مؤشر كثافة الشهب اللامعة‎: %1"
+
+#, qt-format
+#~ msgid "Parent body: %1"
+#~ msgstr "‎الجرم المسبب‎: %1"
+
 #~ msgid "Active"
 #~ msgstr "‎نشط‎"
+
+#, qt-format
+#~ msgid "Geocentric meteoric velocity: %1 km/s"
+#~ msgstr "‎سرعة الشهب حسب مركز الأرض‎: %1    الثانية/كم"
 
 #~ msgid "Illumination"
 #~ msgstr "الإضاءة"
@@ -18465,6 +18547,10 @@ msgstr "الميل المخصص 2"
 #~ msgid "yyyy.MM.dd"
 #~ msgstr "س س س س . ش ش . ي ي"
 
+#, qt-format
+#~ msgid "Sun reflection angle: %1%2"
+#~ msgstr "‎زاوية انعكاس الشمس‎: %1%2‎"
+
 #~ msgid "Hourly zenith rate"
 #~ msgstr "معدل عدد الشهب في الساعة عندما تكون نقطة المنشأ في الأوج"
 
@@ -18574,6 +18660,10 @@ msgstr "الميل المخصص 2"
 #~ msgstr "‎القطر الظاهري‎: %1, ‎مكبر إلى‎: %2"
 
 #, qt-format
+#~ msgid "Operational status: %1"
+#~ msgstr "‎حالة التشغيل‎: %1‎"
+
+#, qt-format
 #~ msgid "IAU Constellation: %1"
 #~ msgstr "‎اختصار اسم المجموعة النجمية من الاتحاد الفلكي العالمي‎: %1‎"
 
@@ -18584,6 +18674,10 @@ msgstr "الميل المخصص 2"
 #, qt-format
 #~ msgid "Contrast index: %1"
 #~ msgstr "‎مؤشر التباين‎:‎%1‎"
+
+#, qt-format
+#~ msgid "Mean Opposition Magnitude: %1"
+#~ msgstr "‎متوسط قدر التقابل‎:‎%1‎"
 
 #, qt-format
 #~ msgid "Albedo: %1"
