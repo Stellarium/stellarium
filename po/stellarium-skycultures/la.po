@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-19 18:56+0700\n"
-"PO-Revision-Date: 2017-06-16 22:03+0000\n"
+"POT-Creation-Date: 2017-07-22 20:09+0700\n"
+"PO-Revision-Date: 2017-07-24 20:38+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-20 05:40+0000\n"
+"X-Launchpad-Export-Date: 2017-07-25 05:28+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: skycultures/translations.fab:9
@@ -82,7 +82,7 @@ msgstr "Iuppiter"
 msgid "Io"
 msgstr "Io"
 
-#. TRANSLATORS: Moon of Jupiter (JII)
+#. TRANSLATORS: Asteroid (52) Europa and moon of Jupiter (JII)
 #: skycultures/translations.fab:31
 msgid "Europa"
 msgstr "Europa"
@@ -209,7 +209,7 @@ msgstr "Phoebe"
 #. TRANSLATORS: Moon of Saturn (SX)
 #: skycultures/translations.fab:80
 msgid "Janus"
-msgstr ""
+msgstr "Janus"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus and moon of Saturn (SXI)
 #: skycultures/translations.fab:82
@@ -219,17 +219,17 @@ msgstr "Epimetheus"
 #. TRANSLATORS: Moon of Saturn (SXII)
 #: skycultures/translations.fab:84
 msgid "Helene"
-msgstr ""
+msgstr "Helene"
 
 #. TRANSLATORS: Moon of Saturn (SXIII)
 #: skycultures/translations.fab:86
 msgid "Telesto"
-msgstr ""
+msgstr "Telesto"
 
 #. TRANSLATORS: Moon of Saturn (SXIV)
 #: skycultures/translations.fab:88
 msgid "Calypso"
-msgstr ""
+msgstr "Calypso"
 
 #. TRANSLATORS: Moon of Saturn (SXV)
 #: skycultures/translations.fab:90 skycultures/romanian/star_names.fab:36
@@ -245,12 +245,12 @@ msgstr "Prometheus"
 #. TRANSLATORS: Asteroid (55) Pandora and moon of Saturn (SXVII)
 #: skycultures/translations.fab:94
 msgid "Pandora"
-msgstr ""
+msgstr "Pandora"
 
 #. TRANSLATORS: Asteroid (4450) Pan and moon of Saturn (SXVIII)
 #: skycultures/translations.fab:96
 msgid "Pan"
-msgstr ""
+msgstr "Pan"
 
 #: skycultures/translations.fab:97
 msgid "Uranus"
@@ -284,12 +284,12 @@ msgstr "Miranda"
 #. TRANSLATORS: Asteroid (2758) Cordelia and moon of Uranus (UVI)
 #: skycultures/translations.fab:109
 msgid "Cordelia"
-msgstr ""
+msgstr "Cordelia"
 
 #. TRANSLATORS: Asteroid (171) Ophelia and moon of Uranus (UVII)
 #: skycultures/translations.fab:111
 msgid "Ophelia"
-msgstr ""
+msgstr "Ophelia"
 
 #. TRANSLATORS: Asteroid (218) Bianca and moon of Uranus (UVIII)
 #: skycultures/translations.fab:113
@@ -299,17 +299,17 @@ msgstr "Bianca"
 #. TRANSLATORS: Moon of Uranus (UIX)
 #: skycultures/translations.fab:115
 msgid "Cressida"
-msgstr ""
+msgstr "Cressida"
 
 #. TRANSLATORS: Asteroid (666) Desdemona and moon of Uranus (UX)
 #: skycultures/translations.fab:117
 msgid "Desdemona"
-msgstr ""
+msgstr "Desdemona"
 
 #. TRANSLATORS: Moon of Uranus (UXI)
 #: skycultures/translations.fab:119
 msgid "Juliet"
-msgstr ""
+msgstr "Juliet"
 
 #: skycultures/translations.fab:120
 msgid "Neptune"
@@ -404,12 +404,12 @@ msgstr "Hydra"
 #. TRANSLATORS: Moon of Pluto (PIV)
 #: skycultures/translations.fab:155
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 #. TRANSLATORS: Moon of Pluto (PV)
 #: skycultures/translations.fab:157
 msgid "Styx"
-msgstr ""
+msgstr "Styx"
 
 #. TRANSLATORS: Asteroid (136199) Eris
 #: skycultures/translations.fab:159
@@ -500,773 +500,878 @@ msgstr "Flora"
 msgid "Hygiea"
 msgstr "Hygiea"
 
-#. TRANSLATORS: Asteroid (41) Daphne
+#. TRANSLATORS: Asteroid (11) Parthenope
 #: skycultures/translations.fab:202
+msgid "Parthenope"
+msgstr "Parthenope"
+
+#. TRANSLATORS: Asteroid (13) Egeria
+#: skycultures/translations.fab:204
+msgid "Egeria"
+msgstr "Egeria"
+
+#. TRANSLATORS: Asteroid (15) Eunomia
+#: skycultures/translations.fab:206
+msgid "Eunomia"
+msgstr "Eunomia"
+
+#. TRANSLATORS: Asteroid (16) Psyche
+#: skycultures/translations.fab:208
+msgid "Psyche"
+msgstr "Psyche"
+
+#. TRANSLATORS: Asteroid (19) Fortuna
+#: skycultures/translations.fab:210
+msgid "Fortuna"
+msgstr "Fortuna"
+
+#. TRANSLATORS: Asteroid (29) Amphitrite
+#: skycultures/translations.fab:212
+msgid "Amphitrite"
+msgstr "Amphitrite"
+
+#. TRANSLATORS: Asteroid (31) Euphrosyne
+#: skycultures/translations.fab:214
+msgid "Euphrosyne"
+msgstr "Euphrosyne"
+
+#. TRANSLATORS: Asteroid (41) Daphne
+#: skycultures/translations.fab:216
 msgid "Daphne"
 msgstr "Daphne"
 
-#. TRANSLATORS: Asteroid (1221) Amor
-#: skycultures/translations.fab:204
-msgid "Amor"
-msgstr "Amor"
-
-#. TRANSLATORS: Asteroid (99942) Apophis
-#: skycultures/translations.fab:206
-msgid "Apophis"
-msgstr "Apophis"
-
-#. TRANSLATORS: Asteroid (2060) Chiron
-#: skycultures/translations.fab:208
-msgid "Chiron"
-msgstr "Chiron"
-
-#. TRANSLATORS: Asteroid (433) Eros
-#: skycultures/translations.fab:210
-msgid "Eros"
-msgstr "Eros"
-
-#. TRANSLATORS: Asteroid (624) Hektor
-#: skycultures/translations.fab:212
-msgid "Hektor"
-msgstr "Hector"
-
-#. TRANSLATORS: Asteroid (3200) Phaethon
-#: skycultures/translations.fab:214
-msgid "Phaethon"
-msgstr "Phaethon"
-
-#. TRANSLATORS: Asteroid (1866) Sisyphus
-#: skycultures/translations.fab:216
-msgid "Sisyphus"
-msgstr "Sisyphus"
-
-#. TRANSLATORS: Asteroid (1864) Daedalus
+#. TRANSLATORS: Asteroid (45) Eugenia
 #: skycultures/translations.fab:218
-msgid "Daedalus"
-msgstr "Daedalus"
+msgid "Eugenia"
+msgstr "Eugenia"
 
-#. TRANSLATORS: Asteroid (1566) Icarus
+#. TRANSLATORS: Asteroid (48) Doris
 #: skycultures/translations.fab:220
-msgid "Icarus"
-msgstr "Icarus"
+msgid "Doris"
+msgstr "Doris"
 
-#. TRANSLATORS: Asteroid (951) Gaspra
+#. TRANSLATORS: Asteroid (65) Cybele
 #: skycultures/translations.fab:222
-msgid "Gaspra"
-msgstr "Gaspra"
+msgid "Cybele"
+msgstr "Cybele"
+
+#. TRANSLATORS: Asteroid (87) Sylvia
+#: skycultures/translations.fab:224
+msgid "Sylvia"
+msgstr "Sylvia"
+
+#. TRANSLATORS: Asteroid (88) Thisbe
+#: skycultures/translations.fab:226
+msgid "Thisbe"
+msgstr "Thisbe"
+
+#. TRANSLATORS: Asteroid (94) Aurora
+#: skycultures/translations.fab:228
+msgid "Aurora"
+msgstr "Aurora"
+
+#. TRANSLATORS: Asteroid (107) Camilla
+#: skycultures/translations.fab:230
+msgid "Camilla"
+msgstr "Camilla"
 
 #. TRANSLATORS: Asteroid (243) Ida
-#: skycultures/translations.fab:224
+#: skycultures/translations.fab:232
 msgid "Ida"
 msgstr "Ida"
 
+#. TRANSLATORS: Asteroid (324) Bamberga
+#: skycultures/translations.fab:234
+msgid "Bamberga"
+msgstr "Bamberga"
+
+#. TRANSLATORS: Asteroid (375) Ursula
+#: skycultures/translations.fab:236
+msgid "Ursula"
+msgstr "Ursula"
+
+#. TRANSLATORS: Asteroid (423) Diotima
+#: skycultures/translations.fab:238
+msgid "Diotima"
+msgstr "Diotima"
+
+#. TRANSLATORS: Asteroid (433) Eros
+#: skycultures/translations.fab:240
+msgid "Eros"
+msgstr "Eros"
+
+#. TRANSLATORS: Asteroid (451) Patientia
+#: skycultures/translations.fab:242
+msgid "Patientia"
+msgstr "Patientia"
+
+#. TRANSLATORS: Asteroid (511) Davida
+#: skycultures/translations.fab:244
+msgid "Davida"
+msgstr "Davida"
+
+#. TRANSLATORS: Asteroid (532) Herculina
+#: skycultures/translations.fab:246
+msgid "Herculina"
+msgstr "Herculina"
+
+#. TRANSLATORS: Asteroid (624) Hektor
+#: skycultures/translations.fab:248
+msgid "Hektor"
+msgstr "Hector"
+
+#. TRANSLATORS: Asteroid (704) Interamnia
+#: skycultures/translations.fab:250
+msgid "Interamnia"
+msgstr "Interamnia"
+
+#. TRANSLATORS: Asteroid (951) Gaspra
+#: skycultures/translations.fab:252
+msgid "Gaspra"
+msgstr "Gaspra"
+
+#. TRANSLATORS: Asteroid (1221) Amor
+#: skycultures/translations.fab:254
+msgid "Amor"
+msgstr "Amor"
+
+#. TRANSLATORS: Asteroid (1566) Icarus
+#: skycultures/translations.fab:256
+msgid "Icarus"
+msgstr "Icarus"
+
+#. TRANSLATORS: Asteroid (1864) Daedalus
+#: skycultures/translations.fab:258
+msgid "Daedalus"
+msgstr "Daedalus"
+
+#. TRANSLATORS: Asteroid (1866) Sisyphus
+#: skycultures/translations.fab:260
+msgid "Sisyphus"
+msgstr "Sisyphus"
+
+#. TRANSLATORS: Asteroid (2060) Chiron
+#: skycultures/translations.fab:262
+msgid "Chiron"
+msgstr "Chiron"
+
+#. TRANSLATORS: Asteroid (3200) Phaethon
+#: skycultures/translations.fab:264
+msgid "Phaethon"
+msgstr "Phaethon"
+
 #. TRANSLATORS: Asteroid (3753) Cruithne
-#: skycultures/translations.fab:226
+#: skycultures/translations.fab:266
 msgid "Cruithne"
 msgstr "Cruithne"
 
 #. TRANSLATORS: Asteroid (5261) Eureka
-#: skycultures/translations.fab:228
+#: skycultures/translations.fab:268
 msgid "Eureka"
 msgstr "Eureka"
 
+#. TRANSLATORS: Asteroid (99942) Apophis
+#: skycultures/translations.fab:270
+msgid "Apophis"
+msgstr "Apophis"
+
 #. TRANSLATORS: Asteroid (367943) Duende [2012 DA14]
-#: skycultures/translations.fab:230
+#: skycultures/translations.fab:272
 msgid "Duende"
 msgstr "Duende"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
-#: skycultures/translations.fab:235
+#: skycultures/translations.fab:277
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: skycultures/translations.fab:245
+#: skycultures/translations.fab:287
 msgid "Tycho's Supernova"
 msgstr "Tycho's Supernova"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: skycultures/translations.fab:247
+#: skycultures/translations.fab:289
 msgid "Kepler's Supernova"
 msgstr "Kepler's Supernova"
 
 #. TRANSLATORS: Name of supernova SN 1680A
-#: skycultures/translations.fab:249
+#: skycultures/translations.fab:291
 msgid "Cassiopeia A"
 msgstr "Cassiopeia A"
 
 #. TRANSLATORS: Name of supernova SN 1885A
-#: skycultures/translations.fab:251
+#: skycultures/translations.fab:293
 msgid "S Andromedae"
 msgstr "S Andromedae"
 
 #. TRANSLATORS: Template for Nova name
-#: skycultures/translations.fab:256
+#: skycultures/translations.fab:298
 msgctxt "Nova template"
 msgid "Nova"
 msgstr "Stella Nova"
 
 #. TRANSLATORS: Proper name of star 14 Andromedae
-#: skycultures/translations.fab:261 skycultures/western/star_names.fab:11
+#: skycultures/translations.fab:303 skycultures/western/star_names.fab:11
 msgid "Veritate"
-msgstr ""
+msgstr "Veritate"
 
 #. TRANSLATORS: Proper name of exoplanet 14 Andromedae b
-#: skycultures/translations.fab:263
+#: skycultures/translations.fab:305
 msgid "Spe"
-msgstr ""
+msgstr "Spe"
 
 #. TRANSLATORS: Proper name of star 18 Delphini
-#: skycultures/translations.fab:265 skycultures/western/star_names.fab:319
+#: skycultures/translations.fab:307 skycultures/western/star_names.fab:319
 msgid "Musica"
 msgstr "Musica"
 
 #. TRANSLATORS: Proper name of exoplanet 18 Delphini b
-#: skycultures/translations.fab:267
+#: skycultures/translations.fab:309
 msgid "Arion"
 msgstr "Arion"
 
 #. TRANSLATORS: Proper name of star 42 Draconis
-#: skycultures/translations.fab:269 skycultures/western/star_names.fab:352
+#: skycultures/translations.fab:311 skycultures/western/star_names.fab:352
 msgid "Fafnir"
 msgstr "Fafnir"
 
 #. TRANSLATORS: Proper name of exoplanet 42 Draconis b
-#: skycultures/translations.fab:271
+#: skycultures/translations.fab:313
 msgid "Orbitar"
 msgstr "Orbitar"
 
 #. TRANSLATORS: Proper name of star 47 Ursae Majoris
-#: skycultures/translations.fab:273 skycultures/western/star_names.fab:791
+#: skycultures/translations.fab:315 skycultures/western/star_names.fab:791
 msgid "Chalawan"
 msgstr "Chalawan"
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris b
-#: skycultures/translations.fab:275
+#: skycultures/translations.fab:317
 msgid "Taphao Thong"
 msgstr "Taphao Thong"
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris c
-#: skycultures/translations.fab:277
+#: skycultures/translations.fab:319
 msgid "Taphao Kaew"
 msgstr "Taphao Kaew"
 
 #. TRANSLATORS: Proper name of star 51 Pegasi
-#: skycultures/translations.fab:279 skycultures/western/star_names.fab:595
+#: skycultures/translations.fab:321 skycultures/western/star_names.fab:595
 msgid "Helvetios"
 msgstr "Helvetios"
 
 #. TRANSLATORS: Proper name of exoplanet 51 Pegasi b
-#: skycultures/translations.fab:281
+#: skycultures/translations.fab:323
 msgid "Dimidium"
 msgstr "Dimidium"
 
 #. TRANSLATORS: Proper name of star 55 Cancri
-#: skycultures/translations.fab:283 skycultures/western/star_names.fab:125
+#: skycultures/translations.fab:325 skycultures/western/star_names.fab:125
 msgid "Copernicus"
 msgstr "Copernicus"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri b
-#: skycultures/translations.fab:285
+#: skycultures/translations.fab:327
 msgid "Galileo"
 msgstr "Galileo"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri c
-#: skycultures/translations.fab:287
+#: skycultures/translations.fab:329
 msgid "Brahe"
 msgstr "Brahe"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri d
-#: skycultures/translations.fab:289
+#: skycultures/translations.fab:331
 msgid "Lipperhey"
 msgstr "Lipperhey"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri e
-#: skycultures/translations.fab:291
+#: skycultures/translations.fab:333
 msgid "Janssen"
 msgstr "Janssen"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri f
-#: skycultures/translations.fab:293
+#: skycultures/translations.fab:335
 msgid "Harriot"
 msgstr "Harriot"
 
 #. TRANSLATORS: Proper name of exoplanet Ain b (epsilon Tauri b)
-#: skycultures/translations.fab:295
+#: skycultures/translations.fab:337
 msgid "Amateru"
 msgstr "Amateru"
 
 #. TRANSLATORS: Proper name of exoplanet Edasich b (iota Draconis b)
-#: skycultures/translations.fab:297
+#: skycultures/translations.fab:339
 msgid "Hypatia"
 msgstr "Hypatia"
 
 #. TRANSLATORS: Proper name of star epsilon Eridani
-#: skycultures/translations.fab:299 skycultures/western/star_names.fab:389
+#: skycultures/translations.fab:341 skycultures/western/star_names.fab:389
 msgid "Ran"
 msgstr "Ran"
 
 #. TRANSLATORS: Proper name of exoplanet epsilon Eridani b
-#: skycultures/translations.fab:301
+#: skycultures/translations.fab:343
 msgid "AEgir"
 msgstr "AEgir"
 
 #. TRANSLATORS: Proper name of exoplanet Errai b (gamma Cephei b)
-#: skycultures/translations.fab:303
+#: skycultures/translations.fab:345
 msgid "Tadmor"
 msgstr "Tadmor"
 
 #. TRANSLATORS: Proper name of exoplanet Fomalhaut b (alpha Piscis Austrini b)
-#: skycultures/translations.fab:305
+#: skycultures/translations.fab:347
 msgid "Dagon"
 msgstr "Dagon"
 
 #. TRANSLATORS: Proper name of star HD 104985
-#: skycultures/translations.fab:307 skycultures/western/star_names.fab:116
+#: skycultures/translations.fab:349 skycultures/western/star_names.fab:116
 msgid "Tonatiuh"
 msgstr "Tonatiuh"
 
 #. TRANSLATORS: Proper name of exoplanet HD 104985 b
-#: skycultures/translations.fab:309
+#: skycultures/translations.fab:351
 msgid "Meztli"
 msgstr "Meztli"
 
 #. TRANSLATORS: Proper name of star HD 149026
-#: skycultures/translations.fab:311 skycultures/western/star_names.fab:440
+#: skycultures/translations.fab:353 skycultures/western/star_names.fab:440
 msgid "Ogma"
 msgstr "Ogma"
 
 #. TRANSLATORS: Proper name of exoplanet HD 149026 b
-#: skycultures/translations.fab:313
+#: skycultures/translations.fab:355
 msgid "Smertrios"
 msgstr "Smertrios"
 
 #. TRANSLATORS: Proper name of star HD 81688
-#: skycultures/translations.fab:315 skycultures/western/star_names.fab:790
+#: skycultures/translations.fab:357 skycultures/western/star_names.fab:790
 msgid "Intercrus"
 msgstr "Intercrus"
 
 #. TRANSLATORS: Proper name of exoplanet HD 81688 b
-#: skycultures/translations.fab:317
+#: skycultures/translations.fab:359
 msgid "Arkas"
 msgstr "Arkas"
 
 #. TRANSLATORS: Proper name of star mu Arae
-#: skycultures/translations.fab:319 skycultures/western/star_names.fab:50
+#: skycultures/translations.fab:361 skycultures/western/star_names.fab:50
 msgid "Cervantes"
 msgstr "Cervantes"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae b
-#: skycultures/translations.fab:321
+#: skycultures/translations.fab:363
 msgid "Quijote"
 msgstr "Quijote"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae c
-#: skycultures/translations.fab:323
+#: skycultures/translations.fab:365
 msgid "Dulcinea"
 msgstr "Dulcinea"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae d
-#: skycultures/translations.fab:325
+#: skycultures/translations.fab:367
 msgid "Rocinante"
 msgstr "Rocinante"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae e
-#: skycultures/translations.fab:327
+#: skycultures/translations.fab:369
 msgid "Sancho"
 msgstr "Sancho"
 
 #. TRANSLATORS: Proper name of exoplanet Pollux b
-#: skycultures/translations.fab:329
+#: skycultures/translations.fab:371
 msgid "Thestias"
 msgstr "Thestias"
 
 #. TRANSLATORS: Proper name of pulsar PSR 1257+12
-#: skycultures/translations.fab:331
+#: skycultures/translations.fab:373
 msgid "Lich"
 msgstr "Lich"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 b
-#: skycultures/translations.fab:333
+#: skycultures/translations.fab:375
 msgid "Draugr"
 msgstr "Draugr"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 c
-#: skycultures/translations.fab:335
+#: skycultures/translations.fab:377
 msgid "Poltergeist"
 msgstr "Poltergeist"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 d
-#: skycultures/translations.fab:337
+#: skycultures/translations.fab:379
 msgid "Phobetor"
 msgstr "Phobetor"
 
 #. TRANSLATORS: Proper name of star upsilon Andromedae
-#: skycultures/translations.fab:339 skycultures/western/star_names.fab:10
+#: skycultures/translations.fab:381 skycultures/western/star_names.fab:10
 msgid "Titawin"
 msgstr "Titawin"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae b
-#: skycultures/translations.fab:341
+#: skycultures/translations.fab:383
 msgid "Saffar"
 msgstr "Saffar"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae c
-#: skycultures/translations.fab:343
+#: skycultures/translations.fab:385
 msgid "Samh"
 msgstr "Samh"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae d
-#: skycultures/translations.fab:345
+#: skycultures/translations.fab:387
 msgid "Majriti"
 msgstr "Majriti"
 
 #. TRANSLATORS: Proper name of star xi Aquilae
-#: skycultures/translations.fab:347 skycultures/western/star_names.fab:37
+#: skycultures/translations.fab:389 skycultures/western/star_names.fab:37
 msgid "Libertas"
 msgstr "Libertas"
 
 #. TRANSLATORS: Proper name of exoplanet xi Aquilae b
-#: skycultures/translations.fab:349
+#: skycultures/translations.fab:391
 msgid "Fortitudo"
 msgstr "Fortitudo"
 
-#: skycultures/translations.fab:354
+#: skycultures/translations.fab:396
 msgctxt "Genitive name of constellation"
 msgid "Andromedae"
 msgstr "Andromedae"
 
-#: skycultures/translations.fab:355
+#: skycultures/translations.fab:397
 msgctxt "Genitive name of constellation"
 msgid "Antliae"
 msgstr "Antliae"
 
-#: skycultures/translations.fab:356
+#: skycultures/translations.fab:398
 msgctxt "Genitive name of constellation"
 msgid "Apodis"
 msgstr "Apodis"
 
-#: skycultures/translations.fab:357
+#: skycultures/translations.fab:399
 msgctxt "Genitive name of constellation"
 msgid "Aquarii"
 msgstr "Aquarii"
 
-#: skycultures/translations.fab:358
+#: skycultures/translations.fab:400
 msgctxt "Genitive name of constellation"
 msgid "Aquilae"
 msgstr "Aquilae"
 
-#: skycultures/translations.fab:359
+#: skycultures/translations.fab:401
 msgctxt "Genitive name of constellation"
 msgid "Arae"
 msgstr "Arae"
 
-#: skycultures/translations.fab:360
+#: skycultures/translations.fab:402
 msgctxt "Genitive name of constellation"
 msgid "Arietis"
 msgstr "Arietis"
 
-#: skycultures/translations.fab:361
+#: skycultures/translations.fab:403
 msgctxt "Genitive name of constellation"
 msgid "Aurigae"
 msgstr "Aurigae"
 
-#: skycultures/translations.fab:362
+#: skycultures/translations.fab:404
 msgctxt "Genitive name of constellation"
 msgid "Bootis"
 msgstr "Bootis"
 
-#: skycultures/translations.fab:363
+#: skycultures/translations.fab:405
 msgctxt "Genitive name of constellation"
 msgid "Caeli"
 msgstr "Caeli"
 
-#: skycultures/translations.fab:364
+#: skycultures/translations.fab:406
 msgctxt "Genitive name of constellation"
 msgid "Camelopardalis"
 msgstr "Camelopardalis"
 
-#: skycultures/translations.fab:365
+#: skycultures/translations.fab:407
 msgctxt "Genitive name of constellation"
 msgid "Cancri"
 msgstr "Cancri"
 
-#: skycultures/translations.fab:366
+#: skycultures/translations.fab:408
 msgctxt "Genitive name of constellation"
 msgid "Canum Venaticorum"
 msgstr "Canum Venaticorum"
 
-#: skycultures/translations.fab:367
+#: skycultures/translations.fab:409
 msgctxt "Genitive name of constellation"
 msgid "Canis Majoris"
 msgstr "Canis Majoris"
 
-#: skycultures/translations.fab:368
+#: skycultures/translations.fab:410
 msgctxt "Genitive name of constellation"
 msgid "Canis Minoris"
 msgstr "Canis Minoris"
 
-#: skycultures/translations.fab:369
+#: skycultures/translations.fab:411
 msgctxt "Genitive name of constellation"
 msgid "Capricorni"
 msgstr "Capricorni"
 
-#: skycultures/translations.fab:370
+#: skycultures/translations.fab:412
 msgctxt "Genitive name of constellation"
 msgid "Carinae"
 msgstr "Carinae"
 
-#: skycultures/translations.fab:371
+#: skycultures/translations.fab:413
 msgctxt "Genitive name of constellation"
 msgid "Cassiopeiae"
 msgstr "Cassiopeiae"
 
-#: skycultures/translations.fab:372
+#: skycultures/translations.fab:414
 msgctxt "Genitive name of constellation"
 msgid "Centauri"
 msgstr "Centauri"
 
-#: skycultures/translations.fab:373
+#: skycultures/translations.fab:415
 msgctxt "Genitive name of constellation"
 msgid "Cephei"
 msgstr "Cephei"
 
-#: skycultures/translations.fab:374
+#: skycultures/translations.fab:416
 msgctxt "Genitive name of constellation"
 msgid "Ceti"
 msgstr "Ceti"
 
-#: skycultures/translations.fab:375
+#: skycultures/translations.fab:417
 msgctxt "Genitive name of constellation"
 msgid "Chamaeleontis"
 msgstr "Chamaeleontis"
 
-#: skycultures/translations.fab:376
+#: skycultures/translations.fab:418
 msgctxt "Genitive name of constellation"
 msgid "Circini"
 msgstr "Circini"
 
-#: skycultures/translations.fab:377
+#: skycultures/translations.fab:419
 msgctxt "Genitive name of constellation"
 msgid "Columbae"
 msgstr "Columbae"
 
-#: skycultures/translations.fab:378
+#: skycultures/translations.fab:420
 msgctxt "Genitive name of constellation"
 msgid "Comae Berenices"
 msgstr "Comae Berenices"
 
-#: skycultures/translations.fab:379
+#: skycultures/translations.fab:421
 msgctxt "Genitive name of constellation"
 msgid "Coronae Australis"
 msgstr "Coronae Australis"
 
-#: skycultures/translations.fab:380
+#: skycultures/translations.fab:422
 msgctxt "Genitive name of constellation"
 msgid "Coronae Borealis"
 msgstr "Coronae Borealis"
 
-#: skycultures/translations.fab:381
+#: skycultures/translations.fab:423
 msgctxt "Genitive name of constellation"
 msgid "Corvi"
 msgstr "Corvi"
 
-#: skycultures/translations.fab:382
+#: skycultures/translations.fab:424
 msgctxt "Genitive name of constellation"
 msgid "Crateris"
 msgstr "Crateris"
 
-#: skycultures/translations.fab:383
+#: skycultures/translations.fab:425
 msgctxt "Genitive name of constellation"
 msgid "Crucis"
 msgstr "Crucis"
 
-#: skycultures/translations.fab:384
+#: skycultures/translations.fab:426
 msgctxt "Genitive name of constellation"
 msgid "Cygni"
 msgstr "Cygni"
 
-#: skycultures/translations.fab:385
+#: skycultures/translations.fab:427
 msgctxt "Genitive name of constellation"
 msgid "Delphini"
 msgstr "Delphini"
 
-#: skycultures/translations.fab:386
+#: skycultures/translations.fab:428
 msgctxt "Genitive name of constellation"
 msgid "Doradus"
 msgstr "Doradus"
 
-#: skycultures/translations.fab:387
+#: skycultures/translations.fab:429
 msgctxt "Genitive name of constellation"
 msgid "Draconis"
 msgstr "Draconis"
 
-#: skycultures/translations.fab:388
+#: skycultures/translations.fab:430
 msgctxt "Genitive name of constellation"
 msgid "Equulei"
 msgstr "Equulei"
 
-#: skycultures/translations.fab:389
+#: skycultures/translations.fab:431
 msgctxt "Genitive name of constellation"
 msgid "Eridani"
 msgstr "Eridani"
 
-#: skycultures/translations.fab:390
+#: skycultures/translations.fab:432
 msgctxt "Genitive name of constellation"
 msgid "Fornacis"
 msgstr "Fornacis"
 
-#: skycultures/translations.fab:391
+#: skycultures/translations.fab:433
 msgctxt "Genitive name of constellation"
 msgid "Geminorum"
 msgstr "Geminorum"
 
-#: skycultures/translations.fab:392
+#: skycultures/translations.fab:434
 msgctxt "Genitive name of constellation"
 msgid "Gruis"
 msgstr "Gruis"
 
-#: skycultures/translations.fab:393
+#: skycultures/translations.fab:435
 msgctxt "Genitive name of constellation"
 msgid "Herculis"
 msgstr "Herculis"
 
-#: skycultures/translations.fab:394
+#: skycultures/translations.fab:436
 msgctxt "Genitive name of constellation"
 msgid "Horologii"
 msgstr "Horologii"
 
-#: skycultures/translations.fab:395
+#: skycultures/translations.fab:437
 msgctxt "Genitive name of constellation"
 msgid "Hydrae"
 msgstr "Hydrae"
 
-#: skycultures/translations.fab:396
+#: skycultures/translations.fab:438
 msgctxt "Genitive name of constellation"
 msgid "Hydri"
 msgstr "Hydri"
 
-#: skycultures/translations.fab:397
+#: skycultures/translations.fab:439
 msgctxt "Genitive name of constellation"
 msgid "Indi"
 msgstr "Indi"
 
-#: skycultures/translations.fab:398
+#: skycultures/translations.fab:440
 msgctxt "Genitive name of constellation"
 msgid "Lacertae"
 msgstr "Lacertae"
 
-#: skycultures/translations.fab:399
+#: skycultures/translations.fab:441
 msgctxt "Genitive name of constellation"
 msgid "Leonis"
 msgstr "Leonis"
 
-#: skycultures/translations.fab:400
+#: skycultures/translations.fab:442
 msgctxt "Genitive name of constellation"
 msgid "Leonis Minoris"
 msgstr "Leonis Minoris"
 
-#: skycultures/translations.fab:401
+#: skycultures/translations.fab:443
 msgctxt "Genitive name of constellation"
 msgid "Leporis"
 msgstr "Leporis"
 
-#: skycultures/translations.fab:402
+#: skycultures/translations.fab:444
 msgctxt "Genitive name of constellation"
 msgid "Librae"
 msgstr "Librae"
 
-#: skycultures/translations.fab:403
+#: skycultures/translations.fab:445
 msgctxt "Genitive name of constellation"
 msgid "Lupi"
 msgstr "Lupi"
 
-#: skycultures/translations.fab:404
+#: skycultures/translations.fab:446
 msgctxt "Genitive name of constellation"
 msgid "Lyncis"
 msgstr "Lyncis"
 
-#: skycultures/translations.fab:405
+#: skycultures/translations.fab:447
 msgctxt "Genitive name of constellation"
 msgid "Lyrae"
 msgstr "Lyrae"
 
-#: skycultures/translations.fab:406
+#: skycultures/translations.fab:448
 msgctxt "Genitive name of constellation"
 msgid "Mensae"
 msgstr "Mensae"
 
-#: skycultures/translations.fab:407
+#: skycultures/translations.fab:449
 msgctxt "Genitive name of constellation"
 msgid "Microscopii"
 msgstr "Microscopii"
 
-#: skycultures/translations.fab:408
+#: skycultures/translations.fab:450
 msgctxt "Genitive name of constellation"
 msgid "Monocerotis"
 msgstr "Monocerotis"
 
-#: skycultures/translations.fab:409
+#: skycultures/translations.fab:451
 msgctxt "Genitive name of constellation"
 msgid "Muscae"
 msgstr "Muscae"
 
-#: skycultures/translations.fab:410
+#: skycultures/translations.fab:452
 msgctxt "Genitive name of constellation"
 msgid "Normae"
 msgstr "Normae"
 
-#: skycultures/translations.fab:411
+#: skycultures/translations.fab:453
 msgctxt "Genitive name of constellation"
 msgid "Octantis"
 msgstr "Octantis"
 
-#: skycultures/translations.fab:412
+#: skycultures/translations.fab:454
 msgctxt "Genitive name of constellation"
 msgid "Ophiuchi"
 msgstr "Ophiuchi"
 
-#: skycultures/translations.fab:413
+#: skycultures/translations.fab:455
 msgctxt "Genitive name of constellation"
 msgid "Orionis"
 msgstr "Orionis"
 
-#: skycultures/translations.fab:414
+#: skycultures/translations.fab:456
 msgctxt "Genitive name of constellation"
 msgid "Pavonis"
 msgstr "Pavonis"
 
-#: skycultures/translations.fab:415
+#: skycultures/translations.fab:457
 msgctxt "Genitive name of constellation"
 msgid "Pegasi"
 msgstr "Pegasi"
 
-#: skycultures/translations.fab:416
+#: skycultures/translations.fab:458
 msgctxt "Genitive name of constellation"
 msgid "Persei"
 msgstr "Persei"
 
-#: skycultures/translations.fab:417
+#: skycultures/translations.fab:459
 msgctxt "Genitive name of constellation"
 msgid "Phoenicis"
 msgstr "Phoenicis"
 
-#: skycultures/translations.fab:418
+#: skycultures/translations.fab:460
 msgctxt "Genitive name of constellation"
 msgid "Pictoris"
 msgstr "Pictoris"
 
-#: skycultures/translations.fab:419
+#: skycultures/translations.fab:461
 msgctxt "Genitive name of constellation"
 msgid "Piscium"
 msgstr "Piscium"
 
-#: skycultures/translations.fab:420
+#: skycultures/translations.fab:462
 msgctxt "Genitive name of constellation"
 msgid "Piscis Austrini"
 msgstr "Piscis Austrini"
 
-#: skycultures/translations.fab:421
+#: skycultures/translations.fab:463
 msgctxt "Genitive name of constellation"
 msgid "Puppis"
 msgstr "Puppis"
 
-#: skycultures/translations.fab:422
+#: skycultures/translations.fab:464
 msgctxt "Genitive name of constellation"
 msgid "Pyxidis"
 msgstr "Pyxidis"
 
-#: skycultures/translations.fab:423
+#: skycultures/translations.fab:465
 msgctxt "Genitive name of constellation"
 msgid "Reticuli"
 msgstr "Reticuli"
 
-#: skycultures/translations.fab:424
+#: skycultures/translations.fab:466
 msgctxt "Genitive name of constellation"
 msgid "Sagittae"
 msgstr "Sagittae"
 
-#: skycultures/translations.fab:425
+#: skycultures/translations.fab:467
 msgctxt "Genitive name of constellation"
 msgid "Sagittarii"
 msgstr "Sagittarii"
 
-#: skycultures/translations.fab:426
+#: skycultures/translations.fab:468
 msgctxt "Genitive name of constellation"
 msgid "Scorpii"
 msgstr "Scorpii"
 
-#: skycultures/translations.fab:427
+#: skycultures/translations.fab:469
 msgctxt "Genitive name of constellation"
 msgid "Sculptoris"
 msgstr "Sculptoris"
 
-#: skycultures/translations.fab:428
+#: skycultures/translations.fab:470
 msgctxt "Genitive name of constellation"
 msgid "Scuti"
 msgstr "Scuti"
 
-#: skycultures/translations.fab:429
+#: skycultures/translations.fab:471
 msgctxt "Genitive name of constellation"
 msgid "Serpentis"
 msgstr "Serpentis"
 
-#: skycultures/translations.fab:430
+#: skycultures/translations.fab:472
 msgctxt "Genitive name of constellation"
 msgid "Sextantis"
 msgstr "Sextantis"
 
-#: skycultures/translations.fab:431
+#: skycultures/translations.fab:473
 msgctxt "Genitive name of constellation"
 msgid "Tauri"
 msgstr "Tauri"
 
-#: skycultures/translations.fab:432
+#: skycultures/translations.fab:474
 msgctxt "Genitive name of constellation"
 msgid "Telescopii"
 msgstr "Telescopii"
 
-#: skycultures/translations.fab:433
+#: skycultures/translations.fab:475
 msgctxt "Genitive name of constellation"
 msgid "Trianguli"
 msgstr "Trianguli"
 
-#: skycultures/translations.fab:434
+#: skycultures/translations.fab:476
 msgctxt "Genitive name of constellation"
 msgid "Trianguli Australis"
 msgstr "Trianguli Australis"
 
-#: skycultures/translations.fab:435
+#: skycultures/translations.fab:477
 msgctxt "Genitive name of constellation"
 msgid "Tucanae"
 msgstr "Tucanae"
 
-#: skycultures/translations.fab:436
+#: skycultures/translations.fab:478
 msgctxt "Genitive name of constellation"
 msgid "Ursae Majoris"
 msgstr "Ursae Majoris"
 
-#: skycultures/translations.fab:437
+#: skycultures/translations.fab:479
 msgctxt "Genitive name of constellation"
 msgid "Ursae Minoris"
 msgstr "Ursae Minoris"
 
-#: skycultures/translations.fab:438
+#: skycultures/translations.fab:480
 msgctxt "Genitive name of constellation"
 msgid "Velorum"
 msgstr "Velorum"
 
-#: skycultures/translations.fab:439
+#: skycultures/translations.fab:481
 msgctxt "Genitive name of constellation"
 msgid "Virginis"
 msgstr "Virginis"
 
-#: skycultures/translations.fab:440
+#: skycultures/translations.fab:482
 msgctxt "Genitive name of constellation"
 msgid "Volantis"
 msgstr "Volantis"
 
-#: skycultures/translations.fab:441
+#: skycultures/translations.fab:483
 msgctxt "Genitive name of constellation"
 msgid "Vulpeculae"
 msgstr "Vulpeculae"
@@ -1354,7 +1459,7 @@ msgstr "Nubecula Minor"
 
 #: nebulae/default/names.dat:48
 msgid "Nubecula Minor"
-msgstr ""
+msgstr "Nubecula Minor"
 
 #: nebulae/default/names.dat:49
 msgid "Mirach's Ghost"
@@ -1378,7 +1483,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:54
 msgid "Triangulum Galaxy"
-msgstr ""
+msgstr "Triangulum Galaxia"
 
 #: nebulae/default/names.dat:55
 msgid "Triangulum Pinwheel"
@@ -1442,15 +1547,15 @@ msgstr ""
 
 #: nebulae/default/names.dat:71
 msgid "Fornax H3"
-msgstr ""
+msgstr "Fornax H3"
 
 #: nebulae/default/names.dat:72
 msgid "Fornax C3"
-msgstr ""
+msgstr "Fornax C3"
 
 #: nebulae/default/names.dat:73
 msgid "Fornax 3"
-msgstr ""
+msgstr "Fornax 3"
 
 #: nebulae/default/names.dat:74
 msgid "Cetus A"
@@ -1639,7 +1744,7 @@ msgstr "Nebula de Mairanii"
 
 #: nebulae/default/names.dat:122
 msgid "Mairan's Nebula"
-msgstr ""
+msgstr "Nebula Mairani"
 
 #: nebulae/default/names.dat:123
 msgid "ε Ori Nebula"
@@ -1675,7 +1780,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:131
 msgid "30 Dor B"
-msgstr ""
+msgstr "30 Dor B"
 
 #: nebulae/default/names.dat:132
 msgid "Casper the Friendly Ghost Nebula"
@@ -1723,7 +1828,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:143
 msgid "Mon R2 IRS3"
-msgstr ""
+msgstr "Mon R2 IRS3"
 
 #: nebulae/default/names.dat:144
 msgid "Monkey Head Nebula"
@@ -1749,11 +1854,11 @@ msgstr "Rosetta B"
 
 #: nebulae/default/names.dat:152
 msgid "Hubble's Variable Nebula"
-msgstr ""
+msgstr "Nebula Hubblei Variabilis"
 
 #: nebulae/default/names.dat:153
 msgid "Hubble's Nebula"
-msgstr ""
+msgstr "Nebula Hubblei"
 
 #: nebulae/default/names.dat:154
 msgid "Cone Nebula"
@@ -1850,7 +1955,7 @@ msgstr ""
 
 #: nebulae/default/names.dat:177
 msgid "Firsse 213"
-msgstr ""
+msgstr "Firsse 213"
 
 #: nebulae/default/names.dat:178
 msgid "Intergalactic Wanderer/Tramp"
@@ -6893,103 +6998,103 @@ msgstr ""
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:12
 msgid "The Pointers"
-msgstr ""
+msgstr "Indicatores"
 
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:13
 msgid "Navigator's Triangle"
-msgstr ""
+msgstr "Triangulum Navigatoris"
 
 #: skycultures/hawaiian_starlines/star_names.fab:1
 msgid "Hokulei"
-msgstr ""
+msgstr "Hokulei"
 
 #: skycultures/hawaiian_starlines/star_names.fab:2
 msgid "Nana-mua"
-msgstr ""
+msgstr "Nana-mua"
 
 #: skycultures/hawaiian_starlines/star_names.fab:3
 msgid "Nana-hope"
-msgstr ""
+msgstr "Nana-hope"
 
 #: skycultures/hawaiian_starlines/star_names.fab:4
 msgid "Puana"
-msgstr ""
+msgstr "Puana"
 
 #: skycultures/hawaiian_starlines/star_names.fab:5
 msgid "A‘a"
-msgstr ""
+msgstr "A‘a"
 
 #: skycultures/hawaiian_starlines/star_names.fab:6
 msgid "Puana-kau"
-msgstr ""
+msgstr "Puana-kau"
 
 #: skycultures/hawaiian_starlines/star_names.fab:7
 msgid "Pu'uhonua"
-msgstr ""
+msgstr "Pu'uhonua"
 
 #: skycultures/hawaiian_starlines/star_names.fab:8
 msgid "Kaulua-koko"
-msgstr ""
+msgstr "Kaulua-koko"
 
 #: skycultures/hawaiian_starlines/star_names.fab:9
 msgid "Hokupa‘a"
-msgstr ""
+msgstr "Hokupa‘a"
 
 #: skycultures/hawaiian_starlines/star_names.fab:10
 msgid "Hokule‘a"
-msgstr ""
+msgstr "Hokule‘a"
 
 #: skycultures/hawaiian_starlines/star_names.fab:11
 msgid "Hiki-analia"
-msgstr ""
+msgstr "Hiki-analia"
 
 #: skycultures/hawaiian_starlines/star_names.fab:12
 msgid "Holopuni"
-msgstr ""
+msgstr "Holopuni"
 
 #: skycultures/hawaiian_starlines/star_names.fab:13
 msgid "Hawaiki"
-msgstr ""
+msgstr "Hawaiki"
 
 #: skycultures/hawaiian_starlines/star_names.fab:14
 msgid "Humu"
-msgstr ""
+msgstr "Humu"
 
 #: skycultures/hawaiian_starlines/star_names.fab:15
 msgid "Keoe"
-msgstr ""
+msgstr "Keoe"
 
 #: skycultures/hawaiian_starlines/star_names.fab:16
 msgid "Hoku‘ula"
-msgstr ""
+msgstr "Hoku‘ula"
 
 #: skycultures/hawaiian_starlines/star_names.fab:17
 msgid "Lehua-Kona"
-msgstr ""
+msgstr "Lehua-Kona"
 
 #: skycultures/hawaiian_starlines/star_names.fab:18
 msgid "Ke ali'i o kona i ka lewa"
-msgstr ""
+msgstr "Ke ali'i o kona i ka lewa"
 
 #: skycultures/hawaiian_starlines/star_names.fab:19
 msgid "Pu‘uhonua"
-msgstr ""
+msgstr "Pu‘uhonua"
 
 #: skycultures/hawaiian_starlines/star_names.fab:20
 msgid "Hiku-kahi"
-msgstr ""
+msgstr "Hiku-kahi"
 
 #: skycultures/hawaiian_starlines/star_names.fab:21
 msgid "Hiku-lua"
-msgstr ""
+msgstr "Hiku-lua"
 
 #: skycultures/hawaiian_starlines/star_names.fab:22
 msgid "Hiku-kolu"
-msgstr ""
+msgstr "Hiku-kolu"
 
 #: skycultures/hawaiian_starlines/star_names.fab:23
 msgid "Hiku-ha"
-msgstr ""
+msgstr "Hiku-ha"
 
 #: skycultures/hawaiian_starlines/star_names.fab:24
 msgid "Hiku-lima"
@@ -7010,7 +7115,7 @@ msgstr "Kaulia"
 
 #: skycultures/hawaiian_starlines/star_names.fab:28
 msgid "Ka Mole Honua"
-msgstr ""
+msgstr "Ka Mole Honua"
 
 #: skycultures/hawaiian_starlines/star_names.fab:29
 msgid "Ka-maile-mua"
@@ -7026,72 +7131,72 @@ msgstr "Ka Maka"
 
 #: skycultures/hawaiian_starlines/star_names.fab:32
 msgid "Kapuahi"
-msgstr ""
+msgstr "Kapuahi"
 
 #: skycultures/hawaiian_starlines/star_names.fab:33
 msgid "Keawe"
-msgstr ""
+msgstr "Keawe"
 
 #: skycultures/hawaiian_starlines/star_names.fab:34
 msgid "Manokalanipo"
-msgstr ""
+msgstr "Manokalanipo"
 
 #: skycultures/hawaiian_starlines/star_names.fab:35
 msgid "Pi‘ilani"
-msgstr ""
+msgstr "Pi‘ilani"
 
 #: skycultures/hawaiian_starlines/star_names.fab:36
 msgid "Kakuhihewa"
-msgstr ""
+msgstr "Kakuhihewa"
 
 #: skycultures/hawaiian_starlines/star_names.fab:37
 msgid "Pi‘ikea"
-msgstr ""
+msgstr "Pi‘ikea"
 
 #: skycultures/hawaiian_starlines/star_names.fab:38
 msgid "Kaikilani"
-msgstr ""
+msgstr "Kaikilani"
 
 #: skycultures/hawaiian_starlines/star_names.fab:39
 #: skycultures/hawaiian_starlines/star_names.fab:46
 msgid "Kukaniloko"
-msgstr ""
+msgstr "Kukaniloko"
 
 #: skycultures/hawaiian_starlines/star_names.fab:40
 msgid "Kealohalani-po-keao"
-msgstr ""
+msgstr "Kealohalani-po-keao"
 
 #: skycultures/hawaiian_starlines/star_names.fab:41
 msgid "Kamoanalipoli-po-keao"
-msgstr ""
+msgstr "Kamoanalipoli-po-keao"
 
 #: skycultures/hawaiian_starlines/star_names.fab:42
 msgid "Kaheihiwahiwa-o-keao"
-msgstr ""
+msgstr "Kaheihiwahiwa-o-keao"
 
 #: skycultures/hawaiian_starlines/star_names.fab:43
 msgid "Kapalinihinihi-o-keao"
-msgstr ""
+msgstr "Kapalinihinihi-o-keao"
 
 #: skycultures/hawaiian_starlines/star_names.fab:45
 msgid "Mirzim"
-msgstr ""
+msgstr "Mirzim"
 
 #: skycultures/hawaiian_starlines/star_names.fab:47
 msgid "‘Ekekeu’ena’ena"
-msgstr ""
+msgstr "‘Ekekeu’ena’ena"
 
 #: skycultures/hawaiian_starlines/star_names.fab:48
 msgid "‘Ekekeuehuehu"
-msgstr ""
+msgstr "‘Ekekeuehuehu"
 
 #: skycultures/hawaiian_starlines/star_names.fab:49
 msgid "‘Ekekeuhe’ehe’e"
-msgstr ""
+msgstr "‘Ekekeuhe’ehe’e"
 
 #: skycultures/hawaiian_starlines/star_names.fab:50
 msgid "‘Ekekeukolokolo"
-msgstr ""
+msgstr "‘Ekekeukolokolo"
 
 #: skycultures/hawaiian_starlines/star_names.fab:51
 #: skycultures/romanian/star_names.fab:48
@@ -7119,71 +7224,71 @@ msgstr "Mintaka"
 
 #: skycultures/hawaiian_starlines/star_names.fab:56
 msgid "Pua‘i"
-msgstr ""
+msgstr "Pua‘i"
 
 #: skycultures/hawaiian_starlines/star_names.fab:57
 msgid "Mili’opu"
-msgstr ""
+msgstr "Mili’opu"
 
 #: skycultures/hawaiian_starlines/star_names.fab:58
 msgid "Kahe"
-msgstr ""
+msgstr "Kahe"
 
 #: skycultures/hawaiian_starlines/star_names.fab:59
 msgid "Hihiwai"
-msgstr ""
+msgstr "Hihiwai"
 
 #: skycultures/hawaiian_starlines/star_names.fab:60
 msgid "Kawelaokapo"
-msgstr ""
+msgstr "Kawelaokapo"
 
 #: skycultures/hawaiian_starlines/star_names.fab:61
 msgid "‘Ohelokulu"
-msgstr ""
+msgstr "‘Ohelokulu"
 
 #: skycultures/hawaiian_starlines/star_names.fab:62
 msgid "‘Ohelokoko"
-msgstr ""
+msgstr "‘Ohelokoko"
 
 #: skycultures/hawaiian_starlines/star_names.fab:63
 msgid "‘Ohelouli"
-msgstr ""
+msgstr "‘Ohelouli"
 
 #: skycultures/hawaiian_starlines/star_names.fab:64
 msgid "‘Oheloawa"
-msgstr ""
+msgstr "‘Oheloawa"
 
 #: skycultures/hawaiian_starlines/star_names.fab:65
 msgid "‘Ohelowaha"
-msgstr ""
+msgstr "‘Ohelowaha"
 
 #: skycultures/hawaiian_starlines/star_names.fab:66
 msgid "Kawilikolokio"
-msgstr ""
+msgstr "Kawilikolokio"
 
 #: skycultures/hawaiian_starlines/star_names.fab:67
 msgid "Ka‘ielawei‘a"
-msgstr ""
+msgstr "Ka‘ielawei‘a"
 
 #: skycultures/hawaiian_starlines/star_names.fab:68
 msgid "Lele"
-msgstr ""
+msgstr "Lele"
 
 #: skycultures/hawaiian_starlines/star_names.fab:69
 msgid "Kalipo‘eu‘eu"
-msgstr ""
+msgstr "Kalipo‘eu‘eu"
 
 #: skycultures/hawaiian_starlines/star_names.fab:70
 msgid "Momonapikowalu"
-msgstr ""
+msgstr "Momonapikowalu"
 
 #: skycultures/hawaiian_starlines/star_names.fab:71
 msgid "Mokopapa‘i"
-msgstr ""
+msgstr "Mokopapa‘i"
 
 #: skycultures/hawaiian_starlines/star_names.fab:72
 msgid "Wainielela"
-msgstr ""
+msgstr "Wainielela"
 
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
@@ -8397,7 +8502,7 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:199
 msgid "SangJiin"
-msgstr ""
+msgstr "SangJiin"
 
 #: skycultures/korean/constellation_names.eng.fab:200
 msgid "Low Fence"
@@ -8438,7 +8543,7 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:212
 msgid "Observatory"
-msgstr ""
+msgstr "Observatorium"
 
 #: skycultures/korean/constellation_names.eng.fab:213
 msgid "Female Officer"
@@ -8463,7 +8568,7 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:221
 msgid "Virtue"
-msgstr ""
+msgstr "Virtus"
 
 #: skycultures/korean/constellation_names.eng.fab:222
 msgid "Emperor's God of War"
@@ -8483,11 +8588,11 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:226
 msgid "Minister"
-msgstr ""
+msgstr "Minister"
 
 #: skycultures/korean/constellation_names.eng.fab:227
 msgid "General and Minister"
-msgstr ""
+msgstr "General et Minister"
 
 #: skycultures/korean/constellation_names.eng.fab:228
 msgid "Jail of Sky"
@@ -8523,7 +8628,7 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:236
 msgid "North Pole"
-msgstr ""
+msgstr "Polus Septemtrionalis"
 
 #: skycultures/korean/constellation_names.eng.fab:237
 msgid "Wound Lodge"
@@ -8535,7 +8640,7 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:239
 msgid "Great Emperor"
-msgstr ""
+msgstr "Imperator Magnus"
 
 #: skycultures/korean/constellation_names.eng.fab:240
 msgid "Officer for Opinion"
@@ -8593,11 +8698,11 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:255
 msgid "Royal Family"
-msgstr ""
+msgstr "Familia Regalis"
 
 #: skycultures/korean/constellation_names.eng.fab:256
 msgid "Head of Family"
-msgstr ""
+msgstr "Caput Familiae"
 
 #: skycultures/korean/constellation_names.eng.fab:257
 msgid "Record of Family"
@@ -8665,225 +8770,225 @@ msgstr ""
 
 #: skycultures/korean/star_names.fab:1
 msgid "SaangSaang"
-msgstr ""
+msgstr "SaangSaang"
 
 #: skycultures/korean/star_names.fab:2 skycultures/korean/star_names.fab:4
 msgid "ChaSaang"
-msgstr ""
+msgstr "ChaSaang"
 
 #: skycultures/korean/star_names.fab:3 skycultures/korean/star_names.fab:50
 msgid "ChaJaang"
-msgstr ""
+msgstr "ChaJaang"
 
 #: skycultures/korean/star_names.fab:5
 msgid "UJangGuun"
-msgstr ""
+msgstr "UJangGuun"
 
 #: skycultures/korean/star_names.fab:6
 msgid "DaeJangGuun"
-msgstr ""
+msgstr "DaeJangGuun"
 
 #: skycultures/korean/star_names.fab:7
 msgid "JwaJangGuun"
-msgstr ""
+msgstr "JwaJangGuun"
 
 #: skycultures/korean/star_names.fab:8
 msgid "WaangRaang"
-msgstr ""
+msgstr "WaangRaang"
 
 #: skycultures/korean/star_names.fab:9 skycultures/korean/star_names.fab:10
 #: skycultures/korean/star_names.fab:11 skycultures/korean/star_names.fab:12
 msgid "CheonSaa"
-msgstr ""
+msgstr "CheonSaa"
 
 #: skycultures/korean/star_names.fab:13 skycultures/korean/star_names.fab:17
 msgid "CheonGou"
-msgstr ""
+msgstr "CheonGou"
 
 #: skycultures/korean/star_names.fab:14
 msgid "SaaGong"
-msgstr ""
+msgstr "SaaGong"
 
 #: skycultures/korean/star_names.fab:15
 msgid "CheonOok"
-msgstr ""
+msgstr "CheonOok"
 
 #: skycultures/korean/star_names.fab:16
 msgid "CheonChaang"
-msgstr ""
+msgstr "CheonChaang"
 
 #: skycultures/korean/star_names.fab:18
 msgid "Gyeong"
-msgstr ""
+msgstr "Gyeong"
 
 #: skycultures/korean/star_names.fab:19
 msgid "JwaJaangGuun"
-msgstr ""
+msgstr "JwaJaangGuun"
 
 #: skycultures/korean/star_names.fab:20
 msgid "HuuJaangGuun"
-msgstr ""
+msgstr "HuuJaangGuun"
 
 #: skycultures/korean/star_names.fab:21
 msgid "UuJaangGuun"
-msgstr ""
+msgstr "UuJaangGuun"
 
 #: skycultures/korean/star_names.fab:22
 msgid "PyeonJaangGuun"
-msgstr ""
+msgstr "PyeonJaangGuun"
 
 #: skycultures/korean/star_names.fab:23
 msgid "SaamJaangGuun"
-msgstr ""
+msgstr "SaamJaangGuun"
 
 #: skycultures/korean/star_names.fab:24
 msgid "TaeSaa"
-msgstr ""
+msgstr "TaeSaa"
 
 #: skycultures/korean/star_names.fab:25 skycultures/korean/star_names.fab:39
 msgid "BaakSaa"
-msgstr ""
+msgstr "BaakSaa"
 
 #: skycultures/korean/star_names.fab:26
 msgid "SaamGong"
-msgstr ""
+msgstr "SaamGong"
 
 #: skycultures/korean/star_names.fab:27
 msgid "JaeUu"
-msgstr ""
+msgstr "JaeUu"
 
 #: skycultures/korean/star_names.fab:28
 msgid "JaeSaa"
-msgstr ""
+msgstr "JaeSaa"
 
 #: skycultures/korean/star_names.fab:29
 msgid "YeoJuu"
-msgstr ""
+msgstr "YeoJuu"
 
 #: skycultures/korean/star_names.fab:30
 msgid "YeoEo"
-msgstr ""
+msgstr "YeoEo"
 
 #: skycultures/korean/star_names.fab:31
 msgid "TaeMin"
-msgstr ""
+msgstr "TaeMin"
 
 #: skycultures/korean/star_names.fab:32
 msgid "SouMin"
-msgstr ""
+msgstr "SouMin"
 
 #: skycultures/korean/star_names.fab:33 skycultures/korean/star_names.fab:64
 #: skycultures/korean/star_names.fab:65 skycultures/korean/star_names.fab:66
 msgid "Buuiin"
-msgstr ""
+msgstr "Buuiin"
 
 #: skycultures/korean/star_names.fab:34
 msgid "WaangBii"
-msgstr ""
+msgstr "WaangBii"
 
 #: skycultures/korean/star_names.fab:35 skycultures/korean/star_names.fab:47
 msgid "HuuGuung"
-msgstr ""
+msgstr "HuuGuung"
 
 #: skycultures/korean/star_names.fab:36
 msgid "HwangJae"
-msgstr ""
+msgstr "HwangJae"
 
 #: skycultures/korean/star_names.fab:37
 msgid "CheoSaa"
-msgstr ""
+msgstr "CheoSaa"
 
 #: skycultures/korean/star_names.fab:38
 msgid "EuiSaa"
-msgstr ""
+msgstr "EuiSaa"
 
 #: skycultures/korean/star_names.fab:40
 msgid "DaeBuu"
-msgstr ""
+msgstr "DaeBuu"
 
 #: skycultures/korean/star_names.fab:41
 msgid "SaangTae"
-msgstr ""
+msgstr "SaangTae"
 
 #: skycultures/korean/star_names.fab:42
 msgid "JuungTae"
-msgstr ""
+msgstr "JuungTae"
 
 #: skycultures/korean/star_names.fab:43
 msgid "HaaTae"
-msgstr ""
+msgstr "HaaTae"
 
 #: skycultures/korean/star_names.fab:44 skycultures/korean/star_names.fab:62
 msgid "TaeJaa"
-msgstr ""
+msgstr "TaeJaa"
 
 #: skycultures/korean/star_names.fab:45
 msgid "JaeWaang"
-msgstr ""
+msgstr "JaeWaang"
 
 #: skycultures/korean/star_names.fab:46 skycultures/korean/star_names.fab:61
 msgid "SeoJaa"
-msgstr ""
+msgstr "SeoJaa"
 
 #: skycultures/korean/star_names.fab:48
 msgid "CheonChuu"
-msgstr ""
+msgstr "CheonChuu"
 
 #: skycultures/korean/star_names.fab:49
 msgid "SaangJaang"
-msgstr ""
+msgstr "SaangJaang"
 
 #: skycultures/korean/star_names.fab:51
 msgid "TaeSaang"
-msgstr ""
+msgstr "TaeSaang"
 
 #: skycultures/korean/star_names.fab:52
 msgid "SaaJuu.DaeRii"
-msgstr ""
+msgstr "SaaJuu.DaeRii"
 
 #: skycultures/korean/star_names.fab:53
 msgid "Jeong"
-msgstr ""
+msgstr "Jeong"
 
 #: skycultures/korean/star_names.fab:54
 msgid "Beop"
-msgstr ""
+msgstr "Beop"
 
 #: skycultures/korean/star_names.fab:55
 msgid "Ryeong"
-msgstr ""
+msgstr "Ryeong"
 
 #: skycultures/korean/star_names.fab:56
 msgid "Beol"
-msgstr ""
+msgstr "Beol"
 
 #: skycultures/korean/star_names.fab:57
 msgid "Saal"
-msgstr ""
+msgstr "Saal"
 
 #: skycultures/korean/star_names.fab:58
 msgid "Wii"
-msgstr ""
+msgstr "Wii"
 
 #: skycultures/korean/star_names.fab:59
 msgid "Eung"
-msgstr ""
+msgstr "Eung"
 
 #: skycultures/korean/star_names.fab:60
 msgid "MyeongDaang"
-msgstr ""
+msgstr "MyeongDaang"
 
 #: skycultures/korean/star_names.fab:63
 msgid "Huu"
-msgstr ""
+msgstr "Huu"
 
 #: skycultures/korean/star_names.fab:67
 msgid "Biin"
-msgstr ""
+msgstr "Biin"
 
 #: skycultures/korean/star_names.fab:68 skycultures/korean/star_names.fab:69
 msgid "DaeJaang"
-msgstr ""
+msgstr "DaeJaang"
 
 #: skycultures/macedonian/constellation_names.eng.fab:1
 msgid "'Aramii' (organized group of thieves)"
@@ -8909,11 +9014,11 @@ msgstr "Libra"
 
 #: skycultures/macedonian/constellation_names.eng.fab:6
 msgid "Yoke"
-msgstr ""
+msgstr "Iugum"
 
 #: skycultures/macedonian/constellation_names.eng.fab:7
 msgid "Wolves"
-msgstr ""
+msgstr "Lupi"
 
 #: skycultures/macedonian/constellation_names.eng.fab:8
 msgid "Threshing Floor"
@@ -8925,11 +9030,11 @@ msgstr ""
 
 #: skycultures/macedonian/constellation_names.eng.fab:10
 msgid "Cross"
-msgstr ""
+msgstr "Crux"
 
 #: skycultures/macedonian/constellation_names.eng.fab:11
 msgid "Fox"
-msgstr ""
+msgstr "Vulpes"
 
 #: skycultures/macedonian/constellation_names.eng.fab:12
 msgid "Tongs"
@@ -8949,7 +9054,7 @@ msgstr ""
 
 #: skycultures/macedonian/constellation_names.eng.fab:16
 msgid "Round Table"
-msgstr ""
+msgstr "Tabula Circularis"
 
 #: skycultures/macedonian/constellation_names.eng.fab:17
 msgid "Pigs"
@@ -8969,163 +9074,163 @@ msgstr ""
 
 #: skycultures/maori/constellation_names.eng.fab:1
 msgid "Taki-o-Autahi"
-msgstr ""
+msgstr "Taki-o-Autahi"
 
 #: skycultures/maori/constellation_names.eng.fab:2
 msgid "Te Taura-o-te-waka-o-tamarereti"
-msgstr ""
+msgstr "Te Taura-o-te-waka-o-tamarereti"
 
 #: skycultures/maori/constellation_names.eng.fab:3
 msgid "Tau-toro"
-msgstr ""
+msgstr "Tau-toro"
 
 #: skycultures/maori/constellation_names.eng.fab:4
 msgid "The Great Boat of Tama Rereti"
-msgstr ""
+msgstr "Navis maior Tamae Rereti"
 
 #: skycultures/maori/constellation_names.eng.fab:5
 msgid "Matakarehu"
-msgstr ""
+msgstr "Matakarehu"
 
 #: skycultures/maori/constellation_names.eng.fab:6
 msgid "The Sail of Tainui"
-msgstr ""
+msgstr "Velum Tainui"
 
 #: skycultures/maori/star_names.fab:1
 msgid "Waipunarangi"
-msgstr ""
+msgstr "Waipunarangi"
 
 #: skycultures/maori/star_names.fab:2
 msgid "Taumata-kuku"
-msgstr ""
+msgstr "Taumata-kuku"
 
 #: skycultures/maori/star_names.fab:3
 msgid "Puanga"
-msgstr ""
+msgstr "Puanga"
 
 #: skycultures/maori/star_names.fab:4
 msgid "Atutahi"
-msgstr ""
+msgstr "Atutahi"
 
 #: skycultures/maori/star_names.fab:5
 msgid "Takarua"
-msgstr ""
+msgstr "Takarua"
 
 #: skycultures/maori/star_names.fab:6
 msgid "Whakaahu"
-msgstr ""
+msgstr "Whakaahu"
 
 #: skycultures/maori/star_names.fab:7
 msgid "Puanga Hori"
-msgstr ""
+msgstr "Puanga Hori"
 
 #: skycultures/maori/star_names.fab:8
 msgid "Mariao"
-msgstr ""
+msgstr "Mariao"
 
 #: skycultures/maori/star_names.fab:9
 msgid "Ruawahia"
-msgstr ""
+msgstr "Ruawahia"
 
 #: skycultures/maori/star_names.fab:10
 msgid "Rehua"
-msgstr ""
+msgstr "Rehua"
 
 #: skycultures/maori/star_names.fab:11
 msgid "Pekehawani"
-msgstr ""
+msgstr "Pekehawani"
 
 #: skycultures/maori/star_names.fab:12
 msgid "Whakaonge-kai"
-msgstr ""
+msgstr "Whakaonge-kai"
 
 #: skycultures/maori/star_names.fab:13
 msgid "Whanui"
-msgstr ""
+msgstr "Whanui"
 
 #: skycultures/maori/star_names.fab:14
 msgid "Poutu-te-Rangi"
-msgstr ""
+msgstr "Poutu-te-Rangi"
 
 #: skycultures/maori/star_names.fab:15
 msgid "Pipiri"
-msgstr ""
+msgstr "Pipiri"
 
 #: skycultures/maori/star_names.fab:16
 msgid "Turu"
-msgstr ""
+msgstr "Turu"
 
 #: skycultures/maori/star_names.fab:17
 msgid "Matariki"
-msgstr ""
+msgstr "Matariki"
 
 #: skycultures/maori/star_names.fab:18
 msgid "Waiti"
-msgstr ""
+msgstr "Waiti"
 
 #: skycultures/maori/star_names.fab:19
 msgid "Waita"
-msgstr ""
+msgstr "Waita"
 
 #: skycultures/maori/star_names.fab:20
 msgid "Tupuarangi"
-msgstr ""
+msgstr "Tupuarangi"
 
 #: skycultures/maori/star_names.fab:21
 msgid "Pohutukawa"
-msgstr ""
+msgstr "Pohutukawa"
 
 #: skycultures/maori/star_names.fab:22
 msgid "Hiwa-i-te-rangi"
-msgstr ""
+msgstr "Hiwa-i-te-rangi"
 
 #: skycultures/maori/star_names.fab:23
 msgid "Tupuanuku"
-msgstr ""
+msgstr "Tupuanuku"
 
 #: skycultures/maori/star_names.fab:24
 msgid "Ururangi"
-msgstr ""
+msgstr "Ururangi"
 
 #. TRANSLATORS: Native name of the Sun in Maori culture
 #: skycultures/maori/planet_names.fab:2
 msgid "Te Ra"
-msgstr ""
+msgstr "Te Ra"
 
 #. TRANSLATORS: Native name of the Moon in Maori culture
 #: skycultures/maori/planet_names.fab:4
 msgid "Te Marama"
-msgstr ""
+msgstr "Te Marama"
 
 #. TRANSLATORS: Native name of Mercury in Maori culture
 #: skycultures/maori/planet_names.fab:6
 msgid "Takero"
-msgstr ""
+msgstr "Takero"
 
 #. TRANSLATORS: Native name of Venus in Maori culture
 #: skycultures/maori/planet_names.fab:8
 msgid "Tawera/Meremere"
-msgstr ""
+msgstr "Tawera/Meremere"
 
 #. TRANSLATORS: Native name of Earth in Maori culture
 #: skycultures/maori/planet_names.fab:10
 msgid "Papa"
-msgstr ""
+msgstr "Papa"
 
 #. TRANSLATORS: Native name of Mars in Maori culture
 #: skycultures/maori/planet_names.fab:12
 msgid "Rangiwhenua"
-msgstr ""
+msgstr "Rangiwhenua"
 
 #. TRANSLATORS: Native name of Jupiter in Maori culture
 #: skycultures/maori/planet_names.fab:14
 msgid "Perearau"
-msgstr ""
+msgstr "Perearau"
 
 #. TRANSLATORS: Native name of Saturn in Maori culture
 #: skycultures/maori/planet_names.fab:16
 msgid "Perearau*"
-msgstr ""
+msgstr "Perearau*"
 
 #: skycultures/mongolian/constellation_names.eng.fab:1
 msgid "Num Sum (The Bow and the Arrow)"
@@ -9182,57 +9287,57 @@ msgstr ""
 #. TRANSLATORS: Native name of the Sun in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:2
 msgid "Nar"
-msgstr ""
+msgstr "Nar"
 
 #. TRANSLATORS: Native name of the Moon in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:4
 msgid "Sar"
-msgstr ""
+msgstr "Sar"
 
 #. TRANSLATORS: Native name of Mercury in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:6
 msgid "Bud"
-msgstr ""
+msgstr "Bud"
 
 #. TRANSLATORS: Native name of Venus in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:8
 msgid "Sugar"
-msgstr ""
+msgstr "Sugar"
 
 #. TRANSLATORS: Native name of Earth in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:10
 msgid "Delkhii"
-msgstr ""
+msgstr "Delkhii"
 
 #. TRANSLATORS: Native name of Mars in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:12
 msgid "Angarag"
-msgstr ""
+msgstr "Angarag"
 
 #. TRANSLATORS: Native name of Jupiter in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:14
 msgid "Barhasbadi"
-msgstr ""
+msgstr "Barhasbadi"
 
 #. TRANSLATORS: Native name of Saturn in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:16
 msgid "Sanchir"
-msgstr ""
+msgstr "Sanchir"
 
 #. TRANSLATORS: Native name of Uranus in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:18
 msgid "Tengeriin-van"
-msgstr ""
+msgstr "Tengeriin-van"
 
 #. TRANSLATORS: Native name of Neptune in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:20
 msgid "Dalai-van"
-msgstr ""
+msgstr "Dalai-van"
 
 #. TRANSLATORS: Native name of Pluto in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:22
 msgid "Dalkhii-van"
-msgstr ""
+msgstr "Dalkhii-van"
 
 #: skycultures/navajo/constellation_names.eng.fab:1
 msgid "Revolving Male"
@@ -9248,7 +9353,7 @@ msgstr ""
 
 #: skycultures/navajo/constellation_names.eng.fab:4
 msgid "Lizard"
-msgstr ""
+msgstr "Lacerta"
 
 #: skycultures/navajo/constellation_names.eng.fab:5
 msgid "Dilyehe"
@@ -9256,7 +9361,7 @@ msgstr ""
 
 #: skycultures/navajo/constellation_names.eng.fab:6
 msgid "First Big One"
-msgstr ""
+msgstr "Primus Magnus"
 
 #: skycultures/navajo/constellation_names.eng.fab:7
 msgid "Rabbit Tracks"
@@ -9276,7 +9381,7 @@ msgstr ""
 
 #: skycultures/norse/constellation_names.eng.fab:3
 msgid "The Fishermen"
-msgstr ""
+msgstr "Piscatores"
 
 #: skycultures/norse/constellation_names.eng.fab:4
 msgid "Woman's Cart"
