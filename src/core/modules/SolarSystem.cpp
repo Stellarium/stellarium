@@ -2422,7 +2422,7 @@ bool SolarSystem::removePlanet(QString name)
 
 void SolarSystem::surfaceNomenclature(const QString& dataDir)
 {
-    planetNativeNamesMap.clear(); // MODIFICAR
+    //planetNativeNamesMap.clear(); // MODIFICAR
     
     QString surfNamesFile = StelFileMgr::findFile("data/" + dataDir + "/surface_nomenclature.fab");
     
