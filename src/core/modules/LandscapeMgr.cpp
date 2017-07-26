@@ -785,29 +785,66 @@ QString LandscapeMgr::getCurrentLandscapeName() const
 QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 {
 	QString desc = getDescription();
-	desc+="<p>";
-	desc+="<b>"+q_("Author: ")+"</b>";
-	desc+=landscape->getAuthorName();
-	desc+="<br>";
+
+	QString author = landscape->getAuthorName();
+
+	desc += "<p>";
+	if (!author.isEmpty())
+		desc += QString("<b>%1</b>: %2<br />").arg(q_("Author"), author);
+
 	// This previously showed 0/0 for locationless landscapes!
 	if (landscape->hasLocation())
 	{
-		desc+="<b>"+q_("Location: ")+"</b>";
-		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
-		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
 		//TRANSLATORS: Unit of measure for distance - meter
-		desc += QString(", %1 %2").arg(landscape->getLocation().altitude).arg(qc_("m", "distance"));
+		QString alt = qc_("m", "distance");
+
+		desc += QString("<b>%1</b>: %2, %3, %4 %5")
+				.arg(q_("Location"))
+				.arg(StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.))
+				.arg(StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.))
+				.arg(landscape->getLocation().altitude).arg(alt);
+
 		QString planetName = landscape->getLocation().planetName;
 		if (!planetName.isEmpty())
 		{
 			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-			desc += "<br><b>"+q_("Celestial body:")+"</b> "+ trans.qtranslate(planetName);
+			desc += QString(", %1").arg(trans.qtranslate(planetName));
 		}
-		desc += "<br><br>";
-	}
-	// TBD: Activate this or delete?
-	//else
-	//	desc+="<b>"+q_("Location: ")+"</b>" + q_("not specified (just decoration)") + "<br><br>";
+		desc += "<br />";
+
+		QStringList atmosphere, sc;
+		atmosphere.clear();
+		sc.clear();
+
+		float pressure = landscape->getDefaultAtmosphericPressure();
+		if (pressure>-1.0)
+		{
+			// 1 mbar = 1 hPa
+			//TRANSLATORS: Unit of measure for pressure - hectopascals
+			QString hPa = qc_("hPa", "pressure");
+			atmosphere.append(QString("%1 %2").arg(QString::number(pressure, 'f', 1), hPa));
+		}
+
+		float temperature = landscape->getDefaultAtmosphericTemperature();
+		if (temperature>-1000.0)
+			atmosphere.append(QString("%1 %2C").arg(QString::number(temperature, 'f', 1)).arg(QChar(0x00B0)));
+
+		if (atmosphere.size()>0)
+			desc += QString("<b>%1</b>: %2<br />").arg(q_("Atmospheric conditions"), atmosphere.join(", "));
+
+		int bortle = landscape->getDefaultBortleIndex();
+		if (bortle>-1)
+			sc.append(QString("%1: %2 (%3)").arg(q_("light pollution")).arg(bortle).arg(q_("by Bortle scale")));
+
+		float extcoeff = landscape->getDefaultAtmosphericExtinction();
+		if (extcoeff>-1.0)
+			sc.append(QString("%1: %2").arg(q_("extinction coefficient")).arg(QString::number(extcoeff, 'f', 2)));
+
+		if (sc.size()>0)
+			desc += QString("<b>%1</b>: %2<br />").arg(q_("Special conditions"), sc.join("; "));
+
+
+	}	
 	return desc;
 }
 
