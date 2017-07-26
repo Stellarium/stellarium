@@ -812,9 +812,8 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		}
 		desc += "<br />";
 
-		QStringList atmosphere, sc;
+		QStringList atmosphere;
 		atmosphere.clear();
-		sc.clear();
 
 		float pressure = landscape->getDefaultAtmosphericPressure();
 		if (pressure>-1.0)
@@ -829,20 +828,16 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		if (temperature>-1000.0)
 			atmosphere.append(QString("%1 %2C").arg(QString::number(temperature, 'f', 1)).arg(QChar(0x00B0)));
 
+		float extcoeff = landscape->getDefaultAtmosphericExtinction();
+		if (extcoeff>-1.0)
+			atmosphere.append(QString("%1: %2").arg(q_("extinction coefficient")).arg(QString::number(extcoeff, 'f', 2)));
+
 		if (atmosphere.size()>0)
 			desc += QString("<b>%1</b>: %2<br />").arg(q_("Atmospheric conditions"), atmosphere.join(", "));
 
 		int bortle = landscape->getDefaultBortleIndex();
 		if (bortle>-1)
-			sc.append(QString("%1: %2 (%3)").arg(q_("light pollution")).arg(bortle).arg(q_("by Bortle scale")));
-
-		float extcoeff = landscape->getDefaultAtmosphericExtinction();
-		if (extcoeff>-1.0)
-			sc.append(QString("%1: %2").arg(q_("extinction coefficient")).arg(QString::number(extcoeff, 'f', 2)));
-
-		if (sc.size()>0)
-			desc += QString("<b>%1</b>: %2<br />").arg(q_("Special conditions"), sc.join("; "));
-
+			desc += QString("<b>%1</b>: %2 (%3)").arg(q_("Light pollution")).arg(bortle).arg(q_("by Bortle scale"));
 
 	}	
 	return desc;
