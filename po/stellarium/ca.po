@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-24 21:25+0700\n"
-"PO-Revision-Date: 2017-07-23 19:15+0000\n"
+"PO-Revision-Date: 2017-07-25 19:44+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-25 05:12+0000\n"
+"X-Launchpad-Export-Date: 2017-07-26 05:09+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -915,7 +915,7 @@ msgstr "Magnitud Absoluta"
 
 #: src/core/modules/Planet.cpp:392
 msgid "Mean Opposition Magnitude"
-msgstr ""
+msgstr "Magnitud mitjana d'oposició"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
@@ -9650,30 +9650,30 @@ msgstr "Magnitud approx."
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
 msgid "Range"
-msgstr ""
+msgstr "Rang"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:306
 msgid "Range rate"
-msgstr ""
+msgstr "Rati del rang"
 
 #: plugins/Satellites/src/Satellite.cpp:310
 msgid "SubPoint (Lat./Long.)"
-msgstr ""
+msgstr "SubPunt (Lat./Long.)"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:324
 msgid "TEME coordinates"
-msgstr ""
+msgstr "Coordenades TEME"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:331
 msgid "TEME velocity"
-msgstr ""
+msgstr "Velocitat TEME"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "Angle de reflexió solar"
 
 #: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
@@ -9685,7 +9685,7 @@ msgstr "Grups"
 
 #: plugins/Satellites/src/Satellite.cpp:356
 msgid "Operational status"
-msgstr ""
+msgstr "Estat operacional"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
@@ -9712,7 +9712,7 @@ msgstr "MHz"
 #: plugins/Satellites/src/Satellite.cpp:402
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 #: plugins/Satellites/src/Satellite.cpp:703
 #: plugins/Satellites/src/Satellite.cpp:728
@@ -12730,21 +12730,21 @@ msgstr "púlsar amb pics (glitches)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 msgid "Barycentric period"
-msgstr ""
+msgstr "Període baricèntric"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:185
 msgctxt "period"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "Temps derivat del període baricèntric"
 
 #: plugins/Pulsars/src/Pulsar.cpp:194
 msgid "Dispersion measure"
-msgstr ""
+msgstr "Mesura de dispersió"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
@@ -12760,23 +12760,23 @@ msgstr "cm"
 
 #: plugins/Pulsars/src/Pulsar.cpp:206
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "Rati de pèrdua d'energia de rotació"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:209
 msgctxt "power"
 msgid "ergs/s"
-msgstr ""
+msgstr "ergs/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "Període binari de pulsar"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:218
 msgctxt "period"
 msgid "days"
-msgstr ""
+msgstr "dies"
 
 #: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
 msgid "Eccentricity"
@@ -12784,28 +12784,28 @@ msgstr "Excentricitat"
 
 #: plugins/Pulsars/src/Pulsar.cpp:227
 msgid "Annual parallax"
-msgstr ""
+msgstr "Paral·laxi anual"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:230
 msgctxt "parallax"
 msgid "mas"
-msgstr ""
+msgstr "mas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:236
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "Distància basada en el model de densitat electrònica"
 
 #: plugins/Pulsars/src/Pulsar.cpp:249
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "Ample del perfil al 50% del pic"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:252
 msgctxt "time"
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:257
@@ -12816,7 +12816,7 @@ msgstr "Densitat de flux amitjanada en el temps a:"
 #: plugins/Pulsars/src/Pulsar.cpp:261
 msgctxt "spectral flux density"
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
@@ -14919,15 +14919,15 @@ msgstr "Deriva radiant (per dia)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "Velocitat meteòrica geocèntrica"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
-msgstr ""
+msgstr "Índex de població"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "Cos primari"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"

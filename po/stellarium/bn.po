@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-24 21:25+0700\n"
-"PO-Revision-Date: 2017-07-23 07:10+0000\n"
+"PO-Revision-Date: 2017-07-25 10:58+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-25 05:11+0000\n"
+"X-Launchpad-Export-Date: 2017-07-26 05:09+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 "Language: bn\n"
 
@@ -913,7 +913,7 @@ msgstr "প্রমান উজ্জ্ব্যলতা"
 
 #: src/core/modules/Planet.cpp:392
 msgid "Mean Opposition Magnitude"
-msgstr ""
+msgstr "গড় প্রতিযোগ ঔজ্জ্বল্যতা"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
@@ -9594,30 +9594,30 @@ msgstr "আপাত উজ্জ্ব্যলতা"
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
 msgid "Range"
-msgstr ""
+msgstr "দূরত্ব"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:306
 msgid "Range rate"
-msgstr ""
+msgstr "দূরত্ব পরিবর্তনের হার"
 
 #: plugins/Satellites/src/Satellite.cpp:310
 msgid "SubPoint (Lat./Long.)"
-msgstr ""
+msgstr "মধ্যগগন (অক্ষাংশ/দ্রাঘিমাংশ)"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:324
 msgid "TEME coordinates"
-msgstr ""
+msgstr "TEME স্থানাঙ্ক"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:331
 msgid "TEME velocity"
-msgstr ""
+msgstr "TEME বেগ"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "রোদের প্রতিফলন কোণ"
 
 #: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
@@ -9629,7 +9629,7 @@ msgstr "দলসমূহ"
 
 #: plugins/Satellites/src/Satellite.cpp:356
 msgid "Operational status"
-msgstr ""
+msgstr "পরিচালন স্থিতি"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
@@ -9656,7 +9656,7 @@ msgstr "মেগাহার্জ"
 #: plugins/Satellites/src/Satellite.cpp:402
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "কিলোহার্জ"
 
 #: plugins/Satellites/src/Satellite.cpp:703
 #: plugins/Satellites/src/Satellite.cpp:728
@@ -10343,6 +10343,8 @@ msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
 msgstr ""
+"দূরবীন প্রদত্ত সংকেত স্টেলারিয়াম-এ পৌঁছানোর মোটামুটি সময় । যদি লক্ষবৃত্তটি "
+"উপেক্ষিত হতে থাকে তবে এর মান বাড়াতে হবে ।"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
@@ -12598,21 +12600,21 @@ msgstr "অসামঞ্জস্য থাকা পালসার"
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 msgid "Barycentric period"
-msgstr ""
+msgstr "ব্যারিসেন্ট্রিক পর্যায়কাল"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:185
 msgctxt "period"
 msgid "s"
-msgstr ""
+msgstr "সেকেন্ড"
 
 #: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "ব্যারিসেন্ট্রিক পর্যায়কালের সময় অবকলন"
 
 #: plugins/Pulsars/src/Pulsar.cpp:194
 msgid "Dispersion measure"
-msgstr ""
+msgstr "বিক্ষেপ"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
@@ -12628,23 +12630,23 @@ msgstr "সেমি"
 
 #: plugins/Pulsars/src/Pulsar.cpp:206
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "ঘোরার কারণে শক্তিক্ষয়ের হার"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:209
 msgctxt "power"
 msgid "ergs/s"
-msgstr ""
+msgstr "অার্গ/সেকেন্ড"
 
 #: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "পালসারের দ্বিক পর্যায়কাল"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:218
 msgctxt "period"
 msgid "days"
-msgstr ""
+msgstr "দিন"
 
 #: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
 msgid "Eccentricity"
@@ -12652,28 +12654,28 @@ msgstr "উত্কেন্দ্রতা"
 
 #: plugins/Pulsars/src/Pulsar.cpp:227
 msgid "Annual parallax"
-msgstr ""
+msgstr "বার্ষিক লম্বন"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:230
 msgctxt "parallax"
 msgid "mas"
-msgstr ""
+msgstr "মিলি অার্কসে"
 
 #: plugins/Pulsars/src/Pulsar.cpp:236
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "ইলেকট্রন ঘনত্ব মডেল অনুসারে দূরত্ব"
 
 #: plugins/Pulsars/src/Pulsar.cpp:249
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "৫০% তীক্ষ্ণতায় পরিলেখ প্রস্থ"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:252
 msgctxt "time"
 msgid "ms"
-msgstr ""
+msgstr "মিলি সে"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:257
@@ -12684,7 +12686,7 @@ msgstr "সময় সাপেক্ষে প্রাবল্য ঘনত্
 #: plugins/Pulsars/src/Pulsar.cpp:261
 msgctxt "spectral flux density"
 msgid "mJy"
-msgstr ""
+msgstr "মিলি জানস্কাই"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
@@ -14756,15 +14758,15 @@ msgstr "উৎসবিন্দুর চলন (প্রতি দিনে)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "পৃথিবী সাপেক্ষে উল্কার গতিবেগ"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
-msgstr ""
+msgstr "প্রভা সূচক"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "উৎস"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
