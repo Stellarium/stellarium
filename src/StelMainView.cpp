@@ -594,17 +594,14 @@ StelMainView::StelMainView(QSettings* settings)
 	//get the desired opengl format parameters
 	QSurfaceFormat glFormat = getDesiredGLFormat();
 	// VSync control
-	QVariant vsync = configuration->value("video/vsync");
-	if(vsync.isValid() && vsync.canConvert<bool>()) // if the config parameter is not set we use system default (which should be true)
-	{
-		#ifdef Q_OS_OSX
-		// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
-		// Qt: https://bugreports.qt.io/browse/QTBUG-53273
-		glFormat.setSwapInterval(configuration->value("video/vsync", false).toBool()); // use vsync=false by default on macOS
-		#else
-		glFormat.setSwapInterval(vsync.toBool());
-		#endif
-	}
+
+	bool vsdef = true;
+	#ifdef Q_OS_OSX
+	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
+	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
+	vsdef = false; // use vsync=false by default on macOS
+	#endif
+	glFormat.setSwapInterval(configuration->value("video/vsync", vsdef).toBool());
 
 	qDebug()<<"Desired surface format: "<<glFormat;
 
