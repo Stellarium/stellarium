@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 20:39+0700\n"
+"POT-Creation-Date: 2017-07-26 21:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,29 +412,25 @@ msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:824
+#: src/core/modules/LandscapeMgr.cpp:823
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:833
-msgid "Atmospheric conditions"
-msgstr ""
-
-#: src/core/modules/LandscapeMgr.cpp:837
-msgid "light pollution"
-msgstr ""
-
-#: src/core/modules/LandscapeMgr.cpp:837
-msgid "by Bortle scale"
-msgstr ""
-
-#: src/core/modules/LandscapeMgr.cpp:841
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:844
-msgid "Special conditions"
+#: src/core/modules/LandscapeMgr.cpp:836
+msgid "Atmospheric conditions"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "Light pollution"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "by Bortle scale"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Nebula.cpp:225
