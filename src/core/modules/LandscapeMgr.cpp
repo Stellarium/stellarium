@@ -795,7 +795,8 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		desc+="<b>"+q_("Location: ")+"</b>";
 		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
 		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
-		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
+		//TRANSLATORS: Unit of measure for distance - meter
+		desc += QString(", %1 %2").arg(landscape->getLocation().altitude).arg(qc_("m", "distance"));
 		QString planetName = landscape->getLocation().planetName;
 		if (!planetName.isEmpty())
 		{
