@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-24 21:25+0700\n"
+"POT-Creation-Date: 2017-07-26 21:07+0700\n"
 "PO-Revision-Date: 2016-06-30 09:37+0000\n"
 "Last-Translator: hariyadi.pt <hariyadiputraga@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-25 05:16+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-07-27 05:19+0000\n"
+"X-Generator: Launchpad (build 18439)\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
@@ -381,23 +381,56 @@ msgstr ""
 msgid "Light pollution data from locations database"
 msgstr "Data Polusi Cahaya dari Database Lokasi"
 
-#: src/core/modules/LandscapeMgr.cpp:789
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
-msgid "Author: "
-msgstr "Pembuat: "
+#: src/core/modules/LandscapeMgr.cpp:793 src/scripting/StelScriptMgr.cpp:233
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+#: plugins/Novae/src/gui/NovaeDialog.cpp:120
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+msgid "Author"
+msgstr "Pembuat"
 
-#: src/core/modules/LandscapeMgr.cpp:795
-msgid "Location: "
-msgstr "Lokasi: "
+#. TRANSLATORS: Unit of measure for distance - meter
+#: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
+msgctxt "distance"
+msgid "m"
+msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:798
-#, qt-format
-msgid ", %1 m"
-msgstr ", %1 m"
+#: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+msgid "Location"
+msgstr "Lokasi"
 
-#: src/core/modules/LandscapeMgr.cpp:803 src/ui_astroCalcDialog.h:797
-#: src/ui_astroCalcDialog.h:839
-msgid "Celestial body:"
+#. TRANSLATORS: Unit of measure for pressure - hectopascals
+#: src/core/modules/LandscapeMgr.cpp:823
+msgctxt "pressure"
+msgid "hPa"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:833
+msgid "extinction coefficient"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:836
+msgid "Atmospheric conditions"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "Light pollution"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "by Bortle scale"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Nebula.cpp:225
@@ -2693,12 +2726,6 @@ msgstr ""
 msgid "Simulation speed"
 msgstr ""
 
-#. TRANSLATORS: Unit of measure for distance - meter
-#: src/gui/StelGuiItems.cpp:716
-msgctxt "distance"
-msgid "m"
-msgstr ""
-
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
 msgstr ""
@@ -3837,24 +3864,6 @@ msgstr ""
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Skrip"
-
-#: src/scripting/StelScriptMgr.cpp:233
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
-msgid "Author"
-msgstr "Pembuat"
 
 #: src/scripting/StelScriptMgr.cpp:238
 msgid "License"
@@ -5763,12 +5772,6 @@ msgstr "Sunting jalan pintas keyboard"
 msgid "Refresh"
 msgstr "Segarkan"
 
-#: src/ui_locationDialogGui.h:456
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
-msgid "Location"
-msgstr "Lokasi"
-
 #: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
@@ -7629,6 +7632,10 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:796 src/ui_astroCalcDialog.h:820
 msgid "Use horizontal coordinates"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:797 src/ui_astroCalcDialog.h:839
+msgid "Celestial body:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:799 src/ui_astroCalcDialog.h:825
@@ -15179,6 +15186,10 @@ msgstr ""
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
 
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
+msgid "Author: "
+msgstr "Pembuat: "
+
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
 msgstr ""
@@ -15827,6 +15838,9 @@ msgstr ""
 #~ msgid "Star Value Multiplier: "
 #~ msgstr "Pengali Nilai Bintang: "
 
+#~ msgid "Location: "
+#~ msgstr "Lokasi: "
+
 #~ msgid "Sidereal"
 #~ msgstr "Sideris"
 
@@ -15845,6 +15859,10 @@ msgstr ""
 #, qt-format
 #~ msgid "Distance: %1 Light Years"
 #~ msgstr "Jarak: %1 Tahun Cahaya"
+
+#, qt-format
+#~ msgid ", %1 m"
+#~ msgstr ", %1 m"
 
 #, qt-format
 #~ msgid "RA/DE (J2000): %1/%2"

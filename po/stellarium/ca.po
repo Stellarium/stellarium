@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-24 21:25+0700\n"
-"PO-Revision-Date: 2017-07-25 19:44+0000\n"
+"POT-Creation-Date: 2017-07-26 21:07+0700\n"
+"PO-Revision-Date: 2017-07-26 20:06+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-26 05:09+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-07-27 05:14+0000\n"
+"X-Generator: Launchpad (build 18439)\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
@@ -384,24 +384,57 @@ msgstr "Etiquetes del paisatge"
 msgid "Light pollution data from locations database"
 msgstr "Dades sobre contaminació lumínica de la base de dades d'ubicacions"
 
-#: src/core/modules/LandscapeMgr.cpp:789
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
-msgid "Author: "
-msgstr "Autor/a: "
+#: src/core/modules/LandscapeMgr.cpp:793 src/scripting/StelScriptMgr.cpp:233
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+#: plugins/Novae/src/gui/NovaeDialog.cpp:120
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+msgid "Author"
+msgstr "Autor"
 
-#: src/core/modules/LandscapeMgr.cpp:795
-msgid "Location: "
-msgstr "Ubicació: "
+#. TRANSLATORS: Unit of measure for distance - meter
+#: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
+msgctxt "distance"
+msgid "m"
+msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:798
-#, qt-format
-msgid ", %1 m"
-msgstr ", %1 m"
+#: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+msgid "Location"
+msgstr "Ubicació"
 
-#: src/core/modules/LandscapeMgr.cpp:803 src/ui_astroCalcDialog.h:797
-#: src/ui_astroCalcDialog.h:839
-msgid "Celestial body:"
-msgstr "Cos celeste:"
+#. TRANSLATORS: Unit of measure for pressure - hectopascals
+#: src/core/modules/LandscapeMgr.cpp:823
+msgctxt "pressure"
+msgid "hPa"
+msgstr "hPa"
+
+#: src/core/modules/LandscapeMgr.cpp:833
+msgid "extinction coefficient"
+msgstr "coeficient d'extinció"
+
+#: src/core/modules/LandscapeMgr.cpp:836
+msgid "Atmospheric conditions"
+msgstr "Condicions atmosfèriques"
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "Light pollution"
+msgstr "Contaminació lumínica"
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "by Bortle scale"
+msgstr "per escala Bortle"
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:230
@@ -2798,12 +2831,6 @@ msgstr "any/s"
 msgid "Simulation speed"
 msgstr "Simulació de velocitat"
 
-#. TRANSLATORS: Unit of measure for distance - meter
-#: src/gui/StelGuiItems.cpp:716
-msgctxt "distance"
-msgid "m"
-msgstr "m"
-
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
 msgstr "distància planetocèntrica"
@@ -3957,24 +3984,6 @@ msgstr "Exportar marcados com..."
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Scripts"
-
-#: src/scripting/StelScriptMgr.cpp:233
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
-msgid "Author"
-msgstr "Autor"
 
 #: src/scripting/StelScriptMgr.cpp:238
 msgid "License"
@@ -5954,12 +5963,6 @@ msgstr "Edita les dreceres de teclat ..."
 msgid "Refresh"
 msgstr "Refresca"
 
-#: src/ui_locationDialogGui.h:456
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
-msgid "Location"
-msgstr "Ubicació"
-
 #: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
@@ -7883,6 +7886,10 @@ msgstr "Llista d'objectes sobre l'horitzó"
 #: src/ui_astroCalcDialog.h:796 src/ui_astroCalcDialog.h:820
 msgid "Use horizontal coordinates"
 msgstr "Utilitzar coordenades horitzontals"
+
+#: src/ui_astroCalcDialog.h:797 src/ui_astroCalcDialog.h:839
+msgid "Celestial body:"
+msgstr "Cos celeste:"
 
 #: src/ui_astroCalcDialog.h:799 src/ui_astroCalcDialog.h:825
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -16224,6 +16231,10 @@ msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
 "L'interval (en segons de línia de temps) en què no es realitza cap redibuixat"
 
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
+msgid "Author: "
+msgstr "Autor/a: "
+
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
 msgstr "6 Textures"
@@ -16999,6 +17010,10 @@ msgstr "Declinació Personalitzada 2"
 #~ msgstr "Línia del Meridià"
 
 #, qt-format
+#~ msgid ", %1 m"
+#~ msgstr ", %1 m"
+
+#, qt-format
 #~ msgid "Type: <b>%1</b>"
 #~ msgstr "Tipus <b>%1</b>"
 
@@ -17227,6 +17242,9 @@ msgstr "Declinació Personalitzada 2"
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Finalitzada la descàrrega de tots els catàlegs estel·lars!"
+
+#~ msgid "Location: "
+#~ msgstr "Ubicació: "
 
 #~ msgid "Scripts "
 #~ msgstr "Scripts "

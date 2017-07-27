@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-24 21:25+0700\n"
-"PO-Revision-Date: 2017-07-24 14:58+0000\n"
+"POT-Creation-Date: 2017-07-26 21:07+0700\n"
+"PO-Revision-Date: 2017-07-26 14:48+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-25 05:23+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-07-27 05:27+0000\n"
+"X-Generator: Launchpad (build 18439)\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
@@ -381,24 +381,57 @@ msgstr "Etichetas panorama"
 msgid "Light pollution data from locations database"
 msgstr "Datos de s'incuinamentu luminosu dae su database de sas localidades"
 
-#: src/core/modules/LandscapeMgr.cpp:789
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
-msgid "Author: "
-msgstr "Autore "
+#: src/core/modules/LandscapeMgr.cpp:793 src/scripting/StelScriptMgr.cpp:233
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+#: plugins/Novae/src/gui/NovaeDialog.cpp:120
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+msgid "Author"
+msgstr "Autore"
 
-#: src/core/modules/LandscapeMgr.cpp:795
-msgid "Location: "
-msgstr "Localidade "
+#. TRANSLATORS: Unit of measure for distance - meter
+#: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
+msgctxt "distance"
+msgid "m"
+msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:798
-#, qt-format
-msgid ", %1 m"
-msgstr ", %1 m"
+#: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+msgid "Location"
+msgstr "Logu"
 
-#: src/core/modules/LandscapeMgr.cpp:803 src/ui_astroCalcDialog.h:797
-#: src/ui_astroCalcDialog.h:839
-msgid "Celestial body:"
-msgstr "Corpu tzeleste"
+#. TRANSLATORS: Unit of measure for pressure - hectopascals
+#: src/core/modules/LandscapeMgr.cpp:823
+msgctxt "pressure"
+msgid "hPa"
+msgstr "hPa"
+
+#: src/core/modules/LandscapeMgr.cpp:833
+msgid "extinction coefficient"
+msgstr "coefitziente de estintzione"
+
+#: src/core/modules/LandscapeMgr.cpp:836
+msgid "Atmospheric conditions"
+msgstr "Cunditziones atmosfericas"
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "Light pollution"
+msgstr "Incuinamentu luminosu"
+
+#: src/core/modules/LandscapeMgr.cpp:840
+msgid "by Bortle scale"
+msgstr "dae s'iscala de Bortle"
 
 #: src/core/modules/Nebula.cpp:215 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:230
@@ -2799,12 +2832,6 @@ msgstr "annos/s"
 msgid "Simulation speed"
 msgstr "Velocidade de similatzione"
 
-#. TRANSLATORS: Unit of measure for distance - meter
-#: src/gui/StelGuiItems.cpp:716
-msgctxt "distance"
-msgid "m"
-msgstr "m"
-
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
 msgstr "distantzia planetocentrica"
@@ -3959,24 +3986,6 @@ msgstr "Isporta sinnalibros comente..."
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Scripts"
 msgstr "Iscript"
-
-#: src/scripting/StelScriptMgr.cpp:233
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
-msgid "Author"
-msgstr "Autore"
 
 #: src/scripting/StelScriptMgr.cpp:238
 msgid "License"
@@ -5960,12 +5969,6 @@ msgstr "Edita sos tastos po segare in curtzu..."
 msgid "Refresh"
 msgstr "Agiorna"
 
-#: src/ui_locationDialogGui.h:456
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
-msgid "Location"
-msgstr "Logu"
-
 #: src/ui_locationDialogGui.h:460 src/ui_locationDialogGui.h:463
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
@@ -7908,6 +7911,10 @@ msgstr "Lista de sos ogettos suba s'orizonte"
 #: src/ui_astroCalcDialog.h:796 src/ui_astroCalcDialog.h:820
 msgid "Use horizontal coordinates"
 msgstr "Imprea sas coordinadas orizontales"
+
+#: src/ui_astroCalcDialog.h:797 src/ui_astroCalcDialog.h:839
+msgid "Celestial body:"
+msgstr "Corpu tzeleste"
 
 #: src/ui_astroCalcDialog.h:799 src/ui_astroCalcDialog.h:825
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -16314,6 +16321,10 @@ msgstr ""
 "Su intervallu  (in segundos de tempus) inue perunu disinnu de s'iscena est "
 "torrau a faghere."
 
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
+msgid "Author: "
+msgstr "Autore "
+
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
 msgstr "6 Textures"
@@ -16873,6 +16884,9 @@ msgstr "Declinatzione Personalizada 2"
 #~ msgid "Illumination"
 #~ msgstr "Lughe"
 
+#~ msgid "Location: "
+#~ msgstr "Localidade "
+
 #, qt-format
 #~ msgid "Opacity: <b>%1</b>"
 #~ msgstr "Opacidade: <b>%1</b>"
@@ -16942,6 +16956,10 @@ msgstr "Declinatzione Personalizada 2"
 
 #~ msgid "kpc"
 #~ msgstr "kpc"
+
+#, qt-format
+#~ msgid ", %1 m"
+#~ msgstr ", %1 m"
 
 #, qt-format
 #~ msgid "Apparent diameter: %1, with rings: %2"
@@ -17445,3 +17463,9 @@ msgstr "Declinatzione Personalizada 2"
 #~ msgctxt "astronomical unit"
 #~ msgid "AU"
 #~ msgstr "AU"
+
+#~ msgid "Special conditions"
+#~ msgstr "Cunditziones Ispeciales"
+
+#~ msgid "light pollution"
+#~ msgstr "incuinamentu luminosu"
