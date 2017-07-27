@@ -382,16 +382,8 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
-		if (flagShowOculars)
-		{
-			// center the selected object in the ocular, and track.
-			movementManager->setFlagTracking(true);
-		}
-		else
-		{
-			// remove the usage label if it is being displayed.
-			hideUsageMessageIfDisplayed();
-		}
+		// remove the usage label if it is being displayed.
+		hideUsageMessageIfDisplayed();
 	}
 	else if(flagShowOculars)
 	{
