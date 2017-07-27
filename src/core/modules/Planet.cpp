@@ -3052,3 +3052,20 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 	// sync default value with ViewDialog and SolarSystem!
 	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::Expl_Sup_2013);
 }
+
+void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont)
+{
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+

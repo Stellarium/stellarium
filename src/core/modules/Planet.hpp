@@ -480,6 +480,9 @@ protected:
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
+    
+    // Draw the Nomenclature of each planet
+    void drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont);
 
 	PlanetOBJModel* loadObjModel() const;
 
