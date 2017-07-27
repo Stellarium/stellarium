@@ -2420,22 +2420,51 @@ bool SolarSystem::removePlanet(QString name)
 	return true;
 }
 
-void SolarSystem::surfaceNomenclature(const QString& dataDir)
+void SolarSystem::readNomenclature(const QString& dataDir)
 {
-    //planetNativeNamesMap.clear(); // MODIFICAR
+    
+    // Create the struct to store data
+    struct planetNomenclature{
+        //char celestialBody;
+        char Id;
+        char Name;
+        char Type;
+        double Coordinates; // this must be an array
+        double Size;
+    };
+    
+    struct Nomenclature{
+        struct Mercury;
+        struct Venus;
+        struct Moon;
+        struct Eart;
+        struct Mars;
+        struct Phobos;
+        struct Deimos;
+        struct Io;
+        struct Europa;
+        struct Ganymede;
+        struct Callisto;
+        struct Mimas;
+        struct Enceladus;
+        struct Tethys;
+        struct Dione;
+        struct Rhea;
+        struct Titan;
+        struct Iapetus;
+        struct Triton;
+    };
+    
+    /* struct planetNomenclature{
+        //char celestialBody;
+        char Id;
+        char Name;
+        char Type;
+        string Coordinates;
+        double Size;
+    } MercuryNomenclature, VenusNomenclature, MoonNomenclature, EarthNomenclature, MarsNomenclature, PhobosNomenclature, DeimosNomenclature, IoNomenclature, EuropaNomenclature, GanymedeNomenclature, CallistoNomenclature, MimasNomenclature, EnceladusNomenclature, TethysNomenclature, DioneNomenclature, RheaNomenclature, TitanNomenclature, IapetusNomenclature, TritonNomenclature; */
     
     QString surfNamesFile = StelFileMgr::findFile("data/" + dataDir + "/surface_nomenclature.fab");
-    
-    if (surfNamesFile.isEmpty())
-    {
-        foreach (const PlanetP& p, systemPlanets)
-        {
-            if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-                p->setNativeName("");
-        }
-        updateI18n();
-        return;
-    }
     
     // Open file
     QFile planetSurfNamesFile(surfNamesFile);
@@ -2453,8 +2482,7 @@ void SolarSystem::surfaceNomenclature(const QString& dataDir)
     // which will be available in recRx.capturedTexts()
     QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
     
-    //QString record, planetId, nativeName;
-    QString record, body, featureId, featureName, featureType, featureCoord, featureSize;
+    QString record, body, featureId, featureName, featureType, featureLat, featureLong, featureSize;
     
     // keep track of how many records we processed.
     int totalRecords=0;
@@ -2477,27 +2505,183 @@ void SolarSystem::surfaceNomenclature(const QString& dataDir)
         }
         else
         {
-            //planetId = recRx.capturedTexts().at(1).trimmed();
-            //nativeName = recRx.capturedTexts().at(3).trimmed(); // Use translatable text
-            //planetNativeNamesMap[planetId] = nativeName;
             body = recRx.capturedTexts().at(1).trimmed();
             featureId = recRx.capturedTexts().at(2).trimmed();
             featureName = recRx.capturedTexts().at(3).trimmed();
             featureType = recRx.capturedTexts().at(4).trimmed();
-            featureCoord = recRx.capturedTexts().at(5).trimmed();
-            featureCoord = recRx.capturedTexts().at(6).trimmed();
+            featureLat = recRx.capturedTexts().at(5).trimmed();
+            featureLong = recRx.capturedTexts().at(6).trimmed();
+            featureSize = recRx.capturedTexts().at(7).trimmed();
             readOk++;
+        }
+        // Keep the data in struct depending on the celestial body
+        if (body==Mercury)
+        {
+            Nomenclature.Mercury.Id = featureId;
+            Nomenclature.Mercury.Name = featureName;
+            Nomenclature.Mercury.Type = featureType;
+            Nomenclature.Mercury.Coordinates = featureLat, featureLong;
+            Nomenclature.Mercury.Size = featureSize;
+        }
+        else if (body==Venus)
+        {
+            Nomenclature.Venus.Id = featureId;
+            Nomenclature.Venus.Name = featureName;
+            Nomenclature.Venus.Type = featureType;
+            Nomenclature.Venus.Coordinates = featureLat, featureLong;
+            Nomenclature.Venus.Size = featureSize;
+        }
+        else if (body==Moon)
+        {
+            Nomenclature.Moon.Id = featureId;
+            Nomenclature.Moon.Name = featureName;
+            Nomenclature.Moon.Type = featureType;
+            Nomenclature.Moon.Coordinates = featureLat, featureLong;
+            Nomenclature.Moon.Size = featureSize;
+        }
+        else if (body==Earth)
+        {
+            NomenclatureEarth.Id = featureId;
+            NomenclatureEarth.Name = featureName;
+            NomenclatureEarth.Type = featureType;
+            NomenclatureEarth.Coordinates = featureLat, featureLong;
+            NomenclatureEarth.Size = featureSize;
+        }
+        else if (body==Mars)
+        {
+            Nomenclature.Mars.Id = featureId;
+            Nomenclature.Mars.Name = featureName;
+            Nomenclature.Mars.Type = featureType;
+            Nomenclature.Mars.Coordinates = featureLat, featureLong;
+            Nomenclature.Mars.Size = featureSize;
+        }
+        // Mars' moons
+        else if (body==Phobos)
+        {
+            Nomenclature.Phobos.Id = featureId;
+            Nomenclature.Phobos.Name = featureName;
+            Nomenclature.Phobos.Type = featureType;
+            Nomenclature.Phobos.Coordinates = featureLat, featureLong;
+            Nomenclature.Phobos.Size = featureSize;
+        }
+        else if (body==Deimos)
+        {
+            Nomenclature.Deimos.Id = featureId;
+            Nomenclature.Deimos.Name = featureName;
+            Nomenclature.Deimos.Type = featureType;
+            Nomenclature.Deimos.Coordinates = featureLat, featureLong;
+            Nomenclature.Deimos.Size = featureSize;
+        }
+        // Jupiter's moons
+        // not included Amalthea and Thebe
+        else if (body==Io)
+        {
+            Nomenclature.Io.Id = featureId;
+            Nomenclature.Io.Name = featureName;
+            Nomenclature.Io.Type = featureType;
+            Nomenclature.Io.Coordinates = featureLat, featureLong;
+            Nomenclature.Io.Size = featureSize;
+        }
+        else if (body==Europa)
+        {
+            Nomenclature.Europa.Id = featureId;
+            Nomenclature.Europa.Name = featureName;
+            Nomenclature.Europa.Type = featureType;
+            Nomenclature.Europa.Coordinates = featureLat, featureLong;
+            Nomenclature.Europa.Size = featureSize;
+        }
+        else if (body==Ganymede)
+        {
+            Nomenclature.Ganymede.Id = featureId;
+            Nomenclature.Ganymede.Name = featureName;
+            Nomenclature.Ganymede.Type = featureType;
+            Nomenclature.Ganymede.Coordinates = featureLat, featureLong;
+            Nomenclature.Ganymede.Size = featureSize;
+        }
+        else if (body==Callisto)
+        {
+            Nomenclature.Callisto.Id = featureId;
+            Nomenclature.Callisto.Name = featureName;
+            Nomenclature.Callisto.Type = featureType;
+            Nomenclature.Callisto.Coordinates = featureLat, featureLong;
+            Nomenclature.Callisto.Size = featureSize;
+        }
+        // Saturn's moons
+        // not included Epimetheus, Janus, Hyperion and Phoebe
+        else if (body==Mimas)
+        {
+            Nomenclature.Mimas.Id = featureId;
+            Nomenclature.Mimas.Name = featureName;
+            Nomenclature.Mimas.Type = featureType;
+            Nomenclature.Mimas.Coordinates = featureLat, featureLong;
+            Nomenclature.Mimas.Size = featureSize;
+        }
+        else if (body==Enceladus)
+        {
+            Nomenclature.Europa.Id = featureId;
+            Nomenclature.Europa.Name = featureName;
+            Nomenclature.Europa.Type = featureType;
+            Nomenclature.Europa.Coordinates = featureLat, featureLong;
+            Nomenclature.Europa.Size = featureSize;
+        }
+        else if (body==Tethys)
+        {
+            Nomenclature.Tethys.Id = featureId;
+            Nomenclature.Tethys.Name = featureName;
+            Nomenclature.Tethys.Type = featureType;
+            Nomenclature.Tethys.Coordinates = featureLat, featureLong;
+            Nomenclature.Tethys.Size = featureSize;
+        }
+        else if (body==Dione)
+        {
+            Nomenclature.Dione.Id = featureId;
+            Nomenclature.Dione.Name = featureName;
+            Nomenclature.Dione.Type = featureType;
+            Nomenclature.Dione.Coordinates = featureLat, featureLong;
+            Nomenclature.Dione.Size = featureSize;
+        }
+        else if (body==Rhea)
+        {
+            Nomenclature.Rhea.Id = featureId;
+            Nomenclature.Rhea.Name = featureName;
+            Nomenclature.Rhea.Type = featureType;
+            Nomenclature.Rhea.Coordinates = featureLat, featureLong;
+            Nomenclature.Rhea.Size = featureSize;
+        }
+        else if (body==Titan)
+        {
+            Nomenclature.Titan.Id = featureId;
+            Nomenclature.Titan.Name = featureName;
+            Nomenclature.Titan.Type = featureType;
+            Nomenclature.Titan.Coordinates = featureLat, featureLong;
+            Nomenclature.Titan.Size = featureSize;
+        }
+        else if (body==Iapetus)
+        {
+            Nomenclature.Iapetus.Id = featureId;
+            Nomenclature.Iapetus.Name = featureName;
+            Nomenclature.Iapetus.Type = featureType;
+            Nomenclature.Iapetus.Coordinates = featureLat, featureLong;
+            Nomenclature.Iapetus.Size = featureSize;
+        }
+        // Uranus' moons
+        // not included Puck, Miranda, Ariel, Umbriel, Titania and Oberon
+        //else if (body==Venus)
+        //{
+        //}
+        // Neptune's moons
+        // not included Proteus
+        else // if (body==Triton)
+        {
+            Nomenclature.Triton.Id = featureId;
+            Nomenclature.Triton.Name = featureName;
+            Nomenclature.Triton.Type = featureType;
+            Nomenclature.Triton.Coordinates = featureLat, featureLong;
+            Nomenclature.Triton.Size = featureSize;
         }
     }
     planetSurfNamesFile.close();
     qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
     
-    foreach (const PlanetP& p, systemPlanets)
-    {
-        if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
-            p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
-    }
-    
-    updateI18n();
 }
 
