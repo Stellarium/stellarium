@@ -361,11 +361,13 @@ void Oculars::draw(StelCore* core)
 //! Determine which "layer" the plugin's drawing will happen on.
 double Oculars::getCallOrder(StelModuleActionName actionName) const
 {
-	// TODO; this really doesn't seem to have any effect.  I've tried everything from -100 to +100,
-	//		and a calculated value.  It all seems to work the same regardless.
-	double order = 1000.0;
-	if (actionName==StelModule::ActionHandleKeys || actionName==StelModule::ActionHandleMouseMoves)
+	double order = 1000.0; // Very low priority, unless we interact.
+
+	if (actionName==StelModule::ActionHandleKeys ||
+	    actionName==StelModule::ActionHandleMouseMoves ||
+	    actionName==StelModule::ActionHandleMouseClicks)
 	{
+		// Make sure we are called before MovementMgr (we need to even call it once!)
 		order = StelApp::getInstance().getModuleMgr().getModule("StelMovementMgr")->getCallOrder(actionName) - 1.0;
 	}
 	else if (actionName==StelModule::ActionDraw)
@@ -379,11 +381,48 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 void Oculars::handleMouseClicks(class QMouseEvent* event)
 {
 	StelCore *core = StelApp::getInstance().getCore();
+
+	// In case we show oculars with black circle, ignore mouse presses outside image circle:
+	// https://sourceforge.net/p/stellarium/discussion/278769/thread/57893bb3/?limit=25#75c0
+	if ((flagShowOculars) ) //&& !getFlagUseSemiTransparency()) // Not sure: ignore or allow selection of semi-hidden stars?
+	{
+		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		float ppx = params.devicePixelsPerPixel;
+
+		float wh = prj->getViewportWidth()/2.; // get half of width of the screen
+		float hh = prj->getViewportHeight()/2.; // get half of height of the screen
+		float mx = event->x()*ppx-wh; // point 0 in center of the screen, axis X directed to right
+		float my = event->y()*ppx-hh; // point 0 in center of the screen, axis Y directed to bottom
+
+		double inner = 0.5 * params.viewportFovDiameter * ppx;
+		// See if we need to scale the mask
+		if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
+		{
+			inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
+		}
+
+		if (mx*mx+my*my>inner*inner) // click outside ocular circle? Gobble event.
+		{
+			event->setAccepted(true);
+			return;
+		}
+	}
+
 	StelMovementMgr *movementManager = core->getMovementMgr();
+	movementManager->handleMouseClicks(event); // force it here for selection!
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
-		// remove the usage label if it is being displayed.
-		hideUsageMessageIfDisplayed();
+		if (flagShowOculars)
+		{
+			// center the selected object in the ocular, and track.
+			movementManager->setFlagTracking(true);
+		}
+		else
+		{
+			// remove the usage label if it is being displayed.
+			hideUsageMessageIfDisplayed();
+		}
 	}
 	else if(flagShowOculars)
 	{
