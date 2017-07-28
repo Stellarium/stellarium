@@ -24,7 +24,7 @@ section~\ref{sec:dso:modifyingTexturesJson} for details of the file format.
 \section{Stellarium DSO Catalog}
 \label{sec:dso:catalog}
 
-Stellarium's DSO Catalog contains over 83000 objects\footnote{An extended edition of this catalog 
+Stellarium's DSO Catalog contains over 84000 objects\footnote{An extended edition of this catalog 
 with over one million objects may be downloaded and installed manually (see section \ref{sec:ExtraData:DSOs}).} 
 (up to $15.5^m$) and is available for end users as collection of files:
 
@@ -69,6 +69,7 @@ follow catalogues:
 \item[\textbf{Arp}]  Atlas of peculiar galaxies~\cite{1966ApJS...14....1A}\newFeature{V0.16.0}
 \item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\cite{2001A&AT...20..717V}\newFeature{V0.16.0}
 \item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\cite{2001A&A...378..843K}\newFeature{V0.16.0}
+\item[\textbf{PN G}]  The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae~\cite{1992secg.book.....A}\newFeature{V0.16.1}
 \end{description}
 
 Cross-index data for Stellarium DSO Catalog is partially obtained from ``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M} and astronomical databases SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr/simbad/}}~\cite{2000A&AS..143....9W} and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
@@ -121,6 +122,7 @@ fields with \emph{tab} char as delimiter:
 32 & integer & Arp number (Atlas of Peculiar Galaxies)\\
 33 & integer & VV number (The catalogue of interacting galaxies)\\
 34 & string  & PK number (Catalogue of Galactic Planetary Nebulae)\\
+35 & string  & PN G number (The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae)\\
 \bottomrule
 \end{longtabu}
 
@@ -166,6 +168,8 @@ PPN & Protoplanetary Nebula\\
 $\ast$ & Star\\
 $\ast\ast$ & Double Star\\
 MUL & Multiple Star\\
+SY$\ast$ & Symbiotic Star\\
+EM$\ast$ & Emission-line Star\\
 \emph{empty} & Unknown type, catalog errors, \emph{Unidentified Southern Objects} etc.\\
 \bottomrule
 \end{longtabu}
