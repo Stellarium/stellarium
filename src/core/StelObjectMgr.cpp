@@ -121,7 +121,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:115"] = "The Catalogue of Peculiar Galaxies";
 		objModulesMap["NebulaMgr:116"] = "The Catalogue of Interacting Galaxies";
 		objModulesMap["NebulaMgr:117"] = "The Catalogue of Galactic Planetary Nebulae";
-		objModulesMap["NebulaMgr:118"] = "Strasbourg-ESO Catalogue of Galactic Planetary Nebulae";
+		objModulesMap["NebulaMgr:118"] = "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
 	}
