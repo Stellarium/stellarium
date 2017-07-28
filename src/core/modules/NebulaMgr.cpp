@@ -552,8 +552,8 @@ NebulaP NebulaMgr::search(const QString& name)
 	static QRegExp sCatNumRx("^(CED|PK)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
-		QString cat = catNumRx.capturedTexts().at(1);
-		QString num = catNumRx.capturedTexts().at(2).trimmed();
+		QString cat = sCatNumRx.capturedTexts().at(1);
+		QString num = sCatNumRx.capturedTexts().at(2).trimmed();
 
 		if (cat == "CED") return searchCed(num);
 		if (cat == "PK") return searchPK(num);
