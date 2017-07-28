@@ -327,6 +327,8 @@ void NebulaMgr::init()
 		catalogFilters	|= Nebula::CatVV;
 	if (conf->value("flag_show_pk", false).toBool())
 		catalogFilters	|= Nebula::CatPK;
+	if (conf->value("flag_show_png", false).toBool())
+		catalogFilters	|= Nebula::CatPNG;
 	conf->endGroup();
 
 	// NB: nebula set loaded inside setter of catalog filter
@@ -558,6 +560,14 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "CED") return searchCed(num);
 		if (cat == "PK") return searchPK(num);
 	}
+	static QRegExp tCatNumRx("^(PN)\\s*G(.+)$");
+	if (tCatNumRx.exactMatch(uname))
+	{
+		QString cat = tCatNumRx.capturedTexts().at(1);
+		QString num = tCatNumRx.capturedTexts().at(2).trimmed();
+
+		if (cat == "PN") return searchPNG(num);
+	}
 	return NebulaP();
 }
 
@@ -785,6 +795,14 @@ NebulaP NebulaMgr::searchPK(QString PK)
 	return NebulaP();
 }
 
+NebulaP NebulaMgr::searchPNG(QString PNG)
+{
+	foreach (const NebulaP& n, dsoArray)
+		if (n->PNG_nb.trimmed().toUpper() == PNG.trimmed().toUpper())
+			return n;
+	return NebulaP();
+}
+
 QString NebulaMgr::getLatestSelectedDSODesignation()
 {
 	QString result = "";
@@ -829,7 +847,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV;
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
-	QString oType, mType, Ced, PK, ra, dec;
+	QString oType, mType, Ced, PK, PNG, ra, dec;
 
 	unsigned int nType;
 
@@ -887,6 +905,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			Arp			= list.at(31).toInt();	 // Arp number
 			VV			= list.at(32).toInt();	 // VV number
 			PK			= list.at(33).trimmed(); // PK number
+			PNG			= list.at(34).trimmed(); // PN G number
 
 			if (decimal)
 			{
@@ -1083,7 +1102,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
 				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
-				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << Arp << VV << PK;
+				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << Arp << VV << PK
+				     << PNG;
 		}
 	}
 	dsoIn.close();
@@ -1162,7 +1182,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		QStringList catalogs;		
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK";
+			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -1219,6 +1239,9 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 17:
 				e = searchPK(cdes);
+				break;
+			case 18:
+				e = searchPNG(cdes);
 				break;
 			default:
 				e = searchDSO(nb);
@@ -1535,6 +1558,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by PN G numbers
+	if (objw.left(2) == "PN")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("PNG%1").arg(n->PNG_nb.trimmed().toUpper()) == objw.trimmed() || QString("PN G%1").arg(n->PNG_nb.trimmed().toUpper()) == objw.trimmed())
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return StelObjectP();
 }
 
@@ -1740,6 +1773,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("PK%1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed() || QString("PK %1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed())
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by PN G numbers
+	if (objw.startsWith("PN"))
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("PNG%1").arg(n->PNG_nb.trimmed().toUpper()) == objw.trimmed() || QString("PN G%1").arg(n->PNG_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -2115,6 +2158,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
+	// Search by PN G objects number
+	if (objw.size()>=1 && objw.left(2)=="PN")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->PNG_nb.isEmpty()) continue;
+			QString constw = QString("PNG%1").arg(n->PNG_nb.trimmed());
+			QString constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("PN G%1").arg(n->PNG_nb.trimmed());
+			constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+				result << constw;
+		}
+	}
+
 	// Search by common names
 	foreach (const NebulaP& n, dsoArray)
 	{
@@ -2302,6 +2365,13 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					result << QString("PK %1").arg(n->PK_nb);
 			}
 			break;
+		case 118: // Strasbourg-ESO Catalogue of Galactic Planetary Nebulae by Acker et. al. (PN G)
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->PNG_nb.isEmpty())
+					result << QString("PN G%1").arg(n->PNG_nb);
+			}
+			break;
 		case 150: // Dwarf galaxies
 		{
 			QStringList dwarfGalaxies;
@@ -2404,6 +2474,8 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("VV %1").arg(n->VV_nb);
 					else if (!n->PK_nb.isEmpty())
 						result << QString("PK %1").arg(n->PK_nb);
+					else if (!n->PNG_nb.isEmpty())
+						result << QString("PN G%1").arg(n->PNG_nb);
 					else if (n->PGC_nb>0)
 						result << QString("PGC %1").arg(n->PGC_nb);
 					else if (n->UGC_nb > 0)
@@ -2548,6 +2620,13 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType)
 			foreach(const NebulaP& n, dsoArray)
 			{
 				if (!n->PK_nb.isEmpty())
+					dso.append(n);
+			}
+			break;
+		case 118: // Strasbourg-ESO Catalogue of Galactic Planetary Nebulae by Acker et. al. (PN G)
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->PNG_nb.isEmpty())
 					dso.append(n);
 			}
 			break;

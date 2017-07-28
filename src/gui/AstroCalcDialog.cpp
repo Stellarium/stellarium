@@ -421,6 +421,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 		category->addItem(q_("The Catalogue of Interacting Galaxies"), "116");
 	if (catalogFilters&Nebula::CatPK)
 		category->addItem(q_("The Catalogue of Galactic Planetary Nebulae"), "117");
+	if (catalogFilters&Nebula::CatPNG)
+		category->addItem(q_("Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"), "118");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");

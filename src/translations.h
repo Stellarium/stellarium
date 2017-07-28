@@ -185,6 +185,8 @@ class Translations
 		N_("The Catalogue of Interacting Galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("The Catalogue of Galactic Planetary Nebulae");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Strasbourg-ESO Catalogue of Galactic Planetary Nebulae");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
