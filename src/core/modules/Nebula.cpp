@@ -110,6 +110,7 @@ Nebula::Nebula()
 	, VV_nb(0)
 	, Ced_nb("")
 	, PK_nb("")
+	, PNG_nb("")
 	, withoutID(false)
 	, nameI18("")
 	, mTypeString()
@@ -190,6 +191,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("VV %1").arg(VV_nb);
 		if (!PK_nb.isEmpty())
 			catIds << QString("PK %1").arg(PK_nb);
+		if (!PNG_nb.isEmpty())
+			catIds << QString("PN G%1").arg(PNG_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -807,6 +810,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("VV %1").arg(VV_nb);
 	else if (catalogFilters&CatPK && !PK_nb.isEmpty())
 		str = QString("PK %1").arg(PK_nb);
+	else if (catalogFilters&CatPNG && !PNG_nb.isEmpty())
+		str = QString("PN G%1").arg(PNG_nb);
 
 	return str;
 }
@@ -819,10 +824,10 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb;
 
 	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb;
-	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty())
+	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty())
 		withoutID = true;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
@@ -955,6 +960,8 @@ bool Nebula::objectInDisplayedCatalog() const
 	else if ((catalogFilters&CatVV) && (VV_nb>0))
 		r = true;
 	else if ((catalogFilters&CatPK) && !(PK_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&CatPNG) && !(PNG_nb.isEmpty()))
 		r = true;
 
 	// Special case: objects without ID from current catalogs

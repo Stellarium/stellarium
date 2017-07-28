@@ -63,7 +63,8 @@ public:
 		CatCed		= 0x00004000, //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 		CatArp		= 0x00008000, //!< Atlas of Peculiar Galaxies (Arp)
 		CatVV		= 0x00010000, //!< Interacting galaxies catalogue by Vorontsov-Velyaminov (VV)
-		CatPK		= 0x00020000  //!< Catalogue of Galactic Planetary Nebulae (PK)
+		CatPK		= 0x00020000, //!< Catalogue of Galactic Planetary Nebulae (PK)
+		CatPNG		= 0x00040000  //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -83,7 +84,7 @@ public:
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK);
+	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG);
 	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeOther);
 
 	//! @enum NebulaType Nebula types
@@ -237,6 +238,7 @@ private:
 	unsigned int VV_nb;             // VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;			// PK number (Catalogue of Galactic Planetary Nebulae)
+	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
 	bool withoutID;
 	QString englishName;            // English name
 	QStringList englishAliases;	// English aliases
