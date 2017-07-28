@@ -851,6 +851,7 @@ private:
 	NebulaP searchArp(unsigned int Arp);
 	NebulaP searchVV(unsigned int VV);
 	NebulaP searchPK(QString PK);
+	NebulaP searchPNG(QString PNG);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
