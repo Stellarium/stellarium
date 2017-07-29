@@ -2431,11 +2431,18 @@ double getDecYear(const int year, const int month, const int day)
 int compareVersions(const QString v1, const QString v2)
 {
 	// result (-1: v1<v2; 0: v1==v2; 1: v1>v2)
-	int result = 0;
+	int ver1, ver2, result = 0;
 	QStringList v1s = v1.split(".");
 	QStringList v2s = v2.split(".");
-	int ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100 + v1s.at(2).toInt();
-	int ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100 + v2s.at(2).toInt();
+	if (v1s.count(".")==2) // Full format: X.Y.Z
+		ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100 + v1s.at(2).toInt();
+	else // Short format: X.Y
+		ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100;
+	if (v2s.count(".")==2)
+		ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100 + v2s.at(2).toInt();
+	else
+		ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100;
+
 	if (ver1<ver2)
 		result = -1;
 	else if (ver1 == ver2)
