@@ -54,8 +54,11 @@ SatellitesDialog::SatellitesDialog()
 	, importWindow(Q_NULLPTR)
 	, filterModel(Q_NULLPTR)
 	, checkStateRole(Qt::UserRole)
+	, delimiter(", ")
+	, acEndl("\n")
 {
 	ui = new Ui_satellitesDialog;
+	iridiumFlaresHeader.clear();
 }
 
 SatellitesDialog::~SatellitesDialog()
@@ -105,6 +108,9 @@ void SatellitesDialog::createDialogContent()
 	QList<QWidget *> addscroll;
 	addscroll << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
+	acEndl="\r\n";
+#else
+	acEndl="\n";
 #endif
 
 	// Settings tab / updates group
@@ -227,8 +233,44 @@ void SatellitesDialog::createDialogContent()
 	initListIridiumFlares();
 	ui->flaresPredictionDepthSpinBox->setValue(plugin->getIridiumFlaresPredictionDepth());
 	connect(ui->flaresPredictionDepthSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setIridiumFlaresPredictionDepth(int)));
-	connect(ui->pushButtonPredictIridiumFlares, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
+	connect(ui->predictIridiumFlaresPushButton, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
+	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
+}
+
+void SatellitesDialog::savePredictedIridiumFlares()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save predicted Iridium flares as..."), QDir::homePath() + "/iridium_flares.csv", filter);
+	QFile predictedIridiumFlares(filePath);
+	if (!predictedIridiumFlares.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "[Satellites]: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream predictedIridiumFlaresList(&predictedIridiumFlares);
+	predictedIridiumFlaresList.setCodec("UTF-8");
+
+	int count = ui->iridiumFlaresTreeWidget->topLevelItemCount();
+
+	predictedIridiumFlaresList << iridiumFlaresHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < count; i++)
+	{
+		int columns = iridiumFlaresHeader.size();
+		for (int j=0; j<columns; j++)
+		{
+			predictedIridiumFlaresList << ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				predictedIridiumFlaresList << delimiter;
+			else
+				predictedIridiumFlaresList << acEndl;
+		}
+	}
+
+	predictedIridiumFlares.close();
 }
 
 void SatellitesDialog::filterListByGroup(int index)
@@ -940,14 +982,15 @@ void SatellitesDialog::enableSatelliteDataForm(bool enabled)
 
 void SatellitesDialog::setIridiumFlaresHeaderNames()
 {
-	QStringList headerStrings;
-	headerStrings << q_("Time");
-	headerStrings << q_("Brightness");
-	headerStrings << q_("Altitude");
-	headerStrings << q_("Azimuth");
-	headerStrings << q_("Satellite");
+	iridiumFlaresHeader.clear();
 
-	ui->iridiumFlaresTreeWidget->setHeaderLabels(headerStrings);
+	iridiumFlaresHeader << q_("Time");
+	iridiumFlaresHeader << q_("Brightness");
+	iridiumFlaresHeader << q_("Altitude");
+	iridiumFlaresHeader << q_("Azimuth");
+	iridiumFlaresHeader << q_("Satellite");
+
+	ui->iridiumFlaresTreeWidget->setHeaderLabels(iridiumFlaresHeader);
 
 	// adjust the column width
 	for(int i = 0; i < IridiumFlaresCount; ++i)
