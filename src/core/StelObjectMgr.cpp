@@ -103,6 +103,8 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:27"] = "Protoplanetary Nebulae";
 		objModulesMap["NebulaMgr:29"] = "Symbiotic stars";
 		objModulesMap["NebulaMgr:30"] = "Emission-line stars";
+		objModulesMap["NebulaMgr:31"] = "Supernova candidates";
+		objModulesMap["NebulaMgr:32"] = "Supernova remnant candidates";
 		objModulesMap["NebulaMgr:100"] = "Messier Catalogue";
 		objModulesMap["NebulaMgr:101"] = "Caldwell Catalogue";
 		objModulesMap["NebulaMgr:102"] = "Barnard Catalogue";
@@ -122,6 +124,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:116"] = "The Catalogue of Interacting Galaxies";
 		objModulesMap["NebulaMgr:117"] = "The Catalogue of Galactic Planetary Nebulae";
 		objModulesMap["NebulaMgr:118"] = "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae";
+		objModulesMap["NebulaMgr:119"] = "A catalogue of Galactic supernova remnants";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
 	}

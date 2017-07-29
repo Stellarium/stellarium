@@ -269,6 +269,16 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setSupernovaRemnantColor
 		   NOTIFY supernovaRemnantsColorChanged
 		   )
+	Q_PROPERTY(Vec3f supernovaCandidatesColor
+		   READ getSupernovaCandidateColor
+		   WRITE setSupernovaCandidateColor
+		   NOTIFY supernovaCandidatesColorChanged
+		   )
+	Q_PROPERTY(Vec3f supernovaRemnantCandidatesColor
+		   READ getSupernovaRemnantCandidateColor
+		   WRITE setSupernovaRemnantCandidateColor
+		   NOTIFY supernovaRemnantCandidatesColorChanged
+		   )
 
 public:
 	NebulaMgr();
@@ -490,6 +500,27 @@ public slots:
 	void setSupernovaRemnantColor(const Vec3f& c);
 	//! Get current value of the supernova remnant symbol color.
 	const Vec3f getSupernovaRemnantColor(void) const;
+
+	//! Set the color used to draw the supernova candidate symbols.
+	//! @param c The color of the supernova candidate symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSupernovaCandidateColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setSupernovaCandidateColor(const Vec3f& c);
+	//! Get current value of the supernova candidate symbol color.
+	const Vec3f getSupernovaCandidateColor(void) const;
+
+
+	//! Set the color used to draw the supernova remnant candidate symbols.
+	//! @param c The color of the supernova remnant candidate symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSupernovaRemnantCandidateColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setSupernovaRemnantCandidateColor(const Vec3f& c);
+	//! Get current value of the supernova remnant candidate symbol color.
+	const Vec3f getSupernovaRemnantCandidateColor(void) const;
 
 	//! Set the color used to draw the interstellar matter symbols.
 	//! @param c The color of the interstellar matter symbols
@@ -801,6 +832,8 @@ signals:
 	void blazarsColorChanged(const Vec3f & color) const;
 	void youngStellarObjectsColorChanged(const Vec3f & color) const;
 	void supernovaRemnantsColorChanged(const Vec3f & color) const;
+	void supernovaCandidatesColorChanged(const Vec3f & color) const;
+	void supernovaRemnantCandidatesColorChanged(const Vec3f & color) const;
 
 private slots:
 	//! Update i18 names from English names according to passed translator.
@@ -852,6 +885,7 @@ private:
 	NebulaP searchVV(unsigned int VV);
 	NebulaP searchPK(QString PK);
 	NebulaP searchPNG(QString PNG);
+	NebulaP searchSNRG(QString SNRG);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

@@ -132,6 +132,10 @@ class Translations
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Supernova remnants");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Supernova candidates");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Supernova remnant candidates");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Interstellar matter");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Emission objects");
@@ -187,6 +191,8 @@ class Translations
 		N_("The Catalogue of Galactic Planetary Nebulae");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("A catalogue of Galactic supernova remnants");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
