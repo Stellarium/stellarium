@@ -64,7 +64,8 @@ public:
 		CatArp		= 0x00008000, //!< Atlas of Peculiar Galaxies (Arp)
 		CatVV		= 0x00010000, //!< Interacting galaxies catalogue by Vorontsov-Velyaminov (VV)
 		CatPK		= 0x00020000, //!< Catalogue of Galactic Planetary Nebulae (PK)
-		CatPNG		= 0x00040000  //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
+		CatPNG		= 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
+		CatSNRG		= 0x00080000  //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -84,7 +85,7 @@ public:
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG);
+	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG);
 	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeOther);
 
 	//! @enum NebulaType Nebula types
@@ -121,7 +122,9 @@ public:
 		NebStar			= 28, 	//!< Star
 		NebSymbioticStar	= 29, 	//!< Symbiotic Star
 		NebEmissionLineStar	= 30, 	//!< Emission-line Star
-		NebUnknown		= 31	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebSNC			= 31, 	//!< Supernova Candidate
+		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
+		NebUnknown		= 33	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();
@@ -239,6 +242,7 @@ private:
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;			// PK number (Catalogue of Galactic Planetary Nebulae)
 	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
+	QString SNRG_nb;		// SNR G number (A catalogue of Galactic supernova remnants (Green, 2014))
 	bool withoutID;
 	QString englishName;            // English name
 	QStringList englishAliases;	// English aliases
@@ -303,8 +307,10 @@ private:
 	static Vec3f possiblePlanetaryNebulaColor;	// The color of possible planetary nebula marker texture (NebPossPN)
 	static Vec3f protoplanetaryNebulaColor;		// The color of protoplanetary nebula marker texture (NebPPN)
 	static Vec3f starColor;				// The color of star marker texture (NebStar)
-	static Vec3f symbioticStarColor;		// The color of star marker texture (NebSymbioticStar)
-	static Vec3f emissionLineStarColor;		// The color of star marker texture (NebEmissionLineStar)
+	static Vec3f symbioticStarColor;		// The color of symbiotic star marker texture (NebSymbioticStar)
+	static Vec3f emissionLineStarColor;		// The color of emission-line star marker texture (NebEmissionLineStar)
+	static Vec3f supernovaCandidateColor;		// The color of supermova candidate marker texture (NebSNC)
+	static Vec3f supernovaRemnantCandidateColor;	// The color of supermova remnant candidate marker texture (NebSNRC)
 
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;

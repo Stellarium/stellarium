@@ -89,6 +89,8 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	colorButton(ui->colorDSOBlazars,			"NebulaMgr.blazarsColor");
 	colorButton(ui->colorDSOYoungStellarObjects,		"NebulaMgr.youngStellarObjectsColor");
 	colorButton(ui->colorDSOSupernovaRemnants,		"NebulaMgr.supernovaRemnantsColor");
+	colorButton(ui->colorDSOSupernovaCandidates,		"NebulaMgr.supernovaCandidatesColor");
+	colorButton(ui->colorDSOSupernovaRemnantCandidates,	"NebulaMgr.supernovaRemnantCandidatesColor");
 
 	connect(ui->colorDSOLabels,				SIGNAL(released()), this, SLOT(askDSOLabelsColor()));
 	connect(ui->colorDSOMarkers,				SIGNAL(released()), this, SLOT(askDSOMarkersColor()));
@@ -123,7 +125,8 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	connect(ui->colorDSOBlazars,				SIGNAL(released()), this, SLOT(askDSOBlazarsColor()));
 	connect(ui->colorDSOYoungStellarObjects,		SIGNAL(released()), this, SLOT(askDSOYoungStellarObjectsColor()));
 	connect(ui->colorDSOSupernovaRemnants,			SIGNAL(released()), this, SLOT(askDSOSupernovaRemnantsColor()));
-
+	connect(ui->colorDSOSupernovaCandidates,		SIGNAL(released()), this, SLOT(askDSOSupernovaCandidatesColor()));
+	connect(ui->colorDSOSupernovaRemnantCandidates,		SIGNAL(released()), this, SLOT(askDSOSupernovaRemnantCandidatesColor()));
 }
 
 void ConfigureDSOColorsDialog::colorButton(QToolButton* toolButton, QString propName)
@@ -584,6 +587,36 @@ void ConfigureDSOColorsDialog::askDSOSupernovaRemnantsColor()
 		GETSTELMODULE(NebulaMgr)->setSupernovaRemnantColor(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/dso_supernova_remnant_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOSupernovaRemnants->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ConfigureDSOColorsDialog::askDSOSupernovaCandidatesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.supernovaCandidatesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOSupernovaCandidates->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(NebulaMgr)->setSupernovaCandidateColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/dso_supernova_candidate_color", StelUtils::vec3fToStr(vColor));
+		ui->colorDSOSupernovaCandidates->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ConfigureDSOColorsDialog::askDSOSupernovaRemnantCandidatesColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.supernovaRemnantCandidatesColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOSupernovaRemnantCandidates->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(NebulaMgr)->setSupernovaRemnantCandidateColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/dso_supernova_remnant_cand_color", StelUtils::vec3fToStr(vColor));
+		ui->colorDSOSupernovaRemnantCandidates->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 

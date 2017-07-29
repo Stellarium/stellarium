@@ -84,6 +84,8 @@ Vec3f Nebula::protoplanetaryNebulaColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::starColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::symbioticStarColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::emissionLineStarColor = Vec3f(1.0f,1.0f,0.1f);
+Vec3f Nebula::supernovaCandidateColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::supernovaRemnantCandidateColor = Vec3f(0.1f,1.0f,0.1f);
 bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -111,6 +113,7 @@ Nebula::Nebula()
 	, Ced_nb("")
 	, PK_nb("")
 	, PNG_nb("")
+	, SNRG_nb("")
 	, withoutID(false)
 	, nameI18("")
 	, mTypeString()
@@ -193,6 +196,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("PK %1").arg(PK_nb);
 		if (!PNG_nb.isEmpty())
 			catIds << QString("PN G%1").arg(PNG_nb);
+		if (!SNRG_nb.isEmpty())
+			catIds << QString("SNR G%1").arg(SNRG_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -677,6 +682,14 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			Nebula::texCircle->bind();
 			color=emissionLineStarColor;
 			break;
+		case NebSNC:
+			Nebula::texDiffuseNebula->bind();
+			color=supernovaCandidateColor;
+			break;
+		case NebSNRC:
+			Nebula::texDiffuseNebula->bind();
+			color=supernovaRemnantCandidateColor;
+			break;
 		default:
 			Nebula::texCircle->bind();
 	}
@@ -812,6 +825,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("PK %1").arg(PK_nb);
 	else if (catalogFilters&CatPNG && !PNG_nb.isEmpty())
 		str = QString("PN G%1").arg(PNG_nb);
+	else if (catalogFilters&CatSNRG && !SNRG_nb.isEmpty())
+		str = QString("SNR G%1").arg(SNRG_nb);
 
 	return str;
 }
@@ -824,10 +839,10 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb;
 
 	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb;
-	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty())
+	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty())
 		withoutID = true;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
@@ -887,6 +902,8 @@ bool Nebula::objectInDisplayedType() const
 			cntype = 7; // Planetary Nebulae
 			break;
 		case NebSNR:
+		case NebSNC:
+		case NebSNRC:
 			cntype = 8; // Supernova Remnants
 			break;
 		case NebCn:
@@ -962,6 +979,8 @@ bool Nebula::objectInDisplayedCatalog() const
 	else if ((catalogFilters&CatPK) && !(PK_nb.isEmpty()))
 		r = true;
 	else if ((catalogFilters&CatPNG) && !(PNG_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&CatSNRG) && !(SNRG_nb.isEmpty()))
 		r = true;
 
 	// Special case: objects without ID from current catalogs
@@ -1100,7 +1119,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		if (!OClRx.capturedTexts().at(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
-		r = rtxt.join(",<br>");
+		r = rtxt.join(",<br />");
 	}
 
 	QRegExp VdBRx("\\.*(I|II|I-II|II P|P),\\s+(VBR|VB|BR|M|F|VF|:)\\.*");
@@ -1167,7 +1186,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtx << qc_("undocumented reflection nebulae", "Reflection Nebulae Classification");
 				break;
 		}
-		r = rtx.join(",<br>");
+		r = rtx.join(",<br />");
 	}
 
 
@@ -1229,7 +1248,32 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				morph << q_("undocumented brightness");
 				break;
 		}
-		r = morph.join(",<br>");
+		r = morph.join(",<br />");
+	}
+
+	if (nType==NebSNR)
+	{
+		QString delim = "";
+		if (!r.isEmpty())
+			delim = ";<br />";
+
+		if (mTypeString.contains("S") && !mTypeString.contains("S?"))
+			r = qc_("remnant shows a shell radio structure", "supernova remnant structure classification") + delim + r;
+
+		if (mTypeString.contains("F") && !mTypeString.contains("F?"))
+			r = qc_("remnant shows a filled center ('plerion') radio structure", "supernova remnant structure classification") + delim + r;
+
+		if (mTypeString.contains("C") && !mTypeString.contains("C?"))
+			r = qc_("remnant shows a composite (or combination) radio structure", "supernova remnant structure classification") + delim + r;
+
+		if (mTypeString.contains("S?"))
+			r = qc_("remnant shows a shell radio structure with some uncertainty", "supernova remnant structure classification") + delim + r;
+
+		if (mTypeString.contains("F?"))
+			r = qc_("remnant shows a filled center ('plerion') radio structure with some uncertainty", "supernova remnant structure classification") + delim + r;
+
+		if (mTypeString.contains("C?"))
+			r = qc_("remnant shows a composite (or combination) radio structure with some uncertainty", "supernova remnant structure classification") + delim + r;
 	}
 
 	return r;
@@ -1292,6 +1336,12 @@ QString Nebula::getTypeString(void) const
 		case NebSNR:
 			wsType = q_("supernova remnant");
 			break;
+		case NebSNC:
+			wsType = q_("supernova candidate");
+			break;
+		case NebSNRC:
+			wsType = q_("supernova remnant candidate");
+			break;
 		case NebSA:
 			wsType = q_("stellar association");
 			break;
@@ -1333,7 +1383,7 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebEmissionLineStar:
 			wsType = q_("emission-line star");
-			break;
+			break;		
 		case NebUnknown:
 			wsType = q_("object of unknown nature");
 			break;

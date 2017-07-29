@@ -72,6 +72,8 @@ private slots:
 	void askDSOBlazarsColor();
 	void askDSOYoungStellarObjectsColor();
 	void askDSOSupernovaRemnantsColor();
+	void askDSOSupernovaCandidatesColor();
+	void askDSOSupernovaRemnantCandidatesColor();
 
 private:
 	void colorButton(QToolButton *toolButton, QString propName);
