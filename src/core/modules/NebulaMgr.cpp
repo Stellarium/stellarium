@@ -2451,7 +2451,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			foreach(const NebulaP& n, dsoArray)
 			{
 				if (!n->SNRG_nb.isEmpty())
-					result << QString("SNR G%1").arg(n->PNG_nb);
+					result << QString("SNR G%1").arg(n->SNRG_nb);
 			}
 			break;
 		case 150: // Dwarf galaxies
