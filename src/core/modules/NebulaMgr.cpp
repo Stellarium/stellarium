@@ -49,6 +49,10 @@
 #include <QRegExp>
 #include <QDir>
 
+// Define version of valid Stellarium DSO Catalog
+// This number must be incremented each time the content or file format of the stars catalogs change
+static const QString StellariumDSOCatalogVersion = "3.2";
+
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c; emit circlesColorChanged(c); }
@@ -876,6 +880,11 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 		record = QString::fromUtf8(dsoIn.readLine());
 		++currentLineNumber;
 
+		QRegExp version("ersion\\s+([\\d\\.]+)\\s+(\\w+)");
+		int vp = version.indexIn(record);
+		if (vp!=-1) // Version of catalog, a first line!
+			dsoOutStream << version.capturedTexts().at(1).trimmed() << version.capturedTexts().at(2).trimmed();
+
 		// skip comments
 		if (record.startsWith("//") || record.startsWith("#"))
 			continue;
@@ -1157,21 +1166,40 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	QDataStream ins(StelUtils::uncompress(in.readAll()));
 	ins.setVersion(QDataStream::Qt_5_2);
 
+	QString version = "", edition= "";
 	int totalRecords=0;
 	while (!ins.atEnd())
 	{
-		// Create a new Nebula record
-		NebulaP e = NebulaP(new Nebula);
-		e->readDSO(ins);
+		if (totalRecords==0) // Read the version of catalog
+		{
+			ins >> version >> edition;
+			if (version.isEmpty())
+				version = "3.1"; // The first version of extended edition of the catalog
+			if (edition.isEmpty())
+				edition = "unknown";
+			qDebug() << "[...]" << QString("Stellarium DSO Catalog, version %1 (%2 edition)").arg(version).arg(edition);
+			if (StelUtils::compareVersions(version, StellariumDSOCatalogVersion)!=0)
+			{
+				qDebug() << "WARNING: Mismatch the version of catalog! The expected version of catalog is" << StellariumDSOCatalogVersion;
+				++totalRecords;
+				break;
+			}
+		}
+		else
+		{
+			// Create a new Nebula record
+			NebulaP e = NebulaP(new Nebula);
+			e->readDSO(ins);
 
-		dsoArray.append(e);
-		nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
-		if (e->DSO_nb!=0)
-			dsoIndex.insert(e->DSO_nb, e);
+			dsoArray.append(e);
+			nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
+			if (e->DSO_nb!=0)
+				dsoIndex.insert(e->DSO_nb, e);
+		}
 		++totalRecords;
 	}
 	in.close();
-	qDebug() << "Loaded" << totalRecords << "DSO records";
+	qDebug() << "Loaded" << --totalRecords << "DSO records";
 	return true;
 }
 
