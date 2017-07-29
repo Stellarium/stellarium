@@ -1475,6 +1475,19 @@
                </attribute>
               </widget>
              </item>
+             <item row="1" column="6">
+              <widget class="QCheckBox" name="checkBoxSNRG">
+               <property name="toolTip">
+                <string>A catalogue of Galactic supernova remnants (Green, 2014)</string>
+               </property>
+               <property name="text">
+                <string notr="true">SNR G</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
