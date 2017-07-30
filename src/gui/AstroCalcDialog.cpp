@@ -2723,6 +2723,10 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Bright stars with high proper motion"), 17);
 	wutCategories.insert(q_("Symbiotic stars"), 18);
 	wutCategories.insert(q_("Emission-line stars"), 19);
+	wutCategories.insert(q_("Supernova candidates"), 20);
+	wutCategories.insert(q_("Supernova remnant candidates"), 21);
+	wutCategories.insert(q_("Supernova remnants"), 22);
+	wutCategories.insert(q_("Clusters of galaxies"), 23);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -3042,8 +3046,95 @@ void AstroCalcDialog::calculateWutObjects()
 				case 19: // Emission-line stars
 					foreach(const NebulaP& object, allDSO)
 					{
+						Nebula::NebulaType ntype = object->getDSOType();						
+						if ((bool)(tflags & Nebula::TypeOther) && (ntype==Nebula::NebEmissionLineStar) && (object->getVMagnitudeWithExtinction(core)<=magLimit) && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
+					}
+					break;
+				case 20: // Supernova candidates
+					foreach(const NebulaP& object, allDSO)
+					{
 						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeOther) && (ntype==Nebula::NebEmissionLineStar) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
+						bool visible = ((object->getVMagnitudeWithExtinction(core)<=magLimit) || (object->getVMagnitude(core)>90.f && magLimit>=19.f));
+						if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype==Nebula::NebSNC) && visible && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
+					}
+					break;
+				case 21: // Supernova remnant candidates
+					foreach(const NebulaP& object, allDSO)
+					{
+						Nebula::NebulaType ntype = object->getDSOType();
+						bool visible = ((object->getVMagnitudeWithExtinction(core)<=magLimit) || (object->getVMagnitude(core)>90.f && magLimit>=19.f));
+						if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype==Nebula::NebSNRC) && visible && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
+					}
+					break;
+				case 22: // Supernova remnants
+					foreach(const NebulaP& object, allDSO)
+					{
+						Nebula::NebulaType ntype = object->getDSOType();
+						bool visible = ((object->getVMagnitudeWithExtinction(core)<=magLimit) || (object->getVMagnitude(core)>90.f && magLimit>=19.f));
+						if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype==Nebula::NebSNR) && visible && object->isAboveRealHorizon(core))
+						{
+							QString d = object->getDSODesignation();
+							QString n = object->getNameI18n();
+
+							if (d.isEmpty() && n.isEmpty())
+								continue;
+
+							if (d.isEmpty())
+								wutObjects.insert(n, n);
+							else if (n.isEmpty())
+								wutObjects.insert(d, d);
+							else
+								wutObjects.insert(QString("%1 (%2)").arg(d, n), d);
+						}
+					}
+					break;
+				case 23: // Clusters of galaxies
+					foreach(const NebulaP& object, allDSO)
+					{
+						Nebula::NebulaType ntype = object->getDSOType();
+						if ((bool)(tflags & Nebula::TypeGalaxyClusters) && (ntype==Nebula::NebGxCl) && object->getVMagnitudeWithExtinction(core)<=magLimit && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
