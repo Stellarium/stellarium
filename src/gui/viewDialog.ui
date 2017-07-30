@@ -1567,36 +1567,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="checkBoxHydrogenRegionsType">
-               <property name="text">
-                <string>Hydrogen regions</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOTypes</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="checkBoxOtherType">
-               <property name="text">
-                <string>Other</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOTypes</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBoxStarClustersType">
-               <property name="text">
-                <string>Star clusters</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOTypes</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="4" column="1">
               <widget class="QCheckBox" name="checkBoxPlanetaryNebulaeType">
                <property name="text">
@@ -1647,10 +1617,40 @@
                </attribute>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxHydrogenRegionsType">
+               <property name="text">
+                <string>Hydrogen regions</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxStarClustersType">
+               <property name="text">
+                <string>Star clusters</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
               <widget class="QCheckBox" name="checkBoxGalaxyClustersType">
                <property name="text">
                 <string>Clusters of galaxies</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxOtherType">
+               <property name="text">
+                <string>Other</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
