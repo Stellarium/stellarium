@@ -66,7 +66,7 @@ public:
 		CatPK		= 0x00020000, //!< Catalogue of Galactic Planetary Nebulae (PK)
 		CatPNG		= 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
 		CatSNRG		= 0x00080000, //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
-		CatACO		= 0x00100000  //!< Rich Clusters of Galaxies (Abell+ 1989) (ACO)
+		CatACO		= 0x00100000  //!< A Catalog of Rich Clusters of Galaxies (Abell+ 1989) (ACO)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -87,7 +87,7 @@ public:
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG);
+	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO);
 	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
