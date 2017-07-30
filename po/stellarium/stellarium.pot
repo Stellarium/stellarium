@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-30 16:56+0700\n"
+"POT-Creation-Date: 2017-07-30 17:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3236,13 +3236,13 @@ msgid "S.B."
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:358 src/gui/AstroCalcDialog.cpp:2710
-#: src/ui_viewDialog.h:2295 src/ui_dsoColorsDialog.h:674
+#: src/ui_viewDialog.h:2292 src/ui_dsoColorsDialog.h:674
 msgid "Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:359 src/translations.h:115
-#: src/ui_viewDialog.h:2296 src/ui_dsoColorsDialog.h:595
+#: src/ui_viewDialog.h:2293 src/ui_dsoColorsDialog.h:595
 msgid "Active galaxies"
 msgstr ""
 
@@ -3265,7 +3265,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:363 src/gui/AstroCalcDialog.cpp:2711
-#: src/translations.h:123 src/ui_viewDialog.h:2293 src/ui_dsoColorsDialog.h:625
+#: src/translations.h:123 src/ui_viewDialog.h:2297 src/ui_dsoColorsDialog.h:625
 msgid "Star clusters"
 msgstr ""
 
@@ -3302,14 +3302,14 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:369 src/gui/AstroCalcDialog.cpp:1216
 #: src/gui/AstroCalcDialog.cpp:2720 src/translations.h:105
-#: src/ui_viewDialog.h:2294 src/ui_dsoColorsDialog.h:678
+#: src/ui_viewDialog.h:2291 src/ui_dsoColorsDialog.h:678
 msgid "Planetary nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:370 src/gui/AstroCalcDialog.cpp:1218
 #: src/gui/AstroCalcDialog.cpp:2709 src/translations.h:107
-#: src/ui_viewDialog.h:2297 src/ui_dsoColorsDialog.h:612
+#: src/ui_viewDialog.h:2294 src/ui_dsoColorsDialog.h:612
 msgid "Dark nebulae"
 msgstr ""
 
@@ -3343,8 +3343,8 @@ msgid "HII regions"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:376 src/translations.h:133
-#: src/ui_viewDialog.h:2289 src/ui_dsoColorsDialog.h:643
+#: src/gui/AstroCalcDialog.cpp:376 src/gui/AstroCalcDialog.cpp:2728
+#: src/translations.h:133 src/ui_viewDialog.h:2289 src/ui_dsoColorsDialog.h:643
 msgid "Supernova remnants"
 msgstr ""
 
@@ -3412,20 +3412,20 @@ msgid "Emission-line stars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:388 src/translations.h:135
-#: src/ui_dsoColorsDialog.h:686
+#: src/gui/AstroCalcDialog.cpp:388 src/gui/AstroCalcDialog.cpp:2726
+#: src/translations.h:135 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:389 src/translations.h:137
-#: src/ui_dsoColorsDialog.h:690
+#: src/gui/AstroCalcDialog.cpp:389 src/gui/AstroCalcDialog.cpp:2727
+#: src/translations.h:137 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:390 src/translations.h:161
-#: src/ui_viewDialog.h:2299 src/ui_dsoColorsDialog.h:694
+#: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:2729
+#: src/translations.h:161 src/ui_viewDialog.h:2298 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr ""
 
@@ -3855,7 +3855,7 @@ msgstr ""
 msgid "Bright stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:2708 src/ui_viewDialog.h:2298
+#: src/gui/AstroCalcDialog.cpp:2708 src/ui_viewDialog.h:2295
 msgid "Bright nebulae"
 msgstr ""
 
@@ -6310,11 +6310,11 @@ msgstr ""
 msgid "Filter by type"
 msgstr ""
 
-#: src/ui_viewDialog.h:2291 src/ui_dsoColorsDialog.h:556
+#: src/ui_viewDialog.h:2296 src/ui_dsoColorsDialog.h:556
 msgid "Hydrogen regions"
 msgstr ""
 
-#: src/ui_viewDialog.h:2292
+#: src/ui_viewDialog.h:2299
 msgid "Other"
 msgstr ""
 
