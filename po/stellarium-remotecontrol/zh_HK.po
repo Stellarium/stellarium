@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-13 02:10+0700\n"
+"POT-Creation-Date: 2017-07-29 18:44+0700\n"
 "PO-Revision-Date: 2017-06-17 08:57+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-13 05:53+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-07-30 05:52+0000\n"
+"X-Generator: Launchpad (build 18441)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -185,10 +185,6 @@ msgstr "太陽日"
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
 msgstr "太陽周"
-
-#: index.html:90 tablet7in.html:191
-msgid "Sidereal day"
-msgstr "恆星日"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
@@ -604,6 +600,9 @@ msgstr "清空螢幕"
 #: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "伺服器沒有回應已超過 %1 秒，Stellarium 是否仍在運行？"
+
+#~ msgid "Sidereal day"
+#~ msgstr "恆星日"
 
 #~ msgid "Selection"
 #~ msgstr "選取"
