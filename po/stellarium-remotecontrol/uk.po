@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-13 02:10+0700\n"
+"POT-Creation-Date: 2017-07-29 18:44+0700\n"
 "PO-Revision-Date: 2017-05-16 16:50+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-13 05:53+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-07-30 05:52+0000\n"
+"X-Generator: Launchpad (build 18441)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -185,10 +185,6 @@ msgstr "Сонячний день"
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
 msgstr "Сонячний тиждень"
-
-#: index.html:90 tablet7in.html:191
-msgid "Sidereal day"
-msgstr "Сидеричний день"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
@@ -606,6 +602,9 @@ msgstr "Очистити екран"
 #: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Сервер не відповідає уже протягом %1 секунд. Stellarium ще працює?"
+
+#~ msgid "Sidereal day"
+#~ msgstr "Сидеричний день"
 
 #~ msgid "Selection"
 #~ msgstr "Позначене"
