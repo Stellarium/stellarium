@@ -157,6 +157,8 @@ class Translations
 		N_("Symbiotic stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Emission-line stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Clusters of galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -193,6 +195,8 @@ class Translations
 		N_("The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("A catalogue of Galactic supernova remnants");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("A catalog of rich clusters of galaxies");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)

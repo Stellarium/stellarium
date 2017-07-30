@@ -91,6 +91,7 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	colorButton(ui->colorDSOSupernovaRemnants,		"NebulaMgr.supernovaRemnantsColor");
 	colorButton(ui->colorDSOSupernovaCandidates,		"NebulaMgr.supernovaCandidatesColor");
 	colorButton(ui->colorDSOSupernovaRemnantCandidates,	"NebulaMgr.supernovaRemnantCandidatesColor");
+	colorButton(ui->colorDSOGalaxyClusters,			"NebulaMgr.galaxyClustersColor");
 
 	connect(ui->colorDSOLabels,				SIGNAL(released()), this, SLOT(askDSOLabelsColor()));
 	connect(ui->colorDSOMarkers,				SIGNAL(released()), this, SLOT(askDSOMarkersColor()));
@@ -127,6 +128,7 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	connect(ui->colorDSOSupernovaRemnants,			SIGNAL(released()), this, SLOT(askDSOSupernovaRemnantsColor()));
 	connect(ui->colorDSOSupernovaCandidates,		SIGNAL(released()), this, SLOT(askDSOSupernovaCandidatesColor()));
 	connect(ui->colorDSOSupernovaRemnantCandidates,		SIGNAL(released()), this, SLOT(askDSOSupernovaRemnantCandidatesColor()));
+	connect(ui->colorDSOGalaxyClusters,			SIGNAL(released()), this, SLOT(askDSOGalaxyClustersColor()));
 }
 
 void ConfigureDSOColorsDialog::colorButton(QToolButton* toolButton, QString propName)
@@ -662,5 +664,20 @@ void ConfigureDSOColorsDialog::askDSOEmissionLineStarsColor()
 		GETSTELMODULE(NebulaMgr)->setEmissionLineStarColor(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/dso_emission_star_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOEmissionLineStars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ConfigureDSOColorsDialog::askDSOGalaxyClustersColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NebulaMgr.galaxyClustersColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorDSOGalaxyClusters->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(NebulaMgr)->setGalaxyClusterColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/dso_galaxy_cluster_color", StelUtils::vec3fToStr(vColor));
+		ui->colorDSOGalaxyClusters->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }

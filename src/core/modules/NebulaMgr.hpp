@@ -279,6 +279,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setSupernovaRemnantCandidateColor
 		   NOTIFY supernovaRemnantCandidatesColorChanged
 		   )
+	Q_PROPERTY(Vec3f galaxyClustersColor
+		   READ getGalaxyClusterColor
+		   WRITE setGalaxyClusterColor
+		   NOTIFY galaxyClustersColorChanged
+		   )
 
 public:
 	NebulaMgr();
@@ -712,6 +717,16 @@ public slots:
 	//! Get current value of the emission-line star symbol color.
 	const Vec3f getEmissionLineStarColor(void) const;
 
+	//! Set the color used to draw the cluster of galaxies symbols.
+	//! @param c The color of the cluster of galaxies symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setGalaxyClusterColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setGalaxyClusterColor(const Vec3f& c);
+	//! Get current value of the cluster of galaxies symbol color.
+	const Vec3f getGalaxyClusterColor(void) const;
+
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
@@ -834,6 +849,7 @@ signals:
 	void supernovaRemnantsColorChanged(const Vec3f & color) const;
 	void supernovaCandidatesColorChanged(const Vec3f & color) const;
 	void supernovaRemnantCandidatesColorChanged(const Vec3f & color) const;
+	void galaxyClustersColorChanged(const Vec3f & color) const;
 
 private slots:
 	//! Update i18 names from English names according to passed translator.
@@ -886,6 +902,7 @@ private:
 	NebulaP searchPK(QString PK);
 	NebulaP searchPNG(QString PNG);
 	NebulaP searchSNRG(QString SNRG);
+	NebulaP searchACO(QString ACO);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
