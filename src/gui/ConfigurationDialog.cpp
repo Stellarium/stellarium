@@ -766,6 +766,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("flag_show_pk",		(bool) (cflags & Nebula::CatPK));
 	conf->setValue("flag_show_png",		(bool) (cflags & Nebula::CatPNG));
 	conf->setValue("flag_show_snrg",	(bool) (cflags & Nebula::CatSNRG));
+	conf->setValue("flag_show_aco",		(bool) (cflags & Nebula::CatACO));
 	conf->endGroup();
 
 	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();
@@ -779,6 +780,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("flag_show_planetary_nebulae",	 (bool) (tflags & Nebula::TypePlanetaryNebulae));
 	conf->setValue("flag_show_hydrogen_regions",	 (bool) (tflags & Nebula::TypeHydrogenRegions));
 	conf->setValue("flag_show_supernova_remnants",	 (bool) (tflags & Nebula::TypeSupernovaRemnants));
+	conf->setValue("flag_show_galaxy_clusters",	 (bool) (tflags & Nebula::TypeGalaxyClusters));
 	conf->setValue("flag_show_other",		 (bool) (tflags & Nebula::TypeOther));
 	conf->endGroup();
 

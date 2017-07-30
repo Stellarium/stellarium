@@ -387,6 +387,7 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Emission-line stars"), "30");
 	category->addItem(q_("Supernova candidates"), "31");
 	category->addItem(q_("Supernova remnant candidates"), "32");
+	category->addItem(q_("Clusters of galaxies"), "33");
 	if (catalogFilters&Nebula::CatM)
 		category->addItem(q_("Messier Catalogue"), "100");
 	if (catalogFilters&Nebula::CatC)
@@ -427,6 +428,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 		category->addItem(q_("The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"), "118");
 	if (catalogFilters&Nebula::CatSNRG)
 		category->addItem(q_("A catalogue of Galactic supernova remnants"), "119");
+	if (catalogFilters&Nebula::CatACO)
+		category->addItem(q_("A catalog of rich clusters of galaxies"), "120");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");

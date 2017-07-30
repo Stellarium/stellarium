@@ -65,7 +65,8 @@ public:
 		CatVV		= 0x00010000, //!< Interacting galaxies catalogue by Vorontsov-Velyaminov (VV)
 		CatPK		= 0x00020000, //!< Catalogue of Galactic Planetary Nebulae (PK)
 		CatPNG		= 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
-		CatSNRG		= 0x00080000  //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
+		CatSNRG		= 0x00080000, //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
+		CatACO		= 0x00100000  //!< Rich Clusters of Galaxies (Abell+ 1989) (ACO)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -80,13 +81,14 @@ public:
 		TypeDarkNebulae		= 0x00000040, //!< Dark Nebulae
 		TypePlanetaryNebulae	= 0x00000080, //!< Planetary Nebulae
 		TypeSupernovaRemnants	= 0x00000100, //!< Supernova Remnants
-		TypeOther		= 0x00000200  //!< Other objects
+		TypeGalaxyClusters	= 0x00000200, //!< Galaxy Clusters
+		TypeOther		= 0x00000400  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 
 	//! A pre-defined set of specifiers for the catalogs filter
 	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG);
-	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeOther);
+	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
 	enum NebulaType
@@ -124,7 +126,8 @@ public:
 		NebEmissionLineStar	= 30, 	//!< Emission-line Star
 		NebSNC			= 31, 	//!< Supernova Candidate
 		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
-		NebUnknown		= 33	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebGxCl			= 33,	//!< Cluster of Galaxies
+		NebUnknown		= 34	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();
@@ -238,11 +241,12 @@ private:
 	unsigned int PGC_nb;            // PGC number (Catalog of galaxies)
 	unsigned int UGC_nb;            // UGC number (The Uppsala General Catalogue of Galaxies)
 	unsigned int Arp_nb;            // Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
-	unsigned int VV_nb;             // VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
+	unsigned int VV_nb;             // VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))	
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;			// PK number (Catalogue of Galactic Planetary Nebulae)
 	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
 	QString SNRG_nb;		// SNR G number (A catalogue of Galactic supernova remnants (Green, 2014))
+	QString ACO_nb;		        // ACO number (Rich Clusters of Galaxies (Abell+ 1989))
 	bool withoutID;
 	QString englishName;            // English name
 	QStringList englishAliases;	// English aliases
@@ -311,6 +315,7 @@ private:
 	static Vec3f emissionLineStarColor;		// The color of emission-line star marker texture (NebEmissionLineStar)
 	static Vec3f supernovaCandidateColor;		// The color of supermova candidate marker texture (NebSNC)
 	static Vec3f supernovaRemnantCandidateColor;	// The color of supermova remnant candidate marker texture (NebSNRC)
+	static Vec3f galaxyClusterColor;		// The color of galaxy cluster marker texture (NebGxCl)
 
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;

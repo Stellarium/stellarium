@@ -86,6 +86,7 @@ Vec3f Nebula::symbioticStarColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::emissionLineStarColor = Vec3f(1.0f,1.0f,0.1f);
 Vec3f Nebula::supernovaCandidateColor = Vec3f(0.1f,1.0f,0.1f);
 Vec3f Nebula::supernovaRemnantCandidateColor = Vec3f(0.1f,1.0f,0.1f);
+Vec3f Nebula::galaxyClusterColor = Vec3f(0.8f,0.8f,0.5f);
 bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -109,11 +110,12 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Arp_nb(0)
-	, VV_nb(0)
+	, VV_nb(0)	
 	, Ced_nb("")
 	, PK_nb("")
 	, PNG_nb("")
 	, SNRG_nb("")
+	, ACO_nb("")
 	, withoutID(false)
 	, nameI18("")
 	, mTypeString()
@@ -198,6 +200,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("PN G%1").arg(PNG_nb);
 		if (!SNRG_nb.isEmpty())
 			catIds << QString("SNR G%1").arg(SNRG_nb);
+		if (!ACO_nb.isEmpty())
+			catIds << QString("ACO %1").arg(ACO_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -690,6 +694,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			Nebula::texDiffuseNebula->bind();
 			color=supernovaRemnantCandidateColor;
 			break;
+		case NebGxCl:
+			Nebula::texGalaxy->bind();
+			color=galaxyClusterColor;
+			break;
 		default:
 			Nebula::texCircle->bind();
 	}
@@ -827,6 +835,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("PN G%1").arg(PNG_nb);
 	else if (catalogFilters&CatSNRG && !SNRG_nb.isEmpty())
 		str = QString("SNR G%1").arg(SNRG_nb);
+	else if (catalogFilters&CatACO && !ACO_nb.isEmpty())
+		str = QString("ACO %1").arg(ACO_nb);
 
 	return str;
 }
@@ -839,10 +849,10 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb;
 
 	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb;
-	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty())
+	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty())
 		withoutID = true;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
@@ -909,8 +919,11 @@ bool Nebula::objectInDisplayedType() const
 		case NebCn:
 			cntype = 9;
 			break;
-		default:
+		case NebGxCl:
 			cntype = 10;
+			break;
+		default:
+			cntype = 11;
 			break;
 	}
 	if (typeFilters&TypeGalaxies && cntype==0)
@@ -933,7 +946,9 @@ bool Nebula::objectInDisplayedType() const
 		r = true;
 	else if (typeFilters&TypeStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
 		r = true;
-	else if (typeFilters&TypeOther && cntype==10)
+	else if (typeFilters&TypeGalaxyClusters && cntype==10)
+		r = true;
+	else if (typeFilters&TypeOther && cntype==11)
 		r = true;
 
 	return r;
@@ -982,6 +997,8 @@ bool Nebula::objectInDisplayedCatalog() const
 		r = true;
 	else if ((catalogFilters&CatSNRG) && !(SNRG_nb.isEmpty()))
 		r = true;
+	else if ((catalogFilters&CatACO) && (!ACO_nb.isEmpty()))
+		r = true;
 
 	// Special case: objects without ID from current catalogs
 	if (withoutID)
@@ -1001,7 +1018,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	// Let's avoid showing a wrong morphological description for galaxies
 	// NOTE: Is required the morphological description for galaxies?
-	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL)
+	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL || nType==NebGxCl)
 		return QString();
 
 	QRegExp GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
@@ -1383,7 +1400,10 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebEmissionLineStar:
 			wsType = q_("emission-line star");
-			break;		
+			break;
+		case NebGxCl:
+			wsType = q_("cluster of galaxies");
+			break;
 		case NebUnknown:
 			wsType = q_("object of unknown nature");
 			break;
