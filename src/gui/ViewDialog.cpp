@@ -1094,6 +1094,8 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 		flags |= Nebula::CatPNG;
 	if (ui->checkBoxSNRG->isChecked())
 		flags |= Nebula::CatSNRG;
+	if (ui->checkBoxACO->isChecked())
+		flags |= Nebula::CatACO;
 
 	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
 }
@@ -1120,6 +1122,8 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 		flags |= Nebula::TypeHydrogenRegions;
 	if (ui->checkBoxSupernovaRemnantsType->isChecked())
 		flags |= Nebula::TypeSupernovaRemnants;
+	if (ui->checkBoxGalaxyClustersType->isChecked())
+		flags |= Nebula::TypeGalaxyClusters;
 	if (ui->checkBoxOtherType->isChecked())
 		flags |= Nebula::TypeOther;
 
@@ -1151,6 +1155,7 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxPK->setChecked(flags & Nebula::CatPK);
 	ui->checkBoxPNG->setChecked(flags & Nebula::CatPNG);
 	ui->checkBoxSNRG->setChecked(flags & Nebula::CatSNRG);
+	ui->checkBoxACO->setChecked(flags & Nebula::CatACO);
 }
 
 void ViewDialog::updateSelectedTypesCheckBoxes()
@@ -1166,6 +1171,7 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxPlanetaryNebulaeType->setChecked(flags & Nebula::TypePlanetaryNebulae);
 	ui->checkBoxHydrogenRegionsType->setChecked(flags & Nebula::TypeHydrogenRegions);
 	ui->checkBoxSupernovaRemnantsType->setChecked(flags & Nebula::TypeSupernovaRemnants);
+	ui->checkBoxGalaxyClustersType->setChecked(flags & Nebula::TypeGalaxyClusters);
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
 }
 

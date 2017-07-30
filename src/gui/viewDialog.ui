@@ -1488,6 +1488,19 @@
                </attribute>
               </widget>
              </item>
+             <item row="2" column="6">
+              <widget class="QCheckBox" name="checkBoxACO">
+               <property name="toolTip">
+                <string>A catalog of rich clusters of galaxies (Abell+, 1989)</string>
+               </property>
+               <property name="text">
+                <string notr="true">ACO</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -1628,6 +1641,16 @@
               <widget class="QCheckBox" name="checkBoxBrightNebulaeType">
                <property name="text">
                 <string>Bright nebulae</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBoxGalaxyClustersType">
+               <property name="text">
+                <string>Clusters of galaxies</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
@@ -3420,12 +3443,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

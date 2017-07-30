@@ -125,6 +125,8 @@ void NebulaMgr::setSymbioticStarColor(const Vec3f& c) {Nebula::symbioticStarColo
 const Vec3f NebulaMgr::getSymbioticStarColor(void) const {return Nebula::symbioticStarColor;}
 void NebulaMgr::setEmissionLineStarColor(const Vec3f& c) {Nebula::emissionLineStarColor = c; emit emissionLineStarsColorChanged(c);}
 const Vec3f NebulaMgr::getEmissionLineStarColor(void) const {return Nebula::emissionLineStarColor;}
+void NebulaMgr::setGalaxyClusterColor(const Vec3f& c) {Nebula::galaxyClusterColor = c; emit galaxyClustersColorChanged(c);}
+const Vec3f NebulaMgr::getGalaxyClusterColor(void) const {return Nebula::galaxyClusterColor;}
 void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
@@ -256,6 +258,7 @@ void NebulaMgr::init()
 	setRadioGalaxyColor(StelUtils::strToVec3f(conf->value("color/dso_radio_galaxy_color", "0.3,0.3,0.3").toString()));
 	setActiveGalaxyColor(StelUtils::strToVec3f(conf->value("color/dso_active_galaxy_color", "1.0,0.5,0.2").toString()));
 	setInteractingGalaxyColor(StelUtils::strToVec3f(conf->value("color/dso_interacting_galaxy_color", "0.2,0.5,1.0").toString()));
+	setGalaxyClusterColor(StelUtils::strToVec3f(conf->value("color/dso_galaxy_cluster_color", "0.2,0.8,1.0").toString()));
 	setQuasarColor(StelUtils::strToVec3f(conf->value("color/dso_quasar_color", defaultGalaxyColor).toString()));
 	setPossibleQuasarColor(StelUtils::strToVec3f(conf->value("color/dso_possible_quasar_color", defaultGalaxyColor).toString()));
 	setBlLacObjectColor(StelUtils::strToVec3f(conf->value("color/dso_bl_lac_color", defaultGalaxyColor).toString()));
@@ -341,6 +344,8 @@ void NebulaMgr::init()
 		catalogFilters	|= Nebula::CatPNG;
 	if (conf->value("flag_show_snrg", false).toBool())
 		catalogFilters	|= Nebula::CatSNRG;
+	if (conf->value("flag_show_aco", false).toBool())
+		catalogFilters	|= Nebula::CatACO;
 	conf->endGroup();
 
 	// NB: nebula set loaded inside setter of catalog filter
@@ -367,6 +372,8 @@ void NebulaMgr::init()
 		typeFilters	|= Nebula::TypeHydrogenRegions;
 	if (conf->value("flag_show_supernova_remnants", true).toBool())
 		typeFilters	|= Nebula::TypeSupernovaRemnants;
+	if (conf->value("flag_show_galaxy_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeGalaxyClusters;
 	if (conf->value("flag_show_other", true).toBool())
 		typeFilters	|= Nebula::TypeOther;
 	conf->endGroup();
@@ -553,7 +560,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "PGC") return searchPGC(num);
 		if (cat == "UGC") return searchUGC(num);
 		if (cat == "ARP") return searchArp(num);
-		if (cat == "VV") return searchVV(num);
+		if (cat == "VV") return searchVV(num);		
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
@@ -563,7 +570,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (dcat == "SH") return searchSh2(dnum);
 	}
-	static QRegExp sCatNumRx("^(CED|PK)\\s*(.+)$");
+	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
 		QString cat = sCatNumRx.capturedTexts().at(1);
@@ -571,6 +578,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (cat == "CED") return searchCed(num);
 		if (cat == "PK") return searchPK(num);
+		if (cat == "ACO" || cat == "ABELL") return searchACO(num);
 	}
 	static QRegExp gCatNumRx("^(PN|SNR)\\s*G(.+)$");
 	if (gCatNumRx.exactMatch(uname))
@@ -824,6 +832,14 @@ NebulaP NebulaMgr::searchSNRG(QString SNRG)
 	return NebulaP();
 }
 
+NebulaP NebulaMgr::searchACO(QString ACO)
+{
+	foreach (const NebulaP& n, dsoArray)
+		if (n->ACO_nb.trimmed().toUpper() == ACO.trimmed().toUpper())
+			return n;
+	return NebulaP();
+}
+
 QString NebulaMgr::getLatestSelectedDSODesignation()
 {
 	QString result = "";
@@ -868,7 +884,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV;
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
-	QString oType, mType, Ced, PK, PNG, SNRG, ra, dec;
+	QString oType, mType, Ced, PK, PNG, SNRG, ACO, ra, dec;
 
 	unsigned int nType;
 
@@ -933,6 +949,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			PK			= list.at(33).trimmed(); // PK number
 			PNG			= list.at(34).trimmed(); // PN G number
 			SNRG			= list.at(35).trimmed(); // SNR G number
+			ACO			= list.at(36).trimmed(); // ACO number
 
 			if (decimal)
 			{
@@ -978,7 +995,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "SR*" << "EM*" << "AB*" << "MI*" << "MI?" << "TT*" << "WR*" << "C*"  << "WD*"  << "EL*"
 			       << "NL*" << "NO*" << "HS*" << "LP*" << "OH*" << "S?R" << "IR*" << "POC" << "PNB"  << "GXCL"
 			       << "AL*" << "PR*" << "RS*" << "S*B" << "SN?" << "SR?" << "DNE" << "RG*" << "PSR"  << "HH"
-			       << "V*"  << "PA?" << "BUB";
+			       << "V*"  << "PA?" << "BUB" << "CLG" << "CGG";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -1040,8 +1057,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 17:
 				case 38:
 				case 41:
-				case 42:
-				case 69:
+				case 42:				
 					nType = (unsigned int)Nebula::NebIGx;
 					break;
 				case 18:
@@ -1131,6 +1147,11 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 75:
 					nType = (unsigned int)Nebula::NebSNRC;
 					break;
+				case 69:
+				case 83:
+				case 84:
+					nType = (unsigned int)Nebula::NebGxCl;
+					break;
 				default:
 				{
 					nType = (unsigned int)Nebula::NebUnknown;
@@ -1144,7 +1165,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
 				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
 				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << Arp << VV << PK
-				     << PNG << SNRG;
+				     << PNG << SNRG << ACO;
 		}
 	}
 	dsoIn.close();
@@ -1242,7 +1263,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		QStringList catalogs;		
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG" << "SNRG";
+			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG" << "SNRG" << "ACO";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -1305,6 +1326,9 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 19:
 				e = searchSNRG(cdes);
+				break;
+			case 20:
+				e = searchACO(cdes);
 				break;
 			default:
 				e = searchDSO(nb);
@@ -1641,6 +1665,19 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by ACO numbers (possible formats are "ACO31", "ACO 31", "Abell31" or "Abell 31")
+	if (objw.left(2) == "ACO" || objw.left(5) == "ABELL")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("ACO%1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
+			|| QString("ACO %1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
+			|| QString("ABELL%1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
+			|| QString("ABELL %1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed())
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return StelObjectP();
 }
 
@@ -1866,6 +1903,19 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("SNRG%1").arg(n->SNRG_nb.trimmed().toUpper()) == objw.trimmed() || QString("SNR G%1").arg(n->SNRG_nb.trimmed().toUpper()) == objw.trimmed())
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by ACO numbers
+	if (objw.startsWith("ACO") || objw.startsWith("ABELL"))
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("ACO%1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
+			|| QString("ACO %1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
+			|| QString("ABELL%1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
+			|| QString("ABELL %1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -2281,6 +2331,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
+	// Search by ACO objects number
+	if (objw.size()>=1 && (objw.left(3)=="ACO" || objw.left(5)=="ABELL"))
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->ACO_nb.isEmpty()) continue;
+			QString constw = QString("ACO%1").arg(n->ACO_nb.trimmed());
+			QString constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("ACO %1").arg(n->ACO_nb.trimmed());
+			constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+				result << constw;
+		}
+	}
+
 	// Search by common names
 	foreach (const NebulaP& n, dsoArray)
 	{
@@ -2482,6 +2552,13 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					result << QString("SNR G%1").arg(n->SNRG_nb);
 			}
 			break;
+		case 120: // A Catalog of Rich Clusters of Galaxies by Abell et. al. (ACO)
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->ACO_nb.isEmpty())
+					result << QString("ACO %1").arg(n->ACO_nb);
+			}
+			break;
 		case 150: // Dwarf galaxies
 		{
 			QStringList dwarfGalaxies;
@@ -2587,11 +2664,13 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (!n->PNG_nb.isEmpty())
 						result << QString("PN G%1").arg(n->PNG_nb);
 					else if (!n->SNRG_nb.isEmpty())
-						result << QString("SNR G%1").arg(n->SNRG_nb);
+						result << QString("SNR G%1").arg(n->SNRG_nb);					
 					else if (n->PGC_nb>0)
 						result << QString("PGC %1").arg(n->PGC_nb);
 					else if (n->UGC_nb > 0)
 						result << QString("UGC %1").arg(n->UGC_nb);
+					else if (!n->ACO_nb.isEmpty())
+						result << QString("ACO %1").arg(n->ACO_nb);
 
 				}
 			}
@@ -2746,6 +2825,13 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType)
 			foreach(const NebulaP& n, dsoArray)
 			{
 				if (!n->SNRG_nb.isEmpty())
+					dso.append(n);
+			}
+			break;
+		case 120: // A Catalog of Rich Clusters of Galaxies by Abell et. al. (ACO)
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->ACO_nb.isEmpty())
 					dso.append(n);
 			}
 			break;
