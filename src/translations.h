@@ -196,7 +196,7 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("A catalogue of Galactic supernova remnants");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("A catalog of rich clusters of galaxies");
+		N_("A Catalog of Rich Clusters of Galaxies");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
