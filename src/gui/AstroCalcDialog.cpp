@@ -1810,7 +1810,7 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 {
 	phenomenaHeader.clear();
 	phenomenaHeader << q_("Phenomenon");
-	phenomenaHeader << q_("Date and Time");
+	phenomenaHeader << q_("Date and Time");	
 	phenomenaHeader << q_("Object 1");
 	phenomenaHeader << q_("Object 2");
 	phenomenaHeader << q_("Separation");
@@ -1835,10 +1835,7 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex &modelIndex)
 {
 	// Find the object
 	QString name = ui->object1ComboBox->currentData().toString();
-	QString date = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data().toString();
-	bool ok;
-	double JD  = StelUtils::getJulianDayFromISO8601String(date.left(10) + "T" + date.right(8), &ok);
-	JD -= core->getUTCOffset(JD)/24.;
+	double JD  = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data(Qt::UserRole).toDouble();
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
@@ -2166,6 +2163,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
 		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
+		treeItem->setData(PhenomenaDate, Qt::UserRole,  it.key());
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		if (occultation)
@@ -2323,7 +2321,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		ACPhenTreeWidgetItem *treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
-		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + core->getUTCOffset(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
+		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
+		treeItem->setData(PhenomenaDate, Qt::UserRole, it.key());
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		if (!object2->getNameI18n().isEmpty())
 			treeItem->setText(PhenomenaObject2, object2->getNameI18n());
@@ -2482,6 +2481,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
 		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
+		treeItem->setData(PhenomenaDate, Qt::UserRole, it.key());
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		if (occultation)
