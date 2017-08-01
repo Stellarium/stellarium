@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-07-30 17:40+0700\n"
-"PO-Revision-Date: 2017-07-26 14:48+0000\n"
+"PO-Revision-Date: 2017-07-31 10:11+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-31 05:26+0000\n"
+"X-Launchpad-Export-Date: 2017-08-01 05:12+0000\n"
 "X-Generator: Launchpad (build 18441)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -797,22 +797,25 @@ msgstr "luminosidade non documentada"
 #: src/core/modules/Nebula.cpp:1278
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr ""
+msgstr "restu chi  faet biere una istruttura radio a conchiglia"
 
 #: src/core/modules/Nebula.cpp:1281
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr ""
+"restu chi faet biere una instruttura radio a centru prenu ('plerion')"
 
 #: src/core/modules/Nebula.cpp:1284
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr ""
+"restu chi faet biere una instruttura radio composita (o una cumbinatzione)"
 
 #: src/core/modules/Nebula.cpp:1287
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
+"restu chi faet biere una instruttura radio  a conchiglia cun cachi incertesa"
 
 #: src/core/modules/Nebula.cpp:1290
 msgctxt "supernova remnant structure classification"
@@ -820,6 +823,8 @@ msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
+"restu chi faet biere una instruttura radio a centru prenu ('plerion') cun "
+"cachi incertesa"
 
 #: src/core/modules/Nebula.cpp:1293
 msgctxt "supernova remnant structure classification"
@@ -827,6 +832,8 @@ msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
+"restu chi faet biere una instruttura radio composita (o una cumbinatzione) "
+"cun cachi incertesa"
 
 #: src/core/modules/Nebula.cpp:1306
 msgid "galaxy"
@@ -898,11 +905,11 @@ msgstr "avantzu 'e supernova"
 
 #: src/core/modules/Nebula.cpp:1357
 msgid "supernova candidate"
-msgstr ""
+msgstr "candidada supernova"
 
 #: src/core/modules/Nebula.cpp:1360
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "candidada restu supernova"
 
 #: src/core/modules/Nebula.cpp:1363
 msgid "stellar association"
@@ -965,7 +972,7 @@ msgstr "Istella cun linea de emissione"
 
 #: src/core/modules/Nebula.cpp:1405
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "gruppu de galassias"
 
 #: src/core/modules/Nebula.cpp:1408
 msgid "object of unknown nature"
@@ -3594,19 +3601,19 @@ msgstr "Istellas cun Linea de Emissione"
 #: src/gui/AstroCalcDialog.cpp:388 src/gui/AstroCalcDialog.cpp:2726
 #: src/translations.h:135 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
-msgstr ""
+msgstr "candidadas Supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:389 src/gui/AstroCalcDialog.cpp:2727
 #: src/translations.h:137 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
-msgstr ""
+msgstr "Candidada restu de supernova"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:2729
 #: src/translations.h:161 src/ui_viewDialog.h:2298 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
-msgstr ""
+msgstr "Gruppos de galassias"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:392 src/translations.h:163
@@ -3701,17 +3708,17 @@ msgstr "Su Catalogu de sas Nebulosas Galatticas Planetarias"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:428 src/translations.h:195
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
-msgstr ""
+msgstr "Su Catalogu Strasbourg-ESO de sas Nebulosas Planetarias Galatticas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:430 src/translations.h:197
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "Unu catalogu de restu de supernovas galatticas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:432 src/translations.h:199
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr ""
+msgstr "Unu catalogu de Gruppos Riccos de Galassias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:433 src/translations.h:201
@@ -6583,14 +6590,17 @@ msgstr "Atlante de sas Galassias Peculiares"
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
+"Su Catalogu Strasbourg-ESO de sas Nebulosas Planetarias Galatticas (Acker+, "
+"1992)"
 
 #: src/ui_viewDialog.h:2283
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr ""
+"Unu catalogu de restu de restu de supernovas galatticas (Green, 2014)"
 
 #: src/ui_viewDialog.h:2286
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
-msgstr ""
+msgstr "Unu catalogu de Gruppos Riccos de Galassias(Abell+, 1989)"
 
 #: src/ui_viewDialog.h:2288
 msgid "Filter by type"
@@ -8355,15 +8365,15 @@ msgstr "Colore de sos marcadores de sos ogettos BL Lac"
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr ""
+msgstr "Colore de su marcadore de candidadas supernovas"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr ""
+msgstr "Colore de su marcadore de candidadas restu de supernovas"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
-msgstr ""
+msgstr "Colore de su marcadore de gruppos de galassias"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -9904,7 +9914,7 @@ msgstr "puntu"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
 msgid "Save predicted Iridium flares as..."
-msgstr ""
+msgstr "Sarva su Raju Iridium predetu comente..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
 msgid "Stellarium Satellites Plugin"
@@ -10436,7 +10446,7 @@ msgstr "Caluca sos rajos Iridium"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "Sarva sas preditziones..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
