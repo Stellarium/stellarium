@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-13 02:10+0700\n"
+"POT-Creation-Date: 2017-07-30 16:49+0700\n"
 "PO-Revision-Date: 2017-05-09 16:32+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-13 05:53+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-07-31 05:49+0000\n"
+"X-Generator: Launchpad (build 18441)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -185,10 +185,6 @@ msgstr "Aurinkovuorokausi"
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
 msgstr "Aurinkoviikko"
-
-#: index.html:90 tablet7in.html:191
-msgid "Sidereal day"
-msgstr "Tähtivuorokausi"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
@@ -609,6 +605,9 @@ msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "Palvelin lakkasi vastaamasta %1 sekuntia sitten. Onko Stellarium yhä "
 "käytössä?"
+
+#~ msgid "Sidereal day"
+#~ msgstr "Tähtivuorokausi"
 
 #~ msgid "Selection"
 #~ msgstr "Valinta"
