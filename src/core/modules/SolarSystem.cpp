@@ -60,7 +60,7 @@
 #include <QMapIterator>
 #include <QDebug>
 #include <QDir>
-#include <QVector>
+#include <QHash>
 
 SolarSystem::SolarSystem()
 	: shadowPlanetCount(0)
@@ -2423,38 +2423,19 @@ bool SolarSystem::removePlanet(QString name)
 
 void SolarSystem::readNomenclature(const QString& dataDir)
 {
+    /* Mercury, Venus, Moon, Mars, Phobos, Deimos, Io, Europa, Ganymede, Callisto, Mimas, Enceladus, Tethys, Dione, Rhea, Titan, Iapetus, Triton;*/
     
-    // Create the struct to store data
-    /*struct planetNomenclature{
-        //char celestialBody;
-        char Id;
-        char Name;
-        char Type;
-        double Coordinates; // this must be an array
-        double Size;
-        QString Id, Name, Type, Latitude, Longitude, Size;
-    };
-    
-    struct Nomenclature{
-        struct Mercury;
-        struct Venus;
-        struct Moon;
-        struct Mars;
-        struct Phobos;
-        struct Deimos;
-        struct Io;
-        struct Europa;
-        struct Ganymede;
-        struct Callisto;
-        struct Mimas;
-        struct Enceladus;
-        struct Tethys;
-        struct Dione;
-        struct Rhea;
-        struct Titan;
-        struct Iapetus;
-        struct Triton;
-    };*/
+    struct {
+        QString Body;
+        QString Id;
+        QString Name;
+        QString Type;
+        QString Latitude;
+        QString Longitude;
+        QString Size;
+    } feature;
+                  
+    QHash<QString, feature> StelPlanetNomenclature;
     
     QString surfNamesFile = StelFileMgr::findFile("data/" + dataDir + "/surface_nomenclature.fab");
     
@@ -2474,7 +2455,7 @@ void SolarSystem::readNomenclature(const QString& dataDir)
     // which will be available in recRx.capturedTexts()
     QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
     
-    QString record, body, featureId, featureName, featureType, featureLat, featureLong, featureSize;
+    QString record;
     
     // keep track of how many records we processed.
     int totalRecords=0;
@@ -2498,40 +2479,16 @@ void SolarSystem::readNomenclature(const QString& dataDir)
         }
         else
         {
-            body = recRx.capturedTexts().at(1).trimmed();
-            featureId = recRx.capturedTexts().at(2).trimmed();
-            featureName = recRx.capturedTexts().at(3).trimmed();
-            featureType = recRx.capturedTexts().at(4).trimmed();
-            featureLat = recRx.capturedTexts().at(5).trimmed();
-            featureLong = recRx.capturedTexts().at(6).trimmed();
-            featureSize = recRx.capturedTexts().at(7).trimmed();
+            feature.Body = recRx.capturedTexts().at(1).trimmed();
+            feature.Id = recRx.capturedTexts().at(2).trimmed();
+            feature.Name = recRx.capturedTexts().at(3).trimmed();
+            feature.Type = recRx.capturedTexts().at(4).trimmed();
+            feature.Latitude = recRx.capturedTexts().at(5).trimmed();
+            feature.Longitude = recRx.capturedTexts().at(6).trimmed();
+            feature.Size = recRx.capturedTexts().at(7).trimmed();
             readOk++;
             
-            // Keep the data in struct depending on the celestial body
-            if ()// already exits an array for this body => keep the data in body's array
-            {
-                QVector<QString> vector = "body";
-                
-                vector.insert(1, body);
-                vector.insert(2, featureId);
-                vector.insert(3, featureName);
-                vector.insert(4, featureType);
-                vector.insert(5, featureLat);
-                vector.insert(6, featureLong);
-                vector.insert(7, featureSize);
-            }
-            else // create a new array and keep the data
-            {
-                QVector<QString> vector = "body";
-                
-                vector.insert(1, body);
-                vector.insert(2, featureId);
-                vector.insert(3, featureName);
-                vector.insert(4, featureType);
-                vector.insert(5, featureLat);
-                vector.insert(6, featureLong);
-                vector.insert(7, featureSize);
-            }
+            StelPlanetNomenclature(readOk, feature);
         }
         
         
