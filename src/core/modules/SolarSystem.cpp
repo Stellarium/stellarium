@@ -2423,7 +2423,7 @@ bool SolarSystem::removePlanet(QString name)
 
 void SolarSystem::readNomenclature(const QString& dataDir)
 {
-    /* Mercury, Venus, Moon, Mars, Phobos, Deimos, Io, Europa, Ganymede, Callisto, Mimas, Enceladus, Tethys, Dione, Rhea, Titan, Iapetus, Triton;*/
+    /* Mercury, Venus, Moon, Mars, Phobos, Deimos, Io, Europa, Ganymede, Callisto, Mimas, Enceladus, Tethys, Dione, Rhea, Titan, Iapetus, Triton;
     
     struct {
         QString Body;
@@ -2435,7 +2435,17 @@ void SolarSystem::readNomenclature(const QString& dataDir)
         QString Size;
     } feature;
                   
-    QHash<QString, feature> StelPlanetNomenclature;
+    QHash <QString, struct {
+        QString Body;
+        QString Id;
+        QString Name;
+        QString Type;
+        QString Latitude;
+        QString Longitude;
+        QString Size;
+    } feature> StelPlanetNomenclature; */
+    
+    QHash <QString, struct feature> StelPlanetNomenclature;
     
     QString surfNamesFile = StelFileMgr::findFile("data/" + dataDir + "/surface_nomenclature.fab");
     
