@@ -1015,7 +1015,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
-			mp->setColorIndexBV(pd.value(secname+"/color_index_bv", 99.f).toFloat());
+			mp->setColorIndexBV(bV);
 			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
 
 			systemMinorBodies.push_back(p);
