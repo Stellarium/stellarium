@@ -478,8 +478,21 @@ void SolarSystem::loadPlanets()
 			shadowPlanetCount++;
 }
 
+unsigned char SolarSystem::BvToColorIndex(float bV)
+{
+	double dBV = bV;
+	dBV *= 1000.0;
+	if (dBV < -500)
+		dBV = -500;
+	else if (dBV > 3499)
+		dBV = 3499;
+
+	return (unsigned int)floor(0.5+127.0*((500.0+dBV)/4000.0));
+}
+
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
+	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	qDebug() << "Loading from :"  << filePath;
 	int readOk = 0;
 	QSettings pd(filePath, StelIniFormat);
@@ -947,10 +960,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
 			minorBodies << englishName;
+
+			Vec3f color = Vec3f(1.f, 1.f, 1.f);
+			float bV = pd.value(secname+"/color_index_bv", 99.f).toFloat();
+			if (bV<99.f)
+				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f;
+			else
+				color = StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
+
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
-						    StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
+						    color, // halo color
 						    pd.value(secname+"/albedo", 0.25f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
@@ -994,6 +1015,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
+			mp->setColorIndexBV(pd.value(secname+"/color_index_bv", 99.f).toFloat());
+			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
 
 			systemMinorBodies.push_back(p);
 		}

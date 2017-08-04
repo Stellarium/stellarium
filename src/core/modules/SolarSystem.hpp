@@ -927,6 +927,10 @@ private:
 
 	void recreateTrails();
 
+	//! Calculate a color of Solar system bodies
+	//! @param bV value of B-V color index
+	unsigned char BvToColorIndex(float bV);
+
 	//! Set flag who enable display a permanent orbits for objects or not
 	void setFlagPermanentOrbits(bool b);
 
