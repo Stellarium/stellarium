@@ -111,6 +111,12 @@ public:
 	//! set value for semi-major axis in AU
 	void setSemiMajorAxis(double value);
 
+	//! set values for spectral types
+	void setSpectralType(QString sT="", QString sB="");
+
+	//! set value for color index B-V
+	void setColorIndexBV(float bv=99.f);
+
 	//! get sidereal period for minor planet
 	double getSiderealPeriod() const;
 
@@ -122,6 +128,9 @@ private:
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;
 	QString properName;
+
+	float b_v;
+	QString specT, specB;
 };
 
 #endif //_MINOR_PLANET_HPP_
