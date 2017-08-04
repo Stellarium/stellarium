@@ -2423,9 +2423,9 @@ bool SolarSystem::removePlanet(QString name)
 
 void SolarSystem::readNomenclature(const QString& dataDir)
 {
-    /* Mercury, Venus, Moon, Mars, Phobos, Deimos, Io, Europa, Ganymede, Callisto, Mimas, Enceladus, Tethys, Dione, Rhea, Titan, Iapetus, Triton;
+    /* Mercury, Venus, Moon, Mars, Phobos, Deimos, Io, Europa, Ganymede, Callisto, Mimas, Enceladus, Tethys, Dione, Rhea, Titan, Iapetus, Triton; */
     
-    struct {
+    /* struct {
         QString Body;
         QString Id;
         QString Name;
@@ -2433,9 +2433,9 @@ void SolarSystem::readNomenclature(const QString& dataDir)
         QString Latitude;
         QString Longitude;
         QString Size;
-    } feature;
+    } feature; */
                   
-    QHash <QString, struct {
+    /* QHash <QString, struct {
         QString Body;
         QString Id;
         QString Name;
@@ -2445,7 +2445,9 @@ void SolarSystem::readNomenclature(const QString& dataDir)
         QString Size;
     } feature> StelPlanetNomenclature; */
     
-    QHash <QString, struct feature> StelPlanetNomenclature;
+    QString feature[6];
+    
+    QHash <QString, QString> StelPlanetNomenclature;
     
     QString surfNamesFile = StelFileMgr::findFile("data/" + dataDir + "/surface_nomenclature.fab");
     
@@ -2489,13 +2491,13 @@ void SolarSystem::readNomenclature(const QString& dataDir)
         }
         else
         {
-            feature.Body = recRx.capturedTexts().at(1).trimmed();
-            feature.Id = recRx.capturedTexts().at(2).trimmed();
-            feature.Name = recRx.capturedTexts().at(3).trimmed();
-            feature.Type = recRx.capturedTexts().at(4).trimmed();
-            feature.Latitude = recRx.capturedTexts().at(5).trimmed();
-            feature.Longitude = recRx.capturedTexts().at(6).trimmed();
-            feature.Size = recRx.capturedTexts().at(7).trimmed();
+            feature[0] = recRx.capturedTexts().at(1).trimmed();
+            feature[1] = recRx.capturedTexts().at(2).trimmed();
+            feature[2] = recRx.capturedTexts().at(3).trimmed();
+            feature[3] = recRx.capturedTexts().at(4).trimmed();
+            feature[4] = recRx.capturedTexts().at(5).trimmed();
+            feature[5] = recRx.capturedTexts().at(6).trimmed();
+            feature[6] = recRx.capturedTexts().at(7).trimmed();
             readOk++;
             
             StelPlanetNomenclature(readOk, feature);
