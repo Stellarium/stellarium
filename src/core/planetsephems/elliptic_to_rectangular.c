@@ -7,7 +7,7 @@ ftp://ftp.imcce.fr/pub/ephem/satel
 I (Johannes Gajdosik) have just taken the Fortran code and data
 obtained from above and rearranged it into this piece of software.
 
-I can neigther allow nor forbid the above theories.
+I can neither allow nor forbid the above theories.
 The copyright notice below covers just my work,
 that is the compilation of the data obtained from above
 into the software supplied in this file.
@@ -43,6 +43,31 @@ SOFTWARE.
 #define M_PI           3.14159265358979323846
 #endif
 
+
+/*
+   Given the orbital elements at some time t0 calculate the
+   rectangular coordinates at time (t0+dt).
+
+   mu = G*(m1+m2) .. gravitational constant of the two body problem
+   a .. semi major axis
+   n = mean motion = 2*M_PI/(orbit period)
+
+   elem[0] .. irrelevant (either a (called by EllipticToRectangularA()) or n (called by EllipticToRectangularN())
+   elem[1] .. L
+   elem[2] .. K=e*cos(Omega+omega)
+   elem[3] .. H=e*sin(Omega+omega)
+   elem[4] .. Q=sin(i/2)*cos(Omega)
+   elem[5] .. P=sin(i/2)*sin(Omega)
+
+   Omega = longitude of ascending node
+   omega = argument of pericenter
+   L = mean longitude = Omega + omega + M
+   M = mean anomaly
+   i = inclination
+   e = excentricity
+
+   Units are suspected to be: Julian days, AU, rad
+*/
 static void
 EllipticToRectangular(const double a,const double n,
                       const double elem[6],const double dt,double xyz[]) {
@@ -62,7 +87,7 @@ EllipticToRectangular(const double a,const double n,
   for (;;) {
     const double cLe = cos(Le);
     const double sLe = sin(Le);
-      /* for excenticity < 1 we have denominator > 0 */
+      /* for excentricity < 1 we have denominator > 0 */
     const double dLe = (L - Le + elem[2]*sLe - elem[3]*cLe)
                      / (1.0    - elem[2]*cLe - elem[3]*sLe);
     Le += dLe;
@@ -80,8 +105,8 @@ EllipticToRectangular(const double a,const double n,
     const double x1 = a * (cLe - elem[2] - psi*dlf*elem[3]);
     const double y1 = a * (sLe - elem[3] + psi*dlf*elem[2]);
 
-    const double elem_4q = elem[4] * elem[4];
-    const double elem_5q = elem[5] * elem[5];
+    const double elem_4q = elem[4] * elem[4]; // Q²
+    const double elem_5q = elem[5] * elem[5]; // P²
     const double dwho = 2.0 * sqrt(1.0 - elem_4q - elem_5q);
     const double rtp = 1.0 - elem_5q - elem_5q;
     const double rtq = 1.0 - elem_4q - elem_4q;
@@ -119,7 +144,7 @@ void EllipticToRectangularN(double mu,const double elem[6],double dt,
 void EllipticToRectangularA(double mu,const double elem[6],double dt,
                             double xyz[]) {
   const double a = elem[0];
-  const double n = sqrt(mu/(a*a*a));
+  const double n = sqrt(mu/(a*a*a)); // mean motion
   EllipticToRectangular(a,n,elem,dt,xyz);
 }
 

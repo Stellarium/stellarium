@@ -14,7 +14,7 @@ I (Johannes Gajdosik) have just taken Valery Laineys Fortran code,
 MarsSatV1-0.f, which he kindly supplied, and rearranged it into
 this piece of software.
 
-I can neigther allow nor forbid the usage of Valery Laineys
+I can neither allow nor forbid the usage of Valery Laineys
 Ephemerides of the Martian satellites.
 The copyright notice below covers not the work of Valery Lainey
 but just my work, that is the compilation of Valery Laineys
