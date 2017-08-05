@@ -70,7 +70,7 @@ zodiacal\_light\_intensity         & float  & 1.0   & Sets the relative brightne
 max\_mag\_nebula\_name             & float  & 8.0   & Sets the magnitude of the nebulae whose name is shown. \\\midrule
 flag\_nebula\_hints\_proportional  & bool   & false & Enables/disables proportional markers for deep-sky objects. \\\midrule
 flag\_surface\_brightness\_usage   & bool   & false & Enables/disables usage surface brightness for markers for deep-sky objects.\\\midrule
-flag\_surface\_brightness\_arcsec  & bool   & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\\midrule
+
 flag\_use\_type\_filter            & bool   & false & Enables/disables usage of the type filters for deep-sky objects. \\\midrule
 flag\_nutation  				   & bool   & true  & Enables/disables usage nutation.\\\midrule
 flag\_topocentric\_coordinates	   & bool   & true  & Enables/disables usage topocentric coordinates.\\\midrule
@@ -391,7 +391,10 @@ flag\_show\_decimal\_degrees    & bool   & false & If \emph{true}, use decimal d
 flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azimuth from south towards west 
                                                    (as in some astronomical literature)\\\midrule
 flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI.\\\midrule
+flag\_surface\_brightness\_arcsec  & bool  & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\\midrule
+flag\_surface\_brightness\_short  & bool   & false & Toggle usage the short notation for the surface brightness of deep-sky objects.\\\midrule
 flag\_dso\_designation\_usage   & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\\midrule
+flag\_dso\_outlines\_usage      & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\\midrule
 flag\_enable\_kinetic\_scrolling & bool  & true  & If \emph{true}, use kinetic scrolling in the GUI\footnote{This option is available on Windows tablets only.}.\\\midrule
 flag\_show\_buttons\_background & bool   & true  & If \emph{true}, use background under bottons on bottom panel.\\\midrule
 pointer\_animation\_speed 		& float  & 1.0 	 & Animation speed of pointers.\\\midrule

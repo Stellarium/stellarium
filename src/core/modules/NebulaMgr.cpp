@@ -41,6 +41,7 @@
 #include "StelActionMgr.hpp"
 
 #include <algorithm>
+#include <vector>
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
@@ -131,6 +132,8 @@ void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHi
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
 bool NebulaMgr::getDesignationUsage(void) const {return Nebula::designationUsage; }
+void NebulaMgr::setFlagOutlines(const bool flag) {if(Nebula::flagUseOutlines!=flag){ Nebula::flagUseOutlines=flag; emit flagOutlinesDisplayedChanged(flag);}}
+bool NebulaMgr::getFlagOutlines(void) const {return Nebula::flagUseOutlines;}
 
 NebulaMgr::NebulaMgr(void)
 	: nebGrid(200)
@@ -186,10 +189,11 @@ void NebulaMgr::init()
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
+	setFlagOutlines(conf->value("gui/flag_dso_outlines_usage", false).toBool());
 	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
-	setFlagSurfaceBrightnessArcsecUsage(conf->value("astro/flag_surface_brightness_arcsec", false).toBool());
-	setFlagSurfaceBrightnessShortNotationUsage(conf->value("astro/flag_surface_brightness_short", true).toBool());
+	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
+	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", true).toBool());
 
 	// Load colors from config file
 	// Upgrade config keys
@@ -596,6 +600,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
 	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
+	QString dsoOutlinesPath		= StelFileMgr::findFile("nebulae/" + setName + "/outlines.dat");
 
 	dsoArray.clear();
 	dsoIndex.clear();
@@ -616,7 +621,10 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		return;
 	}
 
-	loadDSOCatalog(dsoCatalogPath);		
+	loadDSOCatalog(dsoCatalogPath);
+
+	if (!dsoOutlinesPath.isEmpty())
+		loadDSOOutlines(dsoOutlinesPath);
 }
 
 // Look for a nebulae by XYZ coords
@@ -1234,7 +1242,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		return false;
 	}
 
-	// Read the names of the NGC objects
+	// Read the names of the deep-sky objects
 	QString name, record, ref, cdes;
 	int totalRecords=0;
 	int lineNumber=0;
@@ -1355,6 +1363,89 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	}
 	dsoNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
+	return true;
+}
+
+bool NebulaMgr::loadDSOOutlines(const QString &filename)
+{
+	qDebug() << "Loading DSO outline data ...";
+	QFile dsoOutlineFile(filename);
+	if (!dsoOutlineFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "DSO outline data file" << QDir::toNativeSeparators(filename) << "not found.";
+		return false;
+	}
+
+	float RA, DE;
+	int i, readOk = 0;
+	Vec3f XYZ;
+	std::vector<Vec3f> *points = Q_NULLPTR;
+	typedef QPair<float, float> coords;
+	coords point, fpoint;
+	QList<coords> outline;
+	QString record, command, dso;
+	NebulaP e;
+	// Read the outlines data of the DSO
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	while (!dsoOutlineFile.atEnd())
+	{
+		record = QString::fromUtf8(dsoOutlineFile.readLine());
+		if (commentRx.exactMatch(record))
+			continue;
+
+		// bytes 1 - 8, RA
+		RA = record.left(8).toFloat();
+		// bytes 9 -18, DE
+		DE = record.mid(9, 10).toFloat();
+		// bytes 19-25, command
+		command = record.mid(19, 7).trimmed();
+		// bytes 26, designation of DSO
+		dso = record.mid(26).trimmed();
+
+		RA*=M_PI/12.;     // Convert from hours to rad
+		DE*=M_PI/180.;    // Convert from deg to rad
+
+		if (command.contains("start", Qt::CaseInsensitive))
+		{
+			outline.clear();
+			e = search(dso);
+
+			point.first  = RA;
+			point.second = DE;
+			outline.append(point);
+			fpoint = point;
+		}
+
+		if (command.contains("vertex", Qt::CaseInsensitive))
+		{
+			point.first  = RA;
+			point.second = DE;
+			outline.append(point);
+		}
+
+		if (command.contains("end", Qt::CaseInsensitive))
+		{
+			point.first  = RA;
+			point.second = DE;
+			outline.append(point);
+			outline.append(fpoint);
+
+			points = new std::vector<Vec3f>;
+			for (i = 0; i < outline.size(); i++)
+			{
+				// Calc the Cartesian coord with RA and DE
+				point = outline.at(i);
+				StelUtils::spheToRect(point.first, point.second, XYZ);
+				points->push_back(XYZ);
+			}
+
+			e->outlineSegments.push_back(points);
+			readOk++;
+		}
+
+	}
+	dsoOutlineFile.close();
+	qDebug() << "Loaded" << readOk << "DSO outline records successfully";
 	return true;
 }
 

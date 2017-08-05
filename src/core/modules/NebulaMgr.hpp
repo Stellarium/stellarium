@@ -73,6 +73,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setHintsProportional
 		   NOTIFY hintsProportionalChanged
 		   )
+	Q_PROPERTY(bool flagOutlinesDisplayed
+		   READ getFlagOutlines
+		   WRITE setFlagOutlines
+		   NOTIFY flagOutlinesDisplayedChanged
+		   )
 	Q_PROPERTY(bool flagSurfaceBrightnessUsage
 		   READ getFlagSurfaceBrightnessUsage
 		   WRITE setFlagSurfaceBrightnessUsage
@@ -741,6 +746,11 @@ public slots:
 	//! Get whether hints (symbols) are scaled according to nebula size.
 	bool getHintsProportional(void) const;
 
+	//! Set flag for usage outlines for big DSO instead their hints.
+	void setFlagOutlines(const bool flag);
+	//! Get flag for usage outlines for big DSO instead their hints.
+	bool getFlagOutlines(void) const;
+
 	//! Set flag for usage designations of DSO for their labels instead common names.
 	void setDesignationUsage(const bool flag);
 	//! Get flag for usage designations of DSO for their labels instead common names.
@@ -807,6 +817,7 @@ signals:
 	//! Emitted when the type filter is changed
 	void typeFiltersChanged(Nebula::TypeGroup flags);
 	void hintsProportionalChanged(bool b);
+	void flagOutlinesDisplayedChanged(bool b);
 	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
@@ -909,6 +920,8 @@ private:
 	void convertDSOCatalog(const QString& in, const QString& out, bool decimal);
 	// Load proper names for DSO
 	bool loadDSONames(const QString& filename);
+	// Load outlines for DSO
+	bool loadDSOOutlines(const QString& filename);
 
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;
