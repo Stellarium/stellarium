@@ -6,7 +6,7 @@ ftp://ftp.imcce.fr/pub/ephem/planets/vsop87
 I (Johannes Gajdosik) have just taken the data obtained from above
 (VSOP87.mer,...,VSOP87.nep) and rearranged it into this piece of software.
 
-I can neigther allow nor forbid the usage of VSOP87.
+I can neither allow nor forbid the usage of VSOP87.
 The copyright notice below covers not the work of Bretagnon P. and Francou G.
 but just my work, that is the compilation of the VSOP87 data
 into the software supplied in this file.
@@ -40,6 +40,9 @@ have only to be calculated once.
 Furthermore I used the addition formulas
   (cos,sin)(x+y) = ...
 so that for given T the functions cos and sin have only to be called 12 times.
+
+
+ATTENTION! Due to static caching this solution is not reentrant and cannot be parallelized to run in several threads.
 
 ****************************************************************/
 
