@@ -561,8 +561,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		}
 	}
 
-	if (segments>0)
-		lim -= 3.f;
+	if (segments>0 && flagUseOutlines)
+		lim -= 5.f;
 
 	if (lim>maxMagHints)
 		return;
