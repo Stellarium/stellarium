@@ -454,7 +454,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
-	if (std::min(15.f, lim)<maxMagHint)
+	if (std::min(15.f, lim)<maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
 		return -10.f;
 	else
 		return StelObject::getSelectPriority(core)-2.f;
@@ -719,6 +719,33 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	Vec3d ptd1, ptd2;
 	std::vector<Vec3f> *points;
 
+
+	float size = 6.0f;
+	float scaledSize = 0.0f;
+	if (drawHintProportional && segments==0)
+	{
+		if (majorAxisSize>0.)
+			scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		else
+			scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+	}
+
+	// Rotation looks good only for galaxies.
+	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
+	{
+		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
+		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
+		Vec3d XYZrel(XYZ);
+		XYZrel[2]*=0.99;
+		Vec3d XYrel;
+		sPainter.getProjector()->project(XYZrel, XYrel);
+		float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
+	}
+	else	// no galaxy
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
+
+	// Show outlines
 	if (segments>0 && flagUseOutlines)
 	{
 		sPainter.setBlending(true);
@@ -739,34 +766,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			}
 		}
 		sPainter.setLineSmooth(false);
-	}
-	else
-	{
-		float size = 6.0f;
-		float scaledSize = 0.0f;
-		if (drawHintProportional)
-		{
-			if (majorAxisSize>0.)
-				scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-			else
-				scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-		}
-
-		// Rotation looks good only for galaxies.
-		if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
-		{
-			// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
-			// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-			Vec3d XYZrel(XYZ);
-			XYZrel[2]*=0.99;
-			Vec3d XYrel;
-			sPainter.getProjector()->project(XYZrel, XYrel);
-			float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
-		}
-		else	// no galaxy
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
-
 	}
 }
 
