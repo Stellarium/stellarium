@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-30 17:40+0700\n"
+"POT-Creation-Date: 2017-08-04 20:42+0700\n"
 "PO-Revision-Date: 2016-12-30 15:31+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-31 05:18+0000\n"
+"X-Launchpad-Export-Date: 2017-08-05 05:18+0000\n"
 "X-Generator: Launchpad (build 18441)\n"
 "Language: is\n"
 
@@ -34,7 +34,7 @@ msgstr "sérsniðið merki"
 #: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:159
 #: src/core/modules/Constellation.cpp:292 src/core/modules/Nebula.cpp:219
 #: src/core/modules/Nebula.cpp:221 src/core/modules/Planet.cpp:376
-#: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:169
+#: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:189
 #: src/core/modules/StarWrapper.cpp:192 src/gui/AstroCalcDialog.cpp:329
 #: src/ui_configurationDialog.h:1347 plugins/Satellites/src/Satellite.cpp:281
@@ -439,7 +439,7 @@ msgid "by Bortle scale"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:227 src/core/modules/Nebula.cpp:237
-#: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:230
+#: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:62
 #: src/core/modules/StarWrapper.cpp:202 src/gui/AstroCalcDialog.cpp:1649
 #: src/gui/AstroCalcDialog.cpp:1684 plugins/Supernovae/src/Supernova.cpp:140
@@ -453,7 +453,7 @@ msgid "Opacity"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:232 src/core/modules/Planet.cpp:383
-#: src/core/modules/MinorPlanet.cpp:228 src/core/modules/Comet.cpp:176
+#: src/core/modules/MinorPlanet.cpp:242 src/core/modules/Comet.cpp:176
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:200
 #: plugins/Satellites/src/Satellite.cpp:288
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
@@ -465,8 +465,9 @@ msgstr ""
 msgid "Photometric system"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/StarWrapper.cpp:66
-#: src/core/modules/StarWrapper.cpp:210 plugins/Quasars/src/Quasar.cpp:117
+#: src/core/modules/Nebula.cpp:242 src/core/modules/MinorPlanet.cpp:262
+#: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:210
+#: plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
 msgstr ""
 
@@ -518,7 +519,7 @@ msgid "ly"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:313 src/core/modules/Nebula.cpp:348
-#: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:285
+#: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:302
 #: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:240
 #: src/gui/AstroCalcDialog.cpp:1660 src/gui/AstroCalcDialog.cpp:1695
 #: src/ui_configurationDialog.h:1362 plugins/Supernovae/src/Supernova.cpp:155
@@ -988,8 +989,8 @@ msgstr "Djúpfyrirbæri"
 msgid "Toggle DSO type filter"
 msgstr "Víxla af/á síu fyrir gerðir djúpfyrirbæra"
 
-#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:239
-#: src/core/modules/MinorPlanet.cpp:243 src/core/modules/Comet.cpp:187
+#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:253
+#: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:206 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
 msgstr ""
@@ -999,7 +1000,7 @@ msgid "Mean Opposition Magnitude"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:254
+#: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:271
 #: src/core/modules/Comet.cpp:202 src/gui/AstroCalcDialog.cpp:315
 #: src/gui/AstroCalcDialog.cpp:587 src/gui/AstroCalcDialog.cpp:811
 #: src/gui/AstroCalcDialog.cpp:847 src/gui/AstroCalcDialog.cpp:1628
@@ -1009,7 +1010,7 @@ msgid "AU"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:256
+#: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:273
 #: src/core/modules/Comet.cpp:193 src/gui/StelGuiItems.cpp:748
 #: plugins/Satellites/src/Satellite.cpp:304
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -1020,13 +1021,13 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
-#: src/core/modules/MinorPlanet.cpp:268 src/core/modules/MinorPlanet.cpp:283
+#: src/core/modules/MinorPlanet.cpp:285 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:270
+#: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
 msgstr ""
@@ -1035,21 +1036,21 @@ msgstr ""
 msgid "with rings"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:306
+#: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:323
 msgid "scaled up to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:316
+#: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:333
 msgid "Apparent diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:325
+#: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:354
 #: src/core/modules/StarWrapper.cpp:252
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:327
+#: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:356
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
 msgstr ""
@@ -1106,13 +1107,13 @@ msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:345
+#: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:374
 #: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1675
 #: src/gui/AstroCalcDialog.cpp:1710
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:346
+#: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:375
 #: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1665
 #: src/gui/AstroCalcDialog.cpp:1700
 msgid "Elongation"
@@ -1135,10 +1136,20 @@ msgstr ""
 msgid "Eclipse Factor"
 msgstr ""
 
-#: src/core/modules/MinorPlanet.cpp:214
+#: src/core/modules/MinorPlanet.cpp:228
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "Bráðabirgðamerking: %1"
+
+#. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
+#: src/core/modules/MinorPlanet.cpp:343
+msgid "Tholen spectral type"
+msgstr ""
+
+#. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
+#: src/core/modules/MinorPlanet.cpp:349
+msgid "SMASSII spectral type"
+msgstr ""
 
 #: src/core/modules/Comet.cpp:163
 msgctxt "type of comet"
@@ -3704,7 +3715,7 @@ msgstr ""
 msgid "elong."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:997 src/gui/AstroCalcDialog.cpp:2098
+#: src/gui/AstroCalcDialog.cpp:997 src/gui/AstroCalcDialog.cpp:2095
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:243
 msgid "CSV (Comma delimited)"
 msgstr "CSV (aðgreint með kommum)"
@@ -3903,29 +3914,29 @@ msgstr "Hlutur 1"
 msgid "Object 2"
 msgstr "Hlutur 2"
 
-#: src/gui/AstroCalcDialog.cpp:2100
+#: src/gui/AstroCalcDialog.cpp:2097
 msgid "Save calculated phenomena as..."
 msgstr "Vista reiknuð fyrirbæri sem..."
 
-#: src/gui/AstroCalcDialog.cpp:2139 src/gui/AstroCalcDialog.cpp:2314
-#: src/gui/AstroCalcDialog.cpp:2472
+#: src/gui/AstroCalcDialog.cpp:2136 src/gui/AstroCalcDialog.cpp:2312
+#: src/gui/AstroCalcDialog.cpp:2471
 msgid "Conjunction"
 msgstr "Samstaða"
 
-#: src/gui/AstroCalcDialog.cpp:2146
+#: src/gui/AstroCalcDialog.cpp:2143
 msgid "Opposition"
 msgstr "Gagnstaða"
 
-#: src/gui/AstroCalcDialog.cpp:2154
+#: src/gui/AstroCalcDialog.cpp:2151
 msgid "Transit"
 msgstr "Þverganga"
 
-#: src/gui/AstroCalcDialog.cpp:2156 src/gui/AstroCalcDialog.cpp:2319
-#: src/gui/AstroCalcDialog.cpp:2477
+#: src/gui/AstroCalcDialog.cpp:2153 src/gui/AstroCalcDialog.cpp:2317
+#: src/gui/AstroCalcDialog.cpp:2476
 msgid "Occultation"
 msgstr "Stjörnumyrkvi"
 
-#: src/gui/AstroCalcDialog.cpp:2160
+#: src/gui/AstroCalcDialog.cpp:2157
 msgid "Eclipse"
 msgstr "Myrkvi"
 
