@@ -327,6 +327,9 @@ private:
 
 	static bool flagUseArcsecSurfaceBrightness;
 	static bool flagUseShortNotationSurfaceBrightness;
+	static bool flagUseOutlines;
+
+	std::vector<std::vector<Vec3f> *> outlineSegments;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)

@@ -269,6 +269,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->nebulasHintsHorizontalSlider, "NebulaMgr.hintsAmount",0.0,10.0);
 	connectBoolProperty(ui->checkBoxDesignationsOnlyUsage, "NebulaMgr.flagDesignationLabels");
 	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
+	connectBoolProperty(ui->checkBoxOutlines, "NebulaMgr.flagOutlinesDisplayed");
 	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
 	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"StelSkyDrawer.flagNebulaMagnitudeLimit");
 	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customNebulaMagLimit");
