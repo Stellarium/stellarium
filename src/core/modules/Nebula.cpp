@@ -92,6 +92,7 @@ Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
+bool Nebula::flagUseOutlines = false;
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -132,6 +133,7 @@ Nebula::Nebula()
 	, parallaxErr(0.)
 	, nType()
 {
+	outlineSegments.clear();
 }
 
 Nebula::~Nebula()
@@ -520,6 +522,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
 
+	size_t segments = outlineSegments.size();
+
 	Vec3d win;
 	// Check visibility of DSO hints
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
@@ -556,6 +560,9 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			lim=9.0f;
 		}
 	}
+
+	if (segments>0)
+		lim -= 3.f;
 
 	if (lim>maxMagHints)
 		return;
@@ -707,31 +714,60 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		col = Vec3f(0.f,0.f,0.f);
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
-	float size = 6.0f;
-	float scaledSize = 0.0f;
-	if (drawHintProportional)
-	{
-		if (majorAxisSize>0.)
-			scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-		else
-			scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	}
+	unsigned int i, j;
+	Vec3f pt1, pt2;
+	Vec3d ptd1, ptd2;
+	std::vector<Vec3f> *points;
 
-	// Rotation looks good only for galaxies.
-	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
+	if (segments>0 && flagUseOutlines)
 	{
-		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
-		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-		Vec3d XYZrel(XYZ);
-		XYZrel[2]*=0.99;
-		Vec3d XYrel;
-		sPainter.getProjector()->project(XYZrel, XYrel);
-		float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
-	}
-	else	// no galaxy
-		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
+		sPainter.setBlending(true);
+		sPainter.setLineSmooth(true);
+		const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 
+		for (i=0;i<segments;i++)
+		{
+			points = outlineSegments[i];
+
+			for (j=0;j<points->size()-1;j++)
+			{
+				pt1 = points->at(j);
+				pt2 = points->at(j+1);
+				ptd1.set(pt1[0], pt1[1], pt1[2]);
+				ptd2.set(pt2[0], pt2[1], pt2[2]);
+				sPainter.drawGreatCircleArc(ptd1, ptd2, &viewportHalfspace);
+			}
+		}
+		sPainter.setLineSmooth(false);
+	}
+	else
+	{
+		float size = 6.0f;
+		float scaledSize = 0.0f;
+		if (drawHintProportional)
+		{
+			if (majorAxisSize>0.)
+				scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+			else
+				scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		}
+
+		// Rotation looks good only for galaxies.
+		if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
+		{
+			// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
+			// Find an on-screen direction vector from a point offset somewhat in declination from our object.
+			Vec3d XYZrel(XYZ);
+			XYZrel[2]*=0.99;
+			Vec3d XYrel;
+			sPainter.getProjector()->project(XYZrel, XYrel);
+			float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
+		}
+		else	// no galaxy
+			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
+
+	}
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
@@ -1413,4 +1449,3 @@ QString Nebula::getTypeString(void) const
 	}
 	return wsType;
 }
-

@@ -1692,7 +1692,7 @@
                <property name="spacing">
                 <number>6</number>
                </property>
-               <item row="4" column="0">
+               <item row="5" column="0">
                 <widget class="QCheckBox" name="checkBoxProportionalHints">
                  <property name="toolTip">
                   <string>Use hints proportional to angular size of deep-sky objects</string>
@@ -1702,7 +1702,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="5" column="0">
+               <item row="6" column="0">
                 <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
                  <property name="toolTip">
                   <string>Use surface brightness of deep-sky objects for scale of the visibility of their markers and labels.</string>
@@ -1712,7 +1712,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="6" column="0">
+               <item row="7" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                  <item>
                   <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
@@ -1790,10 +1790,17 @@
                  </item>
                 </layout>
                </item>
-               <item row="7" column="0">
+               <item row="8" column="0">
                 <widget class="QPushButton" name="pushButtonConfigureDSOColors">
                  <property name="text">
                   <string>Configure colors of markers</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QCheckBox" name="checkBoxOutlines">
+                 <property name="text">
+                  <string>Use outlines instead hints for big DSO</string>
                  </property>
                 </widget>
                </item>

@@ -732,8 +732,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/nebula_labels_amount",		propMgr->getStelPropertyValue("NebulaMgr.labelsAmount").toDouble());
 	conf->setValue("astro/flag_nebula_hints_proportional",	propMgr->getStelPropertyValue("NebulaMgr.hintsProportional").toBool());
 	conf->setValue("astro/flag_surface_brightness_usage",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessUsage").toBool());
-	conf->setValue("astro/flag_surface_brightness_arcsec",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessArcsecUsage").toBool());
+	conf->setValue("gui/flag_surface_brightness_arcsec",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessArcsecUsage").toBool());
+	conf->setValue("gui/flag_surface_brightness_short",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessShortNotationUsage").toBool());
 	conf->setValue("gui/flag_dso_designation_usage",	propMgr->getStelPropertyValue("NebulaMgr.flagDesignationLabels").toBool());
+	conf->setValue("gui/flag_dso_outlines_usage",		propMgr->getStelPropertyValue("NebulaMgr.flagOutlinesDisplayed").toBool());
 	conf->setValue("astro/flag_nebula_name",		propMgr->getStelPropertyValue("NebulaMgr.flagHintDisplayed").toBool());
 	conf->setValue("astro/flag_use_type_filter",		propMgr->getStelPropertyValue("NebulaMgr.flagTypeFiltersUsage").toBool());
 	conf->setValue("astro/flag_nebula_display_no_texture",	!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
