@@ -7,7 +7,7 @@ ftp://ftp.imcce.fr/pub/ephem/moon/elp82b
 I (Johannes Gajdosik) have just taken the Fortran code and data
 obtained from above and used it to create this piece of software.
 
-I can neigther allow nor forbid the usage of ELP2000-82B.
+I can neither allow nor forbid the usage of ELP2000-82B.
 The copyright notice below covers not the works of
 Chapront-Touze M. and Chapront J., but just my work,
 that is the compilation and rearrangement of
