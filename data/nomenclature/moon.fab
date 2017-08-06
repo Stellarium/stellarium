@@ -1,0 +1,19 @@
+#
+# Nomenclature of the Moon
+#
+# One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
+# Format:
+#	ID of surface feature			: unique string
+#	translatable name of surface feature	: string
+#	type of surface feature			: string
+#	latitude of surface feature		: float (decimal degrees)
+#	longitude of surface feature		: float (decimal degrees)
+#	size of surface feature			: float (kilometers)
+#
+LAC-116	_("Mare Australe")	Mare	-47.77	91.99	996.84
+LAC-76	_("Mare Cognitum")	Mare	-10.53	-22.31	350.01
+LAC-60	_("Agrippa")	Crater	4.1	10.47	43.75
+LAC-95	_("Airy")	Crater	-181.4	5.61	38.9
+LAC-132	_("Abbe")	Crater	-57.58	174.77	63.98
+LAC-62	_("Abbot")	Crater	5.56	54.74	10.4
+LAC-121	_("Apollo")	Crater	-35.69	-151.48	524.23
