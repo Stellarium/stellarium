@@ -36,6 +36,16 @@ typedef void (*posFuncType)(double, double*, void*);
 
 typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
 
+typedef struct
+{
+	QString id;
+	QString name;
+	QString type;
+	float latitude;
+	float longitude;
+	float size;
+} StelPlanetNomenclature;
+
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 360
@@ -320,6 +330,8 @@ public:
 	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
 	bool getFlagTranslatedName(void) { return flagTranslatedName; }
 
+	void setNomenclature(QList<StelPlanetNomenclature> data);
+
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///// Orbit related code
@@ -481,8 +493,8 @@ protected:
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
     
-    // Draw the Nomenclature of each planet
-    void drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont);
+	// Draw the Nomenclature of each planet
+	void drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont);
 
 	PlanetOBJModel* loadObjModel() const;
 
@@ -540,6 +552,8 @@ protected:
 	bool atmosphere;                 // Does the planet have an atmosphere?
 	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
+
+	QList<StelPlanetNomenclature> nomenclature;
 
 	static ApparentMagnitudeAlgorithm vMagAlgorithm;
 
