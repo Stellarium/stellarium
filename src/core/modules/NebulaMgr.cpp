@@ -1244,6 +1244,8 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 	// Read the names of the deep-sky objects
 	QString name, record, ref, cdes;
+	QStringList nodata;
+	nodata.clear();
 	int totalRecords=0;
 	int lineNumber=0;
 	int readOk=0;
@@ -1343,7 +1345,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 		}
 
-		if (e)
+		if (!e.isNull())
 		{
 			if (transRx.exactMatch(name))
 			{
@@ -1354,15 +1356,18 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				else if (currName!=propName)
 					e->addNameAlias(propName);
 			}
-
-
 			readOk++;
 		}
-		//else
-		//	qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(filename);
+		else
+			nodata.append(QString("%1 %2").arg(ref.trimmed(), cdes.trimmed()));
 	}
 	dsoNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
+
+	int err = nodata.size();
+	if (err>0)
+		qDebug() << "WARNING - No position data for" << err << "objects:" << nodata.join(", ");
+
 	return true;
 }
 
