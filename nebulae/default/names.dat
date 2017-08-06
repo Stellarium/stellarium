@@ -146,7 +146,8 @@ NGC  2237            _("Rosette Nebula") # WK
 NGC  2237            _("Rosette A") # SIMBAD
 NGC  2237            _("NGC 2244 Satellite Cluster") # SIMBAD
 NGC  2238            _("Rosette Nebula") # WK
-NGC  2239            _("Rosette Nebula") # WK
+# NGC 2239 is an obsolete designation for NGC 2244!
+NGC  2244            _("Rosette Nebula") # WK
 NGC  2246            _("Rosette Nebula") # WK
 NGC  2246            _("Rosette B") # SIMBAD
 NGC  2261            _("Hubble's Variable Nebula") # WK, SIMBAD
@@ -339,9 +340,10 @@ NGC  5866            _("Fool's Gold Galaxy") # B500
 NGC  5892            _("Fath 703") # NED
 NGC  5897            _("Ghost Globular Cluster") # B500
 NGC  5904            _("Rose Cluster") # B500
-NGC  5907            _("Splinter Galaxy")
-NGC  5907            _("Cat Scratch Galaxy") # B500
-NGC  5907            _("Knife Edge Galaxy") # B500
+# NGC 5907 and NGC 5906 is same galaxy. Only NGC 5906 is in our catalog.
+NGC  5906            _("Splinter Galaxy")
+NGC  5906            _("Cat Scratch Galaxy") # B500
+NGC  5906            _("Knife Edge Galaxy") # B500
 NGC  6027            _("Seyfert's Sextet") # NED
 NGC  6027            _("Serpens Sextet")
 NGC  6087            _("S Nor Cluster") # SIMBAD
@@ -459,7 +461,6 @@ NGC  7027            _("Magic Carpet Nebula") # B500
 NGC  7027            _("Green Rectangle Nebula") # B500
 NGC  7078            _("Pegasus Cluster") # B500
 NGC  7099            _("Jellyfish Cluster") # B500
-NGC  7114            _("Schmidt's Nova Cygni") # SIMBAD
 NGC  7129            _("Small Cluster Nebula")
 NGC  7129            _("NGC 7129 IR Cluster") # SIMBAD
 NGC  7209            _("Star Lizard Cluster") # B500
