@@ -4,6 +4,9 @@ INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini base_lo
 INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCHING 
 	PATTERN "planet*" 
 	)
+INSTALL(DIRECTORY nomenclature/ DESTINATION share/${PACKAGE}/data/nomenclature FILES_MATCHING 
+	PATTERN "*.fab" 
+	)
 
 ########### splash target ##############
 ADD_CUSTOM_TARGET(splash ALL)
