@@ -266,6 +266,8 @@ Planet::Planet(const QString& englishName,
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
+
+	nomenclature.clear();
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -3051,6 +3053,14 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 {
 	// sync default value with ViewDialog and SolarSystem!
 	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::Expl_Sup_2013);
+}
+
+void Planet::setNomenclature(QList<StelPlanetNomenclature> data)
+{
+	nomenclature = data;
+	qDebug() << "Set nomenclature for" << getEnglishName();
+	foreach (StelPlanetNomenclature n, nomenclature)
+		qDebug() << "ID:" << n.id << " Name:" << n.name << " Type:" << n.type << " Latitude:" << QString::number(n.latitude, 'f', 5) << " Longitude:" << QString::number(n.longitude, 'f', 5) << " Size:" << QString::number(n.size, 'f', 2);
 }
 
 void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont)
