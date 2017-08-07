@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-05 22:35+0700\n"
-"PO-Revision-Date: 2017-08-05 17:26+0000\n"
+"PO-Revision-Date: 2017-08-06 16:50+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-06 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-08-07 05:12+0000\n"
 "X-Generator: Launchpad (build 18441)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -454,7 +454,7 @@ msgstr "不透明度"
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "extincted to"
-msgstr ""
+msgstr "消退"
 
 #: src/core/modules/Nebula.cpp:239 src/core/modules/StarWrapper.cpp:228
 msgid "Photometric system"
@@ -491,7 +491,7 @@ msgstr "角秒"
 
 #: src/core/modules/Nebula.cpp:276
 msgid "Contrast index"
-msgstr ""
+msgstr "反差指数"
 
 #: src/core/modules/Nebula.cpp:285 src/core/modules/Nebula.cpp:288
 #: src/ui_configurationDialog.h:1356
@@ -500,7 +500,7 @@ msgstr "大小"
 
 #: src/core/modules/Nebula.cpp:290
 msgid "Orientation angle"
-msgstr ""
+msgstr "定向角"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
@@ -9508,7 +9508,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "太阳反射角度"
 
 #: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
@@ -9520,7 +9520,7 @@ msgstr "组群"
 
 #: plugins/Satellites/src/Satellite.cpp:356
 msgid "Operational status"
-msgstr ""
+msgstr "操作状态"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
@@ -9592,7 +9592,7 @@ msgstr "损坏"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
 msgid "Save predicted Iridium flares as..."
-msgstr ""
+msgstr "保存铱耀斑预测到..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
 msgid "Stellarium Satellites Plugin"
@@ -10083,7 +10083,7 @@ msgstr "预测铱星闪光"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "保存预测..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -12265,7 +12265,7 @@ msgstr "有Glitch现象的脉冲星"
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 msgid "Barycentric period"
-msgstr ""
+msgstr "重心周期"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:185
@@ -12275,11 +12275,11 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "重心周期的时间导数"
 
 #: plugins/Pulsars/src/Pulsar.cpp:194
 msgid "Dispersion measure"
-msgstr ""
+msgstr "色散量"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
@@ -12295,7 +12295,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:206
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "降低能量损失率"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:209
@@ -12305,7 +12305,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "脉冲星二进制周期"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:218
@@ -12319,7 +12319,7 @@ msgstr "离心率"
 
 #: plugins/Pulsars/src/Pulsar.cpp:227
 msgid "Annual parallax"
-msgstr ""
+msgstr "年视差"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:230
@@ -12334,7 +12334,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:249
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "轮廓宽度在峰值的50％"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:252
