@@ -624,7 +624,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 		<< "reply->isFinished():" << reply->isFinished();
 	*/
 
-	if(reply->error())
+	if(reply->error() || reply->bytesAvailable()==0)
 	{
 		qWarning() << "Download error: While downloading"
 		           << reply->url().toString()
@@ -810,7 +810,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	//Hide the abort button - a reply has been received
 	ui->pushButtonAbortQuery->setVisible(false);
 
-	if (reply->error())
+	if (reply->error() || reply->bytesAvailable()==0)
 	{
 		qWarning() << "Download error: While trying to access"
 		           << reply->url().toString()

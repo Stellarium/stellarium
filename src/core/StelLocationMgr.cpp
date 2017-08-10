@@ -761,7 +761,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
 	if (!networkReply)
 	    return;
-	if (networkReply->error() == QNetworkReply::NoError) {
+	if (networkReply->error() == QNetworkReply::NoError && networkReply->bytesAvailable()>0) {
 		//success
 		QVariantMap locMap = StelJsonParser::parse(networkReply->readAll()).toMap();
 		QString ipRegion = locMap.value("region_name").toString();

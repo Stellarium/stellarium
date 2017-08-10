@@ -643,11 +643,7 @@ void Pulsars::updateJSON(void)
 void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "[Pulsars] FAILED to download" << reply->url() << " Error: " << reply->errorString();
-	}
-	else
+	if (reply->error() == QNetworkReply::NoError && reply->bytesAvailable()>0)
 	{
 		// download completed successfully.
 		QString jsonFilePath = StelFileMgr::findFile("modules/Pulsars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/pulsars.json";
@@ -666,6 +662,8 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 			jsonFile.close();
 		}
 	}
+	else
+		qWarning() << "[Pulsars] FAILED to download" << reply->url() << " Error: " << reply->errorString();
 
 	if (progressBar)
 	{

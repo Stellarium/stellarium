@@ -1254,13 +1254,7 @@ void Satellites::updateFromOnlineSources()
 void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "[Satellites] FAILED to download"
-		           << reply->url().toString(QUrl::RemoveUserInfo)
-		           << "Error:" << reply->errorString();
-	}
-	else
+	if (reply->error() == QNetworkReply::NoError && reply->bytesAvailable()>0)
 	{
 		// download completed successfully.
 		QString name = QString("tle%1.txt").arg(numberDownloadsComplete);
@@ -1330,6 +1324,9 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			           << tmpFile->errorString();
 		}
 	}
+	else
+		qWarning() << "[Satellites] FAILED to download" << reply->url().toString(QUrl::RemoveUserInfo) << "Error:" << reply->errorString();
+
 	numberDownloadsComplete++;
 	if (progressBar)
 		progressBar->setValue(numberDownloadsComplete);
