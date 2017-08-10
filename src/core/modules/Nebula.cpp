@@ -420,11 +420,8 @@ QString Nebula::getI18nAliases() const
 
 float Nebula::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
-	float m = vMag;
-	if (m>90.f)
-		m = bMag;
-	return m;
+	Q_UNUSED(core);	
+	return vMag;
 }
 
 double Nebula::getAngularSize(const StelCore *) const
@@ -489,7 +486,9 @@ float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 	float mag = getVMagnitude(core);
 	float sq = 3600.f; // arcmin^2
 	if (arcsec)
-		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2	
+		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
+	if (bMag < 90.f && mag > 90.f)
+		mag = bMag;
 	if (mag<99.f && majorAxisSize>0 && nType!=NebDn)
 		return mag + 2.5*log10(getSurfaceArea()*sq);
 	else
