@@ -572,8 +572,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		}
 	}
 
-	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
-
 	Vec3f color=circleColor;
 	switch (nType)
 	{
@@ -713,6 +711,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			Nebula::texCircle->bind();
 	}
 
+	float lum = 1.f;
 	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
 	if (!objectInDisplayedType())
 		col = Vec3f(0.f,0.f,0.f);
@@ -749,7 +748,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	if (lim>maxMagHints)
 		return;
 
-	float size = 6.0f;
+	float size = 5.0f;
 	float scaledSize = 0.0f;
 	if (drawHintProportional && segments==0)
 	{
