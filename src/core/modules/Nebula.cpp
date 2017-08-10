@@ -441,7 +441,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 
 	float lim, mag;
 	lim = mag = getVMagnitude(core);
-	float mLim = 15.7f;
+	float mLim = 15.0f;
 
 	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
 		return StelObject::getSelectPriority(core)+mLim;
@@ -540,7 +540,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		return;
 
 	float lim = qMin(vMag, bMag);
-	float mLim = 15.7f;
+	float mLim = 15.0f;
 
 	if (surfaceBrightnessUsage)
 	{
