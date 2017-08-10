@@ -768,11 +768,7 @@ void Exoplanets::updateJSON(void)
 void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "[Exoplanets] FAILED to download" << reply->url() << " Error: " << reply->errorString();
-	}
-	else
+	if (reply->error() == QNetworkReply::NoError && reply->bytesAvailable()>0)
 	{
 		// download completed successfully.
 		try
@@ -794,6 +790,9 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 		}
 
 	}
+	else
+		qWarning() << "[Exoplanets] FAILED to download" << reply->url() << " Error: " << reply->errorString();
+
 
 	if (progressBar)
 	{
