@@ -748,7 +748,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	if (lim>maxMagHints)
 		return;
 
-	float size = 5.0f;
+	float size = 6.0f;
 	float scaledSize = 0.0f;
 	if (drawHintProportional && segments==0)
 	{
