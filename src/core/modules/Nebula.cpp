@@ -421,7 +421,10 @@ QString Nebula::getI18nAliases() const
 float Nebula::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
-	return vMag;
+	float m = vMag;
+	if (m>90.f)
+		m = bMag;
+	return m;
 }
 
 double Nebula::getAngularSize(const StelCore *) const
@@ -439,22 +442,32 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	if (!nebMgr->getFlagHints())
 		return StelObject::getSelectPriority(core)+3.f;
 
-	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
-		return StelObject::getSelectPriority(core)+15.f;
-	
-	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
-	// make very easy to select if labeled
 	float lim, mag;
 	lim = mag = getVMagnitude(core);
+	float mLim = 15.7f;
+
+	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
+		return StelObject::getSelectPriority(core)+mLim;
+
+	const StelSkyDrawer* drawer = core->getSkyDrawer();
+
+	if (drawer->getFlagNebulaMagnitudeLimit() && (mag>drawer->getCustomNebulaMagnitudeLimit()))
+		return StelObject::getSelectPriority(core)+mLim;
+	
+	const float maxMagHint = nebMgr->computeMaxMagHint(drawer);
+	// make very easy to select if labeled	
 	if (surfaceBrightnessUsage)
+	{
 		lim = mag = getSurfaceBrightness(core);
+		mLim += 1.f;
+	}
 
 	if (nType==NebDn)
-		lim=15.0f - mag - 2.0f*qMin(1.5f, majorAxisSize); // Note that "mag" field is used for opacity in this catalog!
+		lim=mLim - mag - 2.0f*qMin(1.5f, majorAxisSize); // Note that "mag" field is used for opacity in this catalog!
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
-	if (std::min(15.f, lim)<maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
+	if (std::min(mLim, lim)<maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
 		return -10.f;
 	else
 		return StelObject::getSelectPriority(core)-2.f;
@@ -476,9 +489,7 @@ float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 	float mag = getVMagnitude(core);
 	float sq = 3600.f; // arcmin^2
 	if (arcsec)
-		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
-	if (bMag < 50.f && mag > 50.f)
-		mag = bMag;
+		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2	
 	if (mag<99.f && majorAxisSize>0 && nType!=NebDn)
 		return mag + 2.5*log10(getSurfaceArea()*sq);
 	else
@@ -530,16 +541,17 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		return;
 
 	float lim = qMin(vMag, bMag);
+	float mLim = 15.7f;
 
 	if (surfaceBrightnessUsage)
 	{
 		lim = getSurfaceBrightness(core) - 3.f;
-		if (lim > 50) lim = 16.f;
+		if (lim > 90) lim = mLim + 1.f;
 	}
 	else
 	{
 		float mag = getVMagnitude(core);
-		if (lim > 50) lim = 15.f;
+		if (lim > 90) lim = mLim;
 
 		// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
 		if (nType==NebDn)
@@ -548,8 +560,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			// 9-(opac-5)-2*(angularSize-0.5)
 			// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
 			// The qMin() maximized the visibility gain for large objects.
-			if (majorAxisSize>0 && mag<50)
-				lim = 15.0f - mag - 2.0f*qMin(majorAxisSize, 1.5f);
+			if (majorAxisSize>0 && mag<90)
+				lim = mLim - mag - 2.0f*qMin(majorAxisSize, 1.5f);
 			else if (B_nb>0)
 				lim = 9.0f;
 			else

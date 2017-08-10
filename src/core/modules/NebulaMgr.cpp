@@ -140,7 +140,7 @@ NebulaMgr::NebulaMgr(void)
 	, hintsAmount(0)
 	, labelsAmount(0)
 	, flagConverter(false)
-	, flagDecimalCoordinates(true)	
+	, flagDecimalCoordinates(true)
 {
 	setObjectName("NebulaMgr");
 }
@@ -394,9 +394,9 @@ void NebulaMgr::init()
 	loadNebulaSet("default");
 
 	updateI18n();
-	
+
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
@@ -417,14 +417,13 @@ struct DrawNebulaFuncObject
 	}
 	void operator()(StelRegionObject* obj)
 	{
-		if (!checkMaxMagHints)
+		if (checkMaxMagHints)
 			return;
 
 		Nebula* n = static_cast<Nebula*>(obj);
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
-		float mag = qMin(n->vMag, n->bMag);
-		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > drawer->getCustomNebulaMagnitudeLimit()))
+		if ((drawer->getFlagNebulaMagnitudeLimit()) && (qMin(n->vMag, n->bMag) > drawer->getCustomNebulaMagnitudeLimit()))
 			return;
 
 		if (!n->objectInDisplayedCatalog())
@@ -490,7 +489,7 @@ void NebulaMgr::draw(StelCore* core)
 	float maxMagHints  = computeMaxMagHint(skyDrawer);
 	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
+	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()<=0.f);
 	nebGrid.processIntersectingPointInRegions(p.data(), func);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -501,7 +500,7 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");	
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -564,7 +563,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "PGC") return searchPGC(num);
 		if (cat == "UGC") return searchUGC(num);
 		if (cat == "ARP") return searchArp(num);
-		if (cat == "VV") return searchVV(num);		
+		if (cat == "VV") return searchVV(num);
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
@@ -611,7 +610,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		if (!srcCatalogPath.isEmpty())
 			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack"), flagDecimalCoordinates);
 		else
-			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;			
+			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
 
 	}
 
@@ -1008,7 +1007,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
 				case 0:
-				case 1:				
+				case 1:
 					nType = (unsigned int)Nebula::NebGx;
 					break;
 				case 2:
@@ -1036,7 +1035,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					break;
 				case 8:
 					nType = (unsigned int)Nebula::NebCn;
-					break;				
+					break;
 				case 10:
 				case 23:
 					nType = (unsigned int)Nebula::NebHII;
@@ -1065,7 +1064,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 17:
 				case 38:
 				case 41:
-				case 42:				
+				case 42:
 					nType = (unsigned int)Nebula::NebIGx;
 					break;
 				case 18:
@@ -1271,7 +1270,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		nb = cdes.toInt();
 
-		QStringList catalogs;		
+		QStringList catalogs;
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
 			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG" << "SNRG" << "ACO";
 
@@ -2481,7 +2480,7 @@ QStringList NebulaMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
 	foreach(const NebulaP& n, dsoArray)
-	{		
+	{
 		if (!n->getEnglishName().isEmpty())
 		{
 			if (inEnglish)
@@ -2760,7 +2759,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					else if (!n->PNG_nb.isEmpty())
 						result << QString("PN G%1").arg(n->PNG_nb);
 					else if (!n->SNRG_nb.isEmpty())
-						result << QString("SNR G%1").arg(n->SNRG_nb);					
+						result << QString("SNR G%1").arg(n->SNRG_nb);
 					else if (n->PGC_nb>0)
 						result << QString("PGC %1").arg(n->PGC_nb);
 					else if (n->UGC_nb > 0)
