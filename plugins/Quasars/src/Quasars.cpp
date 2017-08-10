@@ -641,11 +641,7 @@ void Quasars::updateJSON(void)
 void Quasars::updateDownloadComplete(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "[Quasars] FAILED to download" << reply->url() << " Error: " << reply->errorString();
-	}
-	else
+	if (reply->error() == QNetworkReply::NoError && reply->bytesAvailable()>0)
 	{
 		// download completed successfully.
 		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
@@ -664,6 +660,8 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 			jsonFile.close();
 		}
 	}
+	else
+		qWarning() << "[Quasars] FAILED to download" << reply->url() << " Error: " << reply->errorString();
 
 	if (progressBar)
 	{

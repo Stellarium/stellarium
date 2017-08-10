@@ -1299,7 +1299,7 @@ void ConfigurationDialog::downloadFinished()
 	Q_ASSERT(starCatalogDownloadReply);
 	Q_ASSERT(progressBar);
 
-	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError)
+	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError || starCatalogDownloadReply->bytesAvailable()==0)
 	{
 		starCatalogDownloadReply->deleteLater();
 		starCatalogDownloadReply = Q_NULLPTR;
