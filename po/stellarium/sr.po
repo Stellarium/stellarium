@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-05 22:35+0700\n"
+"POT-Creation-Date: 2017-08-09 12:06+0700\n"
 "PO-Revision-Date: 2017-07-24 14:19+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-06 05:25+0000\n"
-"X-Generator: Launchpad (build 18441)\n"
+"X-Launchpad-Export-Date: 2017-08-10 05:36+0000\n"
+"X-Generator: Launchpad (build 18446)\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
@@ -1406,138 +1406,146 @@ msgid "Add 1 synodic month"
 msgstr "Додај један синодички месец"
 
 #: src/core/StelCore.cpp:276
+msgid "Add 1 saros"
+msgstr ""
+
+#: src/core/StelCore.cpp:277
 msgid "Add 1 draconic month"
 msgstr "Додај један драконистички месец"
 
-#: src/core/StelCore.cpp:277
+#: src/core/StelCore.cpp:278
 msgid "Add 1 draconic year"
 msgstr "Додај једну драконистичку годину"
 
-#: src/core/StelCore.cpp:278
+#: src/core/StelCore.cpp:279
 msgid "Add 1 anomalistic month"
 msgstr "Додај један аномалистички месец"
 
-#: src/core/StelCore.cpp:279
+#: src/core/StelCore.cpp:280
 msgid "Add 1 anomalistic year"
 msgstr "Додај једну аномалистичку годину"
 
-#: src/core/StelCore.cpp:280
+#: src/core/StelCore.cpp:281
 msgid "Add 100 anomalistic years"
 msgstr "Додај 100 аномалистичких година"
 
-#: src/core/StelCore.cpp:281
+#: src/core/StelCore.cpp:282
 msgid "Add 1 mean tropical month"
 msgstr "Додај један средњи тропски месец"
 
-#: src/core/StelCore.cpp:282
+#: src/core/StelCore.cpp:283
 msgid "Add 1 mean tropical year"
 msgstr "Додај средњу тропску годину"
 
-#: src/core/StelCore.cpp:283
+#: src/core/StelCore.cpp:284
 msgid "Add 100 mean tropical years"
 msgstr "Додај 100 средњих тропских година"
 
-#: src/core/StelCore.cpp:284
+#: src/core/StelCore.cpp:285
 msgid "Add 1 tropical year"
 msgstr ""
 
-#: src/core/StelCore.cpp:285
+#: src/core/StelCore.cpp:286
 msgid "Add 1 Julian year"
 msgstr "Додај једну јулијанску годину"
 
-#: src/core/StelCore.cpp:286
+#: src/core/StelCore.cpp:287
 msgid "Add 1 Julian century"
 msgstr "Додај један јулијански век"
 
-#: src/core/StelCore.cpp:287
+#: src/core/StelCore.cpp:288
 msgid "Add 1 Gaussian year"
 msgstr "Додај једну Гаусијанску годину"
 
-#: src/core/StelCore.cpp:288
+#: src/core/StelCore.cpp:289
 msgid "Subtract 1 sidereal day"
 msgstr "Одузми један звездани дан"
 
-#: src/core/StelCore.cpp:289
+#: src/core/StelCore.cpp:290
 msgid "Subtract 1 sidereal year"
 msgstr "Одузми једну звездану годину"
 
-#: src/core/StelCore.cpp:290
+#: src/core/StelCore.cpp:291
 msgid "Subtract 100 sidereal years"
 msgstr "Одузми 100 сидеричких година"
 
-#: src/core/StelCore.cpp:291
+#: src/core/StelCore.cpp:292
 msgid "Subtract 1 synodic month"
 msgstr "Одузмите један синодички месец"
 
-#: src/core/StelCore.cpp:292
+#: src/core/StelCore.cpp:293
+msgid "Subtract 1 saros"
+msgstr ""
+
+#: src/core/StelCore.cpp:294
 msgid "Subtract 1 draconic month"
 msgstr "Одузми драконистички месец"
 
-#: src/core/StelCore.cpp:293
+#: src/core/StelCore.cpp:295
 msgid "Subtract 1 draconic year"
 msgstr "Одузми драконистичку годину"
 
-#: src/core/StelCore.cpp:294
+#: src/core/StelCore.cpp:296
 msgid "Subtract 1 anomalistic month"
 msgstr "Одузми аномалистички месец"
 
-#: src/core/StelCore.cpp:295
+#: src/core/StelCore.cpp:297
 msgid "Subtract 1 anomalistic year"
 msgstr "Одузми једну аномалистичку годину"
 
-#: src/core/StelCore.cpp:296
+#: src/core/StelCore.cpp:298
 msgid "Subtract 100 anomalistic years"
 msgstr "Одузми 100 аномалистичких година"
 
-#: src/core/StelCore.cpp:297
+#: src/core/StelCore.cpp:299
 msgid "Subtract 1 mean tropical month"
 msgstr "Одузми средњи тропски месец"
 
-#: src/core/StelCore.cpp:298
+#: src/core/StelCore.cpp:300
 msgid "Subtract 1 mean tropical year"
 msgstr "Одузми средњу тропску годину"
 
-#: src/core/StelCore.cpp:299
+#: src/core/StelCore.cpp:301
 msgid "Subtract 100 mean tropical years"
 msgstr "Одузми 100 средњих тропских година"
 
-#: src/core/StelCore.cpp:300
+#: src/core/StelCore.cpp:302
 msgid "Subtract 1 tropical year"
 msgstr ""
 
-#: src/core/StelCore.cpp:301
+#: src/core/StelCore.cpp:303
 msgid "Subtract 1 Julian year"
 msgstr "Одузми једну јулијанску годину"
 
-#: src/core/StelCore.cpp:302
+#: src/core/StelCore.cpp:304
 msgid "Subtract 1 Julian century"
 msgstr "Одузми један јулијански век"
 
-#: src/core/StelCore.cpp:303
+#: src/core/StelCore.cpp:305
 msgid "Subtract 1 Gaussian year"
 msgstr "Одузми једну Гаусијанску годину"
 
-#: src/core/StelCore.cpp:305
+#: src/core/StelCore.cpp:307
 msgid "Set home planet to selected planet"
 msgstr "Постави изабрану планету као матичну"
 
-#: src/core/StelCore.cpp:306
+#: src/core/StelCore.cpp:308
 msgid "Go to home"
 msgstr "Иди на почетак"
 
-#: src/core/StelCore.cpp:308
+#: src/core/StelCore.cpp:310
 msgid "Flip scene horizontally"
 msgstr "Преокрени призор хоризонтално"
 
-#: src/core/StelCore.cpp:309
+#: src/core/StelCore.cpp:311
 msgid "Flip scene vertically"
 msgstr "Преокрени призор вертикално"
 
-#: src/core/StelCore.cpp:2156
+#: src/core/StelCore.cpp:2170
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Исправка је онемогућена. Користити само уколико знате шта радите!"
 
-#: src/core/StelCore.cpp:2159
+#: src/core/StelCore.cpp:2173
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -1548,7 +1556,7 @@ msgstr ""
 "у свом чланку <em>Ајнштајнова теорија релативитета потврђена древним "
 "помрачењима Сунца</em> (%1). За више информација, погледајте %2овде%3."
 
-#: src/core/StelCore.cpp:2162
+#: src/core/StelCore.cpp:2176
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -1557,7 +1565,7 @@ msgstr ""
 "Ову емпиријску једначину објавио је Г. М. Клеменс у чланку <em>На систему "
 "астрономских константи</em> (%1)."
 
-#: src/core/StelCore.cpp:2165
+#: src/core/StelCore.cpp:2179
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -1570,7 +1578,7 @@ msgstr ""
 "<em>Астрономске формуле за рачунање</em> . Она је такође коришћена у  "
 "програму \"SunTracker Pro\"."
 
-#: src/core/StelCore.cpp:2169
+#: src/core/StelCore.cpp:2183
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -1580,7 +1588,7 @@ msgstr ""
 "<em>Астрономске ефемериде</em> и у <em>Канону помрачења Сунца</em> Мика и "
 "Меуса (1983.) ."
 
-#: src/core/StelCore.cpp:2173
+#: src/core/StelCore.cpp:2187
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -1591,7 +1599,7 @@ msgstr ""
 "у интервалима од 5 до 10 дана почевши од 601. пре нове ере и 1649. нове ере. "
 "Исти однос је такође узет у сизиги Голдстиновим табелама."
 
-#: src/core/StelCore.cpp:2177
+#: src/core/StelCore.cpp:2191
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -1601,7 +1609,7 @@ msgstr ""
 "Ову једначину објавили су П. М. Мулер и Ф. Р. Стивенсон у чланку <em>Убрзање "
 "Земље и месеца из раних астрономских посматрања</em> (%1)."
 
-#: src/core/StelCore.cpp:2180
+#: src/core/StelCore.cpp:2194
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -1610,7 +1618,7 @@ msgstr ""
 "Ову једначину објавио је Ф. Р. Стивенсон у чланку <em>Пре телескопска "
 "астрономска посматрања</em> (%1)."
 
-#: src/core/StelCore.cpp:2183
+#: src/core/StelCore.cpp:2197
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -1623,7 +1631,7 @@ msgstr ""
 "Полиномијалне апроксимације за корекцију делта Т  Е. В- С. В. у периоду од "
 "1800- 1975. </em> (%1) као део података које је објавио Броувер (1952)."
 
-#: src/core/StelCore.cpp:2186
+#: src/core/StelCore.cpp:2200
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -1633,7 +1641,7 @@ msgstr ""
 "програми и табеле од -4000 до +2800</em> 1986. године и у рачунарском "
 "програму за планетаријум \"RedShift\"."
 
-#: src/core/StelCore.cpp:2189
+#: src/core/StelCore.cpp:2203
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1644,12 +1652,12 @@ msgstr ""
 "<em>Дугопериодичне промене у Земљиној ротацији од 700. године пре нове ере "
 "до 1980. године нове ере</em> (%1)."
 
-#: src/core/StelCore.cpp:2192
+#: src/core/StelCore.cpp:2206
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Овај алгоритам се користи у рачунарском програму за планетаријум Водич 7."
 
-#: src/core/StelCore.cpp:2195
+#: src/core/StelCore.cpp:2209
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -1659,7 +1667,7 @@ msgstr ""
 "канон помрачења Сунца: 1986-2035</em> (1987) и у делу <em>Педесетогодишњи "
 "канон помрачења Месеца: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2198
+#: src/core/StelCore.cpp:2212
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -1668,7 +1676,7 @@ msgstr ""
 "Ову формулу извео је К.М. Борковски (%1) из анализе 31 Сунчевих помрачења "
 "евидентираних између 2137 пре нове ере и 1715 године нове ере."
 
-#: src/core/StelCore.cpp:2201
+#: src/core/StelCore.cpp:2215
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -1681,7 +1689,7 @@ msgstr ""
 "1988</em> (%1) подаци се поклапају са вредностима које су дали Стивенсон и "
 "Морисон (1984)."
 
-#: src/core/StelCore.cpp:2204
+#: src/core/StelCore.cpp:2218
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -1691,7 +1699,7 @@ msgstr ""
 "85 лунарне теорије у њиховој <em>Лунарне Табеле и Програми од 4000. пре нове "
 "ере до 8000. </em>(1991)."
 
-#: src/core/StelCore.cpp:2207
+#: src/core/StelCore.cpp:2221
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1702,7 +1710,7 @@ msgstr ""
 "<em>Дугопериодичне флуктуације у Земљиној ротацији: од 700. године пре нове "
 "ере до 1990. године нове ере</em> (%1)."
 
-#: src/core/StelCore.cpp:2210
+#: src/core/StelCore.cpp:2224
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1711,7 +1719,7 @@ msgstr ""
 "Ф. Р. Стивенсон објавио је ову формулу у својој књизи <em>Историјска "
 "помрачења и Земљина ротација</em> (%1)."
 
-#: src/core/StelCore.cpp:2213
+#: src/core/StelCore.cpp:2227
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1721,7 +1729,7 @@ msgstr ""
 "употреби.  Табеле за 1620,2000, укључујући и варијације Чапронта, Чапронт-"
 "Тузеа и Франкоа (1997) за датуме који су ван 1620,2000."
 
-#: src/core/StelCore.cpp:2216
+#: src/core/StelCore.cpp:2230
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1730,7 +1738,7 @@ msgstr ""
 "Насина ЛМП група за динамику сунчевог система користи ову формулу на "
 "интерактивној веб страници %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2219
+#: src/core/StelCore.cpp:2233
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1739,7 +1747,7 @@ msgstr ""
 "Овај полином је објављен у чланку Ј. Меуса и Л. Симонса  <em>Полиномијалне "
 "апроксимације за Делта Т, 1600-2000 нове ере</em> (%1)."
 
-#: src/core/StelCore.cpp:2222
+#: src/core/StelCore.cpp:2236
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1749,7 +1757,7 @@ msgstr ""
 "рачунару </em> (2000) даје једноставан полиномијални податак 3. реда из "
 "блиске прошлости."
 
-#: src/core/StelCore.cpp:2225
+#: src/core/StelCore.cpp:2239
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1761,7 +1769,7 @@ msgstr ""
 "табелирање </em> (2002). Засновано је на Ј. Меусовом <em> Астрономски "
 "алгоритми</em> (1991)."
 
-#: src/core/StelCore.cpp:2228
+#: src/core/StelCore.cpp:2242
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1772,7 +1780,7 @@ msgstr ""
 "<em>Историјске вредности грешака часовника на Земљи %1Т и рачунање "
 "помрачења</em> (%2) са додатком у (%3)."
 
-#: src/core/StelCore.cpp:2231
+#: src/core/StelCore.cpp:2245
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1785,7 +1793,7 @@ msgstr ""
 "корене функције. Ово је засновано на могућем Стивенсоновом периодичном опису "
 "(%2). За више информација погледај %3овде%4"
 
-#: src/core/StelCore.cpp:2234 src/core/StelCore.cpp:2237
+#: src/core/StelCore.cpp:2248 src/core/StelCore.cpp:2251
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1800,15 +1808,15 @@ msgstr ""
 "1900 до +3000 </em> (2006). Ова формула се такође користи у соларном, "
 "лунарном и планетраном ефемеридском програму \"SOLEX\"."
 
-#: src/core/StelCore.cpp:2234
+#: src/core/StelCore.cpp:2248
 msgid "Used by default."
 msgstr "Користи као подразумевано."
 
-#: src/core/StelCore.cpp:2237
+#: src/core/StelCore.cpp:2251
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:2240
+#: src/core/StelCore.cpp:2254
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1818,7 +1826,7 @@ msgstr ""
 "Ово решење Б. Бањевића, базира се на раду Стивенсона и Морисона (1984), "
 "објављено у чланку <em>Античка помрачења и датум пада Вавилона</em> (%1)."
 
-#: src/core/StelCore.cpp:2243
+#: src/core/StelCore.cpp:2257
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1830,7 +1838,7 @@ msgstr ""
 "апроксимације делтаТ</em> (%1) и  поново разматрано 2013. од стране С. "
 "Ислама."
 
-#: src/core/StelCore.cpp:2246
+#: src/core/StelCore.cpp:2260
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1841,7 +1849,7 @@ msgstr ""
 "Мариам Султана и Фахем Заиди објавили у <em> Делта Т:Полиномијална "
 "апроксимација за временски период од 1620-2013</em>(%1)."
 
-#: src/core/StelCore.cpp:2249
+#: src/core/StelCore.cpp:2263
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -1850,7 +1858,7 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2252
+#: src/core/StelCore.cpp:2266
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1859,41 +1867,41 @@ msgstr ""
 "Ово је квадратна формула за рачунање %1Т са коефицијентима које је дефинисао "
 "корисник."
 
-#: src/core/StelCore.cpp:2255 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2269 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Грешка"
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2277
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2304
+#: src/core/StelCore.cpp:2318
 msgid "with zero values outside this range"
 msgstr "са нултим вредностима ван опсега"
 
-#: src/core/StelCore.cpp:2307
+#: src/core/StelCore.cpp:2321
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "са типичном 1-секундном тачношћу и нултом вредношћу ван опсега"
 
-#: src/core/StelCore.cpp:2310
+#: src/core/StelCore.cpp:2324
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2331
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2327
+#: src/core/StelCore.cpp:2341
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Дозвољени опсег за употребу: између %1 и %2, %3 година."
 
-#: src/core/StelCore.cpp:2329
+#: src/core/StelCore.cpp:2343
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Дозвољени опсег за употребу: између %1 и %2 година."
@@ -2186,27 +2194,27 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Изабери директоријум за чување слика екрана"
 
-#: src/gui/ConfigurationDialog.cpp:944
+#: src/gui/ConfigurationDialog.cpp:945
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Почетно видно поље: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:952
+#: src/gui/ConfigurationDialog.cpp:953
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Почетни правац гледања азимут/ висине: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1014
+#: src/gui/ConfigurationDialog.cpp:1015
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 msgid "Authors"
 msgstr "Аутори"
 
-#: src/gui/ConfigurationDialog.cpp:1015 src/gui/ViewDialog.cpp:1358
+#: src/gui/ConfigurationDialog.cpp:1016 src/gui/ViewDialog.cpp:1358
 msgid "Contact"
 msgstr "Контакт"
 
-#: src/gui/ConfigurationDialog.cpp:1017 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:1018 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:514
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
@@ -2226,15 +2234,15 @@ msgstr "Контакт"
 msgid "Version"
 msgstr "Издање"
 
-#: src/gui/ConfigurationDialog.cpp:1114
+#: src/gui/ConfigurationDialog.cpp:1115
 msgid "Running script: "
 msgstr "Покренута скрипта: "
 
-#: src/gui/ConfigurationDialog.cpp:1121
+#: src/gui/ConfigurationDialog.cpp:1122
 msgid "Running script: [none]"
 msgstr "Покренута скрипта: [нема]"
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2242,16 +2250,16 @@ msgstr ""
 "Завршено преузимање нових каталога звезда!\n"
 "Поново покренути Стеларијум како би се звезде приказале."
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "All available star catalogs have been installed."
 msgstr "Сви доступни  каталози звезда су инсталирани."
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1196
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Преузми каталог %1 од %2"
 
-#: src/gui/ConfigurationDialog.cpp:1202
+#: src/gui/ConfigurationDialog.cpp:1203
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -2260,7 +2268,7 @@ msgstr ""
 "Преузимање %1...\n"
 "(Можете затворити овај прозор.)"
 
-#: src/gui/ConfigurationDialog.cpp:1209
+#: src/gui/ConfigurationDialog.cpp:1210
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2271,7 +2279,7 @@ msgstr ""
 "Број звезда: %2 милиона\n"
 "Опсег магнитуде: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1252 src/gui/ConfigurationDialog.cpp:1288
+#: src/gui/ConfigurationDialog.cpp:1253 src/gui/ConfigurationDialog.cpp:1289
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2280,11 +2288,11 @@ msgstr ""
 "Грешка при преузимању %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1341
+#: src/gui/ConfigurationDialog.cpp:1342
 msgid "Verifying file integrity..."
 msgstr "Провера целости датотеке..."
 
-#: src/gui/ConfigurationDialog.cpp:1345
+#: src/gui/ConfigurationDialog.cpp:1346
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -2293,170 +2301,170 @@ msgstr ""
 "Грешка при преузимању %1:\n"
 "Датотека није исправна."
 
-#: src/gui/ConfigurationDialog.cpp:1391 src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1392 src/gui/ConfigurationDialog.cpp:1401
 msgid "Available"
 msgstr "Доступан"
 
-#: src/gui/ConfigurationDialog.cpp:1393 src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1394 src/gui/ConfigurationDialog.cpp:1403
 msgid "Not Available"
 msgstr "Недоступан"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1469
+#: src/gui/ConfigurationDialog.cpp:1470
 msgid "Algorithm of"
 msgstr "Алгоритам за израчунавање"
 
-#: src/gui/ConfigurationDialog.cpp:1482
+#: src/gui/ConfigurationDialog.cpp:1483
 msgid "Without correction"
 msgstr "Без исправке"
 
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1484
 msgid "Schoch (1931)"
 msgstr "Скоч (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1484
+#: src/gui/ConfigurationDialog.cpp:1485
 msgid "Clemence (1948)"
 msgstr "Клеменс (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1485
+#: src/gui/ConfigurationDialog.cpp:1486
 msgid "IAU (1952)"
 msgstr "МАУ (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1487
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астрономске ефемериде (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1488
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Тукерман (1962, 1964) и Голдштајн (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1488
+#: src/gui/ConfigurationDialog.cpp:1489
 msgid "Muller & Stephenson (1975)"
 msgstr "Милер и Стивенсон"
 
-#: src/gui/ConfigurationDialog.cpp:1489
+#: src/gui/ConfigurationDialog.cpp:1490
 msgid "Stephenson (1978)"
 msgstr "Стивенсон (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1490
+#: src/gui/ConfigurationDialog.cpp:1491
 msgid "Schmadel & Zech (1979)"
 msgstr "Шмадел и Зеч (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1491
+#: src/gui/ConfigurationDialog.cpp:1492
 msgid "Schmadel & Zech (1988)"
 msgstr "Шмадел и Зеч"
 
-#: src/gui/ConfigurationDialog.cpp:1492
+#: src/gui/ConfigurationDialog.cpp:1493
 msgid "Morrison & Stephenson (1982)"
 msgstr "Морисон и Стивенсон (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1493
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "Stephenson & Morrison (1984)"
 msgstr "Стивенсон и Морисон (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1494
+#: src/gui/ConfigurationDialog.cpp:1495
 msgid "Stephenson & Houlden (1986)"
 msgstr "Стивенсон и Холден (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1495
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "Espenak (1987, 1989)"
 msgstr "Еспенк"
 
-#: src/gui/ConfigurationDialog.cpp:1496
+#: src/gui/ConfigurationDialog.cpp:1497
 msgid "Borkowski (1988)"
 msgstr "Боровски (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1497
+#: src/gui/ConfigurationDialog.cpp:1498
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Чапронт- Тузе и Чапронт (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1498
+#: src/gui/ConfigurationDialog.cpp:1499
 msgid "Stephenson & Morrison (1995)"
 msgstr "Стивенсон и Морисон (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1499
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "Stephenson (1997)"
 msgstr "Стивенсон (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1501
+#: src/gui/ConfigurationDialog.cpp:1502
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Меус (1998) (са Чапронтом, Чапронт- Тоузеом и Франком (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1502
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "JPL Horizons"
 msgstr "ЛМП Хоризонт"
 
-#: src/gui/ConfigurationDialog.cpp:1503
+#: src/gui/ConfigurationDialog.cpp:1504
 msgid "Meeus & Simons (2000)"
 msgstr "Меус и Симонс (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1504
+#: src/gui/ConfigurationDialog.cpp:1505
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Морисон и Стивенсон (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1505
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1507
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "Espenak & Meeus (2006)"
 msgstr "Еспенк и Меус (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1511
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1512
+#: src/gui/ConfigurationDialog.cpp:1513
 msgid "Reijs (2006)"
 msgstr "Реијс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1513
+#: src/gui/ConfigurationDialog.cpp:1514
 msgid "Banjevic (2006)"
 msgstr "Бањевић (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1514
+#: src/gui/ConfigurationDialog.cpp:1515
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Монтенбрук и Пфлегел (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1516
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Рајнголд и Дершовиц (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1516
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Ислам, Садик и Куреши (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1517
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Калид, Султана и Заиди (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1518
+#: src/gui/ConfigurationDialog.cpp:1519
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Стандардна једначина за %1Т"
 
-#: src/gui/ConfigurationDialog.cpp:1567 src/gui/ConfigurationDialog.cpp:1602
+#: src/gui/ConfigurationDialog.cpp:1568 src/gui/ConfigurationDialog.cpp:1603
 #: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:425
 msgid "System default"
 msgstr "Системски подразумевано"
 
-#: src/gui/ConfigurationDialog.cpp:1568
+#: src/gui/ConfigurationDialog.cpp:1569
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "гггг-мм-дд (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1569
+#: src/gui/ConfigurationDialog.cpp:1570
 msgid "dd-mm-yyyy"
 msgstr "дд-мм-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1570
+#: src/gui/ConfigurationDialog.cpp:1571
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1603
+#: src/gui/ConfigurationDialog.cpp:1604
 msgid "12-hour format"
 msgstr "12- часовни формат"
 
-#: src/gui/ConfigurationDialog.cpp:1604
+#: src/gui/ConfigurationDialog.cpp:1605
 msgid "24-hour format"
 msgstr "24 - часовни формат"
 
