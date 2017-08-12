@@ -572,6 +572,9 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		}
 	}
 
+	// tune limits for outlines
+	float oLim = lim - 3.f;
+
 	Vec3f color=circleColor;
 	switch (nType)
 	{
@@ -718,7 +721,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
 	// Show outlines
-	if (segments>0 && flagUseOutlines)
+	if (segments>0 && flagUseOutlines && oLim<=maxMagHints)
 	{
 		unsigned int i, j;
 		Vec3f pt1, pt2;
