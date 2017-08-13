@@ -601,5 +601,6 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 		"</ul>"
 	"</p>");
 	info.version = METEORSHOWERS_PLUGIN_VERSION;
+	info.license = METEORSHOWERS_PLUGIN_LICENSE;
 	return info;
 }

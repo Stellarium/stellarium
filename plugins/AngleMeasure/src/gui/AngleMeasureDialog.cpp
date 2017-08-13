@@ -87,9 +87,12 @@ void AngleMeasureDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Angle Measure Plug-in") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ANGLEMEASURE_VERSION + "</td></tr>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ANGLEMEASURE_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + ANGLEMEASURE_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Matthew Gates</td></tr>";
-	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Alexander Wolf &lt;alex.v.wolf@gmail.com&gt; <br />Georg Zotti</td></tr>";
+	html += "<tr><td rowspan=3><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov</td></tr>";
+	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Georg Zotti</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("The Angle Measure plugin is a small tool which is used to measure the angular distance between two points on the sky (and calculation of position angle between those two points).") + "</p>";

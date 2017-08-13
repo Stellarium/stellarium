@@ -450,10 +450,13 @@ void SatellitesDialog::populateAboutPage()
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td rowspan=4><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SATELLITES_PLUGIN_LICENSE + "</td></tr>";
+	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr>";
-	html += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
-	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt; (" + q_("Iridium flares") + ")</td></tr></table>";
+	html += "<tr><td rowspan=4><strong>" + q_("Contributors") + "</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt; (" + q_("Iridium flares") + ")</td></tr>";
+	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Georg Zotti</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
 

@@ -986,7 +986,7 @@ void MpcImportWindow::loadBookmarks()
 			bookmarksFile.close();
 
 			//If nothing was read, continue
-			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty() && StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_VERSION)==0)
+			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty() && StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_PLUGIN_VERSION)==0)
 				return;
 		}
 	}
@@ -1051,7 +1051,7 @@ void MpcImportWindow::saveBookmarks()
 		QFile bookmarksFile(bookmarksFilePath);
 		if (bookmarksFile.open(QFile::WriteOnly | QFile::Truncate | QFile::Text))
 		{
-			jsonRoot.insert("version", SOLARSYSTEMEDITOR_VERSION);
+			jsonRoot.insert("version", SOLARSYSTEMEDITOR_PLUGIN_VERSION);
 
 			QVariantMap minorPlanetsObject;
 			saveBookmarksGroup(bookmarks[MpcMinorPlanets], minorPlanetsObject);
