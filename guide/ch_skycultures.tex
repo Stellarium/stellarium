@@ -5,7 +5,7 @@
 
 \chapter{Adding Sky Cultures}
 \label{ch:SkyCultures}
-\chapterauthor*{Georg Zotti}
+\chapterauthor*{Georg Zotti, with additions by Alexander Wolf}
 
 Stellarium comes with a nice set of skycultures. For ethnographers or
 historians of science it may be a worthwile consideration to
@@ -80,7 +80,7 @@ be relevant.
 
 The native constellations are listed in
 \file{constellation\_names.eng.fab}. It consists of 3 simple columns:
-Abbreviation(or just a serial number), native name, and english
+Abbreviation (or just a serial number), native name, and english
 translation. The writing \texttt{\_("name")} allows automatic
 translation of the English strings to other languages. These strings
 will be used as constellation labels.
@@ -171,8 +171,6 @@ NGC 292  |_("Small Magellanic Cloud")
 
 \section{Stick Figures}
 \label{sec:skycultures:stickfigures}
-
-
 
 The modern-style stick figures are coded in \file{constellationship.fab}. Lines
 look like:
@@ -278,6 +276,30 @@ description of source and optional URL, e.g.:
 \begin{configfile}
 9|Kruger 60|https://en.wikipedia.org/wiki/Kruger_60
 \end{configfile}
+
+\section{Asterisms}
+\label{sec:skycultures:asterisms}
+
+\noindent\newFeature{v0.16.1}Sometimes there is a need to extract some part of constellation in the own figure or merge parts from different constellations in one big figure --- e.g. ``Big Dipper'' for Ursa Major or ``Summer Triangle'' for constellations Cygnus, Lyra and Aquila. Those features names as ``asterisms'' as rule. The asterismss are listed in
+\file{asterism\_names.eng.fab}. It consists of 2 simple columns:
+Abbreviation (or just a serial number) and English
+name of asterism. The writing \texttt{\_("name")} allows automatic
+translation of the English strings to other languages. These strings
+will be used as asterisms labels.
+
+The stick figures of asterisms are similar to constellation figures and coded in \file{asterismship.fab}. Lines
+look like:
+
+\begin{configfile}
+Abbr pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
+\end{configfile}
+In this file,
+\begin{description}
+\item[Abbr] is the abbreviation defined in \file{asterism\_names.eng.fab}
+\item[pairs] is the number of line pairs which follow.
+\item[pairN\_starA] Hipparcos numbers for the stars which form the
+  asterism stick figure (similar to constellations). 
+\end{description}
 
 \section{Publish Your Work}
 \label{sec:skyculture:publish}
