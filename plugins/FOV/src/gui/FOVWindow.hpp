@@ -48,7 +48,7 @@ private:
 	Ui_fovWindowForm* ui;
 	FOV* fov;
 
-	void updateAboutText();	
+	void setAboutHtml();
 	void populateFOV();
 
 private slots:

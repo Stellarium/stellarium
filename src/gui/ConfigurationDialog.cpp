@@ -1016,6 +1016,11 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
 			if (!desc.info.version.isEmpty())
 				html += "<br /><strong>" + q_("Version") + "</strong>: " + desc.info.version;
+			html += "<br /><strong>" + q_("License") + "</strong>: ";
+			if (!desc.info.license.isEmpty())
+				html += desc.info.license;
+			else
+				html += qc_("unknown", "license");
 			html += "</p></body></html>";
 			ui->pluginsInfoBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 			ui->pluginsInfoBrowser->setHtml(html);

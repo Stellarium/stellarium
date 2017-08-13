@@ -73,6 +73,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	info.version = NOVAE_PLUGIN_VERSION;
+	info.license = NOVAE_PLUGIN_LICENSE;
 	return info;
 }
 

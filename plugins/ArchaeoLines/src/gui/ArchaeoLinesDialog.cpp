@@ -246,7 +246,8 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("ArchaeoLines Plug-in") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ARCHAEOLINES_VERSION + "</td></tr>";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ARCHAEOLINES_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + ARCHAEOLINES_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Georg Zotti</td></tr>";
 	//html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td> List with br separators </td></tr>";
 	html += "</table>";

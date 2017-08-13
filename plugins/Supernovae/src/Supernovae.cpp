@@ -73,6 +73,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("This plugin allows you to see some bright historical supernovae.");
 	info.version = SUPERNOVAE_PLUGIN_VERSION;
+	info.license = SUPERNOVAE_PLUGIN_LICENSE;
 	return info;
 }
 

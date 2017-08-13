@@ -59,7 +59,8 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 	info.authors = "Georg Zotti";
 	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("A tool for archaeo-/ethnoastronomical alignment studies");
-	info.version = ARCHAEOLINES_VERSION;
+	info.version = ARCHAEOLINES_PLUGIN_VERSION;
+	info.license = ARCHAEOLINES_PLUGIN_LICENSE;
 	return info;
 }
 
