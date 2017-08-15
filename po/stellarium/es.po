@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-13 11:32+0700\n"
-"PO-Revision-Date: 2017-07-07 10:55+0000\n"
+"PO-Revision-Date: 2017-08-14 15:32+0000\n"
 "Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-14 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-08-15 05:09+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 "Language: es_ES\n"
 
@@ -410,7 +410,7 @@ msgstr "Autor"
 #: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -422,23 +422,23 @@ msgstr "Localización"
 #: src/core/modules/LandscapeMgr.cpp:823
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "hPa"
 
 #: src/core/modules/LandscapeMgr.cpp:833
 msgid "extinction coefficient"
-msgstr ""
+msgstr "coeficiente extinción"
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "Condiciones atmosfericas"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "Light pollution"
-msgstr ""
+msgstr "Polución Luminica"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "by Bortle scale"
-msgstr ""
+msgstr "escala Bortle"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
@@ -452,7 +452,7 @@ msgstr "Magnitud"
 
 #: src/core/modules/Nebula.cpp:231
 msgid "Opacity"
-msgstr ""
+msgstr "Opacidad"
 
 #: src/core/modules/Nebula.cpp:234 src/core/modules/Planet.cpp:383
 #: src/core/modules/MinorPlanet.cpp:242 src/core/modules/Comet.cpp:176
@@ -461,17 +461,17 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "extincted to"
-msgstr ""
+msgstr "extincion a"
 
 #: src/core/modules/Nebula.cpp:239 src/core/modules/StarWrapper.cpp:228
 msgid "Photometric system"
-msgstr ""
+msgstr "Systema Fotometrico"
 
 #: src/core/modules/Nebula.cpp:244 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:210
 #: plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "Indice Color (B-V)"
 
 #: src/core/modules/Nebula.cpp:249
 msgid "Surface brightness"
@@ -498,7 +498,7 @@ msgstr "arcseg"
 
 #: src/core/modules/Nebula.cpp:276
 msgid "Contrast index"
-msgstr ""
+msgstr "Indice Constraste"
 
 #: src/core/modules/Nebula.cpp:285 src/core/modules/Nebula.cpp:288
 #: src/ui_configurationDialog.h:1356
@@ -507,7 +507,7 @@ msgstr "Tamaño"
 
 #: src/core/modules/Nebula.cpp:290
 msgid "Orientation angle"
-msgstr ""
+msgstr "Angulo orientación"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
@@ -518,7 +518,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
 msgid "ly"
-msgstr ""
+msgstr "Año Luz"
 
 #: src/core/modules/Nebula.cpp:315 src/core/modules/Nebula.cpp:350
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:302
@@ -533,31 +533,31 @@ msgstr "Distancia"
 #: src/core/modules/Nebula.cpp:325 plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "distance"
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:334
 msgctxt "distance"
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:336
 msgctxt "distance"
 msgid "Mio. ly"
-msgstr ""
+msgstr "Millones de años luz"
 
 #: src/core/modules/Nebula.cpp:364 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
-msgstr ""
+msgstr "Redshift"
 
 #: src/core/modules/Nebula.cpp:375 src/core/modules/StarWrapper.cpp:249
 msgid "Parallax"
-msgstr ""
+msgstr "Paralaje"
 
 #: src/core/modules/Nebula.cpp:379
 msgid "Morphological description"
-msgstr ""
+msgstr "Descripcion morfologica"
 
 #: src/core/modules/Nebula.cpp:1085
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -806,22 +806,23 @@ msgstr "brillo no documentado"
 #: src/core/modules/Nebula.cpp:1324
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr ""
+msgstr "Remanente muestra una estructura de radio de capa"
 
 #: src/core/modules/Nebula.cpp:1327
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
+msgstr "Remanente muestra un centro lleno ('plerion') estructura radio"
 
 #: src/core/modules/Nebula.cpp:1330
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr ""
+msgstr "Remanente muestra una estructura de radio compuesta (o combinación)"
 
 #: src/core/modules/Nebula.cpp:1333
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
+"Remanente muestra una estructura de radio de capa con cierta incertidumbre"
 
 #: src/core/modules/Nebula.cpp:1336
 msgctxt "supernova remnant structure classification"
@@ -829,6 +830,8 @@ msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
+"Remanente muestra un centro lleno ('plerion') estructura de radio con cierta "
+"incertidumbre"
 
 #: src/core/modules/Nebula.cpp:1339
 msgctxt "supernova remnant structure classification"
@@ -836,6 +839,8 @@ msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
+"Remanente muestra una estructura de radio compuesta (o de combinación) con "
+"cierta incertidumbre"
 
 #: src/core/modules/Nebula.cpp:1352
 msgid "galaxy"
@@ -907,11 +912,11 @@ msgstr "resto de supernova"
 
 #: src/core/modules/Nebula.cpp:1403
 msgid "supernova candidate"
-msgstr ""
+msgstr "candidata supernova"
 
 #: src/core/modules/Nebula.cpp:1406
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "Candidato remanente supernova"
 
 #: src/core/modules/Nebula.cpp:1409
 msgid "stellar association"
@@ -966,15 +971,15 @@ msgstr "estrella"
 
 #: src/core/modules/Nebula.cpp:1445
 msgid "symbiotic star"
-msgstr ""
+msgstr "estrella symbiotica"
 
 #: src/core/modules/Nebula.cpp:1448
 msgid "emission-line star"
-msgstr ""
+msgstr "Estrella línea emisión"
 
 #: src/core/modules/Nebula.cpp:1451
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "cluster de galaxias"
 
 #: src/core/modules/Nebula.cpp:1454
 msgid "object of unknown nature"
@@ -996,11 +1001,11 @@ msgstr "Filtro alternativo ded tipo DSO"
 #: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:206 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "Magnitud absoluta"
 
 #: src/core/modules/Planet.cpp:392
 msgid "Mean Opposition Magnitude"
-msgstr ""
+msgstr "Magnitud media oposición"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:271
@@ -1010,7 +1015,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "UA"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:273
@@ -1020,7 +1025,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:324
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -1028,43 +1033,43 @@ msgstr ""
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
-msgstr ""
+msgstr "Mio km"
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
-msgstr ""
+msgstr "Distancia desde el sol"
 
 #: src/core/modules/Planet.cpp:470
 msgid "with rings"
-msgstr ""
+msgstr "con anillos"
 
 #: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:323
 msgid "scaled up to"
-msgstr ""
+msgstr "Escalado a"
 
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:333
 msgid "Apparent diameter"
-msgstr ""
+msgstr "Diametro aparente"
 
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:354
 #: src/core/modules/StarWrapper.cpp:252
 msgctxt "duration"
 msgid "days"
-msgstr ""
+msgstr "dias"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:356
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
-msgstr ""
+msgstr "Periodo Sideral"
 
 #: src/core/modules/Planet.cpp:516
 msgid "Sidereal day"
-msgstr ""
+msgstr "Dia sideral"
 
 #: src/core/modules/Planet.cpp:517
 msgid "Mean solar day"
-msgstr ""
+msgstr "Dia solar medio"
 
 #: src/core/modules/Planet.cpp:521
 msgid "The period of rotation is chaotic"
@@ -1124,11 +1129,11 @@ msgstr "Eloganción"
 
 #: src/core/modules/Planet.cpp:571
 msgid "Illuminated"
-msgstr ""
+msgstr "Iluminado"
 
 #: src/core/modules/Planet.cpp:572
 msgid "Albedo"
-msgstr ""
+msgstr "Albedo"
 
 #: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1655
 #: src/gui/AstroCalcDialog.cpp:1690
@@ -1137,7 +1142,7 @@ msgstr "Fase"
 
 #: src/core/modules/Planet.cpp:583
 msgid "Eclipse Factor"
-msgstr ""
+msgstr "Factor Eclipse"
 
 #: src/core/modules/MinorPlanet.cpp:228
 #, qt-format
@@ -1147,12 +1152,12 @@ msgstr "Designación provisional: %1"
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:343
 msgid "Tholen spectral type"
-msgstr ""
+msgstr "Tipo espectral Tholen"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:349
 msgid "SMASSII spectral type"
-msgstr ""
+msgstr "Tipo espectral SMASSII"
 
 #: src/core/modules/Comet.cpp:163
 msgctxt "type of comet"
@@ -1170,19 +1175,19 @@ msgstr "periódico"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "km/s"
 
 #: src/core/modules/Comet.cpp:247
 msgid "Speed"
-msgstr ""
+msgstr "Velocidad"
 
 #: src/core/modules/Comet.cpp:272
 msgid "Coma diameter (estimate)"
-msgstr ""
+msgstr "Diametro coma (estimación)"
 
 #: src/core/modules/Comet.cpp:273
 msgid "Gas tail length (estimate)"
-msgstr ""
+msgstr "Longitud cola gas (estimación)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1203
@@ -1247,12 +1252,12 @@ msgstr "estrella doble"
 
 #: src/core/modules/StarWrapper.cpp:228
 msgid "Magnitude range"
-msgstr ""
+msgstr "Rango magnitud"
 
 #: src/core/modules/StarWrapper.cpp:246
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Spectral Type"
-msgstr ""
+msgstr "Tipo espectral"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:343
@@ -1261,19 +1266,19 @@ msgstr "Período"
 
 #: src/core/modules/StarWrapper.cpp:260
 msgid "Next maximum light"
-msgstr ""
+msgstr "Luz máxima siguiente"
 
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Next minimum light"
-msgstr ""
+msgstr "Luz mínima siguiente"
 
 #: src/core/modules/StarWrapper.cpp:269
 msgid "Rising time"
-msgstr ""
+msgstr "Tiempo de subida"
 
 #: src/core/modules/StarWrapper.cpp:271
 msgid "Duration of eclipse"
-msgstr ""
+msgstr "Duración del eclipse"
 
 #: src/core/modules/StarWrapper.cpp:278
 msgid "Position angle"
@@ -1404,7 +1409,7 @@ msgstr "Añadir 1 día sidéreo"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 7 sidereal days"
-msgstr ""
+msgstr "Añadir 7 dias siderales"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 sidereal year"
@@ -1420,7 +1425,7 @@ msgstr "Añadir 1 mes sinodico"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 saros"
-msgstr ""
+msgstr "Añadir 1 saros"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 draconic month"
@@ -1476,7 +1481,7 @@ msgstr "Restar 1 día sidéreo"
 
 #: src/core/StelCore.cpp:291
 msgid "Subtract 7 sidereal days"
-msgstr ""
+msgstr "Sustraer 7 dias siderales"
 
 #: src/core/StelCore.cpp:292
 msgid "Subtract 1 sidereal year"
@@ -1492,7 +1497,7 @@ msgstr "Restar 1 mes sinódico"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "Sustraer 1 saros"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 draconic month"
@@ -2090,37 +2095,37 @@ msgstr "(aparente)"
 #: src/core/StelObject.cpp:177
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
-msgstr ""
+msgstr "RA/Dec"
 
 #. TRANSLATORS: Hour angle/Declination
 #: src/core/StelObject.cpp:266
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
-msgstr ""
+msgstr "HA/Dec"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:316
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
-msgstr ""
+msgstr "Az./Alt."
 
 #. TRANSLATORS: Galactic longitude/latitude
 #: src/core/StelObject.cpp:342
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
-msgstr ""
+msgstr "Gal. long./lat."
 
 #. TRANSLATORS: Supergalactic longitude/latitude
 #: src/core/StelObject.cpp:368
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
-msgstr ""
+msgstr "Supergal. long./lat."
 
 #. TRANSLATORS: Ecliptic longitude/latitude
 #: src/core/StelObject.cpp:386
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "Ecl. long./lat."
 
 #: src/core/StelObject.cpp:451
 msgid "Ecliptic obliquity"
@@ -2128,15 +2133,15 @@ msgstr "Oblicuidad eclíptica"
 
 #: src/core/StelObject.cpp:470
 msgid "Mean Sidereal Time"
-msgstr ""
+msgstr "Luz mínima siguiente"
 
 #: src/core/StelObject.cpp:485
 msgid "Apparent Sidereal Time"
-msgstr ""
+msgstr "Hora Aparente Sideral"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr ""
+msgstr "Constelación IAU"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -2312,7 +2317,7 @@ msgstr "Licencia"
 #: src/gui/ConfigurationDialog.cpp:1023
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "desconocido"
 
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Running script: "
@@ -2945,7 +2950,7 @@ msgstr "Velocidad simulacion"
 
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
-msgstr ""
+msgstr "distancian planetocentrica"
 
 #: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
@@ -3442,7 +3447,7 @@ msgstr "mag"
 #. TRANSLATORS: angular size, arcminutes
 #: src/gui/AstroCalcDialog.cpp:301
 msgid "A.S."
-msgstr ""
+msgstr "A. S."
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:305
@@ -3646,32 +3651,32 @@ msgstr "Nebulosas Protoplanetarias"
 #: src/gui/AstroCalcDialog.cpp:2724 src/translations.h:157
 #: src/ui_dsoColorsDialog.h:621
 msgid "Symbiotic stars"
-msgstr ""
+msgstr "Estrellas simbioticas"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:387 src/gui/AstroCalcDialog.cpp:1221
 #: src/gui/AstroCalcDialog.cpp:2725 src/translations.h:159
 #: src/ui_dsoColorsDialog.h:636
 msgid "Emission-line stars"
-msgstr ""
+msgstr "Emisión -linia estrella"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:388 src/gui/AstroCalcDialog.cpp:2726
 #: src/translations.h:135 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
-msgstr ""
+msgstr "Supernovas candidatas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:389 src/gui/AstroCalcDialog.cpp:2727
 #: src/translations.h:137 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
-msgstr ""
+msgstr "Supernova candidatos remanentes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:2729
 #: src/translations.h:161 src/ui_viewDialog.h:2304 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
-msgstr ""
+msgstr "Clusters de galaxias"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:392 src/translations.h:163
@@ -3766,17 +3771,17 @@ msgstr "Catálogo Nebulosas Planetarias Galácticas"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:428 src/translations.h:195
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
-msgstr ""
+msgstr "Catalogo Strasbourg-ESO de Nebulosas Planetarias Galácticas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:430 src/translations.h:197
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "Catálogo de restos de supernova galáctica"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:432 src/translations.h:199
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr ""
+msgstr "Catálogo de Rich Clusters de galaxias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:433 src/translations.h:201
@@ -3817,7 +3822,7 @@ msgstr "Posiciones en %1"
 
 #: src/gui/AstroCalcDialog.cpp:513
 msgid "Average angular size"
-msgstr ""
+msgstr "Promedia tamaño angular"
 
 #: src/gui/AstroCalcDialog.cpp:584 src/gui/AstroCalcDialog.cpp:844
 msgid "Planetocentric distance"
@@ -3829,7 +3834,7 @@ msgstr "Distancia topocentrica"
 
 #: src/gui/AstroCalcDialog.cpp:589
 msgid "Angular size (with rings, if any)"
-msgstr ""
+msgstr "Tamaño angular (con anillos, si los hay)"
 
 #: src/gui/AstroCalcDialog.cpp:663
 msgid "star with high proper motion"
@@ -6643,14 +6648,15 @@ msgstr "Atlas Galaxias Peculiar (Arp, 1966)"
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
+"Catálogo Strasbourg-ESO de Nebulosas Planetarias Galácticas (Acker +, 1992)"
 
 #: src/ui_viewDialog.h:2289
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr ""
+msgstr "Un catálogo de remanentes de supernova galáctica (Verde, 2014)"
 
 #: src/ui_viewDialog.h:2292
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
-msgstr ""
+msgstr "Un catálogo de Rich de galaxias (Abell +, 1989)"
 
 #: src/ui_viewDialog.h:2294
 msgid "Filter by type"
@@ -6716,7 +6722,7 @@ msgstr "Configurar los colores de los marcadores"
 
 #: src/ui_viewDialog.h:2326
 msgid "Use outlines for big deep-sky objects"
-msgstr ""
+msgstr "Utilice esquemas para objetos grandes del cielo profundo"
 
 #: src/ui_viewDialog.h:2327
 msgid "Celestial Sphere"
@@ -7402,7 +7408,7 @@ msgstr "Coordenadas horizontales"
 
 #: src/ui_configurationDialog.h:1360
 msgid "Azimuth/Altitude"
-msgstr ""
+msgstr "Azimut/Altitud"
 
 #: src/ui_configurationDialog.h:1361
 msgid "Catalog number(s)"
@@ -7475,11 +7481,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1390
 msgid "Use formatting output for coordinates"
-msgstr ""
+msgstr "Utilice salida de formato para las coordenadas"
 
 #: src/ui_configurationDialog.h:1391
 msgid "Use designations for celestial coordinate systems"
-msgstr ""
+msgstr "Utilizar designaciones para sistemas de coordenadas celestes"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Control"
@@ -8321,7 +8327,7 @@ msgstr "Nubes moleculares"
 
 #: src/ui_dsoColorsDialog.h:619
 msgid "Color of markers of symbiotic stars"
-msgstr ""
+msgstr "Color marcadores de estrellas simbióticas"
 
 #: src/ui_dsoColorsDialog.h:623
 msgid "Color of markers of molecular clouds"
@@ -8358,7 +8364,7 @@ msgstr "Quásares"
 
 #: src/ui_dsoColorsDialog.h:649
 msgid "Color of markers of emission-line stars"
-msgstr ""
+msgstr "Color de los marcadores de las estrellas de la línea de emisión"
 
 #: src/ui_dsoColorsDialog.h:654
 msgid "Color of markers of emission objects"
@@ -8402,15 +8408,15 @@ msgstr "Color de los marcadores de los objetos BL Lac"
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr ""
+msgstr "Color marcador de estrellas supernova"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr ""
+msgstr "Color de los marcadores de los candidatos remanentes de la supernova"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
-msgstr ""
+msgstr "Color marcadores  candidatos remanentes supernova"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -9010,12 +9016,12 @@ msgstr "\"/px"
 #: plugins/Oculars/src/Oculars.cpp:1874
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:523
 msgid "Ocular"
-msgstr ""
+msgstr "Ocular"
 
 #: plugins/Oculars/src/Oculars.cpp:1876
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
 msgid "Binocular"
-msgstr ""
+msgstr "Prismáticos"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1896
@@ -9280,35 +9286,35 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:919
 msgid "Rayleigh criterion"
-msgstr ""
+msgstr "Criterio Rayleigh"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 msgid "The Rayleigh resolution criterion"
-msgstr ""
+msgstr "Criterio de resolución de Rayleigh"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Dawes' limit"
-msgstr ""
+msgstr "limite Dawes'"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Dawes' resolution criterion"
-msgstr ""
+msgstr "Criterio de resolución Dawes'"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
 msgid "Abbe's limit"
-msgstr ""
+msgstr "Limite Abbe's"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:935
 msgid "Abbe’s diffraction resolution limit"
-msgstr ""
+msgstr "Límite resolución difracción Abbe"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:940
 msgid "Sparrow's limit"
-msgstr ""
+msgstr "Limite Sparrow's"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgid "Sparrow's resolution limit"
-msgstr ""
+msgstr "Limiter resolución Sparrow's"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
@@ -9498,7 +9504,7 @@ msgstr "Panel de control en pantalla"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
 msgid "Show resolution criteria"
-msgstr ""
+msgstr "Ver criterios de resolución"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1147
 msgid ""
@@ -9869,35 +9875,35 @@ msgstr "satélite artificial"
 
 #: plugins/Satellites/src/Satellite.cpp:290
 msgid "Approx. magnitude"
-msgstr ""
+msgstr "Magnitud aproximada"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
 msgid "Range"
-msgstr ""
+msgstr "Rango"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:306
 msgid "Range rate"
-msgstr ""
+msgstr "Rango"
 
 #: plugins/Satellites/src/Satellite.cpp:310
 msgid "SubPoint (Lat./Long.)"
-msgstr ""
+msgstr "SubPunto (Lat./Long.)"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:324
 msgid "TEME coordinates"
-msgstr ""
+msgstr "Coordenadas TEME"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:331
 msgid "TEME velocity"
-msgstr ""
+msgstr "Velocidad TEME"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "Ángulo de reflexión del sol"
 
 #: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
@@ -9909,7 +9915,7 @@ msgstr "Grupos"
 
 #: plugins/Satellites/src/Satellite.cpp:356
 msgid "Operational status"
-msgstr ""
+msgstr "Estado operativo"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
@@ -9931,12 +9937,12 @@ msgstr "El satélite no está visible"
 #: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:259
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #: plugins/Satellites/src/Satellite.cpp:402
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 #: plugins/Satellites/src/Satellite.cpp:703
 #: plugins/Satellites/src/Satellite.cpp:728
@@ -9981,7 +9987,7 @@ msgstr "deteriorado"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
 msgid "Save predicted Iridium flares as..."
-msgstr ""
+msgstr "Guardar previsiones Iridium llamarada como ..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
 msgid "Stellarium Satellites Plugin"
@@ -10510,7 +10516,7 @@ msgstr "Predecir destellos Iridium"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "Guardar predicciones ..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -10646,12 +10652,17 @@ msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
 msgstr ""
+"El tiempo aproximado que tarda la señal del telescopio en llegar a "
+"Stellarium. Aumentar este valor si el retículo está saltando."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
 msgstr ""
+"Velocidad de refresco del telescopio RTS2. Retraso antes de enviar la "
+"siguiente solicitud de estado del telescopio. El valor predeterminado de 0,5 "
+"segundos funciona bien con la mayoría de las configuraciones."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:221
 msgid "Add New Telescope"
@@ -11929,7 +11940,7 @@ msgstr "URL de la máquina que aloja el servidor RTS2 JSON (httpd)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:604
 msgid "Refresh every:"
-msgstr ""
+msgstr "Actualizar cada:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:608
 msgid "User interface settings"
@@ -12278,7 +12289,7 @@ msgstr "Selecciona marcador..."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "Select a text file"
-msgstr ""
+msgstr "Seleccionar archivo texto"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
@@ -12537,11 +12548,11 @@ msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:149
 msgid "Type of supernova"
-msgstr ""
+msgstr "Tipo de supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:163
 msgid "Maximum brightness"
-msgstr ""
+msgstr "Maximo brillo"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
@@ -12952,53 +12963,53 @@ msgstr "púlsar con interferencias"
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 msgid "Barycentric period"
-msgstr ""
+msgstr "Periodo baricentrico"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:185
 msgctxt "period"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "Tiempo derivativo del periodo baricentrico"
 
 #: plugins/Pulsars/src/Pulsar.cpp:194
 msgid "Dispersion measure"
-msgstr ""
+msgstr "Medida dispersión"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
 msgctxt "distance"
 msgid "pc"
-msgstr ""
+msgstr "pc"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:199
 msgctxt "distance"
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: plugins/Pulsars/src/Pulsar.cpp:206
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "Reducir la tasa de pérdida de energía"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:209
 msgctxt "power"
 msgid "ergs/s"
-msgstr ""
+msgstr "ergs/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "Periodo binario del pulsar"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:218
 msgctxt "period"
 msgid "days"
-msgstr ""
+msgstr "dias"
 
 #: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
 msgid "Eccentricity"
@@ -13006,28 +13017,28 @@ msgstr "Excentricidad"
 
 #: plugins/Pulsars/src/Pulsar.cpp:227
 msgid "Annual parallax"
-msgstr ""
+msgstr "Paralaje anual"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:230
 msgctxt "parallax"
 msgid "mas"
-msgstr ""
+msgstr "mas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:236
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "Distancia basada en el modelo de densidad de electrones"
 
 #: plugins/Pulsars/src/Pulsar.cpp:249
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "Ancho del perfil al 50% del pico"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:252
 msgctxt "time"
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:257
@@ -13038,7 +13049,7 @@ msgstr "Tiempo promedio de densidad de flujo a"
 #: plugins/Pulsars/src/Pulsar.cpp:261
 msgctxt "spectral flux density"
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
@@ -13577,12 +13588,12 @@ msgstr "Radio"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgid "Effective temperature"
-msgstr ""
+msgstr "Temperatura efectiva"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgctxt "temperature"
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 msgid "Exoplanet"
@@ -15146,15 +15157,15 @@ msgstr "Deslizamiento de radiante (por día)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "Velocidad meteórica geocéntrica"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
-msgstr ""
+msgstr "El índice de población"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "Cuerpo padre"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
