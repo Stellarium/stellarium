@@ -3079,21 +3079,31 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
     // Take nomenclature
     StelPlanetNomenclature n;
     
-    // re.offset HOW TO USE IT?
+    // Get latitude and longitude of Moon in J2000
+    getJ2000EquatorialPos(Moon) coordMoon;
     
-    // Save radius of body somewhere
-    double radius = 1737000; // In this case, we only work with the Moon, but if there are more bodies it is necessary to use another method (file?)
+    re.offset
+    
+    // Change coordinates from planetocentric to equatorial
+    /*
+     - Distance from Earth to feature -> R
+     - Latitude of feature -> latitude
+     - Longitude of feature -> longitude
+     */
+    double R = sqrt(distEarthMoon*distEarthMoon + radius*radius);
+    double latitude = asin( (radius*sin(n.latitude) + distEarthMoon*sin(latitudeMoon))/R );
+    double longitude = atan( (radius*cos(n.latitude)*sin(n.longitude) + distEarthMoon*cos(latitudeMoon)*sin(longitudeMoon))/(radius*cos(n.latitude)*cos(n.longitude) + distEarthMoon*cos(latitudeMoon)*cos(longitudeMoon)) );
     
     // From spherical to cartesian coordinates
     // The arguments of trigonometric functions must be in radians
-    double x = radius * sin(n.longitude) * cos(90 - n.latitude);
-    double y = radius * sin(n.longitude) * sin(90 - n.latitude);
-    double z = radius * cos(n.longitude);
+    double x = radius * sin(longitude) * cos(90 - latitude);
+    double y = radius * sin(longitude) * sin(90 - latitude);
+    double z = radius * cos(longitude);
     
     // From cartesian to spherical
-    double r = sqrt(x*x + y*y + z*z);
-    double theta = acos(z/r);
-    double phi = 90 - atan(y/x);
+    R = sqrt(x*x + y*y + z*z);
+    longitude = acos(z/R);
+    latitude = 90 - atan(y/x);
     
     
     
