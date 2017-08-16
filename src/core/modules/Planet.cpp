@@ -3090,6 +3090,9 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
      - Latitude of feature -> latitude
      - Longitude of feature -> longitude
      */
+    
+    double distEarthMoon = 384.400; // km
+    
     double R = sqrt(distEarthMoon*distEarthMoon + radius*radius);
     double latitude = asin( (radius*sin(n.latitude) + distEarthMoon*sin(latitudeMoon))/R );
     double longitude = atan( (radius*cos(n.latitude)*sin(n.longitude) + distEarthMoon*cos(latitudeMoon)*sin(longitudeMoon))/(radius*cos(n.latitude)*cos(n.longitude) + distEarthMoon*cos(latitudeMoon)*cos(longitudeMoon)) );
