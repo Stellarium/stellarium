@@ -1,43 +1,69 @@
-Lib	"Libra"	_("(Tulā)")
-Ari	"Aries"	_("(Meṣa)")
-Cnc	"Cancer"	_("(Karkaṭa)")
-Cap	"Capricornus"	_("(Makara)")
-Gem	"Geminii"	_("(Mithuna)")
-Leo	"Leo"	_("(Siṃha)")
-Psc	"Pisces"	_("(Mīna)")
-Sgr	"Sagittarius"	_("(Dhanuṣ)")
-Sco	"Scorpio"	_("(Vṛścikā)")
-Tau	"Taurus"	_("(Vṛṣa)")
-Aqr	"Aquarius"	_("(Kumbha)")
-Vir	"Virgo"	_("(Kanyā)")
-Ori	"Orion"	_("Kalpauruṣa")
-Cma	"Canis Major"	_("bṛhān śvā")
-Uma	"Ursa Major"	_("Saptarṣi")
-N01	"Ashvinii"	_("[Aśvinī]")
-N02	"Bharanii"	_("[Bharaṇī]")
-N03	"Krittikaa"	_("[Kṛttikā]")
-N04	"Rohinii"	_("[Rohiṇī]")
-N05	"Mrgasiras"	_("[Mgṛaśiras]")
-N06	"Ardraa"	_("[Ārdrā]")
-N07	"Punarvasu"	_("[Punarvasū]")
-N08	"Pushya"	_("[Puṣya]")
-N09	"Ashlesha"	_("[Āśleṣa]")
-N10	"Magha"	_("[Magha]")
-N11	"Purva Phalguni"	_("[Pūrva-Phalguni]")
-N12	"Uttara Phalguni"	_("[Uttara-Phalguni]")
-N13	"Hasta"	_("[Hasta]")
-N14	"Chitraa"	_("[Citrā]")
-N15	"Svati"	_("[Svāti]")
-N16	"Vishaakhaa"	_("[Viśākha]")
-N17	"Anuradhaa"	_("[Anurādhā]")
-N18	"Jyeshthaa"	_("[Jyeṣṭhā]")
-N19	"Muula"	_("[Mūla]")
-N20	"Purva Ashaadha"	_("[Pūrva-Aṣāḍha]")
-N21	"Uttara Ashaadha"	_("[Uttara-Aṣāḍha]")
-N22	"Shravana"	_("[Śravaṇa]")
-N23	"Dhanisthaa"	_("[Śraviṣṭhā/ Dhaniṣṭhā]")
-N24	"Shatabhisha"	_("[Śatabhiṣa]")
-N25	"Purva Bhaadrapada"	_("[Pūrava- Bhādrapada]")
-N26	"Uttara Bhaadrapada"	_("[Uttara Bhādrapada]")
-N27	"Revatii"	_("[Revatī]")
-N28	"Abhijit"	_("{Abhijit}")
+# Note from the user guide at https://launchpadlibrarian.net/330148407/stellarium_user_guide-0.16.0-1.pdf:
+#
+# The native constellations are listed in constellation_names.eng.fab. It consists of 3 simple
+# columns: Abbreviation(or just a serial number), native name, and english translation. The writing
+# _("name") allows automatic translation of the English strings to other languages. These strings
+# will be used as constellation labels.
+# The first column (abbreviation) in the Western sky culture provides the canonical 3-letter
+# abbreviation for constellations as used by the International Astronomical Union. Such abbreviations
+# may not be available for the skyculture you are working with, so you must invent your own. These
+# abbreviations are used as keys in the other files, so they must be unique within your skyculture. It
+# is not necessary to have 3-letter keys.
+# The keys can be displayed on screen when labels are requested in the Starlore GUI (section
+# 4.4.5). If you want to prevent certain abbreviations from being displayed, let them start with a
+# dot. See the effect in the Western (H.A.Rey) skyculture: In Abbreviated mode, only the official
+# abbreviations are displayed. In Native mode, the second column of constellation_names.eng.fab
+# is shown. Only with setting Translated , the text translated from the text shown in the third column
+# is shown. If your skyculture is a variant of the Western skyculture, please use the canonical Latin
+# names, they have all been translated already.
+# If your skyculture is not a variant of the generally known Western skyculture, please include an
+# English translation to the name given in the native language. Else translators will not be able to
+# translate the name. See a good example in the Mongolian skyculture.
+
+# Additional notation:
+# Rāśi names are placed within ().
+# Nakṣatra names are placed within [], except for abhijit, which is placed in {}.
+
+## We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below.
+
+Lib	"(Tulā)"	_("Balance (Libra)")
+Ari	"(Meṣa)"	_("Ram (Aries)")
+Cnc	"(Karkaṭa)"	_("Crab (Cancer)")
+Cap	"(Makara)"	_("Crocodile (Capricornus)")
+Gem	"(Mithuna)"	_("Twins (Geminii)")
+Leo	"(Siṃha)"	_("Lion (Leo)")
+Psc	"(Mīna)"	_("Fish (Pisces)")
+Sgr	"(Dhanuṣ)"	_("Bow (Sagittarius)")
+Sco	"(Vṛścikā)"	_("Scorpion (Scorpio)")
+Tau	"(Vṛṣa)"	_("Bull (Taurus)")
+Aqr	"(Kumbha)"	_("Pot (Aquarius)")
+Vir	"(Kanyā)"	_("Virgin (Virgo)")
+Uma	"Saptarṣi"	_("Seven Sages (Ursa Major)")
+N01	"[Aśvinī]"	_("Ashvinii")
+N02	"[Bharaṇī]"	_("Bharanii")
+N03	"[Kṛttikā]"	_("Krittikaa")
+N04	"[Rohiṇī]"	_("Riser *(Rohinii)")
+N05	"[Mgṛaśiras]"	_("Mrgasiras")
+N06	"[Ārdrā]"	_("Wet (Aardraa)")
+N07	"[Punarvasū]"	_("Re-enricher (Punarvasu)")
+N08	"[Puṣya]"	_("Nourisher (Pushya)")
+N09	"[Āśleṣā]"	_("Unembracing (Ashlesha)")
+N10	"[Magha]"	_("Magha")
+N11	"[Pūrva-Phalguni]"	_("Earlier Phalguni (Purva Phalguni)")
+N12	"[Uttara-Phalguni]"	_("Later Phalguni (Uttara Phalguni)")
+N13	"[Hastā]"	_("Hand (Hastaa)")
+N14	"[Citrā]"	_("Chitraa")
+N15	"[Svāti]"	_("Svaati")
+N16	"[Viśākhā]"	_("Vishaakhaa")
+N17	"[Anurādhā]"	_("After vishaakhaa (Anuraadhaa)")
+N18	"[Jyeṣṭhā]"	_("Elder (Jyeshthaa)")
+N19	"[Mūla]"	_("Root (Muula)")
+N20	"[Pūrva-Aṣāḍha]"	_("Earlier AshaaDha (Purva Ashaadha)")
+N21	"[Uttara-Aṣāḍha]"	_("Later AshaaDha (Uttara Ashaadha)")
+N22	"[Śravaṇa]"	_("Ear (Shravana)")
+N23	"[Śraviṣṭhā/ Dhaniṣṭhā]"	_("Most prosperous (Dhanisthaa)")
+N24	"[Śatabhiṣā]"	_("Hundred cures (Shatabhishaa)")
+N25	"[Pūrava-Bhādrapada]"	_("Earlier Bhaadrapada")
+N26	"[Uttara-Bhādrapada]"	_("Later Bhaadrapada")
+N27	"[Revatī]"	_("Revatii")
+N28	"{Abhijit}"	_("Abhijit")
