@@ -2,6 +2,7 @@
 Welcome and thanks for contributing! For general information, please see description.en.utf8 .
 
 # Updating constellations_boundaries.dat
+Since constellations_boundaries.data does not allow comments, we place relevant comments here.
 
 ## Format
 ```
@@ -24,3 +25,4 @@ Conversion and coordinate lookup:
 The ecliptic poles are (as of epoch 1 January 2000) at:
  - (North) right ascension 18h 0m 0.0s (exact), declination +66° 33′ 38.55″ (270 66.82)
  - (South) right ascension 6h 0m 0.0s (exact), declination −66° 33′ 38.55″  (90 -66.82)
+
