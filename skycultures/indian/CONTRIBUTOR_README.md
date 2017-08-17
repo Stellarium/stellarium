@@ -15,9 +15,6 @@ N RA_1 DE_1 RA_2 DE_2 ... RA_N DE_N 2 CON1 CON2
 ```
 
 ## naksatra-junctions
-Please see yogatAra-s listed in:
-  https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-of-Calendar-Panchanga-Committee#page/n42/mode/1up
-
 Conversion and coordinate lookup:
 -  http://simbad.u-strasbg.fr/simbad/sim-id?Ident=Beta+Arietis
 -  https://ned.ipac.caltech.edu/forms/calculator.html
