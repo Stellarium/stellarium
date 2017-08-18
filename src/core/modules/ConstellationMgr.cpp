@@ -1264,18 +1264,36 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		return false;
 	}
 
-	QTextStream istr(&dataFile);
 	float DE, RA;
 	Vec3f XYZ;
 	unsigned num, numc;
 	vector<Vec3f> *points = Q_NULLPTR;
-	QString consname;
+	QString consname, record, data = "";
 	i = 0;
+
+	// Added support of comments for constellations_boundaries.dat file
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	while (!dataFile.atEnd())
+	{
+		// Read the line
+		record = QString::fromUtf8(dataFile.readLine());
+
+		// Skip comments
+		if (commentRx.exactMatch(record))
+			continue;
+
+		// Append the data
+		data.append(record);
+	}
+
+	// Read and parse the data without comments
+	QTextStream istr(&data);
 	while (!istr.atEnd())
 	{
 		num = 0;
 		istr >> num;
-		if(num == 0) continue; // empty line
+		if(num == 0)
+			continue; // empty line
 
 		points = new vector<Vec3f>;
 
