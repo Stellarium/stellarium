@@ -256,7 +256,7 @@ void AsterismMgr::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
 	drawLines(sPainter, core);
-	drawNames(sPainter);	
+	drawNames(sPainter);
 }
 
 // Draw asterisms lines
