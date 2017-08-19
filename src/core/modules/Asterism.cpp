@@ -90,14 +90,19 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				}
 
 				asterism[i]=starMgr->searchHP(HP);
+
+				if (!asterism[i])
+				{
+					qWarning() << "Error in Asterism " << abbreviation << ": can't find star HIP" << HP;
+					return false;
+				}
+
 				break;
 			}
 			case 2: // A small asterism with lines by J2000.0 coordinates
 			{
-				istr >> RA >> DE;
-				RA *= M_PI/12.;
-				DE *= M_PI/180.;
-				StelUtils::spheToRect(RA, DE, coords);
+				istr >> RA >> DE;				
+				StelUtils::spheToRect(RA*M_PI/12., DE*M_PI/180., coords);
 				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
 				StelObjectP s = stars.at(0);
 				float d = 10.f;
@@ -113,16 +118,16 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 
 				asterism[i] = s;
 
+				if (!asterism[i])
+				{
+					qWarning() << "Error in Asterism " << abbreviation << ": can't find star with coordinates" << RA << "/" << DE;
+					return false;
+				}
+
 				break;
 			}
 		}
-		if (!asterism[i])
-		{
-			qWarning() << "Error in Asterism " << abbreviation << ": can't find star HP= " << HP;
-			// TODO: why is this delete commented?
-			// delete[] asterism;
-			return false;
-		}
+
 	}
 
 	XYZname.set(0.,0.,0.);
