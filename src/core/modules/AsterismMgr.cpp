@@ -113,7 +113,7 @@ void AsterismMgr::updateSkyCulture(const QString& skyCultureDir)
 	if (lastLoadedSkyCulture == skyCultureDir)
 		return;
 
-	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/asterismship.fab");
+	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/asterism_lines.fab");
 	if (fic.isEmpty())
 	{
 		hasAsterism = false;

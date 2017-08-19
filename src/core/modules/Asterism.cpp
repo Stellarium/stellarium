@@ -53,14 +53,17 @@ Asterism::~Asterism()
 bool Asterism::read(const QString& record, StarMgr *starMgr)
 {
 	unsigned int HP;
+	double RA, DE;
+	Vec3d coords;
 
 	abbreviation.clear();
 	numberOfSegments = 0;
+	int typeOfAsterism = 1;
 
 	QString buf(record);
 	QTextStream istr(&buf, QIODevice::ReadOnly);
 	QString abb;
-	istr >> abb >> numberOfSegments;
+	istr >> abb >> typeOfAsterism >> numberOfSegments;
 	if (istr.status()!=QTextStream::Ok)
 		return false;
 
@@ -68,19 +71,50 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 	//abbreviation = abb.toUpper();
 	abbreviation=abb;
 
+	StelCore *core = StelApp::getInstance().getCore();
 	asterism = new StelObjectP[numberOfSegments*2];
 	for (unsigned int i=0;i<numberOfSegments*2;++i)
 	{
-		HP = 0;
-		istr >> HP;
-		if(HP == 0)
+		switch (typeOfAsterism)
 		{
-			// TODO: why is this delete commented?
-			// delete[] asterism;
-			return false;
-		}
+			case 1: // A big asterism with lines by HIP stars
+			{
+				HP = 0;
+				istr >> HP;
+				if(HP == 0)
+				{
+					// TODO: why is this delete commented?
+					// delete[] asterism;
+					return false;
+				}
 
-		asterism[i]=starMgr->searchHP(HP);
+				asterism[i]=starMgr->searchHP(HP);
+				break;
+			}
+			case 2: // A small asterism with lines by J2000.0 coordinates
+			{
+				istr >> RA >> DE;
+				RA *= M_PI/12.;
+				DE *= M_PI/180.;
+				StelUtils::spheToRect(RA, DE, coords);
+				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
+				StelObjectP s = stars.at(0);
+				float d = 10.f;
+				foreach (const StelObjectP &p, stars)
+				{
+					float a = coords.angle(p->getJ2000EquatorialPos(core));
+					if (a<d)
+					{
+						d = a;
+						s = p;
+					}
+				}
+
+				asterism[i] = s;
+
+				break;
+			}
+		}
 		if (!asterism[i])
 		{
 			qWarning() << "Error in Asterism " << abbreviation << ": can't find star HP= " << HP;
@@ -134,7 +168,7 @@ const Asterism* Asterism::isStarIn(const StelObject* s) const
 {
 	for(unsigned int i=0;i<numberOfSegments*2;++i)
 	{
-		if (asterism[i]->getEnglishName()==s->getEnglishName())
+		if (asterism[i]==s)
 			return this;
 	}
 	return Q_NULLPTR;
