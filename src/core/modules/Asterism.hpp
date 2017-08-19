@@ -123,6 +123,8 @@ private:
 	Vec3d XYname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
+	//! Type of asterism
+	int typeOfAsterism;
 	//! List of stars forming the segments
 	StelObjectP* asterism;
 

@@ -40,6 +40,7 @@ const QString Asterism::ASTERISM_TYPE = QStringLiteral("Asterism");
 
 Asterism::Asterism()
 	: numberOfSegments(0)
+	, typeOfAsterism(1)
 	, asterism(Q_NULLPTR)
 {
 }
@@ -58,7 +59,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 
 	abbreviation.clear();
 	numberOfSegments = 0;
-	int typeOfAsterism = 1;
+	typeOfAsterism = 1;
 
 	QString buf(record);
 	QTextStream istr(&buf, QIODevice::ReadOnly);
@@ -156,6 +157,9 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 void Asterism::drawName(StelPainter& sPainter) const
 {
 	if (!nameFader.getInterstate())
+		return;
+
+	if (typeOfAsterism==2 && sPainter.getProjector()->getFov()>60.f)
 		return;
 
 	QString name = getNameI18n();
