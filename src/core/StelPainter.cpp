@@ -2266,8 +2266,3 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	return ret;
 }
 
-void StelPainter::drawCoordinates()
-{
-    
-}
-
