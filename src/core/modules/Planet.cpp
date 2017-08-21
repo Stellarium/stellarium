@@ -3077,6 +3077,7 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
     // Get latitude and longitude of Moon in J2000
     Vec3d coord = getJ2000EquatorialPos(core);
     Vec3d srcPos;
+    Vec3d featCoord;
     
     re.offset;
     
@@ -3101,9 +3102,9 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
         
 	    // From spherical to cartesian coordinates
 	    // The arguments of trigonometric functions must be in radians?
-	    coord[0] = radius * cos(longitude) * cos(latitude);
-	    coord[1] = radius * sin(longitude) * cos(latitude);
-	    coord[2] = radius * sin(latitude);
+	    featCoord[0] = radius * cos(longitude) * cos(latitude);
+	    featCoord[1] = radius * sin(longitude) * cos(latitude);
+	    featCoord[2] = radius * sin(latitude);
 
 	    /*// From cartesian to spherical
 	    R = sqrt(x*x + y*y + z*z);
@@ -3116,7 +3117,7 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
         
         
 
-	    if (prj->project(coord, srcPos))
+	    if (prj->project(featCoord, srcPos))
 		    sPainter.drawText(srcPos[0], srcPos[1], n.name, 0, 2.f, 2.f, false);
 
 	    qWarning() << "n.name:" << n.name << " SP:" << screenPos.toString() << "SP2:" << srcPos << " EP:" << coord.toString();
