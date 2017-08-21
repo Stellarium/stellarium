@@ -608,7 +608,8 @@ void LocationDialog::addCurrentLocationToList()
 	{
 		if (model->index(i,0).data()==id)
 		{
-			ui->citiesListView->scrollTo(model->index(i,0));
+			//FIXME: scroll caused artifcats in the GUI for long lists. WTF????
+			//ui->citiesListView->scrollTo(model->index(i,0));
 			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
 			setPositionFromList(model->index(i,0));
 			disconnectEditSignals();
