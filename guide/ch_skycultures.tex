@@ -20,12 +20,9 @@ sections. If you add a new skyculture, please do so for an optimal
 result!
 
 
-
-
 In the Stellarium program folder you can see a folder
 \file{skycultures}. Let us assume you work on Windows and want to create a
 new Skyculture, say, \emph{myCulture}.
-
 
 You can take the \file{inuit} directory as template to start with. Just copy the folder 
 \file{C:\textbackslash{}Program Files\textbackslash{}Stellarium\textbackslash{}skycultures\textbackslash{}inuit} to
@@ -44,11 +41,18 @@ In \file{myculture\textbackslash{}info.ini}, change the entries to
 [info]
 name=myCulture
 author=me
+boundaries=none
 \end{configfile}
 
 \noindent (or what seems best for you). The name is used for the list entry in
 the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}).
 
+The option ``boundaries'' is optional and may contain the follow values:
+\begin{description}
+\item[none] --- this value is enabled by default and it designates that this culture doesn't have boundaries of constellations.
+\item[generic] --- please use this value for subset of ``western'' cultures to enable using default boundaries.
+\item[own] --- please use it for culture who has own set of boundaries for constellations.
+\end{description}
 
 \section{Skyculture Description Files}
 \label{sec:skycultures:description}
@@ -189,14 +193,10 @@ In this file,
   this file.
 \end{description}
 
-\section{Constellation Borders}
-\label{sec:skycultures:borders}
+\section{Constellations Boundaries}
+\label{sec:skycultures:boundaries}
 
-The optional file \file{constellations\_boundaries.dat} includes data for the
-border lines drawn between constellations.  The western constellations
-have been given borders based on B1875.0 coordinates, and all
-skycultures with names starting in \file{Western\_} use these borders
-automatically.
+The optional file\footnote{Please define ``boundaries = own'' in the file \file{info.ini} to enable using custom boundaries.} \file{constellations\_boundaries.dat} includes data for the boundary lines drawn between constellations. The default boundaries for western constellations are defined in the \file{data/constellations\_boundaries.dat} file.
 
 The format for this file is a bit more dificult than the other files. It contains sections which may consist of multiple lines, of the format:
 
@@ -205,9 +205,9 @@ N RA_1 DE_1 RA_2 DE_2 ... RA_N DE_N 2 CON1 CON2
 \end{configfile}
 where
 \begin{description}
-\item[N] number of corners
-\item[RA\_n, DE\_n] right ascension and declination (degrees) of the corners in J2000 coordinates.
-\item[2 CON1 CON2] legacy data. They indicated ``border between 2 constellations, CON1, CON1'' but are now only required to keep the format. %% TODO Assumptions by GZ while writing in 2016-04. 
+\item[N] number of segments for boundary
+\item[RA\_n, DE\_n] right ascension (decimal hours) and declination (decimal degrees) of the points of segments in J2000 coordinates.
+\item[2 CON1 CON2] this data are indicated ``border between 2 constellations CON1 and CON2''. They are uses for define isolated boundaries for each constellation (for properly work of the \menu{Select single constellation} option). 
 \end{description}
 
 \section{Constellation Artwork}
@@ -295,7 +295,7 @@ Abbr 1 pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
 \end{configfile}
 or
 \begin{configfile}
-Abbr 2 pairs pair1_RA1 pair1_DE1 pair1_RA2 pair1_DE2 pair2_RA1 pair2_DE1 ...
+Abbr 2 pairs pair1_RA1 pair1_DE1 pair1_RA2 pair1_DE2 pair2_RA1 ...
 \end{configfile}
 In this file,
 \begin{description}
