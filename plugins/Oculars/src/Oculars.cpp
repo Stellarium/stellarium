@@ -411,7 +411,10 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	}
 
 	StelMovementMgr *movementManager = core->getMovementMgr();
-	movementManager->handleMouseClicks(event); // force it here for selection!
+
+	if (flagShowOculars)
+		movementManager->handleMouseClicks(event); // force it here for selection!
+
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
 		if (flagShowOculars)
