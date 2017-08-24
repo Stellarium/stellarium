@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-13 11:32+0700\n"
-"PO-Revision-Date: 2017-08-20 00:53+0000\n"
+"PO-Revision-Date: 2017-08-20 17:09+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-20 05:09+0000\n"
+"X-Launchpad-Export-Date: 2017-08-21 05:10+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -9789,47 +9789,47 @@ msgstr "satelliitti"
 
 #: plugins/Satellites/src/Satellite.cpp:290
 msgid "Approx. magnitude"
-msgstr ""
+msgstr "Likim. magnitudi"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
 msgid "Range"
-msgstr ""
+msgstr "Etäisyys"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:306
 msgid "Range rate"
-msgstr ""
+msgstr "Etäisyyden muutos"
 
 #: plugins/Satellites/src/Satellite.cpp:310
 msgid "SubPoint (Lat./Long.)"
-msgstr ""
+msgstr "Nadiiripiste (pit./lev.)"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:324
 msgid "TEME coordinates"
-msgstr ""
+msgstr "TEME-koordinaatit"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:331
 msgid "TEME velocity"
-msgstr ""
+msgstr "TEME-nopeus"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "Auringon heijastuskulma"
 
 #: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
-msgstr ""
+msgstr "Ryhmä"
 
 #: plugins/Satellites/src/Satellite.cpp:350
 msgid "Groups"
-msgstr ""
+msgstr "Ryhmät"
 
 #: plugins/Satellites/src/Satellite.cpp:356
 msgid "Operational status"
-msgstr ""
+msgstr "Toimintatila"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
@@ -9851,12 +9851,12 @@ msgstr "Satelliitti ei ole näkyvissä."
 #: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:259
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #: plugins/Satellites/src/Satellite.cpp:402
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 #: plugins/Satellites/src/Satellite.cpp:703
 #: plugins/Satellites/src/Satellite.cpp:728
@@ -9901,7 +9901,7 @@ msgstr "ei enää toimintakuntoinen"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
 msgid "Save predicted Iridium flares as..."
-msgstr ""
+msgstr "Tallenna ennustetut Iridium-välähdykset nimellä..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
 msgid "Stellarium Satellites Plugin"
@@ -10213,11 +10213,11 @@ msgstr "Tietoja ei voitu hakea. Yritä myöhemmin uudelleen."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
 msgid "Download aborted."
-msgstr ""
+msgstr "Lataus keskeytettiin."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
 msgid "Get data"
-msgstr ""
+msgstr "Hae data"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
@@ -10410,7 +10410,7 @@ msgstr "Lähteet"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 msgid "Flare prediction (days):"
-msgstr ""
+msgstr "Ennusteen pituus (päivää):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:830
 msgid "Predict Iridium flares"
@@ -10418,7 +10418,7 @@ msgstr "Ennusta Iridium-välähdykset"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "Tallenna ennusteet..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
