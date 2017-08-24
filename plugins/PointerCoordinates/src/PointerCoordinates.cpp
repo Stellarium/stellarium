@@ -22,6 +22,7 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelMainView.hpp"
 #include "SkyGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -69,6 +70,7 @@ PointerCoordinates::PointerCoordinates()
 	, flagEnableAtStartup(false)
 	, flagShowCoordinatesButton(false)
 	, flagShowConstellation(false)
+	, flagShowCrossedLines(false)
 	, textColor(Vec3f(1,0.5,0))
 	, coordinatesPoint(Vec3d(0,0,0))
 	, fontSize(14)
@@ -102,6 +104,7 @@ void PointerCoordinates::init()
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
 	setFlagShowConstellation(flagShowConstellation);
+	setFlagShowCrossedLines(flagShowCrossedLines);
 }
 
 void PointerCoordinates::deinit()
@@ -285,6 +288,14 @@ void PointerCoordinates::draw(StelCore *core)
 	}
 	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
+
+	if (flagShowCrossedLines)
+	{
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		QPoint m = StelMainView::getInstance().getMousePos();
+		sPainter.drawLine2d(m.x(), 0, m.x(), params.viewportXywh[3]);
+		sPainter.drawLine2d(0, params.viewportXywh[3]-m.y(), params.viewportXywh[2], params.viewportXywh[3]-m.y());
+	}
 }
 
 void PointerCoordinates::enableCoordinates(bool b)
@@ -334,12 +345,13 @@ void PointerCoordinates::loadConfiguration(void)
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
 	setFontSize(conf->value("font_size", 14).toInt());
-	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();
+	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();	
 	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());
 	setCurrentCoordinateSystemKey(conf->value("current_coordinate_system", "RaDecJ2000").toString());
 	QStringList cc = conf->value("custom_coordinates", "1,1").toString().split(",");
 	setCustomCoordinatesPlace(cc[0].toInt(), cc[1].toInt());
 	flagShowConstellation = conf->value("flag_show_constellation", false).toBool();
+	flagShowCrossedLines = conf->value("flag_show_crossed_lines", false).toBool();
 
 	conf->endGroup();
 }
@@ -357,6 +369,7 @@ void PointerCoordinates::saveConfiguration(void)
 	//conf->setValue("text_color", "1,0.5,0");
 	conf->setValue("font_size", getFontSize());
 	conf->setValue("flag_show_constellation", getFlagShowConstellation());
+	conf->setValue("flag_show_crossed_lines", getFlagShowCrossedLines());
 
 	conf->endGroup();
 }
@@ -442,6 +455,13 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 		{
 			x = gui->getSkyGui()->getSkyGuiWidth() - fs.width() - 10*coeff;
 			y = fs.height();
+			break;
+		}
+		case NearMouseCursor:
+		{
+			QPoint m = StelMainView::getInstance().getMousePos();
+			x = m.x() + 3;
+			y = gui->getSkyGui()->getSkyGuiHeight() - m.y() + 5;
 			break;
 		}
 		case Custom:
