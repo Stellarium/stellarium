@@ -91,6 +91,9 @@ void PointerCoordinatesWindow::createDialogContent()
 	ui->checkBoxConstellation->setChecked(coord->getFlagShowConstellation());
 	connect(ui->checkBoxConstellation, SIGNAL(toggled(bool)), coord, SLOT(setFlagShowConstellation(bool)));
 
+	ui->checkBoxCrossedLines->setChecked(coord->getFlagShowCrossedLines());
+	connect(ui->checkBoxCrossedLines, SIGNAL(toggled(bool)), coord, SLOT(setFlagShowCrossedLines(bool)));
+
 	connect(ui->spinBoxX, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 	connect(ui->spinBoxY, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 
@@ -177,6 +180,7 @@ void PointerCoordinatesWindow::populateCoordinatesPlacesList()
 	places->addItem(q_("The top center of the screen"), "TopCenter");
 	places->addItem(q_("In center of the top right half of the screen"), "TopRight");
 	places->addItem(q_("The right bottom corner of the screen"), "RightBottomCorner");
+	places->addItem(q_("Near mouse cursor"), "NearMouseCursor");
 	places->addItem(q_("Custom position"), "Custom");
 
 	//Restore the selection
