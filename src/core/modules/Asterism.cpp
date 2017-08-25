@@ -53,10 +53,6 @@ Asterism::~Asterism()
 
 bool Asterism::read(const QString& record, StarMgr *starMgr)
 {
-	unsigned int HP;
-	double RA, DE;
-	Vec3d coords;
-
 	abbreviation.clear();
 	numberOfSegments = 0;
 	typeOfAsterism = 1;
@@ -80,7 +76,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 		{
 			case 1: // A big asterism with lines by HIP stars
 			{
-				HP = 0;
+				unsigned int HP = 0;
 				istr >> HP;
 				if(HP == 0)
 				{
@@ -101,6 +97,9 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 			}
 			case 2: // A small asterism with lines by J2000.0 coordinates
 			{
+				double RA, DE;
+				Vec3d coords;
+
 				istr >> RA >> DE;				
 				StelUtils::spheToRect(RA*M_PI/12., DE*M_PI/180., coords);
 				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
