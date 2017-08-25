@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-13 11:32+0700\n"
-"PO-Revision-Date: 2017-08-13 05:03+0000\n"
+"POT-Creation-Date: 2017-08-24 22:20+0700\n"
+"PO-Revision-Date: 2017-08-24 15:43+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-14 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-08-25 05:25+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -26,7 +26,7 @@ msgid "custom marker"
 msgstr "пользовательский маркер"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:159
+#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:202
 #: src/core/modules/Constellation.cpp:292 src/core/modules/Nebula.cpp:221
 #: src/core/modules/Nebula.cpp:223 src/core/modules/Planet.cpp:376
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
@@ -45,7 +45,7 @@ msgstr "Тип"
 msgid "Marker"
 msgstr "Маркер"
 
-#: src/core/modules/Asterism.cpp:159
+#: src/core/modules/Asterism.cpp:202
 msgid "asterism"
 msgstr "астеризм"
 
@@ -395,7 +395,7 @@ msgstr "Данные о засветке из базы местоположен�
 #: plugins/FOV/src/gui/FOVWindow.cpp:84
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid "Author"
@@ -2280,7 +2280,7 @@ msgstr "Обратная связь"
 #: plugins/FOV/src/gui/FOVWindow.cpp:82
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:84
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
 msgid "Version"
 msgstr "Версия"
@@ -2303,7 +2303,7 @@ msgstr "Версия"
 #: plugins/FOV/src/gui/FOVWindow.cpp:83
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
 msgid "License"
 msgstr "Лицензия"
@@ -2795,7 +2795,7 @@ msgstr "OSX-разработчик: %1"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
 msgid "Contributors"
 msgstr "Внесшие вклад"
 
@@ -3156,19 +3156,19 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Визуальная звёзд. величина, основанная на фазовом угле и альбедо."
 
-#: src/gui/LocationDialog.cpp:714
+#: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
 msgstr "GPS..."
 
-#: src/gui/LocationDialog.cpp:726
+#: src/gui/LocationDialog.cpp:727
 msgid "GPS:SUCCESS"
 msgstr "GPS:УДАЧНО"
 
-#: src/gui/LocationDialog.cpp:737
+#: src/gui/LocationDialog.cpp:738
 msgid "GPS:FAILED"
 msgstr "GPS:НЕУДАЧНО"
 
-#: src/gui/LocationDialog.cpp:748 src/ui_locationDialogGui.h:492
+#: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:492
 msgid "Get location from GPS"
 msgstr "Получить местоположение из GPS"
 
@@ -7276,7 +7276,7 @@ msgstr "Сохранить эти настройки для всех после�
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
 msgstr "Сохранить настройки"
 
@@ -7288,7 +7288,7 @@ msgstr "Первоначальные настройки"
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:310
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
 msgstr "Первоначальные настройки"
 
@@ -7326,7 +7326,7 @@ msgstr "Вся доступная"
 msgid "Display no information"
 msgstr "Не отображать информации"
 
-#: src/ui_configurationDialog.h:1329 plugins/Oculars/src/Oculars.cpp:2298
+#: src/ui_configurationDialog.h:1329 plugins/Oculars/src/Oculars.cpp:2301
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "Отключена"
@@ -7416,7 +7416,7 @@ msgid "Ecliptic coordinates (J2000)"
 msgstr "Эклиптические координаты (J2000)"
 
 #: src/ui_configurationDialog.h:1376
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
 msgid "Hour angle/Declination"
 msgstr "Часовой угол/Склонение"
 
@@ -7425,7 +7425,7 @@ msgid "Visual magnitude"
 msgstr "Визуальная звёздная величина"
 
 #: src/ui_configurationDialog.h:1379
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "3-letter IAU constellation abbreviation"
 msgstr "Трёхбуквенная аббревиатура созвездия МАС"
 
@@ -8656,7 +8656,7 @@ msgstr ""
 #: plugins/FOV/src/gui/FOVWindow.cpp:89
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
 msgid "Links"
 msgstr "Ссылки"
@@ -8676,7 +8676,7 @@ msgstr "Ссылки"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/FOV/src/gui/FOVWindow.cpp:90
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
 #, qt-format
 msgid ""
@@ -8703,7 +8703,7 @@ msgstr ""
 #: plugins/FOV/src/gui/FOVWindow.cpp:93
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:279
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -8726,7 +8726,7 @@ msgstr "Если у вас есть вопрос, то получить отве
 #: plugins/FOV/src/gui/FOVWindow.cpp:95
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -8749,7 +8749,7 @@ msgstr "Сообщить об ошибке можно %1здесь%2."
 #: plugins/FOV/src/gui/FOVWindow.cpp:97
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:99
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:283
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -8845,7 +8845,7 @@ msgstr "Первоначальные настройки"
 #: plugins/FOV/src/ui_fovWindow.h:373
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:577
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -8864,7 +8864,7 @@ msgstr "Этот плагин позволяет показывать румбы
 msgid "Compass marks"
 msgstr "Компас"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1466
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1469
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
 #: plugins/Oculars/src/ui_ocularDialog.h:1137
 msgid "Oculars"
@@ -8880,221 +8880,221 @@ msgstr ""
 "телескопа (моделируется поле зрения и увеличение). Дополнительно этот плагин "
 "может показать размер кадра сенсора и градусные круги Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:964
+#: plugins/Oculars/src/Oculars.cpp:967
 msgid "Please select an object before switching to ocular view."
 msgstr "Выберите объект до включения вида через окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1060
+#: plugins/Oculars/src/Oculars.cpp:1063
 msgid "&Previous ocular"
 msgstr "&Предыдущий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1061
+#: plugins/Oculars/src/Oculars.cpp:1064
 msgid "&Next ocular"
 msgstr "&Следующий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1062
+#: plugins/Oculars/src/Oculars.cpp:1065
 msgid "Select &ocular"
 msgstr "Выбрать &окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1105
+#: plugins/Oculars/src/Oculars.cpp:1108
 msgid "Toggle &crosshair"
 msgstr "Переключить пере&крестие"
 
-#: plugins/Oculars/src/Oculars.cpp:1115
+#: plugins/Oculars/src/Oculars.cpp:1118
 msgid "Configure &Oculars"
 msgstr "Настройка &окуляров"
 
-#: plugins/Oculars/src/Oculars.cpp:1124
+#: plugins/Oculars/src/Oculars.cpp:1127
 msgid "Toggle &CCD"
 msgstr "Переключить &ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1132
+#: plugins/Oculars/src/Oculars.cpp:1135
 msgid "Toggle &Telrad"
 msgstr "Переключить &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1141
+#: plugins/Oculars/src/Oculars.cpp:1144
 msgid "&Previous CCD"
 msgstr "&Предыдущая ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1145
 msgid "&Next CCD"
 msgstr "&Следующая ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1143
+#: plugins/Oculars/src/Oculars.cpp:1146
 msgid "&Select CCD"
 msgstr "&Выбрать ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1165
+#: plugins/Oculars/src/Oculars.cpp:1168
 msgid "&Rotate CCD"
 msgstr "По&вернуть ПЗС"
 
-#: plugins/Oculars/src/Oculars.cpp:1187
+#: plugins/Oculars/src/Oculars.cpp:1190
 msgid "&Reset rotation"
 msgstr "&Сбросить поворот"
 
-#: plugins/Oculars/src/Oculars.cpp:1467
+#: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/ui_ocularDialog.h:1150
 msgid "Ocular view"
 msgstr "Вид в окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1482
+#: plugins/Oculars/src/Oculars.cpp:1485
 msgid "Oculars popup menu"
 msgstr "Контекстное меню окуляров"
 
-#: plugins/Oculars/src/Oculars.cpp:1483
+#: plugins/Oculars/src/Oculars.cpp:1486
 msgid "Show crosshairs"
 msgstr "Показывать перекрестия"
 
-#: plugins/Oculars/src/Oculars.cpp:1484
+#: plugins/Oculars/src/Oculars.cpp:1487
 msgid "Image sensor frame"
 msgstr "Кадр сенсора"
 
-#: plugins/Oculars/src/Oculars.cpp:1485
+#: plugins/Oculars/src/Oculars.cpp:1488
 msgid "Telrad sight"
 msgstr "Поле зрения Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1486
+#: plugins/Oculars/src/Oculars.cpp:1489
 msgid "Oculars plugin configuration"
 msgstr "Конфигурация плагина"
 
-#: plugins/Oculars/src/Oculars.cpp:1488
+#: plugins/Oculars/src/Oculars.cpp:1491
 msgid "Select next telescope"
 msgstr "Выбрать следующий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1490
+#: plugins/Oculars/src/Oculars.cpp:1493
 msgid "Select previous telescope"
 msgstr "Выбрать предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1492
+#: plugins/Oculars/src/Oculars.cpp:1495
 msgid "Select next eyepiece"
 msgstr "Выбрать следующий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1494
+#: plugins/Oculars/src/Oculars.cpp:1497
 msgid "Select previous eyepiece"
 msgstr "Выбрать предыдущий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1677
+#: plugins/Oculars/src/Oculars.cpp:1680
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "П.В./Скл. (J2000.0) перекрестия"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1685
+#: plugins/Oculars/src/Oculars.cpp:1688
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 msgid "\"/px"
 msgstr "\"/пкс"
 
-#: plugins/Oculars/src/Oculars.cpp:1874
+#: plugins/Oculars/src/Oculars.cpp:1877
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:523
 msgid "Ocular"
 msgstr "Окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1876
+#: plugins/Oculars/src/Oculars.cpp:1879
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
 msgid "Binocular"
 msgstr "Бинокль"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1896
+#: plugins/Oculars/src/Oculars.cpp:1899
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФР окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1903
+#: plugins/Oculars/src/Oculars.cpp:1906
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:577
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Видимое ПЗ окуляра: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1914
+#: plugins/Oculars/src/Oculars.cpp:1917
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
 #, qt-format
 msgid "Lens #%1"
 msgstr "Линза #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1921
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Линза #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1923
+#: plugins/Oculars/src/Oculars.cpp:1926
 msgid "Lens: none"
 msgstr "Линза: нет"
 
-#: plugins/Oculars/src/Oculars.cpp:1938 plugins/Oculars/src/Oculars.cpp:1998
+#: plugins/Oculars/src/Oculars.cpp:1941 plugins/Oculars/src/Oculars.cpp:2001
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1947
+#: plugins/Oculars/src/Oculars.cpp:1950
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:873
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увеличение: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1954
+#: plugins/Oculars/src/Oculars.cpp:1957
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Выходной зрачок: %1 мм"
 
-#: plugins/Oculars/src/Oculars.cpp:1961
+#: plugins/Oculars/src/Oculars.cpp:1964
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:892
 #, qt-format
 msgid "FOV: %1"
 msgstr "Поле зрения: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1982
+#: plugins/Oculars/src/Oculars.cpp:1985
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Размеры: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:1989
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:674
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сенсор #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1990
+#: plugins/Oculars/src/Oculars.cpp:1993
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:678
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сенсор #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2003
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:785
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2294
+#: plugins/Oculars/src/Oculars.cpp:2297
 msgid "&Lens"
 msgstr "&Линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2295
+#: plugins/Oculars/src/Oculars.cpp:2298
 msgid "&Previous lens"
 msgstr "&Предыдущая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2296
+#: plugins/Oculars/src/Oculars.cpp:2299
 msgid "&Next lens"
 msgstr "&Следующая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2329
 msgid "&Telescope"
 msgstr "&Телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2327
+#: plugins/Oculars/src/Oculars.cpp:2330
 msgid "&Previous telescope"
 msgstr "&Предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2328
+#: plugins/Oculars/src/Oculars.cpp:2331
 msgid "&Next telescope"
 msgstr "&Следующий телескоп"
 
@@ -12661,7 +12661,7 @@ msgstr "Плагин \"Навигационные звёзды\""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -12695,7 +12695,7 @@ msgid "Set of navigational stars"
 msgstr "Набор навигационных звёзд"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "Местоположение строки с координатами указателя мыши"
 
@@ -14990,7 +14990,7 @@ msgid "Change sign of equation"
 msgstr "Изменить знак уравнения"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
 msgid "Font size:"
 msgstr "Размер шрифта:"
 
@@ -15858,147 +15858,155 @@ msgstr "дд/мм/гггг"
 msgid "Results"
 msgstr "Результаты поиска"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 msgid "Pointer Coordinates"
 msgstr "Координаты указателя"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:59
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:60
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr "Этот плагин показывает координаты указателя мыши."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 msgid "Show coordinates of the mouse pointer"
 msgstr "Показывать координаты указателя мыши"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:135
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:138
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "П.В./Скл. (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:151
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:154
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "П.В./Скл."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:174
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:177
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Аз./Выс."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:190
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:193
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "Гал. долг./Шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:206
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr "Супергал. долг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:225
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr "Экл. долг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:244
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:247
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Экл. долг./шир. (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:262
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:265
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "Ч.У./Скл."
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
 msgid "Pointer Coordinates plug-in"
 msgstr "Плагин \"Координаты указателя\""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "Показывает координаты курсора мыши на экране."
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:177
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
 msgid "The top center of the screen"
 msgstr "Верх середины экрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:178
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:181
 msgid "In center of the top right half of the screen"
 msgstr "В центре верхней правой половины экрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:179
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
 msgid "The right bottom corner of the screen"
 msgstr "Правый нижний угол экрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
+msgid "Near mouse cursor"
+msgstr "Рядом с курсором мыши"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
 msgstr "Пользовательское местоположение"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "Прямое восхождение/Склонение (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
 msgid "Right ascension/Declination"
 msgstr "Прямое восхождение/Склонение"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
 msgid "Ecliptic Longitude/Latitude"
 msgstr "Эклиптическая долгота/широта"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Эклиптическая долгота/широта (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Altitude/Azimuth"
 msgstr "Высота/Азимут"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Galactic Longitude/Latitude"
 msgstr "Галактическая долгота/широта"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Supergalactic Longitude/Latitude"
 msgstr "Супергалактическая долгота/широта"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:238
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:242
 msgid "Coordinates of custom position:"
 msgstr "Коордитаны пользовательского местоположения:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:286
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:292
 msgid "Enable display of coordinates at startup"
 msgstr "Включить показ координат при запуске"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:287
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Show plug-in button on toolbar"
 msgstr "Показывать кнопку плагина на панели инструментов"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Show IAU constellation code"
 msgstr "Показывать код созвездия МАС"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
+msgid "Show crossed lines under mouse cursor"
+msgstr "Показывать перекрестные линии под курсором мыши"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
 msgstr "Какая система координат будет использоваться для показа"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 msgid "Coordinates:"
 msgstr "Координаты:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
 msgid "Place of the string:"
 msgstr "Местоположение строки:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Coordinate X"
 msgstr "Координата X"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
 msgid "Coordinate Y"
 msgstr "Координата Y"
 

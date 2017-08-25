@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-13 11:32+0700\n"
+"POT-Creation-Date: 2017-08-24 22:20+0700\n"
 "PO-Revision-Date: 2017-06-16 22:46+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Taiwan) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-14 05:27+0000\n"
+"X-Launchpad-Export-Date: 2017-08-25 05:29+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 "Language: zh_HK\n"
 "X-Language: zh_HK\n"
@@ -29,7 +29,7 @@ msgid "custom marker"
 msgstr "自訂標記"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:159
+#: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:202
 #: src/core/modules/Constellation.cpp:292 src/core/modules/Nebula.cpp:221
 #: src/core/modules/Nebula.cpp:223 src/core/modules/Planet.cpp:376
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
@@ -48,7 +48,7 @@ msgstr "類型"
 msgid "Marker"
 msgstr "標記"
 
-#: src/core/modules/Asterism.cpp:159
+#: src/core/modules/Asterism.cpp:202
 msgid "asterism"
 msgstr "星群"
 
@@ -398,7 +398,7 @@ msgstr "取自位置資料庫的光污染數據"
 #: plugins/FOV/src/gui/FOVWindow.cpp:84
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid "Author"
@@ -2215,7 +2215,7 @@ msgstr "聯絡"
 #: plugins/FOV/src/gui/FOVWindow.cpp:82
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:84
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
 msgid "Version"
 msgstr "版本"
@@ -2238,7 +2238,7 @@ msgstr "版本"
 #: plugins/FOV/src/gui/FOVWindow.cpp:83
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:122
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
 msgid "License"
 msgstr "授權條款"
@@ -2719,7 +2719,7 @@ msgstr "OSX 開發: %1"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
 msgid "Contributors"
 msgstr "貢獻者"
 
@@ -3070,19 +3070,19 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "目視星等是基於相位角度和反照率。"
 
-#: src/gui/LocationDialog.cpp:714
+#: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
 msgstr "GPS..."
 
-#: src/gui/LocationDialog.cpp:726
+#: src/gui/LocationDialog.cpp:727
 msgid "GPS:SUCCESS"
 msgstr "GPS:成功"
 
-#: src/gui/LocationDialog.cpp:737
+#: src/gui/LocationDialog.cpp:738
 msgid "GPS:FAILED"
 msgstr "GPS:失敗"
 
-#: src/gui/LocationDialog.cpp:748 src/ui_locationDialogGui.h:492
+#: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:492
 msgid "Get location from GPS"
 msgstr "自GPS取得位置"
 
@@ -7086,7 +7086,7 @@ msgstr "儲存目前的設置，下次啟動時自動套用。"
 #: plugins/NavStars/src/ui_navStarsWindow.h:211
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
 msgstr "儲存設置"
 
@@ -7098,7 +7098,7 @@ msgstr "還原至Stellarium預設值設置"
 #: plugins/NavStars/src/ui_navStarsWindow.h:212
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:310
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
 msgstr "還原預設值"
 
@@ -7133,7 +7133,7 @@ msgstr "完整顯示"
 msgid "Display no information"
 msgstr "不顯示資訊"
 
-#: src/ui_configurationDialog.h:1329 plugins/Oculars/src/Oculars.cpp:2298
+#: src/ui_configurationDialog.h:1329 plugins/Oculars/src/Oculars.cpp:2301
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "不顯示"
@@ -7223,7 +7223,7 @@ msgid "Ecliptic coordinates (J2000)"
 msgstr "黃道座標系統(J2000)"
 
 #: src/ui_configurationDialog.h:1376
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
 msgid "Hour angle/Declination"
 msgstr "時角/赤緯"
 
@@ -7232,7 +7232,7 @@ msgid "Visual magnitude"
 msgstr "視星等"
 
 #: src/ui_configurationDialog.h:1379
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "3-letter IAU constellation abbreviation"
 msgstr "三個字元縮寫的IAU星座名稱"
 
@@ -8430,7 +8430,7 @@ msgstr ""
 #: plugins/FOV/src/gui/FOVWindow.cpp:89
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
 msgid "Links"
 msgstr "連結"
@@ -8450,7 +8450,7 @@ msgstr "連結"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 #: plugins/FOV/src/gui/FOVWindow.cpp:90
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
 #, qt-format
 msgid ""
@@ -8475,7 +8475,7 @@ msgstr "您可以在Launchpad網站上獲得我們的支援，發表時請確認
 #: plugins/FOV/src/gui/FOVWindow.cpp:93
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:279
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -8498,7 +8498,7 @@ msgstr "如果您仍有疑問，你可在 %1 取得解答 %2 。"
 #: plugins/FOV/src/gui/FOVWindow.cpp:95
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -8521,7 +8521,7 @@ msgstr "錯誤報告可以點擊 %1 裡的 %2 。"
 #: plugins/FOV/src/gui/FOVWindow.cpp:97
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:99
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:283
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -8615,7 +8615,7 @@ msgstr "回復預設設置"
 #: plugins/FOV/src/ui_fovWindow.h:373
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:577
 msgctxt "tab in plugin windows"
 msgid "About"
@@ -8634,7 +8634,7 @@ msgstr "在地平面上顯示羅盤刻度"
 msgid "Compass marks"
 msgstr "羅盤刻度"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1466
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1469
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
 #: plugins/Oculars/src/ui_ocularDialog.h:1137
 msgid "Oculars"
@@ -8647,221 +8647,221 @@ msgid ""
 "frame and a Telrad sight."
 msgstr "顯示透過望遠鏡接目鏡觀看的天空(僅模擬視野與放大倍率)，它也可以顯示影像感測器畫框或是Telrad尋星鏡畫面。"
 
-#: plugins/Oculars/src/Oculars.cpp:964
+#: plugins/Oculars/src/Oculars.cpp:967
 msgid "Please select an object before switching to ocular view."
 msgstr "請先選取一個天體後再轉到望遠鏡模擬觀看。"
 
-#: plugins/Oculars/src/Oculars.cpp:1060
+#: plugins/Oculars/src/Oculars.cpp:1063
 msgid "&Previous ocular"
 msgstr "前一台望遠鏡(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1061
+#: plugins/Oculars/src/Oculars.cpp:1064
 msgid "&Next ocular"
 msgstr "下一台望遠鏡(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1062
+#: plugins/Oculars/src/Oculars.cpp:1065
 msgid "Select &ocular"
 msgstr "選取望遠鏡(&o)"
 
-#: plugins/Oculars/src/Oculars.cpp:1105
+#: plugins/Oculars/src/Oculars.cpp:1108
 msgid "Toggle &crosshair"
 msgstr "切換顯示十字准線(&c)"
 
-#: plugins/Oculars/src/Oculars.cpp:1115
+#: plugins/Oculars/src/Oculars.cpp:1118
 msgid "Configure &Oculars"
 msgstr "設定望遠鏡模擬"
 
-#: plugins/Oculars/src/Oculars.cpp:1124
+#: plugins/Oculars/src/Oculars.cpp:1127
 msgid "Toggle &CCD"
 msgstr "切換顯示 CCD (&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1132
+#: plugins/Oculars/src/Oculars.cpp:1135
 msgid "Toggle &Telrad"
 msgstr "切換Telrad尋星鏡(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:1141
+#: plugins/Oculars/src/Oculars.cpp:1144
 msgid "&Previous CCD"
 msgstr "前一個 CCD (&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1142
+#: plugins/Oculars/src/Oculars.cpp:1145
 msgid "&Next CCD"
 msgstr "下一個 CCD (&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1143
+#: plugins/Oculars/src/Oculars.cpp:1146
 msgid "&Select CCD"
 msgstr "選取 CCD (&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1165
+#: plugins/Oculars/src/Oculars.cpp:1168
 msgid "&Rotate CCD"
 msgstr "旋轉 CCD (&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1187
+#: plugins/Oculars/src/Oculars.cpp:1190
 msgid "&Reset rotation"
 msgstr "旋轉歸位(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1467
+#: plugins/Oculars/src/Oculars.cpp:1470
 #: plugins/Oculars/src/ui_ocularDialog.h:1150
 msgid "Ocular view"
 msgstr "望遠鏡模擬顯示"
 
-#: plugins/Oculars/src/Oculars.cpp:1482
+#: plugins/Oculars/src/Oculars.cpp:1485
 msgid "Oculars popup menu"
 msgstr "望遠鏡模擬的彈出式選單"
 
-#: plugins/Oculars/src/Oculars.cpp:1483
+#: plugins/Oculars/src/Oculars.cpp:1486
 msgid "Show crosshairs"
 msgstr "顯示十字准線"
 
-#: plugins/Oculars/src/Oculars.cpp:1484
+#: plugins/Oculars/src/Oculars.cpp:1487
 msgid "Image sensor frame"
 msgstr "影像感測器畫框"
 
-#: plugins/Oculars/src/Oculars.cpp:1485
+#: plugins/Oculars/src/Oculars.cpp:1488
 msgid "Telrad sight"
 msgstr "Telrad尋星鏡視野"
 
-#: plugins/Oculars/src/Oculars.cpp:1486
+#: plugins/Oculars/src/Oculars.cpp:1489
 msgid "Oculars plugin configuration"
 msgstr "望遠鏡模擬外掛程式的設定"
 
-#: plugins/Oculars/src/Oculars.cpp:1488
+#: plugins/Oculars/src/Oculars.cpp:1491
 msgid "Select next telescope"
 msgstr "選取下一台望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1490
+#: plugins/Oculars/src/Oculars.cpp:1493
 msgid "Select previous telescope"
 msgstr "選取前一台望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1492
+#: plugins/Oculars/src/Oculars.cpp:1495
 msgid "Select next eyepiece"
 msgstr "選取下一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1494
+#: plugins/Oculars/src/Oculars.cpp:1497
 msgid "Select previous eyepiece"
 msgstr "選取前一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1677
+#: plugins/Oculars/src/Oculars.cpp:1680
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "十字中心的赤經/赤緯(J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1685
+#: plugins/Oculars/src/Oculars.cpp:1688
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1874
+#: plugins/Oculars/src/Oculars.cpp:1877
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:523
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1876
+#: plugins/Oculars/src/Oculars.cpp:1879
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1896
+#: plugins/Oculars/src/Oculars.cpp:1899
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "望遠鏡焦距: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1903
+#: plugins/Oculars/src/Oculars.cpp:1906
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:577
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "可視視野(aFOV): %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1914
+#: plugins/Oculars/src/Oculars.cpp:1917
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
 #, qt-format
 msgid "Lens #%1"
 msgstr "鏡片 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1921
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "鏡片 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1923
+#: plugins/Oculars/src/Oculars.cpp:1926
 msgid "Lens: none"
 msgstr "鏡片: 無"
 
-#: plugins/Oculars/src/Oculars.cpp:1938 plugins/Oculars/src/Oculars.cpp:1998
+#: plugins/Oculars/src/Oculars.cpp:1941 plugins/Oculars/src/Oculars.cpp:2001
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望遠鏡 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1947
+#: plugins/Oculars/src/Oculars.cpp:1950
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:873
 #, qt-format
 msgid "Magnification: %1"
 msgstr "放大倍率望: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1954
+#: plugins/Oculars/src/Oculars.cpp:1957
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "出射光瞳: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:1961
+#: plugins/Oculars/src/Oculars.cpp:1964
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:892
 #, qt-format
 msgid "FOV: %1"
 msgstr "視野(FOV): %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1982
+#: plugins/Oculars/src/Oculars.cpp:1985
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1986
+#: plugins/Oculars/src/Oculars.cpp:1989
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:674
 #, qt-format
 msgid "Sensor #%1"
 msgstr "感測器 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1990
+#: plugins/Oculars/src/Oculars.cpp:1993
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:678
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "感測器 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2003
+#: plugins/Oculars/src/Oculars.cpp:2006
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:785
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望遠鏡 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2294
+#: plugins/Oculars/src/Oculars.cpp:2297
 msgid "&Lens"
 msgstr "鏡片(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2295
+#: plugins/Oculars/src/Oculars.cpp:2298
 msgid "&Previous lens"
 msgstr "前一個鏡片(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2296
+#: plugins/Oculars/src/Oculars.cpp:2299
 msgid "&Next lens"
 msgstr "下一個鏡片(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2326
+#: plugins/Oculars/src/Oculars.cpp:2329
 msgid "&Telescope"
 msgstr "望遠鏡(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2327
+#: plugins/Oculars/src/Oculars.cpp:2330
 msgid "&Previous telescope"
 msgstr "前一台望遠鏡(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2328
+#: plugins/Oculars/src/Oculars.cpp:2331
 msgid "&Next telescope"
 msgstr "下一台望遠鏡(&N)"
 
@@ -12135,7 +12135,7 @@ msgstr "導航星外掛程式"
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -12167,7 +12167,7 @@ msgid "Set of navigational stars"
 msgstr "導航星選集"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "字串位置與滑鼠指標的座標"
 
@@ -14269,7 +14269,7 @@ msgid "Change sign of equation"
 msgstr "改變均時差的正負號"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
 msgid "Font size:"
 msgstr "字體大小:"
 
@@ -15099,147 +15099,155 @@ msgstr "dd/MM/yyyy"
 msgid "Results"
 msgstr "結果"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 msgid "Pointer Coordinates"
 msgstr "滑鼠座標"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:59
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:60
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr "這個外掛程式顯示滑鼠指標的座標位置"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 msgid "Show coordinates of the mouse pointer"
 msgstr "顯示滑鼠指標的座標位置"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:135
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:138
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "赤經/赤緯 (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:151
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:154
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "赤經/赤緯"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:174
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:177
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "方位角/高度角: %1/%2"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:190
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:193
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "銀經/銀緯"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:206
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr "超星系座標系經度/緯度"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:225
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr "黃經/黃緯"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:244
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:247
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "黃經/黃緯 (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:262
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:265
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "時角/赤緯"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
 msgid "Pointer Coordinates plug-in"
 msgstr "滑鼠座標外掛程式"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "在螢幕上顯示滑鼠指標的座標位置"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:177
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
 msgid "The top center of the screen"
 msgstr "螢幕中心的正上方"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:178
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:181
 msgid "In center of the top right half of the screen"
 msgstr "螢幕右半方中心的正上方"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:179
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
 msgid "The right bottom corner of the screen"
 msgstr "螢幕右下方角落"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
+msgid "Near mouse cursor"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
 msgstr "自訂位置"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "赤經/赤緯 (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
 msgid "Right ascension/Declination"
 msgstr "赤經/赤緯"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
 msgid "Ecliptic Longitude/Latitude"
 msgstr "黃經/黃緯"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "黃經/黃緯 (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Altitude/Azimuth"
 msgstr "高度角/方位角"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Galactic Longitude/Latitude"
 msgstr "銀經/銀緯"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Supergalactic Longitude/Latitude"
 msgstr "超星系座標系經度/緯度"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:238
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:242
 msgid "Coordinates of custom position:"
 msgstr "自訂位置的螢幕座標"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:286
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:292
 msgid "Enable display of coordinates at startup"
 msgstr "在啟動時啟用座標系的顯示"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:287
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Show plug-in button on toolbar"
 msgstr "在工具列顯示外掛程式按鍵"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Show IAU constellation code"
 msgstr "顯示IAU規定的星座縮寫"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
+msgid "Show crossed lines under mouse cursor"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
 msgstr "哪一個座標系統將會被使用來顯示"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 msgid "Coordinates:"
 msgstr "座標:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
 msgid "Place of the string:"
 msgstr "字串的位置:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Coordinate X"
 msgstr "X座標"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
 msgid "Coordinate Y"
 msgstr "Y座標"
 
