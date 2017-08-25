@@ -104,7 +104,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				istr >> RA >> DE;				
 				StelUtils::spheToRect(RA*M_PI/12., DE*M_PI/180., coords);
 				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
-				StelObjectP s = stars.at(0);
+				StelObjectP s = NULL;
 				float d = 10.f;
 				foreach (const StelObjectP &p, stars)
 				{
