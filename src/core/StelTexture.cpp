@@ -59,7 +59,8 @@ StelTexture::~StelTexture()
 			glSize = 0;
 		}
 #ifndef NDEBUG
-		qDebug()<<"Deleted StelTexture"<<id<<", total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+		if (qApp->property("verbose") == true)
+			qDebug()<<"Deleted StelTexture"<<id<<", total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
 #endif
 		id = 0;
 	}
@@ -408,7 +409,8 @@ bool StelTexture::glLoad(const GLData& data)
 	glSize = data.data.size();
 
 #ifndef NDEBUG
-	qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+	if (qApp->property("verbose") == true)
+		qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
 #endif
 
 	//restore old value
