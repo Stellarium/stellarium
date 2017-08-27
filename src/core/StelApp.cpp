@@ -447,6 +447,11 @@ void StelApp::init(QSettings* conf)
 	ssystem->init();
 	getModuleMgr().registerModule(ssystem);
 
+	// Init the nomenclature for Solar system bodies
+	NomenclatureMgr* nomenclature = new NomenclatureMgr();
+	nomenclature->init();
+	getModuleMgr().registerModule(nomenclature);
+
 	// Load hipparcos stars & names
 	StarMgr* hip_stars = new StarMgr();
 	hip_stars->init();
@@ -522,12 +527,6 @@ void StelApp::init(QSettings* conf)
 	CustomObjectMgr* custObj = new CustomObjectMgr();
 	custObj->init();
 	getModuleMgr().registerModule(custObj);
-	
-	// Init the nomenclature
-	NomenclatureMgr* nomenclature = new NomenclatureMgr();
-	nomenclature->init();
-	getModuleMgr().registerModule(nomenclature);
-
 
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr

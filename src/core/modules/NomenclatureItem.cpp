@@ -33,7 +33,13 @@ Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
 
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeMap;
 
-NomenclatureItem::NomenclatureItem(PlanetP nPlanet, const QString& nId, const QString& nName, const QString& nItemType, float nLatitude, float nLongitude, float nSize)
+NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
+				   const QString& nId,
+				   const QString& nName,
+				   const QString& nItemType,
+				   float nLatitude,
+				   float nLongitude,
+				   float nSize)
 	: initialized(false)
 	, planet(nPlanet)
 	, identificator(nId)
@@ -150,7 +156,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	oss << getPositionInfoString(core, flags);
 
 	if (flags&Extra)
-		oss << QString("%1: %2/%3").arg(q_("Planetocentric coordinates")).arg(StelUtils::radToDmsStr(latitude)).arg(StelUtils::radToDmsStr(longitude)) << "<br />";
+		oss << QString("%1: %2/%3").arg(q_("Planetocentric coordinates")).arg(StelUtils::decDegToDmsStr(latitude)).arg(StelUtils::decDegToDmsStr(longitude)) << "<br />";
 
 	if (flags&Size)
 		oss << QString("%1: %2 %3").arg(q_("Size")).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance")) << "<br />";
