@@ -204,8 +204,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	*/
 
 	double R = sqrt(coord.length()*coord.length() + planet->getRadius()*planet->getRadius());
-	double clatitude = asin( (planet->getRadius()*sin(latitude) + coord.length()*sin(coord.latitude()))/R );
-	double clongitude = atan( (planet->getRadius()*cos(latitude)*sin(longitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(planet->getRadius()*cos(latitude)*cos(longitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
+	double clatitude = asin( (planet->getRadius()*sin(latitude*M_PI/180.0) + coord.length()*sin(coord.latitude()))/R );
+	double clongitude = atan( (planet->getRadius()*cos(latitude*M_PI/180.0)*sin(longitude*M_PI/180.0) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(planet->getRadius()*cos(latitude*M_PI/180.0)*cos(longitude*M_PI/180.0) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
 
 	// From spherical to cartesian coordinates
 	// The arguments of trigonometric functions must be in radians?
