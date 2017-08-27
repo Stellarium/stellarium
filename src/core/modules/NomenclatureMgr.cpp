@@ -59,13 +59,11 @@ void NomenclatureMgr::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
-	nomenclatureItems.clear();
+	// Load the nomenclature
+	loadNomenclature();
 
 	setColor(StelUtils::strToVec3f(conf->value("color/nomenclature_color", "0.1,1.0,0.1").toString()));
 	setFlagLabels(conf->value("astro/flag_nomenclature_labels", false).toBool());
-
-	// Load the nomenclature
-	loadNomenclature();
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
@@ -78,8 +76,10 @@ void NomenclatureMgr::init()
 
 void NomenclatureMgr::loadNomenclature()
 {
-	// Load nomenclature for Solar system bodies
+	qDebug() << "Loading nomenclature for Solar system bodies ...";
+
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	nomenclatureItems.clear();
 
 	// Get list of all planet names
 	QStringList sso = ssystem->getAllPlanetEnglishNames();
@@ -162,7 +162,7 @@ void NomenclatureMgr::loadNomenclature()
 			}
 
 			planetSurfNamesFile.close();
-			qDebug() << "Loaded" << readOk << "/" << totalRecords << "items if surface nomenclature for" << planet;
+			qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of surface nomenclature for" << planet;
 
 		}
 	}

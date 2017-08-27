@@ -658,6 +658,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_use_obj_models",		propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
 	conf->setValue("astro/flag_show_obj_self_shadows",	propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 	conf->setValue("astro/apparent_magnitude_algorithm",	Planet::getApparentMagnitudeAlgorithmString());
+	conf->setValue("astro/flag_nomenclature_labels",	propMgr->getStelPropertyValue("NomenclatureMgr.nomenclatureDisplayed").toBool());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_gridlines",		propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());
