@@ -34,6 +34,7 @@
 #include "ZodiacalLight.hpp"
 #include "LabelMgr.hpp"
 #include "SolarSystem.hpp"
+#include "NomenclatureMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelIniParser.hpp"
@@ -521,6 +522,12 @@ void StelApp::init(QSettings* conf)
 	CustomObjectMgr* custObj = new CustomObjectMgr();
 	custObj->init();
 	getModuleMgr().registerModule(custObj);
+	
+	// Init the nomenclature
+	NomenclatureMgr* nomenclature = new NomenclatureMgr();
+	nomenclature->init();
+	getModuleMgr().registerModule(nomenclature);
+
 
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr

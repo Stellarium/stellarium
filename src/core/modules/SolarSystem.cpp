@@ -217,9 +217,6 @@ void SolarSystem::init()
 
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 
-	// Load the nomenclature
-	loadNomenclature();
-
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
@@ -2422,91 +2419,5 @@ bool SolarSystem::removePlanet(QString name)
 	systemPlanets.removeOne(candidate);
 	candidate.clear();
 	return true;
-}
-
-void SolarSystem::loadNomenclature()
-{
-	// Load nomenclature for Solar system bodies
-
-	// Get list of all planet names
-	QStringList sso = getAllPlanetEnglishNames();
-
-	// regular expression to find the comments and empty lines
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-
-	// regular expression to find the nomenclature data
-	// Rules:
-	// One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
-	// Format:
-	//	ID of surface feature			: unique string
-	//	translatable name of surface feature	: string
-	//	type of surface feature			: string
-	//	latitude of surface feature		: float (decimal degrees)
-	//	longitude of surface feature		: float (decimal degrees)
-	//	size of surface feature			: float (kilometers)
-	QRegExp recRx("^\\s*([\\w\\d\\-]+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
-	QString record;
-
-	// Let's check existence of nomenclature data for each planet
-	foreach (QString planet, sso)
-	{
-		QString surfNamesFile = StelFileMgr::findFile("data/nomenclature/" + planet.toLower() + ".fab");
-		if (!surfNamesFile.isEmpty()) // OK, the file is exist!
-		{
-			// Open file
-			QFile planetSurfNamesFile(surfNamesFile);
-			if (!planetSurfNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-			{
-				qDebug() << "Cannot open file" << QDir::toNativeSeparators(surfNamesFile);
-				continue;
-			}
-
-			// keep track of how many records we processed.
-			int totalRecords=0;
-			int readOk=0;
-			int lineNumber=0;
-			StelPlanetNomenclature nomenclature;
-			QList<StelPlanetNomenclature> nomenclatureList;
-			nomenclatureList.clear();
-			while (!planetSurfNamesFile.atEnd())
-			{
-				record = QString::fromUtf8(planetSurfNamesFile.readLine());
-				lineNumber++;
-
-				// Skip comments
-				if (commentRx.exactMatch(record))
-					continue;
-
-				totalRecords++;
-				if (!recRx.exactMatch(record))
-					qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
-				else
-				{
-					// Read the ID of feature
-					nomenclature.id		= recRx.capturedTexts().at(1).trimmed();
-					// Read the name of feature
-					nomenclature.name	= recRx.capturedTexts().at(2).trimmed();
-					// Read the type of feature
-					nomenclature.type	= recRx.capturedTexts().at(3).trimmed();
-					// Read the latitude of feature
-					nomenclature.latitude	= recRx.capturedTexts().at(4).toFloat();
-					// Read the longitude of feature
-					nomenclature.longitude	= recRx.capturedTexts().at(5).toFloat();
-					// Read the size of feature
-					nomenclature.size	= recRx.capturedTexts().at(6).toFloat();
-
-					nomenclatureList.append(nomenclature);
-					readOk++;
-				}
-			}
-
-			planetSurfNamesFile.close();
-			qDebug() << "Loaded" << readOk << "/" << totalRecords << "items if surface nomenclature for" << planet;
-
-			PlanetP p = searchByEnglishName(planet);
-			if (!p.isNull()) // OK, the planet is exist!
-				p->setNomenclature(nomenclatureList);
-		}
-	}
 }
 

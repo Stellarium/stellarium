@@ -757,7 +757,74 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="8" column="0">
+             <item row="15" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLabel" name="planetDetailsLabel">
+                 <property name="text">
+                  <string>Planets magnitude algorithm:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="planetMagnitudeAlgorithmComboBox">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="16" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>22</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="planetMagnitudeAlgorithmDescription">
+                 <property name="text">
+                  <string notr="true">Description of algorithm</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::RichText</enum>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="planetIsolatedTrailsCheckBox">
+               <property name="toolTip">
+                <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
+               </property>
+               <property name="text">
+                <string>Show trail only for selected planet</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
               <widget class="QCheckBox" name="planetLightSpeedCheckBox">
                <property name="toolTip">
                 <string>Activate this option to simulate the effect of real speed of light (recommended).</string>
@@ -767,7 +834,7 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
+             <item row="10" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
                 <widget class="QCheckBox" name="customGrsSettingsCheckBox">
@@ -815,7 +882,7 @@
                </item>
               </layout>
              </item>
-             <item row="11" column="0">
+             <item row="12" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetScaleMoonCheckBox">
@@ -848,7 +915,7 @@
                </item>
               </layout>
              </item>
-             <item row="10" column="0">
+             <item row="11" column="0">
               <layout class="QHBoxLayout" name="planetLimMagHorizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetLimitMagnitudeCheckBox">
@@ -892,7 +959,7 @@
                </property>
               </widget>
              </item>
-             <item row="13" column="0">
+             <item row="14" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_17">
                <item>
                 <widget class="QCheckBox" name="planetLabelCheckBox">
@@ -955,7 +1022,7 @@
                </item>
               </layout>
              </item>
-             <item row="17" column="0">
+             <item row="18" column="0">
               <layout class="QGridLayout" name="gridLayout_6">
                <item row="0" column="0">
                 <widget class="QLabel" name="label_14">
@@ -1081,7 +1148,7 @@
                </item>
               </layout>
              </item>
-             <item row="12" column="0">
+             <item row="13" column="0">
               <layout class="QHBoxLayout" name="scaleSelectedHorizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetScaleMinorBodyCheckBox">
@@ -1105,70 +1172,10 @@
                </item>
               </layout>
              </item>
-             <item row="14" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QLabel" name="planetDetailsLabel">
-                 <property name="text">
-                  <string>Planets magnitude algorithm:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="planetMagnitudeAlgorithmComboBox">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="insertPolicy">
-                  <enum>QComboBox::NoInsert</enum>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="15" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>22</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="planetMagnitudeAlgorithmDescription">
-                 <property name="text">
-                  <string notr="true">Description of algorithm</string>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::RichText</enum>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="planetIsolatedTrailsCheckBox">
-               <property name="toolTip">
-                <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
-               </property>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="planetNomenclatureCheckBox">
                <property name="text">
-                <string>Show trail only for selected planet</string>
+                <string>Show planets nomenclature</string>
                </property>
               </widget>
              </item>
@@ -3394,12 +3401,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
