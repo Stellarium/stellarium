@@ -51,6 +51,10 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
+	Q_PROPERTY(bool nomenclatureDisplayed // This is a "forwarding property" which sets labeling into all planets.
+		   READ getFlagNomenclature
+		   WRITE setFlagNomenclature
+		   NOTIFY nomenclatureDisplayedChanged)
 	Q_PROPERTY(bool flagOrbits // was bool orbitsDisplayed
 		   READ getFlagOrbits
 		   WRITE setFlagOrbits
@@ -177,6 +181,11 @@ class SolarSystem : public StelObjectModule
 		   READ getOrbitsColor
 		   WRITE setOrbitsColor
 		   NOTIFY orbitsColorChanged
+		   )
+	Q_PROPERTY(Vec3f nomenclatureColor
+		   READ getNomenclatureColor
+		   WRITE setNomenclatureColor
+		   NOTIFY nomenclatureColorChanged
 		   )
 	Q_PROPERTY(Vec3f majorPlanetsOrbitsColor
 		   READ getMajorPlanetsOrbitsColor
@@ -360,6 +369,11 @@ public slots:
 	//! Get the current value of the flag which determines if planet labels are drawn or hidden.
 	bool getFlagLabels() const;
 
+	//! Set flag which determines if planet nomenclature labels are drawn or hidden.
+	void setFlagNomenclature(bool b);
+	//! Get the current value of the flag which determines if planet nomenclature labels are drawn or hidden.
+	bool getFlagNomenclature() const;
+
 	//! Set the amount of planet labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the planets magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
@@ -408,6 +422,17 @@ public slots:
 	//! Get the current color used to draw planet labels.
 	//! @return current color
 	const Vec3f& getLabelsColor(void) const;
+
+	//! Set the color used to draw planet nomenclature labels.
+	//! @param c The color of the planet nomenclature labels (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setNomenclatureColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setNomenclatureColor(const Vec3f& c);
+	//! Get the current color used to draw planet nomenclature labels.
+	//! @return current color
+	const Vec3f& getNomenclatureColor(void) const;
 
 	//! Set the color used to draw solar system object orbit lines.
 	//! @param c The color of the solar system object orbit lines (R,G,B)
@@ -772,6 +797,7 @@ public slots:
 
 signals:
 	void labelsDisplayedChanged(bool b);
+	void nomenclatureDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
 	void trailsDisplayedChanged(bool b);
@@ -799,6 +825,7 @@ signals:
 	void customGrsJDChanged(double JD);
 
 	void orbitsColorChanged(const Vec3f & color) const;
+	void nomenclatureColorChanged(const Vec3f & color) const;
 	void majorPlanetsOrbitsColorChanged(const Vec3f & color) const;
 	void minorPlanetsOrbitsColorChanged(const Vec3f & color) const;
 	void dwarfPlanetsOrbitsColorChanged(const Vec3f & color) const;
