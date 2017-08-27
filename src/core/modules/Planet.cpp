@@ -1559,9 +1559,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		}
 		drawHints(core, planetNameFont);
 
-		drawNomenclature(core, planetNameFont);
-
 		draw3dModel(core,transfo,screenSz);
+
+		drawNomenclature(core, planetNameFont);
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);
@@ -3074,7 +3074,7 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
     // Take nomenclature
     //StelPlanetNomenclature n;
     
-    double R, latitude, longitude;
+    double dist, latitude, longitude;
     
     // Get latitude and longitude of Moon in J2000
     Vec3d coord = getJ2000EquatorialPos(core);
@@ -3084,46 +3084,43 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
     
     // Change coordinates from planetocentric to equatorial
     /*
-     - Distance from Earth to feature -> R
+     - Distance from Earth to feature -> dist
      - Latitude of feature -> latitude
      - Longitude of feature -> longitude
      */
 
-    qWarning() << "N" << englishName << nomenclature.size();
+    qDebug() << "N" << englishName << nomenclature.size();
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
     StelPainter sPainter(prj);
     sPainter.setFont(planetNomenclatureFont);
+    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
 
     foreach (StelPlanetNomenclature n, nomenclature)
     {
-        double scaledRadius = radius*sphereScale;
+        double r = radius*sphereScale;
         
-	    R = sqrt(coord.length()*coord.length() + scaledRadius*scaledRadius);
-	    latitude = asin( (scaledRadius*sin(n.latitude) + coord.length()*sin(coord.latitude()))/R );
-	    longitude = atan( (scaledRadius*cos(n.latitude)*sin(n.longitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(scaledRadius*cos(n.latitude)*cos(n.longitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
+	    //dist = sqrt(coord.length()*coord.length() + r*r);
+        dist = getEquinoxEquatorialPos(core).length();
+	    latitude = asin( (r*sin(n.latitude*M_PI/180.0) + coord.length()*sin(coord.latitude()))/dist );
+	    longitude = atan( (r*cos(n.latitude*M_PI/180.0)*sin(n.longitude*M_PI/180.0) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(r*cos(n.latitude*M_PI/180.0)*cos(n.longitude*M_PI/180.0) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
         
 	    // From spherical to cartesian coordinates
-	    featCoord[0] = scaledRadius * cos(longitude) * cos(latitude);
-	    featCoord[1] = scaledRadius * sin(longitude) * cos(latitude);
-	    featCoord[2] = scaledRadius * sin(latitude);
-
-	    /*// From cartesian to spherical
-	    R = sqrt(x*x + y*y + z*z);
-	    latitude = asin(z/R);
-	    longitude = atan(y/x);*/
+        // The arguments of trigonometric functions must be in radians? --> GZ: of course!
+	    featCoord[0] = r * cos(longitude) * cos(latitude);
+	    featCoord[1] = r * sin(longitude) * cos(latitude);
+	    featCoord[2] = r * sin(latitude);
         
 	    // Draw nameI18 + scaling if it's not == 1.
 	    //float tmp = getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-	    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
         
-        if (prj->project(featCoord, srcPos))
+        if (prj->project(featCoord, srcPos)) // Make visible only the names that are looking to the planet
 		    sPainter.drawText(srcPos[0], srcPos[1], n.name, 0, 2.f, 2.f, false);
 
 	    qWarning() << "n.name:" << n.name << " SP:" << screenPos.toString() << "SP2:" << srcPos << " EP:" << coord.toString();
     }
 
-    sPainter.setBlending(true);
+    //sPainter.setBlending(true);
 }
 
 

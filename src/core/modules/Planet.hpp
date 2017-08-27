@@ -38,12 +38,12 @@ typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
 
 typedef struct
 {
-	QString id;
-	QString name;
-	QString type;
-	float latitude;
-	float longitude;
-	float size;
+	QString id;      // ID (unique for this planet)
+	QString name;    // given name
+	QString type;    // Mare|Crater|Volcano|Mountain|... <could become a defined type!>
+	float latitude;  // degrees
+	float longitude; // degrees
+	float size;      // feature size, km
 } StelPlanetNomenclature;
 
 // epoch J2000: 12 UT on 1 Jan 2000
