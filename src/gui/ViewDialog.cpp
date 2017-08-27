@@ -52,6 +52,7 @@
 #include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "NomenclatureMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
