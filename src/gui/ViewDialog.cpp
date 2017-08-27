@@ -225,6 +225,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
 	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
+	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Nomenclature_Labels");
 
 	populatePlanetMagnitudeAlgorithmsList();
 	int idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);

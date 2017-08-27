@@ -923,9 +923,6 @@ private:
 	//! Set flag who enable display a permanent orbits for objects or not
 	void setFlagPermanentOrbits(bool b);
 
-	//! Load nomenclature for solar system bodies
-	void loadNomenclature();
-
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
 	PlanetP sun;
