@@ -3074,10 +3074,11 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
     // Take nomenclature
     //StelPlanetNomenclature n;
     
+    double R, latitude, longitude;
+    
     // Get latitude and longitude of Moon in J2000
     Vec3d coord = getJ2000EquatorialPos(core);
-    Vec3d srcPos;
-    Vec3d featCoord;
+    Vec3d srcPos, featCoord;
     
     re.offset;
     
@@ -3096,28 +3097,27 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
 
     foreach (StelPlanetNomenclature n, nomenclature)
     {
-	    double R = sqrt(coord.length()*coord.length() + radius*radius);
-	    double latitude = asin( (radius*sin(n.latitude) + coord.length()*sin(coord.latitude()))/R );
-	    double longitude = atan( (radius*cos(n.latitude)*sin(n.longitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(radius*cos(n.latitude)*cos(n.longitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
+        double scaledRadius = radius*sphereScale;
+        
+	    R = sqrt(coord.length()*coord.length() + scaledRadius*scaledRadius);
+	    latitude = asin( (scaledRadius*sin(n.latitude) + coord.length()*sin(coord.latitude()))/R );
+	    longitude = atan( (scaledRadius*cos(n.latitude)*sin(n.longitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(scaledRadius*cos(n.latitude)*cos(n.longitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
         
 	    // From spherical to cartesian coordinates
-	    // The arguments of trigonometric functions must be in radians?
-	    featCoord[0] = radius * cos(longitude) * cos(latitude);
-	    featCoord[1] = radius * sin(longitude) * cos(latitude);
-	    featCoord[2] = radius * sin(latitude);
+	    featCoord[0] = scaledRadius * cos(longitude) * cos(latitude);
+	    featCoord[1] = scaledRadius * sin(longitude) * cos(latitude);
+	    featCoord[2] = scaledRadius * sin(latitude);
 
 	    /*// From cartesian to spherical
 	    R = sqrt(x*x + y*y + z*z);
 	    latitude = asin(z/R);
 	    longitude = atan(y/x);*/
-
+        
 	    // Draw nameI18 + scaling if it's not == 1.
 	    //float tmp = getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
         
-        
-
-	    if (prj->project(featCoord, srcPos))
+        if (prj->project(featCoord, srcPos))
 		    sPainter.drawText(srcPos[0], srcPos[1], n.name, 0, 2.f, 2.f, false);
 
 	    qWarning() << "n.name:" << n.name << " SP:" << screenPos.toString() << "SP2:" << srcPos << " EP:" << coord.toString();
