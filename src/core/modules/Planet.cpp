@@ -266,8 +266,6 @@ Planet::Planet(const QString& englishName,
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
-
-	nomenclature.clear();
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -1558,8 +1556,6 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			labelsFader=false;
 		}
 		drawHints(core, planetNameFont);
-
-		drawNomenclature(core, planetNameFont);
 
 		draw3dModel(core,transfo,screenSz);
 	}
@@ -3056,84 +3052,3 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 	// sync default value with ViewDialog and SolarSystem!
 	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::Expl_Sup_2013);
 }
-
-void Planet::setNomenclature(QList<StelPlanetNomenclature> data)
-{
-	nomenclature = data;
-	qDebug() << "Set nomenclature for" << getEnglishName();
-	foreach (StelPlanetNomenclature n, nomenclature)
-		qDebug() << "ID:" << n.id << " Name:" << n.name << " Type:" << n.type << " Latitude:" << QString::number(n.latitude, 'f', 5) << " Longitude:" << QString::number(n.longitude, 'f', 5) << " Size:" << QString::number(n.size, 'f', 2);
-}
-
-void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont)
-{
-	// Use draw methods to set the name and make it disappear
-	if (labelsFader.getInterstate()==0.f)
-		return;
-    
-    // Take nomenclature
-    //StelPlanetNomenclature n;
-    
-    // Get latitude and longitude of Moon in J2000
-    Vec3d coord = getJ2000EquatorialPos(core);
-    Vec3d srcPos;
-    Vec3d featCoord;
-    
-    re.offset;
-    
-    // Change coordinates from planetocentric to equatorial
-    /*
-     - Distance from Earth to feature -> R
-     - Latitude of feature -> latitude
-     - Longitude of feature -> longitude
-     */
-
-    qWarning() << "N" << englishName << nomenclature.size();
-
-    const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-    StelPainter sPainter(prj);
-    sPainter.setFont(planetNomenclatureFont);
-
-    foreach (StelPlanetNomenclature n, nomenclature)
-    {
-	    double R = sqrt(coord.length()*coord.length() + radius*radius);
-	    double latitude = asin( (radius*sin(n.latitude) + coord.length()*sin(coord.latitude()))/R );
-	    double longitude = atan( (radius*cos(n.latitude)*sin(n.longitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(radius*cos(n.latitude)*cos(n.longitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
-        
-	    // From spherical to cartesian coordinates
-	    // The arguments of trigonometric functions must be in radians?
-	    featCoord[0] = radius * cos(longitude) * cos(latitude);
-	    featCoord[1] = radius * sin(longitude) * cos(latitude);
-	    featCoord[2] = radius * sin(latitude);
-
-	    /*// From cartesian to spherical
-	    R = sqrt(x*x + y*y + z*z);
-	    latitude = asin(z/R);
-	    longitude = atan(y/x);*/
-
-	    // Draw nameI18 + scaling if it's not == 1.
-	    //float tmp = getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-	    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
-        
-        
-
-	    if (prj->project(featCoord, srcPos))
-		    sPainter.drawText(srcPos[0], srcPos[1], n.name, 0, 2.f, 2.f, false);
-
-	    qWarning() << "n.name:" << n.name << " SP:" << screenPos.toString() << "SP2:" << srcPos << " EP:" << coord.toString();
-    }
-
-    sPainter.setBlending(true);
-}
-
-
-
-
-
-
-
-
-
-
-
-
