@@ -2501,10 +2501,10 @@ void SolarSystem::loadNomenclature()
 			}
 
 			planetSurfNamesFile.close();
-			qDebug() << "Loaded" << readOk << "/" << totalRecords << "items if surface nomenclature for" << planet;
+			qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of surface nomenclature for" << planet;
 
 			PlanetP p = searchByEnglishName(planet);
-			if (!p.isNull()) // OK, the planet is exist!
+			if (!p.isNull()) // OK, the planet exists!
 				p->setNomenclature(nomenclatureList);
 		}
 	}
