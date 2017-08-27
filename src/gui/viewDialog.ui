@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>755</width>
-    <height>648</height>
+    <height>664</height>
    </rect>
   </property>
   <property name="font">
@@ -757,17 +757,37 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="planetLightSpeedCheckBox">
-               <property name="toolTip">
-                <string>Activate this option to simulate the effect of real speed of light (recommended).</string>
-               </property>
-               <property name="text">
-                <string>Simulate light speed</string>
-               </property>
-              </widget>
+             <item row="4" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="planetIsolatedOrbitCheckBox">
+                 <property name="toolTip">
+                  <string>Deactivate this option if you want to see orbit for selected planet and its moons.</string>
+                 </property>
+                 <property name="text">
+                  <string>Show orbit for selected planet</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
-             <item row="9" column="0">
+             <item row="11" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
                 <widget class="QCheckBox" name="customGrsSettingsCheckBox">
@@ -785,70 +805,52 @@
                </item>
               </layout>
              </item>
-             <item row="1" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayoutSelfShadowing">
+             <item row="16" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
-                <spacer name="horizontalSpacerSelfShadowing">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                <widget class="QLabel" name="planetDetailsLabel">
+                 <property name="text">
+                  <string>Planets magnitude algorithm:</string>
                  </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>22</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="planetShowObjSelfShadowsCheckBox">
-                 <property name="toolTip">
-                  <string/>
+                <widget class="QComboBox" name="planetMagnitudeAlgorithmComboBox">
+                 <property name="editable">
+                  <bool>true</bool>
                  </property>
-                 <property name="text">
-                  <string>Simulate self-shadowing</string>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="11" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout">
+             <item row="14" column="0">
+              <layout class="QHBoxLayout" name="scaleSelectedHorizontalLayout">
                <item>
-                <widget class="QCheckBox" name="planetScaleMoonCheckBox">
+                <widget class="QCheckBox" name="planetScaleMinorBodyCheckBox">
                  <property name="text">
-                  <string>Scale Moon:</string>
+                  <string>Scale minor bodies:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="moonScaleFactor">
-                 <property name="toolTip">
-                  <string>Scale factor</string>
-                 </property>
+                <widget class="QDoubleSpinBox" name="minorBodyScaleFactor">
                  <property name="decimals">
                   <number>1</number>
                  </property>
                  <property name="minimum">
                   <double>1.000000000000000</double>
                  </property>
-                 <property name="maximum">
-                  <double>20.000000000000000</double>
-                 </property>
                  <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>4.000000000000000</double>
+                  <double>0.500000000000000</double>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="10" column="0">
+             <item row="12" column="0">
               <layout class="QHBoxLayout" name="planetLimMagHorizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetLimitMagnitudeCheckBox">
@@ -892,7 +894,106 @@
                </property>
               </widget>
              </item>
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayoutSelfShadowing">
+               <item>
+                <spacer name="horizontalSpacerSelfShadowing">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>22</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="planetShowObjSelfShadowsCheckBox">
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="text">
+                  <string>Simulate self-shadowing</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="17" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>22</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="planetMagnitudeAlgorithmDescription">
+                 <property name="text">
+                  <string notr="true">Description of algorithm</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::RichText</enum>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="13" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="planetScaleMoonCheckBox">
+                 <property name="text">
+                  <string>Scale Moon:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="moonScaleFactor">
+                 <property name="toolTip">
+                  <string>Scale factor</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>20.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>4.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="15" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_17">
                <item>
                 <widget class="QCheckBox" name="planetLabelCheckBox">
@@ -925,37 +1026,7 @@
                </item>
               </layout>
              </item>
-             <item row="4" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <item>
-                <spacer name="horizontalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="planetIsolatedOrbitCheckBox">
-                 <property name="toolTip">
-                  <string>Deactivate this option if you want to see orbit for selected planet and its moons.</string>
-                 </property>
-                 <property name="text">
-                  <string>Show orbit for selected planet</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="17" column="0">
+             <item row="19" column="0">
               <layout class="QGridLayout" name="gridLayout_6">
                <item row="0" column="0">
                 <widget class="QLabel" name="label_14">
@@ -1038,6 +1109,26 @@
                </item>
               </layout>
              </item>
+             <item row="10" column="0">
+              <widget class="QCheckBox" name="planetLightSpeedCheckBox">
+               <property name="toolTip">
+                <string>Activate this option to simulate the effect of real speed of light (recommended).</string>
+               </property>
+               <property name="text">
+                <string>Simulate light speed</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="planetIsolatedTrailsCheckBox">
+               <property name="toolTip">
+                <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
+               </property>
+               <property name="text">
+                <string>Show trail only for selected planet</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_16">
                <property name="bottomMargin">
@@ -1081,96 +1172,36 @@
                </item>
               </layout>
              </item>
-             <item row="12" column="0">
-              <layout class="QHBoxLayout" name="scaleSelectedHorizontalLayout">
+             <item row="8" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
-                <widget class="QCheckBox" name="planetScaleMinorBodyCheckBox">
+                <widget class="QCheckBox" name="planetNomenclatureCheckBox">
                  <property name="text">
-                  <string>Scale minor bodies:</string>
+                  <string>Show planets nomenclature</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="minorBodyScaleFactor">
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.500000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="14" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QLabel" name="planetDetailsLabel">
-                 <property name="text">
-                  <string>Planets magnitude algorithm:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="planetMagnitudeAlgorithmComboBox">
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="insertPolicy">
-                  <enum>QComboBox::NoInsert</enum>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="15" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <spacer name="horizontalSpacer_6">
+                <spacer name="horizontalSpacer_7">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>22</width>
+                   <width>40</width>
                    <height>20</height>
                   </size>
                  </property>
                 </spacer>
                </item>
                <item>
-                <widget class="QLabel" name="planetMagnitudeAlgorithmDescription">
-                 <property name="text">
-                  <string notr="true">Description of algorithm</string>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::RichText</enum>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
+                <widget class="QToolButton" name="planetNomenclatureColor">
+                 <property name="toolTip">
+                  <string>Color of nomenclature labels</string>
                  </property>
                 </widget>
                </item>
               </layout>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="planetIsolatedTrailsCheckBox">
-               <property name="toolTip">
-                <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
-               </property>
-               <property name="text">
-                <string>Show trail only for selected planet</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
