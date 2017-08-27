@@ -219,6 +219,8 @@ void SolarSystem::init()
 
 	// Load the nomenclature
 	loadNomenclature();
+	setFlagNomenclature(conf->value("astro/flag_planets_nomenclature", false).toBool());
+	setNomenclatureColor(StelUtils::strToVec3f(conf->value("color/planet_nomenclature_color", defaultColor).toString()));
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -242,6 +244,7 @@ void SolarSystem::init()
 	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
 	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "flagHints", "Ctrl+P");
 	addAction("actionShow_Planets_Pointers", displayGroup, N_("Planet selection marker"), "flagPointer", "Ctrl+Shift+P");
+	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed");
 	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 }
 
@@ -1543,6 +1546,26 @@ bool SolarSystem::getFlagLabels() const
 	return false;
 }
 
+void SolarSystem::setFlagNomenclature(bool b)
+{
+	if (getFlagNomenclature() != b)
+	{
+		foreach (PlanetP p, systemPlanets)
+			p->setFlagNomenclature(b);
+		emit nomenclatureDisplayedChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagNomenclature() const
+{
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		if (p->getFlagNomenclature())
+			return true;
+	}
+	return false;
+}
+
 void SolarSystem::setFlagOrbits(bool b)
 {
 	bool old = flagOrbits;
@@ -1856,6 +1879,17 @@ void SolarSystem::setLabelsColor(const Vec3f& c)
 const Vec3f& SolarSystem::getLabelsColor(void) const
 {
 	return Planet::getLabelColor();
+}
+
+// Set/Get planets names color
+void SolarSystem::setNomenclatureColor(const Vec3f& c)
+{
+	Planet::setNomenclatureColor(c);
+}
+
+const Vec3f& SolarSystem::getNomenclatureColor(void) const
+{
+	return Planet::getNomenclatureColor();
 }
 
 // Set/Get orbits lines color
