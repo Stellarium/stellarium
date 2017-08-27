@@ -1559,9 +1559,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		}
 		drawHints(core, planetNameFont);
 
-		drawNomenclature(core, planetNameFont);
-
 		draw3dModel(core,transfo,screenSz);
+
+		drawNomenclature(core, planetNameFont);
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);
@@ -3088,20 +3088,21 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
      - Longitude of feature -> longitude
      */
 
-    qWarning() << "N" << englishName << nomenclature.size();
+    qDebug() << "N" << englishName << nomenclature.size();
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
     StelPainter sPainter(prj);
     sPainter.setFont(planetNomenclatureFont);
+    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
 
     foreach (StelPlanetNomenclature n, nomenclature)
     {
 	    double R = sqrt(coord.length()*coord.length() + radius*radius);
-	    double latitude = asin( (radius*sin(n.latitude) + coord.length()*sin(coord.latitude()))/R );
-	    double longitude = atan( (radius*cos(n.latitude)*sin(n.longitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(radius*cos(n.latitude)*cos(n.longitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
+	    double latitude = asin( (radius*sin(n.latitude*M_PI/180.0) + coord.length()*sin(coord.latitude()))/R );
+	    double longitude = atan( (radius*cos(n.latitude*M_PI/180.0)*sin(n.longitude*M_PI/180.0) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(radius*cos(n.latitude*M_PI/180.0)*cos(n.longitude*M_PI/180.0) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
         
 	    // From spherical to cartesian coordinates
-	    // The arguments of trigonometric functions must be in radians?
+	    // The arguments of trigonometric functions must be in radians? --> GZ: of course!
 	    featCoord[0] = radius * cos(longitude) * cos(latitude);
 	    featCoord[1] = radius * sin(longitude) * cos(latitude);
 	    featCoord[2] = radius * sin(latitude);
@@ -3113,7 +3114,6 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
 
 	    // Draw nameI18 + scaling if it's not == 1.
 	    //float tmp = getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-	    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
         
         
 
@@ -3123,7 +3123,7 @@ void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclat
 	    qWarning() << "n.name:" << n.name << " SP:" << screenPos.toString() << "SP2:" << srcPos << " EP:" << coord.toString();
     }
 
-    sPainter.setBlending(true);
+    //sPainter.setBlending(true);
 }
 
 
