@@ -36,16 +36,6 @@ typedef void (*posFuncType)(double, double*, void*);
 
 typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
 
-typedef struct
-{
-	QString id;      // ID (unique for this planet)
-	QString name;    // given name
-	QString type;    // Mare|Crater|Volcano|Mountain|... <could become a defined type!>
-	float latitude;  // degrees
-	float longitude; // degrees
-	float size;      // feature size, km
-} StelPlanetNomenclature;
-
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 360
@@ -307,14 +297,12 @@ public:
 	void setRings(Ring* r) {rings = r;}
 
 	void setSphereScale(float s) { if(s!=sphereScale) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
+	float getSphereScale() { return sphereScale; }
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
-
-	static void setNomenclatureColor(const Vec3f& lc) { nomenclatureColor = lc;}
-	static const Vec3f& getNomenclatureColor(void) { return nomenclatureColor;}
 
 	// update displayed elements. @param deltaTime: ms (since last call)
 	virtual void update(int deltaTime);
@@ -325,9 +313,6 @@ public:
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
 
-	void setFlagNomenclature(bool b){ flagNomenclature = b;}
-	bool getFlagNomenclature(void) const { return flagNomenclature;}
-
 	bool flagNativeName;
 	void setFlagNativeName(bool b) { flagNativeName = b; }
 	bool getFlagNativeName(void) { return flagNativeName; }
@@ -335,8 +320,6 @@ public:
 	bool flagTranslatedName;
 	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
 	bool getFlagTranslatedName(void) { return flagTranslatedName; }
-
-	void setNomenclature(QList<StelPlanetNomenclature> data);
 
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -499,9 +482,6 @@ protected:
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
     
-	// Draw the Nomenclature of each planet
-	void drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont);
-
 	PlanetOBJModel* loadObjModel() const;
 
 	QString englishName;             // english planet name
@@ -553,15 +533,11 @@ protected:
 	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
 	LinearFader hintFader;
 	LinearFader labelsFader;         // Store the current state of the label for this planet
-	LinearFader nomenclatureFader;   // Store the current state of the nomenclature labels for this planet
 	bool flagLabels;                 // Define whether labels should be displayed
-	bool flagNomenclature;           // Define whether nomenclature labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
 	bool halo;                       // Does the planet have a halo?
 	PlanetType pType;                // Type of body
-
-	QList<StelPlanetNomenclature> nomenclature;
 
 	static ApparentMagnitudeAlgorithm vMagAlgorithm;
 
@@ -570,7 +546,6 @@ protected:
 	static bool shaderError;		// True if loading shaders caused errors
 
 	static Vec3f labelColor;
-	static Vec3f nomenclatureColor;
 	static StelTextureSP hintCircleTex;
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;

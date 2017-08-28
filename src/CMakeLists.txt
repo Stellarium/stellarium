@@ -207,6 +207,10 @@ SET(stellarium_lib_SRCS
      core/modules/Skylight.hpp
      core/modules/SolarSystem.cpp
      core/modules/SolarSystem.hpp
+     core/modules/NomenclatureItem.cpp
+     core/modules/NomenclatureItem.hpp
+     core/modules/NomenclatureMgr.cpp
+     core/modules/NomenclatureMgr.hpp
      core/modules/Solve.hpp
      core/modules/Star.cpp
      core/modules/Star.hpp
