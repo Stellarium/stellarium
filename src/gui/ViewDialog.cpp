@@ -52,6 +52,7 @@
 #include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "NomenclatureMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -226,7 +227,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);
 	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
-	colorButton(ui->planetNomenclatureColor, "SolarSystem.nomenclatureColor");
+	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
+	colorButton(ui->planetNomenclatureColor, "NomenclatureMgr.nomenclatureColor");
 	connect(ui->planetNomenclatureColor, SIGNAL(released()), this, SLOT(askPlanetNomenclatureColor()));
 
 	populatePlanetMagnitudeAlgorithmsList();
@@ -1021,14 +1023,14 @@ void ViewDialog::askAsterismLinesColor()
 
 void ViewDialog::askPlanetNomenclatureColor()
 {
-	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.nomenclatureColor")->getValue().value<Vec3f>();
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NomenclatureMgr.nomenclatureColor")->getValue().value<Vec3f>();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
 	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->planetNomenclatureColor->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setNomenclatureColor(vColor);
+		GETSTELMODULE(NomenclatureMgr)->setColor(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/planet_nomenclature_color", StelUtils::vec3fToStr(vColor));
 		ui->planetNomenclatureColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
