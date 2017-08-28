@@ -61,7 +61,6 @@ const QString Planet::PLANET_TYPE = QStringLiteral("Planet");
 bool Planet::shaderError = false;
 
 Vec3f Planet::labelColor = Vec3f(0.4f,0.4f,0.8f);
-Vec3f Planet::nomenclatureColor = Vec3f(0.f, 1.f, 0.f);
 Vec3f Planet::orbitColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitMajorPlanetsColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitMoonsColor = Vec3f(1.0f,0.6f,1.0f);
@@ -217,7 +216,6 @@ Planet::Planet(const QString& englishName,
 	  osculatingFunc(osculatingFunc),
 	  parent(Q_NULLPTR),
 	  flagLabels(true),
-	  flagNomenclature(false),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
@@ -268,8 +266,6 @@ Planet::Planet(const QString& englishName,
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
-
-	nomenclature.clear();
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -1559,21 +1555,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		{
 			labelsFader=false;
 		}
-
-		if (flagNomenclature && ang_dist>0.25 && maxMagLabels>getVMagnitude(core))
-		{
-			nomenclatureFader=true;
-		}
-		else
-		{
-			nomenclatureFader=false;
-		}
-
 		drawHints(core, planetNameFont);
 
 		draw3dModel(core,transfo,screenSz);
-
-		drawNomenclature(core, planetNameFont);
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);
@@ -3060,7 +3044,6 @@ void Planet::update(int deltaTime)
 {
 	hintFader.update(deltaTime);
 	labelsFader.update(deltaTime);
-	nomenclatureFader.update(deltaTime);
 	orbitFader.update(deltaTime);
 }
 
@@ -3069,78 +3052,3 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 	// sync default value with ViewDialog and SolarSystem!
 	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::Expl_Sup_2013);
 }
-
-void Planet::setNomenclature(QList<StelPlanetNomenclature> data)
-{
-	nomenclature = data;
-	qDebug() << "Set nomenclature for" << getEnglishName();
-	foreach (StelPlanetNomenclature n, nomenclature)
-		qDebug() << "ID:" << n.id << " Name:" << n.name << " Type:" << n.type << " Latitude:" << QString::number(n.latitude, 'f', 5) << " Longitude:" << QString::number(n.longitude, 'f', 5) << " Size:" << QString::number(n.size, 'f', 2);
-}
-
-void Planet::drawNomenclature(const StelCore* core, const QFont& planetNomenclatureFont)
-{
-	// Use draw methods to set the name and make it disappear
-	if (nomenclatureFader.getInterstate()==0.f)
-		return;
-    
-    // Get latitude and longitude of Moon in J2000
-    Vec3d coord = getJ2000EquatorialPos(core);
-    Vec3d srcPos, featCoord;
-    
-    //re.offset;
-    
-    // Change coordinates from planetocentric to equatorial
-    /*
-     - Distance from Earth to feature -> dist
-     - Latitude of feature -> latitude
-     - Longitude of feature -> longitude
-     */
-
-    qDebug() << "N" << englishName << nomenclature.size();
-
-    const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-    StelPainter sPainter(prj);
-    sPainter.setFont(planetNomenclatureFont);
-    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelsFader.getInterstate());
-
-    foreach (StelPlanetNomenclature n, nomenclature)
-    {
-        double r = radius*sphereScale;
-        double nlatitude = n.latitude*M_PI/180.0;
-        double nlongitude = (n.longitude - re.offset)*M_PI/180.0;
-        
-        double R = sqrt(coord.length()*coord.length() + r*r);
-        // Could be this line an alternative to get the distance between planet and feature?
-        //double dist = getEquinoxEquatorialPos(core).length();
-        double latitude = asin( (r*sin(nlatitude) + coord.length()*sin(coord.latitude()))/R );
-        double longitude = atan( (r*cos(nlatitude)*sin(nlongitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(r*cos(nlatitude)*cos(nlongitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
-        
-	    // From spherical to cartesian coordinates
-        // The arguments of trigonometric functions must be in radians? --> GZ: of course!
-	    featCoord[0] = r * cos(longitude) * cos(latitude);
-	    featCoord[1] = r * sin(longitude) * cos(latitude);
-	    featCoord[2] = r * sin(latitude);
-        
-	    // Draw nameI18 + scaling if it's not == 1.
-	    //float tmp = getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-        
-        if (prj->project(featCoord, srcPos)) // Make visible only the names that are looking to the planet
-            sPainter.drawCircle(srcPos[0], srcPos[1], 2.f);
-		    sPainter.drawText(srcPos[0], srcPos[1], n.name, 0, 2.f, 2.f, false);
-
-	    qWarning() << "n.name:" << n.name << " SP:" << screenPos.toString() << "SP2:" << srcPos << " EP:" << coord.toString();
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-

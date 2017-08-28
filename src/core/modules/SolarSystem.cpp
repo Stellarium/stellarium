@@ -217,11 +217,6 @@ void SolarSystem::init()
 
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 
-	// Load the nomenclature
-	loadNomenclature();
-	setFlagNomenclature(conf->value("astro/flag_planets_nomenclature", false).toBool());
-	setNomenclatureColor(StelUtils::strToVec3f(conf->value("color/planet_nomenclature_color", defaultColor).toString()));
-
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
@@ -244,7 +239,6 @@ void SolarSystem::init()
 	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
 	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "flagHints", "Ctrl+P");
 	addAction("actionShow_Planets_Pointers", displayGroup, N_("Planet selection marker"), "flagPointer", "Ctrl+Shift+P");
-	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed");
 	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 }
 
@@ -1546,26 +1540,6 @@ bool SolarSystem::getFlagLabels() const
 	return false;
 }
 
-void SolarSystem::setFlagNomenclature(bool b)
-{
-	if (getFlagNomenclature() != b)
-	{
-		foreach (PlanetP p, systemPlanets)
-			p->setFlagNomenclature(b);
-		emit nomenclatureDisplayedChanged(b);
-	}
-}
-
-bool SolarSystem::getFlagNomenclature() const
-{
-	foreach (const PlanetP& p, systemPlanets)
-	{
-		if (p->getFlagNomenclature())
-			return true;
-	}
-	return false;
-}
-
 void SolarSystem::setFlagOrbits(bool b)
 {
 	bool old = flagOrbits;
@@ -1879,17 +1853,6 @@ void SolarSystem::setLabelsColor(const Vec3f& c)
 const Vec3f& SolarSystem::getLabelsColor(void) const
 {
 	return Planet::getLabelColor();
-}
-
-// Set/Get planets names color
-void SolarSystem::setNomenclatureColor(const Vec3f& c)
-{
-	Planet::setNomenclatureColor(c);
-}
-
-const Vec3f& SolarSystem::getNomenclatureColor(void) const
-{
-	return Planet::getNomenclatureColor();
 }
 
 // Set/Get orbits lines color
@@ -2456,91 +2419,5 @@ bool SolarSystem::removePlanet(QString name)
 	systemPlanets.removeOne(candidate);
 	candidate.clear();
 	return true;
-}
-
-void SolarSystem::loadNomenclature()
-{
-	// Load nomenclature for Solar system bodies
-
-	// Get list of all planet names
-	QStringList sso = getAllPlanetEnglishNames();
-
-	// regular expression to find the comments and empty lines
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-
-	// regular expression to find the nomenclature data
-	// Rules:
-	// One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
-	// Format:
-	//	ID of surface feature			: unique string
-	//	translatable name of surface feature	: string
-	//	type of surface feature			: string
-	//	latitude of surface feature		: float (decimal degrees)
-	//	longitude of surface feature		: float (decimal degrees)
-	//	size of surface feature			: float (kilometers)
-	QRegExp recRx("^\\s*([\\w\\d\\-]+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
-	QString record;
-
-	// Let's check existence of nomenclature data for each planet
-	foreach (QString planet, sso)
-	{
-		QString surfNamesFile = StelFileMgr::findFile("data/nomenclature/" + planet.toLower() + ".fab");
-		if (!surfNamesFile.isEmpty()) // OK, the file is exist!
-		{
-			// Open file
-			QFile planetSurfNamesFile(surfNamesFile);
-			if (!planetSurfNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-			{
-				qDebug() << "Cannot open file" << QDir::toNativeSeparators(surfNamesFile);
-				continue;
-			}
-
-			// keep track of how many records we processed.
-			int totalRecords=0;
-			int readOk=0;
-			int lineNumber=0;
-			StelPlanetNomenclature nomenclature;
-			QList<StelPlanetNomenclature> nomenclatureList;
-			nomenclatureList.clear();
-			while (!planetSurfNamesFile.atEnd())
-			{
-				record = QString::fromUtf8(planetSurfNamesFile.readLine());
-				lineNumber++;
-
-				// Skip comments
-				if (commentRx.exactMatch(record))
-					continue;
-
-				totalRecords++;
-				if (!recRx.exactMatch(record))
-					qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
-				else
-				{
-					// Read the ID of feature
-					nomenclature.id		= recRx.capturedTexts().at(1).trimmed();
-					// Read the name of feature
-					nomenclature.name	= recRx.capturedTexts().at(2).trimmed();
-					// Read the type of feature
-					nomenclature.type	= recRx.capturedTexts().at(3).trimmed();
-					// Read the latitude of feature
-					nomenclature.latitude	= recRx.capturedTexts().at(4).toFloat();
-					// Read the longitude of feature
-					nomenclature.longitude	= recRx.capturedTexts().at(5).toFloat();
-					// Read the size of feature
-					nomenclature.size	= recRx.capturedTexts().at(6).toFloat();
-
-					nomenclatureList.append(nomenclature);
-					readOk++;
-				}
-			}
-
-			planetSurfNamesFile.close();
-			qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of surface nomenclature for" << planet;
-
-			PlanetP p = searchByEnglishName(planet);
-			if (!p.isNull()) // OK, the planet exists!
-				p->setNomenclature(nomenclatureList);
-		}
-	}
 }
 
