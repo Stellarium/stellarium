@@ -70,7 +70,9 @@ for(my $i=0; $i<scalar(@dbfiles); $i++)
     {
 	my $id = $arr->[5];
 	$id =~ s/http\:\/\/planetarynames\.wr\.usgs\.gov\/Feature\///gi;
-	print FAB $id."\t_(\"".$arr->[0]."\")\t".$arr->[4]."\t".$arr->[3]."\t".$arr->[2]."\t".$arr->[1]."\n";
+	my $latitude  = sprintf "%.6f", $arr->[3];
+	my $longitude = sprintf "%.6f", $arr->[2];
+	print FAB $id."\t_(\"".$arr->[0]."\")\t".$arr->[4]."\t".$latitude."\t".$longitude."\t".$arr->[1]."\n";
     }
     close FAB;
 }
