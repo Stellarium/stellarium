@@ -41,65 +41,71 @@ class NomenclatureItem : public StelObject
 public:
 	static const QString NOMENCLATURE_TYPE;
 
+	// Details: https://planetarynames.wr.usgs.gov/DescriptorTerms
 	Q_ENUMS(NomenclatureItemType)
 	enum NomenclatureItemType
 	{
-		niAlbedoFeature,	// type="albedo feature"
-		niArcus,		// type="arcus"
-		niCatena,		// type="catena"
-		niCavus,		// type="cavus"
-		niChaos,		// type="chaos"
-		niChasma,		// type="chasma"
-		niCollis,		// type="collis"
-		niCorona,		// type="corona"
-		niCrater,		// type="crater"
-		niDorsum,		// type="dorsum"
-		niEruptiveCenter,	// type="eruptive center"
-		niFlexus,		// type="flexus"
-		niFluctus,		// type="fluctus"
-		niFlumen,		// type="flumen"
-		niFretum,		// type="fretum"
-		niFossa,		// type="fossa"
-		niInsula,		// type="insula"
-		niLabes,		// type="labes"
-		niLabyrinthus,		// type="labyrinthus"
-		niLacuna,		// type="lacuna"
-		niLacus,		// type="lacus"
-		niLargeRingedFeature,	// type="large ringed feature"
-		niLinea,		// type="linea"
-		niLingula,		// type="lingula"
-		niMacula,		// type="macula"
-		niMare,			// type="mare"
-		niMensa,		// type="mensa"
-		niMons,			// type="mons"
-		niOceanus,		// type="oceanus"
-		niPalus,		// type="palus"
-		niPatera,		// type="patera"
-		niPlanitia,		// type="planitia"
-		niPlanum,		// type="planum"
-		niPlume,		// type="plume"
-		niPromontorium,		// type="promontorium"
-		niRegio,		// type="regio"
-		niRima,			// type="rima"
-		niRupes,		// type="rupes"
-		niScopulus,		// type="scopulus"
-		niSerpens,		// type="serpens"
-		niSulcus,		// type="sulcus"
-		niSinus,		// type="sinus"
-		niTerra,		// type="terra"
-		niTholus,		// type="tholus"
-		niUnda,			// type="unda"
-		niVallis,		// type="vallis"
-		niVastitas,		// type="vastitas"
-		niVirga,		// type="virga"
-		niLandingSite,		// type="landing site"
-		niUNDEFINED		// type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
+		niUNDEFINED		=  0, // Undefined type of feature. THIS IS ONLY IN CASE OF ERROR!
+		niAlbedoFeature		=  1, // type="albedo feature"
+		niArcus			=  2, // type="arcus"
+		niAstrum		=  3, // type="astrum"
+		niCatena		=  4, // type="catena"
+		niCavus			=  5, // type="cavus"
+		niChaos			=  6, // type="chaos"
+		niChasma		=  7, // type="chasma"
+		niCollis		=  8, // type="collis"
+		niCorona		=  9, // type="corona"
+		niCrater		= 10, // type="crater"
+		niDorsum		= 11, // type="dorsum"
+		niEruptiveCenter	= 12, // type="eruptive center"
+		niFacula		= 13, // type="facula"
+		niFarrum		= 14, // type="farrum"
+		niFlexus		= 15, // type="flexus"
+		niFluctus		= 16, // type="fluctus"
+		niFlumen		= 17, // type="flumen"
+		niFretum		= 18, // type="fretum"
+		niFossa			= 19, // type="fossa"
+		niInsula		= 20, // type="insula"
+		niLabes			= 21, // type="labes"
+		niLabyrinthus		= 22, // type="labyrinthus"
+		niLacuna		= 23, // type="lacuna"
+		niLacus			= 24, // type="lacus"
+		niLargeRingedFeature	= 25, // type="large ringed feature"
+		niLinea			= 26, // type="linea"
+		niLingula		= 27, // type="lingula"
+		niMacula		= 28, // type="macula"
+		niMare			= 29, // type="mare"
+		niMensa			= 30, // type="mensa"
+		niMons			= 31, // type="mons"
+		niOceanus		= 32, // type="oceanus"
+		niPalus			= 33, // type="palus"
+		niPatera		= 34, // type="patera"
+		niPlanitia		= 35, // type="planitia"
+		niPlanum		= 36, // type="planum"
+		niPlume			= 37, // type="plume"
+		niPromontorium		= 38, // type="promontorium"
+		niRegio			= 39, // type="regio"
+		niRima			= 40, // type="rima"
+		niRupes			= 41, // type="rupes"
+		niScopulus		= 42, // type="scopulus"
+		niSerpens		= 43, // type="serpens"
+		niSulcus		= 44, // type="sulcus"
+		niSinus			= 45, // type="sinus"
+		niTerra			= 46, // type="terra"
+		niTholus		= 47, // type="tholus"
+		niUnda			= 48, // type="unda"
+		niVallis		= 49, // type="vallis"
+		niVastitas		= 50, // type="vastitas"
+		niVirga			= 51, // type="virga"
+		niLandingSite		= 52, // type="landing site"
+		niLenticula		= 53, // type="lenticula"
+		niReticulum		= 54, // type="reticulum"
+		niSatelliteFeature	= 55, // type="satellite feature"
+		niTessera		= 56  // type="tessera"
 	};
 
-	NomenclatureItem(PlanetP nPlanet, const QString& nId, const QString& nName, const QString& nItemType, float nLatitude, float nLongitude, float nSize);
+	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, NomenclatureItemType nItemType, float nLatitude, float nLongitude, float nSize);
 	virtual ~NomenclatureItem();
-
-	static void init();
 
 	//! Get the type of object
 	virtual QString getType(void) const
@@ -109,7 +115,7 @@ public:
 
 	virtual QString getID(void) const
 	{
-		return identificator;
+		return QString("%1").arg(identificator);
 	}
 
 	virtual float getSelectPriority(const StelCore* core) const;
@@ -138,8 +144,9 @@ public:
 
 	void draw(StelCore* core, StelPainter *painter);
 
-	const QString getNomenclatureTypeString() const {return niTypeMap.value(niType);}
-	NomenclatureItemType getNomenclatureType() const {return niType;}
+	QString getNomenclatureTypeString() const;
+	QString getNomenclatureTypeDescription() const;
+	NomenclatureItemType getNomenclatureType() const { return nType;}
 
 	void update(double deltaTime);
 
@@ -152,13 +159,12 @@ private:
 	static Vec3f color;
 
 	PlanetP planet;
-	QString identificator, englishName, nameI18n, nType;
+	int identificator;
+	QString englishName, nameI18n;
+	NomenclatureItemType nType;       // Type of nomenclature item
 	float latitude, longitude, size;
 
-	LinearFader labelsFader;	
-
-	NomenclatureItemType niType;       // Type of nomenclature item
-	static QMap<NomenclatureItemType, QString> niTypeMap; // Maps fast type to english name.
+	LinearFader labelsFader;
 };
 
 #endif // _NOMENCLATUREITEM_HPP_
