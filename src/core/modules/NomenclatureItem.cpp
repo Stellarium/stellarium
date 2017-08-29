@@ -585,7 +585,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	XYZ[1] = r * sin(longitude) * cos(latitude);
 	XYZ[2] = r * sin(latitude);
 
-	if (painter->getProjector()->project(XYZ, srcPos))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
