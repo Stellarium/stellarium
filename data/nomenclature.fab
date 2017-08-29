@@ -1,8 +1,9 @@
 #
-# Nomenclature of the Moon
+# Nomenclature for Solar system bodies
 #
 # One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
 # Format:
+#	planet name				: string
 #	ID of surface feature			: unique integer (equals to Feature ID obtained from https://planetarynames.wr.usgs.gov)
 #	translatable name of surface feature	: string
 #	type of surface feature			: string (2-char code; details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
@@ -10,12 +11,12 @@
 #	longitude of surface feature		: float (decimal degrees)
 #	size of surface feature			: float (kilometers)
 #
-3665	_("Mare Australe")	ME	-47.77	91.99	996.84
-3670	_("Mare Cognitum")	ME	-10.53	-22.31	350.01
-92	_("Agrippa")		AA	4.10	10.47	43.75
-113	_("Airy")		AA	-181.4	5.61	38.9
-9	_("Abbe")		AA	-57.58	174.77	63.98
-10	_("Abbot")		AA	5.56	54.74	10.4
-326	_("Apollo")		AA	-35.69	-151.48	524.23
-6286	_("Valier")		AA	6.65	174.26	65.06
+Moon	3665	_("Mare Australe")	ME	-47.77	91.99	996.84
+Moon	3670	_("Mare Cognitum")	ME	-10.53	-22.31	350.01
+Moon	92	_("Agrippa")		AA	4.10	10.47	43.75
+Moon	113	_("Airy")		AA	-181.4	5.61	38.9
+Moon	9	_("Abbe")		AA	-57.58	174.77	63.98
+Moon	10	_("Abbot")		AA	5.56	54.74	10.4
+Moon	326	_("Apollo")		AA	-35.69	-151.48	524.23
+Moon	6286	_("Valier")		AA	6.65	174.26	65.06
 

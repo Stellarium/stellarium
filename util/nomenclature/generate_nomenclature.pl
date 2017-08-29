@@ -41,30 +41,25 @@ open(TMPL, "<./header.tmpl");
 @header = <TMPL>;
 close TMPL;
 
+open(FAB, ">./nomenclature.fab");
+for(my $j=0;$j<scalar(@header);$j++) {
+    print FAB $header[$j];
+}
+print FAB "\n";
+
 for(my $i=0; $i<scalar(@dbfiles); $i++)
 {
     my $fileName = $dbfiles[$i];
-    my $fabFile  = $fileName;
-    $fabFile =~ s/_nomenclature.dbf//gi;
-    my $planetName = $fabFile;
-    $fabFile = lc $fabFile;
-    $fabFile .= ".fab";
+    my $planetName  = $fileName;
+    $planetName =~ s/_nomenclature.dbf//gi;
+    my $pName   = substr($planetName, 0, 1);
+    my $pNameLC = substr($planetName, 1);
+    $pNameLC = lc $pNameLC;
+    $pName .= $pNameLC;
 
     my $dbh = DBI->connect("DBI:XBase:./") or die $DBI::errstr;
     my $sth = $dbh->prepare("SELECT clean_name, diameter, center_lon, center_lat, code, link FROM $fileName") or die $dbh->errstr;
     $sth->execute() or die $sth->errstr;
-    open(FAB, ">$fabFile");
-    for(my $j=0;$j<scalar(@header);$j++) {
-	my $line = $header[$j];
-	my $pName   = substr($planetName, 0, 1);
-	my $pNameLC = substr($planetName, 1);
-	$pNameLC = lc $pNameLC;
-	$pName .= $pNameLC;
-	$line =~ s/_PLANET_NAME_/$pName/gi;
-	$line =~ s/_PLANET_TARGET_/$planetName/gi;
-	print FAB $line;
-    }
-    print FAB "\n";
     
     while(my $arr = $sth->fetchrow_arrayref ) 
     {
@@ -72,7 +67,7 @@ for(my $i=0; $i<scalar(@dbfiles); $i++)
 	$id =~ s/http\:\/\/planetarynames\.wr\.usgs\.gov\/Feature\///gi;
 	my $latitude  = sprintf "%.6f", $arr->[3];
 	my $longitude = sprintf "%.6f", $arr->[2];
-	print FAB $id."\t_(\"".$arr->[0]."\")\t".$arr->[4]."\t".$latitude."\t".$longitude."\t".$arr->[1]."\n";
+	print FAB $pName."\t".$id."\t_(\"".$arr->[0]."\")\t".$arr->[4]."\t".$latitude."\t".$longitude."\t".$arr->[1]."\n";
     }
-    close FAB;
 }
+close FAB;
