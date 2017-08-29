@@ -79,9 +79,6 @@ void NomenclatureMgr::loadNomenclature()
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	nomenclatureItems.clear();
 
-	// Get list of all planet names
-	QStringList sso = ssystem->getAllPlanetEnglishNames();
-
 	// regular expression to find the comments and empty lines
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 
@@ -89,13 +86,14 @@ void NomenclatureMgr::loadNomenclature()
 	// Rules:
 	// One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
 	// Format:
-	//	ID of surface feature			: unique int (taken from )
+	//	planet name				: string
+	//	ID of surface feature			: unique integer (feature id obtained from https://planetarynames.wr.usgs.gov/)
 	//	translatable name of surface feature	: string
 	//	type of surface feature			: string (2-char code)
 	//	latitude of surface feature		: float (decimal degrees)
 	//	longitude of surface feature		: float (decimal degrees)
 	//	diameter of surface feature		: float (kilometers)
-	QRegExp recRx("^\\s*(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
+	QRegExp recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
 	QString record;
 
 	QStringList nTypes; // codes for types of features (details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
@@ -106,247 +104,252 @@ void NomenclatureMgr::loadNomenclature()
 	       << "RE"	<< "RT"	<< "RI"	<< "RU"	<< "SF"	<< "SC"	<< "SE"	<< "SI"	<< "SU"	<< "TA"
 	       << "TE"	<< "TH"	<< "UN"	<< "VA"	<< "VS"	<< "VI";
 
-	// Let's check existence of nomenclature data for each planet
-	foreach (QString planet, sso)
+	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.fab");
+	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
 	{
-		QString surfNamesFile = StelFileMgr::findFile("data/nomenclature/" + planet.toLower() + ".fab");
-		if (!surfNamesFile.isEmpty()) // OK, the file is exist!
+		// Open file
+		QFile planetSurfNamesFile(surfNamesFile);
+		if (!planetSurfNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			// Open file
-			QFile planetSurfNamesFile(surfNamesFile);
-			if (!planetSurfNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-			{
-				qDebug() << "Cannot open file" << QDir::toNativeSeparators(surfNamesFile);
+			qDebug() << "Cannot open file" << QDir::toNativeSeparators(surfNamesFile);
+			return;
+		}
+
+		// keep track of how many records we processed.
+		int totalRecords=0;
+		int readOk=0;
+		int lineNumber=0;
+
+		PlanetP p;
+
+		int featureId;
+		QString name, ntypecode, planet = "", planetName = "";
+		NomenclatureItem::NomenclatureItemType ntype;
+		float latitude, longitude, size;
+
+		while (!planetSurfNamesFile.atEnd())
+		{
+			record = QString::fromUtf8(planetSurfNamesFile.readLine());
+			lineNumber++;
+
+			// Skip comments
+			if (commentRx.exactMatch(record))
 				continue;
-			}
 
-			// keep track of how many records we processed.
-			int totalRecords=0;
-			int readOk=0;
-			int lineNumber=0;
-
-			int featureId;
-			QString name, ntypecode;
-			NomenclatureItem::NomenclatureItemType ntype;
-			float latitude, longitude, size;
-
-			PlanetP p = ssystem->searchByEnglishName(planet);
-			if (!p.isNull())
+			totalRecords++;
+			if (!recRx.exactMatch(record))
+				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
+			else
 			{
-				while (!planetSurfNamesFile.atEnd())
+				// Read the planet name
+				planet		= recRx.capturedTexts().at(1).trimmed();
+				// Read the ID of feature
+				featureId	= recRx.capturedTexts().at(2).toInt();
+				// Read the name of feature
+				name		= recRx.capturedTexts().at(3).trimmed();
+				// Read the type of feature
+				ntypecode	= recRx.capturedTexts().at(4).trimmed();
+				switch (nTypes.indexOf(ntypecode.toUpper()))
 				{
-					record = QString::fromUtf8(planetSurfNamesFile.readLine());
-					lineNumber++;
+					case 0:
+						ntype = NomenclatureItem::niAlbedoFeature;
+						break;
+					case 1:
+						ntype = NomenclatureItem::niArcus;
+						break;
+					case 2:
+						ntype = NomenclatureItem::niAstrum;
+						break;
+					case 3:
+						ntype = NomenclatureItem::niCatena;
+						break;
+					case 4:
+						ntype = NomenclatureItem::niCavus;
+						break;
+					case 5:
+						ntype = NomenclatureItem::niChaos;
+						break;
+					case 6:
+						ntype = NomenclatureItem::niChasma;
+						break;
+					case 7:
+						ntype = NomenclatureItem::niCollis;
+						break;
+					case 8:
+						ntype = NomenclatureItem::niCorona;
+						break;
+					case 9:
+						ntype = NomenclatureItem::niCrater;
+						break;
+					case 10:
+						ntype = NomenclatureItem::niDorsum;
+						break;
+					case 11:
+						ntype = NomenclatureItem::niEruptiveCenter;
+						break;
+					case 12:
+						ntype = NomenclatureItem::niFacula;
+						break;
+					case 13:
+						ntype = NomenclatureItem::niFarrum;
+						break;
+					case 14:
+						ntype = NomenclatureItem::niFlexus;
+						break;
+					case 15:
+						ntype = NomenclatureItem::niFluctus;
+						break;
+					case 16:
+						ntype = NomenclatureItem::niFlumen;
+						break;
+					case 17:
+						ntype = NomenclatureItem::niFossa;
+						break;
+					case 18:
+						ntype = NomenclatureItem::niFretum;
+						break;
+					case 19:
+						ntype = NomenclatureItem::niInsula;
+						break;
+					case 20:
+						ntype = NomenclatureItem::niLabes;
+						break;
+					case 21:
+						ntype = NomenclatureItem::niLabyrinthus;
+						break;
+					case 22:
+						ntype = NomenclatureItem::niLacuna;
+						break;
+					case 23:
+						ntype = NomenclatureItem::niLacus;
+						break;
+					case 24:
+						ntype = NomenclatureItem::niLandingSite;
+						break;
+					case 25:
+						ntype = NomenclatureItem::niLargeRingedFeature;
+						break;
+					case 26:
+						ntype = NomenclatureItem::niLenticula;
+						break;
+					case 27:
+						ntype = NomenclatureItem::niLinea;
+						break;
+					case 28:
+						ntype = NomenclatureItem::niLingula;
+						break;
+					case 29:
+						ntype = NomenclatureItem::niMacula;
+						break;
+					case 30:
+						ntype = NomenclatureItem::niMare;
+						break;
+					case 31:
+						ntype = NomenclatureItem::niMensa;
+						break;
+					case 32:
+						ntype = NomenclatureItem::niMons;
+						break;
+					case 33:
+						ntype = NomenclatureItem::niOceanus;
+						break;
+					case 34:
+						ntype = NomenclatureItem::niPalus;
+						break;
+					case 35:
+						ntype = NomenclatureItem::niPatera;
+						break;
+					case 36:
+						ntype = NomenclatureItem::niPlanitia;
+						break;
+					case 37:
+						ntype = NomenclatureItem::niPlanum;
+						break;
+					case 38:
+						ntype = NomenclatureItem::niPlume;
+						break;
+					case 39:
+						ntype = NomenclatureItem::niPromontorium;
+						break;
+					case 40:
+						ntype = NomenclatureItem::niRegio;
+						break;
+					case 41:
+						ntype = NomenclatureItem::niReticulum;
+						break;
+					case 42:
+						ntype = NomenclatureItem::niRima;
+						break;
+					case 43:
+						ntype = NomenclatureItem::niRupes;
+						break;
+					case 44:
+						ntype = NomenclatureItem::niSatelliteFeature;
+						break;
+					case 45:
+						ntype = NomenclatureItem::niScopulus;
+						break;
+					case 46:
+						ntype = NomenclatureItem::niSerpens;
+						break;
+					case 47:
+						ntype = NomenclatureItem::niSinus;
+						break;
+					case 48:
+						ntype = NomenclatureItem::niSulcus;
+						break;
+					case 49:
+						ntype = NomenclatureItem::niTerra;
+						break;
+					case 50:
+						ntype = NomenclatureItem::niTessera;
+						break;
+					case 51:
+						ntype = NomenclatureItem::niTholus;
+						break;
+					case 52:
+						ntype = NomenclatureItem::niUnda;
+						break;
+					case 53:
+						ntype = NomenclatureItem::niVallis;
+						break;
+					case 54:
+						ntype = NomenclatureItem::niVastitas;
+						break;
+					case 55:
+						ntype = NomenclatureItem::niVirga;
+						break;
+					default:
+						ntype = NomenclatureItem::niUNDEFINED;
+						break;
+				}
+				// Read the latitude of feature
+				latitude	= recRx.capturedTexts().at(5).toFloat();
+				// Read the longitude of feature
+				longitude	= recRx.capturedTexts().at(6).toFloat();
+				// Read the size of feature
+				size		= recRx.capturedTexts().at(7).toFloat();
 
-					// Skip comments
-					if (commentRx.exactMatch(record))
-						continue;
+				if (planetName.isEmpty() || planet!=planetName)
+				{
+					p = ssystem->searchByEnglishName(planet);
+					planetName = planet;
+				}
 
-					totalRecords++;
-					if (!recRx.exactMatch(record))
-						qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
-					else
-					{
-						// Read the ID of feature
-						featureId	= recRx.capturedTexts().at(1).toInt();
-						// Read the name of feature
-						name		= recRx.capturedTexts().at(2).trimmed();
-						// Read the type of feature
-						ntypecode	= recRx.capturedTexts().at(3).trimmed();
-						switch (nTypes.indexOf(ntypecode.toUpper()))
-						{
-							case 0:
-								ntype = NomenclatureItem::niAlbedoFeature;
-								break;
-							case 1:
-								ntype = NomenclatureItem::niArcus;
-								break;
-							case 2:
-								ntype = NomenclatureItem::niAstrum;
-								break;
-							case 3:
-								ntype = NomenclatureItem::niCatena;
-								break;
-							case 4:
-								ntype = NomenclatureItem::niCavus;
-								break;
-							case 5:
-								ntype = NomenclatureItem::niChaos;
-								break;
-							case 6:
-								ntype = NomenclatureItem::niChasma;
-								break;
-							case 7:
-								ntype = NomenclatureItem::niCollis;
-								break;
-							case 8:
-								ntype = NomenclatureItem::niCorona;
-								break;
-							case 9:
-								ntype = NomenclatureItem::niCrater;
-								break;
-							case 10:
-								ntype = NomenclatureItem::niDorsum;
-								break;
-							case 11:
-								ntype = NomenclatureItem::niEruptiveCenter;
-								break;
-							case 12:
-								ntype = NomenclatureItem::niFacula;
-								break;
-							case 13:
-								ntype = NomenclatureItem::niFarrum;
-								break;
-							case 14:
-								ntype = NomenclatureItem::niFlexus;
-								break;
-							case 15:
-								ntype = NomenclatureItem::niFluctus;
-								break;
-							case 16:
-								ntype = NomenclatureItem::niFlumen;
-								break;
-							case 17:
-								ntype = NomenclatureItem::niFossa;
-								break;
-							case 18:
-								ntype = NomenclatureItem::niFretum;
-								break;
-							case 19:
-								ntype = NomenclatureItem::niInsula;
-								break;
-							case 20:
-								ntype = NomenclatureItem::niLabes;
-								break;
-							case 21:
-								ntype = NomenclatureItem::niLabyrinthus;
-								break;
-							case 22:
-								ntype = NomenclatureItem::niLacuna;
-								break;
-							case 23:
-								ntype = NomenclatureItem::niLacus;
-								break;
-							case 24:
-								ntype = NomenclatureItem::niLandingSite;
-								break;
-							case 25:
-								ntype = NomenclatureItem::niLargeRingedFeature;
-								break;
-							case 26:
-								ntype = NomenclatureItem::niLenticula;
-								break;
-							case 27:
-								ntype = NomenclatureItem::niLinea;
-								break;
-							case 28:
-								ntype = NomenclatureItem::niLingula;
-								break;
-							case 29:
-								ntype = NomenclatureItem::niMacula;
-								break;
-							case 30:
-								ntype = NomenclatureItem::niMare;
-								break;
-							case 31:
-								ntype = NomenclatureItem::niMensa;
-								break;
-							case 32:
-								ntype = NomenclatureItem::niMons;
-								break;
-							case 33:
-								ntype = NomenclatureItem::niOceanus;
-								break;
-							case 34:
-								ntype = NomenclatureItem::niPalus;
-								break;
-							case 35:
-								ntype = NomenclatureItem::niPatera;
-								break;
-							case 36:
-								ntype = NomenclatureItem::niPlanitia;
-								break;
-							case 37:
-								ntype = NomenclatureItem::niPlanum;
-								break;
-							case 38:
-								ntype = NomenclatureItem::niPlume;
-								break;
-							case 39:
-								ntype = NomenclatureItem::niPromontorium;
-								break;
-							case 40:
-								ntype = NomenclatureItem::niRegio;
-								break;
-							case 41:
-								ntype = NomenclatureItem::niReticulum;
-								break;
-							case 42:
-								ntype = NomenclatureItem::niRima;
-								break;
-							case 43:
-								ntype = NomenclatureItem::niRupes;
-								break;
-							case 44:
-								ntype = NomenclatureItem::niSatelliteFeature;
-								break;
-							case 45:
-								ntype = NomenclatureItem::niScopulus;
-								break;
-							case 46:
-								ntype = NomenclatureItem::niSerpens;
-								break;
-							case 47:
-								ntype = NomenclatureItem::niSinus;
-								break;
-							case 48:
-								ntype = NomenclatureItem::niSulcus;
-								break;
-							case 49:
-								ntype = NomenclatureItem::niTerra;
-								break;
-							case 50:
-								ntype = NomenclatureItem::niTessera;
-								break;
-							case 51:
-								ntype = NomenclatureItem::niTholus;
-								break;
-							case 52:
-								ntype = NomenclatureItem::niUnda;
-								break;
-							case 53:
-								ntype = NomenclatureItem::niVallis;
-								break;
-							case 54:
-								ntype = NomenclatureItem::niVastitas;
-								break;
-							case 55:
-								ntype = NomenclatureItem::niVirga;
-								break;
-							default:
-								ntype = NomenclatureItem::niUNDEFINED;
-								break;
-						}
-						// Read the latitude of feature
-						latitude	= recRx.capturedTexts().at(4).toFloat();
-						// Read the longitude of feature
-						longitude	= recRx.capturedTexts().at(5).toFloat();
-						// Read the size of feature
-						size		= recRx.capturedTexts().at(6).toFloat();
+				if (!p.isNull())
+				{
+					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, ntype, latitude, longitude, size));
+					if (!nom.isNull())
+						nomenclatureItems.append(nom);
 
-						NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, ntype, latitude, longitude, size));
-						if (!nom.isNull())
-							nomenclatureItems.append(nom);
-
-						readOk++;
-					}
+					readOk++;
 				}
 			}
-
-			planetSurfNamesFile.close();
-			qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of surface nomenclature for" << planet;
-
 		}
+
+		planetSurfNamesFile.close();
+		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
+
 	}
 }
 
