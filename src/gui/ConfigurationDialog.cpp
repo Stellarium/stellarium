@@ -57,6 +57,7 @@
 #include "StelTranslator.hpp"
 #include "EphemWrapper.hpp"
 #include "ToastMgr.hpp"
+#include "HipsMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>

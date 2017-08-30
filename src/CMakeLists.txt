@@ -10,6 +10,7 @@ IF(ENABLE_SPOUT)
 ENDIF()
 
 SET(stellarium_lib_SRCS
+     core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
      core/StelVideoMgr.hpp
@@ -121,6 +122,8 @@ SET(stellarium_lib_SRCS
      core/GeomMath.cpp
      core/StelOpenGLArray.hpp
      core/StelOpenGLArray.cpp
+     core/StelHips.hpp
+     core/StelHips.cpp
 
      ${spout_SRCS}
 
@@ -175,6 +178,8 @@ SET(stellarium_lib_SRCS
      core/modules/CustomObjectMgr.hpp
      core/modules/GridLinesMgr.cpp
      core/modules/GridLinesMgr.hpp
+     core/modules/HipsMgr.hpp
+     core/modules/HipsMgr.cpp
      core/modules/LabelMgr.hpp
      core/modules/LabelMgr.cpp
      core/modules/Landscape.cpp

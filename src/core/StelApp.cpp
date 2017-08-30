@@ -26,6 +26,7 @@
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "AsterismMgr.hpp"
+#include "HipsMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "CustomObjectMgr.hpp"
@@ -481,6 +482,11 @@ void StelApp::init(QSettings* conf)
 	ToastMgr* toasts = new ToastMgr();
 	toasts->init();
 	getModuleMgr().registerModule(toasts);
+
+	// Hips surveys
+	HipsMgr* hips = new HipsMgr();
+	hips->init();
+	getModuleMgr().registerModule(hips);
 
 	// Init audio manager
 	audioMgr = new StelAudioMgr();

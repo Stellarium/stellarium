@@ -836,11 +836,11 @@ void StelGui::setFlagShowToastSurveyButton(bool b)
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 			QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
 			QPixmap pxmapOff(":/graphicGui/btToastSurvey-off.png");
-			btShowToastSurvey = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
+			btShowToastSurvey = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Survey");
 		}
 		getButtonBar()->addButton(btShowToastSurvey, "040-nebulaeGroup");
 	} else {
-		getButtonBar()->hideButton("actionShow_Toast_Survey");
+		getButtonBar()->hideButton("actionShow_Hips_Survey");
 	}
 	flagShowToastSurveyButton = b;
 }
