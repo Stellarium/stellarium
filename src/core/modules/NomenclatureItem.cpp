@@ -565,7 +565,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	if (!getFlagLabels())
 		return;
 
-	// Get latitude and longitude of Moon in J2000
+	// Get latitude and longitude of planet or moon in J2000
 	Vec3d coord = planet->getJ2000EquatorialPos(core);
 	Vec3d srcPos;
 
@@ -584,6 +584,12 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	XYZ[0] = r * cos(longitude) * cos(latitude);
 	XYZ[1] = r * sin(longitude) * cos(latitude);
 	XYZ[2] = r * sin(latitude);
+    
+/*
+*This part is to find an alternativ to calculation with trigonometric functions
+*/
+    Mat4d mat = Mat4d::zrotation(longitude)*Mat4d::yrotation(latitude);
+    
 
 	if (painter->getProjector()->projectCheck(XYZ, srcPos))
 	{
