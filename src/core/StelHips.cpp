@@ -24,6 +24,7 @@
 #include "StelTextureMgr.hpp"
 
 #include <QNetworkReply>
+#include <QTimeLine>
 
 // Declare functions defined in healpix.c
 extern "C" {
@@ -38,6 +39,9 @@ public:
 	int order;
 	int pix;
 	StelTextureSP texture;
+
+	// Used for smooth fade in
+	QTimeLine texFader;
 };
 
 HipsSurvey::HipsSurvey(const QString& url):
@@ -154,6 +158,8 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 
 	HipsTile* tile = getTile(order, pix);
 	if (!tile || !tile->texture->bind()) return;
+	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
+		tile->texFader.start();
 
 	// Actually draw the tile, as a single quad.
 	Mat3d mat3;
@@ -166,9 +172,18 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 		pos = mat3 * Vec3d(1 - uv[i][1], uv[i][0], 1.0);
 		healpix_xy2vec(pos.v, verts[i].v);
 	}
+	if (tile->texFader.state() == QTimeLine::Running)
+	{
+		sPainter->setBlending(true);
+		sPainter->setColor(1, 1, 1, tile->texFader.currentValue());
+	}
+	else
+	{
+		sPainter->setBlending(false);
+		sPainter->setColor(1, 1, 1, 1);
+	}
+
 	sPainter->setCullFace(true);
-	sPainter->setBlending(false);
-	sPainter->setColor(1, 1, 1, 1);
 	sPainter->setArrays(verts, uv);
 	sPainter->drawFromArray(StelPainter::Triangles, 6, 0, true, indices);
 }
