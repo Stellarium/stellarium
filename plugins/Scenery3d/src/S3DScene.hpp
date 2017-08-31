@@ -27,6 +27,8 @@
 #include "SceneInfo.hpp"
 #include "Heightmap.hpp"
 
+#include <cfloat>
+
 Q_DECLARE_LOGGING_CATEGORY(s3dscene)
 
 class S3DScene
