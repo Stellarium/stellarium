@@ -78,10 +78,11 @@ void S3DScene::Material::fixup()
 	}
 
 	//find out if Kd is valid
-	//this is probably the minimum we should expect
+	//this is probably the minimum we should expect, but there are exporters not writing Kd when map_Kd is given. Log a warning if there is also no texture.
 	if(Kd[0]< .0f)
 	{
-		qCWarning(s3dscene)<<"Material"<<name<<"has no Kd defined";
+		if (!traits.hasDiffuseTexture)
+			qCWarning(s3dscene)<<"Material"<<name<<"has no Kd defined";
 		Kd = QVector3D(0.8f,0.8f,0.8f);
 	}
 

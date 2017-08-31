@@ -36,14 +36,14 @@ public:
 	struct Material : public StelOBJ::Material
 	{
 		Material() : traits(), bAlphatest(false), bBackface(false), fAlphaThreshold(0.5),
-			     vis_fadeIn(0.0,0.0),vis_fadeOut(0.0,0.0),vis_fadeValue(1.0)
+			     vis_fadeIn(-DBL_MAX, -DBL_MAX),vis_fadeOut(DBL_MAX,DBL_MAX),vis_fadeValue(1.0)
 		{
 
 		}
 
 		Material(const StelOBJ::Material& stelMat)
 			: StelOBJ::Material(stelMat), traits(), bAlphatest(false), bBackface(false), fAlphaThreshold(0.5),
-			  vis_fadeIn(0.0,0.0),vis_fadeOut(0.0,0.0),vis_fadeValue(1.0)
+			  vis_fadeIn(-DBL_MAX, -DBL_MAX),vis_fadeOut(DBL_MAX,DBL_MAX),vis_fadeValue(1.0)
 		{
 			if(additionalParams.contains("bAlphatest"))
 				parseBool(additionalParams.value("bAlphatest"), bAlphatest);
