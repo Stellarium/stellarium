@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-24 22:20+0700\n"
-"PO-Revision-Date: 2017-07-26 17:16+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
+"PO-Revision-Date: 2017-08-31 20:45+0000\n"
+"Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-25 05:13+0000\n"
+"X-Launchpad-Export-Date: 2017-09-01 05:12+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -427,7 +427,7 @@ msgstr "каэфіцыент паглынаньня"
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "Атмасфэрныя ўмовы"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "Light pollution"
@@ -435,7 +435,7 @@ msgstr "Засьветленьне"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "by Bortle scale"
-msgstr ""
+msgstr "паводле шкалы Бортля"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
@@ -802,22 +802,23 @@ msgstr "незадакумэнтаваная яркасьць"
 #: src/core/modules/Nebula.cpp:1324
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr ""
+msgstr "рэшткі паказваюць радыёструктуру з абалонкай"
 
 #: src/core/modules/Nebula.cpp:1327
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
+msgstr "рэшткі паказваюць запоўненую цэнтральную («плерыён») радыёструктуру"
 
 #: src/core/modules/Nebula.cpp:1330
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr ""
+msgstr "рэшткі паказваюць складаную (або камбінаваную) радыёструктуру"
 
 #: src/core/modules/Nebula.cpp:1333
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr ""
+"рэшткі паказваюць радыёструктуру з абалонкай зь некаторай няпэўнасьцю"
 
 #: src/core/modules/Nebula.cpp:1336
 msgctxt "supernova remnant structure classification"
@@ -825,6 +826,8 @@ msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
+"рэшткі паказваюць запоўненую цэнтральную («плерыён») радыёструктуру зь "
+"некаторай няпэўнасьцю"
 
 #: src/core/modules/Nebula.cpp:1339
 msgctxt "supernova remnant structure classification"
@@ -832,6 +835,8 @@ msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
+"рэшткі паказваюць складаную (або камбінаваную) радыёструктуру зь некаторай "
+"няпэўнасьцю"
 
 #: src/core/modules/Nebula.cpp:1352
 msgid "galaxy"
@@ -903,11 +908,11 @@ msgstr "рэшткі звышновай"
 
 #: src/core/modules/Nebula.cpp:1403
 msgid "supernova candidate"
-msgstr ""
+msgstr "кандыдат у звышновыя"
 
 #: src/core/modules/Nebula.cpp:1406
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "кандыдат у рэшткі звышновай"
 
 #: src/core/modules/Nebula.cpp:1409
 msgid "stellar association"
@@ -970,7 +975,7 @@ msgstr "зорка з эмісійнай лініяй"
 
 #: src/core/modules/Nebula.cpp:1451
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "скопішча ґаляктык"
 
 #: src/core/modules/Nebula.cpp:1454
 msgid "object of unknown nature"
@@ -3650,19 +3655,19 @@ msgstr "Зоркі з эмісійнай лініяй"
 #: src/gui/AstroCalcDialog.cpp:388 src/gui/AstroCalcDialog.cpp:2726
 #: src/translations.h:135 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
-msgstr ""
+msgstr "Кандыдат у звышновыя"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:389 src/gui/AstroCalcDialog.cpp:2727
 #: src/translations.h:137 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
-msgstr ""
+msgstr "Кандыдат у рэшткі звышновай"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:2729
 #: src/translations.h:161 src/ui_viewDialog.h:2304 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
-msgstr ""
+msgstr "Скопішчы ґаляктык"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:392 src/translations.h:163
@@ -3757,17 +3762,17 @@ msgstr "Каталёґ ґаляктыктыных плянэтарных тум�
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:428 src/translations.h:195
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
-msgstr ""
+msgstr "Каталёґ ґаляктыктыных плянэтарных туманнасьцяў Страсбург-ЭПА"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:430 src/translations.h:197
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "Каталёґ рэштак ґаляктычных звышновых"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:432 src/translations.h:199
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr ""
+msgstr "Каталёґ багатых скопішчаў ґаляктык"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:433 src/translations.h:201
@@ -6611,14 +6616,15 @@ msgstr "Атляс дзіўных ґаляктык (Арп, 1966 г.)"
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
+"Каталёґ ґаляктыктыных плянэтарных туманнасьцяў Страсбург-ЭПА (Акер+ 1992)"
 
 #: src/ui_viewDialog.h:2289
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr ""
+msgstr "Каталёґ рэштак ґаляктычных звышновых (Ґрын, 2014)"
 
 #: src/ui_viewDialog.h:2292
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
-msgstr ""
+msgstr "Каталёґ багатых скопішчаў ґаляктык (Абэль+, 1989)"
 
 #: src/ui_viewDialog.h:2294
 msgid "Filter by type"
@@ -8358,15 +8364,15 @@ msgstr "Колер пазнак лацэртыд"
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr ""
+msgstr "Колер пазнак кандыдытаў у звышновыя"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr ""
+msgstr "Колер пазнак кандыдытаў у рэшткі звышновыя"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
-msgstr ""
+msgstr "Колер пазнак скопішчаў ґаляктык"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -9934,7 +9940,7 @@ msgstr "сапсаваны"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
 msgid "Save predicted Iridium flares as..."
-msgstr ""
+msgstr "Захаваць прадказаныя бліскі Iridium як…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
 msgid "Stellarium Satellites Plugin"
@@ -10458,7 +10464,7 @@ msgstr "Прадказваць бліскі Iridium"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "Захаваць прадказаньні…"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -12923,7 +12929,7 @@ msgstr "Гадавы паралякс"
 #: plugins/Pulsars/src/Pulsar.cpp:230
 msgctxt "parallax"
 msgid "mas"
-msgstr ""
+msgstr "марксек"
 
 #: plugins/Pulsars/src/Pulsar.cpp:236
 msgid "Distance based on electron density model"
