@@ -573,11 +573,10 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	double nlatitude = latitude*M_PI/180.0;
 	double nlongitude = (longitude - planet->getRotationElements().offset)*M_PI/180.0;
 
-	double R = sqrt(coord.length()*coord.length() + r*r);
-	// Could be this line an alternative to get the distance between planet and feature?
-	//double dist = getEquinoxEquatorialPos(core).length();
-	double latitude = asin( (r*sin(nlatitude) + coord.length()*sin(coord.latitude()))/R );
-	double longitude = atan( (r*cos(nlatitude)*sin(nlongitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(r*cos(nlatitude)*cos(nlongitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
+//	double R = sqrt(coord.length()*coord.length() + r*r);
+    double R = sqrt( coord.length()*coord.length() + r*r + 2*coord.length()*r*( cos(nlongitude - coord.longitude())*cos(coord.latitude())*cos(nlatitude) + sin(coord.latitude())*sin(nlatitude) ) );
+    double latitude = asin( (r*sin(nlatitude) + coord.length()*sin(coord.latitude()))/R );
+    double longitude = atan( (r*cos(nlatitude)*sin(nlongitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(r*cos(nlatitude)*cos(nlongitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
 
 	// From spherical to cartesian coordinates
 	// The arguments of trigonometric functions must be in radians? --> GZ: of course!
@@ -588,7 +587,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 /*
 *This part is to find an alternativ to calculation with trigonometric functions
 */
-    Mat4d mat = Mat4d::zrotation(longitude)*Mat4d::yrotation(latitude);
+    Mat4d mat = Mat4d::zrotation(longitude)*Mat4d::yrotation(latitude); // -> this isn't correct
     
 
 	if (painter->getProjector()->projectCheck(XYZ, srcPos))
