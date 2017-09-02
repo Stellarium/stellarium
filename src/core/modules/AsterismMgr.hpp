@@ -54,6 +54,14 @@ class AsterismMgr : public StelObjectModule
 		   READ getFlagLines
 		   WRITE setFlagLines
 		   NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(Vec3f rayHelpersColor
+		   READ getRayHelpersColor
+		   WRITE setRayHelpersColor
+		   NOTIFY rayHelpersColorChanged)
+	Q_PROPERTY(bool rayHelpersDisplayed
+		   READ getFlagRayHelpers
+		   WRITE setFlagRayHelpers
+		   NOTIFY rayHelpersDisplayedChanged)
 	Q_PROPERTY(Vec3f namesColor
 		   READ getLabelsColor
 		   WRITE setLabelsColor
@@ -66,6 +74,10 @@ class AsterismMgr : public StelObjectModule
 		   READ getAsterismLineThickness
 		   WRITE setAsterismLineThickness
 		   NOTIFY asterismLineThicknessChanged)
+	Q_PROPERTY(float rayHelperThickness
+		   READ getRayHelperThickness
+		   WRITE setRayHelperThickness
+		   NOTIFY rayHelperThicknessChanged)
 
 public:
 	//! Constructor
@@ -133,6 +145,21 @@ public slots:
 	//! Get whether asterism lines are displayed
 	bool getFlagLines(void) const;
 
+	//! Define ray helper color
+	//! @param color The color of ray helpers
+	//! @code
+	//! // example of usage in scripts
+	//! AsterismMgr.setRayHelpersColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setRayHelpersColor(const Vec3f& color);
+	//! Get ray helper color
+	Vec3f getRayHelpersColor() const;
+
+	//! Set whether ray helpers will be displayed
+	void setFlagRayHelpers(const bool displayed);
+	//! Get whether ray helpers are displayed
+	bool getFlagRayHelpers(void) const;
+
 	//! Set label color for names
 	//! @param color The color of labels
 	//! @code
@@ -159,6 +186,12 @@ public slots:
 	//! Get the thickness of lines of the asterisms
 	float getAsterismLineThickness() const { return asterismLineThickness; }
 
+	//! Set the thickness of ray helpers of the asterisms
+	//! @param thickness of ray helper in pixels
+	void setRayHelperThickness(const float thickness);
+	//! Get the thickness of ray helper of the asterisms
+	float getRayHelperThickness() const { return rayHelperThickness; }
+
 signals:
 	void fontSizeChanged(const float newSize) const;
 	void linesColorChanged(const Vec3f & color) const;
@@ -166,6 +199,9 @@ signals:
 	void namesColorChanged(const Vec3f & color) const;
 	void namesDisplayedChanged(const bool displayed) const;
 	void asterismLineThicknessChanged(float thickness) const;
+	void rayHelpersColorChanged(const Vec3f & color) const;
+	void rayHelpersDisplayedChanged(const bool displayed) const;
+	void rayHelperThicknessChanged(float thickness) const;
 
 private slots:
 	//! Loads new asterism data and art if the SkyCulture has changed.
@@ -192,6 +228,8 @@ private:
 
 	//! Draw the asterism lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
+	//! Draw the ray helpers at the epoch given by the StelCore.
+	void drawRayHelpers(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the asterism name labels.
 	void drawNames(StelPainter& sPainter) const;
 
@@ -208,11 +246,13 @@ private:
 	QString currentSkyCultureID;
 
 	bool linesDisplayed;
+	bool rayHelpersDisplayed;
 	bool namesDisplayed;
 	bool hasAsterism;
 
 	// Store the thickness of lines of the asterisms
 	float asterismLineThickness;
+	float rayHelperThickness;
 };
 
 #endif // _ASTERISMMGR_HPP_
