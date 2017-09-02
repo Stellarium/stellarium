@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-24 22:20+0700\n"
-"PO-Revision-Date: 2017-07-24 18:46+0000\n"
-"Last-Translator: Tiago Santos <Unknown>\n"
+"PO-Revision-Date: 2017-09-01 19:04+0000\n"
+"Last-Translator: Francisco J M Marques <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-08-25 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-09-02 05:13+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -419,7 +419,7 @@ msgstr "Localização"
 #: src/core/modules/LandscapeMgr.cpp:823
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "hPa"
 
 #: src/core/modules/LandscapeMgr.cpp:833
 msgid "extinction coefficient"
@@ -427,15 +427,15 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "condições atmosféricas"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "Light pollution"
-msgstr ""
+msgstr "poluição luminosa"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "by Bortle scale"
-msgstr ""
+msgstr "Escala de Bortle"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
@@ -546,7 +546,7 @@ msgstr "Mlh. Al"
 
 #: src/core/modules/Nebula.cpp:364 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
-msgstr ""
+msgstr "desvio para o vermelho"
 
 #: src/core/modules/Nebula.cpp:375 src/core/modules/StarWrapper.cpp:249
 msgid "Parallax"
@@ -807,7 +807,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:1327
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
+msgstr "remnant shows a filled center ('plerion') radio structure"
 
 #: src/core/modules/Nebula.cpp:1330
 msgctxt "supernova remnant structure classification"
@@ -903,11 +903,11 @@ msgstr "resto de supernova"
 
 #: src/core/modules/Nebula.cpp:1403
 msgid "supernova candidate"
-msgstr ""
+msgstr "candidata a supernova"
 
 #: src/core/modules/Nebula.cpp:1406
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "candidato a resto de supernova"
 
 #: src/core/modules/Nebula.cpp:1409
 msgid "stellar association"
@@ -970,7 +970,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1451
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "cluster de galaxias"
 
 #: src/core/modules/Nebula.cpp:1454
 msgid "object of unknown nature"
@@ -1400,7 +1400,7 @@ msgstr "Adicionar 1 dia sideral"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 7 sidereal days"
-msgstr ""
+msgstr "adicione 7 dias siderais"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 sidereal year"
@@ -1472,7 +1472,7 @@ msgstr "Retirar 1 dia sideral"
 
 #: src/core/StelCore.cpp:291
 msgid "Subtract 7 sidereal days"
-msgstr ""
+msgstr "subtraia 7 dias siderais"
 
 #: src/core/StelCore.cpp:292
 msgid "Subtract 1 sidereal year"
@@ -2314,7 +2314,7 @@ msgstr "Licença"
 #: src/gui/ConfigurationDialog.cpp:1023
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "desconhecido"
 
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Running script: "
@@ -3653,25 +3653,25 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2725 src/translations.h:159
 #: src/ui_dsoColorsDialog.h:636
 msgid "Emission-line stars"
-msgstr ""
+msgstr "linha de emissão estelar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:388 src/gui/AstroCalcDialog.cpp:2726
 #: src/translations.h:135 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
-msgstr ""
+msgstr "candidatos a supernovas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:389 src/gui/AstroCalcDialog.cpp:2727
 #: src/translations.h:137 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
-msgstr ""
+msgstr "candidatos a restos de supernova"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:2729
 #: src/translations.h:161 src/ui_viewDialog.h:2304 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
-msgstr ""
+msgstr "Clusters de galáxias"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:392 src/translations.h:163
@@ -3718,12 +3718,12 @@ msgstr "Catálogo Melotte"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:408 src/translations.h:179
 msgid "New General Catalogue"
-msgstr ""
+msgstr "Novo catálogo geral"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:410 src/translations.h:181
 msgid "Index Catalogue"
-msgstr ""
+msgstr "Índice do catálogo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:412 src/translations.h:183
@@ -3771,12 +3771,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:430 src/translations.h:197
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "O catálogo dos restos de supernovas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:432 src/translations.h:199
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr ""
+msgstr "Um catálogo de ricos agrupamentos de galáxias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:433 src/translations.h:201
@@ -3958,17 +3958,17 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1212
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr ""
+msgstr "Brilho de estrelas (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1213
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr ""
+msgstr "Estrelas de brilho duplo (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1214
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
-msgstr ""
+msgstr "Estrelas de brilho variavel (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1215
 #, qt-format
@@ -3978,12 +3978,12 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1217
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
-msgstr ""
+msgstr "Nebulosa brilhante  (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1219
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr ""
+msgstr "Galaxias brilhantes (<%1 mag)"
 
 #: src/gui/AstroCalcDialog.cpp:1386 src/gui/AstroCalcDialog.cpp:1793
 #: src/gui/AstroCalcDialog.cpp:1795
@@ -4030,7 +4030,7 @@ msgstr "Tamanho Angular"
 #: src/gui/AstroCalcDialog.cpp:1787
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "Agora cerca de %1"
 
 #: src/gui/AstroCalcDialog.cpp:1789
 #, qt-format
@@ -4822,6 +4822,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
+"Screensaver de vários eventos no Sistema Solar. 287 eventos no total!"
 
 #: src/translations.h:409
 msgid "A tour of the western constellations."
@@ -6180,7 +6181,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:490
 msgid "Retrieve current coordinates from GPS. Does not set timezone!"
-msgstr ""
+msgstr "Ler as coordenadas correntes do GPS. Não altera o fuso horário!"
 
 #: src/ui_locationDialogGui.h:493
 msgid "New Location"
@@ -6504,7 +6505,7 @@ msgstr "Limitar a magnitude dos objectos do sistema solar"
 
 #: src/ui_viewDialog.h:2201
 msgid "Use more accurate 3D models (where available)"
-msgstr ""
+msgstr "Utilize modelos 3D mais precisos (se disponíveis)"
 
 #: src/ui_viewDialog.h:2202
 msgid "Show planet markers"
@@ -6541,7 +6542,7 @@ msgstr "Mostrar órbitas dos planetas"
 
 #: src/ui_viewDialog.h:2221
 msgid "Configure colors of orbit lines"
-msgstr ""
+msgstr "Configurar as cores das linhas das orbitas"
 
 #: src/ui_viewDialog.h:2223
 msgid "Colors..."
@@ -6553,7 +6554,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2225
 msgid "Planets magnitude algorithm:"
-msgstr ""
+msgstr "Algoritmo da magnitude dos planetas:"
 
 #: src/ui_viewDialog.h:2227
 msgid ""
@@ -6711,7 +6712,7 @@ msgstr "Sugestões"
 
 #: src/ui_viewDialog.h:2325
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "Configurar as cores dos mascadores"
 
 #: src/ui_viewDialog.h:2326
 msgid "Use outlines for big deep-sky objects"
