@@ -3,20 +3,1334 @@
 #
 # One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
 # Format:
-#	planet name				: string
-#	ID of surface feature			: unique integer (equals to Feature ID obtained from https://planetarynames.wr.usgs.gov)
-#	translatable name of surface feature	: string
-#	type of surface feature			: string (2-char code; details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
-#	latitude of surface feature		: float (decimal degrees)
-#	longitude of surface feature		: float (decimal degrees)
-#	size of surface feature			: float (kilometers)
+#	english planet name	                 : string
+#	ID of surface feature                : integer unique to planet (equals to Feature ID obtained from https://planetarynames.wr.usgs.gov)
+#	translatable name of surface feature : string
+#	type of surface feature              : string (2-char code; details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
+#	latitude of surface feature	         : float (decimal degrees)
+#	longitude of surface feature         : float (decimal degrees)
+#	size of surface feature	             : float (kilometers)
 #
-Moon	3665	_("Mare Australe")	ME	-47.77	91.99	996.84
-Moon	3670	_("Mare Cognitum")	ME	-10.53	-22.31	350.01
-Moon	92	_("Agrippa")		AA	4.10	10.47	43.75
-Moon	113	_("Airy")		AA	-181.4	5.61	38.9
-Moon	9	_("Abbe")		AA	-57.58	174.77	63.98
-Moon	10	_("Abbot")		AA	5.56	54.74	10.4
-Moon	326	_("Apollo")		AA	-35.69	-151.48	524.23
-Moon	6286	_("Valier")		AA	6.65	174.26	65.06
-
+#
+Mars 38		_("Acidalia Planitia") PL   49.76  339.26 3362.97	
+Mars 220	_("Amazonis Planitia") PL   25.75  197.09 2809.04	
+Mars 348	_("Arcadia Planitia")  PL   47.19  184.31 1871.97	
+Mars 371	_("Argyre Planitia")   PL  -49.84  316.69  892.93	
+Mars 1203	_("Chryse Planitia")   PL   28.43  319.69 1542.44	
+Mars 1784	_("Elysium Planitia")  PL    2.98  154.74	3000.79	
+Mars 14779	_("Eridania Planitia") PL  -38.15  122.21 1062.13	
+Mars 2432	_("Hellas Planitia")   PL  -42.43   70.5  2299.16	
+Mars 2735	_("Isidis Planitia")   PL   13.94   88.38 1224.58	
+Mars 6260	_("Utopia Planitia")   PL   46.74  117.52 3560.45	
+#
+Moon     9 _("Abbe")                             AA  -57.58  174.77   63.98
+Moon    12 _("Abel")                             AA  -34.63   85.78  137.35
+Moon  7037 _("Abel L")                           SF  -34.55   82.39   54.13
+Moon  7038 _("Abel M")                           SF  -32.38   83.52   91.01
+Moon    23 _("Abulfeda")                         AA  -13.87   13.91   62.23
+Moon    22 _("Abul Wáfa")                        AA    0.96  116.63   54.18
+Moon    47 _("Adams")                            AA  -31.89   68.39   63.27
+Moon    82 _("Agatharchides")                    AA  -19.85  -31.11   51.98
+Moon  7093 _("Agatharchides P")                  SF   -20.3  -28.77   65.98
+Moon   119 _("Aitken")                           AA  -16.44  172.96  129.69
+Moon  7124 _("Aitken C")                         SF  -13.76  175.57   65.61
+Moon   162 _("Albategnius")                      AA  -11.24    4.01  130.84
+Moon   146 _("Al-Biruni")                        AA   18.07   92.62   80.41
+Moon   170 _("Alden")                            AA  -23.51  111.11  111.44
+Moon  7155 _("Alden C")                          SF  -22.69  111.74   56.81
+Moon   171 _("Alder")                            AA  -48.63 -177.88   82.12
+Moon   174 _("Alekhin")                          AA  -67.94 -131.85   74.82
+Moon   177 _("Alexander")                        AA   40.25   13.69    94.8
+Moon   185 _("Aliacensis")                       AA   -30.6    5.13   79.65
+Moon   149 _("Al-Khwarizmi")                     AA    7.02  107.01   56.25
+Moon  7130 _("Al-Khwarizmi B")                   SF    9.09  107.92   59.06
+Moon  7131 _("Al-Khwarizmi G")                   SF    6.76  107.35  102.83
+Moon   206 _("Alphonsus")                        AA  -13.39   -2.85  110.54
+Moon   208 _("Alter")                            AA   18.74  -107.8   64.73
+Moon  7227 _("Alter W")                          SF   20.38 -109.41   51.47
+Moon   232 _("Amici")                            AA  -10.06 -172.23   52.03
+Moon  7228 _("Amici M")                          SF  -11.81 -172.02  107.91
+Moon  7234 _("Amici U")                          SF   -8.75 -175.47   88.73
+Moon   247 _("Amundsen")                         AA  -84.44   83.07  103.39
+Moon   252 _("Anaxagoras")                       AA   73.48  -10.17    51.9
+Moon   254 _("Anaximander")                      AA   66.97  -51.44   68.71
+Moon  7240 _("Anaximander B")                    SF   68.08  -61.21    79.1
+Moon  7241 _("Anaximander D")                    SF   65.78  -50.68   96.63
+Moon   255 _("Anaximenes")                       AA   72.49  -44.98   81.12
+Moon  7249 _("Anaximenes G")                     SF   73.75   -40.5   51.17
+Moon   260 _("Anderson")                         AA    15.5  170.79  105.33
+Moon   289 _("Ansgarius")                        AA  -12.92   79.72   91.42
+Moon   296 _("Antoniadi")                        AA   -69.3 -173.06  137.92
+Moon   304 _("Anuchin")                          AA  -48.85  101.66   62.14
+Moon  7282 _("Anuchin Q")                        SF  -50.82   98.77   51.43
+Moon   320 _("Apianus")                          AA  -26.96    7.87   63.44
+Moon   326 _("Apollo")                           AA  -35.69 -151.48  524.23
+Moon   328 _("Apollonius")                       AA    4.51   60.96   50.66
+Moon   330 _("Appleton")                         AA   37.05  158.17   64.59
+Moon   350 _("Archimedes")                       AA   29.72   -3.99   81.04
+Moon   381 _("Aristillus")                       AA   33.88    1.21   54.37
+Moon   382 _("Aristoteles")                      AA   50.24   17.32   87.57
+Moon   387 _("Arnold")                           AA   66.98   35.83   93.13
+Moon  7383 _("Arnold A")                         SF   68.77    39.6   55.13
+Moon   398 _("Artamonov")                        AA   25.44  103.79   62.45
+Moon   402 _("Artem'ev")                         AA    10.4 -145.22   66.39
+Moon  7395 _("Artem'ev G")                       SF   10.01 -143.69   60.94
+Moon   412 _("Arzachel")                         AA  -18.26   -1.93   96.99
+Moon   422 _("Ashbrook")                         AA   -81.1 -110.58  157.68
+Moon   458 _("Atlas")                            AA   46.74   44.38   88.12
+Moon  7419 _("Atlas E")                          SF   48.61    42.5   57.98
+Moon   509 _("Avicenna")                         AA   39.63  -97.28   72.99
+Moon   510 _("Avogadro")                         AA   63.21  165.36  129.84
+Moon  7445 _("Azophi G")                         SF  -23.87   12.27   54.65
+Moon   529 _("Baade")                            AA  -44.75  -82.03   57.85
+Moon   533 _("Babbage")                          AA   59.56  -57.38  146.56
+Moon  7451 _("Babbage D")                        SF   58.65  -61.17   70.96
+Moon   535 _("Babcock")                          AA    4.13   94.14   95.28
+Moon  7455 _("Babcock H")                        SF    3.11   96.51    63.4
+Moon   542 _("Backlund")                         AA  -16.22  103.35   75.46
+Moon  7458 _("Backlund L")                       SF  -18.37  103.82   57.19
+Moon   543 _("Baco")                             AA  -51.04    19.1   65.31
+Moon   560 _("Baillaud")                         AA   74.61   37.35   89.44
+Moon  7485 _("Baillaud A")                       SF   75.61   48.28   55.61
+Moon   561 _("Bailly")                           AA  -66.82   -68.9  300.56
+Moon  7492 _("Bailly B")                         SF  -68.74  -63.25   62.21
+Moon   570 _("Balboa")                           AA   19.24  -83.31   69.19
+Moon  7515 _("Balboa B")                         SF   20.49  -82.57   54.25
+Moon   574 _("Baldet")                           AA  -53.32 -151.96   55.76
+Moon   580 _("Balmer")                           AA  -20.27   70.22   136.3
+Moon   592 _("Banachiewicz")                     AA    5.28   80.01   99.09
+Moon   605 _("Barbier")                          AA  -23.85  157.93   65.38
+Moon   608 _("Barnard")                          AA  -29.79   85.95  115.73
+Moon  7544 _("Barnard D")                        SF  -31.34   89.17   52.24
+Moon   613 _("Barocius")                         AA  -44.98   16.81   82.72
+Moon   616 _("Barringer")                        AA  -28.22 -150.43   66.89
+Moon   617 _("Barrow")                           AA   71.28    7.59   93.82
+Moon   621 _("Bartels")                          AA   24.51  -89.85   54.95
+Moon   651 _("Beals")                            AA   37.11   86.58   52.61
+Moon   653 _("Beaumont")                         AA  -18.08   28.82   50.69
+Moon   654 _("Becquerel")                        AA   40.79   129.5   62.86
+Moon   727 _("Bečvář")                           AA   -2.57  125.07   66.62
+Moon   662 _("Behaim")                           AA  -16.61   79.41   56.21
+Moon   664 _("Beijerinck")                       AA   -13.4  151.84   76.77
+Moon  7641 _("Beijerinck V")                     SF  -12.67  150.26   52.89
+Moon   684 _("Bel'kovich")                       AA   61.53   90.15  215.08
+Moon  7642 _("Bel'kovich A")                     SF   58.65   87.41   57.26
+Moon   672 _("Bell")                             AA   21.98  -96.53   86.33
+Moon   674 _("Bellinsgauzen (Bellingshausen)")   AA  -60.72 -164.85   63.23
+Moon  7651 _("Bell T")                           SF   21.91  -99.04    52.2
+Moon   679 _("Belopol'skiy")                     AA  -17.25 -128.23    61.9
+Moon   682 _("Belyaev")                          AA    23.1  143.11    55.9
+Moon  7655 _("Belyaev Q")                        SF   20.65  139.72   50.29
+Moon  7658 _("Bergstrand Q")                     SF  -19.94  175.19   57.12
+Moon   702 _("Berkner")                          AA   25.13 -105.24   87.62
+Moon   703 _("Berlage")                          AA  -63.04 -163.61   93.75
+Moon   710 _("Berosus")                          AA    33.5   69.99   75.24
+Moon   724 _("Bettinus")                         AA   -63.4  -45.16   71.78
+Moon   728 _("Bhabha")                           AA   -55.5 -165.31   70.25
+Moon   739 _("Biela")                            AA  -54.99   51.63   77.03
+Moon  7719 _("Biela Z")                          SF   -53.9      57   50.63
+Moon   752 _("Birkeland")                        AA  -30.17  174.01   81.64
+Moon   753 _("Birkhoff")                         AA   58.45 -145.65  329.81
+Moon  7735 _("Birkhoff K")                       SF    57.4 -144.81   58.23
+Moon  7740 _("Birkhoff X")                       SF   61.62 -150.42   76.58
+Moon   754 _("Birmingham")                       AA   65.12   -10.7   89.92
+Moon 14748 _("Bi Sheng")                         AA   78.35  148.46   55.27
+Moon  7760 _("Bjerknes E")                       SF  -38.26  115.61   53.45
+Moon   764 _("Blackett")                         AA  -37.55 -115.84  145.31
+Moon   767 _("Blancanus")                        AA  -63.77  -21.63  105.82
+Moon   770 _("Blanchinus")                       AA  -25.32    2.44    59.9
+Moon   773 _("Blazhko")                          AA   31.37 -147.86   51.11
+Moon  7780 _("Blazhko R")                        SF   29.82 -150.01   53.98
+Moon   796 _("Boguslawsky")                      AA   -72.9   43.26   94.59
+Moon  7792 _("Boguslawsky B")                    SF  -73.98   61.12   63.47
+Moon   798 _("Bohr")                             AA   12.71  -86.52   70.07
+Moon   805 _("Boltzmann")                        AA  -74.82  -90.41   72.31
+Moon   806 _("Bolyai")                           AA  -33.85  126.12  102.22
+Moon  7817 _("Bolyai L")                         SF  -36.48  126.66   72.67
+Moon  7819 _("Bolyai W")                         SF  -32.05  124.42   53.03
+Moon   817 _("Bonpland")                         AA   -8.38  -17.33   59.25
+Moon   818 _("Boole")                            AA   63.79  -87.29   61.34
+Moon  7830 _("Boole A")                          SF   63.42  -80.57   55.88
+Moon  7837 _("Boole H")                          SF   61.73  -88.83    82.4
+Moon   827 _("Borman")                           AA  -39.06 -148.25   50.72
+Moon  7862 _("Boscovich P")                      SF   11.47   10.31   64.82
+Moon   832 _("Bose")                             AA  -53.95 -169.36   92.55
+Moon   836 _("Boss")                             AA   45.75   88.68    50.2
+Moon   844 _("Boussingault")                     AA  -70.21   53.73  127.61
+Moon  7877 _("Boussingault A")                   SF  -69.96   53.87    75.4
+Moon  7878 _("Boussingault B")                   SF  -65.69   47.04   57.72
+Moon  7881 _("Boussingault E")                   SF  -67.08   46.64  104.09
+Moon  7896 _("Bouvard M")                        SF  -40.57  -77.45   74.06
+Moon  7897 _("Bouvard N")                        SF  -38.43  -76.51   54.79
+Moon   851 _("Boyle")                            AA  -53.29  177.89   57.13
+Moon   857 _("Bragg")                            AA   42.33 -103.44   77.21
+Moon   864 _("Brashear")                         AA  -73.54 -171.57   60.16
+Moon  7910 _("Brashear P")                       SF  -76.37 -176.32   68.65
+Moon   868 _("Bredikhin")                        AA   17.25 -158.37   61.68
+Moon   873 _("Brenner")                          AA  -39.09   39.11   90.01
+Moon   875 _("Brianchon")                        AA   74.75  -88.36  137.26
+Moon   880 _("Bridgman")                         AA   43.39  136.98   81.89
+Moon  7949 _("Bridgman F")                       SF   43.85  141.32   51.95
+Moon  7953 _("Brisbane E")                       SF  -50.26   71.41   57.35
+Moon  7957 _("Brisbane Z")                       SF  -52.89   72.82   64.73
+Moon   887 _("Bronk")                            AA    25.9 -134.67   66.16
+Moon   893 _("Brouwer")                          AA  -35.82 -124.75   119.6
+Moon   900 _("Brunner")                          AA   -9.86   90.91   50.66
+Moon   906 _("Buch")                             AA   -38.9   17.68   51.31
+Moon   910 _("Buffon")                           AA  -40.64 -133.53  105.76
+Moon   913 _("Buisson")                          AA   -1.47  112.95   61.27
+Moon  7984 _("Buisson Z")                        SF    0.13  113.29  115.35
+Moon   917 _("Bullialdus")                       AA  -20.75  -22.26   60.72
+Moon   920 _("Bunsen")                           AA    41.4  -85.46   55.22
+Moon   922 _("Burckhardt")                       AA   31.11   56.39   54.36
+Moon   949 _("Büsching")                         AA  -38.04   19.96   53.49
+Moon   939 _("Buys-Ballot")                      AA   20.86  174.82   66.38
+Moon  8025 _("Buys-Ballot Q")                    SF   19.74   172.9   59.57
+Moon  8027 _("Buys-Ballot Z")                    SF   22.54  174.73   59.21
+Moon   941 _("Byrd")                             AA   85.43   10.07   97.49
+Moon   943 _("Byrgius")                          AA  -24.73  -65.38   84.46
+Moon   952 _("Cabannes")                         AA  -61.24 -170.21    81.3
+Moon   953 _("Cabeus")                           AA  -85.33  -42.13  100.58
+Moon  8058 _("Cabeus B")                         SF  -82.26  -54.58   59.62
+Moon   960 _("Cailleux")                         AA  -60.41   153.5   52.85
+Moon   965 _("Cajori")                           AA  -47.67   168.7   74.65
+Moon   990 _("Campbell")                         AA   45.57  152.91  222.48
+Moon  1004 _("Cannizzaro")                       AA    55.5  -99.73   54.51
+Moon  1005 _("Cannon")                           AA   19.88   81.36   57.58
+Moon  1008 _("Cantor")                           AA   38.04  118.69   75.72
+Moon  1014 _("Capuanus")                         AA  -34.09  -26.73   59.69
+Moon  8104 _("Capuanus P")                       SF  -35.44  -28.59   68.52
+Moon  1023 _("Carnot")                           AA   52.09  -144.2  126.06
+Moon  1026 _("Carpenter")                        AA   69.52  -51.23   59.06
+Moon  1038 _("Carver")                           AA  -43.46   127.6   62.45
+Moon  8129 _("Carver M")                         SF  -45.66  127.43   80.42
+Moon  1040 _("Casatus")                          AA   -72.7  -30.75  102.85
+Moon  8130 _("Casatus A")                        SF  -72.68  -37.63   54.64
+Moon  1044 _("Cassegrain")                       AA  -51.95   113.3   56.66
+Moon  1045 _("Cassini")                          AA   40.25    4.64   56.88
+Moon  1055 _("Catena Abulfeda")                  CA  -16.59    16.7  209.97
+Moon  1056 _("Catena Artamonov")                 CA   26.09  105.77  131.21
+Moon  1058 _("Catena Davy")                      CA  -10.98   -6.27   52.34
+Moon  1059 _("Catena Dziewulski")                CA   18.78  100.27   80.66
+Moon  1060 _("Catena Gregory")                   CA   -0.59   129.8  148.16
+Moon  1061 _("Catena Humboldt")                  CA  -21.98    84.7  162.29
+Moon  1062 _("Catena Krafft")                    CA   14.91  -72.25   55.11
+Moon  1063 _("Catena Kurchatov")                 CA   37.25   136.6  234.91
+Moon  1064 _("Catena Leuschner (GDL)")           CA    5.07  -111.3  200.06
+Moon  1066 _("Catena Lucretius (RNII)")          CA   -4.03 -126.45  232.07
+Moon  1067 _("Catena Mendeleev")                 CA    6.63  139.22  125.22
+Moon  1068 _("Catena Michelson (GIRD)")          CA   -0.44 -113.58   450.6
+Moon  1070 _("Catena Sumner")                    CA   37.89  111.91  220.52
+Moon  1071 _("Catena Sylvester")                 CA   79.99  -83.12     139
+Moon  1072 _("Catena Taruntius")                 CA    3.04   48.71   69.24
+Moon  1076 _("Catharina")                        AA  -17.98   23.55   98.77
+Moon  1083 _("Cavalerius")                       AA     5.1  -66.93   59.35
+Moon  8184 _("Cavalerius D")                     SF    8.66  -68.47   51.77
+Moon  1086 _("Cavendish")                        AA  -24.63  -53.78   52.64
+Moon  1117 _("Chacornac")                        AA   29.88   31.67   50.44
+Moon  1120 _("Chaffee")                          AA  -39.06 -154.63   51.75
+Moon  1126 _("Challis")                          AA   79.58    9.09   53.21
+Moon  1129 _("Chamberlin")                       AA  -58.83   96.04   60.41
+Moon  1132 _("Chandler")                         AA   43.65  171.76    88.6
+Moon  8246 _("Chandler P")                       SF   41.54  170.15   65.59
+Moon  1143 _("Chaplygin")                        AA   -5.76  150.24  123.39
+Moon  1144 _("Chapman")                          AA   50.09 -100.47   76.83
+Moon  1145 _("Chappe")                           AA  -61.29  -91.24   55.79
+Moon  1146 _("Chappell")                         AA   54.53 -176.77   73.92
+Moon  8256 _("Chappell E")                       SF    55.4 -171.19   59.17
+Moon  1153 _("Charlier")                         AA   36.22 -131.69  109.88
+Moon  1165 _("Chauvenet")                        AA  -11.64   137.2   77.67
+Moon  8265 _("Chauvenet J")                      SF  -14.21  139.51    75.7
+Moon  1167 _("Chebyshev")                        AA  -34.01 -132.88  179.05
+Moon  1173 _("Chernyshev")                       AA   47.01  174.41   59.31
+Moon  1176 _("Chevallier")                       AA   45.01   51.57   51.83
+Moon  1206 _("Chrétien")                         AA  -46.11  162.99   98.63
+Moon  8281 _("Chrétien C")                       SF  -44.76  165.42   63.58
+Moon  1226 _("Clairaut")                         AA  -47.84   13.86   76.89
+Moon  1232 _("Clark")                            AA  -38.67  119.35   52.11
+Moon  1236 _("Clavius")                          AA  -58.62  -14.73  230.77
+Moon  1239 _("Cleomedes")                        AA    27.6    55.5  130.77
+Moon  1241 _("Cleostratus")                      AA   60.32   -77.4   63.23
+Moon  8050 _("C. Mayer D")                       SF    62.2   18.51   64.82
+Moon  1261 _("Cockcroft")                        AA   31.09 -162.91   92.16
+Moon  8364 _("Cockcroft N")                      SF   28.78 -163.67   60.65
+Moon  1273 _("Colombo")                          AA  -15.26   46.02   79.02
+Moon  1278 _("Compton")                          AA   55.86  104.05  164.63
+Moon  1279 _("Comrie")                           AA   23.39 -113.17   59.25
+Moon  8378 _("Comrie K")                         SF   21.92 -112.57    70.6
+Moon  1280 _("Comstock")                         AA   21.59 -122.05   73.23
+Moon  1286 _("Condorcet")                        AA    12.1   69.58   74.85
+Moon  1288 _("Congreve")                         AA   -0.28 -167.84   57.61
+Moon  8407 _("Congreve Q")                       SF   -1.74 -169.56   55.35
+Moon  8408 _("Congreve U")                       SF     0.4 -170.75   54.72
+Moon  1294 _("Cooper")                           AA   52.68  175.92   51.87
+Moon  1296 _("Copernicus")                       AA    9.62  -20.08   96.07
+Moon  1308 _("Cori")                             AA  -50.48 -152.91   67.22
+Moon  1313 _("Coriolis")                         AA    0.56   171.8   78.56
+Moon  1323 _("Coulomb")                          AA   54.46    -115   89.72
+Moon  1329 _("Cremona")                          AA   67.24  -90.86   85.12
+Moon  1336 _("Crocco")                           AA  -46.98  150.51    67.5
+Moon  1337 _("Crommelin")                        AA  -67.46 -147.95   93.48
+Moon  1350 _("Curie")                            AA  -23.05   92.28  138.87
+Moon  1353 _("Curtius")                          AA  -67.08     4.4   99.29
+Moon  8491 _("Curtius D")                        SF   -64.7    8.35   57.19
+Moon  1354 _("Cusanus")                          AA   71.82    69.4   60.87
+Moon  1356 _("Cuvier")                           AA  -50.29    9.69    77.3
+Moon  1371 _("Cyrano")                           AA  -20.37  157.37   79.58
+Moon  1372 _("Cyrillus")                         AA  -13.29   24.07   98.09
+Moon  1381 _("Daedalus")                         AA   -5.83   179.4   93.61
+Moon  8553 _("Daedalus C")                       SF   -4.15 -178.91   58.36
+Moon  8560 _("Daedalus W")                       SF   -3.34  177.46   66.65
+Moon  1694 _("d'Alembert")                       AA   51.07  164.89  233.55
+Moon  1392 _("Dalton")                           AA   17.07  -84.45   60.69
+Moon  8578 _("Damoiseau M")                      SF   -5.08  -61.38    58.3
+Moon  1402 _("Danjon")                           AA  -11.42   123.9    69.3
+Moon  8585 _("Danjon X")                         SF  -10.06  122.86   68.23
+Moon  1405 _("Dante")                            AA   25.36     180   53.83
+Moon  8586 _("Dante C")                          SF   28.01  -177.1   54.01
+Moon  1417 _("Darwin")                           AA  -19.93  -69.21  122.18
+Moon  8600 _("Darwin B")                         SF  -19.96  -72.29   53.74
+Moon  1428 _("Davisson")                         AA  -37.93 -174.97   92.46
+Moon  8612 _("Davy Y")                           SF  -11.05   -7.25   69.56
+Moon  8614 _("Dawson V")                         SF   -66.3 -137.73   59.57
+Moon  1455 _("Debye")                            AA   49.43 -176.03  127.03
+Moon  1437 _("De Forest")                        AA  -76.94 -163.33   56.26
+Moon  1467 _("Delambre")                         AA   -1.94   17.39   51.49
+Moon  1440 _("De La Rue")                        AA   59.02   52.84  135.22
+Moon  1473 _("Dellinger")                        AA   -6.87   140.7   82.04
+Moon  8685 _("Dellinger B")                      SF    -5.5  141.24   55.17
+Moon  8687 _("Deluc A")                          SF  -54.07    -0.5    53.6
+Moon  1484 _("Demonax")                          AA  -78.09   59.36  121.93
+Moon  1442 _("De Moraes")                        AA   49.38     143   54.41
+Moon  8726 _("Denning R")                        SF  -16.97   141.3   72.37
+Moon  8729 _("Denning Y")                        SF  -13.76  142.47   52.47
+Moon  1497 _("Desargues")                        AA   70.25  -73.42   84.85
+Moon  1445 _("De Sitter")                        AA   79.81   38.57   63.79
+Moon  8641 _("De Sitter L")                      SF   78.86   34.52    69.4
+Moon  8642 _("De Sitter M")                      SF   81.11   37.57   75.52
+Moon  1502 _("Deslandres")                       AA  -32.55   -5.57  227.02
+Moon  1510 _("Deutsch")                          AA   24.35  110.91   73.33
+Moon  1449 _("De Vries")                         AA  -19.68 -176.78   57.51
+Moon  1562 _("Doerfel")                          AA  -68.97 -108.53   68.63
+Moon  8758 _("Doerfel Y")                        SF  -67.93 -108.77   79.26
+Moon  1577 _("Donner")                           AA  -31.35   97.99   55.05
+Moon  1579 _("Doppelmayer")                      AA  -28.48  -41.51   65.08
+Moon  1580 _("Doppler")                          AA  -12.58 -159.84  101.79
+Moon  1585 _("Dorsa Aldrovandi")                 DO   23.61   28.65  126.81
+Moon  1586 _("Dorsa Andrusov")                   DO   -1.56   56.77   80.98
+Moon  1587 _("Dorsa Argand")                     DO   28.29  -40.34   91.94
+Moon  1589 _("Dorsa Barlow")                     DO   14.04   30.57  112.57
+Moon  1591 _("Dorsa Burnet")                     DO   26.18  -56.78  194.99
+Moon  1592 _("Dorsa Cato")                       DO    0.21    47.7  128.64
+Moon  1593 _("Dorsa Dana")                       DO    2.26    89.6   82.31
+Moon  1594 _("Dorsa Ewing")                      DO  -11.06  -38.31  261.57
+Moon  1595 _("Dorsa Geikie")                     DO   -4.21   52.83  218.35
+Moon  1596 _("Dorsa Harker")                     DO   13.79   63.65  213.14
+Moon  1597 _("Dorsa Lister")                     DO   19.76   23.52  180.09
+Moon  1598 _("Dorsa Mawson")                     DO   -7.77   52.48  142.71
+Moon  1599 _("Dorsa Rubey")                      DO   -9.88  -42.36  100.64
+Moon  1600 _("Dorsa Smirnov")                    DO   26.41   25.53  221.78
+Moon  1601 _("Dorsa Sorby")                      DO   18.65    13.7   76.03
+Moon  1602 _("Dorsa Stille")                     DO   26.91  -18.85   66.32
+Moon  1603 _("Dorsa Tetyaev")                    DO   20.02   64.06  187.53
+Moon  1604 _("Dorsa Whiston")                    DO   29.77  -56.96  138.93
+Moon  1605 _("Dorsum Arduino")                   DO   24.77  -36.27   99.73
+Moon  1606 _("Dorsum Azara")                     DO   26.86   19.17   103.2
+Moon  1607 _("Dorsum Bucher")                    DO   30.76  -39.55   84.65
+Moon  1608 _("Dorsum Buckland")                  DO   19.43    14.3  369.13
+Moon  1609 _("Dorsum Cayeux")                    DO    0.76   51.22   95.14
+Moon  1610 _("Dorsum Cloos")                     DO    1.15   90.41  103.09
+Moon  1611 _("Dorsum Cushman")                   DO    1.42   49.19   85.65
+Moon  1612 _("Dorsum Gast")                      DO   24.38    8.71   64.87
+Moon  1613 _("Dorsum Grabau")                    DO   29.76  -14.19  123.69
+Moon  1615 _("Dorsum Heim")                      DO    32.2  -29.83  146.79
+Moon  1616 _("Dorsum Higazy")                    DO   27.93  -17.47    63.1
+Moon  1619 _("Dorsum Oppel")                     DO   19.31   52.09  297.62
+Moon  1621 _("Dorsum Scilla")                    DO   32.34     -60  107.52
+Moon  1622 _("Dorsum Termier")                   DO   11.63   57.15   89.65
+Moon  1624 _("Dorsum Von Cotta")                 DO    23.6   11.95  183.06
+Moon  1625 _("Dorsum Zirkel")                    DO   29.55  -24.82  195.22
+Moon  1630 _("Douglass")                         AA    35.5 -122.72   50.95
+Moon  8818 _("Drebbel E")                        SF  -38.21  -51.48    59.8
+Moon  1638 _("Dreyer")                           AA   10.24   97.09   63.84
+Moon  1644 _("Dryden")                           AA  -33.21 -156.15   54.45
+Moon  1645 _("Drygalski")                        AA  -79.57  -87.18  162.49
+Moon  1670 _("Dunér")                            AA   44.68  179.46   65.07
+Moon  1685 _("Dyson")                            AA   60.87 -121.71   63.14
+Moon  8874 _("Dyson Q")                          SF   59.19 -126.13   93.24
+Moon  1689 _("Dziewulski")                       AA   20.99   99.02    68.9
+Moon  1719 _("Eddington")                        AA    21.5  -72.02  120.13
+Moon  1723 _("Edison")                           AA   24.88   99.27   62.72
+Moon  1737 _("Eijkman")                          AA  -63.21 -142.51   56.36
+Moon  1745 _("Einstein")                         AA    16.6  -88.65  181.47
+Moon  8907 _("Einstein A")                       SF   16.69  -88.25   50.48
+Moon  1746 _("Einthoven")                        AA   -5.06  110.06   73.94
+Moon  8913 _("Einthoven M")                      SF   -7.71  110.03   58.58
+Moon  1777 _("Elvey")                            AA    9.01 -100.64   80.21
+Moon  1789 _("Emden")                            AA   62.76 -176.51  114.64
+Moon  8938 _("Encke T")                          SF    3.23  -37.88   94.68
+Moon  1799 _("Endymion")                         AA   53.61   56.48   122.1
+Moon  8942 _("Endymion B")                       SF   59.86   67.75      59
+Moon  8949 _("Endymion J")                       SF   53.51   50.71   66.05
+Moon  8957 _("Engel'gardt (Engelhardt) B")       SF     7.8 -158.18  121.21
+Moon  1893 _("Eötvös")                           AA  -35.61  134.43   101.8
+Moon  1815 _("Epigenes")                         AA    67.5   -4.62   54.51
+Moon  1820 _("Eratosthenes")                     AA   14.47  -11.32   58.77
+Moon  1837 _("Erro")                             AA    5.68   98.54   63.75
+Moon  1848 _("Esnault-Pelterie")                 AA   47.41 -141.83   76.79
+Moon  1849 _("Espin")                            AA   28.15  109.34   70.01
+Moon  9001 _("Euclides P")                       SF   -4.52  -27.69   63.82
+Moon  1861 _("Euctemon")                         AA   76.26   30.57    62.7
+Moon  1863 _("Eudoxus")                          AA   44.27   16.23   70.16
+Moon  1883 _("Evans")                            AA   -9.63 -133.78    69.4
+Moon  9023 _("Evans Q")                          SF  -11.21  -136.3  138.41
+Moon  1887 _("Evershed")                         AA    35.3 -159.51   65.28
+Moon  9027 _("Evershed D")                       SF   38.37 -156.21   53.27
+Moon  9028 _("Evershed E")                       SF   35.53 -158.42   68.52
+Moon  1895 _("Fabricius")                        AA  -42.75   41.84    78.9
+Moon  9031 _("Fabricius A")                      SF  -44.64    44.4   55.02
+Moon  1896 _("Fabry")                            AA   43.07  100.68  179.44
+Moon  1911 _("Faraday")                          AA  -42.45    8.75   69.03
+Moon  1925 _("Fechner")                          AA  -58.25  125.03   59.32
+Moon  1940 _("Fermi")                            AA  -19.61  123.24  241.41
+Moon  1942 _("Fernelius")                        AA  -38.18    4.86   68.42
+Moon  1945 _("Fersman")                          AA    17.9 -126.06  148.14
+Moon  1959 _("Finsen")                           AA  -42.29 -177.72   72.98
+Moon  1963 _("Firmicus")                         AA    7.25   63.43   56.81
+Moon  1964 _("Firsov")                           AA     4.2   112.7      51
+Moon  9083 _("Firsov K")                         SF    2.75  113.51   57.77
+Moon  9086 _("Firsov S")                         SF    3.34  110.27  104.17
+Moon  1967 _("Fitzgerald")                       AA   26.67 -172.14  104.21
+Moon  1968 _("Fizeau")                           AA  -58.19 -134.11  107.08
+Moon  9094 _("Fizeau G")                         SF  -58.99 -124.56   55.38
+Moon  9096 _("Fizeau S")                         SF  -58.66 -140.43   64.08
+Moon  1972 _("Flammarion")                       AA   -3.33   -3.73   76.18
+Moon  9119 _("Flamsteed P")                      SF   -3.25  -44.25  112.24
+Moon  1979 _("Fleming")                          AA   14.91  109.28  126.37
+Moon  9127 _("Fleming W")                        SF   17.79  106.17   51.88
+Moon  1984 _("Florensky")                        AA   25.45  131.85   69.03
+Moon 14527 _("Florey")                           AA   87.04  -19.75   69.06
+Moon  2003 _("Fourier")                          AA  -30.31   -53.1   51.57
+Moon  2005 _("Fowler")                           AA   42.59 -145.27  139.52
+Moon  9175 _("Fowler A")                         SF   46.12 -145.06   54.51
+Moon  2008 _("Fracastorius")                     AA  -21.36   33.07  120.58
+Moon  2007 _("Fra Mauro")                        AA   -6.06  -16.97   96.76
+Moon  2014 _("Franklin")                         AA   38.73   47.64   55.92
+Moon  2016 _("Fraunhofer")                       AA  -39.52   59.06   57.75
+Moon  9234 _("Fraunhofer J")                     SF  -42.31   63.41   62.94
+Moon  2023 _("Freundlich")                       AA      25  170.89   83.16
+Moon  2027 _("Fridman (Friedmann)")              AA  -12.48 -126.88  101.45
+Moon  2030 _("Froelich")                         AA      80 -111.63   56.73
+Moon  2031 _("Frost")                            AA   37.41  -118.9    78.3
+Moon  2043 _("Furnerius")                        AA     -36   60.54  135.03
+Moon  9258 _("Furnerius F")                      SF   -36.1   64.12   52.06
+Moon  9271 _("Furnerius V")                      SF  -35.72    65.5   59.18
+Moon  2052 _("Gadomski")                         AA   36.21 -147.36   65.66
+Moon  2054 _("Gagarin")                          AA  -19.66  149.35  261.83
+Moon  2081 _("Galois")                           AA  -13.94 -152.99  231.97
+Moon  9305 _("Galois A")                         SF  -13.52 -152.46   52.91
+Moon  9312 _("Galois Q")                         SF  -14.85 -154.46   133.6
+Moon  2083 _("Galvani")                          AA   49.51  -84.56   76.83
+Moon  2086 _("Gamow")                            AA   65.29  144.65  113.92
+Moon  2101 _("Ganswindt")                        AA  -79.42  111.17   77.52
+Moon  2102 _("Garavito")                         AA  -47.21  156.78   81.05
+Moon  9345 _("Garavito Y")                       SF  -45.53  156.06   52.89
+Moon  2302 _("Gärtner")                          AA   59.24   34.76  101.79
+Moon  2111 _("Gassendi")                         AA  -17.55  -39.96  111.39
+Moon  2119 _("Gauricus")                         AA  -33.91  -12.74   79.64
+Moon  2120 _("Gauss")                            AA   36.01   79.08  170.72
+Moon  2122 _("Gavrilov")                         AA   17.41  131.22   61.62
+Moon  2137 _("Geminus")                          AA   34.42   56.66   81.98
+Moon  9429 _("Geminus E")                        SF   33.84   48.58   55.48
+Moon  2138 _("Gemma Frisius")                    AA  -34.33   13.37   88.54
+Moon  9437 _("Gemma Frisius A")                  SF   -35.8   15.15    65.1
+Moon  2143 _("Gerard")                           AA   44.54  -80.51   98.78
+Moon  9471 _("Gerard Q Inner")                   SF   46.54  -83.13   67.32
+Moon  9472 _("Gerard Q Outer")                   SF   46.51  -84.55  192.48
+Moon  2144 _("Gerasimovich")                     AA  -22.95 -123.42   90.19
+Moon  9474 _("Gerasimovich R")                   SF  -24.23 -126.37   52.08
+Moon  2155 _("Gibbs")                            AA  -18.37   84.27   78.76
+Moon  2159 _("Gilbert")                          AA    -3.2   76.16  100.25
+Moon  2163 _("Gill")                             AA  -63.77   75.95    63.9
+Moon  2170 _("Ginzel")                           AA   14.25    97.4   53.23
+Moon  9508 _("Glazenap P")                       SF   -4.88  136.37   67.48
+Moon  2198 _("Goclenius")                        AA  -10.05   45.03   73.04
+Moon  2199 _("Goddard")                          AA   15.15   89.13   93.18
+Moon  2210 _("Goldschmidt")                      AA   73.04   -3.37  115.26
+Moon  2243 _("Green")                            AA    3.69  133.12   68.28
+Moon  2246 _("Gregory")                          AA    1.76  127.28    63.9
+Moon  9554 _("Gregory Q")                        SF    0.19  125.94   68.59
+Moon  2252 _("Grimaldi")                         AA   -5.38  -68.36  173.49
+Moon  2255 _("Grissom")                          AA  -46.92 -147.98   59.82
+Moon  2261 _("Gruemberger")                      AA  -67.04   -10.3    91.5
+Moon  2268 _("Guericke")                         AA  -11.57  -14.19   60.75
+Moon  2272 _("Guillaume")                        AA   45.16 -173.38   56.75
+Moon  2282 _("Gum")                              AA  -40.34   88.91   54.55
+Moon  2290 _("Gutenberg")                        AA   -8.61   41.25   70.65
+Moon  2292 _("Guyot")                            AA   11.63  117.12   98.28
+Moon 14530 _("Haber")                            AA    83.4  -94.63   56.79
+Moon  2312 _("Hagecius")                         AA  -59.92   46.63   79.55
+Moon  9629 _("Hagecius A")                       SF  -58.26    47.1   54.33
+Moon  2313 _("Hagen")                            AA  -48.32  135.95   57.52
+Moon  2314 _("Hahn")                             AA   31.22   73.55   87.49
+Moon  2317 _("Hainzel")                          AA  -41.23  -33.52   70.56
+Moon  9668 _("Hainzel A")                        SF  -40.31  -34.02   55.52
+Moon  2321 _("Hale")                             AA  -74.13   91.71   84.42
+Moon  2339 _("Hamilton")                         AA  -42.77   84.41   57.45
+Moon  2351 _("Hanno")                            AA  -56.46   71.38   59.54
+Moon  9704 _("Hanno H")                          SF  -57.84   74.96   57.74
+Moon  9711 _("Hansen B")                         SF   14.43   79.52   79.89
+Moon  2365 _("Harkhebi")                         AA   40.87   98.74  337.14
+Moon  2366 _("Harlan")                           AA  -38.31   79.65   63.45
+Moon  2374 _("Harriot")                          AA    33.2   114.4   52.77
+Moon  9737 _("Harriot A")                        SF   35.58  114.75   53.98
+Moon  2375 _("Hartmann")                         AA    2.71  135.45   63.29
+Moon  2376 _("Hartwig")                          AA   -6.14  -80.47   78.46
+Moon  2379 _("Harvey")                           AA   19.35 -146.51   59.98
+Moon  2380 _("Hase")                             AA  -29.37   62.68   82.08
+Moon  9746 _("Hase D")                           SF  -31.11    63.3   56.69
+Moon 14532 _("Haskin")                           AA   81.51  133.16   66.57
+Moon  2388 _("Hausen")                           AA  -65.11  -88.49  163.24
+Moon 14502 _("Haworth")                          AA  -87.45   -5.17   51.42
+Moon  2394 _("Hayn")                             AA   64.56   83.87   86.21
+Moon  9756 _("Hayn A")                           SF   63.01   71.11   52.28
+Moon  9761 _("Hayn F")                           SF   68.01   85.75   62.54
+Moon  2400 _("Heaviside")                        AA  -10.44  166.77  164.46
+Moon  9776 _("Heaviside K")                      SF  -12.91   168.5   124.9
+Moon  2405 _("Hecataeus")                        AA  -22.06   79.68  133.67
+Moon  9780 _("Hecataeus B")                      SF  -19.38   75.62   68.09
+Moon  9784 _("Hecataeus K")                      SF   -19.6   79.69   94.14
+Moon  2620 _("Hédervári")                        AA  -81.77    85.6   74.14
+Moon  2409 _("Hedin")                            AA    2.87  -76.57  157.38
+Moon  9788 _("Hedin A")                          SF     5.4  -78.06   64.65
+Moon  2417 _("Heinsius")                         AA  -39.48  -17.82   64.87
+Moon  2421 _("Helberg")                          AA   22.63 -102.46   61.93
+Moon  9823 _("Helberg C")                        SF   23.37 -100.93   69.03
+Moon  2438 _("Helmholtz")                        AA  -68.64   65.34  110.16
+Moon  2455 _("Henyey")                           AA    12.7 -152.33   68.74
+Moon  2465 _("Heraclitus")                       AA  -49.31    6.42   85.74
+Moon  9886 _("Heraclitus D")                     SF  -50.51    5.14   56.12
+Moon  2467 _("Hercules")                         AA   46.82   39.21   68.32
+Moon  2471 _("Hermite")                          AA   86.17  -93.32  108.64
+Moon  2481 _("Hertz")                            AA   13.32  104.56   82.94
+Moon  2482 _("Hertzsprung")                      AA    1.37 -128.66  536.37
+Moon  2490 _("Hess")                             AA  -54.47  174.19   90.44
+Moon  9958 _("Hess Z")                           SF  -52.08  173.71    81.1
+Moon  2493 _("Hevelius")                         AA     2.2  -67.46  113.87
+Moon  9967 _("Heymans F")                        SF   74.64  -134.3   52.98
+Moon  2305 _("H. G. Wells")                      AA   40.84  122.63   108.9
+Moon  2503 _("Hilbert")                          AA  -17.87  108.32  173.24
+Moon 15476 _("Hildegard")                        AA  -51.68  127.74     122
+Moon  2515 _("Hippalus")                         AA  -24.92  -30.42   57.36
+Moon  2516 _("Hipparchus")                       AA   -5.36    4.91  143.95
+Moon  2518 _("Hippocrates")                      AA   70.26 -146.54   59.24
+Moon  2520 _("Hirayama")                         AA   -6.01   93.63  145.21
+Moon 10029 _("Holetschek R")                     SF  -29.13  147.83   77.85
+Moon  2546 _("Hommel")                           AA  -54.74   32.93   113.6
+Moon 10033 _("Hommel C")                         SF  -54.91   29.82   51.41
+Moon  2551 _("Hopmann")                          AA  -51.01  159.23   87.84
+Moon  2563 _("Houzeau")                          AA  -17.25 -123.89   76.84
+Moon  2573 _("Hubble")                           AA   22.29   86.91   81.84
+Moon 10073 _("Hubble C")                         SF   19.45   85.62   53.64
+Moon  2574 _("Huggins")                          AA  -41.07   -1.52   65.79
+Moon  2582 _("Humboldt")                         AA  -27.02   80.96  199.46
+Moon  2634 _("Ibn Firnas")                       AA    6.83   122.3   88.29
+Moon  2635 _("Ibn Yunus")                        AA   14.14   91.14   59.69
+Moon  2642 _("Icarus")                           AA   -5.49 -173.26   93.73
+Moon 10107 _("Icarus D")                         SF   -4.55 -171.42   69.36
+Moon  2650 _("Idel'son")                         AA  -81.35  112.69   59.82
+Moon  2692 _("Inghirami")                        AA  -47.49  -68.95    94.6
+Moon  2705 _("Ioffe")                            AA  -14.38 -129.16   83.95
+Moon  2724 _("Isaev")                            AA  -17.57  147.49    94.1
+Moon  2781 _("Jackson")                          AA   22.05 -163.32   71.38
+Moon  2782 _("Jacobi")                           AA  -56.82    11.3   66.28
+Moon  2799 _("Jansky")                           AA    8.63    89.5   73.77
+Moon  2800 _("Janssen")                          AA  -44.96   40.82  200.65
+Moon  2814 _("Jeans")                            AA  -55.58   91.51   81.13
+Moon 10223 _("Jeans N")                          SF  -58.52   90.62   66.69
+Moon 10224 _("Jeans S")                          SF  -56.65   86.93   54.64
+Moon 10225 _("Jeans U")                          SF  -54.68   86.97   63.27
+Moon  2819 _("Jenner")                           AA  -42.01   95.98   73.66
+Moon  2779 _("J. Herschel")                      AA   62.31  -41.86  154.44
+Moon  2839 _("Joliot")                           AA   25.79   93.39  172.79
+Moon  2848 _("Joule")                            AA   27.15 -144.14   97.52
+Moon 10233 _("Joule L")                          SF   25.82 -143.89   67.82
+Moon  2856 _("Jules Verne")                      AA  -34.85  147.28  145.54
+Moon 10237 _("Jules Verne P")                    SF   -37.9   145.3   56.19
+Moon  2859 _("Julius Caesar")                    AA    9.17   15.21   84.72
+Moon  2889 _("Kaiser")                           AA  -36.49    6.48   53.15
+Moon  2906 _("Kamerlingh Onnes")                 AA   14.72 -116.29   70.03
+Moon  2913 _("Kane")                             AA   62.99   25.84   54.96
+Moon 10263 _("Kant D")                           SF  -11.36    18.7    52.4
+Moon  2934 _("Karpinskiy")                       AA   72.61   166.8    91.4
+Moon  2936 _("Karrer")                           AA  -52.06 -142.28   55.56
+Moon  3182 _("Kästner")                          AA    -6.9   78.94  116.07
+Moon 10286 _("Kästner G")                        SF   -3.68   79.35   95.66
+Moon  2976 _("Keeler")                           AA   -9.78  161.78  158.07
+Moon 10290 _("Keeler L")                         SF  -13.06  163.21   65.65
+Moon 10293 _("Keeler V")                         SF   -8.77  158.21      58
+Moon  2979 _("Kekulé")                           AA   16.31 -138.47   94.22
+Moon 10297 _("Kekulé V")                         SF   18.33 -141.73   64.95
+Moon  3018 _("Khvol'son")                        AA  -14.13  111.87   55.88
+Moon  3020 _("Kibal'chich")                      AA    2.72 -147.18   91.67
+Moon  3024 _("Kidinnu")                          AA   35.79  122.95    55.1
+Moon 10320 _("Kidinnu E")                        SF   36.03  124.46   63.73
+Moon  3026 _("Kiess")                            AA   -6.41   84.11   67.79
+Moon 10341 _("Kinau R")                          SF  -60.23   11.55   61.47
+Moon  3037 _("King")                             AA    4.96  120.49   76.21
+Moon  3047 _("Kircher")                          AA  -67.01  -45.48    71.2
+Moon  3050 _("Kirkwood")                         AA   68.34 -156.66   68.12
+Moon  3061 _("Klaproth")                         AA  -69.85  -26.26  121.37
+Moon  3064 _("Kleymenov")                        AA  -32.48 -140.36   55.98
+Moon  3065 _("Klute")                            AA   36.93 -141.76   77.47
+Moon  3068 _("Koch")                             AA  -42.13  150.33    94.7
+Moon  3071 _("Kohlschütter")                     AA   14.24  153.95   56.25
+Moon  3078 _("Kolhörster")                       AA   10.79 -115.01   78.78
+Moon  3082 _("Komarov")                          AA   24.59  152.25   80.43
+Moon  3083 _("Kondratyuk")                       AA  -15.33   115.8   97.97
+Moon  3087 _("Konstantinov")                     AA   19.56  158.34   68.08
+Moon  3090 _("Korolev")                          AA   -4.19 -157.41  423.41
+Moon 10389 _("Korolev C")                        SF   -0.73 -153.22   66.47
+Moon 10395 _("Korolev M")                        SF    -8.5 -157.37   56.75
+Moon  3096 _("Kostinskiy")                       AA   14.43  118.85   67.91
+Moon  3104 _("Kovalevskaya")                     AA   30.86 -129.44  113.71
+Moon 10407 _("Kovalevskaya Q")                   SF   29.18 -131.44  100.63
+Moon  3109 _("Kozyrev")                          AA  -46.64  129.59   59.35
+Moon  3111 _("Krafft")                           AA   16.56  -72.72   51.15
+Moon  3114 _("Kramers")                          AA   53.28 -127.98   61.59
+Moon 10424 _("Kramers C")                        SF   54.66 -126.11   59.64
+Moon  3117 _("Krasovskiy")                       AA    3.79 -175.63   61.67
+Moon 10436 _("Krasovskiy L")                     SF   -0.52 -175.03   56.87
+Moon 10439 _("Krasovskiy T")                     SF    3.64 -177.09   96.46
+Moon 10444 _("Krylov A")                         SF   38.54 -165.21   66.45
+Moon  3137 _("Kugler")                           AA  -53.44   104.1   65.87
+Moon  3143 _("Kulik")                            AA   41.98 -154.63   60.46
+Moon  3165 _("Kurchatov")                        AA    38.3  141.74  110.96
+Moon  3185 _("La Caille")                        AA  -23.68    1.08   67.22
+Moon  3197 _("Lacchini")                         AA   41.29 -107.83   57.95
+Moon  3202 _("Lacus Aestatis")                   LC  -14.83  -68.57   86.39
+Moon  3203 _("Lacus Autumni")                    LC  -11.81  -83.17  195.65
+Moon  3204 _("Lacus Bonitatis")                  LC   23.18   44.32   122.1
+Moon  3205 _("Lacus Doloris")                    LC    16.8    8.61   102.9
+Moon  3206 _("Lacus Excellentiae")               LC  -35.65  -43.58  197.74
+Moon  3207 _("Lacus Felicitatis")                LC   18.52    5.36   98.48
+Moon  3208 _("Lacus Gaudii")                     LC   16.33   12.27   88.54
+Moon  3210 _("Lacus Lenitatis")                  LC   14.32   12.05   78.25
+Moon  3211 _("Lacus Luxuriae")                   LC   19.41   175.5   50.61
+Moon  3212 _("Lacus Mortis")                     LC   45.13   27.32  158.78
+Moon  3214 _("Lacus Odii")                       LC   19.22    7.27   72.68
+Moon  3215 _("Lacus Perseverantiae")             LC    7.84   61.93   70.64
+Moon  3216 _("Lacus Solitudinis")                LC  -27.52  103.88  122.67
+Moon  3217 _("Lacus Somniorum")                  LC   37.56    30.8  424.76
+Moon  3218 _("Lacus Spei")                       LC   43.46    65.2   76.67
+Moon  3219 _("Lacus Temporis")                   LC   46.77   56.21   205.3
+Moon  3220 _("Lacus Timoris")                    LC  -39.42  -27.95  153.65
+Moon  3221 _("Lacus Veris")                      LC  -16.48  -85.91  382.88
+Moon  3223 _("Lade")                             AA   -1.33    9.99   58.11
+Moon 10514 _("Lade A")                           SF   -0.16   12.73   57.82
+Moon  3228 _("Lagalla")                          AA  -44.48  -22.36   88.78
+Moon  3233 _("Lagrange")                         AA   -32.6  -71.45  162.21
+Moon 10538 _("Lagrange E")                       SF  -29.01  -72.85   58.12
+Moon 10546 _("Lagrange R")                       SF  -31.33  -76.67  126.59
+Moon 10549 _("Lagrange W")                       SF  -32.97  -63.83   57.39
+Moon  3249 _("Lamarck")                          AA  -23.12  -70.06  114.65
+Moon 10565 _("Lamarck A")                        SF  -25.15  -70.96    53.4
+Moon 10567 _("Lamarck D")                        SF   -24.9  -74.35  131.28
+Moon  3252 _("Lamb")                             AA  -42.67  100.94  103.55
+Moon 10576 _("Lambert R")                        SF   23.88  -20.66   55.71
+Moon 10573 _("Lamb G")                           SF  -43.06   105.7   68.03
+Moon  3261 _("Lamé")                             AA  -14.76   64.56   84.28
+Moon  3256 _("Lamont")                           AA    5.14   23.32   83.23
+Moon  3259 _("Lampland")                         AA  -31.17  131.51   63.04
+Moon  3264 _("Landau")                           AA   42.16 -119.34  218.15
+Moon  3268 _("Lane")                             AA    -9.5  132.36   53.76
+Moon  3269 _("Langemak")                         AA   -9.93  119.45  104.76
+Moon 10601 _("Langemak N")                       SF  -13.19  119.12  137.93
+Moon 10602 _("Langemak X")                       SF   -6.88   117.9    52.2
+Moon  3270 _("Langevin")                         AA   44.17  162.69    57.8
+Moon  3271 _("Langley")                          AA   51.17  -86.05   59.17
+Moon  3272 _("Langmuir")                         AA  -35.85 -128.89    91.5
+Moon  3273 _("Langrenus")                        AA   -8.86   61.04  131.98
+Moon  3189 _("La Pérouse")                       AA  -10.67   76.28    80.4
+Moon  3282 _("Larmor")                           AA   31.85 -179.67   99.49
+Moon  3297 _("Laue")                             AA   28.29  -97.05   89.17
+Moon 10662 _("Laue U")                           SF   28.69  -101.5   54.69
+Moon  3303 _("Lauritsen")                        AA  -27.54   96.31   51.24
+Moon 10668 _("Lauritsen Z")                      SF  -25.86   96.35   60.57
+Moon  3307 _("Lavoisier")                        AA   38.17  -81.25   71.01
+Moon 10672 _("[Lavoisier D]")                    SF    41.1   -78.1   60.14
+Moon 10673 _("Lavoisier E")                      SF   40.88  -80.39   50.56
+Moon  3319 _("Leavitt")                          AA  -44.86 -139.89   69.31
+Moon 10707 _("Leavitt Z")                        SF  -42.57 -139.56   63.59
+Moon  3320 _("Lebedev")                          AA   -46.8  107.89   121.8
+Moon  3322 _("Lebedinskiy")                      AA    7.84 -164.89   63.39
+Moon 10718 _("Lee M")                            SF  -29.83   -39.7   72.33
+Moon  3329 _("Leeuwenhoek")                      AA  -29.28 -178.87     125
+Moon 10721 _("Leeuwenhoek E")                    SF  -28.51 -176.27  102.11
+Moon  3330 _("Legendre")                         AA  -28.92   70.02   78.08
+Moon 10722 _("Legendre D")                       SF   -31.6   75.15   57.54
+Moon 10728 _("Legendre K")                       SF  -29.79   72.21   91.91
+Moon  3311 _("Le Gentil")                        AA  -74.27  -76.02  125.38
+Moon  3331 _("Lehmann")                          AA  -39.96  -56.17   53.85
+Moon  3335 _("Leibnitz")                         AA  -38.24  179.35  236.67
+Moon  3340 _("Lemaître")                         AA  -61.36 -149.98    93.7
+Moon  3312 _("Le Monnier")                       AA   26.66    30.5    68.4
+Moon  3363 _("Letronne")                         AA   -10.5  -42.49  117.59
+Moon  3364 _("Leucippus")                        AA   29.24 -116.41   57.03
+Moon 10767 _("Leucippus Q")                      SF    25.7 -119.38   89.45
+Moon  3366 _("Leuschner")                        AA    1.67 -109.05   50.14
+Moon  3367 _("Levi-Civita")                      AA  -23.34  143.14  108.23
+Moon  3370 _("Lexell")                           AA  -35.78   -4.27    63.7
+Moon  3372 _("Ley")                              AA   42.11  154.84   81.05
+Moon  3392 _("Licetus")                          AA  -47.19    6.54   75.42
+Moon  3402 _("Lilius")                           AA   -54.6    6.09   61.18
+Moon 10828 _("Lilius D")                         SF  -50.57    2.95   58.78
+Moon  3409 _("Lindblad")                         AA   70.03  -99.22   59.37
+Moon  3410 _("Lindenau")                         AA  -32.35   24.77   53.08
+Moon  3418 _("Lippmann")                         AA  -55.43 -114.32  160.07
+Moon 10870 _("Lippmann L")                       SF  -57.49 -112.44   57.13
+Moon  3419 _("Lipskiy")                          AA   -2.15 -179.38   91.15
+Moon  3439 _("Lobachevskiy")                     AA    9.76  113.07   87.26
+Moon  3449 _("Lodygin")                          AA  -17.42 -146.78   56.11
+Moon  3462 _("Lomonosov")                        AA   27.35   98.28   90.69
+Moon  3465 _("Longomontanus")                    AA  -49.55  -21.88   145.5
+Moon 10928 _("Longomontanus Z")                  SF  -49.91     -18   96.13
+Moon  3472 _("Lorentz")                          AA   34.59  -97.19  378.42
+Moon  3487 _("Love")                             AA   -6.33  129.17   90.08
+Moon  3488 _("Lovelace")                         AA   82.08 -109.51   57.06
+Moon  3493 _("Lowell")                           AA  -12.97 -103.42   62.65
+Moon  3505 _("Lucretius")                        AA   -8.22 -121.24   64.61
+Moon  3521 _("Lundmark")                         AA  -38.87  152.56  103.44
+Moon  3526 _("Lyapunov")                         AA   26.43   89.36   67.58
+Moon  3534 _("Lyman")                            AA  -64.96  162.47   83.25
+Moon 10982 _("Lyman Q")                          SF   -68.2  156.51   83.18
+Moon 10983 _("Lyman T")                          SF  -64.28  156.11   59.25
+Moon  3537 _("Lyot")                             AA  -50.47    84.8   150.6
+Moon 10991 _("Lyot H")                           SF   -51.5      78   63.59
+Moon 10992 _("Lyot L")                           SF  -54.25   83.15   80.08
+Moon  3554 _("Mach")                             AA   18.13 -149.24  174.97
+Moon  3557 _("Maclaurin")                        AA   -1.92   67.99   54.33
+Moon  3560 _("Macrobius")                        AA   21.26   45.97   62.79
+Moon 11039 _("Maestlin R")                       SF    3.53  -41.47   60.42
+Moon  3581 _("Maginus")                          AA  -50.03   -5.98  155.58
+Moon  3602 _("Maksutov")                         AA  -40.75 -168.65   83.84
+Moon  3603 _("Malapert")                         AA     -85    11.4   72.38
+Moon  3610 _("Mallet")                           AA  -45.41   54.05   58.92
+Moon 11092 _("Mallet J")                         SF  -48.79   55.99   55.87
+Moon  3625 _("Mandel'shtam")                     AA     5.7  162.39  181.89
+Moon 14116 _("Mandel'shtam A")                   SF    5.68  162.38   61.94
+Moon 14121 _("Mandel'shtam R")                   SF     4.4  159.79   54.02
+Moon  3646 _("Manzinus")                         AA  -67.51   26.37   95.97
+Moon 11131 _("Maraldi D")                        SF   16.74   36.08   66.49
+Moon  3659 _("Marconi")                          AA   -9.48   145.2   72.88
+Moon  3664 _("Mare Anguis")                      ME   22.43   67.58  145.99
+Moon  3665 _("Mare Australe")                    ME  -47.77   91.99  996.84
+Moon  3670 _("Mare Cognitum")                    ME  -10.53  -22.31  350.01
+Moon  3671 _("Mare Crisium")                     ME   16.18    59.1  555.92
+Moon  3673 _("Mare Fecunditatis")                ME   -7.83   53.67  840.35
+Moon  3674 _("Mare Frigoris")                    ME   57.59   -0.01 1446.41
+Moon  3676 _("Mare Humboldtianum")               ME   56.92   81.54  230.78
+Moon  3677 _("Mare Humorum")                     ME  -24.48  -38.57  419.67
+Moon  3678 _("Mare Imbrium")                     ME   34.72  -14.91 1145.53
+Moon  3679 _("Mare Ingenii")                     ME  -33.25  164.83   282.2
+Moon  3680 _("Mare Insularum")                   ME    7.79  -30.64  511.93
+Moon  3681 _("Mare Marginis")                    ME    12.7   86.52  357.63
+Moon  3682 _("Mare Moscoviense")                 ME   27.28  148.12  275.57
+Moon  3683 _("Mare Nectaris")                    ME  -15.19    34.6  339.39
+Moon  3684 _("Mare Nubium")                      ME  -20.59  -17.29   714.5
+Moon  3685 _("Mare Orientale")                   ME  -19.87  -94.67  294.16
+Moon  3686 _("Mare Serenitatis")                 ME   27.29   18.36  674.28
+Moon  3689 _("Mare Smythii")                     ME   -1.71   87.05  373.97
+Moon  3690 _("Mare Spumans")                     ME     1.3    65.3  143.13
+Moon  3691 _("Mare Tranquillitatis")             ME    8.35   30.83  875.75
+Moon  3693 _("Mare Undarum")                     ME    7.49   68.66  244.84
+Moon  3694 _("Mare Vaporum")                     ME    13.2    4.09  242.46
+Moon  3712 _("Marinus")                          AA  -39.38   76.57   56.55
+Moon 11158 _("Marinus B")                        SF  -39.67   74.62   58.24
+Moon  3713 _("Mariotte")                         AA  -28.46 -139.06   70.27
+Moon  3756 _("Maunder")                          AA  -14.52  -93.88    53.8
+Moon  3760 _("Maurolycus")                       AA  -41.77   13.92  115.35
+Moon  3765 _("Maxwell")                          AA    29.9   98.53  109.24
+Moon  3780 _("McKellar")                         AA  -15.72 -170.86   50.16
+Moon  3781 _("McLaughlin")                       AA   47.01  -92.83   75.29
+Moon 11273 _("McLaughlin C")                     SF   48.17  -91.79   57.55
+Moon  3783 _("McMath")                           AA   16.63 -166.09   88.58
+Moon  3788 _("Mechnikov")                        AA  -10.47 -148.99   58.83
+Moon 11285 _("Mechnikov D")                      SF   -9.74 -147.19   54.64
+Moon  3797 _("Mee")                              AA  -43.63  -35.19  134.11
+Moon  3798 _("Mees")                             AA   13.57  -96.18   51.55
+Moon 11316 _("Mees Y")                           SF   15.73  -96.74   77.28
+Moon  3802 _("Meggers")                          AA    24.3  122.94   51.16
+Moon  3807 _("Meitner")                          AA  -10.87   113.1   87.27
+Moon  3835 _("Mendel")                           AA  -48.83 -109.86  139.65
+Moon  3837 _("Mendeleev")                        AA    5.38  141.17  325.13
+Moon 11324 _("Mendel J")                         SF  -51.51  -107.2   57.59
+Moon 11325 _("Mendel V")                         SF  -46.55 -116.72   60.75
+Moon  3850 _("Mercurius")                        AA   46.66   66.07    64.3
+Moon 11344 _("Mercurius D")                      SF   46.13      69   69.48
+Moon  3860 _("Merrill")                          AA   74.83 -117.45   56.99
+Moon  3862 _("Mersenius")                        AA  -21.49  -49.34   84.46
+Moon  3866 _("Meshcherskiy")                     AA   12.11  125.53   65.94
+Moon  3868 _("Messala")                          AA   39.31   60.06   122.4
+Moon  3873 _("Metius")                           AA  -40.42   43.37   83.81
+Moon  3874 _("Meton")                            AA   73.57   19.63   124.7
+Moon 11399 _("Meton C")                          SF   70.45   18.87   86.12
+Moon 11400 _("Meton D")                          SF   72.16   24.46   78.77
+Moon  3876 _("Mezentsev")                        AA   71.77 -129.64   84.51
+Moon 11405 _("Mezentsev M")                      SF   68.29 -127.59   84.62
+Moon  3883 _("Michelson")                        AA    6.72 -121.55  123.14
+Moon  3892 _("Milankovič")                       AA   76.53  171.35   94.21
+Moon  3899 _("Miller")                           AA  -39.37    0.78   61.37
+Moon  3900 _("Millikan")                         AA   46.76  121.52   93.97
+Moon  3904 _("Milne")                            AA     -31  112.78  259.97
+Moon 11433 _("Milne K")                          SF  -32.71  113.56   58.91
+Moon 11435 _("Milne M")                          SF   -35.9  112.52   52.94
+Moon 11437 _("Milne P")                          SF  -37.47  108.08   97.13
+Moon 11438 _("Milne Q")                          SF  -34.37  107.66   69.19
+Moon  3911 _("Mineur")                           AA   24.67 -161.73   72.28
+Moon  3913 _("Minkowski")                        AA  -56.13  -145.8  107.51
+Moon  3914 _("Minnaert")                         AA  -67.54  178.57  137.31
+Moon  3935 _("Mitra")                            AA   17.76 -154.65    97.1
+Moon  3949 _("Moiseev")                          AA    9.44  103.26   61.56
+Moon 11462 _("Moiseev Z")                        SF   11.19  103.38    74.1
+Moon  3974 _("Mons Argaeus")                     MO   19.33   29.01   61.48
+Moon  3975 _("Mons Bradley")                     MO   21.73    0.38   76.49
+Moon  3994 _("Mons Rümker")                      MO   40.76  -58.38   73.25
+Moon  4001 _("Montanari")                        AA  -45.83  -20.76   77.05
+Moon  4002 _("Montes Agricola")                  MO   29.06  -54.07  159.76
+Moon  4003 _("Montes Alpes")                     MO   48.36   -0.58  334.48
+Moon  4004 _("Montes Apenninus")                 MO   19.87    0.03  599.67
+Moon  4005 _("Montes Archimedes")                MO   25.39   -5.25  146.54
+Moon  4006 _("Montes Carpatus")                  MO   14.57  -23.62  333.59
+Moon  4007 _("Montes Caucasus")                  MO   37.52    9.93  443.51
+Moon  4008 _("Montes Cordillera")                MO  -19.44  -94.93   963.5
+Moon  4009 _("Montes Haemus")                    MO   17.11   12.03  384.66
+Moon  4010 _("Montes Harbinger")                 MO   26.89  -41.29    92.7
+Moon  4011 _("Montes Jura")                      MO   47.49  -36.11   420.8
+Moon  4012 _("Montes Pyrenaeus")                 MO  -14.05   41.51  251.33
+Moon  4013 _("Montes Recti")                     MO    48.3  -19.72   83.24
+Moon  4014 _("Montes Riphaeus")                  MO   -7.48   -27.6  190.12
+Moon  4015 _("Montes Rook")                      MO  -19.49  -94.95  682.28
+Moon  4016 _("Montes Secchi")                    MO    2.72   43.17   52.47
+Moon  4017 _("Montes Spitzbergen")               MO   34.47   -5.21   59.19
+Moon  4018 _("Montes Taurus")                    MO   27.32   40.34  166.16
+Moon  4019 _("Montes Teneriffe")                 MO   47.89  -13.19  111.98
+Moon  4024 _("Montgolfier")                      AA   47.06 -160.08   83.71
+Moon  4026 _("Moore")                            AA   37.25 -177.55   52.66
+Moon  4034 _("Moretus")                          AA  -70.63   -5.95  114.45
+Moon 11478 _("Morozov F")                        SF    4.92   130.2   56.01
+Moon  4043 _("Morse")                            AA    21.9 -175.29   72.77
+Moon  4048 _("Moseley")                          AA   20.95   -90.2   88.89
+Moon  4054 _("Mouchez")                          AA   78.38  -26.82   82.78
+Moon  4055 _("Moulton")                          AA  -60.91   97.57    54.7
+Moon 11499 _("Moulton H")                        SF  -61.16  100.64   50.65
+Moon  4072 _("Murchison")                        AA    5.07   -0.21   57.83
+Moon  4083 _("Mutus")                            AA  -63.65   29.93   76.33
+Moon  4106 _("Nagaoka")                          AA   19.51  154.05   50.54
+Moon  4142 _("Nansen")                           AA   81.17   95.38   116.9
+Moon 11535 _("Nansen F")                         SF   84.95   62.44   61.62
+Moon  4157 _("Nasireddin")                       AA  -41.04    0.14   51.99
+Moon  4158 _("Nasmyth")                          AA  -50.49  -56.39   78.37
+Moon  4159 _("Nassau")                           AA  -24.91  177.34    75.8
+Moon 11542 _("Nassau D")                         SF  -23.67 -179.38   63.82
+Moon 11543 _("Nassau F")                         SF  -25.33 -179.09  115.37
+Moon  4181 _("Nearch")                           AA  -58.58   39.01   72.79
+Moon 11584 _("Necho P")                          SF   -6.99  122.28   75.31
+Moon 14538 _("Nefed'ev")                         AA  -81.07  135.77   52.94
+Moon  4196 _("Neison")                           AA   68.21   25.02   51.03
+Moon  4208 _("Neper")                            AA    8.76   84.58  144.32
+Moon  4217 _("Nernst")                           AA   35.57  -94.64  121.52
+Moon  4223 _("Neujmin")                          AA  -26.68  125.17   97.03
+Moon  4226 _("Neumayer")                         AA  -71.16   70.92   84.38
+Moon  4235 _("Newton")                           AA  -76.52  -17.44   83.85
+Moon 11610 _("Newton A")                         SF  -80.05  -20.82   62.26
+Moon 11616 _("Newton G")                         SF  -78.08  -18.96   62.47
+Moon  4257 _("Niepce")                           AA    72.2 -120.15   59.69
+Moon  4310 _("Nishina")                          AA  -44.57  -170.8   62.13
+Moon  4320 _("Nobel")                            AA   14.73 -101.39   50.87
+Moon  4321 _("Nobile")                           AA  -85.28   53.27   79.27
+Moon  4330 _("Nonius")                           AA   -34.9    3.79   70.61
+Moon  4380 _("Nöther (Noether)")                 AA   66.35 -114.18    64.8
+Moon  4354 _("Numerov")                          AA  -70.52  -162.2  105.39
+Moon  4368 _("Nušl")                             AA   32.19  167.45   60.58
+Moon 11678 _("Nušl Y")                           SF   34.17  166.81    50.5
+Moon  4390 _("Obruchev")                         AA  -38.67  162.43   72.23
+Moon  4395 _("Oceanus Procellarum")              OC   20.67  -56.68 2592.24
+Moon  4540 _("O'Day")                            AA  -30.42  157.29   70.41
+Moon  4408 _("Oenopides")                        AA   57.13   -64.2   73.47
+Moon 11690 _("Oenopides R")                      SF    55.6  -67.89   61.99
+Moon  4417 _("Ohm")                              AA   18.32 -113.78   61.75
+Moon  4424 _("Oken")                             AA  -43.76   76.09   78.67
+Moon  4432 _("Olbers")                           AA     7.3  -76.14   73.02
+Moon 11707 _("Olbers D")                         SF   10.23  -78.03  100.03
+Moon  4433 _("Olcott")                           AA   20.57  117.79   79.94
+Moon 11717 _("Olcott E")                         SF   20.74  119.73   59.12
+Moon  4442 _("Olivier")                          AA   58.72  138.44   78.45
+Moon 11720 _("Olivier N")                        SF   56.63  137.08   60.77
+Moon  4456 _("Omar Khayyam")                     AA   58.21 -102.22   68.64
+Moon  4480 _("Oppenheimer")                      AA  -35.32 -166.03  201.16
+Moon  4487 _("Oresme")                           AA  -42.61  169.22   82.05
+Moon 11737 _("Oresme U")                         SF  -41.71  164.94   68.43
+Moon 11738 _("Oresme V")                         SF  -40.75  165.39    56.1
+Moon  4493 _("Orlov")                            AA  -25.77 -175.08   72.93
+Moon 11740 _("Orlov Y")                          SF  -22.84 -175.37  120.01
+Moon  4497 _("Orontius")                         AA  -40.37   -3.96  121.02
+Moon  4514 _("Ostwald")                          AA   10.24  121.95  108.13
+Moon  4565 _("Palus Epidemiarum")                PA     -32  -27.54  300.38
+Moon  4566 _("Palus Putredinis")                 PA   27.36       0  180.45
+Moon  4567 _("Palus Somni")                      PA   13.69   44.72  163.45
+Moon  4576 _("Paneth")                           AA    62.6  -94.63   60.92
+Moon  4580 _("Pannekoek")                        AA    -4.2  140.69    67.5
+Moon 11779 _("Pannekoek R")                      SF   -5.33  138.53   72.64
+Moon  4583 _("Papaleksi")                        AA   10.15  163.95   92.03
+Moon  4584 _("Paracelsus")                       AA  -22.92  163.44   85.88
+Moon 11784 _("Paracelsus E")                     SF  -22.59   167.3   62.61
+Moon 11789 _("Paracelsus P")                     SF  -24.79  161.88   63.78
+Moon  4586 _("Paraskevopoulos")                  AA   50.09 -150.34   98.87
+Moon 11792 _("Paraskevopoulos H")                SF   49.47  -147.6   54.51
+Moon 11796 _("Paraskevopoulos S")                SF   48.57 -155.26   71.45
+Moon  4587 _("Parenago")                         AA   25.88 -108.91   94.57
+Moon  4590 _("Parkhurst")                        AA  -33.29  103.69   93.08
+Moon  4594 _("Parrot")                           AA  -14.57    3.29   70.66
+Moon 11840 _("Parsons D")                        SF   38.33 -168.69   52.96
+Moon  4599 _("Pascal")                           AA   74.36  -70.63   108.2
+Moon  4600 _("Paschen")                          AA  -14.06 -140.53  127.36
+Moon 11853 _("Paschen K")                        SF  -17.93 -139.57   55.04
+Moon 11855 _("Paschen M")                        SF   -16.3 -140.62   87.84
+Moon  4604 _("Pasteur")                          AA  -11.58  104.91  232.77
+Moon  4611 _("Patsaev")                          AA  -16.77   133.6   55.25
+Moon 11873 _("Patsaev K")                        SF  -18.94  134.57   55.27
+Moon  4613 _("Pauli")                            AA  -44.76  137.35   95.28
+Moon  4616 _("Pavlov")                           AA  -28.28   142.4  143.05
+Moon 11878 _("Pavlov M")                         SF  -32.47  141.95   60.64
+Moon 11879 _("Pavlov P")                         SF  -33.84  139.86    50.1
+Moon 11880 _("Pavlov T")                         SF  -27.91  138.68   52.36
+Moon 11881 _("Pavlov V")                         SF  -26.65  138.61   54.82
+Moon  4622 _("Pawsey")                           AA   44.24  145.29   59.98
+Moon  4627 _("Peary")                            AA   88.63    24.4   78.75
+Moon  4634 _("Peirescius")                       AA   -46.4    67.8   61.53
+Moon  4649 _("Pentland")                         AA  -64.57   11.34   56.45
+Moon 11894 _("Pentland DA")                      SF  -62.93   14.37    52.4
+Moon  4655 _("Perepelkin")                       AA   -9.99   128.8   88.74
+Moon  4660 _("Perkin")                           AA   47.02 -175.73   62.48
+Moon  4661 _("Perrine")                          AA   42.11 -127.95   87.41
+Moon 11908 _("Perrine G")                        SF    41.7 -124.91   57.38
+Moon 11910 _("Perrine S")                        SF   41.97 -128.87    61.6
+Moon  4668 _("Petavius")                         AA  -25.39   60.78  184.06
+Moon  4669 _("Petermann")                        AA   74.35   67.89   76.95
+Moon 11921 _("Petermann R")                      SF   74.78   55.61  118.38
+Moon  4674 _("Petropavlovskiy")                  AA   36.92 -115.28   64.07
+Moon  4675 _("Petrov")                           AA  -61.36   88.18   55.44
+Moon  4678 _("Petzval")                          AA  -62.73 -110.83   93.47
+Moon  4689 _("Phillips")                         AA  -26.57   75.67  104.21
+Moon 11936 _("Phillips D")                       SF  -25.04    70.8   61.88
+Moon 11941 _("Phillips W")                       SF  -25.15   72.23   61.65
+Moon  4691 _("Philolaus")                        AA   72.22  -32.88   71.44
+Moon 11943 _("Philolaus C")                      SF   71.23  -32.82   98.14
+Moon 11944 _("Philolaus D")                      SF   74.37  -27.66   91.35
+Moon 11947 _("Philolaus G")                      SF   69.18  -23.82  102.68
+Moon  4704 _("Phocylides")                       AA  -52.79  -57.31  115.18
+Moon  4717 _("Piazzi")                           AA  -36.16  -68.01  102.57
+Moon  4721 _("Piccolomini")                      AA   -29.7    32.2   87.58
+Moon 11996 _("Piccolomini F")                    SF  -26.36   31.78   72.22
+Moon  4724 _("Pictet")                           AA  -43.56   -7.49   59.95
+Moon 12025 _("Pictet E")                         SF  -41.45   -7.87   70.08
+Moon 12031 _("Pikel'ner S")                      SF  -49.45   121.1   59.77
+Moon  4730 _("Pilâtre")                          AA  -60.17   -86.7   64.37
+Moon  4735 _("Pingré")                           AA  -58.64  -73.95   88.43
+Moon 12046 _("Pingré S")                         SF  -60.33  -82.39   71.53
+Moon  4738 _("Pirquet")                          AA  -20.34  139.93   62.14
+Moon  4740 _("Pitatus")                          AA  -29.88  -13.53  100.63
+Moon  4741 _("Pitiscus")                         AA  -50.61   30.57   79.85
+Moon  4746 _("Pizzetti")                         AA  -35.06  119.29   53.47
+Moon  4749 _("Planck")                           AA  -57.27  135.34  319.46
+Moon 12109 _("Planck Z")                         SF  -55.81   135.1   66.75
+Moon  4756 _("Plaskett")                         AA   81.63  176.71  114.34
+Moon  4757 _("Plato")                            AA   51.62   -9.38  100.68
+Moon 12144 _("Playfair G")                       SF  -23.99    6.09   91.68
+Moon  4765 _("Plummer")                          AA  -24.62 -154.86    75.7
+Moon  4766 _("Plutarch")                         AA   24.18   79.05   69.59
+Moon  4770 _("Poczobutt")                        AA   57.27  -99.23  212.36
+Moon  4775 _("Poincaré")                         AA  -56.86  163.99  345.99
+Moon 15475 _("Poincaré E")                       SF  -56.59  171.06      60
+Moon 15474 _("Poincaré F")                       SF  -57.93   168.6      95
+Moon  4776 _("Poinsot")                          AA    78.9 -146.21   65.11
+Moon  4789 _("Polzunov")                         AA   25.57  115.01   66.53
+Moon  4793 _("Poncelet")                         AA   75.91  -54.57   67.57
+Moon 12221 _("Poncelet C")                       SF   77.56   -74.5   67.95
+Moon  4797 _("Pontanus")                         AA  -28.42   14.36   55.66
+Moon  4798 _("Pontécoulant")                     AA  -58.78   66.07    91.4
+Moon 12272 _("Pontécoulant F")                   SF   -57.6   68.17   68.68
+Moon  4800 _("Popov")                            AA   16.93   99.38    71.4
+Moon  4803 _("Porter")                           AA  -56.15  -10.18   51.46
+Moon  4808 _("Posidonius")                       AA   31.88   29.99   95.06
+Moon  4815 _("Poynting")                         AA    17.5 -133.38  127.55
+Moon  4817 _("Prager")                           AA   -3.99  130.78    53.9
+Moon 12299 _("Prager G")                         SF   -4.75  134.34   77.45
+Moon  4818 _("Prandtl")                          AA  -59.62  141.54   87.53
+Moon  4822 _("Priestley")                        AA  -56.71  108.47   54.88
+Moon  4838 _("Promontorium Agarum")              PR   13.87   65.73   62.46
+Moon  4843 _("Promontorium Heraclides")          PR    40.6   -34.1      50
+Moon  4845 _("Promontorium Laplace")             PR   46.84  -25.51      50
+Moon  4846 _("Promontorium Taenarium")           PR  -18.63   -7.34      70
+Moon  4860 _("Ptolemaeus")                       AA   -9.16   -1.84  153.67
+Moon  4872 _("Purbach")                          AA  -25.51   -2.03  114.97
+Moon  4876 _("Purkyně")                          AA   -1.54   94.86   50.29
+Moon  4886 _("Pythagoras")                       AA   63.68  -62.98  144.55
+Moon  4897 _("Quetelet")                         AA   42.66  -135.3   54.77
+Moon  4908 _("Rabbi Levi")                       AA  -34.78   23.46   82.44
+Moon  4913 _("Racah")                            AA   -13.5 -179.87   71.91
+Moon 12436 _("Racah K")                          SF  -16.56 -178.77   54.39
+Moon  4928 _("Raimond")                          AA   14.78 -159.63   68.37
+Moon  4939 _("Ramsay")                           AA  -40.02  145.04   61.28
+Moon  4966 _("Rayleigh")                         AA   29.12   89.45  113.77
+Moon  4971 _("Razumov")                          AA   38.95 -114.63   75.08
+Moon  5251 _("Réaumur")                          AA   -2.45    0.73   51.25
+Moon  4979 _("Regiomontanus")                    AA  -28.28   -1.09  126.64
+Moon  4980 _("Regnault")                         AA   54.04  -87.88   51.31
+Moon  4981 _("Reichenbach")                      AA  -30.48   47.95   64.85
+Moon 12502 _("Reichenbach T")                    SF  -29.39   45.75    61.5
+Moon  4987 _("Reiner Gamma")                     AL    7.39  -58.96   73.44
+Moon  4999 _("Repsold")                          AA   51.31  -78.41  108.65
+Moon 12541 _("Repsold C")                        SF   48.73  -73.78  135.09
+Moon  5015 _("Rheita")                           AA   -37.1   47.17   70.81
+Moon 12565 _("Rheita E")                         SF  -34.24   48.92   67.72
+Moon  5022 _("Riccioli")                         AA    -2.9  -74.42  155.66
+Moon  5023 _("Riccius")                          AA  -37.02   26.43   71.79
+Moon  5024 _("Ricco")                            AA   74.92  177.05   65.83
+Moon  5027 _("Richardson")                       AA   30.93   99.89  162.56
+Moon  5030 _("Riemann")                          AA   39.38   87.18  117.85
+Moon 12606 _("[Riemann A]")                      SF   37.07    86.5   52.56
+Moon  5037 _("Rima Agatharchides")               RI  -20.38  -28.56   54.25
+Moon  5038 _("Rima Agricola")                    RI   29.25  -53.42  125.08
+Moon  5039 _("Rima Archytas")                    RI   53.63       3   90.18
+Moon  5040 _("Rima Ariadaeus")                   RI    6.48   13.44  247.45
+Moon  5041 _("Rima Artsimovich")                 RI   26.66  -38.65   68.06
+Moon  5042 _("Rima Billy")                       RI  -14.74  -48.04   69.82
+Moon  5043 _("Rima Birt")                        RI   -21.4   -9.28   54.18
+Moon  5044 _("Rima Bradley")                     RI   24.17    -0.6  133.76
+Moon  5045 _("Rima Brayley")                     RI    22.3  -36.35  327.26
+Moon  5047 _("Rima Cardanus")                    RI   11.32  -71.14  221.93
+Moon  5049 _("Rima Cauchy")                      RI   10.42   38.07     167
+Moon  5054 _("Rima Delisle")                     RI   30.87  -32.35    57.6
+Moon  5055 _("Rima Diophantus")                  RI    28.7  -33.67   201.5
+Moon  5056 _("Rima Draper")                      RI   17.37  -25.37  244.16
+Moon  5091 _("Rimae Alphonsus")                  RI   -13.4   -1.94      87
+Moon  5092 _("Rimae Apollonius")                 RI    4.39   54.33   89.64
+Moon  5093 _("Rimae Archimedes")                 RI   26.34   -4.53     215
+Moon  5094 _("Rimae Aristarchus")                RI   27.52  -47.25     175
+Moon  5095 _("Rimae Arzachel")                   RI  -18.31   -1.38      57
+Moon  5097 _("Rimae Bode")                       RI    9.54   -3.22     233
+Moon  5099 _("Rimae Bürg")                       RI    44.7   25.27      98
+Moon  5100 _("Rimae Chacornac")                  RI   29.01   31.24     100
+Moon  5101 _("Rimae Daniell")                    RI   37.53   24.33  140.25
+Moon  5102 _("Rimae Darwin")                     RI  -19.84  -66.66     170
+Moon  5105 _("Rimae Focas")                      RI  -27.68  -97.54      61
+Moon  5106 _("Rimae Fresnel")                    RI   28.11    3.73      75
+Moon  5107 _("Rimae Gassendi")                   RI  -17.47  -39.87      70
+Moon  5108 _("Rimae Gerard")                     RI   45.54  -84.36     110
+Moon  5109 _("Rimae Goclenius")                  RI   -7.84   42.88     190
+Moon  5110 _("Rimae Grimaldi")                   RI   -6.18   -63.9     162
+Moon  5111 _("Rimae Gutenberg")                  RI   -4.42   36.42     223
+Moon  6898 _("Rimae Hase")                       RI  -34.71   67.78  257.24
+Moon  5112 _("Rimae Herigonius")                 RI  -13.92  -36.75     180
+Moon  5113 _("Rimae Hevelius")                   RI    0.81  -66.38     180
+Moon  5114 _("Rimae Hippalus")                   RI   -25.6  -29.36     266
+Moon  5115 _("Rimae Hypatia")                    RI   -0.34   22.78     200
+Moon  5116 _("Rimae Janssen")                    RI   -45.8   39.26     120
+Moon  5117 _("Rimae Kopff")                      RI  -14.68   -88.1     250
+Moon  5119 _("Rimae Littrow")                    RI   22.47   30.47     165
+Moon  5120 _("Rimae Maclear")                    RI   12.23    19.9      94
+Moon  5121 _("Rimae Maestlin")                   RI    2.88  -40.48      71
+Moon  5122 _("Rimae Maupertuis")                 RI   51.24  -22.82      50
+Moon  5123 _("Rimae Menelaus")                   RI    17.1   17.77      87
+Moon  5124 _("Rimae Mersenius")                  RI  -20.69  -46.53     240
+Moon  5125 _("Rimae Opelt")                      RI  -13.64  -18.14      55
+Moon  5127 _("Rimae Parry")                      RI   -8.07  -16.52     210
+Moon  5128 _("Rimae Petavius")                   RI  -25.23   60.48     110
+Moon  5129 _("Rimae Pettit")                     RI  -25.22  -93.63     320
+Moon  5130 _("Rimae Pitatus")                    RI  -29.84  -13.62      90
+Moon  5131 _("Rimae Plato")                      RI   50.88   -3.02     180
+Moon  5132 _("Rimae Plinius")                    RI   17.05   23.14     100
+Moon  5133 _("Rimae Posidonius")                 RI   32.03   29.61      78
+Moon  5135 _("Rimae Ramsden")                    RI  -32.93  -31.32     100
+Moon  5136 _("Rimae Repsold")                    RI   50.74  -80.46  152.05
+Moon  5137 _("Rimae Riccioli")                   RI   -1.52  -73.07     250
+Moon  5138 _("Rimae Ritter")                     RI     3.5   17.97      75
+Moon  5139 _("Rimae Römer")                      RI   26.98   34.86     112
+Moon  5141 _("Rimae Sirsalis")                   RI  -15.01  -61.36     405
+Moon  5142 _("Rimae Sosigenes")                  RI    8.08   18.72     130
+Moon  5143 _("Rimae Sulpicius Gallus")           RI   20.65    9.99      80
+Moon  5145 _("Rimae Theaetetus")                 RI   33.04    5.87      53
+Moon  5146 _("Rimae Triesnecker")                RI     5.1    4.83     200
+Moon  5057 _("Rima Euler")                       RI   21.08  -30.31  104.97
+Moon  5148 _("Rimae Zupus")                      RI  -15.46  -53.76     130
+Moon  5059 _("Rima Furnerius")                   RI   -35.3   61.17   65.85
+Moon  5061 _("Rima Galilaei")                    RI   12.91   -59.2  185.88
+Moon  5060 _("Rima G. Bond")                     RI   32.86   35.25  166.85
+Moon  5064 _("Rima Hadley")                      RI   25.72    3.15  116.09
+Moon  5066 _("Rima Hesiodus")                    RI  -30.54  -21.85  251.46
+Moon  5067 _("Rima Hyginus")                     RI    7.62    6.77  203.96
+Moon  5070 _("Rima Mairan")                      RI   38.28  -46.83  120.51
+Moon  5072 _("Rima Marius")                      RI   16.37  -49.54  283.54
+Moon  5073 _("Rima Messier")                     RI   -0.76   44.55   74.22
+Moon  5074 _("Rima Milichius")                   RI    8.03  -32.87  140.72
+Moon  5075 _("Rima Oppolzer")                    RI   -1.53    1.28    94.2
+Moon  6895 _("[Rima Schröter]")                  RI      26     -51     150
+Moon  5080 _("Rima Sharp")                       RI   46.02  -50.36  276.67
+Moon  5081 _("Rima Sheepshanks")                 RI   58.28   23.69  157.49
+Moon  5083 _("Rima Suess")                       RI    6.62  -47.14  156.39
+Moon  5085 _("Rima T. Mayer")                    RI   13.26  -31.37   67.81
+Moon  5159 _("Ritz")                             AA  -15.37   92.38   53.77
+Moon  5161 _("Roberts")                          AA   70.66 -174.25   89.37
+Moon  5162 _("Robertson")                        AA   21.84 -105.37   89.85
+Moon 12627 _("Roberts R")                        SF   69.05  178.81   55.57
+Moon  5164 _("Rocca")                            AA  -12.89  -72.89   84.06
+Moon 12628 _("Rocca A")                          SF  -13.76  -70.32   64.25
+Moon 12641 _("Rocca Q")                          SF  -15.29  -69.14   58.51
+Moon 12645 _("Rocca W")                          SF  -10.26  -66.52  104.65
+Moon 12646 _("Rocca Z")                          SF  -16.23  -75.54   54.36
+Moon  5166 _("Roche")                            AA  -42.37  136.54  152.67
+Moon 12663 _("Römer P")                          SF   26.54   39.81   59.37
+Moon 12664 _("Römer R")                          SF   24.15   34.45   52.57
+Moon  5255 _("Röntgen")                          AA   32.88  -91.42  128.42
+Moon  5189 _("Rosenberger")                      AA  -55.49   43.15   91.65
+Moon  5196 _("Rosseland")                        AA  -40.82  130.68   67.66
+Moon 12709 _("Rothmann G")                       SF  -28.39   24.39   92.01
+Moon  5204 _("Rowland")                          AA   56.98 -162.48  166.12
+Moon 12719 _("Rowland M")                        SF   51.48  -162.7   57.97
+Moon 12722 _("Rowland Y")                        SF   58.64 -163.21   54.93
+Moon  5207 _("Rozhdestvenskiy")                  AA   84.99 -157.89  181.15
+Moon 12726 _("Rozhdestvenskiy W")                SF   85.89  114.64   74.96
+Moon  5220 _("Rumford")                          AA  -28.81  -169.8   60.83
+Moon 12732 _("Rumford T")                        SF  -28.54 -172.15  111.67
+Moon  5224 _("Rupes Altai")                      RU  -24.32   23.12  545.19
+Moon  5226 _("Rupes Cauchy")                     RU    9.31   37.08  169.85
+Moon  5227 _("Rupes Kelvin")                     RU  -28.03  -33.17   85.92
+Moon  5228 _("Rupes Liebig")                     RU  -25.14  -45.92  144.78
+Moon  5229 _("Rupes Mercator")                   RU  -30.21  -22.84   132.4
+Moon  5230 _("Rupes Recta")                      RU  -21.67    -7.7  115.95
+Moon  5232 _("Rupes Toscanelli")                 RU   26.97  -47.53   50.14
+Moon  5235 _("Russell")                          AA   26.51  -75.55  103.37
+Moon  5246 _("Rynin")                            AA   46.78 -103.73   77.88
+Moon  5270 _("Sacrobosco")                       AA  -23.75   16.64   97.67
+Moon  5272 _("Saenger")                          AA    4.49   102.8   74.57
+Moon 12776 _("Saenger B")                        SF    5.64  103.32   62.42
+Moon  5277 _("Saha")                             AA   -1.69  103.04  103.34
+Moon 12788 _("Saha C")                           SF    1.45  108.22    59.9
+Moon 12793 _("Saha N")                           SF   -4.23  101.89   50.65
+Moon  5305 _("Sanford")                          AA   32.38 -139.21   55.09
+Moon  5314 _("Santbech")                         AA  -20.99   44.06   62.24
+Moon  5331 _("Sarton")                           AA   49.12 -121.14   71.33
+Moon  5335 _("Sasserides")                       AA  -39.28   -9.44   81.74
+Moon  5343 _("Saussure")                         AA  -43.38   -3.88   54.56
+Moon  5352 _("Scaliger")                         AA  -27.26  109.14    86.4
+Moon  5361 _("Schaeberle")                       AA  -26.33  117.71   56.74
+Moon  5364 _("Scheiner")                         AA  -60.35  -27.81  110.07
+Moon  5368 _("Schickard")                        AA  -44.38  -55.11  212.18
+Moon 12891 _("Schickard P")                      SF  -42.91   -48.5   94.39
+Moon  5369 _("Schiller")                         AA  -51.72  -39.78  179.36
+Moon 12906 _("Schiller H")                       SF   -50.6  -37.74   72.44
+Moon  5370 _("Schjellerup")                      AA   69.04  158.24   62.82
+Moon  5371 _("Schlesinger")                      AA   47.12 -138.98   97.28
+Moon 12922 _("Schlesinger B")                    SF   51.02 -135.17   64.45
+Moon  5372 _("Schliemann")                       AA   -1.99  155.12    77.4
+Moon 12924 _("Schliemann A")                     SF    1.22  155.19   56.97
+Moon  5373 _("Schlüter")                         AA   -5.93  -83.39   87.55
+Moon  5376 _("Schneller")                        AA   41.34 -163.73   56.87
+Moon  5378 _("Schomberger")                      AA  -76.64   24.69    85.8
+Moon  5379 _("Schorr")                           AA  -19.45    89.8   52.09
+Moon 12952 _("Schorr A")                         SF  -20.38   88.16   58.06
+Moon  5381 _("Schrödinger")                      AA  -74.73  132.93  316.39
+Moon  5383 _("Schubert")                         AA    2.78   81.01   51.94
+Moon 12979 _("Schubert G")                       SF    4.19   75.34   56.38
+Moon 12983 _("Schubert N")                       SF    1.79   72.65   65.13
+Moon  5385 _("Schumacher")                       AA   42.42   60.81   61.31
+Moon  5387 _("Schuster")                         AA    4.44  146.42  100.08
+Moon  5389 _("Schwarzschild")                    AA   70.08  121.57  211.42
+Moon  5394 _("Scoresby")                         AA   77.73   14.13   54.93
+Moon 13010 _("Scoresby M")                       SF   75.57    8.15   56.52
+Moon  5395 _("Scott")                            AA  -82.35   48.52  107.82
+Moon  5398 _("Seares")                           AA   73.74  147.23    99.5
+Moon  5403 _("Sechenov")                         AA   -6.97 -143.09    63.8
+Moon 13031 _("Segers M")                         SF   44.33  127.55   53.54
+Moon  5407 _("Segner")                           AA  -58.96  -48.68   67.84
+Moon  5410 _("Seidel")                           AA  -32.65  152.47   55.39
+Moon  5446 _("Seyfert")                          AA   29.26  114.34  102.63
+Moon 13055 _("Seyfert A")                        SF   30.56  115.08   51.97
+Moon  5469 _("Sharonov")                         AA   12.37   173.1   75.12
+Moon  5479 _("Shayn")                            AA   32.52  172.42    92.9
+Moon  5494 _("Shoemaker")                        AA  -88.14   45.91   51.82
+Moon  5499 _("Short")                            AA  -74.54   -7.68   67.94
+Moon 13079 _("Short B")                          SF  -75.89   -5.17   89.84
+Moon  5502 _("Shternberg (Sternberg)")           AA   19.38 -116.82   74.36
+Moon  5522 _("Siedentopf")                       AA   22.05  135.08    62.7
+Moon 13085 _("Siedentopf G")                     SF   20.59  137.97   61.29
+Moon  5523 _("Sierpinski")                       AA  -26.93  154.81   66.94
+Moon  5531 _("Sikorsky")                         AA  -65.89  103.65   97.67
+Moon  5543 _("Simpelius")                        AA  -72.61   14.74   68.89
+Moon 13097 _("Simpelius A")                      SF   -69.9    16.1   57.54
+Moon 13098 _("Simpelius B")                      SF  -75.17    10.1   50.16
+Moon 13100 _("Simpelius D")                      SF  -71.56    8.29   55.93
+Moon  5558 _("Sinus Aestuum")                    SI    12.1   -8.34   316.5
+Moon  5559 _("Sinus Amoris")                     SI   19.92   37.29   189.1
+Moon  5561 _("Sinus Asperitatis")                SI   -5.41   27.49  219.14
+Moon  5562 _("Sinus Concordiae")                 SI   10.98   42.47  159.03
+Moon  5563 _("Sinus Fidei")                      SI   17.99    2.04    70.7
+Moon  5564 _("Sinus Honoris")                    SI   11.72   17.87  111.61
+Moon  5565 _("Sinus Iridum")                     SI   45.01  -31.67  249.29
+Moon  5566 _("Sinus Lunicus")                    SI   32.36   -1.85  119.18
+Moon  5567 _("Sinus Medii")                      SI    1.63    1.03  286.67
+Moon  5569 _("Sinus Roris")                      SI   50.26  -50.86  195.04
+Moon  5571 _("Sinus Successus")                  SI    1.12   58.52  126.65
+Moon 13121 _("Sirsalis E")                       SF   -8.16   -56.7   70.29
+Moon 13128 _("Sirsalis Z")                       SF  -10.37  -62.04   90.32
+Moon  5592 _("Sklodowska")                       AA  -18.04   96.15  125.55
+Moon  5599 _("Slipher")                          AA   49.28  160.27   74.65
+Moon  5607 _("Smoluchowski")                     AA   60.22  -96.91   84.26
+Moon  5609 _("Snellius")                         AA  -29.33    55.7   85.98
+Moon 13149 _("Sniadecki Q")                      SF  -22.93 -170.27   79.49
+Moon  5645 _("Sommerfeld")                       AA   64.83 -161.54  150.89
+Moon  5655 _("South")                            AA   57.58  -50.94  119.04
+Moon  5666 _("Spencer Jones")                    AA   13.06  165.84   88.19
+Moon 13181 _("Spencer Jones W")                  SF   14.94  163.53   53.45
+Moon  5680 _("Stadius")                          AA   10.48  -13.77   68.48
+Moon  5686 _("Stebbins")                         AA   64.36 -142.64  129.74
+Moon  5687 _("Stefan")                           AA   46.33 -108.77  112.18
+Moon  5693 _("Steinheil")                        AA  -48.71   46.66   63.28
+Moon  5701 _("Sternfeld")                        AA  -19.75 -142.27   109.8
+Moon  5703 _("Stetson")                          AA  -39.58  -118.2   63.12
+Moon  5704 _("Stevinus")                         AA  -32.49   54.14   71.54
+Moon  5679 _("St. John")                         AA   10.07  149.98   66.74
+Moon  5736 _("Stöfler")                          AA  -41.24    5.93  129.87
+Moon 13265 _("Stöfler D")                        SF  -43.71    4.29   53.24
+Moon 13270 _("Stöfler J")                        SF  -42.11    2.49   64.19
+Moon  5711 _("Stokes")                           AA   52.36  -88.11   53.85
+Moon  5737 _("Störmer")                          AA   57.14  146.65   68.62
+Moon  5721 _("Strabo")                           AA   61.94   54.42   54.72
+Moon  5722 _("Stratton")                         AA    -5.6   164.7   69.76
+Moon  5724 _("Street")                           AA  -46.58  -10.74   58.52
+Moon  5728 _("Strömgren")                        AA  -21.74 -132.37   62.17
+Moon 13318 _("Strömgren A")                      SF  -17.93 -131.82   50.82
+Moon  5727 _("Struve")                           AA   23.41  -76.65  164.34
+Moon  5740 _("Subbotin")                         AA  -29.32  135.71   71.66
+Moon  5761 _("Sumner")                           AA   37.62  108.76   52.87
+Moon  5791 _("Sylvester")                        AA   82.65  -81.22   59.28
+Moon  5799 _("Szilard")                          AA   33.71  105.78  127.22
+Moon  5878 _("Taruntius")                        AA     5.5   46.54   57.32
+Moon  5900 _("Teisserenc")                       AA   31.96 -136.28   62.31
+Moon  5919 _("Ten Bruggencate")                  AA   -9.58  134.66   59.95
+Moon 13432 _("Ten Bruggencate Y")                SF   -6.82   134.3   56.09
+Moon  5957 _("Thebit")                           AA  -22.01   -4.02   54.64
+Moon 13450 _("Thebit P")                         SF  -24.06   -5.63   77.09
+Moon  5965 _("Theophilus")                       AA  -11.45   26.28   98.59
+Moon  5972 _("Thiessen")                         AA   74.86  -169.5   66.39
+Moon  5977 _("Thomson")                          AA  -32.32  166.04  117.25
+Moon 13471 _("Thomson M")                        SF  -35.98  166.44  113.83
+Moon  6000 _("Tikhomirov")                       AA    24.2  161.33   86.43
+Moon  6002 _("Tikhov")                           AA   61.66  172.29   83.97
+Moon  6011 _("Timiryazev")                       AA   -5.09 -147.15   52.15
+Moon 13488 _("Timiryazev S")                     SF   -5.63 -149.51   51.44
+Moon  6027 _("Tiselius")                         AA    6.89   176.7   53.75
+Moon  6035 _("Titius")                           AA  -26.75  100.66   68.42
+Moon 13503 _("Titius Q")                         SF  -27.95      99   50.64
+Moon 13518 _("Torricelli R")                     SF   -5.24   28.14   87.64
+Moon  6097 _("Trumpler")                         AA   29.33  167.14   76.17
+Moon  6100 _("Tsander (Zander)")                 AA    5.39 -149.69  159.95
+Moon 13532 _("Tsander (Zander) B")               SF    9.01 -147.68   55.09
+Moon  6104 _("Tseraskiy (Ceraski)")              AA  -48.66  142.64   65.59
+Moon  6108 _("Tsiolkovskiy")                     AA  -20.38  128.97  184.39
+Moon  6163 _("Tycho")                            AA   -43.3  -11.22   85.29
+Moon  6207 _("Ulugh Beigh")                      AA   32.67  -81.96   57.04
+Moon  6286 _("Valier")                           AA    6.65  174.26   65.06
+Moon  6290 _("Vallis Alpes")                     VA   49.21    3.63  155.42
+Moon  6291 _("Vallis Baade")                     VA  -45.55  -77.23  206.79
+Moon  6292 _("Vallis Bohr")                      VA   10.25  -88.86   95.32
+Moon  6293 _("Vallis Bouvard")                   VA  -38.45  -82.32  287.92
+Moon  6294 _("Vallis Capella")                   VA   -7.39   35.04  106.28
+Moon  6295 _("Vallis Inghirami")                 VA  -43.95  -72.59  145.08
+Moon  6296 _("Vallis Palitzsch")                 VA  -26.16   64.64   110.5
+Moon  6297 _("Vallis Planck")                    VA  -57.26  126.16   502.9
+Moon  6298 _("Vallis Rheita")                    VA  -42.51   51.65  509.07
+Moon  6299 _("Vallis Schrödinger")               VA  -66.52  104.88  301.71
+Moon  6300 _("Vallis Schröteri")                 VA   26.16  -51.58  185.32
+Moon  6301 _("Vallis Snellius")                  VA  -30.93   57.84     640
+Moon  6305 _("Van de Graaff")                    AA  -27.04  172.01  240.47
+Moon  6308 _("Van der Waals")                    AA  -43.56  119.98  113.37
+Moon  6320 _("van't Hoff")                       AA   61.75 -132.68   107.3
+Moon  6327 _("Vasco da Gama")                    AA   13.78  -83.94   93.52
+Moon 13620 _("Vasco da Gama F")                  SF   13.86  -80.78   55.78
+Moon 13621 _("Vasco da Gama P")                  SF      12  -80.34  102.54
+Moon 13622 _("Vasco da Gama R")                  SF    9.91  -83.51    60.9
+Moon  6336 _("Vavilov")                          AA   -0.87 -138.77   98.22
+Moon 13625 _("Vavilov D")                        SF    0.03 -137.48    96.2
+Moon  6341 _("Vega")                             AA  -45.41   63.27   73.51
+Moon  6346 _("Vendelinus")                       AA  -16.46   61.55  141.21
+Moon  6348 _("Vening Meinesz")                   AA    -0.1  162.51   88.69
+Moon  6349 _("Ventris")                          AA   -4.77  157.97  100.74
+Moon 13660 _("Ventris N")                        SF   -6.81  157.59   62.81
+Moon  6357 _("Vernadskiy")                       AA   23.11  130.43   91.97
+Moon 13662 _("[Vernadskiy B]")                   SF   25.15  131.56    61.6
+Moon 13664 _("Vernadskiy X")                     SF   25.82     129   58.57
+Moon  6362 _("Vertregt")                         AA   -19.3  171.12  172.76
+Moon  6365 _("Vesalius")                         AA   -3.23  114.79   64.65
+Moon 13671 _("Vesalius D")                       SF   -2.49  117.07   51.47
+Moon  6369 _("Vestine")                          AA   33.87   93.68   97.81
+Moon 13677 _("Vestine T")                        SF   33.64   91.05    59.2
+Moon  6373 _("Vetchinkin")                       AA    9.77  131.08   94.29
+Moon  6384 _("Vieta")                            AA  -29.31  -56.53   87.16
+Moon  6420 _("Vlacq")                            AA  -53.39   38.69   89.21
+Moon  6430 _("Volta")                            AA    53.9  -84.77  117.15
+Moon  6432 _("Volterra")                         AA   56.55  131.64    55.1
+Moon  6438 _("von Békésy")                       AA   51.92  126.73   96.25
+Moon  6437 _("von Braun")                        AA   41.04  -78.08   61.83
+Moon  6439 _("Von der Pahlen")                   AA  -24.84 -133.01   53.89
+Moon  6440 _("Von Kármán")                       AA  -44.45  176.25  186.35
+Moon 13751 _("Von Kármán M")                     SF  -49.44  174.95  218.98
+Moon  6442 _("Von Neumann")                      AA   40.28  153.25   74.83
+Moon  6447 _("Von Zeipel")                       AA   42.19 -141.93   83.41
+Moon  6483 _("Walther")                          AA  -33.25    0.62  134.23
+Moon  6484 _("Wan-Hoo (Van-Gu)")                 AA   -9.96 -138.91   53.28
+Moon  6488 _("Wargentin")                        AA  -49.53  -60.44   84.69
+Moon  6495 _("Waterman")                         AA   -25.7  128.18   74.91
+Moon  6496 _("Watson")                           AA  -62.59 -124.05   59.43
+Moon  6497 _("Watt")                             AA   -49.6   48.48   66.54
+Moon  6466 _("W. Bond")                          AA   65.41    3.52  170.53
+Moon  6507 _("Wegener")                          AA   45.21 -113.81   95.78
+Moon 13844 _("Wegener W")                        SF   47.11 -116.41   51.77
+Moon  6515 _("Weiss")                            AA  -31.76  -19.59   66.56
+Moon  6523 _("Werner")                           AA  -28.03    3.29   70.59
+Moon  6527 _("Wexler")                           AA  -68.88   90.71   52.44
+Moon  6528 _("Weyl")                             AA   15.97 -120.53  122.82
+Moon 13885 _("Wichmann R")                       SF   -6.64  -38.95   64.13
+Moon  6540 _("Widmannstätten")                   AA   -6.09   85.43   52.88
+Moon  6544 _("Wiener")                           AA    40.9  146.51  113.39
+Moon 13893 _("Wiener K")                         SF   39.26  147.96   94.51
+Moon  6548 _("Wilhelm")                          AA  -43.21  -20.94  100.83
+Moon  6549 _("Wilkins")                          AA  -29.58   19.58   59.44
+Moon  6555 _("Wilsing")                          AA  -20.97 -155.05    66.8
+Moon 13937 _("Wilsing V")                        SF  -20.08 -158.14   53.17
+Moon  6556 _("Wilson")                           AA  -69.33  -42.83   66.57
+Moon  6561 _("Winlock")                          AA    35.4 -105.92   63.93
+Moon 13948 _("Winlock M")                        SF   32.04 -106.23   65.49
+Moon  6573 _("Wood")                             AA   43.66 -121.83   84.15
+Moon  6583 _("Wrottesley")                       AA   -23.9   56.62   58.38
+Moon  6590 _("Wurzelbauer")                      AA  -34.04  -16.06   86.77
+Moon  6591 _("Wyld")                             AA   -1.42    98.1   103.4
+Moon  6606 _("Xenophanes")                       AA   57.49  -82.01  117.57
+Moon  6623 _("Yablochkov")                       AA   60.78  127.58  101.49
+Moon  6634 _("Yamamoto")                         AA   58.16  161.87   77.46
+Moon  6675 _("Young")                            AA  -41.54   50.98   71.44
+Moon  6690 _("Zach")                             AA  -60.92    5.25   68.54
+Moon  6691 _("Zagut")                            AA  -31.94   21.89   78.92
+Moon  6711 _("Zeeman")                           AA  -75.07 -135.06  186.56
+Moon  6713 _("Zelinskiy")                        AA  -28.74  166.86   53.95
+Moon  6717 _("Zeno")                             AA   45.15   72.98   66.78
+Moon  6724 _("Zernike")                          AA   18.34   168.4   50.68
+Moon 14073 _("Zhiritskiy F")                     SF  -24.92  121.61   77.38
+Moon  6735 _("Zhukovskiy")                       AA    7.55 -167.28   82.07
+Moon  6755 _("Zsigmondy")                        AA   59.52  -105.3   66.88
+Moon 14089 _("Zsigmondy A")                      SF   62.48 -102.42    61.2
+Moon 14090 _("Zsigmondy S")                      SF   59.36 -107.28   66.76
+Moon  6757 _("Zucchius")                         AA  -61.38  -50.65   63.18
+Moon  6770 _("Zwicky")                           AA  -16.17  167.64  126.06
