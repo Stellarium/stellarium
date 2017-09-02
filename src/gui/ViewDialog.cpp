@@ -436,10 +436,15 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->asterismLineThicknessSpinBox, "AsterismMgr.asterismLineThickness");
 	connectCheckBox(ui->showAsterismLabelsCheckBox, "actionShow_Asterism_Labels");
 
+	connectCheckBox(ui->showRayHelpersCheckBox, "actionShow_Ray_Helpers");
+	connectDoubleProperty(ui->rayHelperThicknessSpinBox, "AsterismMgr.rayHelperThickness");
+
 	colorButton(ui->colorAsterismLabels,	"AsterismMgr.namesColor");
 	colorButton(ui->colorAsterismLines,	"AsterismMgr.linesColor");
+	colorButton(ui->colorRayHelpers,	"AsterismMgr.rayHelpersColor");
 	connect(ui->colorAsterismLabels,	SIGNAL(released()), this, SLOT(askAsterismLabelsColor()));
 	connect(ui->colorAsterismLines,		SIGNAL(released()), this, SLOT(askAsterismLinesColor()));
+	connect(ui->colorRayHelpers,		SIGNAL(released()), this, SLOT(askRayHelpersColor()));
 
 	// Sky layers. This not yet finished and not visible in releases.
 	// TODO: These 4 lines are commented away in trunk.
@@ -1014,6 +1019,21 @@ void ViewDialog::askAsterismLinesColor()
 		GETSTELMODULE(AsterismMgr)->setLinesColor(vColor);
 		StelApp::getInstance().getSettings()->setValue("color/asterism_lines_color", StelUtils::vec3fToStr(vColor));
 		ui->colorAsterismLines->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askRayHelpersColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("AsterismMgr.rayHelpersColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorRayHelpers->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(AsterismMgr)->setRayHelpersColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/rayhelper_lines_color", StelUtils::vec3fToStr(vColor));
+		ui->colorRayHelpers->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 
