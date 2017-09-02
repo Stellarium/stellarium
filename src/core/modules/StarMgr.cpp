@@ -1067,9 +1067,12 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 			crossIdData.hr = fields.at(4).toUInt(&ok);
 
 			crossIdMap[hipstar] = crossIdData;
-			saoStarsIndex[crossIdData.sao] = hip;
-			hdStarsIndex[crossIdData.hd] = hip;
-			hrStarsIndex[crossIdData.hr] = hip;
+			if (crossIdData.sao>0)
+				saoStarsIndex[crossIdData.sao] = hip;
+			if (crossIdData.hd>0)
+				hdStarsIndex[crossIdData.hd] = hip;
+			if (crossIdData.hr>0)
+				hrStarsIndex[crossIdData.hr] = hip;
 
 			++readOk;
 		}
