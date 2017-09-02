@@ -565,6 +565,11 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	if (!getFlagLabels())
 		return;
 
+	// GZ: I reject smaller craters for now, until geometric computations have been corrected.
+	// TODO: Later, size should be adjusted with planet screen size so that not too many labels are visible.
+	if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<120))
+		return;
+
 	// Get latitude and longitude of planet or moon in J2000
 	Vec3d coord = planet->getJ2000EquatorialPos(core);
 	Vec3d srcPos;
