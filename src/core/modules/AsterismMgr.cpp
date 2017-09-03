@@ -48,11 +48,13 @@ using namespace std;
 
 // constructor which loads all data from appropriate files
 AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
-	: hipStarMgr(_hip_stars),
-	  linesDisplayed(0),
-	  namesDisplayed(0),
-	  hasAsterism(0),
-	  asterismLineThickness(1.)
+	: hipStarMgr(_hip_stars)
+	, linesDisplayed(false)
+	, rayHelpersDisplayed(false)
+	, namesDisplayed(false)
+	, hasAsterism(false)
+	, asterismLineThickness(1.)
+	, rayHelperThickness(1.0)
 {
 	setObjectName("AsterismMgr");
 	Q_ASSERT(hipStarMgr);
