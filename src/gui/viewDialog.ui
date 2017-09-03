@@ -306,7 +306,7 @@
                   </size>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="decimals">
                   <number>2</number>
@@ -357,7 +357,7 @@
                   <bool>true</bool>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="buttonSymbols">
                   <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -459,7 +459,7 @@
                   </size>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="decimals">
                   <number>2</number>
@@ -528,7 +528,7 @@
                   <bool>true</bool>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="buttonSymbols">
                   <enum>QAbstractSpinBox::UpDownArrows</enum>
@@ -633,7 +633,7 @@
                   </size>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="decimals">
                   <number>2</number>
@@ -682,7 +682,7 @@
                   </size>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="decimals">
                   <number>2</number>
@@ -826,11 +826,20 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="moonScaleFactor">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>Scale factor</string>
                  </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="decimals">
-                  <number>1</number>
+                  <number>2</number>
                  </property>
                  <property name="minimum">
                   <double>1.000000000000000</double>
@@ -862,6 +871,15 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="planetLimitMagnitudeDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="maximum">
                   <double>22.000000000000000</double>
                  </property>
@@ -1092,11 +1110,23 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="minorBodyScaleFactor">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="decimals">
-                  <number>1</number>
+                  <number>2</number>
                  </property>
                  <property name="minimum">
                   <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>100.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.500000000000000</double>
@@ -1726,6 +1756,15 @@
                  </item>
                  <item>
                   <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
+                   <property name="maximumSize">
+                    <size>
+                     <width>70</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
                    <property name="minimum">
                     <double>3.000000000000000</double>
                    </property>
@@ -2603,6 +2642,9 @@
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
                    <property name="decimals">
                     <number>0</number>
                    </property>
@@ -2799,8 +2841,17 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>Value range 0..1 (landscape is black at night - landscape is fully bright)</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="maximum">
                   <double>1.000000000000000</double>
@@ -2991,6 +3042,12 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -3015,6 +3072,12 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="constellationLineThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>Value in pixels</string>
                  </property>
@@ -3071,6 +3134,19 @@
                 </widget>
                </item>
                <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
                  <property name="toolTip">
                   <string>Select if you want names abbreviated, original or translated</string>
@@ -3121,6 +3197,12 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="asterismLineThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -3173,6 +3255,15 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="rayHelperThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="decimals">
                   <number>0</number>
                  </property>
