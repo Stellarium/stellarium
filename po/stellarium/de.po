@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-02 20:06+0700\n"
-"PO-Revision-Date: 2017-08-06 15:16+0000\n"
+"PO-Revision-Date: 2017-09-03 12:16+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-03 05:16+0000\n"
+"X-Launchpad-Export-Date: 2017-09-04 05:10+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -72,7 +72,7 @@ msgstr "Asterismen-Bezeichnungen"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Ray helpers"
-msgstr ""
+msgstr "Sternzug-Hilfslinien"
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
@@ -1406,7 +1406,7 @@ msgstr "1 Sterntag vorwärts"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 7 sidereal days"
-msgstr ""
+msgstr "7 Tage Sternzeit vorwärts"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 sidereal year"
@@ -1422,7 +1422,7 @@ msgstr "1 Synodischen Monat vorwärts"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 saros"
-msgstr ""
+msgstr "1 Saros vorwärts"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 draconic month"
@@ -1478,7 +1478,7 @@ msgstr "1 Sterntag zurück"
 
 #: src/core/StelCore.cpp:291
 msgid "Subtract 7 sidereal days"
-msgstr ""
+msgstr "7 Tage Sternzeit zurück"
 
 #: src/core/StelCore.cpp:292
 msgid "Subtract 1 sidereal year"
@@ -1494,7 +1494,7 @@ msgstr "1 Synodischen Monat zurück"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "1 Saros zurück"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 draconic month"
@@ -2318,7 +2318,7 @@ msgstr "Lizenz"
 #: src/gui/ConfigurationDialog.cpp:1023
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "unbekannt"
 
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Running script: "
@@ -7181,11 +7181,11 @@ msgstr "Farbe für Asterismus-Namen"
 
 #: src/ui_viewDialog.h:2618
 msgid "Show ray helpers"
-msgstr ""
+msgstr "Zeige Sternzug-Hilfslinien"
 
 #: src/ui_viewDialog.h:2620
 msgid "Color of ray helpers"
-msgstr ""
+msgstr "Farbe für Sternzug-Hilfslinien"
 
 #: src/ui_viewDialog.h:2623
 msgid "Visible"
@@ -15957,7 +15957,7 @@ msgstr "Rechte untere Ecke des Bildschirms"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "Near mouse cursor"
-msgstr ""
+msgstr "In der Nähe des Mauszeigers"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
@@ -16009,7 +16009,7 @@ msgstr "Zeige IAU Sternbildkürzel"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Show crossed lines under mouse cursor"
-msgstr ""
+msgstr "Zeige Fadenkreuz unter Mauszeiger"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
