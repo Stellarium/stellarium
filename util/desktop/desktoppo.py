@@ -93,24 +93,21 @@ for pofile in glob.glob(podir + '/*.po'):
 
 for langfile in files:
   #open desktop file
-  deskfile = open(langfile,"r")
-  text = deskfile.read()
-  deskfile.close()
-  deskfile = open(langfile,"w")
-  for transblock in tpattern.findall(text):
-    text = text.replace(transblock, '')
+  with open(langfile,"r") as deskfile:
+      text = deskfile.read()
 
-  # Parse PO files
-  for pofile in sorted(glob.glob(podir + '/*.po'), reverse = True):
-    lang = pofile[:-3].rsplit('/',1)[1]
-    pofilename = pofile
-    po = polib.pofile(pofilename)
-    for entry in po.translated_entries():
-      if entry.msgid.encode('utf-8') in text:
-	origmessage = ('\n' + entry.msgctxt + '=' + entry.msgid + '\n').encode('utf-8')
-	origandtranslated = ('\n' + entry.msgctxt + '=' + entry.msgid + '\n' + entry.msgctxt + '[' + lang + ']=' + entry.msgstr + '\n').encode('utf-8')
-	text = text.replace(origmessage, origandtranslated)
-
-  deskfile.write(text)
-  deskfile.close()
-
+  with open(langfile,"w") as deskfile:
+      for transblock in tpattern.findall(text):
+        text = text.replace(transblock, '')
+    
+      # Parse PO files
+      for pofile in sorted(glob.glob(podir + '/*.po'), reverse = True):
+        lang = pofile[:-3].rsplit('/',1)[1]
+        pofilename = pofile
+        po = polib.pofile(pofilename)
+        for entry in po.translated_entries():
+          if entry.msgid.encode('utf-8') in text:
+        origmessage = ('\n' + entry.msgctxt + '=' + entry.msgid + '\n').encode('utf-8')
+        origandtranslated = ('\n' + entry.msgctxt + '=' + entry.msgid + '\n' + entry.msgctxt + '[' + lang + ']=' + entry.msgstr + '\n').encode('utf-8')
+        text = text.replace(origmessage, origandtranslated)
+      deskfile.write(text)
