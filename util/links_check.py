@@ -46,10 +46,8 @@ base = "./"
 if len(sys.argv) == 2:
     base = sys.argv[1] + "/"
 
-files = []
 for root, dirnames, filenames in os.walk(base):
-    for filename in fnmatch.filter(filenames, '*.utf8'):
-        files.append(os.path.join(root, filename))
+    files = [os.path.join(root, filename) for filename in fnmatch.filter(filenames, '*.utf8')]
 
 print "Got %d files" % len(files)
 
