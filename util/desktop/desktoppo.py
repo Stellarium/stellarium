@@ -64,7 +64,8 @@ for langfile in files:
     if e.errno != errno.EEXIST:
         raise
   #open desktop file
-  text = open(langfile,"r").read()
+  with open(langfile,"r") as fid:
+      text = fid.read()
 
   # Parse contents and add them to POT
   for mblock in mpattern.findall(text):
