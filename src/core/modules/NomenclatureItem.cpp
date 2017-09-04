@@ -574,13 +574,15 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d coord = planet->getJ2000EquatorialPos(core);
 	Vec3d srcPos;
 
+    // Calculate the radius of the planet and re-scale it
+    // Convert latitude and longitude to radians. It must be taken into account the rotation of the planet to get the right longitude in radians
 	double r = planet->getRadius()*planet->getSphereScale();
 	double nlatitude = latitude*M_PI/180.0;
 	double nlongitude = (longitude - planet->getRotationElements().offset)*M_PI/180.0;
 
 //	double R = sqrt(coord.length()*coord.length() + r*r);
-    double R = sqrt(coord.length()*coord.length() + r*r + 2*coord.length()*r*cos(nlatitude - coord.latitude()));
-//    double R = sqrt( coord.length()*coord.length() + r*r + 2*coord.length()*r*( cos(nlongitude - coord.longitude())*cos(coord.latitude())*cos(nlatitude) + sin(coord.latitude())*sin(nlatitude) ) );
+//  double R = sqrt( coord.length()*coord.length() + r*r + 2*coord.length()*r*( cos(nlongitude - coord.longitude())*cos(coord.latitude())*cos(nlatitude) + sin(coord.latitude())*sin(nlatitude) ) );
+/*    double R = sqrt(coord.length()*coord.length() + r*r + 2*coord.length()*r*cos(nlatitude - coord.latitude()));
     double latitude = asin( (r*sin(nlatitude) + coord.length()*sin(coord.latitude()))/R );
     double longitude = atan( (r*cos(nlatitude)*sin(nlongitude) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(r*cos(nlatitude)*cos(nlongitude) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
 
@@ -589,11 +591,23 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	XYZ[0] = r * cos(longitude) * cos(latitude);
 	XYZ[1] = r * sin(longitude) * cos(latitude);
 	XYZ[2] = r * sin(latitude);
-    
+    */
 /*
-*This part is to find an alternativ to calculation with trigonometric functions
+*This part is to find an alternative to calculation with trigonometric functions
+* First: rotate "planetocentric" frame to get the coordinates in VSOP87
 */
-//    Mat4d mat = Mat4d::zrotation(longitude)*Mat4d::yrotation(latitude); // -> this isn't correct
+    Mat4d mat = planet->getRotEquatorialToVsop87();
+    Vec3d aux, planetcoord = mat * aux;
+    
+    double R = sqrt(coord.length()*coord.length() + r*r + 2*coord.length()*r*cos(planetcoord[0]*M_PI/180.0 - coord.latitude()));
+    double latitude = asin( (r*sin(planetcoord[0]*M_PI/180.0) + coord.length()*sin(coord.latitude()))/R );
+    double longitude = atan( (r*cos(planetcoord[0]*M_PI/180.0)*sin(planetcoord[1]*M_PI/180.0) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(r*cos(planetcoord[0]*M_PI/180.0)*cos(planetcoord[1]*M_PI/180.0) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
+    
+    // From spherical to cartesian coordinates
+    // The arguments of trigonometric functions must be in radians? --> GZ: of course!
+    XYZ[0] = r * cos(longitude) * cos(latitude);
+    XYZ[1] = r * sin(longitude) * cos(latitude);
+    XYZ[2] = r * sin(latitude);
     
 
 	if (painter->getProjector()->projectCheck(XYZ, srcPos))
