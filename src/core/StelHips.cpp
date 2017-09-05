@@ -38,7 +38,8 @@ class HipsTile
 public:
 	int order;
 	int pix;
-	StelTextureSP texture;
+	StelTextureSP texture = NULL;
+	StelTextureSP allsky = NULL; // allsky low res version of the texture.
 
 	// Used for smooth fade in
 	QTimeLine texFader;
@@ -57,8 +58,8 @@ HipsSurvey::~HipsSurvey()
 
 bool HipsSurvey::parseProperties()
 {
-	if (networkReply) return false;
 	if (propertiesParsed) return true;
+	if (networkReply) return false;
 	QNetworkRequest req = QNetworkRequest(url + "/properties");
 	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, [=] {
@@ -87,14 +88,21 @@ bool HipsSurvey::parseProperties()
 
 bool HipsSurvey::getAllsky()
 {
-	if (allsky.isNull())
-	{
-		QString ext = properties.hips_tile_format == "jpeg" ? "jpg" : "png";
-		QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(properties.hips_order_min).arg(ext);
-		StelTextureMgr& texMgr = StelApp::getInstance().getTextureManager();
-		allsky = texMgr.createTextureThread(path, StelTexture::StelTextureParams(), false);
-	}
-	return allsky->hasError() || allsky->bind();
+	if (!allsky.isNull()) return true;
+	if (!propertiesParsed || networkReply || noAllsky)
+		return false;
+	QString ext = properties.hips_tile_format == "jpeg" ? "jpg" : "png";
+	QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(properties.hips_order_min).arg(ext);
+	QNetworkRequest req = QNetworkRequest(path);
+	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	connect(networkReply, &QNetworkReply::finished, [=] {
+		QByteArray data = networkReply->readAll();
+		allsky = QImage::fromData(data);
+		propertiesParsed = true;
+		delete networkReply;
+		networkReply = NULL;
+	});
+	return !allsky.isNull();
 }
 
 void HipsSurvey::draw(StelPainter* sPainter)
@@ -135,6 +143,17 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		QString path = QString("%1/Norder%2/Dir%3/Npix%4.%5").arg(url).arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext);
 		tile->texture = texMgr.createTextureThread(path, StelTexture::StelTextureParams(), false);
 		tiles.insert(uid, tile);
+
+		// Use the allsky image until we load the full texture.
+		if (order == properties.hips_order_min && !allsky.isNull())
+		{
+			int nbw = sqrt(12 * 1 << (2 * order));
+			int x = (pix % nbw) * allsky.width() / nbw;
+			int y = (pix / nbw) * allsky.width() / nbw;
+			int s = allsky.width() / nbw;
+			QImage image = allsky.copy(x, y, s, s);
+			tile->allsky = texMgr.createTexture(image);
+		}
 	}
 	return tile;
 }
@@ -159,7 +178,9 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 	}
 
 	HipsTile* tile = getTile(order, pix);
-	if (!tile || !tile->texture->bind()) return;
+	if (!tile) return;
+	if (!tile->texture->bind() && (!tile->allsky || !tile->allsky->bind()))
+		return;
 	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
 		tile->texFader.start();
 

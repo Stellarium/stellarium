@@ -24,6 +24,7 @@
 
 #include <QObject>
 #include <QCache>
+#include <QImage>
 
 #include "StelTexture.hpp"
 
@@ -43,10 +44,12 @@ public:
 private:
 	QString url;
 	QCache<long int, HipsTile> tiles;
-	// reply to the initial download of the properties file.
+	// reply to the initial download of the properties file and to the
+	// allsky texture.
 	QNetworkReply *networkReply = NULL;
 
-	StelTextureSP allsky;
+	QImage allsky = QImage();
+	bool noAllsky = false;
 
 	struct {
 		int hips_order;
