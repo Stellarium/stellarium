@@ -173,21 +173,22 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 	// Check if the tile is visible.
 	SphericalCap boundingCap;
 	Vec3d pos;
+	Mat3d mat3;
+	Vec3d verts[4];
+	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(1, 0), Vec2f(0, 1), Vec2f(1, 1)};
+	unsigned short indices[6] = {0, 2, 1, 3, 1, 2};
+	HipsTile *tile;
+
 	healpix_pix2vec(1 << order, pix, pos.v);
 	boundingCap.n = pos;
 	boundingCap.d = cos(M_PI / 2.0 / (1 << order));
 
 	if (!viewportShape.intersects(boundingCap)) return;
 
-	// Keep going down until we reach the required order.
-	if (order < drawOrder)
-	{
-		for (int i = 0; i < 4; i++)
-			drawTile(order + 1, pix * 4 + i, drawOrder, viewportShape, sPainter);
-		return;
-	}
+	if (order < properties.hips_order_min)
+		goto skip_render;
 
-	HipsTile* tile = getTile(order, pix);
+	tile = getTile(order, pix);
 	if (!tile) return;
 	if (!tile->texture->bind() && (!tile->allsky || !tile->allsky->bind()))
 		return;
@@ -195,11 +196,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 		tile->texFader.start();
 
 	// Actually draw the tile, as a single quad.
-	Mat3d mat3;
 	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
-	Vec3d verts[4];
-	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(1, 0), Vec2f(0, 1), Vec2f(1, 1)};
-	unsigned short indices[6] = {0, 2, 1, 3, 1, 2};
 	for (int i = 0; i < 4; i++)
 	{
 		pos = mat3 * Vec3d(1 - uv[i][1], uv[i][0], 1.0);
@@ -219,4 +216,13 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 	sPainter->setCullFace(true);
 	sPainter->setArrays(verts, uv);
 	sPainter->drawFromArray(StelPainter::Triangles, 6, 0, true, indices);
+
+skip_render:
+	// Draw the children.
+	if (order < drawOrder)
+	{
+		for (int i = 0; i < 4; i++)
+			drawTile(order + 1, pix * 4 + i, drawOrder, viewportShape, sPainter);
+		return;
+	}
 }
