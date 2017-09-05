@@ -30,6 +30,11 @@ class HipsMgr : public StelModule
 			WRITE setFlagSurveyShow
 			NOTIFY surveyDisplayedChanged)
 
+	Q_PROPERTY(QString surveyUrl
+			READ getSurveyUrl
+			WRITE setSurveyUrl
+			NOTIFY surveyUrlChanged)
+
 public:
 	HipsMgr();
 	virtual ~HipsMgr();
@@ -39,6 +44,12 @@ public:
 	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
+	QString getSurveyUrl() const;
+	void setSurveyUrl(const QString& url);
+
+signals:
+	void surveyUrlChanged(const QString& url);
+
 public slots:
 	void setFlagSurveyShow(bool displayed);
 	bool getFlagSurveyShow(void) const;
@@ -47,8 +58,8 @@ signals:
 	void surveyDisplayedChanged(const bool displayed) const;
 
 private:
-	class HipsSurvey* survey;
-	class LinearFader* fader;
+	class HipsSurvey* survey = NULL;
+	class LinearFader* fader = NULL;
 };
 
 #endif // _HIPSMGR_HPP_

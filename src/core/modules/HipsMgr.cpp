@@ -41,10 +41,9 @@ HipsMgr::~HipsMgr()
 
 void HipsMgr::init()
 {
-	survey = new HipsSurvey("http://alaskybis.unistra.fr/DSS/DSSColor");
-	survey->setParent(this);
-
 	addAction("actionShow_Hips_Survey", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "surveyDisplayed", "Ctrl+Alt+F");
+
+	setSurveyUrl("http://alaskybis.unistra.fr/DSS/DSSColor");
 }
 
 void HipsMgr::deinit()
@@ -87,4 +86,18 @@ void HipsMgr::setFlagSurveyShow(const bool displayed)
 bool HipsMgr::getFlagSurveyShow() const
 {
 	return *fader;
+}
+
+QString HipsMgr::getSurveyUrl() const
+{
+	return survey ? survey->getUrl() : QString();
+}
+
+void HipsMgr::setSurveyUrl(const QString& url)
+{
+	if (survey && url == survey->getUrl()) return;
+
+	delete survey;
+	survey = new HipsSurvey(url);
+	survey->setParent(this);
 }

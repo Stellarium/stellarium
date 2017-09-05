@@ -40,6 +40,7 @@ public:
 	HipsSurvey(const QString& url);
 	virtual ~HipsSurvey();
 	void draw(StelPainter* sPainter);
+	const QString& getUrl() const {return url;}
 
 private:
 	QString url;
