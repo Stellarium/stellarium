@@ -45,6 +45,7 @@ private:
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file.
 	QNetworkReply *networkReply = NULL;
+
 	StelTextureSP allsky;
 
 	struct {
@@ -55,7 +56,8 @@ private:
 	} properties;
 	bool propertiesParsed = false;
 
-	void parseProperties();
+	bool parseProperties();
+	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
 	void drawTile(int order, int pix, int drawOrder, const SphericalCap& viewportShape, StelPainter* sPainter);
 };

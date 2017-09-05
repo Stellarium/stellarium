@@ -55,9 +55,10 @@ HipsSurvey::~HipsSurvey()
 
 }
 
-void HipsSurvey::parseProperties()
+bool HipsSurvey::parseProperties()
 {
-	if (networkReply) return;
+	if (networkReply) return false;
+	if (propertiesParsed) return true;
 	QNetworkRequest req = QNetworkRequest(url + "/properties");
 	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, [=] {
@@ -81,26 +82,27 @@ void HipsSurvey::parseProperties()
 		delete networkReply;
 		networkReply = NULL;
 	});
+	return propertiesParsed;
+}
+
+bool HipsSurvey::getAllsky()
+{
+	if (allsky.isNull())
+	{
+		QString ext = properties.hips_tile_format == "jpeg" ? "jpg" : "png";
+		QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(properties.hips_order_min).arg(ext);
+		StelTextureMgr& texMgr = StelApp::getInstance().getTextureManager();
+		allsky = texMgr.createTextureThread(path, StelTexture::StelTextureParams(), false);
+	}
+	return allsky->hasError() || allsky->bind();
 }
 
 void HipsSurvey::draw(StelPainter* sPainter)
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
-	if (!propertiesParsed)
-		parseProperties();
-	if (!propertiesParsed) return;
-
-	if (allsky.isNull())
-	{
-		QString ext = properties.hips_tile_format == "jpeg" ? "jpg" : "png";
-		QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(properties.hips_order_min).arg(ext);
-		qDebug() << "Try to get allsky at:" << path;
-		StelTextureMgr& texMgr = StelApp::getInstance().getTextureManager();
-		allsky = texMgr.createTextureThread(path, StelTexture::StelTextureParams(), false);
-	}
-	if (!allsky->hasError() && !allsky->bind())
-		return;
+	if (!parseProperties()) return;
+	if (!getAllsky()) return;
 
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 90 / 2^L
