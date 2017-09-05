@@ -57,6 +57,7 @@ private:
 		int hips_order_min;
 		int hips_tile_width;
 		QString hips_tile_format;
+		QString hips_frame;
 	} properties;
 	bool propertiesParsed = false;
 

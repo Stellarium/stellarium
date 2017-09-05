@@ -88,6 +88,8 @@ bool HipsSurvey::parseProperties()
 				properties.hips_tile_format = value;
 			if (key == "hips_tile_width")
 				properties.hips_tile_width = value.toInt();
+			if (key == "hips_frame")
+				properties.hips_frame = value;
 		}
 		propertiesParsed = true;
 		delete networkReply;
@@ -121,6 +123,15 @@ void HipsSurvey::draw(StelPainter* sPainter)
 	// allsky texture (if available).
 	if (!parseProperties()) return;
 	if (!getAllsky()) return;
+
+	// Set the projection.
+	StelCore* core = StelApp::getInstance().getCore();
+	StelCore::FrameType frame;
+	if (properties.hips_frame == "galactic")
+		frame = StelCore::FrameGalactic;
+	else
+		frame = StelCore::FrameJ2000;
+	sPainter->setProjector(core->getProjection(frame));
 
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 90 / 2^L
