@@ -27,6 +27,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 
+#include <QNetworkReply>
+
 HipsMgr::HipsMgr() : survey(Q_NULLPTR)
 {
 	setObjectName("HipsMgr");
@@ -42,6 +44,25 @@ HipsMgr::~HipsMgr()
 void HipsMgr::init()
 {
 	addAction("actionShow_Hips_Survey", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "surveyDisplayed", "Ctrl+Alt+F");
+
+	// Start to load survey list:
+	QString listPath = "http://alaskybis.unistra.fr/hipslist";
+	QNetworkRequest req = QNetworkRequest(listPath);
+	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	connect(networkReply, &QNetworkReply::finished, [=] {
+		QByteArray data = networkReply->readAll();
+		QString url;
+		foreach(QString line, data.split('\n'))
+		{
+			if (line.startsWith('#')) continue;
+			QString key = line.section("=", 0, 0).trimmed();
+			QString value = line.section("=", 1, -1).trimmed();
+			if (key == "hips_service_url") url = value;
+			if (key == "hips_status" && value.split(' ').contains("public"))
+				surveyList.append(url);
+		}
+		emit surveyListChanged();
+	});
 
 	setSurveyUrl("http://alaskybis.unistra.fr/DSS/DSSColor");
 }

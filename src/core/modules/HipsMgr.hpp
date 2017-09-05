@@ -35,6 +35,10 @@ class HipsMgr : public StelModule
 			WRITE setSurveyUrl
 			NOTIFY surveyUrlChanged)
 
+	Q_PROPERTY(QStringList surveyList
+			MEMBER surveyList
+			NOTIFY surveyListChanged)
+
 public:
 	HipsMgr();
 	virtual ~HipsMgr();
@@ -56,8 +60,10 @@ public slots:
 
 signals:
 	void surveyDisplayedChanged(const bool displayed) const;
+	void surveyListChanged() const;
 
 private:
+	QStringList surveyList;
 	class HipsSurvey* survey = NULL;
 	class LinearFader* fader = NULL;
 };
