@@ -45,6 +45,16 @@ public:
 	QTimeLine texFader;
 };
 
+static QString getExt(const QString& format)
+{
+	foreach(QString ext, format.split(' '))
+	{
+		if (ext == "jpeg") return "jpg";
+		if (ext == "png") return "png";
+	}
+	return QString();
+}
+
 HipsSurvey::HipsSurvey(const QString& url):
 	url(url),
 	tiles(1000)
@@ -91,7 +101,7 @@ bool HipsSurvey::getAllsky()
 	if (!allsky.isNull()) return true;
 	if (!propertiesParsed || networkReply || noAllsky)
 		return false;
-	QString ext = properties.hips_tile_format == "jpeg" ? "jpg" : "png";
+	QString ext = getExt(properties.hips_tile_format);
 	QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(properties.hips_order_min).arg(ext);
 	QNetworkRequest req = QNetworkRequest(path);
 	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
@@ -139,7 +149,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile = new HipsTile();
 		tile->order = order;
 		tile->pix = pix;
-		QString ext = properties.hips_tile_format == "jpeg" ? "jpg" : "png";
+		QString ext = getExt(properties.hips_tile_format);
 		QString path = QString("%1/Norder%2/Dir%3/Npix%4.%5").arg(url).arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext);
 		tile->texture = texMgr.createTextureThread(path, StelTexture::StelTextureParams(), false);
 		tiles.insert(uid, tile);
