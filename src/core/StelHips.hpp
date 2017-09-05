@@ -52,16 +52,11 @@ private:
 	QImage allsky = QImage();
 	bool noAllsky = false;
 
-	struct {
-		int hips_order;
-		int hips_order_min;
-		int hips_tile_width;
-		QString hips_tile_format;
-		QString hips_frame;
-	} properties;
-	bool propertiesParsed = false;
+	// Values from the property file.
+	QMap<QString, QString> properties;
 
 	bool parseProperties();
+	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
 	void drawTile(int order, int pix, int drawOrder, const SphericalCap& viewportShape, StelPainter* sPainter);

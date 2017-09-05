@@ -68,49 +68,42 @@ HipsSurvey::~HipsSurvey()
 
 bool HipsSurvey::parseProperties()
 {
-	if (propertiesParsed) return true;
+	if (!properties.isEmpty()) return true;
 	if (networkReply) return false;
 	QNetworkRequest req = QNetworkRequest(url + "/properties");
 	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, [=] {
-		// Default properties
-		properties.hips_order_min = 3;
 		QByteArray data = networkReply->readAll();
 		foreach(QString line, data.split('\n'))
 		{
 			QString key = line.section("=", 0, 0).trimmed();
 			QString value = line.section("=", 1, -1).trimmed();
-			if (key == "hips_order")
-				properties.hips_order = value.toInt();
-			if (key == "hips_order_min")
-				properties.hips_order_min = value.toInt();
-			if (key == "hips_tile_format")
-				properties.hips_tile_format = value;
-			if (key == "hips_tile_width")
-				properties.hips_tile_width = value.toInt();
-			if (key == "hips_frame")
-				properties.hips_frame = value;
+			properties[key] = value;
 		}
-		propertiesParsed = true;
 		delete networkReply;
 		networkReply = NULL;
 	});
-	return propertiesParsed;
+	return !properties.isEmpty();
+}
+
+int HipsSurvey::getPropertyInt(const QString& key, int fallback)
+{
+	if (!properties.contains(key)) return fallback;
+	return properties[key].toInt();
 }
 
 bool HipsSurvey::getAllsky()
 {
 	if (!allsky.isNull()) return true;
-	if (!propertiesParsed || networkReply || noAllsky)
+	if (properties.isEmpty() || networkReply || noAllsky)
 		return false;
-	QString ext = getExt(properties.hips_tile_format);
-	QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(properties.hips_order_min).arg(ext);
+	QString ext = getExt(properties["hips_tile_format"]);
+	QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(getPropertyInt("hips_order_min", 3)).arg(ext);
 	QNetworkRequest req = QNetworkRequest(path);
 	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, [=] {
 		QByteArray data = networkReply->readAll();
 		allsky = QImage::fromData(data);
-		propertiesParsed = true;
 		delete networkReply;
 		networkReply = NULL;
 	});
@@ -127,7 +120,7 @@ void HipsSurvey::draw(StelPainter* sPainter)
 	// Set the projection.
 	StelCore* core = StelApp::getInstance().getCore();
 	StelCore::FrameType frame;
-	if (properties.hips_frame == "galactic")
+	if (properties["hips_frame"] == "galactic")
 		frame = StelCore::FrameGalactic;
 	else
 		frame = StelCore::FrameJ2000;
@@ -137,9 +130,12 @@ void HipsSurvey::draw(StelPainter* sPainter)
 	// We know that each tile at level L represents an angle of 90 / 2^L
 	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
 	const double anglePerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
-	const double maxAngle = anglePerPixel * properties.hips_tile_width;
+	int tileWidth = getPropertyInt("hips_tile_width");
+	int orderMin = getPropertyInt("hips_order_min", 3);
+	int order = getPropertyInt("hips_order");
+	const double maxAngle = anglePerPixel * tileWidth;
 	int drawOrder = (int)(log2(90. / maxAngle));
-	drawOrder = qBound(properties.hips_order_min, drawOrder, properties.hips_order);
+	drawOrder = qBound(orderMin, drawOrder, order);
 
 	// Draw the 12 root tiles and their children.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
@@ -153,6 +149,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 {
 	int nside = 1 << order;
 	long int uid = pix + 4L * nside * nside;
+	int orderMin = getPropertyInt("hips_order_min", 3);
 	HipsTile* tile = tiles[uid];
 	if (!tile)
 	{
@@ -160,13 +157,13 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile = new HipsTile();
 		tile->order = order;
 		tile->pix = pix;
-		QString ext = getExt(properties.hips_tile_format);
+		QString ext = getExt(properties["hips_tile_format"]);
 		QString path = QString("%1/Norder%2/Dir%3/Npix%4.%5").arg(url).arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext);
 		tile->texture = texMgr.createTextureThread(path, StelTexture::StelTextureParams(true), false);
 		tiles.insert(uid, tile);
 
 		// Use the allsky image until we load the full texture.
-		if (order == properties.hips_order_min && !allsky.isNull())
+		if (order == orderMin && !allsky.isNull())
 		{
 			int nbw = sqrt(12 * 1 << (2 * order));
 			int x = (pix % nbw) * allsky.width() / nbw;
@@ -189,6 +186,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(1, 0), Vec2f(0, 1), Vec2f(1, 1)};
 	unsigned short indices[6] = {0, 2, 1, 3, 1, 2};
 	HipsTile *tile;
+	int orderMin = getPropertyInt("hips_order_min", 3);
 
 	healpix_pix2vec(1 << order, pix, pos.v);
 	boundingCap.n = pos;
@@ -196,7 +194,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 
 	if (!viewportShape.intersects(boundingCap)) return;
 
-	if (order < properties.hips_order_min)
+	if (order < orderMin)
 		goto skip_render;
 
 	tile = getTile(order, pix);
