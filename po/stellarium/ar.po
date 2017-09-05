@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-02 20:06+0700\n"
-"PO-Revision-Date: 2017-07-23 03:09+0000\n"
+"PO-Revision-Date: 2017-09-04 20:09+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-03 05:11+0000\n"
+"X-Launchpad-Export-Date: 2017-09-05 04:35+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
+"Language: ar\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
@@ -70,7 +71,7 @@ msgstr "أسماء التشكيلات النجمية"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Ray helpers"
-msgstr ""
+msgstr "خطوط راي المساعدة"
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
@@ -409,7 +410,7 @@ msgstr "<P DIR=RTL><b>المؤلف</b>"
 #: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "متر"
 
 #: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -421,23 +422,23 @@ msgstr "الموقع"
 #: src/core/modules/LandscapeMgr.cpp:823
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "هكتوباسكال"
 
 #: src/core/modules/LandscapeMgr.cpp:833
 msgid "extinction coefficient"
-msgstr ""
+msgstr "معامل الإنطفاء"
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "الظروف الجوية"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "Light pollution"
-msgstr ""
+msgstr "التلوث الضوئي"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "by Bortle scale"
-msgstr ""
+msgstr "حسب مقياس بورتل"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
@@ -804,36 +805,36 @@ msgstr "‎غير موثق السطوع‎"
 #: src/core/modules/Nebula.cpp:1324
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr ""
+msgstr "البقايا تظهر بنية راديوية قشرية"
 
 #: src/core/modules/Nebula.cpp:1327
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
+msgstr "البقايا تظهر بنية راديوية ممتلئة المركز"
 
 #: src/core/modules/Nebula.cpp:1330
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr ""
+msgstr "البقايا تظهر بنية راديوية مركبة أو مزيج"
 
 #: src/core/modules/Nebula.cpp:1333
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
-msgstr ""
+msgstr "البقايا تظهر بنية راديوية قشرية مع بعض الشك"
 
 #: src/core/modules/Nebula.cpp:1336
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
-msgstr ""
+msgstr "البقايا تظهر بنية راديوية ممتلئة المركز مع بعض الشك"
 
 #: src/core/modules/Nebula.cpp:1339
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
-msgstr ""
+msgstr "البقايا تظهر بنية راديوية مركبة أو مزيج مع بعض الشك"
 
 #: src/core/modules/Nebula.cpp:1352
 msgid "galaxy"
@@ -905,11 +906,11 @@ msgstr "‎بقايا مستعر عظيم‎"
 
 #: src/core/modules/Nebula.cpp:1403
 msgid "supernova candidate"
-msgstr ""
+msgstr "مرشح ليكون مستعر عظيم"
 
 #: src/core/modules/Nebula.cpp:1406
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "مرشح ليكون بقايا مستعر عظيم"
 
 #: src/core/modules/Nebula.cpp:1409
 msgid "stellar association"
@@ -972,7 +973,7 @@ msgstr "‎نجم ذو طيف إشعاع خطي‎"
 
 #: src/core/modules/Nebula.cpp:1451
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "حشد من المجرات"
 
 #: src/core/modules/Nebula.cpp:1454
 msgid "object of unknown nature"
@@ -998,7 +999,7 @@ msgstr "‎القدر المطلق‎"
 
 #: src/core/modules/Planet.cpp:392
 msgid "Mean Opposition Magnitude"
-msgstr ""
+msgstr "‎متوسط القدر عند التقابل‎"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:271
@@ -1145,12 +1146,12 @@ msgstr "‎التسمية الاصطلاحية المؤقتة: ‎%1"
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:343
 msgid "Tholen spectral type"
-msgstr ""
+msgstr "‎Tholen النوع الطيفي حسب‎"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:349
 msgid "SMASSII spectral type"
-msgstr ""
+msgstr "‎SMASSII النوع الطيفي حسب‎"
 
 #: src/core/modules/Comet.cpp:163
 msgctxt "type of comet"
@@ -1402,7 +1403,7 @@ msgstr "أضف يوماً نجمياً واحداً"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 7 sidereal days"
-msgstr ""
+msgstr "أضف 7 أيام نجمية"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 sidereal year"
@@ -1418,7 +1419,7 @@ msgstr "أضف شهراً اقترانياً واحداً"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 saros"
-msgstr ""
+msgstr "أضف دورة ساروس واحدة"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 draconic month"
@@ -1474,7 +1475,7 @@ msgstr "اطرح يوماً نجمياً واحداً"
 
 #: src/core/StelCore.cpp:291
 msgid "Subtract 7 sidereal days"
-msgstr ""
+msgstr "إطرح 7 أيام نجمية"
 
 #: src/core/StelCore.cpp:292
 msgid "Subtract 1 sidereal year"
@@ -1490,7 +1491,7 @@ msgstr "اطرح شهراً اقترانياً واحداً"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "إطرح دورة ساروس واحدة"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 draconic month"
@@ -2289,7 +2290,7 @@ msgstr "<P DIR=RTL><b>الرخصة</b>"
 #: src/gui/ConfigurationDialog.cpp:1023
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "غير معروفة"
 
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Running script: "
@@ -2922,7 +2923,7 @@ msgstr "سرعة المحاكاة"
 
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
-msgstr ""
+msgstr "‎المسافة إلى مركز الكوكب‎"
 
 #: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
@@ -3308,7 +3309,7 @@ msgstr "الميل"
 #: src/gui/AstroCalcDialog.cpp:795
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:993
 msgid "Azimuth"
-msgstr "السمت"
+msgstr "‎السمت‎"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
@@ -3318,7 +3319,7 @@ msgstr "السمت"
 #: plugins/Satellites/src/Satellite.cpp:308
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:992
 msgid "Altitude"
-msgstr "الارتفاع"
+msgstr "‎الارتفاع‎"
 
 #: src/gui/SearchDialog.cpp:269
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
@@ -3635,19 +3636,19 @@ msgstr "نجوم ذات طيف إشعاع خطي"
 #: src/gui/AstroCalcDialog.cpp:388 src/gui/AstroCalcDialog.cpp:2726
 #: src/translations.h:135 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
-msgstr ""
+msgstr "مرشحات لتكون مستعرات عظيمة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:389 src/gui/AstroCalcDialog.cpp:2727
 #: src/translations.h:137 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
-msgstr ""
+msgstr "مرشحات لتكون بقايا مستعرات عظيمة"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:390 src/gui/AstroCalcDialog.cpp:2729
 #: src/translations.h:161 src/ui_viewDialog.h:2331 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
-msgstr ""
+msgstr "حشود من المجرات"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:392 src/translations.h:163
@@ -3742,17 +3743,17 @@ msgstr "دليل السدم الكوكبية المجرية"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:428 src/translations.h:195
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
-msgstr ""
+msgstr "دليل ستراسبورغ-إيسو للسدم الكوكبية المجرية"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:430 src/translations.h:197
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "دليل لبقايا مستعرات عظيمة مجرية"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:432 src/translations.h:199
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr ""
+msgstr "دليل الحشود الغنية بالمجرات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:433 src/translations.h:201
@@ -6580,15 +6581,15 @@ msgstr "أطلس المجرات الغريبة - آرب 1966م"
 #: src/ui_viewDialog.h:2313
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
-msgstr ""
+msgstr "دليل ستراسبورغ-إيسو للسدم الكوكبية المجرية - آكر وآخرون 1992م"
 
 #: src/ui_viewDialog.h:2316
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr ""
+msgstr "دليل بقايا مستعرات عظيمة مجرية - جرين 2014 م"
 
 #: src/ui_viewDialog.h:2319
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
-msgstr ""
+msgstr "دليل الحشود الغنية بالمجرات - آبل وآخرون 1989 م"
 
 #: src/ui_viewDialog.h:2321
 msgid "Filter by type"
@@ -6653,7 +6654,7 @@ msgstr "إعدادات ألوان العلامات"
 
 #: src/ui_viewDialog.h:2353
 msgid "Use outlines for big deep-sky objects"
-msgstr ""
+msgstr "أظهر الرسم الخطي للأجرام السحيقة الكبيرة"
 
 #: src/ui_viewDialog.h:2354
 msgid "Celestial Sphere"
@@ -7108,11 +7109,11 @@ msgstr "لون أسماء التشكيلات النجمية"
 
 #: src/ui_viewDialog.h:2618
 msgid "Show ray helpers"
-msgstr ""
+msgstr "أظهر خطوط راي المساعدة"
 
 #: src/ui_viewDialog.h:2620
 msgid "Color of ray helpers"
-msgstr ""
+msgstr "لون الخطوط المساعدة"
 
 #: src/ui_viewDialog.h:2623
 msgid "Visible"
@@ -8321,15 +8322,15 @@ msgstr "BL Lac لون علامات أجرام"
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr ""
+msgstr "لون علامات الأجرام المرشحة أن تكون مستعرات عظيمة"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr ""
+msgstr "لون علامات الأجرام المرشحة أن تكون بقايا مستعرات عظيمة"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
-msgstr ""
+msgstr "لون علامات حشود المجرات"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -9403,7 +9404,7 @@ msgstr "لوحة تحكم ظاهرة على الشاشة"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1145
 msgid "Show resolution criteria"
-msgstr ""
+msgstr "أظهر معيار الدقة"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1147
 msgid ""
@@ -9780,30 +9781,30 @@ msgstr "‎قدر السطوع التقريبي‎"
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:304
 msgid "Range"
-msgstr ""
+msgstr "‎البعد عن الراصد‎"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:306
 msgid "Range rate"
-msgstr ""
+msgstr "‎معدل تغير السرعة‎"
 
 #: plugins/Satellites/src/Satellite.cpp:310
 msgid "SubPoint (Lat./Long.)"
-msgstr ""
+msgstr "‎إحداثيات الموقع الأرضي تحت القمر مباشرة - الطول/العرض‎"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:324
 msgid "TEME coordinates"
-msgstr ""
+msgstr "‎TEME الإحداثيات حسب‎"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:331
 msgid "TEME velocity"
-msgstr ""
+msgstr "‎TEME السرعة حسب‎"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "Sun reflection angle"
-msgstr ""
+msgstr "‎زاوية انعكاس الشمس‎"
 
 #: plugins/Satellites/src/Satellite.cpp:348
 msgid "Group"
@@ -9815,7 +9816,7 @@ msgstr "مجموعات"
 
 #: plugins/Satellites/src/Satellite.cpp:356
 msgid "Operational status"
-msgstr ""
+msgstr "حالة التشغيل"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
@@ -9837,12 +9838,12 @@ msgstr "القمر الصناعي لايمكن رؤيته"
 #: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:259
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "ميجاهرتز‎"
 
 #: plugins/Satellites/src/Satellite.cpp:402
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "كيلوهرتز‎"
 
 #: plugins/Satellites/src/Satellite.cpp:703
 #: plugins/Satellites/src/Satellite.cpp:728
@@ -9887,7 +9888,7 @@ msgstr "‎متفتت‎"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
 msgid "Save predicted Iridium flares as..."
-msgstr ""
+msgstr "احفظ توهجات إيريديوم كـ"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
 msgid "Stellarium Satellites Plugin"
@@ -10407,7 +10408,7 @@ msgstr "توقع توهجات إيريديوم"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "احفظ التوقعات"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -12781,53 +12782,53 @@ msgstr "النجوم النابضة ذات التغيرات المفاجئة ف�
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 msgid "Barycentric period"
-msgstr ""
+msgstr "‎دورة المركز الكتلي‎"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:185
 msgctxt "period"
 msgid "s"
-msgstr ""
+msgstr "‎ث‎"
 
 #: plugins/Pulsars/src/Pulsar.cpp:189
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "‎التفاضل الزمني لدورة المركز الكتلي‎"
 
 #: plugins/Pulsars/src/Pulsar.cpp:194
 msgid "Dispersion measure"
-msgstr ""
+msgstr "‎مقياس التشتت‎"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:197
 msgctxt "distance"
 msgid "pc"
-msgstr ""
+msgstr "‎بارسك‎"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:199
 msgctxt "distance"
 msgid "cm"
-msgstr ""
+msgstr "‎سم‎"
 
 #: plugins/Pulsars/src/Pulsar.cpp:206
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "‎معدل فقد الطاقة في التناقص الدوراني‎"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:209
 msgctxt "power"
 msgid "ergs/s"
-msgstr ""
+msgstr "‎إرج في الثانية‎"
 
 #: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "‎الدورة الثنائية للنجم النابض‎"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:218
 msgctxt "period"
 msgid "days"
-msgstr ""
+msgstr "‎أيام‎"
 
 #: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
 msgid "Eccentricity"
@@ -12835,39 +12836,39 @@ msgstr "الشذوذ المداري"
 
 #: plugins/Pulsars/src/Pulsar.cpp:227
 msgid "Annual parallax"
-msgstr ""
+msgstr "‎اختلاف المنظر السنوي‎"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:230
 msgctxt "parallax"
 msgid "mas"
-msgstr ""
+msgstr "‎ميللي ثانية قوسية‎"
 
 #: plugins/Pulsars/src/Pulsar.cpp:236
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "‎المسافة بناءاً على نموذج الكثافة الإلكترونية‎"
 
 #: plugins/Pulsars/src/Pulsar.cpp:249
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "‎العرض الجانبي عند 50% من القمة‎"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:252
 msgctxt "time"
 msgid "ms"
-msgstr ""
+msgstr "‎ميللي ثانية‎"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:257
 msgid "Time averaged flux density at"
-msgstr "كثافة معدل التدفق الوقتي عند‎"
+msgstr "كثافة معدل التدفق الوقتي عند"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:261
 msgctxt "spectral flux density"
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
@@ -14911,15 +14912,15 @@ msgstr "‎تزحزح نقطة المنشأ يومياً‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "‎سرعة الشهب بالنسبة لمركز الأرض‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
-msgstr ""
+msgstr "‎مؤشر كثافة توزيع الشهب الساطعة‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "‎الجسم الأب للشهب‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
@@ -15750,7 +15751,7 @@ msgstr "الركن الأيمن السفلي من الشاشة"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "Near mouse cursor"
-msgstr ""
+msgstr "بالقرب من المؤشر"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
@@ -15802,7 +15803,7 @@ msgstr "أظهر اختصار اسم المجموعة النجمية"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Show crossed lines under mouse cursor"
-msgstr ""
+msgstr "أظهر خطوط متقاطعة تحت المؤشر"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
