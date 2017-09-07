@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-02 20:06+0700\n"
-"PO-Revision-Date: 2017-08-31 20:45+0000\n"
+"PO-Revision-Date: 2017-09-06 20:40+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-03 05:13+0000\n"
+"X-Launchpad-Export-Date: 2017-09-07 04:35+0000\n"
 "X-Generator: Launchpad (build 18446)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -72,7 +72,7 @@ msgstr "Пазнакі астэрызмаў"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Ray helpers"
-msgstr ""
+msgstr "Накіроўныя"
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
@@ -1065,7 +1065,7 @@ msgstr "Сыдэрычны пэрыяд"
 
 #: src/core/modules/Planet.cpp:516
 msgid "Sidereal day"
-msgstr "Зоркавы дзень"
+msgstr "Сыдэрычны дзень"
 
 #: src/core/modules/Planet.cpp:517
 msgid "Mean solar day"
@@ -1152,12 +1152,12 @@ msgstr "Часовае абазначэньне: %1"
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:343
 msgid "Tholen spectral type"
-msgstr ""
+msgstr "Спэктральная кляса Толена"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:349
 msgid "SMASSII spectral type"
-msgstr ""
+msgstr "Спэктральная кляса SMASSII"
 
 #: src/core/modules/Comet.cpp:163
 msgctxt "type of comet"
@@ -1404,19 +1404,19 @@ msgstr "Адняць 7 сонечных дзён"
 
 #: src/core/StelCore.cpp:272
 msgid "Add 1 sidereal day"
-msgstr "Наперад на 1 зоркавы дзень"
+msgstr "Наперад на 1 сыдэрычны дзень"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 7 sidereal days"
-msgstr ""
+msgstr "Дадаць 7 сыдэрычных дзён"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 sidereal year"
-msgstr "Дадаць 1 зорны год"
+msgstr "Дадаць 1 сыдэрычны год"
 
 #: src/core/StelCore.cpp:275
 msgid "Add 100 sidereal years"
-msgstr "Дадаць 100 зорных гадоў"
+msgstr "Дадаць 100 сыдэрычных гадоў"
 
 #: src/core/StelCore.cpp:276
 msgid "Add 1 synodic month"
@@ -1424,7 +1424,7 @@ msgstr "Дадаць 1 сынадычны месяц"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 saros"
-msgstr ""
+msgstr "Дадаць 1 сарас"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 draconic month"
@@ -1476,19 +1476,19 @@ msgstr "Дадаць 1 ґаўсіянскі год"
 
 #: src/core/StelCore.cpp:290
 msgid "Subtract 1 sidereal day"
-msgstr "Назад на 1 зоркавы дзень"
+msgstr "Назад на 1 сыдэрычны дзень"
 
 #: src/core/StelCore.cpp:291
 msgid "Subtract 7 sidereal days"
-msgstr ""
+msgstr "Адняць 7 сыдэрычных дзён"
 
 #: src/core/StelCore.cpp:292
 msgid "Subtract 1 sidereal year"
-msgstr "Адняць 1 зорны год"
+msgstr "Адняць 1 сыдэрычны год"
 
 #: src/core/StelCore.cpp:293
 msgid "Subtract 100 sidereal years"
-msgstr "Адняць 100 зорных гадоў"
+msgstr "Адняць 100 сыдэрычных гадоў"
 
 #: src/core/StelCore.cpp:294
 msgid "Subtract 1 synodic month"
@@ -1496,7 +1496,7 @@ msgstr "Адняць 1 сынадычны месяц"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "Адняць 1 сарас"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 draconic month"
@@ -2313,7 +2313,7 @@ msgstr "Ліцэнзія"
 #: src/gui/ConfigurationDialog.cpp:1023
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "невядомая"
 
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Running script: "
@@ -6695,7 +6695,7 @@ msgstr "Наставіць колеры пазнак"
 
 #: src/ui_viewDialog.h:2353
 msgid "Use outlines for big deep-sky objects"
-msgstr ""
+msgstr "Выкарыстоўваць абрысы для аб'ектаў глыбокага космасу"
 
 #: src/ui_viewDialog.h:2354
 msgid "Celestial Sphere"
@@ -7157,11 +7157,11 @@ msgstr "Колер назваў астэрызмаў"
 
 #: src/ui_viewDialog.h:2618
 msgid "Show ray helpers"
-msgstr ""
+msgstr "Паказваць накіроўныя"
 
 #: src/ui_viewDialog.h:2620
 msgid "Color of ray helpers"
-msgstr ""
+msgstr "Колер накіроўных"
 
 #: src/ui_viewDialog.h:2623
 msgid "Visible"
@@ -7439,7 +7439,7 @@ msgstr "Дадатковыя зьвесткі"
 
 #: src/ui_configurationDialog.h:1386
 msgid "Sidereal time"
-msgstr "Зоркавы час"
+msgstr "Сыдэрычны час"
 
 #: src/ui_configurationDialog.h:1387
 msgid "Additional settings"
@@ -15890,7 +15890,7 @@ msgstr "Правы ніжні кут экрана"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "Near mouse cursor"
-msgstr ""
+msgstr "Побач з курсорам мышы"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
@@ -15942,7 +15942,7 @@ msgstr "Паказваць коды сузор'яў МАЗ"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Show crossed lines under mouse cursor"
-msgstr ""
+msgstr "Паказваць перакрыжаваныя лініі пад курсорам мышы"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
