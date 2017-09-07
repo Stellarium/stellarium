@@ -580,7 +580,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     double nlatitude = latitude*M_PI/180.0;
     double nlongitude = (longitude - planet->getRotationElements().offset)*M_PI/180.0; // Longitud en radianes de la localización. El .offset es para que el centro de coordenadas coincida con el centro de la imagen
     
-    Vec3d XYZ, XYZ1, XYZ2, XYZf;
+    Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
     
     // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
     XYZ[0] = r * cos(nlatitude)*cos(nlongitude);
@@ -589,10 +589,16 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     
     Mat4d mat = planet->getRotEquatorialToVsop87();
     XYZ1 = mat * XYZ; // Cartesian coordinates of feature in VSOP87
+    //XYZ1 = mat.transpose() * XYZ;
     
-    XYZ2 = planet->getHeliocentricEclipticPos()*XYZ1;
+    Mat4d id = Mat4d::identity(); // Identity matrix
+    
+    XYZ2 = id * planet->getRotEquatorialToVsop87() * XYZ;
+    //XYZ3 = id * planet->getRotEquatorialToVsop87() * XYZ + XYZ2;
+    
     
     XYZf = XYZ2 + coord;
+    //XYZf = XYZ3 + coord;
     
     // Las coordenadas así calculadas están dadas (en cartesianas) en sistema heliocéntrico. PROBLEMA: los nombres aparecen desplazados en el cielo
     // Posible solución: hacemos el cambio de sistema heliocéntrico a ecuatorial. Para ello pasamos a esféricas y calculamos los nuevos ángulos. Después volvemos a pasar a cartesianas para hacer la proyección
