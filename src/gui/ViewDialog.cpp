@@ -1435,8 +1435,6 @@ void ViewDialog::changeLandscape(QListWidgetItem* item)
 
 void ViewDialog::landscapeChanged(QString id, QString name)
 {
-	Q_UNUSED(id)
-
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	for (int i = 0; i < ui->landscapesListWidget->count(); i++)
 	{
@@ -1446,6 +1444,11 @@ void ViewDialog::landscapeChanged(QString id, QString name)
 			break;
 		}
 	}
+
+	QStringList searchPaths;
+	searchPaths << StelFileMgr::findFile("landscapes/" + id);
+
+	ui->landscapeTextBrowser->setSearchPaths(searchPaths);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	updateDefaultLandscape();
 	// Reset values that might have changed.
