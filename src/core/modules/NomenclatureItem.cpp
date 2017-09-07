@@ -575,17 +575,25 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     Vec3d srcPos;
     
     // Calculate the radius of the planet. It is necessary to re-scale it
-    double r = planet->getRadius()*planet->getSphereScale(); // Radio del planeta. Necesario para operar con las coordenadas de las localizaciones
+    double r = planet->getRadius()*planet->getSphereScale();
+    
     // Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions. The case of longitude is special. We make that the center of the texture (picture of planet/moon) always be the origin of coordinates with planet->getRotationElements().offset
     double nlatitude = latitude*M_PI/180.0;
-    double nlongitude = (longitude - planet->getRotationElements().offset)*M_PI/180.0; // Longitud en radianes de la localización. El .offset es para que el centro de coordenadas coincida con el centro de la imagen
-    
-    Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
+    double nlongitude = (longitude - planet->getRotationElements().offset)*M_PI/180.0;
     
     // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
     XYZ[0] = r * cos(nlatitude)*cos(nlongitude);
     XYZ[1] = r * cos(nlatitude)*cos(nlongitude);
     XYZ[2] = r * sin(nlatitude);
+    
+    // Calculate the location of the feature. If it is on the opposite face of the planet, then it will not appear
+    // R is the distance between the center of the Earth (or the observer's planet) and the feature
+    double dist = sqrt(coord.length()*coord.length() + r*r + 2*coord.length()*r*cos(nlatitude*M_PI/180.0 - coord.latitude()));
+    
+    if (dist > coord.length())
+        return;
+    
+    Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
     
     Mat4d mat = planet->getRotEquatorialToVsop87();
     XYZ1 = mat * XYZ; // Cartesian coordinates of feature in VSOP87
@@ -599,20 +607,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     
     XYZf = XYZ2 + coord;
     //XYZf = XYZ3 + coord;
-    
-    // Las coordenadas así calculadas están dadas (en cartesianas) en sistema heliocéntrico. PROBLEMA: los nombres aparecen desplazados en el cielo
-    // Posible solución: hacemos el cambio de sistema heliocéntrico a ecuatorial. Para ello pasamos a esféricas y calculamos los nuevos ángulos. Después volvemos a pasar a cartesianas para hacer la proyección
-    
-    
-    /*double R = sqrt(coord.length()*coord.length() + r*r + 2*coord.length()*r*cos(planetcoord[0]*M_PI/180.0 - coord.latitude()));
-    double latitude = asin( (r*sin(planetcoord[0]*M_PI/180.0) + coord.length()*sin(coord.latitude()))/R );
-    double longitude = atan( (r*cos(planetcoord[0]*M_PI/180.0)*sin(planetcoord[1]*M_PI/180.0) + coord.length()*cos(coord.latitude())*sin(coord.longitude()))/(r*cos(planetcoord[0]*M_PI/180.0)*cos(planetcoord[1]*M_PI/180.0) + coord.length()*cos(coord.latitude())*cos(coord.longitude())) );
-    
-    // From spherical to cartesian coordinates
-    // The arguments of trigonometric functions must be in radians? --> GZ: of course!
-    XYZ[0] = r * cos(longitude) * cos(latitude);
-    XYZ[1] = r * sin(longitude) * cos(latitude);
-    XYZ[2] = r * sin(latitude);*/
+
     
 
 	if (painter->getProjector()->projectCheck(XYZf, srcPos))
