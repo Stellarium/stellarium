@@ -852,6 +852,15 @@ void AstroCalcDialog::generateEphemeris()
 
 	initListEphemeris();
 
+	double solarDay = 1.0;
+	double siderealDay = 1.0;
+	const PlanetP& cplanet = core->getCurrentPlanet();
+	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+	{
+		solarDay = cplanet->getMeanSolarDay();
+		siderealDay = cplanet->getSiderealDay();
+	}
+
 	switch (ui->ephemerisStepComboBox->currentData().toInt()) {
 		case 1:
 			currentStep = 10 * StelCore::JD_MINUTE;
@@ -869,25 +878,91 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = 12 * StelCore::JD_HOUR;
 			break;
 		case 6:
-			currentStep = StelCore::JD_DAY;
+			currentStep = solarDay;
 			break;
 		case 7:
-			currentStep = 5 * StelCore::JD_DAY;
+			currentStep = 5 * solarDay;
 			break;
 		case 8:
-			currentStep = 10 * StelCore::JD_DAY;
+			currentStep = 10 * solarDay;
 			break;
 		case 9:
-			currentStep = 15 * StelCore::JD_DAY;
+			currentStep = 15 * solarDay;
 			break;
 		case 10:
-			currentStep = 30 * StelCore::JD_DAY;
+			currentStep = 30 * solarDay;
 			break;
 		case 11:
+			currentStep = 60 * solarDay;
+			break;
+		case 12:
+			currentStep = StelCore::JD_DAY;
+			break;
+		case 13:
+			currentStep = 5 * StelCore::JD_DAY;
+			break;
+		case 14:
+			currentStep = 10 * StelCore::JD_DAY;
+			break;
+		case 15:
+			currentStep = 15 * StelCore::JD_DAY;
+			break;
+		case 16:
+			currentStep = 30 * StelCore::JD_DAY;
+			break;
+		case 17:
 			currentStep = 60 * StelCore::JD_DAY;
 			break;
+		case 18:
+			currentStep = siderealDay;
+			break;
+		case 19:
+			currentStep = 5 * siderealDay;
+			break;
+		case 20:
+			currentStep = 10 * siderealDay;
+			break;
+		case 21:
+			currentStep = 15 * siderealDay;
+			break;
+		case 22:
+			currentStep = 30 * siderealDay;
+			break;
+		case 23:
+			currentStep = 60 * siderealDay;
+			break;
+		case 24:
+			currentStep = 10 * (solarDay/1440.0);
+			break;
+		case 25:
+			currentStep = 30 * (solarDay/1440.0);
+			break;
+		case 26:
+			currentStep = solarDay/24.0;
+			break;
+		case 27:
+			currentStep = solarDay/4.0;
+			break;
+		case 28:
+			currentStep = solarDay/2.0;
+			break;
+		case 29:
+			currentStep = 10 * (siderealDay/1440.0);
+			break;
+		case 30:
+			currentStep = 30 * (siderealDay/1440.0);
+			break;
+		case 31:
+			currentStep = siderealDay/24.0;
+			break;
+		case 32:
+			currentStep = siderealDay/4.0;
+			break;
+		case 33:
+			currentStep = siderealDay/2.0;
+			break;
 		default:
-			currentStep = StelCore::JD_DAY;
+			currentStep = solarDay;
 			break;
 	}
 
@@ -1117,17 +1192,39 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	QVariant selectedStepId = steps->itemData(index);
 
 	steps->clear();
-	steps->addItem(q_("10 minutes"), "1");
-	steps->addItem(q_("30 minutes"), "2");
-	steps->addItem(q_("1 hour"), "3");
-	steps->addItem(q_("6 hours"), "4");
-	steps->addItem(q_("12 hours"), "5");
-	steps->addItem(q_("1 day"), "6");
-	steps->addItem(q_("5 days"), "7");
-	steps->addItem(q_("10 days"), "8");
-	steps->addItem(q_("15 days"), "9");
-	steps->addItem(q_("30 days"), "10");
-	steps->addItem(q_("60 days"), "11");
+	steps->addItem(q_("10 Julian minutes"), "1");
+	steps->addItem(q_("30 Julian minutes"), "2");
+	steps->addItem(q_("1 Julian hour"), "3");
+	steps->addItem(q_("6 Julian hours"), "4");
+	steps->addItem(q_("12 Julian hours"), "5");
+	steps->addItem(q_("10 solar minutes"), "24");
+	steps->addItem(q_("30 solar minutes"), "25");
+	steps->addItem(q_("1 solar hour"), "26");
+	steps->addItem(q_("6 solar hours"), "27");
+	steps->addItem(q_("12 solar hours"), "28");
+	steps->addItem(q_("10 sidereal minutes"), "29");
+	steps->addItem(q_("30 sidereal minutes"), "30");
+	steps->addItem(q_("1 sidereal hour"), "31");
+	steps->addItem(q_("6 sidereal hours"), "32");
+	steps->addItem(q_("12 sidereal hours"), "33");
+	steps->addItem(q_("1 Julian day"), "12");
+	steps->addItem(q_("5 Julian days"), "13");
+	steps->addItem(q_("10 Julian days"), "14");
+	steps->addItem(q_("15 Julian days"), "15");
+	steps->addItem(q_("30 Julian days"), "16");
+	steps->addItem(q_("60 Julian days"), "17");
+	steps->addItem(q_("1 solar day"), "6");
+	steps->addItem(q_("5 solar days"), "7");
+	steps->addItem(q_("10 solar days"), "8");
+	steps->addItem(q_("15 solar days"), "9");
+	steps->addItem(q_("30 solar days"), "10");
+	steps->addItem(q_("60 solar days"), "11");
+	steps->addItem(q_("1 sidereal day"), "18");
+	steps->addItem(q_("5 sidereal days"), "19");
+	steps->addItem(q_("10 sidereal days"), "20");
+	steps->addItem(q_("15 sidereal days"), "21");
+	steps->addItem(q_("30 sidereal days"), "22");
+	steps->addItem(q_("60 sidereal days"), "23");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
