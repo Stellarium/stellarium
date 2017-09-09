@@ -1329,14 +1329,15 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				// AW2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
 				//         FIXME: Need experimental data to fitting to real world or the scientific paper with description of model.
+				// GZ 2017-09: Phase coefficients for I and III corrected, based on original publication (Stebbins&Jacobsen 1928) now.
 				if (englishName=="Io")
-					return shadowFactor<1.0 ? 21.0 : -1.68 + d + phaseDeg*(0.46   - 0.0010*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
 				if (englishName=="Europa")
-					return shadowFactor<1.0 ? 21.0 : -1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg));
 				if (englishName=="Ganymede")
-					return shadowFactor<1.0 ? 21.0 : -2.09 + d + phaseDeg*(0.323  - 0.00066*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-2.09 + d + phaseDeg*(0.0323 - 0.00066*phaseDeg));
 				if (englishName=="Callisto")
-					return shadowFactor<1.0 ? 21.0 : -1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
 
 				if ((absoluteMagnitude!=-99.) && (englishName!="Moon"))
 					return absoluteMagnitude+d;
