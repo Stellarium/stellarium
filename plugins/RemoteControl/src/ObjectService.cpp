@@ -116,7 +116,7 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 		QString name = QString::fromUtf8(parameters.value("name"));
 		QString formatStr = QString::fromUtf8(parameters.value("format"));
 		bool formatHtml;
-		if (formatStr == "map")
+		if (formatStr == "map" || formatStr == "json")
 			formatHtml=false;
 		else
 			formatHtml=true;

@@ -72,7 +72,7 @@ void SimbadLookupReply::delayTimerCompleted()
 
 void SimbadLookupReply::httpQueryFinished()
 {
-	if (reply->error()!=QNetworkReply::NoError)
+	if (reply->error()!=QNetworkReply::NoError || reply->bytesAvailable()==0)
 	{
 		currentStatus = SimbadLookupErrorOccured;
 		errorString = QString("%1: %2").arg(q_("Network error")).arg(reply->errorString());

@@ -77,6 +77,7 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
 	info.version = EXOPLANETS_PLUGIN_VERSION;
+	info.license = EXOPLANETS_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -768,11 +769,7 @@ void Exoplanets::updateJSON(void)
 void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "[Exoplanets] FAILED to download" << reply->url() << " Error: " << reply->errorString();
-	}
-	else
+	if (reply->error() == QNetworkReply::NoError && reply->bytesAvailable()>0)
 	{
 		// download completed successfully.
 		try
@@ -794,6 +791,9 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 		}
 
 	}
+	else
+		qWarning() << "[Exoplanets] FAILED to download" << reply->url() << " Error: " << reply->errorString();
+
 
 	if (progressBar)
 	{

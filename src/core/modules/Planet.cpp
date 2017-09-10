@@ -386,10 +386,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	}
 	if (flags&AbsoluteMagnitude && (getAbsoluteMagnitude() > -99.))
 	{
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br>";
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br />";
 		const float moMag=getMeanOppositionMagnitude();
 		if (moMag<50.f)
-			oss << q_("Mean Opposition Magnitude: %1").arg(moMag, 0, 'f', 2) << "<br>";
+			oss << QString("%1: %2").arg(q_("Mean Opposition Magnitude")).arg(moMag, 0, 'f', 2) << "<br />";
 	}
 
 	oss << getCommonInfoString(core, flags);
@@ -578,13 +578,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			// Only show during eclipse, show percent?
 			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			// Debug solution:
-			//			float eclipseFactor = ssystem->getEclipseFactor(core);
-			//			oss << QString(q_("Eclipse Factor: %1 alpha: %2")).arg(eclipseFactor).arg(-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor))) << "<br>";
-			// Release version:
 			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
 			if (eclipseFactor>1.e-7) // needed to avoid false display of 1e-14 or so.
-				oss << QString("%1: %2%").arg(q_("Eclipse Factor")).arg(eclipseFactor) << "<br />";
+				oss << QString("%1: %2%").arg(q_("Eclipse Factor")).arg(QString::number(eclipseFactor, 'f', 2)) << "<br />";
 
 		}
 	}
@@ -1330,14 +1326,19 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return -6.87 + d;
 				if (englishName=="Pluto")
 					return -1.01 + d;
+
+				// AW2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
+				//         FIXME: Need experimental data to fitting to real world or the scientific paper with description of model.
+				// GZ 2017-09: Phase coefficients for I and III corrected, based on original publication (Stebbins&Jacobsen 1928) now.
 				if (englishName=="Io")
-					return -1.68 + d + phaseDeg*(0.46   - 0.0010*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
 				if (englishName=="Europa")
-					return -1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-1.41 + d + phaseDeg*(0.0312 - 0.00125*phaseDeg));
 				if (englishName=="Ganymede")
-					return -2.09 + d + phaseDeg*(0.323  - 0.00066*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-2.09 + d + phaseDeg*(0.0323 - 0.00066*phaseDeg));
 				if (englishName=="Callisto")
-					return -1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg);
+					return shadowFactor<1.0 ? 21.0 : (-1.05 + d + phaseDeg*(0.078  - 0.00274*phaseDeg));
+
 				if ((absoluteMagnitude!=-99.) && (englishName!="Moon"))
 					return absoluteMagnitude+d;
 

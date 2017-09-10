@@ -72,7 +72,10 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	slopeParameter(-1.0f), //== mark as uninitialized: used in getVMagnitude()
 	semiMajorAxis(0.),
 	nameIsProvisionalDesignation(false),
-	properName(englishName)
+	properName(englishName),
+	b_v(99.f),
+	specT(""),
+	specB("")
 {
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -132,6 +135,17 @@ void MinorPlanet::setSemiMajorAxis(double value)
 	semiMajorAxis = value;
 	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
 	deltaJDE = 2.0*qMax(semiMajorAxis, 0.1)*StelCore::JD_SECOND;
+}
+
+void MinorPlanet::setSpectralType(QString sT, QString sB)
+{
+	specT = sT;
+	specB = sB;
+}
+
+void MinorPlanet::setColorIndexBV(float bv)
+{
+	b_v = bv;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -244,6 +258,9 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
+	if (flags&Extra && b_v<99.f)
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2)) << "<br />";
+
 	oss << getCommonInfoString(core, flags);
 
 	if (flags&Distance)
@@ -320,6 +337,18 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	double siderealPeriod = getSiderealPeriod();
 	if (flags&Extra)
 	{
+		if (!specT.isEmpty())
+		{
+			// TRANSLATORS: Tholen spectral taxonomic classification of asteroids
+			oss << QString("%1: %2").arg(q_("Tholen spectral type"), specT) << "<br />";
+		}
+
+		if (!specB.isEmpty())
+		{
+			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
+			oss << QString("%1: %2").arg(q_("SMASSII spectral type"), specB) << "<br />";
+		}
+
 		if (siderealPeriod>0)
 		{
 			QString days = qc_("days", "duration");

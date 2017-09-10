@@ -850,6 +850,9 @@ public:
 	//! Get the list of all the planet localized names
 	QStringList getAllPlanetLocalizedNames() const;
 
+	//! Get the list of all the minor planet common english names
+	QStringList getAllMinorPlanetCommonEnglishNames() const;
+
 	//! Reload the planets
 	void reloadPlanets();
 
@@ -923,6 +926,10 @@ private:
 	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
+
+	//! Calculate a color of Solar system bodies
+	//! @param bV value of B-V color index
+	unsigned char BvToColorIndex(float bV);
 
 	//! Set flag who enable display a permanent orbits for objects or not
 	void setFlagPermanentOrbits(bool b);

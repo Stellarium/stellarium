@@ -178,91 +178,100 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		if (period>0)
 		{
-			//TRANSLATORS: Unit of measure for period - seconds
-			oss << q_("Barycentric period: %1 s").arg(QString::number(period, 'f', 16)) << "<br>";
+			oss << QString("%1: %2 %3")
+			       .arg(q_("Barycentric period"))
+			       .arg(QString::number(period, 'f', 16))
+			       //TRANSLATORS: Unit of measure for period - seconds
+			       .arg(qc_("s", "period"));
+			oss << "<br />";
 		}
 		if (pderivative>0)
-		{
-			oss << q_("Time derivative of barycentric period: %1").arg(QString::number(pderivative, 'e', 5)) << "<br>";
-		}
+			oss << QString("%1: %2").arg(q_("Time derivative of barycentric period")).arg(QString::number(pderivative, 'e', 5)) << "<br />";
+
 		if (dmeasure>0)
 		{
-			oss << QString("%1 %2 %3<sup>-3</sup> %4 %5")
-			       .arg(q_("Dispersion measure:"))
+			oss << QString("%1: %2 %3/%4<sup>3</sup>")
+			       .arg(q_("Dispersion measure"))
 			       .arg(QString::number(dmeasure, 'f', 3))
-			       //TRANSLATORS: Unit of measure for distance - centimeters
-			       .arg(q_("cm"))
-			       .arg(QChar(0x00B7))
 			       //TRANSLATORS: Unit of measure for distance - parsecs
-			       .arg(q_("pc"));
-			oss << "<br>";
+			       .arg(qc_("pc", "distance"))
+			       //TRANSLATORS: Unit of measure for distance - centimeters
+			       .arg(qc_("cm", "distance"));
+			oss << "<br />";
 		}
 		double edot = getEdot(period, pderivative);
 		if (edot>0)
 		{
-			oss << q_("Spin down energy loss rate: %1 ergs/s").arg(QString::number(edot, 'e', 2)) << "<br>";
+			oss << QString("%1: %2 %3")
+			       .arg(q_("Spin down energy loss rate"))
+			       .arg(QString::number(edot, 'e', 2))
+			       //TRANSLATORS: Unit of measure for power - erg per second
+			       .arg(qc_("ergs/s", "power"));
+			oss << "<br>";
 		}
 		if (bperiod>0)
 		{
-			oss << q_("Binary period of pulsar: %1 days").arg(QString::number(bperiod, 'f', 12)) << "<br>";
+			oss << QString("%1: %2 %3")
+			       .arg(q_("Binary period of pulsar"))
+			       .arg(QString::number(bperiod, 'f', 12))
+			       //TRANSLATORS: Unit of measure for period - days
+			       .arg(qc_("days", "period"));
+			oss << "<br>";
 		}
 		if (eccentricity>0)
-		{
-			oss << q_("Eccentricity: %1").arg(QString::number(eccentricity, 'f', 10)) << "<br>";
-		}
+			oss << QString("%1: %2").arg(q_("Eccentricity")).arg(QString::number(eccentricity, 'f', 10)) << "<br />";
+
 		if (parallax>0)
 		{
-			//TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-			oss << q_("Annual parallax: %1 mas").arg(parallax) << "<br>";
+			oss << QString("%1: %2 %3")
+			       .arg(q_("Annual parallax"))
+			       .arg(parallax)
+			       //TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
+			       .arg(qc_("mas", "parallax"));
+			oss << "<br />";
 		}
 		if (distance>0)
 		{
-			oss << q_("Distance based on electron density model: %1 kpc (%2 ly)").arg(distance).arg(distance*3261.563777) << "<br>";
+			oss << QString("%1: %2 %3 (%4 %5)")
+			       .arg(q_("Distance based on electron density model"))
+			       .arg(distance)
+			       //TRANSLATORS: Unit of measure for distance - kiloparsecs
+			       .arg(qc_("kpc", "distance"))
+			       .arg(distance*3261.563777)
+			       //TRANSLATORS: Unit of measure for distance - light years
+			       .arg(qc_("ly", "distance"));
+			oss << "<br />";
 		}
 		if (w50>0)
 		{
-			oss << q_("Profile width at 50% of peak: %1 ms").arg(QString::number(w50, 'f', 2)) << "<br>";
+			oss << QString("%1: %2 %3")
+			       // xgettext:no-c-format
+			       .arg(q_("Profile width at 50% of peak"))
+			       .arg(QString::number(w50, 'f', 2))
+			       //TRANSLATORS: Unit of measure for time - milliseconds
+			       .arg(qc_("ms", "time"));
+			oss << "<br />";
 		}
+
+		// TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
+		QString flux = q_("Time averaged flux density at");
+		// TRANSLATORS: Unit of measurement of frequency
+		QString freq = qc_("MHz", "frequency");
+		// TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
+		QString sfd  = qc_("mJy", "spectral flux density");
+
 		if (s400>0)
-		{
-			oss << QString("%1 %2%3: %4 %5")
-			       // TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-			       .arg(q_("Time averaged flux density at"))
-			       .arg(400)
-			       // TRANSLATORS: Unit of measurement of frequency
-			       .arg(q_("MHz"))
-			       .arg(QString::number(s400, 'f', 2))
-			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-			       .arg(q_("mJy")) << "<br>";
-		}
+			oss << QString("%1 %2%3: %4 %5").arg(flux).arg(400).arg(freq).arg(QString::number(s400, 'f', 2)).arg(sfd) << "<br />";
+
 		if (s600>0)
-		{
-			oss << QString("%1 %2%3: %4 %5")
-			       // TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-			       .arg(q_("Time averaged flux density at"))
-			       .arg(600)
-			       // TRANSLATORS: Unit of measurement of frequency
-			       .arg(q_("MHz"))
-			       .arg(QString::number(s600, 'f', 2))
-			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-			       .arg(q_("mJy")) << "<br>";
-		}
+			oss << QString("%1 %2%3: %4 %5").arg(flux).arg(600).arg(freq).arg(QString::number(s600, 'f', 2)).arg(sfd) << "<br />";
+
 		if (s1400>0)
-		{
-			oss << QString("%1 %2%3: %4 %5")
-			       // TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-			       .arg(q_("Time averaged flux density at"))
-			       .arg(1400)
-			       // TRANSLATORS: Unit of measurement of frequency
-			       .arg(q_("MHz"))
-			       .arg(QString::number(s1400, 'f', 2))
-			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-			       .arg(q_("mJy")) << "<br>";
-		}		
+			oss << QString("%1 %2%3: %4 %5").arg(flux).arg(1400).arg(freq).arg(QString::number(s1400, 'f', 2)).arg(sfd) << "<br />";
+
 		if (notes.length()>0)
-		{
-			oss << "<br>" << q_("Notes: %1").arg(getPulsarTypeInfoString(notes)) << "<br>";
-		}
+			oss << "<br />" << QString("%1: %2").arg(q_("Notes")).arg(getPulsarTypeInfoString(notes)) << "<br />";
+
 	}
 
 	postProcessInfoString(str, flags);

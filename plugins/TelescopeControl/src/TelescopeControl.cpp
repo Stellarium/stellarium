@@ -81,7 +81,8 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov, Johannes Gajdosik";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
-	info.version = TELESCOPE_CONTROL_VERSION;
+	info.version = TELESCOPE_CONTROL_PLUGIN_VERSION;
+	info.license = TELESCOPE_CONTROL_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -630,7 +631,7 @@ void TelescopeControl::saveTelescopes()
 	}
 
 	//Add the version:
-	telescopeDescriptions.insert("version", QString(TELESCOPE_CONTROL_VERSION));
+	telescopeDescriptions.insert("version", QString(TELESCOPE_CONTROL_PLUGIN_VERSION));
 
 	//Convert the tree to JSON
 	StelJsonParser::write(telescopeDescriptions, &telescopesJsonFile);
@@ -679,7 +680,7 @@ void TelescopeControl::loadTelescopes()
 	}
 
 	QString version = map.value("version", "0.0.0").toString();
-	if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_VERSION))!=0)
+	if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_PLUGIN_VERSION))!=0)
 	{
 		QString newName = telescopesJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 		if(telescopesJsonFile.rename(newName))
@@ -1368,7 +1369,7 @@ void TelescopeControl::loadDeviceModels()
 			QVariantMap deviceModelsJsonMap;
 			deviceModelsJsonMap = StelJsonParser::parse(&deviceModelsJsonFile).toMap();
 			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();						
-			if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_VERSION))!=0)
+			if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_PLUGIN_VERSION))!=0)
 			{
 				deviceModelsJsonFile.close();
 				QString newName = deviceModelsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");

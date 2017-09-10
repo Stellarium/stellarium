@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-13 02:10+0700\n"
-"PO-Revision-Date: 2016-06-28 05:22+0000\n"
+"POT-Creation-Date: 2017-07-30 16:49+0700\n"
+"PO-Revision-Date: 2017-07-24 10:34+0000\n"
 "Last-Translator: hariyadi.pt <hariyadiputraga@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-13 05:53+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-07-31 05:49+0000\n"
+"X-Generator: Launchpad (build 18441)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -110,11 +110,11 @@ msgstr "-tidak ada-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Saat ini sedang memuat: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Tidak dapat mendapatkan daftar Pemandangan3d"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -167,11 +167,11 @@ msgstr "Tindakan dan Skrip"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Pemandangan3d"
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "Jeda"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
@@ -188,10 +188,6 @@ msgstr "Hari berdasarkan matahari (solar day)"
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
 msgstr "minggu berdasarkan matahari (solar week)"
-
-#: index.html:90 tablet7in.html:191
-msgid "Sidereal day"
-msgstr "Hari berdasarkan posisi bintang (sidereal day)"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
@@ -255,7 +251,7 @@ msgstr "abad Julian"
 
 #: index.html:123 tablet7in.html:138
 msgid "FOV"
-msgstr ""
+msgstr "Medan Pandang"
 
 #: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
@@ -267,19 +263,19 @@ msgstr "pilih dan fokus"
 
 #: index.html:168 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Mode pemilihan"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Pusatkan ke objek"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "pusatkan dan dekatkan ke objek"
 
 #: index.html:168 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Hanya menandai objek"
 
 #: index.html:170 tablet7in.html:261
 msgid "Quick select"
@@ -299,11 +295,11 @@ msgstr "Pilihan saat ini"
 
 #: index.html:200 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Mendigitalkan Tinjauan Langit"
 
 #: index.html:243 tablet7in.html:399
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Bintang Jatuh"
 
 #: index.html:244 tablet7in.html:400
 msgid "ZHR:"
@@ -339,15 +335,15 @@ msgstr "Planet saat ini"
 
 #: index.html:419 tablet7in.html:578
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Nebula Terang"
 
 #: index.html:420 tablet7in.html:579
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Nebula Gelap"
 
 #: index.html:421 tablet7in.html:580
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Nebula Planet"
 
 #: index.html:430 tablet7in.html:589
 msgid "Labels and markers"
@@ -363,7 +359,7 @@ msgstr "lanskap saat ini"
 
 #: index.html:481 tablet7in.html:642
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "Perlihatkan Asterisme dengan ketebalan"
 
 #: index.html:492 tablet7in.html:658
 msgid "Current sky culture"
@@ -403,27 +399,27 @@ msgstr "ketikkan untuk mencari lokasi"
 
 #: index.html:560 tablet7in.html:741
 msgid "Interaction"
-msgstr ""
+msgstr "Pengaruh"
 
 #: index.html:561 tablet7in.html:742
 msgid "Current scene:"
-msgstr ""
+msgstr "Tampilan Saat ini"
 
 #: index.html:564 tablet7in.html:745
 msgid "View controls"
-msgstr ""
+msgstr "Perlihatkan Pengaturan"
 
 #: index.html:570 tablet7in.html:751
 msgid "Movement controls"
-msgstr ""
+msgstr "Pengaturan Pergerakan"
 
 #: index.html:586 tablet7in.html:767
 msgid "Scene selection"
-msgstr ""
+msgstr "Pemilihan Tampilan"
 
 #: index.html:590 tablet7in.html:771
 msgid "Load selected scene"
-msgstr ""
+msgstr "Memuat Tampilan Terpilih"
 
 #: index.html:614 tablet7in.html:796
 msgid "No response from server"
@@ -490,7 +486,7 @@ msgstr "melihat ke arah horizon pada Azimuth"
 
 #: tablet7in.html:123
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Pergeseran Pandangan Vertikal"
 
 #: tablet7in.html:133
 msgid "Reset"
@@ -590,7 +586,7 @@ msgstr "Pisces"
 
 #: tablet7in.html:654
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Plihan Konstelasi Terasing"
 
 #: tablet7in.html:692
 msgid "Favorites"
@@ -613,6 +609,9 @@ msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "tidak ada respon dari server selama %1 detik. apakah stellarium masih "
 "berjalan?"
+
+#~ msgid "Sidereal day"
+#~ msgstr "Hari berdasarkan posisi bintang (sidereal day)"
 
 #~ msgid "Selection"
 #~ msgstr "Pemilihan"

@@ -108,7 +108,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 		const QString wdsSciName = StarMgr::getWdsName(s->getHip());
-		const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(s->getHip());
 		QStringList designations;
 		if (!sciName.isEmpty())
 			designations.append(sciName);
@@ -117,14 +116,21 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=sciName)
 			designations.append(varSciName);
 
-		QString hip;
+		QString hip, hipq;
 		if (s->hasComponentID())
+		{
 			hip = QString("HIP %1 %2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
+			hipq = QString("%1%2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
+		}
 		else
+		{
 			hip = QString("HIP %1").arg(s->getHip());
+			hipq = QString("%1").arg(s->getHip());
+		}
 
 		designations.append(hip);
 
+		const QString crossIndexData = StarMgr::getCrossIdentificationDesignations(hipq);
 		if (!crossIndexData.isEmpty())
 			designations.append(crossIndexData);
 

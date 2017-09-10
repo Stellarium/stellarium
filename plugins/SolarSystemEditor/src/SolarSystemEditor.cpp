@@ -55,10 +55,11 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "SolarSystemEditor";
 	info.displayedName = N_("Solar System Editor");
-	info.authors = "Bogdan Marinov, Georg Zotti";
+	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
 	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database.");
-	info.version = SOLARSYSTEMEDITOR_VERSION;
+	info.version = SOLARSYSTEMEDITOR_PLUGIN_VERSION;
+	info.license = SOLARSYSTEMEDITOR_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -402,7 +403,7 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 		return QHash<QString,QString>();
 
 	QStringList groups = solarSystemIni.childGroups();
-	QStringList planetNames = solarSystem->getAllPlanetEnglishNames();
+	QStringList planetNames = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
 	foreach (QString group, groups)
 	{

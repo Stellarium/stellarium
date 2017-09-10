@@ -72,6 +72,7 @@ private:
 
 	QHash<QString,QString> unlocalizedNames;
 	
+	void setAboutHtml(void);
 	void updateTexts();
 };
 

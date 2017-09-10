@@ -122,9 +122,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Extra)
 	{
 		if (redshift>0)
-		{
-			oss << q_("Z (redshift): %1").arg(redshift) << "<br />";
-		}
+			oss << QString("%1: %2").arg(q_("Redshift")).arg(redshift) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-13 02:10+0700\n"
-"PO-Revision-Date: 2017-01-14 02:06+0000\n"
+"POT-Creation-Date: 2017-07-30 16:49+0700\n"
+"PO-Revision-Date: 2017-08-17 00:41+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-13 05:53+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-08-18 05:10+0000\n"
+"X-Generator: Launchpad (build 18446)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -110,11 +110,11 @@ msgstr "-brak-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Trwa ładowanie: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Pobranie listy Scenery3d nie powiodło się"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -164,7 +164,7 @@ msgstr "Działania i skrypty"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
@@ -185,10 +185,6 @@ msgstr "Dzień słoneczny"
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
 msgstr "Tydzień słoneczny"
-
-#: index.html:90 tablet7in.html:191
-msgid "Sidereal day"
-msgstr "Dzień gwiazdowy"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
@@ -264,19 +260,19 @@ msgstr "Zaznaczanie i ogniskowanie"
 
 #: index.html:168 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Tryb wybierania"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Wyśrodkuj na obiekcie"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Wyśrodkuj i przybliż obiekt"
 
 #: index.html:168 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Tylko zaznacz obiekt"
 
 #: index.html:170 tablet7in.html:261
 msgid "Quick select"
@@ -300,11 +296,11 @@ msgstr ""
 
 #: index.html:243 tablet7in.html:399
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Meteory"
 
 #: index.html:244 tablet7in.html:400
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: index.html:288 tablet7in.html:452
 msgid ""
@@ -360,7 +356,7 @@ msgstr "Bieżący krajobraz"
 
 #: index.html:481 tablet7in.html:642
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "Rysuj asteryzmy linią o grubości"
 
 #: index.html:492 tablet7in.html:658
 msgid "Current sky culture"
@@ -400,27 +396,27 @@ msgstr "Wpisz aby przeszukać lokalizację"
 
 #: index.html:560 tablet7in.html:741
 msgid "Interaction"
-msgstr ""
+msgstr "Interakcja"
 
 #: index.html:561 tablet7in.html:742
 msgid "Current scene:"
-msgstr ""
+msgstr "Bieżąca scena:"
 
 #: index.html:564 tablet7in.html:745
 msgid "View controls"
-msgstr ""
+msgstr "Sterowanie widokiem"
 
 #: index.html:570 tablet7in.html:751
 msgid "Movement controls"
-msgstr ""
+msgstr "Sterowanie położeniem"
 
 #: index.html:586 tablet7in.html:767
 msgid "Scene selection"
-msgstr ""
+msgstr "Wybór sceny"
 
 #: index.html:590 tablet7in.html:771
 msgid "Load selected scene"
-msgstr ""
+msgstr "Załaduj wybraną scenę"
 
 #: index.html:614 tablet7in.html:796
 msgid "No response from server"
@@ -522,7 +518,7 @@ msgstr "Galaktyka Andromedy"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
-msgstr ""
+msgstr "Gromada Herkules"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
@@ -594,7 +590,7 @@ msgstr "Ulubione"
 
 #: tablet7in.html:694
 msgid "Show 1"
-msgstr ""
+msgstr "Pokaż 1"
 
 #: tablet7in.html:695
 msgid "Remove Labels and Images"
@@ -602,11 +598,16 @@ msgstr "Usuń etykiety i obrazy"
 
 #: tablet7in.html:695
 msgid "Cleanup Screen"
-msgstr ""
+msgstr "Wyczyść ekran"
 
 #: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"Brak odpowiedzi serwera przez %1 sekund. Czy program Stellarium jest wciąż "
+"uruchomiony?"
+
+#~ msgid "Sidereal day"
+#~ msgstr "Dzień gwiazdowy"
 
 #~ msgid "Selection"
 #~ msgstr "Zaznaczenie"

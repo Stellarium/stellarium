@@ -76,7 +76,7 @@ public:
 	//! @enum PhenomenaColumns
 	enum PhenomenaColumns {
 		PhenomenaType,		//! type of phenomena
-		PhenomenaDate,		//! date and time of ephemeris
+		PhenomenaDate,		//! date and time of ephemeris		
 		PhenomenaObject1,	//! first object
 		PhenomenaObject2,	//! second object
 		PhenomenaSeparation,	//! angular separation

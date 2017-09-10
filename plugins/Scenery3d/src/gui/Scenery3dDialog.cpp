@@ -444,7 +444,7 @@ void Scenery3dDialog::updateTextBrowser(const SceneInfo &si)
 			desc = QString("<h3>%1</h3>").arg(si.name);
 			desc+= si.description;
 			desc+="<br><br>";
-			desc+="<b>"+q_("Author: ")+"</b>";
+			desc+="<b>"+q_("Author")+":</b>";
 			desc+= si.author;
 		}
 

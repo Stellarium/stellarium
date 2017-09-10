@@ -146,7 +146,8 @@ NGC  2237            _("Rosette Nebula") # WK
 NGC  2237            _("Rosette A") # SIMBAD
 NGC  2237            _("NGC 2244 Satellite Cluster") # SIMBAD
 NGC  2238            _("Rosette Nebula") # WK
-NGC  2239            _("Rosette Nebula") # WK
+# NGC 2239 is an obsolete designation for NGC 2244!
+NGC  2244            _("Rosette Nebula") # WK
 NGC  2246            _("Rosette Nebula") # WK
 NGC  2246            _("Rosette B") # SIMBAD
 NGC  2261            _("Hubble's Variable Nebula") # WK, SIMBAD
@@ -339,9 +340,10 @@ NGC  5866            _("Fool's Gold Galaxy") # B500
 NGC  5892            _("Fath 703") # NED
 NGC  5897            _("Ghost Globular Cluster") # B500
 NGC  5904            _("Rose Cluster") # B500
-NGC  5907            _("Splinter Galaxy")
-NGC  5907            _("Cat Scratch Galaxy") # B500
-NGC  5907            _("Knife Edge Galaxy") # B500
+# NGC 5907 and NGC 5906 is same galaxy. Only NGC 5906 is in our catalog.
+NGC  5906            _("Splinter Galaxy")
+NGC  5906            _("Cat Scratch Galaxy") # B500
+NGC  5906            _("Knife Edge Galaxy") # B500
 NGC  6027            _("Seyfert's Sextet") # NED
 NGC  6027            _("Serpens Sextet")
 NGC  6087            _("S Nor Cluster") # SIMBAD
@@ -459,7 +461,6 @@ NGC  7027            _("Magic Carpet Nebula") # B500
 NGC  7027            _("Green Rectangle Nebula") # B500
 NGC  7078            _("Pegasus Cluster") # B500
 NGC  7099            _("Jellyfish Cluster") # B500
-NGC  7114            _("Schmidt's Nova Cygni") # SIMBAD
 NGC  7129            _("Small Cluster Nebula")
 NGC  7129            _("NGC 7129 IR Cluster") # SIMBAD
 NGC  7209            _("Star Lizard Cluster") # B500
@@ -597,7 +598,6 @@ SH2  101             _("Tulip Nebula")
 SH2  103             _("Cygnus Loop")
 SH2  103             _("Veil Nebula")
 SH2  108             _("Sadr Region")
-SH2  116             _("Abell 71")
 SH2  129             _("Flying Bat Nebula")
 SH2  155             _("Cave Nebula")
 SH2  158             _("Dreyer's Object")
@@ -616,7 +616,6 @@ SH2  275             _("Rosette Nebula") # WK
 SH2  276             _("Barnard's Loop") # WK
 SH2  292             _("Seagull Nebula")
 SH2  302             _("Snowman Nebula")
-SH2  313             _("Abell 35")
 RCW   77             _("Etched Hourglass Nebula")
 RCW   77             _("Engraved Hourglass Nebula")
 VDB  107             _("Antares Nebula")
@@ -770,6 +769,20 @@ PK   010+18.2        _("Twin Jet Nebula")
 PK   010+18.2        _("M2-9")
 PK   166-06.1        _("Westbrook Nebula")
 PK   340-03.1        _("Water Lily Nebula")
+ACO  426             _("Perseus Cluster") # NED, WP
+ACO  520             _("Train Wreck Cluster") # WP
+ACO  780             _("Hydra A") # NED
+ACO  1060            _("Hydra Cluster") # NED, WP
+ACO  1367            _("Leo Cluster") # NED, WP
+ACO  1656            _("Coma Cluster") # NED, WP
+ACO  2065            _("Corona Borealis Cluster") # WP
+ACO  2151            _("Hercules Cluster") # NED, WP
+ACO  2744            _("Pandora’s Cluster") # WP
+ACO  3526            _("Centaurus Cluster") # NED, WP
+ACO  3558            _("Shapley 8 Cluster") # NED, WP
+ACO  3627            _("Norma Cluster") # NED, WP
+ACO  S373            _("Fornax Cluster") # NED, WP
+ACO  S636            _("Antlia Cluster") # NED, WP
      18              _("Calabash Nebula")
      18              _("Rotten Egg Nebula")
      19              _("Frosty Leo Nebula")
@@ -780,4 +793,5 @@ PK   340-03.1        _("Water Lily Nebula")
      24              _("M1-92")
      26              _("Sagittarius A East")
      27              _("Sagittarius A West")
+     27              _("Minispiral in Gal Center") # SIMBAD
      45              _("Dark Doodad Nebula") # WK

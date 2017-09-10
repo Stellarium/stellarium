@@ -73,6 +73,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setHintsProportional
 		   NOTIFY hintsProportionalChanged
 		   )
+	Q_PROPERTY(bool flagOutlinesDisplayed
+		   READ getFlagOutlines
+		   WRITE setFlagOutlines
+		   NOTIFY flagOutlinesDisplayedChanged
+		   )
 	Q_PROPERTY(bool flagSurfaceBrightnessUsage
 		   READ getFlagSurfaceBrightnessUsage
 		   WRITE setFlagSurfaceBrightnessUsage
@@ -174,6 +179,16 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setStarColor
 		   NOTIFY starsColorChanged
 		   )
+	Q_PROPERTY(Vec3f symbioticStarsColor
+		   READ getSymbioticStarColor
+		   WRITE setSymbioticStarColor
+		   NOTIFY symbioticStarsColorChanged
+		   )
+	Q_PROPERTY(Vec3f emissionLineStarsColor
+		   READ getEmissionLineStarColor
+		   WRITE setEmissionLineStarColor
+		   NOTIFY emissionLineStarsColorChanged
+		   )
 	Q_PROPERTY(Vec3f nebulaeColor
 		   READ getNebulaColor
 		   WRITE setNebulaColor
@@ -258,6 +273,21 @@ class NebulaMgr : public StelObjectModule
 		   READ getSupernovaRemnantColor
 		   WRITE setSupernovaRemnantColor
 		   NOTIFY supernovaRemnantsColorChanged
+		   )
+	Q_PROPERTY(Vec3f supernovaCandidatesColor
+		   READ getSupernovaCandidateColor
+		   WRITE setSupernovaCandidateColor
+		   NOTIFY supernovaCandidatesColorChanged
+		   )
+	Q_PROPERTY(Vec3f supernovaRemnantCandidatesColor
+		   READ getSupernovaRemnantCandidateColor
+		   WRITE setSupernovaRemnantCandidateColor
+		   NOTIFY supernovaRemnantCandidatesColorChanged
+		   )
+	Q_PROPERTY(Vec3f galaxyClustersColor
+		   READ getGalaxyClusterColor
+		   WRITE setGalaxyClusterColor
+		   NOTIFY galaxyClustersColorChanged
 		   )
 
 public:
@@ -481,6 +511,27 @@ public slots:
 	//! Get current value of the supernova remnant symbol color.
 	const Vec3f getSupernovaRemnantColor(void) const;
 
+	//! Set the color used to draw the supernova candidate symbols.
+	//! @param c The color of the supernova candidate symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSupernovaCandidateColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setSupernovaCandidateColor(const Vec3f& c);
+	//! Get current value of the supernova candidate symbol color.
+	const Vec3f getSupernovaCandidateColor(void) const;
+
+
+	//! Set the color used to draw the supernova remnant candidate symbols.
+	//! @param c The color of the supernova remnant candidate symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSupernovaRemnantCandidateColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setSupernovaRemnantCandidateColor(const Vec3f& c);
+	//! Get current value of the supernova remnant candidate symbol color.
+	const Vec3f getSupernovaRemnantCandidateColor(void) const;
+
 	//! Set the color used to draw the interstellar matter symbols.
 	//! @param c The color of the interstellar matter symbols
 	//! @code
@@ -651,6 +702,36 @@ public slots:
 	//! Get current value of the star symbol color.
 	const Vec3f getStarColor(void) const;
 
+	//! Set the color used to draw the symbiotic stars symbols.
+	//! @param c The color of the symbiotic stars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSymbioticStarColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setSymbioticStarColor(const Vec3f& c);
+	//! Get current value of the symbiotic star symbol color.
+	const Vec3f getSymbioticStarColor(void) const;
+
+	//! Set the color used to draw the emission-line stars symbols.
+	//! @param c The color of the emission-line stars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setEmissionLineStarColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setEmissionLineStarColor(const Vec3f& c);
+	//! Get current value of the emission-line star symbol color.
+	const Vec3f getEmissionLineStarColor(void) const;
+
+	//! Set the color used to draw the cluster of galaxies symbols.
+	//! @param c The color of the cluster of galaxies symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setGalaxyClusterColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setGalaxyClusterColor(const Vec3f& c);
+	//! Get current value of the cluster of galaxies symbol color.
+	const Vec3f getGalaxyClusterColor(void) const;
+
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
@@ -664,6 +745,11 @@ public slots:
 	void setHintsProportional(const bool proportional);
 	//! Get whether hints (symbols) are scaled according to nebula size.
 	bool getHintsProportional(void) const;
+
+	//! Set flag for usage outlines for big DSO instead their hints.
+	void setFlagOutlines(const bool flag);
+	//! Get flag for usage outlines for big DSO instead their hints.
+	bool getFlagOutlines(void) const;
 
 	//! Set flag for usage designations of DSO for their labels instead common names.
 	void setDesignationUsage(const bool flag);
@@ -731,6 +817,7 @@ signals:
 	//! Emitted when the type filter is changed
 	void typeFiltersChanged(Nebula::TypeGroup flags);
 	void hintsProportionalChanged(bool b);
+	void flagOutlinesDisplayedChanged(bool b);
 	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
@@ -752,6 +839,8 @@ signals:
 	void stellarAssociationsColorChanged(const Vec3f & color) const;
 	void starCloudsColorChanged(const Vec3f & color) const;
 	void starsColorChanged(const Vec3f & color) const;
+	void symbioticStarsColorChanged(const Vec3f & color) const;
+	void emissionLineStarsColorChanged(const Vec3f & color) const;
 	void nebulaeColorChanged(const Vec3f & color) const;
 	void planetaryNebulaeColorChanged(const Vec3f & color) const;
 	void darkNebulaeColorChanged(const Vec3f & color) const;
@@ -769,6 +858,9 @@ signals:
 	void blazarsColorChanged(const Vec3f & color) const;
 	void youngStellarObjectsColorChanged(const Vec3f & color) const;
 	void supernovaRemnantsColorChanged(const Vec3f & color) const;
+	void supernovaCandidatesColorChanged(const Vec3f & color) const;
+	void supernovaRemnantCandidatesColorChanged(const Vec3f & color) const;
+	void galaxyClustersColorChanged(const Vec3f & color) const;
 
 private slots:
 	//! Update i18 names from English names according to passed translator.
@@ -819,12 +911,17 @@ private:
 	NebulaP searchArp(unsigned int Arp);
 	NebulaP searchVV(unsigned int VV);
 	NebulaP searchPK(QString PK);
+	NebulaP searchPNG(QString PNG);
+	NebulaP searchSNRG(QString SNRG);
+	NebulaP searchACO(QString ACO);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
 	void convertDSOCatalog(const QString& in, const QString& out, bool decimal);
 	// Load proper names for DSO
 	bool loadDSONames(const QString& filename);
+	// Load outlines for DSO
+	bool loadDSOOutlines(const QString& filename);
 
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;
@@ -848,8 +945,6 @@ private:
 	// For DSO convertor
 	bool flagConverter;
 	bool flagDecimalCoordinates;
-
-	bool flagReloading;
 };
 
 #endif // _NEBULAMGR_HPP_
