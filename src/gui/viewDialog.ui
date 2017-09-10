@@ -1042,8 +1042,8 @@
                  <property name="frame">
                   <bool>true</bool>
                  </property>
-                 <property name="buttonSymbols">
-                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="maximum">
                   <number>240000</number>
@@ -3078,7 +3078,7 @@
                <item>
                 <widget class="QCheckBox" name="showConstellationLinesCheckBox">
                  <property name="text">
-                  <string>Show lines with thickness</string>
+                  <string>Show constellation lines</string>
                  </property>
                 </widget>
                </item>
@@ -3091,7 +3091,7 @@
                   </size>
                  </property>
                  <property name="toolTip">
-                  <string>Value in pixels</string>
+                  <string>Thickness of line in pixels</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -3215,6 +3215,9 @@
                    <height>16777215</height>
                   </size>
                  </property>
+                 <property name="toolTip">
+                  <string>Thickness of line in pixels</string>
+                 </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -3272,6 +3275,9 @@
                    <width>50</width>
                    <height>16777215</height>
                   </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Thickness of line in pixels</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
