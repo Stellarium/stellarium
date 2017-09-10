@@ -429,6 +429,9 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 	QTextStream stream(&file);
 	Material* curMaterial = Q_NULLPTR;
 	int lineNr = 0;
+	// some exporters give d and Tr, and some give contradicting interpretations. Track a warning with these.
+	bool dHasBeenGiven = false;
+	bool trHasBeenGiven = false;
 
 	while(!stream.atEnd())
 	{
@@ -456,6 +459,8 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					//add a new material with the specified name
 					curMaterial = &INC_LIST(list);
 					curMaterial->name = name;
+					dHasBeenGiven = false;
+					trHasBeenGiven = false;
 				}
 				else
 				{
@@ -499,7 +504,12 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 				{
 					ok = StelOBJ::parseFloat(splits,curMaterial->d);
 					//clamp d to [0,1]
-					curMaterial->d = std::max(0.0f, std::min(curMaterial->d,1.0f));
+					curMaterial->d = qBound(0.0f, curMaterial->d, 1.0f);
+					if (trHasBeenGiven)
+					{
+						qWarning(stelOBJ) << "Material" << curMaterial->name << "warning: Tr and d both given. The latter wins, d=" << curMaterial->d;
+					}
+					dHasBeenGiven=true;
 				}
 			}
 			else if(CMD_CMP("Tr"))
@@ -511,7 +521,12 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					//not all exporters seem to follow this rule...
 					ok = StelOBJ::parseFloat(splits,curMaterial->d);
 					//clamp d to [0,1]
-					curMaterial->d = 1.0f - std::max(0.0f, std::min(curMaterial->d,1.0f));
+					curMaterial->d = 1.0f - qBound(0.0f, curMaterial->d, 1.0f);
+					if (dHasBeenGiven)
+					{
+						qWarning(stelOBJ) << "Material" << curMaterial->name << "warning: d and Tr both given. The latter wins, Tr=" << 1.0f-curMaterial->d;
+					}
+					trHasBeenGiven=true;
 				}
 			}
 			else if(CMD_CMP("map_Ka")) //define ambient map
