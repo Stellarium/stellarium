@@ -301,7 +301,7 @@
                 <widget class="QDoubleSpinBox" name="starTwinkleAmountDoubleSpinBox">
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -349,7 +349,7 @@
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -454,7 +454,7 @@
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -520,7 +520,7 @@
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -599,6 +599,12 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="lightPollutionSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -628,7 +634,7 @@
                 <widget class="QDoubleSpinBox" name="milkyWayBrightnessDoubleSpinBox">
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -677,7 +683,7 @@
                 <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
                  <property name="maximumSize">
                   <size>
-                   <width>70</width>
+                   <width>75</width>
                    <height>16777215</height>
                   </size>
                  </property>
@@ -1023,6 +1029,12 @@
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
                  </property>
                  <property name="toolTip">
                   <string>The zenithal hourly rate for the sporadic meteors</string>
