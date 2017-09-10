@@ -85,7 +85,7 @@ Filename: "{app}\stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; 
 ;The old log file in all cases
 Type: files; Name: "{userappdata}\Stellarium\log.txt"
 Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
-Type: files; Name: "{userappdata}\Stellarium\data\ssystem.ini"; Tasks: removesolar
+Type: files; Name: "{userappdata}\Stellarium\data\ssystem_minor.ini"; Tasks: removesolar
 Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
 Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: removelandscapes
 Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: removecache
@@ -200,7 +200,7 @@ begin
   case CurUninstallStep of
     usPostUninstall:
       begin
-        mres := MsgBox('{cm:DeleteUserData}', mbConfirmation, MB_YESNO or MB_DEFBUTTON2)
+        mres := SuppressibleMsgBox(ExpandConstant('{cm:DeleteUserData}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2, IDYES)
         if mres = IDYES then
           DelTree(ExpandConstant('{userappdata}\Stellarium'), True, True, True);
           DelTree(ExpandConstant('{userdocs}\Stellarium'), True, True, True);

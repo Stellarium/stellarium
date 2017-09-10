@@ -66,6 +66,7 @@ public:
 		TopCenter,		//!< The top center of the screen
 		TopRight,		//!< In center of the top right half of the screen
 		RightBottomCorner,	//!< The right bottom corner of the screen
+		NearMouseCursor,	//!< Near mouse cursor
 		Custom			//!< The custom position on the screen
 	};
 
@@ -124,6 +125,10 @@ public:
 	{
 		return flagShowCoordinatesButton;
 	}
+	bool getFlagShowCrossedLines(void)
+	{
+		return flagShowCrossedLines;
+	}
 
 	QPair<int, int> getCoordinatesPlace(QString text);
 
@@ -150,6 +155,11 @@ public slots:
 	}
 	//! Display plugin button on toolbar
 	void setFlagShowCoordinatesButton(bool b);
+
+	void setFlagShowCrossedLines(bool b)
+	{
+		flagShowCrossedLines=b;
+	}
 
 	//! Set the current place of the string with coordinates
 	void setCurrentCoordinatesPlace(CoordinatesPlace place)
@@ -200,6 +210,7 @@ private:
 	bool flagEnableAtStartup;
 	bool flagShowCoordinatesButton;
 	bool flagShowConstellation;
+	bool flagShowCrossedLines;
 	Vec3f textColor;
 	Vec3d coordinatesPoint;
 	int fontSize;

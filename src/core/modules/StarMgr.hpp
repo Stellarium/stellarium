@@ -62,6 +62,14 @@ typedef struct
 	float separation;	//! Separation at date of last satisfactory observation, arcsec
 } wds;
 
+typedef struct
+{
+	unsigned int sao;
+	unsigned int hd;
+	unsigned int hr;
+
+} crossid;
+
 typedef QMap<StelObjectP, float> StelACStarData;
 
 //! @class StarMgr
@@ -255,7 +263,7 @@ public:
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
 	//! @return cross-identification data
-	static QString getCrossIdentificationDesignations(int hip);
+	static QString getCrossIdentificationDesignations(QString hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
@@ -449,11 +457,9 @@ private:
 	static QHash<int, wds> wdsStarsMapI18n;
 	static QMap<QString, int> wdsStarsIndexI18n;
 
-	static QHash<int, int> saoStarsMap;
+	static QMap<QString, crossid> crossIdMap;
 	static QMap<int, int> saoStarsIndex;
-	static QHash<int, int> hdStarsMap;
 	static QMap<int, int> hdStarsIndex;
-	static QHash<int, int> hrStarsMap;
 	static QMap<int, int> hrStarsIndex;
 
 	static QHash<int, QString> referenceMap;

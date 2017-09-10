@@ -698,6 +698,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 	QTextStream stream(&device);
 
 	bool smoothGroupWarned = false;
+	bool vertexWWarned = false;
+	bool textureWWarned = false;
 
 	//contains the parsed vertex positions
 	V3Vec posList;
@@ -742,8 +744,11 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 				{
 					float w;
 					parseFloat(splits,w,4);
-					if(!qFuzzyCompare(w,1.0f))
-						qWarning(stelOBJ)<<"Vertex w coordinates different from 1.0 are not supported, changed to 1.0, on line"<<lineNr;
+					if((!qFuzzyCompare(w,1.0f)) && (!vertexWWarned))
+					{
+						qWarning(stelOBJ)<<"Vertex w coordinates different from 1.0 are not supported, changed to 1.0, starting on line"<<lineNr;
+						vertexWWarned=true;
+					}
 				}
 				switch(vertexOrder)
 				{
@@ -779,8 +784,11 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 				{
 					float w;
 					parseFloat(splits,w,3);
-					if(!qFuzzyIsNull(w))
-						qWarning(stelOBJ)<<"Texture w coordinates are not supported, on line"<<lineNr;
+					if( (!qFuzzyIsNull(w)) && (!textureWWarned))
+					{
+						qWarning(stelOBJ)<<"Texture w coordinates are not supported, starting on line"<<lineNr;
+						textureWWarned=true;
+					}
 				}
 			}
 			else if(CMD_CMP("vn"))

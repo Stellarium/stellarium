@@ -830,6 +830,8 @@ public:
 	//! @return The matching planet pointer if exists or Q_NULLPTR.
 	PlanetP searchByEnglishName(QString planetEnglishName) const;
 
+	PlanetP searchMinorPlanetByEnglishName(QString planetEnglishName) const;
+
 	//! Get the Planet object pointer for the Sun.
 	PlanetP getSun() const {return sun;}
 
@@ -848,24 +850,32 @@ public:
 	//! Get the list of all the planet localized names
 	QStringList getAllPlanetLocalizedNames() const;
 
+	//! Get the list of all the minor planet common english names
+	QStringList getAllMinorPlanetCommonEnglishNames() const;
+
 	//! Reload the planets
 	void reloadPlanets();
 
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
-	bool removePlanet(QString name);
+	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
-	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
-	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
+	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).
+	void computePositions(double dateJDE, PlanetP observerPlanet);
 
 	//! Get the list of all the bodies of the solar system.	
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+	//! Get the list of all the bodies of the solar system.
+	const QList<PlanetP>& getAllMinorBodies() const {return systemMinorBodies;}
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
+
+	//! Get lighttime corrected solar position (essential to draw the sun during solar eclipse and compute things like eclipse factor etc, until we get aberration working.)
+	const Vec3d getLightTimeSunPosition() const { return lightTimeSunPosition; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -917,6 +927,10 @@ private:
 
 	void recreateTrails();
 
+	//! Calculate a color of Solar system bodies
+	//! @param bV value of B-V color index
+	unsigned char BvToColorIndex(float bV);
+
 	//! Set flag who enable display a permanent orbits for objects or not
 	void setFlagPermanentOrbits(bool b);
 
@@ -950,6 +964,8 @@ private:
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;
+	//! List of all the minor bodies of the solar system.
+	QList<PlanetP> systemMinorBodies;
 
 	// Master settings
 	bool flagOrbits;
@@ -982,6 +998,8 @@ private:
 	QHash<QString, QString> planetNativeNamesMap;
 	QStringList minorBodies;
 
+	Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
+							// Direct shift caused problems (LP:#1699648), circumvented with this construction.
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
 	// while the planets don't own their orbit objects.
 	// Would it not be better to hand over the orbit object ownership to the Planet object?

@@ -7,7 +7,7 @@ ftp://ftp.imcce.fr/pub/ephem/satel/gust86
 I (Johannes Gajdosik) have just taken the Fortran code and data
 obtained from above and rearranged it into this piece of software.
 
-I can neigther allow nor forbid the usage of the GUST86 theory.
+I can neither allow nor forbid the usage of the GUST86 theory.
 The copyright notice below covers not the works of LASKAR J. and JACOBSON, R.,
 but just my work, that is the compilation of the GUST86 theory
 into the software supplied in this file.

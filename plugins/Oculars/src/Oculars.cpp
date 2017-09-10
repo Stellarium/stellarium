@@ -22,6 +22,8 @@
 
 #include "GridLinesMgr.hpp"
 #include "LabelMgr.hpp"
+#include "ConstellationMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "SkyGui.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
@@ -84,6 +86,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	info.version = OCULARS_PLUGIN_VERSION;
+	info.license = OCULARS_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -127,7 +130,9 @@ Oculars::Oculars():
 	flagDecimalDegrees(false),
 	flagSemiTransparency(false),
 	flagHideGridsLines(false),
-	flagGridlinesDisplayedMain(true),
+	flagGridLinesDisplayedMain(true),
+	flagConstellationLines(true),
+	flagAsterismLines(true),
 	flipVert(false),
 	flipHorz(false),
 	ccdRotationSignalMapper(Q_NULLPTR),
@@ -157,6 +162,7 @@ Oculars::Oculars():
 	flagInitFOVUsage(false),
 	flagInitDirectionUsage(false),
 	flagAutosetMountForCCD(false),
+	flagShowResolutionCriterions(false),
 	equatorialMountEnabled(false),
 	reticleRotation(0.)
 {
@@ -356,11 +362,13 @@ void Oculars::draw(StelCore* core)
 //! Determine which "layer" the plugin's drawing will happen on.
 double Oculars::getCallOrder(StelModuleActionName actionName) const
 {
-	// TODO; this really doesn't seem to have any effect.  I've tried everything from -100 to +100,
-	//		and a calculated value.  It all seems to work the same regardless.
-	double order = 1000.0;
-	if (actionName==StelModule::ActionHandleKeys || actionName==StelModule::ActionHandleMouseMoves)
+	double order = 1000.0; // Very low priority, unless we interact.
+
+	if (actionName==StelModule::ActionHandleKeys ||
+	    actionName==StelModule::ActionHandleMouseMoves ||
+	    actionName==StelModule::ActionHandleMouseClicks)
 	{
+		// Make sure we are called before MovementMgr (we need to even call it once!)
 		order = StelApp::getInstance().getModuleMgr().getModule("StelMovementMgr")->getCallOrder(actionName) - 1.0;
 	}
 	else if (actionName==StelModule::ActionDraw)
@@ -374,7 +382,39 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 void Oculars::handleMouseClicks(class QMouseEvent* event)
 {
 	StelCore *core = StelApp::getInstance().getCore();
+
+	// In case we show oculars with black circle, ignore mouse presses outside image circle:
+	// https://sourceforge.net/p/stellarium/discussion/278769/thread/57893bb3/?limit=25#75c0
+	if ((flagShowOculars) ) //&& !getFlagUseSemiTransparency()) // Not sure: ignore or allow selection of semi-hidden stars?
+	{
+		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		float ppx = params.devicePixelsPerPixel;
+
+		float wh = prj->getViewportWidth()/2.; // get half of width of the screen
+		float hh = prj->getViewportHeight()/2.; // get half of height of the screen
+		float mx = event->x()*ppx-wh; // point 0 in center of the screen, axis X directed to right
+		float my = event->y()*ppx-hh; // point 0 in center of the screen, axis Y directed to bottom
+
+		double inner = 0.5 * params.viewportFovDiameter * ppx;
+		// See if we need to scale the mask
+		if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
+		{
+			inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
+		}
+
+		if (mx*mx+my*my>inner*inner) // click outside ocular circle? Gobble event.
+		{
+			event->setAccepted(true);
+			return;
+		}
+	}
+
 	StelMovementMgr *movementManager = core->getMovementMgr();
+
+	if (flagShowOculars)
+		movementManager->handleMouseClicks(event); // force it here for selection!
+
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
 	{
 		if (flagShowOculars)
@@ -651,6 +691,7 @@ void Oculars::init()
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
+		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
@@ -1734,7 +1775,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		int textureWidth;
 		reticleTexture->getDimensions(textureWidth, textureHeight);
 
-		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner, reticleRotation);
+		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, reticleRotation);
 	}
 
 	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
@@ -1833,13 +1874,16 @@ void Oculars::paintText(const StelCore* core)
 	{
 		QString ocularNumberLabel;
 		QString name = ocular->name();
+		QString ocularI18n = q_("Ocular");
+		if (ocular->isBinoculars())
+			ocularI18n = q_("Binocular");
 		if (name.isEmpty())
 		{
-			ocularNumberLabel = QString(q_("Ocular #%1")).arg(selectedOcularIndex);
+			ocularNumberLabel = QString("%1 #%2").arg(ocularI18n).arg(selectedOcularIndex);
 		}
 		else
 		{
-			ocularNumberLabel = QString(q_("Ocular #%1: %2")).arg(selectedOcularIndex).arg(name);
+			ocularNumberLabel = QString("%1 #%2: %3").arg(ocularI18n).arg(selectedOcularIndex).arg(name);
 		}
 		// The name of the ocular could be really long.
 		if (name.length() > widthString.length())
@@ -2049,8 +2093,10 @@ void Oculars::unzoomOcular()
 
 	if (flagHideGridsLines)
 	{
-		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridlinesDisplayedMain);
+		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridLinesDisplayedMain);
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
+		GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLines);
+		GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLines);
 	}
 
 	skyDrawer->setFlagLuminanceAdaptation(flagAdaptation);
@@ -2101,8 +2147,10 @@ void Oculars::zoom(bool zoomedIn)
 			if (flagHideGridsLines)
 			{
 				// Store current state for later resetting
-				flagGridlinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
+				flagGridLinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
 				flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+				flagConstellationLines = GETSTELMODULE(ConstellationMgr)->getFlagLines();
+				flagAsterismLines = GETSTELMODULE(AsterismMgr)->getFlagLines();
 			}
 
 			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -2146,6 +2194,8 @@ void Oculars::zoomOcular()
 	{
 		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+		GETSTELMODULE(ConstellationMgr)->setFlagLines(false);
+		GETSTELMODULE(AsterismMgr)->setFlagLines(false);
 	}
 
 	skyDrawer->setFlagLuminanceAdaptation(false);
@@ -2199,7 +2249,11 @@ void Oculars::zoomOcular()
 			diameter = ocular->fieldStop();
 		else
 			diameter = telescope!=Q_NULLPTR ? telescope->diameter() : 0.; // Avoid a potential call of null pointer
-		double limitMag = 2.1 + 5*std::log10(diameter); // TODO: document source of this formula!
+		
+		// A better formula for telescopic limiting magnitudes?
+		// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
+		// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
+		double limitMag = 4.5 + 4.4*std::log10(diameter);
 
 		skyDrawer->setFlagStarMagnitudeLimit(true);
 		skyDrawer->setFlagNebulaMagnitudeLimit(true);
@@ -2377,6 +2431,18 @@ bool Oculars::getFlagUseSemiTransparency() const
 	return flagSemiTransparency;
 }
 
+void Oculars::setFlagShowResolutionCriterions(const bool b)
+{
+	flagShowResolutionCriterions = b;
+	settings->setValue("show_resolution_criterions", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagShowResolutionCriterions() const
+{
+	return flagShowResolutionCriterions;
+}
+
 void Oculars::setFlagHideGridsLines(const bool b)
 {
 	if (b != flagHideGridsLines)
@@ -2389,16 +2455,22 @@ void Oculars::setFlagHideGridsLines(const bool b)
 		if (b && flagShowOculars)
 		{
 			// Store current state for later resetting
-			flagGridlinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
+			flagGridLinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
 			flagCardinalPoints = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+			flagConstellationLines = GETSTELMODULE(ConstellationMgr)->getFlagLines();
+			flagAsterismLines = GETSTELMODULE(AsterismMgr)->getFlagLines();
 			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
 			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+			GETSTELMODULE(ConstellationMgr)->setFlagLines(false);
+			GETSTELMODULE(AsterismMgr)->setFlagLines(false);
 		}
 		else if (!b && flagShowOculars)
 		{
 			// Restore main program state
-			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridlinesDisplayedMain);
+			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridLinesDisplayedMain);
 			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPoints);
+			GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLines);
+			GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLines);
 		}
 	}
 }

@@ -52,7 +52,8 @@ public:
 		CColumnRA,		//! right ascension
 		CColumnDec,		//! declination
 		CColumnMagnitude,	//! magnitude
-		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnAngularSize,	//! angular size
+		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)		
 		CColumnType,		//! type of object
 		CColumnCount		//! total number of columns
 	};
@@ -75,7 +76,7 @@ public:
 	//! @enum PhenomenaColumns
 	enum PhenomenaColumns {
 		PhenomenaType,		//! type of phenomena
-		PhenomenaDate,		//! date and time of ephemeris
+		PhenomenaDate,		//! date and time of ephemeris		
 		PhenomenaObject1,	//! first object
 		PhenomenaObject2,	//! second object
 		PhenomenaSeparation,	//! angular separation
@@ -114,6 +115,7 @@ protected:
 
 private slots:
 	void currentCelestialPositions();
+	void populateCelestialCategoryList();
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
@@ -198,8 +200,7 @@ private:
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateCelestialBodyList();
-	void populateCelestialCategoryList();
+	void populateCelestialBodyList();	
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
 	//! Populates the drop-down list of major planets.
@@ -263,11 +264,16 @@ private:
 		if (column == AstroCalcDialog::CColumnName)
 		{
 			QRegExp dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			QRegExp mp("^[(](\\d+)[)]\\s(.+)$");
 			int a = 0, b = 0;
 			if (dso.exactMatch(text(column)))
 				a = dso.capturedTexts().at(2).toInt();
+			if (a==0 && mp.exactMatch(text(column)))
+				a = mp.capturedTexts().at(1).toInt();
 			if (dso.exactMatch(other.text(column)))
 				b = dso.capturedTexts().at(2).toInt();
+			if (b==0 && mp.exactMatch(other.text(column)))
+				b = mp.capturedTexts().at(1).toInt();
 			if (a>0 && b>0)
 				return a < b;
 			else
@@ -277,7 +283,7 @@ private:
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
-		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnExtra)
+		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnAngularSize || column == AstroCalcDialog::CColumnExtra)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}

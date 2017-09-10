@@ -115,7 +115,10 @@ QStringList* TelescopeConfigurationDialog::listSerialPorts()
 void TelescopeConfigurationDialog::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		populateToolTips();
+	}
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -145,6 +148,14 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
 	ui->comboSerialPort->setValidator(serialPortValidator);
+
+	populateToolTips();
+}
+
+void TelescopeConfigurationDialog::populateToolTips()
+{
+	ui->doubleSpinBoxTelescopeDelay->setToolTip(QString("<p>%1</p>").arg(q_("The approximate time it takes for the signals from the telescope to reach Stellarium. Increase this value if the reticle is skipping.")));
+	ui->doubleSpinBoxRTS2Refresh->setToolTip(QString("<p>%1</p>").arg(q_("Refresh rate of the RTS2 telescope. Delay before sending next telescope status request. The default value of 0.5 second works fine with most setups.")));
 }
 
 //Set the configuration panel in a predictable state
@@ -233,7 +244,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QString rts2Url;
 	QString rts2Username;
 	QString rts2Password;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password))
+	int rts2Refresh;
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password, rts2Refresh))
 	{
 		//TODO: Add debug
 		return;
@@ -283,6 +295,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->lineEditRTS2Url->setText(rts2Url);
 		ui->lineEditRTS2Username->setText(rts2Username);
 		ui->lineEditRTS2Password->setText(rts2Password);
+		ui->doubleSpinBoxRTS2Refresh->setValue(SECONDS_FROM_MICROSECONDS(rts2Refresh));
 	}
 
 	//Equinox
@@ -444,7 +457,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	else if (ui->radioButtonTelescopeRTS2->isChecked())
 	{
 		type = ConnectionRTS2;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text());
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(), MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value()));
 	}
 	
 	emit changesSaved(name, type);

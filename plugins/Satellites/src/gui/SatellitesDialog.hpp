@@ -111,6 +111,7 @@ private slots:
 
 	void predictIridiumFlares();
 	void selectCurrentIridiumFlare(const QModelIndex &modelIndex);
+	void savePredictedIridiumFlares();
 
 private:
 	//! @todo find out if this is really necessary... --BM
@@ -150,6 +151,9 @@ private:
 	
 	//! Makes sure that newly added source lines are as checkable as the rest.
 	Qt::ItemDataRole checkStateRole;
+
+	QString delimiter, acEndl;
+	QStringList iridiumFlaresHeader;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

@@ -56,10 +56,11 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "RemoteControl";
 	info.displayedName = N_("Remote Control");
-	info.authors = "Florian Schaukowitsch and Georg Zotti";
+	info.authors = "Florian Schaukowitsch, Georg Zotti";
 	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("Provides remote control functionality using a webserver interface. See manual for detailed description.");
-	info.version = REMOTECONTROL_VERSION;
+	info.version = REMOTECONTROL_PLUGIN_VERSION;
+	info.license = REMOTECONTROL_PLUGIN_LICENSE;
 	return info;
 }
 

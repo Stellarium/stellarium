@@ -196,6 +196,8 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;
+	QString getCommonEnglishName(void) const {return englishName;}
+	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
@@ -233,6 +235,9 @@ public:
 
 	void setNativeName(QString planet) { nativeName = planet; }
 
+	//! set the IAU moon number (designation of the moon), if any.
+	void setIAUMoonNumber(QString designation);
+
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
 	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
@@ -265,7 +270,7 @@ public:
 
 	//! Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double dateJDE);
-	void computePosition(const double dateJDE);
+	virtual void computePosition(const double dateJDE);
 
 	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
 	//! This requires both flavours of JD in cases involving Earth.
@@ -555,6 +560,8 @@ protected:
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 
 private:
+	QString iauMoonNumber;
+
 	// Shader-related variables
 	struct PlanetShaderVars {
 		// Vertex attributes
@@ -642,7 +649,12 @@ private:
 	static bool initFBO();
 	static void deinitFBO();
 
-	static QOpenGLShaderProgram* createShader(const QString& name, PlanetShaderVars& vars, const QByteArray& vSrc, const QByteArray& fSrc, const QByteArray& prefix=QByteArray(), const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
+	static QOpenGLShaderProgram* createShader(const QString& name,
+						  PlanetShaderVars& vars,
+						  const QByteArray& vSrc,
+						  const QByteArray& fSrc,
+						  const QByteArray& prefix=QByteArray(),
+						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
 };
 
 #endif // _PLANET_HPP_

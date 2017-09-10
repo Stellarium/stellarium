@@ -90,6 +90,7 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
 	info.version = TUI_PLUGIN_VERSION;
+	info.license = TUI_PLUGIN_LICENSE;
 	return info;
 }
 

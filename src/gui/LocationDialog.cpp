@@ -344,8 +344,7 @@ void LocationDialog::populatePlanetList()
 
 	QComboBox* planets = ui->planetNameComboBox;
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	QStringList planetNames(ssystem->getAllPlanetEnglishNames());
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	QList<PlanetP> ss = ssystem->getAllPlanets();
 
 	//Save the current selection to be restored later
 	planets->blockSignals(true);
@@ -354,9 +353,9 @@ void LocationDialog::populatePlanetList()
 	planets->clear();
 	//For each planet, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
-	foreach(const QString& name, planetNames)
+	foreach(const PlanetP& p, ss)
 	{
-		planets->addItem(trans.qtranslate(name), name);
+		planets->addItem(p->getNameI18n(), p->getEnglishName());
 	}
 	//Restore the selection
 	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -609,7 +608,8 @@ void LocationDialog::addCurrentLocationToList()
 	{
 		if (model->index(i,0).data()==id)
 		{
-			ui->citiesListView->scrollTo(model->index(i,0));
+			//FIXME: scroll caused artifcats in the GUI for long lists. WTF????
+			//ui->citiesListView->scrollTo(model->index(i,0));
 			ui->citiesListView->selectionModel()->select(model->index(i,0), QItemSelectionModel::ClearAndSelect|QItemSelectionModel::Rows);
 			setPositionFromList(model->index(i,0));
 			disconnectEditSignals();

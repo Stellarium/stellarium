@@ -53,6 +53,8 @@ private slots:
 	void askDSOStellarAssociationsColor();
 	void askDSOStarCloudsColor();
 	void askDSOStarsColor();
+	void askDSOSymbioticStarsColor();
+	void askDSOEmissionLineStarsColor();
 	void askDSONebulaeColor();
 	void askDSOPlanetaryNebulaeColor();
 	void askDSODarkNebulaeColor();
@@ -70,6 +72,9 @@ private slots:
 	void askDSOBlazarsColor();
 	void askDSOYoungStellarObjectsColor();
 	void askDSOSupernovaRemnantsColor();
+	void askDSOSupernovaCandidatesColor();
+	void askDSOSupernovaRemnantCandidatesColor();
+	void askDSOGalaxyClustersColor();
 
 private:
 	void colorButton(QToolButton *toolButton, QString propName);

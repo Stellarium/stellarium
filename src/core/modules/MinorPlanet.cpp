@@ -72,7 +72,10 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	slopeParameter(-1.0f), //== mark as uninitialized: used in getVMagnitude()
 	semiMajorAxis(0.),
 	nameIsProvisionalDesignation(false),
-	properName(englishName)
+	properName(englishName),
+	b_v(99.f),
+	specT(""),
+	specB("")
 {
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
@@ -134,6 +137,17 @@ void MinorPlanet::setSemiMajorAxis(double value)
 	deltaJDE = 2.0*qMax(semiMajorAxis, 0.1)*StelCore::JD_SECOND;
 }
 
+void MinorPlanet::setSpectralType(QString sT, QString sB)
+{
+	specT = sT;
+	specB = sB;
+}
+
+void MinorPlanet::setColorIndexBV(float bv)
+{
+	b_v = bv;
+}
+
 void MinorPlanet::setMinorPlanetNumber(int number)
 {
 	if (minorPlanetNumber)
@@ -163,6 +177,24 @@ void MinorPlanet::setProvisionalDesignation(QString designation)
 	provisionalDesignationHtml = renderProvisionalDesignationinHtml(designation);
 }
 
+QString MinorPlanet::getEnglishName() const
+{
+	QString r = englishName;
+	if (minorPlanetNumber)
+		r = QString("(%1) %2").arg(minorPlanetNumber).arg(englishName);
+
+	return r;
+}
+
+QString MinorPlanet::getNameI18n() const
+{
+	QString r = nameI18;
+	if (minorPlanetNumber)
+		r = QString("(%1) %2").arg(minorPlanetNumber).arg(nameI18);
+
+	return r;
+}
+
 QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
@@ -178,10 +210,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Name)
 	{
 		oss << "<h2>";
-		if (minorPlanetNumber)
-			oss << QString("(%1) ").arg(minorPlanetNumber);
 		if (nameIsProvisionalDesignation)
+		{
+			if (minorPlanetNumber)
+				oss << QString("(%1) ").arg(minorPlanetNumber);
 			oss << provisionalDesignationHtml;
+		}
 		else
 			oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
@@ -198,17 +232,16 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getPlanetTypeString())) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+		QString emag = "";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
 
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 
 	if (flags&AbsoluteMagnitude)
@@ -217,88 +250,129 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		//If the H-G system is not used, use the default radius/albedo mechanism
 		if (slopeParameter < 0)
 		{
-			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core) - 5. * (std::log10(distanceAu*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+			oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core) - 5. * (std::log10(distanceAu*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 		}
 		else
 		{
-			oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
+			oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
 		}
 	}
 
-	oss << getPositionInfoString(core, flags);
+	if (flags&Extra && b_v<99.f)
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2)) << "<br />";
+
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Distance)
 	{
 		double hdistanceAu = getHeliocentricEclipticPos().length();
 		double hdistanceKm = AU * hdistanceAu;
-		if (englishName!="Sun")
+		// TRANSLATORS: Unit of measure for distance - astronomical unit
+		QString au = qc_("AU", "distance, astronomical unit");
+		// TRANSLATORS: Unit of measure for distance - kilometers
+		QString km = qc_("km", "distance");
+		QString distAU, distKM;
+		if (hdistanceAu < 0.1)
 		{
-			if (hdistanceAu < 0.1)
-			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
-				       .arg(hdistanceAu, 0, 'f', 6)
-				       .arg(hdistanceKm, 0, 'f', 3);
-			}
-			else
-			{
-				// xgettext:no-c-format
-				oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
-				       .arg(hdistanceAu, 0, 'f', 3)
-				       .arg(hdistanceKm / 1.0e6, 0, 'f', 3);
-			}
-			oss << "<br>";
+			distAU = QString::number(hdistanceAu, 'f', 6);
+			distKM = QString::number(hdistanceKm, 'f', 3);
 		}
+		else
+		{
+			distAU = QString::number(hdistanceAu, 'f', 3);
+			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - milliones kilometers
+			km = qc_("Mio km", "distance");
+		}
+		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
+
+		double distanceAu = getJ2000EquatorialPos(core).length();
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance: %1AU (%2 km)"))
-				   .arg(distanceAu, 0, 'f', 6)
-				   .arg(distanceKm, 0, 'f', 3);
+			distAU = QString::number(distanceAu, 'f', 6);
+			distKM = QString::number(distanceKm, 'f', 3);		}
+		else
+		{
+			distAU = QString::number(distanceAu, 'f', 3);
+			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - milliones kilometers
+			km = qc_("Mio km", "distance");
+		}
+		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
+	}
+
+	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+	if (flags&Size && angularSize>=4.8e-7)
+	{
+		QString sizeStr = "";
+		if (sphereScale!=1.f) // We must give correct diameters even if upscaling (e.g. Moon)
+		{
+			QString sizeOrig, sizeScaled;
+			if (withDecimalDegree)
+			{
+				sizeOrig   = StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true);
+				sizeScaled = StelUtils::radToDecDegStr(angularSize,5,false,true);
+			}
+			else
+			{
+				sizeOrig   = StelUtils::radToDmsStr(angularSize / sphereScale, true);
+				sizeScaled = StelUtils::radToDmsStr(angularSize, true);
+			}
+
+			sizeStr = QString("%1, %2: %3").arg(sizeOrig, q_("scaled up to"), sizeScaled);
 		}
 		else
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
-				   .arg(distanceAu, 0, 'f', 3)
-				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
+			if (withDecimalDegree)
+				sizeStr = StelUtils::radToDecDegStr(angularSize,5,false,true);
+			else
+				sizeStr = StelUtils::radToDmsStr(angularSize, true);
 		}
-		oss << "<br>";
-	}
 
-	float aSize = 2.*getAngularSize(core)*M_PI/180.;
-	if (flags&Size && aSize>1e-6)
-	{
-		if (withDecimalDegree)
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(aSize,5,false,true)) << "<br>";
-		else
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+		oss << QString("%1: %2").arg(q_("Apparent diameter"), sizeStr) << "<br />";
 	}
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();
 	if (flags&Extra)
 	{
+		if (!specT.isEmpty())
+		{
+			// TRANSLATORS: Tholen spectral taxonomic classification of asteroids
+			oss << QString("%1: %2").arg(q_("Tholen spectral type"), specT) << "<br />";
+		}
+
+		if (!specB.isEmpty())
+		{
+			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
+			oss << QString("%1: %2").arg(q_("SMASSII spectral type"), specB) << "<br />";
+		}
+
 		if (siderealPeriod>0)
 		{
-			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+			QString days = qc_("days", "duration");
+			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 		}
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
 
+		QString pha, elo;
 		if (withDecimalDegree)
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			pha = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
+			elo = StelUtils::radToDecDegStr(elongation,4,false,true);
 		}
 		else
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
+			elo = StelUtils::radToDmsStr(elongation, true);
 		}
+
+		oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
+		oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
