@@ -102,9 +102,9 @@ void ScriptConsole::createDialogContent()
 void ScriptConsole::loadScript()
 {
 	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), 
-	                                                tr("Load Script"), 
+							q_("Load Script"),
 	                                                StelFileMgr::getInstallationDir() + "/scripts", 
-	                                                tr("Script Files") + " " + getFileMask());
+							q_("Script Files") + " " + getFileMask());
 	QFile file(fileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
@@ -122,9 +122,9 @@ void ScriptConsole::saveScript()
 		saveDir = StelFileMgr::getUserDir();
 
 	QString fileName = QFileDialog::getSaveFileName(&StelMainView::getInstance(), 
-	                                                tr("Save Script"), 
+							q_("Save Script"),
 	                                                saveDir,
-	                                                tr("Script Files") + " " + getFileMask());
+							q_("Script Files") + " " + getFileMask());
 	QFile file(fileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
@@ -224,7 +224,7 @@ void ScriptConsole::appendOutputLine(const QString& s)
 void ScriptConsole::includeBrowse()
 {
 	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainView::getInstance(), 
-	                                                           tr("Select Script Includ Directory"), 
+								   q_("Select Script Include Directory"),
 	                                                           StelFileMgr::getInstallationDir() + "/scripts"));
 }
 
