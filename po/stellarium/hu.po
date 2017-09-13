@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-11 01:34+0700\n"
-"PO-Revision-Date: 2017-09-04 17:09+0000\n"
+"PO-Revision-Date: 2017-09-12 11:52+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-11 05:20+0000\n"
+"X-Launchpad-Export-Date: 2017-09-13 05:12+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -1037,7 +1037,7 @@ msgstr "Távolság a Naptól"
 
 #: src/core/modules/Planet.cpp:470
 msgid "with rings"
-msgstr ""
+msgstr "gyűrűkkel"
 
 #: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:323
 msgid "scaled up to"
@@ -1178,11 +1178,11 @@ msgstr "Sebesség"
 
 #: src/core/modules/Comet.cpp:272
 msgid "Coma diameter (estimate)"
-msgstr ""
+msgstr "csóva átmérő (becsült)"
 
 #: src/core/modules/Comet.cpp:273
 msgid "Gas tail length (estimate)"
-msgstr ""
+msgstr "gázcsóva hossz (becsült)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1260
@@ -1247,7 +1247,7 @@ msgstr "kettős csillag"
 
 #: src/core/modules/StarWrapper.cpp:234
 msgid "Magnitude range"
-msgstr ""
+msgstr "Magnitúdó tartomány"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
@@ -1273,7 +1273,7 @@ msgstr "Kelési idő"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Duration of eclipse"
-msgstr ""
+msgstr "Fogyatkozás időtartama"
 
 #: src/core/modules/StarWrapper.cpp:284
 msgid "Position angle"
@@ -2129,7 +2129,7 @@ msgstr "Látszó sziderikus idő"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr ""
+msgstr "IAU csillagkép"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -2933,7 +2933,7 @@ msgstr "szimuláció sebessége"
 
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
-msgstr ""
+msgstr "bolygóközépponti távolság"
 
 #: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
@@ -3887,51 +3887,51 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1176
 msgid "1 sidereal day"
-msgstr ""
+msgstr "1 sziderikus nap"
 
 #: src/gui/AstroCalcDialog.cpp:1177
 msgid "5 sidereal days"
-msgstr ""
+msgstr "5 sziderikus nap"
 
 #: src/gui/AstroCalcDialog.cpp:1178
 msgid "10 sidereal days"
-msgstr ""
+msgstr "10 sziderikus nap"
 
 #: src/gui/AstroCalcDialog.cpp:1179
 msgid "15 sidereal days"
-msgstr ""
+msgstr "15 sziderikus nap"
 
 #: src/gui/AstroCalcDialog.cpp:1180
 msgid "30 sidereal days"
-msgstr ""
+msgstr "30 sziderikus nap"
 
 #: src/gui/AstroCalcDialog.cpp:1181
 msgid "60 sidereal days"
-msgstr ""
+msgstr "60 sziderikus nap"
 
 #: src/gui/AstroCalcDialog.cpp:1182
 msgid "1 Julian day"
-msgstr ""
+msgstr "1 julián nap"
 
 #: src/gui/AstroCalcDialog.cpp:1183
 msgid "5 Julian days"
-msgstr ""
+msgstr "5 julián nap"
 
 #: src/gui/AstroCalcDialog.cpp:1184
 msgid "10 Julian days"
-msgstr ""
+msgstr "10 julián nap"
 
 #: src/gui/AstroCalcDialog.cpp:1185
 msgid "15 Julian days"
-msgstr ""
+msgstr "15 julián nap"
 
 #: src/gui/AstroCalcDialog.cpp:1186
 msgid "30 Julian days"
-msgstr ""
+msgstr "30 julián nap"
 
 #: src/gui/AstroCalcDialog.cpp:1187
 msgid "60 Julian days"
-msgstr ""
+msgstr "60 julián nap"
 
 #: src/gui/AstroCalcDialog.cpp:1259
 msgid "Solar system"
@@ -4065,7 +4065,7 @@ msgstr "Most kb. %1"
 #: src/gui/AstroCalcDialog.cpp:1846
 #, qt-format
 msgid "Passage of meridian at approximately %1"
-msgstr ""
+msgstr "Meridián áthaladásának ideje %1"
 
 #: src/gui/AstroCalcDialog.cpp:1869
 msgid "Phenomenon"
@@ -6534,7 +6534,7 @@ msgstr "Hullócsillagok (ZHR):"
 
 #: src/ui_viewDialog.h:2264 src/ui_viewDialog.h:2267
 msgid "The zenithal hourly rate for the sporadic meteors"
-msgstr ""
+msgstr "Meteorok száma óránként a zeniten"
 
 #: src/ui_viewDialog.h:2270
 msgid "Show planet orbits"
@@ -7107,7 +7107,7 @@ msgstr "Rajzok fényessége"
 
 #: src/ui_viewDialog.h:2610
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Csillagkép vonalak mutatása"
 
 #: src/ui_viewDialog.h:2612 src/ui_viewDialog.h:2636 src/ui_viewDialog.h:2647
 msgid "Thickness of line in pixels"
@@ -7393,7 +7393,7 @@ msgstr "Horizontális koordináták"
 
 #: src/ui_configurationDialog.h:1360
 msgid "Azimuth/Altitude"
-msgstr ""
+msgstr "Azimut/Magasság"
 
 #: src/ui_configurationDialog.h:1361
 msgid "Catalog number(s)"
@@ -7715,7 +7715,7 @@ msgstr "Ekliptikus háló gombja"
 
 #: src/ui_configurationDialog.h:1506
 msgid "Show constellation boundaries button"
-msgstr ""
+msgstr "Csillagkép határok mutatása gomb"
 
 #: src/ui_configurationDialog.h:1508
 msgid ""
@@ -8006,7 +8006,7 @@ msgstr "Magasság - idő"
 
 #: src/ui_astroCalcDialog.h:779
 msgid "Graphs"
-msgstr ""
+msgstr "Grafikonok"
 
 #: src/ui_astroCalcDialog.h:781 src/ui_astroCalcDialog.h:841
 msgid "Graphs on the current year"
@@ -8975,7 +8975,7 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:1877
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:523
 msgid "Ocular"
-msgstr ""
+msgstr "Okulár"
 
 #: plugins/Oculars/src/Oculars.cpp:1879
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
@@ -10437,7 +10437,7 @@ msgstr "Iridium felvillanások számítása"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "Előjelzések mentése..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -12048,7 +12048,7 @@ msgstr "Könyvjelző választása..."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "Select a text file"
-msgstr ""
+msgstr "Szövegfájl kiválasztása"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
@@ -13295,12 +13295,12 @@ msgstr "Sugár"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgid "Effective temperature"
-msgstr ""
+msgstr "Efektív hőmérséklet"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 msgctxt "temperature"
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 msgid "Exoplanet"
@@ -15596,7 +15596,7 @@ msgstr "jobb alsó negyed közepe"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "Near mouse cursor"
-msgstr ""
+msgstr "Az egérmutató közelében"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
@@ -15648,7 +15648,7 @@ msgstr "IAU csillagkép rövidítések"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Show crossed lines under mouse cursor"
-msgstr ""
+msgstr "Keresztező vonalak az egérmutatónál"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
