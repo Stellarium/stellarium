@@ -814,6 +814,7 @@ void S3DRenderer::calculateLighting()
 {
 	//calculate which light source we need + intensity
 	float ambientBrightness, directionalBrightness,emissiveFactor;
+	float eclipseFactor=GETSTELMODULE(SolarSystem)->getEclipseFactor(StelApp::getInstance().getCore());
 
 	Vec3d sunPosition = sun->getAltAzPosAuto(core);
 	sunPosition.normalize();
@@ -891,7 +892,7 @@ void S3DRenderer::calculateLighting()
 	// calculate ambient light
 	if(sinSunAngle > -0.3f) // sun above -18 deg?
 	{
-		lightInfo.sunAmbient = qMin(0.3f, sinSunAngle+0.3f);
+		lightInfo.sunAmbient = qMin(0.3f, sinSunAngle+0.3f)*eclipseFactor;
 		ambientBrightness += lightInfo.sunAmbient;
 	}
 	else
@@ -908,7 +909,7 @@ void S3DRenderer::calculateLighting()
 	// Now find shadow caster + directional light, if any:
 	if (sinSunAngle>-0.1f)
 	{
-		directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f)); // limit to 0.7 in order to keep total below 1.
+		directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f))*eclipseFactor; // limit to 0.7 in order to keep total below 1.
 		//redundant
 		//lightPosition = sunPosition;
 		if (shaderParameters.shadows) lightInfo.shadowCaster = LightParameters::SC_Sun;
