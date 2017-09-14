@@ -1443,7 +1443,8 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 				points->push_back(XYZ);
 			}
 
-			e->outlineSegments.push_back(points);
+			if (!e.isNull())
+				e->outlineSegments.push_back(points);
 			readOk++;
 		}
 
