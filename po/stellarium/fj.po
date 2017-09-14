@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-09-11 01:34+0700\n"
+"POT-Creation-Date: 2017-09-14 10:09+0700\n"
 "PO-Revision-Date: 2012-05-08 17:14+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Fijian <fj@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-11 05:17+0000\n"
+"X-Launchpad-Export-Date: 2017-09-14 05:18+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -3111,6 +3111,22 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
+#: src/gui/ScriptConsole.cpp:105
+msgid "Load Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
+msgid "Script Files"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:125
+msgid "Save Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:227
+msgid "Select Script Include Directory"
+msgstr ""
+
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
@@ -4817,66 +4833,70 @@ msgid "&Open"
 msgstr ""
 
 #: src/translations.h:446
-msgid "File &name:"
+msgid "S&ave"
 msgstr ""
 
 #: src/translations.h:447
-msgid "Copy &Link Location"
+msgid "File &name:"
 msgstr ""
 
 #: src/translations.h:448
-msgid "Abort"
+msgid "Copy &Link Location"
 msgstr ""
 
 #: src/translations.h:449
-msgid "Ignore"
+msgid "Abort"
 msgstr ""
 
 #: src/translations.h:450
-msgid "&Basic colors"
+msgid "Ignore"
 msgstr ""
 
 #: src/translations.h:451
-msgid "&Pick Screen Color"
+msgid "&Basic colors"
 msgstr ""
 
 #: src/translations.h:452
-msgid "&Custom colors"
+msgid "&Pick Screen Color"
 msgstr ""
 
 #: src/translations.h:453
-msgid "&Add to Custom Colors"
+msgid "&Custom colors"
 msgstr ""
 
 #: src/translations.h:454
-msgid "Hu&e:"
+msgid "&Add to Custom Colors"
 msgstr ""
 
 #: src/translations.h:455
-msgid "&Sat:"
+msgid "Hu&e:"
 msgstr ""
 
 #: src/translations.h:456
-msgid "&Val:"
+msgid "&Sat:"
 msgstr ""
 
 #: src/translations.h:457
-msgid "&Red:"
+msgid "&Val:"
 msgstr ""
 
 #: src/translations.h:458
-msgid "&Green:"
+msgid "&Red:"
 msgstr ""
 
 #: src/translations.h:459
-msgid "Bl&ue:"
+msgid "&Green:"
 msgstr ""
 
 #: src/translations.h:460
-msgid "Select Color"
+msgid "Bl&ue:"
 msgstr ""
 
 #: src/translations.h:461
+msgid "Select Color"
+msgstr ""
+
+#: src/translations.h:462
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
@@ -15209,21 +15229,21 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1808
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1809
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1817
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1818
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1827
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1828
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2352
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2353
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
