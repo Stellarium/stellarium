@@ -573,6 +573,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     // Get latitude and longitude of planet or moon in J2000
     Vec3d coord = planet->getJ2000EquatorialPos(core);
     Vec3d srcPos;
+    Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
     
     // Calculate the radius of the planet. It is necessary to re-scale it
     double r = planet->getRadius()*planet->getSphereScale();
@@ -582,32 +583,23 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     double nlongitude = (longitude - planet->getRotationElements().offset)*M_PI/180.0;
     
     // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
-    XYZ[0] = r * cos(nlatitude)*cos(nlongitude);
-    XYZ[1] = r * cos(nlatitude)*cos(nlongitude);
+    XYZ[0] = r * cos(nlatitude) * cos(nlongitude);
+    XYZ[1] = r * cos(nlatitude) * cos(nlongitude);
     XYZ[2] = r * sin(nlatitude);
     
-    // Calculate the location of the feature. If it is on the opposite face of the planet, then it will not appear
-    // R is the distance between the center of the Earth (or the observer's planet) and the feature
-    double dist = sqrt(coord.length()*coord.length() + r*r + 2*coord.length()*r*cos(nlatitude*M_PI/180.0 - coord.latitude()));
+    // Coordinates of fetures in equatorial system. This is the traslation of the coordinates of feature in planetocentric system to the equatorial system by summing this coordinates and the Moon's equatorial coordinates
+    XYZ1 = XYZ + coord;
+    // Coordinates of features in VSOP87 system
+    XYZ2 = planet->getRotEquatorialToVsop87() * XYZ1;
     
-    if (dist > coord.length())
-        return;
+    // An afin transformation is composed by a traslation and a rotation. We have now to calculate the rotation
+    // Identity matrix
+    Mat4d id = Mat4d::identity();
+    Mat4d mat = id * planet->getRotEquatorialToVsop87();
+    // Rotated coordinates of feature in VSOP87 system
+    XYZ3 = mat * XYZ2;
     
-    Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
-    
-    Mat4d mat = planet->getRotEquatorialToVsop87();
-    XYZ1 = mat * XYZ; // Cartesian coordinates of feature in VSOP87
-    //XYZ1 = mat.transpose() * XYZ;
-    
-    Mat4d id = Mat4d::identity(); // Identity matrix
-    
-    XYZ2 = id * planet->getRotEquatorialToVsop87() * XYZ;
-    //XYZ3 = id * planet->getRotEquatorialToVsop87() * XYZ + XYZ2;
-    
-    
-    XYZf = XYZ2 + coord;
-    //XYZf = XYZ3 + coord;
-
+    XYZf = XYZ3 + XYZ2;
     
 
 	if (painter->getProjector()->projectCheck(XYZf, srcPos))
