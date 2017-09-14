@@ -443,6 +443,7 @@ class Translations
 		N_("Directories");
 		N_("Computer");
 		N_("&Open");
+		N_("S&ave");
 		N_("File &name:");
 		N_("Copy &Link Location");
 		N_("Abort");
