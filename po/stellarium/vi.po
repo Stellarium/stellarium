@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 01:34+0700\n"
+"POT-Creation-Date: 2017-09-14 10:09+0700\n"
 "PO-Revision-Date: 2017-06-12 09:25+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-11 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-09-14 05:32+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -3243,6 +3243,22 @@ msgstr "tự nhiên"
 msgid "starchart"
 msgstr "Biểu đồ sao"
 
+#: src/gui/ScriptConsole.cpp:105
+msgid "Load Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
+msgid "Script Files"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:125
+msgid "Save Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:227
+msgid "Select Script Include Directory"
+msgstr ""
+
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
@@ -5013,66 +5029,70 @@ msgid "&Open"
 msgstr "&Mở"
 
 #: src/translations.h:446
+msgid "S&ave"
+msgstr ""
+
+#: src/translations.h:447
 msgid "File &name:"
 msgstr "Tên &file"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Copy &Link Location"
 msgstr "Vị trí sao chép và liên kết"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Abort"
 msgstr "Hủy bỏ"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Ignore"
 msgstr "Bỏ qua"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "&Basic colors"
 msgstr "&Màu cơ bản"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "&Custom colors"
 msgstr "&Màu tùy chỉnh"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "&Add to Custom Colors"
 msgstr "&Thêm màu tùy chỉnh"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "&Red:"
 msgstr "&Đỏ:"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "&Green:"
 msgstr "&Lục:"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Bl&ue:"
 msgstr "&Lam:"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Select Color"
 msgstr "Chọn màu"
 
-#: src/translations.h:461
+#: src/translations.h:462
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Con trỏ ở %1, %2 Nhấn ESC để xóa"
@@ -16126,7 +16146,7 @@ msgstr ""
 "Scener3d shader bị lỗi, không thể vẽ. Hãy kiểm tra đầu ra gỡ rối để biết chi "
 "tiết."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1808
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1809
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -16134,16 +16154,16 @@ msgstr ""
 "Phần cứng của bạn không hỗ trợ hình chiếu khối, vui lòng chuyển sang hình "
 "chiếu 'phối cảnh'!"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1817
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1818
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 "Vẽ bóng hình học thi không được hỗ trợ. Hạ trở lại chế độ '6 Textures'."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1827
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1828
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "Hạ trở lại '6 Textures' bởi vì lỗi GÓC"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2352
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2353
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""

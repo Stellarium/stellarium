@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 01:34+0700\n"
-"PO-Revision-Date: 2017-09-06 20:40+0000\n"
+"POT-Creation-Date: 2017-09-14 10:09+0700\n"
+"PO-Revision-Date: 2017-09-13 19:19+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-11 05:14+0000\n"
+"X-Launchpad-Export-Date: 2017-09-14 05:15+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3284,6 +3284,22 @@ msgstr "прыродны"
 msgid "starchart"
 msgstr "зорная карта"
 
+#: src/gui/ScriptConsole.cpp:105
+msgid "Load Script"
+msgstr "Загрузіць сцэнар"
+
+#: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
+msgid "Script Files"
+msgstr "Файлы сцэнароў"
+
+#: src/gui/ScriptConsole.cpp:125
+msgid "Save Script"
+msgstr "Захаваць сцэнары"
+
+#: src/gui/ScriptConsole.cpp:227
+msgid "Select Script Include Directory"
+msgstr ""
+
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
@@ -3881,75 +3897,75 @@ msgstr "12 гадзін"
 
 #: src/gui/AstroCalcDialog.cpp:1170
 msgid "1 solar day"
-msgstr ""
+msgstr "1 сонечны дзень"
 
 #: src/gui/AstroCalcDialog.cpp:1171
 msgid "5 solar days"
-msgstr ""
+msgstr "5 сонечных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1172
 msgid "10 solar days"
-msgstr ""
+msgstr "10 сонечных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1173
 msgid "15 solar days"
-msgstr ""
+msgstr "15 сонечных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1174
 msgid "30 solar days"
-msgstr ""
+msgstr "30 сонечных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1175
 msgid "60 solar days"
-msgstr ""
+msgstr "60 сонечных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1176
 msgid "1 sidereal day"
-msgstr ""
+msgstr "1 сыдэрычны дзень"
 
 #: src/gui/AstroCalcDialog.cpp:1177
 msgid "5 sidereal days"
-msgstr ""
+msgstr "5 сыдэрычных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1178
 msgid "10 sidereal days"
-msgstr ""
+msgstr "10 сыдэрычных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1179
 msgid "15 sidereal days"
-msgstr ""
+msgstr "15 сыдэрычных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1180
 msgid "30 sidereal days"
-msgstr ""
+msgstr "30 сыдэрычных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1181
 msgid "60 sidereal days"
-msgstr ""
+msgstr "60 сыдэрычных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1182
 msgid "1 Julian day"
-msgstr ""
+msgstr "1 юліянскі дзень"
 
 #: src/gui/AstroCalcDialog.cpp:1183
 msgid "5 Julian days"
-msgstr ""
+msgstr "5 юліянскіх дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1184
 msgid "10 Julian days"
-msgstr ""
+msgstr "10 юліянскіх дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1185
 msgid "15 Julian days"
-msgstr ""
+msgstr "15 юліянскіх дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1186
 msgid "30 Julian days"
-msgstr ""
+msgstr "30 юліянскіх дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1187
 msgid "60 Julian days"
-msgstr ""
+msgstr "60 юліянскіх дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1259
 msgid "Solar system"
@@ -5056,66 +5072,70 @@ msgid "&Open"
 msgstr "&Адкрыць"
 
 #: src/translations.h:446
+msgid "S&ave"
+msgstr ""
+
+#: src/translations.h:447
 msgid "File &name:"
 msgstr "&Назва файла:"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Copy &Link Location"
 msgstr "Капіяваць месца &лучыва"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Abort"
 msgstr "Адкінуць"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Ignore"
 msgstr "Іґнараваць"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "&Basic colors"
 msgstr "&Асноўныя колеры"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "&Pick Screen Color"
 msgstr "&Узяць колер экрану"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "&Custom colors"
 msgstr "&Свае колеры"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "&Add to Custom Colors"
 msgstr "&Дадаць у свае колеры"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Hu&e:"
 msgstr "&Адц:"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "&Sat:"
 msgstr "&Нас:"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "&Val:"
 msgstr "&Ярк:"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "&Red:"
 msgstr "&Чырвоны:"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "&Green:"
 msgstr "&Зялёны:"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Bl&ue:"
 msgstr "С&іні:"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Select Color"
 msgstr "Выберы колер"
 
-#: src/translations.h:461
+#: src/translations.h:462
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Курсор у %1, %2. Націсьні ESC для скасаваньня"
@@ -7145,11 +7165,11 @@ msgstr "Паказваць выявы ў яркасьці"
 
 #: src/ui_viewDialog.h:2610
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Паказваць лініі сузор'яў"
 
 #: src/ui_viewDialog.h:2612 src/ui_viewDialog.h:2636 src/ui_viewDialog.h:2647
 msgid "Thickness of line in pixels"
-msgstr ""
+msgstr "Таўшчыня лініі у піксэлях"
 
 #: src/ui_viewDialog.h:2615
 msgid "Color of constellation lines"
@@ -16208,7 +16228,7 @@ msgstr ""
 "Памылка шэйдара Scenery3d, не магчыма рысаваць. Глядзі падрабязнасьці ў "
 "часопісе адладкі."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1808
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1809
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -16216,16 +16236,16 @@ msgstr ""
 "Тваё абсталяваньне не падтрымлівае кубічнае ператварэньне, пераключыся на "
 "пэрспэктыўную праекцыю, калі ласка!"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1817
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1818
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 "Ґеамэтрычны шэйдар не падтрымліваецца. Задзейнічаем рэжым «6 тэкстур»."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1827
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1828
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "Вяртаемся да «6 тэкстур» праз хібу ANGLE"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2352
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2353
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""

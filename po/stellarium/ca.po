@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 01:34+0700\n"
-"PO-Revision-Date: 2017-09-10 19:00+0000\n"
+"POT-Creation-Date: 2017-09-14 10:09+0700\n"
+"PO-Revision-Date: 2017-09-13 20:04+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-11 05:15+0000\n"
+"X-Launchpad-Export-Date: 2017-09-14 05:16+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -3294,6 +3294,22 @@ msgstr "natural"
 msgid "starchart"
 msgstr "mapa d'estels"
 
+#: src/gui/ScriptConsole.cpp:105
+msgid "Load Script"
+msgstr "Carreca Script"
+
+#: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
+msgid "Script Files"
+msgstr "Fitxers Script"
+
+#: src/gui/ScriptConsole.cpp:125
+msgid "Save Script"
+msgstr "Desa l'Script"
+
+#: src/gui/ScriptConsole.cpp:227
+msgid "Select Script Include Directory"
+msgstr "Seleccioneu el Directori d'Incloure Scripts"
+
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
@@ -5075,66 +5091,70 @@ msgid "&Open"
 msgstr "&Obre"
 
 #: src/translations.h:446
+msgid "S&ave"
+msgstr ""
+
+#: src/translations.h:447
 msgid "File &name:"
 msgstr "&Nom de fitxer:"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Copy &Link Location"
 msgstr "Copia la &ubicació de l'en&llaç"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Abort"
 msgstr "Interrompre"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Ignore"
 msgstr "Ignorar"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "&Basic colors"
 msgstr "Colors &basics"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "&Pick Screen Color"
 msgstr "&Selecciona Color de la Pantalla"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "&Custom colors"
 msgstr "&Colors personalitzats"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "&Add to Custom Colors"
 msgstr "&Afegir als colors personalitzats"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Hu&e:"
 msgstr "&Mat:"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "&Sat:"
 msgstr "&Sat:"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "&Val:"
 msgstr "&Val:"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "&Red:"
 msgstr "&Ver:"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "&Green:"
 msgstr "V&erd:"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Bl&ue:"
 msgstr "&Blue:"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Select Color"
 msgstr "Selecciona color"
 
-#: src/translations.h:461
+#: src/translations.h:462
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Cursor a %1, %2 Prem ESC per cancel·lar"
@@ -16308,7 +16328,7 @@ msgstr ""
 "Error de sombrejat Scenery3d, no es pot dibuixar. Comproveu la sortida de "
 "depuració per obtenir més informació."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1808
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1809
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -16316,16 +16336,16 @@ msgstr ""
 "El seu maquinari no suporta mapatge de cub, si us plau, canvieu a la "
 "projecció 'Perspectiva'!"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1817
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1818
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 "L'ombrejador de geometria no es compatible. Tornant a mode '6 textures'."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1827
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1828
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "Tornant a  les  '6 Textures' a causa d'un error d'ANGLE"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2352
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2353
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""

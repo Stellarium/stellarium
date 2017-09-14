@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 01:34+0700\n"
+"POT-Creation-Date: 2017-09-14 10:09+0700\n"
 "PO-Revision-Date: 2017-09-11 04:52+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-12 05:11+0000\n"
+"X-Launchpad-Export-Date: 2017-09-14 05:15+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 "Language: bn\n"
 
@@ -3281,6 +3281,22 @@ msgstr "স্বাভাবিক দৃশ্যপট"
 msgid "starchart"
 msgstr "নক্ষত্রমন্ডলের নকশা"
 
+#: src/gui/ScriptConsole.cpp:105
+msgid "Load Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
+msgid "Script Files"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:125
+msgid "Save Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:227
+msgid "Select Script Include Directory"
+msgstr ""
+
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
@@ -5051,66 +5067,70 @@ msgid "&Open"
 msgstr "খুলু&ন"
 
 #: src/translations.h:446
+msgid "S&ave"
+msgstr ""
+
+#: src/translations.h:447
 msgid "File &name:"
 msgstr "ফাইলের না&ম :"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Copy &Link Location"
 msgstr "সংযো&গটির ঠিকানা অনুকরন করুন"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Abort"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Ignore"
 msgstr "উপেক্ষা করুন"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "&Basic colors"
 msgstr "প্রা&থমিক রং"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "&Pick Screen Color"
 msgstr "স্ক্রীন থেকে &রং বাছুন"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "&Custom colors"
 msgstr "প&ছন্দসই রং"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "&Add to Custom Colors"
 msgstr "পছন্দসই রঙের তালিকায় যো&গ করুন"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Hu&e:"
 msgstr "&ধরন :"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "&Sat:"
 msgstr "গা&ড়ত্ব :"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "&Val:"
 msgstr "&উজ্জ্বল্যতা :"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "&Red:"
 msgstr "লা&ল :"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "&Green:"
 msgstr "সবু&জ :"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Bl&ue:"
 msgstr "&নীল :"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Select Color"
 msgstr "রং নির্বাচন করুন"
 
-#: src/translations.h:461
+#: src/translations.h:462
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "কার্সারের অবস্থান : %1, %2 । বাতিল করতে ESC চাপুন ।"
@@ -16122,7 +16142,7 @@ msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 "ত্রিমাতৃক প্রতিরূপ গঠন করা যায় নি । আরও তথ্যের জন্য ডিবাগ ফলাফল দেখুন ।"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1808
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1809
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -16130,15 +16150,15 @@ msgstr ""
 "আপনার হার্ডওয়্যার ঘনকাকার অভিক্ষেপন গঠনে অক্ষম, অনুগ্রহ করে 'দর্শনানুপাত "
 "(Perspective)' অভিক্ষেপন ব্যবহার করুন ।"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1817
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1818
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr "জ্যামিতিক অভিক্ষেপন করা সম্ভব নয় । তাই ৬টি ছবি ব্যবহার করা হচ্ছে ।"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1827
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1828
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "ANGLE জনিত সমস্যা এড়াতে ৬টি ছবি ব্যবহার করা হচ্ছে"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2352
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2353
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
