@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-11 01:34+0700\n"
+"POT-Creation-Date: 2017-09-14 10:09+0700\n"
 "PO-Revision-Date: 2017-08-17 23:24+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-11 05:26+0000\n"
+"X-Launchpad-Export-Date: 2017-09-14 05:27+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -3277,6 +3277,22 @@ msgstr "naturalny"
 msgid "starchart"
 msgstr "mapa nieba"
 
+#: src/gui/ScriptConsole.cpp:105
+msgid "Load Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
+msgid "Script Files"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:125
+msgid "Save Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:227
+msgid "Select Script Include Directory"
+msgstr ""
+
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
@@ -5048,66 +5064,70 @@ msgid "&Open"
 msgstr "&Otwórz"
 
 #: src/translations.h:446
+msgid "S&ave"
+msgstr ""
+
+#: src/translations.h:447
 msgid "File &name:"
 msgstr "&Nazwa pliku:"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Copy &Link Location"
 msgstr "Kopiuj adres &odnośnika"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Abort"
 msgstr "Przerwij"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Ignore"
 msgstr "Zignoruj"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "&Basic colors"
 msgstr "Kolory &podstawowe"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "&Pick Screen Color"
 msgstr "&Wybierz kolor ekranu"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "&Custom colors"
 msgstr "Kolory %niestandardowe"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "&Add to Custom Colors"
 msgstr "%Dodaj do kolorów niestandardowych"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Hu&e:"
 msgstr "%Odcień:"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "&Sat:"
 msgstr "N%asyc."
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "&Val:"
 msgstr "%Wartość:"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "&Red:"
 msgstr "%Czerwień:"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "&Green:"
 msgstr "%Zieleń:"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Bl&ue:"
 msgstr "Ni%ebieski:"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Select Color"
 msgstr "Wybierz kolor"
 
-#: src/translations.h:461
+#: src/translations.h:462
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kursor w poz. %1, %2 Naciśnij ESC aby anulować"
@@ -15964,7 +15984,7 @@ msgstr ""
 "Błąd jednostki cieniowania Scenery3d, nie można narysować obiektu. Szczegóły "
 "w informacjach debuggera."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1808
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1809
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -15972,17 +15992,17 @@ msgstr ""
 "Twój sprzęt nie obsługuje mapowania sześciennego, przełącz na rzutowanie "
 "'Perspektywiczne'!"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1817
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1818
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 "Jednostka cieniowania geometrycznego nie jest obsługiwana. Przełączenie "
 "awaryjne do trybu '6 tekstur'."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1827
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1828
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "Przełączenie awaryjne do trybu '6 tekstur' z powodu błędu ANGLE"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2352
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2353
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
