@@ -1434,17 +1434,19 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 			outline.append(point);
 			outline.append(fpoint);
 
-			points = new std::vector<Vec3f>;
-			for (i = 0; i < outline.size(); i++)
-			{
-				// Calc the Cartesian coord with RA and DE
-				point = outline.at(i);
-				StelUtils::spheToRect(point.first, point.second, XYZ);
-				points->push_back(XYZ);
-			}
-
 			if (!e.isNull())
+			{
+				points = new std::vector<Vec3f>;
+				for (i = 0; i < outline.size(); i++)
+				{
+					// Calc the Cartesian coord with RA and DE
+					point = outline.at(i);
+					StelUtils::spheToRect(point.first, point.second, XYZ);
+					points->push_back(XYZ);
+				}
+
 				e->outlineSegments.push_back(points);
+			}
 			readOk++;
 		}
 
