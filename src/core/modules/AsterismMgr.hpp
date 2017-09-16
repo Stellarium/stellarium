@@ -70,11 +70,11 @@ class AsterismMgr : public StelObjectModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY namesDisplayedChanged)
-	Q_PROPERTY(float asterismLineThickness
+	Q_PROPERTY(int asterismLineThickness
 		   READ getAsterismLineThickness
 		   WRITE setAsterismLineThickness
 		   NOTIFY asterismLineThicknessChanged)
-	Q_PROPERTY(float rayHelperThickness
+	Q_PROPERTY(int rayHelperThickness
 		   READ getRayHelperThickness
 		   WRITE setRayHelperThickness
 		   NOTIFY rayHelperThicknessChanged)
@@ -182,15 +182,15 @@ public slots:
 
 	//! Set the thickness of lines of the asterisms
 	//! @param thickness of line in pixels
-	void setAsterismLineThickness(const float thickness);
+	void setAsterismLineThickness(const int thickness);
 	//! Get the thickness of lines of the asterisms
-	float getAsterismLineThickness() const { return asterismLineThickness; }
+	int getAsterismLineThickness() const { return asterismLineThickness; }
 
 	//! Set the thickness of ray helpers of the asterisms
 	//! @param thickness of ray helper in pixels
-	void setRayHelperThickness(const float thickness);
+	void setRayHelperThickness(const int thickness);
 	//! Get the thickness of ray helper of the asterisms
-	float getRayHelperThickness() const { return rayHelperThickness; }
+	int getRayHelperThickness() const { return rayHelperThickness; }
 
 signals:
 	void fontSizeChanged(const float newSize) const;
@@ -198,10 +198,10 @@ signals:
 	void linesDisplayedChanged(const bool displayed) const;
 	void namesColorChanged(const Vec3f & color) const;
 	void namesDisplayedChanged(const bool displayed) const;
-	void asterismLineThicknessChanged(float thickness) const;
+	void asterismLineThicknessChanged(int thickness) const;
 	void rayHelpersColorChanged(const Vec3f & color) const;
 	void rayHelpersDisplayedChanged(const bool displayed) const;
-	void rayHelperThicknessChanged(float thickness) const;
+	void rayHelperThicknessChanged(int thickness) const;
 
 private slots:
 	//! Loads new asterism data and art if the SkyCulture has changed.
@@ -251,8 +251,8 @@ private:
 	bool hasAsterism;
 
 	// Store the thickness of lines of the asterisms
-	float asterismLineThickness;
-	float rayHelperThickness;
+	int asterismLineThickness;
+	int rayHelperThickness;
 };
 
 #endif // _ASTERISMMGR_HPP_

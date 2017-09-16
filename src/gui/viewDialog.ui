@@ -3083,7 +3083,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="constellationLineThicknessSpinBox">
+                <widget class="QSpinBox" name="constellationLineThicknessSpinBox">
                  <property name="maximumSize">
                   <size>
                    <width>50</width>
@@ -3096,17 +3096,11 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <property name="decimals">
-                  <number>0</number>
-                 </property>
                  <property name="minimum">
-                  <double>1.000000000000000</double>
+                  <number>1</number>
                  </property>
                  <property name="maximum">
-                  <double>5.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>1.000000000000000</double>
+                  <number>5</number>
                  </property>
                 </widget>
                </item>
@@ -3208,7 +3202,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="asterismLineThicknessSpinBox">
+                <widget class="QSpinBox" name="asterismLineThicknessSpinBox">
                  <property name="maximumSize">
                   <size>
                    <width>50</width>
@@ -3221,14 +3215,11 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <property name="decimals">
-                  <number>0</number>
-                 </property>
                  <property name="minimum">
-                  <double>1.000000000000000</double>
+                  <number>1</number>
                  </property>
                  <property name="maximum">
-                  <double>5.000000000000000</double>
+                  <number>5</number>
                  </property>
                 </widget>
                </item>
@@ -3269,7 +3260,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="rayHelperThicknessSpinBox">
+                <widget class="QSpinBox" name="rayHelperThicknessSpinBox">
                  <property name="maximumSize">
                   <size>
                    <width>50</width>
@@ -3282,14 +3273,11 @@
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
-                 <property name="decimals">
-                  <number>0</number>
-                 </property>
                  <property name="minimum">
-                  <double>1.000000000000000</double>
+                  <number>1</number>
                  </property>
                  <property name="maximum">
-                  <double>5.000000000000000</double>
+                  <number>5</number>
                  </property>
                 </widget>
                </item>
@@ -3590,12 +3578,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
