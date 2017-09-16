@@ -100,7 +100,7 @@ void ConstellationMgr::init()
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
-	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1.f).toInt());
+	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1).toInt());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (starloreDisplayStyle=="translated")
