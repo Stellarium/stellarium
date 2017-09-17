@@ -460,5 +460,12 @@ class Translations
 		N_("Bl&ue:");
 		N_("Select Color");
 		N_("Cursor at %1, %2 Press ESC to cancel");
+		N_("Back");
+		N_("Forward");
+		N_("Parent Directory");
+		N_("Create New Folder");
+		N_("List View");
+		N_("Detail View");
+		N_("Recent Places");
 	}
 };

@@ -101,7 +101,7 @@ void ScriptConsole::createDialogContent()
 
 void ScriptConsole::loadScript()
 {
-	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), 
+	QString fileName = QFileDialog::getOpenFileName(Q_NULLPTR,
 							q_("Load Script"),
 	                                                StelFileMgr::getInstallationDir() + "/scripts", 
 							q_("Script Files") + " " + getFileMask());
@@ -121,7 +121,7 @@ void ScriptConsole::saveScript()
 	if (saveDir.isEmpty())
 		saveDir = StelFileMgr::getUserDir();
 
-	QString fileName = QFileDialog::getSaveFileName(&StelMainView::getInstance(), 
+	QString fileName = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save Script"),
 	                                                saveDir,
 							q_("Script Files") + " " + getFileMask());
