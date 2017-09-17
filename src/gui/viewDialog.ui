@@ -238,7 +238,7 @@
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="page">
+        <widget class="QWidget" name="page_sky">
          <layout class="QGridLayout" name="gridLayout">
           <property name="leftMargin">
            <number>0</number>
@@ -1862,7 +1862,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_2">
+        <widget class="QWidget" name="page_markings">
          <layout class="QGridLayout" name="gridLayout_2">
           <property name="leftMargin">
            <number>0</number>
@@ -2703,7 +2703,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_3">
+        <widget class="QWidget" name="page_landscape">
          <layout class="QGridLayout" name="gridLayout_3">
           <property name="leftMargin">
            <number>0</number>
@@ -2929,7 +2929,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_4">
+        <widget class="QWidget" name="page_starlore">
          <layout class="QGridLayout" name="gridLayout_4">
           <property name="leftMargin">
            <number>0</number>
@@ -3549,31 +3549,195 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>planetMarkerCheckBox</tabstop>
-  <tabstop>planetLightSpeedCheckBox</tabstop>
+  <tabstop>page_sky</tabstop>
+  <tabstop>starGroupBox</tabstop>
+  <tabstop>starScaleRadiusDoubleSpinBox</tabstop>
+  <tabstop>starRelativeScaleDoubleSpinBox</tabstop>
+  <tabstop>starTwinkleCheckBox</tabstop>
+  <tabstop>starTwinkleAmountDoubleSpinBox</tabstop>
+  <tabstop>starLimitMagnitudeCheckBox</tabstop>
+  <tabstop>starLimitMagnitudeDoubleSpinBox</tabstop>
+  <tabstop>starLabelCheckBox</tabstop>
+  <tabstop>starsLabelsHorizontalSlider</tabstop>
+  <tabstop>milkyWayCheckBox</tabstop>
+  <tabstop>milkyWayBrightnessDoubleSpinBox</tabstop>
+  <tabstop>zodiacalLightCheckBox</tabstop>
+  <tabstop>zodiacalLightBrightnessDoubleSpinBox</tabstop>
+  <tabstop>adaptationCheckbox</tabstop>
+  <tabstop>atmosphereCheckBox</tabstop>
+  <tabstop>useLightPollutionFromLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
+  <tabstop>pushButtonAtmosphereDetails</tabstop>
+  <tabstop>planetsGroupBox</tabstop>
+  <tabstop>planetUseObjModelsCheckBox</tabstop>
+  <tabstop>planetShowObjSelfShadowsCheckBox</tabstop>
+  <tabstop>planetMarkerCheckBox</tabstop>
+  <tabstop>planetOrbitCheckBox</tabstop>
+  <tabstop>pushButtonOrbitColors</tabstop>
+  <tabstop>planetIsolatedOrbitCheckBox</tabstop>
+  <tabstop>planetIsolatedTrailsCheckBox</tabstop>
+  <tabstop>planetLightSpeedCheckBox</tabstop>
+  <tabstop>customGrsSettingsCheckBox</tabstop>
+  <tabstop>pushButtonGrsDetails</tabstop>
+  <tabstop>planetLimitMagnitudeCheckBox</tabstop>
+  <tabstop>planetLimitMagnitudeDoubleSpinBox</tabstop>
+  <tabstop>planetScaleMoonCheckBox</tabstop>
+  <tabstop>moonScaleFactor</tabstop>
+  <tabstop>planetScaleMinorBodyCheckBox</tabstop>
+  <tabstop>minorBodyScaleFactor</tabstop>
+  <tabstop>planetLabelCheckBox</tabstop>
+  <tabstop>planetsLabelsHorizontalSlider</tabstop>
+  <tabstop>planetMagnitudeAlgorithmComboBox</tabstop>
+  <tabstop>zhrSlider</tabstop>
+  <tabstop>zhrSpinBox</tabstop>
+  <tabstop>page_DSO</tabstop>
+  <tabstop>checkBoxM</tabstop>
+  <tabstop>checkBoxC</tabstop>
+  <tabstop>checkBoxNGC</tabstop>
+  <tabstop>checkBoxIC</tabstop>
+  <tabstop>checkBoxB</tabstop>
+  <tabstop>checkBoxSh2</tabstop>
+  <tabstop>checkBoxVdB</tabstop>
+  <tabstop>checkBoxRCW</tabstop>
+  <tabstop>checkBoxLBN</tabstop>
+  <tabstop>checkBoxLDN</tabstop>
+  <tabstop>checkBoxCr</tabstop>
+  <tabstop>checkBoxMel</tabstop>
+  <tabstop>checkBoxPGC</tabstop>
+  <tabstop>checkBoxUGC</tabstop>
+  <tabstop>checkBoxCed</tabstop>
+  <tabstop>checkBoxArp</tabstop>
+  <tabstop>checkBoxVV</tabstop>
+  <tabstop>checkBoxPK</tabstop>
+  <tabstop>checkBoxPNG</tabstop>
+  <tabstop>checkBoxSNRG</tabstop>
+  <tabstop>checkBoxACO</tabstop>
+  <tabstop>groupBoxDSOTypeFilters</tabstop>
+  <tabstop>checkBoxGalaxiesType</tabstop>
+  <tabstop>checkBoxActiveGalaxiesType</tabstop>
+  <tabstop>checkBoxInteractingGalaxiesType</tabstop>
+  <tabstop>checkBoxGalaxyClustersType</tabstop>
+  <tabstop>checkBoxStarClustersType</tabstop>
+  <tabstop>checkBoxOtherType</tabstop>
+  <tabstop>checkBoxBrightNebulaeType</tabstop>
+  <tabstop>checkBoxDarkNebulaeType</tabstop>
+  <tabstop>checkBoxPlanetaryNebulaeType</tabstop>
+  <tabstop>checkBoxSupernovaRemnantsType</tabstop>
+  <tabstop>checkBoxHydrogenRegionsType</tabstop>
+  <tabstop>groupBoxDSOLabelsAndMarkers</tabstop>
+  <tabstop>nebulasLabelsHorizontalSlider</tabstop>
+  <tabstop>nebulasHintsHorizontalSlider</tabstop>
+  <tabstop>checkBoxDesignationsOnlyUsage</tabstop>
+  <tabstop>checkBoxOutlines</tabstop>
+  <tabstop>checkBoxProportionalHints</tabstop>
+  <tabstop>checkBoxSurfaceBrightnessUsage</tabstop>
+  <tabstop>nebulaLimitMagnitudeCheckBox</tabstop>
+  <tabstop>nebulaLimitMagnitudeDoubleSpinBox</tabstop>
+  <tabstop>pushButtonConfigureDSOColors</tabstop>
+  <tabstop>page_markings</tabstop>
+  <tabstop>celestialSphereGroupBox</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
+  <tabstop>colorEquatorialJ2000Grid</tabstop>
   <tabstop>showEquatorialGridCheckBox</tabstop>
+  <tabstop>colorEquatorialGrid</tabstop>
   <tabstop>showEclipticGridJ2000CheckBox</tabstop>
+  <tabstop>colorEclipticGridJ2000</tabstop>
+  <tabstop>showEclipticGridOfDateCheckBox</tabstop>
+  <tabstop>colorEclipticGridOfDate</tabstop>
   <tabstop>showAzimuthalGridCheckBox</tabstop>
+  <tabstop>colorAzimuthalGrid</tabstop>
   <tabstop>showGalacticGridCheckBox</tabstop>
+  <tabstop>colorGalacticGrid</tabstop>
+  <tabstop>showSupergalacticGridCheckBox</tabstop>
+  <tabstop>colorSupergalacticGrid</tabstop>
+  <tabstop>showEquinoxJ2000PointsCheckBox</tabstop>
+  <tabstop>colorEquinoxJ2000Points</tabstop>
+  <tabstop>showEquinoxPointsCheckBox</tabstop>
+  <tabstop>colorEquinoxPoints</tabstop>
+  <tabstop>showSolsticeJ2000PointsCheckBox</tabstop>
+  <tabstop>colorSolsticeJ2000Points</tabstop>
+  <tabstop>showSolsticePointsCheckBox</tabstop>
+  <tabstop>colorSolsticePoints</tabstop>
+  <tabstop>showEquatorJ2000LineCheckBox</tabstop>
+  <tabstop>colorEquatorJ2000Line</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
+  <tabstop>colorEquatorLine</tabstop>
+  <tabstop>showEclipticLineJ2000CheckBox</tabstop>
+  <tabstop>colorEclipticLineJ2000</tabstop>
   <tabstop>showEclipticLineOfDateCheckBox</tabstop>
+  <tabstop>colorEclipticLineOfDate</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
+  <tabstop>colorHorizonLine</tabstop>
   <tabstop>showGalacticEquatorLineCheckBox</tabstop>
-  <tabstop>showConstellationLinesCheckBox</tabstop>
-  <tabstop>showConstellationLabelsCheckBox</tabstop>
+  <tabstop>colorGalacticEquatorLine</tabstop>
+  <tabstop>showSupergalacticEquatorLineCheckBox</tabstop>
+  <tabstop>colorSupergalacticEquatorLine</tabstop>
+  <tabstop>showMeridianLineCheckBox</tabstop>
+  <tabstop>colorMeridianLine</tabstop>
+  <tabstop>showLongitudeLineCheckBox</tabstop>
+  <tabstop>colorLongitudeLine</tabstop>
+  <tabstop>showColuresLineCheckBox</tabstop>
+  <tabstop>colorColuresLine</tabstop>
+  <tabstop>showCardinalPointsCheckBox</tabstop>
+  <tabstop>colorCardinalPoints</tabstop>
+  <tabstop>showCelestialJ2000PolesCheckBox</tabstop>
+  <tabstop>colorCelestialJ2000Poles</tabstop>
+  <tabstop>showCelestialPolesCheckBox</tabstop>
+  <tabstop>colorCelestialPoles</tabstop>
+  <tabstop>showEclipticJ2000PolesCheckBox</tabstop>
+  <tabstop>colorEclipticJ2000Poles</tabstop>
+  <tabstop>showEclipticPolesCheckBox</tabstop>
+  <tabstop>colorEclipticPoles</tabstop>
+  <tabstop>showZenithNadirCheckBox</tabstop>
+  <tabstop>colorZenithNadir</tabstop>
+  <tabstop>showGalacticPolesCheckBox</tabstop>
+  <tabstop>colorGalacticPoles</tabstop>
+  <tabstop>showSupergalacticPolesCheckBox</tabstop>
+  <tabstop>colorSupergalacticPoles</tabstop>
+  <tabstop>showPrimeVerticalLineCheckBox</tabstop>
+  <tabstop>colorPrimeVerticalLine</tabstop>
+  <tabstop>showCircumpolarCirclesCheckBox</tabstop>
+  <tabstop>colorCircumpolarCircles</tabstop>
+  <tabstop>showPrecessionCirclesCheckBox</tabstop>
+  <tabstop>colorPrecessionCircles</tabstop>
+  <tabstop>projectionListWidget</tabstop>
+  <tabstop>viewportOffsetSpinBox</tabstop>
+  <tabstop>page_landscape</tabstop>
+  <tabstop>landscapesListWidget</tabstop>
   <tabstop>landscapeTextBrowser</tabstop>
   <tabstop>showGroundCheckBox</tabstop>
-  <tabstop>showFogCheckBox</tabstop>
   <tabstop>landscapePositionCheckBox</tabstop>
+  <tabstop>showFogCheckBox</tabstop>
+  <tabstop>landscapeBrightnessCheckBox</tabstop>
+  <tabstop>landscapeBrightnessSpinBox</tabstop>
   <tabstop>useAsDefaultLandscapeCheckBox</tabstop>
+  <tabstop>landscapeLabelsCheckBox</tabstop>
+  <tabstop>landscapeIlluminationCheckBox</tabstop>
+  <tabstop>localLandscapeBrightnessCheckBox</tabstop>
   <tabstop>pushButtonAddRemoveLandscapes</tabstop>
+  <tabstop>page_starlore</tabstop>
+  <tabstop>culturesListWidget</tabstop>
   <tabstop>skyCultureTextBrowser</tabstop>
   <tabstop>useAsDefaultSkyCultureCheckBox</tabstop>
-  <tabstop>skyLayerListWidget</tabstop>
-  <tabstop>skyLayerTextBrowser</tabstop>
-  <tabstop>skyLayerEnableCheckBox</tabstop>
+  <tabstop>showConstellationLabelsCheckBox</tabstop>
+  <tabstop>skyCultureNamesStyleComboBox</tabstop>
+  <tabstop>colorConstellationLabels</tabstop>
+  <tabstop>showConstellationLinesCheckBox</tabstop>
+  <tabstop>constellationLineThicknessSpinBox</tabstop>
+  <tabstop>colorConstellationLines</tabstop>
+  <tabstop>showAsterismLinesCheckBox</tabstop>
+  <tabstop>asterismLineThicknessSpinBox</tabstop>
+  <tabstop>colorAsterismLines</tabstop>
+  <tabstop>showRayHelpersCheckBox</tabstop>
+  <tabstop>rayHelperThicknessSpinBox</tabstop>
+  <tabstop>colorRayHelpers</tabstop>
+  <tabstop>showConstellationBoundariesCheckBox</tabstop>
+  <tabstop>colorConstellationBoundaries</tabstop>
+  <tabstop>nativePlanetNamesCheckBox</tabstop>
+  <tabstop>showConstellationArtCheckBox</tabstop>
+  <tabstop>constellationArtBrightnessSpinBox</tabstop>
+  <tabstop>showAsterismLabelsCheckBox</tabstop>
+  <tabstop>colorAsterismLabels</tabstop>
  </tabstops>
  <resources/>
  <connections/>
