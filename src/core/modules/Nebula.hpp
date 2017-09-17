@@ -218,8 +218,12 @@ private:
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel) const;
 	void drawHints(StelPainter& sPainter, float maxMagHints) const;
+	void drawOutlines(StelPainter& sPainter, float maxMagHints) const;
 
 	bool objectInDisplayedType() const;
+
+	Vec3f getHintColor() const;
+	float getVisibilityLevelByMagnitude() const;
 
 	//! Get the printable description of morphological nebula type.
 	//! @return the nebula morphological type string.

@@ -436,6 +436,7 @@ struct DrawNebulaFuncObject
 			sPainter->getProjector()->project(n->XYZ,n->XY);
 			n->drawLabel(*sPainter, maxMagLabels);
 			n->drawHints(*sPainter, maxMagHints);
+			n->drawOutlines(*sPainter, maxMagHints);
 		}
 	}
 	float maxMagHints;
@@ -481,8 +482,8 @@ void NebulaMgr::draw(StelCore* core)
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-	// Use a 1 degree margin
-	const double margin = 1.*M_PI/180.*prj->getPixelPerRadAtCenter();
+	// Use a 4 degree margin (esp. for wide outlines)
+	const double margin = 4.*M_PI/180.*prj->getPixelPerRadAtCenter();
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 
 	// Print all the nebulae of all the selected zones
@@ -1434,16 +1435,19 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 			outline.append(point);
 			outline.append(fpoint);
 
-			points = new std::vector<Vec3f>;
-			for (i = 0; i < outline.size(); i++)
+			if (!e.isNull())
 			{
-				// Calc the Cartesian coord with RA and DE
-				point = outline.at(i);
-				StelUtils::spheToRect(point.first, point.second, XYZ);
-				points->push_back(XYZ);
-			}
+				points = new std::vector<Vec3f>;
+				for (i = 0; i < outline.size(); i++)
+				{
+					// Calc the Cartesian coord with RA and DE
+					point = outline.at(i);
+					StelUtils::spheToRect(point.first, point.second, XYZ);
+					points->push_back(XYZ);
+				}
 
-			e->outlineSegments.push_back(points);
+				e->outlineSegments.push_back(points);
+			}
 			readOk++;
 		}
 
