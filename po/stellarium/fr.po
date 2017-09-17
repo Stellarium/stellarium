@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-14 10:09+0700\n"
-"PO-Revision-Date: 2017-09-11 14:41+0000\n"
+"POT-Creation-Date: 2017-09-14 17:23+0700\n"
+"PO-Revision-Date: 2017-09-15 10:38+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-14 05:18+0000\n"
+"X-Launchpad-Export-Date: 2017-09-16 05:12+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -111,7 +111,7 @@ msgstr "Sélection des constellations une par une"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr "Enlever la sélection de constellations"
+msgstr "Retirer selection of constellations"
 
 #: src/core/modules/StarMgr.cpp:452 src/ui_viewDialog.h:2204
 #: src/ui_dsoColorsDialog.h:652
@@ -1340,7 +1340,7 @@ msgstr "Date et heure"
 
 #: src/core/StelCore.cpp:253 src/core/StelMovementMgr.cpp:194
 msgid "Movement and Selection"
-msgstr "Mouvement et Sélection"
+msgstr "Mouvement et sélection"
 
 #: src/core/StelCore.cpp:256
 msgid "Increase time speed"
@@ -3302,19 +3302,19 @@ msgstr "carte du ciel"
 
 #: src/gui/ScriptConsole.cpp:105
 msgid "Load Script"
-msgstr ""
+msgstr "Charger le script"
 
 #: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
 msgid "Script Files"
-msgstr ""
+msgstr "Fichiers de scripts"
 
 #: src/gui/ScriptConsole.cpp:125
 msgid "Save Script"
-msgstr ""
+msgstr "Enregistrer le script"
 
 #: src/gui/ScriptConsole.cpp:227
 msgid "Select Script Include Directory"
-msgstr ""
+msgstr "Sélectionner le dossier d'inclusion de scripts"
 
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
@@ -5098,8 +5098,8 @@ msgid "&Open"
 msgstr "Ouvrir"
 
 #: src/translations.h:446
-msgid "S&ave"
-msgstr ""
+msgid "&Save"
+msgstr "Enregi&strer"
 
 #: src/translations.h:447
 msgid "File &name:"

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-09-14 10:09+0700\n"
-"PO-Revision-Date: 2017-08-01 13:59+0000\n"
+"POT-Creation-Date: 2017-09-14 17:23+0700\n"
+"PO-Revision-Date: 2017-09-16 11:00+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-14 05:19+0000\n"
+"X-Launchpad-Export-Date: 2017-09-17 05:08+0000\n"
 "X-Generator: Launchpad (build 18449)\n"
 "Language: gd\n"
 
@@ -410,7 +410,7 @@ msgstr "Ùghdar"
 #: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:456
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -422,23 +422,23 @@ msgstr "Ionad"
 #: src/core/modules/LandscapeMgr.cpp:823
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "hPa"
 
 #: src/core/modules/LandscapeMgr.cpp:833
 msgid "extinction coefficient"
-msgstr ""
+msgstr "co-èifeachd a’ mhùchaidh"
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "Suidheachadh an àile"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "Light pollution"
-msgstr ""
+msgstr "Truailleadh solais"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "by Bortle scale"
-msgstr ""
+msgstr "a-rèir sgèile Bortle"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
@@ -452,7 +452,7 @@ msgstr "Meudachd"
 
 #: src/core/modules/Nebula.cpp:231
 msgid "Opacity"
-msgstr ""
+msgstr "Trìd-dhoilleireachd"
 
 #: src/core/modules/Nebula.cpp:234 src/core/modules/Planet.cpp:383
 #: src/core/modules/MinorPlanet.cpp:242 src/core/modules/Comet.cpp:176
@@ -461,17 +461,17 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "extincted to"
-msgstr ""
+msgstr "mùchte gu"
 
 #: src/core/modules/Nebula.cpp:239 src/core/modules/StarWrapper.cpp:234
 msgid "Photometric system"
-msgstr ""
+msgstr "Siostam tomhais-shoillse"
 
 #: src/core/modules/Nebula.cpp:244 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:216
 #: plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "Inneacs datha (B-V)"
 
 #: src/core/modules/Nebula.cpp:249
 msgid "Surface brightness"
@@ -485,20 +485,20 @@ msgstr "às dèidh a’ mhùchaidh"
 #: src/gui/AstroCalcDialog.cpp:506 src/gui/AstroCalcDialog.cpp:508
 msgctxt "magnitude"
 msgid "mag"
-msgstr ""
+msgstr "meud"
 
 #: src/core/modules/Nebula.cpp:260 src/gui/AstroCalcDialog.cpp:506
 #: src/gui/AstroCalcDialog.cpp:513 src/gui/AstroCalcDialog.cpp:589
 msgid "arcmin"
-msgstr ""
+msgstr "àrc-mhion"
 
 #: src/core/modules/Nebula.cpp:262 src/gui/AstroCalcDialog.cpp:508
 msgid "arcsec"
-msgstr ""
+msgstr "àrc-dhiog"
 
 #: src/core/modules/Nebula.cpp:276
 msgid "Contrast index"
-msgstr ""
+msgstr "Inneacs iomsgaraidh"
 
 #: src/core/modules/Nebula.cpp:285 src/core/modules/Nebula.cpp:288
 #: src/ui_configurationDialog.h:1356
@@ -507,7 +507,7 @@ msgstr "Meud"
 
 #: src/core/modules/Nebula.cpp:290
 msgid "Orientation angle"
-msgstr ""
+msgstr "Ceàrn na comhair"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
@@ -518,7 +518,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
 msgid "ly"
-msgstr ""
+msgstr "ly"
 
 #: src/core/modules/Nebula.cpp:315 src/core/modules/Nebula.cpp:350
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:302
@@ -533,31 +533,31 @@ msgstr "Astar"
 #: src/core/modules/Nebula.cpp:325 plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "distance"
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:334
 msgctxt "distance"
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:336
 msgctxt "distance"
 msgid "Mio. ly"
-msgstr ""
+msgstr "Mill. ly"
 
 #: src/core/modules/Nebula.cpp:364 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
-msgstr ""
+msgstr "Sioft deirg"
 
 #: src/core/modules/Nebula.cpp:375 src/core/modules/StarWrapper.cpp:255
 msgid "Parallax"
-msgstr ""
+msgstr "Paraileag"
 
 #: src/core/modules/Nebula.cpp:379
 msgid "Morphological description"
-msgstr ""
+msgstr "Tuairisgeul morf-eòlach"
 
 #: src/core/modules/Nebula.cpp:1085
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -5113,7 +5113,7 @@ msgid "&Open"
 msgstr "F&osgail"
 
 #: src/translations.h:446
-msgid "S&ave"
+msgid "&Save"
 msgstr ""
 
 #: src/translations.h:447
