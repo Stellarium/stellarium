@@ -571,45 +571,33 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		return;
 
     // Get latitude and longitude of planet or moon in equatorial J2000
-    Vec3d coord = planet->getJ2000EquatorialPos(core);
+    //Vec3d eqcoord = planet->getJ2000EquatorialPos(core);
     // Get latitude and longitude of planet or moon in ecliptic J2000
-    Vec3d eclipcoord = planet->getHeliocentricEclipticPos();
+    //Vec3d eclipcoord = planet->getHeliocentricEclipticPos();
     Vec3d srcPos;
     Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
-    Mat4d id, mat;
+    Mat4d id, mat1, mat2;
     
     // Calculate the radius of the planet. It is necessary to re-scale it
     double r = planet->getRadius() * planet->getSphereScale();
     
     // Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions. The case of longitude is special. We make that the center of the texture (picture of planet/moon) always be the origin of coordinates with planet->getRotationElements().offset
     double nlatitude = (latitude + 23.4372) * M_PI/180.0;
-    double nlongitude = (longitude + 23.4372 - planet->getRotationElements().offset)*M_PI/180.0;
+    double nlongitude = (longitude + 23.4372 - planet->getRotationElements().offset) * M_PI/180.0;
     
     // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
     XYZ[0] = r * cos(nlatitude) * cos(nlongitude);
     XYZ[1] = r * cos(nlatitude) * cos(nlongitude);
     XYZ[2] = r * sin(nlatitude);
     
-    // Coordinates of fetures in equatorial system. This is the traslation of the coordinates of feature in planetocentric system to the equatorial system by summing this coordinates and the Moon's equatorial coordinates
-    XYZ1 = XYZ + coord;
-    // Coordinates of features in VSOP87 system
-    XYZ2 = planet->getRotEquatorialToVsop87() * XYZ1;
-    //XYZ2 = planet->getRotEquatorialToVsop87().transpose() * XYZ1;
-    
-    // An affine transformation is composed by a traslation and a rotation. We have now to calculate the rotation
     // Identity matrix
-    id = Mat4d::identity();
-    mat = id * planet->getRotEquatorialToVsop87();
-    // Rotated coordinates of feature in VSOP87 system
-    //XYZ3 = mat * XYZ2; Vamos a hacer una prueba. Lo que tenemos que rotar son las coordenadas ecuatoriales de forma que resulten las coordenadas eclípticas teniendo en cuenta la rotación de la Luna
-    XYZ3 = mat * XYZ1;
-    //XYZ3 = mat.transpose() * XYZ2;
+    //id = Mat4d::identity();
     
-    XYZf = XYZ3 + XYZ2;
+    // Ecliptic coordinates of feature
+    XYZ1 = planet->getRotEquatorialToVsop87().transpose() * (planet->getJ2000EquatorialPos(core) + XYZ);
     
     
-
-	if (painter->getProjector()->projectCheck(XYZf, srcPos))
+	if (painter->getProjector()->projectCheck(XYZ1, srcPos))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
