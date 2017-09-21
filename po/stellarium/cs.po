@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-17 14:26+0700\n"
-"PO-Revision-Date: 2017-09-17 07:59+0000\n"
+"PO-Revision-Date: 2017-09-20 13:03+0000\n"
 "Last-Translator: Pavel Borecki <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-18 05:12+0000\n"
-"X-Generator: Launchpad (build 18449)\n"
+"X-Launchpad-Export-Date: 2017-09-21 05:08+0000\n"
+"X-Generator: Launchpad (build 18463)\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
@@ -15315,27 +15315,27 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Zobrazit koordináty kurzoru myši na obrazovce."
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
 msgid "The top center of the screen"
-msgstr ""
+msgstr "Nahoře uprostřed obrazovky"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:181
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "Ve středu horní pravé poloviny obrazovky"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "Pravý dolní roh obrazovky"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "Near mouse cursor"
-msgstr ""
+msgstr "Poblíž ukazatele myši"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
-msgstr ""
+msgstr "Uživatelem určená pozice"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
 msgid "Right ascension/Declination (J2000.0)"
@@ -15367,15 +15367,15 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:242
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Souřadnice uživatelem určené pozice:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:292
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Zobrazovat souřadnice při spuštění"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "Zobrazovat tlačítko zásuvného modulu na panelu"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Show IAU constellation code"
@@ -15383,7 +15383,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Show crossed lines under mouse cursor"
-msgstr ""
+msgstr "Zobrazovat křížící se čáry pod ukazatelem myši"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
@@ -15391,7 +15391,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 msgid "Coordinates:"
-msgstr ""
+msgstr "Souřadnice:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
 msgid "Place of the string:"
@@ -15399,11 +15399,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Coordinate X"
-msgstr ""
+msgstr "Vodorovná souřadnice"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Svislá souřadnice"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:267
 msgid "Scenery3d plugin loaded!"
@@ -15423,15 +15423,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:327
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Vyp/zap. stínování"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:328
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Vyp/zap. ladící informace"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 msgid "Toggle location text"
-msgstr ""
+msgstr "Vyp/zap. text o umístění"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:330
 msgid "Toggle torchlight"
@@ -15443,16 +15443,16 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:432
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "Načítání scény – chvíli strpení…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:434
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "Na scény „%1“"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:452
 msgid "Loading model..."
-msgstr ""
+msgstr "Načítání modelu…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:467
 msgid "Transforming model..."
@@ -15473,7 +15473,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:502
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Dokončování načítání…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:517
 msgid "Could not load scene, please check log for error messages!"
@@ -15481,7 +15481,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:521
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "Scéna úspěšně načtena."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:581
 msgid "Could not load scene info, please check log for error messages!"
@@ -15490,16 +15490,16 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:605
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Nedaří se nalézt identifikátor scény pro %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:650
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Nejprve je třeba načíst scénu!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:687
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Stínování jednotlivých obrazových bodů %1."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:687
 #: plugins/Scenery3d/src/Scenery3d.cpp:706
@@ -15518,11 +15518,11 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:706
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "Stíny %1."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:711
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Stínování vypnuto nebo neproveditelné."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:742
 #, qt-format
@@ -15540,11 +15540,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:892
 msgid "enabled"
-msgstr ""
+msgstr "zapnuto"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:892
 msgid "disabled"
-msgstr ""
+msgstr "vypnuto"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:965
 msgid "Cubemap size changed"
@@ -15566,7 +15566,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:1114
 msgid "3D Sceneries"
-msgstr ""
+msgstr "3D scenérie"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:1117
 msgid ""
@@ -15602,6 +15602,8 @@ msgstr ""
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Mapování stínu není na vašem hardware možné provézt – podrobnosti naleznete "
+"v záznamu událostí"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid ""
@@ -15647,7 +15649,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:256
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Způsobuje propad výkonu."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
@@ -15699,7 +15701,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid "Saves energy and may increase subjective application performance."
-msgstr ""
+msgstr "Šetří energii a může zvýšit subjektivně vnímaný výkon aplikace."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:269
 msgid ""
@@ -15748,15 +15750,15 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:164
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr ""
+msgstr "Souřadnice mřížky (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "3D scenérie"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Nastavit jako výchozí scénu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
@@ -15778,7 +15780,7 @@ msgstr ""
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Zobrazovat souřadnice mřížky (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
@@ -15790,11 +15792,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Stíny"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Jednoduché stíny"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
@@ -15810,15 +15812,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Kvalita filtrování:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Nízká"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
@@ -15826,7 +15828,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Vysoká (pomalé)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
@@ -15850,7 +15852,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Interval:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
@@ -15862,23 +15864,23 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Nastavení kvalita/výkon"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
-msgstr ""
+msgstr "Uložené pohledy"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
-msgstr ""
+msgstr "Načíst pohled"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Delete view"
-msgstr ""
+msgstr "Smazat pohled"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Add current view"
-msgstr ""
+msgstr "Přidat stávající pohled"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
@@ -15886,7 +15888,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
-msgstr ""
+msgstr "Název:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:58
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:223
@@ -15969,7 +15971,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1266
 msgid "Solstice"
-msgstr ""
+msgstr "obratník"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1269
 msgid "Crossquarter"
@@ -15994,11 +15996,11 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
-msgstr ""
+msgstr "Vybraný objekt"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1293
 msgid "error if you can read this"
-msgstr ""
+msgstr "pokud toto čtete došlo k chybě"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
 msgid "Mercury"
@@ -16161,7 +16163,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "Pro změnu barev je třeba opustit režim zobrazení na celou obrazovku!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
@@ -16178,15 +16180,15 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
-msgstr ""
+msgstr "Geografické umístění 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:544
 msgid "Geographic Location 2"
-msgstr ""
+msgstr "Geografické umístění 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:546
 msgid "Change color"
-msgstr ""
+msgstr "Změnit barvu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:549
 msgid "Minor Lunar Standstill lines"
@@ -16194,27 +16196,27 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Stávající planeta: žádná"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Stávající planeta: Merkur"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Stávající planeta: Venuše"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Stávající planeta: Mars"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Stávající planeta: Jupiter"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:557
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Stávající planeta: Saturn"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
 msgid "Declination of Nadir passage"
