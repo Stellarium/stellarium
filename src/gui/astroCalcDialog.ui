@@ -283,6 +283,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QPushButton" name="celestialPositionsSaveButton">
+              <property name="text">
+               <string>Save positions</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="celestialPositionsUpdateButton">
               <property name="text">
                <string>Update positions</string>
@@ -941,7 +948,7 @@
             <item>
              <widget class="QPushButton" name="saveObjectsButton">
               <property name="text">
-               <string>Save list of objects...</string>
+               <string>Save list of objects</string>
               </property>
              </widget>
             </item>

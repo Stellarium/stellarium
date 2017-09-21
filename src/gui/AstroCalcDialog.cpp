@@ -183,7 +183,8 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
-	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
+	connect(ui->celestialPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveCelestialPositions()));
+	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));	
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(populateCelestialCategoryList()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));	
 
@@ -733,6 +734,41 @@ void AstroCalcDialog::currentCelestialPositions()
 
 	// sort-by-name
 	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
+}
+
+void AstroCalcDialog::saveCelestialPositions()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save celestial positions of objects as..."), QDir::homePath() + "/positions.csv", filter);
+	QFile celPos(filePath);
+	if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream celPosList(&celPos);
+	celPosList.setCodec("UTF-8");
+
+	int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
+
+	celPosList << positionsHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < count; i++)
+	{
+		int columns = positionsHeader.size();
+		for (int j=0; j<columns; j++)
+		{
+			celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				celPosList << delimiter;
+			else
+				celPosList << acEndl;
+		}
+	}
+
+	celPos.close();
 }
 
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelIndex)
