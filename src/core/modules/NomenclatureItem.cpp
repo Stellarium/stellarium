@@ -571,7 +571,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		return;
     
     Vec3d srcPos;
-    Vec3d XYZ, XYZ1, XYZ2, XYZf;
+    Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
     
     // Calculate the radius of the planet. It is necessary to re-scale it
     double r = planet->getRadius() * planet->getSphereScale();
@@ -603,10 +603,73 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     if (a < dist)
     {
         // Identity matrix
-        //Mat4d id = Mat4d::identity();
-    
+        Mat4d id = Mat4d::identity();
+/****************************************************************/
+// OPTION 1
+        /* COMMENTS:
+         - planet->getRotEquatorialToVsop87() is a matrix Mat4d
+         - XYZ1: Cartesian coordinates of feature in VSOP87
+         
+         OTHER POSSIBILITIES:
+         - XYZ2 = id * planet->getRotEquatorialToVsop87() * XYZ;
+         - XYZf = XYZ1 + planet->getEclipticPos();
+         */
+        
+        XYZ1 = planet->getRotEquatorialToVsop87() * XYZ;
+        XYZ2 = planet->getEclipticPos() * XYZ1;
+        XYZf = XYZ1 + planet->getJ2000EquatorialPos(core);
+        
+/****************************************************************/
+
+/****************************************************************/
+// OPTION 2
+        /* COMMENTS:
+         - XYZ1: Coordinates of fetures in equatorial system. This is the traslation of the coordinates of feature in planetocentric system to the equatorial system by summing this coordinates and the Moon's equatorial coordinates
+         - XYZ2: Coordinates of features in VSOP87 system
+         - mat: it is the rotation matrix
+         - XYZ3: Rotated coordinates of feature in VSOP87 system
+         
+         OTHER POSSIBILITIES:
+         - XYZ2 = planet->getRotEquatorialToVsop87().transpose() * XYZ1;
+         - XYZ3 = mat.transpose() * XYZ2;
+         */
+        /*
+        XYZ1 = XYZ + planet->getJ2000EquatorialPos(core);
+        XYZ2 = planet->getRotEquatorialToVsop87() * XYZ1;
+        mat = id * planet->getRotEquatorialToVsop87();
+        XYZ3 = mat * XYZ1;
+        XYZf = XYZ3 + XYZ2;
+         */
+/****************************************************************/
+        
+/****************************************************************/
+// OPTION 3
+        /* COMMENTS:
+         - XYZ1: Ecliptic coordinates of features
+         - XYZ2: Coordinates of features in VSOP87 system
+         - mat: it is the rotation matrix
+         - XYZ3: Rotated coordinates of feature in VSOP87 system
+         
+         OTHER POSSIBILITIES:
+         - XYZ2 = planet->getRotEquatorialToVsop87().transpose() * XYZ1;
+         - XYZ3 = mat * XYZ2;
+         - XYZ3 = mat.transpose() * XYZ2;
+         */
+        /*
+        XYZ1 = XYZ + planet->getEclipticPos();
+        XYZ2 = Mat4d::translation(planet->getEclipticPos()) * XYZ;
+        double JD = getJDFromSystem();
+        axisRotation = planet->getSiderealTime(JD, JDE);
+        XYZ3 = Mat4d::zrotation(M_PI/180 * (axisRotation + 90.)) * XYZ1;
+        XYZf = XYZ3 + XYZ2;
+         */
+/****************************************************************/
+        
+/****************************************************************/
+// OPTION 4
         // Ecliptic coordinates of feature
-        XYZf = planet->getRotEquatorialToVsop87() * (planet->getJ2000EquatorialPos(core) + XYZ);
+        //XYZf = planet->getRotEquatorialToVsop87() * (planet->getJ2000EquatorialPos(core) + XYZ);
+/****************************************************************/
 
         if (painter->getProjector()->projectCheck(XYZf, srcPos))
         {
@@ -615,4 +678,6 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
             painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
         }
     }
+    else
+        return;
 }
