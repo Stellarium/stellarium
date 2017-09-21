@@ -163,6 +163,7 @@ private slots:
 	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
 	void selectWutObject();
+	void saveWutObjects();
 
 	void updateAstroCalcData();
 
