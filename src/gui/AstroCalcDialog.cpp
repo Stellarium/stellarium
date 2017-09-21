@@ -228,6 +228,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
 	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(ui->wutMatchingObjectsListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(selectWutObject()));
+	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
 
@@ -3251,4 +3252,28 @@ void AstroCalcDialog::selectWutObject()
 			}
 		}
 	}
+}
+
+void AstroCalcDialog::saveWutObjects()
+{
+	QString filter = q_("Text file");
+	filter.append(" (*.txt)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save list of objects as..."), QDir::homePath() + "/wut-objects.txt", filter);
+	QFile objlist(filePath);
+	if (!objlist.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream wutObjList(&objlist);
+	wutObjList.setCodec("UTF-8");
+
+	for(int row = 0; row < ui->wutMatchingObjectsListWidget->count(); ++row)
+	{
+		wutObjList << ui->wutMatchingObjectsListWidget->item(row)->text() << acEndl;
+	}
+
+	objlist.close();
 }
