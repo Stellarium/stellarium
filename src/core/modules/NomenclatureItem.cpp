@@ -569,38 +569,50 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// TODO: Later, size should be adjusted with planet screen size so that not too many labels are visible.
 	if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<120))
 		return;
-
-    // Get latitude and longitude of planet or moon in equatorial J2000
-    //Vec3d eqcoord = planet->getJ2000EquatorialPos(core);
-    // Get latitude and longitude of planet or moon in ecliptic J2000
-    //Vec3d eclipcoord = planet->getHeliocentricEclipticPos();
+    
     Vec3d srcPos;
-    Vec3d XYZ, XYZ1, XYZ2, XYZ3, XYZf;
-    Mat4d id, mat1, mat2;
+    Vec3d XYZ, XYZ1, XYZ2, XYZf;
     
     // Calculate the radius of the planet. It is necessary to re-scale it
     double r = planet->getRadius() * planet->getSphereScale();
     
     // Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions. The case of longitude is special. We make that the center of the texture (picture of planet/moon) always be the origin of coordinates with planet->getRotationElements().offset
-    double nlatitude = (latitude + 23.4372) * M_PI/180.0;
-    double nlongitude = (longitude + 23.4372 - planet->getRotationElements().offset) * M_PI/180.0;
+    double nlatitude = latitude * M_PI/180.0;
+    double nlongitude = (longitude - planet->getRotationElements().offset) * M_PI/180.0;
     
     // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
     XYZ[0] = r * cos(nlatitude) * cos(nlongitude);
-    XYZ[1] = r * cos(nlatitude) * cos(nlongitude);
+    XYZ[1] = r * cos(nlatitude) * sin(nlongitude);
     XYZ[2] = r * sin(nlatitude);
     
-    // Identity matrix
-    //id = Mat4d::identity();
+    // It is necessary to "turn off" the names whose features are on the opposite face of the planet
+    // Distance from the obserber to the center of the planet
+    Vec3d coord = planet->getJ2000EquatorialPos(core);
+    double dist = coord.length();
+    // Cartesian coordinates of the planet
+    XYZ1[0] = r * cos(coord.latitude()) * cos(coord.longitude());
+    XYZ1[1] = r * cos(coord.latitude()) * sin(coord.longitude());
+    XYZ1[2] = r * sin(coord.latitude());
+    // Distance from the feature to the observer
+    XYZ2[0] = XYZ[0] + XYZ1[0];
+    XYZ2[1] = XYZ[1] + XYZ1[1];
+    XYZ2[2] = XYZ[2] + XYZ1[2];
     
-    // Ecliptic coordinates of feature
-    XYZ1 = planet->getRotEquatorialToVsop87().transpose() * (planet->getJ2000EquatorialPos(core) + XYZ);
+    double a = XYZ2.length();
+    // If a is bigger than dist, then the feature is on the opposite face of the planet
+    if (a < dist)
+    {
+        // Identity matrix
+        //Mat4d id = Mat4d::identity();
     
-    
-	if (painter->getProjector()->projectCheck(XYZ1, srcPos))
-	{
-		painter->setColor(color[0], color[1], color[2], 1.0);
-		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-		painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
-	}
+        // Ecliptic coordinates of feature
+        XYZf = planet->getRotEquatorialToVsop87() * (planet->getJ2000EquatorialPos(core) + XYZ);
+
+        if (painter->getProjector()->projectCheck(XYZf, srcPos))
+        {
+            painter->setColor(color[0], color[1], color[2], 1.0);
+            painter->drawCircle(srcPos[0], srcPos[1], 2.f);
+            painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
+        }
+    }
 }
