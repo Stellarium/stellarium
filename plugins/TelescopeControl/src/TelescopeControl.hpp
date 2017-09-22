@@ -60,6 +60,19 @@ using namespace TelescopeControlGlobals;
 
 typedef QSharedPointer<TelescopeClient> TelescopeClientP;
 
+/*! @defgroup telescopeControl Telescope Control plug-in
+@{
+The Telescope Control plug-in allows Stellarium to control
+a telescope on a computerized mount (a "Go To" or "Push To"
+telescope) and offers a graphical user interface for
+setting up the connection.
+@}
+*/
+
+//! @class TelescopeControl
+//! @ingroup telescopeControl
+//! Main class of the Telescope Control plug-in.
+
 //! This class manages the controlling of one or more telescopes by one
 //! instance of the stellarium program. "Controlling a telescope"
 //! means receiving position information from the telescope
