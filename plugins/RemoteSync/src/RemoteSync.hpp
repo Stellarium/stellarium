@@ -33,9 +33,20 @@ class RemoteSyncDialog;
 
 Q_DECLARE_LOGGING_CATEGORY(remoteSync)
 
-//! Main class of the RemoteSync plug-in.
+/*! @defgroup remoteSync RemoteSync plug-in
+@{
+Provides state synchronization for multiple Stellarium instances
+running in a network. See manual for detailed description.
+
+@}
+*/
+
+//! @ingroup remoteSync
+//! Main class of the %RemoteSync plug-in.
 //! Provides a synchronization mechanism for multiple Stellarium instances in a network.
 //! This plugin has been developed during ESA SoCiS 2015/2016.
+//! @author Florian Schaukowitsch
+//! @author Georg Zotti
 class RemoteSync : public StelModule
 {
 	Q_OBJECT
