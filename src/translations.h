@@ -467,5 +467,8 @@ class Translations
 		N_("List View");
 		N_("Detail View");
 		N_("Recent Places");
+		N_("%1 already exists.\nDo you want to replace it?");
+		N_("&Yes");
+		N_("&No");
 	}
 };

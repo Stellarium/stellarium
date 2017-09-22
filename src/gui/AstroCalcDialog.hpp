@@ -116,6 +116,7 @@ protected:
 private slots:
 	void currentCelestialPositions();
 	void populateCelestialCategoryList();
+	void saveCelestialPositions();
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
@@ -163,6 +164,7 @@ private slots:
 	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
 	void selectWutObject();
+	void saveWutObjects();
 
 	void updateAstroCalcData();
 
