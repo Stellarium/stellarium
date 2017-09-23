@@ -44,10 +44,8 @@ QVariant StelJsonParser::parse(const QByteArray& aar)
 	QJsonParseError error;
 	QJsonDocument doc = QJsonDocument::fromJson(aar, &error);
 	if (error.error != QJsonParseError::NoError)
-	{
-		qDebug() << "ERROR parsing JSON data:" << error.errorString().toLatin1().constData();
-		return QVariant();
-		//throw std::runtime_error(error.errorString().toLatin1().constData());
+	{		
+		throw std::runtime_error(error.errorString().toLatin1().constData());
 	}
 	return doc.toVariant();
 }
