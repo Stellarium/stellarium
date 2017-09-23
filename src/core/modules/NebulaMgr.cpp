@@ -421,10 +421,12 @@ struct DrawNebulaFuncObject
 			return;
 
 		Nebula* n = static_cast<Nebula*>(obj);
-		float mag = qMin(n->vMag, n->bMag);
+		float mag = n->vMag;
+		if (mag>90.f)
+			mag = n->bMag;
 
 		StelSkyDrawer *drawer = core->getSkyDrawer();
-		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
+		// filter out DSOs which are too dim to be seen (e.g. for bino observers)		
 		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > drawer->getCustomNebulaMagnitudeLimit()))
 			return;
 
