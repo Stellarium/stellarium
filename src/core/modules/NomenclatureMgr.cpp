@@ -378,8 +378,6 @@ void NomenclatureMgr::draw(StelCore* core)
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("NomenclatureItem");
 	if (!newSelected.empty())
 	{
