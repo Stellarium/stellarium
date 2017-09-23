@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-09-11 04:52+0000\n"
+"PO-Revision-Date: 2017-09-22 10:39+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-22 05:12+0000\n"
+"X-Launchpad-Export-Date: 2017-09-23 05:11+0000\n"
 "X-Generator: Launchpad (build 18463)\n"
 "Language: bn\n"
 
@@ -3283,19 +3283,19 @@ msgstr "নক্ষত্রমন্ডলের নকশা"
 
 #: src/gui/ScriptConsole.cpp:105
 msgid "Load Script"
-msgstr ""
+msgstr "কার্যলিপি আমদানি করুন"
 
 #: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
 msgid "Script Files"
-msgstr ""
+msgstr "কার্যলিপি ফাইল"
 
 #: src/gui/ScriptConsole.cpp:125
 msgid "Save Script"
-msgstr ""
+msgstr "কার্যলিপি সঞ্চয় করুন"
 
 #: src/gui/ScriptConsole.cpp:227
 msgid "Select Script Include Directory"
-msgstr ""
+msgstr "কার্যলিপি সঞ্চয় ফোল্ডার বাছুন"
 
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
@@ -3857,7 +3857,7 @@ msgstr "CSV (কমা দ্বারা বিভাজিত)"
 
 #: src/gui/AstroCalcDialog.cpp:743
 msgid "Save celestial positions of objects as..."
-msgstr ""
+msgstr "জ্যোতিষ্কটির অবস্থান সঞ্চয় করুন ..."
 
 #: src/gui/AstroCalcDialog.cpp:828 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -4172,11 +4172,11 @@ msgstr "উজ্জ্বল নীহারিকা"
 
 #: src/gui/AstroCalcDialog.cpp:3295
 msgid "Text file"
-msgstr ""
+msgstr "টেক্ট ফাইল"
 
 #: src/gui/AstroCalcDialog.cpp:3297
 msgid "Save list of objects as..."
-msgstr ""
+msgstr "তালিকাটি পছন্দসই নামে সঞ্চয় করুন ..."
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5081,7 +5081,7 @@ msgstr "খুলু&ন"
 
 #: src/translations.h:446
 msgid "&Save"
-msgstr ""
+msgstr "&সঞ্চয় করুন"
 
 #: src/translations.h:447
 msgid "File &name:"
@@ -5150,31 +5150,31 @@ msgstr "কার্সারের অবস্থান : %1, %2 । বাত
 
 #: src/translations.h:463
 msgid "Back"
-msgstr ""
+msgstr "পূর্ববর্তী"
 
 #: src/translations.h:464
 msgid "Forward"
-msgstr ""
+msgstr "পরবর্তী"
 
 #: src/translations.h:465
 msgid "Parent Directory"
-msgstr ""
+msgstr "মূল ফোল্ডার"
 
 #: src/translations.h:466
 msgid "Create New Folder"
-msgstr ""
+msgstr "নতুন ফোল্ডার তৈরী করুন"
 
 #: src/translations.h:467
 msgid "List View"
-msgstr ""
+msgstr "তালিকা অনুসারে প্রদর্শন"
 
 #: src/translations.h:468
 msgid "Detail View"
-msgstr ""
+msgstr "বিশদে প্রদর্শন"
 
 #: src/translations.h:469
 msgid "Recent Places"
-msgstr ""
+msgstr "সাম্প্রতিক ব্যাবহার সমুহ"
 
 #: src/translations.h:470
 #, qt-format
@@ -5182,14 +5182,16 @@ msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
+"%1 টি বর্তমান আছে ।\n"
+"এটিকে মুছে নতুন যোগ করতে চান ?"
 
 #: src/translations.h:471
 msgid "&Yes"
-msgstr ""
+msgstr "ঠিক &আছে"
 
 #: src/translations.h:472
 msgid "&No"
-msgstr ""
+msgstr "বাতিল করু&ন"
 
 #: src/translations_countries.h:31
 msgid "Andorra"
@@ -8134,7 +8136,7 @@ msgstr "আজ রাতে কি কি দেখা যাবে"
 
 #: src/ui_astroCalcDialog.h:803
 msgid "Save positions"
-msgstr ""
+msgstr "অবস্থান সঞ্চয় করুন"
 
 #: src/ui_astroCalcDialog.h:804
 msgid "Update positions"
@@ -8269,7 +8271,7 @@ msgstr "জ্যোতিষ্ক সমূহ :"
 
 #: src/ui_astroCalcDialog.h:858
 msgid "Save list of objects"
-msgstr ""
+msgstr "তালিকাটি সঞ্চয় করুন"
 
 #: src/ui_astroCalcDialog.h:859
 msgid "Show objects which are up:"

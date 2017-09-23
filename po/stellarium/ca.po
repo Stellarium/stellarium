@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-09-17 21:01+0000\n"
+"PO-Revision-Date: 2017-09-22 17:17+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-22 05:13+0000\n"
+"X-Launchpad-Export-Date: 2017-09-23 05:12+0000\n"
 "X-Generator: Launchpad (build 18463)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -3869,7 +3869,7 @@ msgstr "CSV (Delimitat per comes)"
 
 #: src/gui/AstroCalcDialog.cpp:743
 msgid "Save celestial positions of objects as..."
-msgstr ""
+msgstr "Desa les posicions celestes dels objectes com ..."
 
 #: src/gui/AstroCalcDialog.cpp:828 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -4184,11 +4184,11 @@ msgstr "Nebuloses brillants"
 
 #: src/gui/AstroCalcDialog.cpp:3295
 msgid "Text file"
-msgstr ""
+msgstr "Fitxer de text"
 
 #: src/gui/AstroCalcDialog.cpp:3297
 msgid "Save list of objects as..."
-msgstr ""
+msgstr "Desa la llista d'objectes com ..."
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5206,14 +5206,16 @@ msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
+"%1 ja existeix.\n"
+"Voleu reemplaçar-lo?"
 
 #: src/translations.h:471
 msgid "&Yes"
-msgstr ""
+msgstr "&Sí"
 
 #: src/translations.h:472
 msgid "&No"
-msgstr ""
+msgstr "&No"
 
 #: src/translations_countries.h:31
 msgid "Andorra"
@@ -8176,7 +8178,7 @@ msgstr "Què Passa Aquesta Nit?"
 
 #: src/ui_astroCalcDialog.h:803
 msgid "Save positions"
-msgstr ""
+msgstr "Desa les posicions"
 
 #: src/ui_astroCalcDialog.h:804
 msgid "Update positions"
@@ -8313,7 +8315,7 @@ msgstr "Objectes coincidents:"
 
 #: src/ui_astroCalcDialog.h:858
 msgid "Save list of objects"
-msgstr ""
+msgstr "Desa la llista d'objectes"
 
 #: src/ui_astroCalcDialog.h:859
 msgid "Show objects which are up:"
