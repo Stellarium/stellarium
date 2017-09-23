@@ -764,11 +764,10 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 
 	if (networkReply->error() == QNetworkReply::NoError && networkReply->bytesAvailable()>0)
 	{
-		// success
-		QVariantMap locMap;
+		// success		 
 		try
 		{
-			locMap = StelJsonParser::parse(networkReply->readAll()).toMap();
+			QVariantMap locMap = StelJsonParser::parse(networkReply->readAll()).toMap();
 
 			QString ipRegion = locMap.value("region_name").toString();
 			QString ipCity = locMap.value("city").toString();
@@ -799,10 +798,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
 		}
-		catch (std::runtime_error& e)
+		catch (std::runtime_error)
 		{
-			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Details:" << e.what();
-			qDebug() << "Let's use Paris, France as default location...";
+			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Let's use Paris, France as default location...";
 			core->moveObserverTo(getLastResortLocation(), 0.0f, 0.0f); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
