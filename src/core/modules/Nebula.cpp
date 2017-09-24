@@ -528,16 +528,120 @@ float Nebula::getSurfaceArea(void) const
 		return M_PI*(majorAxisSize/2.f)*(minorAxisSize/2.f); // S = pi*a*b
 }
 
-void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
+Vec3f Nebula::getHintColor(void) const
+{
+	Vec3f color=circleColor;
+	switch (nType)
+	{
+		case NebGx:
+			color=galaxyColor;
+			break;
+		case NebIGx:
+			color=interactingGalaxyColor;
+			break;
+		case NebAGx:
+			color=activeGalaxyColor;
+			break;
+		case NebQSO:
+			color=quasarColor;
+			break;
+		case NebPossQSO:
+			color=possibleQuasarColor;
+			break;
+		case NebBLL:
+			color=blLacObjectColor;
+			break;
+		case NebBLA:
+			color=blazarColor;
+			break;
+		case NebRGx:
+			color=radioGalaxyColor;
+			break;
+		case NebOc:
+			color=openClusterColor;
+			break;
+		case NebSA:
+			color=stellarAssociationColor;
+			break;
+		case NebSC:
+			color=starCloudColor;
+			break;
+		case NebCl:
+			color=clusterColor;
+			break;
+		case NebGc:
+			color=globularClusterColor;
+			break;
+		case NebN:
+			color=nebulaColor;
+			break;
+		case NebHII:
+			color=hydrogenRegionColor;
+			break;
+		case NebMolCld:
+			color=molecularCloudColor;
+			break;
+		case NebYSO:
+			color=youngStellarObjectColor;
+			break;
+		case NebRn:
+			color=reflectionNebulaColor;
+			break;
+		case NebSNR:
+			color=supernovaRemnantColor;
+			break;
+		case NebBn:
+			color=bipolarNebulaColor;
+			break;
+		case NebEn:
+			color=emissionNebulaColor;
+			break;
+		case NebPn:
+			color=planetaryNebulaColor;
+			break;
+		case NebPossPN:
+			color=possiblePlanetaryNebulaColor;
+			break;
+		case NebPPN:
+			color=protoplanetaryNebulaColor;
+			break;
+		case NebDn:
+			color=darkNebulaColor;
+			break;
+		case NebCn:
+			color=clusterWithNebulosityColor;
+			break;
+		case NebEMO:
+			color=emissionObjectColor;
+			break;
+		case NebStar:
+			color=starColor;
+			break;
+		case NebSymbioticStar:
+			color=symbioticStarColor;
+			break;
+		case NebEmissionLineStar:
+			color=emissionLineStarColor;
+			break;
+		case NebSNC:
+			color=supernovaCandidateColor;
+			break;
+		case NebSNRC:
+			color=supernovaRemnantCandidateColor;
+			break;
+		case NebGxCl:
+			color=galaxyClusterColor;
+			break;
+		default:
+			color=circleColor;
+	}
+
+	return color;
+}
+
+float Nebula::getVisibilityLevelByMagnitude(void) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
-
-	size_t segments = outlineSegments.size();
-
-	Vec3d win;
-	// Check visibility of DSO hints
-	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
-		return;
 
 	float lim = qMin(vMag, bMag);
 	float mLim = 15.0f;
@@ -572,147 +676,16 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		}
 	}
 
-	// tune limits for outlines
-	float oLim = lim - 3.f;
+	return lim;
+}
 
-	Vec3f color=circleColor;
-	switch (nType)
-	{
-		case NebGx:
-			Nebula::texGalaxy->bind();
-			color=galaxyColor;
-			break;
-		case NebIGx:
-			Nebula::texGalaxy->bind();
-			color=interactingGalaxyColor;
-			break;
-		case NebAGx:
-			Nebula::texGalaxy->bind();
-			color=activeGalaxyColor;
-			break;
-		case NebQSO:
-			Nebula::texGalaxy->bind();
-			color=quasarColor;
-			break;
-		case NebPossQSO:
-			Nebula::texGalaxy->bind();
-			color=possibleQuasarColor;
-			break;
-		case NebBLL:
-			Nebula::texGalaxy->bind();
-			color=blLacObjectColor;
-			break;
-		case NebBLA:
-			Nebula::texGalaxy->bind();
-			color=blazarColor;
-			break;
-		case NebRGx:
-			Nebula::texGalaxy->bind();
-			color=radioGalaxyColor;
-			break;
-		case NebOc:
-			Nebula::texOpenCluster->bind();
-			color=openClusterColor;
-			break;
-		case NebSA:
-			Nebula::texOpenCluster->bind();
-			color=stellarAssociationColor;
-			break;
-		case NebSC:
-			Nebula::texOpenCluster->bind();
-			color=starCloudColor;
-			break;
-		case NebCl:
-			Nebula::texOpenCluster->bind();
-			color=clusterColor;
-			break;
-		case NebGc:
-			Nebula::texGlobularCluster->bind();
-			color=globularClusterColor;
-			break;
-		case NebN:
-			Nebula::texDiffuseNebula->bind();
-			color=nebulaColor;
-			break;
-		case NebHII:
-			Nebula::texDiffuseNebula->bind();
-			color=hydrogenRegionColor;
-			break;
-		case NebMolCld:
-			Nebula::texDiffuseNebula->bind();
-			color=molecularCloudColor;
-			break;
-		case NebYSO:
-			Nebula::texDiffuseNebula->bind();
-			color=youngStellarObjectColor;
-			break;
-		case NebRn:		
-			Nebula::texDiffuseNebula->bind();
-			color=reflectionNebulaColor;
-			break;
-		case NebSNR:
-			Nebula::texDiffuseNebula->bind();
-			color=supernovaRemnantColor;
-			break;
-		case NebBn:
-			Nebula::texDiffuseNebula->bind();
-			color=bipolarNebulaColor;
-			break;
-		case NebEn:
-			Nebula::texDiffuseNebula->bind();
-			color=emissionNebulaColor;
-			break;
-		case NebPn:
-			Nebula::texPlanetaryNebula->bind();
-			color=planetaryNebulaColor;
-			break;
-		case NebPossPN:
-			Nebula::texPlanetaryNebula->bind();
-			color=possiblePlanetaryNebulaColor;
-			break;
-		case NebPPN:
-			Nebula::texPlanetaryNebula->bind();
-			color=protoplanetaryNebulaColor;
-			break;
-		case NebDn:		
-			Nebula::texDarkNebula->bind();
-			color=darkNebulaColor;
-			break;
-		case NebCn:
-			Nebula::texOpenClusterWithNebulosity->bind();
-			color=clusterWithNebulosityColor;
-			break;
-		case NebEMO:
-			Nebula::texCircle->bind();
-			color=emissionObjectColor;
-			break;
-		case NebStar:
-			Nebula::texCircle->bind();
-			color=starColor;
-			break;
-		case NebSymbioticStar:
-			Nebula::texCircle->bind();
-			color=symbioticStarColor;
-			break;
-		case NebEmissionLineStar:
-			Nebula::texCircle->bind();
-			color=emissionLineStarColor;
-			break;
-		case NebSNC:
-			Nebula::texDiffuseNebula->bind();
-			color=supernovaCandidateColor;
-			break;
-		case NebSNRC:
-			Nebula::texDiffuseNebula->bind();
-			color=supernovaRemnantCandidateColor;
-			break;
-		case NebGxCl:
-			Nebula::texGalaxy->bind();
-			color=galaxyClusterColor;
-			break;
-		default:
-			Nebula::texCircle->bind();
-	}
+void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
+{
+	size_t segments = outlineSegments.size();
+	Vec3f color = getHintColor();
+
+	// tune limits for outlines
+	float oLim = getVisibilityLevelByMagnitude() - 3.f;
 
 	float lum = 1.f;
 	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
@@ -748,8 +721,130 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		sPainter.setLineSmooth(false);
 	}
 
-	if (lim>maxMagHints)
+}
+
+void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
+{
+	size_t segments = outlineSegments.size();
+	Vec3d win;
+	// Check visibility of DSO hints
+	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
+
+	if (getVisibilityLevelByMagnitude()>maxMagHints)
+		return;
+
+	Vec3f color = getHintColor();
+	switch (nType)
+	{
+		case NebGx:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebIGx:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebAGx:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebQSO:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebPossQSO:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebBLL:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebBLA:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebRGx:
+			Nebula::texGalaxy->bind();
+			break;
+		case NebOc:
+			Nebula::texOpenCluster->bind();
+			break;
+		case NebSA:
+			Nebula::texOpenCluster->bind();
+			break;
+		case NebSC:
+			Nebula::texOpenCluster->bind();
+			break;
+		case NebCl:
+			Nebula::texOpenCluster->bind();
+			break;
+		case NebGc:
+			Nebula::texGlobularCluster->bind();
+			break;
+		case NebN:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebHII:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebMolCld:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebYSO:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebRn:		
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebSNR:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebBn:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebEn:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebPn:
+			Nebula::texPlanetaryNebula->bind();
+			break;
+		case NebPossPN:
+			Nebula::texPlanetaryNebula->bind();
+			break;
+		case NebPPN:
+			Nebula::texPlanetaryNebula->bind();
+			break;
+		case NebDn:		
+			Nebula::texDarkNebula->bind();
+			break;
+		case NebCn:
+			Nebula::texOpenClusterWithNebulosity->bind();
+			break;
+		case NebEMO:
+			Nebula::texCircle->bind();
+			break;
+		case NebStar:
+			Nebula::texCircle->bind();
+			break;
+		case NebSymbioticStar:
+			Nebula::texCircle->bind();
+			break;
+		case NebEmissionLineStar:
+			Nebula::texCircle->bind();
+			break;
+		case NebSNC:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebSNRC:
+			Nebula::texDiffuseNebula->bind();
+			break;
+		case NebGxCl:
+			Nebula::texGalaxy->bind();
+			break;
+		default:
+			Nebula::texCircle->bind();
+	}
+
+	float lum = 1.f;
+	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
+	if (!objectInDisplayedType())
+		col = Vec3f(0.f,0.f,0.f);
+	sPainter.setColor(col[0], col[1], col[2], 1);
 
 	float size = 6.0f;
 	float scaledSize = 0.0f;
@@ -782,43 +877,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 {
-	StelCore* core = StelApp::getInstance().getCore();
-
 	Vec3d win;
 	// Check visibility of DSO labels
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
-	float lim = qMin(vMag, bMag);
-
-	if (surfaceBrightnessUsage)
-	{
-		lim = getSurfaceBrightness(core) - 3.f;
-		if (lim > 50) lim = 16.f;
-	}
-	else
-	{
-		float mag = getVMagnitude(core);
-
-		if (lim > 50) lim = 15.f;
-
-		// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-		if (nType==NebDn)
-		{
-			// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
-			// 9-(opac-5)-2*(angularSize-0.5)
-			if (majorAxisSize>0 && mag<50)
-				lim = 15.0f - mag - 2.0f*qMin(majorAxisSize, 2.5f);
-			else if (B_nb>0)
-				lim = 9.0f;
-			else
-				lim= 12.0f; // GZ I assume some LDN objects are rather elusive.
-		}
-		else if (nType==NebHII)
-			lim=9.0f;
-	}
-
-	if (lim>maxMagLabel)
+	if (getVisibilityLevelByMagnitude()>maxMagLabel)
 		return;
 
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);

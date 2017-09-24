@@ -46,6 +46,27 @@ class S3DScene;
 
 Q_DECLARE_LOGGING_CATEGORY(scenery3d)
 
+/*! @defgroup scenery3D 3D Sceneries plug-in
+@{
+3D foreground renderer. Walk around, find and avoid obstructions in
+your garden, find and demonstrate possible astronomical alignments
+in temples, see shadows on sundials etc.
+
+To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn.
+Movement speed is linked to field of view (i.e. zoom in for fine adjustments).
+You can even keep moving by releasing Ctrl before cursor key.
+
+Development of this plugin was in parts supported by the Austrian
+Science Fund (FWF) project ASTROSIM (P 21208-G19).
+More: http://astrosim.univie.ac.at/
+@}
+*/
+
+//! @class Scenery3d
+//! @ingroup scenery3D
+//! Main class of the 3D Sceneries plug-in.
+//! @authors Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch
+
 //! Main class of the module, inherits from StelModule.
 //! Manages initialization, provides an interface to change Scenery3d properties and handles user input
 class Scenery3d : public StelModule

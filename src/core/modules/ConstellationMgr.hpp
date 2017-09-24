@@ -91,7 +91,7 @@ class ConstellationMgr : public StelObjectModule
 		   READ getConstellationDisplayStyle
 		   WRITE setConstellationDisplayStyle
 		   NOTIFY constellationsDisplayStyleChanged)
-	Q_PROPERTY(float constellationLineThickness
+	Q_PROPERTY(int constellationLineThickness
 		   READ getConstellationLineThickness
 		   WRITE setConstellationLineThickness
 		   NOTIFY constellationLineThicknessChanged)
@@ -266,9 +266,9 @@ public slots:
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
-	void setConstellationLineThickness(const float thickness);
+	void setConstellationLineThickness(const int thickness);
 	//! Get the thickness of lines of the constellations
-	float getConstellationLineThickness() const { return constellationLineThickness; }
+	int getConstellationLineThickness() const { return constellationLineThickness; }
 
 signals:
 	void artDisplayedChanged(const bool displayed) const;
@@ -283,7 +283,7 @@ signals:
 	void namesColorChanged(const Vec3f & color) const;
 	void namesDisplayedChanged(const bool displayed) const;
 	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style) const;
-	void constellationLineThicknessChanged(float thickness) const;
+	void constellationLineThicknessChanged(int thickness) const;
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -392,7 +392,7 @@ private:
 	bool namesDisplayed;
 
 	// Store the thickness of lines of the constellations
-	float constellationLineThickness;
+	int constellationLineThickness;
 };
 
 #endif // _CONSTELLATIONMGR_HPP_

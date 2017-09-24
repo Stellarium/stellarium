@@ -183,7 +183,8 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
-	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
+	connect(ui->celestialPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveCelestialPositions()));
+	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));	
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(populateCelestialCategoryList()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));	
 
@@ -228,6 +229,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
 	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(ui->wutMatchingObjectsListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(selectWutObject()));
+	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
 
@@ -734,6 +736,41 @@ void AstroCalcDialog::currentCelestialPositions()
 	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
 }
 
+void AstroCalcDialog::saveCelestialPositions()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save celestial positions of objects as..."), QDir::homePath() + "/positions.csv", filter);
+	QFile celPos(filePath);
+	if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream celPosList(&celPos);
+	celPosList.setCodec("UTF-8");
+
+	int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
+
+	celPosList << positionsHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < count; i++)
+	{
+		int columns = positionsHeader.size();
+		for (int j=0; j<columns; j++)
+		{
+			celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				celPosList << delimiter;
+			else
+				celPosList << acEndl;
+		}
+	}
+
+	celPos.close();
+}
+
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelIndex)
 {
 	// Find the object
@@ -930,37 +967,7 @@ void AstroCalcDialog::generateEphemeris()
 			break;
 		case 23:
 			currentStep = 60 * siderealDay;
-			break;
-		case 24:
-			currentStep = 10 * (solarDay/1440.0);
-			break;
-		case 25:
-			currentStep = 30 * (solarDay/1440.0);
-			break;
-		case 26:
-			currentStep = solarDay/24.0;
-			break;
-		case 27:
-			currentStep = solarDay/4.0;
-			break;
-		case 28:
-			currentStep = solarDay/2.0;
-			break;
-		case 29:
-			currentStep = 10 * (siderealDay/1440.0);
-			break;
-		case 30:
-			currentStep = 30 * (siderealDay/1440.0);
-			break;
-		case 31:
-			currentStep = siderealDay/24.0;
-			break;
-		case 32:
-			currentStep = siderealDay/4.0;
-			break;
-		case 33:
-			currentStep = siderealDay/2.0;
-			break;
+			break;		
 		default:
 			currentStep = solarDay;
 			break;
@@ -1192,27 +1199,11 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	QVariant selectedStepId = steps->itemData(index);
 
 	steps->clear();
-	steps->addItem(q_("10 Julian minutes"), "1");
-	steps->addItem(q_("30 Julian minutes"), "2");
-	steps->addItem(q_("1 Julian hour"), "3");
-	steps->addItem(q_("6 Julian hours"), "4");
-	steps->addItem(q_("12 Julian hours"), "5");
-	steps->addItem(q_("10 solar minutes"), "24");
-	steps->addItem(q_("30 solar minutes"), "25");
-	steps->addItem(q_("1 solar hour"), "26");
-	steps->addItem(q_("6 solar hours"), "27");
-	steps->addItem(q_("12 solar hours"), "28");
-	steps->addItem(q_("10 sidereal minutes"), "29");
-	steps->addItem(q_("30 sidereal minutes"), "30");
-	steps->addItem(q_("1 sidereal hour"), "31");
-	steps->addItem(q_("6 sidereal hours"), "32");
-	steps->addItem(q_("12 sidereal hours"), "33");
-	steps->addItem(q_("1 Julian day"), "12");
-	steps->addItem(q_("5 Julian days"), "13");
-	steps->addItem(q_("10 Julian days"), "14");
-	steps->addItem(q_("15 Julian days"), "15");
-	steps->addItem(q_("30 Julian days"), "16");
-	steps->addItem(q_("60 Julian days"), "17");
+	steps->addItem(q_("10 minutes"), "1");
+	steps->addItem(q_("30 minutes"), "2");
+	steps->addItem(q_("1 hour"), "3");
+	steps->addItem(q_("6 hours"), "4");
+	steps->addItem(q_("12 hours"), "5");
 	steps->addItem(q_("1 solar day"), "6");
 	steps->addItem(q_("5 solar days"), "7");
 	steps->addItem(q_("10 solar days"), "8");
@@ -1225,6 +1216,12 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("15 sidereal days"), "21");
 	steps->addItem(q_("30 sidereal days"), "22");
 	steps->addItem(q_("60 sidereal days"), "23");
+	steps->addItem(q_("1 Julian day"), "12");
+	steps->addItem(q_("5 Julian days"), "13");
+	steps->addItem(q_("10 Julian days"), "14");
+	steps->addItem(q_("15 Julian days"), "15");
+	steps->addItem(q_("30 Julian days"), "16");
+	steps->addItem(q_("60 Julian days"), "17");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -3291,4 +3288,28 @@ void AstroCalcDialog::selectWutObject()
 			}
 		}
 	}
+}
+
+void AstroCalcDialog::saveWutObjects()
+{
+	QString filter = q_("Text file");
+	filter.append(" (*.txt)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save list of objects as..."), QDir::homePath() + "/wut-objects.txt", filter);
+	QFile objlist(filePath);
+	if (!objlist.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream wutObjList(&objlist);
+	wutObjList.setCodec("UTF-8");
+
+	for(int row = 0; row < ui->wutMatchingObjectsListWidget->count(); ++row)
+	{
+		wutObjList << ui->wutMatchingObjectsListWidget->item(row)->text() << acEndl;
+	}
+
+	objlist.close();
 }

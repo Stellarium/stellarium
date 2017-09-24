@@ -53,8 +53,8 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
 	, rayHelpersDisplayed(false)
 	, namesDisplayed(false)
 	, hasAsterism(false)
-	, asterismLineThickness(1.)
-	, rayHelperThickness(1.0)
+	, asterismLineThickness(1)
+	, rayHelperThickness(1)
 {
 	setObjectName("AsterismMgr");
 	Q_ASSERT(hipStarMgr);
@@ -80,8 +80,8 @@ void AsterismMgr::init()
 	setFlagLines(conf->value("viewing/flag_asterism_drawing").toBool());
 	setFlagRayHelpers(conf->value("viewing/flag_rayhelper_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_asterism_name").toBool());
-	setAsterismLineThickness(conf->value("viewing/asterism_line_thickness", 1.f).toFloat());
-	setRayHelperThickness(conf->value("viewing/rayhelper_line_thickness", 1.f).toFloat());
+	setAsterismLineThickness(conf->value("viewing/asterism_line_thickness", 1).toInt());
+	setRayHelperThickness(conf->value("viewing/rayhelper_line_thickness", 1).toInt());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -199,25 +199,25 @@ float AsterismMgr::getFontSize() const
 	return asterFont.pixelSize();
 }
 
-void AsterismMgr::setAsterismLineThickness(const float thickness)
+void AsterismMgr::setAsterismLineThickness(const int thickness)
 {
 	if(thickness!=asterismLineThickness)
 	{
 		asterismLineThickness = thickness;
-		if (asterismLineThickness<=0.f) // The line can not be negative or zero thickness
-			asterismLineThickness = 1.f;
+		if (asterismLineThickness<=0) // The line can not be negative or zero thickness
+			asterismLineThickness = 1;
 
 		emit asterismLineThicknessChanged(thickness);
 	}
 }
 
-void AsterismMgr::setRayHelperThickness(const float thickness)
+void AsterismMgr::setRayHelperThickness(const int thickness)
 {
 	if(thickness!=rayHelperThickness)
 	{
 		rayHelperThickness = thickness;
-		if (rayHelperThickness<=0.f) // The line can not be negative or zero thickness
-			rayHelperThickness = 1.f;
+		if (rayHelperThickness<=0) // The line can not be negative or zero thickness
+			rayHelperThickness = 1;
 
 		emit rayHelperThicknessChanged(thickness);
 	}
@@ -282,7 +282,7 @@ void AsterismMgr::loadLines(const QString &fileName)
 	// Set current states
 	setFlagLines(linesDisplayed);
 	setFlagLabels(namesDisplayed);
-	setFlagLabels(rayHelpersDisplayed);
+	setFlagRayHelpers(rayHelpersDisplayed);
 }
 
 void AsterismMgr::draw(StelCore* core)
@@ -302,7 +302,7 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 		return;
 
 	sPainter.setBlending(true);
-	if (asterismLineThickness>1.f)
+	if (asterismLineThickness>1)
 		sPainter.setLineWidth(asterismLineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
@@ -313,8 +313,8 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 		if ((*iter)->isAsterism())
 			(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (asterismLineThickness>1.f)
-		sPainter.setLineWidth(1.f); // restore line thickness
+	if (asterismLineThickness>1)
+		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
 
@@ -325,7 +325,7 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 		return;
 
 	sPainter.setBlending(true);
-	if (rayHelperThickness>1.f)
+	if (rayHelperThickness>1)
 		sPainter.setLineWidth(rayHelperThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
@@ -336,8 +336,8 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 		if (!(*iter)->isAsterism())
 			(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (rayHelperThickness>1.f)
-		sPainter.setLineWidth(1.f); // restore line thickness
+	if (rayHelperThickness>1)
+		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
 

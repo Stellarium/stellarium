@@ -2075,11 +2075,6 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 	N_("observatory");
 	
-	/* For copy/paste:
-	// TRANSLATORS: Satellite group: 
-	N_("");
-	*/
-	
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
 	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
@@ -2105,7 +2100,7 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 	N_("INTEGRAL");
 	// TRANSLATORS: China's first space station name
-	N_("TIANGONG 1");	
+	N_("TIANGONG 1");
 
 #endif
 }
