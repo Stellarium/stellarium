@@ -753,11 +753,24 @@ void AstroCalcDialog::saveCelestialPositions()
 	celPosList.setCodec("UTF-8");
 
 	int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
+	int columns = positionsHeader.size();
 
-	celPosList << positionsHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < columns; i++)
+	{
+		QString h = positionsHeader.at(i).trimmed();
+		if (h.contains(","))
+			celPosList << QString("\"%1\"").arg(h);
+		else
+			celPosList << h;
+
+		if (i<columns-1)
+			celPosList << delimiter;
+		else
+			celPosList << acEndl;
+	}
+
 	for (int i = 0; i < count; i++)
 	{
-		int columns = positionsHeader.size();
 		for (int j=0; j<columns; j++)
 		{
 			celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
@@ -1091,11 +1104,24 @@ void AstroCalcDialog::saveEphemeris()
 	ephemList.setCodec("UTF-8");
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
+	int columns = ephemerisHeader.size();
 
-	ephemList << ephemerisHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < columns; i++)
+	{
+		QString h = ephemerisHeader.at(i).trimmed();
+		if (h.contains(","))
+			ephemList << QString("\"%1\"").arg(h);
+		else
+			ephemList << h;
+
+		if (i<columns-1)
+			ephemList << delimiter;
+		else
+			ephemList << acEndl;
+	}
+
 	for (int i = 0; i < count; i++)
 	{
-		int columns = ephemerisHeader.size();
 		for (int j=0; j<columns; j++)
 		{
 			ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
@@ -2201,11 +2227,25 @@ void AstroCalcDialog::savePhenomena()
 	phenomenaList.setCodec("UTF-8");
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
+	int columns = phenomenaHeader.size();
 
-	phenomenaList << phenomenaHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < columns; i++)
+	{
+		QString h = phenomenaHeader.at(i).trimmed();
+		if (h.contains(","))
+			phenomenaList << QString("\"%1\"").arg(h);
+		else
+			phenomenaList << h;
+
+		if (i<columns-1)
+			phenomenaList << delimiter;
+		else
+			phenomenaList << acEndl;
+	}
+
 	for (int i = 0; i < count; i++)
 	{
-		int columns = phenomenaHeader.size();
+
 		for (int j=0; j<columns; j++)
 		{
 			phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
