@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-09-21 17:19+0000\n"
-"Last-Translator: xemard.nicolas <Unknown>\n"
+"PO-Revision-Date: 2017-09-23 20:37+0000\n"
+"Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-23 05:14+0000\n"
+"X-Launchpad-Export-Date: 2017-09-24 05:11+0000\n"
 "X-Generator: Launchpad (build 18463)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -814,36 +814,36 @@ msgstr "luminosité non documentée"
 #: src/core/modules/Nebula.cpp:1388
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr ""
+msgstr "rémanent avec structure radio en coquille"
 
 #: src/core/modules/Nebula.cpp:1391
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
+msgstr "rémanent avec structure radio pleine (plérion)"
 
 #: src/core/modules/Nebula.cpp:1394
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr ""
+msgstr "rémanent avec structure radio composite"
 
 #: src/core/modules/Nebula.cpp:1397
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
-msgstr ""
+msgstr "rémanent avec structure radio incertaine"
 
 #: src/core/modules/Nebula.cpp:1400
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
-msgstr ""
+msgstr "rémanent avec structure radio pleine (plérion), avec incertitude"
 
 #: src/core/modules/Nebula.cpp:1403
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
-msgstr ""
+msgstr "rémanent avec structure radio composite, avec incertitude"
 
 #: src/core/modules/Nebula.cpp:1416
 msgid "galaxy"
@@ -3803,12 +3803,12 @@ msgstr "Le catalogue Strasbourg-ESO Catalog of Galactic Planetary Nebulae"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:432 src/translations.h:197
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "Catalogue de rémanents de supernovas galactiques"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:434 src/translations.h:199
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr ""
+msgstr "Catalogue d'amas riches de galaxies"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:435 src/translations.h:201
@@ -3875,7 +3875,7 @@ msgstr "CSV (séparateur virgule)"
 
 #: src/gui/AstroCalcDialog.cpp:743
 msgid "Save celestial positions of objects as..."
-msgstr ""
+msgstr "Enregistrer les positions des objets sous..."
 
 #: src/gui/AstroCalcDialog.cpp:828 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -6786,11 +6786,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2500
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr "Un catalogue de restes de supernovas Galactiques"
+msgstr "Catalogue de rémanents de supernovas galactiques de Green, 2014"
 
 #: src/ui_viewDialog.h:2503
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
-msgstr ""
+msgstr "Catalogue d'amas riches de galaxies de Abell+, 1989"
 
 #: src/ui_viewDialog.h:2505
 msgid "Filter by type"

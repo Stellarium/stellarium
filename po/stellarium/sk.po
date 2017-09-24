@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-06-12 09:25+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
+"PO-Revision-Date: 2017-09-23 20:22+0000\n"
+"Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-23 05:24+0000\n"
+"X-Launchpad-Export-Date: 2017-09-24 05:11+0000\n"
 "X-Generator: Launchpad (build 18463)\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
-msgstr ""
+msgstr "vlastný objekt"
 
 #: src/core/modules/CustomObject.cpp:80
 msgid "custom marker"
-msgstr ""
+msgstr "vlastná značka"
 
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:221
@@ -43,11 +43,11 @@ msgstr "Typ"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
-msgstr ""
+msgstr "Značka"
 
 #: src/core/modules/Asterism.cpp:221
 msgid "asterism"
-msgstr "asterizm"
+msgstr "asterizmus"
 
 #: src/core/modules/AsterismMgr.cpp:98
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:451
@@ -62,19 +62,19 @@ msgstr "Možnosti zobrazenia"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Asterism lines"
-msgstr ""
+msgstr "Spojnice asterizmov"
 
 #: src/core/modules/AsterismMgr.cpp:100
 msgid "Asterism labels"
-msgstr ""
+msgstr "Značky asterizmov"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Ray helpers"
-msgstr ""
+msgstr "Lúčové pomôcky"
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
-msgstr "Súhvezdie"
+msgstr "súhvezdie"
 
 #: src/core/modules/ConstellationMgr.cpp:144
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
@@ -101,7 +101,7 @@ msgstr "Vybrať jediné súhvezdie"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "Odobrať výber súhvezdí"
 
 #: src/core/modules/StarMgr.cpp:452 src/ui_viewDialog.h:2364
 #: src/ui_dsoColorsDialog.h:652
@@ -174,12 +174,12 @@ msgstr "Cirkumpolárny kruh"
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:892 src/core/modules/GridLinesMgr.cpp:901
 msgid "NCP"
-msgstr ""
+msgstr "sev. neb. pól"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:894 src/core/modules/GridLinesMgr.cpp:903
 msgid "SCP"
-msgstr ""
+msgstr "juž. neb. pól"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:910
@@ -191,41 +191,41 @@ msgstr "Z"
 #: src/core/modules/GridLinesMgr.cpp:912
 msgctxt "nadir"
 msgid "Z'"
-msgstr ""
+msgstr "Z'"
 
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:919 src/core/modules/GridLinesMgr.cpp:928
 msgid "NEP"
-msgstr ""
+msgstr "sev. ekl. pól"
 
 #. TRANSLATORS: South Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:921 src/core/modules/GridLinesMgr.cpp:930
 msgid "SEP"
-msgstr ""
+msgstr "juž. ekl. pól"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:937
 msgid "NGP"
-msgstr ""
+msgstr "sev. gal. pól"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:939
 msgid "SGP"
-msgstr ""
+msgstr "juž. gal. pól"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:946
 msgid "NSGP"
-msgstr ""
+msgstr "sev. supergal. pól"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:948
 msgid "SSGP"
-msgstr ""
+msgstr "juž. supergal. pól"
 
 #: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
-msgstr ""
+msgstr "Mriežky a čiary"
 
 #: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
@@ -289,7 +289,7 @@ msgstr "Galaktický rovník"
 
 #: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2704
 msgid "Supergalactic grid"
-msgstr ""
+msgstr "Supergalaktická mriežka"
 
 #: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2593
 msgid "Supergalactic equator"
@@ -342,7 +342,7 @@ msgstr "Supergalaktické póly"
 
 #: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
-msgstr ""
+msgstr "Body rovnodennosti J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
@@ -350,11 +350,11 @@ msgstr "Body rovnodenností"
 
 #: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
-msgstr ""
+msgstr "Body slnovratu J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
-msgstr ""
+msgstr "Body slnovratu"
 
 #: src/core/modules/LandscapeMgr.cpp:423
 msgid "Atmosphere"
@@ -375,11 +375,11 @@ msgstr "Terén"
 
 #: src/core/modules/LandscapeMgr.cpp:427
 msgid "Landscape illumination"
-msgstr ""
+msgstr "Osvetlenie terénu"
 
 #: src/core/modules/LandscapeMgr.cpp:428
 msgid "Landscape labels"
-msgstr ""
+msgstr "Popisky terénu"
 
 #: src/core/modules/LandscapeMgr.cpp:429 src/ui_viewDialog.h:2384
 msgid "Light pollution data from locations database"
@@ -409,7 +409,7 @@ msgstr "Autor"
 #: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:472
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -421,23 +421,23 @@ msgstr "Zemepisná poloha"
 #: src/core/modules/LandscapeMgr.cpp:823
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "hPa"
 
 #: src/core/modules/LandscapeMgr.cpp:833
 msgid "extinction coefficient"
-msgstr ""
+msgstr "faktor extinkcie"
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
-msgstr ""
+msgstr "atmosférické podmienky"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "Light pollution"
-msgstr ""
+msgstr "svetelný smog"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "by Bortle scale"
-msgstr ""
+msgstr "podľa Bortlovej stupnice"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
@@ -451,7 +451,7 @@ msgstr "Magnitúda"
 
 #: src/core/modules/Nebula.cpp:231
 msgid "Opacity"
-msgstr ""
+msgstr "Priehľadnosť"
 
 #: src/core/modules/Nebula.cpp:234 src/core/modules/Planet.cpp:383
 #: src/core/modules/MinorPlanet.cpp:242 src/core/modules/Comet.cpp:176
@@ -460,44 +460,44 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
 msgid "extincted to"
-msgstr ""
+msgstr "po extinkcii"
 
 #: src/core/modules/Nebula.cpp:239 src/core/modules/StarWrapper.cpp:234
 msgid "Photometric system"
-msgstr ""
+msgstr "Fotometrický systém"
 
 #: src/core/modules/Nebula.cpp:244 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:216
 #: plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "Farebný index (B-V)"
 
 #: src/core/modules/Nebula.cpp:249
 msgid "Surface brightness"
-msgstr ""
+msgstr "Povrchový jas"
 
 #: src/core/modules/Nebula.cpp:250
 msgid "after extinction"
-msgstr ""
+msgstr "po extinkcii"
 
 #: src/core/modules/Nebula.cpp:260 src/core/modules/Nebula.cpp:262
 #: src/gui/AstroCalcDialog.cpp:508 src/gui/AstroCalcDialog.cpp:510
 msgctxt "magnitude"
 msgid "mag"
-msgstr ""
+msgstr "mag"
 
 #: src/core/modules/Nebula.cpp:260 src/gui/AstroCalcDialog.cpp:508
 #: src/gui/AstroCalcDialog.cpp:515 src/gui/AstroCalcDialog.cpp:591
 msgid "arcmin"
-msgstr ""
+msgstr "uhl. min."
 
 #: src/core/modules/Nebula.cpp:262 src/gui/AstroCalcDialog.cpp:510
 msgid "arcsec"
-msgstr ""
+msgstr "uhl. sek."
 
 #: src/core/modules/Nebula.cpp:276
 msgid "Contrast index"
-msgstr ""
+msgstr "index kontrastu"
 
 #: src/core/modules/Nebula.cpp:285 src/core/modules/Nebula.cpp:288
 #: src/ui_configurationDialog.h:1356
@@ -506,7 +506,7 @@ msgstr "Veľkosť"
 
 #: src/core/modules/Nebula.cpp:290
 msgid "Orientation angle"
-msgstr ""
+msgstr "Orientačný uhol"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
@@ -517,7 +517,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
 msgid "ly"
-msgstr ""
+msgstr "sv.r."
 
 #: src/core/modules/Nebula.cpp:315 src/core/modules/Nebula.cpp:350
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:302
@@ -532,31 +532,31 @@ msgstr "Vzdialenosť"
 #: src/core/modules/Nebula.cpp:325 plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "distance"
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:334
 msgctxt "distance"
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:336
 msgctxt "distance"
 msgid "Mio. ly"
-msgstr ""
+msgstr "mil. sv.r."
 
 #: src/core/modules/Nebula.cpp:364 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
-msgstr ""
+msgstr "Červený posun"
 
 #: src/core/modules/Nebula.cpp:375 src/core/modules/StarWrapper.cpp:255
 msgid "Parallax"
-msgstr ""
+msgstr "Paralaxa"
 
 #: src/core/modules/Nebula.cpp:379
 msgid "Morphological description"
-msgstr ""
+msgstr "Morfologický opis"
 
 #: src/core/modules/Nebula.cpp:1149
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -804,7 +804,7 @@ msgstr "neuvedená jasnosť"
 #: src/core/modules/Nebula.cpp:1388
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr ""
+msgstr "pozostatok vykazuje rádiovú štruktúru obálky"
 
 #: src/core/modules/Nebula.cpp:1391
 msgctxt "supernova remnant structure classification"
@@ -905,11 +905,11 @@ msgstr "zvyšky supernovy"
 
 #: src/core/modules/Nebula.cpp:1467
 msgid "supernova candidate"
-msgstr ""
+msgstr "kandidát na supernovu"
 
 #: src/core/modules/Nebula.cpp:1470
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "kandidát na zvyšok po supernove"
 
 #: src/core/modules/Nebula.cpp:1473
 msgid "stellar association"
