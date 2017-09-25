@@ -582,7 +582,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     if (p=="Moon")
         double nlongitude = (45.0 + longitude - planet->getRotationElements().offset + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
     else*/
-        double nlongitude = (132.0 + longitude - planet->getRotationElements().offset + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
+        //double nlongitude = (132.0 + longitude - planet->getRotationElements().offset + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
+    double nlongitude = (longitude + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
 
 	// The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
 	XYZ0[0] = r * cos(nlatitude) * cos(nlongitude);
