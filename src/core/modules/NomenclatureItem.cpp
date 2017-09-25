@@ -607,22 +607,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// If a is bigger than dist, then the feature is on the opposite face of the planet
 	if (a < dist)
 	{
-		// Identity matrix
-		//Mat4d id = Mat4d::identity();
-        
-		/* COMMENTS:
-	 - planet->getRotEquatorialToVsop87() is a matrix Mat4d
-	 - XYZ1: Cartesian coordinates of feature in VSOP87
-
-	 OTHER POSSIBILITIES:
-	 - XYZ2 = id * planet->getRotEquatorialToVsop87() * XYZ;
-	 - XYZf = XYZ1 + planet->getEclipticPos();
-	 */
-
-		//XYZ1 = planet->getRotEquatorialToVsop87() * XYZ0;
-		//XYZ2 = planet->getEclipticPos() * XYZ1;
-		//XYZf = XYZ1 + planet->getJ2000EquatorialPos(core);
-
+        /* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
+        planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
 		XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
 
 		if (painter->getProjector()->projectCheck(XYZ, srcPos))
