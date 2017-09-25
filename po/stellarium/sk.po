@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-09-23 20:22+0000\n"
+"PO-Revision-Date: 2017-09-24 21:15+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-24 05:11+0000\n"
+"X-Launchpad-Export-Date: 2017-09-25 05:08+0000\n"
 "X-Generator: Launchpad (build 18463)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -809,17 +809,17 @@ msgstr "pozostatok vykazuje rádiovú štruktúru obálky"
 #: src/core/modules/Nebula.cpp:1391
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
+msgstr "zvyšok vykazuje rádiovú štruktúru s vyplneným stredom (plerion)"
 
 #: src/core/modules/Nebula.cpp:1394
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr ""
+msgstr "zvyšok vykazuje kompozitnú (alebo kombinovanú) rádiovú štruktúru"
 
 #: src/core/modules/Nebula.cpp:1397
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
-msgstr ""
+msgstr "zvyšok vykazuje neistú rádiovú štruktúru"
 
 #: src/core/modules/Nebula.cpp:1400
 msgctxt "supernova remnant structure classification"
@@ -827,6 +827,7 @@ msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
+"zvyšok vykazuje neistú rádiovú štruktúru s vyplneným stredom (plerion)"
 
 #: src/core/modules/Nebula.cpp:1403
 msgctxt "supernova remnant structure classification"
@@ -834,6 +835,7 @@ msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
+"zvyšok vykazuje neistú kompozitnú (alebo kombinovanú) rádiovú štruktúru"
 
 #: src/core/modules/Nebula.cpp:1416
 msgid "galaxy"
@@ -964,15 +966,15 @@ msgstr "hviezda"
 
 #: src/core/modules/Nebula.cpp:1509
 msgid "symbiotic star"
-msgstr ""
+msgstr "symbiotická hviezda"
 
 #: src/core/modules/Nebula.cpp:1512
 msgid "emission-line star"
-msgstr ""
+msgstr "hviezda s emisnými čiarami"
 
 #: src/core/modules/Nebula.cpp:1515
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "kopa galaxií"
 
 #: src/core/modules/Nebula.cpp:1518
 msgid "object of unknown nature"
@@ -994,11 +996,11 @@ msgstr "Prepnúť filter druhov objektov"
 #: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "Absolútna magnitúda"
 
 #: src/core/modules/Planet.cpp:392
 msgid "Mean Opposition Magnitude"
-msgstr ""
+msgstr "Stredná jasnosť v opozícii"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:271
@@ -1008,7 +1010,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "AU"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/Planet.cpp:417 src/core/modules/MinorPlanet.cpp:273
@@ -1018,7 +1020,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:324
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -1026,43 +1028,43 @@ msgstr ""
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
-msgstr ""
+msgstr "mil. km"
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
-msgstr ""
+msgstr "Vzdialenosť od Slnka"
 
 #: src/core/modules/Planet.cpp:470
 msgid "with rings"
-msgstr ""
+msgstr "s prstencami"
 
 #: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:323
 msgid "scaled up to"
-msgstr ""
+msgstr "zväčšené na"
 
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:333
 msgid "Apparent diameter"
-msgstr ""
+msgstr "Zdanlivý priemer"
 
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:354
 #: src/core/modules/StarWrapper.cpp:258
 msgctxt "duration"
 msgid "days"
-msgstr ""
+msgstr "dní"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:356
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
-msgstr ""
+msgstr "Siderická perióda"
 
 #: src/core/modules/Planet.cpp:516
 msgid "Sidereal day"
-msgstr ""
+msgstr "Siderický deň"
 
 #: src/core/modules/Planet.cpp:517
 msgid "Mean solar day"
-msgstr ""
+msgstr "Stredný slnečný deň"
 
 #: src/core/modules/Planet.cpp:521
 msgid "The period of rotation is chaotic"
@@ -1112,30 +1114,30 @@ msgstr "Nov"
 #: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1769
 #: src/gui/AstroCalcDialog.cpp:1804
 msgid "Phase angle"
-msgstr ""
+msgstr "Fázový uhol"
 
 #: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:375
 #: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1759
 #: src/gui/AstroCalcDialog.cpp:1794
 msgid "Elongation"
-msgstr ""
+msgstr "Elongácia"
 
 #: src/core/modules/Planet.cpp:571
 msgid "Illuminated"
-msgstr ""
+msgstr "Osvetlené"
 
 #: src/core/modules/Planet.cpp:572
 msgid "Albedo"
-msgstr ""
+msgstr "Albedo"
 
 #: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1749
 #: src/gui/AstroCalcDialog.cpp:1784
 msgid "Phase"
-msgstr ""
+msgstr "Fáza"
 
 #: src/core/modules/Planet.cpp:583
 msgid "Eclipse Factor"
-msgstr ""
+msgstr "Faktor zatmenia"
 
 #: src/core/modules/MinorPlanet.cpp:228
 #, qt-format
@@ -1145,12 +1147,12 @@ msgstr "Predbežné označenie: %1"
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:343
 msgid "Tholen spectral type"
-msgstr ""
+msgstr "Tholenov spektrálny typ"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:349
 msgid "SMASSII spectral type"
-msgstr ""
+msgstr "Spektrálny typ SMASSII"
 
 #: src/core/modules/Comet.cpp:163
 msgctxt "type of comet"
@@ -1168,19 +1170,19 @@ msgstr "periodická"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "km/s"
 
 #: src/core/modules/Comet.cpp:247
 msgid "Speed"
-msgstr ""
+msgstr "Rýchlosť"
 
 #: src/core/modules/Comet.cpp:272
 msgid "Coma diameter (estimate)"
-msgstr ""
+msgstr "Priemer komy (odhad)"
 
 #: src/core/modules/Comet.cpp:273
 msgid "Gas tail length (estimate)"
-msgstr ""
+msgstr "Dĺžka plynového chvosta (odhad)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:234 src/gui/AstroCalcDialog.cpp:1297
@@ -1209,7 +1211,7 @@ msgstr "Značky planét"
 
 #: src/core/modules/SolarSystem.cpp:240
 msgid "Planet selection marker"
-msgstr ""
+msgstr "Označovač planéty"
 
 #: src/core/modules/SolarSystem.cpp:241
 msgid "Native planet names (from starlore)"
@@ -1245,12 +1247,12 @@ msgstr "dvojhviezda"
 
 #: src/core/modules/StarWrapper.cpp:234
 msgid "Magnitude range"
-msgstr ""
+msgstr "Rozsah jasností"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Spectral Type"
-msgstr ""
+msgstr "Spektrálny typ"
 
 #: src/core/modules/StarWrapper.cpp:258
 #: plugins/Exoplanets/src/Exoplanet.cpp:343
@@ -1259,19 +1261,19 @@ msgstr "Perióda"
 
 #: src/core/modules/StarWrapper.cpp:266
 msgid "Next maximum light"
-msgstr ""
+msgstr "Nasledujúce maximum svetla"
 
 #: src/core/modules/StarWrapper.cpp:268
 msgid "Next minimum light"
-msgstr ""
+msgstr "Nasledujúce minimum svetla"
 
 #: src/core/modules/StarWrapper.cpp:275
 msgid "Rising time"
-msgstr ""
+msgstr "Čas východu"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Duration of eclipse"
-msgstr ""
+msgstr "Dĺžka zatmenia"
 
 #: src/core/modules/StarWrapper.cpp:284
 msgid "Position angle"
@@ -1284,20 +1286,20 @@ msgstr "Uhlová vzdialenosť"
 
 #: src/core/modules/StarWrapper.cpp:300
 msgid "Proper motions by axes"
-msgstr ""
+msgstr "Vlastné pohyby v osiach"
 
 #: src/core/modules/StarWrapper.cpp:300 src/core/modules/StarWrapper.cpp:302
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr ""
+msgstr "mas/r"
 
 #: src/core/modules/StarWrapper.cpp:301
 msgid "Position angle of the proper motion"
-msgstr ""
+msgstr "Pozičný uhol vlastného pohybu"
 
 #: src/core/modules/StarWrapper.cpp:302
 msgid "Angular speed of the proper motion"
-msgstr ""
+msgstr "Uhlová rýchlosť vlastného pohybu"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -1317,7 +1319,7 @@ msgstr "Nočný režim"
 
 #: src/core/StelApp.cpp:581
 msgid "Cannot create Spout sender. See log for details."
-msgstr ""
+msgstr "Nepodarilo sa vytvoriť odosielač Spout. Podrobnosti sú vo výpise."
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
 #: src/gui/AstroCalcDialog.cpp:827 src/gui/AstroCalcDialog.cpp:1907
@@ -1357,7 +1359,7 @@ msgstr "Nastaviť rýchlosť času na nulu"
 
 #: src/core/StelCore.cpp:262
 msgid "Set reverse time direction"
-msgstr ""
+msgstr "Nastaviť opačný smer času"
 
 #: src/core/StelCore.cpp:263
 msgid "Set time to now"
@@ -1365,7 +1367,7 @@ msgstr "Nastaviť aktuálny čas"
 
 #: src/core/StelCore.cpp:264
 msgid "Add 1 solar minute"
-msgstr ""
+msgstr "Pridať 1 slnečnú minútu"
 
 #: src/core/StelCore.cpp:265
 msgid "Add 1 solar hour"
@@ -1381,7 +1383,7 @@ msgstr "Plus 7 dní"
 
 #: src/core/StelCore.cpp:268
 msgid "Subtract 1 solar minute"
-msgstr ""
+msgstr "Ubrať 1 slnečnú minútu"
 
 #: src/core/StelCore.cpp:269
 msgid "Subtract 1 solar hour"
@@ -1401,7 +1403,7 @@ msgstr "Pridať hviezdny deň"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 7 sidereal days"
-msgstr ""
+msgstr "Pridať 7 siderických dní"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 1 sidereal year"
@@ -1417,7 +1419,7 @@ msgstr "Pripočítaj 1 synodický mesiac"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 saros"
-msgstr ""
+msgstr "Pridať 1 saros"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 draconic month"
@@ -1473,7 +1475,7 @@ msgstr "Ubrať hviezdny deň"
 
 #: src/core/StelCore.cpp:291
 msgid "Subtract 7 sidereal days"
-msgstr ""
+msgstr "Ubrať 7 siderických dní"
 
 #: src/core/StelCore.cpp:292
 msgid "Subtract 1 sidereal year"
@@ -1489,7 +1491,7 @@ msgstr "Odpočítaj 1 synodický mesiac"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "Ubrať 1 saros"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 draconic month"
@@ -1867,6 +1869,10 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
+"Riešenie autorov F. R. Stephenson, L. V. Morrison a C. Y. Hohenkerk (2016) "
+"bolo vydané v <em>Measurement of the Earth’s rotation: 720 BC to AD "
+"2015</em> (%1). Mimo uvedeného rozsahu (modelovaného kĺzavým priemerom) "
+"poskytuje hodnoty podľa približnej paraboly."
 
 #: src/core/StelCore.cpp:2278
 #, qt-format
@@ -1887,6 +1893,8 @@ msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
+"Hodnota riešenia %1 pre %2 (sekulárne zrýchlenie Mesiaca) si vyžaduje "
+"prispôsobenie. Podrobnosti sú v príručke."
 
 #: src/core/StelCore.cpp:2330
 msgid "with zero values outside this range"
@@ -1901,10 +1909,12 @@ msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
+"so strednou odchýlkou menej než 1 sekunda, maximálnou chybou 1,9 s a "
+"hodnotami pre okrajové roky mimo tohto rozsahu"
 
 #: src/core/StelCore.cpp:2343
 msgid "with values for the limit years outside this range"
-msgstr ""
+msgstr "s hodnotami pre limitné roky mimo tohto rozsahu"
 
 #: src/core/StelCore.cpp:2353
 #, qt-format
@@ -2068,37 +2078,37 @@ msgstr "(zdanlivo)"
 #: src/core/StelObject.cpp:177
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
-msgstr ""
+msgstr "RA/Dec"
 
 #. TRANSLATORS: Hour angle/Declination
 #: src/core/StelObject.cpp:266
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
-msgstr ""
+msgstr "Hod. uhol/Dec"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:316
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
-msgstr ""
+msgstr "Az./Alt."
 
 #. TRANSLATORS: Galactic longitude/latitude
 #: src/core/StelObject.cpp:342
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
-msgstr ""
+msgstr "Gal. dĺžka/šírka"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
 #: src/core/StelObject.cpp:368
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
-msgstr ""
+msgstr "Supergal. dĺžka/šírka"
 
 #. TRANSLATORS: Ecliptic longitude/latitude
 #: src/core/StelObject.cpp:386
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "Eklipt. dĺžka/šírka"
 
 #: src/core/StelObject.cpp:451
 msgid "Ecliptic obliquity"
@@ -2106,15 +2116,15 @@ msgstr "Ekliptikálne zaoblenie"
 
 #: src/core/StelObject.cpp:470
 msgid "Mean Sidereal Time"
-msgstr ""
+msgstr "Stredný siderický čas"
 
 #: src/core/StelObject.cpp:485
 msgid "Apparent Sidereal Time"
-msgstr ""
+msgstr "Zdanlivý siderický čas"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr ""
+msgstr "Súhvezdie IAU"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -2167,21 +2177,21 @@ msgstr "Pohľad do zenitu"
 
 #: src/core/StelMovementMgr.cpp:207
 msgid "Look towards North Celestial pole"
-msgstr ""
+msgstr "Pohľad smerom k sev. nebeskému pólu"
 
 #: src/core/StelMovementMgr.cpp:208
 msgid "Look towards South Celestial pole"
-msgstr ""
+msgstr "Pohľad smerom k juž. nebeskému pólu"
 
 #: src/core/StelMovementMgr.cpp:225
 msgctxt "mount mode"
 msgid "Equatorial mount"
-msgstr ""
+msgstr "Rovníková montáž"
 
 #: src/core/StelMovementMgr.cpp:227
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
-msgstr ""
+msgstr "Alt-azimutálna montáž"
 
 #: src/core/SimbadSearcher.cpp:78
 msgid "Network error"
@@ -2207,13 +2217,13 @@ msgstr "Nájdené"
 #: src/core/StelLocaleMgr.cpp:273
 msgctxt "solar time"
 msgid "LMST"
-msgstr ""
+msgstr "MSSČ"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
 #: src/core/StelLocaleMgr.cpp:279
 msgctxt "solar time"
 msgid "LTST"
-msgstr ""
+msgstr "MPSČ"
 
 #: src/gui/ConfigurationDialog.cpp:582
 msgid "Select screenshot directory"
@@ -2290,7 +2300,7 @@ msgstr "Licencia"
 #: src/gui/ConfigurationDialog.cpp:1025
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "neznáma"
 
 #: src/gui/ConfigurationDialog.cpp:1122
 msgid "Running script: "
@@ -2462,7 +2472,7 @@ msgstr "Morrison a Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1513
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
-msgstr ""
+msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
 #: src/gui/ConfigurationDialog.cpp:1515
 msgid "Espenak & Meeus (2006)"
@@ -2556,47 +2566,47 @@ msgstr "Page Up/Down"
 
 #: src/gui/HelpDialog.cpp:158
 msgid "Ctrl+Up/Down"
-msgstr ""
+msgstr "CTRL+šípka hore/dole"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time dragging"
-msgstr ""
+msgstr "Natiahnutie času"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl + ťahanie ľavým tlačidlom myši"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Rolovanie času: minúty"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl + koliesko myši"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Rolovanie času: hodiny"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Shift + koliesko myši"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Rolovanie času: dni"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Alt + koliesko myši"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Rolovanie času: roky"
 
 #: src/gui/HelpDialog.cpp:170
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl + Alt + Shift + kolieko myši"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Select object"
@@ -2612,7 +2622,7 @@ msgstr "Zrušiť výber"
 
 #: src/gui/HelpDialog.cpp:179
 msgid "Ctrl & left click"
-msgstr ""
+msgstr "Ctrl + ľavé tlačidlo"
 
 #: src/gui/HelpDialog.cpp:181
 msgid "Right click"
@@ -2620,27 +2630,27 @@ msgstr "Pravé tlačidlo myši"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Add custom marker"
-msgstr ""
+msgstr "Pridať vlastnú značku"
 
 #: src/gui/HelpDialog.cpp:185
 msgid "Shift & left click"
-msgstr ""
+msgstr "Shift + ľavé tlačidlo"
 
 #: src/gui/HelpDialog.cpp:187
 msgid "Delete marker closest to mouse cursor"
-msgstr ""
+msgstr "Vymazať značku najbližšie ku kurzoru myši"
 
 #: src/gui/HelpDialog.cpp:188
 msgid "Shift & right click"
-msgstr ""
+msgstr "Shift + pravé tlačidlo"
 
 #: src/gui/HelpDialog.cpp:190
 msgid "Delete all custom markers"
-msgstr ""
+msgstr "Vymazať všetky vlastné značky"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Shift & Alt & right click"
-msgstr ""
+msgstr "Shift + Alt + pravé tlačidlo"
 
 #: src/gui/HelpDialog.cpp:194
 #, qt-format
@@ -2653,11 +2663,11 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:223
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "Textové rozhranie"
 
 #: src/gui/HelpDialog.cpp:225
 msgid "Activate TUI"
-msgstr ""
+msgstr "Aktivovať textové rozhranie"
 
 #: src/gui/HelpDialog.cpp:234
 msgid ""
@@ -2855,7 +2865,7 @@ msgstr "Okno klávesových skratiek"
 
 #: src/gui/StelGui.cpp:229
 msgid "Astronomical calculations window"
-msgstr ""
+msgstr "Okno astronomických výpočtov"
 
 #: src/gui/StelGui.cpp:230 src/ui_bookmarksDialog.h:193
 msgid "Bookmarks"
@@ -2887,43 +2897,43 @@ msgstr "Časová zóna"
 
 #: src/gui/StelGuiItems.cpp:649 src/gui/LocationDialog.cpp:423
 msgid "Local Mean Solar Time"
-msgstr ""
+msgstr "Miestny stredný slnečný čas"
 
 #: src/gui/StelGuiItems.cpp:652 src/gui/LocationDialog.cpp:424
 msgid "Local True Solar Time"
-msgstr ""
+msgstr "Miestny pravý slnečný čas"
 
 #. TRANSLATORS: unit of measurement: minutes per second
 #: src/gui/StelGuiItems.cpp:655
 msgctxt "unit of measurement"
 msgid "min/s"
-msgstr ""
+msgstr "min/s"
 
 #. TRANSLATORS: unit of measurement: hours per second
 #: src/gui/StelGuiItems.cpp:663
 msgctxt "unit of measurement"
 msgid "hr/s"
-msgstr ""
+msgstr "h/s"
 
 #. TRANSLATORS: unit of measurement: days per second
 #: src/gui/StelGuiItems.cpp:669
 msgctxt "unit of measurement"
 msgid "d/s"
-msgstr ""
+msgstr "d/s"
 
 #. TRANSLATORS: unit of measurement: years per second
 #: src/gui/StelGuiItems.cpp:675
 msgctxt "unit of measurement"
 msgid "yr/s"
-msgstr ""
+msgstr "r/s"
 
 #: src/gui/StelGuiItems.cpp:677 src/gui/StelGuiItems.cpp:679
 msgid "Simulation speed"
-msgstr ""
+msgstr "Rýchlosť simulácie"
 
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
-msgstr ""
+msgstr "vzdialenosť od stredu planéty"
 
 #: src/gui/StelGuiItems.cpp:750
 msgid "planetocentric observer"
@@ -3004,12 +3014,17 @@ msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
+"Využíva polygonálny 3D model vybraných menších objektov (mesiačiky, "
+"planétky, kométy) namiesto guľatej náhrady"
 
 #: src/gui/ViewDialog.cpp:1281
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
+"Použite &quot;tieňovanie mapy&quot; na simuláciu tieňov samotného telesa pre "
+"nekonvexné telesá Slnečnej sústavy. Môže sa tým znížiť kvalita tieňa "
+"penumbry na niektorých objektoch."
 
 #: src/gui/ViewDialog.cpp:1302
 msgid "Abbreviated"
@@ -3070,22 +3085,22 @@ msgstr "Najvyššia zaznamenaná frekvencia (Leonidy 1833)"
 #: src/gui/ViewDialog.cpp:1575
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
-msgstr ""
+msgstr "G. Mueller (1893)"
 
 #: src/gui/ViewDialog.cpp:1576
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
-msgstr ""
+msgstr "Astronomický almanach (1984)"
 
 #: src/gui/ViewDialog.cpp:1577
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr ""
+msgstr "Explanatory Supplement (1992)"
 
 #: src/gui/ViewDialog.cpp:1578
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr ""
+msgstr "Explanatory Supplement (2013)"
 
 #: src/gui/ViewDialog.cpp:1579
 msgctxt "magnitude algorithm"
@@ -3119,23 +3134,23 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:1617
 msgid "Visual magnitude based on phase angle and albedo."
-msgstr ""
+msgstr "Vizuálna magnitúda podľa fázového uhla a albeda."
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
-msgstr ""
+msgstr "GPS…"
 
 #: src/gui/LocationDialog.cpp:727
 msgid "GPS:SUCCESS"
-msgstr ""
+msgstr "GPS:ÚSPECH"
 
 #: src/gui/LocationDialog.cpp:738
 msgid "GPS:FAILED"
-msgstr ""
+msgstr "GPS:ZLYHALO"
 
 #: src/gui/LocationDialog.cpp:749 src/ui_locationDialogGui.h:508
 msgid "Get location from GPS"
-msgstr ""
+msgstr "Zistiť polohu pomocou GPS"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:114
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -3179,7 +3194,7 @@ msgstr "Odstrániť nainštalovaný terén"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 msgid "Do you really want to remove this landscape?"
-msgstr ""
+msgstr "Skutočne chcete odstrániť tento terén?"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3248,15 +3263,15 @@ msgstr "hviezdna mapka"
 
 #: src/gui/ScriptConsole.cpp:105
 msgid "Load Script"
-msgstr ""
+msgstr "Načítať skript"
 
 #: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
 msgid "Script Files"
-msgstr ""
+msgstr "Súbory  skriptov"
 
 #: src/gui/ScriptConsole.cpp:125
 msgid "Save Script"
-msgstr ""
+msgstr "Uložiť skript"
 
 #: src/gui/ScriptConsole.cpp:227
 msgid "Select Script Include Directory"
@@ -3410,7 +3425,7 @@ msgstr "Dec (J2000)"
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:295
 msgid "opacity"
-msgstr ""
+msgstr "priehľadnosť"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:300 src/gui/AstroCalcDialog.cpp:844
@@ -6758,7 +6773,7 @@ msgstr "Pomôcky"
 
 #: src/ui_viewDialog.h:2536
 msgid "Configure colors of markers"
-msgstr ""
+msgstr "Nastaviť farby označovačov"
 
 #: src/ui_viewDialog.h:2537
 msgid "Use outlines for big deep-sky objects"
@@ -8139,7 +8154,7 @@ msgstr "Zobrazí značky polohy aktuálneho nebeského telesa na oblohe"
 
 #: src/ui_astroCalcDialog.h:824
 msgid "Show markers"
-msgstr ""
+msgstr "Zobraziť označovače"
 
 #: src/ui_astroCalcDialog.h:826
 msgid "Show dates of positions of current celestial body near markers"
@@ -8259,11 +8274,11 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr ""
+msgstr "Farby popisiek a značiek objektov hlbokého vesmíru"
 
 #: src/ui_dsoColorsDialog.h:540
 msgid "Color of markers of dark nebulae"
-msgstr ""
+msgstr "Farba značiek tmavých hmlovín"
 
 #: src/ui_dsoColorsDialog.h:546
 msgid "Clusters with neb."
@@ -8271,11 +8286,11 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:550
 msgid "Color of markers of open star clusters"
-msgstr ""
+msgstr "Farba značiek  otvorených hviezdokôp"
 
 #: src/ui_dsoColorsDialog.h:553
 msgid "Color of markers of stellar associations"
-msgstr ""
+msgstr "Farba značiek hviezdnych asociácií"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Possible planetary nebulae"
@@ -8291,35 +8306,35 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interacting galaxies"
-msgstr ""
+msgstr "Farba značiek interagujúcich galaxií"
 
 #: src/ui_dsoColorsDialog.h:569
 msgid "Color of markers of clusters associated with nebulosity"
-msgstr ""
+msgstr "Farba značiek kôp súvisiacich s hmlovinami"
 
 #: src/ui_dsoColorsDialog.h:573
 msgid "Color of markers of young stellar objects"
-msgstr ""
+msgstr "Farba značiek mladých hviezdnych objektov"
 
 #: src/ui_dsoColorsDialog.h:576
 msgid "Color of markers of protoplanetary nebulae"
-msgstr ""
+msgstr "Farba značiek protoplanetárnych hmlovín"
 
 #: src/ui_dsoColorsDialog.h:579
 msgid "Color of markers of possible planetary nebulae"
-msgstr ""
+msgstr "Farba značiek potenciýlnych planetárnych hmlovín"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of possible quasars"
-msgstr ""
+msgstr "Farba značiek potenciálnych kvazarov"
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Color of markers of star clusters"
-msgstr ""
+msgstr "Farba značiek hviezdokôp"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of supernova remnants"
-msgstr ""
+msgstr "Farba značiek zvyškov po supernove"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Possible quasars"
@@ -8327,23 +8342,23 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of blazars"
-msgstr ""
+msgstr "Farba značiek blazarov"
 
 #: src/ui_dsoColorsDialog.h:597
 msgid "Color of markers of quasars"
-msgstr ""
+msgstr "Farba značiek kvazarov"
 
 #: src/ui_dsoColorsDialog.h:600
 msgid "Color of markers of emission nebulae"
-msgstr ""
+msgstr "Farba značiek emisných hmlovín"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Color of markers of reflection nebulae"
-msgstr ""
+msgstr "Farba značiek reflexných hmlovín"
 
 #: src/ui_dsoColorsDialog.h:606
 msgid "Color of markers of star clouds"
-msgstr ""
+msgstr "Farba značiek hviezdnych oblakov"
 
 #: src/ui_dsoColorsDialog.h:609
 msgid "Labels of deep-sky objects"
@@ -8363,35 +8378,35 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:619
 msgid "Color of markers of symbiotic stars"
-msgstr ""
+msgstr "Farba značiek symbiotických hviezd"
 
 #: src/ui_dsoColorsDialog.h:623
 msgid "Color of markers of molecular clouds"
-msgstr ""
+msgstr "Farba značiek molekulárnych oblakov"
 
 #: src/ui_dsoColorsDialog.h:627
 msgid "Color of markers of interstellar matter"
-msgstr ""
+msgstr "Farba značiek medzihviezdnej hmoty"
 
 #: src/ui_dsoColorsDialog.h:631
 msgid "Color of markers of hydrogen regions"
-msgstr ""
+msgstr "Farba značiek vodíkových oblakov"
 
 #: src/ui_dsoColorsDialog.h:634
 msgid "Color of markers of radio galaxies"
-msgstr ""
+msgstr "Farba značiek rádiových galaxií"
 
 #: src/ui_dsoColorsDialog.h:638
 msgid "Color of markers of stars"
-msgstr ""
+msgstr "Farba značiek hviezd"
 
 #: src/ui_dsoColorsDialog.h:641
 msgid "Color of markers of nebulae"
-msgstr ""
+msgstr "Farba značiek hmlovín"
 
 #: src/ui_dsoColorsDialog.h:645
 msgid "Color of markers of bipolar nebulae"
-msgstr ""
+msgstr "Farba značiek bipolárnych hmlovín"
 
 #: src/ui_dsoColorsDialog.h:647 plugins/Quasars/src/Quasars.cpp:72
 #: plugins/Quasars/src/Quasars.cpp:170 plugins/Quasars/src/Quasars.cpp:171
@@ -8400,15 +8415,15 @@ msgstr "Kvazary"
 
 #: src/ui_dsoColorsDialog.h:649
 msgid "Color of markers of emission-line stars"
-msgstr ""
+msgstr "Farba značiek hviezd s emisnými čiarami"
 
 #: src/ui_dsoColorsDialog.h:654
 msgid "Color of markers of emission objects"
-msgstr ""
+msgstr "Farba značiek emisných objektov"
 
 #: src/ui_dsoColorsDialog.h:657
 msgid "Color of markers of deep-sky objects"
-msgstr ""
+msgstr "Farba značiek objektov hlbokého vesmíru"
 
 #: src/ui_dsoColorsDialog.h:661
 msgid "Protoplanetary nebulae"
@@ -8416,43 +8431,43 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:663
 msgid "Color of markers of active galaxies"
-msgstr ""
+msgstr "Farba značiek aktívnych galaxií"
 
 #: src/ui_dsoColorsDialog.h:666
 msgid "Markers of deep-sky objects"
-msgstr ""
+msgstr "Značky objektov hlbokého vesmíru"
 
 #: src/ui_dsoColorsDialog.h:668
 msgid "Markers of DSOs"
-msgstr ""
+msgstr "Značky objektov deep-sky"
 
 #: src/ui_dsoColorsDialog.h:672
 msgid "Color of markers of galaxies"
-msgstr ""
+msgstr "Farba značiek galaxií"
 
 #: src/ui_dsoColorsDialog.h:676
 msgid "Color of markers of planetary nebulae"
-msgstr ""
+msgstr "Farba značiek planetárnych hmlovín"
 
 #: src/ui_dsoColorsDialog.h:681
 msgid "Color of markers of globular star clusters"
-msgstr ""
+msgstr "Farba značiek guľových hviezdokôp"
 
 #: src/ui_dsoColorsDialog.h:684
 msgid "Color of markers of BL Lac objects"
-msgstr ""
+msgstr "Farba značiek objektov typu BL Lac"
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr ""
+msgstr "Farba značiek kandidátov na supernovu"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr ""
+msgstr "Farba značiek kandidátov na zvyšky po supernove"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
-msgstr ""
+msgstr "Farba značiek kôp galaxií"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -11303,6 +11318,9 @@ msgid ""
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr ""
+"Niekoľko kruhov zobrazuje rôzne zorné polia, ktoré je možné pridať k "
+"označovaču ďalekohľadu. Toto je pozostatok z čias pred zavedením modulu "
+"<strong>Okuláre</strong>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
 msgid ""
@@ -13525,6 +13543,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Tento modul zobrazuje potenciálne obývateľné exoplanéty (oranžové značky) a "
+"niektoré informácie o týchto planétach."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Planetary Class"
@@ -14765,6 +14785,18 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Tento modul vám umožní simulovať periodické meteorické roje a zobrazí "
+"značku každého aktívneho aj neaktívneho radiantu.</p><p>Kliknutím na značku "
+"roja zobrazíte všetky podrobnosti o jeho polohe a aktivite. Väčšina údajov v "
+"tomto module pochádza z oficiálneho katalógu <a "
+"href=\"http://imo.net\">International Meteor Organization</a>.</p><p>Sú tu "
+"tri druhy značiek:<ul><li><b>Potvrdené:</b> radiant je aktívny a jeho údaje "
+"boli potvrdené. Znamená to, že tento roj sa  v minulosti prejavil, alebo má "
+"spoľahlivú predpoveď.</li><li><b>Všeobecné:</b> radiant je aktívny, ale jeho "
+"údaje neboli potvrdené. Znamená to, že tento roj sa môže prejaviť,  ale "
+"nemáme príslušné údaje o jeho aktivite v danom "
+"roku.</li><li><b>Neaktívne:</b> v nastavenom čase je radiant "
+"neaktívny.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:127
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -15280,6 +15312,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"Tento modul umožňuje simulovať periodické meteorické roje a zobrazuje značku "
+"každého z aktívnych aj neaktívnych radiantov."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:231
 msgid ""
@@ -15288,6 +15322,9 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"Kliknutím na značku radiantu môžete zobraziť podrobnosti o jeho polohe a "
+"aktivite. Väčšina údajov pochádza z oficiálneho katalógu, ktorý vydáva <a "
+"href=\"http://imo.net\">International Meteor Organization</a>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:238
 msgid ""
@@ -15299,6 +15336,13 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>Sú tu tri druhy značiek:<ul><li><b>Potvrdené:</b> radiant je aktívny a "
+"jeho údaje boli potvrdené. Znamená to, že tento roj sa  v minulosti "
+"prejavil, alebo má spoľahlivú predpoveď.</li><li><b>Všeobecné:</b> radiant "
+"je aktívny, ale jeho údaje neboli potvrdené. Znamená to, že tento roj sa "
+"môže prejaviť,  ale nemáme príslušné údaje o jeho aktivite v danom "
+"roku.</li><li><b>Neaktívne:</b> v nastavenom čase je radiant "
+"neaktívny.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:260
 msgid "Terms"
@@ -15453,7 +15497,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Zobraziť značku radiantu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
