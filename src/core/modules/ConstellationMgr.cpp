@@ -853,7 +853,7 @@ void ConstellationMgr::updateI18n()
 	vector < Constellation * >::const_iterator iter;
 	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
 	{
-		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName);
+		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName, (*iter)->context);
 	}
 }
 
