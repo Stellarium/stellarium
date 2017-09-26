@@ -571,18 +571,13 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		return;
     
 	Vec3d srcPos;
-	Vec3d XYZ0, XYZ1, XYZ2, XYZ;
+	Vec3d XYZ0, XYZ;
 
 	// Calculate the radius of the planet. It is necessary to re-scale it
 	double r = planet->getRadius() * planet->getSphereScale();
 
-	// Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions. The case of longitude is special. We make that the center of the texture (picture of planet/moon) always be the origin of coordinates with planet->getRotationElements().offset
+	// Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions
 	double nlatitude = latitude * M_PI/180.0;
-    /*QString p = planet->getEnglishName();
-    if (p=="Moon")
-        double nlongitude = (45.0 + longitude - planet->getRotationElements().offset + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
-    else*/
-        //double nlongitude = (132.0 + longitude - planet->getRotationElements().offset + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
     double nlongitude = (longitude + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
 
 	// The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
@@ -592,30 +587,22 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// It is necessary to "turn off" the names whose features are on the opposite face of the planet
 	// Distance from the obserber to the center of the planet
-	Vec3d coord = planet->getJ2000EquatorialPos(core);
-	double dist = coord.length();
-	// Cartesian coordinates of the planet
-	XYZ1[0] = r * cos(coord.latitude()) * cos(coord.longitude());
-	XYZ1[1] = r * cos(coord.latitude()) * sin(coord.longitude());
-	XYZ1[2] = r * sin(coord.latitude());
-	// Distance from the feature to the observer
-	XYZ2[0] = XYZ0[0] + XYZ1[0];
-	XYZ2[1] = XYZ0[1] + XYZ1[1];
-	XYZ2[2] = XYZ0[2] + XYZ1[2];
-
-	double a = XYZ2.length();
-	// If a is bigger than dist, then the feature is on the opposite face of the planet
-	if (a < dist)
-	{
+	Vec3d coord = planet->getEclipticPos();
+    double dist = coord.length()/cos(atan(r/coord.length()));
+    // If a is bigger than dist, then the feature is on the opposite face of the planet
+    if (dist < coord.length())
+        return;
+    else
+    {
         /* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
-        planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
-		XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
-
-		if (painter->getProjector()->projectCheck(XYZ, srcPos))
-		{
-			painter->setColor(color[0], color[1], color[2], 1.0);
-			painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-			painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
-		}
-	}
+         planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
+        XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
+    
+        if (painter->getProjector()->projectCheck(XYZ, srcPos))
+        {
+            painter->setColor(color[0], color[1], color[2], 1.0);
+            painter->drawCircle(srcPos[0], srcPos[1], 2.f);
+            painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
+        }
+    }
 }
