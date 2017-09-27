@@ -563,7 +563,6 @@ void NomenclatureItem::update(double deltaTime)
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
-<<<<<<< TREE
     //qWarning() << "Planet:" << planet->getEnglishName() << " LF:" << labelsFader;
     if (!getFlagLabels())
         return;
