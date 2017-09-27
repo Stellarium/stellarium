@@ -104,7 +104,7 @@ public:
 		niTessera		= 56  // type="tessera"
 	};
 
-	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, NomenclatureItemType nItemType, float nLatitude, float nLongitude, float nSize);
+	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, float nLatitude, float nLongitude, float nSize);
 	virtual ~NomenclatureItem();
 
 	//! Get the type of object
@@ -160,7 +160,7 @@ private:
 
 	PlanetP planet;
 	int identificator;
-	QString englishName, nameI18n;
+	QString englishName, context, nameI18n;
 	NomenclatureItemType nType;       // Type of nomenclature item
 	float latitude, longitude, size;
 
