@@ -569,8 +569,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// GZ: I reject smaller craters for now, until geometric computations have been corrected.
 	// TODO: Later, size should be adjusted with planet screen size so that not too many labels are visible.
-	//if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<500))
-	//	return;
+	if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<500))
+		return;
     
 	Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
 
