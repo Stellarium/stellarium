@@ -12,13 +12,13 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-09-24 13:30+0000\n"
+"PO-Revision-Date: 2017-09-26 12:54+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-25 05:08+0000\n"
+"X-Launchpad-Export-Date: 2017-09-27 05:08+0000\n"
 "X-Generator: Launchpad (build 18463)\n"
 "Language: is\n"
 
@@ -152,7 +152,7 @@ msgstr "Vetrarbaugur"
 
 #: src/core/modules/GridLinesMgr.cpp:674
 msgid "Supergalactic Equator"
-msgstr "Útgeimsmiðbaugur"
+msgstr "Útþyrpingarmiðbaugur"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:2601
@@ -294,11 +294,11 @@ msgstr "Vetrarbaugur"
 
 #: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2704
 msgid "Supergalactic grid"
-msgstr "Útgeimshnitanet"
+msgstr "Útþyrpingarhnitanet"
 
 #: src/core/modules/GridLinesMgr.cpp:1246 src/ui_viewDialog.h:2593
 msgid "Supergalactic equator"
-msgstr "Útgeimsmiðbaugur"
+msgstr "Útþyrpingarmiðbaugur"
 
 #: src/core/modules/GridLinesMgr.cpp:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:409
@@ -343,7 +343,7 @@ msgstr "Pólar vetrarbrautar"
 
 #: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2616
 msgid "Supergalactic poles"
-msgstr "Útgeimspólar"
+msgstr "Útþyrpingarpólar"
 
 #: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
@@ -1794,6 +1794,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Þessi lausn eftir F. Espenak and J. Meeus, byggð á Morrison & Stephenson "
+"(2004) og á margliða aðlögun (polynomial fit) með gildum úr töflum fyrir "
+"árin 1600-2000, er notuð fyrir %1NASA Eclipse vefsvæðið%2 og í <em>Five "
+"Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006) frá þeim "
+"hinum sömu. Þessi formúla er einnig notuð í sólar-, tungl- og plánetu-"
+"almanaksforritinu SOLEX."
 
 #: src/core/StelCore.cpp:2260
 msgid "Used by default."
@@ -2057,7 +2063,7 @@ msgstr "Vetr.ln/br."
 #: src/core/StelObject.cpp:368
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
-msgstr "Útgeims.ln/br."
+msgstr "Útþyrp. ln/br."
 
 #. TRANSLATORS: Ecliptic longitude/latitude
 #: src/core/StelObject.cpp:386
@@ -3256,7 +3262,7 @@ msgstr "Vetrarbrautar"
 #: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr "Útgeims"
+msgstr "Útþyrping (supergalactic)"
 
 #: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
@@ -4850,6 +4856,10 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"Mestu álengdir og umferðir Jarðar séð frá Callisto 2000-3000. Af hverju "
+"Callisto? Af hinum 4 tunglum Galileós, er Callisto það eina sem er fyrir "
+"utan geislunarbelti Júpíters. Þess vegna, ef menn munu einhvern tíma setjast "
+"að á tunglum Júpíters, verður Callisto það fyrsta."
 
 #: src/translations.h:416
 msgid ""
@@ -6787,7 +6797,7 @@ msgstr "Birta miðbaugslínu vetrarbrautar."
 
 #: src/ui_viewDialog.h:2572
 msgid "Color of supergalactic equator"
-msgstr "Litur útgeimsmiðbaugs"
+msgstr "Litur útþyrpingarmiðbaugs"
 
 #: src/ui_viewDialog.h:2575
 msgid "Color of ecliptic (of date)"
@@ -6811,7 +6821,8 @@ msgstr "Litur sjóndeildarhrings"
 
 #: src/ui_viewDialog.h:2591
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
-msgstr "Birta miðbaug útgeimshnita de Vaucouleurs (1976)."
+msgstr ""
+"Birta miðbaug útþyrpingarhnita (supergalactic) de Vaucouleurs (1976)."
 
 #: src/ui_viewDialog.h:2595
 msgid "Show meridian line."
@@ -6883,7 +6894,7 @@ msgstr "Litur himinskauta (m.v. dagsetningu)"
 
 #: src/ui_viewDialog.h:2641
 msgid "Color of supergalactic poles"
-msgstr "Litur útgeimspóla"
+msgstr "Litur útþyrpingarpóla"
 
 #: src/ui_viewDialog.h:2644
 msgid "Show ecliptic poles of current date."
@@ -6978,7 +6989,7 @@ msgstr "Sólbaugshnit (J2000)"
 
 #: src/ui_viewDialog.h:2696
 msgid "Color of the supergalactic grid"
-msgstr "Litur útgeimshnitanets"
+msgstr "Litur útþyrpingarhnitanets"
 
 #: src/ui_viewDialog.h:2699
 msgid "Color of the galactic grid"
@@ -6989,8 +7000,8 @@ msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr ""
-"Birta útgeimshnit de Vaucouleurs (1976), skilgreind miðað við dreifingu "
-"nærliggjandi vetrarbrauta."
+"Birta útþyrpingarhnit (supergalactic) de Vaucouleurs (1976), skilgreind "
+"miðað við dreifingu nærliggjandi vetrarbrauta."
 
 #: src/ui_viewDialog.h:2706
 msgid "Equatorial coordinates of J2000.0."
@@ -7381,7 +7392,7 @@ msgstr "Stjörnulengd/breidd (dagsetningar)"
 
 #: src/ui_configurationDialog.h:1343
 msgid "Supergalactic coordinates"
-msgstr "Útgeimshnit"
+msgstr "Útþyrpingarhnit"
 
 #: src/ui_configurationDialog.h:1345
 msgid "The type of the object (star, planet, etc.)"
@@ -10041,6 +10052,9 @@ msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"Kóðinn fyrir útreikning sporbrauta er skrifaður af Jose Luis Canales "
+"samkvæmt endurskoðaðri Spacetrack Report #3 (inniheldur Spacetrack Report "
+"#6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:491
@@ -12311,7 +12325,7 @@ msgstr "Leiðsögustjörnur"
 #: plugins/NavStars/src/NavStars.cpp:55
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
 msgid "This plugin marks navigational stars from a selected set."
-msgstr ""
+msgstr "Þessi forritsviðbót merkir leiðsögustjörnur út frá völdu setti."
 
 #: plugins/NavStars/src/NavStars.cpp:111
 msgid "Mark the navigational stars"
@@ -12817,12 +12831,13 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:124
 msgid "This plugin was developed during ESA SoCiS 2015."
-msgstr ""
+msgstr "Þessi forritsviðbót var hönnuð á meðan ESA SoCiS 2015 stóð."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 #, qt-format
 msgid "This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings."
 msgstr ""
+"Þessi forritsviðbót notar %1QtWebApp HTTP þjóninn%2 eftir Stefan Frings."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:128
 #, qt-format
@@ -12978,7 +12993,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
-msgstr ""
+msgstr "Þessi forritsviðbót var hönnuð á meðan ESA SoCiS 2015&amp;2016 stóð."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:241
 msgid "Server Name"
@@ -13093,6 +13108,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Þessi forritsviðbót teiknar staðsetningar stjarna með fjarreikistjörnum "
+"(exoplanets). Gögn fyrir fjarreikistjörnur eru tekin úr 'Extrasolar Planets "
+"Encyclopaedia' á exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Show exoplanets"
@@ -13233,6 +13251,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Þessi forritsviðbót teiknar staðsetningar stjarna með fjarreikistjörnum "
+"(exoplanets). Gögn fyrir fjarreikistjörnur eru tekin úr \"%1The Extrasolar "
+"Planets Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #, qt-format
@@ -13241,6 +13262,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Listinn yfir mögulega byggilegar fjarreikistjörnur ásamt gögnum um þær var "
+"tekinn úr \"%1The Habitable Exoplanets Catalog%3\" frá %2Planetary "
+"Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #, qt-format
@@ -13249,6 +13273,8 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Núverandi skrá inniheldur upplýsingar um %1 sólkerfi, sem samtals eru með %2 "
+"fjarreikistjörnur (þar með taldar %3 mögulega byggilegar fjarreikistjörnur)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
@@ -13261,13 +13287,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Mögulega byggilegar fjarreikistjörnur"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Þessi forritsviðbót getur birt mögulega byggilegar fjarreikistjörnur "
+"(appelsínugul merki) auk nokkurra upplýsinga um þessar plánetur."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "Planetary Class"
@@ -13312,6 +13340,8 @@ msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
+"Í desember 2015 samþykkti Alþjóðasamband stjarnfræðinga (IAU) opinberlega "
+"yfirfarin nöfn á nokkrum fjarreikistjörnum eftir opna atkvæðagreiðslu."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid ""
@@ -13680,7 +13710,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Nafngjafir á fjarreikistjörnur (IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
@@ -13716,7 +13746,7 @@ msgstr "Plánetur tifstjarna"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "Safnskrá NASA yfir fjarreikistjörnur (Exoplanet Archive)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "IAU Commission 53: Extrasolar Planets"
@@ -13740,7 +13770,7 @@ msgstr "Opna skrá yfir fjarreikistjörnur"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Efnisskrá yfir byggilegar fjarreikistjörnur"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:381
 msgid "Exoplanets is updated"
@@ -13828,11 +13858,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:479
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "Virkja birtingu á dreifingu fjarreikistjarna"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:481
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "Birta fjarreikistjörnur eftir að þær uppgötvuðust"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:483
 msgid "Enable timeline discovery of exoplanets"
@@ -13842,15 +13872,15 @@ msgstr ""
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
-msgstr ""
+msgstr "Birting þeirra sólkerfa sem innihalda byggilegar fjarreikistjörnur"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:487
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Virkja birtingu á byggilegum fjarreikistjörnum einvörðungu"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:488
 msgid "Enable display of designations for exoplanets"
-msgstr ""
+msgstr "Virkja birtingu á sérmerkingum fjarreikistjarna"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 msgid "Show exoplanets button on toolbar"
@@ -14046,7 +14076,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Mesta álengd: %1 (við %2 gráður)"
 
 #: plugins/Observability/src/Observability.cpp:205
 #, qt-format
@@ -14513,7 +14543,7 @@ msgstr "Hámark: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"
-msgstr ""
+msgstr "Lengdargráða sólar"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:623
 msgid "variable"
@@ -14532,22 +14562,22 @@ msgstr "Lýrítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Kentárítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Akvarítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr ""
+msgstr "Bootítar í júní"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
@@ -14557,7 +14587,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:47
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Suððlægir δ-Akvarítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:49
@@ -14567,7 +14597,7 @@ msgstr "α-Kapríkornítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:51
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Árigítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:53
@@ -14592,7 +14622,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:61
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppíð-Velítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:63
@@ -14612,7 +14642,7 @@ msgstr "δ-Leonítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:69
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:71
@@ -14622,7 +14652,7 @@ msgstr "Júní-Lýrítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:73
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Signítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:75
@@ -14632,7 +14662,7 @@ msgstr "ε-Lýrítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:77
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Árigítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:79
@@ -14642,32 +14672,32 @@ msgstr "ε-Geminítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:81
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Suðlægir tárítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:83
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Norðlægir tárítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:85
 msgid "Monocerotids"
-msgstr ""
+msgstr "Mónóserótítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:87
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Mónóserótítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:89
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hýdrítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:91
 msgid "Geminids"
-msgstr ""
+msgstr "Geminítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:93
@@ -14687,22 +14717,22 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:99
 msgid "Orionids"
-msgstr ""
+msgstr "Óríonítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:101
 msgid "Andromedids"
-msgstr ""
+msgstr "Andrómedítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:103
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lýrítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:105
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Skorpítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
@@ -14717,47 +14747,47 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:111
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:113
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Kentárítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:115
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Setítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:117
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "Suðlægir ω-Skorpítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:119
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "Norðlægir ω-Skorpítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:121
 msgid "Arietids"
-msgstr ""
+msgstr "Arietítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:123
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Setítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:125
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Kankrítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:127
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herkúlítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:129
@@ -14767,57 +14797,57 @@ msgstr "ρ-Geminítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:131
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Karinítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:133
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Kraterítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:135
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:137
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:139
 msgid "May Librids"
-msgstr ""
+msgstr "Librítar í maí"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:141
 msgid "June Scutids"
-msgstr ""
+msgstr "Skútítar í júní"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:143
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Fiska Ástralítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:145
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "Suððlægir ι-Akvarítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:147
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "Norðlægir ι-Akvarítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Akvarítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Arietítar um haust"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:153
@@ -14827,22 +14857,22 @@ msgstr "χ-Óríonítar"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "Sextantítar"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "Óríonítar í nóvember"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr ""
+msgstr "Kaelítar í ágúst"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "ε-Gruids"
-msgstr ""
+msgstr "ε-Grúítar"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
@@ -15258,7 +15288,7 @@ msgstr "Vetr.ln/br"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr "Útgeims lengd/breidd"
+msgstr "Útþyrpingar lengd/breidd"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
 msgctxt "abbreviated in the plugin"
@@ -15329,7 +15359,7 @@ msgstr "Vetrarbaugslengd/breidd"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Supergalactic Longitude/Latitude"
-msgstr "Lengd/Breidd útgeimshnita"
+msgstr "Lengd/Breidd útþyrpingarhnita"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:242
 msgid "Coordinates of custom position:"
