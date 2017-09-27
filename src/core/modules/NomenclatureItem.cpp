@@ -34,6 +34,7 @@ Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
 NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   int nId,
 				   const QString& nName,
+				   const QString& nContext,
 				   NomenclatureItemType nItemType,
 				   float nLatitude,
 				   float nLongitude,
@@ -42,6 +43,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, planet(nPlanet)
 	, identificator(nId)
 	, englishName(nName)
+	, context(nContext)
 	, nameI18n(nName)
 	, nType(nItemType)
 	, latitude(nLatitude)
@@ -507,7 +509,7 @@ QString NomenclatureItem::getEnglishName() const
 
 void NomenclatureItem::translateName(const StelTranslator& trans)
 {
-	nameI18n = trans.qtranslate(englishName);
+	nameI18n = trans.qtranslate(englishName, context);
 }
 
 QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -561,6 +563,7 @@ void NomenclatureItem::update(double deltaTime)
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
+<<<<<<< TREE
     //qWarning() << "Planet:" << planet->getEnglishName() << " LF:" << labelsFader;
     if (!getFlagLabels())
         return;
