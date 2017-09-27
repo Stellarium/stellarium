@@ -34,6 +34,7 @@ Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
 NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   int nId,
 				   const QString& nName,
+				   const QString& nContext,
 				   NomenclatureItemType nItemType,
 				   float nLatitude,
 				   float nLongitude,
@@ -42,6 +43,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, planet(nPlanet)
 	, identificator(nId)
 	, englishName(nName)
+	, context(nContext)
 	, nameI18n(nName)
 	, nType(nItemType)
 	, latitude(nLatitude)
@@ -507,7 +509,7 @@ QString NomenclatureItem::getEnglishName() const
 
 void NomenclatureItem::translateName(const StelTranslator& trans)
 {
-	nameI18n = trans.qtranslate(englishName);
+	nameI18n = trans.qtranslate(englishName, context);
 }
 
 QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -570,8 +572,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<500))
 		return;
     
-	Vec3d srcPos;
-	Vec3d XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
+	Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
 
 	// Calculate the radius of the planet. It is necessary to re-scale it
 	double r = planet->getRadius() * planet->getSphereScale();
@@ -585,19 +586,18 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	XYZ0[1] = r * cos(nlatitude) * sin(nlongitude);
 	XYZ0[2] = r * sin(nlatitude);
 
+	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
+	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
+	XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
+
 	// It is necessary to "turn off" the names whose features are on the opposite face of the planet
-	// Distance from the obserber to the center of the planet
-	Vec3d coord = planet->getEclipticPos();
-	double dist = coord.length()/cos(atan(r/coord.length()));
+	// Distance from the obserber to the center of the planet	
+	double dist = XYZ.length()/cos(atan(r/XYZ.length()));
 	// If a is bigger than dist, then the feature is on the opposite face of the planet
-	if (dist < coord.length())
+	if (dist < XYZ.length())
 		return;
 	else
 	{
-		/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
-		   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
-		XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
-    
 		if (painter->getProjector()->projectCheck(XYZ, srcPos))
 		{
 			painter->setColor(color[0], color[1], color[2], 1.0);
