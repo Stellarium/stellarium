@@ -49,7 +49,7 @@ public:
 	};
 
 	//! @struct Activity
-	typedef struct
+	struct Activity
 	{
 		int year;                  //! The catalog year (0 for generic)
 		int zhr;                   //! The ZHR on peak
@@ -57,7 +57,7 @@ public:
 		QDate start;               //! Initial date of activity
 		QDate finish;              //! Last date of activity
 		QDate peak;                //! Peak activity
-	} Activity;
+	};
 
 	//! Constructor
 	//! @param map QVariantMap containing all the data about a Meteor Shower.

@@ -36,13 +36,14 @@ class MeteorShowers : public StelObjectModule
 	Q_OBJECT
 public:
 	//! @struct SearchResult
-	typedef struct
+	struct SearchResult
 	{
 		QString name;
-		QString zhr;
 		QString type;
 		QDate peak;
-	} SearchResult;
+		int zhrMax;
+		int zhrMin;
+	};
 
 	//! Constructor
 	MeteorShowers(MeteorShowersMgr *mgr);
