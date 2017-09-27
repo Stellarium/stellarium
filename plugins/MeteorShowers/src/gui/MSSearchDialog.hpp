@@ -93,30 +93,10 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem& other) const
 	{
-		int column = treeWidget()->sortColumn();
-
-		if (column == MSSearchDialog::ColumnPeak)
-		{
-			QDateTime a = QDateTime::fromString(text(column),"d MMMM yyyy");
-			QDateTime b = QDateTime::fromString(other.text(column),"d MMMM yyyy");
-			return a.operator < (b);
-		}
-		else if (column == MSSearchDialog::ColumnZHR)
-		{
-			// the zhr can be variable ("min-max")
-			QStringList as = text(column).split("-");
-			QStringList bs = other.text(column).split("-");
-			// in case of "variable", choose max value (1)
-			int a = as.size() == 1? as.at(0).toInt() : as.at(1).toInt();
-			int b = bs.size() == 1? bs.at(0).toInt() : bs.at(1).toInt();
-			return a < b;
-		}
-		else //ColumnName or ColumnDataType
-		{
-			return text(column).toLower() < other.text(column).toLower();
-		}
+		const int column = treeWidget()->sortColumn();
+		return this->data(column, Qt::UserRole) < other.data(column, Qt::UserRole);
 	}
 };
 
