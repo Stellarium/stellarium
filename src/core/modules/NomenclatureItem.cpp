@@ -569,8 +569,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// GZ: I reject smaller craters for now, until geometric computations have been corrected.
 	// TODO: Later, size should be adjusted with planet screen size so that not too many labels are visible.
-	if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<500))
-		return;
+	//if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<500))
+	//	return;
     
 	Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
 
@@ -591,18 +591,13 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
 
 	// It is necessary to "turn off" the names whose features are on the opposite face of the planet
-	// Distance from the obserber to the center of the planet	
+	// Distance from the obserber to the center of the planet
 	double dist = XYZ.length()/cos(atan(r/XYZ.length()));
 	// If a is bigger than dist, then the feature is on the opposite face of the planet
-	if (dist < XYZ.length())
-		return;
-	else
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()))
 	{
-		if (painter->getProjector()->projectCheck(XYZ, srcPos))
-		{
-			painter->setColor(color[0], color[1], color[2], 1.0);
-			painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-			painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
-		}
+		painter->setColor(color[0], color[1], color[2], 1.0);
+		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
+		painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
 	}
 }
