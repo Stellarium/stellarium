@@ -58,16 +58,20 @@ for(my $i=0; $i<scalar(@dbfiles); $i++)
     $pName .= $pNameLC;
 
     my $dbh = DBI->connect("DBI:XBase:./") or die $DBI::errstr;
-    my $sth = $dbh->prepare("SELECT clean_name, diameter, center_lon, center_lat, code, link FROM $fileName") or die $dbh->errstr;
+    my $sth = $dbh->prepare("SELECT name, clean_name, diameter, center_lon, center_lat, code, link, type, origin FROM $fileName") or die $dbh->errstr;
     $sth->execute() or die $sth->errstr;
     
     while(my $arr = $sth->fetchrow_arrayref ) 
     {
-	my $id = $arr->[5];
+	my $id = $arr->[6];
 	$id =~ s/http\:\/\/planetarynames\.wr\.usgs\.gov\/Feature\///gi;
-	my $latitude  = sprintf "%.6f", $arr->[3];
-	my $longitude = sprintf "%.6f", $arr->[2];
-	print FAB $pName."\t".$id."\t_(\"".$arr->[0]."\")\t".$arr->[4]."\t".$latitude."\t".$longitude."\t".$arr->[1]."\n";
+	my $latitude  = sprintf "%.6f", $arr->[4];
+	my $longitude = sprintf "%.6f", $arr->[3];
+	my @ntype = split(",",$arr->[7]);
+	my $type = lc $ntype[0]; # context
+	my $featureName = $arr->[0];
+	# if ($featureName !~ m/\'/ && $featureName !~ m/\./) { $featureName = $arr->[1]; }
+	print FAB $pName."\t".$id."\t_(\"".$featureName."\",\"".$type."\")\t".$arr->[5]."\t".$latitude."\t".$longitude."\t".$arr->[2]."\n";
     }
 }
 close FAB;
