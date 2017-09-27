@@ -94,7 +94,8 @@ void NomenclatureMgr::loadNomenclature()
 	//	longitude of surface feature		: float (decimal degrees)
 	//	diameter of surface feature		: float (kilometers)
 	QRegExp recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
-	QString record;
+	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
+	QString record, ctxt;
 
 	QStringList nTypes; // codes for types of features (details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
 	nTypes << "AL"	<< "AR"	<< "AS"	<< "CA"	<< "CB"	<< "CH"	<< "CM"	<< "CO"	<< "CR"	<< "AA"
@@ -123,7 +124,7 @@ void NomenclatureMgr::loadNomenclature()
 		PlanetP p;
 
 		int featureId;
-		QString name, ntypecode, planet = "", planetName = "";
+		QString name, ntypecode, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		float latitude, longitude, size;
 
@@ -145,8 +146,18 @@ void NomenclatureMgr::loadNomenclature()
 				planet		= recRx.capturedTexts().at(1).trimmed();
 				// Read the ID of feature
 				featureId	= recRx.capturedTexts().at(2).toInt();
-				// Read the name of feature
-				name		= recRx.capturedTexts().at(3).trimmed();
+				// Read the name of feature and context
+				ctxt		= recRx.capturedTexts().at(3).trimmed();
+				if (ctxRx.exactMatch(ctxt))
+				{
+					name = ctxRx.capturedTexts().at(1).trimmed();
+					context = ctxRx.capturedTexts().at(2).trimmed();
+				}
+				else
+				{
+					name = ctxt;
+					context = "";
+				}
 				// Read the type of feature
 				ntypecode	= recRx.capturedTexts().at(4).trimmed();
 				switch (nTypes.indexOf(ntypecode.toUpper()))
@@ -338,7 +349,7 @@ void NomenclatureMgr::loadNomenclature()
 
 				if (!p.isNull())
 				{
-					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, ntype, latitude, longitude, size));
+					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, ntype, latitude, longitude, size));
 					if (!nom.isNull())
 						nomenclatureItems.append(nom);
 
@@ -529,6 +540,7 @@ bool NomenclatureMgr::getFlagLabels() const
 // Update i18 names from english names according to current sky culture translator
 void NomenclatureMgr::updateI18n()
 {
+	// TODO: Switch to stellarium-planetary-features.pot template and StelTranslator instance after merging into trunk
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	foreach (NomenclatureItemP i, nomenclatureItems)
 		i->translateName(trans);
