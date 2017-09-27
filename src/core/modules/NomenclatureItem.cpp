@@ -602,7 +602,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     
     // It is necessary to "turn off" the names whose features are on the opposite face of the planet
     /* OPTION 1 */
-    Vec3d XYZ1, XYZ2;
+    /*Vec3d XYZ1, XYZ2;
     // Cartesian coordinates of the planet
     XYZ1[0] = r * cos(coord.latitude()) * cos(coord.longitude());
     XYZ1[1] = r * cos(coord.latitude()) * sin(coord.longitude());
@@ -614,20 +614,20 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     double a = XYZ2.length();
     // If a is bigger than dist, then the feature is on the opposite face of the planet
     if (a > dist)
-        return;
+        return;*/
     /* OPTION 2 */
     // Distance from center of observer's planet to feature
-    double dist = r/sin(0.5*planet->getAngularSize(core));
+    /*double dist = r/sin(0.5*planet->getAngularSize(core));
     if (XYZ.length() > dist)
-        return;
+        return;*/
     /* OPTION 3 */
     double dist = r/sin(0.5*planet->getAngularSize(core));
     if (XYZ.length() > coord.length())
         return;
     /* OPTION 4 */
-    double dist = coord.length()/cos(atan(r/coord.length()));
+    /*double dist = coord.length()/cos(atan(r/coord.length()));
     if (XYZ.length() > coord.length())
-        return;
+        return;*/
     else
     {
         if (painter->getProjector()->projectCheck(XYZ, srcPos))
