@@ -99,8 +99,8 @@ private:
 
 		if (column == MSSearchDialog::ColumnPeak)
 		{
-			QDateTime a = QDateTime::fromString(text(column),"dd/MMM/yyyy");
-			QDateTime b = QDateTime::fromString(other.text(column),"dd/MMM/yyyy");
+			QDateTime a = QDateTime::fromString(text(column),"d MMMM yyyy");
+			QDateTime b = QDateTime::fromString(other.text(column),"d MMMM yyyy");
 			return a.operator < (b);
 		}
 		else if (column == MSSearchDialog::ColumnZHR)
