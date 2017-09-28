@@ -492,7 +492,7 @@ for more details on the location of the user data directory for your OS.
 10.1 Full credits for image 4.2 :
 	Author: Reto Stockli, NASA Earth Observatory,
 		rstockli (at) climate.gsfc.nasa.gov
-	Address of correspondance:
+	Address of correspondence:
 		Reto Stockli
 		ETH/IAC (NFS Klima) & NASA/GSFC Code 913 (SSAI)
 		University Irchel
