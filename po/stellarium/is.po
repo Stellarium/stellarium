@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-09-26 12:54+0000\n"
+"PO-Revision-Date: 2017-09-28 12:16+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-27 05:08+0000\n"
-"X-Generator: Launchpad (build 18463)\n"
+"X-Launchpad-Export-Date: 2017-09-29 05:09+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 "Language: is\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -3075,6 +3075,9 @@ msgid ""
 "was published in <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
+"Þetta reiknirit er byggt á athugunum frá árunum 1877-1891 af G. Mueller og "
+"var það birt í <em>Explanatory Supplement to the Astronomical Ephemeris</em> "
+"(1961)."
 
 #: src/gui/ViewDialog.cpp:1611
 msgid ""
@@ -6128,7 +6131,7 @@ msgstr "Hjálp"
 
 #: src/ui_helpDialogGui.h:285
 msgid "About"
-msgstr "Um"
+msgstr "Um hugbúnað"
 
 #: src/ui_helpDialogGui.h:287 src/ui_scriptConsole.h:374
 msgid "Log"
@@ -10680,7 +10683,7 @@ msgstr "Eiginleikar og takmarkanir"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid "The original telescope control feature"
-msgstr ""
+msgstr "Upprunalegir eiginleikar sjónaukastýringar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
@@ -10728,7 +10731,7 @@ msgstr "Vísbendingar fyrir sjónsvið"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:392
 msgid "'Slew telescope to' window"
-msgstr ""
+msgstr "Gluggi fyrir miðun sjónauka"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 msgid "Telescope commands"
@@ -10764,6 +10767,8 @@ msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"AÐVÖRUN: Stellarium GETUR EKKI komiði í veg fyrir að sjónaukanum þínum sé "
+"beint að sólinni."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
 msgid ""
@@ -11374,7 +11379,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Ýttu á \"%1\" hnappinn til að setja upp nýja tengingu við sjónauka."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
@@ -11408,7 +11413,7 @@ msgstr "Byrja"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:937
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Ræsa valinn sjónauka"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:942
 msgid "Stop"
@@ -11416,7 +11421,7 @@ msgstr "Stöðva"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:943
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Stöðva valinn sjónauka"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:948
 msgid "Connect"
@@ -11424,7 +11429,7 @@ msgstr "Tengjast"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:949
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Tengjast völdum sjónauka"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:954
 msgid "Disconnect"
@@ -11432,7 +11437,7 @@ msgstr "Aftengjast"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:955
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Aftengjast völdum sjónauka"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:976
 msgid "Select a directory"
@@ -11454,15 +11459,15 @@ msgstr "Veldu einn"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Miða sjónauka á"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:323
 msgid "There are no active devices."
-msgstr ""
+msgstr "Það eru engin virk tæki."
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Miða sjónauka á hnit"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
@@ -11472,7 +11477,7 @@ msgstr "Stjö&rnulengd (J2000):"
 #: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "St&jörnubreidd (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
@@ -11510,7 +11515,7 @@ msgstr "Tuga&kerfisgráður"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:342
 msgid "&Slew"
-msgstr ""
+msgstr "&Miða"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
@@ -11525,24 +11530,28 @@ msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Sjónauki sem tengdur er við raðtengi á þessari tölvu og er stýrt beint af "
+"Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:559
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, beint í gegnum raðtengi"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:561
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Sjónauka stýrt af utanaðkomandi forriti, annað hvort á þessari tölvu eða á "
+"fjartengdri vél."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Annar hugbúnaður eða á fjartengdri tölvu"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:565
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
-msgstr ""
+msgstr "Sjónauki sem er aðgengilegur með RTS2(.org) JSON API-forritsviðmóti"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
 msgid "RTS2 telescope"
@@ -11858,11 +11867,11 @@ msgstr "Tímalengd aðdráttar:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:473
 msgid "Milky Way intensity:"
-msgstr "Ljósstyrkur Vetrarbrautar"
+msgstr "Ljósstyrkur Vetrarbrautar:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:479
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "Ljósstyrkur sverðbjarma:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:500
 msgid "Run local script"
@@ -12075,7 +12084,7 @@ msgstr "Bæta við hlutum"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:261
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:273
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "Minniháttar fyrirbæri í sólkerfi"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
@@ -12126,7 +12135,7 @@ msgstr "Stillingaskrá"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:275
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "Bæta nýjum minniháttar fyrirbærum við í sólkerfið"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
@@ -12261,7 +12270,7 @@ msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr ""
+msgstr "Stofnun í kennilegri- og tilraunaeðlisfræði"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
@@ -12340,6 +12349,11 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"Þetta eru 57 \"valdar stjörnur\" sem taldar eru upp í <em>The Nautical "
+"Almanac</em> sem gefið er út sameiginlega af Her Majesty's Nautical Almanac "
+"Office og US Naval Observatory síðan 1958; af þessum sökum eru þessar "
+"stjörnur einnig notaðar í leiðsögutækjum á borð við <em>2102D Star "
+"Finder</em> og <em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:299
@@ -12348,6 +12362,8 @@ msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
 "Bureau des Longitudes."
 msgstr ""
+"Þetta eru 81 stjörnur sem taldar eru upp í <em>%1</em> gefnu út af hinni "
+"frönsku Bureau des Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:305
@@ -12356,6 +12372,8 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"Þetta eru 160 stjörnur sem taldar eru upp í rússneska sjóalmanakinu "
+"(upprunalegur titill á rússnesku er <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:87
 msgid "Navigational Stars Plug-in"
@@ -12370,6 +12388,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Frekari upplýsingar um þessa viðbót, þróun hennar og snið skráa, geturðu "
+"%1séð hér%2."
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:142
@@ -12410,16 +12430,15 @@ msgstr "Athugið:"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae"
-msgstr "Bjartar sprengistjörnur"
+msgstr "Björt nýstirni"
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
-"Þessi viðbót birtir nokkrar bjartar sprengistjörnur í Vetrarbrautinni."
+msgstr "Þessi viðbót birtir nokkur björt nýstirni í Vetrarbrautinni."
 
 #: plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae configuration window"
-msgstr "Stillingagluggi fyrir bjartar sprengistjörnur"
+msgstr "Stillingagluggi fyrir björt nýstirni"
 
 #: plugins/Novae/src/Nova.cpp:147
 msgid "nova"
@@ -12427,7 +12446,7 @@ msgstr "sprengistjarna"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "Bright Novae Plug-in"
-msgstr "Viðbót fyrir bjartar sprengistjörnur"
+msgstr "Viðbót fyrir björt nýstirni (Bright Novae)"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid ""
@@ -12437,14 +12456,12 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
-"Þessi viðbót gerir þér kleift að skoða nokkrar bjartar nýlegar "
-"sprengistjörnur: "
+msgstr "Þessi viðbót gerir þér kleift að skoða nokkur nýleg björt nýstirni: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "Öll þessi nýstirni eru bjartari en %1 við hámarksbirtustig."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 msgid ""
@@ -12467,15 +12484,15 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
 msgid "Novae is updated"
-msgstr ""
+msgstr "Nýstirni eru uppfærð"
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr "Stillingar fyrir bjartar sprengistjörnur"
+msgstr "Stillingar fyrir björt nýstirni"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr "Stillingar viðbótar fyrir bjartar sprengistjörnur"
+msgstr "Stillingar forritsviðbótar fyrir björt nýstirni"
 
 #: plugins/Quasars/src/Quasars.cpp:75
 msgid ""
@@ -12535,18 +12552,18 @@ msgstr "Stillingar fyrir kvasa"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "Teikna alla kvasa sem ekki eru með skýringar"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Virkja birtingu á dreifingu kvasa"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:489
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
 msgid "Enable display at startup"
-msgstr ""
+msgstr "Virkja birtingu þegar forritið er ræst"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Show quasars button on toolbar"
@@ -12781,11 +12798,11 @@ msgstr "Stillingar fyrir tifstjörnur"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "Teikna allar tifstjörnur sem ekki eru með skýringar"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Virkja birtingu á dreifingu tifstjarna"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
@@ -13221,7 +13238,7 @@ msgstr "Möndulhalli"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Angle Distance"
-msgstr ""
+msgstr "Hornbil"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:350
 msgid "Discovered year"
@@ -13322,7 +13339,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Stuðull fyrir jarðlíkindi (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid ""
@@ -13330,10 +13347,13 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Líkindi við Jörðina á kvarðanum 0 til 1, þar sem 1 þýðir líkast Jörðinni. "
+"ESI-stuðullinn ákvarðast af radíus plánetunnar, þéttleika, lausnarhraða og "
+"yfirborðshitastigi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Proper names"
-msgstr ""
+msgstr "Eiginnöfn"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid ""
@@ -13647,7 +13667,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
-msgstr ""
+msgstr "<em>Ogmios</em> er nafn sem þegar er úthlutað á smástirni."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
@@ -13670,7 +13690,7 @@ msgstr "Viðbótarupplýsingar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Byggilegt svæði umhverfis móðurstjörnu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Planetary equilibrium temperature"
@@ -13682,19 +13702,19 @@ msgstr "Lífsskilyrði plánetu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Stuðull fyrir jarðlíkindi (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid "Final Results of NameExoWorlds Public Vote Released"
-msgstr ""
+msgstr "Endanlegar útgefnar niðurstöður úr almennri kosningu NameExoWorlds"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid "NameExoWorlds website"
-msgstr ""
+msgstr "Vefsvæði NameExoWorlds"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "Almenn starfstengd vefsetur tengd rannsóknum á fjarreikistjörnum"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "Exoplanets: an interactive version of XKCD 1071"
@@ -13702,7 +13722,7 @@ msgstr "Fjarreikistjörnur: Gagnvirk útgáfa af XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
@@ -13715,6 +13735,8 @@ msgstr "Nafngjafir á fjarreikistjörnur (IAU)"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
+"Nokkrir stjörnufræðungar og rannsóknahópar sem virkir eru í rannsóknum á "
+"fjarreikistjörnum"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "update: 16 April 2012"
@@ -13754,7 +13776,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "The Habitable Zone Gallery"
@@ -13782,7 +13804,7 @@ msgstr "Miðskekkja sporbrautar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:503
 msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgstr "Hálfur langás umferðarbrautar, AU"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:504
 msgid "Planetary Mass, Mjup"
@@ -13798,11 +13820,11 @@ msgstr "Umferðartími sporbrautar, dagar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
 msgid "Angular Distance, arcsec"
-msgstr ""
+msgstr "Hornbil, bogasek"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid "Effective temperature of host star, K"
-msgstr ""
+msgstr "Raunhitastig móðurstjörnu, K"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
 msgid "Year of Discovery"
@@ -13810,31 +13832,31 @@ msgstr "Uppgötvunarár"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
 msgid "Metallicity of host star"
-msgstr ""
+msgstr "Málmslikja móðurstjörnu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
 msgid "V magnitude of host star, mag"
-msgstr ""
+msgstr "V birtustig móðurstjörnu, mag"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
 msgid "RA (J2000) of star, deg"
-msgstr ""
+msgstr "Stj.lengd (J2000) stjörnu, gráður"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
 msgid "Dec (J2000) of star, deg"
-msgstr ""
+msgstr "Stj.breidd (J2000) stjörnu, gráður"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid "Distance to star, pc"
-msgstr ""
+msgstr "Fjarlægð að stjörnu, pc"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid "Mass of host star, Msol"
-msgstr ""
+msgstr "Massi móðurstjörnu, Msol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
 msgid "Radius of host star, Rsol"
-msgstr ""
+msgstr "Radíus móðurstjörnu, Rsol"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
 msgid "Exoplanets Configuration"
@@ -13854,7 +13876,7 @@ msgstr "Stillingar fyrir fjarreikistjörnur"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:477
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "Teikna öll sólkerfi með fjarreikistjörnum sem ekki eru með skýringar"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:479
 msgid "Enable display of distribution for exoplanets"
@@ -13866,7 +13888,7 @@ msgstr "Birta fjarreikistjörnur eftir að þær uppgötvuðust"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:483
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "Virkja tímalínu með uppgötvunum fjarreikistjarna"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:485
 msgid ""
@@ -13888,11 +13910,11 @@ msgstr "Birta hnapp fyrir fjarreikistjörnur á verkfæraslá"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:494
 msgid "Diagrams: scatter plot"
-msgstr ""
+msgstr "Skýringamyndir: tvísturgraf"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:495
 msgid "Plot"
-msgstr ""
+msgstr "Teikna"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:496
 msgid "Y axis"
@@ -13906,7 +13928,7 @@ msgstr "Lógaritmískur kvarði"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:507
 msgid "log scale"
-msgstr ""
+msgstr "log-kvarði"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:509
@@ -13951,6 +13973,13 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Birtir greiningu á sýnileika hlutar (ris, setur, og umferðartímar) á "
+"núverandi dagsetningu, auk upplýsinga um hvenær ársins hægt er að skoða "
+"hann. Gert er ráð fyrir að hlutur sé skoðanlegur ef hann er ofan "
+"sjóndeildarhrings hluta nætur. Einnig eru teknar með upplýsingar um mestu "
+"fjarlægð frá sólinni og upplýsingar um ris/setur miðað við sól "
+"(acronychal/cosmical rising/setting). (Útskýringar eru gefnar í 'Um "
+"hugbúnað' flipanum í uppsetningarglugga viðbótarinnar.)"
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
@@ -14067,7 +14096,7 @@ msgstr "Varð hæst kl. %1 (fyrir %2) í %3 gráðum"
 
 #: plugins/Observability/src/Observability.cpp:202
 msgid "Source is not observable."
-msgstr ""
+msgstr "Ekki er hægt að skoða fyrirbærið."
 
 #: plugins/Observability/src/Observability.cpp:203
 msgid "No Acronychal nor Cosmical rise/set."
@@ -14114,7 +14143,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:215
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "Hægt að skoða allt árið."
 
 #: plugins/Observability/src/Observability.cpp:216
 msgid "Not observable at dark night."
@@ -14123,7 +14152,7 @@ msgstr "Ekki sjáanlegt um dimmar nætur"
 #: plugins/Observability/src/Observability.cpp:217
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Nætur fyrir ofan sjóndeildarhring: %1"
 
 #: plugins/Observability/src/Observability.cpp:218
 msgid "TODAY:"
@@ -14176,7 +14205,7 @@ msgstr "Útskýringar á nokkrum atriðum"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "Hæð sólar í ljósaskiptum:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
@@ -14185,6 +14214,10 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"Litið verður á öll fyrirbæri á himninum sem sýnileg þegar sólin er fyrir "
+"neðan þessa hæð. Hæðin við stjörnufræðileg ljósaskipti er venjulega á milli -"
+"12 og -18 gráður. Þessi breyta er einungis notuð við mat á sviði "
+"viðmiðunartíma fyrir sýnileika (sjá hér fyrir neðan)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Horizon altitude:"
@@ -14195,6 +14228,8 @@ msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"Lágmarkshæð sýnileika (vegna fjalla, bygginga, eða út af takmörkunum "
+"sjónaukastæðis)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Today ephemeris:"
@@ -14207,6 +14242,10 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
+"Skýrir sig sjálft. Forritið mun birta tíma fyrir ris, setur, og hæstu stöðu "
+"(umferðar). Nákvæmir tímar þessara almanakstútreikninga eru gefnir upp á "
+"tvennan máta: sem tímabil (miðað við núverandi tíma) og sem klukkustundir (í "
+"staðartíma)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
@@ -14235,7 +14274,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Largest Sun separation:"
-msgstr ""
+msgstr "Mesta fjarlægð frá sól:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
@@ -14286,12 +14325,12 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:202
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Hæð sólar í ljósaskiptum: %1 gráður."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:208
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Hæð sjóndeildarhrings: %1 gráður."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -14339,7 +14378,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
-msgstr ""
+msgstr "Dagsetning mestu fjarlægðar frá sól"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "Nights with the source above horizon"
