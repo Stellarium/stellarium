@@ -569,11 +569,10 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     
     // GZ: I reject smaller craters for now, until geometric computations have been corrected.
     // TODO: Later, size should be adjusted with planet screen size so that not too many labels are visible.
-    if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<500))
+    if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<3000))
         return;
     
-    Vec3d srcPos;
-    Vec3d XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
+    Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
     
     // Calculate the radius of the planet. It is necessary to re-scale it
     double r = planet->getRadius() * planet->getSphereScale();
@@ -582,7 +581,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     double nlatitude = latitude * M_PI/180.0;
     double nlongitude = (longitude + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
     
-    // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert them into cartesian coordinates
+    // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
     XYZ0[0] = r * cos(nlatitude) * cos(nlongitude);
     XYZ0[1] = r * cos(nlatitude) * sin(nlongitude);
     XYZ0[2] = r * sin(nlatitude);
@@ -591,49 +590,14 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
      planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
     XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
     
-    Vec3d coord = planet->getEclipticPos();
-    
-    
-    // Angular size of feature
-    double angSizeFeature = 2*atan(size/(2*coord.length()));
-    // Angular size of planet or moon
-    double angSizePlanet = planet->getAngularSize(core);
-    
     // It is necessary to "turn off" the names whose features are on the opposite face of the planet
-    /* OPTION 1 */
-    /*Vec3d XYZ1, XYZ2;
-    // Cartesian coordinates of the planet
-    XYZ1[0] = r * cos(coord.latitude()) * cos(coord.longitude());
-    XYZ1[1] = r * cos(coord.latitude()) * sin(coord.longitude());
-    XYZ1[2] = r * sin(coord.latitude());
-    // Distance from the feature to the observer
-    XYZ2[0] = XYZ[0] + XYZ1[0];
-    XYZ2[1] = XYZ[1] + XYZ1[1];
-    XYZ2[2] = XYZ[2] + XYZ1[2];
-    double a = XYZ2.length();
-    // If a is bigger than dist, then the feature is on the opposite face of the planet
-    if (a > dist)
-        return;*/
-    /* OPTION 2 */
-    // Distance from center of observer's planet to feature
-    /*double dist = r/sin(0.5*planet->getAngularSize(core));
-    if (XYZ.length() > dist)
-        return;*/
-    /* OPTION 3 */
-    double dist = r/sin(0.5*planet->getAngularSize(core));
-    if (XYZ.length() > coord.length())
-        return;
-    /* OPTION 4 */
-    /*double dist = coord.length()/cos(atan(r/coord.length()));
-    if (XYZ.length() > coord.length())
-        return;*/
-    else
+    // Distance from the obserber to the center of the planet
+    double dist = XYZ.length()/cos(atan(r/XYZ.length()));
+    // If dist is bigger than XYZ.length(), then we can see the feature
+    if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()))
     {
-        if (painter->getProjector()->projectCheck(XYZ, srcPos))
-        {
-            painter->setColor(color[0], color[1], color[2], 1.0);
-            painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-            painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
-        }
+        painter->setColor(color[0], color[1], color[2], 1.0);
+        painter->drawCircle(srcPos[0], srcPos[1], 2.f);
+        painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
     }
 }
