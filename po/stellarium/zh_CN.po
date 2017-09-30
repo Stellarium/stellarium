@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-08-08 16:28+0000\n"
-"Last-Translator: sunshuwei <Unknown>\n"
+"PO-Revision-Date: 2017-09-29 16:56+0000\n"
+"Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-23 05:29+0000\n"
-"X-Generator: Launchpad (build 18463)\n"
+"X-Launchpad-Export-Date: 2017-09-30 05:10+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 
 #: src/core/modules/CustomObject.cpp:78
 msgid "custom object"
@@ -409,7 +409,7 @@ msgstr "作者"
 #: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "米"
 
 #: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:472
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -421,7 +421,7 @@ msgstr "所在位置"
 #: src/core/modules/LandscapeMgr.cpp:823
 msgctxt "pressure"
 msgid "hPa"
-msgstr ""
+msgstr "百帕"
 
 #: src/core/modules/LandscapeMgr.cpp:833
 msgid "extinction coefficient"
@@ -517,7 +517,7 @@ msgstr "定向角"
 #: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
 msgctxt "distance"
 msgid "ly"
-msgstr ""
+msgstr "光年"
 
 #: src/core/modules/Nebula.cpp:315 src/core/modules/Nebula.cpp:350
 #: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:302
@@ -532,7 +532,7 @@ msgstr "距离"
 #: src/core/modules/Nebula.cpp:325 plugins/Pulsars/src/Pulsar.cpp:239
 msgctxt "distance"
 msgid "kpc"
-msgstr ""
+msgstr "千秒差距"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
 #: src/core/modules/Nebula.cpp:334
@@ -1018,7 +1018,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:324
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "千米"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -2247,7 +2247,7 @@ msgstr "授权条款"
 #: src/gui/ConfigurationDialog.cpp:1025
 msgctxt "license"
 msgid "unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/gui/ConfigurationDialog.cpp:1122
 msgid "Running script: "
@@ -3190,15 +3190,15 @@ msgstr "星图"
 
 #: src/gui/ScriptConsole.cpp:105
 msgid "Load Script"
-msgstr ""
+msgstr "加载脚本"
 
 #: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
 msgid "Script Files"
-msgstr ""
+msgstr "脚本文件"
 
 #: src/gui/ScriptConsole.cpp:125
 msgid "Save Script"
-msgstr ""
+msgstr "保存脚本"
 
 #: src/gui/ScriptConsole.cpp:227
 msgid "Select Script Include Directory"
@@ -3806,75 +3806,75 @@ msgstr "12小时"
 
 #: src/gui/AstroCalcDialog.cpp:1207
 msgid "1 solar day"
-msgstr ""
+msgstr "1 太阳日"
 
 #: src/gui/AstroCalcDialog.cpp:1208
 msgid "5 solar days"
-msgstr ""
+msgstr "5 太阳日"
 
 #: src/gui/AstroCalcDialog.cpp:1209
 msgid "10 solar days"
-msgstr ""
+msgstr "10 太阳日"
 
 #: src/gui/AstroCalcDialog.cpp:1210
 msgid "15 solar days"
-msgstr ""
+msgstr "15 太阳日"
 
 #: src/gui/AstroCalcDialog.cpp:1211
 msgid "30 solar days"
-msgstr ""
+msgstr "30 太阳日"
 
 #: src/gui/AstroCalcDialog.cpp:1212
 msgid "60 solar days"
-msgstr ""
+msgstr "60 太阳日"
 
 #: src/gui/AstroCalcDialog.cpp:1213
 msgid "1 sidereal day"
-msgstr ""
+msgstr "1 恒星日"
 
 #: src/gui/AstroCalcDialog.cpp:1214
 msgid "5 sidereal days"
-msgstr ""
+msgstr "5 恒星日"
 
 #: src/gui/AstroCalcDialog.cpp:1215
 msgid "10 sidereal days"
-msgstr ""
+msgstr "10 恒星日"
 
 #: src/gui/AstroCalcDialog.cpp:1216
 msgid "15 sidereal days"
-msgstr ""
+msgstr "15 恒星日"
 
 #: src/gui/AstroCalcDialog.cpp:1217
 msgid "30 sidereal days"
-msgstr ""
+msgstr "30 恒星日"
 
 #: src/gui/AstroCalcDialog.cpp:1218
 msgid "60 sidereal days"
-msgstr ""
+msgstr "60 恒星日"
 
 #: src/gui/AstroCalcDialog.cpp:1219
 msgid "1 Julian day"
-msgstr ""
+msgstr "1 儒略日"
 
 #: src/gui/AstroCalcDialog.cpp:1220
 msgid "5 Julian days"
-msgstr ""
+msgstr "5 儒略日"
 
 #: src/gui/AstroCalcDialog.cpp:1221
 msgid "10 Julian days"
-msgstr ""
+msgstr "10 儒略日"
 
 #: src/gui/AstroCalcDialog.cpp:1222
 msgid "15 Julian days"
-msgstr ""
+msgstr "15 儒略日"
 
 #: src/gui/AstroCalcDialog.cpp:1223
 msgid "30 Julian days"
-msgstr ""
+msgstr "30 儒略日"
 
 #: src/gui/AstroCalcDialog.cpp:1224
 msgid "60 Julian days"
-msgstr ""
+msgstr "60 儒略日"
 
 #: src/gui/AstroCalcDialog.cpp:1296
 msgid "Solar system"
@@ -4078,7 +4078,7 @@ msgstr "亮星云"
 
 #: src/gui/AstroCalcDialog.cpp:3295
 msgid "Text file"
-msgstr ""
+msgstr "文本文件"
 
 #: src/gui/AstroCalcDialog.cpp:3297
 msgid "Save list of objects as..."
@@ -4941,7 +4941,7 @@ msgstr "&打开"
 
 #: src/translations.h:446
 msgid "&Save"
-msgstr ""
+msgstr "保存(&S)"
 
 #: src/translations.h:447
 msgid "File &name:"
@@ -5010,27 +5010,27 @@ msgstr "光标在%1, %2 按ESC取消"
 
 #: src/translations.h:463
 msgid "Back"
-msgstr ""
+msgstr "后退"
 
 #: src/translations.h:464
 msgid "Forward"
-msgstr ""
+msgstr "前进"
 
 #: src/translations.h:465
 msgid "Parent Directory"
-msgstr ""
+msgstr "上级目录"
 
 #: src/translations.h:466
 msgid "Create New Folder"
-msgstr ""
+msgstr "创建新文件夹"
 
 #: src/translations.h:467
 msgid "List View"
-msgstr ""
+msgstr "列表视图"
 
 #: src/translations.h:468
 msgid "Detail View"
-msgstr ""
+msgstr "详细视图"
 
 #: src/translations.h:469
 msgid "Recent Places"
@@ -5045,11 +5045,11 @@ msgstr ""
 
 #: src/translations.h:471
 msgid "&Yes"
-msgstr ""
+msgstr "是(&Y)"
 
 #: src/translations.h:472
 msgid "&No"
-msgstr ""
+msgstr "否(&N)"
 
 #: src/translations_countries.h:31
 msgid "Andorra"

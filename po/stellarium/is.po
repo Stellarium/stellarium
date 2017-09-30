@@ -1,24 +1,25 @@
-# translation of po_stellarium_stellarium-is.po to Icelandic
-# translation of 20130131_stellarium_stellarium-is to Icelandic
-# translation of po_stellarium_stellarium-is.po to
-# Icelandic translation for stellarium
+# translation of stellarium-is.po to Icelandic
+# Icelandic translation for Stellarium
+# Íslensk þýðing á Stellarium
 # Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# Copyright (c) 2006-2017 Icelandic translators of Stellarium
+# Höfundarréttur (c) Íslenskir þýðendur Stellarium 2006-2017
 # This file is distributed under the same license as the stellarium package.
 #
-# Sveinn í Felli <sveinki@nett.is>, 2008, 2009, 2013, 2015, 2016, 2017.
-# Sverrir Guðmundsson <sverrgu@hotmail.com>, 2008.
+# Sveinn í Felli <sv1@fellsnet.is>, 2008, 2009, 2013, 2015, 2016, 2017.
+# Sverrir Guðmundsson <sverrgu@hotmail.com>, 2008, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: po_stellarium_stellarium-is\n"
+"Project-Id-Version: stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-22 11:07+0700\n"
-"PO-Revision-Date: 2017-09-28 12:16+0000\n"
+"PO-Revision-Date: 2017-09-29 16:57+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
-"Language-Team: Icelandic <en@li.org>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-09-29 05:09+0000\n"
+"X-Launchpad-Export-Date: 2017-09-30 05:09+0000\n"
 "X-Generator: Launchpad (build 18471)\n"
 "Language: is\n"
 
@@ -681,7 +682,7 @@ msgstr "ríkuleg þyrping með fleiri en 100 stjörnum"
 #: src/core/modules/Nebula.cpp:1243
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
-msgstr ""
+msgstr "óskráður flokkur fyrir fjölda meðlima"
 
 #: src/core/modules/Nebula.cpp:1247
 msgctxt "nebulosity factor of open clusters"
@@ -726,29 +727,29 @@ msgstr "óskráð birtustig endurskinsþoka"
 #: src/core/modules/Nebula.cpp:1292
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "birtugefandi stjarnan liggur innan þokuslæðu"
 
 #: src/core/modules/Nebula.cpp:1295
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
-msgstr ""
+msgstr "stjarna er staðsett utan upplýstrar þokuslæðu"
 
 #: src/core/modules/Nebula.cpp:1298
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr ""
+msgstr "stjarna er staðsett við horn upplýstrar þokuslæðu"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:1303
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "stjarna er staðsett utan upplýstrar afbrigðilegrar þokuslæðu"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
 #: src/core/modules/Nebula.cpp:1309
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "upplýst afbrigðileg þokuslæða"
 
 #: src/core/modules/Nebula.cpp:1313
 msgctxt "Reflection Nebulae Classification"
@@ -1323,6 +1324,8 @@ msgstr "Næturhamur"
 #: src/core/StelApp.cpp:581
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
+"Gat ekki útbúið Spout-sendi. Skoðaðu vinnsluannál til að sjá frekari "
+"upplýsingar."
 
 #: src/core/StelCore.cpp:252 src/gui/StelGui.cpp:207
 #: src/gui/AstroCalcDialog.cpp:827 src/gui/AstroCalcDialog.cpp:1907
@@ -1865,6 +1868,8 @@ msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
+"Gildi þessarar lausnar á %1 fyrir %2 (langtímahröðun tunglsins) þarfnast "
+"aðlögunar, skoðaðu handbókina fyrir nánari upplýsingar."
 
 #: src/core/StelCore.cpp:2330
 msgid "with zero values outside this range"
@@ -2975,12 +2980,16 @@ msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
+"Notar netjulíkön í þrívídd fyrir sum valin fyrirbæri áhangandi reikistjörnum "
+"(smærri tungl, loftsteinar, halastjörnur) í stað kúlulaga nálgunar"
 
 #: src/gui/ViewDialog.cpp:1281
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
+"Nota &quot;skuggavörpun&quot; til að líkja eftir eigin skuggum ekki-íhvolfra "
+"fyrirbæra í sólkerfinu. Gæti minnkað gæði hálfskugga á sumum fyrirbærum."
 
 #: src/gui/ViewDialog.cpp:1302
 msgid "Abbreviated"
@@ -3097,7 +3106,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:1617
 msgid "Visual magnitude based on phase angle and albedo."
-msgstr ""
+msgstr "Sýndarbirtustig byggt á afstöðuhorni og endurskinshlutfalli."
 
 #: src/gui/LocationDialog.cpp:715
 msgid "GPS..."
@@ -4786,16 +4795,21 @@ msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
+"Rétt áður en Mars gengur fyrir Sólina, sprettur Fóbos framúr og gengur fyrir "
+"hana á undan. Gerist á milli Sporðdrekans og Bogmannsins þann 26. apríl, "
+"2017."
 
 #: src/translations.h:404
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
+"Rétt áður en Mars gengur fyrir Sólina, sprettur Fóbos framúr og gengur fyrir "
+"hana á undan. Gerist á milli Nautsins og Tvíburanna þann 23. júlí, 2031."
 
 #: src/translations.h:405
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
-msgstr "Phobos myrkvar sólina séð frá Olympus Mons 10. janúar 2068."
+msgstr "Fóbos myrkvar sólina séð frá Olympus Mons 10. janúar 2068."
 
 #: src/translations.h:406
 msgid ""
@@ -4803,6 +4817,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Myrkvar Fóbosar á Jörðina eru algengir, rétt eins og myrkvar Júpíters. En að "
+"báðar gerðir myrkvanna eigi sér stað á sama degi er mjög sjaldgæft. Hér "
+"gerist það þann 23. janúar 2048. Í raunhraða."
 
 #: src/translations.h:407
 msgid ""
@@ -4882,6 +4899,9 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
+"Ferðir í kringum áhugaverð fyrirbæri, sem hægt væri að skoða með "
+"handsjónauka. Gögn skriftunnar eru tekin úr bókinni \"Binocular Highlights\" "
+"eftir Gary Seronik."
 
 #: src/translations.h:419
 msgid ""
@@ -6836,6 +6856,8 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Lengdarbaugur gagnstöðu/samstöðu - lína sólbaugslengdar sem gengur í gegnum "
+"báða sólbaugspólana, Sólina og gagnstöðupunkt."
 
 #: src/ui_viewDialog.h:2603
 msgid "Color of colures"
@@ -6940,6 +6962,8 @@ msgid ""
 "These circles delimit stars which stay always above (respectively below) the "
 "mathematical horizon."
 msgstr ""
+"Þessir hringir afmarka stjörnur sem alltaf eru ofan (hlutfallslega neðan) "
+"stærðfræðilega sjóndeildarhringslínu."
 
 #: src/ui_viewDialog.h:2669
 msgid "Circumpolar circles"
@@ -7485,11 +7509,11 @@ msgstr "Aukastillingar"
 
 #: src/ui_configurationDialog.h:1388
 msgid "Use short notation for unit of measurement of surface brightness"
-msgstr ""
+msgstr "Nota stutta framsetningu fyrir mælieiningu á yfirborðsbirtu"
 
 #: src/ui_configurationDialog.h:1389
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
-msgstr ""
+msgstr "Nota mælieininguna birtustig/bogsekúndu^2 fyrir yfirborðsbirtu"
 
 #: src/ui_configurationDialog.h:1390
 msgid "Use formatting output for coordinates"
@@ -9283,35 +9307,35 @@ msgstr "Ljósháls í þessari samsetningu augnglers/linsu/sjónauka"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:919
 msgid "Rayleigh criterion"
-msgstr ""
+msgstr "Rayleigh viðmiðun"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 msgid "The Rayleigh resolution criterion"
-msgstr ""
+msgstr "Rayleigh upplausnarviðmiðunin"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Dawes' limit"
-msgstr ""
+msgstr "Markgildi Dawes"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Dawes' resolution criterion"
-msgstr ""
+msgstr "Dawes' upplausnarviðmiðunin"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
 msgid "Abbe's limit"
-msgstr ""
+msgstr "Markgildi Abbes"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:935
 msgid "Abbe’s diffraction resolution limit"
-msgstr ""
+msgstr "Abbe upplausnarmörk ljósdreifingar"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:940
 msgid "Sparrow's limit"
-msgstr ""
+msgstr "Markgildi Sparrows"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
 msgid "Sparrow's resolution limit"
-msgstr ""
+msgstr "Upplausnarmörk Sparrows"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
