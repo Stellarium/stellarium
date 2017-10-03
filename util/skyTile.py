@@ -6,6 +6,7 @@
 import os
 import gzip
 
+
 def writePolys(pl, f):
 	"""Write a list of polygons pl into the file f.
 	The result is under the form [[[ra1, de1],[ra2, de2],[ra3, de3],[ra4, de4]], [[ra1, de1],[ra2, de2],[ra3, de3]]]"""
@@ -27,7 +28,7 @@ class StructCredits:
 		self.full = None;
 		self.infoUrl = None;
 		return
-	
+
 	def outJSON(self, f, levTab):
 		if self.short!=None:
 			f.write(levTab+'\t\t"short": "'+self.short+'",\n')
@@ -50,28 +51,28 @@ class SkyImageTile:
 		self.alphaBlend = None
 		self.maxBrightness = None
 		return
-	
+
 	def outputJSON(self, prefix='', qCompress=False, maxLevelPerFile=10, outDir=''):
 		"""Output the tiles tree in the JSON format"""
 		fName = outDir+prefix+"x%.2d_%.2d_%.2d.json" % (2**self.level, self.i, self.j)
-		
+
 		# Actually write the file with maxLevelPerFile level
 		with open(fName, 'w') as fid:
-            self.__subOutJSON(prefix, qCompress, maxLevelPerFile, fid, 0, outDir)
-		
+			self.__subOutJSON(prefix, qCompress, maxLevelPerFile, fid, 0, outDir)
+
 		if (qCompress):
 			with open(fName) as ff:
-                fout = gzip.GzipFile(fName+".gz", 'w')
-                fout.write(ff.read())
-                fout.close()
-                os.remove(fName)
+				fout = gzip.GzipFile(fName + ".gz", 'w')
+				fout.write(ff.read())
+				fout.close()
+				os.remove(fName)
 
 	def __subOutJSON(self, prefix, qCompress, maxLevelPerFile, f, curLev, outDir):
 		"""Write the tile in the file f"""
 		levTab = ""
 		for i in range(0,curLev):
 			levTab += '\t'
-		
+
 		f.write(levTab+'{\n')
 		if self.imageInfo.short!=None or self.imageInfo.full!=None or self.imageInfo.infoUrl!=None:
 			f.write(levTab+'\t"imageInfo": {\n')
@@ -103,7 +104,7 @@ class SkyImageTile:
 			return
 		f.write(',\n')
 		f.write(levTab+'\t"subTiles": [\n')
-		
+
 		if curLev+1<maxLevelPerFile:
 			# Write the tiles in the same file
 			for st in self.subTiles:

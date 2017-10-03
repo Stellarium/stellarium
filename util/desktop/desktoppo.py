@@ -1,7 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import errno, glob, polib, re, os, getopt, sys
+import errno
+import glob
+import polib
+import re
+import os
+import getopt
+import sys
 from time import strftime
 
 def usage():
@@ -13,18 +19,18 @@ def usage():
 try:
     opts, args = getopt.getopt(sys.argv[1:], "hd:", ["help", "directory="])
 except getopt.GetoptError:
-    usage() # print help information and exit
+    usage()  # print help information and exit
 
-directory='../../data/'
-for o,a in opts:
+directory = '../../data/'
+for o, a in opts:
     if o in ("-h", "--help"):
         usage()
     if o in ("-d", "--directory"):
-        directory=a
+        directory = a
 
 directory = directory.rstrip('/')
 
-if (directory != '') and (os.path.isdir(directory) == False):
+if (directory != '') and (os.path.isdir(directory) is False):
     sys.exit('Specified directory does not exist')
 
 # Find all desktop files
@@ -33,14 +39,14 @@ for rootdir, dirnames, filenames in os.walk(directory):
     files.extend(glob.glob(rootdir + "/*.desktop"))
 
 # Define Templates and po directory name
-messagetemplate='(?<=\n)Name=.*?\n|GenericName=.*?\n|Comment=.*?\n'
-mpattern=re.compile(messagetemplate,re.DOTALL)
-translationtemplate='(?<=\n)Name\[.*?\n|GenericName\[.*?\n|Comment\[.*?\n'
-tpattern=re.compile(translationtemplate,re.DOTALL)
+messagetemplate = '(?<=\n)Name=.*?\n|GenericName=.*?\n|Comment=.*?\n'
+mpattern = re.compile(messagetemplate, re.DOTALL)
+translationtemplate = '(?<=\n)Name\[.*?\n|GenericName\[.*?\n|Comment\[.*?\n'
+tpattern = re.compile(translationtemplate, re.DOTALL)
 podir = '../../po/stellarium-desktop'
 
 # Write POT file
-pot = polib.POFile('',check_for_duplicates=True)
+pot = polib.POFile('', check_for_duplicates=True)
 potcreationtime = strftime('%Y-%m-%d %H:%M%z')
 pot.metadata = {
   'Project-Id-Version': 'Stellarium desktop file translation',
@@ -79,14 +85,14 @@ for langfile in files:
       )
     if message_id != '':
       try:
-	pot.append(potentry)
+        pot.append(potentry)
       except ValueError:
-	print 'The entry already exists'
+        print 'The entry already exists'
 pot.save('../../po/stellarium-desktop/stellarium-desktop.pot')
 
 # Merge translations
 for pofile in glob.glob(podir + '/*.po'):
-  lang = pofile[:-3].rsplit('/',1)[1]
+  lang = pofile[:-3].rsplit('/', 1)[1]
   pofilename = pofile
   po = polib.pofile(pofilename)
   po.merge(pot)
@@ -100,9 +106,9 @@ for langfile in files:
   with open(langfile,"w") as deskfile:
       for transblock in tpattern.findall(text):
         text = text.replace(transblock, '')
-    
+
       # Parse PO files
-      for pofile in sorted(glob.glob(podir + '/*.po'), reverse = True):
+      for pofile in sorted(glob.glob(podir + '/*.po'), reverse=True):
         lang = pofile[:-3].rsplit('/',1)[1]
         pofilename = pofile
         po = polib.pofile(pofilename)

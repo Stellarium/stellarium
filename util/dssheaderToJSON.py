@@ -31,7 +31,7 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 		if x<=0. and y>=300.:
 			# Tile fully invalid
 			return None
-				
+
 		if x<=0.:
 			assert y>0
 			assert y<=300.
@@ -45,7 +45,7 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 		box = removeBoxS
 		x=float(i*scale-box[0])/scale*300.
 		y=float(box[1]-j*scale)/scale*300.
-		# x,y is the position of the box top right corner in pixel wrt lower left corner of current tile		
+		# x,y is the position of the box top right corner in pixel wrt lower left corner of current tile
 		if x>0. or y<=0.:
 			# Tile fully valid
 			return [[[0,0], [300, 0], [300, 300], [0, 300]]]
@@ -53,7 +53,7 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 		if x<=-300. and y>=300.:
 			# Tile fully invalid
 			return None
-				
+
 		if x<=-300.:
 			assert y>0
 			assert y<=300.
@@ -63,8 +63,8 @@ def getIntersectPoly(baseFileName, curLevel, i,j):
 			assert x>-300.
 			return [[[-x,0], [300, 0], [300, 300], [-x, 300]]]
 		return [[[-x,0], [300, 0], [300, 300], [-x, 300]],[[0,y], [-x, y], [-x, 300], [0, 300]]]
-	
-	
+
+
 def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=False):
 	# Create the associated tile description
 	t = skyTile.SkyImageTile()
@@ -84,12 +84,12 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=Fa
 		pl = getIntersectPoly(plateName, currentLevel, i,j)
 	if pl==None or len(pl)==0:
 		return None
-	
+
 	# Get the WCS from the input FITS header file for the tile
 	wcs=astWCS.WCS(plateName+"/"+levels[currentLevel]+"/"+plateName+"_%.2d_%.2d_" % (i,j) +levels[currentLevel]+".hhh")
 	naxis1 = wcs.header.get('NAXIS1')
 	naxis2 = wcs.header.get('NAXIS2')
-	
+
 	t.skyConvexPolygons = []
 	for idx,poly in enumerate(pl):
 		p = [wcs.pix2wcs(v[0]+0.5,v[1]+0.5) for iv,v in enumerate(poly)]
@@ -99,15 +99,15 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=Fa
 	for idx,poly in enumerate(pl):
 		p = [(float(v[0])/naxis1,float(v[1])/naxis2) for iv,v in enumerate(poly)]
 		t.textureCoords.append(p)
-	
+
 	v10 = wcs.pix2wcs(1,0)
 	v01 = wcs.pix2wcs(0,1)
 	v00 = wcs.pix2wcs(0,0)
 	t.minResolution = max(abs(v10[0]-v00[0])*math.cos(v00[1]*math.pi/180.), abs(v01[1]-v00[1]))
-	
+
 	if (currentLevel>=maxLevel):
 		return t
-	
+
 	# Recursively creates the 4 sub-tiles
 	sub = createTile(currentLevel+1, maxLevel, i*2, j*2, outDirectory, plateName)
 	if sub!=None:
@@ -142,25 +142,25 @@ def generateJpgTiles(inDirectory, outDirectory):
 
 
 def plateRange():
-	if len(sys.argv)!=4:
-		print "Usage: "+sys.argv[0]+" prefix startPlate stopPlate "
+	if len(sys.argv) != 4:
+		print "Usage: " + sys.argv[0] + " prefix startPlate stopPlate "
 		exit(-1)
 	prefix = sys.argv[1]
 	outDir = "/tmp/tmpPlate"
-	nRange = range(int(sys.argv[2]),int(sys.argv[3]))
-	
+	nRange = range(int(sys.argv[2]), int(sys.argv[3]))
+
 	for i in nRange:
 		if os.path.exists(outDir):
-			os.system("rm -r "+outDir)
+			os.system("rm -r " + outDir)
 		os.makedirs(outDir)
-	
+
 		plateName = prefix + "%.3i" % i
 		generateJpgTiles(plateName, outDir)
-	
+
 		# Create all the JSON files
 		masterTile = createTile(0, 6, 0, 0, outDir, plateName)
 		masterTile.outputJSON(qCompress=True, maxLevelPerFile=2, outDir=outDir+'/')
-	
+
 		command = "cd /tmp && mv tmpPlate "+plateName+" && tar -cf " +plateName+ ".tar "+plateName+" && rm -rf "+plateName
 		print command
 		os.system(command)
@@ -181,14 +181,14 @@ def mainHeader():
 		fid.rite('"maxBrightness" : 13,\n')
 		fid.write('"subTiles" : \n[\n')
 		for prefix in ['N', 'S']:
-			if prefix=='N':
+			if prefix == 'N':
 				nRange = range(2, 898)
-			if prefix=='S':
+			if prefix == 'S':
 				nRange = range(1, 894)
 			for i in nRange:
-				plateName = prefix+"%.3i" % i
+				plateName = prefix + "%.3i" % i
 				ti = createTile(0, 0, 0, 0, outDir, plateName, True)
-				assert ti != None
+				assert ti is not None
 				f.write('\t{\n')
 				f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
 				f.write('\t\t"worldCoords" : ')
@@ -197,10 +197,9 @@ def mainHeader():
 				f.write('\t\t"subTiles" : ["'+plateName+"/x01_00_00.json.qZ"+'"]\n')
 				f.write('\t},\n'
 		f.seek(-2, os.SEEK_CUR)
-		f.write('\n]}\n')	
+		f.write('\n]}\n')
 
 if __name__ == "__main__":
 	import psyco
 	psyco.full()
 	plateRange()
-
