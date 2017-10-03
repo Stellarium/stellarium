@@ -597,6 +597,11 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
     float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
     
+    // Factor de escala lineal
+    double linearScale = size/(2*r);
+    // Factor de escala angular
+    double angularScale = featureAngSize/planetAngSize;
+    
     /*StelPainter sPainter(prj);
     sPainter.setFont(planetNameFont);
     // Draw nameI18 + scaling if it's not == 1.
@@ -607,11 +612,19 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     // It is necessary to "turn off" the names whose features are on the opposite face of the planet
     // Distance from the obserber to the center of the planet
     double dist = XYZ.length()/cos(atan(r/XYZ.length()));
-    // If dist is bigger than XYZ.length(), then we can see the feature
-    if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()))
+    double scale = linearScale/angularScale;
+    
+    if (scale < screenSz)
+    //if (linearScale < screenSz)
     {
-        painter->setColor(color[0], color[1], color[2], 1.0);
-        painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-        painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
+        // If dist is bigger than XYZ.length(), then we can see the feature
+        if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()))
+        {
+            painter->setColor(color[0], color[1], color[2], 1.0);
+            painter->drawCircle(srcPos[0], srcPos[1], 2.f);
+            painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
+        }
+    else
+       return;
     }
 }
