@@ -614,17 +614,22 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
     double dist = XYZ.length()/cos(atan(r/XYZ.length()));
     double scale = linearScale/angularScale;
     
-    if (scale < screenSz)
-    //if (linearScale < screenSz)
-    {
-        // If dist is bigger than XYZ.length(), then we can see the feature
-        if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()))
-        {
-            painter->setColor(color[0], color[1], color[2], 1.0);
-            painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-            painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
-        }
+    if (screenSz < planetAngSize/100.)
+        return;
     else
-       return;
+    {
+        if ((scale < screenSz) && (screenSz < screenSzFeature))
+        //if (linearScale < screenSz)
+        {
+            // If dist is bigger than XYZ.length(), then we can see the feature
+            if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()))
+            {
+                painter->setColor(color[0], color[1], color[2], 1.0);
+                painter->drawCircle(srcPos[0], srcPos[1], 2.f);
+                painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
+            }
+            else
+                return;
+        }
     }
 }
