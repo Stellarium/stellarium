@@ -491,7 +491,7 @@ QString NomenclatureItem::getNomenclatureTypeDescription() const
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	if (getFlagLabels())
+	if (getFlagLabels() && (getAngularSize(core)>=0.0125)) // TODO: Need a progressive calculations of priority levels
 		return StelObject::getSelectPriority(core)-25.f;
 	else
 		return StelObject::getSelectPriority(core)-2.f;
@@ -527,7 +527,12 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	oss << getPositionInfoString(core, flags);
 
 	if (flags&Size && size>0.f)
-		oss << QString("%1: %2 %3").arg(q_("Diameter")).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance")) << "<br />";
+	{
+		QString sz = q_("Linear size");
+		if (getNomenclatureType()==NomenclatureItem::niCrater)
+			sz = q_("Diameter");
+		oss << QString("%1: %2 %3").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance")) << "<br />";
+	}
 
 	if (flags&Extra)
 	{
