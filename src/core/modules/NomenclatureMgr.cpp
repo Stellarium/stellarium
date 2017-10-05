@@ -540,8 +540,7 @@ bool NomenclatureMgr::getFlagLabels() const
 // Update i18 names from english names according to current sky culture translator
 void NomenclatureMgr::updateI18n()
 {
-	// TODO: Switch to stellarium-planetary-features.pot template and StelTranslator instance after merging into trunk
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getPlanetaryFeaturesTranslator();
 	foreach (NomenclatureItemP i, nomenclatureItems)
 		i->translateName(trans);
 }
