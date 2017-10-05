@@ -761,41 +761,52 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
 	if (!networkReply)
 	    return;
-	if (networkReply->error() == QNetworkReply::NoError) {
-		//success
-		QVariantMap locMap = StelJsonParser::parse(networkReply->readAll()).toMap();
-		QString ipRegion = locMap.value("region_name").toString();
-		QString ipCity = locMap.value("city").toString();
-		QString ipCountry = locMap.value("country_name").toString(); // NOTE: Got a short name of country
-		QString ipCountryCode = locMap.value("country_code").toString();
-		QString ipTimeZone = locMap.value("time_zone").toString();
-		float latitude=locMap.value("latitude").toFloat();
-		float longitude=locMap.value("longitude").toFloat();
 
-		qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
+	if (networkReply->error() == QNetworkReply::NoError && networkReply->bytesAvailable()>0)
+	{
+		// success		 
+		try
+		{
+			QVariantMap locMap = StelJsonParser::parse(networkReply->readAll()).toMap();
 
-		StelLocation loc;
-		loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
-		loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
-		loc.country = StelLocaleMgr::countryCodeToString(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
-		loc.role    = QChar(0x0058); // char 'X'
-		loc.population = 0;
-		loc.latitude = latitude;
-		loc.longitude = longitude;
-		loc.altitude = 0;
-		loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
-		loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
-		loc.planetName = "Earth";
-		loc.landscapeKey = "";
+			QString ipRegion = locMap.value("region_name").toString();
+			QString ipCity = locMap.value("city").toString();
+			QString ipCountry = locMap.value("country_name").toString(); // NOTE: Got a short name of country
+			QString ipCountryCode = locMap.value("country_code").toString();
+			QString ipTimeZone = locMap.value("time_zone").toString();
+			float latitude=locMap.value("latitude").toFloat();
+			float longitude=locMap.value("longitude").toFloat();
 
-		core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-		core->moveObserverTo(loc, 0.0f, 0.0f);
-		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
+			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
+
+			StelLocation loc;
+			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
+			loc.state   = (ipRegion.isEmpty() ? "IPregion"  : ipRegion);
+			loc.country = StelLocaleMgr::countryCodeToString(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
+			loc.role    = QChar(0x0058); // char 'X'
+			loc.population = 0;
+			loc.latitude = latitude;
+			loc.longitude = longitude;
+			loc.altitude = 0;
+			loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
+			loc.planetName = "Earth";
+			loc.landscapeKey = "";
+
+			core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
+			core->moveObserverTo(loc, 0.0f, 0.0f);
+			QSettings* conf = StelApp::getInstance().getSettings();
+			conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
+		}
+		catch (std::runtime_error)
+		{
+			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Let's use Paris, France as default location...";
+			core->moveObserverTo(getLastResortLocation(), 0.0f, 0.0f); // Answer is not in JSON format! A possible block by DNS server or firewall
+		}
 	}
 	else
 	{
-		qDebug() << "Failure getting IP-based location: \n\t" <<networkReply->errorString();
+		qDebug() << "Failure getting IP-based location: \n\t" << networkReply->errorString();
 		// If there is a problem, this must not change to some other location!
 		//core->moveObserverTo(lastResortLocation, 0.0f, 0.0f);
 	}

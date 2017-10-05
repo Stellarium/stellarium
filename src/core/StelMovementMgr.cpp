@@ -1175,7 +1175,13 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 // This is called when you press SPACEBAR: slowly centering&tracking object
 void StelMovementMgr::setFlagTracking(bool b)
 {
-	if (!b || !objectMgr->getWasSelected())
+	if (b && flagTracking)
+	{
+		flagTracking=false;
+		// objectMgr->unSelect();
+		emit flagTrackingChanged(!b);
+	}
+	else if (!b || !objectMgr->getWasSelected())
 	{
 		if(b!=flagTracking)
 		{

@@ -209,7 +209,7 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 		progressBar->setValue(numberDownloadsComplete);
 	
 	// Then, see if there was an error...
-	if (networkReply->error() != QNetworkReply::NoError)
+	if (networkReply->error() != QNetworkReply::NoError || networkReply->bytesAvailable()==0)
 	{
 		qWarning() << "Satellites: failed to download " << url
 		           << networkReply->errorString();

@@ -97,16 +97,24 @@ private:
 	void update(int deltaTime);
 	//! Turn on and off Asterism line rendering.
 	//! @param b new state for line drawing.
-	void setFlagLines(const bool b) {lineFader=b;}
+	void setFlagLines(const bool b) { lineFader=b; }
+	//! Turn on and off ray helper rendering.
+	//! @param b new state for ray helper drawing.
+	void setFlagRayHelpers(const bool b) { rayHelperFader=b; }
 	//! Turn on and off Asterism name label rendering.
 	//! @param b new state for name label drawing.
-	void setFlagLabels(const bool b) {nameFader=b;}
+	void setFlagLabels(const bool b) { nameFader=b; }
 	//! Get the current state of Asterism line rendering.
 	//! @return true if Asterism line rendering it turned on, else false.
-	bool getFlagLines() const {return lineFader;}
+	bool getFlagLines() const { return lineFader; }
+	//! Get the current state of ray helper rendering.
+	//! @return true if ray helper rendering it turned on, else false.
+	bool getFlagRayHelpers() const { return rayHelperFader; }
 	//! Get the current state of Asterism name label rendering.
 	//! @return true if Asterism name label rendering it turned on, else false.
-	bool getFlagLabels() const {return nameFader;}
+	bool getFlagLabels() const { return nameFader; }
+
+	bool isAsterism() const { return flagAsterism; }
 
 	//! International name (translated using gettext)
 	QString nameI18;
@@ -123,16 +131,20 @@ private:
 	Vec3d XYname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
+	//! Type of asterism
+	int typeOfAsterism;
+	bool flagAsterism;
 	//! List of stars forming the segments
 	StelObjectP* asterism;
 
 	SphericalCap boundingCap;
 
 	//! Define whether lines and names must be drawn
-	LinearFader lineFader, nameFader;
+	LinearFader lineFader, rayHelperFader, nameFader;
 
 	//! Currently we only need one color for all asterisms, this may change at some point
 	static Vec3f lineColor;
+	static Vec3f rayHelperColor;
 	static Vec3f labelColor;
 };
 

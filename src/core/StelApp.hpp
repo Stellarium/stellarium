@@ -234,13 +234,15 @@ public slots:
 	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
 	void setFlagSouthAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
 	
-	//! Set flag for using calculation of azimuth from south towards west (as in older astronomical literature)
-	//! @deprecated Use getFlagSouthAzimuthUsage() instead.
-	bool getFlagOldAzimuthUsage() const { return getFlagSouthAzimuthUsage(); }
-	//! Get flag for using calculation of azimuth from south towards west (as in older astronomical literature)
-	//! @deprecated Use setFlagSouthAzimuthUsage() instead.
-	void setFlagOldAzimuthUsage(bool use) { setFlagSouthAzimuthUsage(use); }
+	//! Set flag for using of formatting output for coordinates
+	void setFlagUseFormattingOutput(bool b);
+	//! Get flag for using of formatting output for coordinates
+	bool getFlagUseFormattingOutput() const {return flagUseFormattingOutput;}
 
+	//! Set flag for using designations for celestial coordinate systems
+	void setFlagUseCCSDesignation(bool b);
+	//! Get flag for using designations for celestial coordinate systems
+	bool getFlagUseCCSDesignation() const {return flagUseCCSDesignation;}
 
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
@@ -413,6 +415,8 @@ private:
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;
+	bool flagUseFormattingOutput;
+	bool flagUseCCSDesignation;
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

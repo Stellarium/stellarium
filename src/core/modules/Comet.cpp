@@ -166,16 +166,16 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
 			cometType = qc_("periodic", "type of comet");
 		}
-		oss << q_("Type: <b>%1</b> (%2)").arg(q_(getPlanetTypeString())).arg(cometType) << "<br />";
+		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(getPlanetTypeString()), cometType) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
+	    QString emag = "";
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		oss << q_("Magnitude: <b>%1</b> (after extinction: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-									    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+		    emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+	    oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 
 	if (flags&AbsoluteMagnitude)
@@ -184,91 +184,93 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		//If the two parameter magnitude system is not use, don't display this
 		//value. (Using radius/albedo doesn't make any sense for comets.)
 		if (slopeParameter >= 0)
-			oss << q_("Absolute Magnitude: %1").arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
+			oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
 	}
 
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
+	// TRANSLATORS: Unit of measure for distance - kilometers
+	QString km = qc_("km", "distance");
+	// TRANSLATORS: Unit of measure for distance - milliones kilometers
+	QString Mkm = qc_("Mio km", "distance");
+	QString distAU, distKM;
 	if (flags&Distance)
 	{
-		double distanceAu = getHeliocentricEclipticPos().length();
+		double hdistanceAu = getHeliocentricEclipticPos().length();
+		double hdistanceKm = AU * hdistanceAu;
+		// TRANSLATORS: Unit of measure for distance - astronomical unit
+		QString au = qc_("AU", "distance, astronomical unit");
+		bool useKM = true;
+		if (hdistanceAu < 0.1)
+		{
+			distAU = QString::number(hdistanceAu, 'f', 6);
+			distKM = QString::number(hdistanceKm, 'f', 3);
+		}
+		else
+		{
+			distAU = QString::number(hdistanceAu, 'f', 3);
+			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
+			useKM = false;
+		}
+		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
+
+		double distanceAu = getJ2000EquatorialPos(core).length();
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance from Sun: %1AU (%2 km)"))
-			       .arg(distanceAu, 0, 'f', 6)
-			       .arg(distanceKm, 0, 'f', 3);
+			distAU = QString::number(distanceAu, 'f', 6);
+			distKM = QString::number(distanceKm, 'f', 3);
+			useKM = true;
 		}
 		else
 		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance from Sun: %1AU (%2 Mio km)"))
-			       .arg(distanceAu, 0, 'f', 3)
-			       .arg(distanceKm / 1.0e6, 0, 'f', 3);
+			distAU = QString::number(distanceAu, 'f', 3);
+			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
+			useKM = false;
 		}
-		oss << "<br>";
-		distanceAu = getJ2000EquatorialPos(core).length();
-		distanceKm = AU * distanceAu;
-		if (distanceAu < 0.1)
-		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance: %1AU (%2 km)"))
-				   .arg(distanceAu, 0, 'f', 6)
-				   .arg(distanceKm, 0, 'f', 3);
-		}
-		else
-		{
-			// xgettext:no-c-format
-			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
-				   .arg(distanceAu, 0, 'f', 3)
-				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
-		}
-		oss << "<br>";
+		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
 	}
+
 	if (flags&Extra)
 	{
 		// If semi-major axis not zero then calculate and display orbital period for comet in days
 		double siderealPeriod = getSiderealPeriod();
 		if (siderealPeriod>0)
 		{
-			// TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
-			oss << q_("Sidereal period: %1 a").arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+			// Sidereal (orbital) period for comets in Julian years (symbol: a)
+			oss << QString("%1: %2 a").arg(q_("Sidereal period"), QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 		}
 
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("km/s", "speed");
 		// GZ: Add speed. I don't know where else to place that bit of information.
-		// xgettext:no-c-format
-		oss << QString(q_("Speed: %1 km/s"))
-			   .arg(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
-		oss << "<br>";
+		oss << QString("%1: %2 %3").arg(q_("Speed"), QString::number(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 'f', 3), kms) << "<br />";
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
 
+		QString pha, elo;
 		if (withDecimalDegree)
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			pha = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
+			elo = StelUtils::radToDecDegStr(elongation,4,false,true);
 		}
 		else
 		{
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true)) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation, true)) << "<br>";
+			pha = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
+			elo = StelUtils::radToDmsStr(elongation, true);
 		}
+
+		oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
+		oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
 	}
 
 
 	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
 		// GZ: Add estimates for coma diameter and tail length.
-		// xgettext:no-c-format
-		oss << QString(q_("Coma diameter (estimate): %1 km"))
-			   .arg(floor(tailFactors[0]*AU/1000.0f)*1000.0f, 0, 'f', 0);
-		oss << "<br>";
-		// xgettext:no-c-format
-		oss << QString(q_("Gas tail length (estimate): %1 Mio km"))
-			   .arg(tailFactors[1]*AU*1e-6, 0, 'G', 3);
-		oss << "<br>";
+		oss << QString("%1: %2 %3").arg(q_("Coma diameter (estimate)"), QString::number(floor(tailFactors[0]*AU/1000.0f)*1000.0f, 'f', 0), km) << "<br />";
+		oss << QString("%1: %2 %3").arg(q_("Gas tail length (estimate)"), QString::number(tailFactors[1]*AU*1e-6, 'G', 3), Mkm) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);

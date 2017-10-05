@@ -405,6 +405,7 @@ void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
 void SolarSystem::loadPlanets()
 {
 	minorBodies.clear();
+	systemMinorBodies.clear();
 	qDebug() << "Loading Solar System data (1: planets and moons) ...";
 	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
 	if (solarSystemFile.isEmpty())
@@ -450,8 +451,8 @@ void SolarSystem::loadPlanets()
 					p->satellites.clear();
 					p.clear();
 				}
-			}
-			systemPlanets.clear();
+			}			
+			systemPlanets.clear();			
 			//Memory leak? What's the proper way of cleaning shared pointers?
 
 			// TODO: 0.16pre what about the orbits list?
@@ -478,8 +479,21 @@ void SolarSystem::loadPlanets()
 			shadowPlanetCount++;
 }
 
+unsigned char SolarSystem::BvToColorIndex(float bV)
+{
+	double dBV = bV;
+	dBV *= 1000.0;
+	if (dBV < -500)
+		dBV = -500;
+	else if (dBV > 3499)
+		dBV = 3499;
+
+	return (unsigned int)floor(0.5+127.0*((500.0+dBV)/4000.0));
+}
+
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
+	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	qDebug() << "Loading from :"  << filePath;
 	int readOk = 0;
 	QSettings pd(filePath, StelIniFormat);
@@ -947,10 +961,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
 			minorBodies << englishName;
+
+			Vec3f color = Vec3f(1.f, 1.f, 1.f);
+			float bV = pd.value(secname+"/color_index_bv", 99.f).toFloat();
+			if (bV<99.f)
+				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f;
+			else
+				color = StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
+
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
-						    StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
+						    color, // halo color
 						    pd.value(secname+"/albedo", 0.25f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
@@ -994,7 +1016,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
+			mp->setColorIndexBV(bV);
+			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
 
+			systemMinorBodies.push_back(p);
 		}
 		else if (type == "comet")
 		{
@@ -1043,6 +1068,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			{
 				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
 			}
+			systemMinorBodies.push_back(p);
 		}
 		else
 		{
@@ -1070,6 +1096,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
 			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toDouble();
+
+			// Moon designation (planet index + IAU moon number)
+			QString moonDesignation = pd.value(secname+"/iau_moon_number", "").toString();
+			if (!moonDesignation.isEmpty())
+			{
+				p->setIAUMoonNumber(moonDesignation);
+			}
 		}
 
 
@@ -1330,6 +1363,17 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 	return PlanetP();
 }
 
+PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) const
+{
+	foreach (const PlanetP& p, systemMinorBodies)
+	{
+		if (p->getCommonEnglishName() == planetEnglishName)
+			return p;
+	}
+	return PlanetP();
+}
+
+
 StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
 	foreach (const PlanetP& p, systemPlanets)
@@ -1345,7 +1389,7 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getEnglishName() == name)
+		if (p->getEnglishName() == name || p->getCommonEnglishName() == name)
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -1354,6 +1398,8 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	float r = 0.f;
 	if (withExtinction)
 		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
@@ -1365,12 +1411,16 @@ float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) 
 QString SolarSystem::getPlanetType(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	return p->getPlanetTypeString();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	double r = 0.f;
 	r = p->getDistance();
 	return r;
@@ -1379,6 +1429,8 @@ double SolarSystem::getDistanceToPlanet(QString planetName) const
 double SolarSystem::getElongationForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	double r = 0.f;
 	r = p->getElongation(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
@@ -1387,6 +1439,8 @@ double SolarSystem::getElongationForPlanet(QString planetName) const
 double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	double r = 0.f;
 	r = p->getPhaseAngle(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
@@ -1395,6 +1449,8 @@ double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
 float SolarSystem::getPhaseForPlanet(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
+	if (p.isNull()) // Possible was asked the common name of minor planet?
+		p = searchMinorPlanetByEnglishName(planetName);
 	float r = 0.f;
 	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 	return r;
@@ -2082,9 +2138,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 		foreach(PlanetP p, systemPlanets)
 		{
 			if(p == moon) continue;
-			if (p->getPlanetType()!=Planet::isPlanet
-					&& p->getPlanetType()!=Planet::isStar
-					)
+			if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
 				p->setSphereScale(newScale);
 		}
 		emit flagMinorBodyScaleChanged(b);
@@ -2102,9 +2156,7 @@ void SolarSystem::setMinorBodyScale(double f)
 			foreach(PlanetP p, systemPlanets)
 			{
 				if(p == moon) continue;
-				if (p->getPlanetType()!=Planet::isPlanet
-						&& p->getPlanetType()!=Planet::isStar
-						)
+				if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
 					p->setSphereScale(minorBodyScale);
 			}
 		}
@@ -2123,7 +2175,7 @@ QStringList SolarSystem::getAllPlanetEnglishNames() const
 {
 	QStringList res;
 	foreach (const PlanetP& p, systemPlanets)
-		res.append(p->englishName);
+		res.append(p->getEnglishName());
 	return res;
 }
 
@@ -2131,9 +2183,18 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 {
 	QStringList res;
 	foreach (const PlanetP& p, systemPlanets)
-		res.append(p->nameI18);
+		res.append(p->getNameI18n());
 	return res;
 }
+
+QStringList SolarSystem::getAllMinorPlanetCommonEnglishNames() const
+{
+	QStringList res;
+	foreach (const PlanetP& p, systemMinorBodies)
+		res.append(p->getCommonEnglishName());
+	return res;
+}
+
 
 // GZ TODO: This could be modified to only delete&reload the minor objects. For now, we really load both parts again like in the 0.10?-0.15 series.
 void SolarSystem::reloadPlanets()
@@ -2190,6 +2251,7 @@ void SolarSystem::reloadPlanets()
 		p.clear();
 	}
 	systemPlanets.clear();
+	systemMinorBodies.clear();
 	// Memory leak? What's the proper way of cleaning shared pointers?
 
 	// Also delete Comet textures (loaded in loadPlanets()
@@ -2397,26 +2459,19 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 	return final_illumination;
 }
 
-bool SolarSystem::removePlanet(QString name)
+bool SolarSystem::removeMinorPlanet(QString name)
 {
-	PlanetP candidate = searchByEnglishName(name);
+	PlanetP candidate = searchMinorPlanetByEnglishName(name);
 	if (!candidate)
 	{
 		qWarning() << "Cannot remove planet " << name << ": Not found.";
 		return false;
 	}
-	// TODO: In case we want major bodies or Pluto to be deleted, think about proper handling of moons!
-	//candidate->satellites.clear();
-	if (candidate->pType < Planet::isAsteroid)
-	{
-		qWarning() << "REMOVING MAJOR OBJECT:" << name;
-		qWarning() << "              This is likely not what you want, but will be accepted.";
-		Q_ASSERT(0);
-	}
 	Orbit* orbPtr=(Orbit*) candidate->orbitPtr;
 	if (orbPtr)
 		orbits.removeOne(orbPtr);
 	systemPlanets.removeOne(candidate);
+	systemMinorBodies.removeOne(candidate);
 	candidate.clear();
 	return true;
 }

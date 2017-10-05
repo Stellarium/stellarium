@@ -73,15 +73,13 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 	}
 	else if(operation == "planetlist")
 	{
-		const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-
-		QStringList allPlanets = ssys->getAllPlanetEnglishNames();
+		QList<PlanetP> ss = ssys->getAllPlanets();
 		QJsonArray list;
-		foreach(QString str, allPlanets)
+		foreach(const PlanetP& p, ss)
 		{
 			QJsonObject obj;
-			obj.insert("name",str);
-			obj.insert("name_i18n",trans.qtranslate(str));
+			obj.insert("name", p->getEnglishName());
+			obj.insert("name_i18n", p->getNameI18n());
 			list.append(obj);
 		}
 

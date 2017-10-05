@@ -923,12 +923,19 @@
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButtonPredictIridiumFlares">
+          <widget class="QPushButton" name="predictIridiumFlaresPushButton">
            <property name="toolTip">
             <string>Calculations require time, please be patient</string>
            </property>
            <property name="text">
             <string>Predict Iridium flares</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="predictedIridiumFlaresSaveButton">
+           <property name="text">
+            <string>Save predictions...</string>
            </property>
           </widget>
          </item>

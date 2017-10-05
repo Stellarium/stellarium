@@ -328,7 +328,7 @@ QString radToHmsStrAdapt(const double angle)
 /*************************************************************************
  Convert an angle in radian to a hms formatted string
  If decimal is true,  output should be like this: "  16h29m55.3s"
- If decimal is true,  output should be like this: "  16h20m0.4s"
+ If decimal is true,  output should be like this: "  16h20m00.4s"
  If decimal is false, output should be like this: "0h26m5s"
 *************************************************************************/
 QString radToHmsStr(const double angle, const bool decimal)
@@ -337,7 +337,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 	double s;
 	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
 	int width, precision;
-	QString carry;
+	QString carry, r;
 	if (decimal)
 	{
 		width=5;
@@ -365,7 +365,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 	if (h==24 && m==0 && s==0)
 		h=0;
 
-	return QString("%1h%2m%3s").arg(h, width).arg(m,2,10,QLatin1Char('0')).arg(s, 0, 'f', precision);
+	return QString("%1h%2m%3s").arg(h, width).arg(m, 2, 10, QChar('0')).arg(s, 3+precision, 'f', precision, QChar('0'));
 }
 
 /*************************************************************************
@@ -2431,11 +2431,18 @@ double getDecYear(const int year, const int month, const int day)
 int compareVersions(const QString v1, const QString v2)
 {
 	// result (-1: v1<v2; 0: v1==v2; 1: v1>v2)
-	int result = 0;
+	int ver1, ver2, result = 0;
 	QStringList v1s = v1.split(".");
 	QStringList v2s = v2.split(".");
-	int ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100 + v1s.at(2).toInt();
-	int ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100 + v2s.at(2).toInt();
+	if (v1s.count(".")==2) // Full format: X.Y.Z
+		ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100 + v1s.at(2).toInt();
+	else // Short format: X.Y
+		ver1 = v1s.at(0).toInt()*1000 + v1s.at(1).toInt()*100;
+	if (v2s.count(".")==2)
+		ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100 + v2s.at(2).toInt();
+	else
+		ver2 = v2s.at(0).toInt()*1000 + v2s.at(1).toInt()*100;
+
 	if (ver1<ver2)
 		result = -1;
 	else if (ver1 == ver2)

@@ -54,10 +54,11 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "AngleMeasure";
 	info.displayedName = N_("Angle Measure");
-	info.authors = "Matthew Gates, Bogdan Marinov, Alexander Wolf, Georg Zotti";
+	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Provides an angle measurement tool");
-	info.version = ANGLEMEASURE_VERSION;
+	info.version = ANGLEMEASURE_PLUGIN_VERSION;
+	info.license = ANGLEMEASURE_PLUGIN_LICENSE;
 	return info;
 }
 

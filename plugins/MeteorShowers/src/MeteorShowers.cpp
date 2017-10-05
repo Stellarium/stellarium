@@ -135,9 +135,13 @@ QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(QDate dateFrom, Q
 			{
 				r.name = ms->getNameI18n();
 				r.peak = a.peak;
-				r.zhr = a.zhr == -1
-				      ? QString("%1-%2").arg(a.variable.at(0)).arg(a.variable.at(1))
-				      : QString::number(a.zhr);
+				if (a.zhr == -1) {
+					r.zhrMin = a.variable.at(0);
+					r.zhrMax = a.variable.at(1);
+				} else {
+					r.zhrMin = a.zhr;
+					r.zhrMax = a.zhr;
+				}
 				result.append(r);
 				break;
 			}

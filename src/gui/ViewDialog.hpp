@@ -136,6 +136,7 @@ private slots:
 	// asterisms colors
 	void askAsterismLabelsColor();
 	void askAsterismLinesColor();
+	void askRayHelpersColor();
 	// nomenclature color
 	void askPlanetNomenclatureColor();
 

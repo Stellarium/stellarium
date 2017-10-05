@@ -91,7 +91,7 @@ StelProperty* StelPropertyMgr::registerProperty(const QString &id, QObject *targ
 	if(!value.isValid())
 		qFatal("StelProperty %s can not be read. Missing READ or need to register MetaType?",id.toUtf8().constData());
 
-#ifndef NDEBUG
+#if 0
 	QString debugStr=(stelProp->isReadOnly()?"readonly":"readwrite");
 	if(stelProp->canNotify())
 		debugStr.append(" notify");

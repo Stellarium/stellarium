@@ -218,7 +218,8 @@ Returns a JSON String array of search matches
 
 \paragraph rcObjectServiceInfo info
 Parameters: <tt>[name (String)]</tt>\n
-Returns a HTML info string (StelObject::getInfoString) about the object identified by \p name.
+Parameters: <tt>[format (String)]</tt>\n
+Returns an info string (StelObject::getInfoString) about the object identified by \p name in HTML or JSON format (strings "json" or "map" for \p format).
 If no parameter is given, the currently selected object is used.
 
 \paragraph rcObjectServiceListobjecttypes listobjecttypes

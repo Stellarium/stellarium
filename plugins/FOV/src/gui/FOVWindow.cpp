@@ -43,7 +43,7 @@ void FOVWindow::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		updateAboutText();
+		setAboutHtml();
 	}
 }
 
@@ -72,14 +72,41 @@ void FOVWindow::createDialogContent()
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveFOVSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetFOVSettings()));
 
-	updateAboutText();	
+	setAboutHtml();
 }
 
-void FOVWindow::updateAboutText()
+void FOVWindow::setAboutHtml()
 {
-	ui->labelTitle->setText(q_("Field of View plug-in"));
-	QString version = QString(q_("Version %1")).arg(FOV_VERSION);
-	ui->labelVersion->setText(version);
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + q_("Field of View plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + FOV_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + FOV_PLUGIN_LICENSE + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "</table>";
+
+	html += "<p>" + q_("This plugin allows stepwise zooming via keyboard shortcuts like in the <em>Cartes du Ciel</em> planetarium program.") + "</p>";
+
+	html += "<h3>" + q_("Links") + "</h3>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Field of View plugin") + "</p>";
+	html += "<p><ul>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Field_of_View_plugin\">").arg("</a>") + "</li>";
+	html += "</ul></p></body></html>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if(gui!=Q_NULLPTR)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
+
+	ui->aboutTextBrowser->setHtml(html);
 }
 
 void FOVWindow::saveFOVSettings()

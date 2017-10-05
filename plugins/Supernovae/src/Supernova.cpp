@@ -129,27 +129,30 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(q_("supernova")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("supernova")) << "<br />";
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && getVMagnitude(core) <= maglimit)
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(mag, mage) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(mag) << "<br>";
+	    QString emag = "";
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		    emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), mage);
+
+	    oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), mag, emag) << "<br />";
+
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{
-		oss << q_("Type of supernova: %1").arg(sntype) << "<br>";
-		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
+		oss << QString("%1: %2").arg(q_("Type of supernova"), sntype) << "<br />";
+		oss << QString("%1: %2").arg(q_("Maximum brightness"), getMaxBrightnessDate(peakJD)) << "<br />";
 		if (distance>0)
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
-			oss << q_("Distance: %1 ly").arg(distance*1000) << "<br>";
+			QString ly = qc_("ly", "distance");
+			oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance*1000, 'f', 2), ly) << "<br />";
 		}
 	}
 

@@ -7,7 +7,7 @@ ftp://ftp.imcce.fr/pub/ephem/satel/galilean/L1
 I (Johannes Gajdosik) have just taken the Fortran code and data
 obtained from above and rearranged it into this piece of software.
 
-I can neigther allow nor forbid the usage of the L1 theory.
+I can neither allow nor forbid the usage of the L1 theory.
 The copyright notice below covers not the work of Valery Lainey
 but just my work, that is the compilation of the L1 theory
 into the software supplied in this file.
@@ -62,11 +62,13 @@ void GetL1Coor(double jd,int body,double *xyz);
      The origin of the xyz-coordinates is the center of the planet.
      The reference frame is "dynamical equinox and ecliptic J2000",
      which is the reference frame in VSOP87 and VSOP87A.
+
+     WARNING! Due to static internal variables, this function is not reentrant and not parallelizable!
   */
 
 void GetL1OsculatingCoor(const double jd0,const double jd, const int body,double *xyz);
 
-  /* The oculating orbit of epoch jd0, evatuated at jd, is returned.
+  /* The oculating orbit of epoch jd0, evaluated at jd, is returned.
   */
 
 
