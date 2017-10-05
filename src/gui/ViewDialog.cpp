@@ -274,6 +274,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->nebulasHintsHorizontalSlider, "NebulaMgr.hintsAmount",0.0,10.0);
 	connectBoolProperty(ui->checkBoxDesignationsOnlyUsage, "NebulaMgr.flagDesignationLabels");
 	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
+	connectBoolProperty(ui->checkBoxOutlines, "NebulaMgr.flagOutlinesDisplayed");
 	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
 	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"StelSkyDrawer.flagNebulaMagnitudeLimit");
 	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customNebulaMagLimit");
@@ -423,7 +424,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->nativePlanetNamesCheckBox,"actionShow_Skyculture_NativePlanetNames");
 
 	connectCheckBox(ui->showConstellationLinesCheckBox, "actionShow_Constellation_Lines");
-	connectDoubleProperty(ui->constellationLineThicknessSpinBox,"ConstellationMgr.constellationLineThickness");
+	connectIntProperty(ui->constellationLineThicknessSpinBox,"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox, "actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox, "actionShow_Constellation_Boundaries");
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
@@ -437,13 +438,18 @@ void ViewDialog::createDialogContent()
 	connect(ui->colorConstellationLines,		SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
 
 	connectCheckBox(ui->showAsterismLinesCheckBox, "actionShow_Asterism_Lines");
-	connectDoubleProperty(ui->asterismLineThicknessSpinBox, "AsterismMgr.asterismLineThickness");
+	connectIntProperty(ui->asterismLineThicknessSpinBox, "AsterismMgr.asterismLineThickness");
 	connectCheckBox(ui->showAsterismLabelsCheckBox, "actionShow_Asterism_Labels");
+
+	connectCheckBox(ui->showRayHelpersCheckBox, "actionShow_Ray_Helpers");
+	connectIntProperty(ui->rayHelperThicknessSpinBox, "AsterismMgr.rayHelperThickness");
 
 	colorButton(ui->colorAsterismLabels,	"AsterismMgr.namesColor");
 	colorButton(ui->colorAsterismLines,	"AsterismMgr.linesColor");
+	colorButton(ui->colorRayHelpers,	"AsterismMgr.rayHelpersColor");
 	connect(ui->colorAsterismLabels,	SIGNAL(released()), this, SLOT(askAsterismLabelsColor()));
 	connect(ui->colorAsterismLines,		SIGNAL(released()), this, SLOT(askAsterismLinesColor()));
+	connect(ui->colorRayHelpers,		SIGNAL(released()), this, SLOT(askRayHelpersColor()));
 
 	// Sky layers. This not yet finished and not visible in releases.
 	// TODO: These 4 lines are commented away in trunk.
@@ -1021,6 +1027,21 @@ void ViewDialog::askAsterismLinesColor()
 	}
 }
 
+void ViewDialog::askRayHelpersColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("AsterismMgr.rayHelpersColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorRayHelpers->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		GETSTELMODULE(AsterismMgr)->setRayHelpersColor(vColor);
+		StelApp::getInstance().getSettings()->setValue("color/rayhelper_lines_color", StelUtils::vec3fToStr(vColor));
+		ui->colorRayHelpers->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
 void ViewDialog::askPlanetNomenclatureColor()
 {
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("NomenclatureMgr.nomenclatureColor")->getValue().value<Vec3f>();
@@ -1110,6 +1131,12 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 		flags |= Nebula::CatVV;
 	if (ui->checkBoxPK->isChecked())
 		flags |= Nebula::CatPK;
+	if (ui->checkBoxPNG->isChecked())
+		flags |= Nebula::CatPNG;
+	if (ui->checkBoxSNRG->isChecked())
+		flags |= Nebula::CatSNRG;
+	if (ui->checkBoxACO->isChecked())
+		flags |= Nebula::CatACO;
 
 	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
 }
@@ -1136,6 +1163,8 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 		flags |= Nebula::TypeHydrogenRegions;
 	if (ui->checkBoxSupernovaRemnantsType->isChecked())
 		flags |= Nebula::TypeSupernovaRemnants;
+	if (ui->checkBoxGalaxyClustersType->isChecked())
+		flags |= Nebula::TypeGalaxyClusters;
 	if (ui->checkBoxOtherType->isChecked())
 		flags |= Nebula::TypeOther;
 
@@ -1165,6 +1194,9 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxArp->setChecked(flags & Nebula::CatArp);
 	ui->checkBoxVV->setChecked(flags & Nebula::CatVV);
 	ui->checkBoxPK->setChecked(flags & Nebula::CatPK);
+	ui->checkBoxPNG->setChecked(flags & Nebula::CatPNG);
+	ui->checkBoxSNRG->setChecked(flags & Nebula::CatSNRG);
+	ui->checkBoxACO->setChecked(flags & Nebula::CatACO);
 }
 
 void ViewDialog::updateSelectedTypesCheckBoxes()
@@ -1180,6 +1212,7 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxPlanetaryNebulaeType->setChecked(flags & Nebula::TypePlanetaryNebulae);
 	ui->checkBoxHydrogenRegionsType->setChecked(flags & Nebula::TypeHydrogenRegions);
 	ui->checkBoxSupernovaRemnantsType->setChecked(flags & Nebula::TypeSupernovaRemnants);
+	ui->checkBoxGalaxyClustersType->setChecked(flags & Nebula::TypeGalaxyClusters);
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
 }
 
@@ -1422,8 +1455,6 @@ void ViewDialog::changeLandscape(QListWidgetItem* item)
 
 void ViewDialog::landscapeChanged(QString id, QString name)
 {
-	Q_UNUSED(id)
-
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	for (int i = 0; i < ui->landscapesListWidget->count(); i++)
 	{
@@ -1433,6 +1464,11 @@ void ViewDialog::landscapeChanged(QString id, QString name)
 			break;
 		}
 	}
+
+	QStringList searchPaths;
+	searchPaths << StelFileMgr::findFile("landscapes/" + id);
+
+	ui->landscapeTextBrowser->setSearchPaths(searchPaths);
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	updateDefaultLandscape();
 	// Reset values that might have changed.

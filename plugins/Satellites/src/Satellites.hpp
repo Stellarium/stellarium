@@ -353,7 +353,7 @@ public:
 	//! QNetworkReply-s... --BM
 	static void parseTleFile(QFile& openFile,
 	                         TleDataHash& tleList,
-	                         bool addFlagValue = false);
+				 bool addFlagValue = false);
 
 	//! Reads qs.mag file and its parsing for getting id and standard magnitude
 	//! for satellites.

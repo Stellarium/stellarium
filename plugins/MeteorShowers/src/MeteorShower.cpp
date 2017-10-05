@@ -549,11 +549,11 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if (flags&Extra)
 	{
-		oss << q_("Type: <b>%1</b> (%2)").arg(q_("meteor shower"), mstdata) << "<br />";
+		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("meteor shower"), mstdata) << "<br />";
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra)
 	{
@@ -573,26 +573,28 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 		if (m_speed > 0)
 		{
-			oss << q_("Geocentric meteoric velocity: %1 km/s").arg(m_speed) << "<br />";
+			oss << QString("%1: %2 %3")
+			       .arg(q_("Geocentric meteoric velocity"))
+			       .arg(m_speed)
+			       // TRANSLATORS: Unit of measure for speed - kilometers per second
+			       .arg(qc_("km/s", "speed"));
+			oss << "<br />";
 		}
 
 		if (m_pidx > 0)
-		{
-			oss << q_("The population index: %1").arg(m_pidx) << "<br />";
-		}
+			oss << QString("%1: %2").arg(q_("The population index")).arg(m_pidx) << "<br />";
 
 		if (!m_parentObj.isEmpty())
-		{
-			oss << q_("Parent body: %1").arg(q_(m_parentObj)) << "<br />";
-		}
+			oss << QString("%1: %2").arg(q_("Parent body")).arg(q_(m_parentObj)) << "<br />";
 
 		// activity info
 		if (m_status != INACTIVE)
 		{
+			QString actStr = q_("Activity");
 			if(m_activity.start.month() == m_activity.finish.month())
 			{
 				oss << QString("%1: %2 - %3 %4")
-				       .arg(q_("Activity"))
+				       .arg(actStr)
 				       .arg(m_activity.start.day())
 				       .arg(m_activity.finish.day())
 				       .arg(m_activity.start.toString("MMMM"));
@@ -600,7 +602,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			else
 			{
 				oss << QString("%1: %2 - %3")
-				       .arg(q_("Activity"))
+				       .arg(actStr)
 				       .arg(m_activity.start.toString("d MMMM"))
 				       .arg(m_activity.finish.toString("d MMMM"));
 			}

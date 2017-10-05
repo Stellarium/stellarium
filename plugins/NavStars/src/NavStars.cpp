@@ -54,6 +54,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.contact = "http://stellarium.org/";	
 	info.description = N_("This plugin marks navigational stars from a selected set.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
+	info.license = NAVSTARS_PLUGIN_LICENSE;
 	return info;
 }
 

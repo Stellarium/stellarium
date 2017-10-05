@@ -61,7 +61,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 		return;
 	}
 	
-	qDebug() << "TelescopeClientDirectNexStar paramaters: port, time_delay:" << serialDeviceName << time_delay;
+	qDebug() << "TelescopeClientDirectNexStar parameters: port, time_delay:" << serialDeviceName << time_delay;
 	
 	//Validation: Time delay
 	if (time_delay <= 0 || time_delay > 10000000)

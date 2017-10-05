@@ -1110,9 +1110,10 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Scenery3d";
 	info.version = SCENERY3D_PLUGIN_VERSION;
+	info.license = SCENERY3D_PLUGIN_LICENSE;
 	info.displayedName = N_("3D Sceneries");
 	info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch";
-	info.contact = "Georg.Zotti@univie.ac.at";
+	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("<p>3D foreground renderer. Walk around, find and avoid obstructions in your garden, "
 			      "find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.</p>"
 			      "<p>To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn. "

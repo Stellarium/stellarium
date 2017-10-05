@@ -4,29 +4,22 @@
 \label{ch:DSO}
 
 
-Since version 0.10.0 Stellarium uses the ``json'' cataloguing system
-of configuring textures. At the same time the Simbad online catalogue
-was added to the search feature, making the catalog somewhat redundant
-and used now only as a first search point or if there is no internet
-connection.
+Since version 0.10.0 Stellarium uses the ``json'' cataloguing system of configuring textures. At the same time the Simbad online catalogue was added to the search feature, making the catalog somewhat redundant and used now only as a first search point or if there is no internet connection.
 
-If the object has a name (not just a catalogue number), you should add
-one or more records to the \file{.../nebulae/default/names.dat} file
-(where \file{...} is either the installation directory or the user
-directory). See section~\ref{sec:dso:modifyingNamesDat} Modifying \file{names.dat}
-for details of the file format.
+If the object has a name (not just a catalogue number), you should add one or more records to the \file{.../nebulae/default/names.dat} file (where \file{...} is either the installation directory or the user directory). See section~\ref{sec:dso:modifyingNamesDat} Modifying \file{names.dat} for details of the file format.
 
-If you wish to associate a texture (image) with the object, you must 
-add a record to the \file{.../nebulae/default/textures.json} file. See
-section~\ref{sec:dso:modifyingTexturesJson} for details of the file format.
+If you wish to associate a texture (image) with the object, you must add a record to the \file{.../nebulae/default/textures.json} file. See section~\ref{sec:dso:modifyingTexturesJson} for details of the file format.
+
+If you wish to associate an outline with the object, you must add the series of lines to the 
+\file{.../nebulae/default/outlines.dat} file. See section~\ref{sec:dso:modifyingOutlines} for details of the file format.
 
 
 \section{Stellarium DSO Catalog}
 \label{sec:dso:catalog}
 
-Stellarium's DSO Catalog contains over 83000 objects\footnote{An extended edition of this catalog 
+Stellarium's DSO Catalog contains over 90000 objects\footnote{An extended edition of this catalog 
 with over one million objects may be downloaded and installed manually (see section \ref{sec:ExtraData:DSOs}).} 
-(up to $15.5^m$) and is available for end users as collection of files:
+(up to $15.5^m$ for galaxies) and is available for end users as collection of files:
 
 \begin{longtabu} to \textwidth {lX}
 %\emph{File} & \emph{Description}\\
@@ -43,9 +36,7 @@ convert_dso_catalog = true
 
 The file \file{catalog.txt} should be put into the directory
 \file{.../nebulae/default/} and you should create an empty 
-file \file{catalog.pack} to storing the binary catalog. 
-After converting the data into binary format you should 
-zipped them by command \command{gzip -nc catalog.pack > catalog.dat}.
+file \file{catalog.pack} to storing the binary catalog. After converting the data into binary format you should gzipped them by the command \command{gzip -nc catalog.pack > catalog.dat}.
 
 Stellarium DSO Catalog contains data and supports the designations for
 follow catalogues:
@@ -69,6 +60,9 @@ follow catalogues:
 \item[\textbf{Arp}]  Atlas of peculiar galaxies~\cite{1966ApJS...14....1A}\newFeature{V0.16.0}
 \item[\textbf{VV}]  The catalogue of interacting galaxies by Vorontsov-Velyaminov~\cite{2001A&AT...20..717V}\newFeature{V0.16.0}
 \item[\textbf{PK}]  Version 2000 of the Catalogue of Galactic Planetary Nebulae~\cite{2001A&A...378..843K}\newFeature{V0.16.0}
+\item[\textbf{PN G}]  The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae~\cite{1992secg.book.....A}\newFeature{V0.16.1}
+\item[\textbf{SNR G}]  A catalogue of Galactic supernova remnants~\cite{2014yCat.7272....0G}\newFeature{V0.16.1}
+\item[\textbf{ACO}]  A Catalog of Rich Clusters of Galaxies~\cite{1989ApJS...70....1A}\newFeature{V0.16.1}
 \end{description}
 
 Cross-index data for Stellarium DSO Catalog is partially obtained from ``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M} and astronomical databases SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr/simbad/}}~\cite{2000A&AS..143....9W} and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
@@ -117,10 +111,13 @@ fields with \emph{tab} char as delimiter:
 28 & integer & Mel number (Melotte Catalogue of Deep Sky Objects)\\
 29 & integer & PGC number (HYPERLEDA. I. Catalog of galaxies); partial\\
 30 & integer & UGC number (The Uppsala General Catalogue of Galaxies); partial\\
-31 & string  & Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)\\
+31 & string  & Ced identificator (Cederblad Catalog of bright diffuse Galactic nebulae)\\
 32 & integer & Arp number (Atlas of Peculiar Galaxies)\\
 33 & integer & VV number (The catalogue of interacting galaxies)\\
-34 & string  & PK number (Catalogue of Galactic Planetary Nebulae)\\
+34 & string  & PK identificator (Catalogue of Galactic Planetary Nebulae)\\
+35 & string  & PN G identificator (The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae)\\
+36 & string  & SNR G identificator (A catalogue of Galactic supernova remnants)\\
+37 & string  & ACO identificator (A Catalog of Rich Clusters of Galaxies)\\
 \bottomrule
 \end{longtabu}
 
@@ -146,6 +143,8 @@ RN  & Reflection Nebula\\
 C+N & Cluster associated with nebulosity\\
 HII & HII Region\\
 SNR & Supernova Remnant\\
+SNC & Supernova Candidate\\
+SNRC & Supernova Remnant Candidate\\
 BN  & Bipolar Nebula\\
 EN  & Emission Nebula\\
 SA  & Stellar Association\\
@@ -166,6 +165,9 @@ PPN & Protoplanetary Nebula\\
 $\ast$ & Star\\
 $\ast\ast$ & Double Star\\
 MUL & Multiple Star\\
+SY$\ast$ & Symbiotic Star\\
+EM$\ast$ & Emission-line Star\\
+CLG & Cluster of galaxies\\
 \emph{empty} & Unknown type, catalog errors, \emph{Unidentified Southern Objects} etc.\\
 \bottomrule
 \end{longtabu}
@@ -280,6 +282,50 @@ display. As most images will be two dimensional, display on a spherical
 display will limit the size to about 1 degree before distortion becomes
 evident. Larger images should be sectioned into a mosaic of smaller
 textures for a more accurate display.
+
+\subsection{Modifying outlines.dat}
+\label{sec:dso:modifyingOutlines}
+
+\noindent\newFeature{V0.16.1}Each line in the file \file{outlines.dat} contains three ``columns'' of data for outline elements. The structure for each line is as follows:
+
+\begin{longtabu} to \textwidth {l|l|l|X}
+\toprule
+\emph{Offset} & \emph{Length} & \emph{Type} & \emph{Description}\\
+\midrule
+0  &  8 & \%d  & Right ascension (decimal hours)\\
+10 & 18 & \%d  & Declination (decimal degrees)\\
+20 & 60 & \%s  & Command\\
+\bottomrule
+\end{longtabu}
+
+A coordinates for each point of outline is represented in equatorial coordinate system for epoch J2000.0. The possible values of third ``column'' (\emph{Command}) is:
+\begin{description}
+\item[start] This command mark a start point of the outline. This command should contain designation of deep-sky object also.
+\item[vertex] This command mark a middle point of the outline.
+\item[end] This command mark an end point of the outline.
+\end{description}
+
+
+Example for outline of M42:
+\begin{configfile}
+05.56401 -05.49880 start  M 42 
+05.56759 -05.39201 vertex 
+05.56635 -05.31749 vertex 
+05.57158 -05.21922 vertex 
+05.57601 -05.21716 vertex 
+05.58830 -05.30164 vertex 
+05.59140 -05.34341 vertex 
+05.59028 -05.37076 vertex 
+05.59008 -05.38175 vertex 
+05.59581 -05.37159 vertex 
+05.59943 -05.47123 vertex 
+05.59912 -05.65838 vertex 
+05.59520 -05.73212 vertex 
+05.58490 -05.68102 vertex 
+05.56948 -05.57675 end
+\end{configfile}
+
+The format of the file \file{outlines.dat} is compatible with similar file of the \program{SkyChart/Cartes du Ciel} planetarium.
 
 \section{Adding Extra Nebulae Images}%\label{adding-extra-nebulae-images}
 \label{sec:dso:adding_images}

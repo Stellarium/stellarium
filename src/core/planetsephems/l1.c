@@ -7,7 +7,7 @@ ftp://ftp.imcce.fr/pub/ephem/satel/galilean/L1
 I (Johannes Gajdosik) have just taken the Fortran code and data
 obtained from above and rearranged it into this piece of software.
 
-I can neigther allow nor forbid the usage of the L1 theory.
+I can neither allow nor forbid the usage of the L1 theory.
 The copyright notice below covers not the work of Valery Lainey
 but just my work, that is the compilation of the L1 theory
 into the software supplied in this file.

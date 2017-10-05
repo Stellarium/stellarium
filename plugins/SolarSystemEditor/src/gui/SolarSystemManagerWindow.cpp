@@ -84,6 +84,7 @@ void SolarSystemManagerWindow::createDialogContent()
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), ui->listWidgetObjects, SLOT(repaint()));
 
+	setAboutHtml();
 	updateTexts();
 
 	Q_ASSERT(mpcImportWindow);
@@ -104,10 +105,6 @@ void SolarSystemManagerWindow::updateTexts()
 	// TRANSLATORS: IAU = International Astronomical Union
 	QString mpcText(q_("You can import comet and asteroid data formatted in the export formats of the IAU's Minor Planet Center (%1). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES)."));
 	ui->labelMPC->setText(QString(mpcText).arg(linkCode));
-	
-	//About tab
-	ui->labelTitle->setText(q_("Solar System Editor plug-in"));
-	ui->labelVersion->setText(QString(q_("Version %1")).arg(SOLARSYSTEMEDITOR_VERSION));
 }
 
 void SolarSystemManagerWindow::retranslate()
@@ -116,6 +113,7 @@ void SolarSystemManagerWindow::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		populateSolarSystemList();
+		setAboutHtml();
 		updateTexts();
 	}
 }
@@ -161,11 +159,10 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 void SolarSystemManagerWindow::populateSolarSystemList()
 {
 	unlocalizedNames.clear();
-	foreach (const PlanetP & object, GETSTELMODULE(SolarSystem)->getAllPlanets())
+	foreach (const PlanetP& object, GETSTELMODULE(SolarSystem)->getAllMinorBodies())
 	{
 		// GZ new for 0.16: only insert objects which are minor bodies.
-		if ((object->getPlanetType() >= Planet::isAsteroid) && (object->getEnglishName()!="Pluto"))
-			unlocalizedNames.insert(object->getNameI18n(), object->getEnglishName());
+		unlocalizedNames.insert(object->getCommonNameI18n(), object->getCommonEnglishName());
 	}
 
 	ui->listWidgetObjects->clear();
@@ -214,4 +211,40 @@ void SolarSystemManagerWindow::addConfiguration()
 	filter.append(" (*.ini)");
 	QString filePath = QFileDialog::getOpenFileName(0, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
 	ssEditor->addFromSolarSystemConfigurationFile(filePath);
+}
+
+void SolarSystemManagerWindow::setAboutHtml(void)
+{
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + q_("Solar System Editor") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + SOLARSYSTEMEDITOR_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SOLARSYSTEMEDITOR_PLUGIN_LICENSE + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
+	html += "<tr><td rowspan=2><strong>" + q_("Contributors") + ":</strong></td><td>Georg Zotti</td></tr>";
+	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "</table>";
+
+	html += "<p>" + q_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database.") + "</p>";
+
+	html += "<h3>" + q_("Links") + "</h3>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Solar System Editor plugin") + "</p>";
+	html += "<p><ul>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Solar_System_Editor_plugin\">").arg("</a>") + "</li>";
+	html += "</ul></p></body></html>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if(gui!=Q_NULLPTR)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
+
+	ui->aboutTextBrowser->setHtml(html);
 }

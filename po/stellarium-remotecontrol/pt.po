@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-20 19:42+0700\n"
-"PO-Revision-Date: 2017-05-12 03:12+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2017-07-30 16:49+0700\n"
+"PO-Revision-Date: 2017-07-24 18:17+0000\n"
+"Last-Translator: Tiago Santos <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-21 06:06+0000\n"
-"X-Generator: Launchpad (build 18416)\n"
+"X-Launchpad-Export-Date: 2017-07-31 05:49+0000\n"
+"X-Generator: Launchpad (build 18441)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -23,7 +23,7 @@ msgstr "Não foi possível recuperar a lista de ações"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr "Ação '%1' não foi aceita pelo servidor: "
+msgstr "Ação '%1' não foi aceite pelo servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
@@ -50,7 +50,7 @@ msgstr "Não foi possível recuperar a lista de propriedades"
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr "A propriedade '%1' não foi aceita pelo servidor: "
+msgstr "A propriedade '%1' não foi aceite pelo servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
@@ -79,7 +79,7 @@ msgstr "Erro ao realizar a pesquisa Simbad"
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
 #: tablet7in.html:235
 msgid "idle"
-msgstr "ocioso"
+msgstr "inactivo"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
@@ -110,11 +110,11 @@ msgstr "-nenhum-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(a carregar: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Não foi possível carregar a lista Scenery3d"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -164,11 +164,11 @@ msgstr "Ações e scripts"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
@@ -185,10 +185,6 @@ msgstr "Dia solar"
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
 msgstr "Semana solar"
-
-#: index.html:90 tablet7in.html:191
-msgid "Sidereal day"
-msgstr "Dia sideral"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
@@ -252,7 +248,7 @@ msgstr "Século juliano"
 
 #: index.html:123 tablet7in.html:138
 msgid "FOV"
-msgstr ""
+msgstr "CDV"
 
 #: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
@@ -265,19 +261,19 @@ msgstr "Selecionar e focar"
 
 #: index.html:168 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Modo de seleção"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Centrar no objeto"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Centrar e ampliar o objeto"
 
 #: index.html:168 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Marcar apenas o objeto"
 
 #: index.html:170 tablet7in.html:261
 msgid "Quick select"
@@ -297,11 +293,11 @@ msgstr "Seleção atual"
 
 #: index.html:200 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Pesquisa do Céu Digitalizado"
 
 #: index.html:243 tablet7in.html:399
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Estrelas Cadentes"
 
 #: index.html:244 tablet7in.html:400
 msgid "ZHR:"
@@ -361,7 +357,7 @@ msgstr "Paisagem atual"
 
 #: index.html:481 tablet7in.html:642
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "Mostrar asterismos e espessura"
 
 #: index.html:492 tablet7in.html:658
 msgid "Current sky culture"
@@ -401,27 +397,27 @@ msgstr "Digite para procurar uma localização"
 
 #: index.html:560 tablet7in.html:741
 msgid "Interaction"
-msgstr ""
+msgstr "Interação"
 
 #: index.html:561 tablet7in.html:742
 msgid "Current scene:"
-msgstr ""
+msgstr "Cena atual:"
 
 #: index.html:564 tablet7in.html:745
 msgid "View controls"
-msgstr ""
+msgstr "Ver controlos"
 
 #: index.html:570 tablet7in.html:751
 msgid "Movement controls"
-msgstr ""
+msgstr "Controlos de movimento"
 
 #: index.html:586 tablet7in.html:767
 msgid "Scene selection"
-msgstr ""
+msgstr "Seleção de cena"
 
 #: index.html:590 tablet7in.html:771
 msgid "Load selected scene"
-msgstr ""
+msgstr "Abrir cena selecionada"
 
 #: index.html:614 tablet7in.html:796
 msgid "No response from server"
@@ -488,7 +484,7 @@ msgstr "Vista para o horizonte no Azimute"
 
 #: tablet7in.html:123
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Compensar visão vertical"
 
 #: tablet7in.html:133
 msgid "Reset"
@@ -588,7 +584,7 @@ msgstr "Pisces (Peixes)"
 
 #: tablet7in.html:654
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Seleção de constelações isoladas"
 
 #: tablet7in.html:692
 msgid "Favorites"
@@ -611,6 +607,9 @@ msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "Nenhuma resposta do servidor durante %1 segundos. O Stellarium está em "
 "execução?"
+
+#~ msgid "Sidereal day"
+#~ msgstr "Dia sideral"
 
 #~ msgid "Selection"
 #~ msgstr "Seleção"

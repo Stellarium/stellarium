@@ -77,8 +77,10 @@ public:
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overriden to handle the problem with name conflicts.
 	virtual void translateName(const StelTranslator& trans);
-	virtual QString getEnglishName(void) const {return englishName;}
-	virtual QString getNameI18n(void) const {return nameI18;}
+	virtual QString getEnglishName(void) const;
+	virtual QString getNameI18n(void) const;
+	QString getCommonEnglishName(void) const {return englishName;}
+	QString getCommonNameI18n(void) const {return nameI18;}
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -109,6 +111,12 @@ public:
 	//! set value for semi-major axis in AU
 	void setSemiMajorAxis(double value);
 
+	//! set values for spectral types
+	void setSpectralType(QString sT="", QString sB="");
+
+	//! set value for color index B-V
+	void setColorIndexBV(float bv=99.f);
+
 	//! get sidereal period for minor planet
 	double getSiderealPeriod() const;
 
@@ -120,6 +128,9 @@ private:
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;
 	QString properName;
+
+	float b_v;
+	QString specT, specB;
 };
 
 #endif //_MINOR_PLANET_HPP_

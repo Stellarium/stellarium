@@ -524,7 +524,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		oss << QString("%1: <b>%2</b>").arg(q_("Type")).arg(getNomenclatureTypeString()) << "<br />";
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Size && size>0.f)
 	{

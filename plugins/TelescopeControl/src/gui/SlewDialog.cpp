@@ -334,7 +334,7 @@ void SlewDialog::savePointsToFile()
 		storedPointsDescriptions.insert(QString::number(sp.number),point);
 	}
 	//Add the version:
-	storedPointsDescriptions.insert("version", QString(TELESCOPE_CONTROL_VERSION));
+	storedPointsDescriptions.insert("version", QString(TELESCOPE_CONTROL_PLUGIN_VERSION));
 	//Convert the tree to JSON
 	StelJsonParser::write(storedPointsDescriptions, &pointsJsonFile);
 	pointsJsonFile.flush();//Is this necessary?
@@ -384,7 +384,7 @@ void SlewDialog::loadPointsFromFile()
 	}
 
 	QString version = map.value("version", "0.0.0").toString();
-	if(version < QString(TELESCOPE_CONTROL_VERSION))
+	if(version < QString(TELESCOPE_CONTROL_PLUGIN_VERSION))
 	{
 		QString newName = pointsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 		if(pointsJsonFile.rename(newName))

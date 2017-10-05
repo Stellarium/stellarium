@@ -67,6 +67,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 	info.contact = "i.martividal@gmail.com";
 	info.description = N_("Displays an analysis of a selected object's observability (rise, set, and transit times) for the current date, as well as when it is observable through the year. An object is assumed to be observable if it is above the horizon during a fraction of the night. Also included are the dates of the largest separation from the Sun and acronychal and cosmical rising and setting. (Explanations are provided in the 'About' tab of the plugin's configuration window.)");
 	info.version = OBSERVABILITY_PLUGIN_VERSION;
+	info.license = OBSERVABILITY_PLUGIN_LICENSE;
 	return info;
 }
 

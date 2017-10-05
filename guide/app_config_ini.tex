@@ -70,7 +70,7 @@ zodiacal\_light\_intensity         & float  & 1.0   & Sets the relative brightne
 max\_mag\_nebula\_name             & float  & 8.0   & Sets the magnitude of the nebulae whose name is shown. \\\midrule
 flag\_nebula\_hints\_proportional  & bool   & false & Enables/disables proportional markers for deep-sky objects. \\\midrule
 flag\_surface\_brightness\_usage   & bool   & false & Enables/disables usage surface brightness for markers for deep-sky objects.\\\midrule
-flag\_surface\_brightness\_arcsec  & bool   & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\\midrule
+
 flag\_use\_type\_filter            & bool   & false & Enables/disables usage of the type filters for deep-sky objects. \\\midrule
 flag\_nutation  				   & bool   & true  & Enables/disables usage nutation.\\\midrule
 flag\_topocentric\_coordinates	   & bool   & true  & Enables/disables usage topocentric coordinates.\\\midrule
@@ -94,30 +94,28 @@ toast\_survey\_levels			   & int    & 11    & Count of levels for Digitized Sky 
 \label{sec:config.ini:astrocalc}
 
 This section includes settings for the Astronomical Calculations feature.
-
 \begin{longtabu} to \textwidth {l|l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-flag\_ephemeris\_markers  & bool & true  & Set to \emph{true} to show the calculated ephemeris markers for Solar system bodies.\\\midrule
-flag\_ephemeris\_dates    & bool & false  & Set to \emph{true} to show the dates of calculated ephemeris for Solar system bodies.\\\midrule
-flag\_ephemeris\_magnitudes & bool & false  & Set to \emph{true} to show the magnitude of Solar system body for the calculated ephemeride.\\\midrule
-flag\_ephemeris\_horizontal & bool & false  & Set to \emph{true} to use horizontal coordinates for ephemerides.\\\midrule
-ephemeris\_celestial\_body & string & Moon  & Default celestial body for computation of ephemerides.\\\midrule
-ephemeris\_time\_step & int & 6  & Identificator for time step category.\\\midrule
-celestial\_magnitude\_limit & float & 6.0  & Value of limiting magnitude for the celestial objects in computation of their positions.\\\midrule
-celestial\_category & int & 200  & Identificator for default category of celestial bodies.\\\midrule
-flag\_horizontal\_coordinates & bool & false  & Set to \emph{true} to use horizontal coordinates for compute of positions for the celestial objects.\\\midrule
-flag\_phenomena\_opposition & bool & false  & Set to \emph{true} to compute of opposition phenomenon between the Solar system bodies.\\\midrule
-phenomena\_angular\_separation & float & 1.0 & Allowed angular separation between celestial bodies for computation of phenomena.\\\midrule
-phenomena\_celestial\_body & string & Venus & Default celestial body for computation of phenomena.\\\midrule
-phenomena\_celestial\_group & int & 0 & Identificator for group of celestial bodies for computation of phenomenae.\\\midrule
-wut\_magnitude\_limit & float & 10.0  & Value of limiting magnitude for calculations within What's Up Tonight feature.\\\midrule
-wut\_time\_interval & int & 0 & Identificator for time interval within What's Up Tonight feature computations.\\\midrule
-graphs\_celestial\_body & string & Moon  & Default celestial body for draw of graphs.\\\midrule
-graphs\_first\_id & int & 1  & Identificator for left graph (blue line).\\\midrule
-graphs\_second\_id & int & 2 & Identificator for right graph (yellow line).\\\bottomrule
+\emph{ID}                   & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+flag\_ephemeris\_markers       & bool   & true  & Set to \emph{true} to show the calculated ephemeris markers for Solar system bodies.\\\midrule
+flag\_ephemeris\_dates         & bool   & false & Set to \emph{true} to show the dates of calculated ephemeris for Solar system bodies.\\\midrule
+flag\_ephemeris\_magnitudes    & bool   & false & Set to \emph{true} to show the magnitude of Solar system body for the calculated ephemeride.\\\midrule
+flag\_ephemeris\_horizontal    & bool   & false & Set to \emph{true} to use horizontal coordinates for ephemerides.\\\midrule
+ephemeris\_celestial\_body     & string & Moon  & Default celestial body for computation of ephemerides.\\\midrule
+ephemeris\_time\_step          & int    & 6     & Identificator for time step category.\\\midrule
+celestial\_magnitude\_limit    & float  & 6.0   & Value of limiting magnitude for the celestial objects in computation of their positions.\\\midrule
+celestial\_category            & int    & 200   & Identificator for default category of celestial bodies.\\\midrule
+flag\_horizontal\_coordinates  & bool   & false & Set to \emph{true} to use horizontal coordinates for compute of positions for the celestial objects.\\\midrule
+flag\_phenomena\_opposition    & bool   & false & Set to \emph{true} to compute of opposition phenomenon between the Solar system bodies.\\\midrule
+phenomena\_angular\_separation & float  & 1.0   & Allowed angular separation between celestial bodies for computation of phenomena.\\\midrule
+phenomena\_celestial\_body     & string & Venus & Default celestial body for computation of phenomena.\\\midrule
+phenomena\_celestial\_group    & int    & 0     & Identificator for group of celestial bodies for computation of phenomenae.\\\midrule
+wut\_magnitude\_limit          & float  & 10.0  & Value of limiting magnitude for calculations within What's Up Tonight feature.\\\midrule
+wut\_time\_interval            & int    & 0     & Identificator for time interval within What's Up Tonight feature computations.\\\midrule
+graphs\_celestial\_body        & string & Moon  & Default celestial body for draw of graphs.\\\midrule
+graphs\_first\_id              & int    & 1     & Identificator for left graph (blue line).\\\midrule
+graphs\_second\_id             & int    & 2     & Identificator for right graph (yellow line).\\\bottomrule
 \end{longtabu}
-
 
 \subsection{\big[color\big]}
 \label{sec:config.ini:color}
@@ -129,7 +127,7 @@ no whitespace between the numbers!
 
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID}	& \emph{Default} & \emph{Colour of the\ldots}\\
+\emph{ID}	                            & \emph{Default}      & \emph{Colour of the\ldots}\\
 \midrule
 default\_color           				& \ccbox{0.5,0.5,0.7} & default colour.\\\midrule
 daylight\_text\_color            		& \ccbox{0.0,0.0,0.0} & info text at daylight. \\\midrule
@@ -173,6 +171,10 @@ cardinal\_color          				& \ccbox{0.8,0.2,0.1} &  cardinal points. \\\midrul
 %% A mix of equatorial (blueish) and ecliptical (reddish)...
 colures\_color 			 				& \ccbox{0.5,0.0,0.5} &  colures. \\\midrule
 longitude\_color	     				& \ccbox{0.2,0.4,0.4} &  opposition/conjunction longitude. \\\midrule
+%% Asterisms and ray helpers
+asterism\_lines\_color      	 	 	& \ccbox{0.4,0.4,0.8} &  asterism lines. \\\midrule
+asterism\_names\_color      			& \ccbox{0.4,0.4,0.8} &  asterism names. \\\midrule
+rayhelper\_lines\_color      	 	 	& \ccbox{1.0,1.0,0.0} &  the ray helper lines. \\\midrule
 %% Constellations
 const\_lines\_color      				& \ccbox{0.2,0.2,0.6} &  constellation lines. \\\midrule
 const\_names\_color      				& \ccbox{0.4,0.6,0.9} &  constellation names. \\\midrule
@@ -183,7 +185,8 @@ dso\_circle\_color                      & \ccbox{1.0,0.7,0.2} & deep-sky objects
 dso\_galaxy\_color                      & \ccbox{1.0,0.2,0.2} & galaxies symbols. \\\midrule
 dso\_radio\_galaxy\_color               & \ccbox{0.3,0.3,0.3} & radio galaxies symbols. \\\midrule
 dso\_active\_galaxy\_color              & \ccbox{1.0,0.5,0.2} & active galaxies symbols. \\\midrule
-dso\_interacting\_galaxy\_color         & \ccbox{0.2,0.5,1.0} & interacting galaxies symbols. \\\midrule
+dso\_interacting\_galaxy\_color         & \ccbox{0.2,0.8,1.0} & clusters of galaxies symbols. \\\midrule
+dso\_galaxy\_cluster\_color             & \ccbox{0.2,0.5,1.0} & interacting galaxies symbols. \\\midrule
 dso\_quasar\_color                      & \ccbox{1.0,0.2,0.2} & quasars symbols. \\\midrule
 dso\_possible\_quasar\_color            & \ccbox{1.0,0.2,0.2} & possible quasars symbols. \\\midrule
 dso\_bl\_lac\_color                     & \ccbox{1.0,0.2,0.2} & BL Lac objects symbols. \\\midrule
@@ -196,6 +199,8 @@ dso\_emission\_nebula\_color            & \ccbox{0.1,1.0,0.1} & emission nebulae
 dso\_dark\_nebula\_color                & \ccbox{0.3,0.3,0.3} & dark nebulae symbols. \\\midrule
 dso\_hydrogen\_region\_color            & \ccbox{0.1,1.0,0.1} & hydrogen regions symbols. \\\midrule
 dso\_supernova\_remnant\_color          & \ccbox{0.1,1.0,0.1} & supernovae remnants symbols. \\\midrule
+dso\_supernova\_candidate\_color        & \ccbox{0.1,1.0,0.1} & supernova candidates symbols. \\\midrule
+dso\_supernova\_remnant\_cand\_color    & \ccbox{0.1,1.0,0.1} & supernova remnant candidates symbols. \\\midrule
 dso\_interstellar\_matter\_color        & \ccbox{0.1,1.0,0.1} & interstellar matter symbols. \\\midrule
 dso\_cluster\_with\_nebulosity\_color   & \ccbox{0.1,1.0,0.1} & clusters associated with nebulosity symbols. \\\midrule
 dso\_molecular\_cloud\_color            & \ccbox{0.1,1.0,0.1} & molecular clouds symbols. \\\midrule
@@ -207,6 +212,8 @@ dso\_globular\_cluster\_color           & \ccbox{1.0,1.0,0.1} & globular star cl
 dso\_stellar\_association\_color        & \ccbox{1.0,1.0,0.1} & stellar associations symbols. \\\midrule
 dso\_star\_cloud\_color                 & \ccbox{1.0,1.0,0.1} & star clouds symbols. \\\midrule
 dso\_star\_color                        & \ccbox{1.0,0.7,0.2} & star symbols. \\\midrule
+dso\_symbiotic\_star\_color             & \ccbox{1.0,0.7,0.2} & symbiotic star symbols. \\\midrule
+dso\_emission\_star\_color              & \ccbox{1.0,0.7,0.2} & emission-line star symbols. \\\midrule
 dso\_emission\_object\_color            & \ccbox{1.0,0.7,0.2} & emission objects symbols. \\\midrule
 dso\_young\_stellar\_object\_color      & \ccbox{1.0,0.7,0.2} & young stellar objects symbols. \\\midrule
 star\_label\_color                      & \ccbox{0.4,0.3,0.5} & star labels. \\\midrule
@@ -300,24 +307,27 @@ In this section you can fine-tune which of the deep-sky catalogs should be selec
 
 \begin{longtabu} to \textwidth {l|l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-flag\_show\_ngc & bool & true  & New General Catalogue (NGC). \\\midrule
-flag\_show\_ic  & bool & true  & Index Catalogue (IC). \\\midrule
-flag\_show\_m   & bool & true  & Messier Catalog (M). \\\midrule
-flag\_show\_c   & bool & false & Caldwell Catalogue (C). \\\midrule
-flag\_show\_b   & bool & false & Barnard Catalogue (B). \\\midrule
-flag\_show\_sh2 & bool & false & Sharpless Catalogue (Sh-II). \\\midrule
-flag\_show\_vdb & bool & false & Van den Bergh Catalogue of reflection nebulae (VdB). \\\midrule
-flag\_show\_rcw & bool & false & The RCW catalogue of H$\alpha$-emission regions in the southern Milky Way. \\\midrule
-flag\_show\_lbn & bool & false & Lynds' Catalogue of Bright Nebulae (LBN). \\\midrule
-flag\_show\_ldn & bool & false & Lynds' Catalogue of Dark Nebulae (LDN). \\\midrule
-flag\_show\_cr  & bool & false & Collinder Catalogue (Cr). \\\midrule
-flag\_show\_mel & bool & false & Melotte Catalogue of Deep Sky Objects (Mel).  \\\midrule
-flag\_show\_pgc & bool & false & HYPERLEDA. I. Catalog of galaxies (PGC). \\\midrule
-flag\_show\_ced & bool & false & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). \\\midrule
-flag\_show\_ugc & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\midrule
-flag\_show\_arp & bool & false & Atlas of Peculiar Galaxies (Arp). \\\midrule
-flag\_show\_vv  & bool & false & The Catalogue of Interacting Galaxies (VV). \\\midrule
-flag\_show\_pk  & bool & false & The Catalogue of Galactic Planetary Nebulae (PK). \\\bottomrule
+flag\_show\_ngc  & bool & true  & New General Catalogue (NGC). \\\midrule
+flag\_show\_ic   & bool & true  & Index Catalogue (IC). \\\midrule
+flag\_show\_m    & bool & true  & Messier Catalog (M). \\\midrule
+flag\_show\_c    & bool & false & Caldwell Catalogue (C). \\\midrule
+flag\_show\_b    & bool & false & Barnard Catalogue (B). \\\midrule
+flag\_show\_sh2  & bool & false & Sharpless Catalogue (Sh-II). \\\midrule
+flag\_show\_vdb  & bool & false & Van den Bergh Catalogue of reflection nebulae (VdB). \\\midrule
+flag\_show\_rcw  & bool & false & The RCW catalogue of H$\alpha$-emission regions in the southern Milky Way. \\\midrule
+flag\_show\_lbn  & bool & false & Lynds' Catalogue of Bright Nebulae (LBN). \\\midrule
+flag\_show\_ldn  & bool & false & Lynds' Catalogue of Dark Nebulae (LDN). \\\midrule
+flag\_show\_cr   & bool & false & Collinder Catalogue (Cr). \\\midrule
+flag\_show\_mel  & bool & false & Melotte Catalogue of Deep Sky Objects (Mel).  \\\midrule
+flag\_show\_pgc  & bool & false & HYPERLEDA. I. Catalog of galaxies (PGC). \\\midrule
+flag\_show\_ced  & bool & false & Cederblad Catalog of bright diffuse Galactic nebulae (Ced). \\\midrule
+flag\_show\_ugc  & bool & false & The Uppsala General Catalogue of Galaxies (UGC). \\\midrule
+flag\_show\_arp  & bool & false & Atlas of Peculiar Galaxies (Arp). \\\midrule
+flag\_show\_vv   & bool & false & The Catalogue of Interacting Galaxies (VV). \\\midrule
+flag\_show\_pk   & bool & false & The Catalogue of Galactic Planetary Nebulae (PK). \\\midrule
+flag\_show\_png  & bool & false & The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (PN G). \\\midrule
+flag\_show\_snrg & bool & false & A catalogue of Galactic supernova remnants (SNR G). \\\midrule
+flag\_show\_aco  & bool & false & A Catalog of Rich Clusters of Galaxies (ACO). \\\bottomrule
 \end{longtabu}
 
 \subsection{\big[dso\_type\_filters\big]}
@@ -335,6 +345,7 @@ flag\_show\_dark\_nebulae         & bool & true & display dark nebulae.  \\\midr
 flag\_show\_planetary\_nebulae    & bool & true & display planetary nebulae.  \\\midrule
 flag\_show\_hydrogen\_regions     & bool & true & display hydrogen regions. \\\midrule
 flag\_show\_supernova\_remnants   & bool & true & display supernovae remnants. \\\midrule
+flag\_show\_galaxy\_clusters      & bool & true & display clusters of galaxies. \\\midrule
 flag\_show\_other                 & bool & true & display other deep-sky objects.  \\\bottomrule
 \end{longtabu}
 
@@ -384,7 +395,10 @@ flag\_show\_decimal\_degrees    & bool   & false & If \emph{true}, use decimal d
 flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azimuth from south towards west 
                                                    (as in some astronomical literature)\\\midrule
 flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI.\\\midrule
+flag\_surface\_brightness\_arcsec  & bool  & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\\midrule
+flag\_surface\_brightness\_short  & bool   & false & Toggle usage the short notation for the surface brightness of deep-sky objects.\\\midrule
 flag\_dso\_designation\_usage   & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\\midrule
+flag\_dso\_outlines\_usage      & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\\midrule
 flag\_enable\_kinetic\_scrolling & bool  & true  & If \emph{true}, use kinetic scrolling in the GUI\footnote{This option is available on Windows tablets only.}.\\\midrule
 flag\_show\_buttons\_background & bool   & true  & If \emph{true}, use background under bottons on bottom panel.\\\midrule
 pointer\_animation\_speed 		& float  & 1.0 	 & Animation speed of pointers.\\\midrule
@@ -686,6 +700,9 @@ toggled with hotkeys or switched in the GUI.
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+flag\_asterism\_drawing         & bool  & Display asterism line drawing\\\midrule
+flag\_asterism\_name            & bool  & Display asterism names\\\midrule
+flag\_rayhelper\_drawing        & bool  & Display the ray helper line drawing\\\midrule
 flag\_constellation\_drawing    & bool  & Display constellation line drawing\\\midrule
 flag\_constellation\_name       & bool  & Display constellation names\\\midrule
 flag\_constellation\_art        & bool  & Display constellation art\\\midrule
@@ -717,7 +734,10 @@ moon\_scale                   & float & Sets the moon scale factor, sometimes us
 constellation\_art\_intensity      & float & brightness [0\ldots1] of the constellation art images. Typical value: \emph{0.5}\\\midrule
 constellation\_art\_fade\_duration & float & time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\\\midrule
 constellation\_font\_size          & int   & font size for constellation labels\\\midrule
-constellation\_line\_thickness     & float & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\\\midrule
+constellation\_line\_thickness     & int   & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\\\midrule
+asterism\_font\_size               & int   & font size for asterism labels\\\midrule
+asterism\_line\_thickness          & int   & thickness of lines of the asterisms [1\ldots5]. Typical value: \emph{1}\\\midrule
+rayhelper\_line\_thickness         & int   & thickness of lines of the ray helpers [1\ldots5]. Typical value: \emph{1}\\\midrule
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
 light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
 use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\ %% TODO: DESCRIBE!

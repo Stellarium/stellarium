@@ -196,6 +196,8 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 	virtual QString getEnglishName(void) const;
 	virtual QString getNameI18n(void) const;
+	QString getCommonEnglishName(void) const {return englishName;}
+	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
@@ -232,6 +234,9 @@ public:
 	PlanetType getPlanetType() const {return pType;}
 
 	void setNativeName(QString planet) { nativeName = planet; }
+
+	//! set the IAU moon number (designation of the moon), if any.
+	void setIAUMoonNumber(QString designation);
 
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
@@ -556,6 +561,8 @@ protected:
 	static double customGrsDrift;		// Annual drift of Great Red Spot position (degrees)
 
 private:
+	QString iauMoonNumber;
+
 	// Shader-related variables
 	struct PlanetShaderVars {
 		// Vertex attributes

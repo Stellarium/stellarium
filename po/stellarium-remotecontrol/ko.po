@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-06-20 19:42+0700\n"
-"PO-Revision-Date: 2016-07-11 17:54+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2017-07-30 16:49+0700\n"
+"PO-Revision-Date: 2017-08-28 14:24+0000\n"
+"Last-Translator: Sang-Eun Lee <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-21 06:06+0000\n"
-"X-Generator: Launchpad (build 18416)\n"
+"X-Launchpad-Export-Date: 2017-08-29 05:11+0000\n"
+"X-Generator: Launchpad (build 18446)\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -74,7 +74,7 @@ msgstr "에러 (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Simbad 검색 과정에서 에러 발생"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
 #: tablet7in.html:235
@@ -106,15 +106,15 @@ msgstr "풍경 리스트를 불러오는데 실패하였습니다."
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:505
 #: index.html:562 tablet7in.html:683 tablet7in.html:743
 msgid "-none-"
-msgstr ""
+msgstr "-없음-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(불러오는 중: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Scenery3d 리스트를 불러오지 못했습니다."
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -160,35 +160,31 @@ msgstr "딥스카이"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "액션과 스크립트"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "잠시 멈춤"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr ""
+msgstr "시차"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
-msgstr ""
+msgstr "태양시"
 
 #: index.html:87 tablet7in.html:188
 msgid "Solar day"
-msgstr ""
+msgstr "태양일"
 
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
-msgstr ""
-
-#: index.html:90 tablet7in.html:191
-msgid "Sidereal day"
-msgstr "항성일"
+msgstr "태양주"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
@@ -200,15 +196,15 @@ msgstr "항성세기"
 
 #: index.html:94 tablet7in.html:195
 msgid "Synodic month"
-msgstr ""
+msgstr "삭망월"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr ""
+msgstr "교점월"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr ""
+msgstr "교점년"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
@@ -216,27 +212,27 @@ msgstr "가우스년"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
-msgstr ""
+msgstr "근점월"
 
 #: index.html:102 tablet7in.html:201
 msgid "Anomalistic year"
-msgstr ""
+msgstr "근점년"
 
 #: index.html:103 tablet7in.html:202
 msgid "Anomalistic century"
-msgstr ""
+msgstr "근점세기"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr ""
+msgstr "평균 태양월"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr ""
+msgstr "평균 태양년"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
-msgstr ""
+msgstr "평균 태양세기"
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
@@ -252,7 +248,7 @@ msgstr "율리우스세기"
 
 #: index.html:123 tablet7in.html:138
 msgid "FOV"
-msgstr ""
+msgstr "시야 (Field of View)"
 
 #: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
@@ -260,23 +256,23 @@ msgstr "용어를 검색하세요. TAB을 눌러 결과를 확인하세요."
 
 #: index.html:142 tablet7in.html:230
 msgid "Select and focus"
-msgstr ""
+msgstr "선별 후 초점 맞추기"
 
 #: index.html:168 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "선별 모드"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "대상을 중심으로"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "대상을 중심으로 한 후 확대"
 
 #: index.html:168 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "대상을 표시만 하기"
 
 #: index.html:170 tablet7in.html:261
 msgid "Quick select"
@@ -296,11 +292,11 @@ msgstr "현재 선택"
 
 #: index.html:200 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Digitized Sky Survey"
 
 #: index.html:243 tablet7in.html:399
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Shooting Stars"
 
 #: index.html:244 tablet7in.html:400
 msgid "ZHR:"
@@ -310,7 +306,7 @@ msgstr "정점 시율"
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
-msgstr ""
+msgstr "지구의 축이 천구의 극점 주위로  돌며 그리는 원. 지구 위에만 표시함."
 
 #: index.html:297 tablet7in.html:461
 msgid "Solstices"
@@ -318,15 +314,15 @@ msgstr "지점"
 
 #: index.html:298 tablet7in.html:462
 msgid "Crossquarters"
-msgstr ""
+msgstr "분점"
 
 #: index.html:299 tablet7in.html:463
 msgid "Major Standstill"
-msgstr ""
+msgstr "최대 월구정변기"
 
 #: index.html:300 tablet7in.html:464
 msgid "Minor Standstill"
-msgstr ""
+msgstr "최소 월구정변기"
 
 #: index.html:310 tablet7in.html:474
 msgid "Current Planet:"
@@ -334,15 +330,15 @@ msgstr "현재행성:"
 
 #: index.html:419 tablet7in.html:578
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "발광성운"
 
 #: index.html:420 tablet7in.html:579
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "암흑성운"
 
 #: index.html:421 tablet7in.html:580
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "행성상성운"
 
 #: index.html:430 tablet7in.html:589
 msgid "Labels and markers"
@@ -358,7 +354,7 @@ msgstr "현재 풍경"
 
 #: index.html:481 tablet7in.html:642
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "성군(星群) 보기 (테두리 표시)"
 
 #: index.html:492 tablet7in.html:658
 msgid "Current sky culture"
@@ -366,23 +362,23 @@ msgstr "현재 하늘 상태"
 
 #: index.html:505 tablet7in.html:683
 msgid "Active script:"
-msgstr ""
+msgstr "활성화된 스크립트:"
 
 #: index.html:506 tablet7in.html:684
 msgid "Run selected script"
-msgstr ""
+msgstr "선택한 스크립트 실행"
 
 #: index.html:506 tablet7in.html:684
 msgid "Stop current script"
-msgstr ""
+msgstr "현재 스크립트 중지"
 
 #: index.html:511 tablet7in.html:41 tablet7in.html:668
 msgid "Actions"
-msgstr ""
+msgstr "액션"
 
 #: index.html:515 tablet7in.html:672
 msgid "Run/toggle action"
-msgstr ""
+msgstr "액션 실행/ 활성화"
 
 #: index.html:526 tablet7in.html:707
 msgid "Planet map"
@@ -394,31 +390,31 @@ msgstr "행성지도포인터"
 
 #: index.html:531 tablet7in.html:712
 msgid "Type to search location"
-msgstr ""
+msgstr "위치 검색을 위해 입력"
 
 #: index.html:560 tablet7in.html:741
 msgid "Interaction"
-msgstr ""
+msgstr "상호작용"
 
 #: index.html:561 tablet7in.html:742
 msgid "Current scene:"
-msgstr ""
+msgstr "현재 장면:"
 
 #: index.html:564 tablet7in.html:745
 msgid "View controls"
-msgstr ""
+msgstr "관점 조절"
 
 #: index.html:570 tablet7in.html:751
 msgid "Movement controls"
-msgstr ""
+msgstr "움직임 조절"
 
 #: index.html:586 tablet7in.html:767
 msgid "Scene selection"
-msgstr ""
+msgstr "장면 선택"
 
 #: index.html:590 tablet7in.html:771
 msgid "Load selected scene"
-msgstr ""
+msgstr "선택한 장면 불러오기"
 
 #: index.html:614 tablet7in.html:796
 msgid "No response from server"
@@ -427,15 +423,15 @@ msgstr "서버로부터 응답이 없습니다."
 #: index.html:615
 msgid ""
 "No response from server since %1 seconds. Is Stellarium still running?"
-msgstr ""
+msgstr "%1 초 이후로 서버에서 응답이 없습니다. Stellarium이 여전히 실행중입니까?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "시간 이동"
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "격자"
 
 #: tablet7in.html:97
 msgid "Up/Left"
@@ -455,11 +451,11 @@ msgstr "좌"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr ""
+msgstr "선택한 대상에 초점 맞추기"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr ""
+msgstr "선택한 대상들에 초점 맞추기"
 
 #: tablet7in.html:97
 msgid "Right"
@@ -483,11 +479,11 @@ msgstr ""
 
 #: tablet7in.html:123
 msgid "Vertical View offset"
-msgstr ""
+msgstr "수직시점 오프셋"
 
 #: tablet7in.html:133
 msgid "Reset"
-msgstr ""
+msgstr "초기화"
 
 #: tablet7in.html:266
 msgid "Sirius"
@@ -527,11 +523,11 @@ msgstr "오리온 성운"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "용골자리 에타 성운"
 
 #: tablet7in.html:276
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "큰부리새자리 47"
 
 #: tablet7in.html:277
 msgid "Aries"
@@ -607,3 +603,6 @@ msgstr "서버로부터 %1 간 응답이 없습니다. 아직도 프로그램이
 
 #~ msgid "Selection"
 #~ msgstr "선택"
+
+#~ msgid "Sidereal day"
+#~ msgstr "항성일"

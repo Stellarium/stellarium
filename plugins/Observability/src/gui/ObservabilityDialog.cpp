@@ -132,6 +132,7 @@ void ObservabilityDialog::setAboutHtml(void)
 
 	html += "<h2>" + q_("Observability Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OBSERVABILITY_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + OBSERVABILITY_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Ivan Marti-Vidal &lt;i.martividal@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + q_("Plugin that analyzes the observability of the selected source (or the screen center, if no source is selected). The plugin can show rise, transit, and set times, as well as the best epoch of the year (i.e., largest angular separation from the Sun), the date range when the source is above the horizon at dark night, and the dates of Acronychal and Cosmical rise/set.<br>Ephemeris of the Solar-System objects and parallax effects are taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)") + "</p>";
