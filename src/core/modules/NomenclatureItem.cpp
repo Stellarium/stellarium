@@ -551,9 +551,9 @@ float NomenclatureItem::getVMagnitude(const StelCore* core) const
 	return 99.f;
 }
 
-double NomenclatureItem::getAngularSize(const StelCore*) const
+double NomenclatureItem::getAngularSize(const StelCore* core) const
 {
-	return 0.00001;
+	return std::atan2(size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
 void NomenclatureItem::update(double deltaTime)
@@ -563,73 +563,40 @@ void NomenclatureItem::update(double deltaTime)
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
-    //qWarning() << "Planet:" << planet->getEnglishName() << " LF:" << labelsFader;
-    if (!getFlagLabels())
-        return;
-    
-    // GZ: I reject smaller craters for now, until geometric computations have been corrected.
-    // TODO: Later, size should be adjusted with planet screen size so that not too many labels are visible.
-    //if ((nType==NomenclatureItemType::niSatelliteFeature) || (nType==NomenclatureItemType::niCrater && size<3000))
-    //    return;
-    
-    Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
-    
-    // Calculate the radius of the planet. It is necessary to re-scale it
-    double r = planet->getRadius() * planet->getSphereScale();
-    
-    // Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions
-    double nlatitude = latitude * M_PI/180.0;
-    double nlongitude = (longitude + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
-    
-    // The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
-    XYZ0[0] = r * cos(nlatitude) * cos(nlongitude);
-    XYZ0[1] = r * cos(nlatitude) * sin(nlongitude);
-    XYZ0[2] = r * sin(nlatitude);
-    
-    /* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
-     planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
-    XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
-    
-    const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-    double featureAngSize = 2*atan(size/(2*r));
-    double screenSzFeature = featureAngSize*prj->getPixelPerRadAtCenter();
-    double planetAngSize = getAngularSize(core)*M_PI/180.;
-    float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-    float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
-    
-    // Factor de escala lineal
-    double linearScale = size/(2*r);
-    // Factor de escala angular
-    double angularScale = featureAngSize/planetAngSize;
-    
-    /*StelPainter sPainter(prj);
-    sPainter.setFont(planetNameFont);
-    // Draw nameI18 + scaling if it's not == 1.
-    float tmp = (hintFader.getInterstate()<=0 ? 7.f : 10.f) + getAngularSize(core)*M_PI/180.f*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
-    sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
-    sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(core), 0, tmp, tmp, false);*/
-    
-    // It is necessary to "turn off" the names whose features are on the opposite face of the planet
-    // Distance from the obserber to the center of the planet
-    double dist = XYZ.length()/cos(atan(r/XYZ.length()));
-    double scale = linearScale/angularScale;
-    
-    if (screenSz < planetAngSize/100.)
-        return;
-    else
-    {
-        if ((scale < screenSz) && (screenSz < screenSzFeature))
-        //if (linearScale < screenSz)
-        {
-            // If dist is bigger than XYZ.length(), then we can see the feature
-            if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()))
-            {
-                painter->setColor(color[0], color[1], color[2], 1.0);
-                painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-                painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
-            }
-            else
-                return;
-        }
-    }
+	if (!getFlagLabels())
+		return;
+
+	Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
+
+	// Calculate the radius of the planet. It is necessary to re-scale it
+	double r = planet->getRadius() * planet->getSphereScale();
+
+	// Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions
+	double nlatitude = latitude * M_PI/180.0;
+	double nlongitude = (longitude + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
+
+	// The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
+	XYZ0[0] = r * cos(nlatitude) * cos(nlongitude);
+	XYZ0[1] = r * cos(nlatitude) * sin(nlongitude);
+	XYZ0[2] = r * sin(nlatitude);
+
+	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
+	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
+	XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
+
+	double screenSize = getAngularSize(core)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
+
+	double dist = XYZ.length()/cos(atan(r/XYZ.length()));
+
+	// We can use ratio of angular size to the FOV to checking visibility of features also!
+	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
+	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
+
+	// Let's check visibility of feature
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (screenSize>50. && screenSize<750.))
+	{
+		painter->setColor(color[0], color[1], color[2], 1.0);
+		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
+		painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
+	}
 }
