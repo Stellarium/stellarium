@@ -135,7 +135,7 @@ void RequestHandler::update(double deltaTime)
 void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 {
 
-#define SERVER_HEADER "Stellarium RemoteControl " REMOTECONTROL_VERSION
+#define SERVER_HEADER "Stellarium RemoteControl " REMOTECONTROL_PLUGIN_VERSION
 	response.setHeader("Server",SERVER_HEADER);
 
 	//try to support keep-alive connections

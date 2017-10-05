@@ -57,7 +57,7 @@ More help can be found on www.stellarium.org, and in the user guide.
 From version 0.6.0 the most useful configuration options can be set from within
 the program.
 You can however change it by hand in the file config.ini in the user data
-directory.  See http://www.stellarium.org/doc/head/fileStructure.html
+directory.  See http://www.stellarium.org/doc/@PACKAGE_VERSION@/fileStructure.html
 for more details on the location of the user data directory for your OS.
 
 --------------------------------------------------------------------------------
@@ -492,7 +492,7 @@ for more details on the location of the user data directory for your OS.
 10.1 Full credits for image 4.2 :
 	Author: Reto Stockli, NASA Earth Observatory,
 		rstockli (at) climate.gsfc.nasa.gov
-	Address of correspondance:
+	Address of correspondence:
 		Reto Stockli
 		ETH/IAC (NFS Klima) & NASA/GSFC Code 913 (SSAI)
 		University Irchel

@@ -289,7 +289,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	}
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(q_("constellation")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("constellation")) << "<br />";
 
 	postProcessInfoString(str, flags);
 

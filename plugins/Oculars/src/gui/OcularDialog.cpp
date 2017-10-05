@@ -328,6 +328,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
 	connect(ui->checkBoxInitialDirection, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitDirectionUsage(bool)));
 	connect(ui->checkBoxTypeOfMount, SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
+	connect(ui->checkBoxResolutionCriterion, SIGNAL(clicked(bool)), plugin, SLOT(setFlagShowResolutionCriterions(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -474,6 +475,10 @@ void OcularDialog::createDialogContent()
 	{
 		ui->hideGridsLinesCheckBox->setChecked(true);
 	}
+	if (settings->value("show_resolution_criterions", true).toBool())
+	{
+		ui->checkBoxResolutionCriterion->setChecked(true);
+	}
 }
 
 void OcularDialog::selectedCCDRotationAngleChanged()
@@ -507,12 +512,17 @@ void OcularDialog::initAboutText()
 
 	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + OCULARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";
-	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")<br />Alexander Wolf<br />Rumen G. Bogdanovski &lt;rumen@skyarchive.org&gt;</td></tr>";
+	html += "<tr><td rowspan=5><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov</td></tr>";
+	html += "<tr><td>Pawel Stolowski (" + q_("Barlow lens feature") + ")</td></tr>";
+	html += "<tr><td>Alexander Wolf</td></tr>";
+	html += "<tr><td>Rumen G. Bogdanovski &lt;rumen@skyarchive.org&gt;</td></tr>";
+	html += "<tr><td>Georg Zotti</td></tr>";
 	html += "</table>";
 
 	//Overview
-	html += "<h2>" + q_("Overview") + "</h2>";
+	html += "<h3>" + q_("Overview") + "</h3>";
 
 	html += "<p>" + q_("This plugin is intended to simulate what you would see through an eyepiece.  This configuration dialog can be used to add, modify, or delete eyepieces and telescopes, as well as CCD Sensors.  Your first time running the app will populate some samples to get your started.") + "</p>";
 	html += "<p>" + q_("You can choose to scale the image you see on the screen.") + " ";
@@ -525,7 +535,7 @@ void OcularDialog::initAboutText()
 	html += "<p>" + q_("If you find any issues, please let me know.  Enjoy!") + "</p>";
 
 	//Keys
-	html += "<h2>" + q_("Hot Keys") + "</h2>";
+	html += "<h3>" + q_("Hot Keys") + "</h3>";
 	html += "<p>" + q_("The plug-in's key bindings can be edited in the Keyboard shortcuts editor (F7).") + "</p>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -565,7 +575,19 @@ void OcularDialog::initAboutText()
 	html += "</li>";
 
 	html += "</ul>";
-	html += "</body></html>";
+
+	html += "<h3>" + q_("Links") + "</h3>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Oculars plugin") + "</p>";
+	html += "<p><ul>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of the catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Oculars_plugin\">").arg("</a>") + "</li>";
+	html += "</ul></p></body></html>";
 
 	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 	ui->textBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

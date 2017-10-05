@@ -278,17 +278,17 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags & ObjectType)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite"))  << "<br/>";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
 	}
 	
 	if ((flags & Magnitude) && (stdMag!=99.f))
 	{
-		float mag = getVMagnitude(core);
+		QString emag = "";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << q_("Approx. magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-		else
-			oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(mag, 'f', 2)) << "<br/>";
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Approx. magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
+
 
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 		oss << myText << "<br/>";
@@ -296,21 +296,18 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
-	
+	oss << getCommonInfoString(core, flags);
+
 	if (flags & Extra)
 	{
 		// TRANSLATORS: Slant range: distance between the satellite and the observer
-		oss << QString(q_("Range (km): %1")).arg(range, 5, 'f', 2);
-		oss << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("Range")).arg(range, 5, 'f', 2).arg(qc_("km", "distance")) << "<br/>";
 		// TRANSLATORS: Rate at which the distance changes
-		oss << QString(q_("Range rate (km/s): %1")).arg(rangeRate, 5, 'f', 3);
-		oss << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
-		oss << QString(q_("Altitude (km): %1")).arg(height, 5, 'f', 2);
-		oss << "<br/>";
-		// TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-		oss << QString(q_("SubPoint (Lat./Long.): %1%2/%3%4"))
+		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(height, 5, 'f', 2).arg(qc_("km", "distance")) << "<br/>";
+		oss << QString("%1: %2%3/%4%5")
+		       .arg(q_("SubPoint (Lat./Long.)"))
 		       .arg(latLongSubPointPosition[0], 5, 'f', 2)
 		       .arg(QChar(0x00B0))
 		       .arg(latLongSubPointPosition[1], 5, 'f', 3)
@@ -324,23 +321,21 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		        .arg(position[1], 5, 'f', 2)
 		        .arg(position[2], 5, 'f', 2);
 		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-		oss << QString(q_("TEME coordinates (km): %1")).arg(temeCoords);
-		oss << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("TEME coordinates")).arg(temeCoords).arg(qc_("km", "distance")) << "<br/>";
 		
 		QString temeVel = QString(xyz)
 		        .arg(velocity[0], 5, 'f', 2)
 		        .arg(velocity[1], 5, 'f', 2)
 		        .arg(velocity[2], 5, 'f', 2);
 		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-		oss << QString(q_("TEME velocity (km/s): %1")).arg(temeVel);
-		oss << "<br/>";
+		oss << QString("%1: %2 %3").arg(q_("TEME velocity")).arg(temeVel).arg(qc_("km/s", "speed")) << "<br/>";
 
 		if (sunReflAngle>0)
 		{  // Iridium
-			oss << QString(q_("Sun reflection angle: %1%2"))
+			oss << QString("%1: %2%3").arg(q_("Sun reflection angle"))
 			       .arg(sunReflAngle,0,'f',1)
 			       .arg(QChar(0x00B0)); // Degree sign
-			oss << "<br/>";
+			oss << "<br />";
 		}
 
 		// Groups of the artificial satellites
@@ -354,11 +349,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			if (groups.count()>1)
 				group = q_("Groups");
 
-			oss << QString("%1: %2").arg(group, groupList.join(", ")) << "<br/>";
+			oss << QString("%1: %2").arg(group, groupList.join(", ")) << "<br />";
 		}
 
 		if (status!=StatusUnknown)
-			oss << QString(q_("Operational status: %1")).arg(getOperationalStatus()) << "<br/>";
+			oss << QString("%1 %2").arg(q_("Operational status")).arg(getOperationalStatus()) << "<br />";
 
 		//Visibility: Full text
 		//TODO: Move to a more prominent place.
@@ -399,11 +394,13 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br/>";
-				oss << QString(q_("%1 MHz (%2%3 kHz)"))
+				oss << QString("%1 %2 (%3%4%5)")
+				       .arg(qc_("MHz", "frequency"))
 				       .arg(c.frequency, 8, 'f', 5)
 				       .arg(sign)
-				       .arg(ddop, 6, 'f', 3);
-				oss << "<br/>";
+				       .arg(ddop, 6, 'f', 3)
+				       .arg(qc_("kHz", "frequency"));
+				oss << "<br />";
 			}
 		}
 	}

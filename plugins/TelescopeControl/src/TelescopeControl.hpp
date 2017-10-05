@@ -60,6 +60,19 @@ using namespace TelescopeControlGlobals;
 
 typedef QSharedPointer<TelescopeClient> TelescopeClientP;
 
+/*! @defgroup telescopeControl Telescope Control plug-in
+@{
+The Telescope Control plug-in allows Stellarium to control
+a telescope on a computerized mount (a "Go To" or "Push To"
+telescope) and offers a graphical user interface for
+setting up the connection.
+@}
+*/
+
+//! @class TelescopeControl
+//! @ingroup telescopeControl
+//! Main class of the Telescope Control plug-in.
+
 //! This class manages the controlling of one or more telescopes by one
 //! instance of the stellarium program. "Controlling a telescope"
 //! means receiving position information from the telescope
@@ -128,9 +141,9 @@ public:
 	//These are public, but not slots, because they don't use sufficient validation. Scripts shouldn't be able to add/remove telescopes, only to point them.
 	//! Adds a telescope description containing the given properties. DOES NOT VALIDATE its parameters. If serverName is specified, portSerial should be specified too. Call saveTelescopes() to write the modified configuration to disc. Call startTelescopeAtSlot() to start this telescope.
 	//! @param portSerial must be a valid serial port name for the particular platform, e.g. "COM1" for Microsoft Windows of "/dev/ttyS0" for Linux
-	bool addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host = QString("localhost"), int portTCP = DEFAULT_TCP_PORT, int delay = DEFAULT_DELAY, bool connectAtStartup = false, QList<double> circles = QList<double>(), QString serverName = QString(), QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(), QString rts2Password = QString());
+	bool addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host = QString("localhost"), int portTCP = DEFAULT_TCP_PORT, int delay = DEFAULT_DELAY, bool connectAtStartup = false, QList<double> circles = QList<double>(), QString serverName = QString(), QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(), QString rts2Password = QString(), int rts2Refresh = -1);
 	//! Retrieves a telescope description. Returns false if the slot is empty. Returns empty serverName and portSerial if the description contains no server.
-	bool getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& serverName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password);
+	bool getTelescopeAtSlot(int slot, ConnectionType& connectionType, QString& name, QString& equinox, QString& host, int& portTCP, int& delay, bool& connectAtStartup, QList<double>& circles, QString& serverName, QString& portSerial, QString& rts2Url, QString& rts2Username, QString& rts2Password, int& rts2Refresh);
 	//! Removes info from the tree. Should it include stopTelescopeAtSlot()?
 	bool removeTelescopeAtSlot(int slot);
 	
@@ -347,7 +360,7 @@ private:
 	bool stopServerAtSlot(int slot);
 
 	//! A wrapper for TelescopeClient::create(). Used internally by loadTelescopes() and startTelescopeAtSlot(). Does not perform any validation on its arguments.
-	bool startClientAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString serverName = QString(), QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(), QString rts2Password = QString());
+	bool startClientAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, QList<double> circles, QString serverName = QString(), QString portSerial = QString(), QString rts2Url = QString(), QString rts2Username = QString(), QString rts2Password = QString(), int rts2Refresh = -1);
 	
 	//! Returns true if the TelescopeClient at this slot has been stopped successfully or doesn't exist
 	bool stopClientAtSlot(int slot);

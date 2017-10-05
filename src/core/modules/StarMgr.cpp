@@ -85,11 +85,9 @@ QHash<int, varstar> StarMgr::varStarsMapI18n;
 QMap<QString, int> StarMgr::varStarsIndexI18n;
 QHash<int, wds> StarMgr::wdsStarsMapI18n;
 QMap<QString, int> StarMgr::wdsStarsIndexI18n;
-QHash<int, int> StarMgr::saoStarsMap;
+QMap<QString, crossid> StarMgr::crossIdMap;
 QMap<int, int> StarMgr::saoStarsIndex;
-QHash<int, int> StarMgr::hdStarsMap;
 QMap<int, int> StarMgr::hdStarsIndex;
-QHash<int, int> StarMgr::hrStarsMap;
 QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
 
@@ -228,29 +226,34 @@ QString StarMgr::getSciAdditionalName(int hip)
 	return QString();
 }
 
-QString StarMgr::getCrossIdentificationDesignations(int hip)
+QString StarMgr::getCrossIdentificationDesignations(QString hip)
 {
 	QString designations;
-	QHash<int,int>::const_iterator it(saoStarsMap.find(hip));
-	if (it!=saoStarsMap.end())
-		designations = QString("SAO %1").arg(it.value());
+	QMap<QString, crossid>::const_iterator cr(crossIdMap.find(hip));
+	if (cr==crossIdMap.end() && hip.right(1).toUInt()==0)
+		cr = crossIdMap.find(hip.left(hip.size()-1));
 
-	QHash<int,int>::const_iterator it2(hdStarsMap.find(hip));
-	if (it2!=hdStarsMap.end())
+	if (cr!=crossIdMap.end())
 	{
-		if (designations.isEmpty())
-			designations = QString("HD %1").arg(it2.value());
-		else
-			designations += QString(" - HD %1").arg(it2.value());
-	}
+		crossid crossIdData = cr.value();
+		if (crossIdData.sao>0)
+			designations = QString("SAO %1").arg(crossIdData.sao);
 
-	QHash<int,int>::const_iterator it3(hrStarsMap.find(hip));
-	if (it3!=hrStarsMap.end())
-	{
-		if (designations.isEmpty())
-			designations = QString("HR %1").arg(it3.value());
-		else
-			designations += QString(" - HR %1").arg(it3.value());
+		if (crossIdData.hd>0)
+		{
+			if (designations.isEmpty())
+				designations = QString("HD %1").arg(crossIdData.hd);
+			else
+				designations += QString(" - HD %1").arg(crossIdData.hd);
+		}
+
+		if (crossIdData.hr>0)
+		{
+			if (designations.isEmpty())
+				designations = QString("HR %1").arg(crossIdData.hr);
+			else
+				designations += QString(" - HR %1").arg(crossIdData.hr);
+		}
 	}
 
 	return designations;
@@ -1008,11 +1011,9 @@ void StarMgr::loadWds(const QString& WdsFile)
 // Load cross-identification data from file
 void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 {
-	saoStarsMap.clear();
-	saoStarsIndex.clear();
-	hdStarsMap.clear();
-	hdStarsIndex.clear();
-	hrStarsMap.clear();
+	crossIdMap.clear();
+	saoStarsIndex.clear();	
+	hdStarsIndex.clear();	
 	hrStarsIndex.clear();
 
 	qDebug() << "Loading cross-identification data from" << QDir::toNativeSeparators(crossIdFile);
@@ -1024,6 +1025,8 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	}
 	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
 	ciFile.close();
+
+	crossid crossIdData;
 
 	int readOk=0;
 	int totalRecords=0;
@@ -1040,7 +1043,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 
 		++totalRecords;
 		const QStringList& fields = record.split('\t');
-		if (fields.size()!=4)
+		if (fields.size()!=5)
 		{
 			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIdFile)
 				   << " - record does not match record pattern";
@@ -1058,27 +1061,18 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 				continue;
 			}
 
-			unsigned int sao = fields.at(1).toUInt(&ok);
-			unsigned int hd = fields.at(2).toUInt(&ok);
-			unsigned int hr = fields.at(3).toUInt(&ok);
+			QString hipstar = QString("%1%2").arg(hip).arg(fields.at(1).trimmed());
+			crossIdData.sao = fields.at(2).toUInt(&ok);
+			crossIdData.hd = fields.at(3).toUInt(&ok);
+			crossIdData.hr = fields.at(4).toUInt(&ok);
 
-			if (sao>0)
-			{
-				saoStarsMap[hip] = sao;
-				saoStarsIndex[sao] = hip;
-			}
-
-			if (hd>0)
-			{
-				hdStarsMap[hip] = hd;
-				hdStarsIndex[hd] = hip;
-			}
-
-			if (hr>0)
-			{
-				hrStarsMap[hip] = hr;
-				hrStarsIndex[hr] = hip;
-			}
+			crossIdMap[hipstar] = crossIdData;
+			if (crossIdData.sao>0)
+				saoStarsIndex[crossIdData.sao] = hip;
+			if (crossIdData.hd>0)
+				hdStarsIndex[crossIdData.hd] = hip;
+			if (crossIdData.hr>0)
+				hrStarsIndex[crossIdData.hr] = hip;
 
 			++readOk;
 		}
@@ -1321,33 +1315,27 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
-		QMap<int,int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
+		QMap<int, int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
 		if (sao!=saoStarsIndex.end())
-		{
 			return searchHP(sao.value());
-		}
 	}
 
 	// Search by HD number if it's an HD formated number
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
-		QMap<int,int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
+		QMap<int, int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
 		if (hd!=hdStarsIndex.end())
-		{
 			return searchHP(hd.value());
-		}
 	}
 
 	// Search by HR number if it's an HR formated number
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
-		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		QMap<int, int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
 		if (hr!=hrStarsIndex.end())
-		{
 			return searchHP(hr.value());
-		}
 	}
 
 	// Search by I18n common name
@@ -1412,33 +1400,27 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
-		QMap<int,int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
+		QMap<int, int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
 		if (sao!=saoStarsIndex.end())
-		{
 			return searchHP(sao.value());
-		}
 	}
 
 	// Search by HD number if it's an HD formated number
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
-		QMap<int,int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
+		QMap<int, int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
 		if (hd!=hdStarsIndex.end())
-		{
 			return searchHP(hd.value());
-		}
 	}
 
 	// Search by HR number if it's an HR formated number
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
-		QMap<int,int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		QMap<int, int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
 		if (hr!=hrStarsIndex.end())
-		{
 			return searchHP(hr.value());
-		}
 	}
 
 	// Search by English common name
@@ -1636,7 +1618,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		bool ok;
 		int saoNum = saoRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int,int>::const_iterator sao(saoStarsIndex.find(saoNum));
+		QMap<int, int>::const_iterator sao(saoStarsIndex.find(saoNum));
 		if (sao!=saoStarsIndex.end())
 		{
 			StelObjectP s = searchHP(sao.value());
@@ -1655,7 +1637,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		bool ok;
 		int hdNum = hdRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int,int>::const_iterator hd(hdStarsIndex.find(hdNum));
+		QMap<int, int>::const_iterator hd(hdStarsIndex.find(hdNum));
 		if (hd!=hdStarsIndex.end())
 		{
 			StelObjectP s = searchHP(hd.value());
@@ -1674,7 +1656,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		bool ok;
 		int hrNum = hrRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int,int>::const_iterator hr(hrStarsIndex.find(hrNum));
+		QMap<int, int>::const_iterator hr(hrStarsIndex.find(hrNum));
 		if (hr!=hrStarsIndex.end())
 		{
 			StelObjectP s = searchHP(hr.value());
@@ -1685,6 +1667,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			}
 		}
 	}
+
 
 	// Add exact WDS catalogue numbers
 	QRegExp wdsRx("^(WDS)\\s*(\\S+)\\s*$");

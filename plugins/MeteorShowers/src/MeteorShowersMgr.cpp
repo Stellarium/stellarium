@@ -331,7 +331,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 		m_progressBar = Q_NULLPTR;
 	}
 
-	if (reply->error() != QNetworkReply::NoError)
+	if (reply->error() != QNetworkReply::NoError || reply->bytesAvailable()==0)
 	{
 		qWarning() << "MeteorShowersMgr: Failed to download!" << reply->url();
 		qWarning() << "MeteorShowersMgr: Error " << reply->errorString();
@@ -601,5 +601,6 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 		"</ul>"
 	"</p>");
 	info.version = METEORSHOWERS_PLUGIN_VERSION;
+	info.license = METEORSHOWERS_PLUGIN_LICENSE;
 	return info;
 }

@@ -48,7 +48,7 @@ private:
 	Ui_equationOfTimeWindowForm* ui;
 	EquationOfTime* eq;
 
-	void updateAboutText();		
+	void setAboutHtml();
 
 private slots:
 	void saveEquationOfTimeSettings();

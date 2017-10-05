@@ -290,56 +290,51 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	
 	if (flags&ObjectType)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("planetary system")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
 		if (Vmag<99 && !distributionMode)
 		{
+			QString emag = "";
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-			}
-			else
-			{
-				oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
-			}
+				emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+
+			oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 		}
 	}
 
 	// Ra/Dec etc.
-	oss << getPositionInfoString(core, flags);
+	oss << getCommonInfoString(core, flags);
 
 	if (flags&Extra && !stype.isEmpty())
-	{
-		oss << q_("Spectral Type: %1").arg(stype) << "<br>";
-	}
+		oss <<  QString("%1: <b>%2</b>").arg(q_("Spectral Type"), stype) << "<br />";
 
 	if (flags&Distance && distance>0)
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
-		oss << q_("Distance: %1 ly").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
+		QString ly = qc_("ly", "distance");
+		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance/0.306601, 'f', 2), ly) << "<br />";
 	}
 
 	if (flags&Extra)
 	{
 		if (smetal!=0)
 		{
-			oss << QString("%1 [Fe/H]: %2").arg(q_("Metallicity")).arg(smetal) << "<br>";
+			oss << QString("%1 [Fe/H]: %2").arg(q_("Metallicity"), smetal) << "<br />";
 		}
 		if (smass>0)
 		{
-			oss << QString("%1: %2 M<sub>%3</sub>").arg(q_("Mass")).arg(QString::number(smass, 'f', 3)).arg(q_("Sun")) << "<br>";
+			oss << QString("%1: %2 M<sub>%3</sub>").arg(q_("Mass"), QString::number(smass, 'f', 3), q_("Sun")) << "<br />";
 		}
 		if (sradius>0)
 		{
-			oss << QString("%1: %2 R<sub>%3</sub>").arg(q_("Radius")).arg(QString::number(sradius, 'f', 5)).arg(q_("Sun")) << "<br>";
+			oss << QString("%1: %2 R<sub>%3</sub>").arg(q_("Radius"), QString::number(sradius, 'f', 5), q_("Sun")) << "<br />";
 		}
 		if (effectiveTemp>0)
 		{
-			oss << q_("Effective temperature: %1 K").arg(effectiveTemp) << "<br>";
+			oss << QString("%1: %2 %3").arg(q_("Effective temperature")).arg(effectiveTemp).arg(qc_("K", "temperature")) << "<br />";
 		}
 		if (exoplanets.size() > 0)
 		{
@@ -348,7 +343,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString periodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Period")).arg(q_("days"));
 			QString massLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(q_("Jup"));
 			QString radiusLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(q_("Jup"));
-			QString semiAxisLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Semi-Major Axis")).arg(q_("AU"));
+			QString semiAxisLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Semi-Major Axis")).arg(qc_("AU", "distance, astronomical unit"));
 			QString eccentricityLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Eccentricity"));
 			QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));
 			QString angleDistanceLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (\")</td>").arg(q_("Angle Distance"));

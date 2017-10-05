@@ -167,6 +167,9 @@ public slots:
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
+	void setFlagShowResolutionCriterions(const bool b);
+	bool getFlagShowResolutionCriterions(void) const;
+
 	void setFlagHideGridsLines(const bool b);
 	bool getFlagHideGridsLines(void) const;
 
@@ -327,6 +330,7 @@ private:
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
 	bool flagInitDirectionUsage;	//!< Flag used to track if we use default initial direction (value at the startup of planetarium).
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
+	bool flagShowResolutionCriterions;
 	bool equatorialMountEnabled;
 	double reticleRotation;
 };

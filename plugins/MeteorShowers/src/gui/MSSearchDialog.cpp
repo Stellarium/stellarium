@@ -121,11 +121,21 @@ void MSSearchDialog::searchEvents()
 	initListEvents();
 	foreach (const MeteorShowers::SearchResult& r, searchResult)
 	{
-		MSTreeWidgetItem *treeItem = new MSTreeWidgetItem(m_ui->listEvents);
+		MSTreeWidgetItem* treeItem = new MSTreeWidgetItem(m_ui->listEvents);
 		treeItem->setText(ColumnName, r.name);
-		treeItem->setText(ColumnZHR, r.zhr);
 		treeItem->setText(ColumnDataType, r.type);
 		treeItem->setText(ColumnPeak, r.peak.toString("d MMMM yyyy"));
+		if (r.zhrMin != r.zhrMax)
+			treeItem->setText(ColumnZHR, QString("%1-%2").arg(r.zhrMin).arg(r.zhrMax));
+		else
+			treeItem->setText(ColumnZHR, QString::number(r.zhrMax));
+
+		// let's store the stuff in the UserRole to allow easier sorting
+		// check MSTreeWidgetItem::operator <()
+		treeItem->setData(ColumnName, Qt::UserRole, r.name);
+		treeItem->setData(ColumnDataType, Qt::UserRole, r.type);
+		treeItem->setData(ColumnPeak, Qt::UserRole, r.peak);
+		treeItem->setData(ColumnZHR, Qt::UserRole, r.zhrMax);
 	}
 
 	// adjust the column width

@@ -100,6 +100,7 @@ public:
 		//lets skip drawing the system background
 		setAttribute(Qt::WA_OpaquePaintEvent);
 		setAttribute(Qt::WA_AcceptTouchEvents);
+		setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 		setAutoFillBackground(false);
 	}
 
@@ -556,6 +557,7 @@ StelMainView::StelMainView(QSettings* settings)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
+	setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 	setAutoFillBackground(false);
 
 	configuration = settings;
@@ -592,9 +594,16 @@ StelMainView::StelMainView(QSettings* settings)
 	//get the desired opengl format parameters
 	QSurfaceFormat glFormat = getDesiredGLFormat();
 	// VSync control
-	QVariant vsync = configuration->value("video/vsync");
-	if(vsync.isValid() && vsync.canConvert<bool>()) // if the config parameter is not set we use system default (which should be true)
-		glFormat.setSwapInterval(vsync.toBool());
+	bool vsdef = true;
+	#ifdef Q_OS_OSX
+	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
+	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
+	vsdef = false; // use vsync=false by default on macOS
+	#endif
+	if (configuration->value("video/vsync", vsdef).toBool())
+		glFormat.setSwapInterval(1);
+	else
+		glFormat.setSwapInterval(0);
 
 	qDebug()<<"Desired surface format: "<<glFormat;
 

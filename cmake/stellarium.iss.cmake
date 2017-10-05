@@ -85,7 +85,7 @@ Filename: "{app}\stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; 
 ;The old log file in all cases
 Type: files; Name: "{userappdata}\Stellarium\log.txt"
 Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
-Type: files; Name: "{userappdata}\Stellarium\data\ssystem.ini"; Tasks: removesolar
+Type: files; Name: "{userappdata}\Stellarium\data\ssystem_minor.ini"; Tasks: removesolar
 Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
 Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: removelandscapes
 Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: removecache
@@ -169,12 +169,12 @@ const
   INSTALLSTATE_DEFAULT = 5;      // The product is installed for the current user.
 
   // Visual C++ 2013 Redistributable 12.0.21005
-  VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}';
-  VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}';
+  // VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}';
+  // VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}';
   
-  // Visual C++ 2015 Redistributable 14.0.23506
-  // VC_REDIST_X86 = '{23daf363-3020-4059-b3ae-dc4ad39fed19}';
-  // VC_REDIST_X64 = '{3ee5e5bb-b7cc-4556-8861-a00a82977d6c}';
+  // Visual C++ 2015 Redistributable 14.0.24215
+  VC_REDIST_X86 = '{e2803110-78b3-4664-a479-3611a381656a}';
+  VC_REDIST_X64 = '{d992c12e-cab2-426f-bde3-fb8c53950b0d}';
 
 function MsiQueryProductState(szProduct: string): INSTALLSTATE; 
   external 'MsiQueryProductState{#AW}@msi.dll stdcall';
@@ -189,7 +189,7 @@ begin
   // here the Result must be True when you need to install your VCRedist
   // or False when you don't need to, so now it's upon you how you build
   // this statement, the following won't install your VC redist only when
-  // the Visual C++ 2013 Redist are installed for the current user
+  // the Visual C++ 2015 Redist are installed for the current user
   Result := not (VCVersionInstalled(@REDIST_VERSION@));
 end;
 
@@ -200,7 +200,7 @@ begin
   case CurUninstallStep of
     usPostUninstall:
       begin
-        mres := MsgBox('{cm:DeleteUserData}', mbConfirmation, MB_YESNO or MB_DEFBUTTON2)
+        mres := SuppressibleMsgBox(ExpandConstant('{cm:DeleteUserData}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2, IDYES)
         if mres = IDYES then
           DelTree(ExpandConstant('{userappdata}\Stellarium'), True, True, True);
           DelTree(ExpandConstant('{userdocs}\Stellarium'), True, True, True);

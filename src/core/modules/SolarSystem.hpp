@@ -832,6 +832,8 @@ public:
 	//! @return The matching planet pointer if exists or Q_NULLPTR.
 	PlanetP searchByEnglishName(QString planetEnglishName) const;
 
+	PlanetP searchMinorPlanetByEnglishName(QString planetEnglishName) const;
+
 	//! Get the Planet object pointer for the Sun.
 	PlanetP getSun() const {return sun;}
 
@@ -850,11 +852,14 @@ public:
 	//! Get the list of all the planet localized names
 	QStringList getAllPlanetLocalizedNames() const;
 
+	//! Get the list of all the minor planet common english names
+	QStringList getAllMinorPlanetCommonEnglishNames() const;
+
 	//! Reload the planets
 	void reloadPlanets();
 
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
-	bool removePlanet(QString name);
+	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position.
 	double getEclipseFactor(const StelCore *core) const;
@@ -866,6 +871,8 @@ public:
 
 	//! Get the list of all the bodies of the solar system.	
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
+	//! Get the list of all the bodies of the solar system.
+	const QList<PlanetP>& getAllMinorBodies() const {return systemMinorBodies;}
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
 
@@ -922,6 +929,10 @@ private:
 
 	void recreateTrails();
 
+	//! Calculate a color of Solar system bodies
+	//! @param bV value of B-V color index
+	unsigned char BvToColorIndex(float bV);
+
 	//! Set flag who enable display a permanent orbits for objects or not
 	void setFlagPermanentOrbits(bool b);
 
@@ -955,6 +966,8 @@ private:
 
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;
+	//! List of all the minor bodies of the solar system.
+	QList<PlanetP> systemMinorBodies;
 
 	// Master settings
 	bool flagOrbits;

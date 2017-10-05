@@ -328,6 +328,9 @@ QString StelLogger::getMsvcVersionString(int ver)
 		case 1900:
 			version = "MSVC++ 14.0 (Visual Studio 2015)";
 			break;
+		case 1910:
+			version = "MSVC++ 14.1 (Visual Studio 2017)";
+			break;
 		default:
 			version = "unknown MSVC++ version";
 	}

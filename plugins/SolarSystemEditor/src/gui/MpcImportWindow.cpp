@@ -331,7 +331,7 @@ void MpcImportWindow::selectFile()
 {
 	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
 							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
-	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, "Select a text file", directories[0]);
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a text file"), directories[0]);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -351,11 +351,11 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 	candidatesForAddition.clear();
 
 	//Get a list of the current objects
-	QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
+	//QHash<QString,QString> defaultSsoIdentifiers = ssoManager->getDefaultSsoIdentifiers();
 	QHash<QString,QString> loadedSsoIdentifiers = ssoManager->listAllLoadedSsoIdentifiers();
 
 	//Separating the objects into visual groups in the list
-	int newDefaultSsoIndex = 0;
+	//int newDefaultSsoIndex = 0;
 	int newLoadedSsoIndex = 0;
 	int newNovelSsoIndex = 0;
 	int insertionIndex = 0;
@@ -389,21 +389,22 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 		item->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
 		item->setCheckState(Qt::Unchecked);
 
-		if (defaultSsoIdentifiers.contains(name))
-		{
-			//Duplicate of a default solar system object
-			QFont itemFont(item->font());
-			itemFont.setBold(true);
-			item->setFont(itemFont);
+//		if (defaultSsoIdentifiers.contains(name))
+//		{
+//			//Duplicate of a default solar system object
+//			QFont itemFont(item->font());
+//			itemFont.setBold(true);
+//			item->setFont(itemFont);
 
-			candidatesForUpdate.append(object);
+//			candidatesForUpdate.append(object);
 
-			insertionIndex = newDefaultSsoIndex;
-			newDefaultSsoIndex++;
-			newLoadedSsoIndex++;
-			newNovelSsoIndex++;
-		}
-		else if (loadedSsoIdentifiers.contains(name))
+//			insertionIndex = newDefaultSsoIndex;
+//			newDefaultSsoIndex++;
+//			newLoadedSsoIndex++;
+//			newNovelSsoIndex++;
+//		}
+//		else
+		if (loadedSsoIdentifiers.contains(name))
 		{
 			//Duplicate of another existing object
 			QFont itemFont(item->font());
@@ -623,7 +624,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 		<< "reply->isFinished():" << reply->isFinished();
 	*/
 
-	if(reply->error())
+	if(reply->error() || reply->bytesAvailable()==0)
 	{
 		qWarning() << "Download error: While downloading"
 		           << reply->url().toString()
@@ -809,7 +810,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	//Hide the abort button - a reply has been received
 	ui->pushButtonAbortQuery->setVisible(false);
 
-	if (reply->error())
+	if (reply->error() || reply->bytesAvailable()==0)
 	{
 		qWarning() << "Download error: While trying to access"
 		           << reply->url().toString()
@@ -985,7 +986,7 @@ void MpcImportWindow::loadBookmarks()
 			bookmarksFile.close();
 
 			//If nothing was read, continue
-			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty() && StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_VERSION)==0)
+			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty() && StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_PLUGIN_VERSION)==0)
 				return;
 		}
 	}
@@ -993,15 +994,19 @@ void MpcImportWindow::loadBookmarks()
 	qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
 
 	//Initialize with hard-coded values
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2016", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2016/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2017", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2017/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs", "http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", "http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "http://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)", "http://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", "http://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", "http://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: Numbered objects", "http://www.minorplanetcenter.net/iau/ECS/MPCAT/mpn.txt");
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
 	bookmarks[MpcComets].insert("MPCORB: comets", "http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
 
@@ -1046,7 +1051,7 @@ void MpcImportWindow::saveBookmarks()
 		QFile bookmarksFile(bookmarksFilePath);
 		if (bookmarksFile.open(QFile::WriteOnly | QFile::Truncate | QFile::Text))
 		{
-			jsonRoot.insert("version", SOLARSYSTEMEDITOR_VERSION);
+			jsonRoot.insert("version", SOLARSYSTEMEDITOR_PLUGIN_VERSION);
 
 			QVariantMap minorPlanetsObject;
 			saveBookmarksGroup(bookmarks[MpcMinorPlanets], minorPlanetsObject);
