@@ -35,6 +35,7 @@ QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(Q_NULLPTR)
+	, planetaryFeaturesTranslator(Q_NULLPTR)
 	, timeFormat()
 	, dateFormat()	
 {
@@ -62,7 +63,9 @@ StelLocaleMgr::StelLocaleMgr()
 StelLocaleMgr::~StelLocaleMgr()
 {
 	delete skyTranslator;
-	skyTranslator=Q_NULLPTR;
+	skyTranslator = Q_NULLPTR;
+	delete planetaryFeaturesTranslator;
+	planetaryFeaturesTranslator = Q_NULLPTR;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
@@ -151,6 +154,12 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refre
 	// Update the translator with new locale name
 	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
 	qDebug() << "Sky language is " << skyTranslator->getTrueLocaleName();
+
+	delete planetaryFeaturesTranslator;
+	// Update the translator with new locale name
+	planetaryFeaturesTranslator = new StelTranslator("stellarium-planetary-features", newSkyLanguageName);
+	qDebug() << "Planetary features language is " << planetaryFeaturesTranslator->getTrueLocaleName();
+
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();
 }
@@ -175,6 +184,11 @@ bool StelLocaleMgr::isSkyRTL() const
 const StelTranslator& StelLocaleMgr::getSkyTranslator() const
 {
 	return *skyTranslator;
+}
+
+const StelTranslator& StelLocaleMgr::getPlanetaryFeaturesTranslator() const
+{
+	return *planetaryFeaturesTranslator;
 }
 
 const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
