@@ -667,7 +667,7 @@ IF(WIN32)
      IF(${Qt5Core_VERSION} VERSION_LESS "5.9.0")
           SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
      ELSE()
-          SET(ISS_ICU_LIBS "; No need separate ICU libs for Qt 5.9+")
+          SET(ISS_ICU_LIBS "; No need for separate ICU libs with Qt 5.9+")
      ENDIF()
      # Deploy related stuff
      SET(ISS_QT_PLUGINS "; Qt plugins")
