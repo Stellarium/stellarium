@@ -302,6 +302,7 @@ public:
 	void setRings(Ring* r) {rings = r;}
 
 	void setSphereScale(float s) { if(s!=sphereScale) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
+	float getSphereScale() { return sphereScale; }
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
@@ -485,7 +486,7 @@ protected:
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
-
+    
 	PlanetOBJModel* loadObjModel() const;
 
 	QString englishName;             // english planet name

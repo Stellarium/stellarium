@@ -60,6 +60,7 @@
 #include <QMapIterator>
 #include <QDebug>
 #include <QDir>
+#include <QHash>
 
 SolarSystem::SolarSystem()
 	: shadowPlanetCount(0)
@@ -2474,3 +2475,4 @@ bool SolarSystem::removeMinorPlanet(QString name)
 	candidate.clear();
 	return true;
 }
+

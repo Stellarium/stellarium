@@ -34,6 +34,7 @@
 #include "ZodiacalLight.hpp"
 #include "LabelMgr.hpp"
 #include "SolarSystem.hpp"
+#include "NomenclatureMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelIniParser.hpp"
@@ -449,6 +450,11 @@ void StelApp::init(QSettings* conf)
 	SolarSystem* ssystem = new SolarSystem();
 	ssystem->init();
 	getModuleMgr().registerModule(ssystem);
+
+	// Init the nomenclature for Solar system bodies
+	NomenclatureMgr* nomenclature = new NomenclatureMgr();
+	nomenclature->init();
+	getModuleMgr().registerModule(nomenclature);
 
 	// Load hipparcos stars & names
 	StarMgr* hip_stars = new StarMgr();
