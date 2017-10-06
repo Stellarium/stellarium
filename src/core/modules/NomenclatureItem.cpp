@@ -602,7 +602,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
 
 	// Let's check visibility of feature
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (planet->getVMagnitudeWithExtinction(core)<20.) && (screenSize>50. && screenSize<750.))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (planet->getVMagnitude(core)<20.) && (screenSize>50. && screenSize<750.))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
