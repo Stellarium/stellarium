@@ -41,6 +41,7 @@
 #include "StelFileMgr.hpp"
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
+#include "NomenclatureItem.hpp"
 #include "precession.h"
 
 #include <QSettings>
@@ -1176,6 +1177,45 @@ void StelCore::moveObserverToSelected()
 					landscapeMgr->setFlagFog(pl->hasAtmosphere());
 					landscapeMgr->setFlagLandscape(true);
 				}
+			}
+		}
+		else
+		{
+			NomenclatureItem* ni = dynamic_cast<NomenclatureItem*>(objmgr->getSelectedObject()[0].data());
+			if (ni)
+			{
+				// We need to move to the nomenclature item's host planet.
+				StelLocation loc; //  = getCurrentLocation();
+				loc.planetName = ni->getPlanet()->getEnglishName();
+				loc.name=ni->getEnglishName();
+				loc.state = "";
+				loc.longitude=ni->getLongitude();
+				loc.latitude=ni->getLatitude();
+				loc.bortleScaleIndex=1;
+
+				moveObserverTo(loc);
+				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
+
+				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+				Q_ASSERT(landscapeMgr);
+
+				bool landscapeSetsLocation=landscapeMgr->getFlagLandscapeSetsLocation();
+				landscapeMgr->setFlagLandscapeSetsLocation(false);
+				if (landscapeMgr->getFlagLandscapeAutoSelection())
+				{
+					// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+					// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
+					if (landscapeMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
+						landscapeMgr->setCurrentLandscapeName(loc.planetName);
+					else
+						landscapeMgr->setCurrentLandscapeID("zero");
+				}
+				landscapeMgr->setFlagLandscapeSetsLocation(landscapeSetsLocation);
+
+				// TODO: Maybe find a landscape which is named exactly like this feature? Or at least load a default landscape for the right Planet?
+				landscapeMgr->setFlagAtmosphere(ni->getPlanet()->hasAtmosphere());
+				landscapeMgr->setFlagFog(ni->getPlanet()->hasAtmosphere());
+				landscapeMgr->setFlagLandscape(true);
 			}
 		}
 	}
