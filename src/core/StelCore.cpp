@@ -1204,17 +1204,19 @@ void StelCore::moveObserverToSelected()
 				if (landscapeMgr->getFlagLandscapeAutoSelection())
 				{
 					// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-					// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
 					if (landscapeMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
 						landscapeMgr->setCurrentLandscapeName(loc.planetName);
 					else
 						landscapeMgr->setCurrentLandscapeID("zero");
+
+					if (landscapeMgr->getFlagAtmosphereAutoEnable())
+					{
+						QSettings* conf = StelApp::getInstance().getSettings();
+						landscapeMgr->setFlagAtmosphere(ni->getPlanet()->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+						landscapeMgr->setFlagFog(ni->getPlanet()->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+					}
 				}
 				landscapeMgr->setFlagLandscapeSetsLocation(landscapeSetsLocation);
-
-				// TODO: Maybe find a landscape which is named exactly like this feature? Or at least load a default landscape for the right Planet?
-				landscapeMgr->setFlagAtmosphere(ni->getPlanet()->hasAtmosphere());
-				landscapeMgr->setFlagFog(ni->getPlanet()->hasAtmosphere());
 				landscapeMgr->setFlagLandscape(true);
 			}
 		}
