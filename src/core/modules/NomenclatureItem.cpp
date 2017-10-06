@@ -577,6 +577,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		return;
 
 	Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
+	Vec3d equPos = planet->getJ2000EquatorialPos(core);
 
 	// Calculate the radius of the planet. It is necessary to re-scale it
 	double r = planet->getRadius() * planet->getSphereScale();
@@ -592,18 +593,16 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
 	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
-	XYZ = planet->getJ2000EquatorialPos(core) + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
+	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
 
 	double screenSize = getAngularSize(core)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
-
-	double dist = XYZ.length()/cos(atan(r/XYZ.length()));
 
 	// We can use ratio of angular size to the FOV to checking visibility of features also!
 	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
 	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
 
 	// Let's check visibility of feature
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (screenSize>50. && screenSize<750.))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (planet->getVMagnitudeWithExtinction(core)<20.) && (screenSize>50. && screenSize<750.))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
