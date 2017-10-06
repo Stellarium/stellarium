@@ -594,6 +594,9 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
 	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
 	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
+	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
+	if (XYZ.lengthSquared()< 150.*150.*AU_KM*AU_KM )
+		return;
 
 	double screenSize = getAngularSize(core)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 
