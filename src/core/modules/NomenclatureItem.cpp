@@ -518,7 +518,12 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	QTextStream oss(&str);
 
 	if (flags&Name)
-		oss << "<h2>" << getNameI18n() << "</h2>";
+	{
+		oss << "<h2>" << getNameI18n();
+		if (getNameI18n()!=getEnglishName())
+			oss << " (" << getEnglishName() << ")";
+		oss << "</h2>";
+	}
 
 	if (flags&ObjectType && getNomenclatureType()!=NomenclatureItem::niUNDEFINED)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type")).arg(getNomenclatureTypeString()) << "<br />";
@@ -536,7 +541,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Extra)
 	{
-		oss << QString("%1: %2/%3").arg(q_("Planetographic longitude/latitude")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude)) << "<br />";
+		oss << QString("%1: %2/%3").arg(q_("Planetographic longitude/latitude")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude)) << "<br />";		
 		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED)
 			oss << QString("%1: %2").arg(q_("Landform description"), getNomenclatureTypeDescription()) << "<br />";
 	}
