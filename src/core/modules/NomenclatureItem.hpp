@@ -129,13 +129,13 @@ public:
 	{
 		return XYZ;
 	}
-	//! Get the visual magnitude of pulsar
+	//! Get the visual magnitude of a nomenclature item. Dummy method, returns 99.
 	virtual float getVMagnitude(const StelCore* core) const;
-	//! Get the angular size of pulsar
+	//! Get the angular size of nomenclature item.
 	virtual double getAngularSize(const StelCore* core) const;
-	//! Get the localized name of pulsar
+	//! Get the localized name of nomenclature item.
 	virtual QString getNameI18n(void) const;
-	//! Get the english name of pulsar
+	//! Get the english name of nomenclature item.
 	virtual QString getEnglishName(void) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -152,6 +152,10 @@ public:
 
 	void setFlagLabels(bool b){ labelsFader = b; }
 	bool getFlagLabels(void) const { return labelsFader==true;}
+	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}
+	PlanetP getPlanet(void) const { return planet;}
+	float getLatitude(void) const {return latitude;}
+	float getLongitude(void) const {return longitude;}
 
 private:
 	bool initialized;

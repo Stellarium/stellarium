@@ -334,6 +334,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	StelCore * core = StelApp::getInstance().getCore();
 	pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 	ui->mapLabel->setPixmap(pixmap);
+	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 	// For caching
 	lastPlanet = loc.planetName;
 }
