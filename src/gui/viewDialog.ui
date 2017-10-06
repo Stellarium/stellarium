@@ -763,7 +763,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="9" column="0">
+             <item row="10" column="0">
               <widget class="QCheckBox" name="planetLightSpeedCheckBox">
                <property name="toolTip">
                 <string>Activate this option to simulate the effect of real speed of light (recommended).</string>
@@ -773,7 +773,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="11" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
                 <widget class="QCheckBox" name="customGrsSettingsCheckBox">
@@ -791,7 +791,7 @@
                </item>
               </layout>
              </item>
-             <item row="18" column="0">
+             <item row="19" column="0">
               <layout class="QGridLayout" name="gridLayout_6">
                <item row="0" column="0">
                 <widget class="QLabel" name="label_14">
@@ -923,7 +923,7 @@
                </item>
               </layout>
              </item>
-             <item row="13" column="0">
+             <item row="14" column="0">
               <layout class="QHBoxLayout" name="scaleSelectedHorizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetScaleMinorBodyCheckBox">
@@ -959,7 +959,7 @@
                </item>
               </layout>
              </item>
-             <item row="15" column="0">
+             <item row="16" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
                 <widget class="QLabel" name="planetDetailsLabel">
@@ -980,7 +980,7 @@
                </item>
               </layout>
              </item>
-             <item row="16" column="0">
+             <item row="17" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <property name="topMargin">
                 <number>0</number>
@@ -1056,7 +1056,7 @@
                </item>
               </layout>
              </item>
-             <item row="12" column="0">
+             <item row="13" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetScaleMoonCheckBox">
@@ -1098,7 +1098,7 @@
                </item>
               </layout>
              </item>
-             <item row="11" column="0">
+             <item row="12" column="0">
               <layout class="QHBoxLayout" name="planetLimMagHorizontalLayout">
                <item>
                 <widget class="QCheckBox" name="planetLimitMagnitudeCheckBox">
@@ -1151,7 +1151,7 @@
                </property>
               </widget>
              </item>
-             <item row="14" column="0">
+             <item row="15" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_17">
                <item>
                 <widget class="QCheckBox" name="planetLabelCheckBox">
@@ -1209,6 +1209,27 @@
                  </property>
                  <property name="text">
                   <string>Show orbit for selected planet</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="9" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QCheckBox" name="planetNomenclatureCheckBox">
+                 <property name="text">
+                  <string>Show planets nomenclature</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="planetNomenclatureColor">
+                 <property name="toolTip">
+                  <string>Color of nomenclature labels</string>
+                 </property>
+                 <property name="text">
+                  <string/>
                  </property>
                 </widget>
                </item>
@@ -3742,12 +3763,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
