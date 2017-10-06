@@ -1492,7 +1492,7 @@ double Planet::getSpheroidAngularSize(const StelCore* core) const
 	return std::atan2(radius*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
-// Draw the Planet and all the related infos : name, circle etc..
+//the Planet and all the related infos : name, circle etc..
 void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
 {
 	if (hidden)

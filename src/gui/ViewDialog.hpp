@@ -137,6 +137,8 @@ private slots:
 	void askAsterismLabelsColor();
 	void askAsterismLinesColor();
 	void askRayHelpersColor();
+	// nomenclature color
+	void askPlanetNomenclatureColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

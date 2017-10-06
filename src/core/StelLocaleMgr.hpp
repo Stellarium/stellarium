@@ -71,6 +71,9 @@ public:
 	//! Get a reference to the StelTranslator object currently used for sky objects.
 	const StelTranslator &getSkyTranslator() const;
 
+	//! Get a reference to the StelTranslator object currently used for planetary features.
+	const StelTranslator &getPlanetaryFeaturesTranslator() const;
+
 	//! Get the type (RTL or LTR) of language currently used for sky objects
 	bool isSkyRTL() const;
 	
@@ -150,6 +153,7 @@ public:
 private:
 	// The translator used for astronomical object naming
 	StelTranslator* skyTranslator;
+	StelTranslator* planetaryFeaturesTranslator;
 	StelCore* core;
 	
 	// Date and time variables
