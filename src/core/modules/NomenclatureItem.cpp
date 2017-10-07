@@ -366,7 +366,7 @@ QString NomenclatureItem::getNomenclatureTypeDescription() const
 			nTypeStr = q_("Complex of intersecting valleys or ridges.");
 			break;
 		case niLacuna:
-			nTypeStr = q_("Irregularly shaped depression, which having the appearance of a dry lake bed.");
+			nTypeStr = q_("Irregularly shaped depression, having the appearance of a dry lake bed.");
 			break;
 		case niLacus:
 			if (planet->getEnglishName()=="Titan")
