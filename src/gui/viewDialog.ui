@@ -1219,7 +1219,7 @@
                <item>
                 <widget class="QCheckBox" name="planetNomenclatureCheckBox">
                  <property name="text">
-                  <string>Show planets nomenclature</string>
+                  <string>Show planet nomenclature</string>
                  </property>
                 </widget>
                </item>
@@ -3763,12 +3763,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
