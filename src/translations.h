@@ -90,6 +90,8 @@ class Translations
 		N_("Custom Objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Asterisms");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Planetary Features");
 
 		// =====================================================================
 		// List of deep-sky objects types
