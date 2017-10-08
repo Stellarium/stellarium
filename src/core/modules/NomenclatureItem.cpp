@@ -760,7 +760,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	{
 		oss << "<h2>" << getNameI18n();
 		if (getNameI18n()!=getEnglishName())
-			oss << " (" << getEnglishName() << ")";
+			oss << " (" << q_("latin name") << ": " << getEnglishName() << ")";
 		oss << "</h2>";
 	}
 
@@ -770,7 +770,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		QString latin = getNomenclatureTypeLatinString();
 		QString ts    = q_("Type");
 		if (tstr!=latin && !latin.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3: %4)").arg(ts).arg(tstr).arg(q_("latin")).arg(latin) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3: %4)").arg(ts).arg(tstr).arg(q_("latin term")).arg(latin) << "<br />";
 		else
 			oss << QString("%1: <b>%2</b>").arg(ts).arg(tstr) << "<br />";
 	}
