@@ -294,191 +294,430 @@ QString NomenclatureItem::getNomenclatureTypeString() const
 	return nTypeStr;
 }
 
+QString NomenclatureItem::getNomenclatureTypeLatinString() const
+{
+	QString nTypeStr = "";
+	switch (nType)
+	{
+		case niArcus:
+			nTypeStr = "arcus";
+			break;
+		case niAstrum:
+			nTypeStr = "astrum";
+			break;
+		case niCatena:
+			nTypeStr = "catena";
+			break;
+		case niCavus:
+			nTypeStr = "cavus";
+			break;
+		case niChaos:
+			nTypeStr = "chaos";
+			break;
+		case niChasma:
+			nTypeStr = "chasma";
+			break;
+		case niCollis:
+			nTypeStr = "collis";
+			break;
+		case niCorona:
+			nTypeStr = "corona";
+			break;
+		case niCrater:
+			nTypeStr = "crater";
+			break;
+		case niDorsum:
+			nTypeStr = "dorsum";
+			break;
+		case niFacula:
+			nTypeStr = "facula";
+			break;
+		case niFarrum:
+			nTypeStr = "farrum";
+			break;
+		case niFlexus:
+			nTypeStr = "flexus";
+			break;
+		case niFluctus:
+			nTypeStr = "fluctus";
+			break;
+		case niFlumen:
+			nTypeStr = "flumen";
+			break;
+		case niFretum:
+			nTypeStr = "fretum";
+			break;
+		case niFossa:
+			nTypeStr = "fossa";
+			break;
+		case niInsula:
+			nTypeStr = "insula";
+			break;
+		case niLabes:
+			nTypeStr = "labes";
+			break;
+		case niLabyrinthus:
+			nTypeStr = "labyrinthus";
+			break;
+		case niLacuna:
+			nTypeStr = "lacuna";
+			break;
+		case niLacus:
+			nTypeStr = "lacus";
+			break;
+		case niLenticula:
+			nTypeStr = "lenticula";
+			break;
+		case niLinea:
+			nTypeStr = "linea";
+			break;
+		case niLingula:
+			nTypeStr = "lingula";
+			break;
+		case niMacula:
+			nTypeStr = "macula";
+			break;
+		case niMare:
+			nTypeStr = "mare";
+			break;
+		case niMensa:
+			nTypeStr = "mensa";
+			break;
+		case niMons:
+			nTypeStr = "mons";
+			break;
+		case niOceanus:
+			nTypeStr = "oceanus";
+			break;
+		case niPalus:
+			nTypeStr = "palus";
+			break;
+		case niPatera:
+			nTypeStr = "patera";
+			break;
+		case niPlanitia:
+			nTypeStr = "planitia";
+			break;
+		case niPlanum:
+			nTypeStr = "planum";
+			break;
+		case niPlume:
+			nTypeStr = "plume";
+			break;
+		case niPromontorium:
+			nTypeStr = "promontorium";
+			break;
+		case niRegio:
+			nTypeStr = "regio";
+			break;
+		case niReticulum:
+			nTypeStr = "reticulum";
+			break;
+		case niRima:
+			nTypeStr = "rima";
+			break;
+		case niRupes:
+			nTypeStr = "rupes";
+			break;
+		case niScopulus:
+			nTypeStr = "scopulus";
+			break;
+		case niSerpens:
+			nTypeStr = "serpens";
+			break;
+		case niSulcus:
+			nTypeStr = "sulcus";
+			break;
+		case niSinus:
+			nTypeStr = "sinus";
+			break;
+		case niTerra:
+			nTypeStr = "terra";
+			break;
+		case niTessera:
+			nTypeStr = "tessera";
+			break;
+		case niTholus:
+			nTypeStr = "tholus";
+			break;
+		case niUnda:
+			nTypeStr = "unda";
+			break;
+		case niVallis:
+			nTypeStr = "vallis";
+			break;
+		case niVastitas:
+			nTypeStr = "vastitas";
+			break;
+		case niVirga:
+			nTypeStr = "virga";
+			break;
+		default:
+			nTypeStr = "";
+			break;
+	}
+	return nTypeStr;
+}
+
 QString NomenclatureItem::getNomenclatureTypeDescription() const
 {
 	QString nTypeStr = "";
 	switch (nType)
 	{
 		case niAlbedoFeature:
+			// TRANSLATORS: Description for landform 'albedo feature'
 			nTypeStr = q_("Geographic area distinguished by amount of reflected light.");
 			break;
 		case niArcus:
+			// TRANSLATORS: Description for landform 'arcus'
 			nTypeStr = q_("Arc-shaped feature.");
 			break;
 		case niAstrum:
+			// TRANSLATORS: Description for landform 'astrum'
 			nTypeStr = q_("Radial-patterned feature.");
 			break;
 		case niCatena:
+			// TRANSLATORS: Description for landform 'catena'
 			nTypeStr = q_("Chain of craters.");
 			break;
 		case niCavus:
+			// TRANSLATORS: Description for landform 'cavus'
 			nTypeStr = q_("Hollows, irregular steep-sided depressions usually in arrays or clusters.");
 			break;
 		case niChaos:
+			// TRANSLATORS: Description for landform 'chaos'
 			nTypeStr = q_("Distinctive area of broken terrain.");
 			break;
 		case niChasma:
+			// TRANSLATORS: Description for landform 'chasma'
 			nTypeStr = q_("A deep, elongated, steep-sided depression.");
 			break;
 		case niCollis:
+			// TRANSLATORS: Description for landform 'collis'
 			nTypeStr = q_("Small hills or knobs.");
 			break;
 		case niCorona:
+			// TRANSLATORS: Description for landform 'corona'
 			nTypeStr = q_("Ovoid-shaped feature.");
 			break;
 		case niCrater:
+			// TRANSLATORS: Description for landform 'crater'
 			nTypeStr = q_("A circular depression.");
 			break;
 		case niDorsum:
+			// TRANSLATORS: Description for landform 'dorsum'
 			nTypeStr = q_("Ridge.");
 			break;
 		case niEruptiveCenter:
+			// TRANSLATORS: Description for landform 'eruptive center'
 			nTypeStr = q_("Active volcanic center.");
 			break;
 		case niFacula:
+			// TRANSLATORS: Description for landform 'facula'
 			nTypeStr = q_("Bright spot.");
 			break;
 		case niFarrum:
+			// TRANSLATORS: Description for landform 'farrum'
 			nTypeStr = q_("Pancake-like structure, or a row of such structures.");
 			break;
 		case niFlexus:
+			// TRANSLATORS: Description for landform 'flexus'
 			nTypeStr = q_("A very low curvilinear ridge with a scalloped pattern.");
 			break;
 		case niFluctus:
+			// TRANSLATORS: Description for landform 'fluctus'
 			nTypeStr = q_("Flow terrain.");
 			break;
 		case niFlumen:
+			// TRANSLATORS: Description for landform 'flumen'
 			nTypeStr = q_("Channel, that might carry liquid.");
 			break;
 		case niFretum:
+			// TRANSLATORS: Description for landform 'fretum'
 			nTypeStr = q_("Strait, a narrow passage of liquid connecting two larger areas of liquid.");
 			break;
 		case niFossa:
+			// TRANSLATORS: Description for landform 'fossa'
 			nTypeStr = q_("Long, narrow depression.");
 			break;
 		case niInsula:
+			// TRANSLATORS: Description for landform 'insula'
 			nTypeStr = q_("Island, an isolated land area surrounded by, or nearly surrounded by, a liquid area (sea or lake).");
 			break;
 		case niLabes:
+			// TRANSLATORS: Description for landform 'labes'
 			nTypeStr = q_("Landslide.");
 			break;
 		case niLabyrinthus:
+			// TRANSLATORS: Description for landform 'labyrinthus'
 			nTypeStr = q_("Complex of intersecting valleys or ridges.");
 			break;
 		case niLacuna:
+			// TRANSLATORS: Description for landform 'lacuna'
 			nTypeStr = q_("Irregularly shaped depression, having the appearance of a dry lake bed.");
 			break;
 		case niLacus:
 			if (planet->getEnglishName()=="Titan")
+			{
+				// TRANSLATORS: Description for landform 'lacus' on Titan
 				nTypeStr = q_("'Lake' or small, dark plain with discrete, sharp boundaries.");
+			}
 			else
+			{
+				// TRANSLATORS: Description for landform 'lacus'
 				nTypeStr = q_("'Lake' or small plain.");
+			}
 			break;
 		case niLargeRingedFeature:
+			// TRANSLATORS: Description for landform 'large ringed feature'
 			nTypeStr = q_("Cryptic ringed feature.");
 			break;
 		case niLenticula:
+			// TRANSLATORS: Description for landform 'lenticula'
 			nTypeStr = q_("Small dark spot.");
 			break;
 		case niLinea:
+			// TRANSLATORS: Description for landform 'linea'
 			nTypeStr = q_("A dark or bright elongate marking, may be curved or straight.");
 			break;
 		case niLingula:
+			// TRANSLATORS: Description for landform 'lingula'
 			nTypeStr = q_("Extension of plateau having rounded lobate or tongue-like boundaries.");
 			break;
 		case niMacula:
+			// TRANSLATORS: Description for landform 'macula'
 			nTypeStr = q_("Dark spot, may be irregular");
 			break;
 		case niMare:
 		{
 			QString p = planet->getEnglishName();
 			if (p=="Moon")
+			{
+				// TRANSLATORS: Description for landform 'mare' on the Moon
 				nTypeStr = q_("'Sea'; low albedo, relatively smooth plain, generally of large extent.");
+			}
 			if (p=="Mars")
+			{
+				// TRANSLATORS: Description for landform 'mare' on Mars
 				nTypeStr = q_("'Sea'; dark albedo areas of no known geological significance.");
+			}
 			if (p=="Titan")
+			{
+				// TRANSLATORS: Description for landform 'mare' on Titan
 				nTypeStr = q_("'Sea'; large expanses of dark materials thought to be liquid hydrocarbons");
+			}
 			break;
 		}
 		case niMensa:
+			// TRANSLATORS: Description for landform 'mensa'
 			nTypeStr = q_("A flat-topped prominence with cliff-like edges.");
 			break;
 		case niMons:
+			// TRANSLATORS: Description for landform 'mons'
 			nTypeStr = q_("Mountain.");
 			break;
 		case niOceanus:
+			// TRANSLATORS: Description for landform 'oceanus'
 			nTypeStr = q_("A very large dark area.");
 			break;
 		case niPalus:
+			// TRANSLATORS: Description for landform 'palus'
 			nTypeStr = q_("'Swamp'; small plain.");
 			break;
 		case niPatera:
+			// TRANSLATORS: Description for landform 'patera'
 			nTypeStr = q_("An irregular crater, or a complex one with scalloped edges.");
 			break;
 		case niPlanitia:
+			// TRANSLATORS: Description for landform 'planitia'
 			nTypeStr = q_("Low plain.");
 			break;
 		case niPlanum:
+			// TRANSLATORS: Description for landform 'planum'
 			nTypeStr = q_("Plateau or high plain.");
 			break;
 		case niPlume:
+			// TRANSLATORS: Description for landform 'plume'
 			nTypeStr = q_("Cryo-volcanic feature.");
 			break;
 		case niPromontorium:
+			// TRANSLATORS: Description for landform 'promontorium'
 			nTypeStr = q_("'Cape'; headland promontoria.");
 			break;
 		case niRegio:
+			// TRANSLATORS: Description for landform 'regio'
 			nTypeStr = q_("A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region.");
 			break;
 		case niReticulum:
+			// TRANSLATORS: Description for landform 'reticulum'
 			nTypeStr = q_("Reticular (netlike) pattern.");
 			break;
 		case niRima:
+			// TRANSLATORS: Description for landform 'rima'
 			nTypeStr = q_("Fissure.");
 			break;
 		case niRupes:
+			// TRANSLATORS: Description for landform 'rupes'
 			nTypeStr = q_("Scarp.");
 			break;
 		case niSatelliteFeature:
+			// TRANSLATORS: Description for landform 'satellite feature'
 			nTypeStr = q_("A feature that shares the name of an associated feature.");
 			break;
 		case niScopulus:
+			// TRANSLATORS: Description for landform 'scopulus'
 			nTypeStr = q_("Lobate or irregular scarp.");
 			break;
 		case niSerpens:
+			// TRANSLATORS: Description for landform 'serpens'
 			nTypeStr = q_("Sinuous feature with segments of positive and negative relief along its length.");
 			break;
 		case niSulcus:
+			// TRANSLATORS: Description for landform 'sulcus'
 			nTypeStr = q_("Subparallel furrows and ridges.");
 			break;
 		case niSinus:
 			if (planet->getEnglishName()=="Titan")
+			{
+				// TRANSLATORS: Description for landform 'sinus' on Titan
 				nTypeStr = q_("'Bay'; bays within seas or lakes of liquid hydrocarbons.");
+			}
 			else
+			{
+				// TRANSLATORS: Description for landform 'sinus'
 				nTypeStr = q_("'Bay'; small plain.");
+			}
 			break;
 		case niTerra:
+			// TRANSLATORS: Description for landform 'terra'
 			nTypeStr = q_("Extensive land mass.");
 			break;
 		case niTessera:
+			// TRANSLATORS: Description for landform 'tessera'
 			nTypeStr = q_("Tile-like, polygonal terrain.");
 			break;
 		case niTholus:
+			// TRANSLATORS: Description for landform 'tholus'
 			nTypeStr = q_("Small domical mountain or hill.");
 			break;
 		case niUnda:
+			// TRANSLATORS: Description for landform 'unda'
 			nTypeStr = q_("Dunes.");
 			break;
 		case niVallis:
+			// TRANSLATORS: Description for landform 'vallis'
 			nTypeStr = q_("Valley.");
 			break;
 		case niVastitas:
+			// TRANSLATORS: Description for landform 'vastitas'
 			nTypeStr = q_("Extensive plain.");
 			break;
 		case niVirga:
+			// TRANSLATORS: Description for landform 'virga'
 			nTypeStr = q_("A streak or stripe of color.");
 			break;
 		case niLandingSite:
+			// TRANSLATORS: Description for landform 'landing site' on the Moon
 			nTypeStr = q_("Lunar features at or near Apollo landing sites.");
 			break;
 		case niUNDEFINED:
@@ -526,7 +765,15 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	}
 
 	if (flags&ObjectType && getNomenclatureType()!=NomenclatureItem::niUNDEFINED)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type")).arg(getNomenclatureTypeString()) << "<br />";
+	{
+		QString tstr  = getNomenclatureTypeString();
+		QString latin = getNomenclatureTypeLatinString();
+		QString ts    = q_("Type");
+		if (tstr!=latin && !latin.isEmpty())
+			oss << QString("%1: <b>%2</b> (%3: %4)").arg(ts).arg(tstr).arg(q_("latin")).arg(latin) << "<br />";
+		else
+			oss << QString("%1: <b>%2</b>").arg(ts).arg(tstr) << "<br />";
+	}
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
