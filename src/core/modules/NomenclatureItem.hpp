@@ -144,7 +144,7 @@ public:
 
 	void draw(StelCore* core, StelPainter *painter);
 
-	QString getNomenclatureTypeString() const;
+	QString getNomenclatureTypeString() const;	
 	QString getNomenclatureTypeDescription() const;
 	NomenclatureItemType getNomenclatureType() const { return nType;}
 
@@ -161,6 +161,8 @@ private:
 	bool initialized;
 	Vec3d XYZ;                         // holds J2000 position
 	static Vec3f color;
+
+	QString getNomenclatureTypeLatinString() const;
 
 	PlanetP planet;
 	int identificator;
