@@ -1218,6 +1218,9 @@
               <layout class="QHBoxLayout" name="horizontalLayout_9">
                <item>
                 <widget class="QCheckBox" name="planetNomenclatureCheckBox">
+                 <property name="toolTip">
+                  <string>Show hints and labels for planetary features</string>
+                 </property>
                  <property name="text">
                   <string>Show planet nomenclature</string>
                  </property>
@@ -3763,12 +3766,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
