@@ -344,8 +344,11 @@ void NomenclatureMgr::loadNomenclature()
 				if (planetName.isEmpty() || planet!=planetName)
 				{
 					p = ssystem->searchByEnglishName(planet);
+					if (p.isNull()) // is it a minor planet?
+						p = ssystem->searchMinorPlanetByEnglishName(planet);
 					planetName = planet;
 				}
+
 
 				if (!p.isNull())
 				{
@@ -354,7 +357,7 @@ void NomenclatureMgr::loadNomenclature()
 						nomenclatureItems.append(nom);
 
 					readOk++;
-				}
+				}				
 			}
 		}
 
