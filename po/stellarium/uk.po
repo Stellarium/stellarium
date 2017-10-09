@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-08 11:05+0700\n"
-"PO-Revision-Date: 2017-10-07 15:30+0000\n"
+"POT-Creation-Date: 2017-10-08 18:25+0700\n"
+"PO-Revision-Date: 2017-10-08 09:20+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-08 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-10-09 05:31+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -912,7 +912,7 @@ msgstr "Комплекс долин або хребтів, що перетина
 #: src/core/modules/NomenclatureItem.cpp:557
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
+msgstr "Западина неправильної форми, виглядає як дно висохлого озера."
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:563
@@ -1116,9 +1116,13 @@ msgstr "Області Місяця у місцях посадки «Аполл�
 msgid "Undocumented landform type."
 msgstr "Невизначений тип ландшафту."
 
+#: src/core/modules/NomenclatureItem.cpp:763
+msgid "latin name"
+msgstr "латинська назва"
+
 #: src/core/modules/NomenclatureItem.cpp:773
-msgid "latin"
-msgstr ""
+msgid "latin term"
+msgstr "латинський термін"
 
 #: src/core/modules/NomenclatureItem.cpp:783
 msgid "Linear size"
@@ -1142,7 +1146,11 @@ msgstr "км"
 msgid "Planetographic long./lat."
 msgstr "Планетографічна довгота/широта"
 
-#: src/core/modules/NomenclatureItem.cpp:793
+#: src/core/modules/NomenclatureItem.cpp:792
+msgid "Celestial body"
+msgstr "Небесне тіло"
+
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Landform description"
 msgstr "Опис ландшафту"
 
@@ -7415,11 +7423,11 @@ msgstr "Показати орбіту позначеної планети"
 
 #: src/ui_viewDialog.h:2460
 msgid "Show hints and labels for planetary features"
-msgstr ""
+msgstr "Показувати підказки і мітки областей планет"
 
 #: src/ui_viewDialog.h:2462
 msgid "Show planetary nomenclature"
-msgstr ""
+msgstr "Показувати номенклатуру планет"
 
 #: src/ui_viewDialog.h:2464
 msgid "Color of nomenclature labels"
@@ -20131,12 +20139,3 @@ msgstr "Нетипове схилення 2"
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (after extinction: <b>%2</b>)"
 #~ msgstr "Величина: <b>%1</b> (після послаблення: <b>%2</b>)"
-
-#~ msgid "Show planets nomenclature"
-#~ msgstr "Показати номенклатуру планет"
-
-#~ msgid ""
-#~ "Irregularly shaped depression, which having the appearance of a dry lake bed."
-#~ msgstr ""
-#~ "Западина неправильної форми, на якій спостерігаються ознаки колишнього дна "
-#~ "озера."

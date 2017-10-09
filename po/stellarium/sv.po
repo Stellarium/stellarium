@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-08 11:05+0700\n"
-"PO-Revision-Date: 2017-10-07 21:12+0000\n"
+"POT-Creation-Date: 2017-10-08 18:25+0700\n"
+"PO-Revision-Date: 2017-10-08 13:10+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-08 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-10-09 05:30+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -23,7 +23,7 @@ msgstr "anpassat objekt"
 
 #: src/core/modules/CustomObject.cpp:80
 msgid "custom marker"
-msgstr "anpassad markering"
+msgstr "egen markör"
 
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:221
@@ -44,7 +44,7 @@ msgstr "Typ"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
-msgstr "Markering"
+msgstr "Markör"
 
 #: src/core/modules/Asterism.cpp:221
 msgid "asterism"
@@ -927,7 +927,7 @@ msgstr "Liten mörk fläck."
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:581
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr "En mörk eller ljus elongerad markering, som kan vara böjd eller rak."
+msgstr "En mörk eller ljus elongerad markör, som kan vara böjd eller rak."
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:585
@@ -1105,8 +1105,12 @@ msgstr "Månkännetecken vid eller nära Apollo-landningsplatser."
 msgid "Undocumented landform type."
 msgstr "Odokumenterad typ av landform."
 
+#: src/core/modules/NomenclatureItem.cpp:763
+msgid "latin name"
+msgstr ""
+
 #: src/core/modules/NomenclatureItem.cpp:773
-msgid "latin"
+msgid "latin term"
 msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:783
@@ -1131,7 +1135,11 @@ msgstr "km"
 msgid "Planetographic long./lat."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:793
+#: src/core/modules/NomenclatureItem.cpp:792
+msgid "Celestial body"
+msgstr ""
+
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Landform description"
 msgstr "Beskrivning av landform"
 
@@ -1902,7 +1910,7 @@ msgstr "Planetmarkörer"
 
 #: src/core/modules/SolarSystem.cpp:241
 msgid "Planet selection marker"
-msgstr "Planetmarkeringsmarkör"
+msgstr "Planetväljarmarkör"
 
 #: src/core/modules/SolarSystem.cpp:242
 msgid "Native planet names (from starlore)"
@@ -3208,7 +3216,7 @@ msgstr "Khalid, Sultana & Zaidi (2014)"
 #: src/gui/ConfigurationDialog.cpp:1527
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr "Anpassad ekvation av %1T"
+msgstr "Anpassad ekvation till %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1576 src/gui/ConfigurationDialog.cpp:1611
 #: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:426
@@ -3317,7 +3325,7 @@ msgstr "Vänsterklick"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Clear selection"
-msgstr "Töm markering"
+msgstr "Avmarkera allt"
 
 #: src/gui/HelpDialog.cpp:179
 msgid "Ctrl & left click"
@@ -3329,7 +3337,7 @@ msgstr "Högerklick"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Add custom marker"
-msgstr "Lägg till anpassad markör"
+msgstr "Lägg till egen markör"
 
 #: src/gui/HelpDialog.cpp:185
 msgid "Shift & left click"
@@ -3345,7 +3353,7 @@ msgstr "Shift & högerklicka"
 
 #: src/gui/HelpDialog.cpp:190
 msgid "Delete all custom markers"
-msgstr "Radera alla anpassade markörer"
+msgstr "Radera alla egna markörer"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Shift & Alt & right click"
@@ -5054,7 +5062,7 @@ msgstr "Stjärnbilder"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:90
 msgid "Custom Objects"
-msgstr "Anpassade objekt"
+msgstr "Egna objekt"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:92
@@ -8794,7 +8802,7 @@ msgstr "Utdata"
 
 #: src/ui_scriptConsole.h:377
 msgid "Cursor position"
-msgstr "Markörposition"
+msgstr "Pekarposition"
 
 #: src/ui_scriptConsole.h:379
 msgid "Include dir:"
@@ -8910,11 +8918,11 @@ msgstr "Visa positionsmarkörer för nuvarande himlakropp på himlen"
 
 #: src/ui_astroCalcDialog.h:824
 msgid "Show markers"
-msgstr "Visa markeringar"
+msgstr "Visa markörer"
 
 #: src/ui_astroCalcDialog.h:826
 msgid "Show dates of positions of current celestial body near markers"
-msgstr "Visa datum för himlakroppens positioner nära markeringarna"
+msgstr "Visa datum för himlakroppens positioner nära markörerna"
 
 #: src/ui_astroCalcDialog.h:828
 msgid "Show dates"
@@ -9031,11 +9039,11 @@ msgstr "Anpassa färger"
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr "Färg på etiketter och markeringar för djuprymdsobjekt"
+msgstr "Färg på etiketter och markörer för djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:540
 msgid "Color of markers of dark nebulae"
-msgstr "Färg på markeringar för mörka nebulosor"
+msgstr "Färg på markörer till mörka nebulosor"
 
 #: src/ui_dsoColorsDialog.h:546
 msgid "Clusters with neb."
@@ -9043,11 +9051,11 @@ msgstr "Hopar med nebulositet"
 
 #: src/ui_dsoColorsDialog.h:550
 msgid "Color of markers of open star clusters"
-msgstr "Färg på markeringar för öppna stjärnhopar"
+msgstr "Färg på markörer till öppna stjärnhopar"
 
 #: src/ui_dsoColorsDialog.h:553
 msgid "Color of markers of stellar associations"
-msgstr "Färg på markeringar för stjärnföreningar"
+msgstr "Färg på markörer till stjärnföreningar"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Possible planetary nebulae"
@@ -9063,35 +9071,35 @@ msgstr "Färg på etiketter för djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interacting galaxies"
-msgstr "Färg på markeringar för interagerande galaxer"
+msgstr "Färg på markörer till interagerande galaxer"
 
 #: src/ui_dsoColorsDialog.h:569
 msgid "Color of markers of clusters associated with nebulosity"
-msgstr "Färg på markeringar för hopar förenade med nebulositet"
+msgstr "Färg på markörer till hopar förenade med nebulositet"
 
 #: src/ui_dsoColorsDialog.h:573
 msgid "Color of markers of young stellar objects"
-msgstr "Färg på markeringar för unga stjärnobjekt"
+msgstr "Färg på markörer till unga stjärnobjekt"
 
 #: src/ui_dsoColorsDialog.h:576
 msgid "Color of markers of protoplanetary nebulae"
-msgstr "Färg på markeringar för protoplanetariska nebulosor"
+msgstr "Färg på markörer till protoplanetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:579
 msgid "Color of markers of possible planetary nebulae"
-msgstr "Färg på markeringar för möjliga planetariska nebulosor"
+msgstr "Färg på markörer till möjliga planetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of possible quasars"
-msgstr "Färg på markeringar till möjliga kvasarer"
+msgstr "Färg på markörer till möjliga kvasarer"
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Color of markers of star clusters"
-msgstr "Färg på markeringar till stjärnhopar"
+msgstr "Färg på markörer till stjärnhopar"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of supernova remnants"
-msgstr "Färg på markeringar till supernovarester"
+msgstr "Färg på markörer till supernovarester"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Possible quasars"
@@ -9099,23 +9107,23 @@ msgstr "Möjliga kvasarer"
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of blazars"
-msgstr "Färg på markeringar till blasarer"
+msgstr "Färg på markörer till blasarer"
 
 #: src/ui_dsoColorsDialog.h:597
 msgid "Color of markers of quasars"
-msgstr "Färg på markeringar till kvasarer"
+msgstr "Färg på markörer till kvasarer"
 
 #: src/ui_dsoColorsDialog.h:600
 msgid "Color of markers of emission nebulae"
-msgstr "Färg på markeringar till emissionsnebulosor"
+msgstr "Färg på markörer till emissionsnebulosor"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Color of markers of reflection nebulae"
-msgstr "Färg på markeringar till reflektionsnebulosor"
+msgstr "Färg på markörer till reflektionsnebulosor"
 
 #: src/ui_dsoColorsDialog.h:606
 msgid "Color of markers of star clouds"
-msgstr "Färg på markeringar till stjärnmoln"
+msgstr "Färg på markörer till stjärnmoln"
 
 #: src/ui_dsoColorsDialog.h:609
 msgid "Labels of deep-sky objects"
@@ -9135,35 +9143,35 @@ msgstr "Molekylmoln"
 
 #: src/ui_dsoColorsDialog.h:619
 msgid "Color of markers of symbiotic stars"
-msgstr "Färg på markeringar till symbiotiska stjärnor"
+msgstr "Färg på markörer till symbiotiska stjärnor"
 
 #: src/ui_dsoColorsDialog.h:623
 msgid "Color of markers of molecular clouds"
-msgstr "Färg på markeringar till molekylmoln"
+msgstr "Färg på markörer till molekylmoln"
 
 #: src/ui_dsoColorsDialog.h:627
 msgid "Color of markers of interstellar matter"
-msgstr "Färg på markeringar till interstellär materia"
+msgstr "Färg på markörer till interstellär materia"
 
 #: src/ui_dsoColorsDialog.h:631
 msgid "Color of markers of hydrogen regions"
-msgstr "Färg på markeringar till väteregioner"
+msgstr "Färg på markörer till väteregioner"
 
 #: src/ui_dsoColorsDialog.h:634
 msgid "Color of markers of radio galaxies"
-msgstr "Färg på markeringar till radiogalaxer"
+msgstr "Färg på markörer till radiogalaxer"
 
 #: src/ui_dsoColorsDialog.h:638
 msgid "Color of markers of stars"
-msgstr "Färg på markeringar till stjärnor"
+msgstr "Färg på markörer till stjärnor"
 
 #: src/ui_dsoColorsDialog.h:641
 msgid "Color of markers of nebulae"
-msgstr "Färg på markeringar till nebulosor"
+msgstr "Färg på markörer till nebulosor"
 
 #: src/ui_dsoColorsDialog.h:645
 msgid "Color of markers of bipolar nebulae"
-msgstr "Färg på markeringar till bipolära nebulosor"
+msgstr "Färg på markörer till bipolära nebulosor"
 
 #: src/ui_dsoColorsDialog.h:647 plugins/Quasars/src/Quasars.cpp:72
 #: plugins/Quasars/src/Quasars.cpp:170 plugins/Quasars/src/Quasars.cpp:171
@@ -9172,15 +9180,15 @@ msgstr "Kvasarer"
 
 #: src/ui_dsoColorsDialog.h:649
 msgid "Color of markers of emission-line stars"
-msgstr "Färg på markeringar till emissionslinjestjärnor"
+msgstr "Färg på markörer till emissionslinjestjärnor"
 
 #: src/ui_dsoColorsDialog.h:654
 msgid "Color of markers of emission objects"
-msgstr "Färg på markeringar till emissionsobjekt"
+msgstr "Färg på markörer till emissionsobjekt"
 
 #: src/ui_dsoColorsDialog.h:657
 msgid "Color of markers of deep-sky objects"
-msgstr "Färg på markeringar till djuprymdsobjekt"
+msgstr "Färg på markörer till djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:661
 msgid "Protoplanetary nebulae"
@@ -9188,43 +9196,43 @@ msgstr "Protoplanetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:663
 msgid "Color of markers of active galaxies"
-msgstr "Färg på markeringar till aktiva galaxer"
+msgstr "Färg på markörer till aktiva galaxer"
 
 #: src/ui_dsoColorsDialog.h:666
 msgid "Markers of deep-sky objects"
-msgstr "Markeringar till djuprymdsobjekt"
+msgstr "Markörer till djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:668
 msgid "Markers of DSOs"
-msgstr "Markeringar till DSO"
+msgstr "Markörer till DSO"
 
 #: src/ui_dsoColorsDialog.h:672
 msgid "Color of markers of galaxies"
-msgstr "Färg på markeringar till galaxer"
+msgstr "Färg på markörer till galaxer"
 
 #: src/ui_dsoColorsDialog.h:676
 msgid "Color of markers of planetary nebulae"
-msgstr "Färg på markeringar till planetariska nebulosor"
+msgstr "Färg på markörer till planetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:681
 msgid "Color of markers of globular star clusters"
-msgstr "Färg på markeringar till klotformiga stjärnhopar"
+msgstr "Färg på markörer till klotformiga stjärnhopar"
 
 #: src/ui_dsoColorsDialog.h:684
 msgid "Color of markers of BL Lac objects"
-msgstr "Färg på markeringar till BL Lac-objekt"
+msgstr "Färg på markörer till BL Lac-objekt"
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr "Färg på markeringar till supernovakandidater"
+msgstr "Färg på markörer till supernovakandidater"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr "Färg på markeringar till supernovarestkandidater"
+msgstr "Färg på markörer till supernovarestkandidater"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
-msgstr "Färg på markeringar till galaxhopar"
+msgstr "Färg på markörer till galaxhopar"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -18893,11 +18901,3 @@ msgstr ""
 #, qt-format
 #~ msgid "Albedo: %1"
 #~ msgstr "Albedo: %1"
-
-#~ msgid ""
-#~ "Irregularly shaped depression, which having the appearance of a dry lake bed."
-#~ msgstr ""
-#~ "Oregelbundet formad sänka, som till utseendet liknar en torr sjöbädd."
-
-#~ msgid "Show planets nomenclature"
-#~ msgstr "Visa planeters nomenklatur"
