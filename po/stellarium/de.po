@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-08 11:05+0700\n"
-"PO-Revision-Date: 2017-10-07 20:00+0000\n"
+"POT-Creation-Date: 2017-10-08 18:25+0700\n"
+"PO-Revision-Date: 2017-10-08 13:10+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-08 05:18+0000\n"
+"X-Launchpad-Export-Date: 2017-10-09 05:19+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -908,7 +908,7 @@ msgstr "Komplex von einander schneidenden Tälern oder Bergrücken."
 #: src/core/modules/NomenclatureItem.cpp:557
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
+msgstr "Unregelmäßige Eintiefung, die wie ein trockener Seegrund aussieht."
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:563
@@ -1114,9 +1114,13 @@ msgstr "Mondstrukturen an oder bei Apollo-Landeplätzen."
 msgid "Undocumented landform type."
 msgstr "Nicht dokumentierter Landform-Typ."
 
+#: src/core/modules/NomenclatureItem.cpp:763
+msgid "latin name"
+msgstr "Lateinischer Name"
+
 #: src/core/modules/NomenclatureItem.cpp:773
-msgid "latin"
-msgstr ""
+msgid "latin term"
+msgstr "Lateinischer Begriff"
 
 #: src/core/modules/NomenclatureItem.cpp:783
 msgid "Linear size"
@@ -1140,7 +1144,11 @@ msgstr "km"
 msgid "Planetographic long./lat."
 msgstr "Planetographische Länge/Breite"
 
-#: src/core/modules/NomenclatureItem.cpp:793
+#: src/core/modules/NomenclatureItem.cpp:792
+msgid "Celestial body"
+msgstr "Himmelskörper"
+
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Landform description"
 msgstr "Beschreibung der Landform"
 
@@ -7400,11 +7408,11 @@ msgstr "Zeige Umlaufbahn für ausgewählten Planeten"
 
 #: src/ui_viewDialog.h:2460
 msgid "Show hints and labels for planetary features"
-msgstr ""
+msgstr "Zeige Markierungen und Namen von planetaren Oberflächenmerkmalen"
 
 #: src/ui_viewDialog.h:2462
 msgid "Show planetary nomenclature"
-msgstr ""
+msgstr "Zeige Planeten-Beschriftungen"
 
 #: src/ui_viewDialog.h:2464
 msgid "Color of nomenclature labels"
