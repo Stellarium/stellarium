@@ -420,48 +420,41 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	if (getFlagLabels())
+	foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 	{
-		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
+		if (nItem->initialized)
 		{
-			if (nItem->initialized)
+			equPos = nItem->XYZ;
+			equPos.normalize();
+			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 			{
-				equPos = nItem->XYZ;
-				equPos.normalize();
-				if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
-				{
-					result.append(qSharedPointerCast<StelObject>(nItem));
-				}
+				result.append(qSharedPointerCast<StelObject>(nItem));
 			}
 		}
 	}
+
 
 	return result;
 }
 
 StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 {
-	if (getFlagLabels())
+	foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 	{
-		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
-		{
-			if (nItem->getEnglishName().toUpper() == englishName.toUpper())
-				return qSharedPointerCast<StelObject>(nItem);
-		}
+		if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
+			return qSharedPointerCast<StelObject>(nItem);
 	}
+
 
 	return Q_NULLPTR;
 }
 
 StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	if (getFlagLabels())
+	foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 	{
-		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
-		{
-			if (nItem->getNameI18n().toUpper() == nameI18n.toUpper())
-				return qSharedPointerCast<StelObject>(nItem);
-		}
+		if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
+			return qSharedPointerCast<StelObject>(nItem);
 	}
 
 	return Q_NULLPTR;
@@ -476,36 +469,34 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
 
-	if (getFlagLabels())
+	if (inEnglish)
 	{
-		if (inEnglish)
+		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 		{
-			foreach(const NomenclatureItemP& nItem, nomenclatureItems)
-			{
+			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
 				result << nItem->getEnglishName();
-			}
-		}
-		else
-		{
-			foreach(const NomenclatureItemP& nItem, nomenclatureItems)
-			{
-				result << nItem->getNameI18n();
-			}
 		}
 	}
+	else
+	{
+		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
+		{
+			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
+				result << nItem->getNameI18n();
+		}
+	}
+
 	return result;
 }
 
 NomenclatureItemP NomenclatureMgr::searchByEnglishName(QString nomenclatureItemEnglishName) const
 {
-	if (getFlagLabels())
+	foreach (const NomenclatureItemP& p, nomenclatureItems)
 	{
-		foreach (const NomenclatureItemP& p, nomenclatureItems)
-		{
-			if (p->getEnglishName() == nomenclatureItemEnglishName)
-				return p;
-		}
+		if (p->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && p->getEnglishName() == nomenclatureItemEnglishName)
+			return p;
 	}
+
 	return NomenclatureItemP();
 }
 
