@@ -52,6 +52,7 @@
 #include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "HipsMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -199,6 +200,14 @@ void ViewDialog::createDialogContent()
 
 	connectIntProperty(ui->lightPollutionSpinBox, "StelSkyDrawer.bortleScaleIndex");
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+
+	// Hips Survey
+	HipsMgr* hipsmgr = GETSTELMODULE(HipsMgr);
+	ui->hipsSurveyComboBox->addItems(hipsmgr->property("surveyList").toStringList());
+	ui->hipsSurveyComboBox->setCurrentText(hipsmgr->property("surveyUrl").toString());
+	connect(ui->hipsSurveyComboBox, &QComboBox::currentTextChanged, [=](QString s) {
+		hipsmgr->setProperty("surveyUrl", s);
+	});
 
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
