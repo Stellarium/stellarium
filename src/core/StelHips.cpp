@@ -69,10 +69,14 @@ HipsSurvey::~HipsSurvey()
 bool HipsSurvey::parseProperties()
 {
 	if (!properties.isEmpty()) return true;
-	if (networkReply) return false;
-	QNetworkRequest req = QNetworkRequest(url + "/properties");
-	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(networkReply, &QNetworkReply::finished, [=] {
+	if (!networkReply)
+	{
+		QNetworkRequest req = QNetworkRequest(url + "/properties");
+		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	}
+	if (networkReply->isFinished())
+	{
+		// XXX: check for errors.
 		QByteArray data = networkReply->readAll();
 		foreach(QString line, data.split('\n'))
 		{
@@ -82,7 +86,7 @@ bool HipsSurvey::parseProperties()
 		}
 		delete networkReply;
 		networkReply = NULL;
-	});
+	}
 	return !properties.isEmpty();
 }
 
@@ -94,19 +98,22 @@ int HipsSurvey::getPropertyInt(const QString& key, int fallback)
 
 bool HipsSurvey::getAllsky()
 {
-	if (!allsky.isNull()) return true;
-	if (properties.isEmpty() || networkReply || noAllsky)
-		return false;
-	QString ext = getExt(properties["hips_tile_format"]);
-	QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(getPropertyInt("hips_order_min", 3)).arg(ext);
-	QNetworkRequest req = QNetworkRequest(path);
-	networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(networkReply, &QNetworkReply::finished, [=] {
+	if (!allsky.isNull() || noAllsky) return true;
+	if (properties.isEmpty()) return false;
+	if (!networkReply)
+	{
+		QString ext = getExt(properties["hips_tile_format"]);
+		QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(getPropertyInt("hips_order_min", 3)).arg(ext);
+		QNetworkRequest req = QNetworkRequest(path);
+		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	}
+	if (networkReply->isFinished())
+	{
 		QByteArray data = networkReply->readAll();
 		allsky = QImage::fromData(data);
 		delete networkReply;
 		networkReply = NULL;
-	});
+	};
 	return !allsky.isNull();
 }
 
