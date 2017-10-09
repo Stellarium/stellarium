@@ -1165,6 +1165,20 @@ void StelCore::moveObserverToSelected()
 				moveObserverTo(loc);
 
 				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+				Q_ASSERT(landscapeMgr);
+
+				bool landscapeSetsLocation=landscapeMgr->getFlagLandscapeSetsLocation();
+				landscapeMgr->setFlagLandscapeSetsLocation(false);
+				if (landscapeMgr->getFlagLandscapeAutoSelection())
+				{
+					// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+					if (landscapeMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
+						landscapeMgr->setCurrentLandscapeName(loc.planetName);
+					else
+						landscapeMgr->setCurrentLandscapeID("zero");
+				}
+				landscapeMgr->setFlagLandscapeSetsLocation(landscapeSetsLocation);
+
 				if (pl->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 				{
 					landscapeMgr->setFlagAtmosphere(false);
@@ -1173,8 +1187,12 @@ void StelCore::moveObserverToSelected()
 				}
 				else
 				{
-					landscapeMgr->setFlagAtmosphere(pl->hasAtmosphere());
-					landscapeMgr->setFlagFog(pl->hasAtmosphere());
+					if (landscapeMgr->getFlagAtmosphereAutoEnable())
+					{
+						QSettings* conf = StelApp::getInstance().getSettings();
+						landscapeMgr->setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+						landscapeMgr->setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+					}
 					landscapeMgr->setFlagLandscape(true);
 				}
 			}
