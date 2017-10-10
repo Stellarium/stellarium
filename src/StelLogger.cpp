@@ -41,7 +41,9 @@ void StelLogger::init(const QString& logFilePath)
 	// write timestamp
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
 	// write info about operating system
-	writeLog(StelUtils::getOperatingSystemInfo());
+	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));
+	// Do a similar query with a new prettier version since Qt5.4:
+	writeLog(QString("Product Name: %1").arg(QSysInfo::prettyProductName()));
 
 	// write compiler version
 #if defined __GNUC__ && !defined __clang__
@@ -256,16 +258,10 @@ void StelLogger::debugLogHandler(QtMsgType type, const QMessageLogContext& ctx, 
 {
 	// *** NOTE: see original Qt source in qlogging.cpp (qDefaultMessageHandler) for sensible default code
 
-#if (QT_VERSION>=QT_VERSION_CHECK(5,4,0))
 	//use Qt to format the log message, if possible
 	//this uses the format set by qSetMessagePattern
 	//or QT_MESSAGE_PATTERN environment var
 	QString fmt = qFormatLogMessage(type,ctx,msg);
-#else
-	Q_UNUSED(type)
-	Q_UNUSED(ctx)
-	QString fmt = msg;
-#endif
 	//do nothing for null messages
 	if(fmt.isNull())
 		return;
