@@ -309,6 +309,8 @@ class Translations
 		N_("Grossmugl");
 		// TRANSLATORS: Name of landscape
 		N_("Zero Horizon");
+		// TRANSLATORS: Name of landscape
+		N_("Sun");
 
 		// =====================================================================
 		// 3D landscapes (scenes) names
