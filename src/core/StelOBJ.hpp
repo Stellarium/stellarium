@@ -370,16 +370,8 @@ private:
 //! Implements the qHash method for the Vertex type
 inline uint qHash(const StelOBJ::Vertex& key, uint seed)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,4,0))
 	//hash the whole vertex raw memory directly
 	return qHashBits(&key, sizeof(StelOBJ::Vertex), seed);
-#else
-	//no qHashBits, hash just the position and first uv coord
-	uint h1 = qHash(reinterpret_cast<const quint64*>(key.position)[0], seed);
-	uint h2 = qHash(reinterpret_cast<const quint64*>(key.position)[1], seed);
-
-	return ((h1 << 16) | (h1 >> 16)) ^ h2 ^ seed;
-#endif
 }
 
 #endif // _STELOBJ_HPP_
