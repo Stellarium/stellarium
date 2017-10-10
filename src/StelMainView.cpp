@@ -607,7 +607,6 @@ StelMainView::StelMainView(QSettings* settings)
 
 	qDebug()<<"Desired surface format: "<<glFormat;
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,4,0)
 	//we set the default format to our required format, if possible
 	//this only works with Qt 5.4+
 	QSurfaceFormat defFmt = glFormat;
@@ -616,7 +615,6 @@ StelMainView::StelMainView(QSettings* settings)
 	defFmt.setStencilBufferSize(0);
 	defFmt.setDepthBufferSize(0);
 	QSurfaceFormat::setDefaultFormat(defFmt);
-#endif
 
 	//QGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
 	glWidget = new StelGLWidget(glFormat, this);
@@ -670,14 +668,9 @@ StelMainView::~StelMainView()
 
 QSurfaceFormat StelMainView::getDesiredGLFormat() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(5,4,0)
-	//default-constructed format
-	QSurfaceFormat fmt;
-#else
 	//use the default format as basis
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	qDebug()<<"Default surface format: "<<fmt;
-#endif
 
 	//if on an GLES build, do not set the format
 #ifndef QT_OPENGL_ES_2
