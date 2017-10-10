@@ -60,7 +60,10 @@ QString CustomObject::getNameI18n() const
 	if (isMarker)
 	{
 		QStringList cod = designation.split(" ");
-		r = QString("%1 %2").arg(q_(cod.at(0))).arg(cod.at(1));
+		if (cod.count()>1)
+			r = QString("%1 %2").arg(q_(cod.at(0))).arg(cod.at(1));
+		else
+			r = q_(r);
 	}
 	return r;
 }
