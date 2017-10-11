@@ -145,12 +145,13 @@ void HipsSurvey::draw(StelPainter* sPainter)
 	int drawOrder = (int)(log2(90. / maxAngle));
 	drawOrder = qBound(orderMin, drawOrder, order);
 	drawOrder = 1; // Test.
+	int splitOrder = 4; // Test.
 
 	// Draw the 12 root tiles and their children.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
 	for (int i = 0; i < 12; i++)
 	{
-		drawTile(0, i, drawOrder, viewportRegion, sPainter);
+		drawTile(0, i, drawOrder, splitOrder, viewportRegion, sPainter);
 	}
 }
 
@@ -211,16 +212,19 @@ static bool isClipped(int n, double (*pos)[4])
 }
 
 
-void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap& viewportShape, StelPainter* sPainter)
+void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, const SphericalCap& viewportShape, StelPainter* sPainter)
 {
 	Vec3d pos;
 	Mat3d mat3;
-	Vec3d verts[4];
 	// Vec2f uv[4] = {Vec2f(0, 0), Vec2f(1, 0), Vec2f(0, 1), Vec2f(1, 1)};
 	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(0, 1), Vec2f(1, 0), Vec2f(1, 1)};
-	unsigned short indices[6] = {0, 2, 1, 3, 1, 2};
+	// unsigned short indices[6] = {0, 2, 1, 3, 1, 2};
 	HipsTile *tile;
 	int orderMin = getPropertyInt("hips_order_min", 3);
+	QVector<Vec3d> vertsArray;
+	QVector<Vec2f> texArray;
+	QVector<uint16_t> indicesArray;
+	int nb;
 
 	healpix_pix2vec(1 << order, pix, pos.v);
 
@@ -278,12 +282,6 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 		goto skip_render;
 
 	// Actually draw the tile, as a single quad.
-	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
-	for (int i = 0; i < 4; i++)
-	{
-		pos = mat3 * Vec3d(1 - uv[i][1], uv[i][0], 1.0);
-		healpix_xy2vec(pos.v, verts[i].v);
-	}
 	if (tile->texFader.state() == QTimeLine::Running)
 	{
 		sPainter->setBlending(true);
@@ -295,15 +293,54 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 		sPainter->setColor(1, 1, 1, 1);
 	}
 	sPainter->setCullFace(true);
-	sPainter->setArrays(verts, uv);
-	sPainter->drawFromArray(StelPainter::Triangles, 6, 0, true, indices);
+	nb = fillArrays(order, pix, drawOrder, splitOrder, sPainter, vertsArray, texArray, indicesArray);
+	sPainter->setArrays(vertsArray.constData(), texArray.constData());
+	sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
 
 skip_render:
 	// Draw the children.
 	if (order < drawOrder)
 	{
 		for (int i = 0; i < 4; i++)
-			drawTile(order + 1, pix * 4 + i, drawOrder, viewportShape, sPainter);
+			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, viewportShape, sPainter);
 		return;
 	}
+}
+
+int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder, StelPainter* sPainter,
+						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
+{
+	Mat3d mat3;
+	Vec3d pos;
+	Vec2f texPos;
+	int gridSize = 1 << (splitOrder - drawOrder);
+	int n = gridSize + 1;
+	const int INDICES[6][2] = {
+		{0, 0}, {0, 1}, {1, 0}, {1, 1}, {1, 0}, {0, 1}
+	};
+
+	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			texPos = Vec2f((double)i / gridSize, (double)j / gridSize);
+			pos = mat3 * Vec3d(1.0 - (double)j / gridSize, (double)i / gridSize, 1.0);
+			healpix_xy2vec(pos.v, pos.v);
+			verts << pos;
+			tex << texPos;
+		}
+	}
+	for (int i = 0; i < gridSize; i++)
+	{
+		for (int j = 0; j < gridSize; j++)
+		{
+			for (int k = 0; k < 6; k++)
+			{
+				indices << (INDICES[k][1] + i) * n + INDICES[k][0] + j;
+			}
+		}
+	}
+	return gridSize * gridSize * 6;
 }

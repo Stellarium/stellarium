@@ -27,6 +27,7 @@
 #include <QImage>
 
 #include "StelTexture.hpp"
+#include "VecMath.hpp"
 
 class StelPainter;
 class HipsTile;
@@ -59,7 +60,11 @@ private:
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
-	void drawTile(int order, int pix, int drawOrder, const SphericalCap& viewportShape, StelPainter* sPainter);
+	void drawTile(int order, int pix, int drawOrder, int splitOrder, const SphericalCap& viewportShape, StelPainter* sPainter);
+
+	// Fill the array for a given tile.
+	int fillArrays(int order, int pix, int drawOrder, int splitOrder, StelPainter* sPainter,
+				   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
 };
 
 #endif // _STELHIPS_
