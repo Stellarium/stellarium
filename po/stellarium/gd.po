@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-08 18:25+0700\n"
+"POT-Creation-Date: 2017-10-10 20:27+0700\n"
 "PO-Revision-Date: 2017-09-16 11:00+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-09 05:19+0000\n"
+"X-Launchpad-Export-Date: 2017-10-11 05:23+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 "Language: gd\n"
 
@@ -59,7 +59,7 @@ msgstr "astaras"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Display Options"
 msgstr "Roghainnean an t-seallaidh"
 
@@ -2248,13 +2248,13 @@ msgstr "Flip an sealladh gu còmhnard"
 msgid "Flip scene vertically"
 msgstr "Flip an sealladh gu h-inghearach"
 
-#: src/core/StelCore.cpp:2224
+#: src/core/StelCore.cpp:2242
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Chaidh ceartachadh a chur à comas. Nach cleachd e ach ma tha thu eòlach air "
 "na nì thu!"
 
-#: src/core/StelCore.cpp:2227
+#: src/core/StelCore.cpp:2245
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -2266,7 +2266,7 @@ msgstr ""
 "Relativity Confirmed by Ancient Solar Eclipses</em> (%1). Faigh barrachd "
 "fiosrachaidh %2an-seo%3."
 
-#: src/core/StelCore.cpp:2230
+#: src/core/StelCore.cpp:2248
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2275,7 +2275,7 @@ msgstr ""
 "Chaidh an co-aontar deuchainneach seo fhoillseachadh le G. M. Clemence san "
 "aiste <em>On the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2233
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2288,7 +2288,7 @@ msgstr ""
 "Jean Meeus sna h-<em>Astronomical Formulae for Calculators</em> aige. "
 "Chleachd am prògram PC SunTracker Pro i cuideachd."
 
-#: src/core/StelCore.cpp:2237
+#: src/core/StelCore.cpp:2255
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -2298,7 +2298,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> agus <em>Canon of Solar Eclipses</em> le "
 "Mucke ⁊ Meeus (1983) ris."
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2259
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -2310,7 +2310,7 @@ msgstr ""
 "Chaidh an aon dàimh fhilleadh a-steach ann an clàran sisige aig Goldstine "
 "(1973)."
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2263
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2321,7 +2321,7 @@ msgstr ""
 "san aiste <em>The accelerations of the earth and moon from early "
 "astronomical observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2248
+#: src/core/StelCore.cpp:2266
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2330,7 +2330,7 @@ msgstr ""
 "Chaidh an co-aontar seo fhoillseachadh le  F. R. Stephenson san aiste "
 "<em>Pre-Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2269
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2344,7 +2344,7 @@ msgstr ""
 "U.T. in the period 1800-1975</em> (%1) mar a cho-fhreagair dàta a chaidh "
 "fhoillseachadh le Brouwer (1952) dha."
 
-#: src/core/StelCore.cpp:2254
+#: src/core/StelCore.cpp:2272
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2354,7 +2354,7 @@ msgstr ""
 "from -4000 to +2800</em> (1986) le P. Bretagnon ⁊ L. Simon agus sa phrògram "
 "amharc-lainn phlanaidean RedShift air a’ PC."
 
-#: src/core/StelCore.cpp:2257
+#: src/core/StelCore.cpp:2275
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2365,13 +2365,13 @@ msgstr ""
 "Morrison san aiste <em>Long-term changes in the rotation of the earth - 700 "
 "B.C. to A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2260
+#: src/core/StelCore.cpp:2278
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Tha an algairim seo ’ga chleachdadh sa phrògram amharc-lainn phlanaidean "
 "Guide 7 air PC."
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2281
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2381,7 +2381,7 @@ msgstr ""
 "Canon of Solar Eclipses: 1986-2035</em> (1987) agus sa <em>Fifty Year Canon "
 "of Lunar Eclipses: 1986-2035</em> (1989) aige."
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2390,7 +2390,7 @@ msgstr ""
 "Thionnsgnaich K.M. Borkowski (%1) an fhoirmle seo o sgrùdadh air 31 clàr air "
 "dubhraidhean na grèine eadar 2137 BCE agus 1715 CE."
 
-#: src/core/StelCore.cpp:2269
+#: src/core/StelCore.cpp:2287
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2403,7 +2403,7 @@ msgstr ""
 "E.T. for the Period 1800-1988</em> (%1) mar a cho-fhreagair na luachan dàta "
 "a chaidh a thoirt seachad le Stephenson ⁊ Morrison (1984) ris."
 
-#: src/core/StelCore.cpp:2272
+#: src/core/StelCore.cpp:2290
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2413,7 +2413,7 @@ msgstr ""
 "thionndadh dhe theòirig na gealaich ELP 2000-85 sna <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991) aca."
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2293
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2424,7 +2424,7 @@ msgstr ""
 "Morrison san aiste <em>Long-Term Fluctuations in the Earth’s Rotation: 700 "
 "BC to AD 1990</em> (%1)."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2296
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2433,7 +2433,7 @@ msgstr ""
 "Dh’fhoillsich F. R. Stephenson an fhoirmle seo san leabhar <em>Historical "
 "Eclipses and Earth’s Rotation</em> aige (%1)."
 
-#: src/core/StelCore.cpp:2281
+#: src/core/StelCore.cpp:2299
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2444,7 +2444,7 @@ msgstr ""
 "eug-samhail dhe Chapront, Chapront-Touze ⁊ Francou (1997) airson cinn-là "
 "taobh a-muigh 1620..2000."
 
-#: src/core/StelCore.cpp:2284
+#: src/core/StelCore.cpp:2302
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2454,7 +2454,7 @@ msgstr ""
 "Laboratory an fhoirmle seo air an làrach-lìn eadar-ghnìomhach %1JPL "
 "Horizons%2 aca."
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2305
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2463,7 +2463,7 @@ msgstr ""
 "Chaidh an t-ioma-nòmach seo fhoillseachadh le J. Meeus agus L. Simons san "
 "aiste <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2308
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -2474,7 +2474,7 @@ msgstr ""
 "dàta simplidh le ioma-nòmach dhen 3s òrdugh airson na h-ùine bige a "
 "dh’fhalbh."
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2311
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2486,7 +2486,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002) aca. Tha e stèidhichte air "
 "<em>Astronomical Algorithms</em> (1991) aig Jean Meeus."
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2314
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -2497,7 +2497,7 @@ msgstr ""
 "R. Stephenson san aiste <em>Historical values of the Earth’s clock error %1T "
 "and the calculation of eclipses</em> (%2) le addendum ann an (%3)."
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2317
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2511,7 +2511,7 @@ msgstr ""
 "cunbhalach ma dh’fhaoidte mar a mhìnich Stephenson (%2). Tadhail %3an-seo%4 "
 "airson barrachd fiosrachaidh."
 
-#: src/core/StelCore.cpp:2302 src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2320 src/core/StelCore.cpp:2323
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2527,15 +2527,15 @@ msgstr ""
 "1900 to +3000</em> (2006) aca. Tha an fhoirmle seo ’ga cleachdadh sa "
 "phrògram ephemeris na grèine, na gealaich ’s nam planaidean SOLEX."
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2320
 msgid "Used by default."
 msgstr "’Ga chleachdadh a ghnàth."
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2323
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "TIONNDADH LE PATCH GUN LUATHACHADH A BHARRACHD NA GEALAICH."
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2546,7 +2546,7 @@ msgstr ""
 "Morrison (1984) fhoillseachadh san aiste <em>Ancient eclipses and dating the "
 "fall of Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2558,7 +2558,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1) agus ath-"
 "sgrùdadh le Sana Islam ann an 2013."
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2332
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2569,7 +2569,7 @@ msgstr ""
 "Zaidi aig a bheil pongalachd dhe 0.6 diog fhoillseachadh ann an <em>Delta T: "
 "Polynomial Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2335
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -2583,7 +2583,7 @@ msgstr ""
 "(air a dealbhadh le freagradh splìona), bheir e luachan o pharabola "
 "faigseach dhuinn."
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2338
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -2592,11 +2592,11 @@ msgstr ""
 "Seo foirmle cheàrnanach gus %1T àireamhachadh le co-èifeachdan a mhìnich an "
 "cleachdaiche."
 
-#: src/core/StelCore.cpp:2323 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2341 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Mearachd"
 
-#: src/core/StelCore.cpp:2331
+#: src/core/StelCore.cpp:2349
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2605,17 +2605,17 @@ msgstr ""
 "Tha luach %1 airson %2 an fhuasglaidh (luathachadh-linne na gealaich) "
 "feumach air freagarrachadh, faic an treòir airson barrachd fiosrachaidh."
 
-#: src/core/StelCore.cpp:2372
+#: src/core/StelCore.cpp:2390
 msgid "with zero values outside this range"
 msgstr "le luachan neoni taobh a-muigh na rainse seo"
 
-#: src/core/StelCore.cpp:2375
+#: src/core/StelCore.cpp:2393
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "le pongalachd coltach dhe 1 diog agus luachan neoni taobh a-muigh na rainse "
 "seo"
 
-#: src/core/StelCore.cpp:2378
+#: src/core/StelCore.cpp:2396
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2623,16 +2623,16 @@ msgstr ""
 "le meadhan mearachd dhe nas lugha na diog, mearachd as motha 1.9d agus "
 "luachan air bliadhnaichean crìche taobh a-muigh na rainse seo"
 
-#: src/core/StelCore.cpp:2385
+#: src/core/StelCore.cpp:2403
 msgid "with values for the limit years outside this range"
 msgstr "le luachan air bliadhnaichean crìche taobh a-muigh na rainse seo"
 
-#: src/core/StelCore.cpp:2395
+#: src/core/StelCore.cpp:2413
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Rainse dhligheach a’ chleachdaidh: eadar am bliadhna %1 agus %2, %3."
 
-#: src/core/StelCore.cpp:2397
+#: src/core/StelCore.cpp:2415
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Rainse dhligheach a’ chleachdaidh: eadar am bliadhna %1 agus %2."
@@ -2846,7 +2846,7 @@ msgid "Deep-sky objects background images"
 msgstr "Dealbhan cùlaibh nan cuspairean fad às"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:774 src/StelMainView.cpp:775
+#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
 msgid "Miscellaneous"
 msgstr "Measgaichte"
 
@@ -4924,19 +4924,19 @@ msgstr "Sgriobtaichean"
 msgid "Shortcut"
 msgstr "Ath-ghoirid"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:767
 msgid "Save screenshot"
 msgstr "Sàbhail glacadh-sgrìn"
 
-#: src/StelMainView.cpp:775
+#: src/StelMainView.cpp:768
 msgid "Reload shaders (for development)"
 msgstr "Ath-luchdaich na sgàileadairean (dhan luchd-leasachaidh)"
 
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Full-screen mode"
 msgstr "Modh làn-sgrìn"
 
-#: src/StelMainView.cpp:932
+#: src/StelMainView.cpp:925
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4945,14 +4945,14 @@ msgstr ""
 "bathar-cruaidh na grafaigeachd no cleachd an roghainn --angle-mode (no --"
 "mesa-mode)."
 
-#: src/StelMainView.cpp:935
+#: src/StelMainView.cpp:928
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Chan fhoghainn an tionndadh dhe OpenGL. Feuch an ùraich thu na draibhearan "
 "no bathar-cruaidh na grafaigeachd."
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:970
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4963,7 +4963,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1028
+#: src/StelMainView.cpp:1021
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4974,7 +4974,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1084
+#: src/StelMainView.cpp:1077
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4985,7 +4985,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1125
+#: src/StelMainView.cpp:1118
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4996,7 +4996,7 @@ msgstr ""
 "A bheil thu airson am brath seo a leigeil seachad san àm ri teachd agus "
 "feuchainn i leantainn air adhart sa mhodh iriosail co-dhiù?"
 
-#: src/StelMainView.cpp:1237
+#: src/StelMainView.cpp:1230
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5326,128 +5326,135 @@ msgstr "Großmugl"
 msgid "Zero Horizon"
 msgstr "Neoinitheachd fon fhàire"
 
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:313 plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
+msgid "Sun"
+msgstr "A’ Ghrian"
+
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:316
+#: src/translations.h:318
 msgid "Vienna Sterngarten"
 msgstr "Sterngarten Wien"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:318
+#: src/translations.h:320
 msgid "Testscene"
 msgstr "Sealladh deuchainne"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Landscape Tour"
 msgstr "Turas crutha-thìre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Partial Lunar Eclipse"
 msgstr "Leth-dhubhradh na gealaich"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Total Lunar Eclipse"
 msgstr "Dubhradh slàn na gealaich"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "Screensaver"
 msgstr "Sàbhalaiche-sgrìn"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar Eclipse 2009"
 msgstr "Dubhradh na grèine 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Startup Script"
 msgstr "Sgriobt tòiseachaidh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Zodiac"
 msgstr "Grian-chrios"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Èirigh is dol fodha na grèine trìoblaichte air Mearcar"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dubhradh dùbailte bho Dheimos ann an 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dubhradh dùbailte bho Dheimos ann an 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Dubhradh bho Olympus Mons Faoi 10 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Falach aig an Talamh is a’ Bhliogh  2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 trasnaidhean is 2 dhubhradh bho Dheimos 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid "Solar System Screensaver"
 msgstr "Sàbhalaiche-sgrìn rian-grèine"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Constellations Tour"
 msgstr "Cuairt nan reul-bhadan"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Sun from different planets"
 msgstr "A’ Ghrian bho phlanaidean eadar-dhealaichte"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth best views from other bodies"
 msgstr "Na seallaidhean as fhearr air an Talamh bho bhodhaigean eile"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Transit of Venus"
 msgstr "Trasnadh na Rìbhinne"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Sky Culture Tour"
 msgstr "Sgrìobh tro dhualchasan speura"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "Earth Events from Mercury"
 msgstr "Tachartasan na Talmhainn o Mhearcar"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "Earth Events from a floating city on Venus"
 msgstr "Tachartasan na Talmhainn o bhaile air fleòd air an Rìbhinn"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Earth Events from Mars"
 msgstr "Tachartasan na Talmhainn on Chorg"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
@@ -5455,87 +5462,87 @@ msgstr ""
 "Chorg"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "Sìnidhean is trasnaidhean as motha aig an Talamh is planaidean eile o "
 "Challisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Tycho's Supernova"
 msgstr "Mòr-nòbha Tycho"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:373
+#: src/translations.h:375
 msgid "Earth and other Planets from Ceres"
 msgstr "An Talamh ’s planaidean eile o Ceres"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:375
+#: src/translations.h:377
 msgid "Messier Objects Tour"
 msgstr "Turas air cuspairean Mhessier"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Binocular Highlights"
 msgstr "Binocular Highlights"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 reul dhùbailte thlachdmhor air an t-sùil lom"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "List of largest known stars"
 msgstr "Liosta dhe na reultan as motha air a bheil sinn eòlach"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:383
+#: src/translations.h:385
 msgid "Herschel 400 Tour"
 msgstr "Turas Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:385
+#: src/translations.h:387
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Cuspairean fad às dha ghlainneachan dà-shùileach"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:387
+#: src/translations.h:389
 msgid "The Jack Bennett Catalog"
 msgstr "Catalog Jack Bennett"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Best objects in the New General Catalog"
 msgstr "Na cuspairean as fhearr sa New General Catalog"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Look around each installed landscape."
 msgstr "Thoir sùil air a h-uile cruth-tìre air a stàladh."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "Look at each installed sky culture."
 msgstr "Thoir sùil air gach dualachas speura a chaidh a stàladh."
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Sgriobt gus leth-dhubhradh na gealaich a shealltainn."
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Sgriobt gus dubhradh slàn na gealaich a shealltainn."
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Sgrìob mhall air na speuran gun chrìch a bheir sùil air cuspairean air "
 "thuaiream."
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -5543,11 +5550,11 @@ msgstr ""
 "Sgriobt a thaisbeanas dubhradh slàn na grèine a thachair ann an 2009 (o "
 "Rangpur, Bangladais)."
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Script which runs automatically at startup"
 msgstr "Sgriobt a thèid a ruith gu fèin-obrachail aig an toiseach"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -5556,7 +5563,7 @@ msgstr ""
 "Seallaidh an sgriobt seo na reul-bhadan a’ ghrian-chriosa. ’S e seo na reul-"
 "bhadan a tha air lorg na grèine thar na cruinne speuraich rè bliadhna."
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -5565,7 +5572,7 @@ msgstr ""
 "sònraichte, nì a’ ghrian laighe ’s èirigh aig 3 amannan eadar-dhealaichte "
 "san aon latha Mearcair."
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -5574,7 +5581,7 @@ msgstr ""
 "agus dubhraidh e an toiseach i. Tachraidh seo eadar an Sgairp agus an "
 "Saighdear 26mh dhen Ghiblean 2017."
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -5583,13 +5590,13 @@ msgstr ""
 "agus dubhraidh e an toiseach i. Tachraidh seo eadar an Tarbh agus an Dà Leth-"
 "aon 23mh dhen Iuchar 2031."
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Phobos a’ dubhradh na grèine mar a chithear e o Olympus Mons 10mh dhen "
 "Fhaoilleach 2068."
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -5599,7 +5606,7 @@ msgstr ""
 "glè ainneamh a thachras an dà chuid air an aon latha. Seo mar a thachras e "
 "23mh dhen Fhaoilleach 2048. San luaths fhìrinneach."
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -5616,36 +5623,36 @@ msgstr ""
 "Chorg, bidh an dubhradh air fhathast agus e doilleir fo sgàil a’ Chuirg ’s "
 "cha shoillsich e ach an uairsin."
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 "Sàbhalaiche-sgrìn le grunn thachartasan san rian-ghrèine. Tha 287 tachartas "
 "ann!"
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "A tour of the western constellations."
 msgstr "Turas air na reul-bhadan siarach."
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 "Seall air a’ ghrian o na planaidean mòra dhen rian-ghrèine is o Phlùto."
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Na seallaidhean as fhearr air an Talamh o bhodhaigean eile an rian-ghrèine "
 "san 21d linn."
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Trasnadh na Rìbhinn mar a chunnacas o Sidni an Astràilia, 6mh dhen Ògmhios "
 "2012."
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -5653,7 +5660,7 @@ msgstr ""
 "Boillsgeadh a’ mhòr-nòbha a dh’amhairc Tycho Brahe ann an 1572. Feumaidh "
 "plugan nam mòr-nòbha a bhith an comas."
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -5661,7 +5668,7 @@ msgstr ""
 "Sìnidhean is comhaireachdan as motha aig an Talamh is planaidean eile on "
 "Chorg 2000-3000"
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -5674,7 +5681,7 @@ msgstr ""
 "Bhliogh. Mar sin, nan robh daoine airson tuineachadh air gealach a’ Bhliogh, "
 "’s e Callisto a bhios an tè."
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -5682,11 +5689,11 @@ msgstr ""
 "Sìnidhean is comhaireachdan as motha aig an Talamh is planaidean eile o "
 "Ceres 2000-3000"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "A tour of Messier Objects"
 msgstr "Turas air cuspairean Mhessier"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -5696,7 +5703,7 @@ msgstr ""
 "an dàta airson an sgriobt seo a thogail on leabhar “Binocular Highlights” le "
 "Gary Seronik."
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -5707,16 +5714,16 @@ msgstr ""
 "fhoillseachadh ann an Sky & Telescope 09/2014. Chaidh an dàta a thogail on "
 "làrach-lìn aige, http://www.astropix.com/doubles/"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Bheir an sgriobt seo dha na reultan as motha air a bheil sinn eòlach thu."
 
-#: src/translations.h:423
+#: src/translations.h:425
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Turas air cuspairean on chatalog Herschel 400"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -5726,7 +5733,7 @@ msgstr ""
 "fad às dha ghlainneachan dà-shùileach. Bheir sinn 31 dhe na cuspairean sin "
 "dhut leis an sgriobt seo, air an seòrsachadh a-rèir an dìridh dheis (2000.0)."
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -5734,7 +5741,7 @@ msgstr ""
 "Seo an catalog aig Jack Bennett de na cuspairean fad às deasach (152 cuspair "
 "uile gu lèir). Chaidh catalog Bhennett a thoirt dhuinn le Auke Slotegraaf."
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -5744,191 +5751,191 @@ msgstr ""
 "cleachdadh le buill Saguaro Astronomy Club of Phoenix, AZ airson an duais a "
 "thaobh obrach ionmholta “Best of the NGC”."
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "&Undo"
 msgstr "&Neo-dhèan"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "&Redo"
 msgstr "&Ath-dhèan"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Cu&t"
 msgstr "&Gearr às"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "&Copy"
 msgstr "Dèan lethbhrea&c"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Paste"
 msgstr "Cuir a&nn"
 
-#: src/translations.h:435 plugins/Oculars/src/ui_ocularDialog.h:1170
+#: src/translations.h:437 plugins/Oculars/src/ui_ocularDialog.h:1170
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
 #: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Delete"
 msgstr "Sguab às"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "Select All"
 msgstr "Tagh na h-uile"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Look in:"
 msgstr "Lorg an-seo:"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Directory:"
 msgstr "Pasgan:"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Folder"
 msgstr "Pasgan"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Choose"
 msgstr "&Tagh"
 
-#: src/translations.h:441 src/ui_configurationDialog.h:1532
+#: src/translations.h:443 src/ui_configurationDialog.h:1532
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:619
 msgid "Cancel"
 msgstr "Sguir dheth"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Cancel"
 msgstr "&Sguir dheth"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Files of type:"
 msgstr "Seòrsa an fhaidhle:"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Date Modified"
 msgstr "Ceann-là atharrachaidh"
 
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Directories"
 msgstr "Pasganan"
 
-#: src/translations.h:446
+#: src/translations.h:448
 msgid "Computer"
 msgstr "Coimpiutair"
 
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "&Open"
 msgstr "F&osgail"
 
-#: src/translations.h:448
+#: src/translations.h:450
 msgid "&Save"
 msgstr ""
 
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "File &name:"
 msgstr "Ai&nm an fhaidhle:"
 
-#: src/translations.h:450
+#: src/translations.h:452
 msgid "Copy &Link Location"
 msgstr "Dèan lethbhreac de sheò&ladh a’ cheangail"
 
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Abort"
 msgstr "Sguir dheth"
 
-#: src/translations.h:452
+#: src/translations.h:454
 msgid "Ignore"
 msgstr "Leig seachad"
 
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "&Basic colors"
 msgstr "Dathan &bunasach"
 
-#: src/translations.h:454
+#: src/translations.h:456
 msgid "&Pick Screen Color"
 msgstr "Tagh d&ath na sgrìn"
 
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "&Custom colors"
 msgstr "Dathan &gnàthaichte"
 
-#: src/translations.h:456
+#: src/translations.h:458
 msgid "&Add to Custom Colors"
 msgstr "Cuir ris na d&athan gnàthaichte"
 
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Hu&e:"
 msgstr "&Tuar:"
 
-#: src/translations.h:458
+#: src/translations.h:460
 msgid "&Sat:"
 msgstr "&Sàthachd:"
 
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "&Val:"
 msgstr "&Luach:"
 
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "&Red:"
 msgstr "&Dearg:"
 
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "&Green:"
 msgstr "&Uaine:"
 
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Bl&ue:"
 msgstr "&Gorm:"
 
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Select Color"
 msgstr "Tagh dath"
 
-#: src/translations.h:464
+#: src/translations.h:466
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Cùrsair air %1, %2 Bruth ESC gus sgur dheth"
 
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Back"
 msgstr ""
 
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Forward"
 msgstr ""
 
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Create New Folder"
 msgstr ""
 
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "List View"
 msgstr ""
 
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Detail View"
 msgstr ""
 
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:472
+#: src/translations.h:474
 #, qt-format
 msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
 
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "&No"
 msgstr ""
 
@@ -14499,12 +14506,6 @@ msgstr "Meatailteachd"
 #: plugins/Exoplanets/src/Exoplanet.cpp:344
 msgid "Mass"
 msgstr "Tomad"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:329
-#: plugins/Exoplanets/src/Exoplanet.cpp:333
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
-msgid "Sun"
-msgstr "A’ Ghrian"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 #: plugins/Exoplanets/src/Exoplanet.cpp:345
