@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-08 18:25+0700\n"
+"POT-Creation-Date: 2017-10-10 20:27+0700\n"
 "PO-Revision-Date: 2017-10-08 09:12+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-09 05:28+0000\n"
+"X-Launchpad-Export-Date: 2017-10-11 05:32+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -58,7 +58,7 @@ msgstr "астеризм"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Display Options"
 msgstr "Параметры отображения"
 
@@ -2262,12 +2262,12 @@ msgstr "Отразить по горизонтали"
 msgid "Flip scene vertically"
 msgstr "Отразить по вертикали"
 
-#: src/core/StelCore.cpp:2224
+#: src/core/StelCore.cpp:2242
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Коррекция отключена. Используйте только если вы знаете, что вы делаете!"
 
-#: src/core/StelCore.cpp:2227
+#: src/core/StelCore.cpp:2245
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -2279,7 +2279,7 @@ msgstr ""
 "Эйнштейна подтверждена древними солнечными затмениями</em> (%1). Подробности "
 "смотрите %2здесь%3."
 
-#: src/core/StelCore.cpp:2230
+#: src/core/StelCore.cpp:2248
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2288,7 +2288,7 @@ msgstr ""
 "Это эмпирическое уравнение было опубликовано Г. М. Клеменсом в статье <em>О "
 "системе астрономических констант</em> (%1)."
 
-#: src/core/StelCore.cpp:2233
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2301,7 +2301,7 @@ msgstr ""
 "его книге <em>Астрономические формулы для калькуляторов</em>. Кроме того эта "
 "формула используется в компьютерной программе SunTracker Pro."
 
-#: src/core/StelCore.cpp:2237
+#: src/core/StelCore.cpp:2255
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -2311,7 +2311,7 @@ msgstr ""
 "<em>Астрономических эфемеридах</em> и в <em>Каноне солнечных затмений</em> "
 "Муке и Меёса (1983)."
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2259
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -2322,7 +2322,7 @@ msgstr ""
 "5 - и 10-дневных интервалах от 601 г. до н.э. по 1649 г. н.э. Это же "
 "соотношение было также неявно принято в таблице сизигий Голдштейна (1973)."
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2263
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2332,7 +2332,7 @@ msgstr ""
 "Это уравнение было опубликовано П. М. Мюллером и Ф. Р. Стивенсоном в статье "
 "<em>Ускорение Земли и Луны из ранних астрономических наблюдений</em> (%1)."
 
-#: src/core/StelCore.cpp:2248
+#: src/core/StelCore.cpp:2266
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2341,7 +2341,7 @@ msgstr ""
 "Это уравнение было опубликовано Ф. Р. Стивенсоном в статье "
 "<em>Дотелескопические астрономические наблюдения</em> (%1)."
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2269
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2354,7 +2354,7 @@ msgstr ""
 "аппроксимация для коррекции дельта T E.T.-U.T. за период 1800-1975 г.г.</em> "
 "(%1) как аппроксимация данных, опубликованным Броувером (1952)."
 
-#: src/core/StelCore.cpp:2254
+#: src/core/StelCore.cpp:2272
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2364,7 +2364,7 @@ msgstr ""
 "<em>Планетные программы и таблицы с -4000 по +2800 годы</em> (1986) и в "
 "компьютерной программе-планетарии RedShift."
 
-#: src/core/StelCore.cpp:2257
+#: src/core/StelCore.cpp:2275
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2375,12 +2375,12 @@ msgstr ""
 "<em>Долгосрочные изменения вращения Земли с 700 г. до н.э. до 1980 г. "
 "н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:2260
+#: src/core/StelCore.cpp:2278
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Этот алгоритм используется в компьютерной программе-планетарии Guide 7."
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2281
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2390,7 +2390,7 @@ msgstr ""
 "солнечных затмений: 1986-2035</em> (1987) и его <em>Пятидесятилетнем каноне "
 "лунных затмений: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2400,7 +2400,7 @@ msgstr ""
 "солнечном затмении за период между 2137 годом до нашей эры и 1715 годом "
 "нашей эры."
 
-#: src/core/StelCore.cpp:2269
+#: src/core/StelCore.cpp:2287
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2413,7 +2413,7 @@ msgstr ""
 "г.г.</em> (%1) как аппроксимация данных, приведённых Стивенсоном и Моррисом "
 "(1984)."
 
-#: src/core/StelCore.cpp:2272
+#: src/core/StelCore.cpp:2290
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2423,7 +2423,7 @@ msgstr ""
 "версии лунной теории ELP 2000-85 в их книге <em>Лунные таблицы и программы с "
 "4000 г. до н.э. до 8000 г. н.э.</em> (1991)."
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2293
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2434,7 +2434,7 @@ msgstr ""
 "статье <em>Долгосрочные флуктуации во вращении Земли: с 700 г. до н.э. до "
 "1990 г. н.э.</em> (%1)."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2296
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2443,7 +2443,7 @@ msgstr ""
 "Ф. Р. Стивенсон опубликовал эту формулу в своей книге <em>Исторические "
 "затмения и вращение Земли</em> (%1)."
 
-#: src/core/StelCore.cpp:2281
+#: src/core/StelCore.cpp:2299
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2454,7 +2454,7 @@ msgstr ""
 "Шапрон, Шапрон-Таузи и Франко (1997) для дат за пределами диапазона "
 "1620..2000."
 
-#: src/core/StelCore.cpp:2284
+#: src/core/StelCore.cpp:2302
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2463,7 +2463,7 @@ msgstr ""
 "Группа Динамики Солнечной Системы Лаборатории Реактивного Движения (JPL) "
 "NASA использует эут формулу на их интерактивном вебсайте %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2305
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2472,7 +2472,7 @@ msgstr ""
 "Этот полином был опубликован Ж. Меёсом и Л. Симонсом в статье "
 "<em>Полиномиальное приближение к дельта T, 1620-2000 Н.Э.</em> (%1)."
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2308
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -2482,7 +2482,7 @@ msgstr ""
 "персональном компьютере</em> (2000) представлен простой полином 3-го "
 "порядка, подходящий для недавнего прошлого."
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2311
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2494,7 +2494,7 @@ msgstr ""
 "(2002). Он основан на данных из книги Жана Меёса <em>Астрономические "
 "алгоритмы </em> (1991)."
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2314
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -2505,7 +2505,7 @@ msgstr ""
 "статье <em>Исторические значения ошибки земных часов %1T и расчёт "
 "затмений</em> (%2) с добавлениямм в (%3)."
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2317
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2518,7 +2518,7 @@ msgstr ""
 "косинусом и квадратным уравнением. Это уравнение основано на возможной "
 "периодичности, описанной Стивенсоном (%2). Подробнее смотрите %3здесь%4."
 
-#: src/core/StelCore.cpp:2302 src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2320 src/core/StelCore.cpp:2323
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2534,15 +2534,15 @@ msgstr ""
 "используется для расчёта солнечных, лунных и планетных эфемерид в программе "
 "SOLEX."
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2320
 msgid "Used by default."
 msgstr "Используется по умолчанию."
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2323
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ИСПРАВЛЕННАЯ ВЕРСИЯ БЕЗ ДОБАВЛЕНИЯ ЛУННОГО УСКОРЕНИЯ."
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2553,7 +2553,7 @@ msgstr ""
 "(1984), было опубликовано в статье <em>Древние затмения и датировка падения "
 "Вавилона</em> (%1)."
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2565,7 +2565,7 @@ msgstr ""
 "полиноминальном приближении для дельта Т</em> (%1) и пересмотрено Саной "
 "Исламом в 2013 году."
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2332
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2576,7 +2576,7 @@ msgstr ""
 "Султане и Фахима Зайди была опубликована в <em> Дельта T: полиномиальная "
 "аппроксимация для период времени 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2335
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -2589,7 +2589,7 @@ msgstr ""
 "2015 г. н.э.</em> (%1).  За пределами названного диапазона (смоделированного "
 "сплайн-приближениями) оно даёт значения из параболического приближения."
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2338
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -2598,11 +2598,11 @@ msgstr ""
 "Это квадратичная формула для вычисления %1T с коэффициентами, заданными "
 "пользователем."
 
-#: src/core/StelCore.cpp:2323 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2341 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Ошибка"
 
-#: src/core/StelCore.cpp:2331
+#: src/core/StelCore.cpp:2349
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2611,16 +2611,16 @@ msgstr ""
 "Значение %1 для %2 (вековое ускорение Луны) решения требует адаптации, см. "
 "подробности в Руководстве."
 
-#: src/core/StelCore.cpp:2372
+#: src/core/StelCore.cpp:2390
 msgid "with zero values outside this range"
 msgstr "с нулевым значением вне этого диапазона"
 
-#: src/core/StelCore.cpp:2375
+#: src/core/StelCore.cpp:2393
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "с типичной 1-секундной точностью и нулевым значением вне этого диапазона"
 
-#: src/core/StelCore.cpp:2378
+#: src/core/StelCore.cpp:2396
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2628,16 +2628,16 @@ msgstr ""
 "со средней погрешностью менее одной секунды, максимальной ошибкой 1.9 с и "
 "значениями для предельных лет вне этого диапазона"
 
-#: src/core/StelCore.cpp:2385
+#: src/core/StelCore.cpp:2403
 msgid "with values for the limit years outside this range"
 msgstr "со значениями для предельных лет вне этого диапазона"
 
-#: src/core/StelCore.cpp:2395
+#: src/core/StelCore.cpp:2413
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Допустимый диапазон применения: между %1 и %2 годами, %3."
 
-#: src/core/StelCore.cpp:2397
+#: src/core/StelCore.cpp:2415
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Допустимый диапазон применения: между %1 и %2 годами."
@@ -2846,7 +2846,7 @@ msgid "Deep-sky objects background images"
 msgstr "Фоновые изображения объектов глубокого космоса"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:774 src/StelMainView.cpp:775
+#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
 msgid "Miscellaneous"
 msgstr "Прочее"
 
@@ -4914,19 +4914,19 @@ msgstr "Сценарии"
 msgid "Shortcut"
 msgstr "Сочетание клавиш"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:767
 msgid "Save screenshot"
 msgstr "Сохранить снимок экрана"
 
-#: src/StelMainView.cpp:775
+#: src/StelMainView.cpp:768
 msgid "Reload shaders (for development)"
 msgstr "Перезагрузить шейдеры (для разработки)"
 
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Full-screen mode"
 msgstr "Полноэкранный режим"
 
-#: src/StelMainView.cpp:932
+#: src/StelMainView.cpp:925
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4935,14 +4935,14 @@ msgstr ""
 "оборудование или используйте режим запуска с --angle-mode (или с --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:935
+#: src/StelMainView.cpp:928
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйверы или графическое "
 "оборудование."
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:970
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4953,7 +4953,7 @@ msgstr ""
 "Игнорировать и не показывать это уведомление в будущем, и попытаться "
 "продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1028
+#: src/StelMainView.cpp:1021
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4963,7 +4963,7 @@ msgstr ""
 "Игнорировать и не показывать это уведомление в будущем, и попытаться "
 "продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1084
+#: src/StelMainView.cpp:1077
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4973,7 +4973,7 @@ msgstr ""
 "Игнорировать и не показывать это уведомление в будущем, и попытаться "
 "продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1125
+#: src/StelMainView.cpp:1118
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4983,7 +4983,7 @@ msgstr ""
 "Игнорировать и не показывать это уведомление в будущем, и попытаться "
 "продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1237
+#: src/StelMainView.cpp:1230
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5313,211 +5313,218 @@ msgstr "Гросмугль"
 msgid "Zero Horizon"
 msgstr "Нулевой горизонт"
 
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:313 plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
+msgid "Sun"
+msgstr "Солнце"
+
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:316
+#: src/translations.h:318
 msgid "Vienna Sterngarten"
 msgstr "Венский \"Звёздный сад\""
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:318
+#: src/translations.h:320
 msgid "Testscene"
 msgstr "Тестовая сцена"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Landscape Tour"
 msgstr "Тур по ландшафтам"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Partial Lunar Eclipse"
 msgstr "Частное лунное затмение"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Total Lunar Eclipse"
 msgstr "Полное лунное затмение"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "Screensaver"
 msgstr "Хранитель экрана"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar Eclipse 2009"
 msgstr "Солнечное затмение 2009 г."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Startup Script"
 msgstr "Стартовый сценарий"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Zodiac"
 msgstr "Зодиак"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Тройной восход и закат на Меркурии"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Двойное затмение на Деймосе в 2017 году"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Двойное затмение на Деймосе в 2031 году"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Затмение 10 января 2068 года с горы Олимп"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Покрытие Земли и Юпитера в 2048 году"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 прохождения и 2 затмения с Деймоса в 2027 году"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid "Solar System Screensaver"
 msgstr "События Солнечной системы"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Constellations Tour"
 msgstr "Тур по созвездиям"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Sun from different planets"
 msgstr "Солнце с разных планет"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth best views from other bodies"
 msgstr "Лучшие виды Земли с других тел"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Transit of Venus"
 msgstr "Прохождение Венеры"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Sky Culture Tour"
 msgstr "Тур по культурам неба"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "Earth Events from Mercury"
 msgstr "События Земли с Меркурия"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "Earth Events from a floating city on Venus"
 msgstr "События Земли с плавающего города на Венере"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Earth Events from Mars"
 msgstr "События Земли с Марса"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "Великие элонгации и противостояния Земля и других планет с Марса"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Наибольшие элонгации и прохождения Земли и Марса с Каллисто"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Tycho's Supernova"
 msgstr "Сверхновая Тихо Браге"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:373
+#: src/translations.h:375
 msgid "Earth and other Planets from Ceres"
 msgstr "Земля и другие планеты с Цереры"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:375
+#: src/translations.h:377
 msgid "Messier Objects Tour"
 msgstr "Тур по объектам Мессье"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Binocular Highlights"
 msgstr "Изюминки для биноклей"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 забавных двойных звёзд, видимых невооруженным глазом"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "List of largest known stars"
 msgstr "Список крупнейших звёзд"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:383
+#: src/translations.h:385
 msgid "Herschel 400 Tour"
 msgstr "Тур Гершель 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:385
+#: src/translations.h:387
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: объекты глубокого космоса для биноклей"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:387
+#: src/translations.h:389
 msgid "The Jack Bennett Catalog"
 msgstr "Каталог Джека Беннета"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Best objects in the New General Catalog"
 msgstr "Лучшие объекты в Новом общем каталоге"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Look around each installed landscape."
 msgstr "Посмотрите вокруг каждого установленного ландшафта."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "Look at each installed sky culture."
 msgstr "Посмотрите каждую установленную культуру неба."
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Сценарий для демонстрации частного лунного затмения."
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Сценарий для демонстрации полного лунного затмения."
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Медленная, бесконечная экскурсия по небу с просмотром случайных объектов."
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -5525,11 +5532,11 @@ msgstr ""
 "Сценарий для демонстрации полного солнечного затмения, которое произошло в "
 "2009 году (место - Рангпур, Бангладеш)."
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Script which runs automatically at startup"
 msgstr "Сценарий, который запускается автоматически при запуске"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -5538,7 +5545,7 @@ msgstr ""
 "Этот сценарий демонстрирует Зодиак - линию созвездий, через которые Солнце "
 "проходит по небесной сфере в течении года."
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -5547,7 +5554,7 @@ msgstr ""
 "определенных местах на планете Солнце восходит и заходит три раза в течении "
 "меркурианского дня."
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -5556,7 +5563,7 @@ msgstr ""
 "затмевает Солнце первым. Действие происходит между Скорпионом и Стрельцом 26 "
 "апреля 2017 года."
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -5565,11 +5572,11 @@ msgstr ""
 "затмевает Солнце первым. Действие происходит между Тельцом и Близнецами 23 "
 "июля 2031 года."
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "Вид затмения Солнца Фобосом с горы Олимп 10 января 2068 года."
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -5579,7 +5586,7 @@ msgstr ""
 "покрытия обоих планет в один и тот же день очень редки. Вот одно из таких "
 "покрытий в режиме реального времени, которое произойдёт 23 января 2048 года."
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -5595,33 +5602,33 @@ msgstr ""
 "с диска Марса он всё ещё оказывается в тени планеты и только спустя "
 "некоторое время он попадает на свет."
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 "Хранитель экрана с различными событиями в Солнечной системе. Всего 287 "
 "событий!"
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "A tour of the western constellations."
 msgstr "Экскурсия по западным созвездиям."
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Вид Солнца на больших планетах Солнечной системы и Плутоне."
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "Лучшие в 21-м веке виды Земли с других тел Солнечной системы."
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Прохождение Венеры, каким оно было видно 6 июня 2012 года из Сиднея, "
 "Австралия."
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -5629,7 +5636,7 @@ msgstr ""
 "Вспышка сверхновой, которую наблюдал Тихо Браге в 1572 году. Плагин "
 "\"Исторические сверхновые\" должен быть включён."
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -5637,7 +5644,7 @@ msgstr ""
 "Великие элонгации и противостояния Земля и других планет с Марса на "
 "протяжении 2000-3000 годов"
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -5649,7 +5656,7 @@ msgstr ""
 "пределами радиационного пояса Юпитера. Поэтому, если люди когда-нибудь "
 "колонизируют спутники Юпитера, Каллисто будет одним из них."
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -5657,11 +5664,11 @@ msgstr ""
 "Великие элонгации и противостояния Земля и других видимых планет с Цереры на "
 "протяжении 2000-3000 годов"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "A tour of Messier Objects"
 msgstr "Экскурсия по объектам Мессье"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -5670,7 +5677,7 @@ msgstr ""
 "Экскурсии по интересным объектам, которые доступны для наблюдения с "
 "биноклем. Данные для сценария взяты из одноименной книги Гэри Сероника."
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -5681,16 +5688,16 @@ msgstr ""
 "номере Sky & Telescope от 2014 года. Данные взяты из его сайта, "
 "http://www.astropix.com/doubles/"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Этот скрипт поможет вам совершить экскурсию по крупнейшим известным звёздам."
 
-#: src/translations.h:423
+#: src/translations.h:425
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Экскурсия по объектам из каталога Гершель 400"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -5700,7 +5707,7 @@ msgstr ""
 "в бинокль. В сценарии мы приводим список этих объектов, упорядоченных по "
 "прямому восхождению (2000,0)."
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -5708,7 +5715,7 @@ msgstr ""
 "Каталог южных объектов глубокого космоса Джека Беннета (всего 152 объекта). "
 "Каталог Беннета был подготовлен Эйком Слотеграафом."
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -5718,180 +5725,180 @@ msgstr ""
 "астрономического клуба Сагуаро из Феникса, штат Аризона в качестве "
 "контрольного списка для получения награды."
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "&Undo"
 msgstr "&Отменить"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "&Redo"
 msgstr "&Повторить"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Cu&t"
 msgstr "Выре&зать"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "&Copy"
 msgstr "&Копировать"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Paste"
 msgstr "В&ставить"
 
-#: src/translations.h:435 plugins/Oculars/src/ui_ocularDialog.h:1170
+#: src/translations.h:437 plugins/Oculars/src/ui_ocularDialog.h:1170
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
 #: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "Select All"
 msgstr "Выделить всё"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Look in:"
 msgstr "Искать в:"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Directory:"
 msgstr "Каталог:"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Folder"
 msgstr "Папка"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Choose"
 msgstr "&Выбрать"
 
-#: src/translations.h:441 src/ui_configurationDialog.h:1532
+#: src/translations.h:443 src/ui_configurationDialog.h:1532
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:619
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Cancel"
 msgstr "&Отмена"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Files of type:"
 msgstr "Файлы типа:"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Date Modified"
 msgstr "Дата изменения"
 
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Directories"
 msgstr "Каталоги"
 
-#: src/translations.h:446
+#: src/translations.h:448
 msgid "Computer"
 msgstr "Компьютер"
 
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "&Open"
 msgstr "&Открыть"
 
-#: src/translations.h:448
+#: src/translations.h:450
 msgid "&Save"
 msgstr "&Сохранить"
 
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "File &name:"
 msgstr "&Имя файла:"
 
-#: src/translations.h:450
+#: src/translations.h:452
 msgid "Copy &Link Location"
 msgstr "Копировать ссылку"
 
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Abort"
 msgstr "Прервать"
 
-#: src/translations.h:452
+#: src/translations.h:454
 msgid "Ignore"
 msgstr "Игнорировать"
 
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "&Basic colors"
 msgstr "&Основные цвета"
 
-#: src/translations.h:454
+#: src/translations.h:456
 msgid "&Pick Screen Color"
 msgstr "&Выберите цвет экрана"
 
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "&Custom colors"
 msgstr "&Пользовательские цвета"
 
-#: src/translations.h:456
+#: src/translations.h:458
 msgid "&Add to Custom Colors"
 msgstr "&Добавить к пользовательским цветам"
 
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Hu&e:"
 msgstr "&Тон:"
 
-#: src/translations.h:458
+#: src/translations.h:460
 msgid "&Sat:"
 msgstr "&Нас:"
 
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "&Val:"
 msgstr "&Ярк:"
 
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "&Red:"
 msgstr "&Красный:"
 
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "&Green:"
 msgstr "&Зеленый:"
 
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Bl&ue:"
 msgstr "С&иний:"
 
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Select Color"
 msgstr "Выбор цвета"
 
-#: src/translations.h:464
+#: src/translations.h:466
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Курсор в %1, %2 Нажмите ESC для отмены"
 
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Back"
 msgstr "Назад"
 
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Forward"
 msgstr "Вперёд"
 
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Parent Directory"
 msgstr "Родительский каталог"
 
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Create New Folder"
 msgstr "Создать новую папку"
 
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "List View"
 msgstr "Вид списком"
 
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Detail View"
 msgstr "Детальный вид"
 
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Recent Places"
 msgstr "Недавние места"
 
-#: src/translations.h:472
+#: src/translations.h:474
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -5900,11 +5907,11 @@ msgstr ""
 "%1 уже существует.\n"
 "Вы хотите заменить его?"
 
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "&Yes"
 msgstr "&Да"
 
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "&No"
 msgstr "&Нет"
 
@@ -14367,12 +14374,6 @@ msgstr "Металличность"
 #: plugins/Exoplanets/src/Exoplanet.cpp:344
 msgid "Mass"
 msgstr "Масса"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:329
-#: plugins/Exoplanets/src/Exoplanet.cpp:333
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
-msgid "Sun"
-msgstr "Солнце"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 #: plugins/Exoplanets/src/Exoplanet.cpp:345
