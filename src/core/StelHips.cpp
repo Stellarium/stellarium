@@ -126,12 +126,13 @@ void HipsSurvey::draw(StelPainter* sPainter)
 
 	// Set the projection.
 	StelCore* core = StelApp::getInstance().getCore();
-	StelCore::FrameType frame;
+	StelCore::FrameType frame = StelCore::FrameUninitialized;
 	if (properties["hips_frame"] == "galactic")
 		frame = StelCore::FrameGalactic;
-	else
+	else if (properties["hips_frame"] == "equatorial")
 		frame = StelCore::FrameJ2000;
-	sPainter->setProjector(core->getProjection(frame));
+	if (frame)
+		sPainter->setProjector(core->getProjection(frame));
 
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 90 / 2^L
@@ -143,6 +144,7 @@ void HipsSurvey::draw(StelPainter* sPainter)
 	const double maxAngle = anglePerPixel * tileWidth;
 	int drawOrder = (int)(log2(90. / maxAngle));
 	drawOrder = qBound(orderMin, drawOrder, order);
+	drawOrder = 1; // Test.
 
 	// Draw the 12 root tiles and their children.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
@@ -183,23 +185,82 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 	return tile;
 }
 
+// Test if a shape in clipping coordinate is clipped or not.
+static bool isClipped(int n, double (*pos)[4])
+{
+    // The six planes equations:
+    const int P[6][4] = {
+        {-1, 0, 0, -1}, {1, 0, 0, -1},
+        {0, -1, 0, -1}, {0, 1, 0, -1},
+        {0, 0, -1, -1}, {0, 0, 1, -1}
+    };
+    int i, p;
+    for (p = 0; p < 6; p++) {
+        for (i = 0; i < n; i++) {
+            if (    P[p][0] * pos[i][0] +
+                    P[p][1] * pos[i][1] +
+                    P[p][2] * pos[i][2] +
+                    P[p][3] * pos[i][3] <= 0) {
+                break;
+            }
+        }
+        if (i == n) // All the points are outside a clipping plane.
+            return true;
+    }
+    return false;
+}
+
+
 void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap& viewportShape, StelPainter* sPainter)
 {
-	// Check if the tile is visible.
-	SphericalCap boundingCap;
 	Vec3d pos;
 	Mat3d mat3;
 	Vec3d verts[4];
-	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(1, 0), Vec2f(0, 1), Vec2f(1, 1)};
+	// Vec2f uv[4] = {Vec2f(0, 0), Vec2f(1, 0), Vec2f(0, 1), Vec2f(1, 1)};
+	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(0, 1), Vec2f(1, 0), Vec2f(1, 1)};
 	unsigned short indices[6] = {0, 2, 1, 3, 1, 2};
 	HipsTile *tile;
 	int orderMin = getPropertyInt("hips_order_min", 3);
 
 	healpix_pix2vec(1 << order, pix, pos.v);
-	boundingCap.n = pos;
-	boundingCap.d = cos(M_PI / 2.0 / (1 << order));
 
-	if (!viewportShape.intersects(boundingCap)) return;
+	// Check if the tile is visible.
+	if (0)
+	{
+		SphericalCap boundingCap;
+		boundingCap.n = pos;
+		boundingCap.d = cos(M_PI / 2.0 / (1 << order));
+		if (!viewportShape.intersects(boundingCap)) return;
+	}
+
+	double clip_pos[4][4];
+	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
+	auto proj = sPainter->getProjector();
+	for (int i = 0; i < 4; i++)
+	{
+		pos = mat3 * Vec3d(1 - uv[i][1], uv[i][0], 1.0);
+		healpix_xy2vec(pos.v, pos.v);
+		proj->projectInPlace(pos);
+		pos[0] = (pos[0] - proj->getViewportCenter()[0]) / proj->getViewportWidth() * 2.0;
+		pos[1] = (pos[1] - proj->getViewportCenter()[1]) / proj->getViewportHeight() * 2.0;
+		clip_pos[i][0] = pos[0];
+		clip_pos[i][1] = pos[1];
+		clip_pos[i][2] = 0.0;
+		clip_pos[i][3] = 1.0;
+	}
+	if (isClipped(4, clip_pos)) return;
+
+	// Also check the culling.
+	if (order > 0)
+	{
+		Vec2d u(clip_pos[1][0] - clip_pos[0][0], clip_pos[1][1] - clip_pos[0][1]);
+		Vec2d v(clip_pos[2][0] - clip_pos[0][0], clip_pos[2][1] - clip_pos[0][1]);
+		u.normalize();
+		v.normalize();
+		// XXX: the error (0.5) depends on the order: the higher the order
+		// the lower the error should be.
+		if (u[0] * v[1] - u[1] * v[0] > 0.5) return;
+	}
 
 	if (order < orderMin)
 		goto skip_render;
@@ -210,6 +271,11 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 		return;
 	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
 		tile->texFader.start();
+
+	// XXX: we should be able to render the children tiles on top of the
+	// parent tiles, but the depth function doesn't work well then!
+	if (order < drawOrder)
+		goto skip_render;
 
 	// Actually draw the tile, as a single quad.
 	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
@@ -228,7 +294,6 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, const SphericalCap&
 		sPainter->setBlending(false);
 		sPainter->setColor(1, 1, 1, 1);
 	}
-
 	sPainter->setCullFace(true);
 	sPainter->setArrays(verts, uv);
 	sPainter->drawFromArray(StelPainter::Triangles, 6, 0, true, indices);

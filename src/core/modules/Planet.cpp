@@ -41,6 +41,7 @@
 #include "StelOpenGL.hpp"
 #include "StelOBJ.hpp"
 #include "StelOpenGLArray.hpp"
+#include "StelHips.hpp"
 
 #include <limits>
 #include <QByteArray>
@@ -207,6 +208,7 @@ Planet::Planet(const QString& englishName,
 	  axisRotation(0.),
 	  objModel(Q_NULLPTR),
 	  objModelLoader(Q_NULLPTR),
+	  survey(Q_NULLPTR),
 	  rings(Q_NULLPTR),
 	  distance(0.0),
 	  sphereScale(1.f),
@@ -266,6 +268,16 @@ Planet::Planet(const QString& englishName,
 	if (englishName!="Pluto") // TODO: add some far-out slow object types: other Plutoids, KBO, SDO, OCO, ...
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
+	}
+
+	// XXX: For testing hips surveys.
+	if (englishName == "Mars")
+	{
+		survey = new HipsSurvey("https://d3kq9k9p1609jy.cloudfront.net/surveys/mars");
+	}
+	if (englishName == "Jupiter")
+	{
+		survey = new HipsSurvey("https://d3kq9k9p1609jy.cloudfront.net/surveys/jupiter");
 	}
 }
 
@@ -2134,8 +2146,14 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->setColor(overbright, pow(0.75f, extinctedMag)*overbright, pow(0.42f, 0.9f*extinctedMag)*overbright);
 		}
 
+		if (survey)
+		{
+			sPainter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(radius * sphereScale));
+			sPainter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI / 2.0));
+			survey->draw(sPainter);
+		}
 		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
-		if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
+		else if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
 		{
 			if(!drawObjModel(sPainter, screenSz))
 			{

@@ -45,6 +45,7 @@ class StelPainter;
 class StelTranslator;
 class StelOBJ;
 class StelOpenGLArray;
+class HipsSurvey;
 template <class T> class QFuture;
 class QOpenGLBuffer;
 class QOpenGLFunctions;
@@ -522,6 +523,8 @@ protected:
 	QFuture<PlanetOBJModel*>* objModelLoader;// For async loading of the OBJ file
 
 	QString objModelPath;
+
+	class HipsSurvey* survey;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
