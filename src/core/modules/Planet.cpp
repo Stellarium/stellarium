@@ -2589,6 +2589,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	StelProjector::ModelViewTranformP transfo = painter->getProjector()->getModelViewTransform()->clone();
 	Vec4f color = painter->getColor();
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(radius * sphereScale));
+
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	GL(shader->bind());
@@ -2600,6 +2601,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	// Apply a rotation otherwize the hips surveys don't get rendered at the
 	// proper position.  Not sure why...
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI / 2.0));
+	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)));
 
 	survey->draw(painter, angle, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices) {
 		projectedVertsArray.resize(verts.size());
@@ -2611,6 +2613,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 			painter->getProjector()->project(v, v);
 			projectedVertsArray[i] = Vec3f(v[0], v[1], v[2]);
 			v = Mat4d::scaling(radius * sphereScale) * verts[i];
+			v = Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)) * v;
 			// Undo the rotation we applied for the survey fix.
 			v = Mat4d::zrotation(M_PI / 2.0) * v;
 			vertsArray[i] = Vec3f(v[0], v[1], v[2]);
