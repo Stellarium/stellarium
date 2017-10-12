@@ -274,10 +274,11 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, con
 	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
 		tile->texFader.start();
 
-	// XXX: we should be able to render the children tiles on top of the
-	// parent tiles, but the depth function doesn't work well then!
 	if (order < drawOrder)
-		goto skip_render;
+	{
+		// XXX: Here we should check that all the childern tiles are loaded, in
+		// that case there is no need to render the parent.
+	}
 
 	// Actually draw the tile, as a single quad.
 	if (tile->texFader.state() == QTimeLine::Running)
