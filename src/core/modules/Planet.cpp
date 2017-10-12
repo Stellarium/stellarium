@@ -2150,9 +2150,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (survey)
 		{
-			sPainter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(radius * sphereScale));
-			sPainter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI / 2.0));
-			survey->draw(sPainter);
+			drawSurvey(sPainter);
 		}
 		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
 		else if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
@@ -2571,6 +2569,39 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->release());
 	
 	painter->setCullFace(false);
+}
+
+
+// Draw the Hips survey.
+void Planet::drawSurvey(StelPainter* painter)
+{
+	if (!Planet::initShader()) return;
+	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(radius * sphereScale));
+	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI / 2.0));
+
+	QOpenGLShaderProgram* shader = planetShaderProgram;
+	const PlanetShaderVars* shaderVars = &planetShaderVars;
+	GL(shader->bind());
+	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
+	QVector<Vec3f> projectedVertsArray;
+	QVector<Vec3f> vertsArray;
+
+	survey->draw(painter, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices) {
+		projectedVertsArray.resize(verts.size());
+		vertsArray.resize(verts.size());
+		for (int i = 0; i < verts.size(); i++)
+		{
+			vertsArray[i] = Vec3f(verts[i][0], verts[i][1], verts[i][2]);
+			painter->getProjector()->project(vertsArray[i], projectedVertsArray[i]);
+		}
+		GL(shader->setAttributeArray(shaderVars->vertex, (const GLfloat*)projectedVertsArray.constData(), 3));
+		GL(shader->enableAttributeArray(shaderVars->vertex));
+		GL(shader->setAttributeArray(shaderVars->unprojectedVertex, (const GLfloat*)vertsArray.constData(), 3));
+		GL(shader->enableAttributeArray(shaderVars->unprojectedVertex));
+		GL(shader->setAttributeArray(shaderVars->texCoord, (const GLfloat*)tex.constData(), 2));
+		GL(shader->enableAttributeArray(shaderVars->texCoord));
+		GL(gl->glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.constData()));
+	});
 }
 
 Planet::PlanetOBJModel* Planet::loadObjModel() const
