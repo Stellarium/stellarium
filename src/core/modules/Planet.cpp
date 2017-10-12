@@ -279,6 +279,10 @@ Planet::Planet(const QString& englishName,
 	{
 		survey = new HipsSurvey("https://d3kq9k9p1609jy.cloudfront.net/surveys/jupiter");
 	}
+	if (englishName == "Saturn")
+	{
+		survey = new HipsSurvey("https://d3kq9k9p1609jy.cloudfront.net/surveys/saturn");
+	}
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -2151,6 +2155,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if (survey)
 		{
 			drawSurvey(core, sPainter);
+			drawSphere(sPainter, screenSz, true);
 		}
 		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
 		else if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
@@ -2510,7 +2515,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->setAttributeArray(shaderVars->texCoord, (const GLfloat*)model.texCoordArr.constData(), 2));
 	GL(shader->enableAttributeArray(shaderVars->texCoord));
 
-	if (rings)
+	if (rings && !drawOnlyRing)
 	{
 		painter->setDepthMask(true);
 		painter->setDepthTest(true);
@@ -2576,6 +2581,14 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 {
 	if (!Planet::initShader()) return;
+
+	painter->setDepthMask(true);
+	painter->setDepthTest(true);
+
+	// Backup transformation so that we can restore it later.
+	StelProjector::ModelViewTranformP transfo = painter->getProjector()->getModelViewTransform()->clone();
+	Vec4f color = painter->getColor();
+
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(radius * sphereScale));
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI / 2.0));
 
@@ -2603,6 +2616,10 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		GL(shader->enableAttributeArray(shaderVars->texCoord));
 		GL(gl->glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.constData()));
 	});
+
+	// Restore painter state.
+	painter->setProjector(core->getProjection(transfo));
+	painter->setColor(color[0], color[1], color[2], color[3]);
 }
 
 Planet::PlanetOBJModel* Planet::loadObjModel() const
