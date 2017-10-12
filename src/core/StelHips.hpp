@@ -25,6 +25,7 @@
 #include <QObject>
 #include <QCache>
 #include <QImage>
+#include <functional>
 
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
@@ -38,9 +39,10 @@ class HipsSurvey : public QObject
 {
 	Q_OBJECT
 public:
+	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices)> DrawCallback;
 	HipsSurvey(const QString& url);
 	virtual ~HipsSurvey();
-	void draw(StelPainter* sPainter);
+	void draw(StelPainter* sPainter, DrawCallback callback = NULL);
 	const QString& getUrl() const {return url;}
 
 private:
@@ -60,7 +62,7 @@ private:
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
-	void drawTile(int order, int pix, int drawOrder, int splitOrder, const SphericalCap& viewportShape, StelPainter* sPainter);
+	void drawTile(int order, int pix, int drawOrder, int splitOrder, const SphericalCap& viewportShape, StelPainter* sPainter, DrawCallback callback);
 
 	// Fill the array for a given tile.
 	int fillArrays(int order, int pix, int drawOrder, int splitOrder, StelPainter* sPainter,

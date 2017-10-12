@@ -117,7 +117,7 @@ bool HipsSurvey::getAllsky()
 	return !allsky.isNull();
 }
 
-void HipsSurvey::draw(StelPainter* sPainter)
+void HipsSurvey::draw(StelPainter* sPainter, HipsSurvey::DrawCallback callback)
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
@@ -151,7 +151,7 @@ void HipsSurvey::draw(StelPainter* sPainter)
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
 	for (int i = 0; i < 12; i++)
 	{
-		drawTile(0, i, drawOrder, splitOrder, viewportRegion, sPainter);
+		drawTile(0, i, drawOrder, splitOrder, viewportRegion, sPainter, callback);
 	}
 }
 
@@ -212,7 +212,7 @@ static bool isClipped(int n, double (*pos)[4])
 }
 
 
-void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, const SphericalCap& viewportShape, StelPainter* sPainter)
+void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, const SphericalCap& viewportShape, StelPainter* sPainter, DrawCallback callback)
 {
 	Vec3d pos;
 	Mat3d mat3;
@@ -294,15 +294,19 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, con
 	}
 	sPainter->setCullFace(true);
 	nb = fillArrays(order, pix, drawOrder, splitOrder, sPainter, vertsArray, texArray, indicesArray);
-	sPainter->setArrays(vertsArray.constData(), texArray.constData());
-	sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
+	if (!callback) {
+		sPainter->setArrays(vertsArray.constData(), texArray.constData());
+		sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
+	} else {
+		callback(vertsArray, texArray, indicesArray);
+	}
 
 skip_render:
 	// Draw the children.
 	if (order < drawOrder)
 	{
 		for (int i = 0; i < 4; i++)
-			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, viewportShape, sPainter);
+			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, viewportShape, sPainter, callback);
 		return;
 	}
 }
