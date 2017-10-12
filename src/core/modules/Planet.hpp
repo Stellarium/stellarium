@@ -485,7 +485,7 @@ protected:
 	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
 
 	// Draw the Hips survey.
-	void drawSurvey(StelPainter* painter);
+	void drawSurvey(StelCore* core, StelPainter* painter);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);

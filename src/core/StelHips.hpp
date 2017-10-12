@@ -42,7 +42,7 @@ public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices)> DrawCallback;
 	HipsSurvey(const QString& url);
 	virtual ~HipsSurvey();
-	void draw(StelPainter* sPainter, DrawCallback callback = NULL);
+	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = NULL);
 	const QString& getUrl() const {return url;}
 
 private:

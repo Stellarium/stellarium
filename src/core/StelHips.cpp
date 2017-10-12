@@ -117,7 +117,7 @@ bool HipsSurvey::getAllsky()
 	return !allsky.isNull();
 }
 
-void HipsSurvey::draw(StelPainter* sPainter, HipsSurvey::DrawCallback callback)
+void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
@@ -137,15 +137,13 @@ void HipsSurvey::draw(StelPainter* sPainter, HipsSurvey::DrawCallback callback)
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 90 / 2^L
 	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
-	const double anglePerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
+	double px = sPainter->getProjector()->getPixelPerRadAtCenter() * angle;
 	int tileWidth = getPropertyInt("hips_tile_width");
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	int order = getPropertyInt("hips_order");
-	const double maxAngle = anglePerPixel * tileWidth;
-	int drawOrder = (int)(log2(90. / maxAngle));
+	int drawOrder = ceil(log2(px / (4.0 * sqrt(2.0) * tileWidth)));
 	drawOrder = qBound(orderMin, drawOrder, order);
-	drawOrder = 1; // Test.
-	int splitOrder = 4; // Test.
+	int splitOrder = qMax(drawOrder, 4);
 
 	// Draw the 12 root tiles and their children.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();

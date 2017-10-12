@@ -2150,7 +2150,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (survey)
 		{
-			drawSurvey(sPainter);
+			drawSurvey(core, sPainter);
 		}
 		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
 		else if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
@@ -2573,7 +2573,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 
 // Draw the Hips survey.
-void Planet::drawSurvey(StelPainter* painter)
+void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 {
 	if (!Planet::initShader()) return;
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(radius * sphereScale));
@@ -2585,8 +2585,9 @@ void Planet::drawSurvey(StelPainter* painter)
 	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
+	double angle = getSpheroidAngularSize(core) * M_PI / 180.;
 
-	survey->draw(painter, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices) {
+	survey->draw(painter, angle, [&](const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices) {
 		projectedVertsArray.resize(verts.size());
 		vertsArray.resize(verts.size());
 		for (int i = 0; i < verts.size(); i++)
