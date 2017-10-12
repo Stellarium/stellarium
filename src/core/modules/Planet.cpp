@@ -2592,11 +2592,27 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
+	if (rings)
+	{
+		shader = ringPlanetShaderProgram;
+		shaderVars = &ringPlanetShaderVars;
+	}
+
 	GL(shader->bind());
 	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
 	QVector<Vec3f> projectedVertsArray;
 	QVector<Vec3f> vertsArray;
 	double angle = getSpheroidAngularSize(core) * M_PI / 180.;
+
+	if (rings)
+	{
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, false));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ring, true));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.outerRadius, rings->radiusMax));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.innerRadius, rings->radiusMin));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 2));
+		rings->tex->bind(2);
+	}
 
 	// Apply a rotation otherwize the hips surveys don't get rendered at the
 	// proper position.  Not sure why...
