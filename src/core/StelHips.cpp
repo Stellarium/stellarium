@@ -121,6 +121,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
+	bool outside = (angle == 2.0 * M_PI);
 	if (!parseProperties()) return;
 	if (!getAllsky()) return;
 
@@ -149,7 +150,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
 	for (int i = 0; i < 12; i++)
 	{
-		drawTile(0, i, drawOrder, splitOrder, viewportRegion, sPainter, callback);
+		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, callback);
 	}
 }
 
@@ -210,13 +211,12 @@ static bool isClipped(int n, double (*pos)[4])
 }
 
 
-void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, const SphericalCap& viewportShape, StelPainter* sPainter, DrawCallback callback)
+void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
+						  const SphericalCap& viewportShape, StelPainter* sPainter, DrawCallback callback)
 {
 	Vec3d pos;
 	Mat3d mat3;
-	// Vec2f uv[4] = {Vec2f(0, 0), Vec2f(1, 0), Vec2f(0, 1), Vec2f(1, 1)};
 	Vec2f uv[4] = {Vec2f(0, 0), Vec2f(0, 1), Vec2f(1, 0), Vec2f(1, 1)};
-	// unsigned short indices[6] = {0, 2, 1, 3, 1, 2};
 	HipsTile *tile;
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	QVector<Vec3d> vertsArray;
@@ -226,42 +226,45 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, con
 
 	healpix_pix2vec(1 << order, pix, pos.v);
 
-	// Check if the tile is visible.
-	if (0)
+	// Check if the tile is visible.  For outside survey (fullsky), we
+	// use bounding cap, otherwise we use proper tile clipping test.
+	if (outside)
 	{
 		SphericalCap boundingCap;
 		boundingCap.n = pos;
 		boundingCap.d = cos(M_PI / 2.0 / (1 << order));
 		if (!viewportShape.intersects(boundingCap)) return;
 	}
-
-	double clip_pos[4][4];
-	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
-	auto proj = sPainter->getProjector();
-	for (int i = 0; i < 4; i++)
+	else
 	{
-		pos = mat3 * Vec3d(1 - uv[i][1], uv[i][0], 1.0);
-		healpix_xy2vec(pos.v, pos.v);
-		proj->projectInPlace(pos);
-		pos[0] = (pos[0] - proj->getViewportCenter()[0]) / proj->getViewportWidth() * 2.0;
-		pos[1] = (pos[1] - proj->getViewportCenter()[1]) / proj->getViewportHeight() * 2.0;
-		clip_pos[i][0] = pos[0];
-		clip_pos[i][1] = pos[1];
-		clip_pos[i][2] = 0.0;
-		clip_pos[i][3] = 1.0;
-	}
-	if (isClipped(4, clip_pos)) return;
+		double clip_pos[4][4];
+		healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
+		auto proj = sPainter->getProjector();
+		for (int i = 0; i < 4; i++)
+		{
+			pos = mat3 * Vec3d(1 - uv[i][1], uv[i][0], 1.0);
+			healpix_xy2vec(pos.v, pos.v);
+			proj->projectInPlace(pos);
+			pos[0] = (pos[0] - proj->getViewportCenter()[0]) / proj->getViewportWidth() * 2.0;
+			pos[1] = (pos[1] - proj->getViewportCenter()[1]) / proj->getViewportHeight() * 2.0;
+			clip_pos[i][0] = pos[0];
+			clip_pos[i][1] = pos[1];
+			clip_pos[i][2] = 0.0;
+			clip_pos[i][3] = 1.0;
+		}
+		if (isClipped(4, clip_pos)) return;
 
-	// Also check the culling.
-	if (order > 0)
-	{
-		Vec2d u(clip_pos[1][0] - clip_pos[0][0], clip_pos[1][1] - clip_pos[0][1]);
-		Vec2d v(clip_pos[2][0] - clip_pos[0][0], clip_pos[2][1] - clip_pos[0][1]);
-		u.normalize();
-		v.normalize();
-		// XXX: the error (0.5) depends on the order: the higher the order
-		// the lower the error should be.
-		if (u[0] * v[1] - u[1] * v[0] > 0.5) return;
+		// Also check the culling.
+		if (order > 0)
+		{
+			Vec2d u(clip_pos[1][0] - clip_pos[0][0], clip_pos[1][1] - clip_pos[0][1]);
+			Vec2d v(clip_pos[2][0] - clip_pos[0][0], clip_pos[2][1] - clip_pos[0][1]);
+			u.normalize();
+			v.normalize();
+			// XXX: the error (0.5) depends on the order: the higher the order
+			// the lower the error should be.
+			if (u[0] * v[1] - u[1] * v[0] > 0.5) return;
+		}
 	}
 
 	if (order < orderMin)
@@ -292,7 +295,8 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, con
 		sPainter->setColor(1, 1, 1, 1);
 	}
 	sPainter->setCullFace(true);
-	nb = fillArrays(order, pix, drawOrder, splitOrder, sPainter, vertsArray, texArray, indicesArray);
+	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter,
+					vertsArray, texArray, indicesArray);
 	if (!callback) {
 		sPainter->setArrays(vertsArray.constData(), texArray.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, nb, 0, true, indicesArray.constData());
@@ -305,12 +309,14 @@ skip_render:
 	if (order < drawOrder)
 	{
 		for (int i = 0; i < 4; i++)
-			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, viewportShape, sPainter, callback);
+			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, outside,
+					 viewportShape, sPainter, callback);
 		return;
 	}
 }
 
-int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder, StelPainter* sPainter,
+int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
+						   bool outside, StelPainter* sPainter,
 						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
 	Mat3d mat3;
@@ -318,8 +324,9 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder, St
 	Vec2f texPos;
 	int gridSize = 1 << (splitOrder - drawOrder);
 	int n = gridSize + 1;
-	const int INDICES[6][2] = {
-		{0, 0}, {0, 1}, {1, 0}, {1, 1}, {1, 0}, {0, 1}
+	const int INDICES[2][6][2] = {
+		{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {1, 0}, {0, 1}},
+		{{0, 0}, {1, 0}, {1, 1}, {1, 1}, {0, 1}, {0, 0}},
 	};
 
 	healpix_get_mat3(1 << order, pix, (double(*)[3])mat3.r);
@@ -341,7 +348,8 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder, St
 		{
 			for (int k = 0; k < 6; k++)
 			{
-				indices << (INDICES[k][1] + i) * n + INDICES[k][0] + j;
+				indices << (INDICES[outside ? 1 : 0][k][1] + i) * n +
+					        INDICES[outside ? 1 : 0][k][0] + j;
 			}
 		}
 	}
