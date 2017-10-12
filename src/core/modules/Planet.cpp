@@ -1726,8 +1726,9 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 	return program;
 }
 
-void Planet::initShader()
+bool Planet::initShader()
 {
+	if (planetShaderProgram || shaderError) return !shaderError; // Already done.
 	qDebug() << "Initializing planets GL shaders... ";
 	shaderError = true;
 
@@ -1743,12 +1744,12 @@ void Planet::initShader()
 	if(vFileName.isEmpty())
 	{
 		qCritical()<<"Cannot find 'data/shaders/planet.vert', can't use planet rendering!";
-		return;
+		return false;
 	}
 	if(fFileName.isEmpty())
 	{
 		qCritical()<<"Cannot find 'data/shaders/planet.frag', can't use planet rendering!";
-		return;
+		return false;
 	}
 
 	QFile vFile(vFileName);
@@ -1757,7 +1758,7 @@ void Planet::initShader()
 	if(!vFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qCritical()<<"Cannot load planet vertex shader file"<<vFileName<<vFile.errorString();
-		return;
+		return false;
 	}
 	QByteArray vsrc = vFile.readAll();
 	vFile.close();
@@ -1765,7 +1766,7 @@ void Planet::initShader()
 	if(!fFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		qCritical()<<"Cannot load planet fragment shader file"<<fFileName<<fFile.errorString();
-		return;
+		return false;
 	}
 	QByteArray fsrc = fFile.readAll();
 	fFile.close();
@@ -1915,6 +1916,7 @@ void Planet::initShader()
 			objShaderProgram&&
 			objShadowShaderProgram&&
 			transformShaderProgram);
+	return true;
 }
 
 void Planet::deinitShader()

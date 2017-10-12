@@ -646,8 +646,8 @@ private:
 #endif
 	static unsigned int shadowTex;
 
-	
-	static void initShader();
+
+	static bool initShader();
 	static void deinitShader();
 	static bool initFBO();
 	static void deinitFBO();
