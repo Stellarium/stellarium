@@ -322,7 +322,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	{
 		if (smetal!=0)
 		{
-			oss << QString("%1 [Fe/H]: %2").arg(q_("Metallicity"), smetal) << "<br />";
+			oss << QString("%1 [Fe/H]: %2").arg(q_("Metallicity"), QString::number(smetal, 'f', 3)) << "<br />";
 		}
 		if (smass>0)
 		{
