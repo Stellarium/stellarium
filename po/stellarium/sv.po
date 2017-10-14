@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-08 11:05+0700\n"
-"PO-Revision-Date: 2017-10-07 21:12+0000\n"
+"POT-Creation-Date: 2017-10-10 20:27+0700\n"
+"PO-Revision-Date: 2017-10-13 21:15+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-08 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-10-14 05:13+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -23,7 +23,7 @@ msgstr "anpassat objekt"
 
 #: src/core/modules/CustomObject.cpp:80
 msgid "custom marker"
-msgstr "anpassad markering"
+msgstr "egen markör"
 
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:82 src/core/modules/Asterism.cpp:221
@@ -44,7 +44,7 @@ msgstr "Typ"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
-msgstr "Markering"
+msgstr "Markör"
 
 #: src/core/modules/Asterism.cpp:221
 msgid "asterism"
@@ -58,7 +58,7 @@ msgstr "asterism"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Display Options"
 msgstr "Visningsalternativ"
 
@@ -927,7 +927,7 @@ msgstr "Liten mörk fläck."
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:581
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr "En mörk eller ljus elongerad markering, som kan vara böjd eller rak."
+msgstr "En mörk eller ljus elongerad markör, som kan vara böjd eller rak."
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:585
@@ -1105,8 +1105,12 @@ msgstr "Månkännetecken vid eller nära Apollo-landningsplatser."
 msgid "Undocumented landform type."
 msgstr "Odokumenterad typ av landform."
 
+#: src/core/modules/NomenclatureItem.cpp:763
+msgid "latin name"
+msgstr ""
+
 #: src/core/modules/NomenclatureItem.cpp:773
-msgid "latin"
+msgid "latin term"
 msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:783
@@ -1131,7 +1135,11 @@ msgstr "km"
 msgid "Planetographic long./lat."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:793
+#: src/core/modules/NomenclatureItem.cpp:792
+msgid "Celestial body"
+msgstr ""
+
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Landform description"
 msgstr "Beskrivning av landform"
 
@@ -1902,7 +1910,7 @@ msgstr "Planetmarkörer"
 
 #: src/core/modules/SolarSystem.cpp:241
 msgid "Planet selection marker"
-msgstr "Planetmarkeringsmarkör"
+msgstr "Planetväljarmarkör"
 
 #: src/core/modules/SolarSystem.cpp:242
 msgid "Native planet names (from starlore)"
@@ -2106,7 +2114,7 @@ msgstr "Lägg till 100 stjärnår"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 synodic month"
-msgstr "Addera 1 synodisk månad"
+msgstr "Lägg till 1 synodisk månad"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 saros"
@@ -2114,15 +2122,15 @@ msgstr "Lägg till 1 saros"
 
 #: src/core/StelCore.cpp:279
 msgid "Add 1 draconic month"
-msgstr "Addera 1 drakmånad"
+msgstr "Lägg till 1 drakonisk månad"
 
 #: src/core/StelCore.cpp:280
 msgid "Add 1 draconic year"
-msgstr "Addera 1 drakår"
+msgstr "Lägg till 1 drakoniskt år"
 
 #: src/core/StelCore.cpp:281
 msgid "Add 1 anomalistic month"
-msgstr "Addera 1 anomalistisk månad"
+msgstr "Lägg till 1 anomalistisk månad"
 
 #: src/core/StelCore.cpp:282
 msgid "Add 1 anomalistic year"
@@ -2134,11 +2142,11 @@ msgstr "Lägg till 100 anomalistiskt år"
 
 #: src/core/StelCore.cpp:284
 msgid "Add 1 mean tropical month"
-msgstr "Addera 1 genomsnittlig tropisk månad"
+msgstr "Lägg till 1 medeltropisk månad"
 
 #: src/core/StelCore.cpp:285
 msgid "Add 1 mean tropical year"
-msgstr "Addera 1 genomsnittligt tropiskt år"
+msgstr "Lägg till 1 medeltropiskt år"
 
 #: src/core/StelCore.cpp:286
 msgid "Add 100 mean tropical years"
@@ -2178,7 +2186,7 @@ msgstr "Dra ifrån 100 stjärnår"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 1 synodic month"
-msgstr "Subtrahera 1 synodisk månad"
+msgstr "Dra ifrån 1 synodisk månad"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 saros"
@@ -2186,15 +2194,15 @@ msgstr "Dra ifrån 1 saros"
 
 #: src/core/StelCore.cpp:297
 msgid "Subtract 1 draconic month"
-msgstr "Subtrahera 1 drakmånad"
+msgstr "Dra ifrån 1 drakonisk månad"
 
 #: src/core/StelCore.cpp:298
 msgid "Subtract 1 draconic year"
-msgstr "Subtrahera 1 drakår"
+msgstr "Dra ifrån 1 drakoniskt år"
 
 #: src/core/StelCore.cpp:299
 msgid "Subtract 1 anomalistic month"
-msgstr "Subtrahera 1 anomalistisk månad"
+msgstr "Dra ifrån 1 anomalistisk månad"
 
 #: src/core/StelCore.cpp:300
 msgid "Subtract 1 anomalistic year"
@@ -2206,11 +2214,11 @@ msgstr "Dra ifrån 100 anomalistiskt år"
 
 #: src/core/StelCore.cpp:302
 msgid "Subtract 1 mean tropical month"
-msgstr "Subtrahera 1 genomsnittlig tropisk månad"
+msgstr "Dra ifrån 1 medeltropisk månad"
 
 #: src/core/StelCore.cpp:303
 msgid "Subtract 1 mean tropical year"
-msgstr "Subtrahera 1 genomsnittligt tropiskt år"
+msgstr "Dra ifrån 1 medeltropiskt år"
 
 #: src/core/StelCore.cpp:304
 msgid "Subtract 100 mean tropical years"
@@ -2248,13 +2256,13 @@ msgstr "Vänd scenen horisontellt"
 msgid "Flip scene vertically"
 msgstr "Vänd scenen vertikalt"
 
-#: src/core/StelCore.cpp:2224
+#: src/core/StelCore.cpp:2242
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korrigering är inaktiverad! Använd endast om är säker på att du vet vad du "
 "gör!"
 
-#: src/core/StelCore.cpp:2227
+#: src/core/StelCore.cpp:2245
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -2265,7 +2273,7 @@ msgstr ""
 "Henriksson i artikeln <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). Läs mer %2här%3."
 
-#: src/core/StelCore.cpp:2230
+#: src/core/StelCore.cpp:2248
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2274,7 +2282,7 @@ msgstr ""
 "Denna empiriska ekvation publicerades av G. M. Clemence i artikeln <em>On "
 "the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2233
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2287,7 +2295,7 @@ msgstr ""
 "användes av Jean Meeus i boken <em>Astronomical Formulae for "
 "Calculators</em> (1988) och i datorprogrammet SunTracker Pro."
 
-#: src/core/StelCore.cpp:2237
+#: src/core/StelCore.cpp:2255
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -2297,7 +2305,7 @@ msgstr ""
 "böckerna <em>Astronomical Ephemeris</em> och <em>Canon of Solar "
 "Eclipses</em> av Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2259
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -2308,7 +2316,7 @@ msgstr ""
 "planeterna vid 5- och 10-dagarsintervaller från 601 f.v.t. till 1649 e.v.t. "
 "Samma förhållande antogs även indirekt i Goldstines syzygytabeller (1973)."
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2263
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2319,7 +2327,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2248
+#: src/core/StelCore.cpp:2266
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2328,7 +2336,7 @@ msgstr ""
 "Denna ekvation publicerades av F. R. Stephenson i artikeln <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2269
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2342,7 +2350,7 @@ msgstr ""
 "period 1800-1975</em> (%1) efter att ha prövats och anpassats m.h.a. data "
 "från Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2254
+#: src/core/StelCore.cpp:2272
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2352,7 +2360,7 @@ msgstr ""
 "Tables from -4000 to +2800</em> (1986) och i planetariumdatorprogrammet "
 "RedShift."
 
-#: src/core/StelCore.cpp:2257
+#: src/core/StelCore.cpp:2275
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2363,11 +2371,11 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2260
+#: src/core/StelCore.cpp:2278
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Denna algoritm används i planetariumdatorprogrammet Guide 7."
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2281
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2377,7 +2385,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) och <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2386,7 +2394,7 @@ msgstr ""
 "Denna formel togs fram av K.M. Borkowski (%1) utifrån en analys av 31 "
 "registrerade solförmörkelser mellan 2137 f.v.t. och 1715 e.v.t."
 
-#: src/core/StelCore.cpp:2269
+#: src/core/StelCore.cpp:2287
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2399,7 +2407,7 @@ msgstr ""
 "Period 1800-1988</em> (%1) eftr att ha prövats och anpassats m.h.a. "
 "datavärden från Stephenson & Morrison (1984)."
 
-#: src/core/StelCore.cpp:2272
+#: src/core/StelCore.cpp:2290
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2409,7 +2417,7 @@ msgstr ""
 "version av månrörelseteorin ELP2000-85, publicerad som en del av <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2293
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2420,7 +2428,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2296
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2429,7 +2437,7 @@ msgstr ""
 "F. R. Stephenson publicerade denna formel i boken <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2281
+#: src/core/StelCore.cpp:2299
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2439,7 +2447,7 @@ msgstr ""
 "använd. Tabell för 1620-2000 och innefattar en variant av Chapront, Chapront-"
 "Touze & Francou (1997) för datum utanför 1620-2000."
 
-#: src/core/StelCore.cpp:2284
+#: src/core/StelCore.cpp:2302
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2448,7 +2456,7 @@ msgstr ""
 "JPL Solar System Dynamics Group vid NASA Jet Propulsion Laboratory använder "
 "denna formel på sin interaktiva webbplats %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2305
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2457,7 +2465,7 @@ msgstr ""
 "Detta polynom publicerades av J. Meeus & L. Simons i artikeln <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2308
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -2467,7 +2475,7 @@ msgstr ""
 "Montenbruck & T. Pfleger, 2000) tillhandahåller enkla dataanpassningar för "
 "tredjegradspolynom för en nära dåtid."
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2311
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2479,7 +2487,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Den baseras på Jean Meeus "
 "<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2314
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -2490,7 +2498,7 @@ msgstr ""
 "artikeln <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) med tillägg i (%3)."
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2317
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2503,7 +2511,7 @@ msgstr ""
 "med en cosinus- och andragradsfunktion. Detta är baserat på en möjlig "
 "periodicitet, som beskrivs av Stephenson (%2). Läs mer %3här%4."
 
-#: src/core/StelCore.cpp:2302 src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2320 src/core/StelCore.cpp:2323
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2518,15 +2526,15 @@ msgstr ""
 "Canon of Solar Eclipses: -1900 to +3000</em> (2006). Formeln används även i "
 "ett efemeridprogram för solen, månen och planeterna, kallat SOLEX."
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2320
 msgid "Used by default."
 msgstr "Används som standard."
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2323
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "PATCHAD VERSION UTAN TILLAGD MÅNACCELERATION"
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2537,7 +2545,7 @@ msgstr ""
 "publiserad i artikeln <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2548,7 +2556,7 @@ msgstr ""
 "(2000), publiserad i artikeln <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) och uppdaterad av Sana Islam i 2013."
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2332
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2559,7 +2567,7 @@ msgstr ""
 "Mariam Sultana och Faheem Zaidi publicerades i <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2335
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -2572,7 +2580,7 @@ msgstr ""
 "2015</em> (%1). Utanför det angivna intervallet (modellerat med en spline-"
 "form) ger värden från en ungefärlig parabola."
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2338
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -2581,11 +2589,11 @@ msgstr ""
 "Det här är en andragradsfunktion för beräkning av %1T, där koefficienterna "
 "definieras av användaren."
 
-#: src/core/StelCore.cpp:2323 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2341 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Fel"
 
-#: src/core/StelCore.cpp:2331
+#: src/core/StelCore.cpp:2349
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2594,17 +2602,17 @@ msgstr ""
 "Lösningensvärdes av %1 för %2 (sekulär acceleration av månen) kräver en "
 "anpassning, se Guide för detaljer."
 
-#: src/core/StelCore.cpp:2372
+#: src/core/StelCore.cpp:2390
 msgid "with zero values outside this range"
 msgstr "med noll och inga värden utanför detta intervall"
 
-#: src/core/StelCore.cpp:2375
+#: src/core/StelCore.cpp:2393
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "med en typisk noggrannhet på 1 sekund samt noll och inga värden utanför "
 "detta intervall"
 
-#: src/core/StelCore.cpp:2378
+#: src/core/StelCore.cpp:2396
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2612,16 +2620,16 @@ msgstr ""
 "Med ett genomsnittligt fel på mindre än en sekund, max. fel 1,9s och värden "
 "för gränsåren utanför detta intervall"
 
-#: src/core/StelCore.cpp:2385
+#: src/core/StelCore.cpp:2403
 msgid "with values for the limit years outside this range"
 msgstr "Med värden för gränsåren utanför detta intervall"
 
-#: src/core/StelCore.cpp:2395
+#: src/core/StelCore.cpp:2413
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Giltigt tidsintervall: mellan år %1 och %2, %3."
 
-#: src/core/StelCore.cpp:2397
+#: src/core/StelCore.cpp:2415
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Giltigt tidsintervall: mellan år %1 och %2."
@@ -2830,7 +2838,7 @@ msgid "Deep-sky objects background images"
 msgstr "Bakgrundsbilder för djuprymdsobjekt"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:774 src/StelMainView.cpp:775
+#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
 msgid "Miscellaneous"
 msgstr "Diverse"
 
@@ -3208,7 +3216,7 @@ msgstr "Khalid, Sultana & Zaidi (2014)"
 #: src/gui/ConfigurationDialog.cpp:1527
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr "Anpassad ekvation av %1T"
+msgstr "Anpassad ekvation till %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1576 src/gui/ConfigurationDialog.cpp:1611
 #: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:426
@@ -3317,7 +3325,7 @@ msgstr "Vänsterklick"
 
 #: src/gui/HelpDialog.cpp:177
 msgid "Clear selection"
-msgstr "Töm markering"
+msgstr "Avmarkera allt"
 
 #: src/gui/HelpDialog.cpp:179
 msgid "Ctrl & left click"
@@ -3329,7 +3337,7 @@ msgstr "Högerklick"
 
 #: src/gui/HelpDialog.cpp:184
 msgid "Add custom marker"
-msgstr "Lägg till anpassad markör"
+msgstr "Lägg till egen markör"
 
 #: src/gui/HelpDialog.cpp:185
 msgid "Shift & left click"
@@ -3345,7 +3353,7 @@ msgstr "Shift & högerklicka"
 
 #: src/gui/HelpDialog.cpp:190
 msgid "Delete all custom markers"
-msgstr "Radera alla anpassade markörer"
+msgstr "Radera alla egna markörer"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Shift & Alt & right click"
@@ -3594,7 +3602,7 @@ msgstr "Tidszon"
 
 #: src/gui/StelGuiItems.cpp:649 src/gui/LocationDialog.cpp:424
 msgid "Local Mean Solar Time"
-msgstr "Lokal genomsnittlig soltid"
+msgstr "Lokal medelsoltid"
 
 #: src/gui/StelGuiItems.cpp:652 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
@@ -3749,7 +3757,7 @@ msgstr "Standardfrekvens för orionider"
 
 #: src/gui/ViewDialog.cpp:1528
 msgid "Standard Perseids rate"
-msgstr "Standard-Perseid-mängd"
+msgstr "Standard-perseid-mängd"
 
 #: src/gui/ViewDialog.cpp:1530
 msgid "Standard Geminids rate"
@@ -4897,19 +4905,19 @@ msgstr "Skript"
 msgid "Shortcut"
 msgstr "Kortkommando"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:767
 msgid "Save screenshot"
 msgstr "Spara skärmbild"
 
-#: src/StelMainView.cpp:775
+#: src/StelMainView.cpp:768
 msgid "Reload shaders (for development)"
 msgstr "Ladda shaders igen (för utveckling)"
 
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Full-screen mode"
 msgstr "Helskärmsläge"
 
-#: src/StelMainView.cpp:932
+#: src/StelMainView.cpp:925
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4917,13 +4925,13 @@ msgstr ""
 "Bristfällig version av OpenGL. Var god uppdatera drivrutiner, grafikhårdvara "
 "och använd -angle-mode (eller -mesa-mode)."
 
-#: src/StelMainView.cpp:935
+#: src/StelMainView.cpp:928
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Otillräcklig OpenGL-version. Uppdatera drivrutiner eller grafikhårdvara."
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:970
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4934,7 +4942,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1028
+#: src/StelMainView.cpp:1021
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4945,7 +4953,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1084
+#: src/StelMainView.cpp:1077
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4955,7 +4963,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1125
+#: src/StelMainView.cpp:1118
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4966,7 +4974,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1237
+#: src/StelMainView.cpp:1230
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5054,7 +5062,7 @@ msgstr "Stjärnbilder"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:90
 msgid "Custom Objects"
-msgstr "Anpassade objekt"
+msgstr "Egna objekt"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:92
@@ -5296,213 +5304,220 @@ msgstr "Grossmugl"
 msgid "Zero Horizon"
 msgstr "Matematisk horisont"
 
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:313 plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
+msgid "Sun"
+msgstr "Sol"
+
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:316
+#: src/translations.h:318
 msgid "Vienna Sterngarten"
 msgstr "Wiens Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:318
+#: src/translations.h:320
 msgid "Testscene"
 msgstr "Testscen"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Landscape Tour"
 msgstr "Landskapsrundtur"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Partial Lunar Eclipse"
 msgstr "Partiell månförmörkelse"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Total Lunar Eclipse"
 msgstr "Total månförmörkelse"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar Eclipse 2009"
 msgstr "Solförmörkelse 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Startup Script"
 msgstr "Programstartsskript"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Zodiac"
 msgstr "Zodiaken"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Merkurius soluppgång & solnedgång x3"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dubbelförmörkelse från Deimos 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dubbelförmörkelse från Deimos 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Förmörkelse från Olympus Mons 10 jan 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Ockultation av jorden och Jupiter 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 passager & 2 förmörkelser från Deimos 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid "Solar System Screensaver"
 msgstr "Skärmsläckare – Solsystemet"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Constellations Tour"
 msgstr "Stjärnbildsrundtur"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Sun from different planets"
 msgstr "Solen från olika planeter"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth best views from other bodies"
 msgstr "Bästa utsikt över jorden från andra himlakroppar"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Transit of Venus"
 msgstr "Venuspassage"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Sky Culture Tour"
 msgstr "Stjärnbildsmytologisk rundtur"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "Earth Events from Mercury"
 msgstr "Jordhändelser sett från Merkurius"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "Earth Events from a floating city on Venus"
 msgstr "Jordhändelser sett från en flytande stad på Venus"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Earth Events from Mars"
 msgstr "Jordhändelser sett från Mars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 "Jordens och andra planeters största elongation och opposition från Mars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Jordens och Mars största elongationer och ljusstyrkor från Callisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Tycho's Supernova"
 msgstr "Tychos supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:373
+#: src/translations.h:375
 msgid "Earth and other Planets from Ceres"
 msgstr "Jorden och andra planeter från Ceres"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:375
+#: src/translations.h:377
 msgid "Messier Objects Tour"
 msgstr "Tur kring Messierobjekt"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Binocular Highlights"
 msgstr "Kikarens höjdpunkter"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 dubbelstjärnor för blotta ögat"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "List of largest known stars"
 msgstr "Lista över de största kända stjärnorna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:383
+#: src/translations.h:385
 msgid "Herschel 400 Tour"
 msgstr "Tur kring Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:385
+#: src/translations.h:387
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Djuprymdsobjekt för kikaren"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:387
+#: src/translations.h:389
 msgid "The Jack Bennett Catalog"
 msgstr "Jack Bennetts katalog"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Best objects in the New General Catalog"
 msgstr "De bästa objekten i New General Catalog"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Look around each installed landscape."
 msgstr "Se dig omkring i alla installerade landskap."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "Look at each installed sky culture."
 msgstr "En översikt över alla installerade stjärnbildsmytologier."
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript för att visa en partiell månförmörkelse."
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript för att visa en total månförmörkelse."
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "En långsam, oändlig rundtur på himlavalvet där du tittar på slumpmässiga "
 "objekt."
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -5510,11 +5525,11 @@ msgstr ""
 "Skript som visar en total solförmörkelse som inträffade 2009 (plats: Rangpur "
 "i Bangladesh)."
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Script which runs automatically at startup"
 msgstr "Skript som körs automatiskt vid programstart"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -5523,7 +5538,7 @@ msgstr ""
 "Detta skript visar stjärnbilderna i zodiaken. Det innebär att stjärnbilderna "
 "som ligger längs den bara som solen följer över himlavalvet under året."
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -5531,7 +5546,7 @@ msgstr ""
 "På grund av Merkurius speciella kretslopp och rotation kommer solen att gå "
 "upp och gå ner vid 3 olika tillfällen och platser under samma dygn."
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -5539,7 +5554,7 @@ msgstr ""
 "Precis innan Mars förmörkar solen tittar Phobos fram och hinner förmörka "
 "solen före Mars. Detta sker mellan Skorpionen och Skytten den 26 april 2017."
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -5547,11 +5562,11 @@ msgstr ""
 "Precis innan Mars förmörkar solen tittar Phobos fram och hinner förmörka "
 "solen före Mars. Detta sker mellan Oxen och Tvillingarna den 23 juli 2031."
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "Phobos förmörkar solen, betraktat från Olympus Mons den 10 jan 2068."
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -5561,7 +5576,7 @@ msgstr ""
 "Jupiter. Men förmörkelser av båda på samma dag är väldigt sällsynta. Här är "
 "en som inträffar 2048-01-23, i verklig hastighet."
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -5577,34 +5592,34 @@ msgstr ""
 "Phobos framträder från Mars är den fortfarande förmörkad och kan ses svagt i "
 "Mars skugga, den lyser inte upp förrän senare."
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 "Skärmsläckare av olika händelser i solsystemet. 287 händelser sammanlagt!"
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "A tour of the western constellations."
 msgstr "En genomgång av de västerländska stjärnbilderna."
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Titta på solen från Pluto och de stora planterna i solsystemet."
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "De bästa vyerna över jordklotet från andra kroppar i solsystemet under 2000-"
 "talet."
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Venuspassagen som den såg ut från Sydney i Australien på Sveriges "
 "nationaldag den 6 juni 2012."
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -5612,7 +5627,7 @@ msgstr ""
 "Skenet från supernovan som Tycho Brahe observerade år 1572. "
 "Supernoveinsticksmodulen måste vara aktiverad."
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
@@ -5620,7 +5635,7 @@ msgstr ""
 "Jordens och andra planeters största elongationer och oppositioner från Mars "
 "år 2000-3000"
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -5632,7 +5647,7 @@ msgstr ""
 "helt utanför Jupiters strålningsbälte. Om människan någonsin skulle "
 "kolonisera Jupiters månar skulle man välja Callisto."
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
@@ -5640,11 +5655,11 @@ msgstr ""
 "Jordens och andra planeters största elongationer och oppositioner från Ceres "
 "år 2000-3000"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "A tour of Messier Objects"
 msgstr "En tur över Messierobjekten"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -5653,7 +5668,7 @@ msgstr ""
 "Tur kring intressanta objekt som är synliga i kikare. Data för scriptet har "
 "tagits från boken av Gary Seronik med samma namn."
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -5664,17 +5679,17 @@ msgstr ""
 "i september 2014. Data är taget från hans hemsida, "
 "http://www.astropix.com/doubles/"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Detta skript hjälper dig att göra en utflykt runt de största kända "
 "stjärnorna."
 
-#: src/translations.h:423
+#: src/translations.h:425
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "En tur rund objekt från Herschel 400-katalogen"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -5684,7 +5699,7 @@ msgstr ""
 "djuprymdsobjekt för kikare. I skriptet ger vi dig en lista över dessa 31 "
 "objekt, ordnade efter rektascention (2000.0)."
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -5692,7 +5707,7 @@ msgstr ""
 "Jack Bennett-katalogen över sydliga djuprymdsobjekt (152 totalt). Auke "
 "Slotegraaf bidrog till katalogen."
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -5702,180 +5717,180 @@ msgstr ""
 "astronomiklubbs medlemmar i Phoenix, Arizona, för priset av bästa NGC-"
 "prestation."
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "&Undo"
 msgstr "&Ångra"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "&Redo"
 msgstr "&Gör om"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Cu&t"
 msgstr "Klipp u&t"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "&Copy"
 msgstr "&Kopiera"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Paste"
 msgstr "&Klistra in"
 
-#: src/translations.h:435 plugins/Oculars/src/ui_ocularDialog.h:1170
+#: src/translations.h:437 plugins/Oculars/src/ui_ocularDialog.h:1170
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
 #: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Delete"
 msgstr "Ta bort"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "Select All"
 msgstr "Markera alla"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Look in:"
 msgstr "Leta i:"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Directory:"
 msgstr "Katalog:"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Folder"
 msgstr "Mapp"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Choose"
 msgstr "&Välj"
 
-#: src/translations.h:441 src/ui_configurationDialog.h:1532
+#: src/translations.h:443 src/ui_configurationDialog.h:1532
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:619
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Cancel"
 msgstr "&Avbryt"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Files of type:"
 msgstr "Filer av typen:"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Date Modified"
 msgstr "Ändringsdatum"
 
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Directories"
 msgstr "Kataloger"
 
-#: src/translations.h:446
+#: src/translations.h:448
 msgid "Computer"
 msgstr "Dator"
 
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "&Open"
 msgstr "&Öppna"
 
-#: src/translations.h:448
+#: src/translations.h:450
 msgid "&Save"
 msgstr "&Spara"
 
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "File &name:"
 msgstr "Fil&namn:"
 
-#: src/translations.h:450
+#: src/translations.h:452
 msgid "Copy &Link Location"
 msgstr "Kopiera &Länka plats"
 
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Abort"
 msgstr "Avbryt"
 
-#: src/translations.h:452
+#: src/translations.h:454
 msgid "Ignore"
 msgstr "Ignorera"
 
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "&Basic colors"
 msgstr "&Basfärger"
 
-#: src/translations.h:454
+#: src/translations.h:456
 msgid "&Pick Screen Color"
 msgstr "&Välj skrämfärg"
 
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "&Custom colors"
 msgstr "&Anpassade färger"
 
-#: src/translations.h:456
+#: src/translations.h:458
 msgid "&Add to Custom Colors"
 msgstr "&Lägg till i anpassade färger"
 
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Hu&e:"
 msgstr "&Färgton:"
 
-#: src/translations.h:458
+#: src/translations.h:460
 msgid "&Sat:"
 msgstr "&Färgmättnad:"
 
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "&Val:"
 msgstr "&Valör:"
 
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "&Red:"
 msgstr "&Röd:"
 
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "&Green:"
 msgstr "&Grön:"
 
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Bl&ue:"
 msgstr "&Blå:"
 
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Select Color"
 msgstr "Välj färg"
 
-#: src/translations.h:464
+#: src/translations.h:466
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Pekare vid %1, %2 Tryck Esc för att avbryta"
 
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Back"
 msgstr "Bakåt"
 
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Forward"
 msgstr "Framåt"
 
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Parent Directory"
 msgstr "Överliggande katalog"
 
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Create New Folder"
 msgstr "Skapa ny mapp"
 
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "List View"
 msgstr "Listvy"
 
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Detail View"
 msgstr "Detaljvy"
 
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Recent Places"
 msgstr "Senaste platser"
 
-#: src/translations.h:472
+#: src/translations.h:474
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -5884,11 +5899,11 @@ msgstr ""
 "%1 finns redan.\n"
 "Vill du ersätta den?"
 
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "&Yes"
 msgstr "&Ja"
 
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "&No"
 msgstr "&Nej"
 
@@ -8794,7 +8809,7 @@ msgstr "Utdata"
 
 #: src/ui_scriptConsole.h:377
 msgid "Cursor position"
-msgstr "Markörposition"
+msgstr "Pekarposition"
 
 #: src/ui_scriptConsole.h:379
 msgid "Include dir:"
@@ -8910,11 +8925,11 @@ msgstr "Visa positionsmarkörer för nuvarande himlakropp på himlen"
 
 #: src/ui_astroCalcDialog.h:824
 msgid "Show markers"
-msgstr "Visa markeringar"
+msgstr "Visa markörer"
 
 #: src/ui_astroCalcDialog.h:826
 msgid "Show dates of positions of current celestial body near markers"
-msgstr "Visa datum för himlakroppens positioner nära markeringarna"
+msgstr "Visa datum för himlakroppens positioner nära markörerna"
 
 #: src/ui_astroCalcDialog.h:828
 msgid "Show dates"
@@ -9031,11 +9046,11 @@ msgstr "Anpassa färger"
 
 #: src/ui_dsoColorsDialog.h:538
 msgid "Colors of labels and markers of deep-sky objects"
-msgstr "Färg på etiketter och markeringar för djuprymdsobjekt"
+msgstr "Färg på etiketter och markörer för djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:540
 msgid "Color of markers of dark nebulae"
-msgstr "Färg på markeringar för mörka nebulosor"
+msgstr "Färg på markörer till mörka nebulosor"
 
 #: src/ui_dsoColorsDialog.h:546
 msgid "Clusters with neb."
@@ -9043,11 +9058,11 @@ msgstr "Hopar med nebulositet"
 
 #: src/ui_dsoColorsDialog.h:550
 msgid "Color of markers of open star clusters"
-msgstr "Färg på markeringar för öppna stjärnhopar"
+msgstr "Färg på markörer till öppna stjärnhopar"
 
 #: src/ui_dsoColorsDialog.h:553
 msgid "Color of markers of stellar associations"
-msgstr "Färg på markeringar för stjärnföreningar"
+msgstr "Färg på markörer till stjärnföreningar"
 
 #: src/ui_dsoColorsDialog.h:558
 msgid "Possible planetary nebulae"
@@ -9063,35 +9078,35 @@ msgstr "Färg på etiketter för djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:566
 msgid "Color of markers of interacting galaxies"
-msgstr "Färg på markeringar för interagerande galaxer"
+msgstr "Färg på markörer till interagerande galaxer"
 
 #: src/ui_dsoColorsDialog.h:569
 msgid "Color of markers of clusters associated with nebulosity"
-msgstr "Färg på markeringar för hopar förenade med nebulositet"
+msgstr "Färg på markörer till hopar förenade med nebulositet"
 
 #: src/ui_dsoColorsDialog.h:573
 msgid "Color of markers of young stellar objects"
-msgstr "Färg på markeringar för unga stjärnobjekt"
+msgstr "Färg på markörer till unga stjärnobjekt"
 
 #: src/ui_dsoColorsDialog.h:576
 msgid "Color of markers of protoplanetary nebulae"
-msgstr "Färg på markeringar för protoplanetariska nebulosor"
+msgstr "Färg på markörer till protoplanetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:579
 msgid "Color of markers of possible planetary nebulae"
-msgstr "Färg på markeringar för möjliga planetariska nebulosor"
+msgstr "Färg på markörer till möjliga planetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of possible quasars"
-msgstr "Färg på markeringar till möjliga kvasarer"
+msgstr "Färg på markörer till möjliga kvasarer"
 
 #: src/ui_dsoColorsDialog.h:585
 msgid "Color of markers of star clusters"
-msgstr "Färg på markeringar till stjärnhopar"
+msgstr "Färg på markörer till stjärnhopar"
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of supernova remnants"
-msgstr "Färg på markeringar till supernovarester"
+msgstr "Färg på markörer till supernovarester"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Possible quasars"
@@ -9099,23 +9114,23 @@ msgstr "Möjliga kvasarer"
 
 #: src/ui_dsoColorsDialog.h:593
 msgid "Color of markers of blazars"
-msgstr "Färg på markeringar till blasarer"
+msgstr "Färg på markörer till blasarer"
 
 #: src/ui_dsoColorsDialog.h:597
 msgid "Color of markers of quasars"
-msgstr "Färg på markeringar till kvasarer"
+msgstr "Färg på markörer till kvasarer"
 
 #: src/ui_dsoColorsDialog.h:600
 msgid "Color of markers of emission nebulae"
-msgstr "Färg på markeringar till emissionsnebulosor"
+msgstr "Färg på markörer till emissionsnebulosor"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Color of markers of reflection nebulae"
-msgstr "Färg på markeringar till reflektionsnebulosor"
+msgstr "Färg på markörer till reflektionsnebulosor"
 
 #: src/ui_dsoColorsDialog.h:606
 msgid "Color of markers of star clouds"
-msgstr "Färg på markeringar till stjärnmoln"
+msgstr "Färg på markörer till stjärnmoln"
 
 #: src/ui_dsoColorsDialog.h:609
 msgid "Labels of deep-sky objects"
@@ -9135,35 +9150,35 @@ msgstr "Molekylmoln"
 
 #: src/ui_dsoColorsDialog.h:619
 msgid "Color of markers of symbiotic stars"
-msgstr "Färg på markeringar till symbiotiska stjärnor"
+msgstr "Färg på markörer till symbiotiska stjärnor"
 
 #: src/ui_dsoColorsDialog.h:623
 msgid "Color of markers of molecular clouds"
-msgstr "Färg på markeringar till molekylmoln"
+msgstr "Färg på markörer till molekylmoln"
 
 #: src/ui_dsoColorsDialog.h:627
 msgid "Color of markers of interstellar matter"
-msgstr "Färg på markeringar till interstellär materia"
+msgstr "Färg på markörer till interstellär materia"
 
 #: src/ui_dsoColorsDialog.h:631
 msgid "Color of markers of hydrogen regions"
-msgstr "Färg på markeringar till väteregioner"
+msgstr "Färg på markörer till väteregioner"
 
 #: src/ui_dsoColorsDialog.h:634
 msgid "Color of markers of radio galaxies"
-msgstr "Färg på markeringar till radiogalaxer"
+msgstr "Färg på markörer till radiogalaxer"
 
 #: src/ui_dsoColorsDialog.h:638
 msgid "Color of markers of stars"
-msgstr "Färg på markeringar till stjärnor"
+msgstr "Färg på markörer till stjärnor"
 
 #: src/ui_dsoColorsDialog.h:641
 msgid "Color of markers of nebulae"
-msgstr "Färg på markeringar till nebulosor"
+msgstr "Färg på markörer till nebulosor"
 
 #: src/ui_dsoColorsDialog.h:645
 msgid "Color of markers of bipolar nebulae"
-msgstr "Färg på markeringar till bipolära nebulosor"
+msgstr "Färg på markörer till bipolära nebulosor"
 
 #: src/ui_dsoColorsDialog.h:647 plugins/Quasars/src/Quasars.cpp:72
 #: plugins/Quasars/src/Quasars.cpp:170 plugins/Quasars/src/Quasars.cpp:171
@@ -9172,15 +9187,15 @@ msgstr "Kvasarer"
 
 #: src/ui_dsoColorsDialog.h:649
 msgid "Color of markers of emission-line stars"
-msgstr "Färg på markeringar till emissionslinjestjärnor"
+msgstr "Färg på markörer till emissionslinjestjärnor"
 
 #: src/ui_dsoColorsDialog.h:654
 msgid "Color of markers of emission objects"
-msgstr "Färg på markeringar till emissionsobjekt"
+msgstr "Färg på markörer till emissionsobjekt"
 
 #: src/ui_dsoColorsDialog.h:657
 msgid "Color of markers of deep-sky objects"
-msgstr "Färg på markeringar till djuprymdsobjekt"
+msgstr "Färg på markörer till djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:661
 msgid "Protoplanetary nebulae"
@@ -9188,43 +9203,43 @@ msgstr "Protoplanetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:663
 msgid "Color of markers of active galaxies"
-msgstr "Färg på markeringar till aktiva galaxer"
+msgstr "Färg på markörer till aktiva galaxer"
 
 #: src/ui_dsoColorsDialog.h:666
 msgid "Markers of deep-sky objects"
-msgstr "Markeringar till djuprymdsobjekt"
+msgstr "Markörer till djuprymdsobjekt"
 
 #: src/ui_dsoColorsDialog.h:668
 msgid "Markers of DSOs"
-msgstr "Markeringar till DSO"
+msgstr "Markörer till DSO"
 
 #: src/ui_dsoColorsDialog.h:672
 msgid "Color of markers of galaxies"
-msgstr "Färg på markeringar till galaxer"
+msgstr "Färg på markörer till galaxer"
 
 #: src/ui_dsoColorsDialog.h:676
 msgid "Color of markers of planetary nebulae"
-msgstr "Färg på markeringar till planetariska nebulosor"
+msgstr "Färg på markörer till planetariska nebulosor"
 
 #: src/ui_dsoColorsDialog.h:681
 msgid "Color of markers of globular star clusters"
-msgstr "Färg på markeringar till klotformiga stjärnhopar"
+msgstr "Färg på markörer till klotformiga stjärnhopar"
 
 #: src/ui_dsoColorsDialog.h:684
 msgid "Color of markers of BL Lac objects"
-msgstr "Färg på markeringar till BL Lac-objekt"
+msgstr "Färg på markörer till BL Lac-objekt"
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr "Färg på markeringar till supernovakandidater"
+msgstr "Färg på markörer till supernovakandidater"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr "Färg på markeringar till supernovarestkandidater"
+msgstr "Färg på markörer till supernovarestkandidater"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
-msgstr "Färg på markeringar till galaxhopar"
+msgstr "Färg på markörer till galaxhopar"
 
 #: src/ui_orbitColorsDialog.h:380
 msgid "Style of orbit colors"
@@ -14089,12 +14104,6 @@ msgstr "Metallicitet"
 msgid "Mass"
 msgstr "Massa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:329
-#: plugins/Exoplanets/src/Exoplanet.cpp:333
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
-msgid "Sun"
-msgstr "Sol"
-
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 #: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgid "Radius"
@@ -15325,16 +15334,16 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:237
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
 msgid "Equation of Time"
-msgstr ""
+msgstr "Tidsekvation"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Detta plugin visar lösningen till tidsekvationen."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Visa lösning till tidsekvationen"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:220
@@ -15350,7 +15359,7 @@ msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Tidsekvationsplugin"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:238
 msgid ""
@@ -15364,6 +15373,14 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"Tidsekvationen beskriven skillnaden mellan två typer av soltid. Dessa är den "
+"skenbara soltiden, som direkt planlägger solens rörelse, och medelsoltid, "
+"som planlägger en fiktiv \"medelsol\", med middag 24 timmar isär.  Det finns "
+"ingen allmänt accepterad definition av tecken till tidsekvationen. Vissa "
+"publiceringar säger att den är positiv när ett solur ligger före klockan; "
+"andra när klockan ligger före soluret. I den engelskspråkiga världen är det "
+"förra vanligare, men efterföljs inte alltid. Den som önskar skapa en tabell "
+"eller graf bör först kontrollera vilket tecken som används."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:240
 msgid "Show plug-ins button on toolbar"
@@ -15375,7 +15392,7 @@ msgstr "Använd minuter och sekunder"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:242
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Byt tecken till ekvationen"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
@@ -15502,52 +15519,52 @@ msgstr "Lyriderna"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centauriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Aquariiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr ""
+msgstr "Junibootiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austriniderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:47
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Södra δ-Aquariiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:49
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricorniderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:51
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:53
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "September-ε-Perseiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:55
 msgid "Draconids"
-msgstr ""
+msgstr "Draconiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:57
@@ -15557,12 +15574,12 @@ msgstr "Leoniderna"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:59
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoeniciderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:61
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppid-Veliderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:63
@@ -15577,37 +15594,37 @@ msgstr "Perseiderna"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leoniderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:69
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:71
 msgid "June Lyrids"
-msgstr ""
+msgstr "Junilyriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:73
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygniderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:75
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:77
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:79
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:81
@@ -15622,17 +15639,17 @@ msgstr "Norra tauriderna"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:85
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:87
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Monocerotiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:89
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:91
@@ -15642,17 +15659,17 @@ msgstr "Geminiderna"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:93
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minoriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:95
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "December-Leonis Minoriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:97
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Comae Bereniciderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:99
@@ -15667,47 +15684,47 @@ msgstr "Andromediderna"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:103
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lyriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:105
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:109
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:111
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:113
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centauriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:115
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:117
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "Södra ω-Scorpiiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:119
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "Norra ω-Scorpiidrena"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:121
@@ -15717,102 +15734,102 @@ msgstr "Arietiderna"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:123
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:125
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:127
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:129
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:131
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Cariniderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:133
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Crateriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:135
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:137
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:139
 msgid "May Librids"
-msgstr ""
+msgstr "Majlibriderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:141
 msgid "June Scutids"
-msgstr ""
+msgstr "Juniscutiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:143
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:145
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "Södra ι-Aquariiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:147
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "Norra ι-Aquariiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Höstarietiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:153
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orioniderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "Sextantiderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "Novemberorioniderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr ""
+msgstr "August Caeliderna"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "ε-Gruids"
-msgstr ""
+msgstr "ε-Gruiderna"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
@@ -18893,11 +18910,3 @@ msgstr ""
 #, qt-format
 #~ msgid "Albedo: %1"
 #~ msgstr "Albedo: %1"
-
-#~ msgid ""
-#~ "Irregularly shaped depression, which having the appearance of a dry lake bed."
-#~ msgstr ""
-#~ "Oregelbundet formad sänka, som till utseendet liknar en torr sjöbädd."
-
-#~ msgid "Show planets nomenclature"
-#~ msgstr "Visa planeters nomenklatur"

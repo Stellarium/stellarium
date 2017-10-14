@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-08 11:05+0700\n"
+"POT-Creation-Date: 2017-10-10 20:27+0700\n"
 "PO-Revision-Date: 2017-09-24 21:15+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-08 05:28+0000\n"
+"X-Launchpad-Export-Date: 2017-10-11 05:33+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -58,7 +58,7 @@ msgstr "asterizmus"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Display Options"
 msgstr "Možnosti zobrazenia"
 
@@ -1097,8 +1097,12 @@ msgstr ""
 msgid "Undocumented landform type."
 msgstr ""
 
+#: src/core/modules/NomenclatureItem.cpp:763
+msgid "latin name"
+msgstr ""
+
 #: src/core/modules/NomenclatureItem.cpp:773
-msgid "latin"
+msgid "latin term"
 msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:783
@@ -1123,7 +1127,11 @@ msgstr "km"
 msgid "Planetographic long./lat."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:793
+#: src/core/modules/NomenclatureItem.cpp:792
+msgid "Celestial body"
+msgstr ""
+
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Landform description"
 msgstr ""
 
@@ -2239,11 +2247,11 @@ msgstr "Zrkadliť horizontálne"
 msgid "Flip scene vertically"
 msgstr "Zrkadliť vertikálne"
 
-#: src/core/StelCore.cpp:2224
+#: src/core/StelCore.cpp:2242
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korekcie sú blokované. Používaj len keď vieš, čo robíš!"
 
-#: src/core/StelCore.cpp:2227
+#: src/core/StelCore.cpp:2245
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -2254,7 +2262,7 @@ msgstr ""
 "Henrikssonom v jeho článku <em>Einsteinova teória relativity potvrdená "
 "pomocou starodávnych slnečných zatmení</em> (%1). Viac informácii %2tu%3."
 
-#: src/core/StelCore.cpp:2230
+#: src/core/StelCore.cpp:2248
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2263,7 +2271,7 @@ msgstr ""
 "Túto empirickú rovnicu publikoval G. M. Clemence v článku <em>O sústave "
 "astronomických konštánt</em> (%1)."
 
-#: src/core/StelCore.cpp:2233
+#: src/core/StelCore.cpp:2251
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2275,7 +2283,7 @@ msgstr ""
 "1650 Spencerom Jonesom (%1) a použitý Jeanom Meeusom v jeho <em>Asronomické "
 "vzorce pre kalkulačky</em>. Bol využitý v PC programe SunTracker Pro."
 
-#: src/core/StelCore.cpp:2237
+#: src/core/StelCore.cpp:2255
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -2285,7 +2293,7 @@ msgstr ""
 "<em>Astronomických efemeridoch</em> a v <em>Pravidlo zatmení Slnka</em> "
 "Mucke a Meeus (1983)."
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2259
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -2296,7 +2304,7 @@ msgstr ""
 "v 5- a 10-dňových intervaloch od 601 p.n.l. do 1649 n.l.  Rovnaký vzťah bol "
 "implicitne prijatý v Goldstinových tabuľkách (1973)."
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2263
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2307,7 +2315,7 @@ msgstr ""
 "<em>Zrýchľovanie Zeme a Mesiaca od počiatku astronomických pozorovaní</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2248
+#: src/core/StelCore.cpp:2266
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2316,7 +2324,7 @@ msgstr ""
 "Túto rovnicu publikoval F. R. Stephenson v článku <em>Astronomické "
 "pozorovania pred vynálezom ďalekohľadu</em> (%1)."
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2269
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2329,7 +2337,7 @@ msgstr ""
 "<em>Polynomické aproximácie pre korekciu delta T E.T.-U.T. v období 1800-"
 "1975</em> (%1) ako fitovanie cez dáta Brouwera (1952)."
 
-#: src/core/StelCore.cpp:2254
+#: src/core/StelCore.cpp:2272
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2339,7 +2347,7 @@ msgstr ""
 "<em>Planetárne programy atabuľky od -4000 do +2800</em> (1986) a z PC "
 "planetária RedShift."
 
-#: src/core/StelCore.cpp:2257
+#: src/core/StelCore.cpp:2275
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2349,11 +2357,11 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé zmeny rotácie Zeme - 700 pr. n. l. až 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2260
+#: src/core/StelCore.cpp:2278
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Algoritmus použitý v PC planetáriu Guide 7."
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2281
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2363,7 +2371,7 @@ msgstr ""
 "slnečnýh zatmení: 1986-2035</em> (1987) a v jeho <em>Päťdesiatročnom súhrne "
 "lunárnych zatmení: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2284
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2372,7 +2380,7 @@ msgstr ""
 "Tento vzťah bol získaný K.M. Borkowskim (%1) z analýzy 31 solárnych zatmení "
 "medzi 2137 p.n.l. a 1715 n.l."
 
-#: src/core/StelCore.cpp:2269
+#: src/core/StelCore.cpp:2287
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2384,7 +2392,7 @@ msgstr ""
 "článku <em>Empirické transformácie z U.T. do E.T. v období 1800-1988</em> "
 "(%1) ako fitovanie hodnôt od Stephensona a Morrisona (1984)."
 
-#: src/core/StelCore.cpp:2272
+#: src/core/StelCore.cpp:2290
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2394,7 +2402,7 @@ msgstr ""
 "ELP 2000-85 mesačnej teórii v ich <em>Lunárne tabuľky a programy od 4000 "
 "p.n.l. do 8000 n.l.</em> (1991)."
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2293
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2404,7 +2412,7 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé odchýlky rotácie Zeme: 700 pr. n. l. až 1990</em> (%1)."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2296
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2413,7 +2421,7 @@ msgstr ""
 "F. R. Stephenson publikoval tento vzorec vo svojej knižke <em>Historické "
 "zatmenia a rotácia Zeme</em> (%1)."
 
-#: src/core/StelCore.cpp:2281
+#: src/core/StelCore.cpp:2299
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2423,7 +2431,7 @@ msgstr ""
 "používaný. Tabuľka od 1600 do 2000 a zahŕňa variant Chapront, Chapront-Touze "
 "a Francou (1997) pre dátumy mimo 1620 do 2000."
 
-#: src/core/StelCore.cpp:2284
+#: src/core/StelCore.cpp:2302
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2432,7 +2440,7 @@ msgstr ""
 "JPL Solar System Dynamics Group NASA Jet Propulsion Laboratory použila tento "
 "vzťah na ich interaktívnej webstránke %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2305
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2441,7 +2449,7 @@ msgstr ""
 "Tento polynóm bol publikovaný J. Meeusom a L. Simonsom v článku "
 "<em>Polynomiálne aproximácie pre Delta T, 1620-2000 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2308
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -2451,7 +2459,7 @@ msgstr ""
 "počítači</em> (2000) poskytuje jednoduchý kubický polynóm na fitovanie dát z "
 "nedávnej minulosti."
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2311
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2463,7 +2471,7 @@ msgstr ""
 "kalendárnych tabuliek</em> (2002). Je založený na <em>Astronomických "
 "algoritmoch</em> (1991) Jeana Meeusa."
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2314
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -2474,7 +2482,7 @@ msgstr ""
 "Stephensonom v článku <em>Historické hodnoty chyby zemských hodín %1T a "
 "výpočet zatmení</em> (%2) s dodatkom v (%3)."
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2317
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2487,7 +2495,7 @@ msgstr ""
 "mocninou. Je zaločení na možnej periodicite opísanej v Stephenson (%2). Viac "
 "informácií %3tu%4."
 
-#: src/core/StelCore.cpp:2302 src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2320 src/core/StelCore.cpp:2323
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2501,15 +2509,15 @@ msgstr ""
 "použité pre %1NASA Eclipse Web Site%2 a v ich <em>Päťtisícročnom pravidle "
 "solárnych zatmení: -1900 do +3000</em>"
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2320
 msgid "Used by default."
 msgstr "Použité v predvolenom nastavení."
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2323
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Opravená verzia bez dodatočného zrýchlenia Mesiaca."
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2520,7 +2528,7 @@ msgstr ""
 "publikované v článku <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2532,7 +2540,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1) a revidované S. "
 "Islamem v roku 2013."
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2332
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2543,7 +2551,7 @@ msgstr ""
 "Mariama Sultana a Faheema Zaidia publikoval <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2335
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -2556,7 +2564,7 @@ msgstr ""
 "2015</em> (%1). Mimo uvedeného rozsahu (modelovaného kĺzavým priemerom) "
 "poskytuje hodnoty podľa približnej paraboly."
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2338
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -2565,11 +2573,11 @@ msgstr ""
 "To je kvadratická rovnica pre výpočet %1T s koeficientami definovanými "
 "užívateľom."
 
-#: src/core/StelCore.cpp:2323 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2341 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "Chyba"
 
-#: src/core/StelCore.cpp:2331
+#: src/core/StelCore.cpp:2349
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2578,15 +2586,15 @@ msgstr ""
 "Hodnota riešenia %1 pre %2 (sekulárne zrýchlenie Mesiaca) si vyžaduje "
 "prispôsobenie. Podrobnosti sú v príručke."
 
-#: src/core/StelCore.cpp:2372
+#: src/core/StelCore.cpp:2390
 msgid "with zero values outside this range"
 msgstr "s nulovou hodnotou mimo rozsahu"
 
-#: src/core/StelCore.cpp:2375
+#: src/core/StelCore.cpp:2393
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "s typickou presnosťou 1 sekunda a nulová hodnota mimo rozsahu"
 
-#: src/core/StelCore.cpp:2378
+#: src/core/StelCore.cpp:2396
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2594,16 +2602,16 @@ msgstr ""
 "so strednou odchýlkou menej než 1 sekunda, maximálnou chybou 1,9 s a "
 "hodnotami pre okrajové roky mimo tohto rozsahu"
 
-#: src/core/StelCore.cpp:2385
+#: src/core/StelCore.cpp:2403
 msgid "with values for the limit years outside this range"
 msgstr "s hodnotami pre limitné roky mimo tohto rozsahu"
 
-#: src/core/StelCore.cpp:2395
+#: src/core/StelCore.cpp:2413
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2, %3."
 
-#: src/core/StelCore.cpp:2397
+#: src/core/StelCore.cpp:2415
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2."
@@ -2813,7 +2821,7 @@ msgid "Deep-sky objects background images"
 msgstr "Obrázky na pozadí objektov hlbokého vesmíru"
 
 #: src/core/StelMovementMgr.cpp:195 src/gui/StelGui.cpp:209
-#: src/StelMainView.cpp:774 src/StelMainView.cpp:775
+#: src/StelMainView.cpp:767 src/StelMainView.cpp:768
 msgid "Miscellaneous"
 msgstr "Rôzne"
 
@@ -4872,19 +4880,19 @@ msgstr "Skripty"
 msgid "Shortcut"
 msgstr "Klávesová skratka"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:767
 msgid "Save screenshot"
 msgstr "Uložiť snímku obrazovky"
 
-#: src/StelMainView.cpp:775
+#: src/StelMainView.cpp:768
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:776
+#: src/StelMainView.cpp:769
 msgid "Full-screen mode"
 msgstr "Celoobrazovkový režim"
 
-#: src/StelMainView.cpp:932
+#: src/StelMainView.cpp:925
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4892,13 +4900,13 @@ msgstr ""
 "Nedostatočná verzia OpenGL. Aktualizujte ovládače, grafickú kartu, alebo "
 "použite prepínač --angle-mode (alebo --mesa-mode)."
 
-#: src/StelMainView.cpp:935
+#: src/StelMainView.cpp:928
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Nízka verzia OpenGL. Prosím, aktualizujte ovládače, grafický hardvér."
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:970
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4908,7 +4916,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:1028
+#: src/StelMainView.cpp:1021
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4918,7 +4926,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:1084
+#: src/StelMainView.cpp:1077
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4928,7 +4936,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:1125
+#: src/StelMainView.cpp:1118
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -4938,7 +4946,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:1237
+#: src/StelMainView.cpp:1230
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5268,210 +5276,217 @@ msgstr "Grossmugl"
 msgid "Zero Horizon"
 msgstr "Plochý horizont"
 
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:313 plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
+msgid "Sun"
+msgstr "Slnko"
+
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:316
+#: src/translations.h:318
 msgid "Vienna Sterngarten"
 msgstr "Viedenská Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:318
+#: src/translations.h:320
 msgid "Testscene"
 msgstr "Testovacia scéna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Landscape Tour"
 msgstr "Prehliadka terénov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Partial Lunar Eclipse"
 msgstr "Čiastočné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Total Lunar Eclipse"
 msgstr "Úplné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "Screensaver"
 msgstr "Šetrič obrazovky"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "Solar Eclipse 2009"
 msgstr "Zatmenie Slnka 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Startup Script"
 msgstr "Skript pri spustení"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Zodiac"
 msgstr "Zvieratník"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Trojitý východ a západ Slnka na Merkúre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dvojité zatmenie na Deimose v r. 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dvojité zatmenie na Deimose v r. 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Zatmenie na Olympus Mons 10. januára 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Zákryt Zeme a Jupitera v r. 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 prechody a 2 zatmenia z Deimosu v r. 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:349
+#: src/translations.h:351
 msgid "Solar System Screensaver"
 msgstr "Sporič obrazovky so Slnečnou sústavou"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Constellations Tour"
 msgstr "Prehliadka súhvezdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Sun from different planets"
 msgstr "Slnko z ostatných planét"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Earth best views from other bodies"
 msgstr "Najlepšie pohľady na Zem z iných telies"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Transit of Venus"
 msgstr "Prechod Venuše"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Sky Culture Tour"
 msgstr "Prehliadka nebeskej kultúry"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "Earth Events from Mercury"
 msgstr "Úkazy Zeme z Merkúra"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "Earth Events from a floating city on Venus"
 msgstr "Pozemské úkazy zo vznášajúceho sa mesta v atmosfére Venuše"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "Earth Events from Mars"
 msgstr "Úkazy Zeme z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:367
+#: src/translations.h:369
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "Najväčšie elongácie Zeme a opozície ostatných planét z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Najväčšie elongácie a prechody Zeme a Marsu pri pohľade z Kalista."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Tycho's Supernova"
 msgstr "Tychónova supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:373
+#: src/translations.h:375
 msgid "Earth and other Planets from Ceres"
 msgstr "Zem a ostatné planéty z Ceresu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:375
+#: src/translations.h:377
 msgid "Messier Objects Tour"
 msgstr "Prehliadka Messierových objektov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Binocular Highlights"
 msgstr "To najlepšie pre triéder"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 zábavných dvojhviezd na pozorovanie voľným okom"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "List of largest known stars"
 msgstr "Zoznam najväčších známych hviezd"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:383
+#: src/translations.h:385
 msgid "Herschel 400 Tour"
 msgstr "Prehliadka Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:385
+#: src/translations.h:387
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Objekty oblohy pre triédre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:387
+#: src/translations.h:389
 msgid "The Jack Bennett Catalog"
 msgstr "Katalóg Jacka Bennetta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Best objects in the New General Catalog"
 msgstr "Najlepšie objekty z katalógu NGC"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Look around each installed landscape."
 msgstr "Rozhliadnutie okolo každého nainštalovaného terénu."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "Look at each installed sky culture."
 msgstr "Prehliadnite si všetky nainštalované kultúry súhvezdí."
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript na demonštrovanie čiastočného zatmenia Mesiaca."
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript na demonštrovanie úplného zatmenia Mesiaca."
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Pomalá, nekonečná prehliadka náhodných objektov na oblohe."
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -5479,11 +5494,11 @@ msgstr ""
 "Skript na demonštrovanie úplného zatmenia Slnka, ktoré nastalo v roku 2009 "
 "(poloha=Rangpur, Bangladéš)."
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Script which runs automatically at startup"
 msgstr "Skript, ktorý sa vykoná pri spustení programu"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -5493,7 +5508,7 @@ msgstr ""
 "ktoré ležia pozdĺž čiary, po ktorej sa pohybuje Slnko cez nebeskú sféru "
 "počas roka."
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -5502,7 +5517,7 @@ msgstr ""
 "niektorých miestach pozorovať východ a západ Slnka trikrát za jeden deň na "
 "Merkúre."
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -5510,7 +5525,7 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Škorpiónom a Strelcom 26. apríla 2017."
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -5518,13 +5533,13 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Býkom a Blížencami 23. júla 2031."
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Mesiac Fobos prechádza pred Slnkom pri pohľade z hory Olympus Mons 10. "
 "januára 2068."
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -5534,7 +5549,7 @@ msgstr ""
 "zákryt oboch telies v rovnaký deň je vzácny úkaz. Takto bude prebiehať "
 "dvojitý zákryt 21. januára 2048. Zobrazenie prebieha reálnou rýchlosťou."
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -5549,32 +5564,32 @@ msgstr ""
 "Marsom a Deimosom. Keď Fobos opäť vyjde spoza Marsu, stále je ešte zatienený "
 "Marsom, ale po chvíli ho zaleje slnečný svit."
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid ""
 "Screensaver of various happenings in the Solar System. 287 events in all!"
 msgstr ""
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "A tour of the western constellations."
 msgstr "Prechádza súhvezdiami západnej kultúry."
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Pohľad na Slnko z veľkých planét Slnečnej sústavy a z Pluta."
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Najlepšie pohľady na Zem z iných telies Slnečnej sústavy v priebehu 21. "
 "storočia."
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Prechod Venuše pri pohľade z austrálskeho mesta Sydney, 6. júna 2012."
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -5582,14 +5597,14 @@ msgstr ""
 "Záblesk supernovy, ktorú pozoroval Tycho Brahe v roku 1572. Musí byť zapnutý "
 "modul Supernovy."
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 "Elongácie Zeme a opozície ostatných planét z Marsu v období 2000-3000"
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -5601,18 +5616,18 @@ msgstr ""
 "pásu Jupitera. Ak niekedy ľudia bukú kolonizovať Jupiterove mesiace, Kalisto "
 "bude naporúdzi."
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 "Elongácie Zeme a opozície ostatných planét z Ceresu v období 2000-3000"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "A tour of Messier Objects"
 msgstr "Prehliadka Messierových objektov"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -5621,7 +5636,7 @@ msgstr ""
 "Prehliadka zaujímavých objektov, ktoré sú pozorovateľné triédrom. Údaje v "
 "skripte sú prevzaté zo známej knihy Garyho Seronika."
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list "
 "has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -5631,15 +5646,15 @@ msgstr ""
 "Jerry Lodriguss a vyšiel v časopise Sky & Telescope 09/2014. Údaje "
 "pochádzajú z jeho stránky http://www.astropix.com/doubles/"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "Skript predvedie najväčšie známe hviezdy."
 
-#: src/translations.h:423
+#: src/translations.h:425
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Prehliadka objektov z katalógu Herschel 400"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -5649,204 +5664,204 @@ msgstr ""
 "pozorovanie triédrom. Skript postupne ukáže 31 objektov zoradených podľa "
 "hodinového uhla (epocha 2000.0)."
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "&Undo"
 msgstr "V&rátiť späť"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "&Redo"
 msgstr "&Opakovať vrátené"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Cu&t"
 msgstr "Vys&trihnúť"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "&Copy"
 msgstr "&Kopírovať"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "&Paste"
 msgstr "V&ložiť"
 
-#: src/translations.h:435 plugins/Oculars/src/ui_ocularDialog.h:1170
+#: src/translations.h:437 plugins/Oculars/src/ui_ocularDialog.h:1170
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
 #: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Delete"
 msgstr "Vymazať"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "Select All"
 msgstr "Vybrať všetko"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Look in:"
 msgstr "Hľadať v:"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Directory:"
 msgstr "Priečinok:"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Folder"
 msgstr "Priečinok"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "&Choose"
 msgstr "&Zvoliť"
 
-#: src/translations.h:441 src/ui_configurationDialog.h:1532
+#: src/translations.h:443 src/ui_configurationDialog.h:1532
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:619
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "&Cancel"
 msgstr "&Zrušiť"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Files of type:"
 msgstr "Súbory typu:"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Date Modified"
 msgstr "Dátum zmeny"
 
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Directories"
 msgstr "Priečinky"
 
-#: src/translations.h:446
+#: src/translations.h:448
 msgid "Computer"
 msgstr "Počítač"
 
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "&Open"
 msgstr "&Otvoriť"
 
-#: src/translations.h:448
+#: src/translations.h:450
 msgid "&Save"
 msgstr ""
 
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "File &name:"
 msgstr "&Názov súboru:"
 
-#: src/translations.h:450
+#: src/translations.h:452
 msgid "Copy &Link Location"
 msgstr "Kopírovať &umiestnenie odkazu"
 
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Abort"
 msgstr "Zrušiť"
 
-#: src/translations.h:452
+#: src/translations.h:454
 msgid "Ignore"
 msgstr "Ignorovať"
 
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "&Basic colors"
 msgstr "&Základné farby"
 
-#: src/translations.h:454
+#: src/translations.h:456
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "&Custom colors"
 msgstr "&Vlastné farby"
 
-#: src/translations.h:456
+#: src/translations.h:458
 msgid "&Add to Custom Colors"
 msgstr "Pridať k &vlastným farbám"
 
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Hu&e:"
 msgstr "Od&tieň:"
 
-#: src/translations.h:458
+#: src/translations.h:460
 msgid "&Sat:"
 msgstr "&Sýtosť:"
 
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "&Val:"
 msgstr "&Hodnota:"
 
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "&Red:"
 msgstr "Če&rvená:"
 
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "&Green:"
 msgstr "Ze&lená:"
 
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Bl&ue:"
 msgstr "Mo&drá:"
 
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Select Color"
 msgstr "Vyberte farbu"
 
-#: src/translations.h:464
+#: src/translations.h:466
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kurzor na %1, %2 Zrušíte stlačením ESC"
 
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Back"
 msgstr ""
 
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Forward"
 msgstr ""
 
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Create New Folder"
 msgstr ""
 
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "List View"
 msgstr ""
 
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Detail View"
 msgstr ""
 
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:472
+#: src/translations.h:474
 #, qt-format
 msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
 
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "&No"
 msgstr ""
 
@@ -14126,12 +14141,6 @@ msgstr "Metalicita"
 #: plugins/Exoplanets/src/Exoplanet.cpp:344
 msgid "Mass"
 msgstr "Hmotnosť"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:329
-#: plugins/Exoplanets/src/Exoplanet.cpp:333
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
-msgid "Sun"
-msgstr "Slnko"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 #: plugins/Exoplanets/src/Exoplanet.cpp:345
