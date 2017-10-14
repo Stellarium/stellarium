@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-10 20:27+0700\n"
-"PO-Revision-Date: 2017-10-11 01:31+0000\n"
+"PO-Revision-Date: 2017-10-14 00:29+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-12 05:18+0000\n"
+"X-Launchpad-Export-Date: 2017-10-14 05:12+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -7535,7 +7535,7 @@ msgstr "Konfiguruj kolory znaczników"
 
 #: src/ui_viewDialog.h:2563
 msgid "Use outlines for big deep-sky objects"
-msgstr ""
+msgstr "Używaj konturów dla dużych obiektów głębokiego nieba"
 
 #: src/ui_viewDialog.h:2564
 msgid "Celestial Sphere"
@@ -9072,7 +9072,7 @@ msgstr "Potencjalne mgławice planetarne"
 
 #: src/ui_dsoColorsDialog.h:560
 msgid "Possible pl. nebulae"
-msgstr "Potencjalne mgławice pl."
+msgstr "Potencjalne mgławice planetarne"
 
 #: src/ui_dsoColorsDialog.h:563
 msgid "Color of labels of deep-sky objects"
@@ -13380,6 +13380,7 @@ msgstr "Gwiazdy nawigacyjne"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
+"Ta wtyczka zaznacza gwiazdy nawigacyjne pochodzące z określonego zbioru."
 
 #: plugins/NavStars/src/NavStars.cpp:111
 msgid "Mark the navigational stars"
@@ -13413,7 +13414,7 @@ msgstr ""
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:87
 msgid "Navigational Stars Plug-in"
-msgstr ""
+msgstr "Wtyczka Gwiazdy nawigacyjne"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
@@ -13445,11 +13446,11 @@ msgstr ""
 #: plugins/NavStars/src/ui_navStarsWindow.h:202
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
 msgid "Navigational stars"
-msgstr ""
+msgstr "Gwiazdy nawigacyjne"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:204
 msgid "Set of navigational stars"
-msgstr ""
+msgstr "Zbiór gwiazd nawigacyjnych"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:206
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
@@ -14874,43 +14875,43 @@ msgstr "Okres orbitalny, dni"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
 msgid "Angular Distance, arcsec"
-msgstr ""
+msgstr "Odległość kątowa, arcsec"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid "Effective temperature of host star, K"
-msgstr ""
+msgstr "Temperatura efektywna gwiazdy macierzystej, K"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
 msgid "Year of Discovery"
-msgstr ""
+msgstr "Rok odkrycia"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
 msgid "Metallicity of host star"
-msgstr ""
+msgstr "Metaliczność gwiazdy macierzystej"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
 msgid "V magnitude of host star, mag"
-msgstr ""
+msgstr "Widoczna jasność gwiazdy macierzystej, mag"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
 msgid "RA (J2000) of star, deg"
-msgstr ""
+msgstr "RA (J2000) gwiazdy, st."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
 msgid "Dec (J2000) of star, deg"
-msgstr ""
+msgstr "Dekl. (J2000) gwiazdy, st."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid "Distance to star, pc"
-msgstr ""
+msgstr "Odległość od gwiazdy, pc"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid "Mass of host star, Msol"
-msgstr ""
+msgstr "Masa gwiazdy macierzystej, Msol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
 msgid "Radius of host star, Rsol"
-msgstr ""
+msgstr "Promień gwiazdy macierzystej, Rsol"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
 msgid "Exoplanets Configuration"
@@ -14959,7 +14960,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:488
 msgid "Enable display of designations for exoplanets"
-msgstr ""
+msgstr "Włącz wyświetlanie oznaczeń egzoplanet"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
 msgid "Show exoplanets button on toolbar"
