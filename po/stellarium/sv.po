@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-10 20:27+0700\n"
-"PO-Revision-Date: 2017-10-09 06:00+0000\n"
+"PO-Revision-Date: 2017-10-13 21:15+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-11 05:34+0000\n"
+"X-Launchpad-Export-Date: 2017-10-14 05:13+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -2114,7 +2114,7 @@ msgstr "Lägg till 100 stjärnår"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 synodic month"
-msgstr "Addera 1 synodisk månad"
+msgstr "Lägg till 1 synodisk månad"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 saros"
@@ -2122,15 +2122,15 @@ msgstr "Lägg till 1 saros"
 
 #: src/core/StelCore.cpp:279
 msgid "Add 1 draconic month"
-msgstr "Addera 1 drakmånad"
+msgstr "Lägg till 1 drakonisk månad"
 
 #: src/core/StelCore.cpp:280
 msgid "Add 1 draconic year"
-msgstr "Addera 1 drakår"
+msgstr "Lägg till 1 drakoniskt år"
 
 #: src/core/StelCore.cpp:281
 msgid "Add 1 anomalistic month"
-msgstr "Addera 1 anomalistisk månad"
+msgstr "Lägg till 1 anomalistisk månad"
 
 #: src/core/StelCore.cpp:282
 msgid "Add 1 anomalistic year"
@@ -2142,11 +2142,11 @@ msgstr "Lägg till 100 anomalistiskt år"
 
 #: src/core/StelCore.cpp:284
 msgid "Add 1 mean tropical month"
-msgstr "Addera 1 genomsnittlig tropisk månad"
+msgstr "Lägg till 1 medeltropisk månad"
 
 #: src/core/StelCore.cpp:285
 msgid "Add 1 mean tropical year"
-msgstr "Addera 1 genomsnittligt tropiskt år"
+msgstr "Lägg till 1 medeltropiskt år"
 
 #: src/core/StelCore.cpp:286
 msgid "Add 100 mean tropical years"
@@ -2186,7 +2186,7 @@ msgstr "Dra ifrån 100 stjärnår"
 
 #: src/core/StelCore.cpp:295
 msgid "Subtract 1 synodic month"
-msgstr "Subtrahera 1 synodisk månad"
+msgstr "Dra ifrån 1 synodisk månad"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 saros"
@@ -2194,15 +2194,15 @@ msgstr "Dra ifrån 1 saros"
 
 #: src/core/StelCore.cpp:297
 msgid "Subtract 1 draconic month"
-msgstr "Subtrahera 1 drakmånad"
+msgstr "Dra ifrån 1 drakonisk månad"
 
 #: src/core/StelCore.cpp:298
 msgid "Subtract 1 draconic year"
-msgstr "Subtrahera 1 drakår"
+msgstr "Dra ifrån 1 drakoniskt år"
 
 #: src/core/StelCore.cpp:299
 msgid "Subtract 1 anomalistic month"
-msgstr "Subtrahera 1 anomalistisk månad"
+msgstr "Dra ifrån 1 anomalistisk månad"
 
 #: src/core/StelCore.cpp:300
 msgid "Subtract 1 anomalistic year"
@@ -2214,11 +2214,11 @@ msgstr "Dra ifrån 100 anomalistiskt år"
 
 #: src/core/StelCore.cpp:302
 msgid "Subtract 1 mean tropical month"
-msgstr "Subtrahera 1 genomsnittlig tropisk månad"
+msgstr "Dra ifrån 1 medeltropisk månad"
 
 #: src/core/StelCore.cpp:303
 msgid "Subtract 1 mean tropical year"
-msgstr "Subtrahera 1 genomsnittligt tropiskt år"
+msgstr "Dra ifrån 1 medeltropiskt år"
 
 #: src/core/StelCore.cpp:304
 msgid "Subtract 100 mean tropical years"
@@ -3602,7 +3602,7 @@ msgstr "Tidszon"
 
 #: src/gui/StelGuiItems.cpp:649 src/gui/LocationDialog.cpp:424
 msgid "Local Mean Solar Time"
-msgstr "Lokal genomsnittlig soltid"
+msgstr "Lokal medelsoltid"
 
 #: src/gui/StelGuiItems.cpp:652 src/gui/LocationDialog.cpp:425
 msgid "Local True Solar Time"
@@ -15334,16 +15334,16 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:237
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
 msgid "Equation of Time"
-msgstr ""
+msgstr "Tidsekvation"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Detta plugin visar lösningen till tidsekvationen."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Visa lösning till tidsekvationen"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:220
@@ -15359,7 +15359,7 @@ msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Tidsekvationsplugin"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:238
 msgid ""
@@ -15373,6 +15373,14 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"Tidsekvationen beskriven skillnaden mellan två typer av soltid. Dessa är den "
+"skenbara soltiden, som direkt planlägger solens rörelse, och medelsoltid, "
+"som planlägger en fiktiv \"medelsol\", med middag 24 timmar isär.  Det finns "
+"ingen allmänt accepterad definition av tecken till tidsekvationen. Vissa "
+"publiceringar säger att den är positiv när ett solur ligger före klockan; "
+"andra när klockan ligger före soluret. I den engelskspråkiga världen är det "
+"förra vanligare, men efterföljs inte alltid. Den som önskar skapa en tabell "
+"eller graf bör först kontrollera vilket tecken som används."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:240
 msgid "Show plug-ins button on toolbar"
@@ -15384,7 +15392,7 @@ msgstr "Använd minuter och sekunder"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:242
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Byt tecken till ekvationen"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
