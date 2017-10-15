@@ -1,10 +1,10 @@
 // Author: Qam1
-// Version: 8.0
+// Version: 10.0
 // License: Public Domain
 // Name: Earth best views from other bodies
 // Description: Best views of Earth from other Solar System bodies in the 21st Century.
 
-// Made on Stellarium 0.14.1
+// Made on Stellarium 0.16.1
 
 //basics
 var spd = 5; // speed for screen saver mode in seconds
@@ -155,7 +155,7 @@ SolarSystem.setFlagOrbits(true);
 		LandscapeMgr.setCurrentLandscapeID("ocean");
 
 		core.setDate("2082-10-19T21:08:21", "utc");
-		core.setObserverLocation(-73.71, 44.24, 17, 1, "", "Ceres");
+		core.setObserverLocation(-131.71, 44.24, 17, 1, "", "(1) Ceres");
 		StelMovementMgr.zoomTo(42, 1);
 
 		sd = 1;
@@ -169,7 +169,7 @@ SolarSystem.setFlagOrbits(true);
 		LandscapeMgr.setCurrentLandscapeID("saturn");
 
 		core.setDate("2058-07-15T11:52:00", "utc");
-		core.setObserverLocation(124.71, 27.24, 71492000, 1, "", "Jupiter");
+		core.setObserverLocation(99.71, 27.24, 71492000, 1, "", "Jupiter");
 		StelMovementMgr.zoomTo(34, 1);
 
 		txt1 = LabelMgr.labelScreen("Elongation: 11.849 degrees", 350, 10, false, 25, "#AAFFAA");
@@ -233,7 +233,7 @@ SolarSystem.setFlagOrbits(true);
 		LandscapeMgr.setCurrentLandscapeID("moon");
 
 		core.setDate("2000-09-01T12:35:49", "utc");
-		core.setObserverLocation(113.49, 31.04, 76, 1, "", "Pluto");
+		core.setObserverLocation(17.49, 31.04, 76, 1, "", "Pluto");
 		StelMovementMgr.zoomTo(25, 1);
 
 		txt1 = LabelMgr.labelScreen("Elongation: 1.908 degrees", 500, 10, false, 25, "#AAFFAA");
