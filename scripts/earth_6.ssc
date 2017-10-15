@@ -1,10 +1,10 @@
 // Author: Qam1
 // Name: Earth and Mars Greatest Elongations and Transits from Callisto
 // License: Public Domain
-// Version: 8.0
+// Version: 10.0
 // Description: Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.
 
-// Made on Stellarium 0.14.1
+// Made on Stellarium 0.16.1
 
 
 long =  -73.71
@@ -42,6 +42,28 @@ degstring = "\u00B0";
 
 LabelMgr.deleteAllLabels();
 
+
+core.setObserverLocation(0, 0, 0, 0, "", "Callisto");
+core.wait(.2);
+
+offset = 0
+
+
+PData = core.getObjectPosition("Jupiter");
+alt = PData["altitude"];
+
+if (alt < 0)
+{
+offset = 178
+}
+
+
+long = long + offset
+
+if (long > 360)
+{
+long = long - 360
+}
 
 
 core.setObserverLocation(long, lat, 0, 0, "", "Callisto");
@@ -14450,7 +14472,8 @@ LabelMgr.setLabelShow(txt1, true);
 txt1 = LabelMgr.labelScreen("By Qam1 ", 900*x, 10, false, 25, "#A0801D");
 LabelMgr.setLabelShow(txt1, true);
 
-
+txt1 = LabelMgr.labelScreen(offset, 900*x, 80, false, 10, "#06808D");
+LabelMgr.setLabelShow(txt1, true);
 
 
 // Label
@@ -14671,6 +14694,16 @@ if (i < f)
 {
 i = l;
 }
+
+
+
+rlong = il[i] + offset
+
+if (rlong > 360)
+{
+rlong = rlong - 360
+}
+
 
 
 if (au == 2) // Earth
@@ -15017,7 +15050,12 @@ core.setDate(ahhh, "utc");
 
 if (ij[i] < 10)
 {
-core.setObserverLocation(il[i], 0.00, 2, 0, "", "Callisto");
+
+
+
+
+
+core.setObserverLocation(rlong, 0.00, 2, 0, "", "Callisto");
 
 txt1 = LabelMgr.labelScreen("Lat: "+ 0, 10 * x, 650*y, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
@@ -15027,7 +15065,7 @@ LabelMgr.setLabelShow(txt1, true);
 else
 
 {
-core.setObserverLocation(il[i], 70 * (ik[i]/Math.abs(ik[i])), 0, 0, "", "Callisto");
+core.setObserverLocation(rlong, 70 * (ik[i]/Math.abs(ik[i])), 0, 0, "", "Callisto");
 
 
 txt1 = LabelMgr.labelScreen("Lat: "+ 70 * (ik[i]/Math.abs(ik[i])), 10 * x, 650*y, false, 15, "#FF0000");
@@ -15465,7 +15503,16 @@ LabelMgr.setLabelShow(txt1, true);
 
 }
 
-txt1 = LabelMgr.labelScreen("Long:"+ il[i], 10 * x, 670*y, false, 15, "#FF0000");
+
+dlong = il[i]
+
+if (dlong < 0)
+{
+dlong = 360 + dlong 
+}
+
+
+txt1 = LabelMgr.labelScreen("Long:"+ dlong, 10 * x, 670*y, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 
