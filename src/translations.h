@@ -406,7 +406,7 @@ class Translations
 		N_("Due to the quirks in Mercury's orbit and rotation at certain spots the sun will rise & set 3 different times in one Mercury day.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Scorpio and Sagittarius on April 26, 2017.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Taurus and Gemini on July 23, 2031.");
-		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
+		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
 		N_("Screensaver of various happenings in the Solar System. 287 events in all!");
@@ -417,7 +417,7 @@ class Translations
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
 		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
-		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-3000");
+		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-2200");
 		N_("A tour of Messier Objects");
 		N_("Tours around interesting objects, which accessible to observation with binoculars. The data for the script are taken from the eponymous book by Gary Seronik.");
 		N_("This script helps you make an excursion around 20 fun double stars. The list has been collected by Jerry Lodriguss and published in Sky & Telescope 09/2014. Data taken from his website, http://www.astropix.com/doubles/");
