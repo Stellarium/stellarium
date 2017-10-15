@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-10 20:27+0700\n"
-"PO-Revision-Date: 2017-10-07 11:06+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
+"PO-Revision-Date: 2017-10-15 03:49+0000\n"
+"Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-11 05:37+0000\n"
+"X-Launchpad-Export-Date: 2017-10-15 05:15+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 
 #: src/core/modules/CustomObject.cpp:78
@@ -72,7 +72,7 @@ msgstr "星群标签"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Ray helpers"
-msgstr ""
+msgstr "导航辅助线"
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
@@ -445,673 +445,673 @@ msgstr "波特尔暗空分类法"
 #: src/core/modules/NomenclatureItem.cpp:67
 msgctxt "landform"
 msgid "albedo feature"
-msgstr ""
+msgstr "反照率特征"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:71
 msgctxt "landform"
 msgid "arcus"
-msgstr ""
+msgstr "弧状云"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:75
 msgctxt "landform"
 msgid "astrum"
-msgstr ""
+msgstr "金星上的径向特征图案"
 
 #. TRANSLATORS: Chain of craters
 #: src/core/modules/NomenclatureItem.cpp:79
 msgctxt "landform"
 msgid "catena"
-msgstr ""
+msgstr "坑链"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
 #: src/core/modules/NomenclatureItem.cpp:83
 msgctxt "landform"
 msgid "cavus"
-msgstr ""
+msgstr "深坑"
 
 #. TRANSLATORS: Distinctive area of broken terrain
 #: src/core/modules/NomenclatureItem.cpp:87
 msgctxt "landform"
 msgid "chaos"
-msgstr ""
+msgstr "混沌"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
 #: src/core/modules/NomenclatureItem.cpp:91
 msgctxt "landform"
 msgid "chasma"
-msgstr ""
+msgstr "深谷"
 
 #. TRANSLATORS: Small hills or knobs
 #: src/core/modules/NomenclatureItem.cpp:95
 msgctxt "landform"
 msgid "collis"
-msgstr ""
+msgstr "丘陵"
 
 #. TRANSLATORS: Ovoid-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:99
 msgctxt "landform"
 msgid "corona"
-msgstr ""
+msgstr "冕"
 
 #. TRANSLATORS: A circular depression
 #: src/core/modules/NomenclatureItem.cpp:103
 msgctxt "landform"
 msgid "crater"
-msgstr ""
+msgstr "坑"
 
 #. TRANSLATORS: Ridge
 #: src/core/modules/NomenclatureItem.cpp:107
 msgctxt "landform"
 msgid "dorsum"
-msgstr ""
+msgstr "皱脊"
 
 #. TRANSLATORS: Active volcanic centers on Io
 #: src/core/modules/NomenclatureItem.cpp:111
 msgctxt "landform"
 msgid "eruptive center"
-msgstr ""
+msgstr "喷发中心"
 
 #. TRANSLATORS: Bright spot
 #: src/core/modules/NomenclatureItem.cpp:115
 msgctxt "landform"
 msgid "facula"
-msgstr ""
+msgstr "光斑"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
 #: src/core/modules/NomenclatureItem.cpp:119
 msgctxt "landform"
 msgid "farrum"
-msgstr ""
+msgstr "薄饼状穹丘"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 #: src/core/modules/NomenclatureItem.cpp:123
 msgctxt "landform"
 msgid "flexus"
-msgstr ""
+msgstr "弯脊结构"
 
 #. TRANSLATORS: Flow terrain
 #: src/core/modules/NomenclatureItem.cpp:127
 msgctxt "landform"
 msgid "fluctus"
-msgstr ""
+msgstr "熔岩流"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
 #: src/core/modules/NomenclatureItem.cpp:131
 msgctxt "landform"
 msgid "flumen"
-msgstr ""
+msgstr "流"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
 #: src/core/modules/NomenclatureItem.cpp:135
 msgctxt "landform"
 msgid "fretum"
-msgstr ""
+msgstr "峡"
 
 #. TRANSLATORS: Long, narrow depression
 #: src/core/modules/NomenclatureItem.cpp:139
 msgctxt "landform"
 msgid "fossa"
-msgstr ""
+msgstr "槽沟"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
 #: src/core/modules/NomenclatureItem.cpp:143
 msgctxt "landform"
 msgid "insula"
-msgstr ""
+msgstr "岛"
 
 #. TRANSLATORS: Landslide
 #: src/core/modules/NomenclatureItem.cpp:147
 msgctxt "landform"
 msgid "labes"
-msgstr ""
+msgstr "滑坡泥石流"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
 #: src/core/modules/NomenclatureItem.cpp:151
 msgctxt "landform"
 msgid "labyrinthus"
-msgstr ""
+msgstr "迷宫"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
 #: src/core/modules/NomenclatureItem.cpp:155
 msgctxt "landform"
 msgid "lacuna"
-msgstr ""
+msgstr "洼地"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain with discrete, sharp boundaries
 #: src/core/modules/NomenclatureItem.cpp:159
 msgctxt "landform"
 msgid "lacus"
-msgstr ""
+msgstr "湖"
 
 #. TRANSLATORS: Cryptic ringed feature
 #: src/core/modules/NomenclatureItem.cpp:163
 msgctxt "landform"
 msgid "large ringed feature"
-msgstr ""
+msgstr "大环状特征"
 
 #. TRANSLATORS: Small dark spots on Europa
 #: src/core/modules/NomenclatureItem.cpp:167
 msgctxt "landform"
 msgid "lenticula"
-msgstr ""
+msgstr "镜状"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
 #: src/core/modules/NomenclatureItem.cpp:171
 msgctxt "landform"
 msgid "linea"
-msgstr ""
+msgstr "线形"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
 #: src/core/modules/NomenclatureItem.cpp:175
 msgctxt "landform"
 msgid "lingula"
-msgstr ""
+msgstr "舌状"
 
 #. TRANSLATORS: Dark spot, may be irregular
 #: src/core/modules/NomenclatureItem.cpp:179
 msgctxt "landform"
 msgid "macula"
-msgstr ""
+msgstr "斑点"
 
 #. TRANSLATORS: “Sea”; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
 #: src/core/modules/NomenclatureItem.cpp:183
 msgctxt "landform"
 msgid "mare"
-msgstr ""
+msgstr "海"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
 #: src/core/modules/NomenclatureItem.cpp:187
 msgctxt "landform"
 msgid "mensa"
-msgstr ""
+msgstr "平顶山"
 
 #. TRANSLATORS: Mountain
 #: src/core/modules/NomenclatureItem.cpp:191
 msgctxt "landform"
 msgid "mons"
-msgstr ""
+msgstr "山脉"
 
 #. TRANSLATORS: A very large dark area on the Moon
 #: src/core/modules/NomenclatureItem.cpp:195
 msgctxt "landform"
 msgid "oceanus"
-msgstr ""
+msgstr "洋"
 
 #. TRANSLATORS: "Swamp"; small plain
 #: src/core/modules/NomenclatureItem.cpp:199
 msgctxt "landform"
 msgid "palus"
-msgstr ""
+msgstr "沼"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
 #: src/core/modules/NomenclatureItem.cpp:203
 msgctxt "landform"
 msgid "patera"
-msgstr ""
+msgstr "火山"
 
 #. TRANSLATORS: Low plain
 #: src/core/modules/NomenclatureItem.cpp:207
 msgctxt "landform"
 msgid "planitia"
-msgstr ""
+msgstr "平原"
 
 #. TRANSLATORS: Plateau or high plain
 #: src/core/modules/NomenclatureItem.cpp:211
 msgctxt "landform"
 msgid "planum"
-msgstr ""
+msgstr "高原"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
 #: src/core/modules/NomenclatureItem.cpp:215
 msgctxt "landform"
 msgid "plume"
-msgstr ""
+msgstr "羽流"
 
 #. TRANSLATORS: "Cape"; headland promontoria
 #: src/core/modules/NomenclatureItem.cpp:219
 msgctxt "landform"
 msgid "promontorium"
-msgstr ""
+msgstr "岬"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
 #: src/core/modules/NomenclatureItem.cpp:223
 msgctxt "landform"
 msgid "regio"
-msgstr ""
+msgstr "区"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
 #: src/core/modules/NomenclatureItem.cpp:227
 msgctxt "landform"
 msgid "reticulum"
-msgstr ""
+msgstr "网状构造"
 
 #. TRANSLATORS: Fissure
 #: src/core/modules/NomenclatureItem.cpp:231
 msgctxt "landform"
 msgid "rima"
-msgstr ""
+msgstr "溪"
 
 #. TRANSLATORS: Scarp
 #: src/core/modules/NomenclatureItem.cpp:235
 msgctxt "landform"
 msgid "rupes"
-msgstr ""
+msgstr "断崖"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
 #: src/core/modules/NomenclatureItem.cpp:239
 msgctxt "landform"
 msgid "satellite feature"
-msgstr ""
+msgstr "卫星地形"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:243
 msgctxt "landform"
 msgid "scopulus"
-msgstr ""
+msgstr "不规则断崖"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
 #: src/core/modules/NomenclatureItem.cpp:247
 msgctxt "landform"
 msgid "serpens"
-msgstr ""
+msgstr "蛇形"
 
 #. TRANSLATORS: Subparallel furrows and ridges
 #: src/core/modules/NomenclatureItem.cpp:251
 msgctxt "landform"
 msgid "sulcus"
-msgstr ""
+msgstr "沟"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
 #: src/core/modules/NomenclatureItem.cpp:255
 msgctxt "landform"
 msgid "sinus"
-msgstr ""
+msgstr "湾"
 
 #. TRANSLATORS: Extensive land mass
 #: src/core/modules/NomenclatureItem.cpp:259
 msgctxt "landform"
 msgid "terra"
-msgstr ""
+msgstr "土"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
 #: src/core/modules/NomenclatureItem.cpp:263
 msgctxt "landform"
 msgid "tessera"
-msgstr ""
+msgstr "镶嵌地块"
 
 #. TRANSLATORS: Small domical mountain or hill
 #: src/core/modules/NomenclatureItem.cpp:267
 msgctxt "landform"
 msgid "tholus"
-msgstr ""
+msgstr "山丘"
 
 #. TRANSLATORS: Dunes
 #: src/core/modules/NomenclatureItem.cpp:271
 msgctxt "landform"
 msgid "unda"
-msgstr ""
+msgstr "沙丘"
 
 #. TRANSLATORS: Valley
 #: src/core/modules/NomenclatureItem.cpp:275
 msgctxt "landform"
 msgid "vallis"
-msgstr ""
+msgstr "谷"
 
 #. TRANSLATORS: Extensive plain
 #: src/core/modules/NomenclatureItem.cpp:279
 msgctxt "landform"
 msgid "vastitas"
-msgstr ""
+msgstr "荒原"
 
 #. TRANSLATORS: A streak or stripe of color
 #: src/core/modules/NomenclatureItem.cpp:283
 msgctxt "landform"
 msgid "virga"
-msgstr ""
+msgstr "幡状"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
 #: src/core/modules/NomenclatureItem.cpp:287
 msgctxt "landform"
 msgid "landing site name"
-msgstr ""
+msgstr "登陆站点名称"
 
 #: src/core/modules/NomenclatureItem.cpp:291
 msgctxt "landform"
 msgid "undocumented landform type"
-msgstr ""
+msgstr "无法证实地貌"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
 #: src/core/modules/NomenclatureItem.cpp:469
 msgid "Geographic area distinguished by amount of reflected light."
-msgstr ""
+msgstr "以反射明暗为特征的地理区域。"
 
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:473
 msgid "Arc-shaped feature."
-msgstr ""
+msgstr "弧状特征"
 
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:477
 msgid "Radial-patterned feature."
-msgstr ""
+msgstr "径向的特征图案"
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:481
 msgid "Chain of craters."
-msgstr ""
+msgstr "一连串的坑穴"
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:485
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
-msgstr ""
+msgstr "通常是阵列或集群，成为凹形、不规则的陡峭洼地"
 
 #. TRANSLATORS: Description for landform 'chaos'
 #: src/core/modules/NomenclatureItem.cpp:489
 msgid "Distinctive area of broken terrain."
-msgstr ""
+msgstr "一个破碎或复杂的独特地区"
 
 #. TRANSLATORS: Description for landform 'chasma'
 #: src/core/modules/NomenclatureItem.cpp:493
 msgid "A deep, elongated, steep-sided depression."
-msgstr ""
+msgstr "深、细长、陡峭的谷低"
 
 #. TRANSLATORS: Description for landform 'collis'
 #: src/core/modules/NomenclatureItem.cpp:497
 msgid "Small hills or knobs."
-msgstr ""
+msgstr "小山或球形突出物的集合"
 
 #. TRANSLATORS: Description for landform 'corona'
 #: src/core/modules/NomenclatureItem.cpp:501
 msgid "Ovoid-shaped feature."
-msgstr ""
+msgstr "椭圆形的地形特征。"
 
 #. TRANSLATORS: Description for landform 'crater'
 #: src/core/modules/NomenclatureItem.cpp:505
 msgid "A circular depression."
-msgstr ""
+msgstr "圆形的沉降地"
 
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:509
 msgid "Ridge."
-msgstr ""
+msgstr "山脊"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:513
 msgid "Active volcanic center."
-msgstr ""
+msgstr "活火山喷发的中心"
 
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:517
 msgid "Bright spot."
-msgstr ""
+msgstr "明亮的点"
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:521
 msgid "Pancake-like structure, or a row of such structures."
-msgstr ""
+msgstr "煎饼状结构，或成列的该种结构"
 
 #. TRANSLATORS: Description for landform 'flexus'
 #: src/core/modules/NomenclatureItem.cpp:525
 msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr ""
+msgstr "扇形模式且非常低的曲线脊"
 
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:529
 msgid "Flow terrain."
-msgstr ""
+msgstr "流出的液体所覆盖的地形。"
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:533
 msgid "Channel, that might carry liquid."
-msgstr ""
+msgstr "可能携带液体的通道"
 
 #. TRANSLATORS: Description for landform 'fretum'
 #: src/core/modules/NomenclatureItem.cpp:537
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
-msgstr ""
+msgstr "连接两大片液体区域的狭隘通道"
 
 #. TRANSLATORS: Description for landform 'fossa'
 #: src/core/modules/NomenclatureItem.cpp:541
 msgid "Long, narrow depression."
-msgstr ""
+msgstr "长、狭窄的洼地"
 
 #. TRANSLATORS: Description for landform 'insula'
 #: src/core/modules/NomenclatureItem.cpp:545
 msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
-msgstr ""
+msgstr "被液体区域（海洋或湖泊）环绕或几乎环绕，孤立的土地区域（或是这样的一群地区）"
 
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:549
 msgid "Landslide."
-msgstr ""
+msgstr "滑坡泥石流"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:553
 msgid "Complex of intersecting valleys or ridges."
-msgstr ""
+msgstr "复杂的交叉山谷或山脊"
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:557
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
+msgstr "外观的形状不规则，像是干涸的湖床。"
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:563
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
-msgstr ""
+msgstr "土卫六上有尖锐、离散边界，小且暗的平原或\"湖\""
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:568
 msgid "'Lake' or small plain."
-msgstr ""
+msgstr "湖或小平原"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:573
 msgid "Cryptic ringed feature."
-msgstr ""
+msgstr "潜在环状特征"
 
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:577
 msgid "Small dark spot."
-msgstr ""
+msgstr "小黑斑"
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:581
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr ""
+msgstr "黑暗或明亮的长形标记，可能是曲线或直线"
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:585
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
-msgstr ""
+msgstr "具有圆形叶状或舌状边界的高原的延伸。"
 
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:589
 msgid "Dark spot, may be irregular"
-msgstr ""
+msgstr "黑斑，可能是不规则的"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:597
 msgid ""
 "'Sea'; low albedo, relatively smooth plain, generally of large extent."
-msgstr ""
+msgstr "在月球上大片的圆形平面或\"海\""
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
 #: src/core/modules/NomenclatureItem.cpp:602
 msgid "'Sea'; dark albedo areas of no known geological significance."
-msgstr ""
+msgstr "在火星上大片的圆形平面或\"海\""
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
 #: src/core/modules/NomenclatureItem.cpp:607
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
-msgstr ""
+msgstr "被认为是液态碳氢化合物的大面积的黑暗物质"
 
 #. TRANSLATORS: Description for landform 'mensa'
 #: src/core/modules/NomenclatureItem.cpp:613
 msgid "A flat-topped prominence with cliff-like edges."
-msgstr ""
+msgstr "边缘类似悬崖的突起平顶"
 
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:617
 msgid "Mountain."
-msgstr ""
+msgstr "山"
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:621
 msgid "A very large dark area."
-msgstr ""
+msgstr "非常大片的暗区"
 
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:625
 msgid "'Swamp'; small plain."
-msgstr ""
+msgstr "\"沼泽\"；小平原。"
 
 #. TRANSLATORS: Description for landform 'patera'
 #: src/core/modules/NomenclatureItem.cpp:629
 msgid "An irregular crater, or a complex one with scalloped edges."
-msgstr ""
+msgstr "不规则的坑穴或复杂的扇的边缘，通常是指一座火山顶的碟形凹洼"
 
 #. TRANSLATORS: Description for landform 'planitia'
 #: src/core/modules/NomenclatureItem.cpp:633
 msgid "Low plain."
-msgstr ""
+msgstr "低的平地"
 
 #. TRANSLATORS: Description for landform 'planum'
 #: src/core/modules/NomenclatureItem.cpp:637
 msgid "Plateau or high plain."
-msgstr ""
+msgstr "高原或平坦的高地"
 
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:641
 msgid "Cryo-volcanic feature."
-msgstr ""
+msgstr "冰火山特征"
 
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:645
 msgid "'Cape'; headland promontoria."
-msgstr ""
+msgstr "\"海角\"；岬角"
 
 #. TRANSLATORS: Description for landform 'regio'
 #: src/core/modules/NomenclatureItem.cpp:649
 msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
-msgstr ""
+msgstr "与毗邻地区经由反射或颜色区别与标示的大片面积，或广泛的地理区域。"
 
 #. TRANSLATORS: Description for landform 'reticulum'
 #: src/core/modules/NomenclatureItem.cpp:653
 msgid "Reticular (netlike) pattern."
-msgstr ""
+msgstr "网状特征"
 
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:657
 msgid "Fissure."
-msgstr ""
+msgstr "裂缝"
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:661
 msgid "Scarp."
-msgstr ""
+msgstr "陡坡"
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:665
 msgid "A feature that shares the name of an associated feature."
-msgstr ""
+msgstr "与相关的特征共用名称的地形"
 
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:669
 msgid "Lobate or irregular scarp."
-msgstr ""
+msgstr "片状或不规则的陡坎"
 
 #. TRANSLATORS: Description for landform 'serpens'
 #: src/core/modules/NomenclatureItem.cpp:673
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
-msgstr ""
+msgstr "蜿蜒的特征，沿着它的地形有着正向或负向交替的段落。"
 
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:677
 msgid "Subparallel furrows and ridges."
-msgstr ""
+msgstr "近乎平行的沟和脊。"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:683
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
-msgstr ""
+msgstr "土卫六上液体内\"海湾\""
 
 #. TRANSLATORS: Description for landform 'sinus'
 #: src/core/modules/NomenclatureItem.cpp:688
 msgid "'Bay'; small plain."
-msgstr ""
+msgstr "\"海湾\";靠海边的小平原"
 
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:693
 msgid "Extensive land mass."
-msgstr ""
+msgstr "广大的土地"
 
 #. TRANSLATORS: Description for landform 'tessera'
 #: src/core/modules/NomenclatureItem.cpp:697
 msgid "Tile-like, polygonal terrain."
-msgstr ""
+msgstr "类似砌的砖瓦，是多边形的区域"
 
 #. TRANSLATORS: Description for landform 'tholus'
 #: src/core/modules/NomenclatureItem.cpp:701
 msgid "Small domical mountain or hill."
-msgstr ""
+msgstr "小的圆顶外形的山或小山"
 
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:705
 msgid "Dunes."
-msgstr ""
+msgstr "沙丘"
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:709
 msgid "Valley."
-msgstr ""
+msgstr "山谷"
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:713
 msgid "Extensive plain."
-msgstr ""
+msgstr "广大的平原"
 
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:717
 msgid "A streak or stripe of color."
-msgstr ""
+msgstr "条纹或有颜色的条纹"
 
 #. TRANSLATORS: Description for landform 'landing site' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:721
 msgid "Lunar features at or near Apollo landing sites."
-msgstr ""
+msgstr "在阿波罗登陆点与附近的月球特征"
 
 #: src/core/modules/NomenclatureItem.cpp:725
 msgid "Undocumented landform type."
-msgstr ""
+msgstr "未记录的地形类型。"
 
 #: src/core/modules/NomenclatureItem.cpp:763
 msgid "latin name"
-msgstr ""
+msgstr "拉丁名"
 
 #: src/core/modules/NomenclatureItem.cpp:773
 msgid "latin term"
-msgstr ""
+msgstr "拉丁语"
 
 #: src/core/modules/NomenclatureItem.cpp:783
 msgid "Linear size"
-msgstr ""
+msgstr "线性尺寸"
 
 #: src/core/modules/NomenclatureItem.cpp:785
 msgid "Diameter"
-msgstr ""
+msgstr "直径"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:786 src/core/modules/Planet.cpp:417
@@ -1125,19 +1125,19 @@ msgstr "千米"
 
 #: src/core/modules/NomenclatureItem.cpp:791
 msgid "Planetographic long./lat."
-msgstr ""
+msgstr "行星表面经度/纬度"
 
 #: src/core/modules/NomenclatureItem.cpp:792
 msgid "Celestial body"
-msgstr ""
+msgstr "天体"
 
 #: src/core/modules/NomenclatureItem.cpp:794
 msgid "Landform description"
-msgstr ""
+msgstr "地形描述"
 
 #: src/core/modules/NomenclatureMgr.cpp:72
 msgid "Nomenclature labels"
-msgstr ""
+msgstr "行星体系命名标签"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
 #: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
@@ -2091,7 +2091,7 @@ msgstr "增加 1 恒星日"
 
 #: src/core/StelCore.cpp:274
 msgid "Add 7 sidereal days"
-msgstr ""
+msgstr "增加7个恒星日"
 
 #: src/core/StelCore.cpp:275
 msgid "Add 1 sidereal year"
@@ -2107,7 +2107,7 @@ msgstr "增加1朔望月"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 saros"
-msgstr ""
+msgstr "增加1个沙罗周期"
 
 #: src/core/StelCore.cpp:279
 msgid "Add 1 draconic month"
@@ -2163,7 +2163,7 @@ msgstr "减少 1 恒星日"
 
 #: src/core/StelCore.cpp:292
 msgid "Subtract 7 sidereal days"
-msgstr ""
+msgstr "减去7个恒星日"
 
 #: src/core/StelCore.cpp:293
 msgid "Subtract 1 sidereal year"
@@ -2179,7 +2179,7 @@ msgstr "减少1朔望月"
 
 #: src/core/StelCore.cpp:296
 msgid "Subtract 1 saros"
-msgstr ""
+msgstr "减去1个沙罗周期"
 
 #: src/core/StelCore.cpp:297
 msgid "Subtract 1 draconic month"
@@ -3892,7 +3892,7 @@ msgstr "保存脚本"
 
 #: src/gui/ScriptConsole.cpp:227
 msgid "Select Script Include Directory"
-msgstr ""
+msgstr "选择脚本包含目录"
 
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
@@ -4453,7 +4453,7 @@ msgstr "CSV (逗号分隔)"
 
 #: src/gui/AstroCalcDialog.cpp:743
 msgid "Save celestial positions of objects as..."
-msgstr ""
+msgstr "将天体的位置保存为..."
 
 #: src/gui/AstroCalcDialog.cpp:841 src/ui_dateTimeDialogGui.h:382
 #: src/ui_dateTimeDialogGui.h:387
@@ -4772,7 +4772,7 @@ msgstr "文本文件"
 
 #: src/gui/AstroCalcDialog.cpp:3337
 msgid "Save list of objects as..."
-msgstr ""
+msgstr "将对象列表保存为..."
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -4964,7 +4964,7 @@ msgstr "星群"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:94
 msgid "Planetary Features"
-msgstr ""
+msgstr "行星特征"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -5736,7 +5736,7 @@ msgstr "详细视图"
 
 #: src/translations.h:473
 msgid "Recent Places"
-msgstr ""
+msgstr "最近的位置"
 
 #: src/translations.h:474
 #, qt-format
@@ -5744,6 +5744,8 @@ msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
+"%1 已经存在。\n"
+"想替换它吗?"
 
 #: src/translations.h:475
 msgid "&Yes"
@@ -7221,15 +7223,15 @@ msgstr "显示所选行星的轨道"
 
 #: src/ui_viewDialog.h:2460
 msgid "Show hints and labels for planetary features"
-msgstr ""
+msgstr "显示行星特征的提示和标签"
 
 #: src/ui_viewDialog.h:2462
 msgid "Show planetary nomenclature"
-msgstr ""
+msgstr "显示行星体系命名"
 
 #: src/ui_viewDialog.h:2464
 msgid "Color of nomenclature labels"
-msgstr ""
+msgstr "体系命名标签的颜色"
 
 #: src/ui_viewDialog.h:2467
 msgid "Display objects from catalogs"
@@ -7755,11 +7757,11 @@ msgstr "按亮度显示图案"
 
 #: src/ui_viewDialog.h:2796
 msgid "Show constellation lines"
-msgstr ""
+msgstr "显示星座连线"
 
 #: src/ui_viewDialog.h:2798 src/ui_viewDialog.h:2822 src/ui_viewDialog.h:2833
 msgid "Thickness of line in pixels"
-msgstr ""
+msgstr "线的宽度"
 
 #: src/ui_viewDialog.h:2801
 msgid "Color of constellation lines"
@@ -7815,11 +7817,11 @@ msgstr "星群名称的颜色"
 
 #: src/ui_viewDialog.h:2831
 msgid "Show ray helpers"
-msgstr ""
+msgstr "显示导航辅助线"
 
 #: src/ui_viewDialog.h:2836
 msgid "Color of ray helpers"
-msgstr ""
+msgstr "导航辅助线的颜色"
 
 #: src/ui_viewDialog.h:2839
 msgid "Visible"
@@ -8649,7 +8651,7 @@ msgstr "今晚有什么"
 
 #: src/ui_astroCalcDialog.h:803
 msgid "Save positions"
-msgstr ""
+msgstr "保存位置"
 
 #: src/ui_astroCalcDialog.h:804
 msgid "Update positions"
@@ -8784,7 +8786,7 @@ msgstr "匹配天体："
 
 #: src/ui_astroCalcDialog.h:858
 msgid "Save list of objects"
-msgstr ""
+msgstr "保存对象列表"
 
 #: src/ui_astroCalcDialog.h:859
 msgid "Show objects which are up:"
@@ -10433,12 +10435,12 @@ msgstr "下点 纬度/经度)"
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:324
 msgid "TEME coordinates"
-msgstr ""
+msgstr "TEME坐标"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:331
 msgid "TEME velocity"
-msgstr ""
+msgstr "TEME速度"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "Sun reflection angle"
@@ -13249,7 +13251,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:236
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "基于电子密度模型的距离"
 
 #: plugins/Pulsars/src/Pulsar.cpp:249
 #, no-c-format
@@ -15145,7 +15147,7 @@ msgstr "辐射点漂移"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "地心速度"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
@@ -15153,7 +15155,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "母体"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
@@ -15959,7 +15961,7 @@ msgstr "屏幕右下角"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "Near mouse cursor"
-msgstr ""
+msgstr "靠近鼠标光标"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "Custom position"
