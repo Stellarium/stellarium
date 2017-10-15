@@ -91,7 +91,207 @@ class Translations
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Asterisms");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
-		N_("Planetary Features");
+		N_("Geological features");
+
+		// =====================================================================
+		// List of geological features by type
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: albedo features");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: arcūs");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: astra");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: catenae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: cavi");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: chaoses");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: chasmata");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: colles");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: coronae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: craters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: dorsa");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: eruptive centers");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: faculae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: farra");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: flexūs");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: fluctūs");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: flumina");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: freta");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: fossae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: insulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: labēs");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: labyrinthi");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: lacunae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: lacūs");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: large ringed features");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: lineae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: lingulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: maculae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: maria");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: mensae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: montes");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: oceani");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: paludes");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: paterae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: planitiae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: plana");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: plumes");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: promontoria");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: regiones");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: rimae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: rupēs");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: scopuli");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: serpentes");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: sulci");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: sinūs");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: terrae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: tholi");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: undae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: valles");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: vastitates");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: virgae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: landing sites");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: lenticulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: reticula");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Geological features: tesserae");
+
+		// =====================================================================
+		// List of geological features by celestial body
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Epimetheus");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Vesta");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Mathilde");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Venus");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Mercury");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Iapetus");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Ganymede");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Ceres");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Ida");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Triton");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Oberon");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Itokawa");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Thebe");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Gaspra");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Rhea");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Enceladus");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of the Moon");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Dione");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Steins");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Phoebe");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Puck");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Europa");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Lutetia");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Tethys");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Eros");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Callisto");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Phobos");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Proteus");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Hyperion");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Titania");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Deimos");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Io");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Ariel");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Dactyl");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Titan");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Amalthea");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Umbriel");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Janus");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Mars");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Miranda");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Mimas");
+		// TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
+		N_("Named geological features of Pluto");
 
 		// =====================================================================
 		// List of deep-sky objects types
