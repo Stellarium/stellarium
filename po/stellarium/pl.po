@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-10 20:27+0700\n"
-"PO-Revision-Date: 2017-10-14 00:29+0000\n"
+"PO-Revision-Date: 2017-10-15 01:39+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-14 05:12+0000\n"
+"X-Launchpad-Export-Date: 2017-10-15 05:14+0000\n"
 "X-Generator: Launchpad (build 18474)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -4871,7 +4871,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:3337
 msgid "Save list of objects as..."
-msgstr ""
+msgstr "Zapisz listę obiektów jako..."
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5655,6 +5655,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Największe elongacje i opozycje Ziemi i innych widocznych planet widziane z "
+"Ceres 2000-3000"
 
 #: src/translations.h:421
 msgid "A tour of Messier Objects"
@@ -5790,7 +5792,7 @@ msgstr "&Otwórz"
 
 #: src/translations.h:450
 msgid "&Save"
-msgstr ""
+msgstr "&Zapisz"
 
 #: src/translations.h:451
 msgid "File &name:"
@@ -8869,7 +8871,7 @@ msgstr "Co widać dziś wieczorem"
 
 #: src/ui_astroCalcDialog.h:803
 msgid "Save positions"
-msgstr ""
+msgstr "Zapisz położenia"
 
 #: src/ui_astroCalcDialog.h:804
 msgid "Update positions"
@@ -9004,7 +9006,7 @@ msgstr "Pasujące obiekty:"
 
 #: src/ui_astroCalcDialog.h:858
 msgid "Save list of objects"
-msgstr ""
+msgstr "Zapisz listę obiektów"
 
 #: src/ui_astroCalcDialog.h:859
 msgid "Show objects which are up:"
@@ -10802,7 +10804,7 @@ msgstr "niszczejący"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:245
 msgid "Save predicted Iridium flares as..."
-msgstr ""
+msgstr "Zapisz przewidywane rozbłyski Iridium jako..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
 msgid "Stellarium Satellites Plugin"
@@ -11328,7 +11330,7 @@ msgstr "Przewidywanie rozbłysków Iridium"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "Zapisz przewidywania..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -13867,27 +13869,31 @@ msgstr "Użyj odrębnego koloru dla pulsarów z zaburzeniami"
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Zdalne sterowanie"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"Umożliwia zdalne sterowanie za pomocą interfejsu serwera WWW. Szczegółowy "
+"opis znajduje się w instrukcji."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 msgid "Remote control"
-msgstr ""
+msgstr "Zdalne sterowanie"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Wtyczka Zdalne sterowanie"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"Wtyczka Zdalne sterowanie zapewnia interfejs WWW umożliwiający zmianę stanów "
+"i wywoływanie skryptów za pomocą przeglądarki stron WWW."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:117
 msgid "It is also possible to send commands via command line, e.g.."
@@ -13923,11 +13929,11 @@ msgstr ""
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Konfiguracja wtyczki Zdalne sterowanie"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguracja wtyczki Zdalne sterowanie"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
@@ -14468,6 +14474,9 @@ msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
+"Helvetios to celtyckie słowo oznaczające <em>Helwetę</em>, odnoszące się do "
+"celtyckiego plemienia zamieszkującego w starożytności tereny obecnej "
+"Szwajcarii."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid ""
@@ -14482,8 +14491,8 @@ msgid ""
 "revolutionibus orbium coelestium</em>."
 msgstr ""
 "Mikołaj Kopernik (1473-1543) był polskim astronomem, który zaproponował "
-"model heliocentryczny układu słoneczny w swojej pracy <em>De revolutionibus "
-"orbium coelestium</em>."
+"model heliocentryczny układu słonecznego w swojej pracy <em>De "
+"revolutionibus orbium coelestium</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
@@ -14501,6 +14510,10 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
+"Tycho Brahe (1546-1601) był duńskim astronomem i szlachcicem, który "
+"przeprowadził i udokumentował dokładne obserwacje gwiazd i planet. Odegrały "
+"one kluczową rolę w sformułowaniu przez Keplera trzech praw opisujących ruch "
+"planet."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
