@@ -78,6 +78,7 @@ void NomenclatureMgr::loadNomenclature()
 
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	nomenclatureItems.clear();
+	celestialBodies.clear();
 
 	// regular expression to find the comments and empty lines
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
@@ -347,6 +348,7 @@ void NomenclatureMgr::loadNomenclature()
 					if (p.isNull()) // is it a minor planet?
 						p = ssystem->searchMinorPlanetByEnglishName(planet);
 					planetName = planet;
+					celestialBodies << planet;
 				}
 
 
@@ -486,6 +488,45 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 		}
 	}
 
+	return result;
+}
+
+QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
+{
+	QStringList result;
+	int type = objType.toInt();
+	switch (type)
+	{
+		case 0:
+		{
+			foreach (const NomenclatureItemP& nItem, nomenclatureItems)
+			{
+				if (nItem->getPlanet()->getEnglishName().contains(objType, Qt::CaseSensitive) && nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
+				{
+					if (inEnglish)
+						result << nItem->getEnglishName();
+					else
+						result << nItem->getNameI18n();
+				}
+			}
+		}
+		default:
+		{
+			foreach (const NomenclatureItemP& nItem, nomenclatureItems)
+			{
+				if (nItem->getNomenclatureType()==type)
+				{
+					if (inEnglish)
+						result << nItem->getEnglishName();
+					else
+						result << nItem->getNameI18n();
+				}
+			}
+			break;
+		}
+	}
+
+	result.removeDuplicates();
 	return result;
 }
 

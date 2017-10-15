@@ -716,9 +716,8 @@ QString NomenclatureItem::getNomenclatureTypeDescription() const
 			// TRANSLATORS: Description for landform 'virga'
 			nTypeStr = q_("A streak or stripe of color.");
 			break;
-		case niLandingSite:
-			// TRANSLATORS: Description for landform 'landing site' on the Moon
-			nTypeStr = q_("Lunar features at or near Apollo landing sites.");
+		case niLandingSite:			
+			nTypeStr = "";
 			break;
 		case niUNDEFINED:
 		default:
@@ -790,8 +789,9 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	{
 		oss << QString("%1: %2/%3").arg(q_("Planetographic long./lat.")).arg(StelUtils::decDegToDmsStr(longitude)).arg(StelUtils::decDegToDmsStr(latitude)) << "<br />";
 		oss << QString("%1: %2").arg(q_("Celestial body")).arg(planet->getNameI18n()) << "<br />";
-		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED)
-			oss << QString("%1: %2").arg(q_("Landform description"), getNomenclatureTypeDescription()) << "<br />";
+		QString description = getNomenclatureTypeDescription();
+		if (getNomenclatureType()!=NomenclatureItem::niUNDEFINED && !description.isEmpty())
+			oss << QString("%1: %2").arg(q_("Landform description"), description) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
