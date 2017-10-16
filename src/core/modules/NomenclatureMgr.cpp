@@ -77,8 +77,7 @@ void NomenclatureMgr::loadNomenclature()
 	qDebug() << "Loading nomenclature for Solar system bodies ...";
 
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	nomenclatureItems.clear();
-	celestialBodies.clear();
+	nomenclatureItems.clear();	
 
 	// regular expression to find the comments and empty lines
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
@@ -347,8 +346,7 @@ void NomenclatureMgr::loadNomenclature()
 					p = ssystem->searchByEnglishName(planet);
 					if (p.isNull()) // is it a minor planet?
 						p = ssystem->searchMinorPlanetByEnglishName(planet);
-					planetName = planet;
-					celestialBodies << planet;
+					planetName = planet;					
 				}
 
 
@@ -520,6 +518,7 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 							result << nItem->getNameI18n();
 					}
 				}
+				break;
 			}
 			default:
 			{
