@@ -125,8 +125,7 @@ private:
 	// Font used for displaying our text
 	QFont font;
 	QSettings* conf;
-	StelTextureSP texPointer;
-	QStringList celestialBodies;
+	StelTextureSP texPointer;	
 	QList<NomenclatureItemP> nomenclatureItems;
 };
 
