@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-15 21:15+0700\n"
-"PO-Revision-Date: 2017-10-13 18:07+0000\n"
-"Last-Translator: Alfonso Jose Rodriguez <alfooons@gmail.com>\n"
+"PO-Revision-Date: 2017-10-16 23:10+0000\n"
+"Last-Translator: Miguel Angel <maportilloserra@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-16 05:29+0000\n"
-"X-Generator: Launchpad (build 18474)\n"
+"X-Launchpad-Export-Date: 2017-10-17 05:15+0000\n"
+"X-Generator: Launchpad (build 18476)\n"
 "Language: es_ES\n"
 
 #: src/core/modules/CustomObject.cpp:81
@@ -167,11 +167,11 @@ msgstr "Primera vertical"
 
 #: src/core/modules/GridLinesMgr.cpp:687
 msgid "Equinoctial Colure"
-msgstr "Coluro equinoccial"
+msgstr "Color equinoccial"
 
 #: src/core/modules/GridLinesMgr.cpp:691
 msgid "Solstitial Colure"
-msgstr "Coluro solsticial"
+msgstr "Color solsticial"
 
 #: src/core/modules/GridLinesMgr.cpp:696
 msgid "Circumpolar Circle"
@@ -185,7 +185,7 @@ msgstr "PNC"
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:894 src/core/modules/GridLinesMgr.cpp:903
 msgid "SCP"
-msgstr "PSC"
+msgstr "SCP"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:910
@@ -332,11 +332,11 @@ msgstr "Cenit y nadir"
 
 #: src/core/modules/GridLinesMgr.cpp:1255
 msgid "Ecliptic J2000 poles"
-msgstr "Polos de eclíptica J2000"
+msgstr "Polos de la eclíptica J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
-msgstr "Polos de eclíptica"
+msgstr "Polos de la eclíptica"
 
 #: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2684
 msgid "Galactic poles"
@@ -348,19 +348,19 @@ msgstr "Polos supergalácticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Equinox J2000 points"
-msgstr "Puntos de equinoccio J2000"
+msgstr "Puntos del equinoccio J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1260
 msgid "Equinox points"
-msgstr "Puntos de equinoccio"
+msgstr "Puntos del equinoccio"
 
 #: src/core/modules/GridLinesMgr.cpp:1261
 msgid "Solstice J2000 points"
-msgstr "Puntos de solsticio J2000"
+msgstr "Puntos del solsticio J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1262
 msgid "Solstice points"
-msgstr "Puntos de solsticio"
+msgstr "Puntos del solsticio"
 
 #: src/core/modules/LandscapeMgr.cpp:423
 msgid "Atmosphere"
@@ -381,16 +381,16 @@ msgstr "Suelo"
 
 #: src/core/modules/LandscapeMgr.cpp:427
 msgid "Landscape illumination"
-msgstr "Iluminación de paisaje"
+msgstr "Iluminación del paisaje"
 
 #: src/core/modules/LandscapeMgr.cpp:428
 msgid "Landscape labels"
-msgstr "Nombres de paisaje"
+msgstr "Nombres del paisaje"
 
 #: src/core/modules/LandscapeMgr.cpp:429 src/ui_viewDialog.h:2402
 msgid "Light pollution data from locations database"
 msgstr ""
-"Datos de contaminación lumínica desde la base de datos de las ubicaciones"
+"Datos de la contaminación lumínica desde la base de datos de las ubicaciones"
 
 #: src/core/modules/LandscapeMgr.cpp:793 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
@@ -450,25 +450,25 @@ msgstr "por la escala Bortle"
 #: src/core/modules/NomenclatureItem.cpp:67
 msgctxt "landform"
 msgid "albedo feature"
-msgstr ""
+msgstr "función albedo"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:71
 msgctxt "landform"
 msgid "arcus"
-msgstr ""
+msgstr "arco"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:75
 msgctxt "landform"
 msgid "astrum"
-msgstr ""
+msgstr "astrum"
 
 #. TRANSLATORS: Chain of craters
 #: src/core/modules/NomenclatureItem.cpp:79
 msgctxt "landform"
 msgid "catena"
-msgstr ""
+msgstr "catena"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
 #: src/core/modules/NomenclatureItem.cpp:83
@@ -1277,7 +1277,7 @@ msgstr "concentración central densa de estrellas"
 #: src/core/modules/Nebula.cpp:1155
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr "fuerte núcleo interno de estrellas"
+msgstr "fuerte núcleo interno de las estrellas"
 
 #: src/core/modules/Nebula.cpp:1158
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -1565,7 +1565,7 @@ msgstr "interacción galaxias"
 
 #: src/core/modules/Nebula.cpp:1428 plugins/Quasars/src/Quasar.cpp:102
 msgid "quasar"
-msgstr "cuásar"
+msgstr "quásar"
 
 #: src/core/modules/Nebula.cpp:1431
 msgid "star cluster"
@@ -1589,7 +1589,7 @@ msgstr "nebulosa planetaria"
 
 #: src/core/modules/Nebula.cpp:1446
 msgid "dark nebula"
-msgstr "nebulosa obscura"
+msgstr "nebulosa oscura"
 
 #: src/core/modules/Nebula.cpp:1449
 msgid "cluster associated with nebulosity"
@@ -1641,7 +1641,7 @@ msgstr "objeto de emisión"
 
 #: src/core/modules/Nebula.cpp:1485
 msgid "BL Lac object"
-msgstr "objeto BL Lac"
+msgstr "Objeto BL Lac"
 
 #: src/core/modules/Nebula.cpp:1488
 msgid "blazar"
@@ -1692,11 +1692,11 @@ msgstr "objeto de naturaleza desconocida"
 
 #: src/core/modules/Nebula.cpp:1521
 msgid "undocumented type"
-msgstr "tipo no documentado"
+msgstr "tipo sin documentar"
 
 #: src/core/modules/NebulaMgr.cpp:403
 msgid "Deep-sky objects"
-msgstr "Objetos del Espacio profundo"
+msgstr "Objetos de Espacio profundo"
 
 #: src/core/modules/NebulaMgr.cpp:404
 msgid "Toggle DSO type filter"
@@ -1977,7 +1977,7 @@ msgstr "Duración del eclipse"
 
 #: src/core/modules/StarWrapper.cpp:284
 msgid "Position angle"
-msgstr "Ángulo de posición"
+msgstr "Angulo de posición"
 
 #: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
 #: src/gui/AstroCalcDialog.cpp:1936
@@ -2088,15 +2088,15 @@ msgstr "Substraer 1 minuto solar"
 
 #: src/core/StelCore.cpp:270
 msgid "Subtract 1 solar hour"
-msgstr "Substraer 1 hora solar"
+msgstr "restar 1 hora solar"
 
 #: src/core/StelCore.cpp:271
 msgid "Subtract 1 solar day"
-msgstr "Substraer 1 día solar"
+msgstr "restar 1 día solar"
 
 #: src/core/StelCore.cpp:272
 msgid "Subtract 7 solar days"
-msgstr "Substraer 7 días solares"
+msgstr "restar 7 días solares"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 1 sidereal day"
@@ -2116,7 +2116,7 @@ msgstr "Agregar 100 años sidéreos"
 
 #: src/core/StelCore.cpp:277
 msgid "Add 1 synodic month"
-msgstr "Agregar 1 mes sinódico"
+msgstr "Añadir 1 mes sinodico"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 saros"
@@ -2124,23 +2124,23 @@ msgstr "Agregar 1 saros"
 
 #: src/core/StelCore.cpp:279
 msgid "Add 1 draconic month"
-msgstr "Agregar 1 mes dracónico"
+msgstr "Añadir 1 mes draconico"
 
 #: src/core/StelCore.cpp:280
 msgid "Add 1 draconic year"
-msgstr "Agregar 1 año dracónico"
+msgstr "Añadir 1 año dracónico"
 
 #: src/core/StelCore.cpp:281
 msgid "Add 1 anomalistic month"
-msgstr "Agregar 1 mes anómalo"
+msgstr "Añadir 1 mes anómalo"
 
 #: src/core/StelCore.cpp:282
 msgid "Add 1 anomalistic year"
-msgstr "Agregar 1 año anómalo"
+msgstr "Añadir 1 año anómalo"
 
 #: src/core/StelCore.cpp:283
 msgid "Add 100 anomalistic years"
-msgstr "Agregar 100 años anómalos"
+msgstr "Añadir 100 años anómalos"
 
 #: src/core/StelCore.cpp:284
 msgid "Add 1 mean tropical month"
@@ -2152,11 +2152,11 @@ msgstr "Agregar 1 año tropical medio"
 
 #: src/core/StelCore.cpp:286
 msgid "Add 100 mean tropical years"
-msgstr "Agregar 100 años tropicales medios"
+msgstr "Añadir 100 años tropicales medios"
 
 #: src/core/StelCore.cpp:287
 msgid "Add 1 tropical year"
-msgstr "Agregar 1 año tropical"
+msgstr "Añadir 1 año tropical"
 
 #: src/core/StelCore.cpp:288
 msgid "Add 1 Julian year"
@@ -2208,11 +2208,11 @@ msgstr "Substraer 1 mes anómalo"
 
 #: src/core/StelCore.cpp:300
 msgid "Subtract 1 anomalistic year"
-msgstr "Substraer 1 año anómalo"
+msgstr "Restar 1 año anómalo"
 
 #: src/core/StelCore.cpp:301
 msgid "Subtract 100 anomalistic years"
-msgstr "Substraer 100 años anómalos"
+msgstr "Restar 100 años anómalos"
 
 #: src/core/StelCore.cpp:302
 msgid "Subtract 1 mean tropical month"
@@ -2224,11 +2224,11 @@ msgstr "Substraer 1 año tropical medio"
 
 #: src/core/StelCore.cpp:304
 msgid "Subtract 100 mean tropical years"
-msgstr "Substraer 100 años tropicales medios"
+msgstr "Restar 100 años tropicales medios"
 
 #: src/core/StelCore.cpp:305
 msgid "Subtract 1 tropical year"
-msgstr "Substraer 1 año tropical"
+msgstr "Restar 1 año tropical"
 
 #: src/core/StelCore.cpp:306
 msgid "Subtract 1 Julian year"

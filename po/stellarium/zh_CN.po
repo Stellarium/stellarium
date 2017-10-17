@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-15 21:15+0700\n"
-"PO-Revision-Date: 2017-10-15 16:04+0000\n"
+"PO-Revision-Date: 2017-10-16 16:06+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-16 05:34+0000\n"
-"X-Generator: Launchpad (build 18474)\n"
+"X-Launchpad-Export-Date: 2017-10-17 05:15+0000\n"
+"X-Generator: Launchpad (build 18476)\n"
 
 #: src/core/modules/CustomObject.cpp:81
 msgid "custom object"
@@ -1233,13 +1233,13 @@ msgstr "千秒差距"
 #: src/core/modules/Nebula.cpp:334
 msgctxt "distance"
 msgid "Mpc"
-msgstr ""
+msgstr "百万秒差距"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
 #: src/core/modules/Nebula.cpp:336
 msgctxt "distance"
 msgid "Mio. ly"
-msgstr ""
+msgstr "百万光年"
 
 #: src/core/modules/Nebula.cpp:364 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
@@ -1703,7 +1703,7 @@ msgstr "平均冲时星等"
 #: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgctxt "distance, astronomical unit"
 msgid "AU"
-msgstr ""
+msgstr "天文单位"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
@@ -1711,7 +1711,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
-msgstr ""
+msgstr "百万公里"
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:215
@@ -1734,7 +1734,7 @@ msgstr "视直径"
 #: src/core/modules/StarWrapper.cpp:258
 msgctxt "duration"
 msgid "days"
-msgstr ""
+msgstr "天"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:356
 #: src/core/modules/Comet.cpp:241
@@ -1853,7 +1853,7 @@ msgstr "周期彗星"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
-msgstr ""
+msgstr "公里/秒"
 
 #: src/core/modules/Comet.cpp:247
 msgid "Speed"
@@ -4047,7 +4047,7 @@ msgstr "星等"
 #. TRANSLATORS: angular size, arcminutes
 #: src/gui/AstroCalcDialog.cpp:303
 msgid "A.S."
-msgstr ""
+msgstr "角分"
 
 #. TRANSLATORS: separation, arcseconds
 #: src/gui/AstroCalcDialog.cpp:307
@@ -5079,162 +5079,162 @@ msgstr "地理特征：洼地"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:145
 msgid "Geological features: lacūs"
-msgstr ""
+msgstr "地形特征：湖"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:147
 msgid "Geological features: large ringed features"
-msgstr ""
+msgstr "地形特征：大的环状特征"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:149
 msgid "Geological features: lineae"
-msgstr ""
+msgstr "地形特征：线"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:151
 msgid "Geological features: lingulae"
-msgstr ""
+msgstr "地形特征：舌"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:153
 msgid "Geological features: maculae"
-msgstr ""
+msgstr "地形特征：斑"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:155
 msgid "Geological features: maria"
-msgstr ""
+msgstr "地形特征：海"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Geological features: mensae"
-msgstr ""
+msgstr "地形特征：平顶山"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Geological features: montes"
-msgstr ""
+msgstr "地形特征：山"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
 msgid "Geological features: oceani"
-msgstr ""
+msgstr "地形特征：洋"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Geological features: paludes"
-msgstr ""
+msgstr "地形特征：沼"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:165
 msgid "Geological features: paterae"
-msgstr ""
+msgstr "地形特征：火山"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:167
 msgid "Geological features: planitiae"
-msgstr ""
+msgstr "地形特征：平原"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:169
 msgid "Geological features: plana"
-msgstr ""
+msgstr "地形特征：高原"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:171
 msgid "Geological features: plumes"
-msgstr ""
+msgstr "地形特征：羽流"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:173
 msgid "Geological features: promontoria"
-msgstr ""
+msgstr "地形特征：海角"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:175
 msgid "Geological features: regiones"
-msgstr ""
+msgstr "地形特征：区"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:177
 msgid "Geological features: rimae"
-msgstr ""
+msgstr "地形特征：溪"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:179
 msgid "Geological features: rupēs"
-msgstr ""
+msgstr "地形特征：峭壁"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:181
 msgid "Geological features: scopuli"
-msgstr ""
+msgstr "地形特征：不规则峭壁"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:183
 msgid "Geological features: serpentes"
-msgstr ""
+msgstr "地形特征：蛇形"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:185
 msgid "Geological features: sulci"
-msgstr ""
+msgstr "地形特征：沟"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:187
 msgid "Geological features: sinūs"
-msgstr ""
+msgstr "地形特征：湾"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:189
 msgid "Geological features: terrae"
-msgstr ""
+msgstr "地形特征：土"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:191
 msgid "Geological features: tholi"
-msgstr ""
+msgstr "地形特征：山丘"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:193
 msgid "Geological features: undae"
-msgstr ""
+msgstr "地形特征：沙丘"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Geological features: valles"
-msgstr ""
+msgstr "地形特征：谷"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Geological features: vastitates"
-msgstr ""
+msgstr "地形特征：荒原"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:199
 msgid "Geological features: virgae"
-msgstr ""
+msgstr "地形特征：幡状"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:201
 msgid "Geological features: landing sites"
-msgstr ""
+msgstr "地形特征：登陆地"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:203
 msgid "Geological features: lenticulae"
-msgstr ""
+msgstr "地形特征：镜状"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:205
 msgid "Geological features: reticula"
-msgstr ""
+msgstr "地形特征：网状构造"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:207
 msgid "Geological features: tesserae"
-msgstr ""
+msgstr "地形特征：镶嵌地块"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:212
