@@ -830,9 +830,15 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// Calculate the radius of the planet. It is necessary to re-scale it
 	double r = planet->getRadius() * planet->getSphereScale();
 
+	// Calculate light speed correction
+	// TODO: Improve this hack!
+	double light_speed_correction = 0.0;
+	if (GETSTELMODULE(SolarSystem)->getFlagLightTravelTime())
+		light_speed_correction = (planet->getHeliocentricEclipticPos()-core->getCurrentPlanet()->getHeliocentricEclipticPos()).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+
 	// Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions
 	double nlatitude = latitude * M_PI/180.0;
-	double nlongitude = (longitude + planet->getSiderealTime(core->getJD(), core->getJDE())) * M_PI/180.0;
+	double nlongitude = (longitude + planet->getSiderealTime(core->getJD()-light_speed_correction, core->getJDE()-light_speed_correction)) * M_PI/180.0;
 
 	// The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
 	XYZ0[0] = r * cos(nlatitude) * cos(nlongitude);
