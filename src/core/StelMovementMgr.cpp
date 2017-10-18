@@ -193,9 +193,10 @@ void StelMovementMgr::init()
 
 	QString movementGroup = N_("Movement and Selection");
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
-	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "setFlagTracking()", "Space");
+	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "tracking", "Space");
 	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
 	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
+	// AW: Same behaviour has action "actionGoto_Selected_Object" by the fact (Is it for backward compatibility?)
 	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
 	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
 	addAction("actionLook_Towards_East", movementGroup, N_("Look towards East"), "lookEast()", "Shift+E");
@@ -1175,13 +1176,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 // This is called when you press SPACEBAR: slowly centering&tracking object
 void StelMovementMgr::setFlagTracking(bool b)
 {
-	if (b && flagTracking)
-	{
-		flagTracking=false;
-		// objectMgr->unSelect();
-		emit flagTrackingChanged(!b);
-	}
-	else if (!b || !objectMgr->getWasSelected())
+	if (!b || !objectMgr->getWasSelected())
 	{
 		if(b!=flagTracking)
 		{
