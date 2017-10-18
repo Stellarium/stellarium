@@ -202,6 +202,7 @@ public:
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
+	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
