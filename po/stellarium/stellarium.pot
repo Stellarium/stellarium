@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-15 21:15+0700\n"
+"POT-Creation-Date: 2017-10-18 20:38+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: src/core/modules/CustomObject.cpp:81
 msgid "custom object"
@@ -3856,7 +3857,7 @@ msgstr ""
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:255 src/gui/AstroCalcDialog.cpp:281
 #: src/gui/AstroCalcDialog.cpp:845
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:993
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
 msgid "Azimuth"
 msgstr ""
 
@@ -3866,7 +3867,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:847 src/gui/AstroCalcDialog.cpp:1507
 #: src/gui/AstroCalcDialog.cpp:1913 src/gui/AstroCalcDialog.cpp:1915
 #: plugins/Satellites/src/Satellite.cpp:308
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:992
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
 msgid "Altitude"
 msgstr ""
 
@@ -11023,17 +11024,17 @@ msgid "Internet updates disabled"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:525
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:541
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:547
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:206
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:215
 #: plugins/Novae/src/gui/NovaeDialog.cpp:165
-#: plugins/Novae/src/gui/NovaeDialog.cpp:199
+#: plugins/Novae/src/gui/NovaeDialog.cpp:208
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:214
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:243
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:370
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:376
 msgid "Updating now..."
 msgstr ""
 
@@ -11046,113 +11047,117 @@ msgstr ""
 msgid "Next update: < 1 minute"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:532
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
-#: plugins/Novae/src/gui/NovaeDialog.cpp:169
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
-#, qt-format
-msgid "Next update: %1 minutes"
-msgstr ""
-
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:534
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
-#, qt-format
-msgid "Next update: %1 hours"
-msgstr ""
+#, qt-format, qt-plural-format
+msgid "Next update: %1 minute(s)"
+msgid_plural "Next update: %1 minute(s)"
+msgstr[0] ""
+msgstr[1] ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:544
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
-#: plugins/Novae/src/gui/NovaeDialog.cpp:202
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:217
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:246
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:183
+#: plugins/Novae/src/gui/NovaeDialog.cpp:176
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:313
+#, qt-format, qt-plural-format
+msgid "Next update: %1 hour(s)"
+msgid_plural "Next update: %1 hour(s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:218
+#: plugins/Novae/src/gui/NovaeDialog.cpp:211
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:226
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:379
 msgid "Update error"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:557
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:563
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:559
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:565
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:621
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:627
 msgid "[new source]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:673
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
 #: plugins/Satellites/src/ui_satellitesDialog.h:750
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:204
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:188
+#: plugins/Novae/src/gui/NovaeDialog.cpp:197
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:194
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:359
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:365
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:474
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:675
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
-#: plugins/Novae/src/gui/NovaeDialog.cpp:190
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:187
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:210
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:361
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:681
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:206
+#: plugins/Novae/src/gui/NovaeDialog.cpp:199
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:196
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:367
 msgid "Update from files"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:717
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 msgid "[orbit calculation error]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:724
 msgid "[all newly added]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 msgid "[all not displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:720
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
 msgid "[all displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:721
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
 msgid "[all]"
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:765
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
 msgid "New group..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:971
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:990
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:996
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:991
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
 msgid "Brightness"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:994
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1000
 msgid "Satellite"
 msgstr ""
 
@@ -13195,15 +13200,17 @@ msgstr ""
 msgid "in Russia"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
-#: plugins/Novae/src/gui/NovaeDialog.cpp:173
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:193
-#, qt-format
-msgid "Next update: %1 days"
-msgstr ""
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
+#: plugins/Novae/src/gui/NovaeDialog.cpp:181
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:178
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:201
+#, qt-format, qt-plural-format
+msgid "Next update: %1 day(s)"
+msgid_plural "Next update: %1 day(s)"
+msgstr[0] ""
+msgstr[1] ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:216
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:225
 msgid "Historical supernovae is updated"
 msgstr ""
 
@@ -13389,7 +13396,7 @@ msgid ""
 "generalized values for it."
 msgstr ""
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:209
+#: plugins/Novae/src/gui/NovaeDialog.cpp:218
 msgid "Novae is updated"
 msgstr ""
 
@@ -13436,7 +13443,7 @@ msgstr ""
 msgid "The current catalog contains info about %1 quasars."
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:224
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:233
 msgid "Quasars is updated"
 msgstr ""
 
@@ -13681,7 +13688,7 @@ msgstr ""
 msgid "in France"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:253
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:262
 msgid "Pulsars is updated"
 msgstr ""
 
@@ -14663,67 +14670,67 @@ msgstr ""
 msgid "The Habitable Exoplanets Catalog"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:381
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:387
 msgid "Exoplanets is updated"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:502
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid "Orbital Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:503
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
 msgid "Orbit Semi-Major Axis, AU"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:504
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
 msgid "Planetary Mass, Mjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:505
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
 msgid "Planetary Radius, Rjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:506
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
 msgid "Orbital Period, days"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
 msgid "Angular Distance, arcsec"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid "Effective temperature of host star, K"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid "Year of Discovery"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
 msgid "Metallicity of host star"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
 msgid "V magnitude of host star, mag"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
 msgid "RA (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
 msgid "Dec (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
 msgid "Distance to star, pc"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
 msgid "Mass of host star, Msol"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
 msgid "Radius of host star, Rsol"
 msgstr ""
 
