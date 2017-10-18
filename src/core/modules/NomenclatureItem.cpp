@@ -758,18 +758,19 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();
+		// englishName here is the original scientific term, usually latin but could be plain english like "landing site".
 		if (getNameI18n()!=getEnglishName())
-			oss << " (" << q_("latin name") << ": " << getEnglishName() << ")";
+			oss << " (" << getEnglishName() << ")";
 		oss << "</h2>";
 	}
 
 	if (flags&ObjectType && getNomenclatureType()!=NomenclatureItem::niUNDEFINED)
 	{
 		QString tstr  = getNomenclatureTypeString();
-		QString latin = getNomenclatureTypeLatinString();
+		QString latin = getNomenclatureTypeLatinString(); // not always latin!
 		QString ts    = q_("Type");
 		if (tstr!=latin && !latin.isEmpty())
-			oss << QString("%1: <b>%2</b> (%3: %4)").arg(ts).arg(tstr).arg(q_("latin term")).arg(latin) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3: %4)").arg(ts).arg(tstr).arg(q_("geologic term")).arg(latin) << "<br />";
 		else
 			oss << QString("%1: <b>%2</b>").arg(ts).arg(tstr) << "<br />";
 	}
@@ -824,32 +825,25 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	if (!getFlagLabels())
 		return;
 
-	Vec3d srcPos, XYZ0; // AW: XYZ is gobal variable with equatorial J2000.0 coordinates
-	Vec3d equPos = planet->getJ2000EquatorialPos(core);
+	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 
 	// Calculate the radius of the planet. It is necessary to re-scale it
-	double r = planet->getRadius() * planet->getSphereScale();
+	const double r = planet->getRadius() * planet->getSphereScale();
 
-	// Calculate light speed correction
-	// TODO: Improve this hack!
-	double light_speed_correction = 0.0;
-	if (GETSTELMODULE(SolarSystem)->getFlagLightTravelTime())
-		light_speed_correction = (planet->getHeliocentricEclipticPos()-core->getCurrentPlanet()->getHeliocentricEclipticPos()).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+	Vec3d XYZ0; // XYZ is member variable with equatorial J2000.0 coordinates
+	StelUtils::spheToRect((longitude + planet->getAxisRotation()) * M_PI/180.0, latitude * M_PI/180.0, XYZ0);
+	// For now, assume spherical planets, simply scale by radius.
+	XYZ0 *= r;
+	// TODO1: handle ellipsoid bodies
+	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
-	// Latitude and longitude of the feature must be in radians in order to use them in trigonometric functions
-	double nlatitude = latitude * M_PI/180.0;
-	double nlongitude = (longitude + planet->getSiderealTime(core->getJD()-light_speed_correction, core->getJDE()-light_speed_correction)) * M_PI/180.0;
-
-	// The data contains the latitude and longitude of features => angles => spherical coordinates. So, we have to convert the cartesian coordinates of feature
-	XYZ0[0] = r * cos(nlatitude) * cos(nlongitude);
-	XYZ0[1] = r * cos(nlatitude) * sin(nlongitude);
-	XYZ0[2] = r * sin(nlatitude);
-
-	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates). Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
-	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates. So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
+	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
+	   Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
+	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates.
+	   So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
 	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
-	if (XYZ.lengthSquared()< 150.*150.*AU_KM*AU_KM )
+	if (XYZ.lengthSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
 
 	double screenSize = getAngularSize(core)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
@@ -858,7 +852,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
 	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
 
-	// Let's check visibility of feature
+	// check visibility of feature
+	Vec3d srcPos;
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (planet->getVMagnitude(core)<20.) && (screenSize>50. && screenSize<750.))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
