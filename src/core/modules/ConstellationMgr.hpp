@@ -270,6 +270,9 @@ public slots:
 	//! Get the thickness of lines of the constellations
 	int getConstellationLineThickness() const { return constellationLineThickness; }
 
+	//! Remove constellations from selected objects
+	void deselectConstellations(void);
+
 signals:
 	void artDisplayedChanged(const bool displayed) const;
 	void artFadeDurationChanged(const float duration) const;
@@ -301,9 +304,6 @@ private slots:
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h
 	void updateI18n();
-
-	//! Remove constellations from selected objects
-	void deselectConstellations(void);
 
 private:
 	//! Read constellation names from the given file.
