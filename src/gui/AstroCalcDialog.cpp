@@ -980,7 +980,16 @@ void AstroCalcDialog::generateEphemeris()
 			break;
 		case 23:
 			currentStep = 60 * siderealDay;
-			break;		
+			break;
+		case 24:
+			currentStep = 100 * solarDay;
+			break;
+		case 25:
+			currentStep = 100 * siderealDay;
+			break;
+		case 26:
+			currentStep = 100 * StelCore::JD_DAY;
+			break;
 		default:
 			currentStep = solarDay;
 			break;
@@ -1236,18 +1245,21 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("15 solar days"), "9");
 	steps->addItem(q_("30 solar days"), "10");
 	steps->addItem(q_("60 solar days"), "11");
+	steps->addItem(q_("100 solar days"), "24");
 	steps->addItem(q_("1 sidereal day"), "18");
 	steps->addItem(q_("5 sidereal days"), "19");
 	steps->addItem(q_("10 sidereal days"), "20");
 	steps->addItem(q_("15 sidereal days"), "21");
 	steps->addItem(q_("30 sidereal days"), "22");
 	steps->addItem(q_("60 sidereal days"), "23");
+	steps->addItem(q_("100 sidereal days"), "25");
 	steps->addItem(q_("1 Julian day"), "12");
 	steps->addItem(q_("5 Julian days"), "13");
 	steps->addItem(q_("10 Julian days"), "14");
 	steps->addItem(q_("15 Julian days"), "15");
 	steps->addItem(q_("30 Julian days"), "16");
 	steps->addItem(q_("60 Julian days"), "17");
+	steps->addItem(q_("100 Julian days"), "26");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
