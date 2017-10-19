@@ -57,7 +57,6 @@ coord_func=jupiter_special
 albedo=0.51
 atmosphere=1
 color=1., 0.983, 0.934
-tex_halo=star16x16.png
 tex_map=jupiter.png #texture courtesy of Bj\xf6rn J\xf3nsson
 halo=true
 oblateness=0.064874
@@ -153,6 +152,7 @@ are applied.
 name=Amalthea
 type=moon
 parent=Jupiter
+iau_moon_number=JV
 
 coord_func=ell_orbit
 orbit_AscendingNode=141.5521520794674
@@ -174,7 +174,6 @@ rot_rotation_offset=235.50
 albedo=0.06
 color=1., 0.627, 0.492
 halo=true
-tex_halo=star16x16.png
 tex_map=amalthea.png
 model=j5amalthea_MLfix.obj
 \end{configfile}
@@ -185,38 +184,38 @@ where
   \item[type] \texttt{moon}
 
   \item[parent] English name of planet or parent body.
+  \item[iau\_moon\_number] a short label (string) consisting of the planet's initial and the moon's Roman number in order of discovery.\newFeature{v0.16.1}
 
-  \item[coord\_func] Must be \texttt{ell\_orbit}
-\item[orbit\_AscendingNode] $\Omega$
-\item[orbit\_Eccentricity] $e$
-\item[orbit\_Epoch] 
-\item[orbit\_Inclination] $i$ [degrees]
-\item[orbit\_LongOfPericenter] 
-\item[orbit\_MeanLongitude]
-\item[orbit\_Period]
-\item[orbit\_SemiMajorAxis] $a$ [km]
-\item[orbit\_visualization\_period] Should be set to
-  \texttt{orbit\_Period} to show orbit as closed line. Actually, this happens when omitted. So this is
-  in fact only useful in case of special functions for positioning where \texttt{orbit\_Period} is not given.
+  \item[coord\_func] Must be \texttt{ell\_orbit} for moons with orbital elements given, or \texttt{<name>\_special} for 
+  \item[orbit\_AscendingNode] $\Omega$
+  \item[orbit\_Eccentricity] $e$
+  \item[orbit\_Epoch] 
+  \item[orbit\_Inclination] $i$ [degrees]
+  \item[orbit\_LongOfPericenter] 
+  \item[orbit\_MeanLongitude]
+  \item[orbit\_Period] [days]
+  \item[orbit\_SemiMajorAxis] $a$ [km]
+  \item[orbit\_visualization\_period] [days] Defaults to \texttt{orbit\_Period} to show orbit as closed line. 
+       This is in fact only useful in case of special functions for positioning where \texttt{orbit\_Period} is not given.
 
+  \item[radius] Equator radius, km.
+  \item[oblateness] Flattening of the polar diameter. ($r_{pole}/r_{eq}$)
+  \item[rot\_equator\_ascending\_node]=213.7 TRY TO AVOID!
+  \item[rot\_obliquity]=15.5                 TRY TO AVOID!
 
-\item[radius]=73
-\item[rot\_equator\_ascending\_node]=213.7 TRY TO AVOID!
-\item[rot\_obliquity]=15.5                 TRY TO AVOID!
+  \item[rot\_pole\_ra]  constant of axis right ascension in ICRF, degrees
+  \item[rot\_pole\_ra1] change per century of axis right ascension in ICRF, degrees
+  \item[rot\_pole\_de] constant of axis declination in ICRF, degrees
+  \item[rot\_pole\_de1] change per century of axis declination in ICRF, degrees
+  \item[rot\_rotation\_offset] longitude of central meridian at J2000.0. 
+  \item[rot\_periode] Duration of one sidereal rotation, in earth hours. For moons in bound rotation 
+       (which always show one face towards their parent planet), it is best to omit this value: it defaults to \texttt{orbit\_Period * 24}. 
 
-\item[rot\_pole\_ra]  constant of axis right ascension in ICRF, degrees
-\item[rot\_pole\_ra1] change per century of axis right ascension in ICRF, degrees
-\item[rot\_pole\_de] constant of axis declination in ICRF, degrees
-\item[rot\_pole\_de1] change per century of axis declination in ICRF, degrees
-\item[rot\_rotation\_offset] longitude of central meridian at J2000.0. 
-\item[rot\_periode] Duration of one sidereal rotation, in earth hours.
-
-\item[albedo] total reflectivity [0..1]
-\item[color] for drawing halo.
-\item[halo] [=true] to draw a simple diffuse dot when zoomed out.
-\item[tex\_halo] name of halo texture. Should be \file{star16x16.png}
-\item[tex\_map] name of spherical texture map. Many moons have been mapped by visiting spacecraft!
-\item[model] \newFeature{v0.16.0}(optional) name of a 3D model for a non-spherical body in the \file{model} subdirectory of the program directory. 
+  \item[albedo] total reflectivity [0..1]
+  \item[color] for drawing halo (default: 1,1,1)
+  \item[halo] [=true|false] to draw a simple diffuse dot when zoomed out. Default: true
+  \item[tex\_map] name of spherical texture map. Many moons have been mapped by visiting spacecraft!
+  \item[model] \newFeature{v0.16.0}(optional) name of a 3D model for a non-spherical body in the \file{model} subdirectory of the program directory. 
 \end{description}
 
 
@@ -313,7 +312,6 @@ albedo=0.423
 radius=280
 absolute_magnitude=3.2
 slope_parameter=0.32
-tex_halo=star16x16.png
 tex_map=vesta.png
 model=4vesta_21_MLfix.obj
 \end{configfile}
