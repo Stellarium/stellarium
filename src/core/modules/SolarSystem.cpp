@@ -1121,8 +1121,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// Use more common planet North pole data if available
 		// NB: N pole as defined by IAU (NOT right hand rotation rule)
 		// NB: J2000 epoch
-		double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
-		double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
+		const double J2000NPoleRA = pd.value(secname+"/rot_pole_ra", 0.).toDouble()*M_PI/180.;
+		const double J2000NPoleDE = pd.value(secname+"/rot_pole_de", 0.).toDouble()*M_PI/180.;
 
 		if(J2000NPoleRA || J2000NPoleDE)
 		{
@@ -1141,14 +1141,15 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << endl;
 		}
 
+		// rot_periode given in hours, or orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		p->setRotationElements(
-			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 24.).toDouble()).toDouble()/24.,
+			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.,
 			pd.value(secname+"/rot_rotation_offset",0.).toDouble(),
 			pd.value(secname+"/rot_epoch", J2000).toDouble(),
 			rotObliquity,
 			rotAscNode,
 			pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
-			pd.value(secname+"/orbit_visualization_period",0.).toDouble());
+			pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()); // this is given in days...
 
 
 		if (pd.value(secname+"/rings", 0).toBool()) {

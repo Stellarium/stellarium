@@ -33,7 +33,8 @@ Stellarium's accuracy!
 
 The calendar dates are limited to a very wide interval of years -100.000\ldots100.000. 
 This is mostly useful to visualize the effect of stellar proper motions. 
-If you observe the planets or especially the moon, you will find that it seems to run 
+If you observe the planets, this is way beyond what current models are able to show! 
+Observe for example the Moon: you will find that it seems to run 
 on a polar orbit around +78.000 and even retrograde on a highly elongated orbit a few millennia after that. 
 This is obvious nonsense, caused by extrapolating mathematical models in inappropriate ways. 
 
@@ -46,6 +47,9 @@ For times far from today, a true 3D computation would be required,
 so that also changes in distance (and thus, brighness) could be simulated. 
 Still, the simulation here should give a good impression which close and/or fast stars 
 will move over time, and thus how constellations become deformed.
+
+Note that due to the way the stars are stored in catalogs, zooming in on fast stars like Arcturus 
+may even cease to display such stars when their original area in the sky is no longer in view.
 
 
 \section{Planetary Positions}
@@ -74,7 +78,6 @@ As far as Stellarium is concerned, the user should bear in mind the
 following limits of the VSOP87 method. Accuracy values for VSOP87 are
 heliocentric as given in \cite{1988A&A...202..309B}.
 
-\newpage
 \begin{longtabu} to \textwidth {X|l|X}
 \toprule
 \emph{Object(s)} & \emph{Method} & \emph{Notes}\tabularnewline
@@ -139,7 +142,7 @@ records go back a bit further. Experts on Earth rotation have provided models
 for $\Delta T$ based on such observations. These are usually given as parabolic fit, 
 with some recommended time span. Extrapolating erratic curves too far into the past is dangerous, 
 pointless and inevitably leads to errors or invalid results. Models differ by many hours 
-when applied to far in the past. This is not a problem of Stellarium, 
+when applied too far in the past. This is not a problem of Stellarium, 
 but of current knowledge. You may find a solar eclipse in the 6th millennium BC, 
 but you cannot even be sure which side of Earth could observe it!
 
