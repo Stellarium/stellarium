@@ -162,7 +162,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
-	ui->phenomenToDateEdit->setDateTime(currentDT.addYears(1));
+	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 
 	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
 	QDate min = QDate(100,1,1);
