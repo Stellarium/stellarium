@@ -311,7 +311,7 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		//TRANSLATORS: period, days
 		positionsHeader << QString("%1, %2").arg(q_("per."), qc_("d", "days"));
 	}
-	else if (celType==200)
+	else if (celType>=200)
 	{
 		//TRANSLATORS: distance, AU
 		positionsHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "distance, astronomical unit"));
@@ -438,6 +438,9 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Bright variable stars"), "171");
 	category->addItem(q_("Bright stars with high proper motion"), "172");
 	category->addItem(q_("Solar system objects"), "200");
+	category->addItem(q_("Solar system objects: comets"), "201");
+	category->addItem(q_("Solar system objects: minor bodies"), "202");
+	category->addItem(q_("Solar system objects: planets"), "203");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0) // read config data
@@ -623,6 +626,180 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, planet->getNameI18n());				
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, angularSize);
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+			}
+		}
+	}
+	else if (celTypeId==201)
+	{
+		QList<PlanetP> allMinorBodies = solarSystem->getAllMinorBodies();
+		QString distanceInfo = q_("Planetocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
+		QString distanceUM = qc_("AU", "distance, astronomical unit");
+		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
+		Vec3d pos;
+		foreach (const PlanetP& planet, allMinorBodies)
+		{
+			if ((planet->getPlanetType()==Planet::isComet && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			{
+				pos = planet->getJ2000EquatorialPos(core);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, pos);
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				extra = QString::number(pos.length(), 'f', 5); // A.U.
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, planet->getNameI18n());
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, QChar(0x2014));
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+			}
+		}
+	}
+	else if (celTypeId==202)
+	{
+		QList<PlanetP> allMinorBodies = solarSystem->getAllMinorBodies();
+		QString distanceInfo = q_("Planetocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
+		QString distanceUM = qc_("AU", "distance, astronomical unit");
+		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
+		Vec3d pos;
+		foreach (const PlanetP& planet, allMinorBodies)
+		{
+			Planet::PlanetType ptype = planet->getPlanetType();
+			if (((ptype==Planet::isAsteroid || ptype==Planet::isCubewano || ptype==Planet::isDwarfPlanet || ptype==Planet::isOCO || ptype==Planet::isPlutino || ptype==Planet::isSDO || ptype==Planet::isSednoid)
+			   && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			{
+				pos = planet->getJ2000EquatorialPos(core);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, pos);
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				extra = QString::number(pos.length(), 'f', 5); // A.U.
+
+				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
+				angularSize = QString::number(planet->getAngularSize(core)*120.f, 'f', 4);
+				if (angularSize.toFloat()<1e-4)
+					angularSize = QChar(0x2014);
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, planet->getNameI18n());
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, angularSize);
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+			}
+		}
+	}
+	else if (celTypeId==203)
+	{
+		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
+		QString distanceInfo = q_("Planetocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
+		QString distanceUM = qc_("AU", "distance, astronomical unit");
+		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
+		Vec3d pos;
+		foreach (const PlanetP& planet, allPlanets)
+		{
+			if ((planet->getPlanetType()==Planet::isPlanet && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			{
+				pos = planet->getJ2000EquatorialPos(core);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, pos);
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				extra = QString::number(pos.length(), 'f', 5); // A.U.
+
+				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
+				angularSize = QString::number(planet->getAngularSize(core)*120.f, 'f', 4);
+				if (angularSize.toFloat()<1e-4)
+					angularSize = QChar(0x2014);
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, planet->getNameI18n());
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
 				treeItem->setText(CColumnDec, decStr);
