@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-19 00:36+0700\n"
-"PO-Revision-Date: 2017-10-17 13:29+0000\n"
+"PO-Revision-Date: 2017-10-19 08:01+0000\n"
 "Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-10-19 05:23+0000\n"
+"X-Launchpad-Export-Date: 2017-10-20 05:22+0000\n"
 "X-Generator: Launchpad (build 18476)\n"
+"Language: it\n"
+"X-Language: it\n"
 
 #: src/core/modules/CustomObject.cpp:81
 msgid "custom object"
@@ -4627,7 +4629,7 @@ msgstr "60 giorni solari"
 
 #: src/gui/AstroCalcDialog.cpp:1248
 msgid "100 solar days"
-msgstr ""
+msgstr "100 giorni solari"
 
 #: src/gui/AstroCalcDialog.cpp:1249
 msgid "1 sidereal day"
@@ -4655,7 +4657,7 @@ msgstr "60 giorni siderali"
 
 #: src/gui/AstroCalcDialog.cpp:1255
 msgid "100 sidereal days"
-msgstr ""
+msgstr "100 giorni siderali"
 
 #: src/gui/AstroCalcDialog.cpp:1256
 msgid "1 Julian day"
@@ -4683,7 +4685,7 @@ msgstr "60 giorni giuliani"
 
 #: src/gui/AstroCalcDialog.cpp:1262
 msgid "100 Julian days"
-msgstr ""
+msgstr "100 giorni giuliani"
 
 #: src/gui/AstroCalcDialog.cpp:1334
 msgid "Solar system"
@@ -11532,8 +11534,8 @@ msgstr "Prossimo aggiornamento: < 1 minuto"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prossimo aggiornamento: %1 minuto"
+msgstr[1] "Prossimo aggiornamento: %1 minuti"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:183
@@ -11544,8 +11546,8 @@ msgstr[1] ""
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prossimo aggiornamento: %1 ora"
+msgstr[1] "Prossimo aggiornamento: %1 ore"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:218
@@ -13972,8 +13974,8 @@ msgstr "in Russia"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
 msgid_plural "Next update: %1 day(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prossimo aggiornamento: %1 giorno"
+msgstr[1] "Prossimo aggiornamento: %1 giorni"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:225
 msgid "Historical supernovae is updated"
