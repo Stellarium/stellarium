@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-19 00:36+0700\n"
-"PO-Revision-Date: 2017-10-15 18:04+0000\n"
+"PO-Revision-Date: 2017-10-19 12:59+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-10-19 05:16+0000\n"
+"X-Launchpad-Export-Date: 2017-10-20 05:15+0000\n"
 "X-Generator: Launchpad (build 18476)\n"
 "Language: bn\n"
+"X-Language: bn\n"
 
 #: src/core/modules/CustomObject.cpp:81
 msgid "custom object"
@@ -4610,7 +4611,7 @@ msgstr "৬০ সৌরদিন"
 
 #: src/gui/AstroCalcDialog.cpp:1248
 msgid "100 solar days"
-msgstr ""
+msgstr "১০০ সৌরদিন"
 
 #: src/gui/AstroCalcDialog.cpp:1249
 msgid "1 sidereal day"
@@ -4638,7 +4639,7 @@ msgstr "আহ্নিক গতি অনুসারে ৬০ দিন"
 
 #: src/gui/AstroCalcDialog.cpp:1255
 msgid "100 sidereal days"
-msgstr ""
+msgstr "১০০ নাক্ষত্রিক দিন"
 
 #: src/gui/AstroCalcDialog.cpp:1256
 msgid "1 Julian day"
@@ -4666,7 +4667,7 @@ msgstr "৬০ জুলিয়ান দিন"
 
 #: src/gui/AstroCalcDialog.cpp:1262
 msgid "100 Julian days"
-msgstr ""
+msgstr "১০০ জুলিয়ান দিন"
 
 #: src/gui/AstroCalcDialog.cpp:1334
 msgid "Solar system"
@@ -11443,8 +11444,8 @@ msgstr "পরবর্তী সংশোধন : < ১ মিনিট পর"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "পরবর্তী সংশোধন :  %1 মিনিট পরে"
+msgstr[1] "পরবর্তী সংশোধন : %1 মিনিট পরে"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:183
@@ -11455,8 +11456,8 @@ msgstr[1] ""
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "পরবর্তী সংশোধন : %1 ঘণ্টা পরে"
+msgstr[1] "পরবর্তী সংশোধন : %1 ঘণ্টা পরে"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:218
@@ -13816,8 +13817,8 @@ msgstr ", রাশিয়া"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
 msgid_plural "Next update: %1 day(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "পরবর্তী সংশোধন : %1 দিন পরে"
+msgstr[1] "পরবর্তী সংশোধন : %1 দিন পরে"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:225
 msgid "Historical supernovae is updated"
