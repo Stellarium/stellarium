@@ -62,6 +62,7 @@ void NomenclatureMgr::init()
 
 	setColor(StelUtils::strToVec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
 	setFlagLabels(conf->value("astro/flag_planets_nomenclature", false).toBool());
+	setFlagHideLocalNomenclature(conf->value("astro/flag_hide_local_nomenclature", true).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
@@ -584,6 +585,17 @@ bool NomenclatureMgr::getFlagLabels() const
 			return true;
 	}
 	return false;
+}
+
+void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)
+{
+	NomenclatureItem::hideLocalNomenclature = b;
+	emit localNomenclatureHidingChanged(b);
+}
+
+bool NomenclatureMgr::getFlagHideLocalNomenclature() const
+{
+	return NomenclatureItem::hideLocalNomenclature;
 }
 
 // Update i18 names from english names according to current sky culture translator
