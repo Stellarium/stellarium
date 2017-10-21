@@ -1892,6 +1892,8 @@ void SolarSystem::setFlagIsolatedOrbits(bool b)
 	{
 		flagIsolatedOrbits = b;
 		emit flagIsolatedOrbitsChanged(b);
+		// Reinstall flag for orbits to renew visibility of orbits
+		setFlagOrbits(getFlagOrbits());
 	}
 }
 
