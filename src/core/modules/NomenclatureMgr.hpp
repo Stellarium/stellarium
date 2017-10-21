@@ -40,6 +40,10 @@ class NomenclatureMgr : public StelObjectModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY nomenclatureDisplayedChanged)
+	Q_PROPERTY(bool localNomenclatureHided
+		   READ getFlagHideLocalNomenclature
+		   WRITE setFlagHideLocalNomenclature
+		   NOTIFY localNomenclatureHidingChanged)
 	Q_PROPERTY(Vec3f nomenclatureColor
 		   READ getColor
 		   WRITE setColor
@@ -111,11 +115,17 @@ public slots:
 	//! Get the current value of the flag which determines if nomenclature labels are drawn or hidden.
 	bool getFlagLabels() const;
 
+	//! Set flag which determines if nomenclature labels are drawn or hidden on the celestial body of observer.
+	void setFlagHideLocalNomenclature(bool b);
+	//! Get the current value of the flag which determines if nomenclature labels are drawn or hidden on the celestial body of observer.
+	bool getFlagHideLocalNomenclature() const;
+
 	//! Translate nomenclature names.
 	void updateI18n();
 
 signals:
 	void nomenclatureDisplayedChanged(bool b);
+	void localNomenclatureHidingChanged(bool b);
 	void nomenclatureColorChanged(const Vec3f & color) const;
 
 private:
