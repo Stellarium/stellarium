@@ -79,6 +79,7 @@ SolarSystem::SolarSystem()
 	, flagTranslatedNames(false)
 	, flagIsolatedTrails(true)
 	, flagIsolatedOrbits(true)
+	, flagPlanetsOrbitsOnly(false)
 	, ephemerisMarkersDisplayed(true)
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
@@ -174,6 +175,7 @@ void SolarSystem::init()
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
+	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
@@ -1601,20 +1603,46 @@ void SolarSystem::setFlagOrbits(bool b)
 {
 	bool old = flagOrbits;
 	flagOrbits = b;
+	bool flagPlanetsOnly = getFlagPlanetsOrbitsOnly();
 	if (!b || !selected || selected==sun)
 	{
-		foreach (PlanetP p, systemPlanets)
-			p->setFlagOrbits(b);
-	}
-	else if (getFlagIsolatedOrbits())
-	{
-		// If a Planet is selected and orbits are on, fade out non-selected ones
-		foreach (PlanetP p, systemPlanets)
+		if (flagPlanetsOnly)
 		{
-			if (selected == p)
+			foreach (PlanetP p, systemPlanets)
+			{
+				if (p->getPlanetType()==Planet::isPlanet)
+					p->setFlagOrbits(b);
+				else
+					p->setFlagOrbits(false);
+			}
+		}
+		else
+		{
+			foreach (PlanetP p, systemPlanets)
 				p->setFlagOrbits(b);
-			else
-				p->setFlagOrbits(false);
+		}
+	}
+	else if (getFlagIsolatedOrbits()) // If a Planet is selected and orbits are on, fade out non-selected ones
+	{
+		if (flagPlanetsOnly)
+		{
+			foreach (PlanetP p, systemPlanets)
+			{
+				if (selected == p && p->getPlanetType()==Planet::isPlanet)
+					p->setFlagOrbits(b);
+				else
+					p->setFlagOrbits(false);
+			}
+		}
+		else
+		{
+			foreach (PlanetP p, systemPlanets)
+			{
+				if (selected == p)
+					p->setFlagOrbits(b);
+				else
+					p->setFlagOrbits(false);
+			}
 		}
 	}
 	else
@@ -1902,6 +1930,21 @@ bool SolarSystem::getFlagIsolatedOrbits() const
 	return flagIsolatedOrbits;
 }
 
+void SolarSystem::setFlagPlanetsOrbitsOnly(bool b)
+{
+	if(b!=flagPlanetsOrbitsOnly)
+	{
+		flagPlanetsOrbitsOnly = b;
+		emit flagPlanetsOrbitsOnlyChanged(b);
+		// Reinstall flag for orbits to renew visibility of orbits
+		setFlagOrbits(getFlagOrbits());
+	}
+}
+
+bool SolarSystem::getFlagPlanetsOrbitsOnly() const
+{
+	return flagPlanetsOrbitsOnly;
+}
 
 // Set/Get planets names color
 void SolarSystem::setLabelsColor(const Vec3f& c)

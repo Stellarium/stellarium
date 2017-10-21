@@ -652,6 +652,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_planets_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
 	conf->setValue("viewing/flag_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
 	conf->setValue("viewing/flag_isolated_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
+	conf->setValue("viewing/flag_planets_orbits_only",	propMgr->getStelPropertyValue("SolarSystem.flagPlanetsOrbitsOnly").toBool());
 	conf->setValue("astro/flag_light_travel_time",		propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
 	conf->setValue("viewing/flag_moon_scaled",		propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
 	conf->setValue("viewing/moon_scale",			propMgr->getStelPropertyValue("SolarSystem.moonScale").toFloat());
