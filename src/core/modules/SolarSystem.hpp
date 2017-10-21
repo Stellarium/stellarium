@@ -80,6 +80,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagPlanets
 		   NOTIFY flagPlanetsDisplayedChanged
 		   )
+	Q_PROPERTY(bool flagPlanetsOrbitsOnly
+		   READ getFlagPlanetsOrbitsOnly
+		   WRITE setFlagPlanetsOrbitsOnly
+		   NOTIFY flagPlanetsOrbitsOnlyChanged
+		   )
 	Q_PROPERTY(bool flagIsolatedOrbits
 		   READ getFlagIsolatedOrbits
 		   WRITE setFlagIsolatedOrbits
@@ -736,6 +741,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
 	bool getFlagIsolatedOrbits(void) const;
 
+	//! Set flag which enabled the showing of planets orbits only or not
+	void setFlagPlanetsOrbitsOnly(bool b);
+	//! Get the current value of the flag which enables showing of planets orbits only or not.
+	bool getFlagPlanetsOrbitsOnly(void) const;
+
 	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
 	void setFlagCustomGrsSettings(bool b);
 	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
@@ -780,6 +790,7 @@ signals:
 	void flagNativePlanetNamesChanged(bool b);
 	void flagTranslatedNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
+	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void flagLightTravelTimeChanged(bool b);
@@ -985,6 +996,7 @@ private:
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
+	bool flagPlanetsOrbitsOnly;
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;
