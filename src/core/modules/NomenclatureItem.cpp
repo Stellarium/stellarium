@@ -847,17 +847,18 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	if (XYZ.lengthSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
 
+	if (getFlagHideLocalNomenclature())
+	{
+		// Check the state when needed only!
+		if (planet==core->getCurrentPlanet())
+			return;
+	}
+
 	double screenSize = getAngularSize(core)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 
 	// We can use ratio of angular size to the FOV to checking visibility of features also!
 	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
 	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
-
-	if (getFlagHideLocalNomenclature())
-	{
-		if (planet==core->getCurrentPlanet())
-			return;
-	}
 
 	// check visibility of feature
 	Vec3d srcPos;
