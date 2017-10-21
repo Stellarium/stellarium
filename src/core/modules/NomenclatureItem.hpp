@@ -152,6 +152,8 @@ public:
 
 	void setFlagLabels(bool b){ labelsFader = b; }
 	bool getFlagLabels(void) const { return labelsFader==true;}
+	void setFlagHideLocalNomenclature(bool b) { hideLocalNomenclature=b; }
+	bool getFlagHideLocalNomenclature() const { return hideLocalNomenclature; }
 	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}
 	PlanetP getPlanet(void) const { return planet;}
 	float getLatitude(void) const {return latitude;}
@@ -161,6 +163,7 @@ private:
 	bool initialized;
 	Vec3d XYZ;                         // holds J2000 position
 	static Vec3f color;
+	static bool hideLocalNomenclature;
 
 	QString getNomenclatureTypeLatinString() const;
 

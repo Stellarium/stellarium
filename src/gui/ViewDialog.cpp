@@ -233,6 +233,10 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
 	colorButton(ui->planetNomenclatureColor, "NomenclatureMgr.nomenclatureColor");
 	connect(ui->planetNomenclatureColor, SIGNAL(released()), this, SLOT(askPlanetNomenclatureColor()));
+	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
+	NomenclatureMgr* mnmgr = GETSTELMODULE(NomenclatureMgr);
+	ui->hidePlanetNomenclatureCheckBox->setEnabled(mnmgr->getFlagLabels());
+	connect(mnmgr,SIGNAL(nomenclatureDisplayedChanged(bool)),ui->hidePlanetNomenclatureCheckBox, SLOT(setEnabled(bool)));
 
 	populatePlanetMagnitudeAlgorithmsList();
 	int idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
