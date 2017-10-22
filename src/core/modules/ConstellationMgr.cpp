@@ -1353,7 +1353,7 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
 	{
 		(*iter)->drawBoundaryOptim(sPainter);
-	}	
+	}
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const

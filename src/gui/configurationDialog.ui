@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>568</width>
-    <height>580</height>
+    <height>635</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1676,6 +1676,12 @@
                <property name="icon">
                 <iconset resource="../../data/gui/guiRes.qrc">
                  <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
                </property>
                <property name="description">
                 <string>Download this file to view even more stars</string>

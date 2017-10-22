@@ -1219,7 +1219,7 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 			const QVariantList& magRange = nextStarCatalogToDownload.value("magRange").toList();
 			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
 				.arg(nextStarCatalogToDownload.value("sizeMb").toString())
-				.arg(nextStarCatalogToDownload.value("count").toString())
+				.arg(QString::number(nextStarCatalogToDownload.value("count").toFloat(), 'f', 1))
 				.arg(magRange.first().toString())
 				.arg(magRange.last().toString()));
 		}
@@ -1309,7 +1309,7 @@ void ConfigurationDialog::downloadFinished()
 	Q_ASSERT(starCatalogDownloadReply);
 	Q_ASSERT(progressBar);
 
-	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError || starCatalogDownloadReply->bytesAvailable()==0)
+	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError)
 	{
 		starCatalogDownloadReply->deleteLater();
 		starCatalogDownloadReply = Q_NULLPTR;
@@ -1360,6 +1360,9 @@ void ConfigurationDialog::downloadFinished()
 	else
 	{
 		hasDownloadedStarCatalog = true;
+		ui->getStarsButton->setVisible(true);
+		ui->downloadCancelButton->setVisible(false);
+		ui->downloadRetryButton->setVisible(false);
 	}
 
 	resetStarCatalogControls();
