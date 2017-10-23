@@ -5,7 +5,7 @@
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
+ * as published by the Free Software Foundation; either version
  * of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -79,6 +79,11 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagPlanets
 		   WRITE setFlagPlanets
 		   NOTIFY flagPlanetsDisplayedChanged
+		   )
+	Q_PROPERTY(bool flagPlanetsOrbitsOnly
+		   READ getFlagPlanetsOrbitsOnly
+		   WRITE setFlagPlanetsOrbitsOnly
+		   NOTIFY flagPlanetsOrbitsOnlyChanged
 		   )
 	Q_PROPERTY(bool flagIsolatedOrbits
 		   READ getFlagIsolatedOrbits
@@ -736,6 +741,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
 	bool getFlagIsolatedOrbits(void) const;
 
+	//! Set flag which enabled the showing of planets orbits only or not
+	void setFlagPlanetsOrbitsOnly(bool b);
+	//! Get the current value of the flag which enables showing of planets orbits only or not.
+	bool getFlagPlanetsOrbitsOnly(void) const;
+
 	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
 	void setFlagCustomGrsSettings(bool b);
 	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
@@ -772,6 +782,7 @@ public slots:
 
 signals:
 	void labelsDisplayedChanged(bool b);
+	void nomenclatureDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
 	void trailsDisplayedChanged(bool b);
@@ -779,6 +790,7 @@ signals:
 	void flagNativePlanetNamesChanged(bool b);
 	void flagTranslatedNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
+	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void flagLightTravelTimeChanged(bool b);
@@ -799,6 +811,7 @@ signals:
 	void customGrsJDChanged(double JD);
 
 	void orbitsColorChanged(const Vec3f & color) const;
+	void nomenclatureColorChanged(const Vec3f & color) const;
 	void majorPlanetsOrbitsColorChanged(const Vec3f & color) const;
 	void minorPlanetsOrbitsColorChanged(const Vec3f & color) const;
 	void dwarfPlanetsOrbitsColorChanged(const Vec3f & color) const;
@@ -983,6 +996,7 @@ private:
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
 	bool flagIsolatedOrbits;
+	bool flagPlanetsOrbitsOnly;
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;

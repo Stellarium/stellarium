@@ -108,6 +108,11 @@ public:
 	//! @return the module manager.
 	StelModuleMgr& getModuleMgr() {return *moduleMgr;}
 
+	//! Get the corresponding module or Q_NULLPTR if can't find it.
+	//! This is a shortcut for getModleMgr().getModule().
+	//! @return the module pointer.
+	StelModule* getModule(const QString& moduleID);
+
 	//! Get the locale manager to use for i18n & date/time localization.
 	//! @return the font manager to use for loading fonts.
 	StelLocaleMgr& getLocaleMgr() {return *localeMgr;}

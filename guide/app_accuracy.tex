@@ -22,9 +22,34 @@ complicated than a simple clockwork, and the process of retrofitting
 detailed and accurate models which started around v0.11.0 is not
 completed yet. Therefore, when using Stellarium for scientific work
 like eclipse simulation to illustrate records found in Cuneiform
-tablets, always also use some other reference to compare. You can of
+tablets, always also use some other reference to compare, and of 
+course specify the program version you used for your work. (The next version 
+may be more accurate or at least provide different results!) You can of
 course contact us if you are willing and able to help improving
 Stellarium's accuracy!
+
+\section{Date Range}
+\label{sec:Accuracy:DateRange}
+
+The calendar dates are limited to a very wide interval of years -100.000\ldots100.000. 
+This is mostly useful to visualize the effect of stellar proper motions. 
+If you observe the planets, this is way beyond what current models are able to show! 
+Observe for example the Moon: you will find that it seems to run 
+on a polar orbit around +78.000 and even retrograde on a highly elongated orbit a few millennia after that. 
+This is obvious nonsense, caused by extrapolating mathematical models in inappropriate ways. 
+
+\section{Stellar Proper Motion}
+\label{sec:Accuracy:ProperMotion}
+
+Even though you can follow stellar proper motion for tens of thousands of years, 
+please note that the computation only takes the linear components $\Delta\alpha$, $\Delta\delta$ into account. 
+For times far from today, a true 3D computation would be required, 
+so that also changes in distance (and thus, brighness) could be simulated. 
+Still, the simulation here should give a good impression which close and/or fast stars 
+will move over time, and thus how constellations become deformed.
+
+Note that due to the way the stars are stored in catalogs, zooming in on fast stars like Arcturus 
+may even cease to display such stars when their original area in the sky is no longer in view.
 
 
 \section{Planetary Positions}
@@ -43,7 +68,7 @@ Its use is recommended for the years -4000\ldots+8000. You can observe the sun l
 of date'' and running on the ``ecliptic J2000'' outside this date
 range. This is obviously a mathematical trick to keep
 continuity. Still, positions may be somewhat useful outside this
-range, but don't expect anything reliable 50,000 years in the past!
+range, but don't expect anything reliable 50,000 years in the past! 
 
 The optionally usable JPL DE431 delivers planet positions strictly for
 -13000\ldots+17000 only, and nothing outside, but likely with higher accuracy. 
@@ -53,7 +78,6 @@ As far as Stellarium is concerned, the user should bear in mind the
 following limits of the VSOP87 method. Accuracy values for VSOP87 are
 heliocentric as given in \cite{1988A&A...202..309B}.
 
-\newpage
 \begin{longtabu} to \textwidth {X|l|X}
 \toprule
 \emph{Object(s)} & \emph{Method} & \emph{Notes}\tabularnewline
@@ -104,6 +128,54 @@ unclear for how long this model is applicable.
 
 Orientation for the other planets is still simplified. Future versions
 should implement modern IAU guidelines.
+
+\section{Eclipses}
+\label{sec:Accuracy:Eclipses}
+
+The moon's motion is very complicated, and eclipse computations can be tricky. 
+One aspect which every student of history, prehistory and archaeology should 
+know but as it seems not every does, is at least a basic understanding of the 
+irregular slow-down of earth's rotation known as $\Delta T$. 
+
+Eclipse records on cuneiform tablets go back to the 8th century BC, some Chinese 
+records go back a bit further. Experts on Earth rotation have provided models 
+for $\Delta T$ based on such observations. These are usually given as parabolic fit, 
+with some recommended time span. Extrapolating erratic curves too far into the past is dangerous, 
+pointless and inevitably leads to errors or invalid results. Models differ by many hours 
+when applied too far in the past. This is not a problem of Stellarium, 
+but of current knowledge. You may find a solar eclipse in the 6th millennium BC, 
+but you cannot even be sure which side of Earth could observe it!
+
+WANTED: A model for $\Delta T$ that works in the Mesolithic! 
+
+\section{The Calendar}
+\label{sec:Accuracy:Calendar}
+
+Stellarium follows the widely accepted convention that dates before the Gregorian calendar 
+reform are given in the Julian calendar, introduced by \name{Julius Caesar}\index{Julius Caesar} in 46~BC. 
+If you want to show summer solstice in the year -2500, you will notice it is not on June 21st. 
+This is not an error of Stellarium -- the Gregorian reform had a reason! In prehistoric times, 
+it may be more useful to work with solar ecliptic longitudes. Summer solstice is at $\lambda=90$.
+
+\name{Julius Caesar}\index{Julius Caesar} was assassinated in March 44~BC=-43 (see below). His simple 4-year leap rule was 
+then misapplied by the high priests of Rome. \name{Augustus}\index{Augustus} fixed the calendar, and only 8~AD was the 
+first correctly applied leap year as we know them. Be careful if you are working in Augustean times: 
+Stellarium does not model these issues!
+
+Some authors (esp.\ for Mesoamerican dates) give dates in the proleptic Gregorian calendar 
+(apply the Gregorian leap year rules before 1582). This is a convention, they may do that, 
+but you must do the conversion to the Julian calendar to visualize the sky with Stellarium. 
+Hopefully they also give Julian Day numbers (JD), you can use them with Stellarium. 
+JD numbers are independent from calendar systems. 
+
+Some have noted a difference of one between dates given as BC versus Stellarium's negative years. 
+Note that historical chronology does not know a year Zero! (Try to write this date in Roman numbers!) 
+Year 1~AD was preceded by year 1~BC. Astronomers want to simplify computations and therefore 
+use a year 0 (equivalent to 1~BC). It is simple: 1~BC=0, 2~BC=-1, \ldots. 100~BC=-99. 
+Stellarium is an astronomy program. Just accept this.
+
+
+
 
 
 %%% Local Variables: 

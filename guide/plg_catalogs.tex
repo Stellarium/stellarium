@@ -859,6 +859,13 @@ It should now be possible to search for artificial satellites using
 the regular search dialog (\key{F3}). Note that at any given time, most
 Satellites will be below the horizon.
 
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.58\textwidth]{satellites_plugin_configuration.png}
+\caption{Configuration of the Satellites plugin.}
+\label{fig:plugins:Satellites:Configuration}
+\end{figure}
+
+
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
 
@@ -879,10 +886,19 @@ grouping. A satellite may also not belong to any group at all.
 By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
 \end{description}
 
+\subsection{Iridium Flares prediction}
+\label{sec:plugins:Satellites:IridiumFlares}
+
+The Satellite plugin might predict Iridium flares for the current location up to 2 weeks in the future from the current moment. The calculations of visual magnitude based on standard magnitude, orientation of satellite and places an observer and Sun. Of course all predictions can be saved in the CSV file (Figure~\ref{fig:plugins:Satellites:IridiumFlares}).
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.58\textwidth]{satellites_plugin_iridium_flares.png}
+\caption{Prediction of Iridium flares in the Satellites plugin.}
+\label{fig:plugins:Satellites:IridiumFlares}
+\end{figure}
+
 \subsection{Satellite Catalog}
 \label{sec:plugins:Satellites:catalog}
-
-
 
 The satellite catalog is stored on the disk in JSON\footnote{\url{http://www.json.org/}}
 format, in a file named \file{satellites.json}. A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory.
@@ -905,8 +921,9 @@ To add a new satellite, open a new line after line 5 and paste the following, no
   	"description": "downlink 2",
   	"frequency": 145.825
      }
-              ],
+  ],
   "groups": ["group1", "group2"],
+  "stdMag": 2.0,
   "tle1": "1 12345U 90005D   09080.85236265  .00000014  00000-0  20602-4 0  5632",
   "tle2": "2 12345 98.2700  53.2702 0011918  71.1776 289.0705 14.31818920   653",
   "visible": true
@@ -932,13 +949,12 @@ description field can accept HTML tags such as \texttt{<br/>} (new line), \textt
 \item[tle1]  required, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1~"}
 \item[tle2]  required, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2~"}
 \item[visible]  required parameter, set to true if you want to see it, this can be toggled from the configuration window once the satellite is loaded. 
+\item[stdMag]  optional parameter, contained standard magnitude of satellite. 
 \end{description}
 You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 
 
-
 \subsection{Configuration}
 \label{sec:plugins:Satellites:configuration}
-
 
 The plug-in's configuration data is stored in Stellarium's main configuration
 file.

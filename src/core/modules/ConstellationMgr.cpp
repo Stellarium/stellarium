@@ -62,7 +62,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
 	  namesDisplayed(0),
-	  constellationLineThickness(1.)
+	  constellationLineThickness(1)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -100,7 +100,7 @@ void ConstellationMgr::init()
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
-	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1.f).toFloat());
+	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1).toInt());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (starloreDisplayStyle=="translated")
@@ -370,13 +370,13 @@ ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDi
 	return constellationDisplayStyle;
 }
 
-void ConstellationMgr::setConstellationLineThickness(const float thickness)
+void ConstellationMgr::setConstellationLineThickness(const int thickness)
 {
 	if(thickness!=constellationLineThickness)
 	{
 		constellationLineThickness = thickness;
-		if (constellationLineThickness<=0.f) // The line can not be negative or zero thickness
-			constellationLineThickness = 1.f;
+		if (constellationLineThickness<=0) // The line can not be negative or zero thickness
+			constellationLineThickness = 1;
 
 		emit constellationLineThicknessChanged(thickness);
 	}
@@ -610,7 +610,7 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
 	sPainter.setBlending(true);
-	if (constellationLineThickness>1.f)
+	if (constellationLineThickness>1)
 		sPainter.setLineWidth(constellationLineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
@@ -620,8 +620,8 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 	{
 		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (constellationLineThickness>1.f)
-		sPainter.setLineWidth(1.f); // restore line thickness
+	if (constellationLineThickness>1)
+		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
 
@@ -853,7 +853,7 @@ void ConstellationMgr::updateI18n()
 	vector < Constellation * >::const_iterator iter;
 	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
 	{
-		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName);
+		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName, (*iter)->context);
 	}
 }
 
@@ -1353,7 +1353,7 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
 	{
 		(*iter)->drawBoundaryOptim(sPainter);
-	}	
+	}
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const

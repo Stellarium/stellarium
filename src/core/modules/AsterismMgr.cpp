@@ -48,11 +48,13 @@ using namespace std;
 
 // constructor which loads all data from appropriate files
 AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
-	: hipStarMgr(_hip_stars),
-	  linesDisplayed(0),
-	  namesDisplayed(0),
-	  hasAsterism(0),
-	  asterismLineThickness(1.)
+	: hipStarMgr(_hip_stars)
+	, linesDisplayed(false)
+	, rayHelpersDisplayed(false)
+	, namesDisplayed(false)
+	, hasAsterism(false)
+	, asterismLineThickness(1)
+	, rayHelperThickness(1)
 {
 	setObjectName("AsterismMgr");
 	Q_ASSERT(hipStarMgr);
@@ -76,13 +78,16 @@ void AsterismMgr::init()
 	lastLoadedSkyCulture = "dummy";
 	asterFont.setPixelSize(conf->value("viewing/asterism_font_size", 14).toInt());
 	setFlagLines(conf->value("viewing/flag_asterism_drawing").toBool());
+	setFlagRayHelpers(conf->value("viewing/flag_rayhelper_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_asterism_name").toBool());
-	setAsterismLineThickness(conf->value("viewing/asterism_line_thickness", 1.f).toFloat());
+	setAsterismLineThickness(conf->value("viewing/asterism_line_thickness", 1).toInt());
+	setRayHelperThickness(conf->value("viewing/rayhelper_line_thickness", 1).toInt());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setLinesColor(StelUtils::strToVec3f(conf->value("color/asterism_lines_color", defaultColor).toString()));
 	setLabelsColor(StelUtils::strToVec3f(conf->value("color/asterism_names_color", defaultColor).toString()));
+	setRayHelpersColor(StelUtils::strToVec3f(conf->value("color/rayhelper_lines_color", defaultColor).toString()));
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -91,8 +96,9 @@ void AsterismMgr::init()
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
 
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Asterism_Lines", displayGroup, N_("Asterism lines"), "linesDisplayed", "Alt+A");
+	addAction("actionShow_Asterism_Lines", displayGroup, N_("Asterism lines"), "linesDisplayed", "Alt+A");	
 	addAction("actionShow_Asterism_Labels", displayGroup, N_("Asterism labels"), "namesDisplayed", "Alt+V");
+	addAction("actionShow_Ray_Helpers", displayGroup, N_("Ray helpers"), "rayHelpersDisplayed", "Alt+R");
 }
 
 /*************************************************************************
@@ -150,6 +156,21 @@ Vec3f AsterismMgr::getLinesColor() const
 	return Asterism::lineColor;
 }
 
+void AsterismMgr::setRayHelpersColor(const Vec3f& color)
+{
+	if (color != Asterism::rayHelperColor)
+	{
+		Asterism::rayHelperColor = color;
+		emit rayHelpersColorChanged(color);
+	}
+}
+
+Vec3f AsterismMgr::getRayHelpersColor() const
+{
+	return Asterism::rayHelperColor;
+}
+
+
 void AsterismMgr::setLabelsColor(const Vec3f& color)
 {
 	if (Asterism::labelColor != color)
@@ -178,15 +199,27 @@ float AsterismMgr::getFontSize() const
 	return asterFont.pixelSize();
 }
 
-void AsterismMgr::setAsterismLineThickness(const float thickness)
+void AsterismMgr::setAsterismLineThickness(const int thickness)
 {
 	if(thickness!=asterismLineThickness)
 	{
 		asterismLineThickness = thickness;
-		if (asterismLineThickness<=0.f) // The line can not be negative or zero thickness
-			asterismLineThickness = 1.f;
+		if (asterismLineThickness<=0) // The line can not be negative or zero thickness
+			asterismLineThickness = 1;
 
 		emit asterismLineThicknessChanged(thickness);
+	}
+}
+
+void AsterismMgr::setRayHelperThickness(const int thickness)
+{
+	if(thickness!=rayHelperThickness)
+	{
+		rayHelperThickness = thickness;
+		if (rayHelperThickness<=0) // The line can not be negative or zero thickness
+			rayHelperThickness = 1;
+
+		emit rayHelperThicknessChanged(thickness);
 	}
 }
 
@@ -233,6 +266,7 @@ void AsterismMgr::loadLines(const QString &fileName)
 		{
 			aster->setFlagLines(linesDisplayed);
 			aster->setFlagLabels(namesDisplayed);
+			aster->setFlagRayHelpers(rayHelpersDisplayed);
 			asterisms.push_back(aster);
 			++readOk;
 		}
@@ -248,6 +282,7 @@ void AsterismMgr::loadLines(const QString &fileName)
 	// Set current states
 	setFlagLines(linesDisplayed);
 	setFlagLabels(namesDisplayed);
+	setFlagRayHelpers(rayHelpersDisplayed);
 }
 
 void AsterismMgr::draw(StelCore* core)
@@ -256,6 +291,7 @@ void AsterismMgr::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
 	drawLines(sPainter, core);
+	drawRayHelpers(sPainter, core);
 	drawNames(sPainter);
 }
 
@@ -266,7 +302,7 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 		return;
 
 	sPainter.setBlending(true);
-	if (asterismLineThickness>1.f)
+	if (asterismLineThickness>1)
 		sPainter.setLineWidth(asterismLineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
@@ -274,10 +310,34 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 	vector < Asterism * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
+		if ((*iter)->isAsterism())
+			(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (asterismLineThickness>1.f)
-		sPainter.setLineWidth(1.f); // restore line thickness
+	if (asterismLineThickness>1)
+		sPainter.setLineWidth(1); // restore line thickness
+	sPainter.setLineSmooth(false);
+}
+
+// Draw asterisms lines
+void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) const
+{
+	if (!hasAsterism)
+		return;
+
+	sPainter.setBlending(true);
+	if (rayHelperThickness>1)
+		sPainter.setLineWidth(rayHelperThickness); // set line thickness
+	sPainter.setLineSmooth(true);
+
+	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
+	vector < Asterism * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		if (!(*iter)->isAsterism())
+			(*iter)->drawOptim(sPainter, core, viewportHalfspace);
+	}
+	if (rayHelperThickness>1)
+		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
 
@@ -447,6 +507,25 @@ bool AsterismMgr::getFlagLines(void) const
 	return linesDisplayed;
 }
 
+void AsterismMgr::setFlagRayHelpers(const bool displayed)
+{
+	if(rayHelpersDisplayed != displayed)
+	{
+		rayHelpersDisplayed = displayed;
+		vector < Asterism * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		{
+			(*iter)->setFlagRayHelpers(rayHelpersDisplayed);
+		}
+		emit rayHelpersDisplayedChanged(displayed);
+	}
+}
+
+bool AsterismMgr::getFlagRayHelpers(void) const
+{
+	return rayHelpersDisplayed;
+}
+
 void AsterismMgr::setFlagLabels(const bool displayed)
 {
 	if (namesDisplayed != displayed)
@@ -528,14 +607,16 @@ QStringList AsterismMgr::listAllObjects(bool inEnglish) const
 	{
 		foreach(Asterism* asterism, asterisms)
 		{
-			result << asterism->getEnglishName();
+			if (asterism->isAsterism())
+				result << asterism->getEnglishName();
 		}
 	}
 	else
 	{
 		foreach(Asterism* asterism, asterisms)
 		{
-			result << asterism->getNameI18n();
+			if (asterism->isAsterism())
+				result << asterism->getNameI18n();
 		}
 	}
 	return result;

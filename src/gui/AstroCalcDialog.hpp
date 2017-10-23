@@ -116,6 +116,7 @@ protected:
 private slots:
 	void currentCelestialPositions();
 	void populateCelestialCategoryList();
+	void saveCelestialPositions();
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
@@ -163,6 +164,7 @@ private slots:
 	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
 	void selectWutObject();
+	void saveWutObjects();
 
 	void updateAstroCalcData();
 
@@ -265,11 +267,11 @@ private:
 		{
 			QRegExp dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
 			QRegExp mp("^[(](\\d+)[)]\\s(.+)$");
-			int a = 0, b = 0;
+			int a = 0, b = 0;			
 			if (dso.exactMatch(text(column)))
 				a = dso.capturedTexts().at(2).toInt();
 			if (a==0 && mp.exactMatch(text(column)))
-				a = mp.capturedTexts().at(1).toInt();
+				a = mp.capturedTexts().at(1).toInt();			
 			if (dso.exactMatch(other.text(column)))
 				b = dso.capturedTexts().at(2).toInt();
 			if (b==0 && mp.exactMatch(other.text(column)))

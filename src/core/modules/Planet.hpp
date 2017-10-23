@@ -66,7 +66,7 @@ public:
 	float obliquity;       // tilt of rotation axis w.r.t. ecliptic [radians]
 	float ascendingNode;   // long. of ascending node of equator on the ecliptic [radians]
 	float precessionRate;  // rate of precession of rotation axis in [rads/JulianCentury(36525d)]
-	double siderealPeriod; // sidereal period (Planet year in earth days) [earth days]
+	double siderealPeriod; // sidereal period (Planet year or a moon's sidereal month) [earth days]
 };
 
 // Class to manage rings for planets like saturn
@@ -203,6 +203,7 @@ public:
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
+	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
@@ -303,6 +304,7 @@ public:
 	void setRings(Ring* r) {rings = r;}
 
 	void setSphereScale(float s) { if(s!=sphereScale) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
+	float getSphereScale() { return sphereScale; }
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
@@ -489,7 +491,7 @@ protected:
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
-
+    
 	PlanetOBJModel* loadObjModel() const;
 
 	QString englishName;             // english planet name

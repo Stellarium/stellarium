@@ -96,24 +96,24 @@ public:
 		//! Note that both the \c d and \c Tr statements can change this value
 		float d;
 
-		//! The ambient map path
+		//! The ambient texture map file path
 		QString map_Ka;
-		//! The diffuse map path
+		//! The diffuse texture map file path
 		QString map_Kd;
-		//! The specular map path
+		//! The specular texture map file path
 		QString map_Ks;
-		//! The emissive map path
+		//! The emissive texture map file path
 		QString map_Ke;
-		//! The bump/normal map path
+		//! The bump/normal texture map file path
 		QString map_bump;
-		//! The height map path
+		//! The height map texture file path
 		QString map_height;
 
 
 		typedef QMap<QString,QStringList> ParamsMap;
 		//! Contains all other material parameters that are not recognized by this class,
 		//! but can still be accessed by class users this way.
-		//! The key is the statement name (like are \c Ka, \c map_bump etc.), the value is the list of
+		//! The key is the statement name (e.g. \c Ka, \c map_bump etc.), the value is the list of
 		//! space-separated parameters to this statement
 		ParamsMap additionalParams;
 
@@ -370,16 +370,8 @@ private:
 //! Implements the qHash method for the Vertex type
 inline uint qHash(const StelOBJ::Vertex& key, uint seed)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,4,0))
 	//hash the whole vertex raw memory directly
 	return qHashBits(&key, sizeof(StelOBJ::Vertex), seed);
-#else
-	//no qHashBits, hash just the position and first uv coord
-	uint h1 = qHash(reinterpret_cast<const quint64*>(key.position)[0], seed);
-	uint h2 = qHash(reinterpret_cast<const quint64*>(key.position)[1], seed);
-
-	return ((h1 << 16) | (h1 >> 16)) ^ h2 ^ seed;
-#endif
 }
 
 #endif // _STELOBJ_HPP_

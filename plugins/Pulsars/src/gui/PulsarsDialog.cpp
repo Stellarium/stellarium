@@ -186,11 +186,20 @@ void PulsarsDialog::refreshUpdateValues(void)
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
 	else if (secondsToUpdate < 3600)
-		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
+	{
+		int n = (secondsToUpdate/60)+1;
+		ui->nextUpdateLabel->setText(qn_("Next update: %1 minute(s)", n).arg(n));
+	}
 	else if (secondsToUpdate < 86400)
-		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
+	{
+		int n = (secondsToUpdate/3600)+1;
+		ui->nextUpdateLabel->setText(qn_("Next update: %1 hour(s)", n).arg(n));
+	}
 	else
-		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 days")).arg((secondsToUpdate/86400)+1));
+	{
+		int n = (secondsToUpdate/86400)+1;
+		ui->nextUpdateLabel->setText(qn_("Next update: %1 day(s)", n).arg(n));
+	}
 }
 
 void PulsarsDialog::setUpdateValues(int days)

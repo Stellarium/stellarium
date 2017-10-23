@@ -158,6 +158,9 @@ int main(int argc, char **argv)
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
 
+	// Solution for bug: https://bugs.launchpad.net/stellarium/+bug/1498616
+	qputenv("QT_HARFBUZZ", "old");
+
 	// Init the file manager
 	StelFileMgr::init();
 
@@ -190,18 +193,14 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
 	#ifdef Q_OS_WIN
-	#if QT_VERSION >= 0x050300
 	if (qApp->property("onetime_angle_mode").isValid())
 	{
 		app.setAttribute(Qt::AA_UseOpenGLES, true);
 	}
-	#endif
-	#if QT_VERSION >= 0x050400
 	if (qApp->property("onetime_mesa_mode").isValid())
 	{
 		app.setAttribute(Qt::AA_UseSoftwareOpenGL, true);
 	}
-	#endif
 	#endif
 
 	// Start logging.

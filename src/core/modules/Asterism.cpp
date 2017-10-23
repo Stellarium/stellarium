@@ -35,12 +35,14 @@
 #include <QFontMetrics>
 
 Vec3f Asterism::lineColor = Vec3f(0.4,0.4,0.8);
+Vec3f Asterism::rayHelperColor = Vec3f(1.0,1.0,0.0);
 Vec3f Asterism::labelColor = Vec3f(0.4,0.4,0.8);
 const QString Asterism::ASTERISM_TYPE = QStringLiteral("Asterism");
 
 Asterism::Asterism()
 	: numberOfSegments(0)
 	, typeOfAsterism(1)
+	, flagAsterism(true)
 	, asterism(Q_NULLPTR)
 {
 }
@@ -56,6 +58,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 	abbreviation.clear();
 	numberOfSegments = 0;
 	typeOfAsterism = 1;
+	flagAsterism = true;
 
 	QString buf(record);
 	QTextStream istr(&buf, QIODevice::ReadOnly);
@@ -74,6 +77,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 	{
 		switch (typeOfAsterism)
 		{
+			case 0: // Ray helpers
 			case 1: // A big asterism with lines by HIP stars
 			{
 				unsigned int HP = 0;
@@ -129,22 +133,37 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 
 	}
 
-	XYZname.set(0.,0.,0.);
-	for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
+	if (typeOfAsterism>0)
 	{
-		XYZname+= asterism[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+		XYZname.set(0.,0.,0.);
+		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
+		{
+			XYZname+= asterism[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
+		}
+		XYZname.normalize();
 	}
-	XYZname.normalize();
+	else
+		flagAsterism = false;
 
 	return true;
 }
 
 void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const
 {
-	if (lineFader.getInterstate()<=0.0001f)
-		return;
+	if (flagAsterism)
+	{
+		if (lineFader.getInterstate()<=0.0001f)
+			return;
 
-	sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+	}
+	else
+	{
+		if (rayHelperFader.getInterstate()<=0.0001f)
+			return;
+
+		sPainter.setColor(rayHelperColor[0], rayHelperColor[1], rayHelperColor[2], rayHelperFader.getInterstate());
+	}
 
 	Vec3d star1;
 	Vec3d star2;
@@ -160,7 +179,7 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 
 void Asterism::drawName(StelPainter& sPainter) const
 {
-	if (!nameFader.getInterstate())
+	if (!nameFader.getInterstate() || !flagAsterism)
 		return;
 
 	if (typeOfAsterism==2 && sPainter.getProjector()->getFov()>60.f)
@@ -185,6 +204,7 @@ const Asterism* Asterism::isStarIn(const StelObject* s) const
 void Asterism::update(int deltaTime)
 {
 	lineFader.update(deltaTime);
+	rayHelperFader.update(deltaTime);
 	nameFader.update(deltaTime);
 }
 

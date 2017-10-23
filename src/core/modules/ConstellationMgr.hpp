@@ -91,13 +91,10 @@ class ConstellationMgr : public StelObjectModule
 		   READ getConstellationDisplayStyle
 		   WRITE setConstellationDisplayStyle
 		   NOTIFY constellationsDisplayStyleChanged)
-	Q_PROPERTY(float constellationLineThickness
+	Q_PROPERTY(int constellationLineThickness
 		   READ getConstellationLineThickness
 		   WRITE setConstellationLineThickness
 		   NOTIFY constellationLineThicknessChanged)
-
-	//Register enum with Qt
-	Q_ENUMS(ConstellationDisplayStyle)
 
 public:
 	//! Constructor
@@ -156,6 +153,7 @@ public:
 		constellationsTranslated  = 2,
 		constellationsEnglish     = 3 // Maybe this is not useful?
 	};
+	Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -266,9 +264,12 @@ public slots:
 
 	//! Set the thickness of lines of the constellations
 	//! @param thickness of line in pixels
-	void setConstellationLineThickness(const float thickness);
+	void setConstellationLineThickness(const int thickness);
 	//! Get the thickness of lines of the constellations
-	float getConstellationLineThickness() const { return constellationLineThickness; }
+	int getConstellationLineThickness() const { return constellationLineThickness; }
+
+	//! Remove constellations from selected objects
+	void deselectConstellations(void);
 
 signals:
 	void artDisplayedChanged(const bool displayed) const;
@@ -283,7 +284,7 @@ signals:
 	void namesColorChanged(const Vec3f & color) const;
 	void namesDisplayedChanged(const bool displayed) const;
 	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style) const;
-	void constellationLineThicknessChanged(float thickness) const;
+	void constellationLineThicknessChanged(int thickness) const;
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -301,9 +302,6 @@ private slots:
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h
 	void updateI18n();
-
-	//! Remove constellations from selected objects
-	void deselectConstellations(void);
 
 private:
 	//! Read constellation names from the given file.
@@ -392,7 +390,7 @@ private:
 	bool namesDisplayed;
 
 	// Store the thickness of lines of the constellations
-	float constellationLineThickness;
+	int constellationLineThickness;
 };
 
 #endif // _CONSTELLATIONMGR_HPP_

@@ -162,7 +162,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
-	ui->phenomenToDateEdit->setDateTime(currentDT.addYears(1));
+	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 
 	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
 	QDate min = QDate(100,1,1);
@@ -183,7 +183,8 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentCelestialPosition(QModelIndex)));
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
-	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
+	connect(ui->celestialPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveCelestialPositions()));
+	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));	
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(populateCelestialCategoryList()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));	
 
@@ -228,6 +229,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
 	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(ui->wutMatchingObjectsListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(selectWutObject()));
+	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
 
@@ -309,7 +311,7 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		//TRANSLATORS: period, days
 		positionsHeader << QString("%1, %2").arg(q_("per."), qc_("d", "days"));
 	}
-	else if (celType==200)
+	else if (celType>=200)
 	{
 		//TRANSLATORS: distance, AU
 		positionsHeader << QString("%1, %2").arg(q_("dist."), qc_("AU", "distance, astronomical unit"));
@@ -436,6 +438,9 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Bright variable stars"), "171");
 	category->addItem(q_("Bright stars with high proper motion"), "172");
 	category->addItem(q_("Solar system objects"), "200");
+	category->addItem(q_("Solar system objects: comets"), "201");
+	category->addItem(q_("Solar system objects: minor bodies"), "202");
+	category->addItem(q_("Solar system objects: planets"), "203");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0) // read config data
@@ -637,6 +642,180 @@ void AstroCalcDialog::currentCelestialPositions()
 			}
 		}
 	}
+	else if (celTypeId==201)
+	{
+		QList<PlanetP> allMinorBodies = solarSystem->getAllMinorBodies();
+		QString distanceInfo = q_("Planetocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
+		QString distanceUM = qc_("AU", "distance, astronomical unit");
+		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
+		Vec3d pos;
+		foreach (const PlanetP& planet, allMinorBodies)
+		{
+			if ((planet->getPlanetType()==Planet::isComet && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			{
+				pos = planet->getJ2000EquatorialPos(core);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, pos);
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				extra = QString::number(pos.length(), 'f', 5); // A.U.
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, planet->getNameI18n());
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, QChar(0x2014));
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+			}
+		}
+	}
+	else if (celTypeId==202)
+	{
+		QList<PlanetP> allMinorBodies = solarSystem->getAllMinorBodies();
+		QString distanceInfo = q_("Planetocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
+		QString distanceUM = qc_("AU", "distance, astronomical unit");
+		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
+		Vec3d pos;
+		foreach (const PlanetP& planet, allMinorBodies)
+		{
+			Planet::PlanetType ptype = planet->getPlanetType();
+			if (((ptype==Planet::isAsteroid || ptype==Planet::isCubewano || ptype==Planet::isDwarfPlanet || ptype==Planet::isOCO || ptype==Planet::isPlutino || ptype==Planet::isSDO || ptype==Planet::isSednoid)
+			   && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			{
+				pos = planet->getJ2000EquatorialPos(core);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, pos);
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				extra = QString::number(pos.length(), 'f', 5); // A.U.
+
+				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
+				angularSize = QString::number(planet->getAngularSize(core)*120.f, 'f', 4);
+				if (angularSize.toFloat()<1e-4)
+					angularSize = QChar(0x2014);
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, planet->getNameI18n());
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, angularSize);
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+			}
+		}
+	}
+	else if (celTypeId==203)
+	{
+		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
+		QString distanceInfo = q_("Planetocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
+		QString distanceUM = qc_("AU", "distance, astronomical unit");
+		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
+		Vec3d pos;
+		foreach (const PlanetP& planet, allPlanets)
+		{
+			if ((planet->getPlanetType()==Planet::isPlanet && planet!=core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core)<=mag && planet->isAboveRealHorizon(core))
+			{
+				pos = planet->getJ2000EquatorialPos(core);
+				if (horizon)
+				{
+					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
+					float direction = 3.; // N is zero, E is 90 degrees
+					if (useSouthAzimuth)
+						direction = 2.;
+					ra = direction*M_PI - ra;
+					if (ra > M_PI*2)
+						ra -= M_PI*2;
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+				else
+				{
+					StelUtils::rectToSphe(&ra, &dec, pos);
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
+
+				extra = QString::number(pos.length(), 'f', 5); // A.U.
+
+				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
+				angularSize = QString::number(planet->getAngularSize(core)*120.f, 'f', 4);
+				if (angularSize.toFloat()<1e-4)
+					angularSize = QChar(0x2014);
+
+				ACCelPosTreeWidgetItem *treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+				treeItem->setText(CColumnName, planet->getNameI18n());
+				treeItem->setText(CColumnRA, raStr);
+				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+				treeItem->setText(CColumnDec, decStr);
+				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
+				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+				treeItem->setText(CColumnAngularSize, angularSize);
+				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+				treeItem->setToolTip(CColumnAngularSize, asToolTip);
+				treeItem->setText(CColumnExtra, extra);
+				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+			}
+		}
+	}
 	else
 	{
 		// stars
@@ -734,13 +913,61 @@ void AstroCalcDialog::currentCelestialPositions()
 	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
 }
 
+void AstroCalcDialog::saveCelestialPositions()
+{
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save celestial positions of objects as..."), QDir::homePath() + "/positions.csv", filter);
+	QFile celPos(filePath);
+	if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream celPosList(&celPos);
+	celPosList.setCodec("UTF-8");
+
+	int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
+	int columns = positionsHeader.size();
+
+	for (int i = 0; i < columns; i++)
+	{
+		QString h = positionsHeader.at(i).trimmed();
+		if (h.contains(","))
+			celPosList << QString("\"%1\"").arg(h);
+		else
+			celPosList << h;
+
+		if (i<columns-1)
+			celPosList << delimiter;
+		else
+			celPosList << acEndl;
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		for (int j=0; j<columns; j++)
+		{
+			celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
+			if (j<columns-1)
+				celPosList << delimiter;
+			else
+				celPosList << acEndl;
+		}
+	}
+
+	celPos.close();
+}
+
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelIndex)
 {
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
 
 	QStringList list = nameI18n.split("(");
-	if (list.count()>0 && nameI18n.lastIndexOf("(")!=0)
+	if (list.count()>0 && nameI18n.lastIndexOf("(")!=0 && nameI18n.lastIndexOf("/")==0)
 		nameI18n = list.at(0).trimmed();
 
 	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
@@ -852,6 +1079,15 @@ void AstroCalcDialog::generateEphemeris()
 
 	initListEphemeris();
 
+	double solarDay = 1.0;
+	double siderealDay = 1.0;
+	const PlanetP& cplanet = core->getCurrentPlanet();
+	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+	{
+		solarDay = cplanet->getMeanSolarDay();
+		siderealDay = cplanet->getSiderealDay();
+	}
+
 	switch (ui->ephemerisStepComboBox->currentData().toInt()) {
 		case 1:
 			currentStep = 10 * StelCore::JD_MINUTE;
@@ -869,25 +1105,70 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = 12 * StelCore::JD_HOUR;
 			break;
 		case 6:
-			currentStep = StelCore::JD_DAY;
+			currentStep = solarDay;
 			break;
 		case 7:
-			currentStep = 5 * StelCore::JD_DAY;
+			currentStep = 5 * solarDay;
 			break;
 		case 8:
-			currentStep = 10 * StelCore::JD_DAY;
+			currentStep = 10 * solarDay;
 			break;
 		case 9:
-			currentStep = 15 * StelCore::JD_DAY;
+			currentStep = 15 * solarDay;
 			break;
 		case 10:
-			currentStep = 30 * StelCore::JD_DAY;
+			currentStep = 30 * solarDay;
 			break;
 		case 11:
+			currentStep = 60 * solarDay;
+			break;
+		case 12:
+			currentStep = StelCore::JD_DAY;
+			break;
+		case 13:
+			currentStep = 5 * StelCore::JD_DAY;
+			break;
+		case 14:
+			currentStep = 10 * StelCore::JD_DAY;
+			break;
+		case 15:
+			currentStep = 15 * StelCore::JD_DAY;
+			break;
+		case 16:
+			currentStep = 30 * StelCore::JD_DAY;
+			break;
+		case 17:
 			currentStep = 60 * StelCore::JD_DAY;
 			break;
+		case 18:
+			currentStep = siderealDay;
+			break;
+		case 19:
+			currentStep = 5 * siderealDay;
+			break;
+		case 20:
+			currentStep = 10 * siderealDay;
+			break;
+		case 21:
+			currentStep = 15 * siderealDay;
+			break;
+		case 22:
+			currentStep = 30 * siderealDay;
+			break;
+		case 23:
+			currentStep = 60 * siderealDay;
+			break;
+		case 24:
+			currentStep = 100 * solarDay;
+			break;
+		case 25:
+			currentStep = 100 * siderealDay;
+			break;
+		case 26:
+			currentStep = 100 * StelCore::JD_DAY;
+			break;
 		default:
-			currentStep = StelCore::JD_DAY;
+			currentStep = solarDay;
 			break;
 	}
 
@@ -1009,11 +1290,24 @@ void AstroCalcDialog::saveEphemeris()
 	ephemList.setCodec("UTF-8");
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
+	int columns = ephemerisHeader.size();
 
-	ephemList << ephemerisHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < columns; i++)
+	{
+		QString h = ephemerisHeader.at(i).trimmed();
+		if (h.contains(","))
+			ephemList << QString("\"%1\"").arg(h);
+		else
+			ephemList << h;
+
+		if (i<columns-1)
+			ephemList << delimiter;
+		else
+			ephemList << acEndl;
+	}
+
 	for (int i = 0; i < count; i++)
 	{
-		int columns = ephemerisHeader.size();
 		for (int j=0; j<columns; j++)
 		{
 			ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
@@ -1122,12 +1416,27 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("1 hour"), "3");
 	steps->addItem(q_("6 hours"), "4");
 	steps->addItem(q_("12 hours"), "5");
-	steps->addItem(q_("1 day"), "6");
-	steps->addItem(q_("5 days"), "7");
-	steps->addItem(q_("10 days"), "8");
-	steps->addItem(q_("15 days"), "9");
-	steps->addItem(q_("30 days"), "10");
-	steps->addItem(q_("60 days"), "11");
+	steps->addItem(q_("1 solar day"), "6");
+	steps->addItem(q_("5 solar days"), "7");
+	steps->addItem(q_("10 solar days"), "8");
+	steps->addItem(q_("15 solar days"), "9");
+	steps->addItem(q_("30 solar days"), "10");
+	steps->addItem(q_("60 solar days"), "11");
+	steps->addItem(q_("100 solar days"), "24");
+	steps->addItem(q_("1 sidereal day"), "18");
+	steps->addItem(q_("5 sidereal days"), "19");
+	steps->addItem(q_("10 sidereal days"), "20");
+	steps->addItem(q_("15 sidereal days"), "21");
+	steps->addItem(q_("30 sidereal days"), "22");
+	steps->addItem(q_("60 sidereal days"), "23");
+	steps->addItem(q_("100 sidereal days"), "25");
+	steps->addItem(q_("1 Julian day"), "12");
+	steps->addItem(q_("5 Julian days"), "13");
+	steps->addItem(q_("10 Julian days"), "14");
+	steps->addItem(q_("15 Julian days"), "15");
+	steps->addItem(q_("30 Julian days"), "16");
+	steps->addItem(q_("60 Julian days"), "17");
+	steps->addItem(q_("100 Julian days"), "26");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index<0)
@@ -2107,11 +2416,25 @@ void AstroCalcDialog::savePhenomena()
 	phenomenaList.setCodec("UTF-8");
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
+	int columns = phenomenaHeader.size();
 
-	phenomenaList << phenomenaHeader.join(delimiter) << acEndl;
+	for (int i = 0; i < columns; i++)
+	{
+		QString h = phenomenaHeader.at(i).trimmed();
+		if (h.contains(","))
+			phenomenaList << QString("\"%1\"").arg(h);
+		else
+			phenomenaList << h;
+
+		if (i<columns-1)
+			phenomenaList << delimiter;
+		else
+			phenomenaList << acEndl;
+	}
+
 	for (int i = 0; i < count; i++)
 	{
-		int columns = phenomenaHeader.size();
+
 		for (int j=0; j<columns; j++)
 		{
 			phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
@@ -3194,4 +3517,28 @@ void AstroCalcDialog::selectWutObject()
 			}
 		}
 	}
+}
+
+void AstroCalcDialog::saveWutObjects()
+{
+	QString filter = q_("Text file");
+	filter.append(" (*.txt)");
+	QString filePath = QFileDialog::getSaveFileName(0, q_("Save list of objects as..."), QDir::homePath() + "/wut-objects.txt", filter);
+	QFile objlist(filePath);
+	if (!objlist.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file"
+			   << QDir::toNativeSeparators(filePath);
+		return;
+	}
+
+	QTextStream wutObjList(&objlist);
+	wutObjList.setCodec("UTF-8");
+
+	for(int row = 0; row < ui->wutMatchingObjectsListWidget->count(); ++row)
+	{
+		wutObjList << ui->wutMatchingObjectsListWidget->item(row)->text() << acEndl;
+	}
+
+	objlist.close();
 }

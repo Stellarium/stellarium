@@ -112,6 +112,20 @@ class LandscapeMgr : public StelModule
 		   READ getCurrentLandscapeID
 		   WRITE setCurrentLandscapeID
 		   NOTIFY currentLandscapeChanged)
+	Q_PROPERTY(QStringList allLandscapeNames
+		   READ getAllLandscapeNames)
+	Q_PROPERTY(QString currentLandscapeName
+		   READ getCurrentLandscapeName
+		   WRITE setCurrentLandscapeName
+		   NOTIFY currentLandscapeChanged)
+	Q_PROPERTY(QString currentLandscapeHtmlDescription
+		   READ getCurrentLandscapeHtmlDescription
+		   NOTIFY currentLandscapeChanged)
+	Q_PROPERTY(QString defaultLandscapeID
+		   READ getDefaultLandscapeID
+		   WRITE setDefaultLandscapeID
+		   NOTIFY defaultLandscapeChanged)
+
 public:
 	LandscapeMgr();
 	virtual ~LandscapeMgr();

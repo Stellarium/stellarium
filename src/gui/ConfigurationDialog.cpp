@@ -40,24 +40,18 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocation.hpp"
-#include "StelSkyCultureMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "ConstellationMgr.hpp"
-#include "AsterismMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "Planet.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
-#include "LabelMgr.hpp"
-#include "ScreenImageMgr.hpp"
-#include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
 #include "EphemWrapper.hpp"
 #include "ToastMgr.hpp"
-#include "HipsMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -653,6 +647,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_planets_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
 	conf->setValue("viewing/flag_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
 	conf->setValue("viewing/flag_isolated_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
+	conf->setValue("viewing/flag_planets_orbits_only",	propMgr->getStelPropertyValue("SolarSystem.flagPlanetsOrbitsOnly").toBool());
 	conf->setValue("astro/flag_light_travel_time",		propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
 	conf->setValue("viewing/flag_moon_scaled",		propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool());
 	conf->setValue("viewing/moon_scale",			propMgr->getStelPropertyValue("SolarSystem.moonScale").toFloat());
@@ -673,6 +668,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_use_obj_models",		propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
 	conf->setValue("astro/flag_show_obj_self_shadows",	propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 	conf->setValue("astro/apparent_magnitude_algorithm",	Planet::getApparentMagnitudeAlgorithmString());
+	conf->setValue("astro/flag_planets_nomenclature",	propMgr->getStelPropertyValue("NomenclatureMgr.nomenclatureDisplayed").toBool());
+	conf->setValue("astro/flag_hide_local_nomenclature",	propMgr->getStelPropertyValue("NomenclatureMgr.localNomenclatureHided").toBool());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_gridlines",		propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());
@@ -719,11 +716,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_atmosphere_auto_enable",	propMgr->getStelPropertyValue("LandscapeMgr.flagAtmosphereAutoEnabling").toBool());
 	conf->setValue("viewing/constellation_art_intensity",	propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_name_style",	ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
-	conf->setValue("viewing/constellation_line_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toFloat());
+	conf->setValue("viewing/constellation_line_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());
 
 	conf->setValue("viewing/flag_asterism_drawing",		propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_asterism_name",		propMgr->getStelPropertyValue("AsterismMgr.namesDisplayed").toBool());
-	conf->setValue("viewing/asterism_line_thickness",	propMgr->getStelPropertyValue("AsterismMgr.asterismLineThickness").toFloat());
+	conf->setValue("viewing/asterism_line_thickness",	propMgr->getStelPropertyValue("AsterismMgr.asterismLineThickness").toInt());
+	conf->setValue("viewing/flag_rayhelper_drawing",	propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool());
+	conf->setValue("viewing/rayhelper_line_thickness",	propMgr->getStelPropertyValue("AsterismMgr.rayHelperThickness").toInt());
 
 	conf->setValue("viewing/flag_night",			StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_stars",			propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
@@ -805,7 +804,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("landscape/temperature_C",                          propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
 
 	// view dialog / starlore tab
-	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	QObject* scmgr = (QObject*)&StelApp::getInstance().getSkyCultureMgr();
+	scmgr->setProperty("defaultSkyCultureID", scmgr->property("currentSkyCultureID"));
 
 	// Save default location
 	StelApp::getInstance().getCore()->setDefaultLocationID(core->getCurrentLocation().getID());
@@ -1215,7 +1215,7 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 			const QVariantList& magRange = nextStarCatalogToDownload.value("magRange").toList();
 			ui->downloadLabel->setText(q_("Download size: %1MB\nStar count: %2 Million\nMagnitude range: %3 - %4")
 				.arg(nextStarCatalogToDownload.value("sizeMb").toString())
-				.arg(nextStarCatalogToDownload.value("count").toString())
+				.arg(QString::number(nextStarCatalogToDownload.value("count").toFloat(), 'f', 1))
 				.arg(magRange.first().toString())
 				.arg(magRange.last().toString()));
 		}
@@ -1305,7 +1305,7 @@ void ConfigurationDialog::downloadFinished()
 	Q_ASSERT(starCatalogDownloadReply);
 	Q_ASSERT(progressBar);
 
-	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError || starCatalogDownloadReply->bytesAvailable()==0)
+	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError)
 	{
 		starCatalogDownloadReply->deleteLater();
 		starCatalogDownloadReply = Q_NULLPTR;
@@ -1356,6 +1356,9 @@ void ConfigurationDialog::downloadFinished()
 	else
 	{
 		hasDownloadedStarCatalog = true;
+		ui->getStarsButton->setVisible(true);
+		ui->downloadCancelButton->setVisible(false);
+		ui->downloadRetryButton->setVisible(false);
 	}
 
 	resetStarCatalogControls();

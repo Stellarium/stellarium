@@ -62,18 +62,15 @@ QString getUserAgentString()
 	QString platform = StelUtils::getOperatingSystemInfo();
 	if (platform.contains("Linux"))
 		platform = "Linux";
-	if (platform.contains("FreeBSD"))
+	else if (platform.contains("FreeBSD"))
 		platform = "FreeBSD";
-	if (platform.contains("NetBSD"))
+	else if (platform.contains("NetBSD"))
 		platform = "NetBSD";
-	if (platform.contains("OpenBSD"))
+	else if (platform.contains("OpenBSD"))
 		platform = "OpenBSD";
 
 	// Set user agent as "Stellarium/$version$ ($platform$; $CPU architecture$)"
-	#if QT_VERSION >= 0x050400
-	// TODO: Remove #ifdef when Qt 5.4 will set as minimal
 	platform.append("; " + QSysInfo::currentCpuArchitecture());
-	#endif
 
 	return QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(platform);
 }
@@ -115,11 +112,9 @@ QString getOperatingSystemInfo()
 		case QSysInfo::WV_WINDOWS8:
 			OS = "Windows 8";
 			break;
-		#if QT_VERSION >= 0x050200
 		case QSysInfo::WV_WINDOWS8_1:
 			OS = "Windows 8.1";
 			break;
-		#endif
 		#if QT_VERSION >= 0x050500
 		case QSysInfo::WV_WINDOWS10:
 			OS = "Windows 10";
@@ -715,10 +710,10 @@ double asinh(const double z)
 // Simple integer modulo where the result is always positive.
 int imod(const int a, const int b)
 {
-   int ret = a % b;
-   if(ret < 0)
-     ret+=b;
-   return ret;
+	int ret = a % b;
+	if(ret < 0)
+		ret+=b;
+	return ret;
 }
 
 /*************************************************************************

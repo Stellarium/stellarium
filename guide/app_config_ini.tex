@@ -171,6 +171,10 @@ cardinal\_color          				& \ccbox{0.8,0.2,0.1} &  cardinal points. \\\midrul
 %% A mix of equatorial (blueish) and ecliptical (reddish)...
 colures\_color 			 				& \ccbox{0.5,0.0,0.5} &  colures. \\\midrule
 longitude\_color	     				& \ccbox{0.2,0.4,0.4} &  opposition/conjunction longitude. \\\midrule
+%% Asterisms and ray helpers
+asterism\_lines\_color      	 	 	& \ccbox{0.4,0.4,0.8} &  asterism lines. \\\midrule
+asterism\_names\_color      			& \ccbox{0.4,0.4,0.8} &  asterism names. \\\midrule
+rayhelper\_lines\_color      	 	 	& \ccbox{1.0,1.0,0.0} &  the ray helper lines. \\\midrule
 %% Constellations
 const\_lines\_color      				& \ccbox{0.2,0.2,0.6} &  constellation lines. \\\midrule
 const\_names\_color      				& \ccbox{0.4,0.6,0.9} &  constellation names. \\\midrule
@@ -696,6 +700,9 @@ toggled with hotkeys or switched in the GUI.
 \begin{longtabu} to \textwidth {l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
+flag\_asterism\_drawing         & bool  & Display asterism line drawing\\\midrule
+flag\_asterism\_name            & bool  & Display asterism names\\\midrule
+flag\_rayhelper\_drawing        & bool  & Display the ray helper line drawing\\\midrule
 flag\_constellation\_drawing    & bool  & Display constellation line drawing\\\midrule
 flag\_constellation\_name       & bool  & Display constellation names\\\midrule
 flag\_constellation\_art        & bool  & Display constellation art\\\midrule
@@ -727,7 +734,10 @@ moon\_scale                   & float & Sets the moon scale factor, sometimes us
 constellation\_art\_intensity      & float & brightness [0\ldots1] of the constellation art images. Typical value: \emph{0.5}\\\midrule
 constellation\_art\_fade\_duration & float & time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\\\midrule
 constellation\_font\_size          & int   & font size for constellation labels\\\midrule
-constellation\_line\_thickness     & float & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\\\midrule
+constellation\_line\_thickness     & int   & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\\\midrule
+asterism\_font\_size               & int   & font size for asterism labels\\\midrule
+asterism\_line\_thickness          & int   & thickness of lines of the asterisms [1\ldots5]. Typical value: \emph{1}\\\midrule
+rayhelper\_line\_thickness         & int   & thickness of lines of the ray helpers [1\ldots5]. Typical value: \emph{1}\\\midrule
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
 light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
 use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\ %% TODO: DESCRIBE!

@@ -41,6 +41,7 @@
 #include "StelFileMgr.hpp"
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
+#include "NomenclatureItem.hpp"
 #include "precession.h"
 
 #include <QSettings>
@@ -137,8 +138,8 @@ StelCore::StelCore()
 	double eps1875, chi1875, omega1875, psi1875;
 	double jdB1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
 	getPrecessionAnglesVondrak(jdB1875, &eps1875, &chi1875, &omega1875, &psi1875);
-	matJ2000ToJ1875= Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psi1875) * Mat4d::xrotation(-omega1875) * Mat4d::zrotation(chi1875);
-	matJ2000ToJ1875=matJ2000ToJ1875.transpose();
+	matJ2000ToJ1875 = Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psi1875) * Mat4d::xrotation(-omega1875) * Mat4d::zrotation(chi1875);
+	matJ2000ToJ1875 = matJ2000ToJ1875.transpose();
 }
 
 
@@ -1164,6 +1165,20 @@ void StelCore::moveObserverToSelected()
 				moveObserverTo(loc);
 
 				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+				Q_ASSERT(landscapeMgr);
+
+				bool landscapeSetsLocation=landscapeMgr->getFlagLandscapeSetsLocation();
+				landscapeMgr->setFlagLandscapeSetsLocation(false);
+				if (landscapeMgr->getFlagLandscapeAutoSelection())
+				{
+					// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+					if (landscapeMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
+						landscapeMgr->setCurrentLandscapeName(loc.planetName);
+					else
+						landscapeMgr->setCurrentLandscapeID("zero");
+				}
+				landscapeMgr->setFlagLandscapeSetsLocation(landscapeSetsLocation);
+
 				if (pl->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 				{
 					landscapeMgr->setFlagAtmosphere(false);
@@ -1172,10 +1187,55 @@ void StelCore::moveObserverToSelected()
 				}
 				else
 				{
-					landscapeMgr->setFlagAtmosphere(pl->hasAtmosphere());
-					landscapeMgr->setFlagFog(pl->hasAtmosphere());
+					if (landscapeMgr->getFlagAtmosphereAutoEnable())
+					{
+						QSettings* conf = StelApp::getInstance().getSettings();
+						landscapeMgr->setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+						landscapeMgr->setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+					}
 					landscapeMgr->setFlagLandscape(true);
 				}
+			}
+		}
+		else
+		{
+			NomenclatureItem* ni = dynamic_cast<NomenclatureItem*>(objmgr->getSelectedObject()[0].data());
+			if (ni)
+			{
+				// We need to move to the nomenclature item's host planet.
+				StelLocation loc; //  = getCurrentLocation();
+				loc.planetName = ni->getPlanet()->getEnglishName();
+				loc.name=ni->getEnglishName();
+				loc.state = "";
+				loc.longitude=ni->getLongitude();
+				loc.latitude=ni->getLatitude();
+				loc.bortleScaleIndex=1;
+
+				moveObserverTo(loc);
+				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
+
+				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+				Q_ASSERT(landscapeMgr);
+
+				bool landscapeSetsLocation=landscapeMgr->getFlagLandscapeSetsLocation();
+				landscapeMgr->setFlagLandscapeSetsLocation(false);
+				if (landscapeMgr->getFlagLandscapeAutoSelection())
+				{
+					// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+					if (landscapeMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
+						landscapeMgr->setCurrentLandscapeName(loc.planetName);
+					else
+						landscapeMgr->setCurrentLandscapeID("zero");
+
+					if (landscapeMgr->getFlagAtmosphereAutoEnable())
+					{
+						QSettings* conf = StelApp::getInstance().getSettings();
+						landscapeMgr->setFlagAtmosphere(ni->getPlanet()->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+						landscapeMgr->setFlagFog(ni->getPlanet()->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+					}
+				}
+				landscapeMgr->setFlagLandscapeSetsLocation(landscapeSetsLocation);
+				landscapeMgr->setFlagLandscape(true);
 			}
 		}
 	}
