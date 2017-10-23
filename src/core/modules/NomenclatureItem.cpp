@@ -41,6 +41,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   float nLongitude,
 				   float nSize)
 	: initialized(false)
+	, XYZ(0.0)
 	, planet(nPlanet)
 	, identificator(nId)
 	, englishName(nName)
