@@ -1003,3 +1003,8 @@ void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName action
 		qDebug() << " -- " << module->getCallOrder(actionName) << "Module: " << module->objectName();
 	}
 }
+
+StelModule* StelApp::getModule(const QString& moduleID)
+{
+	return getModuleMgr().getModule(moduleID);
+}
