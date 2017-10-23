@@ -423,7 +423,7 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 
 	foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 	{
-		if (nItem->initialized)
+		if (nItem->initialized && nItem->XYZ.lengthSquared() > 0)
 		{
 			equPos = nItem->XYZ;
 			equPos.normalize();
