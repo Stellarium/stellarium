@@ -156,6 +156,7 @@ public:
 		constellationsTranslated  = 2,
 		constellationsEnglish     = 3 // Maybe this is not useful?
 	};
+	Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
