@@ -18,7 +18,6 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "SolarSystem.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -56,7 +55,8 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	QString activeColorStyle = GETSTELMODULE(SolarSystem)->getOrbitColorStyle();
+	QString activeColorStyle = StelApp::getInstance().getModule("SolarSystem")->property("orbitColorStyle").toString();
+
 	if (activeColorStyle=="groups")
 		ui->groupsRadioButton->setChecked(true);
 	else if (activeColorStyle=="major_planets")
@@ -118,7 +118,7 @@ void ConfigureOrbitColorsDialog::setColorStyle()
 	else
 		colorStyle = "one_color";
 
-	GETSTELMODULE(SolarSystem)->setOrbitColorStyle(colorStyle);
+	StelApp::getInstance().getModule("SolarSystem")->setProperty("orbitColorStyle", colorStyle);
 	StelApp::getInstance().getSettings()->setValue("astro/planets_orbits_color_style", colorStyle);
 }
 
@@ -143,7 +143,7 @@ void ConfigureOrbitColorsDialog::askGenericOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("orbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/sso_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGenericOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -158,7 +158,7 @@ void ConfigureOrbitColorsDialog::askMajorPlanetsGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setMajorPlanetsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("majorPlanetsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/major_planet_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsMajorPlanetsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -173,7 +173,7 @@ void ConfigureOrbitColorsDialog::askMinorPlanetsGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setMinorPlanetsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("minorPlanetsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/minor_planet_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsMinorPlanetsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -188,7 +188,7 @@ void ConfigureOrbitColorsDialog::askDwarfPlanetsGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setDwarfPlanetsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("dwarfPlanetsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dwarf_planet_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsDwarfPlanetsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -203,7 +203,7 @@ void ConfigureOrbitColorsDialog::askCometsGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setCometsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("cometsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/comet_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsCometsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -218,7 +218,7 @@ void ConfigureOrbitColorsDialog::askSednoidsGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setSednoidsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("sednoidsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/sednoid_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsSednoidsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -233,7 +233,7 @@ void ConfigureOrbitColorsDialog::askMoonsGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setMoonsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("moonsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/moon_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsMoonsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -248,7 +248,7 @@ void ConfigureOrbitColorsDialog::askCubewanosGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setCubewanosOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("cubewanosOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/cubewano_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsCubewanosOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -263,7 +263,7 @@ void ConfigureOrbitColorsDialog::askPlutinosGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setPlutinosOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("plutinosOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/plutino_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsPlutinosOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -278,7 +278,7 @@ void ConfigureOrbitColorsDialog::askSDOGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setScatteredDiskObjectsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("scatteredDiskObjectsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/sdo_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsSDOOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -293,7 +293,7 @@ void ConfigureOrbitColorsDialog::askOCOGroupOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setOortCloudObjectsOrbitsColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("oortCloudObjectsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/oco_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsOCOOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -308,7 +308,7 @@ void ConfigureOrbitColorsDialog::askMercuryOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setMercuryOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("mercuryOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/mercury_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPMercuryOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -323,7 +323,7 @@ void ConfigureOrbitColorsDialog::askVenusOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setVenusOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("venusOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/venus_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPVenusOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -338,7 +338,7 @@ void ConfigureOrbitColorsDialog::askEarthOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setEarthOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("earthOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/earth_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPEarthOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -353,7 +353,7 @@ void ConfigureOrbitColorsDialog::askMarsOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setMarsOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("marsOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/mars_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPMarsOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -368,7 +368,7 @@ void ConfigureOrbitColorsDialog::askJupiterOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setJupiterOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("jupiterOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/jupiter_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPJupiterOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -383,7 +383,7 @@ void ConfigureOrbitColorsDialog::askSaturnOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setSaturnOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("saturnOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/saturn_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPSaturnOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -398,7 +398,7 @@ void ConfigureOrbitColorsDialog::askUranusOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setUranusOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("uranusOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/uranus_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPUranusOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -413,7 +413,7 @@ void ConfigureOrbitColorsDialog::askNeptuneOrbitColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(SolarSystem)->setNeptuneOrbitColor(vColor);
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("neptuneOrbitColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/neptune_orbit_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMPNeptuneOrbit->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
