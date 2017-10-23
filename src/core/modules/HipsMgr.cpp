@@ -124,12 +124,13 @@ void HipsMgr::setSurveyUrl(const QString& url)
 	survey->setParent(this);
 }
 
-void HipsMgr::addHips(const QString& url)
+void HipsMgr::addHips(const QString& url_)
 {
+	QString url = url_;
 	QNetworkRequest req = QNetworkRequest(url + "/properties");
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 
-	connect(networkReply, &QNetworkReply::finished, [&, networkReply] {
+	connect(networkReply, &QNetworkReply::finished, [&, url, networkReply] {
 		QByteArray data = networkReply->readAll();
 		QJsonObject properties;
 		foreach(QString line, data.split('\n'))
@@ -140,9 +141,11 @@ void HipsMgr::addHips(const QString& url)
 			QString value = line.section("=", 1, -1).trimmed();
 			properties[key] = value;
 		}
-		this->surveyList.append(properties);
+		QJsonObject info;
+		info["properties"] = properties;
+		info["url"] = url;
+		this->surveyList.append(info);
 		emit surveyListChanged();
-
 		networkReply->deleteLater();
 	});
 }

@@ -96,7 +96,9 @@ private slots:
 
 	void updateSelectedCatalogsCheckBoxes();
 	void updateSelectedTypesCheckBoxes();
+
 	void updateHips();
+	void hipsListItemChanged(QListWidgetItem* item);
 
 	void askEclipticJ2000GridColor();
 	void askEclipticGridColor();

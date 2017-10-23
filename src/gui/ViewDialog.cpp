@@ -465,6 +465,7 @@ void ViewDialog::createDialogContent()
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	connect(hipsmgr, SIGNAL(surveyListChanged()), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()));
+	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
 	updateHips();
 
 	updateTabBarListWidgetWidth();
@@ -476,12 +477,22 @@ void ViewDialog::updateHips()
 	QListWidget* l = ui->surveysListWidget;
 	QJsonObject currentInfo;
 	int currentRow = l->currentRow();
+	QString currentSurvey;
+
+	if (hipsmgr->property("surveyDisplayed") == true)
+		currentSurvey = hipsmgr->property("surveyUrl").toString();
 
 	l->blockSignals(true);
 	l->clear();
 	for (auto info: hipsmgr->property("surveyList").toJsonArray())
 	{
-		l->addItem(info.toObject()["obs_title"].toString());
+		QString url = info.toObject()["url"].toString();
+		QJsonObject properties = info.toObject()["properties"].toObject();
+		QString title = properties["obs_title"].toString();
+		QListWidgetItem* item = new QListWidgetItem(title, l);
+		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+		item->setCheckState(url == currentSurvey ? Qt::Checked : Qt::Unchecked);
+		item->setData(Qt::UserRole, url);
 	}
 	l->setCurrentRow(currentRow);
 	l->blockSignals(false);
@@ -492,7 +503,8 @@ void ViewDialog::updateHips()
 	}
 	else
 	{
-		QJsonObject props = hipsmgr->property("surveyList").toJsonArray()[currentRow].toObject();
+		QJsonObject info = hipsmgr->property("surveyList").toJsonArray()[currentRow].toObject();
+		QJsonObject props = info["properties"].toObject();
 		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
 
 		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
@@ -506,6 +518,29 @@ void ViewDialog::updateHips()
 		ui->surveysTextBrowser->setHtml(html);
 	}
 
+}
+
+void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
+{
+	QListWidget* l = item->listWidget();
+	l->blockSignals(true);
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	QString url = item->data(Qt::UserRole).toString();
+	if (item->checkState() == Qt::Checked)
+	{
+		hipsmgr->setProperty("surveyDisplayed", true);
+		hipsmgr->setProperty("surveyUrl", url);
+	}
+	else
+	{
+		hipsmgr->setProperty("surveyDisplayed", false);
+	}
+	// Uncheck all the other items.
+	for (int i = 0; i < l->count(); i++) {
+		QListWidgetItem *item2 = l->item(i);
+		if (item2 != item) item2->setCheckState(Qt::Unchecked);
+	}
+	l->blockSignals(false);
 }
 
 void ViewDialog::colorButton(QToolButton* toolButton, QString propName)
