@@ -20,7 +20,6 @@
 
 #include "Dialog.hpp"
 #include "LocationDialog.hpp"
-#include "LandscapeMgr.hpp"
 #include "StelLocationMgr.hpp"
 #include "ui_locationDialogGui.h"
 #include "StelApp.hpp"
@@ -28,7 +27,6 @@
 
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
-#include "Planet.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
@@ -287,14 +285,14 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	PlanetP p = ssm->searchByEnglishName(loc.planetName);
-	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
-	if (ls->getFlagAtmosphereAutoEnable())
+	StelModule* ls = StelApp::getInstance().getModule("LandscapeMgr");
+	if (ls->property("flagAtmosphereAutoEnable").toBool())
 	{
 		if (loc.planetName != StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 		{
 			QSettings* conf = StelApp::getInstance().getSettings();
-			ls->setFlagAtmosphere(p->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
-			ls->setFlagFog(p->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+			ls->setProperty("atmosphereDisplayed", p->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+			ls->setProperty("fogDisplayed", p->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
 		}
 	}
 
@@ -498,18 +496,18 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelCore* stelCore = StelApp::getInstance().getCore();
-	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+	StelModule* ls = StelApp::getInstance().getModule("LandscapeMgr");
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
 	{
 		setFieldsFromLocation(loc);
-		if (ls->getFlagLandscapeAutoSelection())
+		if (ls->property("flagLandscapeAutoSelection").toBool())
 		{
 			// If we have a landscape for selected planet then set it, otherwise use default landscape
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
-			if (ls->getAllLandscapeNames().indexOf(loc.planetName)>0)
-				ls->setCurrentLandscapeName(loc.planetName);
+			if (ls->property("allLandscapeNames").toStringList().indexOf(loc.planetName)>0)
+				ls->setProperty("currentLandscapeName", loc.planetName);
 			else
-				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+				ls->setProperty("currentLandscapeID", ls->property("defaultLandscapeID"));
 		}
 
 		// GZ populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).
