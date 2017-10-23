@@ -45,7 +45,6 @@
 #include "StelGuiItems.hpp"
 #include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "GridLinesMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QDebug>
@@ -483,7 +482,7 @@ void ViewDialog::askEclipticJ2000GridColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEclipticJ2000Grid(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("eclipticJ2000GridColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/ecliptical_J2000_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEclipticGridJ2000->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -498,7 +497,7 @@ void ViewDialog::askEclipticGridColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEclipticGrid(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("eclipticGridColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/ecliptical_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEclipticGridOfDate->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -513,7 +512,7 @@ void ViewDialog::askEquatorJ2000GridColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEquatorJ2000Grid(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("equatorJ2000GridColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/equatorial_J2000_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEquatorialJ2000Grid->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -528,7 +527,7 @@ void ViewDialog::askEquatorGridColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEquatorGrid(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("equatorGridColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/equatorial_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEquatorialGrid->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -543,7 +542,7 @@ void ViewDialog::askGalacticGridColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorGalacticGrid(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("galacticGridColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/galactic_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGalacticGrid->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -558,7 +557,7 @@ void ViewDialog::askSupergalacticGridColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorSupergalacticGrid(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("supergalacticGridColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/supergalactic_color", StelUtils::vec3fToStr(vColor));
 		ui->colorSupergalacticGrid->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -573,7 +572,7 @@ void ViewDialog::askAzimuthalGridColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorAzimuthalGrid(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("azimuthalGridColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/azimuthal_color", StelUtils::vec3fToStr(vColor));
 		ui->colorAzimuthalGrid->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -587,8 +586,8 @@ void ViewDialog::askEclipticLineJ2000Color()
 	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorEclipticLineJ2000->toolTip()));
 	if (c.isValid())
 	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEclipticJ2000Line(vColor);
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());		
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("eclipticJ2000LineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/ecliptic_J2000_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEclipticLineJ2000->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -603,7 +602,7 @@ void ViewDialog::askEclipticLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEclipticLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("eclipticLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/ecliptic_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEclipticLineOfDate->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -618,7 +617,7 @@ void ViewDialog::askEquatorLineJ2000Color()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEquatorJ2000Line(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("equatorJ2000LineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/equator_J2000_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEquatorJ2000Line->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -633,7 +632,7 @@ void ViewDialog::askEquatorLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEquatorLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("equatorLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/equator_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEquatorLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -648,7 +647,7 @@ void ViewDialog::askGalacticEquatorLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorGalacticEquatorLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("galacticEquatorLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/galactic_equator_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGalacticEquatorLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -663,7 +662,7 @@ void ViewDialog::askSupergalacticEquatorLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorSupergalacticEquatorLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("supergalacticEquatorLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/supergalactic_equator_color", StelUtils::vec3fToStr(vColor));
 		ui->colorSupergalacticEquatorLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -678,7 +677,7 @@ void ViewDialog::askHorizonLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorHorizonLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("horizonLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/horizon_color", StelUtils::vec3fToStr(vColor));
 		ui->colorHorizonLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -693,7 +692,7 @@ void ViewDialog::askLongitudeLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorLongitudeLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("longitudeLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/oc_longitude_color", StelUtils::vec3fToStr(vColor));
 		ui->colorLongitudeLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -708,7 +707,7 @@ void ViewDialog::askColureLinesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorColureLines(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("colureLinesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/colures_color", StelUtils::vec3fToStr(vColor));
 		ui->colorColuresLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -723,7 +722,7 @@ void ViewDialog::askCircumpolarCirclesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorCircumpolarCircles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("circumpolarCirclesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/circumpolar_circles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorCircumpolarCircles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -738,7 +737,7 @@ void ViewDialog::askPrecessionCirclesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorPrecessionCircles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("precessionCirclesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/precession_circles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorPrecessionCircles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -753,7 +752,7 @@ void ViewDialog::askPrimeVerticalLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorPrimeVerticalLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("primeVerticalLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/prime_vertical_color", StelUtils::vec3fToStr(vColor));
 		ui->colorPrimeVerticalLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -768,7 +767,7 @@ void ViewDialog::askMeridianLineColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorMeridianLine(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("meridianLineColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/meridian_color", StelUtils::vec3fToStr(vColor));
 		ui->colorMeridianLine->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -783,7 +782,7 @@ void ViewDialog::askCelestialJ2000PolesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorCelestialJ2000Poles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("celestialJ2000PolesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/celestial_J2000_poles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorCelestialJ2000Poles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -798,7 +797,7 @@ void ViewDialog::askCelestialPolesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorCelestialPoles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("celestialPolesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/celestial_poles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorCelestialPoles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -813,7 +812,7 @@ void ViewDialog::askZenithNadirColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorZenithNadir(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("zenithNadirColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/zenith_nadir_color", StelUtils::vec3fToStr(vColor));
 		ui->colorZenithNadir->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -828,7 +827,7 @@ void ViewDialog::askEclipticJ2000PolesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEclipticJ2000Poles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("eclipticJ2000PolesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/ecliptic_J2000_poles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEclipticJ2000Poles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -843,7 +842,7 @@ void ViewDialog::askEclipticPolesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEclipticPoles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("eclipticPolesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/ecliptic_poles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEclipticPoles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -858,7 +857,7 @@ void ViewDialog::askGalacticPolesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorGalacticPoles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("galacticPolesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/galactic_poles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGalacticPoles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -873,7 +872,7 @@ void ViewDialog::askSupergalacticPolesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorSupergalacticPoles(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("supergalacticPolesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/supergalactic_poles_color", StelUtils::vec3fToStr(vColor));
 		ui->colorSupergalacticPoles->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -888,7 +887,7 @@ void ViewDialog::askEquinoxJ2000PointsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEquinoxJ2000Points(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("equinoxJ2000PointsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/equinox_J2000_points_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEquinoxJ2000Points->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -903,7 +902,7 @@ void ViewDialog::askEquinoxPointsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorEquinoxPoints(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("equinoxPointsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/equinox_points_color", StelUtils::vec3fToStr(vColor));
 		ui->colorEquinoxPoints->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -918,7 +917,7 @@ void ViewDialog::askSolsticeJ2000PointsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorSolsticeJ2000Points(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("solsticeJ2000PointsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/solstice_J2000_points_color", StelUtils::vec3fToStr(vColor));
 		ui->colorSolsticeJ2000Points->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -933,7 +932,7 @@ void ViewDialog::askSolsticePointsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(GridLinesMgr)->setColorSolsticePoints(vColor);
+		StelApp::getInstance().getModule("GridLinesMgr")->setProperty("solsticePointsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/solstice_points_color", StelUtils::vec3fToStr(vColor));
 		ui->colorSolsticePoints->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
