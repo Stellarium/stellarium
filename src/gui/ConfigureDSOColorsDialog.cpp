@@ -18,7 +18,6 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "NebulaMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
