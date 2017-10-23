@@ -57,6 +57,7 @@
 #include <QDialog>
 #include <QStringList>
 #include <QColorDialog>
+#include <QJsonArray>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(Q_NULLPTR)
@@ -460,7 +461,25 @@ void ViewDialog::createDialogContent()
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
 	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
 
+	// Hips mgr.
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	connect(hipsmgr, SIGNAL(surveyListChanged()), this, SLOT(updateHips()));
+	updateHips();
+
 	updateTabBarListWidgetWidth();
+}
+
+void ViewDialog::updateHips()
+{
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	QListWidget* l = ui->surveysListWidget;
+	l->blockSignals(true);
+	l->clear();
+	for (auto info: hipsmgr->property("surveyList").toJsonArray())
+	{
+		l->addItem(info.toObject()["obs_title"].toString());
+	}
+	l->blockSignals(false);
 }
 
 void ViewDialog::colorButton(QToolButton* toolButton, QString propName)

@@ -58,8 +58,9 @@ void HipsMgr::init()
 			QString key = line.section("=", 0, 0).trimmed();
 			QString value = line.section("=", 1, -1).trimmed();
 			if (key == "hips_service_url") url = value;
-			if (key == "hips_status" && value.split(' ').contains("public"))
-				surveyList.append(url);
+			if (key == "hips_status" && value.split(' ').contains("public")) {
+				addHips(url);
+			}
 		}
 		emit surveyListChanged();
 	});
@@ -121,4 +122,25 @@ void HipsMgr::setSurveyUrl(const QString& url)
 	delete survey;
 	survey = new HipsSurvey(url);
 	survey->setParent(this);
+}
+
+void HipsMgr::addHips(const QString& url)
+{
+	QNetworkRequest req = QNetworkRequest(url + "/properties");
+	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+
+	connect(networkReply, &QNetworkReply::finished, [&, networkReply] {
+		QByteArray data = networkReply->readAll();
+		QJsonObject properties;
+		foreach(QString line, data.split('\n'))
+		{
+			QString key = line.section("=", 0, 0).trimmed();
+			QString value = line.section("=", 1, -1).trimmed();
+			properties[key] = value;
+		}
+		this->surveyList.append(properties);
+		emit surveyListChanged();
+
+		networkReply->deleteLater();
+	});
 }

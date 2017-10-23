@@ -21,6 +21,7 @@
 #define _HIPSMGR_HPP_
 
 #include "StelModule.hpp"
+#include <QJsonArray>
 
 class HipsMgr : public StelModule
 {
@@ -35,7 +36,7 @@ class HipsMgr : public StelModule
 			WRITE setSurveyUrl
 			NOTIFY surveyUrlChanged)
 
-	Q_PROPERTY(QStringList surveyList
+	Q_PROPERTY(QJsonArray surveyList
 			MEMBER surveyList
 			NOTIFY surveyListChanged)
 
@@ -63,9 +64,12 @@ signals:
 	void surveyListChanged() const;
 
 private:
-	QStringList surveyList;
+	QJsonArray surveyList;
 	class HipsSurvey* survey = NULL;
 	class LinearFader* fader = NULL;
+
+	//! load a hips info and add it into the list.
+	void addHips(const QString& url);
 };
 
 #endif // _HIPSMGR_HPP_

@@ -96,6 +96,7 @@ private slots:
 
 	void updateSelectedCatalogsCheckBoxes();
 	void updateSelectedTypesCheckBoxes();
+	void updateHips();
 
 	void askEclipticJ2000GridColor();
 	void askEclipticGridColor();
