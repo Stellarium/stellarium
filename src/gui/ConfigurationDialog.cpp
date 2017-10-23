@@ -40,23 +40,16 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocation.hpp"
-#include "StelSkyCultureMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "ConstellationMgr.hpp"
-#include "AsterismMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "Planet.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
-#include "LabelMgr.hpp"
-#include "ScreenImageMgr.hpp"
-#include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
-#include "EphemWrapper.hpp"
-#include "ToastMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -809,7 +802,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("landscape/temperature_C",                          propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
 
 	// view dialog / starlore tab
-	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	QObject* scmgr = (QObject*)&StelApp::getInstance().getSkyCultureMgr();
+	scmgr->setProperty("defaultSkyCultureID", scmgr->property("currentSkyCultureID"));
 
 	// Save default location
 	StelApp::getInstance().getCore()->setDefaultLocationID(core->getCurrentLocation().getID());

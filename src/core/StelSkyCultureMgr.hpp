@@ -53,6 +53,10 @@ class StelSkyCultureMgr : public QObject
 		   READ getCurrentSkyCultureID
 		   WRITE setCurrentSkyCultureID
 		   NOTIFY currentSkyCultureChanged)
+	Q_PROPERTY(QString defaultSkyCultureID
+		   READ getDefaultSkyCultureID
+		   WRITE setDefaultSkyCultureID
+		   NOTIFY defaultSkyCultureChanged)
 
 public:
 	StelSkyCultureMgr();
