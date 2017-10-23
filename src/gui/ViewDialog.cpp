@@ -464,6 +464,7 @@ void ViewDialog::createDialogContent()
 	// Hips mgr.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	connect(hipsmgr, SIGNAL(surveyListChanged()), this, SLOT(updateHips()));
+	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()));
 	updateHips();
 
 	updateTabBarListWidgetWidth();
@@ -473,13 +474,38 @@ void ViewDialog::updateHips()
 {
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QListWidget* l = ui->surveysListWidget;
+	QJsonObject currentInfo;
+	int currentRow = l->currentRow();
+
 	l->blockSignals(true);
 	l->clear();
 	for (auto info: hipsmgr->property("surveyList").toJsonArray())
 	{
 		l->addItem(info.toObject()["obs_title"].toString());
 	}
+	l->setCurrentRow(currentRow);
 	l->blockSignals(false);
+
+	if (currentRow == -1)
+	{
+		ui->surveysTextBrowser->setText("");
+	}
+	else
+	{
+		QJsonObject props = hipsmgr->property("surveyList").toJsonArray()[currentRow].toObject();
+		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
+
+		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
+
+		html += "<h2>properties</h2>\n<ul>\n";
+		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
+		{
+			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key()).arg(iter.value().toString());
+		}
+		html += "</ul>\n";
+		ui->surveysTextBrowser->setHtml(html);
+	}
+
 }
 
 void ViewDialog::colorButton(QToolButton* toolButton, QString propName)

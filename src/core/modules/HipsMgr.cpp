@@ -134,7 +134,9 @@ void HipsMgr::addHips(const QString& url)
 		QJsonObject properties;
 		foreach(QString line, data.split('\n'))
 		{
+			if (line.startsWith("#")) continue;
 			QString key = line.section("=", 0, 0).trimmed();
+			if (key.isEmpty()) continue;
 			QString value = line.section("=", 1, -1).trimmed();
 			properties[key] = value;
 		}
