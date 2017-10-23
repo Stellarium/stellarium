@@ -96,9 +96,6 @@ class ConstellationMgr : public StelObjectModule
 		   WRITE setConstellationLineThickness
 		   NOTIFY constellationLineThicknessChanged)
 
-	//Register enum with Qt
-	Q_ENUMS(ConstellationDisplayStyle)
-
 public:
 	//! Constructor
 	ConstellationMgr(StarMgr *stars);
