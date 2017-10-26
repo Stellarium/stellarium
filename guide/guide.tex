@@ -49,7 +49,7 @@
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 \input{version}
-%\usepackage{fancyvrb}
+\usepackage{fancyvrb}% provides \VerbatimFootnotes
 \usepackage{marvosym}% For the Zodiac symbols, \Aries etc. 
 \usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
 %\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
@@ -64,6 +64,8 @@
 \newcommand{\DocumentEdition}{1}
 
 \begin{document}
+\VerbatimFootnotes % Allow \verb|whatever| in footnotes 
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
