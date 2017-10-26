@@ -96,6 +96,8 @@ class ConstellationMgr : public StelObjectModule
 		   WRITE setConstellationLineThickness
 		   NOTIFY constellationLineThicknessChanged)
 
+	Q_ENUMS(ConstellationDisplayStyle)
+
 public:
 	//! Constructor
 	ConstellationMgr(StarMgr *stars);
@@ -152,8 +154,7 @@ public:
 		constellationsNative      = 1,
 		constellationsTranslated  = 2,
 		constellationsEnglish     = 3 // Maybe this is not useful?
-	};
-	Q_ENUM(ConstellationDisplayStyle);
+	};	
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
