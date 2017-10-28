@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-26 21:37+0700\n"
+"POT-Creation-Date: 2017-10-28 11:59+0700\n"
 "PO-Revision-Date: 2017-10-26 19:45+0000\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2017-10-27 05:35+0000\n"
+"X-Launchpad-Export-Date: 2017-10-28 05:27+0000\n"
 "X-Generator: Launchpad (build 18493)\n"
 "Language: ru\n"
 "X-Language: ru\n"
@@ -33,7 +33,7 @@ msgstr "пользовательский маркер"
 #: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:292
 #: src/core/modules/NomenclatureItem.cpp:773 src/core/modules/Nebula.cpp:221
-#: src/core/modules/Nebula.cpp:223 src/core/modules/Planet.cpp:376
+#: src/core/modules/Nebula.cpp:223 src/core/modules/Planet.cpp:414
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:195
 #: src/core/modules/StarWrapper.cpp:198 src/gui/AstroCalcDialog.cpp:331
@@ -1119,7 +1119,7 @@ msgid "Diameter"
 msgstr "Диаметр"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:788 src/core/modules/Planet.cpp:417
+#: src/core/modules/NomenclatureItem.cpp:788 src/core/modules/Planet.cpp:455
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/Comet.cpp:193
 #: src/gui/StelGuiItems.cpp:748 plugins/Satellites/src/Satellite.cpp:304
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -1145,7 +1145,7 @@ msgid "Nomenclature labels"
 msgstr "Номенклатурные названия"
 
 #: src/core/modules/Nebula.cpp:229 src/core/modules/Nebula.cpp:239
-#: src/core/modules/Planet.cpp:385 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Planet.cpp:423 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:62
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:1958
 #: src/gui/AstroCalcDialog.cpp:1993 plugins/Supernovae/src/Supernova.cpp:140
@@ -1158,7 +1158,7 @@ msgstr "Звёздная величина"
 msgid "Opacity"
 msgstr "Непрозрачность"
 
-#: src/core/modules/Nebula.cpp:234 src/core/modules/Planet.cpp:383
+#: src/core/modules/Nebula.cpp:234 src/core/modules/Planet.cpp:421
 #: src/core/modules/MinorPlanet.cpp:242 src/core/modules/Comet.cpp:176
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:288
@@ -1227,7 +1227,7 @@ msgid "ly"
 msgstr "св. лет"
 
 #: src/core/modules/Nebula.cpp:315 src/core/modules/Nebula.cpp:350
-#: src/core/modules/Planet.cpp:449 src/core/modules/MinorPlanet.cpp:302
+#: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:302
 #: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:1969 src/gui/AstroCalcDialog.cpp:2004
 #: src/ui_configurationDialog.h:1363 plugins/Supernovae/src/Supernova.cpp:155
@@ -1704,18 +1704,18 @@ msgstr "Объекты глубокого космоса"
 msgid "Toggle DSO type filter"
 msgstr "Переключение фильтра типа ОГК"
 
-#: src/core/modules/Planet.cpp:389 src/core/modules/MinorPlanet.cpp:253
+#: src/core/modules/Planet.cpp:427 src/core/modules/MinorPlanet.cpp:253
 #: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
 msgstr "Абсолютная звёздная величина"
 
-#: src/core/modules/Planet.cpp:392
+#: src/core/modules/Planet.cpp:430
 msgid "Mean Opposition Magnitude"
 msgstr "Звёздная величина среднего противостояния"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:415 src/core/modules/MinorPlanet.cpp:271
+#: src/core/modules/Planet.cpp:453 src/core/modules/MinorPlanet.cpp:271
 #: src/core/modules/Comet.cpp:202 src/gui/AstroCalcDialog.cpp:317
 #: src/gui/AstroCalcDialog.cpp:592 src/gui/AstroCalcDialog.cpp:651
 #: src/gui/AstroCalcDialog.cpp:705 src/gui/AstroCalcDialog.cpp:766
@@ -1726,119 +1726,119 @@ msgid "AU"
 msgstr "а.е."
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
-#: src/core/modules/Planet.cpp:431 src/core/modules/Planet.cpp:446
+#: src/core/modules/Planet.cpp:469 src/core/modules/Planet.cpp:484
 #: src/core/modules/MinorPlanet.cpp:285 src/core/modules/MinorPlanet.cpp:300
 #: src/core/modules/Comet.cpp:195
 msgctxt "distance"
 msgid "Mio km"
 msgstr "млн. км."
 
-#: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:287
+#: src/core/modules/Planet.cpp:472 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:215
 msgid "Distance from Sun"
 msgstr "Расстояние от Солнца"
 
-#: src/core/modules/Planet.cpp:470
+#: src/core/modules/Planet.cpp:508
 msgid "with rings"
 msgstr "с кольцами"
 
-#: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:323
+#: src/core/modules/Planet.cpp:525 src/core/modules/MinorPlanet.cpp:323
 msgid "scaled up to"
 msgstr "масштабирован до"
 
-#: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:333
+#: src/core/modules/Planet.cpp:535 src/core/modules/MinorPlanet.cpp:333
 msgid "Apparent diameter"
 msgstr "Видимый диаметр"
 
-#: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:354
+#: src/core/modules/Planet.cpp:548 src/core/modules/MinorPlanet.cpp:354
 #: src/core/modules/StarWrapper.cpp:258
 msgctxt "duration"
 msgid "days"
 msgstr "дней"
 
-#: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:356
+#: src/core/modules/Planet.cpp:550 src/core/modules/MinorPlanet.cpp:356
 #: src/core/modules/Comet.cpp:241
 msgid "Sidereal period"
 msgstr "Звёздный период обращения"
 
-#: src/core/modules/Planet.cpp:516
+#: src/core/modules/Planet.cpp:554
 msgid "Sidereal day"
 msgstr "Звёздные сутки"
 
-#: src/core/modules/Planet.cpp:517
+#: src/core/modules/Planet.cpp:555
 msgid "Mean solar day"
 msgstr "Средние солнечные сутки"
 
-#: src/core/modules/Planet.cpp:521
+#: src/core/modules/Planet.cpp:559
 msgid "The period of rotation is chaotic"
 msgstr "Период вращения хаотичен"
 
-#: src/core/modules/Planet.cpp:540
+#: src/core/modules/Planet.cpp:578
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Молодой месяц"
 
-#: src/core/modules/Planet.cpp:542
+#: src/core/modules/Planet.cpp:580
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Первая четверть"
 
-#: src/core/modules/Planet.cpp:544
+#: src/core/modules/Planet.cpp:582
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Нарастающая Луна"
 
-#: src/core/modules/Planet.cpp:546
+#: src/core/modules/Planet.cpp:584
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Полнолуние"
 
-#: src/core/modules/Planet.cpp:548
+#: src/core/modules/Planet.cpp:586
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Убывающая Луна"
 
-#: src/core/modules/Planet.cpp:550
+#: src/core/modules/Planet.cpp:588
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Третья четверть"
 
-#: src/core/modules/Planet.cpp:552
+#: src/core/modules/Planet.cpp:590
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Старый месяц"
 
-#: src/core/modules/Planet.cpp:554
+#: src/core/modules/Planet.cpp:592
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Новолуние"
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:374
+#: src/core/modules/Planet.cpp:607 src/core/modules/MinorPlanet.cpp:374
 #: src/core/modules/Comet.cpp:264 src/gui/AstroCalcDialog.cpp:1984
 #: src/gui/AstroCalcDialog.cpp:2019
 msgid "Phase angle"
 msgstr "Фазовый угол"
 
-#: src/core/modules/Planet.cpp:570 src/core/modules/MinorPlanet.cpp:375
+#: src/core/modules/Planet.cpp:608 src/core/modules/MinorPlanet.cpp:375
 #: src/core/modules/Comet.cpp:265 src/gui/AstroCalcDialog.cpp:1974
 #: src/gui/AstroCalcDialog.cpp:2009
 msgid "Elongation"
 msgstr "Элонгация"
 
-#: src/core/modules/Planet.cpp:571
+#: src/core/modules/Planet.cpp:609
 msgid "Illuminated"
 msgstr "Освещено"
 
-#: src/core/modules/Planet.cpp:572
+#: src/core/modules/Planet.cpp:610
 msgid "Albedo"
 msgstr "Альбедо"
 
-#: src/core/modules/Planet.cpp:574 src/gui/AstroCalcDialog.cpp:1964
+#: src/core/modules/Planet.cpp:612 src/gui/AstroCalcDialog.cpp:1964
 #: src/gui/AstroCalcDialog.cpp:1999
 msgid "Phase"
 msgstr "Фаза"
 
-#: src/core/modules/Planet.cpp:583
+#: src/core/modules/Planet.cpp:621
 msgid "Eclipse Factor"
 msgstr "Коэффициент затмения"
 
