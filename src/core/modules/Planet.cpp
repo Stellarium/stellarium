@@ -324,7 +324,7 @@ void Planet::translateName(const StelTranslator& trans)
 	else
 	{
 		if (getFlagTranslatedName())
-			nameI18 = trans.qtranslate(englishName);
+			nameI18 = trans.qtranslate(englishName, getContextString());
 		else
 			nameI18 = englishName;
 	}
@@ -346,6 +346,44 @@ QString Planet::getEnglishName() const
 QString Planet::getNameI18n() const
 {
 	return nameI18;
+}
+
+const QString Planet::getContextString() const
+{
+	QString context = "";
+	switch (getPlanetType())
+	{
+		case isStar:
+			context = "star";
+			break;
+		case isPlanet:
+			context = "major planet";
+			break;
+		case isMoon:
+			context = "moon";
+			break;
+		case isObserver:
+		case isArtificial:
+			context = "special celestial body";
+			break;
+		case isAsteroid:
+		case isPlutino:
+		case isDwarfPlanet:
+		case isCubewano:
+		case isSDO:
+		case isOCO:
+		case isSednoid:
+			context = "minor planet";
+			break;
+		case isComet:
+			context = "comet";
+			break;
+		default:
+			context = "";
+			break;
+	}
+
+	return context;
 }
 
 // Return the information string "ready to print" :)
