@@ -564,6 +564,8 @@ protected:
 private:
 	QString iauMoonNumber;
 
+	const QString getContextString() const;
+
 	// Shader-related variables
 	struct PlanetShaderVars {
 		// Vertex attributes

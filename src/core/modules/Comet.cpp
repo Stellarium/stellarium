@@ -134,7 +134,7 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 
 void Comet::translateName(const StelTranslator &translator)
 {
-	nameI18 = translator.qtranslate(englishName);
+	nameI18 = translator.qtranslate(englishName, "comet");
 }
 
 QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const

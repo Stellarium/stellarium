@@ -4,285 +4,346 @@
 # It is not meant to be compiled but just parsed by gettext
 
 #
-# Planets and satellites from ssystem.ini
+# Planets and satellites from ssystem_major.ini and ssystem_minor.ini files
 #
-_("Sun");
-_("Mercury");
-_("Venus");
-_("Earth");
-_("Moon");
-_("Mars");
+
+_("Sun","star")
+
+#
+# Major planets
+#
+_("Mercury","major planet")
+_("Venus","major planet")
+_("Earth","major planet")
+_("Mars","major planet")
+_("Jupiter","major planet")
+_("Saturn","major planet")
+_("Uranus","major planet")
+_("Neptune","major planet")
+
+#
+# Moons
+#
+
+# EARTH:
+# TRANSLATORS: Moon of Earth (EI)
+_("Moon","moon")
+
+# MARS:
 # TRANSLATORS: Moon of Mars (MII)
-_("Deimos");
+_("Deimos","moon")
 # TRANSLATORS: Moon of Mars (MI)
-_("Phobos");
-# TRANSLATORS: Dwarf planet (1) Ceres
-_("Ceres");
-# TRANSLATORS: Asteroid (2) Pallas
-_("Pallas");
-# TRANSLATORS: Asteroid (3) Juno
-_("Juno");
-# TRANSLATORS: Asteroid (4) Vesta
-_("Vesta");
-_("Jupiter");
+_("Phobos","moon")
+
+# JUPITER:
 # TRANSLATORS: Moon of Jupiter (JI)
-_("Io");
-# TRANSLATORS: Asteroid (52) Europa and moon of Jupiter (JII)
-_("Europa");
+_("Io","moon")
+# TRANSLATORS: Moon of Jupiter (JII)
+_("Europa","moon")
 # TRANSLATORS: Moon of Jupiter (JIII)
-_("Ganymede");
+_("Ganymede","moon")
 # TRANSLATORS: Moon of Jupiter (JIV)
-_("Callisto");
+_("Callisto","moon")
 # TRANSLATORS: Moon of Jupiter (JV)
-_("Amalthea");
+_("Amalthea","moon")
 # TRANSLATORS: Moon of Jupiter (JVI)
-_("Himalia");
+_("Himalia","moon")
 # TRANSLATORS: Moon of Jupiter (JVII)
-_("Elara");
+_("Elara","moon")
 # TRANSLATORS: Moon of Jupiter (JVIII)
-_("Pasiphae");
+_("Pasiphae","moon")
 # TRANSLATORS: Moon of Jupiter (JIX)
-_("Sinope");
+_("Sinope","moon")
 # TRANSLATORS: Moon of Jupiter (JX)
-_("Lysithea");
+_("Lysithea","moon")
 # TRANSLATORS: Moon of Jupiter (JXI)
-_("Carme");
+_("Carme","moon")
 # TRANSLATORS: Moon of Jupiter (JXII)
-_("Ananke");
+_("Ananke","moon")
 # TRANSLATORS: Moon of Jupiter (JXIII)
-_("Leda");
+_("Leda","moon")
 # TRANSLATORS: Moon of Jupiter (JXIV)
-_("Thebe");
+_("Thebe","moon")
 # TRANSLATORS: Moon of Jupiter (JXV)
-_("Adrastea");
-# TRANSLATORS: Asteroid (9) Metis and moon of Jupiter (JXVI)
-_("Metis");
-_("Saturn");
+_("Adrastea","moon")
+# TRANSLATORS: Moon of Jupiter (JXVI)
+_("Metis","moon")
+
+# SATURN:
 # TRANSLATORS: Moon of Saturn (SI)
-_("Mimas");
+_("Mimas","moon")
 # TRANSLATORS: Moon of Saturn (SII)
-_("Enceladus");
+_("Enceladus","moon")
 # TRANSLATORS: Moon of Saturn (SIII)
-_("Tethys");
-# TRANSLATORS: Asteroid (106) Dione and moon of Saturn (SIV)
-_("Dione");
+_("Tethys","moon")
+# TRANSLATORS: Moon of Saturn (SIV)
+_("Dione","moon")
 # TRANSLATORS: Moon of Saturn (SV)
-_("Rhea");
+_("Rhea","moon")
 # TRANSLATORS: Moon of Saturn (SVI)
-_("Titan");
+_("Titan","moon")
 # TRANSLATORS: Moon of Saturn (SVII)
-_("Hyperion");
+_("Hyperion","moon")
 # TRANSLATORS: Moon of Saturn (SVIII)
-_("Iapetus");
+_("Iapetus","moon")
 # TRANSLATORS: Moon of Saturn (SIX)
-_("Phoebe");
+_("Phoebe","moon")
 # TRANSLATORS: Moon of Saturn (SX)
-_("Janus");
-# TRANSLATORS: Asteroid (1810) Epimetheus and moon of Saturn (SXI)
-_("Epimetheus");
+_("Janus","moon")
+# TRANSLATORS: Moon of Saturn (SXI)
+_("Epimetheus","moon")
+# TRANSLATORS: Moon of Saturn (SXI)
+_("Epimetheus","moon")
 # TRANSLATORS: Moon of Saturn (SXII)
-_("Helene");
+_("Helene","moon")
 # TRANSLATORS: Moon of Saturn (SXIII)
-_("Telesto");
+_("Telesto","moon")
 # TRANSLATORS: Moon of Saturn (SXIV)
-_("Calypso");
+_("Calypso","moon")
 # TRANSLATORS: Moon of Saturn (SXV)
-_("Atlas");
-# TRANSLATORS: Asteroid (1809) Prometheus and moon of Saturn (SXVI)
-_("Prometheus");
-# TRANSLATORS: Asteroid (55) Pandora and moon of Saturn (SXVII)
-_("Pandora");
-# TRANSLATORS: Asteroid (4450) Pan and moon of Saturn (SXVIII)
-_("Pan");
-_("Uranus");
+_("Atlas","moon")
+# TRANSLATORS: Moon of Saturn (SXVI)
+_("Prometheus","moon")
+# TRANSLATORS: Moon of Saturn (SXVII)
+_("Pandora","moon")
+# TRANSLATORS: Moon of Saturn (SXVIII)
+_("Pan","moon")
+
+# URANUS:
 # TRANSLATORS: Moon of Uranus (UI)
-_("Ariel");
+_("Ariel","moon")
 # TRANSLATORS: Moon of Uranus (UII)
-_("Umbriel");
-# TRANSLATORS: Asteroid (593) Titania and moon of Uranus (UIII)
-_("Titania");
+_("Umbriel","moon")
+# TRANSLATORS: Moon of Uranus (UIII)
+_("Titania","moon")
 # TRANSLATORS: Moon of Uranus (UIV)
-_("Oberon");
+_("Oberon","moon")
 # TRANSLATORS: Moon of Uranus (UV)
-_("Miranda");
-# TRANSLATORS: Asteroid (2758) Cordelia and moon of Uranus (UVI)
-_("Cordelia");
-# TRANSLATORS: Asteroid (171) Ophelia and moon of Uranus (UVII)
-_("Ophelia");
-# TRANSLATORS: Asteroid (218) Bianca and moon of Uranus (UVIII)
-_("Bianca");
+_("Miranda","moon")
+# TRANSLATORS: Moon of Uranus (UVI)
+_("Cordelia","moon")
+# TRANSLATORS: Moon of Uranus (UVII)
+_("Ophelia","moon")
+# TRANSLATORS: Moon of Uranus (UVIII)
+_("Bianca","moon")
 # TRANSLATORS: Moon of Uranus (UIX)
-_("Cressida");
-# TRANSLATORS: Asteroid (666) Desdemona and moon of Uranus (UX)
-_("Desdemona");
+_("Cressida","moon")
+# TRANSLATORS: Moon of Uranus (UX)
+_("Desdemona","moon")
 # TRANSLATORS: Moon of Uranus (UXI)
-_("Juliet");
-_("Neptune");
+_("Juliet","moon")
+
+# NEPTUNE:
 # TRANSLATORS: Moon of Neptune (NI)
-_("Triton");
+_("Triton","moon")
 # TRANSLATORS: Moon of Neptune (NII)
-_("Nereid");
+_("Nereid","moon")
 # TRANSLATORS: Moon of Neptune (NIII)
-_("Naiad");
+_("Naiad","moon")
 # TRANSLATORS: Moon of Neptune (NIV)
-_("Thalassa");
+_("Thalassa","moon")
 # TRANSLATORS: Moon of Neptune (NV)
-_("Despina");
-# TRANSLATORS: Asteroid (74) Galatea and moon of Neptune (NVI)
-_("Galatea");
-# TRANSLATORS: Asteroid (1162) Larissa and moon of Neptune (NVII)
-_("Larissa");
+_("Despina","moon")
+# TRANSLATORS: Moon of Neptune (NVI)
+_("Galatea","moon")
+# TRANSLATORS: Moon of Neptune (NVII)
+_("Larissa","moon")
 # TRANSLATORS: Moon of Neptune (NVIII)
-_("Proteus");
+_("Proteus","moon")
 # TRANSLATORS: Moon of Neptune (NIX)
-_("Halimede");
+_("Halimede","moon")
 # TRANSLATORS: Moon of Neptune (NX)
-_("Psamathe");
+_("Psamathe","moon")
 # TRANSLATORS: Moon of Neptune (NXI)
-_("Sao");
+_("Sao","moon")
 # TRANSLATORS: Moon of Neptune (NXII)
-_("Laomedeia");
+_("Laomedeia","moon")
 # TRANSLATORS: Moon of Neptune (NXIII)
-_("Neso");
-_("Pluto");
+_("Neso","moon")
+
+# PLUTO:
 # TRANSLATORS: Moon of Pluto (PI)
-_("Charon");
+_("Charon","moon")
 # TRANSLATORS: Moon of Pluto (PII)
-_("Nix");
+_("Nix","moon")
 # TRANSLATORS: Moon of Pluto (PIII)
-_("Hydra");
+_("Hydra","moon")
 # TRANSLATORS: Moon of Pluto (PIV)
-_("Kerberos");
+_("Kerberos","moon")
 # TRANSLATORS: Moon of Pluto (PV)
-_("Styx");
-# TRANSLATORS: Asteroid (136199) Eris
-_("Eris");
-_("Solar System Observer");
-_("Earth Observer");
+_("Styx","moon")
+
+#
+# Special celestial objects
+#
+
+_("Solar System Observer","special celestial body")
+_("Earth Observer","special celestial body")
 # TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-_("SpaceShip");
+_("SpaceShip","special celestial body")
 
 #
-# TNO's that are in the default ssystem_minor.ini
+# Minor planets from the default ssystem_minor.ini
 #
-# TRANSLATORS: TNO/Asteroid (90377) Sedna
-_("Sedna");
-# TRANSLATORS: TNO/Asteroid (50000) Quaoar
-_("Quaoar");
-# TRANSLATORS: TNO/Asteroid (90482) Orcus
-_("Orcus");
-# TRANSLATORS: TNO/Asteroid (136108) Haumea
-_("Haumea");
+
+# TRANSLATORS: Dwarf planet (1) Ceres
+_("Ceres","minor planet")
+# TRANSLATORS: Asteroid (2) Pallas
+_("Pallas","minor planet")
+# TRANSLATORS: Asteroid (3) Juno
+_("Juno","minor planet")
+# TRANSLATORS: Asteroid (4) Vesta
+_("Vesta","minor planet")
+# TRANSLATORS: Asteroid (9) Metis
+_("Metis","minor planet")
+# TRANSLATORS: Asteroid (52) Europa
+_("Europa","minor planet")
+# TRANSLATORS: Asteroid (55) Pandora
+_("Pandora","minor planet")
+# TRANSLATORS: Asteroid (74) Galatea
+_("Galatea","minor planet")
+# TRANSLATORS: Asteroid (106) Dione
+_("Dione","minor planet")
+# TRANSLATORS: Asteroid (171) Ophelia
+_("Ophelia","minor planet")
+# TRANSLATORS: Asteroid (218) Bianca
+_("Bianca","minor planet")
+# TRANSLATORS: Asteroid (593) Titania
+_("Titania","minor planet")
+# TRANSLATORS: Asteroid (666) Desdemona
+_("Desdemona","minor planet")
+# TRANSLATORS: Asteroid (1162) Larissa
+_("Larissa","minor planet")
+# TRANSLATORS: Asteroid (1809) Prometheus
+_("Prometheus","minor planet")
+# TRANSLATORS: Asteroid (1810) Epimetheus
+_("Epimetheus","minor planet")
+# TRANSLATORS: Asteroid (2758) Cordelia
+_("Cordelia","minor planet")
+# TRANSLATORS: Asteroid (4450) Pan
+_("Pan","minor planet")
 # TRANSLATORS: TNO/Asteroid (20000) Varuna
-_("Varuna");
-# TRANSLATORS: TNO/Asteroid (136472) Makemake
-_("Makemake");
-# TRANSLATORS: Cubewano (120347) Salacia
-_("Salacia");
+_("Varuna","minor planet")
 # TRANSLATORS: Plutino (38628) Huya
-_("Huya");
+_("Huya","minor planet")
+# TRANSLATORS: TNO/Asteroid (50000) Quaoar
+_("Quaoar","minor planet")
+# TRANSLATORS: TNO/Asteroid (90377) Sedna
+_("Sedna","minor planet")
+# TRANSLATORS: TNO/Asteroid (90482) Orcus
+_("Orcus","minor planet")
+# TRANSLATORS: Cubewano (120347) Salacia
+_("Salacia","minor planet")
+# TRANSLATORS: Dwarf planet (134340) Pluto
+_("Pluto","minor planet")
+# TRANSLATORS: TNO/Asteroid (136108) Haumea
+_("Haumea","minor planet")
+# TRANSLATORS: Dwarf planet (136199) Eris
+_("Eris","minor planet")
+# TRANSLATORS: TNO/Asteroid (136472) Makemake
+_("Makemake","minor planet")
 # TRANSLATORS: Cubewano (174567) Varda
-_("Varda");
-
+_("Varda","minor planet")
 
 #
-# Asteroids that are not in the default ssystem_minor.ini
+# Minor planets that are not in the default ssystem_minor.ini
 #
 # TRANSLATORS: Asteroid (5) Astraea
-_("Astraea");
+_("Astraea","minor planet")
 # TRANSLATORS: Asteroid (6) Hebe
-_("Hebe");
+_("Hebe","minor planet")
 # TRANSLATORS: Asteroid (7) Iris
-_("Iris");
+_("Iris","minor planet")
 # TRANSLATORS: Asteroid (8) Flora
-_("Flora");
+_("Flora","minor planet")
 # TRANSLATORS: Asteroid (10) Hygiea
-_("Hygiea");
+_("Hygiea","minor planet")
 # TRANSLATORS: Asteroid (11) Parthenope
-_("Parthenope");
+_("Parthenope","minor planet")
 # TRANSLATORS: Asteroid (13) Egeria
-_("Egeria");
+_("Egeria","minor planet")
 # TRANSLATORS: Asteroid (15) Eunomia
-_("Eunomia");
+_("Eunomia","minor planet")
 # TRANSLATORS: Asteroid (16) Psyche
-_("Psyche");
+_("Psyche","minor planet")
 # TRANSLATORS: Asteroid (19) Fortuna
-_("Fortuna");
+_("Fortuna","minor planet")
 # TRANSLATORS: Asteroid (21) Lutetia
-_("Lutetia");
+_("Lutetia","minor planet")
 # TRANSLATORS: Asteroid (29) Amphitrite
-_("Amphitrite");
+_("Amphitrite","minor planet")
 # TRANSLATORS: Asteroid (31) Euphrosyne
-_("Euphrosyne");
+_("Euphrosyne","minor planet")
 # TRANSLATORS: Asteroid (41) Daphne
-_("Daphne");
+_("Daphne","minor planet")
 # TRANSLATORS: Asteroid (45) Eugenia
-_("Eugenia");
+_("Eugenia","minor planet")
 # TRANSLATORS: Asteroid (48) Doris
-_("Doris");
+_("Doris","minor planet")
 # TRANSLATORS: Asteroid (65) Cybele
-_("Cybele");
+_("Cybele","minor planet")
 # TRANSLATORS: Asteroid (87) Sylvia
-_("Sylvia");
+_("Sylvia","minor planet")
 # TRANSLATORS: Asteroid (88) Thisbe
-_("Thisbe");
+_("Thisbe","minor planet")
 # TRANSLATORS: Asteroid (94) Aurora
-_("Aurora");
+_("Aurora","minor planet")
 # TRANSLATORS: Asteroid (107) Camilla
-_("Camilla");
+_("Camilla","minor planet")
 # TRANSLATORS: Asteroid (243) Ida
-_("Ida");
+_("Ida","minor planet")
 # TRANSLATORS: Asteroid (253) Mathilde
-_("Mathilde");
+_("Mathilde","minor planet")
 # TRANSLATORS: Asteroid (324) Bamberga
-_("Bamberga");
+_("Bamberga","minor planet")
 # TRANSLATORS: Asteroid (375) Ursula
-_("Ursula");
+_("Ursula","minor planet")
 # TRANSLATORS: Asteroid (423) Diotima
-_("Diotima");
+_("Diotima","minor planet")
 # TRANSLATORS: Asteroid (433) Eros
-_("Eros");
+_("Eros","minor planet")
 # TRANSLATORS: Asteroid (451) Patientia
-_("Patientia");
+_("Patientia","minor planet")
 # TRANSLATORS: Asteroid (511) Davida
-_("Davida");
+_("Davida","minor planet")
 # TRANSLATORS: Asteroid (532) Herculina
-_("Herculina");
+_("Herculina","minor planet")
 # TRANSLATORS: Asteroid (624) Hektor
-_("Hektor");
+_("Hektor","minor planet")
 # TRANSLATORS: Asteroid (704) Interamnia
-_("Interamnia");
+_("Interamnia","minor planet")
 # TRANSLATORS: Asteroid (951) Gaspra
-_("Gaspra");
+_("Gaspra","minor planet")
 # TRANSLATORS: Asteroid (1221) Amor
-_("Amor");
+_("Amor","minor planet")
 # TRANSLATORS: Asteroid (1566) Icarus
-_("Icarus");
+_("Icarus","minor planet")
 # TRANSLATORS: Asteroid (1864) Daedalus
-_("Daedalus");
+_("Daedalus","minor planet")
 # TRANSLATORS: Asteroid (1866) Sisyphus
-_("Sisyphus");
+_("Sisyphus","minor planet")
 # TRANSLATORS: Asteroid (2060) Chiron
-_("Chiron");
+_("Chiron","minor planet")
 # TRANSLATORS: Asteroid (2867) Steins
-_("Steins");
+_("Steins","minor planet")
 # TRANSLATORS: Asteroid (3200) Phaethon
-_("Phaethon");
+_("Phaethon","minor planet")
 # TRANSLATORS: Asteroid (3753) Cruithne
-_("Cruithne")
+_("Cruithne","minor planet")
 # TRANSLATORS: Asteroid (5261) Eureka
-_("Eureka")
+_("Eureka","minor planet")
 # TRANSLATORS: Asteroid (25143) Itokawa
-_("Itokawa");
+_("Itokawa","minor planet")
 # TRANSLATORS: Asteroid (99942) Apophis
-_("Apophis");
+_("Apophis","minor planet")
 # TRANSLATORS: Asteroid (367943) Duende [2012 DA14]
-_("Duende")
+_("Duende","minor planet")
+
 #
 # Comets
 #
 # TRANSLATORS: Proper name of comet C/1680 V1
-_("Great Comet of 1680 (C/1680 V1)");
+_("Great Comet of 1680 (C/1680 V1)","comet")
 
 #################################################
 #                 EXTRA DATA                    #
@@ -292,200 +353,200 @@ _("Great Comet of 1680 (C/1680 V1)");
 # Supernovae from Historical Supernovae plugin
 #
 # TRANSLATORS: Name of supernova SN 1572A
-_("Tycho's Supernova");
+_("Tycho's Supernova")
 # TRANSLATORS: Name of supernova SN 1604A
-_("Kepler's Supernova");
+_("Kepler's Supernova")
 # TRANSLATORS: Name of supernova SN 1680A
-_("Cassiopeia A");
+_("Cassiopeia A")
 # TRANSLATORS: Name of supernova SN 1885A
-_("S Andromedae");
+_("S Andromedae")
 #
 # Novae from Bright Novae plugin
 #
 # TRANSLATORS: Template for Nova name
-_("Nova", "Nova template");
+_("Nova", "Nova template")
 #
 # Exoplanet systems from Exoplanets plugin
 #
 # TRANSLATORS: Proper name of star 14 Andromedae
-_("Veritate");
+_("Veritate")
 # TRANSLATORS: Proper name of exoplanet 14 Andromedae b
-_("Spe");
+_("Spe")
 # TRANSLATORS: Proper name of star 18 Delphini
-_("Musica");
+_("Musica")
 # TRANSLATORS: Proper name of exoplanet 18 Delphini b
-_("Arion");
+_("Arion")
 # TRANSLATORS: Proper name of star 42 Draconis
-_("Fafnir");
+_("Fafnir")
 # TRANSLATORS: Proper name of exoplanet 42 Draconis b
-_("Orbitar");
+_("Orbitar")
 # TRANSLATORS: Proper name of star 47 Ursae Majoris
-_("Chalawan");
+_("Chalawan")
 # TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris b
-_("Taphao Thong");
+_("Taphao Thong")
 # TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris c
-_("Taphao Kaew");
+_("Taphao Kaew")
 # TRANSLATORS: Proper name of star 51 Pegasi
-_("Helvetios");
+_("Helvetios")
 # TRANSLATORS: Proper name of exoplanet 51 Pegasi b
-_("Dimidium");
+_("Dimidium")
 # TRANSLATORS: Proper name of star 55 Cancri
-_("Copernicus");
+_("Copernicus")
 # TRANSLATORS: Proper name of exoplanet 55 Cancri b
-_("Galileo");
+_("Galileo")
 # TRANSLATORS: Proper name of exoplanet 55 Cancri c
-_("Brahe");
+_("Brahe")
 # TRANSLATORS: Proper name of exoplanet 55 Cancri d
-_("Lipperhey");
+_("Lipperhey")
 # TRANSLATORS: Proper name of exoplanet 55 Cancri e
-_("Janssen");
+_("Janssen")
 # TRANSLATORS: Proper name of exoplanet 55 Cancri f
-_("Harriot");
+_("Harriot")
 # TRANSLATORS: Proper name of exoplanet Ain b (epsilon Tauri b)
-_("Amateru");
+_("Amateru")
 # TRANSLATORS: Proper name of exoplanet Edasich b (iota Draconis b)
-_("Hypatia");
+_("Hypatia")
 # TRANSLATORS: Proper name of star epsilon Eridani
-_("Ran");
+_("Ran")
 # TRANSLATORS: Proper name of exoplanet epsilon Eridani b
-_("AEgir");
+_("AEgir")
 # TRANSLATORS: Proper name of exoplanet Errai b (gamma Cephei b)
-_("Tadmor");
+_("Tadmor")
 # TRANSLATORS: Proper name of exoplanet Fomalhaut b (alpha Piscis Austrini b)
-_("Dagon");
+_("Dagon")
 # TRANSLATORS: Proper name of star HD 104985
-_("Tonatiuh");
+_("Tonatiuh")
 # TRANSLATORS: Proper name of exoplanet HD 104985 b
-_("Meztli");
+_("Meztli")
 # TRANSLATORS: Proper name of star HD 149026
-_("Ogma");
+_("Ogma")
 # TRANSLATORS: Proper name of exoplanet HD 149026 b
-_("Smertrios");
+_("Smertrios")
 # TRANSLATORS: Proper name of star HD 81688
-_("Intercrus");
+_("Intercrus")
 # TRANSLATORS: Proper name of exoplanet HD 81688 b
-_("Arkas");
+_("Arkas")
 # TRANSLATORS: Proper name of star mu Arae
-_("Cervantes");
+_("Cervantes")
 # TRANSLATORS: Proper name of exoplanet mu Arae b
-_("Quijote");
+_("Quijote")
 # TRANSLATORS: Proper name of exoplanet mu Arae c
-_("Dulcinea");
+_("Dulcinea")
 # TRANSLATORS: Proper name of exoplanet mu Arae d
-_("Rocinante");
+_("Rocinante")
 # TRANSLATORS: Proper name of exoplanet mu Arae e
-_("Sancho");
+_("Sancho")
 # TRANSLATORS: Proper name of exoplanet Pollux b
-_("Thestias");
+_("Thestias")
 # TRANSLATORS: Proper name of pulsar PSR 1257+12
-_("Lich");
+_("Lich")
 # TRANSLATORS: Proper name of exoplanet PSR 1257+12 b
-_("Draugr");
+_("Draugr")
 # TRANSLATORS: Proper name of exoplanet PSR 1257+12 c
-_("Poltergeist");
+_("Poltergeist")
 # TRANSLATORS: Proper name of exoplanet PSR 1257+12 d
-_("Phobetor");
+_("Phobetor")
 # TRANSLATORS: Proper name of star upsilon Andromedae
-_("Titawin");
+_("Titawin")
 # TRANSLATORS: Proper name of exoplanet upsilon Andromedae b
-_("Saffar");
+_("Saffar")
 # TRANSLATORS: Proper name of exoplanet upsilon Andromedae c
-_("Samh");
+_("Samh")
 # TRANSLATORS: Proper name of exoplanet upsilon Andromedae d
-_("Majriti");
+_("Majriti")
 # TRANSLATORS: Proper name of star xi Aquilae
-_("Libertas");
+_("Libertas")
 # TRANSLATORS: Proper name of exoplanet xi Aquilae b
-_("Fortitudo");
+_("Fortitudo")
 
 #
 # Genitive names of constellations
 #
-_("Andromedae", "Genitive name of constellation");
-_("Antliae","Genitive name of constellation");
-_("Apodis","Genitive name of constellation");
-_("Aquarii","Genitive name of constellation");
-_("Aquilae","Genitive name of constellation");
-_("Arae","Genitive name of constellation");
-_("Arietis","Genitive name of constellation");
-_("Aurigae","Genitive name of constellation");
-_("Bootis","Genitive name of constellation");
-_("Caeli","Genitive name of constellation");
-_("Camelopardalis","Genitive name of constellation");
-_("Cancri","Genitive name of constellation");
-_("Canum Venaticorum","Genitive name of constellation");
-_("Canis Majoris","Genitive name of constellation");
-_("Canis Minoris","Genitive name of constellation");
-_("Capricorni","Genitive name of constellation");
-_("Carinae","Genitive name of constellation");
-_("Cassiopeiae","Genitive name of constellation");
-_("Centauri","Genitive name of constellation");
-_("Cephei","Genitive name of constellation");
-_("Ceti","Genitive name of constellation");
-_("Chamaeleontis","Genitive name of constellation");
-_("Circini","Genitive name of constellation");
-_("Columbae","Genitive name of constellation");
-_("Comae Berenices","Genitive name of constellation");
-_("Coronae Australis","Genitive name of constellation");
-_("Coronae Borealis","Genitive name of constellation");
-_("Corvi","Genitive name of constellation");
-_("Crateris","Genitive name of constellation");
-_("Crucis","Genitive name of constellation");
-_("Cygni","Genitive name of constellation");
-_("Delphini","Genitive name of constellation");
-_("Doradus","Genitive name of constellation");
-_("Draconis","Genitive name of constellation");
-_("Equulei","Genitive name of constellation");
-_("Eridani","Genitive name of constellation");
-_("Fornacis","Genitive name of constellation");
-_("Geminorum","Genitive name of constellation");
-_("Gruis","Genitive name of constellation");
-_("Herculis","Genitive name of constellation");
-_("Horologii","Genitive name of constellation");
-_("Hydrae","Genitive name of constellation");
-_("Hydri","Genitive name of constellation");
-_("Indi","Genitive name of constellation");
-_("Lacertae","Genitive name of constellation");
-_("Leonis","Genitive name of constellation");
-_("Leonis Minoris","Genitive name of constellation");
-_("Leporis","Genitive name of constellation");
-_("Librae","Genitive name of constellation");
-_("Lupi","Genitive name of constellation");
-_("Lyncis","Genitive name of constellation");
-_("Lyrae","Genitive name of constellation");
-_("Mensae","Genitive name of constellation");
-_("Microscopii","Genitive name of constellation");
-_("Monocerotis","Genitive name of constellation");
-_("Muscae","Genitive name of constellation");
-_("Normae","Genitive name of constellation");
-_("Octantis","Genitive name of constellation");
-_("Ophiuchi","Genitive name of constellation");
-_("Orionis","Genitive name of constellation");
-_("Pavonis","Genitive name of constellation");
-_("Pegasi","Genitive name of constellation");
-_("Persei","Genitive name of constellation");
-_("Phoenicis","Genitive name of constellation");
-_("Pictoris","Genitive name of constellation");
-_("Piscium","Genitive name of constellation");
-_("Piscis Austrini","Genitive name of constellation");
-_("Puppis","Genitive name of constellation");
-_("Pyxidis","Genitive name of constellation");
-_("Reticuli","Genitive name of constellation");
-_("Sagittae","Genitive name of constellation");
-_("Sagittarii","Genitive name of constellation");
-_("Scorpii","Genitive name of constellation");
-_("Sculptoris","Genitive name of constellation");
-_("Scuti","Genitive name of constellation");
-_("Serpentis","Genitive name of constellation");
-_("Sextantis","Genitive name of constellation");
-_("Tauri","Genitive name of constellation");
-_("Telescopii","Genitive name of constellation");
-_("Trianguli","Genitive name of constellation");
-_("Trianguli Australis","Genitive name of constellation");
-_("Tucanae","Genitive name of constellation");
-_("Ursae Majoris","Genitive name of constellation");
-_("Ursae Minoris","Genitive name of constellation");
-_("Velorum","Genitive name of constellation");
-_("Virginis","Genitive name of constellation");
-_("Volantis","Genitive name of constellation");
-_("Vulpeculae","Genitive name of constellation");
+_("Andromedae", "Genitive name of constellation")
+_("Antliae","Genitive name of constellation")
+_("Apodis","Genitive name of constellation")
+_("Aquarii","Genitive name of constellation")
+_("Aquilae","Genitive name of constellation")
+_("Arae","Genitive name of constellation")
+_("Arietis","Genitive name of constellation")
+_("Aurigae","Genitive name of constellation")
+_("Bootis","Genitive name of constellation")
+_("Caeli","Genitive name of constellation")
+_("Camelopardalis","Genitive name of constellation")
+_("Cancri","Genitive name of constellation")
+_("Canum Venaticorum","Genitive name of constellation")
+_("Canis Majoris","Genitive name of constellation")
+_("Canis Minoris","Genitive name of constellation")
+_("Capricorni","Genitive name of constellation")
+_("Carinae","Genitive name of constellation")
+_("Cassiopeiae","Genitive name of constellation")
+_("Centauri","Genitive name of constellation")
+_("Cephei","Genitive name of constellation")
+_("Ceti","Genitive name of constellation")
+_("Chamaeleontis","Genitive name of constellation")
+_("Circini","Genitive name of constellation")
+_("Columbae","Genitive name of constellation")
+_("Comae Berenices","Genitive name of constellation")
+_("Coronae Australis","Genitive name of constellation")
+_("Coronae Borealis","Genitive name of constellation")
+_("Corvi","Genitive name of constellation")
+_("Crateris","Genitive name of constellation")
+_("Crucis","Genitive name of constellation")
+_("Cygni","Genitive name of constellation")
+_("Delphini","Genitive name of constellation")
+_("Doradus","Genitive name of constellation")
+_("Draconis","Genitive name of constellation")
+_("Equulei","Genitive name of constellation")
+_("Eridani","Genitive name of constellation")
+_("Fornacis","Genitive name of constellation")
+_("Geminorum","Genitive name of constellation")
+_("Gruis","Genitive name of constellation")
+_("Herculis","Genitive name of constellation")
+_("Horologii","Genitive name of constellation")
+_("Hydrae","Genitive name of constellation")
+_("Hydri","Genitive name of constellation")
+_("Indi","Genitive name of constellation")
+_("Lacertae","Genitive name of constellation")
+_("Leonis","Genitive name of constellation")
+_("Leonis Minoris","Genitive name of constellation")
+_("Leporis","Genitive name of constellation")
+_("Librae","Genitive name of constellation")
+_("Lupi","Genitive name of constellation")
+_("Lyncis","Genitive name of constellation")
+_("Lyrae","Genitive name of constellation")
+_("Mensae","Genitive name of constellation")
+_("Microscopii","Genitive name of constellation")
+_("Monocerotis","Genitive name of constellation")
+_("Muscae","Genitive name of constellation")
+_("Normae","Genitive name of constellation")
+_("Octantis","Genitive name of constellation")
+_("Ophiuchi","Genitive name of constellation")
+_("Orionis","Genitive name of constellation")
+_("Pavonis","Genitive name of constellation")
+_("Pegasi","Genitive name of constellation")
+_("Persei","Genitive name of constellation")
+_("Phoenicis","Genitive name of constellation")
+_("Pictoris","Genitive name of constellation")
+_("Piscium","Genitive name of constellation")
+_("Piscis Austrini","Genitive name of constellation")
+_("Puppis","Genitive name of constellation")
+_("Pyxidis","Genitive name of constellation")
+_("Reticuli","Genitive name of constellation")
+_("Sagittae","Genitive name of constellation")
+_("Sagittarii","Genitive name of constellation")
+_("Scorpii","Genitive name of constellation")
+_("Sculptoris","Genitive name of constellation")
+_("Scuti","Genitive name of constellation")
+_("Serpentis","Genitive name of constellation")
+_("Sextantis","Genitive name of constellation")
+_("Tauri","Genitive name of constellation")
+_("Telescopii","Genitive name of constellation")
+_("Trianguli","Genitive name of constellation")
+_("Trianguli Australis","Genitive name of constellation")
+_("Tucanae","Genitive name of constellation")
+_("Ursae Majoris","Genitive name of constellation")
+_("Ursae Minoris","Genitive name of constellation")
+_("Velorum","Genitive name of constellation")
+_("Virginis","Genitive name of constellation")
+_("Volantis","Genitive name of constellation")
+_("Vulpeculae","Genitive name of constellation")

@@ -425,7 +425,7 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 
 void MinorPlanet::translateName(const StelTranslator &translator)
 {
-	nameI18 = translator.qtranslate(properName);
+	nameI18 = translator.qtranslate(properName, "minor planet");
 	if (englishName.endsWith('*'))
 	{
 		nameI18.append('*');
