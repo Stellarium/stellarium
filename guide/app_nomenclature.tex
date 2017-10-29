@@ -13,28 +13,28 @@
 \label{fig:Nomenclature:Moon}
 \end{figure}
 
-Since version 0.17.0 the Stellarium support planetary nomenclature\footnote{The feature has been implemented by T.~H.~Roldán as ``ESA Summer of Code in Space 2017'' project.}, what allow users use planetarium in educational and informative purposes in one side, and as tool for recognition and targeting to the planetary features for advanced amateurs in other side. Plus no need additional cartrographic software in the field anymore. 
+Since version 0.17.0 Stellarium supports planetary nomenclature\footnote{The feature has been implemented by T.~H.~Roldán as ``ESA Summer of Code in Space 2017'' project.}, which allows using the planetarium for educational and informative purposes on the one hand, and as tool for recognition and targeting to the planetary features for advanced amateurs on the other hand, avoiding the need for additional cartographic software in the field. 
 
-All planetary nomenclature items are stored in inner format and all names are translatables to provide better understanding those names by average users and newbies -- for example in schools or universities.  Of course all nomenclature items are available for finding in the Search Tool after enabling of displaying nomenclature (this feature is costly and by default it disabled in the GUI).
+All planetary nomenclature items are stored in a dedicated internal format and all names are translatable to provide better understanding of those names by average users and newbies -- for example in schools or universities.  Of course all nomenclature items are available for finding in the Search Tool after enabling the display of nomenclature (this feature is rather costly (in terms of computing power) and by default it is disabled in the GUI).
 
 \section{Format of nomenclature data file}
 \label{sec:Nomenclature:format}
 
-File \file{data/nomenclature.fab} is a plain text file in the encoding of UTF-8 and has a very simple data format: 
+File \file{data/nomenclature.fab} is a plain text file in UTF-8 encoding and has a very simple data format: 
 \begin{itemize}
-\item One rule per line;
-\item Each rule contains seven elements with white space (or ``tab char'') as delimiter.
+\item One item per line;
+\item Each item contains seven elements with white space (or ``tab'' character) as delimiter.
 \end{itemize}
 
 \begin{longtabu} to \textwidth {l|l|X}\toprule
-\emph{Item}        & \emph{Type} & \emph{Comment}\\\midrule
-planet name           & string  & \\\midrule
-ID of planetary feature & integer & unique integer, equals to Feature ID obtained from Gazetteer of Planetary Nomenclature\\\midrule
-translatable name of planetary feature  & string  & the name contains context data\\\midrule
-type of planetary feature  & string  & 2-char code (see designation column in table in section \ref{sec:Nomenclature:DescriptorTerms})\\\midrule
-latitude of center of planetary feature & float  & decimal degrees\\\midrule
-longitude of center of planetary feature & float  & decimal degrees\\\midrule
-size of planetary feature & float & kilometers\\\bottomrule
+\emph{Item}                              & \emph{Type} & \emph{Comment}\\\midrule
+planet name                              & string  & English name of the planet, moon or minor body carrying the named feature\\\midrule
+ID of planetary feature                  & integer & unique integer, equals to Feature ID obtained from Gazetteer of Planetary Nomenclature\\\midrule
+translatable name of planetary feature   & string  & English name, containing context data for translators\\\midrule
+type of planetary feature                & string  & 2-char code (see designation column in table in section \ref{sec:Nomenclature:DescriptorTerms})\\\midrule
+latitude of center of planetary feature  & float   & decimal degrees\\\midrule
+longitude of center of planetary feature & float   & decimal degrees\\\midrule
+size of planetary feature                & float   & kilometers\\\bottomrule
 \end{longtabu}
 
 Example:
