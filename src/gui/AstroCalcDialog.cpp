@@ -186,7 +186,10 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveCelestialPositions()));
 	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));	
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(populateCelestialCategoryList()));
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));	
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));
+	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(currentCelestialPositions()));
+	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
+	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 
 	connectBoolProperty(ui->ephemerisShowMarkersCheckBox, "SolarSystem.ephemerisMarkersDisplayed");
 	connectBoolProperty(ui->ephemerisShowDatesCheckBox, "SolarSystem.ephemerisDatesDisplayed");
@@ -232,6 +235,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
+	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
+	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
+	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 
 	currentCelestialPositions();
 
@@ -525,7 +531,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			else
 				magOp = obj->getVMagnitudeWithExtinction(core);
 
-			if (obj->objectInDisplayedCatalog() && magOp<=mag && obj->isAboveRealHorizon(core))
+			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && magOp<=mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
 				{
@@ -966,8 +972,8 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelInd
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
 
-	QStringList list = nameI18n.split("(");
-	if (list.count()>0 && nameI18n.lastIndexOf("(")!=0 && nameI18n.lastIndexOf("/")==0)
+	QStringList list = nameI18n.split("(");	
+	if (list.count()>0 && nameI18n.lastIndexOf("(")!=0 && nameI18n.lastIndexOf("/")<0)
 		nameI18n = list.at(0).trimmed();
 
 	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))

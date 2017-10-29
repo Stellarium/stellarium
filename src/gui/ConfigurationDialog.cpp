@@ -738,6 +738,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_use_type_filter",		propMgr->getStelPropertyValue("NebulaMgr.flagTypeFiltersUsage").toBool());
 	conf->setValue("astro/flag_nebula_display_no_texture",	!propMgr->getStelPropertyValue("StelSkyLayerMgr.flagShow").toBool() );
 
+	conf->setValue("astro/flag_size_limits_usage",		propMgr->getStelPropertyValue("NebulaMgr.flagUseSizeLimits").toBool());
+	conf->setValue("astro/size_limit_min",			QString::number(propMgr->getStelPropertyValue("NebulaMgr.minSizeLimit").toFloat(), 'f', 0));
+	conf->setValue("astro/size_limit_max",			QString::number(propMgr->getStelPropertyValue("NebulaMgr.maxSizeLimit").toFloat(), 'f', 0));
+
 	conf->setValue("projection/type",			core->getCurrentProjectionTypeKey());
 	conf->setValue("astro/flag_nutation",			core->getUseNutation());
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());

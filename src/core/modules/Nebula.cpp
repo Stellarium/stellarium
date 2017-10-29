@@ -93,6 +93,9 @@ Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 bool Nebula::flagUseOutlines = false;
+bool Nebula::flagUseSizeLimits = false;
+double Nebula::minSizeLimit = 1.0f;
+double Nebula::maxSizeLimit = 600.0f;
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -428,8 +431,8 @@ double Nebula::getAngularSize(const StelCore *) const
 {
 	float size = majorAxisSize;
 	if (majorAxisSize!=minorAxisSize || minorAxisSize>0)
-		size = majorAxisSize+minorAxisSize;
-	return size*0.5f;
+		size = (majorAxisSize+minorAxisSize)*0.5f;
+	return size;
 }
 
 float Nebula::getSelectPriority(const StelCore* core) const
@@ -1114,6 +1117,20 @@ bool Nebula::objectInDisplayedCatalog() const
 	if (withoutID)
 		r = true;
 
+	return r;
+}
+
+bool Nebula::objectInAllowedSizeRangeLimits(void) const
+{
+	bool r = true;
+	if (flagUseSizeLimits)
+	{
+		float size = 60.f * qMax(majorAxisSize, minorAxisSize);
+		if (size>=minSizeLimit && size<=maxSizeLimit)
+			r = true;
+		else
+			r = false;
+	}
 	return r;
 }
 

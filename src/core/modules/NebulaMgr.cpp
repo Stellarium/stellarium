@@ -195,6 +195,10 @@ void NebulaMgr::init()
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
 	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", false).toBool());
 
+	setFlagSizeLimitsUsage(conf->value("astro/flag_size_limits_usage", false).toBool());
+	setMinSizeLimit(conf->value("astro/size_limit_min", 1.0).toDouble());
+	setMaxSizeLimit(conf->value("astro/size_limit_max", 600.0).toDouble());
+
 	// Load colors from config file
 	// Upgrade config keys
 	if (conf->contains("color/nebula_label_color"))
@@ -433,6 +437,9 @@ struct DrawNebulaFuncObject
 		if (!n->objectInDisplayedCatalog())
 			return;
 
+		if (!n->objectInAllowedSizeRangeLimits())
+			return;
+
 		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || mag <= maxMagHints)
 		{
 			sPainter->getProjector()->project(n->XYZ,n->XY);
@@ -465,6 +472,132 @@ void NebulaMgr::setTypeFilters(Nebula::TypeGroup tflags)
 		Nebula::typeFilters = tflags;
 		emit typeFiltersChanged(tflags);
 	}
+}
+
+void NebulaMgr::setFlagSurfaceBrightnessUsage(const bool usage)
+{
+	if (usage!=Nebula::surfaceBrightnessUsage)
+	{
+		Nebula::surfaceBrightnessUsage=usage;
+		emit flagSurfaceBrightnessUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSurfaceBrightnessUsage(void) const
+{
+	return Nebula::surfaceBrightnessUsage;
+}
+
+void NebulaMgr::setFlagSurfaceBrightnessArcsecUsage(const bool usage)
+{
+	if (usage!=Nebula::flagUseArcsecSurfaceBrightness)
+	{
+		Nebula::flagUseArcsecSurfaceBrightness=usage;
+		emit flagSurfaceBrightnessArcsecUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSurfaceBrightnessArcsecUsage(void) const
+{
+	return Nebula::flagUseArcsecSurfaceBrightness;
+}
+
+void NebulaMgr::setFlagSurfaceBrightnessShortNotationUsage(const bool usage)
+{
+	if (usage!=Nebula::flagUseShortNotationSurfaceBrightness)
+	{
+		Nebula::flagUseShortNotationSurfaceBrightness=usage;
+		emit flagSurfaceBrightnessShortNotationUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSurfaceBrightnessShortNotationUsage(void) const
+{
+	return Nebula::flagUseShortNotationSurfaceBrightness;
+}
+
+void NebulaMgr::setFlagSizeLimitsUsage(const bool usage)
+{
+	if (usage!=Nebula::flagUseSizeLimits)
+	{
+		Nebula::flagUseSizeLimits=usage;
+		emit flagSizeLimitsUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSizeLimitsUsage(void) const
+{
+	return Nebula::flagUseSizeLimits;
+}
+
+void NebulaMgr::setFlagUseTypeFilters(const bool b)
+{
+	if (Nebula::flagUseTypeFilters!=b)
+	{
+		Nebula::flagUseTypeFilters=b;
+		emit flagUseTypeFiltersChanged(b);
+	}
+}
+
+bool NebulaMgr::getFlagUseTypeFilters(void) const
+{
+	return Nebula::flagUseTypeFilters;
+}
+
+void NebulaMgr::setLabelsAmount(double a)
+{
+	if(a!=labelsAmount)
+	{
+		labelsAmount=a;
+		emit labelsAmountChanged(a);
+	}
+}
+
+double NebulaMgr::getLabelsAmount(void) const
+{
+	return labelsAmount;
+}
+
+void NebulaMgr::setHintsAmount(double f)
+{
+	if(hintsAmount!=f)
+	{
+		hintsAmount = f;
+		emit hintsAmountChanged(f);
+	}
+}
+
+double NebulaMgr::getHintsAmount(void) const
+{
+	return hintsAmount;
+}
+
+void NebulaMgr::setMinSizeLimit(double s)
+{
+	if(Nebula::minSizeLimit!=s)
+	{
+		Nebula::minSizeLimit = s;
+		emit minSizeLimitChanged(s);
+	}
+}
+
+double NebulaMgr::getMinSizeLimit() const
+{
+	return Nebula::minSizeLimit;
+}
+
+void NebulaMgr::setMaxSizeLimit(double s)
+{
+	if(Nebula::maxSizeLimit!=s)
+	{
+		Nebula::maxSizeLimit = s;
+		emit maxSizeLimitChanged(s);
+	}
+}
+
+double NebulaMgr::getMaxSizeLimit() const
+{
+	return Nebula::maxSizeLimit;
 }
 
 float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
