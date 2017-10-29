@@ -972,7 +972,7 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelInd
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
 
-	QStringList list = nameI18n.split("(");	
+	QStringList list = nameI18n.split("(");
 	if (list.count()>0 && nameI18n.lastIndexOf("(")!=0 && nameI18n.lastIndexOf("/")<0)
 		nameI18n = list.at(0).trimmed();
 
