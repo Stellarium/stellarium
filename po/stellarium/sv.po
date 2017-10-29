@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-28 11:59+0700\n"
-"PO-Revision-Date: 2017-10-24 22:44+0000\n"
+"PO-Revision-Date: 2017-10-28 22:34+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-10-28 05:29+0000\n"
+"X-Launchpad-Export-Date: 2017-10-29 05:29+0000\n"
 "X-Generator: Launchpad (build 18493)\n"
 "Language: sv\n"
 "X-Language: sv\n"
@@ -3367,7 +3367,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:223
 msgid "Text User Interface (TUI)"
-msgstr "Text användargränssnitt (TUI)"
+msgstr "Användargränssnitt för text"
 
 #: src/gui/HelpDialog.cpp:225
 msgid "Activate TUI"
@@ -7541,7 +7541,7 @@ msgstr "Land:"
 
 #: src/ui_locationDialogGui.h:518
 msgid "Enable daylight saving time"
-msgstr "Använd på sommartid"
+msgstr "Använd sommartid"
 
 #: src/ui_searchDialogGui.h:612
 msgid "Find Object"
@@ -7838,7 +7838,7 @@ msgstr "Skala mindre kroppar:"
 
 #: src/ui_viewDialog.h:2475
 msgid "Hide nomenclature on the celestial body of observer"
-msgstr ""
+msgstr "Dölj nomenklatur för observatörens himlakropp"
 
 #: src/ui_viewDialog.h:2477
 msgid ""
@@ -7921,7 +7921,7 @@ msgstr "Visa omloppsbana för vald planet"
 
 #: src/ui_viewDialog.h:2512
 msgid "Show planet orbits only"
-msgstr ""
+msgstr "Visa endast planeters omloppsbanor"
 
 #: src/ui_viewDialog.h:2513
 msgid "Show planet markers"
@@ -13146,14 +13146,14 @@ msgstr "Rensa lista"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:88
 msgid "Text User Interface"
-msgstr "Text User Interface"
+msgstr "Användargränssnitt för text"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:91
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Insticksprogram för versioner ur 0,9-serien av Text User Interface (TUI), "
+"Insticksprogram för versioner ur 0,9-seriernas Användargränssnitt för text, "
 "som används i planetariumsystem"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
@@ -14257,7 +14257,7 @@ msgstr "Använd separat färg för pulsarer vid glitchar"
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Fjärrstyrning"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
@@ -14267,11 +14267,11 @@ msgstr ""
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 msgid "Remote control"
-msgstr ""
+msgstr "Fjärrstyrning"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Insticksprogrammet för fjärrstyrning"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
 msgid ""
@@ -14315,11 +14315,11 @@ msgstr ""
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Konfiguration för fjärrstyrning"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Konfiguration för insticksprogrammet för fjärrstyrning"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
@@ -15538,7 +15538,7 @@ msgstr "Kulminerade vid %1 (%2 sedan) på höjden %3 grader"
 
 #: plugins/Observability/src/Observability.cpp:202
 msgid "Source is not observable."
-msgstr "Källan är ej synlig"
+msgstr "Källa ej synlig"
 
 #: plugins/Observability/src/Observability.cpp:203
 msgid "No Acronychal nor Cosmical rise/set."
@@ -15909,14 +15909,14 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
-"Tidsekvationen beskriven skillnaden mellan två typer av soltid. Dessa är den "
-"skenbara soltiden, som direkt planlägger solens rörelse, och medelsoltid, "
-"som planlägger en fiktiv \"medelsol\", med middag 24 timmar isär.  Det finns "
-"ingen allmänt accepterad definition av tecken till tidsekvationen. Vissa "
+"Tidsekvationen beskriver skillnaden mellan två typer av soltid. Det är den "
+"skenbara soltiden, som direkt beskriver solens rörelse, och medelsoltid, som "
+"beskriver en fiktiv \"medelsol\", med middag 24 timmar isär.  Gällande "
+"tecken till tidsekvation finns ingen allmänt accepterad definition. Vissa "
 "publiceringar säger att den är positiv när ett solur ligger före klockan; "
 "andra när klockan ligger före soluret. I den engelskspråkiga världen är det "
-"förra vanligare, men efterföljs inte alltid. Den som önskar skapa en tabell "
-"eller graf bör först kontrollera vilket tecken som används."
+"tidigare vanligare, men efterföljs inte alltid. Den som önskar skapa en "
+"tabell eller graf bör först kontrollera vilket tecken som används."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:240
 msgid "Show plug-ins button on toolbar"
@@ -16744,7 +16744,7 @@ msgstr "Resultat"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Pekarkoordinater"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:60
 msgid "This plugin shows the coordinates of the mouse pointer."
@@ -16752,7 +16752,7 @@ msgstr "Detta insticksprogram visar muspekarens koordinater."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Visa koordinater för muspekare"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:138
 msgctxt "abbreviated in the plugin"
@@ -16796,7 +16796,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "Insticksprogrammet för pekarkoordinater"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 msgid "Show coordinates of the mouse cursor on the screen."
