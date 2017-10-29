@@ -85,7 +85,7 @@ void NomenclatureMgr::loadNomenclature()
 
 	// regular expression to find the nomenclature data
 	// Rules:
-	// One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
+	// One rule per line. Each rule contains seven elements with white space (or "tab char") as delimiter.
 	// Format:
 	//	planet name				: string
 	//	ID of surface feature			: unique integer (feature id obtained from https://planetarynames.wr.usgs.gov/)
