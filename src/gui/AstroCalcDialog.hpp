@@ -179,6 +179,7 @@ private:
 	class StarMgr* starMgr;
 	class StelObjectMgr* objectMgr;
 	class StelLocaleMgr* localeMgr;
+	class StelMovementMgr* mvMgr;
 	QSettings* conf;
 	QTimer *currentTimeLine;
 	QHash<QString,QString> wutObjects;
@@ -238,8 +239,9 @@ private:
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2);
 
+	bool plotAltVsTime;
 	QString delimiter, acEndl;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;	
 	static float brightLimit;
 	static float minY, maxY, transitX, minY1, maxY1, minY2, maxY2;
 	static QString yAxis1Legend, yAxis2Legend;

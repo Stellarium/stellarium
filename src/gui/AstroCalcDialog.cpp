@@ -61,6 +61,7 @@ QString AstroCalcDialog::yAxis2Legend = "";
 AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	: StelDialog("AstroCalc",parent)
 	, currentTimeLine(Q_NULLPTR)
+	, plotAltVsTime(false)
 	, delimiter(", ")
 	, acEndl("\n")
 {
@@ -70,6 +71,7 @@ AstroCalcDialog::AstroCalcDialog(QObject *parent)
 	dsoMgr = GETSTELMODULE(NebulaMgr);
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	starMgr = GETSTELMODULE(StarMgr);
+	mvMgr = GETSTELMODULE(StelMovementMgr);
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	conf = StelApp::getInstance().getSettings();
 	ephemerisHeader.clear();
@@ -981,9 +983,8 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex &modelInd
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
-			StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-			mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-			mvmgr->setFlagTracking(true);
+			mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+			mvMgr->setFlagTracking(true);
 		}
 	}
 }
@@ -1003,9 +1004,8 @@ void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex &modelIndex)
 			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=core->getCurrentLocation().planetName)
 			{
-				StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-				mvmgr->setFlagTracking(true);
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
 			}
 			else
 			{
@@ -1569,6 +1569,10 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 {
 	// Avoid crash!
 	if(core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
+		return;
+
+	// special case - plot the graph when tab is visible
+	if (!plotAltVsTime)
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
@@ -2158,9 +2162,8 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex &modelIndex)
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
-			StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-			mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-			mvmgr->setFlagTracking(true);
+			mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+			mvMgr->setFlagTracking(true);
 		}
 	}
 }
@@ -2954,6 +2957,15 @@ void AstroCalcDialog::changePage(QListWidgetItem *current, QListWidgetItem *prev
 	// special case
 	if (ui->stackListWidget->row(current)==0)
 		currentCelestialPositions();
+
+	// special case - plot the graph when tab 'Alt. vs Time' is visible
+	if (ui->stackListWidget->row(current)==3)
+	{
+		plotAltVsTime = true;
+		drawAltVsTimeDiagram(); // Is object already selected?
+	}
+	else
+		plotAltVsTime = false;
 }
 
 void AstroCalcDialog::updateTabBarListWidgetWidth()
@@ -3512,9 +3524,8 @@ void AstroCalcDialog::selectWutObject()
 				// Can't point to home planet
 				if (newSelected[0]->getEnglishName()!=core->getCurrentLocation().planetName)
 				{
-					StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-					mvmgr->setFlagTracking(true);
+					mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+					mvMgr->setFlagTracking(true);
 				}
 				else
 				{
