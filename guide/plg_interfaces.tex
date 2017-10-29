@@ -1,7 +1,6 @@
 %% Part of Stellarium User Guide
 %% Status: 2015-12-30 Some parts collected from wiki.
 %%         2016-04-05 GZ changed to have 1 chapter per plugin for a better structure. This file may be split up later. 
-%% TODO: All plugins! And give a better structure than just by alphabet.
 %%         2016-04-16 split plugin part to topical chapters.
 
 \chapter{Interface Extensions}
@@ -534,15 +533,15 @@ In the settings window, you can also specify what should happen when the client
 loses the connection to its server, and what to do when the server quits 
 normally. You can choose between 
 \begin{description}
-\item[Do nothing:] connection is lost and will not be re-established. Stellarium slave keeps running 
+\item[Do nothing:] connection is lost and will not be re-established. Stellarium client keeps running 
      in whatever state it was, waiting for keyboard/mouse interaction. 
 \item[Try reconnecting:] Assume Stellarium is switched off on the server
       but may come back online again, or assume some temporary network problem. 
-	  Stellarium slave just keeps running in whatever state it was, but tries to reconnect.
+	  Stellarium client just keeps running in whatever state it was, but tries to reconnect.
 \item[Quit:] Assume the server always runs until switched off at the end of operating hours. 
-      This is intended for pure slave screens without keyboards. When the server (``master PC'') 
+      This is intended for pure client screens without keyboards. When the server  
 	  is shut down, assume this is the end of the day, and exit Stellarium. An enclosing run script 
-	  can then shutdown the slave computer. 
+	  can then shutdown the client computer before power is switched off with some main switch. 
 \end{description}
 By default, the following things are synchronized:
 \begin{itemize}
@@ -617,7 +616,7 @@ programme.
 % \section{D-Bus Interface}
 % \label{sec:plugin:DBus}
 % 
-% [This may come as user documentation from SoCiS2017/18 (?) work]
+% [This may come as user documentation from SoCiS2018/19 (?) work]
 
 
 \newpage
