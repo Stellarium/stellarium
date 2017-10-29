@@ -202,6 +202,8 @@ public:
 
 	bool objectInDisplayedCatalog() const;
 
+	bool objectInAllowedSizeRangeLimits() const;
+
 private:
 	friend struct DrawNebulaFuncObject;
 
@@ -332,6 +334,10 @@ private:
 	static bool flagUseArcsecSurfaceBrightness;
 	static bool flagUseShortNotationSurfaceBrightness;
 	static bool flagUseOutlines;
+
+	static bool flagUseSizeLimits;
+	static double minSizeLimit;
+	static double maxSizeLimit;
 
 	std::vector<std::vector<Vec3f> *> outlineSegments;
 };
