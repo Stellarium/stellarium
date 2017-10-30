@@ -161,6 +161,7 @@ public:
 
 private:
 	bool initialized;
+	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
 	Vec3d XYZ;                         // holds J2000 position
 	static Vec3f color;
 	static bool hideLocalNomenclature;
