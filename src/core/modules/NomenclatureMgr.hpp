@@ -26,7 +26,7 @@
 #include "NomenclatureItem.hpp"
 
 #include <QFont>
-#include <QList>
+#include <QMultiHash>
 
 class StelPainter;
 class QSettings;
@@ -136,7 +136,7 @@ private:
 	QFont font;
 	QSettings* conf;
 	StelTextureSP texPointer;	
-	QList<NomenclatureItemP> nomenclatureItems;
+	QMultiHash<PlanetP, NomenclatureItemP> nomenclatureItems;
 };
 
 #endif /*_NOMENCLATUREMGR_HPP_*/

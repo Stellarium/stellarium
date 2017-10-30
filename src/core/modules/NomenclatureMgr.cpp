@@ -355,7 +355,7 @@ void NomenclatureMgr::loadNomenclature()
 				{
 					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, ntype, latitude, longitude, size));
 					if (!nom.isNull())
-						nomenclatureItems.append(nom);
+						nomenclatureItems.insert(p, nom);
 
 					readOk++;
 				}				
@@ -380,10 +380,27 @@ void NomenclatureMgr::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	foreach (const NomenclatureItemP& nItem, nomenclatureItems)
+	foreach(PlanetP p, nomenclatureItems.uniqueKeys())
 	{
-		if (nItem && nItem->initialized)
-			nItem->draw(core, &painter);
+		// Early exit if the planet is not visible or too small to render the
+		// labels.
+		const Vec3d equPos = p->getJ2000EquatorialPos(core);
+		const double r = p->getRadius() * p->getSphereScale();
+		double angularSize = atan2(r, equPos.length());
+		double screenSize = angularSize * painter.getProjector()->getPixelPerRadAtCenter();
+		if (screenSize < 50) continue;
+		// TODO: should take into account the planet radius (maybe check
+		// the angular separation between planet center and middle of the
+		// screen?)
+		Vec3d srcPos;
+		if (!painter.getProjector()->projectCheck(equPos, srcPos)) continue;
+
+		// Render all the items of this planet.
+		foreach(const NomenclatureItemP& nItem, nomenclatureItems.values(p))
+		{
+			if (nItem && nItem->initialized)
+				nItem->draw(core, &painter);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
