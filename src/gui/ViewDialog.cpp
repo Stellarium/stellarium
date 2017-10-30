@@ -492,10 +492,13 @@ void ViewDialog::updateHips()
 		QString url = hips->property("url").toString();
 		QJsonObject properties = hips->property("properties").toJsonObject();
 		QString title = properties["obs_title"].toString();
+		if (hips->isLoading()) title = q_("[loading] ") + title;
 		QListWidgetItem* item = new QListWidgetItem(title, l);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 		item->setCheckState(url == currentSurvey ? Qt::Checked : Qt::Unchecked);
 		item->setData(Qt::UserRole, url);
+		disconnect(hips.data(), 0, this, 0);
+		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
 	l->setCurrentRow(currentRow);
 	l->blockSignals(false);
@@ -530,6 +533,7 @@ void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
 	QString url = item->data(Qt::UserRole).toString();
 	if (item->checkState() == Qt::Checked)
 	{
+		l->setCurrentItem(item);
 		hipsmgr->setProperty("surveyDisplayed", true);
 		hipsmgr->setProperty("surveyUrl", url);
 	}

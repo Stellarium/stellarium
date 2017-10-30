@@ -73,6 +73,7 @@ HipsSurvey::HipsSurvey(const QString& url):
 			properties[key] = value;
 		}
 		emit propertiesChanged();
+		emit statusChanged();
 		networkReply->deleteLater();
 	});
 }
@@ -89,6 +90,7 @@ bool HipsSurvey::parseProperties()
 	{
 		QNetworkRequest req = QNetworkRequest(url + "/properties");
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		emit statusChanged();
 	}
 	if (networkReply->isFinished())
 	{
@@ -102,6 +104,7 @@ bool HipsSurvey::parseProperties()
 		}
 		delete networkReply;
 		networkReply = NULL;
+		emit statusChanged();
 	}
 	return !properties.isEmpty();
 }
@@ -122,6 +125,7 @@ bool HipsSurvey::getAllsky()
 		QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(getPropertyInt("hips_order_min", 3)).arg(ext);
 		QNetworkRequest req = QNetworkRequest(path);
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		emit statusChanged();
 	}
 	if (networkReply->isFinished())
 	{
@@ -129,8 +133,14 @@ bool HipsSurvey::getAllsky()
 		allsky = QImage::fromData(data);
 		delete networkReply;
 		networkReply = NULL;
+		emit statusChanged();
 	};
 	return !allsky.isNull();
+}
+
+bool HipsSurvey::isLoading(void) const
+{
+	return (bool)networkReply;
 }
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)

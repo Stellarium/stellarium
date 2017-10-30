@@ -45,21 +45,23 @@ class HipsSurvey : public QObject
 	Q_OBJECT
 
 	Q_PROPERTY(QString url MEMBER url CONSTANT)
-	Q_PROPERTY(QJsonObject properties
-			   MEMBER properties
-			   NOTIFY propertiesChanged)
+	Q_PROPERTY(QJsonObject properties MEMBER properties NOTIFY propertiesChanged)
+	Q_PROPERTY(bool isLoading READ isLoading NOTIFY statusChanged)
+
 public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices)> DrawCallback;
 	HipsSurvey(const QString& url);
 	virtual ~HipsSurvey();
 	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = NULL);
 	const QString& getUrl() const {return url;}
+	bool isLoading(void) const;
 
 	//! Parse a hipslist file into a list of surveys.
 	static QList<HipsSurveyP> parseHipslist(const QString& data);
 
 signals:
 	void propertiesChanged(void);
+	void statusChanged(void);
 
 private:
 	QString url;
