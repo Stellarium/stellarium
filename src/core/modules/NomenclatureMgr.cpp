@@ -379,6 +379,7 @@ void NomenclatureMgr::draw(StelCore* core)
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);
+	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 
 	foreach(PlanetP p, nomenclatureItems.uniqueKeys())
 	{
@@ -389,11 +390,9 @@ void NomenclatureMgr::draw(StelCore* core)
 		double angularSize = atan2(r, equPos.length());
 		double screenSize = angularSize * painter.getProjector()->getPixelPerRadAtCenter();
 		if (screenSize < 50) continue;
-		// TODO: should take into account the planet radius (maybe check
-		// the angular separation between planet center and middle of the
-		// screen?)
-		Vec3d srcPos;
-		if (!painter.getProjector()->projectCheck(equPos, srcPos)) continue;
+		Vec3d n = equPos; n.normalize();
+		SphericalCap boundingCap(n, cos(angularSize));
+		if (!viewportRegion.intersects(boundingCap)) continue;
 		if (p->getVMagnitude(core) >= 20.) continue;
 
 		// Render all the items of this planet.
