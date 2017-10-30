@@ -47,6 +47,7 @@
 #include "StelMovementMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelHips.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -463,7 +464,7 @@ void ViewDialog::createDialogContent()
 
 	// Hips mgr.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
-	connect(hipsmgr, SIGNAL(surveyListChanged()), this, SLOT(updateHips()));
+	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
 	updateHips();
@@ -484,10 +485,12 @@ void ViewDialog::updateHips()
 
 	l->blockSignals(true);
 	l->clear();
-	for (auto info: hipsmgr->property("surveyList").toJsonArray())
+	QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
+
+	for (auto hips: hipslist)
 	{
-		QString url = info.toObject()["url"].toString();
-		QJsonObject properties = info.toObject()["properties"].toObject();
+		QString url = hips->property("url").toString();
+		QJsonObject properties = hips->property("properties").toJsonObject();
 		QString title = properties["obs_title"].toString();
 		QListWidgetItem* item = new QListWidgetItem(title, l);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
@@ -503,8 +506,7 @@ void ViewDialog::updateHips()
 	}
 	else
 	{
-		QJsonObject info = hipsmgr->property("surveyList").toJsonArray()[currentRow].toObject();
-		QJsonObject props = info["properties"].toObject();
+		QJsonObject props = hipslist[currentRow]->property("properties").toJsonObject();
 		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
 
 		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());

@@ -25,6 +25,7 @@
 #include <QObject>
 #include <QCache>
 #include <QImage>
+#include <QJsonObject>
 #include <functional>
 
 #include "StelTexture.hpp"
@@ -34,16 +35,31 @@ class StelPainter;
 class HipsTile;
 class QNetworkReply;
 class SphericalCap;
+class HipsSurvey;
+
+typedef QSharedPointer<HipsSurvey> HipsSurveyP;
+Q_DECLARE_METATYPE(HipsSurveyP)
 
 class HipsSurvey : public QObject
 {
 	Q_OBJECT
+
+	Q_PROPERTY(QString url MEMBER url CONSTANT)
+	Q_PROPERTY(QJsonObject properties
+			   MEMBER properties
+			   NOTIFY propertiesChanged)
 public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices)> DrawCallback;
 	HipsSurvey(const QString& url);
 	virtual ~HipsSurvey();
 	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = NULL);
 	const QString& getUrl() const {return url;}
+
+	//! Parse a hipslist file into a list of surveys.
+	static QList<HipsSurveyP> parseHipslist(const QString& data);
+
+signals:
+	void propertiesChanged(void);
 
 private:
 	QString url;
@@ -56,7 +72,7 @@ private:
 	bool noAllsky = false;
 
 	// Values from the property file.
-	QMap<QString, QString> properties;
+	QJsonObject properties;
 
 	bool parseProperties();
 	int getPropertyInt(const QString& key, int fallback = 0);

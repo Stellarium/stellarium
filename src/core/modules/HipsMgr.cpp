@@ -51,18 +51,8 @@ void HipsMgr::init()
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, [=] {
 		QByteArray data = networkReply->readAll();
-		QString url;
-		foreach(QString line, data.split('\n'))
-		{
-			if (line.startsWith('#')) continue;
-			QString key = line.section("=", 0, 0).trimmed();
-			QString value = line.section("=", 1, -1).trimmed();
-			if (key == "hips_service_url") url = value;
-			if (key == "hips_status" && value.split(' ').contains("public")) {
-				addHips(url);
-			}
-		}
-		emit surveyListChanged();
+		surveys = HipsSurvey::parseHipslist(data);
+		emit surveysChanged();
 	});
 
 	setSurveyUrl("http://alaskybis.unistra.fr/DSS/DSSColor");
@@ -70,8 +60,7 @@ void HipsMgr::init()
 
 void HipsMgr::deinit()
 {
-	delete survey;
-	survey = Q_NULLPTR;
+	survey = NULL;
 }
 
 void HipsMgr::draw(StelCore* core)
@@ -118,34 +107,6 @@ QString HipsMgr::getSurveyUrl() const
 void HipsMgr::setSurveyUrl(const QString& url)
 {
 	if (survey && url == survey->getUrl()) return;
-
-	delete survey;
-	survey = new HipsSurvey(url);
+	survey = HipsSurveyP(new HipsSurvey(url));
 	survey->setParent(this);
-}
-
-void HipsMgr::addHips(const QString& url_)
-{
-	QString url = url_;
-	QNetworkRequest req = QNetworkRequest(url + "/properties");
-	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-
-	connect(networkReply, &QNetworkReply::finished, [&, url, networkReply] {
-		QByteArray data = networkReply->readAll();
-		QJsonObject properties;
-		foreach(QString line, data.split('\n'))
-		{
-			if (line.startsWith("#")) continue;
-			QString key = line.section("=", 0, 0).trimmed();
-			if (key.isEmpty()) continue;
-			QString value = line.section("=", 1, -1).trimmed();
-			properties[key] = value;
-		}
-		QJsonObject info;
-		info["properties"] = properties;
-		info["url"] = url;
-		this->surveyList.append(info);
-		emit surveyListChanged();
-		networkReply->deleteLater();
-	});
 }

@@ -59,6 +59,22 @@ HipsSurvey::HipsSurvey(const QString& url):
 	url(url),
 	tiles(1000)
 {
+	// Immediatly download the properties.
+	QNetworkRequest req = QNetworkRequest(url + "/properties");
+	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	connect(networkReply, &QNetworkReply::finished, [&, url, networkReply] {
+		QByteArray data = networkReply->readAll();
+		foreach(QString line, data.split('\n'))
+		{
+			if (line.startsWith("#")) continue;
+			QString key = line.section("=", 0, 0).trimmed();
+			if (key.isEmpty()) continue;
+			QString value = line.section("=", 1, -1).trimmed();
+			properties[key] = value;
+		}
+		emit propertiesChanged();
+		networkReply->deleteLater();
+	});
 }
 
 HipsSurvey::~HipsSurvey()
@@ -102,7 +118,7 @@ bool HipsSurvey::getAllsky()
 	if (properties.isEmpty()) return false;
 	if (!networkReply)
 	{
-		QString ext = getExt(properties["hips_tile_format"]);
+		QString ext = getExt(properties["hips_tile_format"].toString());
 		QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(getPropertyInt("hips_order_min", 3)).arg(ext);
 		QNetworkRequest req = QNetworkRequest(path);
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
@@ -166,7 +182,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile = new HipsTile();
 		tile->order = order;
 		tile->pix = pix;
-		QString ext = getExt(properties["hips_tile_format"]);
+		QString ext = getExt(properties["hips_tile_format"].toString());
 		QString path = QString("%1/Norder%2/Dir%3/Npix%4.%5").arg(url).arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext);
 		tile->texture = texMgr.createTextureThread(path, StelTexture::StelTextureParams(true), false);
 		tiles.insert(uid, tile);
@@ -354,4 +370,22 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 		}
 	}
 	return gridSize * gridSize * 6;
+}
+
+//! Parse a hipslist file into a list of surveys.
+QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
+{
+	QList<HipsSurveyP> ret;
+	QString url;
+	foreach(QString line, data.split('\n'))
+	{
+		if (line.startsWith('#')) continue;
+		QString key = line.section("=", 0, 0).trimmed();
+		QString value = line.section("=", 1, -1).trimmed();
+		if (key == "hips_service_url") url = value;
+		if (key == "hips_status" && value.split(' ').contains("public")) {
+			ret.append(HipsSurveyP(new HipsSurvey(url)));
+		}
+	}
+	return ret;
 }

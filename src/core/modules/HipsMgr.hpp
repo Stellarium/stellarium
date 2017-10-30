@@ -21,6 +21,7 @@
 #define _HIPSMGR_HPP_
 
 #include "StelModule.hpp"
+#include "StelHips.hpp"
 #include <QJsonArray>
 
 class HipsMgr : public StelModule
@@ -31,14 +32,15 @@ class HipsMgr : public StelModule
 			WRITE setFlagSurveyShow
 			NOTIFY surveyDisplayedChanged)
 
+	// XXX to remove: we should support any number of visible surveys
 	Q_PROPERTY(QString surveyUrl
 			READ getSurveyUrl
 			WRITE setSurveyUrl
 			NOTIFY surveyUrlChanged)
 
-	Q_PROPERTY(QJsonArray surveyList
-			MEMBER surveyList
-			NOTIFY surveyListChanged)
+	Q_PROPERTY(QList<HipsSurveyP> surveys
+			MEMBER surveys
+			NOTIFY surveysChanged)
 
 public:
 	HipsMgr();
@@ -61,15 +63,12 @@ public slots:
 
 signals:
 	void surveyDisplayedChanged(const bool displayed) const;
-	void surveyListChanged() const;
+	void surveysChanged() const;
 
 private:
-	QJsonArray surveyList;
-	class HipsSurvey* survey = NULL;
+	QList<HipsSurveyP> surveys;
+	HipsSurveyP survey;
 	class LinearFader* fader = NULL;
-
-	//! load a hips info and add it into the list.
-	void addHips(const QString& url);
 };
 
 #endif // _HIPSMGR_HPP_
