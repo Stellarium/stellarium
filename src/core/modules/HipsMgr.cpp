@@ -60,7 +60,7 @@ void HipsMgr::init()
 
 void HipsMgr::deinit()
 {
-	survey = NULL;
+	survey = HipsSurveyP(NULL);
 }
 
 void HipsMgr::draw(StelCore* core)
@@ -107,7 +107,7 @@ QString HipsMgr::getSurveyUrl() const
 void HipsMgr::setSurveyUrl(const QString& url)
 {
 	if (survey && url == survey->getUrl()) return;
-	survey = NULL;
+	survey.clear();
 	for (auto hips: surveys)
 	{
 		if (hips->getUrl() == url)
