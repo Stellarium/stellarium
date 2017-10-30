@@ -52,6 +52,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, longitude(nLongitude)
 	, size(nSize)
 {
+	StelUtils::spheToRect((longitude /*+ planet->getAxisRotation()*/) * M_PI/180.0, latitude * M_PI/180.0, XYZpc);
 	initialized = true;
 }
 
@@ -832,10 +833,9 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// Calculate the radius of the planet. It is necessary to re-scale it
 	const double r = planet->getRadius() * planet->getSphereScale();
 
-	Vec3d XYZ0; // XYZ is member variable with equatorial J2000.0 coordinates
-	StelUtils::spheToRect((longitude + planet->getAxisRotation()) * M_PI/180.0, latitude * M_PI/180.0, XYZ0);
-	// For now, assume spherical planets, simply scale by radius.
-	XYZ0 *= r;
+	Vec3d XYZ0;
+//	// For now, assume spherical planets, simply scale by radius.
+	XYZ0 = XYZpc*r;
 	// TODO1: handle ellipsoid bodies
 	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
 
@@ -843,7 +843,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	   Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
 	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates.
 	   So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
-	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
+	// TODO: Maybe it is more efficient to add some getRotEquatorialToVsop87Zrotation() to the Planet class which returns a Mat4d computed in Planet::computeTransMatrix().
+	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * Mat4d::zrotation(planet->getAxisRotation()* M_PI/180.0) * XYZ0;
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
 	if (XYZ.lengthSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
