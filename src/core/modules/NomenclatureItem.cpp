@@ -863,7 +863,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// check visibility of feature
 	Vec3d srcPos;
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (planet->getVMagnitude(core)<20.) && (screenSize>50. && screenSize<750.))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (screenSize>50. && screenSize<750.))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);

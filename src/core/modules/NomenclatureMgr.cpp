@@ -394,10 +394,12 @@ void NomenclatureMgr::draw(StelCore* core)
 		// screen?)
 		Vec3d srcPos;
 		if (!painter.getProjector()->projectCheck(equPos, srcPos)) continue;
+		if (p->getVMagnitude(core) >= 20.) continue;
 
 		// Render all the items of this planet.
-		foreach(const NomenclatureItemP& nItem, nomenclatureItems.values(p))
+		for (auto i = nomenclatureItems.find(p); i != nomenclatureItems.end() && i.key() == p; ++i)
 		{
+			const NomenclatureItemP& nItem = i.value();
 			if (nItem && nItem->initialized)
 				nItem->draw(core, &painter);
 		}
