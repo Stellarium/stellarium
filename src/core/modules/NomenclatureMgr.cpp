@@ -462,8 +462,10 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 	{
 		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 		{
-			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
+			if (nItem->initialized && nItem->XYZ.lengthSquared() > 0 && nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
+			{
 				return qSharedPointerCast<StelObject>(nItem);
+			}
 		}
 	}
 
@@ -476,8 +478,10 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 		{
-			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
+			if (nItem->initialized && nItem->XYZ.lengthSquared() > 0 && nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
+			{
 				return qSharedPointerCast<StelObject>(nItem);
+			}
 		}
 	}
 
