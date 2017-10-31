@@ -50,7 +50,10 @@ class HipsSurvey : public QObject
 
 public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices)> DrawCallback;
-	HipsSurvey(const QString& url);
+	//! Create a new HipsSurvey from its url.
+	//! @param url The location of the survey.
+	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
+	HipsSurvey(const QString& url, double releaseDate=0.0);
 	virtual ~HipsSurvey();
 	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = NULL);
 	const QString& getUrl() const {return url;}
@@ -65,6 +68,7 @@ signals:
 
 private:
 	QString url;
+	double releaseDate; // As UTC Julian day.
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the
 	// allsky texture.
@@ -76,7 +80,7 @@ private:
 	// Values from the property file.
 	QJsonObject properties;
 
-	bool parseProperties();
+	QString getUrlFor(const QString& path) const;
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);

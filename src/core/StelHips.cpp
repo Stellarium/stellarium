@@ -22,6 +22,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <QNetworkReply>
 #include <QTimeLine>
@@ -55,14 +56,20 @@ static QString getExt(const QString& format)
 	return QString();
 }
 
-HipsSurvey::HipsSurvey(const QString& url):
-	url(url),
+QString HipsSurvey::getUrlFor(const QString& path) const
+{
+	return QString("%1/%2?v=%3").arg(url).arg(path).arg((int)releaseDate);
+}
+
+HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
+	url(url_),
+	releaseDate(releaseDate_),
 	tiles(1000)
 {
 	// Immediatly download the properties.
-	QNetworkRequest req = QNetworkRequest(url + "/properties");
+	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(networkReply, &QNetworkReply::finished, [&, url, networkReply] {
+	connect(networkReply, &QNetworkReply::finished, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
 		foreach(QString line, data.split('\n'))
 		{
@@ -71,6 +78,13 @@ HipsSurvey::HipsSurvey(const QString& url):
 			if (key.isEmpty()) continue;
 			QString value = line.section("=", 1, -1).trimmed();
 			properties[key] = value;
+		}
+		if (properties.contains("hips_release_date"))
+		{
+			// XXX: StelUtils::getJulianDayFromISO8601String does not work
+			// without the seconds!
+			QDateTime date = QDateTime::fromString(properties["hips_release_date"].toString(), Qt::ISODate);
+			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		emit propertiesChanged();
 		emit statusChanged();
@@ -81,32 +95,6 @@ HipsSurvey::HipsSurvey(const QString& url):
 HipsSurvey::~HipsSurvey()
 {
 
-}
-
-bool HipsSurvey::parseProperties()
-{
-	if (!properties.isEmpty()) return true;
-	if (!networkReply)
-	{
-		QNetworkRequest req = QNetworkRequest(url + "/properties");
-		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		emit statusChanged();
-	}
-	if (networkReply->isFinished())
-	{
-		// XXX: check for errors.
-		QByteArray data = networkReply->readAll();
-		foreach(QString line, data.split('\n'))
-		{
-			QString key = line.section("=", 0, 0).trimmed();
-			QString value = line.section("=", 1, -1).trimmed();
-			properties[key] = value;
-		}
-		delete networkReply;
-		networkReply = NULL;
-		emit statusChanged();
-	}
-	return !properties.isEmpty();
 }
 
 int HipsSurvey::getPropertyInt(const QString& key, int fallback)
@@ -122,13 +110,15 @@ bool HipsSurvey::getAllsky()
 	if (!networkReply)
 	{
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		QString path = QString("%1/Norder%2/Allsky.%3").arg(url).arg(getPropertyInt("hips_order_min", 3)).arg(ext);
+		QString path = getUrlFor(QString("Norder%1/Allsky.%2").arg(getPropertyInt("hips_order_min", 3)).arg(ext));
+		qDebug() << "Load allsky" << path;
 		QNetworkRequest req = QNetworkRequest(path);
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		emit statusChanged();
 	}
 	if (networkReply->isFinished())
 	{
+		qDebug() << "got allsky";
 		QByteArray data = networkReply->readAll();
 		allsky = QImage::fromData(data);
 		delete networkReply;
@@ -148,7 +138,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
 	bool outside = (angle == 2.0 * M_PI);
-	if (!parseProperties()) return;
+	if (properties.isEmpty()) return;
 	if (!getAllsky()) return;
 
 	// Set the projection.
@@ -193,7 +183,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile->order = order;
 		tile->pix = pix;
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		QString path = QString("%1/Norder%2/Dir%3/Npix%4.%5").arg(url).arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext);
+		QString path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
 		tile->texture = texMgr.createTextureThread(path, StelTexture::StelTextureParams(true), false);
 		tiles.insert(uid, tile);
 
@@ -387,14 +377,24 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 {
 	QList<HipsSurveyP> ret;
 	QString url;
+	double releaseDate = 0;
 	foreach(QString line, data.split('\n'))
 	{
 		if (line.startsWith('#')) continue;
 		QString key = line.section("=", 0, 0).trimmed();
 		QString value = line.section("=", 1, -1).trimmed();
 		if (key == "hips_service_url") url = value;
+		if (key == "hips_release_date")
+		{
+			// XXX: StelUtils::getJulianDayFromISO8601String does not work
+			// without the seconds!
+			QDateTime date = QDateTime::fromString(value, Qt::ISODate);
+			releaseDate = StelUtils::qDateTimeToJd(date);
+		}
 		if (key == "hips_status" && value.split(' ').contains("public")) {
-			ret.append(HipsSurveyP(new HipsSurvey(url)));
+			ret.append(HipsSurveyP(new HipsSurvey(url, releaseDate)));
+			url = "";
+			releaseDate = 0;
 		}
 	}
 	return ret;
