@@ -784,7 +784,8 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	if (flags&Size && size>0.f)
 	{
 		QString sz = q_("Linear size");
-		if (getNomenclatureType()==NomenclatureItem::niCrater)
+		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
+		if ((getNomenclatureType()==NomenclatureItem::niCrater) || (getNomenclatureType()==NomenclatureItem::niSatelliteFeature))
 			sz = q_("Diameter");
 		oss << QString("%1: %2 %3").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance")) << "<br />";
 	}
