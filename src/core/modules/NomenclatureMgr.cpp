@@ -399,7 +399,7 @@ void NomenclatureMgr::draw(StelCore* core)
 		for (auto i = nomenclatureItems.find(p); i != nomenclatureItems.end() && i.key() == p; ++i)
 		{
 			const NomenclatureItemP& nItem = i.value();
-			if (nItem && nItem->initialized)
+			if (nItem)
 				nItem->draw(core, &painter);
 		}
 	}
@@ -430,7 +430,7 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 
@@ -441,14 +441,11 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 
 	foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 	{
-		if (nItem->initialized && nItem->XYZ.lengthSquared() > 0)
+		equPos = nItem->getJ2000EquatorialPos(core);
+		equPos.normalize();
+		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 		{
-			equPos = nItem->XYZ;
-			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
-			{
-				result.append(qSharedPointerCast<StelObject>(nItem));
-			}
+			result.append(qSharedPointerCast<StelObject>(nItem));
 		}
 	}
 
@@ -462,7 +459,7 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 	{
 		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 		{
-			if (nItem->initialized && nItem->XYZ.lengthSquared() > 0 && nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
+			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
 			{
 				return qSharedPointerCast<StelObject>(nItem);
 			}
@@ -478,7 +475,7 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 		{
-			if (nItem->initialized && nItem->XYZ.lengthSquared() > 0 && nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
+			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
 			{
 				return qSharedPointerCast<StelObject>(nItem);
 			}
