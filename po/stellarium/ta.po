@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-10-29 22:12+0700\n"
-"PO-Revision-Date: 2015-11-30 07:20+0000\n"
+"PO-Revision-Date: 2017-10-31 18:31+0000\n"
 "Last-Translator: Balaji பாலாஜி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-10-30 05:30+0000\n"
+"X-Launchpad-Export-Date: 2017-11-01 05:12+0000\n"
 "X-Generator: Launchpad (build 18493)\n"
 "Language: ta\n"
 "X-Language: ta\n"
@@ -47,7 +47,7 @@ msgstr "வகை"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
-msgstr ""
+msgstr "குறிப்பி"
 
 #: src/core/modules/Asterism.cpp:221
 msgid "asterism"
@@ -79,7 +79,7 @@ msgstr ""
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
-msgstr ""
+msgstr "வின்மீன் கூட்டம்"
 
 #: src/core/modules/ConstellationMgr.cpp:144
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
@@ -116,7 +116,7 @@ msgstr "நட்சத்திரங்கள்"
 
 #: src/core/modules/StarMgr.cpp:453
 msgid "Stars labels"
-msgstr ""
+msgstr "நட்சத்திர அடையாளம்"
 
 #: src/core/modules/GridLinesMgr.cpp:641 src/ui_viewDialog.h:2719
 msgid "Meridian"
@@ -140,7 +140,7 @@ msgstr "பூமத்திய ரேகை"
 
 #: src/core/modules/GridLinesMgr.cpp:662
 msgid "Precession Circle"
-msgstr ""
+msgstr "திசைமாற்ற வட்டக்கோடு"
 
 #: src/core/modules/GridLinesMgr.cpp:666 src/ui_viewDialog.h:2708
 msgid "Horizon"
@@ -148,7 +148,7 @@ msgstr "தொடுவானம்"
 
 #: src/core/modules/GridLinesMgr.cpp:670
 msgid "Galactic Equator"
-msgstr ""
+msgstr "மண்டலத்தின் மத்திய ரேகை"
 
 #: src/core/modules/GridLinesMgr.cpp:674
 msgid "Supergalactic Equator"
@@ -268,7 +268,7 @@ msgstr "உச்சநெடுங்கோடு"
 #: src/core/modules/GridLinesMgr.cpp:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Horizon line"
-msgstr ""
+msgstr "தொடுவானக் கோடு"
 
 #: src/core/modules/GridLinesMgr.cpp:1240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
@@ -414,7 +414,7 @@ msgstr "படைப்பாளர்"
 #: src/core/modules/LandscapeMgr.cpp:799 src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
-msgstr ""
+msgstr "மீ (m)"
 
 #: src/core/modules/LandscapeMgr.cpp:802 src/ui_locationDialogGui.h:472
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -502,7 +502,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:105
 msgctxt "landform"
 msgid "crater"
-msgstr ""
+msgstr "கிண்ணக்குழி"
 
 #. TRANSLATORS: Ridge
 #: src/core/modules/NomenclatureItem.cpp:109
@@ -839,7 +839,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:511
 msgid "Ridge."
-msgstr ""
+msgstr "முகடு"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:515
@@ -892,7 +892,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "நிலச்சரிவு"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
@@ -1017,7 +1017,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:659
 msgid "Fissure."
-msgstr ""
+msgstr "பிளவு"
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:663
@@ -1074,12 +1074,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
 msgid "Dunes."
-msgstr ""
+msgstr "மணல் மேடுகள்."
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
 msgid "Valley."
-msgstr ""
+msgstr "பள்ளத்தாக்கு."
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:715
@@ -1105,7 +1105,7 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:787
 msgid "Diameter"
-msgstr ""
+msgstr "விட்டம்"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:788 src/core/modules/Planet.cpp:455
@@ -1115,7 +1115,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:324
 msgctxt "distance"
 msgid "km"
-msgstr ""
+msgstr "கி மீ (km)"
 
 #: src/core/modules/NomenclatureItem.cpp:793
 msgid "Planetographic long./lat."
@@ -1141,11 +1141,11 @@ msgstr ""
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
 #: plugins/Exoplanets/src/Exoplanet.cpp:304
 msgid "Magnitude"
-msgstr ""
+msgstr "எண் மதிப்பு"
 
 #: src/core/modules/Nebula.cpp:234
 msgid "Opacity"
-msgstr ""
+msgstr "ஒளிபுகாமை"
 
 #: src/core/modules/Nebula.cpp:237 src/core/modules/Planet.cpp:421
 #: src/core/modules/MinorPlanet.cpp:242 src/core/modules/Comet.cpp:176
