@@ -70,7 +70,7 @@ void NomenclatureMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed");
+	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed", "Alt+N");
 }
 
 void NomenclatureMgr::loadNomenclature()
