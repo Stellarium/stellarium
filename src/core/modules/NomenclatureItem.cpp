@@ -40,8 +40,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   float nLatitude,
 				   float nLongitude,
 				   float nSize)
-	: initialized(false)
-	, XYZ(0.0)
+	: XYZ(0.0)
 	, planet(nPlanet)
 	, identificator(nId)
 	, englishName(nName)
@@ -53,7 +52,6 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, size(nSize)
 {
 	StelUtils::spheToRect((longitude /*+ planet->getAxisRotation()*/) * M_PI/180.0, latitude * M_PI/180.0, XYZpc);
-	initialized = true;
 }
 
 NomenclatureItem::~NomenclatureItem()
@@ -808,6 +806,29 @@ Vec3f NomenclatureItem::getInfoColor(void) const
 	return color;
 }
 
+Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if (jde == core->getJDE()) return XYZ;
+	jde = core->getJDE();
+	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
+	// Calculate the radius of the planet. It is necessary to re-scale it
+	const double r = planet->getRadius() * planet->getSphereScale();
+
+	Vec3d XYZ0;
+//	// For now, assume spherical planets, simply scale by radius.
+	XYZ0 = XYZpc*r;
+	// TODO1: handle ellipsoid bodies
+	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
+
+	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
+	   Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
+	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates.
+	   So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
+	// TODO: Maybe it is more efficient to add some getRotEquatorialToVsop87Zrotation() to the Planet class which returns a Mat4d computed in Planet::computeTransMatrix().
+	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * Mat4d::zrotation(planet->getAxisRotation()* M_PI/180.0) * XYZ0;
+	return XYZ;
+}
+
 float NomenclatureItem::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
@@ -830,22 +851,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		return;
 
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
+	Vec3d XYZ = getJ2000EquatorialPos(core);
 
-	// Calculate the radius of the planet. It is necessary to re-scale it
-	const double r = planet->getRadius() * planet->getSphereScale();
-
-	Vec3d XYZ0;
-//	// For now, assume spherical planets, simply scale by radius.
-	XYZ0 = XYZpc*r;
-	// TODO1: handle ellipsoid bodies
-	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
-
-	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
-	   Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
-	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates.
-	   So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
-	// TODO: Maybe it is more efficient to add some getRotEquatorialToVsop87Zrotation() to the Planet class which returns a Mat4d computed in Planet::computeTransMatrix().
-	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * Mat4d::zrotation(planet->getAxisRotation()* M_PI/180.0) * XYZ0;
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
 	if (XYZ.lengthSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
@@ -865,7 +872,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// check visibility of feature
 	Vec3d srcPos;
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (planet->getVMagnitude(core)<20.) && (screenSize>50. && screenSize<750.))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (screenSize>50. && screenSize<750.))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);

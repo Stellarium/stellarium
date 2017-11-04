@@ -125,10 +125,7 @@ public:
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
 	//! Get the visual magnitude of a nomenclature item. Dummy method, returns 99.
 	virtual float getVMagnitude(const StelCore* core) const;
 	//! Get the angular size of nomenclature item.
@@ -160,9 +157,9 @@ public:
 	float getLongitude(void) const {return longitude;}
 
 private:
-	bool initialized;
 	Vec3d XYZpc;                         // holds planetocentric position (from longitude/latitude)
-	Vec3d XYZ;                         // holds J2000 position
+	mutable Vec3d XYZ;                   // holds J2000 position
+	mutable double jde;                  // jde time of XYZ value
 	static Vec3f color;
 	static bool hideLocalNomenclature;
 
