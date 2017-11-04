@@ -136,7 +136,9 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 
 		switch (e->key())
 		{
+			case Qt::Key_Plus:      // or
 			case Qt::Key_PageUp:    movementKeyInput[2] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_Minus:     // or
 			case Qt::Key_PageDown:  movementKeyInput[2] = -1.0f * speedup; e->accept(); break;
 			case Qt::Key_Up:        movementKeyInput[1] =  1.0f * speedup; e->accept(); break;
 			case Qt::Key_Down:      movementKeyInput[1] = -1.0f * speedup; e->accept(); break;
@@ -159,7 +161,9 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 		//we do not accept the event on MacOS to allow further handling the event in other modules. (Else the regular view motion stop does not work!)
 		switch (e->key())
 		{
+			case Qt::Key_Plus:
 			case Qt::Key_PageUp:
+			case Qt::Key_Minus:
 			case Qt::Key_PageDown:
 				movementKeyInput[2] = 0.0f;
 #ifndef Q_OS_OSX
