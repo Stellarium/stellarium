@@ -972,7 +972,7 @@ private:
 
 	QFont planetNameFont;
 
-	//! The amount of planets labels (between 0 and 10).
+	//! The amount of planet labels (between 0 and 10).
 	double labelsAmount;
 
 	//! List of all the bodies of the solar system.
