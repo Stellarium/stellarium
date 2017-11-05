@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-29 22:12+0700\n"
-"PO-Revision-Date: 2017-10-11 14:27+0000\n"
-"Last-Translator: Tiago Santos <Unknown>\n"
+"PO-Revision-Date: 2017-11-04 14:10+0000\n"
+"Last-Translator: Andre <andre.david@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-10-30 05:27+0000\n"
+"X-Launchpad-Export-Date: 2017-11-05 05:13+0000\n"
 "X-Generator: Launchpad (build 18493)\n"
 "Language: pt\n"
 "X-Language: pt\n"
@@ -93,16 +93,16 @@ msgstr "Arte da constelação"
 #: src/core/modules/ConstellationMgr.cpp:146
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Constellation labels"
-msgstr "Legendas da constelação"
+msgstr "Legenda da constelação"
 
 #: src/core/modules/ConstellationMgr.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Constellation boundaries"
-msgstr "Limites de constelação"
+msgstr "Limites da constelação"
 
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1481
 msgid "Select single constellation"
-msgstr "Seleccionar uma constelação"
+msgstr "Seleccione uma constelação"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
@@ -120,7 +120,7 @@ msgstr "Rótulos das estrelas"
 
 #: src/core/modules/GridLinesMgr.cpp:641 src/ui_viewDialog.h:2719
 msgid "Meridian"
-msgstr "Meridian"
+msgstr "Meridiano"
 
 #: src/core/modules/GridLinesMgr.cpp:645
 msgid "Ecliptic of J2000.0"
@@ -179,12 +179,12 @@ msgstr "Círculo Circumpolar"
 #. TRANSLATORS: North Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:892 src/core/modules/GridLinesMgr.cpp:901
 msgid "NCP"
-msgstr "PCN"
+msgstr "PNC"
 
 #. TRANSLATORS: South Celestial Pole
 #: src/core/modules/GridLinesMgr.cpp:894 src/core/modules/GridLinesMgr.cpp:903
 msgid "SCP"
-msgstr "PCS"
+msgstr "PSC"
 
 #. TRANSLATORS: Zenith
 #: src/core/modules/GridLinesMgr.cpp:910
@@ -201,36 +201,36 @@ msgstr "Z'"
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:919 src/core/modules/GridLinesMgr.cpp:928
 msgid "NEP"
-msgstr "PCN"
+msgstr "PNE"
 
 #. TRANSLATORS: South Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:921 src/core/modules/GridLinesMgr.cpp:930
 msgid "SEP"
-msgstr "PCS"
+msgstr "PSE"
 
 #. TRANSLATORS: North Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:937
 msgid "NGP"
-msgstr "PGN"
+msgstr "PNG"
 
 #. TRANSLATORS: South Galactic Pole
 #: src/core/modules/GridLinesMgr.cpp:939
 msgid "SGP"
-msgstr "PGS"
+msgstr "PSG"
 
 #. TRANSLATORS: North Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:946
 msgid "NSGP"
-msgstr "PSGN"
+msgstr "PNSG"
 
 #. TRANSLATORS: South Supergalactic Pole
 #: src/core/modules/GridLinesMgr.cpp:948
 msgid "SSGP"
-msgstr "PSGS"
+msgstr "PSSG"
 
 #: src/core/modules/GridLinesMgr.cpp:1231
 msgid "Grids and lines"
-msgstr "Linhas e Grades"
+msgstr "Grelhas e linhas"
 
 #: src/core/modules/GridLinesMgr.cpp:1232
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
@@ -277,7 +277,7 @@ msgstr "Grelha equatorial J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1241
 msgid "Ecliptic J2000 grid"
-msgstr "Grade eclíptica J2000"
+msgstr "Grelha eclíptica J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1242
 msgid "Ecliptic grid"
@@ -335,11 +335,11 @@ msgstr "Polos eclípticos J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1256
 msgid "Ecliptic poles"
-msgstr "Polos  elípticos"
+msgstr "Polos  eclípticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1257 src/ui_viewDialog.h:2780
 msgid "Galactic poles"
-msgstr "Polos galáticos"
+msgstr "Polos galácticos"
 
 #: src/core/modules/GridLinesMgr.cpp:1258 src/ui_viewDialog.h:2738
 msgid "Supergalactic poles"
@@ -388,9 +388,7 @@ msgstr "Rótulos das paisagens"
 
 #: src/core/modules/LandscapeMgr.cpp:429 src/ui_viewDialog.h:2476
 msgid "Light pollution data from locations database"
-msgstr ""
-"Informações sobre a poluição luminosa a partir da base de dados de "
-"localizações"
+msgstr "Dados sobre poluição luminosa da base de dados de localizações"
 
 #: src/core/modules/LandscapeMgr.cpp:793 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
@@ -436,27 +434,27 @@ msgstr "coeficiente de extinção"
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
-msgstr "condições atmosféricas"
+msgstr "Condições atmosféricas"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "Light pollution"
-msgstr "poluição luminosa"
+msgstr "Poluição luminosa"
 
 #: src/core/modules/LandscapeMgr.cpp:840
 msgid "by Bortle scale"
-msgstr "Escala de Bortle"
+msgstr "pela escala de Bortle"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
 #: src/core/modules/NomenclatureItem.cpp:69
 msgctxt "landform"
 msgid "albedo feature"
-msgstr "função de albedo"
+msgstr "característica de albedo"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:73
 msgctxt "landform"
 msgid "arcus"
-msgstr ""
+msgstr "arco"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:77
