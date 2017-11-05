@@ -263,10 +263,10 @@ public slots:
 
 	//! Set the observer location
 	//! @param longitude the longitude in degrees. E is +ve.
-	//!        values out of the range -180 .. 180 mean that
+	//!        values out of the range -180..180 mean that
 	//!        the longitude will not be set
-	//! @param latitude the longitude in degrees. N is +ve.
-	//!        values out of the range -180 .. 180 mean that
+	//! @param latitude the latitude in degrees. N is +ve.
+	//!        values out of the range -90..90 mean that
 	//!        the latitude will not be set
 	//! @param altitude the new altitude in meters.
 	//!        values less than -1000 mean the altitude will not
