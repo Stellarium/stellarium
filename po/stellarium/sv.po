@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-29 22:12+0700\n"
-"PO-Revision-Date: 2017-11-01 17:23+0000\n"
+"PO-Revision-Date: 2017-11-06 04:09+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-02 04:34+0000\n"
+"X-Launchpad-Export-Date: 2017-11-06 05:11+0000\n"
 "X-Generator: Launchpad (build 18493)\n"
 "Language: sv\n"
 "X-Language: sv\n"
@@ -10265,7 +10265,7 @@ msgstr "Välj ett objekt innan du byter till okularvisning."
 
 #: plugins/Oculars/src/Oculars.cpp:1063
 msgid "&Previous ocular"
-msgstr "&Förra okularet"
+msgstr "&Föregående okular"
 
 #: plugins/Oculars/src/Oculars.cpp:1064
 msgid "&Next ocular"
@@ -10293,7 +10293,7 @@ msgstr "Slå på/av &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1144
 msgid "&Previous CCD"
-msgstr "&Förra CCD"
+msgstr "&Föregående CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:1145
 msgid "&Next CCD"
@@ -15518,12 +15518,12 @@ msgstr "Går ned %1 (om %2)"
 #: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr "Rose at %1 (%2 sedan)"
+msgstr "Gick upp %1 (%2 sedan)"
 
 #: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr "Set at %1 (%2 sedan)"
+msgstr "Gick ner %1 (%2 sedan)"
 
 #: plugins/Observability/src/Observability.cpp:197
 #, qt-format
@@ -15559,12 +15559,12 @@ msgstr "Ingen akronisk eller kosmisk uppgång/nedgång."
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr "Största elongation: %1 (vid %2 grader)"
+msgstr "Största elongation: %1 (%2 grader ifrån)"
 
 #: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr "Största vinkelavstånd från solen: %1 (vid %2 grader)"
+msgstr "Största vinkelavstånd från solen: %1 (%2 grader ifrån)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:208
@@ -15620,12 +15620,12 @@ msgstr "I ÅR:"
 #: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "Förra fullmåne: %1 %2 vid %3:%4. "
+msgstr "Föregående fullmåne: %1 %2 klockan %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "Nästa fullmåne: %1 %2 vid %3:%4. "
+msgstr "Nästkommande fullmåne: %1 %2 klockan %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:237
 #: plugins/Observability/src/Observability.cpp:238
