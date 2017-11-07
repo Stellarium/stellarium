@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-29 22:12+0700\n"
-"PO-Revision-Date: 2017-11-06 04:09+0000\n"
+"PO-Revision-Date: 2017-11-06 21:59+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-06 05:11+0000\n"
+"X-Launchpad-Export-Date: 2017-11-07 05:11+0000\n"
 "X-Generator: Launchpad (build 18493)\n"
 "Language: sv\n"
 "X-Language: sv\n"
@@ -5825,7 +5825,7 @@ msgstr "Sol"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:518
 msgid "Vienna Sterngarten"
-msgstr "Wiens Sterngarten"
+msgstr "Sterngarten i Wien"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:520
@@ -15541,7 +15541,7 @@ msgstr "Går aldrig upp."
 #: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr "Kuminerar vid %1 (om %2) på höjden %3 grader"
+msgstr "Kulminerar vid %1 (om %2) på höjden %3 grader"
 
 #: plugins/Observability/src/Observability.cpp:201
 #, qt-format
@@ -15850,7 +15850,7 @@ msgstr ""
 #: plugins/FOV/src/ui_fovWindow.h:351 plugins/FOV/src/ui_fovWindow.h:353
 #: plugins/FOV/src/ui_fovWindow.h:372
 msgid "Field of View"
-msgstr ""
+msgstr "Synfält"
 
 #: plugins/FOV/src/FOV.cpp:45 plugins/FOV/src/gui/FOVWindow.cpp:87
 msgid ""
@@ -15864,7 +15864,7 @@ msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "Insticksprogrammet för synfält"
 
 #: plugins/FOV/src/ui_fovWindow.h:355
 msgid ""
@@ -15874,6 +15874,11 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Som standard använder Stellarium en mjuk zoomning genom mushjulet eller "
+"genvägar på tangentbordet. Vissa användare vill ha stegvis zoomning till "
+"olika fixvärden, som i programvaran Cartes du Ciel, och detta "
+"insticksprogram möjliggör detta. Du kan redigera värden och använda "
+"tangentbordet för att snabbt ställa in synfältet. Alla värden ges i grader."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
@@ -16437,7 +16442,7 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:187
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Kometen 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:189
@@ -16908,19 +16913,19 @@ msgstr "Insticksprogrammet för 3D-scener laddat!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:321
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "3D-scener: 3D-landskap"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:324
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "Slå på 3D-landskap"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:326
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Visa vypunktsdialog"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:327
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Slå på skuggor"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:328
 msgid "Toggle debug information"
@@ -16932,15 +16937,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:330
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "Slå på fackelljus"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:379
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "Shaders till 3D-scener laddade"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:432
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "Laddar scen. Ha tålamod!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:434
 #, qt-format
@@ -16996,7 +17001,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:687
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Enskild pixelskuggning %1."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:687
 #: plugins/Scenery3d/src/Scenery3d.cpp:706
@@ -17015,11 +17020,11 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:706
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "Skuggor %1."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:711
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Skuggor inaktiverade eller inte möjliga."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:742
 #, qt-format
@@ -17033,7 +17038,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:892
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "Lat kubkartering: %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:892
 msgid "enabled"
@@ -17045,25 +17050,25 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:965
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Storlek på kubkartor ändrad"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:967
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Storlek på kubkartor stöds inte, sätt till %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:988
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Storlek på skuggningskarta ändrad"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:990
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Storleken på skuggningskartan stöds inte, sätt till %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:1114
 msgid "3D Sceneries"
-msgstr ""
+msgstr "3D-scener"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:1117
 msgid ""
@@ -17076,16 +17081,29 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Renderare av 3D-förgrund. Gå omkring, hitta och undvik hinder i din "
+"trädgård, hitta och visa möjliga astronomiska inpassningar i tempel, se "
+"skuggor på solur osv.</p><p>Tryck Ctrl+piltangenterna för att röra dig i "
+"omgivningen. Tryck Ctril+PgUp/PgDn för att öka ögonhöjd. Hastigheten i "
+"vilken du kan röra dig beror på synfältet (dvs. zooma in för "
+"finjusteringar). Du kan fortsätta röra dig genom att släppa Ctrl-knappen "
+"innan du släpper piltangenten. </p><p>Österrikiska vetenskapssamfundets "
+"(FWF) projekt ASTROSIM har delvis bidragit till utvecklingen av detta "
+"insticksprogram. För mer information, läs:  http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:399
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"Fel på shader till 3D-scener, kunde inte rita ut. För detaljer, se debug-"
+"utskrift."
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1809
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"Din hårdvara stöder inte kubkartering, var god slå över till "
+"'perspektivprojektion'!"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1818
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
@@ -17099,32 +17117,39 @@ msgstr ""
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Skuggningskartering stöds inte av din hårdvara, kontrollera loggfiler för "
+"detaljer."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Ger mer exakt belysning, genom att beräkna för varje pixel i stället för "
+"varje vertex."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Krävs för bumpkartor och skuggor!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "Använd endast ett skuggflöde i stället för upp till fyra."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"Ger en uppsnabbning på bekostnad av skuggkvalitet, speciellt för större "
+"scener."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"Bestämmer hur skuggorna filtreras, med ökad kvalitet från topp till botten."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:252
 msgid "PCSS requires the quality set to LOW or HIGH."
@@ -17135,12 +17160,15 @@ msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Ungefärlig beräkning av halvskuggor (skarpare skuggor nära kontaktpunkter, "
+"suddiga skuggor längre bort)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Kräver <b>LÅG</b> eller <b>HÖG</b> skuggfiltrering (utan <b>Hårdvara</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:256
 msgid "Causes a performance hit."
@@ -17153,17 +17181,26 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Detta bestämmer på vilket sätt scenen renderas när Stellarium använder en "
+"annan projektion än &quot;Perspektiv&quot;. Scenen renderas alltid ovanpå en "
+"kub, och denna kub förvrids sedan enligt den verkliga projektionen. Kuben "
+"beskrivs som en bild, en &quot;kubkarta&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 texturer</b> använder 6 separata texturer, en för varje sida på kuben. "
+"Detta är den mest kompatibla metoden, men kan vara långsammare än de andra "
+"metoderna."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Kubkarta</b> använder en enda GL_TEXTURE_CUBEMAP. Rekommenderas för de "
+"flesta användare."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
 msgid ""
@@ -17171,10 +17208,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Geometrishader</b> använder moderna grafikprocessorer för att rendera "
+"alla 6 sidor på kuben samtidigt. Det kan vara den snabbaste metoden beroende "
+"på scen och vilken GPU-hårdvara du har. Detta kan inte kryssas i om det inte "
+"stöds av din hårdvara."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Beräknar separat skuggor för varje sida av kubkartan."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
@@ -17182,17 +17223,23 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Om detta inaktiveras kommer den skuggade ytan använda perspektivprojektion, "
+"vilket kan leda till avsaknad av skuggor vid breda synfält, men är i gengäld "
+"betydligt snabbare!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:265
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Detta fungerar inte när <b>Geometrishader</b> för kubkartering används!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"När detta är ikryssat kommer kubkartan bara återskapas inom specifika "
+"tidsintervall, i stället för varje bild."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid "Saves energy and may increase subjective application performance."
@@ -17201,7 +17248,7 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:269
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
-msgstr ""
+msgstr "Notera att kubkartan alltid återrenderas när positionen ändras."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
@@ -17219,37 +17266,41 @@ msgstr ""
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
+"Detta fungerar INTE med &quot;Geometrishader&quot; i kubkarteringsläge!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:275
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Detta uppdaterar en andra sida, så att de visuella framträdandet uppfattas "
+"som mindre &quot;brutet&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:284
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
+"Intervallet (i tidslinjesekunder) under vilket inga återritningar görs"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
-msgstr ""
+msgstr "6 texturer"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr ""
+msgstr "Kubkarta"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Geometrishader"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:164
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr ""
+msgstr "Rutnätskoordinater (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "3D-scener"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
@@ -17257,77 +17308,77 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Ladda/spara vypunkter"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Styrka på fackla:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Facklans räckvidd:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Fackelljus (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Visa rutnätskoordinater (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Visuella inställningar"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "Enskild pixelbelysning"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Skuggor"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Enkla skuggor"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Bumpkartering"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Storlek på kubkarta"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Storlek på skuggningskarta:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Filtreringskvalitet:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Hårdvara"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Låg"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Låg + Hårdvara"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Hög (långsam)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Hög + Hårdvara (långsam)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
@@ -17335,7 +17386,7 @@ msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr "Kubkarteläge:"
+msgstr "Kubkarteringsläge:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
@@ -17351,11 +17402,11 @@ msgstr "Intervall:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Uppdatera endast den dominanta sidan vid rörelse"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Uppdatera även den näst mest dominanta sidan"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
