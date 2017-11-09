@@ -957,7 +957,10 @@ void Exoplanets::translations()
 	N_("Pulsar");
 	// TRANSLATORS: Detection method
 	N_("Other");
-
+	// TRANSLATORS: Detection method
+	N_("Astrometry");
+	// TRANSLATORS: Detection method
+	N_("TTV");
 
 	/* For copy/paste:
 	// TRANSLATORS:
