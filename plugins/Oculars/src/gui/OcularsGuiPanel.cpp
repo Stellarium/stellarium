@@ -139,6 +139,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldDawesCriterion = new QGraphicsTextItem(telescopeControls);
 	fieldAbbeyCriterion = new QGraphicsTextItem(telescopeControls);
 	fieldSparrowCriterion = new QGraphicsTextItem(telescopeControls);
+	fieldVisualResolution = new QGraphicsTextItem(telescopeControls);
 
 	fieldLensName = new QGraphicsTextItem(lensControls);
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
@@ -170,6 +171,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldDawesCriterion->setTextWidth(maxWidth);
 	fieldAbbeyCriterion->setTextWidth(maxWidth);
 	fieldSparrowCriterion->setTextWidth(maxWidth);
+	fieldVisualResolution->setTextWidth(maxWidth);
 
 	fieldLensName->setTextWidth(maxWidth);
 	fieldLensMultipler->setTextWidth(maxWidth);
@@ -812,6 +814,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 	Lens *lens = ocularsPlugin->selectedLens();
 
+	double mag = 0.0;
+
 	if (ocularsPlugin->flagShowCCD)
 	{
 		int index = ocularsPlugin->selectedCCDIndex;
@@ -866,7 +870,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 			fieldExitPupil->setToolTip(q_("Exit pupil provided by this ocular/lens/telescope combination"));
 		}
 
-		double mag = ocular->magnification(telescope, lens);
+		mag = ocular->magnification(telescope, lens);
 		QString magnificationString = QString::number(mag, 'f', 1);
 		magnificationString.append(QChar(0x02E3)); // Was 0x00D7
 		magnificationString.append(QString(" (%1D)").arg(QString::number(mag/telescope->diameter(), 'f', 2)));
@@ -957,6 +961,25 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldAbbeyCriterion->setVisible(false);
 		fieldSparrowCriterion->setVisible(false);
 	}
+
+	// Visual resolution
+	if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriterions() && diameter>0.0)
+	{
+		float rayleigh = 138/diameter;
+		float vres = 60/mag;
+		if (vres<rayleigh)
+			vres = rayleigh;
+		QString visualResolutionLabel = QString("%1: %2\"").arg(q_("Visual resolution")).arg(QString::number(vres, 'f', 2));
+		fieldVisualResolution->setPlainText(visualResolutionLabel);
+		fieldVisualResolution->setToolTip(q_("Visual resolution is based on eye properties and magnification"));
+		fieldVisualResolution->setPos(posX, posY);
+		posY += fieldVisualResolution->boundingRect().height();
+		widgetHeight += fieldVisualResolution->boundingRect().height();
+
+		fieldVisualResolution->setVisible(true);
+	}
+	else
+		fieldVisualResolution->setVisible(false);
 
 	telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
 	telescopeControls->resize(widgetWidth, widgetHeight);
@@ -1114,8 +1137,9 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldDawesCriterion);
 	Q_ASSERT(fieldAbbeyCriterion);
 	Q_ASSERT(fieldSparrowCriterion);
+	Q_ASSERT(fieldVisualResolution);
 	Q_ASSERT(fieldLensName);
-	Q_ASSERT(fieldLensMultipler);
+	Q_ASSERT(fieldLensMultipler);	
 
 	fieldOcularName->setDefaultTextColor(color);
 	fieldOcularFl->setDefaultTextColor(color);
@@ -1133,6 +1157,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldDawesCriterion->setDefaultTextColor(color);
 	fieldAbbeyCriterion->setDefaultTextColor(color);
 	fieldSparrowCriterion->setDefaultTextColor(color);
+	fieldVisualResolution->setDefaultTextColor(color);
 	fieldLensName->setDefaultTextColor(color);
 	fieldLensMultipler->setDefaultTextColor(color);
 }
@@ -1155,6 +1180,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldDawesCriterion);
 	Q_ASSERT(fieldAbbeyCriterion);
 	Q_ASSERT(fieldSparrowCriterion);
+	Q_ASSERT(fieldVisualResolution);
 	Q_ASSERT(fieldLensName);
 	Q_ASSERT(fieldLensMultipler);
 
@@ -1174,6 +1200,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldDawesCriterion->setFont(font);
 	fieldAbbeyCriterion->setFont(font);
 	fieldSparrowCriterion->setFont(font);
+	fieldVisualResolution->setFont(font);
 	fieldLensName->setFont(font);
 	fieldLensMultipler->setFont(font);
 }
