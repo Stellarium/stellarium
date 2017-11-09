@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-29 22:12+0700\n"
-"PO-Revision-Date: 2017-11-06 21:59+0000\n"
+"PO-Revision-Date: 2017-11-08 21:58+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-07 05:11+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
+"X-Launchpad-Export-Date: 2017-11-09 05:14+0000\n"
+"X-Generator: Launchpad (build 18498)\n"
 "Language: sv\n"
 "X-Language: sv\n"
 
@@ -11510,8 +11510,8 @@ msgstr "Nästa uppdatering: < 1 minut"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nästa uppdatering: %1 minut(er)"
+msgstr[1] "Nästa uppdatering: %1 minut(er)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:183
@@ -11522,8 +11522,8 @@ msgstr[1] ""
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nästa uppdatering: %1 timme"
+msgstr[1] "Nästa uppdatering: %1 timmar"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:218
@@ -13728,8 +13728,8 @@ msgstr "i Ryssland"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
 msgid_plural "Next update: %1 day(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nästa uppdatering: %1 dag(ar)"
+msgstr[1] "Nästa uppdatering: %1 dag(ar)"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:225
 msgid "Historical supernovae is updated"
@@ -14366,7 +14366,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:258
 msgid "Enable automatically on startup"
-msgstr ""
+msgstr "Aktivera automatiskt vid uppstart"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:259
 msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
@@ -15967,7 +15967,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:156
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "Slå på radiantetiketter"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:157
 #: plugins/Scenery3d/src/Scenery3d.cpp:325
@@ -16003,12 +16003,12 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:127
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr ""
+msgstr "Bekräftade"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:131
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
 msgid "Generic"
-msgstr ""
+msgstr "Allmänna"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "generic data"
@@ -16016,11 +16016,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:530
 msgid "confirmed data"
-msgstr ""
+msgstr "bekräftade data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:534
 msgid "inactive"
-msgstr ""
+msgstr "inaktiv"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "meteor shower"
@@ -16028,19 +16028,19 @@ msgstr "meteorregn"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Radiantdrift (per dag)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "Geocentrisk meteorhastighet"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
-msgstr ""
+msgstr "Populationsindex"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "Ursprung"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
@@ -16514,6 +16514,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"Detta insticksprogram låter dig simulera periodiska meteorregn, och visa "
+"markörer för varje aktiv och inaktiv radiant."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:231
 msgid ""
@@ -16522,6 +16524,10 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"Genom att enkelklicka på radiantmarkören kan du se alla detaljer om dess "
+"position och aktivitet. De flesta data som används i detta insticksprogram "
+"kommer från den officiella katalogen <a "
+"href=\"http://imo.net\">International Meteor Organization</a>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:238
 msgid ""
@@ -16557,7 +16563,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:271
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
-msgstr ""
+msgstr "Radiant"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:273
 msgid ""
@@ -16566,6 +16572,9 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Radianten eller den skenbara radianten till ett meteorregn är punkten på "
+"himlen från vilken (för planetens observatör) meteorer tycks uppkomma. "
+"Perseiderna t.ex. är meteorer som ser ut att härröra från Perseus stjärnbild."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:279
 msgid ""
@@ -16574,6 +16583,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"En observatör kan se meteorer var som helst på himlen, men "
+"rörelseriktningen, baklänges, kommer att peka mot radianten. En meteor som "
+"inte leder tillbaka till den kända radianten till givet meteorregn benämns "
+"som sporadisk och betraktas inte som del av just det meteorregnet."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:284
 msgid ""
@@ -16581,6 +16594,9 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Många meteorregn har en radiantpunkt som ändrar position under det intervall "
+"meteorregnet uppträder. T.ex. är driftar radianten till Delta Aurigiderna "
+"mer än en grad per natt."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:288
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -16597,7 +16613,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:296
 msgid "Population index"
-msgstr ""
+msgstr "Populationsindex"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:298
 msgid ""
@@ -16606,6 +16622,10 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"Populationsindexet anger hur stor spridningen av meteorer i meteorregnet är. "
+"Värden under 2,5 anger spridning där ljusa meteorer är mer högfrekventa än "
+"normalt, och värden över 3,0 betyder att andelen ljussvaga meteorer är "
+"större än vanligt."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:304
 msgid ""
@@ -16683,19 +16703,19 @@ msgstr "Visa knapp för av- och påslagning av insticksprogram"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "Visa knapp för öppna sökpanelen"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Vista radiantmarkör"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Visa radiantetiketter"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Visa endast aktiva radianter"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:437
 msgid "Label font size (pixels)"
@@ -16703,39 +16723,39 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
-msgstr ""
+msgstr "Ställ in färg på radianter"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Aktiv radiant - allmänna data"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Inaktiv radiant"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Inactive"
-msgstr ""
+msgstr "Inaktiva"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "Aktiv radiant - bekräftade data"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "Aktivera automatiska uppdateringar"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "Nästa uppdatering:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "Senaste uppdateringsförsök"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "Uppdatera"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
@@ -17255,6 +17275,8 @@ msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"När detta är ikryssat kommer bara den sida som motsvarar vyriktningen att "
+"uppdateras vid rörelse."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
