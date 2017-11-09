@@ -39,6 +39,7 @@ NomenclatureMgr::NomenclatureMgr()
 	setObjectName("NomenclatureMgr");
 	conf = StelApp::getInstance().getSettings();
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	ssystem = GETSTELMODULE(SolarSystem);
 }
 
 NomenclatureMgr::~NomenclatureMgr()
@@ -67,17 +68,25 @@ void NomenclatureMgr::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
+	connect(ssystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateNomenclatureData()));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed", "Alt+N");
+}
+
+void NomenclatureMgr::updateNomenclatureData()
+{
+	bool flag = getFlagLabels();
+	loadNomenclature();
+	updateI18n();
+	setFlagLabels(flag);
 }
 
 void NomenclatureMgr::loadNomenclature()
 {
 	qDebug() << "Loading nomenclature for Solar system bodies ...";
 
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	nomenclatureItems.clear();	
 
 	// regular expression to find the comments and empty lines

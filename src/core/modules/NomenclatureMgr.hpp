@@ -123,12 +123,16 @@ public slots:
 	//! Translate nomenclature names.
 	void updateI18n();
 
+	void updateNomenclatureData();
+
 signals:
 	void nomenclatureDisplayedChanged(bool b);
 	void localNomenclatureHidingChanged(bool b);
 	void nomenclatureColorChanged(const Vec3f & color) const;
 
 private:
+	SolarSystem* ssystem;
+
 	//! Load nomenclature for solar system bodies
 	void loadNomenclature();
 
