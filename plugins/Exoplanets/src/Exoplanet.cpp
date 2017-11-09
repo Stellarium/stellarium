@@ -134,6 +134,9 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 				PHEPCount++;			
 			p.EqTemp = exoplanetMap.value("EqTemp", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
+			p.detectionMethod = exoplanetMap.value("detectionMethod", "").toString();
+			p.conservative = exoplanetMap.value("conservative", false).toBool();
+
 			exoplanets.append(p);
 
 			if (p.eccentricity>0)
@@ -221,6 +224,8 @@ QVariantMap Exoplanet::getMap(void) const
 		if (!p.pclass.isEmpty()) explMap["pclass"] = p.pclass;		
 		if (p.EqTemp > 0) explMap["EqTemp"] = p.EqTemp;
 		if (p.ESI > 0) explMap["ESI"] = p.ESI;
+		if (!p.detectionMethod.isEmpty()) explMap["detectionMethod"] = p.detectionMethod;
+		if (p.conservative) explMap["conservative"] = p.conservative;
 		exoplanetList << explMap;
 	}
 	map["exoplanets"] = exoplanetList;
@@ -348,11 +353,13 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));
 			QString angleDistanceLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (\")</td>").arg(q_("Angle Distance"));
 			QString discoveredLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Discovered year"));
-			QString pClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Planetary class"));			
+			QString detectionMethodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Detection method"));
+			QString pClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Planetary class"));
 			//TRANSLATORS: Full phrase is "Equilibrium Temperature"
 			QString equilibriumTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2C)</td>").arg(q_("Equilibrium temp.")).arg(QChar(0x00B0));
 			//TRANSLATORS: ESI = Earth Similarity Index
 			QString ESILabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("ESI"));
+			QString conservativeLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Conservative sample"));
 			foreach(const exoplanetData &p, exoplanets)
 			{
 				if (!p.planetName.isEmpty())
@@ -454,10 +461,23 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				if (p.ESI > 0)
 				{
 					ESILabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.ESI * 0.01, 'f', 2)).append("</td>");
+					if (p.conservative)
+						conservativeLabel.append("<td style=\"padding:0 2px;\">").append(q_("yes")).append("</td>");
+					else
+						conservativeLabel.append("<td style=\"padding:0 2px;\">").append(q_("no")).append("</td>");
 				}
 				else
 				{
 					ESILabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+					conservativeLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.detectionMethod.isEmpty())
+				{
+					detectionMethodLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				else
+				{
+					detectionMethodLabel.append("<td style=\"padding:0 2px;\">").append(q_(p.detectionMethod)).append("</td>");
 				}
 			}
 			oss << "<table>";
@@ -471,13 +491,17 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			oss << "<tr>" << inclinationLabel << "</tr>";
 			oss << "<tr>" << angleDistanceLabel << "</tr>";
 			oss << "<tr>" << discoveredLabel << "</tr>";
+			oss << "<tr>" << detectionMethodLabel << "</tr>";
 			if (hasHabitableExoplanets)
 			{
 				oss << "<tr>" << pClassLabel << "</tr>";				
 				oss << "<tr>" << equilibriumTempLabel << "</tr>";
 				oss << "<tr>" << ESILabel << "</tr>";
+				oss << "<tr>" << conservativeLabel << "</tr>";
 			}
 			oss << "</table>";
+			if (hasHabitableExoplanets)
+				oss << QString("%1: -18.15%2C").arg(q_("Equilibrium temperature on Earth")).arg(QChar(0x00B0)) << "<br />";
 		}
 	}
 
