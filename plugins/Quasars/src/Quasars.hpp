@@ -141,7 +141,7 @@ public:
 
 	//! Set up the plugin with default values.  This means clearing out the Quasars section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
-	//! creates the default pulsars.json file from the resource embedded in the plugin lib/dll file.
+	//! creates the default quasars.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
@@ -203,10 +203,10 @@ public slots:
 	//! @return count of quasars
 	int getCountQuasars(void) {return QsrCount;}
 
-	//! Get status to display of distribution of pulsars
-	//! @return true if distribution of pulsars is enabled
+	//! Get status to display of distribution of quasars
+	//! @return true if distribution of quasars is enabled
 	bool getDisplayMode(void);
-	//! Enable/disable display of distribution of pulsars
+	//! Enable/disable display of distribution of quasars
 	//! @param b (set true for display quasars as markers)
 	void setDisplayMode(bool b);
 

@@ -945,6 +945,20 @@ void Exoplanets::translations()
 	// TRANSLATORS: Planet size
 	N_("Neptunian");
 
+	// TRANSLATORS: Detection method
+	N_("Primary Transit");
+	// TRANSLATORS: Detection method
+	N_("Microlensing");
+	// TRANSLATORS: Detection method
+	N_("Radial Velocity");
+	// TRANSLATORS: Detection method
+	N_("Imaging");
+	// TRANSLATORS: Detection method
+	N_("Pulsar");
+	// TRANSLATORS: Detection method
+	N_("Other");
+
+
 	/* For copy/paste:
 	// TRANSLATORS:
 	N_("");

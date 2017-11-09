@@ -128,7 +128,7 @@ public:
 	//! plugin.
 	virtual bool configureGui(bool show=true);
 
-	//! Set up the plugin with default values.  This means clearing out the Pulsars section in the
+	//! Set up the plugin with default values.  This means clearing out the Novae section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
 	//! creates the default novae.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);

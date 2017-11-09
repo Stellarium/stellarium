@@ -62,13 +62,13 @@ public:
 	{
 		return XYZ;
 	}
-	//! Get the visual magnitude of pulsar
+	//! Get the visual magnitude of custom object
 	virtual float getVMagnitude(const StelCore* core) const;	
-	//! Get the angular size of pulsar
+	//! Get the angular size of custom object
 	virtual double getAngularSize(const StelCore* core) const;
-	//! Get the localized name of pulsar
+	//! Get the localized name of custom object
 	virtual QString getNameI18n(void) const;
-	//! Get the english name of pulsar
+	//! Get the english name of custom object
 	virtual QString getEnglishName(void) const
 	{
 		return designation;
