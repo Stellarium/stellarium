@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>505</height>
+    <width>544</width>
+    <height>538</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -294,6 +294,42 @@
              <string>Show exoplanets button on toolbar</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Exoplanets marker color</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="exoplanetMarkerColor">
+              <property name="toolTip">
+               <string>Exoplanets marker color</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Marker color for potential habitable exoplanets</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="habitableExoplanetMarkerColor">
+              <property name="toolTip">
+               <string>Marker color for potential habitable exoplanets</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
