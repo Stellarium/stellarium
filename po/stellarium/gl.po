@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-29 22:12+0700\n"
+"POT-Creation-Date: 2017-11-11 00:57+0700\n"
 "PO-Revision-Date: 2017-10-16 20:54+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-10-30 05:19+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
+"X-Launchpad-Export-Date: 2017-11-11 04:50+0000\n"
+"X-Generator: Launchpad (build 18505)\n"
 "Language: gl\n"
 "X-Language: gl\n"
 
@@ -40,7 +40,7 @@ msgstr "marcador pesonalizado"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:159
-#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:293
+#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:298
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "Tipo"
@@ -56,7 +56,7 @@ msgstr "asterismo"
 #: src/core/modules/AsterismMgr.cpp:98
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:451
 #: src/core/modules/GridLinesMgr.cpp:1230 src/core/modules/LandscapeMgr.cpp:422
-#: src/core/modules/NomenclatureMgr.cpp:72 src/core/modules/NebulaMgr.cpp:407
+#: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:407
 #: src/core/modules/NebulaMgr.cpp:408 src/core/modules/SolarSystem.cpp:236
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
@@ -399,7 +399,7 @@ msgstr "Datos de polución lumínica dende a base de datos local"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:148
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/FOV/src/gui/FOVWindow.cpp:84
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
@@ -1111,12 +1111,12 @@ msgstr ""
 msgid "Linear size"
 msgstr "Tamaño lineal"
 
-#: src/core/modules/NomenclatureItem.cpp:787
+#: src/core/modules/NomenclatureItem.cpp:788
 msgid "Diameter"
 msgstr "Diámetro"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:788 src/core/modules/Planet.cpp:455
+#: src/core/modules/NomenclatureItem.cpp:789 src/core/modules/Planet.cpp:455
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/Comet.cpp:193
 #: src/gui/StelGuiItems.cpp:748 plugins/Satellites/src/Satellite.cpp:304
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -1125,19 +1125,19 @@ msgctxt "distance"
 msgid "km"
 msgstr "km"
 
-#: src/core/modules/NomenclatureItem.cpp:793
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Planetographic long./lat."
 msgstr "Lonx./lat planetográficas."
 
-#: src/core/modules/NomenclatureItem.cpp:794
+#: src/core/modules/NomenclatureItem.cpp:795
 msgid "Celestial body"
 msgstr "Corpo celestial"
 
-#: src/core/modules/NomenclatureItem.cpp:797
+#: src/core/modules/NomenclatureItem.cpp:798
 msgid "Landform description"
 msgstr "Descrición do terreo"
 
-#: src/core/modules/NomenclatureMgr.cpp:73
+#: src/core/modules/NomenclatureMgr.cpp:75
 msgid "Nomenclature labels"
 msgstr "Etiquetas de nomenclatura"
 
@@ -1147,7 +1147,7 @@ msgstr "Etiquetas de nomenclatura"
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:1968
 #: src/gui/AstroCalcDialog.cpp:2003 plugins/Supernovae/src/Supernova.cpp:140
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
-#: plugins/Exoplanets/src/Exoplanet.cpp:304
+#: plugins/Exoplanets/src/Exoplanet.cpp:309
 msgid "Magnitude"
 msgstr "Magnitude"
 
@@ -1160,7 +1160,7 @@ msgstr "Opacidade"
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:288
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:302
+#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:307
 msgid "extincted to"
 msgstr "extinguido a"
 
@@ -1218,7 +1218,7 @@ msgstr "Ángulo de orientación"
 #: src/core/modules/Nebula.cpp:317 src/core/modules/Nebula.cpp:330
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:317
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:322
 msgctxt "distance"
 msgid "ly"
 msgstr "anos luz"
@@ -1228,7 +1228,7 @@ msgstr "anos luz"
 #: src/core/modules/Comet.cpp:231 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:1979 src/gui/AstroCalcDialog.cpp:2014
 #: src/ui_configurationDialog.h:1363 plugins/Supernovae/src/Supernova.cpp:155
-#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:318
+#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Distance"
 msgstr "Distancia"
 
@@ -1714,7 +1714,7 @@ msgstr "Magnitude de Oposición Media"
 #: src/gui/AstroCalcDialog.cpp:600 src/gui/AstroCalcDialog.cpp:659
 #: src/gui/AstroCalcDialog.cpp:713 src/gui/AstroCalcDialog.cpp:774
 #: src/gui/AstroCalcDialog.cpp:1044 src/gui/AstroCalcDialog.cpp:1080
-#: src/gui/AstroCalcDialog.cpp:1947 plugins/Exoplanets/src/Exoplanet.cpp:346
+#: src/gui/AstroCalcDialog.cpp:1947 plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "UA"
@@ -1947,12 +1947,12 @@ msgid "Magnitude range"
 msgstr "Rango de magnitude"
 
 #: src/core/modules/StarWrapper.cpp:252
-#: plugins/Exoplanets/src/Exoplanet.cpp:312
+#: plugins/Exoplanets/src/Exoplanet.cpp:317
 msgid "Spectral Type"
 msgstr "Tipo espectral"
 
 #: src/core/modules/StarWrapper.cpp:258
-#: plugins/Exoplanets/src/Exoplanet.cpp:343
+#: plugins/Exoplanets/src/Exoplanet.cpp:348
 msgid "Period"
 msgstr "Periodo"
 
@@ -2969,7 +2969,7 @@ msgstr "Contacto"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:146
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/FOV/src/gui/FOVWindow.cpp:82
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:84
@@ -2992,7 +2992,7 @@ msgstr "Versión"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/FOV/src/gui/FOVWindow.cpp:83
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
@@ -4121,7 +4121,7 @@ msgstr "Aceleración secular da Lúa"
 #: src/gui/AstroCalcDialog.cpp:285 src/ui_configurationDialog.h:1369
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
-#: plugins/Exoplanets/src/Exoplanet.cpp:342
+#: plugins/Exoplanets/src/Exoplanet.cpp:347
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:191
 msgid "Name"
 msgstr "Nome"
@@ -5818,8 +5818,8 @@ msgid "Zero Horizon"
 msgstr "Horizonte Cero"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:329
-#: plugins/Exoplanets/src/Exoplanet.cpp:333
+#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: plugins/Exoplanets/src/Exoplanet.cpp:338
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "Sol"
@@ -8027,7 +8027,8 @@ msgstr "Tipo de filtro"
 msgid "Hydrogen regions"
 msgstr "Rexións de Hidróxeno"
 
-#: src/ui_viewDialog.h:2631
+#. TRANSLATORS: Detection method
+#: src/ui_viewDialog.h:2631 plugins/Exoplanets/src/Exoplanets.cpp:959
 msgid "Other"
 msgstr "Outros"
 
@@ -10031,7 +10032,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
 #: plugins/FOV/src/gui/FOVWindow.cpp:89
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
@@ -10052,7 +10053,7 @@ msgstr "Ligazóns"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
 #: plugins/FOV/src/gui/FOVWindow.cpp:90
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -10078,7 +10079,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 #: plugins/FOV/src/gui/FOVWindow.cpp:93
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
@@ -10101,7 +10102,7 @@ msgstr "Se tes unha pregunta podes %1 obter resposta aquí %2"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 #: plugins/FOV/src/gui/FOVWindow.cpp:95
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
@@ -10124,7 +10125,7 @@ msgstr "O infome de erros pódese crear  %1aquí%2."
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 #: plugins/FOV/src/gui/FOVWindow.cpp:97
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:99
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
@@ -10202,7 +10203,7 @@ msgstr "Usar formato dms para os ángulos"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:250
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:491
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:536
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:575
@@ -10221,7 +10222,7 @@ msgstr "Restablecer configuración por defecto"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:261
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:514
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:373
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
@@ -10246,7 +10247,7 @@ msgid "Compass marks"
 msgstr "Marcas de compás"
 
 #: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1469
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
 #: plugins/Oculars/src/ui_ocularDialog.h:1137
 msgid "Oculars"
 msgstr "Oculares"
@@ -10362,43 +10363,43 @@ msgstr "RA/Dec (J2000.0) da cruz"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:1688
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "\"/px"
 msgstr "\"/px"
 
 #: plugins/Oculars/src/Oculars.cpp:1877
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:523
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
 msgid "Ocular"
 msgstr "Ocular"
 
 #: plugins/Oculars/src/Oculars.cpp:1879
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:525
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:527
 msgid "Binocular"
 msgstr "Binóculos"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1899
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:570
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Ocular FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1906
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:577
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:579
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV do ocular: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1917
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:609
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lentes #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1921
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:613
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lentes #%1: %2"
@@ -10408,50 +10409,50 @@ msgid "Lens: none"
 msgstr "Lentes: non"
 
 #: plugins/Oculars/src/Oculars.cpp:1941 plugins/Oculars/src/Oculars.cpp:2001
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:783
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescopio #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1950
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:873
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Aumento: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1957
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:888
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Pupila de saída: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:1964
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:892
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:896
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1985
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:823
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensións: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1989
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:674
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:676
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1993
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:678
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:680
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2006
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:785
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:787
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescopio #%1: %2"
@@ -10480,195 +10481,203 @@ msgstr "Telescopio &Anterior"
 msgid "&Next telescope"
 msgstr "Telescopio &Seguinte"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:211
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
 msgid "Previous ocular"
 msgstr "&Anterior Ocular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:217
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
 msgid "Next ocular"
 msgstr "&Seguinte Ocular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:223
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:225
 msgid "Previous lens"
 msgstr "Lentes previas"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:229
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:231
 msgid "Next lens"
 msgstr "Lentes seguintes"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:235
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:237
 msgid "Previous CCD frame"
 msgstr "Cadro anterior do CCD"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:241
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:243
 msgid "Next CCD frame"
 msgstr "Cadro seguinte do CCD"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:247
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:249
 msgid "Previous telescope"
 msgstr "Telescopio anterior"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:253
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:255
 msgid "Next telescope"
 msgstr "Telescopio seguinte"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:325
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:327
 msgid "Reset the sensor frame rotation"
 msgstr "Reiniciar a rotación do cadro do sensor"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:286
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:288
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Rotar o cadro do sensor 15 graos en sentido antihorario"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:301
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Rotar o cadro do sensor 5 graos en sentido antihorario"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:312
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:314
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Rotar o cadro do sensor 1 grao en sentido antihorario"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:364
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:366
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Rotar o cadro do sensor 15 graos en sentido horario"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:351
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:353
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Rotar o cadro do sensor 5 graos en sentido horario"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:338
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:340
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Rotar o cadro do sensor 1 grao en sentido horario"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:570
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:572
 msgid "Effective focal length of the ocular"
 msgstr "Lonxitude focal efectiva do ocular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
 msgid "Apparent field of view of the ocular"
 msgstr "Campo de visión aparente do ocular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:613
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:615
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Multiplicidade: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:618
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:620
 msgid "Lens: None"
 msgstr "Lentes: non"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:619
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:621
 msgid "Multiplicity: N/A"
 msgstr "Multiplicidade: N/A"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:623
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:625
 msgid "Focal length of eyepiece"
 msgstr "Distancia focal do ocular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:825
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:718
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:829
 msgid "Dimensions field of view"
 msgstr "Dimensións do campo de visión"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:722
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:829
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:724
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 msgid "X scale"
 msgstr "Escala X"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:725
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Horizontal scale"
 msgstr "Escala Horizontal"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:727
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:729
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:835
 msgid "Y scale"
 msgstr "Escala Y"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:728
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:730
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:836
 msgid "Vertical scale"
 msgstr "Escala vertical"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:734
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:736
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Rotación: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:854
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:858
 msgid "Magnification provided by these binoculars"
 msgstr "Aumentos proporcionados por estes binoculares"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:855
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:859
 msgid "Actual field of view provided by these binoculars"
 msgstr "Campo de visión actual proporcionado por estes binoculares"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 msgid "Exit pupil provided by these binoculars"
 msgstr "Pupila de saída fornecida por estes binoculares"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:868
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Aumentos fornecidos por esta combinación de ocular/lente/telecopio"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:865
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:869
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "Campo de visión actual fornecido por esta combinación de "
 "ocular/lente/telescopio"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:866
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:870
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 "Pupila de saída fornecida por esta combinación de ocular/lente/telescopio"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:919
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:923
 msgid "Rayleigh criterion"
 msgstr "Criterio de Rayleigh"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
 msgid "The Rayleigh resolution criterion"
 msgstr "Criterio de resolución de Rayleigh"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:930
 msgid "Dawes' limit"
 msgstr "Límite de Dawes"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:932
 msgid "Dawes' resolution criterion"
 msgstr "Criterio de resolución de Dawes"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:937
 msgid "Abbe's limit"
 msgstr "Límite de Abbe"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:935
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:939
 msgid "Abbe’s diffraction resolution limit"
 msgstr "Límite de resolución da difracción de Abbe"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:940
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:944
 msgid "Sparrow's limit"
 msgstr "Límite de Sparrow"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
 msgid "Sparrow's resolution limit"
 msgstr "Límite de resolución de Sparrow"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:972
+msgid "Visual resolution"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
+msgid "Visual resolution is based on eye properties and magnification"
+msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
@@ -11489,7 +11498,7 @@ msgstr "Ver %1este documento%2 para máis detalles."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "Internet updates disabled"
 msgstr "Desactivada a actualización por Internet"
 
@@ -11503,8 +11512,8 @@ msgstr "Desactivada a actualización por Internet"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:376
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
 msgid "Updating now..."
 msgstr "Actualizando arestora..."
 
@@ -11513,7 +11522,7 @@ msgstr "Actualizando arestora..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
 msgid "Next update: < 1 minute"
 msgstr "Próxima actualización: < 1 minuto"
 
@@ -11522,7 +11531,7 @@ msgstr "Próxima actualización: < 1 minuto"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:314
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
@@ -11534,7 +11543,7 @@ msgstr[1] ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:176
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:313
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
@@ -11546,7 +11555,7 @@ msgstr[1] ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:226
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:255
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:379
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:385
 msgid "Update error"
 msgstr "Erro na actualización"
 
@@ -11574,8 +11583,8 @@ msgstr "[nova fonte]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:365
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:474
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:371
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:511
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "Actualizar agora"
@@ -11585,7 +11594,7 @@ msgstr "Actualizar agora"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:199
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:196
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:367
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
 msgid "Update from files"
 msgstr "Actualizar dende arquivos"
 
@@ -11689,7 +11698,7 @@ msgstr "Actualizar datos de satélites dende fontes da Internet"
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:471
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:508
 msgid "Last update:"
 msgstr "Última actualización:"
 
@@ -11708,7 +11717,7 @@ msgstr ""
 "de actualización"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:752
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:472
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:509
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "Frecuencia de actualización (horas):"
@@ -11759,7 +11768,7 @@ msgstr "Modo realista de satélites artificiais"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:251
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:492
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:537
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
 msgstr "Gardar como configuración por defecto"
@@ -11769,7 +11778,7 @@ msgstr "Gardar como configuración por defecto"
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:493
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:538
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Settings"
 msgstr "Configuración"
@@ -13983,7 +13992,7 @@ msgstr "Catálogo actualizado dende internet"
 #: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:470
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:507
 msgid "Update from Internet sources"
 msgstr "Actualizar dende fontes de Internet"
 
@@ -13998,7 +14007,7 @@ msgstr "Frecuencia de actualización (días):"
 #: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:473
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:510
 msgid "[next update info]"
 msgstr "[información sobre a seguinte actualización]"
 
@@ -14245,7 +14254,7 @@ msgstr "Activar a visualización da distribución de quásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:489
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:526
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
 msgid "Enable display at startup"
 msgstr "Activar ao inicio"
@@ -14344,7 +14353,7 @@ msgctxt "period"
 msgid "days"
 msgstr "días"
 
-#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:347
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:352
 msgid "Eccentricity"
 msgstr "Excentricidade"
 
@@ -14385,7 +14394,7 @@ msgid "mJy"
 msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 msgid "Notes"
 msgstr "Anotacións"
@@ -14887,81 +14896,136 @@ msgstr "Coma Xúpiter"
 msgid "Neptunian"
 msgstr "Coma Neptuno"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:293
+#. TRANSLATORS: Detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:949
+msgid "Primary Transit"
+msgstr ""
+
+#. TRANSLATORS: Detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:951
+msgid "Microlensing"
+msgstr ""
+
+#. TRANSLATORS: Detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:953
+msgid "Radial Velocity"
+msgstr ""
+
+#. TRANSLATORS: Detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:955
+msgid "Imaging"
+msgstr ""
+
+#. TRANSLATORS: Detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:957
+msgid "Pulsar"
+msgstr ""
+
+#. TRANSLATORS: Detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:961
+msgid "Astrometry"
+msgstr ""
+
+#. TRANSLATORS: Detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:963
+msgid "TTV"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:298
 msgid "planetary system"
 msgstr "sistema planetario"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:325
+#: plugins/Exoplanets/src/Exoplanet.cpp:330
 msgid "Metallicity"
 msgstr "Metalicidade"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:329
-#: plugins/Exoplanets/src/Exoplanet.cpp:344
+#: plugins/Exoplanets/src/Exoplanet.cpp:334
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Mass"
 msgstr "Masa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:333
-#: plugins/Exoplanets/src/Exoplanet.cpp:345
+#: plugins/Exoplanets/src/Exoplanet.cpp:338
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
 msgid "Radius"
 msgstr "Radio"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:337
+#: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgid "Effective temperature"
 msgstr "Temperatura efectiva"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:337
+#: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgctxt "temperature"
 msgid "K"
 msgstr "K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:341
+#: plugins/Exoplanets/src/Exoplanet.cpp:346
 msgid "Exoplanet"
 msgstr "Exoplaneta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:343
+#: plugins/Exoplanets/src/Exoplanet.cpp:348
 msgid "days"
 msgstr "días"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:344
-#: plugins/Exoplanets/src/Exoplanet.cpp:345
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:346
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Semi-Major Axis"
 msgstr "Eixe Semi-Maior"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Inclination"
 msgstr "Inclinación"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Angle Distance"
 msgstr "Distancia angular"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Discovered year"
 msgstr "Ano de descuberta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:356
+msgid "Detection method"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:357
 msgid "Planetary class"
 msgstr "Tipo de planeta"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:359
 msgid "Equilibrium temp."
 msgstr "Equilibrio temp."
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Exoplanets/src/Exoplanet.cpp:361
 msgid "ESI"
 msgstr "ESI"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
+#: plugins/Exoplanets/src/Exoplanet.cpp:362
+msgid "Conservative sample"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:465
+msgid "yes"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:467
+msgid "no"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:504
+msgid "Equilibrium temperature on Earth"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "Exoplanets Plug-in"
 msgstr "Plugin de exoplanetas"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -14970,7 +15034,7 @@ msgstr ""
 "Este plugin indica a posición das estrelas con exoplanetas. Os datos de "
 "exoplanetas foron tirados da \"%1The Extrasolar Planets Encyclopaedia%2\""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -14981,7 +15045,7 @@ msgstr ""
 "tirados de \"%1The Habitable Exoplanets Catalog%3\" de %2Planetary "
 "Habitability Laboratory%3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -14993,7 +15057,7 @@ msgstr ""
 "potencialmente habitables)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
 #, qt-format
 msgid ""
@@ -15003,11 +15067,11 @@ msgstr ""
 "Se queres ver a información completa sobre o plugin, a súa historia e o "
 "catálogo, podes vela  %1aquí%2."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "Potential habitable exoplanets"
 msgstr "Exoplanetas potencialmente habitables"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
@@ -15015,11 +15079,11 @@ msgstr ""
 "Este engadido pode mostrar exoplanetas potencialmente habitables (marcados "
 "en cor laranxa) e algunha información sobre eses planetas."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Planetary Class"
 msgstr "Tipo de planeta"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
@@ -15030,11 +15094,11 @@ msgstr ""
 "cá Terra, menor cá Terra, coma a Terra, maior cá Terra, coma Xúpiter, coma "
 "Neptuno) (Terra = G-morno -coma a Terra)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "Equilibrium Temperature"
 msgstr "Equilibrio de temperatura"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -15046,11 +15110,11 @@ msgstr ""
 "quecido pola súa estrela nai (asumindo un albedo de 0,3). Como exemplo, a "
 "temperatura de equilibrio planetario da Terra é -18,15 ° C (255 K)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "Earth Similarity Index (ESI)"
 msgstr "Índice de Semellanza Terrestre (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -15060,11 +15124,11 @@ msgstr ""
 "Terra. ESI depende do radio do planeta, a densidade, a velocidade de escape "
 "e a temperatura da superficie."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "Proper names"
 msgstr "Nomes propios"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
@@ -15072,7 +15136,7 @@ msgstr ""
 "En decembro de 2015, a Unión Internacional Astronómica (IAU) aprobou "
 "oficialmente os nomes dalgúns explanetas despois dun voto público."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
@@ -15080,7 +15144,7 @@ msgstr ""
 "Do latín <em>Veritas</em>, verdade. O ablativo expresa <em>cando hai "
 "verdade</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
@@ -15088,11 +15152,11 @@ msgstr ""
 "Do latín <em>Spes</em>, esperanza. O ablativo indica <em>cando hai "
 "esperanza</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "Musica is Latin for <em>music</em>."
 msgstr "Musica é a forma latina de <em>música</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
@@ -15102,11 +15166,11 @@ msgstr ""
 "súa vida foi salvada no mar por golfiños despois de atraer a atención deles "
 "tocando a súa cítara."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr "Fafnir era un anano mitolóxico nórdico que se converteu nun dragón."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
@@ -15114,12 +15178,12 @@ msgstr ""
 "\"Orbitar\" é unha palabra que se usa en homenaxe ós lanzamentos espaciais e "
 "ás operacións orbitais da NASA."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
 "Chalawan é un rei crocodilo mitolóxico tomado dun conto popular Tailandés."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
@@ -15127,7 +15191,7 @@ msgstr ""
 "Taphao Thong é unha das dúas irmás que aparece nun conto popular Tailandés "
 "de Chalawan."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
@@ -15135,7 +15199,7 @@ msgstr ""
 "Taphao Kae é unha das dúas irmás que aparece nun conto popular Tailandés de "
 "Chalawan."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
@@ -15143,7 +15207,7 @@ msgstr ""
 "Helvetios é o termo celta para <em> o helvetio </ em> e refírese á tribo "
 "celta que viviu en Suíza na antigüidade."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
@@ -15151,7 +15215,7 @@ msgstr ""
 "Dimidium significa en latín <em> metade </ em>, referíndose á masa do "
 "planeta de polo menos a metade da masa de Xúpiter."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
@@ -15161,7 +15225,7 @@ msgstr ""
 "que propuxo o modelo heliocéntrico do Sistema Solar no seu libro <em> De "
 "Revolutionibus Orbium Coelestium </ em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -15175,7 +15239,7 @@ msgstr ""
 "satélites de Xúpiter, e informou as primeiras observacións telescópicas das "
 "fases de Venus, entre outros descubrimentos."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -15187,7 +15251,7 @@ msgstr ""
 "observacións foron fundamentais para a formulación de Kepler das súas tres "
 "leis do movemento planetario."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope "
@@ -15196,7 +15260,7 @@ msgstr ""
 "Hans Lippershey (1570-1619) foi un xermano-holandés creador de lentes a quen "
 "a miúdo se lle atribúe a invención do telescopio refractor en 1608."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
@@ -15206,7 +15270,7 @@ msgstr ""
 "míúdo se lle atribúe a invención do microscopio e, de xeito máis "
 "controvertido, tamén a invención do telescopio."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
@@ -15216,7 +15280,7 @@ msgstr ""
 "etnógrafo e tradutor, a quen se lle atribúe o primeiro debuxo da Lúa a "
 "través de observacións telescópicas."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of "
@@ -15226,7 +15290,7 @@ msgstr ""
 "consagrados a  Amaterasu, a deusa Shinto do Sol, nacida do ollo esquerdo do "
 "deus Izanagi."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
@@ -15236,7 +15300,7 @@ msgstr ""
 "escola neoplatónica de Alexandría no inicio do século V, ata ser asasinada "
 "por unha multitude cristiá no 415."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
@@ -15244,7 +15308,7 @@ msgstr ""
 "Ran é a deusa nórdica do mar, que axita as ondas e captura mariñeiros coa "
 "súa rede."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and "
 "<em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
@@ -15254,7 +15318,7 @@ msgstr ""
 "<em> Ran </ em> representan ambos os <em> Jotuns <em /> que reinan no "
 "universo exterior; tiveron nove fillas."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
@@ -15262,20 +15326,20 @@ msgstr ""
 "Antigo nome semita e actual nome árabe da cidade de Palmira, Patrimonio "
 "Mundial da UNESCO."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 "Dagon era unha divindade semita, representada como medio-home, medio-peixe."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "Tonatiuh era o deus azteca do Sol."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "Meztli era a deusa azteca da Lúa."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
@@ -15285,11 +15349,11 @@ msgstr ""
 "aparece nas mitoloxías celtas de Irlanda e de Escocia, e pode estar "
 "relacionada coa divindade galo-romana <em>Ogmios</ em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Smertrios was a Gallic deity of war."
 msgstr "Smertrios era unha divindade gaélica da guerra."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
@@ -15297,11 +15361,11 @@ msgstr ""
 "Intercrus significa <em>entre as pernas</ em> en latín, referíndose á "
 "posición da estrela na constelación de Osa Maior."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr "Arkas era o fillo de Calisto (Osa Maior) na mitoloxía grega."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15309,7 +15373,7 @@ msgstr ""
 "Miguel de Cervantes Saavedra (1547-1616) foi un famoso escritor español "
 "autor de <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15317,7 +15381,7 @@ msgstr ""
 "Personaxe de ficción de Cervante en <em>El Ingenioso Hidalgo Don Quixote de "
 "la Mancha</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15327,7 +15391,7 @@ msgstr ""
 "Personaxe de ficción interesado amorosamente en Don Quixote <em>El Ingenioso "
 "Hidalgo Don Quixote de la Mancha</ em> de Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15335,7 +15399,7 @@ msgstr ""
 "Cabalo de ficción de Don Quixote en <em>El Ingenioso Hidalgo Don Quixote de "
 "la Mancha</em> de Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15343,7 +15407,7 @@ msgstr ""
 "Escudeiro ficticio de Don Quixote en  <em>El Ingenioso Hidalgo Don Quixote "
 "de la Mancha</em> de Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -15353,7 +15417,7 @@ msgstr ""
 "Leda era unha raíña grega, nai de Pollux e do seu irmán xemelgo Castor, e "
 "tamén de Helena e Clitemnestra."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
@@ -15361,11 +15425,11 @@ msgstr ""
 "Lich é unha criatura ficticia non-morta coñecida por controlar outras "
 "criaturas mortos mediante maxia."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "Draugr refírese a criaturas non-mortas na mitoloxía nórdica."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
@@ -15373,7 +15437,7 @@ msgstr ""
 "Poltergeist é un nome para entidades sobrenaturais que crean perturbacións "
 "físicas, do alemán <em>pantasma barulleira</ em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
@@ -15381,7 +15445,7 @@ msgstr ""
 "Phobetor é unha divindade da mitoloxía grega dos pesadelos, fillo de Nyx, a "
 "divindade primordial da noite."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -15393,7 +15457,7 @@ msgstr ""
 "punto de contacto entre dúas civilizacións (española e árabe) e dous "
 "continentes (Europa e África), despois do século oitavo."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-"
 "al-Saffar, who taught arithmetic, geometry, and astronomy in 11th century "
@@ -15405,7 +15469,7 @@ msgstr ""
 "Córdoba, Andalucía (na actual España), e escribiu un influente tratado sobre "
 "o uso do astrolabio."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or "
 "<em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in "
@@ -15415,7 +15479,7 @@ msgstr ""
 "<em>Ibn al-Samh</ em>), un astrónomo e matemático do século XI na escola de "
 "al Majriti en Córdoba (Andalucía, agora España)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -15425,7 +15489,7 @@ msgstr ""
 "astrónomo, erudito e profesor no século X e principios do XI  en Andalucía "
 "(España na actualidade)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty "
@@ -15437,7 +15501,7 @@ msgstr ""
 "liberdade no mundo ata hoxe. A constelación de Aquila representa unha aguia -"
 " un símbolo popular da liberdade."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
@@ -15447,7 +15511,7 @@ msgstr ""
 "emocional e mental fronte á adversidade, como consagrado pola aguia "
 "(representada pola constelación de Aquila)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
@@ -15455,7 +15519,7 @@ msgstr ""
 "Estes nomes modifícanse en base ás propostas orixinais, para ser coherentes "
 "coas normas da IAU."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
@@ -15463,7 +15527,7 @@ msgstr ""
 "O nome orixinal proposto, <em>Veritas</ em>, é o dun asteroide importante "
 "para o estudo do sistema solar."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
@@ -15471,7 +15535,7 @@ msgstr ""
 "O nome proposto orixinalmente, <em>Amaterasu</em>, xa se usa para un "
 "asteroide."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>, "
 "the Norwegian transliteration. The same name, with the spelling "
@@ -15482,11 +15546,11 @@ msgstr ""
 "transliteración noruegués. O mesmo nome, coa ortografía <em>Aegir</ em>, foi "
 "dado a un dos satélites de Saturno, descuberto en 2004."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr "<em>Ogmios</em> é un nome xa atribuído a un asteroide."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
@@ -15496,7 +15560,7 @@ msgstr ""
 "un dos satélites de Xúpiter. O nome <em>Althaea</ em> foi tamén dado a un "
 "asteroide."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -15508,213 +15572,213 @@ msgstr ""
 "<em>Lippershey</ em> (cun <em>s</ em>) resulta dun erro tipográfico que data "
 "de 1831, polo que debe ser evitada."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid "Additional info"
 msgstr "Información adicional"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid "Circumstellar habitable zone"
 msgstr "Zona habitable arredor da estrela"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid "Planetary equilibrium temperature"
 msgstr "Temperatura de equilibrio planetario"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid "Planetary habitability"
 msgstr "Habitabilidade planetaria"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid "Earth Similarity Index"
 msgstr "Índice de semellanza coa Terra"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr "Resultado fina de NameExoWorlds, decidido en votación pública"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid "NameExoWorlds website"
 msgstr "Sito web de NameExoWorlds"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Webs xerais profesionais de sitios relevantes para planetas extrasolares"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanetas: unha versión interactiva de XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (O cazador de Exolúas con Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exoplanetas en sistemas binarios e múltiples (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Naming exoplanets (IAU)"
 msgstr "Nomeando exoplanetas (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Algúns astrónomos e grupos activos en estudos de planetas extrasolares"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "update: 16 April 2012"
 msgstr "actualización: 16 Abril 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "The Exoplanet Data Explorer"
 msgstr "O Explorador de Datos de Exoplanetas"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "The Anglo-Australian Planet Search"
 msgstr "O Buscador de Planetas anglo-australiano"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Programas de busca de planetas extrasolares Geneva"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "Programa de Exploración de Exoplanetas da NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
 msgid "Pulsar planets"
 msgstr "Planetas púlsar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 msgid "The NASA Exoplanet Archive"
 msgstr "Arquivo de Exoplanetas da NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Comisión IAU 53: Planetas Extrasolares"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 msgid "The Habitable Zone Gallery"
 msgstr "Galería da Zona Habitable"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "Busca de planetas-A busca doutra Terra"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid "Open Exoplanet Catalogue"
 msgstr "Abrir catálogo de exoplanetas"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Catálogo de exoplanetas habitables"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:387
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
 msgid "Exoplanets is updated"
 msgstr "Actualizados os exoplanetas"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid "Orbital Eccentricity"
 msgstr "Excentricidade orbital"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid "Orbit Semi-Major Axis, AU"
 msgstr "Eixe Semi-Maior da órbita, AU"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
 msgid "Planetary Mass, Mjup"
 msgstr "Masa planetaria, Mjup"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
 msgid "Planetary Radius, Rjup"
 msgstr "Radio planetario, Rjup"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
 msgid "Orbital Period, days"
 msgstr "Periodo orbital, días"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
 msgid "Angular Distance, arcsec"
 msgstr "Distancia Angular, arcseg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
 msgid "Effective temperature of host star, K"
 msgstr "Temperatura efectiva da estrela anfitriona, K"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
 msgid "Year of Discovery"
 msgstr "Ano de Descubrimento"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
 msgid "Metallicity of host star"
 msgstr "Metalicidade da estrela anfitriona"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:523
 msgid "V magnitude of host star, mag"
 msgstr "Magnitude V da estrela anfitriona, mag"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
 msgid "RA (J2000) of star, deg"
 msgstr "AR (J2000) da estrela, deg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
 msgid "Dec (J2000) of star, deg"
 msgstr "Dec (J2000) da estrela, deg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
 msgid "Distance to star, pc"
 msgstr "Distancia da estrela, pc"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
 msgid "Mass of host star, Msol"
 msgstr "Masa da estrela anfitriona, Msol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
 msgid "Radius of host star, Rsol"
 msgstr "Radio da estrela anfitriona, Rsol"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:466
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:503
 msgid "Exoplanets Configuration"
 msgstr "Configuración de exoplanetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:467
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:504
 msgid "Exoplanets Plug-in Configuration"
 msgstr "Configuración do plugin de Exoplanetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:469
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:506
 msgid "Update exoplanets data from Internet"
 msgstr "Actualizar os exoplanetas dende internet"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:475
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:512
 msgid "Settings for exoplanets"
 msgstr "Axustes para exoplanetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:477
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:514
 msgid "Plot all systems with exoplanets without labels"
 msgstr "Debuxar todos os sistemas con exoplanetas e sen etiquetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:479
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:516
 msgid "Enable display of distribution for exoplanets"
 msgstr "Activar a visualización de distribución dos explanetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:481
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:518
 msgid "Display exoplanets since their discovery"
 msgstr "Visualizar exoplanetas dende o seu descubrimento"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:483
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:520
 msgid "Enable timeline discovery of exoplanets"
 msgstr "Activar liña de tempo de descubrimento de exoplanetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:485
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
@@ -15722,66 +15786,76 @@ msgstr ""
 "Amosar os sistemas planetarios que conteñen os posibles exoplanetas "
 "habitables"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:487
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:524
 msgid "Enable display of the potential habitable exoplanets only"
 msgstr ""
 "Activar o modo de visualización só dos posibles exoplanetas habitables"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:488
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
 msgid "Enable display of designations for exoplanets"
 msgstr "Activar a visualización das denominacións de exoplanetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:490
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
 msgid "Show exoplanets button on toolbar"
 msgstr "Amosar botón de exoplanetas na barra de ferramentas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:494
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
+msgid "Exoplanets marker color"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:534
+msgid "Marker color for potential habitable exoplanets"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Diagrams: scatter plot"
 msgstr "Diagramas: gráfico de dispersión"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:495
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:540
 msgid "Plot"
 msgstr "Representar"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:496
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid "Y axis"
 msgstr "Eixe Y"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:498
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:505
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:550
 msgid "Logarithmic scale"
 msgstr "Escala logarítmica"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:500
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:507
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:552
 msgid "log scale"
 msgstr "escala log."
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:501
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:509
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:554
 msgid "min"
 msgstr "mín"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:502
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:510
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
 msgid "max"
 msgstr "máx"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:503
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
 msgid "X axis"
 msgstr "Eixe X"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:511
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:556
 msgctxt "tab in plugin windows"
 msgid "Diagram"
 msgstr "Diagrama"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:512
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:557
 msgctxt "tab in plugin windows"
 msgid "Info"
 msgstr "Información"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:513
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
 msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "Sitios web"
@@ -16396,7 +16470,7 @@ msgid "Toggle radiant labels"
 msgstr "Mudar etiquetas de radiante"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:157
-#: plugins/Scenery3d/src/Scenery3d.cpp:325
+#: plugins/Scenery3d/src/Scenery3d.cpp:329
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show settings dialog"
 msgstr "Mostrar diálogo de opcións"
@@ -17393,175 +17467,175 @@ msgstr "Coordenada X"
 msgid "Coordinate Y"
 msgstr "Coordenada Y"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:267
+#: plugins/Scenery3d/src/Scenery3d.cpp:271
 msgid "Scenery3d plugin loaded!"
 msgstr "Cargado o plugin de escenario 3D!"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:321
+#: plugins/Scenery3d/src/Scenery3d.cpp:325
 msgid "Scenery3d: 3D landscapes"
 msgstr "Escenario 3D: paisaxes 3D"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:324
+#: plugins/Scenery3d/src/Scenery3d.cpp:328
 msgid "Toggle 3D landscape"
 msgstr "Mudar paisaxe 3D"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:326
+#: plugins/Scenery3d/src/Scenery3d.cpp:330
 msgid "Show viewpoint dialog"
 msgstr "Mostrar diálogo de punto e vista"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:327
+#: plugins/Scenery3d/src/Scenery3d.cpp:331
 msgid "Toggle shadows"
 msgstr "Sombras de alternancia"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:328
+#: plugins/Scenery3d/src/Scenery3d.cpp:332
 msgid "Toggle debug information"
 msgstr "Mudar información de depuración"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:329
+#: plugins/Scenery3d/src/Scenery3d.cpp:333
 msgid "Toggle location text"
 msgstr "Mudar texto de localización"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:330
+#: plugins/Scenery3d/src/Scenery3d.cpp:334
 msgid "Toggle torchlight"
 msgstr "Mudar luz do facho"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:379
+#: plugins/Scenery3d/src/Scenery3d.cpp:383
 msgid "Scenery3d shaders reloaded"
 msgstr "Recargar sombras de escenario 3D"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:432
+#: plugins/Scenery3d/src/Scenery3d.cpp:436
 msgid "Loading scene. Please be patient!"
 msgstr "Cargando escena. Agarda un pouco!"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:434
+#: plugins/Scenery3d/src/Scenery3d.cpp:438
 #, qt-format
 msgid "Loading scene '%1'"
 msgstr "Cargando escena '%1'"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:452
+#: plugins/Scenery3d/src/Scenery3d.cpp:456
 msgid "Loading model..."
 msgstr "Cargando modelo..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:467
+#: plugins/Scenery3d/src/Scenery3d.cpp:471
 msgid "Transforming model..."
 msgstr "Transformando modelo..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:475
-#: plugins/Scenery3d/src/Scenery3d.cpp:495
+#: plugins/Scenery3d/src/Scenery3d.cpp:479
+#: plugins/Scenery3d/src/Scenery3d.cpp:499
 msgid "Calculating collision map..."
 msgstr "Calculando mapa de colisión..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:480
+#: plugins/Scenery3d/src/Scenery3d.cpp:484
 msgid "Loading ground..."
 msgstr "Cargando o chan..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:491
+#: plugins/Scenery3d/src/Scenery3d.cpp:495
 msgid "Transforming ground..."
 msgstr "Transformando o chan..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:502
+#: plugins/Scenery3d/src/Scenery3d.cpp:506
 msgid "Finalizing load..."
 msgstr "Finalizando a carga..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:517
+#: plugins/Scenery3d/src/Scenery3d.cpp:521
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
 "Non se puido cargar a escena, comproba o arquivo log para ver as mensaxes de "
 "erro!"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:521
+#: plugins/Scenery3d/src/Scenery3d.cpp:525
 msgid "Scene successfully loaded."
 msgstr "Escena cargada con éxito."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:581
+#: plugins/Scenery3d/src/Scenery3d.cpp:585
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
 "Non se puido cargar a información da escena, podes ver as mensaxes de erro "
 "no arquivo log."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:605
+#: plugins/Scenery3d/src/Scenery3d.cpp:609
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr "Non se puido atopar a ID da escena para %1"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:650
+#: plugins/Scenery3d/src/Scenery3d.cpp:654
 msgid "Please load a scene first!"
 msgstr "Antes tes que cargar unha escena!"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:687
+#: plugins/Scenery3d/src/Scenery3d.cpp:691
 #, qt-format
 msgid "Per-Pixel shading %1."
 msgstr "Per-Sombreado do píxel %1."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:687
-#: plugins/Scenery3d/src/Scenery3d.cpp:706
-#: plugins/Scenery3d/src/Scenery3d.cpp:742
+#: plugins/Scenery3d/src/Scenery3d.cpp:691
+#: plugins/Scenery3d/src/Scenery3d.cpp:710
+#: plugins/Scenery3d/src/Scenery3d.cpp:746
 msgctxt "enable"
 msgid "on"
 msgstr "activado"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:687
-#: plugins/Scenery3d/src/Scenery3d.cpp:706
-#: plugins/Scenery3d/src/Scenery3d.cpp:742
+#: plugins/Scenery3d/src/Scenery3d.cpp:691
+#: plugins/Scenery3d/src/Scenery3d.cpp:710
+#: plugins/Scenery3d/src/Scenery3d.cpp:746
 msgctxt "disable"
 msgid "off"
 msgstr "desactivado"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:706
+#: plugins/Scenery3d/src/Scenery3d.cpp:710
 #, qt-format
 msgid "Shadows %1."
 msgstr "Sombras %1."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:711
+#: plugins/Scenery3d/src/Scenery3d.cpp:715
 msgid "Shadows deactivated or not possible."
 msgstr "Sombras desactivadas ou non posibles."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:742
+#: plugins/Scenery3d/src/Scenery3d.cpp:746
 #, qt-format
 msgid "Surface bumps %1."
 msgstr "Colisións de superficie %1."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:790
+#: plugins/Scenery3d/src/Scenery3d.cpp:794
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
 "O modo Cubemap seleccionado non está soportado, volvendo ó '6 texturas'"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:892
+#: plugins/Scenery3d/src/Scenery3d.cpp:896
 #, qt-format
 msgid "Lazy cubemapping: %1"
 msgstr "Cubemap rápido: %1"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:892
+#: plugins/Scenery3d/src/Scenery3d.cpp:896
 msgid "enabled"
 msgstr "activado"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:892
+#: plugins/Scenery3d/src/Scenery3d.cpp:896
 msgid "disabled"
 msgstr "desactivado"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:965
+#: plugins/Scenery3d/src/Scenery3d.cpp:969
 msgid "Cubemap size changed"
 msgstr "O tamaño do Cubemap mudou"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:967
+#: plugins/Scenery3d/src/Scenery3d.cpp:971
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
 msgstr "Non está soportado o tamaño do  Cubemap, establecer en %1"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:988
+#: plugins/Scenery3d/src/Scenery3d.cpp:992
 msgid "Shadowmap size changed"
 msgstr "O tamaño do Mapa de Sombras mudou"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:990
+#: plugins/Scenery3d/src/Scenery3d.cpp:994
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
 msgstr "Non está soportado o tamaño do Mapa de Sombras, establecer en %1"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1114
+#: plugins/Scenery3d/src/Scenery3d.cpp:1118
 msgid "3D Sceneries"
 msgstr "Escenarios 3D"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1117
+#: plugins/Scenery3d/src/Scenery3d.cpp:1121
 msgid ""
 "<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
 "garden, find and demonstrate possible astronomical alignments in temples, "
@@ -17588,7 +17662,7 @@ msgstr ""
 "Erro no escenario 3D, non se pode debuxar. Comprobe a saída de depuración "
 "para máis información."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1809
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1814
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -17596,15 +17670,15 @@ msgstr ""
 "O teu hardware non soporta cubemapping, cambia para proxección "
 "\"Perspectiva\"!"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1818
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1823
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr "Esta xeometría non está soportada. Volve ao modo '6 Texturas'."
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1828
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1833
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "Volve a '6 texturas' por mor dun erro non ÁNGULO"
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2353
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2358
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
