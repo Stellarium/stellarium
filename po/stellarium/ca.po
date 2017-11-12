@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 00:57+0700\n"
-"PO-Revision-Date: 2017-11-08 03:57+0000\n"
+"POT-Creation-Date: 2017-11-11 15:42+0700\n"
+"PO-Revision-Date: 2017-11-11 22:39+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-11 04:47+0000\n"
+"X-Launchpad-Export-Date: 2017-11-12 05:17+0000\n"
 "X-Generator: Launchpad (build 18505)\n"
 "Language: ca\n"
 "X-Language: ca\n"
@@ -6132,9 +6132,9 @@ msgstr ""
 
 #: src/translations.h:612
 msgid ""
-"Screensaver of various happenings in the Solar System. 287 events in all!"
+"Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
-"Salvapantalles de diversos esdeveniments en el Sistema Solar. 287 "
+"Salvapantalles de diversos esdeveniments del sistema solar. 300 "
 "esdeveniments en total!"
 
 #: src/translations.h:613
@@ -10716,11 +10716,11 @@ msgstr "Resolució límit de Sparrow"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:972
 msgid "Visual resolution"
-msgstr ""
+msgstr "Resolució visual"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
 msgid "Visual resolution is based on eye properties and magnification"
-msgstr ""
+msgstr "La resolució visual es basa en les propietats oculars i l'augment"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:495
@@ -14954,37 +14954,37 @@ msgstr "Neptunià"
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:949
 msgid "Primary Transit"
-msgstr ""
+msgstr "Trànsit primari"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:951
 msgid "Microlensing"
-msgstr ""
+msgstr "Microlens"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:953
 msgid "Radial Velocity"
-msgstr ""
+msgstr "Velocitat radial"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:955
 msgid "Imaging"
-msgstr ""
+msgstr "Imatges"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:957
 msgid "Pulsar"
-msgstr ""
+msgstr "Púlsar"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:961
 msgid "Astrometry"
-msgstr ""
+msgstr "Astrometria"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:963
 msgid "TTV"
-msgstr ""
+msgstr "TTV"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:298
 msgid "planetary system"
@@ -15044,7 +15044,7 @@ msgstr "Any del descobriment"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:356
 msgid "Detection method"
-msgstr ""
+msgstr "Mètode de detecció"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:357
 msgid "Planetary class"
@@ -15062,19 +15062,19 @@ msgstr "IST"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:362
 msgid "Conservative sample"
-msgstr ""
+msgstr "Mostra conservadora"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:465
 msgid "yes"
-msgstr ""
+msgstr "sí"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:467
 msgid "no"
-msgstr ""
+msgstr "no"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:504
 msgid "Equilibrium temperature on Earth"
-msgstr ""
+msgstr "Temperatura d'equilibri a la Terra"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "Exoplanets Plug-in"
@@ -15859,12 +15859,12 @@ msgstr "Mostrar el botó dels exoplanetes a la barra d'eines"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 msgid "Exoplanets marker color"
-msgstr ""
+msgstr "Color del marcador d'exoplanetes"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:534
 msgid "Marker color for potential habitable exoplanets"
-msgstr ""
+msgstr "Marcador de colors per a possibles exoplanetes habitables"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Diagrams: scatter plot"
@@ -20748,6 +20748,12 @@ msgstr "Declinació Personalitzada 2"
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 #~ msgstr "Magnitud: <b>%1</b> (extingit a: <b>%2</b>)"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 287 events in all!"
+#~ msgstr ""
+#~ "Salvapantalles de diversos esdeveniments en el Sistema Solar. 287 "
+#~ "esdeveniments en total!"
 
 #~ msgid ""
 #~ "Restoring default settings requires a restart of Stellarium. Saving all the "
