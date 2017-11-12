@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 00:57+0700\n"
-"PO-Revision-Date: 2017-09-22 17:09+0000\n"
+"POT-Creation-Date: 2017-11-11 15:42+0700\n"
+"PO-Revision-Date: 2017-11-11 22:48+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Launchpad-Export-Date: 2017-11-11 04:46+0000\n"
+"X-Launchpad-Export-Date: 2017-11-12 05:15+0000\n"
 "X-Generator: Launchpad (build 18505)\n"
 "Language: be\n"
 "X-Language: be\n"
@@ -504,7 +504,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:105
 msgctxt "landform"
 msgid "crater"
-msgstr ""
+msgstr "кратэр"
 
 #. TRANSLATORS: Ridge
 #: src/core/modules/NomenclatureItem.cpp:109
@@ -516,7 +516,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:113
 msgctxt "landform"
 msgid "eruptive center"
-msgstr ""
+msgstr "вульканічны цэнтар"
 
 #. TRANSLATORS: Bright spot
 #: src/core/modules/NomenclatureItem.cpp:117
@@ -805,7 +805,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
 msgid "Chain of craters."
-msgstr ""
+msgstr "Ланцуг кратэраў."
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:487
@@ -826,7 +826,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'collis'
 #: src/core/modules/NomenclatureItem.cpp:499
 msgid "Small hills or knobs."
-msgstr ""
+msgstr "Малыя пагоркі ці ўзвышшы."
 
 #. TRANSLATORS: Description for landform 'corona'
 #: src/core/modules/NomenclatureItem.cpp:503
@@ -841,7 +841,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:511
 msgid "Ridge."
-msgstr ""
+msgstr "Хрыбет"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:515
@@ -851,7 +851,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
 msgid "Bright spot."
-msgstr ""
+msgstr "Яркая пляма."
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:523
@@ -894,7 +894,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "Апоўзень."
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
@@ -915,7 +915,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:570
 msgid "'Lake' or small plain."
-msgstr ""
+msgstr "«Возера» ці малая раўніна."
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:575
@@ -925,7 +925,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:579
 msgid "Small dark spot."
-msgstr ""
+msgstr "Малая цёмная пляма."
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:583
@@ -940,7 +940,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:591
 msgid "Dark spot, may be irregular"
-msgstr ""
+msgstr "Цёмная пляма, магчыма, няправільная"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:599
@@ -967,17 +967,17 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:619
 msgid "Mountain."
-msgstr ""
+msgstr "Гара."
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:623
 msgid "A very large dark area."
-msgstr ""
+msgstr "Вельмі вялікая цёмная вобласьць."
 
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:627
 msgid "'Swamp'; small plain."
-msgstr ""
+msgstr "«Балота»; малая раўніна"
 
 #. TRANSLATORS: Description for landform 'patera'
 #: src/core/modules/NomenclatureItem.cpp:631
@@ -987,12 +987,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'planitia'
 #: src/core/modules/NomenclatureItem.cpp:635
 msgid "Low plain."
-msgstr ""
+msgstr "Нізкі раўніна."
 
 #. TRANSLATORS: Description for landform 'planum'
 #: src/core/modules/NomenclatureItem.cpp:639
 msgid "Plateau or high plain."
-msgstr ""
+msgstr "Пласкагор'е ці высокая раўніна."
 
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:643
@@ -1076,17 +1076,17 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
 msgid "Dunes."
-msgstr ""
+msgstr "Дзюны."
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
 msgid "Valley."
-msgstr ""
+msgstr "Даліна."
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:715
 msgid "Extensive plain."
-msgstr ""
+msgstr "Шырокая раўніна."
 
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:719
@@ -1099,15 +1099,15 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:775
 msgid "geologic term"
-msgstr ""
+msgstr "ґеаляґічны тэрмін"
 
 #: src/core/modules/NomenclatureItem.cpp:785
 msgid "Linear size"
-msgstr ""
+msgstr "Лінейны памер"
 
 #: src/core/modules/NomenclatureItem.cpp:788
 msgid "Diameter"
-msgstr ""
+msgstr "Дыямэтар"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:789 src/core/modules/Planet.cpp:455
@@ -1125,7 +1125,7 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:795
 msgid "Celestial body"
-msgstr ""
+msgstr "Нябеснае цела"
 
 #: src/core/modules/NomenclatureItem.cpp:798
 msgid "Landform description"
@@ -1133,7 +1133,7 @@ msgstr ""
 
 #: src/core/modules/NomenclatureMgr.cpp:75
 msgid "Nomenclature labels"
-msgstr ""
+msgstr "Подпісы намэнклятуры"
 
 #: src/core/modules/Nebula.cpp:232 src/core/modules/Nebula.cpp:242
 #: src/core/modules/Planet.cpp:423 src/core/modules/MinorPlanet.cpp:244
@@ -4515,15 +4515,15 @@ msgstr "Аб'екты Сонечнай сыстэмы"
 
 #: src/gui/AstroCalcDialog.cpp:449
 msgid "Solar system objects: comets"
-msgstr ""
+msgstr "Аб'екты Сонечнай сыстэмы: камэты"
 
 #: src/gui/AstroCalcDialog.cpp:450
 msgid "Solar system objects: minor bodies"
-msgstr ""
+msgstr "Аб'екты Сонечнай сыстэмы: малыя целы"
 
 #: src/gui/AstroCalcDialog.cpp:451
 msgid "Solar system objects: planets"
-msgstr ""
+msgstr "Аб'екты Сонечнай сыстэмы: плянэты"
 
 #: src/gui/AstroCalcDialog.cpp:501
 #, qt-format
@@ -4630,7 +4630,7 @@ msgstr "60 сонечных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1431
 msgid "100 solar days"
-msgstr ""
+msgstr "100 сонечных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1432
 msgid "1 sidereal day"
@@ -4658,7 +4658,7 @@ msgstr "60 сыдэрычных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1438
 msgid "100 sidereal days"
-msgstr ""
+msgstr "100 сыдэрычных дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1439
 msgid "1 Julian day"
@@ -4686,7 +4686,7 @@ msgstr "60 юліянскіх дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1445
 msgid "100 Julian days"
-msgstr ""
+msgstr "100 юліянскіх дзён"
 
 #: src/gui/AstroCalcDialog.cpp:1517
 msgid "Solar system"
@@ -5095,7 +5095,7 @@ msgstr "Астэрызмы"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:94
 msgid "Geological features"
-msgstr ""
+msgstr "Ґеаляґічныя асаблівасьці"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -5155,7 +5155,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Geological features: eruptive centers"
-msgstr ""
+msgstr "Ґеаляґічныя асаблівасьці: вульканічныя цэнтры"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
@@ -5375,212 +5375,212 @@ msgstr ""
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:212
 msgid "Named geological features of Epimetheus"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Эпімэтэя"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:214
 msgid "Named geological features of Vesta"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Вэсты"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:216
 msgid "Named geological features of Mathilde"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Матыльды"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:218
 msgid "Named geological features of Venus"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Вэнэры"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:220
 msgid "Named geological features of Mercury"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Мэркурыя"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:222
 msgid "Named geological features of Iapetus"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Япэта"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:224
 msgid "Named geological features of Ganymede"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Ґанімэда"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:226
 msgid "Named geological features of Ceres"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Цэрэры"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:228
 msgid "Named geological features of Ida"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Іды"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:230
 msgid "Named geological features of Triton"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Трытона"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:232
 msgid "Named geological features of Oberon"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Абэрона"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:234
 msgid "Named geological features of Itokawa"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Ітакавы"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:236
 msgid "Named geological features of Thebe"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Тэбы"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:238
 msgid "Named geological features of Gaspra"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Ґаспры"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:240
 msgid "Named geological features of Rhea"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Рэі"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:242
 msgid "Named geological features of Enceladus"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Энцэляда"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:244
 msgid "Named geological features of the Moon"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Месяца"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:246
 msgid "Named geological features of Dione"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Дыёны"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:248
 msgid "Named geological features of Steins"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Стэйнза"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:250
 msgid "Named geological features of Phoebe"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Фэбы"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:252
 msgid "Named geological features of Puck"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Пука"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:254
 msgid "Named geological features of Europa"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Эўропы"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:256
 msgid "Named geological features of Lutetia"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Лютэцыі"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:258
 msgid "Named geological features of Tethys"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Тэфіі"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:260
 msgid "Named geological features of Eros"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Эраса"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:262
 msgid "Named geological features of Callisto"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Каліста"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:264
 msgid "Named geological features of Phobos"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Фобаса"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:266
 msgid "Named geological features of Proteus"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Пратэя"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:268
 msgid "Named geological features of Hyperion"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Гіпэрыёна"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:270
 msgid "Named geological features of Titania"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Тытаніі"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:272
 msgid "Named geological features of Deimos"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Дэймаса"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:274
 msgid "Named geological features of Io"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Іо"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:276
 msgid "Named geological features of Ariel"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Арыэль"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:278
 msgid "Named geological features of Dactyl"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Дактыля"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:280
 msgid "Named geological features of Titan"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Тытана"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:282
 msgid "Named geological features of Amalthea"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Амальтэі"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:284
 msgid "Named geological features of Umbriel"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Умбрыэль"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:286
 msgid "Named geological features of Janus"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Януса"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:288
 msgid "Named geological features of Mars"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Марса"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:290
 msgid "Named geological features of Miranda"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Міранды"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:292
 msgid "Named geological features of Mimas"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Мімаса"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in the search tool)
 #: src/translations.h:294
 msgid "Named geological features of Pluto"
-msgstr ""
+msgstr "Названыя ґеаляґічныя асаблівасьці Плютона"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:299
@@ -6070,6 +6070,7 @@ msgstr ""
 #: src/translations.h:609
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
+"Зацьменьне Сонца Фобасам, назіранае з гары Алімп 2 студзеня 2021 года."
 
 #: src/translations.h:610
 msgid ""
@@ -6099,10 +6100,8 @@ msgstr ""
 
 #: src/translations.h:612
 msgid ""
-"Screensaver of various happenings in the Solar System. 287 events in all!"
+"Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
-"Засьцерагальнік экрану з разнастайнымі (287 штука!) падзеямі ў Сонечнай "
-"сыстэме."
 
 #: src/translations.h:613
 msgid "A tour of the western constellations."
@@ -6156,6 +6155,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
+"Найвялікшыя элянґацыі й супрацьстаяньні Зямлі й іншых бачных плянэт з Цэрэры "
+"2000-2200"
 
 #: src/translations.h:621
 msgid "A tour of Messier Objects"
@@ -7912,7 +7913,7 @@ msgstr "Паказваць арбіту вылучанай плянэты"
 
 #: src/ui_viewDialog.h:2546
 msgid "Show planet orbits only"
-msgstr ""
+msgstr "Паказваць толькі арбіты плянэт"
 
 #: src/ui_viewDialog.h:2547
 msgid "Show planet markers"
@@ -7924,11 +7925,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2551
 msgid "Show planetary nomenclature"
-msgstr ""
+msgstr "Паказваць намэнклятуру плянэт"
 
 #: src/ui_viewDialog.h:2553
 msgid "Color of nomenclature labels"
-msgstr ""
+msgstr "Колер подпісаў намэнклятуры"
 
 #: src/ui_viewDialog.h:2556
 msgid "Display objects from catalogs"
@@ -8079,7 +8080,7 @@ msgstr "Выкарыстоўваць абрысы для аб'ектаў глы�
 
 #: src/ui_viewDialog.h:2653
 msgid "Limit angular size (arcmin):"
-msgstr ""
+msgstr "Абмежаваць вуглавы памер (аркмін):"
 
 #: src/ui_viewDialog.h:2655
 msgid "Minimal angular size in arcminutes for visible DSO"
@@ -11706,7 +11707,7 @@ msgstr "Часьціня абнаўленьняў (у гадзінах):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:754
 msgid "Label font size (pixels):"
-msgstr "Кеґль назваў (у піксэлях):"
+msgstr "Кеґль подпісаў (у піксэлях):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Orbit lines"
@@ -12499,7 +12500,7 @@ msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr ""
-"<b>Назва</b> ­— метка, якая будзе паказаная на экране побач з акулярнай "
+"<b>Назва</b> ­— подпіс, які будзе паказаны на экране побач з акулярнай "
 "сеткай тэлескопа."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
@@ -20614,6 +20615,12 @@ msgstr "Сваё схіленьне 2"
 #, qt-format
 #~ msgid "Mean Sidereal Time: %1"
 #~ msgstr "Сярэдні зорны час: %1"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 287 events in all!"
+#~ msgstr ""
+#~ "Засьцерагальнік экрану з разнастайнымі (287 штука!) падзеямі ў Сонечнай "
+#~ "сыстэме."
 
 #, qt-format
 #~ msgid "Mean Opposition Magnitude: %1"

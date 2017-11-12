@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 00:57+0700\n"
-"PO-Revision-Date: 2017-11-08 21:58+0000\n"
+"POT-Creation-Date: 2017-11-11 15:42+0700\n"
+"PO-Revision-Date: 2017-11-11 17:25+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-11 05:03+0000\n"
+"X-Launchpad-Export-Date: 2017-11-12 05:31+0000\n"
 "X-Generator: Launchpad (build 18505)\n"
 "Language: sv\n"
 "X-Language: sv\n"
@@ -2757,7 +2757,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr "Millers cylindriska"
+msgstr "Miller-cylindrisk"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -2765,8 +2765,8 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
-"Millers cylindriska projektion är en modifierad version av Mercators "
-"projektion, och föreslogs år 1942 av Osborn Maitland Miltter (1897-1979). "
+"Den Miller-cylindriska projektionen är en modifierad version av Mercators "
+"projektion, och föreslogs år 1942 av Osborn Maitland Miller (1897-1979). "
 "Polerna går i denna projektion inte längre mot oändligheten."
 
 #: src/core/StelObject.cpp:166
@@ -6106,9 +6106,8 @@ msgstr ""
 
 #: src/translations.h:612
 msgid ""
-"Screensaver of various happenings in the Solar System. 287 events in all!"
+"Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
-"Skärmsläckare av olika händelser i solsystemet. 287 händelser sammanlagt!"
 
 #: src/translations.h:613
 msgid "A tour of the western constellations."
@@ -17044,7 +17043,7 @@ msgstr "Laddar scen. Ha tålamod!"
 #: plugins/Scenery3d/src/Scenery3d.cpp:438
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "Laddar scen '%1'"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:456
 msgid "Loading model..."
@@ -17073,24 +17072,24 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:521
 msgid "Could not load scene, please check log for error messages!"
-msgstr ""
+msgstr "Kunde inte ladda scen, var god se loggfil för felmeddelanden!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:525
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "Scenladdningen lyckades."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:585
 msgid "Could not load scene info, please check log for error messages!"
-msgstr ""
+msgstr "Kunde inte ladda sceninfo, var god se loggfil för felmeddelanden!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:609
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Kunde inte hitta scen-ID för %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:654
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Vänligen ladda en scen först!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:691
 #, qt-format
@@ -17400,7 +17399,7 @@ msgstr "3D-scener"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Sätt denna scen som standard"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
@@ -19623,6 +19622,11 @@ msgstr ""
 #, qt-format
 #~ msgid "IAU Constellation: %1"
 #~ msgstr "IAU-konstellation: %1"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 287 events in all!"
+#~ msgstr ""
+#~ "Skärmsläckare av olika händelser i solsystemet. 287 händelser sammanlagt!"
 
 #, qt-format
 #~ msgid "Albedo: %1"
