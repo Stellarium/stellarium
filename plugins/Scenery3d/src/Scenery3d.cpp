@@ -302,6 +302,10 @@ void Scenery3d::loadConfig()
 	renderer->setTorchEnabled(conf->value("torch_enabled", false).toBool());
 	renderer->setTorchBrightness(conf->value("torch_brightness", 0.5f).toFloat());
 	renderer->setTorchRange(conf->value("torch_range",5.0f).toFloat());
+	renderer->setCurvatureCorrectionEnabled(conf->value("flag_curvature_correction", false).toBool());
+	renderer->setTerrestrialRefractionEnabled(conf->value("flag_terrestrial_refraction", false).toBool());
+	renderer->setTerrestrialRefractionCoefficient(conf->value("terrestrial_refraction_coefficient", 0.13).toDouble());
+	renderer->setDepthCueEnabled(conf->value("flag_depth_cue", false).toBool());
 	renderer->setBumpsEnabled(conf->value("flag_bumpmap", false).toBool());
 	renderer->setShadowsEnabled(conf->value("flag_shadow", false).toBool());
 	renderer->setUseSimpleShadows(conf->value("flag_shadow_simple", false).toBool());
@@ -884,6 +888,71 @@ void Scenery3d::setTorchRange(const float torchRange)
 	conf->setValue(S3D_CONFIG_PREFIX+ "/torch_range",torchRange);
 
 	emit torchRangeChanged(torchRange);
+}
+
+bool Scenery3d::getEnableCurvatureCorrection() const
+{
+	return renderer->getCurvatureCorrectionEnabled();
+}
+
+void Scenery3d::setEnableCurvatureCorrection(const bool enable)
+{
+	if(enable != getEnableCurvatureCorrection())
+	{
+		renderer->setCurvatureCorrectionEnabled(enable);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/flag_curvature_correction",enable);
+
+		emit enableCurvatureCorrectionChanged(enable);
+	}
+}
+
+bool Scenery3d::getEnableTerrestrialRefraction() const
+{
+	return renderer->getTerrestrialRefractionEnabled();
+}
+
+void Scenery3d::setEnableTerrestrialRefraction(const bool enable)
+{
+	if(enable != getEnableTerrestrialRefraction())
+	{
+		renderer->setTerrestrialRefractionEnabled(enable);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/flag_terrestrial_refraction",enable);
+
+		emit enableTerrestrialRefractionChanged(enable);
+	}
+}
+
+float Scenery3d::getTerrestrialRefractionCoefficient() const
+{
+	return renderer->getTerrestrialRefractionCoefficient();
+}
+
+void Scenery3d::setTerrestrialRefractionCoefficient(const float coefficient)
+{
+	renderer->setTerrestrialRefractionCoefficient(coefficient);
+
+	conf->setValue(S3D_CONFIG_PREFIX+ "/terrestrial_refraction_coefficient",coefficient);
+
+	emit terrestrialRefractionCoefficientChanged(coefficient);
+}
+
+bool Scenery3d::getEnableDepthCue() const
+{
+	return renderer->getDepthCueEnabled();
+}
+
+void Scenery3d::setEnableDepthCue(const bool enable)
+{
+	if(enable != getEnableDepthCue())
+	{
+		renderer->setDepthCueEnabled(enable);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/flag_depth_cue",enable);
+
+		emit enableDepthCueChanged(enable);
+	}
 }
 
 bool Scenery3d::getEnableLazyDrawing() const

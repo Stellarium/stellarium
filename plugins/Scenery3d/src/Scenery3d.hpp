@@ -88,6 +88,12 @@ class Scenery3d : public StelModule
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
 	Q_PROPERTY(float torchStrength READ getTorchStrength WRITE setTorchStrength NOTIFY torchStrengthChanged)
 	Q_PROPERTY(float torchRange READ getTorchRange WRITE setTorchRange NOTIFY torchRangeChanged)
+	// 4x NEW IN 0.18?
+	Q_PROPERTY(bool enableCurvatureCorrection READ getEnableCurvatureCorrection WRITE setEnableCurvatureCorrection NOTIFY enableCurvatureCorrectionChanged)
+	Q_PROPERTY(bool enableTerrestrialRefraction READ getEnableTerrestrialRefraction WRITE setEnableTerrestrialRefraction NOTIFY enableTerrestrialRefractionChanged)
+	Q_PROPERTY(float terrestrialRefractionCoefficient READ getTerrestrialRefractionCoefficient WRITE setTerrestrialRefractionCoefficient NOTIFY terrestrialRefractionCoefficientChanged)
+	Q_PROPERTY(bool enableDepthCue READ getEnableDepthCue WRITE setEnableDepthCue NOTIFY enableDepthCueChanged)
+
 	Q_PROPERTY(bool enableLazyDrawing READ getEnableLazyDrawing WRITE setEnableLazyDrawing NOTIFY enableLazyDrawingChanged)
 	Q_PROPERTY(double lazyDrawingInterval READ getLazyDrawingInterval WRITE setLazyDrawingInterval NOTIFY lazyDrawingIntervalChanged)
 	Q_PROPERTY(bool onlyDominantFaceWhenMoving READ getOnlyDominantFaceWhenMoving WRITE setOnlyDominantFaceWhenMoving NOTIFY onlyDominantFaceWhenMovingChanged)
@@ -138,6 +144,10 @@ signals:
     void enableTorchLightChanged(const bool val);
     void torchStrengthChanged(const float val);
     void torchRangeChanged(const float val);
+    void enableCurvatureCorrectionChanged(const bool val);
+    void enableTerrestrialRefractionChanged(const bool val);
+    void terrestrialRefractionCoefficientChanged(const float val);
+    void enableDepthCueChanged(const bool val);
     void enableLazyDrawingChanged(const bool val);
     void lazyDrawingIntervalChanged(const double val);
     void onlyDominantFaceWhenMovingChanged(const bool val);
@@ -228,6 +238,20 @@ public slots:
     //! Sets the range of the torchlight.
     void setTorchRange(const float torchRange);
     float getTorchRange() const;
+
+    //! Controls curvature correction.
+    void setEnableCurvatureCorrection(const bool enable);
+    bool getEnableCurvatureCorrection() const;
+
+    //! Controls correction for Terrestrial Refraction.
+    void setEnableTerrestrialRefraction(const bool enable);
+    bool getEnableTerrestrialRefraction() const;
+    void setTerrestrialRefractionCoefficient(const float coefficient);
+    float getTerrestrialRefractionCoefficient() const;
+
+    //! Controls rendering of a depth cue (distance cue): fade distant terrrain into a misty color.
+    void setEnableDepthCue(const bool enable);
+    bool getEnableDepthCue() const;
 
     //! Sets the state of the cubemap lazy-drawing mode
     void setEnableLazyDrawing(const bool val);

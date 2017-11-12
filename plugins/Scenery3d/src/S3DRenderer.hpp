@@ -120,6 +120,15 @@ public:
 	void setTorchBrightness(float brightness) { torchBrightness = brightness; invalidateCubemap(); }
 	float getTorchRange() const { return torchRange; }
 	void setTorchRange(float range) { torchRange = range; invalidateCubemap(); }
+	void setCurvatureCorrectionEnabled(const bool enabled) { enableCurvatureCorrection = enabled; }
+	bool getCurvatureCorrectionEnabled() const { return enableCurvatureCorrection; }
+	void setTerrestrialRefractionEnabled(const bool enabled) { enableTerrestrialRefraction = enabled; }
+	bool getTerrestrialRefractionEnabled() const { return enableTerrestrialRefraction; }
+	void setTerrestrialRefractionCoefficient(const float coefficient) { terrestrialRefractionCoefficient = coefficient;}
+	float getTerrestrialRefractionCoefficient() const { return terrestrialRefractionCoefficient; }
+	void setDepthCueEnabled(const bool enabled) { enableDepthCue = enabled; }
+	bool getDepthCueEnabled() const { return enableDepthCue; }
+
 
 	//Debugging method, save the Frustum to be able to move away from it and analyze it
 	void saveFrusts();
@@ -152,6 +161,12 @@ private:
 
 	float torchBrightness; // toggle light brightness
 	float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/
+
+	// GZ 4 new for curvature and terrestrial refraction
+	bool enableCurvatureCorrection;
+	bool enableTerrestrialRefraction;
+	float terrestrialRefractionCoefficient;
+	bool enableDepthCue;
 
 	bool textEnabled;           // switchable value: display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
 	bool debugEnabled;          // switchable value: display debug graphics and debug texts on screen

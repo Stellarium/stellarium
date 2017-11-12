@@ -71,7 +71,9 @@ S3DRenderer::S3DRenderer(QObject *parent)
       currentScene(Q_NULLPTR),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
       defaultFBO(-1),
-      torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
+      torchBrightness(0.5f), torchRange(5.0f),
+      enableCurvatureCorrection(true), enableTerrestrialRefraction(true), terrestrialRefractionCoefficient(0.13f), enableDepthCue(false),
+      textEnabled(false), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
       cubemapSize(1024),shadowmapSize(1024),wasMovedInLastDrawCall(false),
