@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 15:42+0700\n"
-"PO-Revision-Date: 2017-09-22 03:02+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
+"POT-Creation-Date: 2017-11-12 18:25+0700\n"
+"PO-Revision-Date: 2017-11-12 10:53+0000\n"
+"Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-12 05:22+0000\n"
+"X-Launchpad-Export-Date: 2017-11-13 05:20+0000\n"
 "X-Generator: Launchpad (build 18505)\n"
 "Language: hu\n"
 "X-Language: hu\n"
@@ -61,7 +61,7 @@ msgstr ""
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:407
 #: src/core/modules/NebulaMgr.cpp:408 src/core/modules/SolarSystem.cpp:236
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
+#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
 #: src/StelMainView.cpp:769
 msgid "Display Options"
@@ -409,6 +409,7 @@ msgstr "Fényszennyezési értékek használata adatbázisból"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:81
 msgid "Author"
 msgstr "Szerző"
 
@@ -432,7 +433,7 @@ msgstr "hPa"
 
 #: src/core/modules/LandscapeMgr.cpp:833
 msgid "extinction coefficient"
-msgstr ""
+msgstr "kioltási tényező"
 
 #: src/core/modules/LandscapeMgr.cpp:836
 msgid "Atmospheric conditions"
@@ -456,97 +457,97 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:73
 msgctxt "landform"
 msgid "arcus"
-msgstr ""
+msgstr "ív"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:77
 msgctxt "landform"
 msgid "astrum"
-msgstr ""
+msgstr "asztrum"
 
 #. TRANSLATORS: Chain of craters
 #: src/core/modules/NomenclatureItem.cpp:81
 msgctxt "landform"
 msgid "catena"
-msgstr ""
+msgstr "kráterlánc"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays or clusters
 #: src/core/modules/NomenclatureItem.cpp:85
 msgctxt "landform"
 msgid "cavus"
-msgstr ""
+msgstr "üreg"
 
 #. TRANSLATORS: Distinctive area of broken terrain
 #: src/core/modules/NomenclatureItem.cpp:89
 msgctxt "landform"
 msgid "chaos"
-msgstr ""
+msgstr "káosz"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
 #: src/core/modules/NomenclatureItem.cpp:93
 msgctxt "landform"
 msgid "chasma"
-msgstr ""
+msgstr "szurdok"
 
 #. TRANSLATORS: Small hills or knobs
 #: src/core/modules/NomenclatureItem.cpp:97
 msgctxt "landform"
 msgid "collis"
-msgstr ""
+msgstr "domb"
 
 #. TRANSLATORS: Ovoid-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:101
 msgctxt "landform"
 msgid "corona"
-msgstr ""
+msgstr "korona"
 
 #. TRANSLATORS: A circular depression
 #: src/core/modules/NomenclatureItem.cpp:105
 msgctxt "landform"
 msgid "crater"
-msgstr ""
+msgstr "kráter"
 
 #. TRANSLATORS: Ridge
 #: src/core/modules/NomenclatureItem.cpp:109
 msgctxt "landform"
 msgid "dorsum"
-msgstr ""
+msgstr "gerinc"
 
 #. TRANSLATORS: Active volcanic centers on Io
 #: src/core/modules/NomenclatureItem.cpp:113
 msgctxt "landform"
 msgid "eruptive center"
-msgstr ""
+msgstr "kitörési középpont"
 
 #. TRANSLATORS: Bright spot
 #: src/core/modules/NomenclatureItem.cpp:117
 msgctxt "landform"
 msgid "facula"
-msgstr ""
+msgstr "fakula"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
 #: src/core/modules/NomenclatureItem.cpp:121
 msgctxt "landform"
 msgid "farrum"
-msgstr ""
+msgstr "palacsintavulkán"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 #: src/core/modules/NomenclatureItem.cpp:125
 msgctxt "landform"
 msgid "flexus"
-msgstr ""
+msgstr "ívsor"
 
 #. TRANSLATORS: Flow terrain
 #: src/core/modules/NomenclatureItem.cpp:129
 msgctxt "landform"
 msgid "fluctus"
-msgstr ""
+msgstr "lávafolyás"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
 #: src/core/modules/NomenclatureItem.cpp:133
 msgctxt "landform"
 msgid "flumen"
-msgstr ""
+msgstr "folyó"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas of liquid
 #: src/core/modules/NomenclatureItem.cpp:137
@@ -558,25 +559,25 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:141
 msgctxt "landform"
 msgid "fossa"
-msgstr ""
+msgstr "árok"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
 #: src/core/modules/NomenclatureItem.cpp:145
 msgctxt "landform"
 msgid "insula"
-msgstr ""
+msgstr "sziget"
 
 #. TRANSLATORS: Landslide
 #: src/core/modules/NomenclatureItem.cpp:149
 msgctxt "landform"
 msgid "labes"
-msgstr ""
+msgstr "csuszamlás"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
 #: src/core/modules/NomenclatureItem.cpp:153
 msgctxt "landform"
 msgid "labyrinthus"
-msgstr ""
+msgstr "labirintus"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance of a dry lake bed
 #: src/core/modules/NomenclatureItem.cpp:157
@@ -588,7 +589,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:161
 msgctxt "landform"
 msgid "lacus"
-msgstr ""
+msgstr "tó"
 
 #. TRANSLATORS: Cryptic ringed feature
 #: src/core/modules/NomenclatureItem.cpp:165
@@ -600,73 +601,73 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:169
 msgctxt "landform"
 msgid "lenticula"
-msgstr ""
+msgstr "lentikula"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
 #: src/core/modules/NomenclatureItem.cpp:173
 msgctxt "landform"
 msgid "linea"
-msgstr ""
+msgstr "vonal"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like boundaries
 #: src/core/modules/NomenclatureItem.cpp:177
 msgctxt "landform"
 msgid "lingula"
-msgstr ""
+msgstr "nyelv"
 
 #. TRANSLATORS: Dark spot, may be irregular
 #: src/core/modules/NomenclatureItem.cpp:181
 msgctxt "landform"
 msgid "macula"
-msgstr ""
+msgstr "makula"
 
 #. TRANSLATORS: “Sea”; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
 #: src/core/modules/NomenclatureItem.cpp:185
 msgctxt "landform"
 msgid "mare"
-msgstr ""
+msgstr "tenger"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
 #: src/core/modules/NomenclatureItem.cpp:189
 msgctxt "landform"
 msgid "mensa"
-msgstr ""
+msgstr "táblahegy"
 
 #. TRANSLATORS: Mountain
 #: src/core/modules/NomenclatureItem.cpp:193
 msgctxt "landform"
 msgid "mons"
-msgstr ""
+msgstr "hegy"
 
 #. TRANSLATORS: A very large dark area on the Moon
 #: src/core/modules/NomenclatureItem.cpp:197
 msgctxt "landform"
 msgid "oceanus"
-msgstr ""
+msgstr "óceán"
 
 #. TRANSLATORS: "Swamp"; small plain
 #: src/core/modules/NomenclatureItem.cpp:201
 msgctxt "landform"
 msgid "palus"
-msgstr ""
+msgstr "mocsár"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
 #: src/core/modules/NomenclatureItem.cpp:205
 msgctxt "landform"
 msgid "patera"
-msgstr ""
+msgstr "patera"
 
 #. TRANSLATORS: Low plain
 #: src/core/modules/NomenclatureItem.cpp:209
 msgctxt "landform"
 msgid "planitia"
-msgstr ""
+msgstr "síkság"
 
 #. TRANSLATORS: Plateau or high plain
 #: src/core/modules/NomenclatureItem.cpp:213
 msgctxt "landform"
 msgid "planum"
-msgstr ""
+msgstr "fennsík"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
 #: src/core/modules/NomenclatureItem.cpp:217
@@ -678,31 +679,31 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:221
 msgctxt "landform"
 msgid "promontorium"
-msgstr ""
+msgstr "fok"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region
 #: src/core/modules/NomenclatureItem.cpp:225
 msgctxt "landform"
 msgid "regio"
-msgstr ""
+msgstr "régió"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
 #: src/core/modules/NomenclatureItem.cpp:229
 msgctxt "landform"
 msgid "reticulum"
-msgstr ""
+msgstr "retikulum"
 
 #. TRANSLATORS: Fissure
 #: src/core/modules/NomenclatureItem.cpp:233
 msgctxt "landform"
 msgid "rima"
-msgstr ""
+msgstr "rianás"
 
 #. TRANSLATORS: Scarp
 #: src/core/modules/NomenclatureItem.cpp:237
 msgctxt "landform"
 msgid "rupes"
-msgstr ""
+msgstr "szakadék"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
 #: src/core/modules/NomenclatureItem.cpp:241
@@ -714,7 +715,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:245
 msgctxt "landform"
 msgid "scopulus"
-msgstr ""
+msgstr "fal"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief along its length
 #: src/core/modules/NomenclatureItem.cpp:249
@@ -726,66 +727,66 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:253
 msgctxt "landform"
 msgid "sulcus"
-msgstr ""
+msgstr "barázda"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons
 #: src/core/modules/NomenclatureItem.cpp:257
 msgctxt "landform"
 msgid "sinus"
-msgstr ""
+msgstr "öböl"
 
 #. TRANSLATORS: Extensive land mass
 #: src/core/modules/NomenclatureItem.cpp:261
 msgctxt "landform"
 msgid "terra"
-msgstr ""
+msgstr "felföld"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
 #: src/core/modules/NomenclatureItem.cpp:265
 msgctxt "landform"
 msgid "tessera"
-msgstr ""
+msgstr "tesszera"
 
 #. TRANSLATORS: Small domical mountain or hill
 #: src/core/modules/NomenclatureItem.cpp:269
 msgctxt "landform"
 msgid "tholus"
-msgstr ""
+msgstr "kúp"
 
 #. TRANSLATORS: Dunes
 #: src/core/modules/NomenclatureItem.cpp:273
 msgctxt "landform"
 msgid "unda"
-msgstr ""
+msgstr "dűne"
 
 #. TRANSLATORS: Valley
 #: src/core/modules/NomenclatureItem.cpp:277
 msgctxt "landform"
 msgid "vallis"
-msgstr ""
+msgstr "völgy"
 
 #. TRANSLATORS: Extensive plain
 #: src/core/modules/NomenclatureItem.cpp:281
 msgctxt "landform"
 msgid "vastitas"
-msgstr ""
+msgstr "síkvidék"
 
 #. TRANSLATORS: A streak or stripe of color
 #: src/core/modules/NomenclatureItem.cpp:285
 msgctxt "landform"
 msgid "virga"
-msgstr ""
+msgstr "virga"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
 #: src/core/modules/NomenclatureItem.cpp:289
 msgctxt "landform"
 msgid "landing site name"
-msgstr ""
+msgstr "leszállási hely neve"
 
 #: src/core/modules/NomenclatureItem.cpp:293
 msgctxt "landform"
 msgid "undocumented landform type"
-msgstr ""
+msgstr "nem-dokumentált földforma"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
 #: src/core/modules/NomenclatureItem.cpp:471
@@ -795,94 +796,97 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:475
 msgid "Arc-shaped feature."
-msgstr ""
+msgstr "ív alakú képződmény"
 
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:479
 msgid "Radial-patterned feature."
-msgstr ""
+msgstr "sugárformájú képződmény"
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
 msgid "Chain of craters."
-msgstr ""
+msgstr "kráterek láncolata"
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:487
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr ""
+"Szabálytalan alakú, meredek falú süllyedés, többnyire csoportosan fordul elő"
 
 #. TRANSLATORS: Description for landform 'chaos'
 #: src/core/modules/NomenclatureItem.cpp:491
 msgid "Distinctive area of broken terrain."
-msgstr ""
+msgstr "jellegzetes, töredezett felületű terület"
 
 #. TRANSLATORS: Description for landform 'chasma'
 #: src/core/modules/NomenclatureItem.cpp:495
 msgid "A deep, elongated, steep-sided depression."
-msgstr ""
+msgstr "Mély, hosszú, meredek oldalú mélyedés"
 
 #. TRANSLATORS: Description for landform 'collis'
 #: src/core/modules/NomenclatureItem.cpp:499
 msgid "Small hills or knobs."
-msgstr ""
+msgstr "kisebb, sima kiemelkedés, bukkanó"
 
 #. TRANSLATORS: Description for landform 'corona'
 #: src/core/modules/NomenclatureItem.cpp:503
 msgid "Ovoid-shaped feature."
-msgstr ""
+msgstr "tojásdad alakú képződmény"
 
 #. TRANSLATORS: Description for landform 'crater'
 #: src/core/modules/NomenclatureItem.cpp:507
 msgid "A circular depression."
-msgstr ""
+msgstr "kör alakú mélyedés"
 
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:511
 msgid "Ridge."
-msgstr ""
+msgstr "Éles, hosszan elnyúló kiemelkedés"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:515
 msgid "Active volcanic center."
-msgstr ""
+msgstr "Aktív vulkáni középpont"
 
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
 msgid "Bright spot."
-msgstr ""
+msgstr "Fényes, pontszerű terület"
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:523
 msgid "Pancake-like structure, or a row of such structures."
-msgstr ""
+msgstr "Lapos képződmény, vagy ezek egymásutánja"
 
 #. TRANSLATORS: Description for landform 'flexus'
 #: src/core/modules/NomenclatureItem.cpp:527
 msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr ""
+msgstr "Alacsony, görbe vonalú gerinc, csipkés megjelenéssel"
 
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:531
 msgid "Flow terrain."
-msgstr ""
+msgstr "Kiömlési terület, általában lapos, vagy enyhén ível felülettel"
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:535
 msgid "Channel, that might carry liquid."
-msgstr ""
+msgstr "Olyan csatorna, ami képes lenne folyadékot szállítani"
 
 #. TRANSLATORS: Description for landform 'fretum'
 #: src/core/modules/NomenclatureItem.cpp:539
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr ""
+"Keskeny, szűk szoros, amiben a folyadék két nagyobb folyadék felületet köt "
+"össze"
 
 #. TRANSLATORS: Description for landform 'fossa'
 #: src/core/modules/NomenclatureItem.cpp:543
 msgid "Long, narrow depression."
-msgstr ""
+msgstr "Hosszú, keskeny mélyedés"
 
 #. TRANSLATORS: Description for landform 'insula'
 #: src/core/modules/NomenclatureItem.cpp:547
@@ -890,47 +894,50 @@ msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
 msgstr ""
+"Olyan földterület, mit nagyrészt folyadék vesz körül (tenger vagy tó)"
 
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "Földcsuszamlás"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
 msgid "Complex of intersecting valleys or ridges."
-msgstr ""
+msgstr "Egymást metsző gerincek és szurdokok bonyolult alakzata"
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:559
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
+msgstr "Szabálytalan alakú mélyedés, ami kiszáradt tómeder benyomását kelti"
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:565
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
 msgstr ""
+"\"Tó\" vagy kis, sötét síkság, éles körvonalakkal (lacus alakzatok a Titánon)"
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:570
 msgid "'Lake' or small plain."
-msgstr ""
+msgstr "\"Tó\" vagy kis, sötét síkság"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:575
 msgid "Cryptic ringed feature."
-msgstr ""
+msgstr "Kör alakú képződmény"
 
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:579
 msgid "Small dark spot."
-msgstr ""
+msgstr "Kis, sötét folt"
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:583
 msgid "A dark or bright elongate marking, may be curved or straight."
 msgstr ""
+"Sötét vagy világos, hosszúkás, keskeny, nagyjából egyenes vagy ívelt vonal"
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:587
@@ -940,64 +947,71 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:591
 msgid "Dark spot, may be irregular"
-msgstr ""
+msgstr "Sötétebb, általában szabálytalan alakú folt"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:599
 msgid ""
 "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
+"\"Tenger\": alacsony albedójú, általában nagy kiterjedésű, viszonylag sík "
+"terület"
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
 #: src/core/modules/NomenclatureItem.cpp:604
 msgid "'Sea'; dark albedo areas of no known geological significance."
 msgstr ""
+"\"Tenger\": alacsony albedójú, általában nagy kiterjedésű, viszonylag sík "
+"terület"
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
 #: src/core/modules/NomenclatureItem.cpp:609
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
+"\"Tenger\": nagy kiterjedésű, sötét anyagból álló terület, amit feltehetően "
+"folyékony szénhidrogén alkot"
 
 #. TRANSLATORS: Description for landform 'mensa'
 #: src/core/modules/NomenclatureItem.cpp:615
 msgid "A flat-topped prominence with cliff-like edges."
 msgstr ""
+"Lapos tetővel és meredek oldalakkal rendelkező, magasan fekvő terület"
 
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:619
 msgid "Mountain."
-msgstr ""
+msgstr "Hegység"
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:623
 msgid "A very large dark area."
-msgstr ""
+msgstr "Nagyon nagy, sötét terület"
 
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:627
 msgid "'Swamp'; small plain."
-msgstr ""
+msgstr "\"Mocsár\": kisebb síkság, alföld"
 
 #. TRANSLATORS: Description for landform 'patera'
 #: src/core/modules/NomenclatureItem.cpp:631
 msgid "An irregular crater, or a complex one with scalloped edges."
-msgstr ""
+msgstr "Szabálytalan alakú kráter, vagy több ilyenből álló, csipkés gerinc"
 
 #. TRANSLATORS: Description for landform 'planitia'
 #: src/core/modules/NomenclatureItem.cpp:635
 msgid "Low plain."
-msgstr ""
+msgstr "Sík, alacsony fekvésű terület"
 
 #. TRANSLATORS: Description for landform 'planum'
 #: src/core/modules/NomenclatureItem.cpp:639
 msgid "Plateau or high plain."
-msgstr ""
+msgstr "Magasan fekvő, sík felület"
 
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:643
 msgid "Cryo-volcanic feature."
-msgstr ""
+msgstr "Kriovulkanikus képződmény"
 
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:647
@@ -1010,21 +1024,23 @@ msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr ""
+"Nagyobb terület, aminek fényvisszaverő képessége vagy színe jelentősen eltér "
+"a környező földrajzi területektől"
 
 #. TRANSLATORS: Description for landform 'reticulum'
 #: src/core/modules/NomenclatureItem.cpp:655
 msgid "Reticular (netlike) pattern."
-msgstr ""
+msgstr "Hálószerű alakzat"
 
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:659
 msgid "Fissure."
-msgstr ""
+msgstr "Repedés, hasadás"
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:663
 msgid "Scarp."
-msgstr ""
+msgstr "Meredek lejtő, szakadék"
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:667
@@ -1046,12 +1062,13 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:679
 msgid "Subparallel furrows and ridges."
-msgstr ""
+msgstr "Közel párhuzamos barázda (bevágás) és kiemelkedés"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:685
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
 msgstr ""
+"\"Öböl\": folyékony szénhidrát tenger vagy tó kitüremkedése a szárazföld felé"
 
 #. TRANSLATORS: Description for landform 'sinus'
 #: src/core/modules/NomenclatureItem.cpp:690
@@ -1061,12 +1078,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:695
 msgid "Extensive land mass."
-msgstr ""
+msgstr "Nagyobb kiterjedésű földtömeg"
 
 #. TRANSLATORS: Description for landform 'tessera'
 #: src/core/modules/NomenclatureItem.cpp:699
 msgid "Tile-like, polygonal terrain."
-msgstr ""
+msgstr "Csempeszerű, sokszögű földterület"
 
 #. TRANSLATORS: Description for landform 'tholus'
 #: src/core/modules/NomenclatureItem.cpp:703
@@ -1076,17 +1093,19 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
 msgid "Dunes."
-msgstr ""
+msgstr "Dűne"
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
 msgid "Valley."
 msgstr ""
+"Völgy; kevésbé meredek falú, hosszanti, vagy szabálytalan körvonalú "
+"bemélyedés"
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:715
 msgid "Extensive plain."
-msgstr ""
+msgstr "Nagy kiterjedésű sík terület"
 
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:719
@@ -1223,6 +1242,7 @@ msgstr "fé"
 #: src/gui/AstroCalcDialog.cpp:1979 src/gui/AstroCalcDialog.cpp:2014
 #: src/ui_configurationDialog.h:1363 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:206
 msgid "Distance"
 msgstr "Távolság"
 
@@ -1705,6 +1725,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:713 src/gui/AstroCalcDialog.cpp:774
 #: src/gui/AstroCalcDialog.cpp:1044 src/gui/AstroCalcDialog.cpp:1080
 #: src/gui/AstroCalcDialog.cpp:1947 plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:154
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "CsE"
@@ -2000,11 +2021,11 @@ msgstr "Állatövi fény"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Digitalizált égboltfelmérés (kísérleti)"
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Night mode"
 msgstr "Éjszakai mód"
 
-#: src/core/StelApp.cpp:587
+#: src/core/StelApp.cpp:591
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
@@ -2963,6 +2984,7 @@ msgstr "Kapcsolat"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:79
 msgid "Version"
 msgstr "Verzió"
 
@@ -2986,6 +3008,7 @@ msgstr "Verzió"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:80
 msgid "License"
 msgstr "Licensz"
 
@@ -8604,6 +8627,7 @@ msgstr ""
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:204
 msgid "Save settings"
 msgstr "Beállítások mentése"
 
@@ -8616,6 +8640,7 @@ msgstr "Az eredeti Stellarium beállítások visszaállítása"
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:205
 msgid "Restore defaults"
 msgstr "Az alapértelmezések visszaállítása"
 
@@ -9975,6 +10000,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:86
 msgid "Links"
 msgstr "Hivatkozások"
 
@@ -9995,6 +10021,7 @@ msgstr "Hivatkozások"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:87
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -10020,6 +10047,7 @@ msgstr "Támogatás a Launchpad weboldalon keresztül. A téma legyen   \"%1\"."
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:279
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:90
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Kérdés esetén %1itt kaphatsz választ%2"
@@ -10043,6 +10071,7 @@ msgstr "Kérdés esetén %1itt kaphatsz választ%2"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:92
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Hibajelentést %1itt lehet készíteni%2"
@@ -10066,6 +10095,7 @@ msgstr "Hibajelentést %1itt lehet készíteni%2"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:283
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:94
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -10162,6 +10192,7 @@ msgstr "Alap beállítások visszaállítása"
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:577
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:207
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Névjegy"
@@ -11999,6 +12030,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 #: plugins/FOV/src/gui/FOVWindow.cpp:99
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:96
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -17979,6 +18011,38 @@ msgstr "Legnagyobb holdforduló vonalai"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:40
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:199
+msgid "Distance Calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:43
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:84
+msgid ""
+"This plugin allows measure linear distance between Solar system bodies."
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+msgid "Open the distance calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:78
+msgid "Distance Calculator plug-in"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:201
+msgid "Linear distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:202
+msgid "Compute distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:203
+msgid "Compute linear distance between two Solar system bodies:"
 msgstr ""
 
 #~ msgid "AU"
