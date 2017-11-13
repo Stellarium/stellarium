@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 00:57+0700\n"
-"PO-Revision-Date: 2017-11-09 15:35+0000\n"
+"POT-Creation-Date: 2017-11-12 18:25+0700\n"
+"PO-Revision-Date: 2017-11-12 05:42+0000\n"
 "Last-Translator: sunshuwei <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-11-11 05:07+0000\n"
+"X-Launchpad-Export-Date: 2017-11-13 05:33+0000\n"
 "X-Generator: Launchpad (build 18505)\n"
 "Language: zh_CN\n"
 "X-Language: zh_CN\n"
@@ -59,7 +59,7 @@ msgstr "星群"
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:407
 #: src/core/modules/NebulaMgr.cpp:408 src/core/modules/SolarSystem.cpp:236
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
+#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
 #: src/StelMainView.cpp:769
 msgid "Display Options"
@@ -407,6 +407,7 @@ msgstr "当地数据库的光污染数据"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:81
 msgid "Author"
 msgstr "作者"
 
@@ -1221,6 +1222,7 @@ msgstr "光年"
 #: src/gui/AstroCalcDialog.cpp:1979 src/gui/AstroCalcDialog.cpp:2014
 #: src/ui_configurationDialog.h:1363 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:206
 msgid "Distance"
 msgstr "距离"
 
@@ -1703,6 +1705,7 @@ msgstr "平均冲时星等"
 #: src/gui/AstroCalcDialog.cpp:713 src/gui/AstroCalcDialog.cpp:774
 #: src/gui/AstroCalcDialog.cpp:1044 src/gui/AstroCalcDialog.cpp:1080
 #: src/gui/AstroCalcDialog.cpp:1947 plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:154
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "天文单位"
@@ -1998,11 +2001,11 @@ msgstr "黄道带"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "数字巡天（实验）"
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Night mode"
 msgstr "夜间模式"
 
-#: src/core/StelApp.cpp:587
+#: src/core/StelApp.cpp:591
 msgid "Cannot create Spout sender. See log for details."
 msgstr "无法创建喷口发件人。 有关详细信息，请参阅日志。"
 
@@ -2905,6 +2908,7 @@ msgstr "联系信息"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:79
 msgid "Version"
 msgstr "版本"
 
@@ -2928,6 +2932,7 @@ msgstr "版本"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:80
 msgid "License"
 msgstr "授权条款"
 
@@ -5978,8 +5983,8 @@ msgstr ""
 
 #: src/translations.h:612
 msgid ""
-"Screensaver of various happenings in the Solar System. 287 events in all!"
-msgstr "太阳系中各种事件的屏幕保护程序。包含287个事件！"
+"Screensaver of various happenings in the Solar System. 300 events in all!"
+msgstr "太阳系中各种事件（总共300种！）的屏幕保护程序，"
 
 #: src/translations.h:613
 msgid "A tour of the western constellations."
@@ -8458,6 +8463,7 @@ msgstr "保存更改并在下次启动 Stellarium 时恢复"
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:204
 msgid "Save settings"
 msgstr "保存设置"
 
@@ -8470,6 +8476,7 @@ msgstr "恢复 Stellarium 的原有设置"
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:205
 msgid "Restore defaults"
 msgstr "还原预设值"
 
@@ -9811,6 +9818,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:86
 msgid "Links"
 msgstr "链接"
 
@@ -9831,6 +9839,7 @@ msgstr "链接"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:87
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -9856,6 +9865,7 @@ msgstr "您可在 Launchpad 网站获得我们的技术支持。提交报告时�
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:279
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:90
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "如果您仍存在问题，可以%1从此处得到回答%2。"
@@ -9879,6 +9889,7 @@ msgstr "如果您仍存在问题，可以%1从此处得到回答%2。"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:92
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "如果有 Bug 需要报告，请点击%1这里%2。"
@@ -9902,6 +9913,7 @@ msgstr "如果有 Bug 需要报告，请点击%1这里%2。"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:283
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:94
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -9996,6 +10008,7 @@ msgstr "恢复默认设置"
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:577
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:207
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "关于"
@@ -11786,6 +11799,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 #: plugins/FOV/src/gui/FOVWindow.cpp:99
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:96
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -14439,9 +14453,7 @@ msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
-msgstr ""
-"潜在的宜居系外行星列表及其相关数据取自”%1The Habitable Exoplanets Catalog%3\" b位于 %2Planetary "
-"Habitability Laboratory%3。"
+msgstr "潜在的宜居系外行星列表及其相关数据取自”%1适居系外行星目录%3\" b位于 %2行星适居性研究室%3。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 #, qt-format
@@ -14462,13 +14474,13 @@ msgstr "你想要阅读有关插件的完整信息，获取它的历史版本信
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "Potential habitable exoplanets"
-msgstr "潜在宜居系外行星"
+msgstr "潜在适居系外行星"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
-msgstr "本插件可显示潜在宜居住系外行星(橙色标记)以及有关这些行星的一些信息。"
+msgstr "本插件可显示潜在适居住系外行星(橙色标记)以及有关这些行星的一些信息。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Planetary Class"
@@ -15064,11 +15076,11 @@ msgstr "启用太阳系外行星发现的时间线"
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
-msgstr "显示行星系统，其中包含潜在的宜居系外行星"
+msgstr "显示行星系统，其中包含潜在的适居系外行星"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:524
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr "仅允许显示潜在宜居行星"
+msgstr "仅允许显示潜在适居系外行星"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
 msgid "Enable display of designations for exoplanets"
@@ -15081,12 +15093,12 @@ msgstr "在工具栏中显示系外行星按钮"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 msgid "Exoplanets marker color"
-msgstr ""
+msgstr "系外行星标识的颜色"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:534
 msgid "Marker color for potential habitable exoplanets"
-msgstr ""
+msgstr "潜在适居系外行星的标记颜色"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Diagrams: scatter plot"
@@ -17508,6 +17520,38 @@ msgstr "主要的月球停变线"
 msgid "Custom Declination 2"
 msgstr "为自定义赤纬线2"
 
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:40
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:199
+msgid "Distance Calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:43
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:84
+msgid ""
+"This plugin allows measure linear distance between Solar system bodies."
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+msgid "Open the distance calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:78
+msgid "Distance Calculator plug-in"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:201
+msgid "Linear distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:202
+msgid "Compute distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:203
+msgid "Compute linear distance between two Solar system bodies:"
+msgstr ""
+
 #~ msgid "AU"
 #~ msgstr "天文单位"
 
@@ -19511,6 +19555,10 @@ msgstr "为自定义赤纬线2"
 #~ msgstr ""
 #~ "望远镜的信号传入 Stellarium 所用的近似时间。\n"
 #~ "如果您发现十字丝在跳动，请增大这一数值。"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 287 events in all!"
+#~ msgstr "太阳系中各种事件的屏幕保护程序。包含287个事件！"
 
 #, qt-format
 #~ msgid "Mean Opposition Magnitude: %1"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 00:57+0700\n"
+"POT-Creation-Date: 2017-11-12 18:25+0700\n"
 "PO-Revision-Date: 2017-06-16 22:46+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Taiwan) <zh_HK@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-11-11 05:06+0000\n"
+"X-Launchpad-Export-Date: 2017-11-13 05:32+0000\n"
 "X-Generator: Launchpad (build 18505)\n"
 "Language: zh_HK\n"
 "X-Language: zh_HK\n"
@@ -60,7 +60,7 @@ msgstr "星群"
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:407
 #: src/core/modules/NebulaMgr.cpp:408 src/core/modules/SolarSystem.cpp:236
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
+#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
 #: src/StelMainView.cpp:769
 msgid "Display Options"
@@ -408,6 +408,7 @@ msgstr "取自位置資料庫的光污染數據"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:81
 msgid "Author"
 msgstr "作者"
 
@@ -1222,6 +1223,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:1979 src/gui/AstroCalcDialog.cpp:2014
 #: src/ui_configurationDialog.h:1363 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:206
 msgid "Distance"
 msgstr "距離"
 
@@ -1704,6 +1706,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:713 src/gui/AstroCalcDialog.cpp:774
 #: src/gui/AstroCalcDialog.cpp:1044 src/gui/AstroCalcDialog.cpp:1080
 #: src/gui/AstroCalcDialog.cpp:1947 plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:154
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr ""
@@ -1999,11 +2002,11 @@ msgstr "黃道光"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "數位巡天(實驗)"
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Night mode"
 msgstr "夜視模式"
 
-#: src/core/StelApp.cpp:587
+#: src/core/StelApp.cpp:591
 msgid "Cannot create Spout sender. See log for details."
 msgstr "無法建立Spout發報機，詳見記錄檔。"
 
@@ -2906,6 +2909,7 @@ msgstr "聯絡"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:79
 msgid "Version"
 msgstr "版本"
 
@@ -2929,6 +2933,7 @@ msgstr "版本"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:80
 msgid "License"
 msgstr "授權條款"
 
@@ -5986,8 +5991,8 @@ msgstr ""
 
 #: src/translations.h:612
 msgid ""
-"Screensaver of various happenings in the Solar System. 287 events in all!"
-msgstr "使用太陽系發生的各樣事件來做的螢幕保護，總計有287個事件！"
+"Screensaver of various happenings in the Solar System. 300 events in all!"
+msgstr ""
 
 #: src/translations.h:613
 msgid "A tour of the western constellations."
@@ -8467,6 +8472,7 @@ msgstr "儲存目前的設置，下次啟動時自動套用。"
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:204
 msgid "Save settings"
 msgstr "儲存設置"
 
@@ -8479,6 +8485,7 @@ msgstr "還原至Stellarium預設值設置"
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:205
 msgid "Restore defaults"
 msgstr "還原預設值"
 
@@ -9820,6 +9827,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:86
 msgid "Links"
 msgstr "連結"
 
@@ -9840,6 +9848,7 @@ msgstr "連結"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:87
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -9865,6 +9874,7 @@ msgstr "您可以在Launchpad網站上獲得我們的支援，發表時請確認
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:279
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:90
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "如果您仍有疑問，你可在 %1 取得解答 %2 。"
@@ -9888,6 +9898,7 @@ msgstr "如果您仍有疑問，你可在 %1 取得解答 %2 。"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:92
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "錯誤報告可以點擊 %1 裡的 %2 。"
@@ -9911,6 +9922,7 @@ msgstr "錯誤報告可以點擊 %1 裡的 %2 。"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:283
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:94
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -10005,6 +10017,7 @@ msgstr "回復預設設置"
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:577
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:207
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "關於"
@@ -11799,6 +11812,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 #: plugins/FOV/src/gui/FOVWindow.cpp:99
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:96
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -17574,6 +17588,38 @@ msgstr "月球主要停頓點所在的赤緯線"
 msgid "Custom Declination 2"
 msgstr "自訂緯度 2"
 
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:40
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:199
+msgid "Distance Calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:43
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:84
+msgid ""
+"This plugin allows measure linear distance between Solar system bodies."
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+msgid "Open the distance calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:78
+msgid "Distance Calculator plug-in"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:201
+msgid "Linear distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:202
+msgid "Compute distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:203
+msgid "Compute linear distance between two Solar system bodies:"
+msgstr ""
+
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道座標系統"
 
@@ -18681,6 +18727,10 @@ msgstr "自訂緯度 2"
 
 #~ msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 #~ msgstr "2068年1月10日從火星的奧林帕斯(Olympus)山看火衛一掩食太陽。"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 287 events in all!"
+#~ msgstr "使用太陽系發生的各樣事件來做的螢幕保護，總計有287個事件！"
 
 #~ msgid ""
 #~ "Earth the other visible Planet's Greatest Elongations and Oppositions from "
