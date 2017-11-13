@@ -145,7 +145,7 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
 lowp float outgasFactor(in mediump vec3 normal, in highp vec3 lightDir, in mediump float falloff)
 {
     mediump float opac = dot(normal,lightDir);
-    //opac = abs(opac); //probably not necessary
+    opac = abs(opac);
     opac = 1.0 - pow(opac, falloff);
     return opac;
 }
