@@ -57,7 +57,7 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual bool configureGui(bool show);
 
-	//! Set up the plugin with default values.  This means clearing out the Distance section in the
+	//! Set up the plugin with default values.  This means clearing out the DistanceCalculator section in the
 	//! main config.ini (if one already exists), and populating it with default values.
 	void restoreDefaults(void);
 

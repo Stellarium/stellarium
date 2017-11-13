@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-11 00:57+0700\n"
-"PO-Revision-Date: 2017-11-08 21:58+0000\n"
+"POT-Creation-Date: 2017-11-12 18:25+0700\n"
+"PO-Revision-Date: 2017-11-11 17:25+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-11-11 05:03+0000\n"
+"X-Launchpad-Export-Date: 2017-11-13 05:30+0000\n"
 "X-Generator: Launchpad (build 18505)\n"
 "Language: sv\n"
 "X-Language: sv\n"
@@ -59,7 +59,7 @@ msgstr "asterism"
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:407
 #: src/core/modules/NebulaMgr.cpp:408 src/core/modules/SolarSystem.cpp:236
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:554
+#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
 #: src/StelMainView.cpp:769
 msgid "Display Options"
@@ -407,6 +407,7 @@ msgstr "Ljusföroreningsdata från position-databasen."
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:81
 msgid "Author"
 msgstr "Upphovsman"
 
@@ -1229,6 +1230,7 @@ msgstr "lå"
 #: src/gui/AstroCalcDialog.cpp:1979 src/gui/AstroCalcDialog.cpp:2014
 #: src/ui_configurationDialog.h:1363 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:206
 msgid "Distance"
 msgstr "Avstånd"
 
@@ -1714,6 +1716,7 @@ msgstr "Medelmagnitud vid opposition"
 #: src/gui/AstroCalcDialog.cpp:713 src/gui/AstroCalcDialog.cpp:774
 #: src/gui/AstroCalcDialog.cpp:1044 src/gui/AstroCalcDialog.cpp:1080
 #: src/gui/AstroCalcDialog.cpp:1947 plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:154
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "AU"
@@ -2009,11 +2012,11 @@ msgstr "Zodiakalljus"
 msgid "Digitized Sky Survey (experimental)"
 msgstr "Digitized Sky Survey (experimentell)"
 
-#: src/core/StelApp.cpp:554
+#: src/core/StelApp.cpp:558
 msgid "Night mode"
 msgstr "Nattläge"
 
-#: src/core/StelApp.cpp:587
+#: src/core/StelApp.cpp:591
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Kan inte skapa Spout sender. För detaljer, se logg."
 
@@ -2757,7 +2760,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
-msgstr "Millers cylindriska"
+msgstr "Miller-cylindrisk"
 
 #: src/core/StelProjectorClasses.cpp:517
 msgid ""
@@ -2765,8 +2768,8 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
-"Millers cylindriska projektion är en modifierad version av Mercators "
-"projektion, och föreslogs år 1942 av Osborn Maitland Miltter (1897-1979). "
+"Den Miller-cylindriska projektionen är en modifierad version av Mercators "
+"projektion, och föreslogs år 1942 av Osborn Maitland Miller (1897-1979). "
 "Polerna går i denna projektion inte längre mot oändligheten."
 
 #: src/core/StelObject.cpp:166
@@ -2975,6 +2978,7 @@ msgstr "Kontakt"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:207
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:249
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:79
 msgid "Version"
 msgstr "Version"
 
@@ -2998,6 +3002,7 @@ msgstr "Version"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:250
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:80
 msgid "License"
 msgstr "Licens"
 
@@ -6106,9 +6111,8 @@ msgstr ""
 
 #: src/translations.h:612
 msgid ""
-"Screensaver of various happenings in the Solar System. 287 events in all!"
+"Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
-"Skärmsläckare av olika händelser i solsystemet. 287 händelser sammanlagt!"
 
 #: src/translations.h:613
 msgid "A tour of the western constellations."
@@ -8652,6 +8656,7 @@ msgstr ""
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:204
 msgid "Save settings"
 msgstr "Spara inställningar"
 
@@ -8664,6 +8669,7 @@ msgstr "Återställ inställningarna till ursprungliga värden."
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:205
 msgid "Restore defaults"
 msgstr "Återställ standardvärden"
 
@@ -10036,6 +10042,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:275
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:86
 msgid "Links"
 msgstr "Länkar"
 
@@ -10056,6 +10063,7 @@ msgstr "Länkar"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:87
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -10083,6 +10091,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:279
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:90
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Om du har några frågor, kan du %1få svar här%2"
@@ -10106,6 +10115,7 @@ msgstr "Om du har några frågor, kan du %1få svar här%2"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:92
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Felrapportering kan göras %1här%2."
@@ -10129,6 +10139,7 @@ msgstr "Felrapportering kan göras %1här%2."
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:283
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:94
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -10227,6 +10238,7 @@ msgstr "Återställ standardinställningar"
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:577
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:207
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Om Oculars"
@@ -12085,6 +12097,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 #: plugins/FOV/src/gui/FOVWindow.cpp:99
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:101
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:96
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -17044,7 +17057,7 @@ msgstr "Laddar scen. Ha tålamod!"
 #: plugins/Scenery3d/src/Scenery3d.cpp:438
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "Laddar scen '%1'"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:456
 msgid "Loading model..."
@@ -17073,24 +17086,24 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:521
 msgid "Could not load scene, please check log for error messages!"
-msgstr ""
+msgstr "Kunde inte ladda scen, var god se loggfil för felmeddelanden!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:525
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "Scenladdningen lyckades."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:585
 msgid "Could not load scene info, please check log for error messages!"
-msgstr ""
+msgstr "Kunde inte ladda sceninfo, var god se loggfil för felmeddelanden!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:609
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Kunde inte hitta scen-ID för %1"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:654
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Vänligen ladda en scen först!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:691
 #, qt-format
@@ -17400,7 +17413,7 @@ msgstr "3D-scener"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Sätt denna scen som standard"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
@@ -17907,6 +17920,38 @@ msgstr "Linjer för högsta månstånd"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:40
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:199
+msgid "Distance Calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:43
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:84
+msgid ""
+"This plugin allows measure linear distance between Solar system bodies."
+msgstr ""
+
+#: plugins/DistanceCalculator/src/DistanceCalculator.cpp:74
+msgid "Open the distance calculator"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/gui/DistanceCalculatorWindow.cpp:78
+msgid "Distance Calculator plug-in"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:201
+msgid "Linear distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:202
+msgid "Compute distance"
+msgstr ""
+
+#: plugins/DistanceCalculator/src/ui_distanceCalculatorWindow.h:203
+msgid "Compute linear distance between two Solar system bodies:"
 msgstr ""
 
 # Osäker
@@ -19623,6 +19668,11 @@ msgstr ""
 #, qt-format
 #~ msgid "IAU Constellation: %1"
 #~ msgstr "IAU-konstellation: %1"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 287 events in all!"
+#~ msgstr ""
+#~ "Skärmsläckare av olika händelser i solsystemet. 287 händelser sammanlagt!"
 
 #, qt-format
 #~ msgid "Albedo: %1"
