@@ -33,6 +33,7 @@ DistanceCalculatorWindow::DistanceCalculatorWindow()
 {
 	ui = new Ui_distanceCalculatorWindowForm();
 	core = StelApp::getInstance().getCore();
+	solarSystem = GETSTELMODULE(SolarSystem);
 }
 
 DistanceCalculatorWindow::~DistanceCalculatorWindow()
@@ -52,7 +53,6 @@ void DistanceCalculatorWindow::retranslate()
 void DistanceCalculatorWindow::createDialogContent()
 {
 	distanceCalc = GETSTELMODULE(DistanceCalculator);
-	solarSystem = GETSTELMODULE(SolarSystem);
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
