@@ -64,8 +64,9 @@ void HipsMgr::init()
 		sources << "http://alaskybis.unistra.fr/hipslist";
 
 
-	for (QString source: sources)
+	for (QUrl source: sources)
 	{
+		if (source.scheme().isEmpty()) source.setScheme("file");
 		QNetworkRequest req = QNetworkRequest(source);
 		QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, &QNetworkReply::finished, [=] {

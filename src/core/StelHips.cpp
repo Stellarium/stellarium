@@ -57,9 +57,14 @@ static QString getExt(const QString& format)
 	return QString();
 }
 
-QString HipsSurvey::getUrlFor(const QString& path) const
+QUrl HipsSurvey::getUrlFor(const QString& path) const
 {
-	return QString("%1/%2?v=%3").arg(url).arg(path).arg((int)releaseDate);
+	QUrl base = url;
+	QString args = "";
+	if (base.scheme().isEmpty()) base.setScheme("file");
+	if (base.scheme() != "file")
+		args += QString("?v=%1").arg((int)releaseDate);
+	return QString("%1/%2%3").arg(base.url()).arg(path).arg(args);
 }
 
 HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
@@ -114,7 +119,7 @@ bool HipsSurvey::getAllsky()
 	if (!networkReply)
 	{
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		QString path = getUrlFor(QString("Norder%1/Allsky.%2").arg(getPropertyInt("hips_order_min", 3)).arg(ext));
+		QUrl path = getUrlFor(QString("Norder%1/Allsky.%2").arg(getPropertyInt("hips_order_min", 3)).arg(ext));
 		qDebug() << "Load allsky" << path;
 		QNetworkRequest req = QNetworkRequest(path);
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
@@ -218,8 +223,8 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		tile->order = order;
 		tile->pix = pix;
 		QString ext = getExt(properties["hips_tile_format"].toString());
-		QString path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
-		tile->texture = texMgr.createTextureThread(path, StelTexture::StelTextureParams(true), false);
+		QUrl path = getUrlFor(QString("Norder%1/Dir%2/Npix%3.%4").arg(order).arg((pix / 10000) * 10000).arg(pix).arg(ext));
+		tile->texture = texMgr.createTextureThread(path.url(), StelTexture::StelTextureParams(true), false);
 		tiles.insert(uid, tile);
 
 		// Use the allsky image until we load the full texture.

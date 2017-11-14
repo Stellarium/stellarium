@@ -26,6 +26,7 @@
 #include <QCache>
 #include <QImage>
 #include <QJsonObject>
+#include <QUrl>
 #include <functional>
 
 #include "StelTexture.hpp"
@@ -88,7 +89,7 @@ private:
 
 
 	QString getTitle(void) const;
-	QString getUrlFor(const QString& path) const;
+	QUrl getUrlFor(const QString& path) const;
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
 	HipsTile* getTile(int order, int pix);
