@@ -492,7 +492,6 @@ void ViewDialog::updateHips()
 		QString url = hips->property("url").toString();
 		QJsonObject properties = hips->property("properties").toJsonObject();
 		QString title = properties["obs_title"].toString();
-		if (hips->isLoading()) title = q_("[loading] ") + title;
 		QListWidgetItem* item = new QListWidgetItem(title, l);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 		item->setCheckState(url == currentSurvey ? Qt::Checked : Qt::Unchecked);
