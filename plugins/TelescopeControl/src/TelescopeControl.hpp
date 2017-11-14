@@ -267,22 +267,18 @@ public slots:
 	//! @endcode
 	void setFontSize(int fontSize);
 	
-	//! slews a telescope to the selected object.
-	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the StelAction which triggered the slot.
+	//! slews a telescope at slot idx to the selected object.
 	//! @code
 	//! // example of usage in scripts
-	//! TelescopeControl.slewTelescopeToSelectedObject();
+	//! TelescopeControl.slewTelescopeToSelectedObject(1);
 	//! @endcode
 	void slewTelescopeToSelectedObject(const int idx);
 
-	//! slews a telescope to the point of the celestial sphere currently
+	//! slews a telescope at slot idx to the point of the celestial sphere currently
 	//! in the center of the screen.
-	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the StelAction which triggered the slot.
 	//! @code
 	//! // example of usage in scripts
-	//! TelescopeControl.slewTelescopeToViewDirection();
+	//! TelescopeControl.slewTelescopeToViewDirection(1);
 	//! @endcode
 	void slewTelescopeToViewDirection(const int idx);
 	
