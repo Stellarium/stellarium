@@ -100,7 +100,10 @@ HipsSurvey::~HipsSurvey()
 int HipsSurvey::getPropertyInt(const QString& key, int fallback)
 {
 	if (!properties.contains(key)) return fallback;
-	return properties[key].toInt();
+	QJsonValue val = properties[key];
+	if (val.isDouble()) return val.toInt();
+	if (val.isString()) return val.toString().toInt();
+	return 0;
 }
 
 bool HipsSurvey::getAllsky()
