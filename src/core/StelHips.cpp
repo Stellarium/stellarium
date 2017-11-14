@@ -23,6 +23,7 @@
 #include "StelPainter.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkReply>
 #include <QTimeLine>
@@ -118,6 +119,12 @@ bool HipsSurvey::getAllsky()
 		QNetworkRequest req = QNetworkRequest(path);
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		emit statusChanged();
+
+		updateProgressBar(0, 100);
+		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
+			updateProgressBar(received, total);
+		});
+
 	}
 	if (networkReply->isFinished())
 	{
@@ -138,6 +145,7 @@ bool HipsSurvey::isLoading(void) const
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
 {
+
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
 	bool outside = (angle == 2.0 * M_PI);
@@ -159,11 +167,15 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	// The maximum angle we want to see is the size of a tile in pixels time the angle for one visible pixel.
 	double px = sPainter->getProjector()->getPixelPerRadAtCenter() * angle;
 	int tileWidth = getPropertyInt("hips_tile_width");
+
 	int orderMin = getPropertyInt("hips_order_min", 3);
 	int order = getPropertyInt("hips_order");
 	int drawOrder = ceil(log2(px / (4.0 * sqrt(2.0) * tileWidth)));
 	drawOrder = qBound(orderMin, drawOrder, order);
 	int splitOrder = qMax(drawOrder, 4);
+
+	nbVisibleTiles = 0;
+	nbLoadedTiles = 0;
 
 	// Draw the 12 root tiles and their children.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
@@ -171,6 +183,26 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	{
 		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, callback);
 	}
+
+	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
+
+}
+
+void HipsSurvey::updateProgressBar(int nb, int total)
+{
+	if (nb == total && progressBar) {
+		StelApp::getInstance().removeProgressBar(progressBar);
+		progressBar = NULL;
+	}
+	if (nb == total) return;
+
+	if (!progressBar)
+	{
+		progressBar = StelApp::getInstance().addProgressBar();
+		progressBar->setFormat(getTitle());
+		progressBar->setRange(0, 100);
+	}
+	progressBar->setValue(100 * nb / total);
 }
 
 HipsTile* HipsSurvey::getTile(int order, int pix)
@@ -289,12 +321,14 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	if (order < orderMin)
 		goto skip_render;
 
+	nbVisibleTiles++;
 	tile = getTile(order, pix);
 	if (!tile) return;
 	if (!tile->texture->bind() && (!tile->allsky || !tile->allsky->bind()))
 		return;
 	if (tile->texFader.state() == QTimeLine::NotRunning && tile->texFader.currentValue() == 0.0)
 		tile->texFader.start();
+	nbLoadedTiles++;
 
 	if (order < drawOrder)
 	{
@@ -401,4 +435,10 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 		}
 	}
 	return ret;
+}
+
+QString HipsSurvey::getTitle(void) const
+{
+	// Todo: add a fallback if the properties don't have a title.
+	return properties["obs_title"].toString();
 }

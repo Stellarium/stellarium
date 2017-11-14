@@ -36,6 +36,7 @@ class HipsTile;
 class QNetworkReply;
 class SphericalCap;
 class HipsSurvey;
+class StelProgressController;
 
 typedef QSharedPointer<HipsSurvey> HipsSurveyP;
 Q_DECLARE_METATYPE(HipsSurveyP)
@@ -80,6 +81,13 @@ private:
 	// Values from the property file.
 	QJsonObject properties;
 
+	// Used to show the loading progress.
+	StelProgressController* progressBar = NULL;
+	int nbVisibleTiles;
+	int nbLoadedTiles;
+
+
+	QString getTitle(void) const;
 	QString getUrlFor(const QString& path) const;
 	int getPropertyInt(const QString& key, int fallback = 0);
 	bool getAllsky();
@@ -91,6 +99,8 @@ private:
 	int fillArrays(int order, int pix, int drawOrder, int splitOrder,
 				   bool outside, StelPainter* sPainter,
 				   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices);
+
+	void updateProgressBar(int nb, int total);
 };
 
 #endif // _STELHIPS_
