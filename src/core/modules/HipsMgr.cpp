@@ -28,6 +28,7 @@
 #include "StelSkyLayerMgr.hpp"
 
 #include <QNetworkReply>
+#include <QSettings>
 
 HipsMgr::HipsMgr() : survey(Q_NULLPTR)
 {
@@ -43,19 +44,39 @@ HipsMgr::~HipsMgr()
 
 void HipsMgr::init()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("hips");
+
 	addAction("actionShow_Hips_Survey", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "surveyDisplayed", "Ctrl+Alt+F");
 
-	// Start to load survey list:
-	QString listPath = "http://alaskybis.unistra.fr/hipslist";
-	QNetworkRequest req = QNetworkRequest(listPath);
-	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(networkReply, &QNetworkReply::finished, [=] {
-		QByteArray data = networkReply->readAll();
-		surveys = HipsSurvey::parseHipslist(data);
-		emit surveysChanged();
-	});
+	// Start to load survey lists
+	QStringList sources;
+	int size = conf->beginReadArray("sources");
+	for (int i = 0; i < size; i++)
+	{
+		conf->setArrayIndex(i);
+		sources << conf->value("url").toString();
+	}
+	conf->endArray();
+
+	// Use alasky if there are not values:
+	if (sources.isEmpty())
+		sources << "http://alaskybis.unistra.fr/hipslist";
+
+
+	for (QString source: sources)
+	{
+		QNetworkRequest req = QNetworkRequest(source);
+		QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		connect(networkReply, &QNetworkReply::finished, [=] {
+			QByteArray data = networkReply->readAll();
+			surveys += HipsSurvey::parseHipslist(data);
+			emit surveysChanged();
+		});
+	}
 
 	setSurveyUrl("http://alaskybis.unistra.fr/DSS/DSSColor");
+	conf->endGroup();
 }
 
 void HipsMgr::deinit()
