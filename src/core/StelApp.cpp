@@ -187,10 +187,6 @@ Q_IMPORT_PLUGIN(RemoteControlStelPluginInterface)
 Q_IMPORT_PLUGIN(RemoteSyncStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_DISTANCECALCULATOR
-Q_IMPORT_PLUGIN(DistanceCalculatorStelPluginInterface)
-#endif
-
 // Initialize static variables
 StelApp* StelApp::singleton = Q_NULLPTR;
 qint64 StelApp::startMSecs = 0;

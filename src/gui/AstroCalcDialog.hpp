@@ -145,6 +145,11 @@ private slots:
 	void savePhenomenaCelestialGroup(int index);
 	void savePhenomenaOppositionFlag(bool b);
 
+	//! Compute planetary data
+	void saveFirstCelestialBody(int index);
+	void saveSecondCelestialBody(int index);
+	void computePlanetaryData();
+
 	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
 	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'

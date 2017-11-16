@@ -192,7 +192,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - milliones kilometers
-	QString Mkm = qc_("Mio km", "distance");
+	QString Mkm = qc_("M km", "distance");
 	QString distAU, distKM;
 	if (flags&Distance)
 	{

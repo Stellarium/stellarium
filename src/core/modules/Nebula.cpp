@@ -336,7 +336,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				//TRANSLATORS: Unit of measure for distance - Megaparsecs
 				dupc = qc_("Mpc", "distance");
 				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
-				duly = qc_("Mio. ly", "distance");
+				duly = qc_("M ly", "distance");
 			}
 
 			if (oDistanceErr>0.f)
