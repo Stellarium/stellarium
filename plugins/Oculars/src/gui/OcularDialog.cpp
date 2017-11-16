@@ -42,7 +42,7 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 			   QList<CCD *>* ccds,
 			   QList<Ocular *>* oculars,
 			   QList<Telescope *>* telescopes,
-			   QList<Lens *> *lense)
+			   QList<Lens *> *lenses)
 	: StelDialog("Oculars")
 	, plugin(pluginPtr)
 	, ccdMapper(Q_NULLPTR)
@@ -70,10 +70,10 @@ OcularDialog::OcularDialog(Oculars* pluginPtr,
 				  telescopeModel,
 				  telescopeModel->propertyMap());
 	
-	this->lense = lense;
+	this->lenses = lenses;
 	lensTableModel = new PropertyBasedTableModel(this);
 	Lens* lensModel = Lens::lensModel();
-	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lense),
+	lensTableModel->init(reinterpret_cast<QList<QObject *>* >(lenses),
 			     lensModel,
 			     lensModel->propertyMap());
 
@@ -268,29 +268,31 @@ void OcularDialog::moveDownSelectedLens()
 #pragma mark Private Slot Methods
 #endif
 /* ********************************************************************* */
-void OcularDialog::requireSelectionStateChanged(int state)
-{
-	bool requireSelection = (state == Qt::Checked);
-	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", true).toBool();
-	if (requireSelection != requireSelectionToZoom)
-	{
-		Oculars::appSettings()->setValue("require_selection_to_zoom", requireSelection);
-		Oculars::appSettings()->sync();
-		emit(requireSelectionChanged(requireSelection));
-	}
-}
 
-void OcularDialog::scaleImageCircleStateChanged(int state)
-{
-	bool shouldScale = (state == Qt::Checked);
-	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle", false).toBool();
-	if (shouldScale != useMaxImageCircle)
-	{
-		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
-		Oculars::appSettings()->sync();
-		emit(scaleImageCircleChanged(shouldScale));
-	}
-}
+// GZ 2017-11 These belong 100% to Oculars, not into the Dialog!
+//void OcularDialog::requireSelectionStateChanged(int state)
+//{
+//	bool requireSelection = (state == Qt::Checked);
+//	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", true).toBool();
+//	if (requireSelection != requireSelectionToZoom)
+//	{
+//		Oculars::appSettings()->setValue("require_selection_to_zoom", requireSelection);
+//		Oculars::appSettings()->sync();
+//		emit(requireSelectionChanged(requireSelection));
+//	}
+//}
+
+//void OcularDialog::scaleImageCircleStateChanged(int state)
+//{
+//	bool shouldScale = (state == Qt::Checked);
+//	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle", false).toBool();
+//	if (shouldScale != useMaxImageCircle)
+//	{
+//		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
+//		Oculars::appSettings()->sync();
+//		emit(scaleImageCircleChanged(shouldScale));
+//	}
+//}
 
 /* ********************************************************************* */
 #if 0
@@ -318,26 +320,40 @@ void OcularDialog::createDialogContent()
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
-	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
+/*
+	connect(ui->scaleImageCircleCheckBox,      SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
+	connect(ui->requireSelectionCheckBox,      SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
 	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));	
-	connect(ui->semiTransparencyCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseSemiTransparency(bool)));
-	connect(ui->hideGridsLinesCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagHideGridsLines(bool)));
-	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
-	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
-	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
-	connect(ui->checkBoxInitialDirection, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitDirectionUsage(bool)));
-	connect(ui->checkBoxTypeOfMount, SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
-	connect(ui->checkBoxResolutionCriterion, SIGNAL(clicked(bool)), plugin, SLOT(setFlagShowResolutionCriterions(bool)));
-	
+	connect(ui->semiTransparencyCheckBox,      SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseSemiTransparency(bool)));
+	connect(ui->hideGridsLinesCheckBox,        SIGNAL(clicked(bool)), plugin, SLOT(setFlagHideGridsLines(bool)));
+	connect(ui->checkBoxControlPanel,          SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
+	connect(ui->checkBoxDecimalDegrees,        SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
+	connect(ui->checkBoxInitialFOV,            SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
+	connect(ui->checkBoxInitialDirection,      SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitDirectionUsage(bool)));
+	connect(ui->checkBoxTypeOfMount,           SIGNAL(clicked(bool)), plugin, SLOT(setFlagAutosetMountForCCD(bool)));
+	connect(ui->checkBoxResolutionCriterion,   SIGNAL(clicked(bool)), plugin, SLOT(setFlagShowResolutionCriterions(bool)));
+*/
+
+	connectBoolProperty(ui->checkBoxControlPanel,          "Oculars.flagGuiPanelEnabled");
+	connectBoolProperty(ui->checkBoxInitialFOV,            "Oculars.flagInitFOVUsage");
+	connectBoolProperty(ui->checkBoxInitialDirection,      "Oculars.flagInitDirectionUsage");
+	connectBoolProperty(ui->checkBoxResolutionCriterion,   "Oculars.flagShowResolutionCriterions");
+	connectBoolProperty(ui->requireSelectionCheckBox,      "Oculars.flagRequireSelection");
+	connectBoolProperty(ui->limitStellarMagnitudeCheckBox, "Oculars.flagLimitMagnitude");
+	connectBoolProperty(ui->hideGridsLinesCheckBox,        "Oculars.flagHideGridsLines");
+	connectBoolProperty(ui->scaleImageCircleCheckBox,      "Oculars.flagScaleImageCircle");
+	connectBoolProperty(ui->semiTransparencyCheckBox,      "Oculars.flagSemiTransparency");
+	connectBoolProperty(ui->checkBoxDMSDegrees,            "Oculars.flagDMSDegrees");
+	connectBoolProperty(ui->checkBoxTypeOfMount,           "Oculars.flagAutosetMountForCCD");
+
 	// The add & delete buttons
-	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
-	connect(ui->deleteCCD, SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
-	connect(ui->addOcular, SIGNAL(clicked()), this, SLOT(insertNewOcular()));
-	connect(ui->deleteOcular, SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
-	connect(ui->addLens, SIGNAL(clicked()), this, SLOT(insertNewLens()));
-	connect(ui->deleteLens, SIGNAL(clicked()), this, SLOT(deleteSelectedLens()));
-	connect(ui->addTelescope, SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
+	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));
+	connect(ui->deleteCCD,       SIGNAL(clicked()), this, SLOT(deleteSelectedCCD()));
+	connect(ui->addOcular,       SIGNAL(clicked()), this, SLOT(insertNewOcular()));
+	connect(ui->deleteOcular,    SIGNAL(clicked()), this, SLOT(deleteSelectedOcular()));
+	connect(ui->addLens,         SIGNAL(clicked()), this, SLOT(insertNewLens()));
+	connect(ui->deleteLens,      SIGNAL(clicked()), this, SLOT(deleteSelectedLens()));
+	connect(ui->addTelescope,    SIGNAL(clicked()), this, SLOT(insertNewTelescope()));
 	connect(ui->deleteTelescope, SIGNAL(clicked()), this, SLOT(deleteSelectedTelescope()));
 
 	// Validators
@@ -348,22 +364,14 @@ void OcularDialog::createDialogContent()
 
 	initAboutText();
 
-	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
-		this, SLOT(moveUpSelectedOcular()));
-	connect(ui->pushButtonMoveOcularDown, SIGNAL(pressed()),
-		this, SLOT(moveDownSelectedOcular()));
-	connect(ui->pushButtonMoveSensorUp, SIGNAL(pressed()),
-		this, SLOT(moveUpSelectedSensor()));
-	connect(ui->pushButtonMoveSensorDown, SIGNAL(pressed()),
-		this, SLOT(moveDownSelectedSensor()));
-	connect(ui->pushButtonMoveTelescopeUp, SIGNAL(pressed()),
-		this, SLOT(moveUpSelectedTelescope()));
-	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()),
-		this, SLOT(moveDownSelectedTelescope()));
-	connect(ui->pushButtonMoveLensUp, SIGNAL(pressed()),
-		this, SLOT(moveUpSelectedLens()));
-	connect(ui->pushButtonMoveLensDown, SIGNAL(pressed()),
-		this, SLOT(moveDownSelectedLens()));
+	connect(ui->pushButtonMoveOcularUp,      SIGNAL(pressed()), this, SLOT(moveUpSelectedOcular()));
+	connect(ui->pushButtonMoveOcularDown,    SIGNAL(pressed()), this, SLOT(moveDownSelectedOcular()));
+	connect(ui->pushButtonMoveSensorUp,      SIGNAL(pressed()), this, SLOT(moveUpSelectedSensor()));
+	connect(ui->pushButtonMoveSensorDown,    SIGNAL(pressed()), this, SLOT(moveDownSelectedSensor()));
+	connect(ui->pushButtonMoveTelescopeUp,   SIGNAL(pressed()), this, SLOT(moveUpSelectedTelescope()));
+	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()), this, SLOT(moveDownSelectedTelescope()));
+	connect(ui->pushButtonMoveLensUp,        SIGNAL(pressed()), this, SLOT(moveUpSelectedLens()));
+	connect(ui->pushButtonMoveLensDown,      SIGNAL(pressed()), this, SLOT(moveDownSelectedLens()));
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -387,7 +395,11 @@ void OcularDialog::createDialogContent()
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
-	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(selectedCCDRotationAngleChanged()));
+	//connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(selectedCCDRotationAngleChanged()));
+	// GZ 2017-11 more useful signal:
+	//connect(ui->ccdRotAngle, SIGNAL(valueChanged()), plugin, SLOT(selectedCCDRotationAngleChanged()));
+	// and even better...
+	connectDoubleProperty(ui->ccdRotAngle, "Oculars.selectedCCDRotationAngle");
 	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
@@ -438,54 +450,55 @@ void OcularDialog::createDialogContent()
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
 
 	// set the initial state
-	QSettings *settings = Oculars::appSettings();
-	if (settings->value("require_selection_to_zoom", true).toBool())
-	{
-		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
-	}
-	if (settings->value("use_max_exit_circle", false).toBool())
-	{
-		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
-	}
-	if (settings->value("limit_stellar_magnitude", true).toBool())
-	{
-		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
-	}
-	if (settings->value("enable_control_panel", false).toBool())
-	{
-		ui->checkBoxControlPanel->setChecked(true);
-	}
-	if (settings->value("use_decimal_degrees", false).toBool())
-	{
-		ui->checkBoxDecimalDegrees->setChecked(true);
-	}
-	if (settings->value("use_initial_fov", false).toBool())
-	{
-		ui->checkBoxInitialFOV->setChecked(true);
-	}
-	if (settings->value("use_initial_direction", false).toBool())
-	{
-		ui->checkBoxInitialDirection->setChecked(true);
-	}
-	if (settings->value("use_semi_transparency", true).toBool())
-	{
-		ui->semiTransparencyCheckBox->setChecked(true);
-	}
-	if (settings->value("hide_grids_and_lines", true).toBool())
-	{
-		ui->hideGridsLinesCheckBox->setChecked(true);
-	}
-	if (settings->value("show_resolution_criterions", true).toBool())
-	{
-		ui->checkBoxResolutionCriterion->setChecked(true);
-	}
+	// GZ 2017-11: Moved these config handlers into Oculars, and connected to the properties!
+//	QSettings *settings = Oculars::appSettings();
+//	if (settings->value("require_selection_to_zoom", true).toBool())
+//	{
+//		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
+//	}
+//	if (settings->value("use_max_exit_circle", false).toBool())
+//	{
+//		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
+//	}
+//	if (settings->value("limit_stellar_magnitude", true).toBool())
+//	{
+//		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
+//	}
+//	if (settings->value("enable_control_panel", false).toBool())
+//	{
+//		ui->checkBoxControlPanel->setChecked(true);
+//	}
+//	if (settings->value("use_decimal_degrees", false).toBool())
+//	{
+//		ui->checkBoxDecimalDegrees->setChecked(true);
+//	}
+//	if (settings->value("use_initial_fov", false).toBool())
+//	{
+//		ui->checkBoxInitialFOV->setChecked(true);
+//	}
+//	if (settings->value("use_initial_direction", false).toBool())
+//	{
+//		ui->checkBoxInitialDirection->setChecked(true);
+//	}
+//	if (settings->value("use_semi_transparency", true).toBool())
+//	{
+//		ui->semiTransparencyCheckBox->setChecked(true);
+//	}
+//	if (settings->value("hide_grids_and_lines", true).toBool())
+//	{
+//		ui->hideGridsLinesCheckBox->setChecked(true);
+//	}
+//	if (settings->value("show_resolution_criterions", true).toBool())
+//	{
+//		ui->checkBoxResolutionCriterion->setChecked(true);
+//	}
 }
 
-void OcularDialog::selectedCCDRotationAngleChanged()
-{
-	if (plugin->getEnableCCD())
-		emit(plugin->selectedCCDChanged());
-}
+//void OcularDialog::selectedCCDRotationAngleChanged()
+//{
+//	if (plugin->getEnableCCD())
+//		emit(plugin->selectedCCDChanged());
+//}
 
 void OcularDialog::setLabelsDescriptionText(bool state)
 {

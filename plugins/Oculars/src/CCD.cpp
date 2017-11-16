@@ -312,25 +312,25 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 #pragma mark Static Methods
 #endif
 /* ********************************************************************* */
-CCD* CCD::ccdFromSettings(QSettings* theSettings, int ccdIndex)
+CCD* CCD::ccdFromSettings(QSettings* settings, int ccdIndex)
 {
 	CCD* ccd = new CCD();
 	QString prefix = "ccd/" + QVariant(ccdIndex).toString() + "/";
-	ccd->setName(theSettings->value(prefix + "name", "").toString());
-	ccd->setResolutionX(theSettings->value(prefix + "resolutionX", 0).toInt());
-	ccd->setResolutionY(theSettings->value(prefix + "resolutionY", 0).toInt());
-	ccd->setChipWidth(theSettings->value(prefix + "chip_width", 0.0).toDouble());
-	ccd->setChipHeight(theSettings->value(prefix + "chip_height", 0.0).toDouble());
-	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", 0.0).toDouble());
-	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", 0.0).toDouble());
-	ccd->setChipRotAngle(theSettings->value(prefix + "chip_rot_angle", 0.0).toDouble());
-	ccd->setBinningX(theSettings->value(prefix + "binningX", 1).toInt());
-	ccd->setBinningY(theSettings->value(prefix + "binningY", 1).toInt());
-	ccd->setHasOAG(theSettings->value(prefix + "has_oag", "false").toBool());
-	ccd->setPrismHeight(theSettings->value(prefix + "prism_height", 0.0).toDouble());
-	ccd->setPrismWidth(theSettings->value(prefix + "prism_width", 0.0).toDouble());
-	ccd->setPrismDistance(theSettings->value(prefix + "prism_distance", 0.0).toDouble());
-	ccd->setPrismPosAngle(theSettings->value(prefix + "prism_pos_angle", 0.0).toDouble());	
+	ccd->setName(settings->value(prefix + "name", "").toString());
+	ccd->setResolutionX(settings->value(prefix + "resolutionX", 0).toInt());
+	ccd->setResolutionY(settings->value(prefix + "resolutionY", 0).toInt());
+	ccd->setChipWidth(settings->value(prefix + "chip_width", 0.0).toDouble());
+	ccd->setChipHeight(settings->value(prefix + "chip_height", 0.0).toDouble());
+	ccd->setPixelWidth(settings->value(prefix + "pixel_width", 0.0).toDouble());
+	ccd->setPixelHeight(settings->value(prefix + "pixel_height", 0.0).toDouble());
+	ccd->setChipRotAngle(settings->value(prefix + "chip_rot_angle", 0.0).toDouble());
+	ccd->setBinningX(settings->value(prefix + "binningX", 1).toInt());
+	ccd->setBinningY(settings->value(prefix + "binningY", 1).toInt());
+	ccd->setHasOAG(settings->value(prefix + "has_oag", "false").toBool());
+	ccd->setPrismHeight(settings->value(prefix + "prism_height", 0.0).toDouble());
+	ccd->setPrismWidth(settings->value(prefix + "prism_width", 0.0).toDouble());
+	ccd->setPrismDistance(settings->value(prefix + "prism_distance", 0.0).toDouble());
+	ccd->setPrismPosAngle(settings->value(prefix + "prism_pos_angle", 0.0).toDouble());
 	return ccd;
 }
 

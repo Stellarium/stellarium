@@ -254,30 +254,22 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					     "actionToggle_Oculars_Next_Telescope");
 	nextTelescopeButton->setToolTip(q_("Next telescope"));
 
-	connect(nextOcularButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(incrementOcularIndex()));
-	connect(nextCcdButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(incrementCCDIndex()));
-	connect(nextTelescopeButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(incrementTelescopeIndex()));
-	connect(prevOcularButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(decrementOcularIndex()));
-	connect(prevCcdButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(decrementCCDIndex()));
-	connect(prevTelescopeButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(decrementTelescopeIndex()));
-	connect(nextLensButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(incrementLensIndex()));
-	connect(prevLensButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(decrementLensIndex()));
+	connect(nextOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(incrementOcularIndex()));
+	connect(nextCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(incrementCCDIndex()));
+	connect(nextTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementTelescopeIndex()));
+	connect(prevOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(decrementOcularIndex()));
+	connect(prevCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(decrementCCDIndex()));
+	connect(prevTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementTelescopeIndex()));
+	connect(nextLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(incrementLensIndex()));
+	connect(prevLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(decrementLensIndex()));
 
 	QColor cOn(255, 255, 255);
 	QColor cOff(102, 102, 102);
 	QColor cHover(162, 162, 162);
 	QString degrees = QString("-15%1").arg(QChar(0x00B0));
 	int degreesW = fm.width(degrees);
-	QPixmap pOn = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	QPixmap pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
+	QPixmap pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
+	QPixmap pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	QPixmap pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdMinus15Button = new StelButton(ccdControls,
 						pOn,
@@ -287,10 +279,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 						true);
 	rotateCcdMinus15Button->setToolTip(q_("Rotate the sensor frame 15 degrees counterclockwise"));
 
-	degrees = QString("-5%1").arg(QChar(0x00B0));
+	degrees  = QString("-5%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
-	pOn = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdMinus5Button = new StelButton(ccdControls,
 					       pOn,
@@ -300,10 +292,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					       true);
 	rotateCcdMinus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees counterclockwise"));
 
-	degrees = QString("-1%1").arg(QChar(0x00B0));
+	degrees  = QString("-1%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
-	pOn = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdMinus1Button = new StelButton(ccdControls,
 					       pOn,
@@ -313,10 +305,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					       true);
 	rotateCcdMinus1Button->setToolTip(q_("Rotate the sensor frame 1 degree counterclockwise"));
 
-	degrees = QString("0%1").arg(QChar(0x00B0));
+	degrees  = QString("0%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
-	pOn = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	resetCcdRotationButton = new StelButton(ccdControls,
 						pOn,
@@ -326,10 +318,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 						true);
 	resetCcdRotationButton->setToolTip(q_("Reset the sensor frame rotation"));
 
-	degrees = QString("+1%1").arg(QChar(0x00B0));
+	degrees  = QString("+1%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
-	pOn = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus1Button = new StelButton(ccdControls,
 					      pOn,
@@ -339,10 +331,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					      true);
 	rotateCcdPlus1Button->setToolTip(q_("Rotate the sensor frame 1 degree clockwise"));
 
-	degrees = QString("+5%1").arg(QChar(0x00B0));
+	degrees  = QString("+5%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
-	pOn = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus5Button = new StelButton(ccdControls,
 					      pOn,
@@ -352,10 +344,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 					      true);
 	rotateCcdPlus5Button->setToolTip(q_("Rotate the sensor frame 5 degrees clockwise"));
 
-	degrees = QString("+15%1").arg(QChar(0x00B0));
+	degrees  = QString("+15%1").arg(QChar(0x00B0));
 	degreesW = fm.width(degrees);
-	pOn = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
-	pOff = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
+	pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
+	pOff   = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOff);
 	pHover = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cHover);
 	rotateCcdPlus15Button = new StelButton(ccdControls,
 					       pOn,
@@ -367,41 +359,27 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	QSignalMapper* sm = ocularsPlugin->ccdRotationSignalMapper;
 	sm->setMapping(rotateCcdMinus15Button, QString("-15"));
-	sm->setMapping(rotateCcdMinus5Button, QString("-5"));
-	sm->setMapping(rotateCcdMinus1Button, QString("-1"));
-	sm->setMapping(rotateCcdPlus1Button, QString("1"));
-	sm->setMapping(rotateCcdPlus5Button, QString("5"));
-	sm->setMapping(rotateCcdPlus15Button, QString("15"));
+	sm->setMapping(rotateCcdMinus5Button,  QString("-5"));
+	sm->setMapping(rotateCcdMinus1Button,  QString("-1"));
+	sm->setMapping(rotateCcdPlus1Button,   QString("1"));
+	sm->setMapping(rotateCcdPlus5Button,   QString("5"));
+	sm->setMapping(rotateCcdPlus15Button,  QString("15"));
 
-	connect(rotateCcdMinus15Button, SIGNAL(triggered()),
-		sm, SLOT(map()));
-	connect(rotateCcdMinus5Button, SIGNAL(triggered()),
-		sm, SLOT(map()));
-	connect(rotateCcdMinus1Button, SIGNAL(triggered()),
-		sm, SLOT(map()));
-	connect(rotateCcdPlus1Button, SIGNAL(triggered()),
-		sm, SLOT(map()));
-	connect(rotateCcdPlus5Button, SIGNAL(triggered()),
-		sm, SLOT(map()));
-	connect(rotateCcdPlus15Button, SIGNAL(triggered()),
-		sm, SLOT(map()));
-	connect(resetCcdRotationButton, SIGNAL(triggered()),
-		ocularsPlugin, SLOT(ccdRotationReset()));
+	connect(rotateCcdMinus15Button, SIGNAL(triggered()), sm, SLOT(map()));
+	connect(rotateCcdMinus5Button,  SIGNAL(triggered()), sm, SLOT(map()));
+	connect(rotateCcdMinus1Button,  SIGNAL(triggered()), sm, SLOT(map()));
+	connect(rotateCcdPlus1Button,   SIGNAL(triggered()), sm, SLOT(map()));
+	connect(rotateCcdPlus5Button,   SIGNAL(triggered()), sm, SLOT(map()));
+	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), sm, SLOT(map()));
+	connect(resetCcdRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(ccdRotationReset()));
 
-	connect(rotateCcdMinus15Button, SIGNAL(triggered()),
-		this, SLOT(updateCcdControls()));
-	connect(rotateCcdMinus5Button, SIGNAL(triggered()),
-		this, SLOT(updateCcdControls()));
-	connect(rotateCcdMinus1Button, SIGNAL(triggered()),
-		this, SLOT(updateCcdControls()));
-	connect(rotateCcdPlus1Button, SIGNAL(triggered()),
-		this, SLOT(updateCcdControls()));
-	connect(rotateCcdPlus5Button, SIGNAL(triggered()),
-		this, SLOT(updateCcdControls()));
-	connect(rotateCcdPlus15Button, SIGNAL(triggered()),
-		this, SLOT(updateCcdControls()));
-	connect(resetCcdRotationButton, SIGNAL(triggered()),
-		this, SLOT(updateCcdControls()));
+	connect(rotateCcdMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	connect(rotateCcdMinus5Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	connect(rotateCcdMinus1Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	connect(rotateCcdPlus1Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	connect(rotateCcdPlus5Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 
 
 	//Set the layout and update the size
@@ -432,18 +410,13 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 		 this, SLOT(updatePosition()));
 
 	//Connecting other slots
-	connect(ocularsPlugin, SIGNAL(selectedOcularChanged()),
-		this, SLOT(updateOcularControls()));
-	connect(ocularsPlugin, SIGNAL(selectedCCDChanged()),
-		this, SLOT(updateCcdControls()));
-	connect(ocularsPlugin, SIGNAL(selectedTelescopeChanged()),
-		this, SLOT(updateTelescopeControls()));
-	connect(ocularsPlugin, SIGNAL(selectedLensChanged()),
-		this, SLOT(updateTelescopeControls()));
+	connect(ocularsPlugin, SIGNAL(selectedOcularChanged(int)),    this, SLOT(updateOcularControls()));
+	connect(ocularsPlugin, SIGNAL(selectedCCDChanged(int)),       this, SLOT(updateCcdControls()));
+	connect(ocularsPlugin, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(updateTelescopeControls()));
+	connect(ocularsPlugin, SIGNAL(selectedLensChanged(int)),      this, SLOT(updateTelescopeControls()));
 
 	//Night mode
-	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)),
-		this, SLOT(setColorScheme(const QString&)));
+	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
 	setColorScheme(stelApp.getCurrentStelStyle());
 }
 
@@ -669,6 +642,7 @@ void OcularsGuiPanel::updateCcdControls()
 	int index = ocularsPlugin->selectedCCDIndex;
 	CCD* ccd = ocularsPlugin->ccds[index];
 	Q_ASSERT(ccd);
+	ocularsPlugin->setSelectedCCDRotationAngle(ccd->chipRotAngle());
 	QString name = ccd->name();
 	QString fullName;
 	if (name.isEmpty())
@@ -731,7 +705,7 @@ void OcularsGuiPanel::updateCcdControls()
 	fieldCcdVScale->setPos(posX, posY);
 	posY += fieldCcdVScale->boundingRect().height();
 	widgetHeight += fieldCcdVScale->boundingRect().height();
-	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle(), 'f', 0);
+	QString rotation = QString::number(ocularsPlugin->getSelectedCCDRotationAngle(), 'f', 0);
 	rotation.append(QChar(0x00B0));
 	QString rotationLabel = QString(q_("Rotation: %1")).arg(rotation);
 	fieldCcdRotation->setPlainText(rotationLabel);
