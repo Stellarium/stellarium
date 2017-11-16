@@ -247,6 +247,10 @@ void AstroCalcDialog::createDialogContent()
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
 	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
+	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
+	connect(ui->secondCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSecondCelestialBody(int)));
+	connect(ui->computePlanetaryDataButton, SIGNAL(clicked(bool)), this, SLOT(computePlanetaryData()));
+
 	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAstroCalcData()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
@@ -1337,9 +1341,13 @@ void AstroCalcDialog::populateCelestialBodyList()
 {
 	Q_ASSERT(ui->celestialBodyComboBox);
 	Q_ASSERT(ui->graphsCelestialBodyComboBox);
+	Q_ASSERT(ui->firstCelestialBodyComboBox);
+	Q_ASSERT(ui->secondCelestialBodyComboBox);
 
 	QComboBox* planets = ui->celestialBodyComboBox;
 	QComboBox* graphsp = ui->graphsCelestialBodyComboBox;
+	QComboBox* firstCB = ui->firstCelestialBodyComboBox;
+	QComboBox* secondCB = ui->secondCelestialBodyComboBox;
 
 	QList<PlanetP> ss = solarSystem->getAllPlanets();
 
@@ -1354,14 +1362,29 @@ void AstroCalcDialog::populateCelestialBodyList()
 	QVariant selectedGraphsPId = graphsp->itemData(indexG);
 	graphsp->clear();
 
+	firstCB->blockSignals(true);
+	int indexFCB = firstCB->currentIndex();
+	QVariant selectedFirstCelestialBodyId = firstCB->itemData(indexFCB);
+	firstCB->clear();
+
+	secondCB->blockSignals(true);
+	int indexSCB = secondCB->currentIndex();
+	QVariant selectedSecondCelestialBodyId = secondCB->itemData(indexSCB);
+	secondCB->clear();
+
 	//For each planet, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const PlanetP& p, ss)
 	{
-		if (!p->getEnglishName().contains("Observer", Qt::CaseInsensitive) && p->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
+		if (!p->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 		{
-			planets->addItem(p->getNameI18n(), p->getEnglishName());
-			graphsp->addItem(p->getNameI18n(), p->getEnglishName());
+			if (p->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
+			{
+				planets->addItem(p->getNameI18n(), p->getEnglishName());
+				graphsp->addItem(p->getNameI18n(), p->getEnglishName());
+			}
+			firstCB->addItem(p->getNameI18n(), p->getEnglishName());
+			secondCB->addItem(p->getNameI18n(), p->getEnglishName());
 		}
 	}
 	//Restore the selection
@@ -1377,8 +1400,22 @@ void AstroCalcDialog::populateCelestialBodyList()
 	graphsp->setCurrentIndex(indexG);
 	graphsp->model()->sort(0);
 
+	indexFCB = firstCB->findData(selectedFirstCelestialBodyId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexFCB<0)
+		indexFCB = firstCB->findData(conf->value("astrocalc/first_celestial_body", "Sun").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+	firstCB->setCurrentIndex(indexFCB);
+	firstCB->model()->sort(0);
+
+	indexSCB = secondCB->findData(selectedSecondCelestialBodyId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (indexSCB<0)
+		indexSCB = secondCB->findData(conf->value("astrocalc/second_celestial_body", "Earth").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+	secondCB->setCurrentIndex(indexSCB);
+	secondCB->model()->sort(0);
+
 	planets->blockSignals(false);
 	graphsp->blockSignals(false);
+	firstCB->blockSignals(false);
+	secondCB->blockSignals(false);
 }
 
 void AstroCalcDialog::saveEphemerisCelestialBody(int index)
@@ -2966,6 +3003,10 @@ void AstroCalcDialog::changePage(QListWidgetItem *current, QListWidgetItem *prev
 	}
 	else
 		plotAltVsTime = false;
+
+	// special case (PCalc)
+	if (ui->stackListWidget->row(current)==6)
+		computePlanetaryData();
 }
 
 void AstroCalcDialog::updateTabBarListWidgetWidth()
@@ -3558,4 +3599,87 @@ void AstroCalcDialog::saveWutObjects()
 	}
 
 	objlist.close();
+}
+
+void AstroCalcDialog::saveFirstCelestialBody(int index)
+{
+	Q_ASSERT(ui->firstCelestialBodyComboBox);
+	QComboBox* celestialBody = ui->firstCelestialBodyComboBox;
+	conf->setValue("astrocalc/first_celestial_body", celestialBody->itemData(index).toString());
+
+	computePlanetaryData();
+}
+
+void AstroCalcDialog::saveSecondCelestialBody(int index)
+{
+	Q_ASSERT(ui->secondCelestialBodyComboBox);
+	QComboBox* celestialBody = ui->secondCelestialBodyComboBox;
+	conf->setValue("astrocalc/second_celestial_body", celestialBody->itemData(index).toString());
+
+	computePlanetaryData();
+}
+
+void AstroCalcDialog::computePlanetaryData()
+{
+	Q_ASSERT(ui->firstCelestialBodyComboBox);
+	Q_ASSERT(ui->secondCelestialBodyComboBox);
+
+	QComboBox* fbody = ui->firstCelestialBodyComboBox;
+	QComboBox* sbody = ui->secondCelestialBodyComboBox;
+
+	QString firstCelestialBody = fbody->currentData(Qt::UserRole).toString();
+	QString secondCelestialBody = sbody->currentData(Qt::UserRole).toString();
+	QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
+
+	PlanetP firstCBId = solarSystem->searchByEnglishName(firstCelestialBody);
+	Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
+	PlanetP secondCBId = solarSystem->searchByEnglishName(secondCelestialBody);
+	Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
+
+	double distanceAu = (posFCB-posSCB).length();
+	double distanceKm = AU * distanceAu;
+	// TRANSLATORS: Unit of measure for distance - kilometers
+	QString km = qc_("km", "distance");
+	// TRANSLATORS: Unit of measure for distance - milliones kilometers
+	QString Mkm = qc_("M km", "distance");
+	QString distAU, distKM;
+	bool useKM = true;
+	if (distanceAu < 0.1)
+	{
+		distAU = QString::number(distanceAu, 'f', 5);
+		distKM = QString::number(distanceKm, 'f', 3);
+		useKM = true;
+	}
+	else
+	{
+		distAU = QString::number(distanceAu, 'f', 5);
+		distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
+		useKM = false;
+	}
+
+	double y = cos(posSCB.latitude())*sin(posSCB.longitude()-posFCB.longitude());
+	double x = cos(posFCB.latitude())*sin(posSCB.latitude()) - sin(posFCB.latitude())*cos(posSCB.latitude())*cos(posSCB.longitude()-posFCB.longitude());
+	double r = std::atan2(y,x);
+	if (r<0)
+		r+= 2*M_PI;
+
+	unsigned int d, m;
+	double s, dd;
+	bool sign;
+
+	StelUtils::radToDms(r, sign, d, m, s);
+	if (d>180)
+		d -= 180;
+
+	StelUtils::radToDecDeg(r, sign, dd);
+	if (dd>180)
+		dd -= 180;
+
+	QString distanceUM = qc_("AU", "distance, astronomical unit");
+	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU).arg(distanceUM).arg(distKM).arg(useKM ? km : Mkm));
+
+	QString angularDistance = QChar(0x2014);
+	if (firstCelestialBody!=currentPlanet && secondCelestialBody!=currentPlanet)
+		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
+	ui->labelAngularDistanceValue->setText(angularDistance);
 }

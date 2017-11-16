@@ -282,7 +282,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			distAU = QString::number(hdistanceAu, 'f', 3);
 			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = qc_("Mio km", "distance");
+			km = qc_("M km", "distance");
 		}
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
 
@@ -297,7 +297,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			distAU = QString::number(distanceAu, 'f', 3);
 			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = qc_("Mio km", "distance");
+			km = qc_("M km", "distance");
 		}
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 	}
