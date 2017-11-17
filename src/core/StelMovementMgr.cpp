@@ -1498,13 +1498,13 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 }
 
 // Zoom to the given field of view
-void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
+void StelMovementMgr::zoomTo(double aim_fov, float zoomDuration)
 {
-	moveDuration /= movementsSpeedFactor;
+	zoomDuration /= movementsSpeedFactor;
 
 	zoomMove.aimFov=aim_fov;
 	zoomMove.startFov=currentFov;
-	zoomMove.speed=1.f/(moveDuration*1000);
+	zoomMove.speed=1.f/(zoomDuration*1000);
 	zoomMove.coef=0.;
 	flagAutoZoom = true;
 }
