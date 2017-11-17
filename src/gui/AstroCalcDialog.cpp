@@ -3682,4 +3682,13 @@ void AstroCalcDialog::computePlanetaryData()
 	if (firstCelestialBody!=currentPlanet && secondCelestialBody!=currentPlanet)
 		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
+
+	int cb1 = std::round(firstCBId->getSiderealPeriod());
+	int cb2 = std::round(secondCBId->getSiderealPeriod());
+	int gcd = StelUtils::gcd(cb1, cb2);
+	QString orbitalResonance = QChar(0x2014);
+	if (firstCelestialBody!="Sun" && secondCelestialBody!="Sun")
+		orbitalResonance = QString("%1:%2").arg(std::round(cb1/gcd)).arg(std::round(cb2/gcd)); // Very accurate resonances!
+
+	ui->labelOrbitalResonanceValue->setText(orbitalResonance);
 }

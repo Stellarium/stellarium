@@ -2448,6 +2448,11 @@ int compareVersions(const QString v1, const QString v2)
 	return result;
 }
 
+int gcd(int a, int b)
+{
+	return b ? gcd(b, a % b) : a;
+}
+
 //! Uncompress gzip or zlib compressed data.
 QByteArray uncompress(const QByteArray& data)
 {
