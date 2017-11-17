@@ -88,7 +88,6 @@ class Oculars : public StelModule
 	Q_PROPERTY(int selectedLensIndex      READ getSelectedLensIndex      WRITE selectLensAtIndex      NOTIFY selectedLensChanged)
 	Q_PROPERTY(double selectedCCDRotationAngle READ getSelectedCCDRotationAngle WRITE setSelectedCCDRotationAngle NOTIFY selectedCCDRotationAngleChanged)
 
-	// 2017-11:  All things settable by the OcularDialog GUI should also be Properties...
 	Q_PROPERTY(bool flagGuiPanelEnabled          READ getFlagGuiPanelEnabled          WRITE enableGuiPanel NOTIFY flagGuiPanelEnabledChanged)
 	Q_PROPERTY(bool flagInitFOVUsage             READ getFlagInitFovUsage             WRITE setFlagInitFovUsage NOTIFY flagInitFOVUsageChanged) 
 	Q_PROPERTY(bool flagInitDirectionUsage       READ getFlagInitDirectionUsage       WRITE setFlagInitDirectionUsage NOTIFY flagInitDirectionUsageChanged) 
@@ -171,7 +170,7 @@ public slots:
 	int getSelectedTelescopeIndex() const {return selectedTelescopeIndex; }
 
 	void selectLensAtIndex(QString indexString); //!< indexString must be an integer, in the range -1:lense.count()
-	void selectLensAtIndex(int index);           //!< index in the range -1:lense.count(), else call is ignored
+	void selectLensAtIndex(int index);           //!< index in the range -1:lenses.count(), else call is ignored
 	int getSelectedLensIndex() const {return selectedLensIndex; }
 
 	//! Toggles the sensor frame overlay.
@@ -195,8 +194,6 @@ public slots:
 
 	void setFlagRequireSelection(const bool b);
 	bool getFlagRequireSelection(void) const;
-	//	void setFlagRequireSelection(bool state);
-	//	bool getFlagRequireSelection(void) const { return flagRequireSelection;}
 	
 	void setFlagLimitMagnitude(const bool b);
 	bool getFlagLimitMagnitude(void) const;
@@ -245,8 +242,6 @@ signals:
 	void flagDMSDegreesChanged(bool value);
 	void flagScaleImageCircleChanged(bool value);
 
-
-
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
 	void instrumentChanged();
@@ -286,8 +281,8 @@ private:
 	//! Once there is a valid ini file, it is loaded into the settings attribute.
 	void validateAndLoadIniFile();
 
-	//!
-	//! Record the state of the GridLinesMgr views beforehand, so that it can be reset afterwards.
+	//! toggles the actual ocular view.
+	//! Record the state of the GridLinesMgr and other settings beforehand, so that they can be reset afterwards.
 	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
 	void zoom(bool zoomedIn);
