@@ -712,6 +712,12 @@ namespace StelUtils
 	//! with other data.
 	QByteArray uncompress(QIODevice &device, qint64 maxBytes=-1);
 
+	//! Greatest Common Divisor (Euclid's algorithm)
+	//! @param a first number
+	//! @param b second number
+	//! @return Greatest Common Divisor
+	int gcd(int a, int b);
+
 #ifdef _MSC_BUILD
 	inline double trunc(double x)
 	{

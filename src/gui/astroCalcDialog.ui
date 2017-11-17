@@ -990,6 +990,19 @@
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelAngularDistance">
+              <property name="text">
+               <string>Angular distance:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="labelAngularDistanceValue"/>
+            </item>
             <item row="1" column="0">
              <widget class="QComboBox" name="firstCelestialBodyComboBox">
               <property name="editable">
@@ -1000,12 +1013,8 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="labelSCB">
-              <property name="text">
-               <string>Second celestial body:</string>
-              </property>
-             </widget>
+            <item row="2" column="1">
+             <widget class="QLabel" name="labelLinearDistanceValue"/>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="labelLinearDistance">
@@ -1017,16 +1026,10 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="labelAngularDistanceValue"/>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="labelAngularDistance">
+            <item row="0" column="1">
+             <widget class="QLabel" name="labelSCB">
               <property name="text">
-               <string>Angular distance:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <string>Second celestial body:</string>
               </property>
              </widget>
             </item>
@@ -1037,9 +1040,6 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="labelLinearDistanceValue"/>
-            </item>
             <item row="1" column="1">
              <widget class="QComboBox" name="secondCelestialBodyComboBox">
               <property name="editable">
@@ -1049,6 +1049,19 @@
                <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="labelOrbitalResonance">
+              <property name="text">
+               <string>Orbital resonance:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLabel" name="labelOrbitalResonanceValue"/>
             </item>
            </layout>
           </item>
