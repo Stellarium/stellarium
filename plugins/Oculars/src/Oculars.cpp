@@ -685,7 +685,8 @@ void Oculars::init()
 		
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
 
-		setFlagDMSDegrees(settings->value("use_decimal_degrees", false).toBool());
+		// For historical reasons, name of .ini entry and description of checkbox (and therefore flag name) are reversed.
+		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 		setFlagInitDirectionUsage(settings->value("use_initial_direction", false).toBool());
@@ -2404,7 +2405,7 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 void Oculars::setFlagDMSDegrees(const bool b)
 {
 	flagDMSDegrees = b;
-	settings->setValue("use_decimal_degrees", b);
+	settings->setValue("use_decimal_degrees", !b);
 	settings->sync();
 	emit flagDMSDegreesChanged(b);
 }

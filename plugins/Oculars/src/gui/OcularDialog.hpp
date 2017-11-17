@@ -71,10 +71,6 @@ public slots:
 	void moveDownSelectedLens();
 	void retranslate();
 
-//signals:
-//	void requireSelectionChanged(bool state);
-//	void scaleImageCircleChanged(bool state);
-
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -82,10 +78,7 @@ protected:
 
 private slots:
 	void initAboutText();
-//	void requireSelectionStateChanged(int state);
-//	void scaleImageCircleStateChanged(int state);
 	void setLabelsDescriptionText(bool state);
-	//void selectedCCDRotationAngleChanged();
 
 private:
 	Oculars* plugin;
