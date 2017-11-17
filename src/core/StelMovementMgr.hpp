@@ -213,8 +213,8 @@ public slots:
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
-	//! @param moveDuration The time that the operation should take to complete. [seconds]
-	void zoomTo(double aimFov, float moveDuration = 1.);
+	//! @param zoomDuration The time that the operation should take to complete. [seconds]
+	void zoomTo(double aimFov, float zoomDuration = 1.);
 	//! Get the current Field Of View in degrees
 	double getCurrentFov() const {return currentFov;}
 
