@@ -43,7 +43,7 @@ MainService::MainService(QObject *parent)
 	: AbstractAPIService(parent),
 	  moveX(0),moveY(0),lastMoveUpdateTime(0),
 	  //100 should be more than enough
-	  //this only has to emcompass events that occur between 2 status updates
+	  //this only has to encompass events that occur between 2 status updates
 	  actionCache(100), propCache(100)
 {
 	//this is run in the main thread
@@ -214,10 +214,53 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 
 		response.writeJSON(QJsonDocument(mainObj));
 	}
+	else if(operation=="view")
+	{
+		// Retrieve Vector of view direction
+
+		// Optional: limit answer to just one number.
+		bool giveJ2000=true;
+		bool giveJNow=true;
+		bool giveAltAz=true;
+		QString coordName = QString::fromUtf8(parameters.value("coord"));
+		if (coordName=="J2000")
+		{
+			giveJNow=false;
+			giveAltAz=false;
+		}
+		else if (coordName=="JNow")
+		{
+			giveJ2000=false;
+			giveAltAz=false;
+		}
+		else if (coordName=="altAz")
+		{
+			giveJ2000=false;
+			giveJNow=false;
+		}
+
+		QJsonObject mainObj;
+
+		Vec3d viewJ2000=mvmgr->getViewDirectionJ2000();
+		if (giveJ2000)
+			mainObj.insert("J2000", viewJ2000.toString());
+		if (giveJNow)
+		{
+			Vec3d viewJNow=core->j2000ToEquinoxEqu(viewJ2000, StelCore::RefractionAuto);
+			mainObj.insert("JNow", viewJNow.toString());
+		}
+		if (giveAltAz)
+		{
+			Vec3d viewAltAz=core->j2000ToAltAz(viewJ2000, StelCore::RefractionAuto);
+			mainObj.insert("altAz", viewAltAz.toString());
+		}
+
+		response.writeJSON(QJsonDocument(mainObj));
+	}
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. GET: status, plugins");
+		response.writeRequestError("unsupported operation. GET: status, plugins, view");
 	}
 }
 

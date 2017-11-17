@@ -480,10 +480,18 @@ It is also possible to send commands via command line, e.g.,
 wget -q --post-data 'id=show.ssc' http://stella:8090/api/scripts/run >/dev/null 2>&1
 curl --data 'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
 curl -d     'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
+curl -d 'id=LandscapeMgr.fogDisplayed&value=false' http://localhost:8090/api/stelproperty/set 
 \end{commands}
 This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
 
 % TODO: Please list all available commands with examples here!
+
+You can retrieve a complete pretty-printed list of properties:
+\begin{commands}[\scriptsize]
+curl -G -d 'id=propId=-1&actionId=-2' http://localhost:8090/api/main/status | python -m json.tool 
+\end{commands} 
+
+
   
 \subsection{Developer information}
 \label{sec:plugins:RemoteControl:developer}
