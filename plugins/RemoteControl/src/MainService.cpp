@@ -223,12 +223,12 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 		bool giveJNow=true;
 		bool giveAltAz=true;
 		QString coordName = QString::fromUtf8(parameters.value("coord"));
-		if (coordName=="J2000")
+		if (coordName=="j2000")
 		{
 			giveJNow=false;
 			giveAltAz=false;
 		}
-		else if (coordName=="JNow")
+		else if (coordName=="jNow")
 		{
 			giveJ2000=false;
 			giveAltAz=false;
@@ -243,11 +243,11 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 
 		Vec3d viewJ2000=mvmgr->getViewDirectionJ2000();
 		if (giveJ2000)
-			mainObj.insert("J2000", viewJ2000.toString());
+			mainObj.insert("j2000", viewJ2000.toString());
 		if (giveJNow)
 		{
 			Vec3d viewJNow=core->j2000ToEquinoxEqu(viewJ2000, StelCore::RefractionAuto);
-			mainObj.insert("JNow", viewJNow.toString());
+			mainObj.insert("jNow", viewJNow.toString());
 		}
 		if (giveAltAz)
 		{
@@ -413,6 +413,28 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 			return;
 		}
 
+		QByteArray jNow = parameters.value("jNow");
+		if(!jNow.isEmpty())
+		{
+			QJsonDocument doc = QJsonDocument::fromJson(jNow);
+			QJsonArray arr = doc.array();
+			if(arr.size() == 3)
+			{
+				Vec3d posNow;
+				posNow[0] = arr.at(0).toDouble();
+				posNow[1] = arr.at(1).toDouble();
+				posNow[2] = arr.at(2).toDouble();
+
+				mvmgr->setViewDirectionJ2000(core->equinoxEquToJ2000(posNow, StelCore::RefractionAuto));
+				response.setData("ok");
+			}
+			else
+			{
+				response.writeRequestError("invalid jNow format, use JSON array of 3 doubles");
+			}
+			return;
+		}
+
 		QByteArray rect = parameters.value("altAz");
 		if(!rect.isEmpty())
 		{
@@ -453,7 +475,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 			response.setData("ok");
 		}
 		else
-			response.writeRequestError("requires at least one of az,alt,j2000 parameters");
+			response.writeRequestError("requires at least one of az,alt,j2000,jNow parameters");
 	}
 
 	else if (operation == "fov")
