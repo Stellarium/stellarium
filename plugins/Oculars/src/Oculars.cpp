@@ -972,46 +972,46 @@ void Oculars::enableOcular(bool enableOcularMode)
 		{
 			selectedTelescopeIndex = 0;
 		}
+
+		StelCore *core = StelApp::getInstance().getCore();
+		LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
+
+		// Toggle the ocular view on & off. To toggle on, we want to ensure there is a selected object.
+		if (!flagShowOculars && flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
+		{
+			if (usageMessageLabelID == -1)
+			{
+				QFontMetrics metrics(font);
+				QString labelText = q_("Please select an object before switching to ocular view.");
+				StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
+				int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0];
+				xPosition = xPosition - 0.5 * (metrics.width(labelText));
+				int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1];
+				yPosition = yPosition - 0.5 * (metrics.height());
+				const char *tcolor = "#99FF99";
+				usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
+										true, font.pixelSize(), tcolor);
+			}
+		}
+		else
+		{
+			if (selectedOcularIndex != -1)
+			{
+				// remove the usage label if it is being displayed.
+				hideUsageMessageIfDisplayed();
+				flagShowOculars = enableOcularMode;
+				zoom(false);
+				//BM: I hope this is the right place...
+				if (guiPanel)
+					guiPanel->showOcularGui();
+			}
+		}
 	}
 
 	if (!ready  || selectedOcularIndex == -1 ||  (selectedTelescopeIndex == -1 && !isBinocularDefined()))
 	{
 		qWarning() << "The Oculars module has been disabled.";
 		return;
-	}
-
-	StelCore *core = StelApp::getInstance().getCore();
-	LabelMgr* labelManager = GETSTELMODULE(LabelMgr);
-
-	// Toggle the ocular view on & off. To toggle on, we want to ensure there is a selected object.
-	if (!flagShowOculars && flagRequireSelection && !StelApp::getInstance().getStelObjectMgr().getWasSelected() )
-	{
-		if (usageMessageLabelID == -1)
-		{
-			QFontMetrics metrics(font);
-			QString labelText = q_("Please select an object before switching to ocular view.");
-			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-			int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0];
-			xPosition = xPosition - 0.5 * (metrics.width(labelText));
-			int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1];
-			yPosition = yPosition - 0.5 * (metrics.height());
-			const char *tcolor = "#99FF99";
-			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
-									true, font.pixelSize(), tcolor);
-		}
-	}
-	else
-	{
-		if (selectedOcularIndex != -1)
-		{
-			// remove the usage label if it is being displayed.
-			hideUsageMessageIfDisplayed();
-			flagShowOculars = enableOcularMode;
-			zoom(false);
-			//BM: I hope this is the right place...
-			if (guiPanel)
-				guiPanel->showOcularGui();
-		}
 	}
 
 	emit enableOcularChanged(flagShowOculars);
