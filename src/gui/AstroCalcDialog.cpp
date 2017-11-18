@@ -3657,23 +3657,39 @@ void AstroCalcDialog::computePlanetaryData()
 		useKM = false;
 	}
 
-	double y = cos(posSCB.latitude())*sin(posSCB.longitude()-posFCB.longitude());
-	double x = cos(posFCB.latitude())*sin(posSCB.latitude()) - sin(posFCB.latitude())*cos(posSCB.latitude())*cos(posSCB.longitude()-posFCB.longitude());
-	double r = std::atan2(y,x);
-	if (r<0)
-		r+= 2*M_PI;
+	double r = std::acos(sin(posFCB.latitude())*sin(posSCB.latitude()) + cos(posFCB.latitude())*cos(posSCB.latitude())*cos(posFCB.longitude() - posSCB.longitude()));
 
 	unsigned int d, m;
 	double s, dd;
 	bool sign;
 
 	StelUtils::radToDms(r, sign, d, m, s);
-	if (d>180)
-		d -= 180;
-
 	StelUtils::radToDecDeg(r, sign, dd);
-	if (dd>180)
-		dd -= 180;
+
+	int cb1 = std::round(firstCBId->getSiderealPeriod());
+	int cb2 = std::round(secondCBId->getSiderealPeriod());
+	QString orbitalResonance = QChar(0x2014);
+	bool spin = false;
+	QString parentFCBName = "";
+	if (firstCelestialBody!="Sun")
+		parentFCBName = firstCBId->getParent()->getEnglishName();
+	QString parentSCBName = "";
+	if (secondCelestialBody!="Sun")
+		parentSCBName = secondCBId->getParent()->getEnglishName();
+
+	if (firstCelestialBody==parentSCBName)
+	{
+		cb1 = std::round(secondCBId->getSiderealPeriod());
+		cb2 = std::round(secondCBId->getSiderealDay());
+		spin = true;
+	}
+	else if (secondCelestialBody==parentFCBName)
+	{
+		cb1 = std::round(firstCBId->getSiderealPeriod());
+		cb2 = std::round(firstCBId->getSiderealDay());
+		spin = true;
+	}
+	int gcd = StelUtils::gcd(cb1, cb2);
 
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
 	ui->labelLinearDistanceValue->setText(QString("%1 %2 (%3 %4)").arg(distAU).arg(distanceUM).arg(distKM).arg(useKM ? km : Mkm));
@@ -3683,12 +3699,12 @@ void AstroCalcDialog::computePlanetaryData()
 		angularDistance = QString("%1%2 %3' %4\" (%5%2)").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2).arg(dd, 0, 'f', 5);
 	ui->labelAngularDistanceValue->setText(angularDistance);
 
-	int cb1 = std::round(firstCBId->getSiderealPeriod());
-	int cb2 = std::round(secondCBId->getSiderealPeriod());
-	int gcd = StelUtils::gcd(cb1, cb2);
-	QString orbitalResonance = QChar(0x2014);
-	if (firstCelestialBody!="Sun" && secondCelestialBody!="Sun")
-		orbitalResonance = QString("%1:%2").arg(std::round(cb1/gcd)).arg(std::round(cb2/gcd)); // Very accurate resonances!
+	if (cb1>0 && cb2>0)
+	{
+		orbitalResonance = QString("%1:%2").arg(qAbs(std::round(cb1/gcd))).arg(qAbs(std::round(cb2/gcd))); // Very accurate resonances!
+		if (spin)
+			orbitalResonance.append(QString(" (%1)").arg(q_("spin-orbit resonance")));
+	}
 
 	ui->labelOrbitalResonanceValue->setText(orbitalResonance);
 }
