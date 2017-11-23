@@ -119,6 +119,7 @@ StelGui::StelGui()
   #endif
 
 {
+	setObjectName("StelGui");
 	// QPixmapCache::setCacheLimit(30000); ?
 }
 
@@ -245,6 +246,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
 #endif
+	// Put StelGui under the StelProperty system (simpler and more consistent GUI)
+	StelApp::getInstance().getStelPropertyManager()->registerObject(this);
 
 	///////////////////////////////////////////////////////////////////////////
 	//// QGraphicsView based GUI
@@ -699,6 +702,7 @@ void StelGui::setFlagShowFlipButtons(bool b)
 	if (initDone) {
 		skyGui->updateBarsPos();
 	}
+	emit flagShowFlipButtonsChanged(b);
 }
 
 // Define whether the button toggling nebulae backround images should be visible
@@ -720,6 +724,7 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	if (initDone) {
 		skyGui->updateBarsPos();
 	}
+	emit flagShowNebulaBackgroundButtonChanged(b);
 }
 
 // Define whether the button toggling bookmarks should be visible
@@ -741,6 +746,7 @@ void StelGui::setFlagShowBookmarksButton(bool b)
 	if (initDone) {
 		skyGui->updateBarsPos();
 	}
+	emit flagShowBookmarksButtonChanged(b);
 }
 
 // Define whether the button toggling ICRS grid should be visible
@@ -762,6 +768,7 @@ void StelGui::setFlagShowICRSGridButton(bool b)
 	if (initDone) {
 		skyGui->updateBarsPos();
 	}
+	emit flagShowICRSGridButtonChanged(b);
 }
 
 // Define whether the button toggling galactic grid should be visible
@@ -783,6 +790,7 @@ void StelGui::setFlagShowGalacticGridButton(bool b)
 	if (initDone) {
 		skyGui->updateBarsPos();
 	}
+	emit flagShowGalacticGridButtonChanged(b);
 }
 
 // Define whether the button toggling ecliptic grid should be visible
@@ -825,6 +833,7 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 	if (initDone) {
 		skyGui->updateBarsPos();
 	}
+	emit flagShowConstellationBoundariesButtonChanged(b);
 }
 
 // Define whether the button toggling TOAST survey images should be visible
@@ -843,16 +852,7 @@ void StelGui::setFlagShowToastSurveyButton(bool b)
 		getButtonBar()->hideButton("actionShow_Toast_Survey");
 	}
 	flagShowToastSurveyButton = b;
-}
-
-void StelGui::setFlagShowDecimalDegrees(bool b)
-{
-	StelApp::getInstance().setFlagShowDecimalDegrees(b);
-	if (searchDialog->visible())
-	{
-		// Update format of input fields if Search Dialog is open
-		searchDialog->populateCoordinateAxis();		
-	}
+	emit flagShowToastSurveyButtonChanged(b);
 }
 
 void StelGui::setVisible(bool b)
@@ -997,6 +997,7 @@ void StelGui::scriptStopped()
 void StelGui::setGuiVisible(bool b)
 {
 	setVisible(b);
+	emit visibleChanged(b);
 }
 
 StelAction* StelGui::getAction(const QString& actionName)

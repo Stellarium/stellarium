@@ -350,12 +350,10 @@ protected:
 		//important to call this, or Qt may have invalid state after we have drawn (wrong textures, etc...)
 		painter->beginNativePainting();
 
-		//fix for bug 1628072 caused by QTBUG-56798
+		//fix for bug LP:1628072 caused by QTBUG-56798
 #ifndef QT_NO_DEBUG
 		StelOpenGL::clearGLErrors();
 #endif
-
-
 		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 
 		//clear the buffer (not strictly required for us because we repaint all pixels, but should improve perf on tile-based renderers)
@@ -368,6 +366,7 @@ protected:
 		app.draw();
 		painter->endNativePainting();
 
+		mainView->handleMouseCursorTimeout(now);
 		mainView->drawEnded();
 	}
 
@@ -397,6 +396,10 @@ protected:
 
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
+		// GZ TODO: Where to place the mouse cursor wake-up?
+		qDebug() << "StelRootItem::mouseMoveEvent()";
+		if (QGuiApplication::overrideCursor()!=0)
+			QGuiApplication::restoreOverrideCursor();
 		QMouseEvent ev = convertMouseEvent(event);
 		QPointF pos = ev.pos();
 		event->setAccepted(StelApp::getInstance().handleMove(pos.x(), pos.y(), ev.buttons()));
@@ -574,7 +577,7 @@ StelMainView::StelMainView(QSettings* settings)
 
 	setWindowIcon(QIcon(":/mainWindow/icon.bmp"));
 	initTitleI18n();
-	setObjectName("Mainview");
+	setObjectName("MainView");
 
 	setViewportUpdateMode(QGraphicsView::NoViewportUpdate);
 	setFrameShape(QFrame::NoFrame);
@@ -639,6 +642,8 @@ StelMainView::StelMainView(QSettings* settings)
 	glWidget->makeCurrent();
 	glWidget->initializeGL();
 #endif
+	// We cannot use global mousetracking. Only if mouse is hidden!
+	//setMouseTracking(true);
 }
 
 void StelMainView::resizeEvent(QResizeEvent* event)
@@ -653,6 +658,18 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 	}
 	QGraphicsView::resizeEvent(event);
 }
+
+// GZ: This should do something to make the cursor visible again when the mouse is moved.
+// However, any implementation of this method seems to gobble all mouse moves.
+//void StelMainView::mouseMoveEvent(QMouseEvent *event)
+//{
+////	//Q_UNUSED(event)
+//////	thereWasAnEvent();
+//	event->ignore();
+////	if (QGuiApplication::overrideCursor()!=0)
+////		QGuiApplication::restoreOverrideCursor();
+//}
+
 
 void StelMainView::focusSky() {
 	//scene()->setActiveWindow(0);
@@ -1274,6 +1291,28 @@ void StelMainView::drawEnded()
 	{
 		if(!minFpsTimer->isActive())
 			minFpsTimer->start();
+	}
+}
+
+void StelMainView::handleMouseCursorTimeout(const double now)
+{
+	// GZ restore mouse cursor stuff from pre-0.15.2.
+	// Manage cursor timeout
+	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
+	{
+		if (QGuiApplication::overrideCursor()==0)
+		{
+			QGuiApplication::setOverrideCursor(Qt::BlankCursor);
+			setMouseTracking(true);
+		}
+	}
+	else
+	{
+		if (QGuiApplication::overrideCursor()!=0)
+		{
+			QGuiApplication::restoreOverrideCursor();
+			setMouseTracking(false);
+		}
 	}
 }
 

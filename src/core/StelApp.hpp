@@ -69,6 +69,10 @@ class StelApp : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
+	Q_PROPERTY(bool flagShowDecimalDegrees  READ getFlagShowDecimalDegrees  WRITE setFlagShowDecimalDegrees  NOTIFY flagShowDecimalDegreesChanged)
+	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
+	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
+	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -237,7 +241,7 @@ public slots:
 	//! Set flag for using calculation of azimuth from south towards west (instead north towards east)
 	bool getFlagSouthAzimuthUsage() const { return flagUseAzimuthFromSouth; }
 	//! Get flag for using calculation of azimuth from south towards west (instead north towards east)
-	void setFlagSouthAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
+	void setFlagSouthAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; emit flagUseAzimuthFromSouthChanged(use);}
 	
 	//! Set flag for using of formatting output for coordinates
 	void setFlagUseFormattingOutput(bool b);
@@ -278,6 +282,10 @@ public slots:
 	void quit();
 signals:
 	void visionNightModeChanged(bool);
+	void flagShowDecimalDegreesChanged(bool);
+	void flagUseAzimuthFromSouthChanged(bool);
+	void flagUseCCSDesignationChanged(bool);
+	void flagUseFormattingOutputChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 
