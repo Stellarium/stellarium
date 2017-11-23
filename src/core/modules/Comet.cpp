@@ -366,12 +366,6 @@ void Comet::update(int deltaTime)
 	{
 		lastJDEtail=dateJDE;
 
-		// The CometOrbit is in fact available in userDataPtr!
-		CometOrbit* orbit=(CometOrbit*)orbitPtr;
-		Q_ASSERT(orbit);
-		if (!orbit->objectDateValid(dateJDE)) return; // out of useful date range. This should allow having hundreds of comet elements.
-
-		eclipticVelocity=orbit->getVelocity();
 		if (orbit->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
 			tailFactors=getComaDiameterAndTailLengthAU();

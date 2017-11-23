@@ -403,7 +403,7 @@ void ellipticalOrbitPosFunc(double jd,double xyz[3], double xyzdot[3], void* orb
 void cometOrbitPosFunc(double jd,double xyz[3], double xyzdot[3], void* orbitPtr)
 {
 	static_cast<CometOrbit*>(orbitPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz, true);
-	xyzdot=static_cast<CometOrbit*>(orbitPtr)->getVelocity();
+	static_cast<CometOrbit*>(orbitPtr)->getVelocity(xyzdot);
 }
 
 // Init and load the solar system data (2 files)

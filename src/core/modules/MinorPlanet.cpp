@@ -302,6 +302,23 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 	}
 
+	if (flags&Velocity)
+	{
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("km/s", "speed");
+
+		Vec3d orbitalVel=getEclipticVelocity();
+		double orbVel=orbitalVel.length();
+		if (orbVel>0.)
+		{ // AU/d * km/AU /24
+			double orbVelKms=orbVel* AU/86400.;
+			oss << QString("%1: %2 %3").arg(q_("Orbital Velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
+			double helioVel=getHeliocentricEclipticVelocity().length(); // just in case we have asteroid moons!
+			if (helioVel!=orbVel)
+			oss << QString("%1: %2 %3").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+		}
+	}
+
 	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && angularSize>=4.8e-7)
 	{
