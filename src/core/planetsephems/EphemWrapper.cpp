@@ -95,9 +95,10 @@ bool use_de431(const double jd)
 }
 
 // planet_id is ONLY one of the #defined values 0..8 above.
-void get_planet_helio_coordsv(const double jd, double xyz[3], const int planet_id)
+void get_planet_helio_coordsv(const double jd, double xyz[3], double xyzdot[3], const int planet_id)
 {
 	bool deOk=false;
+	double xyz6[6];
 	if(!std::isfinite(jd))
 	{
 		qDebug() << "get_planet_helio_coordsv(): SKIPPED CoordCalc, jd is infinite/nan: " << jd;
@@ -106,23 +107,27 @@ void get_planet_helio_coordsv(const double jd, double xyz[3], const int planet_i
 
 	if(use_de430(jd))
 	{
-		deOk=GetDe430Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
 	else if(use_de431(jd))
 	{
-		deOk=GetDe431Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe431Coor(jd, planet_id + 1, xyz6);
 	}
 	if (!deOk) //VSOP87 as fallback
 	{
-		GetVsop87Coor(jd, planet_id, xyz);
+		GetVsop87Coor(jd, planet_id, xyz6);
 	}
+	xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
+
 }
 
 // Osculating positions for time JDE in elements for JDE0, if possible by the theory used (e.g. VSOP87).
 // For ephemerides like DE4xx, JDE0 is irrelevant.
-void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], int planet_id)
+void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], double xyzdot[3], int planet_id)
 {
 	bool deOk=false;
+	double xyz6[6];
 	if(!(std::isfinite(jd) && std::isfinite(jd0)))
 	{
 		qDebug() << "get_planet_helio_osculating_coordsv(): SKIPPED CoordCalc, jd0 or jd is infinite/nan. jd0:" << jd0 << "jd: "<< jd;
@@ -131,16 +136,18 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
 
 	if(use_de430(jd))
 	{
-		deOk=GetDe430Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
 	else if(use_de431(jd))
 	{
-		deOk=GetDe431Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe431Coor(jd, planet_id + 1, xyz6);
 	}
 	if (!deOk) //VSOP87 as fallback
 	{
-		GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz);
+		GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz6);
 	}
+	xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 }
 
 /* Chapter 31 Pg 206-207 Equ 31.1 31.2, 31.3 using VSOP 87
@@ -148,10 +155,11 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
  * for given Julian Day. Values are in AU.
  * params : Julian day, rect coords */
 
-void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
 	bool deOk=false;
+	double xyz6[6];
 	if(!std::isfinite(jd))
 	{
 		qDebug() << "get_pluto_helio_coordsv(): SKIPPED PlutoCoordCalc, jd is infinite/nan:" << jd;
@@ -160,41 +168,50 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 
 	if(use_de430(jd))
 	{
-		deOk=GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+		deOk=GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
 	}
 	else if(use_de431(jd))
 	{
-		deOk=GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+		deOk=GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
 	}
-	if (!deOk) // fallback to previous solution
+
+	if (deOk)
+	{
+		xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+		xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
+	}
+	else	// fallback to previous solution
 	{
 		get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);
+		xyzdot[0]=xyzdot[1]=xyzdot[2]=0.0; // TODO: Some meaningful way to get speed?
 	}
 }
 
 /* Return 0 for the sun */
-void get_sun_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_sun_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(jd);
 	Q_UNUSED(unused);
-	xyz[0]=0.; xyz[1]=0.; xyz[2]=0.;
+	xyz[0]   =0.; xyz[1]   =0.; xyz[2]   =0.;
+	xyzdot[0]=0.; xyzdot[1]=0.; xyzdot[2]=0.;
 }
 
-void get_mercury_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_mercury_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-  	get_planet_helio_coordsv(jd, xyz, EPHEM_MERCURY_ID);
+	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_MERCURY_ID);
 }
-void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_venus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-  	get_planet_helio_coordsv(jd, xyz, EPHEM_VENUS_ID);
+	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_VENUS_ID);
 }
 
-void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) 
+void get_earth_helio_coordsv(const double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
 	bool deOk=false;
+	double xyz6[6];
 	if(!std::isfinite(jd))
 	{
 		qDebug() << "get_earth_helio_coordsv(): SKIPPED EarthCoordCalc, jd is infinite/nan:" << jd;
@@ -203,94 +220,97 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused)
 
 	if(use_de430(jd))
 	{
-		deOk=GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+		deOk=GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
 	}
 	else if(use_de431(jd))
 	{
-		deOk=GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+		deOk=GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
 	}
 	if (!deOk) //VSOP87 as fallback
 	{
 		double moon[3];
-		GetVsop87Coor(jd,EPHEM_EMB_ID,xyz);
+		GetVsop87Coor(jd,EPHEM_EMB_ID,xyz6);
 		GetElp82bCoor(jd,moon);
 		/* Earth != EMB:
 	0.0121505677733761 = mu_m/(1+mu_m),
 	mu_m = mass(moon)/mass(earth) = 0.01230002 */
-		xyz[0] -= 0.0121505677733761 * moon[0];
-		xyz[1] -= 0.0121505677733761 * moon[1];
-		xyz[2] -= 0.0121505677733761 * moon[2];
+		xyz6[0] -= 0.0121505677733761 * moon[0];
+		xyz6[1] -= 0.0121505677733761 * moon[1];
+		xyz6[2] -= 0.0121505677733761 * moon[2];
+		// TODO: HOW TO FIX EARTH SPEED?
 	}
+	xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 }
 
-void get_mars_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_mars_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	get_planet_helio_coordsv(jd, xyz, EPHEM_MARS_ID);
+	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_MARS_ID);
 }
 
-void get_jupiter_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_jupiter_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	get_planet_helio_coordsv(jd, xyz, EPHEM_JUPITER_ID);
+	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_JUPITER_ID);
 }
 
-void get_saturn_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_saturn_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	get_planet_helio_coordsv(jd, xyz, EPHEM_SATURN_ID);
+	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_SATURN_ID);
 }
 
-void get_uranus_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_uranus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	get_planet_helio_coordsv(jd, xyz, EPHEM_URANUS_ID);
+	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_URANUS_ID);
 }
 
-void get_neptune_helio_coordsv(double jd,double xyz[3], void* unused)
+void get_neptune_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	get_planet_helio_coordsv(jd, xyz, EPHEM_NEPTUNE_ID);
+	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_NEPTUNE_ID);
 }
 
-void get_mercury_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_mercury_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MERCURY_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_MERCURY_ID);
 }
 
-void get_venus_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_venus_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_VENUS_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_VENUS_ID);
 }
 
-void get_earth_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_earth_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_EMB_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_EMB_ID);
 }
 
-void get_mars_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_mars_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MARS_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_MARS_ID);
 }
 
-void get_jupiter_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_jupiter_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_JUPITER_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_JUPITER_ID);
 }
 
-void get_saturn_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_saturn_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_SATURN_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_SATURN_ID);
 }
 
-void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_URANUS_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_URANUS_ID);
 }
 
-void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
+void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3])
 {
-	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_NEPTUNE_ID);
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, xyzdot, EPHEM_NEPTUNE_ID);
 }
 
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
@@ -300,129 +320,139 @@ void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
  * Michelle Chapront-Touze and Jean Chapront of the Bureau des Longitudes,
  * Paris. ELP 2000-82B theory
  * param jd Julian day, rect pos */
-void get_lunar_parent_coordsv(double jde,double xyz[3], void* unused)
+void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
+	double xyz6[6];
 	bool deOk=false;
 	if(use_de430(jde))
-		deOk=GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
+		deOk=GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
 	else if(use_de431(jde))
-		deOk=GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
-	if (!deOk) // fallback...
+		deOk=GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
+
+	if (deOk)
+	{
+		xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+		xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
+	}
+	else
+	{  // fallback to DE-less solution.
 		GetElp82bCoor(jde,xyz);
+		xyzdot[0]=xyzdot[1]=xyzdot[3]=0.0; // TODO: Some meaningful way to get speed?
+	}
 }
 
-void get_phobos_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_phobos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetMarsSatCoor(jd,MARS_SAT_PHOBOS,xyz);
+	GetMarsSatCoor(jd, MARS_SAT_PHOBOS, xyz, xyzdot);
 }
 
-void get_deimos_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_deimos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetMarsSatCoor(jd,MARS_SAT_DEIMOS,xyz);
+	GetMarsSatCoor(jd, MARS_SAT_DEIMOS, xyz, xyzdot);
 }
 
-void get_io_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_io_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd,L1_IO,xyz);
+	GetL1Coor(jd, L1_IO, xyz, xyzdot);
 }
 
-void get_europa_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_europa_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd,L1_EUROPA,xyz);
+	GetL1Coor(jd, L1_EUROPA, xyz, xyzdot);
 }
 
-void get_ganymede_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_ganymede_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd,L1_GANYMEDE,xyz);
+	GetL1Coor(jd, L1_GANYMEDE, xyz, xyzdot);
 }
 
-void get_callisto_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_callisto_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd,L1_CALLISTO,xyz);
+	GetL1Coor(jd, L1_CALLISTO, xyz, xyzdot);
 }
 
-void get_mimas_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_mimas_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_MIMAS,xyz);
+	GetTass17Coor(jd, TASS17_MIMAS, xyz, xyzdot);
 }
 
-void get_enceladus_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_enceladus_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_ENCELADUS,xyz);
+	GetTass17Coor(jd, TASS17_ENCELADUS, xyz, xyzdot);
 }
 
-void get_tethys_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_tethys_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_TETHYS,xyz);
+	GetTass17Coor(jd, TASS17_TETHYS, xyz, xyzdot);
 }
 
-void get_dione_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_dione_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_DIONE,xyz);
+	GetTass17Coor(jd, TASS17_DIONE, xyz, xyzdot);
 }
 
-void get_rhea_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_rhea_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_RHEA,xyz);
+	GetTass17Coor(jd, TASS17_RHEA, xyz, xyzdot);
 }
 
-void get_titan_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_titan_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_TITAN,xyz);
+	GetTass17Coor(jd, TASS17_TITAN, xyz, xyzdot);
 }
 
-void get_hyperion_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_hyperion_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_HYPERION,xyz);
+	GetTass17Coor(jd, TASS17_HYPERION, xyz, xyzdot);
 }
 
-void get_iapetus_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_iapetus_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
 	Q_UNUSED(unused);
-	GetTass17Coor(jd,TASS17_IAPETUS,xyz);
+	GetTass17Coor(jd, TASS17_IAPETUS, xyz, xyzdot);
 }
 
-void get_miranda_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_miranda_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetGust86Coor(jd,GUST86_MIRANDA,xyz);
+	GetGust86Coor(jd, GUST86_MIRANDA, xyz, xyzdot);
 }
 
-void get_ariel_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_ariel_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetGust86Coor(jd,GUST86_ARIEL,xyz);
+	GetGust86Coor(jd, GUST86_ARIEL, xyz, xyzdot);
 }
 
-void get_umbriel_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_umbriel_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetGust86Coor(jd,GUST86_UMBRIEL,xyz);
+	GetGust86Coor(jd, GUST86_UMBRIEL, xyz, xyzdot);
 }
 
-void get_titania_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_titania_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetGust86Coor(jd,GUST86_TITANIA,xyz);
+	GetGust86Coor(jd, GUST86_TITANIA, xyz, xyzdot);
 }
 
-void get_oberon_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_oberon_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetGust86Coor(jd,GUST86_OBERON,xyz);
+	GetGust86Coor(jd, GUST86_OBERON, xyz, xyzdot);
 }
 

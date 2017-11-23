@@ -31,10 +31,11 @@
 #include <QString>
 
 // The callback type for the external position computation function
+// arguments are JDE, position[3], velocity[3].
 // The last variable is the userData pointer.
-typedef void (*posFuncType)(double, double*, void*);
+typedef void (*posFuncType)(double, double*, double*, void*);
 
-typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
+typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3], double xyzdot[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -289,21 +290,27 @@ public:
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;
 
-	// Return the heliocentric ecliptical position
+	//! Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
 
-	// Return the heliocentric transformation for local coordinate
+	//! Return the heliocentric transformation for local coordinate
 	Vec3d getHeliocentricPos(Vec3d) const;
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
-	// Compute the distance to the given position in heliocentric coordinate (in AU)
+	//! Get the planet velocity around the parent planet in ecliptical coordinates in AU/d
+	Vec3d getEclipticVelocity() const {return eclipticVelocity;}
+
+	//! Get the planet's heliocentric velocity in the solar system in ecliptical coordinates in AU/d. Required for aberration!
+	Vec3d getHeliocentricEclipticVelocity() const;
+
+	//! Compute the distance to the given position in heliocentric coordinates (in AU)
 	double computeDistance(const Vec3d& obsHelioPos);
 	double getDistance(void) const {return distance;}
 
 	void setRings(Ring* r) {rings = r;}
 
 	void setSphereScale(float s) { if(s!=sphereScale) { sphereScale = s; if(objModel) objModel->needsRescale=true; } }
-	float getSphereScale() { return sphereScale; }
+	float getSphereScale() const { return sphereScale; }
 
 	const QSharedPointer<Planet> getParent(void) const {return parent;}
 
@@ -321,11 +328,11 @@ public:
 
 	bool flagNativeName;
 	void setFlagNativeName(bool b) { flagNativeName = b; }
-	bool getFlagNativeName(void) { return flagNativeName; }
+	bool getFlagNativeName(void) const { return flagNativeName; }
 
 	bool flagTranslatedName;
 	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
-	bool getFlagTranslatedName(void) { return flagTranslatedName; }
+	bool getFlagTranslatedName(void) const { return flagTranslatedName; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -457,7 +464,6 @@ protected:
 		StelOBJ* obj;
 		//! The opengl array, created by loadObjModel() but filled later in main thread
 		StelOpenGLArray* arr;
-
 	};
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
@@ -499,10 +505,13 @@ protected:
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
-	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system around the parent body. To get heliocentric coordinates, use getHeliocentricEclipticPos()
-	// centered on the parent Planet
+	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) around the parent body.
+					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
+	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
+					 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
+					 // to get velocity, preferrably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
+					 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
-//	Vec3d previousScreenPos;         // The position of this planet in the previous frame. 0.16pre: DEAD CODE!
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
 	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.

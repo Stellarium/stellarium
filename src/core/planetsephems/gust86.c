@@ -438,13 +438,16 @@ static double gust86_elem_2[GUST86_DIM];
 static double gust86_jd0 = -1e100;
 static double gust86_elem[GUST86_DIM];
 
-void GetGust86Coor(const double jd,const int body,double *xyz) {
-  GetGust86OsculatingCoor(jd,jd,body,xyz);
+void GetGust86Coor(const double jd, const int body, double *xyz, double *xyzdot) {
+	double xyz6[6];
+	GetGust86OsculatingCoor(jd,jd,body,xyz6);
+	xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 }
 
 void GetGust86OsculatingCoor(const double jd0,const double jd,
                              const int body,double *xyz) {
-  double x[3];
+  double x[6];
   if (jd0 != gust86_jd0) {
     const double t0 = jd0 - 2444239.5;
     gust86_jd0 = jd0;
@@ -465,4 +468,8 @@ void GetGust86OsculatingCoor(const double jd0,const double jd,
   xyz[0] = GUST86toVsop87[0]*x[0]+GUST86toVsop87[1]*x[1]+GUST86toVsop87[2]*x[2];
   xyz[1] = GUST86toVsop87[3]*x[0]+GUST86toVsop87[4]*x[1]+GUST86toVsop87[5]*x[2];
   xyz[2] = GUST86toVsop87[6]*x[0]+GUST86toVsop87[7]*x[1]+GUST86toVsop87[8]*x[2];
+  // GZ Updated to a 6-vector
+  xyz[3] = GUST86toVsop87[0]*x[3]+GUST86toVsop87[1]*x[4]+GUST86toVsop87[2]*x[5];
+  xyz[4] = GUST86toVsop87[3]*x[3]+GUST86toVsop87[4]*x[4]+GUST86toVsop87[5]*x[5];
+  xyz[5] = GUST86toVsop87[6]*x[3]+GUST86toVsop87[7]*x[4]+GUST86toVsop87[8]*x[5];
 }

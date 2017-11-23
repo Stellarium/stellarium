@@ -56,8 +56,8 @@ public:
 	// Original one
 	Vec3d positionAtTime(const double JDE) const;
 	double getPeriod() const;
-	double getBoundingRadius() const;
-	virtual void sample(double, double, int, OrbitSampleProc&) const;
+	// double getBoundingRadius() const; // Return apoapsis distance. UNUSED!
+	// virtual void sample(double, double, int, OrbitSampleProc&) const; //UNDOCUMENTED & UNUSED
 
 private:
 	//! returns eccentric anomaly E for Mean anomaly M

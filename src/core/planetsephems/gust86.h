@@ -60,7 +60,7 @@ extern "C" {
 #define GUST86_TITANIA   3
 #define GUST86_OBERON    4
 
-void GetGust86Coor(const double jd, const int body, double *xyz);
+void GetGust86Coor(const double jd, const int body, double *xyz, double *xyzdot);
   /* Return the rectangular coordinates of the given satellite
      and the given julian date jd expressed in dynamical time (TAI+32.184s).
      The origin of the xyz-coordinates is the center of the planet.
@@ -91,6 +91,7 @@ void GetGust86Coor(const double jd, const int body, double *xyz);
      
 void GetGust86OsculatingCoor(const double jd0, const double jd, const int body, double *xyz);
   /* The oculating orbit of epoch jd0, evaluated at jd, is returned.
+   * xyz is a 6-vector (position&speed)
   */
 
 #ifdef __cplusplus

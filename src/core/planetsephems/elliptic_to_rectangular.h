@@ -65,6 +65,11 @@ extern "C" {
    e = excentricity
    
    Units are suspected to be: Julian days, AU, rad
+
+   Results:
+   xyz[0,1,2]=Position [AU]
+   xyz[3,4,5]=Velocity [AU/d]
+
 */
 
 void EllipticToRectangularN(double mu,const double elem[6],double dt,
