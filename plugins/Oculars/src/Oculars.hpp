@@ -351,6 +351,7 @@ private:
 	bool flagGridLinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
 	bool flagConstellationLinesMain; //!< keep track of constellation display while possibly suppressing their display.
 	bool flagAsterismLinesMain;      //!< keep track of asterism display while possibly suppressing their display.
+	bool flagRayHelpersLinesMain;      //!< keep track of ray helpers display while possibly suppressing their display.
 	bool flipVertMain;               //!< keep track of screen flip in main program
 	bool flipHorzMain;               //!< keep track of screen flip in main program
 

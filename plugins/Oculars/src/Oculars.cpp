@@ -135,6 +135,7 @@ Oculars::Oculars():
 	flagGridLinesDisplayedMain(true),
 	flagConstellationLinesMain(true),
 	flagAsterismLinesMain(true),
+	flagRayHelpersLinesMain(true),
 	flipVertMain(false),
 	flipHorzMain(false),
 	ccdRotationSignalMapper(Q_NULLPTR),
@@ -2154,6 +2155,7 @@ void Oculars::unzoomOcular()
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPointsMain);
 		GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLinesMain);
 		GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLinesMain);
+		GETSTELMODULE(AsterismMgr)->setFlagRayHelpers(flagRayHelpersLinesMain);
 	}
 
 	skyDrawer->setFlagLuminanceAdaptation(flagAdaptationMain);
@@ -2208,6 +2210,7 @@ void Oculars::zoom(bool zoomedIn)
 				flagCardinalPointsMain = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 				flagConstellationLinesMain = GETSTELMODULE(ConstellationMgr)->getFlagLines();
 				flagAsterismLinesMain = GETSTELMODULE(AsterismMgr)->getFlagLines();
+				flagRayHelpersLinesMain = GETSTELMODULE(AsterismMgr)->getFlagRayHelpers();
 			}
 
 			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -2538,6 +2541,7 @@ void Oculars::setFlagHideGridsLines(const bool b)
 			flagCardinalPointsMain     = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
 			flagConstellationLinesMain = GETSTELMODULE(ConstellationMgr)->getFlagLines();
 			flagAsterismLinesMain      = GETSTELMODULE(AsterismMgr)->getFlagLines();
+			flagRayHelpersLinesMain  = GETSTELMODULE(AsterismMgr)->getFlagRayHelpers();
 			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
 			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
 			GETSTELMODULE(ConstellationMgr)->setFlagLines(false);
@@ -2550,6 +2554,7 @@ void Oculars::setFlagHideGridsLines(const bool b)
 			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPointsMain);
 			GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLinesMain);
 			GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLinesMain);
+			GETSTELMODULE(AsterismMgr)->setFlagRayHelpers(flagRayHelpersLinesMain);
 		}
 	}
 }
