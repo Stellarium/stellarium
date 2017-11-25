@@ -397,7 +397,7 @@ protected:
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
 		// GZ TODO: Where to place the mouse cursor wake-up?
-		qDebug() << "StelRootItem::mouseMoveEvent()";
+		//qDebug() << "StelRootItem::mouseMoveEvent()";
 		if (QGuiApplication::overrideCursor()!=0)
 			QGuiApplication::restoreOverrideCursor();
 		QMouseEvent ev = convertMouseEvent(event);
