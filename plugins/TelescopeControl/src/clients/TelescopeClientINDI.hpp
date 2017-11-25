@@ -1,6 +1,5 @@
-#ifndef TELESCOPECLIENTINDI_H
-#define TELESCOPECLIENTINDI_H
-
+#ifndef TELESCOPECLIENTINDI_HPP
+#define TELESCOPECLIENTINDI_HPP
 
 class TelescopeClientINDI
 {
@@ -8,4 +7,4 @@ public:
     TelescopeClientINDI();
 };
 
-#endif // TELESCOPECLIENTINDI_H
+#endif // TELESCOPECLIENTINDI_HPP

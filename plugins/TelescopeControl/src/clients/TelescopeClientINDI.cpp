@@ -1,4 +1,4 @@
-#include "TelescopeClientINDI.h"
+#include "TelescopeClientINDI.hpp"
 
 TelescopeClientINDI::TelescopeClientINDI()
 {
