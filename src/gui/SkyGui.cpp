@@ -72,6 +72,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::AltAzi;
 		if (conf->value("flag_show_distance", false).toBool())
 			infoTextFilters |= StelObject::Distance;
+		if (conf->value("flag_show_velocity", false).toBool())
+			infoTextFilters |= StelObject::Velocity;
 		if (conf->value("flag_show_size", false).toBool())
 			infoTextFilters |= StelObject::Size;
 		if (conf->value("flag_show_extra", false).toBool())

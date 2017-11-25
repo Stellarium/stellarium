@@ -36,8 +36,10 @@ THE SOFTWARE.
 
 static void * ephem;
 
-static Vec3d tempECL = Vec3d(0,0,0);
-static Vec3d tempICRF = Vec3d(0,0,0);
+static Vec3d tempECLpos = Vec3d(0,0,0);
+static Vec3d tempECLspd = Vec3d(0,0,0);
+static Vec3d tempICRFpos = Vec3d(0,0,0);
+static Vec3d tempICRFspd = Vec3d(0,0,0);
 static char nams[JPL_MAX_N_CONSTANTS][6];
 static double vals[JPL_MAX_N_CONSTANTS];
 static double tempXYZ[6];
@@ -79,7 +81,7 @@ bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
     if(initDone)
     {
 	// This may return some error code!
-	int jplresult=jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
+	int jplresult=jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 1);
 
 	switch (jplresult)
 	{
@@ -111,18 +113,25 @@ bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
 			break;
 	}
 
-	jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
+	// Why do we duplicate this?
+	// jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
 
-        tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
+	tempICRFpos =   Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
+	tempICRFspd =   Vec3d(tempXYZ[3], tempXYZ[4], tempXYZ[5]);
 	#ifdef UNIT_TEST
-	tempECL = matJ2000ToVsop87 * tempICRF;
+	tempECLpos = matJ2000ToVsop87 * tempICRFpos;
+	tempECLspd = matJ2000ToVsop87 * tempICRFspd;
 	#else
-        tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
+	tempECLpos = StelCore::matJ2000ToVsop87 * tempICRFpos;
+	tempECLspd = StelCore::matJ2000ToVsop87 * tempICRFspd;
 	#endif
 
-        xyz[0] = tempECL[0];
-        xyz[1] = tempECL[1];
-        xyz[2] = tempECL[2];
+	xyz[0] = tempECLpos[0];
+	xyz[1] = tempECLpos[1];
+	xyz[2] = tempECLpos[2];
+	xyz[3] = tempECLspd[0];
+	xyz[4] = tempECLspd[1];
+	xyz[5] = tempECLspd[2];
 	return true;
     }
     return false;

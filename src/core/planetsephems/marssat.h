@@ -58,8 +58,8 @@ extern "C" {
 #define MARS_SAT_PHOBOS 0
 #define MARS_SAT_DEIMOS 1
 
-void GetMarsSatCoor(double jd,int body,double *xyz);
-  /* Return the rectangular coordinates of the given satellite
+void GetMarsSatCoor(double jd, int body, double *xyz, double *xyzdot);
+  /* Return the rectangular coordinates and speed of the given satellite
      and the given julian date jd expressed in dynamical time (TAI+32.184s).
      The origin of the xyz-coordinates is the center of the planet.
      The reference frame is "dynamical equinox and ecliptic J2000",
@@ -68,6 +68,7 @@ void GetMarsSatCoor(double jd,int body,double *xyz);
 
 void GetMarsSatOsculatingCoor(const double jd0, const double jd, const int body,double *xyz);
   /* The oculating orbit of epoch jd0, evatuated at jd, is returned.
+   * xyz is a 6-vector
   */
 
 #ifdef __cplusplus

@@ -146,6 +146,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());
+	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
 }
 
 SearchDialog::~SearchDialog()
@@ -223,7 +224,7 @@ void SearchDialog::populateCoordinateSystemsList()
 
 void SearchDialog::populateCoordinateAxis()
 {
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	bool xnormal = true;
 
 	ui->AxisXSpinBox->setDecimals(2);

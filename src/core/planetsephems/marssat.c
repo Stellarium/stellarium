@@ -428,13 +428,16 @@ static void CalcAllMarsSatElem(double t,double elem[12]) {
 
 static double mars_sat_to_vsop87[9];
 
-void GetMarsSatCoor(double jd,int body,double *xyz) {
-  GetMarsSatOsculatingCoor(jd,jd,body,xyz);
+void GetMarsSatCoor(double jd,int body,double *xyz, double *xyzdot) {
+	double xyz6[6];
+	GetMarsSatOsculatingCoor(jd,jd,body,xyz6);
+	xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 }
 
 void GetMarsSatOsculatingCoor(const double jd0,const double jd,
                               const int body,double *xyz) {
-  double x[3];
+  double x[6];
   if (jd0 != marssat_jd0) {
     const double t0 = jd0 - 2451545.0 + 6491.5;
     marssat_jd0 = jd0;
@@ -445,8 +448,7 @@ void GetMarsSatOsculatingCoor(const double jd0,const double jd,
                              &t_2,marssat_elem_2);
     GenerateMarsSatToVSOP87(t0,mars_sat_to_vsop87);
   }
-  EllipticToRectangularA(mars_sat_bodies[body].mu,marssat_elem+(body*6),
-                         jd-jd0,x);
+  EllipticToRectangularA(mars_sat_bodies[body].mu,marssat_elem+(body*6),jd-jd0,x);
   xyz[0] = mars_sat_to_vsop87[0]*x[0]
          + mars_sat_to_vsop87[1]*x[1]
          + mars_sat_to_vsop87[2]*x[2];
@@ -456,6 +458,16 @@ void GetMarsSatOsculatingCoor(const double jd0,const double jd,
   xyz[2] = mars_sat_to_vsop87[6]*x[0]
          + mars_sat_to_vsop87[7]*x[1]
          + mars_sat_to_vsop87[8]*x[2];
+  // GZ This is a guess, based on the structure of other operations...
+  xyz[3] = mars_sat_to_vsop87[0]*x[3]
+	 + mars_sat_to_vsop87[1]*x[4]
+	 + mars_sat_to_vsop87[2]*x[5];
+  xyz[4] = mars_sat_to_vsop87[3]*x[3]
+	 + mars_sat_to_vsop87[4]*x[4]
+	 + mars_sat_to_vsop87[5]*x[5];
+  xyz[5] = mars_sat_to_vsop87[6]*x[3]
+	 + mars_sat_to_vsop87[7]*x[4]
+	 + mars_sat_to_vsop87[8]*x[5];
 /*
   printf("%d %18.9lf %15.12lf %15.12lf %15.12lf\n",
          body,jd,xyz[0],xyz[1],xyz[2]);

@@ -251,6 +251,7 @@ CometOrbit::CometOrbit(double pericenterDistance,
 
 void CometOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v, bool updateVelocityVector)
 {
+	Q_UNUSED(updateVelocityVector);
 	JDE -= t0;
 	double rCosNu,rSinNu;
 	if (e < 1.0) InitEll(q,n,e,JDE,rCosNu,rSinNu); // Laguerre-Conway seems stable enough to go for <1.0.
@@ -261,16 +262,17 @@ void CometOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v, bool 
 	}
 	else InitPar(q,n,JDE,rCosNu,rSinNu);
 	double p0,p1,p2, s0, s1, s2;
-	Init3D(i,Om,w,rCosNu,rSinNu,p0,p1,p2, s0, s1, s2, updateVelocityVector, e, q);
+	//Init3D(i,Om,w,rCosNu,rSinNu,p0,p1,p2, s0, s1, s2, updateVelocityVector, e, q);
+	Init3D(i,Om,w,rCosNu,rSinNu,p0,p1,p2, s0, s1, s2, true, e, q);
 	v[0] = rotateToVsop87[0]*p0 + rotateToVsop87[1]*p1 + rotateToVsop87[2]*p2;
 	v[1] = rotateToVsop87[3]*p0 + rotateToVsop87[4]*p1 + rotateToVsop87[5]*p2;
 	v[2] = rotateToVsop87[6]*p0 + rotateToVsop87[7]*p1 + rotateToVsop87[8]*p2;
 
-	if (updateVelocityVector)
-	{
+	//if (updateVelocityVector)
+	//{
 		rdot.set(s0, s1, s2);
 		updateTails=true;
-	}
+	//}
 }
 
 
@@ -459,6 +461,7 @@ Vec3d EllipticalOrbit::positionAtE(const double E) const
 	}
 	else if (eccentricity > 1.0) // N.B. This is odd at least: elliptical must have ecc<1!
 	{
+		Q_ASSERT(0); // We should never come here!
 		double a = pericenterDistance / (1.0 - eccentricity);
 		x = -a * (eccentricity - cosh(E));
 		z = -a * std::sqrt(eccentricity * eccentricity - 1) * -sinh(E);
@@ -466,6 +469,7 @@ Vec3d EllipticalOrbit::positionAtE(const double E) const
 	else
 	{
 		// TODO: Handle parabolic orbits
+		Q_ASSERT(0); // We should never come here!
 		x = 0.0;
 		z = 0.0;
 	}
@@ -487,22 +491,6 @@ Vec3d EllipticalOrbit::positionAtTime(const double JDE) const
 	return positionAtE(E);
 }
 
-//void EllipticalOrbit::positionAtTime(double JDE, double * X, double * Y, double * Z) const
-//{
-//	Vec3d pos = positionAtTime(JDE);
-//	*X=pos[2];
-//	*Y=pos[0];
-//	*Z=pos[1];
-//}
-
-//void EllipticalOrbit::positionAtTimev(double JDE, double* v)
-//{
-//	Vec3d pos = positionAtTime(JDE);
-//	v[0]=pos[2];
-//	v[1]=pos[0];
-//	v[2]=pos[1];
-//}
-
 void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(const double JDE, double* v) const
 {
 	Vec3d pos = positionAtTime(JDE);
@@ -516,21 +504,23 @@ double EllipticalOrbit::getPeriod() const
 	return period;
 }
 
-
+/* Found undocumented and unused in pre-0.17.
+// return apocenter distance
 double EllipticalOrbit::getBoundingRadius() const
 {
 	// TODO: watch out for unbounded parabolic and hyperbolic orbits
 	return pericenterDistance * ((1.0 + eccentricity) / (1.0 - eccentricity));
 }
-
-
+*/
+/*
+ * Found undocumented and unused pre-0.17.
 void EllipticalOrbit::sample(double, double, int nSamples, OrbitSampleProc& proc) const
 {
 	double dE = 2. * M_PI / (double) nSamples;
 	for (int i = 0; i < nSamples; i++)
 		proc.sample(positionAtE(dE * i));
 }
-
+*/
 /*
  * Stuff found unused and deactivated pre-0.15
 Vec3d CachingOrbit::positionAtTime(double JDE) const

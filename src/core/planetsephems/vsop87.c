@@ -137338,8 +137338,7 @@ void GetVsop87Coor(double jd,int body,double *xyz) {
   GetVsop87OsculatingCoor(jd,jd,body,xyz);
 }
 
-void GetVsop87OsculatingCoor(const double jd0,const double jd,
-							 const int body,double *xyz) {
+void GetVsop87OsculatingCoor(const double jd0,const double jd,const int body,double *xyz) {
   if (jd0 != vsop87_jd0) {
 	const double t0 = (jd0 - 2451545.0) / 365250.0;
 	vsop87_jd0 = jd0;

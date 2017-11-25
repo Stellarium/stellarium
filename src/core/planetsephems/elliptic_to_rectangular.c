@@ -116,7 +116,7 @@ EllipticToRectangular(const double a,const double n,
     xyz[1] = x1 * rdg + y1 * rtq;
     xyz[2] = (-x1 * elem[5] + y1 * elem[4]) * dwho;
 
-/*
+// /* GZ 2017-11: Re-enable these lines, they seem to be velocity!
     const double rsam1 = -elem[2]*cLe - elem[3]*sLe;
     const double h = a*n / (1.0 + rsam1);
     const double vx1 = h * (-sLe - psi*rsam1*elem[3]);
@@ -125,7 +125,7 @@ EllipticToRectangular(const double a,const double n,
     xyz[3] = vx1 * rtp + vy1 * rdg;
     xyz[4] = vx1 * rdg + vy1 * rtq;
     xyz[5] = (-vx1 * elem[5] + vy1 * elem[4]) * dwho;
-*/
+// */
   }
 }
 

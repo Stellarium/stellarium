@@ -195,11 +195,9 @@ void ConfigurationDialog::createDialogContent()
 	// Additional settings for selected object info
 	connectBoolProperty(ui->checkBoxUMSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessArcsecUsage");
 	connectBoolProperty(ui->checkBoxUMShortNotationSurfaceBrightness, "NebulaMgr.flagSurfaceBrightnessShortNotationUsage");
-	ui->checkBoxUseFormattingOutput->setChecked(StelApp::getInstance().getFlagUseFormattingOutput());
-	connect(ui->checkBoxUseFormattingOutput, SIGNAL(toggled(bool)), this, SLOT(updateSettingFormattingOutput(bool)));
-	ui->checkBoxUseCCSDesignations->setChecked(StelApp::getInstance().getFlagUseCCSDesignation());
-	connect(ui->checkBoxUseCCSDesignations, SIGNAL(toggled(bool)), this, SLOT(updateSettingCCSDesignations(bool)));
-	
+	connectBoolProperty(ui->checkBoxUseFormattingOutput, "StelApp.flagUseFormattingOutput");
+	connectBoolProperty(ui->checkBoxUseCCSDesignations,  "StelApp.flagUseCCSDesignation");
+
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
@@ -223,6 +221,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(core->getPresetSkyTime()));
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
 
+	// TODO: convert to properties
 	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
 	ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMoveKeys(bool)));
@@ -284,46 +283,31 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
-	ui->showFlipButtonsCheckbox->setChecked(gui->getFlagShowFlipButtons());
-	connect(ui->showFlipButtonsCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowFlipButtons(bool)));
+	connectBoolProperty(ui->showFlipButtonsCheckbox,                   "StelGui.flagShowFlipButtons");
+	connectBoolProperty(ui->showNebulaBgButtonCheckbox,                "StelGui.flagShowNebulaBackgroundButton");
+	connectBoolProperty(ui->showToastSurveyButtonCheckbox,             "StelGui.flagShowToastSurveyButton");
+	connectBoolProperty(ui->showBookmarksButtonCheckBox,               "StelGui.flagShowBookmarksButton");
+	connectBoolProperty(ui->showICRSGridButtonCheckBox,                "StelGui.flagShowICRSGridButton");
+	connectBoolProperty(ui->showGalacticGridButtonCheckBox,            "StelGui.flagShowGalacticGridButton");
+	connectBoolProperty(ui->showEclipticGridButtonCheckBox,            "StelGui.flagShowEclipticGridButton");
+	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
 
-	ui->showNebulaBgButtonCheckbox->setChecked(gui->getFlagShowNebulaBackgroundButton());
-	connect(ui->showNebulaBgButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowNebulaBackgroundButton(bool)));
+	//ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
+	//connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
+	// TODO: Make sure to remove this setter function, rather listen to StelApp's signal. 
+	connectBoolProperty(ui->decimalDegreeCheckBox, "StelApp.flagShowDecimalDegrees");
 
-	ui->showToastSurveyButtonCheckbox->setChecked(gui->getFlagShowToastSurveyButton());
-	connect(ui->showToastSurveyButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowToastSurveyButton(bool)));
+	connectBoolProperty(ui->azimuthFromSouthcheckBox, "StelApp.flagUseAzimuthFromSouth");
 
-	ui->showBookmarksButtonCheckBox->setChecked(gui->getFlagShowBookmarksButton());
-	connect(ui->showBookmarksButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowBookmarksButton(bool)));
-
-	ui->showICRSGridButtonCheckBox->setChecked(gui->getFlagShowICRSGridButton());
-	connect(ui->showICRSGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowICRSGridButton(bool)));
-
-	ui->showGalacticGridButtonCheckBox->setChecked(gui->getFlagShowGalacticGridButton());
-	connect(ui->showGalacticGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowGalacticGridButton(bool)));
-
-	ui->showEclipticGridButtonCheckBox->setChecked(gui->getFlagShowEclipticGridButton());
-	connect(ui->showEclipticGridButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowEclipticGridButton(bool)));
-
-	ui->showConstellationBoundariesButtonCheckBox->setChecked(gui->getFlagShowConstellationBoundariesButton());
-	connect(ui->showConstellationBoundariesButtonCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowConstellationBoundariesButton(bool)));
-
-	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
-	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
-	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagSouthAzimuthUsage());
-	connect(ui->azimuthFromSouthcheckBox, SIGNAL(toggled(bool)), this, SLOT(updateStartPointForAzimuth(bool)));
-
-	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
-	ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
-	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
-	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
-	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
-
-	ui->useButtonsBackgroundCheckBox->setChecked(StelMainView::getInstance().getFlagUseButtonsBackground());
-	connect(ui->useButtonsBackgroundCheckBox, SIGNAL(toggled(bool)), this, SLOT(usageButtonsBackgroundChanged(bool)));
-
-	ui->indicationMountModeCheckBox->setChecked(mvmgr->getFlagIndicationMountMode());
-	connect(ui->indicationMountModeCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagIndicationMountMode(bool)));
+	//ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
+	//ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
+	//connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
+	//connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
+	//connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
+	connectBoolProperty(ui->mouseTimeoutCheckbox, "MainView.flagCursorTimeout");
+	connectDoubleProperty(ui->mouseTimeoutSpinBox, "MainView.cursorTimeout");
+	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "MainView.flagUseButtonsBackground");
+	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
 
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
@@ -334,9 +318,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
-
-	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
-	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
+	connectBoolProperty(ui->invertScreenShotColorsCheckBox, "MainView.flagInvertScreenShotColors");
 
 	connectBoolProperty(ui->autoEnableAtmosphereCheckBox, "LandscapeMgr.flagAtmosphereAutoEnabling");
 	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");
@@ -519,6 +501,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::AltAzi;
 	if (ui->checkBoxDistance->isChecked())
 		flags |= StelObject::Distance;
+	if (ui->checkBoxVelocity->isChecked())
+		flags |= StelObject::Velocity;
 	if (ui->checkBoxSize->isChecked())
 		flags |= StelObject::Size;
 	if (ui->checkBoxExtra->isChecked())
@@ -542,32 +526,32 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 }
 
 
-void ConfigurationDialog::updateStartPointForAzimuth(bool b)
-{
-	StelApp::getInstance().setFlagSouthAzimuthUsage(b);
-}
+//void ConfigurationDialog::updateStartPointForAzimuth(bool b)
+//{
+//	StelApp::getInstance().setFlagSouthAzimuthUsage(b);
+//}
 
-void ConfigurationDialog::updateSettingFormattingOutput(bool b)
-{
-	StelApp::getInstance().setFlagUseFormattingOutput(b);
-}
+//void ConfigurationDialog::updateSettingFormattingOutput(bool b)
+//{
+//	StelApp::getInstance().setFlagUseFormattingOutput(b);
+//}
 
-void ConfigurationDialog::updateSettingCCSDesignations(bool b)
-{
-	StelApp::getInstance().setFlagUseCCSDesignation(b);
-}
+//void ConfigurationDialog::updateSettingCCSDesignations(bool b)
+//{
+//	StelApp::getInstance().setFlagUseCCSDesignation(b);
+//}
 
-void ConfigurationDialog::cursorTimeOutChanged()
-{
-	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
-	StelMainView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
-}
+//void ConfigurationDialog::cursorTimeOutChanged()
+//{
+//	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
+//	StelMainView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+//}
 
-void ConfigurationDialog::usageButtonsBackgroundChanged(bool b)
-{
-	StelMainView::getInstance().setFlagUseButtonsBackground(b);
-	emit StelMainView::getInstance().updateIconsRequested();
-}
+//void ConfigurationDialog::usageButtonsBackgroundChanged(bool b)
+//{
+//	StelMainView::getInstance().setFlagUseButtonsBackground(b);
+//	emit StelMainView::getInstance().updateIconsRequested();
+//}
 
 void ConfigurationDialog::browseForScreenshotDir()
 {
@@ -848,6 +832,8 @@ void ConfigurationDialog::saveAllSettings()
 		               (bool) (flags &  StelObject::AltAzi));
 		conf->setValue("flag_show_distance",
 		               (bool) (flags & StelObject::Distance));
+		conf->setValue("flag_show_velocity",
+			       (bool) (flags & StelObject::Velocity));
 		conf->setValue("flag_show_size",
 		               (bool) (flags & StelObject::Size));
 		conf->setValue("flag_show_extra",
@@ -1428,6 +1414,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxHourAngle->setChecked(flags & StelObject::HourAngle);
 	ui->checkBoxAltAz->setChecked(flags & StelObject::AltAzi);
 	ui->checkBoxDistance->setChecked(flags & StelObject::Distance);
+	ui->checkBoxVelocity->setChecked(flags & StelObject::Velocity);
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);

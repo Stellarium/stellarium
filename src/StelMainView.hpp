@@ -47,7 +47,13 @@ class StelMainView : public QGraphicsView
 	friend class StelGraphicsScene;
 	friend class NightModeGraphicsEffect;
 	Q_OBJECT
-	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
+	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
+	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
+	Q_PROPERTY(bool flagOverwriteScreenshots   READ getFlagOverwriteScreenShots   WRITE setFlagOverwriteScreenShots   NOTIFY flagOverwriteScreenshotsChanged)
+	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
+	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
+	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
+
 
 public:
 	//! Contains some basic info about the OpenGL context used
@@ -117,21 +123,21 @@ public slots:
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
 	//! Set whether colors should be inverted when saving screenshot
-	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b;}
+	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b; emit flagInvertScreenShotColorsChanged(b);}
 
 	//! Get whether existing files are overwritten when saving screenshot
 	bool getFlagOverwriteScreenShots() const {return flagOverwriteScreenshots;}
 	//! Set whether existing files are overwritten when saving screenshot
-	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b;}
+	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b; emit flagOverwriteScreenshotsChanged(b);}
 
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
 	//! Get the mouse cursor timeout in seconds
-	float getCursorTimeout() const {return cursorTimeout;}
+	double getCursorTimeout() const {return cursorTimeout;}
 	//! Get the state of the mouse cursor timeout flag
-	void setFlagCursorTimeout(bool b) {flagCursorTimeout=b;}
+	void setFlagCursorTimeout(bool b) {flagCursorTimeout=b; emit flagCursorTimeoutChanged(b);}
 	//! Set the mouse cursor timeout in seconds
-	void setCursorTimeout(float t) {cursorTimeout=t;}
+	void setCursorTimeout(double t) {cursorTimeout=t; emit cursorTimeoutChanged(t);}
 
 	//! Set the minimum frames per second. Usually this minimum will be switched to after there are no
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
@@ -157,7 +163,7 @@ public slots:
 	bool needsMaxFPS() const;
 
 	//! Set the state of the flag of usage background for GUI buttons
-	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; }
+	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; emit flagUseButtonsBackgroundChanged(b); }
 	//! Get the state of the flag of usage background for GUI buttons
 	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
 
@@ -170,6 +176,8 @@ protected:
 	//! Handle window resized events, and change the size of the underlying
 	//! QGraphicsScene to be the same
 	virtual void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
+//	//! Wake up mouse cursor (if it was hidden)
+//	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
@@ -184,6 +192,11 @@ signals:
 	void reloadShadersRequested();
 
 	void updateIconsRequested();
+	void flagInvertScreenShotColorsChanged(bool b);
+	void flagOverwriteScreenshotsChanged(bool b);
+	void flagUseButtonsBackgroundChanged(bool b);
+	void flagCursorTimeoutChanged(bool b);
+	void cursorTimeoutChanged(double t);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
@@ -200,6 +213,8 @@ private slots:
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
 	void drawEnded();
+	//! hide mouse cursor after some time if configured.
+	void handleMouseCursorTimeout(const double now);
 	//! Returns the desired OpenGL format settings,
 	//! on desktop this corresponds to a GL 2.1 context,
 	//! with 32bit RGBA buffer and 24/8 depth/stencil buffer
@@ -237,8 +252,8 @@ private:
 	QString screenShotPrefix;
 	QString screenShotDir;
 
-	// Number of second before the mouse cursor disappears
-	float cursorTimeout;
+	// Number of seconds before the mouse cursor disappears
+	double cursorTimeout;
 	bool flagCursorTimeout;
 
 	bool flagUseButtonsBackground;

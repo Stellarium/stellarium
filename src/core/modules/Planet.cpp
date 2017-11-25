@@ -197,6 +197,7 @@ Planet::Planet(const QString& englishName,
 	  radius(radius),
 	  oneMinusOblateness(1.0-oblateness),
 	  eclipticPos(0.,0.,0.),
+	  eclipticVelocity(0.,0.,0.),
 	  haloColor(halocolor),
 	  absoluteMagnitude(-99.0f),
 	  albedo(albedo),
@@ -487,6 +488,26 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 	}
 
+	if (flags&Velocity)
+	{
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("km/s", "speed");
+
+		Vec3d orbitalVel=getEclipticVelocity();
+		double orbVel=orbitalVel.length();
+		if (orbVel>0.)
+		{ // AU/d * km/AU /24
+			double orbVelKms=orbVel* AU/86400.;
+			if (englishName=="moon")
+				orbVelKms=orbVel;
+			oss << QString("%1: %2 %3").arg(q_("Orbital Velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
+			double helioVel=getHeliocentricEclipticVelocity().length();
+			if (helioVel!=orbVel)
+			oss << QString("%1: %2 %3").arg(q_("Heliocentric Velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+		}
+	}
+
+
 	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && angularSize>=4.8e-7)
 	{
@@ -649,6 +670,9 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
 		map.insert("type", getPlanetTypeString()); // replace existing "type=Planet" by something more detailed.
 		// TBD: Is there ANY reason to keep "type"="Planet" and add a "ptype"=getPlanetTypeString() field?
+		map.insert("velocity", getEclipticVelocity().toString());
+		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
+
 	}
 
 	return map;
@@ -738,7 +762,7 @@ void Planet::computePositionWithoutOrbits(const double dateJDE)
 {
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
-		coordFunc(dateJDE, eclipticPos, orbitPtr);
+		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 		lastJDE = dateJDE;
 	}
 }
@@ -851,11 +875,11 @@ void Planet::computePosition(const double dateJDE)
 					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 					if (osculatingFunc)
 					{
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos, orbitPtr);
+						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
 					}
 					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
@@ -881,11 +905,11 @@ void Planet::computePosition(const double dateJDE)
 
 					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 					if (osculatingFunc) {
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos, orbitPtr);
+						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
 					}
 					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
@@ -910,11 +934,11 @@ void Planet::computePosition(const double dateJDE)
 				computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 				if (osculatingFunc)
 				{
-					(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
+					(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
 				}
 				else
 				{
-					coordFunc(calc_date, eclipticPos, orbitPtr);
+					coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
 				}
 				orbitP[d] = eclipticPos;
 				orbit[d] = getHeliocentricEclipticPos();
@@ -926,7 +950,7 @@ void Planet::computePosition(const double dateJDE)
 
 
 		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, orbitPtr);
+		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 
 		lastJDE = dateJDE;
 
@@ -934,7 +958,7 @@ void Planet::computePosition(const double dateJDE)
 	else if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, orbitPtr);
+		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 		if (orbitFader.getInterstate()>0.000001)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 				orbit[d]=getHeliocentricPos(orbitP[d]);
@@ -1131,6 +1155,23 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 			p = p->parent;
 		}
 	}
+}
+// Return heliocentric velocity of planet.
+Vec3d Planet::getHeliocentricEclipticVelocity() const
+{
+	// Note: using shared copies is too slow here.  So we use direct access
+	// instead.
+	Vec3d vel = eclipticVelocity;
+	const Planet* pp = parent.data();
+	if (pp)
+	{
+		while (pp->parent.data())
+		{
+			vel += pp->eclipticVelocity;
+			pp = pp->parent.data();
+		}
+	}
+	return vel;
 }
 
 // Compute the distance to the given position in heliocentric coordinate (in AU)

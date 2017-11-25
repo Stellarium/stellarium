@@ -997,13 +997,16 @@ static void CalcUglyStaticL1Elem(double t,double elem[6]) {
   CalcL1Elem(t,ugly_static_parameter_body,elem);
 }
 
-void GetL1Coor(double jd,int body,double *xyz) {
-  GetL1OsculatingCoor(jd,jd,body,xyz);
+void GetL1Coor(double jd, int body, double *xyz, double *xyzdot) {
+	double xyz6[6];
+	GetL1OsculatingCoor(jd,jd,body,xyz6);
+	xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
+	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 }
 
 void GetL1OsculatingCoor(const double jd0,const double jd,
                          const int body,double *xyz) {
-  double x[3];
+  double x[6];
   if (jd0 != l1_jd0[body]) {
     const double t0 = jd0 - 2433282.5;
     l1_jd0[body] = jd0;
@@ -1018,4 +1021,8 @@ void GetL1OsculatingCoor(const double jd0,const double jd,
   xyz[0] = L1toVsop87[0]*x[0]+L1toVsop87[1]*x[1]+L1toVsop87[2]*x[2];
   xyz[1] = L1toVsop87[3]*x[0]+L1toVsop87[4]*x[1]+L1toVsop87[5]*x[2];
   xyz[2] = L1toVsop87[6]*x[0]+L1toVsop87[7]*x[1]+L1toVsop87[8]*x[2];
+  // GZ Pure guesswork. I hope these make sense...
+  xyz[3] = L1toVsop87[0]*x[3]+L1toVsop87[1]*x[4]+L1toVsop87[2]*x[5];
+  xyz[4] = L1toVsop87[3]*x[3]+L1toVsop87[4]*x[4]+L1toVsop87[5]*x[5];
+  xyz[5] = L1toVsop87[6]*x[3]+L1toVsop87[7]*x[4]+L1toVsop87[8]*x[5];
 }
