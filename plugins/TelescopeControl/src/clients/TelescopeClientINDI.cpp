@@ -35,3 +35,52 @@ bool TelescopeClientINDI::hasKnownPosition() const
     qDebug() << "TelescopeClientINDI::hasKnownPosition";
     return false;
 }
+
+
+void TelescopeClientINDI::newDevice(INDI::BaseDevice *dp)
+{
+}
+
+void TelescopeClientINDI::removeDevice(INDI::BaseDevice *dp)
+{
+}
+
+void TelescopeClientINDI::newProperty(INDI::Property *property)
+{
+}
+
+void TelescopeClientINDI::removeProperty(INDI::Property *property)
+{
+}
+
+void TelescopeClientINDI::newBLOB(IBLOB *bp)
+{
+}
+
+void TelescopeClientINDI::newSwitch(ISwitchVectorProperty *svp)
+{
+}
+
+void TelescopeClientINDI::newNumber(INumberVectorProperty *nvp)
+{
+}
+
+void TelescopeClientINDI::newText(ITextVectorProperty *tvp)
+{
+}
+
+void TelescopeClientINDI::newLight(ILightVectorProperty *lvp)
+{
+}
+
+void TelescopeClientINDI::newMessage(INDI::BaseDevice *dp, int messageID)
+{
+}
+
+void TelescopeClientINDI::serverConnected()
+{
+}
+
+void TelescopeClientINDI::serverDisconnected(int exit_code)
+{
+}
