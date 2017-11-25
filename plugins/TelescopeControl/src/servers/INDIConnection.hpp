@@ -3,10 +3,15 @@
 
 #include "baseclient.h"
 
+#include <mutex>
+
 class INDIConnection : public INDI::BaseClient
 {
 public:
     INDIConnection();
+
+    double declination() const;
+    double rightAscension() const;
 
     // INDI::BaseMediator interface
 public:
@@ -22,6 +27,11 @@ public:
     void newMessage(INDI::BaseDevice *dp, int messageID) override;
     void serverConnected() override;
     void serverDisconnected(int exit_code) override;
+
+private:
+    mutable std::mutex mMutex;
+    double mDeclination = 0.0;
+    double mRightAscension = 0.0;
 };
 
 #endif // INDICONNECTION_HPP
