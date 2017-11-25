@@ -802,6 +802,18 @@ void TelescopeControl::loadTelescopes()
 			}
 		}
 
+        if (connectionType == ConnectionINDI)
+        {
+            //Validation: Host name
+            hostName = telescope.value("host_name").toString();
+            if(hostName.isEmpty())
+            {
+                qDebug() << "[TelescopeControl] loadTelescopes(): No host name at slot" << key;
+                map.remove(key);
+                continue;
+            }
+        }
+
 		if (connectionType == ConnectionRTS2)
 		{
 			//Validation: Host name
@@ -1289,6 +1301,10 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 			if (!rts2Url.isEmpty())
 				initString = QString("%1:RTS2:%2:%3:http://%4:%5@%6").arg(name, equinox, QString::number(rts2Refresh), rts2Username, rts2Password, rts2Url);
 			break;
+
+        case ConnectionINDI:
+            initString = QString("%1").arg(name);
+            break;
 
 		case ConnectionRemote:
 		default:
