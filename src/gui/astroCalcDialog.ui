@@ -990,19 +990,6 @@
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">
-            <item row="3" column="0">
-             <widget class="QLabel" name="labelAngularDistance">
-              <property name="text">
-               <string>Angular distance:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="labelAngularDistanceValue"/>
-            </item>
             <item row="1" column="0">
              <widget class="QComboBox" name="firstCelestialBodyComboBox">
               <property name="editable">
@@ -1015,6 +1002,19 @@
             </item>
             <item row="2" column="1">
              <widget class="QLabel" name="labelLinearDistanceValue"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelAngularDistance">
+              <property name="text">
+               <string>Angular distance:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="labelAngularDistanceValue"/>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="labelLinearDistance">
@@ -1062,6 +1062,32 @@
             </item>
             <item row="4" column="1">
              <widget class="QLabel" name="labelOrbitalResonanceValue"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="labelOrbitalVelocityFCB">
+              <property name="text">
+               <string>Orbital velocity of first celestial body:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="labelOrbitalVelocitySCB">
+              <property name="text">
+               <string>Orbital velocity of second celestial body:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLabel" name="labelOrbitalVelocityFCBValue"/>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLabel" name="labelOrbitalVelocitySCBValue"/>
             </item>
            </layout>
           </item>
