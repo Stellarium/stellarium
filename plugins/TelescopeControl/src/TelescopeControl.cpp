@@ -105,6 +105,7 @@ TelescopeControl::TelescopeControl()
 	connectionTypeNames.insert(ConnectionLocal, "local");
 	connectionTypeNames.insert(ConnectionRemote, "remote");
 	connectionTypeNames.insert(ConnectionRTS2, "RTS2");
+    connectionTypeNames.insert(ConnectionINDI, "INDI");
 }
 
 TelescopeControl::~TelescopeControl()
@@ -1303,7 +1304,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 			break;
 
         case ConnectionINDI:
-            initString = QString("%1").arg(name);
+            initString = QString("%1:%2:%3").arg(name, "INDI", "J2000");
             break;
 
 		case ConnectionRemote:

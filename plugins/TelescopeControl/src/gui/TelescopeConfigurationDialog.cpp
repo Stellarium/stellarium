@@ -459,6 +459,11 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 		type = ConnectionRTS2;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(), MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value()));
 	}
+    else if (ui->radioButtonTelescopeINDI->isChecked())
+    {
+        type = ConnectionINDI;
+        telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, QString(), portTCP, delay, connectAtStartup, circles);
+    }
 	
 	emit changesSaved(name, type);
 }
