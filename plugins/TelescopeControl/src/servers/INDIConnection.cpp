@@ -5,7 +5,6 @@ INDIConnection::INDIConnection()
 
 }
 
-
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
 }
