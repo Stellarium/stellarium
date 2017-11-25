@@ -1,7 +1,9 @@
 #ifndef TELESCOPECLIENTINDI_HPP
 #define TELESCOPECLIENTINDI_HPP
 
-class TelescopeClientINDI
+#include <libindi/baseclient.h>
+
+class TelescopeClientINDI : public INDI::BaseClient
 {
 public:
     TelescopeClientINDI();
