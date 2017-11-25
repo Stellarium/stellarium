@@ -9,21 +9,34 @@ INDIConnection::INDIConnection()
 {
 }
 
-double INDIConnection::declination() const
+Vec3d INDIConnection::positionJNow() const
 {
     std::lock_guard<std::mutex> lock(mMutex);
-    return mDeclination;
+    return mPosition;
 }
 
-double INDIConnection::rightAscension() const
+void INDIConnection::setPositionJNow(Vec3d position)
 {
     std::lock_guard<std::mutex> lock(mMutex);
-    return mRightAscension;
+
+    INumberVectorProperty *coord = nullptr;
+    coord = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
+    if (!coord)
+    {
+        IDLog("Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...\n");
+        return;
+    }
+
+    coord->np[0].value = position[0];
+    coord->np[1].value = position[1];
+    sendNewNumber(coord);
 }
 
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
+    std::lock_guard<std::mutex> lock(mMutex);
     IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
+    mTelescope = dp;
 }
 
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
@@ -54,8 +67,8 @@ void INDIConnection::newNumber(INumberVectorProperty *nvp)
     if (name == "EQUATORIAL_EOD_COORD")
     {
         qDebug() << nvp->np[0].value << nvp->np[1].value;
-        mDeclination = nvp->np[0].value;
-        mRightAscension = nvp->np[1].value;
+        mPosition[0] = nvp->np[0].value;
+        mPosition[1] = nvp->np[1].value;
     }
 }
 

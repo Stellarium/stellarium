@@ -5,13 +5,15 @@
 
 #include <mutex>
 
+#include "VecMath.hpp"
+
 class INDIConnection : public INDI::BaseClient
 {
 public:
     INDIConnection();
 
-    double declination() const;
-    double rightAscension() const;
+    Vec3d positionJNow() const;
+    void setPositionJNow(Vec3d position);
 
     // INDI::BaseMediator interface
 public:
@@ -30,8 +32,8 @@ public:
 
 private:
     mutable std::mutex mMutex;
-    double mDeclination = 0.0;
-    double mRightAscension = 0.0;
+    INDI::BaseDevice* mTelescope = nullptr;
+    Vec3d mPosition = {0.0, 0.0, 0.0};
 };
 
 #endif // INDICONNECTION_HPP

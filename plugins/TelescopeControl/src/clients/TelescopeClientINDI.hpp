@@ -3,6 +3,8 @@
 
 #include "TelescopeClient.hpp"
 
+#include "INDIConnection.hpp"
+
 class TelescopeClientINDI final : public TelescopeClient
 {
 public:
@@ -18,6 +20,9 @@ public:
     void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
     bool isConnected() const override;
     bool hasKnownPosition() const override;
+
+private:
+    INDIConnection connection;
 };
 
 #endif // TELESCOPECLIENTINDI_HPP
