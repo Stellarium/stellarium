@@ -58,6 +58,8 @@ SET(TelescopeControl_SRCS
      servers/NexStarConnection.cpp
      servers/NexStarCommand.hpp
      servers/NexStarCommand.cpp
+     servers/INDIConnection.hpp
+     servers/INDIConnection.cpp
 )
 
 # Add here all the .ui files
