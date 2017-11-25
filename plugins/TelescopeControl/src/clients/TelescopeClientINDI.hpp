@@ -2,6 +2,7 @@
 #define TELESCOPECLIENTINDI_HPP
 
 #include "TelescopeClient.hpp"
+#include "baseclient.h"
 
 class TelescopeClientINDI final : public TelescopeClient
 {

@@ -1,3 +1,4 @@
+FIND_PACKAGE(INDI REQUIRED)
 
 INCLUDE_DIRECTORIES(
      .
@@ -8,6 +9,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src
      ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/gui
      ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/servers
+     ${INDI_INCLUDE_DIR}
 )
 
 LINK_DIRECTORIES(/src)
@@ -79,6 +81,6 @@ QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
 ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
-TARGET_LINK_LIBRARIES(TelescopeControl-static Qt5::Core Qt5::Network Qt5::Widgets Qt5::SerialPort)
+TARGET_LINK_LIBRARIES(TelescopeControl-static Qt5::Core Qt5::Network Qt5::Widgets Qt5::SerialPort ${INDI_LIBRARIES})
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
