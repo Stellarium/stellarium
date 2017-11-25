@@ -24,6 +24,8 @@ SET(TelescopeControl_SRCS
      clients/TelescopeClientDirectNexStar.cpp
      clients/TelescopeClientJsonRts2.hpp
      clients/TelescopeClientJsonRts2.cpp
+     clients/TelescopeClientINDI.hpp
+     clients/TelescopeClientINDI.cpp
      TelescopeControl.hpp
      TelescopeControl.cpp
      gui/SlewDialog.hpp
