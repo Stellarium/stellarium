@@ -338,7 +338,7 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 	else
 	{  // fallback to DE-less solution.
 		GetElp82bCoor(jde,xyz);
-		xyzdot[0]=xyzdot[1]=xyzdot[3]=0.0; // TODO: Some meaningful way to get speed?
+		xyzdot[0]=xyzdot[1]=xyzdot[2]=0.0; // TODO: Some meaningful way to get speed?
 	}
 }
 
