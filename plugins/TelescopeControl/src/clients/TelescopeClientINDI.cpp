@@ -25,7 +25,7 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 
 TelescopeClientINDI::~TelescopeClientINDI()
 {
-    qDebug() << "TelescopeClientINDI::~TelescopeClientINDI";
+    mConnection.disconnectServer();
 }
 
 Vec3d TelescopeClientINDI::getJ2000EquatorialPos(const StelCore*) const
@@ -70,7 +70,6 @@ bool TelescopeClientINDI::isConnected() const
 
 bool TelescopeClientINDI::hasKnownPosition() const
 {
-    qDebug() << "TelescopeClientINDI::hasKnownPosition";
-    return true;
+    return mConnection.isConnected();
 }
 
