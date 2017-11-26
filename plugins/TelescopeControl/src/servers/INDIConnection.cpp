@@ -14,7 +14,7 @@ INDIConnection::INDIConnection()
 INDIConnection::Coordinates INDIConnection::position() const
 {
     std::lock_guard<std::mutex> lock(mMutex);
-    return mCoordinatesJNow;
+    return mCoordinates;
 }
 
 void INDIConnection::setPosition(INDIConnection::Coordinates coords)
@@ -75,8 +75,8 @@ void INDIConnection::newProperty(INDI::Property *property)
 
     if (name == "EQUATORIAL_EOD_COORD")
     {
-        mCoordinatesJNow.RA = property->getNumber()->np[0].value;
-        mCoordinatesJNow.DEC = property->getNumber()->np[1].value;
+        mCoordinates.RA = property->getNumber()->np[0].value;
+        mCoordinates.DEC = property->getNumber()->np[1].value;
     }
 
     if (!mTelescope->isConnected())
@@ -108,8 +108,8 @@ void INDIConnection::newNumber(INumberVectorProperty *nvp)
     QString name(nvp->name);
     if (name == "EQUATORIAL_EOD_COORD")
     {
-        mCoordinatesJNow.RA = nvp->np[0].value;
-        mCoordinatesJNow.DEC = nvp->np[1].value;
+        mCoordinates.RA = nvp->np[0].value;
+        mCoordinates.DEC = nvp->np[1].value;
     }
 }
 

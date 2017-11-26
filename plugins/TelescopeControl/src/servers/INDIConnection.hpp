@@ -58,7 +58,7 @@ public:
 private:
     mutable std::mutex mMutex;
     INDI::BaseDevice* mTelescope = nullptr;
-    Coordinates mCoordinatesJNow;
+    Coordinates mCoordinates;
 };
 
 #endif // INDICONNECTION_HPP
