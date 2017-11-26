@@ -40,7 +40,7 @@ public:
     bool hasKnownPosition() const override;
 
 private:
-    INDIConnection connection;
+    INDIConnection mConnection;
 };
 
 #endif // TELESCOPECLIENTINDI_HPP

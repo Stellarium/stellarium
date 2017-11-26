@@ -19,8 +19,8 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
         port = paramRx.capturedTexts().at(2).toInt();
     }
 
-    connection.setServer(host.toStdString().c_str(), port);
-    connection.connectServer();
+    mConnection.setServer(host.toStdString().c_str(), port);
+    mConnection.connectServer();
 }
 
 TelescopeClientINDI::~TelescopeClientINDI()
@@ -30,7 +30,7 @@ TelescopeClientINDI::~TelescopeClientINDI()
 
 Vec3d TelescopeClientINDI::getJ2000EquatorialPos(const StelCore*) const
 {
-    INDIConnection::Coordinates positionJNow = connection.position();
+    INDIConnection::Coordinates positionJNow = mConnection.position();
 
     double longitudeRad = positionJNow.RA * M_PI / 12.0;
     double latitudeRad = positionJNow.DEC * M_PI / 180.0;
@@ -56,16 +56,16 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
     double latitudeRad = posJ2000[1] * 180.0 / M_PI;
 
 
-    INDIConnection::Coordinates positionJNow = connection.position();
+    INDIConnection::Coordinates positionJNow = mConnection.position();
     positionJNow.RA = longitudeRad;
     positionJNow.DEC = latitudeRad;
 
-    connection.setPosition(positionJNow);
+    mConnection.setPosition(positionJNow);
 }
 
 bool TelescopeClientINDI::isConnected() const
 {
-    return connection.isConnected();
+    return mConnection.isConnected();
 }
 
 bool TelescopeClientINDI::hasKnownPosition() const
