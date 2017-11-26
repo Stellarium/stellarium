@@ -44,7 +44,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	parentWidget(parent),
 	borderPath(Q_NULLPTR)
 {
-	setMaximumSize(300, 400);
+	setMaximumSize(300, 450);
 	setContentsMargins(0, 0, 0, 0);
 	//TODO: set font?
 
@@ -172,7 +172,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldAbbeyCriterion->setTextWidth(maxWidth);
 	fieldSparrowCriterion->setTextWidth(maxWidth);
 	fieldVisualResolution->setTextWidth(maxWidth);
-
 	fieldLensName->setTextWidth(maxWidth);
 	fieldLensMultipler->setTextWidth(maxWidth);
 
@@ -406,8 +405,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	borderPath->setParentItem(parentWidget);
 
 	updatePosition();
-	connect (parentWidget, SIGNAL(geometryChanged()),
-		 this, SLOT(updatePosition()));
+	connect (parentWidget, SIGNAL(geometryChanged()),	 this, SLOT(updatePosition()));
 
 	//Connecting other slots
 	connect(ocularsPlugin, SIGNAL(selectedOcularChanged(int)),    this, SLOT(updateOcularControls()));
@@ -983,8 +981,7 @@ void OcularsGuiPanel::setLensControlsVisible(bool show)
 	}
 	mainLayout->invalidate();
 	mainLayout->activate();
-	resize(mainLayout->geometry().width(),
-	       mainLayout->geometry().height());
+	resize(mainLayout->geometry().width(), mainLayout->geometry().height());
 }
 
 void OcularsGuiPanel::setOcularControlsVisible(bool show)
@@ -1049,8 +1046,7 @@ void OcularsGuiPanel::setTelescopeControlsVisible(bool show)
 	}
 	mainLayout->invalidate();
 	mainLayout->activate();
-	resize(mainLayout->geometry().width(),
-	       mainLayout->geometry().height());
+	resize(mainLayout->geometry().width(), mainLayout->geometry().height());
 }
 
 void OcularsGuiPanel::updateMainButtonsPositions()
@@ -1194,23 +1190,23 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
 					      const QColor& textColor,
 					      const QColor& backgroundColor)
 {
-	if (width <= 0 || height <=0) {
+	if (width <= 0 || height <=0)
+	{
 		return QPixmap();
 	}
 
 	QPixmap pixmap(width, height);
 	pixmap.fill(backgroundColor);
 
-	if (text.isEmpty()) {
+	if (text.isEmpty())
+	{
 		return pixmap;
 	}
 
 	QPainter painter(&pixmap);
 	painter.setFont(font);
 	painter.setPen(QPen(textColor));
-	painter.drawText(0, 0, width, height,
-			 Qt::AlignHCenter | Qt::AlignVCenter | Qt::TextSingleLine,
-			 text);
+	painter.drawText(0, 0, width, height, Qt::AlignHCenter | Qt::AlignVCenter | Qt::TextSingleLine, text);
 
 	return pixmap;
 }

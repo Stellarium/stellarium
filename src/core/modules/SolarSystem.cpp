@@ -394,13 +394,16 @@ void SolarSystem::drawPointer(const StelCore* core)
 	}
 }
 
-void ellipticalOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
+void ellipticalOrbitPosFunc(double jd,double xyz[3], double xyzdot[3], void* orbitPtr)
 {
-	static_cast<EllipticalOrbit*>(userDataPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz);
+	static_cast<EllipticalOrbit*>(orbitPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz);
+	// TODO: Implement a way to retrieve velocities.
+	xyzdot[0]=xyzdot[1]=xyzdot[2]=0.0;
 }
-void cometOrbitPosFunc(double jd,double xyz[3], void* userDataPtr)
+void cometOrbitPosFunc(double jd,double xyz[3], double xyzdot[3], void* orbitPtr)
 {
-	static_cast<CometOrbit*>(userDataPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz);
+	static_cast<CometOrbit*>(orbitPtr)->positionAtTimevInVSOP87Coordinates(jd, xyz, true);
+	static_cast<CometOrbit*>(orbitPtr)->getVelocity(xyzdot);
 }
 
 // Init and load the solar system data (2 files)
@@ -638,9 +641,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (pericenterDistance <= 0.0) {
 				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
-					qDebug() << "ERROR: " << englishName
+					qDebug() << "ERROR loading " << englishName
 						 << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis";
-					//abort();
 					continue;
 				} else {
 					semi_major_axis /= AU;
@@ -692,12 +694,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			// when the parent is the sun use ecliptic rather than sun equator:
-			const double parentRotObliquity = parent->getParent()
-											  ? parent->getRotObliquity(2451545.0)
-											  : 0.0;
-			const double parent_rot_asc_node = parent->getParent()
-											  ? parent->getRotAscendingNode()
-											  : 0.0;
+			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
+			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()      : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 			if (parent->getParent()) {
 				const double c_obl = cos(parentRotObliquity);
@@ -714,16 +712,16 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			// Create an elliptical orbit
-			EllipticalOrbit *orb = new EllipticalOrbit(pericenterDistance,
-								   eccentricity,
-								   inclination,
-								   ascending_node,
-								   arg_of_pericenter,
-								   mean_anomaly,
-								   period,
-								   epoch,
-								   parentRotObliquity,
-								   parent_rot_asc_node,
+			EllipticalOrbit *orb = new EllipticalOrbit(pericenterDistance,     // [AU]
+								   eccentricity,           // 0..>1, but practically only 0..1
+								   inclination,            // [radians]
+								   ascending_node,         // [radians]
+								   arg_of_pericenter,      // [radians]
+								   mean_anomaly,           // [radians]
+								   period,                 // [days]
+								   epoch,                  // [JDE]
+								   parentRotObliquity,     // [radians]
+								   parent_rot_asc_node,    // [radians]
 								   parent_rot_j2000_longitude);
 			orbits.push_back(orb);
 

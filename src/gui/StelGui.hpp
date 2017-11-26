@@ -56,6 +56,14 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged)
 	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar NOTIFY autoHideHorizontalButtonBarChanged)
 	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar NOTIFY autoHideVerticalButtonBarChanged)
+	Q_PROPERTY(bool flagShowFlipButtons READ getFlagShowFlipButtons WRITE setFlagShowFlipButtons NOTIFY flagShowFlipButtonsChanged)
+	Q_PROPERTY(bool flagShowNebulaBackgroundButton READ getFlagShowNebulaBackgroundButton WRITE setFlagShowNebulaBackgroundButton NOTIFY flagShowNebulaBackgroundButtonChanged)
+	Q_PROPERTY(bool flagShowToastSurveyButton READ getFlagShowToastSurveyButton WRITE setFlagShowToastSurveyButton NOTIFY  flagShowToastSurveyButtonChanged)
+	Q_PROPERTY(bool flagShowBookmarksButton READ getFlagShowBookmarksButton WRITE setFlagShowBookmarksButton NOTIFY flagShowBookmarksButtonChanged)
+	Q_PROPERTY(bool flagShowICRSGridButton READ getFlagShowICRSGridButton WRITE setFlagShowICRSGridButton NOTIFY flagShowICRSGridButtonChanged)
+	Q_PROPERTY(bool flagShowGalacticGridButton READ getFlagShowGalacticGridButton WRITE setFlagShowGalacticGridButton NOTIFY flagShowGalacticGridButtonChanged )
+	Q_PROPERTY(bool flagShowEclipticGridButton READ getFlagShowEclipticGridButton WRITE setFlagShowEclipticGridButton NOTIFY flagShowEclipticGridButtonChanged )
+	Q_PROPERTY(bool flagShowConstellationBoundariesButton READ getFlagShowConstellationBoundariesButton WRITE setFlagShowConstellationBoundariesButton NOTIFY flagShowConstellationBoundariesButtonChanged )
 
 public:
 	friend class ViewDialog;
@@ -85,30 +93,6 @@ public:
 	//! Get the SkyGui instance (useful for adding other interface elements).
 	//! It will return a valid object only if called after init().
 	class SkyGui* getSkyGui() const;
-	
-	//! Get whether the buttons toggling image flip are visible
-	bool getFlagShowFlipButtons() const;
-	
-	//! Get whether the button toggling nebulae background is visible
-	bool getFlagShowNebulaBackgroundButton() const;
-
-	//! Get whether the button toggling TOAST survey is visible
-	bool getFlagShowToastSurveyButton() const;
-
-	//! Get whether the button toggling bookmarks is visible
-	bool getFlagShowBookmarksButton() const;
-
-	//! Get whether the button toggling ICRS grid is visible
-	bool getFlagShowICRSGridButton() const;
-
-	//! Get whether the button toggling galactic grid is visible
-	bool getFlagShowGalacticGridButton() const;
-
-	//! Get whether the button toggling ecliptic grid is visible
-	bool getFlagShowEclipticGridButton() const;
-
-	//! Get whether the button toggling constellation boundaries is visible
-	bool getFlagShowConstellationBoundariesButton() const;
 
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
@@ -134,29 +118,43 @@ public:
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
-	
+	//! Get whether the buttons toggling image flip are visible
+	bool getFlagShowFlipButtons() const;
+
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
+	//! Get whether the button toggling nebulae background is visible
+	bool getFlagShowNebulaBackgroundButton() const;
 
 	//! Define whether the button toggling TOAST survey should be visible
 	void setFlagShowToastSurveyButton(bool b);
+	//! Get whether the button toggling TOAST survey is visible
+	bool getFlagShowToastSurveyButton() const;
 
 	//! Define whether the button toggling bookmarks should be visible
 	void setFlagShowBookmarksButton(bool b);
+	//! Get whether the button toggling bookmarks is visible
+	bool getFlagShowBookmarksButton() const;
 
 	//! Define whether the button toggling ICRS grid should be visible
 	void setFlagShowICRSGridButton(bool b);
+	//! Get whether the button toggling ICRS grid is visible
+	bool getFlagShowICRSGridButton() const;
 
 	//! Define whether the button toggling galactic grid should be visible
 	void setFlagShowGalacticGridButton(bool b);
+	//! Get whether the button toggling galactic grid is visible
+	bool getFlagShowGalacticGridButton() const;
 
 	//! Define whether the button toggling ecliptic grid should be visible
 	void setFlagShowEclipticGridButton(bool b);
+	//! Get whether the button toggling ecliptic grid is visible
+	bool getFlagShowEclipticGridButton() const;
 
 	//! Define whether the button toggling constellation boundaries should be visible
 	void setFlagShowConstellationBoundariesButton(bool b);
-
-	void setFlagShowDecimalDegrees(bool b);
+	//! Get whether the button toggling constellation boundaries is visible
+	bool getFlagShowConstellationBoundariesButton() const;
 
 	//! Get the auto-hide status of the horizontal toolbar.
 	bool getAutoHideHorizontalButtonBar() const;
@@ -194,6 +192,14 @@ signals:
 	void visibleChanged(bool b);
 	void autoHideHorizontalButtonBarChanged(bool b);
 	void autoHideVerticalButtonBarChanged(bool b);
+	void flagShowFlipButtonsChanged(bool b);
+	void flagShowNebulaBackgroundButtonChanged(bool b);
+	void flagShowToastSurveyButtonChanged(bool b);
+	void flagShowBookmarksButtonChanged(bool b);
+	void flagShowICRSGridButtonChanged(bool b);
+	void flagShowGalacticGridButtonChanged(bool b);
+	void flagShowEclipticGridButtonChanged(bool b);
+	void flagShowConstellationBoundariesButtonChanged(bool b);
 
 private slots:
 	void reloadStyle();

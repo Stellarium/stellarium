@@ -56,8 +56,8 @@ public:
 	// Original one
 	Vec3d positionAtTime(const double JDE) const;
 	double getPeriod() const;
-	double getBoundingRadius() const;
-	virtual void sample(double, double, int, OrbitSampleProc&) const;
+	// double getBoundingRadius() const; // Return apoapsis distance. UNUSED!
+	// virtual void sample(double, double, int, OrbitSampleProc&) const; //UNDOCUMENTED & UNUSED
 
 private:
 	//! returns eccentric anomaly E for Mean anomaly M
@@ -98,6 +98,7 @@ public:
 	void setUpdateTails(const bool update){ updateTails=update; }
 	//! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JDE, v, true)
 	Vec3d getVelocity() const { return rdot; }
+	void getVelocity(double *vel) const { vel[0]=rdot[0]; vel[1]=rdot[1]; vel[2]=rdot[2];}
 	double getSemimajorAxis() const { return (e==1. ? 0. : q / (1.-e)); }
 	double getEccentricity() const { return e; }
 	bool objectDateValid(const double JDE) const { return (fabs(t0-JDE)<orbitGood); }

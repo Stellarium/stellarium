@@ -56,12 +56,14 @@ extern "C" {
 #define L1_GANYMEDE      2
 #define L1_CALLISTO      3
 
-void GetL1Coor(double jd,int body,double *xyz);
+void GetL1Coor(double jd,int body,double *xyz, double *xyzdot);
   /* Return the rectangular coordinates of the given satellite
      and the given julian date jd expressed in dynamical time (TAI+32.184s).
      The origin of the xyz-coordinates is the center of the planet.
      The reference frame is "dynamical equinox and ecliptic J2000",
      which is the reference frame in VSOP87 and VSOP87A.
+
+     GZ2017-11: added xyzdot, now last 2 parameters should be 3-vectors of position and speed.
 
      WARNING! Due to static internal variables, this function is not reentrant and not parallelizable!
   */
@@ -69,6 +71,7 @@ void GetL1Coor(double jd,int body,double *xyz);
 void GetL1OsculatingCoor(const double jd0,const double jd, const int body,double *xyz);
 
   /* The oculating orbit of epoch jd0, evaluated at jd, is returned.
+     GZ2017-11: xyz now is a 6-vector of position and speed.
   */
 
 

@@ -41,6 +41,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagTracking
 		   WRITE setFlagTracking
 		   NOTIFY flagTrackingChanged)
+	Q_PROPERTY(bool flagIndicationMountMode
+		   READ getFlagIndicationMountMode
+		   WRITE setFlagIndicationMountMode
+		   NOTIFY flagIndicationMountModeChanged)
 
 	//The targets of viewport offset animation
 	Q_PROPERTY(float viewportHorizontalOffsetTarget
@@ -182,7 +186,7 @@ public slots:
 	//! Get the state of flag for indication of mount mode
 	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
 	//! Set the state of flag for indication of mount mode
-	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; }
+	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; emit flagIndicationMountModeChanged(b); }
 
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
@@ -309,6 +313,7 @@ signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
 	void equatorialMountChanged(bool b);
+	void flagIndicationMountModeChanged(bool b);
 
 	void flagAutoZoomOutResetsDirectionChanged(bool b);
 
