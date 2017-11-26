@@ -805,7 +805,8 @@ void TelescopeControl::loadTelescopes()
 
         if (connectionType == ConnectionINDI)
         {
-
+            portTCP = telescope.value("tcp_port").toInt();
+            hostName = telescope.value("host_name").toString();
         }
 
 		if (connectionType == ConnectionRTS2)
@@ -828,7 +829,7 @@ void TelescopeControl::loadTelescopes()
 			if (connectionType != ConnectionRTS2)
 			{
 				//Validation: TCP port
-				portTCP = telescope.value("tcp_port").toInt();
+                portTCP = telescope.value("tcp_port").toInt();
 				if(!telescope.contains("tcp_port") || !isValidPort(portTCP))
 				{
 					qDebug() << "[TelescopeControl] Unable to load telescope: No valid TCP port at slot" << key;
@@ -951,6 +952,11 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	telescope.insert("name", name);
 	telescope.insert("connection", connectionTypeNames.value(connectionType));
 	telescope.insert("equinox", equinox);//TODO: Validation!
+
+    if (connectionType == ConnectionINDI)
+    {
+        telescope.insert("host_name", host);
+    }
 
 	if (connectionType == ConnectionRemote)
 	{
@@ -1297,7 +1303,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 			break;
 
         case ConnectionINDI:
-            initString = QString("%1:%2:%3").arg(name, "INDI", "J2000");
+            initString = QString("%1:%2:%3:%4:%5").arg(name, "INDI", "J2000", host, QString::number(portTCP));
             break;
 
 		case ConnectionRemote:

@@ -468,7 +468,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
     else if (ui->radioButtonTelescopeINDI->isChecked())
     {
         type = ConnectionINDI;
-        telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, QString(), portTCP, delay, connectAtStartup, circles);
+        telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles);
     }
 	
 	emit changesSaved(name, type);

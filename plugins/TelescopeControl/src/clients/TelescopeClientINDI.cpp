@@ -5,11 +5,21 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 
-TelescopeClientINDI::TelescopeClientINDI(const QString &name):
+TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params):
     TelescopeClient(name)
 {
     qDebug() << "TelescopeClientINDI::TelescopeClientINDI";
-    connection.setServer("localhost", 7624);
+
+    QRegExp paramRx("^([^:]*):(\\d+)$");
+    QString host;
+    int port = 0;
+    if (paramRx.exactMatch(params))
+    {
+        host = paramRx.capturedTexts().at(1).trimmed();
+        port = paramRx.capturedTexts().at(2).toInt();
+    }
+
+    connection.setServer(host.toStdString().c_str(), port);
     connection.connectServer();
 }
 

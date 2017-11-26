@@ -110,7 +110,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	}
     else if (type == "INDI")
     {
-        newTelescope = new TelescopeClientINDI(name);
+        newTelescope = new TelescopeClientINDI(name, params);
     }
 	else
 	{
