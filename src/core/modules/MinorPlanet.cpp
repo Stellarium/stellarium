@@ -315,7 +315,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			oss << QString("%1: %2 %3").arg(q_("Orbital Velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
 			double helioVel=getHeliocentricEclipticVelocity().length(); // just in case we have asteroid moons!
 			if (helioVel!=orbVel)
-			oss << QString("%1: %2 %3").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+				oss << QString("%1: %2 %3").arg(q_("Heliocentric Velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
 		}
 	}
 
