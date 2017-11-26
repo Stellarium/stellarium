@@ -41,6 +41,9 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 
 bool INDIConnection::isConnected() const
 {
+    if (!mTelescope)
+        return false;
+
     return mTelescope->isConnected();
 }
 
