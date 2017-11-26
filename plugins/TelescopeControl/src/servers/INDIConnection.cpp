@@ -59,6 +59,14 @@ void INDIConnection::newProperty(INDI::Property *property)
 {
     IDLog("INDIConnection::newProperty| %s\n", property->getName());
 
+    QString name(property->getName());
+
+    if (name == "EQUATORIAL_EOD_COORD")
+    {
+        mCoordinatesJNow.RA = property->getNumber()->np[0].value;
+        mCoordinatesJNow.DEC = property->getNumber()->np[1].value;
+    }
+
     if (!mTelescope->isConnected())
     {
         connectDevice(mTelescope->getDeviceName());
@@ -86,18 +94,6 @@ void INDIConnection::newNumber(INumberVectorProperty *nvp)
     QString name(nvp->name);
     if (name == "EQUATORIAL_EOD_COORD")
     {
-//        qDebug() << nvp->np[0].label
-//                << " "
-//                << nvp->np[0].value
-//                << ", "
-//                << nvp->np[1].label
-//                << " "
-//                << nvp->np[1].value;
-
-        mPosition[0] = nvp->np[0].value;
-        mPosition[1] = nvp->np[1].value;
-        mPosition[2] = 0.0;
-
         mCoordinatesJNow.RA = nvp->np[0].value;
         mCoordinatesJNow.DEC = nvp->np[1].value;
     }

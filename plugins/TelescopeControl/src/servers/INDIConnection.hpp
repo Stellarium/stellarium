@@ -59,7 +59,6 @@ public:
 private:
     mutable std::mutex mMutex;
     INDI::BaseDevice* mTelescope = nullptr;
-    Vec3d mPosition = {0.0, 0.0, 0.0};
     Coordinates mCoordinatesJNow;
 };
 
