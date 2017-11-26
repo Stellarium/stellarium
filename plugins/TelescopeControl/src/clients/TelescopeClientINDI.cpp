@@ -34,8 +34,6 @@ Vec3d TelescopeClientINDI::getJ2000EquatorialPos(const StelCore*) const
 
 void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP selectObject)
 {
-    qDebug() << "TelescopeClientINDI::telescopeGoto ";
-
     Vec3d posRectJ2000;
     const StelCore* core = StelApp::getInstance().getCore();
     Vec3d posRectJNow = core->j2000ToEquinoxEqu(positionJ2000, StelCore::RefractionOff);
