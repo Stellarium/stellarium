@@ -23,7 +23,7 @@
 
 #include <mutex>
 
-class INDIConnection : public INDI::BaseClient
+class INDIConnection final : public INDI::BaseClient
 {
 public:
     typedef struct
