@@ -36,32 +36,27 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
 {
     qDebug() << "TelescopeClientINDI::telescopeGoto ";
 
-    Vec3d pos;
+    Vec3d posRectJ2000;
     const StelCore* core = StelApp::getInstance().getCore();
-    Vec3d positionJNow = core->j2000ToEquinoxEqu(positionJ2000, StelCore::RefractionOff);
+    Vec3d posRectJNow = core->j2000ToEquinoxEqu(positionJ2000, StelCore::RefractionOff);
+    Vec3d posJ2000;
+    StelUtils::rectToSphe(&posJ2000[0], &posJ2000[1], posRectJNow);
 
-    StelUtils::rectToSphe(&pos[0], &pos[1], positionJNow);
+    if (posJ2000[0] < 0.0)
+        posJ2000[0] += 2*M_PI;
 
-
-
-    qWarning() << "rad " << pos[0] << ", " << pos[1];
-    qWarning() << "Hms" << StelUtils::radToHmsStrAdapt(pos[0]) << ", " << StelUtils::radToDmsStrAdapt(pos[1]);
-    qWarning() << "DcmDeg" << StelUtils::radToDecDegStr(pos[0]) << ", " << StelUtils::radToDecDegStr(pos[1]);
-
-    double latitude = pos[0] * 12.0 / M_PI;
-    double longitude = pos[1] * 180.0 / M_PI;
-
-    pos[0] = latitude;
-    pos[1] = longitude;
-
-    qWarning() << "lat, long " << latitude << ", " << longitude;
+    double longitude = posJ2000[0] * 12.0 / M_PI;
+    double latitude = posJ2000[1] * 180.0 / M_PI;
 
 
+    INDIConnection::Coordinates positionJNow = connection.position();
+    positionJNow.RA = longitude;
+    positionJNow.DEC = latitude;
+    posRectJ2000[0] = latitude;
 
-    //Vec3d positionJNow(latitudine, longitude, 0.0);
-    //const StelCore* core = StelApp::getInstance().getCore();
-    //Vec3d positionJNow = core->j2000ToEquinoxEqu(positionJ2000, StelCore::RefractionOff);
-    //connection.setPositionJNow(pos);
+    qWarning() << "long, lat " << longitude << ", " << latitude;
+
+    connection.setPosition(positionJNow);
 }
 
 bool TelescopeClientINDI::isConnected() const
