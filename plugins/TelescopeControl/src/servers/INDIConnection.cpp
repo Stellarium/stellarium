@@ -19,13 +19,13 @@ INDIConnection::Coordinates INDIConnection::position() const
 
 void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 {
+    std::lock_guard<std::mutex> lock(mMutex);
     if (!mTelescope->isConnected())
     {
         IDLog("Error: Telescope not connected");
         return;
     }
 
-    std::lock_guard<std::mutex> lock(mMutex);
     INumberVectorProperty *property = nullptr;
     property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
     if (!property)
@@ -41,6 +41,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 
 bool INDIConnection::isConnected() const
 {
+    std::lock_guard<std::mutex> lock(mMutex);
     if (!mTelescope)
         return false;
 
@@ -51,15 +52,23 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
     std::lock_guard<std::mutex> lock(mMutex);
     IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
+    /// @todo filter telescopes
     mTelescope = dp;
 }
 
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 {
+    std::lock_guard<std::mutex> lock(mMutex);
+    if (mTelescope == dp)
+        mTelescope = nullptr;
 }
 
 void INDIConnection::newProperty(INDI::Property *property)
 {
+    std::lock_guard<std::mutex> lock(mMutex);
+    if (mTelescope != property->getBaseDevice())
+        return;
+
     IDLog("INDIConnection::newProperty| %s\n", property->getName());
 
     QString name(property->getName());
@@ -92,6 +101,8 @@ void INDIConnection::newSwitch(ISwitchVectorProperty *svp)
 
 void INDIConnection::newNumber(INumberVectorProperty *nvp)
 {
+    // @TODO filter for mTelescope
+
     std::lock_guard<std::mutex> lock(mMutex);
 
     QString name(nvp->name);
