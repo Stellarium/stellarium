@@ -1,4 +1,4 @@
-/*
+/*git fetch
  * Copyright (C) 2017 Alessandro Siniscalchi <asiniscalchi@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -22,8 +22,6 @@
 #include "baseclient.h"
 
 #include <mutex>
-
-#include "VecMath.hpp"
 
 class INDIConnection : public INDI::BaseClient
 {
