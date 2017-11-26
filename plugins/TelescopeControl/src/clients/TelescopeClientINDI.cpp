@@ -34,7 +34,6 @@ Vec3d TelescopeClientINDI::getJ2000EquatorialPos(const StelCore*) const
 
 void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP selectObject)
 {
-    Vec3d posRectJ2000;
     const StelCore* core = StelApp::getInstance().getCore();
     Vec3d posRectJNow = core->j2000ToEquinoxEqu(positionJ2000, StelCore::RefractionOff);
     Vec3d posJ2000;
@@ -43,16 +42,13 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
     if (posJ2000[0] < 0.0)
         posJ2000[0] += 2*M_PI;
 
-    double longitude = posJ2000[0] * 12.0 / M_PI;
-    double latitude = posJ2000[1] * 180.0 / M_PI;
+    double longitudeRad = posJ2000[0] * 12.0 / M_PI;
+    double latitudeRad = posJ2000[1] * 180.0 / M_PI;
 
 
     INDIConnection::Coordinates positionJNow = connection.position();
-    positionJNow.RA = longitude;
-    positionJNow.DEC = latitude;
-    posRectJ2000[0] = latitude;
-
-    qWarning() << "long, lat " << longitude << ", " << latitude;
+    positionJNow.RA = longitudeRad;
+    positionJNow.DEC = latitudeRad;
 
     connection.setPosition(positionJNow);
 }
