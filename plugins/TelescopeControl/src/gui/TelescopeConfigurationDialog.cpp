@@ -137,6 +137,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
 	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
 	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
+    connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
 	
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -386,7 +387,12 @@ void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
 	else
 	{
 		ui->groupBoxRTS2Settings->hide();
-	}
+    }
+}
+
+void TelescopeConfigurationDialog::toggleTypeINDI(bool enabled)
+{
+    ui->groupBoxConnectionSettings->setVisible(enabled);
 }
 
 void TelescopeConfigurationDialog::buttonSavePressed()
