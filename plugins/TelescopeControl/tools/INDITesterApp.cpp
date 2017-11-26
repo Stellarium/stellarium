@@ -13,9 +13,23 @@ int main (int argc, char *argv[])
     if (!connection.connectServer())
         return -1;
 
-    std::cout << "Press any key to terminate the client.\n";
-    std::string term;
-    std::cin >> term;
+    while(1)
+    {
+        INDIConnection::Coordinates coord = connection.position();
+
+        std::cout << std::endl;
+        std::string stringDEC;
+        std::string stringRA;
+        std::cout << "RA : ";
+        std::cin >> stringRA;
+        std::cout << "DEC : ";
+        std::cin >> stringDEC;
+
+        coord.RA = std::atof(stringRA.c_str());
+        coord.DEC = std::atof(stringDEC.c_str());
+
+        connection.setPosition(coord);
+    }
 
     return 0;
 }

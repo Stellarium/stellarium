@@ -2,6 +2,8 @@
 
 #include <QDebug>
 #include <QString>
+#include <chrono>
+#include <thread>
 
 #include "libindi/basedevice.h"
 
@@ -9,27 +11,32 @@ INDIConnection::INDIConnection()
 {
 }
 
-Vec3d INDIConnection::positionJNow() const
+INDIConnection::Coordinates INDIConnection::position() const
 {
     std::lock_guard<std::mutex> lock(mMutex);
-    return mPosition;
+    return mCoordinatesJNow;
 }
 
-void INDIConnection::setPositionJNow(Vec3d position)
+void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 {
-    std::lock_guard<std::mutex> lock(mMutex);
+    if (!mTelescope->isConnected())
+    {
+        IDLog("Error: Telescope not connected");
+        return;
+    }
 
-    INumberVectorProperty *coord = nullptr;
-    coord = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
-    if (!coord)
+    std::lock_guard<std::mutex> lock(mMutex);
+    INumberVectorProperty *property = nullptr;
+    property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
+    if (!property)
     {
         IDLog("Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...\n");
         return;
     }
 
-    coord->np[0].value = position[0];
-    coord->np[1].value = position[1];
-    sendNewNumber(coord);
+    property->np[0].value = coords.RA;
+    property->np[1].value = coords.DEC;
+    sendNewNumber(property);
 }
 
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
@@ -37,8 +44,6 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
     std::lock_guard<std::mutex> lock(mMutex);
     IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
     mTelescope = dp;
-
-
 }
 
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
@@ -47,13 +52,14 @@ void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 
 void INDIConnection::newProperty(INDI::Property *property)
 {
-    IDLog("INDIConnection::newProperty\n");
+    IDLog("INDIConnection::newProperty| %s\n", property->getName());
 
     if (!mTelescope->isConnected())
+    {
         connectDevice(mTelescope->getDeviceName());
-
-    if (mTelescope->isConnected())
-        IDLog("connected");
+        if (mTelescope->isConnected())
+            IDLog("connected\n");
+    }
 }
 
 void INDIConnection::removeProperty(INDI::Property *property)
@@ -75,17 +81,20 @@ void INDIConnection::newNumber(INumberVectorProperty *nvp)
     QString name(nvp->name);
     if (name == "EQUATORIAL_EOD_COORD")
     {
-        qDebug() << nvp->np[0].label
-                << " "
-                << nvp->np[0].value
-                << ", "
-                << nvp->np[1].label
-                << " "
-                << nvp->np[1].value;
+//        qDebug() << nvp->np[0].label
+//                << " "
+//                << nvp->np[0].value
+//                << ", "
+//                << nvp->np[1].label
+//                << " "
+//                << nvp->np[1].value;
 
         mPosition[0] = nvp->np[0].value;
         mPosition[1] = nvp->np[1].value;
         mPosition[2] = 0.0;
+
+        mCoordinatesJNow.RA = nvp->np[0].value;
+        mCoordinatesJNow.DEC = nvp->np[1].value;
     }
 }
 

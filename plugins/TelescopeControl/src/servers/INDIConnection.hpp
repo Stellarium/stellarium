@@ -10,10 +10,16 @@
 class INDIConnection : public INDI::BaseClient
 {
 public:
+    typedef struct
+    {
+        double RA = 0.0;
+        double DEC = 0.0;
+    } Coordinates;
+
     INDIConnection();
 
-    Vec3d positionJNow() const;
-    void setPositionJNow(Vec3d position);
+    Coordinates position() const;
+    void setPosition(Coordinates coords);
 
     // INDI::BaseMediator interface
 public:
@@ -34,6 +40,7 @@ private:
     mutable std::mutex mMutex;
     INDI::BaseDevice* mTelescope = nullptr;
     Vec3d mPosition = {0.0, 0.0, 0.0};
+    Coordinates mCoordinatesJNow;
 };
 
 #endif // INDICONNECTION_HPP
