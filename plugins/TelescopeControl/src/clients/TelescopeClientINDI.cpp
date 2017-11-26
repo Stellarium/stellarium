@@ -55,8 +55,7 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
 
 bool TelescopeClientINDI::isConnected() const
 {
-    qDebug() << "TelescopeClientINDI::isConnected";
-    return true;
+    return connection.isConnected();
 }
 
 bool TelescopeClientINDI::hasKnownPosition() const

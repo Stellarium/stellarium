@@ -21,6 +21,8 @@ public:
     Coordinates position() const;
     void setPosition(Coordinates coords);
 
+    bool isConnected() const;
+
     // INDI::BaseMediator interface
 public:
     void newDevice(INDI::BaseDevice *dp) override;

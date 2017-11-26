@@ -805,14 +805,7 @@ void TelescopeControl::loadTelescopes()
 
         if (connectionType == ConnectionINDI)
         {
-            //Validation: Host name
-            hostName = telescope.value("host_name").toString();
-            if(hostName.isEmpty())
-            {
-                qDebug() << "[TelescopeControl] loadTelescopes(): No host name at slot" << key;
-                map.remove(key);
-                continue;
-            }
+
         }
 
 		if (connectionType == ConnectionRTS2)
