@@ -33,6 +33,7 @@ public:
     } Coordinates;
 
     INDIConnection();
+    INDIConnection(const INDIConnection& that) = delete;
 
     Coordinates position() const;
     void setPosition(Coordinates coords);
