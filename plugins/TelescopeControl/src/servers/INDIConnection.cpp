@@ -37,6 +37,8 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
     std::lock_guard<std::mutex> lock(mMutex);
     IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
     mTelescope = dp;
+
+
 }
 
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
@@ -45,6 +47,13 @@ void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 
 void INDIConnection::newProperty(INDI::Property *property)
 {
+    IDLog("INDIConnection::newProperty\n");
+
+    if (!mTelescope->isConnected())
+        connectDevice(mTelescope->getDeviceName());
+
+    if (mTelescope->isConnected())
+        IDLog("connected");
 }
 
 void INDIConnection::removeProperty(INDI::Property *property)
@@ -66,9 +75,17 @@ void INDIConnection::newNumber(INumberVectorProperty *nvp)
     QString name(nvp->name);
     if (name == "EQUATORIAL_EOD_COORD")
     {
-        qDebug() << nvp->np[0].value << nvp->np[1].value;
+        qDebug() << nvp->np[0].label
+                << " "
+                << nvp->np[0].value
+                << ", "
+                << nvp->np[1].label
+                << " "
+                << nvp->np[1].value;
+
         mPosition[0] = nvp->np[0].value;
         mPosition[1] = nvp->np[1].value;
+        mPosition[2] = 0.0;
     }
 }
 
