@@ -1,4 +1,4 @@
-/*git fetch
+/*
  * Copyright (C) 2017 Alessandro Siniscalchi <asiniscalchi@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
