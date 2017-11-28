@@ -105,7 +105,7 @@ TelescopeControl::TelescopeControl()
 	connectionTypeNames.insert(ConnectionLocal, "local");
 	connectionTypeNames.insert(ConnectionRemote, "remote");
 	connectionTypeNames.insert(ConnectionRTS2, "RTS2");
-    connectionTypeNames.insert(ConnectionINDI, "INDI");
+	connectionTypeNames.insert(ConnectionINDI, "INDI");
 }
 
 TelescopeControl::~TelescopeControl()
@@ -803,11 +803,11 @@ void TelescopeControl::loadTelescopes()
 			}
 		}
 
-        if (connectionType == ConnectionINDI)
-        {
-            portTCP = telescope.value("tcp_port").toInt();
-            hostName = telescope.value("host_name").toString();
-        }
+		if (connectionType == ConnectionINDI)
+		{
+			portTCP = telescope.value("tcp_port").toInt();
+			hostName = telescope.value("host_name").toString();
+		}
 
 		if (connectionType == ConnectionRTS2)
 		{
@@ -829,7 +829,7 @@ void TelescopeControl::loadTelescopes()
 			if (connectionType != ConnectionRTS2)
 			{
 				//Validation: TCP port
-                portTCP = telescope.value("tcp_port").toInt();
+				portTCP = telescope.value("tcp_port").toInt();
 				if(!telescope.contains("tcp_port") || !isValidPort(portTCP))
 				{
 					qDebug() << "[TelescopeControl] Unable to load telescope: No valid TCP port at slot" << key;
@@ -953,10 +953,10 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	telescope.insert("connection", connectionTypeNames.value(connectionType));
 	telescope.insert("equinox", equinox);//TODO: Validation!
 
-    if (connectionType == ConnectionINDI)
-    {
-        telescope.insert("host_name", host);
-    }
+	if (connectionType == ConnectionINDI)
+	{
+		telescope.insert("host_name", host);
+	}
 
 	if (connectionType == ConnectionRemote)
 	{
@@ -1302,9 +1302,9 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 				initString = QString("%1:RTS2:%2:%3:http://%4:%5@%6").arg(name, equinox, QString::number(rts2Refresh), rts2Username, rts2Password, rts2Url);
 			break;
 
-        case ConnectionINDI:
-            initString = QString("%1:%2:%3:%4:%5").arg(name, "INDI", "J2000", host, QString::number(portTCP));
-            break;
+		case ConnectionINDI:
+			initString = QString("%1:%2:%3:%4:%5").arg(name, "INDI", "J2000", host, QString::number(portTCP));
+			break;
 
 		case ConnectionRemote:
 		default:

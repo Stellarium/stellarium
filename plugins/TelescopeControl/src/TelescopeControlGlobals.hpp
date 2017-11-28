@@ -53,7 +53,7 @@ namespace TelescopeControlGlobals {
 		ConnectionLocal,
 		ConnectionRemote,
 		ConnectionRTS2,
-        ConnectionINDI,
+		ConnectionINDI,
 		ConnectionCount
 	};
 	

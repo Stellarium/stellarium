@@ -108,10 +108,10 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		newTelescope= new TelescopeClientDirectNexStar(name, params, eq);
 	}
-    else if (type == "INDI")
-    {
-        newTelescope = new TelescopeClientINDI(name, params);
-    }
+	else if (type == "INDI")
+	{
+		newTelescope = new TelescopeClientINDI(name, params);
+	}
 	else
 	{
 		qWarning() << "WARNING - unknown telescope type" << type << "- not creating a telescope object for url" << url;
